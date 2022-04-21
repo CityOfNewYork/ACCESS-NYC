@@ -3,7 +3,7 @@
 Plugin Name: WP All Export
 Plugin URI: http://www.wpallimport.com/upgrade-to-wp-all-export-pro/?utm_source=export-plugin-free&utm_medium=wp-plugins-page&utm_campaign=upgrade-to-pro
 Description: Export any post type to a CSV or XML file. Edit the exported data, and then re-import it later using WP All Import.
-Version: 1.3.3
+Version: 1.3.4
 Author: Soflyy
 */
 
@@ -33,20 +33,20 @@ define('PMXE_ROOT_URL', rtrim(plugin_dir_url(__FILE__), '/'));
 if ( class_exists('PMXE_Plugin') and PMXE_EDITION == "paid"){
 
 	function pmxe_notice(){
-		
+
 		?>
 		<div class="error">
 			<p>
 			<?php printf(esc_html__('Please de-activate and remove the free version of the WP All Export before activating the paid version.', 'wp_all_export_plugin')); ?>
 			</p>
 		</div>
-		<?php				
+		<?php
 
 		deactivate_plugins( str_replace('\\', '/', dirname(__FILE__)) . '/wp-all-export.php');
 
 	}
 
-	add_action('admin_notices', 'pmxe_notice');	
+	add_action('admin_notices', 'pmxe_notice');
 
 }
 else {
@@ -59,7 +59,7 @@ else {
 	 */
 	define('PMXE_PREFIX', 'pmxe_');
 
-	define('PMXE_VERSION', '1.3.3');
+	define('PMXE_VERSION', '1.3.4');
 
     define('PMXE_ASSETS_VERSION', '-1.0.2');
 
@@ -69,7 +69,7 @@ else {
 	 * Plugin root uploads folder name
 	 * @var string
 	 */
-	define('WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY', 'wpallexport');	
+	define('WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY', 'wpallexport');
 	/**
 	 * Plugin uploads folder name
 	 * @var string
@@ -80,13 +80,13 @@ else {
 	 * Plugin temp folder name
 	 * @var string
 	 */
-	define('WP_ALL_EXPORT_TEMP_DIRECTORY', WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'temp');	
+	define('WP_ALL_EXPORT_TEMP_DIRECTORY', WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'temp');
 
 	/**
 	 * Plugin temp folder name
 	 * @var string
 	 */
-	define('WP_ALL_EXPORT_CRON_DIRECTORY', WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'exports');	
+	define('WP_ALL_EXPORT_CRON_DIRECTORY', WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'exports');
 
 	/**
 	 * Main plugin file, Introduces MVC pattern
@@ -131,7 +131,7 @@ else {
 		 * Max allowed file size (bytes) to import in default mode
 		 * @var int
 		 */
-		const LARGE_SIZE = 0; // all files will importing in large import mode	
+		const LARGE_SIZE = 0; // all files will importing in large import mode
 
 		/**
 		 * WP All Import temp folder
@@ -190,7 +190,7 @@ else {
             }
 
             $this->addons = new \Wpae\App\Service\Addons\AddonService();
-            
+
             // init plugin options
             $option_name = get_class($this) . '_Options';
             $options_default = PMXE_Config::createFromFile(self::ROOT_DIR . '/config/options.php')->toArray();
@@ -240,7 +240,6 @@ else {
             add_action('admin_init', array($this, 'adminInit'), 11);
             add_action('admin_init', array($this, 'fix_db_schema'), 10);
             add_action('init', array($this, 'init'), 10);
-
         }
 
         /**
@@ -323,7 +322,7 @@ else {
 		 */
 		public function getTablePrefix() {
 			global $wpdb;
-			
+
 			//return ($this->isNetwork() ? $wpdb->base_prefix : $wpdb->prefix) . self::PREFIX;
 			return $wpdb->prefix . self::PREFIX;
 		}
@@ -367,7 +366,6 @@ else {
 
             $addons_not_included = get_option('wp_all_export_free_addons_not_included',false);
 
-
             if ( !get_option('wp_all_export_free_addons_not_included',false) && current_user_can( 'manage_options' ) && (!XmlExportEngine::get_addons_service()->isAcfAddonActive() || !XmlExportEngine::get_addons_service()->isWooCommerceAddonActive())){
 
 				$website = get_site_url();
@@ -386,16 +384,16 @@ else {
 			// create history folder
 			$uploads = wp_upload_dir();
 
-			$wpallimportDirs = array( WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY, self::TEMP_DIRECTORY, self::UPLOADS_DIRECTORY, self::CRON_DIRECTORY);			
+			$wpallimportDirs = array( WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY, self::TEMP_DIRECTORY, self::UPLOADS_DIRECTORY, self::CRON_DIRECTORY);
 
 			foreach ($wpallimportDirs as $destination) {
 
 				$dir = $uploads['basedir'] . DIRECTORY_SEPARATOR . $destination;
-				
-				if ( !is_dir($dir)) wp_mkdir_p($dir);			
 
-				if ( ! @file_exists($dir . DIRECTORY_SEPARATOR . 'index.php') ) @touch( $dir . DIRECTORY_SEPARATOR . 'index.php' );						
-				
+				if ( !is_dir($dir)) wp_mkdir_p($dir);
+
+				if ( ! @file_exists($dir . DIRECTORY_SEPARATOR . 'index.php') ) @touch( $dir . DIRECTORY_SEPARATOR . 'index.php' );
+
 			}
 
             if ( ! is_dir($uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY) or ! is_writable($uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY)) {
@@ -420,27 +418,26 @@ else {
                     . '<p><a class="button button-primary" href="https://wpallimport.com/portal/downloads" target="_blank">' . __('Download Add-On', PMXE_Plugin::LANGUAGE_DOMAIN) . '</a></p>', 'wpae_acf_addon_not_installed_notice');
             }
 
-			self::$session = new PMXE_Handler();						
+			self::$session = new PMXE_Handler();
 
 			$input = new PMXE_Input();
-			$page = strtolower($input->getpost('page', ''));						
+			$page = strtolower($input->getpost('page', ''));
 
 			if (preg_match('%^' . preg_quote(str_replace('_', '-', self::PREFIX), '%') . '([\w-]+)$%', $page)) {
-				//$this->adminDispatcher($page, strtolower($input->getpost('action', 'index')));
 
 				$action = strtolower($input->getpost('action', 'index'));
 
-				// capitalize prefix and first letters of class name parts	
+				// capitalize prefix and first letters of class name parts
 				$controllerName = preg_replace_callback('%(^' . preg_quote(self::PREFIX, '%') . '|_).%', array($this, "replace_callback"),str_replace('-', '_', $page));
 				$actionName = str_replace('-', '_', $action);
 				if (method_exists($controllerName, $actionName)) {
 
 					if ( ! get_current_user_id() or ! current_user_can(self::$capabilities)) {
 					    // This nonce is not valid.
-					    die( 'Security check' ); 
+					    die( 'Security check' );
 
 					} else {
-						
+
 						$this->_admin_current_screen = (object)array(
 							'id' => $controllerName,
 							'base' => $controllerName,
@@ -460,6 +457,10 @@ else {
 						if ( ! $controller instanceof PMXE_Controller_Admin) {
                             throw new Exception("Administration page `$page` matches to a wrong controller type.");
                         }
+
+                        $reviewsUI = new \Wpae\Reviews\ReviewsUI();
+
+                        add_action('admin_notices', [$reviewsUI, 'render']);
 
                             if($controller instanceof PMXE_Admin_Manage && ($action == 'update' || $action == 'template' || $action == 'options') && isset($_GET['id'])) {
                                 $addons = new \Wpae\App\Service\Addons\AddonService();
@@ -498,9 +499,9 @@ else {
 			                            (
 				                            ( in_array( 'product', $cpt ) && \class_exists('WooCommerce') && ! XmlExportEngine::get_addons_service()->isWooCommerceProductAddonActive() ) ||
 				                            ( in_array( 'shop_order', $cpt ) && ! XmlExportEngine::get_addons_service()->isWooCommerceOrderAddonActive() ) ||
-				                            in_array( 'shop_review', $cpt ) || 
-                                            in_array( 'shop_coupon', $cpt ) 
-                                        ) && ! $addons->isWooCommerceAddonActive() 
+				                            in_array( 'shop_review', $cpt ) ||
+                                            in_array( 'shop_coupon', $cpt )
+                                        ) && ! $addons->isWooCommerceAddonActive()
                                     ) ||
 		                            ( $export->options['export_type'] == 'advanced' && $export->options['wp_query_selector'] == 'wp_user_query' && ! $addons->isUserAddonActive() )
 	                            ) {
@@ -513,14 +514,14 @@ else {
                             }
 
 
-						if ($this->_admin_current_screen->is_ajax) { // ajax request						
+						if ($this->_admin_current_screen->is_ajax) { // ajax request
 							$controller->$action();
 							do_action('wpallexport_action_after');
 							die(); // stop processing since we want to output only what controller is randered, nothing in addition
-						} elseif ( ! $controller->isInline) {																																		
+						} elseif ( ! $controller->isInline) {
 							@ob_start();
 							$controller->$action();
-							self::$buffer = @ob_get_clean();													
+							self::$buffer = @ob_get_clean();
 						} else {
 							self::$buffer_callback = array($controller, $action);
 						}
@@ -566,7 +567,7 @@ else {
 		 * @internal param $string [optional] $page When $page set to empty string ealier buffered content is outputted, otherwise controller is called based on $page value
 		 */
 		public function adminDispatcher($page = '', $action = 'index') {
-			if ('' === $page) {				
+			if ('' === $page) {
 				if ( ! is_null(self::$buffer)) {
 					echo '<div class="wrap">';
 					// Contents are sanitized at a lower level
@@ -581,7 +582,7 @@ else {
 				} else {
 					throw new Exception('There is no previousely buffered content to display.');
 				}
-			} 
+			}
 		}
 
 		public function replace_callback($matches){
@@ -673,7 +674,7 @@ else {
 		 * @throws Exception
 		 */
 		public function getOption($option = NULL) {
-			$options = apply_filters('wp_all_export_config_options', $this->options);			
+			$options = apply_filters('wp_all_export_config_options', $this->options);
 			if (is_null($option)) {
 				return $options;
 			} else if (isset($options[$option])) {
@@ -721,7 +722,7 @@ else {
 			global $wpdb;
 
 			if (function_exists('is_multisite') && is_multisite()) {
-		        // check if it is a network activation - if so, run the activation function for each blog id	        
+		        // check if it is a network activation - if so, run the activation function for each blog id
 		        if (isset($_GET['networkwide']) && ($_GET['networkwide'] == 1)) {
 		            $old_blog = $wpdb->blogid;
 		            // Get all blog ids
@@ -729,14 +730,14 @@ else {
 		            foreach ($blogids as $blog_id) {
 		                switch_to_blog($blog_id);
 		                require self::ROOT_DIR . '/schema.php';
-		                dbDelta($plugin_queries);	                
+		                dbDelta($plugin_queries);
 		            }
 		            switch_to_blog($old_blog);
-		            return;	         
-		        }	         
+		            return;
+		        }
 		    }
 
-			dbDelta($plugin_queries);		
+			dbDelta($plugin_queries);
 
 		}
 
@@ -749,11 +750,11 @@ else {
 		 * @return void
 		 */
 		public function load_plugin_textdomain() {
-			
-			$locale = apply_filters( 'plugin_locale', get_locale(), 'wp_all_export_plugin' );							
-			
+
+			$locale = apply_filters( 'plugin_locale', get_locale(), 'wp_all_export_plugin' );
+
 			load_plugin_textdomain( 'wp_all_export_plugin', false, dirname( plugin_basename( __FILE__ ) ) . "/i18n/languages" );
-		}	
+		}
 
 		public function fix_db_schema(){
 
@@ -806,24 +807,30 @@ else {
 			$tablefields = $wpdb->get_results("DESCRIBE {$table};");
 			$iteration = false;
 			$parent_id = false;
-			$export_post_type = false;			
-
-			// Check if field exists
+			$export_post_type = false;
+            $created_at = false;
+			
+            // Check if field exists
 			foreach ($tablefields as $tablefield) {
 				if ('iteration' == $tablefield->Field) $iteration = true;
 				if ('parent_id' == $tablefield->Field) $parent_id = true;
 				if ('export_post_type' == $tablefield->Field) $export_post_type = true;
+				if ('created_at' == $tablefield->Field) $created_at = true;
 			}
 
-			if ( ! $iteration ){				
+			if ( ! $iteration ){
 				$wpdb->query("ALTER TABLE {$table} ADD `iteration` BIGINT(20) NOT NULL DEFAULT 0;");
 			}
-			if ( ! $parent_id ){				
+			if ( ! $parent_id ){
 				$wpdb->query("ALTER TABLE {$table} ADD `parent_id` BIGINT(20) NOT NULL DEFAULT 0;");
 			}
-			if ( ! $export_post_type ){				
+			if ( ! $export_post_type ){
 				$wpdb->query("ALTER TABLE {$table} ADD `export_post_type` TEXT NOT NULL DEFAULT '';");
 			}
+            if ( ! $created_at ){
+                $wpdb->query("ALTER TABLE {$table} ADD `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP;");
+                $wpdb->query("UPDATE {$table} SET `created_at` = `registered_on` WHERE 1");
+            }
 
 			update_option( "wp_all_export_free_db_version", PMXE_VERSION );
 		}
@@ -882,31 +889,31 @@ else {
 		 */
 		public static function get_default_import_options() {
 			return array(
-				'cpt' => array(),	
+				'cpt' => array(),
 				'whereclause' => '',
 				'joinclause' => '',
 				'filter_rules_hierarhy' => '',
 				'product_matching_mode' => 'parent',
 				'order_item_per_row' => 1,
 				'order_item_fill_empty_columns' => 1,
-				'filepath' => '',				
+				'filepath' => '',
 				'current_filepath' => '',
 				'bundlepath' => '',
 				'export_type' => 'specific',
-				'wp_query' => '',	
+				'wp_query' => '',
 				'wp_query_selector' => 'wp_query',
 				'is_user_export' => false,
 				'is_comment_export' => false,
-				'export_to' => 'csv',	
+				'export_to' => 'csv',
 				'export_to_sheet' => 'csv',
 				'delimiter' => ',',
 				'encoding' => 'UTF-8',
-				'is_generate_templates' => 1,				
-				'is_generate_import' => 1,				
-				'import_id' => 0,									
-				'template_name' => '',				
+				'is_generate_templates' => 1,
+				'is_generate_import' => 1,
+				'import_id' => 0,
+				'template_name' => '',
 				'is_scheduled' => 0,
-				'scheduled_period' => '',				
+				'scheduled_period' => '',
 				'scheduled_email' => '',
 				'cc_label' => array(),
 				'cc_type' => array(),
@@ -914,7 +921,7 @@ else {
 				'cc_name' => array(),
 				'cc_php' => array(),
 				'cc_code' => array(),
-				'cc_sql' => array(),				
+				'cc_sql' => array(),
 				'cc_options' => array(),
 				'cc_settings' => array(),
 				'friendly_name' => '',
@@ -946,7 +953,7 @@ else {
 				'custom_xml_template' => '',
 				'custom_xml_template_header' => '',
 				'custom_xml_template_loop' => '',
-				'custom_xml_template_footer' => '',				
+				'custom_xml_template_footer' => '',
 				'custom_xml_template_options' => array(),
         		'custom_xml_cdata_logic' => 'auto',
 				'show_cdata_in_preview' => 0,
@@ -966,7 +973,7 @@ else {
                 'sub_post_type_to_export' => ''
 
             );
-		}		
+		}
 
 		public static function is_ajax(){
 			return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') ? true : false ;

@@ -1,0 +1,12 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/widgets-language-switcher/LanguageSwitcher.js:11
+msgid "All"
+msgstr ""
+
+#: src/js/widgets-language-switcher/LanguageSwitcher.js:51
+msgid "Display on language"
+msgstr ""

@@ -39,15 +39,18 @@ class Dismissed {
 
 	public static function dismissNotice() {
 		$data = filter_var_array( $_POST, [
-			'repository' => FILTER_SANITIZE_STRING,
-			'noticeId'   => FILTER_SANITIZE_STRING,
+			'repository'       => FILTER_SANITIZE_STRING,
+			'noticeType'       => FILTER_SANITIZE_STRING,
+			'noticePluginSlug' => FILTER_SANITIZE_STRING,
 		] );
+
+		$dismissions = apply_filters( 'otgs_installer_admin_notices_dismissions', [] );
 
 		$store = new Store();
 
 		$dismissed = $store->get( self::STORE_KEY, [] );
 
-		$dismissed['repo'][ $data['repository'] ][ $data['noticeId'] ] = time();
+		$dismissed = $dismissions[ $data['noticeType'] ]( $dismissed, $data );
 
 		$store->save( self::STORE_KEY, $dismissed );
 

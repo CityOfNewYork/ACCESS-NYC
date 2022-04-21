@@ -13,7 +13,7 @@ class PMAI_Admin_Import extends PMAI_Controller_Admin {
      * @param string $post_type
      * @param $post
      */
-    public function index($post_type = 'post', $post ) {
+    public function index( $post_type, $post ) {
         $this->data['post_type'] = $post_type;
         $this->data['post'] =& $post;
         $this->data['groups'] = array();

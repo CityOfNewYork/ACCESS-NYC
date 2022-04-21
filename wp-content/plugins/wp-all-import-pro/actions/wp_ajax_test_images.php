@@ -133,7 +133,7 @@ function pmxi_wp_ajax_test_images(){
 
 						if ( (is_wp_error($request) or $request === false) and ! @file_put_contents($image_filepath, @file_get_contents($img, false, $get_ctx))) {
 							$failed_msgs[] = (is_wp_error($request)) ? $request->get_error_message() : sprintf(__('File `%s` cannot be saved locally', 'wp_all_import_plugin'), $img);										
-						} elseif( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
+						} elseif( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], wp_all_import_supported_image_types())) {
 							$failed_msgs[] = sprintf(__('File `%s` is not a valid image.', 'wp_all_import_plugin'), $img);										
 						} else {
 							$success_images++;											

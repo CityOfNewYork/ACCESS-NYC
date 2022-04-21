@@ -16,8 +16,8 @@ class WPML_TF_Backend_Document_Information extends WPML_TF_Document_Information 
 	/**
 	 * WPML_TF_Backend_Document_Information constructor.
 	 *
-	 * @param SitePress                   $sitepress
-	 * @param WPML_TP_Client_Factory|null $tp_client_factory
+	 * @param SitePress              $sitepress
+	 * @param WPML_TP_Client_Factory $tp_client_factory
 	 */
 	public function __construct( SitePress $sitepress, WPML_TP_Client_Factory $tp_client_factory = null ) {
 		parent::__construct( $sitepress );
@@ -148,7 +148,7 @@ class WPML_TF_Backend_Document_Information extends WPML_TF_Document_Information 
 		if ( isset( $translation_job->translation_service ) ) {
 
 			if ( 'local' === $translation_job->translation_service && isset( $translation_job->translator_id ) ) {
-				$translator_name = get_the_author_meta( 'display_name', $translation_job->translator_id );
+				$translator_name  = get_the_author_meta( 'display_name', $translation_job->translator_id );
 				$translator_name .= ' (' . __( 'local translator', 'sitepress' ) . ')';
 			} else {
 				$translator_name = __( 'Unknown remote translation service', 'sitepress' );

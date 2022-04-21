@@ -13,7 +13,7 @@
  * Plugin Name:       Better Search Replace
  * Plugin URI:        https://bettersearchreplace.com
  * Description:       A small plugin for running a search/replace on your WordPress database.
- * Version:           1.3.4
+ * Version:           1.4
  * Author:            Delicious Brains
  * Author URI:        https://bettersearchreplace.com
  * License:           GPL-3.0
@@ -53,7 +53,7 @@ if ( ! defined( 'WPINC' ) ) {
 function run_better_search_replace() {
 
 	// Allows for overriding the capability required to run the plugin.
-	$cap = apply_filters( 'bsr_capability', 'install_plugins' );
+	$cap = apply_filters( 'bsr_capability', 'manage_options' );
 
 	// Only load for admins.
 	if ( current_user_can( $cap ) ) {
@@ -68,7 +68,7 @@ function run_better_search_replace() {
 		define( 'BSR_URL', plugin_dir_url( BSR_FILE ) );
 
 		// Defines the current version of the plugin.
-		define( 'BSR_VERSION', '1.3.4' );
+		define( 'BSR_VERSION', '1.4' );
 
 		/**
 		 * The core plugin class that is used to define internationalization,

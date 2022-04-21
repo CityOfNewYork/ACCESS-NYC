@@ -31,7 +31,7 @@ class WPML_404_Guess extends WPML_Slug_Resolution {
 	 * @param string   $name
 	 * @param WP_Query $query
 	 *
-	 * @return array containing most likely name, type and whether or not a match was found
+	 * @return array<string|bool> containing most likely name, type and whether or not a match was found
 	 */
 	public function guess_cpt_by_name( $name, $query ) {
 		$type  = $query->get( 'post_type' );
@@ -42,14 +42,15 @@ class WPML_404_Guess extends WPML_Slug_Resolution {
 		if ( (bool) $types === true ) {
 
 			$date_snippet = $this->by_date_snippet( $query );
+			$page_first = (bool) $query->get( 'pagename' );
 
 			$cache     = new WPML_WP_Cache( 'WPML_404_Guess' );
-			$cache_key = 'guess_cpt' . $name . wp_json_encode( $types ) . $date_snippet;
+			$cache_key = 'guess_cpt' . $name . wp_json_encode( $types ) . $page_first . $date_snippet;
 			$found     = false;
 			$ret       = $cache->get( $cache_key, $found );
 
 			if ( ! $found ) {
-				$ret = $this->find_post_type( $name, $type, $types, $date_snippet );
+				$ret = $this->find_post_type( $name, $type, $types, $date_snippet, $page_first );
 				$cache->set( $cache_key, $ret );
 			}
 		}
@@ -62,17 +63,20 @@ class WPML_404_Guess extends WPML_Slug_Resolution {
 	 *
 	 * @param string $name
 	 * @param string $type
-	 * @param array $types
+	 * @param array  $types
 	 * @param string $date_snippet
+	 * @param bool $page_first
 	 *
 	 * @return array
 	 */
-	private function find_post_type( $name, $type, $types, $date_snippet ) {
-		$ret   = array( $name, $type, false );
-		$where = $this->wpdb->prepare( "post_name = %s ", $name );
+	private function find_post_type( $name, $type, $types, $date_snippet, $page_first ) {
+		$ret    = array( $name, $type, false );
+		$where  = $this->wpdb->prepare( 'post_name = %s ', $name );
 		$where .= " AND post_type IN ('" . implode( "', '", $types ) . "')";
 		$where .= $date_snippet;
-		$res   = $this->wpdb->get_row( "
+		/** @var \stdClass $res */
+		$res    = $this->wpdb->get_row(
+			"
 										 SELECT post_type, post_name
 										 FROM {$this->wpdb->posts} p
 										 LEFT JOIN {$this->wpdb->prefix}icl_translations wpml_translations
@@ -83,8 +87,9 @@ class WPML_404_Guess extends WPML_Slug_Resolution {
 										    AND ( post_status = 'publish'
 										        OR ( post_type = 'attachment'
 										             AND post_status = 'inherit' ) )
-										    " . $this->order_by_language_snippet( (bool) $date_snippet ) . "
-									     LIMIT 1" );
+										    " . $this->order_by_type_and_language_snippet( (bool) $date_snippet, $page_first ) . '
+									     LIMIT 1'
+		);
 		if ( (bool) $res === true ) {
 			$ret = array( $res->post_name, $res->post_type, true );
 		}
@@ -103,7 +108,11 @@ class WPML_404_Guess extends WPML_Slug_Resolution {
 	 */
 	private function by_date_snippet( $query ) {
 		$snippet = '';
-		foreach ( array( 'year' => 'YEAR', 'monthnum' => 'MONTH', 'day' => 'DAY' ) as $index => $time_unit ) {
+		foreach ( array(
+			'year'     => 'YEAR',
+			'monthnum' => 'MONTH',
+			'day'      => 'DAY',
+		) as $index => $time_unit ) {
 			if ( (bool) ( $value = $query->get( $index ) ) === true ) {
 				$snippet .= $this->wpdb->prepare( " AND {$time_unit}(post_date) = %d ", $value );
 			}
@@ -114,22 +123,25 @@ class WPML_404_Guess extends WPML_Slug_Resolution {
 
 	/**
 	 * @param bool $has_date
+	 * @param bool $page_first
 	 *
 	 * @return string
 	 */
-	private function order_by_language_snippet( $has_date ) {
+	private function order_by_type_and_language_snippet( $has_date, $page_first ) {
 		$lang_order   = $this->get_ordered_langs();
 		$current_lang = array_shift( $lang_order );
 		$best_score   = count( $lang_order ) + 2;
-		$order_by     = '';
+		$order_by     = sprintf( "ORDER BY post_type = 'page' %s", $page_first ? 'DESC' : 'ASC' );
 		if ( $best_score > 2 ) {
-			$order_by .= $this->wpdb->prepare( 'ORDER BY CASE wpml_translations.language_code WHEN %s THEN %d ',
-			                                   $current_lang,
-			                                   $best_score );
-			$score = $best_score - 2;
+			$order_by .= $this->wpdb->prepare(
+				', CASE wpml_translations.language_code WHEN %s THEN %d ',
+				$current_lang,
+				$best_score
+			);
+			$score     = $best_score - 2;
 			foreach ( $lang_order as $lang_code ) {
 				$order_by .= $this->wpdb->prepare( ' WHEN %s THEN %d ', $lang_code, $score );
-				$score -= 1;
+				$score    -= 1;
 			}
 			$order_by .= ' ELSE 0 END DESC ';
 			if ( $has_date ) {
@@ -146,7 +158,10 @@ class WPML_404_Guess extends WPML_Slug_Resolution {
 	 * @return string
 	 */
 	private function order_by_post_type_snippet() {
-		$post_types = array( 'page' => 2, 'post' => 1 );
+		$post_types = array(
+			'page' => 2,
+			'post' => 1,
+		);
 		$order_by   = ' CASE p.post_type ';
 		foreach ( $post_types as $type => $score ) {
 			$order_by .= $this->wpdb->prepare( ' WHEN %s THEN %d ', $type, $score );

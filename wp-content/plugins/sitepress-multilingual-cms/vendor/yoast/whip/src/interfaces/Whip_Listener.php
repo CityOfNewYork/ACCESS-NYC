@@ -1,4 +1,9 @@
 <?php
+/**
+ * WHIP libary file.
+ *
+ * @package Yoast\WHIP
+ */
 
 /**
  * Interface Whip_Listener.
@@ -11,5 +16,4 @@ interface Whip_Listener {
 	 * @return void
 	 */
 	public function listen();
-
 }

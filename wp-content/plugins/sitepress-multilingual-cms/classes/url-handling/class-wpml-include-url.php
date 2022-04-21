@@ -51,10 +51,12 @@ class WPML_Include_Url extends WPML_WPDB_User {
 	public function get_unfiltered_home() {
 		$this->unfiltered_home_url = $this->unfiltered_home_url
 			? $this->unfiltered_home_url
-			: $this->wpdb->get_var( "  SELECT option_value
+			: $this->wpdb->get_var(
+				"  SELECT option_value
 									   FROM {$this->wpdb->options}
 									   WHERE option_name = 'home'
-									   LIMIT 1" );
+									   LIMIT 1"
+			);
 
 		return $this->unfiltered_home_url;
 	}

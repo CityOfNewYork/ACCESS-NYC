@@ -22,6 +22,14 @@ class WPML_TF_Feedback_Edit {
 	/** @var null|WPML_TP_Client $tp_client */
 	private $tp_client;
 
+	/**
+	 * WPML_TF_Feedback_Edit constructor.
+	 *
+	 * @param \WPML_TF_Feedback_Query      $feedback_query
+	 * @param \WPML_TF_Data_Object_Storage $feedback_storage
+	 * @param \WPML_TF_Data_Object_Storage $message_storage
+	 * @param \WPML_TP_Client_Factory|null $tp_client_factory
+	 */
 	public function __construct(
 		WPML_TF_Feedback_Query $feedback_query,
 		WPML_TF_Data_Object_Storage $feedback_storage,
@@ -39,8 +47,7 @@ class WPML_TF_Feedback_Edit {
 	 * @param array $args
 	 *
 	 * @return null|WPML_TF_Feedback
-	 *
-	 * @throws WPML_TF_Feedback_Update_Exception
+	 * @throws \WPML_TF_Feedback_Update_Exception
 	 */
 	public function update( $feedback_id, array $args ) {
 		$feedback = $this->feedback_query->get_one( $feedback_id );
@@ -98,6 +105,8 @@ class WPML_TF_Feedback_Edit {
 	/**
 	 * @param WPML_TF_Feedback $feedback
 	 * @param array            $args
+	 *
+	 * @throws \WPML_TF_Feedback_Update_Exception
 	 */
 	private function update_feedback_status( WPML_TF_Feedback $feedback, array $args ) {
 		if ( isset( $args['feedback_status'] )
@@ -188,10 +197,11 @@ class WPML_TF_Feedback_Edit {
 	 * @param string $endpoint
 	 *
 	 * @return string
+	 * @throws \WPML_TF_Feedback_Update_Exception
 	 */
 	private function get_communication_error_message( $endpoint ) {
 		$active_service = $this->get_tp_client()->services()->get_active();
-		$service_name = isset( $active_service->name ) ? $active_service->name : esc_html( 'Translation Service', 'sitepress' );
+		$service_name = isset( $active_service->name ) ? $active_service->name : esc_html__( 'Translation Service', 'sitepress' );
 
 		if ( 'send' === $endpoint ) {
 			$error_message = sprintf(

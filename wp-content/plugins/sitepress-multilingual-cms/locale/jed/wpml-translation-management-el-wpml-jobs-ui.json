@@ -1,0 +1,22 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Draft — Pending review": [
+            "Πρόχειρο — Αναμένει επιμέλεια"
+         ],
+         "Complete": [
+            "Ολοκληρώθηκε"
+         ],
+         "Insufficient funds": [
+            "Ανεπαρκή χρήματα"
+         ],
+         "Editor Job ID": [
+            "Αναγνωστικό εργασίας επεξεργαστή"
+         ]
+      }
+   }
+}

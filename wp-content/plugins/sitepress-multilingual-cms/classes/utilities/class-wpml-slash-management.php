@@ -28,7 +28,7 @@ class WPML_Slash_Management {
 	public function maybe_user_trailingslashit( $url, $method = '' ) {
 		$url_parts = wpml_parse_url( $url );
 
-		if ( ! $url_parts ) {
+		if ( ! $url_parts || ! is_array( $url_parts ) ) {
 			return $url;
 		}
 
@@ -59,7 +59,7 @@ class WPML_Slash_Management {
 	 * Follows the logic of WordPress core user_trailingslashit().
 	 * Can be called on plugins_loaded event, when $wp_rewrite is not set yet.
 	 *
-	 * @param $path
+	 * @param string $path
 	 *
 	 * @return string
 	 */
@@ -110,7 +110,7 @@ class WPML_Slash_Management {
 	public function parse_missing_host_from_path( array $url_parts ) {
 		if ( ! isset( $url_parts['host'] ) && isset( $url_parts['path'] ) ) {
 			$domain_and_subdir = explode( '/', $url_parts['path'] );
-			$domain = $domain_and_subdir[0];
+			$domain            = $domain_and_subdir[0];
 			$url_parts['host'] = $domain;
 			array_shift( $domain_and_subdir );
 

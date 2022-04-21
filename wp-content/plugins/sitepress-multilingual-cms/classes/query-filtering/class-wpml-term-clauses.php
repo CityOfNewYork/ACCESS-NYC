@@ -78,11 +78,11 @@ class WPML_Term_Clauses {
 
 		$where_lang = $this->get_where_lang();
 
-		$clauses['join']  .= " LEFT JOIN {$this->wpdb->prefix}icl_translations icl_t
+		$clauses['join'] .= " LEFT JOIN {$this->wpdb->prefix}icl_translations icl_t
                                     ON icl_t.element_id = tt.term_taxonomy_id
                                         AND icl_t.element_type IN ({$icl_taxonomies})";
 
-		$clauses = $this->maybe_apply_count_adjustment( $clauses );
+		$clauses           = $this->maybe_apply_count_adjustment( $clauses );
 		$clauses['where'] .= " AND ( ( icl_t.element_type IN ({$icl_taxonomies}) {$where_lang} )
                                     OR icl_t.element_type NOT IN ({$icl_taxonomies}) OR icl_t.element_type IS NULL ) ";
 

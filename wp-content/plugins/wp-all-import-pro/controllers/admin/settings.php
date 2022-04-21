@@ -154,9 +154,26 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 			if (empty($post['html_entities'])) $post['html_entities'] = 0;
 			if (empty($post['utf8_decode'])) $post['utf8_decode'] = 0;
 
-            $post['cron_job_key'] = preg_replace('/[^A-Za-z0-9-_\.]+/', '', $post['cron_job_key']);
+            $post['cron_job_key'] = wp_all_import_url_title($post['cron_job_key']);
 
             if ( ! $this->errors->get_error_codes()) { // no validation errors detected
+
+                $current_cron_job_key = PMXI_Plugin::getInstance()->getOption('cron_job_key');
+                $new_cron_job_key = $post['cron_job_key'];
+
+                if($new_cron_job_key !== $current_cron_job_key) {
+
+                    // Cron job key changed
+                    $scheduling_service = \Wpai\Scheduling\Scheduling::create();
+                    $imports = new PMXI_Import_List();
+                    $imports = $imports->getBy('deleted', 0)->convertRecords();
+
+                    foreach ($imports as $import) {
+                        if($import->options['scheduling_enable'] === "1") {
+                            $scheduling_service->updateApiKey($import->id, $new_cron_job_key);
+                        }
+                    }
+                }
 
 				PMXI_Plugin::getInstance()->updateOption($post);
 
@@ -301,7 +318,7 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 						);								
 						
 						// Call the custom API.
-						$response = wp_remote_get( add_query_arg( $api_params, $options['info_api_url'] ), array( 'timeout' => 15, 'sslverify' => false ) );						
+						$response = wp_remote_get( add_query_arg( $api_params, $options['info_api_url'] ), array( 'timeout' => 15, 'sslverify' => true ) );
 
 						// make sure the response came back okay
 						if ( is_wp_error( $response ) )
@@ -377,7 +394,7 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 				);
 
 				// Call the custom API.
-				$response = wp_remote_get( add_query_arg( $api_params, $options['info_api_url'] ), array( 'timeout' => 15, 'sslverify' => false ) );
+				$response = wp_remote_get( add_query_arg( $api_params, $options['info_api_url'] ), array( 'timeout' => 15, 'sslverify' => true ) );
 
 				if ( is_wp_error( $response ) )
 					return false;
@@ -419,7 +436,8 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 
 		$files = array_diff(@scandir($dir), array('.','..'));
 
-		$cacheFiles = @array_diff(@scandir($cacheDir), array('.','..'));
+		$cacheFiles = @scandir($cacheDir);
+		$cacheFiles = is_array($cacheFiles) ? @array_diff($cacheFiles, array('.','..')) : null;
 
 		$msg = __('Files not found', 'wp_all_import_plugin');
 
@@ -575,6 +593,10 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 		$targetDir = self::$path;
 
 		if (! is_dir($targetDir) || ! is_writable($targetDir)){
+		    wp_mkdir_p($targetDir);
+		}
+
+		if (! is_dir($targetDir) || ! is_writable($targetDir)){
 			delete_transient( self::$upload_transient );
 			exit(json_encode(array("jsonrpc" => "2.0", "error" => array("code" => 100, "message" => __("Uploads folder is not writable.", "wp_all_import_plugin")), "id" => "id")));
 		}
@@ -700,6 +722,9 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 
 		$notice = false;
 
+		// declare gravity form title variable
+		$gravity_form_title = null;
+
 		// Check if file has been uploaded
 		if (!$chunks || $chunk == $chunks - 1) {
 			// Strip the temp .part suffix off 
@@ -737,28 +762,29 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 				if ( ! empty($upload_result['post_type'])) {
 					$post_type = $upload_result['post_type'];
 					$taxonomy_type = $upload_result['taxonomy_type'];
+					$gravity_form_title = $upload_result['gravity_form_title'];
 					switch ( $post_type ) {
 						case 'shop_order':
 							if ( ! class_exists('WooCommerce') ) {
 								$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires WooCommerce.</p><a class="upgrade_link" href="https://wordpress.org/plugins/woocommerce/" target="_blank">Get WooCommerce</a>.', 'wp_all_import_plugin');							
 							} else {
 								if ( ! defined('PMWI_EDITION') ) {
-									$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires the Pro version of the WooCommerce Add-On.</p><a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1529&edd_options%5Bprice_id%5D=1" class="upgrade_link" target="_blank">Purchase the WooCommerce Add-On</a>.', 'wp_all_import_plugin');
+									$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires the Pro version of the WooCommerce Add-On.</p><a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=2707227&edd_options%5Bprice_id%5D=1" class="upgrade_link" target="_blank">Purchase the WooCommerce Add-On</a>.', 'wp_all_import_plugin');
 								} elseif ( PMWI_EDITION != 'paid' ) {
-									$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires the Pro version of the WooCommerce Add-On, but you have the free version installed.</p><a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1529&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link">Purchase the WooCommerce Add-On</a>.', 'wp_all_import_plugin');
+									$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires the Pro version of the WooCommerce Add-On, but you have the free version installed.</p><a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=2707227&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link">Purchase the WooCommerce Add-On</a>.', 'wp_all_import_plugin');
 								}							
 							}
 							break;
 						case 'import_users':
 							if ( ! class_exists('PMUI_Plugin') ) {
-								$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires the User Add-On.</p><a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1921&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link">Purchase the User Add-On</a>.', 'wp_all_import_plugin');
+								$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires the User Add-On.</p><a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=2707221&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link">Purchase the User Add-On</a>.', 'wp_all_import_plugin');
 							}
 							break;
 						case 'shop_customer':
 							if ( ! class_exists('WooCommerce') ) {
 								$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires WooCommerce.</p><a class="upgrade_link" href="https://wordpress.org/plugins/woocommerce/" target="_blank">Get WooCommerce</a>.', 'wp_all_import_plugin');							
 							} elseif ( ! class_exists('PMUI_Plugin') ) {
-								$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires the User Add-On.</p><p class="wpallimport-upgrade-links-container"><a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1921&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link">Purchase the User Add-On</a></p>', 'wp_all_import_plugin');
+								$notice = __('<p class="wpallimport-bundle-notice">The import bundle you are using requires the User Add-On.</p><p class="wpallimport-upgrade-links-container"><a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=2707221&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link">Purchase the User Add-On</a></p>', 'wp_all_import_plugin');
 							}
 							break;
 						default:
@@ -769,7 +795,7 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 
 				if ( ! empty($upload_result['is_empty_bundle_file'])) {
 					// Return JSON-RPC response
-					exit(json_encode(array("jsonrpc" => "2.0", "error" => null, "result" => null, "id" => "id", "name" => $upload_result['filePath'], "post_type" => $post_type, "taxonomy_type" => $taxonomy_type, "notice" => $notice, "template" => $upload_result['template'], "url_bundle" => true)));
+					exit(json_encode(array("jsonrpc" => "2.0", "error" => null, "result" => null, "id" => "id", "name" => $upload_result['filePath'], "post_type" => $post_type, "taxonomy_type" => $taxonomy_type, "gravity_form_title" => $gravity_form_title, "notice" => $notice, "template" => $upload_result['template'], "url_bundle" => true)));
 				}
 				else {
 
@@ -848,7 +874,7 @@ class PMXI_Admin_Settings extends PMXI_Controller_Admin {
 		}			
 
 		// Return JSON-RPC response
-		exit(json_encode(array("jsonrpc" => "2.0", "error" => null, "result" => null, "id" => "id", "name" => $filePath, "post_type" => $post_type, "taxonomy_type" => $taxonomy_type, "notice" => $notice)));
+		exit(json_encode(array("jsonrpc" => "2.0", "error" => null, "result" => null, "id" => "id", "name" => $filePath, "post_type" => $post_type, "taxonomy_type" => $taxonomy_type, "gravity_form_title" => $gravity_form_title, "notice" => $notice)));
 
 	}		
 

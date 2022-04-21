@@ -52,6 +52,7 @@ class WPML_Admin_Menu_Item {
 
 	/**
 	 * Required by `usort` to remove duplicates, as casts array elements to string
+	 *
 	 * @return string
 	 */
 	public function __toString() {
@@ -64,12 +65,14 @@ class WPML_Admin_Menu_Item {
 			$parent = $this->get_parent_slug();
 		}
 
-		add_submenu_page( $parent,
-		                  $this->get_page_title(),
-		                  $this->get_menu_title(),
-		                  $this->get_capability(),
-		                  $this->get_menu_slug(),
-		                  $this->get_function() );
+		add_submenu_page(
+			$parent,
+			$this->get_page_title(),
+			$this->get_menu_title(),
+			$this->get_capability(),
+			$this->get_menu_slug(),
+			$this->get_function()
+		);
 	}
 
 	/**
@@ -183,14 +186,18 @@ class WPML_Admin_Menu_Item {
 			$function = spl_object_hash( (object) $function );
 		}
 
-		return wp_json_encode( array(
-			'capability'  => $this->get_capability(),
-			'function'    => $function,
-			'menu_slug'   => $this->get_menu_slug(),
-			'menu_title'  => $this->get_menu_title(),
-			'order'       => $this->get_order(),
-			'page_title'  => $this->get_page_title(),
-			'parent_slug' => $this->get_parent_slug(),
-		), 0, 1 );
+		return wp_json_encode(
+			array(
+				'capability'  => $this->get_capability(),
+				'function'    => $function,
+				'menu_slug'   => $this->get_menu_slug(),
+				'menu_title'  => $this->get_menu_title(),
+				'order'       => $this->get_order(),
+				'page_title'  => $this->get_page_title(),
+				'parent_slug' => $this->get_parent_slug(),
+			),
+			0,
+			1
+		);
 	}
 }

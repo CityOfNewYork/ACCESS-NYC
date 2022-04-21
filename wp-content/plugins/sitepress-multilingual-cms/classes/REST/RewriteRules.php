@@ -2,8 +2,7 @@
 
 namespace WPML\Core\REST;
 
-
-class RewriteRules implements \IWPML_REST_Action, \IWPML_DIC_Action  {
+class RewriteRules implements \IWPML_REST_Action, \IWPML_DIC_Action {
 	/** @var \SitePress */
 	private $sitepress;
 

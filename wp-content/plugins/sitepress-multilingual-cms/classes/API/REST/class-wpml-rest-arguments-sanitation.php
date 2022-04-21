@@ -8,7 +8,7 @@
 class WPML_REST_Arguments_Sanitation {
 
 	/**
-	 * @param $value
+	 * @param mixed $value
 	 *
 	 * @return bool
 	 */
@@ -20,7 +20,7 @@ class WPML_REST_Arguments_Sanitation {
 	}
 
 	/**
-	 * @param $value
+	 *@param mixed $value
 	 *
 	 * @return bool
 	 */
@@ -29,7 +29,7 @@ class WPML_REST_Arguments_Sanitation {
 	}
 
 	/**
-	 * @param $value
+	 *@param mixed $value
 	 *
 	 * @return bool
 	 */
@@ -38,7 +38,7 @@ class WPML_REST_Arguments_Sanitation {
 	}
 
 	/**
-	 * @param $value
+	 *@param mixed $value
 	 *
 	 * @return bool
 	 */
@@ -47,7 +47,7 @@ class WPML_REST_Arguments_Sanitation {
 	}
 
 	/**
-	 * @param $value
+	 *@param mixed $value
 	 *
 	 * @return bool
 	 */
@@ -56,7 +56,7 @@ class WPML_REST_Arguments_Sanitation {
 	}
 
 	/**
-	 * @param $value
+	 *@param mixed $value
 	 *
 	 * @return bool
 	 */
@@ -65,7 +65,7 @@ class WPML_REST_Arguments_Sanitation {
 	}
 
 	/**
-	 * @param $value
+	 *@param mixed $value
 	 *
 	 * @return array
 	 */

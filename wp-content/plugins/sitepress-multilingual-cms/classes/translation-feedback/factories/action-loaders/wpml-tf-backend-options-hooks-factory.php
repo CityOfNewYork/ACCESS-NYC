@@ -24,7 +24,7 @@ class WPML_TF_Backend_Options_Hooks_Factory extends WPML_Current_Screen_Loader_F
 
 			$settings_read = new WPML_TF_Settings_Read();
 			/** @var WPML_TF_Settings $tf_settings */
-			$tf_settings   = $settings_read->get( 'WPML_TF_Settings' );
+			$tf_settings = $settings_read->get( 'WPML_TF_Settings' );
 
 			$options_view = new WPML_TF_Backend_Options_View(
 				$template_loader->get_template(),

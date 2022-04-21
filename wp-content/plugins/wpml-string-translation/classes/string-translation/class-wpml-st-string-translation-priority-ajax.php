@@ -1,6 +1,6 @@
 <?php
 
-class WPML_ST_String_Translation_Priority_AJAX implements IWPML_Action{
+class WPML_ST_String_Translation_Priority_AJAX implements IWPML_Action {
 
 	/** @var wpdb */
 	private $wpdb;
@@ -8,7 +8,7 @@ class WPML_ST_String_Translation_Priority_AJAX implements IWPML_Action{
 	/**
 	 * @param wpdb $wpdb
 	 */
-	public function __construct( wpdb $wpdb) {
+	public function __construct( wpdb $wpdb ) {
 		$this->wpdb = $wpdb;
 	}
 

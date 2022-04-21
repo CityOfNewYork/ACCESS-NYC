@@ -1,0 +1,16 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "But...": [
+            "但..."
+         ],
+         "Wait to translate any content that contains media until we're finished configuring it. It will be just a moment.": [
+            "請等待翻譯包含媒體的任何內容，直到我們完成設定。很快就好。"
+         ]
+      }
+   }
+}

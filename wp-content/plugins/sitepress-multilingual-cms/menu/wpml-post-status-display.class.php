@@ -19,26 +19,29 @@ class WPML_Post_Status_Display {
 	 *
 	 * @param string $link Link the status icon is to point to.
 	 * @param string $text Hover text for the status icon.
-	 * @param string $img Name of the icon image file to be used.
 	 * @param string $css_class
 	 *
 	 * @return string
 	 */
 	private function render_status_icon( $link, $text, $css_class ) {
+		$icon = $this->get_action_icon( $css_class, $text );
+		if ( strpos( $icon, 'disabled' ) ) {
+			$link = null;
+		}
 
 		if ( $link ) {
 			$icon_html = '<a href="' . esc_url( $link ) . '" class="js-wpml-translate-link">';
 		} else {
-			$icon_html = '<a>';
+			$icon_html = '<a class="js-wpml-translate-link">';
 		}
-		$icon_html .= $this->get_action_icon( $css_class, $text );
-		$icon_html .= '</a>';
+		$icon_html .= $icon;
+		$icon_html .= $link ? '</a>' : '</span>';
 
 		return $icon_html;
 	}
 
 	private function get_action_icon( $css_class, $label ) {
-		return '<i class="' . $css_class . ' js-otgs-popover-tooltip" title="' . esc_attr( $label ) . '"></i>';
+		return '<i class="' . $css_class . ' js-otgs-popover-tooltip" title="' . esc_attr( $label ) . '" data-original-title="' . esc_attr( $label ) . '"></i>';
 	}
 
 	/**
@@ -52,7 +55,7 @@ class WPML_Post_Status_Display {
 	 * @return string
 	 */
 	public function get_status_html( $post_id, $lang ) {
-		list( $text, $link, $trid, $css_class ) = $this->get_status_data( $post_id, $lang );
+		list( $text, $link, $trid, $css_class, $status ) = $this->get_status_data( $post_id, $lang );
 		if ( ! did_action( 'wpml_pre_status_icon_display' ) ) {
 			do_action( 'wpml_pre_status_icon_display' );
 		}
@@ -65,8 +68,9 @@ class WPML_Post_Status_Display {
 		 * @param string $lang
 		 * @param int    $trid
 		 * @param string $css_class
+		 * @param int $status
 		 */
-		$link = apply_filters( 'wpml_link_to_translation', $link, $post_id, $lang, $trid, $css_class );
+		$link = apply_filters( 'wpml_link_to_translation', $link, $post_id, $lang, $trid, $css_class, $status );
 
 		/**
 		 * Filters the translation status text.
@@ -76,8 +80,9 @@ class WPML_Post_Status_Display {
 		 * @param string $lang
 		 * @param int    $trid
 		 * @param string $css_class
+		 * @param int $status
 		 */
-		$text = apply_filters( 'wpml_text_to_translation', $text, $post_id, $lang, $trid, $css_class );
+		$text = apply_filters( 'wpml_text_to_translation', $text, $post_id, $lang, $trid, $css_class, $status );
 
 		/**
 		 * Filter the CSS class for the status icon.
@@ -88,8 +93,9 @@ class WPML_Post_Status_Display {
 		 * @param int    $post_id
 		 * @param string $lang
 		 * @param int    $trid
+		 * @param int $status
 		 */
-		$css_class = apply_filters( 'wpml_css_class_to_translation', $css_class, $post_id, $lang, $trid );
+		$css_class = apply_filters( 'wpml_css_class_to_translation', $css_class, $post_id, $lang, $trid, $status );
 
 		$css_class = $this->map_old_icon_filter_to_css_class( $css_class, $post_id, $lang, $trid );
 
@@ -167,11 +173,16 @@ class WPML_Post_Status_Display {
 			list( $text, $link, $css_class ) = $this->generate_add_data( $trid, $lang, $source_language_code, $post_id );
 		}
 
-		return array( $text, $link, $trid, $css_class );
+		if ($status === ICL_TM_ATE_NEEDS_RETRY) {
+			list( $text, $link, $css_class ) = $this->generate_retry_data();
+
+		}
+
+		return array( $text, $link, $trid, $css_class, $status );
 	}
 
 	/**
-	 * @param      $post_id  int
+	 * @param int $post_id
 	 * @param bool $update   true if the translation in questions is in need of an update,
 	 *                       false otherwise.
 	 *
@@ -232,6 +243,14 @@ class WPML_Post_Status_Display {
 			sprintf( __( 'Add translation to %s', 'sitepress' ), $this->active_langs[ $lang_code ]['display_name'] ),
 			$link,
 			self::ICON_TRANSLATION_ADD,
+		);
+	}
+
+	private function generate_retry_data( ) {
+		return array(
+			null,
+			null,
+			self::ICON_TRANSLATION_IN_PROGRESS,
 		);
 	}
 }

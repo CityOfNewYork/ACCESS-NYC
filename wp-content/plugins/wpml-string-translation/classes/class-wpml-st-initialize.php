@@ -31,6 +31,7 @@ class WPML_ST_Initialize {
 	private function configureDIC() {
 		\WPML\Container\share( \WPML\ST\Container\Config::getSharedClasses() );
 		\WPML\Container\alias( \WPML\ST\Container\Config::getAliases() );
+		\WPML\Container\delegate( \WPML\ST\Container\Config::getDelegated() );
 	}
 
 	private function loadEarlyHooks() {

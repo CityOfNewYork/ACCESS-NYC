@@ -13,14 +13,19 @@ class WPML_ST_Term_Link_Filter {
 	/** @var WPML_WP_Cache_Factory $cache_factory */
 	private $cache_factory;
 
+	/** @var WPML_ST_Tax_Slug_Translation_Settings $tax_settings */
+	private $tax_settings;
+
 	public function __construct(
 		WPML_Tax_Slug_Translation_Records $slug_records,
 		SitePress $sitepress,
-		WPML_WP_Cache_Factory $cache_factory
+		WPML_WP_Cache_Factory $cache_factory,
+		WPML_ST_Tax_Slug_Translation_Settings $tax_settings
 	) {
 		$this->slug_records  = $slug_records;
 		$this->sitepress     = $sitepress;
 		$this->cache_factory = $cache_factory;
+		$this->tax_settings  = $tax_settings;
 	}
 
 	/**
@@ -46,11 +51,13 @@ class WPML_ST_Term_Link_Filter {
 		if ( $cache_item->exists() ) {
 			$termlink = $cache_item->get();
 		} else {
-			$original_slug   = $this->slug_records->get_original( $term->taxonomy );
-			$translated_slug = $this->slug_records->get_translation( $term->taxonomy, $term_lang );
+			if ( $this->tax_settings->is_translated( $term->taxonomy ) ) {
+				$original_slug   = $this->slug_records->get_original( $term->taxonomy );
+				$translated_slug = $this->slug_records->get_translation( $term->taxonomy, $term_lang );
 
-			if ( $original_slug && $translated_slug && $original_slug !== $translated_slug ) {
-				$termlink = $this->replace_slug( $termlink, $original_slug, $translated_slug );
+				if ( $original_slug && $translated_slug && $original_slug !== $translated_slug ) {
+					$termlink = $this->replace_slug( $termlink, $original_slug, $translated_slug );
+				}
 			}
 
 			$cache_item->set( $termlink );

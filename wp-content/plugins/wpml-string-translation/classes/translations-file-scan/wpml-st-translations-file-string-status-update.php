@@ -8,7 +8,7 @@ class WPML_ST_Translations_File_String_Status_Update {
 	private $wpdb;
 
 	/**
-	 * @param int $number_of_secondary_languages
+	 * @param int  $number_of_secondary_languages
 	 * @param wpdb $wpdb
 	 */
 	public function __construct( $number_of_secondary_languages, wpdb $wpdb ) {

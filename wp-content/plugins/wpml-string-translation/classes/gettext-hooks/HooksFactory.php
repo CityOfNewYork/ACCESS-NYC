@@ -15,7 +15,7 @@ class HooksFactory implements \IWPML_Backend_Action_Loader, \IWPML_Frontend_Acti
 
 	/**
 	 * @return \IWPML_Action|Hooks|null
-	 * @throws \Auryn\InjectionException
+	 * @throws \WPML\Auryn\InjectionException
 	 */
 	public function create() {
 		/**
@@ -33,16 +33,12 @@ class HooksFactory implements \IWPML_Backend_Action_Loader, \IWPML_Frontend_Acti
 			return $st_gettext_hooks;
 		}
 
-		$st_upgrade = make( WPML_ST_Upgrade::class );
-		// todo: Remove this condition because we won't apply this command anymore (was to add string pages and urls tables)
-		if ( $st_upgrade->has_command_been_executed( 'WPML_ST_Upgrade_Db_Cache_Command' ) ) {
-			/** @var Hooks $st_gettext_hooks */
-			$st_gettext_hooks = make( Hooks::class );
-			$st_gettext_hooks->clearFilters();
+		/** @var Hooks $st_gettext_hooks */
+		$st_gettext_hooks = make( Hooks::class );
+		$st_gettext_hooks->clearFilters();
 
-			foreach ( $filters as $filter ) {
-				$st_gettext_hooks->addFilter( $filter );
-			}
+		foreach ( $filters as $filter ) {
+			$st_gettext_hooks->addFilter( $filter );
 		}
 
 		return $st_gettext_hooks;
@@ -50,7 +46,7 @@ class HooksFactory implements \IWPML_Backend_Action_Loader, \IWPML_Frontend_Acti
 
 	/**
 	 * @return Filters\IFilter[]
-	 * @throws \Auryn\InjectionException
+	 * @throws \WPML\Auryn\InjectionException
 	 */
 	private function getFilters() {
 		$filters = [];
@@ -80,8 +76,8 @@ class HooksFactory implements \IWPML_Backend_Action_Loader, \IWPML_Frontend_Acti
 	 */
 	private function isTrackingStrings( Settings $settings ) {
 		return $settings->isTrackStringsEnabled()
-		       && current_user_can( 'edit_others_posts' )
-		       && ! is_admin();
+			   && current_user_can( 'edit_others_posts' )
+			   && ! is_admin();
 	}
 
 	/**

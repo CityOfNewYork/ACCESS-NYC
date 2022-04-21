@@ -58,7 +58,7 @@ class WPML_Pre_Option_Page extends WPML_WPDB_And_SP_User {
 		return isset( $results[ $type ][ $target_language ] ) ? $results[ $type ][ $target_language ] : false;
 	}
 
-	public function clear_cache() {
+	public static function clear_cache() {
 		$cache = new WPML_WP_Cache( self::CACHE_GROUP );
 		$cache->flush_group_cache();
 	}

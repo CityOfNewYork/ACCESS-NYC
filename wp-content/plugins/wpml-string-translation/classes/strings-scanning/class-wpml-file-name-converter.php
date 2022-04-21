@@ -35,7 +35,7 @@ class WPML_File_Name_Converter {
 	private function get_home_path() {
 		if ( null === $this->home_path ) {
 			if ( ! function_exists( 'get_home_path' ) ) {
-				require_once( ABSPATH . 'wp-admin/includes/file.php' );
+				require_once ABSPATH . 'wp-admin/includes/file.php';
 			}
 
 			$this->home_path = get_home_path();

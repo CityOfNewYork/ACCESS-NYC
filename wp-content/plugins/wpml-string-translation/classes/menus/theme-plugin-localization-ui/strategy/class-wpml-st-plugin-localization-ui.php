@@ -14,7 +14,7 @@ class WPML_ST_Plugin_Localization_UI implements IWPML_Theme_Plugin_Localization_
 	/**
 	 * WPML_ST_Plugin_Localization_UI constructor.
 	 *
-	 * @param WPML_Localization $localization
+	 * @param WPML_Localization                 $localization
 	 * @param WPML_ST_Plugin_Localization_Utils $utils
 	 */
 	public function __construct(
@@ -22,8 +22,8 @@ class WPML_ST_Plugin_Localization_UI implements IWPML_Theme_Plugin_Localization_
 		WPML_ST_Plugin_Localization_Utils $utils ) {
 
 		$this->localization = $localization;
-		$this->utils = $utils;
-		$this->base_st_url = admin_url( 'admin.php?page=' . WPML_ST_FOLDER . '/menu/string-translation.php' );
+		$this->utils        = $utils;
+		$this->base_st_url  = admin_url( 'admin.php?page=' . WPML_ST_FOLDER . '/menu/string-translation.php' );
 	}
 
 	/**
@@ -76,7 +76,7 @@ class WPML_ST_Plugin_Localization_UI implements IWPML_Theme_Plugin_Localization_
 	 * @return array
 	 */
 	private function get_components( $plugins, $plugin_stats ) {
-		$components = array();
+		$components      = array();
 		$no_domain_stats = array(
 			'complete'   => 0,
 			'incomplete' => 0,
@@ -111,19 +111,31 @@ class WPML_ST_Plugin_Localization_UI implements IWPML_Theme_Plugin_Localization_
 
 	/**
 	 * @param string $domain
-	 * @param array $stats
+	 * @param array  $stats
 	 *
 	 * @return array
 	 */
 	private function get_component( $domain, array $stats ) {
 		return array(
-			'translated'   => $stats['complete'],
-			'needs_update' => $stats['incomplete'],
-			'needs_update_link' => add_query_arg( array( 'context' => $domain, 'status' => ICL_STRING_TRANSLATION_NOT_TRANSLATED ), $this->base_st_url ),
-			'translated_link' => add_query_arg( array( 'context' => $domain, 'status' => ICL_STRING_TRANSLATION_COMPLETE ), $this->base_st_url ),
-			'domain_link' => add_query_arg( array( 'context' => $domain), $this->base_st_url ),
-			'title_needs_translation' => sprintf( __( 'Translate strings in %s', 'wpml-string-translation' ), $domain),
-			'title_all_strings' => sprintf( __( 'All strings in %s', 'wpml-string-translation' ), $domain),
+			'translated'              => $stats['complete'],
+			'needs_update'            => $stats['incomplete'],
+			'needs_update_link'       => add_query_arg(
+				array(
+					'context' => $domain,
+					'status'  => ICL_STRING_TRANSLATION_NOT_TRANSLATED,
+				),
+				$this->base_st_url
+			),
+			'translated_link'         => add_query_arg(
+				array(
+					'context' => $domain,
+					'status'  => ICL_STRING_TRANSLATION_COMPLETE,
+				),
+				$this->base_st_url
+			),
+			'domain_link'             => add_query_arg( array( 'context' => $domain ), $this->base_st_url ),
+			'title_needs_translation' => sprintf( __( 'Translate strings in %s', 'wpml-string-translation' ), $domain ),
+			'title_all_strings'       => sprintf( __( 'All strings in %s', 'wpml-string-translation' ), $domain ),
 		);
 	}
 

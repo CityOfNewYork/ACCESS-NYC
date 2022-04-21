@@ -38,7 +38,7 @@ class WPML_Custom_Field_Setting_Query {
 			$args
 		);
 
-		$where = " WHERE 1=1";
+		$where  = ' WHERE 1=1';
 		$where .= $this->add_AND_excluded_fields_condition();
 		$where .= $this->add_AND_search_condition( $args['search'] );
 		$where .= $this->add_AND_system_fields_condition( $args['hide_system_fields'] );
@@ -54,7 +54,7 @@ class WPML_Custom_Field_Setting_Query {
 	 * @return int
 	 */
 	public function get_total_rows() {
-		return (int) $this->wpdb->get_var( "SELECT FOUND_ROWS();" );
+		return (int) $this->wpdb->get_var( 'SELECT FOUND_ROWS();' );
 	}
 
 	/**
@@ -74,24 +74,16 @@ class WPML_Custom_Field_Setting_Query {
 	 * @return string
 	 */
 	private function add_AND_search_condition( $search ) {
-		if ( $search ) {
-			return $this->wpdb->prepare( ' AND meta_key LIKE "%s"', '%' . $search . '%' );
-		}
-
-		return '';
+		return $search ? $this->wpdb->prepare( " AND meta_key LIKE '%s'", '%' . $search . '%' ) : '';
 	}
 
 	/**
-	 * @param bool   $hide_system_fields
+	 * @param bool $hide_system_fields
 	 *
 	 * @return string
 	 */
 	private function add_AND_system_fields_condition( $hide_system_fields ) {
-		if ( $hide_system_fields ) {
-			return ' AND meta_key NOT LIKE "\_%"';
-		}
-
-		return '';
+		return $hide_system_fields ? " AND meta_key NOT LIKE '\_%'" : '';
 	}
 
 	/**

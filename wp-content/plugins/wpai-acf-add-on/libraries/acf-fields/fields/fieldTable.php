@@ -196,35 +196,43 @@ class FieldTable extends Field {
 					    case 'csv':
 					    	$rowFields = array_shift($xpath['rows']);
 						    if (!empty($rowFields)) {
-						    	$rows = explode($this->getRowDelimiter(), $rowFields);
-							    $rows = array_map('trim', $rows);
-							    if (!empty($rows)) {
-							    	foreach ($rows as $row) {
-									    $rowData = [];
-									    $cells = explode($this->getCellDelimiter(), $row);
-									    $cells = array_map('trim', $cells);
-									    if (!empty($cells)) {
-										    foreach ($cells as $cell) {
-											    $rowData[] = $this->getByXPath( $cell, $args['xpath_suffix'] . $this->getOption('field_path') );
-										    }
-									    }
-									    $values[] = $rowData;
-								    }
-							    }
+							    $data = $this->getByXPath( $rowFields, $args['xpath_suffix'] . $this->getOption('field_path') );
+								foreach ( $data as $index => $item ) {
+									$indexValues = [];
+									$rows = explode($this->getRowDelimiter(), $item);
+									$rows = array_map('trim', $rows);
+									if ( ! empty($rows) ) {
+										foreach ($rows as $row) {
+											$rowData = [];
+											$cells = explode($this->getCellDelimiter(), $row);
+											$cells = array_map('trim', $cells);
+											if ( ! empty($cells) ) {
+												foreach ( $cells as $cell ) {
+													$rowData[] = $cell;
+												}
+											}
+											$indexValues[] = $rowData;
+										}
+									}
+									$values[] = $indexValues;
+								}
 						    }
 						    break;
 					    default:
 						    $this->setMode( 'fixed' );
 						    foreach ( $xpath['rows'] as $key => $rowFields ) {
-							    $rowData = [];
-							    $cells = explode($this->getCellDelimiter(), $rowFields);
-							    $cells = array_map('trim', $cells);
-							    if (!empty($cells)) {
-								    foreach ($cells as $cell) {
-									    $rowData[] = $this->getByXPath( $cell, $args['xpath_suffix'] . $this->getOption('field_path') );
+							    $data = $this->getByXPath( $rowFields, $args['xpath_suffix'] . $this->getOption('field_path') );
+							    foreach ( $data as $index => $item ) {
+								    $rowData = [];
+								    $cells = explode($this->getCellDelimiter(), $item);
+								    $cells = array_map('trim', $cells);
+								    if ( ! empty($cells) ) {
+									    foreach ( $cells as $cell ) {
+										    $rowData[] = $cell;
+									    }
 								    }
+								    $values[$index][] = $rowData;
 							    }
-							    $values[] = $rowData;
 						    }
 						    break;
 				    }
@@ -293,6 +301,7 @@ class FieldTable extends Field {
 				    break;
 			    case 'csv':
 			    case 'fixed':
+			        $values = $values[$this->getPostIndex()];
 			    	// Calculate maximum count of columns.
 					$columns_count = 0;
 				    foreach ($values as $row) {
@@ -311,7 +320,7 @@ class FieldTable extends Field {
 					    $row_data = [];
 					    foreach ($row as $cell) {
 						    $row_data[] = [
-							    'c' => $cell[$this->getPostIndex()]
+							    'c' => $cell //[$this->getPostIndex()]
 						    ];
 					    }
 					    // Prefill missing cells with empty values.

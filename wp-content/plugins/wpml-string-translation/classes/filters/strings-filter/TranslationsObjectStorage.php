@@ -14,11 +14,14 @@ class TranslationsObjectStorage extends \SplObjectStorage {
 	 * @return string
 	 */
 	public function getHash( $o ) {
-		return implode( '_', [
-			$o->getValue(),
-			$o->getName(),
-			$o->getDomain(),
-			$o->getContext(),
-		] );
+		return implode(
+			'_',
+			[
+				$o->getValue(),
+				$o->getName(),
+				$o->getDomain(),
+				$o->getContext(),
+			]
+		);
 	}
 }

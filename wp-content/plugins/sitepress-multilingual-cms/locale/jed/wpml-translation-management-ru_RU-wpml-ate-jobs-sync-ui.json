@@ -1,0 +1,163 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "Отправка на перевод"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "Подключение к Расширенному редактору перевода WPML"
+         ],
+         "Try again": [
+            "Повторить попытку"
+         ],
+         "You don't have the rights to review this language": [
+            "У вас нет прав для проверки на этом языке."
+         ],
+         "pages & posts": [
+            "страницы и записи"
+         ],
+         "left to translate": [
+            "осталось перевести"
+         ],
+         "Translate on hold": [
+            "Перевод на удержании"
+         ],
+         "All translated": [
+            "Все переведено"
+         ],
+         "%d translations left": [
+            "Осталось переводов: %d"
+         ],
+         "Credits used:": [
+            "Использовано кредитов:"
+         ],
+         "Credits left:": [
+            "Осталось кредитов:"
+         ],
+         "Calculating": [
+            "Подсчет"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "Оставшиеся предоплаченные кредиты, назначенные этому сайту на WPML.org."
+         ],
+         "Prepaid credits left": [
+            "Осталось предоплаченных кредитов"
+         ],
+         "Account credits used": [
+            "Использованные кредиты учетной записи"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "Как только вы израсходуете все предоплаченные кредиты, мы выставим вам счет за все использованные дополнительные кредиты по окончании месяца."
+         ],
+         "Payment limit:": [
+            "Лимит оплаты:"
+         ],
+         "%s credits": [
+            "%s кредитов"
+         ],
+         "Preparing more content for translation": [
+            "Подготовка дополнительного контента к переводу"
+         ],
+         "Preparing content for translation": [
+            "Подготовка контента к переводу"
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "Произошла ошибка автоматического перевода, которая требует внимания. Исправьте ее, чтобы продолжить."
+         ],
+         "%d translations waiting for review": [
+            "Переводов, ожидающих проверки: %d"
+         ],
+         "Draft — Pending review": [
+            "Черновик — Ожидает проверки"
+         ],
+         "Complete": [
+            "Закончен"
+         ],
+         "Insufficient funds": [
+            "Недостаточно средств"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "Подробнее о переводе контента читайте в <a>Руководстве по началу работы</a>."
+         ],
+         "Let's Start Translating!": [
+            "Начнем переводить!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "Выберите контент в Консоли перевода ниже и создайте свой первый заказ на перевод!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "Измените <a>настройки автоматического перевода</a> (текущие заказы на перевод будут выполнены с текущими настройками)."
+         ],
+         "Read more about translating your site automatically.": [
+            "Подробнее об автоматическом переводе сайта."
+         ],
+         "Your site is being automatically translated!": [
+            "Ваш сайт переводится автоматически!"
+         ],
+         "Automatic Translation Status": [
+            "Состояние автоматического перевода"
+         ],
+         "Calculating...": [
+            "Подсчет..."
+         ],
+         "Do not close WP admin!": [
+            "Не закрывайте консоль администратора WP!"
+         ],
+         "The number of translations": [
+            "Количество переводов"
+         ],
+         "Delete Translations": [
+            "Удалить переводы"
+         ],
+         "Keep Translations as Draft": [
+            "Оставить переводы в виде черновиков"
+         ],
+         "Never mind. I want to review these translations.": [
+            "Не надо. Я хочу проверить эти переводы."
+         ],
+         "Cancel": [
+            "Отменить"
+         ],
+         "You haven't selected any jobs that need review.": [
+            "Вы не выбрали ни одного заказа, требующего проверки."
+         ],
+         "Please select the pending review jobs to abort.": [
+            "Выберите ожидающие проверки заказы, которые нужно отменить."
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "Это приведет к удалению выбранных заказов из очереди переводов без их публикации. Что сделать с переводами?"
+         ],
+         "Cancel Translation Review": [
+            "Отменить проверку переводов"
+         ],
+         "Edit": [
+            "Изменить"
+         ],
+         "Updating": [
+            "Обновление"
+         ],
+         "Translate": [
+            "Перевести"
+         ],
+         "Take and translate": [
+            "Взять на перевод"
+         ],
+         "Review": [
+            "Проверить"
+         ],
+         "Are you sure you want to resign from this job?": [
+            "Отказаться от этого заказа?"
+         ],
+         "Resign": [
+            "Отказаться"
+         ],
+         "View": [
+            "Просмотреть"
+         ]
+      }
+   }
+}

@@ -1,0 +1,163 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "傳送翻譯"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "正在連線到WPML的進階翻譯編輯器"
+         ],
+         "Try again": [
+            "重試"
+         ],
+         "You don't have the rights to review this language": [
+            "您無權檢視此語言"
+         ],
+         "pages & posts": [
+            "頁面和文章"
+         ],
+         "left to translate": [
+            "還未翻譯"
+         ],
+         "Translate on hold": [
+            "暫停翻譯"
+         ],
+         "All translated": [
+            "全部已翻譯"
+         ],
+         "%d translations left": [
+            "%d 翻譯剩餘"
+         ],
+         "Credits used:": [
+            "已用積分："
+         ],
+         "Credits left:": [
+            "剩餘積分："
+         ],
+         "Calculating": [
+            "計算中"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "在WPML.org上分配給此網站的剩餘預付積分。"
+         ],
+         "Prepaid credits left": [
+            "剩餘預付積分"
+         ],
+         "Account credits used": [
+            "已用帳戶積分"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "一旦您用完了所有預付積分，我們將在月底後為您使用的任何額外積分開具發票"
+         ],
+         "Payment limit:": [
+            "付款限額："
+         ],
+         "%s credits": [
+            "%s個積分"
+         ],
+         "Preparing more content for translation": [
+            "正在準備更多的翻譯內容"
+         ],
+         "Preparing content for translation": [
+            "正在準備翻譯內容"
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "有一個自動翻譯問題需要您注意。請修復後繼續。"
+         ],
+         "%d translations waiting for review": [
+            "%d 翻譯等待審閱"
+         ],
+         "Draft — Pending review": [
+            "草稿 — 等候審閱"
+         ],
+         "Complete": [
+            "完成"
+         ],
+         "Insufficient funds": [
+            "資金不足"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "閱讀<a>入門指南</a>中有關如何翻譯內容的更多資訊"
+         ],
+         "Let's Start Translating!": [
+            "讓我們開始翻譯吧！"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "從下面的翻譯儀表板中選擇內容，建立第一個翻譯工作！"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "變更<a>自動翻譯設定</a>（正在進行的翻譯工作將使用當前設定完成）。"
+         ],
+         "Read more about translating your site automatically.": [
+            "進一步瞭解如何自動翻譯網站。"
+         ],
+         "Your site is being automatically translated!": [
+            "正在自動翻譯您的網站！"
+         ],
+         "Automatic Translation Status": [
+            "自動翻譯狀態"
+         ],
+         "Calculating...": [
+            "計算中..."
+         ],
+         "Do not close WP admin!": [
+            "不要關閉WP管理員！"
+         ],
+         "The number of translations": [
+            "翻譯數量"
+         ],
+         "Delete Translations": [
+            "移除翻譯"
+         ],
+         "Keep Translations as Draft": [
+            "將譯文保留為草稿"
+         ],
+         "Never mind. I want to review these translations.": [
+            "沒關係。我會審閱這些翻譯。"
+         ],
+         "Cancel": [
+            "取消"
+         ],
+         "You haven't selected any jobs that need review.": [
+            "您尚未選擇任何需要審閱的工作。"
+         ],
+         "Please select the pending review jobs to abort.": [
+            "請選擇待決的審閱工作以中止。"
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "這將從翻譯佇列中移除選定的工作，而不會發佈它們。您想如何處理這些翻譯？"
+         ],
+         "Cancel Translation Review": [
+            "取消翻譯審閱"
+         ],
+         "Edit": [
+            "編輯"
+         ],
+         "Updating": [
+            "更新中"
+         ],
+         "Translate": [
+            "翻譯"
+         ],
+         "Take and translate": [
+            "接受並翻譯"
+         ],
+         "Review": [
+            "審核"
+         ],
+         "Are you sure you want to resign from this job?": [
+            "您確定要辭去這份工作？"
+         ],
+         "Resign": [
+            "辭職"
+         ],
+         "View": [
+            "查看"
+         ]
+      }
+   }
+}

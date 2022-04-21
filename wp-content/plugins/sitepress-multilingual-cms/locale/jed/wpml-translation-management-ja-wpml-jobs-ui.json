@@ -1,0 +1,22 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Draft — Pending review": [
+            "草稿 — レビュー待ち"
+         ],
+         "Complete": [
+            "完了"
+         ],
+         "Insufficient funds": [
+            "資金不足"
+         ],
+         "Editor Job ID": [
+            "エディタージョブID"
+         ]
+      }
+   }
+}

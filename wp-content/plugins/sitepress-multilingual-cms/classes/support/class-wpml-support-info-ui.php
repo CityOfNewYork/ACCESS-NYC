@@ -47,7 +47,7 @@ class WPML_Support_Info_UI {
 						'value'      => $php_version,
 						'url'        => 'http://php.net/supported-versions.php',
 						'messages'   => array(
-							sprintf( __( 'PHP %1$s and above are recommended. PHP %2$s is the minimum requirement.', 'sitepress' ), $minimum_recommended_php_version, $minimum_required_php_version ) => 'https://wpml.org/home/minimum-requirements/',
+							sprintf( __( 'PHP %1$s and above are recommended. PHP %2$s is the minimum requirement.', 'sitepress' ), $minimum_recommended_php_version, $minimum_required_php_version ) => 'https://wpml.org/home/minimum-requirements/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore',
 							__( 'Find how you can update PHP.', 'sitepress' )                                                                                                                         => 'http://www.wpupdatephp.com/update/',
 						),
 						'is_error'   => $this->support_info->is_version_less_than( $minimum_required_php_version, $php_version ),
@@ -58,7 +58,7 @@ class WPML_Support_Info_UI {
 						'value'    => $php_memory_limit,
 						'url'      => 'http://php.net/manual/ini.core.php#ini.memory-limit',
 						'messages' => array(
-							sprintf( __( 'A memory limit of at least %s is required.', 'sitepress' ), $minimum_required_memory ) => 'https://wpml.org/home/minimum-requirements/',
+							sprintf( __( 'A memory limit of at least %s is required.', 'sitepress' ), $minimum_required_memory ) => 'https://wpml.org/home/minimum-requirements/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore',
 						),
 						'is_error' => $this->support_info->is_memory_less_than( $minimum_required_memory, $php_memory_limit ),
 					),
@@ -82,7 +82,7 @@ class WPML_Support_Info_UI {
 						'value' => $this->support_info->is_utf8mb4_charset_supported() ? __( 'Yes' ) : __( 'No' ),
 						'url'        => 'https://dev.mysql.com/doc/refman/5.5/en/charset-unicode-utf8mb4.html',
 						'messages'   => array(
-							__( 'Some features related to String Translations may not work correctly without utf8mb4 character.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/',
+							__( 'Some features related to String Translations may not work correctly without utf8mb4 character.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore',
 						),
 						'is_error' => ! $this->support_info->is_utf8mb4_charset_supported(),
 					) ,
@@ -97,7 +97,7 @@ class WPML_Support_Info_UI {
 						'label'    => __( 'Version', 'sitepress' ),
 						'value'    => $this->support_info->get_wp_version(),
 						'messages' => array(
-							__( 'WordPress 3.9 or later is required.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/',
+							__( 'WordPress 3.9 or later is required.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore',
 						),
 						'is_error' => $this->support_info->is_version_less_than( $minimum_required_wp_version, $this->support_info->get_wp_version() ),
 					),
@@ -110,7 +110,7 @@ class WPML_Support_Info_UI {
 						'value'    => $this->support_info->get_wp_memory_limit(),
 						'url'      => 'https://codex.wordpress.org/Editing_wp-config.php#Increasing_memory_allocated_to_PHP',
 						'messages' => array(
-							__( 'A memory limit of at least 128MB is required.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/',
+							__( 'A memory limit of at least 128MB is required.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore',
 						),
 						'is_error' => $this->support_info->is_memory_less_than( $minimum_required_memory, $this->support_info->get_wp_memory_limit() ),
 					),
@@ -119,16 +119,16 @@ class WPML_Support_Info_UI {
 						'value'    => $this->support_info->get_wp_max_memory_limit(),
 						'url'      => 'https://codex.wordpress.org/Editing_wp-config.php#Increasing_memory_allocated_to_PHP',
 						'messages' => array(
-							__( 'A memory limit of at least 128MB is required.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/',
+							__( 'A memory limit of at least 128MB is required.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore',
 						),
 						'is_error' => $this->support_info->is_memory_less_than( $minimum_required_memory, $this->support_info->get_wp_max_memory_limit() ),
 					),
 					'rest_enabled' => array(
 						'label'    => __( 'REST enabled', 'sitepress' ),
 						'value'    => wpml_is_rest_enabled() ? __( 'Yes' ) : __( 'No' ),
-						'url'      => 'https://wpml.org/home/minimum-requirements/',
+						'url'      => 'https://wpml.org/home/minimum-requirements/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore',
 						'messages' => array(
-							__( 'REST API is disabled, blocking some features of WPML', 'sitepress' ) => 'https://wpml.org/documentation/support/rest-api-dependencies/',
+							__( 'REST API is disabled, blocking some features of WPML', 'sitepress' ) => 'https://wpml.org/documentation/support/rest-api-dependencies/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore',
 						),
 						'is_error' => ! wpml_is_rest_enabled(),
 					),
@@ -142,7 +142,7 @@ class WPML_Support_Info_UI {
 				'value'    => $this->support_info->eval_disabled_by_suhosin() ? __( 'Not available', 'sitepress' ) : __( 'Available', 'sitepress' ),
 				'url'      => 'https://suhosin.org/stories/configuration.html#suhosin-executor-disable-eval',
 				'messages' => array(
-					__( 'The eval() PHP function must be enabled.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/#eval-usage',
+					__( 'The eval() PHP function must be enabled.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore#eval-usage',
 				),
 				'is_error' => $this->support_info->eval_disabled_by_suhosin(),
 			);
@@ -186,8 +186,8 @@ class WPML_Support_Info_UI {
 	}
 
 	/**
-	 * @param array $blocks
-	 * @param       $type
+	 * @param array  $blocks
+	 * @param string $type
 	 */
 	private function set_has_messages( array &$blocks, $type ) {
 		/**

@@ -64,8 +64,8 @@ if(!defined('ABSPATH')) {
 							<hr>
 							<p style="text-align:right;">
 								<div class="input">
-									<label for="save_import_as" style="width: 103px;"><?php esc_html_e('Friendly Name:','wp_all_export_plugin');?></label>
-									<input type="text" name="friendly_name" title="<?php esc_html_e('Save friendly name...', 'pmxi_plugin') ?>" style="vertical-align:middle; background:#fff !important;" value="<?php echo wp_all_export_clear_xss(esc_attr($post['friendly_name'])); ?>" />
+									<label for="save_import_as" style="width: 103px;"><?php esc_html_e('Export Name:','wp_all_export_plugin');?></label>
+									<input type="text" name="friendly_name" title="<?php esc_html_e('Save Export Name...', 'pmxi_plugin') ?>" style="vertical-align:middle; background:#fff !important; width: 350px;" value="<?php echo wp_all_export_clear_xss(esc_attr($post['friendly_name'])); ?>"  />
 								</div>
 							</p>
 						</td>

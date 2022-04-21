@@ -19,6 +19,9 @@
  */
 class WPML_Compatibility_2017 {
 	function init_hooks() {
+		/**
+		 * @phpstan-ignore-next-line
+		 */
 		$num_sections = twentyseventeen_panel_count();
 
 		for ( $i = 1; $i <= $num_sections; $i ++ ) {
@@ -30,10 +33,11 @@ class WPML_Compatibility_2017 {
 			add_filter( 'theme_mod_panel_' . $i, array( $this, 'get_translated_panel_id' ) );
 		}
 	}
-	
+
 	function get_translated_panel_id( $id ) {
 		/**
 		 * Get the translated ID of the given page using the `wpml_object_id` filter and returns the original if the translation is missing
+		 *
 		 * @see https://wpml.org/wpml-hook/wpml_object_id/
 		 */
 		return apply_filters( 'wpml_object_id', $id, 'page', true );

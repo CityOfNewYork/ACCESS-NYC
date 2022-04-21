@@ -14,7 +14,11 @@ class WPML_Get_Page_By_Path {
 	/** @var WPML_Debug_BackTrace $debug_backtrace */
 	private $debug_backtrace;
 
+	/** @var string $language */
 	private $language;
+
+	/** @var string $post_type */
+	private $post_type;
 
 	public function __construct( wpdb $wpdb, SitePress $sitepress, WPML_Debug_BackTrace $debug_backtrace ) {
 		$this->wpdb            = $wpdb;
@@ -23,22 +27,29 @@ class WPML_Get_Page_By_Path {
 	}
 
 	public function get( $page_name, $lang, $output = OBJECT, $post_type = 'page' ) {
-		$this->language = $lang;
-		add_filter( 'query', array( $this, 'get_page_by_path_filter' ), self::BEFORE_REMOVE_PLACEHOLDER_ESCAPE_PRIORITY );
-		$temp_lang_switch = new WPML_Temporary_Switch_Language( $this->sitepress, $lang );
+		$this->post_type = $post_type;
+		$this->language  = $lang;
+
 		$this->clear_cache( $page_name, $post_type );
-		$page = get_page_by_path( $page_name, $output, $post_type );
+
+		add_filter( 'query', [ $this, 'get_page_by_path_filter' ], self::BEFORE_REMOVE_PLACEHOLDER_ESCAPE_PRIORITY );
+		$temp_lang_switch = new WPML_Temporary_Switch_Language( $this->sitepress, $lang );
+		$page             = get_page_by_path( $page_name, $output, $post_type );
 		$temp_lang_switch->restore_lang();
-		remove_filter( 'query', array( $this, 'get_page_by_path_filter' ), self::BEFORE_REMOVE_PLACEHOLDER_ESCAPE_PRIORITY );
+		remove_filter( 'query', [ $this, 'get_page_by_path_filter' ], self::BEFORE_REMOVE_PLACEHOLDER_ESCAPE_PRIORITY );
+
 		return $page;
 	}
 
 	public function get_page_by_path_filter( $query ) {
-		if ( $this->debug_backtrace->is_function_in_call_stack( 'get_page_by_path' ) ) {
+		if (
+			$this->sitepress->is_translated_post_type( $this->post_type )
+			&& $this->debug_backtrace->is_function_in_call_stack( 'get_page_by_path' )
+		) {
 
 			$where = $this->wpdb->prepare( "ID IN ( SELECT element_id FROM {$this->wpdb->prefix}icl_translations WHERE language_code = %s AND element_type LIKE 'post_%%' ) AND ", $this->language );
 
-			$query = str_replace( "WHERE ", "WHERE " . $where, $query );
+			$query = str_replace( 'WHERE ', 'WHERE ' . $where, $query );
 		}
 
 		return $query;
@@ -52,8 +63,8 @@ class WPML_Get_Page_By_Path {
 	 */
 	private function clear_cache( $page_name, $post_type ) {
 		$last_changed = wp_cache_get_last_changed( 'posts' );
-		$hash = md5( $page_name . serialize( $post_type ) );
-		$cache_key = "get_page_by_path:$hash:$last_changed";
+		$hash         = md5( $page_name . serialize( $post_type ) );
+		$cache_key    = "get_page_by_path:$hash:$last_changed";
 		wp_cache_delete( $cache_key, 'posts' );
 	}
 }

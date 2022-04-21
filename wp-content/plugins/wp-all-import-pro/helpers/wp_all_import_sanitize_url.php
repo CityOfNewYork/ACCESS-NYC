@@ -32,6 +32,12 @@ if ( ! function_exists('wp_all_import_sanitize_url')) {
                     if ( substr( $link, -4 ) == 'dl=0' ) {
                         return str_replace( 'dl=0', 'dl=1', $link );
                     }
+                    if ( strpos( $link, '?' ) === false ) {
+                    	return $link . '?dl=1';
+                    }
+	                if ( strpos( $link, 'dl=1' ) === false ) {
+		                return $link . '&dl=1';
+	                }
                     break;
                 case 'google.com':
                     if ( !empty( $type ) ) {
@@ -39,10 +45,10 @@ if ( ! function_exists('wp_all_import_sanitize_url')) {
                             case 'file':
                                 $pattern = '/(?<=\/file\/d\/).*?(?=\/edit)/';
                                 preg_match( $pattern, $link, $match );
-                                $file_id = $match[0];
-                                if ( !empty( $file_id ) ) {
-                                    return 'https://drive.google.com/uc?export=download&id=' . $file_id;
-                                }
+								if (!empty($match[0])) {
+									$file_id = $match[0];
+									return 'https://drive.google.com/uc?export=download&id=' . $file_id;
+								}
                                 break;
                             case 'spreadsheets':
                                 $pattern = '/(?<=\/spreadsheets\/d\/).*?(?=\/edit)/';

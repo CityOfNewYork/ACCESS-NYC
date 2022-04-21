@@ -45,7 +45,7 @@ class WPML_WP_Roles {
 	}
 
 	/**
-	 * @param  WP_User  $user
+	 * @param  WP_User $user
 	 *
 	 * @return int
 	 */
@@ -57,7 +57,7 @@ class WPML_WP_Roles {
 		$capabilitiesWithLevel = function ( $has, $cap ) {
 			return $has && strpos( $cap, 'level_' ) === 0;
 		};
-		$levelToNumber = function ( $cap ) {
+		$levelToNumber         = function ( $cap ) {
 			return (int) substr( $cap, strlen( 'level_' ) );
 		};
 
@@ -72,16 +72,18 @@ class WPML_WP_Roles {
 	/**
 	 * It returns a filtered array of roles.
 	 *
-	 * @param  string  $level  The capability level that the role must meet.
-	 * @param  null|string  $default  The role ID to use as a default.
+	 * @param  string      $level  The capability level that the role must meet.
+	 * @param  null|string $default  The role ID to use as a default.
 	 *
 	 * @return array
 	 */
 	private static function get_roles_for_level( $level, $default = null ) {
 		return \wpml_collect( get_editable_roles() )
-			->filter( function ( $role ) use ( $level ) {
-				return isset( $role['capabilities'][ $level ] ) && $role['capabilities'][ $level ];
-			} )
+			->filter(
+				function ( $role ) use ( $level ) {
+					return isset( $role['capabilities'][ $level ] ) && $role['capabilities'][ $level ];
+				}
+			)
 			->map( self::create_build_role_entity( $level, $default ) )
 			->values()
 			->toArray();
@@ -119,9 +121,8 @@ class WPML_WP_Roles {
 		 * @param  string  $level  The capability level required for this role (@see \WPML_WP_Roles::get_roles_for_level).
 		 *
 		 * @since 2.8.0
-		 *
 		 */
-		$default    = apply_filters( 'wpml_role_for_level_default', $default, $level );
+		$default = apply_filters( 'wpml_role_for_level_default', $default, $level );
 		return function ( $id ) use ( $default ) {
 			return $default && ( $default === $id );
 		};

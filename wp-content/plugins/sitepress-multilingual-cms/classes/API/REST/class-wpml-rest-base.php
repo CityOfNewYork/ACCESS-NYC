@@ -1,8 +1,10 @@
 <?php
+
 /**
+ * Class WPML_REST_Base
+ *
  * @author OnTheGo Systems
  */
-
 abstract class WPML_REST_Base {
 	const CAPABILITY_EXTERNAL = 'external';
 
@@ -15,7 +17,7 @@ abstract class WPML_REST_Base {
 	/**
 	 * WPML_REST_Base constructor.
 	 *
-	 * @param null $namespace Defaults to `\WPML_REST_Base::REST_NAMESPACE`
+	 * @param null $namespace Defaults to `\WPML_REST_Base::REST_NAMESPACE`.
 	 */
 	public function __construct( $namespace = null ) {
 		if ( ! $namespace ) {
@@ -24,26 +26,21 @@ abstract class WPML_REST_Base {
 		$this->namespace = $namespace;
 	}
 
-	abstract function add_hooks();
+	abstract public function add_hooks();
 
 	public function validate_permission( WP_REST_Request $request ) {
-		$capabilities = $this->get_allowed_capabilities( $request );
+		$user_can = $this->user_has_matching_capabilities( $request );
 
-		$user_can = false;
-		if ( self::CAPABILITY_EXTERNAL === $capabilities ) {
-			$user_can = true;
-		} elseif ( is_string( $capabilities ) ) {
-			$user_can = current_user_can( $capabilities );
-		} elseif ( is_array( $capabilities ) ) {
-			foreach ( $capabilities as $capability ) {
-				$user_can = $user_can || current_user_can( $capability );
-			}
+		if ( ! $user_can ) {
+			return false;
 		}
 
-		return $user_can && wp_verify_nonce( $request->get_header( 'x_wp_nonce' ), 'wp_rest' );
+		$nonce = $this->get_nonce( $request );
+
+		return $user_can && wp_verify_nonce( $nonce, 'wp_rest' );
 	}
 
-	abstract function get_allowed_capabilities( WP_REST_Request $request );
+	abstract public function get_allowed_capabilities( WP_REST_Request $request );
 
 	/**
 	 * @param string $route
@@ -66,6 +63,42 @@ abstract class WPML_REST_Base {
 		}
 
 		return $args;
+	}
+
+	/**
+	 * @param \WP_REST_Request $request
+	 *
+	 * @return bool
+	 */
+	private function user_has_matching_capabilities( WP_REST_Request $request ) {
+		$capabilities = $this->get_allowed_capabilities( $request );
+
+		$user_can = false;
+		if ( self::CAPABILITY_EXTERNAL === $capabilities ) {
+			$user_can = true;
+		} elseif ( is_string( $capabilities ) ) {
+			$user_can = current_user_can( $capabilities );
+		} elseif ( is_array( $capabilities ) ) {
+			foreach ( $capabilities as $capability ) {
+				$user_can = $user_can || current_user_can( $capability );
+			}
+		}
+
+		return $user_can;
+	}
+
+	/**
+	 * @param \WP_REST_Request $request
+	 *
+	 * @return mixed|string|null
+	 */
+	private function get_nonce( WP_REST_Request $request ) {
+		$nonce = $request->get_header( 'x_wp_nonce' );
+		if ( ! $nonce ) {
+			$nonce = $request->get_param( '_wpnonce' );
+		}
+
+		return $nonce;
 	}
 
 }

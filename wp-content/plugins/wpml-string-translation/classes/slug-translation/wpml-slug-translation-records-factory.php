@@ -18,5 +18,7 @@ class WPML_Slug_Translation_Records_Factory {
 		} elseif ( WPML_Slug_Translation_Factory::TAX === $type ) {
 			return new WPML_Tax_Slug_Translation_Records( $wpdb, $cache_factory );
 		}
+
+		return null;
 	}
 }

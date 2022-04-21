@@ -1,0 +1,163 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "Envoi à la traduction"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "Connexion à l'éditeur de traduction avancé de WPML"
+         ],
+         "Try again": [
+            "Réessayer"
+         ],
+         "You don't have the rights to review this language": [
+            "Vous n'êtes pas autorisé à effectuer des révisions dans cette langue"
+         ],
+         "pages & posts": [
+            "pages et publications"
+         ],
+         "left to translate": [
+            "traductions restent à traduire"
+         ],
+         "Translate on hold": [
+            "Traduction sur pause"
+         ],
+         "All translated": [
+            "Tout est traduit"
+         ],
+         "%d translations left": [
+            "Il reste %d traductions"
+         ],
+         "Credits used:": [
+            "Crédits épuisés :"
+         ],
+         "Credits left:": [
+            "Crédits restants :"
+         ],
+         "Calculating": [
+            "Calcul en cours"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "Crédits prépayés restants attribués à ce site sur WPML.org."
+         ],
+         "Prepaid credits left": [
+            "Crédits prépayés restants"
+         ],
+         "Account credits used": [
+            "Crédits de compte épuisés"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "Lorsque vous aurez épuisé tous vos crédits prépayés, nous vous facturerons pour tout crédit supplémentaire que vous utiliserez à dater de la fin du mois"
+         ],
+         "Payment limit:": [
+            "Limite de paiement :"
+         ],
+         "%s credits": [
+            "%s crédits"
+         ],
+         "Preparing more content for translation": [
+            "De nouveaux contenus sont en préparation pour être traduits"
+         ],
+         "Preparing content for translation": [
+            "Préparation des contenus à traduire"
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "Une erreur qui nécessite votre attention est survenue avec la traduction automatique. Corrigez-la pour pouvoir poursuivre."
+         ],
+         "%d translations waiting for review": [
+            "%d traductions en attente de relecture"
+         ],
+         "Draft — Pending review": [
+            "Brouillon : relecture en attente"
+         ],
+         "Complete": [
+            "Achevé"
+         ],
+         "Insufficient funds": [
+            "Fonds insuffisants"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "Découvrez comment traduire vos contenus dans le <a>Guide de démarrage</a>"
+         ],
+         "Let's Start Translating!": [
+            "Lançons la traduction !"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "Choisissez les contenus depuis le Tableau de bord de traduction ci-dessous et créez votre premier travail de traduction !"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "Modifiez vos <a>paramètres de traduction automatique</a> (les travaux de traduction en cours seront exécutés avec les paramètres actuels)."
+         ],
+         "Read more about translating your site automatically.": [
+            "En savoir plus sur la traduction automatique de votre site."
+         ],
+         "Your site is being automatically translated!": [
+            "Votre site est en train d'être traduit automatiquement !"
+         ],
+         "Automatic Translation Status": [
+            "Statut de la traduction automatique"
+         ],
+         "Calculating...": [
+            "Calcul en cours..."
+         ],
+         "Do not close WP admin!": [
+            "Ne fermez pas l'administration WP !"
+         ],
+         "The number of translations": [
+            "Le nombre de traductions"
+         ],
+         "Delete Translations": [
+            "Supprimer les traductions"
+         ],
+         "Keep Translations as Draft": [
+            "Conserver les traductions comme brouillons"
+         ],
+         "Never mind. I want to review these translations.": [
+            "C'est sans importance. Je souhaite réviser ces traductions."
+         ],
+         "Cancel": [
+            "Annuler"
+         ],
+         "You haven't selected any jobs that need review.": [
+            "Vous n'avez sélectionné aucun travail qui requiert une relecture."
+         ],
+         "Please select the pending review jobs to abort.": [
+            "Veuillez sélectionner les travaux de relecture en attente que vous souhaitez abandonner."
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "Ceci supprimera les travaux sélectionnés de la file d'attente des traductions sans les publier. Que souhaitez-vous faire avec les traductions ?"
+         ],
+         "Cancel Translation Review": [
+            "Supprimer la relecture de la traduction"
+         ],
+         "Edit": [
+            "Modifier"
+         ],
+         "Updating": [
+            "Mise à jour"
+         ],
+         "Translate": [
+            "Traduire"
+         ],
+         "Take and translate": [
+            "Prendre et traduire"
+         ],
+         "Review": [
+            "Vérifier"
+         ],
+         "Are you sure you want to resign from this job?": [
+            "Souhaitez-vous vraiment renoncer à ce travail ?"
+         ],
+         "Resign": [
+            "Renoncer"
+         ],
+         "View": [
+            "Visualiser"
+         ]
+      }
+   }
+}

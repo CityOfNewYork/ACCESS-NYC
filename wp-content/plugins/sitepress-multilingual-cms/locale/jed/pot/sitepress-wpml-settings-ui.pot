@@ -1,0 +1,61 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/translate-everything/ConfirmNewTranslatablePostTypeDialog.js:22
+msgid ""
+"You can choose which posts to translate from the <strong>Translation "
+"Management Dashboard</strong>."
+msgstr ""
+
+#: src/js/components/translate-everything/ConfirmNewTranslatablePostTypeDialog.js:45
+msgid "Yes, translate all of these posts automatically"
+msgstr ""
+
+#: src/js/components/translate-everything/ConfirmNewTranslatablePostTypeDialog.js:55
+msgid "No, I want to translate some of these posts, but not all"
+msgstr ""
+
+#: src/js/settings/UI/TranslationMethod.js:54
+msgid ""
+"You must use the Advanced Translation Editor if you want to translate your "
+"content automatically."
+msgstr ""
+
+#: src/js/settings/UI/Troubleshooting.js:26
+msgid "Synchronize translators and translation managers with ATE"
+msgstr ""
+
+#: src/js/settings/UI/Troubleshooting.js:36
+msgid ""
+"Please try again in a few minutes. If the problem persists, please contact "
+"%sWPML support%s."
+msgstr ""
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:105
+msgid "Save"
+msgstr ""
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:79
+msgid "Please confirm this translation setting"
+msgstr ""
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:82
+msgid ""
+"Your site is set to translate all content automatically. When you make "
+"<PostTypesNames /> translatable, WPML will automatically translate the "
+"<NumberOfItems /> existing items."
+msgstr ""
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:89
+msgid "Are you OK with paying for this?"
+msgstr ""
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:91
+msgid "Cancel"
+msgstr ""
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:92
+msgid "Make translatable"
+msgstr ""

@@ -114,12 +114,12 @@ class WPML_Settings_Helper {
 	 * @param string $post_type
 	 */
 	function activate_slug_translation( $post_type ) {
-		$slug_settings                          = $this->sitepress->get_setting( 'posts_slug_translation', array() );
-		$slug_settings[ 'types' ]               = isset( $slug_settings[ 'types' ] )
-			? $slug_settings[ 'types' ] : array();
-		$slug_settings[ 'types' ][ $post_type ] = 1;
+		$slug_settings                        = $this->sitepress->get_setting( 'posts_slug_translation', array() );
+		$slug_settings['types']               = isset( $slug_settings['types'] )
+			? $slug_settings['types'] : array();
+		$slug_settings['types'][ $post_type ] = 1;
 		/** @deprected key `on`, use option `wpml_base_slug_translation` instead */
-		$slug_settings[ 'on' ]                  = 1;
+		$slug_settings['on'] = 1;
 
 		$this->clear_ls_languages_cache();
 		$this->sitepress->set_setting( 'posts_slug_translation', $slug_settings, true );
@@ -133,8 +133,8 @@ class WPML_Settings_Helper {
 	 */
 	function deactivate_slug_translation( $post_type ) {
 		$slug_settings = $this->sitepress->get_setting( 'posts_slug_translation', array() );
-		if ( isset( $slug_settings[ 'types' ][ $post_type ] ) ) {
-			unset( $slug_settings[ 'types' ][ $post_type ] );
+		if ( isset( $slug_settings['types'][ $post_type ] ) ) {
+			unset( $slug_settings['types'][ $post_type ] );
 		}
 
 		$this->clear_ls_languages_cache();
@@ -161,15 +161,18 @@ class WPML_Settings_Helper {
 		$tm_settings = $this->sitepress->get_setting( 'translation-management', array() );
 		foreach ( $tm_settings['taxonomies_readonly_config'] as $tx => $translate ) {
 			if ( $translate
-			     && ! in_array( $tx, $taxs )
-			     && isset( $wp_taxonomies[ $tx ] )
-			     && in_array( $object_type, $wp_taxonomies[ $tx ]->object_type )
+				 && ! in_array( $tx, $taxs )
+				 && isset( $wp_taxonomies[ $tx ] )
+				 && in_array( $object_type, $wp_taxonomies[ $tx ]->object_type )
 			) {
 				$taxs[] = $tx;
 			}
 		}
 
-		$ret = array( 'taxs' => $taxs, 'object_type' => $taxs_obj_type['object_type'] );
+		$ret = array(
+			'taxs'        => $taxs,
+			'object_type' => $taxs_obj_type['object_type'],
+		);
 
 		return $ret;
 	}
@@ -185,8 +188,8 @@ class WPML_Settings_Helper {
 		$tm_settings          = $this->sitepress->get_setting( 'translation-management', array() );
 		$cpt_unlocked_options = $this->sitepress->get_setting( 'custom_posts_unlocked_option', array() );
 		foreach ( $types as $k => $type ) {
-			if ( isset( $tm_settings[ 'custom-types_readonly_config' ][ $k ] )
-				 && ! $tm_settings[ 'custom-types_readonly_config' ][ $k ]
+			if ( isset( $tm_settings['custom-types_readonly_config'][ $k ] )
+				 && ! $tm_settings['custom-types_readonly_config'][ $k ]
 			) {
 				unset( $types[ $k ] );
 			}
@@ -285,7 +288,7 @@ class WPML_Settings_Helper {
 		$cpt_unlock_options = $this->sitepress->get_setting( $setting_key, array() );
 		$cpt_unlock_options = array_merge( $cpt_unlock_options, $unlock_options );
 		$this->sitepress->set_setting( $setting_key, $cpt_unlock_options, true );
-		return $cpt_unlock_options ;
+		return $cpt_unlock_options;
 	}
 
 	/**
@@ -293,11 +296,15 @@ class WPML_Settings_Helper {
 	 */
 	function maybe_add_filter( $config_type ) {
 		if ( $config_type === 'taxonomies' ) {
-			add_filter( 'get_translatable_taxonomies',
-			            array( $this, '_override_get_translatable_taxonomies' ) );
+			add_filter(
+				'get_translatable_taxonomies',
+				array( $this, '_override_get_translatable_taxonomies' )
+			);
 		} elseif ( $config_type === 'custom-types' ) {
-			add_filter( 'get_translatable_documents',
-			            array( $this, '_override_get_translatable_documents' ) );
+			add_filter(
+				'get_translatable_documents',
+				array( $this, '_override_get_translatable_documents' )
+			);
 		}
 	}
 

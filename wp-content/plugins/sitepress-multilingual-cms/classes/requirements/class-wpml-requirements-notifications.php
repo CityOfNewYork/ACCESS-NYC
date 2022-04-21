@@ -4,6 +4,10 @@
  * @author OnTheGo Systems
  */
 class WPML_Requirements_Notification {
+	/**
+	 * @var \IWPML_Template_Service
+	 */
+	private $template_service;
 
 	/**
 	 * WPML_Requirements_Notification constructor.
@@ -72,9 +76,9 @@ class WPML_Requirements_Notification {
 			$model = array(
 				'strings' => array(
 					/* translators: %s will be replaced with a list of plugins or themes. */
-					'title'   => sprintf( __( 'One more step before you can translate on %s', 'sitepress' ), $this->build_items_in_sentence( $integrations ) ),
-					'message' => __( "You need to enable WPML's Translation Editor, to translate conveniently.", 'sitepress' ),
-					'enable_done' => __( 'Done.', 'sitepress' ),
+					'title'        => sprintf( __( 'One more step before you can translate on %s', 'sitepress' ), $this->build_items_in_sentence( $integrations ) ),
+					'message'      => __( "You need to enable WPML's Translation Editor, to translate conveniently.", 'sitepress' ),
+					'enable_done'  => __( 'Done.', 'sitepress' ),
 					'enable_error' => __( 'Something went wrong. Please try again or contact the support.', 'sitepress' ),
 				),
 				'nonces'  => array(
@@ -100,7 +104,7 @@ class WPML_Requirements_Notification {
 	}
 
 	/**
-	 * @param $items
+	 * @param array<string> $items
 	 *
 	 * @return string
 	 */
@@ -112,9 +116,9 @@ class WPML_Requirements_Notification {
 			return $product_names;
 		}
 
-		$last          = array_slice( $items, - 1 );
-		$first         = implode( ', ', array_slice( $items, 0, - 1 ) );
-		$both          = array_filter( array_merge( array( $first ), $last ), 'strlen' );
+		$last  = array_slice( $items, - 1 );
+		$first = implode( ', ', array_slice( $items, 0, - 1 ) );
+		$both  = array_filter( array_merge( array( $first ), $last ), 'strlen' );
 		/* translators: Used before the last element of a three or more elements list */
 		$product_names = implode( _x( ', and', 'Used before the last element of a three or more elements list', 'sitepress' ) . ' ', $both );
 

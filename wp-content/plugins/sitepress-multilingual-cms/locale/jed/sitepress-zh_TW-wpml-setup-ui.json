@@ -1,0 +1,508 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "From:": [
+            "從："
+         ],
+         "--Choose language--": [
+            " - 選擇語言 - "
+         ],
+         "to:": [
+            "到："
+         ],
+         "Set language pair(s) for Translator %s:": [
+            "為譯員%s設定語言對："
+         ],
+         "+ Add more language pairs for this translator": [
+            "+為此譯員新增更多語言對"
+         ],
+         "First Name": [
+            "名字"
+         ],
+         "Last Name": [
+            "姓氏"
+         ],
+         "Role": [
+            "角色"
+         ],
+         "(required)": [
+            "（必須）"
+         ],
+         "Make sure that you have provided a correct email address e.g. name@domain.com": [
+            "確保您提供了正確的電子郵件地址，例如name@domain.com"
+         ],
+         "This field is required": [
+            "此欄位是必填欄"
+         ],
+         "A translator can be any WordPress role.": [
+            "譯員可以是任何WordPress角色。"
+         ],
+         "Username": [
+            "使用者名稱"
+         ],
+         "Email": [
+            "電子郵件"
+         ],
+         "Search": [
+            "搜尋"
+         ],
+         "user": [
+            "使用者"
+         ],
+         "Editor": [
+            "編輯器"
+         ],
+         "Select an existing %s and set as Translation Manager": [
+            "選擇現有%s並設定為翻譯經理"
+         ],
+         "Create a new %s and set as Translation Manager": [
+            "建立新的%s並設定為翻譯經理"
+         ],
+         "Cancel": [
+            "取消"
+         ],
+         "Add Translation Manager": [
+            "新增翻譯經理"
+         ],
+         "Translate Some": [
+            "翻譯一些"
+         ],
+         "I want to choose which content to translate": [
+            "我想選擇要翻譯的內容"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "您待決的自動翻譯將被取消。"
+         ],
+         "Save": [
+            "保存"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "轉到<a>翻譯管理儀表板</a>，翻譯您的內容。"
+         ],
+         "Review the translations before publishing": [
+            "在發佈之前審閱翻譯"
+         ],
+         "Publish translations and review them later": [
+            "發佈翻譯並在以後審閱"
+         ],
+         "Publish translations without reviewing": [
+            "不審閱就發佈翻譯"
+         ],
+         "When automatic translation completes:": [
+            "自動翻譯完成後："
+         ],
+         "Translate Everything": [
+            "全部翻譯"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "WPML將自動翻譯您發佈或更新的內容"
+         ],
+         "How do you want to translate this site?": [
+            "您想如何翻譯這個網站？"
+         ],
+         "Select an existing user and set as Translator": [
+            "選擇一個現有使用者，並設定為翻譯"
+         ],
+         "Create a new user and set as Translator": [
+            "建立一個新使用者，並設定為翻譯"
+         ],
+         "Set language pair(s)": [
+            "設定語言對"
+         ],
+         "Previous": [
+            "上一頁"
+         ],
+         "Add a Translator": [
+            "新增譯員"
+         ],
+         "Edit language pair(s) for translator": [
+            "編輯翻譯的語言對"
+         ],
+         "Name": [
+            "名稱"
+         ],
+         "Language Pairs": [
+            "語言對"
+         ],
+         "You can translate to and from all languages": [
+            "您可以翻譯所有語言"
+         ],
+         "%s file upload failed.": [
+            "%s檔案上載失敗。"
+         ],
+         "Flag": [
+            "國旗"
+         ],
+         "Flag file": [
+            "旗幟檔案"
+         ],
+         "You just added  language. Next, select it as the site's default language or a translation language.": [
+            "您剛剛新增了語言。接下來，選擇它作為網站的預設語言或翻譯語言。"
+         ],
+         "Language added": [
+            "已新增語言"
+         ],
+         "The value \"%s\" already exists": [
+            "值 \"%s\"已存在"
+         ],
+         "Add a new language": [
+            "新增語言"
+         ],
+         "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
+            "從以下清單中選擇通用語言，建立特定於國家/地區的語言。然後，選擇應該為其在地化的國家/地區。"
+         ],
+         "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
+            "透過選擇資料庫中已經存在的組合，WPML可以幫助填寫必要的欄位。進一步瞭解<AddingACustomLanguageLink />。"
+         ],
+         "Cannot find?": [
+            "找不到？"
+         ],
+         "Click here": [
+            "按這裡"
+         ],
+         "The name of your language as it will appear on your site's language switcher.": [
+            "將在網站語言切換器上顯示的語言名稱。"
+         ],
+         "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
+            "格式錯誤。它只能包含小寫字母和 \"-\"。例如 \"fr\"、\"pt-br\"、\"zh-hans\""
+         ],
+         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "資料庫和URL中標識語言的唯一值。語言程式碼儲存後無法變更。"
+         ],
+         "Language": [
+            "語言"
+         ],
+         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "如果您的自訂語言與現有語言相似，則可以使用現有語言的拼字檢查和自動翻譯。例如，如果您的自訂語言是瑞士德文，則可以對應到德文作為拼字檢查和自動翻譯使用的語言。如果不將自訂語言對應到現有語言，則拼字檢查和自動翻譯功能將不可用在該語言中。"
+         ],
+         "Location": [
+            "地點"
+         ],
+         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "從MO和PO檔案載入翻譯時，WPML會檢查該值。預設區域設定包含在WordPress設定中 /wp-content/languages/ folder的檔名中。"
+         ],
+         "Code": [
+            "代碼"
+         ],
+         "The language will not be supported by automatic translations": [
+            "自動翻譯將不支援該語言"
+         ],
+         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "谷歌使用hreflang屬性將使用者引導到使用其相關語言和位置的網站。範例："
+         ],
+         "Language mapping": [
+            "語言對應"
+         ],
+         "All English-speaking users: en": [
+            "所有講英文的使用者：en"
+         ],
+         "Don't map this language": [
+            "不要對應此語言"
+         ],
+         "English for UK users: en-gb": [
+            "英國使用者英文：en-gb"
+         ],
+         "Default locale": [
+            "預設的區域設定"
+         ],
+         "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
+            "格式錯誤。它只能含小寫字母和\"_\"。例如\"de\"、\"de_DE\"、\"zh_Hant_TW\""
+         ],
+         "English for US users: en-us": [
+            "美國使用者英文：en-us"
+         ],
+         "hreflang": [
+            "hreflang"
+         ],
+         "Encode url?": [
+            "編碼url？"
+         ],
+         "NO": [
+            "否"
+         ],
+         "YES": [
+            "是"
+         ],
+         " (required)": [
+            "（必須）"
+         ],
+         "Please fill in the field": [
+            "請填寫此欄位"
+         ],
+         "Save language": [
+            "儲存語言"
+         ],
+         "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
+            "確定此語言中的URL是否已編碼或使用ASCII字元（如果不確定，請將其保留為\"否\"）。"
+         ],
+         "adding a custom language": [
+            "新增自訂語言"
+         ],
+         "Learn more about required server settings to use a different domain per language": [
+            "進一步瞭解按語言使用不同的網域所需的伺服器設定"
+         ],
+         "Language name added as a parameter": [
+            "語言名稱作為參數新增"
+         ],
+         "I will set up the domains for my secondary languages later.": [
+            "稍後我將為我的次要語言設定網域。"
+         ],
+         "The domain you have entered is invalid.": [
+            "您輸入的網域無效。"
+         ],
+         "The domain you have entered must be unique.": [
+            "您輸入的網域必須是唯一的。"
+         ],
+         "Please Note: Your site won't work in your secondary languages until this is successfully set up or you switch to a different URL option.": [
+            "請注意：在成功完成此設定或切換到其他URL選項之前，您的網站將無法使用您的次要語言。"
+         ],
+         "Learn more about Language URL Options": [
+            "進一步瞭解語言URL選項"
+         ],
+         "How would you like to format your site's URL?": [
+            "您希望如何設定網站URL的格式？"
+         ],
+         "Different languages in directories": [
+            "不同的語言在不同目錄中"
+         ],
+         "The URL rewrite is not configured in your server.": [
+            "伺服器中未設定URL重寫。"
+         ],
+         "Learn more about required server settings to display languages in directories": [
+            "進一步瞭解在目錄中顯示語言所需的伺服器設定"
+         ],
+         "I will fix my server settings to display languages in directories later.": [
+            "我將稍後修改伺服器設定以在目錄中顯示語言。"
+         ],
+         "Your server settings do not allow for languages in directories. ": [
+            "您的伺服器設定不允許在目錄中顯示語言。"
+         ],
+         "Learn more about the required server settings.": [
+            "進一步瞭解所需伺服器設定。"
+         ],
+         "A different domain per language": [
+            "各語言使用不同的網域"
+         ],
+         "There was a critical error setting up WPML. Please contact our <LinkToSupportForum /> to resolve it.": [
+            "設定WPML時出現嚴重錯誤。請聯絡我們的<LinkToSupportForum />以解決此問題。"
+         ],
+         "Hide error message": [
+            "隱藏錯誤訊息"
+         ],
+         "Show error message": [
+            "顯示錯誤訊息"
+         ],
+         "View the status of the translations in <s>WPML → Translation Management</s>.": [
+            "在<s>WPML → 翻譯管理</s>中檢視翻譯狀態。"
+         ],
+         "WPML has started translating your site": [
+            "WPML已開始翻譯您的網站"
+         ],
+         "Go to <s>WPML → Translation Management</s> to choose what to translate.": [
+            "轉到<s>WPML→ 翻譯管理</s>選擇要翻譯的內容。"
+         ],
+         "You are ready to start translating": [
+            "您已經準備好開始翻譯了"
+         ],
+         "Right now, your site has a nice language switcher in its footer. To enable other styles of language switchers, go to <s>WPML → Languages</s>.": [
+            "現在，您的網站在其頁腳中有一個很好看的語言切換器。要啟用其他樣式的語言切換器，請轉到<s>WPML→ 語言</s>。"
+         ],
+         "Language switcher customization": [
+            "語言切換器自訂"
+         ],
+         "support forum": [
+            "支援論壇"
+         ],
+         "Default language": [
+            "預設語言"
+         ],
+         "What is the current language of your website?": [
+            "您網站的當前語言是什麼？"
+         ],
+         "Translation languages": [
+            "翻譯語言"
+         ],
+         "Which languages do you want to translate your site into?": [
+            "您希望將網站翻譯成哪些語言？"
+         ],
+         "If you cannot find languages that you need in the list": [
+            "如果在清單中找不到所需的語言"
+         ],
+         "create a custom language": [
+            "建立自訂語言"
+         ],
+         "What are the languages of your site?": [
+            "您的網站使用什麼語言？"
+         ],
+         "If you don't have a WPML.org account or a valid subscription, %1$spurchase one%2$s to get automatic updates, full support, and a 30-day money-back guarantee.": [
+            "如果您沒有WPML.org帳戶或有效訂閱，%1$s請購買一個%2$s以獲得自動更新、完全支援和30天的退款保證。"
+         ],
+         "Already purchased WPML?": [
+            "已經購買了WPML？"
+         ],
+         "Enter your site key from your WPML account to receive automatic updates.": [
+            "輸入來自WPML帳戶的網站金鑰以接收自動更新。"
+         ],
+         "Site key": [
+            "網站金鑰"
+         ],
+         "Get a key for this site": [
+            "獲取此網站的金鑰"
+         ],
+         "Improve your site’s translations using helpful plugins": [
+            "使用有用的外掛程式改進網站的翻譯"
+         ],
+         "Based on the themes and other plugins running on your site, we recommend that you enable the following WPML components. These are included with your WPML purchase and allow you to translate strings, media, admin texts, and more.": [
+            "基於網站上執行的主題和其他外掛程式，我們建議您啟用以下WPML元件。這些都包含在您購買的WPML中，允許您翻譯字串、媒體、管理文字等。"
+         ],
+         "Error in activating plugin.": [
+            "激活外掛程式時出錯。"
+         ],
+         "Error in installing plugin.": [
+            "安裝外掛程式時出錯。"
+         ],
+         "Yes, send theme and plugins information, in order to get faster support and compatibility alerts": [
+            "是，傳送主題和外掛程式資訊，以獲得更快的支援和相容性提醒"
+         ],
+         "No, don't send this information and skip compatibility alerts": [
+            "否，不傳送此資訊並跳過相容性提醒"
+         ],
+         "Do you want to get better and faster support?": [
+            "您想獲得更好更快的支援嗎？"
+         ],
+         "The WPML plugin can send a list of active plugins and theme used in your site to wpml.org. This allows our support team to help you much faster and to contact you in advance about potential compatibility problems and their solutions.": [
+            "WPML外掛程式可以將您網站中使用的活動外掛程式和主題清單傳送到wpml.org。這使我們的支援團隊能夠更快地為您提供幫助，並提前與您聯絡以瞭解潛在的相容性問題及其解決方案。"
+         ],
+         "Privacy and data usage policy": [
+            "隱私和資料使用政策"
+         ],
+         "Only myself (%s)": [
+            "只有我自己(%s)"
+         ],
+         "You will be the sole translator for this site. You will be able to translate any document between any language pair. If you want to do some of the translations and allow others to translate as well, select the \"Users of this site\" option instead.": [
+            "您將是本網站的唯一翻譯。您將能夠在任何語言對之間翻譯任何文件。如果您想進行部分翻譯，並允許其他人也進行翻譯，請選擇\"此網站的使用者\"選項。"
+         ],
+         "Individual translators": [
+            "個體譯員"
+         ],
+         "You will choose or create new users of this WordPress site as the translators. You can also choose yourself. This allows you to set up a team of translators working in different language pairs.": [
+            "您將選擇或建立此WordPress網站的新使用者作為譯員。您也可以選擇自己。這允許您建立一個翻譯團隊，以處理不同的語言對。"
+         ],
+         "A Professional Translation Service": [
+            "專業的翻譯服務"
+         ],
+         "WPML offers tight integration with over 70 translation services. You will choose the translation service that you prefer and enjoy a streamlined process for sending jobs and receiving completed translations.": [
+            "WPML提供與70多個翻譯服務的緊密整合。您將選擇您喜歡的翻譯服務，並享受簡化的傳送工作和接收完成翻譯的流程。"
+         ],
+         "I want to set a \"Translation Manager\" who will choose the translators for this site": [
+            "我想設定一個\"翻譯經理 \"，他將為此網站選擇譯員"
+         ],
+         "You will choose a user of this site and delegate the setup of translators to him/her. Choose this option when you are building a website for a client, who will set up translator users or choose a translation service.": [
+            "您將選擇此網站的一名使用者並將譯員的設定委派給他/她。在為客戶建置網站時請選擇此選項，客戶將設定譯員使用者或選擇翻譯服務。"
+         ],
+         "Learn more about <LinkToTheDifferentWaysYouCanTranslateYourSite/>.": [
+            "進一步瞭解<LinkToTheDifferentWaysYouCanTranslateYourSite/>。"
+         ],
+         "the different ways you can translate your site with WPML": [
+            "使用WPML翻譯網站的不同方法"
+         ],
+         "Who will translate?": [
+            "誰來翻譯？"
+         ],
+         "Connect this site to <service_name />": [
+            "將此網站連線到<service_name />"
+         ],
+         "Error: %s": [
+            "錯誤：%s"
+         ],
+         "Use a different Translation Service": [
+            "使用其他翻譯服務"
+         ],
+         "Authenticate": [
+            "認證"
+         ],
+         "Choose a Translation Service": [
+            "選擇翻譯服務"
+         ],
+         "Loading": [
+            "載入中"
+         ],
+         "+ Add a Translation Manager": [
+            "+新增翻譯經理"
+         ],
+         "+ Add a Translator": [
+            "+ 新增譯員"
+         ],
+         "A new language could not be added correctly": [
+            "無法正確新增語言"
+         ],
+         "Languages": [
+            "語言"
+         ],
+         "URL Format": [
+            "URL格式"
+         ],
+         "Register WPML": [
+            "註冊WPML"
+         ],
+         "Translation": [
+            "翻譯"
+         ],
+         "Support": [
+            "支援"
+         ],
+         "Plugins": [
+            "外掛程式"
+         ],
+         "Finished": [
+            "已完成"
+         ],
+         "Back": [
+            "返回"
+         ],
+         "Continue": [
+            "繼續"
+         ],
+         "Skip": [
+            "跳過"
+         ],
+         "Install and activate": [
+            "安裝和激活"
+         ],
+         "Finish": [
+            "完成"
+         ],
+         "Visit <link_to_service /> to request an API Token. This token allows WPML to connect to <service_name /> to send and receive jobs.": [
+            "存取<link_to_service />以請求API權杖。此權杖允許WPML連線到<service_name />以傳送和接收工作。"
+         ],
+         "Settings": [
+            "設置"
+         ],
+         "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
+            "當WPML設定為自動翻譯網站內容時，當前無法連線翻譯服務。要使用翻譯服務，請在<LinkToSettingsPage /> 頁面上變更您的翻譯模式。"
+         ],
+         "Error: ": [
+            "錯誤："
+         ],
+         "Documentation": [
+            "文件"
+         ],
+         "Deactivate": [
+            "停用"
+         ],
+         "Activate": [
+            "激活"
+         ],
+         "Description": [
+            "說明"
+         ],
+         "Ranking": [
+            "排名"
+         ]
+      }
+   }
+}

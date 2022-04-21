@@ -39,8 +39,8 @@ class StringsRetrieve {
 				s.gettext_context,
 				s.name
 			FROM {$this->wpdb->prefix}icl_strings s
-			" . $this->getStringTranslationJoin() . "
-			" . $this->getDomainWhere();
+			" . $this->getStringTranslationJoin() . '
+			' . $this->getDomainWhere();
 
 		if ( $modified_mo_only ) {
 			$query .= $this->getModifiedMOOnlyWhere();
@@ -71,8 +71,6 @@ class StringsRetrieve {
 	}
 
 	/**
-	 * @param string $language
-	 *
 	 * @return string
 	 */
 	private function getStringTranslationJoin() {
@@ -84,13 +82,13 @@ class StringsRetrieve {
 
 	/** @return string */
 	private function getDomainWhere() {
-		return " WHERE UPPER(context) = UPPER(%s)";
+		return ' WHERE UPPER(context) = UPPER(%s)';
 	}
 
 	/** @return string */
 	private function getModifiedMOOnlyWhere() {
-		return " AND st.status IN (" .
-		       wpml_prepare_in( [ ICL_TM_COMPLETE, ICL_TM_NEEDS_UPDATE ], '%d' ) .
-		       ") AND (st.value != st.mo_string OR st.mo_string IS NULL)";
+		return ' AND st.status IN (' .
+			   wpml_prepare_in( [ ICL_TM_COMPLETE, ICL_TM_NEEDS_UPDATE ], '%d' ) .
+			   ') AND st.value IS NOT NULL';
 	}
 }

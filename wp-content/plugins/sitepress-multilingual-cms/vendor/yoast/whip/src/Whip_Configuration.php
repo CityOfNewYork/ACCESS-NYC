@@ -1,11 +1,18 @@
 <?php
+/**
+ * WHIP libary file.
+ *
+ * @package Yoast\WHIP
+ */
 
 /**
- * Class Whip_Configuration
+ * Class Whip_Configuration.
  */
 class Whip_Configuration {
 
 	/**
+	 * The configuration to use.
+	 *
 	 * @var array
 	 */
 	private $configuration;
@@ -15,23 +22,23 @@ class Whip_Configuration {
 	 *
 	 * @param array $configuration The configuration to use.
 	 *
-	 * @throws Whip_InvalidType
+	 * @throws Whip_InvalidType When the $configuration parameter is not of the expected type.
 	 */
 	public function __construct( $configuration = array() ) {
 		if ( ! is_array( $configuration ) ) {
-			throw new Whip_InvalidType( 'Configuration', gettype( $configuration), "array" );
+			throw new Whip_InvalidType( 'Configuration', $configuration, 'array' );
 		}
 
-	    $this->configuration = $configuration;
+		$this->configuration = $configuration;
 	}
 
 	/**
 	 * Retrieves the configured version of a particular requirement.
-	 * If the requirement does not exist, this returns -1.
 	 *
 	 * @param Whip_Requirement $requirement The requirement to check.
 	 *
-	 * @return int The version of the passed requirement that was detected.
+	 * @return string|int The version of the passed requirement that was detected as a string.
+	 *                    If the requirement does not exist, this returns int -1.
 	 */
 	public function configuredVersion( Whip_Requirement $requirement ) {
 		if ( ! $this->hasRequirementConfigured( $requirement ) ) {

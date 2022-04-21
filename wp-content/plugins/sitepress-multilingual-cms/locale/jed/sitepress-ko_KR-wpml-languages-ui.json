@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose Content to Automatically Translate into": [
+            "다음 언어로 자동 번역할 컨텐츠 선택:"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "변경 사항 저장 및 자동 번역 활성화"
+         ],
+         "Cancel Language Changes": [
+            "언어 변경 취소"
+         ],
+         "Save": [
+            "저장"
+         ],
+         "Choose Content to Automatically Translate into New Language": [
+            "새 언어로 자동 번역할 컨텐츠 선택"
+         ],
+         "Add languages and start translating": [
+            "언어 추가 및 번역 시작"
+         ],
+         "Add language and start translating": [
+            "언어 추가 및 번역 시작"
+         ],
+         "Never mind. Don't add new languages": [
+            "괜찮습니다. 새 언어를 추가하지 마세요."
+         ],
+         "Never mind. Don't add new language": [
+            "괜찮습니다. 새 언어를 추가하지 마세요."
+         ],
+         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
+            "지금 바로 기존의 모든 글과 페이지를 자동으로 번역하고 컨텐츠를 새로 생성할 때 자동으로 번역합니다."
+         ],
+         "Only automatically translate new content.": [
+            "새 컨텐츠만 자동으로 번역합니다."
+         ],
+         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
+            "사이트 컨텐츠를 자동으로 번역하는 <a>모든 컨텐츠 번역</a> 모드를 사용하고 있습니다."
+         ],
+         "Which content do you want to automatically translate into your newly-added language?": [
+            "어떤 컨텐츠를 새로 추가된 언어로 자동 번역하시겠습니까?"
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "번역 관리 대시보드에서 기존 컨텐츠를 번역할 수 있습니다."
+         ]
+      }
+   }
+}

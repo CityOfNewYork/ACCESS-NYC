@@ -22,7 +22,7 @@ class WPML_Slug_Translation_Factory implements IWPML_Frontend_Action_Loader, IWP
 		$post_settings   = $settings_factory->create( self::POST );
 		$tax_settings    = $settings_factory->create( self::TAX );
 
-		$term_link_filter  = new WPML_ST_Term_Link_Filter( $tax_records, $sitepress, new WPML_WP_Cache_Factory() );
+		$term_link_filter = new WPML_ST_Term_Link_Filter( $tax_records, $sitepress, new WPML_WP_Cache_Factory(), $tax_settings );
 
 		$hooks['legacy_class'] = new WPML_Slug_Translation(
 			$sitepress,
@@ -42,7 +42,7 @@ class WPML_Slug_Translation_Factory implements IWPML_Frontend_Action_Loader, IWP
 				new WPML_WP_Post_Type(),
 				WPML_ST_Slug_Translation_UI_Save::ACTION_HOOK_FOR_POST
 			);
-			$hooks['ui_save_tax'] = new WPML_ST_Slug_Translation_UI_Save(
+			$hooks['ui_save_tax']  = new WPML_ST_Slug_Translation_UI_Save(
 				$tax_settings,
 				$tax_records,
 				$sitepress,
@@ -59,7 +59,10 @@ class WPML_Slug_Translation_Factory implements IWPML_Frontend_Action_Loader, IWP
 		}
 
 		$hooks['public-api'] = new WPML_ST_Slug_Translation_API(
-			$records_factory, $settings_factory, $sitepress, new WPML_WP_API()
+			$records_factory,
+			$settings_factory,
+			$sitepress,
+			new WPML_WP_API()
 		);
 
 		return $hooks;

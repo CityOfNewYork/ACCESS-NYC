@@ -1,0 +1,19 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Insufficient funds": [
+            "Không đủ tiền"
+         ],
+         "Complete": [
+            "Hoàn thành"
+         ],
+         "Pending review": [
+            "Đang chờ đánh giá"
+         ]
+      }
+   }
+}

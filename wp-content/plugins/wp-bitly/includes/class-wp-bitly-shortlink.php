@@ -135,6 +135,14 @@ class Wp_Bitly_Shortlink {
 	public function wpbitly_get_shortlink($original, $post, $force = false)
 	{
 
+		// Avoid creating shortlinks during bulk edit
+		if( isset( $_GET['bulk_edit'] ) ) return;
+
+	    // Avoid creating shortlinks during an autosave
+	    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+	        return;
+	    }
+
 		if (is_object($post)) {
 			$post_id = $post->ID;
 		} else if (is_integer($post)) {
@@ -144,11 +152,6 @@ class Wp_Bitly_Shortlink {
 		}
 	    
 	    $shortlink = false;
-
-	    // Avoid creating shortlinks during an autosave
-	    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-	        return;
-	    }
 
 	    // or for revisions
 	    if (wp_is_post_revision($post_id)) {

@@ -39,7 +39,6 @@ class PMXI_Image_List extends PMXI_Model_List {
      * @param $args
      * @return array|bool|null|\WP_Post
      */
-
     public function getExistingImage($args, $allow_filter = true){
         $attch = false;
         foreach($this->getBy($args)->convertRecords() as $imageRecord) {
@@ -50,13 +49,11 @@ class PMXI_Image_List extends PMXI_Model_List {
                 $attch = get_post($attid);
                 if ($attch) {
                     break;
-                }
-                else{
+                } else {
                     $imageRecord->delete();
                 }
             }
         }
-
         return $attch;
     }
 }

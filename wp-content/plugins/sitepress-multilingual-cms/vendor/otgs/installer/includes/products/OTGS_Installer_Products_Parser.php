@@ -14,9 +14,19 @@ class OTGS_Installer_Products_Parser {
 
 	private $product_notices = array();
 
-	public function __construct( WP_Installer_Channels $installerChannels, OTGS_Installer_Logger_Storage $logger ) {
-		$this->logger = $logger;
+	/**
+	 * @var array
+	 */
+	private $defaultProducts;
+
+	public function __construct(
+		WP_Installer_Channels $installerChannels,
+		OTGS_Products_Config_Xml $productsConfigXml,
+		OTGS_Installer_Logger_Storage $logger
+	) {
+		$this->logger            = $logger;
 		$this->installerChannels = $installerChannels;
+		$this->defaultProducts   = $productsConfigXml->get_repository_products_default_data();
 	}
 
 	/**
@@ -30,9 +40,13 @@ class OTGS_Installer_Products_Parser {
 	public function get_products_from_response( $products_url, $repository_id, $response ) {
 		$products = $this->parse_products_response( $products_url, $response );
 		$products = $this->validate_products_plugins( $products_url, $products );
-
 		$products['downloads'] = $this->prepare_products_downloads( $repository_id, $products );
+
 		return $products;
+	}
+
+	public function get_default_products( $repository_id ) {
+		return isset( $this->defaultProducts[ $repository_id ] ) ? $this->defaultProducts[ $repository_id ] : null;
 	}
 
 	/**
@@ -65,18 +79,17 @@ class OTGS_Installer_Products_Parser {
 		if ( is_array( $products ) ) {
 			foreach ( $products['downloads']['plugins'] as $product_id => $product ) {
 				if ( empty( $product['slug'] )
-				     || empty($product['name'])
-				     || empty($product['version'])
-				     || empty($product['date'])
-				     || empty($product['url'])
-				     || empty($product['basename'])
+				     || empty( $product['name'] )
+				     || empty( $product['version'] )
+				     || empty( $product['date'] )
+				     || empty( $product['url'] )
+				     || empty( $product['basename'] )
 				) {
 					$this->handle_product_parsing_error( $products_url, $product_id );
 					throw OTGS_Installer_Products_Parsing_Exception::createForResponse( $products_url );
 				}
 			}
 		}
-
 		return $products;
 	}
 
@@ -105,7 +118,7 @@ class OTGS_Installer_Products_Parser {
 
 	/**
 	 * @param string $repository_id
-	 * @param string $products
+	 * @param array $products
 	 *
 	 * @return array
 	 */

@@ -1,19 +1,19 @@
 /*jshint browser:true, devel:true */
 /*global jQuery, wp */
 (function($){
-	"use strict";
+    "use strict";
 
-	$(document).ready(function(){
+    $(function () {
 
-		var section      = $('#wpml-translation-feedback-options'),
-			enableToggle = section.find('#wpml-tf-enable-translation-feedback'),
-			displayMode  = section.find('input[name="display_mode"]'),
-			saveTriggers = section.find('.js-wpml-tf-trigger-save');
+        var section = $('#wpml-translation-feedback-options'),
+            enableToggle = section.find('#wpml-tf-enable-translation-feedback'),
+            displayMode = section.find('input[name="display_mode"]'),
+            saveTriggers = section.find('.js-wpml-tf-trigger-save');
 
-		var saveSettings = function(node) {
-			var spinner  = node.closest('.js-wpml-tf-settings-block').find('.spinner'),
-				message  = node.closest('.js-wpml-tf-settings-block').find('.js-wpml-tf-request-status').empty(),
-				settings = getSerializedSettings();
+        var saveSettings = function (node) {
+            var spinner = node.closest('.js-wpml-tf-settings-block').find('.spinner'),
+                message = node.closest('.js-wpml-tf-settings-block').find('.js-wpml-tf-request-status').empty(),
+                settings = getSerializedSettings();
 
 			spinner.addClass('is-active');
 

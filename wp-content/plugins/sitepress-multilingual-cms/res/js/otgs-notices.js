@@ -105,23 +105,23 @@
 				type: 'POST',
 				data: {
 					action: 'otgs-dismiss-group',
-					group: groupToDismiss,
-					nonce: nonce
-				},
-				dataType: 'json',
-				complete: function () {
-					location.reload();
-				}
-			});
-		};
-	}
+					group : groupToDismiss,
+                    nonce : nonce
+                },
+                            dataType: 'json',
+                            complete: function () {
+                                location.reload();
+                            }
+                        });
+        };
+    }
 
-	jQuery(document).ready(function () {
-		bindEvents();
+    jQuery(function () {
+        bindEvents();
 
-	});
+    });
 
-	jQuery(document).on('otgs-notices-added', function (event) {
-		bindEvents();
-	});
+    jQuery(document).on('otgs-notices-added', function (event) {
+        bindEvents();
+    });
 })(jQuery, ajaxurl);

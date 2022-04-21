@@ -19,13 +19,16 @@ class AssignTranslationStatusToDuplicates {
 				if ( ! isset( $element_language_details[ $code ] ) ) {
 					continue;
 				}
+				/** @var \stdClass $element_translation */
 				$element_translation = $element_language_details[ $code ];
-				if ( ! isset( $element_translation, $element_translation->element_id ) || $element_translation->original ) {
+				if ( ! isset( $element_translation->element_id ) || $element_translation->original ) {
 					continue;
 				}
-				$translation = $iclTranslationManagement->get_element_translation( $element_translation->element_id,
+				$translation = $iclTranslationManagement->get_element_translation(
+					$element_translation->element_id,
 					$code,
-					$element_type );
+					$element_type
+				);
 				if ( ! $translation ) {
 					$status_helper = wpml_get_post_status_helper();
 					$status_helper->set_status( $element_translation->element_id, ICL_TM_DUPLICATE );

@@ -12,7 +12,7 @@ class Registered {
 
 		?>
 		<div class="otgs-installer-registered wp-clearfix">
-			<div class="notice inline otgs-installer-notice otgs-installer-notice-registered otgs-installer-notice-<?php echo $model->repoId; ?>">
+			<div class="inline otgs-installer-notice otgs-installer-notice-confirm otgs-installer-notice-<?php echo $model->repoId; ?>">
 				<div class="otgs-installer-notice-content">
 					<?php echo esc_html( $message ) ?>
 					<?php \OTGS\Installer\Templates\Repository\RegisteredButtons::render( $model ); ?>

@@ -1,7 +1,7 @@
 <?php
 
 class WPML_ST_Upgrade_MO_Scanning implements IWPML_St_Upgrade_Command {
-	/** @var WPDB $wpdb */
+	/** @var wpdb $wpdb */
 	private $wpdb;
 
 	private static $sql = "
@@ -9,7 +9,7 @@ class WPML_ST_Upgrade_MO_Scanning implements IWPML_St_Upgrade_Command {
 		  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
 		  `file_path` varchar(250) NOT NULL,
 		  `file_path_md5` varchar(32) NOT NULL,
-		  `domain` varchar(45) NOT NULL,
+		  `domain` varchar(160) NOT NULL,
 		  `status` varchar(20) NOT NULL DEFAULT %s,
 		  `num_of_strings` int(11) NOT NULL DEFAULT '0',
 		  `last_modified` int(11) NOT NULL,
@@ -20,9 +20,9 @@ class WPML_ST_Upgrade_MO_Scanning implements IWPML_St_Upgrade_Command {
 	";
 
 	/**
-	 * @param WPDB $wpdb
+	 * @param wpdb $wpdb
 	 */
-	public function __construct( WPDB $wpdb ) {
+	public function __construct( wpdb $wpdb ) {
 		$this->wpdb = $wpdb;
 	}
 
@@ -71,7 +71,7 @@ class WPML_ST_Upgrade_MO_Scanning implements IWPML_St_Upgrade_Command {
 	}
 
 	public static function get_command_id() {
-		return __CLASS__ . '_3' ;
+		return __CLASS__ . '_4' ;
 	}
 
 	/**

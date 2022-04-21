@@ -1,0 +1,35 @@
+<div id="translation-service-instruction" class="notice wpml-notice otgs-is-dismissible">
+    <h3>{{ strings.title }}</h3>
+
+    <p>{{ strings.description }}</p>
+
+    <p class="ts-instruction-video">
+        <a href="{{ video_link }}" target="_blank">
+            <img src="{{ image_url }}" alt="" width="440" height="230"/>
+        </a>
+    </p>
+
+    <p class="ts-instruction-help">
+        {{ strings.need_help }}
+        <a href="{{ help_link }}" target="_blank">
+            {{ strings.help_caption }}
+        </a>
+    </p>
+
+    <p class="ts-instruction-dismiss">
+        <input type="checkbox" value="" id="checkbox-my-test-translation-went-fine" disabled="disabled" style="display: none;">
+        <span id="this-stuff-is-important">
+            {{ strings.this_stuff_is_important }}
+        </span>
+        <span id="my-test-translation-went-fine" style="display: none;">
+            {{ strings.my_test_translation_went_fine }}
+            <button class="js-ts-instruction-dismiss button button-secondary" id="dismiss-instruction" disabled="disabled" style="display: none;">
+                {{ strings.dismiss }}
+            </button>
+        </span>
+    </p>
+
+    <span class="js-ts-instruction-dismiss notice-dismiss" style="display:none">
+        <span class="screen-reader-text">{{ strings.dismiss }}</span>
+    </span>
+</div>

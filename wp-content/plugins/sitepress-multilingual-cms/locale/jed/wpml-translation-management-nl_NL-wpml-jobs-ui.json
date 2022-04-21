@@ -1,0 +1,22 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Draft — Pending review": [
+            "Concept - in afwachting van controle"
+         ],
+         "Complete": [
+            "Voltooien"
+         ],
+         "Insufficient funds": [
+            "Onvoldoende saldo"
+         ],
+         "Editor Job ID": [
+            "Redacteur Functie-ID"
+         ]
+      }
+   }
+}

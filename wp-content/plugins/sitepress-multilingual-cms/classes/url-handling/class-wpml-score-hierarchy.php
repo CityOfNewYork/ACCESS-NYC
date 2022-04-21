@@ -2,7 +2,7 @@
 
 class WPML_Score_Hierarchy {
 
-	private $data = array();
+	private $data  = array();
 	private $slugs = array();
 
 	/**
@@ -31,7 +31,7 @@ class WPML_Score_Hierarchy {
 				$slug_pos     = array_keys( $slugs, $page->post_name, true );
 				$par_slug_pos = array_keys( $slugs, $page->parent_name, true );
 				if ( (bool) $par_slug_pos !== false
-				     && (bool) $slug_pos !== false
+					 && (bool) $slug_pos !== false
 				) {
 					$remove = true;
 					foreach ( $slug_pos as $child_slug_pos ) {
@@ -124,7 +124,7 @@ class WPML_Score_Hierarchy {
 	private function get_slugs_for_page( $current_page ) {
 		$slugs = array();
 
-		while( $current_page && $current_page->post_name ) {
+		while ( $current_page && $current_page->post_name ) {
 			$slugs[]      = $current_page->post_name;
 			$parent_name  = $current_page->parent_name;
 			$current_page = $this->get_page_by_id( $current_page->post_parent );

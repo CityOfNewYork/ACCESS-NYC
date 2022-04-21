@@ -18,7 +18,7 @@ class Actions {
 			'WPML_ST_Remote_String_Translation_Factory',
 			'WPML_ST_Privacy_Content_Factory',
 			'WPML_ST_String_Tracking_AJAX_Factory',
-			'WPML_ST_Translation_Memory_Factory',
+			\WPML_ST_Translation_Memory::class,
 			'WPML_ST_Script_Translations_Hooks_Factory',
 			\WPML\ST\MO\Scan\UI\Factory::class,
 			'WPML\ST\Rest\FactoryLoader',
@@ -29,6 +29,11 @@ class Actions {
 			\WPML\ST\MO\File\FailureHooksFactory::class,
 			\WPML\ST\DB\Mappers\Hooks::class,
 			\WPML\ST\Shortcode\Hooks::class,
+			\WPML\ST\AdminTexts\UI::class,
+			\WPML\ST\PackageTranslation\Hooks::class,
+			\WPML\ST\Main\UI::class,
+			\WPML\ST\StringsCleanup\UI::class,
+			\WPML\ST\DisplayAsTranslated\CheckRedirect::class,
 		);
 	}
 }

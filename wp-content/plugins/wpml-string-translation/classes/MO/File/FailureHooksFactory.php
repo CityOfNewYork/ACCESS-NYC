@@ -11,7 +11,7 @@ use WPML\ST\MO\Scan\UI\Factory as UiFactory;
 class FailureHooksFactory implements \IWPML_Backend_Action_Loader {
 	/**
 	 * @return FailureHooks|null
-	 * @throws \Auryn\InjectionException
+	 * @throws \WPML\Auryn\InjectionException
 	 */
 	public function create() {
 		/** @var SitePress $sitepress */
@@ -31,7 +31,7 @@ class FailureHooksFactory implements \IWPML_Backend_Action_Loader {
 
 	/**
 	 * @return bool
-	 * @throws \Auryn\InjectionException
+	 * @throws \WPML\Auryn\InjectionException
 	 */
 	private function hasRanPreGenerateViaUi() {
 		$uiPreGenerateStatus = ProcessFactory::createStatus( false );

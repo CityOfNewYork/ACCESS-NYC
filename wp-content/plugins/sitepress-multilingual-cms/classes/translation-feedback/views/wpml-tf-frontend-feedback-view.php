@@ -2,6 +2,7 @@
 
 /**
  * Class WPML_TF_Frontend_Feedback_View
+ *
  * @author OnTheGoSystems
  */
 class WPML_TF_Frontend_Feedback_View {
@@ -49,7 +50,7 @@ class WPML_TF_Frontend_Feedback_View {
 	 */
 	public function render_form() {
 		$model = array(
-			'strings' => array(
+			'strings'       => array(
 				'dialog_title'      => __( 'Rate translation', 'sitepress' ),
 				'thank_you_rating'  => __( 'Thank you for your rating!', 'sitepress' ),
 				'thank_you_comment' => __( 'Thank you for your rating and comment!', 'sitepress' ),
@@ -86,8 +87,8 @@ class WPML_TF_Frontend_Feedback_View {
 
 		if ( WPML_TF_Settings::BUTTON_MODE_CUSTOM !== $this->settings->get_button_mode() ) {
 			$model = array(
-				'strings' => array(
-					'form_open_title'   => __( 'Rate translation of this page', 'sitepress' ),
+				'strings'             => array(
+					'form_open_title' => __( 'Rate translation of this page', 'sitepress' ),
 				),
 				'wrapper_css_classes' => $this->get_wrapper_css_classes(),
 				'icon_css_class'      => $this->get_icon_css_class(),
@@ -116,7 +117,7 @@ class WPML_TF_Frontend_Feedback_View {
 		$icon_style  = $this->settings->get_icon_style();
 		$css_classes = self::get_icon_css_classes();
 
-		if ( array_key_exists( $icon_style,$css_classes ) ) {
+		if ( array_key_exists( $icon_style, $css_classes ) ) {
 			return $css_classes[ $icon_style ];
 		}
 

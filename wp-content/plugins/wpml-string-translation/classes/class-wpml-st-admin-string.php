@@ -3,7 +3,7 @@
 /**
  * WPML_ST_Admin_String class
  */
-Class WPML_ST_Admin_String extends WPML_ST_String {
+class WPML_ST_Admin_String extends WPML_ST_String {
 
 	/**
 	 * @var string $name
@@ -29,8 +29,9 @@ Class WPML_ST_Admin_String extends WPML_ST_String {
 
 	private function fetch_name_and_value() {
 		if ( is_null( $this->name ) || is_null( $this->value ) ) {
-			$res = $this->wpdb->get_row(
-				"SELECT name, value  " . $this->from_where_snippet() );
+			$res         = $this->wpdb->get_row(
+				'SELECT name, value  ' . $this->from_where_snippet()
+			);
 			$this->name  = $res->name;
 			$this->value = $res->value;
 		}

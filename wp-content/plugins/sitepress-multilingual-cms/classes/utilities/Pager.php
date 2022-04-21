@@ -30,12 +30,15 @@ class Pager {
 	public function iterate( Collection $collection, callable $callback, $timeout = PHP_INT_MAX ) {
 		$processedItems = $this->getProcessedCount();
 
-		$this->getItemsToProcess( $collection, $processedItems )->eachWithTimeout( function ( $item ) use (
+		$this->getItemsToProcess( $collection, $processedItems )->eachWithTimeout(
+			function ( $item ) use (
 			&$processedItems,
 			$callback
-		) {
-			return $callback( $item ) && ++ $processedItems;
-		}, $timeout );
+			) {
+				return $callback( $item ) && ++ $processedItems;
+			},
+			$timeout
+		);
 
 		$remainingPages = $this->getRemainingPages( $collection, $processedItems );
 

@@ -20,7 +20,7 @@ class WPML_Users_Languages {
 	 */
 	public function __construct( &$WPML_Language_Code, &$WPML_WP_API ) {
 		$this->WPML_Language_Code = &$WPML_Language_Code;
-		$this->WPML_WP_API = &$WPML_WP_API;
+		$this->WPML_WP_API        = &$WPML_WP_API;
 		$this->register_hooks();
 	}
 
@@ -60,11 +60,11 @@ class WPML_Users_Languages {
 	private function get_language_from_globals() {
 		$lang = null;
 
-		$inputs = array($_POST, $_GET, $GLOBALS);
+		$inputs = array( $_POST, $_GET, $GLOBALS );
 
-		foreach($inputs as $input) {
+		foreach ( $inputs as $input ) {
 			if ( array_key_exists( 'wpml_user_email_language', $input ) ) {
-				$lang = sanitize_title($input['wpml_user_email_language']);
+				$lang = sanitize_title( $input['wpml_user_email_language'] );
 				$lang = $this->WPML_Language_Code->sanitize( $lang );
 				break;
 			}

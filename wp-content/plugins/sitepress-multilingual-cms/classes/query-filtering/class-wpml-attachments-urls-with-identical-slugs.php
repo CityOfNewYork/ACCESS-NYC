@@ -28,9 +28,7 @@ class WPML_Attachments_Urls_With_Identical_Slugs implements IWPML_Action {
 					$wp_query->queried_object_id = apply_filters( 'wpml_object_id', $wp_query->queried_object_id, 'attachment', true );
 					$wp_query->queried_object    = get_post( $wp_query->queried_object_id );
 				}
-
 			}
-
 		}
 
 		return $wp_query;

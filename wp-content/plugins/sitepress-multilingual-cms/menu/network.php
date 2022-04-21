@@ -38,32 +38,36 @@ $text = isset( $text ) ? $text : '';
 ?>
 
 <div class="wrap">
-    <h2><?php echo esc_html__( 'WPML Network Setup', 'sitepress' ) ?>
-		<?php if ( isset( $_REQUEST['s'] ) && $_REQUEST['s'] ) {
-			printf( '<span class="subtitle">' . esc_html__( 'Search results for &#8220;%s&#8221;' ) . '</span>', esc_html( $s ) );
-		} ?>
-    </h2>
+	<h2><?php echo esc_html__( 'WPML Network Setup', 'sitepress' ); ?>
+		<?php
+		if ( isset( $_REQUEST['s'] ) && $_REQUEST['s'] ) {
+			printf( '<span class="subtitle">' . esc_html__( 'Search results for &#8220;%s&#8221;' ) . '</span>', filter_var( $_REQUEST['s'], FILTER_SANITIZE_SPECIAL_CHARS ) );
+		}
+		?>
+	</h2>
 
-    <form action="" method="get" id="ms-search">
-        <p class="search-box">
-            <label class="screen-reader-text" for="icl_ss"><?php echo esc_html( $text ); ?>:</label>
-            <input type="hidden" name="page" value="<?php echo esc_attr( $_GET['page'] ); ?>"/>
-            <input type="text" id="icl_ss" name="s" value="<?php _admin_search_query(); ?>"/>
+	<form action="" method="get" id="ms-search">
+		<p class="search-box">
+			<label class="screen-reader-text" for="icl_ss"><?php echo esc_html( $text ); ?>:</label>
+			<input type="hidden" name="page" value="<?php echo esc_attr( $_GET['page'] ); ?>"/>
+			<input type="text" id="icl_ss" name="s" value="<?php _admin_search_query(); ?>"/>
 			<?php submit_button( __( 'Search', 'sitepress' ), 'button', false, false, array( 'id' => 'search-submit' ) ); ?>
 
-        </p>
-    </form>
+		</p>
+	</form>
 
 	<?php echo $msg; ?>
 
-    <br/>
+	<br/>
 
 	<?php if ( empty( $wp_list_table->items ) ) : ?>
 		<?php $wp_list_table->no_items(); ?>
 	<?php else : ?>
 
         <div class="tablenav top">
-			<?php $wp_list_table->pagination( 'bottom' ); ?>
+			<?php
+			$wp_list_table->pagination( 'bottom' );
+			?>
         </div>
 
         <table class="wp-list-table widefat">
@@ -114,16 +118,22 @@ $text = isset( $text ) ? $text : '';
 					foreach ( $blog_states as $state ) {
 						++ $i;
 						( $i == $state_count ) ? $sep = '' : $sep = ', ';
-						$blog_state .= "<span class='post-state'>" . esc_html( $state . $sep ) . "</span>";
+						$blog_state                  .= "<span class='post-state'>" . esc_html( $state . $sep ) . '</span>';
 					}
 				}
 
 				?>
-                <tr class="<?php echo esc_attr( $class ); ?>">
-                    <td class='column-blogname blogname'>
-						<?php $blogname = ( is_subdomain_install() ) ? str_replace( '.' . $current_site->domain, '', $blog['domain'] ) : $blog['path']; ?>
-                        <a href="<?php echo esc_url( network_admin_url( 'site-info.php?id=' . $blog['blog_id'] ) ); ?>"
-                           class="edit"><?php echo esc_html( $blogname ) . $blog_state; ?></a>
+				<tr class="<?php echo esc_attr( $class ); ?>">
+					<td class='column-blogname blogname'>
+						<?php
+						$current_site = get_current_site();
+						$blog_name    = $blog['path'];
+						if ( ( is_subdomain_install() ) ) {
+							$blog_name = str_replace( '.' . $current_site->domain, '', $blog['domain'] );
+						}
+						?>
+						<a href="<?php echo esc_url( network_admin_url( 'site-info.php?id=' . $blog['blog_id'] ) ); ?>"
+						   class="edit"><?php echo esc_html( $blog_name ) . $blog_state; ?></a>
 						<?php
 						// Preordered.
 						$actions = array(
@@ -143,40 +153,49 @@ $text = isset( $text ) ? $text : '';
 						$actions['backend'] = "<span class='backend'><a href='" . esc_url( get_admin_url( $blog['blog_id'] ) ) . "' class='edit'>" . esc_html__( 'Dashboard', 'sitepress' ) . '</a></span>';
 						$actions['visit']   = "<span class='view'><a href='" . esc_url( get_home_url( $blog['blog_id'] ) ) . "' rel='permalink'>" . esc_html__( 'Visit', 'sitepress' ) . '</a></span>';
 
-						$actions = apply_filters( 'manage_sites_action_links', array_filter( $actions ), $blog['blog_id'], $blogname );
+						$actions = apply_filters( 'manage_sites_action_links', array_filter( $actions ), $blog['blog_id'], $blog_name );
 						echo $wp_list_table->row_actions( $actions );
 						?>
                     </td>
                     <td>
 						<?php switch_to_blog( $blog['blog_id'] ); ?>
-						<?php if ( get_option( '_wpml_inactive', false, false ) ) : ?>
+						<?php if ( get_option( '_wpml_inactive', false ) ) : ?>
 							<?php esc_html_e( 'Inactive', 'sitepress' ); ?>
                             <div class="row-actions">
-                                <a href="<?php echo esc_url( wp_nonce_url( network_admin_url( 'sites.php?action=activatewpml&amp;id=' . (int) $blog['blog_id'] ), 'activatewpml' ) ) ?>"><?php esc_html_e( 'Activate', 'sitepress' ) ?></a>
+                                <a href="<?php echo esc_url( wp_nonce_url( network_admin_url( 'sites.php?action=activatewpml&amp;id=' . (int) $blog['blog_id'] ), 'activatewpml' ) ); ?>"><?php esc_html_e( 'Activate', 'sitepress' ); ?></a>
                             </div>
 						<?php else : ?>
 							<?php esc_html_e( 'Active', 'sitepress' ); ?>
-                            <div class="row-actions">
-								<?php if ( $blog['blog_id'] != $current_blog->blog_id ) : ?>
-                                    <a href="<?php echo esc_url( wp_nonce_url( network_admin_url( 'sites.php?action=deactivatewpml&amp;id=' . (int) $blog['blog_id'] ), 'deactivatewpml' ) ) ?>"><?php esc_html_e( 'Deactivate', 'sitepress' ) ?></a>
-								<?php endif; ?>
-                            </div>
+							<div class="row-actions">
+								<?php
+								global $current_blog;
+								if ( $blog['blog_id'] != $current_blog->blog_id ) {
+									?>
+									<a href="<?php echo esc_url( wp_nonce_url( network_admin_url( 'sites.php?action=deactivatewpml&amp;id=' . (int) $blog['blog_id'] ), 'deactivatewpml' ) ); ?>"><?php esc_html_e( 'Deactivate', 'sitepress' ); ?></a>
+									<?php
+								}
+								?>
+							</div>
 						<?php endif; ?>
 						<?php restore_current_blog(); ?>
-                    </td>
-                    <td><a onclick="WPML_core.network.reset_wpml(this)" href="#"
-                           data-link="<?php echo esc_url( wp_nonce_url( network_admin_url( 'sites.php?action=resetwpml&amp;id=' . (int) $blog['blog_id'] ), 'resetwpml' ) ); ?>"
-                           data-msg="<?php echo
-						       sprintf( esc_html__( 'You are about to reset WPML for this site: %s.', 'sitepress' ), esc_html( $blogname ) ) .
-						       " " . esc_html__( "All translation data will be lost if you reset WPML's data. They cannot be recovered later.", 'sitepress' )
-					       ?>"><?php esc_html_e( 'Reset', 'sitepress' ) ?></a></td>
+					</td>
+					<td><a onclick="WPML_core.network.reset_wpml(this)" href="#"
+						   data-link="<?php echo esc_url( wp_nonce_url( network_admin_url( 'sites.php?action=resetwpml&amp;id=' . (int) $blog['blog_id'] ), 'resetwpml' ) ); ?>"
+						   data-msg="
+						   <?php
+						   echo sprintf( esc_html__( 'You are about to reset WPML for this site: %s.', 'sitepress' ), esc_html( $blog_name ) ) .
+						        ' ' . esc_html__( "All translation data will be lost if you reset WPML's data. They cannot be recovered later.", 'sitepress' )
+						   ?>
+						   "><?php esc_html_e( 'Reset', 'sitepress' ); ?></a></td>
                 </tr>
 			<?php endforeach; ?>
             </tbody>
         </table>
 
         <div class="tablenav bottom">
-			<?php $wp_list_table->pagination( 'bottom' ); ?>
+			<?php
+			$wp_list_table->pagination( 'bottom' );
+			?>
         </div>
 
 	<?php endif ?>
@@ -184,12 +203,12 @@ $text = isset( $text ) ? $text : '';
 </div>
 
 <script type="text/javascript">
-    var WPML_core = WPML_core || {};
-    WPML_core.network = {};
-    WPML_core.network.reset_wpml = function (link) {
-        link = jQuery(link);
-        if (confirm(link.data('msg'))) {
-            window.location = link.data('link');
-        }
-    }
+	var WPML_core = WPML_core || {};
+	WPML_core.network = {};
+	WPML_core.network.reset_wpml = function (link) {
+		link = jQuery(link);
+		if (confirm(link.data('msg'))) {
+			window.location = link.data('link');
+		}
+	}
 </script>

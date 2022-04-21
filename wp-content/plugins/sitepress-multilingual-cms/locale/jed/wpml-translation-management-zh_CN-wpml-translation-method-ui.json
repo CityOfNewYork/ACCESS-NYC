@@ -1,0 +1,85 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Translate Some": [
+            "翻译一些"
+         ],
+         "I want to choose which content to translate": [
+            "我想选择要翻译的内容"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "您挂起的自动翻译将被取消。"
+         ],
+         "Save": [
+            "保存"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "转到<a>翻译管理仪表板</a>，翻译您的内容。"
+         ],
+         "Review the translations before publishing": [
+            "在发布之前审阅翻译"
+         ],
+         "Publish translations and review them later": [
+            "发布翻译并在以后审阅"
+         ],
+         "Publish translations without reviewing": [
+            "不审阅就发布翻译"
+         ],
+         "When automatic translation completes:": [
+            "自动翻译完成后："
+         ],
+         "Translate Everything": [
+            "全部翻译"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "WPML将自动翻译您发布或更新的内容"
+         ],
+         "How do you want to translate this site?": [
+            "您想如何翻译这个网站？"
+         ],
+         "Yes, automatically translate all of my <s>existing posts and pages</s> right now, plus <s>new content</s> as I create it.": [
+            "是，立即自动翻译我所有的<s>现有文章和页面</s>，以及创建的<s>新内容</s>。"
+         ],
+         "Automatically translate all of my <s>existing content</s> right now, plus <s>new content</s> as I create it.": [
+            "立即自动翻译我所有的<s>现有内容</s>，以及创建的<s>新内容</s>。"
+         ],
+         "No, only automatically translate <s>new content</s>.": [
+            "否，仅自动翻译<s>新内容</s>。"
+         ],
+         "Only automatically translate <s>new content</s>.": [
+            "仅自动翻译<s>新内容</s>。"
+         ],
+         "Should WPML automatically translate your existing content?": [
+            "WPML要自动翻译您现有的内容吗？"
+         ],
+         "Which content do you want to translate automatically?": [
+            "您希望自动翻译哪些内容？"
+         ],
+         "Start translating automatically": [
+            "开始自动翻译"
+         ],
+         "Create an account to start translating": [
+            "创建一个帐户开始翻译"
+         ],
+         "WPML will use credits from your automatic translation account to translate your site immediately as you publish new content or update existing content.": [
+            "当您发布新内容或更新现有内容时，WPML将使用您的自动翻译帐户中的积分立即翻译您的网站。"
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "您可以从翻译管理仪表板翻译现有内容。"
+         ],
+         "Cancel": [
+            "取消"
+         ],
+         "You must use the <s>Advanced Translation Editor</s> if you want to translate your content automatically.": [
+            "如果要自动翻译内容，必须使用<s>高级翻译编辑器</s>。"
+         ],
+         "You currently use a translation service to translate your content. To translate your site automatically, first disconnect your translation service in your <a><s>Translation Management settings</s></a>.": [
+            "您当前使用翻译服务翻译您的内容。要自动翻译您的网站，请先断开<a><s>翻译管理设置</a></s>中的翻译服务。"
+         ]
+      }
+   }
+}

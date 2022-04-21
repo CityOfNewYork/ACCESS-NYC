@@ -2,7 +2,7 @@
 
 class WPML_ST_Tax_Slug_Translation_Settings extends WPML_ST_Slug_Translation_Settings {
 
-	const OPTION_NAME = "wpml_tax_slug_translation_settings";
+	const OPTION_NAME = 'wpml_tax_slug_translation_settings';
 
 	/** @var array $types */
 	private $types = array();

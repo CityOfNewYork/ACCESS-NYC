@@ -1,4 +1,7 @@
 <?php
+
+use WPML\FP\Lst;
+
 /**
  * Created by PhpStorm.
  * User: bruce
@@ -9,24 +12,38 @@
 class WPML_Translation_Modes {
 
 	public function is_translatable_mode( $mode ) {
-		$mode = (int) $mode;
-
-		return $mode === WPML_CONTENT_TYPE_TRANSLATE || $mode === WPML_CONTENT_TYPE_DISPLAY_AS_IF_TRANSLATED;
+		return Lst::includes(
+			(int) $mode,
+			[ WPML_CONTENT_TYPE_TRANSLATE, WPML_CONTENT_TYPE_DISPLAY_AS_IF_TRANSLATED ]
+		);
 	}
 
 	public function get_options_for_post_type( $post_type_label ) {
-		return array(
+		return [
 			WPML_CONTENT_TYPE_DONT_TRANSLATE           => sprintf( __( "Do not make '%s' translatable", 'sitepress' ), $post_type_label ),
 			WPML_CONTENT_TYPE_TRANSLATE                => sprintf( __( "Make '%s' translatable", 'sitepress' ), $post_type_label ),
 			WPML_CONTENT_TYPE_DISPLAY_AS_IF_TRANSLATED => sprintf( __( "Make '%s' appear as translated", 'sitepress' ), $post_type_label ),
-		);
+		];
 	}
 
 	public function get_options() {
-		return array(
-			WPML_CONTENT_TYPE_TRANSLATE                => __( 'Translatable - only show translated items', 'sitepress' ),
-			WPML_CONTENT_TYPE_DISPLAY_AS_IF_TRANSLATED => __( 'Translatable - use translation if available or fallback to default language', 'sitepress' ),
-			WPML_CONTENT_TYPE_DONT_TRANSLATE           => __( 'Not translatable', 'sitepress' ),
-		);
+		$formatHeading = function ( $a, $b ) {
+			return $a . "<br/><span class='explanation-text'>" . $b . '</span>';
+		};
+
+		return [
+			WPML_CONTENT_TYPE_TRANSLATE                => $formatHeading(
+				esc_html__( 'Translatable', 'sitepress' ),
+				esc_html__( 'only show translated items', 'sitepress' )
+			),
+			WPML_CONTENT_TYPE_DISPLAY_AS_IF_TRANSLATED => $formatHeading(
+				esc_html__( 'Translatable', 'sitepress' ),
+				esc_html__( 'use translation if available or fallback to default language', 'sitepress' )
+			),
+			WPML_CONTENT_TYPE_DONT_TRANSLATE           => $formatHeading(
+				esc_html__( 'Not translatable', 'sitepress' ),
+				'&nbsp;'
+			)
+		];
 	}
 }

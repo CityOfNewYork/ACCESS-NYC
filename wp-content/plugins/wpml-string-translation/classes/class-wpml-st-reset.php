@@ -12,7 +12,7 @@ class WPML_ST_Reset {
 	private $settings;
 
 	/**
-	 * @param wpdb $wpdb
+	 * @param wpdb             $wpdb
 	 * @param WPML_ST_Settings $settings
 	 */
 	public function __construct( $wpdb, WPML_ST_Settings $settings = null ) {
@@ -58,7 +58,7 @@ class WPML_ST_Reset {
 			? filter_var( $_POST['id'], FILTER_SANITIZE_NUMBER_INT ) : false;
 		$filtered_id = array_key_exists( 'id', $_GET ) && ! $filtered_id ?
 			filter_var( $_GET['id'], FILTER_SANITIZE_NUMBER_INT ) : $filtered_id;
-		$blog_id = false !== $filtered_id ? $filtered_id : $this->wpdb->blogid;
+		$blog_id     = false !== $filtered_id ? $filtered_id : $this->wpdb->blogid;
 
 		return $blog_id;
 	}

@@ -2,6 +2,7 @@
 
 /**
  * Class WPML_TF_Backend_Feedback_List_View
+ *
  * @author OnTheGoSystems
  */
 class WPML_TF_Backend_Feedback_List_View {
@@ -28,10 +29,10 @@ class WPML_TF_Backend_Feedback_List_View {
 	/**
 	 * WPML_TF_Backend_Feedback_List_View constructor.
 	 *
-	 * @param IWPML_Template_Service $template_service
-	 * @param WPML_TF_Feedback_Query $feedback_query
-	 * @param WPML_Admin_Pagination  $pagination
-	 * @param WPML_Admin_Table_Sort  $table_sort
+	 * @param IWPML_Template_Service       $template_service
+	 * @param WPML_TF_Feedback_Query       $feedback_query
+	 * @param WPML_Admin_Pagination        $pagination
+	 * @param WPML_Admin_Table_Sort        $table_sort
 	 * @param WPML_TF_Feedback_Page_Filter $page_filter
 	 */
 	public function __construct(
@@ -107,9 +108,9 @@ class WPML_TF_Backend_Feedback_List_View {
 			'page_subtitle' => __( 'Issues with translations', 'sitepress' ),
 			'table_header'  => WPML_TF_Backend_Feedback_Row_View::get_columns_strings(),
 			'screen_reader' => array(
-				'select_all'        => __( 'Select All', 'sitepress' ),
+				'select_all' => __( 'Select All', 'sitepress' ),
 			),
-			'pagination' => array(
+			'pagination'    => array(
 				'list_navigation' => __( 'Feedback list navigation', 'sitepress' ),
 				'first_page'      => __( 'First page', 'sitepress' ),
 				'previous_page'   => __( 'Previous page', 'sitepress' ),
@@ -118,7 +119,7 @@ class WPML_TF_Backend_Feedback_List_View {
 				'current_page'    => __( 'Current page', 'sitepress' ),
 				'of'              => __( 'of', 'sitepress' ),
 			),
-			'bulk_actions' => array(
+			'bulk_actions'  => array(
 				'select'       => __( 'Select bulk action', 'sitepress' ),
 				'apply_button' => __( 'Apply', 'sitepress' ),
 				'options'      => array(
@@ -129,9 +130,9 @@ class WPML_TF_Backend_Feedback_List_View {
 
 				),
 			),
-			'row_summary' => WPML_TF_Backend_Feedback_Row_View::get_summary_strings(),
-			'row_details' => WPML_TF_Backend_Feedback_Row_View::get_details_strings(),
-			'no_feedback' => __( 'No feedback found.', 'sitepress' ),
+			'row_summary'   => WPML_TF_Backend_Feedback_Row_View::get_summary_strings(),
+			'row_details'   => WPML_TF_Backend_Feedback_Row_View::get_details_strings(),
+			'no_feedback'   => __( 'No feedback found.', 'sitepress' ),
 		);
 
 		if ( $this->feedback_query->is_in_trash() ) {
@@ -151,15 +152,15 @@ class WPML_TF_Backend_Feedback_List_View {
 		$this->table_sort->set_primary_column( 'feedback' );
 
 		return array(
-			'feedback' => array(
+			'feedback'     => array(
 				'url'     => $this->table_sort->get_column_url( 'feedback' ),
 				'classes' => $this->table_sort->get_column_classes( 'feedback' ),
 			),
-			'rating' => array(
+			'rating'       => array(
 				'url'     => $this->table_sort->get_column_url( 'rating' ),
 				'classes' => $this->table_sort->get_column_classes( 'rating' ),
 			),
-			'status' => array(
+			'status'       => array(
 				'url'     => $this->table_sort->get_column_url( 'status' ),
 				'classes' => $this->table_sort->get_column_classes( 'status' ),
 			),
@@ -167,7 +168,7 @@ class WPML_TF_Backend_Feedback_List_View {
 				'url'     => $this->table_sort->get_column_url( 'document_title' ),
 				'classes' => $this->table_sort->get_column_classes( 'document_title' ),
 			),
-			'date' => array(
+			'date'         => array(
 				'url'     => $this->table_sort->get_column_url( 'date' ),
 				'classes' => $this->table_sort->get_column_classes( 'date' ),
 			),

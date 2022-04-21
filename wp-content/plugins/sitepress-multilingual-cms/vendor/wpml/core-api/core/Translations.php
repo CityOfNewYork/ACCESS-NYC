@@ -5,6 +5,8 @@ namespace WPML\Element\API;
 use WPML\Collect\Support\Traits\Macroable;
 use WPML\FP\Fns;
 use WPML\FP\Maybe;
+use WPML\FP\Obj;
+use WPML\FP\Relation;
 use function WPML\FP\curryN;
 
 /**
@@ -28,7 +30,11 @@ use function WPML\FP\curryN;
  * @method static callable|int setAsSource( ...$el_id, ...$el_type, ...$language_code )
  * @method static callable|int setAsTranslationOf( ...$el_id, ...$el_type, ...$translated_id, ...$language_code )
  * @method static callable|array get( ...$el_id, ...$el_type )
+ * @method static callable|array|null getInLanguage( ...$el_id, ...$el_type, ...$language_code )
+ * @method static callable|array|null getInCurrentLanguage( ...$el_id, ...$el_type )
  * @method static callable|array getIfOriginal( ...$el_id, ...$el_type )
+ * @method static callable|array getOriginal( ...$element_id, ...$element_type )
+ * @method static callable|array getOriginalId( ...$element_id, ...$element_type )
  * @method static callable|bool isOriginal( ...$el_id, ...$translations )
  */
 class Translations {
@@ -36,31 +42,60 @@ class Translations {
 	use Macroable;
 
 	/**
-	 * @ignore
+	 * @return void
 	 */
 	public static function init() {
-		global $sitepress;
-
-		self::macro( 'setLanguage', curryN( 6, [ $sitepress, 'set_element_language_details' ] ) );
+		self::macro( 'setLanguage', curryN( 6, function (
+			$el_id,
+			$el_type,
+			$trid,
+			$language_code,
+			$src_language_code,
+			$check_duplicate
+		) {
+			global $sitepress;
+			$sitepress->set_element_language_details( $el_id, $el_type, $trid, $language_code, $src_language_code, $check_duplicate );
+		} ) );
 
 		self::macro( 'setAsSource', self::setLanguage( Fns::__, Fns::__, null, Fns::__, null, true ) );
 
 		self::macro( 'setAsTranslationOf', curryN( 4,
-			function ( $el_id, $el_type, $translated_id, $language_code ) use ( $sitepress ) {
+			function ( $el_id, $el_type, $translated_id, $language_code ) {
+				global $sitepress;
 				$trid = $sitepress->get_element_trid( $el_id, $el_type );
 				self::setLanguage( $translated_id, $el_type, $trid, $language_code, null, true );
 			} ) );
 
-		self::macro( 'get', curryN( 2, function ( $el_id, $el_type ) use ( $sitepress ) {
+		self::macro( 'get', curryN( 2, function ( $el_id, $el_type ) {
+			global $sitepress;
 			$trid = $sitepress->get_element_trid( $el_id, $el_type );
 
-			return $sitepress->get_element_translations( $trid, $el_type );
+			return $sitepress->get_element_translations( $trid, $el_type, false, false, false, false, true );
+		} ) );
+
+		self::macro( 'getInLanguage', curryN( 3, function( $el_id, $el_type, $language_code ) {
+			return wpml_collect( self::get( $el_id, $el_type ) )
+				->filter( Relation::propEq( 'language_code', $language_code ) )
+				->first();
+		} ) );
+
+		self::macro( 'getInCurrentLanguage', curryN( 2, function( $el_id, $el_type ) {
+			return self::getInLanguage( $el_id, $el_type, Languages::getCurrentCode() );
 		} ) );
 
 		self::macro( 'getIfOriginal', curryN( 2, function ( $el_id, $el_type ) {
 			return Maybe::of( self::get( $el_id, $el_type ) )
 			            ->filter( self::isOriginal( $el_id ) )
 			            ->getOrElse( [] );
+		} ) );
+
+		self::macro( 'getOriginal', curryN( 2, function( $element_id, $element_type ) {
+			return wpml_collect( self::get( $element_id, $element_type ) )
+				->first( Obj::prop( 'original' ) );
+		} ) );
+
+		self::macro( 'getOriginalId', curryN( 2, function( $element_id, $element_type ) {
+			return (int) Obj::prop( 'element_id',  self::getOriginal( $element_id, $element_type ) );
 		} ) );
 
 		self::macro( 'isOriginal', curryN( 2, function ( $id, $translations ) {
@@ -70,7 +105,6 @@ class Translations {
 
 			return Fns::reduce( $isElementOriginal( $id ), false, $translations );
 		} ) );
-
 	}
 }
 

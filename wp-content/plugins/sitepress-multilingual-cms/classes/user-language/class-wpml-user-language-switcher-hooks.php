@@ -18,8 +18,8 @@ class WPML_User_Language_Switcher_Hooks {
 	private $user_language_switcher;
 
 	/**
-	 * @var WPML_User_Language_Switcher
-	 * @var WPML_User_Language_Switcher_UI
+	 * @param WPML_User_Language_Switcher $WPML_User_Language_Switcher
+	 * @param WPML_User_Language_Switcher_UI $WPML_User_Language_Switcher_UI
 	 */
 	public function __construct( &$WPML_User_Language_Switcher, &$WPML_User_Language_Switcher_UI ) {
 

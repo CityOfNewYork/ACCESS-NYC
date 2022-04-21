@@ -27,7 +27,7 @@ class OTGS_Installer_Fetch_Subscription {
 	 * @param string $site_key
 	 * @param string $source
 	 *
-	 * @return bool|stdClass
+	 * @return array
 	 * @throws OTGS_Installer_Fetch_Subscription_Exception
 	 */
 	public function get( $repository_id, $site_key, $source ) {
@@ -36,6 +36,7 @@ class OTGS_Installer_Fetch_Subscription {
 		}
 
 		$subscription_data = false;
+		$site_key_data = false;
 
 		$args['body'] = array(
 			'action'   => 'site_key_validation',
@@ -117,6 +118,10 @@ class OTGS_Installer_Fetch_Subscription {
 					$this->store_log( $args, $api_url, isset( $data->error ) ? $data->error : '' );
 				}
 
+				if ( isset( $data->site_key ) && $data->site_key ) {
+					$site_key_data = $data->site_key;
+				}
+
 				do_action( 'installer_fetched_subscription_data', $data, $repository_id );
 			} else {
 				if ( is_wp_error( $response ) ) {
@@ -134,7 +139,7 @@ class OTGS_Installer_Fetch_Subscription {
 			throw new OTGS_Installer_Fetch_Subscription_Exception( $response->get_error_message() );
 		}
 
-		return $subscription_data;
+		return [$subscription_data, $site_key_data];
 	}
 
 	private function store_log( $args, $request_url, $response ) {
@@ -197,6 +202,8 @@ class OTGS_Installer_Fetch_Subscription {
 
 		}
 
-		return $site_url;
+		$filtered_site_url = filter_var( apply_filters( 'otgs_installer_site_url', $site_url ), FILTER_SANITIZE_URL );
+
+		return $filtered_site_url ? $filtered_site_url : $site_url;
 	}
 }

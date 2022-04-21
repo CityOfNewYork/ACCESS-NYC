@@ -1,5 +1,11 @@
 <?php
 
+use WPML\FP\Str;
+use WPML\FP\Lst;
+use WPML\FP\Fns;
+use WPML\FP\Wrapper;
+use function WPML\FP\pipe;
+
 class WPML_Absolute_Links_Blacklist {
 
 	private $blacklist_requests;
@@ -12,12 +18,17 @@ class WPML_Absolute_Links_Blacklist {
 	}
 
 	public function is_blacklisted( $request ) {
-		$blacklisted = in_array( $request, $this->blacklist_requests, true );
-		if ( $blacklisted ) {
-			return true;
-		}
+		$isBlacklisted = function ( $request ) {
+			return Lst::includes( $request, $this->blacklist_requests )
+				   || $this->is_blacklisted_with_regex( $request );
+		};
 
-		return $this->is_blacklisted_with_regex( $request );
+		return Wrapper::of( $request )
+			->map( Str::split( '/' ) )
+			->map( Fns::map( Fns::unary( pipe( 'urlencode', 'strtolower' ) ) ) )
+			->map( Lst::join( '/' ) )
+			->map( $isBlacklisted )
+			->get();
 	}
 
 	private function is_blacklisted_with_regex( $request ) {

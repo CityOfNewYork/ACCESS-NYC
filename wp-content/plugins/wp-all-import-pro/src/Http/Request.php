@@ -24,7 +24,7 @@ class Request
             $jsonDecodedContent = json_decode($this->content, true);
 
             if (is_null($jsonDecodedContent)) {
-                throw new \Exception('Invalid JON Provided');
+                throw new \Exception('Invalid JSON Provided');
             }
 
             return $jsonDecodedContent;
