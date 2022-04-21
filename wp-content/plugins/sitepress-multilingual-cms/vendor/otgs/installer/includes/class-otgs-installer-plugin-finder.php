@@ -73,6 +73,23 @@ class OTGS_Installer_Plugin_Finder {
 		return $installed_plugins;
 	}
 
+	public function get_otgs_installed_plugins_by_repository() {
+		$installed_plugins = [];
+
+		/** @var OTGS_Installer_Plugin $plugin */
+		foreach ( $this->plugins as $plugin ) {
+			if ( $plugin->get_installed_version() ) {
+				$installed_plugins[ $plugin->get_repo() ][] = [
+					'id' => $plugin->get_id(),
+					'slug' => $plugin->get_slug(),
+					'name' => $plugin->get_name(),
+				];
+			}
+		}
+
+		return $installed_plugins;
+	}
+
 	/**
 	 * @param string $slug
 	 * @param string $repo

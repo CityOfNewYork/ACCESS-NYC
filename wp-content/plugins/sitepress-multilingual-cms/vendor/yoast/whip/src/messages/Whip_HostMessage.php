@@ -1,24 +1,28 @@
 <?php
+/**
+ * WHIP libary file.
+ *
+ * @package Yoast\WHIP
+ */
 
 /**
- * Class Whip_HostMessage
+ * Class Whip_HostMessage.
  */
 class Whip_HostMessage implements Whip_Message {
 
 	/**
+	 * Text domain to use for translations.
+	 *
 	 * @var string
 	 */
 	private $textdomain;
 
 	/**
+	 * The environment key to use to retrieve the message from.
+	 *
 	 * @var string
 	 */
 	private $messageKey;
-
-	/**
-	 * @var string
-	 */
-	private $filterKey;
 
 	/**
 	 * Whip_Message constructor.
@@ -32,7 +36,7 @@ class Whip_HostMessage implements Whip_Message {
 	}
 
 	/**
-	 * Renders the message body.
+	 * Retrieves the message body.
 	 *
 	 * @return string The message body.
 	 */
@@ -40,9 +44,9 @@ class Whip_HostMessage implements Whip_Message {
 		$message = array();
 
 		$message[] = Whip_MessageFormatter::strong( $this->title() ) . '<br />';
-		$message[] = Whip_MessageFormatter::paragraph( Whip_Host::message( $this->messageKey, $this->filterKey ) );
+		$message[] = Whip_MessageFormatter::paragraph( Whip_Host::message( $this->messageKey ) );
 
-		return implode( $message, "\n" );
+		return implode( "\n", $message );
 	}
 
 	/**
@@ -51,6 +55,7 @@ class Whip_HostMessage implements Whip_Message {
 	 * @return string The message title.
 	 */
 	public function title() {
+		/* translators: 1: name. */
 		return sprintf( __( 'A message from %1$s', $this->textdomain ), Whip_Host::name() );
 	}
 }

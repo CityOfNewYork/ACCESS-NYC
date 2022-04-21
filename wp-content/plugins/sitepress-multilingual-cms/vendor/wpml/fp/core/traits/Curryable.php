@@ -3,14 +3,14 @@
 
 namespace WPML\FP;
 
-use Closure;
 use BadMethodCallException;
+use Closure;
 
 trait Curryable {
 	/**
 	 * The registered string curried methods.
 	 *
-	 * @var array
+	 * @var string[]
 	 */
 	protected static $curried = [];
 
@@ -18,6 +18,7 @@ trait Curryable {
 	 * Register a custom curried function.
 	 *
 	 * @param string   $name
+	 * @param int      $argCount
 	 * @param callable $fn
 	 *
 	 * @return void
@@ -40,8 +41,8 @@ trait Curryable {
 	/**
 	 * Dynamically handle calls to the class.
 	 *
-	 * @param string $method
-	 * @param array  $parameters
+	 * @param string  $method
+	 * @param mixed[] $parameters
 	 *
 	 * @return mixed
 	 *
@@ -62,14 +63,15 @@ trait Curryable {
 	/**
 	 * Dynamically handle calls to the class.
 	 *
-	 * @param string $method
-	 * @param array  $parameters
+	 * @param string  $method
+	 * @param mixed[] $parameters
 	 *
 	 * @return mixed
 	 *
 	 * @throws \BadMethodCallException
 	 */
 	public function __call( $method, $parameters ) {
+		throw new BadMethodCallException( "Curryable does not support methods in object scope. This is a limitation of PHP 5.x." );
 		if ( ! static::hasCurry( $method ) ) {
 			throw new BadMethodCallException( "Method {$method} does not exist." );
 		}
@@ -81,11 +83,23 @@ trait Curryable {
 		return call_user_func_array( static::$curried[ $method ][1], $parameters );
 	}
 
-	private function curryItCall( $count, callable $fn ) {
+	/**
+	 * @param int     $count
+	 * @param \Closure $fn
+	 *
+	 * @return \Closure
+	 */
+	private function curryItCall( $count, Closure $fn ) {
 		return curryN( $count, $fn->bindTo( $this, static::class ) );
 	}
 
-	private static function curryItStaticCall( $count, callable $fn ) {
+	/**
+	 * @param int     $count
+	 * @param \Closure $fn
+	 *
+	 * @return \Closure
+	 */
+	private static function curryItStaticCall( $count, Closure $fn ) {
 		return curryN( $count, Closure::bind( $fn, null, static::class ) );
 	}
 

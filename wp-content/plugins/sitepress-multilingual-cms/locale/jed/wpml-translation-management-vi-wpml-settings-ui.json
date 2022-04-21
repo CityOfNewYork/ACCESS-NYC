@@ -1,0 +1,19 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
+            "Bạn phải sử dụng Trình biên tập Dịch thuật Nâng cao nếu bạn muốn dịch tự động nội dung của mình."
+         ],
+         "Synchronize translators and translation managers with ATE": [
+            "Đồng bộ những người dịch và quản lý dịch thuật bằng ATE"
+         ],
+         "Please try again in a few minutes. If the problem persists, please contact %sWPML support%s.": [
+            "Vui lòng thử lại sau vài phút. Nếu sự cố vẫn còn tiếp diễn, vui lòng liên hệ %sbộ phận hỗ trợ của WPML%s."
+         ]
+      }
+   }
+}

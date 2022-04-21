@@ -101,6 +101,7 @@ class WPML_Query_Filter extends  WPML_Full_Translation_API {
 
 		$post_type = $this->determine_post_type( 'posts_join' );
 		$post_type = $post_type ? $post_type : ( $query->is_tax() ? $this->get_tax_query_posttype( $query ) : 'post' );
+		$post_type = $query->is_posts_page ? 'post' : $post_type;
 		if ( is_array( $post_type ) && $this->has_translated_type( $post_type ) === true ) {
 			$join .= $this->any_post_type_join();
 		} elseif ( $post_type ) {
@@ -241,8 +242,17 @@ class WPML_Query_Filter extends  WPML_Full_Translation_API {
 				$query_vars = $o['args'][1][1]->query_vars;
 				$post_type  = esc_sql( $query_vars['post_type'] );
 
-				if ( ! $post_type && (bool) $query_vars['pagename'] ) {
-					$post_type = 'page';
+				if ( ! $post_type ) {
+					if ( (bool) $query_vars['pagename'] ) {
+						$post_type = 'page';
+					} elseif ( isset( $query_vars['p'] ) ) {
+						$post_type = $this->wpdb->get_var(
+							$this->wpdb->prepare(
+								"SELECT post_type from {$this->wpdb->posts} where ID=%d",
+								$query_vars['p']
+							)
+						);
+					}
 				}
 
 				break;
@@ -363,6 +373,7 @@ class WPML_Query_Filter extends  WPML_Full_Translation_API {
 			$post_type = $this->determine_post_type( 'posts_where' );
 			$post_type = empty( $post_type ) && $query->is_tax() ? $this->get_tax_query_posttype( $query )
 				: $post_type;
+			$post_type = $query->is_posts_page ? 'post' : $post_type;
 			$post_type = $post_type ? $post_type : ( $query->is_attachment() ? 'attachment' : 'post' );
 			$active    = $pagenow !== 'media-upload.php'
 			             && $post_type && ( $post_type === 'any' || $this->posttypes_not_translated( $post_type ) === false )
@@ -372,28 +383,42 @@ class WPML_Query_Filter extends  WPML_Full_Translation_API {
 		return $active;
 	}
 
-	private function is_media_and_cant_be_translated($post_type) {
+	private function is_media_and_cant_be_translated( $post_type ) {
 		$is_attachment_and_cant_be_translated = ( $post_type === 'attachment' && ! $this->sitepress->is_translated_post_type( 'attachment' ) );
 
 		return $is_attachment_and_cant_be_translated;
 	}
 
 	/**
+	 * @param \WP_Comment_Query $comment_query
+	 *
+	 * @return int|null
+	 */
+	private function get_post_id_from_comment_query( WP_Comment_Query $comment_query ) {
+		if ( isset( $comment_query->query_vars['post_id'] ) ) {
+			return $comment_query->query_vars['post_id'];
+		} elseif ( isset( $comment_query->query_vars['post_ID'] ) ) {
+			return $comment_query->query_vars['post_ID'];
+		}
+
+		return null;
+	}
+
+	/**
 	 * Checks if the comment query applies to posts that are of a translated type.
 	 *
 	 * @param WP_Comment_Query $comment_query
+	 *
 	 * @return bool
 	 */
 	private function is_comment_query_filtered( $comment_query ) {
 		$filtered = true;
-		if ( isset( $comment_query->query_vars[ 'post_id' ] ) ) {
-			$post_id = $comment_query->query_vars[ 'post_id' ];
-		} elseif ( isset( $comment_query->query_vars[ 'post_ID' ] ) ) {
-			$post_id = $comment_query->query_vars[ 'post_ID' ];
-		}
-		if ( !empty( $post_id ) ) {
-			$post = get_post ( $post_id );
-			if ( (bool) $post === true && !$this->sitepress->is_translated_post_type ( $post->post_type ) ) {
+
+		$post_id  = $this->get_post_id_from_comment_query( $comment_query );
+
+		if ( $post_id ) {
+			$post = get_post( $post_id );
+			if ( (bool) $post === true && ! $this->sitepress->is_translated_post_type( $post->post_type ) ) {
 				$filtered = false;
 			}
 		}
@@ -429,7 +454,7 @@ class WPML_Query_Filter extends  WPML_Full_Translation_API {
 	}
 
 	/**
-	 * @param $requested_id
+	 * @param int $requested_id
 	 *
 	 * @return bool|mixed|null|string
 	 */

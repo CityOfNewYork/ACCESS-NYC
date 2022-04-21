@@ -31,7 +31,8 @@ class FactoryLoader implements \IWPML_REST_Action_Loader, \IWPML_Deferred_Action
 		/** @var Manager $manager */
 		$manager = ManagerFactory::create();
 
-		return make( MO\PreGenerate::class,
+		return make(
+			MO\PreGenerate::class,
 			[ ':manager' => $manager ]
 		);
 	}

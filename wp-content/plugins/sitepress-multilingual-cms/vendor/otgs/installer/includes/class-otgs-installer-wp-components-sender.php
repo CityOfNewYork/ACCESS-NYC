@@ -39,6 +39,7 @@ class OTGS_Installer_WP_Components_Sender {
 							'site_url'   => get_site_url(),
 							'components' => $components,
 							'phpversion' => phpversion(),
+							'wp_version' => get_bloginfo( 'version' ),
 							'force'      => $force,
 						),
 					) )

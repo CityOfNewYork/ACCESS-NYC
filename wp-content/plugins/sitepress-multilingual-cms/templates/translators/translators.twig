@@ -1,0 +1,22 @@
+<div class="js-translators wpml-section" data-nonce="{{ nonce }}">
+    <h2>{{ strings.title }}</h2>
+
+    <div class="js-translators-list">
+        {% include 'only-i-translator.twig' %}
+        <div class="tablenav top clearfix text-center">
+            <button
+                    class="button-secondary alignright js-add-translator"
+                    {% if not can_add_translators %} disabled {% endif %}
+            > + {{ strings.add_translator }}</button>
+        </div>
+        {% if can_add_translators %}
+            {% include 'translators-table.twig' %}
+        {% else %}
+            <div class="notice notice-warning inline">
+                <p>{{ strings.no_capability }}</p>
+            </div>
+        {% endif %}
+    </div>
+    {% include 'add-new-translator-dialog.twig' with { 'dialog': add_translator_dialog } %}
+    {% include 'edit-translator-languages-dialog.twig' with { 'dialog': edit_translator_languages_dialog } %}
+</div>

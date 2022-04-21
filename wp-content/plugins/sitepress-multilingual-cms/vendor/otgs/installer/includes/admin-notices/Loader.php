@@ -71,6 +71,11 @@ class Loader {
 		}
 	}
 
+	public static function isDismissed( $repository_id, $notice_id ) {
+		$remainigNotices = static::refreshDismissed();
+		return Dismissed::isDismissed( $remainigNotices, $repository_id, $notice_id );
+	}
+
 	/**
 	 * @return array
 	 */

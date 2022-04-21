@@ -11,7 +11,7 @@ use WPML\ST\Troubleshooting\Cleanup\Database;
 class AjaxFactory implements \IWPML_AJAX_Action_Loader {
 
 	const ACTION_SHOW_GENERATE_DIALOG = 'wpml_st_mo_generate_show_dialog';
-	const ACTION_CLEANUP = 'wpml_st_troubleshooting_cleanup';
+	const ACTION_CLEANUP              = 'wpml_st_troubleshooting_cleanup';
 
 	public function create() {
 		return self::getActions()->map( self::buildHandler() )->toArray();
@@ -39,13 +39,16 @@ class AjaxFactory implements \IWPML_AJAX_Action_Loader {
 	}
 
 	/**
-	 * @throws \Auryn\InjectionException
+	 * @throws \WPML\Auryn\InjectionException
 	 */
 	public static function showGenerateDialog() {
 		if ( is_super_admin() && is_multisite() ) {
-			( new Executor() )->executeWith( Executor::MAIN_SITE_ID, function () {
-				make( Status::class )->markIncompleteForAll();
-			} );
+			( new Executor() )->executeWith(
+				Executor::MAIN_SITE_ID,
+				function () {
+					make( Status::class )->markIncompleteForAll();
+				}
+			);
 		} else {
 			make( Status::class )->markIncomplete();
 		}
@@ -54,7 +57,7 @@ class AjaxFactory implements \IWPML_AJAX_Action_Loader {
 	}
 
 	/**
-	 * @throws \Auryn\InjectionException
+	 * @throws \WPML\Auryn\InjectionException
 	 */
 	public static function cleanup() {
 		/** @var Database $database */

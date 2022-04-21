@@ -10,6 +10,16 @@ if (!empty($item->options['custom_type'])){
 			$custom_type->label = empty($tx->labels->name) ? __('Taxonomy Terms', 'wp_all_import_plugin') : $tx->labels->name;
 			$custom_type->singular_label = empty($tx->labels->singular_name) ? __('Taxonomy Term', 'wp_all_import_plugin') : $tx->labels->singular_name;
 			break;
+        case 'comments':
+            $custom_type = new stdClass();
+            $custom_type->label = __('Comments', 'wp_all_import_plugin');
+            $custom_type->singular_label = __('Comment', 'wp_all_import_plugin');
+            break;
+        case 'woo_reviews':
+            $custom_type = new stdClass();
+            $custom_type->label = __('WooCommerce Reviews', 'wp_all_import_plugin');
+            $custom_type->singular_label = __('Review', 'wp_all_import_plugin');
+            break;
 		default:
 			$custom_type = get_post_type_object( $item->options['custom_type'] );
 			if ( ! empty($custom_type) ) {
@@ -70,7 +80,7 @@ else{
 		<input type="hidden" name="is_confirmed" value="1" />
 		<input type="hidden" name="import_ids[]" value="<?php echo esc_attr($item->id); ?>" />
 		<input type="hidden" name="base_url" value="<?php echo $this->baseUrl; ?>">
-		<input type="submit" class="button-primary delete-single-import <?php echo ("ajax" == $item->options['import_processing']) ? 'wp_all_import_ajax_deletion' : '';?>" value="Delete" />
+		<input type="submit" class="button-primary delete-single-import wp_all_import_ajax_deletion" value="Delete" />
 		<div class="wp_all_import_functions_preloader"></div>
 	</div>
 	<div class="wp_all_import_deletion_log"></div>

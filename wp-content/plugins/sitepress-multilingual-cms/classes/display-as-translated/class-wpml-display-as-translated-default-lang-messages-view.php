@@ -31,9 +31,10 @@ class WPML_Display_As_Translated_Default_Lang_Messages_View {
 		return array(
 			'before_message'   => __( "Changing the site's default language can cause some content to disappear.", 'sitepress' ),
 			'after_message'    => sprintf(
-				__( "If some content appears gone, it might be because you switched the site's default language from %s to %s.", 'sitepress' ),
+				__( "If some content appears gone, it might be because you switched the site's default language from %1\$s to %2\$s.", 'sitepress' ),
 				$prev_default_lang,
-				$default_lang ),
+				$default_lang
+			),
 			'help_text'        => __( 'Tell me more', 'sitepress' ),
 			'help_link'        => 'https://wpml.org/?page_id=1451509',
 			'got_it'           => __( 'Got it', 'sitepress' ),

@@ -16,7 +16,7 @@ class WPML_Package_TM_Jobs {
 		return $trid != false;
 	}
 
-	final protected function get_trid($create_if_missing = true) {
+	final protected function get_trid( $create_if_missing = true ) {
 		global $sitepress;
 		$package   = $this->package;
 		$post_trid = $sitepress->get_element_trid( $package->ID, $package->get_translation_element_type() );
@@ -30,10 +30,10 @@ class WPML_Package_TM_Jobs {
 
 	final public function set_language_details( $language_code = null ) {
 		global $sitepress;
-		$package = $this->package;
-		$post_id = $package->ID;
-		$post    = $this->get_translatable_item( $post_id );
-		$post_id = $post->ID;
+		$package      = $this->package;
+		$post_id      = $package->ID;
+		$post         = $this->get_translatable_item( $post_id );
+		$post_id      = $post->ID;
 		$element_type = $package->get_translation_element_type();
 		if ( ! $language_code ) {
 			$language_code = icl_get_default_language();
@@ -42,7 +42,7 @@ class WPML_Package_TM_Jobs {
 	}
 
 	final public function get_translatable_item( $package ) {
-		//for TranslationManagement::send_jobs
+		// for TranslationManagement::send_jobs
 		if ( ! is_a( $package, 'WPML_Package' ) ) {
 			$package = new WPML_Package( $package );
 		}
@@ -52,8 +52,6 @@ class WPML_Package_TM_Jobs {
 
 	final public function delete_translation_jobs() {
 		global $wpdb;
-
-		$deleted = false;
 
 		$post_translations = $this->get_post_translations();
 		foreach ( $post_translations as $lang => $translation ) {
@@ -66,30 +64,20 @@ class WPML_Package_TM_Jobs {
 				$job_id         = $wpdb->get_var( $job_id_prepare );
 
 				if ( $job_id ) {
-					$wpdb->delete($wpdb->prefix . 'icl_translate_job', array('job_id' => $job_id) );
-					$wpdb->delete($wpdb->prefix . 'icl_translate', array('job_id' => $job_id) );
-					$deleted = true;
+					$wpdb->delete( $wpdb->prefix . 'icl_translate_job', array( 'job_id' => $job_id ) );
+					$wpdb->delete( $wpdb->prefix . 'icl_translate', array( 'job_id' => $job_id ) );
 				}
 			}
-			
-			$wpdb->delete($wpdb->prefix . 'icl_translations', array('translation_id' => $translation->translation_id));
 		}
-
-		return $deleted;
 	}
 
 	final public function delete_translations() {
 		global $sitepress;
-		$package = $this->package;
 
-		$translation_element_type = $package->get_translation_element_type();
-		$trid                     = $this->get_trid();
-
-		$deleted = false;
-		if($trid) {
-			$deleted = $sitepress->delete_element_translation($trid, $translation_element_type);
-		}
-		return $deleted;
+		$sitepress->delete_element_translation(
+			$this->get_trid(),
+			$this->package->get_translation_element_type()
+		);
 	}
 
 	final public function get_post_translations() {
@@ -122,7 +110,7 @@ class WPML_Package_TM_Jobs {
 		$job_id             = $this->get_translation_job_id( $rid );
 		$translation_fields = $this->get_translations_job_fields( $job_id );
 		foreach ( $translation_fields as $field_type => $el ) {
-			//delete fields that are no longer present
+			// delete fields that are no longer present
 			if ( $el->field_translate && ! isset( $post->string_data[ $field_type ] ) ) {
 				$this->delete_translation_field( $el->tid );
 				if ( ! $deleted ) {
@@ -146,7 +134,7 @@ class WPML_Package_TM_Jobs {
 		$job_id             = $this->get_translation_job_id( $rid );
 		$translation_fields = $this->get_translations_job_fields( $job_id );
 
-		if ( isset($post->string_data) && is_array($post->string_data) ) {
+		if ( isset( $post->string_data ) && is_array( $post->string_data ) ) {
 			foreach ( $post->string_data as $field_type => $field_value ) {
 				$updated = $this->insert_update_translation_job_field( $field_value, $translation_fields, $field_type, $job_id );
 				if ( ! $updated_any && $updated ) {
@@ -199,7 +187,14 @@ class WPML_Package_TM_Jobs {
 
 	private function update_translation_field( $field_data, $translation_fields, $field_type ) {
 		global $wpdb;
-		$wpdb->update( $wpdb->prefix . 'icl_translate', array( 'field_data' => $field_data, 'field_finished' => 0 ), array( 'tid' => $translation_fields[ $field_type ]->tid ) );
+		$wpdb->update(
+			$wpdb->prefix . 'icl_translate',
+			array(
+				'field_data'     => $field_data,
+				'field_finished' => 0,
+			),
+			array( 'tid' => $translation_fields[ $field_type ]->tid )
+		);
 	}
 
 	private function insert_translation_field( $job_id, $field_type, $field_data ) {
@@ -212,7 +207,7 @@ class WPML_Package_TM_Jobs {
 			'field_translate'       => 1,
 			'field_data'            => $field_data,
 			'field_data_translated' => 0,
-			'field_finished'        => 0
+			'field_finished'        => 0,
 		);
 
 		$wpdb->insert( $wpdb->prefix . 'icl_translate', $data );

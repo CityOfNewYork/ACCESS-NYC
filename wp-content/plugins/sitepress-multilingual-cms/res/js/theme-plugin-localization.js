@@ -2,18 +2,18 @@
 
 jQuery(function($){
 
-	'use strict';
+    'use strict';
 
-	$(document).ready(function () {
-		var ajax_success_action = function( response, response_text ) {
+    $(function () {
+        var ajax_success_action = function (response, response_text) {
 
-			if( response.success ) {
-				response_text.text( icl_ajx_saved );
-			} else {
-				response_text.text( icl_ajx_error );
-			}
+            if (response.success) {
+                response_text.text(icl_ajx_saved);
+            } else {
+                response_text.text(icl_ajx_error);
+            }
 
-			response_text.show();
+            response_text.show();
 
 			setTimeout(function () {
 				response_text.fadeOut('slow');
@@ -37,9 +37,9 @@ jQuery(function($){
 				data: {
 					action: 'wpml_update_localization_options',
 					nonce: $( '#wpml-localization-options-nonce' ).val(),
-					wpml_st_display_strings_scan_notices: 'checked' === alert_scan_new_strings.attr( 'checked' ) ? alert_scan_new_strings.val() : 0,
-					use_theme_plugin_domain: 'checked' === use_theme_plugin_domain.attr( 'checked' ) ? use_theme_plugin_domain.val() : 0,
-					theme_localization_load_textdomain: 'checked' === theme_localization_load_textdomain.attr( 'checked' ) ? theme_localization_load_textdomain.val() : 0,
+					wpml_st_display_strings_scan_notices: alert_scan_new_strings.is(':checked') ? alert_scan_new_strings.val() : 0,
+					use_theme_plugin_domain: use_theme_plugin_domain.is(':checked') ? use_theme_plugin_domain.val() : 0,
+					theme_localization_load_textdomain: theme_localization_load_textdomain.is(':checked') ? theme_localization_load_textdomain.val() : 0,
 					gettext_theme_domain_name: gettext_theme_domain_name.val()
 
 				},

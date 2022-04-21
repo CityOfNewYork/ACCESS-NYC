@@ -2,10 +2,10 @@
 
 class WPML_LS_Templates {
 
-	const CONFIG_FILE    = 'config.json';
+	const CONFIG_FILE = 'config.json';
 	const OPTION_NAME = 'wpml_language_switcher_template_objects';
 
-	/** @var  @var string $uploads_path */
+	/** @var string $uploads_path */
 	private $uploads_path;
 
 	/**
@@ -28,10 +28,10 @@ class WPML_LS_Templates {
 	}
 
 	public function init_hooks() {
-		add_action( 'after_setup_theme',  array( $this, 'after_setup_theme_action' ) );
-		add_action( 'activated_plugin',   array( $this, 'activated_plugin_action' ) );
+		add_action( 'after_setup_theme', array( $this, 'after_setup_theme_action' ) );
+		add_action( 'activated_plugin', array( $this, 'activated_plugin_action' ) );
 		add_action( 'deactivated_plugin', array( $this, 'activated_plugin_action' ) );
-		add_action( 'switch_theme',       array( $this, 'activated_plugin_action' ) );
+		add_action( 'switch_theme', array( $this, 'activated_plugin_action' ) );
 	}
 
 	/**
@@ -56,7 +56,7 @@ class WPML_LS_Templates {
 		} else {
 			// PHP 5.3 Bug https://bugs.php.net/bug.php?id=34857
 			$in_array = $in_array ? array_combine( $in_array, $in_array ) : $in_array;
-			$ret = array_intersect_key( $this->templates, $in_array );
+			$ret      = array_intersect_key( $this->templates, $in_array );
 		}
 		return $ret;
 	}
@@ -99,7 +99,7 @@ class WPML_LS_Templates {
 		if ( $this->templates === false ) {
 
 			$this->templates = array();
-			$dirs_to_scan = array();
+			$dirs_to_scan    = array();
 
 			/**
 			 * Filter the directories to scan
@@ -124,7 +124,7 @@ class WPML_LS_Templates {
 					$tpl    = array();
 					$config = $this->parse_template_config( $template_path );
 
-					$tpl['path']     = $template_path;
+					$tpl['path']     = [ $wpml_core_path, $template_path ];
 					$tpl['version']  = isset( $config['version'] ) ? $config['version'] : '1';
 					$tpl['name']     = isset( $config['name'] ) ? $config['name'] : null;
 					$tpl['name']     = $this->get_unique_name( $tpl['name'], $template_path );
@@ -139,14 +139,14 @@ class WPML_LS_Templates {
 						? $this->wpml_file->get_uri_from_path( $template_path . $this->ds . 'flags' ) : $tpl['flags_base_uri'];
 
 					$tpl['flag_extension'] = isset( $config['flag_extension'] )
-						?  $config['flag_extension'] : null;
+						? $config['flag_extension'] : null;
 
 					if ( $this->is_core_template( $template_path ) ) {
 						$tpl['is_core'] = true;
 						$tpl['slug']    = isset( $config['slug'] ) ? $config['slug'] : $tpl['slug'];
 					}
 
-					$tpl['for'] = isset( $config['for'] )
+					$tpl['for']            = isset( $config['for'] )
 						? $config['for'] : array( 'menus', 'sidebars', 'footer', 'post_translations', 'shortcode_actions' );
 					$tpl['force_settings'] = isset( $config['settings'] )
 						? $config['settings'] : array();
@@ -169,7 +169,7 @@ class WPML_LS_Templates {
 		$templates_paths = array();
 
 		foreach ( $dirs_to_scan as $dir ) {
-			if ( !is_dir( $dir ) ) {
+			if ( ! is_dir( $dir ) ) {
 				continue;
 			}
 			$files = scandir( $dir );
@@ -178,7 +178,7 @@ class WPML_LS_Templates {
 				foreach ( $files as $file ) {
 					$template_path = $dir . '/' . $file;
 					if ( is_dir( $template_path )
-					     && file_exists( $template_path . $this->ds . WPML_LS_Template::FILENAME )
+						 && file_exists( $template_path . $this->ds . WPML_LS_Template::FILENAME )
 						 && file_exists( $template_path . $this->ds . self::CONFIG_FILE )
 					) {
 						$templates_paths[] = $template_path;
@@ -196,7 +196,7 @@ class WPML_LS_Templates {
 	 * @return array
 	 */
 	private function parse_template_config( $template_path ) {
-		$config = array();
+		$config             = array();
 		$configuration_file = $template_path . $this->ds . self::CONFIG_FILE;
 		if ( file_exists( $configuration_file ) ) {
 			$json_content = file_get_contents( $configuration_file );
@@ -209,17 +209,17 @@ class WPML_LS_Templates {
 	/**
 	 * @param string $ext
 	 * @param string $template_path
-	 * @param array $config
+	 * @param array  $config
 	 *
 	 * @return array|null
 	 */
 	private function get_files( $ext, $template_path, $config ) {
 		$resources = array();
 
-		if( isset( $config[ $ext ] ) ) {
+		if ( isset( $config[ $ext ] ) ) {
 			$config[ $ext ] = is_array( $config[ $ext ] ) ? $config[ $ext ] : array( $config[ $ext ] );
 			foreach ( $config[ $ext ] as $file ) {
-				$file = untrailingslashit( $template_path ) .$this->ds . $file;
+				$file        = untrailingslashit( $template_path ) . $this->ds . $file;
 				$resources[] = $this->wpml_file->get_uri_from_path( $file );
 			}
 		} else {
@@ -236,7 +236,7 @@ class WPML_LS_Templates {
 
 	/**
 	 * @param mixed|string|null $name
-	 * @param string $path
+	 * @param string            $path
 	 *
 	 * @return string
 	 */
@@ -251,17 +251,17 @@ class WPML_LS_Templates {
 		} elseif ( strpos( $path, $this->wpml_file->fix_dir_separator( $this->get_uploads_path() ) ) === 0 ) {
 			$name = __( 'Uploads', 'sitepress' ) . ' - ' . $name;
 		} elseif (
-			strpos( $path, $this->wpml_file->fix_dir_separator( WP_PLUGIN_DIR ) ) === 0
+			strpos( $path, $this->wpml_file->fix_dir_separator( WPML_PLUGINS_DIR ) ) === 0
 			&& ! $this->is_core_template( $path )
 		) {
-			$plugin_dir = $this->wpml_file->fix_dir_separator( WP_PLUGIN_DIR );
-			$plugin_dir = preg_replace( '#' . preg_quote( $plugin_dir ) . '#' , '', $path, 1 );
+			$plugin_dir = $this->wpml_file->fix_dir_separator( WPML_PLUGINS_DIR );
+			$plugin_dir = preg_replace( '#' . preg_quote( $plugin_dir ) . '#', '', $path, 1 );
 			$plugin_dir = ltrim( $plugin_dir, $this->ds );
 			$plugin_dir = explode( $this->ds, $plugin_dir );
 
 			if ( isset( $plugin_dir[0] ) ) {
 				$require = ABSPATH . 'wp-admin' . $this->ds . 'includes' . $this->ds . 'plugin.php';
-				require_once( $require );
+				require_once $require;
 				foreach ( get_plugins() as $slug => $plugin ) {
 					if ( strpos( $slug, $plugin_dir[0] ) === 0 ) {
 						$name = $plugin['Name'] . ' - ' . $name;

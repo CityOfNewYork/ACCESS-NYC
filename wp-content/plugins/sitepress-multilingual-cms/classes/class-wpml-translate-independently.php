@@ -14,7 +14,7 @@ class WPML_Translate_Independently {
 
 	public function wpml_translate_independently() {
 		$post_id = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : null;
-		$nonce = isset( $_POST['icl_duplciate_nonce'] ) ? sanitize_text_field( $_POST['icl_duplciate_nonce'] ) : '';
+		$nonce   = isset( $_POST['icl_duplciate_nonce'] ) ? sanitize_text_field( $_POST['icl_duplciate_nonce'] ) : '';
 
 		if ( wp_verify_nonce( $nonce, 'icl_check_duplicates' ) || null === $post_id ) {
 			if ( delete_post_meta( $post_id, '_icl_lang_duplicate_of' ) ) {
@@ -28,8 +28,8 @@ class WPML_Translate_Independently {
 	}
 
 	public function localize_scripts() {
-		$success = _x( 'You are updating a duplicate post.', '1/2 Confirm to make duplicated translations independent', 'sitepress' ) . "\n";
-		$success .= _x( 'To not lose your changes, WPML will set this post to be translated independently.', '2/2 Confirm to make duplicated translations independent', 'sitepress' ) . "\n";
+		$success        = _x( 'You are updating a duplicate post.', '1/2 Confirm to make duplicated translations independent', 'sitepress' ) . "\n";
+		$success       .= _x( 'To not lose your changes, WPML will set this post to be translated independently.', '2/2 Confirm to make duplicated translations independent', 'sitepress' ) . "\n";
 		$duplicate_data = array(
 			'icl_duplicate_message' => $success,
 			'icl_duplicate_fail'    => __( 'Unable to remove relationship!', 'sitepress' ),
@@ -37,8 +37,8 @@ class WPML_Translate_Independently {
 
 		$post = isset( $_GET['post'] ) ? filter_var( $_GET['post'], FILTER_SANITIZE_NUMBER_INT ) : '';
 		if ( $post && '' !== get_post_meta( $post, '_icl_lang_duplicate_of', true ) ) {
-			$duplicate_data['duplicate_post_nonce'] = wp_create_nonce( 'icl_check_duplicates' );
-			$duplicate_data['duplicate_post'] = $post;
+			$duplicate_data['duplicate_post_nonce']      = wp_create_nonce( 'icl_check_duplicates' );
+			$duplicate_data['duplicate_post']            = $post;
 			$duplicate_data['wp_classic_editor_changed'] = false;
 		}
 
@@ -47,6 +47,7 @@ class WPML_Translate_Independently {
 
 	/**
 	 * Add callback to detect post editor change.
+	 *
 	 * @param  array $initArray
 	 *
 	 * @return array

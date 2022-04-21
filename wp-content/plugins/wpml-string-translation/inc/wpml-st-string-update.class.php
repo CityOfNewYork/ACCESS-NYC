@@ -6,9 +6,9 @@ class WPML_ST_String_Update {
 	/**
 	 * WPML_ST_String_Update constructor.
 	 *
-	 * @param WPDB $wpdb
+	 * @param wpdb $wpdb
 	 */
-	public function __construct( WPDB $wpdb ) {
+	public function __construct( wpdb $wpdb ) {
 		$this->wpdb = $wpdb;
 	}
 
@@ -26,10 +26,12 @@ class WPML_ST_String_Update {
 	public function update_string( $domain, $name, $old_value, $new_value, $force_complete = false ) {
 		if ( $new_value != $old_value ) {
 			$string = $this->get_initial_string( $name, $domain, $old_value, $new_value );
-			$this->wpdb->update( $this->wpdb->prefix . 'icl_strings',
-			                     array( 'value' => $new_value ),
-			                     array( 'id' => $string->id ) );
-			$is_widget = $domain === WP_Widget_Text_Icl::STRING_DOMAIN;
+			$this->wpdb->update(
+				$this->wpdb->prefix . 'icl_strings',
+				array( 'value' => $new_value ),
+				array( 'id' => $string->id )
+			);
+			$is_widget = $domain === WPML_ST_WIDGET_STRING_DOMAIN;
 			if ( $is_widget && $new_value ) {
 				$this->update_widget_name( $string->name, $old_value, $new_value );
 			}
@@ -46,7 +48,6 @@ class WPML_ST_String_Update {
 			 * @param string     $new_value
 			 * @param bool|false $force_complete
 			 * @param stdClass   $string
-			 *
 			 */
 			do_action( 'wpml_st_update_string', $domain, $name, $old_value, $new_value, $force_complete, $string );
 		}
@@ -75,12 +76,14 @@ class WPML_ST_String_Update {
 			foreach (
 				array(
 					'icl_string_translations' => 'string_id',
-					'icl_strings'             => 'id'
+					'icl_strings'             => 'id',
 				) as $table_name => $id_col
 			) {
-				$this->wpdb->update( $this->wpdb->prefix . $table_name,
-				                     array( 'status' => $new_status ),
-				                     array( $id_col => $string->id ) );
+				$this->wpdb->update(
+					$this->wpdb->prefix . $table_name,
+					array( 'status' => $new_status ),
+					array( $id_col => $string->id )
+				);
 			}
 		}
 	}
@@ -96,7 +99,7 @@ class WPML_ST_String_Update {
 	private function get_initial_string( $name, $context, $old_value, $new_value ) {
 		$string = $this->read_string_from_db( $name, $context );
 		if ( ! $string ) {
-			if ( $context !== WP_Widget_Text_Icl::STRING_DOMAIN ) {
+			if ( $context !== WPML_ST_WIDGET_STRING_DOMAIN ) {
 				icl_register_string( $context, $name, $new_value );
 			} else {
 				list( $res, $name ) = $this->update_widget_name( $name, $old_value, $new_value );
@@ -120,13 +123,17 @@ class WPML_ST_String_Update {
 	 */
 	private function read_string_from_db( $name, $context ) {
 
-		return $this->wpdb->get_row( $this->wpdb->prepare( " SELECT id, value, status, name
+		return $this->wpdb->get_row(
+			$this->wpdb->prepare(
+				" SELECT id, value, status, name
 																	FROM {$this->wpdb->prefix}icl_strings
 																	WHERE context = %s
 																		AND name = %s
 																	LIMIT 1",
-		                                                   $context,
-		                                                   $name ) );
+				$context,
+				$name
+			)
+		);
 	}
 
 	/**
@@ -142,23 +149,24 @@ class WPML_ST_String_Update {
 	private function update_widget_name( $name, $old_value, $new_value ) {
 		$res = 0;
 		if ( 0 === strpos( $name, 'widget title - ' ) ) {
-			$name = 'widget title - ' . md5( $new_value );
+			$name     = 'widget title - ' . md5( $new_value );
 			$old_name = 'widget title - ' . md5( $old_value );
 
-			if ( $this->read_string_from_db( $name, WP_Widget_Text_Icl::STRING_DOMAIN ) ) {
-				$old_string = $this->read_string_from_db( $old_name, WP_Widget_Text_Icl::STRING_DOMAIN );
+			if ( $this->read_string_from_db( $name, WPML_ST_WIDGET_STRING_DOMAIN ) ) {
+				$old_string = $this->read_string_from_db( $old_name, WPML_ST_WIDGET_STRING_DOMAIN );
 				if ( $old_string ) {
 					$this->delete_old_widget_title_string_if_new_already_exists( $old_string );
 				}
 			} else {
-				$res = $this->write_widget_update_to_db( WP_Widget_Text_Icl::STRING_DOMAIN, $old_name, $name );
+				$res = $this->write_widget_update_to_db( WPML_ST_WIDGET_STRING_DOMAIN, $old_name, $name );
 			}
-
 		} elseif ( 0 === strpos( $name, 'widget body - ' ) ) {
 			$name = 'widget body - ' . md5( $new_value );
-			$res  = $this->write_widget_update_to_db( WP_Widget_Text_Icl::STRING_DOMAIN,
-			                                          'widget body - ' . md5( $old_value ),
-			                                          $name );
+			$res  = $this->write_widget_update_to_db(
+				WPML_ST_WIDGET_STRING_DOMAIN,
+				'widget body - ' . md5( $old_value ),
+				$name
+			);
 		}
 
 		return array( $res, $name );
@@ -175,12 +183,17 @@ class WPML_ST_String_Update {
 	 */
 	private function write_widget_update_to_db( $context, $old_name, $new_name ) {
 
-		return $this->wpdb->update( $this->wpdb->prefix . 'icl_strings',
-		                            array(
-			                            'name'                    => $new_name,
-			                            'domain_name_context_md5' => md5( WP_Widget_Text_Icl::STRING_DOMAIN . $new_name )
-		                            ),
-		                            array( 'context' => $context, 'name' => $old_name ) );
+		return $this->wpdb->update(
+			$this->wpdb->prefix . 'icl_strings',
+			array(
+				'name'                    => $new_name,
+				'domain_name_context_md5' => md5( WPML_ST_WIDGET_STRING_DOMAIN . $new_name ),
+			),
+			array(
+				'context' => $context,
+				'name'    => $old_name,
+			)
+		);
 	}
 
 	private function delete_old_widget_title_string_if_new_already_exists( $string ) {

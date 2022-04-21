@@ -297,13 +297,6 @@ $columns = apply_filters('pmxe_manage_imports_columns', $columns);
 												}
 											}
 
-											// if ($is_re_import_allowed and wp_all_export_is_compatible() and ! empty($item['options']['import_id'])){												
-											// 	$import = new PMXI_Import_Record();
-											// 	$import->getById($item['options']['import_id']);
-											// 	if ($import->isEmpty() or $import->parent_import_id == 0){
-											// 		$item['options']['import_id'] = 0;
-											// 	}												
-											// }											
 										}		
 
 									?>

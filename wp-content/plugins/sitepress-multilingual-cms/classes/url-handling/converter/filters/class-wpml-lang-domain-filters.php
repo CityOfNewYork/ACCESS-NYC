@@ -10,8 +10,8 @@ class WPML_Lang_Domain_Filters {
 	/**
 	 * WPML_Lang_Domain_Filters constructor.
 	 *
-	 * @param $wpml_url_converter
-	 * @param $wpml_wp_api
+	 * @param \WPML_URL_Converter $wpml_url_converter
+	 * @param \WPML_WP_API $wpml_wp_api
 	 */
 	public function __construct(
 		WPML_URL_Converter $wpml_url_converter,
@@ -52,7 +52,7 @@ class WPML_Lang_Domain_Filters {
 	 */
 	public function upload_dir_filter_callback( $upload_dir ) {
 		$convertWithMatchingTrailingSlash = function ( $url ) {
-			$hasTrailingSlash = '/' === substr( $url , -1 );
+			$hasTrailingSlash = '/' === substr( $url, -1 );
 			$newUrl           = $this->wpml_url_converter->convert_url( $url );
 
 			return $hasTrailingSlash ? trailingslashit( $newUrl ) : untrailingslashit( $newUrl );
@@ -92,7 +92,7 @@ class WPML_Lang_Domain_Filters {
 	private function get_host_from_HTTP_HOST() {
 		$host = $_SERVER['HTTP_HOST'];
 
-		if ( false !==  strpos( $_SERVER['HTTP_HOST'], ':' ) ) {
+		if ( false !== strpos( $_SERVER['HTTP_HOST'], ':' ) ) {
 			$host = explode( ':', $_SERVER['HTTP_HOST'] );
 			$host = $host[0];
 		}
@@ -139,8 +139,8 @@ class WPML_Lang_Domain_Filters {
 	 */
 	public function admin_url_filter( $url, $path ) {
 		if ( ( strpos( $url, 'http://' ) === 0
-		       || strpos( $url, 'https://' ) === 0 )
-		     && 'admin-ajax.php' === $path && $this->wpml_wp_api->is_front_end()
+			   || strpos( $url, 'https://' ) === 0 )
+			 && 'admin-ajax.php' === $path && $this->wpml_wp_api->is_front_end()
 		) {
 			global $sitepress;
 
@@ -153,7 +153,7 @@ class WPML_Lang_Domain_Filters {
 	/**
 	 * Convert logout url only for front-end.
 	 *
-	 * @param $logout_url
+	 * @param string $logout_url
 	 *
 	 * @return string
 	 */

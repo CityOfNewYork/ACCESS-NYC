@@ -1,5 +1,8 @@
 <?php
 
+use WPML\FP\Fns;
+use function WPML\FP\partial;
+
 class WPML_ST_Slug_New_Match_Finder {
 	/**
 	 * @param string                     $match
@@ -23,12 +26,7 @@ class WPML_ST_Slug_New_Match_Finder {
 	 * @return WPML_ST_Slug_New_Match[]
 	 */
 	private function map_to_new_matches( $match, array $custom_types ) {
-		$result = array();
-		foreach ( $custom_types as $custom_type ) {
-			$result[] = $this->find_match_of_type( $match, $custom_type );
-		}
-
-		return $result;
+		return Fns::map( partial( [ $this, 'find_match_of_type' ], $match ), $custom_types );
 	}
 
 	/**
@@ -37,14 +35,14 @@ class WPML_ST_Slug_New_Match_Finder {
 	 *
 	 * @return WPML_ST_Slug_New_Match
 	 */
-	private function find_match_of_type( $match, WPML_ST_Slug_Custom_Type $custom_type ) {
+	public function find_match_of_type( $match, WPML_ST_Slug_Custom_Type $custom_type ) {
 		if ( $custom_type->is_using_tags() ) {
 			$slug             = $this->filter_slug_using_tag( $custom_type->get_slug() );
 			$slug_translation = $this->filter_slug_using_tag( $custom_type->get_slug_translation() );
 
 			$new_match = $this->adjust_match( $match, $slug, $slug_translation );
 
-			$result = new WPML_ST_Slug_New_Match( $new_match, false );
+			$result = new WPML_ST_Slug_New_Match( $new_match, $custom_type->is_display_as_translated() );
 		} else {
 			$new_match = $this->adjust_match( $match, $custom_type->get_slug(), $custom_type->get_slug_translation() );
 			$result    = new WPML_ST_Slug_New_Match(
@@ -78,10 +76,13 @@ class WPML_ST_Slug_New_Match_Finder {
 	private function adjust_match( $match, $slug, $slug_translation ) {
 		if (
 			! empty( $slug_translation )
-			&& preg_match( '#^[^/]*/?' . preg_quote( $slug ) . '/#', $match )
+			&& preg_match( '#^[^/]*/?\(?' . preg_quote( $slug ) . '\)?/#', $match )
 			&& $slug !== $slug_translation
 		) {
-			$match = preg_replace( '#^' . addslashes( $slug ) . '/#', $slug_translation . '/', $match );
+			$replace = function( $match ) use ( $slug, $slug_translation ) {
+				return str_replace( $slug, $slug_translation, $match[0]);
+			};
+			$match = preg_replace_callback( '#^\(?' . preg_quote( addslashes( $slug ) ) . '\)?/#', $replace, $match );
 		}
 
 		return $match;

@@ -31,11 +31,12 @@ class OTGS_Installer_Debug_Info {
 		$repository_settings = $repository_settings['repositories'];
 
 		foreach ( $repositories as $repo_id => $repository ) {
-			$repositories_data[ $repo_id ] = array(
-				'api-url' => $repository['api-url'],
-				'bucket-url' => $this->prepare_bucket_url( $repo_id ),
-				'subscription' => isset( $repository_settings[ $repo_id ]['subscription'] ) ? $repository_settings[ $repo_id ]['subscription'] : '',
-			);
+			$repositories_data[ $repo_id ] = [
+				'api-url'                            => $repository['api-url'],
+				'bucket-url'                         => $this->prepare_bucket_url( $repo_id ),
+				'subscription'                       => isset( $repository_settings[ $repo_id ]['subscription'] ) ? $repository_settings[ $repo_id ]['subscription'] : '',
+				'last-successful-subscription-fetch' => $this->prepare_last_subscription_fetch( $repository_settings, $repo_id ),
+			];
 		}
 
 		$data['installer'] = array(
@@ -50,5 +51,10 @@ class OTGS_Installer_Debug_Info {
 	private function prepare_bucket_url( $repo_id ) {
 		$bucket_url = $this->products_config_storage->get_repository_products_url( $repo_id );
 		return $bucket_url ? $bucket_url : 'not assigned';
+	}
+
+	private function prepare_last_subscription_fetch( $repository_settings, $repo_id ) {
+		return isset( $repository_settings[ $repo_id ]['last_successful_subscription_fetch'] ) ?
+			date( 'Y-m-d h:i:s', $repository_settings[ $repo_id ]['last_successful_subscription_fetch'] ) : 'none';
 	}
 }

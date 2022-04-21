@@ -18,7 +18,7 @@ if (empty($custom_type)){
 					<?php if ($custom_type->hierarchical): ?>
 					<tr>
 						<td>
-							<h4><?php _e('Parent Term', 'wp_all_import_plugin'); ?> <a class="wpallimport-help" href="#help" style="position:relative; top:-1px;" original-title="If your taxonomies have parent/child relationships, use this field to set the parent for the imported taxonomy term. Terms can be matched by slug, name, or ID.">?</a></h4>
+							<h4><?php _e('Parent Term', 'wp_all_import_plugin'); ?> <a class="wpallimport-help" href="#help" style="position:relative; top:-1px;" title="If your taxonomies have parent/child relationships, use this field to set the parent for the imported taxonomy term. Terms can be matched by slug, name, or ID.">?</a></h4>
 							<div>
 								<input type="text" name="taxonomy_parent" style="width:100%;" value="<?php echo esc_attr($post['taxonomy_parent']); ?>" placeholder="<?php echo __('Parent term', 'wp_all_import_plugin'); ?>"/>
 							</div>
@@ -45,7 +45,36 @@ if (empty($custom_type)){
 									</div>
 								</div>
 							</div>								
-							<div class="clear"></div>													
+							<div class="clear"></div>
+                            <?php if ($custom_type->name == 'product_cat'): ?>
+                                <h4><?php printf(__('%s Display Type', 'wp_all_import_plugin'), $custom_type->labels->singular_name); ?></h4>
+                                <div class="input">
+                                    <input type="radio" id="taxonomy_display_type_default" name="taxonomy_display_type" value="" <?php echo empty($post['taxonomy_display_type']) ? 'checked="checked"' : '' ?> class="switcher"/>
+                                    <label for="taxonomy_display_type_default"><?php _e('Default', 'wp_all_import_plugin') ?></label>
+                                </div>
+                                <div class="input">
+                                    <input type="radio" id="taxonomy_display_type_products" name="taxonomy_display_type" value="products" <?php echo "products" == $post['taxonomy_display_type'] ? 'checked="checked"' : '' ?> class="switcher"/>
+                                    <label for="taxonomy_display_type_products"><?php _e('Products', 'wp_all_import_plugin') ?></label>
+                                </div>
+                                <div class="input">
+                                    <input type="radio" id="taxonomy_display_type_subcategories" name="taxonomy_display_type" value="subcategories" <?php echo "subcategories" == $post['taxonomy_display_type'] ? 'checked="checked"' : '' ?> class="switcher"/>
+                                    <label for="taxonomy_display_type_subcategories"><?php _e('Subcategories', 'wp_all_import_plugin') ?></label>
+                                </div>
+                                <div class="input">
+                                    <input type="radio" id="taxonomy_display_type_both" name="taxonomy_display_type" value="both" <?php echo "both" == $post['taxonomy_display_type'] ? 'checked="checked"' : '' ?> class="switcher"/>
+                                    <label for="taxonomy_display_type_both"><?php _e('Both', 'wp_all_import_plugin') ?></label>
+                                </div>
+                                <div class="input fleft" style="position:relative;width:220px;">
+                                    <input type="radio" id="taxonomy_display_type_xpath" class="switcher" name="taxonomy_display_type" value="xpath" <?php echo 'xpath' == $post['taxonomy_display_type'] ? 'checked="checked"': '' ?>/>
+                                    <label for="taxonomy_display_type_xpath"><?php _e('Set display type manually', 'wp_all_import_plugin' )?></label> <br>
+                                    <div class="switcher-target-taxonomy_display_type_xpath">
+                                        <div class="input">
+                                            &nbsp;<input type="text" class="smaller-text" name="taxonomy_display_type_xpath" style="width:190px;" value="<?php echo esc_attr($post['taxonomy_display_type_xpath']) ?>" placeholder="<?php echo __('Term Display Type', 'wp_all_import_plugin'); ?>"/>
+                                            <a href="#help" class="wpallimport-help" title="<?php _e('The term display type should be empty or one of the following: products, subcategories, both.', 'wp_all_import_plugin') ?>" style="position:relative; top:13px; float: right;">?</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
 						</td>
 					</tr>
 				</table>

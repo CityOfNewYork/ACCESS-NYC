@@ -1,0 +1,22 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Draft — Pending review": [
+            "Bản nháp - Đang chờ rà soát"
+         ],
+         "Complete": [
+            "Hoàn thành"
+         ],
+         "Insufficient funds": [
+            "Không đủ tiền"
+         ],
+         "Editor Job ID": [
+            "ID Công việc của Người biên tập"
+         ]
+      }
+   }
+}

@@ -99,11 +99,7 @@ WPMLCore.wizardFramework = function ( $, wizardImplementation ) {
 	};
 
 	self.setBackButtonState = function () {
-		if ( self.currentStepIndex === 0 ) {
-			self.backButton.attr( 'disabled', 'disabled' );
-		} else {
-			self.backButton.removeAttr( 'disabled' );
-		}
+		self.backButton.prop( 'disabled', self.currentStepIndex === 0 );
 	};
 
 	self.setNextButtonState = function () {
@@ -147,11 +143,7 @@ WPMLCore.wizardFramework = function ( $, wizardImplementation ) {
 	};
 
 	self.enableNextButton = function ( state ) {
-		if ( state ) {
-			self.nextButton.removeAttr( 'disabled' );
-		} else {
-			self.nextButton.attr( 'disabled', 'disabled' );
-		}
+		self.nextButton.prop( 'disabled', ! state );
 	};
 
 	self.setNextButtonPrimary = function ( state ) {

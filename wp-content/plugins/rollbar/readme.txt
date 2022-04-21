@@ -2,8 +2,8 @@
 Contributors: arturmoczulski
 Tags: rollbar, full stack, error, tracking, error tracking, error reporting, reporting, debug
 Requires at least: 3.5.1
-Tested up to: 5.1.1
-Stable tag: 2.6.1
+Tested up to: 5.8.4
+Stable tag: 2.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -104,6 +104,12 @@ Yes. It's actually the recommended method of installation.
 1. Settings page
 
 == Changelog ==
+
+= Version 2.6.3 (April 18th 2022) =
+* Update the tested WP versions
+
+= Version 2.6.2 (March 4th 2020) =
+* don’t start a session for wp-cron (https://github.com/rollbar/rollbar-php-wordpress/pull/88)
 
 = Version 2.6.1 (December 27th 2019) =
 * fix(initPhpLogging): Moving fetch settings to before settings check. (https://github.com/rollbar/rollbar-php-wordpress/pull/84)
@@ -208,6 +214,12 @@ Yes. It's actually the recommended method of installation.
 * Initial release!
 
 == Upgrade Notice ==
+
+= Version 2.6.3 (April 18th 2022) =
+* Update the tested WP versions
+
+= Version 2.6.2 (March 4th 2020) =
+* don’t start a session for wp-cron (https://github.com/rollbar/rollbar-php-wordpress/pull/88)
 
 = Version 2.6.1 (December 27th 2019) =
 * fix(initPhpLogging): Moving fetch settings to before settings check. (https://github.com/rollbar/rollbar-php-wordpress/pull/84)

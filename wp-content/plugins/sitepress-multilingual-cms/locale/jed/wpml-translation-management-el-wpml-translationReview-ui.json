@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Accepted": [
+            "Αποδεκτή"
+         ],
+         "Approved!": [
+            "Εγκρίθηκε!"
+         ],
+         "Loading the next translation for review...": [
+            "Φόρτωση της επόμενης μετάφρασης για επιμέλεια…"
+         ],
+         "Back": [
+            "Πίσω"
+         ],
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "Απενεργοποιήστε αυτήν την επιλογή, για να μην φορτωθεί αυτόματα η επόμενη μετάφραση μετά την ολοκλήρωση αυτής της επιμέλειας."
+         ],
+         "Turn on to automatically load the next translation after finishing this review.": [
+            "Ενεργοποιήστε αυτήν την επιλογή, για να φορτωθεί αυτόματα η επόμενη μετάφραση μετά την ολοκλήρωση αυτής της επιμέλειας."
+         ],
+         "Edit": [
+            "Επεξεργασία"
+         ],
+         "Edit translation": [
+            "Επεξεργασία μετάφρασης"
+         ],
+         "There was an error in applying translation.": [
+            "Παρουσιάστηκε πρόβλημα στην εφαρμογή της μετάφρασης."
+         ],
+         "Please wait, applying translation..": [
+            "Περιμένετε, γίνεται εφαρμογή της μετάφρασης…"
+         ],
+         "Next review": [
+            "Επόμενη επιμέλεια"
+         ],
+         "Publish this translation": [
+            "Δημοσίευση αυτής της μετάφρασης"
+         ],
+         "Accept this translation": [
+            "Αποδοχή αυτής της μετάφρασης"
+         ],
+         "Published!": [
+            "Δημοσιεύτηκε!"
+         ]
+      }
+   }
+}

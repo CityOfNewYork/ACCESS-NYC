@@ -26,8 +26,8 @@ WPML_core.widgets = (function( $ ) {
 
 })( jQuery );
 
-jQuery(document).ready(function () {
-	"use strict";
+jQuery(function () {
+    "use strict";
 
-	WPML_core.widgets.init();
+    WPML_core.widgets.init();
 });

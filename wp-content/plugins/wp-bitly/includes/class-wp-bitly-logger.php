@@ -39,12 +39,14 @@ class Wp_Bitly_Logger {
 	 */
 
 
-	public function wpbitly_debug_log($towrite, $message, $bypass = true)
+	public function wpbitly_debug_log( $towrite, $message, $bypass = true )
 	{
 
-	    if (!$this->wp_bitly_options->get_option('debug') || !$bypass) {
+	    if( !$this->wp_bitly_options->get_option( 'debug' ) || !$bypass ) {
 	        return;
 	    }
+
+		if( !is_dir( WPBITLY_DIR . '/log/' ) ) return;
 
 	    $log = fopen(WPBITLY_LOG, 'a');
 

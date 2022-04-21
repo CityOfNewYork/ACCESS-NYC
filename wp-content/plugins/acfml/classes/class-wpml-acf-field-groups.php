@@ -1,33 +1,76 @@
 <?php
 
+use WPML\FP\Fns;
+use WPML\FP\Obj;
 
 class WPML_ACF_Field_Groups {
+	/**
+	 * @var SitePress
+	 */
 	private $sitepress;
 	const POST_TYPE = 'acf-field-group';
-	const DEFAULT_EDITOR_OPTION_NAME = 'acfml_field_groups_default_editor';
+
+	/**
+	 * @var bool $nativeEditorEnabled
+	 */
+	private $nativeEditorEnabled;
 
 	public function __construct( SitePress $sitepress ) {
 		$this->sitepress = $sitepress;
 	}
 
 	public function register_hooks() {
-		if ( ! get_option( self::DEFAULT_EDITOR_OPTION_NAME ) ) {
-			add_action( 'wpml_tm_loaded', array( $this, 'translate_field_groups_with_wp_editor' ) );
+		if ( is_admin()
+			 && apply_filters( 'wpml_sub_setting', false, 'custom_posts_sync_option', self::POST_TYPE )
+		) {
+			add_filter( 'wpml_tm_post_edit_tm_editor_selector_display', [ $this, 'disable_tm_editor_selector_for_field_group' ] );
+			add_action( 'admin_init', [ $this, 'translate_field_groups_with_wp_editor' ] );
 		}
+	}
 
-		// ATE/CTE wizard resets this option so cover the case when it is run long after activating TM and ACFML plugins
-		add_filter( 'wp_ajax_wpml_tm_wizard_done', array( $this, 'translate_field_groups_with_wp_editor' ), 1 );
+	private function shouldUseNativeEditor() {
+		if ( ! isset( $this->nativeEditorEnabled ) ) {
+			/**
+			 * Filters the TM editor setting for ACF field groups.
+			 *
+			 * @since 1.10.0
+			 * @internal
+			 *
+			 * @param bool  $use_tm_editor Use TM editor for ACF field groups.
+			 */
+			$this->nativeEditorEnabled = (bool) apply_filters( 'acfml_use_native_editor_for_field_groups', true, get_the_ID() );
+		}
+		return $this->nativeEditorEnabled;
+	}
+
+	/**
+	 * @param bool $display display TM editor selector.
+	 * @return bool
+	 */
+	public function disable_tm_editor_selector_for_field_group( $display ) {
+		$getPostType = function() {
+			// phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification,WordPress.VIP.SuperGlobalInputUsage.AccessDetected
+			$getFromPOST = Obj::prop( Fns::__, $_POST );
+
+			return 'wpml_get_meta_boxes_html' === $getFromPOST( 'action' )
+				? get_post_type( $getFromPOST( 'post_id' ) )
+				: get_post_type();
+		};
+
+		return $this->shouldUseNativeEditor() && self::POST_TYPE === $getPostType() ? false : $display;
 	}
 
 	/**
 	 * Set translation mode for acf-field-group post type to 'native editor'
-	 * but do it only once so user can change this if really must
 	 */
 	public function translate_field_groups_with_wp_editor() {
-		$tm_settings = $this->sitepress->get_setting( 'translation-management', [] );
-		$tm_settings[ WPML_TM_Post_Edit_TM_Editor_Mode::TM_KEY_FOR_POST_TYPE_USE_NATIVE ][ self::POST_TYPE ] = true;
-		$this->sitepress->set_setting( 'translation-management', $tm_settings, true );
-		WPML_TM_Post_Edit_TM_Editor_Mode::delete_all_posts_option( self::POST_TYPE );
-		update_option( self::DEFAULT_EDITOR_OPTION_NAME, true );
+		if ( $this->shouldUseNativeEditor() ) {
+			$tm_settings = apply_filters( 'wpml_setting', [], 'translation-management' );
+			if ( ! Obj::pathOr( false, [ WPML_TM_Post_Edit_TM_Editor_Mode::TM_KEY_FOR_POST_TYPE_USE_NATIVE, self::POST_TYPE ], $tm_settings ) ) {
+				$tm_settings[ WPML_TM_Post_Edit_TM_Editor_Mode::TM_KEY_FOR_POST_TYPE_USE_NATIVE ][ self::POST_TYPE ] = true;
+				$this->sitepress->set_setting( 'translation-management', $tm_settings, true );
+				WPML_TM_Post_Edit_TM_Editor_Mode::delete_all_posts_option( self::POST_TYPE );
+			}
+		}
 	}
 }

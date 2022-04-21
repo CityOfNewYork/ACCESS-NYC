@@ -3,8 +3,8 @@ Contributors: clint.s, Kelseystevensonbitly
 Donate link: https://watermelonwebworks.com
 Tags: shortlink, bitly, url, shortener, custom domain, social, media, twitter, facebook, share
 Requires at least: 5.0
-Tested up to: 5.6
-Stable tag: 2.6.0
+Tested up to: 5.8
+Stable tag: 2.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,15 +46,20 @@ After publishing a page or post, you’ll see the Bitly's Wordpress Plugin optio
 
 # Viewing a link’s click data
 
-Click metrics for a short link will appear in the post’s or page’s settings. They include the number of clicks today, the total number clicks over time, and a graph of the number of clicks over the last 7 days.0
+Click metrics for a short link will appear in the post’s or page’s settings. They include the number of clicks today, the total number clicks over time, and a graph of the number of clicks over the last 7 days.
 
 == Frequently Asked Questions ==
 
 = After installation, do I need to update all my posts for short links to be created? =
 
-No. The first time a shortlink is requested for a particular post, the plugin will automatically generate one.
+No. The first time a short link is requested for a particular post, the plugin will automatically generate one.
 
 == Changelog ==
+= 2.7.0 =
+* Updated to prevent short link (re)generation when bulk-editing posts.
+* Added placeholder message to Bitly metabox when creating new post.
+* Fixed issue where "Default Organization" field displayed incorrect value after configuration change.
+* Various additional minor fixes.
 = 2.6.0 =
 * Completely rebuilt for use with Bitly API version 4.
 = 2.5.2 =

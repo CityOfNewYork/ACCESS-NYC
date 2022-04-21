@@ -19,9 +19,9 @@ class WPML_LS_Public_API {
 	/**
 	 * WPML_LS_Public_API constructor.
 	 *
-	 * @param WPML_LS_Settings $settings
-	 * @param WPML_LS_Render $render
-	 * @param SitePress $sitepress
+	 * @param WPML_LS_Settings     $settings
+	 * @param WPML_LS_Render       $render
+	 * @param SitePress            $sitepress
 	 * @param WPML_LS_Slot_Factory $slot_factory
 	 */
 	public function __construct(

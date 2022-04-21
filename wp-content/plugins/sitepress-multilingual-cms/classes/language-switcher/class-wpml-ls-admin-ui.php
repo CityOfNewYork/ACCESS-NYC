@@ -2,12 +2,12 @@
 
 class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 
-	const NONCE_NAME = 'wpml-language-switcher-admin';
-	const MAIN_UI_TEMPLATE = 'layout-main.twig';
-	const RESET_UI_TEMPLATE = 'layout-reset.twig';
-	const BUTTON_TEMPLATE = 'layout-slot-edit-button.twig';
+	const NONCE_NAME            = 'wpml-language-switcher-admin';
+	const MAIN_UI_TEMPLATE      = 'layout-main.twig';
+	const RESET_UI_TEMPLATE     = 'layout-reset.twig';
+	const BUTTON_TEMPLATE       = 'layout-slot-edit-button.twig';
 	const SLOT_SLUG_PLACEHOLDER = '%id%';
-	const RESET_NONCE_NAME = 'wpml-language-switcher-reset';
+	const RESET_NONCE_NAME      = 'wpml-language-switcher-reset';
 
 	/* @var WPML_LS_Templates $templates */
 	private $templates;
@@ -30,12 +30,12 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 	/**
 	 * WPML_Language_Switcher_Menu constructor.
 	 *
-	 * @param WPML_LS_Templates $templates
-	 * @param WPML_LS_Settings $settings
-	 * @param WPML_LS_Render $render
+	 * @param WPML_LS_Templates     $templates
+	 * @param WPML_LS_Settings      $settings
+	 * @param WPML_LS_Render        $render
 	 * @param WPML_LS_Inline_Styles $inline_styles
-	 * @param SitePress $sitepress
-	 * @param WPML_LS_Assets $assets
+	 * @param SitePress             $sitepress
+	 * @param WPML_LS_Assets        $assets
 	 */
 	public function __construct( $templates, $settings, $render, $inline_styles, $sitepress, $assets = null ) {
 		$this->templates     = $templates;
@@ -72,7 +72,8 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 			$suffix = $this->sitepress->get_wp_api()->constant( 'SCRIPT_DEBUG' ) ? '' : '.min';
 
 			wp_register_script(
-				'wpml-language-switcher-settings', ICL_PLUGIN_URL . '/res/js/language-switchers-settings' . $suffix . '.js',
+				'wpml-language-switcher-settings',
+				ICL_PLUGIN_URL . '/res/js/language-switchers-settings' . $suffix . '.js',
 				array( 'jquery', 'wp-util', 'jquery-ui-sortable', 'jquery-ui-dialog', 'wp-color-picker', 'wp-pointer' )
 			);
 			wp_enqueue_script( 'wpml-language-switcher-settings' );
@@ -134,10 +135,10 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 
 			foreach ( array( 'menus', 'sidebars', 'statics' ) as $group ) {
 				if ( isset( $settings[ $group ] ) ) {
-					$slot_slug                                      = key( $settings[ $group ] );
+					$slot_slug = key( $settings[ $group ] );
 
 					if ( preg_match( '/' . self::SLOT_SLUG_PLACEHOLDER . '/', $slot_slug ) ) {
-						$new_slug = preg_replace( '/' . self::SLOT_SLUG_PLACEHOLDER . '/', '__id__', $slot_slug );
+						$new_slug                        = preg_replace( '/' . self::SLOT_SLUG_PLACEHOLDER . '/', '__id__', $slot_slug );
 						$settings[ $group ][ $new_slug ] = $settings[ $group ][ $slot_slug ];
 						unset( $settings[ $group ][ $slot_slug ] );
 						$slot_slug = $new_slug;
@@ -146,8 +147,8 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 					$settings[ $group ][ $slot_slug ]['slot_slug']  = $slot_slug;
 					$settings[ $group ][ $slot_slug ]['slot_group'] = $group;
 					$settings                                       = $this->settings->convert_slot_settings_to_objects( $settings );
-					$slot                                           = $settings[ $group ][ $slot_slug ];
-					$preview                                        = $this->render->get_preview( $slot );
+					$slot    = $settings[ $group ][ $slot_slug ];
+					$preview = $this->render->get_preview( $slot );
 					$this->sitepress->get_wp_api()->wp_send_json_success( $preview );
 				}
 			}
@@ -233,7 +234,7 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 		}
 
 		$slot = $this->settings->get_slot( $type, $slug );
-		$url  = admin_url( 'admin.php?page=' . WPML_LS_Admin_UI::get_page_hook() . '#' . $type . '/' . $slug );
+		$url  = admin_url( 'admin.php?page=' . self::get_page_hook() . '#' . $type . '/' . $slug );
 
 		if ( $slot->slug() === $slug ) {
 			$model = array(
@@ -340,25 +341,31 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 	 */
 	public function get_misc_strings() {
 		return array(
-			'no_templates'               => __( 'There are no templates available.', 'sitepress' ),
-			'label_preview'              => _x( 'Preview', 'Language switcher preview', 'sitepress' ),
-			'label_position'             => _x( 'Position', 'Language switcher preview', 'sitepress' ),
-			'label_actions'              => _x( 'Actions', 'Language switcher preview', 'sitepress' ),
-			'label_action'               => _x( 'Action', 'Language switcher preview', 'sitepress' ),
-			'button_save'                => __( 'Save', 'sitepress' ),
-			'button_cancel'              => __( 'Cancel', 'sitepress' ),
-			'title_what_to_include'      => __( 'What to include in the language switcher:', 'sitepress' ),
-			'label_include_flag'         => __( 'Flag', 'sitepress' ),
-			'label_include_native_lang'  => __( 'Native language name', 'sitepress' ),
-			'label_include_display_lang' => __( 'Language name in current language', 'sitepress' ),
-			'label_include_current_lang' => __( 'Current language', 'sitepress' ),
-			'templates_dropdown_label'   => __( 'Language switcher style:', 'sitepress' ),
-			'templates_wpml_group'       => __( 'WPML', 'sitepress' ),
-			'templates_custom_group'     => __( 'Custom', 'sitepress' ),
-			'title_action_edit'          => __( 'Edit language switcher', 'sitepress' ),
-			'title_action_delete'        => __( 'Delete language switcher', 'sitepress' ),
-			'button_back'                => __( 'Back', 'sitepress' ),
-			'button_next'                => __( 'Next', 'sitepress' ),
+			'no_templates'                               => __( 'There are no templates available.', 'sitepress' ),
+			'label_preview'                              => _x( 'Preview', 'Language switcher preview', 'sitepress' ),
+			'label_position'                             => _x( 'Position', 'Language switcher preview', 'sitepress' ),
+			'label_actions'                              => _x( 'Actions', 'Language switcher preview', 'sitepress' ),
+			'label_action'                               => _x( 'Action', 'Language switcher preview', 'sitepress' ),
+			'button_save'                                => __( 'Save', 'sitepress' ),
+			'button_cancel'                              => __( 'Cancel', 'sitepress' ),
+			'title_what_to_include'                      => __( 'What to include in the language switcher:', 'sitepress' ),
+			'label_include_flag'                         => __( 'Flag', 'sitepress' ),
+			'label_include_native_lang'                  => __( 'Native language name', 'sitepress' ),
+			'label_include_display_lang'                 => __( 'Language name in current language', 'sitepress' ),
+			'label_include_current_lang'                 => __( 'Current language', 'sitepress' ),
+			'label_include_flag_width'              => __( 'Width', 'sitepress' ),
+			'label_include_flag_height'             => __( 'Height', 'sitepress' ),
+			'label_include_flag_width_placeholder'  => __( 'auto', 'sitepress' ),
+			'label_include_flag_height_placeholder' => __( 'auto', 'sitepress' ),
+			'label_include_flag_width_suffix'       => __( 'px', 'sitepress' ),
+			'label_include_flag_height_suffix'      => __( 'px', 'sitepress' ),
+			'templates_dropdown_label'                   => __( 'Language switcher style:', 'sitepress' ),
+			'templates_wpml_group'                       => __( 'WPML', 'sitepress' ),
+			'templates_custom_group'                     => __( 'Custom', 'sitepress' ),
+			'title_action_edit'                          => __( 'Edit language switcher', 'sitepress' ),
+			'title_action_delete'                        => __( 'Delete language switcher', 'sitepress' ),
+			'button_back'                                => __( 'Back', 'sitepress' ),
+			'button_next'                                => __( 'Next', 'sitepress' ),
 		);
 	}
 
@@ -377,7 +384,7 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 				'text' => __( 'Add a comma-separated list of URL arguments that you want WPML to pass when switching languages.', 'sitepress' ),
 				'link' => array(
 					'text'   => __( 'Preserving URL arguments', 'sitepress' ),
-					'url'    => 'https://wpml.org/documentation/getting-started-guide/language-setup/language-switcher-options/#preserving-url-parameters',
+					'url'    => 'https://wpml.org/documentation/getting-started-guide/language-setup/language-switcher-options/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore#preserving-url-parameters',
 					'target' => '_blank',
 				),
 			),
@@ -385,7 +392,7 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 				'text' => __( 'Enter CSS to add to the page. This is useful when you want to add styling to the language switcher, without having to edit the CSS file on the server.', 'sitepress' ),
 				'link' => array(
 					'text'   => __( 'Styling the language switcher with additional CSS', 'sitepress' ),
-					'url'    => 'https://wpml.org/documentation/getting-started-guide/language-setup/language-switcher-options/#styling-the-language-switcher-with-additional-css',
+					'url'    => 'https://wpml.org/documentation/getting-started-guide/language-setup/language-switcher-options/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore#styling-the-language-switcher-with-additional-css',
 					'target' => '_blank',
 				),
 			),
@@ -434,7 +441,7 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 			'backwards_compatibility'       => array(
 				'text' => __( "Since WPML 3.6.0, the language switchers are not using CSS IDs and the CSS classes have changed. This was required to fix some bugs and match the latest standards. If your theme or your custom CSS is not relying on these old selectors, it's recommended to skip the backwards compatibility. However, it's still possible to re-activate this option later.", 'sitepress' ),
 			),
-			'show_in_footer'       => array(
+			'show_in_footer'                => array(
 				'text' => __( "You can display a language switcher in the site's footer. You can customize and style it here.", 'sitepress' ),
 			),
 		);
@@ -529,7 +536,7 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 	public function get_shortcode_actions_strings() {
 
 		$description_link_text = _x( "insert WPML's switchers in custom locations", 'Custom languuage switcher description: external link text', 'sitepress' );
-		$description_link_url  = 'https://wpml.org/documentation/getting-started-guide/language-setup/language-switcher-options/#custom-locations';
+		$description_link_url  = 'https://wpml.org/documentation/getting-started-guide/language-setup/language-switcher-options/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore#custom-locations';
 		$description_link      = '<a href="' . $description_link_url . '" target="_blank">' . $description_link_text . '</a>';
 		$description           = _x( 'Need more options? See how you can %s.', 'Custom languuage switcher description: text', 'sitepress' );
 

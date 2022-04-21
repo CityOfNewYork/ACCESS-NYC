@@ -18,7 +18,7 @@ class WPML_URL_Converter_Url_Helper {
 
 	/**
 	 *
-	 * @param wpdb $wpdb
+	 * @param wpdb             $wpdb
 	 * @param WPML_Include_Url $wpml_include_url_filter
 	 */
 	public function __construct( wpdb $wpdb = null, WPML_Include_Url $wpml_include_url_filter = null ) {
@@ -72,7 +72,7 @@ class WPML_URL_Converter_Url_Helper {
 		$url_query_parts = wpml_parse_url( strpos( $url, 'http' ) === false ? 'http://' . $url : $url );
 
 		return isset( $url_query_parts['path'] )
-		       && strpos( wpml_strip_subdir_from_url( $url_query_parts['path'] ), '/wp-admin' ) === 0;
+			   && strpos( wpml_strip_subdir_from_url( $url_query_parts['path'] ), '/wp-admin' ) === 0;
 	}
 
 	/**
@@ -82,7 +82,7 @@ class WPML_URL_Converter_Url_Helper {
 	 *
 	 * @return string
 	 */
-	private function get_unfiltered_home_option() {
+	public function get_unfiltered_home_option() {
 		if ( $this->wpml_include_url_filter ) {
 			return $this->wpml_include_url_filter->get_unfiltered_home();
 		} else {

@@ -1,0 +1,39 @@
+{
+  "name": "nyco/wp-login",
+  "version": "0.0.1",
+  "type": "wordpress-muplugin",
+  "license": "GPL-3.0+",
+  "description": "A local development plugin for WordPress to enable logging in to the WordPress Admin.",
+  "homepage": "https://github.com/cityofnewyork/nyco-wp-login",
+  "authors": [
+    {
+      "name": "NYC Opportunity",
+      "email": "products@nycopportunity.nyc.gov",
+      "homepage": "https://nyc.gov/opportunity"
+    }
+  ],
+  "keywords": [
+    "wordpress",
+    "login"
+  ],
+  "support": {
+    "issues": "https://github.com/cityofnewyork/nyco-wp-login/issues"
+  },
+  "require": {
+    "composer/installers": "~1.0"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "~3.0"
+  },
+  "scripts": {
+    "lint": [
+      "vendor/bin/phpcs --standard=phpcs.xml --extensions=php --ignore=vendor/ ."
+    ],
+    "fix": [
+      "vendor/bin/phpcbf --standard=phpcs.xml --extensions=php --ignore=vendor/ ."
+    ],
+    "publish": [
+      "git push && git push --tags"
+    ]
+  }
+}

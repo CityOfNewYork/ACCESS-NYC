@@ -1,16 +1,26 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: konrad
  * Date: 12.01.17
  * Time: 12:36
+ *
+ * @package acfml
  */
+
+use WPML\FP\Relation;
+
 class WPML_ACF_Pro {
 
-	public function __construct() {
-		add_action('icl_make_duplicate', array($this, 'make_duplicate_action'), 10, 4);
-		add_filter('acf/duplicate_field/type=clone', array($this, 'duplicate_clone_field'), 10, 1);
+	public function register_hooks() {
+		$isOverwritingFromOriginal = Relation::propEq( 'icl_ajx_action', 'set_duplication' );
+
+		// phpcs:ignore WordPress.VIP.SuperGlobalInputUsage.AccessDetected,WordPress.CSRF.NonceVerification.NoNonceVerification
+		if ( is_admin() && $isOverwritingFromOriginal( $_POST ) ) {
+			add_action( 'icl_make_duplicate', [ $this, 'make_duplicate_action' ], 10, 4 );
+		}
+
+		add_filter( 'acf/duplicate_field/type=clone', [ $this, 'duplicate_clone_field' ], 10, 1 );
 	}
 
 	public function make_duplicate_action($master_post_id, $lang, $post_array, $id) {
@@ -33,9 +43,9 @@ class WPML_ACF_Pro {
 	}
 
 	/**
-	 * Filter: Update clloned field names to translated version
+	 * Filter: Update cloned field names to translated version
 	 *
-	 * @param $field
+	 * @param array $field
 	 *
 	 * @return array Updated field
 	 */

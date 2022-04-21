@@ -98,6 +98,20 @@ class WPML_TF_Feedback implements IWPML_TF_Data_Object {
 	}
 
 	/**
+	 * @return int|null
+	 */
+	public function get_feedback_id() {
+		return $this->id;
+	}
+
+	/**
+	 * @param \WPML_TF_Message $message
+	 */
+	public function add_message( WPML_TF_Message $message ) {
+		$this->messages->add( $message );
+	}
+
+	/**
 	 * @return mixed|null|string
 	 */
 	public function get_date_created() {
@@ -204,13 +218,6 @@ class WPML_TF_Feedback implements IWPML_TF_Data_Object {
 	 */
 	public function get_messages() {
 		return $this->messages;
-	}
-
-	/**
-	 * @param WPML_TF_Message $message
-	 */
-	public function add_message( WPML_TF_Message $message ) {
-		$this->messages->add( $message );
 	}
 
 	/** @param WPML_TF_TP_Responses $tp_responses */

@@ -5,8 +5,8 @@ use WPML\ST\TranslationFile\QueueFilter;
 
 class WPML_ST_Translations_File_Queue {
 	const DEFAULT_LIMIT = 20000;
-	const TIME_LIMIT = 10; // seconds
-	const LOCK_FIELD = '_wpml_st_file_scan_in_progress';
+	const TIME_LIMIT    = 10; // seconds
+	const LOCK_FIELD    = '_wpml_st_file_scan_in_progress';
 
 	/** @var WPML_ST_Translations_File_Dictionary */
 	private $file_dictionary;
@@ -26,12 +26,12 @@ class WPML_ST_Translations_File_Queue {
 	private $transient;
 
 	/**
-	 * @param WPML_ST_Translations_File_Dictionary $file_dictionary
-	 * @param WPML_ST_Translations_File_Scan $file_scan
+	 * @param WPML_ST_Translations_File_Dictionary   $file_dictionary
+	 * @param WPML_ST_Translations_File_Scan         $file_scan
 	 * @param WPML_ST_Translations_File_Scan_Storage $file_scan_storage
-	 * @param WPML_Language_Records $language_records
-	 * @param int $limit
-	 * @param WPML_Transient $transient
+	 * @param WPML_Language_Records                  $language_records
+	 * @param int                                    $limit
+	 * @param WPML_Transient                         $transient
 	 */
 	public function __construct(
 		WPML_ST_Translations_File_Dictionary $file_dictionary,
@@ -97,7 +97,6 @@ class WPML_ST_Translations_File_Queue {
 						} else {
 							$file->set_status( WPML_ST_Translations_File_Entry::PARTLY_IMPORTED );
 						}
-
 					} catch ( WPML_ST_Bulk_Strings_Insert_Exception $e ) {
 						$file->set_status( WPML_ST_Translations_File_Entry::PARTLY_IMPORTED );
 						break;
@@ -136,7 +135,7 @@ class WPML_ST_Translations_File_Queue {
 	 */
 	public function is_completed() {
 		return 0 === count( $this->file_dictionary->get_not_imported_files() ) &&
-		       0 < count( $this->file_dictionary->get_imported_files() );
+			   0 < count( $this->file_dictionary->get_imported_files() );
 	}
 
 	/**
@@ -169,8 +168,8 @@ class WPML_ST_Translations_File_Queue {
 
 	/**
 	 * @param array $translations
-	 * @param int $offset
-	 * @param int $limit
+	 * @param int   $offset
+	 * @param int   $limit
 	 *
 	 * @return array
 	 */

@@ -15,7 +15,7 @@ if (!function_exists('wp_all_import_get_url')) {
 
         $targetDir = (!$targetDir) ? wp_all_import_secure_file($uploads['basedir'] . DIRECTORY_SEPARATOR . PMXI_Plugin::UPLOADS_DIRECTORY) : $targetDir;
 
-        $tmpname = wp_unique_filename($targetDir, ($type and strlen(basename($filePath)) < 30) ? basename($filePath) : time());
+        $tmpname = wp_unique_filename($targetDir, ($type and strlen(basename($filePath)) < 30) ? basename($filePath) : (string) time());
 
         $localPath = $targetDir . '/' . urldecode(sanitize_file_name($tmpname)) . ((!$type) ? '.tmp' : '');
 
@@ -35,8 +35,7 @@ if (!function_exists('wp_all_import_get_url')) {
                     $chunk = @fread($file, 1024);
                     if (!$type and $first_chunk and (strpos($chunk, "<?") !== FALSE or strpos($chunk, "<rss") !== FALSE) or strpos($chunk, "xmlns") !== FALSE) {
                         $type = 'xml';
-                    }
-                    elseif (!$type and $first_chunk) {
+                    } elseif (!$type and $first_chunk) {
                         $type = 'csv';
                     } // if it's a 1st chunk, then chunk <? symbols to detect XML file
                     $first_chunk = FALSE;
@@ -89,24 +88,21 @@ if (!function_exists('wp_all_import_get_url')) {
                 if ( ! $type ) {
                     if ($contentEncoding == 'gzip') {
                         $file = @fopen($localPath);
-                    }
-                    else {
+                    } else {
                         $file = @fopen($localPath, "rb");
                     }
                     while (!@feof($file)) {
                         $chunk = @fread($file, 1024);
                         if (strpos($chunk, "<?") !== FALSE or strpos($chunk, "<rss") !== FALSE or strpos($chunk, "xmlns") !== FALSE) {
                             $type = 'xml';
-                        }
-                        else {
+                        } else {
                             $type = 'csv';
                         } // if it's a 1st chunk, then chunk <? symbols to detect XML file
                         break;
                     }
                     @fclose($file);
                 }
-            }
-            else {
+            } else {
                 return $request;
             }
 

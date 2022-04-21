@@ -1,11 +1,18 @@
 <?php
+/**
+ * WHIP libary file.
+ *
+ * @package Yoast\WHIP
+ */
 
 /**
- * Exception for an invalid version comparison string
+ * Exception for an invalid version comparison string.
  */
 class Whip_InvalidVersionComparisonString extends Exception {
 
 	/**
+	 * InvalidVersionComparisonString constructor.
+	 *
 	 * @param string $value The passed version comparison string.
 	 */
 	public function __construct( $value ) {

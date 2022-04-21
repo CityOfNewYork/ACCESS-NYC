@@ -37,21 +37,22 @@ class WPML_Main_Admin_Menu {
 	 * @throws \InvalidArgumentException
 	 */
 	public function configure() {
-		$this->root = new WPML_Admin_Menu_Root( array(
-			                                  'menu_id' => 'WPML',
-			                                  'page_title' => __( 'WPML', 'sitepress' ),
-			                                  'menu_title' => __( 'WPML', 'sitepress' ),
-			                                  'capability' => 'wpml_manage_languages',
-			                                  'menu_slug',
-			                                  'function'   => null,
-			                                  'icon_url'   => ICL_PLUGIN_URL . '/res/img/icon16.png',
-		                                  ) );
+		$this->root = new WPML_Admin_Menu_Root(
+			array(
+				'menu_id'    => 'WPML',
+				'page_title' => __( 'WPML', 'sitepress' ),
+				'menu_title' => __( 'WPML', 'sitepress' ),
+				'capability' => 'wpml_manage_languages',
+				'menu_slug',
+				'function'   => null,
+				'icon_url'   => ICL_PLUGIN_URL . '/res/img/icon16.png',
+			)
+		);
 
 		$this->root->init_hooks();
 
-		$this->languages();
-
 		if ( $this->sitepress->is_setup_complete() ) {
+			$this->languages();
 			do_action( 'icl_wpml_top_menu_added' );
 
 			if ( $this->is_wpml_setup_completed() ) {
@@ -65,6 +66,8 @@ class WPML_Main_Admin_Menu {
 			$this->taxonomy_translation();
 
 			do_action( 'wpml_core_admin_menus_added' );
+		} else {
+			$this->wizard();
 		}
 
 		$this->support();
@@ -85,19 +88,29 @@ class WPML_Main_Admin_Menu {
 		$this->root->add_item( $menu );
 	}
 
+	private function wizard() {
+		$menu = new WPML_Admin_Menu_Item();
+		$menu->set_order( self::MENU_ORDER_LANGUAGES );
+		$menu->set_page_title( __( 'WPML Setup', 'sitepress' ) );
+		$menu->set_menu_title( __( 'Setup', 'sitepress' ) );
+		$menu->set_capability( 'wpml_manage_languages' );
+		$menu->set_menu_slug( WPML_PLUGIN_FOLDER . '/menu/setup.php' );
+		$this->root->add_item( $menu );
+	}
+
 	/**
 	 * @return bool
 	 */
 	private function is_wpml_setup_completed() {
 		return $this->sitepress->get_setting( 'existing_content_language_verified' )
-		       && 2 <= count( $this->sitepress->get_active_languages() );
+			   && 2 <= count( $this->sitepress->get_active_languages() );
 	}
 
 	/**
 	 * @throws \InvalidArgumentException
 	 */
 	private function themes_and_plugins_localization() {
-		$menu             = new WPML_Admin_Menu_Item();
+		$menu = new WPML_Admin_Menu_Item();
 		$menu->set_order( self::MENU_ORDER_THEMES_AND_PLUGINS_LOCALIZATION );
 		$menu->set_page_title( __( 'Theme and plugins localization', 'sitepress' ) );
 		$menu->set_menu_title( __( 'Theme and plugins localization', 'sitepress' ) );
@@ -146,7 +159,7 @@ class WPML_Main_Admin_Menu {
 	private function support() {
 		$menu_slug = WPML_PLUGIN_FOLDER . '/menu/support.php';
 
-		$menu             = new WPML_Admin_Menu_Item();
+		$menu = new WPML_Admin_Menu_Item();
 		$menu->set_order( self::MENU_ORDER_MAX );
 		$menu->set_page_title( __( 'Support', 'sitepress' ) );
 		$menu->set_menu_title( __( 'Support', 'sitepress' ) );
@@ -159,13 +172,13 @@ class WPML_Main_Admin_Menu {
 	}
 
 	/**
-	 * @param $parent
+	 * @param string $parent_slug
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	private function troubleshooting_menu( $parent ) {
+	private function troubleshooting_menu( $parent_slug ) {
 		$menu = new WPML_Admin_Menu_Item();
-		$menu->set_parent_slug( $parent );
+		$menu->set_parent_slug( $parent_slug );
 		$menu->set_page_title( __( 'Troubleshooting', 'sitepress' ) );
 		$menu->set_menu_title( __( 'Troubleshooting', 'sitepress' ) );
 		$menu->set_capability( 'wpml_manage_troubleshooting' );
@@ -174,13 +187,13 @@ class WPML_Main_Admin_Menu {
 	}
 
 	/**
-	 * @param $parent
+	 * @param string $parent_slug
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	private function debug_information_menu( $parent ) {
+	private function debug_information_menu( $parent_slug ) {
 		$menu = new WPML_Admin_Menu_Item();
-		$menu->set_parent_slug( $parent );
+		$menu->set_parent_slug( $parent_slug );
 		$menu->set_page_title( __( 'Debug information', 'sitepress' ) );
 		$menu->set_menu_title( __( 'Debug information', 'sitepress' ) );
 		$menu->set_capability( 'wpml_manage_troubleshooting' );

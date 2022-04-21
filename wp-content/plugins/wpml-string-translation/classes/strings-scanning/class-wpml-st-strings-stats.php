@@ -18,7 +18,7 @@ class WPML_ST_Strings_Stats {
 	private $stats;
 
 	public function __construct( wpdb $wpdb, SitePress $sitepress ) {
-		$this->wpdb = $wpdb;
+		$this->wpdb      = $wpdb;
 		$this->sitepress = $sitepress;
 	}
 
@@ -28,7 +28,7 @@ class WPML_ST_Strings_Stats {
 	 * @param string $domain
 	 */
 	public function update( $component_name, $type, $domain ) {
-		$count = $this->get_count( $domain );
+		$count           = $this->get_count( $domain );
 		$string_settings = $this->sitepress->get_setting( 'st' );
 		$string_settings[ $type . '_localization_domains' ][ $component_name ][ $domain ] = $count;
 		$this->sitepress->set_setting( 'st', $string_settings, true );

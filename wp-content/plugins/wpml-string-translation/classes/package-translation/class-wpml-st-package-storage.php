@@ -8,16 +8,14 @@
  */
 class WPML_ST_Package_Storage {
 
-	/** @var  int $package_id */
 	private $package_id;
-	/** @var  wpdb $this ->wpdb */
 	private $wpdb;
 
 	/**
 	 * WPML_ST_Package_Storage constructor.
 	 *
-	 * @param int $package_id
-	 * @param wpdb $this ->wpdb
+	 * @param int   $package_id
+	 * @param \wpdb $wpdb
 	 */
 	public function __construct( $package_id, wpdb $wpdb ) {
 		$this->package_id = $package_id;
@@ -28,7 +26,7 @@ class WPML_ST_Package_Storage {
 	 * @param string $string_title
 	 * @param string $string_type
 	 * @param string $string_value
-	 * @param int $string_id
+	 * @param int    $string_id
 	 *
 	 * @return bool
 	 */
@@ -36,15 +34,15 @@ class WPML_ST_Package_Storage {
 
 		$update_where = array( 'id' => $string_id );
 
-		$update_data = array(
+		$update_data           = array(
 			'type'  => $string_type,
 			'title' => $this->truncate_long_string( $string_title ),
 		);
 		$type_or_title_updated = $this->wpdb->update( $this->wpdb->prefix . 'icl_strings', $update_data, $update_where );
 
-		$update_data  = array(
+		$update_data                 = array(
 			'string_package_id' => $this->package_id,
-			'value' => $string_value
+			'value'             => $string_value,
 		);
 		$package_id_or_value_updated = $this->wpdb->update( $this->wpdb->prefix . 'icl_strings', $update_data, $update_where );
 
@@ -91,13 +89,16 @@ class WPML_ST_Package_Storage {
                       FROM {$this->wpdb->prefix}icl_translations
                       WHERE element_id = %d
                         AND element_type LIKE 'package%%'
-                      LIMIT 1 )"
-				, $this->package_id ) );
+                      LIMIT 1 )",
+				$this->package_id
+			)
+		);
 		if ( ! empty( $translation_ids ) ) {
 			$this->wpdb->query(
 				"UPDATE {$this->wpdb->prefix}icl_translation_status
                           SET needs_update = 1
-                          WHERE translation_id IN (" . wpml_prepare_in( $translation_ids, '%d' ) . " ) " );
+                          WHERE translation_id IN (" . wpml_prepare_in( $translation_ids, '%d' ) . ' ) '
+			);
 		}
 	}
 

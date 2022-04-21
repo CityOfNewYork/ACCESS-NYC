@@ -1,14 +1,14 @@
 /*globals jQuery, ajaxurl */
-jQuery('document').ready(function ($) {
-	"use strict";
+jQuery(function ($) {
+    "use strict";
 
-	$('[data-js-callback="js-set-translation-editor"]').click(function () {
+    $('[data-js-callback="js-set-translation-editor"]').click(function () {
 
-		var enable_button = $(this);
-		var notice = enable_button.closest('.otgs-notice');
-		var nonce = notice.find('input[name="wpml_set_translation_editor_nonce"]').val();
-		var success = notice.find('.js-done');
-		var error = notice.find('.js-error');
+        var enable_button = $(this);
+        var notice = enable_button.closest('.otgs-notice');
+        var nonce = notice.find('input[name="wpml_set_translation_editor_nonce"]').val();
+        var success = notice.find('.js-done');
+        var error = notice.find('.js-error');
 
 		$.ajax({
 						 url:     ajaxurl,

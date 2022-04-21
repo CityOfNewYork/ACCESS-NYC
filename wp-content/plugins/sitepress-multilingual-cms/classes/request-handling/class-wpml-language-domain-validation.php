@@ -15,26 +15,28 @@ class WPML_Language_Domain_Validation {
 	/**
 	 * @param WPML_WP_API $wp_api
 	 * @param WP_Http     $http
-	 * @param string      $url
 	 *
 	 * @throws \InvalidArgumentException
 	 */
 
-	public function __construct( $wp_api, $http, $url ) {
+	public function __construct( WPML_WP_API $wp_api, WP_Http $http) {
 		$this->wp_api         = $wp_api;
 		$this->http           = $http;
-		$this->url            = $url;
-		$this->validation_url = $this->get_validation_url();
-		if ( ! $this->has_scheme_and_host() ) {
-			throw new InvalidArgumentException( 'Invalid URL :' . $this->url );
-		}
 	}
 
 	/**
+	 * @param string $url
+	 *
 	 * @return bool
 	 */
-	public function is_valid() {
-		if( is_multisite() && defined( 'SUBDOMAIN_INSTALL' ) && SUBDOMAIN_INSTALL ) {
+	public function is_valid( $url ) {
+		$this->url            = $url;
+		$this->validation_url = $this->get_validation_url();
+		if ( ! $this->has_scheme_and_host() ) {
+			return false;
+		}
+
+		if ( is_multisite() && defined( 'SUBDOMAIN_INSTALL' ) && SUBDOMAIN_INSTALL ) {
 			return true;
 		}
 

@@ -21,7 +21,7 @@ class WPML_Admin_Table_Sort {
 	 * @param string $orderby_param
 	 * @param string $order_param
 	 */
-	public function __construct( $orderby_param = 'orderby', $order_param = 'order') {
+	public function __construct( $orderby_param = 'orderby', $order_param = 'order' ) {
 		$this->orderby_param = $orderby_param;
 		$this->order_param   = $order_param;
 	}
@@ -46,7 +46,7 @@ class WPML_Admin_Table_Sort {
 		);
 
 		if ( $this->get_current_orderby() === $column && $this->get_current_order() === 'desc' ) {
-			$query_args[$this->order_param] = 'asc';
+			$query_args[ $this->order_param ] = 'asc';
 		}
 
 		return add_query_arg( $query_args, $this->get_current_url() );
@@ -87,7 +87,7 @@ class WPML_Admin_Table_Sort {
 	 */
 	private function get_current_orderby() {
 		$url_args = $this->get_url_args();
-		return isset( $url_args[$this->orderby_param] ) ? $url_args[$this->orderby_param] : null;
+		return isset( $url_args[ $this->orderby_param ] ) ? $url_args[ $this->orderby_param ] : null;
 	}
 
 	/**
@@ -95,7 +95,7 @@ class WPML_Admin_Table_Sort {
 	 */
 	private function get_current_order() {
 		$url_args = $this->get_url_args();
-		return isset( $url_args[$this->order_param] ) ? $url_args[$this->order_param] : null;
+		return isset( $url_args[ $this->order_param ] ) ? $url_args[ $this->order_param ] : null;
 	}
 
 	/**
@@ -114,7 +114,7 @@ class WPML_Admin_Table_Sort {
 	private function get_url_args() {
 		if ( ! $this->url_args ) {
 			$this->url_args = array();
-			$url_query  = wpml_parse_url( $this->get_current_url(), PHP_URL_QUERY );
+			$url_query      = wpml_parse_url( $this->get_current_url(), PHP_URL_QUERY );
 			parse_str( $url_query, $this->url_args );
 		}
 

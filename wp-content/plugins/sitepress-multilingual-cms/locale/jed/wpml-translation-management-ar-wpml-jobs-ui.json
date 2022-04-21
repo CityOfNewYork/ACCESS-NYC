@@ -1,0 +1,22 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Draft — Pending review": [
+            "مسودة — المراجعة معلقة"
+         ],
+         "Complete": [
+            "استكمِل"
+         ],
+         "Insufficient funds": [
+            "رصيد غير كافٍ"
+         ],
+         "Editor Job ID": [
+            "معرف هوية مهمة المحرر"
+         ]
+      }
+   }
+}

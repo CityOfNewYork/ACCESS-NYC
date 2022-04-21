@@ -9,17 +9,17 @@ WPML_String_Translation.ChangeDomainLanguage = function () {
 	var privateData = {};
 
 	var init = function () {
-		jQuery(document).ready(function () {
+        jQuery(function () {
 
-			privateData.summary_div = jQuery('#wpml-change-domain-language-dialog').find('.js-summary');
-			privateData.lang_select = jQuery(privateData.summary_div).find('select');
-			privateData.apply_button = jQuery('#wpml-change-domain-language-dialog-apply-button');
-			privateData.table_body = privateData.summary_div.find('table').find('tbody');
-			privateData.domain_select = jQuery('#wpml-domain-select');
-			privateData.check_all = jQuery(privateData.summary_div).find('.js-all-check');
-			privateData.lang_area = jQuery(privateData.summary_div).find('.js-lang-select-area');
+            privateData.summary_div = jQuery('#wpml-change-domain-language-dialog').find('.js-summary');
+            privateData.lang_select = jQuery(privateData.summary_div).find('select');
+            privateData.apply_button = jQuery('#wpml-change-domain-language-dialog-apply-button');
+            privateData.table_body = privateData.summary_div.find('table').find('tbody');
+            privateData.domain_select = jQuery('#wpml-domain-select');
+            privateData.check_all = jQuery(privateData.summary_div).find('.js-all-check');
+            privateData.lang_area = jQuery(privateData.summary_div).find('.js-lang-select-area');
 
-			setupDialog();
+            setupDialog();
 
 			jQuery('#wpml-language-of-domains-link').on('click', showDialog);
 			privateData.domain_select.on('change', showSummary);
@@ -54,7 +54,7 @@ WPML_String_Translation.ChangeDomainLanguage = function () {
 				close:         function () {
 					var languageSelector = jQuery('.js-simple-lang-selector-flags');
 					if (languageSelector) {
-						languageSelector.select2("close");
+						languageSelector.wpml_select2("close");
 					}
 				}
 			});
@@ -79,7 +79,7 @@ WPML_String_Translation.ChangeDomainLanguage = function () {
 			buildTable(languages);
 
 			domainLang = jQuery(this).find('option:selected').data('domain_lang');
-			jQuery(privateData.lang_select).select2('val', domainLang);
+			jQuery(privateData.lang_select).wpml_select2('val', domainLang);
 
 			privateData.summary_div.show();
 

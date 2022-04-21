@@ -22,7 +22,7 @@ class RegisteredButtons {
 				<?php printf( __( "Unregister %s from this site", 'installer' ), $model->productName ) ?>
 			</a>&nbsp;
 
-			<?php if ( ! $model->expired ): ?>
+			<?php if ( ! $model->expired && $model->displayCheckForUpdates ): ?>
 				<a class="update_site_key_js otgs-installer-notice-status-item-btn"
 				   data-repository="<?php echo $model->repoId ?>"
 				   data-nonce="<?php echo $model->updateSiteKeyNonce; ?>"

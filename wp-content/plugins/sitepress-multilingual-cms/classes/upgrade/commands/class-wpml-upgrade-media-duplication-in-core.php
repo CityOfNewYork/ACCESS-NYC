@@ -2,10 +2,10 @@
 
 class WPML_Upgrade_Media_Duplication_In_Core implements IWPML_Upgrade_Command {
 
-	const DUPLICATE_FEATURED_META_KEY = '_wpml_media_featured';
-	const FEATURED_AS_TRANSLATED_META_KEY = '_wpml_featured_image_as_translated';
+	const DUPLICATE_FEATURED_META_KEY            = '_wpml_media_featured';
+	const FEATURED_AS_TRANSLATED_META_KEY        = '_wpml_featured_image_as_translated';
 	const TRANSIENT_DEFERRED_UPGRADE_IN_PROGRESS = 'wpml_upgrade_media_duplication_in_progress';
-	const MAX_TIME = 10;
+	const MAX_TIME                               = 10;
 
 	/** @var SitePress */
 	private $sitepress;
@@ -29,9 +29,9 @@ class WPML_Upgrade_Media_Duplication_In_Core implements IWPML_Upgrade_Command {
 	private $start_time;
 
 	public function __construct( array $args ) {
-		$this->sitepress    = $args[0];
-		$this->wpdb         = $args[1]->get_wpdb();
-		$this->notices      = $args[2];
+		$this->sitepress = $args[0];
+		$this->wpdb      = $args[1]->get_wpdb();
+		$this->notices   = $args[2];
 	}
 
 	/**
@@ -185,16 +185,16 @@ class WPML_Upgrade_Media_Duplication_In_Core implements IWPML_Upgrade_Command {
 								}
 							}
 						},
-                        error: function(jqXHR, textStatus, errorThrown) {
+						error: function(jqXHR, textStatus, errorThrown) {
 							var errorData = '<p>status code: '+jqXHR.status+'</p><p>errorThrown: ' + errorThrown + '</p><p>jqXHR.responseText:</p><div>'+jqXHR.responseText + '</div>';
-							upgradeProgress.html( '<?php echo esc_html__('The following exception has occurred while running the migration, please try again later or contact support if the problem persists.', 'sitepress'); ?><hr>' + errorData );
+							upgradeProgress.html( '<?php echo esc_html__( 'The following exception has occurred while running the migration, please try again later or contact support if the problem persists.', 'sitepress' ); ?><hr>' + errorData );
 							console.log('jqXHR:');
 							console.log(jqXHR);
 							console.log('textStatus:');
 							console.log(textStatus);
 							console.log('errorThrown:');
 							console.log(errorThrown);
-                        }
+						}
 					} );
 				};
 
@@ -283,7 +283,6 @@ class WPML_Upgrade_Media_Duplication_In_Core implements IWPML_Upgrade_Command {
 			foreach ( $this->sitepress->get_active_languages() as $language_code => $active_language ) {
 				$this->get_media_attachment_duplication()->create_duplicate_attachment( (int) $attachment_id, (int) $post->ID, $language_code );
 			}
-
 		}
 
 		update_post_meta( $post->ID, '_wpml_media_duplicate', true );
@@ -293,7 +292,7 @@ class WPML_Upgrade_Media_Duplication_In_Core implements IWPML_Upgrade_Command {
 		$settings = $this->get_media_settings();
 
 		return isset( $settings['new_content_settings']['duplicate_media'] )
-		     && $settings['new_content_settings']['duplicate_media'];
+			 && $settings['new_content_settings']['duplicate_media'];
 	}
 
 	public function update_global_settings() {
@@ -357,7 +356,7 @@ class WPML_Upgrade_Media_Duplication_In_Core implements IWPML_Upgrade_Command {
 	}
 
 	private function remove_notice() {
-		$this->notices->remove_notice( 'default',  __CLASS__ );
+		$this->notices->remove_notice( 'default', __CLASS__ );
 	}
 
 	private function create_or_refresh_notice() {

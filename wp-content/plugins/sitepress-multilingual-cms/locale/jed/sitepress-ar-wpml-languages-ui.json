@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose Content to Automatically Translate into": [
+            "اختر المحتوى المراد ترجمته آليًا إلى"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "حفظ التغييرات وتمكين الترجمة الآلية"
+         ],
+         "Cancel Language Changes": [
+            "إلغاء تغييرات اللغة"
+         ],
+         "Save": [
+            "حفظ"
+         ],
+         "Choose Content to Automatically Translate into New Language": [
+            "اختر المحتوى لترجمته آليًا إلى لغة جديدة"
+         ],
+         "Add languages and start translating": [
+            "إضافة لغات وبدء الترجمة"
+         ],
+         "Add language and start translating": [
+            "إضافة لغة وبدء الترجمة"
+         ],
+         "Never mind. Don't add new languages": [
+            "لا عليك. لا تقم بإضافة لغات جديدة"
+         ],
+         "Never mind. Don't add new language": [
+            "لا عليك. لا تقم بإضافة لغة جديدة"
+         ],
+         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
+            "ترجمة جميع مقالاتي وصفحاتي الحالية آليًا الآن، بالإضافة إلى المحتوى الجديد بمجرد إنشائي له."
+         ],
+         "Only automatically translate new content.": [
+            "ترجمة المحتوى الجديد فقط آليًا."
+         ],
+         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
+            "أنت تستخدم وضع <a>ترجمة كل شيء</a>، والذي يقوم بترجمة محتوى موقعك آليًا."
+         ],
+         "Which content do you want to automatically translate into your newly-added language?": [
+            "ما هو المحتوى الذي ترغب في ترجمته آليًا إلى اللغة المضافة حديثًا إلى موقعك؟"
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "يمكنك ترجمة المحتوى الحالي من خلال لوحة أدوات إدارة الترجمة."
+         ]
+      }
+   }
+}

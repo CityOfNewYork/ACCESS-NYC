@@ -22,6 +22,10 @@ class WPML_ST_String_Positions_In_Source extends WPML_ST_String_Positions {
 	 * @var WPML_File_Name_Converter $filename_converter
 	 */
 	private $filename_converter;
+	/**
+	 * @var \WPML_WP_API
+	 */
+	private $wp_api;
 
 	public function __construct(
 		SitePress $sitePress,
@@ -55,7 +59,7 @@ class WPML_ST_String_Positions_In_Source extends WPML_ST_String_Positions {
 	}
 
 	/**
-	 * @param $string_id
+	 * @param int $string_id
 	 *
 	 * @return array
 	 */

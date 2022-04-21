@@ -21,8 +21,8 @@ class WPML_ST_WP_Loaded_Action extends WPML_SP_User {
 	public function run() {
 		$string_settings = $this->sitepress->get_setting( 'st', array() );
 		if ( ! isset( $string_settings['sw'] )
-		     || ( $this->pagenow === 'admin.php'
-		          && strpos( $this->get_page, 'theme-localization.php' ) !== false ) ) {
+			 || ( $this->pagenow === 'admin.php'
+				  && strpos( $this->get_page, 'theme-localization.php' ) !== false ) ) {
 			$string_settings['sw'] = isset( $string_settings['sw'] )
 				? $string_settings['sw'] : array();
 			$this->sitepress->set_setting( 'st', $string_settings, true );

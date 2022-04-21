@@ -1,15 +1,14 @@
-jQuery(document).ready(
-	function () {
-		"use strict";
-		jQuery('.editinline').on(
-			'click', function () {
-				var lang, parentDiv, editButton, postLink;
+jQuery(function () {
+    "use strict";
+    jQuery('.editinline').on(
+        'click', function () {
+            var lang, parentDiv, editButton, postLink;
 
-				parentDiv = jQuery(this).closest('div');
-				editButton = parentDiv.find('.edit').find('a');
-				postLink = editButton.attr('href');
-				lang = postLink.match(/(?=lang=).*.$/).pop().replace('lang=', '');
-				parseJSONTerms(lang);
+            parentDiv = jQuery(this).closest('div');
+            editButton = parentDiv.find('.edit').find('a');
+            postLink = editButton.attr('href');
+            lang = postLink.match(/(?=lang=).*.$/).pop().replace('lang=', '');
+            parseJSONTerms(lang);
 			}
 		);
 	}
@@ -25,7 +24,7 @@ function parseJSONTerms(lang) {
 	"use strict";
 	var JSONString, allTerms, termsInCorrectLang, taxonomy;
 	JSONString = jQuery('#icl-terms-by-lang').html();
-	allTerms = jQuery.parseJSON(JSONString);
+	allTerms = JSON.parse(JSONString);
 	if (allTerms.hasOwnProperty(lang)) {
 		termsInCorrectLang = allTerms[lang];
 		for (taxonomy in termsInCorrectLang) {

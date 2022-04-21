@@ -116,7 +116,7 @@ class FieldGoogleMap extends BaseGoogleMap {
     /**
      * @return int
      */
-    public function getCountValues() {
+    public function getCountValues($parentIndex = false) {
         $parents = $this->getParents();
         $count = 0;
         if (!empty($parents)){

@@ -1,13 +1,13 @@
-jQuery(document).ready(function () {
+jQuery(function () {
 
-	var cookie_setting      = wpml_cookie_setting,
-		ajax_success_action = function( response, response_text ) {
+    var cookie_setting = wpml_cookie_setting,
+        ajax_success_action = function (response, response_text) {
 
-		if( response.success ) {
-			response_text.text( icl_ajx_saved );
-		} else {
-			response_text.text( icl_ajx_error );
-		}
+            if (response.success) {
+                response_text.text(icl_ajx_saved);
+            } else {
+                response_text.text(icl_ajx_error);
+            }
 
 		response_text.show();
 
@@ -39,7 +39,7 @@ jQuery(document).ready(function () {
 					buttons: function( event, t ) {
 						var button = jQuery('<a class="close" href="#">&nbsp;</a>');
 
-						return button.bind( 'click.pointer', function(e) {
+						return button.on( 'click.pointer', function(e) {
 							e.preventDefault();
 							t.element.pointer('close');
 						});

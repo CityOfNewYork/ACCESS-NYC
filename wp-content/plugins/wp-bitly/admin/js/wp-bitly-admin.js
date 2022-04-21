@@ -8,7 +8,7 @@ var windowFeatures = "menubar=0,location=0,resizable=yes,toolbar=0,scrollbars=ye
         
         function populate_org_options(token){
             $.ajax({
-                url:"/wp-admin/admin-ajax.php",
+                url:ajaxurl,
                 data:{token:token,action:"get_org_options"},
                 method: "POST"   
             })
@@ -21,18 +21,20 @@ var windowFeatures = "menubar=0,location=0,resizable=yes,toolbar=0,scrollbars=ye
         
         function change_group_options(curr_org){
             $.ajax({
-                url:"/wp-admin/admin-ajax.php",
+                url:ajaxurl,
                 data:{curr_org:curr_org,action:"get_group_options"},
                 method: "POST"   
             })
             .done(function( options ) {
                 $( "#wpbitly_default_group" ).html( options );
+                var curr_group = $( "#wpbitly_default_group" ).val();
+                change_domain_options(curr_group);
             });
         }
         
         function change_domain_options(curr_group){
             $.ajax({
-                url:"/wp-admin/admin-ajax.php",
+                url:ajaxurl,
                 data:{curr_group:curr_group,action:"get_domain_options"},
                 method: "POST"   
             })

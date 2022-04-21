@@ -1,0 +1,40 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Accepted": [
+            "התקבלה"
+         ],
+         "Reviewing the next translation...": [
+            "בדיקת התרגום הבא."
+         ],
+         "Back": [
+            "חזרה"
+         ],
+         "Edit Translation": [
+            "ערוך תרגום"
+         ],
+         "There was an error in applying translation.": [
+            "אירעה שגיאה בהחלת התרגום."
+         ],
+         "Please wait, applying translation..": [
+            "המתן, מחיל את התרגום."
+         ],
+         "Publish this translation": [
+            "פרסם תרגום זה."
+         ],
+         "Accept this translation": [
+            "קבל תרגום זה"
+         ],
+         "Approved!": [
+            "אושר!"
+         ],
+         "Loading the next translation for review...": [
+            "טוען את התרגום הבא לבדיקה..."
+         ]
+      }
+   }
+}

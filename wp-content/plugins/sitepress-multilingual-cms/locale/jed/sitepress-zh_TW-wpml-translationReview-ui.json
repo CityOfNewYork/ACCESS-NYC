@@ -1,0 +1,40 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Accepted": [
+            "已接受"
+         ],
+         "Reviewing the next translation...": [
+            "審閱下一個翻譯..."
+         ],
+         "Back": [
+            "返回"
+         ],
+         "Edit Translation": [
+            "編輯翻譯"
+         ],
+         "There was an error in applying translation.": [
+            "套用翻譯時出錯。"
+         ],
+         "Please wait, applying translation..": [
+            "請稍候，正在套用翻譯.."
+         ],
+         "Publish this translation": [
+            "發佈此翻譯"
+         ],
+         "Accept this translation": [
+            "接受此翻譯"
+         ],
+         "Approved!": [
+            "已核准！"
+         ],
+         "Loading the next translation for review...": [
+            "正在載入下一個翻譯以供審閱..."
+         ]
+      }
+   }
+}

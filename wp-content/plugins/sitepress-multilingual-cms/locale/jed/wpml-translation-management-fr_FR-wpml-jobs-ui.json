@@ -1,0 +1,22 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Draft — Pending review": [
+            "Brouillon : relecture en attente"
+         ],
+         "Complete": [
+            "Achevé"
+         ],
+         "Insufficient funds": [
+            "Fonds insuffisants"
+         ],
+         "Editor Job ID": [
+            "ID de la tâche de l'éditeur"
+         ]
+      }
+   }
+}

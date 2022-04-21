@@ -5,18 +5,18 @@
  */
 class WPML_ICL_Client {
 	private $error;
-	/** @var WP_HTTP $http */
+	/** @var WP_Http $http */
 	private $http;
-	/** @var  WPML_WP_API $wp_api */
+	/** @var WPML_WP_API $wp_api */
 	private $wp_api;
-	private $method  = 'GET';
+	private $method = 'GET';
 	private $post_data;
 
 	/**
 	 * WPML_ICL_Client constructor.
 	 *
-	 * @param WP_HTTP $http
-	 * @param WPML_WP_API
+	 * @param WP_Http     $http
+	 * @param WPML_WP_API $wp_api
 	 */
 	public function __construct( $http, $wp_api ) {
 		$this->http   = $http;
@@ -72,7 +72,7 @@ class WPML_ICL_Client {
 	}
 
 	/**
-	 * @param $request_url
+	 * @param string $request_url
 	 *
 	 * @return mixed|string
 	 */
@@ -93,7 +93,7 @@ class WPML_ICL_Client {
 	}
 
 	/**
-	 * @param $method
+	 * @param string $method
 	 */
 	public function set_method( $method ) {
 		$this->method = $method;

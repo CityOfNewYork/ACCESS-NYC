@@ -90,7 +90,16 @@ activate_plugin('redis-cache/redis-cache.php');
  */
 
 activate_plugin('query-monitor/query-monitor.php');
-activate_plugin('query-monitor-twig-profile/query-monitor-twig-profile.php');
+
+/**
+ * Enable seamless logging in to the WordPress Admin.
+ *
+ * @author NYC Opportunity
+ */
+
+if (file_exists(WPMU_PLUGIN_DIR . '/wp-login/login.php')) {
+  require_once WPMU_PLUGIN_DIR . '/wp-login/login.php';
+}
 
 /**
  * Allow local development requests

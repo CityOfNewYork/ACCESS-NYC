@@ -3,10 +3,10 @@
 class WPML_Root_Page {
 
 	public static function init() {
-		if ( WPML_Root_Page::uses_html_root()
-		     || WPML_Root_Page::get_root_id() > 0
-		     || strpos( (string) filter_var( $_SERVER['REQUEST_URI'] ), 'wpml_root_page=1' ) !== false
-		     || (bool) filter_input( INPUT_POST, '_wpml_root_page' ) === true
+		if ( self::uses_html_root()
+			 || self::get_root_id() > 0
+			 || strpos( (string) filter_var( $_SERVER['REQUEST_URI'] ), 'wpml_root_page=1' ) !== false
+			 || (bool) filter_input( INPUT_POST, '_wpml_root_page' ) === true
 		) {
 			global $wpml_root_page_actions;
 
@@ -31,14 +31,15 @@ class WPML_Root_Page {
 	/**
 	 * Checks if the value in $_SERVER['REQUEST_URI] points towards the root page.
 	 * Therefore this can be used to check if the current request points towards the root page.
+	 *
 	 * @return bool
 	 */
 	public static function is_current_request_root() {
-		return self::is_root_page( $_SERVER[ 'REQUEST_URI' ] );
+		return self::is_root_page( $_SERVER['REQUEST_URI'] );
 	}
 
 	/**
-	 * @param $requested_url string
+	 * @param string $requested_url
 	 *                       Checks if a requested url points towards the root page.
 	 *
 	 * @return bool
@@ -51,8 +52,8 @@ class WPML_Root_Page {
 		}
 
 		$request_parts = self::get_slugs_and_get_query( $requested_url );
-		$slugs         = $request_parts[ 'slugs' ];
-		$gets          = $request_parts[ 'querystring' ];
+		$slugs         = $request_parts['slugs'];
+		$gets          = $request_parts['querystring'];
 
 		$target_of_gets = self::get_query_target_from_query_string( $gets );
 
@@ -72,11 +73,12 @@ class WPML_Root_Page {
 	public static function uses_html_root() {
 		$urls = icl_get_setting( 'urls' );
 
-		return isset( $urls[ 'root_page' ] ) && isset( $urls[ 'show_on_root' ] ) && $urls[ 'show_on_root' ] === 'html_file';
+		return isset( $urls['root_page'] ) && isset( $urls['show_on_root'] ) && $urls['show_on_root'] === 'html_file';
 	}
 
 	/**
 	 * Returns the id of the root page or false if it isn't set.
+	 *
 	 * @return bool|int
 	 */
 	public static function get_root_id() {
@@ -87,6 +89,7 @@ class WPML_Root_Page {
 
 	/**
 	 * Returns the slug of the root page or false if non exists.
+	 *
 	 * @return bool|string
 	 */
 	private static function get_root_slug() {
@@ -105,27 +108,27 @@ class WPML_Root_Page {
 	}
 
 	/**
-	 * @param $requested_url string
+	 * @param string $requested_url
 	 *                       Takes a request_url in the format of $_SERVER['REQUEST_URI']
 	 *                       and returns an associative array containing its slugs ans query string.
 	 *
 	 * @return array
 	 */
 	private static function get_slugs_and_get_query( $requested_url ) {
-		$result            = array();
-		$request_path      = wpml_parse_url( $requested_url, PHP_URL_PATH );
-		$request_path      = wpml_strip_subdir_from_url( $request_path );
-		$slugs             = self::get_slugs_array( $request_path );
-		$result[ 'slugs' ] = $slugs;
+		$result          = array();
+		$request_path    = wpml_parse_url( $requested_url, PHP_URL_PATH );
+		$request_path    = wpml_strip_subdir_from_url( $request_path );
+		$slugs           = self::get_slugs_array( $request_path );
+		$result['slugs'] = $slugs;
 
-		$query_string            = wpml_parse_url( $requested_url, PHP_URL_QUERY );
-		$result[ 'querystring' ] = ! $query_string ? '' : $query_string;
+		$query_string          = wpml_parse_url( $requested_url, PHP_URL_QUERY );
+		$result['querystring'] = ! $query_string ? '' : $query_string;
 
 		return $result;
 	}
 
 	/**
-	 * @param $path string
+	 * @param string $path
 	 *              Turns a query string into an array of its slugs.
 	 *              The array is filtered so to not contain empty values and
 	 *              consecutively and numerically indexed starting at 0.
@@ -141,7 +144,7 @@ class WPML_Root_Page {
 	}
 
 	/**
-	 * @param $slugs array
+	 * @param array $slugs
 	 *               Checks if a given set of slugs points towards the root page or not.
 	 *               The result of this can always be overridden by GET parameters and is not a certain
 	 *               check as to being on the root page or not.
@@ -172,10 +175,10 @@ class WPML_Root_Page {
 	}
 
 	/**
-	 * @param $query_string
 	 * Turns a given query string into an associative array of its parameters.
 	 *
-	 * @return array
+	 * @param string $query_string
+	 * @return array<string,string>
 	 */
 	private static function get_query_array_from_string( $query_string ) {
 		$all_query_params = array();
@@ -185,7 +188,7 @@ class WPML_Root_Page {
 	}
 
 	/**
-	 * @param $query_string string
+	 * @param string $query_string
 	 *                      Checks if the WP_Query functionality can decisively recognize if a querystring points
 	 *                      towards an archive.
 	 *
@@ -196,15 +199,16 @@ class WPML_Root_Page {
 		$root_page_actions = wpml_get_root_page_actions_obj();
 		remove_action( 'parse_query', array( $root_page_actions, 'wpml_home_url_parse_query' ) );
 		$query_string = str_replace( '?', '', $query_string );
-		$query        = new WP_Query( $query_string );
-		$is_archive   = $query->is_archive();
+
+		$query      = new WP_Query( $query_string );
+		$is_archive = $query->is_archive();
 		add_action( 'parse_query', array( $root_page_actions, 'wpml_home_url_parse_query' ) );
 
 		return $is_archive;
 	}
 
 	/**
-	 * @param $query_string string
+	 * @param string $query_string
 	 *                      Checks if a given query string decisively points towards or away from the root page.
 	 *
 	 * @return int
@@ -216,19 +220,19 @@ class WPML_Root_Page {
 	}
 
 	/**
-	 * @param $query_params array
+	 * @param array $query_params
 	 *                      Checks if a set of query parameters decisively points towards or away from the root page.
 	 *
 	 * @return int
 	 */
 	private static function get_query_target_from_params_array( $query_params ) {
 
-		if ( ! isset( $query_params[ 'p' ] )
-				 && ! isset( $query_params[ 'page_id' ] )
-				 && ! isset( $query_params[ 'name' ] )
-				 && ! isset( $query_params[ 'pagename' ] )
-				 && ! isset( $query_params[ 'page_name' ] )
-				 && ! isset( $query_params[ 'attachment_id' ] )
+		if ( ! isset( $query_params['p'] )
+				 && ! isset( $query_params['page_id'] )
+				 && ! isset( $query_params['name'] )
+				 && ! isset( $query_params['pagename'] )
+				 && ! isset( $query_params['page_name'] )
+				 && ! isset( $query_params['attachment_id'] )
 		) {
 			$result = WPML_QUERY_IS_NOT_FOR_POST;
 		} else {
@@ -236,12 +240,12 @@ class WPML_Root_Page {
 			$root_id   = self::get_root_id();
 			$root_slug = self::get_root_slug();
 
-			if ( ( isset( $query_params[ 'p' ] ) && $query_params[ 'p' ] != $root_id )
-					 || ( isset( $query_params[ 'page_id' ] ) && $query_params[ 'page_id' ] != $root_id )
-					 || ( isset( $query_params[ 'name' ] ) && $query_params[ 'name' ] != $root_slug )
-					 || ( isset( $query_params[ 'pagename' ] ) && $query_params[ 'pagename' ] != $root_slug )
-					 || ( isset( $query_params[ 'preview_id' ] ) && $query_params[ 'preview_id' ] != $root_id )
-					 || ( isset( $query_params[ 'attachment_id' ] ) && $query_params[ 'attachment_id' ] != $root_id )
+			if ( ( isset( $query_params['p'] ) && $query_params['p'] != $root_id )
+					 || ( isset( $query_params['page_id'] ) && $query_params['page_id'] != $root_id )
+					 || ( isset( $query_params['name'] ) && $query_params['name'] != $root_slug )
+					 || ( isset( $query_params['pagename'] ) && $query_params['pagename'] != $root_slug )
+					 || ( isset( $query_params['preview_id'] ) && $query_params['preview_id'] != $root_id )
+					 || ( isset( $query_params['attachment_id'] ) && $query_params['attachment_id'] != $root_id )
 			) {
 				$result = WPML_QUERY_IS_OTHER_THAN_ROOT;
 			} else {
@@ -253,13 +257,13 @@ class WPML_Root_Page {
 	}
 
 	/**
-	 * @param $post false|WP_Post
+	 * @param false|WP_Post $post
 	 *              Filters the postID used by the preview for the case of the root page preview.
 	 *
 	 * @return null|WP_Post
 	 */
 	public static function front_page_id_filter( $post ) {
-		$preview_id = isset( $_GET[ 'preview_id' ] ) ? $_GET[ 'preview_id' ] : - 1;
+		$preview_id = isset( $_GET['preview_id'] ) ? $_GET['preview_id'] : - 1;
 
 		if ( $preview_id == self::get_root_id() ) {
 			$post = get_post( $preview_id );
@@ -271,12 +275,24 @@ class WPML_Root_Page {
 	/**
 	 * Filters the template that is used for the root page
 	 *
-	 * @param $template
+	 * @param string $template
 	 *
 	 * @return string
 	 */
 	public static function wpml_home_url_template_include( $template ) {
 
-		return self::is_current_request_root() ? get_page_template() : $template;
+		return self::is_current_request_root() ? self::get_root_page_template() : $template;
+	}
+
+	/**
+	 * @return string
+	 */
+	public static function get_root_page_template() {
+		$page_template = get_page_template();
+		if ( $page_template ) {
+			return $page_template;
+		}
+		$singular_template = get_singular_template();
+		return $singular_template ?: get_index_template();
 	}
 }

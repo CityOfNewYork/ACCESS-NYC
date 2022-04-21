@@ -12,7 +12,7 @@ class WPML_Language_Collection {
 	 * WPML_Language_Collection constructor.
 	 *
 	 * @param SitePress $sitepress
-	 * @param array $initial_languages Array of language codes
+	 * @param array     $initial_languages Array of language codes
 	 */
 	public function __construct( SitePress $sitepress, $initial_languages = array() ) {
 		$this->sitepress = $sitepress;
@@ -31,7 +31,7 @@ class WPML_Language_Collection {
 	}
 
 	public function get( $code ) {
-		if( ! isset( $this->languages[ $code ] ) ) {
+		if ( ! isset( $this->languages[ $code ] ) ) {
 			$this->add( $code );
 		}
 		return $this->languages[ $code ];

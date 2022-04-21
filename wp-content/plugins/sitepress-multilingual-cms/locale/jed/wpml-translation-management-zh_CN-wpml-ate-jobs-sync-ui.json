@@ -1,0 +1,163 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "发送翻译"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "正在连接到WPML的高级翻译编辑器"
+         ],
+         "Try again": [
+            "重试"
+         ],
+         "You don't have the rights to review this language": [
+            "您无权查看此语言"
+         ],
+         "pages & posts": [
+            "页面和文章"
+         ],
+         "left to translate": [
+            "还未翻译"
+         ],
+         "Translate on hold": [
+            "暂停翻译"
+         ],
+         "All translated": [
+            "全部已翻译"
+         ],
+         "%d translations left": [
+            "%d 翻译剩余"
+         ],
+         "Credits used:": [
+            "已用积分："
+         ],
+         "Credits left:": [
+            "剩余积分："
+         ],
+         "Calculating": [
+            "计算中"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "在WPML.org上分配给此网站的剩余预付积分。"
+         ],
+         "Prepaid credits left": [
+            "剩余预付积分"
+         ],
+         "Account credits used": [
+            "已用账户积分"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "一旦您用完了所有预付积分，我们将在月底后为您使用的任何额外积分开具发票"
+         ],
+         "Payment limit:": [
+            "付款限额："
+         ],
+         "%s credits": [
+            "%s个积分"
+         ],
+         "Preparing more content for translation": [
+            "正在准备更多的翻译内容"
+         ],
+         "Preparing content for translation": [
+            "正在准备翻译内容"
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "有一个自动翻译问题需要您注意。请修复后继续。"
+         ],
+         "%d translations waiting for review": [
+            "%d 翻译等待审阅"
+         ],
+         "Draft — Pending review": [
+            "草稿 — 等候审阅"
+         ],
+         "Complete": [
+            "完成"
+         ],
+         "Insufficient funds": [
+            "资金不足"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "阅读<a>入门指南</a>中有关如何翻译内容的更多信息"
+         ],
+         "Let's Start Translating!": [
+            "让我们开始翻译吧！"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "从下面的翻译仪表板中选择内容，创建第一个翻译工作！"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "更改<a>自动翻译设置</a>（正在进行的翻译工作将使用当前设置完成）。"
+         ],
+         "Read more about translating your site automatically.": [
+            "进一步了解如何自动翻译网站。"
+         ],
+         "Your site is being automatically translated!": [
+            "正在自动翻译您的网站！"
+         ],
+         "Automatic Translation Status": [
+            "自动翻译状态"
+         ],
+         "Calculating...": [
+            "计算中..."
+         ],
+         "Do not close WP admin!": [
+            "不要关闭WP管理员！"
+         ],
+         "The number of translations": [
+            "翻译数量"
+         ],
+         "Delete Translations": [
+            "删除翻译"
+         ],
+         "Keep Translations as Draft": [
+            "将译文保留为草稿"
+         ],
+         "Never mind. I want to review these translations.": [
+            "没关系。我会审阅这些翻译。"
+         ],
+         "Cancel": [
+            "取消"
+         ],
+         "You haven't selected any jobs that need review.": [
+            "您尚未选择任何需要审阅的工作。"
+         ],
+         "Please select the pending review jobs to abort.": [
+            "请选择挂起的审阅工作以中止。"
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "这将从翻译队列中删除选定的工作，而不会发布它们。您想如何处理这些翻译？"
+         ],
+         "Cancel Translation Review": [
+            "取消翻译审阅"
+         ],
+         "Edit": [
+            "编辑"
+         ],
+         "Updating": [
+            "更新中"
+         ],
+         "Translate": [
+            "翻译"
+         ],
+         "Take and translate": [
+            "接受并翻译"
+         ],
+         "Review": [
+            "审核"
+         ],
+         "Are you sure you want to resign from this job?": [
+            "您确定要辞去这份工作？"
+         ],
+         "Resign": [
+            "辞职"
+         ],
+         "View": [
+            "查看"
+         ]
+      }
+   }
+}

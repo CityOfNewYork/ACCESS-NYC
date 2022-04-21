@@ -71,7 +71,6 @@ function pipe( callable $f, callable $g ) {
  *
  * @param callable $function
  * @param mixed    $arg1
- * @param mixed ...
  *
  * @return callable
  */
@@ -89,7 +88,6 @@ function partial( callable $function, $arg1 ) {
  *
  * @param callable $function
  * @param mixed    $arg1
- * @param mixed ...
  *
  * @return callable
  */
@@ -101,6 +99,11 @@ function partialRight( callable $function, $arg1 ) {
 	};
 }
 
+/**
+ * @param callable $fn
+ *
+ * @return \Closure
+ */
 function tap( callable $fn ) {
 	return function ( $value ) use ( $fn ) {
 		$fn( $value );
@@ -109,16 +112,24 @@ function tap( callable $fn ) {
 	};
 }
 
-;
-
+/**
+ * @param callable $f
+ * @param callable $g
+ *
+ * @return \Closure
+ */
 function either( callable $f, callable $g ) {
 	return function ( $value ) use ( $f, $g ) {
 		return $f( $value ) || $g( $value );
 	};
 }
 
-;
-
+/**
+ * @param int      $count
+ * @param callable $fn
+ *
+ * @return \Closure
+ */
 function curryN( $count, Callable $fn ) {
 	$accumulator = function ( array $arguments ) use ( $count, $fn, &$accumulator ) {
 		return function () use ( $count, $fn, $arguments, $accumulator ) {
@@ -148,6 +159,13 @@ function curryN( $count, Callable $fn ) {
 	return $accumulator( [] );
 }
 
+/**
+ * @param callable $fn
+ * @param bool     $required
+ *
+ * @return \Closure
+ * @throws \ReflectionException
+ */
 function curry( callable $fn, $required = true ) {
 	if ( is_string( $fn ) && strpos( $fn, '::', 1 ) !== false ) {
 		$reflection = new \ReflectionMethod( $fn );
@@ -164,6 +182,11 @@ function curry( callable $fn, $required = true ) {
 	return curryN( $count, $fn );
 }
 
+/**
+ * @param string $fnName
+ *
+ * @return \Closure
+ */
 function apply( $fnName ) {
 	$args = array_slice( func_get_args(), 1 );
 
@@ -194,7 +217,7 @@ function apply( $fnName ) {
  * $result = $invoker( new Test( 2 ) );  // 20
  *
  *
- * @param $fnName
+ * @param string $fnName
  *
  * @return _Invoker
  */
@@ -202,6 +225,11 @@ function invoke( $fnName ) {
 	return new _Invoker( $fnName );
 }
 
+/**
+ * @param callable $fn
+ *
+ * @return \Closure
+ */
 function chain( callable $fn ) {
 	return function ( $container ) use ( $fn ) {
 		if ( method_exists( $container, 'chain' ) ) {
@@ -216,10 +244,20 @@ function chain( callable $fn ) {
 	};
 }
 
+/**
+ * @param callable $fn
+ *
+ * @return \Closure
+ */
 function flatMap( callable $fn ) {
 	return chain( $fn );
 }
 
+/**
+ * @param callable $fn
+ *
+ * @return Either
+ */
 function tryCatch( callable $fn ) {
 	try {
 		return Right::of( $fn() );
@@ -228,6 +266,11 @@ function tryCatch( callable $fn ) {
 	}
 }
 
+/**
+ * @param callable $fn
+ *
+ * @return \Closure
+ */
 function flip( callable $fn ) {
 	return function () use ( $fn ) {
 		$args = func_get_args();
@@ -240,5 +283,3 @@ function flip( callable $fn ) {
 		return call_user_func_array( $fn, $args );
 	};
 }
-
-;

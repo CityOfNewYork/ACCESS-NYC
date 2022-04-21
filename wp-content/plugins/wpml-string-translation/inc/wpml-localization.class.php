@@ -1,6 +1,10 @@
 <?php
 
 class WPML_Localization {
+	/**
+	 * @var \wpdb
+	 */
+	private $wpdb;
 
 	/**
 	 * WPML_Localization constructor.
@@ -18,7 +22,7 @@ class WPML_Localization {
 		return $this->get_domain_stats( $theme_localization_domains, 'theme' );
 	}
 
-	private function get_domain_stats( $localization_domains, $default, $no_wordpress = false ) {
+	public function get_domain_stats( $localization_domains, $default, $no_wordpress = false, $count_in_progress_as_completed = false ) {
 		$results = array();
 		if ( $localization_domains ) {
 			$domains = array();
@@ -29,7 +33,7 @@ class WPML_Localization {
 				}
 			}
 			if ( ! empty( $domains ) ) {
-				$sql = "SELECT context, status, COUNT(id) AS c 
+				$sql     = "SELECT context, status, COUNT(id) AS c 
 						FROM {$this->wpdb->prefix}icl_strings 
 						WHERE context IN ('" . join( "','", $domains ) . "') 
 						GROUP BY context, status";
@@ -37,14 +41,14 @@ class WPML_Localization {
 			}
 		}
 
-		return $this->results_to_array( $results );
+		return $this->results_to_array( $results, $count_in_progress_as_completed );
 	}
 
 	public function get_localization_stats( $component_type ) {
 		$localization_data = $this->get_localization_data( $component_type );
 
-		$results                     = array();
-		$all_domains                 = array();
+		$results     = array();
+		$all_domains = array();
 
 		foreach ( $localization_data as $component => $localization_domains ) {
 			$all_domains = array_merge( $all_domains, array_keys( $localization_domains ) );
@@ -82,83 +86,92 @@ class WPML_Localization {
 	}
 
 	public function get_wrong_plugin_localization_stats() {
-		$results = $this->wpdb->get_results( "
+		$results = $this->wpdb->get_results(
+			"
 	        SELECT context, status, COUNT(id) AS c
 	        FROM {$this->wpdb->prefix}icl_strings
 	        WHERE context LIKE ('plugin %')
 	        GROUP BY context, status
-	    " );
+	    "
+		);
 
 		return $this->results_to_array( $results );
 	}
-	
+
 	public function get_wrong_theme_localization_stats() {
-		$results = $this->wpdb->get_results( "
+		$results = $this->wpdb->get_results(
+			"
 	        SELECT context, status, COUNT(id) AS c
 	        FROM {$this->wpdb->prefix}icl_strings
 	        WHERE context LIKE ('theme %')
 	        GROUP BY context, status
-	    " );
+	    "
+		);
 
 		$results = $this->results_to_array( $results );
 
-		$theme_path = TEMPLATEPATH;
+		$theme_path        = TEMPLATEPATH;
 		$old_theme_context = 'theme ' . basename( $theme_path );
-		
+
 		unset( $results[ $old_theme_context ] );
-		
+
 		return $results;
-		
+
 	}
-	
+
 	public function does_theme_require_rescan() {
 
-		$theme_path = TEMPLATEPATH;
+		$theme_path        = TEMPLATEPATH;
 		$old_theme_context = 'theme ' . basename( $theme_path );
 
-
-		$result = $this->wpdb->get_var( $this->wpdb->prepare( "
+		$result = $this->wpdb->get_var(
+			$this->wpdb->prepare(
+				"
 	        SELECT COUNT(id) AS c
 	        FROM {$this->wpdb->prefix}icl_strings
 	        WHERE context = %s",
-			$old_theme_context
-			) );
-		
+				$old_theme_context
+			)
+		);
+
 		return $result ? true : false;
 	}
-	
+
 	public function get_most_popular_domain( $plugin ) {
 		$plugin_localization_domains = icl_get_sub_setting( 'st', 'plugin_localization_domains' );
-		
-		$most_popular = '';
-		$most_count = 0;
 
-		foreach( $plugin_localization_domains[ $plugin ] as $name => $count) {
+		$most_popular = '';
+		$most_count   = 0;
+
+		foreach ( $plugin_localization_domains[ $plugin ] as $name => $count ) {
 			if ( $name == 'WordPress' || $name == 'default' ) {
 				continue;
 			}
-			if ($count > $most_count) {
+			if ( $count > $most_count ) {
 				$most_popular = $name;
-				$most_count = $count;
+				$most_count   = $count;
 			}
 		}
-		
+
 		return $most_popular;
 	}
-	private function results_to_array( $results ) {
+	private function results_to_array( $results, $count_in_progress_as_completed = false ) {
 		$stats = array();
 
 		foreach ( $results as $r ) {
-			if ( ! isset( $stats[ $r->context ][ 'complete' ] ) ) {
-				$stats[ $r->context ][ 'complete' ] = 0;
+			if ( ! isset( $stats[ $r->context ]['complete'] ) ) {
+				$stats[ $r->context ]['complete'] = 0;
 			}
-			if ( ! isset( $stats[ $r->context ][ 'incomplete' ] ) ) {
-				$stats[ $r->context ][ 'incomplete' ] = 0;
+			if ( ! isset( $stats[ $r->context ]['incomplete'] ) ) {
+				$stats[ $r->context ]['incomplete'] = 0;
 			}
-			if ( $r->status == ICL_TM_COMPLETE ) {
-				$stats[ $r->context ][ 'complete' ] = $r->c;
+			if (
+				$r->status == ICL_TM_COMPLETE ||
+				( $count_in_progress_as_completed && $r->status == ICL_TM_IN_PROGRESS )
+			) {
+				$stats[ $r->context ]['complete'] += $r->c;
 			} else {
-				$stats[ $r->context ][ 'incomplete' ] += $r->c;
+				$stats[ $r->context ]['incomplete'] += $r->c;
 			}
 		}
 

@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose Content to Automatically Translate into": [
+            "Choisir des contenus à traduire automatiquement en"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "Sauvegarder les modifications et activer la traduction automatique"
+         ],
+         "Cancel Language Changes": [
+            "Annuler les modifications de langue"
+         ],
+         "Save": [
+            "Appliquer"
+         ],
+         "Choose Content to Automatically Translate into New Language": [
+            "Choisir un contenu à traduire automatiquement dans une nouvelle langue"
+         ],
+         "Add languages and start translating": [
+            "Ajouter des langues et démarrer la traduction"
+         ],
+         "Add language and start translating": [
+            "Ajouter une langue et démarrer la traduction"
+         ],
+         "Never mind. Don't add new languages": [
+            "C'est sans importance. N'ajoutez pas de nouvelles langues"
+         ],
+         "Never mind. Don't add new language": [
+            "C'est sans importance. N'ajoutez pas de nouvelle langue"
+         ],
+         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
+            "Traduire automatiquement toutes mes publications et pages actuelles immédiatement, ainsi que les nouveaux contenus au fur et à mesure que je les crée."
+         ],
+         "Only automatically translate new content.": [
+            "Traduire automatiquement uniquement les nouveaux contenus."
+         ],
+         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
+            "Vous utilisez actuellement le mode <a>Tout traduire</a>, qui permet de traduire automatiquement le contenu de votre site."
+         ],
+         "Which content do you want to automatically translate into your newly-added language?": [
+            "Quels contenus souhaitez-vous traduire automatiquement dans la langue que vous venez d'ajouter ?"
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "Vous pouvez traduire les contenus disponibles depuis le Tableau de bord de gestion de traduction."
+         ]
+      }
+   }
+}

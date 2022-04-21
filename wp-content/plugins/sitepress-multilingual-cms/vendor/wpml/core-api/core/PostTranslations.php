@@ -13,14 +13,18 @@ use function WPML\FP\curryN;
  * @method static callable|int setAsSource( ...$el_id, ...$language_code ) - Curried :: int → string → void
  * @method static callable|int setAsTranslationOf( ...$el_id, ...$translated_id, ...$language_code )
  * @method static callable|array get( ...$el_id ) - Curried :: int → [object]
+ * @method static callable|array|null getInLanguage( ...$el_id, ...$language_code ) - Curried :: int → string → array|null
+ * @method static callable|array|null getInCurrentLanguage( ...$el_id ) - Curried :: int → array|null
  * @method static callable|array getIfOriginal( ...$el_id ) - Curried :: int → [object]
+ * @method static callable|array getOriginal( ...$element_id ) - Curried :: int → object|null
+ * @method static callable|array getOriginalId( ...$element_id ) - Curried :: int → int
  */
 class PostTranslations {
 
 	use Macroable;
 
 	/**
-	 * @ignore
+	 * @return void
 	 */
 	public static function init() {
 
@@ -30,13 +34,19 @@ class PostTranslations {
 
 		self::macro( 'get', curryN( 1, self::withPostType( Translations::get() ) ) );
 
+		self::macro( 'getInLanguage', curryN( 2, self::withPostType( Translations::getInLanguage() ) ) );
+
+		self::macro( 'getInCurrentLanguage', curryN( 1, self::withPostType( Translations::getInCurrentLanguage() ) )  );
+
 		self::macro( 'getIfOriginal', curryN( 1, self::withPostType( Translations::getIfOriginal() ) ) );
 
+		self::macro( 'getOriginal', curryN( 1, self::withPostType( Translations::getOriginal() ) ) );
+
+		self::macro( 'getOriginalId', curryN( 1, self::withPostType( Translations::getOriginalId() ) ) );
 	}
 
 	/**
-	 * @ignore
-	 * @param $fn
+	 * @param callable $fn
 	 *
 	 * @return \Closure
 	 */

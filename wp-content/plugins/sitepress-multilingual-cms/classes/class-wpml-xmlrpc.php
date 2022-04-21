@@ -9,7 +9,7 @@ class WPML_XMLRPC extends WPML_SP_User {
 	/**
 	 * WPML_XMLRPC constructor.
 	 *
-	 * @param SitePress        $sitepress
+	 * @param SitePress $sitepress
 	 */
 	public function __construct( SitePress $sitepress ) {
 		parent::__construct( $sitepress );

@@ -25,7 +25,7 @@ abstract class WPML_TF_Data_Object_Post_Convert {
 	abstract public function to_post_data( IWPML_TF_Data_Object $data_object );
 
 	/**
-	 * @param array
+	 * @param array $post_data
 	 *
 	 * @return object
 	 */

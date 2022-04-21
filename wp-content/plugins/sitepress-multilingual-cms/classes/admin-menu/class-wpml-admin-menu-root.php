@@ -55,13 +55,15 @@ class WPML_Admin_Menu_Root {
 
 		$root_slug = $this->get_menu_slug();
 
-		add_menu_page( $this->get_page_title(),
-		               $this->get_menu_title(),
-		               $this->get_capability(),
-		               $root_slug,
-		               $this->get_function(),
-		               $this->get_icon_url(),
-		               $this->get_position() );
+		add_menu_page(
+			$this->get_page_title(),
+			$this->get_menu_title(),
+			$this->get_capability(),
+			$root_slug,
+			$this->get_function(),
+			$this->get_icon_url(),
+			$this->get_position()
+		);
 
 		do_action( 'wpml_admin_menu_root_configured', $this->get_menu_id(), $root_slug );
 
@@ -202,6 +204,7 @@ class WPML_Admin_Menu_Root {
 	public function init_hooks() {
 		add_action( 'wpml_admin_menu_register_item', array( $this, 'register_menu_item' ) );
 		add_action( 'admin_menu', array( $this, 'build' ) );
+		add_action( 'set_wpml_root_menu_capability', [ $this, 'set_capability' ], 10, 1 );
 	}
 
 	/**
@@ -212,7 +215,7 @@ class WPML_Admin_Menu_Root {
 	public function menu_order_fixer( WPML_Admin_Menu_Item $item ) {
 		static $last_order = WPML_Main_Admin_Menu::MENU_ORDER_MAX;
 		if ( $item->get_order() === null ) {
-			$item->set_order( $last_order+1 );
+			$item->set_order( $last_order + 1 );
 		}
 		if ( $last_order < PHP_INT_MAX ) {
 			$last_order = $item->get_order();

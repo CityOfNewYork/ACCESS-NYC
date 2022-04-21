@@ -59,7 +59,12 @@ class WPML_Display_As_Translated_Default_Lang_Messages {
 		$taxonomies = get_taxonomies();
 
 		foreach ( $post_types as $post_type ) {
-			if ( $this->sitepress->is_display_as_translated_post_type( $post_type ) && get_posts( array( 'post_type' => $post_type, 'posts_per_page' => 1 ) ) ) {
+			if ( $this->sitepress->is_display_as_translated_post_type( $post_type ) && get_posts(
+				array(
+					'post_type'      => $post_type,
+					'posts_per_page' => 1,
+				)
+			) ) {
 				return true;
 			}
 		}

@@ -9,16 +9,17 @@ use WPML_ST_Translations_File_Dictionary_Storage_Table;
 use WPML_ST_Translations_File_Dictionary;
 use WPML\WP\OptionManager;
 use function WPML\Container\make;
+use function WPML\FP\partial;
 
 class Factory implements \IWPML_Backend_Action_Loader, \IWPML_Deferred_Action_Loader {
 
 	const WPML_VERSION_INTRODUCING_ST_MO_FLOW = '4.3.0';
-	const OPTION_GROUP = 'ST-MO';
-	const IGNORE_WPML_VERSION = 'ignore-wpml-version';
+	const OPTION_GROUP                        = 'ST-MO';
+	const IGNORE_WPML_VERSION                 = 'ignore-wpml-version';
 
 	/**
-	 * @return \IWPML_Action|UI|null
-	 * @throws \Auryn\InjectionException
+	 * @return callable|null
+	 * @throws \WPML\Auryn\InjectionException
 	 */
 	public function create() {
 		if (
@@ -37,14 +38,17 @@ class Factory implements \IWPML_Backend_Action_Loader, \IWPML_Deferred_Action_Lo
 			) {
 				$files_to_import               = $st_page ? $this->getFilesToImport() : wpml_collect( [] );
 				$domains_to_pre_generate_count = self::getDomainsToPreGenerateCount();
-				if ( $files_to_import->count() || $domains_to_pre_generate_count ) {
-					return new UI(
+				if ( $files_to_import->count() || $domains_to_pre_generate_count || isset( $_GET['search'] ) ) {
+					return partial(
+						[ UI::class, 'add_hooks' ],
 						Model::provider( $files_to_import, $domains_to_pre_generate_count, $st_page, is_network_admin() ),
 						$st_page
 					);
 				}
 			}
 		}
+
+		return null;
 	}
 
 	public function get_load_action() {
@@ -54,7 +58,7 @@ class Factory implements \IWPML_Backend_Action_Loader, \IWPML_Deferred_Action_Lo
 
 	/**
 	 * @return bool
-	 * @throws \Auryn\InjectionException
+	 * @throws \WPML\Auryn\InjectionException
 	 */
 	public static function isDismissed() {
 		return make( OptionManager::class )->get( self::OPTION_GROUP, 'pregen-dismissed', false );
@@ -62,7 +66,7 @@ class Factory implements \IWPML_Backend_Action_Loader, \IWPML_Deferred_Action_Lo
 
 	/**
 	 * @return Collection
-	 * @throws \Auryn\InjectionException
+	 * @throws \WPML\Auryn\InjectionException
 	 */
 	private function getFilesToImport() {
 		/** @var WPML_ST_Translations_File_Dictionary $file_dictionary */
@@ -96,7 +100,7 @@ class Factory implements \IWPML_Backend_Action_Loader, \IWPML_Deferred_Action_Lo
 
 	/**
 	 * @return int
-	 * @throws \Auryn\InjectionException
+	 * @throws \WPML\Auryn\InjectionException
 	 */
 	public static function getDomainsToPreGenerateCount() {
 		return self::isPreGenerationRequired() ? make( ProcessFactory::class )->create()->getPagesCount() : 0;

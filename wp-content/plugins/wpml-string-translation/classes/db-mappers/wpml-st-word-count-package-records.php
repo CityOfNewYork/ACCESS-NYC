@@ -13,7 +13,7 @@ class WPML_ST_Word_Count_Package_Records {
 	public function get_all_package_ids() {
 		return array_map(
 			'intval',
-			$this->wpdb->get_col( "SELECT ID FROM {$this->wpdb->prefix}icl_string_packages"	)
+			$this->wpdb->get_col( "SELECT ID FROM {$this->wpdb->prefix}icl_string_packages" )
 		);
 	}
 
@@ -69,7 +69,7 @@ class WPML_ST_Word_Count_Package_Records {
 		}
 
 		$query = "UPDATE {$this->wpdb->prefix}icl_string_packages SET word_count = NULL
-				  WHERE kind_slug IN(" . wpml_prepare_in( $package_kinds ) . ")";
+				  WHERE kind_slug IN(" . wpml_prepare_in( $package_kinds ) . ')';
 
 		$this->wpdb->query( $query );
 	}
@@ -85,7 +85,7 @@ class WPML_ST_Word_Count_Package_Records {
 		}
 
 		$query = "SELECT ID FROM {$this->wpdb->prefix}icl_string_packages
-				  WHERE kind_slug IN(" . wpml_prepare_in( $kinds ) . ")";
+				  WHERE kind_slug IN(" . wpml_prepare_in( $kinds ) . ')';
 
 		return array_map( 'intval', $this->wpdb->get_col( $query ) );
 	}
@@ -103,7 +103,7 @@ class WPML_ST_Word_Count_Package_Records {
 		$query = "SELECT sp.ID FROM {$this->wpdb->prefix}icl_string_packages AS sp
 				  LEFT JOIN {$this->wpdb->posts} AS p
 				  	ON p.ID = sp.post_id
-				  WHERE p.post_type IN(" . wpml_prepare_in( $post_types ) . ")";
+				  WHERE p.post_type IN(" . wpml_prepare_in( $post_types ) . ')';
 
 		return array_map( 'intval', $this->wpdb->get_col( $query ) );
 	}

@@ -9,16 +9,16 @@ class Term extends Strategy {
 	protected $id_prefix = 'term_';
 
 	/**
-	 * @var null
+	 * @var string
 	 */
 	protected $taxonomy;
 
 	/**
 	 * Term constructor.
 	 *
-	 * @param null $taxonomy
+	 * @param string $taxonomy
 	 */
-	public function __construct( $taxonomy = null ) {
+	public function __construct( $taxonomy ) {
 		$this->taxonomy = $taxonomy;
 	}
 
@@ -29,6 +29,25 @@ class Term extends Strategy {
 	 */
 	public function isValidId( $id ) {
 		return strpos( $id, $this->id_prefix ) === 0 && $this->getNumericId( $id ) > 0;
+	}
+
+	/**
+	 * Get value object for given term ID.
+	 *
+	 * @param  string $id The element ID with "term_" at the beginning.
+	 * @return object|void Value object with id and type or null when element not found.
+	 */
+	protected function getElement( $id ) {
+		if ( $this->isValidId( $id ) ) {
+			$id   = $this->getNumericId( $id );
+			$term = get_term( $id );
+			if ( isset( $term->taxonomy ) ) {
+				return (object) [
+					'id'   => $id,
+					'type' => $term->taxonomy,
+				];
+			}
+		}
 	}
 
 	/**
@@ -73,7 +92,7 @@ class Term extends Strategy {
 	}
 
 	/**
-	 * @param null $id
+	 * @param int|null $id
 	 *
 	 * @return mixed|void
 	 */

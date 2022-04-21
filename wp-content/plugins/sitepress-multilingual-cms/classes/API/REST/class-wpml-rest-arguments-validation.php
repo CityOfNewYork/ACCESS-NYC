@@ -8,7 +8,7 @@
 class WPML_REST_Arguments_Validation {
 
 	/**
-	 * @param $value
+	 *@param mixed $value
 	 *
 	 * @return bool
 	 */
@@ -17,7 +17,7 @@ class WPML_REST_Arguments_Validation {
 	}
 
 	/**
-	 * @param $value
+	 *@param mixed $value
 	 *
 	 * @return bool
 	 */
@@ -26,7 +26,7 @@ class WPML_REST_Arguments_Validation {
 	}
 
 	/**
-	 * @param $value
+	 *@param mixed $value
 	 *
 	 * @return bool
 	 */
@@ -35,7 +35,7 @@ class WPML_REST_Arguments_Validation {
 	}
 
 	/**
-	 * @param $value
+	 *@param mixed $value
 	 *
 	 * @return bool
 	 */
@@ -44,7 +44,7 @@ class WPML_REST_Arguments_Validation {
 	}
 
 	/**
-	 * @param $value
+	 *@param mixed $value
 	 *
 	 * @return bool
 	 */
@@ -53,7 +53,7 @@ class WPML_REST_Arguments_Validation {
 	}
 
 	/**
-	 * @param $value
+	 *@param mixed $value
 	 *
 	 * @return bool
 	 */
@@ -61,6 +61,11 @@ class WPML_REST_Arguments_Validation {
 		return is_array( $value );
 	}
 
+	/**
+	 * @param mixed $value
+	 *
+	 * @return bool
+	 */
 	static function date( $value ) {
 		try {
 			$d = new DateTime( $value );

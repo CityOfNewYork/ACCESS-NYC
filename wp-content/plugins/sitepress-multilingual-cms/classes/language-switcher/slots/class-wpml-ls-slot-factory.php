@@ -40,7 +40,6 @@ class WPML_LS_Slot_Factory {
 					}
 					break;
 			}
-
 		} else {
 			$slot = $args;
 		}
@@ -55,7 +54,7 @@ class WPML_LS_Slot_Factory {
 	 */
 	public function get_default_slot_arguments( $slot_group ) {
 		$args = array(
-			'slot_group' => $slot_group,
+			'slot_group'                    => $slot_group,
 			'display_link_for_current_lang' => 1,
 			'display_names_in_native_lang'  => 1,
 			'display_names_in_current_lang' => 1,
@@ -64,7 +63,7 @@ class WPML_LS_Slot_Factory {
 		if ( $slot_group === 'menus' ) {
 			$args['template']        = $this->get_core_templates( 'menu-item' );
 			$args['is_hierarchical'] = 1;
-		} else if ( $slot_group === 'sidebars' ) {
+		} elseif ( $slot_group === 'sidebars' ) {
 			$args['template'] = $this->get_core_templates( 'dropdown' );
 		}
 

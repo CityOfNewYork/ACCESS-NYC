@@ -1,5 +1,7 @@
 <?php
 
+use WPML\FP\Obj;
+
 class WPML_TM_Settings_Update extends WPML_SP_User {
 
 	private $index_singular;
@@ -19,18 +21,14 @@ class WPML_TM_Settings_Update extends WPML_SP_User {
 	 * @param SitePress             $sitepress
 	 * @param WPML_Settings_Helper  $settings_helper
 	 */
-	public function __construct( $index_singular, $index_plural, &$tm_instance, &$sitepress, &$settings_helper ) {
+	public function __construct( $index_singular, $index_plural, &$tm_instance, &$sitepress, $settings_helper ) {
 		parent::__construct( $sitepress );
 		$this->tm_instance     = &$tm_instance;
 		$this->index_singular  = $index_singular;
 		$this->index_plural    = $index_plural;
 		$this->index_ro        = $index_plural . '_readonly_config';
 		$this->index_sync      = $index_plural . '_sync_option';
-		if ( 'custom-type' == $index_singular ) {
-			$this->index_unlocked = 'custom_posts_unlocked_option';
-		} else {
-			$this->index_unlocked = 'taxonomies_unlocked_option';
-		}
+		$this->index_unlocked  = 'custom-type' == $index_singular ? 'custom_posts_unlocked_option' : 'taxonomies_unlocked_option';
 		$this->settings_helper = $settings_helper;
 	}
 
@@ -38,8 +36,7 @@ class WPML_TM_Settings_Update extends WPML_SP_User {
 	 * @param array $config
 	 */
 	public function update_from_config( array $config ) {
-		$config[ $this->index_plural ] = isset( $config[ $this->index_plural ] ) ? $config[ $this->index_plural ] : array();
-		$this->update_tm_settings( $config[ $this->index_plural ] );
+		$this->update_tm_settings( Obj::propOr( [], $this->index_plural, $config ) );
 	}
 
 	private function sync_settings( array $config ) {
@@ -47,8 +44,8 @@ class WPML_TM_Settings_Update extends WPML_SP_User {
 		$section_plural   = $this->index_plural;
 
 		if ( ! empty( $config[ $section_singular ] ) ) {
-			$sync_option     = $this->sitepress->get_setting( $this->index_sync, array() );
-			$unlocked_option = $this->sitepress->get_setting( $this->index_unlocked, array() );
+			$sync_option     = $this->sitepress->get_setting( $this->index_sync, [] );
+			$unlocked_option = $this->sitepress->get_setting( $this->index_unlocked, [] );
 			if ( ! is_numeric( key( current( $config ) ) ) ) {
 				$cf[0] = $config[ $section_singular ];
 			} else {
@@ -75,8 +72,8 @@ class WPML_TM_Settings_Update extends WPML_SP_User {
 				}
 			}
 
-		$this->sitepress->set_setting( $this->index_sync, $sync_option );
-		$this->settings_helper->maybe_add_filter( $section_plural );
+			$this->sitepress->set_setting( $this->index_sync, $sync_option );
+			$this->settings_helper->maybe_add_filter( $section_plural );
 		}
 	}
 
@@ -87,21 +84,24 @@ class WPML_TM_Settings_Update extends WPML_SP_User {
 	 * @return bool
 	 */
 	private function is_making_type_translatable( $new_sync, $old_sync ) {
-		return in_array( $new_sync, array(
-				WPML_CONTENT_TYPE_TRANSLATE,
-				WPML_CONTENT_TYPE_DISPLAY_AS_IF_TRANSLATED
-			) ) && WPML_CONTENT_TYPE_DONT_TRANSLATE === $old_sync;
+		return in_array(
+			       $new_sync,
+			       [
+				       WPML_CONTENT_TYPE_TRANSLATE,
+				       WPML_CONTENT_TYPE_DISPLAY_AS_IF_TRANSLATED,
+			       ]
+		       ) && WPML_CONTENT_TYPE_DONT_TRANSLATE === $old_sync;
 	}
 
 	private function update_tm_settings( array $config ) {
 		$section_singular            = $this->index_singular;
 		$config                      = array_filter( $config );
-		$config[ $section_singular ] = isset( $config[ $section_singular ] ) ? $config[ $section_singular ] : array();
+		$config[ $section_singular ] = Obj::propOr( [], $section_singular, $config );
 		$this->sync_settings( $config );
 
 		// taxonomies - check what's been removed
 		if ( ! empty( $this->tm_instance->settings[ $this->index_ro ] ) ) {
-			$config_values = array();
+			$config_values = [];
 			foreach ( $config[ $section_singular ] as $config_value ) {
 				$config_values[ $config_value['value'] ] = $config_value['attr']['translate'];
 			}

@@ -36,7 +36,7 @@ class WPML_Translation_Tree extends WPML_SP_User {
 	 * @return array
 	 */
 	public function get_alphabetically_ordered_list() {
-		$root_list = $this->sort_trids_alphabetically( $this->tree );
+		$root_list              = $this->sort_trids_alphabetically( $this->tree );
 		$ordered_list_flattened = array();
 		foreach ( $root_list as $root_trid_group ) {
 			$ordered_list_flattened = $this->get_children_recursively( $root_trid_group, $ordered_list_flattened );
@@ -62,11 +62,11 @@ class WPML_Translation_Tree extends WPML_SP_User {
 	/**
 	 * Groups an array of terms objects by their trid and language_code
 	 *
-	 * @param array $terms
+	 * @param array<\stdClass> $terms
 	 *
-	 * @return array
+	 * @return array<int>
 	 */
-	private function generate_trid_groups ( $terms ) {
+	private function generate_trid_groups( $terms ) {
 		$trids = array();
 		foreach ( $terms as $term ) {
 			$trids [ $term->trid ] [ $term->language_code ] = array(
@@ -75,10 +75,10 @@ class WPML_Translation_Tree extends WPML_SP_User {
 				'term_id' => $term->term_id,
 			);
 			if ( isset( $term->name ) ) {
-				$trids [ $term->trid ] [ $term->language_code ][ 'name' ] = $this->get_unique_term_name( $term->name );
+				$trids [ $term->trid ] [ $term->language_code ]['name'] = $this->get_unique_term_name( $term->name );
 			}
 
-			$this->term_ids[ ] = $term->term_id;
+			$this->term_ids[] = $term->term_id;
 		}
 
 		return $trids;
@@ -90,11 +90,11 @@ class WPML_Translation_Tree extends WPML_SP_User {
 	 * @return string
 	 */
 	private function get_unique_term_name( $name ) {
-		return uniqid( $name. '-' );
+		return uniqid( $name . '-' );
 	}
 
 	/**
-	 * @param            array $trids
+	 * @param array<int>       $trids
 	 * @param array|bool|false $root_trid_group
 	 * @param int              $level current depth in the tree
 	 *                                Recursively turns an array of unordered trid objects into a tree.
@@ -105,16 +105,16 @@ class WPML_Translation_Tree extends WPML_SP_User {
 		$return = array();
 
 		foreach ( $trids as $trid => $trid_group ) {
-			if ( $this->is_root ( $trid_group, $root_trid_group ) ) {
+			if ( $this->is_root( $trid_group, $root_trid_group ) ) {
 				unset( $trids[ $trid ] );
-				if ( !isset( $this->trid_levels[ $trid ] ) ) {
+				if ( ! isset( $this->trid_levels[ $trid ] ) ) {
 					$this->trid_levels[ $trid ] = 0;
 				}
-				$this->trid_levels[ $trid ] = max ( array( $level, $this->trid_levels[ $trid ] ) );
-				$return [ $trid ] = array(
+				$this->trid_levels[ $trid ] = max( array( $level, $this->trid_levels[ $trid ] ) );
+				$return [ $trid ]           = array(
 					'trid'     => $trid,
 					'elements' => $trid_group,
-					'children' => $this->parse_tree ( $trids, $trid_group, $level + 1 )
+					'children' => $this->parse_tree( $trids, $trid_group, $level + 1 ),
 				);
 			}
 		}
@@ -129,41 +129,41 @@ class WPML_Translation_Tree extends WPML_SP_User {
 	 *                   relationship between both trids exists.
 	 *
 	 * @return bool
-     */
-    private function is_root( $children, $parent ) {
-        $root  = !(bool)$parent;
-        foreach ( $this->language_order as $c_lang ) {
-            if(!isset($children[ $c_lang ])){
-                continue;
-            }
-            $child_in_lang = $children[ $c_lang ];
-            if ( $parent === false ) {
-                $root =!( $child_in_lang[ 'parent' ] != 0 || in_array( $child_in_lang[ 'parent' ], $this->term_ids ) );
-                break;
-            } else {
-                foreach ( (array) $parent as $p_lang => $parent_in_lang ) {
-                    if ( $c_lang == $p_lang && $child_in_lang[ 'parent' ] == $parent_in_lang[ 'term_id' ] ) {
-                        $root = true;
-                        break;
-                    }
-                }
-            }
-        }
+	 */
+	private function is_root( $children, $parent ) {
+		$root = ! (bool) $parent;
+		foreach ( $this->language_order as $c_lang ) {
+			if ( ! isset( $children[ $c_lang ] ) ) {
+				continue;
+			}
+			$child_in_lang = $children[ $c_lang ];
+			if ( $parent === false ) {
+				$root = ! ( $child_in_lang['parent'] != 0 || in_array( $child_in_lang['parent'], $this->term_ids ) );
+				break;
+			} else {
+				foreach ( (array) $parent as $p_lang => $parent_in_lang ) {
+					if ( $c_lang == $p_lang && $child_in_lang['parent'] == $parent_in_lang['term_id'] ) {
+						$root = true;
+						break;
+					}
+				}
+			}
+		}
 
-        return $root;
-    }
+		return $root;
+	}
 
 	private function sort_trids_alphabetically( $trid_groups ) {
 		$terms_in_trids = array();
-		$ordered_trids = array();
+		$ordered_trids  = array();
 		foreach ( $trid_groups as $trid_group ) {
-			foreach ( $trid_group[ 'elements' ] as $lang => $term ) {
+			foreach ( $trid_group['elements'] as $lang => $term ) {
 				if ( ! isset( $terms_in_trids[ $lang ] ) ) {
 					$terms_in_trids[ $lang ] = array();
 				}
-				$trid                                = $trid_group[ 'trid' ];
-				$term[ 'trid' ]                      = $trid;
-				$terms_in_trids[ $lang ][ $trid ][ ] = $term;
+				$trid                               = $trid_group['trid'];
+				$term['trid']                       = $trid;
+				$terms_in_trids[ $lang ][ $trid ][] = $term;
 			}
 		}
 
@@ -178,14 +178,14 @@ class WPML_Translation_Tree extends WPML_SP_User {
 						continue;
 					}
 					$term_in_lang_and_trid     = array_pop( $terms_in_lang_and_trid );
-					$term_name                 = $term_in_lang_and_trid[ 'name' ];
+					$term_name                 = $term_in_lang_and_trid['name'];
 					$term_names [ $term_name ] = $trid;
-					$term_names_numerical [ ]  = $term_name;
+					$term_names_numerical []   = $term_name;
 				}
 				natsort( $term_names_numerical );
 				foreach ( $term_names_numerical as $name ) {
-					$ordered_trids [ ] = $trid_groups[ $term_names[ $name ] ];
-					$sorted[ ]         = $term_names[ $name ];
+					$ordered_trids [] = $trid_groups[ $term_names[ $name ] ];
+					$sorted[]         = $term_names[ $name ];
 				}
 			}
 		}
@@ -212,8 +212,10 @@ class WPML_Translation_Tree extends WPML_SP_User {
 		if ( is_array( $children ) ) {
 			$children = $this->sort_trids_alphabetically( $children );
 			foreach ( $children as $child ) {
-				$existing_list = $this->get_children_recursively( $child,
-					$existing_list );
+				$existing_list = $this->get_children_recursively(
+					$child,
+					$existing_list
+				);
 			}
 		}
 
@@ -228,14 +230,14 @@ class WPML_Translation_Tree extends WPML_SP_User {
 	 *
 	 * @return array
 	 */
-	private function add_level_information_to_terms ( $tridgroup ) {
-		foreach ( $tridgroup[ 'elements' ] as $lang => &$term ) {
-			$level = 0;
-			$term_id = $term[ 'term_id' ];
+	private function add_level_information_to_terms( $tridgroup ) {
+		foreach ( $tridgroup['elements'] as $lang => &$term ) {
+			$level   = 0;
+			$term_id = $term['term_id'];
 			while ( ( $term_id = wp_get_term_taxonomy_parent_id( $term_id, $this->taxonomy ) ) ) {
 				$level ++;
 			}
-			$term[ 'level' ] = $level;
+			$term['level'] = $level;
 		}
 
 		return $tridgroup;

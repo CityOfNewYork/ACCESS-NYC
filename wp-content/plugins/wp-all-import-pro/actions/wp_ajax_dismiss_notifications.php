@@ -10,7 +10,7 @@ function pmxi_wp_ajax_dismiss_notifications(){
 	}
 	
 	if (isset($_POST['addon']) ) {
-		update_option($_POST['addon'] . '_notice_ignore', 'true');
+		update_option($_POST['addon'] . '_notice_ignore', 'true', false);
 	}
 	exit( json_encode( array('result' => true)));
 }

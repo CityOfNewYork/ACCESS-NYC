@@ -29,7 +29,7 @@ class WPML_Cookie_Setting {
 	}
 
 	/**
-	 * @param $value
+	 * @param mixed $value
 	 */
 	public function set_setting( $value ) {
 		$this->sitepress->set_setting( self::COOKIE_SETTING_FIELD, $value );

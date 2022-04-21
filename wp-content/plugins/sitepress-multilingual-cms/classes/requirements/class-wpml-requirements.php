@@ -8,7 +8,7 @@ class WPML_Requirements {
 	private $missing_requirements = array();
 
 	private $plugins = array(
-		'wpml-media-translation'     => array(
+		'wpml-media-translation'      => array(
 			'version' => '2.1.24',
 			'name'    => 'WPML Media Translation',
 		),
@@ -23,19 +23,19 @@ class WPML_Requirements {
 		'woocommerce-multilingual'    => array(
 			'version' => '4.7.0',
 			'name'    => 'WooCommerce Multilingual',
-			'url'     => 'https://wpml.org/download/woocommerce-multilingual/',
+			'url'     => 'https://wpml.org/download/woocommerce-multilingual/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore',
 		),
 		'gravityforms-multilingual'   => array(
 			'name' => 'GravityForms Multilingual',
-			'url'  => 'https://wpml.org/download/gravityforms-multilingual/',
+			'url'  => 'https://wpml.org/download/gravityforms-multilingual/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore',
 		),
 		'buddypress-multilingual'     => array(
 			'name' => 'BuddyPress Multilingual',
-			'url'  => 'https://wpml.org/download/buddypress-multilingual/',
+			'url'  => 'https://wpml.org/download/buddypress-multilingual/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore',
 		),
-		'wp-seo-multilingual'     => array(
+		'wp-seo-multilingual'         => array(
 			'name' => 'Yoast SEO Multilingual',
-			'url'  => 'https://wpml.org/download/yoast-seo-multilingual/',
+			'url'  => 'https://wpml.org/download/yoast-seo-multilingual/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore',
 		),
 	);
 
@@ -44,52 +44,42 @@ class WPML_Requirements {
 			'url'                => 'https://wpml.org/?page_id=2909360&utm_source=wpmlplugin&utm_campaign=gutenberg&utm_medium=translation-editor&utm_term=translating-content-created-using-gutenberg-editor',
 			'requirements_class' => 'WPML_Integration_Requirements_Block_Editor',
 		),
-		'page-builders' => array(
+		'page-builders'                  => array(
 			'url'          => 'https://wpml.org/?page_id=1129854',
 			'requirements' => array(
 				'wpml-string-translation',
-				'wpml-translation-management',
 			),
 		),
-		'woocommerce'   => array(
-			'url'          => '#',
-			'requirements' => array(
-				'woocommerce-multilingual',
-				'wpml-translation-management',
-				'wpml-string-translation',
-			),
-		),
-		'gravityforms'  => array(
+		'gravityforms'                   => array(
 			'url'          => '#',
 			'requirements' => array(
 				'gravityforms-multilingual',
 				'wpml-string-translation',
-				'wpml-translation-management',
 			),
 		),
-		'buddypress'    => array(
+		'buddypress'                     => array(
 			'url'          => '#',
 			'requirements' => array(
 				'buddypress-multilingual',
 			),
 		),
-		'bb-plugin'    => array(
+		'bb-plugin'                      => array(
 			'url'          => '#',
 			'requirements' => array(
 				'wpml-string-translation',
 			),
 		),
-		'elementor-plugin'    => array(
+		'elementor-plugin'               => array(
 			'url'          => '#',
 			'requirements' => array(
 				'wpml-string-translation',
 			),
 		),
-		'wordpress-seo'	=> array(
+		'wordpress-seo'                  => array(
 			'url'          => '#',
 			'requirements' => array(
 				'wp-seo-multilingual',
-			)
+			),
 		),
 	);
 
@@ -231,7 +221,7 @@ class WPML_Requirements {
 	 */
 	private function get_components_requirements_by_type( $type, $slug ) {
 		$components_requirements = $this->get_components_by_type( $type, $slug );
-		$requirements = array();
+		$requirements            = array();
 
 		if ( array_key_exists( 'requirements', $components_requirements ) ) {
 			$requirements = $components_requirements['requirements'];
@@ -240,8 +230,9 @@ class WPML_Requirements {
 				$class = $components_requirements['requirements_class'];
 				/** @var IWPML_Integration_Requirements_Module $requirement_module */
 				$requirement_module = new $class( $this );
-				$requirements = $requirement_module->get_requirements();
-			} catch ( Exception $e ) {}
+				$requirements       = $requirement_module->get_requirements();
+			} catch ( Exception $e ) {
+			}
 		}
 
 		return $requirements;

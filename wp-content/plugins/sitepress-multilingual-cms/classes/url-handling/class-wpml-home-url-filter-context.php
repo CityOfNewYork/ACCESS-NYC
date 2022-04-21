@@ -2,9 +2,9 @@
 
 class WPML_Home_Url_Filter_Context {
 
-	const REST_REQUEST = 'rest-request';
+	const REST_REQUEST  = 'rest-request';
 	const REWRITE_RULES = 'rewrite-rules';
-	const PAGINATION = 'pagination';
+	const PAGINATION    = 'pagination';
 
 	/**
 	 * @var int
@@ -55,6 +55,6 @@ class WPML_Home_Url_Filter_Context {
 	 */
 	private function pagination_link() {
 		return WPML_LANGUAGE_NEGOTIATION_TYPE_PARAMETER === $this->language_negotiation_type
-		       && $this->debug_backtrace->is_function_in_call_stack( 'get_pagenum_link' );
+			   && $this->debug_backtrace->is_function_in_call_stack( 'get_pagenum_link' );
 	}
 }

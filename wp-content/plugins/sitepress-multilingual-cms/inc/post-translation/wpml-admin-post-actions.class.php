@@ -52,7 +52,10 @@ class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 		global $sitepress;
 
 		$this->defer_term_counting();
-		$post = isset( $post ) ? $post : get_post( $post_id );
+		if ( ! $post ) {
+			$post = get_post( $post_id );
+		}
+
 		// exceptions
 		$http_referer = $this->get_http_referer();
 		if ( ! $this->has_save_post_action( $post ) && ! $http_referer->is_rest_request_called_from_post_edit_page() ) {
@@ -111,10 +114,12 @@ class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 		if ( isset( $post_vars['icl_tn_note'] ) ) {
 			update_post_meta( $post_id, '_icl_translator_note', $post_vars['icl_tn_note'] );
 		}
-		$save_filter_action_state = new WPML_WP_Filter_State( 'save_post' );
+
 		$this->after_save_post( $trid, $post_vars, $language_code, $source_language );
-		$this->save_media_options( $post_id, $source_language );
-		$save_filter_action_state->restore();
+
+		if ( 'attachment' !== $post->post_type ) {
+			$this->save_media_options( $post_id, $source_language );
+		}
 	}
 
 	/**
@@ -238,21 +243,33 @@ class WPML_Admin_Post_Actions extends WPML_Post_Translation {
 	 * @param string $language_code
 	 * @param string $default_language
 	 *
-	 * @uses \WPML_Backend_Request::get_source_language_from_referer to retrieve the source_language when saving via ajax
-	 *
 	 * @return null|string
 	 */
 	protected function get_save_post_source_lang( $trid, $language_code, $default_language ) {
-		/** @var WPML_Backend_Request|WPML_Frontend_Request $wpml_request_handler */
-		global $wpml_request_handler;
-
 		$source_language = filter_input ( INPUT_GET, 'source_lang', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
-		$source_language = $source_language ? $source_language : $wpml_request_handler->get_source_language_from_referer();
+		$source_language = $source_language ? $source_language : $this->get_source_language_from_referer();
 		$source_language = $source_language ? $source_language : SitePress::get_source_language_by_trid ( $trid );
 		$source_language = $source_language === 'all' ? $default_language : $source_language;
 		$source_language = $source_language !== $language_code ? $source_language : null;
 
 		return $source_language;
+	}
+
+	/**
+	 * Gets the source_language $_GET parameter from the HTTP_REFERER
+	 *
+	 * @return string|bool
+	 */
+	private function get_source_language_from_referer() {
+		if ( ! isset( $_SERVER['HTTP_REFERER'] ) ) {
+			return false;
+		}
+
+		$referer = $_SERVER['HTTP_REFERER'];
+		$query   = wpml_parse_url( $referer, PHP_URL_QUERY );
+		parse_str( $query, $query_parts );
+
+		return isset( $query_parts['source_lang'] ) ? $query_parts['source_lang'] : false;
 	}
 
 	public function get_trid_from_referer() {

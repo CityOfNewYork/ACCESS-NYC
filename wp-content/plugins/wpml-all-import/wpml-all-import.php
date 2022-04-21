@@ -3,13 +3,15 @@
 /*
 	Plugin Name: WPML All Import
 	Plugin URI: http://wpml.org
-	Description: Import multilingual content to WordPress. Requires WP All Import & WPML.
-	Version: 2.1.1
+	Description: Adds compatibility between WP All Import and WPML | <a href="https://wpml.org/documentation/related-projects/wpml-all-import-plugin-website-import-with-wpml/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlai">Documentation</a>
+	Version: 2.3.0
 	Author: OnTheGoSystems
 	Author URI: http://www.onthegosystems.com/
 */
 
 require_once "includes/rapid-addon.php";
+
+require_once "vendor/autoload.php";
 
 if ( ! class_exists('WPAI_WPML') )
 {
@@ -105,13 +107,13 @@ if ( ! class_exists('WPAI_WPML') )
 				add_action( 'pmxi_saved_post',         array( &$this, 'saved_post' ), 10, 1 );
 				add_action( 'pmxi_delete_post',        array( &$this, 'delete_post' ), 10, 1 );
 				add_filter( 'pmxi_import_name', 	   array( &$this, 'import_name'), 10, 2 );
-                add_filter( 'wp_all_import_term_exists', array( &$this, 'wp_all_import_term_exists' ), 10, 4);
+				add_filter( 'wp_all_import_term_exists', array( &$this, 'wp_all_import_term_exists' ), 10, 4);
+
+				add_action( 'pmxi_after_xml_import', [ $this, 'after_xml_import' ], 10, 2 );
 
 				add_filter( 'wp_all_import_get_existing_image', array( $this, 'get_existing_image_filter' ) );
 
 				add_filter( 'wp_all_import_get_image_from_gallery', array( $this, 'get_image_from_gallery_filter' ) );
-
-				//add_action( 'pmxi_attachment_uploaded', array( $this, 'pmxi_attachment_uploaded_action' ), 10, 3 );
 
 				add_action( 'wp_all_import_add_attachment', array( $this, 'add_attachment_action' ) );
 			}
@@ -187,7 +189,13 @@ if ( ! class_exists('WPAI_WPML') )
 											'radio',
 											$import_list
 										),
-										$this->wpml_addon->add_field('unique_key', 'Unique Identifier', 'text', null, 'To inform WPML that this new post is translation of another post put the same unique identifier like you did for post in main language.')
+										$this->wpml_addon->add_field('unique_key',
+											__('Unique Identifier chosen during the parent import', 'wpml-all-import'),
+											'text',
+											null,
+											__('To inform WPML that this new post is translation of another post put the same unique identifier like you did for post in main language.', 'wpml-all-import'),
+											true,
+											$this->parentImportUniqueKey( $imports ) )
 									)
 								)
 							)
@@ -252,6 +260,7 @@ if ( ! class_exists('WPAI_WPML') )
 			*/
 			public function before_post_import( $import_id )
 			{
+				$this->disableWCMLvariationSynchronisation();
 				$this->current_language = apply_filters('wpml_current_language', null);
 
 				if ( empty($this->language_code) )
@@ -265,6 +274,8 @@ if ( ! class_exists('WPAI_WPML') )
 				}
 				// switch language to language in which post should be created
 				do_action( 'wpml_switch_language', $this->language_code );
+				( new WPML\AI\WCML() )->beforePostImport();
+				( new WPML\AI\Attachments() )->beforePostImport();
 			}
 
 			/**
@@ -276,6 +287,8 @@ if ( ! class_exists('WPAI_WPML') )
 			{
 				// switch language back to main
 				do_action( 'wpml_switch_language', $this->current_language );
+				( new WPML\AI\WCML() )->afterPostImport();
+				( new WPML\AI\Attachments() )->afterPostImport();
 			}
 
 			/**
@@ -317,18 +330,21 @@ if ( ! class_exists('WPAI_WPML') )
 			}
 
 			/**
-			*
 			*	Fires before deleting post [do_action - 'pmxi_delete_post']
 			*
+			*   @param array|int $post_ids ID or array of IDs of post being deleted.
 			*/
-			public function delete_post( $post_id )
+			public function delete_post( $post_ids )
 			{
 				global $wpdb;
-				$post_type = 'post_' . get_post_type($post_id);
-				$delete_args = array($post_id, $post_type);
-				$delete_sql = "DELETE FROM {$wpdb->prefix}icl_translations WHERE element_id=%d AND element_type=%s";
-				$delete_sql_prepared = $wpdb->prepare($delete_sql, $delete_args);
-				$wpdb->query( $delete_sql_prepared );
+				$post_ids = (array) $post_ids;
+				foreach ($post_ids as $post_id) {
+					$post_type           = 'post_' . get_post_type( $post_id );
+					$delete_args         = array( $post_id, $post_type );
+					$delete_sql          = "DELETE FROM {$wpdb->prefix}icl_translations WHERE element_id=%d AND element_type=%s";
+					$delete_sql_prepared = $wpdb->prepare( $delete_sql, $delete_args );
+					$wpdb->query( $delete_sql_prepared );
+				}
 				$this->wpml->get_translations_cache()->clear();
 			}
 
@@ -479,11 +495,45 @@ if ( ! class_exists('WPAI_WPML') )
 
 				$factory         = new WPML_Media_Attachments_Duplication_Factory();
 				$media_duplicate = $factory->create();
-				$media_duplicate->save_attachment_actions( $attachment_id );
+				if ( $media_duplicate && method_exists( $media_duplicate, 'save_attachment_actions' ) ) {
+					$media_duplicate->save_attachment_actions( $attachment_id );
+				}
 			}
 
 		}
-            
+
+		/**
+		 * Prevents calling \WCML_Synchronize_Product_Data::synchronize_products.
+		 *
+		 * It caused creation of duplicated product variations.
+		 *
+		 * @uses woocommerce_wpml
+		 */
+		private function disableWCMLvariationSynchronisation() {
+			global $woocommerce_wpml;
+			if ( isset( $woocommerce_wpml->sync_product_data ) ) {
+				remove_action( 'save_post', [ $woocommerce_wpml->sync_product_data, 'synchronize_products' ], PHP_INT_MAX );
+			}
+		}
+
+		private function parentImportUniqueKey( array $imports ) {
+			$lastImport = end( $imports );
+			if ( isset( $lastImport['options'] ) ) {
+				$options = maybe_unserialize( $lastImport['options'] );
+				return $options['unique_key'] ?: '';
+			}
+		}
+
+		/**
+		 * Runs after full import.
+		 *
+		 * @param int                $importId
+		 * @param PMXI_Import_Record $import
+		 */
+		public function after_xml_import( $importId, $import ) {
+			( new  \WPML\AI\WCML() )->afterFullImport( $importId, $import );
+		}
+
 	}
 
 	WPAI_WPML::getInstance();

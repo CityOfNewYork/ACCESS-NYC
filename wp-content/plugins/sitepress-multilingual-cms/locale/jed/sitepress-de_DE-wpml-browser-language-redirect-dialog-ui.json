@@ -1,0 +1,34 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "How Browser Language Redirect Affects Google Indexing": [
+            "Wie die Umleitung nach Browser-Sprache die Google-Indizierung beeinflusst"
+         ],
+         "Documentation": [
+            "Dokumentation"
+         ],
+         "Browser redirect affects Google indexing and search results": [
+            "Die Browser-Umleitung beeinflusst die Google-Indizierung und die Suchergebnisse"
+         ],
+         "Got it, activate anyway": [
+            "Verstanden, trotzdem aktivieren"
+         ],
+         "Cancel": [
+            "Abbrechen"
+         ],
+         "When you redirect visitors based on their language, you also redirect Google. Google wants to see your site exactly like visitors see it, including any redirects that you apply.": [
+            "Wenn Sie Besucher auf Basis ihrer Sprache umleiten, leiten Sie auch Google um. Google möchte Ihre Website exakt so sehen, wie Besucher sie sehen, einschließlich aller Umleitungen, die Sie anwenden."
+         ],
+         "It is OK to redirect visitors based on their language, but you need to realize that this feature affects SEO.": [
+            "Es ist OK, Besucher auf Basis ihrer Sprache umzuleiten, doch Ihnen muss bewusst sein, dass diese Funktion sich auf die SEO auswirkt."
+         ],
+         "Before proceeding, we recommend that you read these two pages:": [
+            "Bevor Sie fortfahren, empfehlen wir Ihnen, diese beiden Seiten zu lesen:"
+         ]
+      }
+   }
+}

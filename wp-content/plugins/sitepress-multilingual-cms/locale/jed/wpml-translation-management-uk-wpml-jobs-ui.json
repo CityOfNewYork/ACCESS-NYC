@@ -1,0 +1,22 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Draft — Pending review": [
+            "Чернетка – Чекає на перевірку"
+         ],
+         "Complete": [
+            "Завершений"
+         ],
+         "Insufficient funds": [
+            "Недостатньо коштів"
+         ],
+         "Editor Job ID": [
+            "Ідентифікатор завдання редактора"
+         ]
+      }
+   }
+}

@@ -117,16 +117,11 @@ define('POTX_CONTEXT_ERROR', FALSE);
 /**
  * Process a file and put extracted information to the given parameters.
  *
- * @param $file_path
- *   Complete path to file to process.
- * @param $strip_prefix
- *   An integer denoting the number of chars to strip from filepath for output.
- * @param $save_callback
- *   Callback function to use to save the collected strings.
- * @param $version_callback
- *   Callback function to use to save collected version numbers.
- * @param $default_domain
- *   Default domain to be used if one can't be found.
+ * @param string          $file_path        Complete path to file to process.
+ * @param int             $strip_prefix     An integer denoting the number of chars to strip from filepath for output.
+ * @param callable|string $save_callback    Callback function to use to save the collected strings.
+ * @param callable|string $version_callback Callback function to use to save collected version numbers.
+ * @param string          $default_domain   Default domain to be used if one can't be found.
  */
 function _potx_process_file($file_path,
 							$strip_prefix = 0,
@@ -196,8 +191,7 @@ function _potx_process_file($file_path,
  * Escape quotes in a strings depending on the surrounding
  * quote type used.
  *
- * @param $str
- *   The strings to escape
+ * @param string $str The strings to escape
  */
 function _potx_format_quoted_string($str) {
   $quo = substr($str, 0, 1);
@@ -224,18 +218,12 @@ function wpml_potx_unquote_context_or_domain( $string ) {
 /**
  * Output a marker error with an extract of where the error was found.
  *
- * @param $file
- *   Name of file
- * @param $line
- *   Line number of error
- * @param $marker
- *   Function name with which the error was identified
- * @param $ti
- *   Index on the token array
- * @param $error
- *   Helpful error message for users.
- * @param $docs_url
- *   Documentation reference.
+ * @param string $file     Name of file
+ * @param int    $line     Line number of error
+ * @param string $marker   Function name with which the error was identified
+ * @param int    $ti       Index on the token array
+ * @param string $error    Helpful error message for users.
+ * @param string $docs_url Documentation reference.
  */
 function _potx_marker_error($file, $line, $marker, $ti, $error, $docs_url = NULL) {
   global $_potx_tokens;
@@ -265,24 +253,18 @@ function _potx_marker_error($file, $line, $marker, $ti, $error, $docs_url = NULL
 /**
  * Status notification function.
  *
- * @param $op
- *   Operation to perform or type of message text.
- *     - set:    sets the reporting mode to $value
- *               use one of the POTX_STATUS_* constants as $value
- *     - get:    returns the list of error messages recorded
- *               if $value is true, it also clears the internal message cache
- *     - error:  sends an error message in $value with optional $file and $line
- *     - status: sends a status message in $value
- * @param $value
- *   Value depending on $op.
- * @param $file
- *   Name of file the error message is related to.
- * @param $line
- *   Number of line the error message is related to.
- * @param $excerpt
- *   Excerpt of the code in question, if available.
- * @param $docs_url
- *   URL to the guidelines to follow to fix the problem.
+ * @param string $op       Operation to perform or type of message text.
+ *                         - set:    sets the reporting mode to $value
+ *                         use one of the POTX_STATUS_* constants as $value
+ *                         - get:    returns the list of error messages recorded
+ *                         if $value is true, it also clears the internal message cache
+ *                         - error:  sends an error message in $value with optional $file and $line
+ *                         - status: sends a status message in $value
+ * @param string $value    Value depending on $op.
+ * @param string $file     Name of file the error message is related to.
+ * @param int    $line     Number of line the error message is related to.
+ * @param string $excerpt  Excerpt of the code in question, if available.
+ * @param string $docs_url URL to the guidelines to follow to fix the problem.
  */
 function potx_status($op, $value = NULL, $file = NULL, $line = NULL, $excerpt = NULL, $docs_url = NULL) {
   static $mode = POTX_STATUS_CLI;
@@ -363,16 +345,12 @@ function potx_status($op, $value = NULL, $file = NULL, $line = NULL, $excerpt = 
  *   T_STRING("$function_name") + "(" + T_CONSTANT_ENCAPSED_STRING + ")"
  *   T_STRING("$function_name") + "(" + T_CONSTANT_ENCAPSED_STRING + ","
  *
- * @param $file
- *   Name of file parsed.
- * @param $save_callback
- *   Callback function used to save strings.
- * @param function_name
- *   The name of the function to look for (could be 't', '$t', 'st'
- *   or any other t-like function).
- * @param $string_mode
- *   String mode to use: POTX_STRING_INSTALLER, POTX_STRING_RUNTIME or
- *   POTX_STRING_BOTH.
+ * @param string   $file          Name of file parsed.
+ * @param callable $save_callback Callback function used to save strings.
+ * @param string   $function_name The name of the function to look for (could be 't', '$t', 'st'
+ *                                or any other t-like function).
+ * @param int      $string_mode   String mode to use: POTX_STRING_INSTALLER, POTX_STRING_RUNTIME or
+ *                                POTX_STRING_BOTH.
  */
 function _potx_find_t_calls($file, $save_callback, $function_name = 't', $string_mode = POTX_STRING_RUNTIME) {
   global $_potx_tokens, $_potx_lookup;
@@ -406,15 +384,12 @@ function _potx_find_t_calls($file, $save_callback, $function_name = 't', $string
  *   and then an optional value for the replacements and an optional array
  *   for the options with an optional context key.
  *
- * @param $file
- *   Name of file parsed.
- * @param $save_callback
- *   Callback function used to save strings.
- * @param string $function_name
- * @param string $default_domain
- * @param int $string_mode
- *   String mode to use: POTX_STRING_INSTALLER, POTX_STRING_RUNTIME or
- *   POTX_STRING_BOTH.
+ * @param string   $file          Name of file parsed.
+ * @param callable $save_callback Callback function used to save strings.
+ * @param string   $function_name
+ * @param string   $default_domain
+ * @param int      $string_mode   String mode to use: POTX_STRING_INSTALLER, POTX_STRING_RUNTIME or
+ *                                POTX_STRING_BOTH.
  *
  * @internal param $function_name The name of the function to look for (could be 't', '$t', 'st'*   The name of the function to look for (could be 't', '$t', 'st'
  *   or any other t-like function). Drupal 7 only supports context on t().
@@ -444,6 +419,7 @@ function _potx_find_t_calls_with_context(
 				if ( in_array( $rig, array( ")", "," ) )
 					 && ( is_array( $mid ) && ( $mid[ 0 ] == T_CONSTANT_ENCAPSED_STRING ) )
 				) {
+					$context = false;
 					// By default, there is no context.
 					$domain = POTX_CONTEXT_NONE;
 					if ( $rig == ',' ) {
@@ -540,8 +516,7 @@ function _potx_find_t_calls_with_context(
 /**
  * Helper function to look up the token closing the current function.
  *
- * @param $here
- *   The token at the function name
+ * @param string $here The token at the function name
  */
 function _potx_find_end_of_function($here, $open = '{', $close = '}') {
   global $_potx_tokens;
@@ -568,8 +543,7 @@ function _potx_find_end_of_function($here, $open = '{', $close = '}') {
 /**
  * Helper to move past potx_t() and format_plural() arguments in search of context.
  *
- * @param $here
- *   The token before the start of the arguments
+ * @param string $here The token before the start of the arguments
  */
 function _potx_skip_args($here) {
   global $_potx_tokens;
@@ -598,15 +572,11 @@ function _potx_skip_args($here) {
 /**
  * Helper to find the value for 'context' on t() and format_plural().
  *
- * @param $tf
- *   Start position of the original function.
- * @param $ti
- *   Start position where we should search from.
- * @param $file
- *   Full path name of file parsed.
- * @param function_name
- *   The name of the function to look for. Either 'format_plural' or 't'
- *   given that Drupal 7 only supports context on these.
+ * @param int    $tf            Start position of the original function.
+ * @param int    $ti            Start position where we should search from.
+ * @param string $file          Full path name of file parsed.
+ * @param string $function_name The name of the function to look for. Either 'format_plural' or 't'
+ *                              given that Drupal 7 only supports context on these.
  */
 function _potx_find_context($tf, $ti, $file, $function_name) {
   global $_potx_tokens;
@@ -664,12 +634,9 @@ function _potx_find_context($tf, $ti, $file, $function_name) {
  * Get the exact CVS version number from the file, so we can
  * push that into the generated output.
  *
- * @param $code
- *   Complete source code of the file parsed.
- * @param $file
- *   Name of the file parsed.
- * @param $version_callback
- *   Callback used to save the version information.
+ * @param string   $code             Complete source code of the file parsed.
+ * @param string   $file             Name of the file parsed.
+ * @param callable $version_callback Callback used to save the version information.
  */
 function _potx_find_version_number($code, $file, $version_callback) {
   // Prevent CVS from replacing this pattern with actual info.
@@ -687,11 +654,9 @@ function _potx_find_version_number($code, $file, $version_callback) {
  * to a global array to reduce memory consumption problems when
  * passing around big chunks of values.
  *
- * @param $value
- *   The ersion number value of $file. If NULL, the collected
- *   values are returned.
- * @param $file
- *   Name of file where the version information was found.
+ * @param string $value The version number value of $file. If NULL, the collected
+ *                      values are returned.
+ * @param string $file  Name of file where the version information was found.
  */
 function _potx_save_version($value = NULL, $file = NULL) {
   global $_potx_versions;
@@ -709,19 +674,14 @@ function _potx_save_version($value = NULL, $file = NULL) {
  * to global arrays to reduce memory consumption problems when
  * passing around big chunks of values.
  *
- * @param $value
- *   The string value. If NULL, the array of collected values
- *   are returned for the given $string_mode.
- * @param $context
- *   From Drupal 7, separate contexts are supported. POTX_CONTEXT_NONE is
- *   the default, if the code does not specify a context otherwise.
- * @param $file
- *   Name of file where the string was found.
- * @param $line
- *   Line number where the string was found.
- * @param $string_mode
- *   String mode: POTX_STRING_INSTALLER, POTX_STRING_RUNTIME
- *   or POTX_STRING_BOTH.
+ * @param string $value       The string value. If NULL, the array of collected values
+ *                            are returned for the given $string_mode.
+ * @param string $context     From Drupal 7, separate contexts are supported. POTX_CONTEXT_NONE is
+ *                            the default, if the code does not specify a context otherwise.
+ * @param string $file        Name of file where the string was found.
+ * @param int    $line        Line number where the string was found.
+ * @param int    $string_mode String mode: POTX_STRING_INSTALLER, POTX_STRING_RUNTIME
+ *                            or POTX_STRING_BOTH.
  */
 function _potx_save_string($value = NULL, $context = NULL, $file = NULL, $line = 0, $string_mode = POTX_STRING_RUNTIME) {
   global $_potx_strings, $_potx_install;

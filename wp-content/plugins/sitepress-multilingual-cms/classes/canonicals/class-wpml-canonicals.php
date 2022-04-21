@@ -16,9 +16,9 @@ class WPML_Canonicals {
 	/**
 	 * WPML_Canonicals constructor.
 	 *
-	 * @param SitePress $sitepress
+	 * @param SitePress                        $sitepress
 	 * @param WPML_Translation_Element_Factory $translation_element_factory
-	 * @param WPML_Translations $wpml_translations
+	 * @param WPML_Translations                $wpml_translations
 	 */
 	public function __construct(
 		SitePress $sitepress,
@@ -87,7 +87,9 @@ class WPML_Canonicals {
 				$post_element = $this->translation_element_factory->create( $post->ID, 'post' );
 
 				$should_translate_canonical_url = apply_filters(
-					'wpml_must_translate_canonical_url', true, $post_element
+					'wpml_must_translate_canonical_url',
+					true,
+					$post_element
 				);
 
 				if ( ! $should_translate_canonical_url ) {
@@ -115,7 +117,7 @@ class WPML_Canonicals {
 	}
 
 	/**
-	 * @param $url
+	 * @param string $url
 	 *
 	 * @return string
 	 */
