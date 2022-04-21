@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Menu 1.13.0
+ * jQuery UI Menu 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -35,7 +35,7 @@
 "use strict";
 
 return $.widget( "ui.menu", {
-	version: "1.13.0",
+	version: "1.13.1",
 	defaultElement: "<ul>",
 	delay: 300,
 	options: {
@@ -162,7 +162,7 @@ return $.widget( "ui.menu", {
 
 		// If the mouse didn't actually move, but the page was scrolled, ignore the event (#9356)
 		if ( event.clientX === this.lastMousePosition.x &&
-				event.clientY === this.lastMousePosition.y ) {
+			event.clientY === this.lastMousePosition.y ) {
 			return;
 		}
 
@@ -695,13 +695,13 @@ return $.widget( "ui.menu", {
 		return this.activeMenu
 			.find( this.options.items )
 
-				// Only match on items, not dividers or other content (#10571)
-				.filter( ".ui-menu-item" )
-					.filter( function() {
-						return regex.test(
-							String.prototype.trim.call(
-								$( this ).children( ".ui-menu-item-wrapper" ).text() ) );
-					} );
+			// Only match on items, not dividers or other content (#10571)
+			.filter( ".ui-menu-item" )
+			.filter( function() {
+				return regex.test(
+					String.prototype.trim.call(
+						$( this ).children( ".ui-menu-item-wrapper" ).text() ) );
+			} );
 	}
 } );
 

@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Draggable 1.13.0
+ * jQuery UI Draggable 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -34,7 +34,7 @@
 "use strict";
 
 $.widget( "ui.draggable", $.ui.mouse, {
-	version: "1.13.0",
+	version: "1.13.1",
 	widgetEventPrefix: "drag",
 	options: {
 		addClasses: true,
@@ -294,8 +294,8 @@ $.widget( "ui.draggable", $.ui.mouse, {
 		}
 
 		if ( ( this.options.revert === "invalid" && !dropped ) ||
-				( this.options.revert === "valid" && dropped ) ||
-				this.options.revert === true || ( typeof this.options.revert === "function" &&
+			( this.options.revert === "valid" && dropped ) ||
+			this.options.revert === true || ( typeof this.options.revert === "function" &&
 				this.options.revert.call( this.element, dropped ) )
 		) {
 			$( this.helper ).animate(

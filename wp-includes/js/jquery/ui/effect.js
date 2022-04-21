@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Effects 1.13.0
+ * jQuery UI Effects 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -32,7 +32,7 @@
 
 // Include version.js
 $.ui = $.ui || {};
-$.ui.version = "1.13.0";
+$.ui.version = "1.13.1";
 
 // Source: jquery-var-for-color.js
 // Create a local jQuery because jQuery Color relies on it and the
@@ -1119,7 +1119,7 @@ if ( $.uiBackCompat !== false ) {
 }
 
 $.extend( $.effects, {
-	version: "1.13.0",
+	version: "1.13.1",
 
 	define: function( name, mode, effect ) {
 		if ( !effect ) {

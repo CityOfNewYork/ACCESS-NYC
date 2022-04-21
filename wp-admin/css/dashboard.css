@@ -125,6 +125,7 @@
 	background-blend-mode: overlay;
 	font-size: 14px;
 	line-height: 1.3;
+	clear: both;
 }
 
 .welcome-panel::before {
