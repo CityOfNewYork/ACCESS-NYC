@@ -6,6 +6,7 @@ use WPML\Collect\Support\Collection;
 use WPML\FP\Fns;
 use WPML\FP\Lst;
 use WPML\FP\Str;
+use WPML\FP\Obj;
 
 class OptionsPage extends Strategy {
 	/**
@@ -78,8 +79,8 @@ class OptionsPage extends Strategy {
 	 * @return array
 	 */
 	private function addNormalizedValuesForFieldState( $options, $prefix, $key, $value ) {
-		if ( isset( $value['ID'] ) ) {
-			return array_merge( $options, [ "${prefix}${key}" => $value['ID'] ] );
+		if ( $value instanceof \WP_Post || isset( $value['ID'] ) ) {
+			return array_merge( $options, [ "${prefix}${key}" => Obj::prop( 'ID', $value ) ] );
 		} elseif ( is_array( $value ) ) {
 			foreach ( $value as $index => $item ) {
 				if ( is_numeric( $index ) ) {
