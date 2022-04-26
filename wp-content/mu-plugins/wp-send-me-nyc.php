@@ -20,8 +20,8 @@ $email = new SMNYC\EmailMe('controllers/smnyc-email.php');
  * Register post types for the email and SMS templates.
  */
 add_action('init', function() use ($email, $sms) {
-  $email->registerPostType();
-  $sms->registerPostType();
+  $email->registerPostType()->createEndpoints();
+  $sms->registerPostType()->createEndpoints();
 });
 
 /**

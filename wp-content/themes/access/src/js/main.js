@@ -89,6 +89,7 @@ import WebShare from 'utilities/web-share/web-share';
         'NEWSLETTER_VALID_EMAIL_INVALID',
         'NEWSLETTER_VALID_CHECKBOX_BOROUGH',
         'NEWSLETTER_SUCCESS_CONFIRM_EMAIL',
+        'NEWSLETTER_SUCCESS_SUBSCRIBED',
         'NEWSLETTER_ERR_PLEASE_TRY_LATER',
         'NEWSLETTER_ERR_PLEASE_ENTER_VALUE',
         'NEWSLETTER_ERR_TOO_MANY_RECENT',
@@ -101,6 +102,7 @@ import WebShare from 'utilities/web-share/web-share';
 
       newsletter.strings = strings;
       newsletter.form.strings = strings;
+      newsletter.stringKeys.SUCCESS_SUBSCRIBED = 'Thank you for subscribing';
     });
   })(document.querySelectorAll(Newsletter.selector));
 

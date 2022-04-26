@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "af5e5805c8f53226a2b74aa16f1a8b0a",
+    "content-hash": "b103156b27696be7d2c4a8eef8f051d9",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -1640,16 +1640,16 @@
         },
         {
             "name": "nyco/wp-send-me-nyc",
-            "version": "1.6.3",
+            "version": "1.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-send-me-nyc.git",
-                "reference": "693306315e95f6f323174389a2ff813d22e87f43"
+                "reference": "240d561e56c43fac2b0e9a29ddd6958bbf2cd979"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-send-me-nyc/zipball/693306315e95f6f323174389a2ff813d22e87f43",
-                "reference": "693306315e95f6f323174389a2ff813d22e87f43",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-send-me-nyc/zipball/240d561e56c43fac2b0e9a29ddd6958bbf2cd979",
+                "reference": "240d561e56c43fac2b0e9a29ddd6958bbf2cd979",
                 "shasum": ""
             },
             "require": {
@@ -1690,9 +1690,9 @@
             ],
             "support": {
                 "issues": "https://github.com/cityofnewyork/nyco-wp-send-me-nyc/issues",
-                "source": "https://github.com/CityOfNewYork/nyco-wp-send-me-nyc/tree/v1.6.3"
+                "source": "https://github.com/CityOfNewYork/nyco-wp-send-me-nyc/tree/v1.6.4"
             },
-            "time": "2022-03-01T17:05:31+00:00"
+            "time": "2022-04-26T16:27:18+00:00"
         },
         {
             "name": "nyco/wp-stat-collector",
