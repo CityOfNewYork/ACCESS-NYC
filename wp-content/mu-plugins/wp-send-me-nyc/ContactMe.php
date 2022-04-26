@@ -2,6 +2,8 @@
 
 namespace SMNYC;
 
+use Exception;
+
 /**
  * Generic parent class for specific contact methods to extend
  * Creates AJAX hooks for you, and automatically includes CSRF protection
@@ -206,7 +208,7 @@ class ContactMe {
         'body' => json_encode($options)
       ));
 
-      if (is_array($response) && '200' === $response['response']['code']) {
+      if (200 === $response['response']['code']) {
         $body = json_decode($response['body'], true);
 
         /**
