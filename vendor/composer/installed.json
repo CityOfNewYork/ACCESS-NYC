@@ -1823,17 +1823,17 @@
         },
         {
             "name": "nyco/wp-send-me-nyc",
-            "version": "1.6.4",
-            "version_normalized": "1.6.4.0",
+            "version": "1.6.6",
+            "version_normalized": "1.6.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CityOfNewYork/nyco-wp-send-me-nyc.git",
-                "reference": "240d561e56c43fac2b0e9a29ddd6958bbf2cd979"
+                "reference": "45454cca712c34b5c10bf67ed4fe09acae6cf55c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-send-me-nyc/zipball/240d561e56c43fac2b0e9a29ddd6958bbf2cd979",
-                "reference": "240d561e56c43fac2b0e9a29ddd6958bbf2cd979",
+                "url": "https://api.github.com/repos/CityOfNewYork/nyco-wp-send-me-nyc/zipball/45454cca712c34b5c10bf67ed4fe09acae6cf55c",
+                "reference": "45454cca712c34b5c10bf67ed4fe09acae6cf55c",
                 "shasum": ""
             },
             "require": {
@@ -1846,7 +1846,7 @@
             "require-dev": {
                 "squizlabs/php_codesniffer": "^3"
             },
-            "time": "2022-04-26T16:27:18+00:00",
+            "time": "2022-04-26T20:39:14+00:00",
             "type": "wordpress-muplugin",
             "installation-source": "dist",
             "notification-url": "https://packagist.org/downloads/",
@@ -1876,7 +1876,7 @@
             ],
             "support": {
                 "issues": "https://github.com/cityofnewyork/nyco-wp-send-me-nyc/issues",
-                "source": "https://github.com/CityOfNewYork/nyco-wp-send-me-nyc/tree/v1.6.4"
+                "source": "https://github.com/CityOfNewYork/nyco-wp-send-me-nyc/tree/v1.6.6"
             },
             "install-path": "../../wp-content/mu-plugins/wp-send-me-nyc"
         },

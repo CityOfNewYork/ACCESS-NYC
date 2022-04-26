@@ -1,7 +1,7 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '3.33.1',
-        'version' => '3.33.1.0',
+        'pretty_version' => '3.33.2',
+        'version' => '3.33.2.0',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -191,8 +191,8 @@
             'dev_requirement' => false,
         ),
         'nyco/access-nyc' => array(
-            'pretty_version' => '3.33.1',
-            'version' => '3.33.1.0',
+            'pretty_version' => '3.33.2',
+            'version' => '3.33.2.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -254,12 +254,12 @@
             'dev_requirement' => false,
         ),
         'nyco/wp-send-me-nyc' => array(
-            'pretty_version' => '1.6.4',
-            'version' => '1.6.4.0',
+            'pretty_version' => '1.6.6',
+            'version' => '1.6.6.0',
             'type' => 'wordpress-muplugin',
             'install_path' => __DIR__ . '/../../wp-content/mu-plugins/wp-send-me-nyc',
             'aliases' => array(),
-            'reference' => '240d561e56c43fac2b0e9a29ddd6958bbf2cd979',
+            'reference' => '45454cca712c34b5c10bf67ed4fe09acae6cf55c',
             'dev_requirement' => false,
         ),
         'nyco/wp-stat-collector' => array(
