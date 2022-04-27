@@ -236,12 +236,12 @@
             'dev_requirement' => true,
         ),
         'nyco/wp-open-data-transients' => array(
-            'pretty_version' => '0.1.2',
-            'version' => '0.1.2.0',
+            'pretty_version' => '0.1.3',
+            'version' => '0.1.3.0',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../wp-content/plugins/wp-open-data-transients',
             'aliases' => array(),
-            'reference' => 'e5d22e1b72ae1155d7f382bbbf04d50ad764c19f',
+            'reference' => 'a2e01564a070e6511502395dce335862f8f73b26',
             'dev_requirement' => false,
         ),
         'nyco/wp-s3-all-import-compatibility' => array(

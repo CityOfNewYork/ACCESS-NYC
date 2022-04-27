@@ -161,7 +161,10 @@ $alerts = Timber::get_posts(array(
 ));
 
 $context['post']->alerts = array_filter($alerts, function($p) {
-  return in_array('locations', array_values($p->custom['location']));
+  $location = (!empty($p->custom['location']))
+    ? $p->custom['location'] : [];
+
+  return in_array('locations', array_values($location));
 });
 
 // Extend alerts with Timber Post Controller

@@ -127,9 +127,12 @@ if (get_field('alert')) {
   ));
 
   $context['alerts'] = array_filter($alerts, function($p) {
+    $location = (!empty($p->custom['location']))
+      ? $p->custom['location'] : [];
+
     $flags = ['programs', 'single'];
 
-    $location = (!empty($p->custom['location'])) ? $p->custom['location'] : [];
+    $location = (!empty($location)) ? $p->custom['location'] : [];
 
     $intersect = array_intersect(array_values($location), $flags);
 
