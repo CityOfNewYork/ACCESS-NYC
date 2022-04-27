@@ -1,7 +1,7 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '3.33.2',
-        'version' => '3.33.2.0',
+        'pretty_version' => '3.33.3',
+        'version' => '3.33.3.0',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -191,8 +191,8 @@
             'dev_requirement' => false,
         ),
         'nyco/access-nyc' => array(
-            'pretty_version' => '3.33.2',
-            'version' => '3.33.2.0',
+            'pretty_version' => '3.33.3',
+            'version' => '3.33.3.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
