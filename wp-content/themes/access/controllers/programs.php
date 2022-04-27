@@ -4,6 +4,7 @@
  * Program Guide
  *
  * @link /wp-json/wp/v2/programs
+ *
  * @author NYC Opportunity
  */
 
@@ -39,7 +40,8 @@ class Programs extends Timber\Post {
 
     $this->status = $this->getStatus();
 
-    $this->status_type = $this->custom['program_status_type'];
+    $this->status_type = (empty($this->custom['program_status_type']))
+      ? '' : $this->custom['program_status_type'];
 
     $this->icon = $this->getIcon();
 
@@ -53,14 +55,16 @@ class Programs extends Timber\Post {
 
     $this->share_hash = SMNYC\hash($this->share_url);
 
-    $og_title = $this->custom['og_title'];
+    $og_title = (empty($this->custom['og_title']))
+      ? '' : $this->custom['og_title'];
 
-    $web_share_text = $this->custom['web_share_text'];
+    $web_share_text = (empty($this->custom['web_share_text']))
+      ? '' : $this->custom['web_share_text'];
 
     $this->web_share = array(
-      'title' => ($og_title) ?
+      'title' => (!empty($og_title)) ?
         $og_title : $this->custom['plain_language_program_name'],
-      'text' => ($web_share_text) ?
+      'text' => (!empty($web_share_text)) ?
         $web_share_text : strip_tags($this->custom['brief_excerpt']),
       'url' => wp_get_shortlink()
     );
@@ -137,6 +141,10 @@ class Programs extends Timber\Post {
    * @return  Object/Boolean  Status. If cleared return false.
    */
   public function getStatus() {
+    if (empty($this->custom['program_status'])) {
+      return false;
+    }
+
     $status = array(
       'type' => $this->custom['program_status_type'],
       'text' => $this->custom['program_status']
@@ -164,9 +172,8 @@ class Programs extends Timber\Post {
    * @return  String  The class name of the icon
    */
   public function getIconClass() {
-    $type = $this->custom['program_status_type'];
-
-    $key = ($type || isset($type)) ? $type : self::STATUS_DEFAULT;
+    $key = (empty($this->custom['program_status_type']))
+      ? self::STATUS_DEFAULT : $this->custom['program_status_type'];
 
     return self::ICON_COLORS[$key];
   }

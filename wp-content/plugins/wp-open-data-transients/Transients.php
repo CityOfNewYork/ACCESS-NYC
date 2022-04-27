@@ -8,17 +8,23 @@ namespace NYCO;
 
 class Transients {
   const TRANSIENTS_OPTION = 'open_data_transients_saved';
+
   const TOKEN_OPTION = 'open_data_app_token';
+
   const EXPIRATION = WEEK_IN_SECONDS; // WordPress Time Constant
+
   const NAME_REGEX = '/^[A-Za-z_]*$/';
+
 
   /**
    * Gets a set transient if it exists, if it doesn't, it will set the transient
    * from the stored list of transients.
-   * @param  [string] $name The name of the transient to retrieve
-   * @return [string]       A JSON string representing the body of the request
+   *
+   * @param  String  $name  The name of the transient to retrieve
+   *
+   * @return String         A JSON string representing the body of the request
    */
-  public function get($name) {
+  public static function get($name) {
     $transient = get_transient($name);
 
     if (empty($transient)) {
@@ -30,10 +36,12 @@ class Transients {
 
   /**
    * Set the transient based on the url saved in the options database.
-   * @param  [string] $name The name of the transient to retrieve
-   * @return [string]       A JSON string representing the body of the request
+   *
+   * @param  String  $name  The name of the transient to retrieve
+   *
+   * @return String         A JSON string representing the body of the request
    */
-  public function set($name) {
+  public static function set($name) {
     $option_transients = get_option(self::TRANSIENTS_OPTION, null);
 
     $option_token = self::TOKEN_OPTION;
@@ -61,11 +69,13 @@ class Transients {
 
   /**
    * Save the transient to our saved list to be referenced by the set and get methods
-   * @param  [string] $name The name of the transient
-   * @param  [string] $url  The url of the transient
-   * @return [object]       The saved transient
+   *
+   * @param  String  $name  The name of the transient
+   * @param  String  $url   The url of the transient
+   *
+   * @return Object         The saved transient
    */
-  public function save($name, $url) {
+  public static function save($name, $url) {
     // Validate params
     $name = filter_var(
       $name, FILTER_VALIDATE_REGEXP,

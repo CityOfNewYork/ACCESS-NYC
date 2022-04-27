@@ -19,6 +19,7 @@ const ID = 'open_data_transients';
  */
 
 $action = 'admin_action_' . ID;
+
 $nonce = ID . '_nonce';
 
 /**
@@ -41,5 +42,6 @@ add_action($action, function () use ($nonce, $action) {
 
   // Redirect back to the page
   wp_redirect($_POST['_wp_http_referer']);
+
   exit();
 });
