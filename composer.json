@@ -24,7 +24,7 @@
     }
   ],
   "require": {
-    "humanmade/s3-uploads": "^2",
+    "humanmade/s3-uploads": "*",
     "nyco/wp-assets": "^1",
     "nyco/wp-config": "^1",
     "nyco/wp-gc-templates-sync": "^0.0",
@@ -89,5 +89,10 @@
     ]
   },
   "minimum-stability": "stable",
-  "prefer-stable": true
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true
+    }
+  }
 }
