@@ -76,7 +76,7 @@
     "@nycopportunity/pattern-attribution": "^1.0.2",
     "@nycopportunity/pattern-modal": "^1.0.0",
     "@nycopportunity/patterns-framework": "^1.0.0-15",
-    "@nycopportunity/wp-archive-vue": "^1.2.0",
+    "@nycopportunity/wp-archive-vue": "^1.3.0",
     "animate.scss": "0.0.6",
     "es6-promise": "^4.2.5",
     "jquery": "^3.5.1",
