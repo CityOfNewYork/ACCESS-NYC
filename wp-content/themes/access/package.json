@@ -73,7 +73,7 @@
   },
   "dependencies": {
     "@nycopportunity/access-patterns": "^0.16.0",
-    "@nycopportunity/pattern-attribution": "^1.0.2",
+    "@nycopportunity/pattern-attribution": "^1.1.1",
     "@nycopportunity/pattern-modal": "^1.0.0",
     "@nycopportunity/patterns-framework": "^1.0.0-15",
     "@nycopportunity/wp-archive-vue": "^1.2.0",
