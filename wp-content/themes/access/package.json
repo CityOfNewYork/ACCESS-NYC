@@ -79,7 +79,7 @@
     "@nycopportunity/wp-archive-vue": "^1.2.0",
     "animate.scss": "0.0.6",
     "es6-promise": "^4.2.5",
-    "jquery": "^3.5.1",
+    "jquery": "^3.6.3",
     "underscore": "^1.13.3",
     "whatwg-fetch": "^3.0.0"
   }
