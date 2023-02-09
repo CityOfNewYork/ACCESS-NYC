@@ -1,3 +1,13 @@
-<a href="{{ url_base }}/eligibility#step-1" {% if this.style %}class="{{ this.style }}"{% endif %} data-js="track" data-track-key="Main Nav" data-track-data='[{"action": "eligibility#step-1"}]'>{{ __('Am I eligible?', 'accessnyctheme') }}</a>
+{% for m in footer_get_help_now_menu.get_items %}
+    <a href="{{ m.link }}"
+    {% if this.style %}class="{{ this.style }}"{% endif %}
+    {% if m.attr_title %}title="{{ m.attr_title }}"{% else %}title="{{ m.title }}"{% endif %}
+    {% if m.target %}target="{{ m.target }}"{% endif %}
+    {% if m.xfn %}rel="{{ m.xfn }}"{% endif %}>
+    {{ m.title }}
+    </a>
+{% endfor %}
+
+{# <a href="{{ url_base }}/eligibility#step-1" {% if this.style %}class="{{ this.style }}"{% endif %} data-js="track" data-track-key="Main Nav" data-track-data='[{"action": "eligibility#step-1"}]'>{{ __('Am I eligible?', 'accessnyctheme') }}</a>
 <a href="{{ url_base }}/programs" {% if this.style %}class="{{ this.style }}"{% endif %} data-js="track" data-track-key="Main Nav" data-track-data='[{"action": "programs"}]'>{{ __('Programs', 'accessnyctheme') }}</a>
-<a href="{{ url_base }}/locations" {% if this.style %}class="{{ this.style }}"{% endif %} data-js="track" data-track-key="Main Nav" data-track-data='[{"action": "locations"}]'>{{ __('Find help', 'accessnyctheme') }}</a>
+<a href="{{ url_base }}/locations" {% if this.style %}class="{{ this.style }}"{% endif %} data-js="track" data-track-key="Main Nav" data-track-data='[{"action": "locations"}]'>{{ __('Find help', 'accessnyctheme') }}</a> #}
