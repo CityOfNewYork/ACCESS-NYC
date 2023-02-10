@@ -67,7 +67,7 @@ class Site extends TimberSite {
      * Add Menus
      */
 
-    $context['menu'] = new TimberMenu('header-menu');
+    $context['header_menu'] = new TimberMenu('header-menu');
 
     $context['footer_get_help_now_menu'] = new TimberMenu('get-help-now');
 
