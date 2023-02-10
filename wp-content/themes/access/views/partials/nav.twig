@@ -2,16 +2,7 @@
     <a href="{{ m.link }}"
         {% if this.style %}class="{{ this.style }}"{% endif %}
         {% if m.attr_title %}title="{{ m.attr_title }}"{% else %}title="{{ m.title }}"{% endif %}
-        {% if m.target %}target="{{ m.target }}"{% endif %}
-        data-js="track" data-track-key="Main Nav" 
-        {# Track what the user clicks - 
-        if the link is a relative path, remove the leading '/';
-        otherwise, use the slug because determining the relative path would be difficult #}
-        {% if m.path[:1] == '/' %}
-            data-track-data="{&quot;action&quot;: &quot;{{ m.path[1:] }}&quot;}]"
-        {% else %}
-            data-track-data="{&quot;action&quot;: &quot;{{ m.slug }}&quot;}]"
-        {% endif %}>
+        {% if m.target %}target="{{ m.target }}"{% endif %}>
         {{ m.title }}
     </a>
 {% endfor %}
