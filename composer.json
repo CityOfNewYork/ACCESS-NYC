@@ -1,6 +1,6 @@
 {
   "name": "nyco/access-nyc",
-  "version": "3.32.2",
+  "version": "3.33.4",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "homepage": "https://access.nyc.gov",
   "authors": [
@@ -89,5 +89,11 @@
     ]
   },
   "minimum-stability": "stable",
-  "prefer-stable": true
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "kylekatarnls/update-helper": true
+    }
+  }
 }
