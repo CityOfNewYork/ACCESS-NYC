@@ -1,5 +1,20 @@
 <?php
 
+use WPML\Element\API\Entity\LanguageMapping;
+use WPML\Element\API\Languages;
+use WPML\FP\Fns;
+use WPML\FP\Obj;
+use WPML\FP\Str;
+use WPML\FP\Lst;
+use WPML\FP\Logic;
+use WPML\FP\Relation;
+use WPML\Setup\Option;
+use WPML\TM\API\ATE\CachedLanguageMappings;
+use WPML\TM\ATE\API\CachedATEAPI;
+use WPML\TM\API\ATE\LanguageMappings;
+use WPML\TM\ATE\API\CacheStorage\Transient;
+use function WPML\FP\pipe;
+
 class SitePress_EditLanguages {
 	const ACCEPTED_MIME_TYPES = [
 		'gif'          => 'image/gif',
@@ -8,7 +23,7 @@ class SitePress_EditLanguages {
 		'svg'          => 'image/svg+xml',
 	];
 
-	public $active_languages;
+	public static $active_languages;
 	public $upload_dir;
 	public $is_writable         = false;
 	public $required_fields     = [
@@ -22,11 +37,9 @@ class SitePress_EditLanguages {
 	private $mode               = 'edit';
 	private $validation_action  = null;
 	public $validation_failed   = false;
-	private $built_in_languages = [];
 	private $error              = '';
 	private $message            = '';
 	private $max_file_size;
-
 	private $max_locale_length = 35;
 
 	/**
@@ -35,16 +48,29 @@ class SitePress_EditLanguages {
 	private $wpml_flags;
 
 	/**
-	 * @var array
+	 * @var array<string>
 	 */
 	private $wpml_flag_files;
 
 	/** @var bool $update_language_packs_if_needed */
 	private $update_language_packs_if_needed;
 
+	/** @var array */
+	private static $languages_available_in_ate;
+
 	/**
-	 * @param WPML_Flags $wpml_flags
-	 * @param bool       $update_language_packs_if_needed
+     * This is a helper variable that stores just saved mapping.
+     * It is needed to avoid the problem with delayed mapping propagation in ATE.
+     * When we save a new mapping, we try to retrieve those data immediately after which does not always work.
+     * Instead of that, we store this data here after saving. When a user reloads the page, we will ask ATE API for those data.
+     *
+	 * @var array|null
+	 */
+	public static $newlySavedMapping;
+
+	/**
+	 * @param \WPML_Flags $wpml_flags
+	 * @param bool        $update_language_packs_if_needed
 	 */
 	public function __construct( WPML_Flags $wpml_flags, $update_language_packs_if_needed = true ) {
 		$this->wpml_flags = $wpml_flags;
@@ -61,9 +87,6 @@ class SitePress_EditLanguages {
 		);
 
 		$this->max_file_size = 100000;
-
-		$lang_codes               = icl_get_languages_codes();
-		$this->built_in_languages = array_values( $lang_codes );
 
 		if ( $this->is_delete_language_action() ) {
 			$lang_id = (int) $_GET['id'];
@@ -90,14 +113,29 @@ class SitePress_EditLanguages {
 
 		$this->migrate();
 
-		$this->get_active_languages();
-
 		// Trigger save.
 		if ( isset( $_POST['icl_edit_languages_action'] ) && $_POST['icl_edit_languages_action'] === 'update' ) {
 			if ( wp_verify_nonce( $_POST['_wpnonce'], 'icl_edit_languages' ) ) {
 				$this->update();
+				self::$active_languages = null; // clear cache
 			}
 		}
+
+		$transientStorage = new Transient();
+		$transientStorage->delete( CachedATEAPI::CACHE_OPTION );
+	}
+
+	/**
+	 * @param bool $clearCache
+	 *
+	 * @return array
+	 */
+	public static function getLanguagesAvailableInATE( $clearCache = false ) {
+		if ( ! self::$languages_available_in_ate || $clearCache ) {
+			self::$languages_available_in_ate = Option::isTMAllowed() ? LanguageMappings::getAvailable() : [];
+		}
+
+		return self::$languages_available_in_ate;
 	}
 
 	function render() {
@@ -127,6 +165,18 @@ class SitePress_EditLanguages {
 					<li>
 						<strong><?php echo esc_html_x( 'hreflang:', 'Edit languages page: subtitle #6', 'sitepress' ); ?></strong> <?php echo esc_html_x( 'the code Google expects for this language. The hreflang should contain at least the language code (usually, made of two letters), or, if you want to specify the country/region, it sould be the same information as the locale name, but in a slightly different format. If the locale for Canadian French is fr_CA, the corresponding hreflang would be fr-ca. Instead of an underscore, use a dash (-) and all letters should be lowercase.', 'Edit languages page: subtitle #6, description', 'sitepress' ); ?>
 					</li>
+                    <li>
+                        <strong><?php echo esc_html_x( 'Language mapping:', 'Edit languages page: subtitle #7', 'sitepress' ); ?></strong>
+                        <?php
+                        $link = 'https://wpml.org/documentation/automatic-translation/using-automatic-translation-with-custom-languages/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore';
+
+                        echo sprintf( _x(
+	                        'To use automatic translation with a custom or country-specific language, you must map it to a supported language. Read more about <a href="%s" target="_blank" rel="noopener noreferrer">using automatic translation with custom languages</a>.',
+	                        'Edit languages page: subtitle #7, description',
+	                        'sitepress'
+                        ), $link );
+                        ?>
+                    </li>
 				</ul>
 			</div>
 			<?php
@@ -163,13 +213,18 @@ class SitePress_EditLanguages {
 						}
 						?>
 					class="icl_edit_languages_show"><?php esc_html_e( 'Translation (new)', 'sitepress' ); ?></th>
-					<?php foreach ( $this->active_languages as $lang ) { ?>
+					<?php foreach ( self::get_active_languages() as $lang ) { ?>
 						<th><?php esc_html_e( 'Translation', 'sitepress' ); ?> (<?php echo esc_html( $lang['english_name'] ); ?>)</th>
 					<?php } ?>
 					<th><?php esc_html_e( 'Flag', 'sitepress' ); ?></th>
 					<th><?php esc_html_e( 'Default locale', 'sitepress' ); ?></th>
 					<th><?php esc_html_e( 'Encode URLs', 'sitepress' ); ?></th>
 					<th><?php esc_html_e( 'hreflang', 'sitepress' ); ?></th>
+
+		            <?php if ( \WPML_TM_ATE_Status::is_enabled_and_activated() ) { ?>
+					<th><?php esc_html_e( 'Language mapping', 'sitepress' ); ?></th>
+                    <?php } ?>
+
 					<th>&nbsp;</th>
 				</tr>
 				</thead>
@@ -184,19 +239,24 @@ class SitePress_EditLanguages {
 						}
 						?>
 					class="icl_edit_languages_show"><?php _e( 'Translation (new)', 'sitepress' ); ?></th>
-					<?php foreach ( $this->active_languages as $lang ) { ?>
+					<?php foreach ( self::get_active_languages() as $lang ) { ?>
 						<th><?php esc_html_e( 'Translation', 'sitepress' ); ?> (<?php echo $lang['english_name']; ?>)</th>
 					<?php } ?>
 					<th><?php esc_html_e( 'Flag', 'sitepress' ); ?></th>
 					<th><?php esc_html_e( 'Default locale', 'sitepress' ); ?></th>
 					<th><?php esc_html_e( 'Encode URLs', 'sitepress' ); ?></th>
 					<th><?php esc_html_e( 'hreflang', 'sitepress' ); ?></th>
+
+					<?php if ( \WPML_TM_ATE_Status::is_enabled_and_activated() ) { ?>
+                        <th><?php esc_html_e( 'Language mapping', 'sitepress' ); ?></th>
+					<?php } ?>
+
 					<th>&nbsp;</th>
 				</tr>
 				</tfoot>
 				<tbody>
 				<?php
-				foreach ( $this->active_languages as $lang ) {
+				foreach ( self::get_active_languages() as $lang ) {
 					$this->table_row( $lang );
 				}
 				if ( $this->is_new_data_and_invalid() ) {
@@ -228,17 +288,11 @@ class SitePress_EditLanguages {
 													?>
 							 style="display:none;"<?php } ?> />
 				&nbsp;
-				<input disabled="disabled" type="submit" class="button-primary" value="<?php _e( 'Save', 'sitepress' ); ?>"/>
+                <span id="wpml-language-edit-page" ></span>
+				<input style="display:none;" type="submit" class="button-primary" value="<?php _e( 'Save', 'sitepress' ); ?>"/>
 			</p>
 			<br/>
 		</form>
-
-		<p>
-			<?php wp_nonce_field( 'reset_languages_nonce', '_icl_nonce_rl' ); ?>
-			<input class="button-primary" type="button" id="icl_reset_languages" value="<?php esc_html_e( 'Reset languages', 'sitepress' ); ?>"/>
-			<span class="hidden"><?php esc_html_e( 'WPML will reset all language information to its default values. Any languages that you added or edited will be lost.', 'sitepress' ); ?></span>
-		</p>
-
 		<?php
 	}
 
@@ -287,13 +341,16 @@ class SitePress_EditLanguages {
 				<?php
 				if ( $add ) {
 					?>
-					<input type="text" name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][english_name]" value="<?php echo esc_attr( $lang['english_name'] ); ?>"/>
+					<input type="text" class="wpml_edit_languages_name" name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][english_name]" value="<?php echo esc_attr( $lang['english_name'] ); ?>"/>
 					<?php
 				} else {
 					?>
-					<div class="read-only" id="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][english_name]"><?php echo esc_attr( $lang['english_name'] ); ?> <input type="hidden"
-																																												 name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][english_name]"
-																																												 value="<?php echo esc_attr( $lang['english_name'] ); ?>"/>
+					<div class="read-only" id="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][english_name]">
+						<?php echo esc_attr( $lang['english_name'] ); ?>
+                            <input type="hidden"
+                                    class="wpml_edit_languages_name"
+                                    name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][english_name]"
+                                    value="<?php echo esc_attr( $lang['english_name'] ); ?>"/>
 					</div>
 					<?php
 				}
@@ -303,14 +360,16 @@ class SitePress_EditLanguages {
 				<?php
 				if ( $add ) {
 					?>
-					<input type="text" name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][code]" value="<?php echo esc_attr( $lang['code'] ); ?>" maxlength="7" style="width:30px; max-width: 7em"/>
+					<input type="text" class="wpml_edit_languages_code" name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][code]" value="<?php echo esc_attr( $lang['code'] ); ?>" maxlength="7" style="width:30px; max-width: 7em"/>
 					<?php
 				} else {
 					?>
-					<div class="read-only" id="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][code]"><?php echo esc_attr( $lang['code'] ); ?> <input type="hidden"
-																																								 name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][code]"
-																																								 value="<?php echo esc_attr( $lang['code'] ); ?>"
-																																								 style="width:30px;"/>
+					<div class="read-only" id="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][code]"><?php echo esc_attr( $lang['code'] ); ?>
+                        <input type="hidden"
+                               name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][code]"
+                               class="wpml_edit_languages_code"
+                               value="<?php echo esc_attr( $lang['code'] ); ?>"
+                               style="width:30px;"/>
 					</div>
 					<?php
 				}
@@ -327,7 +386,7 @@ class SitePress_EditLanguages {
 														 value="<?php echo esc_attr( $this->get_add_language_from_post_data( $lang['id'] ) ); ?>"/>
 			</td>
 			<?php
-			foreach ( $this->active_languages as $translation ) {
+			foreach ( self::get_active_languages() as $translation ) {
 				?>
 				<td><input type="text" name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][translations][<?php echo esc_attr( $translation['code'] ); ?>]"
 						   value="<?php echo esc_attr( $this->get_translations_data( $lang, $translation ) ); ?>"/></td>
@@ -337,6 +396,7 @@ class SitePress_EditLanguages {
 			<td>
 				<?php
 				if ( $this->is_writable ) {
+				    $custom_flag_url = null;
 					$allowed_types = array_keys( self::ACCEPTED_MIME_TYPES );
 					?>
 					<div style="float:left;">
@@ -353,9 +413,13 @@ class SitePress_EditLanguages {
 											 checked="checked"<?php } ?> />
 								&nbsp;
 								<label for="wpm-edit-languages-<?php echo esc_attr( $lang['id'] ); ?>-flag-upload">
-									<?php if ( $lang['code'] && $lang['from_template'] ) : ?>
-										&nbsp;<img src="<?php echo $this->wpml_flags->get_flag_url( $lang['code'] ); ?>"
-												   alt="<?php echo esc_attr( $lang ['code'] ); ?>"/>
+									<?php if ( $lang['code'] && $lang['from_template'] ) :
+                                        $custom_flag_url = isset( $lang['flag_url'] ) ? $lang['flag_url'] : null; ?>
+										&nbsp;<img
+                                                src="<?php echo $this->wpml_flags->get_flag_url( $lang['code'] ); ?>"
+                                                alt="<?php echo esc_attr( $lang ['code'] ); ?>"
+                                                width="18"
+                                        />
 									<?php endif; ?>
 									<?php _e( 'Custom flag', 'sitepress' ); ?>
 								</label>
@@ -376,7 +440,7 @@ class SitePress_EditLanguages {
 								</div>
 
 							</li>
-							<?php if ( $lang['code'] && in_array( $lang['code'], $this->built_in_languages ) ) : ?>
+							<?php if ( Obj::prop( 'built_in', $lang ) ) : ?>
 								<li>
 									<label>
 										<input type="radio"
@@ -388,11 +452,30 @@ class SitePress_EditLanguages {
 													?>
 													 checked="checked"<?php } ?> />
 										&nbsp;<img
-											src="<?php echo $this->wpml_flags->get_wpml_flags_url() . $lang['code'] . '.png'; ?>"
+											src="<?php echo WPML_Flags::get_wpml_flags_url() . $lang['code'] . '.png'; ?>"
 											alt="<?php echo esc_attr( $lang ['code'] ); ?>"/>
 										<?php esc_html_e( 'WPML flag', 'sitepress' ); ?>
 									</label>
 								</li>
+							<?php endif ?>
+
+							<?php if ( !Obj::prop( 'built_in', $lang ) && Obj::prop( 'flag_url', $lang ) && $lang['flag_url'] != $custom_flag_url ): ?>
+                                <li>
+                                    <label>
+                                        <input type="radio"
+                                               name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][flag_upload]"
+                                               value="false"
+                                               class="radio icl_edit_languages_use_field"
+											<?php
+											if ( ! $lang['from_template'] ) {
+												?>
+                                                checked="checked"<?php } ?> />
+                                        &nbsp;<img
+                                                src="<?php echo $lang['flag_url']; ?>"
+                                                alt="<?php echo esc_attr( $lang ['code'] ); ?>"/>
+										<?php esc_html_e( 'WPML flag', 'sitepress' ); ?>
+                                    </label>
+                                </li>
 							<?php endif ?>
 						</ul>
 					</div>
@@ -435,13 +518,20 @@ class SitePress_EditLanguages {
 			<td><input type="text" name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][tag]" maxlength="<?php echo esc_attr( $this->max_locale_length ); ?>" value="<?php echo esc_html( $lang['tag'] ); ?>"
 					   style="width: auto; max-width: 5em;"/></td>
 
+		    <?php
+		    if ( \WPML_TM_ATE_Status::is_enabled_and_activated() ) {
+			    $this->displayMappingField( $lang, $add );
+		    }
+            ?>
+
+
 			<td>
 				<?php
 				if (
 					! $add
-					&& ! in_array( $lang['code'], $this->built_in_languages )
+					&& ! Obj::prop( 'built_in', $lang )
 					&& $lang['code'] != $sitepress->get_default_language()
-					&& count( $this->active_languages ) > 1
+					&& count( self::get_active_languages() ) > 1
 				) :
 					?>
 					<a href="
@@ -471,58 +561,99 @@ class SitePress_EditLanguages {
 		<?php
 	}
 
-	function get_active_languages() {
-		global $sitepress, $wpdb;
-		$this->active_languages = $sitepress->get_active_languages( true );
-
-		foreach ( $this->active_languages as $lang ) {
-			foreach ( $this->active_languages as $lang_translation ) {
-				$this->active_languages[ $lang['code'] ]['translation'][ $lang_translation['id'] ] = $sitepress->get_display_language_name( $lang['code'], $lang_translation['code'] );
-			}
-			$flag = $sitepress->get_flag( $lang['code'] );
-			$this->active_languages[ $lang['code'] ]['flag']           = $flag->flag;
-			$this->active_languages[ $lang['code'] ]['from_template']  = $flag->from_template;
-			$this->active_languages[ $lang['code'] ]['default_locale'] = $wpdb->get_var( $wpdb->prepare( "SELECT default_locale FROM {$wpdb->prefix}icl_languages WHERE code=%s", $lang['code'] ) );
-			$this->active_languages[ $lang['code'] ]['encode_url']     = $lang['encode_url'];
-			$this->active_languages[ $lang['code'] ]['tag']            = $lang['tag'];
+	public static function get_active_languages() {
+		if ( self::$active_languages ) {
+			return self::$active_languages;
 		}
 
-	}
+		global $sitepress;
+		$result = [];
 
-	function insert_main_table( $code, $english_name, $default_locale, $major = 0, $active = 0, $encode_url = 0, $tag = '' ) {
-		global $wpdb;
+		$active_languages = Languages::withFlags( Languages::getActive() );
+		if ( \WPML_TM_ATE_Status::is_enabled_and_activated() ) {
+			if ( self::$newlySavedMapping ) {
+				$active_languages = Fns::map( function ( $language ) {
+					$newlyCreatedMapping = Lst::find( pipe(
+						Obj::pathOr( null, [ 'source_language', 'code' ] ),
+						Relation::equals( Obj::prop( 'code', $language ) )
+					), self::$newlySavedMapping );
 
-		return $wpdb->insert(
-			$wpdb->prefix . 'icl_languages', [
-				'code'           => $code,
-				'english_name'   => $english_name,
-				'default_locale' => $default_locale,
-				'major'          => $major,
-				'active'         => $active,
-				'encode_url'     => $encode_url,
-				'tag'            => $tag,
-			]
-		);
+					if ( ! $newlyCreatedMapping || ! Obj::pathOr( false, [ 'result', 'created' ], $newlyCreatedMapping ) ) {
+						$mapping = new LanguageMapping(
+							Obj::prop( 'code', $language ),
+							Obj::prop( 'english_name', $language ),
+							LanguageMappings::IGNORE_MAPPING_ID
+						);
+
+						return array_merge( $language, [ 'can_be_translated_automatically' => false, 'mapping' => $mapping ] );
+					} else {
+						return array_merge( $language, [
+							'can_be_translated_automatically' => true,
+							'mapping'                         => new LanguageMapping(
+								Obj::prop( 'code', $language ),
+								Obj::prop( 'english_name', $language ),
+								Obj::path( [ 'target_language', 'id' ], $newlyCreatedMapping ),
+								Obj::path( [ 'target_language', 'code' ], $newlyCreatedMapping )
+							)
+						] );
+					}
+				}, $active_languages );
+			} else {
+				$active_languages = LanguageMappings::withCanBeTranslatedAutomatically( LanguageMappings::withMapping( $active_languages ) );
+			}
+		}
+
+		foreach ( $active_languages as $lang ) {
+			$code = Obj::prop( 'code', $lang );
+
+			// Most of predefined languages can be mapped out of the box, even without defining mapping explicitly.
+            // For instance, we know that French should be mapped to French in ATE and so on.
+            // Here I perform this check for languages which do not have explicitly defined mapping
+			if ( ! Obj::prop( 'mapping', $lang ) ) {
+				foreach ( self::getLanguagesAvailableInATE() as $ateLanguage ) {
+					if ( $code === Obj::prop( 'iso', $ateLanguage ) ) {
+						$lang['mapping'] = new LanguageMapping(
+							$code,
+							Obj::prop( 'display_name', $lang ),
+							Obj::prop( 'id', $ateLanguage ),
+							Obj::prop( 'iso', $ateLanguage )
+						);
+						break;
+					}
+				}
+			}
+
+
+			$result[ $code ]                  = $lang;
+			$result[ $code ]['flag']          = Obj::prop( 'flag_url', $lang );
+			$result[ $code ]['from_template'] = Obj::prop( 'flag_from_template', $lang );
+
+			foreach ( $active_languages as $lang_translation ) {
+				$result[ $code ]['translation'][ Obj::prop( 'id', $lang_translation ) ] = $sitepress->get_display_language_name( $code, Obj::prop( 'code', $lang_translation ) );
+			}
+		}
+
+        self::$active_languages = $result;
+
+		return $result;
 	}
 
 	function update_main_table( $id, $code, $default_locale, $encode_url, $tag ) {
 		global $wpdb;
 		$wpdb->update(
-			$wpdb->prefix . 'icl_languages', [
+			$wpdb->prefix . 'icl_languages',
+			[
 				'code'           => $code,
 				'default_locale' => $default_locale,
 				'encode_url'     => $encode_url,
 				'tag'            => $tag,
-			], [ 'ID' => $id ]
+			],
+			[ 'ID' => $id ]
 		);
 	}
 
 	function insert_translation( $name, $language_code, $display_language_code ) {
-		global $wpdb;
-		$insert_sql      = "INSERT INTO {$wpdb->prefix}icl_languages_translations (name, language_code, display_language_code) VALUES(%s, %s, %s)";
-		$insert_prepared = $wpdb->prepare( $insert_sql, [ $name, $language_code, $display_language_code ] );
-
-		return $wpdb->query( $insert_prepared );
+		return Languages::setLanguageTranslation( $language_code, $display_language_code, $name );
 	}
 
 	function update_translation( $name, $language_code, $display_language_code ) {
@@ -542,8 +673,8 @@ class SitePress_EditLanguages {
 
 	function update_flag( $lang_code, $flag, $from_template ) {
 		global $wpdb;
-		$update_sql      = "UPDATE {$wpdb->prefix}icl_flags SET flag= %s,from_template=%s WHERE lang_code = %s";
-		$update_prepared = $wpdb->prepare( $update_sql, [ $flag, $from_template, $lang_code ] );
+		$insert_and_update_sql = "INSERT INTO {$wpdb->prefix}icl_flags (lang_code, flag, from_template) VALUES(%s, %s, %s) ON DUPLICATE KEY UPDATE flag= %s,from_template=%s";
+		$update_prepared       = $wpdb->prepare( $insert_and_update_sql, [ $lang_code, $flag, $from_template, $flag, $from_template ] );
 		$wpdb->query( $update_prepared );
 	}
 
@@ -591,7 +722,8 @@ class SitePress_EditLanguages {
 				$wpdb->update( $wpdb->prefix . 'icl_locale_map', [ 'locale' => $data['default_locale'] ], [ 'code' => $data['code'] ] );
 			} else {
 				$wpdb->insert(
-					$wpdb->prefix . 'icl_locale_map', [
+					$wpdb->prefix . 'icl_locale_map',
+					[
 						'code'   => $data['code'],
 						'locale' => $data['default_locale'],
 					]
@@ -609,7 +741,7 @@ class SitePress_EditLanguages {
 					if ( empty( $translation_value ) ) {
 						$translation_value = $data['english_name'];
 					}
-					$translation_code = $_POST['icl_edit_languages']['add']['code'];
+					$translation_code = filter_var( $_POST['icl_edit_languages']['add']['code'], FILTER_SANITIZE_STRING );
 				}
 
 				// Check if update.
@@ -629,6 +761,8 @@ class SitePress_EditLanguages {
 				}
 			}
 
+
+
 			// Handle flag.
 			$from_template = $this->handle_flag_post_data( $data, $id );
 
@@ -637,6 +771,9 @@ class SitePress_EditLanguages {
 			// Reset flag upload field.
 			$_POST['icl_edit_languages'][ $id ]['flag_upload'] = 'false';
 		}
+
+		$this->saveLanguageMapping( $_POST['icl_edit_languages'] );
+
 		// Refresh cache.
 		$sitepress->get_language_name_cache()->clear();
 		$sitepress->clear_flags_cache();
@@ -647,14 +784,12 @@ class SitePress_EditLanguages {
 			unset( $_POST['icl_edit_languages']['add'] );
 		}
 
-		// Reset active languages.
-		$this->get_active_languages();
 		$this->update_language_packs( $sitepress );
 	}
 
 	/**
-	 * @param array $data
-	 * @param int   $id
+	 * @param array<string,string|array<string,string>> $data
+	 * @param int                                       $id
 	 *
 	 * @return int
 	 */
@@ -669,18 +804,33 @@ class SitePress_EditLanguages {
 				$this->set_errors( __( 'Error uploading flag file.', 'sitepress' ) );
 			}
 			$this->wpml_flags->clear();
-		} elseif ( empty( $data['flag'] ) || 'false' === $data['flag_upload'] ) {
-			$data['flag'] = $data['code'] . '.png';
+		} elseif ( empty( $data['flag'] ) || \WPML\FP\Relation::propEq( 'flag_upload', 'false', $data ) ) {
+			if( $this->isBuildInLang($data['code']) ) {
+				$data['flag'] = $data['code'] . '.png';
+			} elseif (!empty($data['flag'])) {
+				$data['flag'] = basename($data['flag']);
+			} else {
+				$data['flag'] = '';
+			}
 		} else {
+		    // This is needed for the case that some other language is updated. In that case this will
+            // part will for any custom flag and flag becomes the complete url.
+			if (!empty($data['flag'])) {
+				$data['flag'] = basename( $data['flag'] );
+			}
 			$from_template = 1;
 		}
 
 		return $from_template;
 	}
 
+	private function isBuildInLang( $langCode ) {
+		$builtInLanguageCodes = Obj::values( \icl_get_languages_codes() );
+		return Lst::includes( $langCode, $builtInLanguageCodes );
+	}
 	/**
-	 * @param array $data
-	 * @param       $id
+	 * @param array<string,string|array<string,string>> $data
+	 * @param int                                       $id
 	 *
 	 * @return bool
 	 */
@@ -693,7 +843,7 @@ class SitePress_EditLanguages {
 
 		$data = stripslashes_deep( stripslashes_deep( $data ) );
 		// Insert main table.
-		if ( ! $this->insert_main_table( $data['code'], $data['english_name'], $data['default_locale'], 0, 1, $data['encode_url'], $data['tag'] ) ) {
+		if ( ! Languages::add( $data['code'], $data['english_name'], $data['default_locale'], 0, 1, $data['encode_url'], $data['tag'] ) ) {
 			$this->set_errors( __( 'Adding language failed.', 'sitepress' ) );
 
 			return false;
@@ -704,14 +854,16 @@ class SitePress_EditLanguages {
 			$wpdb->prepare(
 				"SELECT code
                                                         FROM {$wpdb->prefix}icl_locale_map
-                                                        WHERE code=%s", $data['code']
+                                                        WHERE code=%s",
+				$data['code']
 			)
 		);
 		if ( $locale_exists ) {
 			$wpdb->update( $wpdb->prefix . 'icl_locale_map', [ 'locale' => $data['default_locale'] ], [ 'code' => $data['code'] ] );
 		} else {
 			$wpdb->insert(
-				$wpdb->prefix . 'icl_locale_map', [
+				$wpdb->prefix . 'icl_locale_map',
+				[
 					'code'   => $data['code'],
 					'locale' => $data['default_locale'],
 				]
@@ -916,7 +1068,7 @@ class SitePress_EditLanguages {
 		global $wpdb, $sitepress;
 		$lang = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}icl_languages WHERE id=%d", $lang_id ) );
 		if ( $lang ) {
-			if ( in_array( $lang->code, $this->built_in_languages, true ) ) {
+			if ( in_array( $lang->code, array_values( icl_get_languages_codes() ), true ) ) {
 				$error = __( "Error: This is a built in language. You can't delete it.", 'sitepress' );
 			} else {
 				$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}icl_languages WHERE id=%d", $lang_id ) );
@@ -947,7 +1099,7 @@ class SitePress_EditLanguages {
 				add_action( 'delete_post', [ $sitepress, 'delete_post_actions' ] );
 
 				// delete terms
-				remove_action( 'delete_term', [ $sitepress, 'delete_term' ], 1, 3 );
+				remove_action( 'delete_term', [ $sitepress, 'delete_term' ], 1 );
 				$tax_ids = $wpdb->get_col(
 					$wpdb->prepare(
 						"SELECT element_id FROM {$wpdb->prefix}icl_translations WHERE element_type LIKE %s AND language_code=%s",
@@ -1065,23 +1217,16 @@ class SitePress_EditLanguages {
 
 			$wpml_wp_api = new WPML_WP_API();
 
-			add_filter(
-				'upload_mimes', function () {
-					return self::ACCEPTED_MIME_TYPES;
-				}
-			);
+			add_filter( 'upload_mimes', \WPML\FP\Fns::always( self::ACCEPTED_MIME_TYPES ) );
 
-			$mime = $wpml_wp_api->get_file_mime_type(
-				$_FILES['icl_edit_languages']['tmp_name'][ $id ]['flag_file'],
-				$_FILES['icl_edit_languages']['name'][ $id ]['flag_file']
-			);
+			$mime = $wpml_wp_api->get_file_mime_type( $uploaded_file, $original_file );
 
 			$allowed_mime_types = array_values( self::ACCEPTED_MIME_TYPES );
 			$validated          = in_array( $mime, $allowed_mime_types, true );
 
 			if ( $validated && move_uploaded_file( $uploaded_file, $target_path ) ) {
 
-				if ( function_exists( 'wp_get_image_editor' ) && 'image/svg+xml' !== $mime ) {
+				if ((!defined('WPML_DO_NOT_RESIZE_UPLOADED_FLAGS') || !WPML_DO_NOT_RESIZE_UPLOADED_FLAGS) && function_exists( 'wp_get_image_editor' ) && 'image/svg+xml' !== $mime ) {
 					$image = wp_get_image_editor( $target_path );
 					if ( ! is_wp_error( $image ) ) {
 						$image->resize( 18, 12, true );
@@ -1094,7 +1239,7 @@ class SitePress_EditLanguages {
 		} else {
 			$error_message = __( 'There was an error uploading the file, please try again!', 'sitepress' );
 			if ( ! empty( $_FILES['icl_edit_languages']['error'][ $id ]['flag_file'] ) ) {
-				switch ( $_FILES['icl_edit_languages']['error'][ $id ]['flag_file'] ) {
+				switch ( filter_var( $_FILES['icl_edit_languages']['error'][ $id ]['flag_file'], FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ) {
 					case UPLOAD_ERR_INI_SIZE;
 						$error_message = __( 'The uploaded file exceeds the upload_max_filesize directive in php.ini.', 'sitepress' );
 						break;
@@ -1135,7 +1280,7 @@ class SitePress_EditLanguages {
 	}
 
 	/**
-	 * @param $sitepress
+	 * @param \SitePress $sitepress
 	 */
 	private function update_language_packs( SitePress $sitepress ) {
 		if ( $this->update_language_packs_if_needed ) {
@@ -1147,7 +1292,7 @@ class SitePress_EditLanguages {
 	}
 
 	/**
-	 * @param $id
+	 * @param int $id
 	 *
 	 * @return string
 	 */
@@ -1159,8 +1304,8 @@ class SitePress_EditLanguages {
 	}
 
 	/**
-	 * @param $lang
-	 * @param $translation
+	 * @param array<string,string|array<string,string>> $lang
+	 * @param array<string,string>                      $translation
 	 *
 	 * @return string
 	 */
@@ -1174,5 +1319,97 @@ class SitePress_EditLanguages {
 		$value = stripslashes_deep( $value );
 
 		return $value;
+	}
+
+	private function saveLanguageMapping( $languagesData ) {
+		if ( ! \WPML_TM_ATE_Status::is_enabled_and_activated() ) {
+			return;
+		}
+
+		// for a new language if nothing was chosen, select "Don't map"
+		$languagesData = Fns::map( function ( $data, $id ) {
+			if ( $id === 'add' && ! Obj::prop( 'mapping', $data ) ) {
+				$data['mapping'] = LanguageMappings::IGNORE_MAPPING_ID;
+			}
+
+			return $data;
+		}, $languagesData );
+
+		$mapping = Fns::map( function ( $data ) {
+			if ( $data['mapping'] == LanguageMappings::IGNORE_MAPPING_ID ) {
+				return new LanguageMapping( $data['code'], $data['english_name'], $data['mapping'], null );
+			} else {
+				list( $targetId, $targetCode ) = Str::split( '###', $data['mapping'] );
+
+				return new LanguageMapping( $data['code'], $data['english_name'], $targetId, $targetCode );
+			}
+		}, Fns::filter( Obj::prop( 'mapping' ), $languagesData ) );
+
+		$storeDataInTemporaryVariable = function ( $data ) {
+			self::$newlySavedMapping = $data;
+		};
+
+		$findErrors      = Fns::filter( Logic::complement( Obj::pathOr( false, [ 'result', 'created' ] ) ) );
+		$getSourceNames  = Fns::map( Obj::path( [ 'source_language', 'name' ] ) );
+		$displayErrorMsg = function ( $languageNames ) {
+			$this->set_errors( sprintf(
+				__( 'The language mapping could not be saved for languages: %s', 'sitepress-multilingual-cms' ),
+				Lst::join( ', ', $languageNames )
+			) );
+		};
+		$logError        = pipe( $findErrors, $getSourceNames, $displayErrorMsg );
+
+		LanguageMappings::saveMapping( $mapping )->bimap( $logError, $storeDataInTemporaryVariable );
+	}
+
+	private function displayMappingField( $lang, $add ) {
+	    ?>
+            <td>
+	            <?php
+	            $targetId = Obj::pathOr(null, [ 'mapping', 'targetId' ], $lang );
+	            $displayNotice = ! $add && ( ! Obj::prop( 'can_be_translated_automatically', $lang ) ||
+	                                         Obj::pathOr(null, [ 'mapping', 'targetId' ], $lang ) === LanguageMappings::IGNORE_MAPPING_ID );
+	            ?>
+
+                <select class="icl_edit_languages_mapping" name="icl_edit_languages[<?php echo esc_attr( $lang['id'] ); ?>][mapping]">
+	                <?php if ( ! $targetId ) { ?>
+                        <option value="0"><?php _e( 'Choose mapping', 'sitepress-multilingual-cms' ) ?></option>
+	                <?php } ?>
+                    <option value="<?php echo LanguageMappings::IGNORE_MAPPING_ID ?>" <?php if ( $targetId === LanguageMappings::IGNORE_MAPPING_ID ) echo 'selected="selected"'; ?> >
+                        <?php echo __( "Don't map this language", 'sitepress-multilingual-cms' ); ?>
+                    </option>
+	                <?php foreach ( self::getLanguagesAvailableInATE() as $ateLanguage ) { ?>
+                        <option value="<?php echo Obj::prop('id', $ateLanguage) . '###' . Obj::prop('iso', $ateLanguage )?>"
+	                        <?php if ( Obj::prop( 'id', $ateLanguage ) === $targetId ) {
+		                        echo 'selected="selected"';
+	                        } ?>
+                        >
+                            <?php echo Obj::prop('name', $ateLanguage); ?>
+                        </option>
+                    <?php } ?>
+                </select>
+                <br/>
+
+                    <?php if (Obj::prop('code', $lang) === Languages::getDefaultCode()) { ?>
+                        <div class="notice-info <?php echo Option::shouldTranslateEverything() ? 'error' : 'notice' ?> inline" style="max-width: 190px;<?php echo ! $displayNotice ? 'display:none;' : '' ?>">
+				            <?php echo sprintf( __(
+				                    'None of your content can be automatically translated until you <a href="%s" target="_blank" referrerpolicy="no-referrer">map your default language to a supported language</a>.', 'sitepress-multilingual-cms' ),
+                                'https://wpml.org/documentation/automatic-translation/using-automatic-translation-with-custom-languages/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore'
+                            ) ?>
+                        </div>
+                    <?php } elseif ( CachedLanguageMappings::hasTheSameMappingAsDefaultLang ( $lang ) ) { ?>
+                        <div class="notice-info notice inline" style="max-width: 190px;<?php echo ! $displayNotice ? 'display:none;' : '' ?>">
+	                        <?php echo sprintf( __(
+		                        "Content in this language cannot be automatically translated unless you map it to a language that's different from the default. <a href='%s' target='_blank' referrerpolicy='no-referrer'>Read more</a>", 'sitepress-multilingual-cms' ),
+		                        'https://wpml.org/documentation/automatic-translation/using-automatic-translation-with-custom-languages/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore#important-considerations-when-mapping-languages'
+	                        ) ?>
+                        </div>
+                    <?php }else{ ?>
+                        <div class="notice-info notice inline" style="max-width: 190px;<?php echo ! $displayNotice ? 'display:none;' : '' ?>">
+                            <?php _e( 'Content in this language cannot be automatically translated unless you map it to a supported language.', 'sitepress-multilingual-cms' ) ?>
+                        </div>
+                    <?php } ?>
+            </td>
+        <?php
 	}
 }

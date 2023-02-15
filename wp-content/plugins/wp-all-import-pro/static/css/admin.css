@@ -3,7 +3,10 @@
 *	Basic rules
 *	
 *-------------------------------------------------------------------------*/
-
+body.wpallimport-plugin {
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+	overflow-anchor: none;
+}
 .wpallimport-plugin hr {
 	height: 1px;
 	border-width: 0px;
@@ -25,12 +28,46 @@
 	vertical-align: middle;
 	margin-left: 5px;
 	position: relative;
-	top: -4px;
+	top: 4px;
 	background-size: cover;
 
 }
+
+.wpallimport-plugin .wpallimport-footer {
+	display: flex;
+	justify-content: center;
+	margin-top: 40px;
+	margin-bottom: -20px;
+}
+
+.wpallimport-plugin .ui-datepicker {
+	/* Overwrite jQuery UI font family */
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+
+
+}
+.wpallimport-plugin .ui-state-default {
+	font-weight: normal;
+}
+.wpallimport-plugin .ui-state-highlight,
+.wpallimport-plugin .ui-state-active {
+	color: #fff;
+}
+.wpallimport-plugin .ui-state-highlight  {
+	border: 1px dashed #40acad;
+    background: #fff;
+    color: #1d5987;
+}
+.wpallimport-plugin .ui-state-highlight.ui-state-active {
+	border: 1px dashed #fff;
+	background: #40acad;
+}
+.wpallimport-plugin .ui-datepicker-prev,
+.wpallimport-plugin .ui-datepicker-next {
+	cursor: pointer;
+}
 .wpallimport-plugin input.datepicker {
-	width: 8em;
+	width: 10em;
 }
 .wpallimport-plugin button.ui-datepicker-trigger {
 	background-image: url("../img/date-picker.gif");
@@ -41,6 +78,22 @@
 	width: 21px;
 	height: 18px;
 	vertical-align: middle;
+}
+.wpallimport-plugin .ui_tpicker_time_label,
+.wpallimport-plugin .ui_tpicker_hour_label,
+.wpallimport-plugin .ui_tpicker_minute_label {
+	font-weight: bold;
+	color: #444;
+}
+.wpallimport-plugin .ui_tpicker_time,
+.wpallimport-plugin .ui_tpicker_hour,
+.wpallimport-plugin .ui_tpicker_minute {
+	margin: 10px 0;
+}
+.wpallimport-plugin .ui-datepicker-close {
+	background: #40acad;
+	border-radius: 4px;
+	color: #fff;
 }
 .wpallimport-plugin .progress-msg {
 	font-style: italic;
@@ -84,7 +137,9 @@
 	background: url('../img/ui_4.0/continue.png') no-repeat 93% 50% #425f9a;
 	border: none;
 }
-.wpallimport-plugin .wpallimport-large-button:hover{
+.wpallimport-plugin .wpallimport-large-button:hover,
+.wpallimport-plugin .wpallimport-large-button:active,
+.wpallimport-plugin .wpallimport-large-button:focus{
 	background: url('../img/ui_4.0/continue.png') no-repeat 93% 50% #425f9a;
 	border: none;
 	box-shadow: none;
@@ -92,38 +147,54 @@
 
 /*@+ header */
 .wpallimport-plugin .wpallimport-logo{
-	background: url('../img/ui_4.0/logo.png');
-	width: 60px;
-	height: 51px;
-	float: left;
-	margin-right: 10px;
+  background: url(../img/logo.svg) no-repeat;
+  background-size: 55px 55px;
+  width: 55px;
+  height: 55px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  float: left;
+  margin-right: 8px;
 }
+
+.wpallimport-plugin .wpallimport-title > h2:before,
+.wpallimport-plugin .wpallimport-title > h3:before {
+	content: '';
+  background: url(../img/wpallimport.svg) no-repeat;
+  background-size: 134px 14px;
+  width: 134px;
+  height: 25px;
+  display: block;
+}
+
+.wpallimport-plugin .wpallimport-title p{
+	font-size: 18px !important;
+	line-height: 16px;
+	color: #777;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.wpallimport-plugin .wpallimport-title h2,
+.wpallimport-plugin .wpallimport-title h3{
+	font-size: 33px;
+	color: #425f9a;
+	font-weight: bold;
+	padding-top: 5px;
+	padding-right: 0;
+	margin-left: 2px;
+}
+.wpallimport-plugin .wpallimport-title h2,
+.wpallimport-plugin .wpallimport-title h3{
+	margin: 8px 0 !important;
+}
+
 .wpallimport-plugin .wpallimport-title{
 	float: left;
 }
-	.wpallimport-plugin .wpallimport-title p{
-		font-size: 18px !important;
-		line-height: 16px;
-		color: #777;
-		margin-top: 0;
-		margin-bottom: 0;
-	}
-	.wpallimport-plugin .wpallimport-title h2,
-	.wpallimport-plugin .wpallimport-title h3{
-		font-size: 33px;
-		color: #425f9a;
-		font-weight: bold;
-		padding-top: 5px;
-		padding-right: 0;
-		margin-left: 2px;
-	}
-	.wpallimport-plugin .wpallimport-title h3{
-		margin: 5px 0;
-	}
 .wpallimport-plugin .wpallimport-links{
 	float: right;
 	margin-right: 3px;
-	margin-top: 33px;	
+	margin-top: 10px;
 }
 .wpallimport-plugin .wpallimport-links a{
 	font-size: 12px;
@@ -223,7 +294,16 @@
 		.wpallimport-plugin .wpallimport-file-upload-result a:last-child{
 			margin-left: 0 !important;
 		}
-.wpallimport-plugin .wpallimport-download-from-url{
+.wpallimport-plugin .wpallimport-download-resource {
+	display: none;
+	text-align: center;
+}
+.wpallimport-download-from-ftp-builder-title{
+	font-size: 16px;
+	line-height: 2.9;
+}
+.wpallimport-plugin .wpallimport-download-from-url,
+.wpallimport-plugin .wpallimport-download-from-ftp{
 	background: none repeat scroll 0 0 #46ba69;
 	color: #fff;
 	display: inline-block;
@@ -233,6 +313,29 @@
 	position: relative;
 	text-decoration: none;
 	vertical-align: bottom;
+}
+.wpallimport-ftp-builder{
+	background: none repeat scroll 0 0 #46ba69;
+	color: #fff !important;
+	display: inline-block;
+	font-size: 14px;
+	height: 19px;
+	padding: 8px 15px 8px 15px;
+	position: relative;
+	text-decoration: none;
+	bottom: 2px;
+}
+.ftp_path {
+	display: flex;
+	width: 75%;
+	height: 49px;
+	margin: 6px auto 0 auto;
+	left: 3px;
+	position: relative;
+}
+.wpallimport-ftp-builder-wrap {
+	position: relative;
+	right: 150px;
 }
 .wpallimport-plugin .wpallimport-file-upload-result .wpallimport-change-uploaded-file{
 	color:#40acad;	
@@ -334,9 +437,20 @@
 	color: #40acad;
 	text-decoration: none;
 }
-.wpallimport-plugin div.error{
-	clear: both;
+.wpallimport-plugin div.error,
+.wpallimport-plugin div.updated{
 	margin-top: 15px;
+}
+
+.wpallimport-plugin div.error.license-status,
+.wpallimport-plugin div.updated.license-status{
+	margin: 0 0 0 2px;
+	display: inline-block;
+	text-transform: capitalize;
+	padding: 2px 10px;
+	height: 18px;
+	vertical-align: 1px;
+	line-height: 17px;
 }
 .wpallimport-plugin .wp-pointer-content ul,
 .wpallimport-plugin .wpallimport-pointer-content ul{
@@ -374,9 +488,8 @@
 .wpallimport-plugin .options select{
 	border: 1px solid #ddd;
 	font-size: 12px;
-	/*height: 25px;*/
 	width: auto;
-	padding: 2px;
+	padding: 4px 25px 4px 12px;
 	color: #000;
 }
 .wpallimport-plugin .wpallimport-template input[type="text"],
@@ -435,23 +548,18 @@
 	display: inline-block;
 	width: 16px;
 	height: 16px;
-	margin: 0px 3px;
 }
 .wpallimport-plugin .add-new-ico,
 .wpallimport-plugin .add-new-cat, 
 .wpallimport-plugin .add-new-custom, 
 .wpallimport-plugin .add-new-key{ 
-	background: url("../img/ui_4.0/add.png") no-repeat 0px 5px;
 	font-size: 12px;
-	width:100px;
-	height:25px;
-	padding-left: 20px;
-	color:#21759B;
-	/*font-family: "Open Sans",​sans-serif;*/
+	width: 115px;
+	height: 25px;
+	color: #21759B;
 	padding-top: 2px;
 	text-decoration: underline;
 	display: block;
-	/*margin: 0 auto;	*/
 }
 
 .wpallimport-plugin .remove-ico{
@@ -570,6 +678,25 @@
 	display: none;
 	background: #fff;
 }
+.wpallimport-plugin .wpai-ftp-connection-error{
+	width:75%;
+	margin-right:auto;
+	margin-left:auto;
+	left:5px;
+	margin-top:50px;
+	font-size: 18px !important;
+	color: #888;
+	text-align:left;
+	padding-top:0px;
+}
+.wpallimport-plugin .wpai-ftp-connection-error .wpallimport-notify-wrapper .error-headers {
+	background-position-y: top !important;
+}
+.wpallimport-plugin .wpai-ftp-connection-error .wpallimport-notify-wrapper .error-headers h3,
+.wpallimport-plugin .wpai-ftp-connection-error .wpallimport-notify-wrapper .error-headers span {
+	top: 8px;
+	position:relative;
+}
 .wpallimport-plugin .first-step-errors .exclamation{
 	margin-top: 20px !important;	
 }
@@ -658,6 +785,12 @@
 	-moz-border-radius: 14px;
 	-khtml-border-radius: 14px;
 	-webkit-border-radius: 14px;	
+}
+.wpallimport-plugin .rad30{
+	border-radius: 30px;
+	-moz-border-radius: 30px;
+	-khtml-border-radius: 30px;
+	-webkit-border-radius: 30px;
 }
 .wpallimport-plugin .pl17{ padding-left: 17px; }	
 .wpallimport-plugin .no-margin{ margin: 0px; }
@@ -764,7 +897,7 @@
 	font-size: 12px;
 }
 .wpallimport-plugin .wpallimport-created-by span{
-	background: url('../img/soflyy-logo.png') no-repeat;
+	background: url('../img/soflyy-logo.svg') no-repeat;
 	display: block;
 	float: right;
 	width: 72px;
@@ -853,6 +986,19 @@
 	border-top: #F5F5F5 solid 1px;
 }
 
+.wpallimport-plugin .delimiter-field {
+	display: flex;
+	flex-direction: row;
+}
+
+.wpallimport-plugin .delimiter-field input:nth-child(1) {
+	width: 100%;
+}
+
+.wpallimport-plugin .delimiter-field input:nth-child(2) {
+	margin-left: 5px;
+}
+
 /*--------------------------------------------------------------------------
 *
 *	WP All Import Layout
@@ -871,14 +1017,16 @@
 	width: 100%;
 }
 
-.wpallimport-plugin table.wpallimport-layout.wpallimport-step-1, 
+.wpallimport-plugin table.wpallimport-step-1,
 .wpallimport-plugin .wpallimport-step-2,
 .wpallimport-plugin .wpallimport-step-3,
 .wpallimport-plugin .wpallimport-step-4,
 .wpallimport-plugin .wpallimport-step-5,
 .wpallimport-plugin .wpallimport-step-6{
-	margin: 20px 0 0 0px;
+	margin: 10px 0 0 0px;
 }
+
+
 	.wpallimport-plugin table.wpallimport-layout td {
 		vertical-align: top;
 		border: none;		
@@ -932,11 +1080,30 @@
 	-moz-border-radius: 4px;
 	-khtml-border-radius: 4px;
 	-webkit-border-radius: 4px;	
-	margin-top: 20px;
+	margin-top: 10px;
 	margin-bottom: 20px;
 	padding-bottom: 15px;
 }
 
+.wpallimport-plugin .wpallimport-content-section.wpallimport-complete-statistics {
+	text-align: left;
+	padding: 20px;
+}
+
+.wpallimport-plugin .wpallimport-content-section.wpallimport-complete-statistics p {
+	font-size: 21px !important;
+	color: #777;
+	background: url("../img/s-check.png") no-repeat;
+	background-size: 30px;
+	padding-left: 50px;
+}
+.wpallimport-plugin .wpallimport-skipped-notice{
+	display: none;
+}
+
+.wpallimport-skipped-notice a { 
+	margin-left: 0px !important;
+}
 
 .wpallimport-plugin table.form-table {
 	clear: none;
@@ -1357,7 +1524,7 @@
 	font-weight: normal;
 	font-size: 18px;	
 	padding: 0;
-	padding: 0 10px;
+	padding: 0 12px;
 	line-height: 24px;
 }
 .wpallimport-plugin .change_file #file_selector .dd-select,
@@ -1406,8 +1573,8 @@
 		width: 24px;	
 	}
 	.wpallimport-plugin .wpallimport-import-to.wpallimport-import-to-checked{
-		background: #38A659;
-		border: 1px solid #3da55c;
+		background: #46BA69;
+		border: 1px solid #46BA69;
 		color: #fff;
 	}
 	.wpallimport-plugin .wpallimport-import-to.wpallimport-to-new-items span.wpallimport-import-to-title:before{	
@@ -1434,6 +1601,58 @@
 		position: absolute;
 		top: 33px;	
 	}
+.wpallimport-plugin .wpallimport-download-from{
+	background: none repeat scroll 0 0 #f6f5f1;
+	border: 1px solid #ddd;
+	color: #888;
+	display: inline-block;
+	font-size: 18px;
+	height: 50px;
+	line-height: 24px;
+	padding-top: 25px;
+	text-align: center;
+	text-decoration: none;
+	width: 360px;
+	margin-right: 10px;
+	position: relative;
+}
+.wpallimport-plugin .wpallimport-download-from span.wpallimport-download-from-arrow{
+	display: none;
+}
+.wpallimport-plugin .wpallimport-download-from.wpallimport-download-from-checked span.wpallimport-download-from-arrow{
+	background: url('../img/ui_4.0/bottom_arrow.png') no-repeat;
+	position: absolute;
+	bottom: -12px;
+	left: 48%;
+	display: block;
+	height: 14px;
+	width: 24px;
+}
+.wpallimport-plugin .wpallimport-download-from.wpallimport-download-from-checked{
+	background: #46BA69;
+	border: 1px solid #46BA69;
+	color: #fff;
+}
+.wpallimport-plugin .wpallimport-download-from.wpallimport-download-file-from-url span.wpallimport-download-from-title:before{
+
+	font-size: 33px;
+	left: 27%;
+	line-height: 10px;
+	position: absolute;
+	top: 33px;
+}
+.wpallimport-plugin .wpallimport-download-from.wpallimport-download-file-from-url.wpallimport-download-from-checked span.wpallimport-download-from-title:before,
+.wpallimport-plugin .wpallimport-download-from.wpallimport-download-file-from-ftp.wpallimport-download-from-checked span.wpallimport-download-from-title:before{
+	color: #46BA69;
+}
+.wpallimport-plugin .wpallimport-download-from.wpallimport-download-file-from-ftp span.wpallimport-download-from-title:before{
+
+	font-size: 33px;
+	left: 23%;
+	line-height: 10px;
+	position: absolute;
+	top: 33px;
+}
 .wpallimport-plugin #custom_type_selector .dd-option .dashicon:before,
 .wpallimport-plugin #custom_type_selector .dd-selected .dashicon:before {
     font-family: "dashicons";
@@ -1484,6 +1703,18 @@
 	content: "\f110";
 	color: #555;
 }
+.wpallimport-plugin #custom_type_selector .dd-option .dashicon-comments:before,
+.wpallimport-plugin #custom_type_selector .dd-selected .dashicon-comments:before{
+	font-family: "dashicons";
+	content: "\f101";
+	color: #555;
+}
+.wpallimport-plugin #custom_type_selector .dd-option .dashicon-woo_reviews:before,
+.wpallimport-plugin #custom_type_selector .dd-selected .dashicon-woo_reviews:before{
+	font-family: "dashicons";
+	content: "\f155";
+	color: #555;
+}
 .wpallimport-plugin #custom_type_selector .dd-option .dashicon-taxonomies:before,
 .wpallimport-plugin #custom_type_selector .dd-selected .dashicon-taxonomies:before{
 	font-family: "dashicons";
@@ -1498,25 +1729,31 @@
 	color:#46ba69;
 	line-height: 24px;
 }
-.wpallimport-plugin input[name=url]{
+.wpallimport-plugin input[name=url],
+.wpallimport-plugin .wpallimport-download-resource-step-two-ftp input{
 	font-size: 18px !important;
 	height: 49px;
-	margin-top: 20px;
-	padding: 5px;
+	/*margin-top: 20px;*/
 	width: 75% !important;
-	/*background: url('../img/ui_4.0/url.png') 10px -42px no-repeat;*/
-	padding-left: 60px;
+	padding: 0 5px 0 60px;
 	border: 1px solid #ddd;
 	border-radius: 4px;
 	-moz-border-radius: 4px;
 	-khtml-border-radius: 4px;
 	-webkit-border-radius: 4px;
-	color: #cfceca;
+	color: #888;
 	margin-bottom: 0;
 }
-.wpallimport-plugin .wpallimport-url-icon:before{
+.wpallimport-plugin .wpallimport-download-resource-step-two-ftp input,
+.wpallimport-plugin .wpallimport-download-resource-step-two-ftp textarea{
+	margin-top: 10px;
+	margin-bottom: 0px !important;
+}
+.wpallimport-plugin .wpallimport-download-resource-step-two-ftp input::placeholder {
 	color: #cfceca;
-	content: "\f103";
+}
+.wpallimport-plugin .wpallimport-input-icon{
+	color: #cfceca;
 	font-family: "dashicons";
 	font-size: 30px;
 	left: 45px;
@@ -1524,8 +1761,102 @@
 	top: -14px;
 	vertical-align: bottom;
 }
-.wpallimport-plugin .wpallimport-url-icon.focus:before{
-	color: #333;
+.wpallimport-plugin .wpallimport-url-icon {
+	display: -webkit-inline-box;
+}
+.wpallimport-plugin .wpallimport-url-icon:before{
+	content: "\f103";
+}
+.wpallimport-plugin .wpallimport-ftp-host-icon {
+	display: -webkit-inline-box;
+}
+.wpallimport-plugin .wpallimport-ftp-host-icon:before{
+	content: "\f319";
+}
+.wpallimport-plugin .wpallimport-ftp-path-icon {
+	top: -33px;
+	float: left;
+	z-index: 1;
+	left: 17px;
+	position: absolute;
+}
+.wpallimport-plugin .wpallimport-ftp-path-icon:before{
+	content: "\f123";
+}
+.wpallimport-plugin .wpallimport-file-type-options .wpai-ftp-path-input {
+	display:block;
+	padding-right:50px;
+	top: -2px;
+	position: relative;
+}
+.wpai-ftp-path-button {
+	float:right;
+}
+.wpallimport-plugin .ftp_path .wpai-ftp-select-file-button {
+	background-image: none;
+	text-align: center;
+	background-color: rgb(70, 186, 105);
+	width: 175px;
+	border: none;
+	height: 49px;
+	top: 0.5px;
+	font-size: 16px;
+	padding: 0 50px;
+}
+.wpallimport-plugin input[name=ftp_path] {
+	float: left;
+	position: relative;
+	width: 100% !important;
+	top: -10px;
+	margin-right: 10px;
+}
+.wpallimport-plugin .wpallimport-ftp-port-icon {
+	display: -webkit-inline-box;
+}
+.wpallimport-plugin .wpallimport-ftp-port-icon:before{
+	content: "\f106";
+}
+.wpallimport-plugin .wpallimport-ftp-username-icon {
+	display: -webkit-inline-box;
+}
+.wpallimport-plugin .wpallimport-ftp-username-icon:before{
+	content: "\f110";
+}
+.wpallimport-plugin .wpallimport-ftp-password-icon {
+	display: -webkit-inline-box;
+}
+.wpallimport-plugin .wpallimport-ftp-password-icon:before{
+	content: "\f112";
+}
+.wpallimport-plugin .wpallimport-ftp-private-key-icon:before{
+	content: "\f313";
+}
+.wpallimport-plugin .wpallimport-ftp-private-key-icon {
+	display: -webkit-inline-box;
+	top: -72px;
+}
+.wpai-ftp-text-area {
+	font-size: 18px !important;
+	height: 100px;
+	margin-top: 20px;
+	padding: 5px;
+	width: 75% !important;
+	padding-left: 60px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-khtml-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	color: #888;
+	margin-bottom: 0;
+	resize: none;
+}
+.wpai-ftp-text-area::placeholder {
+	color: #cfceca !important;
+	font-size: 18px;
+}
+#wpai-ftp-text-area-help {
+	top:-46px !important;
 }
 .wpallimport-plugin input[name=url].focus{
 	background-position: 10px 8px;
@@ -1728,38 +2059,43 @@
 .wpallimport-plugin .filtering_rules .drag-element{
 	background: url('../img/ui_4.0/list.png') no-repeat 0 3px;
 	padding-left: 30px;
-	height: 25px;
 }
 .wpallimport-plugin .filtering_rules .drag-element .rule_element{
 	display: inline-block;
 	width: 30%;
 	color:#46ba69;
 	font-size: 14px;
+	vertical-align: top;
 }
 .wpallimport-plugin .filtering_rules .drag-element .rule_as_is{
 	display: inline-block;
 	width: 20%;
 	color:#40acad;
 	font-size: 14px;
+	vertical-align: top;
 }
 .wpallimport-plugin .filtering_rules .drag-element .rule_condition_value{
 	display: inline-block;
 	width: 20%;
 	color:#000;
 	font-size: 14px;
+	word-wrap: break-word;
+	vertical-align: top;
+	max-width: 20vw;
+	padding-right: 15px;
 }
 .wpallimport-plugin .filtering_rules .drag-element .condition{
 	display: inline-block;
 	width: 25%;
 	color:#000;
 	font-size: 14px;
+	vertical-align: top;
 }
 .wpallimport-plugin .filtering_rules li{
 	position: relative;
 	padding: 10px 20px;
 	margin: 0;
 	border-bottom: 1px solid #ddd;
-	height: 25px;
 }
 	.wpallimport-plugin .filtering_rules li .remove-ico{
 		right: 4%;
@@ -1947,10 +2283,6 @@
 .wpallimport-plugin form.wpallimport-template.edit {
 	/*width: 700px;*/
 }
-	.wpallimport-plugin form.wpallimport-template .load-template {		
-		display: block;
-		font-size: 12px;		
-	}
 
 .wpallimport-plugin #poststuff{
 	min-width: 200px;
@@ -2300,8 +2632,10 @@
 		.wpallimport-plugin .post_taxonomy ol.ui-sortable .drag-element{
 			background-position: 0 10px;
 		}
-		.wpallimport-plugin .post_taxonomy ol.ui-sortable .remove-ico{
+		.wpallimport-plugin .post_taxonomy ol.ui-sortable .remove-ico,
+		.wpallimport-plugin .post_taxonomy ul.tax_hierarchical_logic .remove-ico {
 			top: 8px;
+			right: 8px;
 		}
 
 .wpallimport-plugin .separated_by{
@@ -2344,11 +2678,18 @@
 .wpallimport-plugin .ui-menu-item a{
 	text-decoration: none;
 	color: #777;
+	font-size: 12px;
+
+	/* Overwrite jQuery UI font family */
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+
 }
-	.wpallimport-plugin .ui-menu-item a.ui-state-focus,
-	.wpallimport-plugin .ui-menu-item a.ui-state-active{
-		margin: 0;
-	}
+.wpallimport-plugin .ui-menu-item a.ui-state-focus,
+.wpallimport-plugin .ui-menu-item a.ui-state-active{
+	background: inherit;
+	border: inherit;
+	margin: 0;
+}
 .wpallimport-plugin .ui-menu-item{
 	border-bottom: 1px solid #777;
 }
@@ -2408,8 +2749,6 @@
 }
 .wpallimport-plugin .wpallimport-cf-menu li a{
 	padding: 0;
-	/*font-family: "Open Sans",​sans-serif;*/
-	font-size: 12px;
 	display: inline;
 	color: #777;
 }
@@ -2421,15 +2760,51 @@
 	border-radius: 0px;
 	border: 0px;
 }
-.wpallimport-plugin .wpallimport-not-empty{
-	/*display: block;
-	padding: 5px;*/
+.wpallimport-plugin .comments-import-fields {
+	width: 100%;
+	margin-top: 0;
 }
-/*--------------------------------------------------------------------------
-*
-*	Step 4 - Import Options
-*	
-*-------------------------------------------------------------------------*/
+
+.wpallimport-plugin .comments-import-fields input[type="text"],
+.wpallimport-plugin .comments-import-fields select {
+	height: 40px;
+}
+.wpallimport-plugin .comments-import-fields select {
+	font-size: 15px !important;
+}
+.wpallimport-plugin .comments-import-fields textarea {
+	font-size: 14px !important;
+	padding: 6px !important;
+}
+.wpallimport-plugin .comments-import-fields .datepicker {
+	width: 300px;
+}
+.wpallimport-plugin .comments-import-fields .input {
+	margin-bottom: 10px;
+}
+.wpallimport-plugin .comments-import-fields .input .input {
+	margin-bottom: 0px;
+}
+.wpallimport-plugin .load-template-container {
+    display: flex;
+    align-items: center;
+}
+.wpallimport-plugin form.wpallimport-template .load-template select {
+    width: auto;
+    padding: 4px 25px 4px 12px;
+
+    /*
+     * Overwrite previous !important rule required for the rest of the pulldowns
+     */
+    font-size: 12px !important;
+    height: 34px;
+    background-size: 14px 14px;
+}
+	/*--------------------------------------------------------------------------
+    *
+    *	Step 4 - Import Options
+    *
+    *-------------------------------------------------------------------------*/
 
 .wpallimport-plugin .options .tag{
 	margin-top: 0px;		
@@ -2537,12 +2912,21 @@
 	padding-top: 10px;
 }
 	.wpallimport-plugin .wpallimport-step-5 .wpallimport-section .wpallimport-collapsed-content p{
-		color: #777;
-		background: url('../img/ui_4.0/logo_small.png') no-repeat;
-		padding-left: 35px;
-		min-height: 26px;
-		line-height: 28px;
+	  margin:  1.4em 0;
 	}
+
+.wpallimport-plugin .wpallimport-step-5 .wpallimport-section .wpallimport-collapsed-content p:before {
+	content: '';
+	width: 24px;
+	background: url(../img/s-check.png) no-repeat;
+  background-size: auto;
+	background-size: auto;
+	background-size: 24px;
+	height: 24px;
+	margin-right: 10px;
+	vertical-align: -42%;
+	display: inline-block;
+}
 
 .wpallimport-plugin form.confirm{	
 	margin-bottom: 20px;
@@ -2602,6 +2986,9 @@
 	float: left; 
 	margin: 12px 40px 12px 0px;
 }
+.wpallimport-plugin .unable-to-connect {
+	color: #f2b03d;
+}
 /*--------------------------------------------------------------------------
 *
 *	Step 6 - Processing
@@ -2622,7 +3009,7 @@
 .wpallimport-plugin #processbar{	
 	text-align: center;
 	visibility: hidden;
-	height: 30px;
+	height: 70px;
 	margin-top: 18px;
 	margin-bottom: 20px;		
 	background: #fff;
@@ -2631,24 +3018,37 @@
 }
 	.wpallimport-plugin #processbar div{
 		background: #76d771;
-		height: 30px;
+		height: 70px;
 		width: 0%;
 		position: absolute;		
 		top:0;
 	}
+.wpallimport-plugin .progress_processed {
+	margin-bottom: 20px;
+	text-align: right;
+}
+.wpallimport-plugin .progress_details {
+	text-align: right;
+}
+.wpallimport-plugin .progress_details .progress_details_item {
+	margin-left: 10px;
+}
 .wpallimport-plugin #import_progress{
 	color: #000000;
 	font-size: 21px;
 	/*font-weight: bold;*/
 	display: block;
 	width: 100%;
+	height: 70px;
 	text-align: center;
 	opacity: 1;
 	position: relative;
 	padding-top: 10px;
 }
-	.wpallimport-plugin #import_progress #center_progress{
-		color:#46ba69;
+	.wpallimport-plugin #center_progress{
+		position: relative;
+		top: 25px;
+		color: #326C3B;
 		font-size: 60px;
 	}
 .wpallimport-plugin #right_progress{ 
@@ -2656,7 +3056,7 @@
 	right: 0;
 	color:#777;
 }
-	.wpallimport-plugin #right_progress span{
+	.wpallimport-plugin #right_progress span span {
 		color:#000;
 	}
 .wpallimport-plugin #left_progress{ 
@@ -2811,9 +3211,9 @@
 .wpallimport-plugin .tag {	
 	position: fixed;
 	max-width: 450px;
-	top: 127px;
 	padding-bottom: 20px;
 	margin-right: 15px;
+	margin-top: 10px;
 	width: 22%;
 }
 .wpallimport-plugin #wp-content-editor-tools{
@@ -2890,6 +3290,12 @@
   	}
 }
 
+@media screen and (min-width: 783px) {
+	.wpallimport-plugin input[type="checkbox"] {
+		max-width: 1rem;
+	}
+}
+
 .wpallimport-plugin .wpallimport-xml {
 	padding-left: 15px;
 }
@@ -2932,6 +3338,9 @@
 .wpallimport-plugin .csv-tag-name {
 	color: #40acad;
 	font-weight: bold;
+}
+.wpallimport-plugin .csv-tag-name {
+	word-wrap: break-word;
 }
 .wpallimport-plugin .xml-tag.opening .xml-tag-name {
 	cursor: pointer;
@@ -3101,6 +3510,11 @@
 .wpallimport-plugin .pmxi-admin-imports .column-info{
 	width: 150px;
 }
+.wpallimport-plugin .manage-column.check-column,
+.wpallimport-plugin #the-pmxi-admin-import-list .check-column{
+	padding: 10px;
+}
+
 /*--------------------------------------------------------------------------
 *
 *	Setting Page
@@ -3117,7 +3531,7 @@
 }
 .wpallimport-plugin form.settings .wpallimport-header{
 	overflow: hidden;
-	height: 60px;
+	height: 70px;
 	padding-top: 10px;
 }
 
@@ -3172,6 +3586,62 @@
 	position: absolute;
 	right: 5%;
 	top: 42px;
+}
+.wpallimport-plugin .ftp-connection-builder-dialog .ui-dialog-buttonset {
+	width: 100%;
+}
+.wpallimport-plugin .ftp-connection-builder-dialog .ui-button {
+	color: #0071a1;
+	border-color: #0071a1;
+	background: #f3f5f6;
+	display: inline-block;
+	text-decoration: none;
+	font-size: 13px;
+	line-height: 2.15384615;
+	min-height: 30px;
+	padding: 0 10px;
+	cursor: pointer;
+	border-width: 1px;
+	border-style: solid;
+	-webkit-appearance: none;
+	border-radius: 3px;
+	white-space: nowrap;
+	box-sizing: border-box;
+}
+.wpallimport-plugin .ftp-connection-builder-dialog .ui-button:hover {
+	background: #f1f1f1;
+	border-color: #016087;
+	color: #016087;
+}
+.wpallimport-plugin .ftp-connection-builder-dialog .ui-button span {
+	font-weight: normal;
+}
+.wpallimport-plugin .ftp-connection-builder-dialog .ui-button:nth-child(3){
+	float: right;
+}
+.wpallimport-plugin .ftp-connection-builder-dialog .ui-button:nth-child(4){
+	float: right;
+	display: none;
+	background: #007cba;
+	border-color: #007cba;
+	color: #fff;
+	text-decoration: none;
+	text-shadow: none;
+}
+.wpallimport-plugin .ftp-connection-builder-dialog .ui-button:nth-child(4):hover {
+	background: #0071a1;
+	border-color: #0071a1;
+	color: #fff;
+}
+
+.wpallimport-plugin .wp_all_import_saving_status {
+	padding: 10px;
+	display: block;
+}
+
+.wpallimport-plugin .settings .submit-buttons {
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
 /*--------------------------------------------------------------------------
 *
@@ -3305,6 +3775,22 @@ body.rtl.wpallimport-plugin .show_hints
 	}
 	.wpallimport-plugin .wpallimport-choose-import-direction[rel="matching"]{
 		margin-left: -16%;
+	}
+}
+
+@media screen and (max-width: 1149px) {
+	.wpallimport-plugin .wpallimport-choose-elements table tbody tr:last-of-type td {
+		overflow: visible;
+		padding-left: 5px;
+	}
+	.wpallimport-plugin #pmxi_add_rule{
+		background: url("../img/ui_4.0/rule.png") no-repeat scroll 5px 5px #40acad;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 46px;
+		padding: 0;
 	}
 }
 
@@ -3478,7 +3964,8 @@ body.rtl.wpallimport-plugin .show_hints
 	.wpallimport-plugin .wpallimport-upload-type-container{
 		padding: 0 40px;
 	}
-	.wpallimport-plugin .wpallimport-import-to{
+	.wpallimport-plugin .wpallimport-import-to,
+	.wpallimport-plugin .wpallimport-download-from {
 		width: 330px;
 	}
 	.wpallimport-plugin .ajax-console .found_records h4{
@@ -3516,10 +4003,12 @@ body.rtl.wpallimport-plugin .show_hints
 	.wpallimport-plugin .change_file #select-files{
 		font-size: 14px;
 	}
-	.wpallimport-plugin .wpallimport-import-to.wpallimport-to-new-items span.wpallimport-import-to-title:before{
+	.wpallimport-plugin .wpallimport-import-to.wpallimport-to-new-items span.wpallimport-import-to-title:before,
+	.wpallimport-plugin .wpallimport-download-from.wpallimport-download-file-from-url span.download-from-title:before{
 		left: 25%;
 	}
-	.wpallimport-plugin .wpallimport-import-to.wpallimport-to-existing-items span.wpallimport-import-to-title:before{
+	.wpallimport-plugin .wpallimport-import-to.wpallimport-to-existing-items span.wpallimport-import-to-title:before,
+	.wpallimport-plugin .wpallimport-download-from.wpallimport-download-file-from-ftp span.wpallimport-download-from-title:before{
 		left: 20%;
 	}
 	.wpallimport-plugin .wpallimport-custom-fields textarea{

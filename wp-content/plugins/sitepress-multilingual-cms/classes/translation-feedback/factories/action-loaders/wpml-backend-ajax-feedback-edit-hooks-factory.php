@@ -32,7 +32,7 @@ class WPML_TF_Backend_AJAX_Feedback_Edit_Hooks_Factory extends WPML_AJAX_Base_Fa
 			$template_loader = new WPML_Twig_Template_Loader(
 				array( WPML_PLUGIN_PATH . WPML_TF_Backend_Feedback_Row_View::TEMPLATE_FOLDER )
 			);
-			$row_view = new WPML_TF_Backend_Feedback_Row_View( $template_loader->get_template() );
+			$row_view        = new WPML_TF_Backend_Feedback_Row_View( $template_loader->get_template() );
 
 			$hooks = new WPML_TF_Backend_AJAX_Feedback_Edit_Hooks(
 				$feedback_edit,

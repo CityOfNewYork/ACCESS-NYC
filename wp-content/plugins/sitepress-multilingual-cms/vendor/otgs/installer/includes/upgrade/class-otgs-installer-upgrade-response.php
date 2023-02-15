@@ -38,37 +38,41 @@ class OTGS_Installer_Upgrade_Response {
 	}
 
 	public function modify_upgrade_response( $update_plugins ) {
+		if ( isset( $update_plugins ) && is_object( $update_plugins ) ) {
+			foreach ( $this->plugins as $plugin ) {
+				$repository   = $this->repositories->get( $plugin->get_repo() );
+				$subscription = $repository->get_subscription();
 
-		foreach ( $this->plugins as $plugin ) {
-			$repository   = $this->repositories->get( $plugin->get_repo() );
-			$subscription = $repository->get_subscription();
+				$response = (object) [
+					'id'            => $plugin->get_id(),
+					'slug'          => $plugin->get_slug(),
+					'plugin'        => $plugin->get_id(),
+					'new_version'   => $plugin->get_version(),
+				];
 
-			if ( $this->should_skip_upgrade_process( $plugin, $update_plugins, $repository ) ) {
-				continue;
+				if ( $this->should_skip_upgrade_process( $plugin, $update_plugins, $repository ) ) {
+					$update_plugins->no_update[$plugin->get_id() ] = $response;
+					continue;
+				}
+
+				$response->upgrade_notice = '';
+				$response->url            = $plugin->get_url();
+				$response->tested         = $plugin->get_tested();
+
+				if ( $subscription->get_site_key() ) {
+					$response->package = $this->append_site_key_to_download_url(
+						$plugin->get_url(),
+						$subscription->get_site_key(),
+						$repository->get_id(),
+						WP_Installer()->get_installer_site_url()
+					);
+				}
+
+				$response = apply_filters( 'otgs_installer_upgrade_check_response', $response, $plugin->get_name(), $repository->get_id() );
+
+				$update_plugins->checked[ $plugin->get_id() ]  = $plugin->get_installed_version();
+				$update_plugins->response[ $plugin->get_id() ] = $response;
 			}
-
-			$response                 = new stdClass();
-			$response->id             = 0;
-			$response->slug           = $plugin->get_slug();
-			$response->plugin         = $plugin->get_id();
-			$response->new_version    = $plugin->get_version();
-			$response->upgrade_notice = '';
-			$response->url            = $plugin->get_url();
-			$response->tested         = $plugin->get_tested();
-
-			if ( $subscription->get_site_key() ) {
-				$response->package = $this->append_site_key_to_download_url(
-					$plugin->get_url(),
-					$subscription->get_site_key(),
-					$repository->get_id(),
-					WP_Installer()->get_installer_site_url()
-				);
-			}
-
-			$response = apply_filters( 'otgs_installer_upgrade_check_response', $response, $plugin->get_name(), $repository->get_id() );
-
-			$update_plugins->checked[ $plugin->get_id() ]  = $plugin->get_installed_version();
-			$update_plugins->response[ $plugin->get_id() ] = $response;
 		}
 
 		return $update_plugins;

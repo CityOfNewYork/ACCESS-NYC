@@ -1,19 +1,19 @@
 /*jshint browser:true, devel:true */
 /*global jQuery, wp */
 (function($){
-	"use strict";
+    "use strict";
 
-	$(document).ready(function(){
-		var table = $('.js-wpml-tf-feedback-list-table'),
-			ajax_action = $('.wpml-tf-feedback-list-page input[name="ajax_action"]').val(),
-			ajax_nonce = $('.wpml-tf-feedback-list-page input[name="ajax_nonce"]').val();
+    $(function () {
+        var table = $('.js-wpml-tf-feedback-list-table'),
+            ajax_action = $('.wpml-tf-feedback-list-page input[name="ajax_action"]').val(),
+            ajax_nonce = $('.wpml-tf-feedback-list-page input[name="ajax_nonce"]').val();
 
-		var openFeedbackDetails = function(feedbackId) {
-			table.find('#wpml-tf-feedback-' + feedbackId).hide();
-			table.find('#wpml-tf-feedback-details-' + feedbackId).show();
-		};
+        var openFeedbackDetails = function (feedbackId) {
+            table.find('#wpml-tf-feedback-' + feedbackId).hide();
+            table.find('#wpml-tf-feedback-details-' + feedbackId).show();
+        };
 
-		var closeAllFeedbackDetails = function() {
+        var closeAllFeedbackDetails = function () {
 			table.find('.js-wpml-tf-feedback-details').hide();
 			table.find('.js-wpml-tf-feedback').show();
 		};
@@ -58,9 +58,9 @@
 		};
 
 		var submitActionOnFeedback = function(id, action) {
-			var currentURL = window.location.href,
+			var currentURL = WPML_core.sanitize( window.location.href ),
 				params = {
-					nonce: table.closest('form').find('input[name="nonce"]').val(),
+					nonce: WPML_core.sanitize(table.closest('form').find('input[name="nonce"]').val()),
 					bulk_action: action,
 					bulk_action2: action,
 					feedback_ids: [ id ],
@@ -83,7 +83,7 @@
 				data: data,
 				success:  function (response) {
 					if (reload) {
-						window.location.href = window.location.pathname + window.location.search + window.location.hash;
+						window.location.href = WPML_core.sanitize(window.location.pathname + window.location.search + window.location.hash);
 					} else {
 						spinner.removeClass('is-active');
 						refreshFeedbackRows(data.feedback_id, response);

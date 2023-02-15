@@ -8,7 +8,6 @@
 namespace Rhubarb\RedisCache;
 
 use WP_Error;
-use Exception;
 
 defined( '\\ABSPATH' ) || exit;
 
@@ -51,7 +50,7 @@ class Plugin {
     private static $instance;
 
     /**
-     * Plugin instanciation method
+     * Plugin instantiation method
      *
      * @return Plugin
      */
@@ -69,8 +68,6 @@ class Plugin {
     private function __construct() {
         require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-        register_activation_hook( WP_REDIS_FILE, 'wp_cache_flush' );
-
         if ( is_multisite() ) {
             $this->page = 'settings.php?page=redis-cache';
             $this->screen = 'settings_page_redis-cache-network';
@@ -78,6 +75,8 @@ class Plugin {
             $this->page = 'options-general.php?page=redis-cache';
             $this->screen = 'settings_page_redis-cache';
         }
+
+        Metrics::init();
 
         $this->add_actions_and_filters();
     }
@@ -90,6 +89,7 @@ class Plugin {
     public function add_actions_and_filters() {
         add_action( 'deactivate_plugin', [ $this, 'on_deactivation' ] );
         add_action( 'admin_init', [ $this, 'maybe_update_dropin' ] );
+        add_action( 'admin_init', [ $this, 'maybe_redirect' ] );
         add_action( 'init', [ $this, 'init' ] );
 
         add_action( is_multisite() ? 'network_admin_menu' : 'admin_menu', [ $this, 'add_admin_menu_page' ] );
@@ -108,12 +108,10 @@ class Plugin {
 
         add_action( 'wp_ajax_roc_dismiss_notice', [ $this, 'dismiss_notice' ] );
 
-        $links = sprintf( '%splugin_action_links_%s', is_multisite() ? 'network_admin_' : '', WP_REDIS_BASENAME );
-        add_filter( $links, [ $this, 'add_plugin_actions_links' ] );
+        add_filter( 'plugin_row_meta', [ $this, 'add_plugin_row_meta' ], 10, 2 );
+        add_filter( sprintf( '%splugin_action_links_%s', is_multisite() ? 'network_admin_' : '', WP_REDIS_BASENAME ), [ $this, 'add_plugin_actions_links' ] );
 
         add_action( 'wp_head', [ $this, 'register_shutdown_hooks' ] );
-        add_action( 'shutdown', [ $this, 'record_metrics' ] );
-        add_action( 'rediscache_discard_metrics', [ $this, 'discard_metrics' ] );
 
         add_filter( 'qm/collectors', [ $this, 'register_qm_collector' ], 25 );
         add_filter( 'qm/outputter/html', [ $this, 'register_qm_output' ] );
@@ -126,7 +124,7 @@ class Plugin {
      */
     public function init() {
         load_plugin_textdomain( 'redis-cache', false, 'redis-cache/languages' );
-        
+
         if ( is_admin() && ! wp_next_scheduled( 'rediscache_discard_metrics' ) ) {
             wp_schedule_event( time(), 'hourly', 'rediscache_discard_metrics' );
         }
@@ -209,7 +207,9 @@ class Plugin {
         wp_add_dashboard_widget(
             'dashboard_rediscache',
             __( 'Redis Object Cache', 'redis-cache' ),
-            [ $this, 'show_dashboard_widget' ]
+            [ $this, 'show_dashboard_widget' ],
+            'normal',
+            'high'
         );
     }
 
@@ -229,11 +229,35 @@ class Plugin {
      * @return string[]
      */
     public function add_plugin_actions_links( $links ) {
-        return array_merge(
-            [ sprintf( '<a href="%s">%s</a>', network_admin_url( $this->page ), esc_html__( 'Settings', 'redis-cache' ) ) ],
-            $links
+        $settings = sprintf(
+            '<a href="%s">%s</a>',
+            network_admin_url( $this->page ),
+            esc_html__( 'Settings', 'redis-cache' )
         );
+
+        return array_merge( [ $settings ], $links );
     }
+
+    /**
+	 * Adds plugin meta links on the plugin page
+	 *
+	 * @param string[] $plugin_meta An array of the plugin's metadata.
+	 * @param string   $plugin_file Path to the plugin file relative to the plugins directory.
+	 * @return string[] An array of the plugin's metadata.
+	 */
+	public function add_plugin_row_meta( array $plugin_meta, $plugin_file ) {
+		if ( strpos( $plugin_file, 'redis-cache.php' ) === false ) {
+			return $plugin_meta;
+		}
+
+        $plugin_meta[] = sprintf(
+			'<a href="%1$s"><span class="dashicons dashicons-star-filled" aria-hidden="true" style="font-size: 14px; line-height: 1.3"></span>%2$s</a>',
+			'https://objectcache.pro/?ref=oss&amp;utm_source=wp-plugin&amp;utm_medium=meta-row',
+			esc_html_x( 'Upgrade to Pro', 'verb', 'redis-cache' )
+		);
+
+		return $plugin_meta;
+	}
 
     /**
      * Enqueues admin style resources
@@ -285,10 +309,12 @@ class Plugin {
             return;
         }
 
+        $clipboard = file_exists( ABSPATH .WPINC . '/js/clipboard.min.js' );
+
         wp_enqueue_script(
             'redis-cache',
             plugins_url( 'assets/js/admin.js', WP_REDIS_FILE ),
-            [ 'jquery', 'underscore' ],
+            array_merge( [ 'jquery', 'underscore' ], $clipboard ? [ 'clipboard' ] : [ ] ),
             WP_REDIS_VERSION,
             true
         );
@@ -319,9 +345,7 @@ class Plugin {
      * @return void
      */
     public function enqueue_redis_metrics() {
-        global $wp_object_cache;
-
-        if ( defined( 'WP_REDIS_DISABLE_METRICS' ) && WP_REDIS_DISABLE_METRICS ) {
+        if ( ! Metrics::is_enabled() ) {
             return;
         }
 
@@ -343,26 +367,17 @@ class Plugin {
             true
         );
 
-        if ( ! method_exists( $wp_object_cache, 'redis_instance' ) ) {
+        if ( ! $this->get_redis_status() ) {
             return;
         }
 
-        try {
-            $min_time = $screen->id === $this->screen
-                ? self::metrics_max_time()
-                : MINUTE_IN_SECONDS * 30;
+        $min_time = $screen->id === $this->screen
+            ? Metrics::max_time()
+            : MINUTE_IN_SECONDS * 30;
 
-            $metrics = $wp_object_cache->redis_instance()->zrangebyscore(
-                $wp_object_cache->build_key( 'metrics', 'redis-cache' ),
-                time() - $min_time,
-                time() - MINUTE_IN_SECONDS,
-                [ 'withscores' => true ]
-            );
+        $metrics = Metrics::get( $min_time );
 
-            wp_localize_script( 'redis-cache', 'rediscache_metrics', $metrics );
-        } catch ( Exception $exception ) {
-            error_log( $exception ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
-        }
+        wp_localize_script( 'redis-cache', 'rediscache_metrics', $metrics );
     }
 
     /**
@@ -418,7 +433,20 @@ class Plugin {
         $dropin = get_plugin_data( WP_CONTENT_DIR . '/object-cache.php' );
         $plugin = get_plugin_data( WP_REDIS_PLUGIN_PATH . '/includes/object-cache.php' );
 
-        return $dropin['PluginURI'] === $plugin['PluginURI'];
+        /**
+         * Filters the drop-in validation state
+         *
+         * @since 2.0.16
+         * @param bool   $state      The validation state of the drop-in.
+         * @param string $dropin     The `PluginURI` of the drop-in.
+         * @param string $plugin     The `PluginURI` of the plugin.
+         */
+        return apply_filters(
+            'redis_cache_validate_dropin',
+            $dropin['PluginURI'] === $plugin['PluginURI'],
+            $dropin['PluginURI'],
+            $plugin['PluginURI']
+        );
     }
 
     /**
@@ -575,21 +603,30 @@ class Plugin {
             return;
         }
 
-        if ( $this->object_cache_dropin_exists() ) {
-            $url = $this->action_link( 'update-dropin' );
+        // Do not display the dropin message if you want
+        if ( defined( 'WP_REDIS_DISABLE_DROPIN_BANNERS' ) && WP_REDIS_DISABLE_DROPIN_BANNERS ) {
+            return;
+        }
 
+        if ( $this->object_cache_dropin_exists() ) {
             if ( $this->validate_object_cache_dropin() ) {
                 if ( $this->object_cache_dropin_outdated() ) {
                     // translators: %s = Action link to update the drop-in.
-                    $message = sprintf( __( 'The Redis object cache drop-in is outdated. Please <a href="%s">update the drop-in</a>.', 'redis-cache' ), $url );
+                    $message = sprintf(
+                        __( 'The Redis object cache drop-in is outdated. Please <a href="%s">update the drop-in</a>.', 'redis-cache' ),
+                        $this->action_link( 'update-dropin' )
+                    );
                 }
             } else {
-                // translators: %s = Action link to update the drop-in.
-                $message = sprintf( __( 'A foreign object cache drop-in was found. To use Redis for object caching, please <a href="%s">enable the drop-in</a>.', 'redis-cache' ), $url );
+                // translators: %s = Link to settings page.
+                $message = sprintf(
+                    __( 'A foreign object cache drop-in was found. To use Redis for object caching, please <a href="%s">enable the drop-in</a>.', 'redis-cache' ),
+                    esc_url( network_admin_url( $this->page ) )
+                );
             }
 
             if ( isset( $message ) ) {
-                printf( '<div class="update-nag">%s</div>', wp_kses_post( $message ) );
+                printf( '<div class="update-nag notice notice-warning inline">%s</div>', wp_kses_post( $message ) );
             }
         }
     }
@@ -647,7 +684,7 @@ class Plugin {
                          * Fires on cache enable event
                          *
                          * @since 1.3.5
-                         * @param bool $result Whether the filesystem event (copy of the `object-cache.php` file) was successfull.
+                         * @param bool $result Whether the filesystem event (copy of the `object-cache.php` file) was successful.
                          */
                         do_action( 'redis_object_cache_enable', $result );
 
@@ -673,7 +710,7 @@ class Plugin {
                          * Fires on cache enable event
                          *
                          * @since 1.3.5
-                         * @param bool $result Whether the filesystem event (deletion of the `object-cache.php` file) was successfull.
+                         * @param bool $result Whether the filesystem event (deletion of the `object-cache.php` file) was successful.
                          */
                         do_action( 'redis_object_cache_disable', $result );
 
@@ -704,7 +741,7 @@ class Plugin {
                          * Fires on cache enable event
                          *
                          * @since 1.3.5
-                         * @param bool $result Whether the filesystem event (copy of the `object-cache.php` file) was successfull.
+                         * @param bool $result Whether the filesystem event (copy of the `object-cache.php` file) was successful.
                          */
                         do_action( 'redis_object_cache_update_dropin', $result );
 
@@ -774,18 +811,18 @@ class Plugin {
             return;
         }
 
-        if ( ! current_user_can( 'manage_options' ) ) {
+        if ( ! current_user_can( is_multisite() ? 'manage_network_options' : 'manage_options' ) ) {
             return;
         }
 
-        if ( 1 === intval( get_user_meta( get_current_user_id(), 'roc_dismissed_pro_release_notice', true ) ) ) {
+        if ( intval( get_user_meta( get_current_user_id(), 'roc_dismissed_pro_release_notice', true ) ) === 1 ) {
             return;
         }
 
         printf(
             '<div class="notice notice-info is-dismissible" data-dismissible="pro_release_notice" data-nonce="%s"><p><strong>%s</strong> %s</p></div>',
             esc_attr( wp_create_nonce( 'roc_dismiss_notice' ) ),
-            esc_html__( 'Object Cache Pro is out!', 'redis-cache' ),
+            esc_html__( 'Object Cache Pro!', 'redis-cache' ),
             sprintf(
                 // translators: %s = Link to the plugin setting screen.
                 wp_kses_post( __( 'A <u>business class</u> object cache backend. Truly reliable, highly-optimized and fully customizable, with a <u>dedicated engineer</u> when you most need it. <a href="%s">Learn more »</a>', 'redis-cache' ) ),
@@ -814,11 +851,11 @@ class Plugin {
             return;
         }
 
-        if ( ! current_user_can( 'manage_options' ) ) {
+        if ( ! current_user_can( is_multisite() ? 'manage_network_options' : 'manage_options' ) ) {
             return;
         }
 
-        if ( 1 === intval( get_user_meta( get_current_user_id(), 'roc_dismissed_wc_pro_notice', true ) ) ) {
+        if ( intval( get_user_meta( get_current_user_id(), 'roc_dismissed_wc_pro_notice', true ) ) === 1 ) {
             return;
         }
 
@@ -846,80 +883,6 @@ class Plugin {
     }
 
     /**
-     * Adds the recorded metrics to redis
-     *
-     * @return void
-     */
-    public function record_metrics() {
-        global $wp_object_cache;
-
-        if ( defined( 'WP_REDIS_DISABLE_METRICS' ) && WP_REDIS_DISABLE_METRICS ) {
-            return;
-        }
-
-        if ( ! $this->get_redis_status() ) {
-            return;
-        }
-
-        if ( ! method_exists( $wp_object_cache, 'info' ) || ! method_exists( $wp_object_cache, 'redis_instance' ) ) {
-            return;
-        }
-
-        $info = $wp_object_cache->info();
-
-        $metrics = [
-            'i' => substr( uniqid(), -7 ),
-            'h' => $info->hits,
-            'm' => $info->misses,
-            'r' => $info->ratio,
-            'b' => $info->bytes,
-            't' => number_format( $info->time, 5 ),
-            'c' => $info->calls,
-        ];
-
-        try {
-            $wp_object_cache->redis_instance()->zadd(
-                $wp_object_cache->build_key( 'metrics', 'redis-cache' ),
-                time(),
-                http_build_query( $metrics, null, ';' )
-            );
-        } catch ( Exception $exception ) {
-            error_log( $exception ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
-        }
-    }
-
-    /**
-     * Removes recorded metrics after an hour
-     *
-     * @return void
-     */
-    public function discard_metrics() {
-        global $wp_object_cache;
-
-        if ( defined( 'WP_REDIS_DISABLE_METRICS' ) && WP_REDIS_DISABLE_METRICS ) {
-            return;
-        }
-
-        if ( ! $this->get_redis_status() ) {
-            return;
-        }
-
-        if ( ! method_exists( $wp_object_cache, 'redis_instance' ) ) {
-            return;
-        }
-
-        try {
-            $wp_object_cache->redis_instance()->zremrangebyscore(
-                $wp_object_cache->build_key( 'metrics', 'redis-cache' ),
-                0,
-                time() - self::metrics_max_time()
-            );
-        } catch ( Exception $exception ) {
-            error_log( $exception ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
-        }
-    }
-
-    /**
      * Displays the redis cache html comment
      *
      * @return void
@@ -928,6 +891,7 @@ class Plugin {
         global $wp_object_cache;
 
         if (
+            ( defined( 'WP_CLI' ) && WP_CLI ) ||
             ( defined( 'DOING_CRON' ) && DOING_CRON ) ||
             ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ||
             ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ||
@@ -956,7 +920,7 @@ class Plugin {
             'https://wprediscache.com'
         );
 
-        if ( ! WP_DEBUG ) {
+        if ( ! WP_DEBUG_DISPLAY ) {
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             printf( "\n<!-- %s -->\n", $message );
 
@@ -981,23 +945,10 @@ class Plugin {
     }
 
     /**
-     * Retrieves metrix max time
-     *
-     * @return int
-     */
-    public static function metrics_max_time() {
-        if ( defined( 'WP_REDIS_METRICS_MAX_TIME' ) ) {
-            return intval( WP_REDIS_METRICS_MAX_TIME );
-        }
-
-        return HOUR_IN_SECONDS;
-    }
-
-    /**
      * Initializes the WP filesystem API to be ready for use
      *
      * @param string $url    The URL to post the form to.
-     * @param bool   $silent Wheather to ask the user for credentials if necessary or not.
+     * @param bool   $silent Whether to ask the user for credentials if necessary or not.
      * @return bool
      */
     public function initialize_filesystem( $url, $silent = false ) {
@@ -1053,6 +1004,10 @@ class Plugin {
             }
         }
 
+        if ( ! $wp_filesystem->is_writable( WP_CONTENT_DIR ) ) {
+            return new WP_Error( 'copy', __( 'Content directory is not writable.', 'redis-cache' ) );
+        }
+
         if ( ! $wp_filesystem->copy( $cachefile, $testfile, true, FS_CHMOD_FILE ) ) {
             return new WP_Error( 'copy', __( 'Failed to copy test file.', 'redis-cache' ) );
         }
@@ -1090,6 +1045,25 @@ class Plugin {
     }
 
     /**
+     * Redirects to the plugin settings if the plugin was just activated
+     *
+     * @return void
+     */
+    public function maybe_redirect() {
+        if ( ! get_transient( '_rediscache_activation_redirect' ) ) {
+            return;
+        }
+
+        if ( ! current_user_can( is_multisite() ? 'manage_network_options' : 'manage_options' ) ) {
+            return;
+        }
+
+        delete_transient( '_rediscache_activation_redirect' );
+
+        wp_safe_redirect( network_admin_url( $this->page ) );
+    }
+
+    /**
      * Updates the `object-cache.php` drop-in
      *
      * @return void
@@ -1113,10 +1087,19 @@ class Plugin {
              * Fires on cache enable event
              *
              * @since 1.3.5
-             * @param bool $result Whether the filesystem event (copy of the `object-cache.php` file) was successfull.
+             * @param bool $result Whether the filesystem event (copy of the `object-cache.php` file) was successful.
              */
             do_action( 'redis_object_cache_update_dropin', $result );
         }
+    }
+
+    /**
+     * Plugin activation hook
+     *
+     * @return void
+     */
+    public static function on_activation() {
+        set_transient( '_rediscache_activation_redirect', 1, 30 );
     }
 
     /**

@@ -53,6 +53,13 @@ class WPML_TF_Message implements IWPML_TF_Data_Object {
 	}
 
 	/**
+	 * @param \WPML_TF_Message $message
+	 */
+	public function add_message( WPML_TF_Message $message ) {
+		return;
+	}
+
+	/**
 	 * @return mixed|null|string
 	 */
 	public function get_date_created() {

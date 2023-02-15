@@ -86,6 +86,11 @@
                     $.ui.ddmanager.prepareOffsets(this, event);
             }
 
+            this.dragDirection = {
+                vertical: this._getDragVerticalDirection(),
+                horizontal: this._getDragHorizontalDirection()
+            };
+
             //Regenerate the absolute position used for position checks
             this.positionAbs = this._convertPositionTo("absolute");
 
@@ -332,7 +337,7 @@
                     depth --;
                 }
 
-                id = ($(item).attr(o.attribute || 'id')).match(o.expression || (/(.+)[-=_](.+)/));
+                id = ($(item).attr(o.attribute || 'id') || '').match(o.expression || (/(.+)[-=_](.+)/));
 
                 if (depth === sDepth + 1) {
                     pid = o.rootID;

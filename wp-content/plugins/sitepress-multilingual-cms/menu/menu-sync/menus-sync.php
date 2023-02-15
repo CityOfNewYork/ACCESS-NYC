@@ -1,11 +1,11 @@
 <?php
-require dirname( __FILE__ ) . '/wpml-menu-sync-display.class.php';
+global $icl_menus_sync, $sitepress;
 
-/** @var $sitepress SitePress */
-/** @var $icl_menus_sync ICLMenusSync */
-$active_languages = $sitepress->get_active_languages();
-$def_lang_code = $sitepress->get_default_language();
-$def_lang = $sitepress->get_language_details( $def_lang_code );
+/** @var SitePress $sitepress */
+/** @var ICLMenusSync $icl_menus_sync */
+$active_languages    = $sitepress->get_active_languages();
+$def_lang_code       = $sitepress->get_default_language();
+$def_lang            = $sitepress->get_language_details( $def_lang_code );
 $secondary_languages = array();
 
 foreach ( $active_languages as $code => $lang ) {
@@ -16,8 +16,8 @@ foreach ( $active_languages as $code => $lang ) {
 ?>
 <!--suppress HtmlFormInputWithoutLabel --><!--suppress HtmlUnknownAttribute -->
 <div class="wrap">
-<h2><?php esc_html_e( 'WP Menus Sync', 'sitepress' ) ?></h2>
-<p><?php printf( esc_html__( 'Menu synchronization will sync the menu structure from the default language of %s to the secondary languages.', 'sitepress' ), $def_lang['display_name'] ) ?></p>
+<h2><?php esc_html_e( 'WP Menus Sync', 'sitepress' ); ?></h2>
+<p><?php printf( esc_html__( 'Menu synchronization will sync the menu structure from the default language of %s to the secondary languages.', 'sitepress' ), $def_lang['display_name'] ); ?></p>
 
 <br/>
 <?php
@@ -31,26 +31,27 @@ if ( $icl_menus_sync->is_preview ) {
 	<thead>
 	<tr>
 		<th scope="row" class="menu-check-all"><input type="checkbox"/></th>
-		<th><?php esc_html_e( 'Language', 'sitepress' ) ?></th>
-		<th><?php esc_html_e( 'Action', 'sitepress' ) ?></th>
+		<th><?php esc_html_e( 'Language', 'sitepress' ); ?></th>
+		<th><?php esc_html_e( 'Action', 'sitepress' ); ?></th>
 	</tr>
 	</thead>
 	<tbody>
 
 	<?php
+	$menu_id = null;
 	if ( empty( $icl_menus_sync->sync_data ) ) {
 		?>
 		<tr>
-			<td align="center" colspan="3"><?php esc_html_e( 'Nothing to sync.', 'sitepress' ) ?></td>
+			<td align="center" colspan="3"><?php esc_html_e( 'Nothing to sync.', 'sitepress' ); ?></td>
 		</tr>
-	<?php
+		<?php
 	} else {
-		//Menus
+		// Menus
 		foreach ( $icl_menus_sync->menus as $menu_id => $menu ) {
 			$menu_sync_display = new WPML_Menu_Sync_Display( $menu_id, $icl_menus_sync );
 			?>
 			<tr class="icl_msync_menu_title">
-				<td colspan="3"><?php echo esc_html( $menu['name'] ) ?></td>
+				<td colspan="3"><?php echo esc_html( $menu['name'] ); ?></td>
 			</tr>
 
 			<?php
@@ -63,13 +64,13 @@ if ( $icl_menus_sync->is_preview ) {
 					<tr>
 						<th scope="row" class="check-column">
 							<input type="checkbox"
-								   name="sync[menu_translation][<?php echo esc_attr( $menu_id ) ?>][<?php echo esc_attr( $language ) ?>]"
-								   value="<?php echo esc_attr( $name ) ?>"/>
+								   name="sync[menu_translation][<?php echo esc_attr( $menu_id ); ?>][<?php echo esc_attr( $language ); ?>]"
+								   value="<?php echo esc_attr( $name ); ?>"/>
 						</th>
-						<td><?php echo esc_html( $lang_details['display_name'] ) ?></td>
-						<td><?php printf( esc_html__( 'Add menu translation:  %s', 'sitepress' ), '<strong>' . esc_html( $name ) . '</strong>' ) ?> </td>
+						<td><?php echo esc_html( $lang_details['display_name'] ); ?></td>
+						<td><?php printf( esc_html__( 'Add menu translation:  %s', 'sitepress' ), '<strong>' . esc_html( $name ) . '</strong>' ); ?> </td>
 					</tr>
-				<?php
+					<?php
 				}
 			}
 
@@ -102,16 +103,16 @@ if ( $icl_menus_sync->is_preview ) {
 		<input id="icl_msync_submit"
 			   class="button-primary"
 			   type="button"
-			   value="<?php esc_attr_e( 'Apply changes' ) ?>"
-			   data-message="<?php esc_attr_e( 'Syncing menus %1 of %2', 'sitepress' ) ?>"
-			   data-message-complete="<?php esc_attr_e( 'The selected menus have been synchonized.', 'sitepress' ) ?>"
+			   value="<?php esc_attr_e( 'Apply changes' ); ?>"
+			   data-message="<?php esc_attr_e( 'Syncing menus %1 of %2', 'sitepress' ); ?>"
+			   data-message-complete="<?php esc_attr_e( 'The selected menus have been synchonized.', 'sitepress' ); ?>"
 			<?php echo $icl_menu_sync_submit_disabled; ?> />&nbsp;
-		<input id="icl_msync_cancel" class="button-secondary" type="button" value="<?php _e( 'Cancel' ) ?>"/>
+		<input id="icl_msync_cancel" class="button-secondary" type="button" value="<?php _e( 'Cancel' ); ?>"/>
 		<span id="icl_msync_message"></span>
 	</p>
 		<?php wp_nonce_field( '_icl_nonce_menu_sync', '_icl_nonce_menu_sync' ); ?>
 	</form>
-<?php
+	<?php
 } else {
 	$need_sync = 0;
 	?>
@@ -120,13 +121,13 @@ if ( $icl_menus_sync->is_preview ) {
 		<table class="widefat icl_msync">
 			<thead>
 			<tr>
-				<th><?php echo esc_html( $def_lang['display_name'] ) ?></th>
+				<th><?php echo esc_html( $def_lang['display_name'] ); ?></th>
 				<?php
 				if ( ! empty( $secondary_languages ) ) {
 					foreach ( $secondary_languages as $lang ) {
 						?>
-						<th><?php echo esc_html( $lang['display_name'] ) ?></th>
-					<?php
+						<th><?php echo esc_html( $lang['display_name'] ); ?></th>
+						<?php
 					}
 				}
 				?>
@@ -137,15 +138,15 @@ if ( $icl_menus_sync->is_preview ) {
 			if ( empty( $icl_menus_sync->menus ) ) {
 				?>
 				<tr>
-					<td align="center" colspan="<?php echo count( $active_languages ) ?>"><?php esc_html_e( 'No menus found', 'sitepress' ) ?></td>
+					<td align="center" colspan="<?php echo count( $active_languages ); ?>"><?php esc_html_e( 'No menus found', 'sitepress' ); ?></td>
 				</tr>
-			<?php
+				<?php
 			} else {
 				foreach ( $icl_menus_sync->menus as $menu_id => $menu ) {
 					?>
 
 					<tr class="icl_msync_menu_title">
-						<td><strong><?php echo esc_html( $menu['name'] ) ?></strong></td>
+						<td><strong><?php echo esc_html( $menu['name'] ); ?></strong></td>
 						<?php
 						foreach ( $secondary_languages as $l ) {
 							$input_name = sprintf( 'sync[menu_options][%s][%s][auto_add]', esc_attr( $menu_id ), esc_attr( $l['code'] ) );
@@ -158,23 +159,23 @@ if ( $icl_menus_sync->is_preview ) {
 									$need_sync++;
 									?>
 									<input type="text" class="icl_msync_add"
-										   name="sync[menu_translations][<?php echo esc_attr( $menu_id ) ?>][<?php echo esc_attr( $l['code'] ) ?>]"
-										   value="<?php echo esc_attr( $menu['name'] ) . ' - ' . esc_attr( $l['display_name'] ) ?>"
+										   name="sync[menu_translations][<?php echo esc_attr( $menu_id ); ?>][<?php echo esc_attr( $l['code'] ); ?>]"
+										   value="<?php echo esc_attr( $menu['name'] ) . ' - ' . esc_attr( $l['display_name'] ); ?>"
 									/>
-									<small><?php esc_html_e( 'Auto-generated title. Click to edit.', 'sitepress' ) ?></small>
+									<small><?php esc_html_e( 'Auto-generated title. Click to edit.', 'sitepress' ); ?></small>
 									<input type="hidden" value=""
-										   name="<?php echo $input_name ?>"
+										   name="<?php echo $input_name; ?>"
 									/>
-								<?php
+									<?php
 								}
 								if ( isset( $menu['translations'][ $l['code'] ]['auto_add'] ) ) {
 									?>
-									<input type="hidden" name="<?php echo $input_name ?>" value="<?php echo esc_attr( $menu['translations'][ $l['code'] ]['auto_add'] ) ?>"/>
-								<?php
+									<input type="hidden" name="<?php echo $input_name; ?>" value="<?php echo esc_attr( $menu['translations'][ $l['code'] ]['auto_add'] ); ?>"/>
+									<?php
 								}
 								?>
 							</td>
-						<?php
+							<?php
 						} //foreach($secondary_languages as $l):
 						?>
 					</tr>
@@ -191,35 +192,37 @@ if ( $icl_menus_sync->is_preview ) {
 			if ( $need_sync ) {
 				?>
 				<input id="icl_msync_sync" type="submit" class="button-primary"
-					   value="<?php esc_attr_e( 'Sync', 'sitepress' ) ?>"
-					<?php disabled( ! $need_sync ) ?>
+					   value="<?php esc_attr_e( 'Sync', 'sitepress' ); ?>"
+					<?php disabled( ! $need_sync ); ?>
 				/>
 				&nbsp;&nbsp;
 				<span id="icl_msync_max_input_vars"
 					  style="display:none"
 					  class="icl-admin-message-warning"
-					  data-max_input_vars="<?php
+					  data-max_input_vars="
+					  <?php
 
 					  //phpcs:disable PHPCompatibility.IniDirectives.NewIniDirectives.max_input_varsFound -- It never caused issues, but we should probably fix that
-					  echo ini_get( 'max_input_vars' );
+						echo ini_get( 'max_input_vars' );
 					  //phpcs:enable PHPCompatibility.IniDirectives.NewIniDirectives.max_input_varsFound
 
-					  ?>">
+						?>
+					  ">
 					<?php
 					printf(
-						esc_html__( 'The menus on this page may not sync because it requires more input variables. Please modify the %s setting in your php.ini or .htaccess files to %s or more.', 'sitepress' ),
+						esc_html__( 'The menus on this page may not sync because it requires more input variables. Please modify the %1$s setting in your php.ini or .htaccess files to %2$s or more.', 'sitepress' ),
 						'<strong>max_input_vars</strong>',
 						'<strong>!NUM!</strong>'
 					)
 					?>
 				</span>
-			<?php
+				<?php
 			} else {
 				?>
 				<input id="icl_msync_sync" type="submit" class="button-primary"
-					   value="<?php esc_attr_e( 'Nothing Sync', 'sitepress' ) ?>"<?php disabled( ! $need_sync ) ?>
+					   value="<?php esc_attr_e( 'Nothing Sync', 'sitepress' ); ?>"<?php disabled( ! $need_sync ); ?>
 				/>
-			<?php
+				<?php
 			}
 			?>
 		</p>
@@ -232,48 +235,48 @@ if ( $icl_menus_sync->is_preview ) {
 		foreach ( $icl_menus_sync->operations as $op => $c ) {
 			if ( $op == 'add' ) {
 				?>
-				<span class="icl_msync_item icl_msync_add"><?php esc_html_e( 'Item will be added', 'sitepress' ) ?></span>
-			<?php
+				<span class="icl_msync_item icl_msync_add"><?php esc_html_e( 'Item will be added', 'sitepress' ); ?></span>
+				<?php
 			} elseif ( $op == 'del' ) {
 				?>
-				<span class="icl_msync_item icl_msync_del"><?php esc_html_e( 'Item will be removed', 'sitepress' ) ?></span>
-			<?php
+				<span class="icl_msync_item icl_msync_del"><?php esc_html_e( 'Item will be removed', 'sitepress' ); ?></span>
+				<?php
 			} elseif ( $op == 'not' ) {
 				?>
-				<span class="icl_msync_item icl_msync_not"><?php esc_html_e( 'Item cannot be added (parent not translated)', 'sitepress' ) ?></span>
-			<?php
+				<span class="icl_msync_item icl_msync_not"><?php esc_html_e( 'Item cannot be added (parent not translated)', 'sitepress' ); ?></span>
+				<?php
 			} elseif ( $op == 'mov' ) {
 				?>
-				<span class="icl_msync_item icl_msync_mov"><?php esc_html_e( 'Item changed position', 'sitepress' ) ?></span>
-			<?php
+				<span class="icl_msync_item icl_msync_mov"><?php esc_html_e( 'Item changed position', 'sitepress' ); ?></span>
+				<?php
 			} elseif ( $op == 'copy' ) {
 				?>
-				<span class="icl_msync_item icl_msync_copy"><?php esc_html_e( 'Item will be copied', 'sitepress' ) ?></span>
-			<?php
+				<span class="icl_msync_item icl_msync_copy"><?php esc_html_e( 'Item will be copied', 'sitepress' ); ?></span>
+				<?php
 			} elseif ( $op == 'label_changed' ) {
 				?>
-				<span class="icl_msync_item icl_msync_label_changed"><?php esc_html_e( 'Strings for menus will be updated', 'sitepress' ) ?></span>
-			<?php
+				<span class="icl_msync_item icl_msync_label_changed"><?php esc_html_e( 'Strings for menus will be updated', 'sitepress' ); ?></span>
+				<?php
 			} elseif ( $op == 'url_changed' ) {
 				?>
-				<span class="icl_msync_item icl_msync_url_changed"><?php esc_html_e( 'URLs for menus will be updated', 'sitepress' ) ?></span>
-			<?php
+				<span class="icl_msync_item icl_msync_url_changed"><?php esc_html_e( 'URLs for menus will be updated', 'sitepress' ); ?></span>
+				<?php
 			} elseif ( $op == 'options_changed' ) {
 				?>
-				<span class="icl_msync_item icl_msync_options_changed"><?php esc_html_e( 'Menu Options will be updated', 'sitepress' ) ?></span>
-			<?php
+				<span class="icl_msync_item icl_msync_options_changed"><?php esc_html_e( 'Menu Options will be updated', 'sitepress' ); ?></span>
+				<?php
 			} elseif ( $op == 'label_missing' ) {
 				?>
 				<span class="icl_msync_item icl_msync_label_missing">
-					<?php esc_html_e( 'Untranslated strings for menus', 'sitepress' ) ?>
+					<?php esc_html_e( 'Untranslated strings for menus', 'sitepress' ); ?>
 				</span>
-			<?php
+				<?php
 			} elseif ( $op == 'url_missing' ) {
 				?>
 				<span class="icl_msync_item icl_msync_url_missing">
-					<?php esc_html_e( 'Untranslated URLs for menus', 'sitepress' ) ?>
+					<?php esc_html_e( 'Untranslated URLs for menus', 'sitepress' ); ?>
 				</span>
-			<?php
+				<?php
 			}
 		}
 	}

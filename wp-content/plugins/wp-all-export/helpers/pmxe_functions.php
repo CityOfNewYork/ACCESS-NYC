@@ -56,11 +56,11 @@
 		{
 			if (empty($post_type)) return array();
 
-			$post_type = ($post_type == 'product' and class_exists('WooCommerce')) ? array('product', 'product_variation') : array($post_type);
+			$post_type = ($post_type == 'product' and class_exists('WooCommerce')) ? array('product') : array($post_type);
 
 			global $wpdb;
 			$table_prefix = $wpdb->prefix;
-			$meta_keys = $wpdb->get_results("SELECT DISTINCT {$table_prefix}postmeta.meta_key FROM {$table_prefix}postmeta, {$table_prefix}posts WHERE {$table_prefix}postmeta.post_id = {$table_prefix}posts.ID AND {$table_prefix}posts.post_type IN ('" . implode('\',\'', $post_type) . "') AND {$table_prefix}postmeta.meta_key NOT LIKE '_edit%' LIMIT 1000");
+			$meta_keys = $wpdb->get_results("SELECT DISTINCT {$table_prefix}postmeta.meta_key FROM {$table_prefix}postmeta, {$table_prefix}posts WHERE {$table_prefix}postmeta.post_id = {$table_prefix}posts.ID AND {$table_prefix}posts.post_type IN ('" . implode('\',\'', $post_type) . "') AND {$table_prefix}postmeta.meta_key NOT LIKE '_edit%' AND {$table_prefix}postmeta.meta_key NOT LIKE '_oembed_%'  LIMIT 1000");
 
 			$_existing_meta_keys = array();
 			if ( ! empty($meta_keys)){

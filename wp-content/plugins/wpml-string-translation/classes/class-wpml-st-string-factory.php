@@ -73,22 +73,21 @@ class WPML_ST_String_Factory {
 		$prepare_args = array( $string );
 
 		if ( $gettext_context ) {
-			$sql            .= " AND gettext_context=%s";
+			$sql           .= ' AND gettext_context=%s';
 			$prepare_args[] = $gettext_context;
 		}
 
-
 		if ( $domain ) {
-			$sql            .= " AND context=%s";
+			$sql           .= ' AND context=%s';
 			$prepare_args[] = $domain;
 		}
 
 		if ( $name !== false ) {
-			$sql .= " AND name = %s ";
+			$sql           .= ' AND name = %s ';
 			$prepare_args[] = $name;
 		}
 
-		$sql                                 = $this->wpdb->prepare( $sql . " LIMIT 1", $prepare_args );
+		$sql                                 = $this->wpdb->prepare( $sql . ' LIMIT 1', $prepare_args );
 		$cache_key                           = md5( $sql );
 		$this->string_id_cache[ $cache_key ] = isset( $this->string_id_cache[ $cache_key ] )
 			? $this->string_id_cache[ $cache_key ]

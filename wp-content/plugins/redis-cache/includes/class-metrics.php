@@ -146,7 +146,7 @@ class Metrics {
 
         $info = $wp_object_cache->info();
 
-        $this->id = substr( uniqid(), -7 );
+        $this->id = substr( md5( uniqid( strval( mt_rand() ), true ) ), 12 );
         $this->hits = $info->hits;
         $this->misses = $info->misses;
         $this->ratio = $info->ratio;
@@ -241,6 +241,28 @@ class Metrics {
                 $wp_object_cache->build_key( 'metrics', 'redis-cache' ),
                 0,
                 time() - self::max_time()
+            );
+        } catch ( Exception $exception ) {
+            // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+            error_log( $exception );
+        }
+    }
+
+    /**
+     * Counts the recorded metrics
+     *
+     * @return int
+     */
+    public static function count() {
+        global $wp_object_cache;
+
+        if ( ! self::is_active() ) {
+            return;
+        }
+
+        try {
+            return $wp_object_cache->redis_instance()->zcount(
+                $wp_object_cache->build_key( 'metrics', 'redis-cache' ), '-inf', '+inf'
             );
         } catch ( Exception $exception ) {
             // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log

@@ -1,24 +1,24 @@
-jQuery(document).ready(function(){  
-    if(jQuery('form input[name="action"]').attr('value') ==='add-tag'){
-        jQuery('.form-wrap p[class="submit"]').before(jQuery('#icl_tax_menu').html());    
-    }else{
+jQuery(function () {
+    if (jQuery('form input[name="action"]').attr('value') === 'add-tag') {
+        jQuery('.form-wrap p[class="submit"]').before(jQuery('#icl_tax_menu').html());
+    } else {
         var new_row = jQuery('#edittag table[class="form-table"] tr.term-description-wrap').clone()
-            .removeClass('term-description-wrap').addClass('wpml-term-languages-wrap');
-        jQuery('#edittag table[class="form-table"]:first').append( new_row );
+                                                                                           .removeClass('term-description-wrap').addClass('wpml-term-languages-wrap');
+        jQuery('#edittag table[class="form-table"]:first').append(new_row);
         jQuery('#edittag table[class="form-table"]:first tr:last th:first').html('&nbsp;');
-        jQuery('#edittag table[class="form-table"]:first tr:last td:last').html(jQuery('#icl_tax_menu').html());  
-    }    
+        jQuery('#edittag table[class="form-table"]:first tr:last td:last').html(jQuery('#icl_tax_menu').html());
+    }
     jQuery('#icl_tax_menu').remove();
 
     jQuery('select[name="icl_tag_language"]').change(function(){
-        var lang = jQuery(this).val();
-        var ajx = location.href.replace(/#(.*)$/,'');
+        var lang = WPML_core.sanitize(jQuery(this).val());
+		var ajx = WPML_core.sanitize(location.href).replace(/#(.*)$/,'');
         ajx = ajx.replace(/pagenum=([0-9]+)/,'');
-        if(-1 == location.href.indexOf('?')){
+        if(-1 == WPML_core.sanitize(location.href).indexOf('?')){
             url_glue='?';
         }else{
             url_glue='&';
-        }   
+        }
 
         if(icl_this_lang != lang){
             jQuery('#icl_translate_options').fadeOut();
@@ -32,11 +32,11 @@ jQuery(document).ready(function(){
             lsubsub = resp.substr(strt,endd-strt+7);
             jQuery('table.widefat').before(lsubsub);
             tag_start = resp.indexOf('<div class="tagcloud">');
-            tag_end  = resp.indexOf('</div>', tag_start);            
+            tag_end  = resp.indexOf('</div>', tag_start);
             tag_cloud = resp.substr(tag_start+22,tag_end-tag_start-22);
             jQuery('.tagcloud').html(tag_cloud);
         });
-        
+
    });
 
     /*
@@ -48,7 +48,7 @@ jQuery(document).ready(function(){
     defaultCategoryJSONDiv = jQuery('#icl-default-category-ids');
     if (defaultCategoryJSONDiv.length !== 0) {
         defaultCategoryJSON = defaultCategoryJSONDiv.html();
-        defaultCategoryIDs = jQuery.parseJSON(defaultCategoryJSON);
+        defaultCategoryIDs = JSON.parse(defaultCategoryJSON);
 
         for (key in defaultCategoryIDs) {
             if (defaultCategoryIDs.hasOwnProperty(key)) {
@@ -85,7 +85,7 @@ var iclTagLangSelectBar = {
         var self = this;
         self.addTagForm = jQuery('#addtag');
         self.bar = jQuery('#icl_subsubsub');
-        self.taxonomy = self.addTagForm.find('[name="taxonomy"]').val();
+        self.taxonomy = WPML_core.sanitize( self.addTagForm.find('[name="taxonomy"]').val() );
         self.displayBar();
         self.addHiddenSearchField();
 
@@ -124,7 +124,7 @@ var iclTagLangSelectBar = {
                 jQuery('#icl_tax_'+taxonomy+'_lang .inside').html(icl_ajxloaderimg);
                 jQuery.ajax({
                     type:'GET',
-                    url : location.href.replace(/&trid=([0-9]+)/, ''),
+                    url : WPML_core.sanitize(location.href).replace(/&trid=([0-9]+)/, ''),
                     data: '', // wpmlcore-5061
                     success: function(msg){
                         jQuery('#icl_tax_adding_notice').fadeOut();
@@ -140,7 +140,7 @@ var iclTagLangSelectBar = {
         "use strict";
         var self = this;
 
-        return self.addTagForm.find('[name="icl_tax_' + self.taxonomy + '_language"]').val();
+        return WPML_core.sanitize( self.addTagForm.find('[name="icl_tax_' + self.taxonomy + '_language"]').val() );
     },
     addHiddenSearchField: function () {
         "use strict";

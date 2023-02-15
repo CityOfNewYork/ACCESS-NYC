@@ -1,5 +1,5 @@
-jQuery(document).ready(function(){
-    jQuery('#icl_affiliate_info_check').submit(iclAffiliateInfoCheck);    
+jQuery(function () {
+    jQuery('#icl_affiliate_info_check').submit(iclAffiliateInfoCheck);
 });
 
 function iclAffiliateInfoCheck(){

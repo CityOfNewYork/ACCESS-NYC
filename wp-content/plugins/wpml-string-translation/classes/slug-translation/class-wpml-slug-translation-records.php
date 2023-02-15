@@ -27,6 +27,7 @@ abstract class WPML_Slug_Translation_Records {
 		if ( ! $cache_item->exists() ) {
 			$slug = new WPML_ST_Slug();
 
+			/** @var \stdClass $original */
 			$original = $this->wpdb->get_row(
 				$this->wpdb->prepare(
 					"SELECT id, value, language, context, name
@@ -42,13 +43,16 @@ abstract class WPML_Slug_Translation_Records {
 			if ( $original ) {
 				$slug->set_lang_data( $original );
 
+				/** @var array<\stdClass> $translations */
 				$translations = $this->wpdb->get_results(
 					$this->wpdb->prepare(
 						"SELECT value, language, status
 					 FROM {$this->wpdb->prefix}icl_string_translations
 					 WHERE string_id = %d
-						AND value <> ''",
-						$original->id
+						AND value <> '' 
+					    AND language <> %s",
+						$original->id,
+						$original->language
 					)
 				);
 
@@ -154,8 +158,8 @@ abstract class WPML_Slug_Translation_Records {
 	public function update_original_slug( $type, $slug ) {
 		$this->wpdb->update(
 			$this->wpdb->prefix . 'icl_strings',
-			 array( 'value' => $slug ),
-			 array( 'name'  => $this->get_string_name( $type ) )
+			array( 'value' => $slug ),
+			array( 'name' => $this->get_string_name( $type ) )
 		);
 
 		$this->flush_cache();
@@ -175,7 +179,7 @@ abstract class WPML_Slug_Translation_Records {
 
 		if ( $slug->get_original_id() ) {
 			$original_slug_and_lang = (object) array(
-				'value' => $slug->get_original_value(),
+				'value'    => $slug->get_original_value(),
 				'language' => $slug->get_original_lang(),
 			);
 		}
@@ -204,9 +208,9 @@ abstract class WPML_Slug_Translation_Records {
 			}
 
 			$rows[] = (object) array(
-				'value' => $slug->get_value( $lang ),
+				'value'    => $slug->get_value( $lang ),
 				'language' => $lang,
-				'status' => $slug->get_status( $lang ),
+				'status'   => $slug->get_status( $lang ),
 			);
 		}
 

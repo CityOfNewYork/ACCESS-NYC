@@ -41,10 +41,14 @@ class DroolsProxy {
     $response = $this->request($url, json_encode($_POST['data']), $user, $pass);
 
     if ($response === false || empty($response)) {
-      $this->notify(__('The response is false or empty,') . ' "' .
-        var_export($response, true) . '"', true);
+      $msg = __('The response is false or empty');
 
-      wp_send_json(['status' => 'fail'], 500);
+      $this->notify($msg . ', "' . var_export($response, true) . '"', true);
+
+      wp_send_json(array(
+        'status' => 'fail',
+        'message' => $msg
+      ), 500);
 
       wp_die();
     }

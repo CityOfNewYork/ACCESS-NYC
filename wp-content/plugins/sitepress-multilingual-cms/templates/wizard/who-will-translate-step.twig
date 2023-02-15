@@ -1,0 +1,106 @@
+<div class="wpml-wizard-step wpml-who-will-translate-step js-who-will-translate-step"
+     data-nonce="{{ nonce }}"
+     data-mode='{{ mode }}'
+>
+
+    <div class="js-main">
+        <h2 class="text-center">{{ strings.title }}</h2>
+
+        <div class="wpml-who-will-translate-option">
+            <input type="checkbox" class="js-only-i" id="who-only-i"/>
+            <label for="who-only-i">{{ strings.only_i }}</label>
+            {% include 'help-tooltip.twig' with {'help': strings.only_i_help} %}
+        </div>
+
+
+        <div class="wpml-who-will-translate-option">
+            <input type="checkbox" class="js-users" id="who-users"/>
+            <label for="who-users">{{ strings.users }}</label>
+            {% include 'help-tooltip.twig' with {'help': strings.users_help} %}
+        </div>
+        <div class="js-users-section js-section wpml-who-will-translate-settings" style="display:none">
+            {{ translators_ui|raw }}
+        </div>
+
+
+        <div class="wpml-who-will-translate-option">
+            <input type="checkbox" class="js-translation-service" id="who-translation-service"/>
+            <label for="who-translation-service">{{ strings.translation_service }}</label>
+            {% include 'help-tooltip.twig' with {'help': strings.translation_service_help} %}
+        </div>
+        <div class="js-translation-service-section js-section wpml-who-will-translate-settings" style="display:none">
+
+            <div class="wpml-section js-choose-section text-center">
+                <button class="button-primary js-choose-translation-service">{{ strings.choose_translation_service }}</button>
+            </div>
+
+            <div class="wpml-section js-selected-section" style="display: none">
+
+            </div>
+
+            <div id="js-translation-services-dialog"
+                 class=""
+                 title="{{ strings.translation_service_dialog.title }}"
+                 style="display:none"
+                 data-cancel-text="{{ strings.dialog_cancel }}"
+            >
+                <p>{{ strings.translation_service_dialog.into }}</p>
+                {{ translation_services_table | raw }}
+            </div>
+
+            <div id="js-activate-translation-services-dialog"
+                 class="ts-activate-section"
+                 data-title="{{ strings.activate_translation_service_dialog.title }}"
+                 style="display: none"
+                 data-cancel-text="&laquo; {{ strings.activate_translation_service_dialog.cancel }}"
+                 data-ok-text="{{ strings.activate_translation_service_dialog.ok }}"
+            >
+
+              <div class="ts-activate-logo">
+                    <img class="js-activate-logo" src="">
+                </div>
+
+
+                <div class="ts-activate-content">
+                    <p class="js-connect-desc"
+                       data-text="{{ strings.activate_translation_service_dialog.connect_desc }}"></p>
+                    <p><a href="" class="wpml-external-link js-connect-how-to-find"
+                          data-text="{{ strings.activate_translation_service_dialog.connect_how_to_find }}"
+                          target="_blank"></a></p>
+
+
+                <div class="custom_fields_wrapper js-custom-fields-wrapper"></div>
+
+                <div class="notice notice-error inline js-error-message ts-activate-notice"
+                     style="display: none"></div>
+
+                <p class="js-create-account ts-create-account-link"
+                   data-text="{{ strings.activate_translation_service_dialog.no_account }}">
+                    <span></span> <a class="wpml-external-link" href=""
+                                     target="_blank">{{ strings.activate_translation_service_dialog.create_one }}</a>
+                </p>
+
+            </div>
+
+            </div>
+
+        </div>
+
+
+        {% if is_administrator %}
+            <div class="wpml-who-will-translate-option">
+                <input type="checkbox" class="js-leave-choice" id="who-leave-choice"/>
+                <label for="who-leave-choice">{{ strings.leave_choice }}</label>
+                {% include 'help-tooltip.twig' with {'help': strings.leave_choice_help } %}
+            </div>
+            <div class="js-leave-choice-section js-section wpml-who-will-translate-settings" style="display:none">
+                {{ translation_manager_ui|raw }}
+            </div>
+        {% endif %}
+
+        <div class="wpml-wizard-buttons-container ">
+            <button class="button wpml-button button-lg alignright js-continue button-primary">{{ strings.button_text }} &raquo;</button>
+        </div>
+
+    </div>
+</div>

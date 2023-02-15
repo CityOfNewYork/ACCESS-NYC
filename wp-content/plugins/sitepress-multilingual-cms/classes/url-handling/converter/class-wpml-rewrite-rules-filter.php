@@ -12,7 +12,7 @@ class WPML_Rewrite_Rules_Filter {
 	private $wpml_url_filters;
 
 	/**
-	 * @param array $active_languages
+	 * @param array            $active_languages
 	 * @param WPML_URL_Filters $wpml_url_filters
 	 */
 	public function __construct( $active_languages, $wpml_url_filters = null ) {

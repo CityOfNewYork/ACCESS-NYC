@@ -9,27 +9,16 @@
 					<tr>
 						<td colspan="3">
 							<h4><?php _e('Import Speed Optimization', 'wp_all_import_plugin'); ?></h4>									
-							<div class="input">															
-								<div class="input">
-									<input type="radio" id="import_default_processing" class="switcher" name="import_processing" value="default" <?php echo ('ajax' != $post['import_processing']) ? 'checked="checked"': '' ?> style="margin-left:0;"/>
-									<label for="import_default_processing"><?php _e('High Speed Small File Processing', 'wp_all_import_plugin' )?> <a href="#help" class="wpallimport-help" style="position:relative; top:0;" title="<?php _e('If the import takes longer than your server\'s timeout settings (max_execution_time, mod_fcgid read data timeout, etc.) it will fail.', 'wp_all_import_plugin'); ?>">?</a></label>					
-								</div>
-								
-								<input type="radio" id="import_ajax_processing" class="switcher" name="import_processing" value="ajax" <?php echo 'ajax' == $post['import_processing'] ? 'checked="checked"': '' ?> style="margin-left:0;"/>
-								<label for="import_ajax_processing"><?php _e('Iterative, Piece-by-Piece Processing', 'wp_all_import_plugin' )?></label>					
-								
-								<span class="switcher-target-import_ajax_processing pl17" style="display:block; clear: both; width: 100%;">
-									
-									<label for="processing_iteration_logic_custom"><?php _e('In each iteration, process', 'wp_all_import_plugin');?></label> <input type="text" name="records_per_request" style="vertical-align:middle; font-size:11px; background:#fff !important; width: 40px; text-align:center;" value="<?php echo esc_attr($post['records_per_request']) ?>" /> <?php _e('records', 'wp_all_import_plugin'); ?>
-									<a href="#help" class="wpallimport-help" style="position: relative; top: -2px;" title="<?php _e('WP All Import must be able to process this many records in less than your server\'s timeout settings. If your import fails before completion, to troubleshoot you should lower this number. If you are importing images, especially high resolution images, high numbers here are probably a bad idea, since downloading the images can take lots of time - for example, 20 posts with 5 images each = 100 images. At 500Kb per image that\'s 50Mb that needs to be downloaded. Can your server download that before timing out? If not, the import will fail.', 'wp_all_import_plugin'); ?>">?</a>
-									
-									<div class="input" style="margin:5px 0px;">
-										<input type="hidden" name="chuncking" value="0" />
-										<input type="checkbox" id="chuncking" name="chuncking" value="1" class="fix_checkbox" <?php echo $post['chuncking'] ? 'checked="checked"': '' ?>/>
-										<label for="chuncking"><?php _e('Split file up into <strong>' . PMXI_Plugin::getInstance()->getOption('large_feed_limit') . '</strong> record chunks.', 'wp_all_import_plugin');?></label> 
-										<a href="#help" class="wpallimport-help" style="position: relative; top: -2px;" title="<?php _e('This option will decrease the amount of slowdown experienced at the end of large imports. The slowdown is partially caused by the need for WP All Import to read deeper and deeper into the file on each successive iteration. Splitting the file into pieces means that, for example, instead of having to read 19000 records into a 20000 record file when importing the last 1000 records, WP All Import will just split it into 20 chunks, and then read the last chunk from the beginning.','wp_all_import_plugin'); ?>">?</a>							
-									</div>							
-								</span>									
+							<div class="input">
+                                <label for="processing_iteration_logic_custom"><?php _e('In each iteration, process', 'wp_all_import_plugin');?></label> <input type="text" name="records_per_request" style="vertical-align:middle; font-size:11px; background:#fff !important; width: 40px; text-align:center;" value="<?php echo esc_attr($post['records_per_request']) ?>" /> <?php _e('records', 'wp_all_import_plugin'); ?>
+                                <a href="#help" class="wpallimport-help" style="position: relative; top: -2px;" title="<?php _e('WP All Import must be able to process this many records in less than your server\'s timeout settings. If your import fails before completion, to troubleshoot you should lower this number. If you are importing images, especially high resolution images, high numbers here are probably a bad idea, since downloading the images can take lots of time - for example, 20 posts with 5 images each = 100 images. At 500Kb per image that\'s 50Mb that needs to be downloaded. Can your server download that before timing out? If not, the import will fail.', 'wp_all_import_plugin'); ?>">?</a>
+
+                                <div class="input" style="margin:5px 0px;">
+                                    <input type="hidden" name="chuncking" value="0" />
+                                    <input type="checkbox" id="chuncking" name="chuncking" value="1" class="fix_checkbox" <?php echo $post['chuncking'] ? 'checked="checked"': '' ?>/>
+                                    <label for="chuncking"><?php _e('Split file up into <strong>' . PMXI_Plugin::getInstance()->getOption('large_feed_limit') . '</strong> record chunks.', 'wp_all_import_plugin');?></label>
+                                    <a href="#help" class="wpallimport-help" style="position: relative; top: -2px;" title="<?php _e('This option will decrease the amount of slowdown experienced at the end of large imports. The slowdown is partially caused by the need for WP All Import to read deeper and deeper into the file on each successive iteration. Splitting the file into pieces means that, for example, instead of having to read 19000 records into a 20000 record file when importing the last 1000 records, WP All Import will just split it into 20 chunks, and then read the last chunk from the beginning.','wp_all_import_plugin'); ?>">?</a>
+                                </div>
 							</div>				
 							<div class="input">
 								<input type="hidden" name="is_fast_mode" value="0" />
@@ -75,7 +64,10 @@
 										'acf-field-group',
 										'custom_css',
 										'customize_changeset',
-										'oembed_cache'
+										'oembed_cache',
+                                        'wp_block',
+                                        'user_request',
+                                        'scheduled-action'
 									);
 									$custom_types = get_post_types(array('_builtin' => true), 'objects') + get_post_types(array('_builtin' => false, 'show_ui' => true), 'objects'); 
 									foreach ($custom_types as $key => $ct) {
@@ -90,15 +82,18 @@
 
 										// Put users & comments & taxonomies after Pages
 										if ( ! empty($custom_types['page']) && $key == 'page' || empty($custom_types['page']) && $key == 'post' ){
+
+                                            $sorted_cpt['taxonomies'] = new stdClass();
+                                            $sorted_cpt['taxonomies']->labels = new stdClass();
+                                            $sorted_cpt['taxonomies']->labels->name = __('Taxonomies','wp_all_export_plugin');
+
 											$sorted_cpt['import_users'] = new stdClass();
 											$sorted_cpt['import_users']->labels = new stdClass();
 											$sorted_cpt['import_users']->labels->name = __('Users','wp_all_export_plugin');
 
-//											if ( class_exists('WooCommerce') ) {
-//												$sorted_cpt['shop_customer'] = new stdClass();
-//												$sorted_cpt['shop_customer']->labels = new stdClass();
-//												$sorted_cpt['shop_customer']->labels->name = __('WooCommerce Customers','wp_all_export_plugin');
-//											}
+                                            $sorted_cpt['comments'] = new stdClass();
+                                            $sorted_cpt['comments']->labels = new stdClass();
+                                            $sorted_cpt['comments']->labels->name = __('Comments','wp_all_export_plugin');
 
 											break;
 										}
@@ -124,20 +119,20 @@
 
 								?>	
 								<div class="wpallimport-change-custom-type">
-								<select name="custom_type_selector" id="custom_type_selector" class="wpallimport-post-types">
 
-
-                                <?php
-                                // *****************************************************
-                                // **************** START CPT LOOP *********************
-                                // *****************************************************
-                                ?>
+								    <select name="custom_type_selector" id="custom_type_selector" class="wpallimport-post-types">
 
                                     <?php
-                                    $known_imgs     = array( 'post', 'page', 'product', 'import_users', 'shop_order', 'shop_coupon', 'shop_customer', 'users', 'comments', 'taxonomies' );
+                                    // *****************************************************
+                                    // **************** START CPT LOOP *********************
+                                    // *****************************************************
+                                    ?>
+
+                                    <?php
+                                    $known_imgs     = array( 'post', 'page', 'product', 'import_users', 'shop_order', 'shop_coupon', 'shop_customer', 'users', 'comments', 'taxonomies', 'woo_reviews' );
                                     $all_posts      = array_merge( $sorted_cpt, $hidden_post_types );
                                     $all_posts      = apply_filters( 'pmxi_custom_types', $all_posts, 'all_types' );
-                                    $ordered_posts  = array( 0 => 'post', 1 => 'page', 2 => 'taxonomies', 3 => 'import_users', 4 => 'shop_order', 5 => 'shop_coupon', 6 => 'product', 7 => 'shop_customer' );
+                                    $ordered_posts  = array( 'post', 'page', 'taxonomies', 'comments', 'import_users', 'shop_order', 'shop_coupon', 'product', 'woo_reviews', 'shop_customer' );
 
                                     foreach ( $all_posts as $key => $post_obj ) {
                                         if ( ! in_array( $key, $ordered_posts ) ) {
@@ -196,7 +191,7 @@
 									<?php if ( ! class_exists('PMUI_Plugin') ): ?>
 										<div class="wpallimport-upgrade-notice" rel="import_users">
 											<p><?php _e('The User Add-On is Required to Import Users', 'wp_all_import_plugin'); ?></p>
-											<a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1921&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link"><?php _e('Purchase the User Add-On', 'wp_all_import_plugin');?></a>
+											<a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=2707221&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link"><?php _e('Purchase the User Add-On', 'wp_all_import_plugin');?></a>
 										</div>
 									<?php endif; ?>
 
@@ -204,7 +199,7 @@
 									<?php if ( class_exists('WooCommerce') && ! class_exists('PMUI_Plugin') ): ?>
 										<div class="wpallimport-upgrade-notice" rel="shop_customer">
 											<p><?php _e('The User Add-On is Required to Import Customers', 'wp_all_import_plugin'); ?></p>
-											<a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1921&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link"><?php _e('Purchase the User Add-On', 'wp_all_import_plugin');?></a>
+											<a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=2707221&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link"><?php _e('Purchase the User Add-On', 'wp_all_import_plugin');?></a>
 										</div>
 									<?php endif; ?>
 
@@ -212,19 +207,21 @@
 									<?php if ( class_exists('WooCommerce') && ! class_exists('PMWI_Plugin') ): ?>
 										<div class="wpallimport-upgrade-notice" rel="product">
 											<p><?php _e('The WooCommerce Add-On is Required to Import Products', 'wp_all_import_plugin'); ?></p>
-											<a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1529&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link"><?php _e('Purchase the WooCommerce Add-On Pro', 'wp_all_import_plugin');?></a>
+											<a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=2707227&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link"><?php _e('Purchase the WooCommerce Add-On Pro', 'wp_all_import_plugin');?></a>
 										</div>
 									<?php endif; ?>
 									<?php if ( class_exists('WooCommerce') &&  ( ! class_exists('PMWI_Plugin') || class_exists('PMWI_Plugin') && PMWI_EDITION == 'free') ): ?>
 										<div class="wpallimport-upgrade-notice" rel="shop_order">
 											<p><?php _e('The WooCommerce Add-On Pro is Required to Import Orders', 'wp_all_import_plugin'); ?></p>
-											<a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1529&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link"><?php _e('Purchase the WooCommerce Add-On Pro', 'wp_all_import_plugin');?></a>
+											<a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=2707227&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link"><?php _e('Purchase the WooCommerce Add-On Pro', 'wp_all_import_plugin');?></a>
 										</div>
 										<div class="wpallimport-upgrade-notice" rel="shop_coupon">
 											<p><?php _e('The WooCommerce Add-On Pro is Required to Import Coupons', 'wp_all_import_plugin'); ?></p>
-											<a href="http://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=1529&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link"><?php _e('Purchase the WooCommerce Add-On Pro', 'wp_all_import_plugin');?></a>
+											<a href="https://www.wpallimport.com/checkout/?edd_action=add_to_cart&download_id=2707227&edd_options%5Bprice_id%5D=1" target="_blank" class="upgrade_link"><?php _e('Purchase the WooCommerce Add-On Pro', 'wp_all_import_plugin');?></a>
 										</div>
 									<?php endif; ?>
+
+									<?php do_action('wp_all_import_entity_type_bundle', $post, true); ?>
 
 								</div>
 								<?php endif; ?>

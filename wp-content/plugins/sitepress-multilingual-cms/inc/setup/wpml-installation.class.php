@@ -4,6 +4,10 @@ class WPML_Installation extends WPML_WPDB_And_SP_User {
 
 	const WPML_START_VERSION_KEY = 'wpml_start_version';
 
+	public static function getStartVersion() {
+		return get_option( self::WPML_START_VERSION_KEY, '0.0.0' );
+	}
+
 	function go_to_setup1() {
 		// Reverse $this->prepopulate_translations()
 		$this->wpdb->query( "TRUNCATE TABLE {$this->wpdb->prefix}icl_translations" );
@@ -32,7 +36,7 @@ class WPML_Installation extends WPML_WPDB_And_SP_User {
 	/**
 	 * Sets the locale in the icl_locale_map if it has not yet been set
 	 *
-	 * @param $initial_language_code
+	 * @param string $initial_language_code
 	 */
 	private function maybe_set_locale( $initial_language_code ) {
 		$q          = "SELECT code FROM {$this->wpdb->prefix}icl_locale_map WHERE code=%s";
@@ -114,15 +118,20 @@ class WPML_Installation extends WPML_WPDB_And_SP_User {
 		return $sanitized_codes;
 	}
 
-	public function finish_installation( $site_key = false ) {
+	public function finish_installation( ) {
+		icl_set_setting( 'store_frontend_cookie', 1 );
+
 		icl_set_setting( 'setup_complete', 1, true );
-		if ( $site_key ) {
-			icl_set_setting( 'site_key', $site_key, true );
-		}
 
 		update_option( self::WPML_START_VERSION_KEY, ICL_SITEPRESS_VERSION );
 
 		do_action( 'wpml_setup_completed' );
+	}
+
+	public function store_site_key( $site_key = false ) {
+		if ( $site_key ) {
+			icl_set_setting( 'site_key', $site_key, true );
+		}
 	}
 
 	public function finish_step3() {
@@ -167,7 +176,6 @@ class WPML_Installation extends WPML_WPDB_And_SP_User {
 			wp_styles();
 		}
 
-		/** @var WP_Styles text_direction */
 		if ( $this->sitepress->is_rtl( $admin_language ) ) {
 			$GLOBALS['text_direction'] = 'rtl';
 			$GLOBALS['wp_styles']->text_direction = 'rtl';
@@ -237,11 +245,11 @@ class WPML_Installation extends WPML_WPDB_And_SP_User {
 
 	/**
 	 * @param string $display_language
-	 * @param bool $active_only
+	 * @param bool   $active_only
+	 * @param bool   $major_first
+	 * @param string $order_by
 	 *
-	 * @param bool $major_first
-	 *
-	 * @return array
+	 * @return array<string,\stdClass>
 	 */
 	public function refresh_active_lang_cache( $display_language, $active_only = false, $major_first = false,  $order_by = 'english_name' ) {
 		$active_snippet     = $active_only ? " l.active = 1 AND " : "";
@@ -357,7 +365,7 @@ class WPML_Installation extends WPML_WPDB_And_SP_User {
 			)
 		);
 
-		$maxtrid = 1 + $this->wpdb->get_var( "SELECT MAX(trid) FROM {$this->wpdb->prefix}icl_translations" );
+		$maxtrid = 1 + (int) $this->wpdb->get_var( "SELECT MAX(trid) FROM {$this->wpdb->prefix}icl_translations" );
 
 		global $wp_taxonomies;
 		$taxonomies = array_keys( (array) $wp_taxonomies );
@@ -370,7 +378,7 @@ class WPML_Installation extends WPML_WPDB_And_SP_User {
 				";
 			$insert_prepare = $this->wpdb->prepare( $insert_query, array( $element_type, $maxtrid, $lang, $tax ) );
 			$this->wpdb->query( $insert_prepare );
-			$maxtrid = 1 + $this->wpdb->get_var( "SELECT MAX(trid) FROM {$this->wpdb->prefix}icl_translations" );
+			$maxtrid = 1 + (int) $this->wpdb->get_var( "SELECT MAX(trid) FROM {$this->wpdb->prefix}icl_translations" );
 		}
 
 		$this->wpdb->query(

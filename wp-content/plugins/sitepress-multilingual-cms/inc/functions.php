@@ -32,10 +32,13 @@ function wpml_site_uses_icl() {
 		$table_exists = $wpdb->get_var( "SHOW TABLES LIKE '{$wpdb->prefix}icl_translation_status'" );
 
 		if ( $table_exists ) {
-			$icl_job_count_query = $wpdb->prepare( "SELECT rid
+			$icl_job_count_query = $wpdb->prepare(
+				"SELECT rid
 							FROM {$wpdb->prefix}icl_translation_status
 							WHERE translation_service = %s
-							LIMIT 1;", 'icanlocalize' );
+							LIMIT 1;",
+				'icanlocalize'
+			);
 
 			$site_uses_icl = (bool) $wpdb->get_var( $icl_job_count_query );
 		}
@@ -94,7 +97,7 @@ function wpml_get_setting( $key, $default = null ) {
  *
  * @return mixed The value of the requested setting, or $default
  * @since 3.2
- * @use \SitePress::api_hooks
+ * @uses  \SitePress::api_hooks
  */
 function wpml_get_setting_filter( $default, $key ) {
 	$args = func_get_args();
@@ -126,19 +129,19 @@ function icl_get_sub_setting( $key, $sub_key, $default = false ) {
 /**
  * Gets a WPML sub setting value.
  *
- * @uses  \wpml_get_setting_filter
- *
  * @param mixed|false $default     Required. The value to return if the settings key does not exist
  *                                 (typically it's false, but you may want to use something else).
  * @param string      $key         The settings name key the sub key belongs to.
  * @param string      $sub_key     The sub key to return the value of.
  * @param mixed       $deprecated  Deprecated param.
  *
+ * @return mixed The value of the requested setting, or $default
  * @todo  [WPML 3.3] Remove deprecated argument
  *
- * @return mixed The value of the requested setting, or $default
+ * @uses  \wpml_get_setting_filter
+ *
  * @since 3.2
- * @use \SitePress::api_hooks
+ * @uses  \SitePress::api_hooks
  */
 function wpml_get_sub_setting_filter( $default, $key, $sub_key, $deprecated = null ) {
 	$default = null !== $deprecated && ! $default ? $deprecated : $default;
@@ -195,14 +198,16 @@ function icl_get_settings() {
 /**
  * Add settings link to plugin page.
  *
- * @param $links
- * @param $file
+ * @param SitePress     $sitepress
+ * @param array<string> $links
+ * @param string        $file
  *
  * @return array
  */
-function icl_plugin_action_links( $links, $file ) {
+function icl_plugin_action_links( SitePress $sitepress, $links, $file ) {
 	if ( $file == WPML_PLUGIN_BASENAME ) {
-		$links[] = '<a href="admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/languages.php">' . __( 'Configure', 'sitepress' ) . '</a>';
+		$endpoint = $sitepress->is_setup_complete() ? 'languages.php' : 'setup.php';
+		$links[]  = '<a href="admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/' . $endpoint . '">' . __( 'Configure', 'sitepress' ) . '</a>';
 	}
 
 	return $links;
@@ -262,9 +267,14 @@ function _icl_tax_has_objects_recursive( $id, $term_id = -1, $rec = 0 ) {
 		$term_id = $wpdb->get_var( $wpdb->prepare( "SELECT term_id FROM {$wpdb->term_taxonomy} WHERE term_taxonomy_id=%d", $id ) );
 	}
 
-	$children = $wpdb->get_results( $wpdb->prepare( "
+	$children = $wpdb->get_results(
+		$wpdb->prepare(
+			"
         SELECT term_taxonomy_id, term_id, count FROM {$wpdb->term_taxonomy} WHERE parent = %d
-    ", $term_id ) );
+    ",
+			$term_id
+		)
+	);
 
 	$count = 0;
 	foreach ( $children as $ch ) {
@@ -290,9 +300,9 @@ function _icl_trash_restore_prompt() {
 		if ( isset( $post->post_status ) && $post->post_status == 'trash' ) {
 			$post_type_object = get_post_type_object( $post->post_type );
 
-			$delete_post_link  = '<a href="' . esc_url( get_delete_post_link( $post->ID, '', true ) ) . '">' . esc_html( 'delete it permanently', 'sitepress' ) . '</a>';
-			$restore_post_link = '<a href="' . wp_nonce_url( admin_url( sprintf( $post_type_object->_edit_link . '&amp;action=untrash', $post->ID ) ), 'untrash-post_' . $post->ID ) . '">' . esc_html( 'restore', 'sitepress' ) . '</a>';
-			$ret               = '<p>' . sprintf( esc_html__( 'This translation is currently in the trash. You need to either %s or %s it in order to continue.' ), $delete_post_link, $restore_post_link );
+			$delete_post_link  = '<a href="' . esc_url( get_delete_post_link( $post->ID, '', true ) ) . '">' . esc_html__( 'delete it permanently', 'sitepress' ) . '</a>';
+			$restore_post_link = '<a href="' . wp_nonce_url( admin_url( sprintf( $post_type_object->_edit_link . '&amp;action=untrash', $post->ID ) ), 'untrash-post_' . $post->ID ) . '">' . esc_html__( 'restore', 'sitepress' ) . '</a>';
+			$ret               = '<p>' . sprintf( esc_html__( 'This translation is currently in the trash. You need to either %1$s or %2$s it in order to continue.' ), $delete_post_link, $restore_post_link );
 
 			wp_die( $ret );
 		}
@@ -317,16 +327,16 @@ function icl_makes_duplicates( $master_post_id ) {
  * Build or update duplicated posts from a master post.
  * To be used only for admin backend actions
  *
- * @see   $iclTranslationManagement in \SitePress:: __construct
- *
- * @param  int $master_post_id    The ID of the post to duplicate from.
+ * @param int $master_post_id     The ID of the post to duplicate from.
  *                                The ID can be that of a post, page or custom post
  *                                Master post doesn't need to be in the default language.
+ *
+ * @see   $iclTranslationManagement in \SitePress:: __construct
  *
  * @uses  SitePress
  * @uses  TranslationManagement
  * @since 3.2
- * @use \SitePress::api_hooks
+ * @uses  \SitePress::api_hooks
  */
 function wpml_admin_make_post_duplicates_action( $master_post_id ) {
 	$post      = get_post( $master_post_id );
@@ -359,13 +369,12 @@ function icl_makes_duplicates_public( $master_post_id ) {
 /**
  * Build duplicated posts from a master post only in case of the duplicate not being present at the time.
  *
- * @param  int $master_post_id    The ID of the post to duplicate from.
+ * @param int $master_post_id     The ID of the post to duplicate from.
  *                                Master post doesn't need to be in the default language.
  *
  * @uses       SitePress
  * @since      3.2
- * @use \SitePress::api_hooks
- * @deprecated This function will be removed in future releases.
+ * @uses       \SitePress::api_hooks
  */
 function wpml_make_post_duplicates_action( $master_post_id ) {
 
@@ -418,25 +427,25 @@ function icl_do_not_promote() {
 }
 
 /**
- * @param $time
+ * @param string $time
  *
  * @return string
  */
 function icl_convert_to_user_time( $time ) {
 
-	//offset between server time and user time in seconds
-	$time_offset = get_option( 'gmt_offset' )*3600;
+	// offset between server time and user time in seconds
+	$time_offset = get_option( 'gmt_offset' ) * 3600;
 	$local_time  = __( 'Last Update Time could not be determined', 'sitepress' );
 
 	try {
-		//unix time stamp in server time
+		// unix time stamp in server time
 		$creation_time = strtotime( $time );
-		//creating dates before 2014 are impossible
+		// creating dates before 2014 are impossible
 		if ( $creation_time !== false ) {
 			$local_time = date( 'Y-m-d H:i:s', $creation_time + $time_offset );
 		}
 	} catch ( Exception $e ) {
-		//Ignoring the exception, as we already set the default value in $local_time
+		// Ignoring the exception, as we already set the default value in $local_time
 	}
 
 	return $local_time;
@@ -447,7 +456,7 @@ function icl_convert_to_user_time( $time ) {
  *
  * @global sitepress $sitepress
  *
- * @param string     $language 2 letters language code
+ * @param string $language 2 letters language code
  *
  * @return boolean
  * @since      unknown
@@ -464,8 +473,6 @@ function icl_is_language_active( $language ) {
 /**
  * Checks if given language is enabled
  *
- * @global sitepress $sitepress
- *
  * @param mixed      $empty_value   This is normally the value the filter will be modifying.
  *                                  We are not filtering anything here therefore the NULL value
  *                                  This for the filter function to actually receive the full argument list:
@@ -473,8 +480,10 @@ function icl_is_language_active( $language ) {
  * @param string     $language_code The language code to check Accepts a 2-letter language code
  *
  * @return boolean
+ * @global sitepress $sitepress
+ *
  * @since 3.2
- * @use \SitePress::api_hooks
+ * @uses  \SitePress::api_hooks
  */
 function wpml_language_is_active_filter( $empty_value, $language_code ) {
 	global $sitepress;
@@ -524,16 +533,18 @@ function wpml_prepare_in( $items, $format = '%s' ) {
 	$how_many = count( $items );
 	if ( $how_many > 0 ) {
 		$placeholders    = array_fill( 0, $how_many, $format );
-		$prepared_format = implode( ",", $placeholders );
+		$prepared_format = implode( ',', $placeholders );
 		$prepared_in     = $wpdb->prepare( $prepared_format, $items );
 	} else {
-		$prepared_in = "";
+		$prepared_in = '';
 	}
 
 	return $prepared_in;
 }
 
 function is_not_installing_plugins() {
+	global $sitepress;
+
 	$checked = isset( $_REQUEST['checked'] ) ? (array) $_REQUEST['checked'] : array();
 
 	if ( ! isset( $_REQUEST['action'] ) ) {
@@ -600,7 +611,7 @@ function icl_suppress_activation() {
  */
 function activate_installer( $sitepress = null ) {
 	// installer hook - start
-	include_once WPML_PLUGIN_PATH . '/vendor/otgs/installer/loader.php'; //produces global variable $wp_installer_instance
+	include_once WPML_PLUGIN_PATH . '/vendor/otgs/installer/loader.php'; // produces global variable $wp_installer_instance
 	$args = array(
 		'plugins_install_tab' => 1,
 	);
@@ -610,11 +621,14 @@ function activate_installer( $sitepress = null ) {
 			array(
 				'repository_id' => 'wpml',
 				'product_name'  => 'WPML',
-				'condition_cb'  => array( $sitepress, 'setup' )
-			)
+				'condition_cb'  => array( $sitepress, 'setup' ),
+			),
 		);
 	}
-	/** @var WP_Installer $wp_installer_instance */
+	/**
+	 * @var WP_Installer $wp_installer_instance
+	 */
+	/** @phpstan-ignore-next-line */
 	WP_Installer_Setup( $wp_installer_instance, $args );
 	// installer hook - end
 }
@@ -624,23 +638,30 @@ function wpml_missing_filter_input_notice() {
 	<div class="message error">
 		<h3><?php esc_html_e( "WPML can't be functional because it requires a disabled PHP extension!", 'sitepress' ); ?></h3>
 
-		<p><?php esc_html_e( "To ensure and improve the security of your website, WPML makes use of the ", 'sitepress' ); ?><a href="http://php.net/manual/en/book.filter.php">PHP Data Filtering</a> extension.<br><br>
-			<?php esc_html_e( "The filter extension is enabled by default as of PHP 5.2.0. Before this time an experimental PECL extension was
-            used, however, the PECL version is no longer recommended to be used or updated. (source: ", 'sitepress' ); ?><a href="http://php.net/manual/en/filter.installation.php">PHP Manual Function Reference Variable and
+		<p><?php esc_html_e( 'To ensure and improve the security of your website, WPML makes use of the ', 'sitepress' ); ?><a href="http://php.net/manual/en/book.filter.php">PHP Data Filtering</a> extension.<br><br>
+			<?php
+			esc_html_e(
+				'The filter extension is enabled by default as of PHP 5.2.0. Before this time an experimental PECL extension was
+            used, however, the PECL version is no longer recommended to be used or updated. (source: ',
+				'sitepress'
+			);
+			?>
+			<a href="http://php.net/manual/en/filter.installation.php">PHP Manual Function Reference Variable and
 				Type Related Extensions Filter
 				Installing/Configuring</a>)<br>
 			<br>
-			<?php esc_html_e( "The filter extension is enabled by default as of PHP 5.2, therefore it must have been disabled by either you or your host.", 'sitepress' ); ?>
+			<?php esc_html_e( 'The filter extension is enabled by default as of PHP 5.2, therefore it must have been disabled by either you or your host.', 'sitepress' ); ?>
 			<br><?php esc_html_e( "To enable it, either you or your host will need to open your website's php.ini file and either:", 'sitepress' ); ?><br>
 		<ol>
 			<li><?php esc_html_e( "Remove the 'filter_var' string from the 'disable_functions' directive or...", 'sitepress' ); ?>
 			</li>
-			<li><?php esc_html_e( "Add the following line:", 'sitepress' ); ?> <code class="inline-code">extension=filter.so</code></li>
+			<li><?php esc_html_e( 'Add the following line:', 'sitepress' ); ?> <code class="inline-code">extension=filter.so</code></li>
 		</ol>
-		<?php $ini_location = php_ini_loaded_file();
+		<?php
+		$ini_location = php_ini_loaded_file();
 		if ( $ini_location !== false ) {
 			?>
-			<strong><?php esc_html_e( "Your php.ini file is located at", 'sitepress' ) . ' ' . esc_html( $ini_location ); ?>.</strong>
+			<strong><?php esc_html_e( 'Your php.ini file is located at', 'sitepress' ) . ' ' . esc_html( $ini_location ); ?>.</strong>
 			<?php
 		}
 		?>
@@ -678,8 +699,8 @@ function repair_el_type_collate() {
 /**
  * Wrapper for `parse_url` using `wp_parse_url`
  *
- * @param     $url
- * @param int $component
+ * @param string $url
+ * @param int    $component
  *
  * @return array|string|int|null
  */
@@ -699,47 +720,13 @@ function wpml_parse_url( $url, $component = -1 ) {
 
 	if ( $component === -1 ) {
 		$ret = wp_parse_url( $url );
-	} else if ( isset( $component_map[ $component ] ) ) {
+	} elseif ( isset( $component_map[ $component ] ) ) {
 		$key    = $component_map[ $component ];
 		$parsed = wp_parse_url( $url );
 		$ret    = isset( $parsed[ $key ] ) ? $parsed[ $key ] : null;
 	}
 
 	return $ret;
-}
-
-// Add wp_parse_url function for versions of WP before 4.4
-
-if ( ! function_exists( 'wp_parse_url' ) ) {
-	function wp_parse_url( $url ) {
-		$parts = @parse_url( $url );
-		if ( ! $parts ) {
-			// < PHP 5.4.7 compat, trouble with relative paths including a scheme break in the path
-			if ( '/' == $url[0] && false !== strpos( $url, '://' ) ) {
-				// Since we know it's a relative path, prefix with a scheme/host placeholder and try again
-				if ( ! $parts = @parse_url( 'placeholder://placeholder' . $url ) ) {
-					return $parts;
-				}
-				// Remove the placeholder values
-				unset( $parts['scheme'], $parts['host'] );
-			} else {
-				return $parts;
-			}
-		}
-
-		// < PHP 5.4.7 compat, doesn't detect schemeless URL's host field
-		if ( '//' == substr( $url, 0, 2 ) && ! isset( $parts['host'] ) ) {
-			$path_parts    = explode( '/', substr( $parts['path'], 2 ), 2 );
-			$parts['host'] = $path_parts[0];
-			if ( isset( $path_parts[1] ) ) {
-				$parts['path'] = '/' . $path_parts[1];
-			} else {
-				unset( $parts['path'] );
-			}
-		}
-
-		return $parts;
-	}
 }
 
 /**
@@ -774,12 +761,11 @@ function wpml_array_unique( $array, $sort_flags = SORT_REGULAR ) {
 }
 
 /**
- * @param $array
- * @param $keep_key_assoc
- *
- * @see \wpml_array_unique
+ * @param array<mixed> $array
+ * @param bool         $keep_key_assoc
  *
  * @return array
+ * @see \wpml_array_unique
  */
 function wpml_array_unique_fallback( $array, $keep_key_assoc ) {
 	$duplicate_keys = array();
@@ -823,7 +809,7 @@ function wpml_is_cli() {
 	return defined( 'WP_CLI' ) && WP_CLI;
 }
 
-function wpml_sticky_post_sync( Sitepress $sitepress = null ) {
+function wpml_sticky_post_sync( SitePress $sitepress = null ) {
 	static $instance;
 
 	if ( ! $instance ) {
@@ -838,7 +824,7 @@ function wpml_sticky_post_sync( Sitepress $sitepress = null ) {
 			$wpml_post_translations,
 			new WPML_Sticky_Posts_Lang_Filter(
 				$sitepress,
-                $wpml_post_translations
+				$wpml_post_translations
 			)
 		);
 	}
@@ -869,4 +855,31 @@ function wpml_get_filesystem_direct() {
  */
 function wpml_update_escaped_post( array $postarray, $lang = null, $wp_error = false ) {
 	return wpml_get_create_post_helper()->insert_post( $postarray, $lang, $wp_error );
+}
+
+/**
+ * @param string $group
+ *
+ * @return WPML_WP_Cache
+ */
+function wpml_get_cache( $group = '' ) {
+	return new WPML_WP_Cache( $group );
+}
+
+
+if ( ! function_exists( 'wpml_is_ajax' ) ) {
+	/**
+	 * wpml_is_ajax - Returns true when the page is loaded via ajax.
+	 *
+	 * @since  3.1.5
+	 *
+	 * @return bool
+	 */
+	function wpml_is_ajax() {
+		if ( defined( 'DOING_AJAX' ) ) {
+			return true;
+		}
+
+		return ( isset( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && wpml_mb_strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) ? true : false;
+	}
 }

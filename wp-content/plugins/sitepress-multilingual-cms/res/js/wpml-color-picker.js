@@ -8,17 +8,17 @@ WPML_Core.ColorPicker = function () {
 	var self = this;
 
 	self.init = function () {
-		jQuery(document).ready(function () {
-			var colorPickers = jQuery('.wp-picker-container .wpml-colorpicker');
+        jQuery(function () {
+            var colorPickers = jQuery('.wp-picker-container .wpml-colorpicker');
 
-			if (colorPickers.length) {
-				jQuery(colorPickers).on('focus', function () {
-					jQuery(this).data('old-value', jQuery(this).val());
-				});
+            if (colorPickers.length) {
+                jQuery(colorPickers).on('focus', function () {
+                    jQuery(this).data('old-value', jQuery(this).val());
+                });
 
-				jQuery(colorPickers).on('blur', function () {
-					var oldValue = '';
-					if (jQuery(this).data('old-value')) {
+                jQuery(colorPickers).on('blur', function () {
+                    var oldValue = '';
+                    if (jQuery(this).data('old-value')) {
 						oldValue = jQuery(this).data('old-value');
 					}
 					if (jQuery(this).hasClass('iris-error') || !self.isValidColor(jQuery(this).val())) {

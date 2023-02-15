@@ -29,9 +29,9 @@ class WPML_TF_Frontend_Display_Requirements {
 	 */
 	public function verify() {
 		return $this->is_enabled_on_frontend()
-		       && $this->is_translation()
-		       && $this->is_allowed_language()
-		       && $this->is_not_expired();
+			   && $this->is_translation()
+			   && $this->is_allowed_language()
+			   && $this->is_not_expired();
 	}
 
 	/**
@@ -39,7 +39,7 @@ class WPML_TF_Frontend_Display_Requirements {
 	 */
 	private function is_enabled_on_frontend() {
 		return $this->settings->is_enabled()
-		       && $this->settings->get_button_mode() !== WPML_TF_Settings::BUTTON_MODE_DISABLED;
+			   && $this->settings->get_button_mode() !== WPML_TF_Settings::BUTTON_MODE_DISABLED;
 	}
 
 	/**
@@ -54,7 +54,7 @@ class WPML_TF_Frontend_Display_Requirements {
 	 */
 	private function is_allowed_language() {
 		return is_array( $this->settings->get_languages_to() )
-		       && in_array( $this->queried_object->get_language_code(), $this->settings->get_languages_to(), true );
+			   && in_array( $this->queried_object->get_language_code(), $this->settings->get_languages_to(), true );
 	}
 
 	/**
@@ -64,7 +64,7 @@ class WPML_TF_Frontend_Display_Requirements {
 		$is_expired = false;
 
 		if ( $this->settings->get_display_mode() === WPML_TF_Settings::DISPLAY_CUSTOM
-		     && $this->queried_object->is_post()
+			 && $this->queried_object->is_post()
 		) {
 			$post = get_post( $this->queried_object->get_id() );
 			$now  = strtotime( 'now' );

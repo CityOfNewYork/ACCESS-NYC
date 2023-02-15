@@ -20,8 +20,14 @@ use WPML\Core\Twig\Node\Expression\AbstractExpression;
  */
 class IncludeNode extends \WPML\Core\Twig\Node\Node implements \WPML\Core\Twig\Node\NodeOutputInterface
 {
-    public function __construct(\WPML\Core\Twig\Node\Expression\AbstractExpression $expr, \WPML\Core\Twig\Node\Expression\AbstractExpression $variables = null, $only = \false, $ignoreMissing = \false, $lineno, $tag = null)
-    {
+    public function __construct(
+    	\WPML\Core\Twig\Node\Expression\AbstractExpression $expr,
+	    $variables,
+	    $only,
+	    $ignoreMissing,
+	    $lineno,
+	    $tag = null
+    ) {
         $nodes = ['expr' => $expr];
         if (null !== $variables) {
             $nodes['variables'] = $variables;

@@ -25,10 +25,14 @@ if (class_exists('Whoops\Run')) {
 function debug($str, $return = true) {
   $backtrace = debug_backtrace()[0];
 
-  error_log(
-    var_export($str, $return) . " " .
-    $backtrace['file'] . ':' . $backtrace['line'] . "\r\n"
-  );
+  $file = isset($backtrace['file']) ? $backtrace['file'] . ':' : '';
+  $line = isset($backtrace['line']) ? $backtrace['line'] : '';
+
+  // Sent log to native debug.log
+  error_log(var_export($str, $return) . " " . $file . $line);
+
+  // Send log to Query Monitor
+  do_action('qm/debug', var_export($str, $return));
 }
 // phpcs:enable
 

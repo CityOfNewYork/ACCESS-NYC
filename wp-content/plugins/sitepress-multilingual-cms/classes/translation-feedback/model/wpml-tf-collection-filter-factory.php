@@ -3,8 +3,8 @@
 class WPML_TF_Collection_Filter_Factory {
 
 	/**
-	 * @param       $type
-	 * @param array $args
+	 * @param string $type
+	 * @param array  $args
 	 *
 	 * @return null|IWPML_TF_Collection_Filter
 	 */

@@ -1,11 +1,20 @@
 <?php
+/**
+ * WHIP libary file.
+ *
+ * @package Yoast\WHIP
+ */
 
 /**
  * Represents the WordPress option for saving the dismissed messages.
  */
 class Whip_WPDismissOption implements Whip_DismissStorage {
 
-	/** @var string */
+	/**
+	 * WordPress option name.
+	 *
+	 * @var string
+	 */
 	protected $optionName = 'whip_dismiss_timestamp';
 
 	/**
@@ -32,5 +41,4 @@ class Whip_WPDismissOption implements Whip_DismissStorage {
 
 		return (int) $dismissedOption;
 	}
-
 }

@@ -1,0 +1,5 @@
+#wpadminbar #wp-admin-bar-translate .ab-icon {
+    top: 3px;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+}

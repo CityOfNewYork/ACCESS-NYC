@@ -6,7 +6,7 @@ class WPML_ST_Theme_Plugin_Localization_Options_UI_Factory implements IWPML_Back
 	public function create() {
 		global $sitepress;
 
-		$hooks = null;
+		$hooks          = null;
 		$current_screen = get_current_screen();
 
 		if ( isset( $current_screen->id ) && WPML_PLUGIN_FOLDER . '/menu/theme-localization' === $current_screen->id ) {

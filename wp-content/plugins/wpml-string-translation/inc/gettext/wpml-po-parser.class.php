@@ -11,8 +11,8 @@ class WPML_PO_Parser {
 			$ids[ ] = $s[ 'string_id' ];
 		}
 		if ( ! empty( $ids ) ) {
-			$sql_prepared = $wpdb->prepare( "SELECT string_id, position_in_page 
-	            			 				 FROM {$wpdb->prefix}icl_string_positions 
+			$sql_prepared = $wpdb->prepare( "SELECT string_id, position_in_page
+	            			 				 FROM {$wpdb->prefix}icl_string_positions
 	            			 				 WHERE kind=%d AND string_id IN(%s)", ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_SOURCE, implode( ',', $ids ));
 			$res = $wpdb->get_results( $sql_prepared );
 			foreach ( $res as $row ) {
@@ -39,7 +39,7 @@ class WPML_PO_Parser {
 
 			$po_single = '';
 			if ( isset( $file ) && isset( $exp ) ) {
-				$line_number = $exp[ 1 ];
+				$line_number = (int) $exp[ 1 ];
 				$line_number--; // Make it 0 base
 				$line_number -= 2; // Go back 2 lines
 				if ( $line_number < 0 ) {
@@ -72,11 +72,11 @@ class WPML_PO_Parser {
 		$translation_language = 'en';
 
 		if ( isset( $_GET['context'] ) ) {
-			$po_title .= '_' . $_GET['context'];
+			$po_title .= '_' . filter_var( $_GET['context'], FILTER_SANITIZE_STRING );
 		}
 
 		if ( isset( $_GET['translation_language'] ) ) {
-			$translation_language = $_GET['translation_language'];
+			$translation_language = filter_var( $_GET['translation_language'], FILTER_SANITIZE_STRING );
 		}
 
 		$po = "";
@@ -112,14 +112,14 @@ class WPML_PO_Parser {
 		} else {
 			$str = '"' . self::addslashes( $str ) . '"';
 		}
-		
+
 		return $str;
 	}
-	
+
 	private static function addslashes ( $str ) {
 		$str = str_replace( '\\', '\\\\', $str );
 		$str = str_replace( '"', '\"', $str );
-		
+
 		return $str;
 	}
 

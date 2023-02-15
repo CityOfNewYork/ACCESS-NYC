@@ -1,8 +1,6 @@
 <?php
 
-
 namespace OTGS\Installer\AdminNotices;
-
 
 class MessageTexts {
 	/**
@@ -25,9 +23,16 @@ class MessageTexts {
 	 *
 	 * @return string|null
 	 */
-	public function get( $repo, $messageId ) {
+	public function get( $repo, $messageId, $parameters = [] ) {
 		if ( isset( $this->messages['repo'][ $repo ][ $messageId ] ) ) {
-			return call_user_func( $this->messages['repo'][ $repo ][ $messageId ], $messageId );
+			if ( ! empty( $parameters ) ) {
+				return call_user_func(
+					$this->messages['repo'][ $repo ][ $messageId ],
+					$parameters
+				);
+			} else {
+				return call_user_func( $this->messages['repo'][ $repo ][ $messageId ], $messageId );
+			}
 		}
 
 		return null;

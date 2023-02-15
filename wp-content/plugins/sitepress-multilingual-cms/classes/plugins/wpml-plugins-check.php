@@ -15,10 +15,6 @@ class WPML_Plugins_Check {
 	) {
 		$required_versions = json_decode( $bundle_json, true );
 
-		if ( version_compare( $tm_version, $required_versions['wpml-translation-management'], '<' ) ) {
-			remove_action( 'wpml_loaded', 'wpml_tm_load', 10 );
-		}
-
 		if ( version_compare( $st_version, $required_versions['wpml-string-translation'], '<' ) ) {
 			remove_action( 'wpml_before_init', 'load_wpml_st_basics' );
 		}

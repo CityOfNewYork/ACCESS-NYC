@@ -33,7 +33,7 @@ class WPML_ST_Bulk_Strings_Insert {
 		foreach ( array_chunk( $strings, $this->chunk_size ) as $chunk ) {
 
 			$query = "INSERT IGNORE INTO {$this->wpdb->prefix}icl_strings "
-			         . '(`language`, `context`, `gettext_context`, `domain_name_context_md5`, `name`, `value`, `status`) VALUES ';
+					 . '(`language`, `context`, `gettext_context`, `domain_name_context_md5`, `name`, `value`, `status`) VALUES ';
 
 			$query .= implode( ',', array_map( array( $this, 'build_string_row' ), $chunk ) );
 
@@ -52,7 +52,7 @@ class WPML_ST_Bulk_Strings_Insert {
 	public function insert_string_translations( array $translations ) {
 		foreach ( array_chunk( $translations, $this->chunk_size ) as $chunk ) {
 			$query = "INSERT IGNORE INTO {$this->wpdb->prefix}icl_string_translations "
-			         . '(`string_id`, `language`, `status`, `mo_string`) VALUES ';
+					 . '(`string_id`, `language`, `status`, `mo_string`) VALUES ';
 
 			$query .= implode( ',', array_map( array( $this, 'build_translation_row' ), $chunk ) );
 

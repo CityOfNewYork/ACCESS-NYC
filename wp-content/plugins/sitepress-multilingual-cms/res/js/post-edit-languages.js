@@ -73,16 +73,16 @@ function build_language_links(data, $, container) {
 	}
 }
 
-jQuery(document).ready(function ($) {
-	"use strict";
+jQuery(function ($) {
+    "use strict";
 
-	var data = post_edit_languages_data;
-	var subsubsub = $('.subsubsub');
-	var container = subsubsub.next('.icl_subsubsub');
+    var data = post_edit_languages_data;
+    var subsubsub = $('.subsubsub');
+    var container = subsubsub.next('.icl_subsubsub');
 
-	if (container.length === 0) {
-		container = $('<div></div>');
-		container.addClass('icl_subsubsub');
+    if (container.length === 0) {
+        container = $('<div></div>');
+        container.addClass('icl_subsubsub');
 
 		subsubsub.after(container);
 	}

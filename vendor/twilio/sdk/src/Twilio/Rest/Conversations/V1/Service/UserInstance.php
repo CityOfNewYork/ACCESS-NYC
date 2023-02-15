@@ -13,6 +13,7 @@ use Twilio\Deserialize;
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceResource;
 use Twilio\Options;
+use Twilio\Rest\Conversations\V1\Service\User\UserConversationList;
 use Twilio\Values;
 use Twilio\Version;
 
@@ -29,8 +30,11 @@ use Twilio\Version;
  * @property \DateTime $dateCreated
  * @property \DateTime $dateUpdated
  * @property string $url
+ * @property array $links
  */
 class UserInstance extends InstanceResource {
+    protected $_userConversations;
+
     /**
      * Initialize the UserInstance
      *
@@ -57,6 +61,7 @@ class UserInstance extends InstanceResource {
             'dateCreated' => Deserialize::dateTime(Values::array_get($payload, 'date_created')),
             'dateUpdated' => Deserialize::dateTime(Values::array_get($payload, 'date_updated')),
             'url' => Values::array_get($payload, 'url'),
+            'links' => Values::array_get($payload, 'links'),
         ];
 
         $this->solution = ['chatServiceSid' => $chatServiceSid, 'sid' => $sid ?: $this->properties['sid'], ];
@@ -110,6 +115,13 @@ class UserInstance extends InstanceResource {
      */
     public function fetch(): UserInstance {
         return $this->proxy()->fetch();
+    }
+
+    /**
+     * Access the userConversations
+     */
+    protected function getUserConversations(): UserConversationList {
+        return $this->proxy()->userConversations;
     }
 
     /**

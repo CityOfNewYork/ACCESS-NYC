@@ -59,7 +59,7 @@ class WPML_PHP_Functions {
 	}
 
 	/**
-	 * @param $string
+	 * @param string $string
 	 *
 	 * @return string
 	 */
@@ -88,6 +88,7 @@ class WPML_PHP_Functions {
 
 	/**
 	 * Compares two "PHP-standardized" version number strings
+	 *
 	 * @see \WPML_WP_API::version_compare
 	 *
 	 * @param string $version1

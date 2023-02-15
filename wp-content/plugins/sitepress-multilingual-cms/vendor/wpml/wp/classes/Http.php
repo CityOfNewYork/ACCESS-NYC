@@ -15,13 +15,12 @@ class Http {
 
 	use Macroable;
 
+	/**
+	 * @return void
+	 */
 	public static function init() {
 		self::macro( 'post', curryN( 2, function ( $url, $args ) {
-			$response = Fns::make( \WP_Http::class )->post( $url, $args );
-
-			return \is_wp_error( $response )
-				? Either::Left( $response )
-				: Either::Right( $response );
+			return WordPress::handleError( Fns::make( \WP_Http::class )->post( $url, $args ) );
 		} ) );
 	}
 

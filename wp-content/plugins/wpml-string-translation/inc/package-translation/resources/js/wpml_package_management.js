@@ -13,7 +13,7 @@ var WPML_Package_Translation = WPML_Package_Translation || {};
 			jQuery('.js_package_all_cb').on('change', self.check_uncheck_all);
 			jQuery('.js_package_row_cb').on('change', self.enable_disable_delete);
 			jQuery('#delete_packages').on('click', self.delete_selected_packages);
-			jQuery('#package_kind').on('change', self.filter_by_kind);
+			jQuery('#package_kind_filter').on('change', self.filter_by_kind);
 		};
 
 		self.check_uncheck_all = function () {
@@ -94,20 +94,20 @@ var WPML_Package_Translation = WPML_Package_Translation || {};
 			var icl_package_translations_body = icl_package_translations.find('tbody');
 			if (self.all_selected()) {
 				icl_package_translations_body.find('tr').show();
-			} else {
-				icl_package_translations_body.find('tr').hide();
-				icl_package_translations_body.find('tr.js_package.js_package_' + kind_slug).show();
-			}
-			self.enable_disable_delete();
-		};
+            } else {
+                icl_package_translations_body.find('tr').hide();
+                icl_package_translations_body.find('tr.js_package.js_package_' + kind_slug).show();
+            }
+            self.enable_disable_delete();
+        };
 
-		self.init();
-	};
+        self.init();
+    };
 
-	jQuery(document).ready(
-		function () {
-			WPML_Package_Translation.management_page = new WPML_Package_Translation.ManagementPage();
-		}
-	);
+    jQuery(
+        function () {
+            WPML_Package_Translation.management_page = new WPML_Package_Translation.ManagementPage();
+        }
+    );
 
 }());

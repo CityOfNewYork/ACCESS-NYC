@@ -307,7 +307,7 @@ class PMXI_API
 				$is_full_width = true;
 				if ( ! empty($params['sub_fields']) ){
 					foreach ($params['sub_fields'] as $sub_field) {
-						if ($sub_field[0]['params']['is_main_field']){
+						if (!empty($sub_field[0]['params']['is_main_field'])){
 							PMXI_API::add_field($sub_field[0]['type'], $sub_field[0]['label'], $sub_field[0]['params']);			
 							$is_full_width = false;
 							break;
@@ -333,8 +333,9 @@ class PMXI_API
 								<?php
 									if ( ! empty($params['sub_fields']) ){
 										foreach ($params['sub_fields'] as $sub_field) {																						
-											if ( ! $sub_field[0]['params']['is_main_field'])
-												PMXI_API::add_field($sub_field[0]['type'], $sub_field[0]['label'], $sub_field[0]['params']);																																					
+											if ( empty($sub_field[0]['params']['is_main_field']) ) {
+                                                PMXI_API::add_field($sub_field[0]['type'], $sub_field[0]['label'], $sub_field[0]['params']);
+                                            }
 										}
 									}
 								?>
@@ -450,7 +451,7 @@ class PMXI_API
 
 		$is_base64_images_allowed = apply_filters("wp_all_import_is_base64_images_allowed", true, $url, false);
 
-		if ( $file_type == 'images' && base64_encode(base64_decode($url)) == $url && $is_base64_images_allowed ) {
+		if ( $file_type == 'images' && wp_all_import_is_base64_encoded($url) && $is_base64_images_allowed ) {
 			$image_name = md5($url) . '.jpg';
 			// Search existing attachment.
 			$attch = wp_all_import_get_image_from_gallery($image_name, $targetDir, $file_type);
@@ -471,13 +472,13 @@ class PMXI_API
 			}
 
 			if ("yes" == $download_images) {
-				$img = @imagecreatefromstring(base64_decode($url));
+				$img = @imagecreatefromstring(wp_all_import_base64_decode_image($url));
 				if ($img) {
 					$image_filename = $image_name;
 					$logger and call_user_func($logger, __('- found base64_encoded image', 'wp_all_import_plugin'));
 					$image_filepath = $targetDir . '/' . $image_filename;
 					imagejpeg($img, $image_filepath);
-					if ( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
+					if ( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], wp_all_import_supported_image_types())) {
 						$logger and call_user_func($logger, sprintf(__('- <b>WARNING</b>: File %s is not a valid image and cannot be set as featured one', 'wp_all_import_plugin'), $image_filepath));
 					} else {
 						$result = true;
@@ -513,7 +514,7 @@ class PMXI_API
 				}	
 				// Validate import images.
 				elseif ($file_type == 'images') {
-					if ( preg_match('%\W(svg)$%i', wp_all_import_basename($image_filepath)) or $image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath) and in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
+					if ( preg_match('%\W(svg)$%i', wp_all_import_basename($image_filepath)) or $image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath) and in_array($image_info[2], wp_all_import_supported_image_types())) {
                         $logger and call_user_func($logger, sprintf(__('- Image `%s` has been successfully found', 'wp_all_import_plugin'), $wpai_image_path));
                         $result = true;
 					} else {
@@ -544,7 +545,7 @@ class PMXI_API
 			} else {
 					
 				if ($file_type == 'images') {
-					if ( preg_match('%\W(svg)$%i', wp_all_import_basename($image_filepath)) or $image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath) and in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
+					if ( preg_match('%\W(svg)$%i', wp_all_import_basename($image_filepath)) or $image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath) and in_array($image_info[2], wp_all_import_supported_image_types())) {
 						$result = true;		
 						$logger and call_user_func($logger, sprintf(__('- Image `%s` has been successfully downloaded', 'wp_all_import_plugin'), $url));									
 					}
@@ -567,7 +568,7 @@ class PMXI_API
 				} else {
 					
 					if ($file_type == 'images') {
-						if ( preg_match('%\W(svg)$%i', wp_all_import_basename($image_filepath)) or $image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath) and in_array($image_info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_BMP))) {
+						if ( preg_match('%\W(svg)$%i', wp_all_import_basename($image_filepath)) or $image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath) and in_array($image_info[2], wp_all_import_supported_image_types())) {
                             $result = true;
                             $logger and call_user_func($logger, sprintf(__('- Image `%s` has been successfully downloaded', 'wp_all_import_plugin'), $url));
 						} else {

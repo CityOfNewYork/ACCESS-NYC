@@ -2,6 +2,7 @@
 
 /**
  * Class WPML_TF_Backend_Hooks_Factory
+ *
  * @author OnTheGoSystems
  */
 class WPML_TF_Backend_Hooks_Factory implements IWPML_Backend_Action_Loader {

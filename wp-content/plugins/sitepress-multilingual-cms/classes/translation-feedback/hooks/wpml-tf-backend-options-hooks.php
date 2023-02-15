@@ -24,10 +24,10 @@ class WPML_TF_Backend_Options_Hooks implements IWPML_Action {
 	/**
 	 * WPML_TF_Backend_Options_Hooks constructor.
 	 *
-	 * @param WPML_TF_Backend_Options_View     $options_view
-	 * @param WPML_TF_Backend_Options_Scripts  $scripts
-	 * @param WPML_TF_Backend_Options_Styles   $styles
-	 * @param WPML_TF_Translation_Service $translation_service
+	 * @param WPML_TF_Backend_Options_View    $options_view
+	 * @param WPML_TF_Backend_Options_Scripts $scripts
+	 * @param WPML_TF_Backend_Options_Styles  $styles
+	 * @param WPML_TF_Translation_Service     $translation_service
 	 */
 	public function __construct(
 		WPML_TF_Backend_Options_View $options_view,

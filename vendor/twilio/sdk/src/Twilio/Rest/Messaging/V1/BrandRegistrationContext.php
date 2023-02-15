@@ -11,13 +11,20 @@ namespace Twilio\Rest\Messaging\V1;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
+use Twilio\ListResource;
+use Twilio\Rest\Messaging\V1\BrandRegistration\BrandVettingList;
 use Twilio\Values;
 use Twilio\Version;
 
 /**
  * PLEASE NOTE that this class contains beta products that are subject to change. Use them with caution.
+ *
+ * @property BrandVettingList $brandVettings
+ * @method \Twilio\Rest\Messaging\V1\BrandRegistration\BrandVettingContext brandVettings(string $brandVettingSid)
  */
 class BrandRegistrationContext extends InstanceContext {
+    protected $_brandVettings;
+
     /**
      * Initialize the BrandRegistrationContext
      *
@@ -43,6 +50,62 @@ class BrandRegistrationContext extends InstanceContext {
         $payload = $this->version->fetch('GET', $this->uri);
 
         return new BrandRegistrationInstance($this->version, $payload, $this->solution['sid']);
+    }
+
+    /**
+     * Update the BrandRegistrationInstance
+     *
+     * @return BrandRegistrationInstance Updated BrandRegistrationInstance
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function update(): BrandRegistrationInstance {
+        $payload = $this->version->update('POST', $this->uri);
+
+        return new BrandRegistrationInstance($this->version, $payload, $this->solution['sid']);
+    }
+
+    /**
+     * Access the brandVettings
+     */
+    protected function getBrandVettings(): BrandVettingList {
+        if (!$this->_brandVettings) {
+            $this->_brandVettings = new BrandVettingList($this->version, $this->solution['sid']);
+        }
+
+        return $this->_brandVettings;
+    }
+
+    /**
+     * Magic getter to lazy load subresources
+     *
+     * @param string $name Subresource to return
+     * @return ListResource The requested subresource
+     * @throws TwilioException For unknown subresources
+     */
+    public function __get(string $name): ListResource {
+        if (\property_exists($this, '_' . $name)) {
+            $method = 'get' . \ucfirst($name);
+            return $this->$method();
+        }
+
+        throw new TwilioException('Unknown subresource ' . $name);
+    }
+
+    /**
+     * Magic caller to get resource contexts
+     *
+     * @param string $name Resource to return
+     * @param array $arguments Context parameters
+     * @return InstanceContext The requested resource context
+     * @throws TwilioException For unknown resource
+     */
+    public function __call(string $name, array $arguments): InstanceContext {
+        $property = $this->$name;
+        if (\method_exists($property, 'getContext')) {
+            return \call_user_func_array(array($property, 'getContext'), $arguments);
+        }
+
+        throw new TwilioException('Resource does not have a context');
     }
 
     /**

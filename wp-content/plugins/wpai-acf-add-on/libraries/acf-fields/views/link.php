@@ -29,6 +29,6 @@
         type="text"
         placeholder=""
         value="<?php echo esc_attr( $current_field['target'] );?>"
-        name="fields<?php echo $field_name; ?>[<?php echo $field['key'];?>][target]" c
-        lass="text widefat rad4"/>
+        name="fields<?php echo $field_name; ?>[<?php echo $field['key'];?>][target]"
+        class="text widefat rad4"/>
 </div>

@@ -1,0 +1,49 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Connect this site to your %s account": [
+            "將此網站關聯到您的帳戶%s"
+         ],
+         "Error": [
+            "錯誤"
+         ],
+         "« Use a different Translation Service": [
+            "« 使用不同的翻譯服務"
+         ],
+         "Authenticate": [
+            "認證"
+         ],
+         "Visit <link_to_service /> to request an API Token. This token allows WPML to connect to <service_name /> to send and receive jobs.": [
+            "存取<link_to_service />以請求API權杖。此權杖允許WPML連線到<service_name />以傳送和接收工作。"
+         ],
+         "Search": [
+            "搜尋"
+         ],
+         "Settings": [
+            "設置"
+         ],
+         "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
+            "當WPML設定為自動翻譯網站內容時，當前無法連線翻譯服務。要使用翻譯服務，請在<LinkToSettingsPage /> 頁面上變更您的翻譯模式。"
+         ],
+         "Documentation": [
+            "文件"
+         ],
+         "Activate": [
+            "激活"
+         ],
+         "Name": [
+            "名稱"
+         ],
+         "Description": [
+            "說明"
+         ],
+         "Ranking": [
+            "排名"
+         ]
+      }
+   }
+}

@@ -73,7 +73,7 @@ class wpconfigBackups extends Check {
 				$code     = wp_remote_retrieve_response_code( $response );
 
 				if ( 200 === $code ) {
-					$this->add_vulnerability( __( 'A publicly accessible wp-config.php backup file  was found in', 'wpscan' ) . " <a href='$url' target='_blank'>$url</a>", 'high', sanitize_title( $path ) );
+					$this->add_vulnerability( __( 'A publicly accessible wp-config.php backup file  was found in', 'wpscan' ) . " <a href='$url' target='_blank'>$url</a>.", 'high', sanitize_title( $path ), 'https://blog.wpscan.com/wordpress-configuration-file-backups/' );
 				}
 			}
 		}

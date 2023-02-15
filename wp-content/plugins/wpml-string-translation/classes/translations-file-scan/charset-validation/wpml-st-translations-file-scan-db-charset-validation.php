@@ -25,7 +25,7 @@ class WPML_ST_Translations_File_Scan_Db_Charset_Validation implements WPML_ST_Tr
 			return false;
 		}
 
-		$chunks     = array();
+		$chunks = array();
 		foreach ( $this->table_list->get_tables() as $table ) {
 			$chunks[] = $this->get_unique_collation_list_from_table( $table );
 		}

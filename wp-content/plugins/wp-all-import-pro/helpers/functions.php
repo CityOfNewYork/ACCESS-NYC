@@ -1,7 +1,81 @@
 <?php
-	
+if( !function_exists('wpai_wp_enqueue_code_editor')){
+function wpai_wp_enqueue_code_editor( $args ) {
+
+	// We need syntax highlighting to work in the plugin regardless of user setting.
+	// Function matches https://developer.wordpress.org/reference/functions/wp_enqueue_code_editor/ otherwise.
+	/*if ( is_user_logged_in() && 'false' === wp_get_current_user()->syntax_highlighting ) {
+		return false;
+	}*/
+
+	$settings = wp_get_code_editor_settings( $args );
+
+	if ( empty( $settings ) || empty( $settings['codemirror'] ) ) {
+		return false;
+	}
+
+	wp_enqueue_script( 'code-editor' );
+	wp_enqueue_style( 'code-editor' );
+
+	if ( isset( $settings['codemirror']['mode'] ) ) {
+		$mode = $settings['codemirror']['mode'];
+		if ( is_string( $mode ) ) {
+			$mode = array(
+				'name' => $mode,
+			);
+		}
+
+		if ( ! empty( $settings['codemirror']['lint'] ) ) {
+			switch ( $mode['name'] ) {
+				case 'css':
+				case 'text/css':
+				case 'text/x-scss':
+				case 'text/x-less':
+					wp_enqueue_script( 'csslint' );
+					break;
+				case 'htmlmixed':
+				case 'text/html':
+				case 'php':
+				case 'application/x-httpd-php':
+				case 'text/x-php':
+					wp_enqueue_script( 'htmlhint' );
+					wp_enqueue_script( 'csslint' );
+					wp_enqueue_script( 'jshint' );
+					if ( ! current_user_can( 'unfiltered_html' ) ) {
+						wp_enqueue_script( 'htmlhint-kses' );
+					}
+					break;
+				case 'javascript':
+				case 'application/ecmascript':
+				case 'application/json':
+				case 'application/javascript':
+				case 'application/ld+json':
+				case 'text/typescript':
+				case 'application/typescript':
+					wp_enqueue_script( 'jshint' );
+					wp_enqueue_script( 'jsonlint' );
+					break;
+			}
+		}
+	}
+
+	wp_add_inline_script( 'code-editor', sprintf( 'jQuery.extend( wp.codeEditor.defaultSettings, %s );', wp_json_encode( $settings ) ) );
+
+	/**
+	 * Fires when scripts and styles are enqueued for the code editor.
+	 *
+	 * @since 4.9.0
+	 *
+	 * @param array $settings Settings for the enqueued code editor.
+	 */
+	do_action( 'wp_enqueue_code_editor', $settings );
+
+	return $settings;
+}
+}
+
 	if ( ! function_exists('pmxi_if') ) {
-		function pmxi_if( $left_condition, $operand = '', $right_condition = '', $then, $else = '' ) {
+		function pmxi_if( $left_condition, $operand, $right_condition, $then, $else = '' ) {
 			$str = trim(implode(' ', array($left_condition, html_entity_decode($operand), $right_condition)));												
 			return (eval ("return ($str);")) ? $then : $else;
 		}		
@@ -199,7 +273,7 @@
     if ( ! function_exists('wp_all_import_update_post_count') ) {
         function wp_all_import_update_post_count() {
             global $wpdb;
-            update_option( 'post_count', (int) $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_status = 'publish' and post_type = 'post'" ) );
+            update_option( 'post_count', (int) $wpdb->get_var( "SELECT COUNT(ID) FROM {$wpdb->posts} WHERE post_status = 'publish' and post_type = 'post'" ), false );
         }
     }
 
@@ -213,3 +287,47 @@
         }
     }
 
+    if ( ! function_exists('wp_all_import_generate_functions_hash') ) {
+        function wp_all_import_generate_functions_hash() {
+            $uploads = wp_upload_dir();
+            $functions_hash = false;
+            $functions_file = $uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
+            if (@file_exists($functions_file)) {
+                $functions_hash = hash_file('md5', $functions_file);
+                // Check functions file from current theme.
+                $theme_functions_file = get_template_directory() . '/functions.php';
+                if (@file_exists($theme_functions_file)) {
+                    $functions_hash .= hash_file('md5', $theme_functions_file);
+                }
+            }
+            return $functions_hash;
+        }
+    }
+
+    if (!function_exists('wp_all_import_is_update_custom_field')) {
+	    function wp_all_import_is_update_custom_field($meta_key, $options) {
+		    if ($options['update_all_data'] == 'yes') {
+			    return TRUE;
+		    }
+		    if (!$options['is_update_custom_fields']) {
+			    return FALSE;
+		    }
+		    if ($options['update_custom_fields_logic'] == "full_update") {
+			    return TRUE;
+		    }
+		    if ($options['update_custom_fields_logic'] == "only"
+		        && !empty($options['custom_fields_list'])
+		        && is_array($options['custom_fields_list'])
+		        && in_array($meta_key, $options['custom_fields_list'])
+		    ) {
+			    return TRUE;
+		    }
+		    if ($options['update_custom_fields_logic'] == "all_except"
+		        && (empty($options['custom_fields_list']) || !in_array($meta_key, $options['custom_fields_list']))
+		    ) {
+			    return TRUE;
+		    }
+
+		    return FALSE;
+	    }
+    }

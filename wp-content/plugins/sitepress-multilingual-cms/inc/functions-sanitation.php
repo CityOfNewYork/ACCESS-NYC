@@ -43,7 +43,7 @@ function wpml_is_valid_hex_color( $input ) {
 		$is_valid = true;
 	} else {
 		$try_rgb2hex = wpml_rgb_to_hex( $input );
-		$is_valid = $try_rgb2hex ? preg_match( '/' . wpml_get_valid_hex_color_pattern() . '/i', $try_rgb2hex ) : false;
+		$is_valid    = $try_rgb2hex ? preg_match( '/' . wpml_get_valid_hex_color_pattern() . '/i', $try_rgb2hex ) : false;
 	}
 
 	return $is_valid;
@@ -65,7 +65,7 @@ function wpml_rgb_to_hex( $rgb ) {
 		return false;
 	}
 
-	$hex = '#';
+	$hex  = '#';
 	$hex .= str_pad( dechex( $rgb[0] ), 2, '0', STR_PAD_LEFT );
 	$hex .= str_pad( dechex( $rgb[1] ), 2, '0', STR_PAD_LEFT );
 	$hex .= str_pad( dechex( $rgb[2] ), 2, '0', STR_PAD_LEFT );

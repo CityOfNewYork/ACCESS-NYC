@@ -7,15 +7,15 @@ use WPML\Core\Twig_Environment;
  * @author OnTheGo Systems
  */
 class WPML_Integrations_Requirements {
-	const NOTICE_GROUP = 'requirements';
-	const CORE_REQ_NOTICE_ID = 'core-requirements';
-	const MISSING_REQ_NOTICE_ID = 'missing-requirements';
-	const EDITOR_NOTICE_ID = 'enable-translation-editor';
-	const DOCUMENTATION_LINK = 'https://wpml.org/documentation/plugins-compatibility/page-builders/';
+	const NOTICE_GROUP                    = 'requirements';
+	const CORE_REQ_NOTICE_ID              = 'core-requirements';
+	const MISSING_REQ_NOTICE_ID           = 'missing-requirements';
+	const EDITOR_NOTICE_ID                = 'enable-translation-editor';
+	const DOCUMENTATION_LINK              = 'https://wpml.org/documentation/translating-your-contents/page-builders/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore';
 	const DOCUMENTATION_LINK_BLOCK_EDITOR = 'https://wpml.org/?page_id=2909360&utm_source=wpmlplugin&utm_campaign=gutenberg&utm_medium=translation-editor&utm_term=translating-content-created-using-gutenberg-editor';
 
 	private $core_issues = array();
-	private $issues = array();
+	private $issues      = array();
 	private $tm_settings;
 	private $should_create_editor_notice = false;
 	private $integrations;
@@ -48,12 +48,7 @@ class WPML_Integrations_Requirements {
 		$this->third_party_dependencies  = $third_party_dependencies;
 		$this->requirements_notification = $requirements_notification;
 		$this->tm_settings               = $this->sitepress->get_setting( 'translation-management' );
-		$this->integrations              = $this->get_integrations();
-
-		if ( $integrations ) {
-			$this->integrations = $integrations;
-		}
-
+		$this->integrations              = $integrations ? $integrations : $this->get_integrations();
 	}
 
 	public function init_hooks() {
@@ -111,10 +106,14 @@ class WPML_Integrations_Requirements {
 	private function update_should_create_editor_notice() {
 		$editor_translation_set =
 			isset( $this->tm_settings['doc_translation_method'] ) &&
-			in_array( (string) $this->tm_settings['doc_translation_method'], array(
-				(string) ICL_TM_TMETHOD_EDITOR,
-				(string) ICL_TM_TMETHOD_ATE
-			), true );
+			in_array(
+				(string) $this->tm_settings['doc_translation_method'],
+				array(
+					(string) ICL_TM_TMETHOD_EDITOR,
+					(string) ICL_TM_TMETHOD_ATE,
+				),
+				true
+			);
 		$requires_tm_editor     = false;
 
 		foreach ( $this->integrations as $integration_item ) {
@@ -161,13 +160,13 @@ class WPML_Integrations_Requirements {
 	}
 
 	private function get_integrations() {
-		$integrations       = new WPML_Integrations( $this->sitepress->get_wp_api() );
+		$integrations = new WPML_Integrations( $this->sitepress->get_wp_api() );
 
 		return $integrations->get_results();
 	}
 
 	/**
-	 * @param $notice_type
+	 * @param string $notice_type
 	 *
 	 * @return array
 	 */
@@ -176,7 +175,7 @@ class WPML_Integrations_Requirements {
 
 		foreach ( $this->integrations as $integration ) {
 			if ( in_array( $notice_type, $integration['notices-display'], true ) &&
-			     ! in_array( $integration['name'], $names, true ) ) {
+				 ! in_array( $integration['name'], $names, true ) ) {
 				$names[] = $integration['name'];
 			}
 		}
@@ -264,8 +263,8 @@ class WPML_Integrations_Requirements {
 
 	/**
 	 * @param WPML_Requirements_Notification $notice_model
-	 * @param WPML_Notices $wpml_admin_notices
-	 * @param WPML_WP_API $wp_api
+	 * @param WPML_Notices                   $wpml_admin_notices
+	 * @param WPML_WP_API                    $wp_api
 	 */
 	private function add_core_requirements_notice( WPML_Requirements_Notification $notice_model, WPML_Notices $wpml_admin_notices, WPML_WP_API $wp_api ) {
 		if ( $this->core_issues ) {
@@ -281,8 +280,8 @@ class WPML_Integrations_Requirements {
 
 	/**
 	 * @param WPML_Requirements_Notification $notice_model
-	 * @param WPML_Notices $wpml_admin_notices
-	 * @param WPML_WP_API $wp_api
+	 * @param WPML_Notices                   $wpml_admin_notices
+	 * @param WPML_WP_API                    $wp_api
 	 */
 	private function add_requirements_notice( WPML_Requirements_Notification $notice_model, WPML_Notices $wpml_admin_notices, WPML_WP_API $wp_api ) {
 		if ( $this->issues ) {
@@ -298,8 +297,8 @@ class WPML_Integrations_Requirements {
 
 	/**
 	 * @param WPML_Requirements_Notification $notice_model
-	 * @param WPML_Notices $wpml_admin_notices
-	 * @param WPML_WP_API $wp_api
+	 * @param WPML_Notices                   $wpml_admin_notices
+	 * @param WPML_WP_API                    $wp_api
 	 */
 	private function add_tm_editor_notice( WPML_Requirements_Notification $notice_model, WPML_Notices $wpml_admin_notices, WPML_WP_API $wp_api ) {
 		if ( $this->should_create_editor_notice ) {
@@ -307,8 +306,8 @@ class WPML_Integrations_Requirements {
 			$requirements_scripts->add_translation_editor_notice_hook();
 
 			$integrations_names = $this->get_integrations_names( 'wpml-translation-editor' );
-			$text   = $notice_model->get_settings( $integrations_names );
-			$notice = new WPML_TM_Editor_Notice( self::EDITOR_NOTICE_ID, $text, self::NOTICE_GROUP );
+			$text               = $notice_model->get_settings( $integrations_names );
+			$notice             = new WPML_TM_Editor_Notice( self::EDITOR_NOTICE_ID, $text, self::NOTICE_GROUP );
 			$notice->set_css_class_types( 'info' );
 
 			$enable_action = new WPML_Notice_Action( _x( 'Enable it now', 'Integration requirement notice title for translation editor: enable action', 'sitepress' ), '#', false, false, true );

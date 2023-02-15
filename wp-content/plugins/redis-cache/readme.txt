@@ -1,20 +1,20 @@
 === Redis Object Cache ===
 Contributors: tillkruess
 Donate link: https://github.com/sponsors/tillkruss
-Tags: redis, predis, phpredis, credis, hhvm, pecl, caching, cache, object cache, performance, replication, clustering, keydb
+Tags: redis, predis, phpredis, credis, hhvm, pecl, relay, caching, cache, object cache, performance, replication, clustering, keydb
 Requires at least: 3.3
-Tested up to: 5.6
+Tested up to: 5.9
 Requires PHP: 5.6
-Stable tag: 2.0.15
+Stable tag: 2.0.25
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-A persistent object cache backend powered by Redis. Supports Predis, PhpRedis, Credis, HHVM, replication, clustering and WP-CLI.
+A persistent object cache backend powered by Redis. Supports Predis, PhpRedis, Credis, Relay, HHVM, replication, clustering and WP-CLI.
 
 
 == Description ==
 
-A persistent object cache backend powered by Redis. Supports [Predis](https://github.com/nrk/predis/), [PhpRedis (PECL)](https://github.com/phpredis/phpredis), [Credis](https://github.com/colinmollenhour/credis), [HHVM](https://github.com/facebook/hhvm/tree/master/hphp/system/php/redis), replication, clustering and [WP-CLI](http://wp-cli.org/).
+A persistent object cache backend powered by Redis. Supports [Predis](https://github.com/predis/predis/), [PhpRedis (PECL)](https://github.com/phpredis/phpredis), [Relay](https://relaycache.com), [Credis](https://github.com/colinmollenhour/credis), [HHVM](https://github.com/facebook/hhvm/tree/master/hphp/system/php/redis), replication, clustering and [WP-CLI](http://wp-cli.org/).
 
 To adjust the connection parameters, prefix cache keys or configure replication/clustering, please see [Other Notes](http://wordpress.org/extend/plugins/redis-cache/other_notes/).
 
@@ -26,13 +26,13 @@ A **business class** Redis object cache backend. Truly reliable, highly optimize
 * 100% WordPress API compliant
 * Faster serialization and compression
 * Easy debugging & logging
-* Cache analytics and preloading
+* Cache prefetching and analytics
 * Fully unit tested (100% code coverage)
 * Secure connections with TLS
 * Health checks via WordPress & WP CLI
 * Optimized for WooCommerce, Jetpack & Yoast SEO
 
-Learn more about [Object Cache Pro](https://objectcache.pro/?utm_source=wp-plugin&amp;utm_medium=readme).
+Learn more about [Object Cache Pro](https://objectcache.pro/?ref=oss&amp;utm_source=wp-plugin&amp;utm_medium=readme).
 
 
 == Installation ==
@@ -63,7 +63,7 @@ Please see the [configuration options wiki page](https://github.com/rhubarbgroup
 
 == Replication & Clustering ==
 
-To use Replication, Sharding or Clustering, make sure your server is running PHP7 or higher (HHVM is not supported) and you consulted the [Predis](https://github.com/nrk/predis) or [PhpRedis](https://github.com/phpredis/phpredis) documentation.
+To use Replication, Sharding or Clustering, make sure your server is running PHP7 or higher (HHVM is not supported) and you consulted the [Predis](https://github.com/predis/predis) or [PhpRedis](https://github.com/phpredis/phpredis) documentation.
 
 Please see the [replication & clustering wiki page](https://github.com/rhubarbgroup/redis-cache/wiki/Replication-&-Clustering) for more information.
 
@@ -82,6 +82,80 @@ To see a list of all available WP-CLI commands, please see the [WP CLI commands 
 
 
 == Changelog ==
+
+= 2.0.25 =
+
+- Removed broken `wp_cache_add_multiple()` function
+
+= 2.0.24 =
+
+- Improve metrics label/tooltip formatting
+- Fix metrics chart not rendering
+- Updated Predis to v1.1.10
+- Updated Credis to v1.13.0
+- Support `composer/installers` v1 and v2
+- Link to settings page when foreign drop-in was found
+- Added `wp_cache_flush_runtime()` function
+- Added `wp_cache_add_multiple()` function
+- Added `wp_cache_delete_multiple()` function
+
+= 2.0.23 =
+
+- Added support for [Relay](https://relaycache.com)
+- Minor UX fixes and improvements
+- Fixed PHP 8.1 deprecation notice
+- Updated ApexCharts to v3.31.0
+
+= 2.0.22 =
+
+- PHP 8.1 compatibility fixes
+- Upgraded to Predis v1.1.9
+- Added settings link to widget
+- Overhauled diagnostics pane
+- Updated ApexCharts to v3.30.0
+- Redirect to plugin settings after activation
+- Fixed wrong path to `diagnostics.php` file
+- Fixed chart overflow in settings tab
+- Fixed Predis cluster ping
+- Avoid warning when content folder is not writeable
+
+= 2.0.21 =
+
+- Added metrics diagnostics
+- Added `WP_Object_Cache::decr()` alias
+- Moved `diagnostics.php` file
+
+= 2.0.20 =
+
+- Fix wp.org release
+
+= 2.0.19 =
+
+- Make metric identifier unique
+- Set unique prefix for sites hosted on Cloudways
+- Don't print HTML debug comment when `WP_CLI` is `true`
+
+= 2.0.18 =
+
+- Added `redis_object_cache_trace` action and `WP_REDIS_TRACE` constant
+- Updated ApexCharts to v3.26.0
+- Fixed and issue with `WP_REDIS_DISABLE_METRICS`
+
+= 2.0.17 =
+
+- Code cleanup
+- Fixed missing metrics
+- Fixed filesystem test
+
+= 2.0.16 =
+
+- Updated Credis to v1.11.4
+- Fixed drop-in notice styling
+- Moved metrics into dedicated class
+- Added `redis_cache_validate_dropin` filter
+- Use `WP_DEBUG_DISPLAY` (instead of `WP_DEBUG`) constant to display debug information
+- Fixed rare error in `wp_cache_get_multiple()`
+- Removed `intval()` usage
 
 = 2.0.15 =
 
@@ -474,6 +548,6 @@ Since Predis isn't maintained any longer, it's highly recommended to switch over
 
 == Upgrade Notice ==
 
-= 2.0.15 =
+= 2.0.25 =
 
-Version 2.0 is a significant rewrite of the plugin. Please read the v2.0.0 release notes.
+Various fixes and improvements.

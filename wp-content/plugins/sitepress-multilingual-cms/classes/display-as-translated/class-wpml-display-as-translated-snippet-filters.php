@@ -29,7 +29,7 @@ class WPML_Display_As_Translated_Snippet_Filters implements IWPML_Action {
 
 	private function is_media_ajax_query( array $post_type ) {
 		return false !== strpos( $_SERVER['REQUEST_URI'], 'admin-ajax' )
-		       && isset( $_REQUEST['action'] ) && 'query-attachments' === $_REQUEST['action']
-		       && array_key_exists( 'attachment', $post_type );
+			   && isset( $_REQUEST['action'] ) && 'query-attachments' === $_REQUEST['action']
+			   && array_key_exists( 'attachment', $post_type );
 	}
 }

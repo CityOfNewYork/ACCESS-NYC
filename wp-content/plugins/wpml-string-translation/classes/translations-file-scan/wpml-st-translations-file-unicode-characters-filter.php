@@ -31,13 +31,13 @@ class WPML_ST_Translations_File_Unicode_Characters_Filter {
 	}
 
 	/**
-	 * @param WPML_ST_Translations_File_Translation $translations
+	 * @param \WPML_ST_Translations_File_Translation $translation
 	 *
 	 * @return bool
 	 */
 	public function is_valid( WPML_ST_Translations_File_Translation $translation ) {
 		if ( preg_match( $this->pattern, $translation->get_original() ) ||
-		     preg_match( $this->pattern, $translation->get_translation() ) ) {
+			 preg_match( $this->pattern, $translation->get_translation() ) ) {
 			return false;
 		}
 

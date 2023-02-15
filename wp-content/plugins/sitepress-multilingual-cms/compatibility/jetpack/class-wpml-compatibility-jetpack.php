@@ -11,14 +11,16 @@ class WPML_Compatibility_Jetpack implements IWPML_Action {
 	public function add_hooks() {
 		add_filter(
 			'publicize_should_publicize_published_post',
-			array( $this, 'publicize_should_publicize_published_post_filter' ), 10, 2
+			array( $this, 'publicize_should_publicize_published_post_filter' ),
+			10,
+			2
 		);
 	}
 
 	/**
 	 * Filter to prevent duplicate post from being publicized.
 	 *
-	 * @param bool $should_publicize Should publicize post.
+	 * @param bool    $should_publicize Should publicize post.
 	 * @param WP_Post $post Post.
 	 *
 	 * @return bool
@@ -31,7 +33,7 @@ class WPML_Compatibility_Jetpack implements IWPML_Action {
 	 * Check if post is a duplicate being created at the moment.
 	 * We cannot use standard method to determine duplicate as post meta '_icl_lang_duplicate_of' is not set yet.
 	 *
-	 * @param $post
+	 * @param \WP_Post $post
 	 *
 	 * @return bool
 	 */

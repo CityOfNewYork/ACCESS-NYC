@@ -1,5 +1,7 @@
 <?php
 
+use WPML\FP\Obj;
+
 class WPML_Custom_Field_XML_Settings_Import {
 
 	/** @var  WPML_Custom_Field_Setting_Factory $setting_factory */
@@ -52,9 +54,7 @@ class WPML_Custom_Field_XML_Settings_Import {
 					if ( isset( $c[ 'attr' ][ 'convert_to_sticky' ] ) ) {
 						$setting->set_convert_to_sticky( (bool) $c[ 'attr' ][ 'convert_to_sticky' ] );
 					}
-					if ( isset( $c[ 'attr' ][ 'encoding' ] ) ) {
-						$setting->set_encoding( $c[ 'attr' ][ 'encoding' ] );
-					}
+					$setting->set_encoding( Obj::path( [ 'attr', 'encoding' ], $c ) );
 				}
 			}
 		}
@@ -83,17 +83,17 @@ class WPML_Custom_Field_XML_Settings_Import {
 			}
 		}
 	}
-	
+
 	private function import_editor_settings( $c, $setting ) {
 		if ( isset( $c[ 'attr' ][ 'style' ] ) ) {
 			$setting->set_editor_style( $c[ 'attr' ][ 'style' ] );
 		}
 		if ( isset( $c[ 'attr' ][ 'label' ] ) ) {
 			$setting->set_editor_label( $c[ 'attr' ][ 'label' ] );
-		}					
+		}
 		if ( isset( $c[ 'attr' ][ 'group' ] ) ) {
 			$setting->set_editor_group( $c[ 'attr' ][ 'group' ] );
-		}					
+		}
 	}
 
 	private function import_custom_field_texts() {

@@ -1,0 +1,508 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "From:": [
+            "Από:"
+         ],
+         "--Choose language--": [
+            "--Επιλογή γλώσσας--"
+         ],
+         "to:": [
+            "σε:"
+         ],
+         "Set language pair(s) for Translator %s:": [
+            "Ορισμός ζεύγους ή ζευγών γλωσσών για μεταφραστή %s:"
+         ],
+         "+ Add more language pairs for this translator": [
+            "+ Προσθήκη περισσότερων ζευγών γλωσσών για αυτόν τον μεταφραστή"
+         ],
+         "First Name": [
+            "Όνομα"
+         ],
+         "Last Name": [
+            "Επίθετο"
+         ],
+         "Role": [
+            "Ρόλος"
+         ],
+         "(required)": [
+            "(υποχρεωτικό)"
+         ],
+         "Make sure that you have provided a correct email address e.g. name@domain.com": [
+            "Φροντίστε να έχετε καταχωρίσει μια σωστή διεύθυνση email, π.χ. name@domain.com"
+         ],
+         "This field is required": [
+            "Αυτό το πεδίο είναι υποχρεωτικό"
+         ],
+         "A translator can be any WordPress role.": [
+            "Ο μεταφραστής μπορεί να έχει οποιονδήποτε ρόλο του WordPress."
+         ],
+         "Username": [
+            "Όνομα χρήστη"
+         ],
+         "Email": [
+            "Email"
+         ],
+         "Search": [
+            "Αναζήτηση"
+         ],
+         "user": [
+            "χρήστη"
+         ],
+         "Editor": [
+            "Επεξεργαστής κειμένου"
+         ],
+         "Select an existing %s and set as Translation Manager": [
+            "Επιλογή ενός νέου %s και ορισμός του ως διαχειριστή μετάφρασης"
+         ],
+         "Create a new %s and set as Translation Manager": [
+            "Δημιουργία ενός νέου %s και ορισμός του ως διαχειριστή μετάφρασης"
+         ],
+         "Cancel": [
+            "Άκυρο"
+         ],
+         "Add Translation Manager": [
+            "Προσθήκη διαχειριστή μετάφρασης"
+         ],
+         "Translate Some": [
+            "Μετάφραση ορισμένων"
+         ],
+         "I want to choose which content to translate": [
+            "Θέλω να επιλέγω ποιο περιεχόμενο θα μεταφράζεται"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "Οι εκκρεμείς αυτόματες μεταφράσεις σας θα ακυρωθούν."
+         ],
+         "Save": [
+            "Αποθήκευση"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "Πηγαίνετε στον <a>πίνακα εργαλείων Διαχείρισης μεταφράσεων</a> για να μεταφράσετε το περιεχόμενό σας"
+         ],
+         "Review the translations before publishing": [
+            "Επιμέλεια μεταφράσεων πριν τη δημοσίευση"
+         ],
+         "Publish translations and review them later": [
+            "Δημοσίευση μεταφράσεων και επιμέλεια αργότερα"
+         ],
+         "Publish translations without reviewing": [
+            "Δημοσίευση μεταφράσεων χωρίς επιμέλεια"
+         ],
+         "When automatic translation completes:": [
+            "Όταν η αυτόματη μετάφραση ολοκληρώνεται, να γίνεται:"
+         ],
+         "Translate Everything": [
+            "Μετάφραση όλων"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "Το WPML θα μεταφράζει αυτόματα περιεχόμενο που δημοσιεύετε ή ενημερώνετε "
+         ],
+         "How do you want to translate this site?": [
+            "Πώς θέλετε να μεταφράζεται αυτός ο ιστότοπος;"
+         ],
+         "Select an existing user and set as Translator": [
+            "Επιλογή ενός τρέχοντος χρήστη και ορισμός ως μεταφραστής"
+         ],
+         "Create a new user and set as Translator": [
+            "Δημιουργία ενός νέου χρήστη και ορισμός του ως μεταφραστής"
+         ],
+         "Set language pair(s)": [
+            "Ορισμός ζεύγους(-ών) γλωσσών"
+         ],
+         "Previous": [
+            "Προηγούμενο"
+         ],
+         "Add a Translator": [
+            "Προσθήκη μεταφραστή"
+         ],
+         "Edit language pair(s) for translator": [
+            "Επεξεργασία ζεύγους(-ών) γλωσσών για μεταφραστή"
+         ],
+         "Name": [
+            "Όνομα"
+         ],
+         "Language Pairs": [
+            "Ζεύγη γλωσσών"
+         ],
+         "You can translate to and from all languages": [
+            "Μπορείτε να μεταφράσετε από και προς όλες τις γλώσσες"
+         ],
+         "%s file upload failed.": [
+            "Απέτυχε το ανέβασμα του αρχείου %s."
+         ],
+         "Flag": [
+            "Σημαία"
+         ],
+         "Flag file": [
+            "Επισήμανση αρχείου"
+         ],
+         "You just added  language. Next, select it as the site's default language or a translation language.": [
+            "Μόλις προσθέσατε τη γλώσσα. Στη συνέχεια, επιλέξτε την ως προεπιλεγμένη γλώσσα του ιστότοπου ή ως γλώσσα μετάφρασης."
+         ],
+         "Language added": [
+            "Προστέθηκε γλώσσα"
+         ],
+         "The value \"%s\" already exists": [
+            "Η τιμή \"%s\" υπάρχει ήδη"
+         ],
+         "Add a new language": [
+            "Προσθήκη νέας γλώσσας"
+         ],
+         "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
+            "Δημιουργήστε μια γλώσσα συγκεκριμένης χώρας, επιλέγοντας τη γενική γλώσσα από την παρακάτω λίστα και, έπειτα, τη χώρα για την οποία θα πρέπει να τοπικοποιηθεί."
+         ],
+         "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
+            "Επιλέγοντας έναν συνδυασμό που υπάρχει ήδη στη βάση δεδομένων, το WPML μπορεί να βοηθήσει με τη συμπλήρωση των απαραίτητων πεδίων. Διαβάστε περισσότερα για το θέμα <AddingACustomLanguageLink />."
+         ],
+         "Cannot find?": [
+            "Δεν τη βρίσκετε;"
+         ],
+         "Click here": [
+            "Κάντε κλικ εδώ"
+         ],
+         "The name of your language as it will appear on your site's language switcher.": [
+            "Το όνομα της γλώσσας σας θα εμφανιστεί στον εναλλαγέα γλώσσας του ιστότοπού σας."
+         ],
+         "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
+            "Λάθος μορφή. Μπορεί να περιέχει μόνο πεζά γράμματα και \"-\". Π.χ.: \"fr\" , \"pt-br\", \"zh-hans\"."
+         ],
+         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "Μια μοναδική τιμή που προσδιορίζει τη γλώσσα στη βάση δεδομένων και το URL. Αφού αποθηκευτεί, ο κωδικός γλώσσας δεν μπορεί να αλλάξει."
+         ],
+         "Language": [
+            "Γλώσσα"
+         ],
+         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "Αν η προσαρμοσμένη γλώσσα είναι παρόμοια με μια υπάρχουσα γλώσσα, μπορείτε να χρησιμοποιήσετε τον ορθογραφικό έλεγχο και την αυτόματη μετάφραση της υπάρχουσας γλώσσας. Για παράδειγμα, αν η προσαρμοσμένη γλώσσα είναι τα Ελβετικά-Γερμανικά, μπορείτε να αντιστοιχίσετε τα Γερμανικά ως γλώσσα που θα χρησιμοποιείται για ορθογραφικό έλεγχο και αυτόματη μετάφραση. Αν δεν αντιστοιχίσετε την προσαρμοσμένη γλώσσα σε μια υπάρχουσα γλώσσα, ο ορθογραφικός έλεγχος και η αυτόματη μετάφραση δεν θα είναι διαθέσιμα στη συγκεκριμένη γλώσσα. "
+         ],
+         "Location": [
+            "Τοποθεσία"
+         ],
+         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "Η τιμή που ελέγχει το WPML κατά τη φόρτωση μεταφράσεων από αρχεία MO και PO. Η προεπιλεγμένη τοποθεσία περιλαμβάνεται στα ονόματα αρχείων  στον φάκελο /wp-content/languages/ της διαμόρφωσης WordPress."
+         ],
+         "Code": [
+            "Κωδικός"
+         ],
+         "The language will not be supported by automatic translations": [
+            "Η γλώσσα δεν θα υποστηρίζεται από αυτόματες μεταφράσεις"
+         ],
+         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "Το Google χρησιμοποιεί την ιδιότητα hreflang για να κατευθύνει τους χρήστες σε ιστότοπους στη δική τους γλώσσα και τοποθεσία. Παραδείγματα:"
+         ],
+         "Language mapping": [
+            "Αντιστοίχιση γλωσσών"
+         ],
+         "All English-speaking users: en": [
+            "Όλοι οι αγγλόφωνοι χρήστες: en"
+         ],
+         "Don't map this language": [
+            "Να μην αντιστοιχιστεί αυτή η γλώσσα"
+         ],
+         "English for UK users: en-gb": [
+            "Αγγλικά για χρήστες στο ΗΒ: en-gb"
+         ],
+         "Default locale": [
+            "Προεπιλεγμένες τοπικές ρυθμίσεις"
+         ],
+         "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
+            "Λάθος μορφή. Μπορεί να περιέχει μόνο πεζά γράμματα και \"_\". Π.χ.: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+         ],
+         "English for US users: en-us": [
+            "Αγγλικά για χρήστες στις ΗΠΑ: en-us"
+         ],
+         "hreflang": [
+            "hreflang"
+         ],
+         "Encode url?": [
+            "Να γίνει κωδικοποίηση του URL;"
+         ],
+         "NO": [
+            "ΟΧΙ"
+         ],
+         "YES": [
+            "ΝΑΙ"
+         ],
+         " (required)": [
+            " (υποχρεωτικό)"
+         ],
+         "Please fill in the field": [
+            "Συμπληρώστε το πεδίο"
+         ],
+         "Save language": [
+            "Αποθήκευση γλώσσας"
+         ],
+         "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
+            "Καθορίζει εάν τα URL σε αυτήν τη γλώσσα κωδικοποιούνται ή χρησιμοποιούν χαρακτήρες ASCII (αν δεν γνωρίζετε με βεβαιότητα, αφήστε την επιλογή \"Όχι\")."
+         ],
+         "adding a custom language": [
+            "προσθήκη προσαρμοσμένης γλώσσας"
+         ],
+         "Learn more about required server settings to use a different domain per language": [
+            "Μάθετε περισσότερα σχετικά με τις ρυθμίσεις διακομιστή που απαιτούνται για τη χρήση διαφορετικού τομέα ανά γλώσσα"
+         ],
+         "Language name added as a parameter": [
+            "Το όνομα γλώσσας προστεθημένο ως παράμετρος"
+         ],
+         "I will set up the domains for my secondary languages later.": [
+            "Θα ρυθμίσω τους τομείς για τις δευτερεύουσες γλώσσες αργότερα."
+         ],
+         "The domain you have entered is invalid.": [
+            "Ο τομέας που καταχωρίσατε δεν είναι έγκυρος."
+         ],
+         "The domain you have entered must be unique.": [
+            "Ο τομέας που καταχωρίσατε πρέπει να είναι μοναδικός."
+         ],
+         "Please Note: Your site won't work in your secondary languages until this is successfully set up or you switch to a different URL option.": [
+            "Σημειώστε: Ο ιστότοπός σας δεν λειτουργεί στις δευτερεύουσες γλώσσες, μέχρι να ρυθμιστεί επιτυχώς ή να κάνετε άλλη επιλογή URL."
+         ],
+         "Learn more about Language URL Options": [
+            "Μάθετε περισσότερα για τις επιλογές URL γλωσσών"
+         ],
+         "How would you like to format your site's URL?": [
+            "Πώς θέλετε να μορφοποιείται το URL του ιστότοπού σας;"
+         ],
+         "Different languages in directories": [
+            "Διαφορετικές γλώσσες στους καταλόγους"
+         ],
+         "The URL rewrite is not configured in your server.": [
+            "Η επανεγγραφή URL δεν έχει ρυθμιστεί στον διακομιστή σας."
+         ],
+         "Learn more about required server settings to display languages in directories": [
+            "Μάθετε περισσότερα σχετικά με τις απαραίτητες ρυθμίσεις διακομιστή για την εμφάνιση γλωσσών σε καταλόγους"
+         ],
+         "I will fix my server settings to display languages in directories later.": [
+            "Θα φτιάξω τις ρυθμίσεις διακομιστή για την εμφάνιση γλωσσών σε καταλόγους αργότερα."
+         ],
+         "Your server settings do not allow for languages in directories. ": [
+            "Οι ρυθμίσεις διακομιστή σας δεν επιτρέπουν την εμφάνιση γλωσσών σε καταλόγους."
+         ],
+         "Learn more about the required server settings.": [
+            "Μάθετε περισσότερα σχετικά με τις απαραίτητες ρυθμίσεις διακομιστή."
+         ],
+         "A different domain per language": [
+            "Διαφορετικός τομέας ανά γλώσσα"
+         ],
+         "There was a critical error setting up WPML. Please contact our <LinkToSupportForum /> to resolve it.": [
+            "Προέκυψε κρίσιμο σφάλμα κατά τη διαμόρφωση του WPML. Επικοινωνήστε με το <LinkToSupportForum /> για επίλυσή του."
+         ],
+         "Hide error message": [
+            "Απόκρυψη μηνύματος σφάλματος"
+         ],
+         "Show error message": [
+            "Εμφάνιση μηνύματος σφάλματος"
+         ],
+         "View the status of the translations in <s>WPML → Translation Management</s>.": [
+            "Δείτε την κατάσταση των μεταφράσεων στο <s>WPML → Διαχείριση μεταφράσεων</s>."
+         ],
+         "WPML has started translating your site": [
+            "Το WPML άρχισε να μεταφράζει τον ιστότοπό σας"
+         ],
+         "Go to <s>WPML → Translation Management</s> to choose what to translate.": [
+            "Πηγαίνετε στο <s>WPML → Διαχείριση μεταφράσεων</s> για να επιλέξετε τι θα μεταφραστεί."
+         ],
+         "You are ready to start translating": [
+            "Όλα έτοιμα για έναρξη μετάφρασης"
+         ],
+         "Right now, your site has a nice language switcher in its footer. To enable other styles of language switchers, go to <s>WPML → Languages</s>.": [
+            "Αυτήν τη στιγμή, ο ιστότοπός σας έχει έναν όμορφο εναλλαγέα γλώσσας στο υποσέλιδό του. Για να ενεργοποιήσετε διαφορετικά στυλ εναλλαγεων γλώσσας, πηγαίνετε στο <s>WPML → Γλώσσες</s>."
+         ],
+         "Language switcher customization": [
+            "Προσαρμογή εναλλαγέα γλώσσας"
+         ],
+         "support forum": [
+            "φόρουμ υποστήριξης"
+         ],
+         "Default language": [
+            "Προεπιλεγμένη γλώσσα"
+         ],
+         "What is the current language of your website?": [
+            "Ποια είναι η τρέχουσα γλώσσα του ιστότοπού σας;"
+         ],
+         "Translation languages": [
+            "Γλώσσες μετάφρασης"
+         ],
+         "Which languages do you want to translate your site into?": [
+            "Σε ποιες γλώσσες θέλετε να μεταφράσετε τον ιστότοπό σας;"
+         ],
+         "If you cannot find languages that you need in the list": [
+            "Αν δεν μπορείτε να βρείτε γλώσσες που χρειάζεστε στη λίστα,"
+         ],
+         "create a custom language": [
+            "δημιουργήστε μια προσαρμοσμένη γλώσσα"
+         ],
+         "What are the languages of your site?": [
+            "Ποιες είναι οι γλώσσες του ιστότοπού σας;"
+         ],
+         "If you don't have a WPML.org account or a valid subscription, %1$spurchase one%2$s to get automatic updates, full support, and a 30-day money-back guarantee.": [
+            "Αν δεν έχετε λογαριασμό ή έγκυρη συνδρομή WPML.org , %1$sαγοράστε ένα%2$s για να λάβετε αυτόματες ενημερώσεις, πλήρη υποστήριξη και μια εγγύηση επιστροφής χρημάτων 30 ημερών."
+         ],
+         "Already purchased WPML?": [
+            "Έχετε ήδη αγοράσει το WPML;"
+         ],
+         "Enter your site key from your WPML account to receive automatic updates.": [
+            "Καταχωρίστε το κλειδί ιστοτόπου από τον λογαριασμό σας WPML, για να λαμβάνετε αυτόματες ενημερώσεις."
+         ],
+         "Site key": [
+            "Κλειδί ιστοτόπου"
+         ],
+         "Get a key for this site": [
+            "Αποκτήστε ένα κλειδί για αυτόν τον ιστότοπο"
+         ],
+         "Improve your site’s translations using helpful plugins": [
+            "Βελτιώστε τις μεταφράσεις του ιστοτόπου σας με χρήσιμες προσθήκες"
+         ],
+         "Based on the themes and other plugins running on your site, we recommend that you enable the following WPML components. These are included with your WPML purchase and allow you to translate strings, media, admin texts, and more.": [
+            "Με βάσει τα θέματα και άλλες προσθήκες που εκτελούνται στον ιστότοπό σας, προτείνουμε να ενεργοποιήσετε τα εξής στοιχεία του WPML. Αυτά περιλαμβάνονται στην αγορά του WPML και σας επιτρέπουν να μεταφράζετε συμβολοσειρές, πολυμέσα, διαχειριστικά κείμενα και άλλα πολλά."
+         ],
+         "Error in activating plugin.": [
+            "Σφάλμα κατά την ενεργοποίηση προσθήκης."
+         ],
+         "Error in installing plugin.": [
+            "Σφάλμα κατά την εγκατάσταση προσθήκης."
+         ],
+         "Yes, send theme and plugins information, in order to get faster support and compatibility alerts": [
+            "Ναι, να γίνεται αποστολή στοιχείων θεμάτων και προσθηκών, ώστε να λαμβάνω πιο γρήγορα υποστήριξη και ειδοποιήσεις συμβατότητας"
+         ],
+         "No, don't send this information and skip compatibility alerts": [
+            "Όχι, να μην γίνεται αποστολή αυτών των στοιχείων και να παραλείπονται οι ειδοποιήσεις συμβατότητας"
+         ],
+         "Do you want to get better and faster support?": [
+            "Θέλετε να λαμβάνετε καλύτερη και γρηγορότερη υποστήριξη;"
+         ],
+         "The WPML plugin can send a list of active plugins and theme used in your site to wpml.org. This allows our support team to help you much faster and to contact you in advance about potential compatibility problems and their solutions.": [
+            "Η προσθήκη WPML μπορεί να στείλει έναν κατάλογο ενεργών προσθηκών και θεμάτων που χρησιμοποιούνται στον ιστότοπό σας στο wpml.org. Αυτό επιτρέπει στην ομάδα υποστήριξής μας να σας εξυπηρετεί πολύ πιο γρήγορα και να επικοινωνεί μαζί σας εκ των προτέρων σχετικά με πιθανά προβλήματα συμβατότητας και τις λύσεις τους."
+         ],
+         "Privacy and data usage policy": [
+            "Πολιτική απορρήτου και χρήσης δεδομένων"
+         ],
+         "Only myself (%s)": [
+            "Μόνο εγώ (%s)"
+         ],
+         "You will be the sole translator for this site. You will be able to translate any document between any language pair. If you want to do some of the translations and allow others to translate as well, select the \"Users of this site\" option instead.": [
+            "Θα είστε αποκλειστικός μεταφραστής για αυτόν τον ιστότοπο.  Θα μπορείτε να μεταφράσετε κάθε έγγραφο σε οποιοδήποτε γλωσσικό ζεύγος. Αν θέλετε να κάνετε ορισμένες από τις μεταφράσεις και να επιτρέπετε και σε άλλους να μεταφράζουν, επιλέξετε \"Χρήστες αυτού του ιστότοπου\"."
+         ],
+         "Individual translators": [
+            "Μεμονωμένοι μεταφραστές"
+         ],
+         "You will choose or create new users of this WordPress site as the translators. You can also choose yourself. This allows you to set up a team of translators working in different language pairs.": [
+            "Ως μεταφραστές θα εεπιλέξετε ή θα δημιουργήσετε νέους χρήστες αυτού του ιστοτόπου WordPress. Μπορείτε επίσης να επιλέξετε τον εαυτό σας, επιτρέποντάς σας έτσι να διαμορφώσετε μια ομάδα μεταφραστών που εργάζονται σε διαφορετικά γλωσσικά ζεύγη."
+         ],
+         "A Professional Translation Service": [
+            "Μια υπηρεσία επαγγελματικής μετάφρασης"
+         ],
+         "WPML offers tight integration with over 70 translation services. You will choose the translation service that you prefer and enjoy a streamlined process for sending jobs and receiving completed translations.": [
+            "Το WPML προσφέρει συμπιεσμένη ενσωμάτωση με περισσότερες από 70 μεταφραστικές υπηρεσίες. Θα επιλέξετε τη μεταφραστική υπηρεσία της προτίμησής σας και θα απολαύσετε μια βελτιστοποιημένη διαδικασία αποστολής εργασιών και λήψης ολοκληρωμένων μεταφράσεων."
+         ],
+         "I want to set a \"Translation Manager\" who will choose the translators for this site": [
+            "Θέλω να ορίσω έναν \"Διαχειριστή μεταφράσεων\" που θα επιλέξει τους μεταφραστές για αυτόν τον ιστότοπο"
+         ],
+         "You will choose a user of this site and delegate the setup of translators to him/her. Choose this option when you are building a website for a client, who will set up translator users or choose a translation service.": [
+            "Θα επιλέξετε έναν χρήστη αυτού του ιστοχώρου και θα αναθέσετε σε αυτόν την ομάδα μεταφραστών. Επιλέξτε αυτή την επιλογή όταν δημιουργείτε έναν ιστότοπο για έναν πελάτη, ο οποίος θα ορίσει τους χρήστες μεταφραστές ή θα επιλέξει μια μεταφραστική υπηρεσία."
+         ],
+         "Learn more about <LinkToTheDifferentWaysYouCanTranslateYourSite/>.": [
+            "Μάθετε περισσότερα για <LinkToTheDifferentWaysYouCanTranslateYourSite/>."
+         ],
+         "the different ways you can translate your site with WPML": [
+            "τους διαφορετικούς τρόπους που μπορείτε να μεταφράσετε τον ιστότοπό σας με το WPML"
+         ],
+         "Who will translate?": [
+            "Ποιος θα μεταφράζει;"
+         ],
+         "Connect this site to <service_name />": [
+            "Συνδέστε αυτόν τον ιστότοπο με την υπηρεσία <service_name />"
+         ],
+         "Error: %s": [
+            "Σφάλμα: %s"
+         ],
+         "Use a different Translation Service": [
+            "Χρήση διαφορετικής Μεταφραστικής Υπηρεσίας"
+         ],
+         "Authenticate": [
+            "Έλεγχος ταυτότητας"
+         ],
+         "Choose a Translation Service": [
+            "Επιλογή Μεταφραστικής Υπηρεσίας"
+         ],
+         "Loading": [
+            "Φόρτωση"
+         ],
+         "+ Add a Translation Manager": [
+            "+ Προσθήκη Διαχειριστή μεταφράσεων"
+         ],
+         "+ Add a Translator": [
+            "+ Προσθήκη μεταφραστή"
+         ],
+         "A new language could not be added correctly": [
+            "Δεν ήταν εφικτή η προσθήκη νέας γλώσσας"
+         ],
+         "Languages": [
+            "Γλώσσες"
+         ],
+         "URL Format": [
+            "Μορφή URL"
+         ],
+         "Register WPML": [
+            "Εγγραφή WPML"
+         ],
+         "Translation": [
+            "Μετάφραση"
+         ],
+         "Support": [
+            "Υποστήριξη"
+         ],
+         "Plugins": [
+            "Προσθήκες"
+         ],
+         "Finished": [
+            "Ολοκληρώθηκε"
+         ],
+         "Back": [
+            "Πίσω"
+         ],
+         "Continue": [
+            "Συνέχεια"
+         ],
+         "Skip": [
+            "Παράλειψη"
+         ],
+         "Install and activate": [
+            "Εγκατάσταση και ενεργοποίηση"
+         ],
+         "Finish": [
+            "Τέλος"
+         ],
+         "Visit <link_to_service /> to request an API Token. This token allows WPML to connect to <service_name /> to send and receive jobs.": [
+            "Επισκεφτείτε την υπηρεσία <link_to_service /> για να ζητήσετε ένα διακριτικό API. Αυτό το διακριτικό επιτρέπει στο WPML να συνδέεται στην υπηρεσία <service_name />, ώστε να στέλνει και να λαμβάνει εργασίες."
+         ],
+         "Settings": [
+            "Ρυθμίσεις"
+         ],
+         "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
+            "Προς το παρόν, δεν είναι εφικτή η σύνδεση μιας μεταφραστικής υπηρεσίας, όταν το WPML έχει οριστεί να μεταφράζει αυτόματα το περιεχόμενο του ιστοτόπου σας. Για να χρησιμοποιήσετε μια μεταφραστική υπηρεσία, αλλάξτε τη μεταφραστική λειτουργία στη σελίδα <LinkToSettingsPage />."
+         ],
+         "Error: ": [
+            "Σφάλμα:"
+         ],
+         "Documentation": [
+            "Τεκμηρίωση"
+         ],
+         "Deactivate": [
+            "Απενεργοποίηση"
+         ],
+         "Activate": [
+            "Ενεργοποίηση"
+         ],
+         "Description": [
+            "Περιγραφή"
+         ],
+         "Ranking": [
+            "Κατάταξη"
+         ]
+      }
+   }
+}

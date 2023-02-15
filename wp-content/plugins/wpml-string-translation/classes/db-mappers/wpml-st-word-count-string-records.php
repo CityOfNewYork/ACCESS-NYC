@@ -118,7 +118,7 @@ class WPML_ST_Word_Count_String_Records {
 		}
 
 		$query = "SELECT id FROM {$this->wpdb->prefix}icl_strings
-				  WHERE string_package_id IN(" . wpml_prepare_in( $package_ids ) . ")";
+				  WHERE string_package_id IN(" . wpml_prepare_in( $package_ids ) . ')';
 
 		return array_map( 'intval', $this->wpdb->get_col( $query ) );
 	}

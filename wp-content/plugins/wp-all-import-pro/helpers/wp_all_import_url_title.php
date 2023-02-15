@@ -1,15 +1,11 @@
 <?php
 if ( ! function_exists('wp_all_import_url_title')){
 
-	function wp_all_import_url_title($str, $separator = 'dash', $lowercase = FALSE)
-	{
-		if ($separator == 'dash')
-		{
+	function wp_all_import_url_title($str, $separator = 'dash', $lowercase = FALSE) {
+		if ($separator == 'dash') {
 			$search		= '_';
 			$replace	= '-';
-		}
-		else
-		{
+		} else {
 			$search		= '-';
 			$replace	= '_';
 		}
@@ -27,13 +23,11 @@ if ( ! function_exists('wp_all_import_url_title')){
 
 		$str = strip_tags($str);
 
-		foreach ($trans as $key => $val)
-		{
+		foreach ($trans as $key => $val) {
 			$str = preg_replace("#".$key."#i", $val, $str);
 		}
 
-		if ($lowercase === TRUE)
-		{
+		if ($lowercase === TRUE) {
 			$str = strtolower($str);
 		}
 

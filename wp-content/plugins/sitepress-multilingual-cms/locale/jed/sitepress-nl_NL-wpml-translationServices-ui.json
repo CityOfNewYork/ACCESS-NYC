@@ -1,0 +1,49 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Connect this site to your %s account": [
+            "Sluit deze site aan op uw %s account"
+         ],
+         "Error": [
+            "Fout"
+         ],
+         "« Use a different Translation Service": [
+            "« Gebruik een andere vertaalservice"
+         ],
+         "Authenticate": [
+            "Authentiseren \r\n"
+         ],
+         "Visit <link_to_service /> to request an API Token. This token allows WPML to connect to <service_name /> to send and receive jobs.": [
+            "Bezoek <link_to_service /> om een API-token aan te vragen. Met dit token kan WPML verbinding maken met <service_name /> om opdrachten te verzenden en te ontvangen."
+         ],
+         "Search": [
+            "Zoeken"
+         ],
+         "Settings": [
+            "Instellingen"
+         ],
+         "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
+            "Het is momenteel niet mogelijk om een vertaalservice aan te sluiten als WPML is ingesteld om de inhoud van je site automatisch te vertalen. Als je een vertaalservice wilt gebruiken, verander dan je vertaalmodus op de <LinkToSettingsPage /> pagina."
+         ],
+         "Documentation": [
+            "Documentatie"
+         ],
+         "Activate": [
+            "Activeren"
+         ],
+         "Name": [
+            "Naam"
+         ],
+         "Description": [
+            "Beschrijving"
+         ],
+         "Ranking": [
+            "Ranking"
+         ]
+      }
+   }
+}

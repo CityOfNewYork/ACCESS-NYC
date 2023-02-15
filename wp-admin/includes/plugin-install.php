@@ -136,7 +136,7 @@ function plugins_api( $action, $args = array() ) {
 	/**
 	 * Filters the response for the current WordPress.org Plugin Installation API request.
 	 *
-	 * Passing a non-false value will effectively short-circuit the WordPress.org API request.
+	 * Returning a non-false value will effectively short-circuit the WordPress.org API request.
 	 *
 	 * If `$action` is 'query_plugins' or 'plugin_information', an object MUST be passed.
 	 * If `$action` is 'hot_tags' or 'hot_categories', an array should be passed.
@@ -689,7 +689,7 @@ function install_plugin_information() {
 						_nx( '%s+ Million', '%s+ Million', $active_installs_millions, 'Active plugin installations' ),
 						number_format_i18n( $active_installs_millions )
 					);
-				} elseif ( 0 == $api->active_installs ) {
+				} elseif ( $api->active_installs < 10 ) {
 					_ex( 'Less Than 10', 'Active plugin installations' );
 				} else {
 					echo number_format_i18n( $api->active_installs ) . '+';
@@ -697,7 +697,7 @@ function install_plugin_information() {
 				?>
 				</li>
 			<?php } if ( ! empty( $api->slug ) && empty( $api->external ) ) { ?>
-				<li><a target="_blank" href="<?php echo __( 'https://wordpress.org/plugins/' ) . $api->slug; ?>/"><?php _e( 'WordPress.org Plugin Page &#187;' ); ?></a></li>
+				<li><a target="_blank" href="<?php echo esc_url( __( 'https://wordpress.org/plugins/' ) . $api->slug ); ?>/"><?php _e( 'WordPress.org Plugin Page &#187;' ); ?></a></li>
 			<?php } if ( ! empty( $api->homepage ) ) { ?>
 				<li><a target="_blank" href="<?php echo esc_url( $api->homepage ); ?>"><?php _e( 'Plugin Homepage &#187;' ); ?></a></li>
 			<?php } if ( ! empty( $api->donate_link ) && empty( $api->contributors ) ) { ?>
@@ -880,7 +880,7 @@ function install_plugin_information() {
 				break;
 			case 'newer_installed':
 				/* translators: %s: Plugin version. */
-				echo '<a class="button button-primary right disabled">' . sprintf( __( 'Newer Version (%s) Installed' ), $status['version'] ) . '</a>';
+				echo '<a class="button button-primary right disabled">' . sprintf( __( 'Newer Version (%s) Installed' ), esc_html( $status['version'] ) ) . '</a>';
 				break;
 			case 'latest_installed':
 				echo '<a class="button button-primary right disabled">' . __( 'Latest Version Installed' ) . '</a>';

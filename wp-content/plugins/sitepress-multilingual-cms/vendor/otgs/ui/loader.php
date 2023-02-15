@@ -22,7 +22,7 @@
 /**
  * OTGS UI version - increase after every major update.
  */
-$otg_ui_version = 109;
+$otg_ui_version = 111;
 
 /**
  * =================
@@ -89,7 +89,7 @@ if ( ! function_exists( 'otgs_ui_plugins_loaded' ) ) {
 			}
 		}
 
-		if ( $latest > 0 ) {
+		if ( $latest > 0 && isset( $otg_ui_versions[ $latest ]['url'] ) ) {
 			// Require all the available classes: we need to overcome autoloaders!!
 			require_once $otg_ui_versions[ $latest ]['path'] . '/src/php/OTGS_Assets_Handles.php';
 			require_once $otg_ui_versions[ $latest ]['path'] . '/src/php/OTGS_Assets_Store.php';

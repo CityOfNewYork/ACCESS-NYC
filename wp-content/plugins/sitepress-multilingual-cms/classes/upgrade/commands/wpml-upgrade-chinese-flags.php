@@ -24,9 +24,10 @@ class WPML_Upgrade_Chinese_Flags implements IWPML_Upgrade_Command {
 		if ( $flags ) {
 			foreach ( $flags as $flag ) {
 				if ( $this->must_update( $flag ) ) {
-					$this->wpdb->update( $this->wpdb->prefix . 'icl_flags',
+					$this->wpdb->update(
+						$this->wpdb->prefix . 'icl_flags',
 						array(
-							'flag' => 'zh.png'
+							'flag' => 'zh.png',
 						),
 						array( 'id' => $flag->id ),
 						array( '%s' ),

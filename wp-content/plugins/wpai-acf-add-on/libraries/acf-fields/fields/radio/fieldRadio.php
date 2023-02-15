@@ -93,10 +93,10 @@ class FieldRadio extends Field {
      *
      * @return int
      */
-    public function getCountValues() {
+    public function getCountValues($parentIndex = false) {
         $count = 0;
         if ("yes" !== $this->getOption('is_multiple_field')){
-            $count = parent::getCountValues();
+            $count = parent::getCountValues($parentIndex);
         }
         return $count;
     }

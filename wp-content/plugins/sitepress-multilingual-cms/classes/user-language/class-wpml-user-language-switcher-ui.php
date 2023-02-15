@@ -8,6 +8,14 @@ use WPML\Core\Twig_Environment;
  * @subpackage wpml-user-language
  */
 class WPML_User_Language_Switcher_UI {
+	/**
+	 * @var \WPML_User_Language_Switcher
+	 */
+	private $user_language_switcher;
+	/**
+	 * @var \WPML_User_Language_Switcher_Resources
+	 */
+	private $resources;
 
 	/**
 	 * WPML_User_Language_Switcher_UI constructor.
@@ -15,11 +23,20 @@ class WPML_User_Language_Switcher_UI {
 	 * @param WPML_User_Language_Switcher           $WPML_User_Language_Switcher
 	 * @param WPML_User_Language_Switcher_Resources $WPML_User_Language_Switcher_Resources
 	 */
-	public function __construct( &$WPML_User_Language_Switcher, &$WPML_User_Language_Switcher_Resources ) {
-		$this->user_language_switcher = &$WPML_User_Language_Switcher;
-		$this->resources              = &$WPML_User_Language_Switcher_Resources;
+	public function __construct( $WPML_User_Language_Switcher, $WPML_User_Language_Switcher_Resources ) {
+		$this->user_language_switcher = $WPML_User_Language_Switcher;
+		$this->resources              = $WPML_User_Language_Switcher_Resources;
 	}
 
+	/**
+	 * @param array<string,mixed> $args
+	 * @param array<string,mixed> $model
+	 *
+	 * @return string
+	 * @throws \WPML\Core\Twig\Error\LoaderError
+	 * @throws \WPML\Core\Twig\Error\RuntimeError
+	 * @throws \WPML\Core\Twig\Error\SyntaxError
+	 */
 	public function language_switcher( $args, $model ) {
 		$this->resources->enqueue_scripts( $args );
 
@@ -27,9 +44,12 @@ class WPML_User_Language_Switcher_UI {
 	}
 
 	/**
-	 * @param array $model
+	 * @param array<string,mixed> $model
 	 *
 	 * @return string
+	 * @throws \WPML\Core\Twig\Error\LoaderError
+	 * @throws \WPML\Core\Twig\Error\RuntimeError
+	 * @throws \WPML\Core\Twig\Error\SyntaxError
 	 */
 	protected function get_view( $model ) {
 		$template_paths = array(

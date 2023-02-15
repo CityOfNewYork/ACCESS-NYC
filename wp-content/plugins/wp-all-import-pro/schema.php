@@ -93,8 +93,8 @@ CREATE TABLE {$table_prefix}files (
 CREATE TABLE {$table_prefix}images (
 	id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,	
 	attachment_id BIGINT(20) UNSIGNED NOT NULL,
-	image_url VARCHAR(600) NOT NULL DEFAULT '',
-	image_filename VARCHAR(600) NOT NULL DEFAULT '',	
+	image_url TEXT NOT NULL DEFAULT '',
+	image_filename TEXT NOT NULL DEFAULT '',	
 	PRIMARY KEY  (id)
 ) $charset_collate;
 CREATE TABLE {$table_prefix}history (
@@ -105,5 +105,12 @@ CREATE TABLE {$table_prefix}history (
 	date DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',		
 	summary TEXT,
 	PRIMARY KEY  (id)
+) $charset_collate;
+CREATE TABLE {$table_prefix}hash (
+	hash BINARY(16) NOT NULL,
+	post_id BIGINT(20) UNSIGNED NOT NULL,
+	import_id SMALLINT(5) UNSIGNED NOT NULL,
+	post_type VARCHAR(32) NOT NULL DEFAULT '',
+	PRIMARY KEY  (hash)
 ) $charset_collate;
 SCHEMA;

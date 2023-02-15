@@ -64,6 +64,14 @@ class WPML_Sync_Custom_Fields {
 		}
 
 		$added = array_diff( $values_from, $values_to );
+
+		$args = [
+			'values_from' => $values_from,
+			'values_to'   => $values_to,
+			'removed'     => $removed,
+			'added'       => $added,
+		];
+
 		foreach ( $added as $v ) {
 			$copied_value = maybe_unserialize( $v );
 
@@ -74,10 +82,11 @@ class WPML_Sync_Custom_Fields {
 			 * @param int    $post_id_from The ID of the source post.
 			 * @param int    $post_id_to   The ID of the destination post.
 			 * @param string $meta_key     The key of the post meta being copied.
+			 * @param array  $args         The internal parameters.
 			 *
 			 * @since 4.3.0
 			 */
-			$copied_value = apply_filters( 'wpml_sync_custom_field_copied_value', $copied_value, $post_id_from, $post_id_to, $meta_key );
+			$copied_value = apply_filters( 'wpml_sync_custom_field_copied_value', $copied_value, $post_id_from, $post_id_to, $meta_key, $args );
 
 			$copied_value = wp_slash( $copied_value );
 			add_post_meta( $post_id_to, $meta_key, $copied_value );

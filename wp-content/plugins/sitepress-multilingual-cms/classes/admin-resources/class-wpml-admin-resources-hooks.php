@@ -1,6 +1,6 @@
 <?php
 
-class WPML_Admin_Resources_Hooks {
+class WPML_Admin_Resources_Hooks implements IWPML_Backend_Action {
 
 	public function add_hooks() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_resources' ) );

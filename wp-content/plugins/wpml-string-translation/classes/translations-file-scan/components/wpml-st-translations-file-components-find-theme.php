@@ -55,9 +55,9 @@ class WPML_ST_Translations_File_Components_Find_Theme implements WPML_ST_Transla
 	}
 
 	/**
-	 * @param $file_path
+	 * @param string $file_path
 	 *
-	 * @return mixed
+	 * @return string
 	 */
 	private function extract_theme_directory( $file_path ) {
 		$file_path = $this->file->fix_dir_separator( $file_path );

@@ -21,9 +21,11 @@ trait Functor {
 		return $this->value;
 	}
 
+	/**
+	 * @param callable $callback
+	 *
+	 * @return \WPML\FP\Either
+	 */
 	abstract public function map( callable $callback );
 
-	public static function of( $value ) {
-		return new static( $value );
-	}
 }

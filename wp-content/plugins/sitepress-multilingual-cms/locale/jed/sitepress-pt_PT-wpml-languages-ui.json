@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose Content to Automatically Translate into": [
+            "Selecionar Conteúdo para Traduzir Automaticamente para"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "Guardar Alterações e Ativar a Tradução Automática"
+         ],
+         "Cancel Language Changes": [
+            "Cancelar Alterações de Idioma"
+         ],
+         "Save": [
+            "Guardar"
+         ],
+         "Choose Content to Automatically Translate into New Language": [
+            "Selecionar Conteúdo para Traduzir Automaticamente para Um Novo Idioma"
+         ],
+         "Add languages and start translating": [
+            "Adicionar idiomas e começar a traduzir"
+         ],
+         "Add language and start translating": [
+            "Adicionar idioma e começar a traduzir"
+         ],
+         "Never mind. Don't add new languages": [
+            "Não importa. Não acrescente novos idiomas"
+         ],
+         "Never mind. Don't add new language": [
+            "Não importa. Não acrescente novo idioma"
+         ],
+         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
+            "Traduzir automaticamente todos os meus artigos e páginas existentes agora mesmo, além de novos conteúdos à medida que eu criar."
+         ],
+         "Only automatically translate new content.": [
+            "Novos conteúdos devem ser traduzidos apenas automaticamente."
+         ],
+         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
+            "Está a usar o modo <a>Traduzir Tudo</a>, que traduz automaticamente o conteúdo do seu website automaticamente."
+         ],
+         "Which content do you want to automatically translate into your newly-added language?": [
+            "Que conteúdo pretende traduzir automaticamente para o idioma recém-adicionado?"
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "Pode traduzir conteúdo já existente através do Painel de Controlo do Translation Management."
+         ]
+      }
+   }
+}

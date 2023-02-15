@@ -1,12 +1,13 @@
 <?php
-
 /**
  * Class WPML_URL_Converter
  *
  * @package    wpml-core
  * @subpackage url-handling
- *
  */
+
+use WPML\SuperGlobals\Server;
+use WPML\UrlHandling\WPLoginUrlConverter;
 
 class WPML_URL_Converter {
 	/**
@@ -14,7 +15,14 @@ class WPML_URL_Converter {
 	 */
 	private $strategy;
 
+	/**
+	 * @var string
+	 */
 	protected $default_language;
+
+	/**
+	 * @var string[]
+	 */
 	protected $active_languages;
 
 	/**
@@ -38,10 +46,10 @@ class WPML_URL_Converter {
 	protected $object_url_helper;
 
 	/**
-	 * @param IWPML_URL_Converter_Strategy $strategy
+	 * @param IWPML_URL_Converter_Strategy   $strategy
 	 * @param WPML_Resolve_Object_Url_Helper $object_url_helper
-	 * @param $default_language
-	 * @param $active_languages
+	 * @param string                         $default_language
+	 * @param array<string>                  $active_languages
 	 */
 	public function __construct(
 		IWPML_URL_Converter_Strategy $strategy,
@@ -49,15 +57,18 @@ class WPML_URL_Converter {
 		$default_language,
 		$active_languages
 	) {
-		$this->strategy = $strategy;
+		$this->strategy          = $strategy;
 		$this->object_url_helper = $object_url_helper;
-		$this->default_language = $default_language;
-		$this->active_languages = $active_languages;
+		$this->default_language  = $default_language;
+		$this->active_languages  = $active_languages;
 
-		$this->lang_param = new WPML_URL_Converter_Lang_Param_Helper( $active_languages );
+		$this->lang_param   = new WPML_URL_Converter_Lang_Param_Helper( $active_languages );
 		$this->slash_helper = new WPML_Slash_Management();
 	}
 
+	/**
+	 * @return IWPML_URL_Converter_Strategy
+	 */
 	public function get_strategy() {
 		return $this->strategy;
 	}
@@ -102,6 +113,10 @@ class WPML_URL_Converter {
 		$this->slash_helper = $slash_helper;
 	}
 
+	public function get_default_site_url() {
+		return $this->get_url_helper()->get_unfiltered_home_option();
+	}
+
 	/**
 	 * Scope of this function:
 	 * 1. Convert the home URL in the specified language depending on language negotiation:
@@ -115,8 +130,8 @@ class WPML_URL_Converter {
 	 *
 	 * WARNING: The URI slugs won't be translated for arbitrary URL (not the current one)
 	 *
-	 * @param $url
-	 * @param bool $lang_code
+	 * @param string $url
+	 * @param bool   $lang_code
 	 *
 	 * @return bool|mixed|string
 	 */
@@ -131,9 +146,9 @@ class WPML_URL_Converter {
 		if ( ! $lang_code ) {
 			$lang_code = $sitepress->get_current_language();
 		}
-		$language_from_url  = $this->get_language_from_url( $url );
+		$language_from_url = $this->get_language_from_url( $url );
 
-		if ( $language_from_url === $lang_code ) {
+		if ( $language_from_url === $lang_code || 'all' === $lang_code ) {
 			$new_url = $url;
 		} else {
 			if ( $this->can_resolve_object_url( $url ) ) {
@@ -156,12 +171,18 @@ class WPML_URL_Converter {
 	 */
 	public function get_language_from_url( $url ) {
 		$http_referer_factory = new WPML_URL_HTTP_Referer_Factory();
-		$http_referer = $http_referer_factory->create();
-		$url = $http_referer->get_url( $url );
+		$http_referer         = $http_referer_factory->create();
+		$url                  = $http_referer->get_url( $url );
+		$language             = $this->lang_param->lang_by_param( $url ) ?: $this->get_strategy()->get_lang_from_url_string( $url );
 
-		if ( ! ( $language = $this->lang_param->lang_by_param( $url ) ) ) {
-			$language = $this->get_strategy()->get_lang_from_url_string( $url );
-		}
+		/**
+		 * Filters language code fetched from the current URL and allows to rewrite
+		 * the language to set on front-end
+		 *
+		 * @param string $language language fetched from the current URL
+		 * @param string $url current URL.
+		 */
+		$language = apply_filters( 'wpml_get_language_from_url', $language, $url );
 
 		return $this->get_strategy()->validate_language( $language, $url );
 	}
@@ -177,15 +198,25 @@ class WPML_URL_Converter {
 	}
 
 	/**
+	 * @param SitePress $sitepress
+	 *
+	 * @return WPLoginUrlConverter|null
+	 */
+	public function get_wp_login_url_converter( $sitepress ) {
+		return $this->strategy->use_wp_login_url_converter()
+			? new WPLoginUrlConverter( $sitepress, $this )
+			: null;
+	}
+
+	/**
 	 * @param string $url
 	 *
 	 * @return bool
 	 */
 	private function can_resolve_object_url( $url ) {
-		$server_name = isset( $_SERVER['SERVER_NAME'] ) ? $_SERVER['SERVER_NAME'] : '';
 		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '';
 		$server_name = strpos( $request_uri, '/' ) === 0
-			? untrailingslashit( $server_name ) : trailingslashit( $server_name );
+			? untrailingslashit( Server::getServerName() ) : trailingslashit( Server::getServerName() );
 		$request_url = stripos( get_option( 'siteurl' ), 'https://' ) === 0
 			? 'https://' . $server_name . $request_uri : 'http://' . $server_name . $request_uri;
 

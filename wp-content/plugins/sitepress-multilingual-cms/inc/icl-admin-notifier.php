@@ -7,13 +7,11 @@
  * Admin Notifier Class
  *
  * Manages Admin Notices
- *
- *
  */
 
-add_action ( 'init', array('ICL_AdminNotifier', 'init') );
+add_action( 'init', array( 'ICL_AdminNotifier', 'init' ) );
 
-if(!class_exists('ICL_AdminNotifier')) {
+if ( ! class_exists( 'ICL_AdminNotifier' ) ) {
 	class ICL_AdminNotifier {
 		public static function init() {
 			if ( is_admin() ) {
@@ -44,13 +42,13 @@ if(!class_exists('ICL_AdminNotifier')) {
 			$messages                       = self::get_messages();
 			$messages['instant_messages'][] = array(
 				'text' => $message,
-				'type' => $type
+				'type' => $type,
 			);
 			self::save_messages( $messages );
 		}
 
 		/**
-		 * @param $message_id
+		 * @param int $message_id
 		 *
 		 * @return bool|array
 		 */
@@ -69,10 +67,16 @@ if(!class_exists('ICL_AdminNotifier')) {
 		private static function get_messages() {
 			$messages = get_option( 'icl_admin_messages' );
 			if ( ! ( isset( $messages ) && $messages != false ) ) {
-				return array( 'messages' => array(), 'instant_messages' => array() );
+				return array(
+					'messages'         => array(),
+					'instant_messages' => array(),
+				);
 			}
 			if ( ! isset( $messages['messages'] ) || ! isset( $messages['instant_messages'] ) ) {
-				$messages = array( 'messages' => array(), 'instant_messages' => array() );
+				$messages = array(
+					'messages'         => array(),
+					'instant_messages' => array(),
+				);
 			}
 
 			return (array) $messages;
@@ -86,7 +90,7 @@ if(!class_exists('ICL_AdminNotifier')) {
 		}
 
 		/**
-		 * @param $args
+		 * @param array<mixed> $args
 		 *    Args attributes:
 		 *    string        id - An unique identifier for the message
 		 *    string        msg - The actual message
@@ -129,7 +133,7 @@ if(!class_exists('ICL_AdminNotifier')) {
 
 			$id = $args['id'];
 
-			//Check if existing message has been set as dismissed or hidden
+			// Check if existing message has been set as dismissed or hidden
 			if ( self::message_id_exists( $id ) ) {
 				$temp_msg = self::get_message( $id );
 
@@ -281,7 +285,7 @@ if(!class_exists('ICL_AdminNotifier')) {
 		}
 
 		public static function remove_message( $message_id ) {
-			if ( $message_id === null || ! isset( $message_id ) ) {
+			if ( ! $message_id ) {
 				return false;
 			}
 
@@ -299,7 +303,7 @@ if(!class_exists('ICL_AdminNotifier')) {
 		}
 
 		public static function remove_message_group( $message_group ) {
-			if ( $message_group === null || ! isset( $message_group ) ) {
+			if ( ! $message_group ) {
 				return;
 			}
 
@@ -332,7 +336,7 @@ if(!class_exists('ICL_AdminNotifier')) {
 						if ( isset( $msg['admin_notice'] ) && ! $msg['admin_notice'] ) {
 							if ( ! isset( $msg['capability'] ) || ( $msg['capability'] == '' ) || current_user_can( $msg['capability'] ) ) {
 								if ( array_key_exists( 'limit_to_page', $msg ) ) {
-									foreach( $msg['limit_to_page'] as $page ) {
+									foreach ( $msg['limit_to_page'] as $page ) {
 										if ( array_key_exists( 'page', $_GET ) && $_GET['page'] === $page ) {
 											self::display_message( $id, $msg['text'], $msg['type'], $msg['classes'], $msg['hide'] || $msg['hide_per_user'], $msg['dismiss'] || $msg['dismiss_per_user'], true );
 										}
@@ -456,7 +460,7 @@ if(!class_exists('ICL_AdminNotifier')) {
 					$temp_classes[] = $class;
 				}
 			}
-			if ( $hide OR $dismiss ) {
+			if ( $hide or $dismiss ) {
 				$temp_classes[] = 'otgs-is-dismissible';
 			}
 
@@ -518,7 +522,7 @@ if(!class_exists('ICL_AdminNotifier')) {
 				}
 			}
 
-			$result = '<div class="' . implode( ' ', $classes ) . '">';
+			$result  = '<div class="' . implode( ' ', $classes ) . '">';
 			$result .= self::sanitize_and_format_message( $message );
 			$result .= '</div>';
 
@@ -530,7 +534,7 @@ if(!class_exists('ICL_AdminNotifier')) {
 		}
 
 		/**
-		 * @param $args
+		 * @param array<mixed> $args
 		 *
 		 * @return mixed
 		 */
@@ -615,7 +619,7 @@ if(!class_exists('ICL_AdminNotifier')) {
 
 		static function troubleshooting() {
 			?>
-					<h4><?php _e( 'Messages and notifications', 'sitepress' ) ?></h4>
+					<h4><?php _e( 'Messages and notifications', 'sitepress' ); ?></h4>
 			<?php
 			if ( self::has_hidden_messages() ) {
 
@@ -642,7 +646,14 @@ if(!class_exists('ICL_AdminNotifier')) {
 
 		static function remove_notifications() {
 			self::save_messages( array() );
-			echo wp_json_encode( array( 'errors' => 0, 'message' => __( 'Done', 'sitepress' ), 'cont' => 0, 'reload' => 1 ) );
+			echo wp_json_encode(
+				array(
+					'errors'  => 0,
+					'message' => __( 'Done', 'sitepress' ),
+					'cont'    => 0,
+					'reload'  => 1,
+				)
+			);
 			die();
 		}
 
@@ -686,18 +697,25 @@ if(!class_exists('ICL_AdminNotifier')) {
 				self::save_messages( $messages );
 			}
 
-			echo wp_json_encode( array( 'errors' => 0, 'message' => __( 'Done', 'sitepress' ), 'cont' => $dirty, 'reload' => 1 ) );
+			echo wp_json_encode(
+				array(
+					'errors'  => 0,
+					'message' => __( 'Done', 'sitepress' ),
+					'cont'    => $dirty,
+					'reload'  => 1,
+				)
+			);
 			die();
 		}
 
 		/** Deprecated methods */
 
 		/**
-		 * @deprecated deprecated @since version 3.2. Use ICL_AdminNotifier::remove_message()
-		 *
-		 * @param $message_id
+		 * @param int $message_id
 		 *
 		 * @return bool
+		 * @deprecated deprecated @since version 3.2. Use ICL_AdminNotifier::remove_message()
+		 *
 		 */
 		public static function removeMessage( $message_id ) {
 			return self::remove_message( $message_id );
@@ -755,26 +773,26 @@ if(!class_exists('ICL_AdminNotifier')) {
 		}
 
 		/**
-		 * @deprecated deprecated @since version 3.2. Use ICL_AdminNotifier::display_instant_message()
-		 *
-		 * @param        $message
+		 * @param string $message
 		 * @param string $type
 		 * @param bool   $class
 		 * @param bool   $return
 		 *
 		 * @return string
+		 * @deprecated deprecated @since version 3.2. Use ICL_AdminNotifier::display_instant_message()
+		 *
 		 */
 		public static function displayInstantMessage( $message, $type = 'information', $class = false, $return = false ) {
 			return self::display_instant_message( $message, $type, $class, $return );
 		}
 
 		/**
-		 * @param $message
+		 * @param string $message
 		 *
 		 * @return string
 		 */
 		public static function sanitize_and_format_message( $message ) {
-			//		return preg_replace( '/`(.*?)`/s', '<pre>$1</pre>', stripslashes( $message ) );
+			// return preg_replace( '/`(.*?)`/s', '<pre>$1</pre>', stripslashes( $message ) );
 			$backticks_pattern = '|`(.*)`|U';
 			preg_match_all( $backticks_pattern, $message, $matches );
 

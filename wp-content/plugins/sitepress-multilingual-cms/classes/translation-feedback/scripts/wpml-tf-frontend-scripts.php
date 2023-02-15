@@ -2,6 +2,7 @@
 
 /**
  * Class WPML_TF_Frontend_Scripts
+ *
  * @author OnTheGoSystems
  */
 class WPML_TF_Frontend_Scripts {

@@ -32,7 +32,7 @@ class WPML_Languages_Notices {
 	public function missing_languages( $not_found_languages ) {
 		$list_items = array();
 		if ( $not_found_languages ) {
-			$list_item_pattern = __( '%s (current locale: %s) - suggested locale(s): %s', 'sitepress' );
+			$list_item_pattern = __( '%1$s (current locale: %2$s) - suggested locale(s): %3$s', 'sitepress' );
 
 			foreach ( (array) $not_found_languages as $not_found_language ) {
 				$suggested_codes = $this->get_suggestions( $not_found_language );
@@ -59,8 +59,8 @@ class WPML_Languages_Notices {
 			$text .= '</li>';
 			$text .= '</ul>';
 
-			$languages_edit_url = admin_url( '?page=' . WPML_PLUGIN_FOLDER . '/menu/languages.php&trop=1' );
-			$languages_edit_link = '<a href="' . $languages_edit_url . '">';
+			$languages_edit_url   = admin_url( 'admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/languages.php&trop=1' );
+			$languages_edit_link  = '<a href="' . $languages_edit_url . '">';
 			$languages_edit_link .= __( 'Edit Languages', 'sitepress' );
 			$languages_edit_link .= '</a>';
 
@@ -120,7 +120,7 @@ class WPML_Languages_Notices {
 			$attribute_value = $language[ $language_attribute ];
 			$attribute_value = str_replace( '-', '_', $attribute_value );
 			$attribute_value = strtolower( $attribute_value );
-			$iso_1 = $iso_2 = '';
+			$iso_1           = $iso_2 = '';
 
 			if ( array_key_exists( 1, $translation['iso'] ) ) {
 				$iso_1 = strtolower( $translation['iso'][1] );

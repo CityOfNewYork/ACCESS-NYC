@@ -1,0 +1,163 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "Wysyłam do tłumaczenia"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "Trwa łączenie z Zaawansowanym edytorem tłumaczeń WPML."
+         ],
+         "Try again": [
+            "Spróbuj ponownie"
+         ],
+         "You don't have the rights to review this language": [
+            "Nie masz uprawnień do sprawdzania w tym języku."
+         ],
+         "pages & posts": [
+            "strony i wpisy"
+         ],
+         "left to translate": [
+            "pozostało do przetłumaczenia"
+         ],
+         "Translate on hold": [
+            "Tłumaczenie wstrzymane"
+         ],
+         "All translated": [
+            "Wszystko przetłumaczone"
+         ],
+         "%d translations left": [
+            "Pozostało tłumaczeń: %d "
+         ],
+         "Credits used:": [
+            "Wykorzystanych kredytów:"
+         ],
+         "Credits left:": [
+            "Pozostałych kredytów:"
+         ],
+         "Calculating": [
+            "Trwa obliczanie."
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "Pozostałe opłacone kredyty przypisane do tej strony w serwisie WPML.org"
+         ],
+         "Prepaid credits left": [
+            "Pozostałe opłacone kredyty"
+         ],
+         "Account credits used": [
+            "Wykorzystane kredyty z konta"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "Po wykorzystaniu przez Ciebie wszystkich opłaconych kredytów wyślemy Ci fakturę za wszelkie dodatkowe naliczone kredyty po zakończeniu miesiąca."
+         ],
+         "Payment limit:": [
+            "Limit wpłaty:"
+         ],
+         "%s credits": [
+            "%s kredyty(-ów)"
+         ],
+         "Preparing more content for translation": [
+            "Trwa przygotowywanie kolejnych treści do tłumaczenia."
+         ],
+         "Preparing content for translation": [
+            "Trwa przygotowywanie treści do tłumaczenia."
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "Wystąpiły problemy z tłumaczeniem automatycznym, które wymagają Twojej uwagi. Rozwiąż je, zanim przejdziesz dalej."
+         ],
+         "%d translations waiting for review": [
+            "Liczba tłumaczeń oczekujących na sprawdzenie: %d "
+         ],
+         "Draft — Pending review": [
+            "Szkic — oczekuje na sprawdzenie"
+         ],
+         "Complete": [
+            "Zakończony"
+         ],
+         "Insufficient funds": [
+            "Brakuje środków"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "Przeczytaj więcej o tym, jak tłumaczyć treści w <a>przewodniku \"Jak zacząć?\"</a>."
+         ],
+         "Let's Start Translating!": [
+            "Zacznijmy tłumaczenie!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "Wybierz treści z Pulpitu tłumaczeń poniżej, aby stworzyć swoje pierwsze zadanie tłumaczeniowe!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "Zmień <a>ustawienia automatycznego tłumaczenia</a> (zadania tłumaczeniowe, które są już w toku, zostaną ukończone zgodnie z aktualnymi ustawieniami)"
+         ],
+         "Read more about translating your site automatically.": [
+            "Przeczytaj więcej o tym, jak tłumaczyć swoją stronę automatycznie."
+         ],
+         "Your site is being automatically translated!": [
+            "Twoja strona jest teraz tłumaczona automatycznie!"
+         ],
+         "Automatic Translation Status": [
+            "Status tłumaczenia automatycznego"
+         ],
+         "Calculating...": [
+            "Trwa obliczanie."
+         ],
+         "Do not close WP admin!": [
+            "Nie zamykaj panelu administracyjnego WP!"
+         ],
+         "The number of translations": [
+            "Liczba tłumaczeń"
+         ],
+         "Delete Translations": [
+            "Skasuj tłumaczenia"
+         ],
+         "Keep Translations as Draft": [
+            "Zachowaj tłumaczenia jako szkice"
+         ],
+         "Never mind. I want to review these translations.": [
+            "Nic, jednak chcę sprawdzić te tłumaczenia"
+         ],
+         "Cancel": [
+            "Anuluj"
+         ],
+         "You haven't selected any jobs that need review.": [
+            "Nie wybrano żadnych zadań, które wymagają sprawdzenia."
+         ],
+         "Please select the pending review jobs to abort.": [
+            "Wybierz zadania sprawdzania w toku, które chcesz anulować."
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "Spowoduje to usunięcie wybranych zadań z Kolejki tłumaczeń bez ich opublikowania. Co chcesz zrobić z tymi tłumaczeniami?"
+         ],
+         "Cancel Translation Review": [
+            "Anuluj sprawdzanie tłumaczenia"
+         ],
+         "Edit": [
+            "Edycja"
+         ],
+         "Updating": [
+            "Aktualizacja"
+         ],
+         "Translate": [
+            "Przetłumacz"
+         ],
+         "Take and translate": [
+            "Przyjmij i przetłumacz"
+         ],
+         "Review": [
+            "Recenzja"
+         ],
+         "Are you sure you want to resign from this job?": [
+            "Czy na pewno chcesz zrezygnować z tego zlecenia?"
+         ],
+         "Resign": [
+            "Zrezygnuj"
+         ],
+         "View": [
+            "Widok"
+         ]
+      }
+   }
+}

@@ -61,11 +61,17 @@ function pmai_is_acf_update_allowed($cur_meta_key, $options ){
 
 			if ( ! empty($mapped_acf)){			
 				foreach ($mapped_acf as $acf_group_id => $is_mapped) {				
-					if ( ! $is_mapped ) continue;				
-					$acf_fields = get_posts(array('posts_per_page' => -1, 'post_type' => 'acf-field', 'post_parent' => $acf_group_id, 'post_status' => 'publish'));
+					if ( ! $is_mapped ) continue;
+					if ( ! is_numeric($acf_group_id) ) {
+						$group = pmai_get_acf_group_by_slug( $acf_group_id );
+						if (!empty($group)) {
+							$acf_group_id = $group->ID;
+						}
+					}
+					$acf_fields = acf_get_fields($acf_group_id);
 					if ( ! empty($acf_fields) ){
 						foreach ($acf_fields as $field) {
-							if ( $cur_meta_key == $field->post_excerpt or $cur_meta_key == "_" . $field->post_excerpt or strpos($cur_meta_key, $field->post_excerpt . '_') === 0 or strpos($cur_meta_key, '_' . $field->post_excerpt . '_') === 0){
+							if ( $cur_meta_key == $field['name'] or $cur_meta_key == "_" . $field['name'] or strpos($cur_meta_key, $field['name'] . '_') === 0 or strpos($cur_meta_key, '_' . $field['name'] . '_') === 0){
 								return apply_filters('pmai_is_acf_update_allowed', true, $cur_meta_key, $options);
 								break;
 							}
@@ -113,7 +119,8 @@ function pmai_is_acf_update_allowed($cur_meta_key, $options ){
 			if (! empty($options['acf_list']) and is_array($options['acf_list'])){
 				foreach ($options['acf_list'] as $key => $acf_field) {
 					$field_parts = explode('---', $acf_field);
-					$field_name = trim(array_shift(explode(" ", $field_parts[0])), "[]");
+					$field_parts_name = explode( " ", $field_parts[0] );
+					$field_name  = trim(array_shift( $field_parts_name ), "[]");
 					if (!empty($field_parts[1])){
 						$sub_field_name = trim($field_parts[1], "[]");
 						if (preg_match('%^_{0,1}'.$field_name.'_[0-9]{1,}_'.$sub_field_name.'$%', $cur_meta_key)){
@@ -140,6 +147,12 @@ function pmai_is_acf_update_allowed($cur_meta_key, $options ){
 
 				foreach ($mapped_acf as $acf_group_id => $is_mapped) {				
 					if ( ! $is_mapped ) continue;
+					if ( ! is_numeric($acf_group_id) ) {
+						$group = pmai_get_acf_group_by_slug( $acf_group_id );
+						if (!empty($group)) {
+							$acf_group_id = $group->ID;
+						}
+					}
 					$acf_fields = get_post_meta($acf_group_id, '');
 					if (!empty($acf_fields)){
 						foreach ($acf_fields as $meta_key => $cur_meta_val){
@@ -161,6 +174,12 @@ function pmai_is_acf_update_allowed($cur_meta_key, $options ){
 				if ( in_array($cur_meta_key, $all_acf_fields)){
 					foreach ($mapped_acf as $acf_group_id => $is_mapped) {				
 						if ( ! $is_mapped ) continue;
+						if ( ! is_numeric($acf_group_id) ) {
+							$group = pmai_get_acf_group_by_slug( $acf_group_id );
+							if (!empty($group)) {
+								$acf_group_id = $group->ID;
+							}
+						}
 						$acf_fields = get_post_meta($acf_group_id, '');
 						if (!empty($acf_fields)){
 							foreach ($acf_fields as $meta_key => $cur_meta_val){

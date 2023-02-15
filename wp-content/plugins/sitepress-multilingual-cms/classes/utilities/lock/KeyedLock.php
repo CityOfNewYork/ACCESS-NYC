@@ -10,7 +10,7 @@ class KeyedLock extends Lock {
 	/**
 	 * Lock constructor.
 	 *
-	 * @param \wpdb $wpdb
+	 * @param \wpdb  $wpdb
 	 * @param string $name
 	 */
 	public function __construct( \wpdb $wpdb, $name ) {
@@ -20,7 +20,7 @@ class KeyedLock extends Lock {
 
 	/**
 	 * @param string $key
-	 * @param int $release_timeout
+	 * @param int    $release_timeout
 	 *
 	 * @return string|false The key or false if could not acquire the lock
 	 */

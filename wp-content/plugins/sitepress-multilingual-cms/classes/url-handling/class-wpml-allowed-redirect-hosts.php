@@ -5,7 +5,7 @@ class WPML_Allowed_Redirect_Hosts extends WPML_SP_User {
 	public function __construct( &$sitepress ) {
 		parent::__construct( $sitepress );
 	}
-	
+
 	public function get_hosts( $hosts ) {
 		$domains          = $this->sitepress->get_setting( 'language_domains' );
 		$default_language = $this->sitepress->get_default_language();
@@ -19,15 +19,15 @@ class WPML_Allowed_Redirect_Hosts extends WPML_SP_User {
 		$active_languages = $this->sitepress->get_active_languages();
 
 		foreach ( $domains as $code => $url ) {
-			if ( !empty( $active_languages[ $code ] ) ) {
-				$url = $home_schema . $url;
+			if ( ! empty( $active_languages[ $code ] ) ) {
+				$url   = $home_schema . $url;
 				$parts = wpml_parse_url( $url );
-				if ( isset($parts[ 'host' ]) && !in_array( $parts[ 'host' ], $hosts ) ) {
-					$hosts[ ] = $parts[ 'host' ];
+				if ( isset( $parts['host'] ) && ! in_array( $parts['host'], $hosts ) ) {
+					$hosts[] = $parts['host'];
 				}
 			}
 		}
-		
+
 		return $hosts;
 	}
 }

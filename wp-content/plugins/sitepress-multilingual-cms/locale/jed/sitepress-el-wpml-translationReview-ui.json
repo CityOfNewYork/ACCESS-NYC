@@ -1,0 +1,40 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Accepted": [
+            "Αποδεκτή"
+         ],
+         "Reviewing the next translation...": [
+            "Επιμέλεια της επόμενης μετάφρασης…"
+         ],
+         "Back": [
+            "Πίσω"
+         ],
+         "Edit Translation": [
+            "Επεξεργασία μετάφρασης"
+         ],
+         "There was an error in applying translation.": [
+            "Παρουσιάστηκε πρόβλημα στην εφαρμογή της μετάφρασης."
+         ],
+         "Please wait, applying translation..": [
+            "Περιμένετε, γίνεται εφαρμογή της μετάφρασης…"
+         ],
+         "Publish this translation": [
+            "Δημοσίευση αυτής της μετάφρασης"
+         ],
+         "Accept this translation": [
+            "Αποδοχή αυτής της μετάφρασης"
+         ],
+         "Approved!": [
+            "Εγκρίθηκε!"
+         ],
+         "Loading the next translation for review...": [
+            "Φόρτωση της επόμενης μετάφρασης για επιμέλεια…"
+         ]
+      }
+   }
+}

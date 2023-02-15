@@ -27,7 +27,7 @@ class WPML_ST_Translations_File_Scan {
 		$translations = array();
 		$file_type    = pathinfo( $file, PATHINFO_EXTENSION );
 
-		switch( $file_type ) {
+		switch ( $file_type ) {
 			case 'mo':
 				$translations_file = new WPML_ST_Translations_File_MO( $file );
 				$translations      = $translations_file->get_translations();

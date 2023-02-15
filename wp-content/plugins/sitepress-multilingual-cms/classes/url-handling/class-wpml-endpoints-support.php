@@ -53,7 +53,7 @@ class WPML_Endpoints_Support {
 
 					$endpoint_translation = $this->get_endpoint_translation( $endpoint_key, $endpoint_value );
 
-					if ( $endpoint_value !== $endpoint_translation ) {
+					if ( $endpoint_value !== urldecode( $endpoint_translation ) ) {
 						add_rewrite_endpoint( $endpoint_translation, EP_ROOT | EP_PAGES );
 					}
 				}
@@ -92,7 +92,7 @@ class WPML_Endpoints_Support {
 		$endpoint_translation = apply_filters( 'wpml_translate_single_string', $endpoint, self::STRING_CONTEXT, $key, $language ? $language : $this->current_language );
 
 		if ( ! empty( $endpoint_translation ) ) {
-			return $endpoint_translation;
+			return implode( '/', array_map( 'rawurlencode', explode( '/', $endpoint_translation ) ) );
 		} else {
 			return $endpoint;
 		}
@@ -128,14 +128,14 @@ class WPML_Endpoints_Support {
 
 					$endpoint_translation = $this->get_endpoint_translation( $endpoint_key, $endpoint_value );
 
-					if ( $endpoint_value === $endpoint_translation ) {
+					if ( $endpoint_value === urldecode( $endpoint_translation ) ) {
 						continue;
 					}
 
 					$buff_value = array();
 
 					foreach ( $value as $k => $v ) {
-						$k                = preg_replace( '/(\/)?' . $endpoint_value . '(\/)?(\(\/\(\.\*\)\)\?\/\?\$)/', '$1' . $endpoint_translation . '$2$3', $k );
+						$k                = preg_replace( '/(\/|^)' . $endpoint_value . '(\/)?(\(\/\(\.\*\)\)\?\/\?\$)/', '$1' . $endpoint_translation . '$2$3', $k );
 						$buff_value[ $k ] = $v;
 					}
 					$value = $buff_value;
@@ -147,7 +147,7 @@ class WPML_Endpoints_Support {
 	}
 
 	/**
-	 * @param string $p
+	 * @param string $link
 	 * @param int $pid
 	 *
 	 * @return string

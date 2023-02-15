@@ -14,8 +14,8 @@ class WPML_ST_Element_Slug_Translation_UI {
 		WPML_ST_Element_Slug_Translation_UI_Model $model,
 		IWPML_Template_Service $template_service
 	) {
-		$this->model             = $model;
-		$this->template_service  = $template_service;
+		$this->model            = $model;
+		$this->template_service = $template_service;
 	}
 
 	/** @return WPML_ST_Element_Slug_Translation_UI */

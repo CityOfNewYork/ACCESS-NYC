@@ -17,7 +17,7 @@ class WPML_Admin_Pagination_Factory {
 		$pagination = new WPML_Admin_Pagination();
 		$pagination->set_total_items( $total_items );
 		$pagination->set_items_per_page( $this->items_per_page );
-		$pagination->set_page_param_name($page_param_name);
+		$pagination->set_page_param_name( $page_param_name );
 
 		$page = 1;
 		if ( isset( $_GET[ $page_param_name ] ) ) {
@@ -27,7 +27,7 @@ class WPML_Admin_Pagination_Factory {
 
 		$template = new WPML_Twig_Template_Loader(
 			array(
-				WPML_PLUGIN_PATH . '/templates/pagination'
+				WPML_PLUGIN_PATH . '/templates/pagination',
 			)
 		);
 

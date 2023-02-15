@@ -2,7 +2,6 @@
 
 namespace WPML\Core\REST;
 
-
 class Status {
 
 	const PING_KEY                = 'wp-rest-enabled-ping';
@@ -73,13 +72,16 @@ class Status {
 	private function pingRestEndpoint() {
 		$url = get_rest_url( '/' );
 
-		$response = $this->wp_http->get( $url, [
-			'timeout' => 5,
-			'headers' => [
-				'X-WP-Nonce' => wp_create_nonce( 'wp_rest' ),
-			],
-			'cookies' => $this->getCookiesWithoutSessionId(),
-		] );
+		$response = $this->wp_http->get(
+			$url,
+			[
+				'timeout' => 5,
+				'headers' => [
+					'X-WP-Nonce' => wp_create_nonce( 'wp_rest' ),
+				],
+				'cookies' => $this->getCookiesWithoutSessionId(),
+			]
+		);
 
 		if ( is_wp_error( $response ) ) {
 			return $this->isTimeout( $response ) ? self::TIMEOUT : self::DISABLED;

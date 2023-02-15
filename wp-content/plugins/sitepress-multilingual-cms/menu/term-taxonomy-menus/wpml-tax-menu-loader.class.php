@@ -4,7 +4,7 @@ class WPML_Tax_Menu_Loader {
 
 	/** @var SitePress $sitepress */
 	private $sitepress;
-	/** @var WPDB $wpdb */
+	/** @var wpdb $wpdb */
 	public $wpdb;
 	/** @var string $taxonomy */
 	private $taxonomy;

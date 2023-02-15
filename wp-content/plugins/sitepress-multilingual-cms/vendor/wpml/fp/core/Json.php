@@ -13,6 +13,9 @@ class Json {
 
 	use Macroable;
 
+	/**
+	 * @return void
+	 */
 	public static function init() {
 		self::macro( 'toArray', curryN( 1, function ( $str ) {
 			return json_decode( $str, true );

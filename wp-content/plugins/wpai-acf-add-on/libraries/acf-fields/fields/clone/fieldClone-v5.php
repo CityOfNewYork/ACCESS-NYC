@@ -78,7 +78,9 @@ class FieldCloneV5 extends Field {
             foreach ($subFieldsData as $subFieldData) {
                 if ($subFieldData) {
                     $field = $this->initDataAndCreateField($subFieldData);
-                    $this->subFields[] = $field;
+                    if ($field) {
+	                    $this->subFields[] = $field;
+                    }
                 }
             }
         }
@@ -93,31 +95,20 @@ class FieldCloneV5 extends Field {
         if (!empty($field['clone'])){
             foreach ($field['clone'] as $sub_field_key) {
                 if (strpos($sub_field_key, 'group_') === 0){
-                    $acf_groups = get_posts(array(
-                        'posts_per_page' => 1,
-                        'post_type' => 'acf-field-group',
-                        'name' => $sub_field_key,
-                        'post_status' => array('publish', 'acf-disabled')
-                    ));
+	                $acf_groups = acf_get_field_groups();
                     if (!empty($acf_groups)){
                         foreach ($acf_groups as $acf_group){
-                            $groupFields = get_posts(array(
-                                'posts_per_page' => -1,
-                                'post_type' => 'acf-field',
-                                'post_parent' => $acf_group->ID,
-                                'post_status' => 'publish',
-                                'orderby' => 'menu_order',
-                                'order' => 'ASC')
-                            );
-                            if (!empty($groupFields)){
-                                foreach ($groupFields as $groupField){
-                                    $fieldsData[] = $groupField;
-                                }
-                            }
+							if ($acf_group['key'] == $sub_field_key) {
+								$groupFields = acf_get_fields($acf_group);
+								if (!empty($groupFields)){
+									foreach ($groupFields as $groupField){
+										$fieldsData[] = $groupField;
+									}
+								}
+							}
                         }
                     }
-                }
-                else{
+                } else {
                     $fieldsData[] = $this->getDBFieldDataByKey($sub_field_key);
                 }
             }
@@ -143,15 +134,14 @@ class FieldCloneV5 extends Field {
                 if (strpos($sub_field_key, 'group_') === 0){
                     if (!empty($fields)){
                         foreach ($fields as $sub_field) {
-                            if ($sub_field['parent'] == $this->getFieldKey()){
+                            if ($sub_field['parent'] == $sub_field_key){
                                 $sub_fieldData = $sub_field;
                                 $sub_fieldData['ID'] = $sub_fieldData['id'] = uniqid();
                                 $fieldsData[] = $sub_fieldData;
                             }
                         }
                     }
-                }
-                else{
+                } else {
                     $fieldsData[] = $this->getLocalFieldDataByKey($sub_field_key);
                 }
             }
@@ -162,14 +152,14 @@ class FieldCloneV5 extends Field {
     /**
      * @return int
      */
-    public function getCountValues() {
+    public function getCountValues($parentIndex = false) {
         $values = $this->getOption('values');
         $countRows = 0;
         /** @var Field $field */
         foreach ($values as $field){
             if (!empty($field)) {
                 $field->importData = $this->getImportData();
-                $count = $field->getCountValues();
+                $count = $field->getCountValues($parentIndex);
                 if ($count > $countRows){
                     $countRows = $count;
                 }

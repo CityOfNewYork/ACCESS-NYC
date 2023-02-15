@@ -9,7 +9,7 @@ if( !defined( 'ABSPATH' ) ) exit;
 
 class Plugin {
     
-    const VERSION = "2.6.1";
+    const VERSION = "2.6.2";
     
     private $config;
     
@@ -164,6 +164,7 @@ class Plugin {
                 array(
                     'methods' => 'POST',
                     'callback' => '\Rollbar\Wordpress\Plugin::testPhpLogging',
+                    'permission_callback' => '__return_true',
                     'args' => array(
                         'server_side_access_token' => array(
                             'required' => true

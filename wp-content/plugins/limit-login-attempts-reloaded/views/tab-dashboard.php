@@ -369,6 +369,7 @@ if( $active_app === 'local' ) {
                     <?php endforeach; ?>
                 </table>
                 <p class="countries-table-info"><?php _e( 'today', 'limit-login-attempts-reloaded' ); ?></p>
+                <p class="countries-table-info-right"><?php _e( 'Block by country feature available with <a href="https://www.limitloginattempts.com/info.php?from=plugin-dashboard-country" target="_blank">premium plus plan</a>.', 'limit-login-attempts-reloaded' ) ?></p>
             </div>
         </div>
 

@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose Content to Automatically Translate into": [
+            "בחר תוכן שאותו אתה רוצה לתרגם באופן אוטומטי ל-"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "שמור שינויים והפעל תרגום אוטומטי"
+         ],
+         "Cancel Language Changes": [
+            "בטל שינויי שפה"
+         ],
+         "Save": [
+            "שמור"
+         ],
+         "Choose Content to Automatically Translate into New Language": [
+            "בחר תוכן שברצונך לתרגם באופן אוטומטי לשפה חדשה"
+         ],
+         "Add languages and start translating": [
+            "הוסף שפות והתחל לתרגם"
+         ],
+         "Add language and start translating": [
+            "הוסף שפות והתחל לתרגם"
+         ],
+         "Never mind. Don't add new languages": [
+            "לא חשוב. אל תוסיף שפות חדשות"
+         ],
+         "Never mind. Don't add new language": [
+            "לא חשוב. אל תוסיף שפה חדשה"
+         ],
+         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
+            "תרגם באופן אוטומטי את כל הפוסטים והדפים הקיימים שלי עכשיו, וגם תוכן חדש לאחר שאני יוצר אותו."
+         ],
+         "Only automatically translate new content.": [
+            "תרגם באופן אוטומטי רק תוכן חדש."
+         ],
+         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
+            "אתה משתמש במצב <a>תרגם בכל</a>, שמתרגם את תוכן האתר שלך באופן אוטומטי."
+         ],
+         "Which content do you want to automatically translate into your newly-added language?": [
+            "איזה תוכן אתה רוצה לתרגם באופן אוטומטי לשפה החדשה שהוספת?"
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "ניתן לתרגם תוכן קיים מ'לוח הבקרה של ניהול התרגום'."
+         ]
+      }
+   }
+}

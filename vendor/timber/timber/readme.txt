@@ -2,8 +2,8 @@
 Contributors: jarednova
 Tags: template engine, templates, twig
 Requires at least: 4.9.8
-Tested up to: 5.5.1
-Stable tag: 1.18.2
+Tested up to: 5.8.1
+Stable tag: 1.19.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,8 +37,43 @@ _Twig is the template language powering Timber; if you need a little background 
 **Changes for Theme Developers**
 
 **Fixes and improvements**
+* Fix documented return type for Timber\Image::thumbnail #2463 (thanks @titouanmathis)
 
-= 1.18.2 = 
+= 1.19.1 =
+
+**Fixes and improvements**
+
+* Fix bug when using switch_to_blog() in combination with Timber images by @gchtr in https://github.com/timber/timber/pull/2478
+* Fix the `thumbnail()` method return type by @titouanmathis in https://github.com/timber/timber/pull/2463
+* Merge in 2.x GH Actions changes by @jarednova in https://github.com/timber/timber/pull/2484
+* Adds @nlemoine to the contribs list! by @jarednova in https://github.com/timber/timber/pull/2488
+* Bump version of Upstatement/Routes to 0.8.1 by @jarednova in https://github.com/timber/timber/pull/2512
+
+* @titouanmathis made their first contribution in https://github.com/timber/timber/pull/2463
+
+**Full Changelog**: https://github.com/timber/timber/compare/1.19.0...1.19.1
+
+= 1.19.0 =
+
+**Changes for Theme Developers**
+
+* You can now get dimensions of SVG images #2421 #2432 (thanks @vyskoczilova)
+* You can pass additional variables to the `timber/loader/loader` filter #2324 (thanks @neojp)
+
+**Fixes and improvements**
+
+* Fix for double quotes that might appear in a "Read More" in Gutenberg #2337 #2343 (thanks @Keysaw)
+* Fix implementation of WP's `get_the_date` and `get_the_time` filters #2350 (thanks @shvlv)
+* Fix for how the `wp:more` tag works with `noteaser` #2348 #2351 (thanks @jhhazelaar)
+* Fix for two cases of where `home_url()` should be used instead of `site_url()` #2356 #2357 (thanks @Levdbas)
+* Fix for where `Timber::get_sites` returned the same locale for all sites #1908 #2369 (thanks @highbelt)
+* Use the latest release of Upstatement/Routes (0.5 => 0.8) #2373 (thanks @jverneaut)
+* Fix for sidebar retrieval in PHP 8 #2385 (thanks @marciojc)
+* Fix for proper ignoring of the Cache directory on case-insensitive file systems #342 #2416 (thanks @toonvandeputte)
+
+* Fixed a bug when using `switch_to_blog()` in combination with Timber images #1312 #2478 (thanks @gchtr)
+
+= 1.18.2 =
 
 **Fixes and improvements**
 

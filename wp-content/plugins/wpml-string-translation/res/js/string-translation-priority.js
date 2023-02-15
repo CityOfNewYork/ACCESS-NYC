@@ -8,12 +8,12 @@ WPML_String_Translation.ChangeTranslationPriority = function () {
     var privateData = {};
 
     var init = function () {
-        jQuery(document).ready(function () {
+        jQuery(function () {
             privateData.translation_priority_select = jQuery('#icl-st-change-translation-priority-selected');
-            privateData.translation_priority_select.on( 'change', applyChanges );
+            privateData.translation_priority_select.on('change', applyChanges);
 
             privateData.spinner = jQuery('.icl-st-change-spinner');
-            privateData.spinner.detach().insertAfter( privateData.translation_priority_select );
+            privateData.spinner.detach().insertAfter(privateData.translation_priority_select);
 
             initializeSelect2();
         });
@@ -56,13 +56,13 @@ WPML_String_Translation.ChangeTranslationPriority = function () {
     };
 
     var initializeSelect2 = function () {
-        privateData.translation_priority_select.select2({
-            escapeMarkup:       function(m) { return m; },
+        privateData.translation_priority_select.wpml_select2({
+
             width:              'auto',
             dropdownCss:        {'z-index': parseInt(jQuery('.ui-dialog').css('z-index'), 10) + 100},
             dropdownAutoWidth:  true
         });
-        jQuery('.js-change-translation-priority .select2-choice').addClass('button button-secondary').attr('disabled', 'true');
+        jQuery('.js-change-translation-priority .wpml_select2-choice').addClass('button button-secondary').attr('disabled', 'true');
     };
 
     init();
