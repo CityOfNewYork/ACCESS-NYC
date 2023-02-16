@@ -24,6 +24,18 @@
     padding-bottom: 7px;
 }
 
+#rediscache .form-table .success {
+    color: #008a20;
+}
+
+#rediscache .form-table .warning {
+    color: #dba617;
+}
+
+#rediscache .form-table .error {
+    color: #d63638;
+}
+
 #rediscache .form-table td ul {
     margin: 0;
 }
@@ -53,26 +65,28 @@
     background-color: #e5e5e5 !important;
 }
 
-#rediscache #redis-stats-chart {
-    height: 300px;
-}
-
 #rediscache .tab-pane-diagnostics p {
     margin-top: 20px;
 }
 
-#rediscache .tab-pane-diagnostics textarea {
+#rediscache #diagnostics-pane .card {
     width: 100%;
+    max-width: 100%;
 }
 
-#rediscache .compatiblity {
+#rediscache #diagnostics-pane pre {
+    height: 400px;
+    overflow: scroll;
+}
+
+#rediscache .compatibility {
     display: flex;
     max-width: 520px;
     margin-bottom: 5px;
     color: #666;
 }
 
-#rediscache .compatiblity + ul {
+#rediscache .compatibility + ul {
     margin-top: 0;
     padding-left: 50px;
     list-style: circle;
@@ -80,7 +94,7 @@
     color: #666;
 }
 
-#rediscache .compatiblity .dashicons {
+#rediscache .compatibility .dashicons {
     margin-right: 5px;
 }
 
@@ -106,23 +120,36 @@
 
 #widget-redis-stats ul {
     margin: 11px 11px 0;
-    text-align: center;
+    display: flex;
 }
 
 #widget-redis-stats ul li {
+    margin-bottom: 0;
+}
+
+#metrics-pane #widget-redis-stats ul {
+    display: block;
+    list-style-type: none;
+    text-align: center;
+    font-size: 14px;
+}
+
+#metrics-pane #widget-redis-stats ul li {
     display: inline;
+    list-style-type: none;
 }
 
 #widget-redis-stats ul a {
-    padding: 0 5px;
-    color: #72777c;
-    font-weight: bold;
+    padding: 0 7px;
     text-decoration: none;
 }
 
-#widget-redis-stats ul a:hover,
+#widget-redis-stats ul a:hover {
+    color: #135e96;
+}
+
 #widget-redis-stats ul a.active {
-    color: #0073aa;
+    color: #1d2327;
 }
 
 #redis-stats-chart .apexcharts-annotations {
@@ -137,11 +164,13 @@
 
 #redis-stats-chart .apexcharts-tooltip {
     display: flex;
+    flex-direction: row;
     width: 100%;
     justify-content: center;
     border: none;
     box-shadow: none;
     background: #fff;
+    margin-top: 1px;
 }
 
 #redis-stats-chart .apexcharts-tooltip-title {
@@ -149,8 +178,6 @@
     padding: 0 15px;
     border-bottom: none;
     background-color: transparent;
-    font-weight: bold;
-    font-variant-numeric: tabular-nums;
 }
 
 #redis-stats-chart .apexcharts-tooltip-series-group {

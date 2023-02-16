@@ -1,0 +1,85 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Translate Some": [
+            "Перевести отдельные"
+         ],
+         "I want to choose which content to translate": [
+            "Я хочу выбрать контент на перевод"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "Автоматические переводы в ожидании будут отменены."
+         ],
+         "Save": [
+            "Сохранить"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "Для перевода контента перейдите в <a>Консоль управления переводами</a>."
+         ],
+         "Review the translations before publishing": [
+            "Проверить переводы перед публикацией"
+         ],
+         "Publish translations and review them later": [
+            "Опубликовать переводы и проверить позже"
+         ],
+         "Publish translations without reviewing": [
+            "Опубликовать переводы без проверки"
+         ],
+         "When automatic translation completes:": [
+            "По окончанию автоматического перевода:"
+         ],
+         "Translate Everything": [
+            "Перевести все"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "WPML автоматически переведет публикуемый или обновляемый контент."
+         ],
+         "How do you want to translate this site?": [
+            "Как перевести этот сайт?"
+         ],
+         "Yes, automatically translate all of my <s>existing posts and pages</s> right now, plus <s>new content</s> as I create it.": [
+            "Да, автоматически перевести <s>все существующие записи и страницы</s> прямо сейчас, а также <s>новый контент>/s> по мере его создания."
+         ],
+         "Automatically translate all of my <s>existing content</s> right now, plus <s>new content</s> as I create it.": [
+            "Автоматически перевести <s>весь существующий контент</s> прямо сейчас, а также <s>новый контент</s> по мере его создания."
+         ],
+         "No, only automatically translate <s>new content</s>.": [
+            "Нет, переводить автоматически только <s>новый контент</s>."
+         ],
+         "Only automatically translate <s>new content</s>.": [
+            "Автоматически переводить только <s>новый контент</s>."
+         ],
+         "Should WPML automatically translate your existing content?": [
+            "Следует ли WPML автоматически переводить существующий контент?"
+         ],
+         "Which content do you want to translate automatically?": [
+            "Какой контент необходимо перевести автоматически?"
+         ],
+         "Start translating automatically": [
+            "Начать переводить автоматически"
+         ],
+         "Create an account to start translating": [
+            "Создайте учетную запись, чтобы начать переводить"
+         ],
+         "WPML will use credits from your automatic translation account to translate your site immediately as you publish new content or update existing content.": [
+            "WPML использует кредиты из вашей учетной записи автоматического перевода для немедленного перевода вашего сайта при публикации нового контента или обновления существующего."
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "Существующий контент можно переводить в Консоли управления переводами."
+         ],
+         "Cancel": [
+            "Отменить"
+         ],
+         "You must use the <s>Advanced Translation Editor</s> if you want to translate your content automatically.": [
+            "Если вы хотите переводить свой контент автоматически, следует использовать <s>Расширенный редактор перевода</s>."
+         ],
+         "You currently use a translation service to translate your content. To translate your site automatically, first disconnect your translation service in your <a><s>Translation Management settings</s></a>.": [
+            "В настоящее время вы пользуетесь услугами службы переводов для перевода своего контента. Чтобы перевести свой сайт автоматически, сначала отключите службу переводов в <a><s>настройках управления переводами</s></a>."
+         ]
+      }
+   }
+}

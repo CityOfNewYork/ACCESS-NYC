@@ -29,7 +29,7 @@ class InstalledComponents {
 	public static function isPluginMissing() {
 		return function( WPML_ST_Translations_File_Entry $entry ) {
 			return 'plugin' === $entry->get_component_type()
-			       && ! is_readable( WP_PLUGIN_DIR . '/' . $entry->get_component_id() );
+			       && ! is_readable( WPML_PLUGINS_DIR . '/' . $entry->get_component_id() );
 		};
 	}
 

@@ -11,7 +11,6 @@ class WPML_Settings_Filters {
 	 *
 	 * @return array
 	 * @see \WPML_Config::maybe_add_filter
-	 *
 	 */
 	function get_translatable_documents( array $types, array $read_only_cpt_settings, array $cpt_unlocked_options ) {
 		global $wp_post_types;

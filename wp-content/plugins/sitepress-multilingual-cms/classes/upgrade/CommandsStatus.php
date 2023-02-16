@@ -2,7 +2,6 @@
 
 namespace WPML\Upgrade;
 
-
 class CommandsStatus {
 	const OPTION_KEY = 'wpml_update_statuses';
 
@@ -16,7 +15,7 @@ class CommandsStatus {
 	}
 
 	/**
-	 * @param string $class
+	 * @param string $className
 	 * @param bool   $flag
 	 */
 	public function markAsExecuted( $className, $flag = true ) {

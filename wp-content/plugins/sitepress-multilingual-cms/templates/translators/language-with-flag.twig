@@ -1,0 +1,2 @@
+{% set lang_details = languages.get( lang ) %}
+<img width="18" height="12" src="{{ lang_details.get_flag_url() }}"> {{ lang_details.get_display_name() }}

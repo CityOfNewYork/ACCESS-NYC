@@ -102,8 +102,9 @@ class WPML_Inactive_Content {
 	private function get_inactive() {
 
 		if ( null === $this->inactive ) {
-			$this->inactive   = array();
-			$post_query       = $this->wpdb->prepare( "
+			$this->inactive = array();
+			$post_query     = $this->wpdb->prepare(
+				"
 					SELECT COUNT(posts.ID) AS c, posts.post_type, languages_translations.name AS language
 					FROM {$this->wpdb->prefix}icl_translations translations
 					JOIN {$this->wpdb->posts} posts
@@ -114,7 +115,8 @@ class WPML_Inactive_Content {
 						ON languages_translations.language_code = languages.code
 							AND languages_translations.display_language_code = %s
 					GROUP BY posts.post_type, translations.language_code
-				", array( wpml_like_escape( 'post_' ) . '%', $this->current_language )
+				",
+				array( wpml_like_escape( 'post_' ) . '%', $this->current_language )
 			);
 
 			$post_results = $this->wpdb->get_results( $post_query );
@@ -125,7 +127,8 @@ class WPML_Inactive_Content {
 				}
 			}
 
-			$tax_query = $this->wpdb->prepare( "
+			$tax_query = $this->wpdb->prepare(
+				"
 				   SELECT COUNT(posts.term_taxonomy_id) AS c, posts.taxonomy, languages_translations.name AS language
 				   FROM {$this->wpdb->prefix}icl_translations translations
 					JOIN {$this->wpdb->term_taxonomy} posts
@@ -137,7 +140,10 @@ class WPML_Inactive_Content {
 							AND languages_translations.display_language_code = %s
 					WHERE translations.element_type LIKE %s
 					GROUP BY posts.taxonomy, translations.language_code
-				", $this->current_language, wpml_like_escape(  'tax_') . '%' );
+				",
+				$this->current_language,
+				wpml_like_escape( 'tax_' ) . '%'
+			);
 
 			$tax_results = $this->wpdb->get_results( $tax_query );
 

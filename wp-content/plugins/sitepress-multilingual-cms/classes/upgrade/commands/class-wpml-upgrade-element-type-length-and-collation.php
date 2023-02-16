@@ -14,8 +14,8 @@ class WPML_Upgrade_Element_Type_Length_And_Collation implements IWPML_Upgrade_Co
 
 	/** @return bool */
 	private function run() {
-		$table  = 'icl_translations';
-		$column = 'element_type';
+		$table       = 'icl_translations';
+		$column      = 'element_type';
 		$column_attr = "VARCHAR(60) NOT NULL DEFAULT 'post_post'";
 
 		if ( $this->upgrade_schema->does_table_exist( $table ) ) {

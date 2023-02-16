@@ -6,12 +6,12 @@
 global $wpdb;
 
 $current_table = 'icl_languages';
-$sql = "ALTER TABLE {$wpdb->prefix}icl_languages MODIFY default_locale varchar(35), MODIFY tag varchar(35);";
-$result = $wpdb->query( $sql );
-if(false!==$result) {
+$sql           = "ALTER TABLE {$wpdb->prefix}icl_languages MODIFY default_locale varchar(35), MODIFY tag varchar(35);";
+$result        = $wpdb->query( $sql );
+if ( false !== $result ) {
 	$current_table = 'icl_locale_map';
-	$sql = "ALTER TABLE {$wpdb->prefix}icl_locale_map MODIFY locale varchar(35);";
-	$result = $wpdb->query( $sql );
+	$sql           = "ALTER TABLE {$wpdb->prefix}icl_locale_map MODIFY locale varchar(35);";
+	$result        = $wpdb->query( $sql );
 }
 
 function update_seo_settings() {
@@ -50,6 +50,6 @@ function update_seo_settings() {
 
 update_seo_settings();
 
-if(false==$result) {
-	throw new Exception('Error upgrading schema for table "' . $current_table . '": ' . $wpdb->last_error );
+if ( false == $result ) {
+	throw new Exception( 'Error upgrading schema for table "' . $current_table . '": ' . $wpdb->last_error );
 }

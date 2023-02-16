@@ -8,6 +8,10 @@ class Shortcode {
 
 	private $context;
 	private $name;
+	/**
+	 * @var \wpdb
+	 */
+	private $wpdb;
 
 	public function __construct( \wpdb $wpdb ) {
 		$this->wpdb = $wpdb;
@@ -61,7 +65,7 @@ class Shortcode {
 	 */
 	private function get_registered_string() {
 		$strings = $this->get_strings_registered_in_context();
-		if ( $strings && array_key_exists( $this->name , $strings ) ) {
+		if ( $strings && array_key_exists( $this->name, $strings ) ) {
 			return $strings[ $this->name ];
 		}
 

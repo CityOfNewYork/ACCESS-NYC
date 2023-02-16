@@ -76,7 +76,7 @@ class WPML_Compatibility_Disqus implements IWPML_Action {
 			'yi'      => self::LANGUAGE_NOT_SUPPORTED,
 			'zh-hans' => 'zh',
 			'zh-hant' => 'zh_AHNT',
-			'zu'      => 'af'
+			'zu'      => 'af',
 		);
 
 		return apply_filters( 'wpml_disqus_language_map', $map );

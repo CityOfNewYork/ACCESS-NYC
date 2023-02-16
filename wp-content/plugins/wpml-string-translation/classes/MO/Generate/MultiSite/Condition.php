@@ -16,7 +16,7 @@ class Condition {
 
 	private function hasPostBodyParam() {
 		$request_body = file_get_contents( 'php://input' );
-		$data         = (array)json_decode( $request_body );
+		$data         = filter_var_array( (array)json_decode( $request_body ), FILTER_SANITIZE_STRING );
 
 		return isset( $data['runForAllSites'] ) && $data['runForAllSites'];
 	}

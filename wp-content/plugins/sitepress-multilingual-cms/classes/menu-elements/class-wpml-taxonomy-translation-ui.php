@@ -13,11 +13,11 @@ class WPML_Taxonomy_Translation_UI {
 	/**
 	 * WPML_Taxonomy_Translation constructor.
 	 *
-	 * @param SitePress $sitepress
-	 * @param string $taxonomy if given renders a specific taxonomy,
-	 *                         otherwise renders a placeholder
-	 * @param bool[] $args array with possible indices:
-	 *                     'taxonomy_selector' => bool .. whether or not to show the taxonomy selector
+	 * @param SitePress                      $sitepress
+	 * @param string                         $taxonomy if given renders a specific taxonomy,
+	 *                                                 otherwise renders a placeholder
+	 * @param bool[]                         $args array with possible indices:
+	 *                                             'taxonomy_selector' => bool .. whether or not to show the taxonomy selector
 	 * @param WPML_UI_Screen_Options_Factory $screen_options_factory
 	 */
 	public function __construct(
@@ -34,11 +34,15 @@ class WPML_Taxonomy_Translation_UI {
 			$help_title = esc_html__( 'Taxonomy Translation', 'sitepress' );
 			$help_text  = $this->get_help_text();
 
-			$this->screen_options = $screen_options_factory->create_pagination( 'taxonomy_translation_per_page',
-			                                                                    ICL_TM_DOCS_PER_PAGE );
-			$screen_options_factory->create_help_tab( 'taxonomy_translation_help_tab',
-			                                                                  $help_title,
-			                                                                  $help_text );
+			$this->screen_options = $screen_options_factory->create_pagination(
+				'taxonomy_translation_per_page',
+				ICL_TM_DOCS_PER_PAGE
+			);
+			$screen_options_factory->create_help_tab(
+				'taxonomy_translation_help_tab',
+				$help_title,
+				$help_text
+			);
 		}
 	}
 
@@ -60,8 +64,8 @@ class WPML_Taxonomy_Translation_UI {
 			$output .= '<br/>';
 		}
 		$output .= '<div id="wpml_tt_taxonomy_translation_wrap" data-items_per_page="'
-		           . $this->get_items_per_page()
-		           . '">';
+				   . $this->get_items_per_page()
+				   . '">';
 		$output .= '<div class="loading-content"><span class="spinner" style="visibility: visible"></span></div>';
 		$output .= '</div>';
 		do_action( 'icl_menu_footer' );
@@ -85,30 +89,44 @@ class WPML_Taxonomy_Translation_UI {
 	 */
 	private function get_help_text() {
 		/* translators: this is the title of a documentation page used to terminate the sentence "is not possible to ..."  */
-		$translate_base_taxonomy_slug_link_title = esc_html__( 'translate the base taxonomy slugs with WPML',
-		                                                       'sitepress' );
-		$translate_base_taxonomy_slug_link       = '<a href="https://wpml.org/faq/translate-taxonomy-slugs-wpml/" target="_blank">'
-		                                           . $translate_base_taxonomy_slug_link_title
-		                                           . '</a>';
+		$translate_base_taxonomy_slug_link_title = esc_html__(
+			'translate the base taxonomy slugs with WPML',
+			'sitepress'
+		);
+		$translate_base_taxonomy_slug_link       = '<a href="https://wpml.org/faq/translate-taxonomy-slugs-wpml/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore" target="_blank">'
+												   . $translate_base_taxonomy_slug_link_title
+												   . '</a>';
 
 		/* translators: this is the title of a documentation page used to terminate the sentence "To learn more, please visit our documentation page about..."  */
-		$translate_taxonomies_link_title = esc_html__( 'translating post categories and custom taxonomies',
-		                                               'sitepress' );
-		$translate_taxonomies_link       = '<a href="https://wpml.org/documentation/getting-started-guide/translating-post-categories-and-custom-taxonomies/" target="_blank">'
-		                                   . $translate_taxonomies_link_title
-		                                   . '</a>';
+		$translate_taxonomies_link_title = esc_html__(
+			'translating post categories and custom taxonomies',
+			'sitepress'
+		);
+		$translate_taxonomies_link       = '<a href="https://wpml.org/documentation/getting-started-guide/translating-post-categories-and-custom-taxonomies/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore" target="_blank">'
+										   . $translate_taxonomies_link_title
+										   . '</a>';
 
 		$help_sentences   = array();
-		$help_sentences[] = esc_html__( "WPML allows you to easily translate your site's taxonomies. Only taxonomies marked as translatable will be available for translation. Select the taxonomy in the dropdown menu and then use the list of taxonomy terms that appears to translate them.",
-		                                'sitepress' );
+		$help_sentences[] = esc_html__(
+			"WPML allows you to easily translate your site's taxonomies. Only taxonomies marked as translatable will be available for translation. Select the taxonomy in the dropdown menu and then use the list of taxonomy terms that appears to translate them.",
+			'sitepress'
+		);
 		/* translators: the sentence is completed with "translate the base taxonomy slugs with WPML" */
-		$help_sentences[] = sprintf( esc_html__( 'Please note that currently, you can translate the slugs of taxonomy terms but it is not possible to %s.',
-		                                         'sitepress' ),
-		                             $translate_base_taxonomy_slug_link );
+		$help_sentences[] = sprintf(
+			esc_html__(
+				'Please note that currently, you can translate the slugs of taxonomy terms but it is not possible to %s.',
+				'sitepress'
+			),
+			$translate_base_taxonomy_slug_link
+		);
 		/* translators: the sentence is completed with "translating post categories and custom taxonomies" */
-		$help_sentences[] = sprintf( esc_html__( 'To learn more, please visit our documentation page about %s.',
-		                                         'sitepress' ),
-		                             $translate_taxonomies_link );
+		$help_sentences[] = sprintf(
+			esc_html__(
+				'To learn more, please visit our documentation page about %s.',
+				'sitepress'
+			),
+			$translate_taxonomies_link
+		);
 
 		return '<p>' . implode( '</p><p>', $help_sentences ) . '</p>';
 	}

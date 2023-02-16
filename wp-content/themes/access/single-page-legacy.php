@@ -93,7 +93,10 @@ if (get_field('alert')) {
   ));
 
   $context['alerts'] = array_filter($alerts, function($p) {
-    return in_array('pages', array_values($p->custom['location']));
+    $location = (!empty($p->custom['location']))
+      ? $p->custom['location'] : [];
+
+    return in_array('pages', array_values($location));
   });
 }
 

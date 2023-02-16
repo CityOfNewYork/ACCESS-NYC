@@ -4,7 +4,7 @@
  * @author OnTheGo Systems
  */
 class WPML_ACF_Xliff {
-	/** @var WPDB $wpdb */
+	/** @var wpdb $wpdb */
 	public $wpdb;
 	/** @var SitePress $sitepress */
 	protected $sitepress;
@@ -127,7 +127,7 @@ class WPML_ACF_Xliff {
 	}
 
 	/**
-	 * @param $search_pattern
+	 * @param string $search_pattern
 	 */
 	private function collect_meta_keys_to_update( $search_pattern ) {
 		$this->search_patterns[] = $search_pattern;

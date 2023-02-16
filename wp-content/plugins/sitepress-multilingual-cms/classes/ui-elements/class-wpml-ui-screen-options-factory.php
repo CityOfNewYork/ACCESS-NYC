@@ -24,11 +24,11 @@ class WPML_UI_Screen_Options_Factory {
 
 		return $pagination;
 	}
-	
+
 	public function create_help_tab( $id, $title, $content ) {
 		$help_tab = new WPML_UI_Help_Tab( $this->sitepress->get_wp_api(), $id, $title, $content );
 		$help_tab->init_hooks();
-		
+
 		return $help_tab;
 	}
 

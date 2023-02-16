@@ -51,22 +51,22 @@ class WPML_String_Scanner {
 	/**
 	 * WPML_String_Scanner constructor.
 	 *
-	 * @param WP_Filesystem_Base $wp_filesystem
+	 * @param WP_Filesystem_Base   $wp_filesystem
 	 * @param WPML_ST_File_Hashing $file_hashing
 	 */
 	public function __construct( WP_Filesystem_Base $wp_filesystem, WPML_ST_File_Hashing $file_hashing ) {
 		global $wpdb;
 
-		$this->domains               = array();
-		$this->registered_strings    = array();
-		$this->lang_codes            = array();
-		$this->domains_found         = array();
-		$this->scan_stats            = array();
-		$this->scanned_files         = array();
+		$this->domains            = array();
+		$this->registered_strings = array();
+		$this->lang_codes         = array();
+		$this->domains_found      = array();
+		$this->scan_stats         = array();
+		$this->scanned_files      = array();
 
-		$this->default_domain        = 'default';
-		$this->wp_filesystem         = $wp_filesystem;
-		$this->file_hashing          = $file_hashing;
+		$this->default_domain = 'default';
+		$this->wp_filesystem  = $wp_filesystem;
+		$this->file_hashing   = $file_hashing;
 	}
 
 	protected function scan_starting( $scanning ) {
@@ -81,8 +81,8 @@ class WPML_String_Scanner {
 		$result = array(
 			'scan_successful_message' => esc_html__( 'Scan successful! WPML found %s strings.', 'wpml-string-translation' ),
 			'files_processed_message' => esc_html__( 'The following files were processed:', 'wpml-string-translation' ),
-			'files_processed' => $this->get_scanned_files(),
-			'strings_found' => is_array( $__icl_registered_strings ) ? count( $__icl_registered_strings ) : 0,
+			'files_processed'         => $this->get_scanned_files(),
+			'strings_found'           => is_array( $__icl_registered_strings ) ? count( $__icl_registered_strings ) : 0,
 		);
 
 		if ( $result['strings_found'] ) {
@@ -92,13 +92,13 @@ class WPML_String_Scanner {
 		$sitepress->get_wp_api()->wp_send_json_success( $result );
 	}
 
-	protected final function init_text_domain( $text_domain ) {
+	final protected function init_text_domain( $text_domain ) {
 		$string_settings = apply_filters( 'wpml_get_setting', false, 'st' );
 
-		$use_header_text_domain = isset( $string_settings[ 'use_header_text_domains_when_missing' ] ) && $string_settings[ 'use_header_text_domains_when_missing' ];
-		
+		$use_header_text_domain = isset( $string_settings['use_header_text_domains_when_missing'] ) && $string_settings['use_header_text_domains_when_missing'];
+
 		$this->default_domain = 'default';
-	
+
 		if ( $use_header_text_domain && $text_domain ) {
 			$this->default_domain = $text_domain;
 		}
@@ -107,7 +107,7 @@ class WPML_String_Scanner {
 	protected function get_domains_found() {
 		return $this->domains_found[ $this->currently_scanning ];
 	}
-	
+
 	protected function get_default_domain() {
 		return $this->default_domain;
 	}
@@ -120,14 +120,15 @@ class WPML_String_Scanner {
 
 	/**
 	 * Get list of files under directory.
+	 *
 	 * @param  string $path       Directory to parse.
 	 * @param  object $filesystem WP_Filesystem object
 	 * @return array
 	 */
 	private function extract_files( $path, $filesystem ) {
-		$path = $this->add_dir_separator( $path );
+		$path  = $this->add_dir_separator( $path );
 		$files = array();
-		$list = $filesystem->dirlist( $path );
+		$list  = $filesystem->dirlist( $path );
 		foreach ( $list as $single_file ) {
 			if ( 'f' === $single_file['type'] ) {
 				$files[] = $path . $single_file['name'];
@@ -140,6 +141,7 @@ class WPML_String_Scanner {
 
 	/**
 	 * Make sure that the last character is second argument.
+	 *
 	 * @param  string $path
 	 * @param  string $separator
 	 * @return string
@@ -155,13 +157,13 @@ class WPML_String_Scanner {
 			return $path;
 		}
 	}
-	
+
 	private function fix_existing_string_with_wrong_context( $original_value, $new_string_context, $gettext_context ) {
 		if ( ! isset( $this->current_type ) || ! isset( $this->current_path ) ) {
 			return;
 		}
 
-        $old_context = $this->get_old_context( );
+		$old_context = $this->get_old_context();
 
 		$new_context_string_id = $this->get_string_id( $original_value, $new_string_context, $gettext_context );
 
@@ -174,17 +176,17 @@ class WPML_String_Scanner {
 			}
 		}
 	}
-    
-    private function get_old_context( ) {
-		
-        $plugin_or_theme_path = $this->current_path;
 
-		$name    = basename( $plugin_or_theme_path );
+	private function get_old_context() {
+
+		$plugin_or_theme_path = $this->current_path;
+
+		$name        = basename( $plugin_or_theme_path );
 		$old_context = $this->current_type . ' ' . $name;
 
-        return $old_context;
-        
-    }
+		return $old_context;
+
+	}
 
 	private function get_lang_code( $lang_locale ) {
 		global $wpdb;
@@ -201,7 +203,7 @@ class WPML_String_Scanner {
 		$this->warm_cache( $domain );
 
 		$string_context_name = md5( $gettext_context . md5( $original ) );
-		$string_id  = isset( $this->registered_strings[ $domain ] [ 'context-name' ] [ $string_context_name ] ) ? $this->registered_strings[ $domain ] [ 'context-name' ] [ $string_context_name ] : null;
+		$string_id           = isset( $this->registered_strings[ $domain ] ['context-name'] [ $string_context_name ] ) ? $this->registered_strings[ $domain ] ['context-name'] [ $string_context_name ] : null;
 
 		return $string_id;
 	}
@@ -212,22 +214,24 @@ class WPML_String_Scanner {
 		$string = $wpdb->get_row( $wpdb->prepare( "SELECT gettext_context, name FROM {$wpdb->prefix}icl_strings WHERE id=%d", $string_id ) );
 
 		$domain_name_context_md5 = md5( $new_string_context . $string->name . $string->gettext_context );
-		
-		$wpdb->update( $wpdb->prefix . 'icl_strings',
-						array(
-							  'context'                 => $new_string_context,
-							  'domain_name_context_md5' => $domain_name_context_md5
-							  ),
-						array( 'id' => $string_id ), array( '%s', '%s') , '%d' );
-		
 
+		$wpdb->update(
+			$wpdb->prefix . 'icl_strings',
+			array(
+				'context'                 => $new_string_context,
+				'domain_name_context_md5' => $domain_name_context_md5,
+			),
+			array( 'id' => $string_id ),
+			array( '%s', '%s' ),
+			'%d'
+		);
 
 	}
 
 	protected function set_stats( $key, $item ) {
 		$string_settings = apply_filters( 'wpml_get_setting', false, 'st' );
 
-		foreach( $this->get_domains_found() as $name => $count ) {
+		foreach ( $this->get_domains_found() as $name => $count ) {
 			$old_count = isset( $string_settings[ $key ][ $item ][ $name ] ) ?
 				$string_settings[ $key ][ $item ][ $name ] :
 				0;
@@ -251,16 +255,21 @@ class WPML_String_Scanner {
 		}
 
 		if ( ! in_array( $domain, $this->domains ) ) {
-			$this->domains[ ] = $domain;
+			$this->domains[] = $domain;
 
 			// clear existing entries (both source and page type)
-			$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}icl_string_positions WHERE string_id IN
-                (SELECT id FROM {$wpdb->prefix}icl_strings WHERE context = %s)", $domain ) );
+			$wpdb->query(
+				$wpdb->prepare(
+					"DELETE FROM {$wpdb->prefix}icl_string_positions WHERE string_id IN
+                (SELECT id FROM {$wpdb->prefix}icl_strings WHERE context = %s)",
+					$domain
+				)
+			);
 		}
 
-        $string = str_replace( '\n', "\n", $string );
+		$string = str_replace( '\n', "\n", $string );
 		$string = str_replace( array( '\"', "\\'" ), array( '"', "'" ), $string );
-		//replace extra backslashes added by _potx_process_file
+		// replace extra backslashes added by _potx_process_file
 		$string = str_replace( array( '\\\\' ), array( '\\' ), $string );
 		$string = stripcslashes( $string );
 
@@ -280,31 +289,35 @@ class WPML_String_Scanner {
 		}
 
 		// store position in source
-		$this->track_string( $string,
-							 array( 'domain' => $domain,
-								    'context' => $_gettext_context
-								  ),
-							ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_SOURCE,
-							$file,
-							$line );
+		$this->track_string(
+			$string,
+			array(
+				'domain'  => $domain,
+				'context' => $_gettext_context,
+			),
+			ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_SOURCE,
+			$file,
+			$line
+		);
 	}
 
 	private function register_string( $domain, $context, $name, $string ) {
 
 		$this->warm_cache( $domain );
 
-		if ( ! isset( $this->registered_strings[ $domain ] [ 'context-name' ] [ md5( $context . $name ) ] ) ) {
-			
+		if ( ! isset( $this->registered_strings[ $domain ] ['context-name'] [ md5( $context . $name ) ] ) ) {
+
 			if ( $context ) {
-				$string_context = array( 'domain'  => $domain,
-										 'context' => $context
-										);
+				$string_context = array(
+					'domain'  => $domain,
+					'context' => $context,
+				);
 			} else {
 				$string_context = $domain;
 			}
 			$string_id = icl_register_string( $string_context, $name, $string );
-			
-			$this->registered_strings[ $domain ] [ 'context-name' ] [ md5( $context . $name ) ] = $string_id;
+
+			$this->registered_strings[ $domain ] ['context-name'] [ md5( $context . $name ) ] = $string_id;
 		}
 	}
 
@@ -313,7 +326,7 @@ class WPML_String_Scanner {
 
 			$this->registered_strings[ $domain ] = array(
 				'context-name' => array(),
-				'value'      => array(),
+				'value'        => array(),
 			);
 
 			$results = $this->get_strings_mapper()->get_all_by_context( $domain );
@@ -325,20 +338,20 @@ class WPML_String_Scanner {
 
 	public function track_string( $text, $context, $kind = ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_PAGE, $file = null, $line = null ) {
 		list ( $domain, $gettext_context ) = wpml_st_extract_context_parameters( $context );
-		
+
 		// get string id
 		$string_id = $this->get_string_id( $text, $domain, $gettext_context );
 		if ( $string_id ) {
-			$str_pos_mapper = $this->get_string_positions_mapper();
+			$str_pos_mapper       = $this->get_string_positions_mapper();
 			$string_records_count = $str_pos_mapper->get_count_of_positions_by_string_and_kind( $string_id, $kind );
 
 			if ( ICL_STRING_TRANSLATION_STRING_TRACKING_THRESHOLD > $string_records_count ) {
 				if ( $kind == ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_PAGE ) {
 					// get page url
-					$https    = isset( $_SERVER[ 'HTTPS' ] ) && $_SERVER[ 'HTTPS' ] == 'on' ? 's' : '';
-					$position = 'http' . $https . '://' . $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ];
+					$https    = isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] == 'on' ? 's' : '';
+					$position = 'http' . $https . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 				} else {
-					$file = $this->get_file_name_converter()->transform_realpath_to_reference( $file );
+					$file     = $this->get_file_name_converter()->transform_realpath_to_reference( $file );
 					$position = $file . '::' . $line;
 				}
 
@@ -358,114 +371,133 @@ class WPML_String_Scanner {
 	}
 
 	protected function add_scanned_file( $file ) {
-		$this->scanned_files[ ] = $this->format_path_for_display( $file );
+		$this->scanned_files[] = $this->format_path_for_display( $file );
 	}
 
 	protected function get_scanned_files() {
 		return $this->scanned_files;
 	}
-    
-    protected function cleanup_wrong_contexts( ) {
-        global $wpdb;
-		
-        $old_context = $this->get_old_context( );
 
-	    /** @var array $results */
-		$results = $wpdb->get_results( $wpdb->prepare( "
+	protected function cleanup_wrong_contexts() {
+		global $wpdb;
+
+		$old_context = $this->get_old_context();
+
+		/** @var array $results */
+		$results = $wpdb->get_results(
+			$wpdb->prepare(
+				"
 	        SELECT id, name, value
 	        FROM {$wpdb->prefix}icl_strings
 	        WHERE context = %s",
-			$old_context
-			) );
-		
-		foreach( $results as $string ) {
+				$old_context
+			)
+		);
+
+		foreach ( $results as $string ) {
 			// See if the string has no translations
 
 			/** @var array $old_translations */
-			$old_translations = $wpdb->get_results( $wpdb->prepare( "
+			$old_translations = $wpdb->get_results(
+				$wpdb->prepare(
+					"
 				SELECT id, language, status, value
 				FROM {$wpdb->prefix}icl_string_translations
 				WHERE string_id = %d",
-				$string->id
-				) );
+					$string->id
+				)
+			);
 
 			if ( ! $old_translations ) {
 				// We don't have any translations so we can delete the string.
-				
+
 				$wpdb->delete( $wpdb->prefix . 'icl_strings', array( 'id' => $string->id ), array( '%d' ) );
 			} else {
 				// check if we have a new string in the right context
-				
-				$domains = $this->get_domains_found( );
-				
+
+				$domains = $this->get_domains_found();
+
 				foreach ( $domains as $domain => $count ) {
-					$new_string_id = $wpdb->get_var( $wpdb->prepare( "
+					$new_string_id = $wpdb->get_var(
+						$wpdb->prepare(
+							"
 						SELECT id
 						FROM {$wpdb->prefix}icl_strings
 						WHERE context = %s AND name = %s AND value = %s",
-						$domain, $string->name, $string->value
-						) );
-					
+							$domain,
+							$string->name,
+							$string->value
+						)
+					);
+
 					if ( $new_string_id ) {
-						
+
 						// See if it has the same translations
 
 						/** @var array $new_translations */
-						$new_translations = $wpdb->get_results( $wpdb->prepare( "
+						$new_translations = $wpdb->get_results(
+							$wpdb->prepare(
+								"
 							SELECT id, language, status, value
 							FROM {$wpdb->prefix}icl_string_translations
 							WHERE string_id = %d",
-							$new_string_id
-							) );
-						
-						foreach ( $new_translations as $new_translation) {
+								$new_string_id
+							)
+						);
+
+						foreach ( $new_translations as $new_translation ) {
 							foreach ( $old_translations as $index => $old_translation ) {
 								if ( $new_translation->language == $old_translation->language &&
 										$new_translation->status == $old_translation->status &&
 										$new_translation->value == $old_translation->value ) {
-									unset( $old_translations[$index] );
+									unset( $old_translations[ $index ] );
 								}
 							}
 						}
 						if ( ! $old_translations ) {
 							// We don't have any old translations that are not in the new strings so we can delete the string.
-							
+
 							$wpdb->delete( $wpdb->prefix . 'icl_strings', array( 'id' => $string->id ), array( '%d' ) );
 							break;
 						}
-						
-					}					
-					
+					}
 				}
-				
 			}
 		}
-		
+
 		// Rename the context for any strings that are in the old context
 		// This way the update message will no longer show.
-		
+
 		$obsolete_context = str_replace( 'plugin ', '', $old_context );
 		$obsolete_context = str_replace( 'theme ', '', $obsolete_context );
 		$obsolete_context = $obsolete_context . ' (obsolete)';
 
-	    $string_update_context = $wpdb->get_results( $wpdb->prepare( "
+		$string_update_context = $wpdb->get_results(
+			$wpdb->prepare(
+				"
 									 SELECT id FROM {$wpdb->prefix}icl_strings
 									 WHERE context = %s
 									 ",
-		                             $old_context ), ARRAY_A );
+				$old_context
+			),
+			ARRAY_A
+		);
 
-
-	    if ( $string_update_context ) {
-		    $wpdb->query( $wpdb->prepare( "
+		if ( $string_update_context ) {
+			$wpdb->query(
+				$wpdb->prepare(
+					"
 									 UPDATE {$wpdb->prefix}icl_strings
 									 SET context = %s
 									 WHERE id IN ( " . implode( ',', wp_list_pluck( $string_update_context, 'id' ) ) . ' )
 									 ',
-			    $obsolete_context ) );
-	    }
-        
-    }
-	
+					$obsolete_context
+				)
+			);
+		}
+
+	}
+
 	protected function copy_old_translations( $contexts, $prefix ) {
 		foreach ( $contexts as $context ) {
 			$old_strings = $this->get_strings_by_context( $prefix . ' ' . $context );
@@ -475,14 +507,12 @@ class WPML_String_Scanner {
 
 			$old_translations = $this->get_strings_translations( $old_strings );
 
-			$new_strings = $this->get_strings_by_context( $context );
+			$new_strings      = $this->get_strings_by_context( $context );
 			$new_translations = $this->get_strings_translations( $new_strings );
 
-			/** @var array $old_translations */
-			foreach( $old_translations as $old_translation ) {
+			foreach ( $old_translations as $old_translation ) {
 				// see if we have a new translation.
 				$found = false;
-				/** @var array $new_translations */
 				foreach ( $new_translations as $new_translation ) {
 					if ( $new_translation->string_id == $old_translation->string_id &&
 							$new_translation->language == $old_translation->language ) {
@@ -490,10 +520,10 @@ class WPML_String_Scanner {
 						break;
 					}
 				}
-				
+
 				if ( ! $found ) {
 					// Copy the old translation to the new string.
-					
+
 					// Find the original
 					foreach ( $old_strings as $old_string ) {
 						if ( $old_string->id == $old_translation->string_id ) {
@@ -508,12 +538,10 @@ class WPML_String_Scanner {
 							break;
 						}
 					}
-					
 				}
-				
 			}
 		}
-			
+
 	}
 
 	/**
@@ -524,25 +552,28 @@ class WPML_String_Scanner {
 	private function get_strings_by_context( $context ) {
 		global $wpdb;
 
-		return $wpdb->get_results( $wpdb->prepare( "
+		return $wpdb->get_results(
+			$wpdb->prepare(
+				"
 				SELECT id, name, value
 				FROM {$wpdb->prefix}icl_strings
 				WHERE context = %s",
-			$context
-		) );
+				$context
+			)
+		);
 	}
 
 	/**
 	 * @param array $strings
 	 *
-	 * @return array
+	 * @return array<\stdClass>
 	 */
 	private function get_strings_translations( $strings ) {
 		global $wpdb;
 
 		$translations = array();
 
-		if (count($strings)) {
+		if ( count( $strings ) ) {
 			foreach ( array_chunk( $strings, 100 ) as $chunk ) {
 				$ids = array();
 				foreach ( $chunk as $string ) {
@@ -550,7 +581,8 @@ class WPML_String_Scanner {
 				}
 				$ids = implode( ',', $ids );
 
-				$rows = $wpdb->get_results( "
+				$rows = $wpdb->get_results(
+					"
 							SELECT id, string_id, language, status, value
 							FROM {$wpdb->prefix}icl_string_translations
 							WHERE string_id IN ({$ids})"
@@ -624,7 +656,7 @@ class WPML_String_Scanner {
 	/**
 	 * @param WPML_File_Name_Converter $converter
 	 */
-	public function set_file_name_converter(WPML_File_Name_Converter $converter) {
+	public function set_file_name_converter( WPML_File_Name_Converter $converter ) {
 		$this->file_name_converter = $converter;
 	}
 
@@ -646,19 +678,6 @@ class WPML_String_Scanner {
 		}
 
 		return $is_string_preview;
-	}
-
-	/**
-	 * @param string $type
-	 * @param string $path
-	 *
-	 * @return bool
-	 */
-	public function update_last_mo_scan_timestamp( $type, $path ) {
-		$name = basename( $path );
-		$existing_dates = get_option( self::UPDATE_LAST_MO_SCAN_TIMESTAMP, array() );
-		$existing_dates[ $type ][ $name ] = time();
-		return update_option( self::UPDATE_LAST_MO_SCAN_TIMESTAMP, $existing_dates, false );
 	}
 
 	/** @return bool */

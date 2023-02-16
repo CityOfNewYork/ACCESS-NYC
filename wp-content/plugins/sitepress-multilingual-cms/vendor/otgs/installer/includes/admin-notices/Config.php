@@ -22,9 +22,11 @@ class Config {
 	 */
 	protected function hasItem( array $messages, $item, $type ) {
 		foreach ( $messages['repo'] as $repo => $ids ) {
-			foreach ( $ids as $id ) {
-				if ( isset( $this->config['repo'][ $repo ][ $id ][ $type ] ) &&
-				     in_array( $item, $this->config['repo'][ $repo ][ $id ][ $type ], true ) ) {
+			foreach ( $ids as $id => $noticeType ) {
+				$index = is_array( $noticeType ) ? $id : $noticeType;
+
+				if ( isset( $this->config['repo'][ $repo ][ $index ][ $type ] )
+				     && in_array( $item, $this->config['repo'][ $repo ][ $index ][ $type ], true ) ) {
 					return true;
 				}
 			}

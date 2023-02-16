@@ -24,5 +24,4 @@ class Store {
 		$current = get_option( self::ADMIN_NOTICES_OPTION, [] );
 		return isset( $current[$key] ) ? $current[$key] : $default;
 	}
-
 }

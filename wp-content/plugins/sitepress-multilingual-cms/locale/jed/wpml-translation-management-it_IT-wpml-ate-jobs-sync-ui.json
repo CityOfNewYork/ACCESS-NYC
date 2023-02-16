@@ -1,0 +1,163 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "Invio in traduzione"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "Connessione all'editor di traduzione avanzato di WPML"
+         ],
+         "Try again": [
+            "Riprova"
+         ],
+         "You don't have the rights to review this language": [
+            "Non possiedi i diritti per rivedere le traduzioni in questa lingua"
+         ],
+         "pages & posts": [
+            "pagine a articoli"
+         ],
+         "left to translate": [
+            "da tradurre"
+         ],
+         "Translate on hold": [
+            "In attesa di traduzione"
+         ],
+         "All translated": [
+            "Tutto tradotto"
+         ],
+         "%d translations left": [
+            "%d traduzioni rimaste"
+         ],
+         "Credits used:": [
+            "Crediti utilizzati:"
+         ],
+         "Credits left:": [
+            "Crediti rimanenti:"
+         ],
+         "Calculating": [
+            "Calcolo in corso"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "Crediti prepagati rimanenti assegnati a questo sito su WPML.org."
+         ],
+         "Prepaid credits left": [
+            "Crediti prepagati rimanenti"
+         ],
+         "Account credits used": [
+            "Crediti dell'account utilizzati"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "Una volta utilizzati tutti i crediti prepagati, ti fattureremo eventuali crediti aggiuntivi che utilizzerai dopo la fine del mese"
+         ],
+         "Payment limit:": [
+            "Limite di pagamento:"
+         ],
+         "%s credits": [
+            "%s crediti"
+         ],
+         "Preparing more content for translation": [
+            "Preparazione di altri contenuti per la traduzione"
+         ],
+         "Preparing content for translation": [
+            "Preparazione dei contenuti per la traduzione"
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "Si è verificato un problema con la traduzione automatica che richiede la tua attenzione. Risolvilo per continuare."
+         ],
+         "%d translations waiting for review": [
+            "%d traduzioni in attesa di revisione"
+         ],
+         "Draft — Pending review": [
+            "Bozza — In attesa di revisione"
+         ],
+         "Complete": [
+            "Completata"
+         ],
+         "Insufficient funds": [
+            "Fondi insufficienti"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "Consulta la <a>Guida introduttiva</a> per ottenere maggiori informazioni sulle modalità di traduzione dei contenuti del tuo sito"
+         ],
+         "Let's Start Translating!": [
+            "Iniziamo a tradurre!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "Seleziona i contenuti dal dashboard di traduzione qui in basso e crea il tuo primo lavoro di traduzione!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "Modifica le tue <a>impostazioni di traduzione automatica</a> (i lavori di traduzione in corso verranno completati con le impostazioni correnti)."
+         ],
+         "Read more about translating your site automatically.": [
+            "Ulteriori informazioni sulla traduzione automatica del tuo sito."
+         ],
+         "Your site is being automatically translated!": [
+            "Il tuo sito viene tradotto automaticamente!"
+         ],
+         "Automatic Translation Status": [
+            "Stato della traduzione automatica"
+         ],
+         "Calculating...": [
+            "Calcolo in corso..."
+         ],
+         "Do not close WP admin!": [
+            "Non chiudere l'area di amministrazione di WP!"
+         ],
+         "The number of translations": [
+            "Il numero di traduzioni"
+         ],
+         "Delete Translations": [
+            "Elimina le traduzioni"
+         ],
+         "Keep Translations as Draft": [
+            "Mantieni le traduzioni come bozza"
+         ],
+         "Never mind. I want to review these translations.": [
+            "Lascia stare. Desidero rivedere queste traduzioni."
+         ],
+         "Cancel": [
+            "Annulla"
+         ],
+         "You haven't selected any jobs that need review.": [
+            "Non hai selezionato nessun lavoro che necessita di revisione."
+         ],
+         "Please select the pending review jobs to abort.": [
+            "Seleziona i lavori di revisione in sospeso da annullare."
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "Questa azione rimuoverà i lavori selezionati dalla coda delle traduzioni senza pubblicarli. Cosa intendi fare con le traduzioni?"
+         ],
+         "Cancel Translation Review": [
+            "Annulla la revisione delle traduzioni"
+         ],
+         "Edit": [
+            "Modifica"
+         ],
+         "Updating": [
+            "Aggiornamento in corso"
+         ],
+         "Translate": [
+            "Traduci"
+         ],
+         "Take and translate": [
+            "Accetta e traduci"
+         ],
+         "Review": [
+            "Revisione"
+         ],
+         "Are you sure you want to resign from this job?": [
+            "Confermi di voler rinunciare a questo lavoro?"
+         ],
+         "Resign": [
+            "Rinuncia"
+         ],
+         "View": [
+            "Visualizza"
+         ]
+      }
+   }
+}

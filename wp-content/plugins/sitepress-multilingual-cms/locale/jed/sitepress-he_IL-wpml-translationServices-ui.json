@@ -1,0 +1,49 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Connect this site to your %s account": [
+            "חבר אתר זה לחשבון %s שלך"
+         ],
+         "Error": [
+            "שגיאה"
+         ],
+         "« Use a different Translation Service": [
+            "« השתמש בשירות תרגום אחר"
+         ],
+         "Authenticate": [
+            "בצע אימות"
+         ],
+         "Visit <link_to_service /> to request an API Token. This token allows WPML to connect to <service_name /> to send and receive jobs.": [
+            "בקר ב-<link_to_service /> כדילבקש אסימון API. אסימון זה יאפשר ל-WPML להתחבר ל-. <service_name /> כדי לשלוח משימות ולקבל אותן."
+         ],
+         "Search": [
+            "חפש"
+         ],
+         "Settings": [
+            "הגדרות"
+         ],
+         "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
+            "כרגע לא ניתן לחבר שירות תרגום כאשר WPML מוגדר לתרגום האתר באופן אוטומטי. כדי להשתמש בשירות תרגום, שנה את מצב התרגום בדף <LinkToSettingsPage />."
+         ],
+         "Documentation": [
+            "תיעוד"
+         ],
+         "Activate": [
+            "הפעל"
+         ],
+         "Name": [
+            "שם"
+         ],
+         "Description": [
+            "תיאור"
+         ],
+         "Ranking": [
+            "דירוג"
+         ]
+      }
+   }
+}

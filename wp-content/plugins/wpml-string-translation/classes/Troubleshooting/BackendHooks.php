@@ -24,7 +24,8 @@ class BackendHooks implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 	}
 
 	public function displayButtons() {
-		?><div><?php
+		?><div>
+		<?php
 
 		if ( ! $this->domainsAndLanguagesRepo->get()->isEmpty() ) {
 			$this->displayButton(
@@ -40,7 +41,9 @@ class BackendHooks implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 			esc_attr__( 'Cleanup and optimization completed!', 'wpml-string-translation' )
 		);
 
-		?></div><?php
+		?>
+		</div>
+		<?php
 	}
 
 	/**
@@ -57,7 +60,7 @@ class BackendHooks implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 				   value="<?php echo $buttonLabel; ?>"
 				   data-action="<?php echo $action; ?>"
 				   data-success-message="<?php echo $confirmationMessage; ?>"
-				   data-nonce="<?php echo wp_create_nonce( self::NONCE_KEY ) ?>"
+				   data-nonce="<?php echo wp_create_nonce( self::NONCE_KEY ); ?>"
 				   data-reload="<?php echo ! (bool) $confirmationMessage; ?>"
 			/>
 			<br/>

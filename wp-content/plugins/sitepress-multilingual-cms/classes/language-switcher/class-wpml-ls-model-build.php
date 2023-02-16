@@ -38,6 +38,8 @@ class WPML_LS_Model_Build extends WPML_SP_User {
 		'menu_item_parent'       => 'mixed',
 		'is_parent'              => 'bool',
 		'backward_compatibility' => 'array',
+		'flag_width'             => 'int',
+		'flag_height'            => 'int',
 	];
 
 	/**
@@ -100,8 +102,8 @@ class WPML_LS_Model_Build extends WPML_SP_User {
 	}
 
 	/**
-	 * @param $group
-	 * @param $slug
+	 * @param string $group
+	 * @param string $slug
 	 *
 	 * @return string
 	 */
@@ -136,6 +138,9 @@ class WPML_LS_Model_Build extends WPML_SP_User {
 			$get_ls_args['skip_missing'] = false;
 		}
 
+		$flag_width  = $slot->get( 'include_flag_width' );
+		$flag_height = $slot->get( 'include_flag_height' );
+
 		$languages = $this->sitepress->get_ls_languages( $get_ls_args );
 		$languages = is_array( $languages ) ? $languages : [];
 
@@ -155,6 +160,13 @@ class WPML_LS_Model_Build extends WPML_SP_User {
 					'code' => $code,
 					'url'  => $data['url'],
 				];
+
+				if ( $flag_width ) {
+					$ret[ $code ]['flag_width'] = $flag_width;
+				}
+				if ( $flag_height ) {
+					$ret[ $code ]['flag_height'] = $flag_height;
+				}
 
 				/* @deprecated Use 'wpml_ls_language_url' instead */
 				$ret[ $code ]['url'] = apply_filters( 'WPML_filter_link', $ret[ $code ]['url'], $data );
@@ -351,6 +363,10 @@ class WPML_LS_Model_Build extends WPML_SP_User {
 						$sanitized[ $allowed_var ] = (string) $vars[ $allowed_var ];
 						break;
 
+					case 'int':
+						$sanitized[ $allowed_var ] = (int) $vars[ $allowed_var ];
+						break;
+
 					case 'bool':
 						$sanitized[ $allowed_var ] = (bool) $vars[ $allowed_var ];
 						break;
@@ -463,8 +479,8 @@ class WPML_LS_Model_Build extends WPML_SP_User {
 	}
 
 	/**
-	 * @param                   $template_slug
-	 * @param mixed|string|null $type
+	 * @param string      $template_slug
+	 * @param string|null $type
 	 *
 	 * @return bool
 	 */

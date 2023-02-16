@@ -86,6 +86,11 @@
 					$.ui.ddmanager.prepareOffsets(this, event);
 			}
 
+			this.dragDirection = {
+				vertical: this._getDragVerticalDirection(),
+				horizontal: this._getDragHorizontalDirection()
+			};
+
 			//Regenerate the absolute position used for position checks
 			this.positionAbs = this._convertPositionTo("absolute");
 
@@ -165,7 +170,7 @@
 			var newList = document.createElement(o.listType);
 
 			this.beyondMaxLevels = 0;
-			
+
 			// If the item is moved to the left, send it to its parent's level unless there are siblings below it.
 			if (parentItem != null && nextItem == null &&
 					(o.rtl && (this.positionAbs.left + this.helper.outerWidth() > parentItem.offset().left + parentItem.outerWidth()) ||
@@ -332,7 +337,7 @@
 					depth --;
 				}
 
-				id = ($(item).attr(o.attribute || 'id')).match(o.expression || (/(.+)[-=_](.+)/));
+				id = ($(item).attr(o.attribute || 'id') || '').match(o.expression || (/(.+)[-=_](.+)/));
 
 				if (depth === sDepth + 1) {
 					pid = o.rootID;
@@ -343,7 +348,7 @@
 											 .match(o.expression || (/(.+)[-=_](.+)/));
 					pid = parentItem[2];
 				}
-				
+
 				if (id) {
 					var pmxi_is_assign = $(item).find('input.assign_term:first').is(':checked');
 					ret.push({"item_id": id[2], "left": left, "right": right, "parent_id": pid, "xpath":$(item).find('input.xpath_field').val(), "assign" : pmxi_is_assign });
@@ -370,7 +375,7 @@
 
 			if (this.options.listType) {
 				var list = item.closest(this.options.listType);
-				while (list && list.length > 0 && 
+				while (list && list.length > 0 &&
                     	!list.is('.ui-sortable')) {
 					level++;
 					list = list.parent().closest(this.options.listType);

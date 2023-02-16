@@ -18,7 +18,8 @@ abstract class VerificationOptions {
      * @param string $customMessage The text of a custom message to use for the
      *                              verification
      * @param string $sendDigits The digits to send after a phone call is answered
-     * @param string $locale The locale to use for the verification SMS or call
+     * @param string $locale The locale to use for the verification SMS, WhatsApp
+     *                       or call
      * @param string $customCode A pre-generated code
      * @param string $amount The amount of the associated PSD2 compliant
      *                       transaction.
@@ -28,10 +29,14 @@ abstract class VerificationOptions {
      * @param array $channelConfiguration Channel specific configuration in json
      *                                    format.
      * @param string $appHash Your App Hash to be appended at the end of an SMS.
+     * @param string $templateSid The verification template SMS messages.
+     * @param string $templateCustomSubstitutions The values of the special
+     *                                            variables declared on the message
+     *                                            template.
      * @return CreateVerificationOptions Options builder
      */
-    public static function create(string $customFriendlyName = Values::NONE, string $customMessage = Values::NONE, string $sendDigits = Values::NONE, string $locale = Values::NONE, string $customCode = Values::NONE, string $amount = Values::NONE, string $payee = Values::NONE, array $rateLimits = Values::ARRAY_NONE, array $channelConfiguration = Values::ARRAY_NONE, string $appHash = Values::NONE): CreateVerificationOptions {
-        return new CreateVerificationOptions($customFriendlyName, $customMessage, $sendDigits, $locale, $customCode, $amount, $payee, $rateLimits, $channelConfiguration, $appHash);
+    public static function create(string $customFriendlyName = Values::NONE, string $customMessage = Values::NONE, string $sendDigits = Values::NONE, string $locale = Values::NONE, string $customCode = Values::NONE, string $amount = Values::NONE, string $payee = Values::NONE, array $rateLimits = Values::ARRAY_NONE, array $channelConfiguration = Values::ARRAY_NONE, string $appHash = Values::NONE, string $templateSid = Values::NONE, string $templateCustomSubstitutions = Values::NONE): CreateVerificationOptions {
+        return new CreateVerificationOptions($customFriendlyName, $customMessage, $sendDigits, $locale, $customCode, $amount, $payee, $rateLimits, $channelConfiguration, $appHash, $templateSid, $templateCustomSubstitutions);
     }
 }
 
@@ -41,7 +46,8 @@ class CreateVerificationOptions extends Options {
      * @param string $customMessage The text of a custom message to use for the
      *                              verification
      * @param string $sendDigits The digits to send after a phone call is answered
-     * @param string $locale The locale to use for the verification SMS or call
+     * @param string $locale The locale to use for the verification SMS, WhatsApp
+     *                       or call
      * @param string $customCode A pre-generated code
      * @param string $amount The amount of the associated PSD2 compliant
      *                       transaction.
@@ -51,8 +57,12 @@ class CreateVerificationOptions extends Options {
      * @param array $channelConfiguration Channel specific configuration in json
      *                                    format.
      * @param string $appHash Your App Hash to be appended at the end of an SMS.
+     * @param string $templateSid The verification template SMS messages.
+     * @param string $templateCustomSubstitutions The values of the special
+     *                                            variables declared on the message
+     *                                            template.
      */
-    public function __construct(string $customFriendlyName = Values::NONE, string $customMessage = Values::NONE, string $sendDigits = Values::NONE, string $locale = Values::NONE, string $customCode = Values::NONE, string $amount = Values::NONE, string $payee = Values::NONE, array $rateLimits = Values::ARRAY_NONE, array $channelConfiguration = Values::ARRAY_NONE, string $appHash = Values::NONE) {
+    public function __construct(string $customFriendlyName = Values::NONE, string $customMessage = Values::NONE, string $sendDigits = Values::NONE, string $locale = Values::NONE, string $customCode = Values::NONE, string $amount = Values::NONE, string $payee = Values::NONE, array $rateLimits = Values::ARRAY_NONE, array $channelConfiguration = Values::ARRAY_NONE, string $appHash = Values::NONE, string $templateSid = Values::NONE, string $templateCustomSubstitutions = Values::NONE) {
         $this->options['customFriendlyName'] = $customFriendlyName;
         $this->options['customMessage'] = $customMessage;
         $this->options['sendDigits'] = $sendDigits;
@@ -63,6 +73,8 @@ class CreateVerificationOptions extends Options {
         $this->options['rateLimits'] = $rateLimits;
         $this->options['channelConfiguration'] = $channelConfiguration;
         $this->options['appHash'] = $appHash;
+        $this->options['templateSid'] = $templateSid;
+        $this->options['templateCustomSubstitutions'] = $templateCustomSubstitutions;
     }
 
     /**
@@ -100,9 +112,10 @@ class CreateVerificationOptions extends Options {
     }
 
     /**
-     * The locale to use for the verification SMS or call. Can be: `af`, `ar`, `ca`, `cs`, `da`, `de`, `el`, `en`, `en-GB`, `es`, `fi`, `fr`, `he`, `hi`, `hr`, `hu`, `id`, `it`, `ja`, `ko`, `ms`, `nb`, `nl`, `pl`, `pt`, `pr-BR`, `ro`, `ru`, `sv`, `th`, `tl`, `tr`, `vi`, `zh`, `zh-CN`, or `zh-HK.`
+     * The locale to use for the verification SMS, WhatsApp or call. Can be: `af`, `ar`, `ca`, `cs`, `da`, `de`, `el`, `en`, `en-GB`, `es`, `fi`, `fr`, `he`, `hi`, `hr`, `hu`, `id`, `it`, `ja`, `ko`, `ms`, `nb`, `nl`, `pl`, `pt`, `pr-BR`, `ro`, `ru`, `sv`, `th`, `tl`, `tr`, `vi`, `zh`, `zh-CN`, or `zh-HK.`
      *
-     * @param string $locale The locale to use for the verification SMS or call
+     * @param string $locale The locale to use for the verification SMS, WhatsApp
+     *                       or call
      * @return $this Fluent Builder
      */
     public function setLocale(string $locale): self {
@@ -157,7 +170,7 @@ class CreateVerificationOptions extends Options {
     }
 
     /**
-     * [`email`](https://www.twilio.com/docs/verify/email) channel configuration in json format. Must include 'from' and 'from_name'.
+     * [`email`](https://www.twilio.com/docs/verify/email) channel configuration in json format. The fields 'from' and 'from_name' are optional but if included the 'from' field must have a valid email address.
      *
      * @param array $channelConfiguration Channel specific configuration in json
      *                                    format.
@@ -176,6 +189,30 @@ class CreateVerificationOptions extends Options {
      */
     public function setAppHash(string $appHash): self {
         $this->options['appHash'] = $appHash;
+        return $this;
+    }
+
+    /**
+     * The message [template](https://www.twilio.com/docs/verify/api/templates). If provided, will override the default template for the Service. SMS channel only.
+     *
+     * @param string $templateSid The verification template SMS messages.
+     * @return $this Fluent Builder
+     */
+    public function setTemplateSid(string $templateSid): self {
+        $this->options['templateSid'] = $templateSid;
+        return $this;
+    }
+
+    /**
+     * A stringified JSON object in which the keys are the template's special variables and the values are the variables substitutions.
+     *
+     * @param string $templateCustomSubstitutions The values of the special
+     *                                            variables declared on the message
+     *                                            template.
+     * @return $this Fluent Builder
+     */
+    public function setTemplateCustomSubstitutions(string $templateCustomSubstitutions): self {
+        $this->options['templateCustomSubstitutions'] = $templateCustomSubstitutions;
         return $this;
     }
 

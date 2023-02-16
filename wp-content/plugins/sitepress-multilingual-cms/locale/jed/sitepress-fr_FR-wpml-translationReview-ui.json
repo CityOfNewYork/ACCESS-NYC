@@ -1,0 +1,40 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Accepted": [
+            "Accepté"
+         ],
+         "Reviewing the next translation...": [
+            "Relecture de la prochaine traduction en cours..."
+         ],
+         "Back": [
+            "Retour"
+         ],
+         "Edit Translation": [
+            "Modifier la traduction"
+         ],
+         "There was an error in applying translation.": [
+            "Une erreur est survenue lors de la prise en charge de la traduction."
+         ],
+         "Please wait, applying translation..": [
+            "Veuillez patienter, la traduction est prise en charge..."
+         ],
+         "Publish this translation": [
+            "Publier cette traduction"
+         ],
+         "Accept this translation": [
+            "Accepter cette traduction"
+         ],
+         "Approved!": [
+            "Approuvée !"
+         ],
+         "Loading the next translation for review...": [
+            "Chargement de la prochaine traduction à réviser..."
+         ]
+      }
+   }
+}

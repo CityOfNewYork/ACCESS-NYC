@@ -113,6 +113,10 @@ final class PMXE_Wpallimport
 
 		$custom_type = (empty($exportOptions['cpt'])) ? 'post' : $exportOptions['cpt'][0];
 
+        if(XmlExportEngine::$is_custom_addon_export) {
+            $custom_type = 'gf_entries';
+        }
+
 		// Do not create an import template for WooCommerce Refunds
 		if ( $export->options['export_to'] == 'xml' && in_array($export->options['xml_template_type'], array('custom', 'XmlGoogleMerchants')) )  return false;
 
@@ -160,7 +164,19 @@ final class PMXE_Wpallimport
 				'update_categories_logic' => 'only',
 				'taxonomies_list' => '',
 				'export_id' => $export->id
-			);					
+			);
+
+
+            if(XmlExportEngine::$is_custom_addon_export) {
+
+                $gf_addon = \GF_Export_Add_On::get_instance();
+                $sub_post_type = $gf_addon->add_on->get_sub_post_type();
+
+                if(class_exists('GFAPI')) {
+                    $form = GFAPI::get_form($sub_post_type);
+                    self::$templateOptions['gravity_form_title'] = $form['title'];
+                }
+            }
 
 			if ( in_array('product', $exportOptions['cpt']) )
 			{				
@@ -469,6 +485,8 @@ final class PMXE_Wpallimport
 
 		$implode_delimiter = ($options['delimiter'] == ',') ? '|' : ',';
 
+		$addons = new \Wpae\App\Service\Addons\AddonService();
+
 		if ( ! empty($options['is_user_export']) ) self::$templateOptions['pmui']['import_users'] = 1;
 
 		foreach ($options['ids'] as $ID => $value) 
@@ -503,39 +521,48 @@ final class PMXE_Wpallimport
 							);
 						}
 
-						XmlExportWooCommerce::prepare_import_template( $options, self::$templateOptions, $cf_list, $attr_list, $element_name, $options['cc_label'][$ID] );
+						if($addons->isWooCommerceAddonActive() || $addons->isWooCommerceProductAddonActive()) {
+						    XmlExportWooCommerce::prepare_import_template( $options, self::$templateOptions, $cf_list, $attr_list, $element_name, $options['cc_label'][$ID] );
+					    }
 					}
 
 					break;
 
 				case 'acf':					
 
-					if (empty($required_add_ons['PMAI_Plugin']))
-					{
-						$required_add_ons['PMAI_Plugin'] = array(
-							'name' => 'ACF Add-On Pro',
-							'paid' => true,
-							'url'  => 'http://www.wpallimport.com/advanced-custom-fields/?utm_source=export-plugin-free&utm_medium=upgrade-notice&utm_campaign=import-acf-template'
-						);
+					if($addons->isAcfAddonActive()) {
+
+						if (empty($required_add_ons['PMAI_Plugin']))
+						{
+							$required_add_ons['PMAI_Plugin'] = array(
+								'name' => 'ACF Add-On Pro',
+								'paid' => true,
+								'url'  => 'http://www.wpallimport.com/advanced-custom-fields/?utm_source=export-plugin-free&utm_medium=upgrade-notice&utm_campaign=import-acf-template'
+							);
+						}
+
+						$field_options = unserialize($options['cc_options'][$ID]);
+
+						// add ACF group ID to the template options
+						if( ! in_array($field_options['group_id'], self::$templateOptions['acf'])){
+							self::$templateOptions['acf'][$field_options['group_id']] = 1;
+						}					
+
+						self::$templateOptions['fields'][$field_options['key']] = XmlExportACF::prepare_import_template( $options, self::$templateOptions, $acf_list, $element_name, $field_options);
+
 					}
-
-					$field_options = unserialize($options['cc_options'][$ID]);
-
-					// add ACF group ID to the template options
-					if( ! in_array($field_options['group_id'], self::$templateOptions['acf'])){
-						self::$templateOptions['acf'][$field_options['group_id']] = 1;
-					}					
-
-					self::$templateOptions['fields'][$field_options['key']] = XmlExportACF::prepare_import_template( $options, self::$templateOptions, $acf_list, $element_name, $field_options);											 
 
 					break;				
 
 				default:
 
-				    $addons = new \Wpae\App\Service\Addons\AddonService();
 					XmlExportCpt::prepare_import_template( $options, self::$templateOptions, $cf_list, $attr_list, $taxs_list, $element_name, $ID);
 					
 					XmlExportMediaGallery::prepare_import_template( $options, self::$templateOptions, $element_name, $ID);
+
+                    if(XmlExportEngine::$is_custom_addon_export) {
+                        XmlExportCustomRecord::prepare_import_template($options, self::$templateOptions, $element_name, $ID);
+                    }
 
 					if($addons->isUserAddonActive()) {
                         XmlExportUser::prepare_import_template($options, self::$templateOptions, $element_name, $ID);
@@ -543,7 +570,9 @@ final class PMXE_Wpallimport
 
                     XmlExportTaxonomy::prepare_import_template( $options, self::$templateOptions, $element_name, $ID);
 
-					XmlExportWooCommerceOrder::prepare_import_template( $options, self::$templateOptions, $element_name, $ID);
+					if($addons->isWooCommerceAddonActive() || $addons->isWooCommerceOrderAddonActive()) {
+						XmlExportWooCommerceOrder::prepare_import_template( $options, self::$templateOptions, $element_name, $ID);
+					}
 
 					break;
 			}

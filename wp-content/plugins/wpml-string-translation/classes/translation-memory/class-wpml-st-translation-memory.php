@@ -1,9 +1,10 @@
 <?php
 
-class WPML_ST_Translation_Memory implements IWPML_Action {
+use \WPML\FP\Obj;
+use \WPML\FP\Fns;
+use  \WPML\ST\Main\Ajax\FetchTranslationMemory;
 
-	const NONCE         = 'wpml_translation_memory_nonce';
-	const SCRIPT_HANDLE = 'wpml-st-translation-memory';
+class WPML_ST_Translation_Memory implements IWPML_AJAX_Action, IWPML_Backend_Action, IWPML_DIC_Action {
 
 	/** @var WPML_ST_Translation_Memory_Records $records */
 	private $records;
@@ -13,36 +14,8 @@ class WPML_ST_Translation_Memory implements IWPML_Action {
 	}
 
 	public function add_hooks() {
-		add_action( 'wp_ajax_wpml_st_fetch_translations', array( $this, 'fetch_translations' ) );
-		add_filter( 'wpml_st_translation_memory_nonce', array( $this, 'get_nonce' ) );
-		add_filter( 'wpml_st_get_translation_memory', array( $this, 'get_translation_memory' ), 10, 4 );
-
-		if ( isset( $_GET['page'] ) && WPML_ST_FOLDER . '/menu/string-translation.php' === $_GET['page'] ) {
-			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_script' ) );
-		}
-	}
-
-	public function fetch_translations() {
-		$results = array();
-
-		if (
-			wp_verify_nonce( $_POST['nonce'], self::NONCE ) &&
-			isset( $_POST['strings'], $_POST['languages']['source'], $_POST['languages']['target'] )
-		) {
-			$args = array(
-				'strings'     => wp_unslash( $_POST['strings'] ),
-				'source_lang' => $_POST['languages']['source'],
-				'target_lang' => $_POST['languages']['target'],
-			);
-
-			$results = $this->records->get( $args );
-		}
-
-		wp_send_json_success( $results );
-	}
-
-	public function get_nonce( $nonce = null ) {
-		return wp_create_nonce( self::NONCE );
+		add_filter( 'wpml_st_get_translation_memory', [ $this, 'get_translation_memory' ], 10, 2 );
+		add_filter( 'wpml_st_translation_memory_endpoint', Fns::always( FetchTranslationMemory::class ) );
 	}
 
 	/**
@@ -55,18 +28,10 @@ class WPML_ST_Translation_Memory implements IWPML_Action {
 	 * @return stdClass[]
 	 */
 	public function get_translation_memory( $empty_array, $args ) {
-		return $this->records->get( $args );
-	}
-
-	public function enqueue_script() {
-		wp_register_script(
-			self::SCRIPT_HANDLE,
-			WPML_ST_URL . '/res/js/string-translation-memory.js',
-			array( 'jquery' ),
-			WPML_ST_VERSION
+		return $this->records->get(
+			Obj::propOr( [], 'strings',  $args ),
+			Obj::propOr( '', 'source_lang',  $args ),
+			Obj::propOr( '', 'target_lang',  $args )
 		);
-
-		wp_enqueue_script( self::SCRIPT_HANDLE );
-		wp_localize_script( self::SCRIPT_HANDLE, self::NONCE, array( 'value' => $this->get_nonce() ) );
 	}
 }

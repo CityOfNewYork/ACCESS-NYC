@@ -82,7 +82,7 @@ class WPML_Admin_Text_Import extends WPML_Admin_Text_Functionality {
 				}
 
 				$_icl_admin_option_names = is_array( $_icl_admin_option_names )
-					? array_replace_recursive( $arr_options, $_icl_admin_option_names ) : $arr_options;
+					? array_replace_recursive( $_icl_admin_option_names, $arr_options ) : $arr_options;
 			}
 
 			update_option( '_icl_admin_option_names', $_icl_admin_option_names );
@@ -93,7 +93,7 @@ class WPML_Admin_Text_Import extends WPML_Admin_Text_Functionality {
 	}
 
 
-	private function register_string_recursive( $key, $value, $arr, $prefix = '', $suffix, $requires_upgrade, $type, $admin_text_context_old ) {
+	private function register_string_recursive( $key, $value, $arr, $prefix, $suffix, $requires_upgrade, $type, $admin_text_context_old ) {
 		if ( is_scalar( $value ) ) {
 			icl_register_string( WPML_Admin_Texts::DOMAIN_NAME_PREFIX . $suffix, $prefix . $key, $value, true );
 			if ( $requires_upgrade ) {

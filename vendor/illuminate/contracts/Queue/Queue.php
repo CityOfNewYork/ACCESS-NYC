@@ -16,7 +16,7 @@ interface Queue
      * Push a new job onto the queue.
      *
      * @param  string|object  $job
-     * @param  mixed   $data
+     * @param  mixed  $data
      * @param  string|null  $queue
      * @return mixed
      */
@@ -27,7 +27,7 @@ interface Queue
      *
      * @param  string  $queue
      * @param  string|object  $job
-     * @param  mixed   $data
+     * @param  mixed  $data
      * @return mixed
      */
     public function pushOn($queue, $job, $data = '');
@@ -37,29 +37,29 @@ interface Queue
      *
      * @param  string  $payload
      * @param  string|null  $queue
-     * @param  array   $options
+     * @param  array  $options
      * @return mixed
      */
     public function pushRaw($payload, $queue = null, array $options = []);
 
     /**
-     * Push a new job onto the queue after a delay.
+     * Push a new job onto the queue after (n) seconds.
      *
      * @param  \DateTimeInterface|\DateInterval|int  $delay
      * @param  string|object  $job
-     * @param  mixed   $data
+     * @param  mixed  $data
      * @param  string|null  $queue
      * @return mixed
      */
     public function later($delay, $job, $data = '', $queue = null);
 
     /**
-     * Push a new job onto the queue after a delay.
+     * Push a new job onto a specific queue after (n) seconds.
      *
      * @param  string  $queue
      * @param  \DateTimeInterface|\DateInterval|int  $delay
      * @param  string|object  $job
-     * @param  mixed   $data
+     * @param  mixed  $data
      * @return mixed
      */
     public function laterOn($queue, $delay, $job, $data = '');
@@ -67,8 +67,8 @@ interface Queue
     /**
      * Push an array of jobs onto the queue.
      *
-     * @param  array   $jobs
-     * @param  mixed   $data
+     * @param  array  $jobs
+     * @param  mixed  $data
      * @param  string|null  $queue
      * @return mixed
      */
@@ -77,7 +77,7 @@ interface Queue
     /**
      * Pop the next job off of the queue.
      *
-     * @param  string  $queue
+     * @param  string|null  $queue
      * @return \Illuminate\Contracts\Queue\Job|null
      */
     public function pop($queue = null);

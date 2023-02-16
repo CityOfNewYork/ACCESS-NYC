@@ -74,8 +74,6 @@ function pmxe_wp_ajax_wpallexport()
     } else {
         XmlExportEngine::$post_types = $exportOptions['cpt'];
 
-        // $is_products_export = ($exportOptions['cpt'] == 'product' and class_exists('WooCommerce'));
-
         if (in_array('users', $exportOptions['cpt']) or in_array('shop_customer', $exportOptions['cpt'])) {
             add_action('pre_user_query', 'wp_all_export_pre_user_query', 10, 1);
             $exportQuery = new WP_User_Query(array('orderby' => 'ID', 'order' => 'ASC', 'number' => $posts_per_page, 'offset' => $export->exported));
@@ -97,16 +95,33 @@ function pmxe_wp_ajax_wpallexport()
             }
             remove_action('comments_clauses', 'wp_all_export_comments_clauses');
         } else {
-            remove_all_actions('parse_query');
-            remove_all_actions('pre_get_posts');
-            remove_all_filters('posts_clauses');
-            remove_all_filters('posts_orderby');
 
-            add_filter('posts_join', 'wp_all_export_posts_join', 10, 1);
-            add_filter('posts_where', 'wp_all_export_posts_where', 10, 1);
-            $exportQuery = new WP_Query(array('post_type' => $exportOptions['cpt'], 'post_status' => 'any', 'orderby' => 'ID', 'order' => 'ASC', 'offset' => $export->exported, 'posts_per_page' => $posts_per_page));
-            remove_filter('posts_where', 'wp_all_export_posts_where');
-            remove_filter('posts_join', 'wp_all_export_posts_join');
+            if(strpos($exportOptions['cpt'][0], 'custom_') === 0) {
+
+                $addon = GF_Export_Add_On::get_instance();
+
+                $filter_args = array(
+                    'filter_rules_hierarhy' => empty($exportOptions['filter_rules_hierarhy']) ? array() : $exportOptions['filter_rules_hierarhy'],
+                    'product_matching_mode' => empty($exportOptions['product_matching_mode']) ? 'strict' : $exportOptions['product_matching_mode'],
+                    'taxonomy_to_export' => empty($exportOptions['taxonomy_to_export']) ? '' : $exportOptions['taxonomy_to_export'],
+                    'sub_post_type_to_export' => empty($exportOptions['sub_post_type_to_export']) ? '' : $exportOptions['sub_post_type_to_export']
+                );
+
+                $exportQuery = $addon->add_on->get_query($export->exported, $posts_per_page, $filter_args );
+
+            } else {
+
+                remove_all_actions('parse_query');
+                remove_all_actions('pre_get_posts');
+                remove_all_filters('posts_clauses');
+                remove_all_filters('posts_orderby');
+
+                add_filter('posts_join', 'wp_all_export_posts_join', 10, 1);
+                add_filter('posts_where', 'wp_all_export_posts_where', 10, 1);
+                $exportQuery = new WP_Query(array('post_type' => $exportOptions['cpt'], 'post_status' => 'any', 'orderby' => 'ID', 'order' => 'ASC', 'offset' => $export->exported, 'posts_per_page' => $posts_per_page));
+                remove_filter('posts_where', 'wp_all_export_posts_where');
+                remove_filter('posts_join', 'wp_all_export_posts_join');
+            }
         }
     }
 
@@ -137,12 +152,33 @@ function pmxe_wp_ajax_wpallexport()
         remove_filter('terms_clauses', 'wp_all_export_terms_clauses');
     } else {
 
-        if(XmlExportEngine::$is_user_export) {
-            $foundPosts = $exportQuery->get_total();
-            $postCount = count($exportQuery->get_results());
+        if(strpos($exportOptions['cpt'][0], 'custom_') === 0) {
+
+            $addon = GF_Export_Add_On::get_instance();
+
+            $filter_args = array(
+                'filter_rules_hierarhy' => empty($exportOptions['filter_rules_hierarhy']) ? array() : $exportOptions['filter_rules_hierarhy'],
+                'product_matching_mode' => empty($exportOptions['product_matching_mode']) ? 'strict' : $exportOptions['product_matching_mode'],
+                'taxonomy_to_export' => empty($exportOptions['taxonomy_to_export']) ? '' : $exportOptions['taxonomy_to_export'],
+                'sub_post_type_to_export' => empty($exportOptions['sub_post_type_to_export']) ? '' : $exportOptions['sub_post_type_to_export']
+            );
+
+            $totalQuery = $addon->add_on->get_query( 0, 0, $filter_args);
+            $exportQuery = $addon->add_on->get_query($export->exported, $exportOptions['records_per_iteration'] , $filter_args );
+            $foundPosts = count($totalQuery->results);
+            $postCount = count($exportQuery->results);
+
+            XmlExportEngine::$exportQuery = $exportQuery;
+
         } else {
-            $foundPosts = $exportQuery->found_posts;
-            $postCount = $exportQuery->post_count;
+
+            if (XmlExportEngine::$is_user_export) {
+                $foundPosts = $exportQuery->get_total();
+                $postCount = count($exportQuery->get_results());
+            } else {
+                $foundPosts = $exportQuery->found_posts;
+                $postCount = $exportQuery->post_count;
+            }
         }
     }
     // [ \get total founded records ]

@@ -3,9 +3,11 @@
 namespace WPML\FP;
 
 use WPML\FP\Functor\Functor;
+use WPML\FP\Functor\Pointed;
 
 class Wrapper {
 	use Functor;
+	use Pointed;
 
 	/**
 	 * @param callable $fn
@@ -22,7 +24,7 @@ class Wrapper {
 	 * @return mixed|null
 	 */
 	public function filter( $fn = null ) {
-		$fn = $fn ?: FP::identity();
+		$fn = $fn ?: Fns::identity();
 		return $fn( $this->value ) ? $this->value : null;
 	}
 
@@ -51,4 +53,5 @@ class Wrapper {
 	public function get() {
 		return $this->value;
 	}
+
 }

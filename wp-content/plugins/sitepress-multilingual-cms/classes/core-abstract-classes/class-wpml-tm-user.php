@@ -10,7 +10,7 @@ class WPML_TM_User {
 	 *
 	 * @param TranslationManagement $tm_instance
 	 */
-	public function __construct( &$tm_instance ) {
-		$this->tm_instance = &$tm_instance;
+	public function __construct( TranslationManagement $tm_instance ) {
+		$this->tm_instance = $tm_instance;
 	}
 }

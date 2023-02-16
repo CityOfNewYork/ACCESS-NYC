@@ -8,47 +8,31 @@ use Aws\Ses\SesClient;
 use Soundasleep\Html2Text;
 
 class EmailMe extends ContactMe {
-  protected $action = 'Email';
+  public $action = 'Email';
 
-  protected $service = 'AWS';
+  public $action_label = 'Email';
 
-  protected $account_label = 'Key';
+  public $service = 'AWS';
 
-  protected $secret_label = 'Secret';
+  public $type = 'Email';
 
-  protected $from_label = 'From Email Address';
+  public $account_label = 'Key';
 
-  protected $account_hint = 'EXAMPLEAKIAIOSFODNN7';
+  public $secret_label = 'Secret';
 
-  protected $secret_hint = 'EXAMPLEwJalrXUtnFEMI/K7MDENG/bPxRfiCY';
+  public $from_label = 'From Email Address';
 
-  protected $from_hint = 'noreply@example.com';
+  public $template_controller = 'smnyc-email.php';
 
-  protected $prefix = 'smnyc_aws';
+  public $post_type = 'smnyc-email';
 
-  protected $template_controller = 'smnyc-email.php';
+  public $post_type_label = 'SMNYC Email';
 
-  const POST_TYPE = 'smnyc-email';
+  public $post_type_description = 'Email content for Send Me NYC';
 
-  /**
-   * Register post type for email content
-   */
-  public function registerPostType() {
-    register_post_type(self::POST_TYPE, array(
-      'label' => __('SMNYC Email', 'text_domain'),
-      'description' => __('Email content for Send Me NYC', 'text_domain'),
-      'labels' => array(
-        'name' => _x('SMNYC Emails', 'Post Type General Name', 'text_domain'),
-        'singular_name' => _x('SMNYC Email', 'Post Type Singular Name', 'text_domain'),
-      ),
-      'hierarchical' => false,
-      'public' => true,
-      'show_ui' => true,
-      'show_in_rest' => true,
-      'has_archive' => false,
-      'exclude_from_search' => true
-    ));
-  }
+  public $post_type_name = 'SMNYC Emails';
+
+  public $post_type_name_singular = 'SMNYC Email';
 
   /**
    * Get the content of the email to send.
@@ -74,13 +58,13 @@ class EmailMe extends ContactMe {
       return false;
     }
 
-    $post = get_page_by_path($template, OBJECT, self::POST_TYPE);
+    $post = get_page_by_path($template, OBJECT, $this->post_type);
 
     $id = $post->ID;
 
     // Filter ID through WPML. Need to add conditionals for WPML or admin notice
     if ($lang !== 'en') {
-      $id = apply_filters('wpml_object_id', $post->ID, self::POST_TYPE, true, $lang);
+      $id = apply_filters('wpml_object_id', $post->ID, $this->post_type, true, $lang);
     }
 
     // Render Timber template
@@ -115,17 +99,26 @@ class EmailMe extends ContactMe {
    */
   protected function send($to, $info) {
     try {
-      $user = get_option('smnyc_aws_user');
-      $secret = get_option('smnyc_aws_secret');
-      $from = get_option('smnyc_aws_from');
-      $display = get_option('smnyc_aws_display_name');
-      $reply = get_option('smnyc_aws_reply');
+      $user = get_option($this->info()['option_prefix'] . 'user');
+      $secret = get_option($this->info()['option_prefix'] . 'secret');
+      $from = get_option($this->info()['option_prefix'] . 'from');
+      $display = get_option($this->info()['option_prefix'] . 'display_name');
+      $reply = get_option($this->info()['option_prefix'] . 'reply');
 
-      $user = (!empty($user)) ? $user : SMNYC_AWS_USER;
-      $secret = (!empty($secret)) ? $secret : SMNYC_AWS_SECRET;
-      $from = (!empty($from)) ? $from : SMNYC_AWS_FROM;
-      $display = (!empty($display)) ? $display : SMNYC_AWS_DISPLAY_NAME;
-      $reply = (!empty($reply)) ? $reply : SMNYC_AWS_REPLY;
+      $user = (!empty($user))
+        ? $user : constant($this->info()['constant_prefix'] . 'USER');
+
+      $secret = (!empty($secret))
+        ? $secret : constant($this->info()['constant_prefix'] . 'SECRET');
+
+      $from = (!empty($from))
+        ? $from : constant($this->info()['constant_prefix'] . 'FROM');
+
+      $display = (!empty($display))
+        ? $display : constant($this->info()['constant_prefix'] . 'DISPLAY_NAME');
+
+      $reply = (!empty($reply))
+        ? $reply : constant($this->info()['constant_prefix'] . 'DISPLAY_REPLY');
 
       // Build display name
       $from = (!empty($display)) ? "$display<$from>" : $from;
@@ -209,26 +202,24 @@ class EmailMe extends ContactMe {
   public function createSettingsSection() {
     parent::createSettingsSection();
 
-    $section = $this->prefix . '_section';
-
     $this->registerSetting(array(
-      'id' => $this->prefix . '_secret',
+      'id' => $this->info()['option_prefix'] . 'secret',
       'title' => $this->secret_label,
-      'section' => $section,
+      'section' => $this->info()['settings_section'],
       'private' => true
     ));
 
     $this->registerSetting(array(
-      'id' => $this->prefix . '_display_name',
+      'id' => $this->info()['option_prefix'] . 'display_name',
       'title' => 'Email Display Name <small><em>optional</em></small>',
-      'section' => $section,
+      'section' => $this->info()['settings_section'],
       'translate' => true
     ));
 
     $this->registerSetting(array(
-      'id' => $this->prefix . '_reply',
+      'id' => $this->info()['option_prefix'] . 'reply',
       'title' => 'Reply-To <small><em>optional</em></small>',
-      'section' => $section
+      'section' => $this->info()['settings_section']
     ));
   }
 }

@@ -75,12 +75,12 @@ class WPML_Global_AJAX extends WPML_SP_User {
 
 	/**
 	 * @param string $url
-	 * @param array $errors
+	 * @param array  $errors
 	 *
 	 * @return bool
 	 */
 	private function validateRootPageUrl( $url, array &$errors ) {
-		$wp_http = new WP_HTTP();
+		$wp_http = new WP_Http();
 		if ( '' === trim( $url ) ) {
 			$errors[] = __( 'The URL of the HTML file is required', 'sitepress' );
 
@@ -118,6 +118,11 @@ class WPML_Global_AJAX extends WPML_SP_User {
 		return true;
 	}
 
+	/**
+	 * @param string $url
+	 *
+	 * @return bool
+	 */
 	function is_external( $url ) {
 		$site_url        = get_site_url();
 		$site_components = wp_parse_url( $site_url );
@@ -139,7 +144,7 @@ class WPML_Global_AJAX extends WPML_SP_User {
 	}
 
 	/**
-	 * @param $site_host
+	 * @param string $site_host
 	 *
 	 * @return string
 	 */

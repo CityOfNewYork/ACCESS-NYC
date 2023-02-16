@@ -1,7 +1,6 @@
 
-jQuery(document).ready(function(){
-    //    iclStepper(jQuery('#icl-migrate-start').attr('href'), true);
-    jQuery('#icl-migrate-start').one('click', function(){
+jQuery(function () {
+    jQuery('#icl-migrate-start').one('click', function () {
         iclStepper(jQuery(this).attr('href'), '&init=1', true);
         return false;
     });

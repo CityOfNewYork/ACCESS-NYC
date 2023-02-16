@@ -37,7 +37,7 @@ class WPML_ST_Translations_File_Component_Details {
 		$this->file              = $wpml_file;
 
 		$this->theme_dir  = $this->file->fix_dir_separator( get_theme_root() );
-		$this->plugin_dir = $this->file->fix_dir_separator( realpath( WP_PLUGIN_DIR ) );
+		$this->plugin_dir = $this->file->fix_dir_separator( realpath( WPML_PLUGINS_DIR ) );
 
 		$wp_content_dir = realpath( WP_CONTENT_DIR );
 

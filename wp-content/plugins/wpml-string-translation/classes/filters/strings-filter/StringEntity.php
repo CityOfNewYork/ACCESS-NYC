@@ -2,7 +2,6 @@
 
 namespace WPML\ST\StringsFilter;
 
-
 class StringEntity {
 	/** @var string */
 	private $value;

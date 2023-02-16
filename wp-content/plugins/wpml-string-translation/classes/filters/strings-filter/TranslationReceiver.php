@@ -2,7 +2,6 @@
 
 namespace WPML\ST\StringsFilter;
 
-
 class TranslationReceiver {
 	/** @var \wpdb */
 	private $wpdb;

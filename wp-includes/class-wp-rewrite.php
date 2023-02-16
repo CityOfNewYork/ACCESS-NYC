@@ -840,9 +840,23 @@ class WP_Rewrite {
 	 *
 	 * @param string $permalink_structure The permalink structure.
 	 * @param int    $ep_mask             Optional. Endpoint mask defining what endpoints are added to the structure.
-	 *                                    Accepts `EP_NONE`, `EP_PERMALINK`, `EP_ATTACHMENT`, `EP_DATE`, `EP_YEAR`,
-	 *                                    `EP_MONTH`, `EP_DAY`, `EP_ROOT`, `EP_COMMENTS`, `EP_SEARCH`, `EP_CATEGORIES`,
-	 *                                    `EP_TAGS`, `EP_AUTHORS`, `EP_PAGES`, `EP_ALL_ARCHIVES`, and `EP_ALL`.
+	 *                                    Accepts a mask of:
+	 *                                    - `EP_ALL`
+	 *                                    - `EP_NONE`
+	 *                                    - `EP_ALL_ARCHIVES`
+	 *                                    - `EP_ATTACHMENT`
+	 *                                    - `EP_AUTHORS`
+	 *                                    - `EP_CATEGORIES`
+	 *                                    - `EP_COMMENTS`
+	 *                                    - `EP_DATE`
+	 *                                    - `EP_DAY`
+	 *                                    - `EP_MONTH`
+	 *                                    - `EP_PAGES`
+	 *                                    - `EP_PERMALINK`
+	 *                                    - `EP_ROOT`
+	 *                                    - `EP_SEARCH`
+	 *                                    - `EP_TAGS`
+	 *                                    - `EP_YEAR`
 	 *                                    Default `EP_NONE`.
 	 * @param bool   $paged               Optional. Whether archive pagination rules should be added for the structure.
 	 *                                    Default true.
@@ -1301,7 +1315,7 @@ class WP_Rewrite {
 		/**
 		 * Filters rewrite rules used for date archives.
 		 *
-		 * Likely date archives would include /yyyy/, /yyyy/mm/, and /yyyy/mm/dd/.
+		 * Likely date archives would include `/yyyy/`, `/yyyy/mm/`, and `/yyyy/mm/dd/`.
 		 *
 		 * @since 1.5.0
 		 *
@@ -1316,7 +1330,7 @@ class WP_Rewrite {
 		 * Filters rewrite rules used for root-level archives.
 		 *
 		 * Likely root-level archives would include pagination rules for the homepage
-		 * as well as site-wide post feeds (e.g. /feed/, and /feed/atom/).
+		 * as well as site-wide post feeds (e.g. `/feed/`, and `/feed/atom/`).
 		 *
 		 * @since 1.5.0
 		 *
@@ -1330,7 +1344,7 @@ class WP_Rewrite {
 		/**
 		 * Filters rewrite rules used for comment feed archives.
 		 *
-		 * Likely comments feed archives include /comments/feed/, and /comments/feed/atom/.
+		 * Likely comments feed archives include `/comments/feed/` and `/comments/feed/atom/`.
 		 *
 		 * @since 1.5.0
 		 *
@@ -1345,7 +1359,7 @@ class WP_Rewrite {
 		/**
 		 * Filters rewrite rules used for search archives.
 		 *
-		 * Likely search-related archives include /search/search+query/ as well as
+		 * Likely search-related archives include `/search/search+query/` as well as
 		 * pagination and feed paths for a search.
 		 *
 		 * @since 1.5.0
@@ -1360,7 +1374,7 @@ class WP_Rewrite {
 		/**
 		 * Filters rewrite rules used for author archives.
 		 *
-		 * Likely author archives would include /author/author-name/, as well as
+		 * Likely author archives would include `/author/author-name/`, as well as
 		 * pagination and feed paths for author archives.
 		 *
 		 * @since 1.5.0
@@ -1397,8 +1411,13 @@ class WP_Rewrite {
 			 * Filters rewrite rules used for individual permastructs.
 			 *
 			 * The dynamic portion of the hook name, `$permastructname`, refers
-			 * to the name of the registered permastruct, e.g. 'post_tag' (tags),
-			 * 'category' (categories), etc.
+			 * to the name of the registered permastruct.
+			 *
+			 * Possible hook names include:
+			 *
+			 *  - `category_rewrite_rules`
+			 *  - `post_format_rewrite_rules`
+			 *  - `post_tag_rewrite_rules`
 			 *
 			 * @since 3.1.0
 			 *
@@ -1434,7 +1453,7 @@ class WP_Rewrite {
 		 *
 		 * @since 1.5.0
 		 *
-		 * @param WP_Rewrite $this Current WP_Rewrite instance (passed by reference).
+		 * @param WP_Rewrite $wp_rewrite Current WP_Rewrite instance (passed by reference).
 		 */
 		do_action_ref_array( 'generate_rewrite_rules', array( &$this ) );
 
@@ -1682,6 +1701,23 @@ class WP_Rewrite {
 	 *
 	 * @param string      $name      Name of the endpoint.
 	 * @param int         $places    Endpoint mask describing the places the endpoint should be added.
+	 *                               Accepts a mask of:
+	 *                               - `EP_ALL`
+	 *                               - `EP_NONE`
+	 *                               - `EP_ALL_ARCHIVES`
+	 *                               - `EP_ATTACHMENT`
+	 *                               - `EP_AUTHORS`
+	 *                               - `EP_CATEGORIES`
+	 *                               - `EP_COMMENTS`
+	 *                               - `EP_DATE`
+	 *                               - `EP_DAY`
+	 *                               - `EP_MONTH`
+	 *                               - `EP_PAGES`
+	 *                               - `EP_PERMALINK`
+	 *                               - `EP_ROOT`
+	 *                               - `EP_SEARCH`
+	 *                               - `EP_TAGS`
+	 *                               - `EP_YEAR`
 	 * @param string|bool $query_var Optional. Name of the corresponding query variable. Pass `false` to
 	 *                               skip registering a query_var for this endpoint. Defaults to the
 	 *                               value of `$name`.
@@ -1725,9 +1761,23 @@ class WP_Rewrite {
 	 *     @type bool $with_front  Whether the structure should be prepended with `WP_Rewrite::$front`.
 	 *                             Default true.
 	 *     @type int  $ep_mask     The endpoint mask defining which endpoints are added to the structure.
-	 *                             Accepts `EP_NONE`, `EP_PERMALINK`, `EP_ATTACHMENT`, `EP_DATE`, `EP_YEAR`,
-	 *                             `EP_MONTH`, `EP_DAY`, `EP_ROOT`, `EP_COMMENTS`, `EP_SEARCH`, `EP_CATEGORIES`,
-	 *                             `EP_TAGS`, `EP_AUTHORS`, `EP_PAGES`, `EP_ALL_ARCHIVES`, and `EP_ALL`.
+	 *                             Accepts a mask of:
+	 *                             - `EP_ALL`
+	 *                             - `EP_NONE`
+	 *                             - `EP_ALL_ARCHIVES`
+	 *                             - `EP_ATTACHMENT`
+	 *                             - `EP_AUTHORS`
+	 *                             - `EP_CATEGORIES`
+	 *                             - `EP_COMMENTS`
+	 *                             - `EP_DATE`
+	 *                             - `EP_DAY`
+	 *                             - `EP_MONTH`
+	 *                             - `EP_PAGES`
+	 *                             - `EP_PERMALINK`
+	 *                             - `EP_ROOT`
+	 *                             - `EP_SEARCH`
+	 *                             - `EP_TAGS`
+	 *                             - `EP_YEAR`
 	 *                             Default `EP_NONE`.
 	 *     @type bool $paged       Whether archive pagination rules should be added for the structure.
 	 *                             Default true.

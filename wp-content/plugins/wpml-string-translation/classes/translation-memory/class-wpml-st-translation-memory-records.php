@@ -10,20 +10,15 @@ class WPML_ST_Translation_Memory_Records {
 	}
 
 	/**
-	 * @param array $args with keys
-	 *                    - `strings` an array of strings
-	 *                    - `source_lang`
-	 *                    - `target_lang` (optional)
+	 * @param array $strings
+	 * @param string $source_lang
+	 * @param string $target_lang
 	 *
 	 * @return array
 	 */
-	public function get( array $args ) {
-		$strings     = isset( $args['strings'] ) && is_array( $args['strings'] ) ? $args['strings'] : null;
-		$source_lang = isset( $args['source_lang'] ) ? $args['source_lang'] : null;
-		$target_lang = isset( $args['target_lang'] ) ? $args['target_lang'] : null;
-
-		if ( ! ( $strings && $source_lang ) ) {
-			return array();
+	public function get( $strings, $source_lang, $target_lang ) {
+		if ( ! $strings ) {
+			return [];
 		}
 
 		$strings = $this->also_match_alternative_line_breaks( $strings );
@@ -31,12 +26,15 @@ class WPML_ST_Translation_Memory_Records {
 		$prepared_strings = wpml_prepare_in( $strings );
 
 		$sql = "
-			SELECT s.value as original, st.value as translation, st.language as language
+			SELECT s.value as original, coalesce(st.value, st.mo_string) as translation, st.language as language
 			FROM {$this->wpdb->prefix}icl_strings as s
 			JOIN {$this->wpdb->prefix}icl_string_translations as st
 			ON s.id = st.string_id
 			WHERE s.value IN ({$prepared_strings}) AND s.language = '%s'
-				AND st.status IN (" . ICL_STRING_TRANSLATION_COMPLETE . "," . ICL_STRING_TRANSLATION_NEEDS_UPDATE . ")";
+				AND (
+				(st.value IS NOT NULL AND st.status IN (" . ICL_STRING_TRANSLATION_COMPLETE . "," . ICL_STRING_TRANSLATION_NEEDS_UPDATE . "))
+				OR (st.value IS NULL AND st.mo_string IS NOT NULL)
+				)";
 
 		$prepare_args = array( $source_lang );
 

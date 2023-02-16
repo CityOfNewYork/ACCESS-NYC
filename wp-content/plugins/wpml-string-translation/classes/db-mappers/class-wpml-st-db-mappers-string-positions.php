@@ -14,8 +14,8 @@ class WPML_ST_DB_Mappers_String_Positions {
 	}
 
 	/**
-	 * @param $string_id
-	 * @param $kind
+	 * @param int $string_id
+	 * @param int $kind
 	 *
 	 * @return int
 	 */
@@ -46,9 +46,9 @@ class WPML_ST_DB_Mappers_String_Positions {
 	}
 
 	/**
-	 * @param $string_id
-	 * @param $position
-	 * @param $kind
+	 * @param int    $string_id
+	 * @param string $position
+	 * @param int    $kind
 	 *
 	 * @return bool
 	 */
@@ -63,9 +63,9 @@ class WPML_ST_DB_Mappers_String_Positions {
 	}
 
 	/**
-	 * @param $string_id
-	 * @param $position
-	 * @param $kind
+	 * @param int    $string_id
+	 * @param string $position
+	 * @param int    $kind
 	 */
 	public function insert( $string_id, $position, $kind ) {
 		$this->wpdb->insert( $this->wpdb->prefix . 'icl_string_positions', array(

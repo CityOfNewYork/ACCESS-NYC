@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose Content to Automatically Translate into": [
+            "选择内容以自动翻译为"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "保存更改并启用自动翻译"
+         ],
+         "Cancel Language Changes": [
+            "取消语言更改"
+         ],
+         "Save": [
+            "保存"
+         ],
+         "Choose Content to Automatically Translate into New Language": [
+            "选择要自动翻译为新语言的内容"
+         ],
+         "Add languages and start translating": [
+            "添加语言并开始翻译"
+         ],
+         "Add language and start translating": [
+            "添加语言并开始翻译"
+         ],
+         "Never mind. Don't add new languages": [
+            "没关系。不要添加新语言"
+         ],
+         "Never mind. Don't add new language": [
+            "没关系。不要添加新语言"
+         ],
+         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
+            "立即自动翻译我所有现有的文章和页面，以及我创建的新内容。"
+         ],
+         "Only automatically translate new content.": [
+            "仅自动翻译新内容。"
+         ],
+         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
+            "您使用的是<a>翻译所有内容</a>模式，该模式会自动翻译您的网站内容。"
+         ],
+         "Which content do you want to automatically translate into your newly-added language?": [
+            "您希望自动将哪些内容翻译成新添加的语言？"
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "您可以从翻译管理仪表板翻译现有内容。"
+         ]
+      }
+   }
+}

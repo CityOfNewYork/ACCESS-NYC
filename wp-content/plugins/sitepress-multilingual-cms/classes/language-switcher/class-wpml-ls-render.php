@@ -32,7 +32,7 @@ class WPML_LS_Render extends WPML_SP_User {
 	 * @param WPML_LS_Settings      $settings
 	 * @param WPML_LS_Model_Build   $model_build
 	 * @param WPML_LS_Inline_Styles $inline_styles
-	 * @param SitePress                            $sitepress
+	 * @param SitePress             $sitepress
 	 */
 	public function __construct( $templates, $settings, $model_build, $inline_styles, $sitepress ) {
 		$this->templates     = $templates;
@@ -50,14 +50,16 @@ class WPML_LS_Render extends WPML_SP_User {
 			add_filter( 'wp_setup_nav_menu_item', array( $this, 'maybe_repair_menu_item' ), PHP_INT_MAX );
 
 			add_filter( 'the_content', array( $this, 'the_content_filter' ), self::THE_CONTENT_FILTER_PRIORITY );
-			add_action( 'wp_footer', array( $this, 'wp_footer_action' ), 19 );
+			if ( ! $this->is_widgets_page() ) {
+				add_action( 'wp_footer', array( $this, 'wp_footer_action' ), 19 );
+			}
 
 			$this->assets->init_hooks();
 		}
 	}
 
 	/**
-	 * @param WPML_LS_slot $slot
+	 * @param WPML_LS_Slot $slot
 	 *
 	 * @return string
 	 */
@@ -88,7 +90,7 @@ class WPML_LS_Render extends WPML_SP_User {
 	/**
 	 * @param string       $html
 	 * @param array        $model
-	 * @param WPML_LS_slot $slot
+	 * @param WPML_LS_Slot $slot
 	 *
 	 * @return string
 	 */
@@ -96,13 +98,13 @@ class WPML_LS_Render extends WPML_SP_User {
 		/**
 		 * @param string       $html   The HTML for the language switcher
 		 * @param array        $model  The model passed to the template
-		 * @param WPML_LS_slot $slot   The language switcher settings for this slot
+		 * @param WPML_LS_Slot $slot   The language switcher settings for this slot
 		 */
 		return apply_filters( 'wpml_ls_html', $html, $model, $slot );
 	}
 
 	/**
-	 * @param WPML_LS_slot $slot
+	 * @param WPML_LS_Slot $slot
 	 *
 	 * @return array
 	 */
@@ -141,7 +143,7 @@ class WPML_LS_Render extends WPML_SP_User {
 
 		$slot = $this->settings->get_menu_settings_from_id( $menu->term_id );
 
-		if( $slot->is_enabled() && ! $this->is_hidden( $slot ) ) {
+		if ( $slot->is_enabled() && ! $this->is_hidden( $slot ) ) {
 			$is_before  = 'before' === $slot->get( 'position_in_menu' );
 			$lang_items = $this->get_menu_items( $slot );
 
@@ -210,8 +212,8 @@ class WPML_LS_Render extends WPML_SP_User {
 
 			foreach ( $model['languages'] as $language_model ) {
 				$this->current_template->set_model( $language_model );
-				$item_content = $this->filter_html( $this->current_template->get_html(), $language_model, $slot );
-				$ls_menu_item = new WPML_LS_Menu_Item( $language_model, $item_content );
+				$item_content             = $this->filter_html( $this->current_template->get_html(), $language_model, $slot );
+				$ls_menu_item             = new WPML_LS_Menu_Item( $language_model, $item_content );
 				$ls_menu_item->menu_order = $menu_order;
 				$menu_order++;
 
@@ -253,7 +255,13 @@ class WPML_LS_Render extends WPML_SP_User {
 	private function render_menu_preview( $slot ) {
 		$items    = $this->get_menu_items( $slot );
 		$class    = $slot->get( 'is_hierarchical' ) ? 'wpml-ls-menu-hierarchical-preview' : 'wpml-ls-menu-flat-preview';
-		$defaults = array( 'before' => '', 'after' => '', 'link_before' => '', 'link_after' => '', 'theme_location' => '' );
+		$defaults = array(
+			'before'         => '',
+			'after'          => '',
+			'link_before'    => '',
+			'link_after'     => '',
+			'theme_location' => '',
+		);
 		$defaults = (object) $defaults;
 		$output   = walk_nav_menu_tree( $items, 2, $defaults );
 
@@ -281,6 +289,12 @@ class WPML_LS_Render extends WPML_SP_User {
 		return wpml_home_url_ls_hide_check() && ! $slot->is_shortcode_actions();
 	}
 
+	public function is_widgets_page() {
+		global $pagenow;
+
+		return is_admin() && 'widgets.php' === $pagenow;
+	}
+
 	/**
 	 * @param string $content
 	 *
@@ -291,7 +305,7 @@ class WPML_LS_Render extends WPML_SP_User {
 		$slot              = $this->settings->get_slot( 'statics', 'post_translations' );
 
 		if ( $slot->is_enabled() && $this->sitepress->get_wp_api()->is_singular() ) {
-			$post_translations = $this->post_translations_label( $slot	);
+			$post_translations = $this->post_translations_label( $slot );
 		}
 
 		if ( $post_translations ) {
@@ -319,7 +333,6 @@ class WPML_LS_Render extends WPML_SP_User {
 			$html = sprintf( $slot->get( 'availability_text' ), $html );
 			$html = '<p class="' . $css_classes . '">' . $html . '</p>';
 
-
 			/* @deprecated use 'wpml_ls_post_alternative_languages' instead */
 			$html = apply_filters( 'icl_post_alternative_languages', $html );
 
@@ -334,7 +347,7 @@ class WPML_LS_Render extends WPML_SP_User {
 
 	public function wp_footer_action() {
 		$slot = $this->settings->get_slot( 'statics', 'footer' );
-		if( $slot->is_enabled() ) {
+		if ( $slot->is_enabled() ) {
 			echo $this->render( $slot );
 		}
 	}

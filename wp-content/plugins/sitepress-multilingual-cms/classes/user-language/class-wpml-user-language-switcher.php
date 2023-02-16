@@ -13,12 +13,17 @@ class WPML_User_Language_Switcher {
 	/**
 	 * WPML_User_Language_Switcher constructor.
 	 *
-	 * @param WPML_Language_Code
+	 * @param WPML_Language_Code $WPML_Language_Code
 	 */
 	public function __construct( &$WPML_Language_Code ) {
 		$this->WPML_Language_Code = &$WPML_Language_Code;
 	}
 
+	/**
+	 * @param string $email
+	 *
+	 * @return false|mixed|string|null
+	 */
 	private function to_be_selected( $email ) {
 		$language = $this->WPML_Language_Code->get_from_user_meta( $email );
 		if ( ! $language ) {
@@ -28,6 +33,12 @@ class WPML_User_Language_Switcher {
 		return $language;
 	}
 
+	/**
+	 * @param string $email
+	 * @param string $language
+	 *
+	 * @return bool|int
+	 */
 	public function save_language_user_meta( $email, $language ) {
 		$user    = get_user_by( 'email', $email );
 		$updated = false;
@@ -39,10 +50,20 @@ class WPML_User_Language_Switcher {
 		return $updated;
 	}
 
+	/**
+	 * @param string $language
+	 *
+	 * @return false|string|null
+	 */
 	public function sanitize( $language ) {
 		return $this->WPML_Language_Code->sanitize( $language );
 	}
 
+	/**
+	 * @param string $email
+	 *
+	 * @return array[]
+	 */
 	public function get_model( $email ) {
 
 		$active_languages = apply_filters( 'wpml_active_languages', null, null );

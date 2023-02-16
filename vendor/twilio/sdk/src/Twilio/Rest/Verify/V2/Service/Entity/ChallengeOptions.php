@@ -34,18 +34,20 @@ abstract class ChallengeOptions {
     /**
      * @param string $factorSid Factor Sid.
      * @param string $status The Status of theChallenges to fetch
+     * @param string $order The sort order of the Challenges list
      * @return ReadChallengeOptions Options builder
      */
-    public static function read(string $factorSid = Values::NONE, string $status = Values::NONE): ReadChallengeOptions {
-        return new ReadChallengeOptions($factorSid, $status);
+    public static function read(string $factorSid = Values::NONE, string $status = Values::NONE, string $order = Values::NONE): ReadChallengeOptions {
+        return new ReadChallengeOptions($factorSid, $status, $order);
     }
 
     /**
      * @param string $authPayload Optional payload to verify the Challenge
+     * @param array $metadata Metadata of the challenge.
      * @return UpdateChallengeOptions Options builder
      */
-    public static function update(string $authPayload = Values::NONE): UpdateChallengeOptions {
-        return new UpdateChallengeOptions($authPayload);
+    public static function update(string $authPayload = Values::NONE, array $metadata = Values::ARRAY_NONE): UpdateChallengeOptions {
+        return new UpdateChallengeOptions($authPayload, $metadata);
     }
 }
 
@@ -80,7 +82,7 @@ class CreateChallengeOptions extends Options {
     }
 
     /**
-     * Shown to the user when the push notification arrives. Required when `factor_type` is `push`
+     * Shown to the user when the push notification arrives. Required when `factor_type` is `push`. Can be up to 256 characters in length
      *
      * @param string $detailsMessage Shown to the user when the push notification
      *                               arrives
@@ -92,7 +94,7 @@ class CreateChallengeOptions extends Options {
     }
 
     /**
-     * A list of objects that describe the Fields included in the Challenge. Each object contains the label and value of the field. Used when `factor_type` is `push`.
+     * A list of objects that describe the Fields included in the Challenge. Each object contains the label and value of the field, the label can be up to 36 characters in length and the value can be up to 128 characters in length. Used when `factor_type` is `push`. There can be up to 20 details fields.
      *
      * @param array[] $detailsFields A list of objects that describe the Fields
      *                               included in the Challenge
@@ -104,7 +106,7 @@ class CreateChallengeOptions extends Options {
     }
 
     /**
-     * Details provided to give context about the Challenge. Not shown to the end user. It must be a stringified JSON with only strings values eg. `{"ip": "172.168.1.234"}`
+     * Details provided to give context about the Challenge. Not shown to the end user. It must be a stringified JSON with only strings values eg. `{"ip": "172.168.1.234"}`. Can be up to 1024 characters in length
      *
      * @param array $hiddenDetails Hidden details provided to contextualize the
      *                             Challenge
@@ -116,7 +118,7 @@ class CreateChallengeOptions extends Options {
     }
 
     /**
-     * Optional payload used to verify the Challenge upon creation. Only used with a Factor of type `totp` to carry the TOTP code that needs to be verified.
+     * Optional payload used to verify the Challenge upon creation. Only used with a Factor of type `totp` to carry the TOTP code that needs to be verified. For `TOTP` this value must be between 3 and 8 characters long.
      *
      * @param string $authPayload Optional payload to verify the Challenge
      * @return $this Fluent Builder
@@ -141,10 +143,12 @@ class ReadChallengeOptions extends Options {
     /**
      * @param string $factorSid Factor Sid.
      * @param string $status The Status of theChallenges to fetch
+     * @param string $order The sort order of the Challenges list
      */
-    public function __construct(string $factorSid = Values::NONE, string $status = Values::NONE) {
+    public function __construct(string $factorSid = Values::NONE, string $status = Values::NONE, string $order = Values::NONE) {
         $this->options['factorSid'] = $factorSid;
         $this->options['status'] = $status;
+        $this->options['order'] = $order;
     }
 
     /**
@@ -170,6 +174,17 @@ class ReadChallengeOptions extends Options {
     }
 
     /**
+     * The desired sort order of the Challenges list. One of `asc` or `desc` for ascending and descending respectively. Defaults to `asc`.
+     *
+     * @param string $order The sort order of the Challenges list
+     * @return $this Fluent Builder
+     */
+    public function setOrder(string $order): self {
+        $this->options['order'] = $order;
+        return $this;
+    }
+
+    /**
      * Provide a friendly representation
      *
      * @return string Machine friendly representation
@@ -183,19 +198,32 @@ class ReadChallengeOptions extends Options {
 class UpdateChallengeOptions extends Options {
     /**
      * @param string $authPayload Optional payload to verify the Challenge
+     * @param array $metadata Metadata of the challenge.
      */
-    public function __construct(string $authPayload = Values::NONE) {
+    public function __construct(string $authPayload = Values::NONE, array $metadata = Values::ARRAY_NONE) {
         $this->options['authPayload'] = $authPayload;
+        $this->options['metadata'] = $metadata;
     }
 
     /**
-     * The optional payload needed to verify the Challenge. E.g., a TOTP would use the numeric code.
+     * The optional payload needed to verify the Challenge. E.g., a TOTP would use the numeric code. For `TOTP` this value must be between 3 and 8 characters long. For `Push` this value can be up to 5456 characters in length
      *
      * @param string $authPayload Optional payload to verify the Challenge
      * @return $this Fluent Builder
      */
     public function setAuthPayload(string $authPayload): self {
         $this->options['authPayload'] = $authPayload;
+        return $this;
+    }
+
+    /**
+     * Custom metadata associated with the challenge. This is added by the Device/SDK directly to allow for the inclusion of device information. It must be a stringified JSON with only strings values eg. `{"os": "Android"}`. Can be up to 1024 characters in length.
+     *
+     * @param array $metadata Metadata of the challenge.
+     * @return $this Fluent Builder
+     */
+    public function setMetadata(array $metadata): self {
+        $this->options['metadata'] = $metadata;
         return $this;
     }
 

@@ -12,14 +12,14 @@ class WPML_WP_Cache_Item {
 	 * WPML_WP_Cache_Item constructor.
 	 *
 	 * @param WPML_WP_Cache $cache
-	 * @param string|array $key
+	 * @param string|array  $key
 	 */
 	public function __construct( WPML_WP_Cache $cache, $key ) {
 		if ( is_array( $key ) ) {
 			$key = md5( json_encode( $key ) );
 		}
 		$this->cache = $cache;
-		$this->key = $key;
+		$this->key   = $key;
 	}
 
 	/**

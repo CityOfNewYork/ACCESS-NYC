@@ -1,0 +1,19 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
+            "Πρέπει να χρησιμοποιήσετε τον Προηγμένο επεξεργαστή μεταφράσεων, αν θέλετε να μεταφράζετε αυτόματα το περιεχόμενό σας."
+         ],
+         "Synchronize translators and translation managers with ATE": [
+            "Συγχρονισμός μεταφραστών και διαχειριστών μεταφράσεων με τον Προηγμένο επεξεργαστή μεταφράσεων"
+         ],
+         "Please try again in a few minutes. If the problem persists, please contact %sWPML support%s.": [
+            "Δοκιμάστε ξανά σε λίγα λεπτά. Αν το πρόβλημα επιμείνει, επικοινωνήστε με τη ν %sυποστήριξη του WPML%s."
+         ]
+      }
+   }
+}

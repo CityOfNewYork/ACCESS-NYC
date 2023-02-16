@@ -8,9 +8,9 @@ function icl_reset_wpml( $blog_id = false ) {
 	}
 
 	if ( empty( $blog_id ) ) {
-	    $filtered_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE );
+		$filtered_id = filter_input( INPUT_POST, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE );
 		$filtered_id = $filtered_id ? $filtered_id : filter_input( INPUT_GET, 'id', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE );
-        $blog_id = $filtered_id !== false ? $filtered_id : $wpdb->blogid;
+		$blog_id     = $filtered_id !== false ? $filtered_id : $wpdb->blogid;
 	}
 
 	if ( $blog_id || ! function_exists( 'is_multisite' ) || ! is_multisite() ) {
@@ -47,11 +47,13 @@ function icl_reset_wpml( $blog_id = false ) {
 			$wpdb->prefix . 'icl_string_pages',
 			$wpdb->prefix . 'icl_string_urls',
 			$wpdb->prefix . 'icl_cms_nav_cache',
+			$wpdb->prefix . 'icl_string_batches',
+			$wpdb->prefix . 'icl_translation_downloads',
 		);
 		$icl_tables = apply_filters( 'wpml_reset_tables', $icl_tables, $blog_id );
 
 		foreach ( $icl_tables as $icl_table ) {
-			$wpdb->query( "DROP TABLE IF EXISTS " . $icl_table );
+			$wpdb->query( 'DROP TABLE IF EXISTS ' . $icl_table );
 		}
 
 		$wpml_options = array(
@@ -102,18 +104,20 @@ function icl_reset_wpml( $blog_id = false ) {
 		}
 
 		$wpml_user_options = array(
-			'language_pairs'
+			'language_pairs',
 		);
 		$wpml_user_options = apply_filters( 'wpml_reset_user_options', $wpml_user_options, $blog_id );
 		if ( $wpml_user_options ) {
 			foreach ( $wpml_user_options as $wpml_user_option ) {
 
 				$meta_key = $wpdb->get_blog_prefix( $blog_id ) . $wpml_user_option;
-				$users    = get_users( array(
-					'blog_id'  => $blog_id,
-					'meta_key' => $meta_key,
-					'fields'   => array( 'ID' ),
-				) );
+				$users    = get_users(
+					array(
+						'blog_id'  => $blog_id,
+						'meta_key' => $meta_key,
+						'fields'   => array( 'ID' ),
+					)
+				);
 
 				/** @var WP_User $user */
 				foreach ( $users as $user ) {
@@ -144,9 +148,11 @@ function icl_reset_wpml( $blog_id = false ) {
 
 		$capabilities = apply_filters( 'wpml_reset_user_capabilities', $capabilities, $blog_id );
 		if ( $capabilities ) {
-			$users = get_users( array(
-				'blog_id' => $blog_id,
-			) );
+			$users = get_users(
+				array(
+					'blog_id' => $blog_id,
+				)
+			);
 
 			/** @var WP_User $user */
 			foreach ( $users as $user ) {
@@ -163,12 +169,12 @@ function icl_reset_wpml( $blog_id = false ) {
 		$wpml_cache_directory->remove();
 
 		do_action( 'wpml_reset_plugins_after' );
-		
+
 		$wpmu_sitewide_plugins = (array) maybe_unserialize( get_site_option( 'active_sitewide_plugins' ) );
 		if ( ! isset( $wpmu_sitewide_plugins[ WPML_PLUGIN_BASENAME ] ) ) {
 			remove_action( 'deactivate_' . WPML_PLUGIN_BASENAME, 'icl_sitepress_deactivate' );
 			deactivate_plugins( WPML_PLUGIN_BASENAME );
-			$ra                                                   = get_option( 'recently_activated' );
+			$ra                         = get_option( 'recently_activated' );
 			$ra[ WPML_PLUGIN_BASENAME ] = time();
 			update_option( 'recently_activated', $ra );
 		} else {

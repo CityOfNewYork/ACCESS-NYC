@@ -15,14 +15,14 @@ class WPML_ST_JED_File_Builder extends WPML\ST\TranslationFile\Builder {
 	 * @param StringEntity[] $strings
 	 * @return string
 	 */
-	public function get_content(array $strings) {
+	public function get_content( array $strings ) {
 		$data = new stdClass();
 
 		$data->{'translation-revision-date'} = date( 'Y-m-d H:i:sO' );
-		$data->generator = 'WPML String Translation ' . WPML_ST_VERSION;
-		$data->domain = 'messages';
-		$data->locale_data = new stdClass();
-		$data->locale_data->messages = new stdClass();
+		$data->generator                     = 'WPML String Translation ' . WPML_ST_VERSION;
+		$data->domain                        = 'messages';
+		$data->locale_data                   = new stdClass();
+		$data->locale_data->messages         = new stdClass();
 
 		$data->locale_data->messages->{WPML_ST_Translations_File_JED::EMPTY_PROPERTY_NAME} = (object) array(
 			'domain'       => 'messages',

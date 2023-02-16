@@ -16,6 +16,9 @@ class FP {
 
 	use Macroable;
 
+	/**
+	 * @return void
+	 */
 	public static function init(){
 		self::macro( 'map', curryN(2, function( $fn, $target ){
 			if ( is_object( $target ) ) {

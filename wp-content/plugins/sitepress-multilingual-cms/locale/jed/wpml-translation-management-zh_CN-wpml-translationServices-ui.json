@@ -1,0 +1,49 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Connect this site to your %s account": [
+            "将此网站关联到您的帐户%s"
+         ],
+         "Error": [
+            "错误"
+         ],
+         "« Use a different Translation Service": [
+            "« 使用不同的翻译服务"
+         ],
+         "Authenticate": [
+            "认证"
+         ],
+         "Visit <link_to_service /> to request an API Token. This token allows WPML to connect to <service_name /> to send and receive jobs.": [
+            "访问<link_to_service />以请求API令牌。此令牌允许WPML连接到<service_name />以发送和接收工作。"
+         ],
+         "Search": [
+            "搜索"
+         ],
+         "Settings": [
+            "设置"
+         ],
+         "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
+            "当WPML设置为自动翻译网站内容时，当前无法连接翻译服务。要使用翻译服务，请在<LinkToSettingsPage /> 页面上更改您的翻译模式。"
+         ],
+         "Documentation": [
+            "文档"
+         ],
+         "Activate": [
+            "激活"
+         ],
+         "Name": [
+            "名称"
+         ],
+         "Description": [
+            "说明"
+         ],
+         "Ranking": [
+            "排名"
+         ]
+      }
+   }
+}

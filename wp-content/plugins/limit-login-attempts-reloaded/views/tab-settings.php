@@ -7,10 +7,12 @@ if( !defined( 'ABSPATH' ) ) exit();
  */
 
 $gdpr = $this->get_option( 'gdpr' );
+$gdpr_message = $this->get_option( 'gdpr_message' );
 
 $v = explode( ',', $this->get_option( 'lockout_notify' ) );
-$log_checked = in_array( 'log', $v ) ? ' checked ' : '';
 $email_checked = in_array( 'email', $v ) ? ' checked ' : '';
+
+$show_top_level_menu_item = $this->get_option( 'show_top_level_menu_item' );
 
 $admin_notify_email = $this->get_option( 'admin_notify_email' );
 $admin_email_placeholder = (!is_multisite()) ? get_option( 'admin_email' ) : get_site_option( 'admin_email' );
@@ -59,26 +61,27 @@ $active_app_config = $this->get_custom_app_config();
     <?php endif ?>
 
     <table class="form-table">
-		<?php if( $active_app === 'local' ) : ?>
         <tr>
             <th scope="row"
                 valign="top"><?php echo __( 'GDPR compliance', 'limit-login-attempts-reloaded' ); ?></th>
             <td>
                 <input type="checkbox" name="gdpr" value="1" <?php if($gdpr): ?> checked <?php endif; ?>/>
-				<?php echo __( 'this makes the plugin <a href="https://gdpr-info.eu/" target="_blank" >GDPR</a> compliant', 'limit-login-attempts-reloaded' ); ?> <br/>
+				<?php echo __( 'this makes the plugin <a href="https://gdpr-info.eu/" target="_blank">GDPR</a> compliant by showing a message on the login page. <a href="https://www.limitloginattempts.com/gdpr-qa/?from=plugin-settings-gdpr" target="_blank">Read more</a>', 'limit-login-attempts-reloaded' ); ?> <br/>
             </td>
         </tr>
-        <?php endif; ?>
+        <tr>
+            <th scope="row"
+                valign="top"><?php echo __( 'GDPR message', 'limit-login-attempts-reloaded' ); ?></th>
+            <td>
+                <textarea name="gdpr_message" cols="60"><?php echo esc_textarea( stripslashes( $gdpr_message ) ); ?></textarea>
+                <p class="description"><?php echo __( 'You can use a shortcode here to insert links, for example, a link to your Privacy Policy page. <br>The shortcode is: [llar-link url="https://example.com" text="Privacy Policy"]', 'limit-login-attempts-reloaded' ); ?></p>
+            </td>
+        </tr>
 
         <tr>
             <th scope="row"
                 valign="top"><?php echo __( 'Notify on lockout', 'limit-login-attempts-reloaded' ); ?></th>
             <td>
-				<?php /*
-                <input type="checkbox" name="lockout_notify_log" <?php echo $log_checked; ?>
-                       value="log"/> <?php echo __( 'Lockout log', 'limit-login-attempts-reloaded' ); ?><br/>
-                */ ?>
-
                 <input type="checkbox" name="lockout_notify_email" <?php echo $email_checked; ?>
                        value="email"/> <?php echo __( 'Email to', 'limit-login-attempts-reloaded' ); ?>
                 <input type="email" name="admin_notify_email"
@@ -87,6 +90,14 @@ $active_app_config = $this->get_custom_app_config();
                 <input type="text" size="3" maxlength="4"
                        value="<?php echo( $this->get_option( 'notify_email_after' ) ); ?>"
                        name="email_after"/> <?php echo __( 'lockouts', 'limit-login-attempts-reloaded' ); ?>
+            </td>
+        </tr>
+
+        <tr>
+            <th scope="row"
+                valign="top"><?php echo __( 'Show top-level menu item', 'limit-login-attempts-reloaded' ); ?></th>
+            <td>
+                <input type="checkbox" name="show_top_level_menu_item" <?php checked( $show_top_level_menu_item ); ?>> <?php _e( '(Reload the page to see the changes)', 'limit-login-attempts-reloaded' ) ?>
             </td>
         </tr>
         <tr>
@@ -107,7 +118,7 @@ $active_app_config = $this->get_custom_app_config();
     </table>
 
     <h3><?php echo __( 'App Settings', 'limit-login-attempts-reloaded' ); ?></h3>
-    <p><?php echo __( 'The apps absorb the main load caused by brute-force attacks, analyse login attempts and block unwanted visitors. They might provide other service functions as well.', 'limit-login-attempts-reloaded' ); ?></p>
+    <p><?php echo __( 'The app absorbs the main load caused by brute-force attacks, analyzes login attempts, and blocks unwanted visitors. It provides other service functions as well.', 'limit-login-attempts-reloaded' ); ?></p>
 
     <div id="llar-apps-accordion" class="llar-accordion">
         <h3><?php echo __( 'Local App', 'limit-login-attempts-reloaded' ); ?></h3>
@@ -162,7 +173,7 @@ $active_app_config = $this->get_custom_app_config();
                     <th scope="row"
                         valign="top"><?php echo __( 'Setup Code', 'limit-login-attempts-reloaded' ); ?></th>
                     <td>
-                        <input type="text" class="regular-text" id="limit-login-app-setup-link" value="<?php echo ( !empty( $app_setup_code ) ) ? esc_attr( $app_setup_code ) : ''; ?>">
+                        <input type="text" class="regular-text" id="limit-login-app-setup-code" value="<?php echo ( !empty( $app_setup_code ) ) ? esc_attr( $app_setup_code ) : ''; ?>">
                         <button class="button" id="limit-login-app-setup"><?php echo __( 'Submit', 'limit-login-attempts-reloaded' ); ?></button>
                         <span class="spinner llar-app-ajax-spinner"></span><br>
                         <span class="llar-app-ajax-msg"></span>
@@ -181,7 +192,7 @@ $active_app_config = $this->get_custom_app_config();
                                 <li><span class="dashicons dashicons-yes"></span><?php _e( 'Sync the allow/deny/pass lists between multiple domains', 'limit-login-attempts-reloaded' ); ?></li>
                                 <li><span class="dashicons dashicons-yes"></span><?php _e( 'Get premium support', 'limit-login-attempts-reloaded' ); ?></li>
                                 <li><span class="dashicons dashicons-yes"></span><?php _e( 'Run auto backups of access control lists, lockouts and logs', 'limit-login-attempts-reloaded' ); ?></li>
-                                <li><span class="dashicons dashicons-yes"></span><?php _e( 'Only pay $4.99/m per domain - cancel any time', 'limit-login-attempts-reloaded' ); ?></li>
+                                <li><span class="dashicons dashicons-yes"></span><?php _e( 'Only pay $7.99/m per domain - cancel any time', 'limit-login-attempts-reloaded' ); ?></li>
                             </ul>
                         </div>
                         <?php endif; ?>
@@ -250,11 +261,11 @@ $active_app_config = $this->get_custom_app_config();
                     $app_ajax_msg.text('').removeClass('success error');
                     $app_ajax_spinner.css('visibility', 'visible');
 
-                    var setup_link = $('#limit-login-app-setup-link').val();
+                    var setup_code = $('#limit-login-app-setup-code').val();
 
                     $.post(ajaxurl, {
                         action: 'app_setup',
-                        link: setup_link,
+                        code: setup_code,
                         sec: '<?php echo esc_js( wp_create_nonce( "llar-action" ) ); ?>'
                     }, function(response){
 

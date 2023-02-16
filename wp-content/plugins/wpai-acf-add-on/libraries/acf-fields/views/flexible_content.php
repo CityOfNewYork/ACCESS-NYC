@@ -340,7 +340,9 @@
                 <?php
             }?>
         </select>
-        <a href="javascript:void(0);" class="acf-button delete_layout_button" style="float:right; margin-top: 10px;"><?php _e("Delete Layout", 'wp_all_import_acf_add_on'); ?></a>
-        <a href="javascript:void(0);" class="acf-button add_layout_button" style="float:right; margin-top: 10px; margin-right: 10px"><?php _e("Add Layout", 'wp_all_import_acf_add_on'); ?></a>
+        <div class="layout_buttons">
+            <a href="javascript:void(0);" class="acf-button add_layout_button"><?php _e("Add Layout", 'wp_all_import_acf_add_on'); ?></a>
+            <a href="javascript:void(0);" class="acf-button delete_layout_button"><?php _e("Delete Layout", 'wp_all_import_acf_add_on'); ?></a>
+        </div>
     </div>
 </div>

@@ -1,0 +1,40 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Accepted": [
+            "مقبول"
+         ],
+         "Reviewing the next translation...": [
+            "جارٍ مراجعة الترجمة التالية..."
+         ],
+         "Back": [
+            "رجوع"
+         ],
+         "Edit Translation": [
+            "تحرير الترجمة"
+         ],
+         "There was an error in applying translation.": [
+            "حدث خطأ أثناء تطبيق الترجمة."
+         ],
+         "Please wait, applying translation..": [
+            "يُرجى الانتظار، جارٍ تطبيق الترجمة..."
+         ],
+         "Publish this translation": [
+            "نشر هذه الترجمة"
+         ],
+         "Accept this translation": [
+            "قبول هذه الترجمة"
+         ],
+         "Approved!": [
+            "موافق عليه!"
+         ],
+         "Loading the next translation for review...": [
+            "جارٍ تحميل الترجمة التالية لمراجعتها..."
+         ]
+      }
+   }
+}

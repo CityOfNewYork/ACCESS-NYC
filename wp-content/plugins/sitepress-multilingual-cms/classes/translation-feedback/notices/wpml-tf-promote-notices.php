@@ -9,7 +9,7 @@ class WPML_TF_Promote_Notices {
 
 	const NOTICE_GROUP    = 'wpml-tf-promote';
 	const NOTICE_NEW_SITE = 'notice-new-site';
-	const DOC_URL         = 'https://wpml.org/documentation/getting-started-guide/getting-visitor-feedback-about-your-sites-translations/';
+	const DOC_URL         = 'https://wpml.org/documentation/getting-started-guide/getting-visitor-feedback-about-your-sites-translations/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore';
 
 	/** @var SitePress $sitepress */
 	private $sitepress;

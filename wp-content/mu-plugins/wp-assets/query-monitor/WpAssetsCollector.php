@@ -80,13 +80,17 @@ class WpAssetsCollector extends \QM_Collector {
       array_map(function($int) {
         $handle = $int['handle'];
 
-        // Get the final registered output
-        $int['registered'] = array_key_exists($handle, $this->data['registered']) ?
-          $this->data['registered'][$handle] : false;
+        if (isset($this->data['registered'])) {
+          // Get the final registered output
+          $int['registered'] = array_key_exists($handle, $this->data['registered']) ?
+            $this->data['registered'][$handle] : false;
+        }
 
-        // Get the index of the integration in the queue
-        $int['queue'] = (in_array($handle, $this->data['queue'])) ?
-          array_search($handle, $this->data['queue']) : false;
+        if (isset($this->data['queue'])) {
+          // Get the index of the integration in the queue
+          $int['queue'] = (in_array($handle, $this->data['queue'])) ?
+            array_search($handle, $this->data['queue']) : false;
+        }
 
         return $int;
       }, $integrations) : array();

@@ -104,7 +104,7 @@ class TranslateWpmlString {
 			} else {
 				return __( $name, $domain );
 			}
-		} ;
+		};
 
 		$new_value      = $this->withMOLocale( $targetLang, $translateByName );
 		$hasTranslation = $new_value !== $name;
@@ -200,7 +200,6 @@ class TranslateWpmlString {
 	 *
 	 * But it's still possible that WPML registered strings
 	 * have a hash for the name.
-	 *
 	 *
 	 * @param string $original
 	 * @param string $name

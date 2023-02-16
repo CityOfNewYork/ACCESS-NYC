@@ -5,18 +5,10 @@ if ( icl_vars.loadLanguageJs ) {
   var icl_home = icl_vars.icl_home;
 
   window.addLoadEvent = function(func) {
-    var oldonload = window.onload;
-    if (typeof window.onload != 'function') {
-      window.onload = func;
-    } else {
-      window.onload = function() {
-        if (oldonload) {
-          oldonload();
-        }
-        func();
-      }
-    }
+	  if (document.readyState === 'loading') {
+		  document.addEventListener('DOMContentLoaded', func);
+	  } else {
+		  func();
+	  }
   }
 }
-
-

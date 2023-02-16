@@ -11,7 +11,7 @@ if ( ! function_exists('wp_all_import_get_reader_engine')){
 		// auto detect xml reader engine disabled
 		if ( $is_auto_detect_xml_reader === false ) 
 		{
-			update_option('wpai_parser_type', 'xmlreader');
+			update_option('wpai_parser_type', 'xmlreader', false);
 			
 			return false;
 		}		
@@ -111,7 +111,7 @@ if ( ! function_exists('wp_all_import_get_reader_engine')){
 
 				$xml_reader_engine = ($xmlreader_count >= $xmlstreamer_count) ? 'xmlreader' : 'xmlstreamer';				
 
-				update_option('wpai_parser_type', $xml_reader_engine);
+				update_option('wpai_parser_type', $xml_reader_engine, false);
 			}
 		}
 

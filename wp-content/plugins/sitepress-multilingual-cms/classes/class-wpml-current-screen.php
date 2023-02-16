@@ -7,25 +7,25 @@
  * Time: 08:44
  */
 class WPML_Current_Screen {
-	private $translatable_types = array();
+	private $translatable_types                     = array();
 	private $allowed_screen_ids_for_edit_posts_list = array();
-	private $allowed_screen_ids_for_edit_post = array();
+	private $allowed_screen_ids_for_edit_post       = array();
 
 	public function is_edit_posts_list() {
 		return $this->get() && in_array( $this->get()->id, $this->get_allowed_screen_ids_for_edit_posts_list() )
-		       && $this->has_posts();
+			   && $this->has_posts();
 
 	}
 
 	public function is_edit_post() {
 		return $this->get() && in_array( $this->get()->id, $this->get_allowed_screen_ids_for_edit_post() )
-		       && $this->has_post();
+			   && $this->has_post();
 
 	}
 
 	private function get_translatable_types() {
 		if ( ! $this->translatable_types ) {
-			$translatable_types       = apply_filters( 'wpml_translatable_documents', array() );
+			$translatable_types = apply_filters( 'wpml_translatable_documents', array() );
 			if ( $translatable_types ) {
 				$this->translatable_types = array_keys( $translatable_types );
 			}
@@ -97,12 +97,12 @@ class WPML_Current_Screen {
 
 	private function has_posts() {
 		return $this->get()
-		       && ( array_key_exists( 'posts', $GLOBALS ) )
-		       && $GLOBALS['posts'];
+			   && ( array_key_exists( 'posts', $GLOBALS ) )
+			   && $GLOBALS['posts'];
 	}
 
 	private function has_post() {
 		return $this->get()
-		       && array_key_exists( 'post', $_GET );
+			   && array_key_exists( 'post', $_GET );
 	}
 }

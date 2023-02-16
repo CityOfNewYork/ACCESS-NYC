@@ -127,9 +127,11 @@ class ignoreVulnerabilities {
 		foreach ( wp_get_themes() as $name => $details ) {
 			$this->list_vulnerabilities_to_ignore( 'themes', $this->parent->get_theme_slug( $name, $details ) );
 		}
-
-		foreach ( $this->parent->classes['checks/system']->checks as $id => $data ) {
-			$this->list_vulnerabilities_to_ignore( 'security-checks', $id );
+    
+    if ( get_option( $this->parent->OPT_DISABLE_CHECKS, array() ) !== '1' ) {
+			foreach ( $this->parent->classes['checks/system']->checks as $id => $data ) {
+				$this->list_vulnerabilities_to_ignore( 'security-checks', $id );
+			}
 		}
 	}
 

@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose Content to Automatically Translate into": [
+            "Chọn nội dung để tự động dịch sang"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "Lưu các thay đổi và Bật tính năng Dịch thuật Tự động"
+         ],
+         "Cancel Language Changes": [
+            "Hủy các thay đổi ngôn ngữ"
+         ],
+         "Save": [
+            "Lưu"
+         ],
+         "Choose Content to Automatically Translate into New Language": [
+            "Chọn nội dung để Tự động Dịch sang Ngôn ngữ mới"
+         ],
+         "Add languages and start translating": [
+            "Thêm các ngôn ngữ và bắt đầu dịch."
+         ],
+         "Add language and start translating": [
+            "Thêm ngôn ngữ và bắt đầu dịch."
+         ],
+         "Never mind. Don't add new languages": [
+            "Không sao. Không thêm các ngôn ngữ mới"
+         ],
+         "Never mind. Don't add new language": [
+            "Không sao. Không thêm ngôn ngữ mới"
+         ],
+         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
+            "Tự động dịch tất cả các bài đăng và trang hiện có của tôi ngay, cùng với nội dung mới như tôi đã tạo."
+         ],
+         "Only automatically translate new content.": [
+            "Chỉ tự động dịch nội dung mới."
+         ],
+         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
+            "Bạn đang sử dụng chế độ <a>Dịch mọi thứ</a>, chế độ tự động dịch nội dung trang web của bạn."
+         ],
+         "Which content do you want to automatically translate into your newly-added language?": [
+            "Nội dung nào bạn muốn tự động dịch sang ngôn ngữ mới bổ sung của mình?"
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "Bạn có thể dịch nội dung có sẵn từ Bảng điều khiển Quản lý Dịch thuật."
+         ]
+      }
+   }
+}

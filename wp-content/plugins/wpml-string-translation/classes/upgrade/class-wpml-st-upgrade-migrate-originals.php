@@ -8,15 +8,15 @@ class WPML_ST_Upgrade_Migrate_Originals implements IWPML_St_Upgrade_Command {
 	/** @var SitePress sitepress */
 	private $sitepress;
 
-	private $translations = array();
+	private $translations   = array();
 	private $not_translated = array();
 	private $active_languages;
-	
+
 	public function __construct( wpdb $wpdb, SitePress $sitepress ) {
-		$this->wpdb      = $wpdb;
-		$this->sitepress = $sitepress;
+		$this->wpdb       = $wpdb;
+		$this->sitepress  = $sitepress;
 		$active_languages = $this->sitepress->get_active_languages();
-		foreach( $active_languages as $lang ) {
+		foreach ( $active_languages as $lang ) {
 			$this->active_languages[] = $lang['code'];
 		}
 	}
@@ -24,7 +24,7 @@ class WPML_ST_Upgrade_Migrate_Originals implements IWPML_St_Upgrade_Command {
 	public static function get_command_id() {
 		return __CLASS__;
 	}
-	
+
 	public function run() {
 		if ( $this->is_migration_required() ) {
 			if ( current_user_can( 'manage_options' ) ) {
@@ -35,24 +35,24 @@ class WPML_ST_Upgrade_Migrate_Originals implements IWPML_St_Upgrade_Command {
 			return true;
 		}
 	}
-	
-	function update_message(){
+
+	function update_message() {
 		?>
-			<div id="wpml-st-upgrade-migrate-originals" class="update-nag" style="display:block">
+			<div id="wpml-st-upgrade-migrate-originals" class="update-nag notice notice-info" style="display:block">
 				<p>
 					<?php esc_html_e( "WPML needs to update the database. This update will help improve WPML's performance when fetching translated strings.", 'wpml-string-translation' ); ?>
 					<br /><br />
 					<button class="wpml-st-upgrade-migrate-originals"><?php esc_html_e( 'Update Now', 'wpml-string-translation' ); ?></button> <span class="spinner" style="float: none"></span>
 				</p>
-                <?php wp_nonce_field( 'wpml-st-upgrade-migrate-originals-nonce', 'wpml-st-upgrade-migrate-originals-nonce' ); ?>
+				<?php wp_nonce_field( 'wpml-st-upgrade-migrate-originals-nonce', 'wpml-st-upgrade-migrate-originals-nonce' ); ?>
 			</div>
-			<div id="wpml-st-upgrade-migrate-originals-complete" class="update-nag" style="display:none">
+			<div id="wpml-st-upgrade-migrate-originals-complete" class="update-nag notice notice-info" style="display:none">
 				<p>
 					<?php esc_html_e( 'The database has been updated.', 'wpml-string-translation' ); ?>
 					<br /><br />
 					<button class="wpml-st-upgrade-migrate-originals-close"><?php esc_html_e( 'Close', 'wpml-string-translation' ); ?></button>
 				</p>
-                <?php wp_nonce_field( 'wpml-st-upgrade-migrate-originals-nonce', 'wpml-st-upgrade-migrate-originals-nonce' ); ?>
+				<?php wp_nonce_field( 'wpml-st-upgrade-migrate-originals-nonce', 'wpml-st-upgrade-migrate-originals-nonce' ); ?>
 			</div>
 			<script type="text/javascript">
 				jQuery( function( $ ) {
@@ -79,9 +79,9 @@ class WPML_ST_Upgrade_Migrate_Originals implements IWPML_St_Upgrade_Command {
 			</script>
 		<?php
 	}
-	
+
 	public function run_ajax() {
-		
+
 		if ( $this->is_migration_required() ) {
 			$this->get_strings_without_translations();
 			$this->get_originals_with_translations();
@@ -103,12 +103,12 @@ class WPML_ST_Upgrade_Migrate_Originals implements IWPML_St_Upgrade_Command {
 		$found = $this->wpdb->get_var( $query );
 		return $found > 0;
 	}
-	
+
 	private function get_strings_without_translations() {
-		
-		foreach( $this->active_languages as $lang ) {
-			$res_args    = array( $lang, $lang );
-		
+
+		foreach ( $this->active_languages as $lang ) {
+			$res_args = array( $lang, $lang );
+
 			$res_query                     = "
 								SELECT
 									s.value,
@@ -123,15 +123,15 @@ class WPML_ST_Upgrade_Migrate_Originals implements IWPML_St_Upgrade_Command {
 			$res_prepare                   = $this->wpdb->prepare( $res_query, $res_args );
 			$this->not_translated[ $lang ] = $this->wpdb->get_results( $res_prepare, ARRAY_A );
 		}
-		
+
 	}
-	
+
 	private function get_originals_with_translations() {
-		
-		foreach( $this->active_languages as $lang ) {
-			$res_args    = array( ICL_TM_COMPLETE, $lang );
-		
-			$res_query                   = "
+
+		foreach ( $this->active_languages as $lang ) {
+			$res_args = array( ICL_TM_COMPLETE, $lang );
+
+			$res_query   = "
 								SELECT
 									st.value AS tra,
 									s.value AS org
@@ -140,28 +140,28 @@ class WPML_ST_Upgrade_Migrate_Originals implements IWPML_St_Upgrade_Command {
 									ON s.id=st.string_id
 								WHERE st.status=%d AND st.language=%s
 								";
-			$res_prepare                 = $this->wpdb->prepare( $res_query, $res_args );
-			$result = $this->wpdb->get_results( $res_prepare, ARRAY_A );
-			$strings = array();
+			$res_prepare = $this->wpdb->prepare( $res_query, $res_args );
+			$result      = $this->wpdb->get_results( $res_prepare, ARRAY_A );
+			$strings     = array();
 			foreach ( $result as $string ) {
 				$strings[ $string['org'] ] = $string['tra'];
 			}
 			$this->translations[ $lang ] = $strings;
 		}
 	}
-	
+
 	private function migrate_translations() {
-		
-		foreach( $this->active_languages as $lang ) {
-			foreach( $this->not_translated[ $lang ] as $not_translated ) {
-				
+
+		foreach ( $this->active_languages as $lang ) {
+			foreach ( $this->not_translated[ $lang ] as $not_translated ) {
+
 				if ( isset( $this->translations[ $lang ][ $not_translated['value'] ] ) ) {
 					icl_add_string_translation( $not_translated['id'], $lang, $this->translations[ $lang ][ $not_translated['value'] ], ICL_TM_COMPLETE );
 					break;
 				}
 			}
-		}		
+		}
 	}
-	
+
 }
 

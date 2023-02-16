@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose Content to Automatically Translate into": [
+            "Выбрать контент для автоматического перевода на"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "Сохранить изменения и включить автоматический перевод"
+         ],
+         "Cancel Language Changes": [
+            "Отменить языковые изменения"
+         ],
+         "Save": [
+            "Сохранить"
+         ],
+         "Choose Content to Automatically Translate into New Language": [
+            "Выбрать контент для автоматического перевода на новый язык"
+         ],
+         "Add languages and start translating": [
+            "Добавить языки и начать переводить"
+         ],
+         "Add language and start translating": [
+            "Добавить язык и начать переводить"
+         ],
+         "Never mind. Don't add new languages": [
+            "Не надо. Не добавлять новые языки"
+         ],
+         "Never mind. Don't add new language": [
+            "Не надо. Не добавлять новый язык"
+         ],
+         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
+            "Автоматически перевести все существующие записи и страницы прямо сейчас, а также новый контент по мере его создания."
+         ],
+         "Only automatically translate new content.": [
+            "Автоматически переводить только новый контент."
+         ],
+         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
+            "Вы используете режим <a>Перевести все</a>, при котором контент вашего сайта переводится автоматически."
+         ],
+         "Which content do you want to automatically translate into your newly-added language?": [
+            "Какой контент следует автоматически переводить на новый язык?"
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "Существующий контент можно переводить в Консоли управления переводами."
+         ]
+      }
+   }
+}

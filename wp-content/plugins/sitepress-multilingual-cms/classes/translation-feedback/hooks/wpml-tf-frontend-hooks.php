@@ -2,6 +2,7 @@
 
 /**
  * Class WPML_TF_Frontend_Hooks
+ *
  * @author OnTheGoSystems
  */
 class WPML_TF_Frontend_Hooks implements IWPML_Action {

@@ -48,18 +48,26 @@ class WPML_XML_Config_Log_Notice {
 			$return_url = add_query_arg( $return_url_qs, $return_url );
 		}
 
-		$retry_url = add_query_arg( array( self::NOTICE_ERROR_GROUP . '-action' => 'wpml_xml_update_refresh', self::NOTICE_ERROR_GROUP . '-nonce' => wp_create_nonce( 'wpml_xml_update_refresh' ) ), $return_url );
+		$retry_url = add_query_arg(
+			array(
+				self::NOTICE_ERROR_GROUP . '-action' => 'wpml_xml_update_refresh',
+				self::NOTICE_ERROR_GROUP . '-nonce'  => wp_create_nonce( 'wpml_xml_update_refresh' ),
+			),
+			$return_url
+		);
 		$retry     = $notices->get_new_notice_action( __( 'Retry', 'sitepress' ), $retry_url, false, false, true );
 
 		$notice->add_action( $show_logs );
 		$notice->add_action( $retry );
 		$notice->set_dismissible( true );
-		$notice->set_restrict_to_page_prefixes( array(
-			                                        'sitepress-multilingual-cms',
-			                                        'wpml-translation-management',
-			                                        'wpml-package-management',
-			                                        'wpml-string-translation',
-		                                        ) );
+		$notice->set_restrict_to_page_prefixes(
+			array(
+				'sitepress-multilingual-cms',
+				'wpml-translation-management',
+				'wpml-package-management',
+				'wpml-string-translation',
+			)
+		);
 
 		$notice->set_restrict_to_screen_ids( array( 'dashboard', 'plugins', 'themes' ) );
 		$notice->add_exclude_from_page( WPML_Config_Update_Log::get_support_page_log_section() );
@@ -71,7 +79,7 @@ class WPML_XML_Config_Log_Notice {
 	 */
 	private function is_admin_user_action() {
 		return is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX )
-		       && ( 'heartbeat' !== filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING ) )
-		       && ( ! defined( 'DOING_CRON' ) || ! DOING_CRON );
+			   && ( 'heartbeat' !== filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING ) )
+			   && ( ! defined( 'DOING_CRON' ) || ! DOING_CRON );
 	}
 }

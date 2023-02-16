@@ -1,19 +1,19 @@
 /*jshint browser:true, devel:true */
 /*global jQuery, wp */
 (function($){
-	"use strict";
+    "use strict";
 
-	$(document).ready(function(){
-		var form         = $('.js-wpml-tf-feedback-form'),
-			openIcon     = $('.js-wpml-tf-feedback-icon'),
-			ratingInput  = form.find('input[name="wpml-tf-rating"]'),
-			sendButton   = form.find('.js-wpml-tf-comment-button'),
-			documentId   = form.find('input[name="document_id"]').val(),
-			documentType = form.find('input[name="document_type"]').val(),
-			action       = form.find('input[name="action"]').val(),
-			nonce        = form.find('input[name="nonce"]').val(),
-			noCommentThreshold = 4,
-			dialogInitialized    = false,
+    $(function () {
+        var form = $('.js-wpml-tf-feedback-form'),
+            openIcon = $('.js-wpml-tf-feedback-icon'),
+            ratingInput = form.find('input[name="wpml-tf-rating"]'),
+            sendButton = form.find('.js-wpml-tf-comment-button'),
+            documentId = form.find('input[name="document_id"]').val(),
+            documentType = form.find('input[name="document_type"]').val(),
+            action = form.find('input[name="action"]').val(),
+            nonce = form.find('input[name="nonce"]').val(),
+            noCommentThreshold = 4,
+            dialogInitialized = false,
 			feedbackId;
 
 		var disableRating = function() {

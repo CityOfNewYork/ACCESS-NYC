@@ -1,0 +1,163 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "Αποστολή για μετάφραση"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "Γίνεται σύνδεση με τον Προηγμένο επεξεργαστή μεταφράσεων του WPML"
+         ],
+         "Try again": [
+            "Δοκιμάστε ξανά"
+         ],
+         "You don't have the rights to review this language": [
+            "Δεν έχετε δικαιώματα επιμέλειας αυτής της γλώσσας"
+         ],
+         "pages & posts": [
+            "σελίδες και αναρτήσεις"
+         ],
+         "left to translate": [
+            "ακόμα για μετάφραση"
+         ],
+         "Translate on hold": [
+            "Μετάφραση σε αναμονή"
+         ],
+         "All translated": [
+            "Μεταφρασμένα όλα"
+         ],
+         "%d translations left": [
+            "%d μεταφράσεις ακόμα"
+         ],
+         "Credits used:": [
+            "Χρησιμοποιημένες μονάδες:"
+         ],
+         "Credits left:": [
+            "Εναπομείνασες μονάδες:"
+         ],
+         "Calculating": [
+            "Υπολογισμός…"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "Εναπομείνασες προπληρωμένες μονάδες που έχουν ανατεθεί σε αυτόν τον ιστότοπο στο WPML.org."
+         ],
+         "Prepaid credits left": [
+            "Εναπομείνασες προπληρωμένες μονάδες"
+         ],
+         "Account credits used": [
+            "Χρησιμοποιημένες μονάδες λογαριασμού"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "Αφού χρησιμοποιήσετε όλες τις προπληρωμένες μονάδες σας, θα σας χρεώσουμε για τυχόν πρόσθετες μονάδες που χρησιμοποιείτε μετά το τέλος του μήνα."
+         ],
+         "Payment limit:": [
+            "Όριο πληρωμών:"
+         ],
+         "%s credits": [
+            "%s μονάδες"
+         ],
+         "Preparing more content for translation": [
+            "Προετοιμασία περισσότερου περιεχομένου για μετάφραση…"
+         ],
+         "Preparing content for translation": [
+            "Προετοιμασία περιεχομένου για μετάφραση…"
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "Υπάρχει ένα πρόβλημα με την αυτόματη μετάφραση που απαιτεί την προσοχή σας. Διορθώστε το για να συνεχίσετε."
+         ],
+         "%d translations waiting for review": [
+            "%d μεταφράσεις αναμένουν επιμέλεια"
+         ],
+         "Draft — Pending review": [
+            "Πρόχειρο — Αναμένει επιμέλεια"
+         ],
+         "Complete": [
+            "Ολοκληρώθηκε"
+         ],
+         "Insufficient funds": [
+            "Ανεπαρκή χρήματα"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "Διαβάστε περισσότερα για το πώς να μεταφράζετε το περιεχόμενό σας στον <a>Οδηγό έναρξης</a>"
+         ],
+         "Let's Start Translating!": [
+            "Ας αρχίσουμε να μεταφράζουμε!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "Επιλέξτε το περιεχόμενο που θέλετε από τον Πίνακα εργαλείων, παρακάτω, και δημιουργήστε την πρώτη σας μεταφραστική εργασία!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "Επιλέξτε τις <a>ρυθμίσεις αυτόματης μετάφρασης</a> (οι μεταφραστικές εργασίες που βρίσκονται σε εξέλιξη θα ολοκληρωθούν με τις τρέχουσες ρυθμίσεις)."
+         ],
+         "Read more about translating your site automatically.": [
+            "Διαβάστε περισσότερα σχετικά με την αυτόματη μετάφραση του ιστοτόπου σας."
+         ],
+         "Your site is being automatically translated!": [
+            "Ο ιστότοπός σας μεταφράζεται αυτόματα!"
+         ],
+         "Automatic Translation Status": [
+            "Κατάσταση αυτόματης μετάφρασης"
+         ],
+         "Calculating...": [
+            "Υπολογισμός…"
+         ],
+         "Do not close WP admin!": [
+            "Μην κλείσετε τη διαχείριση του WP!"
+         ],
+         "The number of translations": [
+            "Ο αριθμός μεταφράσεων"
+         ],
+         "Delete Translations": [
+            "Διαγραφή μεταφράσεων"
+         ],
+         "Keep Translations as Draft": [
+            "Διατήρηση μεταφράσεων ως πρόχειρα"
+         ],
+         "Never mind. I want to review these translations.": [
+            "Θέλω να επιμεληθώ αυτές τις μεταφράσεις."
+         ],
+         "Cancel": [
+            "Άκυρο"
+         ],
+         "You haven't selected any jobs that need review.": [
+            "Δεν έχετε επιλέξει καμία εργασία που χρειάζεται επιμέλεια."
+         ],
+         "Please select the pending review jobs to abort.": [
+            "Επιλέξτε τις εργασίες για τις οποίες εκκρεμεί επιμέλεια που θα ματαιωθούν."
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "Έτσι θα αφαιρεθούν οι επιλεγμένες εργασίες από την Ουρά μεταφράσεων, χωρίς να δημοσιευτούν. Τι θέλετε να κάνετε με τις μεταφράσεις;"
+         ],
+         "Cancel Translation Review": [
+            "Ακύρωση επιμέλειας μεταφράσεων"
+         ],
+         "Edit": [
+            "Επεξεργασία"
+         ],
+         "Updating": [
+            "Ενημέρωση σε εξέλιξη"
+         ],
+         "Translate": [
+            "Μετάφραση"
+         ],
+         "Take and translate": [
+            "Αποδοχή και μετάφραση"
+         ],
+         "Review": [
+            "Κριτική"
+         ],
+         "Are you sure you want to resign from this job?": [
+            "Είστε βέβαιοι ότι θέλετε να παραιτηθείτε από αυτήν την εργασία;"
+         ],
+         "Resign": [
+            "Παραίτηση"
+         ],
+         "View": [
+            "Προβολή"
+         ]
+      }
+   }
+}

@@ -1,0 +1,163 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "Skickar för översättning"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "Ansluter till WPMLs Avancerade översättningsredigerare"
+         ],
+         "Try again": [
+            "Försök igen"
+         ],
+         "You don't have the rights to review this language": [
+            "Du har inte rättigheter att granska detta språk"
+         ],
+         "pages & posts": [
+            "sidor och inlägg"
+         ],
+         "left to translate": [
+            "kvar att översätta"
+         ],
+         "Translate on hold": [
+            "Översätt parkerad"
+         ],
+         "All translated": [
+            "Allt översatt"
+         ],
+         "%d translations left": [
+            "%d översättningar kvar"
+         ],
+         "Credits used:": [
+            "Använda krediter:"
+         ],
+         "Credits left:": [
+            "Krediter kvar:"
+         ],
+         "Calculating": [
+            "Beräknar"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "Återstående förbetalda krediter som tilldelas den här webbplatsen på WPML.org."
+         ],
+         "Prepaid credits left": [
+            "Förbetalda krediter kvar"
+         ],
+         "Account credits used": [
+            "Använda kontokrediter"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "När du har använt alla dina förbetalda krediter fakturerar vi dig för eventuella ytterligare krediter du använder efter månadens slut"
+         ],
+         "Payment limit:": [
+            "Betalningsgräns:"
+         ],
+         "%s credits": [
+            "%s krediter"
+         ],
+         "Preparing more content for translation": [
+            "Förbereder mer innehåll för översättning"
+         ],
+         "Preparing content for translation": [
+            "Förbereder innehåll för översättning"
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "Det finns ett problem med automatisk översättning som behöver din uppmärksamhet. Åtgärda för att fortsätta."
+         ],
+         "%d translations waiting for review": [
+            "%d översättningar väntar på granskning"
+         ],
+         "Draft — Pending review": [
+            "Utkast — väntar på granskning"
+         ],
+         "Complete": [
+            "Färdig"
+         ],
+         "Insufficient funds": [
+            "Otillräckliga medel"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "Läs mer om hur du översätter ditt innehåll i <a> Kom igång-guiden</a>"
+         ],
+         "Let's Start Translating!": [
+            "Låt oss börja översätta!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "Välj ditt innehåll från översättningspanelen nedan och skapa ditt första översättningsjobb!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "Ändra dina <a>automatiska översättningsinställningar</a> (pågående översättningsjobb slutförs med de aktuella inställningarna)."
+         ],
+         "Read more about translating your site automatically.": [
+            "Läs mer om att översätta din webbplats automatiskt."
+         ],
+         "Your site is being automatically translated!": [
+            "Din webbplats översätts automatiskt!"
+         ],
+         "Automatic Translation Status": [
+            "Status för automatisk översättning"
+         ],
+         "Calculating...": [
+            "Beräknar..."
+         ],
+         "Do not close WP admin!": [
+            "Stäng inte WP-administratören!"
+         ],
+         "The number of translations": [
+            "Antalet översättningar"
+         ],
+         "Delete Translations": [
+            "Ta bort översättningar"
+         ],
+         "Keep Translations as Draft": [
+            "Behåll översättningar som utkast"
+         ],
+         "Never mind. I want to review these translations.": [
+            "Det spelar ingen roll. Jag vill granska dessa översättningar."
+         ],
+         "Cancel": [
+            "Avbryt"
+         ],
+         "You haven't selected any jobs that need review.": [
+            "Du har inte valt några jobb som behöver granskas."
+         ],
+         "Please select the pending review jobs to abort.": [
+            "Välj de väntande granskningsjobben som ska avbrytas."
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "Detta tar bort de markerade jobben från översättningskön utan att publicera dem. Vad vill du göra med översättningarna?"
+         ],
+         "Cancel Translation Review": [
+            "Avbryt översättningsgranskning"
+         ],
+         "Edit": [
+            "Redigera"
+         ],
+         "Updating": [
+            "Uppdaterar"
+         ],
+         "Translate": [
+            "Översätt"
+         ],
+         "Take and translate": [
+            "Ta och översätt"
+         ],
+         "Review": [
+            "Granska"
+         ],
+         "Are you sure you want to resign from this job?": [
+            "Är du säker på att du vill lämna det här jobbet?"
+         ],
+         "Resign": [
+            "Lämna"
+         ],
+         "View": [
+            "Visa"
+         ]
+      }
+   }
+}

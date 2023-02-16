@@ -1,0 +1,163 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "번역하도록 전송"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "WPML의 고급 번역 편집기에 연결 중"
+         ],
+         "Try again": [
+            "다시 시도"
+         ],
+         "You don't have the rights to review this language": [
+            "이 언어를 검토할 권한이 없습니다."
+         ],
+         "pages & posts": [
+            "페이지 및 글"
+         ],
+         "left to translate": [
+            "남은 번역"
+         ],
+         "Translate on hold": [
+            "번역 보류"
+         ],
+         "All translated": [
+            "번역된 모든 항목"
+         ],
+         "%d translations left": [
+            "%d개 번역 남음"
+         ],
+         "Credits used:": [
+            "사용한 크레딧:"
+         ],
+         "Credits left:": [
+            "남은 크레딧:"
+         ],
+         "Calculating": [
+            "계산 중"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "WPML.org에서 이 사이트에 할당된 선불 크레딧 잔액입니다."
+         ],
+         "Prepaid credits left": [
+            "남은 선불 크레딧"
+         ],
+         "Account credits used": [
+            "사용한 계정 크레딧"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "선불 크레딧을 모두 사용하면 월말 이후에 사용하는 추가 크레딧에 대한 청구서를 보내드립니다."
+         ],
+         "Payment limit:": [
+            "지불한도액:"
+         ],
+         "%s credits": [
+            "%s 크레딧"
+         ],
+         "Preparing more content for translation": [
+            "번역할 추가 컨텐츠 준비 중"
+         ],
+         "Preparing content for translation": [
+            "번역할 컨텐츠 준비 중"
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "자동 번역과 관련하여 확인이 필요한 문제가 있습니다. 계속하려면 문제를 수정하십시오."
+         ],
+         "%d translations waiting for review": [
+            "%d개 번역 검토 대기 중"
+         ],
+         "Draft — Pending review": [
+            "초안 — 검토 대기중"
+         ],
+         "Complete": [
+            "완료"
+         ],
+         "Insufficient funds": [
+            "잔액 부족"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "<a>시작 가이드</a>에서 컨텐츠를 번역하는 방법에 대한 자세한 정보를 살펴보십시오."
+         ],
+         "Let's Start Translating!": [
+            "번역을 시작하세요!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "아래의 번역 대시보드에서 컨텐츠를 선택하여 첫 번째 번역 작업을 만들어보세요!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "<a>자동 번역 설정</a>을 변경합니다. (진행 중인 번역 작업은 현재 설정으로 완료됩니다.)"
+         ],
+         "Read more about translating your site automatically.": [
+            "사이트 자동 번역에 대한 자세한 내용을 살펴보십시오."
+         ],
+         "Your site is being automatically translated!": [
+            "사이트가 자동으로 번역됩니다!"
+         ],
+         "Automatic Translation Status": [
+            "자동 번역 상태"
+         ],
+         "Calculating...": [
+            "계산 중..."
+         ],
+         "Do not close WP admin!": [
+            "워드프레스 관리자 페이지를 닫지 마세요!"
+         ],
+         "The number of translations": [
+            "번역 개수"
+         ],
+         "Delete Translations": [
+            "번역 삭제"
+         ],
+         "Keep Translations as Draft": [
+            "번역을 초안으로 유지"
+         ],
+         "Never mind. I want to review these translations.": [
+            "괜찮습니다. 이러한 번역을 검토하겠습니다."
+         ],
+         "Cancel": [
+            "취소"
+         ],
+         "You haven't selected any jobs that need review.": [
+            "검토가 필요한 작업을 선택하지 않았습니다."
+         ],
+         "Please select the pending review jobs to abort.": [
+            "중단할 보류 중인 검토 작업을 선택하십시오."
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "이 옵션은 선택한 작업을 발행하지 않고 번역 대기열에서 제거합니다. 번역을 어떻게 처리하시겠습니까?"
+         ],
+         "Cancel Translation Review": [
+            "번역 검토 취소"
+         ],
+         "Edit": [
+            "편집"
+         ],
+         "Updating": [
+            "업데이트 중..."
+         ],
+         "Translate": [
+            "번역"
+         ],
+         "Take and translate": [
+            "가져와서 번역하기"
+         ],
+         "Review": [
+            "검토"
+         ],
+         "Are you sure you want to resign from this job?": [
+            "이 작업에서 탈퇴하시겠습니까?"
+         ],
+         "Resign": [
+            "탈퇴"
+         ],
+         "View": [
+            "보기"
+         ]
+      }
+   }
+}

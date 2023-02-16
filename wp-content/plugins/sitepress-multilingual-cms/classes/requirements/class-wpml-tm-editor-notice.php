@@ -10,7 +10,7 @@ class WPML_TM_Editor_Notice extends WPML_Notice {
 
 	public function is_different( WPML_Notice $other_notice ) {
 		if ( $this->get_id() !== $other_notice->get_id() ||
-		     $this->get_group() !== $other_notice->get_group()
+			 $this->get_group() !== $other_notice->get_group()
 		) {
 			return true;
 		}

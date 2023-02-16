@@ -35,21 +35,25 @@ class Database {
 	}
 
 	private function deleteOnlyNativeMoStringTranslations( array $moDomains ) {
-		$this->wpdb->query( "
+		$this->wpdb->query(
+			"
 			DELETE st FROM {$this->wpdb->prefix}icl_string_translations AS st
 			LEFT JOIN {$this->wpdb->prefix}icl_strings AS s
 				ON st.string_id = s.id
-			WHERE st.value IS NULL AND s.context IN(" . wpml_prepare_in( $moDomains ) . ")
-		" );
+			WHERE st.value IS NULL AND s.context IN(" . wpml_prepare_in( $moDomains ) . ')
+		'
+		);
 	}
 
 	private function deleteMoStringsWithNoTranslation( array $moDomains ) {
-		$this->wpdb->query( "
+		$this->wpdb->query(
+			"
 			DELETE s FROM {$this->wpdb->prefix}icl_strings AS s
 			LEFT JOIN {$this->wpdb->prefix}icl_string_translations AS st
 				ON st.string_id = s.id
-			WHERE st.string_id IS NULL AND s.context IN(" . wpml_prepare_in( $moDomains ) . ")
-		" );
+			WHERE st.string_id IS NULL AND s.context IN(" . wpml_prepare_in( $moDomains ) . ')
+		'
+		);
 	}
 
 	private function optimizeStringTables() {
@@ -72,6 +76,6 @@ class Database {
 	 * @return bool
 	 */
 	private function tableExists( $table ) {
-		return (bool) $this->wpdb->get_var( $this->wpdb->prepare( "SHOW TABLES LIKE %s", $table ) );
+		return (bool) $this->wpdb->get_var( $this->wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) );
 	}
 }

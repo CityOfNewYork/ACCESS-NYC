@@ -16,8 +16,6 @@ use Twilio\Values;
 use Twilio\Version;
 
 /**
- * PLEASE NOTE that this class contains preview products that are subject to change. Use them with caution. If you currently do not have developer preview access, please contact help@twilio.com.
- *
  * @property string $accountSid
  * @property string $status
  * @property \DateTime $dateCreated
@@ -34,6 +32,9 @@ use Twilio\Version;
  * @property int $bitrate
  * @property string $size
  * @property int $duration
+ * @property string $mediaExternalLocation
+ * @property string $statusCallback
+ * @property string $statusCallbackMethod
  * @property string $url
  * @property array $links
  */
@@ -66,6 +67,9 @@ class CompositionInstance extends InstanceResource {
             'bitrate' => Values::array_get($payload, 'bitrate'),
             'size' => Values::array_get($payload, 'size'),
             'duration' => Values::array_get($payload, 'duration'),
+            'mediaExternalLocation' => Values::array_get($payload, 'media_external_location'),
+            'statusCallback' => Values::array_get($payload, 'status_callback'),
+            'statusCallbackMethod' => Values::array_get($payload, 'status_callback_method'),
             'url' => Values::array_get($payload, 'url'),
             'links' => Values::array_get($payload, 'links'),
         ];

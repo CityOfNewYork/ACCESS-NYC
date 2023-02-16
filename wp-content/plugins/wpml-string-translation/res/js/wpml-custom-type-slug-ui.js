@@ -4,11 +4,11 @@ var WPML_String_Translation = WPML_String_Translation || {};
 
 WPML_String_Translation.CustomTypeSlugUI = function () {
 	var init = function () {
-		jQuery(document).ready(function() {
-			jQuery('.js-translate-slug-original').on('change', change_original_lang);
-			jQuery('.js-toggle-slugs-table').on('click', toggle_slugs_table );
-		});
-	};
+        jQuery(function () {
+            jQuery('.js-translate-slug-original').on('change', change_original_lang);
+            jQuery('.js-toggle-slugs-table').on('click', toggle_slugs_table);
+        });
+    };
 	
 	var change_original_lang = function () {
 		var new_lang = jQuery(this).val();

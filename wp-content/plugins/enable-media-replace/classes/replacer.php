@@ -144,7 +144,7 @@ class Replacer
       // update the file attached. This is required for wp_get_attachment_url to work.
       $updated = update_attached_file($this->post_id, $this->targetFile->getFullFilePath() );
       if (! $updated)
-        Log::addError('Update Attached File reports as not updated');
+        Log::addError('Update Attached File reports as not updated or same value');
 
       $this->target_url = $this->getTargetURL(); //wp_get_attachment_url($this->post_id);
 
@@ -163,22 +163,30 @@ class Replacer
         Log::addInfo('WP_Handle_upload filter returned different file', $filtered);
       }
 
+			// Check and update post mimetype, otherwise badly coded plugins cry.
+		  $post_mime = get_post_mime_type($this->post_id);
+			$target_mime = $this->targetFile->getFileMime();
+
+			// update DB post mime type, if somebody decided to mess it up, and the target one is not empty.
+			if ($target_mime !== $post_mime && strlen($target_mime) > 0)
+			{
+
+				  \wp_update_post(array('post_mime_type' => $this->targetFile->getFileMime(), 'ID' => $this->post_id));
+			}
+
       $metadata = wp_generate_attachment_metadata( $this->post_id, $this->targetFile->getFullFilePath() );
       wp_update_attachment_metadata( $this->post_id, $metadata );
       $this->target_metadata = $metadata;
-
 
       /** If author is different from replacer, note this */
       $author_id = get_post_meta($this->post_id, '_emr_replace_author', true);
 
       if ( intval($this->source_post->post_author) !== get_current_user_id())
       {
-
          update_post_meta($this->post_id, '_emr_replace_author', get_current_user_id());
       }
       elseif ($author_id)
       {
-
         delete_post_meta($this->post_id, '_emr_replace_author');
       }
 
@@ -186,13 +194,18 @@ class Replacer
       {
          // Write new image title.
          $title = $this->getNewTitle();
+				 $excerpt = $this->getNewExcerpt();
          $update_ar = array('ID' => $this->post_id);
          $update_ar['post_title'] = $title;
          $update_ar['post_name'] = sanitize_title($title);
+				 if ($excerpt !== false)
+				 {
+				 		$update_ar['post_excerpt'] = $excerpt;
+				 }
          $update_ar['guid'] = $this->target_url; //wp_get_attachment_url($this->post_id);
-         $update_ar['post_mime_type'] = $this->targetFile->getFileMime();
-         $post_id = \wp_update_post($update_ar, true);
+    //     $update_ar['post_mime_type'] = $this->targetFile->getFileMime();
 
+         $post_id = \wp_update_post($update_ar, true);
 
          // update post doesn't update GUID on updates.
          $wpdb->update( $wpdb->posts, array( 'guid' =>  $this->target_url), array('ID' => $this->post_id) );
@@ -223,6 +236,7 @@ class Replacer
         if (false === $result)
           Log::addWarn('Thumbnail Updater returned false');
       }*/
+
 
       // if all set and done, update the date.
       // This must be done after wp_update_posts
@@ -263,6 +277,25 @@ class Replacer
     $title = apply_filters( 'enable_media_replace_title', $title );
 
     return $title;
+  }
+
+  protected function getNewExcerpt()
+  {
+	    $meta = $this->target_metadata;
+			$excerpt = false;
+
+	    if (isset($meta['image_meta']))
+	    {
+	      if (isset($meta['image_meta']['caption']))
+	      {
+	          if (strlen($meta['image_meta']['caption']) > 0)
+	          {
+	             $excerpt = $meta['image_meta']['caption'];
+	          }
+	      }
+	    }
+
+		return $excerpt;
   }
 
   /** Gets the source file after processing. Returns a file */
@@ -481,8 +514,8 @@ class Replacer
       }
     }
 
-  //  Log::addDebug('Source', $this->source_metadata);
-  //  Log::addDebug('Target', $this->target_metadata);
+    Log::addDebug('Source', $this->source_metadata);
+    Log::addDebug('Target', $this->target_metadata);
     /* If on the other hand, some sizes are available in source, but not in target, try to replace them with something closeby.  */
     foreach($search_urls as $size => $url)
     {
@@ -570,13 +603,13 @@ class Replacer
 
         if ($replaced_content !== $post_content)
         {
-          Log::addDebug('POST CONTENT TO SAVE', $replaced_content);
+          //Log::addDebug('POST CONTENT TO SAVE', $replaced_content);
 
         //  $result = wp_update_post($post_ar);
           $sql = 'UPDATE ' . $wpdb->posts . ' SET post_content = %s WHERE ID = %d';
           $sql = $wpdb->prepare($sql, $replaced_content, $post_id);
 
-  Log::addDebug("POSt update query " . $sql);
+  //Log::addTemp("POSt update query " . $sql);
           $result = $wpdb->query($sql);
 
           if ($result === false)
@@ -805,6 +838,14 @@ class Replacer
 
       if (! isset($this->source_metadata['sizes'][$sizeName]) || ! isset($this->target_metadata['width'])) // This can happen with non-image files like PDF.
       {
+				 // Check if metadata-less item is a svg file. Just the main file to replace all thumbnails since SVG's don't need thumbnails.
+				 if (strpos($this->target_url, '.svg') !== false)
+				 {
+				 	$svg_file = wp_basename($this->target_url);
+				 	return $svg_file;  // this is the relpath of the mainfile.
+				 }
+
+
         return false;
       }
       $old_width = $this->source_metadata['sizes'][$sizeName]['width']; // the width from size not in new image
@@ -833,12 +874,7 @@ class Replacer
       if(empty($closest_file)) return false;
 
       return $closest_file;
-      //$oldFile = $oldData['file'];
-      //if(is_array($oldFile)) { $oldFile = $oldFile[0];} // HelpScout case 709692915
-      /*if(empty($oldFile)) {
-          return false; //make sure we don't replace in this case as we will break the URLs for all the images in the folder.
-      } */
-    //  $this->convertArray[] = array('imageFrom' => $this->relPath .  $oldFile, 'imageTo' => $this->relPath . $closest_file);
+
 
   }
 

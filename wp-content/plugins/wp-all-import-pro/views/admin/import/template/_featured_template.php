@@ -18,7 +18,7 @@
 								<div class="switcher-target-<?php echo $section_slug; ?>download_images_yes" style="padding-left:27px;">
 									<label for="<?php echo $section_slug; ?>download_featured_delim"><?php _e('Enter image URL one per line, or separate them with a ', 'wp_all_import_plugin');?></label>
 									<input type="text" class="small" id="<?php echo $section_slug; ?>download_featured_delim" name="<?php echo $section_slug; ?>download_featured_delim" value="<?php echo esc_attr($post[$section_slug . 'download_featured_delim']) ?>" style="width:5%; text-align:center;"/>
-									<textarea name="<?php echo $section_slug; ?>download_featured_image" class="newline rad4" style="clear: both; display:block;" placeholder=""><?php echo esc_attr($post[$section_slug . 'download_featured_image']) ?></textarea>			
+									<textarea name="<?php echo $section_slug; ?>download_featured_image" class="newline rad4" style="clear: both; display:block;" placeholder=""><?php echo esc_attr($post[$section_slug . 'download_featured_image']) ?></textarea>
 								</div>
 								<div class="input">							
 									<input type="radio" name="<?php echo $section_slug; ?>download_images" value="gallery" class="switcher" id="<?php echo $section_slug; ?>download_images_gallery" <?php echo ("gallery" == $post[$section_slug . 'download_images']) ? 'checked="checked"' : '';?>/>
@@ -28,7 +28,7 @@
 								<div class="switcher-target-<?php echo $section_slug; ?>download_images_gallery" style="padding-left:27px;">
 									<label for="<?php echo $section_slug; ?>gallery_featured_delim"><?php _e('Enter image filenames one per line, or separate them with a ', 'wp_all_import_plugin');?></label>
 									<input type="text" class="small" id="<?php echo $section_slug; ?>gallery_featured_delim" name="<?php echo $section_slug; ?>gallery_featured_delim" value="<?php echo esc_attr($post[$section_slug . 'gallery_featured_delim']) ?>" style="width:5%; text-align:center;"/>
-									<textarea name="<?php echo $section_slug; ?>gallery_featured_image" class="newline rad4" style="clear: both; display:block; "><?php echo esc_attr($post[$section_slug . 'gallery_featured_image']) ?></textarea>			
+									<textarea name="<?php echo $section_slug; ?>gallery_featured_image" class="newline rad4" style="clear: both; display:block; "><?php echo esc_attr($post[$section_slug . 'gallery_featured_image']) ?></textarea>
 								</div>
 								<div class="input">
 									<?php $wp_uploads = wp_upload_dir(); ?>																					
@@ -38,7 +38,7 @@
 								<div class="switcher-target-<?php echo $section_slug; ?>download_images_no" style="padding-left:27px;">
 									<label for="<?php echo $section_slug; ?>featured_delim"><?php _e('Enter image filenames one per line, or separate them with a ', 'wp_all_import_plugin');?></label>
 									<input type="text" class="small" id="<?php echo $section_slug; ?>featured_delim" name="<?php echo $section_slug; ?>featured_delim" value="<?php echo esc_attr($post[$section_slug . 'featured_delim']) ?>" style="width:5%; text-align:center;"/>
-									<textarea name="<?php echo $section_slug; ?>featured_image" class="newline rad4" style="clear: both; display:block; "><?php echo esc_attr($post[$section_slug . 'featured_image']) ?></textarea>			
+									<textarea name="<?php echo $section_slug; ?>featured_image" class="newline rad4" style="clear: both; display:block; "><?php echo esc_attr($post[$section_slug . 'featured_image']) ?></textarea>
 								</div>																
 							</div>
 							<h4><?php _e('Image Options', 'wp_all_import_plugin'); ?></h4>
@@ -72,7 +72,7 @@
 									<input type="hidden" name="<?php echo $section_slug; ?>import_img_tags" value="0" />
 									<input type="checkbox" id="<?php echo $section_slug; ?>import_img_tags" name="<?php echo $section_slug; ?>import_img_tags" value="1" <?php echo (isset($post[$section_slug . 'import_img_tags']) && $post[$section_slug . 'import_img_tags']) ? 'checked="checked"': '' ?> />
 									<label for="<?php echo $section_slug; ?>import_img_tags"><?php _e('Scan through post content and import images wrapped in &lt;img&gt; tags', 'wp_all_import_plugin') ?></label>
-									<a href="#help" class="wpallimport-help" title="<?php _e('Only images hosted on other sites will be imported. Images will be imported to WordPress and the <img> tag updated with the new image URL.', 'wp_all_import_plugin') ?>" style="position:relative; top: -2px;">?</a>
+									<a href="#help" class="wpallimport-help" title="<?php _e('Only images hosted on other sites will be imported. Images will be imported to WordPress and the &lt;img&gt tag updated with the new image URL.', 'wp_all_import_plugin') ?>" style="position:relative; top: -2px;">?</a>
 								</div>
 								<?php endif; ?>
 							</div>
@@ -195,7 +195,7 @@
 	<ul>
 		<li><?php _e('WP All Import will automatically ignore elements with blank image URLs/filenames.', 'wp_all_import_plugin'); ?></li>
 		<li><?php _e('WP All Import must download the images to your server. You can\'t have images in a Gallery that are referenced by external URL. That\'s just how WordPress works.', 'wp_all_import_plugin'); ?></li>
-		<li><?php printf(__('Importing a variable number of images can be done using a <a href="%s" target="_blank">FOREACH LOOP</a>', 'wp_all_import_plugin'), 'http://www.wpallimport.com/documentation/step-3/template-syntax/'); ?></li>
+		<li><?php printf(__('Importing a variable number of images can be done using a <a href="%s" target="_blank">FOREACH LOOP</a>', 'wp_all_import_plugin'), 'https://www.wpallimport.com/documentation/developers/custom-code/foreach-loops/'); ?></li>
 		<li><?php printf(__('For more information check out our <a href="%s" target="_blank">comprehensive documentation</a>', 'wp_all_import_plugin'), 'http://www.wpallimport.com/documentation/'); ?></li>
 	</ul>
 </div>

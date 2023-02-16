@@ -1,0 +1,15 @@
+{% if language.flag_url %}
+    {% if language.flag_width > 0 %}
+        {% set flag_width = 'width=%s'|format(language.flag_width) %}
+    {% endif %}
+    {% if language.flag_height > 0 %}
+        {% set flag_height = 'height=%s'|format(language.flag_height) %}
+    {% endif %}
+    <img
+            class="{{ css_classes_flag }}"
+            src="{{ language.flag_url }}"
+            alt="{{ language.flag_alt }}"
+            {{ flag_width }}
+            {{ flag_height }}
+    />
+{%- endif -%}

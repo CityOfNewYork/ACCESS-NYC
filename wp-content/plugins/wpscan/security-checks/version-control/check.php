@@ -70,7 +70,7 @@ class versionControl extends Check {
 				$code     = wp_remote_retrieve_response_code( $response );
 
 				if ( 200 === $code ) {
-					$this->add_vulnerability( __( 'A publicly accessible ' . esc_html( $file ) . ' file was found. The file could expose your websites\'s source code.', 'wpscan' ), 'high', sanitize_title( $file ) );
+					$this->add_vulnerability( __( 'A publicly accessible ' . esc_html( $file ) . ' file was found. The file could expose your websites\'s source code.', 'wpscan' ), 'high', sanitize_title( $file ), 'https://blog.wpscan.com/wordpress-version-control-files/' );
 				}
 			}
 		}

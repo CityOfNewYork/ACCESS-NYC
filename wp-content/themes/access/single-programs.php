@@ -78,6 +78,7 @@ preload_fonts($context['language_code']);
 
 /**
  * Gets the url parameter on the page for navigating each section
+ *
  * @author Blue State Digital
  */
 if (isset($_GET['step'])) {
@@ -92,6 +93,7 @@ $context['post'] = $program;
 
 /**
  * Add to schema
+ *
  * @author NYC Opportunity
  */
 
@@ -108,8 +110,8 @@ $context['page_meta_description'] = $program->getPageMetaDescription();
 
 /**
  * Admin AJAX
- *
  */
+
 $context['shareAction'] = admin_url('admin-ajax.php');
 
 /**
@@ -125,8 +127,16 @@ if (get_field('alert')) {
   ));
 
   $context['alerts'] = array_filter($alerts, function($p) {
+    $location = (!empty($p->custom['location']))
+      ? $p->custom['location'] : [];
+
     $flags = ['programs', 'single'];
-    return count(array_intersect(array_values($p->custom['location']), $flags)) === count($flags);
+
+    $location = (!empty($location)) ? $p->custom['location'] : [];
+
+    $intersect = array_intersect(array_values($location), $flags);
+
+    return count($intersect) === count($flags);
   });
 }
 

@@ -65,7 +65,7 @@ class WPML_TF_Backend_AJAX_Feedback_Edit_Hooks implements IWPML_Action {
 	}
 
 	/**
-	 * @param $key
+	 * @param string $key
 	 *
 	 * @throws WPML_TF_AJAX_Exception
 	 */

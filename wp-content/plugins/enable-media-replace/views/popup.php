@@ -24,10 +24,17 @@ if (!current_user_can('upload_files'))
 
 global $wpdb;
 
-$table_name = $wpdb->prefix . "posts";
+$emr = EnableMediaReplacePlugin::get();
 
+$table_name = $wpdb->prefix . "posts";
 $attachment_id = intval($_GET['attachment_id']);
 $attachment = get_post($attachment_id);
+
+if (! $emr->checkImagePermission($attachment->post_author, $attachment_id))
+{
+  wp_die( esc_html__('You do not have permission to upload files for this author.', 'enable-media-replace') );
+}
+
 $replacer = new Replacer($attachment_id);
 
 $file = $replacer->getSourceFile();
@@ -40,7 +47,7 @@ $uiHelper = new UIHelper();
 $uiHelper->setPreviewSizes();
 $uiHelper->setSourceSizes($attachment_id);
 
-$emr = EnableMediaReplacePlugin::get();
+
 
 $defaults = array(
   'replace_type' => 'replace',
@@ -69,7 +76,7 @@ $url = $uiHelper->getFormUrl($attachment_id);
 
 <div class='editor-wrapper'>
     <section class='image_chooser wrapper'>
-      <div class='section-header'> <?php _e('Choose Replacement Media', 'enable-replace-media'); ?></div>
+      <div class='section-header'> <?php _e('Choose Replacement Media', 'enable-media-replace'); ?></div>
 
 		<div id="message" class=""><strong><?php printf( esc_html__('NOTE: You are about to replace the media file "%s". There is no undo. Think about it!', "enable-media-replace"), $filename ); ?></strong></div>
 
@@ -80,14 +87,16 @@ $url = $uiHelper->getFormUrl($attachment_id);
     <div class='form-error filesize'><p><?php printf(__('%s f %s exceeds the maximum upload size for this site.', 'enable-media-replace'), '<span class="fn">', '</span>'); ?></p>
     </div>
 
-    <div class='form-warning filetype'><p><?php printf(__('Replacement file is not the same filetype. This might cause unexpected issues')); ?></p></div>
+    <div class='form-warning filetype'><p><?php printf(__('Replacement file is not the same filetype. This might cause unexpected issues ( %s )', 'enable-media-replace'), '<span class="source_type"></span> - <span class="target_type"></span>'); ?>
+
+    </p></div>
 
     <div class='form-warning mimetype'><p><?php printf(__('Replacement file type doesn\'t seem to be allowed by WordPress. This might cause unexpected issues')); ?></p></div>
 
     <div class='emr_drop_area'>
       <div class='drop-wrapper'>
 
-  		  <p><input type="file" name="userfile" id="userfile" /></p>
+            <p><input type="file" name="userfile" id="userfile" /></p>
         <h1><?php _e('Drop File Here', 'enable-media-replace'); ?></h1>
       </div>
 
@@ -118,38 +127,41 @@ $url = $uiHelper->getFormUrl($attachment_id);
 
 <div class='option-flex-wrapper'>
   <section class='replace_type wrapper'>
-    <div class='section-header'> <?php _e('Replacement Options', 'enable-replace-media'); ?></div>
+    <div class='section-header'> <?php _e('Replacement Options', 'enable-media-replace'); ?></div>
 
-  		<?php
+          <?php
       // these are also used in externals, for checks.
       do_action( 'emr_before_replace_type_options' ); ?>
 
 
-  	<?php $enabled_search = apply_filters( 'emr_display_replace_type_options', true );
+     <?php $enabled_search = apply_filters( 'emr_display_replace_type_options', true );
        $search_disabled = (! $enabled_search) ? 'disabled' : '';
     ?>
       <div class='option replace <?php echo $search_disabled ?>'>
-    		<label for="replace_type_1"  ><input <?php checked('replace', $settings['replace_type']) ?> id="replace_type_1" type="radio" name="replace_type" value="replace" <?php echo $search_disabled ?> > <?php echo esc_html__("Just replace the file", "enable-media-replace"); ?>
+          <label for="replace_type_1"  ><input <?php checked('replace', $settings['replace_type']) ?> id="replace_type_1" type="radio" name="replace_type" value="replace" <?php echo $search_disabled ?> > <?php echo esc_html__("Just replace the file", "enable-media-replace"); ?>
         </label>
 
-    		<p class="howto">
+          <p class="howto">
             <?php printf( esc_html__("Note: This option requires you to upload a file of the same type (%s) as the one you are replacing. The name of the attachment will stay the same (%s) no matter what the file you upload is called.", "enable-media-replace"), $filetype, $filename ); ?>
         </p>
+
+				<p class='form-warning filetype'><?php _e('If you replace the file with a different filetype, this file might become unreadable and / or cause unexpected issues', 'enable-media-replace'); ?>
+				</p>
 
         <?php do_action('emr_after_search_type_options'); ?>
       </div>
 
-  		<?php $enabled_replacesearch = apply_filters( 'emr_enable_replace_and_search', true );
+          <?php $enabled_replacesearch = apply_filters( 'emr_enable_replace_and_search', true );
         $searchreplace_disabled = (! $enabled_replacesearch) ? 'disabled' : '';
       ?>
 
       <div class="option searchreplace <?php echo $searchreplace_disabled ?>">
-  		<label for="replace_type_2"><input id="replace_type_2" <?php checked('replace_and_search', $settings['replace_type']) ?> type="radio" name="replace_type" value="replace_and_search" <?php echo $searchreplace_disabled ?> > <?php echo __("Replace the file, use new file name and update all links", "enable-media-replace"); ?>
+          <label for="replace_type_2"><input id="replace_type_2" <?php checked('replace_and_search', $settings['replace_type']) ?> type="radio" name="replace_type" value="replace_and_search" <?php echo $searchreplace_disabled ?> > <?php echo __("Replace the file, use new file name and update all links", "enable-media-replace"); ?>
       </label>
 
-  		<p class="howto"><?php printf( esc_html__("Note: If you check this option, the name and type of the file you are about to upload will replace the old file. All links pointing to the current file (%s) will be updated to point to the new file name. (If any other websites link to the file directly, those links will no longer work. Be careful.)", "enable-media-replace"), $filename ); ?></p>
+          <p class="howto"><?php printf( esc_html__("Note: If you check this option, the name and type of the file you are about to upload will replace the old file. All links pointing to the current file (%s) will be updated to point to the new file name. (If any other websites link to the file directly, those links will no longer work. Be careful.)", "enable-media-replace"), $filename ); ?></p>
 
-  	<!--	<p class="howto"><?php echo esc_html__("Please note that if you upload a new image, only embeds/links of the original size image will be replaced in your posts.", "enable-media-replace"); ?></p> -->
+     <!-- <p class="howto"><?php echo esc_html__("Please note that if you upload a new image, only embeds/links of the original size image will be replaced in your posts.", "enable-media-replace"); ?></p> -->
 
       <?php do_action('emr_after_replace_type_options'); ?>
       </div>
@@ -160,8 +172,12 @@ $url = $uiHelper->getFormUrl($attachment_id);
       <div class='option timestamp'>
         <?php
           $attachment_current_date = date_i18n('d/M/Y H:i', strtotime($attachment->post_date) );
+					$attachment_now_date = date_i18n('d/M/Y H:i', time() );
           $time = current_time('mysql');
-          $date = new \dateTime($time);
+          $date = $nowDate = new \dateTime($time); // default to now.
+				//	var_dump(strtotime($attachment->post_date));
+				//	exit();
+					$attachmentDate = new \dateTime($attachment->post_date);
 
           if ($settings['timestamp_replace'] == \EnableMediaReplace\Replacer::TIME_CUSTOM)
           {
@@ -170,7 +186,7 @@ $url = $uiHelper->getFormUrl($attachment_id);
         ?>
           <p><?php _e('When replacing the media, do you want to:', 'enable-media-replace'); ?></p>
           <ul>
-            <li><label><input type='radio' <?php checked('1', $settings['timestamp_replace']) ?> name='timestamp_replace' value='1' /><?php _e('Replace the date', 'enable-media-replace'); ?></label></li>
+            <li><label><input type='radio' <?php checked('1', $settings['timestamp_replace']) ?> name='timestamp_replace' value='1' /><?php printf(__('Replace the date with current date %s(%s)%s', 'enable-media-replace'), "<span class='small'>", $attachment_now_date, "</span>") ; ?></label></li>
             <li><label><input type='radio' <?php checked('2', $settings['timestamp_replace']) ?> name='timestamp_replace' value='2'  /><?php printf(__('Keep the date %s(%s)%s', 'enable-media-replace'), "<span class='small'>", $attachment_current_date, "</span>"); ?></label></li>
             <li><label><input type='radio' <?php checked('3', $settings['timestamp_replace']) ?> name='timestamp_replace' value='3' /><?php _e('Set a Custom Date', 'enable-media-replace'); ?></label></li>
           </ul>
@@ -183,6 +199,14 @@ $url = $uiHelper->getFormUrl($attachment_id);
            @ <input type='text' name="custom_hour" class='emr_hour' value="<?php echo $date->format('H') ?>" /> &nbsp;
             <input type="text" name="custom_minute" class='emr_minute' value="<?php echo $date->format('i'); ?>" />
             <input type="hidden" name="custom_date_formatted" value="<?php echo $date->format('Y-m-d'); ?>" />
+
+						<span class="replace_custom_date_wrapper">
+						<?php
+						printf('<a class="replace_custom_date" data-date="%s" data-hour="%s" data-min="%s" data-format="%s">%s</a>', $nowDate->format(get_option('date_format')), $nowDate->format('H'), $nowDate->format('i'), $nowDate->format('Y-m-d'), __('Now', 'enable-media-replace'));
+						echo " ";
+						printf('<a class="replace_custom_date" data-date="%s" data-hour="%s" data-min="%s" data-format="%s">%s</a>', $attachmentDate->format(get_option('date_format')), $attachmentDate->format('H'), $attachmentDate->format('i'), $attachmentDate->format('Y-m-d'), __('Original', 'enable-media-replace'));
+						?>
+					</span>
          </div>
          <?php if ($subdir = $uiHelper->getRelPathNow()):
 
@@ -190,7 +214,7 @@ $url = $uiHelper->getFormUrl($attachment_id);
                $subdir = $settings['new_location_dir'];
           ?>
          <div class='location_option'>
-           <label><input type="checkbox" name="new_location" value="1" <?php checked($settings['new_location'], 1); ?>  /> <?php _e('Put new Upload in Updated Folder: '); ?></label>
+           <label><input type="checkbox" name="new_location" value="1" <?php checked($settings['new_location'], 1); ?>  /> <?php _e('Put new Upload in Updated Folder: ', 'enable-media-replace'); ?></label>
             <input type="text" name="location_dir" value="<?php echo $subdir ?>" />
           </div>
         <?php endif; ?>
@@ -204,44 +228,9 @@ $url = $uiHelper->getFormUrl($attachment_id);
   </section>
 </div>
 
+	<?php include_once('upsell.php'); ?>
 
-	<?php
-		#wp_nonce_field('enable-media-replace');
-    $plugins = get_plugins();
-    $spInstalled = isset($plugins['shortpixel-image-optimiser/wp-shortpixel.php']);
-    $spActive = is_plugin_active('shortpixel-image-optimiser/wp-shortpixel.php');
-	?>
 
-  <section class='upsell-wrapper'>
-    <?php if(! $spInstalled) {?>
-    <div class='shortpixel-offer'>
-      <h3 class="" style="margin-top: 0;text-align: center;">
-        <a href="https://shortpixel.com/wp/af/VKG6LYN28044" target="_blank">
-          <?php echo esc_html__("Optimize your images with ShortPixel, get +50% credits!", "enable-media-replace"); ?>
-        </a>
-      </h3>
-      <div class="" style="text-align: center;">
-        <a href="https://shortpixel.com/wp/af/VKG6LYN28044" target="_blank">
-          <img src="https://optimizingmattersblog.files.wordpress.com/2016/10/shortpixel.png">
-        </a>
-      </div>
-      <div class="" style="margin-bottom: 10px;">
-        <?php echo esc_html__("Get more Google love by compressing your site's images! Check out how much ShortPixel can save your site and get +50% credits when signing up as an Enable Media Replace user! Forever!", "enable-media-replace"); ?>
-      </div>
-      <div class=""><div style="text-align: <?php echo (is_rtl()) ? 'left' : 'right' ?>;">
-          <a class="button button-primary" id="shortpixel-image-optimiser-info" href="https://shortpixel.com/wp/af/VKG6LYN28044" target="_blank">
-            <?php echo esc_html__("More info", "enable-media-replace"); ?>
-          </a>
-        </div>
-      </div>
-    </div>
-    <?php } ?>
-    <div class='shortpixel-offer site-speed'>
-      <p class='img-wrapper'><img src="<?php echo $emr->getPluginURL('img/shortpixel.png'); ?>" alt='ShortPixel'></p>
-      <h3><?php printf(__('ARE YOU %s CONCERNED WITH %s YOUR %s %s SITE SPEED? %s', 'enable-media-replace'),'<br>', '<br>','<br>', '<span class="red">','</span>'); ?><br><br>
-       <?php printf(__('ALLOW ShortPixel %s SPECIALISTS TO %s FIND THE %s SOLUTION FOR YOU.', 'enable-media-replace'), '<br>','<br>','<br>'); ?></h3>
-      <p class='button-wrapper'><a href='https://shortpixel.com/lp/wso/?utm_source=EMR' target="_blank"><?php _e('FIND OUT MORE', 'enable-media-replace') ?></a></p>
-    </div>
-  </section>
+
 	</form>
 </div>

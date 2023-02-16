@@ -2,6 +2,7 @@
 
 /**
  * Class WPML_Troubleshoot_Action
+ *
  * @author onTheGoSystems
  */
 class WPML_Troubleshoot_Action {
@@ -15,7 +16,7 @@ class WPML_Troubleshoot_Action {
 		$response = false;
 
 		if ( array_key_exists( 'nonce', $_POST ) && array_key_exists( 'debug_action', $_POST )
-		     && self::SYNC_POSTS_TAXONOMIES_SLUG === $_POST['debug_action']
+			 && self::SYNC_POSTS_TAXONOMIES_SLUG === $_POST['debug_action']
 		) {
 			$response = wp_verify_nonce( $_POST['nonce'], $_POST['debug_action'] );
 

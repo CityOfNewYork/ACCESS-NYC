@@ -6,9 +6,34 @@
  */
 class WPML_User_Options_Menu {
 
-	/** @var WP_User $this ->current_user */
+	/** @var WP_User */
 	private $current_user;
+	/** @var SitePress */
 	private $sitepress;
+	/**
+	 * @var string
+	 */
+	private $user_language;
+	/**
+	 * @var string
+	 */
+	private $user_admin_def_lang;
+	/**
+	 * @var mixed[]
+	 */
+	private $lang_details;
+	/**
+	 * @var string
+	 */
+	private $admin_default_language;
+	/**
+	 * @var string
+	 */
+	private $admin_language;
+	/**
+	 * @var mixed[]
+	 */
+	private $all_languages;
 
 	/**
 	 * WPML_User_Options_Menu constructor.
@@ -38,7 +63,7 @@ class WPML_User_Options_Menu {
 	 * adds to it
 	 */
 	public function render() {
-		$wp_api = $this->sitepress->get_wp_api();
+		$wp_api              = $this->sitepress->get_wp_api();
 		$hide_wpml_languages = $wp_api->version_compare_naked( get_bloginfo( 'version' ), '4.7', '>=' ) ? 'style="display: none"' : '';
 		ob_start();
 
@@ -48,10 +73,10 @@ class WPML_User_Options_Menu {
 			<th colspan="2"><h3><a name="wpml"></a><?php esc_html_e( 'WPML language settings', 'sitepress' ); ?></h3></th>
 		</tr>
 		<tr class="user-language-wrap" <?php echo $hide_wpml_languages; ?>>
-			<th><label for="icl_user_admin_language"><?php esc_html_e( 'Select your language:', 'sitepress' ) ?></label></th>
+			<th><label for="icl_user_admin_language"><?php esc_html_e( 'Select your language:', 'sitepress' ); ?></label></th>
 			<td>
 				<select id="icl_user_admin_language" name="icl_user_admin_language">
-					<option value=""<?php selected( true, $admin_default_language_selected ) ?>>
+					<option value=""<?php selected( true, $admin_default_language_selected ); ?>>
 						<?php echo esc_html( sprintf( __( 'Default admin language (currently %s)', 'sitepress' ), $this->admin_default_language ) ); ?>
 					</option>
 					<?php
@@ -65,7 +90,7 @@ class WPML_User_Options_Menu {
 									$language_name .= ' (' . $al['native_name'] . ')';
 								}
 								?>
-								<option value="<?php echo esc_attr( $lang_code ); ?>"<?php selected( true, $current_language_selected ) ?>>
+								<option value="<?php echo esc_attr( $lang_code ); ?>"<?php selected( true, $current_language_selected ); ?>>
 									<?php echo esc_html( $language_name ); ?>
 								</option>
 								<?php
@@ -90,17 +115,27 @@ class WPML_User_Options_Menu {
 	}
 
 	/**
-	 * @param $use_admin_language_for_edit
+	 * @param bool $use_admin_language_for_edit
 	 */
 	private function get_hidden_languages_options( $use_admin_language_for_edit ) {
-		$wp_api = $this->sitepress->get_wp_api();
-		if ( $wp_api->current_user_can( 'translate' ) || $wp_api->current_user_can( 'manage_options' ) ) {
-			$hidden_languages  = $this->sitepress->get_setting( 'hidden_languages' );
-			$display_hidden_languages = $wp_api->get_user_meta( $this->current_user->ID, 'icl_show_hidden_languages', true );
+
+		/**
+		 * Filters a condition if current user can see hidden languages options in profile settings
+		 *
+		 * @params bool $show_hidden_languages_options
+		 */
+		$show_hidden_languages_options = apply_filters(
+			'wpml_show_hidden_languages_options',
+			current_user_can( 'manage_options' )
+		);
+
+		if ( $show_hidden_languages_options ) {
+			$hidden_languages         = $this->sitepress->get_setting( 'hidden_languages' );
+			$display_hidden_languages = get_user_meta( $this->current_user->ID, 'icl_show_hidden_languages', true );
 			?>
 
 			<tr class="user-language-wrap">
-				<th><?php esc_html_e( 'Editing language:', 'sitepress' ) ?></th>
+				<th><?php esc_html_e( 'Editing language:', 'sitepress' ); ?></th>
 				<td>
 					<input type="checkbox" name="icl_admin_language_for_edit" id="icl_admin_language_for_edit" value="1" <?php checked( true, $use_admin_language_for_edit ); ?> />
 					&nbsp;<label for="icl_admin_language_for_edit"><?php esc_html_e( 'Set admin language as editing language.', 'sitepress' ); ?></label>
@@ -108,7 +143,7 @@ class WPML_User_Options_Menu {
 			</tr>
 
 			<tr class="user-language-wrap">
-				<th><?php esc_html_e( 'Hidden languages:', 'sitepress' ) ?></th>
+				<th><?php esc_html_e( 'Hidden languages:', 'sitepress' ); ?></th>
 				<td>
 					<p>
 						<?php
@@ -129,8 +164,8 @@ class WPML_User_Options_Menu {
 						?>
 					</p>
 					<p>
-						<input id="icl_show_hidden_languages" name="icl_show_hidden_languages" type="checkbox" value="1" <?php checked( true, $display_hidden_languages ) ?> />
-						&nbsp;<label for="icl_show_hidden_languages"><?php esc_html_e( 'Display hidden languages', 'sitepress' ) ?></label>
+						<input id="icl_show_hidden_languages" name="icl_show_hidden_languages" type="checkbox" value="1" <?php checked( true, $display_hidden_languages ); ?> />
+						&nbsp;<label for="icl_show_hidden_languages"><?php esc_html_e( 'Display hidden languages', 'sitepress' ); ?></label>
 					</p>
 				</td>
 			</tr>

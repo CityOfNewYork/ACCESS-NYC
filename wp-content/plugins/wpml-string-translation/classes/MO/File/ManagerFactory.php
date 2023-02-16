@@ -8,7 +8,7 @@ class ManagerFactory {
 
 	/**
 	 * @return Manager
-	 * @throws \Auryn\InjectionException
+	 * @throws \WPML\Auryn\InjectionException
 	 */
 	public static function create() {
 		return make( Manager::class, [ ':builder' => make( Builder::class ) ] );

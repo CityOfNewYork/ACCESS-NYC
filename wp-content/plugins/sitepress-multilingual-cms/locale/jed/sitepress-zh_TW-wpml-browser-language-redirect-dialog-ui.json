@@ -1,0 +1,34 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "How Browser Language Redirect Affects Google Indexing": [
+            "瀏覽器語言重定向如何影響谷歌索引"
+         ],
+         "Documentation": [
+            "文件"
+         ],
+         "Browser redirect affects Google indexing and search results": [
+            "瀏覽器重定向會影響谷歌索引和搜尋結果"
+         ],
+         "Got it, activate anyway": [
+            "瞭解，仍然激活"
+         ],
+         "Cancel": [
+            "取消"
+         ],
+         "When you redirect visitors based on their language, you also redirect Google. Google wants to see your site exactly like visitors see it, including any redirects that you apply.": [
+            "當根據訪問者的語言重定向他們時，也會重定向谷歌。谷歌希望看到您的網站就像訪問者看到的那樣，包括您套用的任何重定向。"
+         ],
+         "It is OK to redirect visitors based on their language, but you need to realize that this feature affects SEO.": [
+            "根據訪問者的語言重定向他們是可以的，但要意識到此功能會影響搜尋引擎最佳化。"
+         ],
+         "Before proceeding, we recommend that you read these two pages:": [
+            "在繼續之前，我們建議您閱讀以下兩頁："
+         ]
+      }
+   }
+}

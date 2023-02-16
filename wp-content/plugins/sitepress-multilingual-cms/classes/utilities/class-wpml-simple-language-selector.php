@@ -10,20 +10,23 @@ class WPML_Simple_Language_Selector extends WPML_SP_User {
 
 	function render( $options = array() ) {
 
-		$options = array_merge( array(
-															'id'                 => '',
-															'name'               => '',
-															'show_please_select' => true,
-															'please_select_text' => __( '-- Please select --', 'sitepress' ),
-															'selected'           => '',
-															'echo'               => false,
-															'class'              => '',
-															'data'               => array(),
-															'show_flags'         => true,
-															'languages'          => null,
-															'disabled'           => false,
-															'style'              => '',
-														), $options );
+		$options = array_merge(
+			array(
+				'id'                 => '',
+				'name'               => '',
+				'show_please_select' => true,
+				'please_select_text' => __( '-- Please select --', 'sitepress' ),
+				'selected'           => '',
+				'echo'               => false,
+				'class'              => '',
+				'data'               => array(),
+				'show_flags'         => true,
+				'languages'          => null,
+				'disabled'           => false,
+				'style'              => '',
+			),
+			$options
+		);
 
 		if ( $options['languages'] ) {
 			$languages = $options['languages'];
@@ -70,7 +73,8 @@ class WPML_Simple_Language_Selector extends WPML_SP_User {
 			<?php
 			if ( $options['show_please_select'] ) {
 				?>
-				<option value="" <?php
+				<option value="" 
+				<?php
 				if ( '' == $options['selected'] ) {
 					echo 'selected="selected"';
 				}
@@ -82,11 +86,12 @@ class WPML_Simple_Language_Selector extends WPML_SP_User {
 			}
 			foreach ( $languages as $lang ) {
 				?>
-				<option value="<?php echo esc_attr( $lang['code'] ); ?>" <?php
-				if ( $options['selected'] == $lang['code'] ) {
-					echo 'selected="selected"';
-				}
-				?>
+				<option value="<?php echo esc_attr( $lang['code'] ); ?>" 
+										  <?php
+											if ( $options['selected'] == $lang['code'] ) {
+												echo 'selected="selected"';
+											}
+											?>
 								data-flag_url="<?php echo esc_url( $this->sitepress->get_flag_url( $lang['code'] ) ); ?>" data-status="<?php echo in_array( $lang['code'], array_keys( $active_languages ) ) ? 'active' : ''; ?>">
 					<?php echo esc_html( $lang['display_name'] ); ?>
 				</option>
@@ -102,7 +107,7 @@ class WPML_Simple_Language_Selector extends WPML_SP_User {
 		return null;
 	}
 
-	static public function enqueue_scripts() {
+	public static function enqueue_scripts() {
 		if ( ! wp_script_is( 'wpml-select-2' ) ) {
 			// Enqueue in the footer because this is usually called late.
 			wp_enqueue_script( 'wpml-select-2', ICL_PLUGIN_URL . '/lib/select2/select2.min.js', array( 'jquery' ), ICL_SITEPRESS_VERSION, true );

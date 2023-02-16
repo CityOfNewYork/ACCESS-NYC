@@ -14,37 +14,37 @@ class WPML_Nav_Menu_Actions extends WPML_Full_Translation_API {
 	 * @param WPML_Post_Translation $post_translations
 	 * @param WPML_Term_Translation $term_translations
 	 */
-	public function __construct(&$sitepress, &$wpdb, &$post_translations, &$term_translations) {
+	public function __construct( &$sitepress, &$wpdb, &$post_translations, &$term_translations ) {
 		parent::__construct( $sitepress, $wpdb, $post_translations, $term_translations );
-		add_action ( 'wp_delete_nav_menu', array( $this, 'wp_delete_nav_menu' ) );
-		add_action ( 'wp_create_nav_menu', array( $this, 'wp_update_nav_menu' ), 10, 2 );
-		add_action ( 'wp_update_nav_menu', array( $this, 'wp_update_nav_menu' ), 10, 2 );
-		add_action ( 'wp_update_nav_menu_item', array( $this, 'wp_update_nav_menu_item' ), 10, 3 );
-		add_action ( 'delete_post', array( $this, 'wp_delete_nav_menu_item' ) );
-		add_filter ( 'pre_update_option_theme_mods_' . get_option( 'stylesheet' ), array( $this, 'pre_update_theme_mods_theme' ) );
-		if(is_admin()){
-			add_filter('theme_mod_nav_menu_locations', array($this, 'theme_mod_nav_menu_locations'));
+		add_action( 'wp_delete_nav_menu', array( $this, 'wp_delete_nav_menu' ) );
+		add_action( 'wp_create_nav_menu', array( $this, 'wp_update_nav_menu' ), 10, 2 );
+		add_action( 'wp_update_nav_menu', array( $this, 'wp_update_nav_menu' ), 10, 2 );
+		add_action( 'wp_update_nav_menu_item', array( $this, 'wp_update_nav_menu_item' ), 10, 3 );
+		add_action( 'delete_post', array( $this, 'wp_delete_nav_menu_item' ) );
+		add_filter( 'pre_update_option_theme_mods_' . get_option( 'stylesheet' ), array( $this, 'pre_update_theme_mods_theme' ) );
+		if ( is_admin() ) {
+			add_filter( 'theme_mod_nav_menu_locations', array( $this, 'theme_mod_nav_menu_locations' ) );
 		}
 	}
 
 	public function wp_delete_nav_menu( $id ) {
-		$menu_id_tt = $this->wpdb->get_var (
-			$this->wpdb->prepare (
+		$menu_id_tt = $this->wpdb->get_var(
+			$this->wpdb->prepare(
 				"SELECT term_taxonomy_id FROM {$this->wpdb->term_taxonomy} WHERE term_id=%d AND taxonomy='nav_menu'",
 				$id
 			)
 		);
 
 		$update_args = array(
-			'element_id' => $menu_id_tt,
+			'element_id'   => $menu_id_tt,
 			'element_type' => 'tax_nav_menu',
-			'context' => 'tax'
+			'context'      => 'tax',
 		);
 		do_action( 'wpml_translation_update', array_merge( $update_args, array( 'type' => 'before_delete' ) ) );
 
 		$q          = "DELETE FROM {$this->wpdb->prefix}icl_translations WHERE element_id=%d AND element_type='tax_nav_menu' LIMIT 1";
-		$q_prepared = $this->wpdb->prepare ( $q, $menu_id_tt );
-		$this->wpdb->query ( $q_prepared );
+		$q_prepared = $this->wpdb->prepare( $q, $menu_id_tt );
+		$this->wpdb->query( $q_prepared );
 
 		do_action( 'wpml_translation_update', array_merge( $update_args, array( 'type' => 'after_delete' ) ) );
 	}
@@ -68,9 +68,9 @@ class WPML_Nav_Menu_Actions extends WPML_Full_Translation_API {
 		$menu_lang = $this->term_translations->lang_code_by_termid( $menu_id );
 		$trid      = $this->post_translations->get_element_trid( $menu_item_db_id );
 		if ( array_key_exists( 'menu-item-type', $args )
-		     && ( $args['menu-item-type'] === 'post_type' || $args['menu-item-type'] === 'taxonomy' )
-		     && array_key_exists( 'menu-item-object-id', $args )
-		     && $menu_id > 0
+			 && ( $args['menu-item-type'] === 'post_type' || $args['menu-item-type'] === 'taxonomy' )
+			 && array_key_exists( 'menu-item-object-id', $args )
+			 && $menu_id > 0
 		) {
 			$language_code_item = $args['menu-item-type'] === 'post_type'
 				? $this->post_translations->get_element_lang_code( $args['menu-item-object-id'] )
@@ -91,9 +91,9 @@ class WPML_Nav_Menu_Actions extends WPML_Full_Translation_API {
 		if ( ! empty( $post->post_type ) && $post->post_type == 'nav_menu_item' ) {
 
 			$update_args = array(
-				'element_id' => $menu_item_id,
+				'element_id'   => $menu_item_id,
 				'element_type' => 'post_nav_menu_item',
-				'context' => 'post'
+				'context'      => 'post',
 			);
 
 			do_action( 'wpml_translation_update', array_merge( $update_args, array( 'type' => 'before_delete' ) ) );
@@ -107,26 +107,26 @@ class WPML_Nav_Menu_Actions extends WPML_Full_Translation_API {
 	}
 
 	public function pre_update_theme_mods_theme( $val ) {
-		$default_language = $this->sitepress->get_default_language ();
-		$current_language = $this->sitepress->get_current_language ();
+		$default_language = $this->sitepress->get_default_language();
+		$current_language = $this->sitepress->get_current_language();
 
-		if ( isset( $val[ 'nav_menu_locations' ] )
-		     && filter_input ( INPUT_GET, 'action' ) === 'delete'
-		     && $current_language !== $default_language
+		if ( isset( $val['nav_menu_locations'] )
+			 && filter_input( INPUT_GET, 'action' ) === 'delete'
+			 && $current_language !== $default_language
 		) {
-			$val[ 'nav_menu_locations' ] = get_theme_mod ( 'nav_menu_locations' );
+			$val['nav_menu_locations'] = get_theme_mod( 'nav_menu_locations' );
 		}
 
-		if ( isset( $val[ 'nav_menu_locations' ] ) ) {
-			foreach ( (array) $val[ 'nav_menu_locations' ] as $k => $v ) {
-				if ( !$v && $current_language !== $default_language ) {
-					$tl = get_theme_mod ( 'nav_menu_locations' );
+		if ( isset( $val['nav_menu_locations'] ) ) {
+			foreach ( (array) $val['nav_menu_locations'] as $k => $v ) {
+				if ( ! $v && $current_language !== $default_language ) {
+					$tl = get_theme_mod( 'nav_menu_locations' );
 					if ( isset( $tl[ $k ] ) ) {
-						$val[ 'nav_menu_locations' ][ $k ] = $tl[ $k ];
+						$val['nav_menu_locations'][ $k ] = $tl[ $k ];
 					}
 				} else {
-					$val[ 'nav_menu_locations' ][ $k ] = icl_object_id (
-						$val[ 'nav_menu_locations' ][ $k ],
+					$val['nav_menu_locations'][ $k ] = icl_object_id(
+						$val['nav_menu_locations'][ $k ],
 						'nav_menu',
 						true,
 						$default_language
@@ -153,8 +153,8 @@ class WPML_Nav_Menu_Actions extends WPML_Full_Translation_API {
 	}
 
 	private function get_save_lang( $menu_id ) {
-		$language_code = isset( $_POST[ 'icl_nav_menu_language' ] )
-				? $_POST[ 'icl_nav_menu_language' ] : $this->term_translations->lang_code_by_termid ( $menu_id );
+		$language_code = isset( $_POST['icl_nav_menu_language'] )
+				? $_POST['icl_nav_menu_language'] : $this->term_translations->lang_code_by_termid( $menu_id );
 		$language_code = $language_code ? $language_code : $this->sitepress->get_current_language();
 
 		return $language_code;

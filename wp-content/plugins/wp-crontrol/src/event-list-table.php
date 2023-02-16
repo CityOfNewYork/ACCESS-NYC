@@ -1,8 +1,6 @@
 <?php
 /**
  * List table for cron events.
- *
- * @package wp-crontrol
  */
 
 namespace Crontrol\Event;
@@ -19,24 +17,29 @@ class Table extends \WP_List_Table {
 	/**
 	 * Array of cron event hooks that are persistently added by WordPress core.
 	 *
-	 * @var string[] Array of hook names.
+	 * @var array<int,string> Array of hook names.
 	 */
 	protected static $persistent_core_hooks;
 
 	/**
-	 * Whether the current user has the capability to edit files.
+	 * Whether the current user has the capability to create or edit PHP cron events.
 	 *
-	 * @var bool Whether the user can edit files.
+	 * @var bool Whether the user can create or edit PHP cron events.
 	 */
-	protected static $can_edit_files;
+	protected static $can_manage_php_crons;
 
 	/**
 	 * Array of the count of each hook.
 	 *
-	 * @var int[] Array of count of each hooked, keyed by hook name.
+	 * @var array<string,int> Array of count of each hooked, keyed by hook name.
 	 */
 	protected static $count_by_hook;
 
+	/**
+	 * Array of all cron events.
+	 *
+	 * @var array<string,stdClass> Array of event objects.
+	 */
 	protected $all_events = array();
 
 	/**
@@ -53,10 +56,12 @@ class Table extends \WP_List_Table {
 
 	/**
 	 * Prepares the list table items and arguments.
+	 *
+	 * @return void
 	 */
 	public function prepare_items() {
 		self::$persistent_core_hooks = \Crontrol\get_persistent_core_hooks();
-		self::$can_edit_files        = current_user_can( 'edit_files' );
+		self::$can_manage_php_crons  = current_user_can( 'edit_files' );
 		self::$count_by_hook         = count_by_hook();
 
 		$events = get();
@@ -70,9 +75,9 @@ class Table extends \WP_List_Table {
 			} );
 		}
 
-		if ( ! empty( $_GET['hooks_type'] ) ) {
-			$hooks_type = sanitize_text_field( $_GET['hooks_type'] );
-			$filtered = $this->get_filtered_events( $events );
+		if ( ! empty( $_GET['crontrol_hooks_type'] ) ) {
+			$hooks_type = sanitize_text_field( $_GET['crontrol_hooks_type'] );
+			$filtered = self::get_filtered_events( $events );
 
 			if ( isset( $filtered[ $hooks_type ] ) ) {
 				$events = $filtered[ $hooks_type ];
@@ -109,10 +114,10 @@ class Table extends \WP_List_Table {
 	/**
 	 * Returns events filtered by various parameters
 	 *
-	 * @param array $events The list of all events.
-	 * @return array Array of filtered events keyed by parameter.
+	 * @param array<string,stdClass> $events The list of all events.
+	 * @return array<string,array<string,stdClass>> Array of filtered events keyed by filter name.
 	 */
-	protected function get_filtered_events( array $events ) {
+	public static function get_filtered_events( array $events ) {
 		$all_core_hooks = \Crontrol\get_all_core_hooks();
 		$filtered = array(
 			'all' => $events,
@@ -131,13 +136,25 @@ class Table extends \WP_List_Table {
 			return ( ! in_array( $event->hook, $all_core_hooks, true ) );
 		} );
 
+		/**
+		 * Filters the available filtered events on the cron event listing screen.
+		 *
+		 * See the corresponding `crontrol/filter-types` filter to adjust the list of filter types.
+		 *
+		 * @since 1.11.0
+		 *
+		 * @param array[]    $filtered Array of filtered event arrays keyed by filter name.
+		 * @param stdClass[] $events   Array of all events.
+		 */
+		$filtered = apply_filters( 'crontrol/filtered-events', $filtered, $events );
+
 		return $filtered;
 	}
 
 	/**
 	 * Returns an array of column names for the table.
 	 *
-	 * @return string[] Array of column names keyed by their ID.
+	 * @return array<string,string> Array of column names keyed by their ID.
 	 */
 	public function get_columns() {
 		return array(
@@ -157,7 +174,7 @@ class Table extends \WP_List_Table {
 	/**
 	 * Columns to make sortable.
 	 *
-	 * @return array
+	 * @return array<string,array<int,(string|bool)>>
 	 */
 	public function get_sortable_columns() {
 		return array(
@@ -169,7 +186,7 @@ class Table extends \WP_List_Table {
 	/**
 	 * Returns an array of CSS class names for the table.
 	 *
-	 * @return string[] Array of class names.
+	 * @return array<int,string> Array of class names.
 	 */
 	protected function get_table_classes() {
 		return array( 'widefat', 'striped', $this->_args['plural'] );
@@ -181,41 +198,62 @@ class Table extends \WP_List_Table {
 	 *
 	 * @since 3.1.0
 	 *
-	 * @return array
+	 * @return array<string,string>
 	 */
 	protected function get_bulk_actions() {
 		return array(
-			'delete_crons' => esc_html__( 'Delete', 'wp-crontrol' ),
+			'crontrol_delete_crons' => esc_html__( 'Delete', 'wp-crontrol' ),
 		);
 	}
 
 	/**
 	 * Display the list of hook types.
 	 *
-	 * @return string[]
+	 * @return array<string,string>
 	 */
 	public function get_views() {
-		$filtered = $this->get_filtered_events( $this->all_events );
+		$filtered = self::get_filtered_events( $this->all_events );
 
 		$views = array();
-		$hooks_type = ( ! empty( $_GET['hooks_type'] ) ? $_GET['hooks_type'] : 'all' );
+		$hooks_type = ( ! empty( $_GET['crontrol_hooks_type'] ) ? $_GET['crontrol_hooks_type'] : 'all' );
 
 		$types = array(
-			'all'      => __( 'All hooks', 'wp-crontrol' ),
-			'noaction' => __( 'Hooks with no action', 'wp-crontrol' ),
-			'core'     => __( 'WordPress core hooks', 'wp-crontrol' ),
-			'custom'   => __( 'Custom hooks', 'wp-crontrol' ),
+			'all'      => __( 'All events', 'wp-crontrol' ),
+			'noaction' => __( 'Events with no action', 'wp-crontrol' ),
+			'core'     => __( 'WordPress core events', 'wp-crontrol' ),
+			'custom'   => __( 'Custom events', 'wp-crontrol' ),
 		);
+
+		/**
+		 * Filters the filter types on the cron event listing screen.
+		 *
+		 * See the corresponding `crontrol/filtered-events` filter to adjust the filtered events.
+		 *
+		 * @since 1.11.0
+		 *
+		 * @param string[] $types      Array of filter names keyed by filter name.
+		 * @param string   $hooks_type The current filter name.
+		 */
+		$types = apply_filters( 'crontrol/filter-types', $types, $hooks_type );
 
 		$url = admin_url( 'tools.php?page=crontrol_admin_manage_page' );
 
+		/**
+		 * @var array<string,string> $types
+		 */
 		foreach ( $types as $key => $type ) {
+			if ( ! isset( $filtered[ $key ] ) ) {
+				continue;
+			}
+
+			$link = ( 'all' === $key ) ? $url : add_query_arg( 'crontrol_hooks_type', $key, $url );
+
 			$views[ $key ] = sprintf(
 				'<a href="%1$s"%2$s>%3$s <span class="count">(%4$s)</span></a>',
-				'all' === $key ? $url : add_query_arg( 'hooks_type', $key, $url ),
+				esc_url( $link ),
 				$hooks_type === $key ? ' class="current"' : '',
-				$type,
-				count( $filtered[ $key ] )
+				esc_html( $type ),
+				number_format_i18n( count( $filtered[ $key ] ) )
 			);
 		}
 
@@ -223,9 +261,33 @@ class Table extends \WP_List_Table {
 	}
 
 	/**
+	 * Extra controls to be displayed between bulk actions and pagination.
+	 *
+	 * @param string $which One of 'top' or 'bottom' to indicate the position on the screen.
+	 *
+	 * @return void
+	 */
+	protected function extra_tablenav( $which ) {
+		wp_nonce_field( 'crontrol-export-event-csv', 'crontrol_nonce' );
+		printf(
+			'<input type="hidden" name="crontrol_hooks_type" value="%s"/>',
+			esc_attr( isset( $_GET['crontrol_hooks_type'] ) ? sanitize_text_field( wp_unslash( $_GET['crontrol_hooks_type'] ) ) : 'all' )
+		);
+		printf(
+			'<input type="hidden" name="s" value="%s"/>',
+			esc_attr( isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '' )
+		);
+		printf(
+			'<button class="button" type="submit" name="crontrol_action" value="export-event-csv">%s</button>',
+			esc_html__( 'Export', 'wp-crontrol' )
+		);
+	}
+
+	/**
 	 * Generates content for a single row of the table.
 	 *
-	 * @param object $event The current event.
+	 * @param stdClass $event The current event.
+	 * @return void
 	 */
 	public function single_row( $event ) {
 		$classes = array();
@@ -253,7 +315,7 @@ class Table extends \WP_List_Table {
 			}
 		}
 
-		if ( is_late( $event ) ) {
+		if ( is_late( $event ) || is_too_frequent( $event ) ) {
 			$classes[] = 'crontrol-warning';
 		}
 
@@ -281,13 +343,13 @@ class Table extends \WP_List_Table {
 
 		$links = array();
 
-		if ( ( 'crontrol_cron_job' !== $event->hook ) || self::$can_edit_files ) {
+		if ( ( 'crontrol_cron_job' !== $event->hook ) || self::$can_manage_php_crons ) {
 			$link = array(
-				'page'         => 'crontrol_admin_manage_page',
-				'action'       => 'edit-cron',
-				'id'           => rawurlencode( $event->hook ),
-				'sig'          => rawurlencode( $event->sig ),
-				'next_run_utc' => rawurlencode( $event->time ),
+				'page'                  => 'crontrol_admin_manage_page',
+				'crontrol_action'       => 'edit-cron',
+				'crontrol_id'           => rawurlencode( $event->hook ),
+				'crontrol_sig'          => rawurlencode( $event->sig ),
+				'crontrol_next_run_utc' => rawurlencode( $event->time ),
 			);
 			$link = add_query_arg( $link, admin_url( 'tools.php' ) );
 
@@ -295,27 +357,27 @@ class Table extends \WP_List_Table {
 		}
 
 		$link = array(
-			'page'         => 'crontrol_admin_manage_page',
-			'action'       => 'run-cron',
-			'id'           => rawurlencode( $event->hook ),
-			'sig'          => rawurlencode( $event->sig ),
-			'next_run_utc' => rawurlencode( $event->time ),
+			'page'                  => 'crontrol_admin_manage_page',
+			'crontrol_action'       => 'run-cron',
+			'crontrol_id'           => rawurlencode( $event->hook ),
+			'crontrol_sig'          => rawurlencode( $event->sig ),
+			'crontrol_next_run_utc' => rawurlencode( $event->time ),
 		);
 		$link = add_query_arg( $link, admin_url( 'tools.php' ) );
-		$link = wp_nonce_url( $link, "run-cron_{$event->hook}_{$event->sig}" );
+		$link = wp_nonce_url( $link, "crontrol-run-cron_{$event->hook}_{$event->sig}" );
 
 		$links[] = "<a href='" . esc_url( $link ) . "'>" . esc_html__( 'Run Now', 'wp-crontrol' ) . '</a>';
 
-		if ( ! in_array( $event->hook, self::$persistent_core_hooks, true ) && ( ( 'crontrol_cron_job' !== $event->hook ) || self::$can_edit_files ) ) {
+		if ( ! in_array( $event->hook, self::$persistent_core_hooks, true ) && ( ( 'crontrol_cron_job' !== $event->hook ) || self::$can_manage_php_crons ) ) {
 			$link = array(
-				'page'         => 'crontrol_admin_manage_page',
-				'action'       => 'delete-cron',
-				'id'           => rawurlencode( $event->hook ),
-				'sig'          => rawurlencode( $event->sig ),
-				'next_run_utc' => rawurlencode( $event->time ),
+				'page'                  => 'crontrol_admin_manage_page',
+				'crontrol_action'       => 'delete-cron',
+				'crontrol_id'           => rawurlencode( $event->hook ),
+				'crontrol_sig'          => rawurlencode( $event->sig ),
+				'crontrol_next_run_utc' => rawurlencode( $event->time ),
 			);
 			$link = add_query_arg( $link, admin_url( 'tools.php' ) );
-			$link = wp_nonce_url( $link, "delete-cron_{$event->hook}_{$event->sig}_{$event->time}" );
+			$link = wp_nonce_url( $link, "crontrol-delete-cron_{$event->hook}_{$event->sig}_{$event->time}" );
 
 			$links[] = "<span class='delete'><a href='" . esc_url( $link ) . "'>" . esc_html__( 'Delete', 'wp-crontrol' ) . '</a></span>';
 		}
@@ -323,12 +385,12 @@ class Table extends \WP_List_Table {
 		if ( function_exists( 'wp_unschedule_hook' ) && ! in_array( $event->hook, self::$persistent_core_hooks, true ) && ( 'crontrol_cron_job' !== $event->hook ) ) {
 			if ( self::$count_by_hook[ $event->hook ] > 1 ) {
 				$link = array(
-					'page'   => 'crontrol_admin_manage_page',
-					'action' => 'delete-hook',
-					'id'     => rawurlencode( $event->hook ),
+					'page'            => 'crontrol_admin_manage_page',
+					'crontrol_action' => 'delete-hook',
+					'crontrol_id'     => rawurlencode( $event->hook ),
 				);
 				$link = add_query_arg( $link, admin_url( 'tools.php' ) );
-				$link = wp_nonce_url( $link, "delete-hook_{$event->hook}" );
+				$link = wp_nonce_url( $link, "crontrol-delete-hook_{$event->hook}" );
 
 				$text = sprintf(
 					/* translators: %s: Number of events with a given name */
@@ -346,23 +408,35 @@ class Table extends \WP_List_Table {
 	 * Outputs the checkbox cell of a table row.
 	 *
 	 * @param stdClass $event The cron event for the current row.
+	 * @return string The cell output.
 	 */
 	protected function column_cb( $event ) {
-		if ( ! in_array( $event->hook, self::$persistent_core_hooks, true ) && ( ( 'crontrol_cron_job' !== $event->hook ) || self::$can_edit_files ) ) {
-			?>
-			<label class="screen-reader-text" for="">
-				<?php printf( esc_html__( 'Select this row', 'wp-crontrol' ) ); ?>
-			</label>
-			<?php
-				printf(
-					'<input type="checkbox" name="delete[%1$s][%2$s]" value="%3$s">',
-					esc_attr( $event->time ),
-					esc_attr( rawurlencode( $event->hook ) ),
-					esc_attr( $event->sig )
-				);
-			?>
-			<?php
+		$id = sprintf(
+			'crontrol-delete-%1$s-%2$s-%3$s',
+			$event->time,
+			rawurlencode( $event->hook ),
+			$event->sig
+		);
+
+		if ( in_array( $event->hook, self::$persistent_core_hooks, true ) ) {
+			return sprintf(
+				'<span class="dashicons dashicons-wordpress" aria-hidden="true"></span>
+				<span class="screen-reader-text">%s</span>',
+				esc_html__( 'This is a WordPress core event and cannot be deleted', 'wp-crontrol' )
+			);
+		} elseif ( ( 'crontrol_cron_job' !== $event->hook ) || self::$can_manage_php_crons ) {
+			return sprintf(
+				'<label class="screen-reader-text" for="%1$s">%2$s</label>
+				<input type="checkbox" name="crontrol_delete[%3$s][%4$s]" value="%5$s" id="%1$s">',
+				esc_attr( $id ),
+				esc_html__( 'Select this row', 'wp-crontrol' ),
+				esc_attr( $event->time ),
+				esc_attr( rawurlencode( $event->hook ) ),
+				esc_attr( $event->sig )
+			);
 		}
+
+		return '';
 	}
 
 	/**
@@ -391,10 +465,6 @@ class Table extends \WP_List_Table {
 	 * @return string The cell output.
 	 */
 	protected function column_crontrol_args( $event ) {
-		if ( ! empty( $event->args ) ) {
-			$args = \Crontrol\json_output( $event->args );
-		}
-
 		if ( 'crontrol_cron_job' === $event->hook ) {
 			$return = '<em>' . esc_html__( 'PHP Code', 'wp-crontrol' ) . '</em>';
 
@@ -431,7 +501,7 @@ class Table extends \WP_List_Table {
 			} else {
 				return sprintf(
 					'<pre>%s</pre>',
-					esc_html( $args )
+					esc_html( \Crontrol\json_output( $event->args ) )
 				);
 			}
 		}
@@ -471,8 +541,16 @@ class Table extends \WP_List_Table {
 	 * @return string The cell output.
 	 */
 	protected function column_crontrol_next( $event ) {
-		$date_utc   = gmdate( 'Y-m-d\TH:i:s+00:00', $event->time );
-		$date_local = get_date_from_gmt( date( 'Y-m-d H:i:s', $event->time ), 'Y-m-d H:i:s' );
+		$date_local_format = 'Y-m-d H:i:s';
+		$offset_site = get_date_from_gmt( 'now', 'P' );
+		$offset_event = get_date_from_gmt( gmdate( 'Y-m-d H:i:s', $event->time ), 'P' );
+
+		if ( $offset_site !== $offset_event ) {
+			$date_local_format .= ' P';
+		}
+
+		$date_utc   = gmdate( 'c', $event->time );
+		$date_local = get_date_from_gmt( gmdate( 'Y-m-d H:i:s', $event->time ), $date_local_format );
 
 		$time = sprintf(
 			'<time datetime="%1$s">%2$s</time>',
@@ -518,6 +596,17 @@ class Table extends \WP_List_Table {
 					'<span class="status-crontrol-error"><span class="dashicons dashicons-warning" aria-hidden="true"></span> %s</span>',
 					esc_html( $schedule_name->get_error_message() )
 				);
+			} elseif ( is_too_frequent( $event ) ) {
+				return sprintf(
+					'%1$s<span class="status-crontrol-warning"><br><span class="dashicons dashicons-warning" aria-hidden="true"></span> %2$s</span>',
+					esc_html( $schedule_name ),
+					sprintf(
+						/* translators: 1: The name of the configuration constant, 2: The value of the configuration constant */
+						esc_html__( 'This interval is less than the %1$s constant which is set to %2$s seconds. Events that use it may not run on time.', 'wp-crontrol' ),
+						'<code>WP_CRON_LOCK_TIMEOUT</code>',
+						intval( WP_CRON_LOCK_TIMEOUT )
+					)
+				);
 			} else {
 				return esc_html( $schedule_name );
 			}
@@ -528,9 +617,11 @@ class Table extends \WP_List_Table {
 
 	/**
 	 * Outputs a message when there are no items to show in the table.
+	 *
+	 * @return void
 	 */
 	public function no_items() {
-		if ( empty( $_GET['s'] ) && empty( $_GET['hooks_type'] ) ) {
+		if ( empty( $_GET['s'] ) && empty( $_GET['crontrol_hooks_type'] ) ) {
 			esc_html_e( 'There are currently no scheduled cron events.', 'wp-crontrol' );
 		} else {
 			esc_html_e( 'No matching cron events.', 'wp-crontrol' );

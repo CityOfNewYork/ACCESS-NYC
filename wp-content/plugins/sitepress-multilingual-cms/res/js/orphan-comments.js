@@ -3,18 +3,17 @@
 
 "use strict";
 
-jQuery(document).ready(
-	function ($) {
+jQuery(function ($) {
 
-		var deleted = 0;
-		var deleting = false;
-		var initial_orphans_count = 0;
+    var deleted = 0;
+    var deleting = false;
+    var initial_orphans_count = 0;
 
-		var orphansCount = $('#wpml_orphans_count');
-		var orphansCheckCount = orphansCount.find('.check-orphans');
-		var orphansCountResults = orphansCount.find('.orphans-check-results');
-		var orphansCountProgress = orphansCount.find('.count-in-progress');
-		var deletingProgress = orphansCount.find('.delete-in-progress');
+    var orphansCount = $('#wpml_orphans_count');
+    var orphansCheckCount = orphansCount.find('.check-orphans');
+    var orphansCountResults = orphansCount.find('.orphans-check-results');
+    var orphansCountProgress = orphansCount.find('.count-in-progress');
+    var deletingProgress = orphansCount.find('.delete-in-progress');
 		var deletedOrphans = orphansCount.find('.deleted');
 		var cleanOrphans = orphansCount.find('.clean-orphans');
 		var noOrphans = orphansCount.find('.no_orphans');
@@ -52,7 +51,7 @@ jQuery(document).ready(
 			$.post(
 				ajaxurl, data, function (res) {
 					orphansCountProgress.fadeOut();
-					var orphansCountResult = res.success ? res.data : 0;
+					var orphansCountResult = parseInt(res.success ? res.data : 0);
 					orphansCheckLoader.fadeOut();
 					orphansCountResults.find('.count').html(orphansCountResult);
 					if (orphansCountResult > 0) {

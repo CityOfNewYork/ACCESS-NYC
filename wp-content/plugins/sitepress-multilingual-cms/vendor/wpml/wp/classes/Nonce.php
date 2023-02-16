@@ -17,6 +17,9 @@ class Nonce {
 
 	use Macroable;
 
+	/**
+	 * @return void
+	 */
 	public static function init() {
 		self::macro( 'verify', curryN( 2, function ( $action, Collection $postData ) {
 			return wp_verify_nonce( $postData->get( 'nonce' ), $action ?: $postData->get( 'endpoint' ) )

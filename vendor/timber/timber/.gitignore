@@ -5,6 +5,7 @@ twig-cache/*
 vendor
 build
 /cache
+!/lib/Cache
 *.swp
 *~
 wp-content
@@ -18,3 +19,4 @@ docs/output
 /Timber.php
 wordpress
 composer.lock
+.vscode

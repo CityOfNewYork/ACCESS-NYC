@@ -86,7 +86,7 @@ class WPML_ST_Blog_Name_And_Description_Hooks implements \IWPML_Action {
 	}
 
 	/**
-	 * @param string string $name
+	 * @param string $string_name
 	 *
 	 * Checks whether a given string is to be translated in the Admin back-end.
 	 * Currently only tagline and title of a site are to be translated.

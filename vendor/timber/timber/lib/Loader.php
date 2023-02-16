@@ -147,7 +147,7 @@ class Loader {
 			$rootPath = null;
 		}
 		$fs = new \Twig\Loader\FilesystemLoader($paths, $rootPath);
-		$fs = apply_filters('timber/loader/loader', $fs);
+		$fs = apply_filters('timber/loader/loader', $fs, $paths, $rootPath);
 		return $fs;
 	}
 
@@ -272,15 +272,15 @@ class Loader {
 	}
 
 	/**
-	 * @return \Asm89\Twig\CacheExtension\Extension
+	 * @return \Twig\CacheExtension\Extension
 	 */
 	private function _get_cache_extension() {
 
 		$key_generator   = new \Timber\Cache\KeyGenerator();
 		$cache_provider  = new \Timber\Cache\WPObjectCacheAdapter($this);
 		$cache_lifetime  = apply_filters('timber/cache/extension/lifetime', 0);
-		$cache_strategy  = new \Asm89\Twig\CacheExtension\CacheStrategy\GenerationalCacheStrategy($cache_provider, $key_generator, $cache_lifetime);
-		$cache_extension = new \Asm89\Twig\CacheExtension\Extension($cache_strategy);
+		$cache_strategy  = new \Twig\CacheExtension\CacheStrategy\GenerationalCacheStrategy($cache_provider, $key_generator, $cache_lifetime);
+		$cache_extension = new \Twig\CacheExtension\Extension($cache_strategy);
 
 		return $cache_extension;
 	}

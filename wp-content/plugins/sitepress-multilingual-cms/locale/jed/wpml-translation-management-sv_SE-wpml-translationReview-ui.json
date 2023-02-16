@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Accepted": [
+            "Godkänd"
+         ],
+         "Approved!": [
+            "Godkänd!"
+         ],
+         "Loading the next translation for review...": [
+            "Läser in nästa översättning för granskning..."
+         ],
+         "Back": [
+            "Tillbaka"
+         ],
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "Stäng av för att inte automatiskt ladda nästa översättning när du har avslutat den här granskningen."
+         ],
+         "Turn on to automatically load the next translation after finishing this review.": [
+            "Aktivera för att automatiskt ladda nästa översättning när du har avslutat den här granskningen."
+         ],
+         "Edit": [
+            "Redigera"
+         ],
+         "Edit translation": [
+            "Redigera översättning"
+         ],
+         "There was an error in applying translation.": [
+            "Det gick inte att använda översättningen."
+         ],
+         "Please wait, applying translation..": [
+            "Vänta, tillämpar översättning.."
+         ],
+         "Next review": [
+            "Nästa granskning"
+         ],
+         "Publish this translation": [
+            "Publicera denna översättning"
+         ],
+         "Accept this translation": [
+            "Godkänn denna översättning"
+         ],
+         "Published!": [
+            "Publicerat!"
+         ]
+      }
+   }
+}

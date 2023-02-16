@@ -5,7 +5,6 @@
  *
  * @package    wpml-core
  * @subpackage taxonomy-term-translation
- *
  */
 class WPML_Term_Hierarchy_Duplication extends WPML_WPDB_And_SP_User {
 
@@ -66,11 +65,13 @@ class WPML_Term_Hierarchy_Duplication extends WPML_WPDB_And_SP_User {
 		$post_ids_in           = wpml_prepare_in( (array) $post_ids, '%d' );
 		$taxonomies_in         = wpml_prepare_in( $translated_taxonomies );
 
-		$this->wpdb->get_col( "SELECT DISTINCT tt.taxonomy
+		$this->wpdb->get_col(
+			"SELECT DISTINCT tt.taxonomy
 						 FROM {$this->wpdb->term_taxonomy} tt
 						 JOIN {$this->wpdb->term_relationships} tr
 						  ON tt.term_taxonomy_id = tr.term_taxonomy_id
-						 WHERE tr.object_id IN ({$post_ids_in}) AND tt.taxonomy IN ({$taxonomies_in})" );
+						 WHERE tr.object_id IN ({$post_ids_in}) AND tt.taxonomy IN ({$taxonomies_in})"
+		);
 
 		foreach ( $translated_taxonomies as $key => $tax ) {
 			$unsynced_terms = $hierarchy_sync_helper->get_unsynced_elements(

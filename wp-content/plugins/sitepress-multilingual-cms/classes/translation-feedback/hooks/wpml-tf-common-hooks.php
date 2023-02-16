@@ -29,7 +29,7 @@ class WPML_TF_Common_Hooks implements IWPML_Action {
 		register_post_type( WPML_TF_Message_Post_Convert::POST_TYPE );
 	}
 
-	/** @param $post_id int */
+	/** @param int $post_id */
 	public function cleanup_post_feedback_data( $post_id ) {
 		if ( WPML_TF_Feedback_Post_Convert::POST_TYPE === get_post_type( $post_id ) ) {
 			return;

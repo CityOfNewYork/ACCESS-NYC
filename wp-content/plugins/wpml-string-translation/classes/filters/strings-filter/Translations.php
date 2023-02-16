@@ -2,7 +2,6 @@
 
 namespace WPML\ST\StringsFilter;
 
-
 class Translations {
 	/** @var \SplObjectStorage */
 	private $data;

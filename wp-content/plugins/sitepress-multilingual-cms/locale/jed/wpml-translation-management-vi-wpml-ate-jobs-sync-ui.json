@@ -1,0 +1,163 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "Đang gửi để dịch"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "Đang kết nối với Trình biên tập Dịch thuật Nâng cao của WPML"
+         ],
+         "Try again": [
+            "Thử lại"
+         ],
+         "You don't have the rights to review this language": [
+            "Bạn không có quyền rà soát ngôn ngữ này"
+         ],
+         "pages & posts": [
+            "các trang & bài viết"
+         ],
+         "left to translate": [
+            "còn lại cần dịch"
+         ],
+         "Translate on hold": [
+            "Tạm dừng việc dịch"
+         ],
+         "All translated": [
+            "Đã dịch tất cả"
+         ],
+         "%d translations left": [
+            "%d bản dịch còn lại"
+         ],
+         "Credits used:": [
+            "Tín dụng đã dùng:"
+         ],
+         "Credits left:": [
+            "Tín dụng còn lại:"
+         ],
+         "Calculating": [
+            "Đang tính toán"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "Tín dụng trả trước còn lại được gán cho trang web này trên WPML.org."
+         ],
+         "Prepaid credits left": [
+            "Tín dụng trả trước còn lại"
+         ],
+         "Account credits used": [
+            "Tín dụng tài khoản đã dùng"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "Khi bạn đã sử dụng tất cả tín dụng trả trước, chúng tôi sẽ lập hóa đơn cho bất kỳ phần tín dụng bổ sung nào bạn sử dụng sau khi kết thúc tháng"
+         ],
+         "Payment limit:": [
+            "Giới hạn thanh toán:"
+         ],
+         "%s credits": [
+            "%s tín dụng"
+         ],
+         "Preparing more content for translation": [
+            "Đang chuẩn bị thêm nội dung cần dịch"
+         ],
+         "Preparing content for translation": [
+            "Đang chuẩn bị nội dung cần dịch"
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "Đây là một sự cố với tính năng dịch tự động cần bạn chú ý. Hãy sửa để tiếp tục."
+         ],
+         "%d translations waiting for review": [
+            "%d bản dịch đang chờ rà soát"
+         ],
+         "Draft — Pending review": [
+            "Bản nháp - Đang chờ rà soát"
+         ],
+         "Complete": [
+            "Hoàn thành"
+         ],
+         "Insufficient funds": [
+            "Không đủ tiền"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "Đọc thêm về cách thức dịch nội dung của bạn trong <a>Hướng dẫn bắt đầu</a>"
+         ],
+         "Let's Start Translating!": [
+            "Hãy bắt đầu dịch!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "Chọn nội dung của bạn từ Bảng điều khiển Dịch thuật dưới đây và tạo việc dịch đầu tiên của bạn!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "Thay đổi <a>cài đặt dịch tự động</a> của bạn (các công việc dịch thuật đang diễn ra sẽ được hoàn tất bằng cài đặt hiện thời)."
+         ],
+         "Read more about translating your site automatically.": [
+            "Đọc thêm về việc dịch tự động trang web của bạn."
+         ],
+         "Your site is being automatically translated!": [
+            "Trang web của bạn đang được dịch tự động!"
+         ],
+         "Automatic Translation Status": [
+            "Trạng thái dịch tự động"
+         ],
+         "Calculating...": [
+            "Đang tính toán..."
+         ],
+         "Do not close WP admin!": [
+            "Không đó mục quản trị của WP!"
+         ],
+         "The number of translations": [
+            "Số lượng bản dịch"
+         ],
+         "Delete Translations": [
+            "Xóa các bản dịch"
+         ],
+         "Keep Translations as Draft": [
+            "Giữ các bản dịch dưới dạng Bản nháp"
+         ],
+         "Never mind. I want to review these translations.": [
+            "Không sao. Tôi muốn rà soát các bản dịch này."
+         ],
+         "Cancel": [
+            "Hủy"
+         ],
+         "You haven't selected any jobs that need review.": [
+            "Bạn chưa chọn bất kỳ công việc nào cần rà soát."
+         ],
+         "Please select the pending review jobs to abort.": [
+            "Vui lòng chọn các công việc rà soát chờ xử lý để hủy bỏ."
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "Việc này sẽ xóa các công việc đã chọn khỏi Hàng chờ Bản dịch mà không đăng tải chúng. Bạn muốn làm gì với các bản dịch?"
+         ],
+         "Cancel Translation Review": [
+            "Hủy việc rà soát bản dịch"
+         ],
+         "Edit": [
+            "Sửa"
+         ],
+         "Updating": [
+            "Đang cập nhật"
+         ],
+         "Translate": [
+            "Dịch"
+         ],
+         "Take and translate": [
+            "Nhận và dịch"
+         ],
+         "Review": [
+            "Đánh giá"
+         ],
+         "Are you sure you want to resign from this job?": [
+            "Bạn có chắc là bạn muốn rút khỏi công việc này?"
+         ],
+         "Resign": [
+            "Từ bỏ"
+         ],
+         "View": [
+            "Xem"
+         ]
+      }
+   }
+}

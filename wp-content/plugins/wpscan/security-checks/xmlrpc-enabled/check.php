@@ -75,7 +75,7 @@ class xmlrpcEnabled extends Check {
 			error_log( $authenticated_response->get_error_message() );
 		} else {
 			if ( preg_match( '/<string>Incorrect username or password.<\/string>/', $authenticated_response['body'] ) ) {
-				$this->add_vulnerability( __( 'The XML-RPC interface is enabled. This significantly increases your site\'s attack surface.', 'wpscan' ), 'medium', sanitize_title( $url ) );
+				$this->add_vulnerability( __( 'The XML-RPC interface is enabled. This significantly increases your site\'s attack surface.', 'wpscan' ), 'medium', sanitize_title( $url ), 'https://blog.wpscan.com/is-wordpress-xmlrpc-a-security-problem/' );
 				return;
 			} else {
 				// Try an unauthenticated request.
@@ -83,7 +83,7 @@ class xmlrpcEnabled extends Check {
 				$unauthenticated_response = wp_remote_post( $url, array( 'body' => $unauthenticated_body ) );
 
 				if ( preg_match( '/<string>Hello!<\/string>/', $unauthenticated_response['body'] ) ) {
-					$this->add_vulnerability( __( 'The XML-RPC interface is partly disabled, but still allows unauthenticated requests.', 'wpscan' ), 'low', sanitize_title( $url ) );
+					$this->add_vulnerability( __( 'The XML-RPC interface is partly disabled, but still allows unauthenticated requests.', 'wpscan' ), 'low', sanitize_title( $url ), 'https://blog.wpscan.com/is-wordpress-xmlrpc-a-security-problem/' );
 				}
 			}
 		}
