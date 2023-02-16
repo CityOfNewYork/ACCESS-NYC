@@ -27,7 +27,7 @@ class WPML_Resolve_Absolute_Url implements IWPML_Resolve_Object_Url {
 			return false;
 		}
 
-		$this->lock = true;
+		$this->lock   = true;
 		$current_lang = $this->sitepress->get_current_language();
 		$this->sitepress->switch_lang( $lang );
 
@@ -37,7 +37,6 @@ class WPML_Resolve_Absolute_Url implements IWPML_Resolve_Object_Url {
 			if ( trailingslashit( $new_url ) === trailingslashit( $url ) ) {
 				$new_url = false;
 			}
-
 		} catch ( Exception $e ) {
 			$new_url = false;
 		}

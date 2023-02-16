@@ -58,7 +58,7 @@ WPMLCore.Tooltip.prototype = {
 	buttons:        function (event, t) {
 		var button = jQuery('<a class="close" href="#">&nbsp;</a>');
 
-		return button.bind('click.pointer', function (e) {
+		return button.on('click.pointer', function (e) {
 			e.preventDefault();
 			t.element.pointer('close');
 		});
@@ -82,9 +82,9 @@ WPMLCore.initializeTooltips = function() {
 };
 
 (function () {
-	'use strict';
+    'use strict';
 
-	jQuery(document).ready(function () {
-		WPMLCore.initializeTooltips();
-	});
+    jQuery(function () {
+        WPMLCore.initializeTooltips();
+    });
 }());

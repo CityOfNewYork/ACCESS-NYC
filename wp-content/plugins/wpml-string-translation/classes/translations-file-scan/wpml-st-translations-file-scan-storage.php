@@ -8,11 +8,11 @@ class WPML_ST_Translations_File_Scan_Storage {
 	private $bulk_insert;
 
 	/**
-	 * @param wpdb $wpdb
+	 * @param wpdb                        $wpdb
 	 * @param WPML_ST_Bulk_Strings_Insert $bulk_insert
 	 */
 	public function __construct( wpdb $wpdb, WPML_ST_Bulk_Strings_Insert $bulk_insert ) {
-		$this->wpdb = $wpdb;
+		$this->wpdb        = $wpdb;
 		$this->bulk_insert = $bulk_insert;
 	}
 

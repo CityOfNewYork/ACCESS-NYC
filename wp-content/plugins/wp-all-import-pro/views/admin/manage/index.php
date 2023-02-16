@@ -2,7 +2,7 @@
     (function ($, ajaxurl, wp_all_import_security) {
 
         $(document).ready(function () {
-            $('.open_cron_scheduling').click(function () {
+            $('.open_cron_scheduling').on('click', function () {
 
                 var itemId = $(this).data('itemid');
                 openSchedulingDialog(itemId, $(this), '<?php echo WP_ALL_IMPORT_ROOT_URL; ?>/static/img/preloader.gif');
@@ -12,15 +12,15 @@
 
     window.pmxiHasSchedulingSubscription = <?php echo PMXI_Plugin::hasActiveSchedulingLicense() ? 'true' : 'false';  ?>;
 </script>
-<div class="wpallimport-header" style="overflow:hidden; height: 65px; padding-top: 10px; margin-bottom: -20px;">
-	<div class="wpallimport-logo"></div>
-	<div class="wpallimport-title">
-		<p><?php _e('WP All Import', 'wp_all_import_plugin'); ?></p>
-		<h3><?php _e('Manage Imports', 'wp_all_import_plugin'); ?></h3>			
-	</div>	
-</div>
 
 <h2></h2> <!-- Do not remove -->
+
+<div class="wpallimport-header" style="overflow:hidden; height: 70px; padding-top: 10px; margin-bottom: -15px;">
+	<div class="wpallimport-logo"></div>
+	<div class="wpallimport-title">
+		<h3><?php _e('Manage Imports', 'wp_all_import_plugin'); ?></h3>
+	</div>
+</div>
 
 <?php if ($this->errors->get_error_codes()): ?>
 	<?php $this->error() ?>
@@ -169,14 +169,14 @@ $columns = apply_filters('pmxi_manage_imports_columns', $columns);
 											if ( ! empty($path_parts['dirname'])){
 												$path_all_parts = explode('/', $path_parts['dirname']);
 												$dirname = array_pop($path_all_parts);
-												if ( wp_all_import_isValidMd5($dirname)){								
-
+												if ( wp_all_import_isValidMd5($dirname)){
 													$path = str_replace($dirname, preg_replace('%^(.{3}).*(.{3})$%', '$1***$2', $dirname), str_replace('temp/', '', $item['path']));
-													
 												}
 											}
 											?>
 											<em><a href="<?php echo add_query_arg(array('id' => $item['id'], 'action' => 'feed', '_wpnonce' => wp_create_nonce( '_wpnonce-download_feed' )), $this->baseUrl); ?>" class="wp_all_import_show_path" rel="<?php echo $item['path']; ?>"><?php echo preg_replace('%.*wp-content/%', 'wp-content/', $path); ?></a></em>
+                                        <?php elseif ( in_array($item['type'], array('ftp'))): ?>
+                                            <em><?php echo $item['options']['ftp_username'] . '@' . preg_replace('%^ftps?://%i', '', $item['options']['ftp_host']) . '/' . $item['options']['ftp_path'];?></em>
 										<?php elseif (in_array($item['type'], array('file'))):?>
 											<?php $item['path'] = wp_all_import_get_absolute_path($item['path']); ?>
 											<em><a href="<?php echo add_query_arg(array('id' => $item['id'], 'action' => 'feed', '_wpnonce' => wp_create_nonce( '_wpnonce-download_feed' )), $this->baseUrl); ?>" class="wp_all_import_show_path" rel="<?php echo $item['path']; ?>"><?php echo preg_replace('%.*wp-content/%', 'wp-content/', $item['path']); ?></a></em>
@@ -185,11 +185,8 @@ $columns = apply_filters('pmxi_manage_imports_columns', $columns);
 										<?php endif; ?>
 									<?php endif ?>
 									<div class="row-actions">
-
 										<?php do_action('pmxi_import_menu', $item['id'], $this->baseUrl); ?>
-
 										<?php
-
 											$import_actions = array(
 												'import_template' => array(
 													'url' => ( ! $item['processing'] and ! $item['executing'] ) ? add_query_arg(array('id' => $item['id'], 'action' => 'edit'), $this->baseUrl) : '',
@@ -226,8 +223,7 @@ $columns = apply_filters('pmxi_manage_imports_columns', $columns);
 														break;
 												}												
 												$ai++;		
-											}	
-
+											}
 										?>																			
 
 									</div>
@@ -298,6 +294,16 @@ $columns = apply_filters('pmxi_manage_imports_columns', $columns);
 													$custom_type->label = empty($tx->labels->name) ? __('Taxonomy Terms', 'wp_all_import_plugin') : $tx->labels->name;
 													$custom_type->singular_label = empty($tx->labels->singular_name) ? __('Taxonomy Term', 'wp_all_import_plugin') : $tx->labels->singular_name;
 													break;
+                                                case 'comments':
+                                                    $custom_type = new stdClass();
+                                                    $custom_type->label =  __('Comments', 'wp_all_import_plugin');
+                                                    $custom_type->singular_label =  __('Comment', 'wp_all_import_plugin');
+                                                    break;
+                                                case 'woo_reviews':
+                                                    $custom_type = new stdClass();
+                                                    $custom_type->label =  __('WooCommerce Reviews', 'wp_all_import_plugin');
+                                                    $custom_type->singular_label =  __('Review', 'wp_all_import_plugin');
+                                                    break;
                                                 case 'import_users':
                                                     $custom_type = new stdClass();
                                                     $custom_type->label = __('Users', 'wp_all_import_plugin');
@@ -347,7 +353,7 @@ $columns = apply_filters('pmxi_manage_imports_columns', $columns);
                                         <a href="#help" class="wpallimport-help" style="position: relative; top: -2px; margin-left: 0;"  title="<?php _e("To run this import on a schedule you must use the 'Download from URL' or 'Use existing file' option on the Import Settings page.", PMXI_Plugin::LANGUAGE_DOMAIN);?>">?</a>
                                         <br/>
                                     <?php } else { ?>
-                                        <a href="#"
+                                        <a href="javascript:void(0);"
                                            class="open_cron_scheduling"
                                            data-itemid="<?php echo $item['id'];?>"><?php _e('Scheduling Options', 'wp_all_import_plugin'); ?></a><br/>
 
@@ -362,11 +368,11 @@ $columns = apply_filters('pmxi_manage_imports_columns', $columns);
 								?>
 								<td style="width: 130px;">
 									<?php if ( ! $item['processing'] and ! $item['executing'] ): ?>
-									<h2 style="float:left;"><a class="add-new-h2" href="<?php echo add_query_arg(array('id' => $item['id'], 'action' => 'update'), $this->baseUrl); ?>"><?php _e('Run Import', 'wp_all_import_plugin'); ?></a></h2>
+									<h2 style="float:left;"><a class="add-new-h2" href="<?php echo add_query_arg(array('id' => $item['id'], 'action' => 'update'), remove_query_arg('pagenum', $this->baseUrl)); ?>"><?php _e('Run Import', 'wp_all_import_plugin'); ?></a></h2>
 									<?php elseif ($item['processing']) : ?>
-									<h2 style="float:left;"><a class="add-new-h2" href="<?php echo add_query_arg(array('id' => $item['id'], 'action' => 'cancel', '_wpnonce' => wp_create_nonce( '_wpnonce-cancel_import' )), $this->baseUrl); ?>"><?php _e('Cancel Cron', 'wp_all_import_plugin'); ?></a></h2>
+									<h2 style="float:left;"><a class="add-new-h2" href="<?php echo add_query_arg(array('id' => $item['id'], 'action' => 'cancel', '_wpnonce' => wp_create_nonce( '_wpnonce-cancel_import' )), remove_query_arg('pagenum', $this->baseUrl)); ?>"><?php _e('Cancel Cron', 'wp_all_import_plugin'); ?></a></h2>
 									<?php elseif ($item['executing']) : ?>
-									<h2 style="float:left;"><a class="add-new-h2" href="<?php echo add_query_arg(array('id' => $item['id'], 'action' => 'cancel', '_wpnonce' => wp_create_nonce( '_wpnonce-cancel_import' )), $this->baseUrl); ?>"><?php _e('Cancel', 'wp_all_import_plugin'); ?></a></h2>
+									<h2 style="float:left;"><a class="add-new-h2" href="<?php echo add_query_arg(array('id' => $item['id'], 'action' => 'cancel', '_wpnonce' => wp_create_nonce( '_wpnonce-cancel_import' )), remove_query_arg('pagenum', $this->baseUrl)); ?>"><?php _e('Cancel', 'wp_all_import_plugin'); ?></a></h2>
 									<?php endif; ?>
 								</td>
 								<?php
@@ -405,7 +411,6 @@ $columns = apply_filters('pmxi_manage_imports_columns', $columns);
 		</div>
 	</div>
 	<div class="clear"></div>
-	
 	<a href="http://soflyy.com/" target="_blank" class="wpallimport-created-by"><?php _e('Created by', 'wp_all_import_plugin'); ?> <span></span></a>
 
 </form>

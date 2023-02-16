@@ -70,15 +70,4 @@ class WPML_REST_Request_Analyze {
 
 		return isset( $this->uri_parts[ $index ] ) ? $this->uri_parts[ $index ] : '';
 	}
-
-	/**
-	 * This is to keep backward compatibility for sites using REST requests
-	 * with a language as a directory prefix. As a consequence, those REST requests
-	 * are filtering resources by language.
-	 *
-	 * @return bool
-	 */
-	public function should_load_on_frontend() {
-		return $this->has_valid_language_prefix();
-	}
 }

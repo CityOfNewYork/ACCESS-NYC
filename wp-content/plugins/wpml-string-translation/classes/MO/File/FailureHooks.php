@@ -92,7 +92,7 @@ class FailureHooks implements \IWPML_Backend_Action {
 		$text .= '<p>' . esc_html__( 'To resolve this, please contact your hosting company and request that they make that folder writable.',
 				'wpml-string-translation' ) . '</p>';
 
-		$url = 'https://wpml.org/faq/cannot-write-mo-files/?utm_source=wpml-plugin&utm_medium=warning-message&utm_campaign=mo-files&utm_term=cannot-write-mo-files&utm_content=doc-link';
+		$url = 'https://wpml.org/faq/cannot-write-mo-files/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlst';
 		$link = '<a href="' . $url . '" target="_blank" rel="noreferrer noopener" >' .
 		        esc_html__( "WPML's documentation on troubleshooting .mo files generation.",
 			        'wpml-string-translation' ) .

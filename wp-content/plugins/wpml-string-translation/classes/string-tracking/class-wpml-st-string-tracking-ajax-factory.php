@@ -24,13 +24,13 @@ class WPML_ST_String_Tracking_AJAX_Factory implements IWPML_AJAX_Action_Loader {
 	private function is_string_position_view() {
 		return isset( $_GET['action'], $_GET['nonce'] )
 			&& in_array(
-					$_GET['action'],
-					array(
-						self::ACTION_POSITION_IN_SOURCE,
-						self::ACTION_POSITION_IN_PAGE,
-					),
-					true
-		       )
+				$_GET['action'],
+				array(
+					self::ACTION_POSITION_IN_SOURCE,
+					self::ACTION_POSITION_IN_PAGE,
+				),
+				true
+			)
 			&& wp_verify_nonce( $_GET['nonce'], $_GET['action'] );
 	}
 

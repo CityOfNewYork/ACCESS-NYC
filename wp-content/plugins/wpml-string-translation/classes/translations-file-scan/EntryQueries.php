@@ -16,7 +16,7 @@ class EntryQueries {
 	}
 
 	/**
-	 * @param $extension
+	 * @param string $extension
 	 *
 	 * @return \Closure
 	 */
@@ -50,7 +50,7 @@ class EntryQueries {
 	 * @return string
 	 */
 	private static function getPluginName( \WPML_ST_Translations_File_Entry $entry ) {
-		$data = get_plugin_data( WP_PLUGIN_DIR . '/' . $entry->get_component_id(), false, false );
+		$data = get_plugin_data( WPML_PLUGINS_DIR . '/' . $entry->get_component_id(), false, false );
 		return $data['Name'];
 	}
 

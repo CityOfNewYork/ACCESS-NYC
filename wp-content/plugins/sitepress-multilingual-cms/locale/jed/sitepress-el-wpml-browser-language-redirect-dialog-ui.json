@@ -1,0 +1,34 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "How Browser Language Redirect Affects Google Indexing": [
+            "Πώς επηρεάζει η ανακατεύθυνση βάσει γλώσσας προγράμματος περιήγησης την κατάρτιση καταλόγων Google"
+         ],
+         "Documentation": [
+            "Τεκμηρίωση"
+         ],
+         "Browser redirect affects Google indexing and search results": [
+            "Η ανακατεύθυνση βάσει γλώσσας προγράμματος περιήγησης επηρεάζει την κατάρτιση καταλόγων και την εύρεση Google"
+         ],
+         "Got it, activate anyway": [
+            "Κατάλαβα, να ενεργοποιηθεί παρά τα παραπάνω"
+         ],
+         "Cancel": [
+            "Άκυρο"
+         ],
+         "When you redirect visitors based on their language, you also redirect Google. Google wants to see your site exactly like visitors see it, including any redirects that you apply.": [
+            "Όταν ανακατευθύνετε επισκέπτες βάσει της γλώσσας τους, θα ανακατευθύνετε και το Google. Το Google θέλει να βλέπει τον ιστότοπό σας ακριβώς όπως τον βλέπουν οι επισκέπτες, και αυτό συμπεριλαμβάνει τυχόν ανακατευθύνσεις που εφαρμόζετε."
+         ],
+         "It is OK to redirect visitors based on their language, but you need to realize that this feature affects SEO.": [
+            "Δεν πειράζει το να ανακατευθύνετε επισκέπτες βάσει της γλώσσας τους, εφόσον συνειδητοποιείτε ότι αυτή η λειτουργία επηρεάζει το SEO."
+         ],
+         "Before proceeding, we recommend that you read these two pages:": [
+            "Πριν συνεχίσετε, προτείνουμε να διαβάσετε αυτές τις δύο σελίδες:"
+         ]
+      }
+   }
+}

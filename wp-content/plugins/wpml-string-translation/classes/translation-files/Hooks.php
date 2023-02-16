@@ -36,4 +36,8 @@ class Hooks {
 	private function hasTranslationFilesTables() {
 		return $this->upgrade->has_command_been_executed( WPML_ST_Upgrade_MO_Scanning::class );
 	}
+
+	public static function useFileSynchronization() {
+		return defined( 'WPML_ST_SYNC_TRANSLATION_FILES' ) && constant( 'WPML_ST_SYNC_TRANSLATION_FILES' );
+	}
 }

@@ -19,19 +19,19 @@ WPML_Translate_taxonomy = {};
 WPML_Translate_taxonomy.callbacks = jQuery.Callbacks();
 
 (function () {
-	"use strict";
-	
-	jQuery(document).ready(function () {
-		
-		var loading = jQuery( '.wpml_taxonomy_loading .spinner' );
-		if ( loading.length ) {
-			loading.css( {
-				'visibility': 'visible',
-				'float': 'left'
-				} );
-			loading.show();
-		}
-		jQuery('.icl_tt_main_bottom').hide();
+    "use strict";
+
+    jQuery(function () {
+
+        var loading = jQuery('.wpml_taxonomy_loading .spinner');
+        if (loading.length) {
+            loading.css({
+                            'visibility': 'visible',
+                            'float'     : 'left'
+                        });
+            loading.show();
+        }
+        jQuery('.icl_tt_main_bottom').hide();
 
 		TaxonomyTranslation.data.activeLanguages = wpml_taxonomies.activeLanguages;
 		TaxonomyTranslation.data.allLanguages = wpml_taxonomies.allLanguages;

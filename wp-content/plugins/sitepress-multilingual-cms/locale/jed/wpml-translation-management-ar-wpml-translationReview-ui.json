@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Accepted": [
+            "مقبول"
+         ],
+         "Approved!": [
+            "موافق عليه!"
+         ],
+         "Loading the next translation for review...": [
+            "جارٍ تحميل الترجمة التالية لمراجعتها..."
+         ],
+         "Back": [
+            "رجوع"
+         ],
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "أوقف تشغيل الخيار كي لا يتم تحميل الترجمة التالية تلقائيًا بعد استكمال هذه المراجعة."
+         ],
+         "Turn on to automatically load the next translation after finishing this review.": [
+            "قم بتشغيل الخيار كي يتم تحميل الترجمة التالية تلقائيًا بعد استكمال هذه المراجعة."
+         ],
+         "Edit": [
+            "تحرير"
+         ],
+         "Edit translation": [
+            "تحرير الترجمة"
+         ],
+         "There was an error in applying translation.": [
+            "حدث خطأ أثناء تطبيق الترجمة."
+         ],
+         "Please wait, applying translation..": [
+            "يُرجى الانتظار، جارٍ تطبيق الترجمة..."
+         ],
+         "Next review": [
+            "المراجعة التالية"
+         ],
+         "Publish this translation": [
+            "نشر هذه الترجمة"
+         ],
+         "Accept this translation": [
+            "قبول هذه الترجمة"
+         ],
+         "Published!": [
+            "تم النشر!"
+         ]
+      }
+   }
+}

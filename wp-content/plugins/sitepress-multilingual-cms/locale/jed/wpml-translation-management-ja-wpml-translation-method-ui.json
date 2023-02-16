@@ -1,0 +1,85 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Translate Some": [
+            "一部翻訳する"
+         ],
+         "I want to choose which content to translate": [
+            "翻訳コンテンツを選択する"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "保留中の自動翻訳はキャンセルされます。"
+         ],
+         "Save": [
+            "保存"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "コンテンツを翻訳するには、<a>Translation Management ダッシュボード</a>を開いてください。"
+         ],
+         "Review the translations before publishing": [
+            "公開する前に、翻訳をレビュー"
+         ],
+         "Publish translations and review them later": [
+            "翻訳を公開し、後でレビューする"
+         ],
+         "Publish translations without reviewing": [
+            "レビューなしで翻訳を公開する"
+         ],
+         "When automatic translation completes:": [
+            "自動翻訳が完了するとき："
+         ],
+         "Translate Everything": [
+            "全て翻訳"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "WPMLは、公開または更新されるコンテンツを自動的に翻訳します"
+         ],
+         "How do you want to translate this site?": [
+            "このサイトをどのように翻訳しますか？"
+         ],
+         "Yes, automatically translate all of my <s>existing posts and pages</s> right now, plus <s>new content</s> as I create it.": [
+            "はい、直ちに<s>既存の投稿とページ</s>を自動翻訳し、作成された<s>新しいコンテンツ</s> も翻訳します。"
+         ],
+         "Automatically translate all of my <s>existing content</s> right now, plus <s>new content</s> as I create it.": [
+            "直ちにすべての<s>既存の投稿とページ</s>を自動翻訳し、作成された<s>新しいコンテンツ</s> も翻訳します。"
+         ],
+         "No, only automatically translate <s>new content</s>.": [
+            "いいえ、 <s>新しいコンテンツ</s>のみ自動翻訳します。"
+         ],
+         "Only automatically translate <s>new content</s>.": [
+            "<s>新しいコンテンツ</s>のみ自動翻訳します。"
+         ],
+         "Should WPML automatically translate your existing content?": [
+            "WPMLに既存のコンテンツを自動翻訳させますか？\r\n"
+         ],
+         "Which content do you want to translate automatically?": [
+            "どのコンテンツを自動翻訳しますか？"
+         ],
+         "Start translating automatically": [
+            "自動的に翻訳を開始"
+         ],
+         "Create an account to start translating": [
+            "翻訳を開始するためには、アカウントを作成してください"
+         ],
+         "WPML will use credits from your automatic translation account to translate your site immediately as you publish new content or update existing content.": [
+            "WPMLは新しいコンテンツが公開される、または既存のコンテンツが更新されると、直ちに翻訳するために、あなたの自動翻訳アカウントからのクレジットを使用します\r\n"
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "Translation Managementダッシュボードで既存のコンテンツを翻訳できます。"
+         ],
+         "Cancel": [
+            "キャンセル"
+         ],
+         "You must use the <s>Advanced Translation Editor</s> if you want to translate your content automatically.": [
+            "コンテンツを自動翻訳する場合、<s>アドバンス翻訳エディター</s> を使用する必要があります。"
+         ],
+         "You currently use a translation service to translate your content. To translate your site automatically, first disconnect your translation service in your <a><s>Translation Management settings</s></a>.": [
+            "現在、コンテンツの翻訳に翻訳サービスを使用中です。サイトを自動翻訳するには、<a><s>Translation Management 設定</s></a>で翻訳サービスとの接続を解除してください。"
+         ]
+      }
+   }
+}

@@ -110,7 +110,7 @@ class WPML_TF_Backend_Bulk_Actions {
 
 			if ( isset( $_GET['nonce'], $_GET['feedback_ids'] ) ) {
 				$is_valid = $this->is_valid_action( $_GET['bulk_action'] )
-				            && wp_verify_nonce( $_GET['nonce'], WPML_TF_Backend_Hooks::PAGE_HOOK );
+							&& wp_verify_nonce( $_GET['nonce'], WPML_TF_Backend_Hooks::PAGE_HOOK );
 			}
 		}
 

@@ -2,6 +2,7 @@
 
 /**
  * Class WPML_TF_Frontend_Hooks_Factory
+ *
  * @author OnTheGoSystems
  */
 class WPML_TF_Frontend_Hooks_Factory implements IWPML_Frontend_Action_Loader, IWPML_Deferred_Action_Loader {

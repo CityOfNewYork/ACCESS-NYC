@@ -1,19 +1,14 @@
-jQuery(document).ready(function(){
-	var filterSearch     = jQuery("#icl_st_filter_search");
+jQuery(function () {
+    var filterSearch = jQuery("#icl_st_filter_search");
 
     jQuery('.wpml-colorpicker').wpColorPicker();
 
-    jQuery('a[href="#icl-st-toggle-translations"]').click(icl_st_toggler);
-    var inlineTextArea = jQuery('.icl-st-inline textarea');
-    inlineTextArea.focus(icl_st_monitor_ta);
-    inlineTextArea.keyup(icl_st_monitor_ta_check_modifications);
-    jQuery(".icl_st_form").submit(icl_st_submit_translation);
     jQuery('select[name="icl_st_filter_status"]').change(icl_st_filter_status);
     jQuery('select[name="icl_st_filter_context"]').change(icl_st_filter_context);
     jQuery('select[name="icl-st-filter-translation-priority"]').change(icl_st_filter_translation_priority);
     jQuery('#icl_st_filter_search_sb').click(icl_st_filter_search);
 
-	if (filterSearch.length) {
+    if (filterSearch.length) {
 		updateControls();
 
 		filterSearch.keyup(function (event) {
@@ -28,19 +23,21 @@ jQuery(document).ready(function(){
     jQuery('#icl_st_delete_selected').click(icl_st_delete_selected);
 
     jQuery('#icl_st_po_translations').click(function(){
-        if(jQuery(this).attr('checked')){
-            jQuery('#icl_st_po_language').removeAttr('disabled').fadeIn();
+        var po_language = jQuery('#icl_st_po_language');
+        po_language.prop('disabled', !jQuery(this).prop('checked'));
+        if(jQuery(this).prop('checked')){
+            po_language.fadeIn();
         }else{
-            jQuery('#icl_st_po_language').attr('disabled','disabled').fadeOut();
+            po_language.fadeOut();
         }
     });
     var iclTMLanguages = jQuery('#icl_tm_languages');
     iclTMLanguages.find(':checkbox').click(icl_st_update_languages);
     jQuery('.icl_st_row_cb, .check-column :checkbox').click(icl_st_update_checked_elements);
     iclTMLanguages.find('select').change(icl_st_change_service);
-    jQuery('.icl_htmlpreview_link').click(icl_st_show_html_preview);
     jQuery('#icl_st_po_form').submit(icl_validate_po_upload);
     jQuery('#icl_st_send_strings').submit(icl_st_send_strings);
+    jQuery('#icl_st_translate_to_all').click(icl_st_select_all);
 
     jQuery('.handlediv').click(function () {
         jQuery(this).parent().toggleClass('closed');
@@ -51,10 +48,6 @@ jQuery(document).ready(function(){
     var iclSTOptionWriteForm = jQuery('#icl_st_option_write_form');
     iclSTOptionWriteForm.submit(icl_st_admin_options_form_submit);
     iclSTOptionWriteForm.submit(iclSaveForm);
-
-    jQuery('.icl_stow_toggler').click(icl_st_admin_strings_toggle_strings);
-    jQuery('#icl_st_ow_export').click(icl_st_ow_export_selected);
-    jQuery('#icl_st_ow_export_close').click(icl_st_ow_export_close);
 
     // Picker align
     jQuery(".pick-show").click(function () {
@@ -67,7 +60,7 @@ jQuery(document).ready(function(){
 		jQuery('input[name="wpml_st_theme_localization_type_wpml_td"]').prop('checked', checked);
 	});
 
-    jQuery(document).delegate('.wpml_st_pop_download', 'click', icl_st_pop_download);
+    jQuery(document).on('click', '.wpml_st_pop_download', icl_st_pop_download);
 
     var ICLSTMoreOptions = jQuery('#icl_st_more_options');
     ICLSTMoreOptions.submit(iclSaveForm);
@@ -92,82 +85,28 @@ jQuery(document).ready(function(){
 });
 
 
-function icl_st_toggler(){
-    jQuery(".icl-st-inline").slideUp();
-    var inl = jQuery(this).parent().next().next();
-    if(inl.css('display') == 'none'){
-		inl.trigger('wpml-open-string-translations', inl);
-        inl.slideDown();
-    }else{
-        inl.slideUp();
-    }
-    icl_st_show_html_preview_close();
-}
-
-var icl_st_ta_cache = [];
-var icl_st_cb_cache = [];
-function icl_st_monitor_ta(){
-    if(jQuery(this).attr('id') !== undefined){
-        var id = jQuery(this).attr('id').replace(/^icl_st_ta_/,'');
-        if(icl_st_ta_cache[id] == undefined){
-            icl_st_ta_cache[id] = jQuery(this).val();
-            icl_st_cb_cache[id] = jQuery('#icl_st_cb_'+id).attr('checked');
-        }
-    }
-}
-
-function icl_st_monitor_ta_check_modifications(){
-    if(jQuery(this).attr('id') !== undefined){
-        var id = jQuery(this).attr('id').replace(/^icl_st_ta_/,'');
-        if(icl_st_ta_cache[id] != jQuery(this).val()){
-            jQuery('#icl_st_cb_'+id).removeAttr('checked');
-        }else{
-            if(icl_st_cb_cache[id]){
-                jQuery('#icl_st_cb_'+id).attr('checked','checked');
-            }
-        }
-    }
-    icl_st_show_html_preview_close();
-}
-
-function icl_st_submit_translation(){
-    var thisf = jQuery(this);
-    var postvars = thisf.serialize();
-    postvars += '&icl_ajx_action=icl_st_save_translation';
-    thisf.contents().find('textarea, input').attr('disabled','disabled');
-    thisf.contents().find('.icl_ajx_loader').fadeIn();
-    var string_id = thisf.find('input[name="icl_st_string_id"]').val();
-    jQuery.post(icl_ajx_url, postvars, function(msg){
-        thisf.contents().find('textarea, input').removeAttr('disabled');
-        thisf.contents().find('.icl_ajx_loader').fadeOut();
-        var spl = msg.split('|');
-        jQuery('#icl_st_string_status_'+string_id).html(spl[1]);
-    });
-    return false;
-}
-
 function icl_st_filter_status(){
-    var qs = jQuery(this).val() != '' ? '&status=' + jQuery(this).val() : '';
-    location.href=location.href.replace(/#(.*)$/,'').replace(/&paged=([0-9]+)/,'').replace(/&updated=true/,'').replace(/&status=([0-9a-z-]+)/g,'') + qs;
+    var qs = jQuery(this).val() != '' ? '&status=' + WPML_core.sanitize(jQuery(this).val()) : '';
+    location.href = WPML_core.sanitize(location.href).replace(/#(.*)$/,'').replace(/&paged=([0-9]+)/,'').replace(/&updated=true/,'').replace(/&status=([0-9a-z-]+)/g,'') + qs;
 }
 
 function icl_st_filter_context(){
     var qs = jQuery(this).val() != '' ? '&context=' + encodeURIComponent(jQuery(this).val()) : '';
-    location.href=location.href.replace(/#(.*)$/,'').replace(/&paged=([0-9]+)/,'').replace(/&updated=true/,'').replace(/&context=(.*)/g,'') + qs;
+    location.href= WPML_core.sanitize(location.href).replace(/#(.*)$/,'').replace(/&paged=([0-9]+)/,'').replace(/&updated=true/,'').replace(/&context=(.*)/g,'') + qs;
 }
 
 function icl_st_filter_translation_priority(){
     var qs = jQuery(this).val() != '' ? '&translation-priority=' + encodeURIComponent(jQuery(this).val()) : '';
-    location.href=location.href.replace(/#(.*)$/,'').replace(/&paged=([0-9]+)/,'').replace(/&updated=true/,'').replace(/&translation-priority=(.*)/g,'') + qs;
+    location.href= WPML_core.sanitize(location.href).replace(/#(.*)$/,'').replace(/&paged=([0-9]+)/,'').replace(/&updated=true/,'').replace(/&translation-priority=(.*)/g,'') + qs;
 }
 
 function icl_st_filter_search(){
 	var context            = jQuery('select[name="icl_st_filter_context"]').val(),
 		search_text        = jQuery('#icl_st_filter_search').val(),
-		exact_match        = jQuery('#icl_st_filter_search_em').attr('checked'),
-		search_translation = jQuery('#search_translation').attr('checked'),
+		exact_match        = jQuery('#icl_st_filter_search_em').prop('checked'),
+		search_translation = jQuery('#search_translation').prop('checked'),
 		query_string       = search_text !== '' ? '&search=' + encodeURIComponent(search_text) : '',
-		url                = location.href;
+		url                = WPML_core.sanitize(location.href);
 
 	query_string = query_string.replace(/&em=1/g,'');
 
@@ -191,18 +130,18 @@ function icl_st_filter_search(){
 		url = url.replace(/&context=(.*)/g,'');
 	}
 
-	location.href = url;
+	location.href = WPML_core.sanitize(url);
 }
 
 function icl_st_getUrlParameter(name) {
 	name        = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
 	var regex   = new RegExp('[\\?&]' + name + '=([^&#]*)');
-	var results = regex.exec(location.search);
+	var results = regex.exec( WPML_core.sanitize(location.search) );
 	return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
 
 function icl_st_filter_search_remove(){
-    location.href=location.href.replace(/#(.*)$/,'').replace(/&search=(.*)/g,'').replace(/&em=1/g,'');
+    location.href = WPML_core.sanitize(location.href).replace(/#(.*)$/,'').replace(/&search=(.*)/g,'').replace(/&em=1/g,'');
 }
 
 function icl_st_delete_selected() {
@@ -220,7 +159,7 @@ function icl_st_delete_selected() {
         if (proceed) {
             delids = [];
             checkedRows.each(function () {
-                var item = jQuery(this).val();
+                var item = WPML_core.sanitize(jQuery(this).val());
                 delids.push(item);
                 jQuery(this).trigger('click');
             });
@@ -266,18 +205,30 @@ function icl_st_send_strings(){
 }
 
 function icl_st_update_languages() {
-    if (!jQuery('#icl_tm_languages').find('input:checked').length) {
-        jQuery('#icl_send_strings').attr('disabled', 'disabled');
+    if (!jQuery('#icl_tm_languages').find('input[type=checkbox]:checked:not(:disabled)').length) {
+        jQuery('#icl_send_strings').prop('disabled', true);
     } else if (jQuery('.icl_st_row_cb:checked, .check-column input:checked').length && jQuery('.js-lang-not-active:checked').length === 0) {
-        jQuery('#icl_send_strings').removeAttr('disabled');
+        jQuery('#icl_send_strings').prop('disabled', false);
     }
     var self = jQuery(this);
     var lang = self.attr('name').replace(/translate_to\[(.+)]/, '$1');
-    if (self.attr('checked') == true && jQuery('#icl_st_service_' + lang).val() === 'icanlocalize') {
+    if (self.prop('checked') && jQuery('#icl_st_service_' + lang).val() === 'icanlocalize') {
         icl_st_show_estimated_cost(lang);
     } else {
         icl_st_hide_estimated_cost(lang);
     }
+	icl_st_update_select_all_status();
+}
+
+function icl_st_select_all() {
+	var self = jQuery(this);
+	jQuery('#icl_tm_languages').find('input[type=checkbox]').prop('checked', self.prop('checked'));
+	icl_st_update_languages();
+}
+
+function icl_st_update_select_all_status() {
+	const uncheckedCount = jQuery('#icl_tm_languages input[type=checkbox]:not(:checked)').length;
+	jQuery('#icl_st_translate_to_all').prop('checked', uncheckedCount === 0);
 }
 
 function show_package_incomplete_notice(hide) {
@@ -324,11 +275,11 @@ function icl_st_update_checked_elements() {
         jQuery('.icl_st_row_cb').prop('checked', jQuery(this).prop('checked'));
     }
 
-    jQuery('#icl_st_change_lang_selected').prop('disabled', get_checked_cbs().length === 0);
-    jQuery('#icl-st-change-translation-priority-selected').prop('disabled', get_checked_cbs().length === 0);
-
-    jQuery('.js-change-translation-priority .select2-choice, .js-simple-lang-selector-flags .select2-choice').attr('disabled', get_checked_cbs().length === 0);
-
+    var selectedStringsCount = get_checked_cbs().length;
+    jQuery('#icl_st_change_lang_selected').wpml_select2().prop('disabled', selectedStringsCount === 0);
+    jQuery('#icl-st-change-translation-priority-selected').wpml_select2().prop('disabled', selectedStringsCount === 0);
+    jQuery('.js-change-translation-priority .wpml_select2-choice, .js-simple-lang-selector-flags .wpml_select2-choice').attr('disabled', selectedStringsCount === 0)
+                                                                                                              .addClass('button button-secondary');
 
     if (!jQuery('.icl_st_row_cb:checked').length) {
         jQuery('#icl_st_delete_selected, #icl_send_strings').prop('disabled', true);
@@ -353,23 +304,7 @@ function icl_st_update_checked_elements() {
 }
 
 function set_bulk_selects(bulk_cb_checked) {
-    jQuery('.check-column input').attr('checked', (bulk_cb_checked ? 'checked' : false ));
-}
-
-function icl_st_show_html_preview(){
-    var parent = jQuery(this).parent();
-    var textarea = parent.parent().prev().find('textarea[name="icl_st_translation"]');
-    if(parent.find('.icl_html_preview').css('display')=='none'){
-        parent.find('.icl_html_preview').html(textarea.val().replace(/(\n|\r)/g,'<br>')).slideDown();
-    }else{
-        parent.find('.icl_html_preview').slideUp();
-    }
-
-    return false;
-}
-
-function icl_st_show_html_preview_close(){
-    jQuery('.icl_html_preview').slideUp();
+    jQuery('.check-column input').prop('checked', bulk_cb_checked);
 }
 
 function icl_validate_po_upload(){
@@ -398,7 +333,7 @@ function icl_show_in_source(tabfile, line){
     if(icl_show_in_source_scroll_once){
         if(line > 40){
             line = line - 10;
-            location.href=location.protocol+'//'+location.host+location.pathname+location.search+'#icl_source_line_'+tabfile+'_'+line;
+            location.href= WPML_core.sanitize(location.protocol+'//'+location.host+location.pathname+location.search+'#icl_source_line_'+tabfile+'_'+line);
         }
     }else{
         jQuery('.icl_string_track_source').fadeOut(
@@ -407,7 +342,7 @@ function icl_show_in_source(tabfile, line){
                     function(){
                         if(line > 40){
                             line = line - 10;
-                            location.href=location.protocol+'//'+location.host+location.pathname+location.search+'#icl_source_line_'+tabfile+'_'+line;
+                            location.href= WPML_core.sanitize(location.protocol+'//'+location.host+location.pathname+location.search+'#icl_source_line_'+tabfile+'_'+line);
                         }
                     }
                 );
@@ -433,48 +368,12 @@ function icl_st_admin_options_form_submit(){
     });
 }
 
-function icl_st_admin_strings_toggle_strings(){
-    var thisa = jQuery(this);
-    jQuery(this).parent().next().slideToggle(function(){
-        if(thisa.html().charAt(0)=='+'){
-            thisa.html(thisa.html().replace(/^\+/,'-'));
-        }else{
-            thisa.html(thisa.html().replace(/^-/,'+'));
-        }
-    });
-    return false;
-}
-
-function icl_st_ow_export_selected(){
-    jQuery('#icl_st_ow_export').attr('disabled','disabled');
-    jQuery('#icl_st_option_writes').find('.ajax_loader').fadeIn();
-    jQuery.ajax({
-        type: "POST",
-        dataType: 'json',
-        url: icl_ajx_url,
-        data: "icl_ajx_action=icl_st_ow_export&"+jQuery('#icl_st_option_write_form').serialize() + '&_icl_nonce=' + jQuery('#_icl_nonce_owe').val(),
-        success: function(res){
-            jQuery('#icl_st_ow_export_out').html(res.message).slideDown();
-            jQuery('#icl_st_option_writes').find('.ajax_loader').fadeOut(
-                function(){
-                    jQuery('#icl_st_ow_export_close').fadeIn();
-                }
-            );
-
-        }
-    });
-}
-
-function icl_st_ow_export_close(){
-    jQuery('#icl_st_ow_export_out').slideUp(function(){jQuery('#icl_st_ow_export_close').fadeOut()});
-    jQuery('#icl_st_ow_export').removeAttr('disabled');
-}
 
 function icl_st_pop_download(){
     var file = jQuery(this).data('file');
     var domain = jQuery(this).data('domain');
 
-    location.href = ajaxurl + "?action=icl_st_pop_download&file=" + file + "&domain=" + domain;
+    location.href = WPML_core.sanitize( ajaxurl + "?action=icl_st_pop_download&file=" + file + "&domain=" + domain );
 
     return false;
 }
@@ -482,7 +381,7 @@ function icl_st_pop_download(){
 function icl_st_selected_word_count() {
     var word_count = 0;
     jQuery('.icl_st_row_cb:checked').each(function () {
-        var string_id = jQuery(this).val();
+        var string_id = WPML_core.sanitize(jQuery(this).val());
         word_count += parseInt(jQuery('#icl_st_wc_' + string_id).val())
     });
     return word_count;
@@ -502,7 +401,7 @@ function icl_st_change_service(){
 
     var lang = jQuery(this).attr('name').replace(/service\[(.+)]/ , '$1');
     if(jQuery(this).val()=='icanlocalize'){
-        if(jQuery('#icl_st_translate_to_'+lang).attr('checked')){
+        if(jQuery('#icl_st_translate_to_'+lang).prop('checked')){
             icl_st_show_estimated_cost(lang);
         }
     }else{

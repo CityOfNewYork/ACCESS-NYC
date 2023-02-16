@@ -24,13 +24,13 @@ if (!class_exists('RapidAddon')) {
 		public $logger = null;
 		public $when_to_run = false;
 		public $image_options = array(
-			'download_images' => 'yes', 
-			'download_featured_delim' => ',', 
+			'download_images' => 'yes',
+			'download_featured_delim' => ',',
 			'download_featured_image' => '',
 			'gallery_featured_image' => '',
 			'gallery_featured_delim' => ',',
 			'featured_image' => '',
-			'featured_delim' => ',', 
+			'featured_delim' => ',',
 			'search_existing_images' => 1,
 			'is_featured' => 0,
 			'create_draft' => 'no',

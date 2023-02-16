@@ -12,16 +12,16 @@ class WPML_Theme_Plugin_Localization_Options_UI implements IWPML_Theme_Plugin_Lo
 	/** @return array */
 	public function get_model() {
 		$model = array(
-			'nonce_field' => WPML_Theme_Plugin_Localization_Options_Ajax::NONCE_LOCALIZATION_OPTIONS,
-			'nonce_value' => wp_create_nonce( WPML_Theme_Plugin_Localization_Options_Ajax::NONCE_LOCALIZATION_OPTIONS ),
-			'section_label' => __( 'Localization options', 'sitepress' ),
-			'top_options'   => array(
+			'nonce_field'            => WPML_Theme_Plugin_Localization_Options_Ajax::NONCE_LOCALIZATION_OPTIONS,
+			'nonce_value'            => wp_create_nonce( WPML_Theme_Plugin_Localization_Options_Ajax::NONCE_LOCALIZATION_OPTIONS ),
+			'section_label'          => __( 'Localization options', 'sitepress' ),
+			'top_options'            => array(
 				array(
 					'template' => 'automatic-load-check.twig',
 					'model'    => array(
 						'theme_localization_load_textdomain' => array(
-							'value' => 1,
-							'label' => __( "Automatically load the theme's .mo file using 'load_textdomain'", 'sitepress' ),
+							'value'   => 1,
+							'label'   => __( "Automatically load the theme's .mo file using 'load_textdomain'", 'sitepress' ),
 							'checked' => checked( $this->sitepress->get_setting( 'theme_localization_load_textdomain' ), true, false ),
 						),
 						'gettext_theme_domain_name' => array(
@@ -31,8 +31,8 @@ class WPML_Theme_Plugin_Localization_Options_UI implements IWPML_Theme_Plugin_Lo
 					),
 				),
 			),
-			'button_label' => __( 'Save', 'sitepress' ),
-			'scanning_progress_msg' => __( "Scanning now, please don't close this page.", 'sitepress' ),
+			'button_label'           => __( 'Save', 'sitepress' ),
+			'scanning_progress_msg'  => __( "Scanning now, please don't close this page.", 'sitepress' ),
 			'scanning_results_title' => __( 'Scanning Results', 'sitepress' ),
 		);
 

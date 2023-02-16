@@ -32,7 +32,7 @@ class Domains {
 	/**
 	 * Domains constructor.
 	 *
-	 * @param PackageDomains $package_domains
+	 * @param PackageDomains                       $package_domains
 	 * @param WPML_ST_Translations_File_Dictionary $file_dictionary
 	 */
 	public function __construct(
@@ -51,7 +51,7 @@ class Domains {
 	public function getMODomains() {
 		if ( ! self::$mo_domains instanceof Collection ) {
 			$excluded_domains = self::getReservedDomains()
-						             ->merge( $this->getJEDDomains() );
+									 ->merge( $this->getJEDDomains() );
 
 			$sql = "
 				SELECT DISTINCT context {$this->getCollateForContextColumn()}
@@ -107,9 +107,9 @@ class Domains {
 				 * so they are loaded on-demand.
 				 */
 				return 0 === strpos( $domain, WPML_Admin_Texts::DOMAIN_NAME_PREFIX )
-				       || $this->package_domains->isPackage( $domain )
-				       || Shortcode::STRING_DOMAIN === $domain
-				       || in_array( $domain, $native_mo_domains, true );
+					   || $this->package_domains->isPackage( $domain )
+					   || Shortcode::STRING_DOMAIN === $domain
+					   || in_array( $domain, $native_mo_domains, true );
 			}
 		)->values();
 	}
@@ -118,7 +118,7 @@ class Domains {
 	 * @return Collection
 	 */
 	public function getJEDDomains() {
-		if ( ! self::$jed_domains instanceof Collection) {
+		if ( ! self::$jed_domains instanceof Collection ) {
 			self::$jed_domains = wpml_collect( $this->file_dictionary->get_domains( 'json' ) );
 		}
 
@@ -126,7 +126,7 @@ class Domains {
 	}
 
 	public static function resetCache() {
-		self::$mo_domains = null;
+		self::$mo_domains  = null;
 		self::$jed_domains = null;
 	}
 
@@ -137,9 +137,11 @@ class Domains {
 	 * @return Collection
 	 */
 	public static function getReservedDomains() {
-		return wpml_collect( [
-			WPML_ST_Blog_Name_And_Description_Hooks::STRING_DOMAIN,
-		] );
+		return wpml_collect(
+			[
+				WPML_ST_Blog_Name_And_Description_Hooks::STRING_DOMAIN,
+			]
+		);
 	}
 
 	/**

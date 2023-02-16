@@ -63,11 +63,11 @@ class WPML_TF_Backend_Options_View {
 	 */
 	public static function get_strings() {
 		return array(
-			'section_title' => __( 'Translation Feedback', 'sitepress' ),
-			'button_mode_section_title' => __( 'Translation Feedback button on front-end:', 'sitepress' ),
-			'icon_style_section_title' => __( 'Icon style:', 'sitepress' ),
+			'section_title'              => __( 'Translation Feedback', 'sitepress' ),
+			'button_mode_section_title'  => __( 'Translation Feedback button on front-end:', 'sitepress' ),
+			'icon_style_section_title'   => __( 'Icon style:', 'sitepress' ),
 			'languages_to_section_title' => __( 'Show Translation Feedback module for these languages:', 'sitepress' ),
-			'expiration_section_title' => __( 'Expiration date for Translation Feedback module:', 'sitepress' ),
+			'expiration_section_title'   => __( 'Expiration date for Translation Feedback module:', 'sitepress' ),
 		);
 	}
 
@@ -77,7 +77,7 @@ class WPML_TF_Backend_Options_View {
 	private function get_module_toggle() {
 		return array(
 			'value'    => 1,
-			'label'    =>  __( 'Enable Translation Feedback module', 'sitepress' ),
+			'label'    => __( 'Enable Translation Feedback module', 'sitepress' ),
 			'selected' => $this->settings->is_enabled(),
 		);
 	}
@@ -86,7 +86,7 @@ class WPML_TF_Backend_Options_View {
 	 * @return array
 	 */
 	private function get_button_modes() {
-		$modes =  array(
+		$modes = array(
 			WPML_TF_Settings::BUTTON_MODE_LEFT     => array(
 				'value'    => WPML_TF_Settings::BUTTON_MODE_LEFT,
 				'label'    => __( 'Show on the left side of the screen', 'sitepress' ),
@@ -99,8 +99,8 @@ class WPML_TF_Backend_Options_View {
 			),
 			WPML_TF_Settings::BUTTON_MODE_CUSTOM   => array(
 				'value'    => WPML_TF_Settings::BUTTON_MODE_CUSTOM,
-				'label'    => __( 'I will add it manually (%1sinstructions%2s)', 'sitepress' ),
-				'link'     => 'https://wpml.org/wpml-hook/wpml_tf_feedback_open_link/',
+				'label'    => __( 'I will add it manually (%1$sinstructions%2$s)', 'sitepress' ),
+				'link'     => 'https://wpml.org/wpml-hook/wpml_tf_feedback_open_link/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore',
 				'selected' => false,
 			),
 			WPML_TF_Settings::BUTTON_MODE_DISABLED => array(
@@ -174,10 +174,10 @@ class WPML_TF_Backend_Options_View {
 
 		foreach ( $active_languages as $code => $language ) {
 			$languages_to[ $code ] = array(
-				'value'     => $code,
-				'label'     => $language['display_name'],
-				'flag_url'  => $this->sitepress->get_flag_url( $code ),
-				'selected'  => false,
+				'value'    => $code,
+				'label'    => $language['display_name'],
+				'flag_url' => $this->sitepress->get_flag_url( $code ),
+				'selected' => false,
 			);
 
 			if ( in_array( $code, $allowed_languages ) ) {
@@ -194,13 +194,13 @@ class WPML_TF_Backend_Options_View {
 	private function get_display_modes() {
 		$modes = array(
 			WPML_TF_Settings::DISPLAY_CUSTOM => array(
-				'value'   => WPML_TF_Settings::DISPLAY_CUSTOM,
-				'label'   => esc_html__( 'Ask for feedback about translated content that was %1s in the last %2s %3s', 'sitepress' ),
+				'value'    => WPML_TF_Settings::DISPLAY_CUSTOM,
+				'label'    => esc_html__( 'Ask for feedback about translated content that was %1$s in the last %2$s %3$s', 'sitepress' ),
 				'selected' => false,
 			),
 			WPML_TF_Settings::DISPLAY_ALWAYS => array(
-				'value'   => WPML_TF_Settings::DISPLAY_ALWAYS,
-				'label'   => __( 'Always ask for feedback (no time limit for feedback)', 'sitepress' ),
+				'value'    => WPML_TF_Settings::DISPLAY_ALWAYS,
+				'label'    => __( 'Always ask for feedback (no time limit for feedback)', 'sitepress' ),
 				'selected' => false,
 			),
 		);
@@ -222,12 +222,12 @@ class WPML_TF_Backend_Options_View {
 				'label'    => __( 'published or updated', 'sitepress' ),
 				'selected' => false,
 			),
-			WPML_TF_Settings::EXPIRATION_ON_PUBLISH_ONLY      => array(
+			WPML_TF_Settings::EXPIRATION_ON_PUBLISH_ONLY => array(
 				'value'    => WPML_TF_Settings::EXPIRATION_ON_PUBLISH_ONLY,
 				'label'    => __( 'published', 'sitepress' ),
 				'selected' => false,
 			),
-			WPML_TF_Settings::EXPIRATION_ON_UPDATE_ONLY       => array(
+			WPML_TF_Settings::EXPIRATION_ON_UPDATE_ONLY  => array(
 				'value'    => WPML_TF_Settings::EXPIRATION_ON_UPDATE_ONLY,
 				'label'    => __( 'updated', 'sitepress' ),
 				'selected' => false,
@@ -249,7 +249,7 @@ class WPML_TF_Backend_Options_View {
 
 		for ( $i = 1; $i < self::MAX_EXPIRATION_QUANTITY + 1; $i++ ) {
 			$quantities[ $i ] = array(
-				'value' => $i,
+				'value'    => $i,
 				'selected' => false,
 			);
 		}
@@ -266,12 +266,12 @@ class WPML_TF_Backend_Options_View {
 	 */
 	private function get_expiration_units() {
 		$units = array(
-			WPML_TF_Settings::DELAY_DAY => array(
+			WPML_TF_Settings::DELAY_DAY   => array(
 				'value'    => WPML_TF_Settings::DELAY_DAY,
 				'label'    => __( 'day(s)', 'sitepress' ),
 				'selected' => false,
 			),
-			WPML_TF_Settings::DELAY_WEEK => array(
+			WPML_TF_Settings::DELAY_WEEK  => array(
 				'value'    => WPML_TF_Settings::DELAY_WEEK,
 				'label'    => __( 'week(s)', 'sitepress' ),
 				'selected' => false,

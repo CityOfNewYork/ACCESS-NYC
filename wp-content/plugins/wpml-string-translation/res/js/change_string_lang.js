@@ -7,7 +7,7 @@ WPML_String_Translation.ChangeLanguage = function () {
 	var privateData = {};
 
     var init = function () {
-        jQuery(document).ready(function () {
+        jQuery(function () {
 
             privateData.language_select = jQuery('#icl_st_change_lang_selected');
             privateData.language_select.on('change', applyChanges);

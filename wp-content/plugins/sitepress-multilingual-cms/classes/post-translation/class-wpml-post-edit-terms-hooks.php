@@ -56,7 +56,7 @@ class WPML_Post_Edit_Terms_Hooks implements IWPML_Action {
 				$tags      = explode( $delimiter, trim( $tags, " \n\t\r\0\x0B," ) );
 			}
 
-			return $tags;
+			return array_map( 'trim', $tags );
 		}
 
 		return null;

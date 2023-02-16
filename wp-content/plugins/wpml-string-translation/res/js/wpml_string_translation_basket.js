@@ -10,10 +10,10 @@ WPML_String_Translation.TranslationBasket = function () {
 	var private_data = {};
 
 	var init = function () {
-		jQuery(document).ready(function() {
-			private_data.button = jQuery('#icl_send_strings');
-		});
-	};
+        jQuery(function () {
+            private_data.button = jQuery('#icl_send_strings');
+        });
+    };
 	
 	self.maybe_enable_button = function () {
 		if ( self.is_not_active_lang_selected() ) {
@@ -81,11 +81,9 @@ WPML_String_Translation.TranslationBasket = function () {
 			var lang = checked.data('language');
 			
 			jQuery('#icl_tm_languages').find('input').each(function() {
-				if (lang === jQuery(this).data('language')) {
-					jQuery(this).parent().hide();
-				} else {
-					jQuery(this).parent().show();
-				}
+				var show = lang === jQuery(this).data('language');
+				jQuery(this).closest('tr').toggle(!show);
+				jQuery(this).attr('disabled', show);
 			});
 			
 			jQuery('input[name="icl-tr-from"]').val(lang);

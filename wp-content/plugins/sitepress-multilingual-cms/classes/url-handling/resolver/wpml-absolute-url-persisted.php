@@ -14,9 +14,8 @@ class WPML_Absolute_Url_Persisted {
 	/**
 	 * @return WPML_Absolute_Url_Persisted
 	 */
-	public static function get_instance()
-	{
-		if (null === self::$instance) {
+	public static function get_instance() {
+		if ( null === self::$instance ) {
 			self::$instance = new self();
 		}
 
@@ -27,7 +26,12 @@ class WPML_Absolute_Url_Persisted {
 
 	private function __clone() {}
 
-	private function __wakeup() {}
+	/**
+	 * @throws Exception
+	 */
+	public function __wakeup() {
+		throw new Exception( 'Cannot unserialize singleton' );
+	}
 
 	/**
 	 * Returns urls array.
@@ -78,29 +82,8 @@ class WPML_Absolute_Url_Persisted {
 		return null;
 	}
 
-	/** @param string $url */
-	public function delete( $url ) {
-		if ( array_key_exists( $url, $this->get_urls() ) ) {
-			unset( $this->urls[ $url ] );
-		}
-
-		foreach ( $this->urls as $original_url => $urls_per_lang ) {
-			$lang = array_search( $url, $urls_per_lang, true );
-
-			if ( $lang ) {
-				unset( $this->urls[ $original_url ][ $lang ] );
-
-				if ( empty( $this->urls[ $original_url ] ) ) {
-					unset( $this->urls[ $original_url ] );
-				}
-			}
-		}
-
-		$this->persist_in_shutdown();
-	}
-
 	public function reset() {
-		$this->urls = array();
+		$this->urls = [];
 		$this->persist();
 		$this->urls = null;
 	}

@@ -106,7 +106,7 @@ if( ! class_exists('PMAI_Updater') ) {
                 if( false === $version_info ) {
 
                     $version_info = $this->api_request( 'check_update', array( 'slug' => $this->slug ) );
-                    set_transient( $cache_key, $version_info, 3600 );
+                    set_transient( $cache_key, $version_info, 3600 * 24 );
 
                 }
 
@@ -168,7 +168,7 @@ if( ! class_exists('PMAI_Updater') ) {
 
                     $version_info = $this->api_request( 'plugin_latest_version', array( 'slug' => $this->slug ) );
 
-                    set_transient( $cache_key, $version_info, 3600 );
+                    set_transient( $cache_key, $version_info, 3600 * 24 );
                 }
 
 
@@ -268,7 +268,7 @@ if( ! class_exists('PMAI_Updater') ) {
 
                 if ( false !== $api_response ) {
                     $_data = $api_response;
-                    set_transient( $cache_key, $_data, 3600 );
+                    set_transient( $cache_key, $_data, 3600 * 24 );
                 }                                
 
             }

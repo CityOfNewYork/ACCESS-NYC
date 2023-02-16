@@ -1,0 +1,62 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: vendor/wpml/tm/src/js/translationServices/components/AuthorizeModal.js:22
+msgid "Connect this site to your %s account"
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translationServices/components/AuthorizeModal.js:45
+msgid "Error"
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translationServices/components/AuthorizeModal.js:57
+msgid "« Use a different Translation Service"
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translationServices/components/AuthorizeModal.js:62
+msgid "Authenticate"
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translationServices/components/Connect.js:22
+msgid ""
+"Visit <link_to_service /> to request an API Token. This token allows WPML "
+"to connect to <service_name /> to send and receive jobs."
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translationServices/components/SearchForm.js:13
+msgid "Search"
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translationServices/components/Sections.js:16
+msgid "Settings"
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translationServices/components/Sections.js:42
+msgid ""
+"It’s not currently possible to connect a translation service when WPML is "
+"set to translate your site’s content automatically. To use a translation "
+"service, please change your translation mode on the <LinkToSettingsPage /> "
+"page."
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translationServices/components/ServicesList.js:41
+msgid "Documentation"
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translationServices/components/ServicesList.js:57
+msgid "Activate"
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translationServices/components/ServicesList.js:69
+msgid "Name"
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translationServices/components/ServicesList.js:74
+msgid "Description"
+msgstr ""
+
+#: vendor/wpml/tm/src/js/translationServices/components/ServicesList.js:81
+msgid "Ranking"
+msgstr ""

@@ -45,13 +45,13 @@ function wpml_st_hide_strings_scan_notices(element, callback) {
 												}
 											}
 										},
-										open:    function (event, ui) {
-											jQuery('#jquery-ui-style-css').attr('disabled', 'true');
+										open:    function () {
+											jQuery('#jquery-ui-style-css').prop('disabled', true);
 											jQuery('.ui-widget-overlay.ui-front').css('z-index', '10001');
 											jQuery('.ui-dialog').css('z-index', '10002');
 										},
-										close:   function (event, ui) {
-											jQuery('#jquery-ui-style-css').removeAttr('disabled');
+										close:   function () {
+											jQuery('#jquery-ui-style-css').prop('disabled', false);
 										}
 
 		});

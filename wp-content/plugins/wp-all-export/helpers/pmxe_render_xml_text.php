@@ -7,7 +7,7 @@ function pmxe_render_xml_text($text, $shorten = false, $is_render_collapsed = fa
 
 	if (preg_match('%\[more:(\d+)\]%', $text, $mtch)) {
 		$no = intval($mtch[1]);
-		echo '<div class="xml-more">[ &dArr; ' . sprintf(__('<strong>%s</strong> %s more', 'pmxi_plugin'), $no, _n('element', 'elements', $no, 'pmxi_plugin')) . ' &dArr; ]</div>';
+		echo '<div class="xml-more">[ &dArr; ' . sprintf(wp_kses_post(__('<strong>%s</strong> %s more', 'pmxi_plugin'), $no, _n('element', 'elements', $no, 'pmxi_plugin'))) . ' &dArr; ]</div>';
 		return;
 	}
 	$more = '';
@@ -21,5 +21,5 @@ function pmxe_render_xml_text($text, $shorten = false, $is_render_collapsed = fa
 	$text = str_replace('CDATABEGIN', '&lt;![CDATA[', $text);
 	$text = str_replace('CDATACLOSE', ']]&gt;', $text);
 	$is_short = strlen($text) <= 40;
-	echo '<div class="xml-content textonly' . ($is_short ? ' short' : '') . ($is_cdata ? ' cdata' : '') . ($is_render_collapsed ? ' collapsed' : '') . '">' . $text . $more . '</div>';
+	echo '<div class="xml-content textonly' . ($is_short ? ' short' : '') . ($is_cdata ? ' cdata' : '') . ($is_render_collapsed ? ' collapsed' : '') . '">' . esc_html($text) . $more . '</div>';
 }

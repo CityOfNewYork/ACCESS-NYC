@@ -26,7 +26,7 @@ class WPML_Page_Builder_Settings {
 
 	/**
 	 * @param string $key
-	 * @param mixed $default
+	 * @param mixed  $default
 	 *
 	 * @return mixed
 	 */

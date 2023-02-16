@@ -4,14 +4,14 @@
  * @author OnTheGo Systems
  */
 class WPML_Notice {
-	private $display_callbacks = array();
+	private $display_callbacks      = array();
 	private $id;
 	private $text;
 	private $collapsed_text;
-	private $group             = 'default';
+	private $group                  = 'default';
 	private $restricted_to_user_ids = array();
 
-	private $actions            = array();
+	private $actions = array();
 	/**
 	 * @see \WPML_Notice::set_css_class_types
 	 * @var array
@@ -85,7 +85,7 @@ class WPML_Notice {
 
 	/** @param int $user_id */
 	public function add_user_restriction( $user_id ) {
-		$user_id = (int) $user_id;
+		$user_id                                  = (int) $user_id;
 		$this->restricted_to_user_ids[ $user_id ] = $user_id;
 	}
 
@@ -172,6 +172,9 @@ class WPML_Notice {
 		return $this->display_callbacks;
 	}
 
+	/**
+	 * @return array<\WPML_Notice_Action>
+	 */
 	public function get_actions() {
 		return $this->actions;
 	}
@@ -242,8 +245,12 @@ class WPML_Notice {
 	 * @return string
 	 */
 	public function get_text() {
-		$notice = array( 'id' => $this->get_id(), 'group' => $this->get_group() );
+		$notice     = array(
+			'id'    => $this->get_id(),
+			'group' => $this->get_group(),
+		);
 		$this->text = apply_filters( 'wpml_notice_text', $this->text, $notice );
+
 		return $this->text;
 	}
 
@@ -267,15 +274,16 @@ class WPML_Notice {
 	 * - notice-info
 	 * You can use the above values with or without the "notice-" prefix:
 	 * the prefix will be added automatically in the HTML, if missing.
+	 *
 	 * @see https://codex.wordpress.org/Plugin_API/Action_Reference/admin_notices for more details
 	 *
 	 * @param string|array $types Accepts either a space separated values string, or an array of values.
+	 * @return WPML_Notice
 	 */
 	public function set_css_class_types( $types ) {
-		if ( ! is_array( $types ) ) {
-			$types = explode( ' ', $types );
-		}
-		$this->css_class_types = $types;
+		$this->css_class_types = is_array( $types ) ? $types : explode( ' ', $types );
+
+		return $this;
 	}
 
 	/**
@@ -296,7 +304,7 @@ class WPML_Notice {
 		);
 	}
 
-	public function get_hide_if_notice_exists( ) {
+	public function get_hide_if_notice_exists() {
 		return $this->hide_if_notice_exists;
 	}
 
@@ -345,18 +353,24 @@ class WPML_Notice {
 	}
 
 	/**
+	 * Set notice to only display once.
+	 *
 	 * @param bool $flash
+	 *
+	 * @return WPML_Notice
 	 * @since 4.1.0
 	 */
-	public function set_flash( $flash = true ){
+	public function set_flash( $flash = true ) {
 		$this->flash = (bool) $flash;
+
+		return $this;
 	}
 
 	/**
 	 * @return bool
 	 * @since 4.1.0
 	 */
-	public function is_flash(){
+	public function is_flash() {
 		return $this->flash;
 	}
 
@@ -372,5 +386,16 @@ class WPML_Notice {
 	 */
 	public function set_text_only( $text_only ) {
 		$this->text_only = $text_only;
+	}
+
+	/**
+	 * @param int|string $id
+	 * @param string     $text
+	 * @param string     $group
+	 *
+	 * @return WPML_Notice
+	 */
+	public static function make( $id, $text, $group = 'default' ) {
+		return new WPML_Notice( $id, $text, $group );
 	}
 }

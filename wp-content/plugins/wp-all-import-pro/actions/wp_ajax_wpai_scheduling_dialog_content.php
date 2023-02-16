@@ -258,6 +258,10 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
 
             margin: 0 4px 4px 0 !important;
         }
+
+        .unable-to-connect {
+            color: #f2b03d;
+        }
     </style>
 
     <script type="text/javascript">
@@ -374,7 +378,7 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
                         };
                     };
 
-                    $('#weekly li').click(function () {
+                    $('#weekly li').on('click', function () {
 
                         $('#weekly li').removeClass('error');
 
@@ -395,7 +399,7 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
 
                     });
 
-                    $('#monthly li').click(function () {
+                    $('#monthly li').on('click', function () {
 
                         $('#monthly li').removeClass('error');
                         $(this).parent().parent().find('.days-of-week li').removeClass('selected');
@@ -449,7 +453,7 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
 
                     $('#timezone').chosen({width: '284px'});
 
-                    $('.wpai-save-button').click(function (e) {
+                    $('.wpai-save-button').on('click', function (e) {
 
                         var initialValue = $(this).find('.save-text').html();
                         var schedulingEnable = $('input[name="scheduling_enable"]:checked').val();
@@ -547,7 +551,7 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
 
                     var saveSubscription = false;
 
-                    $('#add-subscription').click(function () {
+                    $('#add-subscription').on('click', function () {
 
                         $('#add-subscription-field').show();
                         $('#add-subscription-field').animate({width: '400px'}, 225);
@@ -564,7 +568,7 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
                         return false;
                     });
 
-                    $('#subscribe-button').click(function () {
+                    $('#subscribe-button').on('click', function () {
 
                         if (saveSubscription) {
                             $('#subscribe-button .easing-spinner').show();
@@ -631,7 +635,7 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
                 });
             });
             // help scheduling template
-            $('.help_scheduling').click(function () {
+            $('.help_scheduling').on('click', function () {
 
                 $('.wp-all-import-scheduling-help').css('left', ($(document).width() / 2) - 255).show();
                 $('#wp-all-import-scheduling-help-inner').css('max-height', $(window).height() - 150).show();
@@ -641,7 +645,7 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
                 return false;
             });
 
-            $('.wp_all_export_scheduling_help').find('h3').unbind('click').click(function () {
+            $('.wp_all_export_scheduling_help').find('h3').unbind('click').on('click', function () {
                 var $action = $(this).find('span').html();
                 $('.wp_all_export_scheduling_help').find('h3').each(function () {
                     $(this).find('span').html("+");
@@ -657,7 +661,7 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
                 }
             });
 
-            $('.wpallimport-super-overlay').click(function () {
+            $('.wpallimport-super-overlay').on('click', function () {
                 $('.wp-all-import-scheduling-help, .wp-all-import-scheduling-help-inner').hide();
                 $('.wp-pointer').show();
                 $('.wpallimport-overlay').show();
@@ -683,12 +687,12 @@ function pmxi_wp_ajax_wpai_scheduling_dialog_content()
                 <label>
                     <input type="radio" name="scheduling_enable"
                            value="1" <?php if ($post['scheduling_enable'] == 1) { ?> checked="checked" <?php } ?>/>
-                    <h4 style="margin: 0; position: relative; display: inline-block;"><?php _e('Automatic Scheduling', PMXI_Plugin::LANGUAGE_DOMAIN); ?>
-                        <span class="connection-icon" style="position: absolute; top:-1px; left: 152px;">
+                    <h4 style="margin: 0; display: inline-flex; align-items: center;"><?php _e('Automatic Scheduling', PMXI_Plugin::LANGUAGE_DOMAIN); ?>
+                        <span class="connection-icon" style="margin-left: 8px; height: 16px;">
 															<?php include_once(__DIR__.'/../views/admin/import/options/scheduling/_connection_icon.php'); ?>
 														</span>
                         <?php if (!$scheduling->checkConnection()) { ?>
-                            <span class="wpai-license" style="margin-left: 25px; display: inline-block; font-weight: normal; <?php if(!$hasActiveLicense) { ?> display: none; <?php }?> color: #f2b03d;  ">Unable to connect - <a target="_blank" style="text-decoration: underline;" href="http://wpallimport.com/support">please contact support</a>.</span>
+                            <span class="wpai-license" style="margin-left: 8px; font-weight: normal; <?php if(!$hasActiveLicense) { ?> display: none; <?php }?>"><span class="unable-to-connect">Unable to connect, please contact support.</span></span>
                         <?php } ?>
                     </h4>
                 </label>

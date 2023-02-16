@@ -32,6 +32,7 @@
   }
   .section-content {
     padding: 15px;
+    overflow: hidden;
   }
 
   .dashboard-section-1 {
@@ -331,6 +332,14 @@
         font-weight: 400;
         margin-top: 5px;
         margin-bottom: 0;
+        float: left;
+      }
+      .countries-table-info-right {
+        color: #2271b1;
+        font-weight: 400;
+        margin-top: 5px;
+        margin-bottom: 0;
+        float: right;
       }
     }
     .info-box-2 {

@@ -1,0 +1,16 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "But...": [
+            "אבל..."
+         ],
+         "Wait to translate any content that contains media until we're finished configuring it. It will be just a moment.": [
+            "המתן עם התרגום של תוכן שזקוק למדיה עד שנסיים לסדר את התצורה שלו. זה ייקח רק רגע."
+         ]
+      }
+   }
+}

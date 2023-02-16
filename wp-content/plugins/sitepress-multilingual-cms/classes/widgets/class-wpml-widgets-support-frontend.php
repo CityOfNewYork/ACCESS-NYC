@@ -1,5 +1,8 @@
 <?php
 
+use WPML\FP\Lst;
+use WPML\FP\Obj;
+
 /**
  * This code is inspired by WPML Widgets (https://wordpress.org/plugins/wpml-widgets/),
  * created by Jeroen Sormani
@@ -45,8 +48,22 @@ class WPML_Widgets_Support_Frontend implements IWPML_Action {
 	 * @return bool
 	 */
 	private function it_must_display( $instance ) {
-		return ! array_key_exists( 'wpml_language', $instance )
-		       || $instance['wpml_language'] === $this->current_language
-		       || 'all' === $instance['wpml_language'];
+		if ( !isset ( $instance['wpml_language'] ) && isset ( $instance['content'] ) ) {
+			$blocks = parse_blocks( $instance['content'] );
+			$instance = $this->find_wpml_language_element_in_multidimensional_array( $blocks );
+		}
+
+		return Lst::includes( Obj::propOr( null, 'wpml_language', $instance ), [ null, $this->current_language, 'all' ] );
 	}
+
+	private function find_wpml_language_element_in_multidimensional_array( $arr ) {
+		$wpml_lang_arr = [];
+		array_walk_recursive( $arr, function( $value, $key ) use ( &$wpml_lang_arr ) {
+			if ( $key === 'wpml_language' ) {
+				$wpml_lang_arr[ $key ] = $value;
+			}
+		});
+		return $wpml_lang_arr;
+	}
+
 }

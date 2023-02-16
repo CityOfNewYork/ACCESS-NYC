@@ -1,17 +1,17 @@
 <?php
 
 class WPML_WP_Post {
-	/** @var WPDB $wpdb */
+	/** @var wpdb $wpdb */
 	public $wpdb;
 
 	/** @var int */
 	private $post_id;
 
 	/**
-	 * @param WPDB $wpdb
+	 * @param wpdb $wpdb
 	 * @param int $post_id
 	 */
-	public function __construct( WPDB $wpdb, $post_id ) {
+	public function __construct( wpdb $wpdb, $post_id ) {
 		$this->wpdb = $wpdb;
 		$this->post_id = $post_id;
 	}

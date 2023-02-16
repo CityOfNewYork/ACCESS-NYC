@@ -33,6 +33,7 @@
   <exclude-pattern>wp-content/mu-plugins/wp-config/</exclude-pattern>
   <exclude-pattern>wp-content/mu-plugins/wp-s3-all-import-compatibility/</exclude-pattern>
   <exclude-pattern>wp-content/mu-plugins/wp-send-me-nyc/</exclude-pattern>
+  <exclude-pattern>wp-content/mu-plugins/wp-login/</exclude-pattern>
   <exclude-pattern>wp-content/themes/access/node_modules/</exclude-pattern>
 
   <!-- This file is a lift from native WordPress so it won't conform to the standard set by this file -->

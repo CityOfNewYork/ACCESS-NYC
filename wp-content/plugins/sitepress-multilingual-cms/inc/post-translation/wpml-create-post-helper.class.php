@@ -62,13 +62,29 @@ class WPML_Create_Post_Helper {
 	 */
 	private function slash_and_preserve_tag_ids( array $postarr ) {
 		if ( array_key_exists( 'tags_input', $postarr ) ) {
-			$tagIds  = array_filter( $postarr['tags_input'], 'is_int' );
-			$postarr = wp_slash( $postarr );
-			$postarr['tags_input'] = $tagIds + $postarr['tags_input'];
+			$tagIds                = array_filter( $postarr['tags_input'], 'is_int' );
+			$postarr               = wp_slash( $postarr );
+			$postarr['tags_input'] = array_merge( $tagIds, $this->parse_tag( $postarr['tags_input'] ) );
 		} else {
 			$postarr = wp_slash( $postarr );
 		}
 
 		return $postarr;
+	}
+
+	private function parse_tag( $tags ) {
+		if ( empty( $tags ) ) {
+			$tags = array();
+		}
+
+		if ( ! is_array( $tags ) ) {
+			$comma = _x( ',', 'tag delimiter' );
+			if ( ',' !== $comma ) {
+				$tags = str_replace( $comma, ',', $tags );
+			}
+			$tags = explode( ',', trim( $tags, " \n\t\r\0\x0B," ) );
+		}
+
+		return $tags;
 	}
 }

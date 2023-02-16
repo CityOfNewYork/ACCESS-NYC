@@ -1,62 +1,63 @@
 <?php
 
 class WPML_Package_Admin_Lang_Switcher {
-	
+
 	private $package;
 	private $args;
-	
+
 	public function __construct( $package, $args ) {
 		$this->package = new WPML_Package( $package );
-		$this->args = $args;
+		$this->args    = $args;
 		add_action( 'wp_before_admin_bar_render', array( $this, 'admin_language_switcher' ) );
 		add_action( 'wp_after_admin_bar_render', array( $this, 'add_meta_box' ) );
 	}
-	
+
 	function admin_language_switcher() {
 		global $wp_admin_bar, $wpdb, $sitepress;
-		
-        $parent = 'WPML_PACKAGE_LANG';
+
+		$parent = 'WPML_PACKAGE_LANG';
 
 		$package_language = $this->package->get_package_language();
 		if ( ! $package_language ) {
 			$package_language = $sitepress->get_default_language();
 		}
-		
-		$wpml_pt_meta = new WPML_Package_Translation_Metabox( $this->package, $wpdb, $sitepress, $this->args );
+
+		$wpml_pt_meta          = new WPML_Package_Translation_Metabox( $this->package, $wpdb, $sitepress, $this->args );
 		$package_language_name = $wpml_pt_meta->get_package_language_name();
-		$wp_admin_bar->add_menu( array(
-									  'parent' => false, 'id' => $parent,
-									  'title'  => '<img width="18" height="12" src="' . $sitepress->get_flag_url( $package_language ) . '"> ' . $package_language_name,
-									)
-								);
+		$wp_admin_bar->add_menu(
+			array(
+				'parent' => false,
+				'id'     => $parent,
+				'title'  => '<img width="18" height="12" src="' . $sitepress->get_flag_url( $package_language ) . '"> ' . $package_language_name,
+			)
+		);
 	}
-	
+
 	function add_meta_box() {
-		
+
 		global $wpdb, $sitepress;
 
 		$metabox = '<div id="wpml-package-admin-bar-popup" class="wpml-package-popup">';
-		
+
 		$wpml_pt_meta = new WPML_Package_Translation_Metabox( $this->package, $wpdb, $sitepress, $this->args );
-		$metabox .= $wpml_pt_meta->get_metabox();
-		
+		$metabox     .= $wpml_pt_meta->get_metabox();
+
 		$metabox .= '</div>';
-		
+
 		$metabox .= $this->add_js();
-		
+
 		// This is required when a new package is created but it doesn't have any translated content yet.
 		// https://onthegosystems.myjetbrains.com/youtrack/issue/wpmlst-556
 		WPML_Simple_Language_Selector::enqueue_scripts();
 
-	  wp_enqueue_style( 'wpml-package-adminbar-popup', WPML_ST_URL . '/res/css/wpml-package-adminbar-popup.css', array(), ICL_SITEPRESS_VERSION );
+		wp_enqueue_style( 'wpml-package-adminbar-popup', WPML_ST_URL . '/res/css/wpml-package-adminbar-popup.css', array(), ICL_SITEPRESS_VERSION );
 
-
-	  echo $metabox;
+		echo $metabox;
 	}
-	
+
 	function add_js() {
-		ob_start( );
-		
+		ob_start();
+
 		?>
 		
 			<script type="text/javascript">
@@ -122,8 +123,8 @@ class WPML_Package_Admin_Lang_Switcher {
 			</script>
 		
 		<?php
-		
+
 		return ob_get_clean();
 	}
-	
+
 }

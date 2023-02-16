@@ -1,16 +1,16 @@
-=== Query Monitor ===
+# Query Monitor
 Contributors: johnbillion
 Tags: debug, debug-bar, debugging, development, developer, performance, profiler, queries, query monitor, rest-api
 Requires at least: 3.7
-Tested up to: 5.6
-Stable tag: 3.6.6
+Tested up to: 5.9
+Stable tag: 3.9.0
 License: GPLv2 or later
 Requires PHP: 5.3
 Donate link: https://johnblackbourn.com/donations/
 
 Query Monitor is the developer tools panel for WordPress.
 
-== Description ==
+## Description
 
 Query Monitor is the developer tools panel for WordPress. It enables debugging of database queries, PHP errors, hooks and actions, block editor blocks, enqueued scripts and stylesheets, HTTP API calls, and more.
 
@@ -39,26 +39,26 @@ In addition:
 
 * Whenever a redirect occurs, Query Monitor adds an HTTP header containing the call stack, so you can use your favourite HTTP inspector or browser developer tools to trace what triggered the redirect.
 * The response from any jQuery-initiated Ajax request on the page will contain various debugging information in its headers. PHP errors also get output to the browser's developer console.
-* The response from an authenticated WordPress REST API request will contain various debugging information in its headers, as long as the authenticated user has permission to view Query Monitor's output.
+* The response from an authenticated WordPress REST API request will contain an overview of performance information and PHP errors in its headers, as long as the authenticated user has permission to view Query Monitor's output. An [an enveloped REST API request](https://developer.wordpress.org/rest-api/using-the-rest-api/global-parameters/#_envelope) will include even more debugging information in the `qm` property of the response.
 
 By default, Query Monitor's output is only shown to Administrators on single-site installations, and Super Admins on Multisite installations.
 
 In addition to this, you can set an authentication cookie which allows you to view Query Monitor output when you're not logged in (or if you're logged in as a non-Administrator). See the Settings panel for details.
 
-= Other Plugins =
+### Other Plugins
 
 I maintain several other plugins for developers. Check them out:
 
 * [User Switching](https://wordpress.org/plugins/user-switching/) provides instant switching between user accounts in WordPress.
 * [WP Crontrol](https://wordpress.org/plugins/wp-crontrol/) lets you view and control what's happening in the WP-Cron system
 
-= Privacy Statement =
+### Privacy Statement
 
 Query Monitor is private by default and always will be. It does not persistently store any of the data that it collects. It does not send data to any third party, nor does it include any third party resources.
 
 [Query Monitor's full privacy statement can be found here](https://github.com/johnbillion/query-monitor/wiki/Privacy-Statement).
 
-== Screenshots ==
+## Screenshots
 
 1. Admin Toolbar Menu
 2. Aggregate Database Queries by Component
@@ -68,19 +68,19 @@ Query Monitor is private by default and always will be. It does not persistently
 6. HTTP API Requests
 7. Aggregate Database Queries by Calling Function
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions
 
-= Does this plugin work with PHP 8? =
+### Does this plugin work with PHP 8?
 
 Yes.
 
-= Who can access Query Monitor's output? =
+### Who can access Query Monitor's output?
 
 By default, Query Monitor's output is only shown to Administrators on single-site installations, and Super Admins on Multisite installations.
 
 In addition to this, you can set an authentication cookie which allows you to view Query Monitor output when you're not logged in, or when you're logged in as a user who cannot usually see Query Monitor's output. See the Settings panel for details.
 
-= Does Query Monitor itself impact the page generation time or memory usage? =
+### Does Query Monitor itself impact the page generation time or memory usage?
 
 Short answer: Yes, but only a little.
 
@@ -88,42 +88,50 @@ Long answer: Query Monitor has a small impact on page generation time because it
 
 Query Monitor's memory usage typically accounts for around 10% of the total memory used to generate the page.
 
-= Are there any add-on plugins for Query Monitor? =
+### Can I prevent Query Monitor from collecting data during long-running requests?
+
+Yes, if anything calls `do_action( 'qm/cease' )` then Query Monitor will cease operating for the remainder of the page generation. It detaches itself from further data collection, discards any data it's collected so far, and skips the output of its information.
+
+This is useful for long-running operations that perform a very high number of database queries, consume a lot of memory, or otherwise are of no concern to Query Monitor, for example:
+
+* Backuping up or restoring your site
+* Exporting a large amount of data
+* Running security scans
+
+### Are there any add-on plugins for Query Monitor?
 
 [A list of add-on plugins for Query Monitor can be found here.](https://github.com/johnbillion/query-monitor/wiki/Query-Monitor-Add-on-Plugins)
 
-In addition, Query Monitor transparently supports add-ons for the Debug Bar plugin. If you have any Debug Bar add-ons installed, just deactivate Debug Bar and the add-ons will show up in Query Monitor's menu.
+In addition, Query Monitor transparently supports add-ons for the Debug Bar plugin. If you have any Debug Bar add-ons installed, deactivate Debug Bar and the add-ons will show up in Query Monitor's menu.
 
-= Where can I suggest a new feature or report a bug? =
+### Where can I suggest a new feature or report a bug?
 
 Please use [the issue tracker on Query Monitor's GitHub repo](https://github.com/johnbillion/query-monitor/issues) as it's easier to keep track of issues there, rather than on the wordpress.org support forums.
 
-= Is Query Monitor available on Altis? =
+### Is Query Monitor available on Altis?
 
 Yes, the [Altis Developer Tools](https://www.altis-dxp.com/resources/developer-docs/dev-tools/) are built on top of Query Monitor.
 
-= Is Query Monitor available on WordPress.com VIP Go? =
+### Is Query Monitor available on WordPress.com VIP Go?
 
 Yes, it's included as part of the VIP Go platform. However, a user needs to be granted the `view_query_monitor` capability to see Query Monitor even if they're an administrator.
 
-= I'm using multiple instances of `wpdb`. How do I get my additional instances to show up in Query Monitor? =
+Please note that information about database queries and the environment is somewhat restricted on VIP. This is a platform restriction and not a Query Monitor issue.
+
+### I'm using multiple instances of `wpdb`. How do I get my additional instances to show up in Query Monitor?
 
 You'll need to hook into the `qm/collect/db_objects` filter and add an item to the array containing your `wpdb` instance. For example:
 
-`
-add_filter( 'qm/collect/db_objects', function( $objects ) {
-	$objects['my_db'] = $GLOBALS['my_db'];
-	return $objects;
-} );
-`
+    add_filter( 'qm/collect/db_objects', function( $objects ) {
+        $objects['my_db'] = $GLOBALS['my_db'];
+        return $objects;
+    } );
 
 Your `wpdb` instance will then show up as a separate panel, and the query time and query count will show up separately in the admin toolbar menu. Aggregate information (queries by caller and component) will not be separated.
 
-= Can I click on stack traces to open the file in my editor? =
+### Can I click on stack traces to open the file in my editor?
 
 Yes. You can enable this on the Settings panel.
-
-= Do you accept donations? =
 
 ### Do you accept donations?
 
@@ -132,6 +140,65 @@ Yes. You can enable this on the Settings panel.
 In addition, if you like the plugin then I'd love for you to [leave a review](https://wordpress.org/support/view/plugin-reviews/query-monitor). Tell all your friends about it too!
 
 ## Changelog ##
+
+### 3.9.0 ###
+
+* Introduces a dark mode toggle on the Settings panel, which replaces the `QM_DARK_MODE` constant
+* Prevents errors with undefined constants being reported in `db.php`
+* Adds more comprehensive handling of unexpected values in stack traces
+* Fixes PHP Warning 'Header may not contain NUL bytes' when outputting headers
+
+### 3.8.2 ###
+
+* Fixes some deprecated notices with PHP 8.1
+* Improves the handling of SQL queries that consist only of MySQL comments
+
+### 3.8.1 ###
+
+* Fixes an incompatibility with PHP versions prior to 7.2
+* Fixes a warning that was being triggered within the PHP header dispatcher
+* Introduces the `qm/component_type/{$type}` filter
+* Introduces a `QM_VERSION` constant
+
+### 3.8.0 ###
+
+* Introduces the ability for a third party to cease all further data collection and output at any point by calling `do_action( 'qm/cease' )`, for example to prevent memory exhaustion during long-running operations
+* Reduces the width of the admin toolbar menu item by using lower decimal precision
+* Improves the Template panel information when a block theme is in use (for Full Site Editing)
+* Improves the performance and accuracy of stack traces and calling function information
+* Corrects some formatting of numbers and error messages in the REST API output
+* Adds more useful information when a persistent object cache or opcode cache isn't in use
+* Improves clarity in the Scripts and Styles panels when any of the URLs include a port number
+* Introduces the `qm/component_context/{$type}` filter to complement `qm/component_name/{$type}` and `qm/component_dirs`
+* Improves internal code quality, internationalisation, and further reduces overall memory usage
+
+### 3.7.1 ###
+
+* Add a fallback for timing processing during Ajax requests that are dispatched before the `shutdown` hook.
+
+### 3.7.0 ###
+
+* <a href="https://querymonitor.com/blog/2021/05/debugging-wordpress-rest-api-requests/">Introduce debugging output in a `qm` property in enveloped REST API responses</a>
+* Add HTTP API call information to the overview panel
+* Don't show QM output inside WordPress embeds as nobody uses this
+* Don't try to access the `QM_HIDE_SELF` constant before it's defined
+* Process the timing and memory related stats as early as possible so the data isn't too skewed
+
+
+### 3.6.8 ###
+
+* Add WordPress memory usage statistic to Overview panel
+* Add block context information to the Blocks panel
+* Fix row highlighting of TH cells
+* Fix some panel resizing bugs
+
+
+### 3.6.7 ###
+
+* Implement a `QM_DB_SYMLINK` constant to prevent the `db.php` symlink being put into place.
+* Remove a dependency on `SAVEQUERIES` in the query collector.
+* Remove invalid `scope` attributes on table cells.
+
 
 ### 3.6.6 ###
 
@@ -359,114 +426,3 @@ New features! Read about them here: https://querymonitor.com/blog/2019/02/new-fe
 * Min width CSS for buttons.
 * First pass at documenting filters and hooks.
 * More coding standards updates.
-
-### 3.1.1 ###
-
-* Add a dark mode for the UI which is used via the Dark Mode plugin.
-* Display Query Monitor's output in the user's selected language, instead of the site language.
-* Add extended support for the Members and User Role Editor plugins.
-* Fix link hover and focus styles.
-* Reset some more CSS styles.
-
-### 3.1.0 ###
-
-**Main changes:**
-
-* Lots of accessibility improvements.
-* Switch to system default fonts to match the WordPress admin area fonts.
-* [Implement a PSR-3 compatible logger](https://querymonitor.com/blog/2018/07/profiling-and-logging/).
-* UI improvements for mobile/touch/narrow devices.
-* Various improvements to the layout of the Scripts and Styles panels.
-* Prevent the "overscroll" behaviour that causes the main page to scroll when scrolling to the end of a panel.
-* Remove the second table footer when filtering tables.
-* Add a settings panel with information about all of the available configuration constants.
-
-**All other changes:**
-
-* Show a warning message in the Overview panel when a PHP error is trigger during an Ajax request.
-* Display a warning when time or memory usage is above 75% of the respective limit.
-* Template Part file string normalization so template parts are correctly shown on Windows systems.
-* Don't output toggle links or a blank HTTP API transport if not necessary.
-* Add a human readable representation of transient timeouts, and prevent some wrapping.
-* Add a tear down for the capability checks collector so that cap checks performed between QM's processing and output don't break things.
-* Remove the ability to sort the HTTP API Calls table. This removes a column, increasing the available horizontal space.
-* Handle a bunch more known object types when displaying parameter values.
-* Allow PHP errors to be filtered by level.
-* Shorten the displayed names of long namespaced symbols by initialising the inner portions of the name.
-* Combine the Location and Caller columns for PHP Errors to save some horizontal space.
-* Don't wrap text in the PHP error type column.
-* Improve the authentication cookie toggle so it dynamically reflects the current state.
-* For now, force QM to use ltr text direction.
-* Clarify terminology around the number of enqueued assets.
-* Add fallback support for `wp_cache_get_stats()` to fetch cache stats.
-* Improve the message shown when no queries are performed.
-* Pluck stats from cache controllers that implement a `getStats()` method and return a nested array of stats for each server.
-* Rename the `QM_HIDE_CORE_HOOKS` configuration constant to `QM_HIDE_CORE_ACTIONS`.
-* Better handling of environments with unlimited execution time or memory limit. Adds a warning for both.
-* When an external cache isn't in use, provide some helpful info if an appropriate extension is installed.
-
-
-### 3.0.1 ###
-
-* Add even more hardening to the JS handling to prevent problems when jQuery is broken.
-* Remove the old `no-js` styles which don't work well with the new UI.
-* Correct the logic for showing the `Non-Core` component filter option.
-* Add another VIP function to the list of functions that call the HTTP API.
-* Add an inline warning highlight to capability checks that are empty or of a non-string type.
-* Add support for WordPress.com VIP Client MU plugins.
-* Add support for displaying laps as part of the timing information.
-* Add full support for namespaced Debug Bar add-on panels.
-* Switch back to depending on `jquery` instead of `jquery-core`.
-* Don't assume `php_uname()` is always callable. Add info about the host OS too.
-* Reset inline height attribute when the panel is closed.
-
-### 3.0.0 ###
-
-* Brand new UI that resembles familiar web developer tools. Lots of related improvements and fixes.
-* Introduce some basic timing functionality in a Timings panel. See #282 for usage.
-* Introduce a `QM_NO_JQUERY` constant for running QM without jQuery as a dependency.
-* Greater resilience to JavaScript errors.
-* Allow the Scripts and Styles panel to be filtered by host name.
-* Expose information about redirects that occurred in HTTP API requests.
-* Expose more debugging information for HTTP API requests.
-* Don't enable the Capability Checks panel by default as it's very memory intensive.
-* Allow PHP errors to be silenced according to their component. See `qm/collect/php_error_levels` and `qm/collect/hide_silenced_php_errors` filters.
-* Hide all file paths and stack traces behind toggles by default.
-* Remove support for the AMP for WordPress plugin.
-* Add associative keys to the array passed to the `qm/built-in-collectors` filter.
-* Drop support for PHP 5.2.
-* Generally improve performance and reduce memory usage.
-
-### 2.17.0 ###
-
-* Add the current user object to the Request panel.
-* A few improvements to the appearance of the overall layout.
-* Use relative positioning in place of the nasty absolute position hack needed for some themes.
-* Ensure the `get_*_template()` function exists before calling it.
-* Add a `QM_DISABLE_ERROR_HANDLER` constant to disable QM's error handling.
-* Switch to runtime filtering of user capabilities instead of granting the `view_query_monitor` cap upon activation.
-* Correct a bunch of inline docs and code standards.
-
-
-### 2.16.2 ###
-
-* Correctly handle re-selection of filters with a saved value that contains special characters.
-* Show the correct caller for Super Admin capability checks.
-
-
-### 2.16.1 ###
-
-* Update the plugin version number (no functional changes from 2.16.0).
-
-### 2.16.0 ###
-
-* Introduce a new panel for displaying user capability checks that have been performed during the page load.
-* Remember the picked value in all the filters. Uses localStorage in the browser.
-* Add a "Non-Core" filter to the Component filter control in all panels.
-* Add a "Non-SELECT" filter to the query type filter control in the Queries panel.
-* Display collapsed stack traces by default in all panels.
-* Add the error code to the Database Errors output.
-* Improve the visual appearance of the column sorting controls.
-* Improved display for parameter values in call stacks.
-* Any files within `wp-content` which don't have a component are now grouped by the root directory or file name.
-

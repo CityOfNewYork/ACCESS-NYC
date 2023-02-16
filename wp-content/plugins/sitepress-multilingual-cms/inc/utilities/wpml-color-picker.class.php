@@ -39,7 +39,7 @@ class WPML_Color_Picker {
 		} else {
 			$input_label .= '<label for="' . esc_attr( $input_id ) . '" style="display: none;"></label>';
 		}
-		$input .= '<input class="wpml-colorpicker wp-color-picker-field" type="text"';
+		$input                                 .= '<input class="wpml-colorpicker wp-color-picker-field" type="text"';
 		$input_attributes['size']               = $input_size;
 		$input_attributes['id']                 = $input_id;
 		$input_attributes['name']               = $input_name;

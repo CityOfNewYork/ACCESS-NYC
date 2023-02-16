@@ -35,7 +35,7 @@ class WPLocaleProxy {
 			return true;
 		}
 
-		false;
+		return false;
 	}
 
 	/**

@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Accepted": [
+            "Đã chấp thuận"
+         ],
+         "Approved!": [
+            "Đã phê duyệt!"
+         ],
+         "Loading the next translation for review...": [
+            "Đang tải bản dịch tiếp theo để rà soát..."
+         ],
+         "Back": [
+            "Quay lại"
+         ],
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "Tắt để không tự động tải bản dịch tiếp theo sau khi hoàn tất phần rà soát này."
+         ],
+         "Turn on to automatically load the next translation after finishing this review.": [
+            "Bật để tự động tải bản dịch tiếp theo sau khi hoàn tất việc rà soát này."
+         ],
+         "Edit": [
+            "Sửa"
+         ],
+         "Edit translation": [
+            "Sửa bản dịch"
+         ],
+         "There was an error in applying translation.": [
+            "Đã có lỗi khi áp dụng quá trình dịch thuật."
+         ],
+         "Please wait, applying translation..": [
+            "Vui lòng đợi, đang áp dụng quá trình dịch thuật..."
+         ],
+         "Next review": [
+            "Lần rà soát tiếp theo"
+         ],
+         "Publish this translation": [
+            "Đăng tải bản dịch này"
+         ],
+         "Accept this translation": [
+            "Chấp nhận bản dịch này"
+         ],
+         "Published!": [
+            "Đã đăng tải!"
+         ]
+      }
+   }
+}

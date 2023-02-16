@@ -39,6 +39,11 @@ class Promise {
 		}
 	}
 
+	/**
+	 * @param mixed $data
+	 *
+	 * @return mixed
+	 */
 	public function reject( $data ) {
 		$result = $data;
 		if ( $this->onReject ) {

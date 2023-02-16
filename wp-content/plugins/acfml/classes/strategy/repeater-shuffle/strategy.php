@@ -7,6 +7,15 @@ abstract class Strategy {
 	 * @var string Element ID prefix.
 	 */
 	protected $id_prefix;
+
+	/**
+	 * @var false|int Translation ID for given element.
+	 */
+	protected $trid;
+
+	/** @var array $element_translations */
+	protected $element_translations;
+
 	/**
 	 * Check if this is valid ID of processed post, term etc.
 	 *
@@ -17,30 +26,58 @@ abstract class Strategy {
 	abstract public function isValidId( $id );
 
 	/**
-	 * Gets all post meta or term meta for given ID.
+	 * Get value object for given element ID.
 	 *
-	 * @param int $id The post or term ID.
+	 * @param  int|string $id The element ID.
+	 *
+	 * @return object|null Value object with id and type or null when element not found.
+	 */
+	abstract protected function getElement( $id );
+
+	/**
+	 * Get translation ID for given element.
+	 *
+	 * @param int|string $elementId Processed element (post, taxonomy) ID.
+	 *
+	 * @return false|int|string Translated post or term or option page ID, or false if does not exist.
+	 */
+	public function getTrid( $elementId ) {
+		if ( null === $this->trid ) {
+			$this->trid = false;
+			$element    = $this->getElement( $elementId );
+			if ( isset( $element->id, $element->type ) ) {
+				$type       = apply_filters( 'wpml_element_type', $element->type );
+				$this->trid = apply_filters( 'wpml_element_trid', $this->trid, $element->id, $type );
+			}
+		}
+		return $this->trid;
+	}
+
+	/**
+	 * Gets all post meta or term meta or options page for given ID.
+	 *
+	 * @param int|string $id The post or term or options page ID.
 	 *
 	 * @return mixed
 	 */
 	abstract public function getAllMeta( $id );
 
 	/**
-	 * Gets one post/term meta.
+	 * Gets one post/term/option page's meta.
 	 *
-	 * @param int    $id     The post or term ID.
-	 * @param string $key    The meta key.
-	 * @param bool   $single
+	 * @param int|string $id     The post or term or options page ID.
+	 * @param string     $key    The meta/option key.
+	 * @param bool       $single Return single value.
 	 *
 	 * @return mixed
 	 */
 	abstract public function getOneMeta( $id, $key, $single );
 
 	/**
-	 * Deletes one post/term meta from database.
+	 * Deletes one post/term/option page's meta from database.
 	 *
-	 * @param int    $id  The post or term ID.
-	 * @param string $key The meta key.
+	 * @param int|string $id  The post or term or options page ID.
+	 * @param string     $key The meta/option key.
 	 *
 	 * @return mixed
 	 */
@@ -49,13 +86,20 @@ abstract class Strategy {
 	/**
 	 * Updates term/post meta in database.
 	 *
-	 * @param int    $id  The post or term ID.
-	 * @param string $key The meta key.
-	 * @param mixed  $val New value.
+	 * @param int|string $id  The post or term or options page ID.
+	 * @param string     $key The meta/option key.
+	 * @param mixed      $val New value.
 	 *
 	 * @return mixed
 	 */
 	abstract public function updateOneMeta( $id, $key, $val );
+
+	/**
+	 * @param int|null $id
+	 *
+	 * @return string
+	 */
+	abstract protected function get_element_type( $id );
 
 	/**
 	 * Changes term ID into numeric.
@@ -79,42 +123,29 @@ abstract class Strategy {
 	 * @return bool
 	 */
 	public function hasTranslations( $id ) {
-		$has_translations = false;
-		$element_type     = $this->get_element_type( $id );
-		$trid             = apply_filters( 'wpml_element_trid', null, $this->getNumericId( $id ), $element_type );
-		if ( $trid ) {
-			$element_translations = apply_filters( 'wpml_get_element_translations', null, $trid, $element_type );
-			$has_translations = $element_translations && 1 < count( $element_translations );
-		}
-		return $has_translations;
+		return count( $this->getTranslations( $id ) ) > 0;
 	}
 
 	/**
 	 * Returns post or term translations.
 	 *
-	 * @param int $id The post or term ID.
+	 * @param int|string $id The post or term or option page ID.
 	 *
-	 * @return array|mixed|void
+	 * @return array
 	 */
 	public function getTranslations( $id ) {
-		static $element_translations = array();
-		static $last_id              = false;
+		if ( ! isset( $this->element_translations[ $id ] ) ) {
+			$element_type                      = $this->get_element_type( $id );
+			$trid                              = apply_filters( 'wpml_element_trid', false, $this->getNumericId( $id ), $element_type );
+			$this->element_translations[ $id ] = apply_filters( 'wpml_get_element_translations', [], $trid, $element_type );
 
-		if ( $id !== $last_id || ! $element_translations ) {
-			$element_type = $this->get_element_type( $id );
-			$trid         = apply_filters( 'wpml_element_trid', null, $this->getNumericId( $id ), $element_type );
-			if ( $trid ) {
-				$element_translations = apply_filters( 'wpml_get_element_translations', null, $trid, $element_type );
-				if ( $element_translations ) {
-					foreach ( $element_translations as $language_code => $element ) {
-						if ( (int) $element->element_id === $this->getNumericId( $id ) ) {
-							unset( $element_translations[ $language_code ] );
-						}
-					}
+			foreach ( $this->element_translations[ $id ] as $language_code => $element ) {
+				if ( (int) $element->element_id === $this->getNumericId( $id ) ) {
+					unset( $this->element_translations[ $id ][ $language_code ] );
 				}
 			}
 		}
-		$last_id = $id;
-		return $element_translations;
+
+		return $this->element_translations[ $id ];
 	}
 }

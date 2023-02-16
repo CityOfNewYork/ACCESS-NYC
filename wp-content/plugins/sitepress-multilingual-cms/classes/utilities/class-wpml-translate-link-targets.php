@@ -10,7 +10,7 @@ class WPML_Translate_Link_Targets {
 	/**
 	 * WPML_Translate_Link_Targets constructor.
 	 *
-	 * @param AbsoluteLinks $absolute_links
+	 * @param AbsoluteLinks               $absolute_links
 	 * @param WPML_Absolute_To_Permalinks $permalinks_converter
 	 */
 	public function __construct( AbsoluteLinks $absolute_links, WPML_Absolute_To_Permalinks $permalinks_converter ) {

@@ -11,7 +11,7 @@ class WPML_ST_Theme_Localization_UI_Factory {
 		global $wpdb;
 
 		$localization = new WPML_Localization( $wpdb );
-		$utils = new WPML_ST_Theme_Localization_Utils();
+		$utils        = new WPML_ST_Theme_Localization_Utils();
 
 		return new WPML_ST_Theme_Localization_UI( $localization, $utils, self::TEMPLATE_PATH );
 	}

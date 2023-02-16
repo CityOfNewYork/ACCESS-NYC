@@ -7,19 +7,19 @@
  */
 class WPML_TF_Frontend_AJAX_Hooks implements IWPML_Action {
 
-	/** @var  WPML_TF_Data_Object_Storage $feedback_storage */
+	/** @var WPML_TF_Data_Object_Storage $feedback_storage */
 	private $feedback_storage;
 
-	/** @var  WPML_TF_Document_Information $document_information */
+	/** @var WPML_TF_Document_Information $document_information */
 	private $document_information;
 
 	/** @var WPML_TF_Post_Rating_Metrics $post_rating_metrics */
 	private $post_rating_metrics;
 
-	/** @var null|WPML_TP_Client_Factory $tp_client_factory */
+	/** @var WPML_TP_Client_Factory $tp_client_factory */
 	private $tp_client_factory;
 
-	/** @var null|WPML_TP_Client $tp_client */
+	/** @var WPML_TP_Client $tp_client */
 	private $tp_client;
 
 	private $post_data;
@@ -30,15 +30,15 @@ class WPML_TF_Frontend_AJAX_Hooks implements IWPML_Action {
 	 * @param WPML_TF_Data_Object_Storage  $feedback_storage
 	 * @param WPML_TF_Document_Information $document_information
 	 * @param WPML_TF_Post_Rating_Metrics  $post_rating_metrics
-	 * @param WPML_TP_Client_Factory       $tp_client_factory
-	 * @param array                        $post_data
+	 * @param WPML_TP_Client_Factory|null  $tp_client_factory
+	 * @param mixed[]|null                 $post_data
 	 */
 	public function __construct(
 		WPML_TF_Data_Object_Storage $feedback_storage,
 		WPML_TF_Document_Information $document_information,
 		WPML_TF_Post_Rating_Metrics $post_rating_metrics,
 		WPML_TP_Client_Factory $tp_client_factory = null,
-		array $post_data
+		array $post_data = null
 	) {
 		$this->feedback_storage     = $feedback_storage;
 		$this->document_information = $document_information;

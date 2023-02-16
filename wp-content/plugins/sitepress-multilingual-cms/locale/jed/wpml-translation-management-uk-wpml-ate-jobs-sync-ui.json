@@ -1,0 +1,163 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "Надсилання на переклад"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "Підключення до Розширеного редактора перекладів WPML"
+         ],
+         "Try again": [
+            "Повторити спробу"
+         ],
+         "You don't have the rights to review this language": [
+            "У вас немає прав на перевірку цією мовою."
+         ],
+         "pages & posts": [
+            "сторінки та публікації"
+         ],
+         "left to translate": [
+            "залишилося перекласти"
+         ],
+         "Translate on hold": [
+            "Переклад на утриманні"
+         ],
+         "All translated": [
+            "Усе перекладено"
+         ],
+         "%d translations left": [
+            "Залишилося замовлень на переклад: %d"
+         ],
+         "Credits used:": [
+            "Використано кредитів:"
+         ],
+         "Credits left:": [
+            "Залишилося кредитів:"
+         ],
+         "Calculating": [
+            "Підрахунок"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "Решта попередньо оплачених кредитів, призначених для цього веб-сайту на WPML.org."
+         ],
+         "Prepaid credits left": [
+            "Залишилося попередньо оплачених кредитів"
+         ],
+         "Account credits used": [
+            "Використані кредити облікового запису"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "Щойно ви витратите всі попередньо оплачені кредити, ми виставимо вам рахунок за всі використані додаткові кредити після закінчення місяця."
+         ],
+         "Payment limit:": [
+            "Ліміт оплати:"
+         ],
+         "%s credits": [
+            "%s кредитів"
+         ],
+         "Preparing more content for translation": [
+            "Приготування додаткового вмісту до перекладу"
+         ],
+         "Preparing content for translation": [
+            "Приготування вмісту до перекладу"
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "Виникла проблема автоматичного перекладу, що потребує вашої уваги. Виправте її, щоб продовжити."
+         ],
+         "%d translations waiting for review": [
+            "Перекладів, які очікують на перевірку: %d"
+         ],
+         "Draft — Pending review": [
+            "Чернетка – Чекає на перевірку"
+         ],
+         "Complete": [
+            "Завершений"
+         ],
+         "Insufficient funds": [
+            "Недостатньо коштів"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "Докладніше про переклад вмісту читайте в <a>Посібнику з початку роботи</a>."
+         ],
+         "Let's Start Translating!": [
+            "Розпочнімо перекладати!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "Виберіть вміст у Консолі перекладу нижче і створіть своє перше замовлення на переклад!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "Змініть <a>налаштування автоматичного перекладу</a> (поточні замовлення на переклад будуть виконані з поточними налаштуваннями)."
+         ],
+         "Read more about translating your site automatically.": [
+            "Докладніше про автоматичний переклад веб-сайту."
+         ],
+         "Your site is being automatically translated!": [
+            "Ваш веб-сайт перекладається автоматично!"
+         ],
+         "Automatic Translation Status": [
+            "Стан автоматичного перекладу"
+         ],
+         "Calculating...": [
+            "Підрахунок..."
+         ],
+         "Do not close WP admin!": [
+            "Не закривайте консоль адміністратора WP!"
+         ],
+         "The number of translations": [
+            "Кількість перекладів"
+         ],
+         "Delete Translations": [
+            "Видалити переклади"
+         ],
+         "Keep Translations as Draft": [
+            "Залишити переклади у вигляді чернеток"
+         ],
+         "Never mind. I want to review these translations.": [
+            "Не треба. Я хочу перевірити ці переклади."
+         ],
+         "Cancel": [
+            "Скасувати"
+         ],
+         "You haven't selected any jobs that need review.": [
+            "Ви не обрали жодного замовлення, яке потрібно перевірити."
+         ],
+         "Please select the pending review jobs to abort.": [
+            "Виберіть замовлення з перевірки, що очікується, які потрібно скасувати."
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "Вибрані замовлення будуть видалені з черги перекладів без публікування. Що зробити з перекладами?"
+         ],
+         "Cancel Translation Review": [
+            "Скасувати редагування перекладів"
+         ],
+         "Edit": [
+            "Редагувати"
+         ],
+         "Updating": [
+            "Триває оновлення"
+         ],
+         "Translate": [
+            "Перекласти"
+         ],
+         "Take and translate": [
+            "Узяти на переклад"
+         ],
+         "Review": [
+            "Перевірити"
+         ],
+         "Are you sure you want to resign from this job?": [
+            "Справді відмовитися від замовлення?"
+         ],
+         "Resign": [
+            "Відмовитися"
+         ],
+         "View": [
+            "Переглянути"
+         ]
+      }
+   }
+}

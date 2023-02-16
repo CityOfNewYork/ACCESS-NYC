@@ -1,0 +1,16 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "But...": [
+            "그러나..."
+         ],
+         "Wait to translate any content that contains media until we're finished configuring it. It will be just a moment.": [
+            "구성을 완료할 때까지 미디어가 포함된 모든 컨텐츠가 번역되도록 기다려 주세요. 잠시면 됩니다."
+         ]
+      }
+   }
+}

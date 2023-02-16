@@ -17,7 +17,7 @@ class WPML_ACF_Term_Id {
 	 */
 	public function __construct( $id, WPML_ACF_Field $wpml_acf_field ) {
 		$this->id             = $id;
-		$this->wpml_acf_field = maybe_unserialize( $wpml_acf_field );
+		$this->wpml_acf_field = $wpml_acf_field;
 	}
 
 	/**

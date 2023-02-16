@@ -1,0 +1,69 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/languages/components/ConfirmEditLanguageSave.js:35
+msgid "Choose Content to Automatically Translate into"
+msgstr ""
+
+#: src/js/languages/components/ConfirmEditLanguageSave.js:38
+msgid "Save Changes and Enable Automatic Translation"
+msgstr ""
+
+#: src/js/languages/components/ConfirmEditLanguageSave.js:39
+msgid "Cancel Language Changes"
+msgstr ""
+
+#: src/js/languages/components/ConfirmEditLanguageSave.js:43
+#: src/js/languages/components/ConfirmNewLanguage.js:96
+msgid "Save"
+msgstr ""
+
+#: src/js/languages/components/ConfirmNewLanguage.js:80
+msgid "Choose Content to Automatically Translate into New Language"
+msgstr ""
+
+#: src/js/languages/components/ConfirmNewLanguage.js:83
+msgid "Add languages and start translating"
+msgstr ""
+
+#: src/js/languages/components/ConfirmNewLanguage.js:84
+msgid "Add language and start translating"
+msgstr ""
+
+#: src/js/languages/components/ConfirmNewLanguage.js:87
+msgid "Never mind. Don't add new languages"
+msgstr ""
+
+#: src/js/languages/components/ConfirmNewLanguage.js:88
+msgid "Never mind. Don't add new language"
+msgstr ""
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:23
+msgid ""
+"Automatically translate all of my existing posts and pages right now, plus "
+"new content as I create it."
+msgstr ""
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:24
+msgid "Only automatically translate new content."
+msgstr ""
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:27
+msgid ""
+"You are using <a>Translate Everything</a> mode, which translates your site "
+"content automatically."
+msgstr ""
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:33
+msgid ""
+"Which content do you want to automatically translate into your newly-added "
+"language?"
+msgstr ""
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:62
+msgid ""
+"You can translate existing content from the Translation Management "
+"Dashboard."
+msgstr ""

@@ -21,13 +21,18 @@ class OTGS_Installer_WP_Share_Local_Components_Setting {
 	}
 
 	public function has_setting( $repo ) {
-		$current_value = $this->get();
+		$current_value = self::get();
 
 		return $current_value
 		       && array_key_exists( $repo, $current_value );
 	}
 
-	private function get() {
+	public static function get_setting ( $repo) {
+		$current_value = self::get();
+		return array_key_exists( $repo, $current_value ) ?  $current_value[$repo] : null;
+	}
+
+	private static function get() {
 		$setting = get_option( self::OPTION_KEY );
 		return $setting ? $setting : array();
 	}

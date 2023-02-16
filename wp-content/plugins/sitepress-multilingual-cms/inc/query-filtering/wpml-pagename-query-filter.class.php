@@ -49,15 +49,15 @@ class WPML_Page_Name_Query_Filter extends WPML_Name_Query_Filter_Translated {
 
 	/**
 	 * Called when the post id is being adjusted. Can be overridden.
-	 * 
+	 *
 	 * @param WP_Query $page_query
 	 *
 	 * @return WP_Query
 	 */
-	
+
 	protected function adjusting_id( $page_query ) {
 		$page_query->is_page = true;
-		
+
 		return $page_query;
 	}
 }

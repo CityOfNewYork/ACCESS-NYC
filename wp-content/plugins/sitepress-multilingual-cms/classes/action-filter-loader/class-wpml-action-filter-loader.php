@@ -61,9 +61,9 @@ class WPML_Action_Filter_Loader {
 	 * Load factory
 	 *
 	 * @param string $loader Action loader.
+	 * @param bool   $use_dic
 	 */
 	private function load_factory_or_action( $loader, $use_dic ) {
-		/** @var IWPML_Action_Loader_Factory|IWPML_AJAX_Action $action_or_factory */
 		if ( $use_dic ) {
 			$action_or_factory = WPML\Container\make( $loader );
 		} else {

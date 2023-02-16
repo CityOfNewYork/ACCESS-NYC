@@ -76,7 +76,7 @@ class WPML_Post_Comments extends WPML_WPDB_User {
 	}
 
 	/**
-	 * @param $hook
+	 * @param string $hook
 	 */
 	public function enqueue_scripts( $hook ) {
 		wp_register_script( 'wpml-orphan-comments', ICL_PLUGIN_URL . '/res/js/orphan-comments.js', array( 'jquery' ), ICL_SITEPRESS_VERSION, true );
@@ -130,7 +130,7 @@ class WPML_Post_Comments extends WPML_WPDB_User {
 	}
 
 	/**
-	 * @param $how_many
+	 * @param int $how_many
 	 *
 	 * @return false|int
 	 */
@@ -170,7 +170,7 @@ class WPML_Post_Comments extends WPML_WPDB_User {
 	}
 
 	/**
-	 * @param $post_ids
+	 * @param array<int> $post_ids
 	 */
 	private function update_comments_count( $post_ids ) {
 		foreach ( $post_ids as $post_id ) {

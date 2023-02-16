@@ -1,0 +1,19 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Insufficient funds": [
+            "رصيد غير كافٍ"
+         ],
+         "Complete": [
+            "استكمِل"
+         ],
+         "Pending review": [
+            "قيد المراجعة"
+         ]
+      }
+   }
+}

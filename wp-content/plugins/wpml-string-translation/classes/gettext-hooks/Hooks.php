@@ -62,6 +62,7 @@ class Hooks implements \IWPML_Action {
 	}
 
 	/**
+	 * @throws \WPML\Auryn\InjectionException
 	 * @deprecated since WPML ST 3.0.0
 	 */
 	public function clear_filters() {
@@ -89,7 +90,6 @@ class Hooks implements \IWPML_Action {
 	 * @param string|false $name Deprecated since WPML ST 3.0.0 (the name should be automatically created as a hash)
 	 *
 	 * @return string
-	 * @throws Auryn\InjectionException Auryn Exception.
 	 */
 	public function gettext_filter( $translation, $text, $domain, $name = false ) {
 		if ( is_array( $domain ) ) {
@@ -128,11 +128,13 @@ class Hooks implements \IWPML_Action {
 	 * @param string $domain
 	 *
 	 * @return string
-	 * @throws Auryn\InjectionException Auryn Exception.
 	 */
 	public function gettext_with_context_filter( $translation, $text, $context, $domain ) {
 		if ( $context ) {
-			$domain = [ 'domain' => $domain, 'context' => $context ];
+			$domain = [
+				'domain'  => $domain,
+				'context' => $context,
+			];
 		}
 
 		return $this->gettext_filter( $translation, $text, $domain );
@@ -147,7 +149,6 @@ class Hooks implements \IWPML_Action {
 	 * @param string|false $context
 	 *
 	 * @return string
-	 * @throws Auryn\InjectionException Auryn Exception.
 	 */
 	public function ngettext_filter( $translation, $single, $plural, $number, $domain, $context = false ) {
 		if ( $number == 1 ) {
@@ -168,8 +169,6 @@ class Hooks implements \IWPML_Action {
 	 * @param string $domain
 	 *
 	 * @return string
-	 * @throws Auryn\InjectionException Auryn Exception.
-	 *
 	 */
 	public function ngettext_with_context_filter( $translation, $single, $plural, $number, $context, $domain ) {
 		return $this->ngettext_filter( $translation, $single, $plural, $number, $domain, $context );

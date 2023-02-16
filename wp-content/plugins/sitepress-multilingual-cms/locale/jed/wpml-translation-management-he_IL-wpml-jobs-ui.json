@@ -1,0 +1,22 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Draft — Pending review": [
+            "טיוטה - ממתינה לבדיקה"
+         ],
+         "Complete": [
+            "הושלם"
+         ],
+         "Insufficient funds": [
+            "אין מספיק כסף"
+         ],
+         "Editor Job ID": [
+            "מזהה משימת עריכה"
+         ]
+      }
+   }
+}

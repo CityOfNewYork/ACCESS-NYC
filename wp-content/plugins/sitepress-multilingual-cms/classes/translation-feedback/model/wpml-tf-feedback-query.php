@@ -28,7 +28,7 @@ class WPML_TF_Feedback_Query {
 	/** @var int $total_items_count */
 	private $total_items_count;
 
-	/** @var $filtered_items_count int */
+	/** @var int $filtered_items_count */
 	private $filtered_items_count;
 
 	/** @var bool $is_in_trash */
@@ -202,7 +202,7 @@ class WPML_TF_Feedback_Query {
 	 * @param int  $feedback_id
 	 * @param bool $with_messages
 	 *
-	 * @return null|WPML_TF_Feedback
+	 * @return null|\IWPML_TF_Data_Object
 	 */
 	public function get_one( $feedback_id, $with_messages = true ) {
 		$feedback = $this->feedback_storage->get( $feedback_id );
@@ -215,7 +215,6 @@ class WPML_TF_Feedback_Query {
 			$filter   = new WPML_TF_Message_Collection_Filter( $filter_args );
 			$messages = $this->message_storage->get_collection( $filter );
 
-			/** @var WPML_TF_Feedback $feedback */
 			foreach ( $messages as $message ) {
 				$feedback->add_message( $message );
 			}

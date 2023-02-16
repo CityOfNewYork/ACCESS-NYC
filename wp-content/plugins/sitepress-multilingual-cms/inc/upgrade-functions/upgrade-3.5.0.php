@@ -13,8 +13,8 @@ function update_icl_strings_charset_and_collations() {
 	$sql_template = "ALTER TABLE `{$wpdb->prefix}icl_strings` MODIFY `%s` VARCHAR(%d) {$charset} {$collate}";
 
 	$fields = array(
-		'name' => WPML_STRING_TABLE_NAME_CONTEXT_LENGTH,
-		'context' => WPML_STRING_TABLE_NAME_CONTEXT_LENGTH,
+		'name'                    => WPML_STRING_TABLE_NAME_CONTEXT_LENGTH,
+		'context'                 => WPML_STRING_TABLE_NAME_CONTEXT_LENGTH,
 		'domain_name_context_md5' => 32,
 	);
 

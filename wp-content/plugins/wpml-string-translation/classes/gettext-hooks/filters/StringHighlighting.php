@@ -29,12 +29,11 @@ class StringHighlighting implements IFilter {
 
 		if ( $this->isHighlighting( $domain, $text ) ) {
 			$translation = '<span style="background-color:'
-		                   . esc_attr( $this->settings->getTrackStringColor() )
-		                   . '">'
-		                   . $translation
-		                   . '</span>';
+						   . esc_attr( $this->settings->getTrackStringColor() )
+						   . '">'
+						   . $translation
+						   . '</span>';
 		}
-
 
 		return $translation;
 	}
@@ -47,7 +46,7 @@ class StringHighlighting implements IFilter {
 	 */
 	private function isHighlighting( $domain, $text ) {
 		return isset( $_GET[ HooksFactory::TRACK_PARAM_TEXT ], $_GET[ HooksFactory::TRACK_PARAM_DOMAIN ] )
-		       && stripslashes( $_GET[ HooksFactory::TRACK_PARAM_DOMAIN  ] ) === $domain
-		       && stripslashes( $_GET[ HooksFactory::TRACK_PARAM_TEXT] ) === $text;
+			   && stripslashes( $_GET[ HooksFactory::TRACK_PARAM_DOMAIN ] ) === $domain
+			   && stripslashes( $_GET[ HooksFactory::TRACK_PARAM_TEXT ] ) === $text;
 	}
 }

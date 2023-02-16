@@ -146,6 +146,7 @@ class WPML_Post_Status extends WPML_WPDB_User {
 				'Tried to set status' . $status . ' for falsy post_id ' . serialize( $post_id ) );
 		}
 
+		/** @var \stdClass $translation_id */
 		$translation_id = $this->wpdb->get_row (
 			$this->wpdb->prepare (
 				"SELECT it.translation_id AS transid, ts.translation_id AS status_id
@@ -182,7 +183,7 @@ class WPML_Post_Status extends WPML_WPDB_User {
 		);
 
 
-		return isset( $res );
+		return $res;
 	}
 
 	public function get_status( $post_id, $trid = false, $lang_code = false ) {

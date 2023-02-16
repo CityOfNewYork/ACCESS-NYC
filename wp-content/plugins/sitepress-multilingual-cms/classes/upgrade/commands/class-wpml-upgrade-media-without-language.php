@@ -9,7 +9,7 @@ class WPML_Upgrade_Media_Without_Language extends WPML_Upgrade_Run_All {
 	private $default_language;
 
 	public function __construct( array $args ) {
-		$this->wpdb = $args[0];
+		$this->wpdb             = $args[0];
 		$this->default_language = $args[1];
 	}
 

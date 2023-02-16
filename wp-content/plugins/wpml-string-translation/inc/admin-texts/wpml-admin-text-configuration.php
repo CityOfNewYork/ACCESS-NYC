@@ -26,7 +26,7 @@ class WPML_Admin_Text_Configuration extends WPML_Admin_Text_Functionality {
 		$admin_text_config = isset( $config['wpml-config']['admin-texts'] ) ? $config['wpml-config']['admin-texts'] : array();
 		$wpml_config_all   = array();
 		if ( isset( $type, $admin_text_context, $admin_text_config['key'] ) ) {
-			if ( isset( $admin_text_config['key']['attr'] ) ) { //single
+			if ( isset( $admin_text_config['key']['attr'] ) ) { // single
 				$admin_text_config['key']['type']    = $type;
 				$admin_text_config['key']['context'] = $admin_text_context;
 				$wpml_config_all[]                   = $admin_text_config['key'];
@@ -47,32 +47,14 @@ class WPML_Admin_Text_Configuration extends WPML_Admin_Text_Functionality {
 		return $this->config;
 	}
 
-	function get_wpml_config_file( $data ) {
-
-		return "<wpml-config>\n\t<admin-texts>\n" . $this->output_xml( $data, 0 )
-		       . "\t</admin-texts>\n</wpml-config>\n";
-	}
-
-	private function output_xml( $data, $level ) {
-		$output = '';
-
-		foreach ( $data as $key => $value ) {
-			$tabs = str_repeat( "\t", $level + 2 );
-			$output .= $tabs . '<key name="' . $key . '"'
-			           . ( is_array( $value ) && ! empty( $value )
-					? ">\n" . $this->output_xml( $value, $level + 1 ) . $tabs . '</key' : '/' )
-			           . ">\n";
-		}
-
-		return $output;
-	}
-
 	private function fill_wildcards( array $config_array ) {
 
 		return ( ! isset( $config_array['attr']['name'] ) || $config_array['attr']['name'] !== '*' )
-		       && ( ! isset( $config_array[0]['attr']['name'] ) || $config_array[0]['attr']['name'] !== '*' )
-			? $this->remove_unmatched( $config_array,
-			                           $this->all_strings_array( $this->get_top_level_filters( $config_array ) ) )
+			   && ( ! isset( $config_array[0]['attr']['name'] ) || $config_array[0]['attr']['name'] !== '*' )
+			? $this->remove_unmatched(
+				$config_array,
+				$this->all_strings_array( $this->get_top_level_filters( $config_array ) )
+			)
 			: array();
 	}
 
@@ -120,7 +102,7 @@ class WPML_Admin_Text_Configuration extends WPML_Admin_Text_Functionality {
 	 */
 	private function wildcard_to_matcher( $wildcard ) {
 
-		return '#^' . str_replace( '*', '.+', $wildcard ) . '$#';
+		return '#^' . str_replace( '\*', '.+', preg_quote( $wildcard, '#' ) ) . '$#';
 	}
 
 	private function all_strings_array( array $top_level_filters ) {
@@ -133,19 +115,23 @@ class WPML_Admin_Text_Configuration extends WPML_Admin_Text_Functionality {
 		foreach ( $top_level_filters as $key => $filter ) {
 			$like                      = strpos( $filter, '*' ) !== false;
 			$comparator                = $like ? ' LIKE ' : '=';
-			$top_level_filters[ $key ] = $wpdb->prepare( ' option_name ' . $comparator . ' %s ',
-			                                             $like
-				                                             ? str_replace( '*', '%', $wpdb->esc_like( $filter ) )
-				                                             : $filter );
+			$top_level_filters[ $key ] = $wpdb->prepare(
+				' option_name ' . $comparator . ' %s ',
+				$like
+															 ? str_replace( '*', '%', $wpdb->esc_like( $filter ) )
+															 : $filter
+			);
 		}
 
 		$where = ' AND ( ' . join( ' OR ', $top_level_filters ) . ' )';
 
-		$strings     = $wpdb->get_results( "SELECT option_name, option_value
+		$strings     = $wpdb->get_results(
+			"SELECT option_name, option_value
 											FROM {$wpdb->options}
 											WHERE option_name NOT LIKE '_transient%'
 											AND option_name NOT LIKE '_site_transient%' {$where}
-											AND LENGTH(option_value) < 1000000" );
+											AND LENGTH(option_value) < 1000000"
+		);
 		$all_options = array();
 		foreach ( $strings as $data_pair ) {
 			if ( $this->is_blacklisted( $data_pair->option_name ) === false ) {
@@ -162,7 +148,7 @@ class WPML_Admin_Text_Configuration extends WPML_Admin_Text_Functionality {
 			foreach ( $option_value as $key => $value ) {
 				$ret[] = array(
 					'attr' => array( 'name' => $key ),
-					'key'  => $this->reformat_array( $value )
+					'key'  => $this->reformat_array( $value ),
 				);
 			}
 		}
@@ -171,11 +157,11 @@ class WPML_Admin_Text_Configuration extends WPML_Admin_Text_Functionality {
 	}
 
 	/**
-	 * @param $file_or_object
+	 * @param string $file_path
 	 *
 	 * @return bool
 	 */
-	private function can_handle_custom_xml( $file_or_object ) {
-		return is_string( $file_or_object ) && '' !== $file_or_object && file_exists( $file_or_object ) && class_exists( 'WPML_XML_Config_Validate' );
+	private function can_handle_custom_xml( $file_path ) {
+		return is_string( $file_path ) && '' !== $file_path && file_exists( $file_path ) && class_exists( 'WPML_XML_Config_Validate' );
 	}
 }

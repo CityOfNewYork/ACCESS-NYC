@@ -86,7 +86,7 @@ class WPML_ST_String_Dependencies_Node {
 		if ( ! $this->parent && ! $this->iteration_completed ) {
 			$this->iteration_completed = true;
 		}
-		
+
 		return $this;
 	}
 

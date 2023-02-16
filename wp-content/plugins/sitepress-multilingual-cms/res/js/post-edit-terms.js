@@ -1,25 +1,25 @@
 /*globals jQuery, WPML_core, ajaxurl, icl_post_edit_messages */
 (function () {
-	'use strict';
+    'use strict';
 
-	/** @namespace icl_post_edit_messages.switch_language_title */
-	/** @namespace icl_post_edit_messages.switch_language_alert */
-	/** @namespace icl_post_edit_messages.connection_loss_alert */
-	/** @namespace icl_post_edit_messages.switch_language_message */
-	/** @namespace icl_post_edit_messages.switch_language_confirm */
-	/** @namespace icl_post_edit_messages._nonce */
+    /** @namespace icl_post_edit_messages.switch_language_title */
+    /** @namespace icl_post_edit_messages.switch_language_alert */
+    /** @namespace icl_post_edit_messages.connection_loss_alert */
+    /** @namespace icl_post_edit_messages.switch_language_message */
+    /** @namespace icl_post_edit_messages.switch_language_confirm */
+    /** @namespace icl_post_edit_messages._nonce */
 
-	jQuery(document).ready(function () {
-		var language_selector;
-		/* Check if we have a language switcher present. */
-		language_selector = jQuery('select[name="icl_post_language"]');
-		if (jQuery('[name="_wpml_root_page"]').length !== 0) {
-			jQuery('#edit-slug-box').hide();
-		}
+    jQuery(function () {
+        var language_selector;
+        /* Check if we have a language switcher present. */
+        language_selector = jQuery('select[name="icl_post_language"]');
+        if (jQuery('[name="_wpml_root_page"]').length !== 0) {
+            jQuery('#edit-slug-box').hide();
+        }
 
-		if (language_selector.length !== 0) {
-			language_selector.on('change', iclPostLanguageAskConfirmation);
-			iclSwitchPostLanguage();
+        if (language_selector.length !== 0) {
+            language_selector.on('change', iclPostLanguageAskConfirmation);
+            iclSwitchPostLanguage();
 		} else {
 			// just add a hidden field with the information and the same id as the language switcher to the dom
 			jQuery.ajax({
@@ -126,7 +126,7 @@
 										},
 										success:  function () {
 											post_language_switcher.data('last_lang', new_post_language);
-											var url = jQuery(location).attr('href');
+											var url = WPML_core.sanitize(jQuery(location).attr('href'));
 											if (/lang=/.test(url)) {
 												url = url.replace(/([\?&])(lang=)[^&#]*/, '$1$2' + new_post_language);
 											} else {

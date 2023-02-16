@@ -1,0 +1,163 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "Enviando para traducción"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "Conectando con el Editor de traducción avanzado de WPML"
+         ],
+         "Try again": [
+            "Intentar de nuevo"
+         ],
+         "You don't have the rights to review this language": [
+            "Usted no tiene derechos para revisar este idioma"
+         ],
+         "pages & posts": [
+            "páginas y publicaciones"
+         ],
+         "left to translate": [
+            "pendientes de traducción"
+         ],
+         "Translate on hold": [
+            "Traducción suspendida"
+         ],
+         "All translated": [
+            "Todo traducido"
+         ],
+         "%d translations left": [
+            "Quedan %d traducciones"
+         ],
+         "Credits used:": [
+            "Crédito utilizado:"
+         ],
+         "Credits left:": [
+            "Crédito restante:"
+         ],
+         "Calculating": [
+            "Calculando"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "Crédito prepagado restante asignado a este sitio web en WPML.org."
+         ],
+         "Prepaid credits left": [
+            "Crédito prepagado restante"
+         ],
+         "Account credits used": [
+            "Crédito de la cuenta utilizado"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "Una vez que haya usado todo el crédito prepagado, le facturaremos todo crédito adicional que utilice después de finalizado el mes."
+         ],
+         "Payment limit:": [
+            "Límite de pago:"
+         ],
+         "%s credits": [
+            "%s créditos"
+         ],
+         "Preparing more content for translation": [
+            "Preparando más contenido para traducir"
+         ],
+         "Preparing content for translation": [
+            "Preparando contenido para traducir"
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "Hay un problema con la traducción automática que requiere su atención. Soluciónelo para continuar."
+         ],
+         "%d translations waiting for review": [
+            "%d traducciones a la espera de revisión"
+         ],
+         "Draft — Pending review": [
+            "Borrador: pendiente de revisión"
+         ],
+         "Complete": [
+            "Terminada"
+         ],
+         "Insufficient funds": [
+            "Fondos insuficientes"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "Más información sobre cómo traducir contenido en la <a>Guía de inicio</a>"
+         ],
+         "Let's Start Translating!": [
+            "¡Empecemos a traducir!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "Seleccione el contenido en el Panel de traducción a continuación y ¡cree su primer trabajo de traducción!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "Cambie la <a>configuración de traducción automática</a> (los trabajos de traducción en progreso se completarán con la configuración actual)."
+         ],
+         "Read more about translating your site automatically.": [
+            "Más información sobre la traducción automática del sitio web."
+         ],
+         "Your site is being automatically translated!": [
+            "¡Su sitio web se está traduciendo automáticamente!"
+         ],
+         "Automatic Translation Status": [
+            "Estado de la traducción automática"
+         ],
+         "Calculating...": [
+            "Calculando..."
+         ],
+         "Do not close WP admin!": [
+            "¡No cierre la administración de WP!"
+         ],
+         "The number of translations": [
+            "La cantidad de traducciones"
+         ],
+         "Delete Translations": [
+            "Eliminar traducciones"
+         ],
+         "Keep Translations as Draft": [
+            "Mantener las traducciones como borrador"
+         ],
+         "Never mind. I want to review these translations.": [
+            "Da lo mismo. Yo quiero revisar estas traducciones."
+         ],
+         "Cancel": [
+            "Cancelar"
+         ],
+         "You haven't selected any jobs that need review.": [
+            "No ha seleccionado ningún trabajo que requiera revisión."
+         ],
+         "Please select the pending review jobs to abort.": [
+            "Seleccione los trabajos de revisión pendientes para anular."
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "Esto quitará los trabajos seleccionados de la cola de traducción sin publicarlos. ¿Qué desea hacer con las traducciones?"
+         ],
+         "Cancel Translation Review": [
+            "Cancelar la revisión de traducción"
+         ],
+         "Edit": [
+            "Editar"
+         ],
+         "Updating": [
+            "Actualizando"
+         ],
+         "Translate": [
+            "Traducir"
+         ],
+         "Take and translate": [
+            "Aceptar y traducir"
+         ],
+         "Review": [
+            "Reseña"
+         ],
+         "Are you sure you want to resign from this job?": [
+            "¿Está seguro de que desea renunciar a este trabajo?"
+         ],
+         "Resign": [
+            "Renunciar"
+         ],
+         "View": [
+            "Ver"
+         ]
+      }
+   }
+}

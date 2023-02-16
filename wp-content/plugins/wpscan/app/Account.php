@@ -24,44 +24,35 @@ class Account {
 	public function __construct( $parent ) {
 		$this->parent = $parent;
 
-		add_action( 'wpscan/api/get/after', array( $this, 'update_account_status' ), 10, 2 );
 		add_action( 'admin_init', array( $this, 'add_account_summary_meta_box' ) );
 	}
 
 	/**
-	 * Update account status after the api request.
+	 * Update account status by calling the /status endpoint.
 	 *
 	 * @since 1.0.0
-	 * @param string $endpoint endpoint.
-	 * @param string $response response.
+	 * @param string $api_token
 	 * @access public
 	 * @return void
 	 */
-	public function update_account_status( $endpoint, $response ) {
-		$wp_endpoit = '/wordpresses/' . str_replace( '.', '', get_bloginfo( 'version' ) );
+	public function update_account_status( $api_token = null ) {
+		$current = get_option( $this->parent->OPT_ACCOUNT_STATUS, array() );
+		$updated = $current;
+		
+		$req = $this->parent->api_get( '/status', $api_token );
+		
+		if ( is_object( $req ) ) {
+			$updated['plan'] = $req->plan;
 
-		if ( $endpoint === $wp_endpoit ) {
-			$current = get_option( $this->parent->OPT_ACCOUNT_STATUS, array() );
-			$updated = $current;
-
-			$updated['limit']     = wp_remote_retrieve_header( $response, 'x-ratelimit-limit' );
-			$updated['remaining'] = wp_remote_retrieve_header( $response, 'x-ratelimit-remaining' );
-			$updated['reset']     = wp_remote_retrieve_header( $response, 'x-ratelimit-reset' );
-
-			if ( ! isset( $current['plan'] ) || $current['limit'] !== $updated['limit'] ) {
-				$req = $this->parent->api_get( '/status' );
-
-				// Plan.
-				if ( is_object( $req ) ) {
-					$updated['plan'] = $req->plan;
-				}
-
-				// For enterprise users.
-				if ( -1 === $req->requests_remaining ) {
-					$updated['limit']     = __( 'unlimited', 'wpscan' );
-					$updated['remaining'] = __( 'unlimited', 'wpscan' );
-					$updated['reset']     = __( 'unlimited', 'wpscan' );
-				}
+			// Enterprise users.
+			if ( -1 === $req->requests_remaining ) {
+				$updated['limit']     = __( 'unlimited', 'wpscan' );
+				$updated['remaining'] = __( 'unlimited', 'wpscan' );
+				$updated['reset']     = __( 'unlimited', 'wpscan' );
+			} else {
+				$updated['limit']     = $req->requests_limit;
+				$updated['remaining'] = $req->requests_remaining;
+				$updated['reset']     = $req->requests_reset;
 			}
 
 			update_option( $this->parent->OPT_ACCOUNT_STATUS, $updated );
@@ -97,9 +88,9 @@ class Account {
 	 */
 	public function get_account_status() {
 		$defaults = array(
-			'plan'      => 'NO DATA',
-			'limit'     => 50,
-			'remaining' => 50,
+			'plan'      => 'None',
+			'limit'     => 25,
+			'remaining' => 25,
 			'reset'     => time(),
 		);
 

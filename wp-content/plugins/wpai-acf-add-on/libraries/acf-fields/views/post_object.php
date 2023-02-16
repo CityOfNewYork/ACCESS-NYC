@@ -8,7 +8,7 @@
 
 <input
     type="text"
-    style="width:5%; text-align:center;"
+    style="text-align:center;"
     value="<?php echo (!empty($current_field['delim'])) ? esc_attr( $current_field['delim'] ) : ',';?>"
     name="fields<?php echo $field_name;?>[<?php echo $field['key'];?>][delim]"
     class="small rad4">

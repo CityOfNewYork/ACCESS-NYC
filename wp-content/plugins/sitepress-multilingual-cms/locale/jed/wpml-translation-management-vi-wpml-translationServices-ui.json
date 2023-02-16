@@ -1,0 +1,49 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Connect this site to your %s account": [
+            "Kết nối trang web này với tài khoản %s của bạn"
+         ],
+         "Error": [
+            "Lỗi"
+         ],
+         "« Use a different Translation Service": [
+            "« Sử dụng một Dịch vụ Dịch thuật khác"
+         ],
+         "Authenticate": [
+            "Xác thực"
+         ],
+         "Visit <link_to_service /> to request an API Token. This token allows WPML to connect to <service_name /> to send and receive jobs.": [
+            "Truy cập <link_to_service /> để yêu cầu một API Token. Token này cho phép WPML két nối với <service_name /> để gửi và nhận việc."
+         ],
+         "Search": [
+            "Tìm kiếm"
+         ],
+         "Settings": [
+            "Cài đặt"
+         ],
+         "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
+            "Hiện không thể kết nối với một dịch vụ dịch thuật khi WPML được thiết lập để dịch tự động nội dung trang web của bạn. Để sử dụng một dịch vụ dịch thuật, hãy thay đổi chế độ dịch thuật của bạn trên trang <LinkToSettingsPage />."
+         ],
+         "Documentation": [
+            "Tài liệu"
+         ],
+         "Activate": [
+            "Kích hoạt"
+         ],
+         "Name": [
+            "Tên"
+         ],
+         "Description": [
+            "Miêu tả"
+         ],
+         "Ranking": [
+            "Xếp hạng"
+         ]
+      }
+   }
+}

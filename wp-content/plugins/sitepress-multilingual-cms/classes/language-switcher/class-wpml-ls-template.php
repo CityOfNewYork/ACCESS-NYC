@@ -20,13 +20,15 @@ class WPML_LS_Template extends WPML_Templates_Factory {
 	 * @param array $template_model
 	 */
 	public function __construct( $template_data, $template_model = array() ) {
-		$this->template = $this->format_data( $template_data );
+		$this->template        = $this->format_data($template_data);
+		$this->template['js']  = self::remove_non_minified_duplicates( $this->template['js'] );
+		$this->template['css'] = self::remove_non_minified_duplicates( $this->template['css'] );
 
 		if ( array_key_exists( 'template_string', $this->template ) ) {
 			$this->template_string = $this->template['template_string'];
 		}
 
-		$this->model    = $template_model;
+		$this->model = $template_model;
 		parent::__construct();
 	}
 
@@ -55,6 +57,9 @@ class WPML_LS_Template extends WPML_Templates_Factory {
 
 	/**
 	 * @return string
+	 * @throws \WPML\Core\Twig\Error\LoaderError
+	 * @throws \WPML\Core\Twig\Error\RuntimeError
+	 * @throws \WPML\Core\Twig\Error\SyntaxError
 	 */
 	public function get_html() {
 		$ret = '';
@@ -70,9 +75,11 @@ class WPML_LS_Template extends WPML_Templates_Factory {
 	 * @return array
 	 */
 	public function get_styles( $with_version = false ) {
-		return $with_version
+		$styles = $with_version
 			? array_map( array( $this, 'add_resource_version' ), $this->template['css'] )
 			: $this->template['css'];
+
+		return array_values( $styles );
 	}
 
 	/**
@@ -88,9 +95,11 @@ class WPML_LS_Template extends WPML_Templates_Factory {
 	 * @return array
 	 */
 	public function get_scripts( $with_version = false ) {
-		return $with_version
+		$scripts = $with_version
 			? array_map( array( $this, 'add_resource_version' ), $this->template['js'] )
 			: $this->template['js'];
+
+		return array_values( $scripts );
 	}
 
 	/**
@@ -118,6 +127,7 @@ class WPML_LS_Template extends WPML_Templates_Factory {
 	 */
 	public function get_inline_style_handler() {
 		$count = count( $this->template['css'] );
+
 		return $count > 0 ? $this->get_resource_handler( $count - 1 ) : null;
 	}
 
@@ -203,4 +213,34 @@ class WPML_LS_Template extends WPML_Templates_Factory {
 			$this->template_string = $template_string;
 		}
 	}
+
+
+
+    /**
+     * If an asset has a minified and a non-minified version,
+     * we remove the non-minified version.
+     *
+     * @param array $assets
+     *
+     * @return array
+     */
+    public static function remove_non_minified_duplicates( array $assets ) {
+        $hasMinifiedVersion = function( $url ) use ( $assets ) {
+            $extension = pathinfo( $url, PATHINFO_EXTENSION );
+            $basename  = pathinfo( $url, PATHINFO_BASENAME );
+            $filename  = pathinfo( $url, PATHINFO_FILENAME );
+
+            $url_start     = substr( $url, 0, strlen( $url ) - strlen( $basename ) );
+            $minified_file = $filename . '.min.' . $extension;
+            if ( in_array( $url_start . $minified_file, $assets, true ) ) {
+                return true;
+            }
+
+            return false;
+        };
+
+        return wpml_collect( $assets )
+            ->reject( $hasMinifiedVersion )
+            ->toArray();
+    }
 }

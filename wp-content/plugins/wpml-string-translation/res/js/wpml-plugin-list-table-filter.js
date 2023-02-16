@@ -1,7 +1,7 @@
 (function ($, window) {
     "use strict";
 
-    $(document).ready(function () {
+    $(function () {
         $('.wpml_plugin_table_filters').find('a').each(function (i, element) {
             $(element).on('click', function (e) {
                 e.preventDefault();

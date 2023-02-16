@@ -1,0 +1,22 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Draft — Pending review": [
+            "Entwurf — Überprüfung steht aus"
+         ],
+         "Complete": [
+            "Fertig"
+         ],
+         "Insufficient funds": [
+            "Nicht genug Geldmittel"
+         ],
+         "Editor Job ID": [
+            "Editor-Auftrags-ID"
+         ]
+      }
+   }
+}

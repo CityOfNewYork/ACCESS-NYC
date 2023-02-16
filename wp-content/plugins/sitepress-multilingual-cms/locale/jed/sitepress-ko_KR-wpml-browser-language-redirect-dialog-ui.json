@@ -1,0 +1,34 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "How Browser Language Redirect Affects Google Indexing": [
+            "브라우저 언어 리디렉션이 Google 색인에 미치는 영향"
+         ],
+         "Documentation": [
+            "설명서"
+         ],
+         "Browser redirect affects Google indexing and search results": [
+            "브라우저 리디렉션은 Google 색인과 검색 결과에 영향을 미칩니다."
+         ],
+         "Got it, activate anyway": [
+            "이해했습니다. 그래도 활성화함"
+         ],
+         "Cancel": [
+            "취소"
+         ],
+         "When you redirect visitors based on their language, you also redirect Google. Google wants to see your site exactly like visitors see it, including any redirects that you apply.": [
+            "언어에 따라 방문자들을 리디렉션하면 Google도 리디렉션하게 됩니다. Google은 적용되는 리디렉션을 포함하여 방문자들이 사이트를 보는 것과 동일하게 사이트를 보기를 원합니다."
+         ],
+         "It is OK to redirect visitors based on their language, but you need to realize that this feature affects SEO.": [
+            "언어에 따라 방문자들을 리디렉션해도 되지만 이 기능은 SEO에 영향을 미친다는 점을 이해해야 합니다."
+         ],
+         "Before proceeding, we recommend that you read these two pages:": [
+            "진행하기 전에 다음 두 페이지를 읽는 것이 좋습니다:"
+         ]
+      }
+   }
+}

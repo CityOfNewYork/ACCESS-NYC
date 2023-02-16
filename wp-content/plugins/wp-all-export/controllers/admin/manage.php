@@ -99,13 +99,13 @@ class PMXE_Admin_Manage extends PMXE_Controller_Admin {
 
 		$wp_uploads = wp_upload_dir();	
 
-		$this->data['file_path'] = site_url() . '/wp-cron.php?security_token=' . substr(md5($this->data['cron_job_key'] . $item['id']), 0, 16) . '&export_id=' . $item['id'] . '&action=get_data'; 
+		$this->data['file_path'] = site_url() . '/wp-load.php?security_token=' . substr(md5($this->data['cron_job_key'] . $item['id']), 0, 16) . '&export_id=' . $item['id'] . '&action=get_data';
 
 		$this->data['bundle_url'] = ''; 
 
 		if ( ! empty($item['options']['bundlepath']) )
 		{			
-			$this->data['bundle_url'] = site_url() . '/wp-cron.php?security_token=' . substr(md5($this->data['cron_job_key'] . $item['id']), 0, 16) . '&export_id=' . $item['id'] . '&action=get_bundle&t=zip';
+			$this->data['bundle_url'] = site_url() . '/wp-load.php?security_token=' . substr(md5($this->data['cron_job_key'] . $item['id']), 0, 16) . '&export_id=' . $item['id'] . '&action=get_bundle&t=zip';
 		}		
 
 		$this->render();
@@ -123,7 +123,7 @@ class PMXE_Admin_Manage extends PMXE_Controller_Admin {
 			wp_redirect($this->baseUrl); die();
 		}
 		
-		$this->data['file_path'] = site_url() . '/wp-cron.php?security_token=' . substr(md5($this->data['cron_job_key'] . $item['id']), 0, 16) . '&export_id=' . $item['id'] . '&action=get_data';
+		$this->data['file_path'] = site_url() . '/wp-load.php?security_token=' . substr(md5($this->data['cron_job_key'] . $item['id']), 0, 16) . '&export_id=' . $item['id'] . '&action=get_data';
 
 		$this->render();
 	}

@@ -1,0 +1,34 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "How Browser Language Redirect Affects Google Indexing": [
+            "ブラウザ言語リダイレクトが、Google Indexingに影響を与える理由"
+         ],
+         "Documentation": [
+            "資料"
+         ],
+         "Browser redirect affects Google indexing and search results": [
+            "ブラウザリダイレクトは、Google indexingと検索結果に影響を与えます"
+         ],
+         "Got it, activate anyway": [
+            "了解、とにかく起動する"
+         ],
+         "Cancel": [
+            "キャンセル"
+         ],
+         "When you redirect visitors based on their language, you also redirect Google. Google wants to see your site exactly like visitors see it, including any redirects that you apply.": [
+            "彼らの言語に基づいて閲覧者をリダイレクトすると、Googleもリダイレクトすることになります。Googleは、あなたが適用するリダイレクトを含むサイトを、閲覧者が見るように正確に表示したいと考えています。"
+         ],
+         "It is OK to redirect visitors based on their language, but you need to realize that this feature affects SEO.": [
+            "言語に基づいて閲覧者をリダイレクトすることは問題ありませんが、この特徴はSEOに影響を与えることに注意する必要があります。\r\n"
+         ],
+         "Before proceeding, we recommend that you read these two pages:": [
+            "続ける前に、次の2ページを読むことをおすすめします："
+         ]
+      }
+   }
+}

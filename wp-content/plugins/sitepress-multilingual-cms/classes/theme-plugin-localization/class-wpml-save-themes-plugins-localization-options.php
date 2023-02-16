@@ -22,13 +22,13 @@ class WPML_Save_Themes_Plugins_Localization_Options {
 				$value = filter_var( $settings[ $key ], $setting['filter'] );
 				if ( 'setting' === $setting['type'] ) {
 					if ( $setting['st_setting'] ) {
-						$st_settings = $this->sitepress->get_setting( 'st' );
+						$st_settings                             = $this->sitepress->get_setting( 'st' );
 						$st_settings[ $setting['settings_var'] ] = $value;
 						$this->sitepress->set_setting( 'st', $st_settings );
 					} else {
 						$this->sitepress->set_setting( $setting['settings_var'], $value );
 					}
-				} elseif( 'option' === $setting['type'] ){
+				} elseif ( 'option' === $setting['type'] ) {
 					update_option( $setting['settings_var'], $value );
 				}
 			}
@@ -41,18 +41,18 @@ class WPML_Save_Themes_Plugins_Localization_Options {
 
 	/** @return array */
 	private function get_settings() {
-		$settings = array();
+		$settings                                       = array();
 		$settings['theme_localization_load_textdomain'] = array(
 			'settings_var' => 'theme_localization_load_textdomain',
-			'filter' => FILTER_SANITIZE_NUMBER_INT,
-			'type' => 'setting',
-			'st_setting' => false,
+			'filter'       => FILTER_SANITIZE_NUMBER_INT,
+			'type'         => 'setting',
+			'st_setting'   => false,
 		);
-		$settings['gettext_theme_domain_name'] = array(
+		$settings['gettext_theme_domain_name']          = array(
 			'settings_var' => 'gettext_theme_domain_name',
-			'filter' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-			'type' => 'setting',
-			'st_setting' => false,
+			'filter'       => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+			'type'         => 'setting',
+			'st_setting'   => false,
 		);
 
 		/**

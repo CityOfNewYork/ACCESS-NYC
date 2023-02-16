@@ -91,17 +91,27 @@ class WPML_Displayed_String_Filter {
 	 */
 	protected function get_translation( $untranslated_text, $name, $context ) {
 		list ( $name, $domain, $gettext_context ) = $this->transform_parameters( $name, $context );
-		$untranslated_text = is_numeric( $untranslated_text ) ? (string) $untranslated_text : $untranslated_text;
+		$untranslated_text                        = is_numeric( $untranslated_text ) ? (string) $untranslated_text : $untranslated_text;
 
-		$translation = $this->translator->translate( new StringEntity(
-			$untranslated_text, $name, $domain, $gettext_context
-		) );
+		$translation = $this->translator->translate(
+			new StringEntity(
+				$untranslated_text,
+				$name,
+				$domain,
+				$gettext_context
+			)
+		);
 
 		if ( ! $translation->hasTranslation() ) {
 			list( $name, $domain ) = array_map( array( $this, 'truncate_long_string' ), array( $name, $domain ) );
-			$translation = $this->translator->translate( new StringEntity(
-				$untranslated_text, $name, $domain, $gettext_context
-			) );
+			$translation           = $this->translator->translate(
+				new StringEntity(
+					$untranslated_text,
+					$name,
+					$domain,
+					$gettext_context
+				)
+			);
 		}
 
 		return $translation;

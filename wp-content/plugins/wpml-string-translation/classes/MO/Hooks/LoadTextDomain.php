@@ -10,6 +10,8 @@ use function WPML\FP\partial;
 
 class LoadTextDomain implements \IWPML_Action {
 
+	const PRIORITY_OVERRIDE = 10;
+
 	/** @var Manager $file_manager */
 	private $file_manager;
 

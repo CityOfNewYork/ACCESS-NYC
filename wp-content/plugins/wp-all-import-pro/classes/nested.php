@@ -23,7 +23,8 @@ if ( ! class_exists('PMXI_Nested')){
 			if ( ! empty($this->nested_files) ){				
 				$tmp_files = array();
 				foreach ($this->nested_files as $key => $nfile) {
-					$nested_fileURL = array_shift(XmlImportParser::factory($this->xml, $this->xpath, $nfile, $tmp_file)->parse()); $tmp_files[] = $tmp_file;						
+					$factory = XmlImportParser::factory($this->xml, $this->xpath, $nfile, $tmp_file)->parse();
+					$nested_fileURL = array_shift($factory); $tmp_files[] = $tmp_file;
 					if ( ! empty($nested_fileURL) ){
 						$errors = new WP_Error();
 

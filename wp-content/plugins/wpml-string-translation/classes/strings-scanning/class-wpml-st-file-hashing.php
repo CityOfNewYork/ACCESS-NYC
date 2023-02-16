@@ -29,7 +29,7 @@ class WPML_ST_File_Hashing {
 
 	public function save_hash() {
 		$needs_to_save = false;
-		if (array_key_exists( 'files', $_POST ) ) {
+		if ( array_key_exists( 'files', $_POST ) ) {
 			foreach ( $_POST['files'] as $file_path ) {
 				if ( realpath( $file_path ) ) {
 					$this->set_hash( $file_path );

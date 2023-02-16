@@ -16,10 +16,10 @@ class WPML_Element_Sync_Settings {
 	 */
 	public function is_sync( $type ) {
 		return isset( $this->settings[ $type ] ) &&
-		       (
-			       $this->settings[ $type ] == WPML_CONTENT_TYPE_TRANSLATE ||
-			       $this->settings[ $type ] == WPML_CONTENT_TYPE_DISPLAY_AS_IF_TRANSLATED
-		       );
+			   (
+				   $this->settings[ $type ] == WPML_CONTENT_TYPE_TRANSLATE ||
+				   $this->settings[ $type ] == WPML_CONTENT_TYPE_DISPLAY_AS_IF_TRANSLATED
+			   );
 	}
 
 }

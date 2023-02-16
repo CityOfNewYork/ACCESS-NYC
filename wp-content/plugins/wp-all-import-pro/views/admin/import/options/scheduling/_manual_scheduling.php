@@ -1,4 +1,4 @@
-<div>
+<div style="padding-top:11px;">
     <label class="manual-scheduling-label">
         <input type="radio" name="scheduling_enable"
                value="2" <?php if ($post['scheduling_enable'] == 2) { ?> checked="checked" <?php } ?>/>

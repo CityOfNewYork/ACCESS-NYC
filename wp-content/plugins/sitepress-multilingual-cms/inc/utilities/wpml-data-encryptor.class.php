@@ -39,7 +39,6 @@ class WPML_Data_Encryptor {
 	 *
 	 * @param string $key_salt
 	 * @param string $method
-	 *
 	 */
 	public function __construct( $key_salt = '', $method = 'AES-256-CTR' ) {
 
@@ -48,7 +47,7 @@ class WPML_Data_Encryptor {
 		}
 
 		if ( function_exists( 'openssl_encrypt' ) && function_exists( 'openssl_decrypt' )
-		     && version_compare( phpversion(), '5.3.2', '>' ) ) {
+			 && version_compare( phpversion(), '5.3.2', '>' ) ) {
 
 			$methods = openssl_get_cipher_methods();
 			if ( ! in_array( $method, $methods ) && ! empty( $methods ) ) {
@@ -57,10 +56,10 @@ class WPML_Data_Encryptor {
 				$this->method = $method;
 			}
 			$this->library = 'openssl';
-			$this->key   = substr( sha1( $key_salt, true ), 0, 16 );
-			$this->iv    = substr( $key_salt, 0, 16 );
+			$this->key     = substr( sha1( $key_salt, true ), 0, 16 );
+			$this->iv      = substr( $key_salt, 0, 16 );
 
-		} else if ( function_exists( 'mcrypt_encrypt' ) && function_exists( 'mcrypt_decrypt' ) ) { // PHP 5.2 support
+		} elseif ( function_exists( 'mcrypt_encrypt' ) && function_exists( 'mcrypt_decrypt' ) ) { // PHP 5.2 support
 			$this->library = 'mcrypt';
 			$this->key     = substr( NONCE_KEY, 0, 24 );
 			$this->iv      = mcrypt_create_iv( mcrypt_get_iv_size( MCRYPT_RIJNDAEL_256, MCRYPT_MODE_ECB ), MCRYPT_RAND );
@@ -108,14 +107,14 @@ class WPML_Data_Encryptor {
 	/**
 	 * @param string $library
 	 */
-	public function set_crypt_library( $library ){
+	public function set_crypt_library( $library ) {
 		$this->library = $library;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function get_crypt_library(){
+	public function get_crypt_library() {
 		return $this->library;
 	}
 
@@ -123,7 +122,7 @@ class WPML_Data_Encryptor {
 	 * @return string
 	 */
 	private function get_key_salt() {
-		if ( defined( 'NONCE_SALT' ) ){
+		if ( defined( 'NONCE_SALT' ) ) {
 			return NONCE_SALT;
 		}
 

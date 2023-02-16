@@ -2,10 +2,10 @@
 Contributors: ShortPixel
 Donate link: https://www.paypal.me/resizeImage
 Tags: replace, attachment, media, files, replace image, replace jpg, change media, replace media, image, file
-Requires at least: 4.9
-Tested up to: 5.5.1
+Requires at least: 4.9.7
+Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 3.5.0
+Stable tag: 3.6.3
 
 Easily replace any attached image/file by simply uploading a new file in the Media Library edit view - a real time saver!
 
@@ -25,9 +25,9 @@ Now you'll be able to replace any uploaded file from the media "edit" view, wher
 #### It's simple to replace a file
 
 1. Just replace the file. This option requires you to upload a file of the same type as the one you are replacing. The name of the attachment will stay the same no matter what the file you upload is called.
-1. Replace the file, use new file name and update all links. If you check this option, the name and type of the file you are about to upload will replace the old file. All links pointing to the current file will be updated to point to the new file name.
+1. Replace the file, use new file name and update all links. If you check this option, the name and type of the file you are about to upload will replace the old file. All links pointing to the current file will be updated to point to the new file name. Additional options for the folder where to place the new file, or the date of the new file are also available on the replace screen.
 
-This plugin is very powerful and a must-have for any larger sites built with WordPress. It now also comes with preview of the replaced image!
+This plugin is very powerful and a must-have for any larger sites built with WordPress. It now also comes with a preview of the replaced image!
 
 #### Display file modification time
 
@@ -46,6 +46,41 @@ If you want more control over the format used to display the time, you can use t
 * [Regenerate Thumbnails Advanced](https://wordpress.org/plugins/regenerate-thumbnails-advanced/) - Fast, free and simple to use plugin to regenerate the thumbnails for your site after changing a theme (for example). Supported & maintained by [ShortPixel](https://ShortPixel.com)
 
 == Changelog ==
+
+= 3.6.3 =
+
+Release date: November 25th, 2021
+* Fix: the shortcode `file-modified` works again for non-privileged visitors as well;
+* Compat: if other plugins don't properly use WP Hooks, don't return errors;
+* Tweak: updated banners list from the EMR screen.
+
+= 3.6.2 =
+
+Release date: November 8th, 2021
+* Fix: there was an issue in file.php with checking mime-type, resulting in weird mime-type values in certain cases (thanks @dougaxe1 for the PR);
+* Fix: if target mime type returns empty, don't store that;
+* Tweak: removed old notification about SPIO.
+
+= 3.6.1 =
+
+Release date: October 27th, 2021
+* Fix: there was a broken image in one of the plugin notices;
+* Fix: added a check for the function `mime_content_type`, which doesn't seem to always be available on various hosts;
+* Fix: the plugin checks if the current user has rights to install/activate plugins and only then displays the 1-click installers and also a filter is available now;
+
+= 3.6.0 =
+
+Release date: October 11th, 2021
+* New: Constant EMR_CAPABILITY can define extra user roles to allow and deny replacements;
+* New: Replacing an usual image with an SVG file will just replace all thumbnails by the main file;
+* New: Also replaces caption when set in Exif data (when replacing with updating all links);
+* Tweak: Added Now and Original options to Custom Date for usability;
+* Tweak: changes/updates to the banners from the EMR screen;
+* Fix: EMR now respects edit_other_posts permissions using default permissions;
+* Fix: EMR with ALLOW_UNFILTERED_UPLOADS enabled (and allowed role) will not limit non-allowed uploads;
+* Fix: some missing and wrong text-domains are now corrected (thanks @alexclassroom);
+* Fix: a missing dot in the plugin description was preventing the transaltions to properly work;
+* Fix: the plugin can now be uninstalled/deleted on PHP 8.
 
 = 3.5.0 =
 

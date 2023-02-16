@@ -2,7 +2,6 @@
 
 namespace WPML\Media\Duplication;
 
-
 abstract class AbstractFactory implements \IWPML_Backend_Action_Loader, \IWPML_Frontend_Action_Loader {
 	/**
 	 * @return bool

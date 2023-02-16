@@ -60,12 +60,12 @@ class FieldGroupV5 extends Field {
     /**
      * @return int
      */
-    public function getCountValues() {
+    public function getCountValues($parentIndex = false) {
         $countRows = 0;
         /** @var Field $field */
         foreach ($this->getSubFields() as $field){
             $field->importData = $this->getImportData();
-            $count = $field->getCountValues();
+            $count = $field->getCountValues($parentIndex);
             if ($count > $countRows){
                 $countRows = $count;
             }

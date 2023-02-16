@@ -2,7 +2,6 @@
 
 namespace WPML\ST\StringsFilter;
 
-
 class QueryBuilder {
 	/** @var \wpdb */
 	private $wpdb;
@@ -18,7 +17,7 @@ class QueryBuilder {
 	}
 
 	/**
-	 * @param $language
+	 * @param string $language
 	 *
 	 * @return $this
 	 */
@@ -47,7 +46,7 @@ class QueryBuilder {
 	 */
 	public function filterByString( StringEntity $string ) {
 		$this->where = $this->wpdb->prepare(
-			"s.name = %s AND s.context = %s AND s.gettext_context = %s",
+			's.name = %s AND s.context = %s AND s.gettext_context = %s',
 			$string->getName(),
 			$string->getDomain(),
 			$string->getContext()

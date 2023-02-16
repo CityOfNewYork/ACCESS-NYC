@@ -6,26 +6,20 @@
 function pmai_pmxi_reimport($entry, $post){
 	global $acf;
 	if ($acf and version_compare($acf->settings['version'], '5.0.0') >= 0) {
-		$acfs = get_posts(array('posts_per_page' => -1, 'post_type' => 'acf-field'));
-		$all_existing_acf = array();
-		if ( ! empty($acfs) ){
-			foreach ($acfs as $key => $acf_entry) {
-				$all_existing_acf[] = '[' . $acf_entry->post_excerpt . '] ' . $acf_entry->post_title;
+		$groups = acf_get_field_groups();
+		if ( ! empty($groups) ) {
+			foreach ($groups as $group) {
+				$fields = acf_get_fields($group);
+				if (!empty($fields)) {
+					foreach ($fields as $key => $field) {
+					    if ( ! empty($field['name']) ) {
+						    $all_existing_acf[] = '[' . $field['name'] . '] ' . $field['label'];
+                        }
+					}
+				}
 			}
 		}
-        if (function_exists('acf_local')) {
-            $fields = acf_local()->fields;
-        }
-        if (empty($fields) && function_exists('acf_get_local_fields')) {
-            $fields = acf_get_local_fields();
-        }
-		if ( ! empty($fields) ) {
-			foreach ($fields as $key => $field) {
-				$all_existing_acf[] = '[' . $field['name'] . '] ' . $field['label'];
-			}
-		}
-	}
-	else {
+	} else {
 		$acfs = get_posts(array('posts_per_page' => -1, 'post_type' => 'acf'));
 		$all_existing_acf = array();
 		if (!empty($acfs)) {

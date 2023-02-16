@@ -13,8 +13,10 @@ class PMXE_Export_Record extends PMXE_Model_Record {
 	
 	/**
 	 * Import all files matched by path
+	 *
 	 * @param callable[optional] $logger Method where progress messages are submmitted
-	 * @return PMXI_Import_Record
+	 *
+	 * @return PMXE_Export_Record
 	 * @chainable
 	 */
 	public function execute($logger = NULL, $cron = false) {
@@ -51,8 +53,10 @@ class PMXE_Export_Record extends PMXE_Model_Record {
 		$filter_args = array(
 			'filter_rules_hierarhy' => $this->options['filter_rules_hierarhy'],
 			'product_matching_mode' => $this->options['product_matching_mode'],
-            'taxonomy_to_export' => empty($this->options['taxonomy_to_export']) ? '' : $this->options['taxonomy_to_export']
-		);
+            'taxonomy_to_export' => empty($this->options['taxonomy_to_export']) ? '' : $this->options['taxonomy_to_export'],
+            'sub_post_type_to_export' => empty($this->options['sub_post_type_to_export']) ? '' : $this->options['sub_post_type_to_export']
+
+        );
 
         $filters = \Wpae\Pro\Filtering\FilteringFactory::getFilterEngine();
         $filters->init($filter_args);
@@ -364,7 +368,7 @@ class PMXE_Export_Record extends PMXE_Model_Record {
 
 	                $headers = 'From: '. get_bloginfo( 'name' ) .' <'. get_bloginfo( 'admin_email' ) .'>' . "\r\n";
 	                
-	                $message = '<p>Export '. $this->options['friendly_name'] .' has been completed. You can find exported file in attachments.</p>';                
+	                $message = '<p>Export '. wp_all_export_clear_xss($this->options['friendly_name']) .' has been completed. You can find exported file in attachments.</p>';
 
 	                wp_mail($this->options['scheduled_email'], __("WP All Export", "pmxe_plugin"), $message, $headers, array($file_path));
 
@@ -671,7 +675,7 @@ class PMXE_Export_Record extends PMXE_Model_Record {
     	if ( $options['export_to'] == 'xml' && ! empty($options['xml_template_type']) && in_array($options['xml_template_type'], array('custom', 'XmlGoogleMerchants')) ) return false;
 
         // Export only parent product do not support import bundle
-        if ( ! empty($options['cpt']) and in_array($options['cpt'][0], array('product', 'product_variation')) and class_exists('WooCommerce') and $options['export_variations'] != XmlExportEngine::VARIABLE_PRODUCTS_EXPORT_PARENT_AND_VARIATION){
+        if ( ! empty($options['cpt']) and in_array($options['cpt'][0], array('product', 'product_variation')) and class_exists('WooCommerce') and $options['export_variations'] == XmlExportEngine::VARIABLE_PRODUCTS_EXPORT_VARIATION){
             return false;
         }
 
@@ -681,8 +685,8 @@ class PMXE_Export_Record extends PMXE_Model_Record {
 
     /**
 	 * Clear associations with posts	 
-	 * @return PMXE_Import_Record
-	 * @chainable
+	 * @return PMXE_Export_Record
+     * @chainable
 	 */
 	public function deletePosts() {
 		$post = new PMXE_Post_List();					

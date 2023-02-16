@@ -29,7 +29,7 @@
 	});
 
 	// help scheduling template
-	$('.help_scheduling').click(function(){
+	$('.help_scheduling').on('click', function(){
 
 		$('.wp-all-import-scheduling-help').css('left', ($( document ).width()/2) - 255 ).show();
 		$('#wp-all-import-scheduling-help-inner').css('max-height', $( window ).height()-150).show();
@@ -39,7 +39,7 @@
 
 	var saveSubscription = false;
 
-	$('#add-subscription').click(function(){
+	$('#add-subscription').on('click', function(){
 		$('#add-subscription-field').show();
 		$('#add-subscription-field').animate({width:'400px'}, 225);
 		$('#add-subscription-field').animate({left:'0'}, 225);
@@ -55,7 +55,7 @@
 		return false;
 	});
 
-	$('.wp_all_import_scheduling_help').find('h3').click(function(){
+	$('.wp_all_import_scheduling_help').find('h3').on('click', function(){
 		var $action = $(this).find('span').html();
 		$('.wp_all_import_scheduling_help').find('h3').each(function(){
 			$(this).find('span').html("+");
@@ -107,15 +107,16 @@
                         $('.timepicker').timepicker();
 
                         var $leftOffset = ($(window).width() - 715) / 2;
+						var $topOffset = $(document).scrollTop() + 100;
 
                         var $pointer = $('.wp-pointer').last();
-                        $pointer.css({'position': 'absolute', 'top': '50px', 'left': $leftOffset + 'px'});
+                        $pointer.css({'position': 'absolute', 'top': $topOffset + 'px', 'left': $leftOffset + 'px'});
 
                         $pointer.find('a.close').remove();
                         $pointer.find('.wp-pointer-buttons').append('<button class="save-changes button button-primary button-hero wpallimport-large-button scheduling-save-button" style="float: right; background-image: none;">Save</button>');
                         $pointer.find('.wp-pointer-buttons').append('<button class="close-pointer button button-primary button-hero wpallimport-large-button scheduling-cancel-button" style="float: right; background: #F1F1F1 none;text-shadow: 0 0 black; color: #777; margin-right: 10px;">Cancel</button>');
 
-                        $(".close-pointer, .wpallimport-overlay").unbind('click').click(function () {
+                        $(".close-pointer, .wpallimport-overlay").unbind('click').on('click', function () {
                             $self.pointer('close');
                             $self.pointer('destroy');
                         });
@@ -124,7 +125,7 @@
                             $('.save-changes ').addClass('disabled');
                         }
 
-                        $(".save-changes").unbind('click').click(function () {
+                        $(".save-changes").unbind('click').on('click', function () {
                             if($(this).hasClass('disabled')) {
                                 return false;
                             }
@@ -256,7 +257,7 @@
 		};
 	};
 
-	$('#weekly li').click(function () {
+	$('#weekly li').on('click', function () {
 
 		$('#weekly li').removeClass('error');
 
@@ -277,7 +278,7 @@
 
 	});
 
-	$('#monthly li').click(function () {
+	$('#monthly li').on('click', function () {
 
 		$('#monthly li').removeClass('error');
 		$(this).parent().parent().find('.days-of-week li').removeClass('selected');
@@ -331,7 +332,7 @@
 
 	$('#timezone').chosen({width: '320px'});
 
-	$('.wpai-import-complete-save-button').click(function (e) {
+	$('.wpai-import-complete-save-button').on('click', function (e) {
 
 		if($('.wpai-save-button').hasClass('disabled')) {
 			return false;
@@ -377,7 +378,7 @@
 		});
 	});
 
-	$('#subscribe-button').click(function(){
+	$('#subscribe-button').on('click', function(){
 
 		if(saveSubscription) {
 			$('#subscribe-button .easing-spinner').show();
@@ -436,7 +437,7 @@
 		}
 	});
 
-    $('.wpai-save-scheduling-button, .wpai-save-scheduling-button-blue').click(function (e) {
+    $('.wpai-save-scheduling-button, .wpai-save-scheduling-button-blue').on('click', function (e) {
 
     	var saveOnly = $(this).hasClass('save_only');
 
@@ -471,7 +472,7 @@
         }
 
         // Don't process scheduling
-        if (!schedulingEnable) {
+        if (!hasActiveLicense) {
             if(saveOnly) {
                 $('#save_only_field').prop('disabled', false);
             }

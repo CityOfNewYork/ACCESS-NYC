@@ -108,7 +108,7 @@ __e( labels.Singular ) +
 __e( originalLabels.singular ) +
 '" type="text">\n\t\t\t<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="' +
 __e( labels.copyFromOriginal ) +
-'"/>\n\t\t\t<input class="js-translation js-required-translation" id="' +
+'"></button>\n\t\t\t<input class="js-translation js-required-translation" id="' +
 ((__t = ( taxonomy )) == null ? '' : __t) +
 '-singular" value="' +
 __e( translatedLabels.singular ) +
@@ -122,7 +122,7 @@ __e( labels.Plural ) +
 __e(originalLabels.general ) +
 '" type="text">\n\t\t\t<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="' +
 __e( labels.copyFromOriginal ) +
-'"/>\n\t\t\t<input class="js-translation js-required-translation" id="' +
+'"></button>\n\t\t\t<input class="js-translation js-required-translation" id="' +
 ((__t = ( taxonomy )) == null ? '' : __t) +
 '-plural" value="' +
 __e( translatedLabels.general ) +
@@ -138,7 +138,7 @@ __e( labels.Slug ) +
 __e(originalLabels.slug ) +
 '" type="text">\n\t\t\t\t<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="' +
 __e( labels.copyFromOriginal ) +
-'"/>\n\t\t\t\t<input class="js-translation" id="' +
+'"></button>\n\t\t\t\t<input class="js-translation" id="' +
 ((__t = ( taxonomy )) == null ? '' : __t) +
 '-slug" value="' +
 __e( translatedLabels.slug ) +
@@ -612,7 +612,7 @@ __p += '<div class="icl_tt_form wpml-dialog" id="icl_tt_form_' +
 ((__t = ( original_term.name )) == null ? '' : __t) +
 '" type="text">\n\t\t\t<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="' +
 ((__t = ( labels.copyFromOriginal )) == null ? '' : __t) +
-'"/>\n\t\t\t<input id="term-name" value="' +
+'"></button>\n\t\t\t<input id="term-name" value="' +
 ((__t = ( term.name )) == null ? '' : __t) +
 '" type="text">\n\t\t</div>\n\t\n\t\t<div class="wpml-form-row">\n\t\t\t<label for="term-slug">' +
 ((__t = ( labels.Slug )) == null ? '' : __t) +
@@ -620,7 +620,7 @@ __p += '<div class="icl_tt_form wpml-dialog" id="icl_tt_form_' +
 ((__t = ( original_term.slug )) == null ? '' : __t) +
 '" type="text">\n\t\t\t<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="' +
 ((__t = ( labels.copyFromOriginal )) == null ? '' : __t) +
-'"/>\n\t\t\t<input id="term-slug" value="' +
+'"></button>\n\t\t\t<input id="term-slug" value="' +
 ((__t = ( term.slug )) == null ? '' : __t) +
 '" type="text">\n\t\t</div>\n\t\t<div class="wpml-form-row">\n\t\t\t<label for="term-description">' +
 ((__t = ( labels.Description )) == null ? '' : __t) +
@@ -628,7 +628,7 @@ __p += '<div class="icl_tt_form wpml-dialog" id="icl_tt_form_' +
 ((__t = ( original_term.description )) == null ? '' : __t) +
 '</textarea>\n\t\t\t<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="' +
 ((__t = ( labels.copyFromOriginal )) == null ? '' : __t) +
-'"/>\n\t\t\t<textarea id="term-description" cols="22" rows="4">' +
+'"></button>\n\t\t\t<textarea id="term-description" cols="22" rows="4">' +
 ((__t = ( term.description )) == null ? '' : __t) +
 '</textarea>\n\t\t</div>\n\t\t';
  if ( original_term_meta.length ) { ;
@@ -642,7 +642,7 @@ __p += '\n\t\t\t\t\t<label for="term-meta">' +
 __e( meta_data.meta_value ) +
 '" type="text">\n\t\t\t\t\t<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="' +
 ((__t = ( labels.copyFromOriginal )) == null ? '' : __t) +
-'"/>\n\t\t\t\t\t<input name="term-meta" class="term-meta" data-meta-key="' +
+'"></button>\n\t\t\t\t\t<input name="term-meta" class="term-meta" data-meta-key="' +
 ((__t = ( meta_data.meta_key )) == null ? '' : __t) +
 '" value="' +
 __e( term_meta[meta_data.meta_key] ) +

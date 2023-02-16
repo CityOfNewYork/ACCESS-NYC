@@ -1,3 +1,5 @@
+/*global WPML_core */
+
 var icl_language_pairs_updated = false;
 
 addLoadEvent(function () {
@@ -36,10 +38,13 @@ addLoadEvent(function () {
 
     if (location.href.indexOf("show_config=1") != -1) {
         icl_toggle_account_setup();
-        location.href = location.href.replace("&show_config=1", "");
-        location.href = location.href.replace("?show_config=1&", "&");
-        location.href = location.href.replace("?show_config=1", "");
-        location.href = location.href + '#icl_account_setup';
+
+        var url = WPML_core.sanitize(location.href)
+            .replace("&show_config=1", "")
+            .replace("?show_config=1&", "&")
+            .replace("?show_config=1", "");
+
+        location.href = url + '#icl_account_setup';
     }
 });
 
@@ -50,7 +55,7 @@ function icl_toggle_account_setup() {
     } else {
         if (icl_language_pairs_updated) {
             iclAcctStats.html('<div align="left" style="margin-bottom:5px;">' + icl_ajxloaderimg + "</div>").fadeIn();
-            location.href = location.href.replace(/#(.*)$/g, '');
+            location.href = WPML_core.sanitize(location.href).replace(/#(.*)$/g, '');
         } else {
             iclAcctStats.slideDown();
         }
@@ -93,16 +98,12 @@ function iclShowNextButtonStep1() {
         })
     });
 
-    if (found) {
-        jQuery('input[name="icl_content_trans_setup_next_1"]').removeAttr("disabled");
-    } else {
-        jQuery('input[name="icl_content_trans_setup_next_1"]').attr("disabled", "disabled");
-    }
+    jQuery('input[name="icl_content_trans_setup_next_1"]').prop("disabled", !found);
 }
 
 function toggleTranslationPairsSub() {
     var code = jQuery(this).attr('name').split('_').pop();
-    if (jQuery(this).attr('checked')) {
+    if (jQuery(this).prop('checked')) {
         jQuery('#icl_tr_pair_sub_' + code).slideDown();
     } else {
         jQuery('#icl_tr_pair_sub_' + code).css("display", "none");
@@ -119,7 +120,7 @@ function iclToggleContentTranslation() {
         url: icl_ajx_url,
         data: "icl_ajx_action=toggle_content_translation&new_val=" + val,
         success: function (msg) {
-            location.href = location.href.replace(/#.*/, '');
+            location.href = WPML_core.sanitize(location.href).replace(/#.*/, '');
         }
     });
 }

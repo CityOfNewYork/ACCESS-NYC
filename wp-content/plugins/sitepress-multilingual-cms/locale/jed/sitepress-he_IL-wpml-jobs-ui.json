@@ -1,0 +1,19 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Insufficient funds": [
+            "אין מספיק כסף"
+         ],
+         "Complete": [
+            "הושלם"
+         ],
+         "Pending review": [
+            "ממתין לבדיקה."
+         ]
+      }
+   }
+}

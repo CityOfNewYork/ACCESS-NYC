@@ -8,20 +8,20 @@
 		<div class="wpml-form-row">
 			<label for="term-name"><%= labels.Name %></label>
 			<input readonly id="term-name-original" value="<%= original_term.name %>" type="text">
-			<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="<%= labels.copyFromOriginal %>"/>
+			<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="<%= labels.copyFromOriginal %>"></button>
 			<input id="term-name" value="<%= term.name %>" type="text">
 		</div>
 	
 		<div class="wpml-form-row">
 			<label for="term-slug"><%= labels.Slug %></label>
 			<input readonly id="term-slug-original" value="<%= original_term.slug %>" type="text">
-			<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="<%= labels.copyFromOriginal %>"/>
+			<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="<%= labels.copyFromOriginal %>"></button>
 			<input id="term-slug" value="<%= term.slug %>" type="text">
 		</div>
 		<div class="wpml-form-row">
 			<label for="term-description"><%= labels.Description %></label>
 			<textarea readonly id="term-description-original" cols="22" rows="4"><%= original_term.description %></textarea>
-			<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="<%= labels.copyFromOriginal %>"/>
+			<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="<%= labels.copyFromOriginal %>"></button>
 			<textarea id="term-description" cols="22" rows="4"><%= term.description %></textarea>
 		</div>
 		<% if ( original_term_meta.length ) { %>
@@ -31,7 +31,7 @@
 				<% _.each(original_term_meta, function(meta_data){ %>
 					<label for="term-meta"><%= meta_data.meta_key %></label>
 					<input readonly value="<%- meta_data.meta_value %>" type="text">
-					<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="<%= labels.copyFromOriginal %>"/>
+					<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="<%= labels.copyFromOriginal %>"></button>
 					<input name="term-meta" class="term-meta" data-meta-key="<%= meta_data.meta_key %>" value="<%- term_meta[meta_data.meta_key] %>" type="text">
 				<% }); %>
 			</div>

@@ -43,7 +43,7 @@ function wpml_is_action_authenticated( $action ) {
  */
 function wpml_nonce_field( $action ) {
 	return '<input name="_icl_nonce" type="hidden" value="'
-	       . wp_create_nonce( $action . '_nonce' ) . '"/>';
+		   . wp_create_nonce( $action . '_nonce' ) . '"/>';
 }
 
 /**
@@ -58,24 +58,6 @@ if ( ! function_exists( 'uuid_v5' ) ) {
 	function uuid_v5( $name, $ns_uuid = '6ba7b811-9dad-11d1-80b4-00c04fd430c8' ) {
 		$wpml_uuid = new WPML_UUID();
 		return $wpml_uuid->get_uuid_v5( $name, $ns_uuid );
-	}
-}
-
-/**
- * This function was introduced in WP 4.7.0
- * Generate a random UUID (version 4).
- *
- * @return string UUID.
- */
-if ( ! function_exists( 'wp_generate_uuid4' ) ) {
-	function wp_generate_uuid4() {
-		return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-		                mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
-		                mt_rand( 0, 0xffff ),
-		                mt_rand( 0, 0x0fff ) | 0x4000,
-		                mt_rand( 0, 0x3fff ) | 0x8000,
-		                mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
-		);
 	}
 }
 

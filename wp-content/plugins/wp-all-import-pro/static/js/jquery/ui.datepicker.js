@@ -189,7 +189,7 @@ $.extend(Datepicker.prototype, {
 					html(buttonImage == '' ? buttonText : $('<img/>').attr(
 					{ src:buttonImage, alt:buttonText, title:buttonText })));
 			input[isRTL ? 'before' : 'after'](inst.trigger);
-			inst.trigger.click(function() {
+			inst.trigger.on('click', function() {
 				if ($.datepicker._datepickerShowing && $.datepicker._lastInput == target)
 					$.datepicker._hideDatepicker();
 				else

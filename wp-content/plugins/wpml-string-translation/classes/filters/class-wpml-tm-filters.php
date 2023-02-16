@@ -13,7 +13,7 @@ class WPML_TM_Filters {
 	/**
 	 * WPML_TM_Filters constructor.
 	 *
-	 * @param wpdb $wpdb
+	 * @param wpdb      $wpdb
 	 * @param SitePress $sitepress
 	 */
 	public function __construct( wpdb $wpdb, SitePress $sitepress ) {

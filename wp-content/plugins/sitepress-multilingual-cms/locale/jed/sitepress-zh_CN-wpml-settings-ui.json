@@ -1,0 +1,37 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "You can choose which posts to translate from the <strong>Translation Management Dashboard</strong>.": [
+            "您可以从<strong>翻译管理仪表板</strong>选择要翻译的文章。"
+         ],
+         "Yes, translate all of these posts automatically": [
+            "是，自动翻译所有这些文章"
+         ],
+         "No, I want to translate some of these posts, but not all": [
+            "否，我想翻译其中一些文章，但不是全部"
+         ],
+         "Save": [
+            "保存"
+         ],
+         "Please confirm this translation setting": [
+            "请确认此翻译设置"
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the <NumberOfItems /> existing items.": [
+            "您的站点设置为自动翻译所有内容。当您使<PostTypesNames />可翻译时，WPML将自动翻译<NumberOfItems />个现有项目。"
+         ],
+         "Are you OK with paying for this?": [
+            "您可以付这笔钱吗？"
+         ],
+         "Cancel": [
+            "取消"
+         ],
+         "Make translatable": [
+            "使可翻译"
+         ]
+      }
+   }
+}

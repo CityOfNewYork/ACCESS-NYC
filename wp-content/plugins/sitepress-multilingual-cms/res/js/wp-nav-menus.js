@@ -2,8 +2,8 @@
 /*global jQuery */
 var WPML_core = WPML_core || {};
 
-jQuery(document).ready(function(){
-    jQuery(document).delegate('#icl_menu_language', 'change', WPML_core.wp_nav_language_change);
+jQuery(function () {
+    jQuery(document).on('change', '#icl_menu_language', WPML_core.wp_nav_language_change);
 
 });
 
@@ -18,7 +18,7 @@ WPML_core.wp_nav_language_change = function() {
         url: location.href,
         success: function(res){
             jQuery('#icl_translation_of_wrap').html(res);
-            thiss.removeAttr('disabled');
+            thiss.prop('disabled', false);
         }
     });
 };
@@ -58,6 +58,6 @@ WPML_core.wp_nav_fix_spacing_for_wp45 = function() {
     }
 };
 
-jQuery(document).ready(function() {
+jQuery(function () {
     jQuery('#wpml-ls-menu-management').appendTo('#menu-settings-column').show();
 });

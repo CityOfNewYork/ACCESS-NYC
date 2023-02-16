@@ -1,0 +1,19 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Insufficient funds": [
+            "Brakuje środków"
+         ],
+         "Complete": [
+            "Zakończony"
+         ],
+         "Pending review": [
+            "Oczekuje na recenzję"
+         ]
+      }
+   }
+}

@@ -7,6 +7,9 @@
 
 class QM_CLI extends QM_Plugin {
 
+	/**
+	 * @param string $file
+	 */
 	protected function __construct( $file ) {
 
 		# Register command
@@ -19,6 +22,8 @@ class QM_CLI extends QM_Plugin {
 
 	/**
 	 * Enable QM by creating the symlink for db.php
+	 *
+	 * @return void
 	 */
 	public function enable() {
 		$drop_in = WP_CONTENT_DIR . '/db.php';
@@ -28,8 +33,13 @@ class QM_CLI extends QM_Plugin {
 				WP_CLI::success( "Query Monitor's wp-content/db.php is already in place" );
 				exit( 0 );
 			} else {
-				WP_CLI::error( 'Unknown wp-content/db.php already is already in place' );
+				WP_CLI::error( 'Unknown wp-content/db.php is already in place' );
 			}
+		}
+
+		if ( defined( 'QM_DB_SYMLINK' ) && ! QM_DB_SYMLINK ) {
+			WP_CLI::warning( 'Creation of symlink prevented by QM_DB_SYMLINK constant.' );
+			exit( 0 );
 		}
 
 		if ( ! function_exists( 'symlink' ) ) {
@@ -44,6 +54,10 @@ class QM_CLI extends QM_Plugin {
 		}
 	}
 
+	/**
+	 * @param string $file
+	 * @return self
+	 */
 	public static function init( $file = null ) {
 
 		static $instance = null;

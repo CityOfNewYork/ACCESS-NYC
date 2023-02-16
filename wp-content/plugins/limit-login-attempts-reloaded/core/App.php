@@ -91,7 +91,9 @@ class LLAR_App {
 		}
 
 		$link = 'https://' . $link;
-		$link = add_query_arg( 'domain', $_SERVER['SERVER_NAME'], $link );
+
+		$domain = parse_url( home_url( '/' ) );
+		$link = add_query_arg( 'domain', $domain['host'], $link );
 
 		$plugin_data = get_plugin_data( LLA_PLUGIN_DIR . '/limit-login-attempts-reloaded.php' );
 		$link = add_query_arg( 'version', $plugin_data['Version'], $link );
@@ -126,6 +128,22 @@ class LLAR_App {
 	public function stats() {
 
 		return $this->request( 'stats', 'get' );
+	}
+
+	/**
+	 * @return bool|mixed
+	 */
+	public static function stats_global() {
+
+		$response = wp_remote_get('https://api.limitloginattempts.com/v1/global-stats');
+
+		if( is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) !== 200 ) {
+
+			return false;
+		} else {
+
+			return json_decode( sanitize_textarea_field( stripslashes( wp_remote_retrieve_body( $response ) ) ), true );
+		}
 	}
 
 	/**
@@ -167,6 +185,44 @@ class LLAR_App {
 	}
 
 	/**
+	 * @return bool|mixed
+	 * @throws Exception
+	 */
+	public function country() {
+
+		return $this->request( 'country', 'get' );
+	}
+
+	/**
+	 * @param $data
+	 * @return bool|mixed
+	 * @throws Exception
+	 */
+	public function country_add( $data ) {
+
+		return $this->request( 'country/add', 'post', $data );
+	}
+
+	/**
+	 * @param $data
+	 * @return bool|mixed
+	 * @throws Exception
+	 */
+	public function country_remove( $data ) {
+
+		return $this->request( 'country/remove', 'post', $data );
+	}
+
+	/**
+	 * @param $data
+	 * @return bool|mixed
+	 */
+	public function country_rule( $data ) {
+
+		return $this->request( 'country/rule', 'post', $data );
+	}
+
+	/**
 	 * @param $data
 	 * @return bool|mixed
 	 */
@@ -188,6 +244,7 @@ class LLAR_App {
 
 		$data['limit'] = $limit;
 		$data['offset'] = $offset;
+		$data['is_short'] = 1;
 
 		return $this->request( 'log', 'get', $data );
 	}

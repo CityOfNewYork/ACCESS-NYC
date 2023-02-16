@@ -29,6 +29,7 @@ class WPML_Custom_Fields_Post_Meta_Info implements IWPML_Action {
 		if ( check_ajax_referer( self::AJAX_ACTION, 'nonceGet', false ) ) {
 			$meta_id = filter_var( $_GET['meta_id'], FILTER_SANITIZE_NUMBER_INT );
 			if ( $meta_id ) {
+				/** @var \stdClass $custom_field */
 				$custom_field = get_post_meta_by_id( $meta_id );
 				if ( $custom_field ) {
 					$post_id  = $custom_field->post_id;

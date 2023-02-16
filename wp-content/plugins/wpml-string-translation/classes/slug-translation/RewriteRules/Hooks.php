@@ -33,7 +33,7 @@ class Hooks {
 		if ( $this->slug_translation_settings->is_enabled() ) {
 			add_filter( 'option_rewrite_rules', [ $this, 'filter' ], 1, 1 );
 			add_filter( 'flush_rewrite_rules_hard', [ $this, 'flushRewriteRulesHard' ] );
-			add_action( 'registered_post_type', [ $this, 'clearCache'] );
+			add_action( 'registered_post_type', [ $this, 'clearCache' ] );
 			add_action( 'registered_taxonomy', [ $this, 'clearCache' ] );
 		}
 	}
@@ -60,7 +60,7 @@ class Hooks {
 	}
 
 	/**
-	 * @param $hard
+	 * @param bool $hard
 	 *
 	 * @return mixed
 	 */

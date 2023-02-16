@@ -1,13 +1,25 @@
 <?php
+/**
+ * WHIP libary file.
+ *
+ * @package Yoast\WHIP
+ */
 
 /**
  * Listener for dismissing a message.
  */
 class Whip_WPMessageDismissListener implements Whip_Listener {
 
+	/**
+	 * The name of the dismiss action expected to be passed via $_GET.
+	 *
+	 * @var string
+	 */
 	const ACTION_NAME = 'whip_dismiss';
 
 	/**
+	 * The object for dismissing a message.
+	 *
 	 * @var Whip_MessageDismisser
 	 */
 	protected $dismisser;
@@ -47,5 +59,4 @@ class Whip_WPMessageDismissListener implements Whip_Listener {
 			wp_create_nonce( self::ACTION_NAME )
 		);
 	}
-
 }

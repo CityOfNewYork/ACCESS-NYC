@@ -11,7 +11,7 @@ class WPML_ST_Package_Factory {
 	}
 
 	/**
-	 * @param array|WPML_Package $package_data
+	 * @param \stdClass|\WPML_Package|array|int $package_data
 	 *
 	 * @return WPML_Package
 	 */

@@ -11,7 +11,7 @@ class WPML_Theme_Plugin_Localization_UI_Hooks {
 	/**
 	 * WPML_Theme_Plugin_Localization_UI_Hooks constructor.
 	 *
-	 * @param WPML_Theme_Plugin_Localization_UI $localization_ui
+	 * @param WPML_Theme_Plugin_Localization_UI         $localization_ui
 	 * @param WPML_Theme_Plugin_Localization_Options_UI $options_ui
 	 */
 	public function __construct(
@@ -19,7 +19,7 @@ class WPML_Theme_Plugin_Localization_UI_Hooks {
 		WPML_Theme_Plugin_Localization_Options_UI $options_ui ) {
 
 		$this->localization_ui = $localization_ui;
-		$this->options_ui = $options_ui;
+		$this->options_ui      = $options_ui;
 	}
 
 	public function add_hooks() {
@@ -30,8 +30,8 @@ class WPML_Theme_Plugin_Localization_UI_Hooks {
 	public function enqueue_styles() {
 		wp_enqueue_style( 'wpml-theme-plugin-localization', ICL_PLUGIN_URL . '/res/css/theme-plugin-localization.css', array( 'wpml-tooltip' ), ICL_SITEPRESS_VERSION );
 		wp_enqueue_script( 'wpml-theme-plugin-localization', ICL_PLUGIN_URL . '/res/js/theme-plugin-localization.js', array( 'jquery' ), ICL_SITEPRESS_VERSION );
-		wp_enqueue_script(  OTGS_Assets_Handles::POPOVER_TOOLTIP  );
-		wp_enqueue_style(  OTGS_Assets_Handles::POPOVER_TOOLTIP  );
+		wp_enqueue_script( OTGS_Assets_Handles::POPOVER_TOOLTIP );
+		wp_enqueue_style( OTGS_Assets_Handles::POPOVER_TOOLTIP );
 	}
 
 	public function render_options_ui() {

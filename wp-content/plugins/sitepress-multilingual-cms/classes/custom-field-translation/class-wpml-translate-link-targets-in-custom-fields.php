@@ -8,13 +8,13 @@ class WPML_Translate_Link_Targets_In_Custom_Fields extends WPML_Translate_Link_T
 	private $wp_api;
 	/* @var array $meta_keys */
 	private $meta_keys;
-	
+
 	/**
 	 * WPML_Translate_Link_Targets_In_Custom_Fields constructor.
 	 *
-	 * @param TranslationManagement $tm_instance
-	 * @param WPML_WP_API $wp_api
-	 * @param AbsoluteLinks $absolute_links
+	 * @param TranslationManagement       $tm_instance
+	 * @param WPML_WP_API                 $wp_api
+	 * @param AbsoluteLinks               $absolute_links
 	 * @param WPML_Absolute_To_Permalinks $permalinks_converter
 	 */
 	public function __construct( &$tm_instance, &$wp_api, $absolute_links, $permalinks_converter ) {
@@ -23,28 +23,29 @@ class WPML_Translate_Link_Targets_In_Custom_Fields extends WPML_Translate_Link_T
 		$this->wp_api      = &$wp_api;
 
 		$this->tm_instance->load_settings_if_required();
-		if ( isset( $this->tm_instance->settings[ 'custom_fields_translate_link_target' ] ) &&
-				! empty( $this->tm_instance->settings[ 'custom_fields_translate_link_target' ] ) ) {
-			
-			$this->meta_keys = $this->tm_instance->settings[ 'custom_fields_translate_link_target' ];
+		if ( isset( $this->tm_instance->settings['custom_fields_translate_link_target'] ) &&
+				! empty( $this->tm_instance->settings['custom_fields_translate_link_target'] ) ) {
+
+			$this->meta_keys = $this->tm_instance->settings['custom_fields_translate_link_target'];
 		}
 	}
-	
+
 	public function has_meta_keys() {
 		return (bool) $this->meta_keys;
 	}
 
 	/**
 	 * maybe_translate_link_targets
-	 * 
-     * @param string|array $metadata - Always null for post metadata.
-     * @param int $object_id - Post ID for post metadata
-     * @param string $meta_key - metadata key.
-     * @param bool $single - Indicates if processing only a single $metadata value or array of values.
-     * @return Original or Modified $metadata.
-     */	
+	 *
+	 * @param string|array $metadata  - Always null for post metadata.
+	 * @param int          $object_id - Post ID for post metadata
+	 * @param string       $meta_key  - metadata key.
+	 * @param bool         $single    - Indicates if processing only a single $metadata value or array of values.
+	 *
+	 * @return string|array Original or Modified $metadata.
+	 */
 	public function maybe_translate_link_targets( $metadata, $object_id, $meta_key, $single ) {
-		
+
 		if ( array_key_exists( $meta_key, $this->meta_keys ) ) {
 			$custom_field_setting = new WPML_Post_Custom_Field_Setting( $this->tm_instance, $meta_key );
 			if ( $custom_field_setting->is_translate_link_target() ) {

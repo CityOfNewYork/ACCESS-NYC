@@ -7,27 +7,32 @@ use WPML\Collect\Support\Traits\Macroable;
 /**
  * @method static callable|bool not( mixed ...$v ) - Curried :: mixed->bool
  * @method static callable|bool isNotNull( mixed ...$v ) - Curried :: mixed->bool
- * @method static callable ifElse( ...$predicate, ...$first, ...$second ) - Curried :: ( a->bool )->callable->callable->callable
+ * @method static callable|mixed ifElse( ...$predicate, ...$first, ...$second, ...$data ) - Curried :: ( a->bool )->callable->callable->callable
  * @method static callable when( ...$predicate, ...$fn ) - Curried :: ( a->bool )->callable->callable
  * @method static callable unless( ...$predicate, ...$fn ) - Curried :: ( a->bool )->callable->callable
  * @method static callable cond( ...$conditions, ...$fn ) - Curried :: [( a->bool ), callable]->callable
  * @method static callable both( ...$a, ...$b, ...$data ) - Curried :: ( a → bool ) → ( a → bool ) → a → bool
- * @method static callable allPass( array $predicates ) - Curried :: [( *… → bool )] → ( *… → bool )
- * @method static callable|bool and ( ...$a, ...$b ) - Curried :: a → b → bool
- * @method static callable anyPass( array $predicates ) - Curried :: [( *… → bool )] → ( *… → bool )
+ * @method static callable|bool allPass( ...$predicates, ...$data ) - Curried :: [( *… → bool )] → ( *… → bool )
+ * @method static callable|bool anyPass( ...$predicates, ...$data ) - Curried :: [( *… → bool )] → ( *… → bool )
  * @method static callable complement( ...$fn ) - Curried :: ( *… → * ) → ( *… → bool )
  * @method static callable|mixed defaultTo( ...$a, ...$b ) - Curried :: a → b → a | b
  * @method static callable|bool either( ...$a, ...$b ) - Curried :: ( *… → bool ) → ( *… → bool ) → ( *… → bool )
- * @method static callable|bool or ( ...$a, ...$b ) - Curried :: a → b → bool
  * @method static callable|mixed until ( ...$predicate, ...$transform, ...$data ) - Curried :: ( a → bool ) → ( a → a ) → a → a
  * @method static callable|bool propSatisfies( ...$predicate, ...$prop, ...$data ) - Curried :: ( a → bool ) → String → [String => a] → bool
  * @method static callable|bool isArray ( ...$a ) - Curried :: a → bool
+ * @method static callable|bool isMappable ( ...$a ) - Curried :: a → bool
  * @method static callable|bool isEmpty( ...$a ) - Curried:: a → bool
+ * @method static callable|bool isNotEmpty( ...$a ) - Curried:: a → bool
+ * @method static callable|mixed firstSatisfying( ...$predicate, ...$functions, ...$data ) - Curried:: callable->callable[]->mixed->mixed
+ * @method static callable|bool isTruthy( ...$data ) - Curried:: mixed->bool
  */
 class Logic {
 
 	use Macroable;
 
+	/**
+	 * @return void
+	 */
 	public static function init() {
 		self::macro( 'not', curryN( 1, function ( $v ) { return ! Fns::value( $v ); } ) );
 		self::macro( 'isNotNull', curryN( 1, pipe( 'is_null', self::not() ) ) );
@@ -61,10 +66,6 @@ class Logic {
 			return true;
 		} ) );
 
-		self::macro( 'and', curryN( 2, function ( $a, $b ) {
-			return Fns::value( $a ) && Fns::value( $b );
-		} ) );
-
 		self::macro( 'anyPass', curryN( 2, function ( array $predicates, $data ) {
 			foreach ( $predicates as $predicate ) {
 				if ( $predicate( $data ) ) {
@@ -87,10 +88,6 @@ class Logic {
 			return $a( $data ) || $b( $data );
 		} ) );
 
-		self::macro( 'or', curryN( 2, function ( $a, $b ) {
-			return Fns::value( $a ) || Fns::value( $b );
-		} ) );
-
 		self::macro( 'until', curryN( 3, function ( $predicate, $transform, $data ) {
 			while ( ! $predicate( $data ) ) {
 				$data = $transform( $data );
@@ -107,12 +104,33 @@ class Logic {
 			return is_array( $a );
 		}));
 
+		self::macro( 'isMappable', curryN( 1, function( $a ) {
+			return self::isArray( $a ) || ( is_object( $a ) && method_exists( $a, 'map' ) );
+		}));
+
 		self::macro( 'isEmpty', curryN( 1, function ( $arg ) {
 			if ( is_array( $arg ) || $arg instanceof \Countable ) {
 				return count( $arg ) === 0;
 			}
 
 			return empty( $arg );
+		} ) );
+
+		self::macro( 'isNotEmpty', curryN( 1, self::complement( self::isEmpty() ) ) );
+
+		self::macro( 'firstSatisfying', curryN( 3, function ( $predicate, array $conditions, $data ) {
+			foreach ( $conditions as $condition ) {
+				$res = $condition( $data );
+				if ( $predicate( $res ) ) {
+					return $res;
+				}
+			}
+
+			return null;
+		} ) );
+
+		self::macro( 'isTruthy', curryN( 1, function ( $data ) {
+			return $data instanceof \Countable ? count( $data ) > 0 : (bool) $data;
 		} ) );
 	}
 }

@@ -181,7 +181,7 @@ final class ACFService{
             }
 
             $downloadFiles = "no";
-            $fileName = $img_url;
+            $fileName = basename($img_url);
         }
 
         return PMXI_API::upload_image($pid, $img_url, $downloadFiles, $logger, true, $fileName, 'images', $search_in_gallery, $importData['articleData'], $importData);
@@ -223,7 +223,7 @@ final class ACFService{
             }
 
             $downloadFiles = "no";
-            $fileName = $atch_url;
+            $fileName = basename($atch_url);
         }
 
         return PMXI_API::upload_image($pid, $atch_url, $downloadFiles, $logger, true, $fileName, "files", $search_in_gallery, $importData['articleData'], $importData);
@@ -234,10 +234,13 @@ final class ACFService{
      * @param array $post_types
      * @return array
      */
-    public static function get_posts_by_relationship($values, $post_types = array()){
+    public static function get_posts_by_relationship($values, $post_types){
         $post_ids = array();
         $values = array_filter($values);
         if (!empty($values)) {
+			if (!empty($post_types) && !is_array($post_types)) {
+				$post_types = [$post_types];
+			}
             $values = array_map('trim', $values);
             global $wpdb;
             foreach ($values as $ev) {

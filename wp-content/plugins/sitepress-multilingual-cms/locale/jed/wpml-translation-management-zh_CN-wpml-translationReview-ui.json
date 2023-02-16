@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Accepted": [
+            "已接受"
+         ],
+         "Approved!": [
+            "已核准！"
+         ],
+         "Loading the next translation for review...": [
+            "正在加载下一个翻译以供审阅..."
+         ],
+         "Back": [
+            "返回"
+         ],
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "关闭此选项可在完成此审阅后不自动加载下一个翻译。"
+         ],
+         "Turn on to automatically load the next translation after finishing this review.": [
+            "启用此选项可在完成此审阅后自动加载下一个翻译。"
+         ],
+         "Edit": [
+            "编辑"
+         ],
+         "Edit translation": [
+            "编辑翻译"
+         ],
+         "There was an error in applying translation.": [
+            "应用翻译时出错。"
+         ],
+         "Please wait, applying translation..": [
+            "请稍候，正在应用翻译.."
+         ],
+         "Next review": [
+            "下一个审阅"
+         ],
+         "Publish this translation": [
+            "发布此翻译"
+         ],
+         "Accept this translation": [
+            "接受此翻译"
+         ],
+         "Published!": [
+            "已发布！"
+         ]
+      }
+   }
+}
