@@ -7,11 +7,11 @@
  */
 class WPML_TF_Collection implements Iterator, Countable {
 
-	/** @var  IWPML_TF_Data_Object[] */
+	/** @var array<\IWPML_TF_Data_Object> */
 	protected $collection = array();
 
 	/**
-	 * @param IWPML_TF_Data_Object $data_object
+	 * @param \IWPML_TF_Data_Object $data_object
 	 */
 	public function add( IWPML_TF_Data_Object $data_object ) {
 		$this->collection[ $data_object->get_id() ] = $data_object;
@@ -25,7 +25,7 @@ class WPML_TF_Collection implements Iterator, Countable {
 	}
 
 	/**
-	 * @param $id
+	 * @param int $id
 	 *
 	 * @return IWPML_TF_Data_Object|null
 	 */

@@ -6,7 +6,7 @@ class WPML_User extends WP_User {
 	 * @see \get_user_meta
 	 *
 	 * @param string $key
-	 * @param bool $single
+	 * @param bool   $single
 	 *
 	 * @return mixed
 	 */
@@ -18,8 +18,8 @@ class WPML_User extends WP_User {
 	 * @see \update_meta
 	 *
 	 * @param string $key
-	 * @param mixed $value
-	 * @param mixed $prev_value
+	 * @param mixed  $value
+	 * @param mixed  $prev_value
 	 */
 	public function update_meta( $key, $value, $prev_value = '' ) {
 		update_user_meta( $this->ID, $key, $value, $prev_value );

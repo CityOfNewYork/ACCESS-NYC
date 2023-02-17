@@ -1,0 +1,34 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "How Browser Language Redirect Affects Google Indexing": [
+            "Как переадресация в зависимости от языка браузера влияет на индексирование Google"
+         ],
+         "Documentation": [
+            "Документация"
+         ],
+         "Browser redirect affects Google indexing and search results": [
+            "Переадресация браузера влияет на индексирование Google и результаты поиска"
+         ],
+         "Got it, activate anyway": [
+            "Понятно. Все равно включить"
+         ],
+         "Cancel": [
+            "Отменить"
+         ],
+         "When you redirect visitors based on their language, you also redirect Google. Google wants to see your site exactly like visitors see it, including any redirects that you apply.": [
+            "При переадресации посетителей в зависимости от их языка, также происходит переадресация Google. Google хочет видеть ваш сайт именно таким, каким его видят посетители, включая все применяемые переадресации."
+         ],
+         "It is OK to redirect visitors based on their language, but you need to realize that this feature affects SEO.": [
+            "Перенаправлять посетителей в зависимости от их языка вполне нормально, но следует понимать, что это влияет на поисковую оптимизацию."
+         ],
+         "Before proceeding, we recommend that you read these two pages:": [
+            "Перед продолжением советуем прочитать эти две страницы:"
+         ]
+      }
+   }
+}

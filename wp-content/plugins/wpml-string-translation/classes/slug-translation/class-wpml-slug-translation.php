@@ -88,7 +88,7 @@ class WPML_Slug_Translation implements IWPML_Action {
 		if ( $post_type ) {
 			$language = $language ? $language : $this->sitepress->get_current_language();
 			$slug     = $this->slug_records_factory->create( WPML_Slug_Translation_Factory::POST )
-			                                       ->get_slug( $post_type );
+												   ->get_slug( $post_type );
 
 			return $slug->filter_value( $slug_value, $language );
 		}
@@ -122,14 +122,17 @@ class WPML_Slug_Translation implements IWPML_Action {
 		}
 
 		if ( ! $this->sitepress->is_translated_post_type( $post->post_type )
-		     || ! ( $ld = $this->sitepress->get_element_language_details( $post->ID, 'post_' . $post->post_type ) )
+			 || ! ( $ld = $this->sitepress->get_element_language_details( $post->ID, 'post_' . $post->post_type ) )
 		) {
 			return $post_link;
 		}
 
-		$cache_key = $leavename . '#' . $sample;
+		$ld = apply_filters( 'wpml_st_post_type_link_filter_language_details', $ld );
+
+		$cache_key  = $leavename . '#' . $sample;
 		$cache_key .= $this->ls_languages_status->is_getting_ls_languages() ? 'yes' : 'no';
-		$blog_id = get_current_blog_id();
+		$cache_key .= $ld->language_code;
+		$blog_id    = get_current_blog_id();
 		if ( isset( $this->post_link_cache[ $blog_id ][ $post->ID ][ $cache_key ] ) ) {
 			$post_link = $this->post_link_cache[ $blog_id ][ $post->ID ][ $cache_key ];
 		} else {
@@ -150,13 +153,30 @@ class WPML_Slug_Translation implements IWPML_Action {
 				if ( isset( $wp_rewrite->extra_permastructs[ $post->post_type ] ) ) {
 					$struct_original = $wp_rewrite->extra_permastructs[ $post->post_type ]['struct'];
 
-					$lslash                                                       = false !== strpos( $struct_original, '/' . $slug_this ) ? '/' : '';
-					$wp_rewrite->extra_permastructs[ $post->post_type ]['struct'] = preg_replace( '@' . $lslash . $slug_this . '/@',
+					/**
+					 * This hook allows to filter the slug we want to search and replace
+					 * in the permalink structure. This is required for 3rd party
+					 * plugins replacing the original slug with a placeholder.
+					 *
+					 * @since 3.1.0
+					 *
+					 * @param string  $slug_this The original slug.
+					 * @param string  $post_link The initial link.
+					 * @param WP_Post $post      The post.
+					 * @param bool    $leavename Whether to keep the post name.
+					 * @param bool    $sample    Is it a sample permalink.
+					 */
+					$slug_this = apply_filters( 'wpml_st_post_type_link_filter_original_slug', $slug_this, $post_link, $post, $leavename, $sample );
+
+					$lslash = false !== strpos( $struct_original, '/' . $slug_this ) ? '/' : '';
+					$wp_rewrite->extra_permastructs[ $post->post_type ]['struct'] = preg_replace(
+						'@' . $lslash . $slug_this . '/@',
 						$lslash . $slug_real . '/',
-						$struct_original );
+						$struct_original
+					);
 					$this->ignore_post_type_link                                  = true;
-					$post_link                                                    = get_post_permalink( $post->ID, $leavename, $sample );
-					$this->ignore_post_type_link                                  = false;
+					$post_link                   = get_post_permalink( $post->ID, $leavename, $sample );
+					$this->ignore_post_type_link = false;
 					$wp_rewrite->extra_permastructs[ $post->post_type ]['struct'] = $struct_original;
 				} else {
 					$post_link = str_replace( $slug_this . '=', $slug_real . '=', $post_link );
@@ -169,8 +189,8 @@ class WPML_Slug_Translation implements IWPML_Action {
 	}
 
 	/**
-	 * @param int $post_ID
-	 * @param $post
+	 * @param int      $post_ID
+	 * @param \WP_Post $post
 	 */
 	public function clear_post_link_cache( $post_ID, $post ) {
 		$blog_id = get_current_blog_id();
@@ -327,12 +347,15 @@ class WPML_Slug_Translation implements IWPML_Action {
 				$slug = trim( $post_type_obj->rewrite['slug'], '/' );
 				if ( $slug ) {
 					// First check if we should migrate from the old format URL slug: slug
-					$string_id = $wpdb->get_var( $wpdb->prepare( "SELECT id
+					$string_id = $wpdb->get_var(
+						$wpdb->prepare(
+							"SELECT id
 											FROM {$wpdb->prefix}icl_strings
 											WHERE name = %s AND value = %s",
-						'URL slug: ' . $slug,
-						$slug
-					) );
+							'URL slug: ' . $slug,
+							$slug
+						)
+					);
 					if ( $string_id ) {
 						// migrate it to URL slug: post_type
 

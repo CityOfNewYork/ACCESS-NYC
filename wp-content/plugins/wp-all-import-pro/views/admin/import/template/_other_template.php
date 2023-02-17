@@ -1,15 +1,7 @@
 <?php
-switch ($post_type){
-	case 'taxonomies':
-		$custom_type = new stdClass();
-		$custom_type->labels = new stdClass();
-		$custom_type->labels->singular_name = __('Taxonomy Term', 'wp_all_import_plugin');
-		break;
-	default:
-		$custom_type = get_post_type_object( $post_type );
-		break;
-}
+$custom_type = get_post_type_object( $post_type );
 ?>
+
 <div class="wpallimport-collapsed closed wpallimport-section ">
 	<div class="wpallimport-content-section ">
 		<div class="wpallimport-collapsed-header">
@@ -72,29 +64,29 @@ switch ($post_type){
 							</div>											
 						</td>
 					</tr>
-					<tr>
-						<td>
-							<h4><?php _e('Comments', 'wp_all_import_plugin'); ?></h4>
-							<div class="input">
-								<input type="radio" id="comment_status_open" name="comment_status" value="open" <?php echo 'open' == $post['comment_status'] ? 'checked="checked"' : '' ?> class="switcher"/>
-								<label for="comment_status_open"><?php _e('Open', 'wp_all_import_plugin') ?></label>
-							</div>
-							<div class="input">
-								<input type="radio" id="comment_status_closed" name="comment_status" value="closed" <?php echo 'closed' == $post['comment_status'] ? 'checked="checked"' : '' ?> class="switcher"/>
-								<label for="comment_status_closed"><?php _e('Closed', 'wp_all_import_plugin') ?></label>
-							</div>
-							<div class="input fleft" style="position:relative;width:220px;">
-								<input type="radio" id="comment_status_xpath" class="switcher" name="comment_status" value="xpath" <?php echo 'xpath' == $post['comment_status'] ? 'checked="checked"': '' ?>/>
-								<label for="comment_status_xpath"><?php _e('Set with XPath', 'wp_all_import_plugin' )?></label> <br>
-								<div class="switcher-target-comment_status_xpath">
-									<div class="input">
-										&nbsp;<input type="text" class="smaller-text" name="comment_status_xpath" style="width:190px;" value="<?php echo esc_attr($post['comment_status_xpath']) ?>"/>
-										<a href="#help" class="wpallimport-help" title="<?php _e('The value of presented XPath should be one of the following: (\'open\', \'closed\').', 'wp_all_import_plugin') ?>" style="position:relative; top:13px; float: right;">?</a>
-									</div>
-								</div>
-							</div>		
-						</td>
-					</tr>
+                    <tr>
+                        <td>
+                            <h4><?php _e('Comments', 'wp_all_import_plugin'); ?></h4>
+                            <div class="input">
+                                <input type="radio" id="comment_status_open" name="comment_status" value="open" <?php echo 'open' == $post['comment_status'] ? 'checked="checked"' : '' ?> class="switcher"/>
+                                <label for="comment_status_open"><?php _e('Open', 'wp_all_import_plugin') ?></label>
+                            </div>
+                            <div class="input">
+                                <input type="radio" id="comment_status_closed" name="comment_status" value="closed" <?php echo 'closed' == $post['comment_status'] ? 'checked="checked"' : '' ?> class="switcher"/>
+                                <label for="comment_status_closed"><?php _e('Closed', 'wp_all_import_plugin') ?></label>
+                            </div>
+                            <div class="input fleft" style="position:relative;width:220px;">
+                                <input type="radio" id="comment_status_xpath" class="switcher" name="comment_status" value="xpath" <?php echo 'xpath' == $post['comment_status'] ? 'checked="checked"': '' ?>/>
+                                <label for="comment_status_xpath"><?php _e('Set with XPath', 'wp_all_import_plugin' )?></label> <br>
+                                <div class="switcher-target-comment_status_xpath">
+                                    <div class="input">
+                                        &nbsp;<input type="text" class="smaller-text" name="comment_status_xpath" style="width:190px;" value="<?php echo esc_attr($post['comment_status_xpath']) ?>"/>
+                                        <a href="#help" class="wpallimport-help" title="<?php _e('The value of presented XPath should be one of the following: (\'open\', \'closed\').', 'wp_all_import_plugin') ?>" style="position:relative; top:13px; float: right;">?</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
 					<tr>
 						<td>	
 							<h4><?php _e('Trackbacks and Pingbacks', 'wp_all_import_plugin'); ?></h4>
@@ -136,10 +128,10 @@ switch ($post_type){
 					</tr>	
 					<tr>
 						<td>
-							<h4 style="float:left;"><?php _e('Download & Import Attachments', 'wp_all_import_plugin') ?></h4>
-							<div style="clear:both;">
-								<input type="text" name="attachments" style="width:87%;" value="<?php echo esc_attr($post['attachments']) ?>" />
-								<input type="text" class="small" name="atch_delim" value="<?php echo esc_attr($post['atch_delim']) ?>" style="width:5%; text-align:center; float:right;"/>
+							<h4><?php _e('Download & Import Attachments', 'wp_all_import_plugin') ?></h4>
+							<div class="delimiter-field">
+								<input type="text" name="attachments" value="<?php echo esc_attr($post['attachments']) ?>" />
+								<input type="text" class="small" name="atch_delim" value="<?php echo esc_attr($post['atch_delim']) ?>" />
 							</div>			
 							<div class="input" style="margin:3px;">
 								<input type="hidden" name="is_search_existing_attach" value="0" />

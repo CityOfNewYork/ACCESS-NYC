@@ -4,10 +4,12 @@
         <id>wpml</id>
         <apiurl>https://api.wpml.org/</apiurl>
         <products>http://d2salfytceyqoe.cloudfront.net/wpml33-products.json</products>
+        <default_products>{"id":"wpml-the-wordpress-multilingual-plugin","name":"WPML - The WordPress Multilingual Plugin","product-name":"WPML","url":"https:\/\/wpml.org","site_keys_management_url":"https:\/\/wpml.org\/account\/sites\/","packages":[],"downloads":{"plugins":[]},"recommendation_sections":[],"commecial_tab_sections":[]}</default_products>
     </repository>
     <repository>
         <id>toolset</id>
         <apiurl>https://api.toolset.com/</apiurl>
         <products>http://d7j863fr5jhrr.cloudfront.net/toolset33-products.json</products>
+        <default_products>{"id":"toolset-plugins-for-wordpress-development","name":"Toolset - Plugins for WordPress development","product-name":"Toolset","url":"https://toolset.com","site_keys_management_url":"https://toolset.com/account/sites/","packages":[],"downloads":{"plugins":[]},"recommendation_sections":[],"commecial_tab_sections":[]}</default_products>
     </repository>
 </repositories>

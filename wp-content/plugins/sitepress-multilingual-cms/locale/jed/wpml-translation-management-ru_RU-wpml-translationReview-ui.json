@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Accepted": [
+            "Принято"
+         ],
+         "Approved!": [
+            "Утверждено!"
+         ],
+         "Loading the next translation for review...": [
+            "Загрузка следующего перевода для проверки..."
+         ],
+         "Back": [
+            "Назад"
+         ],
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "Выключите, чтобы не загружать следующий перевод автоматически после завершения этой проверки."
+         ],
+         "Turn on to automatically load the next translation after finishing this review.": [
+            "Включите, чтобы загружать следующий перевод автоматически после завершения этой проверки."
+         ],
+         "Edit": [
+            "Изменить"
+         ],
+         "Edit translation": [
+            "Редактировать перевод"
+         ],
+         "There was an error in applying translation.": [
+            "Во время применения перевода произошла ошибка."
+         ],
+         "Please wait, applying translation..": [
+            "Подождите, применяется перевод..."
+         ],
+         "Next review": [
+            "Следующая проверка"
+         ],
+         "Publish this translation": [
+            "Опубликовать этот перевод"
+         ],
+         "Accept this translation": [
+            "Принять этот перевод"
+         ],
+         "Published!": [
+            "Опубликовано!"
+         ]
+      }
+   }
+}

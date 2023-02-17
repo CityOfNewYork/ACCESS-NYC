@@ -2,7 +2,6 @@
 
 namespace WPML\FP\Strings;
 
-use WPML\FP\Maybe;
 use function WPML\FP\partial;
 use function WPML\FP\partialRight;
 use function WPML\FP\pipe;
@@ -58,13 +57,3 @@ function remove( $remove ) {
 	return partial( 'str_replace', $remove, '' );
 }
 
-/**
- * @param string $regex
- * @param string $str
- *
- * @return \WPML\FP\Just|\WPML\FP\Nothing
- */
-function match( $regex, $str ) {
-	$found = preg_match_all( $regex, $str, $matches );
-	return $found !== false ? Maybe::of( wpml_collect( $matches[1] ) ) : Maybe::nothing();
-}

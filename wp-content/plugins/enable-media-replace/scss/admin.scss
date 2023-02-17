@@ -11,7 +11,6 @@
     }
   }
 
-
   .wrapper
   {
 //    margin: 15px 0;
@@ -27,8 +26,6 @@
       margin: 0 0 15px 0;
     }
   }
-
-
 
   .image_chooser.wrapper
   {
@@ -222,6 +219,14 @@
         width: 45px;
       }
     }
+		.replace_custom_date
+		{
+				margin-left: 5px;
+				&:hover {
+					text-decoration: underline;
+					cursor: pointer
+				}
+		}
     ul
     {
       li
@@ -300,47 +305,65 @@
     width: 250px;
     min-height: 270px;
     border: 1px solid #ccc;
-    padding: 15px;
+    padding: 10px;
     //margin: 0 0 10px 25px;
-    margin-bottom:25px;
+    margin-bottom: 10px;
     float: right;
     clear: both;
+		background-color: #dcfdff;
     h3 {
-      line-height: 1.3em; // match size
+      color: #00d0e5;
+      font-size: 18px;
+      text-align: center;
+      margin: 0;
+      line-height: 1.3em;
     }
-    &.site-speed
+		h4 {
+			// margin: 0;
+			 font-size: 16px;
+			 text-align: center;
+		}
+		.red { color: #ff0000; }
+		.cyan { color: #00d0e5; }
+		.grey { color: grey; }
+		.ucase { text-transform: uppercase; }
+		 a {
+			 	text-decoration: none
+		 }
+    .button-wrapper
     {
-        background-color: #dcfdff;
-        .img-wrapper
-        {
-          text-align: center;
-          margin: 0 0 25px 0;
-          img { max-width: 140px; max-height: 140px; margin: 0; }
-        }
-        h3 {
-          color: #00d0e5;
-          font-size: 20px;
-          text-align: center;
-          margin: 0;
-          line-height: 1.3em;
-        }
-        .button-wrapper
-        {
-          text-align: center;
-          margin-top: 35px;
-          a {
-            background-color: #ff0000;
-            color: #fff;
-            display: inline-block;
-            padding: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 20px;
-          }
-        }
-        .red { color: #ff0000; }
-
+      text-align: center;
+      margin-top: 35px;
+      a {
+        background-color: #ff0000;
+        color: #fff;
+        display: inline-block;
+        padding: 8px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 20px;
+				text-transform: uppercase;
+      }
     }
+		.hidden { display: none !important; }
+
+    .img-wrapper
+    {
+      text-align: center;
+      margin: 0 0 25px 0;
+      img { max-width: 140px; max-height: 140px; margin: 0; }
+    }
+
+		&.spio  // shortpixel
+		{
+		}
+    &.site-speed // Site speed
+    {
+    }
+		&.envira-shortpixel-install // envira
+		{
+				background: #fff;
+		}
   }
 
   @media( max-width: 1200px)
@@ -359,4 +382,20 @@
   {
     .upsell-wrapper { display: none; }
   }
+	@media (max-width: 450px )
+	{
+			.replace_custom_date_wrapper {
+				 display: block;
+				 margin-top: 15px;
+				 font-size: 16px;
+
+			}
+			.location_option {
+				 label {
+					 	margin: 25px 0;
+						display: inline-block;
+				}
+
+			}
+	}
 } // emr_upload_form

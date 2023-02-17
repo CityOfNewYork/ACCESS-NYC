@@ -118,6 +118,12 @@ $.fn.wplupload  = function($options) {
 									$('#taxonomy_to_import').ddslick('select', {index: tindex });
 								}
 							}
+							if (r.gravity_form_title){
+								var tindex = $('#gravity_form_to_import li:has(input[value="'+ r.gravity_form_title +'"])').index();
+								if (tindex != -1){
+									$('#gravity_form_to_import').ddslick('select', {index: tindex });
+								}
+							}
 
 							if (typeof r.url_bundle != "undefined")
 							{								
@@ -180,7 +186,7 @@ $.fn.wplupload  = function($options) {
 			$('#advanced_upload').show();
 		});
 		
-		$('#cancel-upload').click(function() {
+		$('#cancel-upload').on('click', function() {
 			var i, file;
 			
 			$up.stop();		

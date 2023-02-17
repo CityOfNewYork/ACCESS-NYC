@@ -33,6 +33,7 @@ use Twilio\Version;
  * @method \Twilio\Rest\Messaging\V1\Service\PhoneNumberContext phoneNumbers(string $sid)
  * @method \Twilio\Rest\Messaging\V1\Service\ShortCodeContext shortCodes(string $sid)
  * @method \Twilio\Rest\Messaging\V1\Service\AlphaSenderContext alphaSenders(string $sid)
+ * @method \Twilio\Rest\Messaging\V1\Service\UsAppToPersonContext usAppToPerson(string $sid)
  */
 class ServiceContext extends InstanceContext {
     protected $_phoneNumbers;
@@ -81,6 +82,7 @@ class ServiceContext extends InstanceContext {
             'AreaCodeGeomatch' => Serialize::booleanToString($options['areaCodeGeomatch']),
             'ValidityPeriod' => $options['validityPeriod'],
             'SynchronousValidation' => Serialize::booleanToString($options['synchronousValidation']),
+            'Usecase' => $options['usecase'],
             'UseInboundWebhookOnNumber' => Serialize::booleanToString($options['useInboundWebhookOnNumber']),
         ]);
 

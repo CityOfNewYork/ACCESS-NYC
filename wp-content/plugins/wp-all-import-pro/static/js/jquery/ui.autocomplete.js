@@ -449,7 +449,7 @@ $.widget("ui.menu", {
 				role: "listbox",
 				"aria-activedescendant": "ui-active-menuitem"
 			})
-			.click(function( event ) {
+			.on('click', function( event ) {
 				if ( !$( event.target ).closest( ".ui-menu-item a" ).length ) {
 					return;
 				}

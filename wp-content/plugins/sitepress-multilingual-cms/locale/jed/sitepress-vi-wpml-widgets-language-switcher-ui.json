@@ -1,0 +1,16 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "All": [
+            "Tất cả"
+         ],
+         "Display on language": [
+            "Hiển thị trên ngôn ngữ"
+         ]
+      }
+   }
+}

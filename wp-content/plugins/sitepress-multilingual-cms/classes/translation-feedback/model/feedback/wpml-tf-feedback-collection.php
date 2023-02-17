@@ -169,8 +169,6 @@ class WPML_TF_Feedback_Collection extends WPML_TF_Collection {
 	 */
 	public function link_messages_to_feedback( WPML_TF_Message_Collection $message_collection ) {
 		foreach ( $message_collection as $message ) {
-
-			/** @var WPML_TF_Message $message */
 			if ( array_key_exists( $message->get_feedback_id(), $this->collection ) ) {
 				$this->collection[ $message->get_feedback_id() ]->add_message( $message );
 			}

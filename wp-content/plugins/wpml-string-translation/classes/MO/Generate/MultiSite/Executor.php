@@ -31,7 +31,7 @@ class Executor {
 	 * @return \WPML\Collect\Support\Collection
 	 */
 	public function getSiteIds() {
-		return \wpml_collect( get_sites() )->pluck( 'id' );
+		return \wpml_collect( get_sites( [ 'number' => PHP_INT_MAX  ] ) )->pluck( 'id' );
 	}
 
 	/**

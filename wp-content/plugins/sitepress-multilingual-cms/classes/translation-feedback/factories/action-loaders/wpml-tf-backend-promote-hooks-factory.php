@@ -9,7 +9,7 @@ class WPML_TF_Backend_Promote_Hooks_Factory implements IWPML_Backend_Action_Load
 
 	/** @return string */
 	public function get_load_action() {
-		return 'plugins_loaded';
+		return 'wpml_after_tm_loaded';
 	}
 
 	public function create() {

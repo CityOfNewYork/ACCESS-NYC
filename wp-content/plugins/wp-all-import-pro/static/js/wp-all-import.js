@@ -3,14 +3,14 @@
  */
 (function($){$(function () {
 		
-	$('#dismiss').click(function(){
+	$('#dismiss').on('click', function(){
 
 		$(this).parents('div.updated:first').slideUp();
 		$.post('admin.php?page=pmxi-admin-settings&action=dismiss', {dismiss: true}, function (data) {}, 'html');
 		
 	});
 
-	$('.wpallimport-dismissible').find('button.notice-dismiss').live('click', (function(e){
+	$('.wpallimport-dismissible').find('button.notice-dismiss').on('click', (function(e){
 
     	var request = {
 			action: 'dismiss_notifications',		

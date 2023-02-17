@@ -1,0 +1,37 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "You can choose which posts to translate from the <strong>Translation Management Dashboard</strong>.": [
+            "U kunt kiezen welke berichten vertaald moeten worden op het <strong>Translation Management-dashboard</strong>."
+         ],
+         "Yes, translate all of these posts automatically": [
+            "Ja, vertaal al deze berichten automatisch"
+         ],
+         "No, I want to translate some of these posts, but not all": [
+            "Nee, ik wil sommige van deze berichten vertalen, maar niet alle"
+         ],
+         "Save": [
+            "Opslaan"
+         ],
+         "Please confirm this translation setting": [
+            "Gelieve deze vertaalinstelling te bevestigen"
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the <NumberOfItems /> existing items.": [
+            "Je site is ingesteld om alle inhoud automatisch te vertalen. Wanneer je <PostTypesNames /> vertaalbaar maakt, zal WPML automatisch de <NumberOfItems /> bestaande items vertalen."
+         ],
+         "Are you OK with paying for this?": [
+            "Vind je het oké om hiervoor te betalen?"
+         ],
+         "Cancel": [
+            "Annuleren"
+         ],
+         "Make translatable": [
+            "Vertaalbaar maken"
+         ]
+      }
+   }
+}

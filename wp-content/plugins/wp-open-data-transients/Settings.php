@@ -17,7 +17,9 @@ use NYCO\Transients\Validations as Validations;
  */
 
 const TITLE = 'Open Data Transients';
+
 const ID = 'open_data_transients';
+
 const CAPABILITY = 'manage_options';
 
 /**

@@ -75,7 +75,6 @@ class OTGS_Products_Manager {
 				}
 			}
 		}
-
 		return $this->products_config_xml->get_repository_products_url( $repository_id );
 	}
 

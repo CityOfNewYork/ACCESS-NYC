@@ -1,0 +1,50 @@
+<div class="js-translation-managers translation-managers-section wpml-section" data-nonce="{{ nonce }}" data-current-user-id="{{ user_id }}">
+    <h2>{{ strings.title }}</h2>
+
+    <div class="js-choose-managers-section text-center clearfix">
+        <button class="button-primary js-add-translation-manager"
+                data-set-text="{{ strings.set_user }}"
+                data-add-text="+ {{ strings.add_user }}"
+        ></button>
+    </div>
+
+    {% include 'existing-user-section.twig' %}
+    {% include 'new-user-section.twig' %}
+
+    <span class="notice notice-error inline js-error-message" style="display: none"></span>
+
+    <ul class="js-translation-managers-list translation-managers-list" style="display:none;">
+            {% for user in translation_managers %}
+                {% include 'translation-managers-row.twig' %}
+            {% endfor %}
+    </ul>
+
+    <div class="js-no-translation-managers notice notice-warning inline" style="display:none;"><p>{{ strings.no_users }}</p></div>
+
+    <div id="{{ dialog.id }}"
+         class="{{ dialog.class }}"
+         title="{{ dialog.strings.title }}"
+         style="display:none"
+         data-ok-text="{{ dialog.strings.add_text }}"
+         data-cancel-text="{{ dialog.strings.cancel_text }}">
+
+        <div class="js-select-user"
+             data-nonce="{{ dialog.nonce }}"
+             style="width: 600px">
+
+            <label class="add-new-translation-role-label" for="manager-existing-user"><input type="radio" id="manager-existing-user" name="user" value="existing"/> {{ dialog.strings.existing_user }}</label>
+
+            <div class="js-existing-user-section add-new-translation-role-form" style="display: none">
+                <input type="text" class="js-translation-user-select" placeholder=""/>
+            </div>
+
+            <label class="add-new-translation-role-label" for="manager-new-user"> <input type="radio" id="manager-new-user" name="user" value="new"/> {{ dialog.strings.new_user }}</label>
+
+            <div class="js-new-user-section add-new-translation-role-form" style="display: none">
+                {% include 'new-user-inputs.twig' %}
+            </div>
+        </div>
+
+    </div>
+
+</div>

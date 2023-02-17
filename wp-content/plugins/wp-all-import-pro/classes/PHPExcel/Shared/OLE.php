@@ -206,7 +206,8 @@ class PHPExcel_Shared_OLE
         // in OLE_ChainedBlockStream::stream_open().
         // Object is removed from self::$instances in OLE_Stream::close().
         $GLOBALS['_OLE_INSTANCES'][] = $this;
-        $instanceId = end(array_keys($GLOBALS['_OLE_INSTANCES']));
+        $_ole_instances = array_keys($GLOBALS['_OLE_INSTANCES']);
+        $instanceId = end($_ole_instances);
 
         $path = 'ole-chainedblockstream://oleInstanceId=' . $instanceId;
         if ($blockIdOrPps instanceof PHPExcel_Shared_OLE_PPS) {
@@ -444,7 +445,7 @@ class PHPExcel_Shared_OLE
     {
         $rawname = '';
         for ($i = 0; $i < strlen($ascii); ++$i) {
-            $rawname .= $ascii{$i} . "\x00";
+            $rawname .= $ascii[$i] . "\x00";
         }
         return $rawname;
     }

@@ -23,6 +23,7 @@ if ( isset( $active_languages[ $language ] ) ) {
 	}
 }
 
+$user_messages = [];
 if ( isset( $_POST['action'] ) && $_POST['action'] == 'icl_admo_add_translations' && wp_verify_nonce( $_POST['_wpnonce'], 'icl_adm_save_translations' ) ) {
 	$translations_add = array();
 	if ( ! empty( $_POST['add_new'] ) && array_key_exists( 'new', $translations ) ) {
@@ -75,9 +76,13 @@ if ( isset( $_POST['action'] ) && $_POST['action'] == 'icl_admo_add_translations
     <?php if(!empty($translations_updated) || !empty($translations_add)):?>
     
         <p><strong><?php _e('Success!', 'wpml-string-translation') ?></strong></p>
-        <?php foreach($user_messages as $umessage): ?>
-        <p><?php echo $umessage ?></p>
-        <?php endforeach; ?>    
+	    <?php
+	    foreach ( $user_messages as $umessage ) {
+		    ?>
+            <p><?php echo $umessage ?></p>
+		    <?php
+	    }
+	    ?>
         <a href="<?php echo admin_url('admin.php?page=' . ICL_PLUGIN_FOLDER . '/menu/theme-localization.php'); ?>" class="button-secondary"><?php _e('Check other languages', 'wpml-string-translation') ?></a>
         
     <?php elseif(!$version): ?>

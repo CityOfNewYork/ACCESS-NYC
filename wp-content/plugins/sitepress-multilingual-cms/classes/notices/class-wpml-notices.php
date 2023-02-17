@@ -13,10 +13,13 @@ class WPML_Notices {
 
 	private $notice_render;
 	/**
-	 * @var array
+	 * @var array<string,array<\WPML_Notice>>
 	 */
 	private $notices;
-	private $notices_to_remove  = array();
+	/**
+	 * @var array<string,array<int>>
+	 */
+	private $notices_to_remove = array();
 	private $dismissed;
 	private $user_dismissed;
 	private $original_notices_md5;
@@ -24,7 +27,7 @@ class WPML_Notices {
 	/**
 	 * WPML_Notices constructor.
 	 *
-	 * @param WPML_Notice_Render     $notice_render
+	 * @param WPML_Notice_Render $notice_render
 	 */
 	public function __construct( WPML_Notice_Render $notice_render ) {
 		$this->notice_render        = $notice_render;
@@ -166,7 +169,7 @@ class WPML_Notices {
 
 	private function save_notices() {
 		$this->remove_notices();
-		if ( ! has_action( 'shutdown' , array( $this, 'save_to_option' ) ) ) {
+		if ( ! has_action( 'shutdown', array( $this, 'save_to_option' ) ) ) {
 			add_action( 'shutdown', array( $this, 'save_to_option' ), 1000 );
 		}
 	}
@@ -185,7 +188,6 @@ class WPML_Notices {
 	public function remove_notices() {
 		if ( $this->notices_to_remove ) {
 			foreach ( $this->notices_to_remove as $group => &$group_notices ) {
-				/** @var array $group_notices */
 				foreach ( $group_notices as $id ) {
 					if ( array_key_exists( $group, $this->notices ) && array_key_exists( $id, $this->notices[ $group ] ) ) {
 						unset( $this->notices[ $group ][ $id ] );
@@ -228,14 +230,7 @@ class WPML_Notices {
 
 	private function must_display_notices() {
 		if ( $this->notices ) {
-			/**
-			 * @var string $group
-			 */
 			foreach ( $this->notices as $group => $notices ) {
-				/**
-				 * @var array       $notices
-				 * @var WPML_Notice $notice
-				 */
 				foreach ( $notices as $notice ) {
 					if ( $this->notice_render->must_display_notice( $notice ) && ! $this->must_hide_if_notice_exists( $notice ) ) {
 						return true;
@@ -260,10 +255,6 @@ class WPML_Notices {
 	public function admin_notices() {
 		if ( $this->notices && $this->must_display_notices() ) {
 			foreach ( $this->notices as $group => $notices ) {
-				/**
-				 * @var array       $notices
-				 * @var WPML_Notice $notice
-				 */
 				foreach ( $notices as $notice ) {
 					if ( $notice instanceof WPML_Notice && ! $this->is_notice_dismissed( $notice ) ) {
 						$this->notice_render->render( $notice );
@@ -302,8 +293,8 @@ class WPML_Notices {
 	}
 
 	/**
-	 * @param string $notice_id
-	 * @param        null !string $notice_group
+	 * @param string      $notice_id
+	 * @param null|string $notice_group
 	 *
 	 * @return bool
 	 */
@@ -336,7 +327,7 @@ class WPML_Notices {
 	}
 
 	/**
-	 * @param null !string $notice_group
+	 * @param null|string $notice_group
 	 *
 	 * @return bool
 	 */
@@ -374,7 +365,7 @@ class WPML_Notices {
 	 * @return false|int
 	 */
 	private function has_valid_nonce() {
-		$nonce          = isset( $_POST['nonce'] ) ? $_POST['nonce'] : null;
+		$nonce = isset( $_POST['nonce'] ) ? $_POST['nonce'] : null;
 		return wp_verify_nonce( $nonce, self::NONCE_NAME );
 	}
 
@@ -466,7 +457,7 @@ class WPML_Notices {
 		}
 
 		if ( $is_dismissed && method_exists( $notice, 'can_be_dismissed_for_different_text' )
-		     && ! $notice->can_be_dismissed_for_different_text() ) {
+			 && ! $notice->can_be_dismissed_for_different_text() ) {
 			$is_dismissed = md5( $notice->get_text() ) === $this->dismissed[ $group ][ $id ];
 		}
 
@@ -475,7 +466,7 @@ class WPML_Notices {
 
 	public function init_hooks() {
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ), \WPML_Admin_Scripts_Setup::PRIORITY_ENQUEUE_SCRIPTS + 1 );
 		add_action( 'wp_ajax_otgs-hide-notice', array( $this, 'wp_ajax_hide_notice' ) );
 		add_action( 'wp_ajax_otgs-dismiss-notice', array( $this, 'wp_ajax_dismiss_notice' ) );
 		add_action( 'wp_ajax_otgs-dismiss-group', array( $this, 'wp_ajax_dismiss_group' ) );

@@ -2,6 +2,7 @@
 
 /**
  * Class WPML_TF_Backend_Styles
+ *
  * @author OnTheGoSystems
  */
 class WPML_TF_Backend_Styles {

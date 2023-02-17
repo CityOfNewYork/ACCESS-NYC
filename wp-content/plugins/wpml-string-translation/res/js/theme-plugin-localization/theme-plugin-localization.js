@@ -297,14 +297,8 @@ jQuery(function($) {
 			return text;
 		},
 
-		renderStringsCounter: function() {
-			var text = '';
-
-			text = text + this.scanSuccessfulMessage.replace('%s', this.counter.totalStrings) + '<br />';
-			text = text.split('!')[1];
-			text = text.split('.')[0];
-
-			return text;
+		renderStringsCounter: function () {
+			return 'WPML' + this.scanSuccessfulMessage.replace('%s', this.counter.totalStrings).split('WPML')[1];
 		},
 
 		restoreUI: function() {
@@ -342,30 +336,30 @@ jQuery(function($) {
 
 		selectItems: function( scanButton, group ) {
 			group.forEach(function(item){
-				$( 'input[value="' + item + '"]' ).attr( 'checked', 'checked' );
+				$( 'input[value="' + item + '"]' ).prop( 'checked', true );
 			});
 		},
 
-		scan: function( scanButton ) {
-			$( scanButton ).click();
-		},
+        scan: function (scanButton) {
+            $(scanButton).click();
+        },
 
-		shouldRunAutoScan: function() {
-			return '' !== this.groups[0] && ( -1 !== location.href.search('action=scan_from_notice') || -1 !== location.href.search('action=scan_active_items'))
-		}
-	};
+        shouldRunAutoScan: function () {
+            return '' !== this.groups[0] && (-1 !== location.href.search('action=scan_from_notice') || -1 !== location.href.search('action=scan_active_items'))
+        }
+    };
 
-	$(document).ready(function () {
-		var scanningSections = new WPML_ST.ScanningSections();
-		var	auto_scan_type = wpml_active_plugins_themes;
-		var sections_count = 0;
-		var counter = new WPML_ST.ScanningCounter();
+    $(function () {
+        var scanningSections = new WPML_ST.ScanningSections();
+        var auto_scan_type = wpml_active_plugins_themes;
+        var sections_count = 0;
+        var counter = new WPML_ST.ScanningCounter();
 
-		if ( -1 !== location.href.search('action=scan_from_notice') ) {
-			auto_scan_type = wpml_groups_to_scan;
-		}
+        if (-1 !== location.href.search('action=scan_from_notice')) {
+            auto_scan_type = wpml_groups_to_scan;
+        }
 
-		for (var section in scanningSections) {
+        for (var section in scanningSections) {
 			if (scanningSections.hasOwnProperty(section)) {
 				var	isFirstSection = 0 === sections_count;
 				var scanSection = new WPML_ST.StringsScanning(isFirstSection, counter);

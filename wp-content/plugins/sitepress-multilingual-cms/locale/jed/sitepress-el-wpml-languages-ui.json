@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose Content to Automatically Translate into": [
+            "Επιλέξτε περιεχόμενο που θα μεταφράζεται αυτομάτως σε"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "Αποθήκευση αλλαγών και ενεργοποίηση αυτόματης μετάφρασης"
+         ],
+         "Cancel Language Changes": [
+            "Ακύρωση αλλαγών γλώσσας"
+         ],
+         "Save": [
+            "Αποθήκευση"
+         ],
+         "Choose Content to Automatically Translate into New Language": [
+            "Επιλέξτε περιεχόμενο που θα μεταφράζεται αυτομάτως στη νέα γλώσσα"
+         ],
+         "Add languages and start translating": [
+            "Προσθήκη γλωσσών και έναρξη μετάφρασης"
+         ],
+         "Add language and start translating": [
+            "Προσθήκη γλώσσας και έναρξη μετάφρασης"
+         ],
+         "Never mind. Don't add new languages": [
+            "Άλλαξα γνώμη. Να μην προστεθούν νέες γλώσσες."
+         ],
+         "Never mind. Don't add new language": [
+            "Άλλαξα γνώμη. Να μην προστεθεί νέα γλώσσα."
+         ],
+         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
+            "Να μεταφραστούν τώρα αυτόματα όλες οι υπάρχουσες αναρτήσεις και σελίδες μου, καθώς και το νέο περιεχόμενο κατά τη δημιουργία του."
+         ],
+         "Only automatically translate new content.": [
+            "Να μεταφράζεται αυτόματα μόνο το νέο περιεχόμενο."
+         ],
+         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
+            "Χρησιμοποιείτε τη λειτουργία <a>Μετάφραση όλων</a> που μεταφράζει αυτόματα το περιεχόμενο του ιστότοπού σας."
+         ],
+         "Which content do you want to automatically translate into your newly-added language?": [
+            "Ποιο περιεχόμενο θέλετε να μεταφράζεται αυτόματα στη νέα γλώσσα που προσθέσατε;"
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "Μπορείτε να μεταφράσετε το υπάρχον περιεχόμενο από τον πίνακα εργαλείων Διαχείρισης μετάφρασης."
+         ]
+      }
+   }
+}

@@ -11,10 +11,11 @@ class PMXI_CsvParser
      * @access public
      */
     $settings = array(
-        'delimiter' => ',',
+        'delimiter' => ",",
         'eol' => '',
         'length' => 999999,
-        'escape' => '"'
+        'enclosure' => '"',
+        'escape' => "\\",
     ),
 
     $tmp_files = array(),
@@ -72,16 +73,15 @@ class PMXI_CsvParser
      * @see load()
      * @return void
      */
-    public function __construct( $options = array('filename' => null, 'xpath' => '', 'delimiter' => '', 'encoding' => '', 'xml_path' => '', 'targetDir' => false) ) 
-    {
+    public function __construct( $options = array('filename' => null, 'xpath' => '', 'delimiter' => '', 'encoding' => '', 'xml_path' => '', 'targetDir' => false) ) {
+
         PMXI_Plugin::$csv_path = $options['filename'];
         
         $this->xpath = (!empty($options['xpath']) ? $options['xpath'] : ((!empty($_POST['xpath'])) ? $_POST['xpath'] : '/node'));        
             
         if ( ! empty($options['delimiter']) ){
             $this->delimiter = $options['delimiter'];    
-        }
-        else{
+        } else {
             $input = new PMXI_Input();
             $id = $input->get('id', 0);
             if (!$id){
@@ -91,7 +91,7 @@ class PMXI_CsvParser
                 $import = new PMXI_Import_Record();
                 $import->getbyId($id);
                 if ( ! $import->isEmpty() ){
-                    $this->delimiter = $import->options['delimiter'];
+                    $this->delimiter = empty($import->options['delimiter']) ? '' : $import->options['delimiter'];
                 }
             }
         }        
@@ -937,8 +937,9 @@ class PMXI_CsvParser
 
         $c = 0;
         $d = ( "" != $this->delimiter ) ? $this->delimiter : $this->settings['delimiter'];
+        $en = $this->settings['enclosure'];
         $e = $this->settings['escape'];
-        $l = $this->settings['length'];       
+        $l = $this->settings['length'];
 
         $this->is_csv = $d;          
 
@@ -970,7 +971,7 @@ class PMXI_CsvParser
         $create_new_headers = false;
         $skip_x_rows = apply_filters('wp_all_import_skip_x_csv_rows', false, $import_id);
         $headers = array();
-        while ($keys = fgetcsv($res, $l, $d, $e)) {
+        while ($keys = fgetcsv($res, $l, $d, $en, $e)) {
 
             if ($skip_x_rows !== false && $skip_x_rows > $c) {
                 $c++;
@@ -991,7 +992,7 @@ class PMXI_CsvParser
                 $buf_keys = $keys;
                 foreach ($keys as $key => $value) {
 
-                    if (!$create_new_headers and (preg_match('%\W(http:|https:|ftp:)$%i', $value))) {
+                    if (!$create_new_headers and (preg_match('%\W(http:|https:|ftp:)$%i', $value) or is_numeric($value))) {
                         $create_new_headers = true;
                     }
 
@@ -1021,7 +1022,9 @@ class PMXI_CsvParser
                if (!empty($keys)) {
                     $chunk = array();
                     foreach ($this->headers as $key => $header) {
-                        $chunk[$header] = $this->fixEncoding( $keys[$key] );
+                        if(isset($keys[$key])) {
+                            $chunk[ $header ] = $this->fixEncoding( $keys[ $key ] );
+                        }
                     }
                     if ( ! empty($chunk) ) {
                         $xmlWriter->startElement('node');

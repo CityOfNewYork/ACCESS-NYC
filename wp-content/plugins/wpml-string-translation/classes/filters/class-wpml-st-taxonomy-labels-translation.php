@@ -3,7 +3,7 @@
 class WPML_ST_Taxonomy_Labels_Translation implements IWPML_Action {
 
 	const NONCE_TAXONOMY_TRANSLATION = 'wpml_taxonomy_translation_nonce';
-	const PRIORITY_GET_LABEL = 10;
+	const PRIORITY_GET_LABEL         = 10;
 
 	/** @var WPML_ST_Taxonomy_Strings $taxonomy_strings */
 	private $taxonomy_strings;
@@ -46,7 +46,7 @@ class WPML_ST_Taxonomy_Labels_Translation implements IWPML_Action {
 	 */
 	public function block_translation_and_init_strings( $translation, $text, $gettext_context, $domain ) {
 		if ( WPML_ST_Taxonomy_Strings::CONTEXT_GENERAL === $gettext_context
-		     || WPML_ST_Taxonomy_Strings::CONTEXT_SINGULAR === $gettext_context
+			 || WPML_ST_Taxonomy_Strings::CONTEXT_SINGULAR === $gettext_context
 		) {
 			$this->taxonomy_strings->create_string_if_not_exist( $text, $gettext_context, $domain );
 			$this->taxonomy_strings->add_to_translated_with_gettext_context( $text, $domain );
@@ -60,7 +60,7 @@ class WPML_ST_Taxonomy_Labels_Translation implements IWPML_Action {
 	}
 
 	/**
-	 * @param        $false
+	 * @param false  $false
 	 * @param string $taxonomy
 	 *
 	 * @return array|null
@@ -168,7 +168,7 @@ class WPML_ST_Taxonomy_Labels_Translation implements IWPML_Action {
 					'general'  => $general_translation,
 					'singular' => $singular_translation,
 					'slug'     => $slug_translation,
-					'lang'     => $language
+					'lang'     => $language,
 				);
 
 				wp_send_json_success( $result );

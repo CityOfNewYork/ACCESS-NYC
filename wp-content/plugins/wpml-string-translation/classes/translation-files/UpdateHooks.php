@@ -4,6 +4,7 @@ namespace WPML\ST\TranslationFile;
 
 use stdClass;
 use WPML\Collect\Support\Collection;
+use WPML\Element\API\Languages;
 
 class UpdateHooks implements \IWPML_Action {
 
@@ -19,19 +20,29 @@ class UpdateHooks implements \IWPML_Action {
 	/** @var Collection $entities_to_update */
 	private $entities_to_update;
 
+	/** @var callable */
+	private $resetDomainsCache;
+
 	public function __construct(
 		Manager $file_manager,
-		DomainsLocalesMapper $domains_locales_mapper
+		DomainsLocalesMapper $domains_locales_mapper,
+		callable $resetDomainsCache = null
 	) {
 		$this->file_manager           = $file_manager;
 		$this->domains_locales_mapper = $domains_locales_mapper;
 		$this->entities_to_update     = wpml_collect( [] );
+		$this->resetDomainsCache      = $resetDomainsCache ?: [ Domains::class, 'resetCache' ];
 	}
 
 	public function add_hooks() {
 		add_action( 'wpml_st_add_string_translation', array( $this, 'add_to_update_queue' ) );
 		add_action( 'wpml_st_update_string', array( $this, 'refresh_after_update_original_string' ), 10, 6 );
 		add_action( 'wpml_st_before_remove_strings', array( $this, 'refresh_before_remove_strings' ) );
+		/**
+		 * @see UpdateHooks::refresh_domain
+		 * @since @3.1.0
+		 */
+		add_action( 'wpml_st_refresh_domain', [ $this, 'refresh_domain' ] );
 
 		if ( ! $this->file_manager->isPartialFile() ) {
 			add_action( 'wpml_st_translations_file_post_import', array( $this, 'update_imported_file' ) );
@@ -56,12 +67,16 @@ class UpdateHooks implements \IWPML_Action {
 	 * @return array
 	 */
 	public function process_update_queue() {
+		call_user_func( $this->resetDomainsCache );
+
 		$outdated_entities        = $this->domains_locales_mapper->get_from_translation_ids( $this->updated_translation_ids );
 		$this->entities_to_update = $this->entities_to_update->merge( $outdated_entities );
 
-		$this->entities_to_update->each( function( $entity ) {
-			$this->update_file( $entity->domain, $entity->locale );
-		} );
+		$this->entities_to_update->each(
+			function( $entity ) {
+				$this->update_file( $entity->domain, $entity->locale );
+			}
+		);
 
 		return $this->entities_to_update->toArray();
 	}
@@ -87,6 +102,20 @@ class UpdateHooks implements \IWPML_Action {
 	}
 
 	/**
+	 * It dispatches the regeneration of MO files for a specific domain in all active languages.
+	 *
+	 * @param string $domain
+	 */
+	public function refresh_domain( $domain ) {
+		$outdated_entities        = $this->domains_locales_mapper->get_from_domain(
+			[ Languages::class, 'getActive' ],
+			$domain
+		);
+		$this->entities_to_update = $this->entities_to_update->merge( $outdated_entities );
+		$this->add_shutdown_action();
+	}
+
+	/**
 	 * We need to refresh before the strings are deleted,
 	 * otherwise we can't determine which domains to refresh.
 	 *
@@ -103,8 +132,12 @@ class UpdateHooks implements \IWPML_Action {
 	 * @param string $locale
 	 */
 	private function update_file( $domain, $locale ) {
+		/**
+		 * It does not matter whether MO/JED file can be handled or not, that's why `remove` method is placed before `handles` check.
+		 * If a file is not `handable` then it can still should be removed.
+		 */
+		$this->file_manager->remove( $domain, $locale );
 		if ( $this->file_manager->handles( $domain ) ) {
-			$this->file_manager->remove( $domain, $locale );
 			$this->file_manager->add( $domain, $locale );
 		}
 	}

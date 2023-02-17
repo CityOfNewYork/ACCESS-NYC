@@ -81,41 +81,42 @@ abstract class Field implements FieldInterface {
         $subFieldsData = $this->isLocalFieldStorage() ? $this->getLocalSubFieldsData() : $this->getDBSubFieldsData();
 
         if ($subFieldsData){
-
             foreach ($subFieldsData as $subFieldData) {
                 $field = $this->initDataAndCreateField($subFieldData);
                 $this->subFields[] = $field;
             }
         }
 
-        // Init sub fields for Flexible Content
-        if (ACFService::isACFNewerThan('5.0.0') && $this->getType() == 'flexible_content') {
-            // get flexible field
-            $flexibleField = $this->getData('field');
-            // vars
-            $flex_fields = acf_get_fields($flexibleField);
-            // loop through layouts, sub fields and swap out the field key with the real field
-            foreach (array_keys($flexibleField['layouts']) as $fi) {
-                // extract layout
-                $layout = acf_extract_var($flexibleField['layouts'], $fi);
-                // append sub fields
-                if (!empty($flex_fields)) {
-                    foreach (array_keys($flex_fields) as $fk) {
-                        // check if 'parent_layout' is empty
-                        if (empty($flex_fields[$fk]['parent_layout'])) {
-                            // parent_layout did not save for this field, default it to first layout
-                            $flex_fields[$fk]['parent_layout'] = $layout['key'];
-                        }
-                        // append sub field to layout,
-                        if ($flex_fields[$fk]['parent_layout'] == $layout['key']) {
-                            $layout['sub_fields'][] = acf_extract_var($flex_fields, $fk);
-                        }
-                    }
-                }
-                // append back to layouts
-                $this->data['field']['layouts'][$fi] = $layout;
-            }
-        }
+	    // Init sub fields for Flexible Content
+	    if (ACFService::isACFNewerThan('5.0.0') && $this->getType() == 'flexible_content' && $this->isLocalFieldStorage()) {
+		    // get flexible field
+		    $flexibleField = $this->getData('field');
+		    // vars
+		    $flex_fields = acf_get_fields($flexibleField);
+		    // loop through layouts, sub fields and swap out the field key with the real field
+		    foreach (array_keys($flexibleField['layouts']) as $fi) {
+			    // extract layout
+			    $layout = acf_extract_var($flexibleField['layouts'], $fi);
+			    // append sub fields
+			    if (!empty($flex_fields)) {
+				    $layout['sub_fields'] = [];
+				    foreach (array_keys($flex_fields) as $fk) {
+					    // check if 'parent_layout' is empty
+					    if (empty($flex_fields[$fk]['parent_layout'])) {
+						    // parent_layout did not save for this field, default it to first layout
+						    $flex_fields[$fk]['parent_layout'] = $layout['key'];
+					    }
+					    // append sub field to layout,
+					    if ($flex_fields[$fk]['parent_layout'] == $layout['key']) {
+						    $layout['sub_fields'][] = acf_extract_var($flex_fields, $fk);
+					    }
+				    }
+			    }
+			    // append back to layouts
+			    $this->data['field']['layouts'][$fi] = $layout;
+		    }
+	    }
+
     }
 
     /**
@@ -133,7 +134,13 @@ abstract class Field implements FieldInterface {
         foreach ($reset as $key){
             if (empty($field[$key])) $field[$key] = false;
         }
-        $data['current_field'] = empty($post['fields'][$field['key']]) ? false : $post['fields'][$field['key']];
+
+	    if ( array_key_exists( 'key', $field ) ) {
+		    $data['current_field'] = empty($post['fields'][$field['key']]) ? false : $post['fields'][$field['key']];
+	    } else {
+		    $data['current_field'] = false;
+	    }
+
         $options = array('is_multiple_field_value', 'multiple_value');
         foreach ($options as $option){
             $data['current_' . $option] = isset($field['key']) && isset($post[$option][$field['key']]) ? $post[$option][$field['key']] : false;
@@ -260,6 +267,12 @@ abstract class Field implements FieldInterface {
             return FALSE;
         }
 
+        // Do not import empty fields.
+        $value = $this->getFieldValue();
+        if ($value === '' && ! in_array($this->getType(), ['group', 'repeater', 'clone', 'flexible_content', 'button_group'])) {
+            return FALSE;
+        }
+
         switch ($this->getImportType()) {
             case 'import_users':
                 update_user_meta($this->getPostID(), "_" . $this->getFieldName(), $this->getFieldKey());
@@ -291,7 +304,11 @@ abstract class Field implements FieldInterface {
             case 'v4':
             case 'v5':
                 $fieldDir = PMAI_FIELDS_ROOT_DIR . '/views/'. $this->type;
+	            $fieldDir = apply_filters( 'wp_all_import_acf_field_view_dir', $fieldDir, $this );
+	            $fieldDir = apply_filters( 'wp_all_import_acf_field_view_dir_' . $this->type, $fieldDir, $this );
                 $filePath = $fieldDir . DIRECTORY_SEPARATOR . $this->type . '-' . $this->supportedVersion . '.php';
+	            $filePath = apply_filters( 'wp_all_import_acf_field_view_path', $filePath, $this );
+	            $filePath = apply_filters( 'wp_all_import_acf_field_view_path_' . $this->type, $filePath, $this );
                 if (is_file($filePath)) {
                     // Render field header.
                     $header = $fieldDir . DIRECTORY_SEPARATOR . 'header.php';
@@ -309,6 +326,8 @@ abstract class Field implements FieldInterface {
                 break;
             default:
                 $filePath = __DIR__ . '/views/'. $this->type .'.php';
+	            $filePath = apply_filters( 'wp_all_import_acf_field_view_path', $filePath, $this );
+	            $filePath = apply_filters( 'wp_all_import_acf_field_view_path_' . $this->type, $filePath, $this );
                 if (is_file($filePath)) {
                     include $filePath;
                 }
@@ -322,6 +341,8 @@ abstract class Field implements FieldInterface {
          */
         protected function renderHeader(){
             $filePath = __DIR__ . '/templates/header.php';
+	        $filePath = apply_filters( 'wp_all_import_acf_field_template_header_path', $filePath, $this );
+	        $filePath = apply_filters( 'wp_all_import_acf_field_template_header_path' . $this->type, $filePath, $this );
             if (is_file($filePath)) {
                 extract($this->data);
                 include $filePath;
@@ -333,6 +354,8 @@ abstract class Field implements FieldInterface {
          */
         protected function renderFooter(){
             $filePath = __DIR__ . '/templates/footer.php';
+	        $filePath = apply_filters( 'wp_all_import_acf_field_template_footer_path', $filePath, $this );
+	        $filePath = apply_filters( 'wp_all_import_acf_field_template_footer_path' . $this->type, $filePath, $this );
             if (is_file($filePath)) {
                 include $filePath;
             }
@@ -442,8 +465,8 @@ abstract class Field implements FieldInterface {
     public function getFieldName(){
         $fieldName = ( isset($this->data['field']['name']) ? $this->data['field']['name'] : '' );
         if (empty($fieldName)) {
-            if (function_exists('_acf_get_field_by_id')) {
-                $field = _acf_get_field_by_id($this->data['field']['ID']);
+            if (function_exists('acf_get_field')) {
+                $field = acf_get_field($this->data['field']['ID']);
             } else {
                 $label = sanitize_title( $this->data['field']['label'] );
 	            $fieldName = str_replace('-', '_', $label);
@@ -566,12 +589,11 @@ abstract class Field implements FieldInterface {
                 $fieldID = $fieldData['ID'];
             }
         }
-        return get_posts(array(
-            'posts_per_page' => -1,
-            'post_type'      => 'acf-field',
-            'post_parent'    => $fieldID,
-            'post_status'    => 'publish'
-        ));
+        $field = acf_get_field($fieldID);
+        if ( ! empty($field['sub_fields']) ) {
+        	return $field['sub_fields'];
+        }
+	    return [];
     }
 
     /**
@@ -602,11 +624,8 @@ abstract class Field implements FieldInterface {
                         }
                     }
                 }
-            }
-            else{
-
+            } else {
                 global $acf_register_field_group;
-
                 if (!empty($acf_register_field_group)){
                     foreach ($acf_register_field_group as $key => $group) {
                         foreach ($group['fields'] as $field) {
@@ -619,8 +638,7 @@ abstract class Field implements FieldInterface {
                     }
                 }
             }
-        }
-        else {
+        } else {
             foreach ($subFields as $field) {
                 $subFieldData = $field;
                 $subFieldData['ID'] = $subFieldData['id'] = uniqid();
@@ -672,27 +690,12 @@ abstract class Field implements FieldInterface {
      * @return array|bool|mixed
      */
     protected function getDBFieldDataByKey($fieldKey){
-        $fieldData = false;
-        $args = array(
-            'name' => $fieldKey,
-            'post_type' => 'acf-field',
-            'post_status' => 'publish',
-            'posts_per_page' => 1
-        );
-        $my_posts = get_posts($args);
-        if ($my_posts) {
-            $sub_field = $my_posts[0];
-            $fieldData = (!empty($sub_field->post_content)) ? unserialize($sub_field->post_content) : array();
-            $fieldData['ID'] = $sub_field->ID;
-            $fieldData['label'] = $sub_field->post_title;
-            $fieldData['key'] = $sub_field->post_name;
-        }
-        return $fieldData;
+	    return acf_get_field($fieldKey);
     }
 
     /**
      * @param $subFieldData
-     * @return Field
+     * @return Field|bool
      */
     public function initDataAndCreateField($subFieldData){
 
@@ -704,6 +707,20 @@ abstract class Field implements FieldInterface {
             $fieldData['label'] = $subFieldData->post_title;
             $fieldData['key']   = $subFieldData->post_name;
             $fieldData['name']  = $subFieldData->post_excerpt;
+        }
+
+        // Do not include same field as child to avoid `Maximum function nesting level` exception.
+	    $parent = $this->getParent();
+        if ($parent) {
+        	do {
+		        if ( $parent->getFieldKey() == $fieldData['key'] ) {
+			        return FALSE;
+		        }
+        		$parent = $parent->getParent();
+	        } while ($parent);
+        }
+        if ( $this->getFieldKey() == $fieldData['key'] ) {
+        	return FALSE;
         }
 
         // Create sub field instance
@@ -720,8 +737,11 @@ abstract class Field implements FieldInterface {
     /**
      * @return int
      */
-    public function getCountValues(){
+    public function getCountValues($parentIndex = FALSE){
         $parents = $this->getParents();
+        if ($parentIndex !== FALSE && isset($parents[$parentIndex])) {
+        	$parents = [$parents[$parentIndex]];
+        }
         $value = $this->getOriginalFieldValueAsString();
         if (!empty($parents) && !$this->isEmptyValue($value) && !is_array($value)){
             $parentIndex = false;

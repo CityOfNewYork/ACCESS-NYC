@@ -1,10 +1,8 @@
 <?php
+use WPML\FP\Obj;
 
 use WPML\Core\Twig_Environment;
 use WPML\Core\Twig_Error_Syntax;
-use WPML\Core\Twig_Error_Runtime;
-use WPML\Core\Twig_Error_Loader;
-use WPML\Core\Twig_LoaderInterface;
 
 abstract class WPML_Templates_Factory {
 	const NOTICE_GROUP                 = 'template_factory';
@@ -49,18 +47,26 @@ abstract class WPML_Templates_Factory {
 
 	abstract protected function init_template_base_dir();
 
+	/**
+	 * @param null $template
+	 * @param null $model
+	 *
+	 * @throws \WPML\Core\Twig\Error\LoaderError
+	 * @throws \WPML\Core\Twig\Error\RuntimeError
+	 * @throws \WPML\Core\Twig\Error\SyntaxError
+	 */
 	public function show( $template = null, $model = null ) {
 		echo $this->get_view( $template, $model );
 	}
 
 	/**
-	 * @param $template
-	 * @param $model
+	 * @param string $template
+	 * @param array<string,mixed> $model
 	 *
 	 * @return string
-	 * @throws Twig_Error_Syntax
-	 * @throws Twig_Error_Runtime
-	 * @throws Twig_Error_Loader
+	 * @throws \WPML\Core\Twig\Error\LoaderError
+	 * @throws \WPML\Core\Twig\Error\RuntimeError
+	 * @throws \WPML\Core\Twig\Error\SyntaxError
 	 */
 	public function get_view( $template = null, $model = null ) {
 		$output = '';
@@ -125,6 +131,9 @@ abstract class WPML_Templates_Factory {
 					$this->twig->addFilter( $custom_filter );
 				}
 			}
+			if ( Obj::propOr( false, 'debug', $environment_args ) ) {
+				$this->twig->addExtension( new \WPML\Core\Twig\Extension\DebugExtension() );
+			}
 		}
 	}
 
@@ -184,7 +193,7 @@ abstract class WPML_Templates_Factory {
 	}
 
 	/**
-	 * @return Twig_LoaderInterface
+	 * @return \WPML\Core\Twig_LoaderInterface
 	 */
 	protected function get_twig_loader() {
 		if ( $this->is_string_template() ) {

@@ -1,5 +1,7 @@
 <?php
 
+use WPML\ST\JED\Hooks\Sync;
+use WPML\ST\TranslationFile\Sync\FileSync;
 use function WPML\Container\make;
 use WPML\ST\TranslationFile\UpdateHooks;
 
@@ -9,7 +11,7 @@ class WPML_ST_Script_Translations_Hooks_Factory implements IWPML_Backend_Action_
 	 * Create hooks.
 	 *
 	 * @return array|IWPML_Action
-	 * @throws \Auryn\InjectionException Auryn Exception.
+	 * @throws \WPML\Auryn\InjectionException Auryn Exception.
 	 */
 	public function create() {
 		$hooks = array();
@@ -23,6 +25,16 @@ class WPML_ST_Script_Translations_Hooks_Factory implements IWPML_Backend_Action_
 
 		if ( ! wpml_is_ajax() && ! wpml_is_rest_request() ) {
 			$hooks['filtering'] = $this->get_filtering_hooks( $jed_file_manager );
+		}
+
+		if ( WPML\ST\TranslationFile\Hooks::useFileSynchronization() ) {
+			$hooks['sync'] = make(
+				Sync::class,
+				[
+					':fileSync' => make( FileSync::class, [ ':manager' => $jed_file_manager ] ),
+					':manager'  => $jed_file_manager,
+				]
+			);
 		}
 
 		return $hooks;

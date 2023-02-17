@@ -6,6 +6,10 @@
 class WPML_XML_Config_Log_UI {
 	/** @var IWPML_Template_Service */
 	private $template_service;
+	/**
+	 * @var \WPML_Config_Update_Log
+	 */
+	private $log;
 
 	function __construct( WPML_Config_Update_Log $log, IWPML_Template_Service $template_service ) {
 		$this->log              = $log;
@@ -71,10 +75,22 @@ class WPML_XML_Config_Log_UI {
 		);
 
 		if ( $table_data ) {
-			$clear_log_url                    = add_query_arg( array( WPML_XML_Config_Log_Notice::NOTICE_ERROR_GROUP . '-action' => 'wpml_xml_update_clear', WPML_XML_Config_Log_Notice::NOTICE_ERROR_GROUP . '-nonce' => wp_create_nonce( 'wpml_xml_update_clear' ) ), $this->log->get_log_url() );
+			$clear_log_url                    = add_query_arg(
+				array(
+					WPML_XML_Config_Log_Notice::NOTICE_ERROR_GROUP . '-action' => 'wpml_xml_update_clear',
+					WPML_XML_Config_Log_Notice::NOTICE_ERROR_GROUP . '-nonce'  => wp_create_nonce( 'wpml_xml_update_clear' ),
+				),
+				$this->log->get_log_url()
+			);
 			$model['buttons']['clear']['url'] = $clear_log_url;
 
-			$retry_url                        = add_query_arg( array( WPML_XML_Config_Log_Notice::NOTICE_ERROR_GROUP . '-action' => 'wpml_xml_update_refresh', WPML_XML_Config_Log_Notice::NOTICE_ERROR_GROUP . '-nonce' => wp_create_nonce( 'wpml_xml_update_refresh' ) ), $this->log->get_log_url() );
+			$retry_url                        = add_query_arg(
+				array(
+					WPML_XML_Config_Log_Notice::NOTICE_ERROR_GROUP . '-action' => 'wpml_xml_update_refresh',
+					WPML_XML_Config_Log_Notice::NOTICE_ERROR_GROUP . '-nonce'  => wp_create_nonce( 'wpml_xml_update_refresh' ),
+				),
+				$this->log->get_log_url()
+			);
 			$model['buttons']['retry']['url'] = $retry_url;
 		}
 
@@ -88,7 +104,7 @@ class WPML_XML_Config_Log_UI {
 			return $time;
 		}
 
-		list( $sec, $usec ) = explode( '.', $time ); //split the microtime on .
+		list( $sec, $usec ) = explode( '.', $time ); // split the microtime on .
 
 		return date( $dFormat, $sec ) . $usec;
 	}

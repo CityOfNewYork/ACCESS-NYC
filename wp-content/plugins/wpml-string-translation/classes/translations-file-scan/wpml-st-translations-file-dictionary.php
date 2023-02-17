@@ -14,9 +14,9 @@ class WPML_ST_Translations_File_Dictionary {
 	}
 
 	/**
-	 * @param $file_path
+	 * @param string $file_path
 	 *
-	 * @return WPML_ST_Translations_File_Entry
+	 * @return WPML_ST_Translations_File_Entry|null
 	 */
 	public function find_file_info_by_path( $file_path ) {
 		$result = $this->storage->find( $file_path );
@@ -49,10 +49,12 @@ class WPML_ST_Translations_File_Dictionary {
 
 	public function clear_skipped() {
 		$skipped = wpml_collect( $this->storage->find( null, [ WPML_ST_Translations_File_Entry::SKIPPED ] ) );
-		$skipped->each( function ( WPML_ST_Translations_File_Entry $entry ) {
-			$entry->set_status( WPML_ST_Translations_File_Entry::NOT_IMPORTED );
-			$this->storage->save( $entry );
-		} );
+		$skipped->each(
+			function ( WPML_ST_Translations_File_Entry $entry ) {
+				$entry->set_status( WPML_ST_Translations_File_Entry::NOT_IMPORTED );
+				$this->storage->save( $entry );
+			}
+		);
 	}
 
 	/**
@@ -75,14 +77,16 @@ class WPML_ST_Translations_File_Dictionary {
 			$files = $files->filter( EntryQueries::isExtension( $extension ) );
 		}
 		if ( $locale ) {
-			$files = $files->filter( function ( WPML_ST_Translations_File_Entry $file ) use ( $locale ) {
-				return $file->get_file_locale() === $locale;
-			} );
+			$files = $files->filter(
+				function ( WPML_ST_Translations_File_Entry $file ) use ( $locale ) {
+					return $file->get_file_locale() === $locale;
+				}
+			);
 		}
 
 		return $files->map( EntryQueries::getDomain() )
-		             ->unique()
-		             ->values()
-		             ->toArray();
+					 ->unique()
+					 ->values()
+					 ->toArray();
 	}
 }

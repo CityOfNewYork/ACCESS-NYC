@@ -1,0 +1,13 @@
+<div id="wpml-tm-post-edit-alert" class="js-wpml-tm-post-edit-alert wpml-tm-post-edit-alert wpml-tm-post-edit-alert-in-progress" style="display: none;">
+    {{ nonce | raw }}
+    <p id="icl_side_by_site">
+        {{ warning|raw }}
+        <br /><br />
+        {{ message|raw }}
+    </p>
+    <p class="text-center">
+        <a class="js-wpml-tm-continue button button-secondary">{{ edit_anyway_button }}</a>
+        <a class="js-wpml-tm-go-back button button-secondary">{{ go_back_button }}</a>
+    </p>
+    <p><label><input class="do-not-show-again" type="checkbox" value="1" data-action="{{ do_not_show_again_action }}">{{ do_not_show_again }}</label></p>
+</div>

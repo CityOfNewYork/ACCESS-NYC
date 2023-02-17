@@ -5,8 +5,11 @@
 			Lightweight "drop-in" for storing WordPress uploads on Amazon S3 instead of the local filesystem.
 		</td>
 		<td align="right" width="20%">
-			<a href="https://travis-ci.org/humanmade/S3-Uploads">
-				<img src="https://travis-ci.org/humanmade/S3-Uploads.svg?branch=master" alt="Build status">
+			<a href="https://shepherd.dev/github/humanmade/S3-Uploads/">
+				<img src="https://shepherd.dev/github/humanmade/S3-Uploads/coverage.svg" alt="Psalm coverage">
+			</a>
+			<a href="https://travis-ci.com/humanmade/S3-Uploads">
+				<img src="https://travis-ci.com/humanmade/S3-Uploads.svg?branch=master" alt="Build status">
 			</a>
 			<a href="http://codecov.io/github/humanmade/S3-Uploads?branch=master">
 				<img src="http://codecov.io/github/humanmade/S3-Uploads/coverage.svg?branch=master" alt="Coverage via codecov.io" />
@@ -23,25 +26,34 @@
 	</tr>
 </table>
 
-S3 is a WordPress plugin to store uploads on S3. S3-Uploads aims to be a lightweight "drop-in" for storing uploads on Amazon S3 instead of the local filesystem.
+S3 Uploads is a WordPress plugin to store uploads on S3. S3 Uploads aims to be a lightweight "drop-in" for storing uploads on Amazon S3 instead of the local filesystem.
 
 It's focused on providing a highly robust S3 interface with no "bells and whistles", WP-Admin UI or much otherwise. It comes with some helpful WP-CLI commands for generating IAM users, listing files on S3 and Migrating your existing library to S3.
 
+## Requirements
 
-Getting Set Up
-==========
+- PHP >= 7.1
+- WordPress >= 5.3
 
-**Install Using Composer**
+## Getting Set Up
+
+### Install Using Composer
 
 ```
 composer require humanmade/s3-uploads
 ```
 
-**Install Manually**
+**Note:** [Composer's autoloader](https://getcomposer.org/doc/01-basic-usage.md#autoloading) must be loaded before S3 Uploads is loaded. We recommend loading it in your `wp-config.php` before `wp-settings.php` is loaded as shown below.
+
+```php
+require_once __DIR__ . '/vendor/autoload.php';
+```
+
+### Install Manually
 
 If you do not use Composer to manage plugins or other dependencies, you can install the plugin manually. Download the `manual-install.zip` file from the [Releases page](https://github.com/humanmade/S3-Uploads/releases) and extract the ZIP file to your `plugins` directory.
 
-You can also `git clone` this repository, and run `composer install` in the plugin folder to pull in it's dependencies.
+You can also `git clone` this repository, and run `composer install` in the plugin folder to pull in its dependencies.
 
 ---
 
@@ -49,9 +61,14 @@ Once you've installed the plugin, add the following constants to your `wp-config
 
 ```PHP
 define( 'S3_UPLOADS_BUCKET', 'my-bucket' );
+define( 'S3_UPLOADS_REGION', '' ); // the s3 bucket region (excluding the rest of the URL)
+
+// You can set key and secret directly:
 define( 'S3_UPLOADS_KEY', '' );
 define( 'S3_UPLOADS_SECRET', '' );
-define( 'S3_UPLOADS_REGION', '' ); // the s3 bucket region (excluding the rest of the URL)
+
+// Or if using IAM instance profiles, you can use the instance's credentials:
+define( 'S3_UPLOADS_USE_INSTANCE_PROFILE', true );
 ```
 Please refer to this region list http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region for the S3_UPLOADS_REGION values.
 
@@ -81,19 +98,10 @@ like so:
 wp s3-uploads verify
 ```
 
-You'll want to create a new IAM user for the S3-Uploads plugin, so you are not using admin level access keys on your site. S3-Uploads can create the IAM user for you and asign the correct permissions.
-
-```
-wp s3-uploads create-iam-user --admin-key=<key> --admin-secret=<secret>
-```
-
-This will provide you with a new Access Key and Secret Key which you can configure S3-Uploads with. Paste the values in the `wp-config.php`. Once you have migrated your media to S3 with any of the below methods, you'll want to enable S3 Uploads: `wp s3-uploads enable`.
-
-If you want to create your IAM user yourself, or attach the necessary permissions to an existing user, you can output the policy via `wp s3-uploads generate-iam-policy`
+You will need to create your IAM user yourself, or attach the necessary permissions to an existing user, you can output the policy via `wp s3-uploads generate-iam-policy`
 
 
-Listing files on S3
-==========
+## Listing files on S3
 
 S3-Uploads comes with a WP-CLI command for listing files in the S3 bucket for debugging etc.
 
@@ -101,16 +109,13 @@ S3-Uploads comes with a WP-CLI command for listing files in the S3 bucket for de
 wp s3-uploads ls [<path>]
 ```
 
-Uploading files to S3
-==========
+## Uploading files to S3
 
 If you have an existing media library with attachment files, use the below command to copy them all to S3 from local disk.
 
 ```
 wp s3-uploads upload-directory <from> <to> [--verbose]
 ```
-
-Passing `--sync` will only upload files that are newer in `<from>` or that don't exist on S3 already. Use `--dry-run` to test.
 
 For example, to migrate your whole uploads directory to S3, you'd run:
 
@@ -126,8 +131,31 @@ wp s3-uploads cp <from> <to>
 
 Note: as either `<from>` or `<to>` can be S3 or local locations, you must specify the full S3 location via `s3://mybucket/mydirectory` for example `cp ./test.txt s3://mybucket/test.txt`.
 
-Cache Control
-==========
+## Private Uploads
+
+WordPress (and therefor S3 Uploads) default behaviour is that all uploaded media files are publicly accessible. In certain cases which may not be desireable. S3 Uploads supports setting S3 Objects to a `private` ACL and providing temporarily signed URLs for all files that are marked as private.
+
+S3 Uploads does not make assumptions or provide UI for marking attachments as private, instead you should integrate the `s3_uploads_is_attachment_private` WordPress filter to control the behaviour. For example, to mark _all_ attachments as private:
+
+```php
+add_filter( 's3_uploads_is_attachment_private', '__return_true' );
+```
+
+Private uploads can be transitioned to public by calling `S3_Uploads::set_attachment_files_acl( $id, 'public-read' )` or vica-versa. For example:
+
+```php
+S3_Uploads::get_instance()->set_attachment_files_acl( 15, 'public-read' );
+```
+
+The default expiry for all private file URLs is 6 hours. You can modify this by using the `s3_uploads_private_attachment_url_expiry` WordPress filter. The value can be any string interpreted by `strtotime`. For example:
+
+```php
+add_filter( 's3_uploads_private_attachment_url_expiry', function ( $expiry ) {
+	return '+1 hour';
+} );
+```
+
+## Cache Control
 
 You can define the default HTTP `Cache-Control` header for uploaded media using the
 following constant:
@@ -146,8 +174,7 @@ define( 'S3_UPLOADS_HTTP_EXPIRES', gmdate( 'D, d M Y H:i:s', time() + (10 * 365 
 	// will expire in 10 years time
 ```
 
-Default Behaviour
-==========
+## Default Behaviour
 
 As S3 Uploads is a plug and play plugin, activating it will start rewriting image URLs to S3, and also put
 new uploads on S3. Sometimes this isn't required behaviour as a site owner may want to upload a large
@@ -162,8 +189,8 @@ define( 'S3_UPLOADS_AUTOENABLE', false );
 To then enable S3 Uploads rewriting, use the wp-cli command: `wp s3-uploads enable` / `wp s3-uploads disable`
 to toggle the behaviour.
 
-URL Rewrites
-=======
+## URL Rewrites
+
 By default, S3 Uploads will use the canonical S3 URIs for referencing the uploads, i.e. `[bucket name].s3.amazonaws.com/uploads/[file path]`. If you want to use another URL to serve the images from (for instance, if you [wish to use S3 as an origin for CloudFlare](https://support.cloudflare.com/hc/en-us/articles/200168926-How-do-I-use-CloudFlare-with-Amazon-s-S3-Service-)), you should define `S3_UPLOADS_BUCKET_URL` in your `wp-config.php`:
 
 ```PHP
@@ -176,8 +203,7 @@ S3 Uploads' URL rewriting feature can be disabled if the current website does no
 define( 'S3_UPLOADS_DISABLE_REPLACE_UPLOAD_URL', true );
 ```
 
-S3 Object Permissions
-=======
+## S3 Object Permissions
 
 The object permission of files uploaded to S3 by this plugin can be controlled by setting the `S3_UPLOADS_OBJECT_ACL`
 constant. The default setting if not specified is `public-read` to allow objects to be read by anyone. If you don't
@@ -191,8 +217,7 @@ define('S3_UPLOADS_OBJECT_ACL', 'private');
 
 For more information on S3 permissions please see the Amazon S3 permissions documentation.
 
-Custom Endpoints
-=======
+## Custom Endpoints
 
 Depending on your requirements you may wish to use an alternative S3 compatible object storage system such as Minio, Ceph,
 Digital Ocean Spaces, Scaleway and others.
@@ -210,8 +235,7 @@ add_filter( 's3_uploads_s3_client_params', function ( $params ) {
 } );
 ```
 
-Temporary Session Tokens
-=======
+## Temporary Session Tokens
 
 If your S3 access is configured to require a temporary session token in addition to the access key and secret, you should configure the credentials using the following code:
 
@@ -223,8 +247,7 @@ add_filter( 's3_uploads_s3_client_params', function ( $params ) {
 } );
 ```
 
-Offline Development
-=======
+## Offline Development
 
 While it's possible to use S3 Uploads for local development (this is actually a nice way to not have to sync all uploads from production to development),
 if you want to develop offline you have a couple of options.
@@ -235,8 +258,8 @@ if you want to develop offline you have a couple of options.
 Option 2 will allow you to run the S3 Uploads plugin for production parity purposes, it will essentially mock
 Amazon S3 with a local stream wrapper and actually store the uploads in your WP Upload Dir `/s3/`.
 
-Credits
-=======
+## Credits
+
 Created by Human Made for high volume and large-scale sites. We run S3 Uploads on sites with millions of monthly page views, and thousands of sites.
 
 Written and maintained by [Joe Hoyle](https://github.com/joehoyle). Thanks to all our [contributors](https://github.com/humanmade/S3-Uploads/graphs/contributors).

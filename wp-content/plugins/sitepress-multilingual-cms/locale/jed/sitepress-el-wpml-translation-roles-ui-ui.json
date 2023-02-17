@@ -1,0 +1,256 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "From:": [
+            "Από:"
+         ],
+         "--Choose language--": [
+            "--Επιλογή γλώσσας--"
+         ],
+         "to:": [
+            "σε:"
+         ],
+         "Set language pair(s) for Translator %s:": [
+            "Ορισμός ζεύγους ή ζευγών γλωσσών για μεταφραστή %s:"
+         ],
+         "+ Add more language pairs for this translator": [
+            "+ Προσθήκη περισσότερων ζευγών γλωσσών για αυτόν τον μεταφραστή"
+         ],
+         "First Name": [
+            "Όνομα"
+         ],
+         "Last Name": [
+            "Επίθετο"
+         ],
+         "Role": [
+            "Ρόλος"
+         ],
+         "(required)": [
+            "(υποχρεωτικό)"
+         ],
+         "Make sure that you have provided a correct email address e.g. name@domain.com": [
+            "Φροντίστε να έχετε καταχωρίσει μια σωστή διεύθυνση email, π.χ. name@domain.com"
+         ],
+         "This field is required": [
+            "Αυτό το πεδίο είναι υποχρεωτικό"
+         ],
+         "A translator can be any WordPress role.": [
+            "Ο μεταφραστής μπορεί να έχει οποιονδήποτε ρόλο του WordPress."
+         ],
+         "Username": [
+            "Όνομα χρήστη"
+         ],
+         "Email": [
+            "Email"
+         ],
+         "Search": [
+            "Αναζήτηση"
+         ],
+         "user": [
+            "χρήστη"
+         ],
+         "Editor": [
+            "Επεξεργαστής κειμένου"
+         ],
+         "Select an existing %s and set as Translation Manager": [
+            "Επιλογή ενός νέου %s και ορισμός του ως διαχειριστή μετάφρασης"
+         ],
+         "Create a new %s and set as Translation Manager": [
+            "Δημιουργία ενός νέου %s και ορισμός του ως διαχειριστή μετάφρασης"
+         ],
+         "Cancel": [
+            "Άκυρο"
+         ],
+         "Add Translation Manager": [
+            "Προσθήκη διαχειριστή μετάφρασης"
+         ],
+         "Select an existing user and set as Translator": [
+            "Επιλογή ενός τρέχοντος χρήστη και ορισμός ως μεταφραστής"
+         ],
+         "Create a new user and set as Translator": [
+            "Δημιουργία ενός νέου χρήστη και ορισμός του ως μεταφραστής"
+         ],
+         "Set language pair(s)": [
+            "Ορισμός ζεύγους(-ών) γλωσσών"
+         ],
+         "Previous": [
+            "Προηγούμενο"
+         ],
+         "Save": [
+            "Αποθήκευση"
+         ],
+         "Add a Translator": [
+            "Προσθήκη μεταφραστή"
+         ],
+         "Edit language pair(s) for translator": [
+            "Επεξεργασία ζεύγους(-ών) γλωσσών για μεταφραστή"
+         ],
+         "Name": [
+            "Όνομα"
+         ],
+         "Language Pairs": [
+            "Ζεύγη γλωσσών"
+         ],
+         "You can translate to and from all languages": [
+            "Μπορείτε να μεταφράσετε από και προς όλες τις γλώσσες"
+         ],
+         "%s file upload failed.": [
+            "Απέτυχε το ανέβασμα του αρχείου %s."
+         ],
+         "Flag": [
+            "Σημαία"
+         ],
+         "Flag file": [
+            "Επισήμανση αρχείου"
+         ],
+         "You just added  language. Next, select it as the site's default language or a translation language.": [
+            "Μόλις προσθέσατε τη γλώσσα. Στη συνέχεια, επιλέξτε την ως προεπιλεγμένη γλώσσα του ιστότοπου ή ως γλώσσα μετάφρασης."
+         ],
+         "Language added": [
+            "Προστέθηκε γλώσσα"
+         ],
+         "The value \"%s\" already exists": [
+            "Η τιμή \"%s\" υπάρχει ήδη"
+         ],
+         "Add a new language": [
+            "Προσθήκη νέας γλώσσας"
+         ],
+         "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
+            "Δημιουργήστε μια γλώσσα συγκεκριμένης χώρας, επιλέγοντας τη γενική γλώσσα από την παρακάτω λίστα και, έπειτα, τη χώρα για την οποία θα πρέπει να τοπικοποιηθεί."
+         ],
+         "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
+            "Επιλέγοντας έναν συνδυασμό που υπάρχει ήδη στη βάση δεδομένων, το WPML μπορεί να βοηθήσει με τη συμπλήρωση των απαραίτητων πεδίων. Διαβάστε περισσότερα για το θέμα <AddingACustomLanguageLink />."
+         ],
+         "Cannot find?": [
+            "Δεν τη βρίσκετε;"
+         ],
+         "Click here": [
+            "Κάντε κλικ εδώ"
+         ],
+         "The name of your language as it will appear on your site's language switcher.": [
+            "Το όνομα της γλώσσας σας θα εμφανιστεί στον εναλλαγέα γλώσσας του ιστότοπού σας."
+         ],
+         "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
+            "Λάθος μορφή. Μπορεί να περιέχει μόνο πεζά γράμματα και \"-\". Π.χ.: \"fr\" , \"pt-br\", \"zh-hans\"."
+         ],
+         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "Μια μοναδική τιμή που προσδιορίζει τη γλώσσα στη βάση δεδομένων και το URL. Αφού αποθηκευτεί, ο κωδικός γλώσσας δεν μπορεί να αλλάξει."
+         ],
+         "Language": [
+            "Γλώσσα"
+         ],
+         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "Αν η προσαρμοσμένη γλώσσα είναι παρόμοια με μια υπάρχουσα γλώσσα, μπορείτε να χρησιμοποιήσετε τον ορθογραφικό έλεγχο και την αυτόματη μετάφραση της υπάρχουσας γλώσσας. Για παράδειγμα, αν η προσαρμοσμένη γλώσσα είναι τα Ελβετικά-Γερμανικά, μπορείτε να αντιστοιχίσετε τα Γερμανικά ως γλώσσα που θα χρησιμοποιείται για ορθογραφικό έλεγχο και αυτόματη μετάφραση. Αν δεν αντιστοιχίσετε την προσαρμοσμένη γλώσσα σε μια υπάρχουσα γλώσσα, ο ορθογραφικός έλεγχος και η αυτόματη μετάφραση δεν θα είναι διαθέσιμα στη συγκεκριμένη γλώσσα. "
+         ],
+         "Location": [
+            "Τοποθεσία"
+         ],
+         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "Η τιμή που ελέγχει το WPML κατά τη φόρτωση μεταφράσεων από αρχεία MO και PO. Η προεπιλεγμένη τοποθεσία περιλαμβάνεται στα ονόματα αρχείων  στον φάκελο /wp-content/languages/ της διαμόρφωσης WordPress."
+         ],
+         "Code": [
+            "Κωδικός"
+         ],
+         "The language will not be supported by automatic translations": [
+            "Η γλώσσα δεν θα υποστηρίζεται από αυτόματες μεταφράσεις"
+         ],
+         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "Το Google χρησιμοποιεί την ιδιότητα hreflang για να κατευθύνει τους χρήστες σε ιστότοπους στη δική τους γλώσσα και τοποθεσία. Παραδείγματα:"
+         ],
+         "Language mapping": [
+            "Αντιστοίχιση γλωσσών"
+         ],
+         "All English-speaking users: en": [
+            "Όλοι οι αγγλόφωνοι χρήστες: en"
+         ],
+         "Don't map this language": [
+            "Να μην αντιστοιχιστεί αυτή η γλώσσα"
+         ],
+         "English for UK users: en-gb": [
+            "Αγγλικά για χρήστες στο ΗΒ: en-gb"
+         ],
+         "Default locale": [
+            "Προεπιλεγμένες τοπικές ρυθμίσεις"
+         ],
+         "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
+            "Λάθος μορφή. Μπορεί να περιέχει μόνο πεζά γράμματα και \"_\". Π.χ.: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+         ],
+         "English for US users: en-us": [
+            "Αγγλικά για χρήστες στις ΗΠΑ: en-us"
+         ],
+         "hreflang": [
+            "hreflang"
+         ],
+         "Encode url?": [
+            "Να γίνει κωδικοποίηση του URL;"
+         ],
+         "NO": [
+            "ΟΧΙ"
+         ],
+         "YES": [
+            "ΝΑΙ"
+         ],
+         " (required)": [
+            " (υποχρεωτικό)"
+         ],
+         "Please fill in the field": [
+            "Συμπληρώστε το πεδίο"
+         ],
+         "Save language": [
+            "Αποθήκευση γλώσσας"
+         ],
+         "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
+            "Καθορίζει εάν τα URL σε αυτήν τη γλώσσα κωδικοποιούνται ή χρησιμοποιούν χαρακτήρες ASCII (αν δεν γνωρίζετε με βεβαιότητα, αφήστε την επιλογή \"Όχι\")."
+         ],
+         "adding a custom language": [
+            "προσθήκη προσαρμοσμένης γλώσσας"
+         ],
+         "Default language": [
+            "Προεπιλεγμένη γλώσσα"
+         ],
+         "What is the current language of your website?": [
+            "Ποια είναι η τρέχουσα γλώσσα του ιστότοπού σας;"
+         ],
+         "Translation languages": [
+            "Γλώσσες μετάφρασης"
+         ],
+         "Which languages do you want to translate your site into?": [
+            "Σε ποιες γλώσσες θέλετε να μεταφράσετε τον ιστότοπό σας;"
+         ],
+         "If you cannot find languages that you need in the list": [
+            "Αν δεν μπορείτε να βρείτε γλώσσες που χρειάζεστε στη λίστα,"
+         ],
+         "create a custom language": [
+            "δημιουργήστε μια προσαρμοσμένη γλώσσα"
+         ],
+         "What are the languages of your site?": [
+            "Ποιες είναι οι γλώσσες του ιστότοπού σας;"
+         ],
+         "+ Add a Translation Manager": [
+            "+ Προσθήκη Διαχειριστή μεταφράσεων"
+         ],
+         "+ Add a Translator": [
+            "+ Προσθήκη μεταφραστή"
+         ],
+         "%sLocal translators%s are users of your site that can log in and add, edit, and review your site's translations. Add a translator and their associated translation pairs to assign them translation jobs.": [
+            "Οι %sΤοπικοί μεταφραστές%s είναι χρήστες του ιστοτόπου σας που μπορούν να συνδεθούν και να προσθέσουν, να επεξεργαστούν και να επιμεληθούν τις μεταφράσεις του ιστοτόπου σας. Προσθέστε έναν μεταφραστή και τα συσχετισμένα μεταφραστικά ζεύγη του, για να του αναθέσετε μεταφραστικές εργασίες."
+         ],
+         "Translators": [
+            "Μεταφραστές"
+         ],
+         "You can add a dedicated person to oversee everything translation-related on your site. %sTranslation Managers%s can add new local translators or professional translation services, create and assign translation jobs, review completed translations, and change translation-related settings.": [
+            "Μπορείτε να αναθέσετε σε ένα άτομο την επίβλεψη όλων των θεμάτων που σχετίζονται με τη μετάφραση στον ιστότοπό σας. Οι %sΔιαχειριστές μεταφράσεων%s μπορούν να προσθέσουν νέους τοπικούς μεταφραστές ή υπηρεσίες επαγγελματικής μετάφρασης, να δημιουργήσουν και να αναθέσουν μεταφραστικές εργασίες, να επιμεληθούν ολοκληρωμένες μεταφράσεις και να αλλάξουν ρυθμίσεις που αφορούν μεταφράσεις."
+         ],
+         "Translation Managers": [
+            "Διαχειριστές μετάφρασης"
+         ],
+         "Note: All Administrators are automatically given Translation Manager privileges.": [
+            "Σημείωση: Όλοι οι Διαχειριστές λαμβάνουν αυτόματα προνόμια Διαχειριστή μεταφράσεων."
+         ]
+      }
+   }
+}

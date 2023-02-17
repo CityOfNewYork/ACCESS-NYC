@@ -1,0 +1,20 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/ate/status-icons/TranslationQueue.js:47
+msgid "Draft — Pending review"
+msgstr ""
+
+#: src/js/ate/status-icons/TranslationQueue.js:49
+msgid "Complete"
+msgstr ""
+
+#: src/js/ate/status-icons/TranslationQueue.js:59
+msgid "Insufficient funds"
+msgstr ""
+
+#: src/js/jobs/components/ListItem.js:120
+msgid "Editor Job ID"
+msgstr ""

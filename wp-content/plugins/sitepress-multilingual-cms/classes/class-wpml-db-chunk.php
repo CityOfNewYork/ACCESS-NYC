@@ -15,7 +15,7 @@ class WPML_DB_Chunk {
 
 	/**
 	 * @param wpdb $wpdb
-	 * @param int $chunk_size
+	 * @param int  $chunk_size
 	 */
 	public function __construct( wpdb $wpdb, $chunk_size = 1000 ) {
 		$this->wpdb       = $wpdb;
@@ -24,8 +24,8 @@ class WPML_DB_Chunk {
 
 	/**
 	 * @param string $query
-	 * @param array $args
-	 * @param int $elements_num
+	 * @param array  $args
+	 * @param int    $elements_num
 	 *
 	 * @return array
 	 *

@@ -19,6 +19,9 @@ class Cache {
 
 	use Macroable;
 
+	/**
+	 * @return void
+	 */
 	public static function init() {
 		self::macro( 'get', curryN( 2, [ self::class, 'getInternal' ] ) );
 		self::macro( 'set', curryN( 3, [ self::class, 'setInternal' ] ) );
@@ -39,7 +42,7 @@ class Cache {
 			};
 		} ) );
 
-		self::macro( 'memorize', self::memorizeWithCheck( Fns::__, Fns::T(), Fns::__ ) );
+		self::macro( 'memorize', self::memorizeWithCheck( Fns::__, Fns::always( true ), Fns::__ ) );
 
 	}
 
@@ -53,7 +56,11 @@ class Cache {
 		$found  = false;
 		$result = wp_cache_get( $key, $group, false, $found );
 
-		return $found ? Maybe::just( $result ) : Maybe::nothing();
+		if( $found && is_array( $result ) && array_key_exists( 'data', $result ) ) {
+			return  Maybe::just( $result['data'] );
+		}
+
+		return Maybe::nothing();
 	}
 
 	/**
@@ -64,7 +71,8 @@ class Cache {
 	 * @return bool|true
 	 */
 	public static function setInternal( $group, $key, $value ) {
-		return wp_cache_set( $key, $value, $group );
+		// Save $value in an array. We need to do this because W3TC and Redis have bug with saving null.
+		return wp_cache_set( $key, [ 'data' => $value ], $group );
 	}
 
 }

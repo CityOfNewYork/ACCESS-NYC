@@ -3,6 +3,15 @@
 *  Post Box
 *
 *---------------------------------------------------------------------------------------------*/
+.acf_groups .rad4 {
+	border: 1px solid #ddd;
+}
+
+.acf_postbox .hndle > span {
+	line-height: 30px;
+	color: #425e99;
+	padding: 10px;
+}
 
 .acf-hidden {
 	display: none !important;
@@ -124,15 +133,15 @@
 .acf_postbox p.label {
 	font-size: 11px;
 	line-height: 1.1em;
-	margin: 0 0 1em;
+	margin: 5px 0 3px 0;
 	padding: 0;
 	color: #666666;
 	text-shadow: 0 1px 0 #FFFFFF;
 }
 
 .acf_postbox p.label label {
-	color: #333333;
-    font-size: 13px;
+	color: #444;
+    font-size: 12px;
     font-weight: bold;
     padding: 0;
     margin: 0 0 3px;
@@ -177,7 +186,7 @@
 
 .acf_postbox .field select{
 	width: 100%;
-	padding: 2px;
+	padding: 2px 4px;
 	resize: none;
 	border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -203,9 +212,11 @@
     background: #F9F9F9;
 }
 
-.acf-input-wrap input[type="radio"],
-.acf-input-wrap input[type="checkbox"]{
-	height: 16px !important;
+
+
+.acf-input-wrap div.input:nth-of-type(1) {
+	margin-top: 0;
+	margin-right: 0;
 }
 
 
@@ -267,7 +278,6 @@
 
 
 .acf-image-uploader img {
-	box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 	width: 100%;
 	height: auto;
 	display: block;
@@ -518,7 +528,6 @@
 
 .media-modal.acf-media-modal .media-frame-title {
     border-bottom: 1px solid #DFDFDF;
-    box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.1);
 }
 
 .media-modal.acf-media-modal .media-frame-content .media-sidebar {
@@ -530,9 +539,15 @@
     right: 0;
 }
 
+@media (min-width: 783px) {
+	.acf-input-wrap input[type="radio"],
+	.acf-input-wrap input[type="checkbox"]{
+		height: 16px !important;
+	}
+}
 
 @media (max-width: 960px) {
-	
+
 	.media-modal.acf-media-modal {
 		left: 10%;
 		right: 10%;
@@ -614,7 +629,6 @@
 .acf-file-uploader img {
 	min-height: 60px;
 	min-width: 46px;
-	box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 	display: block;
 	background: #f1f1f1;
 }
@@ -712,7 +726,6 @@ ul.acf-radio-list{
 
 table.acf-input-table {
 	border-radius: 0 0 0 0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 table.acf-input-table > thead { }
@@ -887,7 +900,6 @@ table.acf_input tbody tr td.label{
 .acf_relationship .relationship_list li a:focus {
 	background: #eaf2fa;
 	color: #000;
-	box-shadow: #d6e1ec 0 0 0 1px;
 }
 
 .acf_relationship .relationship_right .relationship_list {
@@ -989,6 +1001,32 @@ table.acf_input tbody tr td.label{
 	padding-left: 18px;
 }
 
+.acf-taxonomy-field .wpallimport-plugin .remove-ico {
+	right: -2px;
+}
+
+/*---------------------------------------------------------------------------------------------
+*
+*	Field: Link
+*
+*---------------------------------------------------------------------------------------------*/
+
+.field_type-link .acf-input-wrap {
+	display: flex;
+	flex-direction: column;
+}
+
+.field_type-link .input {
+	margin-top: 10px;
+}
+
+.field_type-link .input label {
+	width: 40px;
+}
+
+.field_type-link .input input[type="text"] {
+	width: 90%;
+}
 
 /*---------------------------------------------------------------------------------------------
 *
@@ -1221,6 +1259,10 @@ th.acf-conditional_logic-hide.acf-show-blank .inner {
 *	Field: Location
 *	
 *-------------------------------------------------------------------------*/
+.field_type-google_map .wpallimport-content-section {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
 
 .acf-google-map {
 	position: relative;
@@ -1328,54 +1370,14 @@ a.acf-button,
 input[type="submit"].acf-button {
 	display: block;	
 	text-decoration: none !important;
-	border-radius: 3px;
-	
-	border: #21759B solid 1px;
-    border-color: #21759B #21759B #1E6A8D;
-    
-    
-	background: #21759B;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#2A95C5), to(#21759B)); /* Safari 4+, Chrome */
-	background-image: -webkit-linear-gradient(top, #2A95C5, #21759B); /* Chrome 10+, Safari 5.1+, iOS 5+ */
-	background-image:    -moz-linear-gradient(top, #2A95C5, #21759B); /* Firefox 3.6-15 */
-	background-image:      -o-linear-gradient(top, #2A95C5, #21759B); /* Opera 11.10+ */
-	background-image:         linear-gradient(to bottom, #2A95C5, #21759B); /* Firefox 16+ */
-	
-    color: #FFFFFF !important;
-    font-weight: normal;
-    text-shadow: 0 1px 0 rgba(0,0,0,0.5);
-    font-size: 13px;
-    line-height: 1em;
-    padding: 6px 11px;
-	box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 0 rgba(120, 200, 230, 0.5) inset;
+	background: #40acad;
+	color: #fff;
+	border-radius: 4px;
 	cursor: pointer;
-	position: relative;
-	text-align: center;
-	text-decoration: none;
-}
-
-a.acf-button:hover,
-input[type="submit"].acf-button:hover {
-
-	background-color: #3b97c9;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#3b97c9), to(#246f99)); /* Safari 4+, Chrome */
-	background-image: -webkit-linear-gradient(top, #3b97c9, #246f99); /* Chrome 10+, Safari 5.1+, iOS 5+ */
-	background-image:    -moz-linear-gradient(top, #3b97c9, #246f99); /* Firefox 3.6-15 */
-	background-image:      -o-linear-gradient(top, #3b97c9, #246f99); /* Opera 11.10+ */
-	background-image:         linear-gradient(to bottom, #3b97c9, #246f99); /* Firefox 16+ */
-
-    border-color: #1B607F;
-
-    color: #FFFFFF;
-    
-	box-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 1px 0 rgba(120, 200, 230, 0.6) inset;
-}
-
-a.acf-button:active,
-input[type="submit"].acf-button:active {
-	box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-	top: 1px;
-	
+	padding: 8px 12px;
+	width: auto;
+	overflow: visible;
+	font-size: 14px;
 }
 
 a.acf-button.grey,
@@ -1383,23 +1385,11 @@ input[type="submit"].acf-button.grey {
 	border-color: #bbb;
 	text-shadow: 0 1px 0 #fff;
 	color: #454545;
-	
-	box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 1px rgba(255, 255, 255, 1) inset;
-	
-	background: #fff;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ececec)); /* Safari 4+, Chrome */
-	background-image: -webkit-linear-gradient(top, #ffffff, #ececec); /* Chrome 10+, Safari 5.1+, iOS 5+ */
-	background-image:    -moz-linear-gradient(top, #ffffff, #ececec); /* Firefox 3.6-15 */
-	background-image:      -o-linear-gradient(top, #ffffff, #ececec); /* Opera 11.10+ */
-	background-image:         linear-gradient(to bottom, #ffffff, #ececec); /* Firefox 16+ */
-	
 }
 
 a.acf-button.grey:hover,
 input[type="submit"].acf-button.grey:hover {
 	border-color: #aaa;
-	
-	box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 1px rgba(255, 255, 255, 1) inset;
 }
 
 a.acf-button[disabled],
@@ -1428,7 +1418,7 @@ div.error a.acf-button {
 }
 
 .repeater > table {
-	margin: 0 0 8px;
+	margin: 0 0 10px;
 }
 
 .repeater > table.acf-input-table > tbody > tr > td.field {
@@ -1508,18 +1498,17 @@ div.error a.acf-button {
 	display: none !important;
 }
 
-.repeater > table > tbody > tr.ui-sortable-helper {
-	box-shadow: 0 1px 5px rgba(0,0,0,0.2);
-}
-
 .repeater > table > tbody > tr.ui-sortable-placeholder {
 	visibility: visible !important;
 }
 
 .repeater > table > tbody > tr.ui-sortable-placeholder td {
 	border: 0 none !important;
-	box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
 	background: rgba(0,0,0,0.075);
+}
+
+.repeater-footer {
+	margin-top: 10px;
 }
 
 
@@ -1613,25 +1602,13 @@ div.error a.acf-button {
 	display: block;
 	position: relative;
 	padding: 0 10px;
-	
 	cursor: move;
-	
-	box-shadow: 0 1px 0 #FFFFFF inset;
 	border: #DFDFDF solid 1px;
-	
 	background: #F1F1F1;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#F9F9F9), to(#ECECEC)); /* Safari 4+, Chrome */
-	background-image: -webkit-linear-gradient(top, #F9F9F9, #ECECEC); /* Chrome 10+, Safari 5.1+, iOS 5+ */
-	background-image:    -moz-linear-gradient(top, #F9F9F9, #ECECEC); /* Firefox 3.6-15 */
-	background-image:      -o-linear-gradient(top, #F9F9F9, #ECECEC); /* Opera 11.10+ */
-	background-image:         linear-gradient(to bottom, #F9F9F9, #ECECEC); /* Firefox 16+ */
-	
-	
 	color: #666;
 	text-shadow: 0 1px 0 #FFFFFF;
 	font-size: 12px;
 	line-height: 35px;
-	
 }
 
 .acf-flexible-content .layout.popup-open .acf-fc-layout-controlls {
@@ -1654,11 +1631,6 @@ div.error a.acf-button {
 
 .acf-flexible-content .layout .acf-fc-layout-controlls > li {
 	margin: 0 0 0 5px;
-}
-
-.acf-flexible-content .layout .acf-fc-layout-controlls .acf-button-add,
-.acf-flexible-content .layout .acf-fc-layout-controlls .acf-button-remove {
-	box-shadow: 0 0 0px 1px #cbcbcb;
 }
 
 .acf-flexible-content .clones {
@@ -1698,13 +1670,31 @@ div.error a.acf-button {
 	border-right: 0 none;
 }
 
+.acf-flexible-content .add_layout {
+	display: flex;
+	align-items: center;
+}
+
+.acf-flexible-content .add_layout .layout_buttons {
+	display: flex;
+	margin-left: auto;
+	height: 32px;
+}
+
+.acf-flexible-content .add_layout .layout_buttons > a {
+	display: inline-flex;
+    align-items: center;
+	color: #fff;
+}
+
+.acf-flexible-content .add_layout .layout_buttons > .add_layout_button {
+	margin-right: 10px;
+}
+
 .acf-fc-popup {
 	position: absolute;
-	
 	border-radius: 3px;
 	background: #333739;
-	box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-	
 	min-width: 135px;
 	z-index: 999;
 }
@@ -1836,7 +1826,21 @@ div.error a.acf-button {
 /*.pmai_taxonomy .drag-element .widefat{
 	width: 80% !important;
 }*/
-.wpallimport-plugin .acf-button:focus, 
-.wpallimport-plugin .acf-button:active{
-	line-height: 13px !important;
+
+@media (max-width: 1211px) {
+	.acf-flexible-content .add_layout .layout_buttons > .add_layout_button,
+	.acf-flexible-content .add_layout .layout_buttons > .delete_layout_button {
+		padding: 10px;
+		justify-content: center;
+	}
+
+	.acf-flexible-content .add_layout .layout_buttons > .add_layout_button {
+		width: 75px;
+		margin-right: 5px;
+		margin-left: 5px;
+	}
+
+	.acf-flexible-content .add_layout .layout_buttons > .delete_layout_button {
+		width: 100px;
+	}
 }

@@ -56,7 +56,7 @@ $columns = array(
 	<table class="widefat pmxi-admin-imports">
 		<thead>
 		<tr>
-			<th class="manage-column column-cb check-column" scope="col" style="padding: 8px 10px;">
+			<th class="manage-column column-cb check-column" scope="col">
 				<input type="checkbox" style="margin-top:1px;"/>
 			</th>
 			<?php
@@ -80,7 +80,7 @@ $columns = array(
 		</thead>
 		<tfoot>
 		<tr>
-			<th class="manage-column column-cb check-column" scope="col" style="padding: 8px 10px;">
+			<th class="manage-column column-cb check-column" scope="col">
 				<input type="checkbox" />
 			</th>
 			<?php echo $col_html; ?>
@@ -98,7 +98,7 @@ $columns = array(
 			<?php foreach ($list as $item): ?>
 				<?php $class = ('alternate' == $class) ? '' : 'alternate'; ?>
 				<tr class="<?php echo $class; ?>" valign="middle">					
-					<th scope="row" class="check-column" style="vertical-align: middle; padding: 8px 10px;">
+					<th scope="row" class="check-column">
 						<input type="checkbox" id="item_<?php echo $item['id'] ?>" name="items[]" value="<?php echo esc_attr($item['id']) ?>" />
 					</th>
 					<?php foreach ($columns as $column_id => $column_display_name): ?>
@@ -152,6 +152,9 @@ $columns = array(
 											break;
 										case 'trigger':
 											_e('triggered by cron', 'wp_all_import_plugin');
+											break;
+										case 'cli':
+											_e('cli', 'wp_all_import_plugin');
 											break;
 										default:
 											# code...

@@ -19,9 +19,10 @@ class WPML_ST_DB_Mappers_Strings {
 	 * @return array
 	 */
 	public function get_all_by_context( $context ) {
+		$where = strpos( $context, '%' ) === false ? '=' : 'LIKE';
 		$query = "
 			SELECT * FROM {$this->wpdb->prefix}icl_strings
-        	WHERE context=%s
+        	WHERE context {$where} %s
 		";
 
 		$query = $this->wpdb->prepare( $query, esc_sql( $context ) );

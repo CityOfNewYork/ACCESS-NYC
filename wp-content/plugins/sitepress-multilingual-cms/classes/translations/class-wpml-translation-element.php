@@ -3,6 +3,7 @@
 /**
  * Use this class as parent class for translatable elements in WPML,
  * to have a common approach for retrieving and setting translation information.
+ *
  * @author OnTheGo Systems
  */
 abstract class WPML_Translation_Element extends WPML_SP_User {
@@ -27,7 +28,7 @@ abstract class WPML_Translation_Element extends WPML_SP_User {
 		if ( ! is_numeric( $id ) || $id <= 0 ) {
 			throw new InvalidArgumentException( 'Argument ID must be numeric and greater than 0.' );
 		}
-		$this->id = (int) $id;
+		$this->id         = (int) $id;
 		$this->wpml_cache = $wpml_cache ? $wpml_cache : new WPML_WP_Cache( WPML_ELEMENT_TRANSLATIONS_CACHE_GROUP );
 		parent::__construct( $sitepress );
 	}
@@ -115,6 +116,9 @@ abstract class WPML_Translation_Element extends WPML_SP_User {
 		return $this->element_translations;
 	}
 
+	/**
+	 * @return false|int
+	 */
 	public function get_trid() {
 		$trid = false;
 		if ( $this->get_language_details() ) {
@@ -173,6 +177,9 @@ abstract class WPML_Translation_Element extends WPML_SP_User {
 		return $source_element;
 	}
 
+	/**
+	 * @return string|null
+	 */
 	public function get_language_code() {
 		$language_code = null;
 		if ( $this->get_language_details() ) {
@@ -203,4 +210,4 @@ abstract class WPML_Translation_Element extends WPML_SP_User {
 	abstract function is_display_as_translated();
 
 
-	}
+}

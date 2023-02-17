@@ -29,8 +29,8 @@ class WPML_Resolve_Object_Url_Helper implements IWPML_Resolve_Object_Url {
 	private $wpml_post_translations;
 
 	/**
-	 * @param SitePress $sitepress
-	 * @param WP_Query $wp_query
+	 * @param SitePress             $sitepress
+	 * @param WP_Query              $wp_query
 	 * @param WPML_Term_Translation $wpml_term_translations
 	 * @param WPML_Post_Translation $wpml_post_translations
 	 */
@@ -70,7 +70,7 @@ class WPML_Resolve_Object_Url_Helper implements IWPML_Resolve_Object_Url {
 			$this->sitepress->switch_lang( $lang_code );
 
 			$element = explode( '_', $translations[ $lang_code ]->element_type );
-			$type = array_shift( $element );
+			$type    = array_shift( $element );
 			$subtype = implode( '_', $element );
 			switch ( $type ) {
 				case 'post':
@@ -89,27 +89,35 @@ class WPML_Resolve_Object_Url_Helper implements IWPML_Resolve_Object_Url {
 		return $new_url;
 	}
 
+	/**
+	 * @param string $url
+	 *
+	 * @return array<string,\stdClass>
+	 */
 	private function cached_retrieve_translations( $url ) {
-		$cache_key      = md5( $url );
-		$cache_found    = false;
-		$cache          = new WPML_WP_Cache( self::CACHE_GROUP );
-		$translations   = $cache->get( $cache_key, $cache_found );
+		$cache_key    = md5( $url );
+		$cache_found  = false;
+		$cache        = new WPML_WP_Cache( self::CACHE_GROUP );
+		$translations = $cache->get( $cache_key, $cache_found );
 
 		if ( ! $cache_found && is_object( $this->wp_query ) ) {
-			$translations = $this->retrieve_translations( );
+			$translations = $this->retrieve_translations();
 			$cache->set( $cache_key, $translations );
 		}
 
 		return $translations;
 	}
 
+	/**
+	 * @return array<string,\stdClass>
+	 */
 	private function retrieve_translations() {
 		$this->sitepress->set_wp_query(); // Make sure $sitepress->wp_query is set
 		$_wp_query_back = clone $this->wp_query;
-		$wp_query = $this->sitepress->get_wp_query();
-		$wp_query = is_object( $wp_query ) ? clone $wp_query : clone $_wp_query_back;
+		$wp_query       = $this->sitepress->get_wp_query();
+		$wp_query       = is_object( $wp_query ) ? clone $wp_query : clone $_wp_query_back;
 
-		$languages_helper = new WPML_Languages( $this->wpml_term_translations, $this->sitepress, $this->wpml_post_translations );
+		$languages_helper    = new WPML_Languages( $this->wpml_term_translations, $this->sitepress, $this->wpml_post_translations );
 		list( $translations) = $languages_helper->get_ls_translations( $wp_query, $_wp_query_back, $this->sitepress->get_wp_query() );
 
 		return $translations;

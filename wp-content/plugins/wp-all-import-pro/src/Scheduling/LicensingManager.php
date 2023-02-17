@@ -37,7 +37,7 @@ class LicensingManager
                 ),
                 array(
                     'timeout' => 15,
-                    'sslverify' => false
+                    'sslverify' => true
                 )
             );
 

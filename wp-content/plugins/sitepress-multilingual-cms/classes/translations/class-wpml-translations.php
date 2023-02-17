@@ -29,15 +29,16 @@ class WPML_Translations extends WPML_SP_User {
 	}
 
 	/**
-	 * @param $trid
-	 * @param $wpml_element_type
+	 * @param int    $trid
+	 * @param string $wpml_element_type
+	 * @param bool $skipPrivilegeChecking
 	 *
-	 * @return array|bool|false|mixed
+	 * @return array<string,\stdClass>
 	 */
-	public function get_translations( $trid, $wpml_element_type ) {
+	public function get_translations( $trid, $wpml_element_type, $skipPrivilegeChecking = false ) {
 		$cache_key_args = array_filter( array( $trid, $wpml_element_type, $this->skip_empty, $this->all_statuses, $this->skip_recursions ) );
-		$cache_key   = md5( wp_json_encode( $cache_key_args ) );
-		$cache_found = false;
+		$cache_key      = md5( wp_json_encode( $cache_key_args ) );
+		$cache_found    = false;
 
 		$temp_elements = $this->wpml_cache->get( $cache_key, $cache_found );
 		if ( ! $this->skip_cache && $cache_found ) {
@@ -54,7 +55,7 @@ class WPML_Translations extends WPML_SP_User {
 		if ( $trid ) {
 
 			if ( $this->wpml_element_type_is_post( $wpml_element_type ) ) {
-				$sql_parts = $this->get_sql_parts_for_post( $wpml_element_type, $sql_parts );
+				$sql_parts = $this->get_sql_parts_for_post( $wpml_element_type, $sql_parts, $skipPrivilegeChecking );
 			} elseif ( $this->wpml_element_type_is_taxonomy( $wpml_element_type ) ) {
 				$sql_parts = $this->get_sql_parts_for_taxonomy( $sql_parts );
 			}
@@ -140,12 +141,12 @@ class WPML_Translations extends WPML_SP_User {
 	}
 
 	/**
-	 * @param WPML_Duplicable_Element|WPML_Translation_Element $duplicate
-	 * @param WPML_Duplicable_Element|WPML_Translation_Element $original
+	 * @param \WPML_Translation_Element $duplicate
+	 * @param \WPML_Translation_Element $original
 	 *
 	 * @throws \UnexpectedValueException
 	 */
-	public function make_duplicate_of( WPML_Duplicable_Element $duplicate, WPML_Duplicable_Element $original ) {
+	public function make_duplicate_of( WPML_Translation_Element $duplicate, WPML_Translation_Element $original ) {
 		$this->validate_duplicable_element( $duplicate );
 		$this->validate_duplicable_element( $original, 'source' );
 		$this->set_source_element( $duplicate, $original );
@@ -155,12 +156,12 @@ class WPML_Translations extends WPML_SP_User {
 	}
 
 	/**
-	 * @param WPML_Duplicable_Element|WPML_Translation_Element $element
+	 * @param \WPML_Translation_Element $element
 	 *
 	 * @return WPML_Post_Element
 	 * @throws \InvalidArgumentException
 	 */
-	public function is_a_duplicate_of( WPML_Duplicable_Element $element ) {
+	public function is_a_duplicate_of( WPML_Translation_Element $element ) {
 		$this->validate_duplicable_element( $element );
 		$duplicate_of = get_post_meta( $element->get_id(), $this->mark_as_duplicate_meta_key, true );
 		if ( $duplicate_of ) {
@@ -171,13 +172,13 @@ class WPML_Translations extends WPML_SP_User {
 	}
 
 	/**
-	 * @param WPML_Duplicable_Element|WPML_Translation_Element $element
+	 * @param \WPML_Translation_Element $element
 	 *
 	 * @return array
 	 * @throws \UnexpectedValueException
 	 * @throws \InvalidArgumentException
 	 */
-	public function is_duplicated_by( WPML_Duplicable_Element $element ) {
+	public function is_duplicated_by( WPML_Translation_Element $element ) {
 		$this->validate_duplicable_element( $element );
 
 		$this->init_cache_for_element( $element );
@@ -185,7 +186,7 @@ class WPML_Translations extends WPML_SP_User {
 		if ( ! $this->duplicated_by[ $element->get_id() ] ) {
 			$this->duplicated_by[ $element->get_id() ] = array();
 
-			$args  = array(
+			$args = array(
 				'post_type'  => $element->get_wp_element_type(),
 				'meta_query' => array(
 					array(
@@ -195,6 +196,7 @@ class WPML_Translations extends WPML_SP_User {
 					),
 				),
 			);
+
 			$query = new WP_Query( $args );
 
 			$results = $query->get_posts();
@@ -207,8 +209,8 @@ class WPML_Translations extends WPML_SP_User {
 	}
 
 	/**
-	 * @param WPML_Translation_Element $element
-	 * @param string                   $argument_name
+	 * @param \WPML_Translation_Element $element
+	 * @param string                    $argument_name
 	 *
 	 * @throws \UnexpectedValueException
 	 */
@@ -219,7 +221,7 @@ class WPML_Translations extends WPML_SP_User {
 	}
 
 	/**
-	 * @param WPML_Translation_Element $element
+	 * @param \WPML_Translation_Element $element
 	 */
 	private function init_cache_for_element( WPML_Translation_Element $element ) {
 		if ( ! array_key_exists( $element->get_id(), $this->duplicated_by ) ) {
@@ -228,23 +230,24 @@ class WPML_Translations extends WPML_SP_User {
 	}
 
 	/**
-	 * @param $element_type
-	 * @param $sql_parts
+	 * @param string                     $element_type
+	 * @param array<string,array<string>> $sql_parts
+	 * @param bool $skipPrivilegeChecking
 	 *
-	 * @return mixed
+	 * @return array<string,array<string>>
 	 */
-	private function get_sql_parts_for_post( $element_type, $sql_parts ) {
+	private function get_sql_parts_for_post( $element_type, $sql_parts, $skipPrivilegeChecking = false ) {
 		$sql_parts['select'][] = ', p.post_title, p.post_status';
 		$sql_parts['join'][]   = " LEFT JOIN {$this->sitepress->get_wpdb()->posts} p ON wpml_translations.element_id=p.ID";
 
 		if ( ! $this->all_statuses && 'post_attachment' !== $element_type && ! is_admin() ) {
 			$public_statuses_where = $this->get_public_statuses();
 			// the current user may not be the admin but may have read private post/page caps!
-			if ( current_user_can( 'read_private_pages' ) || current_user_can( 'read_private_posts' ) ) {
-				$sql_parts['where'][] = " AND (p.post_status IN (" . $public_statuses_where . ", 'draft', 'private', 'pending' ))";
+			if ( current_user_can( 'read_private_pages' ) || current_user_can( 'read_private_posts' ) || $skipPrivilegeChecking ) {
+				$sql_parts['where'][] = ' AND (p.post_status IN (' . $public_statuses_where . ", 'draft', 'private', 'pending' ))";
 			} else {
 				$sql_parts['where'][] = ' AND (';
-				$sql_parts['where'][] = "p.post_status  IN (" . $public_statuses_where . ") ";
+				$sql_parts['where'][] = 'p.post_status  IN (' . $public_statuses_where . ') ';
 				if ( $uid = $this->sitepress->get_current_user()->ID ) {
 					$sql_parts['where'][] = $this->sitepress->get_wpdb()->prepare( " OR (post_status in ('draft', 'private', 'pending') AND  post_author = %d)", $uid );
 				}
@@ -263,9 +266,9 @@ class WPML_Translations extends WPML_SP_User {
 	}
 
 	/**
-	 * @param $sql_parts
+	 * @param array<string,array<string>> $sql_parts
 	 *
-	 * @return mixed
+	 * @return array<string,array<string>>
 	 */
 	private function get_sql_parts_for_taxonomy( $sql_parts ) {
 		$sql_parts['select'][]   = ', tm.name, tm.term_id, COUNT(tr.object_id) AS instances';
@@ -285,10 +288,10 @@ class WPML_Translations extends WPML_SP_User {
 	 */
 	private function must_ignore_translation( stdClass $translation ) {
 		return $this->skip_empty
-		       && (
-		       	    ! $translation->element_id
-		            || $this->must_ignore_translation_for_taxonomy( $translation )
-		       );
+			   && (
+					! $translation->element_id
+					|| $this->must_ignore_translation_for_taxonomy( $translation )
+			   );
 	}
 
 	/**
@@ -298,8 +301,8 @@ class WPML_Translations extends WPML_SP_User {
 	 */
 	private function must_ignore_translation_for_taxonomy( stdClass $translation ) {
 		return $this->wpml_element_type_is_taxonomy( $translation->element_type )
-		       && $translation->instances === 0
-		       && ( ! $this->skip_recursions && ! _icl_tax_has_objects_recursive( $translation->element_id ) );
+			   && $translation->instances === 0
+			   && ( ! $this->skip_recursions && ! _icl_tax_has_objects_recursive( $translation->element_id ) );
 	}
 
 	/**
@@ -320,4 +323,3 @@ class WPML_Translations extends WPML_SP_User {
 		return 0 === strpos( $wpml_element_type, 'post_' );
 	}
 }
-

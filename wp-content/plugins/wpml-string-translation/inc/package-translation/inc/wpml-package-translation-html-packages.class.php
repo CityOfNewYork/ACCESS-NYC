@@ -11,7 +11,7 @@ class WPML_Package_Translation_HTML_Packages {
 	}
 
 	private function set_admin_hooks() {
-		if(is_admin()) {
+		if ( is_admin() ) {
 			add_action( 'wpml_pt_package_table_columns', array( $this, 'render_package_table_columns' ), 10, 1 );
 			add_action( 'wpml_pt_package_table_options', array( $this, 'package_translation_menu_options' ), 10, 1 );
 			add_action( 'wpml_pt_package_table_body', array( $this, 'package_translation_menu_body' ), 10, 1 );
@@ -32,9 +32,9 @@ class WPML_Package_Translation_HTML_Packages {
 			}
 		}
 
-		$table_title                 = __( 'Package Management', 'wpml-string-translation' );
-		$package_kind_label          = __( 'Display packages for this kind:', 'wpml-string-translation' );
-		$package_kind_options[ - 1 ] = __( 'Display packages for this kind:', 'wpml-string-translation' );
+		$table_title               = __( 'Package Management', 'wpml-string-translation' );
+		$package_kind_label        = __( 'Display packages for this kind:', 'wpml-string-translation' );
+		$package_kind_options[- 1] = __( 'Display packages for this kind:', 'wpml-string-translation' );
 		foreach ( $package_kinds as $kind_slug => $kind ) {
 			$package_kind_options[ $kind_slug ] = $kind;
 		}
@@ -62,10 +62,10 @@ class WPML_Package_Translation_HTML_Packages {
 
 		<br/>
 
-		<input id="delete_packages" type="button" class="button-primary" value="<?php echo __( 'Delete Selected Packages', 'wpml-string-translation' ) ?>" disabled="disabled"/>
+		<input id="delete_packages" type="button" class="button-primary" value="<?php echo __( 'Delete Selected Packages', 'wpml-string-translation' ); ?>" disabled="disabled"/>
 		&nbsp;
 		<span class="spinner"></span>
-		<span style="display:none" class="js-delete-confirm-message"><?php echo __( "Are you sure you want to delete these packages?\nTheir strings and translations will be deleted too.", 'wpml-string-translation' ) ?></span>
+		<span style="display:none" class="js-delete-confirm-message"><?php echo __( "Are you sure you want to delete these packages?\nTheir strings and translations will be deleted too.", 'wpml-string-translation' ); ?></span>
 
 		<?php
 		wp_nonce_field( 'wpml_package_nonce', 'wpml_package_nonce' );
@@ -74,13 +74,13 @@ class WPML_Package_Translation_HTML_Packages {
 	public function package_translation_menu_options( $package_kind_options ) {
 		foreach ( $package_kind_options as $option_value => $option_label ) {
 			?>
-			<option value="<?php echo esc_attr($option_value); ?>"><?php echo $option_label; ?></option>
-		<?php
+			<option value="<?php echo esc_attr( $option_value ); ?>"><?php echo $option_label; ?></option>
+			<?php
 		}
 	}
 
 	/**
-	 * @param $packages
+	 * @param array<\WPML_Package> $packages
 	 */
 	public function package_translation_menu_body( $packages ) {
 		if ( ! $packages ) {
@@ -95,23 +95,23 @@ class WPML_Package_Translation_HTML_Packages {
 		<tr>
 			<th scope="col" class="manage-column column-cb check-column">
 				<label for="select_all_package_<?php echo $position; ?>" style="display: none;">
-					<?php _e( 'Select All', 'wpml-string-translation' ) ?>
+					<?php _e( 'Select All', 'wpml-string-translation' ); ?>
 				</label>
 				<input id="select_all_package_<?php echo $position; ?>" class="js_package_all_cb" type="checkbox"/>
 			</th>
-			<th scope="col"><?php echo __( 'Kind', 'wpml-string-translation' ) ?></th>
-			<th scope="col"><?php echo __( 'Name', 'wpml-string-translation' ) ?></th>
-			<th scope="col"><?php echo __( 'Info', 'wpml-string-translation' ) ?></th>
+			<th scope="col"><?php echo __( 'Kind', 'wpml-string-translation' ); ?></th>
+			<th scope="col"><?php echo __( 'Name', 'wpml-string-translation' ); ?></th>
+			<th scope="col"><?php echo __( 'Info', 'wpml-string-translation' ); ?></th>
 		</tr>
-	<?php
+		<?php
 	}
 
 	public function render_string_package_status( $string_count, $translation_in_progress, $default_package_language ) {
-		$package_statuses[ ] = sprintf( __( 'Contains %s strings', 'wpml-string-translation' ), $string_count );
+		$package_statuses[] = sprintf( __( 'Contains %s strings', 'wpml-string-translation' ), $string_count );
 		if ( $translation_in_progress ) {
-			$package_statuses[ ] = '(' . __( 'Translation is in progress', 'wpml-string-translation' ) . ')';
+			$package_statuses[] = '(' . __( 'Translation is in progress', 'wpml-string-translation' ) . ')';
 		}
-		$package_statuses[ ] = __( 'Default package language', 'wpml-string-translation' ) . ': ' . $default_package_language;
+		$package_statuses[] = __( 'Default package language', 'wpml-string-translation' ) . ': ' . $default_package_language;
 
 		echo implode( ' - ', $package_statuses );
 	}
@@ -120,16 +120,18 @@ class WPML_Package_Translation_HTML_Packages {
 		?>
 		<tr>
 			<td colspan="6" align="center">
-				<strong><?php echo __( 'No packages found', 'wpml-string-translation' ) ?></strong>
+				<strong><?php echo __( 'No packages found', 'wpml-string-translation' ); ?></strong>
 			</td>
 		</tr>
-	<?php
+		<?php
 	}
 
+	/**
+	 * @param array<\WPML_Package> $packages
+	 */
 	private function package_translation_menu_items( $packages ) {
 		global $wpdb, $sitepress;
 
-		/** @var WPML_Package $package */
 		foreach ( $packages as $package ) {
 
 			$package_language_code = $package->get_package_language();
@@ -143,15 +145,15 @@ class WPML_Package_Translation_HTML_Packages {
 
 			$disabled = disabled( $translation_in_progress, true, false );
 			?>
-			<tr id="row_<?php echo $package_id ?>" class="js_package js_package_<?php echo esc_attr($package->kind_slug);?>">
+			<tr id="row_<?php echo $package_id; ?>" class="js_package js_package_<?php echo esc_attr( $package->kind_slug ); ?>">
 				<td>
-					<input id="package_<?php echo $package_id ?>" class="js_package_row_cb" type="checkbox" value="<?php echo $package_id ?>" <?php echo $disabled; ?>/>
+					<input id="package_<?php echo $package_id; ?>" class="js_package_row_cb" type="checkbox" value="<?php echo $package_id; ?>" <?php echo $disabled; ?>/>
 				</td>
 				<td class="js-package-kind">
 					<?php echo $package->kind; ?>
 				</td>
 				<td>
-					<label for="package_<?php echo $package_id ?>"><?php echo esc_html($package->title); ?></label>
+					<label for="package_<?php echo $package_id; ?>"><?php echo esc_html( $package->title ); ?></label>
 				</td>
 
 				<td>
@@ -160,7 +162,7 @@ class WPML_Package_Translation_HTML_Packages {
 					?>
 				</td>
 			</tr>
-		<?php
+			<?php
 		}
 	}
 }

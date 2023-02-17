@@ -67,7 +67,7 @@ class WPML_Term_Adjust_Id {
 
 		$object_id = isset( $term->object_id ) ? $term->object_id : false;
 
-		$key         = md5( (int) $object_id . $term->term_id . $this->sitepress->get_current_language() );
+		$key         = md5( (int) $object_id . $term->term_id . $this->sitepress->get_current_language() . $term->count );
 		$found       = false;
 		$cached_term = WPML_Non_Persistent_Cache::get( $key, __CLASS__, $found );
 		if ( $found ) {
@@ -78,6 +78,7 @@ class WPML_Term_Adjust_Id {
 
 		if ( $translated_id && (int) $translated_id !== (int) $term->term_taxonomy_id ) {
 
+			/** @var \WP_Term|\stdClass $term Declared also as \stdClass because we are setting `object_id`, which is not a property of \WP_Term. */
 			$term = get_term_by( 'term_taxonomy_id', $translated_id, $term->taxonomy );
 
 			if ( $object_id ) {
@@ -99,10 +100,12 @@ class WPML_Term_Adjust_Id {
 	 * @return bool
 	 */
 	private function is_ajax_add_term_translation() {
+		/* phpcs:disable WordPress.Security.NonceVerification.Missing */
 		$taxonomy = isset( $_POST['taxonomy'] ) ? $_POST['taxonomy'] : false;
 		if ( $taxonomy ) {
 			return isset( $_POST['action'] ) && 'add-tag' === $_POST['action'] && ! empty( $_POST[ 'icl_tax_' . $taxonomy . '_language' ] );
 		}
+		/* phpcs:enable WordPress.Security.NonceVerification.Missing */
 
 		return false;
 	}

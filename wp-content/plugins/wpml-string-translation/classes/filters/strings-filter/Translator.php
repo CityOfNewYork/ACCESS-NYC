@@ -2,7 +2,6 @@
 
 namespace WPML\ST\StringsFilter;
 
-
 class Translator {
 	/** @var string */
 	private $language;
@@ -14,8 +13,8 @@ class Translator {
 	private $translations;
 
 	/**
-	 * @param string                $language
-	 * @param TranslationReceiver   $translationReceiver
+	 * @param string              $language
+	 * @param TranslationReceiver $translationReceiver
 	 */
 	public function __construct(
 		$language,

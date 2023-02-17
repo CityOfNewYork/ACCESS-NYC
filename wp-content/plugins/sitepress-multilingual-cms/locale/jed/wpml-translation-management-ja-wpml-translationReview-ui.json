@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Accepted": [
+            "承認済み"
+         ],
+         "Approved!": [
+            "承認されました！"
+         ],
+         "Loading the next translation for review...": [
+            "次の翻訳をレビュー用に読み込み中です..."
+         ],
+         "Back": [
+            "戻る"
+         ],
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "このレビュー終了後に、次の翻訳を自動的に読み込まない場合、オフにしてください。"
+         ],
+         "Turn on to automatically load the next translation after finishing this review.": [
+            "このレビュー終了後に、次の翻訳を自動的に読み込む場合、オンにしてください。\r\n\r\n"
+         ],
+         "Edit": [
+            "編集"
+         ],
+         "Edit translation": [
+            "翻訳を編集"
+         ],
+         "There was an error in applying translation.": [
+            "翻訳の適用にエラーが発生しました。"
+         ],
+         "Please wait, applying translation..": [
+            "お待ちください、翻訳を適用中です.."
+         ],
+         "Next review": [
+            "次のレビュー"
+         ],
+         "Publish this translation": [
+            "この翻訳を公開"
+         ],
+         "Accept this translation": [
+            "この翻訳を承認する"
+         ],
+         "Published!": [
+            "公開されました！"
+         ]
+      }
+   }
+}

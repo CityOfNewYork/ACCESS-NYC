@@ -1,0 +1,88 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Your pending automatic translations will be canceled.": [
+            "Suas traduções automáticas pendentes serão canceladas."
+         ],
+         "Save": [
+            "Salvar"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "Acesse o <a>painel do Translation Management</a> para traduzir seu conteúdo."
+         ],
+         "When automatic translation completes:": [
+            "Quando a tradução automática for concluída:"
+         ],
+         "Publish and add to the review list": [
+            "Publicar e adicionar à lista de revisão"
+         ],
+         "Publish without review": [
+            "Publicar sem revisão"
+         ],
+         "Hold for review before publishing": [
+            "Segurar para revisão antes de publicar"
+         ],
+         "Publish translations without a review": [
+            "Publicar traduções sem revisão"
+         ],
+         "Publish translations and review them later": [
+            "Publicar as traduções e revisá-las depois"
+         ],
+         "Let me review the translations before publishing": [
+            "Deixe-me revisar as traduções antes de publicar"
+         ],
+         "Automatically translate my entire site’s content": [
+            "Traduzir automaticamente o conteúdo do meu site inteiro"
+         ],
+         "How do you want to translate this site?": [
+            "Como você quer traduzir este site?"
+         ],
+         "I want to choose which content to translate": [
+            "Eu quero escolher qual conteúdo traduzir"
+         ],
+         "Yes, automatically translate all of my <s>existing posts and pages</s> right now, plus <s>new content</s> as I create it.": [
+            "Sim, traduzir automaticamente agora todos os meus <s>posts e páginas já existentes</s>, além de meu <s>conteúdo novo</s>, à medida que eu criar."
+         ],
+         "Automatically translate all of my <s>existing content</s> right now, plus <s>new content</s> as I create it.": [
+            "Traduzir automaticamente agora todo meu <s>conteúdo já existente</s>, além de meu <s>conteúdo novo</s>, à medida que eu criar."
+         ],
+         "No, only automatically translate <s>new content</s>.": [
+            "Não, só traduzir automaticamente <s>conteúdo novo</s>."
+         ],
+         "Only automatically translate <s>new content</s>.": [
+            "Só traduzir automaticamente <s>conteúdo novo</s>."
+         ],
+         "Should WPML automatically translate your existing content?": [
+            "O WPML deve traduzir automaticamente seu conteúdo já existente?"
+         ],
+         "Which content do you want to translate automatically?": [
+            "Qual conteúdo você quer traduzir automaticamente?"
+         ],
+         "Start translating automatically": [
+            "Começar a traduzir automaticamente"
+         ],
+         "Create an account to start translating": [
+            "Criar uma conta para começar a traduzir"
+         ],
+         "WPML will use credits from your automatic translation account to translate your site immediately as you publish new content or update existing content.": [
+            "O WPML utilizará créditos da sua conta de tradução automática para traduzir seu site imediatamente à medida que você publicar conteúdo novo ou atualizar conteúdo já existente."
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "Você pode traduzir conteúdo já existente através do painel do Translation Management."
+         ],
+         "Cancel": [
+            "Cancelar"
+         ],
+         "You must use the <s>Advanced Translation Editor</s> if you want to translate your content automatically.": [
+            "Você deve usar o <s>Advanced Translation Editor</s> se quiser traduzir seu conteúdo automaticamente."
+         ],
+         "You currently use a translation service to translate your content. To translate your site automatically, first disconnect your translation service in your <a><s>Translation Management settings</s></a>.": [
+            "No momento, você está utilizando um serviço de tradução para traduzir seu conteúdo. Para traduzir automaticamente seu site, primeiro desconecte seu serviço de tradução nas <a><s>configurações do Translation Management</s></a>."
+         ]
+      }
+   }
+}

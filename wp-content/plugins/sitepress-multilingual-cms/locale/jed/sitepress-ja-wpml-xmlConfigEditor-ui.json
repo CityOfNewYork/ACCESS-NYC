@@ -1,0 +1,31 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "The wpml-config.xml file in the root folder of your theme and plugins tells WPML which content is translatable. You can override these settings with your own custom settings by adding them below.": [
+            "テーマとプラグインのルードフォルダのwpml-config.xmlファイルは、WPMLにどのコンテンツが翻訳可能であるかを知らせます。下に設定を追加することで自分のカスタム設定でこれらを無効にすることができます。\r\n"
+         ],
+         "Read more about language configuration files.": [
+            "言語設定ファイルについて詳細をお読みください。"
+         ],
+         "Save": [
+            "保存"
+         ],
+         "Error": [
+            "エラー"
+         ],
+         "Shortcuts": [
+            "ショートカット"
+         ],
+         "Fold/Unfold code": [
+            "コードを折り畳む／折り畳みを解除"
+         ],
+         "Auto format": [
+            "自動フォーマット"
+         ]
+      }
+   }
+}

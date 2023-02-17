@@ -1,0 +1,22 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Draft — Pending review": [
+            "Черновик — Ожидает проверки"
+         ],
+         "Complete": [
+            "Закончен"
+         ],
+         "Insufficient funds": [
+            "Недостаточно средств"
+         ],
+         "Editor Job ID": [
+            "ID заказа для редактора"
+         ]
+      }
+   }
+}

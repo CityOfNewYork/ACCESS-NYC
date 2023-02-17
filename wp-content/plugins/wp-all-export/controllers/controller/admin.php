@@ -44,6 +44,7 @@ abstract class PMXE_Controller_Admin extends PMXE_Controller {
 		wp_enqueue_style('jquery-ui', PMXE_ROOT_URL . '/static/js/jquery/css/redmond/jquery-ui.css', array('media-views'));
 		wp_enqueue_style('jquery-tipsy', PMXE_ROOT_URL . '/static/js/jquery/css/smoothness/jquery.tipsy.css', array('media-views'));
 		wp_enqueue_style('pmxe-admin-style', PMXE_ROOT_URL . '/static/css/admin.css',array('media-views'), PMXE_VERSION.PMXE_ASSETS_VERSION);
+		wp_enqueue_style('pmxe-admin-style-upgrade-notice', PMXE_ROOT_URL . '/static/css/upgrade-notice.css',array('media-views'), PMXE_VERSION.PMXE_ASSETS_VERSION);
 		wp_enqueue_style('pmxe-admin-style-ie', PMXE_ROOT_URL . '/static/css/admin-ie.css', array('media-views'));
 		wp_enqueue_style('jquery-select2', PMXE_ROOT_URL . '/static/js/jquery/css/select2/select2.css', array('media-views'));
 		wp_enqueue_style('jquery-select2', PMXE_ROOT_URL . '/static/js/jquery/css/select2/select2-bootstrap.css', array('media-views'));
@@ -71,7 +72,7 @@ abstract class PMXE_Controller_Admin extends PMXE_Controller {
         wp_deregister_script('wp-codemirror');
 
         wp_enqueue_script('jquery-ui-datepicker', PMXE_ROOT_URL . '/static/js/jquery/ui.datepicker.js', 'jquery-ui-core');
-		wp_enqueue_script('jquery-tipsy', PMXE_ROOT_URL . '/static/js/jquery/jquery.tipsy.js', 'jquery');
+		wp_enqueue_script('tipsy', PMXE_ROOT_URL . '/static/js/jquery/jquery.tipsy.js', 'jquery', PMXE_VERSION.PMXE_ASSETS_VERSION);
 		wp_enqueue_script('jquery-pmxe-nestable', PMXE_ROOT_URL . '/static/js/jquery/jquery.mjs.pmxe_nestedSortable.js', array('jquery', 'jquery-ui-dialog', 'jquery-ui-sortable', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-tabs', 'jquery-ui-progressbar'));
 		wp_enqueue_script('jquery-select2', PMXE_ROOT_URL . '/static/js/jquery/select2.min.js', 'jquery');
 		wp_enqueue_script('jquery-ddslick', PMXE_ROOT_URL . '/static/js/jquery/jquery.ddslick.min.js', 'jquery');
@@ -91,6 +92,7 @@ abstract class PMXE_Controller_Admin extends PMXE_Controller {
 		/* load plupload scripts */
         wp_enqueue_script('pmxe-admin-script', PMXE_ROOT_URL . '/static/js/admin.js', array('jquery', 'jquery-ui-dialog', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-core', 'jquery-ui-widget', 'jquery-ui-position', 'jquery-ui-autocomplete' ), PMXE_VERSION);
 		wp_enqueue_script('pmxe-admin-validate-braces', PMXE_ROOT_URL . '/static/js/validate-braces.js', array('pmxe-admin-script' ), PMXE_VERSION.PMXE_ASSETS_VERSION);
+		wp_enqueue_script('pmxe-admin-update-notice', PMXE_ROOT_URL . '/static/js/upgrade-notice.js', array('pmxe-admin-script' ), PMXE_VERSION.PMXE_ASSETS_VERSION);
 
 		if(getenv('WPAE_DEV')) {
 			wp_enqueue_script('pmxe-angular-app', PMXE_ROOT_URL . '/dist/app.js', array('jquery'), PMXE_VERSION.PMXE_ASSETS_VERSION);
@@ -109,22 +111,6 @@ abstract class PMXE_Controller_Admin extends PMXE_Controller {
 			$trace = debug_backtrace();			
 			$viewPath = str_replace('_', '/', preg_replace('%^' . preg_quote(PMXE_Plugin::PREFIX, '%') . '%', '', strtolower($trace[1]['class']))) . '/' . $trace[1]['function'];
 		}
-		
-		// render contextual help automatically
-		$viewHelpPath = $viewPath;
-		// append file extension if not specified
-		if ( ! preg_match('%\.php$%', $viewHelpPath)) {
-			$viewHelpPath .= '.php';
-		}
-		$viewHelpPath = preg_replace('%\.php$%', '-help.php', $viewHelpPath);
-		$fileHelpPath = PMXE_Plugin::ROOT_DIR . '/views/' . $viewHelpPath;
-				
-		if (is_file($fileHelpPath)) { // there is help file defined
-			ob_start();
-			include $fileHelpPath;
-			add_contextual_help(PMXE_Plugin::getInstance()->getAdminCurrentScreen()->id, ob_get_clean());
-		}
-		
 		parent::render($viewPath);
 	}
 	

@@ -1,0 +1,88 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Your pending automatic translations will be canceled.": [
+            "Je uitstaande automatische vertalingen zullen worden geannuleerd."
+         ],
+         "Save": [
+            "Opslaan"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "Ga naar het <a>Translation Management Dashboard</a> om je inhoud te vertalen."
+         ],
+         "When automatic translation completes:": [
+            "Wanneer de automatische vertaling voltooid is:"
+         ],
+         "Publish and add to the review list": [
+            "Publiceer en voeg toe aan de controleslijst."
+         ],
+         "Publish without review": [
+            "Publiceren zonder controle"
+         ],
+         "Hold for review before publishing": [
+            "Bewaren voor controle vóór publicatie"
+         ],
+         "Publish translations without a review": [
+            "Vertalingen publiceren zonder controle"
+         ],
+         "Publish translations and review them later": [
+            "Vertalingen publiceren en later controleren"
+         ],
+         "Let me review the translations before publishing": [
+            "Laat me de vertalingen nog eens controleren voordat ik ze publiceer"
+         ],
+         "Automatically translate my entire site’s content": [
+            "Vertaal automatisch de inhoud van mijn hele site"
+         ],
+         "How do you want to translate this site?": [
+            "Hoe wil je deze site vertalen?"
+         ],
+         "I want to choose which content to translate": [
+            "Ik wil kiezen welke inhoud vertaald moet worden"
+         ],
+         "Yes, automatically translate all of my <s>existing posts and pages</s> right now, plus <s>new content</s> as I create it.": [
+            "Ja, vertaal nu automatisch al mijn <s>bestaande berichten en pagina's</s>, plus <s>new content</s> terwijl ik deze aanmaak."
+         ],
+         "Automatically translate all of my <s>existing content</s> right now, plus <s>new content</s> as I create it.": [
+            "Vertaal nu al mijn <s>existing content</s> automatisch, plus <s>new content</s> terwijl ik deze aanmaak."
+         ],
+         "No, only automatically translate <s>new content</s>.": [
+            "Nee, vertaal alleen automatisch <s>new content</s>."
+         ],
+         "Only automatically translate <s>new content</s>.": [
+            "Vertaal automatisch <s>new content</s>."
+         ],
+         "Should WPML automatically translate your existing content?": [
+            "Moet WPML je bestaande inhoud automatisch vertalen?"
+         ],
+         "Which content do you want to translate automatically?": [
+            "Welke inhoud wil je automatisch vertalen?"
+         ],
+         "Start translating automatically": [
+            "Automatisch vertalen starten"
+         ],
+         "Create an account to start translating": [
+            "Maak een account aan om met vertalen te beginnen"
+         ],
+         "WPML will use credits from your automatic translation account to translate your site immediately as you publish new content or update existing content.": [
+            "WPML gebruikt credits van je automatische vertaalaccount om je site meteen te vertalen als je nieuwe inhoud publiceert of bestaande inhoud bijwerkt."
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "U kunt bestaande inhoud vertalen vanuit het Translation Management Dashboard."
+         ],
+         "Cancel": [
+            "Annuleren"
+         ],
+         "You must use the <s>Advanced Translation Editor</s> if you want to translate your content automatically.": [
+            "Je moet de <s>Advanced Translation Editor</s> gebruiken als je je inhoud automatisch wilt laten vertalen."
+         ],
+         "You currently use a translation service to translate your content. To translate your site automatically, first disconnect your translation service in your <a><s>Translation Management settings</s></a>.": [
+            "Je gebruikt momenteel een vertaalservice om je inhoud te vertalen. Als je je site automatisch wilt laten vertalen, ontkoppel je eerst je vertaalservice in je <a><s>Translation Management settings</s></a>."
+         ]
+      }
+   }
+}

@@ -4,27 +4,67 @@
 <h4>{{ strings.misc.title_what_to_include }} {% include 'tooltip.twig' with { "content": strings.tooltips.what_to_include } %}</h4>
 <ul class="js-wpml-ls-to-include">
     <li>
-        <label><input type="checkbox" class="js-wpml-ls-setting-display_flags js-wpml-ls-trigger-update"
-                      name="{% if name_base %}{{ name_base }}[display_flags]{% else %}display_flags{% endif %}"
-                      {% if force.display_flags is defined  %} disabled="disabled"{% endif %}
-                      value="1"{% if slot_settings.display_flags %} checked="checked"{% endif %}> {{ strings.misc.label_include_flag }}</label>
+        <label>
+            <input
+                    type="checkbox"
+                    class="js-wpml-ls-setting-display_flags js-wpml-ls-toggle-suboptions js-wpml-ls-trigger-update"
+                    data-target=".js-wpml-ls-flag-sizes"
+                    data-show-on-checked="1"
+                    value="1"
+                    name="{% if name_base %}{{ name_base }}[display_flags]{% else %}display_flags{% endif %}"
+                    {% if force.display_flags is defined %} disabled="disabled"{% endif %}
+                    {% if slot_settings.display_flags %} checked="checked"{% endif %}
+            > {{ strings.misc.label_include_flag }}
+        </label>
+        <ul class="js-wpml-ls-flag-sizes"
+            style="display: {% if slot_settings.display_flags %}block{% else %}none{% endif %};">
+            <li>
+                <label>
+                    {{ strings.misc.label_include_flag_width }}
+                    <input
+                            type="number"
+                            class="js-wpml-ls-setting-include_flag_width js-wpml-ls-trigger-update"
+                            name="{% if name_base %}{{ name_base }}[include_flag_width]{% else %}include_flag_width{% endif %}"
+                            value="{{ slot_settings.include_flag_width > 0 ? slot_settings.include_flag_width : '' }}"
+                            placeholder="{{ strings.misc.label_include_flag_width_placeholder }}"
+                    >
+                    {{ strings.misc.label_include_flag_width_suffix }}
+                </label>
+            </li>
+            <li>
+                <label>
+                    {{ strings.misc.label_include_flag_height }}
+                    <input
+                            type="number"
+                            class="js-wpml-ls-setting-_include_flag_height js-wpml-ls-trigger-update"
+                            name="{% if name_base %}{{ name_base }}[include_flag_height]{% else %}include_flag_height{% endif %}"
+                            value="{{ slot_settings.include_flag_height  > 0 ? slot_settings.include_flag_height : '' }}"
+                            placeholder="{{ strings.misc.label_include_flag_height_placeholder }}"
+                    >
+                    {{ strings.misc.label_include_flag_height_suffix }}
+                </label>
+            </li>
+        </ul>
     </li>
     <li>
         <label><input type="checkbox" class="js-wpml-ls-setting-display_names_in_native_lang js-wpml-ls-trigger-update"
                       name="{% if name_base %}{{ name_base }}[display_names_in_native_lang]{% else %}display_names_in_native_lang{% endif %}"
-                      {% if force.display_names_in_native_lang is defined %} disabled="disabled"{% endif %}
-                      value="1"{% if slot_settings.display_names_in_native_lang %} checked="checked"{% endif %}> {{ strings.misc.label_include_native_lang }}</label>
+                    {% if force.display_names_in_native_lang is defined %} disabled="disabled"{% endif %}
+                      value="1"{% if slot_settings.display_names_in_native_lang %} checked="checked"{% endif %}> {{ strings.misc.label_include_native_lang }}
+        </label>
     </li>
     <li>
         <label><input type="checkbox" class="js-wpml-ls-setting-display_names_in_current_lang js-wpml-ls-trigger-update"
                       name="{% if name_base %}{{ name_base }}[display_names_in_current_lang]{% else %}display_names_in_current_lang{% endif %}"
-                      {% if force.display_names_in_current_lang is defined %} disabled="disabled"{% endif %}
-                      value="1"{% if slot_settings.display_names_in_current_lang|default(1) %} checked="checked"{% endif %}> {{ strings.misc.label_include_display_lang }}</label>
+                    {% if force.display_names_in_current_lang is defined %} disabled="disabled"{% endif %}
+                      value="1"{% if slot_settings.display_names_in_current_lang|default(1) %} checked="checked"{% endif %}> {{ strings.misc.label_include_display_lang }}
+        </label>
     </li>
     <li>
         <label><input type="checkbox" class="js-wpml-ls-setting-display_link_for_current_lang js-wpml-ls-trigger-update"
                       name="{% if name_base %}{{ name_base }}[display_link_for_current_lang]{% else %}display_link_for_current_lang{% endif %}"
-                      {% if force.display_link_for_current_lang is defined or is_hierarchical %} disabled="disabled"{% endif %}
-                      value="1"{% if slot_settings.display_link_for_current_lang|default(1) %} checked="checked"{% endif %}> {{ strings.misc.label_include_current_lang }}</label>
+                    {% if force.display_link_for_current_lang is defined or is_hierarchical %} disabled="disabled"{% endif %}
+                      value="1"{% if slot_settings.display_link_for_current_lang|default(1) %} checked="checked"{% endif %}> {{ strings.misc.label_include_current_lang }}
+        </label>
     </li>
 </ul>

@@ -1,0 +1,22 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Draft — Pending review": [
+            "Utkast — väntar på granskning"
+         ],
+         "Complete": [
+            "Färdig"
+         ],
+         "Insufficient funds": [
+            "Otillräckliga medel"
+         ],
+         "Editor Job ID": [
+            "Id för redigerarjobb"
+         ]
+      }
+   }
+}

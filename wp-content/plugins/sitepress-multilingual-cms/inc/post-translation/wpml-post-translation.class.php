@@ -32,8 +32,10 @@ abstract class WPML_Post_Translation extends WPML_Element_Translation {
 
 	public function init() {
 		if ( $this->is_setup_complete() ) {
-			add_action( 'save_post', array( $this, 'save_post_actions' ), 100, 2 );
-			add_action( 'shutdown', array( $this, 'shutdown_action' ), PHP_INT_MAX );
+			add_action( 'save_post', [ $this, 'save_post_actions' ], 100, 2 );
+			add_action( 'shutdown', [ $this, 'shutdown_action' ], PHP_INT_MAX );
+			add_action( 'edit_attachment', [ $this, 'attachment_actions' ], 100 );
+			add_action( 'add_attachment', [ $this, 'attachment_actions' ], 100 );
 		}
 	}
 
@@ -75,6 +77,26 @@ abstract class WPML_Post_Translation extends WPML_Element_Translation {
 	 * @return void
 	 */
 	public abstract function save_post_actions( $pidd, $post );
+
+	/** @param int $post_id */
+	public function attachment_actions( $post_id ) {
+		/**
+		 * This filter hooks determines whether we should apply the
+		 * "save_post" actions on an attachment.
+		 *
+		 * @since 4.4.0
+		 *
+		 * @param bool True if we should apply save post actions on the attachment, false otherwise (default false).
+		 * @param int  $post_id The attachment post ID.
+		 */
+		if ( apply_filters( 'wpml_apply_save_attachment_actions', false, $post_id ) ) {
+			$post = get_post( $post_id );
+
+			if ( $post ) {
+				$this->save_post_actions( $post_id, $post );
+			}
+		}
+	}
 
 	public function shutdown_action() {
 		if ( self::$defer_term_counting ) {
@@ -398,9 +420,6 @@ abstract class WPML_Post_Translation extends WPML_Element_Translation {
 		return $post_vars;
 	}
 
-	/**
-	 * @param bool $defer
-	 */
 	protected function defer_term_counting() {
 		if ( ! self::$defer_term_counting ) {
 			self::$defer_term_counting = true;

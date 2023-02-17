@@ -3,7 +3,7 @@
 Plugin Name: WP All Import - ACF Add-On
 Plugin URI: http://www.wpallimport.com/
 Description: Import to Advanced Custom Fields. Requires WP All Import & Advanced Custom Fields.
-Version: 3.3.0
+Version: 3.3.6
 Author: Soflyy
 */
 /**
@@ -24,24 +24,24 @@ define('PMAI_ROOT_URL', rtrim(plugin_dir_url(__FILE__), '/'));
  */
 define('PMAI_PREFIX', 'pmai_');
 
-define('PMAI_VERSION', '3.3.0');
+define('PMAI_VERSION', '3.3.6');
 
 if ( class_exists('PMAI_Plugin') and PMAI_EDITION == "free"){
 
 	function pmai_notice(){
-		
+
 		?>
 		<div class="error"><p>
 			<?php printf(__('Please de-activate and remove the free version of the ACF add-on before activating the paid version.', 'PMAI_Plugin'));
 			?>
 		</p></div>
-		<?php				
+		<?php
 
 		deactivate_plugins(PMAI_ROOT_DIR . '/plugin.php');
 
 	}
 
-	add_action('admin_notices', 'pmai_notice');	
+	add_action('admin_notices', 'pmai_notice');
 
 }
 else {
@@ -87,7 +87,7 @@ else {
 		 * Plugin file path
 		 * @var string
 		 */
-		const FILE = __FILE__;	
+		const FILE = __FILE__;
 
 		/**
 		 * Return singletone instance
@@ -229,13 +229,9 @@ else {
 			// register admin page pre-dispatcher
 			add_action('admin_init', array($this, 'adminInit'), 1);
 			add_action('init', array($this, 'init'), 10);
-
 		}
 
 		public function init(){
-			if ( is_admin() || ! empty($_GET['import_key']) ){
-				self::init_available_acf_fields();
-			}
 			$this->load_plugin_textdomain();
 		}
 
@@ -309,10 +305,10 @@ else {
 				// capitalize prefix and first letters of class name parts
 				$controllerName = preg_replace_callback('%(^' . preg_quote(self::PREFIX, '%') . '|_).%', array($this, "replace_callback"),str_replace('-', '_', $page));
 				if (method_exists($controllerName, $actionName)) {
-					
-					if ( ! get_current_user_id() or ! current_user_can('manage_options')) {
+
+					if ( ! get_current_user_id() or ! current_user_can(PMXI_Plugin::$capabilities)) {
 					    // This nonce is not valid.
-					    die( 'Security check' ); 
+					    die( 'Security check' );
 
 					} else {
 
@@ -405,50 +401,48 @@ else {
         /**
          *  Init all available ACF fields.
          */
-        public static function init_available_acf_fields() {
-			global $acf;
-			if ($acf and version_compare($acf->settings['version'], '5.0.0') >= 0) {
-				$acfs = get_posts(array('posts_per_page' => -1, 'post_type' => 'acf-field'));
-				self::$all_acf_fields = array();
-				if (!empty($acfs)) {
-					foreach ($acfs as $key => $acf_entry) {
-						self::$all_acf_fields[] = $acf_entry->post_excerpt;
-					}
-				}
-				if (function_exists('acf_local')) {
-                    $fields = acf_local()->fields;
-                }
-                if (empty($fields) && function_exists('acf_get_local_fields')) {
-                    $fields = acf_get_local_fields();
-                }
-				if ( ! empty($fields) ) {
-					foreach ($fields as $key => $field) {
-						self::$all_acf_fields[] = $field['name'];
-					}
-				}
-			}
-			else {
-				$acfs = get_posts(array('posts_per_page' => -1, 'post_type' => 'acf'));
-				self::$all_acf_fields = array();
-				if (!empty($acfs)) {
-					foreach ($acfs as $key => $acf_entry) {
-						foreach (get_post_meta($acf_entry->ID, '') as $cur_meta_key => $cur_meta_val) {
-							if (strpos($cur_meta_key, 'field_') !== 0) {
-                                continue;
-                            }
-							$field = (!empty($cur_meta_val[0])) ? unserialize($cur_meta_val[0]) : array();
-							$field_name = $field['name'];
-							if ( ! in_array($field_name, self::$all_acf_fields) ) self::$all_acf_fields[] = $field_name;
-							if ( ! empty($field['sub_fields']) ){
-								foreach ($field['sub_fields'] as $key => $sub_field) {
-									$sub_field_name = $sub_field['name'];
-									if ( ! in_array($sub_field_name, self::$all_acf_fields) ) self::$all_acf_fields[] = $sub_field_name;
-								}
-							}
-						}
-					}
-				}
-			}
+        public static function get_available_acf_fields() {
+	        if ( empty(self::$all_acf_fields) ) {
+		        global $acf;
+		        if ($acf and version_compare($acf->settings['version'], '5.0.0') >= 0) {
+			        self::$all_acf_fields = array();
+			        $groups = acf_get_field_groups();
+			        if ( ! empty($groups) ) {
+				        foreach ($groups as $group) {
+					        $fields = acf_get_fields($group);
+					        if (!empty($fields)) {
+						        foreach ($fields as $key => $field) {
+							        if ( ! empty($field['name']) ) {
+								        self::$all_acf_fields[] = $field['name'];
+							        }
+						        }
+					        }
+				        }
+			        }
+		        } else {
+			        $acfs = get_posts(array('posts_per_page' => -1, 'post_type' => 'acf'));
+			        self::$all_acf_fields = array();
+			        if (!empty($acfs)) {
+				        foreach ($acfs as $key => $acf_entry) {
+					        foreach (get_post_meta($acf_entry->ID, '') as $cur_meta_key => $cur_meta_val) {
+						        if (strpos($cur_meta_key, 'field_') !== 0) {
+							        continue;
+						        }
+						        $field = (!empty($cur_meta_val[0])) ? unserialize($cur_meta_val[0]) : array();
+						        $field_name = $field['name'];
+						        if ( ! in_array($field_name, self::$all_acf_fields) ) self::$all_acf_fields[] = $field_name;
+						        if ( ! empty($field['sub_fields']) ){
+							        foreach ($field['sub_fields'] as $key => $sub_field) {
+								        $sub_field_name = $sub_field['name'];
+								        if ( ! in_array($sub_field_name, self::$all_acf_fields) ) self::$all_acf_fields[] = $sub_field_name;
+							        }
+						        }
+					        }
+				        }
+			        }
+		        }
+	        }
+            return self::$all_acf_fields;
 		}
 
 		/**
@@ -459,12 +453,12 @@ else {
 			return array(
 				'acf' => array(),
 				'fields' => array(),
-				'is_multiple_field_value' => array(),				
+				'is_multiple_field_value' => array(),
 				'multiple_value' => array(),
-				'fields_delimiter' => array(),				
+				'fields_delimiter' => array(),
 
 				'is_update_acf' => 1,
-				'update_acf_logic' => 'full_update',						
+				'update_acf_logic' => 'full_update',
 				'acf_list' => array(),
 				'acf_only_list' => array(),
 				'acf_except_list' => array()
@@ -476,10 +470,10 @@ else {
 
 	// retrieve our license key from the DB
 	$wpai_acf_addon_options = get_option('PMXI_Plugin_Options');
-	
+
 	if (!empty($wpai_acf_addon_options['info_api_url'])){
 		// setup the updater
-		$updater = new PMAI_Updater( $wpai_acf_addon_options['info_api_url'], __FILE__, array( 
+		$updater = new PMAI_Updater( $wpai_acf_addon_options['info_api_url'], __FILE__, array(
 				'version' 	=> PMAI_VERSION,		// current version number
 				'license' 	=> false, // license key (used get_option above to retrieve from DB)
 				'item_name' => PMAI_Plugin::getEddName(), 	// name of this plugin

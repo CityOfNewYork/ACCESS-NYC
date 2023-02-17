@@ -1,15 +1,15 @@
 /* <![CDATA[*/
-jQuery(document).ready(function () {
-	jQuery('.icl-admin-message-hide').on('click', function (event) {
+jQuery(function () {
+    jQuery('.icl-admin-message-hide').on('click', function (event) {
 
-		if (typeof(event.preventDefault) !== 'undefined' ) {
-			event.preventDefault();
-		} else {
-			event.returnValue = false;
-		}
+        if (typeof (event.preventDefault) !== 'undefined') {
+            event.preventDefault();
+        } else {
+            event.returnValue = false;
+        }
 
-		var messageBox = jQuery(this).closest('.otgs-is-dismissible');
-		if (messageBox) {
+        var messageBox = jQuery(this).closest('.otgs-is-dismissible');
+        if (messageBox) {
 			var messageID = messageBox.attr('id');
 
 			jQuery.ajax({

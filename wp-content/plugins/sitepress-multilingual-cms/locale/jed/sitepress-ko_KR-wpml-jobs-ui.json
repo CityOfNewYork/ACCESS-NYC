@@ -1,0 +1,19 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Insufficient funds": [
+            "잔액 부족"
+         ],
+         "Complete": [
+            "완료"
+         ],
+         "Pending review": [
+            "검토 대기중"
+         ]
+      }
+   }
+}

@@ -30,11 +30,22 @@ class WPML_Tax_Permalink_Filters implements IWPML_Action {
 		add_filter( 'term_link', array( $this, 'cached_filter_tax_permalink' ), 1, 3 );
 	}
 
+	/**
+	 * @param string                 $permalink
+	 * @param int|\WP_Term|\stdClass $tag
+	 * @param string                 $taxonomy
+	 *
+	 * @return string
+	 */
 	public function cached_filter_tax_permalink( $permalink, $tag, $taxonomy ) {
 		$tag    = is_object( $tag ) ? $tag : get_term( $tag, $taxonomy );
 		$tag_id = $tag ? $tag->term_id : 0;
 
-		$cache = $this->cache_factory->create_cache_item( 'icl_tax_permalink_filter', array( $tag_id, $taxonomy, $this->is_link_for_language_switcher() ) );
+		$cache = $this->cache_factory->create_cache_item( 'icl_tax_permalink_filter', array(
+			$tag_id,
+			$taxonomy,
+			$this->is_link_for_language_switcher()
+		) );
 		if ( $cache->exists() ) {
 			return $cache->get();
 		}
@@ -50,7 +61,7 @@ class WPML_Tax_Permalink_Filters implements IWPML_Action {
 	 * Filters the permalink pointing at a taxonomy archive to correctly reflect the language of its underlying term
 	 *
 	 * @param string $permalink url pointing at a term's archive
-	 * @param int $tag_id
+	 * @param int    $tag_id
 	 *
 	 * @return string
 	 */
@@ -74,7 +85,7 @@ class WPML_Tax_Permalink_Filters implements IWPML_Action {
 
 	private function is_display_as_translated_and_in_default_lang( WPML_Translation_Element $element ) {
 		return $element->is_display_as_translated()
-		       && $element->is_in_default_language();
+			   && $element->is_in_default_language();
 	}
 
 	private function is_link_for_language_switcher() {

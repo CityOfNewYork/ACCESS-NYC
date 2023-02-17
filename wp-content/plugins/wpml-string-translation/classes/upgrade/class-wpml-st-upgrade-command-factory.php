@@ -7,6 +7,7 @@
 
 use function WPML\Container\make;
 use WPML\ST\Upgrade\Command\RegenerateMoFilesWithStringNames;
+use WPML\ST\Upgrade\Command\MigrateMultilingualWidgets;
 
 /**
  * Class WPML_ST_Upgrade_Command_Factory
@@ -50,9 +51,6 @@ class WPML_ST_Upgrade_Command_Factory {
 			case 'WPML_ST_Upgrade_Migrate_Originals':
 				$result = new WPML_ST_Upgrade_Migrate_Originals( $this->wpdb, $this->sitepress );
 				break;
-			case 'WPML_ST_Upgrade_Db_Cache_Command':
-				$result = new WPML_ST_Upgrade_Db_Cache_Command( $this->wpdb );
-				break;
 			case 'WPML_ST_Upgrade_Display_Strings_Scan_Notices':
 				$themes_and_plugins_settings = new WPML_ST_Themes_And_Plugins_Settings();
 				$result                      = new WPML_ST_Upgrade_Display_Strings_Scan_Notices( $themes_and_plugins_settings );
@@ -81,6 +79,9 @@ class WPML_ST_Upgrade_Command_Factory {
 					\WPML\ST\MO\Generate\Process\ProcessFactory::createStatus( $isBackground ),
 					\WPML\ST\MO\Generate\Process\ProcessFactory::createSingle( $isBackground )
 				);
+				break;
+			case MigrateMultilingualWidgets::class:
+				$result = new MigrateMultilingualWidgets();
 				break;
 			default:
 				throw new WPML_ST_Upgrade_Command_Not_Found_Exception( $class_name );

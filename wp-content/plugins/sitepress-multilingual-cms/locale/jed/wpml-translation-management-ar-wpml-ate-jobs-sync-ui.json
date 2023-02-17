@@ -1,0 +1,163 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "قيد الإرسال للترجمة"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "الربط مع محرر الترجمة المتقدم الخاص بـ WPML"
+         ],
+         "Try again": [
+            "إعادة المحاولة"
+         ],
+         "You don't have the rights to review this language": [
+            "أنت لا تمتلك حق مراجعة هذه اللغة"
+         ],
+         "pages & posts": [
+            "الصفحات والمقالات"
+         ],
+         "left to translate": [
+            "في انتظار الترجمة"
+         ],
+         "Translate on hold": [
+            "الترجمة معلقة"
+         ],
+         "All translated": [
+            "تمت ترجمة الكل"
+         ],
+         "%d translations left": [
+            "متبقٍ %d من الترجمات"
+         ],
+         "Credits used:": [
+            "نقاط الرصيد المستخدمة:"
+         ],
+         "Credits left:": [
+            "نقاط الرصيد المتبقية:"
+         ],
+         "Calculating": [
+            "جارٍ الاحتساب"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "نقاط الرصيد المتبقية المدفوعة مقدمًا والتي تم تعيينها إلى هذا الموقع على WPML.org."
+         ],
+         "Prepaid credits left": [
+            "نقاط الرصيد المدفوعة مقدمًا المتبقية"
+         ],
+         "Account credits used": [
+            "نقاط رصيد الحساب المستخدمة"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "ما أن تستنفد جميع نقاط الرصيد المدفوعة مقدمًا لديك، سنقوم بإصدار فاتورة لأي نقاط رصيد إضافية تستخدمها بعد نهاية الشهر."
+         ],
+         "Payment limit:": [
+            "حد الدفع:"
+         ],
+         "%s credits": [
+            "%s من نقاط الرصيد"
+         ],
+         "Preparing more content for translation": [
+            "تحضير المزيد من المحتوى للترجمة"
+         ],
+         "Preparing content for translation": [
+            "تحضير المحتوى للترجمة"
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "حدثت مشكلة مع خدمة الترجمة الآلية تستحق انتباهك. قم بإصلاحها للمتابعة."
+         ],
+         "%d translations waiting for review": [
+            "%d من الترجمات في انتظار المراجعة"
+         ],
+         "Draft — Pending review": [
+            "مسودة — المراجعة معلقة"
+         ],
+         "Complete": [
+            "استكمِل"
+         ],
+         "Insufficient funds": [
+            "رصيد غير كافٍ"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "اقرأ المزيد عن كيفية ترجمة محتواك في <a>دليل البدء</a>"
+         ],
+         "Let's Start Translating!": [
+            "لنبدأ الترجمة!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "اختر محتواك من لوحة أدوات الترجمة أدناه وأنشئ مهمة الترجمة الأولى لديك!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "قم بتغيير <a>إعدادات الترجمة الآلية</a> (سيتم استكمال مهام الترجمة التي ما تزال قيد التنفيذ حاليًا باستخدام الإعدادات الحالية)."
+         ],
+         "Read more about translating your site automatically.": [
+            "قراءة المزيد عن ترجمة موقعك آليًا."
+         ],
+         "Your site is being automatically translated!": [
+            "تتم حاليًا ترجمة موقعك آليًا!"
+         ],
+         "Automatic Translation Status": [
+            "حالة الترجمة الآلية"
+         ],
+         "Calculating...": [
+            "جارٍ الاحتساب..."
+         ],
+         "Do not close WP admin!": [
+            "لا تغلق واجهة مدير WP!"
+         ],
+         "The number of translations": [
+            "عدد الترجمات"
+         ],
+         "Delete Translations": [
+            "حذف الترجمات"
+         ],
+         "Keep Translations as Draft": [
+            "الاحتفاظ بالترجمات كمسودة"
+         ],
+         "Never mind. I want to review these translations.": [
+            "لا عليك. أرغب في مراجعة هذه الترجمات."
+         ],
+         "Cancel": [
+            "الغ"
+         ],
+         "You haven't selected any jobs that need review.": [
+            "لم تقم بتحديد أي مهام ترجمة بحاجة للمراجعة."
+         ],
+         "Please select the pending review jobs to abort.": [
+            "يُرجى تحديد مهام المراجعة المعلقة لإلغائها."
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "سيقوم هذا بإزالة المهام المحددة من قائمة انتظار الترجمات بدون نشرها. ما الذي ترغب في فعله مع الترجمات؟"
+         ],
+         "Cancel Translation Review": [
+            "إلغاء مراجعة الترجمة"
+         ],
+         "Edit": [
+            "تحرير"
+         ],
+         "Updating": [
+            "قيد التحديث"
+         ],
+         "Translate": [
+            "ترجم"
+         ],
+         "Take and translate": [
+            "القبول والترجمة"
+         ],
+         "Review": [
+            "مراجعة"
+         ],
+         "Are you sure you want to resign from this job?": [
+            "هل أنت متأكد أنك تريد التراجع عن هذا العمل؟"
+         ],
+         "Resign": [
+            "تنحى"
+         ],
+         "View": [
+            "استعرض"
+         ]
+      }
+   }
+}

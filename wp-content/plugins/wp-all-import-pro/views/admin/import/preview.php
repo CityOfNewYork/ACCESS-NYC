@@ -15,10 +15,10 @@
 		<?php endif ?>
 			
 		<?php if (isset($title)): ?>
-			<h2 class="title"><?php echo $title; ?></h2>
+			<h2 class="title"><?php echo wp_all_import_filter_html_kses($title); ?></h2>
 		<?php endif ?>
 		<?php if (isset($content)): ?>
-			<?php echo apply_filters('the_content', $content) ?>
+			<?php echo apply_filters('the_content', wp_all_import_filter_html_kses($content)) ?>
 		<?php endif ?>
 
 	</div>

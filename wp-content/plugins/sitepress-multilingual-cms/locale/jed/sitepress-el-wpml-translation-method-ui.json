@@ -1,0 +1,88 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Your pending automatic translations will be canceled.": [
+            "Οι εκκρεμείς αυτόματες μεταφράσεις σας θα ακυρωθούν."
+         ],
+         "Save": [
+            "Αποθήκευση"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "Πηγαίνετε στον <a>πίνακα εργαλείων Διαχείρισης μεταφράσεων</a> για να μεταφράσετε το περιεχόμενό σας"
+         ],
+         "When automatic translation completes:": [
+            "Όταν η αυτόματη μετάφραση ολοκληρώνεται, να γίνεται:"
+         ],
+         "Publish and add to the review list": [
+            "Δημοσίευση και προσθήκη στη λίστα επιμέλειας"
+         ],
+         "Publish without review": [
+            "Δημοσίευση χωρίς επιμέλεια"
+         ],
+         "Hold for review before publishing": [
+            "Αναμονή για επιμέλεια πριν τη δημοσίευση"
+         ],
+         "Publish translations without a review": [
+            "Δημοσίευση μεταφράσεων χωρίς επιμέλεια"
+         ],
+         "Publish translations and review them later": [
+            "Δημοσίευση μεταφράσεων και επιμέλεια αργότερα"
+         ],
+         "Let me review the translations before publishing": [
+            "Να μου δίνεται η ευκαιρία να επιμελούμαι τις μεταφράσεις, πριν δημοσιευτούν"
+         ],
+         "Automatically translate my entire site’s content": [
+            "Αυτόματη μετάφραση ολόκληρου του περιεχομένου του ιστοτόπου"
+         ],
+         "How do you want to translate this site?": [
+            "Πώς θέλετε να μεταφράζεται αυτός ο ιστότοπος;"
+         ],
+         "I want to choose which content to translate": [
+            "Θέλω να επιλέγω ποιο περιεχόμενο θα μεταφράζεται"
+         ],
+         "Yes, automatically translate all of my <s>existing posts and pages</s> right now, plus <s>new content</s> as I create it.": [
+            "Ναι, να γίνει αμέσως τώρα αυτόματη μετάφραση όλων των <s>υφιστάμενων αναρτήσεων και σελίδων</s>, καθώς και του <s>νέου περιεχομένου</s>, καθώς το δημιουργώ."
+         ],
+         "Automatically translate all of my <s>existing content</s> right now, plus <s>new content</s> as I create it.": [
+            "Να γίνει αμέσως τώρα αυτόματη μετάφραση όλου του <s>υφιστάμενου περιεχομένου</s>, καθώς και του <s>νέου περιεχομένου</s>, καθώς το δημιουργώ."
+         ],
+         "No, only automatically translate <s>new content</s>.": [
+            "Όχι, να γίνεται αυτόματη μετάφραση μόνο <s>νέου περιεχομένου</s>."
+         ],
+         "Only automatically translate <s>new content</s>.": [
+            "Να γίνεται αυτόματη μετάφραση μόνο <s>νέου περιεχομένου</s>."
+         ],
+         "Should WPML automatically translate your existing content?": [
+            "Να μεταφράζει το WPML αυτόματα το υφιστάμενο περιεχόμενο;"
+         ],
+         "Which content do you want to translate automatically?": [
+            "Ποιο περιεχόμενο θέλετε να μεταφράζεται αυτόματα;"
+         ],
+         "Start translating automatically": [
+            "Έναρξη αυτόματης μετάφρασης"
+         ],
+         "Create an account to start translating": [
+            "Δημιουργήστε έναν λογαριασμό για έναρξη μετάφρασης"
+         ],
+         "WPML will use credits from your automatic translation account to translate your site immediately as you publish new content or update existing content.": [
+            "Το WPML θα χρησιμοποιεί μονάδες από τον λογαριασμό σας αυτόματης μετάφρασης, ώστε να μεταφράζει αμέσως τον ιστότοπό σας καθώς δημοσιεύετε νέο περιεχόμενο ή ενημερώνετε υφιστάμενο περιεχόμενο."
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "Μπορείτε να μεταφράσετε το υπάρχον περιεχόμενο από τον πίνακα εργαλείων Διαχείρισης μετάφρασης."
+         ],
+         "Cancel": [
+            "Άκυρο"
+         ],
+         "You must use the <s>Advanced Translation Editor</s> if you want to translate your content automatically.": [
+            "Πρέπει να χρησιμοποιήσετε τον <s>Προηγμένο επεξεργαστή μετάφρασης</s>, αν θέλετε να μεταφράζετε το περιεχόμενό σας αυτόματα."
+         ],
+         "You currently use a translation service to translate your content. To translate your site automatically, first disconnect your translation service in your <a><s>Translation Management settings</s></a>.": [
+            "Αυτήν τη στιγμή, χρησιμοποιείτε μια μεταφραστική υπηρεσία για τη μετάφραση του περιεχομένου σας. Για να μεταφράζετε το περιεχόμενό σας αυτόματα, αποσυνδέστε πρώτα τη μεταφραστική υπηρεσία από τις <a><s>ρυθμίσεις Διαχείρισης μεταφράσεων</s></a>."
+         ]
+      }
+   }
+}

@@ -9,7 +9,7 @@ if ( ! function_exists('wp_redirect_or_javascript')):
 function wp_redirect_or_javascript($location, $javascript = NULL, $status = 302) {
 	if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) and strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
 		is_null($javascript) and $javascript = 'location.href="' . addslashes($location) . '";';
-		echo '<script type="text/javascript">' . $javascript . '</script>';
+		echo '<script type="text/javascript">' . esc_js($javascript) . '</script>';
 	} else {
 		return wp_redirect($location, $status);
 	}

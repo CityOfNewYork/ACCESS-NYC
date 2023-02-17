@@ -19,7 +19,7 @@ class WPML_URL_HTTP_Referer {
 		}
 
 		if ( WPML_Ajax::is_admin_ajax_request_called_from_frontend( $backup_url )
-		     || $this->is_rest_request_called_from_post_edit_page()
+			 || $this->is_rest_request_called_from_post_edit_page()
 		) {
 			return $_SERVER['HTTP_REFERER'];
 		}
@@ -34,25 +34,26 @@ class WPML_URL_HTTP_Referer {
 		$referer_data = $request_uri_data = array();
 
 		if ( array_key_exists( 'HTTP_REFERER', $_SERVER ) ) {
-			$query = wpml_parse_url( $_SERVER[ 'HTTP_REFERER' ], PHP_URL_QUERY );
+			$query = wpml_parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_QUERY );
 			parse_str( $query, $referer_data );
 		}
 
 		if ( array_key_exists( 'REQUEST_URI', $_SERVER ) ) {
-			$request_uri = wpml_parse_url( $_SERVER[ 'REQUEST_URI' ], PHP_URL_QUERY );
+			$request_uri = wpml_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_QUERY );
 			parse_str( $request_uri, $request_uri_data );
 		}
 
 		/**
 		 * trid from `HTTP_REFERER` should be return only if `REQUEST_URI` also has trid set.
+		 *
 		 * @link https://onthegosystems.myjetbrains.com/youtrack/issue/wpmltm-1351
 		 *
 		 * Or when it is a rest request called in the post edit page (Gutenberg)
 		 * @link https://onthegosystems.myjetbrains.com/youtrack/issue/wpmlcore-5265
 		 */
 		return array_key_exists( 'trid', $referer_data ) && array_key_exists( 'trid', $request_uri_data )
-		       || ( array_key_exists( 'trid', $referer_data ) && $this->is_rest_request_called_from_post_edit_page() )
-			? (int) $referer_data[ 'trid' ]
+			   || ( array_key_exists( 'trid', $referer_data ) && $this->is_rest_request_called_from_post_edit_page() )
+			? (int) $referer_data['trid']
 			: false;
 	}
 
@@ -72,8 +73,8 @@ class WPML_URL_HTTP_Referer {
 
 	public static function is_post_edit_page() {
 		return isset( $_SERVER['HTTP_REFERER'] )
-		       && ( strpos( $_SERVER['HTTP_REFERER'], 'wp-admin/post.php' )
-		            || strpos( $_SERVER['HTTP_REFERER'], 'wp-admin/post-new.php' )
-		            || strpos( $_SERVER['HTTP_REFERER'], 'wp-admin/edit.php' ) );
+			   && ( strpos( $_SERVER['HTTP_REFERER'], 'wp-admin/post.php' )
+					|| strpos( $_SERVER['HTTP_REFERER'], 'wp-admin/post-new.php' )
+					|| strpos( $_SERVER['HTTP_REFERER'], 'wp-admin/edit.php' ) );
 	}
 }

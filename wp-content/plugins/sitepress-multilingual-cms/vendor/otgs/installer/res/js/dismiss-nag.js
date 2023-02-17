@@ -6,13 +6,11 @@ var otgs_wp_installer_dismiss_nag = {
 
 	dismiss_nag: function () {
 		var element = jQuery(this);
-
-		jQuery('.button-primary').attr('disabled', true);
-		jQuery('.button-secondary').attr('disabled', true);
 		var data = {
 			action: 'installer_dismiss_nag',
 			repository: element.data('repository'),
-			noticeId: element.data('notice')
+			noticeType: element.data('noticeType'),
+			noticePluginSlug: element.data('noticePluginSlug') !== 'undefined' ? element.data('noticePluginSlug') : null,
 		};
 
 		jQuery.ajax({

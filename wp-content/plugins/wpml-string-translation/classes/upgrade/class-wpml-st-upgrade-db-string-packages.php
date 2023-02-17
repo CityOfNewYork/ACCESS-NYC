@@ -9,9 +9,9 @@ class WPML_ST_Upgrade_DB_String_Packages implements IWPML_St_Upgrade_Command {
 	/**
 	 * WPML_ST_Upgrade_DB_String_Packages constructor.
 	 *
-	 * @param WPDB $wpdb
+	 * @param wpdb $wpdb
 	 */
-	public function __construct( WPDB $wpdb ) {
+	public function __construct( wpdb $wpdb ) {
 		$this->wpdb = $wpdb;
 	}
 
@@ -25,7 +25,7 @@ class WPML_ST_Upgrade_DB_String_Packages implements IWPML_St_Upgrade_Command {
 		}
 
 		$sql_get_post_id_column_from_st_package = "SHOW COLUMNS FROM {$this->wpdb->prefix}icl_string_packages LIKE 'post_id'";
-		$post_id_column_exists = $st_packages_table_exist
+		$post_id_column_exists                  = $st_packages_table_exist
 			? $this->wpdb->get_var( $sql_get_post_id_column_from_st_package ) === 'post_id'
 			: false;
 

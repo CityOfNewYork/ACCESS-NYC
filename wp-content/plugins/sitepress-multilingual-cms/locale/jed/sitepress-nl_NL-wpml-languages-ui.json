@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose Content to Automatically Translate into": [
+            "Kies inhoud om automatisch te vertalen in"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "Wijzigingen opslaan en automatische vertaling inschakelen"
+         ],
+         "Cancel Language Changes": [
+            "Taalwijzigingen annuleren"
+         ],
+         "Save": [
+            "Opslaan"
+         ],
+         "Choose Content to Automatically Translate into New Language": [
+            "Kies inhoud om automatisch in de nieuwe taal te vertalen"
+         ],
+         "Add languages and start translating": [
+            "Talen toevoegen en beginnen te vertalen"
+         ],
+         "Add language and start translating": [
+            "Taal toevoegen en beginnen te vertalen"
+         ],
+         "Never mind. Don't add new languages": [
+            "Laat maar. Voeg geen nieuwe talen toe"
+         ],
+         "Never mind. Don't add new language": [
+            "Laat maar. Voeg geen nieuwe taal toe"
+         ],
+         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
+            "Vertaal nu automatisch al mijn bestaande berichten en pagina's, plus nieuwe inhoud wanneer ik die maak."
+         ],
+         "Only automatically translate new content.": [
+            "Vertaal alleen automatisch nieuwe inhoud."
+         ],
+         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
+            "U gebruikt de <a>Alles vertalen</a> modus, die de inhoud van uw site automatisch vertaalt."
+         ],
+         "Which content do you want to automatically translate into your newly-added language?": [
+            "Welke inhoud wilt u automatisch laten vertalen in uw nieuw toegevoegde taal?"
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "U kunt bestaande inhoud vertalen vanuit het Translation Management Dashboard."
+         ]
+      }
+   }
+}

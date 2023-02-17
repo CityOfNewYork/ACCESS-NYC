@@ -9,8 +9,8 @@
 class WPML_Language_Resolution {
 
 	private $active_language_codes = array();
-	private $current_request_lang = null;
-	private $default_lang = null;
+	private $current_request_lang  = null;
+	private $default_lang          = null;
 	/**
 	 * @var array|null $hidden_lang_codes if set to null,
 	 * indicates that the cache needs to be reloaded due to changing settings
@@ -26,11 +26,18 @@ class WPML_Language_Resolution {
 	 */
 	public function __construct( $active_language_codes, $default_lang ) {
 		add_action( 'wpml_cache_clear', array( $this, 'reload' ), 11, 0 );
-		$this->active_language_codes = array_fill_keys( $active_language_codes,
-			1 );
+		$this->active_language_codes = array_fill_keys(
+			$active_language_codes,
+			1
+		);
 		$this->default_lang          = $default_lang;
-		$this->hidden_lang_codes     = array_fill_keys( wpml_get_setting_filter( array(),
-			'hidden_languages' ), 1 );
+		$this->hidden_lang_codes     = array_fill_keys(
+			wpml_get_setting_filter(
+				array(),
+				'hidden_languages'
+			),
+			1
+		);
 	}
 
 	public function reload() {
@@ -42,7 +49,9 @@ class WPML_Language_Resolution {
 
 	public function current_lang_filter( $lang, WPML_Request $wpml_request_handler ) {
 		if ( $this->current_request_lang !== $lang ) {
-			$preview_lang = $this->filter_preview_language_code();
+			$preview_lang = apply_filters( 'wpml_should_filter_preview_lang', true )
+				? $this->filter_preview_language_code()
+				: null;
 
 			if ( $preview_lang ) {
 				$lang = $preview_lang;
@@ -133,8 +142,11 @@ class WPML_Language_Resolution {
 	private function use_cookie_language() {
 
 		return ( isset( $_GET['action'] ) && $_GET['action'] === 'ajax-tag-search' )
-		       || ( isset( $_POST['action'] ) && in_array( $_POST['action'],
-				array( 'get-tagcloud', 'wp-link-ajax' ), true ) );
+			|| ( isset( $_POST['action'] ) && in_array(
+				$_POST['action'],
+				array( 'get-tagcloud', 'wp-link-ajax' ),
+				true
+			) );
 	}
 
 	/**
@@ -146,7 +158,8 @@ class WPML_Language_Resolution {
 	private function filter_preview_language_code() {
 		$preview_id   = filter_var(
 			isset( $_GET['preview_id'] ) ? $_GET['preview_id'] : '',
-			FILTER_SANITIZE_NUMBER_INT );
+			FILTER_SANITIZE_NUMBER_INT
+		);
 		$preview_flag = filter_input( INPUT_GET, 'preview' ) || $preview_id;
 		$preview_id   = $preview_id ? $preview_id : filter_input( INPUT_GET, 'p' );
 		$preview_id   = $preview_id ? $preview_id : filter_input( INPUT_GET, 'page_id' );

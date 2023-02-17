@@ -11,25 +11,25 @@ class WPML_Troubleshooting_Terms_Menu {
 		if ( ! $sitepress->get_setting( 'taxonomy_names_checked' ) ) {
 			$suffix_count = count( WPML_Terms_Translations::get_all_terms_with_language_suffix() );
 			if ( $suffix_count > 0 ) {
-				$message = '<p>';
-				$message .= sprintf( __( "In this version of WPML, you can give your taxonomy terms the same name across multiple languages. You need to update %d taxonomy terms on your website so that they display the same name without any language suffixes.", "sitepress" ), $suffix_count );
+				$message  = '<p>';
+				$message .= sprintf( __( 'In this version of WPML, you can give your taxonomy terms the same name across multiple languages. You need to update %d taxonomy terms on your website so that they display the same name without any language suffixes.', 'sitepress' ), $suffix_count );
 				$message .= '</p>';
 				if ( defined( 'ICL_PLUGIN_URL' ) ) {
 					$message .= '<p><a href="' . admin_url( 'admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/troubleshooting.php#termsuffixupdate' ) . '"><button class="button-primary">Open terms update page</button></a>';
 				}
 
-				ICL_AdminNotifier::addMessage( "termssuffixnotice", $message, 'error', true, false, false, 'terms-suffix', true );
+				ICL_AdminNotifier::addMessage( 'termssuffixnotice', $message, 'error', true, false, false, 'terms-suffix', true );
 			}
 			$sitepress->set_setting( 'taxonomy_names_checked', true, true );
 		}
 
-
-		//TODO: [WPML 3.3] the ICL_AdminNotifier class got improved and we should not call \ICL_AdminNotifier::displayMessages to display an admin notice
+		// TODO: [WPML 3.3] the ICL_AdminNotifier class got improved and we should not call \ICL_AdminNotifier::displayMessages to display an admin notice
 		ICL_AdminNotifier::displayMessages( 'terms-suffix' );
 	}
 
 	/**
 	 * Returns the HTML for the display of all terms with a language suffix in the troubleshooting menu.
+	 *
 	 * @return string
 	 */
 	public static function display_terms_with_suffix() {
@@ -40,23 +40,23 @@ class WPML_Troubleshooting_Terms_Menu {
 
 		if ( ! empty( $terms_to_display ) ) {
 
-			$output = '<div class="icl_cyan_box">';
+			$output  = '<div class="icl_cyan_box">';
 			$output .= '<table class="widefat" id="icl-updated-term-names-table">';
 			$output .= '<a name="termsuffixupdate"></a>';
-			$output .= '<tr><h3>' . __( "Remove language suffixes from taxonomy names.", 'sitepress' ) . '</h3></tr>';
+			$output .= '<tr><h3>' . __( 'Remove language suffixes from taxonomy names.', 'sitepress' ) . '</h3></tr>';
 
-			$output .= '<tr id="icl-updated-term-names-headings"><th></th><th>' . __( "Old Name", "sitepress" ) . '</th><th>' . __( "Updated Name", "sitepress" ) . '</th><th>' . __( "Affected Taxonomies", "sitepress" ) . '</th></tr>';
+			$output .= '<tr id="icl-updated-term-names-headings"><th></th><th>' . __( 'Old Name', 'sitepress' ) . '</th><th>' . __( 'Updated Name', 'sitepress' ) . '</th><th>' . __( 'Affected Taxonomies', 'sitepress' ) . '</th></tr>';
 
 			foreach ( $terms_to_display as $term_id => $term ) {
 
-				$updated_term_name = self::strip_language_suffix( $term[ 'name' ] );
+				$updated_term_name = self::strip_language_suffix( $term['name'] );
 
 				$output .= '<tr class="icl-term-with-suffix-row"><td>';
 				$output .= '<input type="checkbox" checked="checked" name="' . $updated_term_name . '" value="' . $term_id . '"/>';
 				$output .= '</td>';
-				$output .= '<td>' . $term[ 'name' ] . '</td>';
+				$output .= '<td>' . $term['name'] . '</td>';
 				$output .= '<td id="term_' . $term_id . '">' . $updated_term_name . '</td>';
-				$output .= '<td>' . join( ', ', $term[ 'taxonomies' ] ) . '</td>';
+				$output .= '<td>' . join( ', ', $term['taxonomies'] ) . '</td>';
 				$output .= '</tr>';
 			}
 			$output .= '</table>';
@@ -111,11 +111,11 @@ class WPML_Troubleshooting_Terms_Menu {
 		$term_names = array();
 
 		$nonce = filter_input( INPUT_POST, '_icl_nonce', FILTER_SANITIZE_STRING );
-		if ( !wp_verify_nonce( $nonce, 'update_term_names_nonce' ) ) {
+		if ( ! wp_verify_nonce( $nonce, 'update_term_names_nonce' ) ) {
 			die( 'Wrong Nonce' );
 		}
 
-		$request_post_terms = filter_input(INPUT_POST, 'terms');
+		$request_post_terms = filter_input( INPUT_POST, 'terms', FILTER_SANITIZE_STRING );
 		if ( $request_post_terms ) {
 			$term_names = json_decode( stripcslashes( $request_post_terms ) );
 			if ( ! is_object( $term_names ) ) {
@@ -128,7 +128,7 @@ class WPML_Troubleshooting_Terms_Menu {
 		foreach ( $term_names as $term_id => $new_name ) {
 			$res = $wpdb->update( $wpdb->terms, array( 'name' => $new_name ), array( 'term_id' => $term_id ) );
 			if ( $res ) {
-				$updated[ ] = $term_id;
+				$updated[] = $term_id;
 			}
 		}
 

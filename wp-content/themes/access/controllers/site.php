@@ -95,9 +95,11 @@ class Site extends TimberSite {
     )));
 
     // Get the first alert that is set to site wide
-    $context['alert_sitewide'] = reset(array_filter($alerts, function($post) {
-      return $post->custom['alert_sitewide'];
-    }));
+    $alerts = array_filter($alerts, function($p) {
+      return (empty($p->custom['alert_sitewide'])) ? false : $p->custom['alert_sitewide'];
+    });
+
+    $context['alert_sitewide'] = reset($alerts);
 
     /**
      * Query Vars
@@ -182,7 +184,7 @@ class Site extends TimberSite {
     $languages = apply_filters('wpml_active_languages', null, array('skip_missing' => 0));
 
     $langs = array_filter($languages, function($lang) {
-      return ($lang['missing'] === 1);
+      return (isset($lang['missing']) && $lang['missing'] === 1);
     });
 
     $langs = array_map(function($lang) {

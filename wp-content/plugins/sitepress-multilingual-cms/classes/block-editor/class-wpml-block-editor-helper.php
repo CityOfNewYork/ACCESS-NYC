@@ -40,7 +40,7 @@ class WPML_Block_Editor_Helper {
 	 */
 	public static function is_edit_post() {
 		$current_screen = get_current_screen();
-		return  $current_screen && 'post' === $current_screen->base && self::is_active() && self::is_block_editor( $current_screen );
+		return $current_screen && 'post' === $current_screen->base && self::is_active() && self::is_block_editor( $current_screen );
 	}
 
 	/**

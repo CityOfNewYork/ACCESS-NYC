@@ -32,7 +32,7 @@ class WPML_Rewrite_Rule_Filter_Factory {
 					$slug_translations
 				),
 				new WPML_ST_Tax_Slug_Translation_Settings()
-			)
+			),
 		);
 
 		return new WPML_Rewrite_Rule_Filter( $custom_types_repositories, new WPML_ST_Slug_New_Match_Finder() );

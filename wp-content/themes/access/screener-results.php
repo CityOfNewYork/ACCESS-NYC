@@ -100,7 +100,9 @@ $query = array();
 // Gets the URL Parameters for the search value,
 if (isset($_GET['programs'])) {
   $programBlob = validate_params('programs', urldecode(htmlspecialchars($_GET['programs'])));
+
   $context['resultPrograms'] = explode(',', $programBlob);
+
   $query['programs'] = $programBlob;
 } else {
   $context['resultPrograms'] = '';
@@ -108,7 +110,9 @@ if (isset($_GET['programs'])) {
 
 if (isset($_GET['categories'])) {
   $categoryBlob = validate_params('categories', urldecode(htmlspecialchars($_GET['categories'])));
+
   $context['resultCategories'] = explode(',', $categoryBlob);
+
   $query['categories'] = $categoryBlob;
 } else {
   $context['resultCategories'] = '';
@@ -116,7 +120,9 @@ if (isset($_GET['categories'])) {
 
 if (isset($_GET['date'])) {
   $dateBlob = validate_params('date', urldecode(htmlspecialchars($_GET['date'])));
+
   $context['resultDate'] = $dateBlob;
+
   $query['date'] = $dateBlob;
 } else {
   $context['resultDate'] = '';
@@ -124,7 +130,9 @@ if (isset($_GET['date'])) {
 
 if (isset($_GET['guid'])) {
   $guidBlob = validate_params('guid', urldecode(htmlspecialchars($_GET['guid'])));
+
   $context['guid'] = $guidBlob;
+
   $query['guid'] = $guidBlob;
 } else {
   $context['guid'] = '';
@@ -174,15 +182,17 @@ $context['shareHash'] = \SMNYC\hash($context['shareUrl']);
 $context['getParams'] = $get; // pass safe parameters
 
 $context['selectedPrograms'] = array_map(function($post) {
-    return new Controller\Programs($post);
+  return new Controller\Programs($post);
 }, Timber::get_posts($selectedProgramArgs));
 
 $context['additionalPrograms'] = array_map(function($post) {
-    return new Controller\Programs($post);
+  return new Controller\Programs($post);
 }, Timber::get_posts($additionalProgramArgs));
 
 /**
  * Alerts
+ *
+ * @author NYC Opportunity
  */
 
 if (get_field('alert')) {
@@ -194,7 +204,10 @@ if (get_field('alert')) {
   ));
 
   $context['alerts'] = array_filter($alerts, function($p) {
-    return in_array('screener', array_values($p->custom['location']));
+    $location = (!empty($p->custom['location']))
+      ? $p->custom['location'] : [];
+
+    return in_array('screener', array_values($location));
   });
 }
 
@@ -205,6 +218,7 @@ $context['alerts'] = array_map(function($post) {
 
 /**
  * Add to Schema
+ *
  * @author NYC Opportunity
  */
 

@@ -3,20 +3,27 @@
 class WPML_Meta_Boxes_Post_Edit_Ajax implements IWPML_Action {
 
 	const ACTION_GET_META_BOXES = 'wpml_get_meta_boxes_html';
+	const ACTION_GET_ADMIN_LS = 'wpml_get_admin_ls_links';
 	const ACTION_DUPLICATE      = 'make_duplicates';
 
 	private $meta_boxes_post_edit_html;
 	private $translation_management;
 
+	private $admin_language_switcher;
+
 	public function __construct(
-		WPML_Meta_Boxes_Post_Edit_HTML $meta_boxes_post_edit_html, TranslationManagement $iclTranslationManagement
+		WPML_Meta_Boxes_Post_Edit_HTML $meta_boxes_post_edit_html,
+		TranslationManagement $iclTranslationManagement,
+		WPML_Admin_Language_Switcher $admin_language_switcher
 	) {
 		$this->translation_management = $iclTranslationManagement;
 		$this->meta_boxes_post_edit_html = $meta_boxes_post_edit_html;
+		$this->admin_language_switcher = $admin_language_switcher;
 	}
 
 	public function add_hooks() {
 		add_action( 'wp_ajax_' . self::ACTION_GET_META_BOXES, array( $this, 'render_meta_boxes_html' ) );
+		add_action( 'wp_ajax_' . self::ACTION_GET_ADMIN_LS, [ $this, 'get_admin_ls_links' ] );
 		add_action( 'wp_ajax_' . self::ACTION_DUPLICATE, array( $this, 'duplicate_post' ) );
 		add_filter( 'wpml_post_edit_can_translate', array( $this, 'force_post_edit_when_refreshing_meta_boxes' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -39,6 +46,13 @@ class WPML_Meta_Boxes_Post_Edit_Ajax implements IWPML_Action {
 			$post_id = (int) $_POST['post_id'];
 			$this->meta_boxes_post_edit_html->render_languages( get_post( $post_id ) );
 			wp_die();
+		}
+	}
+
+	public function get_admin_ls_links() {
+		if ( $this->is_valid_request( self::ACTION_GET_ADMIN_LS ) ) {
+			$links = $this->admin_language_switcher->get_languages_links();
+			wp_send_json_success( $links );
 		}
 	}
 

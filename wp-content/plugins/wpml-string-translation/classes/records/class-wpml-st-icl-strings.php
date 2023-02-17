@@ -2,7 +2,7 @@
 
 class WPML_ST_ICL_Strings extends WPML_WPDB_User {
 
-	private $table = 'icl_strings';
+	private $table     = 'icl_strings';
 	private $string_id = 0;
 
 	/**
@@ -28,7 +28,10 @@ class WPML_ST_ICL_Strings extends WPML_WPDB_User {
 	 */
 	public function update( $args ) {
 		$this->wpdb->update(
-			$this->wpdb->prefix . $this->table, $args, array( 'id' => $this->string_id ) );
+			$this->wpdb->prefix . $this->table,
+			$args,
+			array( 'id' => $this->string_id )
+		);
 
 		return $this;
 	}
@@ -39,10 +42,13 @@ class WPML_ST_ICL_Strings extends WPML_WPDB_User {
 	public function value() {
 
 		return $this->wpdb->get_var(
-			$this->wpdb->prepare( " SELECT value
+			$this->wpdb->prepare(
+				" SELECT value
 									FROM {$this->wpdb->prefix}{$this->table}
 									WHERE id = %d LIMIT 1",
-				$this->string_id ) );
+				$this->string_id
+			)
+		);
 	}
 
 	/**
@@ -51,10 +57,13 @@ class WPML_ST_ICL_Strings extends WPML_WPDB_User {
 	public function language() {
 
 		return $this->wpdb->get_var(
-			$this->wpdb->prepare( " SELECT language
+			$this->wpdb->prepare(
+				" SELECT language
 									FROM {$this->wpdb->prefix}{$this->table}
 									WHERE id = %d LIMIT 1",
-				$this->string_id ) );
+				$this->string_id
+			)
+		);
 	}
 
 	/**
@@ -63,9 +72,12 @@ class WPML_ST_ICL_Strings extends WPML_WPDB_User {
 	public function status() {
 
 		return (int) $this->wpdb->get_var(
-			$this->wpdb->prepare( " SELECT status
+			$this->wpdb->prepare(
+				" SELECT status
 									FROM {$this->wpdb->prefix}{$this->table}
 									WHERE id = %d LIMIT 1",
-				$this->string_id ) );
+				$this->string_id
+			)
+		);
 	}
 }

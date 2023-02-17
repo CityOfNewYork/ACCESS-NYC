@@ -1,0 +1,88 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Your pending automatic translations will be canceled.": [
+            "Các bản dịch tự động đang chờ xử lý của bạn sẽ bị hủy."
+         ],
+         "Save": [
+            "Lưu"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "Đi đến mục <a>Bảng điều khiển Quản lý Dịch thuật</a> để dịch nội dung của bạn."
+         ],
+         "When automatic translation completes:": [
+            "Khi quá trình dịch tự động hoàn tất:"
+         ],
+         "Publish and add to the review list": [
+            "Đăng tải và thêm vào danh sách rà soát"
+         ],
+         "Publish without review": [
+            "Đăng tải mà không rà soát"
+         ],
+         "Hold for review before publishing": [
+            "Giữ lại để rà soát trước khi đăng tải"
+         ],
+         "Publish translations without a review": [
+            "Đăng tải các bản dịch mà không cần rà soát"
+         ],
+         "Publish translations and review them later": [
+            "Đăng tải các bản dịch và rà soát sau"
+         ],
+         "Let me review the translations before publishing": [
+            "Hãy để tôi rà soát các bản dịch trước khi đăng tải"
+         ],
+         "Automatically translate my entire site’s content": [
+            "Tự động dịch toàn bộ nội dung trên trang web của tôi"
+         ],
+         "How do you want to translate this site?": [
+            "Cách thức bạn muốn dịch trang web này?"
+         ],
+         "I want to choose which content to translate": [
+            "Tôi muốn chọn nội dung cần dịch"
+         ],
+         "Yes, automatically translate all of my <s>existing posts and pages</s> right now, plus <s>new content</s> as I create it.": [
+            "Có, tự động dịch tất cả các <s>bài viết và trang có sẵn</s> của tôi ngay, cùng với <s>nội dung mới</s> như tôi đã tạo."
+         ],
+         "Automatically translate all of my <s>existing content</s> right now, plus <s>new content</s> as I create it.": [
+            "Tự động dịch tất cả <s>nội dung có sẵn</s> của tôi ngay, cùng với <s>nội dung mới</s> như tôi đã tạo."
+         ],
+         "No, only automatically translate <s>new content</s>.": [
+            "Không, chỉ tự động dịch <s>nội dung mới</s>."
+         ],
+         "Only automatically translate <s>new content</s>.": [
+            "Chỉ tự động dịch <s>nội dung mới</s>."
+         ],
+         "Should WPML automatically translate your existing content?": [
+            "WPML sẽ tự động dịch nội dung có sẵn của bạn?"
+         ],
+         "Which content do you want to translate automatically?": [
+            "Bạn muốn tự động dịch những nội dung nào?"
+         ],
+         "Start translating automatically": [
+            "Bắt đầu dịch tự động"
+         ],
+         "Create an account to start translating": [
+            "Chọn một tài khoản để bắt đầu dịch"
+         ],
+         "WPML will use credits from your automatic translation account to translate your site immediately as you publish new content or update existing content.": [
+            "WPML sẽ sử dụng tín dụng từ tài khoản dịch thuật tự động của bạn để dịch trang web của bạn ngay khi bạn đăng tải nội dung mới hoặc cập nhật nội dung có sẵn."
+         ],
+         "You can translate existing content from the Translation Management Dashboard.": [
+            "Bạn có thể dịch nội dung có sẵn từ Bảng điều khiển Quản lý Dịch thuật."
+         ],
+         "Cancel": [
+            "Hủy"
+         ],
+         "You must use the <s>Advanced Translation Editor</s> if you want to translate your content automatically.": [
+            "Bạn phải sử dụng <s>Trình biên tập Dịch thuật Nâng cao</s> nếu bạn muốn tự động dịch nội dung của mình."
+         ],
+         "You currently use a translation service to translate your content. To translate your site automatically, first disconnect your translation service in your <a><s>Translation Management settings</s></a>.": [
+            "Bạn hiện đang sử dụng một dịch vụ dịch thuật để dịch nội dung của mình. Để tự động dịch trang web của bạn, trước tiên hãy ngắt kết nối dịch vụ dịch thuật của bạn trong <a><s>Cài đặt Quản lý Dịch thuật</s></a>."
+         ]
+      }
+   }
+}

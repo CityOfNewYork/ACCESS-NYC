@@ -19,8 +19,8 @@ class WPML_URL_Converter_CPT {
 	/**
 	 * Adjusts the CPT archive slug for possible slug translations from ST.
 	 *
-	 * @param string $link
-	 * @param string $post_type
+	 * @param string      $link
+	 * @param string      $post_type
 	 * @param null|string $language_code
 	 *
 	 * @return string
@@ -40,10 +40,10 @@ class WPML_URL_Converter_CPT {
 		if ( is_string( $translated_slug ) ) {
 			$link_parts = explode( '?', $link, 2 );
 
-			$pattern = '#\/' . preg_quote( $slug, '#' ) . '\/#';
+			$pattern  = '#\/' . preg_quote( $slug, '#' ) . '\/#';
 			$link_new = trailingslashit( preg_replace( $pattern, '/' . $translated_slug . '/', trailingslashit( $link_parts[0] ), 1 ) );
-			$link = $this->slash_helper->match_trailing_slash_to_reference( $link_new, $link_parts[0] );
-			$link = isset( $link_parts[1] ) ? $link . '?' . $link_parts[1] : $link;
+			$link     = $this->slash_helper->match_trailing_slash_to_reference( $link_new, $link_parts[0] );
+			$link     = isset( $link_parts[1] ) ? $link . '?' . $link_parts[1] : $link;
 		}
 
 		return $link;

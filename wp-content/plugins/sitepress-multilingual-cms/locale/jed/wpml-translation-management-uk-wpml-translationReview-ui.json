@@ -1,0 +1,52 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Accepted": [
+            "Прийнято"
+         ],
+         "Approved!": [
+            "Затверджено!"
+         ],
+         "Loading the next translation for review...": [
+            "Завантаження наступного перекладу для перевірки..."
+         ],
+         "Back": [
+            "Назад"
+         ],
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "Вимкніть, щоб не завантажувати наступний переклад автоматично після завершення цієї перевірки."
+         ],
+         "Turn on to automatically load the next translation after finishing this review.": [
+            "Увімкніть, щоб завантажувати наступний переклад автоматично після завершення цієї перевірки."
+         ],
+         "Edit": [
+            "Редагувати"
+         ],
+         "Edit translation": [
+            "Редагувати переклад"
+         ],
+         "There was an error in applying translation.": [
+            "Під час застосування перекладу сталася помилка."
+         ],
+         "Please wait, applying translation..": [
+            "Зачекайте, триває застосування перекладу."
+         ],
+         "Next review": [
+            "Наступна перевірка"
+         ],
+         "Publish this translation": [
+            "Опублікувати цей переклад"
+         ],
+         "Accept this translation": [
+            "Прийняти цей переклад"
+         ],
+         "Published!": [
+            "Опубліковано!"
+         ]
+      }
+   }
+}

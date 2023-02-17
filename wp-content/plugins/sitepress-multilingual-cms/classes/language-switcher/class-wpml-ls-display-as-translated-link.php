@@ -6,6 +6,8 @@
  * Time: 10:56 PM
  */
 
+use WPML\FP\Obj;
+
 class WPML_LS_Display_As_Translated_Link {
 
 	/** @var SitePress $sitepress */
@@ -49,13 +51,21 @@ class WPML_LS_Display_As_Translated_Link {
 		$url = null;
 
 		if ( $this->sitepress->is_display_as_translated_post_type( $queried_object->post_type ) &&
-		     isset( $translations[ $this->default_language ] ) ) {
+			 isset( $translations[ $this->default_language ] ) ) {
 
 			$this->sitepress->switch_lang( $this->default_language );
 			$this->processed_language = $lang;
+
+			$setLanguageCode = Obj::set( Obj::lensProp( 'language_code' ), $lang );
+
 			add_filter( 'post_link_category', array( $this, 'adjust_category_in_post_permalink' ) );
+			add_filter( 'wpml_st_post_type_link_filter_language_details', $setLanguageCode );
+
 			$url = get_permalink( $translations[ $this->default_language ]->element_id );
+
+			remove_filter( 'wpml_st_post_type_link_filter_language_details', $setLanguageCode );
 			remove_filter( 'post_link_category', array( $this, 'adjust_category_in_post_permalink' ) );
+
 			$this->sitepress->switch_lang();
 			$url = $this->url_converter->convert_url_string( $url, $lang );
 		}
@@ -67,7 +77,7 @@ class WPML_LS_Display_As_Translated_Link {
 		$url = null;
 
 		if ( $this->sitepress->is_display_as_translated_taxonomy( $queried_object->taxonomy ) &&
-		     isset( $translations[ $this->default_language ] ) ) {
+			 isset( $translations[ $this->default_language ] ) ) {
 
 			$url = get_term_link( (int) $translations[ $this->default_language ]->term_id, $queried_object->taxonomy );
 			$url = $this->url_converter->convert_url_string( $url, $lang );

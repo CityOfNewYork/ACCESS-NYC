@@ -24,7 +24,7 @@ class ProcessFactory {
 
 	/**
 	 * @return Process
-	 * @throws \Auryn\InjectionException
+	 * @throws \WPML\Auryn\InjectionException
 	 */
 	public function create() {
 		$singleSiteProcess = self::createSingle();
@@ -42,7 +42,7 @@ class ProcessFactory {
 	 * @param bool $isBackgroundProcess
 	 *
 	 * @return SingleSiteProcess
-	 * @throws \Auryn\InjectionException
+	 * @throws \WPML\Auryn\InjectionException
 	 */
 	public static function createSingle( $isBackgroundProcess = false ) {
 		return make(
@@ -60,7 +60,7 @@ class ProcessFactory {
 	 * @param bool $isBackgroundProcess
 	 *
 	 * @return mixed|\Mockery\MockInterface|Status
-	 * @throws \Auryn\InjectionException
+	 * @throws \WPML\Auryn\InjectionException
 	 */
 	public static function createStatus( $isBackgroundProcess = false ) {
 		return make( Status::class, [

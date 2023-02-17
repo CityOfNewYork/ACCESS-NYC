@@ -13,6 +13,7 @@ class WPML_Debug_BackTrace extends WPML\Utils\DebugBackTrace {
 	 * @param bool   $provide_object
 	 * @param bool   $ignore_args
 	 * @param string $debug_backtrace_function
+	 * @phpstan-ignore-next-line
 	 */
 	public function __construct(
 		$php_version = null,

@@ -44,7 +44,7 @@ class Import extends \WPML\ST\Rest\Base {
 
 	/**
 	 * @return array
-	 * @throws \Auryn\InjectionException
+	 * @throws \WPML\Auryn\InjectionException
 	 */
 	public function import( \WP_REST_Request $request ) {
 		/** @var WPML_ST_Translations_File_Queue $queue */

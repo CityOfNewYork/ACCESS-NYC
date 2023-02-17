@@ -4,6 +4,9 @@ namespace WPML\ST\TranslationFile;
 
 use wpdb;
 use WPML\Collect\Support\Collection;
+use WPML\FP\Fns;
+use WPML\FP\Lst;
+use WPML\FP\Obj;
 use WPML_Locale;
 
 class DomainsLocalesMapper {
@@ -41,22 +44,41 @@ class DomainsLocalesMapper {
 	}
 
 	/**
+	 * @param  callable $getActiveLanguages
+	 * @param  string   $domain
+	 *
+	 * @return array
+	 */
+	public function get_from_domain( callable $getActiveLanguages, $domain ) {
+		$createEntity = function ( $locale ) use ( $domain ) {
+			return (object) [
+				'domain' => $domain,
+				'locale' => $locale,
+			];
+		};
+
+		return Fns::map( $createEntity, Obj::values( Lst::pluck( 'default_locale', $getActiveLanguages() ) ) );
+	}
+
+	/**
 	 * @param string $table_alias
-	 * @param array $ids
+	 * @param array  $ids
 	 *
 	 * @return Collection
 	 */
 	private function get_results_where( $table_alias, array $ids ) {
 		$results = [];
 		if ( array_filter( $ids ) ) {
-			$results = $this->wpdb->get_results( "
+			$results = $this->wpdb->get_results(
+				"
     			SELECT DISTINCT
     				s.context AS domain,
     				st.language
     			FROM {$this->wpdb->prefix}icl_string_translations AS " . self::ALIAS_STRING_TRANSLATIONS . "
     			JOIN {$this->wpdb->prefix}icl_strings AS " . self::ALIAS_STRINGS . " ON s.id = st.string_id
-    			WHERE $table_alias.id IN(" . wpml_prepare_in( $ids ) . ")
-    		" );
+    			WHERE $table_alias.id IN(" . wpml_prepare_in( $ids ) . ')
+    		'
+			);
 		}
 
 		return wpml_collect( $results )->map(

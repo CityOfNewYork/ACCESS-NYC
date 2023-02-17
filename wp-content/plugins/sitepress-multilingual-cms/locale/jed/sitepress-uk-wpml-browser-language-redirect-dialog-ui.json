@@ -1,0 +1,34 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "How Browser Language Redirect Affects Google Indexing": [
+            "Вплив переспрямування залежно від мови веб-переглядача на індексацію Google"
+         ],
+         "Documentation": [
+            "Документація"
+         ],
+         "Browser redirect affects Google indexing and search results": [
+            "Переспрямування веб-переглядача впливає на індексацію Google і результати пошуку"
+         ],
+         "Got it, activate anyway": [
+            "Зрозуміло. Усе одно ввімкнути"
+         ],
+         "Cancel": [
+            "Скасувати"
+         ],
+         "When you redirect visitors based on their language, you also redirect Google. Google wants to see your site exactly like visitors see it, including any redirects that you apply.": [
+            "Під час переспрямування відвідувачів залежно від їхньої мови також відбувається переспрямування Google. Google хоче бачити ваш веб-сайт саме таким, яким його бачать відвідувачі, включно з усіма використаними переспрямуваннями."
+         ],
+         "It is OK to redirect visitors based on their language, but you need to realize that this feature affects SEO.": [
+            "Переспрямовувати відвідувачів залежно від їхньої мови цілком нормально, але слід розуміти, що це впливає на SEO."
+         ],
+         "Before proceeding, we recommend that you read these two pages:": [
+            "Перш ніж продовжити, радимо прочитати ці дві сторінки:"
+         ]
+      }
+   }
+}

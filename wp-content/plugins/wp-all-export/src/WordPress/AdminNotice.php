@@ -15,8 +15,8 @@ abstract class AdminNotice
     public function showNotice()
     {
         ?>
-        <div class="<?php echo $this->getType();?>"><p>
-                <?php echo $this->message; ?>
+        <div class="<?php echo esc_attr($this->getType());?>"><p>
+                <?php echo wp_kses_post($this->message); ?>
             </p></div>
         <?php
     }

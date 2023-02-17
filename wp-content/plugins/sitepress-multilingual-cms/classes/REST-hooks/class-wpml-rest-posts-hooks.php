@@ -1,5 +1,7 @@
 <?php
 
+use \WPML\FP\Fns;
+
 class WPML_REST_Posts_Hooks implements IWPML_Action {
 
 	/** @var SitePress $sitepress */
@@ -120,7 +122,11 @@ class WPML_REST_Posts_Hooks implements IWPML_Action {
 			}
 		}
 
-		return array_values( array_filter( $term_ids ) );
+		return wpml_collect( $term_ids )
+			->filter()
+			->values()
+			->map( Fns::unary( 'intval' ) )
+			->toArray();
 	}
 
 	/**

@@ -15,21 +15,23 @@ class WPML_UI_Help_Tab {
 		$this->title   = $title;
 		$this->content = $content;
 	}
-	
+
 	public function init_hooks() {
 		$this->wp_api->add_action( 'admin_head', array( $this, 'add_help_tab' ) );
 	}
-	
+
 	public function add_help_tab() {
 		$screen = $this->wp_api->get_current_screen();
 
 		if ( null !== $screen ) {
-			$screen->add_help_tab( array(
-				                       'id'      => $this->id,
-				                       'title'   => $this->title,
-				                       'content' => $this->content,
-			                       ) );
+			$screen->add_help_tab(
+				array(
+					'id'      => $this->id,
+					'title'   => $this->title,
+					'content' => $this->content,
+				)
+			);
 		}
 	}
-	
+
 }

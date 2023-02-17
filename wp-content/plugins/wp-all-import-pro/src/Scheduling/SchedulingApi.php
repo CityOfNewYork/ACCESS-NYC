@@ -167,6 +167,41 @@ class SchedulingApi
         return $response;
     }
 
+    public function disableSchedule($remoteScheduleId)
+    {
+        wp_remote_request(
+            $this->getApiUrl('schedules/' . $remoteScheduleId . '/disable'),
+            array(
+                'method' => 'DELETE',
+                'headers' => $this->getHeaders()
+            )
+        );
+    }
+
+    public function enableSchedule($scheduleId)
+    {
+        wp_remote_request(
+            $this->getApiUrl('schedules/' . $scheduleId . '/enable'),
+            array(
+                'method' => 'POST',
+                'headers' => $this->getHeaders()
+            )
+        );
+    }
+
+    public function updateScheduleKey($remoteScheduleId, $newKey)
+    {
+        wp_remote_request(
+            $this->getApiUrl('schedules/' . $remoteScheduleId . '/key'),
+            array(
+                'method' => 'POST',
+                'headers' => $this->getHeaders(),
+                'body' => json_encode(['key' => $newKey])
+
+            )
+        );
+    }
+
     /**
      * @return array
      * @throws \Exception

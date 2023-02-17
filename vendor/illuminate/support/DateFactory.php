@@ -64,7 +64,7 @@ use InvalidArgumentException;
  * @method static Carbon setHumanDiffOptions($humanDiffOptions)
  * @method static bool setLocale($locale)
  * @method static void setMidDayAt($hour)
- * @method static Carbon setTestNow($testNow = null)
+ * @method static void setTestNow($testNow = null)
  * @method static void setToStringFormat($format)
  * @method static void setTranslator(\Symfony\Component\Translation\TranslatorInterface $translator)
  * @method static Carbon setUtf8($utf8)
@@ -115,6 +115,7 @@ class DateFactory
      * Use the given handler when generating dates (class name, callable, or factory).
      *
      * @param  mixed  $handler
+     * @return mixed
      *
      * @throws \InvalidArgumentException
      */
@@ -210,13 +211,13 @@ class DateFactory
 
         $dateClass = static::$dateClass ?: $defaultClassName;
 
-        // Check if date can be created using public class method...
+        // Check if the date can be created using the public class method...
         if (method_exists($dateClass, $method) ||
             method_exists($dateClass, 'hasMacro') && $dateClass::hasMacro($method)) {
             return $dateClass::$method(...$parameters);
         }
 
-        // If that fails, create the date with the default class..
+        // If that fails, create the date with the default class...
         $date = $defaultClassName::$method(...$parameters);
 
         // If the configured class has an "instance" method, we'll try to pass our date into there...

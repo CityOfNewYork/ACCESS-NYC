@@ -32,7 +32,7 @@ class WPML_Cookie_Setting_Ajax {
 			wp_send_json_error();
 		} else {
 
-			if( array_key_exists( WPML_Cookie_Setting::COOKIE_SETTING_FIELD, $_POST ) ) {
+			if ( array_key_exists( WPML_Cookie_Setting::COOKIE_SETTING_FIELD, $_POST ) ) {
 				$store_frontend_cookie = filter_var( $_POST[ WPML_Cookie_Setting::COOKIE_SETTING_FIELD ], FILTER_SANITIZE_NUMBER_INT, FILTER_NULL_ON_FAILURE );
 				$this->wpml_frontend_cookie_setting->set_setting( $store_frontend_cookie );
 			} else {

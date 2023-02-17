@@ -2,6 +2,14 @@
 
 ## Table of Contents
 
+* [IfOriginalPost](#iforiginalpost)
+    * [getTranslations](#gettranslations)
+    * [getTranslationIds](#gettranslationids)
+* [Languages](#languages)
+    * [getActive](#getactive)
+    * [getFlagUrl](#getflagurl)
+    * [withFlags](#withflags)
+    * [getAll](#getall)
 * [PostTranslations](#posttranslations)
     * [setAsSource](#setassource)
     * [setAsTranslationOf](#setastranslationof)
@@ -14,6 +22,191 @@
     * [get](#get-1)
     * [getIfOriginal](#getiforiginal-1)
     * [isOriginal](#isoriginal)
+
+## IfOriginalPost
+
+
+
+
+
+* Full name: \WPML\Element\API\IfOriginalPost
+
+
+### getTranslations
+
+Gets the element details for the translations of the given post id.
+
+```php
+IfOriginalPost::getTranslations( integer $id = null ): \WPML\Collect\Support\Collection|callable
+```
+
+Returns an empty array if the id is not an original post.
+
+element details structure:
+```php
+(object) [
+ 'original' => false,            // bool True if the element is the original, false if a translation
+ 'element_id' => 123,            // int The element id
+ 'source_language_code' => 'en', // string The source language code
+ 'language_code' => 'de',        // string The language of the element
+ 'trid' => 456,                  // int The translation id that links translations to source.
+]
+```
+
+* This method is **static**.
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$id` | **integer** | The post id. Optional. If missing then returns a callable waiting for the id. |
+
+
+
+
+---
+
+### getTranslationIds
+
+Get the element ids for the translations of the given post id.
+
+```php
+IfOriginalPost::getTranslationIds( integer $id = null ): \WPML\Collect\Support\Collection|callable
+```
+
+Returns an empty array if the id is not an original post.
+
+* This method is **static**.
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$id` | **integer** | The post id. Optional. If missing then returns a callable waiting for the id. |
+
+
+
+
+---
+
+## Languages
+
+
+
+
+
+* Full name: \WPML\Element\API\Languages
+
+
+### getActive
+
+
+
+```php
+Languages::getActive(  ): array
+```
+
+It returns an array of the active languages.
+
+The returned array is indexed by language code and every element has the following structure:
+```
+ 'fr' => [
+     'code'           => 'fr',
+     'id'             => 3,
+     'english_name'   => 'French',
+     'native_name'    => 'Français',
+     'major'          => 1,
+     'default_locale' => 'fr_FR',
+     'encode_url'     => 0,
+     'tag'            => 'fr ,
+     'display_name'   => 'French
+ ]
+```
+
+* This method is **static**.
+
+
+
+---
+
+### getFlagUrl
+
+
+
+```php
+Languages::getFlagUrl( mixed $...$code ): callable|string
+```
+
+- Curried :: string → string
+
+Gets the flag url for the given language code.
+
+* This method is **static**.
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$...$code` | **mixed** |  |
+
+
+
+
+---
+
+### withFlags
+
+
+
+```php
+Languages::withFlags( mixed $...$langs ): callable|array
+```
+
+- Curried :: [code => lang] → [code => lang]
+
+Adds the language flag url to the array of languages.
+
+* This method is **static**.
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$...$langs` | **mixed** |  |
+
+
+
+
+---
+
+### getAll
+
+
+
+```php
+Languages::getAll(  ): callable|array
+```
+
+void → [lang]
+
+It returns an array of the all the languages.
+
+The returned array is indexed by language code and every element has the following structure:
+```
+ 'fr' => [
+     'code'           => 'fr',
+     'id'             => 3,
+     'english_name'   => 'French',
+     'native_name'    => 'Français',
+     'major'          => 1,
+     'default_locale' => 'fr_FR',
+     'encode_url'     => 0,
+     'tag'            => 'fr ,
+     'display_name'   => 'French
+ ]
+```
+
+* This method is **static**.
+
+
+
+---
 
 ## PostTranslations
 
@@ -132,7 +325,7 @@ Class Translations
 Translations::setLanguage( mixed $...$el_id, mixed $...$el_type, mixed $...$trid, mixed $...$language_code, mixed $...$src_language_code, mixed $...$check_duplicates ): callable|integer
 ```
 
-- Curried
+- Curried :: int → string → int|null → string → string → string|null → bool → bool|int|null|string
 
          Wrapper function for SitePress::set_element_language_details
 
@@ -283,4 +476,4 @@ Translations::isOriginal( mixed $...$el_id, mixed $...$translations ): callable|
 
 
 --------
-> This document was automatically generated from source code comments on 2020-05-19 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)
+> This document was automatically generated from source code comments on 2020-06-28 using [phpDocumentor](http://www.phpdoc.org/) and [cvuorinen/phpdoc-markdown-public](https://github.com/cvuorinen/phpdoc-markdown-public)

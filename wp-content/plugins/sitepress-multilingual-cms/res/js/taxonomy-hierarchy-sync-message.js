@@ -16,8 +16,8 @@ WPML_Core.taxonomy_sync_complete = function ( event, xhr, settings ) {
 	}
 }
 
-jQuery( document ).ready( function () {
-	"use strict";
+jQuery(function () {
+    "use strict";
 
-	jQuery( document ).ajaxComplete( WPML_Core.taxonomy_sync_complete );
-} );
+    jQuery(document).ajaxComplete(WPML_Core.taxonomy_sync_complete);
+});

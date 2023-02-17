@@ -47,9 +47,19 @@ class Display {
 
 	public function addNotices() {
 		foreach ( $this->currentNotices['repo'] as $repo => $ids ) {
-			foreach ( $ids as $id ) {
-				if ( $this->pageConfig->shouldShowMessage( $repo, $id ) || $this->screenConfig->shouldShowMessage( $repo, $id ) ) {
-					$this->displayNotice( $repo, $id );
+			foreach ( $ids as $id => $type ) {
+				if ( is_array( $type ) ) {
+					$index       = $id;
+					$noticesData = $type;
+				} else {
+					$index       = $type;
+					$noticesData = [ $type ];
+				}
+
+				if ( $this->pageConfig->shouldShowMessage( $repo, $index ) || $this->screenConfig->shouldShowMessage( $repo, $index ) ) {
+					foreach ( $noticesData as $noticeData ) {
+						$this->displayNotice( $repo, $index, $noticeData );
+					}
 				}
 			}
 		}
@@ -67,9 +77,13 @@ class Display {
 	 * @param string $repo
 	 * @param string $ids
 	 */
-	private function displayNotice( $repo, $id ) {
-		if ( ! call_user_func( $this->isDismissed, $repo, $id ) ) {
-			$html = $this->messageTexts->get( $repo, $id );
+	private function displayNotice( $repo, $id, $notice_params = [] ) {
+		$noticeId = $id;
+		if ( isset( $notice_params['noticeId'] ) ) {
+			$noticeId = $notice_params['noticeId'];
+		}
+		if ( ! call_user_func( $this->isDismissed, $repo, $noticeId ) ) {
+			$html = $this->messageTexts->get( $repo, $id, $notice_params );
 			if ( $html ) {
 				echo $html;
 			}
@@ -77,8 +91,13 @@ class Display {
 	}
 
 	public function addScripts() {
-		$installer = WP_Installer();
-		wp_enqueue_style( 'installer-admin-notices', $installer->res_url() . '/res/css/admin-notices.css', array(), $installer->version() );
+		$installer = OTGS_Installer();
+		wp_enqueue_style(
+			'installer-admin-notices',
+			$installer->res_url() . '/res/css/admin-notices.css',
+			[],
+			$installer->version()
+		);
 	}
 }
 

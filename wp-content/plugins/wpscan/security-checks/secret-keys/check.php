@@ -64,7 +64,7 @@ class secretKeys extends Check {
 
 		foreach ( $keys as $key ) {
 			if ( defined( $key ) && constant( $key ) === 'put your unique phrase here' ) {
-				$this->add_vulnerability( __( 'The ' . esc_html( $key ) . ' secret key in the wp-config.php file was the default key. It should be changed to a random value using', 'wpscan' ) . " <a href='https://api.wordpress.org/secret-key/1.1/salt/' target='_blank'>https://api.wordpress.org/secret-key/1.1/salt/</a>", 'high', sanitize_title( $key ) );
+				$this->add_vulnerability( __( 'The ' . esc_html( $key ) . ' secret key in the wp-config.php file was the default key. It should be changed to a random value using', 'wpscan' ) . " <a href='https://api.wordpress.org/secret-key/1.1/salt/' target='_blank'>https://api.wordpress.org/secret-key/1.1/salt/</a>.", 'high', sanitize_title( $key ), 'https://blog.wpscan.com/wordpress-secret-keys/' );
 			}
 		}
 	}

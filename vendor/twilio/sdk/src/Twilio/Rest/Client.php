@@ -27,9 +27,11 @@ use Twilio\VersionInfo;
  * @property Events $events
  * @property Fax $fax
  * @property FlexApi $flexApi
+ * @property FrontlineApi $frontlineApi
  * @property Insights $insights
  * @property IpMessaging $ipMessaging
  * @property Lookups $lookups
+ * @property Media $media
  * @property Messaging $messaging
  * @property Monitor $monitor
  * @property Notify $notify
@@ -108,6 +110,7 @@ class Client {
     protected $edge;
     protected $httpClient;
     protected $environment;
+    protected $userAgentExtensions;
     protected $logLevel;
     protected $_account;
     protected $_accounts;
@@ -118,9 +121,11 @@ class Client {
     protected $_events;
     protected $_fax;
     protected $_flexApi;
+    protected $_frontlineApi;
     protected $_insights;
     protected $_ipMessaging;
     protected $_lookups;
+    protected $_media;
     protected $_messaging;
     protected $_monitor;
     protected $_notify;
@@ -146,16 +151,17 @@ class Client {
      *
      * @param string $username Username to authenticate with
      * @param string $password Password to authenticate with
-     * @param string $accountSid Account Sid to authenticate with, defaults to
+     * @param string $accountSid Account SID to authenticate with, defaults to
      *                           $username
      * @param string $region Region to send requests to, defaults to 'us1' if Edge
      *                       provided
      * @param HttpClient $httpClient HttpClient, defaults to CurlClient
      * @param mixed[] $environment Environment to look for auth details, defaults
      *                             to $_ENV
+     * @param string[] $userAgentExtensions Additions to the user agent string
      * @throws ConfigurationException If valid authentication is not present
      */
-    public function __construct(string $username = null, string $password = null, string $accountSid = null, string $region = null, HttpClient $httpClient = null, array $environment = null) {
+    public function __construct(string $username = null, string $password = null, string $accountSid = null, string $region = null, HttpClient $httpClient = null, array $environment = null, array $userAgentExtensions = null) {
         $this->environment = $environment ?: \getenv();
 
         $this->username = $this->getArg($username, self::ENV_ACCOUNT_SID);
@@ -163,6 +169,7 @@ class Client {
         $this->region = $this->getArg($region, self::ENV_REGION);
         $this->edge = $this->getArg(null, self::ENV_EDGE);
         $this->logLevel = $this->getArg(null, self::ENV_LOG);
+        $this->userAgentExtensions = $userAgentExtensions ?: [];
 
         if (!$this->username || !$this->password) {
             throw new ConfigurationException('Credentials are required to create a Client');
@@ -216,8 +223,13 @@ class Client {
         $logLevel = (getenv('DEBUG_HTTP_TRAFFIC') === 'true' ? 'debug' : $this->getLogLevel());
 
         $headers['User-Agent'] = 'twilio-php/' . VersionInfo::string() .
-                                 ' (PHP ' . PHP_VERSION . ')';
+                                 ' (' . php_uname("s") . ' ' . php_uname("m") . ')' .
+                                 ' PHP/' . PHP_VERSION;
         $headers['Accept-Charset'] = 'utf-8';
+
+        if ($this->userAgentExtensions) {
+            $headers['User-Agent'] .= ' ' . implode(' ', $this->userAgentExtensions);
+        }
 
         if ($method === 'POST' && !\array_key_exists('Content-Type', $headers)) {
             $headers['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -714,6 +726,18 @@ class Client {
     }
 
     /**
+     * Access the FrontlineApi Twilio Domain
+     *
+     * @return FrontlineApi FrontlineApi Twilio Domain
+     */
+    protected function getFrontlineApi(): FrontlineApi {
+        if (!$this->_frontlineApi) {
+            $this->_frontlineApi = new FrontlineApi($this);
+        }
+        return $this->_frontlineApi;
+    }
+
+    /**
      * Access the Insights Twilio Domain
      *
      * @return Insights Insights Twilio Domain
@@ -747,6 +771,18 @@ class Client {
             $this->_lookups = new Lookups($this);
         }
         return $this->_lookups;
+    }
+
+    /**
+     * Access the Media Twilio Domain
+     *
+     * @return Media Media Twilio Domain
+     */
+    protected function getMedia(): Media {
+        if (!$this->_media) {
+            $this->_media = new Media($this);
+        }
+        return $this->_media;
     }
 
     /**

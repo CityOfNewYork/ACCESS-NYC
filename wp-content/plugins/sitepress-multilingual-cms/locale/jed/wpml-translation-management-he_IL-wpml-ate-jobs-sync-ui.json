@@ -1,0 +1,163 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "שליחה לתרגום"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "מתחבר לעורך התרגום המתקדם של WPML"
+         ],
+         "Try again": [
+            "נסה שוב"
+         ],
+         "You don't have the rights to review this language": [
+            "אין לך זכויות לבדיקת שפה זו"
+         ],
+         "pages & posts": [
+            "דפים ופוסטים"
+         ],
+         "left to translate": [
+            "נשארו לתרגום"
+         ],
+         "Translate on hold": [
+            "תרגום בהשהייה"
+         ],
+         "All translated": [
+            "הכל מתורגם"
+         ],
+         "%d translations left": [
+            "%d תרגומים נותרו"
+         ],
+         "Credits used:": [
+            "נקודות זכות שנעשה בהן שימוש:"
+         ],
+         "Credits left:": [
+            "נקודות זכות שנותרו:"
+         ],
+         "Calculating": [
+            "מחשב"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "יתרות נקודות זכות ששולמו מראש שמוקצות לאתר זה ב-WPML.org."
+         ],
+         "Prepaid credits left": [
+            "נקודות זכות ששולמו מראש שנותרו"
+         ],
+         "Account credits used": [
+            "נקודות זכות של החשבון שנעשה בהן שימוש"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "לאחר שתשתמש בכל נקודות הזכות ששולמו מראש, אנו נחייב אותך עבור כל נקות זכות נוספת שבה תשתמש אחרי סוף החודש."
+         ],
+         "Payment limit:": [
+            "מגבלת תשלום:"
+         ],
+         "%s credits": [
+            "%s נקודות זכות"
+         ],
+         "Preparing more content for translation": [
+            "מכין עוד תוכן לתרגום"
+         ],
+         "Preparing content for translation": [
+            "מכין תוכן לתרגום"
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "יש בעיה בתרגום האוטומטי שזקוקה לתשומת הלב שלך. תקן אותה כדי להמשיך."
+         ],
+         "%d translations waiting for review": [
+            "%d תרגומים ממתינים לבדיקה"
+         ],
+         "Draft — Pending review": [
+            "טיוטה - ממתינה לבדיקה"
+         ],
+         "Complete": [
+            "הושלם"
+         ],
+         "Insufficient funds": [
+            "אין מספיק כסף"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "ניתן למצוא מידע נוסף אודות תרגום התוכן שלך ב<a>מדריך לתחילת העבודה</a>"
+         ],
+         "Let's Start Translating!": [
+            "הבה נתחיל לתרגם!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "בחר את התוכן שלך מ'לוח הבקרה של התרגום' להלן וצור את משימת התרגום הראשונה שלך!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "שנה את <a>הגדרות התרגום האוטומטי</a> (משימות תרגום בביצוע יושלמו עם ההגדרות הנוכחיות)."
+         ],
+         "Read more about translating your site automatically.": [
+            "מידע נוסף אודות תרגום האתר שלך באופן אוטומטי."
+         ],
+         "Your site is being automatically translated!": [
+            "האתר שלך מתורגם באופן אוטומטי!"
+         ],
+         "Automatic Translation Status": [
+            "סטטוס תרגום אוטומטי"
+         ],
+         "Calculating...": [
+            "מחשב..."
+         ],
+         "Do not close WP admin!": [
+            "אלתסגור את WP admin!"
+         ],
+         "The number of translations": [
+            "מספר התרגומים"
+         ],
+         "Delete Translations": [
+            "מחק תרגומים"
+         ],
+         "Keep Translations as Draft": [
+            "שמור תרגומים כטיוטות"
+         ],
+         "Never mind. I want to review these translations.": [
+            "לא חשוב. אני רוצה לבדוק תרגומים אלו."
+         ],
+         "Cancel": [
+            "בטל"
+         ],
+         "You haven't selected any jobs that need review.": [
+            "לא בחרת תרגומים שצריכים בדיקה."
+         ],
+         "Please select the pending review jobs to abort.": [
+            "בחר את משימות הבדיקה הממתינות שיש להפסיק."
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "פעולה זו תסיר את המשימות שנבחרו מ'תור התרגומים' מבלי לפרסם אותן. מה תרצה לעשות עם התרגומים?"
+         ],
+         "Cancel Translation Review": [
+            "בטל בדיקת תרגום"
+         ],
+         "Edit": [
+            "ערוך"
+         ],
+         "Updating": [
+            "מעדכן"
+         ],
+         "Translate": [
+            "תרגם"
+         ],
+         "Take and translate": [
+            "קח ותרגם"
+         ],
+         "Review": [
+            "בדיקה"
+         ],
+         "Are you sure you want to resign from this job?": [
+            "האם אתה בטוח שאתה רוצה להתפטר ממשימה זו?"
+         ],
+         "Resign": [
+            "התפטר"
+         ],
+         "View": [
+            "צפה"
+         ]
+      }
+   }
+}

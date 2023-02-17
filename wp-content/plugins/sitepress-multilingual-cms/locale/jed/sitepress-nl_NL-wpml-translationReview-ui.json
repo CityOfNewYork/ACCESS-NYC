@@ -1,0 +1,40 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Accepted": [
+            "Goedgekeurd"
+         ],
+         "Reviewing the next translation...": [
+            "De volgende vertaling controleren..."
+         ],
+         "Back": [
+            "Terug"
+         ],
+         "Edit Translation": [
+            "Vertaling bewerken"
+         ],
+         "There was an error in applying translation.": [
+            "Er was een fout bij het aanvragen van de vertaling."
+         ],
+         "Please wait, applying translation..": [
+            "Even geduld, vertaling aanvragen..."
+         ],
+         "Publish this translation": [
+            "Publiceer deze vertaling"
+         ],
+         "Accept this translation": [
+            "Accepteer deze vertaling"
+         ],
+         "Approved!": [
+            "Goedgekeurd!"
+         ],
+         "Loading the next translation for review...": [
+            "Laadt de volgende vertaling voor controle..."
+         ]
+      }
+   }
+}

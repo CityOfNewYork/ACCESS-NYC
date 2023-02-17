@@ -332,8 +332,6 @@ class WPML_Mobile_Detect {
      * don't necessary imply mobile.
      *
      * This method is used inside the new $detect->is('stuff') method.
-     *
-     * @return bool
      */
     public function setMobileDetectionRulesExtended(){
 
@@ -406,7 +404,6 @@ class WPML_Mobile_Detect {
     /**
      * Magic overloading method.
      *
-     * @method boolean is[...]()
      * @param string $name
      * @param array $arguments
      * @return mixed
@@ -513,12 +510,14 @@ class WPML_Mobile_Detect {
     /**
      * This method checks for a certain property in the
      * userAgent.
+     *
+     * @param string $key
+     * @param string $userAgent   deprecated
+     * @param string $httpHeaders deprecated
+     *
+     * @return bool|int|null
      * @todo: The httpHeaders part is not yet used.
      *
-     * @param $key
-     * @param string $userAgent deprecated
-     * @param string $httpHeaders deprecated
-     * @return bool|int|null
      */
     public function is($key, $userAgent = null, $httpHeaders = null){
 
@@ -529,41 +528,42 @@ class WPML_Mobile_Detect {
 
         $this->setDetectionType('extended');
 
-        return $this->matchUAAgainstKey($key);
+	    return $this->matchUAAgainstKey( $key );
 
     }
 
-    public function getOperatingSystems(){
+	public function getOperatingSystems() {
 
-        return $this->operatingSystems;
+		return $this->operatingSystems;
 
-    }
+	}
 
-    /**
-     * Some detection rules are relative (not standard),
-     * because of the diversity of devices, vendors and
-     * their conventions in representing the User-Agent or
-     * the HTTP headers.
-     *
-     * This method will be used to check custom regexes against
-     * the User-Agent string.
-     *
-     * @param $regex
-     * @param string $userAgent
-     * @return bool
-     *
-     * @todo: search in the HTTP headers too.
-     */
-    function match($regex, $userAgent=null){
+	/**
+	 * Some detection rules are relative (not standard),
+	 * because of the diversity of devices, vendors and
+	 * their conventions in representing the User-Agent or
+	 * the HTTP headers.
+	 *
+	 * This method will be used to check custom regexes against
+	 * the User-Agent string.
+	 *
+	 * @param string $regex
+	 * @param string $userAgent
+	 *
+	 * @return bool
+	 *
+	 * @todo: search in the HTTP headers too.
+	 */
+	function match( $regex, $userAgent = null ) {
 
-        // Escape the special character which is the delimiter.
-        $regex = str_replace('/', '\/', $regex);
+		// Escape the special character which is the delimiter.
+		$regex = str_replace( '/', '\/', $regex );
 
-        return (bool)preg_match('/'.$regex.'/is', (!empty($userAgent) ? $userAgent : $this->userAgent));
+		return (bool) preg_match( '/' . $regex . '/is', ( ! empty( $userAgent ) ? $userAgent : $this->userAgent ) );
 
-    }
+	}
 
-    /**
+	/**
      * Get the properties array.
      * @return array
      */
@@ -573,12 +573,13 @@ class WPML_Mobile_Detect {
 
     }
 
-    /**
-     * Prepare the version number.
-     *
-     * @param $ver
-     * @return int
-     */
+	/**
+	 * Prepare the version number.
+	 *
+	 * @param string $ver
+	 *
+	 * @return int
+	 */
     function prepareVersionNo($ver){
 
         $ver = str_replace(array('_', ' ', '/'), array('.', '.', '.'), $ver);

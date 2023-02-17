@@ -67,7 +67,6 @@ class WPML_Upgrade {
 		 *
 		 * @since 4.1.0
 		 * @see   \wpml_create_upgrade_command_definition
-		 *
 		 */
 		$new_commands = apply_filters( 'wpml_upgrade_commands', array() );
 		if ( $new_commands && is_array( $new_commands ) ) {

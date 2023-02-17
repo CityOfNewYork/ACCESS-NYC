@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: REST Prepare Posts
- * Description: Filter to modify the contents of posts called by the WP REST API. Currenlty modifies "Programs" only.
+ * Description: Filter to modify the contents of posts called by the WP REST API. Currently modifies "Programs" only.
  * Author: NYC Opportunity
  */
 

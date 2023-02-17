@@ -6,47 +6,31 @@ use Twilio\Rest\Client;
 use Twilio\Exceptions\RestException as TwilioErr;
 
 class SmsMe extends ContactMe {
-  protected $action = 'SMS';
+  public $action = 'SMS';
 
-  protected $service = 'Twilio';
+  public $action_label = 'SMS';
 
-  protected $account_label = 'Account SID';
+  public $service = 'Twilio';
 
-  protected $secret_sid = 'API Key SID';
+  public $type = 'SMS';
 
-  protected $secret_label = 'API Key Secret';
+  public $account_label = 'Account SID';
 
-  protected $from_label = 'Sender Phone Number';
+  public $secret_sid = 'API Key SID';
 
-  protected $account_hint = 'EXAMPLEAC43fceec9fb0836fff217f4b4f';
+  public $secret_label = 'API Key Secret';
 
-  protected $secret_hint = 'EXAMPLE2674d4ec2a325a63cbcc63d25';
+  public $from_label = 'Sender Phone Number';
 
-  protected $from_hint = '+15551230789';
+  public $post_type = 'smnyc-sms';
 
-  protected $prefix = 'smnyc_twilio';
+  public $post_type_label = 'SMNYC SMS';
 
-  const POST_TYPE = 'smnyc-sms';
+  public $post_type_description = 'SMS content for Send Me NYC';
 
-  /**
-   * Register post type for email content
-   */
-  public function registerPostType() {
-    register_post_type(self::POST_TYPE, array(
-      'label' => __('SMNYC SMS', 'text_domain'),
-      'description' => __('SMS content for Send Me NYC', 'text_domain'),
-      'labels' => array(
-        'name' => _x('SMNYC SMS', 'Post Type General Name', 'text_domain'),
-        'singular_name' => _x('SMNYC SMS', 'Post Type Singular Name', 'text_domain'),
-      ),
-      'hierarchical' => false,
-      'public' => true,
-      'show_ui' => true,
-      'show_in_rest' => true,
-      'has_archive' => false,
-      'exclude_from_search' => true
-    ));
-  }
+  public $post_type_name = 'SMNYC SMS';
+
+  public $post_type_name_singular = 'SMNYC SMS';
 
   /**
    * Get the content of the email to send.
@@ -60,13 +44,13 @@ class SmsMe extends ContactMe {
    */
   protected function content($url_shortened, $url, $share_text, $template, $lang) {
     // Get post and filter ID through WPML
-    $post = get_page_by_path($template, OBJECT, self::POST_TYPE);
+    $post = get_page_by_path($template, OBJECT, $this->post_type);
 
     $id = $post->ID;
 
     // Filter ID through WPML. Need to add conditionals for WPML or admin notice
     if ($lang !== 'en') {
-      $id = apply_filters('wpml_object_id', $post->ID, self::POST_TYPE, true, $lang);
+      $id = apply_filters('wpml_object_id', $post->ID, $this->post_type, true, $lang);
     }
 
     // Get content and replace template tag with bitly url
@@ -86,15 +70,22 @@ class SmsMe extends ContactMe {
    */
   protected function send($to, $msg) {
     try {
-      $user = get_option('smnyc_twilio_user');
-      $apiKeySid = get_option('smnyc_twilio_api_key_sid');
-      $apiKeySecret = get_option('smnyc_twilio_api_key_secret');
-      $from = get_option('smnyc_twilio_from');
+      $user = get_option($this->info()['option_prefix'] . 'user');
+      $apiKeySid = get_option($this->info()['option_prefix'] . 'api_key_sid');
+      $apiKeySecret = get_option($this->info()['option_prefix'] . 'api_key_secret');
+      $from = get_option($this->info()['option_prefix'] . 'from');
 
-      $user = (!empty($user)) ? $user : SMNYC_TWILIO_USER;
-      $apiKeySid = (!empty($apiKeySid)) ? $apiKeySid : SMNYC_TWILIO_API_KEY_SID;
-      $apiKeySecret = (!empty($apiKeySecret)) ? $apiKeySecret : SMNYC_TWILIO_API_KEY_SECRET;
-      $from = (!empty($from)) ? $from : SMNYC_TWILIO_FROM;
+      $user = (!empty($user))
+        ? $user : constant($this->info()['constant_prefix'] . 'USER');
+
+      $apiKeySid = (!empty($apiKeySid))
+        ? $apiKeySid : constant($this->info()['constant_prefix'] . 'API_KEY_SID');
+
+      $apiKeySecret = (!empty($apiKeySecret))
+        ? $apiKeySecret : constant($this->info()['constant_prefix'] . 'API_KEY_SECRET');
+
+      $from = (!empty($from))
+        ? $from : constant($this->info()['constant_prefix'] . 'FROM');
 
       $client = new Client($apiKeySid, $apiKeySecret, $user);
 
@@ -210,18 +201,16 @@ class SmsMe extends ContactMe {
   public function createSettingsSection() {
     parent::createSettingsSection();
 
-    $section = $this->prefix . '_section';
-
     $this->registerSetting(array(
-      'id' => $this->prefix . '_api_key_sid',
+      'id' => $this->info()['option_prefix'] . 'api_key_sid',
       'title' => $this->secret_sid,
-      'section' => $section
+      'section' => $this->info()['settings_section']
     ));
 
     $this->registerSetting(array(
-      'id' => $this->prefix . '_api_key_secret',
+      'id' => $this->info()['option_prefix'] . 'api_key_secret',
       'title' => $this->secret_label,
-      'section' => $section,
+      'section' => $this->info()['settings_section'],
       'private' => true
     ));
   }

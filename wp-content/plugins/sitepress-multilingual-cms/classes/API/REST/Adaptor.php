@@ -10,7 +10,7 @@ class Adaptor extends \WPML_REST_Base {
 	private $target;
 
 	public function set_target( ITarget $target ) {
-		$this->target = $target;
+		$this->target    = $target;
 		$this->namespace = $target->get_namespace();
 	}
 

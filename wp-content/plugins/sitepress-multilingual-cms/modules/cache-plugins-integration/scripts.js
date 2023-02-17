@@ -1,12 +1,12 @@
-jQuery(document).ready(function(){
-    jQuery('#wpml_cpi_options :radio').change(function(){
+jQuery(function () {
+    jQuery('#wpml_cpi_options :radio').change(function () {
         var thisr = jQuery(this);
         jQuery.ajax({
-                type: "POST",
-                url: icl_ajx_url,
-                data: "icl_ajx_action=wpml_cpi_options&automatic=" + thisr.val()
-            });        
-        
+                        type: "POST",
+                        url : icl_ajx_url,
+                        data: "icl_ajx_action=wpml_cpi_options&automatic=" + thisr.val()
+                    });
+
     });
     
     jQuery('#wpml_cpi_clear_cache').click(function(){

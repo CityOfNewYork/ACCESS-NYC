@@ -33,13 +33,14 @@ class OTGS_Installer_Repositories {
 
 			$setting_repositories = $this->installer->get_repositories();
 
+			$api_url = isset($setting_repositories[ $id ]['api-url']) ? $setting_repositories[ $id ]['api-url'] : null;
 			$packages             = $this->get_packages( $repository );
 			$repositories[] = $this->repository_factory->create_repository( array(
 					'id'            => $id,
 					'subscription'  => $subscription,
 					'packages'      => $packages,
 					'product_name'  => $repository['data']['product-name'],
-					'api_url'       => $setting_repositories[ $id ]['api-url'],
+					'api_url'       => $api_url
 				)
 			);
 		}
@@ -69,10 +70,10 @@ class OTGS_Installer_Repositories {
 	}
 
 	private function get_products( $package ) {
-		$products = array();
+		$products = [];
 
 		foreach ( $package['products'] as $product_key => $product ) {
-			$products[] = $this->repository_factory->create_product( array(
+			$products[] = $this->repository_factory->create_product( [
 				'id'                           => $product_key,
 				'name'                         => $product['name'],
 				'description'                  => $product['description'],
@@ -86,7 +87,7 @@ class OTGS_Installer_Repositories {
 				'upgrades'                     => $product['upgrades'],
 				'plugins'                      => $product['plugins'],
 				'downloads'                    => $product['downloads'],
-			) );
+			] );
 		}
 
 		return $products;
@@ -118,11 +119,14 @@ class OTGS_Installer_Repositories {
 		if ( $subscription ) {
 			$this->installer->settings['repositories'][ $repository->get_id() ]['subscription'] = array(
 				'key'           => $subscription->get_site_key(),
+				'key_type'      => $subscription->get_site_key_type(),
 				'data'          => $subscription->get_data(),
 				'registered_by' => $subscription->get_registered_by(),
 				'site_url'      => $subscription->get_site_url(),
 			);
 		}
+		$actualSiteUrl = $this->installer->get_installer_site_url( $repository->get_id() );
+		$this->installer->settings['repositories'][ $repository->get_id() ]['site_key_url'] = $actualSiteUrl;
 
 		$this->installer->save_settings();
 	}

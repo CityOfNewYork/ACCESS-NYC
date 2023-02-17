@@ -3,7 +3,7 @@
  * Plugin Name:   WPScan
  * Plugin URI:    http://wordpress.org/plugins/wpscan/
  * Description:   WPScan WordPress Security Scanner. Scans your system for security vulnerabilities listed in the WPScan Vulnerability Database.
- * Version:       1.13.2
+ * Version:       1.15.5
  * Author:        WPScan Team
  * Author URI:    https://wpscan.com/
  * License:       GPLv3
@@ -21,6 +21,9 @@ define( 'WPSCAN_STATUS_URL', 'https://status.wpscan.com/' );
 define( 'WPSCAN_PROFILE_URL', 'https://wpscan.com/profile' );
 define( 'WPSCAN_PLUGIN_FILE', __FILE__ );
 
+// Action Scheduler library load.
+require_once( plugin_dir_path( WPSCAN_PLUGIN_FILE ) . '/libraries/action-scheduler/action-scheduler.php' );
+
 // Composer autoload.
 require plugin_dir_path( WPSCAN_PLUGIN_FILE ) . 'vendor/autoload.php';
 
@@ -32,3 +35,4 @@ register_activation_hook( WPSCAN_PLUGIN_FILE, array( $wpscan, 'activate' ) );
 
 // Deactivating.
 register_deactivation_hook( WPSCAN_PLUGIN_FILE, array( $wpscan, 'deactivate' ) );
+
