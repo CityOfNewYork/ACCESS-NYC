@@ -201,8 +201,8 @@ class Wp_Bitly {
                 $this->loader->add_action( 'wp_ajax_get_org_options', $plugin_settings, 'get_org_options' );
 		
 		//these functions are used to automatically get the shortlink for a post on save and in the shortcode
-		$this->loader->add_action('save_post',$plugin_shortlink,'wpbitly_get_shortlink', 20, 2); //this was removed in prior versions, but reintroduced here, pre_get_shortlink was not firing
-		$this->loader->add_filter('pre_get_shortlink',$plugin_shortlink,'wpbitly_get_shortlink', 20, 2);
+		$this->loader->add_action('save_post',$plugin_shortlink,'wpbitly_get_shortlink', 20, 2);
+		// $this->loader->add_filter('pre_get_shortlink',$plugin_shortlink,'wpbitly_get_shortlink', 20, 2);
 
 		//register shortcode
 		$this->loader->add_action( 'init', $plugin_shortlink, 'wpbitly_register_shortlink' );

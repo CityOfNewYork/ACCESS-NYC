@@ -87,12 +87,12 @@ class Wp_Bitly_Shortlink {
 	    $permalink = get_permalink($post_id);
 	    $shortlink = get_post_meta($post_id, '_wpbitly', true);
 	    $token = $this->wp_bitly_options->get_option('oauth_token');
-            $default_domain = $this->wp_bitly_options->get_option('default_domain');
-            $default_group = $this->wp_bitly_options->get_option('default_group');
+		$default_domain = $this->wp_bitly_options->get_option('default_domain');
+		$default_group = $this->wp_bitly_options->get_option('default_group');
 
 	    if (!empty($shortlink) && !$bypass) {
 	        $url = $this->wp_bitly_api->wpbitly_api('expand');
-                $data = array("bitlink_id" => $shortlink);
+			$data = array("bitlink_id" => $shortlink);
 	        $response = $this->wp_bitly_api->wpbitly_post($url,$token,$data);
 
 	        $this->wp_bitly_logger->wpbitly_debug_log($response, '/expand/');
@@ -113,6 +113,7 @@ class Wp_Bitly_Shortlink {
             }
             
 	    $response = $this->wp_bitly_api->wpbitly_post($url,$token,$options);
+		if (!$response || empty($response)) $response = $this->wp_bitly_api->wpbitly_post($url,$token,$options);
 
 	    $this->wp_bitly_logger->wpbitly_debug_log($response, '/shorten/');
 
@@ -121,7 +122,7 @@ class Wp_Bitly_Shortlink {
 	        update_post_meta($post_id, '_wpbitly', $shortlink);
 	    }
 
-	    return ($shortlink) ? $shortlink : false;
+	    return $shortlink ?: false;
 	}
 
 	/**
@@ -171,10 +172,15 @@ class Wp_Bitly_Shortlink {
 	        if (!$shortlink && (in_array(get_post_type($post_id), $this->wp_bitly_options->get_option('post_types')) || $force)) {
                     
 	            $shortlink = $this->wpbitly_generate_shortlink($post_id);
+
+				if ($shortlink && !get_post_meta($post_id, '_wpbitly', true)) {
+					update_post_meta($post_id, '_wpbitly', $shortlink);
+				}
+
 	        }
 	    }
 
-	    return ($shortlink) ? $shortlink : $original;
+	    return $shortlink ?: $original;
 	}
 
 	/**
@@ -239,3 +245,4 @@ class Wp_Bitly_Shortlink {
 	
 
 }
+
