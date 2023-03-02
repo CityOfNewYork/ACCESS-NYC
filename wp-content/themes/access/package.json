@@ -1,6 +1,6 @@
 {
   "name": "access-nyc",
-  "version": "3.33.6",
+  "version": "3.33.7",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "repository": {
     "type": "git",
@@ -65,7 +65,7 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-svgmin": "^3.0.0",
     "gulp-svgstore": "^7.0.1",
-    "string-replace-loader": "^2.3.0",
+    "string-replace-loader": "^3.1.0",
     "vinyl-named": "^1.1.0",
     "vue-loader": "^15.9.3",
     "vue-template-compiler": "^2.6.12",
@@ -81,6 +81,7 @@
     "es6-promise": "^4.2.5",
     "jquery": "^3.5.1",
     "underscore": "^1.13.3",
+    "webpack": "^5.75.0",
     "whatwg-fetch": "^3.0.0"
   }
 }
