@@ -1,6 +1,6 @@
 {
   "name": "access-nyc",
-  "version": "3.33.7",
+  "version": "3.33.8",
   "description": "Find help in NYC with food, money, housing, work and more on ACCESS NYC",
   "repository": {
     "type": "git",
@@ -81,7 +81,6 @@
     "es6-promise": "^4.2.5",
     "jquery": "^3.5.1",
     "underscore": "^1.13.3",
-    "webpack": "^5.75.0",
     "whatwg-fetch": "^3.0.0"
   }
 }
