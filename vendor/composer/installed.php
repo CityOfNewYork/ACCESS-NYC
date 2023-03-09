@@ -1,8 +1,8 @@
 <?php return array(
     'root' => array(
         'name' => 'nyco/access-nyc',
-        'pretty_version' => '3.33.8',
-        'version' => '3.33.8.0',
+        'pretty_version' => '3.33.9',
+        'version' => '3.33.9.0',
         'reference' => NULL,
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
@@ -191,8 +191,8 @@
             'dev_requirement' => false,
         ),
         'nyco/access-nyc' => array(
-            'pretty_version' => '3.33.8',
-            'version' => '3.33.8.0',
+            'pretty_version' => '3.33.9',
+            'version' => '3.33.9.0',
             'reference' => NULL,
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
@@ -668,8 +668,8 @@
             'dev_requirement' => false,
         ),
         'wpackagist-plugin/wp-bitly' => array(
-            'pretty_version' => '2.7.1',
-            'version' => '2.7.1.0',
+            'pretty_version' => '2.5.2',
+            'version' => '2.5.2.0',
             'reference' => 'trunk',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../wp-content/plugins/wp-bitly',

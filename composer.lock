@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a23a99b32e9b6be2232cafa915797c8",
+    "content-hash": "d6a3a9c1e2f8e85207c8fc00a647808c",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -3374,7 +3374,7 @@
         },
         {
             "name": "wpackagist-plugin/wp-bitly",
-            "version": "2.7.1",
+            "version": "2.5.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-bitly/",
@@ -3382,7 +3382,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-bitly.zip?timestamp=1659956489"
+                "url": "https://downloads.wordpress.org/plugin/wp-bitly.2.5.2.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

@@ -1,0 +1,8 @@
+# OS or Editor folders
+Thumbs.db
+.DS_Store
+.idea
+
+# Folders to ignore
+node_modules
+/log/debug.txt

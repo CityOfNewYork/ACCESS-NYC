@@ -1,0 +1,67 @@
+#wpbitly-meta .inside {
+  padding: 0;
+}
+
+#wpbitly-meta .inside p.error {
+  padding: 0 10px;
+}
+
+#wpbitly-actions {
+  padding: 10px;
+  clear: both;
+  border-top: 1px solid #ddd;
+  background: #f5f5f5;
+}
+
+#regenerate-action {
+  float: left;
+  line-height: 28px;
+}
+
+#getshortlink-action {
+  text-align: right;
+  float: right;
+  line-height: 23px;
+}
+
+.regeneratelink {
+  color: #a00;
+
+  &:hover {
+    color: #dc3232;
+    border: none;
+  }
+}
+
+.wpbitly-clicks {
+  margin: 1.6em 0 0;
+
+  p {
+    margin: 0 0 .35em;
+    font-size: 1.4em;
+    font-weight: 400;
+    text-align: center;
+
+    &:first-child {
+      font-size: 1.5em;
+    }
+
+    span {
+      color: #0073aa;
+    }
+  }
+}
+
+
+.wpbitly-spacer {
+  margin: 1.5em auto;
+
+  width: 35%;
+
+  border-bottom: 1px solid #dedede;
+}
+
+#wpbitly-meta h4 {
+  font-weight: 300;
+  text-align: center;
+}
