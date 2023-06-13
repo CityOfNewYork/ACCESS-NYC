@@ -370,6 +370,9 @@ if ( ! function_exists( 'wp_mail' ) ) :
 		}
 
 		/*
+		 * New: 
+		 * If we don't have an email from the input headers, default to wordpress@mail1.wpengine.com
+		 * Previously:
 		 * If we don't have an email from the input headers, default to wordpress@$sitename
 		 * Some hosts will block outgoing mail from this address if it doesn't exist,
 		 * but there's no easy alternative. Defaulting to admin_email might appear to be
@@ -377,13 +380,16 @@ if ( ! function_exists( 'wp_mail' ) ) :
 		 * See https://core.trac.wordpress.org/ticket/5007.
 		 */
 		if ( ! isset( $from_email ) ) {
-			// Get the site domain and get rid of www.
-			$sitename = wp_parse_url( network_home_url(), PHP_URL_HOST );
-			if ( 'www.' === substr( $sitename, 0, 4 ) ) {
-				$sitename = substr( $sitename, 4 );
-			}
+			// Below this line is the standard code - replacing it with mail1.wpengine.com to see if it passes email verification
+			$from_email = 'wordpress@mail1.wpengine.com';
 
-			$from_email = 'wordpress@' . $sitename;
+			// // Get the site domain and get rid of www.
+			// $sitename = wp_parse_url( network_home_url(), PHP_URL_HOST );
+			// if ( 'www.' === substr( $sitename, 0, 4 ) ) {
+			// 	$sitename = substr( $sitename, 4 );
+			// }
+
+			// $from_email = 'wordpress@' . $sitename;
 		}
 
 		/**
