@@ -380,7 +380,8 @@ if ( ! function_exists( 'wp_mail' ) ) :
 		 * See https://core.trac.wordpress.org/ticket/5007.
 		 */
 		if ( ! isset( $from_email ) ) {
-			// Below this line is the standard code - replacing it with mail1.wpengine.com to see if it passes email verification
+			// Below this line is the standard code - replacing it with mail1.wpengine.com in order to pass email verification,
+			// since mail1.wpengine.com is the real sender
 			$from_email = 'wordpress@mail1.wpengine.com';
 
 			// // Get the site domain and get rid of www.
