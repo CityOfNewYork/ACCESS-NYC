@@ -3852,8 +3852,8 @@
         },
         {
             "name": "wpackagist-plugin/wp-bitly",
-            "version": "2.5.2",
-            "version_normalized": "2.5.2.0",
+            "version": "2.7.1",
+            "version_normalized": "2.7.1.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-bitly/",
@@ -3861,7 +3861,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-bitly.2.5.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-bitly.zip?timestamp=1659956489"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

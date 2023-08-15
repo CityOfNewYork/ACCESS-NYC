@@ -668,8 +668,8 @@
             'dev_requirement' => false,
         ),
         'wpackagist-plugin/wp-bitly' => array(
-            'pretty_version' => '2.5.2',
-            'version' => '2.5.2.0',
+            'pretty_version' => '2.7.1',
+            'version' => '2.7.1.0',
             'reference' => 'trunk',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../wp-content/plugins/wp-bitly',

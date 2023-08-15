@@ -1,69 +1,69 @@
-=== WP Bitly ===
-Contributors: temeritystudios, chipbennett
+=== Bitly's Wordpress Plugin ===
+Contributors: clint.s, Kelseystevensonbitly
+Donate link: https://watermelonwebworks.com
 Tags: shortlink, bitly, url, shortener, custom domain, social, media, twitter, facebook, share
-Requires at least: 4.5
-Tested up to: 4.9.4
-Requires PHP: 5.2.4
-Stable tag:  2.5.2
-License: GPLv2
+Requires at least: 5.0
+Tested up to: 6.0.1
+Stable tag: 2.7.1
+License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Use Bitly generated shortlinks for all your WordPress posts and pages, including custom post types.
+Create short links to your content with Bitly’s WordPress Plugin.
 
 == Description ==
 
-Love WordPress? Love Bitly? What if you could access an interface between both? Now, you can. WP-bitly allows WordPress users to quickly and easily generate shortlinks for any page, post or custom post type.
+Love WordPress? Love Bitly? After installing this plugin, you’ll be able to shorten a link and view clicks right from WordPress. Your new links will be saved to Bitly for reference and deeper analysis.
 
-What’s more, these shortlinks may also be embedded using a php function or a WordPress shortcode. No matter the type of site you own (from a personal blog to an ecommerce store and everything in between) WP-bitly makes it easy to share your links as and when you please.
+*To do that, you must have a Bitly account to use the plugin. Your account is where you store, edit, and view metrics for your links. Register at bitly.com.*
 
-Getting started is easy as pie. Simply install the plugin, visit the settings page, and authorize with your Bitly account. Pick the post types you want shortlinks generated for, and voila! You’re ready to start sharing posts with speed and ease.
-
-After all, texting a shortlink is far simpler and quicker than texting the full URL.
-
-**PS:** *WP Bitly also offers insights into the way in which your links do the rounds. Who’s clicking? Who’s sharing? With WP-bitly, you’ll always know.*
+No matter the type of site you own (from a personal blog to an ecommerce store and everything in between) Bitly makes it easy to create shorter links and keep an eye on your clicks. Whether you share your links on social, SMS, or email, a short link is easier to manage and remember.  
 
 == Installation ==
+# Installing the plugin
 
-1. From the *Dashboard* navigate to *Plugins >> Add New*
-2. Enter "WP Bitly" in the search field
-3. Select *Install Now*, click *OK* and finally *Activate Plugin*
-4. This will return you to the WordPress Plugins page. Find WP Bitly in the list and click the *Settings* link to configure.
-5. Authenticate with Bitly, select the post types you'd like to use shortlinks with, and you're done!
+You must have a Bitly account to connect to. You can create one at bitly.com. Your account is where you store, edit, and view metrics for your links.
+If you're familiar with adding a plugin to WordPress directly, you can download the ZIP file and upload it to /wp-content/plugins/ after step 2. Otherwise, follow these steps:
+1. Go to your WordPress plugins settings.
+2. Click Add New.
+3. Search for Bitly's WordPress Plugin.
+4. Click Install Now.
+5. Click Activate.
+6. Scroll down the list of your installed plugins, find 
+Bitly, and click Settings.
+7. Now you'll connect the plugin to your Bitly account. Scroll down to Bitly's WordPress Plugin and click Authorize.
+8. Sign in to Bitly, if necessary, and click Allow. The plugin will retrieve an authorization from Bitly and update the Bitly OAuth Token field.
+9. Scroll down and click Save Changes.
+10. Select which types of entries you'll be creating short links for.
+11. If your Bitly account has more than one group, select a group. This is the group where your short links will be saved in Bitly.
+12. If your Bitly account has more than one custom domain, select a domain. This is the domain that will be used for your short links.
+13. Click Save Changes.
+
+Now you can shorten links when you create a new post!
+
+# Creating a short link
+
+After publishing a page or post, you’ll see the Bitly's Wordpress Plugin option in the settings. Click Get Shortlink to create a link to the current content. The link will be saved in your Bitly account, and you’ll be able to view the number of clicks it receives right from this setting.
+
+# Viewing a link’s click data
+
+Click metrics for a short link will appear in the post’s or page’s settings. They include the number of clicks today, the total number clicks over time, and a graph of the number of clicks over the last 7 days.
 
 == Frequently Asked Questions ==
 
 = After installation, do I need to update all my posts for short links to be created? =
 
-No. The first time a shortlink is requested for a particular post, WP Bitly will automatically generate one.
-
-= What happens if I change a posts permalink? =
-
-WP Bitly verifies all shortlink requests against Bitly. If the URL has changed it will see this and request a new shortlink.
-
-= Can I include the shortlink directly in a post? =
-
-The shortcode `[wpbitly]` accepts all the same arguments as the_shortlink(). You can also set a "post_id" directly if you wish.
-
-= How do I include a shortlink using PHP? =
-
-Return a shortlink for the current post:
-`wpbitly_shortlink();`
-
-Returns a shortlink for the specified post ID:
-`wpbitly_shortlink(42);`
-
-== Screenshots ==
-
-1. Straight forward settings page, authorize the plugin and choose your post types.
-2. The new and improved statistics metabox found on any post that has an attached shortlink.
-
-== Upgrade Notice ==
-
-= 2.5.2 =
-2.5.x adds ability to regenerate shortlinks, new metabox and fixes a variety of php warnings.
+No. The first time a short link is requested for a particular post, the plugin will automatically generate one.
 
 == Changelog ==
-
+= 2.7.1 =
+* Updated to prevent short link generation when a post is viewed on the fronted, or edited (but not re-saved) on the backend.
+= 2.7.0 =
+* Updated to prevent short link (re)generation when bulk-editing posts.
+* Added placeholder message to Bitly metabox when creating new post.
+* Fixed issue where "Default Organization" field displayed incorrect value after configuration change.
+* Various additional minor fixes.
+= 2.6.0 =
+* Completely rebuilt for use with Bitly API version 4.
 = 2.5.2 =
 * Fixes various php warnings produced by assuming $post
 * Better response handling for wpbitly_get()
