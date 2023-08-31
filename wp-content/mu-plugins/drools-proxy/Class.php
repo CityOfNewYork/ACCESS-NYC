@@ -23,6 +23,8 @@ class DroolsProxy {
     $user = (!empty($user)) ? $user : DROOLS_USER;
     $pass = (!empty($pass)) ? $pass : DROOLS_PASS;
 
+    $this->notify(__('Test notify URL') . $url);
+
     if (empty($url) || empty($user) || empty($pass)) {
       $this->notify(__('The configuration is missing information.'), true);
 
