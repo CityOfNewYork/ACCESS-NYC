@@ -23,7 +23,7 @@ class DroolsProxy {
     $user = (!empty($user)) ? $user : DROOLS_USER;
     $pass = (!empty($pass)) ? $pass : DROOLS_PASS;
 
-    $this->notify(__('Test notify URL') . $url);
+    $this->notify(__('Test notify URL: ') . $url);
 
     if (empty($url) || empty($user) || empty($pass)) {
       $this->notify(__('The configuration is missing information.'), true);
@@ -93,6 +93,8 @@ class DroolsProxy {
         "Content-Length: " . strlen($data)
       ]
     ]);
+
+    $this->notify(__('Test notify CURL params: ') . print_r($ch, true));
 
     $response = curl_exec($ch);
 
