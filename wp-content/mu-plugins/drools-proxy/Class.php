@@ -94,11 +94,14 @@ class DroolsProxy {
       ]
     ]);
 
-    $this->notify(__('Test notify CURL params: ') . print_r($ch, true));
+    $this->notify(__('Test notify CURL URL: ') . print_r($url, true));
+    $this->notify(__('Test notify CURL data: ') . print_r($data, true));
 
     $response = curl_exec($ch);
 
     $code = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+
+    $this->notify(__('Test notify CURL response code: ') . print_r($code, true));
 
     if ($code >= 400) {
       $this->notify(__('The request failed, response code ') . $code  . '.', true);
