@@ -104,7 +104,7 @@
         {{ __('We can send you a link to this page to help you get back to it when you’re ready.', 'accessnyc-program-detail') }}</p>
 
         <div class="layout-gutter screen-tablet:layout-columns-gutter">
-          {# {% include 'components/share-form.twig' with {this: {
+          {% include 'components/share-form.twig' with {this: {
             type: 'tel',
             button: __('Text', 'accessnyc-program-detail'),
             placeholder: __('Phone Number', 'accessnyc-program-detail'),
@@ -113,7 +113,8 @@
             url: post.share_url,
             hash: post.share_hash,
             template: 'programs'
-          }} only %} #}
+          }} only %}
+
           {% include 'components/share-form.twig' with {this: {
             type: 'email',
             button: __('Email', 'accessnyc-program-detail'),
