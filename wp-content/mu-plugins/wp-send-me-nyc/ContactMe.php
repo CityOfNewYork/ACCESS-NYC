@@ -226,7 +226,7 @@ class ContactMe {
         }
       }
     } catch (Exception $e) {
-      $msg = __('Send Me NYC: Bit.ly URL shortening skipped for ' . $url . $e->getMessage());
+      $msg = sprintf('Send Me NYC: Bit.ly URL shortening skipped for %s: %s', $url, $e->getMessage());
 
       // WP debug.log
       error_log($msg);
