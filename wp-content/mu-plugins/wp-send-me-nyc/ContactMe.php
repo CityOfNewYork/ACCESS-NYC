@@ -188,6 +188,11 @@ class ContactMe {
       $domain = $wpBitlyOptions['default_domain'];
       $group = $wpBitlyOptions['default_group'];
 
+      // temporarily test that the auth token, domain, and group are being generated correctly
+      error_log($token);      
+      error_log($domain);
+      error_log($group);
+
       $options = array('long_url' => $url);
 
       if ($domain) {
@@ -222,7 +227,7 @@ class ContactMe {
           throw new Exception($error_message);
         }
         else {
-          throw new Exception($response['body']);
+          throw new Exception($response['response']['code'] . ' ' . $response['body']);
         }
       }
     } catch (Exception $e) {
