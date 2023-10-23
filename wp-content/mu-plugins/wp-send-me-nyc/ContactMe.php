@@ -188,11 +188,6 @@ class ContactMe {
       $domain = $wpBitlyOptions['default_domain'];
       $group = $wpBitlyOptions['default_group'];
 
-      // temporarily test that the auth token, domain, and group are being generated correctly
-      error_log($token);      
-      error_log($domain);
-      error_log($group);
-
       $options = array('long_url' => $url);
 
       if ($domain) {
