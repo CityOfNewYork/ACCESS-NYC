@@ -217,7 +217,13 @@ class ContactMe {
 
         return $body['link'];
       } else {
-        throw new Exception($response['body']);
+        if ( is_wp_error( $response ) ) {
+          $error_message = $response->get_error_message();
+          throw new Exception($error_message);
+        }
+        else {
+          throw new Exception($response['body']);
+        }
       }
     } catch (Exception $e) {
       $msg = __('Send Me NYC: Bit.ly URL shortening skipped for ' . $url . $e->getMessage());
