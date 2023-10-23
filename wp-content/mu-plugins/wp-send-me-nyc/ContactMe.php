@@ -213,7 +213,7 @@ class ContactMe {
         'body' => json_encode($options)
       ));
 
-      if (200 === $response['response']['code']) {
+      if (200 === $response['response']['code'] || 201 === $response['response']['code']) {
         $body = json_decode($response['body'], true);
 
         /**
