@@ -217,10 +217,10 @@ class ContactMe {
 
         return $body['link'];
       } else {
-        throw new Exception();
+        throw new Exception($response['body']);
       }
     } catch (Exception $e) {
-      $msg = __('Send Me NYC: Bit.ly URL shortening skipped for ' . $url . print_r($e, true));
+      $msg = __('Send Me NYC: Bit.ly URL shortening skipped for ' . $url . $e->getMessage());
 
       // WP debug.log
       error_log($msg);
