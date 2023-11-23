@@ -47,7 +47,7 @@
               </h2>
 
               <p class="color__alt text-small mb-0">
-                {{ __('Latest Update', 'accessnyctheme') }} {{ homepage_touts_latest_update|date('l, F jS') }}
+                {{ __('Latest Update', 'accessnyctheme') }} {{ homepage_touts_latest_update|date(fn('get_option', 'date_format')) }}
               </p>
             </div>
 
@@ -72,9 +72,9 @@
 
                   <p class='c-card__subtitle color__alt'>
                     {% if tout.link_to_content %}
-                      {{ __('Updated', 'accessnyctheme') }} {{ tout.get_field('link_to_content')[0].post_modified|date('l, F jS, g:ia') }}
+                      {{ __('Updated', 'accessnyctheme') }} {{ tout.get_field('link_to_content')[0].post_modified|date(fn('get_option', 'date_format')) }}
                     {% else %}
-                      {{ __('Updated', 'accessnyctheme') }} {{ tout.post_modified|date('l, F jS, g:ia') }}
+                      {{ __('Updated', 'accessnyctheme') }} {{ tout.post_modified|date(fn('get_option', 'date_format')) }}
                     {% endif %}
                   </p>
 
