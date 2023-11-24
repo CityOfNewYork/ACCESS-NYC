@@ -20,7 +20,7 @@
         {% set lead = post.get_field('field_58b480ca3081c') %} {# lead #}
 
         <h2 class="c-header__information color__alt {% if lead %}mb-4{% endif %}">
-          {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
+          {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date(fn('get_option', 'date_format')) }}
         </h2>
 
         {% if lead %}<div class="font-serif screen-tablet:text-large">{{ lead }}</div>{% endif %}
@@ -65,7 +65,7 @@
 
         <footer class="pb-3">
           <p class="text-grey-mid m-0">
-            {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
+            {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date(fn('get_option', 'date_format')) }}
           </p>
         </footer>
       </div>

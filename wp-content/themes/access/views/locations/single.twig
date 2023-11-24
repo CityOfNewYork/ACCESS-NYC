@@ -148,7 +148,7 @@
 
     <footer class="wrap pt-4">
       <p class="text-grey-mid screen-desktop:mb-0">
-        {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
+        {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date(fn('get_option', 'date_format')) }}
       </p>
 
       {# <a class="btn btn-secondary btn-previous w-full print:hidden screen-desktop:hidden js-location-back" href="{{ url_base }}/locations/?lat={{ post.address.lat }}&lng={{ post.address.lng }}">

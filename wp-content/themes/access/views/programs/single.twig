@@ -122,7 +122,7 @@
 
     <footer class="wrap pt-4">
       <p class="color__alt">
-        {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
+        {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date(fn('get_option', 'date_format')) }}
       </p>
     </footer>
 
