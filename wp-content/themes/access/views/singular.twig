@@ -18,7 +18,7 @@
         <h1 class="c-header__descriptor">{{ post.title }}</h1>
 
         <h2 class="c-header__information color__alt">
-          {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
+          {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date(fn('get_option', 'date_format')) }}
         </h2>
       </div>
     </header>
@@ -29,7 +29,7 @@
 
     <footer class="wrap py-4">
       <p class="text-grey-mid m-0">
-        {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date('l, F jS, g:ia') }}
+        {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date(fn('get_option', 'date_format')) }}
       </p>
     </footer>
 
