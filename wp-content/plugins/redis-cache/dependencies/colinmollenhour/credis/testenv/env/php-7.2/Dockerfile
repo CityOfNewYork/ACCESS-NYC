@@ -3,7 +3,9 @@ ENV phpunit_verison 7.5
 ENV redis_version 6.0.8
 
 RUN apt-get update && \
-    apt-get install -y wget libssl-dev
+    apt-get install -y wget libssl-dev && \ 
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN wget https://phar.phpunit.de/phpunit-${phpunit_verison}.phar && \
     chmod +x phpunit-${phpunit_verison}.phar && \
