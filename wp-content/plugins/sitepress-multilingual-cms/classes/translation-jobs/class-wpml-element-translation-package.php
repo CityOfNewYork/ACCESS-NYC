@@ -40,10 +40,11 @@ class WPML_Element_Translation_Package extends WPML_Translation_Job_Helper {
 	 * Create translation package
 	 *
 	 * @param \WPML_Package|\WP_Post|int $post
+	 * @param bool                       $isOriginal
 	 *
 	 * @return array<string,string|array<string,string>>
 	 */
-	public function create_translation_package( $post ) {
+	public function create_translation_package( $post, $isOriginal = false ) {
 
 		$package = array();
 		$post    = is_numeric( $post ) ? get_post( $post ) : $post;
@@ -103,7 +104,7 @@ class WPML_Element_Translation_Package extends WPML_Translation_Job_Helper {
 
 		$package['contents'] = $this->buildEntries( $package['contents'], $post_contents );
 
-		return apply_filters( 'wpml_tm_translation_job_data', $package, $post );
+		return apply_filters( 'wpml_tm_translation_job_data', $package, $post, $isOriginal );
 	}
 
 	private function buildEntries( $contents, $entries, $parentKey = '' ) {
@@ -346,7 +347,7 @@ class WPML_Element_Translation_Package extends WPML_Translation_Job_Helper {
 			// phpcs:disable WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
 			$package['contents'][ $cf ]           = array(
 				'translate' => 1,
-				'data'      => base64_encode( $custom_field_val ),
+				'data'      => base64_encode( (string) $custom_field_val ),
 				'format'    => 'base64',
 			);
 			$package['contents'][ $cf . '-name' ] = array(
@@ -386,7 +387,7 @@ class WPML_Element_Translation_Package extends WPML_Translation_Job_Helper {
 	 */
 	public static function preserve_numerics( $value, $name, $original_post_id, $single ) {
 		$get_original = function () use ( $original_post_id, $name, $single ) {
-			$meta = get_post_meta( $original_post_id, $name, $single );
+			$meta = get_post_meta( (int) $original_post_id, $name, $single );
 			return apply_filters( 'wpml_decode_custom_field', $meta, $name );
 		};
 		if ( is_numeric( $value ) && is_int( $get_original() ) ) {

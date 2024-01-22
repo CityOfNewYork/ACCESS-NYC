@@ -64,7 +64,7 @@ class WPML_Translation_Tree extends WPML_SP_User {
 	 *
 	 * @param array<\stdClass> $terms
 	 *
-	 * @return array<int>
+	 * @return array<int,array>
 	 */
 	private function generate_trid_groups( $terms ) {
 		$trids = array();
@@ -94,9 +94,9 @@ class WPML_Translation_Tree extends WPML_SP_User {
 	}
 
 	/**
-	 * @param array<int>       $trids
-	 * @param array|bool|false $root_trid_group
-	 * @param int              $level current depth in the tree
+	 * @param array<int, array> $trids
+	 * @param array|bool|false  $root_trid_group
+	 * @param int               $level current depth in the tree
 	 *                                Recursively turns an array of unordered trid objects into a tree.
 	 *
 	 * @return array|bool

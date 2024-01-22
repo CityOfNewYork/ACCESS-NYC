@@ -21,23 +21,32 @@ class TranslationServices implements IHandler {
 	public function run( Collection $data ) {
 		$tpApi = make( \WPML_TP_Client_Factory::class )->create()->services();
 
+		$serviceMapperFunction = partialRight(
+			[ ServiceMapper::class, 'map' ],
+			[ ActiveServiceRepository::class, 'getId' ]
+		);
+
 		$services = ServicesRetriever::get(
 			$tpApi,
 			Geolocalization::getCountryByIp( Http::post() ),
-			partialRight(
-				[ ServiceMapper::class, 'map' ],
-				[ ActiveServiceRepository::class, 'getId' ]
-			)
+			$serviceMapperFunction
 		);
 
 		$preferredServiceSUID = \TranslationProxy::get_tp_default_suid();
+		$preferredService = false;
 		if ( $preferredServiceSUID ) {
 			$services = self::filterByPreferred( $services, $preferredServiceSUID );
+			$preferredServiceData = \TranslationProxy_Service::get_service_by_suid( $preferredServiceSUID );
+			$preferredService = new \WPML_TP_Service( $preferredServiceData );
+			$preferredService->set_custom_fields_data();
+			$preferredService = $serviceMapperFunction( $preferredService );
 		}
 
+
 		return Either::of( [
-			'services'        => $services,
-			'logoPlaceholder' => WPML_TM_URL . '/res/img/lsp-logo-placeholder.png',
+			'services'          => $services,
+			'preferredService'	=> $preferredService,
+			'logoPlaceholder'   => WPML_TM_URL . '/res/img/lsp-logo-placeholder.png',
 		] );
 	}
 

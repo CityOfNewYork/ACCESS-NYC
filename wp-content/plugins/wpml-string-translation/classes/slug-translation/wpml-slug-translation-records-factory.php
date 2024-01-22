@@ -21,4 +21,15 @@ class WPML_Slug_Translation_Records_Factory {
 
 		return null;
 	}
+
+	/**
+	 * @return WPML_Tax_Slug_Translation_Records
+	 */
+	public function createTaxRecords() {
+		/** @var wpdb */
+		global $wpdb;
+		$cache_factory = new WPML_WP_Cache_Factory();
+
+		return new WPML_Tax_Slug_Translation_Records( $wpdb, $cache_factory );
+	}
 }

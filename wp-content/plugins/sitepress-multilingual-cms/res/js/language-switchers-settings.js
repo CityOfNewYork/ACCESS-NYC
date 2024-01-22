@@ -366,7 +366,7 @@ WPML_core.languageSwitcher = (function( $, wpml_ls ) {
 
 				$.each(colors, function(k, v){
 					var inputTags = pickerSets.find('.js-wpml-ls-color-' + k);
-					inputTags.attr('value', v);
+					inputTags.val(v);
 					inputTags.parents('.wp-picker-container').find('.wp-color-result').css('background-color', v);
 				});
 

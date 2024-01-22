@@ -121,8 +121,9 @@ class WPML_String_Scanner {
 	/**
 	 * Get list of files under directory.
 	 *
-	 * @param  string $path       Directory to parse.
-	 * @param  object $filesystem WP_Filesystem object
+	 * @param  string             $path       Directory to parse.
+	 * @param  WP_Filesystem_Base $filesystem WP_Filesystem object
+	 *
 	 * @return array
 	 */
 	private function extract_files( $path, $filesystem ) {
@@ -226,6 +227,8 @@ class WPML_String_Scanner {
 			'%d'
 		);
 
+		// Action called after string context is fixed/updated
+		do_action( 'wpml_st_string_updated' );
 	}
 
 	protected function set_stats( $key, $item ) {
@@ -270,6 +273,7 @@ class WPML_String_Scanner {
 		$string = str_replace( '\n', "\n", $string );
 		$string = str_replace( array( '\"', "\\'" ), array( '"', "'" ), $string );
 		// replace extra backslashes added by _potx_process_file
+		/** @var string $string */
 		$string = str_replace( array( '\\\\' ), array( '\\' ), $string );
 		$string = stripcslashes( $string );
 
@@ -412,6 +416,9 @@ class WPML_String_Scanner {
 				// We don't have any translations so we can delete the string.
 
 				$wpdb->delete( $wpdb->prefix . 'icl_strings', array( 'id' => $string->id ), array( '%d' ) );
+
+				// Action called after string is deleted form ic_strings table
+				do_action( 'wpml_st_string_unregistered' );
 			} else {
 				// check if we have a new string in the right context
 
@@ -458,6 +465,9 @@ class WPML_String_Scanner {
 							// We don't have any old translations that are not in the new strings so we can delete the string.
 
 							$wpdb->delete( $wpdb->prefix . 'icl_strings', array( 'id' => $string->id ), array( '%d' ) );
+
+							// Action called after string is deleted from icl_strings table
+							do_action( 'wpml_st_string_unregistered' );
 							break;
 						}
 					}
@@ -469,6 +479,7 @@ class WPML_String_Scanner {
 		// This way the update message will no longer show.
 
 		$obsolete_context = str_replace( 'plugin ', '', $old_context );
+		/** @var string $obsolete_context */
 		$obsolete_context = str_replace( 'theme ', '', $obsolete_context );
 		$obsolete_context = $obsolete_context . ' (obsolete)';
 
@@ -494,6 +505,9 @@ class WPML_String_Scanner {
 					$obsolete_context
 				)
 			);
+
+			// Action called after string is updated.
+			do_action( 'wpml_st_string_updated' );
 		}
 
 	}

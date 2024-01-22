@@ -39,7 +39,7 @@ class WPML_Post_Edit_Terms_Hooks implements IWPML_Action {
 	}
 
 	/**
-	 * @return array
+	 * @return array|null
 	 */
 	public function get_tags_from_tax_input() {
 		if ( ! empty( $_POST['tax_input']['post_tag'] ) ) {
@@ -56,7 +56,9 @@ class WPML_Post_Edit_Terms_Hooks implements IWPML_Action {
 				$tags      = explode( $delimiter, trim( $tags, " \n\t\r\0\x0B," ) );
 			}
 
-			return array_map( 'trim', $tags );
+			if ( $tags ) {
+				return array_map( 'trim', $tags );
+			}
 		}
 
 		return null;

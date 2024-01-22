@@ -108,7 +108,7 @@ class WPML_TM_Field_Content_Action extends WPML_TM_Job_Factory_User {
 		$current_data  = $this->sanitize_field_content( $element->field_data );
 		$previous_data = $this->sanitize_field_content( $previous_element->field_data );
 
-		return wp_text_diff( $previous_data, $current_data, $element->field_format );
+		return wp_text_diff( $previous_data, $current_data );
 	}
 
 	/**

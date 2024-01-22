@@ -138,7 +138,7 @@ class WPML_Post_Duplication extends WPML_WPDB_And_SP_User {
 		// as a taxonomy by WP.
 		if ( $this->sitepress->get_setting( 'sync_post_format' ) ) {
 			$_wp_post_format = get_post_format( $master_post_id );
-			set_post_format( $id, $_wp_post_format );
+			$_wp_post_format && set_post_format( $id, $_wp_post_format );
 		}
 		if ( $this->sitepress->get_setting( 'sync_comments_on_duplicates' ) ) {
 			$this->duplicate_comments( $master_post_id, $id );

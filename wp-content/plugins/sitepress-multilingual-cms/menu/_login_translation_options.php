@@ -26,6 +26,18 @@ global $sitepress, $sitepress_settings;
 				   class="wpml-external-link">
 					<?php esc_html_e( 'How to translate login and registration pages', 'sitepress' ); ?>
 				</a>
+                <br/>
+                <p class="sub-section" id="show_login_page_language_switcher_sub_section"
+				<?php if ( ! get_option( \WPML\UrlHandling\WPLoginUrlConverter::SETTINGS_KEY, false ) ) : ?> style="display: none" <?php endif; ?>
+                >
+                    <label>
+                        <input type="checkbox" id="show_login_page_language_switcher"
+                               name="show_login_page_language_switcher"
+                            <?php checked( get_option( \WPML\AdminLanguageSwitcher\AdminLanguageSwitcher::LANGUAGE_SWITCHER_KEY, true ) ); ?>
+                               value="1"/>
+                        <?php esc_html_e( 'Show Language Switcher on login and registration pages', 'sitepress' ); ?>
+                    </label>
+                </p>
 			</p>
 			<div class="notice-info notice below-h2">
 				<p>

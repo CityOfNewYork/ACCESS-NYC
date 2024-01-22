@@ -16,7 +16,6 @@ use function WPML\FP\pipe;
  * Class ReviewStatus
  * @package WPML\TM\ATE\Review
  *
- * @method static callable|bool needsReview( ...$reviewStatus ) - Curried :: string->bool
  * @method static callable|bool doesJobNeedReview( ...$job ) - Curried :: \stdClass->bool
  */
 class ReviewStatus {
@@ -28,13 +27,27 @@ class ReviewStatus {
 
 	public static function init() {
 
-		self::macro( 'needsReview', Lst::includes( Fns::__, [ ReviewStatus::NEEDS_REVIEW, ReviewStatus::EDITING ] ) );
-
 		self::macro( 'doesJobNeedReview', curryN( 1, Logic::ifElse(
 			Fns::identity(),
 			pipe( Obj::prop( 'review_status' ), self::needsReview() ),
 			Fns::always(false)
 		) ));
+	}
+
+	/**
+	 * @template A as string|curried
+	 * @param A $reviewStatus
+	 *
+	 * @return (A is curried ? callable : bool)
+	 */
+	public static function needsReview( $reviewStatus = null ) {
+		return Lst::includes(
+			$reviewStatus ?: Fns::__,
+			[
+				self::NEEDS_REVIEW,
+				self::EDITING,
+			]
+		);
 	}
 }
 

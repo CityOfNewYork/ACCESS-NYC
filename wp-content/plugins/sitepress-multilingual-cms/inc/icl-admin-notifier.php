@@ -15,8 +15,8 @@ if ( ! class_exists( 'ICL_AdminNotifier' ) ) {
 	class ICL_AdminNotifier {
 		public static function init() {
 			if ( is_admin() ) {
-				add_action( 'wp_ajax_icl-hide-admin-message', array( __CLASS__, 'hide_message' ) );
-				add_action( 'wp_ajax_icl-show-admin-message', array( __CLASS__, 'show_message' ) );
+				add_action( 'wp_ajax_icl-hide-admin-message', array( __CLASS__, 'process_hide_message' ) );
+				add_action( 'wp_ajax_icl-show-admin-message', array( __CLASS__, 'process_show_message' ) );
 				if ( ! defined( 'DOING_AJAX' ) ) {
 					add_action( 'admin_enqueue_scripts', array( __CLASS__, 'add_script' ) );
 
@@ -25,13 +25,29 @@ if ( ! class_exists( 'ICL_AdminNotifier' ) ) {
 
 				add_filter( 'troubleshooting_js_data', array( __CLASS__, 'troubleshooting_js_data' ) );
 				add_action( 'wpml_troubleshooting_cleanup', array( __CLASS__, 'troubleshooting' ) );
-				add_action( 'wp_ajax_icl_restore_notifications', array( __CLASS__, 'restore_notifications' ) );
-				add_action( 'wp_ajax_icl_remove_notifications', array( __CLASS__, 'remove_notifications' ) );
+				add_action( 'wp_ajax_icl_restore_notifications', array( __CLASS__, 'process_restore_notifications' ) );
+				add_action( 'wp_ajax_icl_remove_notifications', array( __CLASS__, 'process_remove_notifications' ) );
 			}
 		}
 
 		public static function add_script() {
-			wp_enqueue_script( 'icl-admin-notifier', ICL_PLUGIN_URL . '/res/js/icl-admin-notifier.js', array( 'jquery' ), ICL_SITEPRESS_VERSION );
+			$handle = 'icl-admin-notifier';
+			wp_register_script(
+				$handle,
+				ICL_PLUGIN_URL . '/res/js/icl-admin-notifier.js',
+				array( 'jquery' ),
+				ICL_SITEPRESS_VERSION,
+				true
+			);
+			wp_localize_script(
+				$handle,
+				'icl_admin_notifier_strings',
+				array(
+					'iclHideAdminMessageNonce' => wp_create_nonce( 'icl_hide_admin_message' ),
+					'iclShowAdminMessageNonce' => wp_create_nonce( 'icl_show_admin_message' ),
+				)
+			);
+			wp_enqueue_script( $handle );
 		}
 
 		/**
@@ -48,7 +64,7 @@ if ( ! class_exists( 'ICL_AdminNotifier' ) ) {
 		}
 
 		/**
-		 * @param int $message_id
+		 * @param int|string $message_id
 		 *
 		 * @return bool|array
 		 */
@@ -151,7 +167,7 @@ if ( ! class_exists( 'ICL_AdminNotifier' ) ) {
 				}
 			}
 
-			$id       = $id ? $id : md5( wp_json_encode( $args ) );
+			$id       = $id ? $id : md5( (string) wp_json_encode( $args ) );
 			$messages = self::get_messages();
 
 			$message = array(
@@ -175,10 +191,10 @@ if ( ! class_exists( 'ICL_AdminNotifier' ) ) {
 				'capability'       => $args['capability'],
 			);
 
-			$message_md5 = md5( wp_json_encode( $message ) );
+			$message_md5 = md5( (string) wp_json_encode( $message ) );
 
 			if ( isset( $messages['messages'][ $id ] ) ) {
-				$existing_message_md5 = md5( wp_json_encode( $messages['messages'][ $id ] ) );
+				$existing_message_md5 = md5( (string) wp_json_encode( $messages['messages'][ $id ] ) );
 				if ( $message_md5 != $existing_message_md5 ) {
 					unset( $messages['messages'][ $id ] );
 				}
@@ -205,12 +221,30 @@ if ( ! class_exists( 'ICL_AdminNotifier' ) ) {
 			return ! empty( $message_data['hide'] ) && $message_data['hidden'];
 		}
 
+		public static function process_hide_message() {
+			self::validate_request(
+				'icl_hide_admin_message',
+				function() {
+					$fallback_message = self::hide_message();
+					echo wp_json_encode(
+						array(
+							'errors'  => 0,
+							'message' => __( 'Done', 'sitepress' ),
+							'text'    => $fallback_message,
+						)
+					);
+					die();
+				}
+			);
+		}
+
 		public static function hide_message() {
 
 			$message_id = self::get_message_id();
+			// phpcs:ignore WordPress.Security.NonceVerification
 			$dismiss    = isset( $_POST['dismiss'] ) ? $_POST['dismiss'] : false;
 			if ( ! self::message_id_exists( $message_id ) ) {
-				exit;
+				return '';
 			}
 
 			self::set_message_display( $message_id, false, 'hide', 'hidden', 'hide_per_user' );
@@ -221,10 +255,11 @@ if ( ! class_exists( 'ICL_AdminNotifier' ) ) {
 				$messages = self::get_messages();
 				$message  = $messages['messages'][ $message_id ];
 				if ( $message && isset( $message['fallback_text'] ) && $message['fallback_text'] ) {
-					echo self::display_message( $message_id, $message['fallback_text'], $message['fallback_type'], $message['fallback_classes'], false, false, true, true );
+					return self::display_message( $message_id, $message['fallback_text'], $message['fallback_type'], $message['fallback_classes'], false, false, true, true );
 				}
 			}
-			exit;
+
+			return '';
 		}
 
 		public static function get_message_id() {
@@ -238,10 +273,27 @@ if ( ! class_exists( 'ICL_AdminNotifier' ) ) {
 			return $message_id;
 		}
 
+		public static function process_show_message() {
+			self::validate_request(
+				'icl_show_admin_message',
+				function() {
+					$message = self::show_message();
+					echo wp_json_encode(
+						array(
+							'errors'  => 0,
+							'message' => __( 'Done', 'sitepress' ),
+							'text'    => $message,
+						)
+					);
+					die();
+				}
+			);
+		}
+
 		public static function show_message() {
 			$message_id = self::get_message_id();
 			if ( ! self::message_id_exists( $message_id ) ) {
-				exit;
+				return '';
 			}
 
 			self::set_message_display( $message_id, true, 'hide', 'hidden', 'hide_per_user' );
@@ -249,9 +301,10 @@ if ( ! class_exists( 'ICL_AdminNotifier' ) ) {
 			$messages = self::get_messages();
 			$message  = $messages['messages'][ $message_id ];
 			if ( $message ) {
-				echo self::display_message( $message_id, $message['text'], $message['type'], $message['classes'], $message['hide'] || $message['hide_per_user'], $message['dismiss'] || $message['dismiss_per_user'], true, true );
+				return self::display_message( $message_id, $message['text'], $message['type'], $message['classes'], $message['hide'] || $message['hide_per_user'], $message['dismiss'] || $message['dismiss_per_user'], true, true );
 			}
-			exit;
+
+			return '';
 		}
 
 		public static function engage_message() {
@@ -361,7 +414,7 @@ if ( ! class_exists( 'ICL_AdminNotifier' ) ) {
 		/**
 		 * @deprecated deprecated @since version 3.2. Use ICL_AdminNotifier::display_message()
 		 *
-		 * @param bool $group
+		 * @param bool|string $group
 		 */
 		public static function displayMessages( $group = false ) {
 			self::display_messages( $group );
@@ -644,7 +697,16 @@ if ( ! class_exists( 'ICL_AdminNotifier' ) ) {
 			<?php
 		}
 
-		static function remove_notifications() {
+		public static function process_remove_notifications() {
+			self::validate_request(
+				'icl_remove_notifications',
+				function() {
+					self::remove_notifications();
+				}
+			);
+		}
+
+		public static function remove_notifications() {
 			self::save_messages( array() );
 			echo wp_json_encode(
 				array(
@@ -657,7 +719,16 @@ if ( ! class_exists( 'ICL_AdminNotifier' ) ) {
 			die();
 		}
 
-		static function restore_notifications() {
+		public static function process_restore_notifications() {
+			self::validate_request(
+				'icl_restore_notifications',
+				function() {
+					self::restore_notifications();
+				}
+			);
+		}
+
+		public static function restore_notifications() {
 			$all_users = $_POST['all_users'];
 
 			$messages = self::get_messages();
@@ -708,10 +779,26 @@ if ( ! class_exists( 'ICL_AdminNotifier' ) ) {
 			die();
 		}
 
+		private static function validate_request( $nonce_name, $cb ) {
+			$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				wp_send_json_error( esc_html__( 'Unauthorized', 'sitepress' ), 401 );
+				return;
+			}
+
+			if ( ! wp_verify_nonce( $nonce, $nonce_name ) ) {
+				wp_send_json_error( esc_html__( 'Invalid request!', 'sitepress' ), 400 );
+				return;
+			}
+
+			$cb();
+		}
+
 		/** Deprecated methods */
 
 		/**
-		 * @param int $message_id
+		 * @param int|string $message_id
 		 *
 		 * @return bool
 		 * @deprecated deprecated @since version 3.2. Use ICL_AdminNotifier::remove_message()
@@ -748,14 +835,14 @@ if ( ! class_exists( 'ICL_AdminNotifier' ) ) {
 		/**
 		 * @deprecated deprecated @since version 3.2
 		 *
-		 * @param string $id               An unique identifier for the message
-		 * @param string $msg              The actual message
-		 * @param string $type             (optional) Any string: it will be used as css class fro the message container. A typical value is 'error', but the following strings can be also used: icl-admin-message-information, icl-admin-message-warning
-		 * @param bool   $hide             (optional) Enable the toggle link to permanently hide the notice
-		 * @param bool   $fallback_message (optional) A message to show when the notice gets hidden
-		 * @param bool   $fallback_type    (optional) The message type to use in the fallback message (@see $type)
-		 * @param bool   $group            (optional) A way to group messages: when displaying messages stored with this method, it's possible to filter them by group (@see ICL_AdminNotifier::displayMessages)
-		 * @param bool   $admin_notice     (optional) Hook the rendering to the 'admin_notice' action
+		 * @param string      $id               An unique identifier for the message
+		 * @param string      $msg              The actual message
+		 * @param string      $type             (optional) Any string: it will be used as css class fro the message container. A typical value is 'error', but the following strings can be also used: icl-admin-message-information, icl-admin-message-warning
+		 * @param bool        $hide             (optional) Enable the toggle link to permanently hide the notice
+		 * @param bool        $fallback_message (optional) A message to show when the notice gets hidden
+		 * @param bool        $fallback_type    (optional) The message type to use in the fallback message (@see $type)
+		 * @param bool|string $group            (optional) A way to group messages: when displaying messages stored with this method, it's possible to filter them by group (@see ICL_AdminNotifier::displayMessages)
+		 * @param bool        $admin_notice     (optional) Hook the rendering to the 'admin_notice' action
 		 */
 		public static function addMessage( $id, $msg, $type = '', $hide = true, $fallback_message = false, $fallback_type = false, $group = false, $admin_notice = false ) {
 			$args = array(

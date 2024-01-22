@@ -55,6 +55,13 @@ class Config {
 				return $wpml_language_resolution;
 			},
 			\TranslationManagement::class     => 'wpml_load_core_tm',
+			\WPML\User\UsersByCapsRepository::class => function () {
+				global $wpdb;
+
+				$languagePairs = new \WPML_Language_Pair_Records( $wpdb, new \WPML_Language_Records( $wpdb ) );
+
+				return new \WPML\User\UsersByCapsRepository( $wpdb, $languagePairs );
+			},
 		];
 	}
 }

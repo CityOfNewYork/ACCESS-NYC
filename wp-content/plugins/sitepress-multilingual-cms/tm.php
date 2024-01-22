@@ -1,7 +1,5 @@
 <?php
 
-use WPML\TM\Notices\AteLockNotice;
-use WPML\TM\ATE\ClonedSites\ReportAjax;
 use WPML\TM\Settings\CustomFieldChangeDetector;
 
 if ( defined( 'WPML_TM_VERSION' ) || get_option( '_wpml_inactive' ) ) {
@@ -86,7 +84,6 @@ function wpml_tm_load( $sitepress = null ) {
 		$TranslationProxy = new WPML_Translation_Proxy_API();
 		new WPML_TM_Troubleshooting_Reset_Pro_Trans_Config( $sitepress, $TranslationProxy, $wpml_wp_api, $wpdb );
 		new WPML_TM_Troubleshooting_Clear_TS( $wpml_wp_api );
-		new WPML_TM_Promotions( $wpml_wp_api );
 
 		if ( defined( 'DOING_AJAX' ) ) {
 			$wpml_tm_options_ajax = new WPML_TM_Options_Ajax( $sitepress );
@@ -157,6 +154,9 @@ function wpml_tm_load( $sitepress = null ) {
 			\WPML\TM\ATE\Sitekey\Sync::class,
 			\WPML\TM\ATE\Review\ReviewCompletedNotice::class,
 			\WPML\TM\Settings\CustomFieldChangeDetector::class,
+			\WPML\MediaTranslation\AddMediaDataToTranslationPackageFactory::class,
+			\WPML\MediaTranslation\MediaTranslationEditorLayoutFactory::class,
+			\WPML\MediaTranslation\MediaTranslationStatusFactory::class,
 		];
 		$action_filter_loader->load( $actions );
 
@@ -185,13 +185,16 @@ function wpml_tm_load( $sitepress = null ) {
 			'WPML_TM_Old_Editor_Factory',
 			\WPML\TM\ATE\Log\Hooks::class,
 			\WPML\TM\ATE\Hooks\ReturnedJobActionsFactory::class,
-			ReportAjax::class,
-			AteLockNotice::class,
+			WPML\TM\ATE\ClonedSites\Loader::class,
 			\WPML\TM\ATE\Loader::class,
+			\WPML\TM\Jobs\Loader::class,
 			\WPML\TM\ATE\Review\ApplyJob::class,
+			\WPML\TM\ATE\Review\PackageJob::class,
 			\WPML\TM\ATE\Review\StatusIcons::class,
 			\WPML\TM\ATE\StatusIcons::class,
-			\WPML\TM\Editor\ManualJobCreationErrorNotice::class
+			\WPML\TM\Editor\ManualJobCreationErrorNotice::class,
+			\WPML\ICLToATEMigration\Loader::class,
+			\WPML\Support\ATE\Hooks::class,
 		];
 		$action_filter_loader->load( $ams_ate_actions );
 
@@ -266,5 +269,6 @@ if ( is_admin() ) {
 }
 
 if ( is_admin() && !wpml_is_ajax() ) {
-	CustomFieldChangeDetector::processNewFields();
+	$customFieldChangeDetector = \WPML\Container\make( CustomFieldChangeDetector::class );
+	$customFieldChangeDetector->processNewFields();
 }

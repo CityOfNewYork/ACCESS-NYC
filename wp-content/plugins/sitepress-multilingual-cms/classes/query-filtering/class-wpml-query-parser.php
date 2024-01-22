@@ -119,15 +119,20 @@ class WPML_Query_Parser {
 		$values = array();
 
 		if ( is_scalar( $q->query_vars[ $key ] ) ) {
-			$glue = strpos( $q->query_vars[ $key ], ',' ) !== false ? ',' : $glue;
-			$glue = strpos( $q->query_vars[ $key ], '+' ) !== false ? '+' : $glue;
+			if ( is_string( $q->query_vars[ $key ] ) ) {
+				$glue = strpos( $q->query_vars[ $key ], ',' ) !== false ? ',' : $glue;
+				$glue = strpos( $q->query_vars[ $key ], '+' ) !== false ? '+' : $glue;
 
-			if ( $glue ) {
-				$values = explode( $glue, $q->query_vars[ $key ] );
-			} else {
+				if ( $glue ) {
+					$values = explode( $glue, $q->query_vars[ $key ] );
+				}
+			}
+
+			if ( ! $glue ) {
 				$values = array( $q->query_vars[ $key ] );
 			}
 
+			/** @phpstan-ignore-next-line trim is not recognised by PHPStan. */
 			$values = array_map( 'trim', $values );
 			$values = $type === 'ids' ? array_map( 'intval', $values ) : $values;
 		} elseif ( is_array( $q->query_vars[ $key ] ) ) {
@@ -318,15 +323,18 @@ class WPML_Query_Parser {
 			$translated_slugs = $this->translate_term_values( array( $slug ), 'slugs', $taxonomy, $current_lang );
 
 			if ( $translated_slugs && (string) $slug !== $translated_slugs[0] ) {
+				/** @var WP_Term|false */
 				$translated_term = get_term_by(
 					'slug',
 					$translated_slugs[0],
 					$taxonomy
 				);
 
-				$new_url = get_term_link( $translated_term, $taxonomy );
+				$new_url = $translated_term
+					? get_term_link( $translated_term, $taxonomy )
+					: null;
 
-				if ( ! is_wp_error( $new_url ) ) {
+				if ( $new_url && ! is_wp_error( $new_url ) ) {
 					/** @var WPML_WP_API */
 					global $wpml_wp_api;
 					$wpml_wp_api->wp_safe_redirect( $new_url );
@@ -419,9 +427,9 @@ class WPML_Query_Parser {
 						$pid_prepared = $this->wpdb->prepare(
 							"
 							SELECT ID FROM {$this->wpdb->posts} p
-							JOIN {$this->wpdb->prefix}icl_translations t 
-								ON t.element_id = p.ID AND t.element_type='post_{$first_post_type}'   
-							WHERE post_name=%s AND post_type=%s AND t.language_code=%s 
+							JOIN {$this->wpdb->prefix}icl_translations t
+								ON t.element_id = p.ID AND t.element_type='post_{$first_post_type}'
+							WHERE post_name=%s AND post_type=%s AND t.language_code=%s
 							LIMIT 1
 						",
 							array( $q->query_vars['name'], $first_post_type, $current_language )

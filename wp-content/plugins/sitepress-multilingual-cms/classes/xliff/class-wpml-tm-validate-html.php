@@ -94,7 +94,7 @@ class WPML_TM_Validate_HTML {
 			if ( $result ) {
 				$processed_html = mb_substr( $html, 0, $pos + mb_strlen( $full_tag ) );
 			} else {
-				$processed_html = mb_substr( $html, 0, $pos ) . '<!-- wpml:html_fragment ' . $full_tag . ' -->';
+				$processed_html = mb_substr( $html, 0, (int) $pos ) . '<!-- wpml:html_fragment ' . $full_tag . ' -->';
 			}
 
 			return array(
@@ -114,16 +114,16 @@ class WPML_TM_Validate_HTML {
 	 *
 	 * @param string $html HTML to process.
 	 *
-	 * @return false|string
+	 * @return string
 	 */
 	private function hide_wp_bugs( $html ) {
 		// WP bug fix for comments - in case you REALLY meant to type '< !--'
 		$html = str_replace( '< !--', '<    !--', $html );
 		// WP bug fix for LOVE <3 (and other situations with '<' before a number)
 		$pattern = '<([0-9]{1})';
-		$html    = mb_ereg_replace_callback( $pattern, array( $this, 'hide_wp_bug_callback' ), $html, 'msri' );
+		$filtered = mb_ereg_replace_callback( $pattern, array( $this, 'hide_wp_bug_callback' ), $html, 'msri' );
 
-		return $html;
+		return $filtered === false ? $html : $filtered;
 	}
 
 	/**
@@ -142,12 +142,13 @@ class WPML_TM_Validate_HTML {
 	 *
 	 * @param $html
 	 *
-	 * @return false|string
+	 * @return string
 	 */
 	private function restore_wp_bugs( $html ) {
-		$pattern = '<!-- wpml:wp_bug (.*?) -->';
-		$html    = mb_ereg_replace_callback( $pattern, array( $this, 'restore_bug_callback' ), $html, 'msri' );
-		$html    = str_replace( '<    !--', '< !--', $html );
+		$pattern  = '<!-- wpml:wp_bug (.*?) -->';
+		$filtered = mb_ereg_replace_callback( $pattern, array( $this, 'restore_bug_callback' ), $html, 'msri' );
+		$html     = $filtered === false ? $html : $filtered;
+		$html     = str_replace( '<    !--', '< !--', $html );
 
 		return $html;
 	}
@@ -168,16 +169,17 @@ class WPML_TM_Validate_HTML {
 	 *
 	 * @param string $html HTML to process.
 	 *
-	 * @return false|string
+	 * @return string
 	 */
 	private function hide_comments( $html ) {
-		$pattern = '<!--(.*?)-->';
-		$html    = mb_ereg_replace_callback( $pattern, array( $this, 'hide_comment_callback' ), $html, 'msri' );
+		$pattern  = '<!--(.*?)-->';
+		$filtered = mb_ereg_replace_callback( $pattern, array( $this, 'hide_comment_callback' ), $html, 'msri' );
+		$html     = $filtered === false ? $html : $filtered;
 
-		$pattern = '<!((?!-- wpml:).*?)>';
-		$html    = mb_ereg_replace_callback( $pattern, array( $this, 'hide_declaration_callback' ), $html, 'msri' );
+		$pattern  = '<!((?!-- wpml:).*?)>';
+		$filtered = mb_ereg_replace_callback( $pattern, array( $this, 'hide_declaration_callback' ), $html, 'msri' );
 
-		return $html;
+		return $filtered === false ? $html : $filtered;
 	}
 
 	/**
@@ -210,13 +212,14 @@ class WPML_TM_Validate_HTML {
 	 * @return string
 	 */
 	private function restore_comments( $html ) {
-		$pattern = '<!-- wpml:html_comment (.*?) -->';
-		$html    = mb_ereg_replace_callback( $pattern, array( $this, 'restore_encoded_content_callback' ), $html, 'msri' );
+		$pattern  = '<!-- wpml:html_comment (.*?) -->';
+		$filtered = mb_ereg_replace_callback( $pattern, array( $this, 'restore_encoded_content_callback' ), $html, 'msri' );
+		$html     = $filtered === false ? $html : $filtered;
 
-		$pattern = '<!-- wpml:html_declaration (.*?) -->';
-		$html    = mb_ereg_replace_callback( $pattern, array( $this, 'restore_encoded_content_callback' ), $html, 'msri' );
+		$pattern  = '<!-- wpml:html_declaration (.*?) -->';
+		$filtered = mb_ereg_replace_callback( $pattern, array( $this, 'restore_encoded_content_callback' ), $html, 'msri' );
 
-		return $html;
+		return $filtered === false ? $html : $filtered;
 	}
 
 	/**
@@ -235,7 +238,7 @@ class WPML_TM_Validate_HTML {
 	 *
 	 * @param string $html HTML to process.
 	 *
-	 * @return false|string
+	 * @return string
 	 */
 	private function hide_self_closing_tags( $html ) {
 		$self_closing_tags = array(
@@ -264,14 +267,15 @@ class WPML_TM_Validate_HTML {
 			'polyline',
 		);
 		foreach ( $self_closing_tags as $self_closing_tag ) {
-			$pattern = '<\s*?' . $self_closing_tag . '((?:.|\s)*?)(>|/>)';
-			$html    = mb_ereg_replace_callback( $pattern, array( $this, 'hide_sct_callback' ), $html, 'msri' );
+			$pattern  = '<\s*?' . $self_closing_tag . '((?:.|\s)*?)(>|/>)';
+			$filtered = mb_ereg_replace_callback( $pattern, array( $this, 'hide_sct_callback' ), $html, 'msri' );
+			$html = $filtered === false ? $html : $filtered;
 		}
 
 		$pattern = '<\s*?[^>]*/>';
-		$html    = mb_ereg_replace_callback( $pattern, array( $this, 'hide_sct_callback' ), $html, 'msri' );
+		$filtered = mb_ereg_replace_callback( $pattern, array( $this, 'hide_sct_callback' ), $html, 'msri' );
 
-		return $html;
+		return $filtered === false ? $html : $filtered;
 	}
 
 	/**
@@ -290,13 +294,13 @@ class WPML_TM_Validate_HTML {
 	 *
 	 * @param $html
 	 *
-	 * @return false|string
+	 * @return string
 	 */
 	private function restore_self_closing_tags( $html ) {
 		$pattern = '<!-- wpml:html_self_closing_tag (.*?) -->';
-		$html    = mb_ereg_replace_callback( $pattern, array( $this, 'restore_sct_callback' ), $html, 'msri' );
+		$filtered = mb_ereg_replace_callback( $pattern, array( $this, 'restore_sct_callback' ), $html, 'msri' );
 
-		return $html;
+		return $filtered === false ? $html : $filtered;
 	}
 
 	/**
@@ -330,10 +334,10 @@ class WPML_TM_Validate_HTML {
 	 * @return false|string
 	 */
 	private function restore_html_fragments( $html ) {
-		$pattern = '<!-- wpml:html_fragment (.*?) -->';
-		$html    = mb_ereg_replace_callback( $pattern, array( $this, 'restore_html_fragment_callback' ), $html, 'msri' );
+		$pattern  = '<!-- wpml:html_fragment (.*?) -->';
+		$filtered = mb_ereg_replace_callback( $pattern, array( $this, 'restore_html_fragment_callback' ), $html, 'msri' );
 
-		return $html;
+		return $filtered === false ? $html : $filtered;
 	}
 
 	/**
@@ -352,13 +356,13 @@ class WPML_TM_Validate_HTML {
 	 *
 	 * @param string $html HTML to process.
 	 *
-	 * @return false|string
+	 * @return string
 	 */
 	private function hide_scripts( $html ) {
-		$pattern = '<\s*?script\s*?>((?:.|\s)*?)</script\s*?>';
-		$html    = mb_ereg_replace_callback( $pattern, array( $this, 'hide_script_callback' ), $html, 'msri' );
+		$pattern  = '<\s*?script\s*?>((?:.|\s)*?)</script\s*?>';
+		$filtered = mb_ereg_replace_callback( $pattern, array( $this, 'hide_script_callback' ), $html, 'msri' );
 
-		return $html;
+		return $filtered === false ? $html : $filtered;
 	}
 
 	/**
@@ -377,13 +381,13 @@ class WPML_TM_Validate_HTML {
 	 *
 	 * @param $html
 	 *
-	 * @return false|string
+	 * @return string
 	 */
 	private function restore_scripts( $html ) {
 		$pattern = '<!-- wpml:script (.*?) -->';
-		$html    = mb_ereg_replace_callback( $pattern, array( $this, 'restore_encoded_content_callback' ), $html, 'msri' );
+		$filtered    = mb_ereg_replace_callback( $pattern, array( $this, 'restore_encoded_content_callback' ), $html, 'msri' );
 
-		return $html;
+		return $filtered === false ? $html : $filtered;
 	}
 
 	/**
@@ -391,13 +395,13 @@ class WPML_TM_Validate_HTML {
 	 *
 	 * @param string $html HTML to process.
 	 *
-	 * @return false|string
+	 * @return string
 	 */
 	private function hide_cdata( $html ) {
 		$pattern = '<!\[CDATA\[((?:.|\s)*?)\]\]>';
-		$html    = mb_ereg_replace_callback( $pattern, array( $this, 'hide_cdata_callback' ), $html, 'msri' );
+		$filtered    = mb_ereg_replace_callback( $pattern, array( $this, 'hide_cdata_callback' ), $html, 'msri' );
 
-		return $html;
+		return $filtered === false ? $html : $filtered;
 	}
 
 	/**
@@ -416,13 +420,13 @@ class WPML_TM_Validate_HTML {
 	 *
 	 * @param $html
 	 *
-	 * @return false|string
+	 * @return string
 	 */
 	private function restore_cdata( $html ) {
 		$pattern = '<!-- wpml:cdata (.*?) -->';
-		$html    = mb_ereg_replace_callback( $pattern, array( $this, 'restore_encoded_content_callback' ), $html, 'msri' );
+		$filtered    = mb_ereg_replace_callback( $pattern, array( $this, 'restore_encoded_content_callback' ), $html, 'msri' );
 
-		return $html;
+		return $filtered === false ? $html : $filtered;
 	}
 
 	/**
@@ -430,13 +434,13 @@ class WPML_TM_Validate_HTML {
 	 *
 	 * @param string $html HTML to process.
 	 *
-	 * @return false|string
+	 * @return string
 	 */
 	private function hide_styles( $html ) {
 		$pattern = '<\s*?style\s*?>((?:.|\s)*?)</style\s*?>';
-		$html    = mb_ereg_replace_callback( $pattern, array( $this, 'hide_style_callback' ), $html, 'msri' );
+		$filtered    = mb_ereg_replace_callback( $pattern, array( $this, 'hide_style_callback' ), $html, 'msri' );
 
-		return $html;
+		return $filtered === false ? $html : $filtered;
 	}
 
 	/**
@@ -455,13 +459,13 @@ class WPML_TM_Validate_HTML {
 	 *
 	 * @param $html
 	 *
-	 * @return false|string
+	 * @return string
 	 */
 	private function restore_styles( $html ) {
 		$pattern = '<!-- wpml:style (.*?) -->';
-		$html    = mb_ereg_replace_callback( $pattern, array( $this, 'restore_encoded_content_callback' ), $html, 'msri' );
+		$filtered    = mb_ereg_replace_callback( $pattern, array( $this, 'restore_encoded_content_callback' ), $html, 'msri' );
 
-		return $html;
+		return $filtered === false ? $html : $filtered;
 	}
 
 	/**

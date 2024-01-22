@@ -17,11 +17,12 @@ use function WPML\FP\pipe;
 
 class UpdateTranslation implements IHandler {
 	public function run( Collection $data ) {
-		$jobId          = $data->get( 'jobId' );
-		$postId         = $data->get( 'postId' );
-		$completedInATE = $data->get( 'completedInATE' );
+		$jobId            = $data->get( 'jobId' );
+		$postId           = $data->get( 'postId' );
+		$completedInATE   = $data->get( 'completedInATE' );
+		$clickedBackInATE = $data->get( 'clickedBackInATE' );
 
-		if ( $completedInATE === 'COMPLETED_WITHOUT_CHANGED' ) {
+		if ( $completedInATE === 'COMPLETED_WITHOUT_CHANGED' || $clickedBackInATE ) {
 			return $this->completeWithoutChanges( $jobId );
 		}
 

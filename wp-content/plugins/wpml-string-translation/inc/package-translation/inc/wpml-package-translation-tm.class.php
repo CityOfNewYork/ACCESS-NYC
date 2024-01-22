@@ -298,6 +298,7 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 
 		$send_to_basket = true;
 		$package_helper = new WPML_Package_Helper();
+		/** @var WPML_Package $post */
 		$post           = $package_helper->get_translatable_item( null, $package_id );
 
 		$post_title   = esc_html( $post->title );

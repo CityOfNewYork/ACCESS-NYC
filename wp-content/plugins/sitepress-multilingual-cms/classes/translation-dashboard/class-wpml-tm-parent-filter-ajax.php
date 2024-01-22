@@ -30,7 +30,7 @@ class WPML_TM_Parent_Filter_Ajax implements IWPML_Action {
 				array(
 					'echo'     => 0,
 					'name'     => 'filter[parent_id]',
-					'selected' => $request_post_parent_id,
+					'selected' => $request_post_parent_id ?: 0,
 				)
 			);
 		} else {
@@ -39,7 +39,7 @@ class WPML_TM_Parent_Filter_Ajax implements IWPML_Action {
 					'echo'          => 0,
 					'orderby'       => 'name',
 					'name'          => 'filter[parent_id]',
-					'selected'      => $request_post_parent_id,
+					'selected'      => $request_post_parent_id ?: 0,
 					'taxonomy'      => $request_post_type,
 					'hide_if_empty' => true,
 				)

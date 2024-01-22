@@ -27,8 +27,6 @@ class Update {
 	/**
 	 * @param string $oldDomain
 	 * @param string $newDomain
-	 *
-	 * @return int
 	 */
 	public static function moveAllStringsToNewDomain( $oldDomain, $newDomain ) {
 		global $wpdb;
@@ -42,8 +40,6 @@ class Update {
 		if ( $affected ) {
 			self::regenerateMOFiles( $oldDomain, $newDomain );
 		}
-
-		return $affected;
 	}
 
 	private static function regenerateMOFiles( $oldDomain, $newDomain ) {

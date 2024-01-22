@@ -8,12 +8,14 @@ use WPML\PB\Gutenberg\StringsInBlock\DOMHandler\DOMHandle;
 use WPML\PB\Gutenberg\StringsInBlock\DOMHandler\HtmlBlock;
 use WPML\PB\Gutenberg\StringsInBlock\DOMHandler\StandardBlock;
 use WPML\PB\Gutenberg\StringsInBlock\DOMHandler\ListBlock;
+use WPML\PB\Gutenberg\StringsInBlock\DOMHandler\ListItemBlock;
 use WPML\PB\Gutenberg\XPath;
 
 class HTML extends Base {
 
-	const LIST_BLOCK_NAME = 'core/list';
-	const HTML_BLOCK_NAME = 'core/html';
+	const LIST_BLOCK_NAME      = 'core/list';
+	const LIST_ITEM_BLOCK_NAME = 'core/list-item';
+	const HTML_BLOCK_NAME      = 'core/html';
 
 	/**
 	 * @param \WP_Block_Parser_Block $block
@@ -82,17 +84,18 @@ class HTML extends Base {
 				$elements       = $xpath->query( $query );
 				foreach ( $elements as $element ) {
 					list( $text, ) = $dom_handle->getPartialInnerHTML( $element );
+					$translation   = $this->getTranslation( $text, $lang, $block, $string_translations );
 					$block         = $this->updateTranslationInBlock(
 						$text,
-						$lang,
+						$this->apply_placeholders_for_html_entities( $translation ),
 						$block,
-						$string_translations,
 						$element,
 						$dom_handle
 					);
 				}
 			}
-			list( $block->innerHTML, ) = $dom_handle->getFullInnerHTML( $dom->documentElement );
+			$content          = $dom_handle->getFullInnerHTML( $dom->documentElement );
+			$block->innerHTML = $this->restore_placeholders_for_html_entities( reset( $content ) );
 
 		} elseif ( isset( $block->blockName, $block->innerHTML ) && '' !== trim( $block->innerHTML ) ) {
 
@@ -100,49 +103,6 @@ class HTML extends Base {
 
 			if ( $translation ) {
 				$block->innerHTML = $translation;
-			}
-		}
-
-		return $block;
-	}
-
-	/**
-	 * This is required when a block has innerBlocks and translatable content at the root.
-	 * Unfortunately we cannot use the DOM because we have only HTML extracts which
-	 * are not valid taken independently.
-	 *
-	 * {@internal
-	 *          innerContent => [
-	 *              '<div><p>The title</p>',
-	 *              null,
-	 *              '\n\n',
-	 *              null,
-	 *              '</div>'
-	 *          ]}
-	 *
-	 * @param \WP_Block_Parser_Block $block
-	 * @param \DOMNode               $element
-	 * @param string                 $translation
-	 *
-	 * @return \WP_Block_Parser_Block
-	 */
-	public static function update_string_in_innerContent( \WP_Block_Parser_Block $block, \DOMNode $element, $translation ) {
-		if ( empty( $block->innerContent ) || empty( $element->nodeValue ) ) {
-			return $block;
-		}
-
-		if ( $element instanceof \DOMAttr ) {
-			$search_value = preg_quote( esc_attr( $element->nodeValue ), '/' );
-			$search       = '/(")(' . $search_value . ')(")/';
-			$translation  = esc_attr( $translation );
-		} else {
-			$search_value = preg_quote( $element->nodeValue, '/' );
-			$search       = '/(>)(' . $search_value . ')(<)/';
-		}
-
-		foreach ( $block->innerContent as &$inner_content ) {
-			if ( $inner_content ) {
-				$inner_content = preg_replace( $search, '${1}' . $translation . '${3}', $inner_content );
 			}
 		}
 
@@ -179,8 +139,9 @@ class HTML extends Base {
 	private function get_dom_handler( \WP_Block_Parser_Block $block ) {
 		$class = wpml_collect(
 			[
-				self::LIST_BLOCK_NAME => ListBlock::class,
-				self::HTML_BLOCK_NAME => HtmlBlock::class,
+				self::LIST_BLOCK_NAME      => ListBlock::class,
+				self::HTML_BLOCK_NAME      => HtmlBlock::class,
+				self::LIST_ITEM_BLOCK_NAME => ListItemBlock::class,
 			]
 		)->get( $block->blockName, StandardBlock::class );
 
@@ -189,18 +150,16 @@ class HTML extends Base {
 
 	/**
 	 * @param string                 $text
-	 * @param string                 $lang
+	 * @param string                 $translation
 	 * @param \WP_Block_Parser_Block $block
-	 * @param array                  $string_translations
 	 * @param \DOMNode               $element
 	 * @param DOMHandle              $dom_handle
 	 *
 	 * @return \WP_Block_Parser_Block
 	 */
-	private function updateTranslationInBlock( $text, $lang, \WP_Block_Parser_Block $block, array $string_translations, $element, $dom_handle ) {
-		$translation = $this->getTranslation( $text, $lang, $block, $string_translations );
+	private function updateTranslationInBlock( $text, $translation, \WP_Block_Parser_Block $block, $element, $dom_handle ) {
 		if ( $translation ) {
-			$block = self::update_string_in_innerContent( $block, $element, $translation );
+			$block = $dom_handle->applyStringTranslations( $block, $element, $translation, $text );
 			$dom_handle->setElementValue( $element, $translation );
 		}
 
@@ -235,5 +194,59 @@ class HTML extends Base {
 		}
 
 		return $translation;
+	}
+
+	/**
+	 * HTML_ENTITY_PLACEHOLDERS
+	 * Some translations are applied using \DomHandler, which converts any HTML entity
+	 * back to it's character, i.e. &apos; becomes '.
+	 * At some places (like shortcode attributes) it breaks the attribute value, because
+	 * the delimter can use the same kind of quotes, i.e. [my attr='Some'value'] => broken.
+	 * To avoid this problem the HTML entities are replaced before parsing the content with
+	 * \DomDocument::loadHTML() and re-applied afterwards.
+	 */
+	const HTML_ENTITY_PLACEHOLDERS = [
+		'&apos;' => 'WPML_PLACEHOLDER_APOS',
+		'&quot;' => 'WPML_PLACEHOLDER_QUOT',
+	];
+
+	/**
+	 * Replaces HTML entities with WPML entity placeholders in given $content.
+	 * See self::HTML_ENTITY_PLACEHOLDERS for affected entities.
+	 *
+	 * @param string $content
+	 *
+	 * @return string
+	 */
+	private function apply_placeholders_for_html_entities( $content ) {
+		if ( empty( $content ) ) {
+			return $content;
+		}
+
+		return str_replace(
+			array_keys( self::HTML_ENTITY_PLACEHOLDERS ),
+			array_values( self::HTML_ENTITY_PLACEHOLDERS ),
+			$content
+		);
+	}
+
+	/**
+	 * Replaces WPML entity placeholders with HTML entities in given $content.
+	 * See self::HTML_ENTITY_PLACEHOLDERS for affected entities.
+	 *
+	 * @param string $content
+	 *
+	 * @return string
+	 */
+	private function restore_placeholders_for_html_entities( $content ) {
+		if ( empty( $content ) ) {
+			return $content;
+		}
+
+		return str_replace(
+			array_values( self::HTML_ENTITY_PLACEHOLDERS ),
+			array_keys( self::HTML_ENTITY_PLACEHOLDERS ),
+			$content
+		);
 	}
 }

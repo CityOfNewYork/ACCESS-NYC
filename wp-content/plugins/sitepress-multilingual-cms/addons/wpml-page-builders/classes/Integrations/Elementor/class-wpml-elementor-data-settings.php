@@ -32,10 +32,10 @@ class WPML_Elementor_Data_Settings implements IWPML_Page_Builders_Data_Settings 
 	}
 
 	/**
-	 * @param array $value
-	 * @param int $translated_post_id
-	 * @param int $original_post_id
-	 * @param string $meta_key
+	 * @param  array  $value
+	 * @param  int    $translated_post_id
+	 * @param  int    $original_post_id
+	 * @param  string $meta_key
 	 *
 	 * @return mixed
 	 */
@@ -77,13 +77,14 @@ class WPML_Elementor_Data_Settings implements IWPML_Page_Builders_Data_Settings 
 	 * @return array
 	 */
 	public function get_fields_to_copy() {
-		return array(
+		return [
 			'_elementor_version',
 			self::META_KEY_MODE,
 			'_elementor_css',
 			'_elementor_template_type',
 			'_elementor_template_widget_type',
-		);
+			'_elementor_popup_display_settings',
+		];
 	}
 
 	/**
@@ -107,7 +108,7 @@ class WPML_Elementor_Data_Settings implements IWPML_Page_Builders_Data_Settings 
 	/**
 	 * @return string
 	 */
-	public function get_pb_name(){
+	public function get_pb_name() {
 		return 'Elementor';
 	}
 
@@ -119,8 +120,8 @@ class WPML_Elementor_Data_Settings implements IWPML_Page_Builders_Data_Settings 
 	}
 
 	/**
-	 * @param array $custom_fields_values
-	 * @param int $post_id
+	 * @param  array $custom_fields_values
+	 * @param  int   $post_id
 	 *
 	 * @return array
 	 */

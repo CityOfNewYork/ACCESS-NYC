@@ -62,10 +62,11 @@ if ( ! $is_cron_request && ! $is_wp_cli_request && ! is_admin() && ! otgs_is_res
 				) {
 
 					$showFrontendBanner = function () use ( $repository_id ) {
-					    $wpmlText = sprintf(
-                            __( 'This site is registered on %s as a development site.', 'installer' ),
-                            '<a href="https://wpml.org">wpml.org</a>'
-                        );
+						$removeFrontendBannerLink = 'https://wpml.org/faq/how-to-remove-the-this-site-is-registered-on-wpml-org-as-a-development-site-notice/';
+						$wpmlText = sprintf(
+							__( 'This site is registered on %s as a development site. Switch to a production site key to %s.', 'installer' ),
+							'<a href="https://wpml.org">wpml.org</a>', '<a href="' . $removeFrontendBannerLink . '">remove this banner</a>'
+						);
 						$message = $repository_id === 'wpml'
 							? $wpmlText
 							: __( 'This site is registered on Toolset.com as a development site.', 'installer' );
@@ -113,7 +114,7 @@ $wp_installer_instance = dirname( __FILE__ ) . '/installer.php';
 global $wp_installer_instances;
 $wp_installer_instances[ $wp_installer_instance ] = [
 	'bootfile' => $wp_installer_instance,
-	'version'  => '3.0.0'
+	'version'  => '3.1.4'
 ];
 
 /**
@@ -231,9 +232,12 @@ if ( ! function_exists( 'wpml_installer_instance_delegator' ) ) {
 
 		// set configuration.
 		$template_path = realpath( get_template_directory() );
-		if ( $template_path && strpos( realpath( $delegate['bootfile'] ), (string) $template_path ) === 0 ) {
-			$delegate['args']['in_theme_folder'] = dirname( ltrim( str_replace( realpath( get_template_directory() ), '', realpath( $delegate['bootfile'] ) ), '\\/' ) );
+		if ( $template_path && strpos( (string) realpath( $delegate['bootfile'] ), (string) $template_path ) === 0 ) {
+			/** @var string $filepath */
+			$filepath = str_replace( (string) realpath( get_template_directory() ), '', (string) realpath( $delegate['bootfile'] ) );
+			$delegate['args']['in_theme_folder'] = dirname( ltrim( $filepath, '\\/' ) );
 		}
+
 		if ( isset( $delegate['args'] ) && is_array( $delegate['args'] ) ) {
 			foreach ( $delegate['args'] as $key => $value ) {
 				WP_Installer()->set_config( $key, $value );

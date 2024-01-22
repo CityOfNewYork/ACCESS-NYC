@@ -3,7 +3,8 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "en"
          },
          "From:": [
             "De:"
@@ -68,12 +69,6 @@
          "Add Translation Manager": [
             "Adicionar Gestor de Tradução"
          ],
-         "Select an existing user and set as Translator": [
-            "Selecionar um utilizador existente e definir como Tradutor"
-         ],
-         "Create a new user and set as Translator": [
-            "Criar um novo utilizador e definir como Tradutor"
-         ],
          "Set language pair(s)": [
             "Definir um ou vários pares de idiomas"
          ],
@@ -85,6 +80,12 @@
          ],
          "Add a Translator": [
             "Adicionar um Tradutor"
+         ],
+         "Select an existing user and set as Translator": [
+            "Selecionar um utilizador existente e definir como Tradutor"
+         ],
+         "Create a new user and set as Translator": [
+            "Criar um novo utilizador e definir como Tradutor"
          ],
          "Edit language pair(s) for translator": [
             "Editar um ou vários pares de idiomas para o tradutor"
@@ -131,26 +132,14 @@
          "Click here": [
             "Clique aqui"
          ],
-         "The name of your language as it will appear on your site's language switcher.": [
-            "O nome do seu idioma, tal como aparecerá no alternador de idiomas do seu website."
-         ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
             "O formato errado. Pode conter apenas letras minúsculas e \"-\". Por exemplo: \"fr\" , \"pt-br\", \"zh-hans\""
-         ],
-         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
-            "Um valor único que identifica o idioma na base de dados e no URL. Uma vez gravado, o código do idioma não poderá ser alterado."
          ],
          "Language": [
             "Língua"
          ],
-         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
-            "Se o seu idioma personalizado for semelhante a um idioma existente, pode utilizar a verificação ortográfica do idioma existente e a tradução automática. Por exemplo, se o seu idioma personalizado for alemão da Suíça, pode mapear alemão como o idioma a utilizar para a verificação ortográfica e a tradução automática. Se não mapear o seu idioma personalizado para um idioma existente, as funcionalidade de verificação ortográfica e tradução automática não estarão disponíveis nesse idioma."
-         ],
          "Location": [
             "Localização"
-         ],
-         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
-            "O valor que o WPML verifica ao carregar traduções de ficheiros MO e PO. A configuração regional predefinida está incluída nos nomes dos ficheiros na sua pasta /wp-content/languages/ na sua configuração do WordPress."
          ],
          "Code": [
             "Código"
@@ -158,29 +147,17 @@
          "The language will not be supported by automatic translations": [
             "O idioma não será suportado por traduções automáticas"
          ],
-         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
-            "O Google utiliza o atributo hreflang para direcionar os utilizadores para websites no seu idioma e localização relevantes. Exemplos:"
-         ],
          "Language mapping": [
             "Mapeamento de idiomas"
          ],
-         "All English-speaking users: en": [
-            "Todos os utilizadores falantes de Inglês: en"
-         ],
          "Don't map this language": [
             "Não mapear este idioma"
-         ],
-         "English for UK users: en-gb": [
-            "Inglês para utilizadores de Reino Unido: en-gb"
          ],
          "Default locale": [
             "Localização pré-definida"
          ],
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
             "Formato errado. Pode conter apenas letras minúsculas e \"_\". Por exemplo: \"de\" , \"de_DE\", \"zh_Hant_TW\""
-         ],
-         "English for US users: en-us": [
-            "Inglês para utilizadores dos EUA: en-us"
          ],
          "hreflang": [
             "hreflang"
@@ -202,6 +179,30 @@
          ],
          "Save language": [
             "Guardar idioma"
+         ],
+         "The name of your language as it will appear on your site's language switcher.": [
+            "O nome do seu idioma, tal como aparecerá no alternador de idiomas do seu website."
+         ],
+         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "Um valor único que identifica o idioma na base de dados e no URL. Uma vez gravado, o código do idioma não poderá ser alterado."
+         ],
+         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "Se o seu idioma personalizado for semelhante a um idioma existente, pode utilizar a verificação ortográfica do idioma existente e a tradução automática. Por exemplo, se o seu idioma personalizado for alemão da Suíça, pode mapear alemão como o idioma a utilizar para a verificação ortográfica e a tradução automática. Se não mapear o seu idioma personalizado para um idioma existente, as funcionalidade de verificação ortográfica e tradução automática não estarão disponíveis nesse idioma."
+         ],
+         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "O valor que o WPML verifica ao carregar traduções de ficheiros MO e PO. A configuração regional predefinida está incluída nos nomes dos ficheiros na sua pasta /wp-content/languages/ na sua configuração do WordPress."
+         ],
+         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "O Google utiliza o atributo hreflang para direcionar os utilizadores para websites no seu idioma e localização relevantes. Exemplos:"
+         ],
+         "All English-speaking users: en": [
+            "Todos os utilizadores falantes de Inglês: en"
+         ],
+         "English for UK users: en-gb": [
+            "Inglês para utilizadores de Reino Unido: en-gb"
+         ],
+         "English for US users: en-us": [
+            "Inglês para utilizadores dos EUA: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
             "Determina se os URLs neste idioma são codificados ou usam os carateres ASCII (se não tiver a certeza, escolha \"Não\")."
@@ -230,18 +231,6 @@
          "What are the languages of your site?": [
             "Quais são os idiomas do seu website?"
          ],
-         "+ Add a Translation Manager": [
-            "+ Adicionar um Gestor de Tradução"
-         ],
-         "+ Add a Translator": [
-            "+ Adicionar um Tradutor"
-         ],
-         "%sLocal translators%s are users of your site that can log in and add, edit, and review your site's translations. Add a translator and their associated translation pairs to assign them translation jobs.": [
-            "%sTradutores Locais%s são utilizadores do seu website que podem iniciar sessão e adicionar, editar e rever as traduções do seu website. Adicione um tradutor e os seus pares de idiomas relacionados para lhes atribuir trabalhos de tradução."
-         ],
-         "Translators": [
-            "Tradutores"
-         ],
          "You can add a dedicated person to oversee everything translation-related on your site. %sTranslation Managers%s can add new local translators or professional translation services, create and assign translation jobs, review completed translations, and change translation-related settings.": [
             "Pode adicionar uma pessoa que irá ser responsável por supervisionar tudo o que está relacionado com a tradução no seu website. Os %sGestores de Tradução%s podem adicionar novos tradutores locais ou serviços profissionais de tradução, criar e atribuir trabalhos de tradução, rever traduções concluídas e alterar as definições relacionadas com a tradução."
          ],
@@ -250,6 +239,12 @@
          ],
          "Note: All Administrators are automatically given Translation Manager privileges.": [
             "Aviso: Todos os Administradores recebem automaticamente permissões de Gestor de Tradução."
+         ],
+         "%sLocal translators%s are users of your site that can log in and add, edit, and review your site's translations. Add a translator and their associated translation pairs to assign them translation jobs.": [
+            "%sTradutores Locais%s são utilizadores do seu website que podem iniciar sessão e adicionar, editar e rever as traduções do seu website. Adicione um tradutor e os seus pares de idiomas relacionados para lhes atribuir trabalhos de tradução."
+         ],
+         "Translators": [
+            "Tradutores"
          ]
       }
    }

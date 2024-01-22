@@ -1,0 +1,181 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Close": [
+            "Stäng"
+         ],
+         "Please take a screenshot of this message and report this issue to <a>WPML support</a>.": [
+            "Ta en skärmdump av meddelandet och rapportera problemet till <a>WPML supporten</a>."
+         ],
+         "This copy of the site has the same content as the original site on %s, but it doesn’t have credits for automatic translation.": [
+            "Denna kopia av webbplatsen har samma innehåll som den ursprungliga webbplatsen på %s, men den har inte krediter för automatisk översättning."
+         ],
+         "If you want to use automatic translation for this site in the future, you can either <a1>add credits to this site</a1> or <a2>share the credits from the original site</a2>.": [
+            "Om du vill använda automatisk översättning för den här webbplatsen i framtiden kan du antingen <a1>lägga till krediter på den här webbplatsen</a1> eller <a2>dela med dig från den ursprungliga webbplatsen</a2>."
+         ],
+         "There was an error checking for credits to share. Please take a screenshot of this message and report it in <a>WPML support</a>.": [
+            "Det uppstod ett fel vid kontroll av krediter att dela. Ta en skärmdump av detta meddelande och rapportera det i <a>WPML-support</a>."
+         ],
+         "You’re all set": [
+            "Allt är klart"
+         ],
+         "To allow the sites running on %s and %s to use the same credits for automatic translation, you need to:": [
+            "För att webbplatserna som körs på %s och %s ska kunna använda samma krediter för automatisk översättning måste du:"
+         ],
+         "Follow <a>this link</a> to access the migration code (you can't get it by visiting %s manually)": [
+            "Följ <a>denna länk</a> för att få tillgång till migreringskoden (du kan inte få den genom att besöka %s manuellt)"
+         ],
+         "Click on <b>Copy migration code</b>": [
+            "Klicka på <b>Kopiera migreringskod</b>"
+         ],
+         "Paste the migration code into the field below.": [
+            "Kopiera in migrationskoden i fältet nedan."
+         ],
+         "Migration code": [
+            "Migreringskod"
+         ],
+         "Continue": [
+            "Fortsätt"
+         ],
+         "Go back": [
+            "Gå tillbaka"
+         ],
+         "Let’s connect the automatic translation credits between the two copies of this site": [
+            "Låt oss ansluta de automatiska översättningskrediterna mellan de två kopiorna av denna webbplats"
+         ],
+         "WPML was unable to copy your site's translations, translation memory, and glossary to this new URL.": [
+            "WPML kunde inte kopiera din webbplats översättningar, översättningsminne och ordlista till den nya webbadressen."
+         ],
+         "Error with copying translation information to new URL": [
+            "Fel vid kopiering av översättningsinformation till ny URL"
+         ],
+         "Great. Now this site and its copy on %s are sharing the credits for automatic translation.": [
+            "Bra. Nu delar den här webbplatsen och dess kopia på %s krediterna för automatisk översättning."
+         ],
+         "Credits that you add on either site will be available on both sites. If you stop using this site, you don’t need to worry about losing credits.": [
+            "Krediter som du lägger till på någon av webbplatserna kommer att finnas tillgängliga på båda webbplatserna. Om du slutar använda den här webbplatsen behöver du inte oroa dig för att förlora krediter."
+         ],
+         "WPML was unable to connect your old and new URLs to share automatic translation credits.": [
+            "WPML kunde inte ansluta dina gamla och nya webbadresser för att dela automatiska översättningskrediter."
+         ],
+         "Error with sharing automatic translation credits": [
+            "Fel vid fördelning av krediter för automatisk översättning"
+         ],
+         "The site on %s has %d credits for automatic translation. Do you want to share these credits between %s and this new location (%s)?": [
+            "Webbplatsen på %s har %d krediter för automatisk översättning. Vill du dela dessa krediter mellan %s och den nya webbplatsen (%s)?"
+         ],
+         "The site on %s has a pay-as-you-go subscription for automatic translation. Do you want to share these credits between %s and this new location (%s)?": [
+            "Webbplatsen på %s har en pay-as-you-go-prenumeration för automatisk översättning. Vill du dela dessa krediter mellan %s och den nya webbplatsen (%s)?"
+         ],
+         "Yes (recommended)": [
+            "Ja (rekommenderas)"
+         ],
+         "In the next step, you will receive instructions for how to approve the credits sharing": [
+            "I nästa steg kommer du att få instruktioner om hur du godkänner kreditdelningen"
+         ],
+         "No": [
+            "Nej"
+         ],
+         "You will need to assign credits or set up a pay-as-you-go plan for this site to use automatic translation": [
+            "Du måste tilldela krediter eller skapa en pay-as-you-go-plan för den här webbplatsen för att använda automatisk översättning"
+         ],
+         "What happens when you share credits for automatic translation between sites?": [
+            "Vad händer när du delar krediter för automatisk översättning mellan webbplatser?"
+         ],
+         "Translation credits for this site": [
+            "Översättningskrediter för denna webbplats"
+         ],
+         "You can continue translating content normally on this site.": [
+            "Du kan fortsätta översätta innehåll normalt på den här webbplatsen."
+         ],
+         "Please keep in mind that there shouldn’t be a copy of this site at %s. If there still is a copy of it there, you will not be able to translate content on that site.": [
+            "Tänk på att det inte ska finnas någon kopia av den här webbplatsen på %s. Om det fortfarande finns en kopia av den där, kommer du inte att kunna översätta innehåll på den webbplatsen."
+         ],
+         "You indicated that you’re no longer running a copy of this site at %s. This means that:": [
+            "Du angav att du inte längre kör en kopia av den här webbplatsen på %s. Detta innebär att:"
+         ],
+         "You will not be able to use automatic translation on the old site": [
+            "Du kommer inte att kunna använda automatisk översättning på den gamla webbplatsen"
+         ],
+         "If you access the old site, it will trigger warnings on this site": [
+            "Om du besöker den gamla webbplatsen kommer det att utlösa varningar på den här webbplatsen"
+         ],
+         "I understand and am no longer running this site at %s": [
+            "Jag förstår och kör inte längre den här webbplatsen på %s"
+         ],
+         "Back": [
+            "Tillbaka"
+         ],
+         "Please check and confirm": [
+            "Kontrollera och bekräfta"
+         ],
+         "WPML was unable to update our records with your new URL.": [
+            "WPML kunde inte uppdatera våra register med din nya URL."
+         ],
+         "Error with moving translation information to new URL": [
+            "Fel vid överföring av översättningsinformation till ny URL"
+         ],
+         "Looks like this site was previously at %s and now it’s at %s.": [
+            "Det ser ut som om den här webbplatsen tidigare var på %s och nu är på %s."
+         ],
+         "Do you still have the same site running at %s?": [
+            "Har du fortfarande samma webbplats som körs på %s?"
+         ],
+         "Yes": [
+            "Ja"
+         ],
+         "This is only a copy - original site is still running": [
+            "Detta är endast en kopia - den ursprungliga webbplatsen är fortfarande i drift"
+         ],
+         "I changed the address of the site to this new one": [
+            "Jag har ändrat adressen till webbplatsen till den här nya adressen"
+         ],
+         "WPML detected a new address for this site": [
+            "WPML har upptäckt en ny adress för denna webbplats"
+         ],
+         "How to manage translations when migrating from development to production and more...": [
+            "Hur hanterar man översättningar när man migrerar från utveckling till produktion och mer..."
+         ],
+         "Looks like this site is a copy of a different site, or moved to a different URL. Please contact your translation manager to update Translation Management plugin configuration.": [
+            "Den här webbplatsen verkar vara en kopia av en anna webbplats eller har flyttats till en annan URL. Kontakta din översättningsansvarige för att uppdatera konfigureringen av insticksprogrammet Översättningshanterare."
+         ],
+         "Site Moved or Copied - Action Required": [
+            "Platsen flyttad eller kopierad - Åtgärd krävs"
+         ],
+         "You or someone else moved this site to %s. Please keep in mind that:": [
+            "Du eller någon annan har flyttat denna webbplats till %s. Tänk på att:"
+         ],
+         "Translations that you do at %s will not appear on this site.": [
+            "Översättningar som du gör på %s kommer inte att visas på den här webbplatsen."
+         ],
+         "You cannot edit translations on this site.": [
+            "Du kan inte redigera översättningar på den här webbplatsen."
+         ],
+         "The site at %s is using the same credits for automatic translation as this site.": [
+            "Webbplatsen på %s använder samma krediter för automatisk översättning som denna webbplats."
+         ],
+         "If you didn't intend to move this site to %s, you can <a>indicate that this site should be at %s</a>.": [
+            "Om du inte hade för avsikt att flytta den här webbplatsen till %s, kan du <a>markeraatt den här webbplatsen ska ligga på %s</a>."
+         ],
+         "This site has moved to a new location": [
+            "Denna webbplats har flyttats till en ny adress"
+         ],
+         "Moving the site back here will mean that you will be able to translate on this domain again, but you will not be able to update translations at %s.": [
+            "Om du flyttar tillbaka webbplatsen hit kommer du att kunna översätta på den här domänen igen, men du kommer inte att kunna uppdatera översättningarna på %s."
+         ],
+         "Yes - move back here": [
+            "Ja - flytta tillbaka hit"
+         ],
+         "No - keep the site on %s": [
+            "Nej - behåll webbplatsen på %s"
+         ],
+         "Are you sure that this site should run on %s and not %s?": [
+            "Är du säker på att den här webbplatsen ska köras på %s och inte %s?"
+         ]
+      }
+   }
+}

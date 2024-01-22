@@ -1,7 +1,7 @@
 <?php
 if ( ! function_exists( 'object_to_array' ) ) {
 	function object_to_array( $obj ) {
-		return json_decode( json_encode( $obj ), true );
+		return json_decode( (string) json_encode( $obj ), true );
 	}
 }
 
@@ -41,7 +41,9 @@ if ( ! function_exists( 'wpml_get_admin_url' ) ) {
 				$admin_url_parsed['query'] = http_build_query( $args['query'] );
 			}
 
-			$admin_url = http_build_url( $admin_url_parsed );
+			$admin_url = $admin_url_parsed
+				? http_build_url( $admin_url_parsed )
+				: admin_url();
 		}
 
 		return $admin_url;

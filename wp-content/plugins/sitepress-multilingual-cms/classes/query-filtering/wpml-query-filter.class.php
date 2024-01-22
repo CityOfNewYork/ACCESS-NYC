@@ -105,7 +105,9 @@ class WPML_Query_Filter extends  WPML_Full_Translation_API {
 		if ( is_array( $post_type ) && $this->has_translated_type( $post_type ) === true ) {
 			$join .= $this->any_post_type_join();
 		} elseif ( $post_type ) {
-			$join = $this->filter_single_type_join( $join, $post_type );
+			if ( is_string( $post_type ) ) {
+				$join = $this->filter_single_type_join( $join, $post_type );
+			}
 		} else {
 			$taxonomy_post_types = $this->tax_post_types_from_query( $query );
 			$join                = $this->tax_types_join( $join, $taxonomy_post_types );
@@ -230,9 +232,9 @@ class WPML_Query_Filter extends  WPML_Full_Translation_API {
 	}
 
 	/**
-	 * @param String $query_type
+	 * @param string $query_type
 	 *
-	 * @return array|bool|string
+	 * @return string|false
 	 */
 	private function determine_post_type( $query_type ) {
 		$debug_backtrace = $this->sitepress->get_backtrace( 0, true, false ); //Limit to a maximum level?
@@ -245,6 +247,8 @@ class WPML_Query_Filter extends  WPML_Full_Translation_API {
 				if ( ! $post_type ) {
 					if ( (bool) $query_vars['pagename'] ) {
 						$post_type = 'page';
+					} elseif ( $query_vars['attachment'] ) {
+						$post_type = 'attachment';
 					} elseif ( isset( $query_vars['p'] ) ) {
 						$post_type = $this->wpdb->get_var(
 							$this->wpdb->prepare(
@@ -290,7 +294,7 @@ class WPML_Query_Filter extends  WPML_Full_Translation_API {
 	/**
 	 * @param WP_Query $query
 	 *
-	 * @return String[]
+	 * @return string[]
 	 */
 	private function get_tax_query_posttype( $query ) {
 		return WPML_WP_Taxonomy::get_linked_post_types( $query->get( 'taxonomy' ) );
@@ -423,7 +427,16 @@ class WPML_Query_Filter extends  WPML_Full_Translation_API {
 			}
 		}
 
-		return apply_filters( 'wpml_is_comment_query_filtered', $filtered, $post_id );
+		/**
+		 * Override when a WP_Comment_Query should be filtered by language.
+		 *
+		 * @param bool             $filtered
+		 * @param int              $post_id
+		 * @param WP_Comment_Query $comment_query
+		 *
+		 * @return bool
+		 */
+		return apply_filters( 'wpml_is_comment_query_filtered', $filtered, $post_id, $comment_query );
 	}
 
 	/**

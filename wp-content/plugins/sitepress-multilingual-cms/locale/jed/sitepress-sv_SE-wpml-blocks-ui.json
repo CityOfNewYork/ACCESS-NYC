@@ -1,0 +1,169 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Advanced": [
+            "Avancerat"
+         ],
+         "HTML anchor": [
+            "HTML-ankare"
+         ],
+         "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
+            "Lägg till en genväg till det här blocket när du ladder sidan med hjälp av URL \"#anchor\"."
+         ],
+         "Additional CSS class(es)": [
+            "Ytterligare CSS-klass(er)"
+         ],
+         "Separate multiple classes with spaces.": [
+            "Separera flera klasser med mellanslag."
+         ],
+         "Color": [
+            "Färg"
+         ],
+         "Dimensions": [
+            "Dimensioner"
+         ],
+         "BLOCK": [
+            "BLOCK"
+         ],
+         "Block margin": [
+            "Blockmarginal"
+         ],
+         "Block padding": [
+            "Blockutfyllnad"
+         ],
+         "LANGUAGE": [
+            "SPRÅK"
+         ],
+         "Language spacing": [
+            "Språk avstånd"
+         ],
+         "Language padding": [
+            "Språkutfyllnad"
+         ],
+         "Display": [
+            "Bildskärm"
+         ],
+         "Show flag": [
+            "Visa flagga"
+         ],
+         "Show language name": [
+            "Visa språknamn"
+         ],
+         "Display language name in": [
+            "Visa språknamnet i"
+         ],
+         "Style": [
+            "Stil"
+         ],
+         "Flag settings": [
+            "Flagginställningar"
+         ],
+         "Width": [
+            "Bredd"
+         ],
+         "Height": [
+            "Höjd"
+         ],
+         "Spacing": [
+            "Avstånd"
+         ],
+         "Allow wrapping to multiple lines": [
+            "Tillåt radbrytning till flera rader"
+         ],
+         "Open on click": [
+            "Öppna vid klick"
+         ],
+         "Show arrow": [
+            "Visa pilen"
+         ],
+         "Layout": [
+            "Layout"
+         ],
+         "Justification": [
+            "Justering"
+         ],
+         "Orientation": [
+            "Orientering"
+         ],
+         "Typography": [
+            "Typografi"
+         ],
+         "Background": [
+            "Bakgrund"
+         ],
+         "Language Text": [
+            "Språk Text"
+         ],
+         "Language Background": [
+            "Språkbakgrund"
+         ],
+         "Current language text": [
+            "Text på aktuellt språk"
+         ],
+         "Current language background": [
+            "Aktuell språkbakgrund"
+         ],
+         "Full name": [
+            "Fullt namn"
+         ],
+         "Code": [
+            "Kod"
+         ],
+         "Justify items left": [
+            "Justera object till vänster"
+         ],
+         "Justify items center": [
+            "Justera object i mitten"
+         ],
+         "Justify items right": [
+            "Justera object till höger"
+         ],
+         "Justify items space between": [
+            "Justera object med mellanslag mellan"
+         ],
+         "Horizontal": [
+            "Horisontell"
+         ],
+         "Vertical": [
+            "Vertikal"
+         ],
+         "Normal": [
+            "Normal"
+         ],
+         "Medium": [
+            "Medelstor"
+         ],
+         "Large": [
+            "Stor"
+         ],
+         "X-Large": [
+            "X-Large"
+         ],
+         "Small": [
+            "Liten"
+         ],
+         "Displays the WPML Language Switcher.": [
+            "Visar WPML:s språkväxlare."
+         ],
+         "Language Switcher": [
+            "Språkväxlare"
+         ],
+         "displays the WPML Language Switcher": [
+            "visar WPML-språkväxlaren "
+         ],
+         "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
+            "Visar WPML-språkväxlaren <br/> Lär dig <a>att översätta detta block</a>."
+         ],
+         "Navigation Language Switcher": [
+            "Språkväxlare för navigering"
+         ],
+         "Reset all": [
+            "Återställ alla"
+         ]
+      }
+   }
+}

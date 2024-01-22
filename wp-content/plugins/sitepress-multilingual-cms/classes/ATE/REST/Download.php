@@ -7,12 +7,10 @@ namespace WPML\TM\ATE\REST;
 
 use WP_REST_Request;
 use WPML\Collect\Support\Collection;
-use WPML\Element\API\PostTranslations;
 use WPML\FP\Cast;
 use WPML\FP\Fns;
 use WPML\FP\Logic;
 use WPML\FP\Obj;
-use WPML\FP\Relation;
 use WPML\TM\API\Jobs;
 use WPML\TM\ATE\Download\Process;
 use WPML\TM\ATE\Review\PreviewLink;

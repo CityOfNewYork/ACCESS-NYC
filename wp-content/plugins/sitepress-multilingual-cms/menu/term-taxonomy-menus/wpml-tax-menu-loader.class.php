@@ -103,7 +103,7 @@ class WPML_Tax_Menu_Loader {
 				)
 			);
 			if ( $parent ) {
-				$parent = (int) icl_object_id( $parent, $element_type );
+				$parent = (int) icl_object_id( (int) $parent, $element_type );
 				$html   = str_replace( 'value="' . $parent . '"', 'value="' . $parent . '" selected="selected"', $html );
 			}
 		}

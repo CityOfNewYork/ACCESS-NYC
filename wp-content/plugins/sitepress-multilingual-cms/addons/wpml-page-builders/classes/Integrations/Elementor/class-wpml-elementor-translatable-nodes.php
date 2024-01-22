@@ -12,6 +12,7 @@ class WPML_Elementor_Translatable_Nodes implements IWPML_Page_Builders_Translata
 	const SETTINGS_FIELD      = 'settings';
 	const TYPE                = 'widgetType';
 	const DEFAULT_HEADING_TAG = 'h2';
+	const ELEMENT_TYPE        = 'elType';
 
 	/**
 	 * @var array
@@ -167,7 +168,8 @@ class WPML_Elementor_Translatable_Nodes implements IWPML_Page_Builders_Translata
 	 */
 	public function get_string_name( $node_id, $field, $settings ) {
 		$field_id = isset( $field['field_id'] ) ? $field['field_id'] : $field['field'];
-		return $field_id . '-' . $settings[ self::TYPE ] . '-' . $node_id;
+		$type     = isset( $settings[ self::TYPE ] ) ? $settings[ self::TYPE ] : $settings[ self::ELEMENT_TYPE ];
+		return $field_id . '-' . $type . '-' . $node_id;
 	}
 
 	/**
@@ -209,6 +211,19 @@ class WPML_Elementor_Translatable_Nodes implements IWPML_Page_Builders_Translata
 
 	public static function get_nodes_to_translate() {
 		return array(
+			// Container for the flexbox layout.
+			// It is not actually a widget but may have an URL to translate.
+			'container'            => [
+				'conditions' => [ self::ELEMENT_TYPE => 'container' ],
+				'fields'     => [
+					'link' => [
+						'field'       => 'url',
+						'type'        => __( 'Container: Link URL', 'sitepress' ),
+						'editor_type' => 'LINK',
+					],
+				],
+			],
+			// Everything below is a widget and has strings to translate.
 			'heading'     => array(
 				'conditions' => array( self::TYPE => 'heading' ),
 				'fields'     => array(
@@ -942,9 +957,16 @@ class WPML_Elementor_Translatable_Nodes implements IWPML_Page_Builders_Translata
 					),
 				),
 				'integration-class' => [
-					'\WPML\PB\Elementor\Modules\MulitpleGallery',
+					'\WPML\PB\Elementor\Modules\MultipleGallery',
 				]
 			),
+			'hotspot'   => [
+				'conditions'        => [ self::TYPE => 'hotspot' ],
+				'fields'            => [],
+				'integration-class' => [
+					\WPML\PB\Elementor\Modules\Hotspot::class,
+				],
+			],
 		);
 	}
 

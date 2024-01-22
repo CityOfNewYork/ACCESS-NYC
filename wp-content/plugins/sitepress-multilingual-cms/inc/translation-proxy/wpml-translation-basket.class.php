@@ -2,6 +2,7 @@
 
 use WPML\LIB\WP\Cache;
 use \WPML\Collect\Support\Traits\Macroable;
+use WPML\FP\Logic;
 use WPML\FP\Str;
 use function \WPML\FP\System\sanitizeString;
 use function \WPML\FP\pipe;
@@ -150,7 +151,7 @@ class WPML_Translation_Basket {
 	/**
 	 * Returns a unique name derived from an input name for a Translation Proxy Basket
 	 *
-	 * @param bool     $name
+	 * @param string   $name
 	 * @param bool|int $max_length
 	 *
 	 * @return bool|string
@@ -270,8 +271,10 @@ WPML_Translation_Basket::macro(
 	'get_batch_id_from_name',
 	curryN(
 		1,
-		Cache::memorize(
+		Cache::memorizeWithCheck(
 			'get_batch_id_from_name',
+			Logic::isNotEmpty(),
+			0,
 			pipe(
 				Str::replace( '"', '\\"' ),
 				sanitizeString(),

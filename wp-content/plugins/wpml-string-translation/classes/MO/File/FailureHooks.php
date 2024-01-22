@@ -51,6 +51,9 @@ class FailureHooks implements \IWPML_Backend_Action {
 			}
 		}
 
+		$notices = wpml_get_admin_notices();
+		$notices->remove_notice( self::NOTICE_GROUP, self::NOTICE_ID_MISSING_FOLDER );
+
 		if ( ! $this->status->isComplete() ) {
 			$this->displayRegenerateInProgressNotice();
 			$this->singleProcess->runPage();
@@ -106,7 +109,6 @@ class FailureHooks implements \IWPML_Backend_Action {
 
 	private function displayRegenerateInProgressNotice() {
 		$notices = wpml_get_admin_notices();
-		$notices->remove_notice( self::NOTICE_GROUP, self::NOTICE_ID_MISSING_FOLDER );
 		$notices->add_notice( new RegenerationInProgressNotice() );
 	}
 

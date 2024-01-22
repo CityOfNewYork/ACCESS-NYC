@@ -70,6 +70,9 @@ class WPML_TM_Jobs_Summary_Report {
 			$original_element = $this->element_factory->create( $job->get_original_element_id(), $job->get_type() );
 			$translation_element = $original_element->get_translation( $job->get_language_code() );
 
+			if ( is_null( $translation_element ) ) {
+				continue;
+			}
 
 			$this->jobs[ $job->get_basic_data()->manager_id ][ WPML_TM_Jobs_Summary::JOBS_COMPLETED_KEY ][] = array(
 				'completed_date'  => date_i18n( get_option( 'date_format', 'F d, Y' ), strtotime( $job->get_completed_date() ) ),

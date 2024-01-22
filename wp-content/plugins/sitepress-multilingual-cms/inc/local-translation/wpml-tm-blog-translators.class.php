@@ -1,5 +1,7 @@
 <?php
 
+use WPML\LIB\WP\User;
+
 class WPML_TM_Blog_Translators {
 
 	/** @var WPML_TM_Records $tm_records */
@@ -94,14 +96,7 @@ class WPML_TM_Blog_Translators {
 	 * @return array
 	 */
 	public function get_raw_blog_translators() {
-		$cache = $this->cache_factory->get( 'WPML_TM_Blog_Translators::get_raw_blog_translators' );
-
-		return $cache->execute_and_cache(
-			'has-translators',
-			function () {
-				return $this->translator_records->get_users_with_capability();
-			}
-		);
+		return $this->translator_records->get_users_with_capability();
 	}
 
 	/**
@@ -128,9 +123,7 @@ class WPML_TM_Blog_Translators {
 		$is_translator = $this->sitepress->get_wp_api()
 										 ->user_can( $user_id, 'translate' );
 		// check if user is administrator and return true if he is
-		if ( $admin_override && $this->sitepress->get_wp_api()
-												->user_can( $user_id, 'manage_options' )
-		) {
+		if ( $admin_override && User::isAdministrator( User::get( $user_id ) ) ) {
 			$is_translator = true;
 			do_action( 'wpml_tm_ate_enable_subscription', $user_id );
 		} else {

@@ -9,6 +9,7 @@ jQuery(function () {
     var restore_notifications_button = jQuery('#icl_restore_notifications');
     var restore_notifications_all_users = jQuery('#icl_restore_notifications_all_users');
     var sync_posts_taxonomies_button = jQuery('#wpml_sync_posts_taxonomies');
+    var ls_templates_update_domain_button = jQuery('#wpml_ls_templates_update_domain');
     remove_notifications_button.off('click');
     remove_notifications_button.on('click', remove_all_notifications);
     restore_notifications_button.off('click');
@@ -26,7 +27,7 @@ jQuery(function () {
 
 		var ajax_data = {
 			'action': 'icl_remove_notifications',
-			'nonce':  troubleshooting_data.nonce.icl_remove_notifications
+			'nonce': troubleshooting_strings.removeNotificationsNonce,
 		};
 
 		jQuery.ajax({
@@ -35,9 +36,6 @@ jQuery(function () {
 			data:     ajax_data,
 			dataType: 'json',
 			success:  function (response) {
-				remove_notifications_button.prop('disabled', false);
-				alert(troubleshooting_data.strings.done);
-				remove_notifications_button.next().fadeOut();
 				if(response.reload == 1) {
 					location.reload();
 				}
@@ -45,7 +43,11 @@ jQuery(function () {
 			error:    function (jqXHR, status, error) {
 				var parsed_response = jqXHR.statusText || status || error;
 				alert(parsed_response);
-			}
+			},
+			complete: function (response) {
+				remove_notifications_button.prop('disabled', false);
+				remove_notifications_button.next().fadeOut();
+			},
 		});
 
 		return false;
@@ -65,7 +67,7 @@ jQuery(function () {
 
 		var ajax_data = {
 			'action': 'icl_restore_notifications',
-			'nonce':  troubleshooting_data.nonce.icl_restore_notifications,
+			'nonce': troubleshooting_strings.restoreNotificationsNonce,
 			'all_users':  all_users
 		};
 
@@ -75,9 +77,6 @@ jQuery(function () {
 			data:     ajax_data,
 			dataType: 'json',
 			success:  function (response) {
-				restore_notifications_button.prop('disabled', false);
-				alert(troubleshooting_data.strings.done);
-				restore_notifications_button.next().fadeOut();
 				if(response.reload == 1) {
 					location.reload();
 				}
@@ -85,7 +84,11 @@ jQuery(function () {
 			error:    function (jqXHR, status, error) {
 				var parsed_response = jqXHR.statusText || status || error;
 				alert(parsed_response);
-			}
+			},
+			complete: function() {
+				restore_notifications_button.prop('disabled', false);
+				restore_notifications_button.next().fadeOut();
+			},
 		});
 
 		return false;
@@ -110,7 +113,8 @@ jQuery(function () {
 			{
 				url: ajaxurl,
 				data: {
-					action: 'icl_repair_broken_type_and_language_assignments'
+					action: 'icl_repair_broken_type_and_language_assignments',
+					icl_nonce: troubleshooting_strings.brokenTypeNonce,
 				},
 				success: function (response) {
 					var rows_fixed = response.data;

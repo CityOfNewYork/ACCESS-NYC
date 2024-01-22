@@ -37,7 +37,7 @@ class WPML_Remove_Pages_Not_In_Current_Language {
 		if ( 'all' !== $current_language && 0 !== count( $posts ) ) {
 			$post_type = $this->find_post_type( $get_page_arguments, $posts );
 
-			if ( Lst::includes( $post_type, PostTypes::getTranslatable() ) ) {
+			if ( $post_type && Lst::includes( $post_type, PostTypes::getTranslatable() ) ) {
 				$white_list = $this->get_posts_in_current_languages( $post_type, $current_language );
 				if ( $this->sitepress->is_display_as_translated_post_type( $post_type ) ) {
 					$original_posts_in_other_language = $this->get_original_posts_in_other_languages( $post_type, $current_language );
@@ -67,7 +67,8 @@ class WPML_Remove_Pages_Not_In_Current_Language {
 
 		$args = [ 'post_' . $post_type, $post_type, $current_language ];
 
-		return $this->get_post_ids( $this->wpdb->prepare( $query, $args ) );
+		/** @phpstan-ignore-next-line WP doc issue: When $query isset the return is not null. */
+		return $this->get_post_ids( $this->wpdb->prepare( $query, $args ));
 	}
 
 	/**
@@ -80,9 +81,9 @@ class WPML_Remove_Pages_Not_In_Current_Language {
 		$query = "
 				SELECT p.ID FROM {$this->wpdb->posts} p
 				JOIN {$this->wpdb->prefix}icl_translations wpml_translations ON p.ID = wpml_translations.element_id
-				WHERE wpml_translations.element_type=%s 
-				  AND p.post_type=%s 
-				  AND wpml_translations.language_code <> %s 
+				WHERE wpml_translations.element_type=%s
+				  AND p.post_type=%s
+				  AND wpml_translations.language_code <> %s
 				  AND wpml_translations.source_language_code IS NULL
 				  AND NOT EXISTS (
 				      SELECT translation_id FROM {$this->wpdb->prefix}icl_translations as other_translation
@@ -92,6 +93,7 @@ class WPML_Remove_Pages_Not_In_Current_Language {
 
 		$args = [ 'post_' . $post_type, $post_type, $current_language, $current_language ];
 
+		/** @phpstan-ignore-next-line WP doc issue: When $query isset the return is not null. */
 		return $this->get_post_ids( $this->wpdb->prepare( $query, $args ) );
 	}
 
@@ -105,8 +107,8 @@ class WPML_Remove_Pages_Not_In_Current_Language {
 	}
 
 	/**
-	 * @param array<string,string> $get_page_arguments
-	 * @param array<string,string> $new_arr
+	 * @param array<string,string>     $get_page_arguments
+	 * @param array<array|int|WP_Post> $new_arr
 	 *
 	 * @return false|string
 	 */

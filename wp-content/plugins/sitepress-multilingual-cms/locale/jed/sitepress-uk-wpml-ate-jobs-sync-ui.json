@@ -1,0 +1,104 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "en"
+         },
+         "Sending for translation": [
+            "Надсилання на переклад"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "Підключення до Розширеного редактора перекладів WPML"
+         ],
+         "Try again": [
+            "Повторити спробу"
+         ],
+         "You don't have the rights to review this language": [
+            "У вас немає прав на перевірку цією мовою."
+         ],
+         "%d translations left": [
+            "Залишилося замовлень на переклад: %d"
+         ],
+         "Preparing content for translation": [
+            "Приготування вмісту до перекладу"
+         ],
+         "Preparing more content for translation": [
+            "Приготування додаткового вмісту до перекладу"
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "Виникла проблема автоматичного перекладу, що потребує вашої уваги. Виправте її, щоб продовжити."
+         ],
+         "Account credits used": [
+            "Використані кредити облікового запису"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "Щойно ви витратите всі попередньо оплачені кредити, ми виставимо вам рахунок за всі використані додаткові кредити після закінчення місяця."
+         ],
+         "Payment limit:": [
+            "Ліміт оплати:"
+         ],
+         "%s credits": [
+            "%s кредитів"
+         ],
+         "Credits used:": [
+            "Використано кредитів:"
+         ],
+         "Credits left:": [
+            "Залишилося кредитів:"
+         ],
+         "Calculating": [
+            "Підрахунок"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "Решта попередньо оплачених кредитів, призначених для цього веб-сайту на WPML.org."
+         ],
+         "Prepaid credits left": [
+            "Залишилося попередньо оплачених кредитів"
+         ],
+         "Error": [
+            "Помилка"
+         ],
+         "Draft — Pending review": [
+            "Чернетка – Чекає на перевірку"
+         ],
+         "Complete": [
+            "Завершений"
+         ],
+         "Insufficient funds": [
+            "Недостатньо коштів"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "Докладніше про переклад вмісту читайте в <a>Посібнику з початку роботи</a>."
+         ],
+         "Let's Start Translating!": [
+            "Розпочнімо перекладати!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "Виберіть вміст у Консолі перекладу нижче і створіть своє перше замовлення на переклад!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "Змініть <a>налаштування автоматичного перекладу</a> (поточні замовлення на переклад будуть виконані з поточними налаштуваннями)."
+         ],
+         "Read more about translating your site automatically.": [
+            "Докладніше про автоматичний переклад веб-сайту."
+         ],
+         "Your site is being automatically translated!": [
+            "Ваш веб-сайт перекладається автоматично!"
+         ],
+         "Calculating...": [
+            "Підрахунок..."
+         ],
+         "Do not close WP admin!": [
+            "Не закривайте консоль адміністратора WP!"
+         ],
+         "The number of translations": [
+            "Кількість перекладів"
+         ],
+         "Cancel": [
+            "Скасувати"
+         ]
+      }
+   }
+}

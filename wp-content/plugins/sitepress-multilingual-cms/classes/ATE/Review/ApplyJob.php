@@ -2,6 +2,7 @@
 
 namespace WPML\TM\ATE\Review;
 
+use WPML\Element\API\Post as WPMLPost;
 use WPML\FP\Fns;
 use WPML\FP\Logic;
 use WPML\FP\Lst;
@@ -21,7 +22,7 @@ class ApplyJob implements \IWPML_Backend_Action, \IWPML_REST_Action, \IWPML_AJAX
 	private static $excluded_from_review = [ 'st-batch', 'package' ];
 
 	public function add_hooks() {
-		if ( Option::shouldBeReviewed() ) {
+		if ( \WPML_TM_ATE_Status::is_enabled_and_activated() && Option::shouldBeReviewed() ) {
 			self::addJobStatusHook();
 			self::addTranslationCompleteHook();
 			self::addTranslationPreSaveHook();
@@ -48,16 +49,27 @@ class ApplyJob implements \IWPML_Backend_Action, \IWPML_REST_Action, \IWPML_AJAX
 
 	private static function addTranslationCompleteHook() {
 		$isHoldToReviewMode = Fns::always( Option::getReviewMode() === 'before-publish' );
+
+		$shouldTranslationBeReviewed = function ( $translatedPostId ) {
+			$job = Jobs::getPostJob( $translatedPostId, Post::getType( $translatedPostId ), WPMLPost::getLang( $translatedPostId ) );
+
+			return $job && self::shouldBeReviewed( $job );
+		};
+
 		$isPostNewlyCreated = Fns::converge( Relation::equals(), [
 			Obj::prop( 'post_date' ),
 			Obj::prop( 'post_modified' )
 		] );
 
+		/** @var callable $isNotNull */
+		$isNotNull = Logic::isNotNull();
+
 		$setPostStatus = pipe(
 			Maybe::of(),
 			Fns::filter( $isHoldToReviewMode ),
+			Fns::filter( $shouldTranslationBeReviewed ),
 			Fns::map( Post::get() ),
-			Fns::filter( Logic::isNotNull() ),
+			Fns::filter( $isNotNull ),
 			Fns::filter( $isPostNewlyCreated ),
 			Fns::map( Obj::prop( 'ID' ) ),
 			Fns::map( Post::setStatus( Fns::__, 'draft' ) )

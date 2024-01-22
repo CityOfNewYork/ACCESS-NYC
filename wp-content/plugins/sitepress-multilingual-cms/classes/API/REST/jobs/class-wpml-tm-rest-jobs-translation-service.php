@@ -1,17 +1,6 @@
 <?php
 
 class WPML_TM_Rest_Jobs_Translation_Service {
-	/** @var WPML_WP_Cache */
-	private $cache;
-
-	/**
-	 * @param WPML_WP_Cache $cache
-	 */
-	public function __construct( WPML_WP_Cache $cache ) {
-		$this->cache = $cache;
-	}
-
-
 	/**
 	 * @param string|int $service_id
 	 *
@@ -32,30 +21,17 @@ class WPML_TM_Rest_Jobs_Translation_Service {
 	}
 
 	private function get_translation_service( $service_id ) {
-		$key     = 'service_' . $service_id;
-		$found   = false;
-		$service = $this->cache->get( $key, $found );
-
-		if ( ! $found ) {
+		$getService = function ( $service_id ) {
 			$current_service = TranslationProxy::get_current_service();
 			if ( $current_service && $current_service->id === $service_id ) {
-				$service = $current_service;
+				return $current_service;
 			} else {
-				$service = TranslationProxy_Service::get_service( $service_id );
+				return TranslationProxy_Service::get_service( $service_id );
 			}
+		};
 
-			$this->cache->set( $key, $service );
-		}
+		$cachedGetService = \WPML\LIB\WP\Cache::memorize( 'wpml-tm-services', 3600, $getService );
 
-		return $service;
-	}
-
-	/**
-	 * @return WPML_TM_Rest_Jobs_Translation_Service
-	 */
-	public static function create() {
-		$cache = new WPML_WP_Cache( 'wpml-tm-services' );
-
-		return new WPML_TM_Rest_Jobs_Translation_Service( $cache );
+		return $cachedGetService( $service_id );
 	}
 }

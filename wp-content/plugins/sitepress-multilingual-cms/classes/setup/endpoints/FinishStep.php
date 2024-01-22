@@ -2,6 +2,7 @@
 
 namespace WPML\Setup\Endpoint;
 
+use WPML\AdminLanguageSwitcher\AdminLanguageSwitcher;
 use WPML\Ajax\IHandler;
 use WPML\API\Settings;
 use WPML\Collect\Support\Collection;
@@ -14,10 +15,14 @@ use WPML\FP\Lst;
 use WPML\FP\Right;
 use WPML\Setup\Option;
 use WPML\TM\Menu\TranslationServices\Endpoints\Deactivate;
+use WPML\TranslationMode\Endpoint\SetTranslateEverything;
 
 class FinishStep implements IHandler {
 
 	public function run( Collection $data ) {
+		// Prepare media setup which will run right after finishing WPML setup.
+		\WPML\Media\Option::prepareSetup();
+
 		$wpmlInstallation = wpml_get_setup_instance();
 		$originalLanguage = Option::getOriginalLang();
 		$wpmlInstallation->finish_step1( $originalLanguage );
@@ -25,6 +30,14 @@ class FinishStep implements IHandler {
 		$wpmlInstallation->finish_installation();
 
 		self::enableFooterLanguageSwitcher();
+
+		if ( Option::isPausedTranslateEverything() ) {
+			// Resave translate everything settings as now languages
+			// are activated, which happened on 'finish_step2'.
+			make( SetTranslateEverything::class )->run(
+				wpml_collect( [ 'onlyNew' => true ] )
+			);
+		}
 
 		$translationMode = Option::getTranslationMode();
 		if ( ! Lst::includes( 'users', $translationMode ) ) {
@@ -51,7 +64,8 @@ class FinishStep implements IHandler {
 			Option::setTranslateEverything( false );
 		}
 
-		WPLoginUrlConverter::enable();
+		WPLoginUrlConverter::enable( true );
+		AdminLanguageSwitcher::enable();
 
 		return Right::of( true );
 	}
@@ -70,7 +84,7 @@ class FinishStep implements IHandler {
 
 	private static function setCurrentUserToTranslateAllLangs() {
 		$currentUser = User::getCurrent();
-		$currentUser->add_cap( \WPML_Translator_Role::CAPABILITY );
+		$currentUser->add_cap( \WPML\LIB\WP\User::CAP_TRANSLATE );
 		User::updateMeta( $currentUser->ID, \WPML_TM_Wizard_Options::ONLY_I_USER_META, true );
 
 		make( \WPML_Language_Pair_Records::class )->store(

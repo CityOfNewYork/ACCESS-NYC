@@ -1,5 +1,6 @@
 <?php
 
+use WPML\API\Sanitize;
 use WPML\TM\Menu\TranslationBasket\Strings;
 use function WPML\Container\make;
 
@@ -15,7 +16,7 @@ class SitePress_Table_Basket extends SitePress_Table {
 			'wpml-tm-translation-basket-and-options',
 			WPML_TM_URL . '/res/js/translation-basket-and-options.js',
 			array( 'wpml-tm-scripts', 'jquery-ui-progressbar', 'jquery-ui-datepicker', 'wpml-tooltip', 'wpml-tm-progressbar' ),
-			WPML_TM_VERSION
+			ICL_SITEPRESS_VERSION
 		);
 
 		wp_localize_script(
@@ -25,6 +26,7 @@ class SitePress_Table_Basket extends SitePress_Table {
 				'day_names'    => array_values( $wp_locale->weekday ),
 				'day_initials' => array_values( $wp_locale->weekday_initial ),
 				'month_names'  => array_values( $wp_locale->month ),
+				'nonce'        => wp_create_nonce( 'basket_extra_fields_refresh' ),
 			)
 		);
 
@@ -32,7 +34,7 @@ class SitePress_Table_Basket extends SitePress_Table {
 			'wpml-tm-jquery-ui-datepicker',
 			WPML_TM_URL . '/res/css/jquery-ui/datepicker.css',
 			array( 'wpml-tooltip' ),
-			WPML_TM_VERSION
+			ICL_SITEPRESS_VERSION
 		);
 
 		/** @var Strings $strings */
@@ -99,16 +101,12 @@ class SitePress_Table_Basket extends SitePress_Table {
 			case 'title':
 			case 'notes':
 				return $item[ $column_name ];
-				break;
 			case 'type':
 				return $this->get_post_type_label( $item[ $column_name ], $item );
-				break;
 			case 'status':
 				return $this->get_post_status_label( $item[ $column_name ] );
-				break;
 			case 'words':
 				return $item[ $column_name ];
-				break;
 			case 'languages':
 				$target_languages_data = $item['target_languages'];
 				$source_language_data  = $item['source_language'];
@@ -130,7 +128,6 @@ class SitePress_Table_Basket extends SitePress_Table {
 				}
 
 				return $languages;
-				break;
 			default:
 				return print_r( $item, true ); // Show the whole array for troubleshooting purposes
 		}
@@ -311,7 +308,7 @@ class SitePress_Table_Basket extends SitePress_Table {
 		} elseif ( $this->current_action() == 'delete' && isset( $_GET['id'] ) && isset( $_GET['item_type'] ) ) {
 			// Delete basket item from post action
 			$delete_basket_item_id   = filter_input( INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT );
-			$delete_basket_item_type = filter_input( INPUT_GET, 'item_type', FILTER_SANITIZE_STRING );
+			$delete_basket_item_type = Sanitize::stringProp( 'item_type', $_GET );
 			if ( $delete_basket_item_id && $delete_basket_item_type ) {
 				TranslationProxy_Basket::delete_item_from_basket(
 					$delete_basket_item_id,

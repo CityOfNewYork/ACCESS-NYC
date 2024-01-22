@@ -23,7 +23,7 @@ class WPML_ST_String_Translation_Priority_AJAX implements IWPML_Action {
 			$change_string_translation_priority_dialog = new WPML_Strings_Translation_Priority( $this->wpdb );
 
 			$string_ids = array_map( 'intval', $_POST['strings'] );
-			$priority   = filter_var( isset( $_POST['priority'] ) ? $_POST['priority'] : '', FILTER_SANITIZE_SPECIAL_CHARS );
+			$priority   = (string) filter_var( isset( $_POST['priority'] ) ? $_POST['priority'] : '', FILTER_SANITIZE_SPECIAL_CHARS );
 			$change_string_translation_priority_dialog->change_translation_priority_of_strings( $string_ids, $priority );
 
 			wp_send_json_success();

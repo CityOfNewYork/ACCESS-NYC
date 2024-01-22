@@ -73,6 +73,13 @@ class WPML_Config_Update_Integrator {
 	}
 
 	public function update_event_ajax() {
+		$nonce = isset( $_POST['_icl_nonce'] ) ? sanitize_text_field( $_POST['_icl_nonce'] ) : '';
+
+		if ( ! wp_verify_nonce( $nonce, 'icl_theme_plugins_compatibility_nonce' ) ) {
+			wp_send_json_error( esc_html__( 'Invalid request!', 'sitepress' ), 400 );
+			return;
+		}
+
 		if ( $this->get_worker()
 				  ->run() ) {
 			echo date( 'F j, Y H:i a', time() );

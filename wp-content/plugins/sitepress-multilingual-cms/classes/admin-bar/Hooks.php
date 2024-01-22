@@ -48,6 +48,6 @@ class Hooks implements \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	}
 
 	public function enqueueScripts() {
-		wp_enqueue_style( 'wpml-tm-admin-bar', WPML_TM_URL . '/res/css/admin-bar-style.css', array(), WPML_TM_VERSION );
+		wp_enqueue_style( 'wpml-tm-admin-bar', WPML_TM_URL . '/res/css/admin-bar-style.css', array(), ICL_SITEPRESS_VERSION );
 	}
 }

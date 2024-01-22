@@ -1,5 +1,7 @@
 <?php
 
+use WPML\API\Sanitize;
+
 /**
  * @author OnTheGo Systems
  */
@@ -79,7 +81,7 @@ class WPML_XML_Config_Log_Notice {
 	 */
 	private function is_admin_user_action() {
 		return is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX )
-			   && ( 'heartbeat' !== filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING ) )
-			   && ( ! defined( 'DOING_CRON' ) || ! DOING_CRON );
+		       && ( 'heartbeat' !== Sanitize::stringProp( 'action', $_POST ) )
+		       && ( ! defined( 'DOING_CRON' ) || ! DOING_CRON );
 	}
 }

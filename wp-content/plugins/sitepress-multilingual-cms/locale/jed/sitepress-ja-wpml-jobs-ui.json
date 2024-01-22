@@ -5,14 +5,399 @@
          "": {
             "domain": "messages"
          },
-         "Insufficient funds": [
-            "資金不足"
+         "Draft — Pending review": [
+            "草稿 — レビュー待ち"
          ],
          "Complete": [
             "完了"
          ],
+         "Insufficient funds": [
+            "資金不足"
+         ],
+         "Start batch sync": [
+            "一括同期を開始する"
+         ],
+         "Cancel job": [
+            "ジョブをキャンセル"
+         ],
+         "Continue reviewing": [
+            "レビューを続ける"
+         ],
+         "Start downloading XLIFF file": [
+            "XLIFF ファイルのダウンロードを開始する"
+         ],
+         "Edit": [
+            "編集"
+         ],
+         "Get translation": [
+            "翻訳を取得する"
+         ],
+         "Resign": [
+            "辞退"
+         ],
+         "Review": [
+            "レビュー"
+         ],
+         "Translate": [
+            "翻訳する"
+         ],
+         "Take and Translate": [
+            "取得して翻訳する"
+         ],
+         "View": [
+            "表示"
+         ],
+         "Delete Translations": [
+            "翻訳を削除"
+         ],
+         "Keep Translations as Draft": [
+            "翻訳を草稿として保持"
+         ],
+         "Never mind. I want to review these translations.": [
+            "取り消してください。翻訳のレビューを希望します。"
+         ],
+         "Cancel": [
+            "キャンセル"
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "これを行うと、翻訳キューから選択したジョブを公開前に削除します。これらの翻訳をどうしますか？"
+         ],
+         "Cancel Translation Review": [
+            "翻訳レビューをキャンセル"
+         ],
+         "Bulk actions": [
+            "一括操作"
+         ],
+         "Apply": [
+            "適用"
+         ],
+         "Actions applied to multiple translation jobs can take a few seconds. Please do not leave the page.": [
+            "複数の翻訳ジョブに適用されるアクションは、数秒かかることがあります。ページを離れないようにしてください。"
+         ],
+         "Actions applied to multiple translation jobs can take a few minutes. Please do not leave the page.": [
+            "複数の翻訳ジョブに適用されるアクションは、数秒かかることがあります。ページを離れないようにしてください。"
+         ],
+         "Select translator": [
+            "翻訳者を選択"
+         ],
+         "Assign": [
+            "指定する"
+         ],
+         "In progress": [
+            "進行中"
+         ],
+         "Translation ready to download": [
+            "翻訳をダウンロードする準備が完了しました"
+         ],
+         "Completed": [
+            "完了済み"
+         ],
+         "Published — Pending review": [
+            "公開済み — レビュー保留中"
+         ],
+         "Published — Review in progress": [
+            "公開済み — レビュー進行中"
+         ],
+         "Draft — Review in progress": [
+            "ドラフト — レビュー進行中"
+         ],
+         "Needs update": [
+            "更新が必要"
+         ],
+         "Cancelled": [
+            "キャンセル済み"
+         ],
+         "Needs translation": [
+            "翻訳が必要です"
+         ],
+         "View original": [
+            "原文を表示"
+         ],
+         "(no title)": [
+            "(タイトルなし)"
+         ],
+         "Automatic translation": [
+            "自動翻訳"
+         ],
+         "TP ID: %d": [
+            "TP ID: %d"
+         ],
+         "Reset": [
+            "リセット"
+         ],
+         "Filter": [
+            "フィルター"
+         ],
+         "ID (%s)": [
+            "ID (%s)"
+         ],
+         "Title (%s)": [
+            "タイトル (%s)"
+         ],
+         "Type (%s)": [
+            "種類 (%s)"
+         ],
+         "Language (%s)": [
+            "言語 (%s)"
+         ],
+         "Batch name (%s)": [
+            "バッチ名 (%s)"
+         ],
+         "Status (%s)": [
+            "ステータス (%s)"
+         ],
+         "Translated by (%s)": [
+            "翻訳担当 (%s)"
+         ],
+         "Sent date (%s)": [
+            "送信日 (%s)"
+         ],
+         "Deadline (%s)": [
+            "締め切り (%s)"
+         ],
+         "Clear all filters": [
+            "すべてのフィルターをクリア"
+         ],
+         "Any Translation Service": [
+            "任意の翻訳サービス"
+         ],
+         "Any WordPress Translator": [
+            "任意のWordPress翻訳者"
+         ],
+         "From": [
+            "から"
+         ],
+         "To": [
+            "から"
+         ],
+         "Anyone": [
+            "任意"
+         ],
+         "Include jobs from translation services": [
+            "翻訳サービスからのジョブも含む"
+         ],
+         "All types": [
+            "全タイプ"
+         ],
+         "Select visible columns": [
+            "可視カラムを選択"
+         ],
+         "Sort descending": [
+            "降順で並べ替え"
+         ],
+         "Sort ascending": [
+            "昇順で並べ替え"
+         ],
+         "Cancel sorting": [
+            "並べ替えをキャンセル"
+         ],
+         "The bulk action is running...": [
+            "バルク アクションを実行しています..."
+         ],
+         "Export all jobs to XLIFF 1.0": [
+            "すべてのジョブを XLIFF 1.0 にエクスポートする"
+         ],
+         "Export all filtered jobs to XLIFF 1.0": [
+            "フィルタリングされたすべてのジョブを XLIFF 1.0 にエクスポートする"
+         ],
+         "Export all jobs to XLIFF 1.1": [
+            "すべてのジョブを XLIFF 1.1 にエクスポートする"
+         ],
+         "Export all filtered jobs to XLIFF 1.1": [
+            "フィルタリングされたすべてのジョブを XLIFF 1.1 にエクスポートする"
+         ],
+         "Export all jobs to XLIFF 1.2": [
+            "すべてのジョブを XLIFF 1.2 にエクスポートする"
+         ],
+         "Export all filtered jobs to XLIFF 1.2": [
+            "フィルタリングされたすべてのジョブを XLIFF 1.2 にエクスポートする"
+         ],
+         "Export": [
+            "エクスポート"
+         ],
+         "Select File": [
+            "ファイルを選択"
+         ],
+         ".xliff .zip": [
+            ".xliff .zip"
+         ],
+         "Importing": [
+            "インポートしています"
+         ],
+         "Import": [
+            "インポート"
+         ],
+         "Import / Export XLIFF": [
+            "XLIFFインポート/エクスポート"
+         ],
+         "Actions": [
+            "アクション"
+         ],
+         "Batch name": [
+            "バッチ名"
+         ],
+         "Filter by %s": [
+            "%sによりフィルター"
+         ],
+         "Title": [
+            "タイトル"
+         ],
+         "Approve translation reviews": [
+            "翻訳レビューを承認する"
+         ],
+         "Cancel jobs": [
+            "ジョブをキャンセル"
+         ],
+         "Cancel translation reviews": [
+            "翻訳レビューをキャンセルする"
+         ],
+         "Export to XLIFF %s": [
+            "XLIFF %s にエクスポートする"
+         ],
+         "Get translations": [
+            "翻訳を取得"
+         ],
+         "This action does not apply to any of the selected translation jobs": [
+            "このアクションは、選択された翻訳ジョブのいずれにも適用されません"
+         ],
+         "Translations have been downloaded": [
+            "翻訳がダウンロードされています"
+         ],
+         "Translation has been downloaded": [
+            "翻訳がダウンロードされています"
+         ],
+         "Translations could not be downloaded": [
+            "翻訳をダウンロードできませんでした"
+         ],
+         "Translation could not be downloaded": [
+            "翻訳をダウンロードできませんでした"
+         ],
+         "Approving translations reviews failed!": [
+            "翻訳レビューの承認に失敗しました！"
+         ],
+         "Failed approving translations for the following posts: ": [
+            "下記の投稿の翻訳の承認に失敗しました:"
+         ],
+         "Translations reviews approved successfully!": [
+            "翻訳レビューが正常に承認されました！"
+         ],
+         "No valid jobs selected to approve translations reviews!": [
+            "翻訳レビューの承認用に有効なジョブが選択されていません！"
+         ],
+         "The translator has been assigned to the job": [
+            "翻訳者がこのジョブに割り当てられました"
+         ],
+         "The translator could not be assigned to the job": [
+            "翻訳者をこのジョブに割り当てできませんでした"
+         ],
+         "The jobs have been cancelled": [
+            "ジョブがキャンセルされています"
+         ],
+         "The job has been cancelled": [
+            "ジョブがキャンセルされています"
+         ],
+         "The jobs could not be cancelled": [
+            "ジョブをキャンセルできませんでした"
+         ],
+         "The job could not be cancelled": [
+            "ジョブをキャンセルできませんでした"
+         ],
+         "Translation reviews have been canceled": [
+            "翻訳のレビューがキャンセルされています"
+         ],
+         "Translation review has been canceled": [
+            "翻訳のレビューがキャンセルされています"
+         ],
+         "Translation reviews could not be canceled": [
+            "翻訳のレビューをキャンセルできませんでした"
+         ],
+         "Translation review could not be canceled": [
+            "翻訳のレビューをキャンセルできませんでした"
+         ],
+         "Sent on": [
+            "送信日"
+         ],
+         "Deadline": [
+            "期日"
+         ],
+         "Status": [
+            "状況"
+         ],
          "Pending review": [
             "レビュー待ち"
+         ],
+         "ID": [
+            "ID"
+         ],
+         "Type": [
+            "タイプ"
+         ],
+         "Languages": [
+            "言語"
+         ],
+         "Translated by": [
+            "翻訳者"
+         ],
+         "Download XLIFF file couldn't be finished": [
+            "XLIFF ファイルのダウンロードを終了できませんでした。"
+         ],
+         "Could not load jobs for export": [
+            "エクスポート用のジョブを読み込みできませんでした"
+         ],
+         "The export to XLIFF failed": [
+            "XLIFF へのエクスポートに失敗しました"
+         ],
+         "Imported %d jobs": [
+            "%d 個のジョブをインポートしました"
+         ],
+         "Imported one job": [
+            "1 個のジョブをインポートしました"
+         ],
+         "Could not import any job": [
+            "ジョブをひとつもインポートできませんでした"
+         ],
+         "Import failed!": [
+            "インポートが失敗しました！"
+         ],
+         "Loading translations queue": [
+            "翻訳キューを読み込んでいます"
+         ],
+         "Loading translation jobs": [
+            "翻訳ジョブを読み込んでいます"
+         ],
+         "Jobs could not be loaded": [
+            "ジョブを読み込めませんでした"
+         ],
+         "Specify some jobs to resign": [
+            "中止させるジョブを指定する"
+         ],
+         "We could not resign jobs: %s": [
+            "ジョブを中止できませんでした: %s"
+         ],
+         "Resigned from jobs": [
+            "ジョブから停止済み"
+         ],
+         "Resigned from job": [
+            "ジョブから停止済み"
+         ],
+         "Failed to resign from jobs": [
+            "ジョブからの停止が失敗しました"
+         ],
+         "The Advanced Editor jobs synchronization has failed": [
+            "アドバンスト エディター ジョブの同期に失敗しました"
+         ],
+         "Synchronization with the Professional Translation service has failed": [
+            "プロフェッショナル翻訳サービスとの同期に失敗しました"
+         ],
+         "%d translation has been downloaded": [
+            "%d 翻訳がダウンロードされました",
+            "%d 翻訳がダウンロードされました"
+         ],
+         "Batch sync finished successfully!": [
+            "一括同期が正常に終了しました！"
+         ],
+         "Batch sync couldn't be finished": [
+            "一括同期を終了できませんでした"
          ]
       }
    }

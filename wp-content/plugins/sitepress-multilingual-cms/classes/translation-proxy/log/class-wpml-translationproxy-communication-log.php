@@ -97,7 +97,7 @@ class WPML_TranslationProxy_Communication_Log {
 	 * @return mixed
 	 */
 	public function sanitize_url( $url ) {
-		$original_url_parsed = wpml_parse_url( $url, PHP_URL_QUERY );
+		$original_url_parsed = (string) wpml_parse_url( $url, PHP_URL_QUERY );
 		parse_str( $original_url_parsed, $original_query_vars );
 
 		$sanitized_query_vars = $this->sanitize_data( $original_query_vars );

@@ -27,9 +27,7 @@ msgid ""
 msgstr ""
 
 #: src/js/translationReview/components/ContinueReviewToggle.js:18
-msgid ""
-"Turn on to automatically load the next translation after finishing this "
-"review."
+msgid "Turn on to automatically load the next translation after finishing this  ."
 msgstr ""
 
 #: src/js/translationReview/components/EditButton.js:10
@@ -38,10 +36,6 @@ msgstr ""
 
 #: src/js/translationReview/components/EditButton.js:9
 msgid "Edit translation"
-msgstr ""
-
-#: src/js/translationReview/components/ErrorText.js:8
-msgid "There was an error in applying translation."
 msgstr ""
 
 #: src/js/translationReview/components/InProgressText.js:8
@@ -62,4 +56,12 @@ msgstr ""
 
 #: src/js/translationReview/components/PublishedText.js:8
 msgid "Published!"
+msgstr ""
+
+#: src/js/translationReview/hooks/useATESync.js:36
+msgid "Someone is already reviewing this translation. Please try again later."
+msgstr ""
+
+#: src/js/translationReview/store.js:29
+msgid "There was an error in applying translation."
 msgstr ""

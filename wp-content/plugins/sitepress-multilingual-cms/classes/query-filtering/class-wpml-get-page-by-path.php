@@ -66,5 +66,6 @@ class WPML_Get_Page_By_Path {
 		$hash         = md5( $page_name . serialize( $post_type ) );
 		$cache_key    = "get_page_by_path:$hash:$last_changed";
 		wp_cache_delete( $cache_key, 'posts' );
+		wp_cache_delete( $cache_key, 'post-queries' );
 	}
 }

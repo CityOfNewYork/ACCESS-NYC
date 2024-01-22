@@ -45,7 +45,7 @@ class WPML_Post_Edit_Screen {
 	 */
 	public function preview_post_link_filter( $link ) {
 		if ( ! $this->sitepress->get_setting( 'language_per_domain_sso_enabled' ) ) {
-			$original_host = filter_var( $_SERVER['HTTP_HOST'], FILTER_SANITIZE_STRING );
+			$original_host = filter_var( $_SERVER['HTTP_HOST'], FILTER_SANITIZE_URL );
 
 			if ( $original_host ) {
 				$domain = wpml_parse_url( $link, PHP_URL_HOST );

@@ -8,7 +8,7 @@ function icl_get_languages_names() {
 
 	if ( $__icl_lang_names_cached === null ) {
 		$serialized_languages = file_get_contents( WPML_PLUGIN_PATH . '/res/languages.json' );
-		$__icl_lang_names     = json_decode( $serialized_languages, true );
+		$__icl_lang_names     = json_decode( (string) $serialized_languages, true );
 
 		$__icl_lang_names_cached = $__icl_lang_names;
 	}

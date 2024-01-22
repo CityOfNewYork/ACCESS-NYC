@@ -29,6 +29,9 @@ class Generator {
 			->each( [ $mo, 'add_entry' ] );
 
 		$mem_file = fopen( 'php://memory', 'r+' );
+		if ( $mem_file === false ) {
+			return '';
+		}
 		$mo->export_to_file_handle( $mem_file );
 
 		rewind( $mem_file );

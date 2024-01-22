@@ -8,20 +8,32 @@
          "Accepted": [
             "Принято"
          ],
-         "Reviewing the next translation...": [
-            "Проверка следующего перевода..."
+         "Approved!": [
+            "Утверждено!"
+         ],
+         "Loading the next translation for review...": [
+            "Загрузка следующего перевода для проверки..."
          ],
          "Back": [
             "Назад"
          ],
-         "Edit Translation": [
-            "Редактировать перевод"
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "Выключите, чтобы не загружать следующий перевод автоматически после завершения этой проверки."
          ],
-         "There was an error in applying translation.": [
-            "Во время применения перевода произошла ошибка."
+         "Turn on to automatically load the next translation after finishing this  .": [
+            "Включите, чтобы автоматически загружать следующий перевод после завершения этого."
+         ],
+         "Edit": [
+            "Изменить"
+         ],
+         "Edit translation": [
+            "Редактировать перевод"
          ],
          "Please wait, applying translation..": [
             "Подождите, применяется перевод..."
+         ],
+         "Next review": [
+            "Следующая проверка"
          ],
          "Publish this translation": [
             "Опубликовать этот перевод"
@@ -29,11 +41,14 @@
          "Accept this translation": [
             "Принять этот перевод"
          ],
-         "Approved!": [
-            "Утверждено!"
+         "Published!": [
+            "Опубликовано!"
          ],
-         "Loading the next translation for review...": [
-            "Загрузка следующего перевода для проверки..."
+         "Someone is already reviewing this translation. Please try again later.": [
+            "Кто-то уже просматривает этот перевод. Пожалуйста, повторите попытку позже."
+         ],
+         "There was an error in applying translation.": [
+            "Во время применения перевода произошла ошибка."
          ]
       }
    }

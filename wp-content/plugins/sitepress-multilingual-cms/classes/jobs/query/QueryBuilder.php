@@ -331,12 +331,14 @@ class QueryBuilder {
 	}
 
 	/**
-	 * @param string $where
+	 * @param string|void $where
 	 *
 	 * @return self
 	 */
 	public function add_AND_where_condition( $where ) {
-		$this->where[] = $where;
+		if ( $where ) {
+			$this->where[] = $where;
+		}
 
 		return $this;
 	}

@@ -571,7 +571,7 @@ function wpml_label_helper( $attributes, $caption ) {
  *
  * @param array<mixed> $args
  * @param string       $id_prefix
- * @param string       $value
+ * @param string|int   $value
  * @param string       $caption
  *
  * @return string
@@ -1088,7 +1088,7 @@ function wpml_get_post_translation_type( $post_id ) {
 	$translation_type = WPML_ELEMENT_IS_NOT_TRANSLATED;
 
 	$post_type = get_post_type( $post_id );
-	if ( wpml_post_has_translations( $post_id, $post_type ) ) {
+	if ( $post_type && wpml_post_has_translations( $post_id, $post_type ) ) {
 		$translation_type = WPML_ELEMENT_IS_TRANSLATED;
 		if ( wpml_get_master_post_from_duplicate( $post_id ) ) {
 			$translation_type = WPML_ELEMENT_IS_A_DUPLICATE;

@@ -6,7 +6,17 @@ abstract class WPML_Admin_Text_Functionality {
 		global $wp_taxonomies;
 
 		$black_list = array_fill_keys(
-			array(
+			/**
+			 * Manipulate the list of blacklisted options.
+			 *
+			 * The options in this array should not be translated for different reasons. This filter
+			 * allows other plugins to avoid certain options from being translated.
+			 *
+			 * @since 3.2.3
+			 *
+			 * @param string[] $options
+			 */
+			apply_filters( 'wpml_st_blacklisted_options', [
 				'active_plugins',
 				'wp_user_roles',
 				'_wpml_media',
@@ -85,7 +95,7 @@ abstract class WPML_Admin_Text_Functionality {
 				'cron',
 				'_transient_WPML_ST_MO_Downloader_lang_map',
 				'icl_translation_jobs_basket',
-			),
+			] ),
 			1
 		);
 
@@ -127,7 +137,7 @@ abstract class WPML_Admin_Text_Functionality {
 
 	/**
 	 * @param string $key     Name of option to retrieve. Expected to not be SQL-escaped.
-	 * @param mixed  $default Value to return in case the string does not exists
+	 * @param mixed  $default Value to return in case the string does not exists.
 	 *
 	 * @return mixed Value set for the option.
 	 */

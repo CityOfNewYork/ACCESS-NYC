@@ -1,0 +1,28 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose the image file type for flags": [
+            "Wählen Sie den Bilddateityp für Flaggen."
+         ],
+         "This option affects only the built-in WPML flags, not the custom uploaded ones.": [
+            "Diese Option wirkt sich nur auf die integrierten WPML-Flaggen aus, nicht auf eigene hochgeladene Flaggen."
+         ],
+         "%s format": [
+            "%s Format"
+         ],
+         "Save": [
+            "Speichern"
+         ],
+         "The new format has been saved.": [
+            "Das neue Format wurde gespeichert."
+         ],
+         "Failed to save the new format": [
+            "Fehler beim Speichern des neuen Formats"
+         ]
+      }
+   }
+}

@@ -43,6 +43,7 @@ class WPML_Verify_SitePress_Settings {
 			'translation_pickup_method'          => 0,
 			'notify_complete'                    => 1,
 			'translated_document_status'         => 1,
+			'translated_document_status_sync'    => 0,
 			'remote_management'                  => 0,
 			'auto_adjust_ids'                    => 1,
 			'alert_delay'                        => 0,

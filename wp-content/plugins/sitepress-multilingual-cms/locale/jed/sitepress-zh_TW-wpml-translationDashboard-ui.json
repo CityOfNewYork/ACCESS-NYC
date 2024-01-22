@@ -1,0 +1,59 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "en"
+         },
+         "Error": [
+            "錯誤"
+         ],
+         "Draft — Pending review": [
+            "草稿 — 等候審閱"
+         ],
+         "Complete": [
+            "完成"
+         ],
+         "Insufficient funds": [
+            "資金不足"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "您待決的自動翻譯將被取消。"
+         ],
+         "Save": [
+            "保存"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "轉到<a>翻譯管理儀表板</a>，翻譯您的內容。"
+         ],
+         "Review the translations before publishing": [
+            "在發佈之前審閱翻譯"
+         ],
+         "Publish translations and review them later": [
+            "發佈翻譯並在以後審閱"
+         ],
+         "Publish translations without reviewing": [
+            "不審閱就發佈翻譯"
+         ],
+         "Translate Everything": [
+            "全部翻譯"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "WPML將自動翻譯您發佈或更新的內容"
+         ],
+         "How do you want to translate this site?": [
+            "您想如何翻譯這個網站？"
+         ],
+         "Translate Some": [
+            "翻譯一些"
+         ],
+         "I want to choose which content to translate": [
+            "我想選擇要翻譯的內容"
+         ],
+         "Translate": [
+            "翻譯"
+         ]
+      }
+   }
+}

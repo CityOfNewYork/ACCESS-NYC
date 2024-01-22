@@ -46,10 +46,10 @@ class Installer_Dependencies {
 
 				$upgrade_path_length = strlen( WP_CONTENT_DIR . '/upgrade' );
 
-				$installer_settings = WP_Installer()->settings;
-				if ( isset( $installer_settings['repositories'][ $repository_id ]['data']['downloads']['plugins'] ) ) {
+				$installer_settings = OTGS_Installer()->settings;
+				if ( !empty( $installer_settings['repositories'][ $repository_id ]['data']['downloads']['plugins'] ) ) {
 					$a_plugin       = current( $installer_settings['repositories'][ $repository_id ]['data']['downloads']['plugins'] );
-					$url            = WP_Installer()->append_site_key_to_download_url( $a_plugin['url'], 'xxxxxx', $repository_id );
+					$url            = OTGS_Installer()->append_site_key_to_download_url( $a_plugin['url'], 'xxxxxx', $repository_id );
 					$tmpfname       = wp_tempnam( $url );
 					$tmpname_length = strlen( basename( $tmpfname ) ) - 4; // -.tmp
 					wp_delete_file( $tmpfname );
@@ -140,11 +140,11 @@ class Installer_Dependencies {
 								foreach ( $repositories_plugins as $slug => $name ) {
 									if ( $wp_plugin_slug == $slug || $name == $plugin['Name'] || $name == $plugin['Title'] ) { //match order: slug, name, title
 
-										remove_action( "after_plugin_row_$plugin_id", 'wp_plugin_update_row', 10, 2 );
+										remove_action( "after_plugin_row_$plugin_id", 'wp_plugin_update_row', 10 );
 										add_action( "after_plugin_row_$plugin_id", array(
 											$this,
 											'wp_plugin_update_row_win_exception',
-										), 10, 2 );
+										), 10, 0 );
 
 									}
 								}
@@ -164,9 +164,10 @@ class Installer_Dependencies {
 	}
 
 	public function wp_plugin_update_row_win_exception() {
+		/** @var WP_Plugins_List_Table $wp_list_table */
 		$wp_list_table = _get_list_table( 'WP_Plugins_List_Table' );
 		echo '<tr class="plugin-update-tr">';
-		echo '<td  class="plugin-update colspanchange" colspan="' . esc_attr( $wp_list_table->get_column_count() ) .
+		echo '<td  class="plugin-update colspanchange" colspan="' . esc_attr( (string) $wp_list_table->get_column_count() ) .
 		     '"><div class="update-message">' . $this->win_paths_exception_message() . '</div></td>';
 		echo '</tr>';
 	}

@@ -15,13 +15,13 @@ class WPML_ST_String_Dependencies_Builder {
 	}
 
 	/**
-	 * @param string $type
-	 * @param int    $id
+	 * @param string|null $type
+	 * @param int         $id
 	 *
 	 * @return WPML_ST_String_Dependencies_Node
 	 */
 	public function from( $type, $id ) {
-		$parent_id = $this->records->get_parent_id_from( $type, $id );
+		$parent_id = $type === null ? false : $this->records->get_parent_id_from( $type, $id );
 
 		if ( $parent_id ) {
 			$parent       = $this->from( $this->get_parent_type( $type ), $parent_id );
@@ -63,10 +63,10 @@ class WPML_ST_String_Dependencies_Builder {
 	/**
 	 * @param string $type
 	 *
-	 * @return false|string
+	 * @return null|string
 	 */
 	private function get_parent_type( $type ) {
-		return array_search( $type, $this->types_map, true );
+		return array_search( $type, $this->types_map, true ) ?: null;
 	}
 
 	/**

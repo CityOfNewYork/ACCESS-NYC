@@ -1,0 +1,235 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
+            "Произошла ошибка при попытке приостановить Автоматический перевод. Повторите попытку позже или свяжитесь с нашей службой поддержки."
+         ],
+         "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
+            "Произошла ошибка при попытке возобновить Автоматический перевод. Повторите попытку позже или свяжитесь с нашей службой поддержки."
+         ],
+         "Error": [
+            "Ошибка"
+         ],
+         "Draft — Pending review": [
+            "Черновик — Ожидает проверки"
+         ],
+         "Complete": [
+            "Завершено"
+         ],
+         "Insufficient funds": [
+            "Недостаточно средств"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "Автоматические переводы в ожидании будут отменены."
+         ],
+         "Save": [
+            "Сохранить"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "Для перевода контента перейдите в <a>Консоль управления переводами</a>."
+         ],
+         "Review the translations before publishing": [
+            "Проверить переводы перед публикацией"
+         ],
+         "Publish translations and review them later": [
+            "Опубликовать переводы и проверить позже"
+         ],
+         "Publish translations without reviewing": [
+            "Опубликовать переводы без проверки"
+         ],
+         "Translate Everything": [
+            "Перевести все"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "WPML автоматически переведет публикуемый или обновляемый контент."
+         ],
+         "How do you want to translate this site?": [
+            "Как перевести этот сайт?"
+         ],
+         "Translate Some": [
+            "Перевести отдельные"
+         ],
+         "I want to choose which content to translate": [
+            "Я хочу выбрать контент на перевод"
+         ],
+         "All Languages": [
+            "Все языки"
+         ],
+         "Overwrite existing translations": [
+            "Перезаписать существующие переводы"
+         ],
+         "Some of the content you want to translate is already translated": [
+            "Некоторый контент, который вы хотите перевести, уже переведен"
+         ],
+         "What do you want to do with the content that’s already translated?": [
+            "Что вы хотите делать с уже переведенным контентом?"
+         ],
+         "Leave existing translations as is": [
+            "Оставить существующие переводы без изменений"
+         ],
+         "This also updates the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "Это также обновляет память переводов для вашего сайта. Подробнее о <a href=\"%s\" target=\"_blank\" >памяти переводов</a>"
+         ],
+         "Allows you to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "Позволяет вам повторно переводить ваш контент и обновлять память переводов для вашего сайта. Подробнее о <a href=\"%s\" target=\"_blank\" >памяти переводов</a>"
+         ],
+         "Allows your translators to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "Позволяет вашим переводчикам повторно переводить ваш контент и обновлять память переводов для вашего сайта. Подробнее о <a href=\"%s\" target=\"_blank\" >памяти переводов</a>"
+         ],
+         "HINT: You can add a Note for translators in the table above with special instructions.": [
+            "СОВЕТ: Вы можете добавить примечание для переводчиков в таблицу выше со специальными инструкциями."
+         ],
+         "Translate automatically": [
+            "Переводить автоматически"
+         ],
+         "How do you want to translate?": [
+            "Как вы хотите перевести?"
+         ],
+         "Assign to a translator": [
+            "Назначить переводчику"
+         ],
+         "Translate myself": [
+            "Перевести самостоятельно"
+         ],
+         "You do not need translation credits to translate content yourself.": [
+            "Вам не нужны переводческие кредиты, чтобы перевести контент самостоятельно."
+         ],
+         "You can only automatically translate content from your site's default language (English), to your site's other languages. Deselect content in your site's secondary languages to proceed.": [
+            "Автоматический перевод применяется только к языку вашего сайта по умолчанию (английский) при переводе на другие языки. Исключите контент на других языках, чтобы продолжить."
+         ],
+         "You can only automatically translate content from your primary language (%s) to other languages. Use the language switcher at the top of this page to switch to %s.": [
+            "Вы можете переводить автоматически только контент с вашего основного языка (%s) на другие языки. Используйте переключатель языка в верхней части этой страницы, чтобы переключиться на %s."
+         ],
+         "Selected content includes items that were originally created in this language. Deselect these items to proceed.": [
+            "В выбранный контент включены элементы, созданные изначально на этом языке. Исключите эти элементы, чтобы продолжить."
+         ],
+         "Add to Translation Queue": [
+            "Добавить в Очередь переводов"
+         ],
+         "Select a post or page to translate": [
+            "Выберите публикацию или страницу для перевода"
+         ],
+         "Translate or duplicate content to at least one language": [
+            "Переведите или дублируйте контент хотя бы на один язык"
+         ],
+         "Choose how you want to translate your content": [
+            "Выберите, как вы хотите перевести свой контент"
+         ],
+         "Selected content is already translated": [
+            "Выбранный контент уже переведен"
+         ],
+         "Selected content includes items in a language other than your site's default language.": [
+            "В выбранный контент включены элементы на других языках."
+         ],
+         "Choose at least one translation action": [
+            "Выберите минимум одно действие перевода"
+         ],
+         "Duplicate": [
+            "Дублировать"
+         ],
+         "Start translating and duplicating": [
+            "Начать переводить и дублировать"
+         ],
+         "Add to Translation Basket and duplicate": [
+            "Добавить в Корзину переводов и дублировать"
+         ],
+         "Add to Translation Queue and duplicate": [
+            "Добавить в Очередь переводов и дублировать"
+         ],
+         "Start translating": [
+            "Начать перевод"
+         ],
+         "Add to Translation Basket": [
+            "Добавить в Корзину переводов"
+         ],
+         "One more thing...": [
+            "Еще кое-что..."
+         ],
+         "What would you like to do when your content has finished translating automatically?": [
+            "Что бы вы хотели сделать после автоматического перевода вашего контента?"
+         ],
+         "Save settings": [
+            "Сохранить настройки"
+         ],
+         "This setting will apply to all future automatic translations. You can change this anytime in WPML → Settings.": [
+            "Этот параметр будет применяться ко всем будущим автоматическим переводам. Вы можете изменить это в любое время в WPML → Настройки."
+         ],
+         "Translate": [
+            "Перевести"
+         ],
+         "Duplicate content": [
+            "Дублировать контент"
+         ],
+         "Do nothing": [
+            "Ничего не делать"
+         ],
+         "To assign content to a translator, first <a href=\"%s\" target=\"_blank\">add a translator</a> or <a href=\"%s\" target=\"_blank\">connect to a translation service</a>.": [
+            "Чтобы назначить контент переводчику, сначала <a href=\"%s\" target=\"_blank\">добавьте переводчика</a> или <a href=\"%s\" target=\"_blank\">подключитесь к службе переводов</a>."
+         ],
+         "You need credits to use automatic translation.": [
+            "Вам нужны кредиты, чтобы использовать автоматический перевод."
+         ],
+         "Translators Tab": [
+            "Вкладка «Переводчики»"
+         ],
+         "Connection Error. Please wait a minute and reload this page. If the problem continues, please <a>contact WPML support</a>.": [
+            "Ошибка подключения. Пожалуйста, подождите минуту и перезагрузите эту страницу. Если проблема повторится, <a>обратитесь в службу поддержки WPML</a>."
+         ],
+         "Finish setting up %s on your site": [
+            "Завершите настройку %s на своем сайте"
+         ],
+         "You need to authenticate %s to send them content for translation. Visit the %s to finish the setup.": [
+            "Вам необходимо аутентифицировать %s, чтобы отправить им контент на перевод. Посетите %s, чтобы завершить настройку."
+         ],
+         "Add a translator to use %s.": [
+            "Добавьте переводчика для использования %s."
+         ],
+         "To send content to %s for translation, go to the %s to add a translator on your site.": [
+            "Чтобы отправить контент на %s для перевода, перейдите в %s, чтобы добавить переводчика на свой сайт."
+         ],
+         "Your selected automatic translation engines do not support the following language(s): %s. Read more about <a>choosing a translation engine</a>.": [
+            "Выбранные вами системы автоматического перевода не поддерживают следующие языки: %s. Узнайте больше о <a>выборе системы перевода</a>."
+         ],
+         "Some of the selected content is already being translated. This will cancel any in-progress translations.": [
+            "Часть выбранного контента уже переводится. Это отменит все выполняемые переводы."
+         ],
+         "It is not possible to translate %s content automatically.": [
+            "Невозможно перевести %s контент автоматически."
+         ],
+         "Translate selected items yourself or deselect these items above.": [
+            "Переведите выбранные элементы самостоятельно или отмените выбор этих пунктов выше."
+         ],
+         "Any existing content (translations) will be overwritten when creating duplicates.": [
+            "При создании повторений будет утеряно весь имеющийся контент (все переводы)."
+         ],
+         "When duplicating content, please first duplicate parent pages to maintain the site's hierarchy.": [
+            "При дублировании контента для соблюдения иерархической структуры сайта сначала продублируйте родительские страницы."
+         ],
+         "Some of the content that you selected for translation includes fields that are encoded. Translators will not be able to work on this kind of content, so we removed it from the job.": [
+            "Часть контента, выбранного вами на перевод, содержит закодированные поля. Переводчики не смогут работать над контентом подобного типа, поэтому мы удалили его из заказа."
+         ],
+         "To fix this problem, you need to tell WPML how these fields are encoded, so that WPML can decode them before sending for translation.": [
+            "Для устранения проблемы необходимо сообщить WPML способ кодировки этих полей, чтобы он смог раскодировать их перед отправкой на перевод."
+         ],
+         "How to indicate to WPML that it needs to decode fields.": [
+            "Как указать WPML, что ему нужно декодировать поля."
+         ],
+         "WPML cannot send some of the content to translation": [
+            "WPML не удается отправить часть контента на перевод"
+         ],
+         "<s>%s</s>: There are base64 encoded fields in this document": [
+            "<s>%s</s>: В этом документе есть поля в кодировке base64."
+         ],
+         "Hide details": [
+            "Скрыть детали"
+         ],
+         "Show details": [
+            "Показать детали"
+         ]
+      }
+   }
+}

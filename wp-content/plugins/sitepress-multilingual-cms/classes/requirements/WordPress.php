@@ -5,7 +5,7 @@ namespace WPML\Requirements;
 class WordPress {
 
 	public static function checkMinimumRequiredVersion() {
-		if ( version_compare( $GLOBALS['wp_version'], 4.4, '<' ) ) {
+		if ( version_compare( $GLOBALS['wp_version'], '4.4', '<' ) ) {
 			add_action( 'admin_notices', [ __CLASS__, 'displayMissingVersionRequirementNotice' ] );
 			return false;
 		}

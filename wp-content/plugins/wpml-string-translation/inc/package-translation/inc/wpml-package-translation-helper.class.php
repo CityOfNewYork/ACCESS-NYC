@@ -1,5 +1,7 @@
 <?php
 
+use WPML\FP\Obj;
+
 class WPML_Package_Helper {
 	const PREFIX_BATCH_STRING = 'batch-string-';
 
@@ -147,6 +149,9 @@ class WPML_Package_Helper {
 			$this->package_cleanup->record_register_string( $package, $this->last_registered_string_id );
 		}
 
+		// Action called after string is registered
+		do_action( 'wpml_st_string_registered' );
+
 		return $string_value;
 	}
 
@@ -177,16 +182,28 @@ class WPML_Package_Helper {
 			if ( $did_update ) {
 				$this->flush_cache();
 				$package->flush_cache();
+
+				// Action called after package strings are updated.
+				do_action( 'wpml_st_string_updated' );
 			}
 		}
 
 		return $string_id;
 	}
 
+	/**
+	 * @param string|mixed     $string_value
+	 * @param string           $string_name
+	 * @param array|object|int $package
+	 *
+	 * @return string|mixed
+	 */
 	final function translate_string( $string_value, $string_name, $package ) {
 		$result = $string_value;
 
 		if ( is_string( $string_value ) ) {
+			/** @var array|stdClass $package */
+			$package = is_scalar( $package ) ? [ 'ID' => $package ] : Obj::assoc( 'translate_only', true, $package );
 			$package = $this->package_factory->create( $package );
 
 			if ( $package ) {
@@ -237,14 +254,14 @@ class WPML_Package_Helper {
 	}
 
 	/**
-	 * @param  WPML_Package             $item
+	 * @param  WPML_Package|null        $item
 	 * @param  int|WP_Post|WPML_Package $package
 	 * @param  string                   $type
 	 *
-	 * @return bool|WPML_Package
+	 * @return null|WPML_Package
 	 */
 	final public function get_translatable_item( $item, $package, $type = 'package' ) {
-		if ( $type === 'package' || explode( '_', $type )[0] === 'package' ) {
+		if ( $type === 'package' || explode( '_', is_null( $type ) ? '' : $type )[0] === 'package' ) {
 			$tm = new WPML_Package_TM( $item );
 
 			return $tm->get_translatable_item( $package );

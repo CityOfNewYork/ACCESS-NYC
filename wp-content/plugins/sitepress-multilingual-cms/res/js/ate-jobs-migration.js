@@ -10,7 +10,7 @@ jQuery(function () {
                         type: 'POST',
                         data: {
 				action: jQuery(this).data('action'),
-				nonce: jQuery(this).data('nonce'),
+				nonce: ate_jobs_migration_data.nonce,
 			},
 			success: function () {
 				jQuery(buttonId).prop('disabled', false);

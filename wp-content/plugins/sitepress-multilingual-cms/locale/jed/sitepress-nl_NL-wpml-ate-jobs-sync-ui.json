@@ -1,0 +1,244 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "Ter vertalingen versturen"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "Verbinden met WPML's Geavanceerde Vertaal Editor..."
+         ],
+         "Try again": [
+            "Opnieuw proberen"
+         ],
+         "You don't have the rights to review this language": [
+            "Je hebt niet de rechten om deze taal te controleren."
+         ],
+         "translations": [
+            "Vertalingen"
+         ],
+         "left in the queue": [
+            "achtergelaten in de wachtrij"
+         ],
+         "Translation on hold": [
+            "Vertaling in wachtstand"
+         ],
+         "No translations in the queue": [
+            "Geen vertalingen in de wachtrij"
+         ],
+         "%d translations left": [
+            "%d resterende vertalingen"
+         ],
+         "%d min remaining": [
+            "%d min resterend"
+         ],
+         "less than 1 min remaining": [
+            "minder dan 1 min resterend"
+         ],
+         "Automatic translation status": [
+            "Status automatische vertaling"
+         ],
+         "Translate Everything Automatically": [
+            "Alles automatisch vertalen"
+         ],
+         "Translate Everything Automatically is active": [
+            "Alles automatisch vertalen is actief"
+         ],
+         "Translate Everything Automatically is paused": [
+            "Alles automatisch vertalen is gepauzeerd"
+         ],
+         "Translate Everything Automatically stopped": [
+            "Alles automatisch vertalen is gestopt"
+         ],
+         "Preparing content for translation": [
+            "Voorbereiden van inhoud voor vertaling..."
+         ],
+         "Preparing more content for translation": [
+            "Voorbereiden van meer inhoud voor vertaling..."
+         ],
+         "An error occured, fix it to continue.": [
+            "Er is een fout opgetreden, herstel deze om verder te gaan."
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "Er is een probleem met de automatische vertaling dat je aandacht nodig heeft. Los het op om verder te gaan."
+         ],
+         "Your default language, %s, must be mapped to a supported language in order to use automatic translation.": [
+            "Uw standaardtaal, %s, moet worden toegewezen aan een ondersteunde taal om automatische vertaling te gebruiken."
+         ],
+         "Your language, %s, must be mapped to a supported language in order to use automatic translation.": [
+            "Je taal, %s, moet gekoppeld zijn aan een ondersteunde taal om automatische vertaling te kunnen gebruiken.",
+            "De volgende talen op je site moeten worden gekoppeld aan een ondersteunde taal om automatische vertaling te kunnen gebruiken: %s"
+         ],
+         "Content in those languages: %s, cannot be automatically translated unless you map them to a language that's different from the default.": [
+            "Inhoud in die talen: %s, kan niet automatisch worden vertaald, tenzij je ze in een andere taal dan de standaardtaal omzet."
+         ],
+         "%d translation waiting for review": [
+            "%d vertaling wacht op controle",
+            "%d vertalingen die wachten op controle"
+         ],
+         "Account credits used": [
+            "Gebruikte accountcredits"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "Zodra u al je prepaid credits hebt gebruikt, factureren we je voor alle extra credits die je gebruikt na het einde van de maand"
+         ],
+         "Payment limit:": [
+            "Betalingslimiet:"
+         ],
+         "%s credits": [
+            "%s credits"
+         ],
+         "Credits used:": [
+            "Gebruikte credits:"
+         ],
+         "Credits left:": [
+            "Resterende credits:"
+         ],
+         "The number of credit you will receive an invoice for at the end of the month. View your pay-as-you-go details in your site’s automatic translation settings.": [
+            "Het aantal credits waarvoor je aan het einde van de maand een factuur ontvangt. Bekijk je pay-as-you-go details in de automatische vertaalinstellingen van je site."
+         ],
+         "Calculating": [
+            "Berekenen..."
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "Resterende prepaid credits die zijn toegewezen aan deze site op WPML.org."
+         ],
+         "Prepaid credits left": [
+            "Resterende prepaid credits"
+         ],
+         "Pay-as-you-go credits used": [
+            "Gebruikte Pay-as-you-go credits"
+         ],
+         "Resume": [
+            "Hervatten"
+         ],
+         "Stop": [
+            "Stoppen"
+         ],
+         "Fix it": [
+            "Herstel het."
+         ],
+         "Pause": [
+            "Pauzeren"
+         ],
+         "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
+            "Er is een fout opgetreden bij het pauzeren van je Automatische Vertaling. Probeer het later nog eens of neem contact op met onze helpdesk."
+         ],
+         "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
+            "Er is een fout opgetreden bij het hervatten van je Automatische Vertaling. Probeer het later nog eens of neem contact op met onze helpdesk."
+         ],
+         "Error": [
+            "Fout"
+         ],
+         "Draft — Pending review": [
+            "Concept - in afwachting van controle"
+         ],
+         "Complete": [
+            "Compleet"
+         ],
+         "Insufficient funds": [
+            "Onvoldoende saldo"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "Lees meer over hoe je je inhoud kunt vertalen in de <a>Getting Started Guide</a>"
+         ],
+         "Let's Start Translating!": [
+            "Laten we beginnen met vertalen!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "Kies je inhoud uit het Vertaaldashboard hieronder en creëer je eerste vertaalopdracht!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "Wijzig je <a>automatic translation settings</a> (lopende vertaaltaken zullen worden voltooid met de huidige instellingen)."
+         ],
+         "Read more about translating your site automatically.": [
+            "Lees meer over het automatisch vertalen van je site."
+         ],
+         "Your site is being automatically translated!": [
+            "Je site wordt automatisch vertaald!"
+         ],
+         "Calculating...": [
+            "Berekenen..."
+         ],
+         "Do not close WP admin!": [
+            "Sluit WP admin niet!"
+         ],
+         "The number of translations": [
+            "Het aantal vertalingen"
+         ],
+         "Translate Everything Automatically - running": [
+            "Vertaal Alles Automatisch - loopt"
+         ],
+         "Translate Everything Automatically - active": [
+            "Vertaal alles automatisch - actief"
+         ],
+         "Pause automatic translation": [
+            "Automatische vertaling pauzeren"
+         ],
+         "WPML will finish in-progress translations but won't translate anything new.": [
+            "WPML maakt lopende vertalingen af, maar vertaalt niets nieuws."
+         ],
+         "Translate Everything Automatically - paused": [
+            "Vertaal alles automatisch - gepauzeerd"
+         ],
+         "Start automatic translation": [
+            "Start automatische vertaling"
+         ],
+         "This uses %scredits%s to translate your existing content and anything you add or change later.": [
+            "Dit gebruikt %scredits%s om je bestaande inhoud te vertalen en alles wat je later toevoegt of verandert."
+         ],
+         "Start translating everything automatically": [
+            "Start alles automatisch vertalen"
+         ],
+         "WPML will translate any new content you create into %1$s.": [
+            "WPML vertaalt elke nieuwe inhoud die je aanmaakt in %1$s."
+         ],
+         "WPML will translate all new future content to %1$s and keep translations up to date when you make changes.": [
+            "WPML zal alle nieuwe toekomstige inhoud vertalen naar %1$s en de vertalingen up-to-date houden wanneer je wijzigingen aanbrengt."
+         ],
+         "Do you want to translate existing content, too?": [
+            "Wil je ook bestaande inhoud vertalen?"
+         ],
+         "Yes, translate all new and existing content": [
+            "Ja, alle nieuwe en bestaande inhoud vertalen"
+         ],
+         "No, only translate new content": [
+            "Nee, alleen nieuwe inhoud vertalen"
+         ],
+         "You can translate existing content from the Translation Management Dashboard": [
+            "Je kunt bestaande inhoud vertalen vanuit het Translation Management Dashboard"
+         ],
+         "Connection Error. Please wait a minute and reload this page. If the problem continues, please contact WPML support.": [
+            "Verbindingsfout. Wacht even en laad deze pagina opnieuw. Als het probleem aanhoudt, neem dan contact op met de WPML helpdesk."
+         ],
+         "Automatic translation uses credits. %1$sRead more about automatic translation credits%2$s": [
+            "Automatische vertaling gebruikt credits. %1$sLees meer over automatische vertaalcredits%2$s"
+         ],
+         "You need credits to start translating everything.": [
+            "Je hebt credits nodig om alles te vertalen."
+         ],
+         "Cancel": [
+            "Annuleren"
+         ],
+         "Start translating everything": [
+            "Start met alles vertalen"
+         ],
+         "%1$d language": [
+            "%1$d taal",
+            "%1$d talen"
+         ],
+         "Please wait...": [
+            "Even geduld.."
+         ],
+         "All new future content": [
+            "Alle nieuwe toekomstige inhoud"
+         ],
+         "Translate Everything Automatically - stopped": [
+            "Alles automatisch vertalen - gestopt"
+         ]
+      }
+   }
+}

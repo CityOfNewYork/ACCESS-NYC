@@ -14,7 +14,7 @@ use WPML\Collect\Support\Arr;
  * @method static callable|array toObj( array ...$array ) - Curried :: array → object
  * @method static callable|array pluck( ...$prop, ...$array ) - Curried :: string → array → array
  * @method static callable|array partition( ...$predicate, ...$target ) - Curried :: ( a → bool ) → [a] → [[a], [a]]
- * @method static callable|array sort( ...$fn, ...$target ) - Curried :: ( ( a, a ) → int ) → [a] → [a]
+ * @method static callable|array sort( ...$fn, ...$target ) - Curried :: ( ( a, a ) → int|bool ) → [a] → [a]
  * @method static callable|array unfold( ...$fn, ...$seed ) - Curried :: ( a → [b] ) → * → [b]
  * @method static callable|array zip( ...$a, ...$b ) - Curried :: [a] → [b] → [[a, b]]
  * @method static callable|array zipObj( ...$a, ...$b ) - Curried :: [a] → [b] → [a => b]
@@ -112,7 +112,10 @@ class Lst {
 			if ( $data instanceof Collection ) {
 				return wpml_collect( self::sort( $compare, $data->toArray() ) );
 			}
-			usort( $data, $compare );
+			$intCompare = function ( $a, $b ) use ( $compare ) {
+				return (int) $compare( $a, $b );
+			};
+			usort( $data, $intCompare );
 
 			return $data;
 		} ) );

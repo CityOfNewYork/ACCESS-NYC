@@ -1,5 +1,7 @@
 <?php
 
+use WPML\LIB\WP\User;
+
 class WPML_TM_REST_Apply_TP_Translation extends WPML_REST_Base {
 	/** @var WPML_TP_Apply_Translations */
 	private $apply_translations;
@@ -47,7 +49,7 @@ class WPML_TM_REST_Apply_TP_Translation extends WPML_REST_Base {
 	}
 
 	public function get_allowed_capabilities( WP_REST_Request $request ) {
-		return array( WPML_Manage_Translations_Role::CAPABILITY, WPML_Translator_Role::CAPABILITY );
+		return [ User::CAP_ADMINISTRATOR, User::CAP_MANAGE_TRANSLATIONS, User::CAP_TRANSLATE ];
 	}
 
 	public function map_jobs_to_array( WPML_TM_Job_Entity $job ) {

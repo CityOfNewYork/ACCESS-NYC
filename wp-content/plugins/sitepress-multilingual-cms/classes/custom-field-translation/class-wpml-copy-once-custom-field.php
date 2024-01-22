@@ -1,6 +1,6 @@
 <?php
 
-class WPML_Copy_Once_Custom_Field implements IWPML_Action {
+class WPML_Copy_Once_Custom_Field implements IWPML_Backend_Action, IWPML_Frontend_Action, IWPML_DIC_Action {
 
 	/** @var SitePress $sitepress */
 	private $sitepress;
@@ -36,10 +36,11 @@ class WPML_Copy_Once_Custom_Field implements IWPML_Action {
 		$custom_fields     = get_post_meta( $post_id );
 
 		foreach ( $custom_fields_to_copy as $meta_key ) {
-			$values = isset( $custom_fields[ $meta_key ] ) ? $custom_fields[ $meta_key ] : [];
-			if ( ! empty( $values ) ) {
-				$values = array( $values );
-			}
+			$values = isset( $custom_fields[ $meta_key ] )
+					&& ! empty( $custom_fields[ $meta_key ] )
+				? [ $custom_fields[ $meta_key ] ]
+				: [];
+
 			/**
 			 * Custom fields values for given post obtained directly from database
 			 *

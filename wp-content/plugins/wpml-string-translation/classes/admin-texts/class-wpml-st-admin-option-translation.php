@@ -35,11 +35,11 @@ class WPML_ST_Admin_Option_Translation extends WPML_SP_User {
 
 	/**
 	 *
-	 * @param string   $option_name
-	 * @param string   $new_value
-	 * @param int|bool $status
-	 * @param int      $translator_id
-	 * @param int      $rec_level
+	 * @param string         $option_name
+	 * @param string|array   $new_value
+	 * @param int|bool       $status
+	 * @param int            $translator_id
+	 * @param int            $rec_level
 	 *
 	 * @return boolean|mixed
 	 */

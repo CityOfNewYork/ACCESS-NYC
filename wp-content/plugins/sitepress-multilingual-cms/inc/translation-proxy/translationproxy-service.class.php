@@ -80,8 +80,8 @@ class TranslationProxy_Service {
 	 * Returns a WPML readable string that allows to tell translation service and translator id
 	 * (typically used for translators dropdowns)
 	 *
-	 * @param int|bool $translation_service_id
-	 * @param int|bool $translator_id
+	 * @param int|float|string|bool $translation_service_id
+	 * @param int|float|string|bool $translator_id
 	 *
 	 * @return string
 	 */

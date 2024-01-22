@@ -59,7 +59,7 @@ class WPML_Translation_Proxy_Networking {
 		$api_response = $this->call_remote_api( $url, $params, $method, $has_return_value );
 
 		if ( $has_return_value ) {
-			if ( ! isset( $api_response['headers']['content-type'] ) ) {
+			if ( ! isset( $api_response['headers'] ) && ! isset( $api_response['headers']['content-type'] ) ) {
 				throw new WPMLTranslationProxyApiException( 'Invalid HTTP response, no content type in header given!' );
 			}
 			$content_type = $api_response['headers']['content-type'];
@@ -114,7 +114,7 @@ class WPML_Translation_Proxy_Networking {
 	 *
 	 * @throws \WPMLTranslationProxyApiException
 	 *
-	 * @return null|string
+	 * @return array
 	 */
 	private function call_remote_api(
 		$url,

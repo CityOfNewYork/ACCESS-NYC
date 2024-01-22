@@ -16,7 +16,7 @@ class WPML_WP_Cache_Item {
 	 */
 	public function __construct( WPML_WP_Cache $cache, $key ) {
 		if ( is_array( $key ) ) {
-			$key = md5( json_encode( $key ) );
+			$key = md5( (string) json_encode( $key ) );
 		}
 		$this->cache = $cache;
 		$this->key   = $key;

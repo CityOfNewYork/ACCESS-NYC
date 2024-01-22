@@ -1,0 +1,178 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Advanced": [
+            "Για προχωρημένους"
+         ],
+         "HTML anchor": [
+            "Αγκύρωση HTML"
+         ],
+         "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
+            "Προσθέστε μια συντόμευση σε αυτό το τμήμα κατά τη φόρτωση της σελίδας με τη χρήση του “#anchor” URL."
+         ],
+         "Additional CSS class(es)": [
+            "Επιπλέον κλάση(-εις) CSS"
+         ],
+         "Separate multiple classes with spaces.": [
+            "Διαχωρίστε πολλαπλές κλάσεις με διαστήματα."
+         ],
+         "Color": [
+            "Χρώμα"
+         ],
+         "Dimensions": [
+            "Διαστάσεις"
+         ],
+         "BLOCK": [
+            "ΤΜΗΜΑ"
+         ],
+         "Block margin": [
+            "Περιθώριο τμήματος"
+         ],
+         "Block padding": [
+            "Αναπλήρωση τμήματος"
+         ],
+         "LANGUAGE": [
+            "ΓΛΩΣΣΑ"
+         ],
+         "Language spacing": [
+            "Διάστιχο γλώσσας"
+         ],
+         "Language padding": [
+            "Αναπλήρωση γλώσσας"
+         ],
+         "Display": [
+            "Προβολή"
+         ],
+         "Show flag": [
+            "Εμφάνιση σημαίας"
+         ],
+         "Show language name": [
+            "Εμφάνιση ονόματος γλώσσας"
+         ],
+         "Display language name in": [
+            "Προβολή ονόματος γλώσσας σε"
+         ],
+         "Style": [
+            "Στιλ"
+         ],
+         "Flag settings": [
+            "Ρυθμίσεις σημαίας"
+         ],
+         "Width": [
+            "Πλάτος"
+         ],
+         "Height": [
+            "Ύψος"
+         ],
+         "Spacing": [
+            "Διάστιχο"
+         ],
+         "Allow wrapping to multiple lines": [
+            "Να επιτρέπεται η αναδίπλωση σε πολλαπλές γραμμές"
+         ],
+         "Open on click": [
+            "Άνοιγμα με το πάτημα ποντικιού"
+         ],
+         "Show arrow": [
+            "Εμφάνιση βέλους"
+         ],
+         "Layout": [
+            "Διάταξη"
+         ],
+         "Justification": [
+            "Στοίχιση"
+         ],
+         "Orientation": [
+            "Προσανατολισμός"
+         ],
+         "Typography": [
+            "Τυπογραφία"
+         ],
+         "Background": [
+            "Φόντο"
+         ],
+         "Language Text": [
+            "Κείμενο γλώσσας"
+         ],
+         "Language Background": [
+            "Φόντο γλώσσας"
+         ],
+         "Current language text": [
+            "Τρέχον κείμενο γλώσσας"
+         ],
+         "Current language background": [
+            "Τρέχον φόντο γλώσσας"
+         ],
+         "Full name": [
+            "Ονοματεπώνυμο"
+         ],
+         "Code": [
+            "Κώδικας"
+         ],
+         "Justify items left": [
+            "Στοίχιση στοιχείων αριστερά"
+         ],
+         "Justify items center": [
+            "Στοίχιση στοιχείων στο κέντρο"
+         ],
+         "Justify items right": [
+            "Στοίχιση στοιχείων δεξιά"
+         ],
+         "Justify items space between": [
+            "Στοίχιση στοιχείων με διάστημα ανάμεσα"
+         ],
+         "Horizontal": [
+            "Οριζόντια"
+         ],
+         "Vertical": [
+            "Κάθετα"
+         ],
+         "Normal": [
+            "Κανονικό"
+         ],
+         "Medium": [
+            "Μεσαίο"
+         ],
+         "Large": [
+            "Μεγάλο"
+         ],
+         "X-Large": [
+            "Πολύ μεγάλο"
+         ],
+         "Ab": [
+            "Αβ"
+         ],
+         "AB": [
+            "ΑΒ"
+         ],
+         "ab": [
+            "αβ"
+         ],
+         "Small": [
+            "Μικρό"
+         ],
+         "Displays the WPML Language Switcher.": [
+            "Προβάλλει την Εναλλαγή Γλώσσας WPML."
+         ],
+         "Language Switcher": [
+            "Εναλλαγή Γλώσσας"
+         ],
+         "displays the WPML Language Switcher": [
+            "προβάλλει την Εναλλαγή Γλώσσας WPML"
+         ],
+         "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
+            "Προβάλλει την Εναλλαγή Γλώσσας WPML. <br/> Μάθετε <a>πώς να μεταφράσετε αυτό το τμήμα</a>."
+         ],
+         "Navigation Language Switcher": [
+            "Εναλλαγή Γλώσσας Πλοήγησης"
+         ],
+         "Reset all": [
+            "Επαναφορά όλων"
+         ]
+      }
+   }
+}

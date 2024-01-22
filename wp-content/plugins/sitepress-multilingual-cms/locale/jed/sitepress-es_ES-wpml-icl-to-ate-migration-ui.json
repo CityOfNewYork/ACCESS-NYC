@@ -1,0 +1,254 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "es_ES"
+         },
+         "From:": [
+            "Del:"
+         ],
+         "--Choose language--": [
+            "--Seleccionar idioma--"
+         ],
+         "to:": [
+            "al:"
+         ],
+         "Set language pair(s) for Translator %s:": [
+            "Establecer los pares de idiomas para el traductor %s:"
+         ],
+         "+ Add more language pairs for this translator": [
+            "+ Agregar más pares de idiomas para este traductor"
+         ],
+         "Translation Memory was successfully copied to Advanced Translation Editor.": [
+            "La memoria de traducción se copió correctamente al Editor de traducción avanzado."
+         ],
+         "Deactivate ICanLocalize.com as Translation Service on this site": [
+            "Desactivar ICanLocalize.com como servicio de traducción en este sitio web"
+         ],
+         "Missing a translator? Or were new jobs since the last copy of the Translation Memory?": [
+            "¿Le falta un traductor? ¿Hay trabajos nuevos desde la última copia de la memoria de traducción?"
+         ],
+         "Enter here your ICanLocalize authentication details.": [
+            "Ingrese aquí los datos de autenticación de ICanLocalize"
+         ],
+         "API Token:": [
+            "Token de la API:"
+         ],
+         "Please enter valid value for ICL token.": [
+            "Ingrese un valor para el token de ICL válido."
+         ],
+         "Enter ICL API token here": [
+            "Introduzca el token de la API de ICL aquí"
+         ],
+         "Submit": [
+            "Enviar"
+         ],
+         "Sign up": [
+            "Registrarse"
+         ],
+         "to ICanLocalize to receive your API token.": [
+            "para que ICanLocalize reciba el token de la API."
+         ],
+         "Already have an account? Login and": [
+            "¿Ya tiene una cuenta? Inicie sesión y"
+         ],
+         "get your token.": [
+            "obtener su token."
+         ],
+         "Copy new Translation Memory to Advanced Translation Memory": [
+            "Copiar la nueva memoria de traducción a la Memoria de traducción avanzada"
+         ],
+         "Import translation memory": [
+            "Importar memoria de traducción"
+         ],
+         "ICanLocalize is already deactivated on this site": [
+            "ICanLocalize ya está desactivado en este sitio web"
+         ],
+         "You can still import Translators or Copy Translation Memory to Advanced Translator Editor": [
+            "Aún así, puede importar los traductores o copiar la memoria de traducción al Editor de traducción avanzado"
+         ],
+         "Move from ICanLocalize.com to Advanced Translation Editor": [
+            "Mover de ICanLocalize.com al Editor de traducción avanzado"
+         ],
+         "Import translators": [
+            "Importar traductores"
+         ],
+         "Come back": [
+            "Volver"
+         ],
+         "Cancel": [
+            "Cancelar"
+         ],
+         "Save": [
+            "Guardar"
+         ],
+         "Name": [
+            "Nombre"
+         ],
+         "Language Pairs": [
+            "Pares de idiomas"
+         ],
+         "Not supported pairs:": [
+            "Pares no admitidos:"
+         ],
+         "ICanLocalize.com deactivated": [
+            "ICanLocalize.com desactivado"
+         ],
+         "Translate memory is imported": [
+            "Se importa la memoria de traducción"
+         ],
+         "There is no translators in ICL": [
+            "No hay traductores en ICL"
+         ],
+         "Translators saved": [
+            "Traductores guardados"
+         ],
+         "%s file upload failed.": [
+            "Error al cargar el archivo %s."
+         ],
+         "Flag": [
+            "Marcar"
+         ],
+         "Flag file": [
+            "Marcar archivo"
+         ],
+         "You just added  language. Next, select it as the site's default language or a translation language.": [
+            "Acaba de agregar un idioma. Ahora, selecciónelo como el idioma predeterminado del sitio web o como un idioma de traducción."
+         ],
+         "Language added": [
+            "Idioma agregado"
+         ],
+         "The value \"%s\" already exists": [
+            "El valor \"%s\" ya existe"
+         ],
+         "Add a new language": [
+            "Agregar un idioma nuevo"
+         ],
+         "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
+            "Cree un idioma específico de un país seleccionando el idioma general de la siguiente lista. Luego, seleccione el país para el que debe ser localizado."
+         ],
+         "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
+            "Al seleccionar una combinación que ya existe en la base de datos, WPML puede ayudar a completar los campos necesarios. Leer más sobre <AddingACustomLanguageLink />."
+         ],
+         "Cannot find?": [
+            "¿No lo encuentra?"
+         ],
+         "Click here": [
+            "Haga clic aquí"
+         ],
+         "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
+            "Formato incorrecto. Puede contener solo letras en minúscula y \"-\". Por ej.: \"fr\" , \"pt-br\", \"zh-hans\""
+         ],
+         "Language": [
+            "Idioma"
+         ],
+         "Location": [
+            "Lugar"
+         ],
+         "Code": [
+            "Código"
+         ],
+         "The language will not be supported by automatic translations": [
+            "El idioma no será admitido para la traducción automática"
+         ],
+         "Language mapping": [
+            "Asignación de idiomas"
+         ],
+         "Don't map this language": [
+            "No asignar este idioma"
+         ],
+         "Default locale": [
+            "Configuración regional predeterminada"
+         ],
+         "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
+            "Formato incorrecto. Puede contener solo letras en minúscula y \"_\". Por ej.: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+         ],
+         "hreflang": [
+            "hreflang"
+         ],
+         "Encode url?": [
+            "¿Codificar url?"
+         ],
+         "Flags must be:": [
+            "Los marcadores deben ser:"
+         ],
+         "NO": [
+            "NO"
+         ],
+         "YES": [
+            "SÍ"
+         ],
+         " (required)": [
+            " (requerido)"
+         ],
+         "Please fill in the field": [
+            "Complete el campo"
+         ],
+         "PNG, SVG, or JPG files": [
+            "Archivos PNG, SVG o JPG"
+         ],
+         "Save language": [
+            "Guardar idioma"
+         ],
+         "18 x 12 pixels": [
+            "18 x 12 píxeles"
+         ],
+         "Read more about ": [
+            "Más información sobre"
+         ],
+         "The name of your language as it will appear on your site's language switcher.": [
+            "El nombre del idioma tal como aparecerá en el selector de idiomas del sitio web."
+         ],
+         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "Un valor único que identifica el idioma de la base de datos y la URL. Una vez guardado, el código de idioma no se puede cambiar."
+         ],
+         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "Si su idioma personalizado es similar a un idioma existente, puede usar el corrector de ortografía y la traducción automática del idioma existente. Por ejemplo, si su idioma es alemán de Suiza, puede configurar el alemán como idioma para usar en la corrección de ortografía y la traducción automática. Si no asigna su idioma personalizado a un idioma existente, las funciones de corrección ortográfica y traducción automática no estarán disponibles en ese idioma."
+         ],
+         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "El valor que WPML verifica al cargar traducciones desde archivos MO y PO. La configuración regional está incluida en el nombre de los archivos de la carpeta /wp-content/languages/ de la configuración de su WordPress."
+         ],
+         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "Google usa el atributo hreflang para dirigir a los usuarios a los sitios del idioma y lugar de relevancia. Por ejemplo:"
+         ],
+         "All English-speaking users: en": [
+            "Todos los usuario anglohablantes: en"
+         ],
+         "English for UK users: en-gb": [
+            "Inglés para usuarios del Reino Unido: en-gb"
+         ],
+         "English for US users: en-us": [
+            "Inglés para usuarios de EE. UU.: en-us"
+         ],
+         "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
+            "Determina si las URL de este idioma se codifican o usan caracteres ASCII (si no está seguro, déjelo en \"No\")."
+         ],
+         "adding a custom language": [
+            "agregar un idioma personalizado"
+         ],
+         "Default language": [
+            "Idioma predeterminado"
+         ],
+         "What is the current language of your website?": [
+            "¿Cuál es el idioma actual de su sitio web?"
+         ],
+         "Translation languages": [
+            "Idiomas de traducción"
+         ],
+         "Which languages do you want to translate your site into?": [
+            "¿A qué idiomas desea traducir su sitio web?"
+         ],
+         "If you cannot find languages that you need in the list": [
+            "Si no encuentra los idiomas que necesita en la lista"
+         ],
+         "create a custom language": [
+            "cree un idioma personalizado"
+         ],
+         "What are the languages of your site?": [
+            "¿Cuáles son los idiomas de su sitio web?"
+         ]
+      }
+   }
+}

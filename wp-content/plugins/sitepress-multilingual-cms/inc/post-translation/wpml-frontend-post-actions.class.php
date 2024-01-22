@@ -1,6 +1,23 @@
 <?php
 
+use WPML\LIB\WP\Hooks;
+
 class WPML_Frontend_Post_Actions extends WPML_Post_Translation {
+
+	public function init() {
+		parent::init ();
+		if ( $this->is_setup_complete() ) {
+
+			/**
+			 * In theory, we could add the 'delete_post` action for all frontend requests
+			 * We'll limit it to REST to avoid any unexpected problems
+			 */
+			Hooks::onAction( 'rest_api_init' )
+			     ->then( function () {
+				     add_action( 'delete_post', [ $this, 'delete_post_actions' ] );
+			     } );
+		}
+	}
 
 	/**
 	 * @param int    $post_id

@@ -2,7 +2,6 @@
 
 class WPML_Endpoints_Support {
 
-	const REGISTERED_ENDPOINTS_OPTION_KEY = 'wpml_registered_endpoints';
 	const STRING_CONTEXT = 'WP Endpoints';
 
 	/**
@@ -26,7 +25,6 @@ class WPML_Endpoints_Support {
 
 	public function add_hooks() {
 		add_action( 'init', array( $this, 'add_endpoints_translations' ) );
-		add_action( 'generate_rewrite_rules', array( $this, 'register_rewrite_rules_strings' ) );
 
 		add_filter( 'option_rewrite_rules', array(
 			$this,
@@ -43,39 +41,21 @@ class WPML_Endpoints_Support {
 
 	public function add_endpoints_translations() {
 
-		if ( $this->default_language !== $this->current_language ) {
+		$registered_endpoints = $this->get_registered_endpoints();
 
-			$registered_endpoints = $this->get_registered_endpoints();
+		if ( $registered_endpoints ) {
 
-			if ( $registered_endpoints ) {
+			foreach ( $registered_endpoints as $endpoint_key => $endpoint_value ) {
 
-				foreach ( $registered_endpoints as $endpoint_key => $endpoint_value ) {
+				$endpoint_translation = $this->get_endpoint_translation( $endpoint_key, $endpoint_value );
 
-					$endpoint_translation = $this->get_endpoint_translation( $endpoint_key, $endpoint_value );
-
-					if ( $endpoint_value !== urldecode( $endpoint_translation ) ) {
-						add_rewrite_endpoint( $endpoint_translation, EP_ROOT | EP_PAGES );
-					}
+				if ( $endpoint_value !== urldecode( $endpoint_translation ) ) {
+					add_rewrite_endpoint( $endpoint_translation, EP_ROOT | EP_PAGES, $endpoint_value );
 				}
 			}
 		}
 
 		do_action( 'wpml_after_add_endpoints_translations', $this->current_language );
-	}
-
-	/**
-	 * @param WP_Rewrite $wp_rewrite
-	 */
-	public function register_rewrite_rules_strings( $wp_rewrite ) {
-
-		$registered_endpoints = array();
-
-		foreach ( $wp_rewrite->endpoints as $endpoint ) {
-			$this->register_endpoint_string( $endpoint[1], $endpoint[2] );
-			$registered_endpoints[ $endpoint[1] ] = $endpoint[2];
-		}
-
-		update_option( self::REGISTERED_ENDPOINTS_OPTION_KEY, $registered_endpoints );
 	}
 
 	/**
@@ -104,11 +84,35 @@ class WPML_Endpoints_Support {
 	 */
 	public function register_endpoint_string( $key, $endpoint ) {
 
-		$string = icl_get_string_id( $endpoint, self::STRING_CONTEXT, $key );
-
-		if ( ! $string ) {
-			icl_register_string( self::STRING_CONTEXT, $key, $endpoint );
+		if ( $key === $endpoint ) {
+			if ( ! $this->is_registered( $endpoint ) ) {
+				icl_register_string( self::STRING_CONTEXT, $key, $endpoint );
+				wp_cache_delete( self::STRING_CONTEXT, __CLASS__ );
+			}
 		}
+	}
+
+	/**
+	 * @param string $endpoint
+	 *
+	 * @return bool
+	 */
+	private function is_registered( $endpoint ) {
+		global $wpdb;
+
+		$endpoints = wp_cache_get( self::STRING_CONTEXT, __CLASS__ );
+		if ( false === $endpoints ) {
+			$endpoints = $wpdb->get_col(
+				$wpdb->prepare(
+					"SELECT value FROM {$wpdb->prefix}icl_strings WHERE context = %s",
+					self::STRING_CONTEXT
+				)
+			);
+
+			wp_cache_set( self::STRING_CONTEXT, $endpoints, __CLASS__ );
+		}
+
+		return in_array( $endpoint, $endpoints, true );
 	}
 
 	/**
@@ -253,8 +257,32 @@ class WPML_Endpoints_Support {
 	 * @return array
 	 */
 	public function get_registered_endpoints() {
+		global $wp_rewrite;
 
-		return get_option( self::REGISTERED_ENDPOINTS_OPTION_KEY, array() );
+		$endpoints = empty( $wp_rewrite->endpoints ) ? [] : $wp_rewrite->endpoints;
+
+		/**
+		 * @param array $endpoints
+		 *
+		 * @return array
+		 *
+		 * @deprecated since 4.6, use `wpml_registered_endpoints` instead.
+		 */
+		$endpoints = apply_filters(
+			'option_wpml_registered_endpoints',
+			array_filter( wp_list_pluck( $endpoints, 2, 1 ) )
+		);
+
+		/**
+		 * Filter the endpoints that WPML will handle.
+		 *
+		 * @param array $endpoints
+		 *
+		 * @return array
+		 *
+		 * @since 4.6
+		 */
+		return apply_filters( 'wpml_registered_endpoints', $endpoints );
 	}
 
 	/**

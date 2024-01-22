@@ -28,6 +28,8 @@ class OrderQueryHelper {
 				if ( $order->get_column() === 'language' ) {
 					$orders[] = 'source_language_name ' . $order->get_direction();
 					$orders[] = 'target_language_name ' . $order->get_direction();
+				} elseif ( $order->get_column() === 'sent_date' || $order->get_column() === 'deadline_date' ) {
+					$orders[] = "DATE({$order->get_column()}) {$order->get_direction()}";
 				} else {
 					$orders[] = $order->get_column() . ' ' . $order->get_direction();
 				}

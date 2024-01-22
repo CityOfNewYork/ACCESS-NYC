@@ -3,7 +3,8 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "en"
          },
          "The wpml-config.xml file in the root folder of your theme and plugins tells WPML which content is translatable. You can override these settings with your own custom settings by adding them below.": [
             "O ficheiro wpml-config.xml na pasta raiz do seu tema e plugins diz ao WPML qual o conteúdo que pode ser traduzido. Pode anular estas definições com as suas próprias definições personalizadas, adicionando-as abaixo."

@@ -13,5 +13,10 @@ class CachedLanguageMappings extends LanguageMappings {
 	protected static function getATEAPI() {
 		return new CachedATEAPI( make( \WPML_TM_ATE_API::class ), new Transient() );
 	}
+
+	public static function clearCache() {
+		$transientStorage = new Transient();
+		$transientStorage->delete( CachedATEAPI::CACHE_OPTION );
+	}
 }
 

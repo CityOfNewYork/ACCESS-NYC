@@ -30,7 +30,7 @@ class OTGS_Installer_WP_Share_Local_Components_Setting_Hooks {
 			            'render_local_components_setting',
 		            ),
 		            10,
-		            5 );
+		            1 );
 		add_filter( 'otgs_installer_has_local_components_setting',
 		            array( $this, 'has_local_components_setting_filter' ),
 		            10,

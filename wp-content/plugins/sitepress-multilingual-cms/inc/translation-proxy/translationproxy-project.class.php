@@ -49,9 +49,9 @@ class TranslationProxy_Project {
 	public $errors = array();
 
 	/**
-	 * @param TranslationProxy_Service $service
-	 * @param string                   $delivery
-	 * @param WPML_TP_Client           $tp_client
+	 * @param TranslationProxy_Service|stdClass $service
+	 * @param string                            $delivery
+	 * @param WPML_TP_Client                    $tp_client
 	 */
 	public function __construct( $service, $delivery, WPML_TP_Client $tp_client ) {
 		$this->service   = $service;

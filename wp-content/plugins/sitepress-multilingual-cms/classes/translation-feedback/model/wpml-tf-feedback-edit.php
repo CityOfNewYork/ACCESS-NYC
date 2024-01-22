@@ -52,7 +52,7 @@ class WPML_TF_Feedback_Edit {
 	public function update( $feedback_id, array $args ) {
 		$feedback = $this->feedback_query->get_one( $feedback_id );
 
-		if ( $feedback ) {
+		if ( $feedback instanceof WPML_TF_Feedback ) {
 			$this->update_feedback_content( $feedback, $args );
 			$this->add_message_to_feedback( $feedback, $args );
 			$this->assign_feedback_to_reviewer( $feedback, $args );

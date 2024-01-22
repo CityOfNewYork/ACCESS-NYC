@@ -28,6 +28,7 @@ class WPML_TF_Feedback_Collection extends WPML_TF_Collection {
 
 		if ( method_exists( $this, $method ) ) {
 			// Use @ to avoid warnings in unit tests => see bug https://bugs.php.net/bug.php?id=50688
+			/** @phpstan-ignore-next-line Refactor class to support PHPStan */
 			@uasort( $this->collection, array( $this, $method ) );
 		}
 	}
@@ -184,6 +185,7 @@ class WPML_TF_Feedback_Collection extends WPML_TF_Collection {
 		$method             = 'filter_by_' . $property;
 
 		if ( method_exists( $this, $method ) ) {
+			/** @phpstan-ignore-next-line Refactor class to support PHPStan */
 			$this->collection = array_filter( $this->collection, array( $this, $method ) );
 		}
 	}

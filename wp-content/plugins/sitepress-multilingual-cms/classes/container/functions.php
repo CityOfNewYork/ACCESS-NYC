@@ -14,8 +14,14 @@ if ( ! function_exists( 'WPML\Container\make' ) ) {
 	 * @param string $class_name
 	 * @param array  $args
 	 *
-	 * @return mixed
+	 * @return object
 	 * @throws \WPML\Auryn\InjectionException
+	 *
+     *
+     * @phpstan-template T of object
+     * @phpstan-param class-string<T> $class_name
+     *
+     * @phpstan-return T
 	 */
 	function make( $class_name = null, array $args = null ) {
 		$make = function ( $class_name, $args = [] ) {

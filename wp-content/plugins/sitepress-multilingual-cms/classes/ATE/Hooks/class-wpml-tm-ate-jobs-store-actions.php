@@ -21,7 +21,7 @@ class WPML_TM_ATE_Jobs_Store_Actions implements IWPML_Action {
 	}
 
 	public function add_hooks() {
-		add_action( 'wpml_tm_ate_jobs_store', array( $this, 'store' ), 10, 2 );
+		add_action( 'wpml_tm_ate_jobs_store', array( $this, 'store_action' ), 10, 2 );
 	}
 
 	/**
@@ -32,5 +32,15 @@ class WPML_TM_ATE_Jobs_Store_Actions implements IWPML_Action {
 	 */
 	public function store( $wpml_job_id, $ate_job_data ) {
 		return $this->ate_jobs->store( $wpml_job_id, $ate_job_data );
+	}
+
+	/**
+	 * @param int   $wpml_job_id
+	 * @param array $ate_job_data
+	 *
+	 * @return void
+	 */
+	public function store_action( $wpml_job_id, $ate_job_data ) {
+		$this->ate_jobs->store( $wpml_job_id, $ate_job_data );
 	}
 }

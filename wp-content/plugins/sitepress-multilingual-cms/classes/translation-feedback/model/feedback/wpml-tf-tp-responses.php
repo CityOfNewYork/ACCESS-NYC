@@ -1,5 +1,7 @@
 <?php
 
+use WPML\API\Sanitize;
+
 /**
  * Class WPML_TF_TP_Responses
  *
@@ -69,7 +71,7 @@ class WPML_TF_TP_Responses {
 
 	/** @param string $method */
 	public function set_feedback_forward_method( $method ) {
-		$this->feedback_forward_method = filter_var( $method, FILTER_SANITIZE_STRING );
+		$this->feedback_forward_method = Sanitize::string( $method );
 	}
 
 	/** @return null|string */
@@ -98,7 +100,7 @@ class WPML_TF_TP_Responses {
 
 		if ( $this->is_api_feedback() && defined( 'OTG_TRANSLATION_PROXY_URL' ) ) {
 			$url = OTG_TRANSLATION_PROXY_URL . self::FEEDBACK_TP_URL_ENDPOINT;
-			$url = preg_replace( '/{feedback_id}/', $this->get_feedback_id(), $url );
+			$url = preg_replace( '/{feedback_id}/', (string) $this->get_feedback_id(), $url );
 		}
 
 		return $url;

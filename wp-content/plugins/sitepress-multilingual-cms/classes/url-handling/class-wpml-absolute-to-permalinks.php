@@ -1,5 +1,7 @@
 <?php
 
+use WPML\Utils\AutoAdjustIds;
+
 class WPML_Absolute_To_Permalinks {
 
 	private $taxonomies_query;
@@ -8,8 +10,12 @@ class WPML_Absolute_To_Permalinks {
 	/** @var SitePress $sitepress */
 	private $sitepress;
 
-	public function __construct( SitePress $sitepress ) {
-		$this->sitepress = $sitepress;
+	/** @var AutoAdjustIds $auto_adjust_ids */
+	private $auto_adjust_ids;
+
+	public function __construct( SitePress $sitepress, AutoAdjustIds $auto_adjust_ids = null ) {
+		$this->sitepress       = $sitepress;
+		$this->auto_adjust_ids = $auto_adjust_ids ?: new AutoAdjustIds( $sitepress );
 	}
 
 	public function convert_text( $text ) {
@@ -37,7 +43,11 @@ class WPML_Absolute_To_Permalinks {
 
 		$parts = $this->get_found_parts( $matches );
 
-		$url = $this->get_url( $parts );
+		$url = $this->auto_adjust_ids->runWith(
+			function() use ( $parts ) {
+				return $this->get_url( $parts );
+			}
+		);
 
 		if ( $this->sitepress->get_wp_api()->is_wp_error( $url ) || empty( $url ) ) {
 			return $parts->whole;
@@ -66,9 +76,6 @@ class WPML_Absolute_To_Permalinks {
 	private function get_url( $parts ) {
 		$tax = $this->taxonomies_query->find( $parts->content_type );
 
-		$auto_adjust_ids_origin = $this->sitepress->get_setting( 'auto_adjust_ids', false );
-		$this->sitepress->set_setting( 'auto_adjust_ids', true );
-
 		if ( $parts->content_type == 'cat_ID' ) {
 			$url = $this->sitepress->get_wp_api()->get_category_link( $parts->id );
 		} elseif ( $tax ) {
@@ -77,15 +84,13 @@ class WPML_Absolute_To_Permalinks {
 			$url = $this->sitepress->get_wp_api()->get_permalink( $parts->id );
 		}
 
-		$this->sitepress->set_setting( 'auto_adjust_ids', $auto_adjust_ids_origin );
-
 		return $url;
 	}
 
 	private function get_fragment( $url, $parts ) {
 		$fragment = $parts->fragment;
 		$fragment = $this->remove_query_in_wrong_lang( $fragment );
-		if ( $fragment != '' ) {
+		if ( is_string( $fragment ) && $fragment != '' ) {
 			$fragment = str_replace( '&#038;', '&', $fragment );
 			$fragment = str_replace( '&amp;', '&', $fragment );
 			if ( $fragment[0] == '&' ) {
@@ -103,7 +108,7 @@ class WPML_Absolute_To_Permalinks {
 	}
 
 	private function remove_query_in_wrong_lang( $fragment ) {
-		if ( $fragment != '' ) {
+		if ( is_string( $fragment ) && $fragment != '' ) {
 			$fragment = str_replace( '&#038;', '&', $fragment );
 			$fragment = str_replace( '&amp;', '&', $fragment );
 			$start    = $fragment[0];

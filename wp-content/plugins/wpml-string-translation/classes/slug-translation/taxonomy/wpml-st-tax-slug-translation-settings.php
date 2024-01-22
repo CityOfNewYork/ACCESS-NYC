@@ -47,8 +47,9 @@ class WPML_ST_Tax_Slug_Translation_Settings extends WPML_ST_Slug_Translation_Set
 		$options = get_option( self::OPTION_NAME, array() );
 
 		foreach ( $this->get_properties() as $name => $value ) {
-			if ( array_key_exists( $name, $options ) ) {
-				call_user_func( array( $this, 'set_' . $name ), $options[ $name ] );
+			$callback = array( $this, 'set_' . $name );
+			if ( array_key_exists( $name, $options ) && is_callable( $callback ) ) {
+				call_user_func( $callback, $options[ $name ] );
 			}
 		}
 	}

@@ -15,6 +15,7 @@ jQuery(function () {
     jQuery( '#js-translated_document-options-btn' ).click(function(){
 
 		var document_status = jQuery( 'input[name*="icl_translated_document_status"]:checked' ).val(),
+      document_status_sync = jQuery( 'input[name*="icl_translated_document_status_sync"]:checked' ).val(),
 			page_url = jQuery( 'input[name*="icl_translated_document_page_url"]:checked' ).val(),
 			response_text = jQuery( '#icl_ajx_response_tdo' ),
 			spinner = '<span id="js-document-options-spinner" style="float: inherit; margin: 0" class="spinner is-active"></span>';
@@ -29,6 +30,7 @@ jQuery(function () {
 				action: 'wpml_translated_document_options',
 				nonce: jQuery( '#wpml-translated-document-options-nonce' ).val(),
 				document_status: document_status,
+        document_status_sync: document_status_sync,
 				page_url: page_url
 			},
 			success: function ( response ) {

@@ -1,0 +1,179 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "pl"
+         },
+         "Advanced": [
+            "Zaawansowane"
+         ],
+         "HTML anchor": [
+            "kotwica HTML"
+         ],
+         "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
+            "Dodaj skrót do tego bloku podczas wczytywania strony, korzystając z URL \"#kotwica\"."
+         ],
+         "Additional CSS class(es)": [
+            "Dodatkowe klasy CSS"
+         ],
+         "Separate multiple classes with spaces.": [
+            "Rozdziel wiele klas spacjami."
+         ],
+         "Color": [
+            "Kolor"
+         ],
+         "Dimensions": [
+            "Wymiary"
+         ],
+         "BLOCK": [
+            "Blokowy"
+         ],
+         "Block margin": [
+            "Margines bloku"
+         ],
+         "Block padding": [
+            "Odstęp bloku"
+         ],
+         "LANGUAGE": [
+            "JĘZYK"
+         ],
+         "Language spacing": [
+            "Margines zewnętrzny języka"
+         ],
+         "Language padding": [
+            "Margines wewnętrzny języka"
+         ],
+         "Display": [
+            "Wyświetl"
+         ],
+         "Show flag": [
+            "Wyświetl flagę"
+         ],
+         "Show language name": [
+            "Wyświetl nazwę języka"
+         ],
+         "Display language name in": [
+            "Wyświetl nazwę języka w"
+         ],
+         "Style": [
+            "Styl"
+         ],
+         "Flag settings": [
+            "Ustawienia flagi"
+         ],
+         "Width": [
+            "Szerokość"
+         ],
+         "Height": [
+            "Wysokość"
+         ],
+         "Spacing": [
+            "Margines zewnętrzny"
+         ],
+         "Allow wrapping to multiple lines": [
+            "Zezwalaj na zawijanie wierszy"
+         ],
+         "Open on click": [
+            "Otwórz po kliknięciu"
+         ],
+         "Show arrow": [
+            "Wyświetl strzałkę"
+         ],
+         "Layout": [
+            "Układ"
+         ],
+         "Justification": [
+            "Justowanie"
+         ],
+         "Orientation": [
+            "Orientacja"
+         ],
+         "Typography": [
+            "Typografia"
+         ],
+         "Background": [
+            "Tło"
+         ],
+         "Language Text": [
+            "Tekst języka"
+         ],
+         "Language Background": [
+            "Tło dla języka"
+         ],
+         "Current language text": [
+            "Tekst w bieżącym języku"
+         ],
+         "Current language background": [
+            "Tło dla bieżącego języka"
+         ],
+         "Full name": [
+            "Pełne imię i nazwisko"
+         ],
+         "Code": [
+            "Kod"
+         ],
+         "Justify items left": [
+            "Wyrównaj do lewej"
+         ],
+         "Justify items center": [
+            "Wyśrodkuj"
+         ],
+         "Justify items right": [
+            "Wyrównaj do prawej"
+         ],
+         "Justify items space between": [
+            "Wyjustuj"
+         ],
+         "Horizontal": [
+            "Poziomy"
+         ],
+         "Vertical": [
+            "Pionowy"
+         ],
+         "Normal": [
+            "Normalny"
+         ],
+         "Medium": [
+            "Średni"
+         ],
+         "Large": [
+            "Duży"
+         ],
+         "X-Large": [
+            "X-Duży"
+         ],
+         "Ab": [
+            "Ab"
+         ],
+         "AB": [
+            "AB"
+         ],
+         "ab": [
+            "ab"
+         ],
+         "Small": [
+            "Mała"
+         ],
+         "Displays the WPML Language Switcher.": [
+            "Wyświetla Przełącznik Języków WPML."
+         ],
+         "Language Switcher": [
+            "Przełącznik języka"
+         ],
+         "displays the WPML Language Switcher": [
+            "wyświetla Przełącznik Języków WPML."
+         ],
+         "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
+            "Wyświetla przełącznik języka WPML. <br/> Dowiedz się, <a>jak przetłumaczyć ten blok</a>."
+         ],
+         "Navigation Language Switcher": [
+            "Przełącznik Nawigacji Języków"
+         ],
+         "Reset all": [
+            "Resetuj wszystko"
+         ]
+      }
+   }
+}

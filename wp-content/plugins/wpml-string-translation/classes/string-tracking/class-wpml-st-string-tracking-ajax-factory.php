@@ -14,7 +14,7 @@ class WPML_ST_String_Tracking_AJAX_Factory implements IWPML_AJAX_Action_Loader {
 			return new WPML_ST_String_Tracking_AJAX(
 				$this->get_st_string_positions(),
 				new WPML_Super_Globals_Validation(),
-				filter_var( $_GET['action'], FILTER_SANITIZE_STRING )
+				(string) filter_var( $_GET['action'], FILTER_SANITIZE_STRING )
 			);
 		}
 

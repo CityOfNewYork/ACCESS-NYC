@@ -8,7 +8,6 @@ use WPML\FP\Logic;
 use WPML\FP\Obj;
 use WPML\FP\Relation;
 use WPML\LIB\WP\Hooks;
-use WPML\LIB\WP\Option;
 use WPML\TM\API\Jobs;
 use WPML\UIPage;
 use function WPML\Container\make;
@@ -57,22 +56,45 @@ class ManualJobCreationErrorNotice implements \IWPML_Backend_Action {
 	}
 
 	public static function retryMessage( array $params ) {
-		$returnUrl = \remove_query_arg( [ 'ateJobCreationError', 'jobId' ], Jobs::getCurrentUrl() );
+		$returnUrl  = \remove_query_arg( [ 'ateJobCreationError', 'jobId' ], Jobs::getCurrentUrl() );
+		$jobId      = Obj::prop( 'jobId', $params );
 
-		return sprintf(
+		if ( ! is_numeric( $jobId ) ) {
+			return sprintf(
+				'<div class="wpml-display-flex wpml-display-flex-center">%1$s</div>',
+				__( "WPML didn't manage to translate this page.", 'wpml-translation-management' )
+			);
+		}
+
+		$jobEditUrl = Jobs::getEditUrl( $returnUrl, (int) $jobId );
+
+		$fallbackErrorMessage = sprintf(
 			'<div class="wpml-display-flex wpml-display-flex-center">%1$s <a class="button wpml-margin-left-sm" href="%2$s">%3$s</a></div>',
 			__( "WPML didn't manage to translate this page.", 'wpml-translation-management' ),
-			Jobs::getEditUrl( $returnUrl, Obj::prop( 'jobId', $params ) ),
+			$jobEditUrl,
 			__( 'Try again', 'wpml-translation-management' )
 		);
+
+		$tryAgainTextLink = sprintf( '<a href="%1$s">%2$s</a>',
+			$jobEditUrl,
+			__( 'Try again', 'wpml-translation-management' ) );
+
+		$ateApiErrorMessage = ATEDetailedErrorMessage::readDetailedError( $tryAgainTextLink );
+
+		return $ateApiErrorMessage ?: $fallbackErrorMessage;
 	}
 
 	public static function retryFailedMessage() {
-		return '<div>' .
-		       sprintf(
-			       __( 'WPML tried to translate this page three times and failed. To get it fixed, contact %s', 'wpml-translation-management' ),
-			       '<a target=\'_blank\' href="https://wpml.org/forums/forum/english-support/">' . __( 'WPML support', 'wpml-translation-management' ) . '</a>'
-		       ) . '</div>';
+		$fallbackErrorMessage = '<div>' .
+		                        sprintf(
+			                        __( 'WPML tried to translate this page three times and failed. To get it fixed, contact %s', 'wpml-translation-management' ),
+			                        '<a target=\'_blank\' href="https://wpml.org/forums/forum/english-support/">' . __( 'WPML support', 'wpml-translation-management' ) . '</a>'
+		                        ) . '</div>';
+
+		$ateApiErrorMessage = ATEDetailedErrorMessage::readDetailedError();
+
+		return $ateApiErrorMessage ?: $fallbackErrorMessage;
+
 	}
 
 	public static function ateNotActiveMessage() {

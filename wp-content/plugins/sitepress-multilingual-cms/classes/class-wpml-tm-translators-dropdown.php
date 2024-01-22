@@ -122,7 +122,7 @@ class WPML_TM_Translators_Dropdown {
 			}
 			$translators = apply_filters( 'wpml_tm_translators_list', $translators );
 
-			$dropdown .= '<select id="' . esc_attr( $id ) . '" class="js-wpml-translator-dropdown" data-lang-to="' . esc_attr( $to ) . '"
+			$dropdown .= '<select id="' . esc_attr( $id ) . '" class="js-wpml-translator-dropdown" data-lang-to="' . esc_attr( (string) $to ) . '"
 								  name="' . esc_attr( $name ) . '" ' . ( $disabled ? 'disabled="disabled"' : '' ) . '>';
 
 			if ( $default_name ) {

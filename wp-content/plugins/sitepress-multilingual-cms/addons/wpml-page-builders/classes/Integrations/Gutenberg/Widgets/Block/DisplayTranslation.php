@@ -10,7 +10,10 @@ use function WPML\FP\spreadArgs;
 
 class DisplayTranslation implements \IWPML_Frontend_Action, \WPML\PB\Gutenberg\Integration {
 
-	const PRIORITY_BEFORE_REMOVE_BLOCK_MARKUP = 0;
+	/**
+	 * @see \WPML_Widgets_Support_Frontend::PRIORITY_AFTER_TRANSLATION_APPLIED
+	 */
+	const PRIORITY_BEFORE_REMOVE_BLOCK_MARKUP = -1;
 
 	public function add_hooks() {
 		$getStringsFromMOFile = Fns::memorize( [ Strings::class, 'fromMo' ] );

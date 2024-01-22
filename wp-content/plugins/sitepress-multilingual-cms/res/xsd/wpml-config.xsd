@@ -124,6 +124,15 @@
         </xs:sequence>
         <xs:attribute type="xs:string" name="name" use="required"/>
         <xs:attribute type="xs:string" name="label" use="optional"/>
+        <xs:attribute type="xs:string" name="type" use="optional"/>
+        <xs:attribute type="xs:string" name="sub-type" use="optional"/>
+        <xs:attribute name="encoding" use="optional">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="json" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
         <xs:attribute name="search-method">
             <xs:simpleType>
                 <xs:restriction base="xs:string">
@@ -192,6 +201,7 @@
         <xs:simpleContent>
             <xs:extension base="xs:string">
                 <xs:attribute type="xs:string" name="type" use="optional"/>
+                <xs:attribute type="xs:string" name="sub-type" use="optional"/>
                 <xs:attribute type="xs:string" name="encoding" use="optional"/>
                 <xs:attribute type="xs:string" name="label" use="optional"/>
             </xs:extension>
@@ -308,6 +318,7 @@
         <xs:simpleContent>
             <xs:extension base="xs:string">
                 <xs:attribute type="xs:string" name="type" use="optional"/>
+                <xs:attribute type="xs:string" name="sub-type" use="optional"/>
                 <xs:attribute type="xs:string" name="label" use="optional"/>
             </xs:extension>
         </xs:simpleContent>

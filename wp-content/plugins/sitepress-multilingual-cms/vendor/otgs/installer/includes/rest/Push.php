@@ -30,9 +30,10 @@ class Push {
 			$last_refresh = constant( 'OTGS_INSTALLER_OVERRIDE_SUB_LAST_REFRESH' );
 		}
 
-		if ( time() - $last_refresh > self::REFRESH_INTERVAL
-		) {
+		if ( time() - $last_refresh > self::REFRESH_INTERVAL ) {
 			$installer->refresh_subscriptions_data();
+
+			do_action( 'otgs_installer_subscription_refreshed' );
 
 			return new WP_REST_Response( [ 'message' => 'OK' ], 200 );
 		}

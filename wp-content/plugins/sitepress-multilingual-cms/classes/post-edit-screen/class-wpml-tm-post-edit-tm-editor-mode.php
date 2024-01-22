@@ -1,10 +1,13 @@
 <?php
 
+use WPML\FP\Obj;
+use WPML\Collect\Support\Collection;
+
 class WPML_TM_Post_Edit_TM_Editor_Mode {
 
-	const POST_META_KEY_USE_NATIVE        = '_wpml_post_translation_editor_native';
+	const POST_META_KEY_USE_NATIVE = '_wpml_post_translation_editor_native';
 	const TM_KEY_FOR_POST_TYPE_USE_NATIVE = 'post_translation_editor_native_for_post_type';
-	const TM_KEY_GLOBAL_USE_NATIVE        = 'post_translation_editor_native';
+	const TM_KEY_GLOBAL_USE_NATIVE = 'post_translation_editor_native';
 
 	/**
 	 * Check post meta first
@@ -17,7 +20,7 @@ class WPML_TM_Post_Edit_TM_Editor_Mode {
 	 * @return bool
 	 */
 	public static function is_using_tm_editor( SitePress $sitepress, $post_id ) {
-		$post_id = self::get_source_id( $sitepress, $post_id );
+		$post_id = self::get_source_id( $sitepress, $post_id, 'post_' . get_post_type( $post_id ) );
 
 		$post_meta = get_post_meta( $post_id, self::POST_META_KEY_USE_NATIVE, true );
 		if ( 'no' === $post_meta ) {
@@ -38,15 +41,61 @@ class WPML_TM_Post_Edit_TM_Editor_Mode {
 
 	/**
 	 * @param SitePress $sitepress
-	 * @param int       $post_id
+	 * @param int $postId
+	 *
+	 * @return array
+	 */
+	public static function get_editor_settings( SitePress $sitepress, $postId ) {
+		$useTmEditor = \WPML_TM_Post_Edit_TM_Editor_Mode::is_using_tm_editor( $sitepress, $postId );
+		$useTmEditor = apply_filters( 'wpml_use_tm_editor', $useTmEditor, $postId );
+
+		$result = self::get_blocked_posts( [ $postId ] );
+
+		if ( isset($result[$postId]) ) {
+			$isWpmlEditorBlocked = true;
+			$reason              = $result[$postId];
+		} else {
+			$isWpmlEditorBlocked = false;
+			$reason              = '';
+		}
+
+		return [
+			$useTmEditor,
+			$isWpmlEditorBlocked,
+			$reason,
+		];
+	}
+
+	/**
+	 * @param array $postIds list of post ids that should be checked is blocked.
+	 *
+	 * @return array list of post ids that are blocked and the reason why they are blocked.
+	 */
+	public static function get_blocked_posts( $postIds ) {
+		/**
+		 * Returns the editor settings for the posts - is the WPML editor blocked, and if so, why.
+		 *
+		 * Filter returns an array of: the reason why its blocked indexed by the post ID.
+		 *
+		 * @since 4.6.0
+		 *
+		 * @param array $defaultParams The default parameters that should be returned
+		 * @param array $postIds An array of post IDs
+		 */
+		return apply_filters( 'wpml_tm_editor_exclude_posts', [], $postIds );
+	}
+
+	/**
+	 * @param SitePress $sitepress
+	 * @param int $post_id
+	 * @param string $wpml_post_type
 	 *
 	 * @return int
 	 */
-	private static function get_source_id( SitePress $sitepress, $post_id ) {
-		$source_id      = $post_id;
-		$wpml_post_type = 'post_' . get_post_type( $post_id );
-		$trid           = $sitepress->get_element_trid( $post_id, $wpml_post_type );
-		$translations   = $sitepress->get_element_translations( $trid, $wpml_post_type );
+	private static function get_source_id( SitePress $sitepress, $post_id, $wpml_post_type ) {
+		$source_id    = $post_id;
+		$trid         = $sitepress->get_element_trid( $post_id, $wpml_post_type );
+		$translations = $sitepress->get_element_translations( $trid, $wpml_post_type );
 
 		if ( ! $translations ) {
 			return (int) $post_id;
@@ -85,7 +134,7 @@ class WPML_TM_Post_Edit_TM_Editor_Mode {
 			}
 
 			if ( ! isset( $tm_settings['post_translation_editor_native_for_post_type'] ) ) {
-				$tm_settings['post_translation_editor_native_for_post_type'] = array();
+				$tm_settings['post_translation_editor_native_for_post_type'] = [];
 			}
 		}
 

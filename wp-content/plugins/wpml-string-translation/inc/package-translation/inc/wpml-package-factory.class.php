@@ -26,7 +26,7 @@ class WPML_ST_Package_Factory {
 	}
 
 	/**
-	 * @param array|WPML_Package $package_data
+	 * @param array|int|stdClass|WPML_Package $package_data
 	 *
 	 * @return WPML_WP_Cache_Item
 	 */
@@ -35,7 +35,7 @@ class WPML_ST_Package_Factory {
 			$this->cache_factory = new WPML_WP_Cache_Factory();
 		}
 
-		$package_key = md5( json_encode( $package_data ) );
+		$package_key = md5( (string) json_encode( $package_data ) );
 
 		return $this->cache_factory->create_cache_item( __CLASS__, $package_key );
 	}

@@ -143,12 +143,12 @@ class WPML_LS_Widget extends WP_Widget {
 	}
 
 	/**
-	 * @param string $widget_id
+	 * @param string|int $widget_id
 	 *
 	 * @return int
 	 */
 	public function get_number_from_widget_id( $widget_id ) {
-		return (int) preg_replace( '/^' . self::SLUG . '-/', '', $widget_id, 1 );
+		return (int) preg_replace( '/^' . self::SLUG . '-/', '', (string) $widget_id, 1 );
 	}
 
 	/**

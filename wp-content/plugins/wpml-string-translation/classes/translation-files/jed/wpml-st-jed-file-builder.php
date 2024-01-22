@@ -35,7 +35,7 @@ class WPML_ST_JED_File_Builder extends WPML\ST\TranslationFile\Builder {
 			$data->locale_data->messages->{$original} = $string->get_translations();
 		}
 
-		$jed_content = wp_json_encode( $data );
+		$jed_content = (string) wp_json_encode( $data );
 
 		return preg_replace( '/"' . WPML_ST_Translations_File_JED::EMPTY_PROPERTY_NAME . '"/', '""', $jed_content, 1 );
 	}

@@ -19,6 +19,13 @@ abstract class WPML_Custom_Field_Setting extends WPML_TM_User {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function get_index() {
+		return $this->index;
+	}
+
+	/**
 	 * @return bool true if the custom field setting is given by a setting in
 	 *              a wpml-config.xml
 	 */
@@ -205,4 +212,23 @@ abstract class WPML_Custom_Field_Setting extends WPML_TM_User {
 	 */
 	abstract protected function get_setting_prefix();
 
+	/**
+	 * @return string
+	 */
+	public function get_html_disabled() {
+		$isDisabled = $this->is_read_only() && ! $this->is_unlocked();
+
+		/**
+		 * This filter hook give the ability to disable the HTML radio buttons
+		 * for the custom field preference.
+		 *
+		 * @since 4.6.0
+		 *
+		 * @param bool                      $isDisabled
+		 * @param WPML_Custom_Field_Setting $instance
+		 */
+		return apply_filters( 'wpml_custom_field_setting_is_html_disabled', $isDisabled, $this )
+			? 'disabled="disabled"'
+			: '';
+	}
 }

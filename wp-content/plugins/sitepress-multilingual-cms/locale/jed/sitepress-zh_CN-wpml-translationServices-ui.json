@@ -3,7 +3,8 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "no"
          },
          "Connect this site to your %s account": [
             "将此网站关联到您的帐户%s"
@@ -39,7 +40,7 @@
             "名称"
          ],
          "Description": [
-            "说明"
+            "描述"
          ],
          "Ranking": [
             "排名"

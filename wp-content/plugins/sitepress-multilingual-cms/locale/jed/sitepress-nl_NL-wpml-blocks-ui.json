@@ -1,0 +1,169 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Advanced": [
+            "Geavanceerd"
+         ],
+         "HTML anchor": [
+            "HTML anker"
+         ],
+         "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
+            "Voeg een snelkoppeling aan dit blok toe bij het laden van de pagina met de \"#anchor\" URL."
+         ],
+         "Additional CSS class(es)": [
+            "Toegevoegde CSS klasse(n)"
+         ],
+         "Separate multiple classes with spaces.": [
+            "Scheid meerdere klassen met spaties."
+         ],
+         "Color": [
+            "Kleur"
+         ],
+         "Dimensions": [
+            "Afmetingen"
+         ],
+         "BLOCK": [
+            "Block"
+         ],
+         "Block margin": [
+            "Blokmarge"
+         ],
+         "Block padding": [
+            "Blokvulling"
+         ],
+         "LANGUAGE": [
+            "TAAL"
+         ],
+         "Language spacing": [
+            "Taalafstand"
+         ],
+         "Language padding": [
+            "Taal opvulling"
+         ],
+         "Display": [
+            "Weergeven"
+         ],
+         "Show flag": [
+            "Vlag tonen"
+         ],
+         "Show language name": [
+            "Taalnaam tonen"
+         ],
+         "Display language name in": [
+            "Taalnaam weergeven in"
+         ],
+         "Style": [
+            "Stijl"
+         ],
+         "Flag settings": [
+            "Vlag instellingen"
+         ],
+         "Width": [
+            "Breedte"
+         ],
+         "Height": [
+            "Hoogte"
+         ],
+         "Spacing": [
+            "Spatiëring"
+         ],
+         "Allow wrapping to multiple lines": [
+            "Terugloop naar meerdere regels toestaan"
+         ],
+         "Open on click": [
+            "Openen met een klik"
+         ],
+         "Show arrow": [
+            "Pijl weergeven"
+         ],
+         "Layout": [
+            "Layout"
+         ],
+         "Justification": [
+            "Verantwoording"
+         ],
+         "Orientation": [
+            "Oriëntatie"
+         ],
+         "Typography": [
+            "Typografie"
+         ],
+         "Background": [
+            "Achtergrond"
+         ],
+         "Language Text": [
+            "Tekst taal"
+         ],
+         "Language Background": [
+            "Taal achtergrond"
+         ],
+         "Current language text": [
+            "Huidige taaltekst"
+         ],
+         "Current language background": [
+            "Huidige taalachtergrond"
+         ],
+         "Full name": [
+            "Volledige naam"
+         ],
+         "Code": [
+            "Code"
+         ],
+         "Justify items left": [
+            "Rechtvaardig items links"
+         ],
+         "Justify items center": [
+            "Rechtvaardig items midden"
+         ],
+         "Justify items right": [
+            "Rechtvaardig items rechts"
+         ],
+         "Justify items space between": [
+            "Rechtvaardig items met tussenruimte"
+         ],
+         "Horizontal": [
+            "Horizontaal"
+         ],
+         "Vertical": [
+            "Verticaal"
+         ],
+         "Normal": [
+            "Normaal"
+         ],
+         "Medium": [
+            "Middelgroot"
+         ],
+         "Large": [
+            "Groot"
+         ],
+         "X-Large": [
+            "Zeer groot"
+         ],
+         "Small": [
+            "Klein"
+         ],
+         "Displays the WPML Language Switcher.": [
+            "Geeft de WPML-taalschakelaar weer."
+         ],
+         "Language Switcher": [
+            "Taalschakelaar"
+         ],
+         "displays the WPML Language Switcher": [
+            "geeft de WPML Taalschakelaar weer"
+         ],
+         "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
+            "Toont de WPML taalswitcher. <br/> Leer <a>hoe dit blok te vertalen</a>."
+         ],
+         "Navigation Language Switcher": [
+            "Navigatie Taal Schakelaar"
+         ],
+         "Reset all": [
+            "Alles opnieuw instellen"
+         ]
+      }
+   }
+}

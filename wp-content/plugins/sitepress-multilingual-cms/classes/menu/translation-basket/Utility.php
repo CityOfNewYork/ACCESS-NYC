@@ -27,7 +27,7 @@ class Utility {
 
 		$targetLanguages = [];
 
-		if ( $basketLanguages ) {
+		if ( is_array( $basketLanguages ) ) {
 
 			$notBasketLanguage      = function ( $lang ) use ( $basketLanguages ) {
 				return ! in_array( $lang['code'], $basketLanguages, true );

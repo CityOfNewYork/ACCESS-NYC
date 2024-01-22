@@ -94,7 +94,7 @@ class WPML_TM_CMS_ID extends WPML_TM_Record_User {
 			$parts = explode( $this->cms_id_parts_fallback_glue, $cms_id );
 		}
 
-		return array_pad( array_slice( $parts, 0, 4 ), false, 4 );
+		return array_pad( array_slice( $parts, 0, 4 ), 4, false );
 	}
 
 	/**

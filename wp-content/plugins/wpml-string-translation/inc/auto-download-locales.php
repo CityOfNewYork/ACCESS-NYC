@@ -8,11 +8,11 @@ class WPML_ST_MO_Downloader {
 	private $xml;
 	private $translation_files = array();
 	/**
-	 * @var string[string]
+	 * @var array<array<string>>
 	 */
 	private $lang_map;
 	/**
-	 * @var string[string]
+	 * @var array<array<string>>
 	 */
 	private $lang_map_rev;
 
@@ -50,6 +50,10 @@ class WPML_ST_MO_Downloader {
 
 	function set_lang_map_from_csv() {
 		$fh = fopen( WPML_ST_PATH . '/inc/lang-map.csv', 'r' );
+		if ( ! $fh ) {
+			//@todo: test if frontend needs msg
+			return;
+		}
 		while ( list($locale, $code) = fgetcsv( $fh ) ) {
 				$this->lang_map[ $locale ] = $code;
 		}
@@ -328,7 +332,10 @@ class WPML_ST_MO_Downloader {
 				}
 
 				$mo          = new MO();
+
+				// @see wpmldev-1856
 				$pomo_reader = new POMO_StringReader( $response['body'] );
+				/** @phpstan-ignore-next-line */
 				$mo->import_from_reader( $pomo_reader );
 				$data            = $wpdb->get_results(
 					$wpdb->prepare(

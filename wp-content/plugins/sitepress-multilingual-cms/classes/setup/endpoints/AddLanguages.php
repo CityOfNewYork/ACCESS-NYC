@@ -37,9 +37,10 @@ class AddLanguages implements IHandler {
 						(bool) Obj::propOr( false, 'fromTemplate', $flag )
 					);
 				}
-			}
 
-			$this->saveMapping( $language, $id );
+				/** @phpstan-ignore-next-line */
+				$this->saveMapping( $language, $id );
+			}
 
 			return [ $language['code'], $id ];
 		};
@@ -52,8 +53,8 @@ class AddLanguages implements IHandler {
 	}
 
 	/**
-	 * @param string $language
-	 * @param int $id
+	 * @param array $language
+	 * @param int   $id
 	 */
 	private function saveMapping( $language, $id ) {
 		$languageMapping = Obj::prop( 'mapping', $language );

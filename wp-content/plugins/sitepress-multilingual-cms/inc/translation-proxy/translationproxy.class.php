@@ -30,18 +30,25 @@ class TranslationProxy {
 	}
 
 	public static function get_tp_default_suid() {
-		$tp_default_suid = false;
-
 		if ( defined( 'WPML_TP_DEFAULT_SUID' ) ) {
-			$tp_default_suid = WPML_TP_DEFAULT_SUID;
+			return WPML_TP_DEFAULT_SUID;
 		}
 
-		$preferred_translation_service = self::get_preferred_translation_service();
-		if ( $preferred_translation_service && ! $tp_default_suid ) {
-			$tp_default_suid = $preferred_translation_service;
-		}
+		return self::get_preferred_translation_service() ?: false;
+	}
 
-		return $tp_default_suid;
+	/**
+	 * @param string $suid
+	 * @return 'wpml_list'|'config'|'account'
+	 */
+	public static function get_service_linked_by_suid( $suid ) {
+		if ( defined( 'WPML_TP_DEFAULT_SUID' ) && WPML_TP_DEFAULT_SUID === $suid ) {
+			return 'config';
+		}
+		if ( self::get_preferred_translation_service() === $suid ) {
+			return 'account';
+		}
+		return 'wpml_list';
 	}
 
 	public static function has_preferred_translation_service() {
@@ -65,15 +72,10 @@ class TranslationProxy {
 	/**
 	 * @param int $service_id
 	 *
-	 * @return TranslationProxy_Project|WP_Error
-	 * @throws \WPMLTranslationProxyApiException
-	 * @throws \InvalidArgumentException
+	 * @return TranslationProxy_Service|WP_Error
 	 */
 	public static function select_service( $service_id, $credentials = null ) {
 		global $sitepress;
-
-		$service_selected = false;
-		$error            = false;
 
 		/** @var TranslationProxy_Service $service */
 		$service = self::get_service( $service_id );
@@ -81,26 +83,27 @@ class TranslationProxy {
 		if ( $service ) {
 			self::deselect_active_service();
 
-			$service          = self::build_and_store_active_translation_service( $service, $credentials );
-			$result           = $service;
-			$service_selected = true;
-
-			// Force authentication if no user input is needed
-			if ( ! self::service_requires_authentication( $service ) ) {
-				( new AuthorizationFactory() )->create()->authorize( new \stdClass() );
+			try {
+				$service = self::build_and_store_active_translation_service( $service, $credentials );
+				$result  = $service;// Force authentication if no user input is needed
+				if ( ! self::service_requires_authentication( $service ) ) {
+					try {
+						( new AuthorizationFactory() )->create()->authorize( new \stdClass() );
+					} catch ( \Exception $e ) {
+						// Note that we do not unselect the service even though the authentication failed.
+						// It is better to show it to user as selected and let him try to authenticate again.
+						$result = new WP_Error( '1', sprintf( __( 'Authentication failed ( serviceId: %d )', 'sitepress' ), $service_id ) );
+					}
+				}
+			} catch ( \Exception $e ) {
+				$result = new WP_Error( '2', sprintf( __( 'Failed to select translation service  ( serviceId: %d )', 'sitepress' ), $service_id ) );
+				$sitepress->set_setting( 'translation_service', false, true );
 			}
 		} else {
-			$result = new WP_Error(
-				'0',
-				'No service selected',
-				array( 'service_id' => $service_id )
-			);
-		}
-
-		// Do not store selected service if this operation failed;
-		if ( $error || ! $service_selected ) {
+			$result = new WP_Error( '2', sprintf( __( 'Failed to select translation service ( serviceId: %d )', 'sitepress' ), $service_id ) );
 			$sitepress->set_setting( 'translation_service', false, true );
 		}
+
 		$sitepress->save_settings();
 
 		return $result;
@@ -147,12 +150,12 @@ class TranslationProxy {
 	}
 
 	/**
-	 * @return bool|TranslationProxy_Project
+	 * @return TranslationProxy_Project|false
 	 */
 	public static function get_current_project() {
 		$translation_service = self::get_current_service();
 
-		if ( $translation_service ) {
+		if ( $translation_service && ! is_wp_error( $translation_service ) ) {
 			return new TranslationProxy_Project( $translation_service, 'xmlrpc', self::get_tp_client() );
 		}
 		return false;
@@ -398,7 +401,7 @@ class TranslationProxy {
 	}
 
 	/**
-	 * @param bool|TranslationProxy_Service|WP_Error $service
+	 * @param bool|stdClass|TranslationProxy_Service|WP_Error $service
 	 *
 	 * @return bool
 	 * @throws \InvalidArgumentException
@@ -446,9 +449,10 @@ class TranslationProxy {
 	}
 
 	/**
-	 * @return bool|TranslationProxy_Service|WP_Error
+	 * @return stdClass|WP_Error|false
 	 */
 	public static function get_current_service() {
+		/** @var SitePress $sitepress */
 		global $sitepress;
 
 		/** @var TranslationProxy_Service $ts */
@@ -469,7 +473,7 @@ class TranslationProxy {
 	public static function is_current_service_active_and_authenticated() {
 		$active_service = self::get_current_service();
 
-		return $active_service && ( ! self::service_requires_authentication() || TranslationProxy_Service::is_authenticated( $active_service ) );
+		return $active_service && TranslationProxy_Service::is_authenticated( $active_service );
 	}
 
 	/**
@@ -527,7 +531,7 @@ class TranslationProxy {
 
 		$translation_service = self::get_current_service();
 		if ( $translation_service && ! $force_reload ) {
-			return null !== $translation_service->custom_fields ? $translation_service->custom_fields : false;
+			return $translation_service->custom_fields ?: false;
 		}
 
 		return self::get_tp_client()->services()->get_custom_fields( $service_id );

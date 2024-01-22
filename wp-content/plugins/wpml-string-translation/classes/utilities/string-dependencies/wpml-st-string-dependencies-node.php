@@ -96,7 +96,7 @@ class WPML_ST_String_Dependencies_Node {
 	 * @param int    $id
 	 * @param string $type
 	 *
-	 * @return bool|WPML_ST_String_Dependencies_Node
+	 * @return false|WPML_ST_String_Dependencies_Node
 	 */
 	public function search( $id, $type ) {
 		if ( $this->id === $id && $this->type === $type ) {

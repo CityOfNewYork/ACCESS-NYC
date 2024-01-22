@@ -8,11 +8,16 @@ class ReturnedJobActions implements \IWPML_Action {
 	/** @var callable :: int->string->void */
 	private $addToQueue;
 
+	/** @var callable :: int->string->void */
+	private $remove_translation_duplicate_status;
+
 	/**
 	 * @param  callable $addToQueue
+	 * @param  callable $removeTranslationDuplicateStatus
 	 */
-	public function __construct( callable $addToQueue ) {
+	public function __construct( callable $addToQueue, callable $removeTranslationDuplicateStatus ) {
 		$this->addToQueue = $addToQueue;
+		$this->remove_translation_duplicate_status = $removeTranslationDuplicateStatus;
 	}
 
 
@@ -26,6 +31,7 @@ class ReturnedJobActions implements \IWPML_Action {
 
 			if ( isset( $_GET['complete'] ) ) {
 				call_user_func( $this->addToQueue, $ateJobId, ReturnedJobsQueue::STATUS_COMPLETED );
+				call_user_func( $this->remove_translation_duplicate_status, $ateJobId );
 			} elseif ( isset( $_GET['back'] ) ) {
 				call_user_func( $this->addToQueue, $ateJobId, ReturnedJobsQueue::STATUS_BACK );
 			}

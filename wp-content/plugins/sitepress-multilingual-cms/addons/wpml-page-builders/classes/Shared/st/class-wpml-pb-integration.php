@@ -142,10 +142,50 @@ class WPML_PB_Integration {
 	 */
 	private function is_editing_translation_with_native_editor( $translatedPostId ) {
 		// $getPOST :: string -> mixed
-		$getPOST = Obj::prop( Fns::__, $_POST );
+		$getPOST = Obj::prop( Fns::__, $_POST ); // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
 
-		$isTranslationWithNativeEditor = 'editpost' === $getPOST( 'action' )
-		                                 && (int) $getPOST( 'ID' ) === $translatedPostId;
+		// $isQuickEditAction :: int -> bool
+		$isQuickEditAction = function( $id ) use ( $getPOST ) {
+			return wp_doing_ajax()
+				   && 'inline-save' === $getPOST( 'action' )
+				   && $id === (int) $getPOST( 'post_ID' );
+		};
+
+		// $isSavingPostWithREST :: int -> bool
+		$isSavingPostWithREST = function( $translatedPostId ) {
+			if ( ! in_array( $_SERVER['REQUEST_METHOD'], [ 'POST', 'PUT', 'PATCH' ], true ) ) {
+				return false;
+			}
+
+			$postTypeSlugs = wpml_collect( get_post_types( [], 'objects' ) )
+				->map( function( $postType ) {
+					return Obj::prop( 'rest_base', $postType ) ?: Obj::prop( 'name', $postType );
+				} )
+				->filter()
+				->implode( '|' );
+
+			preg_match( '/' . preg_quote( rest_get_url_prefix(), '/' ) . '\/wp\/v2\/(?:' . $postTypeSlugs . ')\/(\d+)/', $_SERVER['REQUEST_URI'], $matches );
+			$RESTPostId = (int) Obj::prop( 1, $matches );
+
+			return $RESTPostId === $translatedPostId;
+		};
+
+		// $getGET :: string -> mixed
+		$getGET = Obj::prop( Fns::__, $_GET ); // phpcs:ignore WordPress.CSRF.NonceVerification.NoNonceVerification
+
+		// $isBulkEditAction :: int -> bool
+		$isBulkEditAction = function( $id ) use ( $getGET ) {
+			$screenAction = 'edit-' . get_post_type( $id );
+			return $screenAction === $getGET( 'screen' )
+				&& 'edit' === $getGET( 'action' )
+				&& wpml_collect( (array) $getGET( 'post' ) )
+					->map( \WPML\FP\Cast::toInt() )
+					->contains( $id );
+		};
+
+		$isTranslationWithNativeEditor = ( 'editpost' === $getPOST( 'action' ) && (int) $getPOST( 'ID' ) === $translatedPostId )
+			|| ( ( $isQuickEditAction( $translatedPostId ) || $isBulkEditAction( $translatedPostId ) ) && WPML_PB_Last_Translation_Edit_Mode::is_native_editor( $translatedPostId ) )
+			|| $isSavingPostWithREST( $translatedPostId );
 
 		/**
 		 * This filter allows to override the result if a translation
@@ -170,9 +210,10 @@ class WPML_PB_Integration {
 
 	/**
 	 * @param WP_Post $post
+	 * @param bool $allowRegisteringPostTranslation Specifies if the string registration must be allowed for posts that are not original.
 	 */
-	public function register_all_strings_for_translation( $post ) {
-		if ( $post instanceof \WP_Post && $this->is_post_status_ok( $post ) && $this->is_original_post( $post ) ) {
+	public function register_all_strings_for_translation( $post, $allowRegisteringPostTranslation = false ) {
+		if ( $post instanceof \WP_Post && $this->is_post_status_ok( $post ) && ( $allowRegisteringPostTranslation || $this->is_original_post( $post ) ) ) {
 			$this->is_registering_string = true;
 			$this->with_strategies( invoke( 'register_strings' )->with( $post ) );
 			$this->is_registering_string = false;

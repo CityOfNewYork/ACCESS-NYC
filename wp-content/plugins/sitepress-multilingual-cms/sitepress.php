@@ -2,10 +2,10 @@
 /**
  * Plugin Name: WPML Multilingual CMS
  * Plugin URI: https://wpml.org/
- * Description: WPML Multilingual CMS | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/wpml-4-5-5/">WPML 4.5.5 release notes</a>
+ * Description: WPML Multilingual CMS | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/wpml-4-6-9/">WPML 4.6.9 release notes</a>
  * Author: OnTheGoSystems
  * Author URI: http://www.onthegosystems.com/
- * Version: 4.5.5
+ * Version: 4.6.9
  * Plugin Slug: sitepress-multilingual-cms
  *
  * @package WPML\Core
@@ -29,7 +29,7 @@ if ( ! \WPML\Requirements\WordPress::checkMinimumRequiredVersion() ) {
 	return;
 }
 
-define( 'ICL_SITEPRESS_VERSION', '4.5.5' );
+define( 'ICL_SITEPRESS_VERSION', '4.6.9' );
 
 // Do not uncomment the following line!
 // If you need to use this constant, use it in the wp-config.php file
@@ -56,8 +56,16 @@ require_once __DIR__ . '/vendor/autoload.php';
 add_action( 'plugins_loaded', 'wpml_disable_outdated_plugins', -PHP_INT_MAX );
 
 function wpml_disable_outdated_plugins() {
+	$dependencies = file_get_contents(
+		dirname( __FILE__ ) . '/wpml-dependencies.json'
+	);
+
+	if ( ! $dependencies ) {
+		return;
+	}
+
 	WPML_Plugins_Check::disable_outdated(
-		file_get_contents( dirname( __FILE__ ) . '/wpml-dependencies.json' ),
+		$dependencies,
 		defined( 'WPML_TM_VERSION' ) ? WPML_TM_VERSION : '1.0',
 		defined( 'WPML_ST_VERSION' ) ? WPML_ST_VERSION : '1.0',
 		defined( 'WCML_VERSION' ) ? WCML_VERSION : '1.0'
@@ -107,6 +115,9 @@ require_once __DIR__ . '/inc/constants.php';
 
 require_once __DIR__ . '/vendor/otgs/ui/loader.php';
 otgs_ui_initialize( __DIR__ . '/vendor/otgs/ui', ICL_PLUGIN_URL . '/vendor/otgs/ui' );
+
+$vendor_root_url = ICL_PLUGIN_URL . '/vendor';
+require_once __DIR__ . '/vendor/otgs/icons/loader.php';
 
 require_once __DIR__ . '/inc/taxonomy-term-translation/wpml-term-translations.class.php';
 require_once __DIR__ . '/inc/functions-troubleshooting.php';
@@ -168,12 +179,11 @@ $action_filter_loader = new WPML_Action_Filter_Loader();
 $action_filter_loader->load( [
 	\WPML\Ajax\Factory::class,
 	\WPML\Installer\AddSiteUrl::class,
-	\WPML\Core\BackgroundTask::class,
 ] );
 
 if ( $sitepress->is_setup_complete() ) {
 	$actions = [
-		'WPML_Copy_Once_Custom_Field_Factory',
+		'WPML_Copy_Once_Custom_Field',
 		'WPML_Adjacent_Links_Hooks_Factory',
 		'WPML_Widgets_Support_Factory',
 		'WPML_Admin_Resources_Hooks',
@@ -188,7 +198,6 @@ if ( $sitepress->is_setup_complete() ) {
 		'WPML_Post_Edit_Terms_Hooks_Factory',
 		'WPML_Attachments_Urls_With_Identical_Slugs_Factory',
 		'WPML_API_Hooks_Factory',
-		'WPML_Cache_Terms_Per_Lang_Factory',
 		'WPML_Display_As_Translated_Message_For_New_Post_Factory',
 		'WPML_Custom_Fields_Post_Meta_Info_Factory',
 		'WPML_Display_As_Translated_Default_Lang_Messages_Factory',
@@ -220,6 +229,13 @@ if ( $sitepress->is_setup_complete() ) {
 		\WPML\FullSiteEditing\BlockTemplates::class,
 		\WPML\AdminLanguageSwitcher\DisableWpLanguageSwitcher::class,
 		\WPML\AdminLanguageSwitcher\AdminLanguageSwitcher::class,
+		\WPML\TM\Troubleshooting\Loader::class,
+		\WPML\TaxonomyTermTranslation\Hooks::class,
+		\WPML\BlockEditor\Loader::class,
+		\WPML\TM\ATE\Hooks\LanguageMappingCache::class,
+		\WPML\BackgroundTask\BackgroundTaskLoader::class,
+		\WPML\Core\PostTranslation\SyncTranslationDocumentStatus::class,
+		\WPML\Utilities\DebugLog::class,
 	];
 	$action_filter_loader->load( $actions );
 
@@ -232,7 +248,6 @@ if ( $sitepress->is_setup_complete() ) {
 			'WPML_Display_As_Translated_Attachments_Query_Factory',
 			'WPML_Media_Settings_Factory',
 			\WPML\Media\Loader::class,
-			\WPML\Media\Translate\LanguagesUpdated::class,
 			\WPML\Media\FrontendHooks::class,
 		];
 
@@ -246,6 +261,14 @@ if ( $sitepress->is_setup_complete() ) {
 	];
 
 	$action_filter_loader->load( $rest_factories );
+
+	// On posts listing page.
+	add_action(
+		'load-edit.php',
+		function() {
+			new WPML_Posts_Listing_Page();
+		}
+	);
 } else {
 	$action_filter_loader->load( [
 		\WPML\Setup\DisableNotices::class,
@@ -444,3 +467,5 @@ if ( defined( 'WCML_VERSION') ) {
 add_action( 'plugins_loaded', function() {
 	require_once WPML_PLUGIN_PATH . '/addons/wpml-page-builders/loader.php';
 }, PHP_INT_MAX );
+
+

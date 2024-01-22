@@ -1,40 +1,57 @@
 <?php
 
-
 namespace WPML\TM\ATE;
 
-
-use WPML\API\Settings;
-use WPML\DocPage;
 use WPML\Element\API\Languages;
+use WPML\TM\API\ATE\CachedLanguageMappings;
+use WPML\API\Settings;
+use WPML\Core\BackgroundTask\Model\BackgroundTask;
+use WPML\Core\BackgroundTask\Repository\BackgroundTaskRepository;
+use WPML\DocPage;
 use WPML\FP\Fns;
 use WPML\FP\Logic;
 use WPML\FP\Lst;
 use WPML\FP\Obj;
 use WPML\FP\Relation;
+use WPML\LIB\WP\Hooks;
 use WPML\LIB\WP\User;
+use WPML\Posts\UntranslatedCount;
+use WPML\Setup\Option;
 use WPML\TM\ATE\AutoTranslate\Endpoint\AutoTranslate;
-use WPML\TM\ATE\AutoTranslate\Endpoint\EnableATE;
 use WPML\TM\ATE\AutoTranslate\Endpoint\CancelJobs;
+use WPML\TM\ATE\AutoTranslate\Endpoint\CountJobsInProgress;
+use WPML\TM\ATE\AutoTranslate\Endpoint\EnableATE;
 use WPML\TM\ATE\AutoTranslate\Endpoint\GetATEJobsToSync;
 use WPML\TM\ATE\AutoTranslate\Endpoint\GetCredits;
 use WPML\TM\ATE\AutoTranslate\Endpoint\GetStatus;
 use WPML\TM\ATE\AutoTranslate\Endpoint\RefreshJobsStatus;
 use WPML\TM\ATE\AutoTranslate\Endpoint\SyncLock;
+use WPML\TM\ATE\AutoTranslate\Endpoint\Languages as EndpointLanguages;
 use WPML\TM\ATE\Download\Queue;
-use WPML\TM\ATE\Review\ReviewStatus;
+use WPML\TM\ATE\LanguageMapping\InvalidateCacheEndpoint;
+use WPML\TM\ATE\Retranslation\Endpoint as RetranslationEndpoint;
 use WPML\TM\ATE\Sync\Trigger;
-use WPML\TM\WP\App\Resources;
+use WPML\TM\ATE\TranslateEverything\Pause\View as PauseTranslateEverything;
+use WPML\Core\WP\App\Resources;
 use WPML\UIPage;
+use WPML\TM\ATE\Retranslation\Scheduler;
 use function WPML\Container\make;
 use function WPML\FP\invoke;
 use function WPML\FP\pipe;
-use WPML\LIB\WP\Hooks;
-use WPML\Setup\Option;
 
-class Loader implements \IWPML_Backend_Action {
+class Loader implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 
 	const JOB_ID_PLACEHOLDER = '###';
+
+	/** @var BackgroundTaskRepository */
+	private $backgroundTaskRepository;
+
+	/**
+	 * @param BackgroundTaskRepository $backgroundTaskRepository
+	 */
+	public function __construct( BackgroundTaskRepository $backgroundTaskRepository ) {
+		$this->backgroundTaskRepository = $backgroundTaskRepository;
+	}
 
 	public function add_hooks() {
 		if ( wpml_is_ajax() ) {
@@ -46,18 +63,28 @@ class Loader implements \IWPML_Backend_Action {
 			return;
 		}
 
-		if (
-			\WPML_TM_ATE_Status::is_enabled_and_activated()
-			|| Settings::pathOr( false, [ 'translation-management', 'doc_translation_method' ] ) === ICL_TM_TMETHOD_ATE
-		) {
-			StatusBar::add_hooks();
-
-			Hooks::onAction( 'in_admin_header' )
-			     ->then( [ self::class, 'showAteConsoleContainer' ] );
+		if ( UIPage::isTMJobs( $_GET ) ) {
+			return;
 		}
+
+		$displayBackgroundTasks = $this->backgroundTaskRepository->getCountRunnableTasks() > 0;
+
+		$maybeLoadStatusBarAndATEConsole = Fns::tap( function ( $data ) use ( $displayBackgroundTasks ) {
+			if (
+				\WPML_TM_ATE_Status::is_enabled_and_activated()
+				|| Settings::pathOr( false, [ 'translation-management', 'doc_translation_method' ] ) === ICL_TM_TMETHOD_ATE
+				|| $displayBackgroundTasks
+			) {
+				StatusBar::add_hooks( $data['data']['hasAutomaticJobsInProgress'], $data['data']['needsReviewCount'], $displayBackgroundTasks  );
+
+				Hooks::onAction( 'in_admin_header' )
+				     ->then( [ self::class, 'showAteConsoleContainer' ] );
+			}
+		} );
 
 		Hooks::onAction( 'wp_loaded' )
 		     ->then( [ self::class, 'getData' ] )
+		     ->then( $maybeLoadStatusBarAndATEConsole )
 		     ->then( Resources::enqueueApp( 'ate-jobs-sync' ) )
 		     ->then( Fns::always( make( \WPML_TM_Scripts_Factory::class ) ) )
 		     ->then( invoke( 'localize_script' )->with( 'wpml-ate-jobs-sync-ui' ) );
@@ -67,53 +94,75 @@ class Loader implements \IWPML_Backend_Action {
 	}
 
 	public static function getData() {
-		$jobsToSync = Jobs::getJobsWithStatus( [
-			ICL_TM_WAITING_FOR_TRANSLATOR,
-			ICL_TM_IN_PROGRESS,
-			ICL_TM_ATE_NEEDS_RETRY
-		] );
+		$jobsToSync = Jobs::getJobsToSync();
+
+		$anyJobsExist = Jobs::isThereJob();
 
 		$ateTab = admin_url( UIPage::getTMATE() );
+
+		$isAteActive = \WPML_TM_ATE_Status::is_enabled_and_activated();
+
+		$defaultLanguage = Languages::getDefaultCode();
+		$getLanguages    = pipe(
+			Languages::class . '::getActive',
+			CachedLanguageMappings::withCanBeTranslatedAutomatically(),
+			CachedLanguageMappings::withMapping(),
+			Fns::map( Obj::over( Obj::lensProp( 'mapping' ), Obj::prop( 'targetCode' ) ) ),
+			Fns::map(
+				Obj::addProp(
+					'is_default',
+					Relation::propEq( 'code', $defaultLanguage )
+				)
+			),
+			Obj::values()
+		);
+
+		/** @var Scheduler */
+		$scheduler = make( Scheduler::class );
 
 		return [
 			'name' => 'ate_jobs_sync',
 			'data' => [
-				'endpoints'            => self::getEndpoints(),
-				'urls'                 => self::getUrls( $ateTab ),
-				'jobIdPlaceHolder'     => self::JOB_ID_PLACEHOLDER,
-				'notices'              => StatusBar::getNotices(),
-				'isTranslationManager' => User::getCurrent()->has_cap( \WPML_Manage_Translations_Role::CAPABILITY ),
+				'endpoints'                   => self::getEndpoints(),
+				'urls'                        => self::getUrls( $ateTab ),
+				'jobIdPlaceHolder'            => self::JOB_ID_PLACEHOLDER,
+				'languages'                   => $isAteActive ? $getLanguages() : [],
+				'isTranslationManager'        => User::canManageTranslations(),
 
-				'jobsToSync'       => $jobsToSync,
-				'totalJobsCount'   => Jobs::getTotal(),
-				'needsReviewCount' => count( Jobs::getJobsWithStatus( [ ICL_TM_NEEDS_REVIEW ] ) ),
+				'jobsToSync'                  => $jobsToSync,
+				'anyJobsExist'                => $anyJobsExist,
+				'totalJobsCount'              => Jobs::getTotal(),
+				'needsReviewCount'            => count( Jobs::getJobsWithStatus( [ ICL_TM_NEEDS_REVIEW ] ) ),
 
-				'shouldTranslateEverything' => Option::shouldTranslateEverything() && ! TranslateEverything::isEverythingProcessed( true ),
+				'shouldTranslateEverything'   =>
+					! Option::isPausedTranslateEverything()
+					&& Option::shouldTranslateEverything()
+					&& ! TranslateEverything::isEverythingProcessed( true ),
+				'isPausedTranslateEverything' => Option::isPausedTranslateEverything() ? 1 : 0,
 
-				'isAutomaticTranslations' => Option::shouldTranslateEverything(),
-				'isSyncRequired'          => self::isSyncRequired() || count( $jobsToSync ),
-				'needsFetchCredit'        => Option::shouldTranslateEverything() && UIPage::isTMDashboard( $_GET ),
+				'isAutomaticTranslations'     => Option::shouldTranslateEverything(),
+				'hasAutomaticJobsInProgress'  => Logic::isNotEmpty( Fns::filter( Obj::prop( 'automatic' ), $jobsToSync ) ),
+				'isSyncRequired'              => count( $jobsToSync ),
 
-				'strings'     => self::getStrings(),
-				'ateConsole'  => self::getAteData( Lst::pluck( 'ateJobId', $jobsToSync ) ),
-				'isAteActive' => \WPML_TM_ATE_Status::is_enabled_and_activated(),
-				'editorMode'  => Settings::pathOr( false, [ 'translation-management', 'doc_translation_method' ] )
+				'strings'                     => self::getStrings(),
+				'ateConsole'                  => self::getAteData( Lst::pluck( 'ateJobId', $jobsToSync ) ),
+				'isAteActive'                 => $isAteActive,
+				'editorMode'                  => Settings::pathOr( false, [ 'translation-management', 'doc_translation_method' ] ),
+				'shouldCheckForRetranslation' => $scheduler->shouldRun(),
+				'ateCallbacks' => [], // Should be used to add any needed ATE callbacks in JS side, refer to 'src/js/ate/retranslation/index.js' for example
+
+				'settings' => [
+					'numberOfParallelDownloads' => defined('WPML_ATE_MAX_PARALLEL_DOWNLOADS') ? WPML_ATE_MAX_PARALLEL_DOWNLOADS : 10,
+				],
 			],
 		];
-	}
-
-	/**
-	 * @return bool
-	 */
-	private static function isSyncRequired() {
-		return make( Trigger::class )->isSyncRequired();
 	}
 
 	/**
 	 * @return string
 	 */
 	public static function getNotEnoughCreditPopup() {
-		$isTranslationManager = User::getCurrent()->has_cap( \WPML_Manage_Translations_Role::CAPABILITY );
+		$isTranslationManager = User::canManageTranslations();
 
 		$content = $isTranslationManager
 			? __(
@@ -156,33 +205,30 @@ class Loader implements \IWPML_Backend_Action {
 	}
 
 	private static function getAteData( $ateJobIds ) {
-		$registration_data = make( \WPML_TM_AMS_API::class )->get_registration_data();
+		if ( User::canManageTranslations() ) {
+			/** @var NoCreditPopup $noCreditPopup */
+			$noCreditPopup = make( NoCreditPopup::class );
 
-		return User::getCurrent()->has_cap( \WPML_Manage_Translations_Role::CAPABILITY )
-			? [
-				'host'         => make( \WPML_TM_ATE_AMS_Endpoints::class )->get_base_url( \WPML_TM_ATE_AMS_Endpoints::SERVICE_AMS ),
-				'wpml_host'    => get_site_url(),
-				'job_list'     => $ateJobIds,
-				'widget_mode'  => 'issue_solving',
-				'return_url'   => \WPML\TM\API\Jobs::getCurrentUrl(),
-				'secret_key'   => Obj::prop( 'secret', $registration_data ),
-				'shared_key'   => Obj::prop( 'shared', $registration_data ),
-				'website_uuid' => make( \WPML_TM_ATE_Authentication::class )->get_site_id(),
-				'ui_language'  => make( \SitePress::class )->get_user_admin_language( User::getCurrentId() ),
-				'restNonce'    => wp_create_nonce( 'wp_rest' ),
-				'container'    => '#wpml-ate-console-container',
-			]
-			: false;
+			return $noCreditPopup->getData( $ateJobIds );
+		}
+
+		return false;
 	}
 
 	private static function getEndpoints() {
 		return [
-			'auto-translate'       => AutoTranslate::class,
-			'translate-everything' => TranslateEverything::class,
-			'getCredits'           => GetCredits::class,
-			'enableATE'            => EnableATE::class,
-			'getATEJobsToSync'     => GetATEJobsToSync::class,
-			'syncLock'             => SyncLock::class,
+			'auto-translate'               => AutoTranslate::class,
+			'translate-everything'         => TranslateEverything::class,
+			'getCredits'                   => GetCredits::class,
+			'enableATE'                    => EnableATE::class,
+			'getATEJobsToSync'             => GetATEJobsToSync::class,
+			'syncLock'                     => SyncLock::class,
+			'pauseTranslateEverything'     => PauseTranslateEverything::class,
+			'untranslatedCount'            => UntranslatedCount::class,
+			'countAutomaticJobsInProgress' => CountJobsInProgress::class,
+			'languages'                    => EndpointLanguages::class,
+			'assignToTranslation'          => RetranslationEndpoint::class,
+			'invalidateLangMappingCache'   => InvalidateCacheEndpoint::class,
 		];
 	}
 
@@ -192,13 +238,13 @@ class Loader implements \IWPML_Backend_Action {
 			'ateams'                    => $ateTab,
 			'automaticSettings'         => \admin_url( UIPage::getSettings() ),
 			'translateAutomaticallyDoc' => DocPage::getTranslateAutomatically(),
-			'ateConsole'                => make( \WPML_TM_ATE_AMS_Endpoints::class )
-				                               ->get_base_url( \WPML_TM_ATE_AMS_Endpoints::SERVICE_AMS ) . '/mini_app/main.js',
+			'ateConsole'                => make( NoCreditPopup::class )->getUrl(),
 			'translationQueue'          => \add_query_arg(
 				[ 'status' => ICL_TM_NEEDS_REVIEW ],
 				\admin_url( UIPage::getTranslationQueue() )
 			),
-			'currentUrl' => \WPML\TM\API\Jobs::getCurrentUrl(),
+			'currentUrl'                => \WPML\TM\API\Jobs::getCurrentUrl(),
+			'editLanguages'             => add_query_arg( [ 'trop' => 1 ], UIPage::getLanguages() ),
 		];
 	}
 

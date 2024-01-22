@@ -40,6 +40,10 @@ class WPML_Compatibility_Theme_Enfold {
 			return;
 		}
 
+		if ( wp_is_post_revision( $post_id ) ) {
+			return;
+		}
+
 		$is_original = apply_filters( 'wpml_is_original_content', false, $post_id, 'post_' . $post->post_type );
 
 		if ( ! $is_original && $this->is_active( $post_id ) ) {

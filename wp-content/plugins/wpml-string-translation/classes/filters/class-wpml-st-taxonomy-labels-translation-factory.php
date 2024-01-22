@@ -13,7 +13,7 @@ class WPML_ST_Taxonomy_Labels_Translation_Factory implements IWPML_Backend_Actio
 		if ( $this->is_taxonomy_translation_table_action() ) {
 			$records_factory  = new WPML_Slug_Translation_Records_Factory();
 			$taxonomy_strings = new WPML_ST_Taxonomy_Strings(
-				$records_factory->create( WPML_Slug_Translation_Factory::TAX ),
+				$records_factory->createTaxRecords(),
 				WPML\Container\make( WPML_ST_String_Factory::class )
 			);
 			$hooks[]          = new WPML_ST_Taxonomy_Labels_Translation(

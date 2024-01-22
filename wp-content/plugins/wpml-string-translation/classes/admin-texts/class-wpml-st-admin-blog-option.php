@@ -25,8 +25,8 @@ class WPML_ST_Admin_Blog_Option extends WPML_SP_User {
 	}
 
 	/**
-	 * @param string $old_value
-	 * @param string $new_value
+	 * @param string|array $old_value
+	 * @param string|array $new_value
 	 *
 	 * @return mixed
 	 */

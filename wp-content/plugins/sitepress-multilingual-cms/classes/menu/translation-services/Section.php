@@ -1,6 +1,7 @@
 <?php
 
 namespace WPML\TM\Menu\TranslationServices;
+use WPML\LIB\WP\User;
 
 class Section implements \IWPML_TM_Admin_Section {
 	const SLUG = 'translators';
@@ -81,7 +82,7 @@ class Section implements \IWPML_TM_Admin_Section {
 	 * @return string|array
 	 */
 	public function get_capabilities() {
-		return [ \WPML_Manage_Translations_Role::CAPABILITY, 'manage_options' ];
+		return [ User::CAP_MANAGE_TRANSLATIONS, User::CAP_ADMINISTRATOR ];
 	}
 
 	/**

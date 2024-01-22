@@ -171,6 +171,7 @@ class WPML_ST_Upgrade {
 	 * @return bool
 	 */
 	public function has_command_been_executed( $class ) {
+		/** @phpstan-ignore-next-line */
 		$id       = call_user_func( [ $class, 'get_command_id' ] );
 		$settings = $this->sitepress->get_setting( 'st', [] );
 
@@ -183,6 +184,7 @@ class WPML_ST_Upgrade {
 	 * @param string $class Command class name.
 	 */
 	public function mark_command_as_executed( $class ) {
+		/** @phpstan-ignore-next-line */
 		$id                           = call_user_func( [ $class, 'get_command_id' ] );
 		$settings                     = $this->sitepress->get_setting( 'st', [] );
 		$settings[ $id . '_has_run' ] = true;

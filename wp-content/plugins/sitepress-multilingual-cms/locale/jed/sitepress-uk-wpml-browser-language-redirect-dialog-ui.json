@@ -3,7 +3,8 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "en"
          },
          "How Browser Language Redirect Affects Google Indexing": [
             "Вплив переспрямування залежно від мови веб-переглядача на індексацію Google"

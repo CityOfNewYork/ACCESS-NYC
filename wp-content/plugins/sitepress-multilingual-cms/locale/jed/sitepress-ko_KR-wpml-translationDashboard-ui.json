@@ -1,0 +1,235 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
+            "자동 번역을 일시 중지하는 중에 오류가 발생했습니다. 나중에 다시 시도하거나 지원팀에 문의하세요."
+         ],
+         "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
+            "자동 번역을 다시 시작하는 중에 오류가 발생했습니다. 나중에 다시 시도하거나 지원팀에 문의하세요."
+         ],
+         "Error": [
+            "오류"
+         ],
+         "Draft — Pending review": [
+            "초안 — 검토 대기중"
+         ],
+         "Complete": [
+            "완료"
+         ],
+         "Insufficient funds": [
+            "잔액 부족"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "보류 중인 자동 번역이 취소됩니다."
+         ],
+         "Save": [
+            "저장"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "<a>번역 관리 대시보드</a>로 이동하여 컨텐츠를 번역 하십시오."
+         ],
+         "Review the translations before publishing": [
+            "발행 전 번역 검토하기"
+         ],
+         "Publish translations and review them later": [
+            "번역을 발행하고 나중에 검토하기"
+         ],
+         "Publish translations without reviewing": [
+            "검토 없이 번역 발행하기"
+         ],
+         "Translate Everything": [
+            "모든 컨텐츠 번역"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "사용자가 발행하거나 업데이트하는 컨텐츠를 WPML이 자동으로 번역합니다."
+         ],
+         "How do you want to translate this site?": [
+            "이 사이트를 어떻게 번역하시겠습니까?"
+         ],
+         "Translate Some": [
+            "일부 컨텐츠 번역"
+         ],
+         "I want to choose which content to translate": [
+            "번역할 컨텐츠를 선택하겠습니다."
+         ],
+         "All Languages": [
+            "모든 언어"
+         ],
+         "Overwrite existing translations": [
+            "기존 번역 덮어쓰기"
+         ],
+         "Some of the content you want to translate is already translated": [
+            "번역하려는 콘텐츠 중 일부가 이미 번역되었습니다"
+         ],
+         "What do you want to do with the content that’s already translated?": [
+            "이미 번역된 콘텐츠로 무엇을 하시겠습니까?"
+         ],
+         "Leave existing translations as is": [
+            "기존 번역을 그대로 유지합니다"
+         ],
+         "This also updates the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "이렇게 하면 사이트의 번역 메모리도 업데이트됩니다. <a href=\"%s\" target=\"_blank\" >번역 메모리</a>에 대해 자세히 알아보세요"
+         ],
+         "Allows you to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "콘텐츠를 다시 번역하고 사이트의 번역 메모리를 업데이트할 수 있습니다. <a href=\"%s\" target=\"_blank\" >번역 메모리</a>에 대해 자세히 알아보세요"
+         ],
+         "Allows your translators to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "번역가가 콘텐츠를 다시 번역하고 사이트의 번역 메모리를 업데이트할 수 있습니다. <a href=\"%s\" target=\"_blank\" >번역 메모리</a>에 대해 자세히 알아보세요"
+         ],
+         "HINT: You can add a Note for translators in the table above with special instructions.": [
+            "힌트: 특별한 지침과 함께 위의 표에 번역가를 위한 메모를 추가할 수 있습니다."
+         ],
+         "Translate automatically": [
+            "자동 번역"
+         ],
+         "How do you want to translate?": [
+            "어떻게 번역하시겠습니까?"
+         ],
+         "Assign to a translator": [
+            "번역가에게 배정"
+         ],
+         "Translate myself": [
+            "직접 번역"
+         ],
+         "You do not need translation credits to translate content yourself.": [
+            "콘텐츠를 직접 번역하는 경우는 번역 크레딧이 필요하지 않습니다."
+         ],
+         "You can only automatically translate content from your site's default language (English), to your site's other languages. Deselect content in your site's secondary languages to proceed.": [
+            "사이트의 기본 언어(영어)에서 사이트의 다른 언어로만 콘텐츠를 자동으로 번역할 수 있습니다. 계속하려면 사이트의 보조 언어로 된 콘텐츠를 선택 취소하세요."
+         ],
+         "You can only automatically translate content from your primary language (%s) to other languages. Use the language switcher at the top of this page to switch to %s.": [
+            "콘텐츠를 기본 언어(%s)에서 다른 언어로만 자동 번역할 수 있습니다. %s로 변환하려면 이 페이지 상단의 언어 변환기를 사용하세요."
+         ],
+         "Selected content includes items that were originally created in this language. Deselect these items to proceed.": [
+            "선택한 콘텐츠에는 원래 이 언어로 작성된 항목이 포함되어 있습니다. 계속하려면 이러한 항목을 선택 취소하세요."
+         ],
+         "Add to Translation Queue": [
+            "번역 대기열에 추가"
+         ],
+         "Select a post or page to translate": [
+            "번역할 게시물 또는 페이지를 선택합니다"
+         ],
+         "Translate or duplicate content to at least one language": [
+            "콘텐츠를 하나 이상의 언어로 번역 또는 복제합니다"
+         ],
+         "Choose how you want to translate your content": [
+            "콘텐츠를 번역할 방법 선택합니다"
+         ],
+         "Selected content is already translated": [
+            "선택한 콘텐츠는 이미 번역되었습니다"
+         ],
+         "Selected content includes items in a language other than your site's default language.": [
+            "선택한 콘텐츠에는 사이트의 기본 언어가 아닌 다른 언어로 된 항목이 포함되어 있습니다."
+         ],
+         "Choose at least one translation action": [
+            "최소 하나 이상의 번역 작업을 선택하십시오."
+         ],
+         "Duplicate": [
+            "복제"
+         ],
+         "Start translating and duplicating": [
+            "번역 및 복제 시작"
+         ],
+         "Add to Translation Basket and duplicate": [
+            "번역 바구니에 추가하고 복제"
+         ],
+         "Add to Translation Queue and duplicate": [
+            "번역 대기열에 추가하고 복제"
+         ],
+         "Start translating": [
+            "번역 시작"
+         ],
+         "Add to Translation Basket": [
+            "번역 바구니에 추가"
+         ],
+         "One more thing...": [
+            "한 가지 더..."
+         ],
+         "What would you like to do when your content has finished translating automatically?": [
+            "콘텐츠가 자동으로 번역이 완료되면 어떻게 하시겠습니까?"
+         ],
+         "Save settings": [
+            "설정 저장"
+         ],
+         "This setting will apply to all future automatic translations. You can change this anytime in WPML → Settings.": [
+            "이 설정은 향후 모든 자동 번역에 적용됩니다. WPML → 설정에서 언제든지 이 설정을 변경할 수 있습니다."
+         ],
+         "Translate": [
+            "번역"
+         ],
+         "Duplicate content": [
+            "콘텐츠 복제"
+         ],
+         "Do nothing": [
+            "아무 작업도 수행하지 않음"
+         ],
+         "To assign content to a translator, first <a href=\"%s\" target=\"_blank\">add a translator</a> or <a href=\"%s\" target=\"_blank\">connect to a translation service</a>.": [
+            "콘텐츠를 번역가에게 배정하려면 먼저 <a href=\"%s\" target=\"_blank\">번역가를 추가</a>하거나<a href=\"%s\" target=\"_blank\">번역 서비스에 연결합니다</a>."
+         ],
+         "You need credits to use automatic translation.": [
+            "자동 번역을 사용하려면 크레딧이 필요합니다."
+         ],
+         "Translators Tab": [
+            "번역가 탭"
+         ],
+         "Connection Error. Please wait a minute and reload this page. If the problem continues, please <a>contact WPML support</a>.": [
+            "연결 오류입니다. 잠시 기다린 후 이 페이지를 다시 로드하세요. 문제가 계속되면 <a>WPML 지원팀에 문의하세요</a>."
+         ],
+         "Finish setting up %s on your site": [
+            "사이트에서 %s 설정을 완료합니다"
+         ],
+         "You need to authenticate %s to send them content for translation. Visit the %s to finish the setup.": [
+            "번역할 콘텐츠를 보내려면 %s을(를) 인증해야 합니다. %s을(를) 방문하여 설정을 완료하세요."
+         ],
+         "Add a translator to use %s.": [
+            "%s을(를) 사용하려면 번역가를 추가하세요."
+         ],
+         "To send content to %s for translation, go to the %s to add a translator on your site.": [
+            "번역을 위해 콘텐츠를 %s(으)로 보내려면, %s(으)로 이동하여 사이트에 번역가를 추가하세요."
+         ],
+         "Your selected automatic translation engines do not support the following language(s): %s. Read more about <a>choosing a translation engine</a>.": [
+            "선택한 자동 번역 엔진은 다음 언어를 지원하지 않습니다: %s. <a>번역 엔진 선택</a>에 대해 자세히 알아보세요."
+         ],
+         "Some of the selected content is already being translated. This will cancel any in-progress translations.": [
+            "선택한 콘텐츠 중 일부는 이미 번역되고 있습니다. 이렇게 하면 진행 중인 모든 번역이 취소됩니다."
+         ],
+         "It is not possible to translate %s content automatically.": [
+            "%s 콘텐츠를 자동으로 번역할 수 없습니다."
+         ],
+         "Translate selected items yourself or deselect these items above.": [
+            "선택한 항목을 직접 번역하거나 위의 이들 항목을 선택 취소하세요."
+         ],
+         "Any existing content (translations) will be overwritten when creating duplicates.": [
+            "기존의 모든 컨텐츠(번역)는 복제를 생성할 때 덮어쓰기 됩니다."
+         ],
+         "When duplicating content, please first duplicate parent pages to maintain the site's hierarchy.": [
+            "컨텐츠를 복제할 때 사이트의 계층 구조를 유지하도록 먼저 상위 페이지를 복제하십시오."
+         ],
+         "Some of the content that you selected for translation includes fields that are encoded. Translators will not be able to work on this kind of content, so we removed it from the job.": [
+            "번역하도록 선택한 일부 컨텐츠에는 인코딩된 필드가 포함되어 있습니다. 번역가는 이러한 종류의 컨텐츠를 번역할 수 없으므로 작업에서 제거했습니다."
+         ],
+         "To fix this problem, you need to tell WPML how these fields are encoded, so that WPML can decode them before sending for translation.": [
+            "이 문제를 해결하려면 이러한 필드가 인코딩된 방식을 WPML에 알려주어야 합니다. 그러면 WPML에서 번역하도록 전송하기 전에 디코딩할 수 있습니다."
+         ],
+         "How to indicate to WPML that it needs to decode fields.": [
+            "필드를 디코딩해야 함을 WPML에 표시하는 방법입니다."
+         ],
+         "WPML cannot send some of the content to translation": [
+            "WPML에서 일부 컨텐츠를 번역하도록 보낼 수 없습니다."
+         ],
+         "<s>%s</s>: There are base64 encoded fields in this document": [
+            "<s>%s</s>: 이 문서에는 base64로 인코딩된 필드가 있습니다"
+         ],
+         "Hide details": [
+            "세부 정보 숨기기"
+         ],
+         "Show details": [
+            "세부 정보 표시"
+         ]
+      }
+   }
+}

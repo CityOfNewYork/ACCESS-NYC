@@ -58,7 +58,7 @@ class WPML_REST_Request_Analyze {
 	 */
 	private function get_uri_part( $index = 0 ) {
 		if ( null === $this->uri_parts ) {
-			$request_uri = filter_var( $_SERVER['REQUEST_URI'], FILTER_SANITIZE_STRING );
+			$request_uri = (string) filter_var( $_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL );
 			$cleaned_uri = ltrim( wpml_strip_subdir_from_url( $request_uri ), '/' );
 
 			if ( $this->wp_rewrite->using_index_permalinks() ) {

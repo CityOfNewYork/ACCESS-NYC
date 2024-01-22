@@ -716,7 +716,8 @@
 			ajax_spinner.css('visibility', 'visible');
 			basket_extra_fields_list.html(ajax_spinner);
 			var ajax_data = {
-				'action': 'basket_extra_fields_refresh'
+				'action': 'basket_extra_fields_refresh',
+				'nonce': wpml_tm_translation_basket_and_options.nonce,
 			};
 
 			jQuery.post(ajaxurl, ajax_data, function(response) {

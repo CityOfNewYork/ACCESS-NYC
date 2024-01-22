@@ -203,7 +203,9 @@ class WPML_TM_XLIFF {
 	public function toString() {
 		$this->compose();
 
-		return trim( $this->dom->saveXML() );
+		$xml = $this->dom->saveXML();
+
+		return $xml ? trim( $xml ) : '';
 	}
 
 	private function compose() {

@@ -1,6 +1,9 @@
 <?php
 
 use WPML\FP\Obj;
+use WPML\FP\Str;
+use WPML\FP\Fns;
+use function WPML\FP\pipe;
 
 /**
  * Class WPML_Elementor_Translate_IDs
@@ -24,7 +27,7 @@ class WPML_Elementor_Translate_IDs implements IWPML_Action {
 		add_filter( 'elementor/theme/get_location_templates/condition_sub_id', array( $this, 'translate_location_condition_sub_id' ), 10, 2 );
 		add_filter( 'elementor/documents/get/post_id', array(
 			$this,
-			'translate_template_id'
+			'translate_template_id',
 		) );
 		add_filter( 'elementor/frontend/builder_content_data', array( $this, 'translate_global_widget_ids' ), 10, 2 );
 		add_filter( 'elementor/frontend/builder_content_data', array( $this, 'translate_product_ids' ), 10, 2 );
@@ -52,12 +55,22 @@ class WPML_Elementor_Translate_IDs implements IWPML_Action {
 		$sub_name = isset( $parsed_condition['sub_name'] ) ? $parsed_condition['sub_name'] : null;
 
 		if ( (int) $sub_id > 0 && $sub_name ) {
-			$element_type = $sub_name;
+			$startsWith = Str::startsWith( Fns::__, $sub_name );
+			$getType    = Str::pregReplace( Fns::__, '', $sub_name );
+
+			$findReplace = wpml_collect( [
+				'in_'           => '/^in_|_children$/',
+				'child_of_'     => '/^child_of_/',
+				'any_child_of_' => '/^any_child_of_/',
+			] );
 
 			if ( 'child_of' === $sub_name ) {
 				$element_type = get_post_type( $sub_id );
-			} elseif ( 0 === strpos( $sub_name, 'in_' ) ) {
-				$element_type = preg_replace( '/^in_|_children$/', '', $sub_name );
+			} else {
+				$element_type = $findReplace
+					->filter( pipe( Fns::nthArg( 1 ), $startsWith ) )
+					->map( $getType )
+					->first( Fns::identity(), $sub_name );
 			}
 
 			$sub_id = $this->translate_id( $sub_id, $element_type );
@@ -77,19 +90,22 @@ class WPML_Elementor_Translate_IDs implements IWPML_Action {
 	private function is_WP_widget_call() {
 		return $this->debug_backtrace->is_class_function_in_call_stack(
 			'ElementorPro\Modules\Library\WP_Widgets\Elementor_Library',
-			'widget' );
+			'widget'
+		);
 	}
 
 	private function is_shortcode_call() {
 		return $this->debug_backtrace->is_class_function_in_call_stack(
 			'ElementorPro\Modules\Library\Classes\Shortcode',
-			'shortcode' );
+			'shortcode'
+		);
 	}
 
 	private function is_template_widget_call() {
 		return $this->debug_backtrace->is_class_function_in_call_stack(
 			'ElementorPro\Modules\Library\Widgets\Template',
-			'render' );
+			'render'
+		);
 	}
 
 	public function translate_global_widget_ids( $data_array, $post_id ) {
@@ -115,7 +131,11 @@ class WPML_Elementor_Translate_IDs implements IWPML_Action {
 	 */
 	public function translate_product_ids( $data_array, $post_id ) {
 		foreach ( $data_array as &$data ) {
-			if ( Obj::prop( 'elType', $data ) === 'widget' && Obj::prop( 'widgetType', $data ) === 'wc-add-to-cart' ) {
+			if (
+				Obj::prop( 'elType', $data ) === 'widget'
+				&& Obj::prop( 'widgetType', $data ) === 'wc-add-to-cart'
+				&& Obj::propOr( false, 'product_id', $data['settings'] )
+			) {
 				$data['settings']['product_id'] = $this->translate_id( $data['settings']['product_id'] );
 			}
 
@@ -132,7 +152,7 @@ class WPML_Elementor_Translate_IDs implements IWPML_Action {
 	 * @return int
 	 */
 	private function translate_id( $element_id, $element_type = null ) {
-		if ( ! $element_type || $element_type === "any_child_of" ) {
+		if ( ! $element_type || 'any_child_of' === $element_type ) {
 			$element_type = get_post_type( $element_id );
 		}
 

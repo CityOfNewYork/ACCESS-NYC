@@ -31,7 +31,7 @@ class WPML_TM_Batch_Report_Hooks {
 
 	public function add_hooks() {
 		add_action( 'wpml_tm_assign_job_notification', array( $this, 'set_job' ) );
-		add_action( 'wpml_tm_new_job_notification', array( $this, 'set_job' ), 10, 2 );
+		add_action( 'wpml_tm_new_job_notification', array( $this, 'set_job' ), 10, 1 );
 		add_action( 'wpml_tm_local_string_sent', array( $this, 'set_job' ) );
 		add_action( 'wpml_tm_basket_committed', array( $this->email_process, 'process_emails' ) );
 	}

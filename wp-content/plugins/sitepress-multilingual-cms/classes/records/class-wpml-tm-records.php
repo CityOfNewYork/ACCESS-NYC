@@ -32,10 +32,6 @@ class WPML_TM_Records {
 		return $this->wpdb;
 	}
 
-	public function get_new_wpml_wp_cache( $group = '' ) {
-		return new WPML_WP_Cache( $group );
-	}
-
 	public function get_post_translations() {
 		return $this->wpml_post_translations;
 	}
@@ -65,7 +61,7 @@ class WPML_TM_Records {
 			if ( $translation_ids ) {
 				$translation_ids          = implode( ',', $translation_ids );
 				$this->preloaded_statuses = $this->wpdb->get_results(
-					"SELECT *
+					"SELECT status, translation_id
 					FROM {$this->wpdb->prefix}icl_translation_status
 					WHERE translation_id in ({$translation_ids})"
 				);

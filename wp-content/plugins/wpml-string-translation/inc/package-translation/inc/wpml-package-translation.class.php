@@ -47,7 +47,7 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 
 			/* Translation hooks for other plugins to use */
 			add_filter( 'wpml_tm_element_type', array( $this, 'get_element_type' ), 10, 2 );
-			add_filter( 'wpml_tm_dashboard_title_locations', array( $this, 'add_title_db_location' ), 10, 2 );
+			add_filter( 'wpml_tm_dashboard_title_locations', array( $this, 'add_title_db_location' ), 10, 1 );
 
 			add_filter( 'wpml_string_title_from_id', array( $this, 'string_title_from_id_filter' ), 10, 2 );
 			// TODO: deprecated, use the 'wpml_register_string' action
@@ -80,9 +80,9 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 
 			/* Translation queue hooks */
 			add_filter( 'wpml_tm_external_translation_job_title', array( $this, 'get_post_title' ), 10, 2 );
-			add_filter( 'wpml_tm_add_to_basket', array( $this, 'add_to_basket' ), 10, 2 );
+			add_filter( 'wpml_tm_add_to_basket', array( $this, 'add_to_basket' ), 10, 1 );
 			add_filter( 'wpml_tm_translation_jobs_basket', array( $this, 'update_translation_jobs_basket' ), 10, 3 );
-			add_filter( 'wpml_tm_basket_items_types', array( $this, 'basket_items_types' ), 10, 2 );
+			add_filter( 'wpml_tm_basket_items_types', array( $this, 'basket_items_types' ), 10, 1 );
 
 			/*
 			 TM Hooks */
@@ -252,6 +252,7 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 
 			global $sitepress;
 
+			/** @var int[] $packages_ids */
 			$packages_ids = array_keys( $packages );
 
 			foreach ( $packages_ids as $package_id ) {
@@ -512,6 +513,7 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 		$item = $this->get_package_details( $package_id );
 
 		$post_id = $this->get_external_id_from_package( new WPML_Package( $package_id ) );
+		/** @var WPML_Package $post */
 		$post    = $this->get_translatable_item( null, $post_id );
 		if ( ! $post ) {
 			return;
@@ -590,7 +592,7 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 	 * Functions to update translations when packages are modified in admin
 	 *
 	 * @param int       $rid
-	 * @param \stdClass $post
+	 * @param \stdClass|WPML_Package $post
 	 */
 
 	function update_icl_translate( $rid, $post ) {

@@ -16,14 +16,14 @@ class Resources implements \IWPML_Backend_Action {
 			'wpml-tm-ts-admin-section',
 			WPML_TM_URL . '/res/css/admin-sections/translation-services.css',
 			array(),
-			WPML_TM_VERSION
+			ICL_SITEPRESS_VERSION
 		);
 
 		wp_enqueue_style(
 			'wpml-tm-translation-services',
 			WPML_TM_URL . '/dist/css/translationServices/styles.css',
 			[],
-			WPML_TM_VERSION
+			ICL_SITEPRESS_VERSION
 		);
 	}
 
@@ -33,21 +33,21 @@ class Resources implements \IWPML_Backend_Action {
 			'wpml-tm-ts-admin-section',
 			WPML_TM_URL . '/res/js/translation-services.js',
 			array(),
-			WPML_TM_VERSION
+			ICL_SITEPRESS_VERSION
 		);
 
 		wp_enqueue_script(
 			'wpml-tm-translation-services',
 			WPML_TM_URL . '/dist/js/translationServices/app.js',
 			array(),
-			WPML_TM_VERSION
+			ICL_SITEPRESS_VERSION
 		);
 
 		wp_enqueue_script(
 			'wpml-tp-api',
 			WPML_TM_URL . '/res/js/wpml-tp-api.js',
 			array( 'jquery', 'wp-util' ),
-			WPML_TM_VERSION
+			ICL_SITEPRESS_VERSION
 		);
 	}
 

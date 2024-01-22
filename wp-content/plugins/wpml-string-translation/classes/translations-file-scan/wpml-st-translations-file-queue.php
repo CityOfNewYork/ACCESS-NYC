@@ -23,6 +23,7 @@ class WPML_ST_Translations_File_Queue {
 	/** @var int */
 	private $limit;
 
+	/** @var WPML_Transient  */
 	private $transient;
 
 	/**

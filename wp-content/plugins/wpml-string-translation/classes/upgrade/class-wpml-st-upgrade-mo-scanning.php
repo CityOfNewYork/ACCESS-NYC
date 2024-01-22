@@ -4,21 +4,6 @@ class WPML_ST_Upgrade_MO_Scanning implements IWPML_St_Upgrade_Command {
 	/** @var wpdb $wpdb */
 	private $wpdb;
 
-	private static $sql = "
-		CREATE TABLE `PREFIXicl_mo_files_domains` (
-		  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-		  `file_path` varchar(250) NOT NULL,
-		  `file_path_md5` varchar(32) NOT NULL,
-		  `domain` varchar(160) NOT NULL,
-		  `status` varchar(20) NOT NULL DEFAULT %s,
-		  `num_of_strings` int(11) NOT NULL DEFAULT '0',
-		  `last_modified` int(11) NOT NULL,
-		  `component_type` enum('plugin','theme','other') NOT NULL DEFAULT 'other',
-  		  `component_id` varchar(100) DEFAULT NULL,
-		  UNIQUE KEY `file_path_md5_UNIQUE` (`file_path_md5`)
-		)
-	";
-
 	/**
 	 * @param wpdb $wpdb
 	 */
@@ -35,9 +20,23 @@ class WPML_ST_Upgrade_MO_Scanning implements IWPML_St_Upgrade_Command {
 		$table_name = $this->wpdb->prefix . 'icl_mo_files_domains';
 		$this->wpdb->query( "DROP TABLE IF EXISTS `{$table_name}`" );
 
-		$sql = str_replace( 'PREFIX', $this->wpdb->prefix, self::$sql );
+		//@todo needs proper testing
+		/** @var string $sql */
 		$sql = $this->wpdb->prepare(
-			$sql,
+			"
+				CREATE TABLE `{$this->wpdb->prefix}icl_mo_files_domains` (
+				  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+				  `file_path` varchar(250) NOT NULL,
+				  `file_path_md5` varchar(32) NOT NULL,
+				  `domain` varchar(160) NOT NULL,
+				  `status` varchar(20) NOT NULL DEFAULT %s,
+				  `num_of_strings` int(11) NOT NULL DEFAULT '0',
+				  `last_modified` int(11) NOT NULL,
+				  `component_type` enum('plugin','theme','other') NOT NULL DEFAULT 'other',
+				  `component_id` varchar(100) DEFAULT NULL,
+				  UNIQUE KEY `file_path_md5_UNIQUE` (`file_path_md5`)
+				)
+			",
 			array( WPML_ST_Translations_File_Entry::NOT_IMPORTED )
 		);
 
@@ -50,7 +49,9 @@ class WPML_ST_Upgrade_MO_Scanning implements IWPML_St_Upgrade_Command {
 		$result = true;
 
 		$table_name = $this->wpdb->prefix . 'icl_string_translations';
-		if ( 0 === count( $this->wpdb->get_results( "SHOW COLUMNS FROM `{$table_name}` LIKE 'mo_string'" ) ) ) {
+		/** @var array $results */
+		$results = $this->wpdb->get_results( "SHOW COLUMNS FROM `{$table_name}` LIKE 'mo_string'" );
+		if ( 0 === count( $results ) ) {
 			$sql = "
 				ALTER TABLE {$table_name} 
 				ADD COLUMN `mo_string` TEXT NULL DEFAULT NULL AFTER `value`;

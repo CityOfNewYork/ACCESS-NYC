@@ -43,6 +43,8 @@ class OTGS_Installer_Connection_Test {
 			$request_response    = wp_remote_head( $update_response->response[ $plugin_id ]->package );
 			$parsed_download_url = wp_parse_url( $update_response->response[ $plugin_id ]->package );
 			parse_str( $parsed_download_url['query'], $download_args );
+			/** @var array{download_version: string, version: string} $download_args */
+
 
 			if ( is_wp_error( $request_response ) ) {
 				$error_message = $request_response->get_error_message();

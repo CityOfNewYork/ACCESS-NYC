@@ -5,14 +5,399 @@
          "": {
             "domain": "messages"
          },
+         "Draft — Pending review": [
+            "مسودة — المراجعة معلقة"
+         ],
+         "Complete": [
+            "اكتملت"
+         ],
          "Insufficient funds": [
             "رصيد غير كافٍ"
          ],
-         "Complete": [
-            "استكمِل"
+         "Start batch sync": [
+            "بدء مزامنة دفعة الترجمة"
+         ],
+         "Cancel job": [
+            "إلغاء المهمة"
+         ],
+         "Continue reviewing": [
+            "مواصلة المراجعة"
+         ],
+         "Start downloading XLIFF file": [
+            "بدء تنزيل ملف XLIFF"
+         ],
+         "Edit": [
+            "تحرير"
+         ],
+         "Get translation": [
+            "الحصول على الترجمة"
+         ],
+         "Resign": [
+            "تنحى"
+         ],
+         "Review": [
+            "مراجعة"
+         ],
+         "Translate": [
+            "ترجم"
+         ],
+         "Take and Translate": [
+            "القبول والترجمة"
+         ],
+         "View": [
+            "استعرض"
+         ],
+         "Delete Translations": [
+            "حذف الترجمات"
+         ],
+         "Keep Translations as Draft": [
+            "الاحتفاظ بالترجمات كمسودة"
+         ],
+         "Never mind. I want to review these translations.": [
+            "لا عليك. أرغب في مراجعة هذه الترجمات."
+         ],
+         "Cancel": [
+            "إلغاء"
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "سيقوم هذا بإزالة المهام المحددة من قائمة انتظار الترجمات بدون نشرها. ما الذي ترغب في فعله مع الترجمات؟"
+         ],
+         "Cancel Translation Review": [
+            "إلغاء مراجعة الترجمة"
+         ],
+         "Bulk actions": [
+            "اجراءات العمل المجمع"
+         ],
+         "Apply": [
+            "تطبيق"
+         ],
+         "Actions applied to multiple translation jobs can take a few seconds. Please do not leave the page.": [
+            "الإجراءات المطبقة على عدة مهام ترجمة قد تستغرق عدة ثوانٍ. يُرجى عدم مغادرة الصفحة."
+         ],
+         "Actions applied to multiple translation jobs can take a few minutes. Please do not leave the page.": [
+            "الإجراءات المطبقة على عدة مهام ترجمة قد تستغرق عدة دقائق. يُرجى عدم مغادرة الصفحة."
+         ],
+         "Select translator": [
+            "تحديد المترجم"
+         ],
+         "Assign": [
+            "تعيين"
+         ],
+         "In progress": [
+            "قيد التقدم"
+         ],
+         "Translation ready to download": [
+            "الترجمة جاهزة للتنزيل"
+         ],
+         "Completed": [
+            "اكتملت"
+         ],
+         "Published — Pending review": [
+            "منشور — في انتظار المراجعة"
+         ],
+         "Published — Review in progress": [
+            "منشور — المراجعة قيد التنفيذ"
+         ],
+         "Draft — Review in progress": [
+            "مسودة — المراجعة قيد التنفيذ"
+         ],
+         "Needs update": [
+            "يتطلب تحديثاً"
+         ],
+         "Cancelled": [
+            "عملية ملغاة"
+         ],
+         "Needs translation": [
+            "بحاجة للترجمة"
+         ],
+         "View original": [
+            "عرض الأصل"
+         ],
+         "(no title)": [
+            "(بدون عنوان)"
+         ],
+         "Automatic translation": [
+            "الترجمة الآلية"
+         ],
+         "TP ID: %d": [
+            "معرف TP: %d"
+         ],
+         "Reset": [
+            "إعادة ضبط"
+         ],
+         "Filter": [
+            "تصفية"
+         ],
+         "ID (%s)": [
+            "معرف الهوية\r\n (%s)"
+         ],
+         "Title (%s)": [
+            "العنوان (%s)"
+         ],
+         "Type (%s)": [
+            "النوع (%s)"
+         ],
+         "Language (%s)": [
+            "اللغة (%s)"
+         ],
+         "Batch name (%s)": [
+            "اسم الدفعة (%s)"
+         ],
+         "Status (%s)": [
+            "الحالة (%s)"
+         ],
+         "Translated by (%s)": [
+            "المترجم: (%s)"
+         ],
+         "Sent date (%s)": [
+            "تاريخ الإرسال (%s)"
+         ],
+         "Deadline (%s)": [
+            "موعد التسليم (%s)"
+         ],
+         "Clear all filters": [
+            "محو كل المرشحات"
+         ],
+         "Any Translation Service": [
+            "أي خدمة ترجمة"
+         ],
+         "Any WordPress Translator": [
+            "أي مترجم WordPress"
+         ],
+         "From": [
+            "من"
+         ],
+         "To": [
+            "إلى"
+         ],
+         "Anyone": [
+            "أي شخص"
+         ],
+         "Include jobs from translation services": [
+            "تضمين المهام من خدمات الترجمة"
+         ],
+         "All types": [
+            "كل الأنواع"
+         ],
+         "Select visible columns": [
+            "تحديد الأعمدة المرئية"
+         ],
+         "Sort descending": [
+            "الترتيب تنازليًا"
+         ],
+         "Sort ascending": [
+            "الترتيب تصاعديًا"
+         ],
+         "Cancel sorting": [
+            "إلغاء الفرز"
+         ],
+         "The bulk action is running...": [
+            "الإجراء المجمع قيد التنفيذ..."
+         ],
+         "Export all jobs to XLIFF 1.0": [
+            "تصدير كل المهام إلى XLIFF 1.0"
+         ],
+         "Export all filtered jobs to XLIFF 1.0": [
+            "تصدير كل المهام التي تم ترشيحها إلى XLIFF 1.0"
+         ],
+         "Export all jobs to XLIFF 1.1": [
+            "تصدير كل المهام إلى XLIFF 1.1"
+         ],
+         "Export all filtered jobs to XLIFF 1.1": [
+            "تصدير كل المهام التي تم ترشيحها إلى XLIFF 1.1"
+         ],
+         "Export all jobs to XLIFF 1.2": [
+            "تصدير كل المهام إلى XLIFF 1.2"
+         ],
+         "Export all filtered jobs to XLIFF 1.2": [
+            "تصدير كل المهام التي تم ترشيحها إلى XLIFF 1.2"
+         ],
+         "Export": [
+            "تصدير"
+         ],
+         "Select File": [
+            "تحديد ملف"
+         ],
+         ".xliff .zip": [
+            ".xliff .zip"
+         ],
+         "Importing": [
+            "جارٍ الاستيراد"
+         ],
+         "Import": [
+            "استيراد"
+         ],
+         "Import / Export XLIFF": [
+            "استيراد/تصدير XLIFF"
+         ],
+         "Actions": [
+            "الإجراءات"
+         ],
+         "Batch name": [
+            "اسم دفعة المهمات"
+         ],
+         "Filter by %s": [
+            "الترشيح بحسب %s"
+         ],
+         "Title": [
+            "العنوان"
+         ],
+         "Approve translation reviews": [
+            "اعتماد مراجعات الترجمة"
+         ],
+         "Cancel jobs": [
+            "إلغاء المهام"
+         ],
+         "Cancel translation reviews": [
+            "إلغاء مراجعات الترجمة"
+         ],
+         "Export to XLIFF %s": [
+            "تصدير إلى XLIFF %s"
+         ],
+         "Get translations": [
+            "الحصول على الترجمات"
+         ],
+         "This action does not apply to any of the selected translation jobs": [
+            "هذا الإجراء لا ينطبق على أي مهمة من مهام الترجمة المحددة"
+         ],
+         "Translations have been downloaded": [
+            "تم تنزيل الترجمات"
+         ],
+         "Translation has been downloaded": [
+            "تم تنزيل الترجمة"
+         ],
+         "Translations could not be downloaded": [
+            "لم يمكن تنزيل الترجمات"
+         ],
+         "Translation could not be downloaded": [
+            "لم يمكن تنزيل الترجمة"
+         ],
+         "Approving translations reviews failed!": [
+            "الموافقة على مراجعات الترجمات فشلت!"
+         ],
+         "Failed approving translations for the following posts: ": [
+            "فشلت الموافقة على الترجمات للمقالات التالية:"
+         ],
+         "Translations reviews approved successfully!": [
+            "تمت الموافقة على مراجعات الترجمات بنجاح!"
+         ],
+         "No valid jobs selected to approve translations reviews!": [
+            "لم يتم تحديد أي مهام صالحة للموافقة على مراجعات الترجمات!"
+         ],
+         "The translator has been assigned to the job": [
+            "تم تعيين المترجم إلى المهمة"
+         ],
+         "The translator could not be assigned to the job": [
+            "لم يمكن تعيين المترجم إلى المهمة"
+         ],
+         "The jobs have been cancelled": [
+            "تم إلغاء المهام"
+         ],
+         "The job has been cancelled": [
+            "تم إلغاء المهمة"
+         ],
+         "The jobs could not be cancelled": [
+            "لم يمكن إلغاء المهام"
+         ],
+         "The job could not be cancelled": [
+            "لم يمكن إلغاء المهمة"
+         ],
+         "Translation reviews have been canceled": [
+            "تم إلغاء مراجعات الترجمة"
+         ],
+         "Translation review has been canceled": [
+            "تم إلغاء مراجعة الترجمة"
+         ],
+         "Translation reviews could not be canceled": [
+            "لم يمكن إلغاء مراجعات الترجمة"
+         ],
+         "Translation review could not be canceled": [
+            "لم يمكن إلغاء مراجعة الترجمة"
+         ],
+         "Sent on": [
+            "تاريخ الإرسال"
+         ],
+         "Deadline": [
+            "موعد التسليم"
+         ],
+         "Status": [
+            "الحالة"
          ],
          "Pending review": [
-            "قيد المراجعة"
+            "مراجعة معلقة"
+         ],
+         "ID": [
+            "معرف الهوية"
+         ],
+         "Type": [
+            "نوع"
+         ],
+         "Languages": [
+            "لغات"
+         ],
+         "Translated by": [
+            "تمت ترجمته بواسطة"
+         ],
+         "Download XLIFF file couldn't be finished": [
+            "لم يكتمل تنزيل ملف XLIFF"
+         ],
+         "Could not load jobs for export": [
+            "لم يمكن تحميل المهام لتصديرها"
+         ],
+         "The export to XLIFF failed": [
+            "فشل التصدير إلى XLIFF"
+         ],
+         "Imported %d jobs": [
+            "تم استيراد %d من المهام"
+         ],
+         "Imported one job": [
+            "تم استيراد مهمة واحدة"
+         ],
+         "Could not import any job": [
+            "لم يمكن استيراد أي مهمة من المهام"
+         ],
+         "Import failed!": [
+            "فشلت عملية الاستيراد!"
+         ],
+         "Loading translations queue": [
+            "جارٍ تحميل قائمة مهام الترجمة"
+         ],
+         "Loading translation jobs": [
+            "جارٍ تحميل مهام الترجمة"
+         ],
+         "Jobs could not be loaded": [
+            "لم يمكن تحميل المهام"
+         ],
+         "Specify some jobs to resign": [
+            "حدد بعض المهام المراد إلغاء تعيينك إليها"
+         ],
+         "We could not resign jobs: %s": [
+            "لم يمكننا إلغاء التعيين إلى المهام: %s"
+         ],
+         "Resigned from jobs": [
+            "تم إلغاء التعيين إلى المهام"
+         ],
+         "Resigned from job": [
+            "تم إلغاء التعيين إلى المهمة"
+         ],
+         "Failed to resign from jobs": [
+            "فشل إلغاء التعيين إلى المهام"
+         ],
+         "The Advanced Editor jobs synchronization has failed": [
+            "فشلت عملية مزامنة مهام المحرر المتقدم"
+         ],
+         "Synchronization with the Professional Translation service has failed": [
+            "فشلت المزامنة مع خدمة الترجمة الاحترافية"
+         ],
+         "%d translation has been downloaded": [
+            "تم تنزيل %d ترجمة",
+            "تم تنزيل %d من الترجمات"
+         ],
+         "Batch sync finished successfully!": [
+            "اكتملت مزامنة دفعة المهام بنجاح!"
+         ],
+         "Batch sync couldn't be finished": [
+            "لم تكتمل مزامنة دفعة المهام"
          ]
       }
    }

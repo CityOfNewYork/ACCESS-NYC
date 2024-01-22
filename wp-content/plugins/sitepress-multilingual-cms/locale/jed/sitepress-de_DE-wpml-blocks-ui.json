@@ -1,0 +1,169 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Advanced": [
+            "Erweitert"
+         ],
+         "HTML anchor": [
+            "HTML-Anker"
+         ],
+         "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
+            "Fügen Sie eine Verknüpfung zu diesem Block hinzu, wenn Sie die Seite mit der „#anchor“-URL laden."
+         ],
+         "Additional CSS class(es)": [
+            "Zusätzliche CSS-Klasse(n)"
+         ],
+         "Separate multiple classes with spaces.": [
+            "Trennen Sie mehrere Klassen durch Leerzeichen."
+         ],
+         "Color": [
+            "Farbe"
+         ],
+         "Dimensions": [
+            "Maße"
+         ],
+         "BLOCK": [
+            "Block"
+         ],
+         "Block margin": [
+            "Blockrand"
+         ],
+         "Block padding": [
+            "Block-Abstand"
+         ],
+         "LANGUAGE": [
+            "Sprache"
+         ],
+         "Language spacing": [
+            "Leerzeichen"
+         ],
+         "Language padding": [
+            "Sprachabstand"
+         ],
+         "Display": [
+            "Anzeigen"
+         ],
+         "Show flag": [
+            "Flagge anzeigen"
+         ],
+         "Show language name": [
+            "Sprachname anzeigen"
+         ],
+         "Display language name in": [
+            "Sprachname anzeigen in"
+         ],
+         "Style": [
+            "Stil"
+         ],
+         "Flag settings": [
+            "Flaggen-Einstellungen"
+         ],
+         "Width": [
+            "Breite"
+         ],
+         "Height": [
+            "Höhe"
+         ],
+         "Spacing": [
+            "Abstand"
+         ],
+         "Allow wrapping to multiple lines": [
+            "Umbruch auf mehrere Zeilen zulassen"
+         ],
+         "Open on click": [
+            "Beim Anklicken öffnen"
+         ],
+         "Show arrow": [
+            "Pfeil anzeigen"
+         ],
+         "Layout": [
+            "Layout"
+         ],
+         "Justification": [
+            "Rechtfertigung"
+         ],
+         "Orientation": [
+            "Ausrichtung"
+         ],
+         "Typography": [
+            "Typographie"
+         ],
+         "Background": [
+            "Hintergrund"
+         ],
+         "Language Text": [
+            "Sprachtext"
+         ],
+         "Language Background": [
+            "Sprachhintergrund"
+         ],
+         "Current language text": [
+            "Aktueller Sprachtext"
+         ],
+         "Current language background": [
+            "Aktueller Sprachhintergrund"
+         ],
+         "Full name": [
+            "Vollständiger Name"
+         ],
+         "Code": [
+            "Code"
+         ],
+         "Justify items left": [
+            "Elemente links ausrichten"
+         ],
+         "Justify items center": [
+            "Elemente in der Mitte ausrichten"
+         ],
+         "Justify items right": [
+            "Elemente rechts ausrichten"
+         ],
+         "Justify items space between": [
+            "Elemente mit Leerzeichen ausrichten"
+         ],
+         "Horizontal": [
+            "Horizontal"
+         ],
+         "Vertical": [
+            "Vertikal"
+         ],
+         "Normal": [
+            "Normal"
+         ],
+         "Medium": [
+            "Mittel"
+         ],
+         "Large": [
+            "Groß"
+         ],
+         "X-Large": [
+            "Sehr groß"
+         ],
+         "Small": [
+            "Klein"
+         ],
+         "Displays the WPML Language Switcher.": [
+            "Zeigt den WPML-Sprachumschalter an."
+         ],
+         "Language Switcher": [
+            "Sprachumschalter"
+         ],
+         "displays the WPML Language Switcher": [
+            "Zeigt den WPML-Sprachumschalter an."
+         ],
+         "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
+            "Zeigt den WPML-Sprachumschalter an. <br/> Erfahren Sie, <a>wie Sie diesen Block übersetzen</a>."
+         ],
+         "Navigation Language Switcher": [
+            "Umschalter für Navigationssprache"
+         ],
+         "Reset all": [
+            "Alles zurücksetzen"
+         ]
+      }
+   }
+}

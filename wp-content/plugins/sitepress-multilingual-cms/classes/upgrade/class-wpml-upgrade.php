@@ -63,7 +63,7 @@ class WPML_Upgrade {
 		 * The filter must be added before the `wpml_loaded` action is fired (the action is fired on `plugins_loaded`).
 		 *
 		 * @param array $commands An empty array.
-		 * @param array $new_commands Array of classes created with \wpml_create_upgrade_command_definition.
+		 * @return array Array of classes created with \wpml_create_upgrade_command_definition.
 		 *
 		 * @since 4.1.0
 		 * @see   \wpml_create_upgrade_command_definition
@@ -191,17 +191,20 @@ class WPML_Upgrade {
 	}
 
 	private function nonce_ok( $class ) {
-		$ok = false;
+		$class_name = get_class( $class );
+		if ( ! $class_name ) {
+			return false;
+		}
 
-		$class_name = $this->get_command_id( get_class( $class ) );
+		$class_name = $this->get_command_id( $class_name );
 		if ( isset( $_POST['action'] ) && $_POST['action'] === $class_name ) {
 			$nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 			if ( $this->sitepress->get_wp_api()->wp_verify_nonce( $nonce, $class_name . '-nonce' ) ) {
-				$ok = true;
+				return true;
 			}
 		}
 
-		return $ok;
+		return false;
 	}
 
 	/**

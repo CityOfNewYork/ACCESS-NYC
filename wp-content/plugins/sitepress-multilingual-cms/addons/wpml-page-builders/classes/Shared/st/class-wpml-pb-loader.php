@@ -72,6 +72,7 @@ class WPML_PB_Loader {
 			WPML\PB\AutoUpdate\Hooks::class,
 			WPML\PB\Shutdown\Hooks::class,
 			WPML\PB\GutenbergCleanup\ShortcodeHooks::class,
+			WPML\PB\Shortcode\AdjustIdsHooks::class,
 		];
 
 		make( WPML_Action_Filter_Loader::class )->load( $hooks );

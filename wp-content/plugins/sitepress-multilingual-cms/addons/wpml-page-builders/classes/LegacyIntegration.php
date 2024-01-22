@@ -53,7 +53,10 @@ class LegacyIntegration {
 			$integrationClasses[] = \WPML\Compatibility\Divi\TinyMCE::class;
 			$integrationClasses[] = \WPML\Compatibility\Divi\DisplayConditions::class;
 			$integrationClasses[] = \WPML\Compatibility\Divi\DoubleQuotes::class;
+			$integrationClasses[] = \WPML\Compatibility\Divi\WooShortcodes::class; // @todo: replace with config - wpmlpb-275
 			$integrationClasses[] = \WPML\Compatibility\Divi\Hooks\Editor::class;
+			$integrationClasses[] = \WPML\Compatibility\Divi\Hooks\DomainsBackendEditor::class;
+			$integrationClasses[] = \WPML\Compatibility\Divi\Hooks\GutenbergUpdate::class;
 		}
 
 		$loader = new \WPML_Action_Filter_Loader();

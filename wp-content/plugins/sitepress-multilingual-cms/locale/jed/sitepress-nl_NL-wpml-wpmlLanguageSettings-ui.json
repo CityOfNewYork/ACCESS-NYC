@@ -1,0 +1,28 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose the image file type for flags": [
+            "Kies het type beeldbestand voor vlaggen"
+         ],
+         "This option affects only the built-in WPML flags, not the custom uploaded ones.": [
+            "Deze optie beïnvloedt alleen de ingebouwde WPML-vlaggen, niet de aangepaste geüploade vlaggen."
+         ],
+         "%s format": [
+            "%s opmaak"
+         ],
+         "Save": [
+            "Opslaan"
+         ],
+         "The new format has been saved.": [
+            "De nieuwe opmaak is opgeslagen."
+         ],
+         "Failed to save the new format": [
+            "De nieuwe opmaak is niet opgeslagen"
+         ]
+      }
+   }
+}

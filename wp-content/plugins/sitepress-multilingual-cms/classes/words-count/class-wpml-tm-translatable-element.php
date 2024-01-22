@@ -11,7 +11,7 @@ abstract class WPML_TM_Translatable_Element {
 	protected $id;
 
 	/**
-	 * @param int                               $id
+	 * @param int|false                         $id
 	 * @param WPML_TM_Word_Count_Records        $word_count_records
 	 * @param WPML_TM_Word_Count_Single_Process $single_process
 	 */

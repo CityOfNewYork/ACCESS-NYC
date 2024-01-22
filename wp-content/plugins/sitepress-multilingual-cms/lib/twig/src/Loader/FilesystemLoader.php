@@ -32,7 +32,7 @@ class FilesystemLoader implements \WPML\Core\Twig\Loader\LoaderInterface, \WPML\
     public function __construct($paths = [], $rootPath = null)
     {
         $this->rootPath = (null === $rootPath ? \getcwd() : $rootPath) . \DIRECTORY_SEPARATOR;
-        if (\false !== ($realPath = \realpath($rootPath))) {
+        if (false !== ($realPath = !empty($rootPath) ? \realpath($rootPath) : false) ) {
             $this->rootPath = $realPath . \DIRECTORY_SEPARATOR;
         }
         if ($paths) {

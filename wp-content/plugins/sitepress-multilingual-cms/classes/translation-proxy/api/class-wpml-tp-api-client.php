@@ -1,5 +1,7 @@
 <?php
 
+use WPML\FP\Str;
+
 class WPML_TP_API_Client {
 	/** @var string */
 	private $proxy_url;
@@ -39,11 +41,11 @@ class WPML_TP_API_Client {
 		WPML_TranslationProxy_Com_Log::log_call( $request->get_url(), $request->get_params() );
 		$response = $this->call_remote_api( $request );
 
-		if ( ! $response || is_wp_error( $response ) || ( isset( $response['response']['code'] ) && $response['response']['code'] >= 400 ) ) {
+		if ( ! $response || is_wp_error( $response ) || ( isset( $response['response'] ) && isset( $response['response']['code'] ) && $response['response']['code'] >= 400 ) ) {
 			throw new WPML_TP_API_Exception( 'Communication error', $request, $response );
 		}
 
-		if ( isset( $response['headers']['content-type'] ) ) {
+		if ( isset( $response['headers'] ) && isset( $response['headers']['content-type'] ) ) {
 			$content_type = $response['headers']['content-type'];
 			$response     = $response['body'];
 
@@ -71,12 +73,17 @@ class WPML_TP_API_Client {
 	/**
 	 * @param WPML_TP_API_Request $request
 	 *
-	 * @return null|string
+	 * @return null|WP_Error|string
 	 */
 	private function call_remote_api( WPML_TP_API_Request $request ) {
 		$context = $this->filter_request_params( $request->get_params(), $request->get_method() );
+		$url     = $request->get_url();
 
-		return $this->http->request( $this->proxy_url . $request->get_url(), $context );
+		if ( ! Str::startsWith( 'http://', $url ) && ! Str::startsWith( 'https://', $url ) ) {
+			$url = $this->proxy_url . $url;
+		}
+
+		return $this->http->request( $url, $context );
 	}
 
 	/**

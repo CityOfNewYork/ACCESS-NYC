@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'IWPML_ST_Rewrite_Rule_Filter' => $baseDir . '/classes/slug-translation/iwpml-st-rewrite-rule-filter.php',
     'IWPML_ST_String_Scanner' => $baseDir . '/classes/strings-scanning/iwpml-st-string-scanner.php',
     'IWPML_ST_Translations_File' => $baseDir . '/classes/translations-file-scan/translations-file/iwpml-st-translations-file.php',

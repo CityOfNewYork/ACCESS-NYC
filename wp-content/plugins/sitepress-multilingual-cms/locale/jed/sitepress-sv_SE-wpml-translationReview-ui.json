@@ -8,20 +8,32 @@
          "Accepted": [
             "Godkänd"
          ],
-         "Reviewing the next translation...": [
-            "Granskar nästa översättning..."
+         "Approved!": [
+            "Godkänd!"
+         ],
+         "Loading the next translation for review...": [
+            "Läser in nästa översättning för granskning..."
          ],
          "Back": [
             "Tillbaka"
          ],
-         "Edit Translation": [
-            "Redigera översättning"
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "Stäng av för att inte automatiskt ladda nästa översättning när du har avslutat den här granskningen."
          ],
-         "There was an error in applying translation.": [
-            "Det gick inte att använda översättningen."
+         "Turn on to automatically load the next translation after finishing this  .": [
+            "Slå på för att automatiskt läsa in nästa översättning efter att ha avslutat denna ."
+         ],
+         "Edit": [
+            "Redigera"
+         ],
+         "Edit translation": [
+            "Redigera översättning"
          ],
          "Please wait, applying translation..": [
             "Vänta, tillämpar översättning.."
+         ],
+         "Next review": [
+            "Nästa granskning"
          ],
          "Publish this translation": [
             "Publicera denna översättning"
@@ -29,11 +41,14 @@
          "Accept this translation": [
             "Godkänn denna översättning"
          ],
-         "Approved!": [
-            "Godkänd!"
+         "Published!": [
+            "Publicerat!"
          ],
-         "Loading the next translation for review...": [
-            "Läser in nästa översättning för granskning..."
+         "Someone is already reviewing this translation. Please try again later.": [
+            "Någon granskar redan den här översättningen. Försök igen senare."
+         ],
+         "There was an error in applying translation.": [
+            "Det gick inte att använda översättningen."
          ]
       }
    }

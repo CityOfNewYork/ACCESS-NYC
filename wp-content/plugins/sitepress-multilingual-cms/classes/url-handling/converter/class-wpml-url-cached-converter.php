@@ -23,7 +23,7 @@ class WPML_URL_Cached_Converter extends WPML_URL_Converter {
 		$skip_convert_url_string = $this->get_strategy()->skip_convert_url_string( $url, $lang_code );
 
 		$cache_key_args = array( $url, $lang_code, $negotiation_type, $skip_convert_url_string );
-		$cache_key      = md5( wp_json_encode( $cache_key_args ) );
+		$cache_key      = md5( (string) wp_json_encode( $cache_key_args ) );
 		$cache_group    = 'convert_url';
 		$cache_found    = false;
 		$cache          = new WPML_WP_Cache( $cache_group );

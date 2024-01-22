@@ -45,7 +45,7 @@ class WPML_Term_Element extends WPML_Translation_Element {
 	 * @return string
 	 */
 	public function get_type( $term = null ) {
-		if ( ! $this->taxonomy && $term && ! is_wp_error( $term ) ) {
+		if ( ! $this->taxonomy && $term instanceof WP_Term ) {
 			$this->taxonomy = $term->taxonomy;
 		}
 

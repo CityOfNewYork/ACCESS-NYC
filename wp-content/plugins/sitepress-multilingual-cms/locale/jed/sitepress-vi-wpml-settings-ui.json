@@ -3,7 +3,8 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "en"
          },
          "You can choose which posts to translate from the <strong>Translation Management Dashboard</strong>.": [
             "Bạn có thể chọn bài đăng nào cần dịch <strong>Bảng điều khiển Quản lý Dịch thuật</strong>."
@@ -13,6 +14,15 @@
          ],
          "No, I want to translate some of these posts, but not all": [
             "Không, tôi muốn dịch một vài bài đăng trong số này, nhưng không phải tất cả"
+         ],
+         "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
+            "Bạn phải sử dụng Trình biên tập Dịch thuật Nâng cao nếu bạn muốn dịch tự động nội dung của mình."
+         ],
+         "Synchronize translators and translation managers with ATE": [
+            "Đồng bộ những người dịch và quản lý dịch thuật bằng ATE"
+         ],
+         "Please try again in a few minutes. If the problem persists, please contact %sWPML support%s.": [
+            "Vui lòng thử lại sau vài phút. Nếu sự cố vẫn còn tiếp diễn, vui lòng liên hệ %sbộ phận hỗ trợ của WPML%s."
          ],
          "Save": [
             "Lưu"

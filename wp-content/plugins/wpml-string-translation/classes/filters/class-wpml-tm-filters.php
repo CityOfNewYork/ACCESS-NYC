@@ -56,8 +56,8 @@ class WPML_TM_Filters {
 	 * @return bool
 	 */
 	public function job_assigned_to_filter( $assigned_correctly, $string_translation_id, $translator_id, $service ) {
-		if ( ( ! $service || $service === 'local' ) && strpos( $string_translation_id, 'string|' ) !== false ) {
-			$string_translation_id = preg_replace( '/[^0-9]/', '', $string_translation_id );
+		if ( ( ! $service || $service === 'local' ) && strpos( (string) $string_translation_id, 'string|' ) !== false ) {
+			$string_translation_id = preg_replace( '/[^0-9]/', '', (string) $string_translation_id );
 			$this->wpdb->update(
 				$this->wpdb->prefix . 'icl_string_translations',
 				array( 'translator_id' => $translator_id ),

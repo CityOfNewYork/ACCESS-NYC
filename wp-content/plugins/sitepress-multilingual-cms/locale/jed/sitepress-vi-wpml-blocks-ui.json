@@ -1,0 +1,161 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "en"
+         },
+         "Advanced": [
+            ""
+         ],
+         "HTML anchor": [
+            ""
+         ],
+         "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
+            ""
+         ],
+         "Additional CSS class(es)": [
+            ""
+         ],
+         "Separate multiple classes with spaces.": [
+            ""
+         ],
+         "Color": [
+            ""
+         ],
+         "Dimensions": [
+            ""
+         ],
+         "BLOCK": [
+            ""
+         ],
+         "Block margin": [
+            ""
+         ],
+         "Block padding": [
+            ""
+         ],
+         "LANGUAGE": [
+            ""
+         ],
+         "Language spacing": [
+            ""
+         ],
+         "Language padding": [
+            ""
+         ],
+         "Display": [
+            ""
+         ],
+         "Show flag": [
+            ""
+         ],
+         "Show language name": [
+            ""
+         ],
+         "Display language name in": [
+            ""
+         ],
+         "Style": [
+            ""
+         ],
+         "Flag settings": [
+            ""
+         ],
+         "Width": [
+            ""
+         ],
+         "Height": [
+            ""
+         ],
+         "Spacing": [
+            ""
+         ],
+         "Allow wrapping to multiple lines": [
+            ""
+         ],
+         "Open on click": [
+            ""
+         ],
+         "Show arrow": [
+            ""
+         ],
+         "Layout": [
+            ""
+         ],
+         "Justification": [
+            ""
+         ],
+         "Orientation": [
+            ""
+         ],
+         "Typography": [
+            ""
+         ],
+         "Background": [
+            ""
+         ],
+         "Language Text": [
+            ""
+         ],
+         "Language Background": [
+            ""
+         ],
+         "Current language text": [
+            ""
+         ],
+         "Current language background": [
+            ""
+         ],
+         "Small": [
+            ""
+         ],
+         "Normal": [
+            ""
+         ],
+         "Medium": [
+            ""
+         ],
+         "Large": [
+            ""
+         ],
+         "X-Large": [
+            ""
+         ],
+         "Ab": [
+            ""
+         ],
+         "AB": [
+            ""
+         ],
+         "ab": [
+            ""
+         ],
+         "Displays the WPML Language Switcher.": [
+            ""
+         ],
+         "Language Switcher": [
+            ""
+         ],
+         "displays the WPML Language Switcher": [
+            ""
+         ],
+         "Navigation Language Switcher": [
+            ""
+         ],
+         "Reset all": [
+            ""
+         ],
+         "Minimum value is : ": [
+            ""
+         ],
+         "Maximum value is : ": [
+            ""
+         ],
+         "Value must be a number!": [
+            ""
+         ]
+      }
+   }
+}

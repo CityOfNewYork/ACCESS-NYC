@@ -19,7 +19,7 @@ class WPML_TM_Page_Builders_Hooks {
 	}
 
 	public function init_hooks() {
-		add_filter( 'wpml_tm_translation_job_data',         array( $this, 'translation_job_data_filter' ), 10, 2 );
+		add_filter( 'wpml_tm_translation_job_data',         array( $this, 'translation_job_data_filter' ), 10, 3 );
 		add_action( 'wpml_pro_translation_completed',       array( $this, 'pro_translation_completed_action' ), 10, 3 );
 		add_filter( 'wpml_tm_adjust_translation_fields',    array( $this, 'adjust_translation_fields_filter' ), 10, 2 );
 		add_filter( 'wpml_tm_job_layout',                   array( $this, 'job_layout_filter' ) );
@@ -30,12 +30,13 @@ class WPML_TM_Page_Builders_Hooks {
 	/**
 	 * @param array $translation_package
 	 * @param mixed $post
+	 * @param bool  $isOriginal
 	 *
 	 * @return array
 	 */
-	public function translation_job_data_filter( array $translation_package, $post ) {
+	public function translation_job_data_filter( array $translation_package, $post, $isOriginal = false ) {
 		$worker = $this->get_worker();
-		return $worker->translation_job_data_filter( $translation_package, $post );
+		return $worker->translation_job_data_filter( $translation_package, $post, $isOriginal );
 	}
 
 	/**

@@ -1,5 +1,7 @@
 <?php
 
+use WPML\API\Sanitize;
+
 class WPML_Translation_Jobs_Migration_Hooks_Factory implements IWPML_Backend_Action_Loader, IWPML_AJAX_Action_Loader {
 
 	/**
@@ -102,7 +104,7 @@ class WPML_Translation_Jobs_Migration_Hooks_Factory implements IWPML_Backend_Act
 	 */
 	private function get_request_uri() {
 		if ( isset( $_SERVER['REQUEST_URI'] ) ) {
-			return filter_var( wp_unslash( $_SERVER['REQUEST_URI'] ), FILTER_SANITIZE_STRING );
+			return wp_unslash( Sanitize::stringProp( 'REQUEST_URI', $_SERVER ) );
 		}
 
 		return '';

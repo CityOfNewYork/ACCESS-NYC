@@ -4,6 +4,7 @@ class WPML_Elementor_WooCommerce_Hooks {
 
 	public function add_hooks() {
 		add_filter( 'pre_get_posts', array( $this, 'do_not_suppress_filters_on_product_widget' ) );
+		add_filter( 'wcml_multi_currency_ajax_actions', [ $this, 'adjustCurrencyOnElementorCartFragments' ] );
 	}
 
 	/**
@@ -20,5 +21,15 @@ class WPML_Elementor_WooCommerce_Hooks {
 		}
 
 		return $query;
+	}
+
+	/**
+	 * @param  array $actions
+	 *
+	 * @return array
+	 */
+	public function adjustCurrencyOnElementorCartFragments( $actions ) {
+		$actions[] = 'elementor_menu_cart_fragments';
+		return $actions;
 	}
 }

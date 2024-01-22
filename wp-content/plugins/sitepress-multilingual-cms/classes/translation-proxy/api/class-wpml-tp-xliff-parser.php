@@ -2,6 +2,18 @@
 
 class WPML_TP_Xliff_Parser {
 
+	/** @var WPML_TM_Validate_HTML $validate_html */
+	private $validate_html;
+
+	/**
+	 * WPML_TP_Xliff_Parser constructor.
+	 *
+	 * @param WPML_TM_Validate_HTML $validate_html
+	 */
+	public function __construct( WPML_TM_Validate_HTML $validate_html ) {
+		$this->validate_html = $validate_html;
+	}
+
 	/**
 	 * @param SimpleXMLElement $xliff
 	 *
@@ -13,10 +25,15 @@ class WPML_TP_Xliff_Parser {
 
 		$translations = array();
 		foreach ( $xliff->file->body->children() as $node ) {
+			$source         = $this->get_cdata_value( $node, 'source' );
+			$target         = $this->get_cdata_value( $node, 'target' );
+			$sourceRestored = $this->validate_html->restore_html( $source );
+			$targetRestored = $this->validate_html->restore_html( $target );
+
 			$translations[] = new WPML_TP_Translation(
 				(string) $node->attributes()->id,
-				$this->get_cdata_value( $node, 'source' ),
-				$this->get_cdata_value( $node, 'target' )
+				( false !== $sourceRestored ) ? $sourceRestored : $source,
+				( false !== $targetRestored ) ? $targetRestored : $target
 			);
 		}
 

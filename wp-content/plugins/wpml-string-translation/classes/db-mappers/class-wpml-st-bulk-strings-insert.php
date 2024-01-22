@@ -8,7 +8,7 @@ class WPML_ST_Bulk_Strings_Insert {
 	/** @var wpdb */
 	private $wpdb;
 
-	/** @var int  */
+	/** @var int<1,max>  */
 	private $chunk_size = 1000;
 
 	/**

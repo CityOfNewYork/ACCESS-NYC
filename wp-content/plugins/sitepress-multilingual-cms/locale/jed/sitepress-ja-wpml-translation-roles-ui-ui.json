@@ -30,7 +30,7 @@
             "役割"
          ],
          "(required)": [
-            "(必要)"
+            " (必要)"
          ],
          "Make sure that you have provided a correct email address e.g. name@domain.com": [
             "正しいメールアドレスであることを確認してください。例、name@domain.com"
@@ -68,11 +68,8 @@
          "Add Translation Manager": [
             "Translation Managerを追加"
          ],
-         "Select an existing user and set as Translator": [
-            "既存のユーザーをトランスレーターとして設定"
-         ],
-         "Create a new user and set as Translator": [
-            "新ユーザーを作成し、トランスレーターとして設定する"
+         "Add a Translation Manager": [
+            "翻訳マネジャーを追加"
          ],
          "Set language pair(s)": [
             "言語ペアを設定"
@@ -85,6 +82,12 @@
          ],
          "Add a Translator": [
             "翻訳者を追加"
+         ],
+         "Select an existing user and set as Translator": [
+            "既存のユーザーをトランスレーターとして設定"
+         ],
+         "Create a new user and set as Translator": [
+            "新ユーザーを作成し、トランスレーターとして設定する"
          ],
          "Edit language pair(s) for translator": [
             "トランスレーターの言語ペアを編集"
@@ -131,26 +134,14 @@
          "Click here": [
             "ここをクリック"
          ],
-         "The name of your language as it will appear on your site's language switcher.": [
-            "サイトの言語スイッチャーに表示される言語名。"
-         ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
             "間違ったフォーマット。小文字と \"-\"のみを含んでください。例: \"fr\" , \"pt-br\", \"zh-hans\""
-         ],
-         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
-            "データベースとURLの言語を識別する独自の値。保存すると、言語コードは変更できません。"
          ],
          "Language": [
             "言語"
          ],
-         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
-            "カスタム言語が既存の言語に似ている場合、既存の言語のスペルチェックと自動翻訳を使用できます。例えば、あなたのカスタム言語がスイスドイツ語の場合、スペルチェックと自動翻訳の言語には、地図上でドイツ語を指定できます。地図上でカスタム言語を既存の言語として指定しない場合、スペルチェックと自動翻訳機能はその言語で利用できなくなります。"
-         ],
          "Location": [
             "位置"
-         ],
-         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
-            "MOとPOファイルから翻訳を読み込むとき、WPMLがチェックする値。デフォルトロケールは、あなたのWordPress 設定の/wp-content/languages/フォルダのファイル名に含まれています。"
          ],
          "Code": [
             "コード"
@@ -158,20 +149,11 @@
          "The language will not be supported by automatic translations": [
             "この言語は自動翻訳にサポートされていません"
          ],
-         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
-            "Googleは、ユーザーを彼らの関連言語と位置のサイトにダイレクトする際、hreflang属性を使用します。例："
-         ],
          "Language mapping": [
             "言語マッピング"
          ],
-         "All English-speaking users: en": [
-            "全ての英語を話すユーザー: en"
-         ],
          "Don't map this language": [
             "この言語は地図上で指定しないでください"
-         ],
-         "English for UK users: en-gb": [
-            "イギリスユーザーの英語: en-gb"
          ],
          "Default locale": [
             "初期設定ロケール"
@@ -179,14 +161,14 @@
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
             "間違ったフォーマット。小文字と\"_\"のみを含んでください。例: \"de\" , \"de_DE\", \"zh_Hant_TW\""
          ],
-         "English for US users: en-us": [
-            "アメリカユーザーの英語: en-us"
-         ],
          "hreflang": [
             "hreflang"
          ],
          "Encode url?": [
             "URLをエンコードしますか？\r\n"
+         ],
+         "Flags must be:": [
+            "フラッグは必須："
          ],
          "NO": [
             "いいえ"
@@ -200,8 +182,41 @@
          "Please fill in the field": [
             "フィールドに入力してください"
          ],
+         "PNG, SVG, or JPG files": [
+            "PNG、SVG、または JPG ファイル"
+         ],
          "Save language": [
             "言語を保存"
+         ],
+         "18 x 12 pixels": [
+            "18 x 12 ピクセル"
+         ],
+         "Read more about ": [
+            "詳細は次でお読みください"
+         ],
+         "The name of your language as it will appear on your site's language switcher.": [
+            "サイトの言語スイッチャーに表示される言語名。"
+         ],
+         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "データベースとURLの言語を識別する独自の値。保存すると、言語コードは変更できません。"
+         ],
+         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "カスタム言語が既存の言語に似ている場合、既存の言語のスペルチェックと自動翻訳を使用できます。例えば、あなたのカスタム言語がスイスドイツ語の場合、スペルチェックと自動翻訳の言語には、地図上でドイツ語を指定できます。地図上でカスタム言語を既存の言語として指定しない場合、スペルチェックと自動翻訳機能はその言語で利用できなくなります。"
+         ],
+         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "MOとPOファイルから翻訳を読み込むとき、WPMLがチェックする値。デフォルトロケールは、あなたのWordPress 設定の/wp-content/languages/フォルダのファイル名に含まれています。"
+         ],
+         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "Googleは、ユーザーを彼らの関連言語と位置のサイトにダイレクトする際、hreflang属性を使用します。例："
+         ],
+         "All English-speaking users: en": [
+            "全ての英語を話すユーザー: en"
+         ],
+         "English for UK users: en-gb": [
+            "イギリスユーザーの英語: en-gb"
+         ],
+         "English for US users: en-us": [
+            "アメリカユーザーの英語: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
             "この言語のURLがエンコードされているか、ASCII 文字を使用するかを特定します (はっきりしない場合、\"No\"にしてください)。"
@@ -230,18 +245,6 @@
          "What are the languages of your site?": [
             "サイトにどの言語を使用していますか？"
          ],
-         "+ Add a Translation Manager": [
-            "+ Translation Managerを追加"
-         ],
-         "+ Add a Translator": [
-            "+ 翻訳者を追加"
-         ],
-         "%sLocal translators%s are users of your site that can log in and add, edit, and review your site's translations. Add a translator and their associated translation pairs to assign them translation jobs.": [
-            "サイトにログインし、サイトの翻訳を追加、編集、レビューできる%sローカルトランスレーター%sが使用されています。関連言語ペアに翻訳者（トランスレーター）を追加し、翻訳ジョブを割り当ててください。"
-         ],
-         "Translators": [
-            "トランスレーター"
-         ],
          "You can add a dedicated person to oversee everything translation-related on your site. %sTranslation Managers%s can add new local translators or professional translation services, create and assign translation jobs, review completed translations, and change translation-related settings.": [
             "サイトに翻訳関連の全ての業務を監督する専任者を追加できます。%sTranslation Managers%s は、新しいローカルトランスレーターや専門的な翻訳サービスを追加し、翻訳ジョブの作成と割り当て、完了した翻訳のレビュー、翻訳関連の設定変更を実施します。"
          ],
@@ -250,6 +253,15 @@
          ],
          "Note: All Administrators are automatically given Translation Manager privileges.": [
             "注記：すべての管理者は自動的に翻訳マネジャーの特権を与えられます。"
+         ],
+         "%sLocal translators%s are users of your site that can log in and add, edit, and review your site's translations. Add a translator and their associated translation pairs to assign them translation jobs.": [
+            "サイトにログインし、サイトの翻訳を追加、編集、レビューできる%sローカルトランスレーター%sが使用されています。関連言語ペアに翻訳者（トランスレーター）を追加し、翻訳ジョブを割り当ててください。"
+         ],
+         "You can %shire an experienced translator%s to review your automatic translations for perfect quality.": [
+            "%s経験豊富な翻訳者%sを探し、自動翻訳のレビューを依頼することで、完璧な品質を確保できます。"
+         ],
+         "Translators": [
+            "トランスレーター"
          ]
       }
    }

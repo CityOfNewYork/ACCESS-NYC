@@ -31,12 +31,12 @@ class StringTranslation implements IFilter {
 		}
 
 		if ( $domain === ICL_STRING_TRANSLATION_DYNAMIC_CONTEXT ) {
-			icl_register_string( $domain, $name, $text );
+			icl_register_string( $domain, (string) $name, $text );
 		}
 
 		$has_translation = null;
 
-		$found_translation = icl_translate( $domain, $name, $text, false, $has_translation );
+		$found_translation = icl_translate( $domain, (string) $name, $text, false, $has_translation );
 
 		if ( $has_translation ) {
 			return $found_translation;

@@ -22,7 +22,7 @@
 				url: ajaxurl,
 				data: {
 					action: "update_wpml_config_index",
-					_icl_nonce: "<?php echo wp_create_nonce( 'icl_theme_plugins_compatibility_nonce' ); ?>"
+					_icl_nonce: "<?php echo wp_create_nonce( 'icl_theme_plugins_compatibility_nonce' ); ?>",
 				},
 				success: function (response) {
 					if (response)

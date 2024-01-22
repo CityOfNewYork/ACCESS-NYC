@@ -3,6 +3,7 @@
 namespace WPML\TM\Jobs\Dispatch;
 
 use WPML\Element\API\Languages;
+use WPML\TM\API\Jobs;
 
 class Packages extends Elements {
 
@@ -16,7 +17,7 @@ class Packages extends Elements {
 		parent::dispatch( $sendBatch, $messages, $buildBatch, $data, $type );
 	}
 
-	protected static function filterElements( Messages $messages, $packagesData, $targetLanguages ) {
+	protected static function filterElements( Messages $messages, $packagesData, $targetLanguages, $howToHandleExisting, $translateAutomatically ) {
 
 		$ignoredPackagesMessages = [];
 		$packagesToTranslation   = [];
@@ -36,12 +37,13 @@ class Packages extends Elements {
 					continue;
 				}
 
-				if ( self::hasInProgressJob(
-					$package->ID,
-					$package->get_element_type_prefix() . '_' . $package->kind_slug,
-					$language
-				) ) {
-					$ignoredPackagesMessages [] = $messages->ignoreInProgressPackageMessage( $package, $language );
+				$job = Jobs::getElementJob(
+					(int) $package->ID,
+					(string) $package->get_element_type_prefix() . '_' . $package->kind_slug,
+					(string) $language
+				);
+
+				if ( $job && ( self::isProgressJob( $job ) || self::isCompletedJob( $job ) && $howToHandleExisting === \WPML_TM_Translation_Batch::HANDLE_EXISTING_LEAVE ) ) {
 					continue;
 				}
 

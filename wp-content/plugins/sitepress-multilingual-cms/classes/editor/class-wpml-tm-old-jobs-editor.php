@@ -61,7 +61,12 @@ class WPML_TM_Old_Jobs_Editor {
 	}
 
 	public function set( $job_id, $editor ) {
-		$this->job_factory->update_job_data( $job_id, array( 'editor' => $editor ) );
+		$data = [ 'editor' => $editor ];
+		if ( $editor !== WPML_TM_Editors::ATE ) {
+			$data['editor_job_id'] = null;
+		}
+
+		$this->job_factory->update_job_data( $job_id, $data );
 	}
 
 

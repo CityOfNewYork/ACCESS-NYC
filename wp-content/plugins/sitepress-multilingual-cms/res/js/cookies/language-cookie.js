@@ -1,5 +1,6 @@
-jQuery(function () {
-    jQuery.each(wpml_cookies, function (cookieName, cookieData) {
-        document.cookie = cookieName + '=' + cookieData.value + ';expires=' + cookieData.expires + '; path=' + cookieData.path
-    });
+document.addEventListener('DOMContentLoaded', function() {
+	for(var cookieName in wpml_cookies) {
+		var cookieData = wpml_cookies[cookieName];
+		document.cookie = cookieName + '=' + cookieData.value + ';expires=' + cookieData.expires + '; path=' + cookieData.path;
+	}
 });

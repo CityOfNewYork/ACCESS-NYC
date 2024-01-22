@@ -8,7 +8,11 @@ class UpdateTranslation extends \WPML_Page_Builders_Update_Translation {
 	public function update_strings_in_modules( array &$data_array ) {
 		foreach ( $data_array as &$data ) {
 			if ( isset( $data[ TranslatableNodes::SETTINGS_FIELD ] ) ) {
-				$data = $this->update_strings_in_node( $data[ TranslatableNodes::SETTINGS_FIELD ]['class'], $data );
+				if ( TranslatableNodes::isWrappingModule( $data ) ) {
+					$this->update_strings_in_modules( $data[ TranslatableNodes::CHILDREN_FIELD ] );
+				} else {
+					$data = $this->update_strings_in_node( $data[ TranslatableNodes::SETTINGS_FIELD ]['class'], $data );
+				}
 			} elseif ( is_array( $data ) ) {
 				$this->update_strings_in_modules( $data );
 			}
@@ -29,5 +33,4 @@ class UpdateTranslation extends \WPML_Page_Builders_Update_Translation {
 		}
 		return $settings;
 	}
-
 }

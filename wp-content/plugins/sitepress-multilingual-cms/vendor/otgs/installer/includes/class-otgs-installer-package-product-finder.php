@@ -15,14 +15,13 @@ class OTGS_Installer_Package_Product_Finder {
 			$subscription = $repository->get_subscription();
 		}
 		if ( $subscription ) {
-			$type    = $subscription->get_type();
-			$product = $repository->get_product_by_subscription_type( $type );
+			$product = $repository->get_product_by_subscription_type();
 
 			if ( ! $product ) {
-				$product = $repository->get_product_by_subscription_type_equivalent( $type );
+				$product = $repository->get_product_by_subscription_type_equivalent();
 
 				if ( ! $product ) {
-					$product = $repository->get_product_by_subscription_type_on_upgrades( $type );
+					$product = $repository->get_product_by_subscription_type_on_upgrades();
 				}
 			}
 		}

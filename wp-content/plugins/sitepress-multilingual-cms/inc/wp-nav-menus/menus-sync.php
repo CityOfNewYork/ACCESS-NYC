@@ -67,7 +67,7 @@ class ICLMenusSync extends WPML_Menu_Sync_Functionality {
 		$menus = $wpdb->get_results(
 			$wpdb->prepare(
 				"
-            SELECT tm.term_id, tm.name FROM {$wpdb->terms} tm 
+            SELECT tm.term_id, tm.name FROM {$wpdb->terms} tm
                 JOIN {$wpdb->term_taxonomy} tx ON tx.term_id = tm.term_id
                 JOIN {$wpdb->prefix}icl_translations tr ON tr.element_id = tx.term_taxonomy_id AND tr.element_type='tax_nav_menu'
             WHERE tr.language_code=%s
@@ -91,7 +91,7 @@ class ICLMenusSync extends WPML_Menu_Sync_Functionality {
 		$menus = $wpdb->get_results(
 			$wpdb->prepare(
 				"
-            SELECT tm.term_id, tm.name FROM {$wpdb->terms} tm 
+            SELECT tm.term_id, tm.name FROM {$wpdb->terms} tm
                 JOIN {$wpdb->term_taxonomy} tx ON tx.term_id = tm.term_id
                 JOIN {$wpdb->prefix}icl_translations tr ON tr.element_id = tx.term_taxonomy_id AND tr.element_type='tax_nav_menu'
             WHERE tr.language_code=%s
@@ -349,7 +349,7 @@ class ICLMenusSync extends WPML_Menu_Sync_Functionality {
 								$item_sync_needed = false;
 								if ( $item_translation['menu_order'] != $item_translation['menu_order_new'] || $item_translation['depth'] != $item['depth'] ) { // MOVED
 									echo '<span class="icl_msync_item icl_msync_mov">' . esc_html( $item_translation['title'] ) . '</span>';
-									echo '<input type="hidden" name="sync[mov][' . esc_attr( $menu_id ) . '][' . esc_attr( $item['ID'] ) . '][' . esc_attr( $lang_code ) . '][' . esc_attr( $item_translation['menu_order_new'] ) . ']" value="' . esc_attr( $item_translation['title'] ) . '" />';
+									echo '<input type="hidden" name="sync[mov][' . esc_attr( (string) $menu_id ) . '][' . esc_attr( (string) $item['ID'] ) . '][' . esc_attr( (string) $lang_code ) . '][' . esc_attr( (string) $item_translation['menu_order_new'] ) . ']" value="' . esc_attr( (string) $item_translation['title'] ) . '" />';
 									$this->operations['mov'] = empty( $this->operations['mov'] ) ? 1
 										: $this->operations['mov'] ++;
 
@@ -401,8 +401,8 @@ class ICLMenusSync extends WPML_Menu_Sync_Functionality {
 								}
 							} elseif ( $item_translation && 'custom' === $item_translation['object_type'] ) {
 								// item translation does not exist but is a custom item that will be created
-								echo '<span class="icl_msync_item icl_msync_add">' . esc_html( $item_translation['title'] ) . ' @' . esc_html( $lang_code ) . '</span>';
-								echo '<input type="hidden" name="sync[add][' . esc_attr( $menu_id ) . '][' . esc_attr( $item['ID'] ) . '][' . esc_attr( $lang_code ) . ']" value="' . esc_attr( $item_translation['title'] . ' @' . $lang_code ) . '" />';
+								echo '<span class="icl_msync_item icl_msync_add">' . esc_html( $item_translation['title'] ) . ' @' . esc_html( (string) $lang_code ) . '</span>';
+								echo '<input type="hidden" name="sync[add][' . esc_attr( $menu_id ) . '][' . esc_attr( $item['ID'] ) . '][' . esc_attr( (string) $lang_code ) . ']" value="' . esc_attr( $item_translation['title'] . ' @' . $lang_code ) . '" />';
 								$this->incOperation( 'add' );
 							} elseif ( ! empty( $item_translation['object_id'] ) ) {
 								// item translation does not exist but translated object does
@@ -410,18 +410,18 @@ class ICLMenusSync extends WPML_Menu_Sync_Functionality {
 									echo '<span class="icl_msync_item icl_msync_not">' . esc_html( $item_translation['title'] ) . '</span>';
 									$this->operations['not'] = empty( $this->operations['not'] ) ? 1
 										: $this->operations['not'] ++;
-								} elseif ( ! icl_object_id( $item['ID'], 'nav_menu_item', false, $lang_code ) ) {
+								} elseif ( ! icl_object_id( $item['ID'], 'nav_menu_item', false, (string) $lang_code ) ) {
 									// item translation does not exist but translated object does
 									echo '<span class="icl_msync_item icl_msync_add">' . esc_html( $item_translation['title'] ) . '</span>';
-									echo '<input type="hidden" name="sync[add][' . esc_attr( $menu_id ) . '][' . esc_attr( $item['ID'] ) . '][' . esc_attr( $lang_code ) . ']" value="' . esc_attr( $item_translation['title'] ) . '" />';
+									echo '<input type="hidden" name="sync[add][' . esc_attr( $menu_id ) . '][' . esc_attr( $item['ID'] ) . '][' . esc_attr( (string) $lang_code ) . ']" value="' . esc_attr( $item_translation['title'] ) . '" />';
 									$this->incOperation( 'add' );
 								} else {
 									$need_sync --;
 								}
 							} elseif ( $item_translation && 'post_type_archive' === $item_translation['object_type'] ) {
 								// item translation does not exist but is a post type archive item that will be created
-								echo '<span class="icl_msync_item icl_msync_add">' . esc_html( $item_translation['title'] ) . ' @' . esc_html( $lang_code ) . '</span>';
-								echo '<input type="hidden" name="sync[add][' . esc_attr( $menu_id ) . '][' . esc_attr( $item['ID'] ) . '][' . esc_attr( $lang_code ) . ']" value="' . esc_attr( $item_translation['title'] . ' @' . $lang_code ) . '" />';
+								echo '<span class="icl_msync_item icl_msync_add">' . esc_html( $item_translation['title'] ) . ' @' . esc_html( (string) $lang_code ) . '</span>';
+								echo '<input type="hidden" name="sync[add][' . esc_attr( $menu_id ) . '][' . esc_attr( $item['ID'] ) . '][' . esc_attr( (string) $lang_code ) . ']" value="' . esc_attr( $item_translation['title'] . ' @' . $lang_code ) . '" />';
 								$this->incOperation( 'add' );
 							} else {
 								// item translation and object translation do not exist

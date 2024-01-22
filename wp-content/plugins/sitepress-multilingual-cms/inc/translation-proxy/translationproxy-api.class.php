@@ -92,8 +92,13 @@ if ( ! function_exists( 'gzdecode' ) ) {
 		if ( $len < 20 ) {
 			return;
 		}
-		$head                                     = substr( $gzdata, 0, 10 );
-		$head                                     = unpack( 'n1id/C1cm/C1flg/V1mtime/C1xfl/C1os', $head );
+		$head = substr( $gzdata, 0, 10 );
+		$head = unpack( 'n1id/C1cm/C1flg/V1mtime/C1xfl/C1os', $head );
+
+		if( ! $head ) {
+			return;
+		}
+
 		list( $ID, $CM, $FLG, $MTIME, $XFL, $OS ) = array_values( $head );
 		$FTEXT                                    = 1 << 0;
 		$FHCRC                                    = 1 << 1;
@@ -101,7 +106,12 @@ if ( ! function_exists( 'gzdecode' ) ) {
 		$FNAME                                    = 1 << 3;
 		$FCOMMENT                                 = 1 << 4;
 		$head                                     = unpack( 'V1crc/V1isize', substr( $gzdata, $len - 8, 8 ) );
-		list( $CRC32, $ISIZE )                    = array_values( $head );
+
+		if ( ! $head ) {
+			return;
+		}
+
+		list( $CRC32, $ISIZE ) = array_values( $head );
 
 		// -- check gzip stream identifier
 		if ( $ID != 0x1f8b ) {
@@ -142,10 +152,10 @@ if ( ! function_exists( 'gzdecode' ) ) {
 		}
 
 		// -- check+fin
-		$chk = crc32( $gzdata );
+		$chk = crc32( (string) $gzdata );
 		if ( $CRC32 != $chk ) {
 			trigger_error( "gzdecode: checksum failed (real$chk != comp$CRC32)", E_USER_WARNING );
-		} elseif ( $ISIZE != strlen( $gzdata ) ) {
+		} elseif ( $ISIZE != strlen( (string) $gzdata ) ) {
 			trigger_error( 'gzdecode: stream size mismatch', E_USER_WARNING );
 		} else {
 			return ( $gzdata );

@@ -204,7 +204,13 @@ function icl_reset_wpml( $blog_id = false ) {
 function icl_repair_broken_type_and_language_assignments() {
 	global $sitepress;
 
-	$lang_setter = new WPML_Fix_Type_Assignments( $sitepress );
+    $nonce = isset( $_GET['icl_nonce'] ) ? sanitize_text_field( $_GET['icl_nonce'] ) : '';
+
+    if ( ! wp_verify_nonce( $nonce, 'broken_type_nonce' ) ) {
+        wp_send_json_error( esc_html__( 'Invalid request!', 'sitepress' ) );
+    }
+
+    $lang_setter = new WPML_Fix_Type_Assignments( $sitepress );
 	$rows_fixed  = $lang_setter->run();
 
 	wp_send_json_success( $rows_fixed );

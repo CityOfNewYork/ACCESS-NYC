@@ -38,9 +38,15 @@ class TranslationProxy_Translator {
 			return $result;
 		}
 
-		$translator_status = array();
-		$website_details   = self::get_website_details(
-			new TranslationProxy_Project( TranslationProxy::get_current_service(), 'xmlrpc', TranslationProxy::get_tp_client() ),
+		$translator_status   = array();
+		$translation_service = TranslationProxy::get_current_service();
+
+		if ( ! $translation_service instanceof TranslationProxy_Service ) {
+			return [];
+		}
+
+		$website_details = self::get_website_details(
+			new TranslationProxy_Project( $translation_service, 'xmlrpc', TranslationProxy::get_tp_client() ),
 			$force
 		);
 

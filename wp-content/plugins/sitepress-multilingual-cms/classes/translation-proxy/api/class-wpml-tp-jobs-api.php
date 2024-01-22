@@ -1,5 +1,7 @@
 <?php
 
+use WPML\FP\Obj;
+
 class WPML_TP_Jobs_API extends WPML_TP_API {
 
 	const CHUNK_SIZE = 100;
@@ -133,4 +135,28 @@ class WPML_TP_Jobs_API extends WPML_TP_API {
 		return array_map( array( $this, 'build_job_status' ), $result );
 	}
 
+	/**
+	 * @param int $tp_job_id
+	 *
+	 * @return string
+	 * @throws WPML_TP_API_Exception When response is incorrect.
+	 */
+	public function get_translated_xliff_download_url( $tp_job_id ) {
+		$request = new WPML_TP_API_Request( '/jobs.json' );
+
+		$params = [
+			'filter'    => [
+				'job_ids' => $tp_job_id,
+			],
+			'accesskey' => $this->project->get_access_key(),
+		];
+		$request->set_params( $params );
+
+		$result = $this->client->send_request( $request );
+		if ( ! $result || ! is_array( $result ) || 0 === count( $result ) || ! is_object( $result[0] ) ) {
+			throw new WPML_TP_API_Exception( 'XLIFF download link could not be fetched for tp_job: ' . $tp_job_id, $request );
+		}
+
+		return Obj::propOr( '', 'translated_xliff_download_url', $result[0] );
+	}
 }

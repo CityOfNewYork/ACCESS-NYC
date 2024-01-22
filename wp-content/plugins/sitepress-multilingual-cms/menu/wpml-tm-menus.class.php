@@ -1,6 +1,9 @@
 <?php
-if ( filter_input( INPUT_GET, 'sm', FILTER_SANITIZE_STRING ) === 'basket' ) {
-	add_action( 'admin_enqueue_scripts', array( 'SitePress_Table_Basket', 'enqueue_js' ) );
+
+use WPML\API\Sanitize;
+
+if ( Sanitize::stringProp( 'sm', $_GET ) === 'basket' ) {
+    add_action( 'admin_enqueue_scripts', array( 'SitePress_Table_Basket', 'enqueue_js' ) );
 }
 
 abstract class WPML_TM_Menus {

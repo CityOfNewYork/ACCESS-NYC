@@ -30,7 +30,7 @@ class WPML_Custom_Fields_Post_Meta_Info implements IWPML_Action {
 			$meta_id = filter_var( $_GET['meta_id'], FILTER_SANITIZE_NUMBER_INT );
 			if ( $meta_id ) {
 				/** @var \stdClass $custom_field */
-				$custom_field = get_post_meta_by_id( $meta_id );
+				$custom_field = get_post_meta_by_id( (int) $meta_id );
 				if ( $custom_field ) {
 					$post_id  = $custom_field->post_id;
 					$meta_key = $custom_field->meta_key;
