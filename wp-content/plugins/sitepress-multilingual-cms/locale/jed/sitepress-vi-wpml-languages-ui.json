@@ -3,8 +3,12 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "en"
          },
+         "Cancel": [
+            "Hủy"
+         ],
          "Choose Content to Automatically Translate into": [
             "Chọn nội dung để tự động dịch sang"
          ],
@@ -17,9 +21,6 @@
          "Save": [
             "Lưu"
          ],
-         "Choose Content to Automatically Translate into New Language": [
-            "Chọn nội dung để Tự động Dịch sang Ngôn ngữ mới"
-         ],
          "Add languages and start translating": [
             "Thêm các ngôn ngữ và bắt đầu dịch."
          ],
@@ -31,6 +32,9 @@
          ],
          "Never mind. Don't add new language": [
             "Không sao. Không thêm ngôn ngữ mới"
+         ],
+         "Choose Content to Automatically Translate into New Language": [
+            "Chọn nội dung để Tự động Dịch sang Ngôn ngữ mới"
          ],
          "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
             "Tự động dịch tất cả các bài đăng và trang hiện có của tôi ngay, cùng với nội dung mới như tôi đã tạo."

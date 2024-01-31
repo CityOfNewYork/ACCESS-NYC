@@ -3,25 +3,38 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "it_IT"
          },
          "Accepted": [
             "Accettata"
          ],
-         "Reviewing the next translation...": [
-            "Revisione della prossima traduzione..."
+         "Approved!": [
+            "Approvata!"
+         ],
+         "Loading the next translation for review...": [
+            "Caricamento della prossima traduzione per la revisione..."
          ],
          "Back": [
             "Indietro"
          ],
-         "Edit Translation": [
-            "Modifica la traduzione"
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "Disattiva questa opzione per non caricare automaticamente la traduzione successiva dopo aver terminato questa revisione."
          ],
-         "There was an error in applying translation.": [
-            "Si è verificato un errore durante l'applicazione della traduzione."
+         "Turn on to automatically load the next translation after finishing this  .": [
+            "Attiva per caricare automaticamente la traduzione successiva dopo il termine di questa."
+         ],
+         "Edit": [
+            "Modifica"
+         ],
+         "Edit translation": [
+            "Modifica la traduzione"
          ],
          "Please wait, applying translation..": [
             "Attendi, applicazione della traduzione in corso..."
+         ],
+         "Next review": [
+            "Prossima revisione"
          ],
          "Publish this translation": [
             "Pubblica questa traduzione"
@@ -29,11 +42,14 @@
          "Accept this translation": [
             "Accetta questa traduzione"
          ],
-         "Approved!": [
-            "Approvata!"
+         "Published!": [
+            "Pubblicata!"
          ],
-         "Loading the next translation for review...": [
-            "Caricamento della prossima traduzione per la revisione..."
+         "Someone is already reviewing this translation. Please try again later.": [
+            "Qualcuno sta già revisionando questa traduzione. Riprova più tardi."
+         ],
+         "There was an error in applying translation.": [
+            "Si è verificato un errore durante l'applicazione della traduzione."
          ]
       }
    }

@@ -1,5 +1,6 @@
 <?php
 
+use WPML\API\Sanitize;
 use WPML\Compatibility\FusionBuilder\BaseHooks;
 
 class WPML_Compatibility_Plugin_Fusion_Global_Element_Hooks extends BaseHooks implements \IWPML_Action {
@@ -76,7 +77,7 @@ class WPML_Compatibility_Plugin_Fusion_Global_Element_Hooks extends BaseHooks im
 	public function wpml_ls_exclude_in_menu_filter( $render ) {
 		// Nonce is checked by fusion builder plugin.
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing
-		$action = isset( $_POST['action'] ) ? filter_var( wp_unslash( $_POST['action'] ), FILTER_SANITIZE_STRING ) : '';
+		$action = isset( $_POST['action'] ) ? Sanitize::string( wp_unslash( $_POST['action'] ) ) : '';
 
 		if ( wp_doing_ajax() && 'fusion_app_partial_refresh' === $action ) {
 			return false;
@@ -165,7 +166,7 @@ class WPML_Compatibility_Plugin_Fusion_Global_Element_Hooks extends BaseHooks im
 	public function get_template_translation_icons() {
 		check_admin_referer( self::ACTION, 'nonce' );
 
-		$ids = isset( $_POST['ids'] ) ? filter_var( wp_unslash( $_POST['ids'] ), FILTER_SANITIZE_STRING ) : '';
+		$ids = isset( $_POST['ids'] ) ? Sanitize::string( wp_unslash( $_POST['ids'] ) ) : '';
 		$ids = empty( $ids ) ? [] : array_unique( array_map( 'intval', explode( ',', $ids ) ) );
 
 		$icons = [];

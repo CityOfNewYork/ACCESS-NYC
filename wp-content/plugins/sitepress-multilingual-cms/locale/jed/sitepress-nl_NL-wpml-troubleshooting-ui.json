@@ -1,0 +1,40 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Preparing...": [
+            "Voorbereiden..."
+         ],
+         "All jobs have been cancelled": [
+            "Alle opdrachten zijn geannuleerd"
+         ],
+         "There is no more jobs to cancel": [
+            "Er zijn geen opdrachten meer om te annuleren"
+         ],
+         "The jobs cancellation has failed": [
+            "Het annuleren van opdrachten is mislukt"
+         ],
+         "Cancel in-progress automatic jobs": [
+            "Annuleer lopende automatische opdrachten"
+         ],
+         "Domain name has been updated": [
+            "Domeinnaam is bijgewerkt"
+         ],
+         "Domain name update has been failed": [
+            "Domeinnaam aanpassing is mislukt"
+         ],
+         "Update domain name in language switcher settings": [
+            "Domeinnaam bijwerken in instellingen voor taalswitcher"
+         ],
+         "Refresh license data to recognise license update": [
+            "Licentiegegevens verversen om licentie-update te herkennen"
+         ],
+         "WPML License has been refreshed": [
+            "WPML licentie is geüpdatet"
+         ]
+      }
+   }
+}

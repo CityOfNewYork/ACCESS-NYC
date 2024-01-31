@@ -147,6 +147,20 @@ class OTGS_Installer_Subscription {
 		         || ( $this->get_status() === self::SUBSCRIPTION_STATUS_ACTIVE && ! $this->is_expired( $expiredForPeriod ) ) );
 	}
 
+	/**
+	 * @param int $expiredForPeriod
+	 * @return bool
+	 */
+	public function is_in_grace( $expiredForPeriod = 0 ) {
+		return ! $this->is_lifetime()
+			&& (
+				self::SUBSCRIPTION_STATUS_ACTIVE === $this->get_status()
+				&& ( $this->get_expiration() &&
+					( strtotime( $this->get_expiration() ) >= time() - $expiredForPeriod &&
+						strtotime( $this->get_expiration() ) <= time() ) )
+			);
+	}
+
 	public function is_refunded() {
 		return ! $this->is_lifetime() &&
 		       $this->get_status() === self::SUBSCRIPTION_STATUS_INACTIVE &&

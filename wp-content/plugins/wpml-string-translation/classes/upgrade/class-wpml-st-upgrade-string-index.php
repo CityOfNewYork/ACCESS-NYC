@@ -17,8 +17,9 @@ class WPML_ST_Upgrade_String_Index {
 		$key_exists = get_option( self::OPTION_NAME );
 		if ( ! $key_exists ) {
 			$sql = "SHOW KEYS FROM  {$this->wpdb->prefix}icl_strings WHERE Key_name='uc_domain_name_context_md5' AND Non_unique = 0";
-
-			$key_exists = 0 < count( $this->wpdb->get_results( $sql ) ) ? 'yes' : 'no';
+			/** @var array<int, object> $results */
+			$results = $this->wpdb->get_results( $sql );
+			$key_exists = 0 < count( $results ) ? 'yes' : 'no';
 			update_option( self::OPTION_NAME, $key_exists, true );
 		}
 

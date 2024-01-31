@@ -63,25 +63,6 @@ class WPML_Inactive_Content {
 		return $counts;
 	}
 
-	/** @return array */
-	public function get_total_counts() {
-		$total_counts = array();
-
-		foreach ( $this->get_language_counts_rows() as $lang_counts ) {
-
-			for ( $i = 0; $i < count( $lang_counts ); $i++ ) {
-
-				if ( ! isset( $total_counts[ $i ] ) ) {
-					$total_counts[ $i ] = 0;
-				}
-
-				$total_counts[ $i ] += $lang_counts[ $i ];
-			}
-		}
-
-		return $total_counts;
-	}
-
 	/**
 	 * @param string $lang
 	 * @param string $type
@@ -96,6 +77,15 @@ class WPML_Inactive_Content {
 		}
 
 		return 0;
+	}
+
+	/**
+	 * @param $langName
+	 *
+	 * @return string
+	 */
+	public function getLangCode( $langName ) {
+		return \WPML\Element\API\Languages::getCodeByName($langName);
 	}
 
 	/** @return array */
@@ -138,11 +128,14 @@ class WPML_Inactive_Content {
 					JOIN {$this->wpdb->prefix}icl_languages_translations languages_translations
 						ON languages_translations.language_code = languages.code
 							AND languages_translations.display_language_code = %s
-					WHERE translations.element_type LIKE %s
+					WHERE translations.element_type LIKE %s AND translations.element_type NOT LIKE %s 
 					GROUP BY posts.taxonomy, translations.language_code
 				",
-				$this->current_language,
-				wpml_like_escape( 'tax_' ) . '%'
+				[
+					$this->current_language,
+					wpml_like_escape( 'tax_' ) . '%',
+					'%'. wpml_like_escape('tax_translation_priority') . '%'
+				]
 			);
 
 			$tax_results = $this->wpdb->get_results( $tax_query );

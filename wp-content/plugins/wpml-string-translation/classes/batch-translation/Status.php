@@ -41,6 +41,7 @@ class Status {
 			$trids = $keyByBatchId( $trids );
 
 			$in       = wpml_prepare_in( $trids, '%d' );
+			/** @var array $transIds */
 			$transIds = $wpdb->get_results(
 				"SELECT translation_id, trid, language_code FROM {$wpdb->prefix}icl_translations WHERE trid IN ({$in}) AND source_language_code IS NOT NULL"
 			);

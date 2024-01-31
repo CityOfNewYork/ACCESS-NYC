@@ -1,0 +1,40 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Preparing...": [
+            "جارٍ التحضير..."
+         ],
+         "All jobs have been cancelled": [
+            "تم إلغاء جميع المهام"
+         ],
+         "There is no more jobs to cancel": [
+            "لا يوجد المزيد من المهام لإلغائها"
+         ],
+         "The jobs cancellation has failed": [
+            "فشلت عملية إلغاء المهام"
+         ],
+         "Cancel in-progress automatic jobs": [
+            "إلغاء مهام الترجمة الآلية قيد التنفيذ"
+         ],
+         "Domain name has been updated": [
+            "تم تحديث اسم النطاق"
+         ],
+         "Domain name update has been failed": [
+            "فشل تحديث اسم النطاق"
+         ],
+         "Update domain name in language switcher settings": [
+            "تحديث اسم النطاق في إعدادات محوّل اللغة"
+         ],
+         "Refresh license data to recognise license update": [
+            "أعد تحديث بيانات الترخيص لإعادة التعرف على تحديث الترخيص"
+         ],
+         "WPML License has been refreshed": [
+            "تم تحديث ترخيص WPML"
+         ]
+      }
+   }
+}

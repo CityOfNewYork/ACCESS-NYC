@@ -1,5 +1,7 @@
 <?php
 
+use WPML\PB\BeaverBuilder\BeaverThemer\HooksFactory as BeaverThemer;
+
 class WPML_Beaver_Builder_Data_Settings implements IWPML_Page_Builders_Data_Settings {
 
 	/**
@@ -20,7 +22,24 @@ class WPML_Beaver_Builder_Data_Settings implements IWPML_Page_Builders_Data_Sett
 	 * @return array
 	 */
 	public function get_fields_to_copy() {
-		return array( '_fl_builder_draft_settings', '_fl_builder_data_settings', '_fl_builder_enabled' );
+		$fields = [
+			'_fl_builder_draft_settings',
+			'_fl_builder_data_settings',
+			'_fl_builder_enabled',
+		];
+
+		if ( BeaverThemer::isActive() ) {
+			return array_merge(
+				$fields,
+				[
+					'_fl_theme_builder_locations',
+					'_fl_theme_builder_exclusions',
+					'_fl_theme_builder_edit_mode',
+				]
+			);
+		}
+
+		return $fields;
 	}
 
 	/**
@@ -44,7 +63,7 @@ class WPML_Beaver_Builder_Data_Settings implements IWPML_Page_Builders_Data_Sett
 	/**
 	 * @return string
 	 */
-	public function get_pb_name(){
+	public function get_pb_name() {
 		return 'Beaver builder';
 	}
 

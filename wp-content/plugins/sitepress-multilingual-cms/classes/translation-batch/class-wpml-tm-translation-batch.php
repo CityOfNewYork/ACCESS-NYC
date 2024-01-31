@@ -1,6 +1,12 @@
 <?php
 
+use WPML\FP\Lst;
+
 class WPML_TM_Translation_Batch {
+
+	const HANDLE_EXISTING_LEAVE = 'leave';
+	const HANDLE_EXISTING_OVERRIDE = 'override';
+
 	/** @var WPML_TM_Translation_Batch_Element[] */
 	private $elements;
 
@@ -12,6 +18,12 @@ class WPML_TM_Translation_Batch {
 
 	/** @var DateTime */
 	private $deadline;
+
+	/** @var "auto"|"manual"|null  */
+	private $translationMode = null;
+
+	/** @var string  */
+	private $howToHandleExisting = self::HANDLE_EXISTING_LEAVE;
 
 	/**
 	 * @param WPML_TM_Translation_Batch_Element[] $elements
@@ -131,5 +143,33 @@ class WPML_TM_Translation_Batch {
 			'basket_name'   => $this->get_basket_name(),
 			'deadline_date' => $this->get_deadline() ? $this->get_deadline()->format( 'Y-m-d' ) : '',
 		);
+	}
+
+	/**
+	 * @return "auto"|"manual"|null
+	 */
+	public function getTranslationMode() {
+		return $this->translationMode;
+	}
+
+	/**
+	 * @param "auto"|"manual"|null $translationMode
+	 */
+	public function setTranslationMode( $translationMode ) {
+		$this->translationMode = Lst::includes( $translationMode, [ 'auto', 'manual' ] ) ? $translationMode : null;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getHowToHandleExisting() {
+		return $this->howToHandleExisting;
+	}
+
+	/**
+	 * @param string $howToHandleExisting
+	 */
+	public function setHowToHandleExisting( $howToHandleExisting ) {
+		$this->howToHandleExisting = $howToHandleExisting;
 	}
 }

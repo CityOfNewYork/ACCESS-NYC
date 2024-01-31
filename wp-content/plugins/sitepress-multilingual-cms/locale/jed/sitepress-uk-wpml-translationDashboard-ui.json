@@ -1,0 +1,59 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "en"
+         },
+         "Error": [
+            "Помилка"
+         ],
+         "Draft — Pending review": [
+            "Чернетка – Чекає на перевірку"
+         ],
+         "Complete": [
+            "Завершений"
+         ],
+         "Insufficient funds": [
+            "Недостатньо коштів"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "Автоматичні переклади, що очікують, буде скасовано."
+         ],
+         "Save": [
+            "Зберегти"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "Щоб перекласти вміст, перейдіть у <a>Консоль керування перекладами</a>."
+         ],
+         "Review the translations before publishing": [
+            "Перевірити переклади перед публікуванням"
+         ],
+         "Publish translations and review them later": [
+            "Опублікувати переклади і перевірити пізніше"
+         ],
+         "Publish translations without reviewing": [
+            "Опублікувати переклади без перевірки"
+         ],
+         "Translate Everything": [
+            "Перекласти все"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "WPML автоматично перекладе вміст, що публікується або оновлюється."
+         ],
+         "How do you want to translate this site?": [
+            "Як перекласти цей веб-сайт?"
+         ],
+         "Translate Some": [
+            "Перекласти окремі"
+         ],
+         "I want to choose which content to translate": [
+            "Я хочу вибрати вміст на переклад"
+         ],
+         "Translate": [
+            "Перекласти"
+         ]
+      }
+   }
+}

@@ -22,7 +22,6 @@ class Recommendation {
 	}
 
 	/**
-	 * @param callable $getActivatedPlugins
 	 * @param array $initialNotices
 	 *
 	 * @return array

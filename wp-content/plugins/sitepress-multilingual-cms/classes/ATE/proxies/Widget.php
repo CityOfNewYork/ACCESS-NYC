@@ -1,6 +1,9 @@
 <?php
 namespace WPML\ATE\Proxies;
 
+use WPML\API\Sanitize;
+use WPML\LIB\WP\User;
+
 class Widget implements \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	const QUERY_VAR_ATE_WIDGET_SCRIPT = 'wpml-app';
 	const SCRIPT_NAME                 = 'ate-widget';
@@ -26,13 +29,11 @@ class Widget implements \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	 * @return string|void
 	 */
 	public function get_script() {
-		if (
-			! current_user_can( \WPML_Manage_Translations_Role::CAPABILITY ) &&
-			! current_user_can( 'manage_options' ) ) {
+		if ( ! User::canManageTranslations() ) {
 			return false;
 		}
 
-		$app = filter_input( INPUT_GET, self::QUERY_VAR_ATE_WIDGET_SCRIPT, FILTER_SANITIZE_STRING );
+		$app = Sanitize::stringProp( self::QUERY_VAR_ATE_WIDGET_SCRIPT, $_GET );
 
 		if ( self::SCRIPT_NAME !== $app ) {
 			return false;

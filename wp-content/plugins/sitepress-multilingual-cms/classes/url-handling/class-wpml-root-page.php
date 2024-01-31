@@ -73,7 +73,7 @@ class WPML_Root_Page {
 	public static function uses_html_root() {
 		$urls = icl_get_setting( 'urls' );
 
-		return isset( $urls['root_page'] ) && isset( $urls['show_on_root'] ) && $urls['show_on_root'] === 'html_file';
+		return isset( $urls['root_page'] ) && isset( $urls['show_on_root'] ) && $urls['directory_for_default_language'] && 'html_file' === $urls['show_on_root'];
 	}
 
 	/**
@@ -98,7 +98,7 @@ class WPML_Root_Page {
 
 		$root_slug = false;
 		if ( $root_id ) {
-			$root_page_object = get_post( $root_id );
+			$root_page_object = get_post( (int) $root_id );
 			if ( $root_page_object && isset( $root_page_object->post_name ) ) {
 				$root_slug = $root_page_object->post_name;
 			}

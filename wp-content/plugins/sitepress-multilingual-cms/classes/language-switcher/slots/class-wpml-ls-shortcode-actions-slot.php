@@ -34,7 +34,7 @@ class WPML_LS_Shortcode_Actions_Slot extends WPML_LS_Slot {
 		 *
 		 * @since 4.3.0
 		 *
-		 * @param bool The original status.
+		 * @param bool $is_enabled The original status.
 		 */
 		return apply_filters( 'wpml_custom_language_switcher_is_enabled', parent::is_enabled() );
 	}

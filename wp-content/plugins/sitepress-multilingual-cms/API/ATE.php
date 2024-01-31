@@ -29,7 +29,12 @@ class ATE {
 			return [];
 		}
 
-		return wpml_collect( json_decode( wp_json_encode( $response ), true ) )->first(
+		$encoded = wp_json_encode( $response );
+		if ( ! $encoded ) {
+			return [];
+		}
+
+		return wpml_collect( json_decode( $encoded, true ) )->first(
 			pipe(
 				Obj::prop( 'ate_job_id' ),
 				Relation::equals( $ateJobId )

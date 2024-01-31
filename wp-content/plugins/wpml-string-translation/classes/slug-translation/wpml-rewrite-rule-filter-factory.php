@@ -13,7 +13,7 @@ class WPML_Rewrite_Rule_Filter_Factory {
 		}
 
 		$slug_records_factory = new WPML_Slug_Translation_Records_Factory();
-		$slug_translations    = new WPML_ST_Slug_Translations( $sitepress );
+		$slug_translations    = new WPML_ST_Slug_Translations();
 
 		$custom_types_repositories = array(
 			new WPML_ST_Slug_Translation_Post_Custom_Types_Repository(

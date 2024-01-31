@@ -2,6 +2,8 @@
 
 namespace WPML\FP;
 
+use WPML\FP\Invoker\_Invoker;
+
 /**
  * Wraps the given function and returns a function that can take arguments as an array and invokes
  * the wrapped function with individual arguments

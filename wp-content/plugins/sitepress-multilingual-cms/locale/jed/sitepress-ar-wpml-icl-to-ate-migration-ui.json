@@ -1,0 +1,253 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "From:": [
+            "من:"
+         ],
+         "--Choose language--": [
+            "--اختيار اللغة--"
+         ],
+         "to:": [
+            "إلى:"
+         ],
+         "Set language pair(s) for Translator %s:": [
+            "تعيين زوج (أزواج) اللغة إلى المترجم %s:"
+         ],
+         "+ Add more language pairs for this translator": [
+            "+ إضافة المزيد من أزواج اللغة لهذا المترجم"
+         ],
+         "Translation Memory was successfully copied to Advanced Translation Editor.": [
+            "تم نسخ ذاكرة الترجمة بنجاح إلى محرر الترجمة المتقدم."
+         ],
+         "Deactivate ICanLocalize.com as Translation Service on this site": [
+            "تعطيل ICanLocalize.com كخدمة ترجمة على هذا الموقع"
+         ],
+         "Missing a translator? Or were new jobs since the last copy of the Translation Memory?": [
+            "ألا تجد المترجم؟ أم هناك مهام جديدة منذ النسخ الأخير لذاكرة الترجمة؟"
+         ],
+         "Enter here your ICanLocalize authentication details.": [
+            "أدخل بيانات تسجيل الدخول إلى ICanLocalize هنا."
+         ],
+         "API Token:": [
+            "رمز واجهة البرمجة:"
+         ],
+         "Please enter valid value for ICL token.": [
+            "يُرجى إدخال قيمة صالحة لرمز ICL."
+         ],
+         "Enter ICL API token here": [
+            "أدخل رمز واجهة برمجة ICL هنا"
+         ],
+         "Submit": [
+            "أرسل"
+         ],
+         "Sign up": [
+            "اشتراك"
+         ],
+         "to ICanLocalize to receive your API token.": [
+            "إلى ICanLocalize لتحصل على رمز واجهة البرمجة الخاص بك."
+         ],
+         "Already have an account? Login and": [
+            "هل لديك حساب بالفعل؟ سجل الدخول و"
+         ],
+         "get your token.": [
+            "احصل على رمزك."
+         ],
+         "Copy new Translation Memory to Advanced Translation Memory": [
+            "نسخ ذاكرة الترجمة الجديدة إلى ذاكرة الترجمة المتقدمة"
+         ],
+         "Import translation memory": [
+            "استيراد ذاكرة الترجمة"
+         ],
+         "ICanLocalize is already deactivated on this site": [
+            "تم تعطيل ICanLocalize بالفعل على هذا الموقع"
+         ],
+         "You can still import Translators or Copy Translation Memory to Advanced Translator Editor": [
+            "ما زال بإمكانك استيراد المترجمين أو نسخ ذاكرة الترجمة إلى محرر الترجمة المتقدم"
+         ],
+         "Move from ICanLocalize.com to Advanced Translation Editor": [
+            "النقل من ICanLocalize.com إلى محرر الترجمة المتقدم"
+         ],
+         "Import translators": [
+            "استيراد المترجمين"
+         ],
+         "Come back": [
+            "راجعنا مرة أخرى"
+         ],
+         "Cancel": [
+            "إلغاء"
+         ],
+         "Save": [
+            "حفظ"
+         ],
+         "Name": [
+            "الاسم"
+         ],
+         "Language Pairs": [
+            "أزواج اللغة"
+         ],
+         "Not supported pairs:": [
+            "لا توجد أزواج مدعومة:"
+         ],
+         "ICanLocalize.com deactivated": [
+            "خدمة ICanLocalize.com معطلة"
+         ],
+         "Translate memory is imported": [
+            "تم استيراد ذاكرة الترجمة"
+         ],
+         "There is no translators in ICL": [
+            "لا يوجد مترجمون في ICL"
+         ],
+         "Translators saved": [
+            "تم حفظ المترجمين"
+         ],
+         "%s file upload failed.": [
+            "فشل رفع الملف %s."
+         ],
+         "Flag": [
+            "راية"
+         ],
+         "Flag file": [
+            "ملف العلم"
+         ],
+         "You just added  language. Next, select it as the site's default language or a translation language.": [
+            "لقد أضفت لغة للتو. بعد ذلك، قم بتحديدها كاللغة الافتراضية للموقع أو كلغة ترجمة."
+         ],
+         "Language added": [
+            "تمت إضافة اللغة"
+         ],
+         "The value \"%s\" already exists": [
+            "القيمة \"%s\" موجودة بالفعل"
+         ],
+         "Add a new language": [
+            "إضافة لغة جديدة"
+         ],
+         "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
+            "أنشئ لغة محددة لبلد معين عن طريق اختيار اللغة العامة من القائمة أدناه. وبعد ذلك، قم باختيار البلد التي يجب توطينها إليها."
+         ],
+         "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
+            "باختيارك لتوليفة موجودة بالفعل في قاعدة البيانات، سيكون بمقدور WPML مساعدتك في تعبئة الحقول الضرورية. اقرأ المزيد عن <AddingACustomLanguageLink />."
+         ],
+         "Cannot find?": [
+            "ألا يمكنك العثور عليه؟"
+         ],
+         "Click here": [
+            "انقر هنا"
+         ],
+         "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
+            "التنسيق خاطئ. يمكنه أن يحتوي على أحرف صغيرة و\"-\" فقط. على سبيل المثال: \"fr\" , \"pt-br\", \"zh-hans\""
+         ],
+         "Language": [
+            "اللغة"
+         ],
+         "Location": [
+            "الموقع"
+         ],
+         "Code": [
+            "الكود"
+         ],
+         "The language will not be supported by automatic translations": [
+            "لن تكون اللغة مدعومة بالترجمات الآلية"
+         ],
+         "Language mapping": [
+            "تخطيط اللغة"
+         ],
+         "Don't map this language": [
+            "عدم تعيين هذه اللغة"
+         ],
+         "Default locale": [
+            "الموضع الأساسي"
+         ],
+         "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
+            "التنسيق خاطئ. يمكنه أن يحتوي على أحرف صغيرة و\"_\" فقط. على سبيل المثال: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+         ],
+         "hreflang": [
+            "hreflang"
+         ],
+         "Encode url?": [
+            "أتود تشفير مسار الإنترنت؟"
+         ],
+         "Flags must be:": [
+            "الأعلام يجب أن تكون:"
+         ],
+         "NO": [
+            "لا"
+         ],
+         "YES": [
+            "نعم"
+         ],
+         " (required)": [
+            "(مطلوب)"
+         ],
+         "Please fill in the field": [
+            "يُرجى تعبئة الحقل"
+         ],
+         "PNG, SVG, or JPG files": [
+            "ملفات بتنسيق PNG، أو SVG، أو JPG"
+         ],
+         "Save language": [
+            "حفظ اللغة"
+         ],
+         "18 x 12 pixels": [
+            "18 × 12 بكسل"
+         ],
+         "Read more about ": [
+            "قراءة المزيد عن"
+         ],
+         "The name of your language as it will appear on your site's language switcher.": [
+            "اسم لغتك كما سيظهر على محوّل اللغة بموقعك."
+         ],
+         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "قيمة مميزة تحدد اللغة في قاعدة البيانات ومسار الإنترنت. بمجرد حفظ رمز اللغة، لن يمكنك تغييره."
+         ],
+         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "إذا كانت لغتك المخصصة مشابهة للغة الحالية، يمكنك استخدام التدقيق اللغوي والترجمة الآلية للغة الحالية. على سبيل المثال، إذا كانت لغتك المخصصة هي اللغة الألمانية السويسرية، يمكنك تعيينها إلى الألمانية كلغة التدقيق اللغوي والترجمة الآلية للمستخدم. إذا لم تقم بتعيين لغتك المخصصة إلى لغة حالية، لن تكون خصائص التدقيق اللغوي والترجمة الآلية متاحة بهذه اللغة."
+         ],
+         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "القيمة التي يقوم WPML بمراجعتها عند تحميل الترجمات من ملفات MO وPO. الإعدادات المحلية الافتراضية تكون مدرجة في أسماء الملفات في مجلد /wp-content/languages/ في إعداد WordPress الخاص بك."
+         ],
+         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "يستخدم جوجل السمة hreflang لإعادة توجيه المستخدمين إلى المواقع بلغتهم وموقعهم. الأمثلة:"
+         ],
+         "All English-speaking users: en": [
+            "كل المستخدمين المتحدثين للغة الإنجليزية: en"
+         ],
+         "English for UK users: en-gb": [
+            "اللغة الإنجليزية للمستخدمين من المملكة المتحدة: en-gb"
+         ],
+         "English for US users: en-us": [
+            "اللغة الإنجليزية للمستخدمين من الولايات المتحدة: en-us"
+         ],
+         "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
+            "يحدد ما إذا كان سيتم تشفير مسارات الإنترنت بهذه اللغة أو استخدام رموز ASCII (إذا كنت غير متأكد، اترك الخيار كـ \"لا\")."
+         ],
+         "adding a custom language": [
+            "إضافة لغة مخصصة"
+         ],
+         "Default language": [
+            "اللغة الافتراضية"
+         ],
+         "What is the current language of your website?": [
+            "ما هي اللغة الحالية لموقعك الإلكتروني؟"
+         ],
+         "Translation languages": [
+            "لغات الترجمة"
+         ],
+         "Which languages do you want to translate your site into?": [
+            "ما هي اللغات التي ترغب في ترجمة موقعك إليها؟"
+         ],
+         "If you cannot find languages that you need in the list": [
+            "إن لم تستطع العثور على اللغات التي تحتاج إليها في القائمة"
+         ],
+         "create a custom language": [
+            "إنشاء لغة مخصصة"
+         ],
+         "What are the languages of your site?": [
+            "ما هي لغات موقعك؟"
+         ]
+      }
+   }
+}

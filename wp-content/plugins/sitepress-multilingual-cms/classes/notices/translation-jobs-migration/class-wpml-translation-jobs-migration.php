@@ -104,7 +104,7 @@ class WPML_Translation_Jobs_Migration {
 	 * @param WPML_TM_Post_Job_Entity $job
 	 * @param int                     $new_tp_id
 	 *
-	 * @return bool
+	 * @return int|false
 	 */
 	private function get_new_status( WPML_TM_Post_Job_Entity $job, $new_tp_id ) {
 		$new_status = false;
@@ -199,7 +199,7 @@ class WPML_Translation_Jobs_Migration {
 	 * @param int $old_tp_id
 	 * @param int $new_tp_id
 	 * @param int $old_status
-	 * @param int $new_status
+	 * @param int|false $new_status
 	 */
 	private function log( $rid, $old_tp_id, $new_tp_id, $old_status, $new_status ) {
 		$log = get_option( self::MIGRATION_FIX_LOG_KEY, array() );

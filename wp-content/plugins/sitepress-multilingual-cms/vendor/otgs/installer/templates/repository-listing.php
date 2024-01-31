@@ -59,7 +59,7 @@ $model                      = (object) [
 
     $subscription_type = isset($subscription_type) ? $subscription_type : null;
     $upgrade_options = isset($upgrade_options) ? $upgrade_options : null;
-    $packages = $this->_render_product_packages($repository['data']['packages'], $subscription_type, $model->expired, $upgrade_options, $repository_id);
+    $packages = $this->_render_product_packages($repository, $repository['data']['packages'], $subscription_type, $model->expired, $upgrade_options, $repository_id);
     if(empty($subscription_type) || $model->expired){
         $subpackages_expandable = true;
     }else{
@@ -97,7 +97,7 @@ $model                      = (object) [
 
 				<?php if(!empty($package['sub-packages'])): ?>
 
-					<?php $subpackages = $this->_render_product_packages($package['sub-packages'], $subscription_type, $model->expired, $upgrade_options, $repository_id); ?>
+					<?php $subpackages = $this->_render_product_packages($repository, $package['sub-packages'], $subscription_type, $model->expired, $upgrade_options, $repository_id); ?>
 
 					<?php if($subpackages): ?>
 

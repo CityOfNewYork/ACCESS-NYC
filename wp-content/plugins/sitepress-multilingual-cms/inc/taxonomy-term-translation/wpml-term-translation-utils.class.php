@@ -1,5 +1,7 @@
 <?php
 
+use WPML\FP\Fns;
+
 class WPML_Term_Translation_Utils extends WPML_SP_User {
 
 	/**
@@ -32,6 +34,9 @@ class WPML_Term_Translation_Utils extends WPML_SP_User {
 	private function synchronize_terms( $original_post_id, $lang, $duplicate ) {
 		global $wpml_post_translations;
 
+		$returnTrue = Fns::always( true );
+		add_filter( 'wpml_disable_term_adjust_id', $returnTrue );
+
 		$wpml_post_translations->reload();
 		$translated_post_id = $wpml_post_translations->element_id_in( $original_post_id, $lang );
 		if ( (bool) $translated_post_id === true ) {
@@ -39,6 +44,9 @@ class WPML_Term_Translation_Utils extends WPML_SP_User {
 
 			foreach ( $taxonomies as $tax ) {
 				$terms_on_original = wp_get_object_terms( $original_post_id, $tax );
+				if ( is_wp_error ( $terms_on_original ) ) {
+					continue;
+				}
 
 				if ( ! $this->sitepress->is_translated_taxonomy( $tax ) ) {
 					if ( $this->sitepress->get_setting( 'sync_post_taxonomies' ) ) {
@@ -56,7 +64,10 @@ class WPML_Term_Translation_Utils extends WPML_SP_User {
 				}
 			}
 		}
-		clean_object_term_cache( $original_post_id, get_post_type( $original_post_id ) );
+
+		remove_filter( 'wpml_disable_term_adjust_id', $returnTrue );
+		$post_type = get_post_type( $original_post_id );
+		$post_type && clean_object_term_cache( $original_post_id, $post_type );
 	}
 
 	/**

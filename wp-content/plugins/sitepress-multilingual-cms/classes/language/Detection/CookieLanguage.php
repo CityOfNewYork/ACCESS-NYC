@@ -28,7 +28,7 @@ class CookieLanguage {
 	}
 
 	public function getBackendCookieName() {
-		return 'wp-wpml_current_admin_language_' . md5( $this->get_cookie_domain() );
+		return 'wp-wpml_current_admin_language_' . md5( (string) $this->get_cookie_domain() );
 	}
 
 	public function getFrontendCookieName() {
@@ -38,7 +38,7 @@ class CookieLanguage {
 	public function get( $cookieName ) {
 		global $wpml_language_resolution;
 
-		$cookie_value = $this->cookie->get_cookie( $cookieName );
+		$cookie_value = esc_attr( $this->cookie->get_cookie( $cookieName ) );
 		$lang         = $cookie_value ? substr( $cookie_value, 0, 10 ) : null;
 		$lang         = $wpml_language_resolution->is_language_active( $lang ) ? $lang : $this->defaultLanguage;
 
@@ -52,7 +52,7 @@ class CookieLanguage {
 		if ( is_user_logged_in() ) {
 			if ( ! $this->cookie->headers_sent() ) {
 				if ( preg_match(
-					'@\.(css|js|png|jpg|gif|jpeg|bmp)@i',
+					'@\.(css|js|png|jpg|gif|jpeg|bmp|ico)@i',
 					basename( preg_replace( '@\?.*$@', '', $_SERVER['REQUEST_URI'] ) )
 				)
 					 || isset( $_POST['icl_ajx_action'] ) || isset( $_POST['_ajax_nonce'] ) || defined( 'DOING_AJAX' )

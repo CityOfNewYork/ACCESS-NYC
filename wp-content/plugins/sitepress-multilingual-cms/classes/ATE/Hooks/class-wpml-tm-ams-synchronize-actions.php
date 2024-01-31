@@ -1,5 +1,7 @@
 <?php
 
+use WPML\LIB\WP\User;
+
 /**
  * @author OnTheGo Systems
  */
@@ -25,12 +27,6 @@ class WPML_TM_AMS_Synchronize_Actions implements IWPML_Action {
 	 */
 	private $translator_activation_records;
 
-	/** @var WPML_Translation_Manager_Records */
-	private $tm_records;
-
-	/** @var WPML_Translator_Records */
-	private $translator_records;
-
 	/** @var int[] */
 	private $deletedManagerIds = [];
 
@@ -41,16 +37,12 @@ class WPML_TM_AMS_Synchronize_Actions implements IWPML_Action {
 		WPML_TM_AMS_API $ams_api,
 		WPML_TM_AMS_Users $ams_user_records,
 		WPML_WP_User_Factory $user_factory,
-		WPML_TM_AMS_Translator_Activation_Records $translator_activation_records,
-		WPML_Translation_Manager_Records $tm_records,
-		WPML_Translator_Records $translator_records
+		WPML_TM_AMS_Translator_Activation_Records $translator_activation_records
 	) {
 		$this->ams_api                       = $ams_api;
 		$this->ams_user_records              = $ams_user_records;
 		$this->user_factory                  = $user_factory;
 		$this->translator_activation_records = $translator_activation_records;
-		$this->tm_records = $tm_records;
-		$this->translator_records = $translator_records;
 	}
 
 	public function add_hooks() {
@@ -93,11 +85,15 @@ class WPML_TM_AMS_Synchronize_Actions implements IWPML_Action {
 	 * @param int $user_id
 	 */
 	public function prepare_user_deleted( $user_id ) {
-		if ( $this->tm_records->does_user_have_capability( $user_id ) ) {
-			$this->deletedManagerIds[] = $user_id;
-		}
-		if ( $this->translator_records->does_user_have_capability( $user_id ) ) {
-			$this->deletedTranslatorIds[] = $user_id;
+		$user = User::get( $user_id );
+
+		if ( $user ) {
+			if ( User::hasCap( User::CAP_ADMINISTRATOR ) || User::hasCap( User::CAP_MANAGE_TRANSLATIONS, $user ) ) {
+				$this->deletedManagerIds[] = $user_id;
+			}
+			if ( User::hasCap( User::CAP_ADMINISTRATOR ) || User::hasCap( User::CAP_TRANSLATE, $user ) ) {
+				$this->deletedTranslatorIds[] = $user_id;
+			}
 		}
 	}
 
@@ -105,11 +101,15 @@ class WPML_TM_AMS_Synchronize_Actions implements IWPML_Action {
 	 * @param int $user_id
 	 */
 	public function user_changed( $user_id ) {
-		if ( in_array( $user_id, $this->deletedManagerIds ) || $this->tm_records->does_user_have_capability( $user_id ) ) {
-			$this->synchronize_managers();
-		}
-		if ( in_array( $user_id, $this->deletedTranslatorIds ) || $this->translator_records->does_user_have_capability( $user_id ) ) {
-			$this->synchronize_translators();
+		$user = User::get( $user_id );
+
+		if ( $user ) {
+			if ( in_array( $user_id, $this->deletedManagerIds ) || User::hasCap( User::CAP_ADMINISTRATOR ) || User::hasCap( User::CAP_MANAGE_TRANSLATIONS, $user ) ) {
+				$this->synchronize_managers();
+			}
+			if ( in_array( $user_id, $this->deletedTranslatorIds ) || User::hasCap( User::CAP_ADMINISTRATOR ) || User::hasCap( User::CAP_TRANSLATE, $user ) ) {
+				$this->synchronize_translators();
+			}
 		}
 	}
 }

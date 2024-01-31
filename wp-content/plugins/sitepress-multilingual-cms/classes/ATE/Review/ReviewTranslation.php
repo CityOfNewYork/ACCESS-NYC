@@ -2,16 +2,18 @@
 
 namespace WPML\TM\ATE\Review;
 
+use WPML\API\Sanitize;
 use WPML\FP\Fns;
 use WPML\FP\Logic;
 use WPML\FP\Lst;
 use WPML\FP\Relation;
+use WPML\FP\Str;
 use WPML\LIB\WP\Hooks;
 use WPML\LIB\WP\Post;
 use WPML\Element\API\Post as WPMLPost;
 use WPML\TM\API\Jobs;
 use WPML\TM\API\Translators;
-use WPML\TM\WP\App\Resources;
+use WPML\Core\WP\App\Resources;
 use WPML\FP\Obj;
 use function WPML\FP\pipe;
 use function WPML\FP\spreadArgs;
@@ -29,10 +31,27 @@ class ReviewTranslation implements \IWPML_Frontend_Action, \IWPML_Backend_Action
 			Hooks::onFilter( 'the_preview' )
 			     ->then( Hooks::getArgs( [ 0 => 'post' ] ) )
 			     ->then( $this->handleTranslationReview() );
+
+			if ( $this->isCurrentPageReview() ) {
+				add_filter(
+					'init',
+					function () {
+						// This hook is only needed for the WP Autosaved revision preview.
+						// For Translation Review it can cause problems overwritting the post by an autosaved draft.
+						remove_filter( 'the_preview', '_set_preview' );
+						return true;
+					},
+					PHP_INT_MAX
+				);
+			}
 		}
 
 		Hooks::onFilter( 'user_has_cap', 10, 3 )
 		     ->then( spreadArgs( function ( $userCaps, $requiredCaps, $args ) {
+				 /** @var array $userCaps */
+				 /** @var array $requiredCaps */
+				 /** @var array $args */
+
 			     if ( Relation::propEq( 0, 'edit_post', $args ) ) {
 				     $translator = Translators::getCurrent();
 
@@ -62,6 +81,10 @@ class ReviewTranslation implements \IWPML_Frontend_Action, \IWPML_Backend_Action
 
 			     return $allowedTranslators;
 		     } ) );
+
+		if ( $this->isCurrentPageReviewPostTypeTemplate() ) {
+			Hooks::onFilter( 'pre_render_block', 10, 2 )->then( spreadArgs( [ $this, 'onPreRenderBlock' ] ) );
+		}
 	}
 
 	private static function canEditLanguage( $translator, $job ) {
@@ -87,10 +110,18 @@ class ReviewTranslation implements \IWPML_Frontend_Action, \IWPML_Backend_Action
 		);
 	}
 
+	/**
+	 * @param int $jobId
+	 *
+	 * @return callable
+	 */
 	public function handleTranslationReview() {
 		return function ( $data ) {
 			$post  = Obj::prop( 'post', $data );
 			$jobId = filter_input( INPUT_GET, 'jobId', FILTER_SANITIZE_NUMBER_INT );
+			$filterTargetLanguages = Sanitize::stringProp('targetLanguages', $_GET)
+				? Str::split( ',', Sanitize::stringProp('targetLanguages', $_GET) ) : null;
+
 			if ( $jobId ) {
 				/**
 				 * This hooks is fired as soon as a translation review is about to be displayed.
@@ -103,18 +134,18 @@ class ReviewTranslation implements \IWPML_Frontend_Action, \IWPML_Backend_Action
 				do_action( 'wpml_tm_handle_translation_review', $jobId, $post );
 
 				Hooks::onFilter( 'wp_redirect' )
-				     ->then( [ __CLASS__, 'failGracefullyOnPreviewRedirection' ] );
+					 ->then( [ __CLASS__, 'failGracefullyOnPreviewRedirection' ] );
 
 				Hooks::onAction( 'template_redirect', PHP_INT_MAX )
-				     ->then( function () {
-					     Hooks::onAction( 'wp_footer' )
-					          ->then( [ __CLASS__, 'printReviewToolbarAnchor' ] );
-				     } );
+					 ->then( function () {
+						 Hooks::onAction( 'wp_footer' )
+							  ->then( [ __CLASS__, 'printReviewToolbarAnchor' ] );
+					 } );
 
 				show_admin_bar( false );
 
 				$enqueue = Resources::enqueueApp( 'translationReview' );
-				$enqueue( $this->getData( $jobId, $post ) );
+				$enqueue( $this->getData( $jobId, $post, $filterTargetLanguages ) );
 			}
 
 			return $post;
@@ -151,23 +182,23 @@ class ReviewTranslation implements \IWPML_Frontend_Action, \IWPML_Backend_Action
 	}
 
 
-	public function getData( $jobId, $post ) {
+	public function getData( $jobId, $post, $filterTargetLanguages ) {
 		$job = Jobs::get( $jobId );
-
-		$editUrl = \add_query_arg( [ 'preview' => 1 ], Jobs::getEditUrl( Jobs::getCurrentUrl(), $jobId ) );
 
 		return [
 			'name' => 'reviewTranslation',
 			'data' => [
-				'jobEditUrl'          => $editUrl,
-				'nextJobUrl'          => NextTranslationLink::get( $job ),
+				'jobEditUrl'          => $this->getEditUrl( $jobId ),
+				'nextJobUrl'          => NextTranslationLink::get( $job, $filterTargetLanguages ),
 				'jobId'               => (int) $jobId,
 				'postId'              => $post->ID,
 				'isPublished'         => Relation::propEq( 'post_status', 'publish', $post ) ? 1 : 0,
 				'needsReview'         => ReviewStatus::doesJobNeedReview( $job ),
 				'completedInATE'      => $this->isCompletedInATE( $_GET ),
-				'needsUpdate'         => Relation::propEq( 'review_status', ReviewStatus::EDITING, $job ),
-				'previousTranslation' => filter_input( INPUT_GET, 'previousTranslation', FILTER_SANITIZE_STRING ),
+				'isReturningFromATE'  => (bool) Obj::prop( 'editFromReviewPage', $_GET ),
+				'clickedBackInATE'    => (bool) Obj::prop( 'back', $_GET ),
+				'needsUpdate'         => is_object( $job ) ? Relation::propEq( 'review_status', ReviewStatus::EDITING, $job ) : false,
+				'previousTranslation' => Sanitize::stringProp( 'previousTranslation', $_GET ),
 				'backUrl'             => Obj::prop( 'returnUrl', $_GET ),
 				'endpoints'           => [
 					'accept' => AcceptTranslation::class,
@@ -177,6 +208,14 @@ class ReviewTranslation implements \IWPML_Frontend_Action, \IWPML_Backend_Action
 		];
 	}
 
+	/**
+	 * Returns completed status based on key 'complete_no_changes' in $params.
+	 * Returns NOT_COMPLETED if 'complete_no_changes' is not set.
+	 *
+	 * @param array $params
+	 *
+	 * @return string
+	 */
 	public function isCompletedInATE( $params ) {
 		$completedInATE = pipe(
 			Obj::prop( 'complete_no_changes' ),
@@ -189,5 +228,86 @@ class ReviewTranslation implements \IWPML_Frontend_Action, \IWPML_Backend_Action
 		);
 
 		return $completedInATE( $params );
+	}
+
+	/**
+	 * @param int $jobId
+	 *
+	 * @return string
+	 */
+	private function getEditUrl( $jobId ) {
+		return \add_query_arg( [ 'preview' => 1 ], Jobs::getEditUrl( $this->getReturnParamInEditUrl(), $jobId ) );
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getReturnParamInEditUrl() {
+		/**
+		 * Those are GET params which ATE may send when we return to the review page.
+		 * We don't want to include them in subsequent edit link.
+		 */
+		$ateParams = [
+			'back',
+			'complete_no_changes',
+			'ate_status',
+			'complete',
+			'in_progress',
+			'ate_original_id',
+			'ate_status',
+			'editFromReviewPage',
+		];
+
+		$returnParam = Jobs::getCurrentUrl();
+		$returnParam = \remove_query_arg( $ateParams, $returnParam );
+
+		/**
+		 * We need to add the `editFromReviewPage` param to the return URL to be able to detect that we are returning from ATE to the review page.
+		 * It is used to repeat the sync on "in-progress" status.
+		 */
+		$returnParam = \add_query_arg( [ 'editFromReviewPage' => 1 ], $returnParam );
+
+		return $returnParam;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isCurrentPageReviewPostTypeTemplate() {
+		$queryVars = [];
+		if ( isset( $_SERVER['QUERY_STRING'] ) ) {
+			parse_str( $_SERVER['QUERY_STRING'], $queryVars );
+		}
+
+		return Obj::has( 'wpmlReviewPostType', $queryVars ) && 'wp_template' === $queryVars['wpmlReviewPostType'];
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isCurrentPageReview() {
+		$queryVars = [];
+		if ( isset( $_SERVER['QUERY_STRING'] ) ) {
+			parse_str( $_SERVER['QUERY_STRING'], $queryVars );
+		}
+
+		$jobId = filter_input( INPUT_GET, 'jobId', FILTER_SANITIZE_NUMBER_INT );
+		return !! $jobId || Obj::has( 'wpmlReviewPostType', $queryVars );
+	}
+
+	/**
+	 * This filter is called from WP core /wp-includes/blocks.php right before block is rendered.
+	 * If anything other than null is returned from this filter that value is used as final block rendered value without calling actual block render function.
+	 *
+	 * @param string|null $preRenderedContent Pre-rendered context for the block.
+	 * @param array       $blockParams Block params being rendered.
+	 *
+	 * @return string|null $context
+	 */
+	public function onPreRenderBlock( $preRenderedContent, $blockParams ) {
+		// Fixes error 'postId is not defined' in WP core when context vars are removed for posts with 'wp_template' type.
+		if ( is_array( $blockParams ) && 'core/comments' === $blockParams['blockName'] && $this->isCurrentPageReviewPostTypeTemplate() ) {
+			return '';
+		}
 	}
 }

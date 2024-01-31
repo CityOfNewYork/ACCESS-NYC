@@ -148,10 +148,15 @@ class wpml_zip {
 			unlink( $fileName );
 		}
 		$fd = fopen( $fileName, 'x+b' );
+
+		if ( ! $fd ) {
+			return false;
+		}
+
 		if ( is_resource( $this->zipFile ) ) {
 			rewind( $this->zipFile );
 			while ( ! feof( $this->zipFile ) ) {
-				fwrite( $fd, fread( $this->zipFile, $this->streamChunkSize ) );
+				fwrite( $fd, (string) fread( $this->zipFile, $this->streamChunkSize ) );
 			}
 
 			fclose( $this->zipFile );
@@ -217,7 +222,14 @@ class wpml_zip {
 
 		if ( $compress ) {
 			$gzTmp  = gzcompress( $data );
-			$gzData = substr( substr( $gzTmp, 0, strlen( $gzTmp ) - 4 ), 2 ); // gzcompress adds a 2 byte header and 4 byte CRC we can't use.
+			if ( ! $gzTmp ) {
+				return false;
+			}
+			$gzTmp = substr( $gzTmp, 0, strlen( $gzTmp ) - 4 );
+			if ( ! $gzTmp ) {
+				return false;
+			}
+			$gzData = substr( $gzTmp, 2 ); // gzcompress adds a 2 byte header and 4 byte CRC we can't use.
 			// The 2 byte header does contain useful data, though in this case the 2 parameters we'd be interrested in will always be 8 for compression type, and 2 for General purpose flag.
 			$gzLength = strlen( $gzData );
 		} else {
@@ -264,7 +276,10 @@ class wpml_zip {
 			$this->openStream( $filePath, $timestamp, $fileComment, $extFileAttr );
 
 			while ( ! feof( $fh ) ) {
-				$this->addStreamData( fread( $fh, $this->streamChunkSize ) );
+				$data = fread( $fh, $this->streamChunkSize );
+				if ( $data ) {
+					$this->addStreamData( $data );
+				}
 			}
 			$this->closeStream();
 		}
@@ -372,6 +387,10 @@ class wpml_zip {
 		}
 
 		$file_handle = fopen( $tempzip, 'rb' );
+		if ( ! $file_handle ) {
+			return false;
+		}
+
 		$stats       = fstat( $file_handle );
 		$eof         = $stats['size'] - 72;
 
@@ -381,9 +400,9 @@ class wpml_zip {
 		$gzType  = fread( $file_handle, 2 );
 		fread( $file_handle, 4 );
 		$fileCRC32  = fread( $file_handle, 4 );
-		$v          = unpack( 'Vval', fread( $file_handle, 4 ) );
+		$v          = unpack( 'Vval', (string) fread( $file_handle, 4 ) );
 		$gzLength   = $v['val'];
-		$v          = unpack( 'Vval', fread( $file_handle, 4 ) );
+		$v          = unpack( 'Vval', (string) fread( $file_handle, 4 ) );
 		$dataLength = $v['val'];
 
 		$this->buildZipEntry( $filePath, $fileComment, $gpFlags, $gzType, $timestamp, $fileCRC32, $gzLength, $dataLength, $extFileAttr );
@@ -415,7 +434,7 @@ class wpml_zip {
 	 */
 	public function finalize() {
 		if ( ! $this->isFinalized ) {
-			if ( strlen( $this->streamFilePath ) > 0 ) {
+			if ( isset( $this->streamFilePath ) && strlen( $this->streamFilePath ) > 0 ) {
 				$this->closeStream();
 			}
 			$cd = implode( '', $this->cdRec );
@@ -444,7 +463,7 @@ class wpml_zip {
 	 * Get the zip file contents
 	 * If the zip haven't been finalized yet, this will cause it to become finalized
 	 *
-	 * @return zip data
+	 * @return string data
 	 */
 	public function getZipData() {
 		if ( ! $this->isFinalized ) {
@@ -455,7 +474,7 @@ class wpml_zip {
 		} else {
 			rewind( $this->zipFile );
 			$filestat = fstat( $this->zipFile );
-			return fread( $this->zipFile, $filestat['size'] );
+			return fread( $this->zipFile, $filestat['size'] > 0 ? $filestat['size'] : 0 );
 		}
 	}
 
@@ -554,15 +573,15 @@ class wpml_zip {
 	/**
 	 * Build the Zip file structures
 	 *
-	 * @param string $filePath
-	 * @param string $fileComment
-	 * @param string $gpFlags
-	 * @param string $gzType
-	 * @param int    $timestamp
-	 * @param string $fileCRC32
-	 * @param int    $gzLength
-	 * @param int    $dataLength
-	 * @param int    $extFileAttr Use self::EXT_FILE_ATTR_FILE for files, self::EXT_FILE_ATTR_DIR for Directories.
+	 * @param string       $filePath
+	 * @param string       $fileComment
+	 * @param string|false $gpFlags
+	 * @param string|false $gzType
+	 * @param int          $timestamp
+	 * @param string|false $fileCRC32
+	 * @param int          $gzLength
+	 * @param int          $dataLength
+	 * @param int          $extFileAttr Use self::EXT_FILE_ATTR_FILE for files, self::EXT_FILE_ATTR_DIR for Directories.
 	 */
 	private function buildZipEntry( $filePath, $fileComment, $gpFlags, $gzType, $timestamp, $fileCRC32, $gzLength, $dataLength, $extFileAttr ) {
 		$filePath          = str_replace( '\\', '/', $filePath );
@@ -573,7 +592,7 @@ class wpml_zip {
 		$dosTime = $this->getDosTime( $timestamp );
 		$tsPack  = pack( 'V', $timestamp );
 
-		if ( strlen( $gpFlags ) != 2 ) {
+		if ( $gpFlags && strlen( $gpFlags ) !== 2 ) {
 			$gpFlags = "\x00\x00";
 		}
 
@@ -590,7 +609,7 @@ class wpml_zip {
 
 		if ( $isFileUTF8 || $isCommentUTF8 ) {
 			$flag     = 0;
-			$gpFlagsV = unpack( 'vflags', $gpFlags );
+			$gpFlagsV = unpack( 'vflags', (string) $gpFlags );
 			if ( isset( $gpFlagsV['flags'] ) ) {
 				$flag = $gpFlagsV['flags'];
 			}
@@ -660,7 +679,7 @@ class wpml_zip {
 	private function zipflush() {
 		if ( ! is_resource( $this->zipFile ) ) {
 			$this->zipFile = tmpfile();
-			fwrite( $this->zipFile, $this->zipData );
+			$this->zipFile && fwrite( $this->zipFile, $this->zipData );
 			$this->zipData = null;
 		}
 	}

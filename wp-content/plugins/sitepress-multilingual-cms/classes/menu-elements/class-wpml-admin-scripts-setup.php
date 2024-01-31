@@ -26,8 +26,7 @@ class WPML_Admin_Scripts_Setup extends WPML_Full_Translation_API {
 	public function register_styles() {
 		wp_register_style( 'otgs-dialogs', ICL_PLUGIN_URL . '/res/css/otgs-dialogs.css', array( 'wp-jquery-ui-dialog' ), ICL_SITEPRESS_VERSION );
 		wp_register_style( 'wpml-dialog', ICL_PLUGIN_URL . '/res/css/dialog.css', array( 'otgs-dialogs' ), ICL_SITEPRESS_VERSION );
-		wp_register_style( 'otgs-ico', ICL_PLUGIN_URL . '/res/css/otgs-ico.css', null, ICL_SITEPRESS_VERSION );
-		wp_register_style( 'wpml-wizard', ICL_PLUGIN_URL . '/res/css/wpml-wizard.css', null, ICL_SITEPRESS_VERSION );
+		wp_register_style( 'wpml-wizard', ICL_PLUGIN_URL . '/res/css/wpml-wizard.css', [], ICL_SITEPRESS_VERSION );
 	}
 
 	private function print_js_globals() {
@@ -281,7 +280,7 @@ class WPML_Admin_Scripts_Setup extends WPML_Full_Translation_API {
 			: null;
 		if ( $menu_order || $page_template ) {
 			?>
-			<script type="text/javascript">addLoadEvent(function () { 
+			<script type="text/javascript">addLoadEvent(function () {
 			<?php
 			if ( $menu_order ) {
 				?>
@@ -465,7 +464,7 @@ class WPML_Admin_Scripts_Setup extends WPML_Full_Translation_API {
 		}
 
 		wp_enqueue_style( 'wpml-dialog' );
-		wp_enqueue_style( 'otgs-ico' );
+		wp_enqueue_style( 'otgs-icons' );
 		wp_enqueue_style( 'wpml-wizard' );
 		wp_enqueue_style( 'thickbox' );
 	}

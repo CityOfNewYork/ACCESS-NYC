@@ -172,6 +172,13 @@ class WPML_LS_Template extends WPML_Templates_Factory {
 	}
 
 	/**
+	 * @param array $template
+	 */
+	public function set_template_data( $template ) {
+		$this->template = $template;
+	}
+
+	/**
 	 * return bool
 	 */
 	public function is_core() {

@@ -31,7 +31,8 @@ class WPML_Cookie_Scripts {
 	}
 
 	public function enqueue_scripts() {
-		wp_enqueue_script( 'wpml-cookie', ICL_PLUGIN_URL . '/res/js/cookies/language-cookie.js', array( 'jquery' ), ICL_SITEPRESS_VERSION, false );
+		wp_enqueue_script( 'wpml-cookie', ICL_PLUGIN_URL . '/res/js/cookies/language-cookie.js', array(), ICL_SITEPRESS_VERSION, false );
+		wp_script_add_data( 'wpml-cookie', 'strategy', 'defer' );
 
 		$cookies = array(
 			$this->language_cookie_name => array(

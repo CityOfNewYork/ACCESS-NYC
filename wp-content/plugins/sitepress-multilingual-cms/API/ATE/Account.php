@@ -11,14 +11,14 @@ use function WPML\Container\make;
 
 class Account {
 	/**
-	 * @return array
+	 * @return Either<array>
 	 */
 	public static function getCredits() {
 		return WordPress::handleError( make( \WPML_TM_AMS_API::class )->getCredits() )
 		                ->filter( Fns::identity() )
+						/** @phpstan-ignore-next-line */
 		                ->map( Fns::tap( OptionManager::update( 'TM', 'Account::credits' ) ) )
-		                ->alt( Either::of( [ 'error' => 'communication error' ] ) )
-		                ->get();
+		                ->bimap( Fns::always( [ 'error' => 'communication error' ] ), Fns::identity() );
 	}
 
 	/**
@@ -46,7 +46,7 @@ class Account {
 		$creditInfo = OptionManager::getOr( [], 'TM', 'Account::credits' );
 
 		if ( ! array_key_exists( 'active_subscription', $creditInfo ) ) {
-			$creditInfo = self::getCredits();
+			$creditInfo = self::getCredits()->getOrElse( [] );
 		}
 
 		return self::hasActiveSubscription( $creditInfo ) || self::getAvailableBalance( $creditInfo ) > 0;

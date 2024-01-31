@@ -72,7 +72,7 @@ class RewriteRules implements \IWPML_REST_Action, \IWPML_DIC_Action {
 	 */
 	private function getSubdirectory() {
 		$url       = get_option( 'home' );
-		$home_path = trim( parse_url( $url, PHP_URL_PATH ), '/' );
+		$home_path = trim( (string) parse_url( $url, PHP_URL_PATH ), '/' );
 
 		return $home_path;
 	}

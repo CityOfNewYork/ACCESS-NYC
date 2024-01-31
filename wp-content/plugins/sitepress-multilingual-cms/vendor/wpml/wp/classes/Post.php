@@ -63,9 +63,10 @@ class Post {
 
 		self::macro( 'setStatusWithoutFilters', curryN( 2, function ( $id, $newStatus ) {
 			global $wpdb;
-
-			return $wpdb->update( $wpdb->posts, [ 'post_status' => $newStatus ], [ 'ID' => $id ] ) ? $id : 0;
-		} ) );
+			$result = $wpdb->update( $wpdb->posts, [ 'post_status' => $newStatus ], [ 'ID' => $id ] ) ? $id : 0;
+			if ( $result ) clean_post_cache( $id );
+			return $result;
+;		} ) );
 
 		self::macro( 'delete', curryN( 1, partialRight( 'wp_delete_post', true ) ) );
 

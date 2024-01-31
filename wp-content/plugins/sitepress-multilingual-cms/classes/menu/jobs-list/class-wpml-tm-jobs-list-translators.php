@@ -33,7 +33,7 @@ class WPML_TM_Jobs_List_Translators {
 	}
 
 	private function getLanguagePairs( $translator ) {
-
+		/** @var callable $isValidLanguage */
 		$isValidLanguage       = Lst::includes( Fns::__,  Lst::pluck( 'code', Languages::getAll() ) );
 		$sourceIsValidLanguage = flip( $isValidLanguage );
 		$getValidTargets       = Fns::filter( $isValidLanguage );

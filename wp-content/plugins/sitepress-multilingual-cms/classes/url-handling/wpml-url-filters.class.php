@@ -1,5 +1,6 @@
 <?php
 
+use WPML\FP\Relation;
 use \WPML\FP\Str;
 use \WPML\SuperGlobals\Server;
 
@@ -62,6 +63,8 @@ class WPML_URL_Filters {
 		if ( $this->has_wp_get_canonical_url() ) {
 			add_filter( 'get_canonical_url', array( $this, 'get_canonical_url_filter' ), 1, 2 );
 		}
+
+		add_action( 'current_screen', [ $this, 'permalink_options_home_url' ] );
 	}
 
 	public function add_global_hooks() {
@@ -232,7 +235,11 @@ class WPML_URL_Filters {
 		}
 
 		$post_element = new WPML_Post_Element( $post_id, $this->sitepress );
-		if ( ! $this->is_display_as_translated_mode( $post_element ) && $post_element->is_translatable() ) {
+		if (
+			! is_wp_error( $post_element->get_wp_element_type() )
+			&& ! $this->is_display_as_translated_mode( $post_element )
+			&& $post_element->is_translatable()
+		) {
 			$link = $this->get_translated_permalink( $link, $post_id, $post_element );
 		}
 
@@ -262,6 +269,15 @@ class WPML_URL_Filters {
 	 */
 	public function get_canonical_url_filter( $canonical_url, $post ) {
 		return $this->canonicals->get_canonical_url( $canonical_url, $post, $this->get_request_language() );
+	}
+
+	/**
+	 * @param WP_Screen $current_screen
+	 */
+	public function permalink_options_home_url( $current_screen ) {
+		if ( Relation::propEq( 'id', 'options-permalink', $current_screen ) ) {
+			add_filter( 'wpml_get_home_url', 'untrailingslashit' );
+		}
 	}
 
 	/**

@@ -58,7 +58,18 @@ if ( WP_DEBUG ) {
 if ( ! $errors ) {
 	echo <<<WIDGET_CONSTRUCTOR
 $app
-LoadEateWidget($constructor);
+
+var params = $constructor;
+
+if( typeof ate_jobs_sync.ateCallbacks.retranslation === 'function' ) {
+	params.onGlossaryRetranslationStart = ate_jobs_sync.ateCallbacks.retranslation
+}
+
+if( typeof ate_jobs_sync.ateCallbacks.invalidateCache === 'function' ) {
+	params.onLanguageMappingChange = ate_jobs_sync.ateCallbacks.invalidateCache
+}
+
+LoadEateWidget(params);
 	
 WIDGET_CONSTRUCTOR;
 }

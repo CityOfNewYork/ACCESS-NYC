@@ -26,7 +26,6 @@ class DetectPrematurelyTranslatedStrings implements \IWPML_Action {
 		$this->gettextHooksSettings = $settings;
 	}
 
-
 	/**
 	 * Init gettext hooks.
 	 */
@@ -117,7 +116,6 @@ class DetectPrematurelyTranslatedStrings implements \IWPML_Action {
 				'gettext_theme_domain_name',
 				implode( ',', array_unique( $this->preloadedDomains ) )
 			);
-			$this->sitepress->set_setting( 'theme_localization_load_textdomain', true );
 			$this->sitepress->save_settings();
 		}
 

@@ -57,12 +57,28 @@ class TriggerSynchronization implements \IWPML_Backend_Action, \IWPML_DIC_Action
 				self::ACTION_ID,
 				WPML_TM_URL . '/res/js/ate-jobs-migration.js',
 				[ 'jquery' ],
-				WPML_TM_VERSION
+				ICL_SITEPRESS_VERSION
 			);
+
+			wp_localize_script(
+				self::ACTION_ID,
+				'ate_jobs_migration_data',
+				[
+					'nonce' => wp_create_nonce( self::ACTION_ID ),
+				]
+			);
+
 		}
 	}
 
 	public function clearExecutedStateToForceUpgrade() {
+
+		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
+
+		if ( ! wp_verify_nonce( $nonce, self::ACTION_ID ) ) {
+			wp_send_json_error( esc_html__( 'Invalid request!', 'sitepress' ) );
+		}
+
 		$this->commandStatus->markAsExecuted( Command::class, false );
 		wp_send_json_success();
 	}

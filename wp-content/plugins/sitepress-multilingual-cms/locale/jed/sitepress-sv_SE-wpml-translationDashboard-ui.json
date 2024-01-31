@@ -1,0 +1,235 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
+            "Ett fel inträffade när du försökte pausa den automatiska översättningen. Försök igen senare eller kontakta supporten."
+         ],
+         "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
+            "Ett fel inträffade när den automatiska översättningen skulle återupptas. Försök igen senare eller kontakta supporten."
+         ],
+         "Error": [
+            "Fel"
+         ],
+         "Draft — Pending review": [
+            "Utkast — väntar på granskning"
+         ],
+         "Complete": [
+            "Komplett"
+         ],
+         "Insufficient funds": [
+            "Otillräckliga medel"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "Dina väntande automatiska översättningar avbryts."
+         ],
+         "Save": [
+            "Spara"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "Gå till <a>Instrumentpanel för översättningshantering</a> för att översätta ditt innehåll."
+         ],
+         "Review the translations before publishing": [
+            "Granska översättningarna före publicering"
+         ],
+         "Publish translations and review them later": [
+            "Publicera översättningar och granska dem senare"
+         ],
+         "Publish translations without reviewing": [
+            "Publicera översättningar utan att granska"
+         ],
+         "Translate Everything": [
+            "Översätt allt"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "WPML översätter automatiskt innehåll som du publicerar eller uppdaterar"
+         ],
+         "How do you want to translate this site?": [
+            "Hur vill du översätta den här webbplatsen?"
+         ],
+         "Translate Some": [
+            "Översätt några"
+         ],
+         "I want to choose which content to translate": [
+            "Jag vill välja vilket innehåll som ska översättas"
+         ],
+         "All Languages": [
+            "Alla språk"
+         ],
+         "Overwrite existing translations": [
+            "Skriv över befintliga översättningar"
+         ],
+         "Some of the content you want to translate is already translated": [
+            "En del av det innehåll som du vill översätta är redan översatt."
+         ],
+         "What do you want to do with the content that’s already translated?": [
+            "Vad vill du göra med det innehåll som redan är översatt?"
+         ],
+         "Leave existing translations as is": [
+            "Lämna befintliga översättningar oförändrade"
+         ],
+         "This also updates the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "Detta uppdaterar även översättningsminnet för din webbplats. Läs mer om <a href=\"%s\" target=\"_blank\" >översättningsminne</a>"
+         ],
+         "Allows you to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "Låter dig översätta ditt innehåll igen och uppdatera översättningsminnet för din webbplats. Läs mer om <a href=\"%s\" target=\"_blank\" >översättningsminne</a>"
+         ],
+         "Allows your translators to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "Tillåter dina översättare att återöversätta ditt innehåll och uppdatera översättningsminnet för din webbplats. Läs mer om <a href=\"%s\" target=\"_blank\" >översättningsminne</a>"
+         ],
+         "HINT: You can add a Note for translators in the table above with special instructions.": [
+            "TIPS: Du kan lägga till en anmärkning för översättare i tabellen ovan med särskilda instruktioner."
+         ],
+         "Translate automatically": [
+            "Översätt automatiskt"
+         ],
+         "How do you want to translate?": [
+            "Hur vill du översätta?"
+         ],
+         "Assign to a translator": [
+            "Tilldela en översättare"
+         ],
+         "Translate myself": [
+            "Översätt mig själv"
+         ],
+         "You do not need translation credits to translate content yourself.": [
+            "Du behöver inga översättningskrediter för att översätta innehåll dig själv."
+         ],
+         "You can only automatically translate content from your site's default language (English), to your site's other languages. Deselect content in your site's secondary languages to proceed.": [
+            "Du kan bara översätta innehåll automatiskt från webbplatsens standardspråk (engelska) till webbplatsens andra språk. Avmarkera innehåll på webbplatsens sekundära språk för att fortsätta."
+         ],
+         "You can only automatically translate content from your primary language (%s) to other languages. Use the language switcher at the top of this page to switch to %s.": [
+            "Du kan bara översätta innehåll automatiskt från ditt primära språk (%s) till andra språk. Använd språkväxlaren högst upp på den här sidan för att byta till %s."
+         ],
+         "Selected content includes items that were originally created in this language. Deselect these items to proceed.": [
+            "Valt innehåll omfattar objekt som ursprungligen skapades på detta språk. Avmarkera dessa objekt för att fortsätta."
+         ],
+         "Add to Translation Queue": [
+            "Lägg till i översättningskön"
+         ],
+         "Select a post or page to translate": [
+            "Välj ett inlägg eller en sida som ska översättas"
+         ],
+         "Translate or duplicate content to at least one language": [
+            "Översätt eller duplicera innehåll till minst ett språk."
+         ],
+         "Choose how you want to translate your content": [
+            "Välj hur du vill översätta ditt innehåll"
+         ],
+         "Selected content is already translated": [
+            "Det valda innehållet är redan översatt"
+         ],
+         "Selected content includes items in a language other than your site's default language.": [
+            "Valt innehåll inkluderar objekt på ett annat språk än din webbplats standardspråk."
+         ],
+         "Choose at least one translation action": [
+            "Välj minst en översättningsåtgärd"
+         ],
+         "Duplicate": [
+            "Duplicera"
+         ],
+         "Start translating and duplicating": [
+            "Börja översätta och duplicera"
+         ],
+         "Add to Translation Basket and duplicate": [
+            "Lägg till i översättningskorgen och duplicera"
+         ],
+         "Add to Translation Queue and duplicate": [
+            "Lägg till i översättningskön och duplicera"
+         ],
+         "Start translating": [
+            "Börja översätta"
+         ],
+         "Add to Translation Basket": [
+            "Lägg till i översättningskorgen"
+         ],
+         "One more thing...": [
+            "En sak till..."
+         ],
+         "What would you like to do when your content has finished translating automatically?": [
+            "Vad skulle du vilja göra när ditt automatiskt översatt innehåll har blivit färdigt?"
+         ],
+         "Save settings": [
+            "Spara inställningar"
+         ],
+         "This setting will apply to all future automatic translations. You can change this anytime in WPML → Settings.": [
+            "Den här inställningen gäller för alla framtida automatiska översättningar. Du kan ändra detta när som helst i WPML → Inställningar."
+         ],
+         "Translate": [
+            "Översätt"
+         ],
+         "Duplicate content": [
+            "Duplicera innehåll"
+         ],
+         "Do nothing": [
+            "Gör ingenting"
+         ],
+         "To assign content to a translator, first <a href=\"%s\" target=\"_blank\">add a translator</a> or <a href=\"%s\" target=\"_blank\">connect to a translation service</a>.": [
+            "Om du vill tilldela en översättare innehåll ska du först <a href=\"%s\" target=\"_blank\">läggä till en översättare</a> eller <a href=\"%s\" target=\"_blank\">ansluta till en översättningstjänst</a>."
+         ],
+         "You need credits to use automatic translation.": [
+            "Du behöver krediter för att använda automatisk översättning."
+         ],
+         "Translators Tab": [
+            "Fliken Översättare"
+         ],
+         "Connection Error. Please wait a minute and reload this page. If the problem continues, please <a>contact WPML support</a>.": [
+            "Anslutningsfel. Vänligen vänta en stund och ladda om den här sidan. Om problemet kvarstår, var god kontakta <a>WPML-supporten</a>."
+         ],
+         "Finish setting up %s on your site": [
+            "Slutför inställningen av %s på din webbplats"
+         ],
+         "You need to authenticate %s to send them content for translation. Visit the %s to finish the setup.": [
+            "Du måste autentisera %s för att skicka innehåll för översättning. Besök %s för att avsluta inställningen."
+         ],
+         "Add a translator to use %s.": [
+            "Lägg till en översättare för att använda %s."
+         ],
+         "To send content to %s for translation, go to the %s to add a translator on your site.": [
+            "Om du vill skicka innehåll till %s för översättning går du till %s för att lägga till en översättare på din webbplats."
+         ],
+         "Your selected automatic translation engines do not support the following language(s): %s. Read more about <a>choosing a translation engine</a>.": [
+            "Maskinöversättningsmotorerna du har valt stöder inte följande språk: %s. Ta reda på hur du <a>väljer en översättningsmotor</a>."
+         ],
+         "Some of the selected content is already being translated. This will cancel any in-progress translations.": [
+            "En del av det valda innehållet är redan översatt. Detta avbryter alla pågående översättningar."
+         ],
+         "It is not possible to translate %s content automatically.": [
+            "Det är inte möjligt att översätta innehållet i %s automatiskt."
+         ],
+         "Translate selected items yourself or deselect these items above.": [
+            "Översätt valda objekt själv eller avmarkera dessa object ovan."
+         ],
+         "Any existing content (translations) will be overwritten when creating duplicates.": [
+            "Eventuellt befintligt innehåll (översättningar) skrivs över när du skapar duplikatkopior."
+         ],
+         "When duplicating content, please first duplicate parent pages to maintain the site's hierarchy.": [
+            "När du duplicerar innehåll, duplicera först huvudsidorna för att bibehålla platsens hierarki."
+         ],
+         "Some of the content that you selected for translation includes fields that are encoded. Translators will not be able to work on this kind of content, so we removed it from the job.": [
+            "En del av det innehåll som du valt att översätta innehåller fält som är kodade. Översättarna kommer inte att kunna arbeta med denna typ av innehåll, så vi tog bort det från jobbet."
+         ],
+         "To fix this problem, you need to tell WPML how these fields are encoded, so that WPML can decode them before sending for translation.": [
+            "För att åtgärda detta problem måste du meddela WPML hur dessa fält är kodade så att WPML kan avkoda dem innan de skickas för översättning."
+         ],
+         "How to indicate to WPML that it needs to decode fields.": [
+            "Hur man anger för WPML att fält måste avkodas."
+         ],
+         "WPML cannot send some of the content to translation": [
+            "En del av innehållet kan inte skickas för översättning av WPML"
+         ],
+         "<s>%s</s>: There are base64 encoded fields in this document": [
+            "<s>%s</s>: Det finns base64-kodade fält i det här dokumentet."
+         ],
+         "Hide details": [
+            "Dölj detaljer"
+         ],
+         "Show details": [
+            "Visa detaljer"
+         ]
+      }
+   }
+}

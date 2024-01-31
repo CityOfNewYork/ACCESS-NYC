@@ -210,9 +210,13 @@ class WPML_Term_Language_Synchronization extends WPML_WPDB_And_SP_User {
 				",
 			$this->taxonomy
 		);
-		$ttid_pid_pairs     = $this->wpdb->get_results( $query_for_post_ids );
 
-		return $this->format_data( $ttid_pid_pairs );
+		/** @var array<object>|null $ttid_pid_pairs */
+		$ttid_pid_pairs = $this->wpdb->get_results( $query_for_post_ids );
+
+		return is_array( $ttid_pid_pairs )
+			? $this->format_data( $ttid_pid_pairs )
+			: [];
 	}
 
 	/**

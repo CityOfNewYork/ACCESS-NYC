@@ -67,7 +67,7 @@ abstract class WPML_TM_Update_Translation_Data_Action extends WPML_Translation_J
 			}
 
 			if ( isset( $translation_package['title'] ) ) {
-				$translate_job_insert_data['title'] = mb_substr( $translation_package['title'], 0, 160 );
+				$translate_job_insert_data['title'] = WPML\FP\Str::truncate_bytes( $translation_package['title'], 160 );
 			}
 
 			$wpdb->insert( $wpdb->prefix . 'icl_translate_job', $translate_job_insert_data );

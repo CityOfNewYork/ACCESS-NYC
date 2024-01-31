@@ -1,0 +1,236 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "no"
+         },
+         "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
+            "尝试暂停自动翻译时出错。请稍后再试或联系支持人员。"
+         ],
+         "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
+            "尝试恢复自动翻译时出错。请稍后再试或联系支持人员。"
+         ],
+         "Error": [
+            "错误"
+         ],
+         "Draft — Pending review": [
+            "草稿 — 等候审阅"
+         ],
+         "Complete": [
+            "完成"
+         ],
+         "Insufficient funds": [
+            "资金不足"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "您挂起的自动翻译将被取消。"
+         ],
+         "Save": [
+            "保存"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "转到<a>翻译管理仪表板</a>，翻译您的内容。"
+         ],
+         "Review the translations before publishing": [
+            "在发布之前审阅翻译"
+         ],
+         "Publish translations and review them later": [
+            "发布翻译并在以后审阅"
+         ],
+         "Publish translations without reviewing": [
+            "不审阅就发布翻译"
+         ],
+         "Translate Everything": [
+            "全部翻译"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "WPML将自动翻译您发布或更新的内容"
+         ],
+         "How do you want to translate this site?": [
+            "您想如何翻译这个网站？"
+         ],
+         "Translate Some": [
+            "翻译一些"
+         ],
+         "I want to choose which content to translate": [
+            "我想选择要翻译的内容"
+         ],
+         "All Languages": [
+            "所有语言"
+         ],
+         "Overwrite existing translations": [
+            "覆盖现有的翻译"
+         ],
+         "Some of the content you want to translate is already translated": [
+            "你要翻译的部分内容已翻译"
+         ],
+         "What do you want to do with the content that’s already translated?": [
+            "你想对已翻译的内容做什么？"
+         ],
+         "Leave existing translations as is": [
+            "保持现有翻译不变"
+         ],
+         "This also updates the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "这也会更新你网站的翻译记忆库。阅读有关<a href=\"%s\" target=\"_blank\" >翻译记忆库</a>的更多信息"
+         ],
+         "Allows you to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "允许你重新翻译你的内容并更新你网站的翻译记忆库。阅读有关<a href=\"%s\" target=\"_blank\" >翻译记忆库</a>的更多信息"
+         ],
+         "Allows your translators to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "允许你的译员重新翻译你的内容并更新你网站的翻译记忆库。阅读有关<a href=\"%s\" target=\"_blank\" >翻译记忆库</a>的更多信息"
+         ],
+         "HINT: You can add a Note for translators in the table above with special instructions.": [
+            "提示: 你可以在上表中为译员添加注释及特殊说明。"
+         ],
+         "Translate automatically": [
+            "自动翻译"
+         ],
+         "How do you want to translate?": [
+            "你想怎么翻译？"
+         ],
+         "Assign to a translator": [
+            "分配给译员"
+         ],
+         "Translate myself": [
+            "我自己翻译"
+         ],
+         "You do not need translation credits to translate content yourself.": [
+            "自己翻译内容不需要翻译积分。"
+         ],
+         "You can only automatically translate content from your site's default language (English), to your site's other languages. Deselect content in your site's secondary languages to proceed.": [
+            ""
+         ],
+         "You can only automatically translate content from your primary language (%s) to other languages. Use the language switcher at the top of this page to switch to %s.": [
+            "你只能将内容从你的主要语言 (%s) 自动翻译成其他语言。使用此页面顶部的语言切换器可切换到 %s。"
+         ],
+         "Selected content includes items that were originally created in this language. Deselect these items to proceed.": [
+            ""
+         ],
+         "Add to Translation Queue": [
+            "添加到翻译队列"
+         ],
+         "Select a post or page to translate": [
+            "选择要翻译的文章或页面"
+         ],
+         "Translate or duplicate content to at least one language": [
+            "将内容翻译或复制为至少一种语言"
+         ],
+         "Choose how you want to translate your content": [
+            "选择如何翻译你的内容"
+         ],
+         "Selected content is already translated": [
+            "所选内容已翻译"
+         ],
+         "Selected content includes items in a language other than your site's default language.": [
+            ""
+         ],
+         "Choose at least one translation action": [
+            "至少选择一个翻译操作"
+         ],
+         "Duplicate": [
+            "复制"
+         ],
+         "Start translating and duplicating": [
+            "开始翻译和复制"
+         ],
+         "Add to Translation Basket and duplicate": [
+            "添加到翻译篮并复制"
+         ],
+         "Add to Translation Queue and duplicate": [
+            "添加到翻译队列并复制"
+         ],
+         "Start translating": [
+            "开始翻译"
+         ],
+         "Add to Translation Basket": [
+            "加入翻译购物篮"
+         ],
+         "One more thing...": [
+            "还有一件事..."
+         ],
+         "What would you like to do when your content has finished translating automatically?": [
+            "当你的内容自动完成翻译后，你想做什么？"
+         ],
+         "Save settings": [
+            "保存设置"
+         ],
+         "This setting will apply to all future automatic translations. You can change this anytime in WPML → Settings.": [
+            "此设置将应用于所有未来的自动翻译。可随时在 WPML → 设置中更改此设置。"
+         ],
+         "Translate": [
+            "翻译"
+         ],
+         "Duplicate content": [
+            "复制内容"
+         ],
+         "Do nothing": [
+            "不做什么"
+         ],
+         "To assign content to a translator, first <a href=\"%s\" target=\"_blank\">add a translator</a> or <a href=\"%s\" target=\"_blank\">connect to a translation service</a>.": [
+            "要将内容分配给译员，首先<a href=\"%s\" target=\"_blank\">添加译员</a>或<a href=\"%s\" target=\"_blank\">连接到翻译服务</a>。"
+         ],
+         "You need credits to use automatic translation.": [
+            "你需要积分才能使用自动翻译。"
+         ],
+         "Translators Tab": [
+            "译员选项卡"
+         ],
+         "Connection Error. Please wait a minute and reload this page. If the problem continues, please <a>contact WPML support</a>.": [
+            "连接错误。请稍等，然后重新加载此页面。如果问题仍然存在，请<a>联系 WPML 支持</a>。"
+         ],
+         "Finish setting up %s on your site": [
+            "在你的网站上完成 %s 的设置"
+         ],
+         "You need to authenticate %s to send them content for translation. Visit the %s to finish the setup.": [
+            "你需要验证 %s 才能将内容发送给他们进行翻译。请访问 %s 以完成设置。"
+         ],
+         "Add a translator to use %s.": [
+            "添加译员以使用 %s。"
+         ],
+         "To send content to %s for translation, go to the %s to add a translator on your site.": [
+            "要将内容发送到 %s 进行翻译，请转到 %s 在你的网站上添加译员。"
+         ],
+         "Your selected automatic translation engines do not support the following language(s): %s. Read more about <a>choosing a translation engine</a>.": [
+            "你选择的自动翻译引擎不支持以下语言: %s。详细了解<a>选择翻译引擎</a>。"
+         ],
+         "Some of the selected content is already being translated. This will cancel any in-progress translations.": [
+            "一些选定内容已在翻译中。这将取消任何正在进行的翻译。"
+         ],
+         "It is not possible to translate %s content automatically.": [
+            "无法自动翻译 %s 内容。"
+         ],
+         "Translate selected items yourself or deselect these items above.": [
+            "自己翻译所选项目或取消选择上面的这些项目。"
+         ],
+         "Any existing content (translations) will be overwritten when creating duplicates.": [
+            "创建复本时，将覆盖任何现有内容（译文）。"
+         ],
+         "When duplicating content, please first duplicate parent pages to maintain the site's hierarchy.": [
+            "复制内容时，请首先复制父页面以保持网站的层次结构。"
+         ],
+         "Some of the content that you selected for translation includes fields that are encoded. Translators will not be able to work on this kind of content, so we removed it from the job.": [
+            "您选择翻译的某些内容包括编码的字段。译员将无法处理这类内容，所以我们将其从工作中移除。"
+         ],
+         "To fix this problem, you need to tell WPML how these fields are encoded, so that WPML can decode them before sending for translation.": [
+            "要解决此问题，您需要告诉WPML如何对这些字段进行编码，以便WPML在送交翻译之前对其进行解码。"
+         ],
+         "How to indicate to WPML that it needs to decode fields.": [
+            "如何向 WPML 指示它需要解码字段。"
+         ],
+         "WPML cannot send some of the content to translation": [
+            "WPML无法将一些内容发去翻译"
+         ],
+         "<s>%s</s>: There are base64 encoded fields in this document": [
+            "<s>%s</s>: 本文档中有 base64 编码的字段"
+         ],
+         "Hide details": [
+            "隐藏详情"
+         ],
+         "Show details": [
+            "显示详细资料"
+         ]
+      }
+   }
+}

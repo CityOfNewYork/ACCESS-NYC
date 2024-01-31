@@ -77,6 +77,8 @@ class WPML_TM_Jobs_Collection implements IteratorAggregate, Countable {
 	 * @param bool     $return_job_collection
 	 *
 	 * @return array|WPML_TM_Jobs_Collection
+	 *
+	 * @psalm-return ($return_job_collection is false ? array : WPML_TM_Jobs_Collection)
 	 */
 	public function map( $callback, $return_job_collection = false ) {
 		$mapped_result = array_map( $callback, $this->jobs );
@@ -115,6 +117,7 @@ class WPML_TM_Jobs_Collection implements IteratorAggregate, Countable {
 	/**
 	 * @return ArrayIterator
 	 */
+	#[\ReturnTypeWillChange]
 	public function getIterator() {
 		return new ArrayIterator( $this->jobs );
 	}
@@ -123,6 +126,7 @@ class WPML_TM_Jobs_Collection implements IteratorAggregate, Countable {
 		return $this->jobs;
 	}
 
+	#[\ReturnTypeWillChange]
 	public function count() {
 		return count( $this->jobs );
 	}

@@ -60,10 +60,16 @@ class StringsRetrieve {
 	 */
 	private function get_number_of_strings_in_domain( $language, $domain, $modified_mo_only ) {
 		$tables = "SELECT COUNT(s.id) FROM {$this->wpdb->prefix}icl_strings AS s";
+
+		/** @var string $where */
+		/** @phpstan-ignore-next-line */
 		$where  = $this->wpdb->prepare( $this->getDomainWhere(), [ $domain ] );
 
 		if ( $modified_mo_only ) {
-			$tables .= $this->wpdb->prepare( $this->getStringTranslationJoin(), [ $language, $language ] );
+			/** @var string $sql */
+			/** @phpstan-ignore-next-line */
+			$sql = $this->wpdb->prepare( $this->getStringTranslationJoin(), [ $language, $language ] );
+			$tables .= $sql;
 			$where  .= $this->getModifiedMOOnlyWhere();
 		}
 

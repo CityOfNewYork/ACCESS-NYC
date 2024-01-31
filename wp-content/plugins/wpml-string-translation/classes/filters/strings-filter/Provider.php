@@ -21,8 +21,8 @@ class Provider {
 	/**
 	 * Get filter.
 	 *
-	 * @param string|null $lang Language.
-	 * @param string|null $name Language name.
+	 * @param string|null      $lang Language.
+	 * @param string|null|bool $name Language name.
 	 *
 	 * @return WPML_Displayed_String_Filter|WPML_Register_String_Filter|null
 	 */

@@ -1,0 +1,253 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "From:": [
+            "Från:"
+         ],
+         "--Choose language--": [
+            "--Välj språk--"
+         ],
+         "to:": [
+            "till:"
+         ],
+         "Set language pair(s) for Translator %s:": [
+            "Ange språkpar för översättaren %s:"
+         ],
+         "+ Add more language pairs for this translator": [
+            "+ Lägg till fler språkpar för den här översättaren"
+         ],
+         "Translation Memory was successfully copied to Advanced Translation Editor.": [
+            "Översättningsminnet kopierades framgångsrikt till den Avancerade Översättningsredigeraren."
+         ],
+         "Deactivate ICanLocalize.com as Translation Service on this site": [
+            "Inaktivera ICanLocalize.com som översättningstjänst på den här webbplatsen"
+         ],
+         "Missing a translator? Or were new jobs since the last copy of the Translation Memory?": [
+            "Saknar du en översättare? Eller har du fått nya jobb sedan den senaste kopian av översättningsminnet?"
+         ],
+         "Enter here your ICanLocalize authentication details.": [
+            "Ange här dina autentiseringsuppgifter för ICanLocalize."
+         ],
+         "API Token:": [
+            "API-token:"
+         ],
+         "Please enter valid value for ICL token.": [
+            "Ange ett giltigt värde för ICL-token."
+         ],
+         "Enter ICL API token here": [
+            "Ange ICL API-token här"
+         ],
+         "Submit": [
+            "Skicka"
+         ],
+         "Sign up": [
+            "Registrera dig"
+         ],
+         "to ICanLocalize to receive your API token.": [
+            "på ICanLocalize för att få din API-token."
+         ],
+         "Already have an account? Login and": [
+            "Har du redan ett konto? Logga in och"
+         ],
+         "get your token.": [
+            "och hämta din token."
+         ],
+         "Copy new Translation Memory to Advanced Translation Memory": [
+            "Kopiera det nya översättningsminnet till det Avancerade Översättningsminnet"
+         ],
+         "Import translation memory": [
+            "Importera översättningsminne"
+         ],
+         "ICanLocalize is already deactivated on this site": [
+            "ICanLocalize är redan inaktiverad på den här webbplatsen"
+         ],
+         "You can still import Translators or Copy Translation Memory to Advanced Translator Editor": [
+            "Du kan fortfarande importera översättare eller kopiera översättningsminne till den Avancerade Översättarredigeraren."
+         ],
+         "Move from ICanLocalize.com to Advanced Translation Editor": [
+            "Flytta från ICanLocalize.com till den Avancerade Översättningsredigeraren"
+         ],
+         "Import translators": [
+            "Importera översättare"
+         ],
+         "Come back": [
+            "Kom tillbaka"
+         ],
+         "Cancel": [
+            "Avbryt"
+         ],
+         "Save": [
+            "Spara"
+         ],
+         "Name": [
+            "Namn"
+         ],
+         "Language Pairs": [
+            "Språkpar"
+         ],
+         "Not supported pairs:": [
+            "Inga understödda par:"
+         ],
+         "ICanLocalize.com deactivated": [
+            "ICanLocalize.com avaktiverad"
+         ],
+         "Translate memory is imported": [
+            "Översättningsminne importeras"
+         ],
+         "There is no translators in ICL": [
+            "Det finns inga översättare i ICL"
+         ],
+         "Translators saved": [
+            "Översättare sparade"
+         ],
+         "%s file upload failed.": [
+            "%s filöverföring misslyckades."
+         ],
+         "Flag": [
+            "Flagga"
+         ],
+         "Flag file": [
+            "Flagga fil"
+         ],
+         "You just added  language. Next, select it as the site's default language or a translation language.": [
+            "Du har precis lagt till språk. Välj sedan det som standardspråk för webbplatsen eller översättningsspråk."
+         ],
+         "Language added": [
+            "Språk tillagd"
+         ],
+         "The value \"%s\" already exists": [
+            "Värdet \"%s\" finns redan"
+         ],
+         "Add a new language": [
+            "Lägg till ett nytt språk"
+         ],
+         "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
+            "Skapa ett landsspecifikt språk genom att välja det allmänna språket i listan nedan. Välj sedan landet det ska vara lokaliserad för."
+         ],
+         "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
+            "Genom att välja en kombination som redan finns i databasen kan WPML hjälpa till att fylla i de nödvändiga fälten. Läs mer om <AddingACustomLanguageLink />."
+         ],
+         "Cannot find?": [
+            "Kan inte hitta?"
+         ],
+         "Click here": [
+            "Klicka här"
+         ],
+         "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
+            "Fel format. Den får bara innehålla små bokstäver och \"-\". T.ex. \"fr\", \"pt-br\", \"zh-hans\""
+         ],
+         "Language": [
+            "Språk"
+         ],
+         "Location": [
+            "Lokalisering"
+         ],
+         "Code": [
+            "Kod"
+         ],
+         "The language will not be supported by automatic translations": [
+            "Språket kommer inte att stödjas av automatiska översättningar"
+         ],
+         "Language mapping": [
+            "Språkmappning"
+         ],
+         "Don't map this language": [
+            "Mappa inte detta språk"
+         ],
+         "Default locale": [
+            "Standardspråkversion"
+         ],
+         "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
+            "Fel format. Den får bara innehålla små bokstäver och \"_\". T.ex. \"de\", \"de_DE\", \"zh_Hant_TW\""
+         ],
+         "hreflang": [
+            "hreflang"
+         ],
+         "Encode url?": [
+            "Koda URL?"
+         ],
+         "Flags must be:": [
+            "Flaggor måste vara:"
+         ],
+         "NO": [
+            "NEJ"
+         ],
+         "YES": [
+            "JA"
+         ],
+         " (required)": [
+            " (krävs)"
+         ],
+         "Please fill in the field": [
+            "Fyll i fältet"
+         ],
+         "PNG, SVG, or JPG files": [
+            "PNG-, SVG- eller JPG-filer"
+         ],
+         "Save language": [
+            "Spara språk"
+         ],
+         "18 x 12 pixels": [
+            "18 x 12 pixlar"
+         ],
+         "Read more about ": [
+            "Läs mer om"
+         ],
+         "The name of your language as it will appear on your site's language switcher.": [
+            "Namnet på språket så som det kommer att visas på webbplatsens språkväxlare."
+         ],
+         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "Ett unikt värde som identifierar språket i databasen och URL. Språkskoden kan inte ändras när den har sparats."
+         ],
+         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "Om ditt anpassade språk liknar ett befintligt språk kan du använda det befintliga språkets stavningskontroll och automatisk översättning. Om ditt anpassade språk till exempel är schweiziskt-tyska du kan mappa till tyska som det språk som ska användas för stavningskontroll och automatisk översättning. Om du inte mappar ditt anpassade språk till ett befintligt språk är stavningskontroll och automatiska översättningsfunktioner inte tillgängliga på det språket."
+         ],
+         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "Värdet WPML kontrollerar när man läser in översättningar från MO- och PO-filer. Standardspråket ingår i filnamnen i mappen /wp-content/languages/ i din WordPress-installation."
+         ],
+         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "Google använder attributet hreflang för att dirigera användare till webbplatser på deras relevanta språk och plats. Exempel:"
+         ],
+         "All English-speaking users: en": [
+            "Alla engelsktalande användare: en"
+         ],
+         "English for UK users: en-gb": [
+            "Engelska för brittiska användare: en-gb"
+         ],
+         "English for US users: en-us": [
+            "Engelska för USA-användare: en-us"
+         ],
+         "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
+            "Anger om webbadresser på detta språk är kodade eller använder ASCII-tecken (om du är osäker lämnar du det som \"No\")."
+         ],
+         "adding a custom language": [
+            "lägga till ett anpassat språk"
+         ],
+         "Default language": [
+            "Standardspråk"
+         ],
+         "What is the current language of your website?": [
+            "Vad är det aktuella språket på din webbplats?"
+         ],
+         "Translation languages": [
+            "Översättningsspråk"
+         ],
+         "Which languages do you want to translate your site into?": [
+            "Vilka språk vill du översätta din webbplats till?"
+         ],
+         "If you cannot find languages that you need in the list": [
+            "Om du inte hittar de språk du behöver i listan"
+         ],
+         "create a custom language": [
+            "skapa ett anpassat språk"
+         ],
+         "What are the languages of your site?": [
+            "Vilka språk är språken på din webbplats?"
+         ]
+      }
+   }
+}

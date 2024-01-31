@@ -6,7 +6,7 @@ class WPML_Translator_Records extends WPML_Translation_Roles_Records {
 	 * @return string
 	 */
 	protected function get_capability() {
-		return WPML_Translator_Role::CAPABILITY;
+		return \WPML\LIB\WP\User::CAP_TRANSLATE;
 	}
 
 	/**

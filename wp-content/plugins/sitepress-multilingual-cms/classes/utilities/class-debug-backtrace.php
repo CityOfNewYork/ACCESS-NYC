@@ -27,10 +27,10 @@ class DebugBackTrace {
 	/**
 	 * DebugBackTrace constructor.
 	 *
-	 * @param int  $limit
-	 * @param bool $provide_object
-	 * @param bool $ignore_args
-	 * @param null $debug_backtrace_function
+	 * @param int         $limit
+	 * @param bool        $provide_object
+	 * @param bool        $ignore_args
+	 * @param null|string $debug_backtrace_function
 	 */
 	public function __construct(
 		$limit = 0,

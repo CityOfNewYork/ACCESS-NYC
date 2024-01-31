@@ -8,7 +8,6 @@ class WPML_Translation_Priority_Select extends WPML_Templates_Factory {
 	const NONCE = 'wpml_change_string_translation_priority_nonce';
 
 	public function get_model() {
-
 		$model = array(
 			'translation_priorities' => get_terms(
 				array(
@@ -16,7 +15,7 @@ class WPML_Translation_Priority_Select extends WPML_Templates_Factory {
 					'hide_empty' => false,
 				)
 			),
-			'nonce'                  => wp_nonce_field( self::NONCE, self::NONCE ),
+			'nonce'                  => wp_nonce_field( self::NONCE, self::NONCE, true, false ),
 			'strings'                => array(
 				'empty_text' => __( 'Change translation priority of selected strings', 'wpml-string-translation' ),
 			),

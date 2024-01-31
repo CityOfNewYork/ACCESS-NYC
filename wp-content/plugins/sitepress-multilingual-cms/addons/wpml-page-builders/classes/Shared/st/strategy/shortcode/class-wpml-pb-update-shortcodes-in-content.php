@@ -102,6 +102,11 @@ class WPML_PB_Update_Shortcodes_In_Content {
 				$this->new_content = str_replace( $block, $new_block, $this->new_content );
 			} else {
 				if ( $is_attribute && $attr ) {
+					// Quotes needs to be converted to entities, otherwise they can match with
+					// the shortcode attributes delimters and break the attributes.
+					$translation = !empty( $translation )
+						? str_replace( [ "'", '"' ], [ '&apos;', '&quot;' ], $translation )
+						: $translation;
 					$pattern     = '/' . $attr . '=(["\'])' . preg_quote( $original, '/' ) . '(["\'])/';
 					$replacement = $attr . '=${1}' . $this->escape_backward_reference_on_replacement_string( $translation ) . '${2}';
 				} else {

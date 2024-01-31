@@ -58,6 +58,9 @@ class StringQuery implements Query {
 			'strings.id as original_element_id',
 			'strings.language as source_language',
 			'string_translations.language as target_language',
+			'NULL AS trid',
+			'NULL AS element_type',
+			'NULL AS element_id',
 			'string_translations.translation_service as translation_service',
 			'string_status.timestamp as sent_date',
 			'NULL as deadline_date',
@@ -74,10 +77,8 @@ class StringQuery implements Query {
 			'string_translations.status = ' . ICL_TM_COMPLETE . '  AS has_completed_translation',
 			'NULL AS editor_job_id',
 			'0 AS automatic',
-			'NULL AS review_status',
-			'NULL AS trid',
-			'NULL AS element_type',
 			'NULL AS job_title',
+			'NULL AS review_status',
 		);
 
 		return $this->build_query( $params, $columns );

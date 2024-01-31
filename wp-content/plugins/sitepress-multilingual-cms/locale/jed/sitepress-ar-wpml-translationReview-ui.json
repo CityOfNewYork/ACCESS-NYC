@@ -8,20 +8,32 @@
          "Accepted": [
             "مقبول"
          ],
-         "Reviewing the next translation...": [
-            "جارٍ مراجعة الترجمة التالية..."
+         "Approved!": [
+            "موافق عليه!"
+         ],
+         "Loading the next translation for review...": [
+            "جارٍ تحميل الترجمة التالية لمراجعتها..."
          ],
          "Back": [
             "رجوع"
          ],
-         "Edit Translation": [
-            "تحرير الترجمة"
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "أوقف تشغيل الخيار كي لا يتم تحميل الترجمة التالية تلقائيًا بعد استكمال هذه المراجعة."
          ],
-         "There was an error in applying translation.": [
-            "حدث خطأ أثناء تطبيق الترجمة."
+         "Turn on to automatically load the next translation after finishing this  .": [
+            "قم بتفعيل هذا الخيار لتحميل الترجمة التالية تلقائيًا بعد الانتهاء من هذه الترجمة."
+         ],
+         "Edit": [
+            "تحرير"
+         ],
+         "Edit translation": [
+            "تحرير الترجمة"
          ],
          "Please wait, applying translation..": [
             "يُرجى الانتظار، جارٍ تطبيق الترجمة..."
+         ],
+         "Next review": [
+            "المراجعة التالية"
          ],
          "Publish this translation": [
             "نشر هذه الترجمة"
@@ -29,11 +41,14 @@
          "Accept this translation": [
             "قبول هذه الترجمة"
          ],
-         "Approved!": [
-            "موافق عليه!"
+         "Published!": [
+            "تم النشر!"
          ],
-         "Loading the next translation for review...": [
-            "جارٍ تحميل الترجمة التالية لمراجعتها..."
+         "Someone is already reviewing this translation. Please try again later.": [
+            "يقوم شخص ما بمراجعة هذه الترجمة بالفعل. يُرجى إعادة المحاولة لاحقًا."
+         ],
+         "There was an error in applying translation.": [
+            "حدث خطأ أثناء تطبيق الترجمة."
          ]
       }
    }

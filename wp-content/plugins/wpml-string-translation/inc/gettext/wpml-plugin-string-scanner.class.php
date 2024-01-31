@@ -1,5 +1,7 @@
 <?php
 
+use WPML\API\Sanitize;
+
 class WPML_Plugin_String_Scanner extends WPML_String_Scanner implements IWPML_ST_String_Scanner {
 
 	private $current_plugin_file;
@@ -23,7 +25,7 @@ class WPML_Plugin_String_Scanner extends WPML_String_Scanner implements IWPML_ST
 		require_once WPML_ST_PATH . '/inc/potx.php';
 
 		foreach ( $_POST['files'] as $file ) {
-			$file = filter_var( $file, FILTER_SANITIZE_STRING );
+			$file = (string) Sanitize::string( $file );
 			if ( $this->file_hashing->hash_changed( $file ) ) {
 				_potx_process_file( $file, 0, array( $this, 'store_results' ), '_potx_save_version', $this->get_default_domain() );
 				$this->add_scanned_file( $file );

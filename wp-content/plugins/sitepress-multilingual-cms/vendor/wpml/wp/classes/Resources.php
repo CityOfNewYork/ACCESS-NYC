@@ -22,12 +22,32 @@ class Resources {
 	 * @return void
 	 */
 	public static function enqueue( $app, $pluginBaseUrl, $pluginBasePath, $version, $domain = null, $localize = null ) {
-		$handle = "wpml-$app-ui";
+		static::enqueueWithDeps( $app, $pluginBaseUrl, $pluginBasePath, $version, $domain, $localize, [] );
+	}
+
+	/**
+	 * Enqueue a JavaScript application file from the dist directory, with dependencies.
+	 *
+	 * @param string        $app
+	 * @param string        $pluginBaseUrl
+	 * @param string        $pluginBasePath
+	 * @param string        $version
+	 * @param null|string   $domain
+	 * @param null|string[] $localize
+	 * @param null|string[] $dependencies
+	 *
+	 * @return void
+	 */
+	public static function enqueueWithDeps( $app, $pluginBaseUrl, $pluginBasePath, $version, $domain = null, $localize = null, $dependencies = [] ) {
+		$handle = sprintf(
+			'wpml-%s-ui',
+			str_replace( '/', '_', $app )
+		);
 
 		wp_register_script(
 			$handle,
 			"$pluginBaseUrl/dist/js/$app/app.js",
-			[],
+			$dependencies,
 			$version
 		);
 

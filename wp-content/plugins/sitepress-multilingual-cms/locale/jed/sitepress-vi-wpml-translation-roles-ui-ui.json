@@ -3,7 +3,8 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "en"
          },
          "From:": [
             "Từ:"
@@ -68,12 +69,6 @@
          "Add Translation Manager": [
             "Thêm Quản lý Dịch thuật"
          ],
-         "Select an existing user and set as Translator": [
-            "Chọn một người dùng có sẵn và đặt thành Biên dịch viên (Người dịch)"
-         ],
-         "Create a new user and set as Translator": [
-            "Tạo người dùng mới và đặt làm Biên dịch viên"
-         ],
          "Set language pair(s)": [
             "Thiết lập (các) cặp ngôn ngữ"
          ],
@@ -85,6 +80,12 @@
          ],
          "Add a Translator": [
             "Thêm người dịch"
+         ],
+         "Select an existing user and set as Translator": [
+            "Chọn một người dùng có sẵn và đặt thành Biên dịch viên (Người dịch)"
+         ],
+         "Create a new user and set as Translator": [
+            "Tạo người dùng mới và đặt làm Biên dịch viên"
          ],
          "Edit language pair(s) for translator": [
             "Chỉnh sửa (các) cặp ngôn ngữ dành cho biên dịch viên"
@@ -131,26 +132,14 @@
          "Click here": [
             "Nhấn vào đây"
          ],
-         "The name of your language as it will appear on your site's language switcher.": [
-            "Tên ngôn ngữ của bạn sẽ xuất hiện trên trình chuyển đổi ngôn ngữ của trang web của bạn."
-         ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
             "Định dạng không đúng. Chỉ có thể chứa các chữ cái thường và \"-\". Ví dụ: \"fr\" , \"pt-br\", \"zh-hans\""
-         ],
-         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
-            "Một giá trị duy nhất định danh ngôn ngữ trong cơ sở dữ liệu và URL. Khi đã lưu, không thể thay đổi mã ngôn ngữ."
          ],
          "Language": [
             "Ngôn ngữ"
          ],
-         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
-            "Nếu ngôn ngữ tùy chỉnh của bạn tương tự như một ngôn ngữ có sẵn, bạn có thể sử dụng công cụ kiểm tra chính tả và quá trình dịch tự động của ngôn ngữ có sẵn. Ví dụ, nếu ngôn ngữ tùy chỉnh của bạn là tiếng Đức-Thụy Sĩ, bạn có thể ánh xạ với tiếng Đức như ngôn ngữ cần sử dụng cho công cụ kiểm tra chính tả và quá trình dịch tự động. Nếu bạn không ánh xạ ngôn ngữ tùy chỉnh của mình với một ngôn ngữ có sẵn, các tính năng kiểm tra chính tả và dịch tự động sẽ không khả dụng trong ngôn ngữ đó."
-         ],
          "Location": [
             "Địa điểm"
-         ],
-         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
-            "Giá trì WPML kiểm tra khi tải các bản dịch từ các tập tin MO và PO. Vị trí mặc định sẽ có trong các tên tập tin trong thưu mục /wp-content/languages/ trong mục thiết lập WordPress của bạn."
          ],
          "Code": [
             "Mã"
@@ -158,29 +147,17 @@
          "The language will not be supported by automatic translations": [
             "Ngôn ngữ sẽ không được các bản dịch tự động hỗ trợ"
          ],
-         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
-            "Google sử dụng thuộc tính hreflang để hướng người dùng đến các trang web theo ngôn ngữ và địa điểm liên quan. Ví dụ:"
-         ],
          "Language mapping": [
             "Ánh xạ ngôn ngữ"
          ],
-         "All English-speaking users: en": [
-            "Tất cả người dùng nói tiếng Anh: en"
-         ],
          "Don't map this language": [
             "Không ánh xạ ngôn ngữ này"
-         ],
-         "English for UK users: en-gb": [
-            "Tiếng Anh cho người dùng tại Vương Quốc Anh: en-gb"
          ],
          "Default locale": [
             "Locale mặc định"
          ],
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
             "Định dạng không đúng. Chỉ có thể chứa các chữ cái thường và \"_\". Ví dụ: \"de\" , \"de_DE\", \"zh_Hant_TW\""
-         ],
-         "English for US users: en-us": [
-            "Tiếng Anh cho người dùng tại Mỹ: en-us"
          ],
          "hreflang": [
             "hreflang"
@@ -202,6 +179,30 @@
          ],
          "Save language": [
             "Lưu ngôn ngữ"
+         ],
+         "The name of your language as it will appear on your site's language switcher.": [
+            "Tên ngôn ngữ của bạn sẽ xuất hiện trên trình chuyển đổi ngôn ngữ của trang web của bạn."
+         ],
+         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "Một giá trị duy nhất định danh ngôn ngữ trong cơ sở dữ liệu và URL. Khi đã lưu, không thể thay đổi mã ngôn ngữ."
+         ],
+         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "Nếu ngôn ngữ tùy chỉnh của bạn tương tự như một ngôn ngữ có sẵn, bạn có thể sử dụng công cụ kiểm tra chính tả và quá trình dịch tự động của ngôn ngữ có sẵn. Ví dụ, nếu ngôn ngữ tùy chỉnh của bạn là tiếng Đức-Thụy Sĩ, bạn có thể ánh xạ với tiếng Đức như ngôn ngữ cần sử dụng cho công cụ kiểm tra chính tả và quá trình dịch tự động. Nếu bạn không ánh xạ ngôn ngữ tùy chỉnh của mình với một ngôn ngữ có sẵn, các tính năng kiểm tra chính tả và dịch tự động sẽ không khả dụng trong ngôn ngữ đó."
+         ],
+         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "Giá trì WPML kiểm tra khi tải các bản dịch từ các tập tin MO và PO. Vị trí mặc định sẽ có trong các tên tập tin trong thưu mục /wp-content/languages/ trong mục thiết lập WordPress của bạn."
+         ],
+         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "Google sử dụng thuộc tính hreflang để hướng người dùng đến các trang web theo ngôn ngữ và địa điểm liên quan. Ví dụ:"
+         ],
+         "All English-speaking users: en": [
+            "Tất cả người dùng nói tiếng Anh: en"
+         ],
+         "English for UK users: en-gb": [
+            "Tiếng Anh cho người dùng tại Vương Quốc Anh: en-gb"
+         ],
+         "English for US users: en-us": [
+            "Tiếng Anh cho người dùng tại Mỹ: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
             "Quyết định liệu các URL trong ngôn ngữ này có được mã hóa không hay sử dụng các ký tự ASCII (nếu không chắc chắn, hãy để là \"Không\")."
@@ -230,18 +231,6 @@
          "What are the languages of your site?": [
             "Trang web của bạn có những ngôn ngữ nào?"
          ],
-         "+ Add a Translation Manager": [
-            "+ Thêm một Quản lý Dịch thuật"
-         ],
-         "+ Add a Translator": [
-            "+ Thêm một người dịch"
-         ],
-         "%sLocal translators%s are users of your site that can log in and add, edit, and review your site's translations. Add a translator and their associated translation pairs to assign them translation jobs.": [
-            "%sNgười dịch bản địa%s là những người dùng trên trang web của bạn - những người có thể đăng nhập và thêm, chỉnh sửa và rà soát các bản dịch trên trang web của bạn. Thêm người dịch và các cặp ngôn ngữ dịch thuật liên kết để phân công cho họ các công việc dịch."
-         ],
-         "Translators": [
-            "Người dịch"
-         ],
          "You can add a dedicated person to oversee everything translation-related on your site. %sTranslation Managers%s can add new local translators or professional translation services, create and assign translation jobs, review completed translations, and change translation-related settings.": [
             "Bạn có thể thêm một người tận tâm để giám sát mọi việc liên quan đến dịch thuật trên trang web của mình.%sCác Quản lý Dịch thuật%s có thể thêm những người dịch bản địa hoặc các dịch vụ dịch thuật chuyên nghiệp mới, tạo và phân công các công việc dịch thuật, rà soát các bản dịch hoàn tất và thay đổi cài đặt liên quan đến dịch thuật."
          ],
@@ -250,6 +239,12 @@
          ],
          "Note: All Administrators are automatically given Translation Manager privileges.": [
             "Lưu ý: Tất cả các quản trị viên được tự động trao các đặc quyền của Quản lý Dịch thuật."
+         ],
+         "%sLocal translators%s are users of your site that can log in and add, edit, and review your site's translations. Add a translator and their associated translation pairs to assign them translation jobs.": [
+            "%sNgười dịch bản địa%s là những người dùng trên trang web của bạn - những người có thể đăng nhập và thêm, chỉnh sửa và rà soát các bản dịch trên trang web của bạn. Thêm người dịch và các cặp ngôn ngữ dịch thuật liên kết để phân công cho họ các công việc dịch."
+         ],
+         "Translators": [
+            "Người dịch"
          ]
       }
    }

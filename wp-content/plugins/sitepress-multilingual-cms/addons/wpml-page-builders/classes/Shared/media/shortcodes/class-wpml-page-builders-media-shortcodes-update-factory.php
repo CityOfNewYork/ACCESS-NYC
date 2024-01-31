@@ -46,7 +46,7 @@ class WPML_Page_Builders_Media_Shortcodes_Update_Factory implements IWPML_PB_Med
 		if ( ! $this->media_translate ) {
 			$this->media_translate = new WPML_Page_Builders_Media_Translate(
 				$this->get_element_factory(),
-				new WPML_Media_Image_Translate( $sitepress, new WPML_Media_Attachment_By_URL_Factory() )
+				new WPML_Media_Image_Translate( $sitepress, new WPML_Media_Attachment_By_URL_Factory(), new \WPML\Media\Factories\WPML_Media_Attachment_By_URL_Query_Factory() )
 			);
 		}
 

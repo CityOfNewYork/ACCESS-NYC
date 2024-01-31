@@ -5,11 +5,9 @@ class WPML_TM_Translation_Status {
 	protected $tm_records;
 
 	private $element_id_cache;
-	private $wpml_cache;
 
 	public function __construct( WPML_TM_Records $tm_records ) {
 		$this->tm_records = $tm_records;
-		$this->wpml_cache = $this->tm_records->get_new_wpml_wp_cache( 'element_translations' );
 	}
 
 	public function init() {
@@ -17,55 +15,53 @@ class WPML_TM_Translation_Status {
 			'wpml_translation_status',
 			array( $this, 'filter_translation_status' ),
 			1,
-			4
+			3
 		);
 		add_action( 'wpml_cache_clear', array( $this, 'reload' ) );
 	}
 
 	public function filter_translation_status( $status, $trid, $target_lang_code ) {
-		/** @var WPML_TM_Element_Translations $wpml_tm_element_translations */
-		$wpml_tm_element_translations = wpml_tm_load_element_translations();
-
-		$cache_key  = md5( $trid . $target_lang_code );
-		$found      = false;
-		$new_status = $this->wpml_cache->get( $cache_key, $found );
-		if ( ! $found ) {
-			if ( $trid ) {
-				$element_ids         = array_filter( $this->get_element_ids( $trid ) );
-				$element_type_prefix = $wpml_tm_element_translations->get_element_type_prefix( $trid, $target_lang_code );
-
-				$in_basket = false;
-				foreach ( $element_ids as $id ) {
-					if ( $this->is_in_basket( $id, $target_lang_code, $element_type_prefix ) ) {
-						$in_basket = true;
-						break;
-					}
-				}
-				if ( $in_basket ) {
-					$new_status = ICL_TM_IN_BASKET;
-				} else {
-					foreach ( $element_ids as $id ) {
-						if ( $job_status = $this->is_in_active_job( $id, $target_lang_code, $element_type_prefix, true ) ) {
-							$new_status = $job_status;
-							break;
-						}
-					}
-				}
-
-				$new_status = ICL_TM_IN_BASKET !== $new_status && $wpml_tm_element_translations->is_update_needed( $trid, $target_lang_code ) ? ICL_TM_NEEDS_UPDATE : $new_status;
-			}
-
-			if ( false !== $new_status ) {
-				$this->wpml_cache->set( $cache_key, $new_status );
-			}
+		if ( ! $trid ) {
+			return $status;
 		}
 
-		return (int) ( false !== $new_status ? $new_status : $status );
+		$getNewStatus = function ( $trid, $target_lang_code ) {
+			/** @var WPML_TM_Element_Translations $wpml_tm_element_translations */
+			$wpml_tm_element_translations = wpml_tm_load_element_translations();
+
+			$element_ids         = array_filter( $this->get_element_ids( $trid ) );
+			$element_type_prefix = $wpml_tm_element_translations->get_element_type_prefix( $trid, $target_lang_code );
+
+			foreach ( $element_ids as $id ) {
+				if ( $this->is_in_basket( $id, $target_lang_code, $element_type_prefix ) ) {
+					return ICL_TM_IN_BASKET;
+				}
+			}
+
+			if ( $wpml_tm_element_translations->is_update_needed( $trid, $target_lang_code ) ) {
+				return ICL_TM_NEEDS_UPDATE;
+			}
+
+			foreach ( $element_ids as $id ) {
+				if ( $job_status = $this->is_in_active_job( $id, $target_lang_code, $element_type_prefix, true ) ) {
+					return $job_status;
+				}
+			}
+
+			return false;
+		};
+
+		$cachedGetNewStatus = \WPML\LIB\WP\Cache::memorize( WPML_ELEMENT_TRANSLATIONS_CACHE_GROUP, 0, $getNewStatus );
+		$newStatus = $cachedGetNewStatus( $trid, $target_lang_code );
+
+		return $newStatus !== false ? $newStatus : $status;
 	}
 
 	public function reload() {
 		$this->element_id_cache = array();
-		$this->wpml_cache->flush_group_cache();
+		\WPML\LIB\WP\Cache::flushGroup( WPML_ELEMENT_TRANSLATIONS_CACHE_GROUP );
+		$oldCache = new WPML_WP_Cache( WPML_ELEMENT_TRANSLATIONS_CACHE_GROUP );
+		$oldCache->flush_group_cache();
 	}
 
 	public function is_in_active_job(

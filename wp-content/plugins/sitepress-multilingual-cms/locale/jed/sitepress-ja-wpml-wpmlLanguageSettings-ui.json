@@ -1,0 +1,28 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose the image file type for flags": [
+            "フラグ用の画像ファイルの種類を選択してください"
+         ],
+         "This option affects only the built-in WPML flags, not the custom uploaded ones.": [
+            "このオプションは、ビルトイン WPML フラグにのみ影響し、カスタム アップロードされたフラグには影響しません。"
+         ],
+         "%s format": [
+            "%s フォーマット"
+         ],
+         "Save": [
+            "保存"
+         ],
+         "The new format has been saved.": [
+            "新しい形式が保存されました。"
+         ],
+         "Failed to save the new format": [
+            "新しい形式の保存に失敗しました"
+         ]
+      }
+   }
+}

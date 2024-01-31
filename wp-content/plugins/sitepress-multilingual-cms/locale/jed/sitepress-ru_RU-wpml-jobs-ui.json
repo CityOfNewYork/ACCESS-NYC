@@ -5,14 +5,399 @@
          "": {
             "domain": "messages"
          },
+         "Draft — Pending review": [
+            "Черновик — Ожидает проверки"
+         ],
+         "Complete": [
+            "Завершено"
+         ],
          "Insufficient funds": [
             "Недостаточно средств"
          ],
-         "Complete": [
-            "Закончен"
+         "Start batch sync": [
+            "Начать синхронизацию партии"
+         ],
+         "Cancel job": [
+            "Отменить заказ"
+         ],
+         "Continue reviewing": [
+            "Продолжить проверку"
+         ],
+         "Start downloading XLIFF file": [
+            "Начать загрузку XLIFF-файла"
+         ],
+         "Edit": [
+            "Изменить"
+         ],
+         "Get translation": [
+            "Получить перевод"
+         ],
+         "Resign": [
+            "Отказаться"
+         ],
+         "Review": [
+            "Проверить"
+         ],
+         "Translate": [
+            "Перевести"
+         ],
+         "Take and Translate": [
+            "Взять на перевод"
+         ],
+         "View": [
+            "Просмотреть"
+         ],
+         "Delete Translations": [
+            "Удалить переводы"
+         ],
+         "Keep Translations as Draft": [
+            "Оставить переводы в виде черновиков"
+         ],
+         "Never mind. I want to review these translations.": [
+            "Не надо. Я хочу проверить эти переводы."
+         ],
+         "Cancel": [
+            "Отмена"
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "Это приведет к удалению выбранных заказов из очереди переводов без их публикации. Что сделать с переводами?"
+         ],
+         "Cancel Translation Review": [
+            "Отменить проверку переводов"
+         ],
+         "Bulk actions": [
+            "Массовые действия"
+         ],
+         "Apply": [
+            "Применить"
+         ],
+         "Actions applied to multiple translation jobs can take a few seconds. Please do not leave the page.": [
+            "Действия, применяемые к нескольким заданиям на перевод, могут занять несколько секунд. Пожалуйста, не покидайте страницу."
+         ],
+         "Actions applied to multiple translation jobs can take a few minutes. Please do not leave the page.": [
+            "Действия, применяемые к нескольким заданиям на перевод, могут занять несколько минут. Пожалуйста, не покидайте страницу."
+         ],
+         "Select translator": [
+            "Выбрать переводчика"
+         ],
+         "Assign": [
+            "Назначить"
+         ],
+         "In progress": [
+            "в процессе"
+         ],
+         "Translation ready to download": [
+            "Перевод готов к загрузке"
+         ],
+         "Completed": [
+            "завершено"
+         ],
+         "Published — Pending review": [
+            "Опубликовано — Ожидает проверки"
+         ],
+         "Published — Review in progress": [
+            "Опубликовано — Выполняется проверка"
+         ],
+         "Draft — Review in progress": [
+            "Черновик — Идет проверка"
+         ],
+         "Needs update": [
+            "Необходимо обновление"
+         ],
+         "Cancelled": [
+            "Отменена"
+         ],
+         "Needs translation": [
+            "Требуется перевод"
+         ],
+         "View original": [
+            "Смотреть оригинал"
+         ],
+         "(no title)": [
+            "(Без заголовка)"
+         ],
+         "Automatic translation": [
+            "Автоматический перевод"
+         ],
+         "TP ID: %d": [
+            "Идентификатор ПП: %d"
+         ],
+         "Reset": [
+            "Сбросить"
+         ],
+         "Filter": [
+            "Фильтровать\r\n"
+         ],
+         "ID (%s)": [
+            "Идентификатор (%s)"
+         ],
+         "Title (%s)": [
+            "Заголовок (%s)"
+         ],
+         "Type (%s)": [
+            "Тип (%s)"
+         ],
+         "Language (%s)": [
+            "Язык (%s)"
+         ],
+         "Batch name (%s)": [
+            "Название партии (%s)"
+         ],
+         "Status (%s)": [
+            "Статус (%s)"
+         ],
+         "Translated by (%s)": [
+            "Переведено (%s)"
+         ],
+         "Sent date (%s)": [
+            "Дата отправки (%s)"
+         ],
+         "Deadline (%s)": [
+            "Крайний срок (%s)"
+         ],
+         "Clear all filters": [
+            "Очистить все фильтры"
+         ],
+         "Any Translation Service": [
+            "Любой службой переводов"
+         ],
+         "Any WordPress Translator": [
+            "Любой переводчик WordPress"
+         ],
+         "From": [
+            "с"
+         ],
+         "To": [
+            "на"
+         ],
+         "Anyone": [
+            "Любым лицом"
+         ],
+         "Include jobs from translation services": [
+            "Включить задания от служб перевода"
+         ],
+         "All types": [
+            "Все типы"
+         ],
+         "Select visible columns": [
+            "Выбрать видимые столбцы"
+         ],
+         "Sort descending": [
+            "Сортировать по убыванию"
+         ],
+         "Sort ascending": [
+            "Сортировать по возрастанию"
+         ],
+         "Cancel sorting": [
+            "Отменить сортировку"
+         ],
+         "The bulk action is running...": [
+            "Массовое действие выполняется..."
+         ],
+         "Export all jobs to XLIFF 1.0": [
+            "Экспорт всех заданий в XLIFF 1.0"
+         ],
+         "Export all filtered jobs to XLIFF 1.0": [
+            "Экспорт всех отфильтрованных заданий в XLIFF 1.0"
+         ],
+         "Export all jobs to XLIFF 1.1": [
+            "Экспорт всех заданий в XLIFF 1.1"
+         ],
+         "Export all filtered jobs to XLIFF 1.1": [
+            "Экспорт всех отфильтрованных заданий в XLIFF 1.1"
+         ],
+         "Export all jobs to XLIFF 1.2": [
+            "Экспорт всех заданий в XLIFF 1.2"
+         ],
+         "Export all filtered jobs to XLIFF 1.2": [
+            "Экспорт всех отфильтрованных заданий в XLIFF 1.2"
+         ],
+         "Export": [
+            "Экспортировать"
+         ],
+         "Select File": [
+            "Выбрать файл"
+         ],
+         ".xliff .zip": [
+            ".xliff .zip"
+         ],
+         "Importing": [
+            "Импорт"
+         ],
+         "Import": [
+            "Импортировать"
+         ],
+         "Import / Export XLIFF": [
+            "Импорт / Экспорт XLIFF"
+         ],
+         "Actions": [
+            "Действия"
+         ],
+         "Batch name": [
+            "Название партии"
+         ],
+         "Filter by %s": [
+            "Фильтровать по %s"
+         ],
+         "Title": [
+            "Заголовок"
+         ],
+         "Approve translation reviews": [
+            "Утвердить проверенные переводы"
+         ],
+         "Cancel jobs": [
+            "Отменить заказы"
+         ],
+         "Cancel translation reviews": [
+            "Отменить проверку переводов"
+         ],
+         "Export to XLIFF %s": [
+            "Экспорт в XLIFF %s"
+         ],
+         "Get translations": [
+            "Получить переводы"
+         ],
+         "This action does not apply to any of the selected translation jobs": [
+            "Это действие не применяется ни к одному из выбранных заданий на перевод"
+         ],
+         "Translations have been downloaded": [
+            "Переводы были загружены"
+         ],
+         "Translation has been downloaded": [
+            "Перевод был загружен"
+         ],
+         "Translations could not be downloaded": [
+            "Переводы не могут быть загружены"
+         ],
+         "Translation could not be downloaded": [
+            "Перевод не может быть загружен"
+         ],
+         "Approving translations reviews failed!": [
+            "Не удалось одобрить проверки переводов"
+         ],
+         "Failed approving translations for the following posts: ": [
+            "Не удалось одобрить переводы следующих публикаций:"
+         ],
+         "Translations reviews approved successfully!": [
+            "Проверки переводов успешно одобрены!"
+         ],
+         "No valid jobs selected to approve translations reviews!": [
+            "Не выбрано подходящих заданий для одобрения проверок переводов!"
+         ],
+         "The translator has been assigned to the job": [
+            "Переводчик был назначен на задание"
+         ],
+         "The translator could not be assigned to the job": [
+            "Переводчик не может быть назначен на задание"
+         ],
+         "The jobs have been cancelled": [
+            "Задания были отменены"
+         ],
+         "The job has been cancelled": [
+            "Задание было отменено"
+         ],
+         "The jobs could not be cancelled": [
+            "Задания не могли быть отменены"
+         ],
+         "The job could not be cancelled": [
+            "Задание не может быть отменено"
+         ],
+         "Translation reviews have been canceled": [
+            "Проверки переводов отменены"
+         ],
+         "Translation review has been canceled": [
+            "Проверка перевода отменена"
+         ],
+         "Translation reviews could not be canceled": [
+            "Проверки переводов не могут быть отменены"
+         ],
+         "Translation review could not be canceled": [
+            "Проверка перевода не может быть отменена"
+         ],
+         "Sent on": [
+            "Отправлено"
+         ],
+         "Deadline": [
+            "Крайний срок"
+         ],
+         "Status": [
+            "Состояние"
          ],
          "Pending review": [
-            "Ожидает проверки"
+            "В ожидании проверки"
+         ],
+         "ID": [
+            "Идентификатор"
+         ],
+         "Type": [
+            "Тип"
+         ],
+         "Languages": [
+            "Языки"
+         ],
+         "Translated by": [
+            "переводчик"
+         ],
+         "Download XLIFF file couldn't be finished": [
+            "Загрузка XLIFF-файла не может быть завершена"
+         ],
+         "Could not load jobs for export": [
+            "Не удалось загрузить задания для экспорта"
+         ],
+         "The export to XLIFF failed": [
+            "Не удалось экспортировать в XLIFF"
+         ],
+         "Imported %d jobs": [
+            "Импортировано %d заданий"
+         ],
+         "Imported one job": [
+            "Импортировано одно задание"
+         ],
+         "Could not import any job": [
+            "Не удалось импортировать ни одно задание"
+         ],
+         "Import failed!": [
+            "Не удалось импортировать!"
+         ],
+         "Loading translations queue": [
+            "Загрузка очереди переводов"
+         ],
+         "Loading translation jobs": [
+            "Загрузка заданий на перевод"
+         ],
+         "Jobs could not be loaded": [
+            "Не удалось загрузить задания"
+         ],
+         "Specify some jobs to resign": [
+            "Укажите некоторые задания, которые нужно отменить"
+         ],
+         "We could not resign jobs: %s": [
+            "Мы не смогли отменить задания: %s"
+         ],
+         "Resigned from jobs": [
+            "Отказался от заданий"
+         ],
+         "Resigned from job": [
+            "Отказался от задания"
+         ],
+         "Failed to resign from jobs": [
+            "Не удалось отказаться от задания"
+         ],
+         "The Advanced Editor jobs synchronization has failed": [
+            "Ошибка синхронизации заданий Расширенного редактора"
+         ],
+         "Synchronization with the Professional Translation service has failed": [
+            "Синхронизация со службой профессионального перевода не удалась"
+         ],
+         "%d translation has been downloaded": [
+            "%d перевод загружен",
+            "%d перевода(-ов) загружено"
+         ],
+         "Batch sync finished successfully!": [
+            "Синхронизация партии успешно завершена!"
+         ],
+         "Batch sync couldn't be finished": [
+            "Не удалось завершить синхронизацию партии"
          ]
       }
    }

@@ -1,0 +1,40 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Preparing...": [
+            "Προετοιμασία..."
+         ],
+         "All jobs have been cancelled": [
+            "Όλες οι εργασίες ακυρώθηκαν"
+         ],
+         "There is no more jobs to cancel": [
+            "Δεν υπάρχουν άλλες εργασίες για ακύρωση"
+         ],
+         "The jobs cancellation has failed": [
+            "Η ακύρωση εργασιών ήταν ανεπιτυχής"
+         ],
+         "Cancel in-progress automatic jobs": [
+            "Ακύρωση αυτόματων εργασιών σε εξέλιξη"
+         ],
+         "Domain name has been updated": [
+            "Το όνομα τομέα ενημερώθηκε"
+         ],
+         "Domain name update has been failed": [
+            "Η ενημέρωση ονόματος τομέα ήταν ανεπιτυχής"
+         ],
+         "Update domain name in language switcher settings": [
+            "Ενημέρωση ονόματος τομέα στις ρυθμίσεις εναλλαγής γλώσσας"
+         ],
+         "Refresh license data to recognise license update": [
+            "Ανανέωση δεδομένων άδειας για αναγνώριση ενημέρωσης άδειας"
+         ],
+         "WPML License has been refreshed": [
+            "Η άδεια του WPML ανανεώθηκε"
+         ]
+      }
+   }
+}

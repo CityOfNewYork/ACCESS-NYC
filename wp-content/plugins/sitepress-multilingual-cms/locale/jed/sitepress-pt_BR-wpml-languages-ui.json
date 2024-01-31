@@ -5,6 +5,15 @@
          "": {
             "domain": "messages"
          },
+         "hide the translations instead.": [
+            "em vez disso, oculte as traduções."
+         ],
+         "Error happened! Please try again.": [
+            "Ocorreu um erro! Tente novamente."
+         ],
+         "Cancel": [
+            "Cancelar"
+         ],
          "Choose Content to Automatically Translate into": [
             "Escolha conteúdo para traduzir automaticamente para"
          ],
@@ -17,35 +26,35 @@
          "Save": [
             "Salvar"
          ],
-         "Choose Content to Automatically Translate into New Language": [
-            "Escolha conteúdo para traduzir automaticamente para novo idioma"
+         "Add new languages": [
+            "Adicionar novos idiomas"
          ],
-         "Add languages and start translating": [
-            "Adicionar idiomas e começar a traduzir"
+         "Add new language": [
+            "Adicionar novo idioma"
          ],
-         "Add language and start translating": [
-            "Adicionar idioma e começar a traduzir"
+         "Never mind - don't add new languages": [
+            "Sem problemas - não adicionar novos idiomas"
          ],
-         "Never mind. Don't add new languages": [
-            "Está tranquilo. Não adicionar novos idiomas"
+         "Never mind - don't add new language": [
+            "Sem problemas - não adicionar novo idioma"
          ],
-         "Never mind. Don't add new language": [
-            "Está tranquilo. Não adicionar novo idioma"
+         "Choose which content to translate into the new language": [
+            "Escolha qual conteúdo traduzir para o novo idioma"
          ],
-         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
-            "Traduzir automaticamente agora todos os meus posts e páginas já existentes, além de meu conteúdo novo, à medida que eu criar."
+         "Automatically translate all my posts and pages, plus new content as I create it.": [
+            "Traduzir automaticamente todas as minhas publicações e páginas, além de novos conteúdos à medida que os crio."
          ],
          "Only automatically translate new content.": [
             "Só traduzir automaticamente conteúdo novo."
          ],
-         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
-            "Você está usando o modo <a>Traduzir tudo</a>, que traduz automaticamente o conteúdo do seu site."
+         "Which content do you want to translate into the new language?": [
+            "Qual conteúdo você deseja traduzir para o novo idioma?"
          ],
-         "Which content do you want to automatically translate into your newly-added language?": [
-            "Qual conteúdo deseja traduzir automaticamente para o idioma que você acabou de adicionar?"
+         "When you unpause automatic translation, this content will be <a>translated automatically</a>.": [
+            "Ao retomar a tradução automática, este conteúdo será <a>traduzido automaticamente</a>."
          ],
-         "You can translate existing content from the Translation Management Dashboard.": [
-            "Você pode traduzir conteúdo já existente através do painel do Translation Management."
+         "You can still translate existing content any time from the Translation Management Dashboard.": [
+            "Você ainda pode traduzir o conteúdo existente a qualquer momento no Painel de Gerenciamento de Tradução."
          ]
       }
    }

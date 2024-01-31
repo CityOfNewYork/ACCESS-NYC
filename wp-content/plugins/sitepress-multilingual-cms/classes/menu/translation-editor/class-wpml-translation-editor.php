@@ -122,7 +122,7 @@ class WPML_Translation_Editor extends WPML_WPDB_And_SP_User {
 				'Are you sure you want to resign from this job?',
 				'wpml-translation-management'
 			),
-			'resign_url'                => admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/translations-queue.php&icl_tm_action=save_translation&resign=1&job_id=' . $this->job->get_id() ),
+			'resign_url'                => admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/translations-queue.php&icl_tm_action=save_translation&resign=1&job_id=' . $this->job->get_id() . '&nonce=' . wp_create_nonce( 'save_translation' ) ),
 			'confirmNavigate'           => __(
 				'You have unsaved changes!',
 				'wpml-translation-management'

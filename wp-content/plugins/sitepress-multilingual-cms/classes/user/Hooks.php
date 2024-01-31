@@ -2,6 +2,8 @@
 
 namespace WPML\TM\User;
 
+use WPML\LIB\WP\User;
+
 class Hooks implements \IWPML_Backend_Action {
 
 	public function add_hooks() {
@@ -20,10 +22,7 @@ class Hooks implements \IWPML_Backend_Action {
 	}
 
 	public function filter_show_hidden_languages_options( $show_hidden_languages_options ) {
-		if (
-			current_user_can( \WPML_Manage_Translations_Role::CAPABILITY )
-			|| current_user_can( \WPML_Translator_Role::CAPABILITY )
-		) {
+		if ( User::canManageTranslations() || User::hasCap(User::CAP_TRANSLATE) ) {
 			return true;
 		}
 

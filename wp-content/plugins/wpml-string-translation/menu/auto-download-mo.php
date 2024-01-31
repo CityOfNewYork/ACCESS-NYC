@@ -10,12 +10,13 @@ if ( isset( $active_languages[ $language ] ) ) {
 	try {
 		$WPML_ST_MO_Downloader->load_xml();
 		$WPML_ST_MO_Downloader->get_translation_files();
-		$version_projects = explode( ';', $version );
-		$types            = array();
+		$types = array();
+		$version_projects = explode( ';', (string) $version );
 		foreach ( $version_projects as $project ) {
 			$exp     = explode( '|', $project );
 			$types[] = $exp[0];
 		}
+
 		$translations = $WPML_ST_MO_Downloader->get_translations( $language, array( 'types' => $types ) );
 
 	} catch ( Exception $error ) {

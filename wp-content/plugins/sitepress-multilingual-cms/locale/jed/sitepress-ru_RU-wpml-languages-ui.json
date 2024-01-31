@@ -5,6 +5,15 @@
          "": {
             "domain": "messages"
          },
+         "hide the translations instead.": [
+            "вместо этого скрыть переводы."
+         ],
+         "Error happened! Please try again.": [
+            "Произошла ошибка! Пожалуйста, попробуйте еще раз."
+         ],
+         "Cancel": [
+            "Отмена"
+         ],
          "Choose Content to Automatically Translate into": [
             "Выбрать контент для автоматического перевода на"
          ],
@@ -17,35 +26,35 @@
          "Save": [
             "Сохранить"
          ],
-         "Choose Content to Automatically Translate into New Language": [
-            "Выбрать контент для автоматического перевода на новый язык"
+         "Add new languages": [
+            "Добавить новые языки"
          ],
-         "Add languages and start translating": [
-            "Добавить языки и начать переводить"
+         "Add new language": [
+            "Добавить новый язык"
          ],
-         "Add language and start translating": [
-            "Добавить язык и начать переводить"
+         "Never mind - don't add new languages": [
+            "Ничего страшного, не добавляйте новые языки"
          ],
-         "Never mind. Don't add new languages": [
-            "Не надо. Не добавлять новые языки"
+         "Never mind - don't add new language": [
+            "Ничего страшного, не добавляйте новый язык"
          ],
-         "Never mind. Don't add new language": [
-            "Не надо. Не добавлять новый язык"
+         "Choose which content to translate into the new language": [
+            "Выберите, какой контент нужно перевести на новый язык"
          ],
-         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
-            "Автоматически перевести все существующие записи и страницы прямо сейчас, а также новый контент по мере его создания."
+         "Automatically translate all my posts and pages, plus new content as I create it.": [
+            "Автоматически переводить все мои публикации и страницы, а также новый, создаваемый мной, контент."
          ],
          "Only automatically translate new content.": [
             "Автоматически переводить только новый контент."
          ],
-         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
-            "Вы используете режим <a>Перевести все</a>, при котором контент вашего сайта переводится автоматически."
+         "Which content do you want to translate into the new language?": [
+            "Какой контент вы хотите перевести на новый язык?"
          ],
-         "Which content do you want to automatically translate into your newly-added language?": [
-            "Какой контент следует автоматически переводить на новый язык?"
+         "When you unpause automatic translation, this content will be <a>translated automatically</a>.": [
+            "Если вы активируете автоматический перевод, этот контент будет <a>переведен автоматически</a>."
          ],
-         "You can translate existing content from the Translation Management Dashboard.": [
-            "Существующий контент можно переводить в Консоли управления переводами."
+         "You can still translate existing content any time from the Translation Management Dashboard.": [
+            "Вы также можете переводить существующий контент в любое время с помощью Панели управления переводом."
          ]
       }
    }

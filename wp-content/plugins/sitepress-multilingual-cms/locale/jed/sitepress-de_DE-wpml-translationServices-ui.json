@@ -21,7 +21,7 @@
             "Besuchen Sie <link_to_service />, um einen API-Token anzufordern. Mit diesem Token kann WPML eine Verbindung zu <service_name /> herstellen, um Aufträge zu versenden und zu erhalten."
          ],
          "Search": [
-            "Suche"
+            "Suchen"
          ],
          "Settings": [
             "Einstellungen"
@@ -30,7 +30,7 @@
             "Es ist aktuell nicht möglich, eine Verbindung zu einem Übersetzungsdienst herzustellen, wenn WPML für die automatische Übersetzung der Inhalte Ihrer Website eingestellt ist. Um einen Übersetzungsdienst zu nutzen, ändern Sie bitte Ihren Übersetzungsmodus auf der Seite <LinkToSettingsPage />."
          ],
          "Documentation": [
-            "Dokumentation"
+            "Produktdokumentation"
          ],
          "Activate": [
             "Aktivieren"

@@ -164,6 +164,7 @@ class TermMeta {
 				$carry[ $fieldName ] = [];
 			}
 
+			/** @var string $options */
 			$options = $extractOptions( $row, $fieldName );
 
 			/**

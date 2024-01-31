@@ -27,10 +27,16 @@ class WPML_Lang_URL_Validator {
 		$def_lang      = $this->sitepress->get_language_details( $def_lang_code );
 		$output        = '<span class="explanation-text">(';
 
+		if ( $def_lang ) {
+			$output .= sprintf(
+				'%s - %s, ',
+				trailingslashit( $this->get_sample_url( $root ? $def_lang_code : '' ) ),
+				esc_html( $def_lang['display_name'] )
+			);
+		}
+
 		$output .= sprintf(
-			'%s - %s, %s - %s',
-			trailingslashit( $this->get_sample_url( $root ? $def_lang_code : '' ) ),
-			esc_html( $def_lang['display_name'] ),
+			'%s - %s',
 			trailingslashit( $this->get_sample_url( $sample_lang_code ) ),
 			esc_html( $sample_lang['display_name'] )
 		);

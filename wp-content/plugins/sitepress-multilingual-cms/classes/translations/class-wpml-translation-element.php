@@ -37,6 +37,9 @@ abstract class WPML_Translation_Element extends WPML_SP_User {
 		return $this->id;
 	}
 
+	/**
+	 * @return string|null
+	 */
 	public function get_source_language_code() {
 		$source_language_code = null;
 		if ( $this->get_language_details() ) {
@@ -156,7 +159,7 @@ abstract class WPML_Translation_Element extends WPML_SP_User {
 	abstract function get_type( $element = null );
 
 	/**
-	 * @param null|stdClass $element_data null, or a standard object containing at least the `translation_id`, `language_code`, `element_id`, `source_language_code`, `element_type`, and `original` properties.
+	 * @param null|object $element_data null, or a standard object containing at least the `translation_id`, `language_code`, `element_id`, `source_language_code`, `element_type`, and `original` properties.
 	 *
 	 * @return WPML_Translation_Element
 	 */
@@ -175,6 +178,15 @@ abstract class WPML_Translation_Element extends WPML_SP_User {
 		}
 
 		return $source_element;
+	}
+
+	/**
+	 * Determines whether the current element language is the root source element.
+	 *
+	 * @return bool
+	 */
+	public function is_root_source()  {
+		return null !== $this->get_source_language_code() && $this->get_source_language_code() === $this->get_language_code();
 	}
 
 	/**

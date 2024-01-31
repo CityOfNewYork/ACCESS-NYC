@@ -47,7 +47,7 @@ class WPML_TM_Post_Edit_Custom_Field_Settings_Menu {
 						continue;
 					}
 					$this->rendered = true;
-					$radio_disabled = ( $field_setting->is_read_only() && ! $field_setting->is_unlocked() ) ? 'disabled="disabled"' : '';
+					$radio_disabled = $field_setting->get_html_disabled();
 					$status         = (int) $field_setting->status();
 					$states         = array(
 						array( 'value' => WPML_IGNORE_CUSTOM_FIELD, 'text' => __( "Don't translate", 'sitepress' ) ),
@@ -84,7 +84,7 @@ class WPML_TM_Post_Edit_Custom_Field_Settings_Menu {
 										<input class="icl_mcs_cfs"
 									              name="icl_mcs_cf_<?php echo esc_attr( base64_encode( $cfield ) ); ?>"
 									              type="radio"
-									              value="<?php echo esc_attr( $state['value'] ); ?>" <?php echo esc_attr( $radio_disabled . $checked ); ?>
+									              value="<?php echo esc_attr( (string) $state['value'] ); ?>" <?php echo esc_attr( $radio_disabled . $checked ); ?>
 										/>
 										<?php echo esc_html( $state['text'] ) ?>
 									</label>&nbsp;

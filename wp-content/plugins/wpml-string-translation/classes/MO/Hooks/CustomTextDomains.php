@@ -51,6 +51,7 @@ class CustomTextDomains implements \IWPML_Action {
 		};
 
 		$addJitMoToL10nGlobal = pipe( Lst::nth( 0 ), function ( $domain ) use ( $locale ) {
+			unset( $GLOBALS['l10n'][ $domain ] );
 			$GLOBALS['l10n'][ $domain ] = new MO( $this->loadedDictionary, $locale, $domain );
 		} );
 

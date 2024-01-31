@@ -56,7 +56,7 @@ class TranslateWpmlString {
 	/**
 	 * @param string|array $wpmlContext
 	 * @param string       $name
-	 * @param bool         $value
+	 * @param bool|string  $value
 	 * @param bool         $allowEmptyValue
 	 * @param null|bool    $hasTranslation
 	 * @param null|string  $targetLang
@@ -87,7 +87,7 @@ class TranslateWpmlString {
 	/**
 	 * @param string|array $wpmlContext
 	 * @param string       $name
-	 * @param bool         $value
+	 * @param bool|string  $value
 	 * @param null|bool    $hasTranslation
 	 * @param null|string  $targetLang
 	 *
@@ -118,7 +118,7 @@ class TranslateWpmlString {
 	/**
 	 * @param string|array $wpmlContext
 	 * @param string       $name
-	 * @param bool         $value
+	 * @param bool|string  $value
 	 * @param null|bool    $hasTranslation
 	 * @param null|string  $targetLang
 	 *
@@ -163,6 +163,7 @@ class TranslateWpmlString {
 		$initialLocale = $this->languageSwitch->getCurrentLocale();
 
 		if ( $targetLang ) {
+			/** @var string $targetLocale */
 			$targetLocale = $this->locale->get_locale( $targetLang );
 			$this->languageSwitch->switchToLocale( $targetLocale );
 			$result = $function( $targetLocale );
@@ -184,8 +185,8 @@ class TranslateWpmlString {
 	 * If those conditions are not fulfilled,
 	 * we will translate from the database.
 	 *
-	 * @param string $original
-	 * @param string $name
+	 * @param string|bool $original
+	 * @param string      $name
 	 *
 	 * @return bool
 	 */
@@ -201,13 +202,13 @@ class TranslateWpmlString {
 	 * But it's still possible that WPML registered strings
 	 * have a hash for the name.
 	 *
-	 * @param string $original
-	 * @param string $name
+	 * @param string|bool $original
+	 * @param string      $name
 	 *
 	 * @return bool
 	 */
 	private static function isWpmlRegisteredString( $original, $name ) {
-		return $name && md5( $original ) !== $name;
+		return $name && md5( (string) $original ) !== $name;
 	}
 
 	public static function resetCache() {

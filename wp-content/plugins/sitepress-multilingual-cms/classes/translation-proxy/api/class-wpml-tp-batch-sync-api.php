@@ -42,7 +42,7 @@ class WPML_TP_Batch_Sync_API extends WPML_TP_API {
 	 */
 	private function handle_response( WPML_TP_API_Request $request ) {
 		$result = $this->client->send_request( $request, true );
-		if ( ! $result || empty( $result ) || ! isset( $result->queued_batches ) ) {
+		if ( empty( $result ) || ! isset( $result->queued_batches ) ) {
 			throw new WPML_TP_API_Exception( 'Batch synchronization could not be initialized' );
 		}
 

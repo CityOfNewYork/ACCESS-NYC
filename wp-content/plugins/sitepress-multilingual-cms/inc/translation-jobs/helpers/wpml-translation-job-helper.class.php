@@ -3,7 +3,7 @@
 class WPML_Translation_Job_Helper {
 
 	public function encode_field_data( $data ) {
-		return base64_encode( $data );
+		return null === $data ? '' : base64_encode( $data );
 	}
 
 	public function decode_field_data( $data, $format ) {

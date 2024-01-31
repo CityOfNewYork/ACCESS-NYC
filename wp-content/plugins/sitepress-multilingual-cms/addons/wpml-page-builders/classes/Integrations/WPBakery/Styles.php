@@ -12,7 +12,10 @@ use function WPML\FP\partialRight;
 
 class Styles implements \IWPML_Frontend_Action, \IWPML_Backend_Action {
 
-	const META_CUSTOM_CSS = '_wpb_shortcodes_custom_css';
+	const META_CUSTOM_CSS = [
+		'_wpb_shortcodes_custom_css',
+		'_wpb_post_custom_css',
+	];
 
 	/** @var WPML_Custom_Field_Setting_Factory $metaSettingFactory */
 	private $metaSettingFactory;
@@ -36,19 +39,21 @@ class Styles implements \IWPML_Frontend_Action, \IWPML_Backend_Action {
 		// $ifUsingWpBakery :: int -> bool
 		$ifUsingWpBakery = partialRight( 'get_post_meta', '_wpb_vc_js_status', true );
 
-		// $getCssValue :: int -> string
-		$getCssValue = partialRight( 'get_post_meta', self::META_CUSTOM_CSS, true );
-
-		// $setCssForTranslation :: int -> void
-		$setCssForTranslation = partial( 'update_post_meta', $postId, self::META_CUSTOM_CSS );
+		// $copyCss:: int -> void
+		$copyCss = function( $originalPostId ) use ( $postId ) {
+			wpml_collect( self::META_CUSTOM_CSS )->map( function( $key ) use ( $postId, $originalPostId ) {
+				$css = get_post_meta( $originalPostId, $key, true );
+				if ( $css ) {
+					update_post_meta( $postId, $key, $css );
+				}
+			} );
+		};
 
 		Maybe::of( $postId )
 			->filter( $ifUsingTranslationEditor )
 			->map( PostTranslations::getOriginalId() )
 			->filter( $ifUsingWpBakery )
-			->map( $getCssValue )
-			->filter( Fns::identity() )
-			->map( $setCssForTranslation );
+			->map( $copyCss );
 	}
 
 	/**
@@ -62,10 +67,12 @@ class Styles implements \IWPML_Frontend_Action, \IWPML_Backend_Action {
 	 * remote config file).
 	 */
 	public function adjustMetaSetting() {
-		$metaSetting = $this->metaSettingFactory->post_meta_setting( self::META_CUSTOM_CSS );
+		wpml_collect( self::META_CUSTOM_CSS )->map( function( $key ) {
+			$metaSetting = $this->metaSettingFactory->post_meta_setting( $key );
 
-		if ( ! $metaSetting->is_unlocked() ) {
-			$metaSetting->set_to_copy_once();
-		}
+			if ( ! $metaSetting->is_unlocked() ) {
+				$metaSetting->set_to_copy_once();
+			}
+		} );
 	}
 }

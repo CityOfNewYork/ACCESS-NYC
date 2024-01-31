@@ -20,29 +20,33 @@ use function WPML\FP\pipe;
 class StatusIcons implements \IWPML_Backend_Action {
 
 	public function add_hooks() {
+		if ( ! Option::isTMAllowed() ) {
+			// Blog License. No access to Review mechanic.
+			return;
+		}
+
 		$ifNeedsReview = function ( $fn ) {
-			$getJob          = Fns::converge( Jobs::getTridJob(), [
-				Obj::prop( 'trid' ),
-				Obj::prop( 'languageCode' )
-			] );
-			$doesNeedReview = pipe(
-				$getJob,
-				ReviewStatus::doesJobNeedReview()
-			);
+			$doesNeedReview = function( $job ) {
+				// Treat null as ACCEPTED.
+				$review_status = isset( $job['review_status'] ) && $job['review_status']
+					? $job['review_status']
+					: ReviewStatus::ACCEPTED;
+				return ReviewStatus::needsReview( $review_status );
+			};
 
 			return Logic::ifElse( $doesNeedReview, $fn, Obj::prop( 'default' ) );
 		};
 
-		Hooks::onFilter( 'wpml_css_class_to_translation', PHP_INT_MAX , 5 )
-		     ->then( Hooks::getArgs( [ 0 => 'default', 2 => 'languageCode', 3 => 'trid', 4 => 'status' ] ) )
+		Hooks::onFilter( 'wpml_css_class_to_translation', PHP_INT_MAX , 6 )
+		     ->then( Hooks::getArgs( [ 0 => 'default', 2 => 'languageCode', 3 => 'trid', 4 => 'status', 5 => 'review_status' ] ) )
 		     ->then( $ifNeedsReview( Fns::always( 'otgs-ico-needs-review' ) ) );
 
-		Hooks::onFilter( 'wpml_text_to_translation', PHP_INT_MAX, 6 )
-		     ->then( Hooks::getArgs( [ 0 => 'default', 2 => 'languageCode', 3 => 'trid', 5 => 'status' ] ) )
+		Hooks::onFilter( 'wpml_text_to_translation', PHP_INT_MAX, 7 )
+		     ->then( Hooks::getArgs( [ 0 => 'default', 2 => 'languageCode', 3 => 'trid', 5 => 'status', 6 => 'review_status' ] ) )
 		     ->then( $ifNeedsReview ( self::getReviewTitle( 'languageCode' ) ) );
 
-		Hooks::onFilter( 'wpml_link_to_translation', PHP_INT_MAX, 6 )
-		     ->then( Hooks::getArgs( [ 0 => 'default', 1 => 'postId', 2 => 'langCode', 3 => 'trid', 5 => 'status' ] ) )
+		Hooks::onFilter( 'wpml_link_to_translation', PHP_INT_MAX, 7 )
+		     ->then( Hooks::getArgs( [ 0 => 'default', 1 => 'postId', 2 => 'langCode', 3 => 'trid', 5 => 'status', 6 => 'review_status' ] ) )
 		     ->then( $this->setLink() );
 	}
 
@@ -70,6 +74,15 @@ class StatusIcons implements \IWPML_Backend_Action {
 
 	private function setLink() {
 		return function ( $data ) {
+			if ( array_key_exists( 'review_status', $data ) ) {
+				// Review status already provided by the filter.
+				$review_status = $data['review_status'] ?: ReviewStatus::ACCEPTED;
+				if ( ! ReviewStatus::needsReview( $review_status ) ) {
+					// Does not need review.
+					return $data['default'];
+				}
+			}
+
 			$isInProgress            = pipe(
 				Obj::prop( 'status' ),
 				Lst::includes( Fns::__, [ ICL_TM_WAITING_FOR_TRANSLATOR, ICL_TM_IN_PROGRESS, ICL_TM_ATE_NEEDS_RETRY ] )

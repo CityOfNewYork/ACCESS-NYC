@@ -53,7 +53,7 @@ class WPML_Root_Page_Actions {
 	/**
 	 * If a page is used as the root page, returns the id of that page, otherwise false.
 	 *
-	 * @return bool|false|int
+	 * @return int|false
 	 */
 	public function get_root_page_id() {
 		$urls_in_dirs = isset($this->sp_settings['language_negotiation_type']) && (int)$this->sp_settings['language_negotiation_type'] === 1;
@@ -162,7 +162,8 @@ class WPML_Root_Page_Actions {
 			 * The context within the screen where the boxes should display. Available contexts vary from screen to screen.
 			 * Post edit screen contexts include 'normal', 'side', and 'advanced'.
 			 *
-			 * @param String WPML_Meta_Boxes_Post_Edit_HTML::WRAPPER_ID Meta box ID.
+			 * @param 'advanced'|'normal'|'side' $position
+			 * @param string $meta_box_id Meta box ID.
 			 *
 			 * @since 4.2.8
 			 *
@@ -223,12 +224,12 @@ class WPML_Root_Page_Actions {
 		global $sitepress, $wpml_query_filter;
 
 		remove_action( 'template_redirect', 'redirect_canonical' );
-		add_action( 'parse_query', array( $this, 'wpml_home_url_parse_query' ) );
+		add_action( 'parse_query', array( $this, 'action_wpml_home_url_parse_query' ) );
 
 		remove_filter( 'posts_join', array( $wpml_query_filter, 'posts_join_filter' ), 10 );
 		remove_filter( 'posts_where', array( $wpml_query_filter, 'posts_where_filter' ), 10 );
 		$root_id = $this->get_root_page_id();
-		$rp      = get_post( $root_id );
+		$rp      = $root_id ? get_post( $root_id ) : false;
 		if ( $rp && $rp->post_status != 'trash' ) {
 			$sitepress->ROOT_URL_PAGE_ID = $root_id;
 		}
@@ -239,14 +240,14 @@ class WPML_Root_Page_Actions {
 	 *
 	 * @return mixed
 	 */
-	function wpml_home_url_parse_query( $q ) {
+	function wpml_home_url_parse_query( $q, $remove_filter = 'wpml_home_url_parse_query' ) {
 		if ( ! $q->is_main_query() ) {
 			return $q;
 		}
 		if ( ! WPML_Root_Page::is_current_request_root() ) {
 			return $q;
 		} else {
-			remove_action( 'parse_query', array( $this, 'wpml_home_url_parse_query' ) );
+			remove_action( 'parse_query', array( $this, $remove_filter ) );
 
 			$uri_path  = trim( wpml_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ), '/' );
 			$uri_parts = explode( '/', $uri_path );
@@ -261,7 +262,7 @@ class WPML_Root_Page_Actions {
 
 			$q->parse_query( $query_args );
 			$root_id = $this->get_root_page_id();
-			add_action( 'parse_query', array( $this, 'wpml_home_url_parse_query' ) );
+			add_action( 'parse_query', array( $this, $remove_filter ) );
 
 			if ( false !== $root_id ) {
 				$q = $this->set_page_query_parameters( $q, $root_id );
@@ -275,6 +276,11 @@ class WPML_Root_Page_Actions {
 
 		return $q;
 	}
+
+	function action_wpml_home_url_parse_query( $q ) {
+		$this->wpml_home_url_parse_query( $q, 'action_wpml_home_url_parse_query' );
+	}
+
 
 	private function set_page_query_parameters( $q, $page_id ) {
 		$q->query_vars['page_id'] = $page_id;

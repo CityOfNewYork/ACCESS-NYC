@@ -5,6 +5,41 @@
         <br /><br />
         {{ message|raw }}
     </p>
+
+   {% if translations_in_progress is defined %}
+       {% set display_limit = translations_in_progress.display_limit %}
+       {% set translations = translations_in_progress.translations %}
+       {% if translations %}
+            <table style="width:100%">
+                <tr>
+                    <th colspan="3" style="text-align: left;">
+                       {{ translations_in_progress.title }}
+                    </th>
+                </tr>
+                {% set break = false %}
+                {% for translation in translations if not break %}
+                    {% if loop.index == display_limit and translations|length > display_limit %}
+                        <tr>
+                            <td colspan="3"><i>{{ translations_in_progress.more|format( translations|length + 1 - display_limit )}}</i></td>
+                        </tr>
+                        {% set break = true %}
+                    {% else %}
+                        <tr>
+                            <td style="width: 5%">{{ translation.flag|raw }}</td>
+                            <td>{{ translation.translator ?: translations_in_progress.no_translator }}</td>
+                            <td style="text-align: right">{{ translation.waiting_for }}</td>
+                        </tr>
+                   {% endif %}
+                {% endfor %}
+            </table>
+            {% if translations_in_progress.msg_stale_job %}
+			    <div class="notice inline notice-error notice-alt" style="margin: 10px 0; padding:5px">
+                    {{ translations_in_progress.msg_stale_job|raw }}
+                </div>
+            {% endif %}
+       {% endif %}
+   {% endif %}
+
     <p class="text-center">
         <a class="js-wpml-tm-continue button button-secondary">{{ edit_anyway_button }}</a>
         <a class="js-wpml-tm-go-back button button-secondary">{{ go_back_button }}</a>

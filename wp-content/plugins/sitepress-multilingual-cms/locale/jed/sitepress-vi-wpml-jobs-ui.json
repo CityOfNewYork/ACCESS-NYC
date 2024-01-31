@@ -3,16 +3,56 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "en"
          },
-         "Insufficient funds": [
-            "Không đủ tiền"
+         "Draft — Pending review": [
+            "Bản nháp - Đang chờ rà soát"
          ],
          "Complete": [
             "Hoàn thành"
          ],
+         "Insufficient funds": [
+            "Không đủ tiền"
+         ],
+         "Edit": [
+            "Sửa"
+         ],
+         "Resign": [
+            "Từ bỏ"
+         ],
+         "Review": [
+            "Đánh giá"
+         ],
+         "Translate": [
+            "Dịch"
+         ],
+         "View": [
+            "Xem"
+         ],
+         "Delete Translations": [
+            "Xóa các bản dịch"
+         ],
+         "Keep Translations as Draft": [
+            "Giữ các bản dịch dưới dạng Bản nháp"
+         ],
+         "Never mind. I want to review these translations.": [
+            "Không sao. Tôi muốn rà soát các bản dịch này."
+         ],
+         "Cancel": [
+            "Hủy"
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "Việc này sẽ xóa các công việc đã chọn khỏi Hàng chờ Bản dịch mà không đăng tải chúng. Bạn muốn làm gì với các bản dịch?"
+         ],
+         "Cancel Translation Review": [
+            "Hủy việc rà soát bản dịch"
+         ],
          "Pending review": [
             "Đang chờ đánh giá"
+         ],
+         "Languages": [
+            "Ngôn ngữ"
          ]
       }
    }

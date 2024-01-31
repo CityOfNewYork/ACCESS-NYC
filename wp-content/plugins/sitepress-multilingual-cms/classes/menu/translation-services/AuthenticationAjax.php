@@ -25,10 +25,10 @@ class AuthenticationAjax {
 	}
 
 	/**
-	 * @return bool
+	 * @return void
 	 */
 	public function authenticate_service() {
-		return $this->handle_action(
+		$this->handle_action(
 			function () {
 				$this->authorize_factory->create()->authorize(
 					json_decode( stripslashes( $_POST['custom_fields'] ) )
@@ -44,10 +44,10 @@ class AuthenticationAjax {
 	}
 
 	/**
-	 * @return bool
+	 * @return void
 	 */
 	public function update_credentials() {
-		return $this->handle_action(
+		$this->handle_action(
 			function () {
 				$this->authorize_factory->create()->updateCredentials(
 					json_decode( stripslashes( $_POST['custom_fields'] ) )
@@ -63,10 +63,10 @@ class AuthenticationAjax {
 	}
 
 	/**
-	 * @return bool
+	 * @return void
 	 */
 	public function invalidate_service() {
-		return $this->handle_action(
+		$this->handle_action(
 			function () {
 				$this->authorize_factory->create()->deauthorize();
 			},
@@ -82,7 +82,7 @@ class AuthenticationAjax {
 	 * @param string   $success_message
 	 * @param string   $failure_message
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	private function handle_action(
 		callable $action,
@@ -94,19 +94,19 @@ class AuthenticationAjax {
 			try {
 				$action();
 
-				return $this->send_success_response( $success_message );
+				$this->send_success_response( $success_message );
 			} catch ( \Exception $e ) {
 				return $this->send_error_message( $failure_message );
 			}
 		} else {
-			return $this->send_error_message( __( 'Invalid Request', 'wpml-translation-management' ) );
+			$this->send_error_message( __( 'Invalid Request', 'wpml-translation-management' ) );
 		}
 	}
 
 	/**
 	 * @param string $msg
 	 *
-	 * @return bool
+	 * @return void
 	 */
 	private function send_success_response( $msg ) {
 		wp_send_json_success(
@@ -116,8 +116,6 @@ class AuthenticationAjax {
 				'reload'  => 1,
 			]
 		);
-
-		return true;
 	}
 
 	/**
@@ -133,8 +131,6 @@ class AuthenticationAjax {
 				'reload'  => 0,
 			]
 		);
-
-		return false;
 	}
 
 	/**

@@ -70,7 +70,7 @@ class Status {
 	 * @return string
 	 */
 	private function pingRestEndpoint() {
-		$url = get_rest_url( '/' );
+		$url = get_rest_url();
 
 		$response = $this->wp_http->get(
 			$url,

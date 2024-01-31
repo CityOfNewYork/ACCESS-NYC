@@ -396,7 +396,7 @@ class WPML_Pro_Translation extends WPML_TM_Job_Factory_User {
 		$links = array();
 
 		foreach ( $regexp_links as $regexp ) {
-			if ( preg_match_all( $regexp, $body, $matches, PREG_SET_ORDER ) ) {
+			if ( preg_match_all( $regexp, is_null( $body ) ? '' : $body, $matches, PREG_SET_ORDER ) ) {
 				foreach ( $matches as $match ) {
 					$links[] = $match;
 				}
@@ -412,7 +412,7 @@ class WPML_Pro_Translation extends WPML_TM_Job_Factory_User {
 		$sitepress->switch_lang( $target_lang_code );
 
 		$wpml_element_type = $element_type;
-		$body              = false;
+		$body              = '';
 		$string_type       = null;
 		if ( strpos( $element_type, 'post' ) === 0 ) {
 			$post_prepared     = $wpdb->prepare( "SELECT * FROM {$wpdb->posts} WHERE ID=%d", array( $element_id ) );

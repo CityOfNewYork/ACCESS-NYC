@@ -105,8 +105,8 @@ class WPML_ST_Slug {
 	 * This method is used as a filter which returns the initial `$slug_value`
 	 * if no better value was found.
 	 *
-	 * @param string $slug_value
-	 * @param string $lang
+	 * @param string|false $slug_value
+	 * @param string       $lang
 	 *
 	 * @return string
 	 */

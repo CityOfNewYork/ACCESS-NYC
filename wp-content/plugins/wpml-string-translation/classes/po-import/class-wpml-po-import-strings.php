@@ -39,12 +39,12 @@ class WPML_PO_Import_Strings {
 		$strings = json_decode( $_POST['strings_json'] );
 
 		foreach ( $strings as $k => $string ) {
-			$original = filter_var( $string->original, FILTER_SANITIZE_STRING );
+			$original = wp_kses_post( $string->original );
 			$context  = filter_var( $string->context, FILTER_SANITIZE_STRING );
 
 			$string->original = str_replace( '\n', "\n", $original );
 			$name             = isset( $string->name )
-				? filter_var( $string->name, FILTER_SANITIZE_STRING ) : md5( $original );
+				? (string) filter_var( $string->name, FILTER_SANITIZE_STRING ) : md5( $original );
 
 			$string_id = icl_register_string( array(
 				'domain'  => filter_var( $_POST['icl_st_domain_name'], FILTER_SANITIZE_STRING ),
@@ -59,8 +59,8 @@ class WPML_PO_Import_Strings {
 	}
 
 	/**
-	 * @param string    $string_id
-	 * @param \stdClass $string
+	 * @param int|false|null $string_id
+	 * @param \stdClass      $string
 	 */
 	private function maybe_add_translation( $string_id, $string ) {
 		if ( $string_id && array_key_exists( 'icl_st_po_language', $_POST ) ) {
@@ -69,7 +69,7 @@ class WPML_PO_Import_Strings {
 				if ( $string->fuzzy ) {
 					$status = ICL_TM_NOT_TRANSLATED;
 				}
-				$translation = str_replace('\n', "\n", $string->translation );
+				$translation = str_replace( '\n', "\n", wp_kses_post( $string->translation ) );
 
 				icl_add_string_translation( $string_id, $_POST[ 'icl_st_po_language' ], $translation, $status );
 				icl_update_string_status( $string_id );

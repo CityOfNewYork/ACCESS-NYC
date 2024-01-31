@@ -51,6 +51,7 @@ class WPML_TF_Data_Object_Storage {
 	public function persist( IWPML_TF_Data_Object $data_object ) {
 		$post_data = $this->post_convert->to_post_data( $data_object );
 
+		/** @var int|WP_Error $updated_id */
 		$updated_id = wp_insert_post( $post_data['post'] );
 
 		if ( $updated_id && ! is_wp_error( $updated_id ) ) {

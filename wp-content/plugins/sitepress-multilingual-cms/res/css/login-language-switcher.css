@@ -9,5 +9,6 @@
   overflow: visible;
   background: none;
   border: none;
-  box-shadow: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }

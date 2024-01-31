@@ -103,7 +103,7 @@ class WPML_ST_Slug_New_Match_Finder {
 			similar_text( $match, $new_match->get_value(), $percent );
 			// Multiply $percent by 100 because floats as array keys are truncated to integers
 			// This will allow for fractional percentages.
-			$similarities[ $percent * 100 ] = $new_match;
+			$similarities[ intval( $percent * 100 ) ] = $new_match;
 		}
 
 		ksort( $similarities );

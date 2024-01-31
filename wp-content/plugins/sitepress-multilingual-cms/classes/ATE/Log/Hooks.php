@@ -14,12 +14,7 @@ class Hooks implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 	}
 
 	public function add_hooks() {
-		add_action( 'wpml_support_page_after', [ $this, 'renderSupportSection' ] );
 		add_action( 'admin_menu', [ $this, 'addLogSubmenuPage' ] );
-	}
-
-	public function renderSupportSection() {
-		$this->viewFactory->create()->renderSupportSection();
 	}
 
 	public function addLogSubmenuPage() {

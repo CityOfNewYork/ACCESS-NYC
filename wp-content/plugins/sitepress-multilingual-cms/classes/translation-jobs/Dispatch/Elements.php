@@ -2,9 +2,12 @@
 
 namespace WPML\TM\Jobs\Dispatch;
 
+use Exception;
+use WPML\API\Sanitize;
 use WPML\FP\Fns;
 use WPML\FP\Lst;
 use WPML\FP\Obj;
+use WPML\FP\Relation;
 use WPML\LIB\WP\User;
 use WPML\TM\API\Jobs;
 use function WPML\Container\make;
@@ -25,19 +28,26 @@ abstract class Elements {
 		$data,
 		$type
 	) {
+		$howToHandleExisting = Obj::propOr(\WPML_TM_Translation_Batch::HANDLE_EXISTING_LEAVE, 'wpml-how-to-handle-existing', $data );
+		$translateAutomatically = Relation::propEq( 'wpml-how-to-translate', 'automatic', $data );
+
 		$translationActions = filter_var_array(
 			Obj::propOr( [], 'tr_action', $data ),
 			FILTER_SANITIZE_NUMBER_INT
 		);
-		$sourceLanguage     = filter_var( $data['translate_from'], FILTER_SANITIZE_STRING );
+		$sourceLanguage = Sanitize::stringProp( 'translate_from', $data );
 
 		$targetLanguages = self::getTargetLanguages( $translationActions );
 		$translators     = self::getTranslators( $sourceLanguage, $targetLanguages );
 
-		$elementsForTranslation = self::getElements( $messages, $data[ $type ], $targetLanguages );
+		$elementsForTranslation = self::getElements( $messages, $data[ $type ], $targetLanguages, $howToHandleExisting, $translateAutomatically );
 
 		$batch = $buildBatch( $elementsForTranslation, $sourceLanguage, $translators );
-		$batch && $sendBatch( $messages, $batch );
+		if ( $batch ) {
+			$batch->setTranslationMode( Relation::propEq( 'wpml-how-to-translate', 'automatic', $data ) ? 'auto' : 'manual' );
+			$batch->setHowToHandleExisting( $howToHandleExisting );
+			$sendBatch( $messages, $batch );
+		}
 	}
 
 	private static function getTargetLanguages( $translationActions ) {
@@ -65,7 +75,9 @@ abstract class Elements {
 	private static function getElements(
 		Messages $messages,
 		$data,
-		$targetLanguages
+		$targetLanguages,
+		$howToHandleExisting,
+		$translateAutomatically
 	) {
 		$getElementsToTranslate = pipe( Fns::filter( Obj::prop( 'checked' ) ), Lst::keyBy( 'checked' ) );
 		$elementsIds            = $getElementsToTranslate( $data );
@@ -73,7 +85,9 @@ abstract class Elements {
 		list( $elementsToTranslation, $ignoredElementsMessages ) = static::filterElements(
 			$messages,
 			$elementsIds,
-			$targetLanguages
+			$targetLanguages,
+			$howToHandleExisting,
+			$translateAutomatically
 		);
 
 		$messages->showForPosts( $ignoredElementsMessages, 'information' );
@@ -82,24 +96,46 @@ abstract class Elements {
 	}
 
 	/**
-	 * @param int    $elementId
-	 * @param string $elementType
-	 * @param string $language
+	 * @param \stdClass $job
 	 *
 	 * @return bool
 	 */
-	protected static function hasInProgressJob( $elementId, $elementType, $language ) {
-		$job = Jobs::getElementJob( $elementId, $elementType, $language );
+	protected static function isProgressJob( $job ) {
+		return Lst::includes( (int) $job->status, [ ICL_TM_WAITING_FOR_TRANSLATOR, ICL_TM_IN_PROGRESS ] ) && ! $job->needs_update;
+	}
 
-		return $job && ICL_TM_IN_PROGRESS === (int) $job->status && ! $job->needs_update;
+	/**
+	 * @param \stdClass $job
+	 *
+	 * @return bool
+	 */
+	protected static function isCompletedJob( $job ) {
+		return (int) $job->status === ICL_TM_COMPLETE && ! $job->needs_update;
 	}
 
 	/**
 	 * @param Messages $messages
 	 * @param array    $elementsData
 	 * @param array    $targetLanguages
+	 * @param string   $howToHandleExisting
+	 * @param bool     $translateAutomatically
 	 *
+	 * phpcs:disable Squiz.Commenting.FunctionComment.InvalidNoReturn
 	 * @return array
+	 * @throws Exception Throws an exception if the method is not properly extended.
 	 */
-	abstract protected static function filterElements( Messages $messages, $elementsData, $targetLanguages );
+	protected static function filterElements( Messages $messages, $elementsData, $targetLanguages, $howToHandleExisting, $translateAutomatically ) {
+		throw new Exception( ' this method is mandatory' );
+	}
+
+	/**
+	 * @param \stdClass $job
+	 * @param string|null  $howToHandleExisting
+	 * @param bool $translateAutomatically
+	 *
+	 * @return bool
+	 */
+	protected static function shouldJobBeIgnoredBecauseIsCompleted( $job, $howToHandleExisting, $translateAutomatically ) {
+		return $translateAutomatically && $job && self::isCompletedJob( $job ) && $howToHandleExisting === \WPML_TM_Translation_Batch::HANDLE_EXISTING_LEAVE;
+	}
 }

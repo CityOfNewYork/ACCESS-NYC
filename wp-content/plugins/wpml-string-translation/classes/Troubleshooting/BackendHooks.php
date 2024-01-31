@@ -41,6 +41,11 @@ class BackendHooks implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 			esc_attr__( 'Cleanup and optimization completed!', 'wpml-string-translation' )
 		);
 
+		$this->displayLinkButton(
+			admin_url( sprintf( 'admin.php?page=%s', WPML_ST_FOLDER . '/menu/string-translation.php' ) ) . '&amp;troubleshooting=1',
+			esc_attr__( 'Clear invalid strings', 'wpml-string-translation' )
+		);
+
 		?>
 		</div>
 		<?php
@@ -63,6 +68,19 @@ class BackendHooks implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 				   data-nonce="<?php echo wp_create_nonce( self::NONCE_KEY ); ?>"
 				   data-reload="<?php echo ! (bool) $confirmationMessage; ?>"
 			/>
+			<br/>
+		</p>
+		<?php
+	}
+
+	/**
+	 * @param string       $link
+	 * @param string       $buttonLabel
+	 */
+	private function displayLinkButton( $link, $buttonLabel ) {
+		?>
+		<p>
+			<a class="button-secondary" href="<?php echo $link; ?>"><?php echo $buttonLabel; ?></a>
 			<br/>
 		</p>
 		<?php

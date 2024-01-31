@@ -22,7 +22,7 @@ class WPML_TM_Action_Helper {
 	/**
 	 * calculate post md5
 	 *
-	 * @param object|int $post
+	 * @param WP_Post|int $post
 	 *
 	 * @return string
 	 * @todo full support for custom posts and custom taxonomies
@@ -55,7 +55,7 @@ class WPML_TM_Action_Helper {
 			 * @internal
 			 *
 			 * @param string  $content
-			 * @param WP_Post $post
+			 * @param ?WP_Post $post
 			 */
 			$content = apply_filters( 'wpml_tm_post_md5_content', $content, $post );
 
@@ -79,7 +79,7 @@ class WPML_TM_Action_Helper {
 
 		$terms = array();
 		// we shouldn't adjust term by current language need get terms by post_id
-		remove_filter( 'get_term', array( $sitepress, 'get_term_adjust_id' ), 1 );
+		$hasFilter = remove_filter( 'get_term', array( $sitepress, 'get_term_adjust_id' ), 1 );
 
 		$post_taxonomy_terms = wp_get_object_terms( $post->ID, $taxonomy );
 		if ( ! is_wp_error( $post_taxonomy_terms ) ) {
@@ -92,7 +92,9 @@ class WPML_TM_Action_Helper {
 			sort( $terms, SORT_STRING );
 		}
 
-		add_filter( 'get_term', array( $sitepress, 'get_term_adjust_id' ), 1, 1 );
+		if ( $hasFilter ) {
+			add_filter( 'get_term', array( $sitepress, 'get_term_adjust_id' ), 1, 1 );
+		}
 
 		return $terms;
 	}

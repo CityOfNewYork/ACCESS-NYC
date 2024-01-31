@@ -20,6 +20,8 @@ class WPML_ST_Translations_File_MO implements IWPML_ST_Translations_File {
 		$mo           = new MO();
 		$pomo_reader  = new POMO_CachedFileReader( $this->filepath );
 
+		// @see wpmldev-1856
+		/** @phpstan-ignore-next-line */
 		$mo->import_from_reader( $pomo_reader );
 
 		foreach ( $mo->entries as $str => $v ) {

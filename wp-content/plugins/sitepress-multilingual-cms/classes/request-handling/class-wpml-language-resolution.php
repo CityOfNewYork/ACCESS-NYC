@@ -1,5 +1,7 @@
 <?php
 
+use WPML\FP\Str;
+
 /**
  * Class WPML_Language_Resolution
  *
@@ -121,6 +123,9 @@ class WPML_Language_Resolution {
 	 * @return string
 	 */
 	private function filter_for_legal_langs( $lang ) {
+		if ( Str::includes( 'wp-login.php', $_SERVER['REQUEST_URI'] ) ) {
+			return $lang;
+		}
 
 		$this->maybe_reload();
 

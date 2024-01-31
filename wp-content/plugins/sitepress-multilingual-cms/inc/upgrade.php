@@ -23,13 +23,10 @@ function icl_plugin_upgrade() {
 	$iclsettings = get_option( 'icl_sitepress_settings' );
 
 	require_once WPML_PLUGIN_PATH . '/inc/cache.php';
-	icl_cache_clear( 'locale_cache_class' );
-	icl_cache_clear( 'flags_cache_class' );
-	icl_cache_clear( 'language_name_cache_class' );
-	delete_option( \WPML_LS_Templates::OPTION_NAME );
 
 	if ( get_option( 'icl_sitepress_version' ) && version_compare( get_option( 'icl_sitepress_version' ), '1.7.2', '<' ) ) {
-		$wpdb->update( $wpdb->prefix . 'icl_flags', array( 'flag' => 'ku.png' ), array( 'lang_code' => 'ku' ) );
+		$kuFlag = wpml_get_flag_file_name('ku');
+		$wpdb->update( $wpdb->prefix . 'icl_flags', array( 'flag' => $kuFlag ), array( 'lang_code' => 'ku' ) );
 		$wpdb->update(
 			$wpdb->prefix . 'icl_languages_translations',
 			array( 'name' => 'Magyar' ),
@@ -88,11 +85,9 @@ function icl_plugin_upgrade() {
 			$post_types[ $row->post_type ][] = $row->ID;
 		}
 		foreach ( $post_types as $type => $ids ) {
-			if ( ! empty( $ids ) ) {
-								$q          = "UPDATE {$wpdb->prefix}icl_translations SET element_type=%s WHERE element_type='post' AND element_id IN(" . join( ',', $ids ) . ')';
-								$q_prepared = $wpdb->prepare( $q, 'post_' . $type );
-				$wpdb->query( $q_prepared );    // @since 3.1.5 - mysql_* function deprecated in php 5.5+
-			}
+			$q          = "UPDATE {$wpdb->prefix}icl_translations SET element_type=%s WHERE element_type='post' AND element_id IN(" . join( ',', $ids ) . ')';
+			$q_prepared = $wpdb->prepare( $q, 'post_' . $type );
+			$wpdb->query( $q_prepared );    // @since 3.1.5 - mysql_* function deprecated in php 5.5+
 		}
 
 		// fix categories & tags in icl_translations
@@ -160,6 +155,10 @@ function icl_plugin_upgrade() {
 	}
 
 	if ( version_compare( get_option( 'icl_sitepress_version' ), ICL_SITEPRESS_VERSION, '<' ) ) {
+		icl_cache_clear( 'locale_cache_class' );
+		icl_cache_clear( 'flags_cache_class' );
+		icl_cache_clear( 'language_name_cache_class' );
+		delete_option( \WPML_LS_Templates::OPTION_NAME );
 		update_option( 'icl_sitepress_version', ICL_SITEPRESS_VERSION );
 	}
 

@@ -15,7 +15,7 @@
             "« Gebruik een andere vertaalservice"
          ],
          "Authenticate": [
-            "Authentiseren \r\n"
+            "Authentiseren \r\n\n"
          ],
          "Visit <link_to_service /> to request an API Token. This token allows WPML to connect to <service_name /> to send and receive jobs.": [
             "Bezoek <link_to_service /> om een API-token aan te vragen. Met dit token kan WPML verbinding maken met <service_name /> om opdrachten te verzenden en te ontvangen."

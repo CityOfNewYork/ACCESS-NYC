@@ -17,7 +17,8 @@ trait makeDir {
 			return true;
 		}
 
-		return $this->filesystem->mkdir( $subdir, 0755 & ~ umask() );
+		$chmod = defined( 'FS_CHMOD_DIR' ) ? FS_CHMOD_DIR : 0755;
+		return $this->filesystem->mkdir( $subdir, $chmod );
 	}
 
 	/**

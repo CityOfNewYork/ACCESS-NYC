@@ -100,7 +100,7 @@ class RefreshServices {
 			'wpml-tm-refresh-services',
 			WPML_TM_URL . '/res/js/refresh-services.js',
 			array(),
-			WPML_TM_VERSION
+			ICL_SITEPRESS_VERSION
 		);
 	}
 }

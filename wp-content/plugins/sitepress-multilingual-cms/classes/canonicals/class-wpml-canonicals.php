@@ -171,7 +171,7 @@ class WPML_Canonicals {
 	}
 
 	/**
-	 * @param WPML_Post_Element $post_element
+	 * @param WPML_Translation_Element $post_element
 	 *
 	 * @return false|string
 	 */

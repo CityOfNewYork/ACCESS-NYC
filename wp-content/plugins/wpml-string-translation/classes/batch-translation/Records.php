@@ -6,10 +6,12 @@ use WPML\FP\Curryable;
 use WPML\FP\Fns;
 use WPML\FP\Lst;
 use function WPML\Container\make;
+use function WPML\FP\curryN;
 
 /**
+ * @phpstan-type curried '__CURRIED_PLACEHOLDER__'
+ *
  * @method static callable|void installSchema( ...$wpdb ) :: wpdb → void
- * @method static callable|int get( ...$wpdb, ...$batchId ) :: wpdb → int → [int]
  * @method static callable|void set( ...$wpdb, ...$batchId, ...$stringId ) :: wpdb → int → int → void
  * @method static callable|int[] findBatches( ...$wpdb, ...$stringId ) :: wpdb → int → int[]
  */
@@ -27,6 +29,27 @@ class Records {
 		)
 	';
 
+	/**
+	 * @param \wpdb|null $wpdb
+	 * @param int|curried $batchId
+	 * @return int|callable
+	 *
+	 * @phpstan-return ($batchId is not null ? int : callable)
+	 */
+	public static function get( \wpdb $wpdb = null, $batchId = null ) {
+		return call_user_func_array(
+			curryN(
+				2,
+				function ( \wpdb $wpdb, $batchId ) {
+					/** @var string $sql */
+					$sql = $wpdb->prepare( "SELECT string_id FROM {$wpdb->prefix}icl_string_batches WHERE batch_id = %d", $batchId );
+					return $wpdb->get_col( $sql );
+				}
+			),
+			func_get_args()
+		);
+	}
+
 }
 
 Records::curryN(
@@ -38,17 +61,6 @@ Records::curryN(
 			$wpdb->query( sprintf( Records::$string_batch_sql_prototype, $wpdb->prefix ) );
 			$option->set( 'ST', Records::class . '_schema_installed', true );
 		}
-	}
-);
-
-
-Records::curryN(
-	'get',
-	2,
-	function ( \wpdb $wpdb, $batchId ) {
-		return $wpdb->get_col(
-			$wpdb->prepare( "SELECT string_id FROM {$wpdb->prefix}icl_string_batches WHERE batch_id = %d", $batchId )
-		);
 	}
 );
 
@@ -72,9 +84,9 @@ Records::curryN(
 	'findBatch',
 	2,
 	function ( \wpdb $wpdb, $stringId ) {
-		return $wpdb->get_var(
-			$wpdb->prepare( "SELECT batch_id FROM {$wpdb->prefix}icl_string_batches WHERE string_id = %d", $stringId )
-		);
+		/** @var string $sql */
+		$sql = $wpdb->prepare( "SELECT batch_id FROM {$wpdb->prefix}icl_string_batches WHERE string_id = %d", $stringId );
+		return $wpdb->get_var( $sql );
 	}
 );
 

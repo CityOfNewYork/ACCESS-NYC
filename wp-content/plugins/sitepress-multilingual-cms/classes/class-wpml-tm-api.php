@@ -81,9 +81,9 @@ class WPML_TM_API {
 		$user = new WP_User( $user_id );
 
 		if ( empty( $language_pairs ) ) {
-			$user->remove_cap( WPML_Translator_Role::CAPABILITY );
-		} elseif ( ! $user->has_cap( WPML_Translator_Role::CAPABILITY ) ) {
-			$user->add_cap( WPML_Translator_Role::CAPABILITY );
+			$user->remove_cap( \WPML\LIB\WP\User::CAP_TRANSLATE );
+		} elseif ( ! $user->has_cap( \WPML\LIB\WP\User::CAP_TRANSLATE ) ) {
+			$user->add_cap( \WPML\LIB\WP\User::CAP_TRANSLATE );
 		}
 
 		$language_pair_records = new WPML_Language_Pair_Records( $wpdb, new WPML_Language_Records( $wpdb ) );

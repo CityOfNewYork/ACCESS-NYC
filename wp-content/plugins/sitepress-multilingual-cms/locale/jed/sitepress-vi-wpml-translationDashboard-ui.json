@@ -1,0 +1,59 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "en"
+         },
+         "Error": [
+            "Lỗi"
+         ],
+         "Draft — Pending review": [
+            "Bản nháp - Đang chờ rà soát"
+         ],
+         "Complete": [
+            "Hoàn thành"
+         ],
+         "Insufficient funds": [
+            "Không đủ tiền"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "Các bản dịch tự động đang chờ xử lý của bạn sẽ bị hủy."
+         ],
+         "Save": [
+            "Lưu"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "Đi đến mục <a>Bảng điều khiển Quản lý Dịch thuật</a> để dịch nội dung của bạn."
+         ],
+         "Review the translations before publishing": [
+            "Rà soát bản dịch trước khi đăng tải"
+         ],
+         "Publish translations and review them later": [
+            "Đăng tải các bản dịch và rà soát sau"
+         ],
+         "Publish translations without reviewing": [
+            "Đăng tải các bản dịch mà không cần rà soát"
+         ],
+         "Translate Everything": [
+            "Dịch mọi thứ"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "WPML sẽ tự động dịch nội dung mà bạn đăng tải hoặc cập nhật"
+         ],
+         "How do you want to translate this site?": [
+            "Cách thức bạn muốn dịch trang web này?"
+         ],
+         "Translate Some": [
+            "Dịch một số"
+         ],
+         "I want to choose which content to translate": [
+            "Tôi muốn chọn nội dung cần dịch"
+         ],
+         "Translate": [
+            "Dịch"
+         ]
+      }
+   }
+}

@@ -3,17 +3,25 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/js/components/translate-everything/ConfirmNewTranslatablePostTypeDialog.js:22
+#: src/js/components/translate-everything/ConfirmNewTranslatablePostTypeDialog.js:23
 msgid ""
 "You can choose which posts to translate from the <strong>Translation "
 "Management Dashboard</strong>."
 msgstr ""
 
-#: src/js/components/translate-everything/ConfirmNewTranslatablePostTypeDialog.js:45
-msgid "Yes, translate all of these posts automatically"
+#: src/js/components/translate-everything/ConfirmNewTranslatablePostTypeDialog.js:57
+msgid "Yes, translate <b>existing</b> and <b>future</b> content automatically"
 msgstr ""
 
-#: src/js/components/translate-everything/ConfirmNewTranslatablePostTypeDialog.js:55
+#: src/js/components/translate-everything/ConfirmNewTranslatablePostTypeDialog.js:72
+msgid "Yes, but only translate <b>future</b> content automatically"
+msgstr ""
+
+#: src/js/components/translate-everything/ConfirmNewTranslatablePostTypeDialog.js:73
+msgid "Yes, translate <b>future</b> content automatically"
+msgstr ""
+
+#: src/js/components/translate-everything/ConfirmNewTranslatablePostTypeDialog.js:85
 msgid "No, I want to translate some of these posts, but not all"
 msgstr ""
 
@@ -33,29 +41,41 @@ msgid ""
 "%sWPML support%s."
 msgstr ""
 
-#: src/js/settings/components/ConfirmNewTranslatablePostType.js:105
-msgid "Save"
-msgstr ""
-
-#: src/js/settings/components/ConfirmNewTranslatablePostType.js:79
-msgid "Please confirm this translation setting"
-msgstr ""
-
-#: src/js/settings/components/ConfirmNewTranslatablePostType.js:82
-msgid ""
-"Your site is set to translate all content automatically. When you make "
-"<PostTypesNames /> translatable, WPML will automatically translate the "
-"<NumberOfItems /> existing items."
-msgstr ""
-
-#: src/js/settings/components/ConfirmNewTranslatablePostType.js:89
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:103
 msgid "Are you OK with paying for this?"
 msgstr ""
 
-#: src/js/settings/components/ConfirmNewTranslatablePostType.js:91
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:105
 msgid "Cancel"
 msgstr ""
 
-#: src/js/settings/components/ConfirmNewTranslatablePostType.js:92
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:106
 msgid "Make translatable"
+msgstr ""
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:119
+msgid "Save"
+msgstr ""
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:88
+msgid "Please confirm this translation setting"
+msgstr ""
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:91
+msgid ""
+"Your site is set to translate all content automatically. When you make "
+"<PostTypesNames /> translatable, WPML will automatically translate the %1$d "
+"existing item."
+msgid_plural ""
+"Your site is set to translate all content automatically. When you make "
+"<PostTypesNames /> translatable, WPML will automatically translate the %1$d "
+"existing items."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:97
+msgid ""
+"Your site is set to translate all content automatically. When you make "
+"<PostTypesNames /> translatable, WPML will automatically translate all "
+"future content."
 msgstr ""

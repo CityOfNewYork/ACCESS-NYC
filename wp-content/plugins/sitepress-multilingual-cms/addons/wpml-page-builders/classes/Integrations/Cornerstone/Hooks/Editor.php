@@ -40,10 +40,13 @@ class Editor implements \IWPML_Frontend_Action {
 			return (array) $request;
 		};
 
+		$key   = version_compare( constant( 'CS_VERSION' ), '7.1.3', '>=' ) ? 'document' : 'builder';
+		$getId = Obj::path( [ 'requests', $key, 'id' ] );
+
 		return Maybe::fromNullable( \WP_REST_Server::get_raw_data() )
 			->map( 'json_decode' )
 			->map( $decodeCornerstoneData )
-			->map( Obj::path( [ 'requests', 'builder', 'id' ] ) )
+			->map( $getId )
 			->map( Cast::toInt() )
 			->getOrElse( null );
 	}

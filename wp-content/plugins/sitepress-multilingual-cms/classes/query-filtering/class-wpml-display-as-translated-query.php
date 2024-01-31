@@ -18,6 +18,14 @@ abstract class WPML_Display_As_Translated_Query {
 		$this->icl_translation_table_alias = $icl_translation_table_alias;
 	}
 
+	/**
+	 * @return string
+	 */
+	public function get_icl_translations_table_alias() {
+		return is_string( $this->icl_translation_table_alias ) && ! empty( $this->icl_translation_table_alias )
+			? $this->icl_translation_table_alias
+			: 'wpml_translations';
+	}
 
 	/**
 	 * @param string $current_language

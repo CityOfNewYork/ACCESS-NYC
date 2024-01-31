@@ -209,7 +209,7 @@ class WPML_Config_Update {
 	/**
 	 * @param string|array|WP_Error $response
 	 * @param string                $request_type
-	 * @param null                  $component
+	 * @param ?string               $component
 	 * @param array|stdClass|null   $extra_data
 	 */
 	private function log_response( $response, $request_type = 'unknown', $component = null, $extra_data = null ) {
@@ -248,7 +248,10 @@ class WPML_Config_Update {
 			if ( array_key_exists( 'body', $response ) ) {
 				$response_data['body'] = 'Empty!';
 				if ( $response['body'] ) {
-					$response_data['body'] = json_decode( json_encode( simplexml_load_string( $response['body'] ) ), true );
+					$body_encode = wp_json_encode( simplexml_load_string( $response['body'] ) );
+					if ( $body_encode ) {
+						$response_data['body'] = json_decode( $body_encode, true );
+					}
 				}
 			}
 		} elseif ( is_array( $response ) ) {

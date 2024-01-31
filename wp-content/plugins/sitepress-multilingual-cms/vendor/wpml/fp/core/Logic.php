@@ -100,9 +100,7 @@ class Logic {
 			return $predicate( Obj::prop( $prop, $data ) );
 		} ) );
 
-		self::macro( 'isArray', curryN( 1, function( $a ) {
-			return is_array( $a );
-		}));
+		self::macro( 'isArray', Type::isArray() );
 
 		self::macro( 'isMappable', curryN( 1, function( $a ) {
 			return self::isArray( $a ) || ( is_object( $a ) && method_exists( $a, 'map' ) );

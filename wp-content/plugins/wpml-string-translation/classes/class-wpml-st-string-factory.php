@@ -36,6 +36,7 @@ class WPML_ST_String_Factory {
 	 * @return WPML_ST_String
 	 */
 	public function find_by_name( $name ) {
+		/** @var string $sql */
 		$sql                                 = $this->wpdb->prepare( "SELECT id FROM {$this->wpdb->prefix}icl_strings WHERE name=%s LIMIT 1", $name );
 		$cache_key                           = md5( $sql );
 		$this->string_id_cache[ $cache_key ] = isset( $this->string_id_cache[ $cache_key ] )
@@ -60,9 +61,9 @@ class WPML_ST_String_Factory {
 	}
 
 	/**
-	 * @param string       $string
-	 * @param string|array $context
-	 * @param bool|false   $name
+	 * @param string         $string
+	 * @param string|array   $context
+	 * @param string|false   $name
 	 *
 	 * @return mixed
 	 */
@@ -87,6 +88,7 @@ class WPML_ST_String_Factory {
 			$prepare_args[] = $name;
 		}
 
+		/** @var string $sql */
 		$sql                                 = $this->wpdb->prepare( $sql . ' LIMIT 1', $prepare_args );
 		$cache_key                           = md5( $sql );
 		$this->string_id_cache[ $cache_key ] = isset( $this->string_id_cache[ $cache_key ] )

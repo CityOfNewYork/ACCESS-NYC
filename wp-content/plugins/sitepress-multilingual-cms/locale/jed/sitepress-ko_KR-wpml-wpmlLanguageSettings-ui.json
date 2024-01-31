@@ -1,0 +1,28 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose the image file type for flags": [
+            "플래그에 사용할 이미지 파일 유형을 선택합니다"
+         ],
+         "This option affects only the built-in WPML flags, not the custom uploaded ones.": [
+            "이 옵션은 사용자 지정 업로드 플래그가 아닌 기본 제공 WPML 플래그에만 영향을 미칩니다."
+         ],
+         "%s format": [
+            "%s 형식"
+         ],
+         "Save": [
+            "저장"
+         ],
+         "The new format has been saved.": [
+            "새 형식이 저장되었습니다."
+         ],
+         "Failed to save the new format": [
+            "새 형식을 저장하지 못했습니다"
+         ]
+      }
+   }
+}

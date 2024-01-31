@@ -101,7 +101,9 @@ define( 'ICL_PRO_TRANSLATION_COST_PER_WORD', 0.09 );
 define( 'ICL_PRO_TRANSLATION_PICKUP_XMLRPC', 0 );
 define( 'ICL_PRO_TRANSLATION_PICKUP_POLLING', 1 );
 
-define( 'ICL_REMOTE_WPML_CONFIG_FILES_INDEX', 'http://cdn.wpml.org/' );
+if ( ! defined( 'ICL_REMOTE_WPML_CONFIG_FILES_INDEX' ) ) {
+	define( 'ICL_REMOTE_WPML_CONFIG_FILES_INDEX', 'http://cdn.wpml.org/' );
+}
 
 define( 'ICL_ICONS_URL', ICL_PLUGIN_URL . '/res/img/' );
 

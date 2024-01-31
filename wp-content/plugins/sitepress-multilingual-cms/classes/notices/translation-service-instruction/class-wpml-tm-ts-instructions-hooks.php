@@ -49,14 +49,15 @@ class WPML_TM_TS_Instructions_Hooks implements IWPML_Action {
 			$handle,
 			WPML_TM_URL . '/dist/js/translationServiceInstruction/app.js',
 			array(),
-			WPML_TM_VERSION
+			ICL_SITEPRESS_VERSION
 		);
 
 		$data = array(
-			'restUrl'     => untrailingslashit( rest_url() ),
-			'restNonce'   => wp_create_nonce( 'wp_rest' ),
-			'ate'         => null,
-			'currentUser' => wp_get_current_user(),
+			'restUrl'            => untrailingslashit( rest_url() ),
+			'restNonce'          => wp_create_nonce( 'wp_rest' ),
+			'syncJobStatesNonce' => wp_create_nonce( 'sync-job-states' ),
+			'ate'                => null,
+			'currentUser'        => wp_get_current_user(),
 		);
 
 		wp_localize_script( $handle, 'WPML_TM_SETTINGS', $data );

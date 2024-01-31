@@ -148,6 +148,10 @@ class WPML_LS_Slot {
 				'type'             => 'int',
 				'force_missing_to' => 0,
 			),
+			'is_hierarchical'                          => array(
+				'type'             => 'int',
+				'force_missing_to' => 0,
+			),
 			'template'                      => array( 'type' => 'string' ),
 			'display_flags'                 => array(
 				'type'             => 'int',

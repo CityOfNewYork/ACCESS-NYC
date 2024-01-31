@@ -34,15 +34,18 @@ function wpml_sanitize_hex_color_array( $input, $default_if_invalid = '', $bypas
 }
 
 /**
- * @param string $input
+ * @param string|array $input
  *
  * @return bool
  */
 function wpml_is_valid_hex_color( $input ) {
-	if ( 'transparent' === $input || preg_match( '/' . wpml_get_valid_hex_color_pattern() . '/i', $input ) ) {
+	if (
+		'transparent' === $input ||
+		( is_string( $input ) && preg_match( '/' . wpml_get_valid_hex_color_pattern() . '/i', $input ) )
+	) {
 		$is_valid = true;
 	} else {
-		$try_rgb2hex = wpml_rgb_to_hex( $input );
+		$try_rgb2hex = is_array( $input ) ? wpml_rgb_to_hex( $input ) : false;
 		$is_valid    = $try_rgb2hex ? preg_match( '/' . wpml_get_valid_hex_color_pattern() . '/i', $try_rgb2hex ) : false;
 	}
 
@@ -58,7 +61,7 @@ function wpml_get_valid_hex_color_pattern() {
  *
  * @param array $rgb
  *
- * @return bool|string
+ * @return string|false
  */
 function wpml_rgb_to_hex( $rgb ) {
 	if ( ! is_array( $rgb ) || count( $rgb ) < 3 ) {

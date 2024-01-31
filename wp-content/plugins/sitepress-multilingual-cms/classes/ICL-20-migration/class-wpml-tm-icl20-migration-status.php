@@ -93,7 +93,7 @@ class WPML_TM_ICL20_Migration_Status {
 			$raw_settings = get_option( 'wp_installer_settings', null );
 
 			if ( $raw_settings ) {
-				if ( is_array( $raw_settings ) || empty( $raw_settings ) ) { // backward compatibility 1.1
+				if ( is_array( $raw_settings ) ) { // backward compatibility 1.1
 					$this->installer_settings = $raw_settings;
 				} else {
 					$has_gz_support = function_exists( 'gzuncompress' ) && function_exists( 'gzcompress' );
@@ -101,8 +101,11 @@ class WPML_TM_ICL20_Migration_Status {
 					if ( $has_gz_support ) {
 						$raw_settings = gzuncompress( $raw_settings );
 					}
-					/** @noinspection UnserializeExploitsInspection */
-					$this->installer_settings = unserialize( $raw_settings );
+
+					if ( $raw_settings ) {
+						/** @noinspection UnserializeExploitsInspection */
+						$this->installer_settings = unserialize( $raw_settings );
+					}
 				}
 			}
 		}
@@ -116,7 +119,10 @@ class WPML_TM_ICL20_Migration_Status {
 		if ( $has_gz_support ) {
 			$raw_settings = gzcompress( $raw_settings );
 		}
-		$raw_settings = base64_encode( $raw_settings );
-		update_option( 'wp_installer_settings', $raw_settings );
+
+		if ( $raw_settings ) {
+			$raw_settings = base64_encode( $raw_settings );
+			update_option( 'wp_installer_settings', $raw_settings );
+		}
 	}
 }

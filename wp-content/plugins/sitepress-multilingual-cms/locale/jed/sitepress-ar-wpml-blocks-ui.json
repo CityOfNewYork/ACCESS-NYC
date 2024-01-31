@@ -1,0 +1,169 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Advanced": [
+            "متقدم"
+         ],
+         "HTML anchor": [
+            "عنصر ارتساء HTML"
+         ],
+         "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
+            "أضف اختصارًا إلى هذه الكتلة عند تحميل الصفحة باستخدام مسار الإنترنت الخاص بـ\"#anchor\"."
+         ],
+         "Additional CSS class(es)": [
+            "فئة (فئات) CSS الإضافية"
+         ],
+         "Separate multiple classes with spaces.": [
+            "فصل الفئات المتعددة بفاصلة."
+         ],
+         "Color": [
+            "اللون"
+         ],
+         "Dimensions": [
+            "الأبعاد"
+         ],
+         "BLOCK": [
+            "الكتل"
+         ],
+         "Block margin": [
+            "هامش كتلة البيانات"
+         ],
+         "Block padding": [
+            "نطاق كتلة البيانات"
+         ],
+         "LANGUAGE": [
+            "اللغة"
+         ],
+         "Language spacing": [
+            "تباعد المسافات في اللغة"
+         ],
+         "Language padding": [
+            "نطاق اللغة"
+         ],
+         "Display": [
+            "عرض"
+         ],
+         "Show flag": [
+            "عرض العلم"
+         ],
+         "Show language name": [
+            "عرض اسم اللغة"
+         ],
+         "Display language name in": [
+            "عرض اسم اللغة في"
+         ],
+         "Style": [
+            "النمط"
+         ],
+         "Flag settings": [
+            "إعدادات العلم"
+         ],
+         "Width": [
+            "العرض"
+         ],
+         "Height": [
+            "الارتفاع"
+         ],
+         "Spacing": [
+            "تباعد المسافات"
+         ],
+         "Allow wrapping to multiple lines": [
+            "السماح بالتضمين في عدة أسطر"
+         ],
+         "Open on click": [
+            "الفتح عند النقر"
+         ],
+         "Show arrow": [
+            "عرض السهم"
+         ],
+         "Layout": [
+            "التنسيق"
+         ],
+         "Justification": [
+            "المحاذاة"
+         ],
+         "Orientation": [
+            "الاتجاه"
+         ],
+         "Typography": [
+            "نمط الطباعة"
+         ],
+         "Background": [
+            "خلفية"
+         ],
+         "Language Text": [
+            "نص اللغة"
+         ],
+         "Language Background": [
+            "خلفية اللغة"
+         ],
+         "Current language text": [
+            "نص اللغة الحالية"
+         ],
+         "Current language background": [
+            "خلفية اللغة الحالية"
+         ],
+         "Full name": [
+            "الاسم بالكامل"
+         ],
+         "Code": [
+            "الكود"
+         ],
+         "Justify items left": [
+            "ضبط العناصر إلى اليسار"
+         ],
+         "Justify items center": [
+            "ضبط العناصر إلى المنتصف"
+         ],
+         "Justify items right": [
+            "ضبط العناصر إلى اليمين"
+         ],
+         "Justify items space between": [
+            "ضبط المسافة البينية للعناصر"
+         ],
+         "Horizontal": [
+            "أفقي"
+         ],
+         "Vertical": [
+            "رأسي"
+         ],
+         "Normal": [
+            "عادي"
+         ],
+         "Medium": [
+            "متوسط"
+         ],
+         "Large": [
+            "كبير"
+         ],
+         "X-Large": [
+            "كبير للغاية"
+         ],
+         "Small": [
+            "صغير"
+         ],
+         "Displays the WPML Language Switcher.": [
+            "يعرض محوّل اللغة الخاص بـWPML."
+         ],
+         "Language Switcher": [
+            "محوّل اللغة"
+         ],
+         "displays the WPML Language Switcher": [
+            "يعرض محوّل اللغة الخاص بـWPML"
+         ],
+         "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
+            "يعرض محوّل اللغة WPML Language Switcher. <br/> تعرف على <a>كيفية ترجمة كتلة البيانات هذه</a>."
+         ],
+         "Navigation Language Switcher": [
+            "محوّل لغة التنقل"
+         ],
+         "Reset all": [
+            "إعادة تعيين الكل"
+         ]
+      }
+   }
+}

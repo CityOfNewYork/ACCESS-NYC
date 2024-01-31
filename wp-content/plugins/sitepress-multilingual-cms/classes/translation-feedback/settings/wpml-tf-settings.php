@@ -1,5 +1,7 @@
 <?php
 
+use WPML\API\Sanitize;
+
 /**
  * Class WPML_TF_Settings
  *
@@ -72,7 +74,7 @@ class WPML_TF_Settings implements IWPML_TF_Settings {
 	 * @param string $button_mode
 	 */
 	public function set_button_mode( $button_mode ) {
-		$this->button_mode = filter_var( $button_mode, FILTER_SANITIZE_STRING );
+  		$this->button_mode = Sanitize::string( $button_mode );
 	}
 
 	/**
@@ -84,7 +86,7 @@ class WPML_TF_Settings implements IWPML_TF_Settings {
 
 	/** @param string $style */
 	public function set_icon_style( $style ) {
-		$this->icon_style = filter_var( $style, FILTER_SANITIZE_STRING );
+		$this->icon_style = Sanitize::string( $style );
 	}
 
 	/** @return string */
@@ -110,7 +112,7 @@ class WPML_TF_Settings implements IWPML_TF_Settings {
 	 * @param string $display_mode
 	 */
 	public function set_display_mode( $display_mode ) {
-		$this->display_mode = filter_var( $display_mode, FILTER_SANITIZE_STRING );
+		$this->display_mode = Sanitize::string( $display_mode );
 	}
 
 	/**
@@ -124,7 +126,7 @@ class WPML_TF_Settings implements IWPML_TF_Settings {
 	 * @param string $expiration_mode
 	 */
 	public function set_expiration_mode( $expiration_mode ) {
-		$this->expiration_mode = filter_var( $expiration_mode, FILTER_SANITIZE_STRING );
+		$this->expiration_mode = Sanitize::string( $expiration_mode );
 	}
 
 	/**

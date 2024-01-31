@@ -133,7 +133,7 @@ class ExtraFieldDataInEditor implements \IWPML_Backend_Action {
 		 *
 		 * Filters the value of `\WPML_Translation_Editor_UI::MAX_ALLOWED_SINGLE_LINE_LENGTH`
 		 *
-		 * @param  int                MAX_ALLOWED_SINGLE_LINE_LENGTH The length of the string, after which it must use a multiline input
+		 * @param  int    $max_allowed_single_line_length MAX_ALLOWED_SINGLE_LINE_LENGTH The length of the string, after which it must use a multiline input
 		 * @param  array  $field  The generic field data
 		 * @param  array  $custom_field_data  The custom field specific data
 		 *

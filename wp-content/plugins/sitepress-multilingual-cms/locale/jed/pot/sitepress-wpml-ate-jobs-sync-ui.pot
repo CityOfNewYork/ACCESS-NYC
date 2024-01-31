@@ -3,7 +3,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/js/ate/AutoTranslate.js:19
+#: src/js/ate/AutoTranslate.js:21
 msgid "Sending for translation"
 msgstr ""
 
@@ -19,83 +19,193 @@ msgstr ""
 msgid "You don't have the rights to review this language"
 msgstr ""
 
-#: src/js/ate/status-bar/components/AteJobsStatus.js:42
-msgid "pages & posts"
+#: src/js/ate/status-bar/components/AteJobsStatus.js:33
+msgid "translations"
+msgstr ""
+
+#: src/js/ate/status-bar/components/AteJobsStatus.js:34
+msgid "left in the queue"
 msgstr ""
 
 #: src/js/ate/status-bar/components/AteJobsStatus.js:43
-msgid "left to translate"
+msgid "Translation on hold"
 msgstr ""
 
-#: src/js/ate/status-bar/components/AteJobsStatus.js:52
-msgid "Translate on hold"
+#: src/js/ate/status-bar/components/AteJobsStatus.js:45
+#: src/js/ate/status-bar/components/constants.js:13
+msgid "No translations in the queue"
 msgstr ""
 
-#: src/js/ate/status-bar/components/AteJobsStatus.js:54
-msgid "All translated"
-msgstr ""
-
-#: src/js/ate/status-bar/components/AteJobsStatus.js:59
+#: src/js/ate/status-bar/components/AteJobsStatus.js:50
 msgid "%d translations left"
 msgstr ""
 
-#: src/js/ate/status-bar/components/credit/index.js:101
-msgid "Credits used:"
+#: src/js/ate/status-bar/components/StatusBar/Notifications.js:38
+msgid "%d min remaining"
 msgstr ""
 
-#: src/js/ate/status-bar/components/credit/index.js:105
-msgid "Credits left:"
+#: src/js/ate/status-bar/components/StatusBar/Notifications.js:39
+msgid "less than 1 min remaining"
 msgstr ""
 
-#: src/js/ate/status-bar/components/credit/index.js:115
-msgid "Calculating"
+#: src/js/ate/status-bar/components/constants.js:11
+#: src/js/ate/translate-everything/components/Status/index.js:51
+msgid "Automatic translation status"
 msgstr ""
 
-#: src/js/ate/status-bar/components/credit/index.js:50
-msgid "Remaining prepaid credits that are assigned to this site on WPML.org."
+#: src/js/ate/status-bar/components/constants.js:15
+msgid "Translate Everything Automatically"
 msgstr ""
 
-#: src/js/ate/status-bar/components/credit/index.js:64
-msgid "Prepaid credits left"
+#: src/js/ate/status-bar/components/constants.js:17
+msgid "Translate Everything Automatically is active"
 msgstr ""
 
-#: src/js/ate/status-bar/components/credit/index.js:84
-msgid "Account credits used"
+#: src/js/ate/status-bar/components/constants.js:19
+#: src/js/ate/translate-everything/pause/components/StatusBar/Paused.js:20
+msgid "Translate Everything Automatically is paused"
 msgstr ""
 
-#: src/js/ate/status-bar/components/credit/index.js:92
-msgid ""
-"Once you’ve used all your prepaid credits, we’ll invoice you for any "
-"additional credits you use after the end of the month"
+#: src/js/ate/status-bar/components/constants.js:21
+msgid "Translate Everything Automatically stopped"
 msgstr ""
 
-#: src/js/ate/status-bar/components/credit/index.js:97
-msgid "Payment limit:"
-msgstr ""
-
-#: src/js/ate/status-bar/components/credit/index.js:98
-msgid "%s credits"
-msgstr ""
-
-#: src/js/ate/status-bar/components/sending/index.js:10
-msgid "Preparing more content for translation"
-msgstr ""
-
+#: src/js/ate/status-bar/components/constants.js:23
 #: src/js/ate/status-bar/components/sending/index.js:11
 msgid "Preparing content for translation"
 msgstr ""
 
-#: src/js/ate/status-bar/model/NoticeManager.js:17
+#: src/js/ate/status-bar/components/constants.js:25
+#: src/js/ate/status-bar/components/sending/index.js:10
+msgid "Preparing more content for translation"
+msgstr ""
+
+#: src/js/ate/status-bar/components/constants.js:27
+msgid "An error occured, fix it to continue."
+msgstr ""
+
+#: src/js/ate/status-bar/components/constants.js:29
 msgid ""
 "There is an issue with automatic translation that needs your attention. Fix "
 "it to continue."
 msgstr ""
 
-#: src/js/ate/status-bar/model/NoticeManager.js:9
-msgid "%d translations waiting for review"
+#: src/js/ate/status-bar/components/constants.js:32
+#. %s is replaced by the name of the language.
+msgid ""
+"Your default language, %s, must be mapped to a supported language in order "
+"to use automatic translation."
 msgstr ""
 
-#: src/js/ate/status-icons/TranslationQueue.js:47
+#: src/js/ate/status-bar/components/constants.js:40
+#. %s is replaced by the language(s) name.
+msgid ""
+"Your language, %s, must be mapped to a supported language in order to use "
+"automatic translation."
+msgid_plural ""
+"The following languages on your site must be mapped to a supported language "
+"in order to use automatic translation: %s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/js/ate/status-bar/components/constants.js:50
+msgid ""
+"Content in those languages: %s, cannot be automatically translated unless "
+"you map them to a language that's different from the default."
+msgstr ""
+
+#: src/js/ate/status-bar/components/constants.js:60
+#. %d is replaced by the number of jobs to review.
+msgid "%d translation waiting for review"
+msgid_plural "%d translations waiting for review"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/js/ate/status-bar/components/credit/index.js:100
+msgid "Account credits used"
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:110
+msgid ""
+"Once you’ve used all your prepaid credits, we’ll invoice you for any "
+"additional credits you use after the end of the month"
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:115
+msgid "Payment limit:"
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:116
+msgid "%s credits"
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:119
+msgid "Credits used:"
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:123
+msgid "Credits left:"
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:133
+msgid ""
+"The number of credit you will receive an invoice for at the end of the "
+"month. View your pay-as-you-go details in your site’s automatic translation "
+"settings."
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:139
+msgid "Calculating"
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:59
+msgid "Remaining prepaid credits that are assigned to this site on WPML.org."
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:73
+msgid "Prepaid credits left"
+msgstr ""
+
+#: src/js/ate/status-bar/components/credit/index.js:99
+msgid "Pay-as-you-go credits used"
+msgstr ""
+
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:17
+#: src/js/ate/translate-everything/pause/components/StatusBar/Paused.js:24
+msgid "Resume"
+msgstr ""
+
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:26
+msgid "Stop"
+msgstr ""
+
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:35
+#: src/js/ate/translate-everything/pause/components/StatusBar/Stopped.js:17
+msgid "Fix it"
+msgstr ""
+
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:8
+#: src/js/ate/translate-everything/pause/components/StatusBar/Active.js:27
+msgid "Pause"
+msgstr ""
+
+#: src/js/ate/status-bar/model/pauseAndResume.js:28
+msgid ""
+"There was an error when trying to pause your Automatic Translation. Please "
+"try again later or contact our support."
+msgstr ""
+
+#: src/js/ate/status-bar/model/pauseAndResume.js:56
+msgid ""
+"There was an error when trying to resume your Automatic Translation. Please "
+"try again later or contact our support."
+msgstr ""
+
+#: src/js/ate/status-bar/model/pauseAndResume.js:59
+msgid "Error"
+msgstr ""
+
+#: src/js/ate/status-icons/TranslationQueue.js:46
 msgid "Draft — Pending review"
 msgstr ""
 
@@ -103,118 +213,154 @@ msgstr ""
 msgid "Complete"
 msgstr ""
 
-#: src/js/ate/status-icons/TranslationQueue.js:59
+#: src/js/ate/status-icons/TranslationQueue.js:60
 msgid "Insufficient funds"
 msgstr ""
 
-#: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:23
+#: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:26
 msgid ""
 "Read more about how to translate your content in the <a>Getting Started "
 "Guide</a>"
 msgstr ""
 
-#: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:33
+#: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:36
 msgid "Let's Start Translating!"
 msgstr ""
 
-#: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:35
+#: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:38
 msgid ""
 "Choose your content from the Translation Dashboard below and create your "
 "first translation job!"
 msgstr ""
 
-#: src/js/ate/translate-everything/components/Status/index.js:107
+#: src/js/ate/translate-everything/components/Status/index.js:106
 msgid ""
 "Change your <a>automatic translation settings</a> (in-progress translation "
 "jobs will be completed with the current settings)."
 msgstr ""
 
-#: src/js/ate/translate-everything/components/Status/index.js:117
+#: src/js/ate/translate-everything/components/Status/index.js:116
 msgid "Read more about translating your site automatically."
 msgstr ""
 
-#: src/js/ate/translate-everything/components/Status/index.js:41
+#: src/js/ate/translate-everything/components/Status/index.js:50
 msgid "Your site is being automatically translated!"
 msgstr ""
 
-#: src/js/ate/translate-everything/components/Status/index.js:42
-msgid "Automatic Translation Status"
-msgstr ""
-
-#: src/js/ate/translate-everything/components/Status/index.js:50
+#: src/js/ate/translate-everything/components/Status/index.js:59
 msgid "Calculating..."
 msgstr ""
 
-#: src/js/ate/translate-everything/components/Status/index.js:90
+#: src/js/ate/translate-everything/components/Status/index.js:89
 msgid "Do not close WP admin!"
 msgstr ""
 
-#: src/js/ate/translate-everything/components/Status/index.js:98
+#: src/js/ate/translate-everything/components/Status/index.js:97
 msgid "The number of translations"
 msgstr ""
 
-#: src/js/translationQueue/AbortReview/AbortReviewsDialog.js:34
-msgid "Delete Translations"
+#: src/js/ate/translate-everything/pause/components/StatusBar/Active.js:23
+msgid "Translate Everything Automatically - running"
 msgstr ""
 
-#: src/js/translationQueue/AbortReview/AbortReviewsDialog.js:42
-msgid "Keep Translations as Draft"
+#: src/js/ate/translate-everything/pause/components/StatusBar/Active.js:24
+msgid "Translate Everything Automatically - active"
 msgstr ""
 
-#: src/js/translationQueue/AbortReview/AbortReviewsDialog.js:51
-msgid "Never mind. I want to review these translations."
+#: src/js/ate/translate-everything/pause/components/StatusBar/Active.js:28
+msgid "Pause automatic translation"
 msgstr ""
 
-#: src/js/translationQueue/AbortReview/AbortReviewsDialog.js:62
+#: src/js/ate/translate-everything/pause/components/StatusBar/Active.js:39
+msgid "WPML will finish in-progress translations but won't translate anything new."
+msgstr ""
+
+#: src/js/ate/translate-everything/pause/components/StatusBar/Paused.js:21
+msgid "Translate Everything Automatically - paused"
+msgstr ""
+
+#: src/js/ate/translate-everything/pause/components/StatusBar/Paused.js:25
+msgid "Start automatic translation"
+msgstr ""
+
+#: src/js/ate/translate-everything/pause/components/StatusBar/Paused.js:28
+msgid ""
+"This uses %scredits%s to translate your existing content and anything you "
+"add or change later."
+msgstr ""
+
+#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:21
+msgid "Start translating everything automatically"
+msgstr ""
+
+#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:24
+#. %1$s will be replaced with 'xx languages'.
+msgid "WPML will translate any new content you create into %1$s."
+msgstr ""
+
+#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:27
+#. %1$s will be replaced with 'xx languages'.
+msgid ""
+"WPML will translate all new future content to %1$s and keep translations up "
+"to date when you make changes."
+msgstr ""
+
+#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:29
+msgid "Do you want to translate existing content, too?"
+msgstr ""
+
+#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:31
+msgid "Yes, translate all new and existing content"
+msgstr ""
+
+#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:33
+msgid "No, only translate new content"
+msgstr ""
+
+#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:35
+msgid "You can translate existing content from the Translation Management Dashboard"
+msgstr ""
+
+#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:37
+msgid ""
+"Connection Error. Please wait a minute and reload this page. If the problem "
+"continues, please contact WPML support."
+msgstr ""
+
+#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:41
+#. %1$s opening link tag <a>, %2$s closing link tag </a>.
+msgid ""
+"Automatic translation uses credits. %1$sRead more about automatic "
+"translation credits%2$s"
+msgstr ""
+
+#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:49
+msgid "You need credits to start translating everything."
+msgstr ""
+
+#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:50
 msgid "Cancel"
 msgstr ""
 
-#: src/js/translationQueue/AbortReview/AbortReviewsDialog.js:68
-msgid "You haven't selected any jobs that need review."
+#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:51
+msgid "Start translating everything"
 msgstr ""
 
-#: src/js/translationQueue/AbortReview/AbortReviewsDialog.js:71
-msgid "Please select the pending review jobs to abort."
+#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:71
+#. %1$d is replaced by the number of active languages.
+msgid "%1$d language"
+msgid_plural "%1$d languages"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Initialise.js:29
+msgid "Please wait..."
 msgstr ""
 
-#: src/js/translationQueue/AbortReview/AbortReviewsDialog.js:75
-msgid ""
-"This will remove the selected jobs from the Translations Queue without "
-"publishing them. What would you like to do with the translations?"
+#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/PostCount.js:101
+msgid "All new future content"
 msgstr ""
 
-#: src/js/translationQueue/AbortReview/AbortReviewsDialog.js:79
-msgid "Cancel Translation Review"
-msgstr ""
-
-#: src/js/translationQueue/ActionButtons.js:150
-msgid "Edit"
-msgstr ""
-
-#: src/js/translationQueue/ActionButtons.js:152
-msgid "Updating"
-msgstr ""
-
-#: src/js/translationQueue/ActionButtons.js:154
-msgid "Translate"
-msgstr ""
-
-#: src/js/translationQueue/ActionButtons.js:156
-msgid "Take and translate"
-msgstr ""
-
-#: src/js/translationQueue/ActionButtons.js:43
-msgid "Review"
-msgstr ""
-
-#: src/js/translationQueue/ActionButtons.js:71
-msgid "Are you sure you want to resign from this job?"
-msgstr ""
-
-#: src/js/translationQueue/ActionButtons.js:82
-msgid "Resign"
-msgstr ""
-
-#: src/js/translationQueue/ActionButtons.js:91
-msgid "View"
+#: src/js/ate/translate-everything/pause/components/StatusBar/Stopped.js:14
+msgid "Translate Everything Automatically - stopped"
 msgstr ""

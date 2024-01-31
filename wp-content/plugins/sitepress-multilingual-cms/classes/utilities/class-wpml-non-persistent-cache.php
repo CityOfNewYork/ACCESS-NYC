@@ -15,9 +15,9 @@ class WPML_Non_Persistent_Cache {
 	/**
 	 * Retrieves the data contents from the cache, if it exists.
 	 *
-	 * @param string $key   Cache key.
-	 * @param string $group Cache group.
-	 * @param bool   $found Whether the key was found in the cache (passed by reference).
+	 * @param string|int $key   Cache key.
+	 * @param string     $group Cache group.
+	 * @param bool       $found Whether the key was found in the cache (passed by reference).
 	 *                      Disambiguates a return of false, a storable value.
 	 *
 	 * @return mixed|bool
@@ -39,9 +39,9 @@ class WPML_Non_Persistent_Cache {
 	/**
 	 * Sets the data contents into the cache.
 	 *
-	 * @param string $key   Cache key.
-	 * @param mixed  $data  Data to store in cache.
-	 * @param string $group Cache group.
+	 * @param string|int $key   Cache key.
+	 * @param mixed	     $data  Data to store in cache.
+	 * @param string     $group Cache group.
 	 *
 	 * @return bool
 	 */

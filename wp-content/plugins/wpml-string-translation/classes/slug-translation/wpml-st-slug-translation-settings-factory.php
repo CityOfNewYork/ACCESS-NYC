@@ -6,7 +6,7 @@ class WPML_ST_Slug_Translation_Settings_Factory {
 	 * @throws InvalidArgumentException
 	 * @param string $element_type
 	 *
-	 * @return WPML_ST_Slug_Translation_Settings
+	 * @return WPML_ST_Slug_Translation_Settings|WPML_ST_Tax_Slug_Translation_Settings|WPML_ST_Post_Slug_Translation_Settings
 	 */
 	public function create( $element_type = null ) {
 		global $sitepress;
@@ -24,5 +24,12 @@ class WPML_ST_Slug_Translation_Settings_Factory {
 		}
 
 		throw new InvalidArgumentException( 'Invalid element type.' );
+	}
+
+	/**
+	 * @return WPML_ST_Tax_Slug_Translation_Settings
+	 */
+	public function createTaxSettings() {
+		return new WPML_ST_Tax_Slug_Translation_Settings();
 	}
 }

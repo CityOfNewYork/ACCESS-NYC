@@ -78,7 +78,9 @@ class WPML_TP_HTTP_Request_Filter {
 
 				if ( is_resource( $value ) ) {
 					$filename = self::get_file_name( $params, $key );
-					$content .= "; filename=\"$filename\"\r\n" . "Content-Type: application/octet-stream\r\n\r\n" . gzencode( stream_get_contents( $value ) ) . "\r\n";
+					$value = stream_get_contents( $value );
+					$value = $value ?: '';
+					$content .= "; filename=\"$filename\"\r\n" . "Content-Type: application/octet-stream\r\n\r\n" . gzencode( $value ) . "\r\n";
 				} else {
 					$content .= "\r\n\r\n$value\r\n";
 				}
@@ -94,7 +96,7 @@ class WPML_TP_HTTP_Request_Filter {
 			strtolower(
 				filter_var(
 					$params['title'],
-					FILTER_SANITIZE_STRING,
+					FILTER_SANITIZE_FULL_SPECIAL_CHARS,
 					FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH
 				)
 			)

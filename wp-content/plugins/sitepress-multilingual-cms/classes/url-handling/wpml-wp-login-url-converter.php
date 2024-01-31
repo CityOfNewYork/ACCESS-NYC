@@ -2,6 +2,7 @@
 
 namespace WPML\UrlHandling;
 
+use WPML\API\Sanitize;
 use WPML\Element\API\Languages;
 use WPML\FP\Obj;
 use WPML\FP\Relation;
@@ -52,7 +53,7 @@ class WPLoginUrlConverter implements \IWPML_Action {
 
 		if ( self::isEnabled() ) {
 			add_filter( 'logout_url', [ $this, 'convert_user_logout_url' ] );
-			add_filter( 'logout_redirect', [ $this, 'convert_default_redirect_url' ], 2, 10 );
+			add_filter( 'logout_redirect', [ $this, 'convert_default_redirect_url' ], 2, 2 );
 		}
 
 		add_action( 'generate_rewrite_rules', [ $this, 'generate_rewrite_rules' ] );
@@ -90,7 +91,8 @@ class WPLoginUrlConverter implements \IWPML_Action {
 
 	public function redirect_to_login_url_with_lang() {
 		$sitePath              = Obj::propOr( '', 'path', parse_url( site_url() ) );
-		$requestUriWithoutPath = Str::trimPrefix( $sitePath, $_SERVER['REQUEST_URI'] );
+		/** @var string $requestUriWithoutPath */
+		$requestUriWithoutPath = Str::trimPrefix( (string) $sitePath, (string) $_SERVER['REQUEST_URI'] );
 
 		$converted_url = site_url( $requestUriWithoutPath, 'login' );
 		if (
@@ -140,10 +142,10 @@ class WPLoginUrlConverter implements \IWPML_Action {
 	public function wpml_login_page_language_from_url( $language, $url ) {
 		if ( $this->is_wp_login_url( $url ) ) {
 			if ( isset( $_GET['lang'] ) && $_GET['lang'] != $language ) {
-				return filter_var( $_GET['lang'], FILTER_SANITIZE_STRING );
+				return Sanitize::stringProp( 'lang', $_GET );
 			}
 			if ( is_multisite() && isset( $_POST['lang'] ) && $_POST['lang'] != $language ) {
-				return filter_var( $_POST['lang'], FILTER_SANITIZE_STRING );
+				return Sanitize::stringProp( 'lang', $_POST );
 			}
 		}
 
@@ -189,8 +191,12 @@ class WPLoginUrlConverter implements \IWPML_Action {
 		return $query_vars;
 	}
 
-	public static function enable() {
-		self::saveState( true );
+	/**
+	 * @param bool $validateOrRollback - If true, it will be validated that the translated Login URL is accessible or rollback.
+	 * @return void
+	 */
+	public static function enable( $validateOrRollback = false ) {
+		self::saveState( true, $validateOrRollback );
 	}
 
 	public static function disable() {
@@ -206,11 +212,12 @@ class WPLoginUrlConverter implements \IWPML_Action {
 
 	/**
 	 * @param bool $state
+	 * @param bool $validate - if true, will validate the change or undo it.
 	 *
 	 */
-	public static function saveState( $state ) {
+	public static function saveState( $state, $validate = false ) {
 		Option::update( self::SETTINGS_KEY, $state );
-		WPLoginUrlConverterRules::markRulesForUpdating();
+		WPLoginUrlConverterRules::markRulesForUpdating( $validate );
 	}
 
 	private function should_convert_url_for_multisite( $url ) {
@@ -245,10 +252,10 @@ class WPLoginUrlConverter implements \IWPML_Action {
 
 	private function get_language_param_for_convert_url() {
 		if ( isset( $_GET['lang'] ) ) {
-			return filter_var( $_GET['lang'], FILTER_SANITIZE_STRING );
+			return Sanitize::stringProp( 'lang', $_GET );
 		}
 		if ( is_multisite() && isset( $_POST['lang'] ) ) {
-			return filter_var( $_POST['lang'], FILTER_SANITIZE_STRING );
+			return Sanitize::stringProp( 'lang', $_POST );
 		}
 		if ( $this->rewrite_rule_not_found || $this->is_subdomain_multisite() ) {
 			return $this->sitepress->get_current_language();

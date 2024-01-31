@@ -1,8 +1,13 @@
 <?php
 
+use WPML\FP\Obj;
+
 class WPML_TM_Rest_Jobs_Element_Info {
 	/** @var WPML_TM_Rest_Jobs_Package_Helper_Factory */
 	private $package_helper_factory;
+
+	/** @var array|null */
+	private $post_types;
 
 	/**
 	 * @param WPML_TM_Rest_Jobs_Package_Helper_Factory $package_helper_factory
@@ -13,7 +18,7 @@ class WPML_TM_Rest_Jobs_Element_Info {
 
 
 	/**
-	 * @param  WPML_TM_Job_Entity $job
+	 * @param WPML_TM_Job_Entity $job
 	 *
 	 * @return array
 	 */
@@ -24,7 +29,8 @@ class WPML_TM_Rest_Jobs_Element_Info {
 
 		switch ( $type ) {
 			case WPML_TM_Job_Entity::POST_TYPE:
-				$result = $this->get_for_post( $id );
+				/** @var WPML_TM_Post_Job_Entity $job */
+				$result = $this->get_for_post( $id, $job->get_element_id() );
 				break;
 			case WPML_TM_Job_Entity::STRING_TYPE:
 			case WPML_TM_Job_Entity::STRING_BATCH:
@@ -45,25 +51,31 @@ class WPML_TM_Rest_Jobs_Element_Info {
 
 		$result['url'] = apply_filters( 'wpml_tm_job_list_element_url', $result['url'], $id, $type );
 
+		if ( $job instanceof WPML_TM_Post_Job_Entity ) {
+			$result['type'] = $this->get_type_info( $job );
+		}
+
 		return $result;
 	}
 
 	/**
-	 * @param int $id
+	 * @param int $originalPostId
+	 * @param int $translatedPostId
 	 *
 	 * @return array
 	 */
-	private function get_for_post( $id ) {
+	private function get_for_post( $originalPostId, $translatedPostId ) {
 		$result = array();
 
-		$post = get_post( $id );
+		$post = get_post( $originalPostId );
 		if ( $post ) {
 			$permalink = get_permalink( $post );
 
-			$result = array(
-				'name' => $post->post_title,
-				'url'  => $permalink,
-			);
+			$result = [
+				'name'   => $post->post_title,
+				'url'    => $permalink,
+				'status' => Obj::propOr( 'draft', 'post_status', get_post( $translatedPostId ) ),
+			];
 		}
 
 		return $result;
@@ -106,5 +118,48 @@ class WPML_TM_Rest_Jobs_Element_Info {
 			'name' => $title,
 			'url'  => null,
 		];
+	}
+
+	/**
+	 * @param WPML_TM_Post_Job_Entity $job
+	 *
+	 * @return array
+	 */
+	private function get_type_info( WPML_TM_Post_Job_Entity $job ) {
+		$generalType = substr(
+			$job->get_element_type(),
+			0,
+			strpos( $job->get_element_type(), '_' ) ?: 0
+		);
+
+		switch ( $generalType ) {
+			case 'post':
+			case 'package':
+				$specificType = substr( $job->get_element_type(), strlen( $generalType ) + 1 );
+				$label        = Obj::pathOr(
+					$job->get_element_type(),
+					[ $specificType, 'labels', 'singular_name' ],
+					$this->get_post_types()
+				);
+				break;
+			case 'st-batch':
+				$label = __( 'Strings', 'wpml-translation-management' );
+				break;
+			default:
+				$label = $job->get_element_type();
+		}
+
+		return [
+			'value' => $job->get_element_type(),
+			'label' => $label,
+		];
+	}
+
+	private function get_post_types() {
+		if ( $this->post_types === null ) {
+			$this->post_types = \WPML\API\PostTypes::getTranslatableWithInfo();
+		}
+
+		return $this->post_types;
 	}
 }

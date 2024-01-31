@@ -39,7 +39,7 @@ abstract class WPML_Hierarchy_Sync extends WPML_WPDB_User {
 		$element_types = (array) $element_types;
 		$results       = array();
 		if ( $element_types ) {
-			$key     = md5( wp_json_encode( array( $element_types, $ref_lang_code ) ) );
+			$key     = md5( (string) wp_json_encode( array( $element_types, $ref_lang_code ) ) );
 			$found   = false;
 			$results = WPML_Non_Persistent_Cache::get( $key, self::CACHE_GROUP, $found );
 			if ( ! $found ) {

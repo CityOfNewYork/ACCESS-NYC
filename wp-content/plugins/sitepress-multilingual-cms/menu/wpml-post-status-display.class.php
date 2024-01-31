@@ -1,5 +1,7 @@
 <?php
 
+use WPML\Setup\Option;
+
 class WPML_Post_Status_Display {
 	const ICON_TRANSLATION_EDIT          = 'otgs-ico-edit';
 	const ICON_TRANSLATION_NEEDS_UPDATE  = 'otgs-ico-refresh';
@@ -56,6 +58,15 @@ class WPML_Post_Status_Display {
 	 */
 	public function get_status_html( $post_id, $lang ) {
 		list( $text, $link, $trid, $css_class, $status ) = $this->get_status_data( $post_id, $lang );
+
+		if ( Option::isTMAllowed() ) {
+			$wpml_tm_element_translations = wpml_tm_load_element_translations();
+			$review_status = $wpml_tm_element_translations->get_translation_review_status( $trid, $lang );
+		} else {
+			// Blog License.
+			$review_status = null;
+		}
+
 		if ( ! did_action( 'wpml_pre_status_icon_display' ) ) {
 			do_action( 'wpml_pre_status_icon_display' );
 		}
@@ -69,8 +80,9 @@ class WPML_Post_Status_Display {
 		 * @param int    $trid
 		 * @param string $css_class
 		 * @param int $status
+		 * @param ?string $review_status
 		 */
-		$link = apply_filters( 'wpml_link_to_translation', $link, $post_id, $lang, $trid, $css_class, $status );
+		$link = apply_filters( 'wpml_link_to_translation', $link, $post_id, $lang, $trid, $css_class, $status, $review_status );
 
 		/**
 		 * Filters the translation status text.
@@ -81,8 +93,9 @@ class WPML_Post_Status_Display {
 		 * @param int    $trid
 		 * @param string $css_class
 		 * @param int $status
+		 * @param ?string $review_status
 		 */
-		$text = apply_filters( 'wpml_text_to_translation', $text, $post_id, $lang, $trid, $css_class, $status );
+		$text = apply_filters( 'wpml_text_to_translation', $text, $post_id, $lang, $trid, $css_class, $status, $review_status );
 
 		/**
 		 * Filter the CSS class for the status icon.
@@ -94,8 +107,9 @@ class WPML_Post_Status_Display {
 		 * @param string $lang
 		 * @param int    $trid
 		 * @param int $status
+		 * @param ?string $review_status
 		 */
-		$css_class = apply_filters( 'wpml_css_class_to_translation', $css_class, $post_id, $lang, $trid, $status );
+		$css_class = apply_filters( 'wpml_css_class_to_translation', $css_class, $post_id, $lang, $trid, $status, $review_status );
 
 		$css_class = $this->map_old_icon_filter_to_css_class( $css_class, $post_id, $lang, $trid );
 
@@ -104,7 +118,7 @@ class WPML_Post_Status_Display {
 		 *
 		 * @since 4.2.0
 		 *
-		 * @param string HTML link
+		 * @param string $html_link
 		 * @param int    $post_id
 		 * @param string $lang
 		 * @param int    $trid
@@ -143,11 +157,12 @@ class WPML_Post_Status_Display {
 		 *
 		 * @deprecated since 4.2.0, use `wpml_css_class_to_translation` instead
 		 *
-		 * @param string $old_icon
-		 * @param int    $post_id
-		 * @param string $lang
-		 * @param int    $trid
-		 * @param string $css_class
+		 * @param string|false $old_icon
+		 * @param int          $post_id
+		 * @param string       $lang
+		 * @param int          $trid
+		 * @param string       $css_class
+		 *
 		 */
 		$old_icon = apply_filters( 'wpml_icon_to_translation', $old_icon, $post_id, $lang, $trid, $css_class );
 

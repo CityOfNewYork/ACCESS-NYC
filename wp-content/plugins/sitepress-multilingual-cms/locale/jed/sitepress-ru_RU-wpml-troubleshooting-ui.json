@@ -1,0 +1,40 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Preparing...": [
+            "Подготовка..."
+         ],
+         "All jobs have been cancelled": [
+            "Все задания отменены"
+         ],
+         "There is no more jobs to cancel": [
+            "Больше нет заданий для отмены"
+         ],
+         "The jobs cancellation has failed": [
+            "Отмена заданий не удалась"
+         ],
+         "Cancel in-progress automatic jobs": [
+            "Отменить выполняемые автоматические задания"
+         ],
+         "Domain name has been updated": [
+            "Доменное имя изменилось"
+         ],
+         "Domain name update has been failed": [
+            "Изменение доменного имени не выполнено"
+         ],
+         "Update domain name in language switcher settings": [
+            "Измените доменное имя в настройках переключателя языков"
+         ],
+         "Refresh license data to recognise license update": [
+            "Обновите данные лицензии, чтобы распознать обновление лицензии"
+         ],
+         "WPML License has been refreshed": [
+            "Лицензия WPML обновлена"
+         ]
+      }
+   }
+}

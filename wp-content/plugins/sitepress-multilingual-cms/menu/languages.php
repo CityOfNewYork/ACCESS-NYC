@@ -2,6 +2,8 @@
 	/* var WPML_Language_Switcher $wpml_language_switcher */
 	global $sitepress, $sitepress_settings, $wpdb, $wpml_language_switcher;
 
+use WPML\Core\WP\App\Resources;
+
 if ( ! is_plugin_active( WPML_PLUGIN_BASENAME ) ) {
 	?>
 		<h2><?php esc_html_e( 'Setup WPML', 'sitepress' ); ?></h2>
@@ -92,6 +94,20 @@ global $language_switcher_defaults, $language_switcher_defaults_alt;
 
 $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 
+$resource = Resources::enqueueApp( 'wpmlLanguageSettings' );
+$resource( [
+	'name' => 'wpmlLanguageSettings',
+	'data' => [
+		'endpoints'        => [
+			'setFileType' => \WPML\TM\Settings\Flags\Endpoints\SetFormat::class,
+		],
+		'loaderImage'      => esc_url( ICL_PLUGIN_URL ) . '/res/img/ajax-loader.gif',
+		'flagsDefaultType' => [
+			'selectedFormat' => \WPML\TM\Settings\Flags\Options::getFormat(),
+			'allowedFormats' => \WPML\TM\Settings\Flags\Options::getAllowedFormats(),
+		],
+	],
+] );
 
 ?>
 <?php $sitepress->noscript_notice(); ?>
@@ -534,6 +550,14 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 				</div> <!-- .wpml-section-url-format -->
 			<?php endif; ?>
 
+		<div class="wpml-section wpml-section-url-format" id="lang-sec-2-1" style="margin-top: 0">
+			<div class="wpml-section-header">
+				<h3><?php esc_html_e( 'Default flag format', 'sitepress' ); ?></h3>
+			</div>
+			<div class="wpml-section-content" id="wpml-default-flag-format">
+			</div>
+		</div>
+
 		<?php do_action( 'wpml_admin_after_languages_url_format' ); ?>
 
 		<?php if ( count( $all_languages ) > 1 && ! $should_hide_admin_language ): ?>
@@ -603,7 +627,7 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 						<?php wp_nonce_field( 'icl_hide_languages_nonce', '_icl_nonce' ); ?>
 						<?php foreach ( $active_languages as $l ) : ?>
 							<?php
-							if ( $l['code'] == $default_language_details['code'] ) {
+							if ( isset( $default_language_details['code'] ) && $l['code'] === $default_language_details['code'] ) {
 								continue;}
 							?>
 							<p>
@@ -745,7 +769,7 @@ $theme_wpml_config_file = WPML_Config::get_theme_wpml_config_file();
 	$request_get_page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE );
 	do_action( 'icl_extra_options_' . $request_get_page );
 
-	$seo_ui = new WPML_SEO_HeadLangs( $sitepress, new WPML_Queried_Object_Factory() );
+	$seo_ui = new WPML_SEO_HeadLangs( $sitepress );
 	$seo_ui->render_menu();
 	?>
 

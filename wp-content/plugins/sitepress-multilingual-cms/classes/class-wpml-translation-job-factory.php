@@ -2,7 +2,7 @@
 
 use \WPML\FP\Obj;
 use WPML\TM\API\Jobs;
-use WPML\TM\Menu\TranslationQueue\JobsRepository;
+use WPML\TM\Menu\TranslationQueue\PostTypeFilters;
 
 /**
  * Class WPML_Translation_Job_Factory
@@ -42,15 +42,6 @@ class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
 			2
 		);
 		add_filter(
-			'wpml_translation_job_types',
-			array(
-				$this,
-				'get_translation_job_types_filter',
-			),
-			10,
-			2
-		);
-		add_filter(
 			'wpml_get_translation_job',
 			array(
 				$this,
@@ -75,7 +66,17 @@ class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
 		return $this->create_local_job( $post_id, $target_language_code, $translator_id, null, $sendFrom );
 	}
 
-	public function create_local_job( $element_id, $target_language_code, $translator_id, $element_type = null, $sendFrom = Jobs::SENT_MANUALLY ) {
+	/**
+	 * @param int $element_id
+	 * @param string $target_language_code
+	 * @param int|null $translator_id
+	 * @param string|null $element_type
+	 * @param int|null $sendFrom
+	 * @param string|null $sourceLanguageCode
+	 *
+	 * @return int|null
+	 */
+	public function create_local_job( $element_id, $target_language_code, $translator_id, $element_type = null, $sendFrom = Jobs::SENT_MANUALLY, $sourceLanguageCode = null ) {
 		/**
 		 * @var TranslationManagement $iclTranslationManagement
 		 */
@@ -92,14 +93,15 @@ class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
 		                           ->icl_translations_by_element_id_and_type_prefix( $element_id, $element_type_prefix );
 
 		if ( $translation_record ) {
-			$trid = $translation_record->trid();
+			$trid       = $translation_record->trid();
+			$sourceLang = $sourceLanguageCode ?: $translation_record->language_code();
 
 			$batch = new WPML_TM_Translation_Batch(
 				array(
 					new WPML_TM_Translation_Batch_Element(
 						$element_id,
 						$element_type_prefix,
-						$translation_record->language_code(),
+						$sourceLang,
 						array( $target_language_code => 1 )
 					),
 				),
@@ -203,7 +205,7 @@ class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
 		$where    = $this->build_where_clause( $args );
 		$jobs_sql = $this->get_job_sql( $where, $order_by, $only_ids );
 		$jobs     = $this->wpdb->get_results( $jobs_sql );
-		if ( $only_ids === false ) {
+		if ( is_array( $jobs ) && $only_ids === false ) {
 			$jobs = $this->add_data_to_post_jobs( $jobs );
 		}
 		if ( $as_job_instances === true ) {
@@ -351,12 +353,6 @@ class WPML_Translation_Job_Factory extends WPML_Abstract_Job_Collection {
                   AND iclt.field_type = 'original_id'
                 ORDER BY {$order_by}
             ";
-	}
-
-	public function get_translation_job_types_filter( $value, $args ) {
-		$jobsRepository = new JobsRepository( wpml_tm_get_jobs_repository( true, false ) );
-
-		return $jobsRepository->getPostTypeFilters( $args );
 	}
 
 	/**

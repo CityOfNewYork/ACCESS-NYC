@@ -116,9 +116,9 @@ class WPML_TM_Post_Actions extends WPML_Translation_Job_Helper {
 				/**
 				 * The filter allows to delegate the status update for translations.
 				 *
-				 * @param bool false (default) if we should update immediately or true if done at a different stage.
+				 * @param bool $update_directly false (default) if we should update immediately or true if done at a different stage.
 				 * @param int $post_id The original post ID.
-				 * @param callable The updater function to execute.
+				 * @param callable $callback The updater function to execute.
 				 *
 				 * @since 2.11.0
 				 *
@@ -184,7 +184,7 @@ class WPML_TM_Post_Actions extends WPML_Translation_Job_Helper {
 		) {
 			global $wpdb;
 
-			$user->add_cap( WPML_Translator_Role::CAPABILITY );
+			$user->add_cap( \WPML\LIB\WP\User::CAP_TRANSLATE );
 
 			$language_pair_records = new WPML_Language_Pair_Records( $wpdb, new WPML_Language_Records( $wpdb ) );
 			$language_pair_records->store( $user_id, array( $source_lang => array( $target_lang ) ) );

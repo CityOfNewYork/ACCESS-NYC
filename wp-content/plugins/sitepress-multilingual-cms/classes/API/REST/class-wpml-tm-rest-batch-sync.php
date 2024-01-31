@@ -1,5 +1,7 @@
 <?php
 
+use WPML\LIB\WP\User;
+
 class WPML_TM_REST_Batch_Sync extends WPML_REST_Base {
 	/** @var WPML_TP_Batch_Sync_API */
 	private $batch_sync_api;
@@ -56,7 +58,7 @@ class WPML_TM_REST_Batch_Sync extends WPML_REST_Base {
 
 
 	public function get_allowed_capabilities( WP_REST_Request $request ) {
-		return array( WPML_Manage_Translations_Role::CAPABILITY, WPML_Translator_Role::CAPABILITY );
+		return [ User::CAP_ADMINISTRATOR, User::CAP_MANAGE_TRANSLATIONS, User::CAP_TRANSLATE ];
 	}
 
 	public function validate_batch_ids( $batches ) {

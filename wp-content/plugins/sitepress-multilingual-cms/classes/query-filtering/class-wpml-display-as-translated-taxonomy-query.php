@@ -45,6 +45,7 @@ class WPML_Display_As_Translated_Taxonomy_Query extends WPML_Display_As_Translat
 				)
 			) as `count`
 		";
+		/** @var string $sql */
 		$sql = $this->wpdb->prepare( $sql, $default_lang );
 
 		return str_replace( 'tt.*', $sql, $fields );
@@ -53,7 +54,7 @@ class WPML_Display_As_Translated_Taxonomy_Query extends WPML_Display_As_Translat
 	private function update_count_in_where( $where, $default_lang ) {
 		$sql = "
 		(
-	        tt.count > 0 
+	        tt.count > 0
 	        OR (
 		        SELECT term_taxonomy.count
 		        FROM {$this->wpdb->term_taxonomy} term_taxonomy
@@ -62,6 +63,7 @@ class WPML_Display_As_Translated_Taxonomy_Query extends WPML_Display_As_Translat
 	        ) > 0
 	    )
 		";
+		/** @var string @sql */
 		$sql = $this->wpdb->prepare( $sql, $default_lang );
 
 		return str_replace( 'tt.count > 0', $sql, $where );

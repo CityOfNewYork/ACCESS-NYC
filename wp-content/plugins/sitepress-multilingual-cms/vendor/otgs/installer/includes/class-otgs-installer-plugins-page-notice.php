@@ -69,6 +69,7 @@ class OTGS_Installer_Plugins_Page_Notice {
 	 * @return array
 	 */
 	private function get_model( $notice ) {
+		/** @var WP_Plugins_List_Table $wp_list_table */
 		$wp_list_table = _get_list_table( 'WP_Plugins_List_Table' );
 
 		list( $tr_classes, $notice_classes ) = $this->get_classes();
@@ -89,9 +90,17 @@ class OTGS_Installer_Plugins_Page_Notice {
 		switch ( $notice['type'] ) {
 			case 'expired':
 				$message = $this->prepareMessage(
-					__( 'You are using an expired account of %s. %sExtend your subscription%s', 'installer' ),
+					__( 'Your %s account has expired. %sPurchase today%s to protect your site from breaking changes in future WordPress releases.', 'installer' ),
 					$notice['product'],
-					$menu_url_with_action
+					'https://wpml.org/purchase/?utm_source=plugin&utm_medium=gui&utm_campaign=installer&utm_term=expired-over-30-days'
+				);
+				break;
+
+			case 'in_grace':
+				$message = $this->prepareMessage(
+					__( 'Your %s account has expired. %sRenew today%s to protect your site from breaking changes in future WordPress releases.', 'installer' ),
+					$notice['product'],
+					'https://wpml.org/account/?utm_source=plugin&utm_medium=gui&utm_campaign=installer&utm_term=expired-within-30-days'
 				);
 				break;
 
@@ -136,6 +145,7 @@ class OTGS_Installer_Plugins_Page_Notice {
 	}
 
 	private function get_toolset_lite_notice_model( $plugin_name ) {
+		/** @var WP_Plugins_List_Table $wp_list_table */
 		$wp_list_table = _get_list_table( 'WP_Plugins_List_Table' );
 
 		list( $tr_classes, $notice_classes ) = $this->get_classes();

@@ -1,5 +1,6 @@
 <?php
 
+use WPML\API\Sanitize;
 use WPML\Core\Twig_Environment;
 use WPML\Core\Twig_Loader_Filesystem;
 use WPML\Core\Twig_Loader_String;
@@ -74,14 +75,15 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	 * @return false|string
 	 */
 	public function get_post_status( $ID = '' ) {
+		$ID = is_string( $ID ) ? (int) $ID : $ID;
 		return get_post_status( $ID );
 	}
 
 	/**
 	 * Wrapper for \get_term_link
 	 *
-	 * @param  object|int|string $term
-	 * @param string            $taxonomy
+	 * @param WP_Term|int|string $term
+	 * @param string             $taxonomy
 	 *
 	 * @return string|WP_Error
 	 */
@@ -118,7 +120,7 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	 * @return false|string
 	 */
 	public function add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function = '' ) {
-
+		/** @phpstan-ignore-next-line WP doc issue. */
 		return add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function );
 	}
 
@@ -134,7 +136,7 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	 * @return string
 	 */
 	public function add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function = '', $icon_url = '', $position = null ) {
-
+		/** @phpstan-ignore-next-line WP doc issue. */
 		return add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position );
 	}
 
@@ -235,8 +237,7 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	 * @return bool
 	 */
 	public function current_user_can( $capability ) {
-
-		return current_user_can( $capability );
+		return WPML\LIB\WP\User::currentUserCan( $capability );
 	}
 
 	/**
@@ -313,8 +314,7 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	 * @return bool
 	 */
 	public function user_can( $user, $capability ) {
-
-		return user_can( $user, $capability );
+		return WPML\LIB\WP\User::userCan( $user, $capability );
 	}
 
 	/**
@@ -479,7 +479,7 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	}
 
 	public function is_heartbeat() {
-		$action = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING );
+		$action = Sanitize::stringProp( 'action', $_POST );
 
 		return 'heartbeat' === $action;
 	}
@@ -487,7 +487,8 @@ class WPML_WP_API extends WPML_PHP_Functions {
 	public function is_post_edit_page() {
 		global $pagenow;
 
-		return 'post.php' === $pagenow && isset( $_GET['action'], $_GET['post'] ) && 'edit' === filter_var( $_GET['action'] );
+		return 'post.php' === $pagenow && isset( $_GET['action'], $_GET['post'] )
+		       && 'edit' === Sanitize::stringProp( 'action', $_GET );
 	}
 
 	public function is_new_post_page() {

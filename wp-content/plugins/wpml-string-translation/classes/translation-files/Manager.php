@@ -50,10 +50,13 @@ abstract class Manager {
 	}
 
 	/**
+	 * Builds and saves the .MO file.
+	 * Returns false if file doesn't exist, file path otherwise.
+	 *
 	 * @param string $domain
 	 * @param string $locale
 	 *
-	 * @return bool
+	 * @return false|string
 	 */
 	public function add( $domain, $locale ) {
 		if ( ! $this->maybeCreateSubdir() ) {
@@ -74,7 +77,11 @@ abstract class Manager {
 
 		$filepath = $this->getFilepath( $domain, $locale );
 
-		return $this->filesystem->put_contents( $filepath, $file_content, 0755 & ~ umask() );
+		$chmod = defined( 'FS_CHMOD_FILE' ) ? FS_CHMOD_FILE : 0644;
+		if ( $this->filesystem->put_contents( $filepath, $file_content, $chmod ) ) {
+			return $filepath;
+		}
+		return false;
 	}
 
 	/**
@@ -116,9 +123,9 @@ abstract class Manager {
 	public static function getSubdir() {
 		$subdir = WP_LANG_DIR . '/' . self::SUB_DIRECTORY;
 
-		$siteId = get_current_blog_id();
-		if ( $siteId > 1 ) {
-			$subdir .= '/' . $siteId;
+		$site_id = get_current_blog_id();
+		if ( $site_id > 1 ) {
+			$subdir .= '/' . $site_id;
 		}
 
 		return $subdir;

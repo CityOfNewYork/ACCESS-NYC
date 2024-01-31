@@ -1,0 +1,59 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "en"
+         },
+         "Error": [
+            "Erro"
+         ],
+         "Draft — Pending review": [
+            "Rascunho — Revisão pendente"
+         ],
+         "Complete": [
+            "Completo"
+         ],
+         "Insufficient funds": [
+            "Fundos insuficientes"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "As suas traduções automáticas pendentes serão canceladas."
+         ],
+         "Save": [
+            "Guardar"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "Vá a <a>Painel de controlo do Translation Management</a> para traduzir o seu conteúdo."
+         ],
+         "Review the translations before publishing": [
+            "Rever as traduções antes de publicar"
+         ],
+         "Publish translations and review them later": [
+            "Publicar traduções e revê-las mais tarde"
+         ],
+         "Publish translations without reviewing": [
+            "Publicar as traduções sem revisão"
+         ],
+         "Translate Everything": [
+            "Traduzir Tudo"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "O WPML irá traduzir automaticamente conteúdo que publique ou atualize"
+         ],
+         "How do you want to translate this site?": [
+            "Como pretende traduzir este website?"
+         ],
+         "Translate Some": [
+            "Traduzir Parte"
+         ],
+         "I want to choose which content to translate": [
+            "Quero selecionar qual o conteúdo a traduzir"
+         ],
+         "Translate": [
+            "Traduzir"
+         ]
+      }
+   }
+}

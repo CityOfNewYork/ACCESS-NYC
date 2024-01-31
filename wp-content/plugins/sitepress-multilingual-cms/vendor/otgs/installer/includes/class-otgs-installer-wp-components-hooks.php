@@ -5,6 +5,7 @@ class OTGS_Installer_WP_Components_Hooks {
 	const EVENT_SEND_COMPONENTS_MONTHLY = 'otgs_send_components_data';
 	const EVENT_SEND_COMPONENTS_AFTER_REGISTRATION = 'otgs_send_components_data_on_product_registration';
 	const REPORT_SCHEDULING_PERIOD = '+1 month';
+	const MONTHLY_CRON = 'monthly';
 
 	/**
 	 * @var OTGS_Installer_WP_Components_Storage
@@ -44,18 +45,13 @@ class OTGS_Installer_WP_Components_Hooks {
 		add_action( self::EVENT_SEND_COMPONENTS_MONTHLY, array( $this, 'send_components_data' ) );
 		add_action( self::EVENT_SEND_COMPONENTS_AFTER_REGISTRATION, array( $this, 'send_components_data' ) );
 		add_action( 'init', array( $this, 'schedule_components_report' ) );
-		add_action( 'wp_ajax_save_site_key', array( $this, 'schedule_components_report_when_product_is_registered' ) );
+
+		add_filter( 'cron_schedules', array( $this, 'custom_monthly_cron_schedule' ) );
 	}
 
 	public function schedule_components_report() {
 		if ( ! wp_next_scheduled( self::EVENT_SEND_COMPONENTS_MONTHLY ) ) {
-			wp_schedule_single_event( strtotime( self::REPORT_SCHEDULING_PERIOD ), self::EVENT_SEND_COMPONENTS_MONTHLY );
-		}
-	}
-
-	public function schedule_components_report_when_product_is_registered() {
-		if ( ! wp_next_scheduled( self::EVENT_SEND_COMPONENTS_AFTER_REGISTRATION ) ) {
-			wp_schedule_single_event( time() + 60, self::EVENT_SEND_COMPONENTS_AFTER_REGISTRATION );
+			wp_schedule_event( strtotime( self::REPORT_SCHEDULING_PERIOD ), self::MONTHLY_CRON, self::EVENT_SEND_COMPONENTS_MONTHLY );
 		}
 	}
 
@@ -74,5 +70,21 @@ class OTGS_Installer_WP_Components_Hooks {
 			$this->storage->refresh_cache();
 			$this->sender->send( $this->storage->get() );
 		}
+	}
+
+	/**
+	 * @return array {
+	 *     The array of cron schedules keyed by the schedule name.
+	 *
+	 *     @type int $interval The schedule interval in seconds.
+	 *     @type string $display The schedule display name.
+	 * }
+	 */
+	public function custom_monthly_cron_schedule( $schedules ) {
+		$schedules[self::MONTHLY_CRON] = array(
+			'interval' => 2592000, // 30 days in seconds
+			'display' => __( 'Monthly', 'sitepress' )
+		);
+		return $schedules;
 	}
 }

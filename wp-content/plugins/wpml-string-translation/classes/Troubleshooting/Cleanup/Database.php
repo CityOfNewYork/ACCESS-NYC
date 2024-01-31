@@ -76,6 +76,8 @@ class Database {
 	 * @return bool
 	 */
 	private function tableExists( $table ) {
-		return (bool) $this->wpdb->get_var( $this->wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) );
+		/** @var string $sql */
+		$sql = $this->wpdb->prepare( 'SHOW TABLES LIKE %s', $table );
+		return (bool) $this->wpdb->get_var( $sql );
 	}
 }

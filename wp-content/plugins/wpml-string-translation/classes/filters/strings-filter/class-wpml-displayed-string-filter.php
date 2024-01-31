@@ -29,7 +29,7 @@ class WPML_Displayed_String_Filter {
 	/**
 	 * Translate by name and context.
 	 *
-	 * @param string       $untranslated_text Untranslated text.
+	 * @param string|bool   $untranslated_text Untranslated text.
 	 * @param string       $name Name of the string.
 	 * @param string|array $context Context.
 	 * @param null|boolean $has_translation If string has translation.
@@ -56,7 +56,7 @@ class WPML_Displayed_String_Filter {
 	/**
 	 * Transform translation parameters.
 	 *
-	 * @param string       $name Name of the string.
+	 * @param string|bool  $name Name of the string.
 	 * @param string|array $context Context.
 	 *
 	 * @return array
@@ -83,8 +83,8 @@ class WPML_Displayed_String_Filter {
 	/**
 	 * Get translation of the string.
 	 *
-	 * @param string       $untranslated_text Untranslated text.
-	 * @param string       $name Name of the string.
+	 * @param string|bool  $untranslated_text Untranslated text.
+	 * @param string|bool  $name Name of the string.
 	 * @param string|array $context Context.
 	 *
 	 * @return TranslationEntity

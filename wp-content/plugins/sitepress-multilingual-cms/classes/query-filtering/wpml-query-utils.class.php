@@ -83,7 +83,7 @@ class WPML_Query_Utils {
 		$cache_args['day']           = $day;
 		$cache_args['post_type']     = $post_type;
 
-		$cache_key   = md5( json_encode( $cache_args ) );
+		$cache_key   = md5( (string) json_encode( $cache_args ) );
 		$cache_group = 'archive_query_has_posts';
 		$cache       = new WPML_WP_Cache( $cache_group );
 		$found       = false;

@@ -4,6 +4,7 @@ namespace WPML\ST\Gettext;
 
 use wpdb;
 use WPML\FP\Obj;
+use WPML\ST\MO\Hooks\PreloadThemeMoFile;
 use WPML\ST\Package\Domains;
 use function wpml_collect;
 use WPML_ST_Settings;
@@ -55,7 +56,11 @@ class AutoRegisterSettings {
 
 		if ( $setting['enabled'] ) {
 			$elapsed_time       = time() - $setting['time'];
-			$setting['enabled'] = self::RESET_AUTOLOAD_TIMEOUT > $elapsed_time;
+			$isStillEnabled = self::RESET_AUTOLOAD_TIMEOUT > $elapsed_time;
+			$setting['enabled'] = $isStillEnabled;
+			if ( ! $isStillEnabled ) {
+				$this->setEnabled( false );
+			}
 		}
 
 		return $setting['enabled'];
@@ -70,6 +75,8 @@ class AutoRegisterSettings {
 		$setting['enabled'] = ( $isEnabled && $this->getTimeToAutoDisable() > 0 );
 
 		$this->settings->update_setting( self::KEY_ENABLED, $setting, true );
+
+		$this->setWpmlSettingForThemeLocalization( $isEnabled );
 	}
 
 	/**
@@ -195,6 +202,7 @@ class AutoRegisterSettings {
 			}
 
 			$this->settings->update_setting( self::KEY_ENABLED, $is_enabled, true );
+			$this->setWpmlSettingForThemeLocalization( $is_enabled[ 'enabled' ] );
 
 			wp_send_json_success();
 		} else {
@@ -232,5 +240,45 @@ class AutoRegisterSettings {
 		}
 
 		return $result;
+	}
+
+	private function setWpmlSettingForThemeLocalization( $isEnabled ) {
+		if ( $isEnabled ) {
+			$this->enableWpmlSettingForThemeLocalizationIfNecessary();
+		} else {
+			$this->disableWpmlSettingForThemeLocalizationIfNecessary();
+		}
+	}
+
+	private function enableWpmlSettingForThemeLocalizationIfNecessary() {
+		$previousLoadThemeSetting = (int) apply_filters(
+			'wpml_get_setting',
+			0,
+			PreloadThemeMoFile::SETTING_KEY
+		);
+		if ( $previousLoadThemeSetting === PreloadThemeMoFile::SETTING_DISABLED ) {
+			do_action(
+				'wpml_set_setting',
+				PreloadThemeMoFile::SETTING_KEY,
+				PreloadThemeMoFile::SETTING_ENABLED_FOR_LOAD_TEXT_DOMAIN,
+				true
+			);
+		}
+	}
+
+	private function disableWpmlSettingForThemeLocalizationIfNecessary() {
+		$previousLoadThemeSetting = (int) apply_filters(
+			'wpml_get_setting',
+			0,
+			PreloadThemeMoFile::SETTING_KEY
+		);
+		if ( $previousLoadThemeSetting === PreloadThemeMoFile::SETTING_ENABLED_FOR_LOAD_TEXT_DOMAIN ) {
+			do_action(
+				'wpml_set_setting',
+				PreloadThemeMoFile::SETTING_KEY,
+				PreloadThemeMoFile::SETTING_DISABLED,
+				true
+			);
+		}
 	}
 }

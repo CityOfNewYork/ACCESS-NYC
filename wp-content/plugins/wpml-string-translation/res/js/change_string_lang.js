@@ -35,7 +35,7 @@ WPML_String_Translation.ChangeLanguage = function () {
 
 		data = {
 			action:   'wpml_change_string_lang',
-			wpnonce:  jQuery('#wpml_change_string_language_nonce').val(),
+			wpnonce:  wpml_st_change_lang_data.nonce,
 			strings:  strings,
 			language: privateData.language_select.val()
 		};

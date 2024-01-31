@@ -1,0 +1,54 @@
+@font-face {
+    font-family: "{{ name }}";
+    src: {{{ fontSrc }}};
+}
+
+[class*="otgs-ico"] {
+    display: inline-block;
+    transform: translate(0, 0);
+}
+[class*="otgs-ico"]:focus {
+   outline: none;
+}
+
+
+{{# if selector }}
+{{ selector }}:before {
+{{ else }}
+[class^="{{prefix}}-"]:before, [class*=" {{prefix}}-"]:before, [data-{{prefix}}]:before {
+{{/ if }}
+    font-family: {{ name }} !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: text-bottom;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.{{prefix}}-32:before {
+  font-size: 32px;
+}
+[data-{{prefix}}]:before {
+  content: attr(data-{{prefix}});
+}
+
+
+{{# each codepoints }}
+{{# if ../selector }}
+{{ ../selector }}.{{ ../prefix }}-{{ @key }}:before {
+{{ else }}
+{{ tag }}.{{ ../prefix }}-{{ @key }}:before {
+{{/ if }}
+    content: "\\{{ codepoint this }}";
+}
+{{/ each }}
+
+/***************************** OTGS ico aliases **************************/
+
+@-webkit-keyframes spin {
+	0%  {transform: rotate(0deg);}
+	100% {transform: rotate(360deg);}
+}

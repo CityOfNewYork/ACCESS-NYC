@@ -84,6 +84,10 @@ class WPML_Taxonomy_Translation_Screen_Data extends WPML_WPDB_And_SP_User {
 			$terms_data['truncated'] = 1;
 		}
 
+		if ( ! is_array( $all_terms ) ) {
+			return $terms_data;
+		}
+
 		if ( function_exists( 'get_term_meta' ) ) {
 			$all_terms = $this->add_metadata( $all_terms );
 		}
@@ -231,7 +235,7 @@ class WPML_Taxonomy_Translation_Screen_Data extends WPML_WPDB_And_SP_User {
 	 */
 	private function build_from_clause( $from, $selects, $limit ) {
 		return $from . sprintf(
-			" INNER JOIN ( 
+			" INNER JOIN (
 					SELECT trid FROM %s WHERE element_type = '%s' AND source_language_code IS NULL LIMIT %d
 				  ) lm on lm.trid = %s.trid",
 			$this->wpdb->prefix . 'icl_translations',

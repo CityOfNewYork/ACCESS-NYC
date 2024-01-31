@@ -299,12 +299,15 @@ function _icl_trash_restore_prompt() {
 		$post = get_post( intval( $_GET['post'] ) );
 		if ( isset( $post->post_status ) && $post->post_status == 'trash' ) {
 			$post_type_object = get_post_type_object( $post->post_type );
+			$delete_post_url  = get_delete_post_link( $post->ID, '', true );
 
-			$delete_post_link  = '<a href="' . esc_url( get_delete_post_link( $post->ID, '', true ) ) . '">' . esc_html__( 'delete it permanently', 'sitepress' ) . '</a>';
-			$restore_post_link = '<a href="' . wp_nonce_url( admin_url( sprintf( $post_type_object->_edit_link . '&amp;action=untrash', $post->ID ) ), 'untrash-post_' . $post->ID ) . '">' . esc_html__( 'restore', 'sitepress' ) . '</a>';
-			$ret               = '<p>' . sprintf( esc_html__( 'This translation is currently in the trash. You need to either %1$s or %2$s it in order to continue.' ), $delete_post_link, $restore_post_link );
+			if ( is_string( $delete_post_url ) ) {
+				$delete_post_link  = '<a href="' . esc_url( $delete_post_url ) . '">' . esc_html__( 'delete it permanently', 'sitepress' ) . '</a>';
+				$restore_post_link = '<a href="' . wp_nonce_url( admin_url( sprintf( $post_type_object->_edit_link . '&amp;action=untrash', $post->ID ) ), 'untrash-post_' . $post->ID ) . '">' . esc_html__( 'restore', 'sitepress' ) . '</a>';
+				$ret               = '<p>' . sprintf( esc_html__( 'This translation is currently in the trash. You need to either %1$s or %2$s it in order to continue.' ), $delete_post_link, $restore_post_link );
 
-			wp_die( $ret );
+				wp_die( $ret );
+			}
 		}
 	}
 }
@@ -320,7 +323,7 @@ function _icl_trash_restore_prompt() {
  * @deprecated 3.2 use 'wpml_admin_make_duplicates' action instead
  */
 function icl_makes_duplicates( $master_post_id ) {
-	wpml_admin_make_post_duplicates_action( $master_post_id );
+	wpml_admin_make_post_duplicates_action( (int) $master_post_id );
 }
 
 /**
@@ -363,7 +366,7 @@ function wpml_admin_make_post_duplicates_action( $master_post_id ) {
  * @deprecated 3.2 use 'wpml_make_post_duplicates' action instead
  */
 function icl_makes_duplicates_public( $master_post_id ) {
-	wpml_make_post_duplicates_action( $master_post_id );
+	wpml_make_post_duplicates_action( (int) $master_post_id );
 }
 
 /**
@@ -503,7 +506,7 @@ function wpml_strip_subdir_from_url( $url ) {
 	global $wpml_url_converter;
 
 	$subdir       = wpml_parse_url( $wpml_url_converter->get_abs_home(), PHP_URL_PATH );
-	$subdir_slugs = array_values( array_filter( explode( '/', $subdir ) ) );
+	$subdir_slugs = ! empty( $subdir ) ? array_values( array_filter( explode( '/', $subdir ) ) ) : [''];
 
 	$url_path_expl = explode( '/', preg_replace( '#^(http|https)://#', '', $url ) );
 	array_shift( $url_path_expl );
@@ -703,6 +706,11 @@ function repair_el_type_collate() {
  * @param int    $component
  *
  * @return array|string|int|null
+ *
+ * @phpstan-return ($component is -1
+ *  ? array|null
+ *  : ($component is PHP_URL_PORT ? int|null : string|null)
+ *  )
  */
 function wpml_parse_url( $url, $component = -1 ) {
 	$ret = null;
@@ -881,5 +889,30 @@ if ( ! function_exists( 'wpml_is_ajax' ) ) {
 		}
 
 		return ( isset( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && wpml_mb_strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest' ) ? true : false;
+	}
+}
+
+if ( ! function_exists( 'wpml_get_flag_file_name' ) ) {
+	/**
+	 * wpml_get_flag_file_name - Returns the SVG or PNG flag file name based on language code if it exists in '/res/flags/' dir.
+	 *
+	 * @param $lang_code
+	 *
+	 * @return string
+	 * @since 4.6.0
+	 *
+	 */
+	function wpml_get_flag_file_name( $lang_code ) {
+		if ( file_exists( WPML_PLUGIN_PATH . '/res/flags/' . $lang_code . '.svg' ) ) {
+			$file = $lang_code . '.svg';
+		} elseif ( file_exists( WPML_PLUGIN_PATH . '/res/flags/' . $lang_code . '.png' ) ) {
+			$file = $lang_code . '.png';
+		} elseif ( file_exists( WPML_PLUGIN_PATH . '/res/flags/nil.svg' ) ) {
+			$file = 'nil.svg';
+		} else {
+			$file = 'nil.png';
+		}
+
+		return $file;
 	}
 }

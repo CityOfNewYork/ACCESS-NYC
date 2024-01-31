@@ -13,6 +13,7 @@ class TranslationsObjectStorage extends \SplObjectStorage {
 	 *
 	 * @return string
 	 */
+	#[\ReturnTypeWillChange]
 	public function getHash( $o ) {
 		return implode(
 			'_',
