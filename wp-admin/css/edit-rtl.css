@@ -98,6 +98,12 @@ input#link_url {
 	color: #646970;
 }
 
+#sample-permalink {
+	display: inline-block;
+	max-width: 100%;
+	word-wrap: break-word;
+}
+
 #edit-slug-box .cancel {
 	margin-left: 10px;
 	padding: 0;
@@ -720,6 +726,17 @@ form#tags-filter {
 	padding-right: 0;
 }
 
+/* Better position for the WordPress admin notices. */
+.privacy-settings .notice,
+.site-health .notice {
+	margin: 25px 22px 15px 20px;
+}
+
+.privacy-settings .notice ~ .notice,
+.site-health .notice ~ .notice {
+	margin-top: 5px;
+}
+
 /* Emulates .wrap h1 styling */
 .privacy-settings-header h1,
 .health-check-header h1 {
@@ -1052,6 +1069,10 @@ form#tags-filter {
 	padding: 0 8px 8px;
 }
 
+#postcustom #postcustomstuff .add-custom-field {
+	padding: 12px 8px 8px;
+}
+
 #side-sortables #postcustom #postcustomstuff .submit {
 	margin: 0;
 	padding: 0;
@@ -1102,7 +1123,8 @@ form#tags-filter {
 	width: auto;
 }
 
-#postcustomstuff #newmetaleft a {
+#postcustomstuff #newmetaleft a,
+#postcustomstuff #newmeta-button {
 	display: inline-block;
 	margin: 0 8px 8px;
 	text-decoration: none;
@@ -1962,11 +1984,6 @@ table.links-table {
 
 	.misc-pub-section {
 		padding: 20px 10px;
-	}
-
-	.misc-pub-section > a {
-		float: left;
-		font-size: 16px;
 	}
 
 	#delete-action,
