@@ -36,7 +36,9 @@
       {% else %}
         {% set url_param = 'program_cat' %}
       {% endif %}
-      <a class="btn btn-primary btn-tag mb-1" href="../?{{ url_param }}={{ category.slug }}">{{ category.name }}</a>
+      <a class="btn btn-primary btn-tag mb-1 max-w-full" href="../?{{ url_param }}={{ category.slug }}">
+        <span class="truncate">{{ category.name }}</span>
+      </a>
     {% endfor %}
   </div>
 

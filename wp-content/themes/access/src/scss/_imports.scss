@@ -109,3 +109,9 @@ $path-to-images: 'img/';
 .outline-none {
   outline: none;
 }
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
