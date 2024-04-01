@@ -18,7 +18,7 @@ add_action('rest_api_init', function() {
    */
 
   $v = 'api/v1'; // namespace for the current version of the API
-  $exp = WEEK_IN_SECONDS; // expiration of the transient caches
+  $exp = HOUR_IN_SECONDS; // expiration of the transient caches
   $lang = (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) ?
     '_' . ICL_LANGUAGE_CODE : '';
 
