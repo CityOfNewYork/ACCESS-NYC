@@ -320,6 +320,7 @@ Script        | Description
 `predeploy`   | This runs a one-off compilation of assets in production mode.
 `scripts`     | This runs a one-off compilation of JavaScript assets in production mode.
 `styles`      | This runs a one-off compilation of stylesheet assets in production mode.
+`svgs`      | This runs a one-off compilation of SVG assets in production mode.
 
 ## Git Hooks
 
