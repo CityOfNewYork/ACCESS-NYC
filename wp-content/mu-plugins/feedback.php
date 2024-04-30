@@ -4,8 +4,8 @@ namespace FeedbackNYC;
 
 use \TANIOS\Airtable\Airtable;
 
-add_action('wp_ajax_feedback', 'FeedbackNYC\feedbackHandler');
-add_action('wp_ajax_nopriv_feedback', 'FeedbackNYC\feedbackHandler');
+// add_action('wp_ajax_feedback', 'FeedbackNYC\feedbackHandler');
+// add_action('wp_ajax_nopriv_feedback', 'FeedbackNYC\feedbackHandler');
 
 /**
  * Creates a record on an Airtable based on the feedback form submission.
