@@ -48,7 +48,7 @@
     "wpackagist-plugin/rollbar": "*",
     "wpackagist-plugin/search-everything": "*",
     "wpackagist-plugin/wp-all-export": "*",
-    "wpackagist-plugin/wp-bitly": "*",
+    "wpackagist-plugin/wp-bitly": "2.7.1",
     "wpackagist-plugin/wp-security-questions": "*",
     "wpackagist-plugin/wps-hide-login": "*",
     "wpackagist-plugin/wpscan": "*"
