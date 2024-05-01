@@ -81,7 +81,6 @@ class EMR_Envira_Gallery_Skin extends WP_Upgrader_Skin {
 			echo wp_json_encode( array( 'error' => __( 'There was an error installing the addon. Please try again.', 'envira-gallery' ) ) );
 			/* log this for API issues */
 
-			error_log( 'Envira: There was an error installing the addon' );
 			error_log( print_r( $errors, true ) );
 
 			die;

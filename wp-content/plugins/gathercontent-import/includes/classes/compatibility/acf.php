@@ -6,6 +6,7 @@
  */
 
 namespace GatherContent\Importer\Compatibility;
+
 use GatherContent\Importer\Sync\Pull;
 use GatherContent\Importer\Sync\Push;
 use GatherContent\Importer\Base;
@@ -152,8 +153,8 @@ class ACF extends Base {
 	 *
 	 * @since  3.1.5
 	 *
-	 * @param  mixed  $meta_value GC Checkbox Field value
-	 * @param  array  $field      ACF Field array
+	 * @param  mixed $meta_value GC Checkbox Field value
+	 * @param  array $field      ACF Field array
 	 *
 	 * @return mixed              Possibly modified meta value.
 	 */
@@ -163,17 +164,20 @@ class ACF extends Base {
 			&& is_array( $meta_value )
 			&& ! empty( $field['choices'] )
 		) {
-			$meta_value = array_map( function( $meta_arr_value ) use ( $field ) {
+			$meta_value = array_map(
+				function( $meta_arr_value ) use ( $field ) {
 
-				// Replace choice with the choice key from ACF.
-				$key = array_search( $meta_arr_value, $field['choices'] );
-				if ( false !== $key ) {
-					$meta_arr_value = $key;
-				}
+					// Replace choice with the choice key from ACF.
+					$key = array_search( $meta_arr_value, $field['choices'] );
+					if ( false !== $key ) {
+						  $meta_arr_value = $key;
+					}
 
-				return $meta_arr_value;
+					return $meta_arr_value;
 
-			}, $meta_value );
+				},
+				$meta_value
+			);
 		}
 
 		return $meta_value;
@@ -184,9 +188,9 @@ class ACF extends Base {
 	 *
 	 * @since  3.1.5
 	 *
-	 * @param  mixed  $meta_value GC Checkbox Field value
-	 * @param  Push   $push       The Push object.
-	 * @param  array  $field      ACF Field array
+	 * @param  mixed $meta_value GC Checkbox Field value
+	 * @param  Push  $push       The Push object.
+	 * @param  array $field      ACF Field array
 	 *
 	 * @return mixed              Possibly modified meta value.
 	 */
@@ -206,9 +210,11 @@ class ACF extends Base {
 			$meta_value[ $key ] = isset( $field['choices'][ $value ] ) ? $field['choices'][ $value ] : $value;
 		}
 
-		$updated = $push->update_element_selected_options( function( $label ) use ( $meta_value ) {
-			return in_array( $label, $meta_value, true );
-		} );
+		$updated = $push->update_element_selected_options(
+			function( $label ) use ( $meta_value ) {
+				return in_array( $label, $meta_value, true );
+			}
+		);
 
 		return $updated;
 	}
@@ -225,7 +231,7 @@ class ACF extends Base {
 	 */
 	public function get_acfs( $post_type, $post_id = 0 ) {
 		$filter = array(
-			'post_type'	=> $post_type
+			'post_type' => $post_type,
 		);
 
 		if ( ! empty( $post_id ) ) {
@@ -238,15 +244,17 @@ class ACF extends Base {
 			return false;
 		}
 
-
 		$field_groups = (array) apply_filters( 'acf/get_field_groups', array() );
 		if ( empty( $field_groups ) ) {
 			return false;
 		}
 
-		$acfs = array_filter( $field_groups, function( $acf ) use ( $metabox_ids ) {
-			return isset( $acf['id'] ) && in_array( $acf['id'], $metabox_ids );
-		} );
+		$acfs = array_filter(
+			$field_groups,
+			function( $acf ) use ( $metabox_ids ) {
+				return isset( $acf['id'] ) && in_array( $acf['id'], $metabox_ids );
+			}
+		);
 
 		return ! empty( $acfs ) ? $acfs : false;
 	}
@@ -256,7 +264,7 @@ class ACF extends Base {
 	 *
 	 * @since  3.1.5
 	 *
-	 * @param  array  $acf The ACF config array.
+	 * @param  array $acf The ACF config array.
 	 *
 	 * @return bool|array  Array of fields for this config, or false.
 	 */

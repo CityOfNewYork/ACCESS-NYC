@@ -93,6 +93,7 @@ class AAL_Activity_Log_List_Table extends WP_List_Table {
 					'Posts',
 					'Taxonomies',
 					'Users',
+					'Emails',
 					'Options',
 					'Attachments',
 					'Plugins',
@@ -172,12 +173,20 @@ class AAL_Activity_Log_List_Table extends WP_List_Table {
 			'action'      => __( 'Action', 'aryo-activity-log' ),
 		);
 
+        if ( ! $this->is_store_ip_address() ) {
+            unset( $columns['ip'] );
+        }
+
 		return $columns;
 	}
 
+    private function is_store_ip_address() {
+        return 'no-collect-ip' !== AAL_Main::instance()->settings->get_option( 'log_visitor_ip_source' );
+    }
+
 	public function get_sortable_columns() {
 		return array(
-			'ip' => 'hist_ip',
+			'ip' => array( 'hist_ip', 'desc' ),
 			'date' => array( 'hist_time', true ),
 		);
 	}
@@ -194,13 +203,13 @@ class AAL_Activity_Log_List_Table extends WP_List_Table {
 				$return  = sprintf( '<strong>' . __( '%s ago', 'aryo-activity-log' ) . '</strong>', human_time_diff( $item->hist_time, current_time( 'timestamp' ) ) );
 
 				$date_formatted = date( 'd/m/Y', $item->hist_time );
-				$return .= '<br /><a href="' . $this->get_filtered_link( 'dateshow', $date_formatted ) . '">' . date( 'd/m/Y', $item->hist_time ) . '</a>';
+				$return .= '<br /><a href="' . $this->get_filtered_link( 'dateshow', $date_formatted ) . '">' . date_i18n( get_option( 'date_format' ), $item->hist_time ) . '</a>';
 
-				$return .= '<br />' . date( 'H:i:s', $item->hist_time );
+				$return .= '<br />' . date_i18n( get_option( 'time_format' ), $item->hist_time );
 				break;
 
 			case 'ip':
-				$return = '<a href="' . $this->get_filtered_link( 'filter_ip', $item->hist_ip ) . '">' . $item->hist_ip. '</a>';
+				$return = '<a href="' . $this->get_filtered_link( 'filter_ip', $item->hist_ip ) . '">' . esc_html( $item->hist_ip ) . '</a>';
 				break;
 
 			default:
@@ -563,23 +572,23 @@ class AAL_Activity_Log_List_Table extends WP_List_Table {
 		}
 
 		if ( ! empty( $_REQUEST['typeshow'] ) ) {
-			$where .= $wpdb->prepare( ' AND `object_type` = %s', $_REQUEST['typeshow'] );
+			$where .= $wpdb->prepare( ' AND `object_type` = %s', sanitize_text_field( $_REQUEST['typeshow'] ) );
 		}
 
 		if ( isset( $_REQUEST['showaction'] ) && '' !== $_REQUEST['showaction'] ) {
-			$where .= $wpdb->prepare( ' AND `action` = %s', $_REQUEST['showaction'] );
+			$where .= $wpdb->prepare( ' AND `action` = %s', sanitize_text_field( $_REQUEST['showaction'] ) );
 		}
 
 		if ( isset( $_REQUEST['filter_ip'] ) && '' !== $_REQUEST['filter_ip'] ) {
-			$where .= $wpdb->prepare( ' AND `hist_ip` = %s', $_REQUEST['filter_ip'] );
+			$where .= $wpdb->prepare( ' AND `hist_ip` = %s', sanitize_text_field( $_REQUEST['filter_ip'] ) );
 		}
 
 		if ( isset( $_REQUEST['usershow'] ) && '' !== $_REQUEST['usershow'] ) {
-			$where .= $wpdb->prepare( ' AND `user_id` = %d', $_REQUEST['usershow'] );
+			$where .= $wpdb->prepare( ' AND `user_id` = %d', sanitize_text_field( $_REQUEST['usershow'] ) );
 		}
 
 		if ( isset( $_REQUEST['capshow'] ) && '' !== $_REQUEST['capshow'] ) {
-			$where .= $wpdb->prepare( ' AND `user_caps` = %s', strtolower( $_REQUEST['capshow'] ) );
+			$where .= $wpdb->prepare( ' AND `user_caps` = %s', strtolower( sanitize_text_field( $_REQUEST['capshow'] ) ) );
 		}
 
 		if ( isset( $_REQUEST['dateshow'] ) ) {
@@ -626,7 +635,10 @@ class AAL_Activity_Log_List_Table extends WP_List_Table {
 					' . $this->_get_where_by_role()
 		);
 
-		$items_orderby = sanitize_sql_orderby( filter_input( INPUT_GET, 'orderby', FILTER_SANITIZE_STRING ) );
+		if ( ! empty( $_GET['orderby'] ) ) {
+			$items_orderby = sanitize_sql_orderby( htmlspecialchars( $_GET['orderby'] ) );
+		}
+
 		if ( empty( $items_orderby ) ) {
 			$items_orderby = 'hist_time'; // Sort by time by default.
 		}
@@ -673,7 +685,7 @@ class AAL_Activity_Log_List_Table extends WP_List_Table {
 	}
 
 	private function get_filtered_link( $name = '', $value = '' ) {
-		$base_page_url = menu_page_url( 'activity_log_page', false );
+		$base_page_url = menu_page_url( 'activity-log-page', false );
 
 		if ( empty( $name ) ) {
 			return $base_page_url;

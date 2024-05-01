@@ -6,6 +6,7 @@
  */
 
 namespace GatherContent\Importer\Sync;
+
 use GatherContent\Importer\Post_Types\Template_Mappings;
 use GatherContent\Importer\Mapping_Post;
 use GatherContent\Importer\API;
@@ -45,7 +46,7 @@ class Push extends Base {
 	 *
 	 * @var string
 	 */
-	protected $config = array();
+	protected $config      = array();
 	protected $item_config = array();
 
 	private $item_id = null;
@@ -86,7 +87,7 @@ class Push extends Base {
 	public function maybe_push_item( $mapping_post_id ) {
 		try {
 
-			$post = $this->get_post( $mapping_post_id );
+			$post       = $this->get_post( $mapping_post_id );
 			$mapping_id = \GatherContent\Importer\get_post_mapping_id( $post->ID );
 
 			$this->mapping = Mapping_Post::get( $mapping_id, true );
@@ -112,70 +113,31 @@ class Push extends Base {
 	 * @return mixed Result of push.
 	 */
 	protected function do_item( $id ) {
+
 		$this->post = $this->get_post( $id );
 
 		$this->check_mapping_data( $this->mapping );
 
-		$this->set_item( \GatherContent\Importer\get_post_item_id( $this->post->ID ) );
+		$this->set_item( \GatherContent\Importer\get_post_item_id( $this->post->ID ), true );
 
 		$config_update = $this->map_wp_data_to_gc_data();
 
 		// No updated data, so bail.
 		if ( empty( $config_update ) ) {
-			throw new Exception( sprintf( __( 'No update data found for that post ID: %d', 'gathercontent-import' ), $this->post->ID ), __LINE__, array(
-				'post_id'    => $this->post->ID,
-				'mapping_id' => $this->mapping->ID,
-				'item_id'    => $this->item->id,
-			) );
+
+			throw new Exception(
+				sprintf( __( 'No update data found for that post ID: %d', 'gathercontent-import' ), $this->post->ID ),
+				__LINE__,
+				array(
+					'post_id'    => $this->post->ID,
+					'mapping_id' => $this->mapping->ID,
+					'item_id'    => $this->item->id ?? 0,
+				)
+			);
 		}
 
 		// If we found updates, do the update.
 		return $this->maybe_do_item_update( $config_update );
-	}
-
-	private function get_structured_array( $config ) {
-		$structured_content = [];
-
-		foreach ( $config as $tab ) {
-			foreach ( $tab->elements as $element ) {
-				switch ( $element->type ) {
-					case 'text':
-						$structured_content[ $element->name ] = $element->value;
-						break;
-					case 'choice_radio':
-						$selected_radios = array();
-						foreach ( $element->options as $option ) {
-							if ( $option->selected ) {
-								$radio = array(
-									'id' => $option->name,
-								);
-
-								if ( $option->value ) {
-									$radio['value'] = $option->value;
-								}
-								$selected_radios[] = $radio;
-							}
-						}
-
-						$structured_content[ $element->name ] = $selected_radios;
-						break;
-					case 'choice_checkbox':
-						$selected_checkboxes = array();
-						foreach ( $element->options as $option ) {
-							if ( $option->selected ) {
-								$selected_checkboxes[] = array(
-									'id' => $option->name,
-								);;
-							}
-						}
-
-						$structured_content[ $element->name ] = $selected_checkboxes;
-						break;
-				}
-			}
-		}
-
-		return $structured_content;
 	}
 
 	/**
@@ -190,43 +152,69 @@ class Push extends Base {
 	 * @return mixed Result of push.
 	 */
 	public function maybe_do_item_update( $update ) {
+
 		// Get our initial config reference.
 		$config = json_decode( $this->config );
 
-		// And update it with the new values.
-		foreach ( $update as $index => $tab ) {
-			foreach ( $tab->elements as $element_index => $element ) {
-				$config[ $index ]->elements[ $element_index ] = $element;
+		// And update the content with the new values.
+		foreach ( $update as $updated_element ) {
+			$element_id = $updated_element->name;
+
+			// handle repeatable elements because we stored them in JSON format earlier and GC requires it in array format
+			if ( $updated_element->repeatable ) {
+
+				$repeatable_value = ! empty( $updated_element->value ) ? @json_decode( $updated_element->value, true ) : $updated_element->value;
+
+				if ( is_array( $repeatable_value ) ) {
+					$updated_element->value = $repeatable_value;
+				} else {
+					$updated_element->value = array();
+				}
+			}
+
+			// handle new item because we don't have content object for it
+			if ( ! isset( $config->content ) ) {
+				$config->content = (object) array();
+			}
+
+			// finally push it to the content array if the data was changed
+			if ( $component_uuid = $updated_element->component_uuid ) {
+
+				if ( ! isset( $config->content->$component_uuid ) ) {
+					$config->content->$component_uuid = (object) array();
+				}
+
+				if(is_array($config->content->$component_uuid) && is_array(json_decode($updated_element->value))){
+					// it's a repeatable component so handle differently
+					$decoded_value = json_decode($updated_element->value);
+					$i = 0;
+					foreach($decoded_value as $value) {
+						if(isset($config->content->$component_uuid[$i])){
+							$config->content->$component_uuid[$i]->$element_id = $value;
+						}
+						$i++;
+					}
+				} else {
+					$config->content->$component_uuid->$element_id = $updated_element->value;
+				}
+
+			} else {
+				$config->content->$element_id = $updated_element->value;
 			}
 		}
 
-
-		if ( ! $this->mapping->data( 'structure_uuid' ) ) {
-
-			if ( $this->item_id ) {
-				$result = $this->api->save_item( $this->item_id, $config );
-			} else {
-				$result = $this->api->create_item(
-					$this->mapping->get_project(),
-					$this->mapping->get_template(),
-					$this->post->post_title,
-					$config
-				);
-			}
+		if ( $this->item_id ) {
+			$result = $this->api->uncached()->update_item( $this->item_id, $config );
 		} else {
-			$content = $this->get_structured_array( $config );
-
-			if ( $this->item_id ) {
-				$result = $this->api->update_item( $this->item_id, $content );
-			} else {
-				$result = $this->api->create_structured_item(
-					$this->mapping->get_project(),
-					$this->mapping->get_template(),
-					$this->post->post_title,
-					$content
-				);
-			}
+			$result = $this->api->create_item(
+				$this->mapping->get_project(),
+				$this->mapping->get_template(),
+				$this->post->post_title,
+				$config->content
+			);
 		}
+
+		// todo: figure out the structure_uuid scenario which I removed from the old code, because there's no way that scenario can regenerated (@ shehrozsheikh@zao [2021-25-11])
 
 		if ( $result && ! is_wp_error( $result ) ) {
 			if ( ! $this->item_id ) {
@@ -235,13 +223,16 @@ class Push extends Base {
 			}
 
 			// If item update was successful, re-fetch it from the API...
-			$this->item = $this->api->uncached()->get_item( $this->item_id );
+			$this->item = $this->api->uncached()->get_item( $this->item_id, true );
 
 			// and update the meta.
-			\GatherContent\Importer\update_post_item_meta( $this->post->ID, array(
-				'created_at' => $this->item->created_at->date,
-				'updated_at' => $this->item->updated_at->date,
-			) );
+			\GatherContent\Importer\update_post_item_meta(
+				$this->post->ID,
+				array(
+					'created_at' => $this->item->created_at,
+					'updated_at' => $this->item->updated_at,
+				)
+			);
 		}
 
 		return $result;
@@ -253,23 +244,26 @@ class Push extends Base {
 	 * @since 3.0.0
 	 *
 	 * @param integer $item_id Item id.
+	 * @param  bool    $exclude_status set this to true to avoid appending status data
 	 *
 	 * @throws Exception On failure.
 	 *
 	 * @return $item
 	 */
-	protected function set_item( $item_id ) {
+	protected function set_item( $item_id, $exclude_status = false ) {
 		$this->item_id = $item_id;
 
 		if ( ! $item_id ) {
 			$item = $this->api->get_template( $this->mapping->get_template() );
 		} else {
-			$item = parent::set_item( $item_id );
+			$item = parent::set_item( $item_id, $exclude_status );
 		}
 
-		$this->item_config = $item->config;
+		$this->item_config = $item;
+		$this->item        = $item;
 
-		$this->config = wp_json_encode( $item->config );
+		// storing it to compare the changed data later
+		$this->config = wp_json_encode( $item );
 
 	}
 
@@ -293,47 +287,70 @@ class Push extends Base {
 	 * @return array Modified item config array on success.
 	 */
 	public function loop_item_elements_and_map() {
+
 		if ( empty( $this->item_config ) ) {
 			return false;
 		}
 
-		foreach ( $this->item_config as $index => $tab ) {
-			if ( ! isset( $tab->elements ) || ! $tab->elements ) {
+		$structure_groups = isset( $this->item_config->related ) ? $this->item_config->related->structure->groups : $this->item_config->structure->groups;
+
+		$this->item_config = array();
+
+		if ( ! isset( $structure_groups ) || empty( $structure_groups ) ) {
+			return false;
+		}
+
+		// to handle multiple tabs
+		foreach ( $structure_groups as $index => $tab ) {
+			if ( ! isset( $tab->fields ) || ! $tab->fields ) {
 				continue;
 			}
 
-			foreach ( $tab->elements as $element_index => $this->element ) {
-				if ( ! empty( $this->element->value ) ) {
-					$this->element->value = self::remove_zero_width( $this->element->value );
+			// to handle fields in a tab
+			foreach ( $tab->fields as $element_index => $field ) {
+
+				// to handle components with multiple fields inside
+				$fields_data    = $field->component->fields ?? array( $field );
+				$component_uuid = 'component' === $field->field_type ? $field->uuid : '';
+
+				$is_component_repeatable = false;
+				if($component_uuid) {
+					$metadata      = $field->metadata;
+					$is_component_repeatable = ( is_object( $metadata ) && isset( $metadata->repeatable ) ) ? $metadata->repeatable->isRepeatable : false;
 				}
 
-				$source = $this->mapping->data( $this->element->name );
-				$source_type = isset( $source['type'] ) ? $source['type'] : '';
-				$source_key = isset( $source['value'] ) ? $source['value'] : '';
+				foreach ( $fields_data as $field_data ) {
 
-				if ( $source_type ) {
-					if ( ! isset( $this->done[ $source_type ] ) ) {
-						$this->done[ $source_type ] = array();
+					$this->element = (object) $this->format_element_data( $field_data, $component_uuid, false, $is_component_repeatable );
+
+					if ( $component_uuid ) {
+						$this->element->component_uuid = $component_uuid;
 					}
 
-					if ( ! isset( $this->done[ $source_type ][ $source_key ] ) ) {
-						$this->done[ $source_type ][ $source_key ] = array();
+					$source      = $this->mapping->data( $this->element->name . ( $component_uuid ? '_component_' . $component_uuid : '' ) );
+					$source_type = isset( $source['type'] ) ? $source['type'] : '';
+					$source_key  = isset( $source['value'] ) ? $source['value'] : '';
+
+					if ( $source_type ) {
+						if ( ! isset( $this->done[ $source_type ] ) ) {
+							$this->done[ $source_type ] = array();
+						}
+
+						if ( ! isset( $this->done[ $source_type ][ $source_key ] ) ) {
+							$this->done[ $source_type ][ $source_key ] = array();
+						}
+
+						$this->done[ $source_type ][ $source_key ][ $index . ':' . $element_index ] = (array) $this->element;
 					}
 
-					$this->done[ $source_type ][ $source_key ][ $index . ':' . $element_index ] = (array) $this->element;
+					if (
+						$source
+						&& isset( $source['type'], $source['value'] )
+						&& $this->set_values_from_wp( $source_type, $source_key )
+					) {
+						$this->item_config[] = $this->element;
+					}
 				}
-
-				if (
-					! $source
-					|| ! isset( $source['type'], $source['value'] )
-					|| ! $this->set_values_from_wp( $source_type, $source_key )
-				) {
-					unset( $this->item_config[ $index ]->elements[ $element_index ] );
-				}
-			}
-
-			if ( empty( $this->item_config[ $index ]->elements ) ) {
-				unset( $this->item_config[ $index ] );
 			}
 		}
 
@@ -408,16 +425,72 @@ class Push extends Base {
 				$updated = $this->set_meta_field_value( $source_key );
 				break;
 
-			/*
-			 * @todo determine if GC can accept file updates.
-			 * case 'wp-type-media':
-			 * 	$updated = $this->get_media_field_value( $source_key );
-			 * 	break;
-			 */
+			case 'wp-type-media':
+				$this->set_featured_image_alt( $source_key );
+				break;
+
 		}
 
 		return $updated;
 	}
+
+
+	/**
+	 * Updates the featured image alt_text if changed
+	 *
+	 * @since 3.2.0
+	 *
+	 * @param string $source_key source key.
+	 *
+	 * @return void
+	 */
+	protected function set_featured_image_alt( $source_key ) {
+
+		if ( 'featured_image' !== $source_key ) {
+			return;
+		}
+
+		$attach_id = get_post_thumbnail_id( $this->post->ID );
+
+		if ( ! $attach_id ) {
+			return;
+		}
+
+		if ( $meta = \GatherContent\Importer\get_post_item_meta( $attach_id ) ) {
+
+			$old_alt_text     = $meta['alt_text'] ?? '';
+			$updated_alt_text = get_post_meta( $attach_id, '_wp_attachment_image_alt', true );
+
+			if ( $old_alt_text !== $updated_alt_text && isset( $meta['file_id'] ) ) {
+
+				$meta['alt_text'] = $updated_alt_text ?? '';
+
+				if ( empty( $meta['alt_text'] ) ) {
+					return;
+				}
+
+				$result = $this->api->update_file_meta(
+					$this->mapping->get_project(),
+					$meta['file_id'],
+					array(
+						'alt_text' => $meta['alt_text'],
+					)
+				);
+
+				if ( ! $result ) {
+					return;
+				}
+
+				// update the new alt_text in the attachment meta
+				\GatherContent\Importer\update_post_item_meta(
+					$attach_id,
+					$meta
+				);
+
+			}
+		}
+	}
+
 
 	/**
 	 * Sets the item config element value for WP post fields,
@@ -430,8 +503,9 @@ class Push extends Base {
 	 * @return bool $updated Whether value was updated.
 	 */
 	protected function set_post_field_value( $post_column ) {
-		$updated = false;
+		$updated  = false;
 		$el_value = $this->element->value;
+
 		$value = ! empty( $this->post->{$post_column} ) ? self::remove_zero_width( $this->post->{$post_column} ) : false;
 		$value = apply_filters( "gc_get_{$post_column}", $value, $this );
 
@@ -443,7 +517,6 @@ class Push extends Base {
 			case 'post_content':
 			case 'post_excerpt':
 				$el_value = wp_kses_post( $this->get_element_value() );
-				$value = $this->convert_media_to_shortcodes( $value );
 				if ( 'post_content' === $post_column ) {
 					$value = apply_filters( 'the_content', $value );
 				}
@@ -461,7 +534,7 @@ class Push extends Base {
 		if ( $value != $el_value ) {
 			// @codingStandardsIgnoreEnd
 			$this->element->value = $value;
-			$updated = true;
+			$updated              = true;
 		}
 
 		return $updated;
@@ -503,15 +576,17 @@ class Push extends Base {
 
 				if ( ! empty( $diff ) ) {
 					$this->element->value = ! empty( $term_names ) ? implode( ', ', $term_names ) : '';
-					$updated = true;
+					$updated              = true;
 				}
 				break;
 
 			case 'choice_checkbox':
 			case 'choice_radio':
-				$updated = $this->update_element_selected_options( function( $label ) use ( $term_names ) {
-					return in_array( $label, $term_names, true );
-				} );
+				$updated = $this->update_element_selected_options(
+					function( $label ) use ( $term_names ) {
+						return in_array( $label, $term_names, true );
+					}
+				);
 
 				// @codingStandardsIgnoreStart
 				/*
@@ -547,7 +622,7 @@ class Push extends Base {
 	 * @return bool $updated Whether value was updated.
 	 */
 	protected function set_meta_field_value( $meta_key ) {
-		$updated = false;
+		$updated    = false;
 		$meta_value = get_post_meta( $this->post->ID, $meta_key, 1 );
 
 		$check = apply_filters( 'gc_config_pre_meta_field_value_updated', null, $meta_value, $meta_key, $this );
@@ -563,27 +638,30 @@ class Push extends Base {
 				if ( $meta_value != $this->element->value ) {
 					// @codingStandardsIgnoreEnd
 					$this->element->value = $meta_value;
-					$updated = true;
+					$updated              = true;
 				}
 				break;
 
 			case 'choice_radio':
-				$updated = $this->update_element_selected_options( function( $label ) use ( $meta_value ) {
-					return $meta_value === $label;
-				} );
+				$updated = $this->update_element_selected_options(
+					function( $label ) use ( $meta_value ) {
+						return $meta_value === $label;
+					}
+				);
 				break;
 
 			case 'choice_checkbox':
-
 				if ( empty( $meta_value ) ) {
 					$meta_value = array();
 				} else {
 					$meta_value = is_array( $meta_value ) ? $meta_value : array( $meta_value );
 				}
 
-				$updated = $this->update_element_selected_options( function( $label ) use ( $meta_value ) {
-					return in_array( $label, $meta_value, true );
-				} );
+				$updated = $this->update_element_selected_options(
+					function( $label ) use ( $meta_value ) {
+						return in_array( $label, $meta_value, true );
+					}
+				);
 				break;
 
 		}
@@ -598,14 +676,14 @@ class Push extends Base {
 	 *
 	 * @param  callable $callback Closure.
 	 *
-	 * @return bool            	Whether the options were updated or not.
+	 * @return bool             Whether the options were updated or not.
 	 */
 	public function update_element_selected_options( $callback ) {
 		$pre_options = wp_json_encode( $this->element->options );
 
 		$last_key = false;
 		if ( isset( $this->element->other_option ) && $this->element->other_option ) {
-			$keys = array_keys( $this->element->options );
+			$keys     = array_keys( $this->element->options );
 			$last_key = end( $keys );
 		}
 

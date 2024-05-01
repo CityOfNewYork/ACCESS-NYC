@@ -6,6 +6,7 @@
  */
 
 namespace GatherContent\Importer\Admin;
+
 use GatherContent\Importer\Admin\Mapping_Wizard;
 use GatherContent\Importer\Mapping_Post;
 use GatherContent\Importer\General;
@@ -102,17 +103,20 @@ class Single extends Post_Base {
 	 * @return void
 	 */
 	public function meta_box( $post ) {
-		$object = get_post_type_object( $post->post_type );
+		$object                = get_post_type_object( $post->post_type );
 		$this->post_type_label = isset( $object->labels->singular_name ) ? $object->labels->singular_name : $object->name;
 
 		$this->post = \GatherContent\Importer\prepare_post_for_js( $post );
 
-		$this->view( 'metabox', array(
-			'post_id'    => $this->post['id'],
-			'item_id'    => $this->post['item'],
-			'mapping_id' => $this->post['mapping'],
-			'label'      => $this->post_type_label,
-		) );
+		$this->view(
+			'metabox',
+			array(
+				'post_id'    => $this->post['id'],
+				'item_id'    => $this->post['item'],
+				'mapping_id' => $this->post['mapping'],
+				'label'      => $this->post_type_label,
+			)
+		);
 	}
 
 	/**
@@ -124,16 +128,16 @@ class Single extends Post_Base {
 	 */
 	protected function get_underscore_templates() {
 		return array(
-			'tmpl-gc-metabox' => array(
+			'tmpl-gc-metabox'          => array(
 				'url'   => General::get_instance()->admin->platform_url(),
 				'label' => $this->post_type_label,
 			),
 			'tmpl-gc-metabox-statuses' => array(),
-			'tmpl-gc-mapping-metabox' => array(
-				'message' => sprintf( esc_html__( 'This %s does not have an associated item or Template Mapping.', 'gathercontent-importer' ), $this->post_type_label ),
+			'tmpl-gc-mapping-metabox'  => array(
+				'message' => sprintf( esc_html__( 'This %s does not have an associated item or Template Mapping. (Please make sure that you have added a mapping in GatherContent > New Mapping)', 'gathercontent-importer' ), $this->post_type_label ),
 			),
-			'tmpl-gc-status-select2' => array(),
-			'tmpl-gc-select2-item' => array(),
+			'tmpl-gc-status-select2'   => array(),
+			'tmpl-gc-select2-item'     => array(),
 		);
 	}
 
@@ -150,9 +154,9 @@ class Single extends Post_Base {
 		$data['_post'] = $this->post;
 		$data['_sure'] = array(
 			'push_no_item' => sprintf( __( 'Push this %s to GatherContent?', 'gathercontent-importer' ), $this->post_type_label ),
-			'push' => sprintf( __( 'Are you sure you want to push this %s to GatherContent? Any unsaved changes in GatherContent will be overwritten.', 'gathercontent-importer' ), $this->post_type_label ),
-			'pull'  => sprintf( __( 'Are you sure you want to pull this %s from GatherContent? Any local changes will be overwritten.', 'gathercontent-importer' ), $this->post_type_label ),
-			'disconnect' => sprintf( __('Are you sure you want to disconnect this %s from GatherContent?', 'gathercontent-importer' ), $this->post_type_label ),
+			'push'         => sprintf( __( 'Are you sure you want to push this %s to GatherContent? Any unsaved changes in GatherContent will be overwritten.', 'gathercontent-importer' ), $this->post_type_label ),
+			'pull'         => sprintf( __( 'Are you sure you want to pull this %s from GatherContent? Any local changes will be overwritten.', 'gathercontent-importer' ), $this->post_type_label ),
+			'disconnect'   => sprintf( __( 'Are you sure you want to disconnect this %s from GatherContent?', 'gathercontent-importer' ), $this->post_type_label ),
 		);
 
 		return $data;

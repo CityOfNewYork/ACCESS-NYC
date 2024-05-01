@@ -6,6 +6,7 @@
  */
 
 namespace GatherContent\Importer;
+
 use DateTime;
 use DateTimeZone;
 
@@ -146,8 +147,8 @@ class Utils extends Base {
 			$date = new DateTime( $utc_date );
 		}
 
-		$time = $date->getTimestamp();
-		$currtime = time();
+		$time      = $date->getTimestamp();
+		$currtime  = time();
 		$time_diff = $currtime - $time;
 
 		if ( $time_diff >= 0 && $time_diff < DAY_IN_SECONDS ) {
@@ -172,14 +173,17 @@ class Utils extends Base {
 		static $types = null;
 
 		if ( null === $types ) {
-			$types = apply_filters( 'gc_field_type_names', array(
-				'text'            => __( 'Text', 'gathercontent-import' ),
-				'text_rich'       => __( 'Rich Text', 'gathercontent-import' ),
-				'text_plain'      => __( 'Plain Text', 'gathercontent-import' ),
-				'choice_radio'    => __( 'Muliple Choice', 'gathercontent-import' ),
-				'choice_checkbox' => __( 'Checkboxes', 'gathercontent-import' ),
-				'files'           => __( 'Attachment', 'gathercontent-import' ),
-			) );
+			$types = apply_filters(
+				'gc_field_type_names',
+				array(
+					'text'            => __( 'Text', 'gathercontent-import' ),
+					'text_rich'       => __( 'Rich Text', 'gathercontent-import' ),
+					'text_plain'      => __( 'Plain Text', 'gathercontent-import' ),
+					'choice_radio'    => __( 'Muliple Choice', 'gathercontent-import' ),
+					'choice_checkbox' => __( 'Checkboxes', 'gathercontent-import' ),
+					'files'           => __( 'Attachment', 'gathercontent-import' ),
+				)
+			);
 		}
 
 		if ( 'all' === $type ) {
@@ -203,11 +207,11 @@ class Utils extends Base {
 
 		if ( null === $labels ) {
 			$labels = array(
-				'accounts' => esc_html__( 'Select an account:', 'gathercontent-importer' ),
-				'projects' => esc_html__( 'Select a project:', 'gathercontent-importer' ),
+				'accounts'  => esc_html__( 'Select an account:', 'gathercontent-importer' ),
+				'projects'  => esc_html__( 'Select a project:', 'gathercontent-importer' ),
 				'templates' => esc_html__( 'Select a template:', 'gathercontent-importer' ),
-				'mappings' => sprintf( esc_html_x( 'Select a %s:', 'Select a template mapping', 'gathercontent-importer' ), General::get_instance()->admin->mapping_wizard->mappings->args->labels->singular_name ),
-				'import' => esc_html__( 'Import Items:', 'gathercontent-importer' ),
+				'mappings'  => sprintf( esc_html_x( 'Select a %s:', 'Select a template mapping', 'gathercontent-importer' ), General::get_instance()->admin->mapping_wizard->mappings->args->labels->singular_name ),
+				'import'    => esc_html__( 'Import Items:', 'gathercontent-importer' ),
 			);
 		}
 
@@ -224,7 +228,7 @@ class Utils extends Base {
 	 * @since  3.0.0.8
 	 *
 	 * @param  string $handle   The script's registered handle.
-	 * @param  string  $version Version string to compare.
+	 * @param  string $version Version string to compare.
 	 *
 	 * @return bool             Result of comparison check.
 	 */

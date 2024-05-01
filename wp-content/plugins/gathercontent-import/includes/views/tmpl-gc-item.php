@@ -19,7 +19,7 @@
 	<# if ( '&mdash;' === data.post_title ) { #>
 		&mdash;
 	<# } else { #>
-		{{ data.post_title }}
+		{{{ data.post_title }}}
 	<# } #>
 	<# if ( data.editLink ) { #></a><# } #>
 </td>

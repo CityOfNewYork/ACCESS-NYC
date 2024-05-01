@@ -49,7 +49,7 @@ wp_enqueue_script( 'jquery-ui-draggable' );
 
 
 <div class='sp_debug_box'>
-     <div class='header'><?php echo $view->namespace ?> Debug Box </div>
+     <div class='header'><?php echo esc_html($view->namespace) ?> Debug Box </div>
      <a target="_blank" href='<?php echo $view->logLink ?>'>Logfile</a>
      <div class='content_box'>
 

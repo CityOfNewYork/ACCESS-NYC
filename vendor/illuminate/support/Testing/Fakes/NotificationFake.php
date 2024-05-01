@@ -206,6 +206,22 @@ class NotificationFake implements NotificationDispatcher, NotificationFactory
     }
 
     /**
+     * Assert the total count of notification that were sent.
+     *
+     * @param  int  $expectedCount
+     * @return void
+     */
+    public function assertCount($expectedCount)
+    {
+        $actualCount = collect($this->notifications)->flatten(3)->count();
+
+        PHPUnit::assertSame(
+            $expectedCount, $actualCount,
+            "Expected {$expectedCount} notifications to be sent, but {$actualCount} were sent."
+        );
+    }
+
+    /**
      * Assert the total amount of times a notification was sent.
      *
      * @param  int  $expectedCount
@@ -237,9 +253,9 @@ class NotificationFake implements NotificationDispatcher, NotificationFactory
 
         $notifications = collect($this->notificationsFor($notifiable, $notification));
 
-        return $notifications->filter(function ($arguments) use ($callback) {
-            return $callback(...array_values($arguments));
-        })->pluck('notification');
+        return $notifications->filter(
+            fn ($arguments) => $callback(...array_values($arguments))
+        )->pluck('notification');
     }
 
     /**
@@ -345,5 +361,15 @@ class NotificationFake implements NotificationDispatcher, NotificationFactory
         $this->locale = $locale;
 
         return $this;
+    }
+
+    /**
+     * Get the notifications that have been sent.
+     *
+     * @return array
+     */
+    public function sentNotifications()
+    {
+        return $this->notifications;
     }
 }

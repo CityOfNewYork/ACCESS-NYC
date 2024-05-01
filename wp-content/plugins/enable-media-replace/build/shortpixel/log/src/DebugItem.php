@@ -41,13 +41,25 @@ class DebugItem
           {
               $this->data[] = print_r($data, true);
           }
-          if ($dataType == 2) //array
+          if ($dataType == 2) //array or object.
           {
+						$count = false;
+						if (gettype($data) == 'array')
+							 $count = count($data);
+						elseif(gettype($data) == 'object')
+							 $count = count(get_object_vars($data));
+
+						$firstLine = 	 ucfirst(gettype($data)) . ':';
+						if ($count !== false)
+							$firstLine .= ' (' . $count . ')';
+
+						$this->data[] = $firstLine;
+
             foreach($data as $index => $item)
             {
               if (is_object($item) || is_array($item))
               {
-                $this->data[] = print_r($item, true);
+                $this->data[] = print_r($index, true) . ' ( ' . ucfirst(gettype($item)) . ') => ' . print_r($item, true);
               }
             }
           }

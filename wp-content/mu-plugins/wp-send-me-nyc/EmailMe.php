@@ -58,13 +58,13 @@ class EmailMe extends ContactMe {
       return false;
     }
 
-    $post = get_page_by_path($template, OBJECT, $this->post_type);
+    $post = get_page_by_path($template, OBJECT, self::POST_TYPE);
 
     $id = $post->ID;
 
     // Filter ID through WPML. Need to add conditionals for WPML or admin notice
     if ($lang !== 'en') {
-      $id = apply_filters('wpml_object_id', $post->ID, $this->post_type, true, $lang);
+      $id = apply_filters('wpml_object_id', $post->ID, self::POST_TYPE, true, $lang);
     }
 
     // Render Timber template

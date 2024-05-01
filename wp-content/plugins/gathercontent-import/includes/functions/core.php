@@ -23,8 +23,8 @@ function autoload( $class_name ) {
 	// Does the class use the namespace prefix?
 	$len = strlen( $prefix );
 	if ( 0 !== strncmp( $prefix, $class_name, $len ) ) {
-	    // No, move to the next registered autoloader.
-	    return;
+		// No, move to the next registered autoloader.
+		return;
 	}
 
 	// base directory for the namespace prefix.
@@ -62,7 +62,9 @@ function setup() {
 		return __NAMESPACE__ . "\\$function";
 	};
 
-	spl_autoload_register( $n( 'autoload' ), false );
+	spl_autoload_register($n( 'autoload' ));
+
+	include_once GATHERCONTENT_PATH . 'vendor/autoload.php';
 
 	if ( is_admin() ) {
 		// We only need to do our work in the admin.

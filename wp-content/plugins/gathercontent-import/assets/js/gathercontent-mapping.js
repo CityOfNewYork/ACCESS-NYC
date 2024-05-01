@@ -1,8 +1,8 @@
 /**
- * GatherContent Plugin - v3.1.13 - 2019-05-22
+ * GatherContent Plugin - v3.1.13 - 2022-01-31
  * http://www.gathercontent.com
  *
- * Copyright (c) 2019 GatherContent
+ * Copyright (c) 2022 GatherContent
  * Licensed under the GPLv2 license.
  */
 
@@ -549,6 +549,14 @@ module.exports = function (app, $, gc) {
 
 			this.defaultTab.set('initial', this.initial);
 			this.render();
+
+			if (gc._tabs && gc._tabs.length > 0) {
+				var firstTabId = gc._tabs[0].id;
+				if (firstTabId) {
+					this.setTab(firstTabId);
+					this.$('.nav-tab[href="#' + firstTabId + '"]').trigger('click');
+				}
+			}
 
 			if (gc._pointers.select_tab_how_to) {
 				this.pointer('.gc-nav-tab-wrapper-bb', 'select_tab_how_to');

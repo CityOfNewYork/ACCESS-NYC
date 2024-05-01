@@ -8,7 +8,6 @@
     var target_is_image;
 
     var is_debug = false;
-
     var is_dragging = false;
 
     this.init = function()
@@ -26,9 +25,17 @@
 			$('.replace_custom_date').on('click', $.proxy(this.updateCustomDate, this));
 
       // DragDrop
-      $('.wrap.emr_upload_form').on('dragover', $.proxy(this.dragOverArea, this));
-      $('.wrap.emr_upload_form').on('dragleave', $.proxy(this.dragOutArea, this));
+			//$(document).on('dragover', $.proxy(this.dragOverArea, this));
+			//$(document).on('dragleave', $.proxy(this.dragOutArea, this));
+			document.addEventListener('dragover',  this.dragOverArea.bind(this), false );
+			document.addEventListener('dragleave',  this.dragOutArea.bind(this), false );
+
+
+
       $('.emr_drop_area').on('drop', $.proxy(this.fileDrop, this));
+			$('.upload-file-action').on('click', function () {
+					var input = document.getElementById('upload-file').click();
+			});
 
       this.checkCustomDate();
       this.loadDatePicker();
@@ -50,7 +57,9 @@
       this.updateTextLayer(source, false);
       this.showReplaceOptions();
 
+
     }
+
     this.loadDatePicker = function()
     {
       $('#emr_datepicker').datepicker({
@@ -66,18 +75,19 @@
               }
         },
       });
-    },
+    }
+
     this.checkCustomDate = function()
     {
       if ($('input[name="timestamp_replace"]:checked').val() == 3)
         this.showCustomDate();
       else
         this.hideCustomDate();
-    },
+    }
     this.showCustomDate = function()
     {
         $('.custom_date').css('visibility', 'visible').fadeTo(100, 1);
-    },
+    }
     this.hideCustomDate = function()
     {
       $('.custom_date').fadeTo(100,0,
@@ -112,7 +122,7 @@
           this.updatePreview(null);
         }
         this.checkSubmit();
-    },
+    }
     this.updatePreview = function(file)
     {
       var preview = $('.image_placeholder').last();
@@ -137,16 +147,19 @@
         img.src = window.URL.createObjectURL(file);
         self = this;
 
-        img.setAttribute('style', 'max-width:100%; max-height: 100%;');
         img.addEventListener("load", function () {
           // with formats like svg it can be rough.
-            var width = img.naturalWidth;
-            var height = img.naturalHeight;
-            if (width == 0)
+
+					var width = img.naturalWidth;
+					var height = img.naturalHeight;
+
+           if (width == 0)
               width = img.width;
             if (height == 0)
               height = img.height;
-            //  $(preview).find('.textlayer').text(img.naturalWidth + ' x ' + img.naturalHeight );
+
+					img.setAttribute('style', 'z-index:2; position: relative; max-width:100%; max-height: 100%; width: ' + width + 'px; height: ' + height + 'px;');
+
               self.updateTextLayer(preview, width + ' x ' + height);
               self.updateFileSize(preview, file);
         });
@@ -215,7 +228,7 @@
       //    textlayer.css('margin-left', '-' + (textlayer.width() / 2 ) + 'px');
         }
 
-    },
+    }
     this.updateFileSize = function(preview, file)
     {
       if (file === null)
@@ -254,12 +267,12 @@
         else {
           $('input[type="submit"]').prop('disabled', true);
         }
-    },
+    }
     this.toggleErrors = function(toggle)
     {
       $('.form-error').fadeOut();
       $('.form-warning').fadeOut();
-    },
+    }
     this.checkUpload = function(fileItem)
     {
       var maxsize = emr_options.maxfilesize;
@@ -279,7 +292,7 @@
           return false;
       }
       return true;
-    },
+    }
     this.errorFileSize = function(fileItem)
     {
       $('.form-error.filesize').find('.fn').text(fileItem.name);
@@ -313,34 +326,57 @@
     {
       e.preventDefault();
       e.stopPropagation();
+			console.log(e);
 
-      if ( this.is_dragging)
+      if (true == this.is_dragging)
         return;
 
-      //this.debug('dragover');
-      //$('.emr_drop_area').css('border-color', '#83b4d8');
-      $('.emr_drop_area').addClass('drop_breakout');
+			var el = document.getElementById('emr-drop-area');
+			var showEl = el.cloneNode(true);
+			showEl.id = 'emr-drop-area-active';
+
+			var child = document.body.appendChild(showEl);
+
+			child.addEventListener('drop', this.fileDrop.bind(this), false);
+
+			child.addEventListener('dragover', function(event){
+				event.preventDefault();
+			})
+
+
       this.is_dragging = true;
     }
+
     this.dragOutArea = function(e)
     {
-      e.preventDefault();
-      e.stopPropagation();
-    //  this.debug('dragout');
-      //$('.emr_drop_area').css('border-color', '#b4b9be');
-      $('.emr_drop_area').removeClass('drop_breakout');
+
+			// event is not passed on filedrop.  remove overlay then.
+			if (typeof e !== 'undefined')
+			{
+      	e.preventDefault();
+      	e.stopPropagation();
+
+				if (e.clientX != 0 || e.clientY != 0) {
+		        return false;
+		    }
+			}
+		var removeEl = document.getElementById('emr-drop-area-active');
+			if (removeEl !== null)
+				document.getElementById('emr-drop-area-active').remove();
+
       this.is_dragging = false;
     }
     this.fileDrop = function (e)
     {
-      var ev = e.originalEvent;
-      this.dragOutArea(e);
-      ev.preventDefault();
+     // var ev = e.originalEvent;
+      this.dragOutArea();
+     //ev.preventDefault();
+			e.stopPropagation();
       e.preventDefault();
 
-      if (ev.dataTransfer.items) {
+      if (e.dataTransfer.items) {
          // Use DataTransferItemList interface to access the file(s)
-          document.getElementById('userfile').files = ev.dataTransfer.files;
+          document.getElementById('upload-file').files = e.dataTransfer.files;
            $('input[name="userfile"]').trigger('change');
        }
     }

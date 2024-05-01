@@ -86,6 +86,7 @@ class General extends Base {
 
 	/**
 	 * Creates or returns an instance of this class.
+	 *
 	 * @since  3.0.0
 	 * @return General A single instance of this class.
 	 */
@@ -99,17 +100,17 @@ class General extends Base {
 
 	protected function __construct() {
 		parent::__construct( $_GET, $_POST );
-		new Utils;
+		new Utils();
 
-		$this->api   = new API( _wp_http_get_object() );
-		$this->admin = new Admin\Admin( $this->api );
-		$this->support = new Admin\Support();
-		$this->debug = new Debug( $this->admin );
-		$this->pull  = new Sync\Pull( $this->api );
-		$this->push  = new Sync\Push( $this->api );
+		$this->api          = new API( _wp_http_get_object() );
+		$this->admin        = new Admin\Admin( $this->api );
+		$this->support      = new Admin\Support();
+		$this->debug        = new Debug( $this->admin );
+		$this->pull         = new Sync\Pull( $this->api );
+		$this->push         = new Sync\Push( $this->api );
 		$this->ajax_handler = new Admin\Ajax\Handlers( $this->api );
 		if ( isset( $this->admin->mapping_wizard->mappings ) ) {
-			$this->bulk_ui = new Admin\Bulk(
+			$this->bulk_ui   = new Admin\Bulk(
 				$this->api,
 				$this->admin->mapping_wizard
 			);
@@ -120,11 +121,11 @@ class General extends Base {
 		}
 
 		if ( class_exists( 'acf' ) ) {
-			$this->compatibility_acf  = new Compatibility\ACF();
+			$this->compatibility_acf = new Compatibility\ACF();
 		}
 
 		if ( defined( 'ICL_SITEPRESS_VERSION' ) ) {
-			$this->compatibility_wml  = new Compatibility\WPML();
+			$this->compatibility_wml = new Compatibility\WPML();
 		}
 	}
 
@@ -170,6 +171,7 @@ class General extends Base {
 
 	/**
 	 * Magic getter for our object, to make protected properties accessible.
+	 *
 	 * @param string $field
 	 * @return mixed
 	 */

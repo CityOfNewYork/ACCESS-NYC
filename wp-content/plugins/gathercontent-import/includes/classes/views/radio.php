@@ -12,21 +12,21 @@ class Radio extends Form_Element {
 	);
 
 	protected function element() {
-		$value = '';
+		$value      = '';
 		$attributes = $this->attributes();
-		$options = (array) $attributes['options'];
+		$options    = (array) $attributes['options'];
 
-		$value = $attributes['value'];
+		$value   = $attributes['value'];
 		$content = '<ul>';
-		$index = 0;
+		$index   = 0;
 		foreach ( $options as $option_val => $option_label ) {
 			$index++;
 			$input_args = array(
-				'type'    => 'radio',
-				'class'   => 'radio-select',
-				'id'      => $attributes['id'] . '-' . $index,
-				'name'    => $attributes['name'],
-				'value'   => $option_val,
+				'type'  => 'radio',
+				'class' => 'radio-select',
+				'id'    => $attributes['id'] . '-' . $index,
+				'name'  => $attributes['name'],
+				'value' => $option_val,
 			);
 
 			if ( $option_val == $value ) {
@@ -45,11 +45,11 @@ class Radio extends Form_Element {
 
 			$desc = '';
 			if ( is_array( $option_label ) ) {
-				$desc = isset( $option_label['desc'] ) ? $option_label['desc'] : '';
+				$desc         = isset( $option_label['desc'] ) ? $option_label['desc'] : '';
 				$option_label = isset( $option_label['label'] ) ? $option_label['label'] : '';
 			}
-			$content .= ' <label title="'. esc_attr( $option_val ) . '" for="'. $attributes['id'] . '-' . $index .'">' . $option_label . '</label>';
-			$content .= $desc ? '<p class="description gc-radio-desc">'. $desc .'</p>' : '';
+			$content .= ' <label title="' . esc_attr( $option_val ) . '" for="' . $attributes['id'] . '-' . $index . '">' . $option_label . '</label>';
+			$content .= $desc ? '<p class="description gc-radio-desc">' . $desc . '</p>' : '';
 			$content .= '</li>';
 		}
 		$content .= '</ul>';

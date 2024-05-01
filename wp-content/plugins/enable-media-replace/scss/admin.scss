@@ -1,5 +1,36 @@
 @import 'datepicker';
+@import 'screens';
 
+#emr-drop-area-active
+{
+//	border: 4px dashed #b4b9be;
+//	max-width: 600px;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 9999;
+	display: block;
+	background: rgba(0,0,0,0.5);
+	border: 6px dashed #AAA;
+
+	h3 {
+		font-size: 36px;
+		color: #ddd;
+		width: 200px;
+		left: 50%;
+		top: 50%;
+		position:absolute;
+	}
+
+	.drop-wrapper
+	{
+		margin: 0 auto;
+	}
+}
+
+// The main form.
 .emr_upload_form
 {
   form
@@ -11,7 +42,15 @@
     }
   }
 
-  .wrapper
+	.editor-wrapper
+	{
+		width: 100%;
+	}
+	.emr_drop_area {
+		display: none;
+	}
+
+	.wrapper
   {
 //    margin: 15px 0;
     padding: 18px;
@@ -27,52 +66,29 @@
     }
   }
 
+	.explainer {
+		font-size: 14px;
+		color: #555;
+		max-width: 800px;
+		margin: 20px 0;
+		.underline {
+			text-decoration-style: dotted;
+			text-decoration-line: underline;
+		}
+
+
+	}
+
   .image_chooser.wrapper
   {
     min-height: 350px;
 
-    .emr_drop_area
-    {
-      border: 4px dashed #b4b9be;
-      max-width: 600px;
-      padding: 28px 14px;
-      text-align: center;
-      position: relative;
-      h1 { display: none; }
-      .drop-wrapper
-      {
-        margin: 0 auto;
 
-      }
-      &.drop_breakout
-      {
-          position: fixed;
-          left: 0;
-          right:0;
-          bottom: 0;
-          top: 0;
-          max-width: none;
-          border-color: #83b4d8;
-          border-width: 10px;
-          z-index: 999999;
-          background-color: rgba(#444, 0.7);
-          h1 {
-            color: #fff;
-            position: absolute;
-            font-size: 50px;
-            line-height: 50px;
-            margin-top: -25px;
-            top: 50%;
-            width: 100%;
-            text-align: center;
-            display: block;
-          }
-          .drop-wrapper { display: none; }
-      }
-    }
     .image_previews
     {
       margin: 15px 0;
+			position: relative;
+
       .image_placeholder
       {
         position: relative;
@@ -81,7 +97,26 @@
         margin-bottom: 10px;
         border: 1px solid #ddd;
         vertical-align: top;
-        max-height: 500px;
+				box-sizing: border-box;
+				background: #fff;
+				max-width: calc(50% - 25px);
+
+				img { object-fit: contain; }
+
+				.upload-title
+				{
+					text-align: center;
+					position: absolute;
+					padding-top: 8px;
+					line-height: 20px;
+					font-weight: 700;
+					width: 100%;
+					left: 0;
+					top: 0;
+				}
+				#upload-file {
+					display: none;
+				}
         .textlayer
         {
           font-size: 25px;
@@ -95,6 +130,7 @@
           border: 1px dashed #eee;
           background-color: #333;
           padding: 8px;
+					z-index: 5;
           //max-width: 100%;
         }
         .dashicons
@@ -115,6 +151,28 @@
            bottom: -25px;
            width: 100%;
         }
+				.drag-and-drop-title
+				{
+					text-align: center;
+					font-weight: 400;
+					font-size: 14px;
+					width: 100%;
+					height: 100%;
+					position: absolute;
+					cursor: pointer;
+					top: 0;
+					left: 0;
+					z-index: 1;
+					span {
+							position: absolute;
+						//	left: 46%;
+							top: 50%;
+							transform: translate(-50%,-50%);
+							padding: 5px 10px;
+							width: 100%;
+
+					}
+				}
         &.is_image
         {
           .dashicons::before, .dashicons { display: none }
@@ -299,6 +357,8 @@
   {
      padding: 12px;
   }
+
+	// *** UPSELL SNIPPET
   .shortpixel-offer
   {
     background: #fff;
@@ -354,6 +414,7 @@
       img { max-width: 140px; max-height: 140px; margin: 0; }
     }
 
+
 		&.spio  // shortpixel
 		{
 		}
@@ -363,6 +424,13 @@
 		&.envira-shortpixel-install // envira
 		{
 				background: #fff;
+		}
+		&.theme-offer
+		{
+			 background: #fff;
+			 img {
+				 max-width: 100%;
+			 }
 		}
   }
 

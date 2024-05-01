@@ -1,5 +1,5 @@
 <span class="dashicons dashicons-post-status"></span> <?php echo esc_html_x( 'Status:', 'GatherContent item status', 'gathercontent-importer' ); ?>
-<# if ( data.status && data.status.name ) { #>
+<# if ( data.status && data.status.display_name ) { #>
 <span class="gc-metabox-status">
 	<?php echo new self( 'underscore-data-status' ); ?>
 </span>

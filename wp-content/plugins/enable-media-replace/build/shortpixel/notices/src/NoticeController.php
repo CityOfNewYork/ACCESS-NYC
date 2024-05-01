@@ -108,7 +108,7 @@ class NoticeController //extends ShortPixelController
       }
       self::$notices[] = $notice;
       $this->countNotices();
-      Log::addDebug('Adding notice - ', $notice);
+
       $this->update();
       return $notice;
   }
@@ -212,14 +212,23 @@ class NoticeController //extends ShortPixelController
   {
     $response = array('result' => false, 'reason' => '');
 
-    if ( wp_verify_nonce( $_POST['nonce'], 'dismiss') )
+    if (isset($_POST['nonce']) && wp_verify_nonce( sanitize_key($_POST['nonce']), 'dismiss') )
     {
-       if ($_POST['plugin_action'] == 'dismiss')
+       if (isset($_POST['plugin_action']) && 'dismiss' == $_POST['plugin_action'] )
        {
-          $id = sanitize_text_field($_POST['id']);
-          $notice = $this->getNoticeByID($id);
+          $id = (isset($_POST['id'])) ? sanitize_text_field( wp_unslash($_POST['id'])) : null;
 
-          if($notice)
+					if (! is_null($id))
+					{
+						
+          	$notice = $this->getNoticeByID($id);
+					}
+					else
+					{
+						$notice = false;
+					}
+
+          if(false !== $notice)
           {
             $notice->dismiss();
             $this->update();
@@ -228,7 +237,8 @@ class NoticeController //extends ShortPixelController
           else
           {
             Log::addError('Notice not found when dismissing -> ' . $id, self::$notices);
-            $response['result'] = ' Notice ' . $id . ' not found. ';
+						$response['result']  = false;
+            $response['reason'] = ' Notice ' . $id . ' not found. ';
           }
 
        }
@@ -349,7 +359,7 @@ class NoticeController //extends ShortPixelController
   {
      if (file_exists(__DIR__ . '/css/notices.css'))
      {
-       echo '<style>' . file_get_contents(__DIR__ . '/css/notices.css') . '</style>';
+       echo '<style>' . esc_html(file_get_contents(__DIR__ . '/css/notices.css')) . '</style>';
      }
      else {
        Log::addDebug('Notices : css/notices.css could not be loaded');

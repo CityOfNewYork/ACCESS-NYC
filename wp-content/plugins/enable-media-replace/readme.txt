@@ -1,51 +1,167 @@
 === Enable Media Replace ===
 Contributors: ShortPixel
 Donate link: https://www.paypal.me/resizeImage
-Tags: replace, attachment, media, files, replace image, replace jpg, change media, replace media, image, file
+Tags: replace, attachment, media, files, replace image, remove background, replace jpg, change media, replace media, image, file
 Requires at least: 4.9.7
-Tested up to: 5.8
+Tested up to: 6.5
 Requires PHP: 5.6
-Stable tag: 3.6.3
+Stable tag: 4.1.5
 
 Easily replace any attached image/file by simply uploading a new file in the Media Library edit view - a real time saver!
 
 == Description ==
 
-**A free, lightweight and easy to use plugin that allows you to seamlessly replace an image or file in your Media Library by uploading a new file in its place. No more deleting, renaming and re-uploading files!
+**A free, lightweight and easy to use plugin that allows you to seamlessly replace an image or file in your Media Library by uploading a new file in its place. No more deleting, renaming and re-uploading files! Now fully compatible with <a href="https://wordpress.org/plugins/amazon-s3-and-cloudfront/" target="_blank">WP Offload Media!</a>
+New beta feature! You can now remove the background of your images for better integration with eCommerce solutions!
 Supported by the friendly team that created <a href="https://wordpress.org/plugins/shortpixel-image-optimiser/" target="_blank">ShortPixel</a>  :)**
 
 #### A real timesaver
 
-Don't you find it tedious and complicated to have to first delete a file and then upload one with the exact same name every time you want to update an image or any uploaded file inside the WordPress media library?
+Don't you find it tedious and complicated to first delete a file and then upload another one with the exact same name every time you want to update an image or other uploaded file in the WordPress media library?
 
 Well, no longer!
 
-Now you'll be able to replace any uploaded file from the media "edit" view, where it should be. Media replacement can be done in one of two ways:
+Now you can replace any uploaded file in the Edit Media view, where it should be. Replacing Media can be done in two ways:
 
 #### It's simple to replace a file
 
-1. Just replace the file. This option requires you to upload a file of the same type as the one you are replacing. The name of the attachment will stay the same no matter what the file you upload is called.
-1. Replace the file, use new file name and update all links. If you check this option, the name and type of the file you are about to upload will replace the old file. All links pointing to the current file will be updated to point to the new file name. Additional options for the folder where to place the new file, or the date of the new file are also available on the replace screen.
+1. Simply replace the file. This option requires you to upload a file of the same type as the file you want to replace. The attachment name remains the same regardless of what the file you upload is called.
+2. Replace the file, use the new file name, and update all links. If you check this option, the old file will be replaced with the name and type of the file you are uploading. All links pointing to the current file will be updated to point to the new file name. Additional options for the folder to put the new file in or the date of the new file are also available on the replace screen.
 
-This plugin is very powerful and a must-have for any larger sites built with WordPress. It now also comes with a preview of the replaced image!
+This plugin is very powerful and a must-have for all major websites built with WordPress. It also offers a preview of the replaced image!
 
-#### Display file modification time
+#### New beta feature: You can now remove the background of any image!
+Similar to replacing media, you can also remove the background of the images from the Media Library! The background removal feature sends the images to ShortPixel's API, removes the background and sends them back in a preview window. If everything looks good, just replace the image with the one that has the background removed! If the source image is a PNG file, you will get a transparent background, while the other images default to a solid white background. You also have the option to choose a different color with an embedded color picker.
+The background removal feature is still in beta and will be free of charge for a reasonable usage.
 
-There is a shortcode available which picks up the file modification date and displays it in a post or a page. The code is:
+If you don't want to use the background removal feature, add this line to your theme's functions.php file, or use a plugin like <a href="https://wordpress.org/plugins/code-snippets/" target="_blank">Code Snippets</a>:
+
+```add_filter( 'emr/feature/background', '__return_false' );```
+
+A similar filter, for the remote notification system is:
+
+```add_filter( 'emr/feature/remote_notice', '__return_false' );```
+
+To shorten the wait time before redirecting to the media editing screen, use the following filter and specify the wait time in seconds (0 means that redirection is immediate, but may cause problems in certain configurations):
+
+```add_filter('emr/success/timeout', function () { return 3; });```
+
+#### Show file modification time
+
+There is a shortcode that takes the file modification date and displays it in a post or on a page. The code is:
 `[file_modified id=XX format=XXXX]` where the "id" is required and the "format" is optional and defaults to your current WordPress settings for date and time format.
 
-So `[file_modified id=870]` would display the last time the file with ID 870 was updated on your site. To get the ID for a file, check the URL when editing a file in the media library (see screenshot #4)
+So `[file_modified id=870]` would show the last time the file with ID 870 was updated on your site. To get the ID for a file, check the URL when editing a file in the media library (see screenshot #4)
 
-If you want more control over the format used to display the time, you can use the format option, so `[file_modified id=870 format=Y-m-d]` would display the file modification date but not the time. The format string uses [standard PHP date() formatting tags](http://php.net/manual/en/function.date.php).
+If you want more control over the format in which the time is shown, you can use the format option. So `[file_modified id=870 format=Y-m-d]` would show the date the file was modified but not the time. The format string uses [the standard PHP date() formatting tags](http://php.net/manual/en/function.date.php).
 
+**Other plugins by [ShortPixel](https://shortpixel.com):**
 
-#### Compatible and recommended Plugins =
+* [ShortPixel Image Optimizer](https://wordpress.org/plugins/shortpixel-image-optimiser/) - Image optimization & compression for all the images on your website, including WebP & AVIF delivery
+* [ShortPixel Adaptive Images](https://wordpress.org/plugins/shortpixel-adaptive-images/) - On-the-fly image optimization & CDN delivery
+* [Resize Image After Upload](https://wordpress.org/plugins/resize-image-after-upload/) - Automatically resize each uploaded image
+* [reGenerate Thumbnails Advanced](https://wordpress.org/plugins/regenerate-thumbnails-advanced/) - Easily regenerate thumbnails
+* [WP SVG Images](https://wordpress.org/plugins/wp-svg-images/) - Secure upload of SVG files to Media Library
+* [ShortPixel Critical CSS](https://wordpress.org/plugins/shortpixel-critical-css/) - Automatically generate above-the-fold CSS for fatster loading times and better SEO scores
 
-* [ShortPixel Image Optimization](https://wordpress.org/plugins/shortpixel-image-optimiser/) - Enable Media Replace is fully compatible with this plugin. Once enabled, ShortPixel will automatically optimize the images you replace using Enable Media Replace.
-* [Resize Image After Upload plugin](https://wordpress.org/plugins/resize-image-after-upload/) - automatically resize images upon upload to save traffic & disk space. Good for SEO and compatible with EMR.
-* [Regenerate Thumbnails Advanced](https://wordpress.org/plugins/regenerate-thumbnails-advanced/) - Fast, free and simple to use plugin to regenerate the thumbnails for your site after changing a theme (for example). Supported & maintained by [ShortPixel](https://ShortPixel.com)
+**Get in touch!**
+
+* Email <a href="https://shortpixel.com/contact" target="_blank">https://shortpixel.com/contact</a>
+* Twitter <a href="https://twitter.com/shortpixel" target="_blank">https://twitter.com/shortpixel</a>
+* Facebook <a href="https://www.facebook.com/ShortPixel" target="_blank">https://www.facebook.com/ShortPixel</a>
+* LinkedIn <a href="https://www.linkedin.com/company/shortpixel" target="_blank">https://www.linkedin.com/company/shortpixel</a>
+
+== Frequently Asked Questions ==
+
+= Where do I report security bugs found in this plugin? =
+Please report security bugs found in the source code of the Enable Media Replace plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/enable-media-replace). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
 == Changelog ==
+
+= 4.1.5 =
+
+Release date: December 14, 2023
+* Tweak: Added a filter to disable the remote notification system added in version 4.1.0;
+* Fix: A potential "Reflected Cross-Site Scripting" vulnerability has been patched, responsibly disclosed by the Wordfence team.
+
+= 4.1.4 =
+
+Release date: September 22, 2023
+* Fix: The latest security fix was breaking the replacements made with Beaver Builder (and possibly other builders);
+
+= 4.1.3 =
+
+Release date: September 14, 2023
+* Fix: A possible PHP Object Injection was patched, which could be exploited under certain conditions;
+* Fix: ShortPixel Image Optimizer handles offloading when both plugins are used with WP Offload Media.
+
+= 4.1.2 =
+
+Release date: April 24, 2023
+* Tweak: Reduced the wait time before redirecting to the media edit page to half (5s);
+* Fix: If an item is not offloaded, no attempt is made to update its data;
+* Fix: Removed some double spaces from the plugin strings (thanks to @Presskopp).
+
+= 4.1.1 =
+
+Release date: April 13, 2023
+* Tweak: Added a filter to reduce or remove the wait time before redirecting to the media edit page;
+* Fix: Replacement works again on multisite setups where the plugin reported the path outside the uploads folder;
+* Fix: In some cases, replacement didn't work when images were offloaded;
+* Fix: Some translation strings were corrected (thanks @alexclassroom !).
+
+= 4.1.0 =
+
+Release date: March 28, 2023
+* New: Integration with WP Offload Media; items that are offloaded can now be replaced correctly;
+* New: Switch to a Replacer module that improves the code and makes it more robust;
+* New: Adding an intermediate confirmation page to solve possible redirection issues;
+* Tweak: The new image can now be dragged and dropped directly into the preview area;
+* Tweak: Improved the display of both the original image and the new image on the replacement screen;
+* Tweak: Improved the notification system and added a mechanism for remote notifications;
+* Tweak: Updated the texts and banners to look better on the replacement screen;
+* Fix: Added documentation in the readme to disable the background removal feature (kudos to @jstask82);
+* Fix: Increased the security of the plugin by adding checks for various AJAX calls;
+
+= 4.0.3 =
+
+Release date: February 21, 2023
+* Fix: background removal notification is no longer displayed when this feature is disabled with the filter;
+* Compat: improved compatibility with PHP 8.1 and 8.2
+* Tweak: updated the banners on the replace page.
+
+= 4.0.2 =
+
+Release date: January 13, 2023
+* Fix: patched a security vulnerability that could allow loading an unauthorized file during the replace operation;
+* Fix: finish the replace operation even if the tmp file cannot be removed due to file permissions issues;
+* Fix: when replacing a scaled file with a non-scaled file, some links were broken;
+* Fix: under certain conditions a PHP warning about an undefined array key was displayed.
+
+= 4.0.1 =
+
+Release date: November 23, 2022
+* Fix: files are now replaced correctly in environments running on Windows/IIC servers;
+* Fix: the mime type is now correctly detected, so that a warning is no longer displayed when replacing PDFs;
+* Fix: the plugin no longer tries to load its code for post IDs that are not attachments, like comments;
+* Fix: some warnings were displayed when using the Members plugin;
+* Compat: added integration for SiteOrigin Page Builder to correctly replace files in its widgets;
+* Compat: added `emr_after_remove_current` action hook (thanks @luistar15);
+* Tweak: added filter to disable the background replace functionality.
+
+= 4.0.0 =
+
+Release date: September 5th, 2022
+* New: added the functionality to remove the background for any image;
+* Fix: images added to the new block-style widgets were not replaced;
+* Fix: the original file was not removed after replacement if a multilingual plugin was installed;
+* Fix: additional checks were added to the new upload path for replacements, to avoid possible vulnerabilities, kudos to @soulseekah;
+* Fix: an object cache flush was added after an image was replaced to prevent the content from still being cached in the post editor;
+* Fix: if there was no `_wp_attached_file` in the postmeta table a fatal error was thrown;
+* Fix: the time zone was not displayed correctly on the Replace Media screen;
+* Fix: added some additional checks for file path to avoid `open_basedir` restrictions;
+* Fix: added titles for the Replace Media and Remove Background screens;
+* Fix: various small CSS/JS fixes, wording updates and code cleanups;
 
 = 3.6.3 =
 

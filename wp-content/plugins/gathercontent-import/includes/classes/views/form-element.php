@@ -28,7 +28,7 @@ abstract class Form_Element extends View {
 		$content = $this->element();
 
 		if ( $desc = $this->get( 'desc' ) ) {
-			$content .= '<p class="description">'. $desc .'</p>';
+			$content .= '<p class="description">' . $desc . '</p>';
 		}
 
 		if ( $echo ) {

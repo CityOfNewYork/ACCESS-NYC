@@ -1,6 +1,6 @@
 {
   "name": "nyco/wp-send-me-nyc",
-  "version": "1.6.6",
+  "version": "1.5.0",
   "type": "wordpress-muplugin",
   "license": "GPL-3.0+",
   "description": "A developer plugin for WordPress that enables sharing website links via SMS or Email.",
@@ -27,24 +27,14 @@
   "support": {
     "issues": "https://github.com/cityofnewyork/nyco-wp-send-me-nyc/issues"
   },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://wpackagist.org",
-      "only": [
-        "wpackagist-plugin/*"
-      ]
-    }
-  ],
   "require": {
-    "aws/aws-sdk-php": "^3",
-    "composer/installers": "^1",
-    "soundasleep/html2text": "^1",
-    "twilio/sdk": "^6",
-    "wpackagist-plugin/wp-bitly": "^2"
+    "composer/installers": "^1.9.0",
+    "twilio/sdk": "^6.15.0",
+    "aws/aws-sdk-php": "^3.166.2",
+    "soundasleep/html2text": "^1.1"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "^3"
+    "squizlabs/php_codesniffer": "^3.5.8"
   },
   "scripts": {
     "lint": [
