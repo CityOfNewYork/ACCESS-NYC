@@ -11,7 +11,7 @@ if ( ! class_exists( 'ACF_Ajax_User_Setting' ) ) :
 		/** @var string The AJAX action name. */
 		var $action = 'acf/ajax/user_setting';
 
-		/** @var bool Prevents access for non-logged in users. */
+		/** @var boolean Prevents access for non-logged in users. */
 		var $public = true;
 
 		/**
@@ -39,5 +39,4 @@ if ( ! class_exists( 'ACF_Ajax_User_Setting' ) ) :
 	}
 
 	acf_new_instance( 'ACF_Ajax_User_Setting' );
-
 endif; // class_exists check

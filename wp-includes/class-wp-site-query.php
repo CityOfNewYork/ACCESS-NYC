@@ -14,6 +14,7 @@
  *
  * @see WP_Site_Query::__construct() for accepted arguments.
  */
+#[AllowDynamicProperties]
 class WP_Site_Query {
 
 	/**
@@ -139,6 +140,11 @@ class WP_Site_Query {
 	 *                                                   - 'path_length'
 	 *                                                   - 'site__in'
 	 *                                                   - 'network__in'
+	 *                                                   - 'deleted'
+	 *                                                   - 'mature'
+	 *                                                   - 'spam'
+	 *                                                   - 'archived'
+	 *                                                   - 'public'
 	 *                                                   - false, an empty array, or 'none' to disable `ORDER BY` clause.
 	 *                                                   Default 'id'.
 	 *     @type string          $order                  How to order retrieved sites. Accepts 'ASC', 'DESC'. Default 'ASC'.
@@ -152,11 +158,11 @@ class WP_Site_Query {
 	 *     @type string          $path                   Limit results to those affiliated with a given path. Default empty.
 	 *     @type string[]        $path__in               Array of paths to include affiliated sites for. Default empty.
 	 *     @type string[]        $path__not_in           Array of paths to exclude affiliated sites for. Default empty.
-	 *     @type int             $public                 Limit results to public sites. Accepts '1' or '0'. Default empty.
-	 *     @type int             $archived               Limit results to archived sites. Accepts '1' or '0'. Default empty.
-	 *     @type int             $mature                 Limit results to mature sites. Accepts '1' or '0'. Default empty.
-	 *     @type int             $spam                   Limit results to spam sites. Accepts '1' or '0'. Default empty.
-	 *     @type int             $deleted                Limit results to deleted sites. Accepts '1' or '0'. Default empty.
+	 *     @type int             $public                 Limit results to public sites. Accepts 1 or 0. Default empty.
+	 *     @type int             $archived               Limit results to archived sites. Accepts 1 or 0. Default empty.
+	 *     @type int             $mature                 Limit results to mature sites. Accepts 1 or 0. Default empty.
+	 *     @type int             $spam                   Limit results to spam sites. Accepts 1 or 0. Default empty.
+	 *     @type int             $deleted                Limit results to deleted sites. Accepts 1 or 0. Default empty.
 	 *     @type int             $lang_id                Limit results to a language ID. Default empty.
 	 *     @type string[]        $lang__in               Array of language IDs to include affiliated sites for. Default empty.
 	 *     @type string[]        $lang__not_in           Array of language IDs to exclude affiliated sites for. Default empty.
@@ -168,15 +174,15 @@ class WP_Site_Query {
 	 *     @type string|string[] $meta_key               Meta key or keys to filter by.
 	 *     @type string|string[] $meta_value             Meta value or values to filter by.
 	 *     @type string          $meta_compare           MySQL operator used for comparing the meta value.
-	 *                                                   See WP_Meta_Query::__construct for accepted values and default value.
+	 *                                                   See WP_Meta_Query::__construct() for accepted values and default value.
 	 *     @type string          $meta_compare_key       MySQL operator used for comparing the meta key.
-	 *                                                   See WP_Meta_Query::__construct for accepted values and default value.
+	 *                                                   See WP_Meta_Query::__construct() for accepted values and default value.
 	 *     @type string          $meta_type              MySQL data type that the meta_value column will be CAST to for comparisons.
-	 *                                                   See WP_Meta_Query::__construct for accepted values and default value.
+	 *                                                   See WP_Meta_Query::__construct() for accepted values and default value.
 	 *     @type string          $meta_type_key          MySQL data type that the meta_key column will be CAST to for comparisons.
-	 *                                                   See WP_Meta_Query::__construct for accepted values and default value.
+	 *                                                   See WP_Meta_Query::__construct() for accepted values and default value.
 	 *     @type array           $meta_query             An associative array of WP_Meta_Query arguments.
-	 *                                                   See WP_Meta_Query::__construct for accepted values.
+	 *                                                   See WP_Meta_Query::__construct() for accepted values.
 	 * }
 	 */
 	public function __construct( $query = '' ) {
@@ -345,14 +351,14 @@ class WP_Site_Query {
 		// $args can include anything. Only use the args defined in the query_var_defaults to compute the key.
 		$_args = wp_array_slice_assoc( $this->query_vars, array_keys( $this->query_var_defaults ) );
 
-		// Ignore the $fields argument as the queried result will be the same regardless.
-		unset( $_args['fields'] );
+		// Ignore the $fields, $update_site_cache, $update_site_meta_cache argument as the queried result will be the same regardless.
+		unset( $_args['fields'], $_args['update_site_cache'], $_args['update_site_meta_cache'] );
 
 		$key          = md5( serialize( $_args ) );
 		$last_changed = wp_cache_get_last_changed( 'sites' );
 
 		$cache_key   = "get_sites:$key:$last_changed";
-		$cache_value = wp_cache_get( $cache_key, 'sites' );
+		$cache_value = wp_cache_get( $cache_key, 'site-queries' );
 
 		if ( false === $cache_value ) {
 			$site_ids = $this->get_site_ids();
@@ -364,14 +370,14 @@ class WP_Site_Query {
 				'site_ids'    => $site_ids,
 				'found_sites' => $this->found_sites,
 			);
-			wp_cache_add( $cache_key, $cache_value, 'sites' );
+			wp_cache_add( $cache_key, $cache_value, 'site-queries' );
 		} else {
 			$site_ids          = $cache_value['site_ids'];
 			$this->found_sites = $cache_value['found_sites'];
 		}
 
 		if ( $this->found_sites && $this->query_vars['number'] ) {
-			$this->max_num_pages = ceil( $this->found_sites / $this->query_vars['number'] );
+			$this->max_num_pages = (int) ceil( $this->found_sites / $this->query_vars['number'] );
 		}
 
 		// If querying for a count only, there's nothing more to do.
@@ -382,6 +388,10 @@ class WP_Site_Query {
 
 		$site_ids = array_map( 'intval', $site_ids );
 
+		if ( $this->query_vars['update_site_meta_cache'] ) {
+			wp_lazyload_site_meta( $site_ids );
+		}
+
 		if ( 'ids' === $this->query_vars['fields'] ) {
 			$this->sites = $site_ids;
 
@@ -390,7 +400,7 @@ class WP_Site_Query {
 
 		// Prime site network caches.
 		if ( $this->query_vars['update_site_cache'] ) {
-			_prime_site_caches( $site_ids, $this->query_vars['update_site_meta_cache'] );
+			_prime_site_caches( $site_ids, false );
 		}
 
 		// Fetch full site objects from the primed cache.
@@ -621,7 +631,9 @@ class WP_Site_Query {
 
 		$date_query = $this->query_vars['date_query'];
 		if ( ! empty( $date_query ) && is_array( $date_query ) ) {
-			$this->date_query                         = new WP_Date_Query( $date_query, 'registered' );
+			$this->date_query = new WP_Date_Query( $date_query, 'registered' );
+
+			// Strip leading 'AND'.
 			$this->sql_clauses['where']['date_query'] = preg_replace( '/^\s*AND\s*/', '', $this->date_query->get_sql() );
 		}
 
@@ -648,8 +660,8 @@ class WP_Site_Query {
 		 *
 		 * @since 4.6.0
 		 *
-		 * @param string[]      $pieces An associative array of site query clauses.
-		 * @param WP_Site_Query $query  Current instance of WP_Site_Query (passed by reference).
+		 * @param string[]      $clauses An associative array of site query clauses.
+		 * @param WP_Site_Query $query   Current instance of WP_Site_Query (passed by reference).
 		 */
 		$clauses = apply_filters_ref_array( 'sites_clauses', array( compact( $pieces ), &$this ) );
 
@@ -683,7 +695,14 @@ class WP_Site_Query {
 		$this->sql_clauses['orderby'] = $orderby;
 		$this->sql_clauses['limits']  = $limits;
 
-		$this->request = "{$this->sql_clauses['select']} {$this->sql_clauses['from']} {$where} {$this->sql_clauses['groupby']} {$this->sql_clauses['orderby']} {$this->sql_clauses['limits']}";
+		// Beginning of the string is on a new line to prevent leading whitespace. See https://core.trac.wordpress.org/ticket/56841.
+		$this->request =
+			"{$this->sql_clauses['select']}
+			 {$this->sql_clauses['from']}
+			 {$where}
+			 {$this->sql_clauses['groupby']}
+			 {$this->sql_clauses['orderby']}
+			 {$this->sql_clauses['limits']}";
 
 		if ( $this->query_vars['count'] ) {
 			return (int) $wpdb->get_var( $this->request );
@@ -727,17 +746,17 @@ class WP_Site_Query {
 	 *
 	 * @global wpdb $wpdb WordPress database abstraction object.
 	 *
-	 * @param string   $string  Search string.
+	 * @param string   $search  Search string.
 	 * @param string[] $columns Array of columns to search.
 	 * @return string Search SQL.
 	 */
-	protected function get_search_sql( $string, $columns ) {
+	protected function get_search_sql( $search, $columns ) {
 		global $wpdb;
 
-		if ( false !== strpos( $string, '*' ) ) {
-			$like = '%' . implode( '%', array_map( array( $wpdb, 'esc_like' ), explode( '*', $string ) ) ) . '%';
+		if ( str_contains( $search, '*' ) ) {
+			$like = '%' . implode( '%', array_map( array( $wpdb, 'esc_like' ), explode( '*', $search ) ) ) . '%';
 		} else {
-			$like = '%' . $wpdb->esc_like( $string ) . '%';
+			$like = '%' . $wpdb->esc_like( $search ) . '%';
 		}
 
 		$searches = array();
@@ -776,6 +795,11 @@ class WP_Site_Query {
 			case 'last_updated':
 			case 'path':
 			case 'registered':
+			case 'deleted':
+			case 'spam':
+			case 'mature':
+			case 'archived':
+			case 'public':
 				$parsed = $orderby;
 				break;
 			case 'network_id':
