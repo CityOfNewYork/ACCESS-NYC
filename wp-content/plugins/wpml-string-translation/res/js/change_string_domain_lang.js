@@ -140,7 +140,7 @@ WPML_String_Translation.ChangeDomainLanguage = function () {
 
 		data = {
 			action:      'wpml_change_string_lang_of_domain',
-			wpnonce:     jQuery('#wpml_change_string_domain_language_nonce').val(),
+			wpnonce:     wpml_st_change_domain_data.nonce,
 			domain:      privateData.domain_select.val(),
 			langs:       languages,
 			use_default: 0 < privateData.summary_div.find('.js-default:checked').length,

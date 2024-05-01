@@ -2,7 +2,7 @@
 
 namespace ACFML\FieldPreferences;
 
-class TranslationJobs {
+class TranslationJobs implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 
 	const TR_JOB_FIELD_PATTERN = '/^field-(\S+)-[0-9]+$/';
 

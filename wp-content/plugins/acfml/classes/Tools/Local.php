@@ -2,7 +2,12 @@
 
 namespace ACFML\Tools;
 
-class Local extends Transfer {
+use ACFML\FieldGroup\Mode;
+use ACFML\Helper\FieldGroup;
+use WPML\LIB\WP\Hooks;
+use function WPML\FP\spreadArgs;
+
+class Local extends Transfer implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	/**
 	 * @var \WPML_ACF_Field_Settings
 	 */
@@ -13,7 +18,7 @@ class Local extends Transfer {
 	}
 
 
-	public function init() {
+	public function add_hooks() {
 		if ( ! $this->isImportFromFile() ) {
 			add_filter( 'acf/prepare_field_group_for_import', [ $this, 'unsetTranslated' ] );
 			if ( is_admin() && LocalSettings::isScanModeEnabled() ) {
@@ -22,6 +27,8 @@ class Local extends Transfer {
 		}
 
 		if ( is_admin() ) {
+			Hooks::onFilter( 'acf/prepare_field_group_for_import' )
+				->then( spreadArgs( [ $this, 'ensureTranslationMode' ] ) );
 			add_action( 'acf/include_admin_tools', [ $this, 'loadUI' ] );
 		}
 	}
@@ -62,5 +69,18 @@ class Local extends Transfer {
 
 	public function loadUI() {
 		acf_register_admin_tool( 'ACFML\Tools\LocalUI' );
+	}
+
+	/**
+	 * @param array $fieldGroup
+	 *
+	 * @return array
+	 */
+	public function ensureTranslationMode( $fieldGroup ) {
+		if ( Mode::getMode( $fieldGroup ) === null ) {
+			$fieldGroup[ Mode::KEY ] = Mode::ADVANCED;
+		}
+
+		return $fieldGroup;
 	}
 }

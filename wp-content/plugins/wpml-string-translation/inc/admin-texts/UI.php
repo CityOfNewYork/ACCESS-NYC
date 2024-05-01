@@ -15,8 +15,12 @@ class UI implements \IWPML_Backend_Action_Loader {
 
 	// shouldShow :: Collection -> bool
 	public static function shouldShow( Collection $data ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return false;
+		}
+
 		return $data->get( 'page' ) === WPML_ST_FOLDER . '/menu/string-translation.php' &&
-			   (int) $data->get( 'trop' ) === 1;
+			(int) $data->get( 'trop' ) === 1;
 	}
 
 

@@ -2,7 +2,7 @@
 
 use ACFML\FieldState;
 
-class WPML_ACF_Custom_Fields_Sync {
+class WPML_ACF_Custom_Fields_Sync implements \IWPML_Backend_Action {
 
 	/**
 	 * @var FieldState
@@ -16,7 +16,7 @@ class WPML_ACF_Custom_Fields_Sync {
 	/**
 	 * Registers hooks related to custom fields synchronisation.
 	 */
-	public function register_hooks() {
+	public function add_hooks() {
 		// make copy once synchronisation working (acfml-155).
 		add_filter( 'acf/update_value', [ $this, 'clean_empty_values_for_copy_once_field' ], 10, 3 );
 	}

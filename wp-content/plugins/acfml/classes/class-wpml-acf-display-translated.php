@@ -1,7 +1,7 @@
 <?php
 
-class WPML_ACF_Display_Translated {
-	public function __construct() {
+class WPML_ACF_Display_Translated implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
+	public function add_hooks() {
 		add_filter( "acf/fields/relationship/query", array( $this, "allow_query_display_translated_in_wp_admin" ), 3, 10 );
 		add_filter( "acf/fields/post_object/query", array( $this, "allow_query_display_translated_in_wp_admin" ), 3, 10 );
 		add_filter( "acf/fields/taxonomy/query", array( $this, "allow_query_display_translated_in_wp_admin" ), 3, 10 );

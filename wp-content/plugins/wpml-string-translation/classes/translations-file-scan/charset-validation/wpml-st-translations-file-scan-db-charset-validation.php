@@ -44,6 +44,7 @@ class WPML_ST_Translations_File_Scan_Db_Charset_Validation implements WPML_ST_Tr
 	 * @return array
 	 */
 	private function get_unique_collation_list_from_table( $table ) {
+		/** @var array $columns */
 		$columns = $this->wpdb->get_results( "SHOW FULL COLUMNS FROM `{$table}` WHERE Collation LIKE 'utf8mb4%'" );
 
 		return array_unique( wp_list_pluck( $columns, 'Collation' ) );

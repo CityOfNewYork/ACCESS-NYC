@@ -1,5 +1,7 @@
 <?php
 
+use WPML\API\Sanitize;
+
 class WPML_ST_Strings {
 
 	const EMPTY_CONTEXT_LABEL = 'empty-context-domain';
@@ -30,30 +32,33 @@ class WPML_ST_Strings {
 
 		$active_languages = $this->sitepress->get_active_languages();
 
+		// phpcs:disable WordPress.CSRF.NonceVerification.NoNonceVerification
 		$status_filter = isset( $_GET['status'] ) ? (int) $_GET['status'] : false;
 
 		$translation_priority = isset( $_GET['translation-priority'] ) ? $_GET['translation-priority'] : false;
 
-		if ( $status_filter !== false ) {
-			if ( $status_filter == ICL_TM_COMPLETE ) {
+		if ( false !== $status_filter ) {
+			if ( ICL_TM_COMPLETE === $status_filter ) {
 				$extra_cond .= ' AND s.status = ' . ICL_TM_COMPLETE;
-			} elseif ( $status_filter == ICL_STRING_TRANSLATION_PARTIAL ) {
+			} elseif ( ICL_STRING_TRANSLATION_PARTIAL === $status_filter ) {
 				$extra_cond .= ' AND s.status = ' . ICL_STRING_TRANSLATION_PARTIAL;
-			} elseif ( $status_filter != ICL_TM_WAITING_FOR_TRANSLATOR ) {
+			} elseif ( ICL_TM_WAITING_FOR_TRANSLATOR !== $status_filter ) {
 				$extra_cond .= ' AND s.status IN (' . ICL_STRING_TRANSLATION_PARTIAL . ',' . ICL_TM_NEEDS_UPDATE . ',' . ICL_TM_NOT_TRANSLATED . ',' . ICL_TM_WAITING_FOR_TRANSLATOR . ')';
 			}
 		}
 
-		if ( $translation_priority != false ) {
-			if ( $translation_priority === __( 'Optional', 'sitepress' ) ) {
-				$extra_cond .= " AND s.translation_priority IN ( '" . esc_sql( $translation_priority ) . "', '' ) ";
+		if ( false !== $translation_priority ) {
+			/** @var string $esc_translation_priority */
+			$esc_translation_priority = esc_sql( $translation_priority );
+			if ( __( 'Optional', 'sitepress' ) === $translation_priority ) {
+				$extra_cond .= " AND s.translation_priority IN ( '" . $esc_translation_priority . "', '' ) ";
 			} else {
-				$extra_cond .= " AND s.translation_priority = '" . esc_sql( $translation_priority ) . "' ";
+				$extra_cond .= " AND s.translation_priority = '" . $esc_translation_priority . "' ";
 			}
 		}
 
 		if ( array_key_exists( 'context', $_GET ) ) {
-			$context = filter_var( $_GET['context'], FILTER_SANITIZE_STRING );
+			$context = stripslashes( html_entity_decode( (string) Sanitize::stringProp( 'context', $_GET ), ENT_QUOTES ) );
 
 			if ( self::EMPTY_CONTEXT_LABEL === $context ) {
 				$context = '';
@@ -61,7 +66,8 @@ class WPML_ST_Strings {
 		}
 
 		if ( isset( $context ) ) {
-			$extra_cond .= " AND s.context = '" . esc_sql( $context ) . "'";
+			/** @phpstan-ignore-next-line */
+			$extra_cond .= $this->wpdb->prepare( ' AND s.context = %s ', $context );
 		}
 
 		if ( $this->must_show_all_results() ) {
@@ -77,23 +83,36 @@ class WPML_ST_Strings {
 
 		$joins     = [];
 		$sql_query = ' WHERE 1 ';
-		if ( $status_filter === ICL_TM_WAITING_FOR_TRANSLATOR ) {
+		if ( ICL_TM_WAITING_FOR_TRANSLATOR === $status_filter ) {
 			$sql_query .= ' AND s.status = ' . ICL_TM_WAITING_FOR_TRANSLATOR;
 		} elseif ( $active_languages && $search_filter && ! $this->must_show_all_results() ) {
 			$sql_query .= ' AND ' . $this->get_value_search_query();
 			$joins[]    = "LEFT JOIN {$this->wpdb->prefix}icl_string_translations str ON str.string_id = s.id";
 		}
+
+		if ( $this->is_troubleshooting_filter_enabled() ) {
+			// This is a troubleshooting filter, it should display only String Translation elements that are in a wrong state.
+			// @see wpmldev-1920 - Strings that are incorrectly duplicated when re-translating a post that was edited using native editor.
+
+			$joins[] = ' LEFT JOIN  ' . $this->wpdb->prefix . 'icl_string_packages sp ON sp.ID = s.string_package_id';
+			$joins[] = ' INNER JOIN  ' . $this->wpdb->prefix . 'icl_translate it ON it.field_data_translated = sp.name';
+			$sql_query .=' AND it.field_type="original_id"';
+		}
+
 		$res = $this->get_results( $sql_query, $extra_cond, $offset, $limit, $joins );
 
 		if ( $res ) {
 			$extra_cond = '';
 			if ( isset( $_GET['translation_language'] ) ) {
-				$extra_cond .= " AND language='" . esc_sql( $_GET['translation_language'] ) . "'";
+				/** @var string $translation_language */
+				$translation_language = esc_sql( $_GET['translation_language'] );
+				$extra_cond .= " AND language='" . $translation_language . "'";
 			}
 
 			foreach ( $res as $row ) {
 				$string_translations[ $row['string_id'] ] = $row;
 
+				// phpcs:disable WordPress.WP.PreparedSQL.NotPrepared
 				$tr = $this->wpdb->get_results(
 					$this->wpdb->prepare(
 						"
@@ -177,33 +196,40 @@ class WPML_ST_Strings {
 	}
 
 	/**
-	 * @param string      $column
-	 * @param string|null $search_filter
-	 * @param bool|null   $exact_match
+	 * @param string            $column
+	 * @param string|null|false $search_filter
+	 * @param bool|null         $exact_match
 	 *
 	 * @return string
 	 */
 	private function get_column_filter_sql( $column, $search_filter, $exact_match ) {
-		$pattern = '{column} LIKE \'%{value}%\'';
-		if ( $exact_match ) {
-			$pattern = '{column} = \'{value}\'';
-		}
+		/** @var string $search_filter_html */
+		$search_filter_html = esc_html( (string) $search_filter );
 
-		return str_replace(
-			array( '{column}', '{value}' ),
-			array(
-				esc_sql( $column ),
-				esc_sql( str_replace( "'", "&#039;", $search_filter ) ),
-			),
-			$pattern
-		);
+		$column = esc_sql( $column );
+		$search_filter = esc_sql( (string) $search_filter );
+		$search_filter_html = esc_sql( $search_filter_html );
+
+		if ( $search_filter === $search_filter_html ) {
+			// No special characters involved.
+			return $exact_match
+				? "$column = '$search_filter'"
+				: "$column LIKE '%$search_filter%'";
+		}
+		/** @var string $replaced_search_filter */
+		$replaced_search_filter = $search_filter ? str_replace( "'", "&#039;", $search_filter ) : '';
+
+		// Special characters involved - search also for HTML version.
+		return $exact_match
+			? "($column = '$search_filter' OR $column = '$search_filter_html')"
+			: "($column LIKE '%$search_filter%' OR $column LIKE '%$search_filter_html%')";
 	}
 
 	public function get_per_domain_counts( $status ) {
 		$extra_cond = '';
 
-		if ( $status !== false ) {
-			if ( $status == ICL_TM_COMPLETE ) {
+		if ( false !== $status ) {
+			if ( ICL_TM_COMPLETE === $status ) {
 				$extra_cond .= ' AND s.status = ' . ICL_TM_COMPLETE;
 			} else {
 				$extra_cond .= ' AND s.status IN (' . ICL_STRING_TRANSLATION_PARTIAL . ',' . ICL_TM_NEEDS_UPDATE . ',' . ICL_TM_NOT_TRANSLATED . ')';
@@ -261,7 +287,7 @@ class WPML_ST_Strings {
 	}
 
 	/**
-	 * @return string|bool
+	 * @return string|false
 	 */
 	private function get_search_filter() {
 		if ( array_key_exists( 'search', $_GET ) ) {
@@ -276,7 +302,7 @@ class WPML_ST_Strings {
 	 */
 	private function is_exact_match() {
 		if ( array_key_exists( 'em', $_GET ) ) {
-			return (int) $_GET['em'] === 1;
+			return 1 === (int) $_GET['em'];
 		}
 
 		return false;
@@ -302,8 +328,15 @@ class WPML_ST_Strings {
 	/**
 	 * @return bool
 	 */
+	private function is_troubleshooting_filter_enabled() {
+		return array_key_exists( 'troubleshooting', $_GET ) && $_GET['troubleshooting'] === '1';
+	}
+
+	/**
+	 * @return bool
+	 */
 	private function must_show_all_results() {
-		return isset( $_GET['show_results'] ) && $_GET['show_results'] === 'all';
+		return isset( $_GET['show_results'] ) && 'all' === $_GET['show_results'];
 	}
 
 }

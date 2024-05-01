@@ -56,6 +56,7 @@ class TranslationHandler {
 					// $getShortcode :: [shortcode, domain, id] -> shortcode
 					$getShortcode = Lst::nth( 0 );
 					// $getShortcode :: [shortcode, domain, id] -> id
+					/** @var callable $getId */
 					$getId = Lst::last();
 
 					// $extractDomain :: string -> string
@@ -171,6 +172,7 @@ class TranslationHandler {
 	// findShortcodesInJobData :: void → ( string → [shortcode, id, translation] )
 	private static function findShortcodesInJobData() {
 		return function ( $str ) {
+			/** @var callable $getId */
 			$getId     = Lst::nth( 1 );
 			$extractId = self::firstMatchingGroup( '/id="(.*?)"/' );
 

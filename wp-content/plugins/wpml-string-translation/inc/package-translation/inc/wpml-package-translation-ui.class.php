@@ -47,6 +47,7 @@ class WPML_Package_Translation_UI {
 		if ( 'WPML' !== $menu_id || ! defined( 'ICL_PLUGIN_PATH' ) ) {
 			return;
 		}
+		/** @var SitePress|null $sitepress */
 		global $sitepress;
 		if ( ! isset( $sitepress ) || ( method_exists( $sitepress, 'get_setting' ) && ! $sitepress->get_setting( 'setup_complete' ) ) ) {
 			return;

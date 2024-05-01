@@ -26,7 +26,9 @@ class WPML_ST_DB_Mappers_String_Positions {
 	        WHERE string_id = %d AND kind = %d
         ";
 
-		return (int) $this->wpdb->get_var( $this->wpdb->prepare( $query, $string_id, $kind ) );
+		/** @var string $sql */
+		$sql = $this->wpdb->prepare( $query, $string_id, $kind );
+		return (int) $this->wpdb->get_var( $sql );
 	}
 
 	/**
@@ -42,7 +44,10 @@ class WPML_ST_DB_Mappers_String_Positions {
           	WHERE string_id = %d AND kind = %d
         ";
 
-		return $this->wpdb->get_col( $this->wpdb->prepare( $query, $string_id, $kind ) );
+		/** @var string $sql */
+		$sql = $this->wpdb->prepare( $query, $string_id, $kind );
+
+		return $this->wpdb->get_col( $sql );
 	}
 
 	/**
@@ -59,7 +64,10 @@ class WPML_ST_DB_Mappers_String_Positions {
             WHERE string_id=%d AND position_in_page=%s AND kind=%s
 		";
 
-		return (bool) $this->wpdb->get_var( $this->wpdb->prepare( $query, $string_id, $position, $kind ) );
+		/** @var string $sql */
+		$sql = $this->wpdb->prepare( $query, $string_id, $position, $kind );
+
+		return (bool) $this->wpdb->get_var( $sql );
 	}
 
 	/**

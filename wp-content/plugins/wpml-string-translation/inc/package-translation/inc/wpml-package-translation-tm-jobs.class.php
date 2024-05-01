@@ -2,7 +2,7 @@
 
 class WPML_Package_TM_Jobs {
 	/**
-	 * @var WPML_Package
+	 * @var WPML_Package|null
 	 */
 	protected $package;
 
@@ -32,6 +32,7 @@ class WPML_Package_TM_Jobs {
 		global $sitepress;
 		$package      = $this->package;
 		$post_id      = $package->ID;
+		/** @var WPML_Package $post */
 		$post         = $this->get_translatable_item( $post_id );
 		$post_id      = $post->ID;
 		$element_type = $package->get_translation_element_type();
@@ -41,9 +42,13 @@ class WPML_Package_TM_Jobs {
 		$sitepress->set_element_language_details( $post_id, $element_type, false, $language_code, null, false );
 	}
 
+	/**
+	 * @param int|WP_Post|WPML_Package $package
+	 * @return WPML_Package
+	 */
 	final public function get_translatable_item( $package ) {
 		// for TranslationManagement::send_jobs
-		if ( ! is_a( $package, 'WPML_Package' ) ) {
+		if ( ! is_object( $package ) || ! is_a( $package, 'WPML_Package' ) ) {
 			$package = new WPML_Package( $package );
 		}
 

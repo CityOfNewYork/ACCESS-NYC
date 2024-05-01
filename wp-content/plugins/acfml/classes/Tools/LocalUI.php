@@ -32,10 +32,18 @@ class LocalUI {
 		?>
 		<p>
 		<?php
-		esc_html_e(
-			'If this option is checked, ACFML will scan your field groups stored in PHP files and the ACF-JSON directory and sync any changes to translation preferences. This can harm the site performance if you have a significant number of fields stored this way.',
-			'acfml'
+		echo sprintf(
+			/* translators: %1$s, %2$s, %3$s and %4$s are placeholders for two <a> link tags. */
+			esc_html__( 'ACF allows you to %1$sregister fields via PHP%2$s or %3$ssave field settings as JSON files%4$s and WPML integrates with these features.', 'acfml' ),
+			'<a href="https://www.advancedcustomfields.com/resources/register-fields-via-php/" target="_blank">',
+			'</a>',
+			'<a href="https://www.advancedcustomfields.com/resources/local-json/" target="_blank">',
+			'</a>'
 		);
+		echo '<br />';
+		esc_html_e( 'If you select this option, ACF Multilingual will scan your field groups stored in PHP files and the "acf-json" directory. It will then sync any changes to translation preferences.', 'acfml' );
+		echo '<br />';
+		esc_html_e( "This can harm the site's performance if you have a significant number of fields stored this way.", 'acfml' );
 		?>
 		</p>
 		<div class="acf-fields">

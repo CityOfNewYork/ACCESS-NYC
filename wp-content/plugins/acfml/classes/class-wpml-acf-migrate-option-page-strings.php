@@ -1,6 +1,6 @@
 <?php
 
-class WPML_ACF_Migrate_Option_Page_Strings {
+class WPML_ACF_Migrate_Option_Page_Strings implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	const CONTEXT = "ACF Option";
 	const OPTION_PREFIX = "options";
 	private $wpdb;
@@ -9,7 +9,7 @@ class WPML_ACF_Migrate_Option_Page_Strings {
 		$this->wpdb = $wpdb;
 	}
 
-	public function run_migration() {
+	public function add_hooks() {
 		if ( $this->revert_should_run() ) {
 			$this->revert_options_page_handling();
 		}

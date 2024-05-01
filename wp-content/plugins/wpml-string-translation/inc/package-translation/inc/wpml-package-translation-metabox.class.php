@@ -7,11 +7,15 @@ class WPML_Package_Translation_Metabox {
 	private $dashboard_link;
 	private $strings_link;
 	private $default_language;
+	/** @var array<string, mixed> */
 	private $main_container_attributes;
 	private $show_description;
 	private $show_link;
 	private $show_status;
 	private $show_title;
+	/**
+	 * @var array<string, mixed>
+	 */
 	private $status_container_attributes;
 	private $status_container_attributes_html;
 	private $status_container_tag;
@@ -220,11 +224,11 @@ class WPML_Package_Translation_Metabox {
 		}
 
 		$result .= $this->get_metabox_status();
-
+		$json_args = wp_json_encode( $this->args ) ? wp_json_encode( $this->args ) : '';
 		$result .= '</div>';
 		$result .= wp_nonce_field( 'wpml_package_nonce', 'wpml_package_nonce', true, false );
 		$result .= '<input type="hidden" id="wpml_package_id" value="' . $this->package->ID . '" />';
-		$result .= '<input type="hidden" id="wpml_package_args" value="' . base64_encode( wp_json_encode( $this->args ) ) . '" />';
+		$result .= '<input type="hidden" id="wpml_package_args" value="' . base64_encode( $json_args ) . '" />';
 
 		if ( ! defined( 'DOING_AJAX' ) ) {
 			$result .= $this->get_lang_switcher_js();
@@ -352,8 +356,12 @@ class WPML_Package_Translation_Metabox {
 		$this->title_tag                   = $args['title_tag'];
 		$this->status_container_tag        = $args['status_container_tag'];
 		$this->status_element_tag          = $args['status_element_tag'];
-		$this->main_container_attributes   = $args['main_container_attributes'];
-		$this->status_container_attributes = $args['status_container_attributes'];
+		/** @var array<string, mixed> $main_container_attributes */
+		$main_container_attributes = $args['main_container_attributes'];
+		$this->main_container_attributes   = $main_container_attributes;
+		/** @var array<string, mixed> $status_container_attributes */
+		$status_container_attributes = $args['status_container_attributes'];
+		$this->status_container_attributes = $status_container_attributes;
 
 		$this->container_attributes_html        = $this->attributes_to_string( $this->main_container_attributes );
 		$this->status_container_attributes_html = $this->attributes_to_string( $this->status_container_attributes );
@@ -372,6 +380,7 @@ class WPML_Package_Translation_Metabox {
 		foreach ( $post_translations as $language => $translation ) {
 			$res_query   = "SELECT status as status_code, needs_update FROM {$this->wpdb->prefix}icl_translation_status WHERE translation_id=%d";
 			$res_args    = array( $translation->translation_id );
+			/** @var string $res_prepare */
 			$res_prepare = $this->wpdb->prepare( $res_query, $res_args );
 			/** @var \stdClass $res */
 			$res = $this->wpdb->get_row( $res_prepare );

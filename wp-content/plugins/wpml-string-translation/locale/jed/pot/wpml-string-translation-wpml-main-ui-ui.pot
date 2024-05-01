@@ -31,11 +31,11 @@ msgstr ""
 msgid "Original:"
 msgstr ""
 
-#: src/js/main-ui/components/LanguagesCell.js:165
+#: src/js/main-ui/components/LanguagesCell.js:166
 msgid "Add %s translation"
 msgstr ""
 
-#: src/js/main-ui/components/LanguagesCell.js:184
+#: src/js/main-ui/components/LanguagesCell.js:185
 msgid "Edit %s translation"
 msgstr ""
 

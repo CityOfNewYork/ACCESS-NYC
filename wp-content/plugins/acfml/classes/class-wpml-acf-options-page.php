@@ -1,10 +1,13 @@
 <?php
 
+use ACFML\Helper\Fields;
+use ACFML\Post\NativeEditorTranslationHooks;
 use WPML\FP\Obj;
 use WPML\FP\Relation;
 use WPML\FP\Str;
+use ACFML\Helper\PhpFunctions;
 
-class WPML_ACF_Options_Page {
+class WPML_ACF_Options_Page implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	/**
 	 * @var SitePress
 	 */
@@ -39,10 +42,25 @@ class WPML_ACF_Options_Page {
 	/**
 	 * Adds filters for displaying options page value and updating this value.
 	 */
-	public function register_hooks() {
+	public function add_hooks() {
 		add_filter( 'acf/pre_render_fields', [ $this, 'fields_on_translated_options_page' ], 10, 2 );
 		add_filter( 'acf/update_value', [ $this, 'overwrite_option_value' ], 10, 4 );
 		add_filter( 'acf/validate_post_id', [ $this, 'append_language_code_for_option_pages' ] );
+		add_action( 'admin_init', [ $this, 'redirectWithLangParam' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_field_lock_assets' ] );
+	}
+
+	/**
+	 * @return void
+	 */
+	public function redirectWithLangParam() {
+		if ( ! isset( $_GET['lang'] ) && $this->is_acf_options_page() ) { // phpcs:ignore
+			$lang = apply_filters( 'wpml_current_language', null );
+			$url  = add_query_arg( 'lang', $lang );
+
+			wp_safe_redirect( $url );
+			PhpFunctions::phpExit();
+		}
 	}
 
 	/**
@@ -64,6 +82,11 @@ class WPML_ACF_Options_Page {
 	 * @return array
 	 */
 	public function fields_on_translated_options_page( $fields, $post_id = 0 ) {
+		if ( $this->is_field_on_translated_options_page( $post_id ) ) {
+			NativeEditorTranslationHooks::loadFieldLockFilters();
+		}
+
+		// @todo: The foreach loop below should probably be wrapped into the above condition.
 		foreach ( $fields as $key => $field ) {
 			$fields[ $key ] = $this->get_field_options( $field, $post_id );
 		}
@@ -81,17 +104,11 @@ class WPML_ACF_Options_Page {
 			switch ( $field['wpml_cf_preferences'] ) {
 				case WPML_COPY_CUSTOM_FIELD:
 					if ( $this->is_field_on_translated_options_page( $post_id ) ) {
-						if ( $this->is_repeater_field( $field ) ) {
+						if ( Fields::isWrapper( $field ) ) {
 							$field['value'] = acf_get_value( self::ORIGINAL_ID, $field );
 							$field          = $this->updateTranslatedSubfieldValue( $field );
 						} else {
 							$field['value'] = $this->convert_relationship_field( acf_get_value( self::ORIGINAL_ID, $field ), $field );
-
-							$field['readonly'] = true;
-
-							$message        = esc_attr__( 'This field is locked for editing because WPML will copy its value from the original language.', 'acfml' );
-							$label          = Obj::propOr( '', 'label', $field );
-							$field['label'] = sprintf( '%s <i class="otgs-ico-lock js-otgs-popover-tooltip" title="%s"></i>', $label, $message );
 						}
 					}
 					break;
@@ -183,7 +200,7 @@ class WPML_ACF_Options_Page {
 	 * @return mixed
 	 */
 	public function overwrite_option_value( $value, $post_id = 0, $field = array(), $original_value = '' ) {
-		if ( ! $this->is_repeater_field( $field )
+		if ( ! Fields::isWrapper( $field )
 				&& isset( $field['wpml_cf_preferences'] )
 				&& WPML_COPY_CUSTOM_FIELD === $field['wpml_cf_preferences']
 				&& $this->is_field_on_translated_options_page( $post_id )
@@ -216,25 +233,15 @@ class WPML_ACF_Options_Page {
 	 * @param array $field ACF field.
 	 *
 	 * @return mixed
+	 *
+	 * @todo Review this, might not make all of the sense
 	 */
 	private function convert_relationship_field( $value, $field ) {
 		if ( is_numeric( $value ) ) {
 			$current_language = $this->sitepress->get_current_language();
-			$data             = $this->acfWorker->prepare_metadata( $value, $field['name'], self::ORIGINAL_ID, sprintf( self::TRANSLATED_ID_FORMAT, $current_language ) );
-			$value            = $this->acfWorker->duplicate_post_meta( $value, $current_language, $data );
+			$value            = $this->acfWorker->convertMetaValue( $value, $field['name'], $field['type'], 'post', self::ORIGINAL_ID, sprintf( self::TRANSLATED_ID_FORMAT, $current_language ), $current_language );
 		}
 		return $value;
-	}
-
-	/**
-	 * Checks if given field has repeater field type.
-	 *
-	 * @param array $field ACF field data.
-	 *
-	 * @return bool
-	 */
-	private function is_repeater_field( $field ) {
-		return isset( $field['type'] ) && 'repeater' === $field['type'];
 	}
 
 	/**
@@ -289,17 +296,18 @@ class WPML_ACF_Options_Page {
 	private function id_starts_with_user( $post_id ) {
 		return (bool) Str::startsWith( 'user_', $post_id );
 	}
-	
+
 	/**
-	 * @param mixed $post_id
+	 * @param mixed  $post_id
 	 * @param string $language_code
 	 *
 	 * @return bool
 	 */
 	private function id_ends_with_language_code( $post_id, $language_code ) {
-		return '_' . $language_code === substr( $post_id, -3 );
+		$suffix = '_' . $language_code;
+		return Str::endsWith( $suffix, $post_id ); /* @phpstan-ignore-line */
 	}
-	
+
 	/**
 	 * @param mixed $post_id
 	 *
@@ -345,5 +353,35 @@ class WPML_ACF_Options_Page {
 			'new_post' => 'The post id is new_post so it is fake id used in acf_form function when creating new post with ACF fields.'
 		];
 		return array_key_exists( $post_id, $restricted );
+	}
+
+	/**
+	 * @return void
+	 */
+	public function enqueue_field_lock_assets() {
+		if ( self::isRenderingOptionPage() ) {
+			NativeEditorTranslationHooks::enqueueAssets();
+		}
+	}
+
+	/**
+	 * @return bool
+	 */
+	private static function isRenderingOptionPage() {
+		/**
+		 * This global is set by WP in wp-admin/admin.php.
+		 * ACF also use that global.
+		 *
+		 * @see \acf_admin_options_page::admin_load()
+		 *
+		 * @var string|null|mixed $plugin_page
+		 */
+		global $plugin_page;
+
+		if ( is_string( $plugin_page ) && function_exists( 'acf_get_options_pages' ) ) {
+			return in_array( $plugin_page, array_keys( (array) acf_get_options_pages() ), true );
+		}
+
+		return false;
 	}
 }

@@ -35,8 +35,9 @@ class WPML_Localization {
 			if ( ! empty( $domains ) ) {
 				$sql     = "SELECT context, status, COUNT(id) AS c 
 						FROM {$this->wpdb->prefix}icl_strings 
-						WHERE context IN ('" . join( "','", $domains ) . "') 
+						WHERE context IN (" . wpml_prepare_in( $domains ) . ")
 						GROUP BY context, status";
+
 				$results = $this->wpdb->get_results( $sql );
 			}
 		}
@@ -124,15 +125,15 @@ class WPML_Localization {
 		$theme_path        = TEMPLATEPATH;
 		$old_theme_context = 'theme ' . basename( $theme_path );
 
-		$result = $this->wpdb->get_var(
-			$this->wpdb->prepare(
-				"
+		/** @var string $sql */
+		$sql = $this->wpdb->prepare(
+			"
 	        SELECT COUNT(id) AS c
 	        FROM {$this->wpdb->prefix}icl_strings
 	        WHERE context = %s",
-				$old_theme_context
-			)
+			$old_theme_context
 		);
+		$result = $this->wpdb->get_var( $sql );
 
 		return $result ? true : false;
 	}

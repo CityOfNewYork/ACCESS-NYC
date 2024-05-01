@@ -15,9 +15,13 @@ class WPML_ST_Upgrade_DB_String_Name_Index implements IWPML_St_Upgrade_Command {
 		$result = true;
 
 		$table_name = $this->wpdb->prefix . 'icl_strings';
-		if ( 0 !== count( $this->wpdb->get_results( "SHOW TABLES LIKE '{$table_name}'" ) ) ) {
+		/** @var array<int, object> $results */
+		$results = $this->wpdb->get_results( "SHOW TABLES LIKE '{$table_name}'" );
+		if ( 0 !== count( $results ) ) {
 			$sql = "SHOW KEYS FROM  {$table_name} WHERE Key_name='icl_strings_name'";
-			if ( 0 === count( $this->wpdb->get_results( $sql ) ) ) {
+			/** @var array<int, object> $results */
+			$results = $this->wpdb->get_results( $sql );
+			if ( 0 === count( $results ) ) {
 				$sql = "
 				ALTER TABLE {$this->wpdb->prefix}icl_strings 
 				ADD INDEX `icl_strings_name` (`name` ASC);

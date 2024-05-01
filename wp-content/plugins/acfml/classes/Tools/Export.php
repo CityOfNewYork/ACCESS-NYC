@@ -4,9 +4,9 @@ namespace ACFML\Tools;
 
 use WPML\FP\Obj;
 
-class Export extends Transfer {
+class Export extends Transfer implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	
-	public function init() {
+	public function add_hooks() {
 		add_filter( 'acf/prepare_field_group_for_export', [ $this, 'addLanguageInformation' ] );
 	}
 	

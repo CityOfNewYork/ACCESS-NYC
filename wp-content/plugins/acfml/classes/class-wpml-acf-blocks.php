@@ -1,6 +1,6 @@
 <?php
 
-class WPML_ACF_Blocks {
+class WPML_ACF_Blocks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 
 	/**
 	 * @var WPML_Post_Translation
@@ -19,7 +19,7 @@ class WPML_ACF_Blocks {
 	/**
 	 * Initialize hooks.
 	 */
-	public function init_hooks() {
+	public function add_hooks() {
 		add_filter( 'wpml_found_strings_in_block', array( $this, 'add_block_data_attribute_strings' ), 10, 2 );
 		add_filter( 'wpml_update_strings_in_block', array( $this, 'update_block_data_attribute' ), 10, 3 );
 	}
@@ -150,7 +150,8 @@ class WPML_ACF_Blocks {
 	 * @return bool
 	 */
 	private function is_acf_block( WP_Block_Parser_Block $block ) {
-		return strpos( $block->blockName, 'acf/' ) === 0;
+		return strpos( $block->blockName, 'acf/' ) === 0 ||
+			function_exists( 'acf_has_block_type' ) && acf_has_block_type( $block->blockName );
 	}
 
 	/**

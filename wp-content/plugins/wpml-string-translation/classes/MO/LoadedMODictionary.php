@@ -32,6 +32,25 @@ class LoadedMODictionary {
 				}
 			);
 		}
+		// WP 6.5
+		// We need to collect all files loaded in WP_Translation_Controller
+		// at the moment of hooks registration.
+		if ( class_exists('\WP_Translation_Controller') ) {
+			$translationsController = \WP_Translation_Controller::get_instance();
+			$reflection = new \ReflectionClass( $translationsController );
+			$property = $reflection->getProperty( 'loaded_files' );
+			$property->setAccessible( true );
+			$loaded_files = $property->getValue( $translationsController );
+
+			foreach ( $loaded_files as $loaded_file => $loaded_file_data ) {
+				$moFileName = str_replace('l10n.php', '.mo', $loaded_file);
+				$locale = array_keys($loaded_file_data)[0];
+				$locale_data = $loaded_file_data[$locale];
+				foreach ( $locale_data as $domain => $translationFile ) {
+					$this->addFile( $domain, $moFileName );
+				}
+			}
+		}
 	}
 
 	/**

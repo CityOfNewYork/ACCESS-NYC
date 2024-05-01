@@ -6,6 +6,7 @@
             "key": "field_5ec3f6d835988",
             "label": "Alert",
             "name": "alert",
+            "aria-label": "",
             "type": "relationship",
             "instructions": "Select an alert to show at the top of the page.",
             "required": 0,
@@ -27,7 +28,8 @@
             "elements": "",
             "min": "",
             "max": "",
-            "return_format": "object"
+            "return_format": "object",
+            "bidirectional_target": []
         }
     ],
     "location": [
@@ -61,5 +63,8 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1596637788
+    "show_in_rest": false,
+    "modified": 1714587205,
+    "local_file": "\/var\/www\/html\/wp-content\/themes\/access\/acf-json\/group_5ec3f6d2e8fc3.json",
+    "acfml_field_group_mode": "advanced"
 }

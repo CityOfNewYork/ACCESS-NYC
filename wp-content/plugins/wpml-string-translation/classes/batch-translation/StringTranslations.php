@@ -20,23 +20,20 @@ use function WPML\FP\spreadArgs;
  * Class StringTranslations
  *
  * @package WPML\ST\Batch\Translation
+ *
+ * @phpstan-type curried '__CURRIED_PLACEHOLDER__'
+ *
  * @method static callable|void save( ...$element_type_prefix, ...$job, ...$decoder ) :: string → object → ( string → string → string ) → void
  * @method static callable|void addExisting( ...$prevTranslations, ...$package, ...$lang ) :: [WPML_TM_Translated_Field] → object → string → [WPML_TM_Translated_Field]
  * @method static callable|bool isTranslated( ...$field ) :: object → bool
- * @method static callable|bool isBatchId( ...$str ) :: string → bool
- * @method static callable|bool isBatchField( ...$field ) :: object → bool
- * @method static callable|string decodeStringId( ...$str ) :: string → string
  * @method static callable|void markTranslationsAsInProgress( ...$getJobStatus, ...$hasTranslation, ...$addTranslation, ...$post, ...$element) :: callable -> callable -> callable -> WPML_TM_Translation_Batch_Element -> \stdClass -> void
  * @method static callable|void cancelTranslations(...$job) :: \WPML_TM_Job_Entity -> void
- * @method static callable|void updateStatus(...$element_type_prefix, ...$job) :: string -> \stdClass -> void
  */
 class StringTranslations {
 
 	use Macroable;
 
 	public static function init() {
-
-		self::macro( 'isBatchId', Str::startsWith( Module::STRING_ID_PREFIX ) );
 
 		self::macro( 'isTranslated', Obj::prop( 'field_translate' ) );
 
@@ -49,8 +46,6 @@ class StringTranslations {
 				}
 			)
 		);
-
-		self::macro( 'decodeStringId', Str::replace( Module::STRING_ID_PREFIX, '' ) );
 
 		self::macro(
 			'save',
@@ -74,29 +69,12 @@ class StringTranslations {
 							[ $getStringId, $decodeField ]
 						);
 
+						/** @var callable $filterTranslatedAndBatchField */
+						$filterTranslatedAndBatchField = Logic::allPass( [ self::isTranslated(), self::isBatchField() ] );
+
 						Wrapper::of( $job->elements )
-							   ->map( Fns::filter( Logic::allPass( [ self::isTranslated(), self::isBatchField() ] ) ) )
+							   ->map( Fns::filter( $filterTranslatedAndBatchField ) )
 							   ->map( Fns::each( $saveTranslation ) );
-					}
-				}
-			)
-		);
-
-		self::macro(
-			'updateStatus',
-			curryN(
-				2,
-				function ( $element_type_prefix, $job ) {
-					if ( $element_type_prefix === 'st-batch' ) {
-						// $getStringId :: field → int
-						$getStringId = pipe( Obj::prop( 'field_type' ), self::decodeStringId() );
-
-						$updateStatus = ST_API::updateStatus( Fns::__, $job->language_code, ICL_TM_IN_PROGRESS );
-
-						\wpml_collect( $job->elements )
-						->filter( self::isBatchField() )
-						->map( $getStringId )
-						->each( $updateStatus );
 					}
 				}
 			)
@@ -149,9 +127,11 @@ class StringTranslations {
 						3,
 						function ( $lang, $data, $stringId ) {
 							if ( $data['translate'] === 1 && self::isBatchId( $stringId ) ) {
+								/** @var string $translation */
+								$translation = ST_API::getTranslation( self::decodeStringId( $stringId ), $lang );
 								return (object) [
 									'id'          => $stringId,
-									'translation' => base64_encode( ST_API::getTranslation( self::decodeStringId( $stringId ), $lang ) ),
+									'translation' => base64_encode( is_null( $translation ) ? '' : $translation ),
 								];
 							}
 
@@ -210,6 +190,99 @@ class StringTranslations {
 			)
 		);
 	}
+
+	/**
+	 * @param string $element_type_prefix
+	 * @param \stdClass $job
+	 * @return callable|void
+	 * @phpstan-return ( $job is not null ? void : callable )
+	 */
+	public static function updateStatus( $element_type_prefix = null, $job = null ) {
+		return call_user_func_array(
+			curryN(
+				2,
+				function ( $element_type_prefix, $job ) {
+					if ( $element_type_prefix === 'st-batch' ) {
+						// $getStringId :: field → int
+						$getStringId = pipe( Obj::prop( 'field_type' ), self::decodeStringId() );
+
+						/** @var callable $updateStatus */
+						$updateStatus = ST_API::updateStatus( Fns::__, $job->language_code, ICL_TM_IN_PROGRESS );
+
+						\wpml_collect( $job->elements )
+							->filter( self::isBatchField() )
+							->map( $getStringId )
+							->each( $updateStatus );
+					}
+				}
+			),
+			func_get_args()
+		);
+	}
+
+	/**
+	 * @param string $str
+	 *
+	 * @return callable|string
+	 *
+	 * @phpstan-template A1 of string|curried
+	 * @phpstan-param ?A1 $str
+	 * @phpstan-return ($str is not null ? string : callable(string=):string)
+	 */
+	public static function decodeStringId( $str = null ) {
+		return call_user_func_array(
+			curryN(
+				1,
+				function( $str ) {
+					return Str::replace( Module::STRING_ID_PREFIX, '', $str );
+				}
+			),
+			func_get_args()
+		);
+	}
+
+	/**
+	 * @param string $str
+	 *
+	 * @return callable|bool
+	 *
+	 * @phpstan-template A1 of string|curried
+	 * @phpstan-param ?A1 $str
+	 * @phpstan-return ($str is not null ? bool : callable(string=):bool)
+	 */
+	public static function isBatchId( $str = null ) {
+		return call_user_func_array(
+			curryN(
+				1,
+				function( $str ) {
+					return Str::startsWith( Module::STRING_ID_PREFIX, $str );
+				}
+			),
+			func_get_args()
+		);
+	}
+
+	/**
+	 * @param string $field
+	 *
+	 * @return callable|bool
+	 *
+	 * @phpstan-template A1 of string|curried
+	 * @phpstan-param ?A1 $field
+	 * @phpstan-return ($field is not null ? bool : callable(string):bool)
+	 */
+	public static function isBatchField( $field = null ) {
+		return call_user_func_array(
+			curryN(
+				1,
+				function( $field ) {
+					return self::isBatchId( Obj::prop( 'field_type', $field ) );
+				}
+			),
+			func_get_args()
+		);
+	}
+
 
 }
 

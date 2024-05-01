@@ -231,13 +231,13 @@ function icl_st_update_select_all_status() {
 	jQuery('#icl_st_translate_to_all').prop('checked', uncheckedCount === 0);
 }
 
-function show_package_incomplete_notice(hide) {
-    var notice = jQuery('#wpml-st-package-incomplete');
-    if (hide) {
-        notice.hide();
-    } else {
-        notice.show();
-    }
+function show_notice(id, hide) {
+	var notice = jQuery(id);
+	if (hide) {
+		notice.hide();
+	} else {
+		notice.show();
+	}
 }
 
 function get_checked_cbs() {
@@ -265,7 +265,18 @@ function get_checked_cbs() {
             incomplete_packages = true;
         }
     }
-    show_package_incomplete_notice( !incomplete_packages || checked_cbs.length === 0);
+
+	var non_default_lang_string_selected = false;
+
+	for (const checkbox of checked_cbs) {
+		if(jQuery(checkbox).data('language') !== wpml_st_main_ui.defaultLang) {
+			non_default_lang_string_selected = true;
+			break;
+		}
+	}
+
+	show_notice('#wpml-st-package-incomplete', !incomplete_packages || non_default_lang_string_selected || checked_cbs.length === 0);
+	show_notice('#wpml-st-non-default-language-string', !non_default_lang_string_selected);
 
     return incomplete_packages ? [] : checked_cbs;
 }
@@ -373,7 +384,7 @@ function icl_st_pop_download(){
     var file = jQuery(this).data('file');
     var domain = jQuery(this).data('domain');
 
-    location.href = WPML_core.sanitize( ajaxurl + "?action=icl_st_pop_download&file=" + file + "&domain=" + domain );
+    location.href = WPML_core.sanitize( ajaxurl + "?action=icl_st_pop_download&wpnonce=" + wpml_scripts_data.nonce_icl_st_pop_download_nonce + "&file=" + file + "&domain=" + domain );
 
     return false;
 }

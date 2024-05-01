@@ -9,6 +9,13 @@ class Post extends Strategy {
 	protected $id_prefix = '';
 
 	/**
+	 * @return string
+	 */
+	public function getEntityType() {
+		return 'post';
+	}
+
+	/**
 	 * @param mixed $id
 	 *
 	 * @return bool

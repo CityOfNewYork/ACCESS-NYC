@@ -48,7 +48,7 @@ class WPML_ST_Element_Slug_Translation_UI {
 			ICL_AdminNotifier::displayInstantMessage(
 				$model['has_missing_translations_message'],
 				'error',
-				'below-h2',
+				true,
 				false
 			);
 		}

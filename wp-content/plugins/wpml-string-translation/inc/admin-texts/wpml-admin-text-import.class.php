@@ -62,7 +62,7 @@ class WPML_Admin_Text_Import extends WPML_Admin_Text_Functionality {
 			$arr_options = array();
 			if ( isset( $arr ) && is_array( $arr ) ) {
 				foreach ( $arr as $key => $v ) {
-					$value = maybe_unserialize( $this->get_option_without_filtering( $key ) );
+					$value = maybe_unserialize( (string) $this->get_option_without_filtering( (string) $key ) );
 					$value = is_array( $value ) && is_array( $v ) ? array_intersect_key( $value, $v ) : $value;
 					$admin_text_context = isset( $arr_context[ $key ] ) ? $arr_context[ $key ] : '';
 					$type               = isset( $arr_type[ $key ] ) ? $arr_type[ $key ] : '';
@@ -85,7 +85,7 @@ class WPML_Admin_Text_Import extends WPML_Admin_Text_Functionality {
 					? array_replace_recursive( $_icl_admin_option_names, $arr_options ) : $arr_options;
 			}
 
-			update_option( '_icl_admin_option_names', $_icl_admin_option_names );
+			update_option( '_icl_admin_option_names', $_icl_admin_option_names, 'no' );
 
 			set_transient( $transient_name, $admin_texts_hash );
 			$sitepress->set_setting( 'admin_text_3_2_migration_complete_' . $admin_texts_hash, true, true );
@@ -95,6 +95,7 @@ class WPML_Admin_Text_Import extends WPML_Admin_Text_Functionality {
 
 	private function register_string_recursive( $key, $value, $arr, $prefix, $suffix, $requires_upgrade, $type, $admin_text_context_old ) {
 		if ( is_scalar( $value ) ) {
+			/** @phpstan-ignore-next-line */
 			icl_register_string( WPML_Admin_Texts::DOMAIN_NAME_PREFIX . $suffix, $prefix . $key, $value, true );
 			if ( $requires_upgrade ) {
 				$this->migrate_3_2( $type, $admin_text_context_old, $suffix, $prefix . $key );

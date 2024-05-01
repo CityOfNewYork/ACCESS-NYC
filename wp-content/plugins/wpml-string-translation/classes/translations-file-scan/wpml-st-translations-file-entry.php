@@ -101,7 +101,7 @@ class WPML_ST_Translations_File_Entry {
 	}
 
 	/**
-	 * @param int $status
+	 * @param string $status
 	 */
 	public function set_status( $status ) {
 		$this->validate_status( $status );

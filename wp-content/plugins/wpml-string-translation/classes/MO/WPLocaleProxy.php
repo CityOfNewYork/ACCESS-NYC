@@ -18,8 +18,9 @@ class WPLocaleProxy {
 	 * @return mixed|null
 	 */
 	public function __call( $method, array $args ) {
-		if ( method_exists( $this->getWPLocale(), $method ) ) {
-			return call_user_func_array( [ $this->getWPLocale(), $method ], $args );
+		$callback = [ $this->getWPLocale(), $method ];
+		if ( method_exists( $this->getWPLocale(), $method ) && is_callable( $callback ) ) {
+			return call_user_func_array( $callback , $args );
 		}
 
 		return null;

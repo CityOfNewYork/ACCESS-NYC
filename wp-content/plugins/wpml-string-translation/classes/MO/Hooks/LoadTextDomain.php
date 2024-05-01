@@ -116,7 +116,12 @@ class LoadTextDomain implements \IWPML_Action {
 			unload_textdomain( $entity->domain );
 			$locale = $this->file_locale->get( $entity->mofile, $entity->domain );
 			$this->loadCustomMOFile( $entity->domain, $entity->mofile, $locale );
-			load_textdomain( $entity->domain, $entity->mofile );
+			if ( class_exists( '\WP_Translation_Controller' ) ) {
+				// WP 6.5 - passing locale
+				load_textdomain( $entity->domain, $entity->mofile, $locale );
+			} else {
+				load_textdomain($entity->domain, $entity->mofile);
+			}
 		} );
 	}
 

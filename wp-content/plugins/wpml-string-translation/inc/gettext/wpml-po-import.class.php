@@ -12,7 +12,7 @@ class WPML_PO_Import {
 		
 		$this->strings = array( );
 		$this->error_str = '';
-		$this->lines   = file( $file_name );
+		$this->lines   = file( $file_name ) ?: array();
 
 		$fuzzy = 0;
 		$name = false;

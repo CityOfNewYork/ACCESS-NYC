@@ -2,6 +2,9 @@
 
 namespace ACFML\Repeater\Shuffle;
 
+use WPML\Element\API\Translations;
+use WPML\FP\Relation;
+
 abstract class Strategy {
 	/**
 	 * @var string Element ID prefix.
@@ -15,6 +18,11 @@ abstract class Strategy {
 
 	/** @var array $element_translations */
 	protected $element_translations;
+
+	/**
+	 * @return string
+	 */
+	abstract public function getEntityType();
 
 	/**
 	 * Check if this is valid ID of processed post, term etc.
@@ -118,7 +126,7 @@ abstract class Strategy {
 	/**
 	 * Checks if given post or term has translations.
 	 *
-	 * @param int $id Post or term ID.
+	 * @param int|string $id The post or term or option page ID.
 	 *
 	 * @return bool
 	 */
@@ -147,5 +155,16 @@ abstract class Strategy {
 		}
 
 		return $this->element_translations[ $id ];
+	}
+
+	/**
+	 * @param int|string $id
+	 *
+	 * @return bool
+	 */
+	public function isOriginal( $id ) {
+		$translations = $this->getTranslations( $id );
+		return ! wpml_collect( array_values( $translations ) )
+			->first( Relation::propEq( 'original', '1' ) );
 	}
 }

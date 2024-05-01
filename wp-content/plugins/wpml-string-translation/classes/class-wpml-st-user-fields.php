@@ -26,7 +26,7 @@ class WPML_ST_User_Fields {
 	public function init_hooks() {
 		if ( ! is_admin() ) {
 			add_action( 'init', array( $this, 'add_get_the_author_field_filters' ) );
-			add_filter( 'the_author', array( $this, 'the_author_filter' ), 10, 2 );
+			add_filter( 'the_author', array( $this, 'the_author_filter' ), 10, 1 );
 		}
 
 		add_action( 'profile_update', array( $this, 'profile_update_action' ), 10 );

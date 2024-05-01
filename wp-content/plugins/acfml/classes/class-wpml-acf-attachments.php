@@ -1,6 +1,6 @@
 <?php
 
-class WPML_ACF_Attachments {
+class WPML_ACF_Attachments implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	/**
 	 * @var array Pairs of original - translation for already processed attachments during custom field copying.
 	 */
@@ -9,7 +9,7 @@ class WPML_ACF_Attachments {
 	/**
 	 * Registers hooks related to attachments.
 	 */
-	public function register_hooks() {
+	public function add_hooks() {
 		add_filter( 'acf/load_value/type=gallery', array( $this, 'load_translated_attachment' ) );
 		add_filter( 'acf/load_value/type=image', array( $this, 'load_translated_attachment' ) );
 		add_filter( 'acf/load_value/type=file', array( $this, 'load_translated_attachment' ) );
@@ -21,18 +21,38 @@ class WPML_ACF_Attachments {
 	 *
 	 * @return array|string|int translated attachemnt id or attachments' ids
 	 */
-	public function load_translated_attachment($attachments) {
-		$attachments = maybe_unserialize($attachments);
+	public function load_translated_attachment( $attachments ) {
+
+		/**
+		 * If it detects an ID ( (int)100 or (string)"203") it passes it to `wpml_object_id`
+		 *
+		 * @param mixed $maybeAttachmentId
+		 *
+		 * @return mixed|null
+		 */
+		$safeConvert = function ( $maybeAttachmentId ) {
+			return is_int( $maybeAttachmentId ) || ( $maybeAttachmentId === ( (string) (int) $maybeAttachmentId ) )
+				? apply_filters( 'wpml_object_id', $maybeAttachmentId, 'attachment', true )
+				: $maybeAttachmentId;
+		};
+
+		$attachments = maybe_unserialize( $attachments );
+
+		$translatedAttachments = [];
 		if ( is_array( $attachments ) ) {
-			$translated_attachments = array();
-			foreach ( $attachments as $key => $attachment_id ) {
-				$translated_attachments[$key] = apply_filters( 'wpml_object_id', $attachment_id, 'attachment', true );
+			$isArrayList = array_keys( $attachments ) === range( 0, count( $attachments ) - 1 );
+
+			foreach ( $attachments as $key => $value ) {
+				if ( $isArrayList || in_array( $key, [ 'id', 'ID' ] ) ) {
+					$value = $safeConvert( $value );
+				}
+				$translatedAttachments[ $key ] = $value;
 			}
 		} else {
-			$translated_attachments = apply_filters( 'wpml_object_id', $attachments, 'attachment', true );
+			$translatedAttachments = $safeConvert( $attachments );
 		}
 
-		return $translated_attachments;
+		return $translatedAttachments;
 	}
 
 	/**
