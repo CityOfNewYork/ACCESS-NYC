@@ -1,0 +1,104 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "en"
+         },
+         "Sending for translation": [
+            "Đang gửi để dịch"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "Đang kết nối với Trình biên tập Dịch thuật Nâng cao của WPML"
+         ],
+         "Try again": [
+            "Thử lại"
+         ],
+         "You don't have the rights to review this language": [
+            "Bạn không có quyền rà soát ngôn ngữ này"
+         ],
+         "%d translations left": [
+            "%d bản dịch còn lại"
+         ],
+         "Preparing content for translation": [
+            "Đang chuẩn bị nội dung cần dịch"
+         ],
+         "Preparing more content for translation": [
+            "Đang chuẩn bị thêm nội dung cần dịch"
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "Đây là một sự cố với tính năng dịch tự động cần bạn chú ý. Hãy sửa để tiếp tục."
+         ],
+         "Account credits used": [
+            "Tín dụng tài khoản đã dùng"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "Khi bạn đã sử dụng tất cả tín dụng trả trước, chúng tôi sẽ lập hóa đơn cho bất kỳ phần tín dụng bổ sung nào bạn sử dụng sau khi kết thúc tháng"
+         ],
+         "Payment limit:": [
+            "Giới hạn thanh toán:"
+         ],
+         "%s credits": [
+            "%s tín dụng"
+         ],
+         "Credits used:": [
+            "Tín dụng đã dùng:"
+         ],
+         "Credits left:": [
+            "Tín dụng còn lại:"
+         ],
+         "Calculating": [
+            "Đang tính toán"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "Tín dụng trả trước còn lại được gán cho trang web này trên WPML.org."
+         ],
+         "Prepaid credits left": [
+            "Tín dụng trả trước còn lại"
+         ],
+         "Error": [
+            "Lỗi"
+         ],
+         "Draft — Pending review": [
+            "Bản nháp - Đang chờ rà soát"
+         ],
+         "Complete": [
+            "Hoàn thành"
+         ],
+         "Insufficient funds": [
+            "Không đủ tiền"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "Đọc thêm về cách thức dịch nội dung của bạn trong <a>Hướng dẫn bắt đầu</a>"
+         ],
+         "Let's Start Translating!": [
+            "Hãy bắt đầu dịch!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "Chọn nội dung của bạn từ Bảng điều khiển Dịch thuật dưới đây và tạo việc dịch đầu tiên của bạn!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "Thay đổi <a>cài đặt dịch tự động</a> của bạn (các công việc dịch thuật đang diễn ra sẽ được hoàn tất bằng cài đặt hiện thời)."
+         ],
+         "Read more about translating your site automatically.": [
+            "Đọc thêm về việc dịch tự động trang web của bạn."
+         ],
+         "Your site is being automatically translated!": [
+            "Trang web của bạn đang được dịch tự động!"
+         ],
+         "Calculating...": [
+            "Đang tính toán..."
+         ],
+         "Do not close WP admin!": [
+            "Không đó mục quản trị của WP!"
+         ],
+         "The number of translations": [
+            "Số lượng bản dịch"
+         ],
+         "Cancel": [
+            "Hủy"
+         ]
+      }
+   }
+}

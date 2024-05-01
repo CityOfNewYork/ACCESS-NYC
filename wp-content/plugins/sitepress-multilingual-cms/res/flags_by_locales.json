@@ -1,0 +1,2282 @@
+[
+ {
+  "Locale Code": "aa-DJ",
+  "Flag-File": "dj.country.svg"
+ },
+ {
+  "Locale Code": "aa-ER",
+  "Flag-File": "er.country.svg"
+ },
+ {
+  "Locale Code": "aa-ET",
+  "Flag-File": "et.country.svg"
+ },
+ {
+  "Locale Code": "af-NA",
+  "Flag-File": "na.country.svg"
+ },
+ {
+  "Locale Code": "af-ZA",
+  "Flag-File": "za.country.svg"
+ },
+ {
+  "Locale Code": "agq-CM",
+  "Flag-File": "cm.country.svg"
+ },
+ {
+  "Locale Code": "ak-GH",
+  "Flag-File": "gh.country.svg"
+ },
+ {
+  "Locale Code": "sq-AL",
+  "Flag-File": "sq.svg"
+ },
+ {
+  "Locale Code": "sq-MK",
+  "Flag-File": "mk.svg"
+ },
+ {
+  "Locale Code": "gsw-FR",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "gsw-LI",
+  "Flag-File": "li.country.svg"
+ },
+ {
+  "Locale Code": "gsw-CH",
+  "Flag-File": "ch.country.svg"
+ },
+ {
+  "Locale Code": "am-ET",
+  "Flag-File": "et.country.svg"
+ },
+ {
+  "Locale Code": "ar-DZ",
+  "Flag-File": "ar.svg"
+ },
+ {
+  "Locale Code": "ar-BH",
+  "Flag-File": "bh.country.svg"
+ },
+ {
+  "Locale Code": "ar-TD",
+  "Flag-File": "td.country.svg"
+ },
+ {
+  "Locale Code": "ar-KM",
+  "Flag-File": "km.country.svg"
+ },
+ {
+  "Locale Code": "ar-DJ",
+  "Flag-File": "dj.country.svg"
+ },
+ {
+  "Locale Code": "ar-EG",
+  "Flag-File": "eg.country.svg"
+ },
+ {
+  "Locale Code": "ar-ER",
+  "Flag-File": "ar.svg"
+ },
+ {
+  "Locale Code": "ar-IQ",
+  "Flag-File": "ar.svg"
+ },
+ {
+  "Locale Code": "ar-IL",
+  "Flag-File": "lt.svg"
+ },
+ {
+  "Locale Code": "ar-JO",
+  "Flag-File": "jo.country.svg"
+ },
+ {
+  "Locale Code": "ar-KW",
+  "Flag-File": "kw.country.svg"
+ },
+ {
+  "Locale Code": "ar-LB",
+  "Flag-File": "lb.country.svg"
+ },
+ {
+  "Locale Code": "ar-LY",
+  "Flag-File": "ly.country.svg"
+ },
+ {
+  "Locale Code": "ar-MR",
+  "Flag-File": "ar.svg"
+ },
+ {
+  "Locale Code": "ar-MA",
+  "Flag-File": "ar.svg"
+ },
+ {
+  "Locale Code": "ar-OM",
+  "Flag-File": "ar.svg"
+ },
+ {
+  "Locale Code": "ar-PS",
+  "Flag-File": "ps.country.svg"
+ },
+ {
+  "Locale Code": "ar-QA",
+  "Flag-File": "qa.country.svg"
+ },
+ {
+  "Locale Code": "ar-SA",
+  "Flag-File": "sa.country.svg"
+ },
+ {
+  "Locale Code": "ar-SO",
+  "Flag-File": "ar.svg"
+ },
+ {
+  "Locale Code": "ar-SS",
+  "Flag-File": "ar.svg"
+ },
+ {
+  "Locale Code": "ar-SD",
+  "Flag-File": "ar.svg"
+ },
+ {
+  "Locale Code": "ar-SY",
+  "Flag-File": "sy.country.svg"
+ },
+ {
+  "Locale Code": "ar-TN",
+  "Flag-File": "tn.country.svg"
+ },
+ {
+  "Locale Code": "ar-AE",
+  "Flag-File": "ae.country.svg"
+ },
+ {
+  "Locale Code": "ar-001",
+  "Flag-File": "ar.svg"
+ },
+ {
+  "Locale Code": "ar-YE",
+  "Flag-File": "ye.country.svg"
+ },
+ {
+  "Locale Code": "hy-AM",
+  "Flag-File": "hy.svg"
+ },
+ {
+  "Locale Code": "as-IN",
+  "Flag-File": "in.country.svg"
+ },
+ {
+  "Locale Code": "ast-ES",
+  "Flag-File": "es.svg"
+ },
+ {
+  "Locale Code": "asa-TZ",
+  "Flag-File": "tz.country.svg"
+ },
+ {
+  "Locale Code": "az-Cyrl-AZ",
+  "Flag-File": "az.svg"
+ },
+ {
+  "Locale Code": "az-Latn-AZ",
+  "Flag-File": "az.svg"
+ },
+ {
+  "Locale Code": "ksf-CM",
+  "Flag-File": "cm.country.svg"
+ },
+ {
+  "Locale Code": "bm-Latn-ML",
+  "Flag-File": "ml.country.svg"
+ },
+ {
+  "Locale Code": "bn-BD",
+  "Flag-File": "bn.svg"
+ },
+ {
+  "Locale Code": "bn-IN",
+  "Flag-File": "bn.svg"
+ },
+ {
+  "Locale Code": "bas-CM",
+  "Flag-File": "cm.country.svg"
+ },
+ {
+  "Locale Code": "ba-RU",
+  "Flag-File": "ru.svg"
+ },
+ {
+  "Locale Code": "eu-ES",
+  "Flag-File": "eu.svg"
+ },
+ {
+  "Locale Code": "be-BY",
+  "Flag-File": "by.country.svg"
+ },
+ {
+  "Locale Code": "bem-ZM",
+  "Flag-File": "zm.country.svg"
+ },
+ {
+  "Locale Code": "bez-TZ",
+  "Flag-File": "tz.country.svg"
+ },
+ {
+  "Locale Code": "byn-ER",
+  "Flag-File": "er.country.svg"
+ },
+ {
+  "Locale Code": "brx-IN",
+  "Flag-File": "in.country.svg"
+ },
+ {
+  "Locale Code": "bs-Cyrl-BA",
+  "Flag-File": "bs.svg"
+ },
+ {
+  "Locale Code": "bs-Latn-BA",
+  "Flag-File": "bs.svg"
+ },
+ {
+  "Locale Code": "br-FR",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "bg-BG",
+  "Flag-File": "bg.svg"
+ },
+ {
+  "Locale Code": "my-MM",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "ca-AD",
+  "Flag-File": "ad.country.svg"
+ },
+ {
+  "Locale Code": "ca-FR",
+  "Flag-File": "ca.svg"
+ },
+ {
+  "Locale Code": "ca-IT",
+  "Flag-File": "ca.svg"
+ },
+ {
+  "Locale Code": "ca-ES",
+  "Flag-File": "ca.svg"
+ },
+ {
+  "Locale Code": "ceb-Latn-PH",
+  "Flag-File": "ph.country.svg"
+ },
+ {
+  "Locale Code": "tzm-MA",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "ku-Arab-IQ",
+  "Flag-File": "ku.svg"
+ },
+ {
+  "Locale Code": "ccp-Cakm",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "ccp-IN",
+  "Flag-File": "in.country.svg"
+ },
+ {
+  "Locale Code": "cd-RU",
+  "Flag-File": "ru.svg"
+ },
+ {
+  "Locale Code": "chr-Cher-US",
+  "Flag-File": "us.country.svg"
+ },
+ {
+  "Locale Code": "cgg-UG",
+  "Flag-File": "ug.country.svg"
+ },
+ {
+  "Locale Code": "zh-CN",
+  "Flag-File": "zh-hans.svg"
+ },
+ {
+  "Locale Code": "zh-SG",
+  "Flag-File": "sg.country.svg"
+ },
+ {
+  "Locale Code": "zh-HK",
+  "Flag-File": "hk.country.svg"
+ },
+ {
+  "Locale Code": "zh-MO",
+  "Flag-File": "zh-hant.svg"
+ },
+ {
+  "Locale Code": "zh-TW",
+  "Flag-File": "tw.country.svg"
+ },
+ {
+  "Locale Code": "cu-RU",
+  "Flag-File": "ru.svg"
+ },
+ {
+  "Locale Code": "swc-CD",
+  "Flag-File": "cg.country.svg"
+ },
+ {
+  "Locale Code": "kw-GB",
+  "Flag-File": "gb.country.svg"
+ },
+ {
+  "Locale Code": "co-FR",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "hr-HR",
+  "Flag-File": "hr.svg"
+ },
+ {
+  "Locale Code": "hr-BA",
+  "Flag-File": "hr.svg"
+ },
+ {
+  "Locale Code": "cs-CZ",
+  "Flag-File": "cs.svg"
+ },
+ {
+  "Locale Code": "da-DK",
+  "Flag-File": "da.svg"
+ },
+ {
+  "Locale Code": "da-GL",
+  "Flag-File": "da.svg"
+ },
+ {
+  "Locale Code": "prs-AF",
+  "Flag-File": "af.country.svg"
+ },
+ {
+  "Locale Code": "dv-MV",
+  "Flag-File": "mv.country.svg"
+ },
+ {
+  "Locale Code": "dua-CM",
+  "Flag-File": "cm.country.svg"
+ },
+ {
+  "Locale Code": "nl-AW",
+  "Flag-File": "aw.country.svg"
+ },
+ {
+  "Locale Code": "nl-BE",
+  "Flag-File": "nl.svg"
+ },
+ {
+  "Locale Code": "nl-BQ",
+  "Flag-File": "nl.svg"
+ },
+ {
+  "Locale Code": "nl-CW",
+  "Flag-File": "nl.svg"
+ },
+ {
+  "Locale Code": "nl-NL",
+  "Flag-File": "nl.svg"
+ },
+ {
+  "Locale Code": "nl-SX",
+  "Flag-File": "nl.svg"
+ },
+ {
+  "Locale Code": "nl-SR",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "dz-BT",
+  "Flag-File": "bt.country.svg"
+ },
+ {
+  "Locale Code": "ebu-KE",
+  "Flag-File": "ke.country.svg"
+ },
+ {
+  "Locale Code": "en-AS",
+  "Flag-File": "as.country.svg"
+ },
+ {
+  "Locale Code": "en-AI",
+  "Flag-File": "ai.country.svg"
+ },
+ {
+  "Locale Code": "en-AG",
+  "Flag-File": "ag.country.svg"
+ },
+ {
+  "Locale Code": "en-AU",
+  "Flag-File": "au.country.svg"
+ },
+ {
+  "Locale Code": "en-AT",
+  "Flag-File": "at.country.svg"
+ },
+ {
+  "Locale Code": "en-BS",
+  "Flag-File": "bs.country.svg"
+ },
+ {
+  "Locale Code": "en-BB",
+  "Flag-File": "bb.country.svg"
+ },
+ {
+  "Locale Code": "en-BE",
+  "Flag-File": "be.country.svg"
+ },
+ {
+  "Locale Code": "en-BZ",
+  "Flag-File": "bz.country.svg"
+ },
+ {
+  "Locale Code": "en-BM",
+  "Flag-File": "bm.country.svg"
+ },
+ {
+  "Locale Code": "en-BW",
+  "Flag-File": "bw.country.svg"
+ },
+ {
+  "Locale Code": "en-IO",
+  "Flag-File": "io.country.svg"
+ },
+ {
+  "Locale Code": "en-VG",
+  "Flag-File": "vg.country.svg"
+ },
+ {
+  "Locale Code": "en-BI",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-CM",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-CA",
+  "Flag-File": "ca.country.svg"
+ },
+ {
+  "Locale Code": "en-029",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "en-KY",
+  "Flag-File": "ky.country.svg"
+ },
+ {
+  "Locale Code": "en-CX",
+  "Flag-File": "cx.country.svg"
+ },
+ {
+  "Locale Code": "en-CC",
+  "Flag-File": "cc.country.svg"
+ },
+ {
+  "Locale Code": "en-CK",
+  "Flag-File": "ck.country.svg"
+ },
+ {
+  "Locale Code": "en-CY",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-DK",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-DM",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-ER",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-150",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-FK",
+  "Flag-File": "fk.country.svg"
+ },
+ {
+  "Locale Code": "en-FI",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-FJ",
+  "Flag-File": "fj.country.svg"
+ },
+ {
+  "Locale Code": "en-GM",
+  "Flag-File": "gm.country.svg"
+ },
+ {
+  "Locale Code": "en-DE",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-GH",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-GI",
+  "Flag-File": "gi.country.svg"
+ },
+ {
+  "Locale Code": "en-GD",
+  "Flag-File": "gd.country.svg"
+ },
+ {
+  "Locale Code": "en-GU",
+  "Flag-File": "gu.country.svg"
+ },
+ {
+  "Locale Code": "en-GG",
+  "Flag-File": "gg.country.svg"
+ },
+ {
+  "Locale Code": "en-GY",
+  "Flag-File": "gy.country.svg"
+ },
+ {
+  "Locale Code": "en-HK",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-IN",
+  "Flag-File": "in.country.svg"
+ },
+ {
+  "Locale Code": "en-IE",
+  "Flag-File": "ie.country.svg"
+ },
+ {
+  "Locale Code": "en-IM",
+  "Flag-File": "im.country.svg"
+ },
+ {
+  "Locale Code": "en-IL",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-JM",
+  "Flag-File": "jm.country.svg"
+ },
+ {
+  "Locale Code": "en-JE",
+  "Flag-File": "je.country.svg"
+ },
+ {
+  "Locale Code": "en-KE",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-KI",
+  "Flag-File": "ki.country.svg"
+ },
+ {
+  "Locale Code": "en-LS",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-LR",
+  "Flag-File": "lr.country.svg"
+ },
+ {
+  "Locale Code": "en-MO",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-MG",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-MW",
+  "Flag-File": "mw.country.svg"
+ },
+ {
+  "Locale Code": "en-MY",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-MT",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-MH",
+  "Flag-File": "mh.country.svg"
+ },
+ {
+  "Locale Code": "en-MU",
+  "Flag-File": "us.country.svg"
+ },
+ {
+  "Locale Code": "en-FM",
+  "Flag-File": "fm.country.svg"
+ },
+ {
+  "Locale Code": "en-MS",
+  "Flag-File": "ms.country.svg"
+ },
+ {
+  "Locale Code": "en-NA",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-NR",
+  "Flag-File": "nr.country.svg"
+ },
+ {
+  "Locale Code": "en-NL",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-NZ",
+  "Flag-File": "nz.country.svg"
+ },
+ {
+  "Locale Code": "en-NG",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-NU",
+  "Flag-File": "nu.country.svg"
+ },
+ {
+  "Locale Code": "en-NF",
+  "Flag-File": "nf.country.svg"
+ },
+ {
+  "Locale Code": "en-MP",
+  "Flag-File": "mp.country.svg"
+ },
+ {
+  "Locale Code": "en-PK",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-PW",
+  "Flag-File": "pw.country.svg"
+ },
+ {
+  "Locale Code": "en-PG",
+  "Flag-File": "pg.country.svg"
+ },
+ {
+  "Locale Code": "en-PN",
+  "Flag-File": "pn.country.svg"
+ },
+ {
+  "Locale Code": "en-PR",
+  "Flag-File": "us.country.svg"
+ },
+ {
+  "Locale Code": "en-PH",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-RW",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-KN",
+  "Flag-File": "kn.country.svg"
+ },
+ {
+  "Locale Code": "en-LC",
+  "Flag-File": "lc.country.svg"
+ },
+ {
+  "Locale Code": "en-VC",
+  "Flag-File": "vc.country.svg"
+ },
+ {
+  "Locale Code": "en-WS",
+  "Flag-File": "ws.country.svg"
+ },
+ {
+  "Locale Code": "en-SC",
+  "Flag-File": "sc.country.svg"
+ },
+ {
+  "Locale Code": "en-SL",
+  "Flag-File": "sl.country.svg"
+ },
+ {
+  "Locale Code": "en-SG",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-SX",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-SI",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-SB",
+  "Flag-File": "sb.country.svg"
+ },
+ {
+  "Locale Code": "en-ZA",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-SS",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-SH",
+  "Flag-File": "sh.country.svg"
+ },
+ {
+  "Locale Code": "en-SD",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-SZ",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-SE",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-CH",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-TZ",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-TK",
+  "Flag-File": "tk.country.svg"
+ },
+ {
+  "Locale Code": "en-TO",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-TT",
+  "Flag-File": "tt.country.svg"
+ },
+ {
+  "Locale Code": "en-TC",
+  "Flag-File": "tc.country.svg"
+ },
+ {
+  "Locale Code": "en-TV",
+  "Flag-File": "tv.country.svg"
+ },
+ {
+  "Locale Code": "en-UG",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-AE",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-GB",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-US",
+  "Flag-File": "us.country.svg"
+ },
+ {
+  "Locale Code": "en-UM",
+  "Flag-File": "um.country.svg"
+ },
+ {
+  "Locale Code": "en-VI",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "en-VU",
+  "Flag-File": "vu.country.svg"
+ },
+ {
+  "Locale Code": "en-001",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-ZM",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "en-ZW",
+  "Flag-File": "en.svg"
+ },
+ {
+  "Locale Code": "eo-001",
+  "Flag-File": "eo.svg"
+ },
+ {
+  "Locale Code": "et-EE",
+  "Flag-File": "et.svg"
+ },
+ {
+  "Locale Code": "ee-GH",
+  "Flag-File": "gh.country.svg"
+ },
+ {
+  "Locale Code": "ee-TG",
+  "Flag-File": "tg.country.svg"
+ },
+ {
+  "Locale Code": "ewo-CM",
+  "Flag-File": "cm.country.svg"
+ },
+ {
+  "Locale Code": "fo-DK",
+  "Flag-File": "nl.svg"
+ },
+ {
+  "Locale Code": "fo-FO",
+  "Flag-File": "fo.country.svg"
+ },
+ {
+  "Locale Code": "fil-PH",
+  "Flag-File": "ph.country.svg"
+ },
+ {
+  "Locale Code": "fi-FI",
+  "Flag-File": "fi.svg"
+ },
+ {
+  "Locale Code": "fr-DZ",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-BE",
+  "Flag-File": "be.country.svg"
+ },
+ {
+  "Locale Code": "fr-BJ",
+  "Flag-File": "bj.country.svg"
+ },
+ {
+  "Locale Code": "fr-BF",
+  "Flag-File": "bf.country.svg"
+ },
+ {
+  "Locale Code": "fr-BI",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-CM",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-CA",
+  "Flag-File": "ca.country.svg"
+ },
+ {
+  "Locale Code": "fr-CF",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-TD",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-KM",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-CG",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-CD",
+  "Flag-File": "cg.country.svg"
+ },
+ {
+  "Locale Code": "fr-CI",
+  "Flag-File": "ci.country.svg"
+ },
+ {
+  "Locale Code": "fr-DJ",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-GQ",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-FR",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-GF",
+  "Flag-File": "gf.country.svg"
+ },
+ {
+  "Locale Code": "fr-PF",
+  "Flag-File": "pf.country.svg"
+ },
+ {
+  "Locale Code": "fr-GA",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-GP",
+  "Flag-File": "gp.country.svg"
+ },
+ {
+  "Locale Code": "fr-GN",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-HT",
+  "Flag-File": "ht.country.svg"
+ },
+ {
+  "Locale Code": "fr-LU",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-MG",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-ML",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-MQ",
+  "Flag-File": "mq.country.svg"
+ },
+ {
+  "Locale Code": "fr-MR",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-MU",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-YT",
+  "Flag-File": "yt.country.svg"
+ },
+ {
+  "Locale Code": "fr-MA",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-NC",
+  "Flag-File": "nc.country.svg"
+ },
+ {
+  "Locale Code": "fr-NE",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-MC",
+  "Flag-File": "mc.country.svg"
+ },
+ {
+  "Locale Code": "fr-RE",
+  "Flag-File": "re.country.svg"
+ },
+ {
+  "Locale Code": "fr-RW",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-BL",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-MF",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-PM",
+  "Flag-File": "pm.country.svg"
+ },
+ {
+  "Locale Code": "fr-SN",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-SC",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-CH",
+  "Flag-File": "ch.country.svg"
+ },
+ {
+  "Locale Code": "fr-SY",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-TG",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-TN",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-VU",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "fr-WF",
+  "Flag-File": "wf.country.svg"
+ },
+ {
+  "Locale Code": "fy-NL",
+  "Flag-File": "nl.svg"
+ },
+ {
+  "Locale Code": "fur-IT",
+  "Flag-File": "it.svg"
+ },
+ {
+  "Locale Code": "ff-Latn-BF",
+  "Flag-File": "bf.country.svg"
+ },
+ {
+  "Locale Code": "ff-CM",
+  "Flag-File": "cm.country.svg"
+ },
+ {
+  "Locale Code": "ff-Latn-CM",
+  "Flag-File": "cm.country.svg"
+ },
+ {
+  "Locale Code": "ff-Latn-GM",
+  "Flag-File": "gm.country.svg"
+ },
+ {
+  "Locale Code": "ff-Latn-GH",
+  "Flag-File": "gh.country.svg"
+ },
+ {
+  "Locale Code": "ff-GN",
+  "Flag-File": "gn.country.svg"
+ },
+ {
+  "Locale Code": "ff-Latn-GN",
+  "Flag-File": "gn.country.svg"
+ },
+ {
+  "Locale Code": "ff-Latn-GW",
+  "Flag-File": "gw.country.svg"
+ },
+ {
+  "Locale Code": "ff-Latn-LR",
+  "Flag-File": "lr.country.svg"
+ },
+ {
+  "Locale Code": "ff-MR",
+  "Flag-File": "mr.country.svg"
+ },
+ {
+  "Locale Code": "ff-Latn-MR",
+  "Flag-File": "mr.country.svg"
+ },
+ {
+  "Locale Code": "ff-Latn-NE",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "ff-NG",
+  "Flag-File": "ng.country.svg"
+ },
+ {
+  "Locale Code": "ff-Latn-NG",
+  "Flag-File": "ng.country.svg"
+ },
+ {
+  "Locale Code": "ff-Latn-SN",
+  "Flag-File": "sn.country.svg"
+ },
+ {
+  "Locale Code": "ff-Latn-SL",
+  "Flag-File": "sl.country.svg"
+ },
+ {
+  "Locale Code": "gl-ES",
+  "Flag-File": "gl.svg"
+ },
+ {
+  "Locale Code": "lg-UG",
+  "Flag-File": "ug.country.svg"
+ },
+ {
+  "Locale Code": "ka-GE",
+  "Flag-File": "ge.country.svg"
+ },
+ {
+  "Locale Code": "de-AT",
+  "Flag-File": "at.country.svg"
+ },
+ {
+  "Locale Code": "de-BE",
+  "Flag-File": "be.country.svg"
+ },
+ {
+  "Locale Code": "de-DE",
+  "Flag-File": "de.svg"
+ },
+ {
+  "Locale Code": "de-IT",
+  "Flag-File": "de.svg"
+ },
+ {
+  "Locale Code": "de-LI",
+  "Flag-File": "li.country.svg"
+ },
+ {
+  "Locale Code": "de-LU",
+  "Flag-File": "de.svg"
+ },
+ {
+  "Locale Code": "de-CH",
+  "Flag-File": "ch.country.svg"
+ },
+ {
+  "Locale Code": "el-CY",
+  "Flag-File": "el.svg"
+ },
+ {
+  "Locale Code": "el-GR",
+  "Flag-File": "el.svg"
+ },
+ {
+  "Locale Code": "kl-GL",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "gn-PY",
+  "Flag-File": "py.country.svg"
+ },
+ {
+  "Locale Code": "gu-IN",
+  "Flag-File": "in.country.svg"
+ },
+ {
+  "Locale Code": "guz-KE",
+  "Flag-File": "ke.country.svg"
+ },
+ {
+  "Locale Code": "ha-Latn-GH",
+  "Flag-File": "gh.country.svg"
+ },
+ {
+  "Locale Code": "ha-Latn-NE",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "ha-Latn-NG",
+  "Flag-File": "ng.country.svg"
+ },
+ {
+  "Locale Code": "haw-US",
+  "Flag-File": "us.country.svg"
+ },
+ {
+  "Locale Code": "he-IL",
+  "Flag-File": "he.svg"
+ },
+ {
+  "Locale Code": "hi-IN",
+  "Flag-File": "hi.svg"
+ },
+ {
+  "Locale Code": "hu-HU",
+  "Flag-File": "hu.svg"
+ },
+ {
+  "Locale Code": "is-IS",
+  "Flag-File": "is.svg"
+ },
+ {
+  "Locale Code": "ig-NG",
+  "Flag-File": "ng.country.svg"
+ },
+ {
+  "Locale Code": "id-ID",
+  "Flag-File": "id.svg"
+ },
+ {
+  "Locale Code": "ia-FR",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "ia-001",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "iu-Latn-CA",
+  "Flag-File": "ca.country.svg"
+ },
+ {
+  "Locale Code": "iu-Cans-CA",
+  "Flag-File": "ca.country.svg"
+ },
+ {
+  "Locale Code": "ga-IE",
+  "Flag-File": "ga.svg"
+ },
+ {
+  "Locale Code": "it-IT",
+  "Flag-File": "it.svg"
+ },
+ {
+  "Locale Code": "it-SM",
+  "Flag-File": "sm.country.svg"
+ },
+ {
+  "Locale Code": "it-CH",
+  "Flag-File": "ch.country.svg"
+ },
+ {
+  "Locale Code": "it-VA",
+  "Flag-File": "va.country.svg"
+ },
+ {
+  "Locale Code": "ja-JP",
+  "Flag-File": "ja.svg"
+ },
+ {
+  "Locale Code": "jv-Latn",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "jv-Latn-ID",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "dyo-SN",
+  "Flag-File": "sn.country.svg"
+ },
+ {
+  "Locale Code": "kea-CV",
+  "Flag-File": "cv.country.svg"
+ },
+ {
+  "Locale Code": "kab-DZ",
+  "Flag-File": "dz.country.svg"
+ },
+ {
+  "Locale Code": "kkj-CM",
+  "Flag-File": "cm.country.svg"
+ },
+ {
+  "Locale Code": "kln-KE",
+  "Flag-File": "ke.country.svg"
+ },
+ {
+  "Locale Code": "kam-KE",
+  "Flag-File": "ke.country.svg"
+ },
+ {
+  "Locale Code": "kn-IN",
+  "Flag-File": "in.country.svg"
+ },
+ {
+  "Locale Code": "ks-Arab",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "ks-Arab-IN",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "kk-KZ",
+  "Flag-File": "kz.country.svg"
+ },
+ {
+  "Locale Code": "km-KH",
+  "Flag-File": "kh.country.svg"
+ },
+ {
+  "Locale Code": "quc-Latn-GT",
+  "Flag-File": "gt.country.svg"
+ },
+ {
+  "Locale Code": "ki-KE",
+  "Flag-File": "ke.country.svg"
+ },
+ {
+  "Locale Code": "rw-RW",
+  "Flag-File": "rw.svg"
+ },
+ {
+  "Locale Code": "sw-KE",
+  "Flag-File": "ke.country.svg"
+ },
+ {
+  "Locale Code": "sw-TZ",
+  "Flag-File": "tz.country.svg"
+ },
+ {
+  "Locale Code": "sw-UG",
+  "Flag-File": "ug.country.svg"
+ },
+ {
+  "Locale Code": "kok-IN",
+  "Flag-File": "in.country.svg"
+ },
+ {
+  "Locale Code": "ko-KR",
+  "Flag-File": "ko.svg"
+ },
+ {
+  "Locale Code": "ko-KP",
+  "Flag-File": "kp.country.svg"
+ },
+ {
+  "Locale Code": "khq-ML",
+  "Flag-File": "ml.country.svg"
+ },
+ {
+  "Locale Code": "ses-ML",
+  "Flag-File": "ml.country.svg"
+ },
+ {
+  "Locale Code": "nmg-CM",
+  "Flag-File": "cm.country.svg"
+ },
+ {
+  "Locale Code": "ky-KG",
+  "Flag-File": "kg.country.svg"
+ },
+ {
+  "Locale Code": "ku-Arab-IR",
+  "Flag-File": "ku.svg"
+ },
+ {
+  "Locale Code": "lkt-US",
+  "Flag-File": "us.country.svg"
+ },
+ {
+  "Locale Code": "lag-TZ",
+  "Flag-File": "tz.country.svg"
+ },
+ {
+  "Locale Code": "lo-LA",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "lv-LV",
+  "Flag-File": "lv.svg"
+ },
+ {
+  "Locale Code": "ln-AO",
+  "Flag-File": "ao.country.svg"
+ },
+ {
+  "Locale Code": "ln-CF",
+  "Flag-File": "cf.country.svg"
+ },
+ {
+  "Locale Code": "ln-CG",
+  "Flag-File": "cg.country.svg"
+ },
+ {
+  "Locale Code": "ln-CD",
+  "Flag-File": "cg.country.svg"
+ },
+ {
+  "Locale Code": "lt-LT",
+  "Flag-File": "lt.svg"
+ },
+ {
+  "Locale Code": "nds-DE",
+  "Flag-File": "de.svg"
+ },
+ {
+  "Locale Code": "nds-NL",
+  "Flag-File": "nl.svg"
+ },
+ {
+  "Locale Code": "dsb-DE",
+  "Flag-File": "de.svg"
+ },
+ {
+  "Locale Code": "lu-CD",
+  "Flag-File": "cg.country.svg"
+ },
+ {
+  "Locale Code": "luo-KE",
+  "Flag-File": "ke.country.svg"
+ },
+ {
+  "Locale Code": "lb-LU",
+  "Flag-File": "lu.country.svg"
+ },
+ {
+  "Locale Code": "luy-KE",
+  "Flag-File": "ke.country.svg"
+ },
+ {
+  "Locale Code": "mk-MK",
+  "Flag-File": "mk.svg"
+ },
+ {
+  "Locale Code": "jmc-TZ",
+  "Flag-File": "tz.country.svg"
+ },
+ {
+  "Locale Code": "mgh-MZ",
+  "Flag-File": "mz.country.svg"
+ },
+ {
+  "Locale Code": "kde-TZ",
+  "Flag-File": "tz.country.svg"
+ },
+ {
+  "Locale Code": "mg-MG",
+  "Flag-File": "mg.country.svg"
+ },
+ {
+  "Locale Code": "ms-BN",
+  "Flag-File": "ms.svg"
+ },
+ {
+  "Locale Code": "ms-MY",
+  "Flag-File": "ms.svg"
+ },
+ {
+  "Locale Code": "ml-IN",
+  "Flag-File": "in.country.svg"
+ },
+ {
+  "Locale Code": "mt-MT",
+  "Flag-File": "mt.svg"
+ },
+ {
+  "Locale Code": "gv-IM",
+  "Flag-File": "im.country.svg"
+ },
+ {
+  "Locale Code": "mi-NZ",
+  "Flag-File": "nz.country.svg"
+ },
+ {
+  "Locale Code": "arn-CL",
+  "Flag-File": "cl.country.svg"
+ },
+ {
+  "Locale Code": "mr-IN",
+  "Flag-File": "in.country.svg"
+ },
+ {
+  "Locale Code": "mas-KE",
+  "Flag-File": "ke.country.svg"
+ },
+ {
+  "Locale Code": "mas-TZ",
+  "Flag-File": "tz.country.svg"
+ },
+ {
+  "Locale Code": "mzn-IR",
+  "Flag-File": "ir.country.svg"
+ },
+ {
+  "Locale Code": "mer-KE",
+  "Flag-File": "ke.country.svg"
+ },
+ {
+  "Locale Code": "mgo-CM",
+  "Flag-File": "cm.country.svg"
+ },
+ {
+  "Locale Code": "moh-CA",
+  "Flag-File": "ca.country.svg"
+ },
+ {
+  "Locale Code": "mn-MN",
+  "Flag-File": "mn.svg"
+ },
+ {
+  "Locale Code": "mn-Mong-CN",
+  "Flag-File": "mn.svg"
+ },
+ {
+  "Locale Code": "mn-Mong-MN",
+  "Flag-File": "mn.svg"
+ },
+ {
+  "Locale Code": "mfe-MU",
+  "Flag-File": "mu.country.svg"
+ },
+ {
+  "Locale Code": "mua-CM",
+  "Flag-File": "cm.country.svg"
+ },
+ {
+  "Locale Code": "nqo-GN",
+  "Flag-File": "gn.country.svg"
+ },
+ {
+  "Locale Code": "naq-NA",
+  "Flag-File": "na.country.svg"
+ },
+ {
+  "Locale Code": "ne-IN",
+  "Flag-File": "ne.svg"
+ },
+ {
+  "Locale Code": "ne-NP",
+  "Flag-File": "ne.svg"
+ },
+ {
+  "Locale Code": "nnh-CM",
+  "Flag-File": "cm.country.svg"
+ },
+ {
+  "Locale Code": "jgo-CM",
+  "Flag-File": "cm.country.svg"
+ },
+ {
+  "Locale Code": "lrc-IQ",
+  "Flag-File": "iq.country.svg"
+ },
+ {
+  "Locale Code": "lrc-IR",
+  "Flag-File": "ir.country.svg"
+ },
+ {
+  "Locale Code": "nd-ZW",
+  "Flag-File": "zw.country.svg"
+ },
+ {
+  "Locale Code": "nb-NO",
+  "Flag-File": "no.svg"
+ },
+ {
+  "Locale Code": "nn-NO",
+  "Flag-File": "no.svg"
+ },
+ {
+  "Locale Code": "nb-SJ",
+  "Flag-File": "sj.country.svg"
+ },
+ {
+  "Locale Code": "nus-SD",
+  "Flag-File": "sd.country.svg"
+ },
+ {
+  "Locale Code": "nus-SS",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "nyn-UG",
+  "Flag-File": "ug.country.svg"
+ },
+ {
+  "Locale Code": "oc-FR",
+  "Flag-File": "fr.svg"
+ },
+ {
+  "Locale Code": "or-IN",
+  "Flag-File": "in.country.svg"
+ },
+ {
+  "Locale Code": "om-ET",
+  "Flag-File": "et.country.svg"
+ },
+ {
+  "Locale Code": "om-KE",
+  "Flag-File": "ke.country.svg"
+ },
+ {
+  "Locale Code": "os-GE",
+  "Flag-File": "ge.country.svg"
+ },
+ {
+  "Locale Code": "os-RU",
+  "Flag-File": "ru.svg"
+ },
+ {
+  "Locale Code": "ps-AF",
+  "Flag-File": "af.country.svg"
+ },
+ {
+  "Locale Code": "ps-PK",
+  "Flag-File": "pk.country.svg"
+ },
+ {
+  "Locale Code": "fa-AF",
+  "Flag-File": "fa.svg"
+ },
+ {
+  "Locale Code": "fa-IR",
+  "Flag-File": "fa.svg"
+ },
+ {
+  "Locale Code": "pl-PL",
+  "Flag-File": "pt.svg"
+ },
+ {
+  "Locale Code": "pt-AO",
+  "Flag-File": "pt.svg"
+ },
+ {
+  "Locale Code": "pt-BR",
+  "Flag-File": "pt.svg"
+ },
+ {
+  "Locale Code": "pt-CV",
+  "Flag-File": "cv.country.svg"
+ },
+ {
+  "Locale Code": "pt-GQ",
+  "Flag-File": "pt.svg"
+ },
+ {
+  "Locale Code": "pt-GW",
+  "Flag-File": "pt.svg"
+ },
+ {
+  "Locale Code": "pt-LU",
+  "Flag-File": "pt.svg"
+ },
+ {
+  "Locale Code": "pt-MO",
+  "Flag-File": "pt.svg"
+ },
+ {
+  "Locale Code": "pt-MZ",
+  "Flag-File": "pt.svg"
+ },
+ {
+  "Locale Code": "pt-PT",
+  "Flag-File": "pt.svg"
+ },
+ {
+  "Locale Code": "pt-ST",
+  "Flag-File": "st.country.svg"
+ },
+ {
+  "Locale Code": "pt-CH",
+  "Flag-File": "pt.svg"
+ },
+ {
+  "Locale Code": "pt-TL",
+  "Flag-File": "tl.country.svg"
+ },
+ {
+  "Locale Code": "qps-ploca",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "qps-ploc",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "qps-plocm",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "pa-IN",
+  "Flag-File": "pa.svg"
+ },
+ {
+  "Locale Code": "pa-Arab-PK",
+  "Flag-File": "pa.svg"
+ },
+ {
+  "Locale Code": "quz-BO",
+  "Flag-File": "qu.svg"
+ },
+ {
+  "Locale Code": "quz-EC",
+  "Flag-File": "qu.svg"
+ },
+ {
+  "Locale Code": "quz-PE",
+  "Flag-File": "qu.svg"
+ },
+ {
+  "Locale Code": "ksh-DE",
+  "Flag-File": "de.svg"
+ },
+ {
+  "Locale Code": "ro-MD",
+  "Flag-File": "md.country.svg"
+ },
+ {
+  "Locale Code": "ro-RO",
+  "Flag-File": "ro.svg"
+ },
+ {
+  "Locale Code": "rm-CH",
+  "Flag-File": "ch.country.svg"
+ },
+ {
+  "Locale Code": "rof-TZ",
+  "Flag-File": "tz.country.svg"
+ },
+ {
+  "Locale Code": "rn-BI",
+  "Flag-File": "bi.country.svg"
+ },
+ {
+  "Locale Code": "ru-BY",
+  "Flag-File": "ru.svg"
+ },
+ {
+  "Locale Code": "ru-KZ",
+  "Flag-File": "ru.svg"
+ },
+ {
+  "Locale Code": "ru-KG",
+  "Flag-File": "ru.svg"
+ },
+ {
+  "Locale Code": "ru-MD",
+  "Flag-File": "ru.svg"
+ },
+ {
+  "Locale Code": "ru-RU",
+  "Flag-File": "ru.svg"
+ },
+ {
+  "Locale Code": "ru-UA",
+  "Flag-File": "uk.svg"
+ },
+ {
+  "Locale Code": "rwk-TZ",
+  "Flag-File": "tz.country.svg"
+ },
+ {
+  "Locale Code": "ssy-ER",
+  "Flag-File": "er.country.svg"
+ },
+ {
+  "Locale Code": "sah-RU",
+  "Flag-File": "ru.svg"
+ },
+ {
+  "Locale Code": "saq-KE",
+  "Flag-File": "ke.country.svg"
+ },
+ {
+  "Locale Code": "smn-FI",
+  "Flag-File": "fi.svg"
+ },
+ {
+  "Locale Code": "smj-NO",
+  "Flag-File": "no.svg"
+ },
+ {
+  "Locale Code": "smj-SE",
+  "Flag-File": "sv.svg"
+ },
+ {
+  "Locale Code": "se-FI",
+  "Flag-File": "fi.svg"
+ },
+ {
+  "Locale Code": "se-NO",
+  "Flag-File": "no.svg"
+ },
+ {
+  "Locale Code": "se-SE",
+  "Flag-File": "sv.svg"
+ },
+ {
+  "Locale Code": "sms-FI",
+  "Flag-File": "fi.svg"
+ },
+ {
+  "Locale Code": "sma-NO",
+  "Flag-File": "no.svg"
+ },
+ {
+  "Locale Code": "sma-SE",
+  "Flag-File": "sv.svg"
+ },
+ {
+  "Locale Code": "sg-CF",
+  "Flag-File": "cf.country.svg"
+ },
+ {
+  "Locale Code": "sbp-TZ",
+  "Flag-File": "tz.country.svg"
+ },
+ {
+  "Locale Code": "sa-IN",
+  "Flag-File": "in.country.svg"
+ },
+ {
+  "Locale Code": "gd-GB",
+  "Flag-File": "gb.country.svg"
+ },
+ {
+  "Locale Code": "seh-MZ",
+  "Flag-File": "mz.country.svg"
+ },
+ {
+  "Locale Code": "sr-Cyrl-BA",
+  "Flag-File": "sr.svg"
+ },
+ {
+  "Locale Code": "sr-Cyrl-ME",
+  "Flag-File": "me.country.svg"
+ },
+ {
+  "Locale Code": "sr-Cyrl-RS",
+  "Flag-File": "sr.svg"
+ },
+ {
+  "Locale Code": "sr-Cyrl-CS",
+  "Flag-File": "sr.svg"
+ },
+ {
+  "Locale Code": "sr-Latn-BA",
+  "Flag-File": "sr.svg"
+ },
+ {
+  "Locale Code": "sr-Latn-ME",
+  "Flag-File": "me.country.svg"
+ },
+ {
+  "Locale Code": "sr-Latn-RS",
+  "Flag-File": "sr.svg"
+ },
+ {
+  "Locale Code": "sr-Latn-CS",
+  "Flag-File": "sr.svg"
+ },
+ {
+  "Locale Code": "nso-ZA",
+  "Flag-File": "za.country.svg"
+ },
+ {
+  "Locale Code": "tn-BW",
+  "Flag-File": "bw.country.svg"
+ },
+ {
+  "Locale Code": "tn-ZA",
+  "Flag-File": "za.country.svg"
+ },
+ {
+  "Locale Code": "ksb-TZ",
+  "Flag-File": "tz.country.svg"
+ },
+ {
+  "Locale Code": "sn-Latn",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "sn-Latn-ZW",
+  "Flag-File": "zw.country.svg"
+ },
+ {
+  "Locale Code": "sd-Arab-PK",
+  "Flag-File": "pk.country.svg"
+ },
+ {
+  "Locale Code": "si-LK",
+  "Flag-File": "lk.country.svg"
+ },
+ {
+  "Locale Code": "sk-SK",
+  "Flag-File": "sk.svg"
+ },
+ {
+  "Locale Code": "sl-SI",
+  "Flag-File": "sl.svg"
+ },
+ {
+  "Locale Code": "xog-UG",
+  "Flag-File": "ug.country.svg"
+ },
+ {
+  "Locale Code": "so-DJ",
+  "Flag-File": "so.svg"
+ },
+ {
+  "Locale Code": "so-ET",
+  "Flag-File": "so.svg"
+ },
+ {
+  "Locale Code": "so-KE",
+  "Flag-File": "so.svg"
+ },
+ {
+  "Locale Code": "so-SO",
+  "Flag-File": "so.svg"
+ },
+ {
+  "Locale Code": "st-ZA",
+  "Flag-File": "za.country.svg"
+ },
+ {
+  "Locale Code": "nr-ZA",
+  "Flag-File": "za.country.svg"
+ },
+ {
+  "Locale Code": "st-LS",
+  "Flag-File": "ls.country.svg"
+ },
+ {
+  "Locale Code": "es-AR",
+  "Flag-File": "ar.country.svg"
+ },
+ {
+  "Locale Code": "es-BZ",
+  "Flag-File": "bz.country.svg"
+ },
+ {
+  "Locale Code": "es-VE",
+  "Flag-File": "ve.country.svg"
+ },
+ {
+  "Locale Code": "es-BO",
+  "Flag-File": "bo.country.svg"
+ },
+ {
+  "Locale Code": "es-BR",
+  "Flag-File": "es.svg"
+ },
+ {
+  "Locale Code": "es-CL",
+  "Flag-File": "cl.country.svg"
+ },
+ {
+  "Locale Code": "es-CO",
+  "Flag-File": "co.country.svg"
+ },
+ {
+  "Locale Code": "es-CR",
+  "Flag-File": "cr.country.svg"
+ },
+ {
+  "Locale Code": "es-CU",
+  "Flag-File": "cu.country.svg"
+ },
+ {
+  "Locale Code": "es-DO",
+  "Flag-File": "do.country.svg"
+ },
+ {
+  "Locale Code": "es-EC",
+  "Flag-File": "ec.country.svg"
+ },
+ {
+  "Locale Code": "es-SV",
+  "Flag-File": "es.svg"
+ },
+ {
+  "Locale Code": "es-GQ",
+  "Flag-File": "es.svg"
+ },
+ {
+  "Locale Code": "es-GT",
+  "Flag-File": "gt.country.svg"
+ },
+ {
+  "Locale Code": "es-HN",
+  "Flag-File": "hn.country.svg"
+ },
+ {
+  "Locale Code": "es-419",
+  "Flag-File": "es.svg"
+ },
+ {
+  "Locale Code": "es-MX",
+  "Flag-File": "mx.country.svg"
+ },
+ {
+  "Locale Code": "es-NI",
+  "Flag-File": "ni.country.svg"
+ },
+ {
+  "Locale Code": "es-PA",
+  "Flag-File": "es.svg"
+ },
+ {
+  "Locale Code": "es-PY",
+  "Flag-File": "py.country.svg"
+ },
+ {
+  "Locale Code": "es-PE",
+  "Flag-File": "pe.country.svg"
+ },
+ {
+  "Locale Code": "es-PH",
+  "Flag-File": "es.svg"
+ },
+ {
+  "Locale Code": "es-PR",
+  "Flag-File": "pr.country.svg"
+ },
+ {
+  "Locale Code": "es-ES",
+  "Flag-File": "es.svg"
+ },
+ {
+  "Locale Code": "es-US",
+  "Flag-File": "mx.country.svg"
+ },
+ {
+  "Locale Code": "es-UY",
+  "Flag-File": "uy.country.svg"
+ },
+ {
+  "Locale Code": "zgh-Tfng-MA",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "zgh-Tfng",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "ss-ZA",
+  "Flag-File": "za.country.svg"
+ },
+ {
+  "Locale Code": "ss-SZ",
+  "Flag-File": "sz.country.svg"
+ },
+ {
+  "Locale Code": "sv-AX",
+  "Flag-File": "ax.country.svg"
+ },
+ {
+  "Locale Code": "sv-FI",
+  "Flag-File": "sv.svg"
+ },
+ {
+  "Locale Code": "sv-SE",
+  "Flag-File": "sv.svg"
+ },
+ {
+  "Locale Code": "syr-SY",
+  "Flag-File": "sy.country.svg"
+ },
+ {
+  "Locale Code": "shi-Tfng",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "shi-Tfng-MA",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "shi-Latn-MA",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "dav-KE",
+  "Flag-File": "ke.country.svg"
+ },
+ {
+  "Locale Code": "tg-Cyrl-TJ",
+  "Flag-File": "tj.country.svg"
+ },
+ {
+  "Locale Code": "tzm-Latn-DZ",
+  "Flag-File": "dz.country.svg"
+ },
+ {
+  "Locale Code": "ta-IN",
+  "Flag-File": "ta.svg"
+ },
+ {
+  "Locale Code": "ta-MY",
+  "Flag-File": "ta.svg"
+ },
+ {
+  "Locale Code": "ta-SG",
+  "Flag-File": "ta.svg"
+ },
+ {
+  "Locale Code": "ta-LK",
+  "Flag-File": "ta.svg"
+ },
+ {
+  "Locale Code": "twq-NE",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "tt-RU",
+  "Flag-File": "ru.svg"
+ },
+ {
+  "Locale Code": "te-IN",
+  "Flag-File": "in.country.svg"
+ },
+ {
+  "Locale Code": "teo-KE",
+  "Flag-File": "ke.country.svg"
+ },
+ {
+  "Locale Code": "teo-UG",
+  "Flag-File": "ug.country.svg"
+ },
+ {
+  "Locale Code": "th-TH",
+  "Flag-File": "th.svg"
+ },
+ {
+  "Locale Code": "bo-IN",
+  "Flag-File": "in.country.svg"
+ },
+ {
+  "Locale Code": "bo-CN",
+  "Flag-File": "zh.svg"
+ },
+ {
+  "Locale Code": "tig-ER",
+  "Flag-File": "er.country.svg"
+ },
+ {
+  "Locale Code": "ti-ER",
+  "Flag-File": "er.country.svg"
+ },
+ {
+  "Locale Code": "ti-ET",
+  "Flag-File": "et.country.svg"
+ },
+ {
+  "Locale Code": "to-TO",
+  "Flag-File": "to.svg"
+ },
+ {
+  "Locale Code": "ts-ZA",
+  "Flag-File": "za.country.svg"
+ },
+ {
+  "Locale Code": "tr-CY",
+  "Flag-File": "tr.svg"
+ },
+ {
+  "Locale Code": "tr-TR",
+  "Flag-File": "tr.svg"
+ },
+ {
+  "Locale Code": "tk-TM",
+  "Flag-File": "tm.country.svg"
+ },
+ {
+  "Locale Code": "uk-UA",
+  "Flag-File": "uk.svg"
+ },
+ {
+  "Locale Code": "hsb-DE",
+  "Flag-File": "de.svg"
+ },
+ {
+  "Locale Code": "ur-IN",
+  "Flag-File": "ur.svg"
+ },
+ {
+  "Locale Code": "ur-PK",
+  "Flag-File": "ur.svg"
+ },
+ {
+  "Locale Code": "ug-CN",
+  "Flag-File": "zh.svg"
+ },
+ {
+  "Locale Code": "uz-Arab",
+  "Flag-File": "uz.svg"
+ },
+ {
+  "Locale Code": "uz-Arab-AF",
+  "Flag-File": "uz.svg"
+ },
+ {
+  "Locale Code": "uz-Cyrl-UZ",
+  "Flag-File": "uz.svg"
+ },
+ {
+  "Locale Code": "uz-Latn-UZ",
+  "Flag-File": "uz.svg"
+ },
+ {
+  "Locale Code": "vai-Vaii-LR",
+  "Flag-File": "lr.country.svg"
+ },
+ {
+  "Locale Code": "vai-Latn-LR",
+  "Flag-File": "lr.country.svg"
+ },
+ {
+  "Locale Code": "ve-ZA",
+  "Flag-File": "za.country.svg"
+ },
+ {
+  "Locale Code": "vi-VN",
+  "Flag-File": "vi.svg"
+ },
+ {
+  "Locale Code": "vo-001",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "vun-TZ",
+  "Flag-File": "tz.country.svg"
+ },
+ {
+  "Locale Code": "wae-CH",
+  "Flag-File": "ch.country.svg"
+ },
+ {
+  "Locale Code": "cy-GB",
+  "Flag-File": "cy.svg"
+ },
+ {
+  "Locale Code": "wal-ET",
+  "Flag-File": "et.country.svg"
+ },
+ {
+  "Locale Code": "wo-SN",
+  "Flag-File": "sn.country.svg"
+ },
+ {
+  "Locale Code": "xh-ZA",
+  "Flag-File": "za.country.svg"
+ },
+ {
+  "Locale Code": "yav-CM",
+  "Flag-File": "cm.country.svg"
+ },
+ {
+  "Locale Code": "ii-CN",
+  "Flag-File": "zh.svg"
+ },
+ {
+  "Locale Code": "yo-BJ",
+  "Flag-File": "bj.country.svg"
+ },
+ {
+  "Locale Code": "yo-NG",
+  "Flag-File": "ng.country.svg"
+ },
+ {
+  "Locale Code": "dje-NE",
+  "Flag-File": "-"
+ },
+ {
+  "Locale Code": "zu-ZA",
+  "Flag-File": "zu.svg"
+ }
+]

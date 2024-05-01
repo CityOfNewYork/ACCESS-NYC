@@ -56,6 +56,7 @@ class Strings {
 
 		$messages->showForStrings( $ignoredStringsMessages, 'information' );
 
+		/** @phpstan-ignore-next-line */
 		return array_filter( $stringsToTranslation, Lst::length() );
 	}
 }

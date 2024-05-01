@@ -1,16 +1,20 @@
 <?php
 
+use WPML\FP\Fns;
 use WPML\FP\Maybe;
 use WPML\Settings\PostType\Automatic;
 use WPML\Setup\Option;
 use WPML\TM\ATE\TranslateEverything;
 use WPML\FP\Lst;
 use WPML\FP\Obj;
+use WPML\FP\Logic;
 use WPML\TM\API\ATE\CachedLanguageMappings;
 use WPML\Element\API\Languages;
 use WPML\LIB\WP\Post;
 use WPML\API\PostTypes;
+use WPML\TM\API\Jobs;
 use function WPML\FP\partial;
+use WPML\LIB\WP\User;
 
 class WPML_TM_Translation_Status_Display {
 
@@ -127,7 +131,9 @@ class WPML_TM_Translation_Status_Display {
        				translation_status.translation_service,
        				translation_status.needs_update,
        				translations.trid,
-       			    translate_job.job_id
+       			    translate_job.job_id,
+       				translate_job.editor,
+       				translate_job.automatic
 				FROM {$this->wpdb->prefix}icl_languages languages
 				LEFT JOIN {$this->wpdb->prefix}icl_translations translations
 					ON languages.code = translations.language_code
@@ -160,9 +166,11 @@ class WPML_TM_Translation_Status_Display {
 			$css_class .= ' otgs-ico-edit-disabled';
 		} elseif ( ! $this->is_lang_pair_allowed( $lang, $source_lang, $post_id ) && ! $element_id ) {
 			$css_class .= ' otgs-ico-add-disabled';
+		} elseif ( ! $this->has_user_rights_to_translate( $trid, $lang ) ) {
+			$css_class .= ' otgs-ico-edit-disabled';
 		}
 
-		if ( ( $this->isTranslateEverythingInProgress( $post_id, $lang ) && ( 'draft' !== $post_status || $this->is_in_progress( $trid, $lang ) ) ) ) {
+		if ( ( $this->isTranslateEverythingInProgress( $trid, $post_id, $lang ) && ( 'draft' !== $post_status || $this->is_in_progress( $trid, $lang ) ) ) ) {
 			$css_class .= ' otgs-ico-waiting';
 		}
 
@@ -197,7 +205,12 @@ class WPML_TM_Translation_Status_Display {
 			);
 		} elseif ( $this->is_lang_pair_allowed( $lang, null, $original_post_id ) && $this->is_in_progress( $trid, $lang ) ) {
 			$language = $this->sitepress->get_language_details( $lang );
-			$text     = sprintf( __( 'Edit the %s translation', 'wpml-translation-management' ), $language['display_name'] );
+
+			if ( $this->shouldAutoTranslate( $trid, $original_post_id, $lang ) ) {
+				$text = sprintf( __( '%s: Waiting for automatic translation', 'wpml-translation-management' ), $language['display_name'] );
+			} else {
+				$text = sprintf( __( 'Edit the %s translation', 'wpml-translation-management' ), $language['display_name'] );
+			}
 		} elseif ( ! $this->is_lang_pair_allowed( $lang, $source_lang, $original_post_id ) ) {
 			$language        = $this->sitepress->get_language_details( $lang );
 			$source_language = $this->sitepress->get_language_details( $source_lang );
@@ -206,13 +219,51 @@ class WPML_TM_Translation_Status_Display {
 				$source_language['display_name'],
 				$language['display_name']
 			);
+		} elseif ( ! $this->has_user_rights_to_translate( $trid, $lang ) ) {
+			$text = __( "You can only edit translations assigned to you.", 'wpml-translation-management' );
 		}
 
-		if ( $this->isTranslateEverythingInProgress( $original_post_id, $lang ) ) {
+		if ( $this->isTranslateEverythingInProgress( $trid, $original_post_id, $lang ) ) {
 			$text = __( 'WPML is translating your content automatically. You can monitor the progress in the admin bar.', 'wpml-translation-management' );
 		}
 
 		return $text;
+	}
+
+	/**
+	 * Determine if there is no manual translation for the given trid
+	 * and language.
+	 *
+	 * @param int    $trid
+	 * @param string $lang
+	 *
+	 * @return bool
+	 */
+	private function has_no_manual_translation( $trid, $lang ) {
+		if (
+			! array_key_exists( $trid, $this->statuses ) ||
+			! array_key_exists( $lang, $this->statuses[ $trid ] )
+		) {
+			// There is no job yet for this language.
+			return true;
+		}
+
+		// The ICL_TM_NOT_TRANSLATED flag is used for jobs which were canceled.
+		// I.e. Job created on post update while a Translation Service is
+		// active, but before that service has been able to translate the post,
+		// the user switched to Translate Everything.
+		$job_is_canceled =
+			Obj::assocPath( [ $trid, $lang, 'status' ], ICL_TM_NOT_TRANSLATED );
+
+		$job_is_automatic = Obj::path( [ $trid, $lang, 'automatic' ] );
+
+		return Logic::anyPass(
+			[
+				$job_is_canceled,
+				$job_is_automatic,
+			],
+			$this->statuses
+		);
 	}
 
 	/**
@@ -240,8 +291,8 @@ class WPML_TM_Translation_Status_Display {
 		$is_remote        = $this->is_remote( $trid, $lang );
 		$is_in_progress   = $this->is_in_progress( $trid, $lang );
 		$does_need_update = (bool) Obj::pathOr( false, [ $trid, $lang, 'needs_update' ], $this->statuses );
-		$use_tm_editor    = WPML_TM_Post_Edit_TM_Editor_Mode::is_using_tm_editor( $this->sitepress, $post_id );
-		$use_tm_editor    = apply_filters( 'wpml_use_tm_editor', $use_tm_editor );
+		$use_tm_editor    = $this->shouldUseTMEditor( $post_id );
+
 		$source_lang_code = $this->post_translations->get_element_lang_code( $post_id );
 
 		$is_local_job_in_progress  = $is_in_progress && ! $is_remote;
@@ -272,7 +323,7 @@ class WPML_TM_Translation_Status_Display {
 			}
 
 			if ( $job_id ) {
-				if ( $does_need_update && $this->shouldAutoTranslate( $post_id, $lang ) ) {
+				if ( $does_need_update && $this->shouldAutoTranslate( $trid, $post_id, $lang ) ) {
 					$tm_editor_link = '#';
 				} else {
 					$tm_editor_link = $this->get_link_for_existing_job( $job_id );
@@ -289,6 +340,16 @@ class WPML_TM_Translation_Status_Display {
 		$this->tm_editor_links[ $post_id ][ $lang ][ $trid ] = $tm_editor_link;
 
 		return $link;
+	}
+
+	private function shouldUseTMEditor( $postId ) {
+		static $cachedKeys;
+		if ( ! isset( $cachedKeys[ $postId ] ) ) {
+			list( $useTmEditor, $isWpmlEditorBlocked, $reason ) = \WPML_TM_Post_Edit_TM_Editor_Mode::get_editor_settings( $this->sitepress, $postId );
+			$cachedKeys[ $postId ]                              = $useTmEditor && ! $isWpmlEditorBlocked;
+		}
+
+		return $cachedKeys[ $postId ];
 	}
 
 	/**
@@ -308,13 +369,16 @@ class WPML_TM_Translation_Status_Display {
 			return $html;
 		}
 
+		$this->maybe_load_stats( $trid );
+
 		$Attributes = [
 			'original-link'      => $this->original_links[ $post_id ][ $lang ][ $trid ],
 			'tm-editor-link'     => $this->tm_editor_links[ $post_id ][ $lang ][ $trid ],
-			'auto-translate'     => $this->shouldAutoTranslate( $post_id, $lang ),
+			'auto-translate'     => $this->shouldAutoTranslate( $trid, $post_id, $lang ),
 			'trid'               => $trid,
 			'language'           => $lang,
 			'user-can-translate' => $this->is_lang_pair_allowed( $lang, null, $post_id ) ? 'yes' : 'no',
+			'should-ate-sync'    => $this->shouldATESync( $trid, $lang ) ? '1' : '0',
 		];
 		if ( isset( $this->statuses[ $trid ][ $lang ]['job_id'] ) ) {
 			$Attributes['tm-job-id'] = esc_attr( $this->statuses[ $trid ][ $lang ]['job_id'] );
@@ -332,7 +396,7 @@ class WPML_TM_Translation_Status_Display {
 	}
 
 	private function get_link_for_new_job( $post_id, $trid, $lang, $source_lang_code ) {
-		if ( $this->shouldAutoTranslate( $post_id, $lang ) ) {
+		if ( $this->shouldAutoTranslate( $trid, $post_id, $lang ) ) {
 			return '#';
 		} else {
 			$args = array(
@@ -352,26 +416,36 @@ class WPML_TM_Translation_Status_Display {
 	}
 
 	private static function get_tm_editor_base_url() {
+		$returnUrl = self::get_return_url();
+		$returnUrl = $returnUrl ? rawurlencode( esc_url_raw( stripslashes( $returnUrl ) ) ) : '';
+
 		$args = array(
 			'page'       => WPML_TM_FOLDER . '/menu/translations-queue.php',
-			'return_url' => rawurlencode( esc_url_raw( stripslashes( self::get_return_url() ) ) ),
+			'return_url' => $returnUrl,
+			'lang'       => Languages::getCurrentCode(), // We pass this param later to ATE in order to return to the page list in the same language.
 		);
 
 		return add_query_arg( $args, 'admin.php' );
 	}
 
 	private static function get_return_url() {
-		$args = array( 'wpml_tm_saved', 'wpml_tm_cancel' );
+		$args = [ 'wpml_tm_saved', 'wpml_tm_cancel' ];
 
 		if ( wpml_is_ajax() || ! is_admin() ) {
-			if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-				return remove_query_arg( $args, $_SERVER['HTTP_REFERER'] );
+			if ( ! isset( $_SERVER['HTTP_REFERER'] ) ) {
+				return null;
 			}
 
-			return null;
+			$url = remove_query_arg( $args, $_SERVER['HTTP_REFERER'] );
+		} else {
+			$url = remove_query_arg( $args );
 		}
 
-		return remove_query_arg( $args );
+		// We add the lang parameter to the return url to return from CTE to the post list in the same language.
+		return add_query_arg( [
+			'lang'    => Languages::getCurrentCode(),
+			'referer' => 'ate',
+		], $url );
 	}
 
 	/**
@@ -387,18 +461,45 @@ class WPML_TM_Translation_Status_Display {
 			false,
 			$this->sitepress->get_wp_api()->get_current_user_id(),
 			[
-				'lang_from'      => $lang_from ? $lang_from : $this->sitepress->get_current_language(),
+				'lang_from'      => $lang_from ?: Languages::getCurrentCode(),
 				'lang_to'        => $lang_to,
-				'admin_override' => $this->is_current_user_admin(),
+				'admin_override' => User::isAdministrator(),
 				'post_id'        => $post_id,
 			]
 		);
 	}
 
-	protected function is_current_user_admin() {
+	/**
+	 * It checks whether a current user has rights to edit a translation created by another user.
+	 * All admins and editors can edit any translation.
+	 * Other translators can edit only translations which either are assigned to them or unassigned.
+	 *
+	 * @param int $trid
+	 * @param string $lang
+	 *
+	 * @return bool
+	 */
+	private function has_user_rights_to_translate( $trid, $lang ) {
+		$user = User::getCurrent();
+		if ( User::isAdministrator( $user ) || User::isEditor( $user ) ) {
+			return true;
+		}
 
-		return $this->sitepress->get_wp_api()
-		                       ->current_user_can( 'manage_options' );
+		$job = Jobs::getTridJob( $trid, $lang );
+		if ( ! $job ) {
+			return true;
+		}
+
+		if ( ! Obj::prop( 'translator_id', $job ) ) { // nobody is currently assigned
+			return true;
+		}
+
+		if ( (int) Obj::propOr( 0, 'translator_id', $job ) === (int) $user->ID ) {
+			return true;
+		}
+
+		// Neither admin, nor editor, nor the translator of $trid.
+		return false;
 	}
 
 	/**
@@ -444,25 +545,44 @@ class WPML_TM_Translation_Status_Display {
 	}
 
 	/**
-	 * @param int $postId
+	 * @param int    $trid
+	 * @param int    $postId
 	 * @param string $language
 	 *
 	 * @return bool
 	 */
-	private function isTranslateEverythingInProgress( $postId , $language ) {
-		return Option::shouldTranslateEverything()
-		       && $this->shouldAutoTranslate( $postId, $language )
-		       && ! TranslateEverything::isEverythingProcessedForPostTypeAndLanguage( Post::getType( $postId ), $language )
+	private function isTranslateEverythingInProgress( $trid, $postId, $language ) {
+		/** @var string $postType */
+		$postType = Post::getType( $postId );
+		return $postType
+			   && Option::shouldTranslateEverything()
+		       && ! Option::isPausedTranslateEverything()
+		       && $this->shouldAutoTranslate( $trid, $postId, $language )
+		       && ! TranslateEverything::isEverythingProcessedForPostTypeAndLanguage( $postType, $language )
 		       && Lst::includes( Post::getType( $postId ), PostTypes::getAutomaticTranslatable() );
 	}
 
-	private function shouldAutoTranslate( $postId, $targetLang ) {
+	private function shouldAutoTranslate( $trid, $postId, $targetLang ) {
 		$isOriginalPost = ! (bool) $this->post_translations->get_source_lang_code( $postId );
 		$postLanguage   = $this->post_translations->get_element_lang_code( $postId );
 
 		return $isOriginalPost &&
 		       $postLanguage === Languages::getDefaultCode() &&
+		       $this->shouldUseTMEditor( $postId ) &&
 		       Automatic::shouldTranslate( get_post_type( $postId ) ) &&
-		       CachedLanguageMappings::isCodeEligibleForAutomaticTranslations( $targetLang );
+		       CachedLanguageMappings::isCodeEligibleForAutomaticTranslations( $targetLang ) &&
+			   $this->has_no_manual_translation( $trid, $targetLang );
+	}
+
+	/**
+	 * @param int $trid
+	 * @param string $lang
+	 *
+	 * @return bool
+	 */
+	private function shouldATESync( $trid, $lang ) {
+		$job = Obj::path( [ $trid, $lang ], $this->statuses );
+
+		return Jobs::shouldBeATESynced( $job );
 	}
 }

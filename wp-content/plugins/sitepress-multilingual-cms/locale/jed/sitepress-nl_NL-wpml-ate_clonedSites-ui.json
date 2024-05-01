@@ -1,0 +1,181 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Close": [
+            "Afsluiten"
+         ],
+         "Please take a screenshot of this message and report this issue to <a>WPML support</a>.": [
+            "Maak een schermafbeelding van dit bericht en meld dit probleem aan <a>WPML support</a>."
+         ],
+         "This copy of the site has the same content as the original site on %s, but it doesn’t have credits for automatic translation.": [
+            "Deze kopie van de site heeft dezelfde inhoud als de originele site op %s, maar heeft geen credits voor automatische vertaling."
+         ],
+         "If you want to use automatic translation for this site in the future, you can either <a1>add credits to this site</a1> or <a2>share the credits from the original site</a2>.": [
+            "Als je in de toekomst gebruik wilt maken van automatische vertaling voor deze site, kun je <a1>credits toevoegen aan deze site</a1> of <a2>de credits delen van de oorspronkelijke site</a2>."
+         ],
+         "There was an error checking for credits to share. Please take a screenshot of this message and report it in <a>WPML support</a>.": [
+            "Er is een fout opgetreden bij het controleren op credits om te delen. Neem dan een screenshot van dit bericht en meld het in <a>WPML support</a>."
+         ],
+         "You’re all set": [
+            "Je bent helemaal klaar"
+         ],
+         "To allow the sites running on %s and %s to use the same credits for automatic translation, you need to:": [
+            "Om de actieve sites op %s en %s dezelfde vertaalcredits te laten gebruiken voor automatische vertaling, moet je:"
+         ],
+         "Follow <a>this link</a> to access the migration code (you can't get it by visiting %s manually)": [
+            "Volg <a>deze link</a> om toegang te krijgen tot de migratiecode (je kunt deze niet krijgen door %s handmatig te bezoeken)"
+         ],
+         "Click on <b>Copy migration code</b>": [
+            "Klik op <b>Migratiecode kopiëren</b>"
+         ],
+         "Paste the migration code into the field below.": [
+            "Plak de migratiecode in het veld hieronder."
+         ],
+         "Migration code": [
+            "Migratiecode"
+         ],
+         "Continue": [
+            "Doorgaan"
+         ],
+         "Go back": [
+            "Teruggaan"
+         ],
+         "Let’s connect the automatic translation credits between the two copies of this site": [
+            "Laten we de automatische vertaalcredits koppelen met de twee kopieën van deze site"
+         ],
+         "WPML was unable to copy your site's translations, translation memory, and glossary to this new URL.": [
+            "WPML kon de vertalingen van je site, het vertaalgeheugen en de woordenlijst niet kopiëren naar deze nieuwe URL."
+         ],
+         "Error with copying translation information to new URL": [
+            "Fout bij het kopiëren van vertaalinformatie naar nieuwe URL"
+         ],
+         "Great. Now this site and its copy on %s are sharing the credits for automatic translation.": [
+            "Geweldig. Nu delen deze site en zijn kopie op %s de vertaalcredits voor automatische vertaling."
+         ],
+         "Credits that you add on either site will be available on both sites. If you stop using this site, you don’t need to worry about losing credits.": [
+            "Credits die je op beide sites toevoegt, blijven beschikbaar op beide sites. Als je deze site niet meer gebruikt, hoef je je geen zorgen te maken over het verlies van credits."
+         ],
+         "WPML was unable to connect your old and new URLs to share automatic translation credits.": [
+            "WPML kon je oude en nieuwe URL's niet koppelen om automatische vertaalcredits te delen."
+         ],
+         "Error with sharing automatic translation credits": [
+            "Fout bij het delen van automatische vertaalcredits"
+         ],
+         "The site on %s has %d credits for automatic translation. Do you want to share these credits between %s and this new location (%s)?": [
+            "De site op %s heeft %d credits voor automatische vertaling. Wil je deze credits delen met %s en deze nieuwe locatie (%s)?"
+         ],
+         "The site on %s has a pay-as-you-go subscription for automatic translation. Do you want to share these credits between %s and this new location (%s)?": [
+            "De site op %s heeft een pay-as-you-go abonnement voor automatische vertaling. Wil je deze credits delen met %s en deze nieuwe locatie (%s)?"
+         ],
+         "Yes (recommended)": [
+            "Ja (aanbevolen)"
+         ],
+         "In the next step, you will receive instructions for how to approve the credits sharing": [
+            "Bij de volgende stap ontvang je instructies voor het goedkeuren van het delen van de credits."
+         ],
+         "No": [
+            "Nee"
+         ],
+         "You will need to assign credits or set up a pay-as-you-go plan for this site to use automatic translation": [
+            "Je moet credits toewijzen of een pay-as-you-go plan instellen voor deze site om automatische vertaling te gebruiken."
+         ],
+         "What happens when you share credits for automatic translation between sites?": [
+            "Wat gebeurt er als je de credits voor automatisch vertalen deelt tussen verschillende sites?"
+         ],
+         "Translation credits for this site": [
+            "Vertaalcredits voor deze site"
+         ],
+         "You can continue translating content normally on this site.": [
+            "Je kunt gewoon doorgaan met het vertalen van inhoud op deze site."
+         ],
+         "Please keep in mind that there shouldn’t be a copy of this site at %s. If there still is a copy of it there, you will not be able to translate content on that site.": [
+            "Houd er rekening mee dat er geen kopie van je site zou moeten zijn op %s. Als daar nog steeds een kopie staat, kun je de inhoud op die site niet vertalen."
+         ],
+         "You indicated that you’re no longer running a copy of this site at %s. This means that:": [
+            "Je hebt aangegeven dat je niet langer een kopie van deze site op %s hebt. Dit betekent dat:"
+         ],
+         "You will not be able to use automatic translation on the old site": [
+            "Je geen automatische vertaling kunt gebruiken op de oude site"
+         ],
+         "If you access the old site, it will trigger warnings on this site": [
+            "Als je naar de oude site gaat, zal dat waarschuwingen op deze site genereren."
+         ],
+         "I understand and am no longer running this site at %s": [
+            "Ik begrijp het en deze site is niet langer actief op %s."
+         ],
+         "Back": [
+            "Terug"
+         ],
+         "Please check and confirm": [
+            "Controleren en bevestigen"
+         ],
+         "WPML was unable to update our records with your new URL.": [
+            "WPML was niet in staat om onze gegevens aan te passen met je nieuwe URL."
+         ],
+         "Error with moving translation information to new URL": [
+            "Fout bij het verplaatsen van vertaalinformatie naar nieuwe URL"
+         ],
+         "Looks like this site was previously at %s and now it’s at %s.": [
+            "Het lijkt erop dat deze site eerst op %s stond en nu op %s."
+         ],
+         "Do you still have the same site running at %s?": [
+            "Heb je nog steeds dezelfde site actief op %s?"
+         ],
+         "Yes": [
+            "Ja"
+         ],
+         "This is only a copy - original site is still running": [
+            "Dit is slechts een kopie - de originele site is nog steeds actief"
+         ],
+         "I changed the address of the site to this new one": [
+            "Ik heb het adres van je site veranderd in dit nieuwe adres"
+         ],
+         "WPML detected a new address for this site": [
+            "WPML heeft een nieuw adres voor je site gedetecteerd"
+         ],
+         "How to manage translations when migrating from development to production and more...": [
+            "Hoe vertalingen te beheren bij het migreren van ontwikkeling naar productie en meer..."
+         ],
+         "Looks like this site is a copy of a different site, or moved to a different URL. Please contact your translation manager to update Translation Management plugin configuration.": [
+            "Het lijkt erop dat deze site een kopie is van een andere site, of dat hij verplaatst is naar een andere URL. Neem contact op met uw vertaalmanager om de configuratie van de plugin van Translation Manager bij te werken."
+         ],
+         "Site Moved or Copied - Action Required": [
+            "Site verplaatst of gekopieerd - Actie vereist"
+         ],
+         "You or someone else moved this site to %s. Please keep in mind that:": [
+            "Jij of iemand anders heeft deze site verplaatst naar %s. Houd er rekening mee dat:"
+         ],
+         "Translations that you do at %s will not appear on this site.": [
+            "Vertalingen die je maakt op %s niet op deze site verschijnen."
+         ],
+         "You cannot edit translations on this site.": [
+            "Je kunt op deze site geen vertalingen bewerken."
+         ],
+         "The site at %s is using the same credits for automatic translation as this site.": [
+            "De site op %s gebruikt dezelfde automatische vertaalcredits als deze site."
+         ],
+         "If you didn't intend to move this site to %s, you can <a>indicate that this site should be at %s</a>.": [
+            "Als je niet van plan was om deze site naar %s te verplaatsen, kun je <a>aangeven dat deze site op %s moet staan</a>."
+         ],
+         "This site has moved to a new location": [
+            "Deze site is verplaatst naar een nieuwe locatie"
+         ],
+         "Moving the site back here will mean that you will be able to translate on this domain again, but you will not be able to update translations at %s.": [
+            "Als je de site hierheem terugplaatst, kun je weer vertalen op dit domein, maar kun je geen vertalingen meer bijwerken op %s."
+         ],
+         "Yes - move back here": [
+            "Ja - naar hier terugplaatsen"
+         ],
+         "No - keep the site on %s": [
+            "Nee - houd de site op %s"
+         ],
+         "Are you sure that this site should run on %s and not %s?": [
+            "Weet je zeker dat deze site actief moet zijn op %s en niet op %s?"
+         ]
+      }
+   }
+}

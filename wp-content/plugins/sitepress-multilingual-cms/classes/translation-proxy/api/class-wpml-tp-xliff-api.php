@@ -1,17 +1,24 @@
 <?php
 
+use WPML\FP\Obj;
+
 class WPML_TP_XLIFF_API extends WPML_TP_API {
 	/** @var WPML_TP_Xliff_Parser */
 	private $xliff_parser;
+
+	/** @var WPML_TP_Jobs_API */
+	private $jobs_api;
 
 	public function __construct(
 		WPML_TP_API_Client $client,
 		WPML_TP_Project $project,
 		WPML_TP_API_Log_Interface $logger,
-		WPML_TP_Xliff_Parser $xliff_parser
+		WPML_TP_Xliff_Parser $xliff_parser,
+		WPML_TP_Jobs_API $jobs_api
 	) {
 		parent::__construct( $client, $project, $logger );
 		$this->xliff_parser = $xliff_parser;
+		$this->jobs_api     = $jobs_api;
 	}
 
 	/**
@@ -22,7 +29,13 @@ class WPML_TP_XLIFF_API extends WPML_TP_API {
 	 * @throws WPML_TP_API_Exception
 	 */
 	public function get_remote_translations( $tp_job_id, $parse = true ) {
-		$request = new WPML_TP_API_Request( '/jobs/{job_id}/xliff.json' );
+		try {
+			$download_url = $this->jobs_api->get_translated_xliff_download_url( $tp_job_id );
+		} catch ( \WPML_TP_API_Exception $e ) {
+			// Use the old fashioned way if the url cannot be retrieved via the Translation Proxy API
+			$download_url = '/jobs/{job_id}/xliff.json';
+		}
+		$request      = new WPML_TP_API_Request( $download_url );
 		$request->set_params(
 			array(
 				'job_id'    => $tp_job_id,
@@ -31,7 +44,7 @@ class WPML_TP_XLIFF_API extends WPML_TP_API {
 		);
 
 		$result = $this->client->send_request( $request );
-		if ( ! $result || empty( $result ) || false === strpos( $result, 'xliff' ) ) {
+		if ( empty( $result ) || false === strpos( $result, 'xliff' ) ) {
 			throw new WPML_TP_API_Exception( 'XLIFF file could not be fetched for tp_job: ' . $tp_job_id, $request );
 		}
 

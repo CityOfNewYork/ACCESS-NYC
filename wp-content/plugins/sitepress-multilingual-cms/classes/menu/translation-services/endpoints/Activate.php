@@ -5,7 +5,8 @@ namespace WPML\TM\Menu\TranslationServices\Endpoints;
 use WPML\Ajax\IHandler;
 use WPML\Collect\Support\Collection;
 use WPML\FP\Either;
-use WPML\FP\Fns;
+use WPML\FP\Logic;
+use WPML\FP\Obj;
 use WPML\TM\TranslationProxy\Services\AuthorizationFactory;
 
 class Activate implements IHandler {
@@ -17,12 +18,7 @@ class Activate implements IHandler {
 		$authorize = function ( $serviceId ) use ( $apiTokenData ) {
 			$authorization = ( new AuthorizationFactory )->create();
 			try {
-				foreach( $apiTokenData as $key => $data ) {
-					if ( empty( $data ) ) {
-						unset( $apiTokenData[ $key ] );
-					}
-				}
-				$authorization->authorize( (object) $apiTokenData );
+				$authorization->authorize( (object) Obj::pickBy( Logic::isNotEmpty(), $apiTokenData ) );
 
 				return Either::of( $serviceId );
 			} catch ( \Exception $e ) {

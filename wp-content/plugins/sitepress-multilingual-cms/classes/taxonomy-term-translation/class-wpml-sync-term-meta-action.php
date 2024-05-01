@@ -118,6 +118,16 @@ class WPML_Sync_Term_Meta_Action {
 			);
 			$wpdb->query( $insert_prepared );
 		}
+
+		/**
+		 * @param int    $term_id_from The term_id of the source term.
+		 * @param int    $term_id_to   The term_id of the destination term.
+		 * @param string $meta_key     The key of the term meta being copied.
+		 *
+		 * @since 4.7.0
+		 */
+		do_action( 'wpml_after_copy_term_field', $term_id_from, $term_id_to, $meta_key );
+
 		wp_cache_init();
 	}
 

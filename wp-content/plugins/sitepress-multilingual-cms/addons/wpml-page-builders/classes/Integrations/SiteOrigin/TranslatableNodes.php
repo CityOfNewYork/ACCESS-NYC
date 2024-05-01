@@ -8,6 +8,11 @@ use WPML\PB\SiteOrigin\Modules\ModuleWithItemsFromConfig;
 class TranslatableNodes implements \IWPML_Page_Builders_Translatable_Nodes {
 
 	const SETTINGS_FIELD = 'panels_info';
+	const CHILDREN_FIELD = 'panels_data';
+
+	const WRAPPING_MODULES = [
+		'SiteOrigin_Panels_Widgets_Layout',
+	];
 
 	/**
 	 * Nodes to translate.
@@ -182,4 +187,13 @@ class TranslatableNodes implements \IWPML_Page_Builders_Translatable_Nodes {
 		return apply_filters( 'wpml_siteorigin_modules_to_translate', [] );
 	}
 
+	/**
+	 * @param array $module
+	 *
+	 * @return bool
+	 */
+	public static function isWrappingModule( $module ) {
+		return isset( $module[ self::CHILDREN_FIELD ] ) &&
+			in_array( Obj::path( [ self::SETTINGS_FIELD, 'class' ], $module ), self::WRAPPING_MODULES, true );
+	}
 }

@@ -5,8 +5,6 @@ namespace WPML\TM\ATE\ClonedSites;
 use WPML\FP\Fns;
 
 class Report {
-	const REPORT_TYPE_COPY = 'copy';
-	const REPORT_TYPE_MOVE = 'move';
 
 	/**
 	 * @var \WPML_TM_AMS_API
@@ -14,9 +12,9 @@ class Report {
 	private $apiClient;
 
 	/**
-	 * @var ApiCommunication
+	 * @var Lock
 	 */
-	private $apiCommunicationHandler;
+	private $lock;
 
 	/**
 	 * @var \WPML_TM_ATE_Job_Repository
@@ -37,74 +35,79 @@ class Report {
 
 	/**
 	 * @param \WPML_TM_AMS_API $apiClient
-	 * @param ApiCommunication $apiCommunicationHandler
+	 * @param Lock $lock
 	 * @param \WPML_TM_ATE_Job_Repository $ateJobsRepository
 	 * @param \WPML_Translation_Job_Factory $translationJobFactory
 	 */
 	public function __construct(
 		\WPML_TM_AMS_API $apiClient,
-		ApiCommunication $apiCommunicationHandler,
+		Lock $lock,
 		\WPML_TM_ATE_Job_Repository $ateJobsRepository,
 		\WPML_TP_Sync_Update_Job $updateJobs,
 		\WPML_Translation_Job_Factory $translationJobFactory
 	) {
-		$this->apiClient               = $apiClient;
-		$this->apiCommunicationHandler = $apiCommunicationHandler;
-		$this->ateJobsRepository       = $ateJobsRepository;
-		$this->updateJobs              = $updateJobs;
-		$this->translationJobFactory   = $translationJobFactory;
+		$this->apiClient             = $apiClient;
+		$this->lock                  = $lock;
+		$this->ateJobsRepository     = $ateJobsRepository;
+		$this->updateJobs            = $updateJobs;
+		$this->translationJobFactory = $translationJobFactory;
 	}
 
+
 	/**
-	 * @param string $reportType
-	 *
-	 * @return bool
+	 * @return true|\WP_Error
 	 */
-	public function report( $reportType ) {
-		$reportCallback = \wpml_collect( [
-			self::REPORT_TYPE_COPY => $this->reportCopiedSite(),
-			self::REPORT_TYPE_MOVE => $this->reportMovedSite(),
-		] )->get( $reportType, Fns::always( Fns::always( false ) ) );
+	public function move() {
+		$reportResult = $this->apiClient->reportMovedSite();
+		$result       = $this->apiClient->processMoveReport( $reportResult );
 
-		$reportResult = $reportCallback();
-
-		if ($reportResult) {
+		if ( $result ) {
+			$this->lock->unlock();
 			do_action( 'wpml_tm_ate_synchronize_translators' );
 		}
 
-		return $reportResult;
+		return $result;
 	}
 
-	private function reportCopiedSite() {
-		return function () {
-			$reportResult = $this->apiClient->reportCopiedSite();
-			$isConfirmed  = $this->apiClient->processCopyReportConfirmation( $reportResult );
-
-			if ( $isConfirmed ) {
-				$jobsInProgress = $this->ateJobsRepository->get_jobs_to_sync();
-				/** @var \WPML_TM_Post_Job_Entity $jobInProgress */
-				foreach ( $jobsInProgress as $jobInProgress ) {
-					$jobInProgress->set_status( ICL_TM_NOT_TRANSLATED );
-					$this->updateJobs->update_state( $jobInProgress );
-					$this->translationJobFactory->delete_job_data( $jobInProgress->get_translate_job_id() );
-				}
-				$this->apiCommunicationHandler->unlockClonedSite();
-			}
-
-			return $isConfirmed;
-		};
+	/**
+	 * @return bool
+	 */
+	public function copy() {
+		return $this->copyWithStrategy( 'reportCopiedSite' );
 	}
 
-	private function reportMovedSite() {
-		return function () {
-			$reportResult      = $this->apiClient->reportMovedSite();
-			$movedSuccessfully = $this->apiClient->processMoveReport( $reportResult );
+	/**
+	 * @param string $migrationCode
+	 *
+	 * @return bool
+	 */
+	public function copyWithCredit( $migrationCode ) {
+		return $this->copyWithStrategy( 'reportCopiedSiteWithCreditTransfer', [ $migrationCode ] );
+	}
 
-			if ( $movedSuccessfully ) {
-				$this->apiCommunicationHandler->unlockClonedSite();
+	/**
+	 * @param string $copyStrategy
+	 * @param mixed[] $arguments
+	 *
+	 * @return bool
+	 */
+	private function copyWithStrategy( $copyStrategy, $arguments = [] ) {
+		$reportResult = call_user_func_array( [ $this->apiClient, $copyStrategy ], $arguments );
+		$result       = $this->apiClient->processCopyReportConfirmation( $reportResult );
+
+		if ( $result ) {
+			$jobsInProgress = $this->ateJobsRepository->get_jobs_to_sync();
+			/** @var \WPML_TM_Post_Job_Entity $jobInProgress */
+			foreach ( $jobsInProgress as $jobInProgress ) {
+				$jobInProgress->set_status( ICL_TM_NOT_TRANSLATED );
+				$this->updateJobs->update_state( $jobInProgress );
+				$this->translationJobFactory->delete_job_data( $jobInProgress->get_translate_job_id() );
 			}
 
-			return $movedSuccessfully;
-		};
+			$this->lock->unlock();
+			do_action( 'wpml_tm_ate_synchronize_translators' );
+		}
+
+		return $result;
 	}
 }

@@ -396,7 +396,7 @@ class WPML_Pro_Translation extends WPML_TM_Job_Factory_User {
 		$links = array();
 
 		foreach ( $regexp_links as $regexp ) {
-			if ( preg_match_all( $regexp, $body, $matches, PREG_SET_ORDER ) ) {
+			if ( preg_match_all( $regexp, is_null( $body ) ? '' : $body, $matches, PREG_SET_ORDER ) ) {
 				foreach ( $matches as $match ) {
 					$links[] = $match;
 				}
@@ -406,13 +406,13 @@ class WPML_Pro_Translation extends WPML_TM_Job_Factory_User {
 		return $links;
 	}
 
-	public function fix_links_to_translated_content( $element_id, $target_lang_code, $element_type = 'post' ) {
+	public function fix_links_to_translated_content( $element_id, $target_lang_code, $element_type = 'post', $preLoaded = [] ) {
 		global $wpdb, $sitepress;
 
 		$sitepress->switch_lang( $target_lang_code );
 
 		$wpml_element_type = $element_type;
-		$body              = false;
+		$body              = '';
 		$string_type       = null;
 		if ( strpos( $element_type, 'post' ) === 0 ) {
 			$post_prepared     = $wpdb->prepare( "SELECT * FROM {$wpdb->posts} WHERE ID=%d", array( $element_id ) );
@@ -420,11 +420,28 @@ class WPML_Pro_Translation extends WPML_TM_Job_Factory_User {
 			$body              = $post->post_content;
 			$wpml_element_type = 'post_' . $post->post_type;
 		} elseif ( $element_type == 'string' ) {
-			$string_prepared    = $wpdb->prepare( "SELECT string_id, value FROM {$wpdb->prefix}icl_string_translations WHERE id=%d", array( $element_id ) );
-			$data               = $wpdb->get_row( $string_prepared );
-			$body               = $data->value;
-			$original_string_id = $data->string_id;
-			$string_type        = $wpdb->get_var( $wpdb->prepare( "SELECT type FROM {$wpdb->prefix}icl_strings WHERE id=%d", $original_string_id ) );
+			if (
+				is_array( $preLoaded )
+				&& array_key_exists( 'value', $preLoaded )
+				&& array_key_exists( 'string_id', $preLoaded )
+			) {
+				$body               = $preLoaded['value'];
+				$original_string_id = $preLoaded['string_id'];
+			} else {
+				$data = $wpdb->get_row(
+					$wpdb->prepare(
+						"SELECT string_id, value
+						FROM {$wpdb->prefix}icl_string_translations
+						WHERE id=%d",
+						array( $element_id )
+					)
+				);
+
+				$body               = $data->value;
+				$original_string_id = $data->string_id;
+			}
+
+			$string_type = $wpdb->get_var( $wpdb->prepare( "SELECT type FROM {$wpdb->prefix}icl_strings WHERE id=%d", $original_string_id ) );
 			if ( 'LINK' === $string_type ) {
 				$body = '<a href="' . $body . '">removeit</a>';
 			}

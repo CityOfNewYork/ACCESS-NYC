@@ -44,10 +44,6 @@ WPML_core.wp_nav_align_inputs = function() {
 
     for ( i= 0; i < 3; i++) {
         element = jQuery(inputs[i]);
-        if (element.length) {
-            position = jQuery(inputs[i]).offset().left;
-            jQuery(inputs[i]).css('margin-left', right_max - position);
-        }
     }
 };
 

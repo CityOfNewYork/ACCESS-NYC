@@ -91,9 +91,9 @@ class WPML_PHP_Functions {
 	 *
 	 * @see \WPML_WP_API::version_compare
 	 *
-	 * @param string $version1
-	 * @param string $version2
-	 * @param null   $operator
+	 * @param string  $version1
+	 * @param string  $version2
+	 * @param ?string $operator
 	 *
 	 * @return mixed
 	 */

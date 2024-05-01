@@ -35,8 +35,8 @@ class WPML_Translate_Independently {
 			'icl_duplicate_fail'    => __( 'Unable to remove relationship!', 'sitepress' ),
 		);
 
-		$post = isset( $_GET['post'] ) ? filter_var( $_GET['post'], FILTER_SANITIZE_NUMBER_INT ) : '';
-		if ( $post && '' !== get_post_meta( $post, '_icl_lang_duplicate_of', true ) ) {
+		$post = isset( $_GET['post'] ) ? filter_var( $_GET['post'], FILTER_SANITIZE_NUMBER_INT ) : 0;
+		if ( $post && '' !== get_post_meta( (int) $post, '_icl_lang_duplicate_of', true ) ) {
 			$duplicate_data['duplicate_post_nonce']      = wp_create_nonce( 'icl_check_duplicates' );
 			$duplicate_data['duplicate_post']            = $post;
 			$duplicate_data['wp_classic_editor_changed'] = false;

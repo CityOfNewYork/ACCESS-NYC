@@ -33,7 +33,10 @@ class WPML_TM_Jobs_Deadline_Cron_Hooks implements IWPML_Action {
 			}
 		} else {
 			$timestamp = wp_next_scheduled( self::CHECK_OVERDUE_JOBS_EVENT );
-			wp_unschedule_event( $timestamp, self::CHECK_OVERDUE_JOBS_EVENT );
+
+			if ( $timestamp ) {
+				wp_unschedule_event( $timestamp, self::CHECK_OVERDUE_JOBS_EVENT );
+			}
 		}
 	}
 

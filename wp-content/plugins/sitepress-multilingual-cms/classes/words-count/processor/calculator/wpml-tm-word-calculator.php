@@ -27,7 +27,8 @@ class WPML_TM_Word_Calculator {
 		if ( in_array( $language_code, self::get_asian_languages() ) ) {
 			$words += strlen( strip_tags( $sanitized_source ) ) / self::ASIAN_LANGUAGE_CHAR_SIZE;
 		} else {
-			$words += count( preg_split( '/[\s,:;!\.\?\(\)\[\]\-_\'"\\/]+/', $sanitized_source, 0, PREG_SPLIT_NO_EMPTY ) );
+			$strings = preg_split( '/[\s,:;!\.\?\(\)\[\]\-_\'"\\/]+/', $sanitized_source, 0, PREG_SPLIT_NO_EMPTY );
+			$words  += $strings ? count( $strings ) : 0;
 		}
 
 		return (int) $words;

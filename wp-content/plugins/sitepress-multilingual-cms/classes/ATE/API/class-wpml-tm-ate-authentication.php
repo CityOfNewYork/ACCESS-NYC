@@ -40,7 +40,7 @@ class WPML_TM_ATE_Authentication {
 			$query_to_sign = $this->get_url_query( $url );
 
 			if ( $params && 'get' !== $verb ) {
-				$query_to_sign['body'] = md5( wp_json_encode( $params, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) );
+				$query_to_sign['body'] = md5( (string) wp_json_encode( $params, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) );
 			}
 
 			$url_parts_to_sign          = $url_parts;
@@ -132,7 +132,7 @@ class WPML_TM_ATE_Authentication {
 	private function get_url_query( $url ) {
 		$url_parts = wp_parse_url( $url );
 		$query     = array();
-		if ( array_key_exists( 'query', $url_parts ) ) {
+		if ( is_array( $url_parts ) && array_key_exists( 'query', $url_parts ) ) {
 			parse_str( $url_parts['query'], $query );
 		}
 
@@ -146,7 +146,7 @@ class WPML_TM_ATE_Authentication {
 	 */
 	protected function build_query( $query ) {
 		if ( PHP_VERSION_ID >= 50400 ) {
-			$final_query = http_build_query( $query, null, '&', PHP_QUERY_RFC3986 );
+			$final_query = http_build_query( $query, '', '&', PHP_QUERY_RFC3986 );
 		} else {
 			$final_query = str_replace(
 				array( '+', '%7E' ),

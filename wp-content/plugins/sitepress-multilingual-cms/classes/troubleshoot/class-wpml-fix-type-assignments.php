@@ -21,9 +21,10 @@ class WPML_Fix_Type_Assignments extends WPML_WPDB_And_SP_User {
 		$rows_fixed  = $this->fix_broken_duplicate_rows();
 		$rows_fixed += $this->fix_missing_original();
 		$rows_fixed += $this->fix_wrong_source_language();
+		$rows_fixed += $this->fix_broken_type_assignments();
 		$rows_fixed += $this->fix_broken_taxonomy_assignments();
 		$rows_fixed += $this->fix_broken_post_assignments();
-		$rows_fixed += $this->fix_broken_type_assignments();
+		$rows_fixed += $this->fix_mismatched_types();
 		icl_cache_clear();
 		wp_cache_init();
 
@@ -144,6 +145,10 @@ class WPML_Fix_Type_Assignments extends WPML_WPDB_And_SP_User {
 	 * an original element and it's translation, by setting the original's type
 	 * on the corrupted translation rows.
 	 *
+	 * This needs to be run before fix_broken_post_assignments. If it is run after
+	 * then the element_type will be set to element_type of the source_language_code
+	 * which might not be the same as the post_type which is set in fix_broken_post_assignments.
+	 *
 	 * @return int number of rows fixed
 	 */
 	private function fix_broken_type_assignments() {
@@ -228,4 +233,38 @@ class WPML_Fix_Type_Assignments extends WPML_WPDB_And_SP_User {
 
 		return $rows_affected;
 	}
+
+	/**
+	 * Deletes the row for a translated element from icl_translations, where the translated element_type
+	 * is not the same as the original element_type in a trid. This is the final fix to run.
+	 * The previous fix should have associated the element_type with the matching type from the posts table.
+	 * If the translated type does not match the original type, then it needs to be deleted.
+	 *
+	 * @return int number of rows fixed
+	 */
+	private function fix_mismatched_types() {
+		$rows_affected = $this->wpdb->query(
+			"DELETE t
+				FROM {$this->wpdb->prefix}icl_translations t
+				JOIN {$this->wpdb->prefix}icl_translations o
+					ON o.trid = t.trid
+					AND o.language_code != t.language_code
+					AND o.source_language_code IS NULL
+					AND t.source_language_code IS NOT NULL
+					AND o.element_type <> t.element_type"
+		);
+
+		if ( 0 < $rows_affected ) {
+			do_action(
+				'wpml_translation_update',
+				array(
+					'type'          => 'delete',
+					'rows_affected' => $rows_affected,
+				)
+			);
+		}
+
+		return $rows_affected;
+	}
+
 }

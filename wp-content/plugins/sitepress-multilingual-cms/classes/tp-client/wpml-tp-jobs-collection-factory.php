@@ -11,7 +11,7 @@ class WPML_TP_Jobs_Collection_Factory {
 
 		if ( $current_project ) {
 			$tp_jobs_collection = new WPML_TP_Jobs_Collection(
-				TranslationProxy::get_current_project(),
+				$current_project,
 				new WPML_TP_Job_Factory(),
 				new WPML_Translation_Batch_Factory()
 			);

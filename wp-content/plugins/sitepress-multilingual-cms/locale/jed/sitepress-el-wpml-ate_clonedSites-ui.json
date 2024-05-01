@@ -1,0 +1,181 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Close": [
+            "Κλείσιμο"
+         ],
+         "Please take a screenshot of this message and report this issue to <a>WPML support</a>.": [
+            "Βγάλτε ένα στιγμιότυπο οθόνης αυτού του μηνύματος και αναφέρετε αυτό το πρόβλημα στο <a>WPML support</a>."
+         ],
+         "This copy of the site has the same content as the original site on %s, but it doesn’t have credits for automatic translation.": [
+            "Αυτό το αντίγραφο του ιστότοπου έχει το ίδιο περιεχόμενο με τον αρχικό ιστότοπο στο %s, αλλά δεν διαθέτει μονάδες για αυτόματη μετάφραση."
+         ],
+         "If you want to use automatic translation for this site in the future, you can either <a1>add credits to this site</a1> or <a2>share the credits from the original site</a2>.": [
+            "Αν θέλετε να χρησιμοποιήσετε αυτόματη μετάφραση για αυτόν τον ιστότοπο στο μέλλον, μπορείτε είτε να <a1>προσθέσετε μονάδες σε αυτόν τον ιστότοπο</a1> ή <a2>να μοιραστείτε τις μονάδες από τον αρχικό ιστότοπο</a2>."
+         ],
+         "There was an error checking for credits to share. Please take a screenshot of this message and report it in <a>WPML support</a>.": [
+            "Προέκυψε ένα σφάλμα κατά την αναζήτηση μονάδων για διαμοιρασμό. Βγάλτε ένα στιγμιότυπο οθόνης αυτού του μηνύματος και αναφέρετέ το στο <a>WPML support</a>."
+         ],
+         "You’re all set": [
+            "Είστε έτοιμοι"
+         ],
+         "To allow the sites running on %s and %s to use the same credits for automatic translation, you need to:": [
+            "Για να επιτρέπεται η λειτουργία ιστότοπων σε %s και το %s να χρησιμοποιεί τις ίδιες μονάδες για αυτόματη μετάφραση, πρέπει να κάνετε τα εξής:"
+         ],
+         "Follow <a>this link</a> to access the migration code (you can't get it by visiting %s manually)": [
+            "Ακολουθήστε <a>αυτόν τον σύνδεσμο</a> για πρόσβαση στον κωδικό μεταβίβασης (δεν μπορείτε να το λάβετε αν επισκεφτείτε το %s χειροκίνητα)"
+         ],
+         "Click on <b>Copy migration code</b>": [
+            "Κάντε κλικ στο <b>Αντιγραφή κωδικού μεταβίβασης</b>"
+         ],
+         "Paste the migration code into the field below.": [
+            "Επικολλήστε τον κωδικό μεταβίβασης στο παρακάτω πεδίο."
+         ],
+         "Migration code": [
+            "Κωδικός μεταβίβασης"
+         ],
+         "Continue": [
+            "Συνέχεια"
+         ],
+         "Go back": [
+            "Επιστροφή"
+         ],
+         "Let’s connect the automatic translation credits between the two copies of this site": [
+            "Ας συνδέσουμε τις μονάδες αυτόματης μετάφρασης μεταξύ των δύο αντιγράφων αυτού του ιστότοπου"
+         ],
+         "WPML was unable to copy your site's translations, translation memory, and glossary to this new URL.": [
+            "Το WPML δεν μπόρεσε να αντιγράψει τις μεταφράσεις του ιστότοπού σας, τη μεταφραστική μνήμη και το γλωσσάριο σε αυτό το νέο URL."
+         ],
+         "Error with copying translation information to new URL": [
+            "Σφάλμα στην αντιγραφή των πληροφοριών μετάφρασης σε νέο URL"
+         ],
+         "Great. Now this site and its copy on %s are sharing the credits for automatic translation.": [
+            "Τέλεια. Πλέον αυτός ο ιστότοπος και το αντίγραφό του στο %s μοιράζονται τις μονάδες για αυτόματη μετάφραση."
+         ],
+         "Credits that you add on either site will be available on both sites. If you stop using this site, you don’t need to worry about losing credits.": [
+            "Οι μονάδες που προσθέτετε σε οποιονδήποτε ιστότοπο θα είναι διαθέσιμες και στους δύο ιστότοπους. Αν σταματήσετε να χρησιμοποιείτε αυτόν τον ιστότοπο, δεν χρειάζεται να ανησυχείτε για την απώλεια μονάδων."
+         ],
+         "WPML was unable to connect your old and new URLs to share automatic translation credits.": [
+            "Το WPML δεν μπόρεσε να συνδέσει το παλιό και νέο URL σας για να μοιραστεί μονάδες αυτόματης μετάφρασης."
+         ],
+         "Error with sharing automatic translation credits": [
+            "Σφάλμα κατά τον διαμοιρασμό μονάδων αυτόματης μετάφρασης"
+         ],
+         "The site on %s has %d credits for automatic translation. Do you want to share these credits between %s and this new location (%s)?": [
+            "Ο ιστότοπος στο %s διαθέτει %d μονάδες για αυτόματη μετάφραση. Θέλετε να μοιραστείτε αυτές τις μονάδες μεταξύ του %s και αυτής της νέας τοποθεσίας (%s);"
+         ],
+         "The site on %s has a pay-as-you-go subscription for automatic translation. Do you want to share these credits between %s and this new location (%s)?": [
+            "Ο ιστότοπος στο %s έχει συνδρομή πληρωμής ανάλογα με τη χρήση για αυτόματη μετάφραση. Θέλετε να μοιραστείτε αυτές τις μονάδες μεταξύ του %s και αυτής της νέας τοποθεσίας (%s);"
+         ],
+         "Yes (recommended)": [
+            "Ναι (συνιστάται)"
+         ],
+         "In the next step, you will receive instructions for how to approve the credits sharing": [
+            "Στο επόμενο βήμα, θα λάβετε οδηγίες για τον τρόπο έγκρισης του διαμοιρασμού μονάδων"
+         ],
+         "No": [
+            "Όχι"
+         ],
+         "You will need to assign credits or set up a pay-as-you-go plan for this site to use automatic translation": [
+            "Θα πρέπει να αναθέσετε μονάδες ή να δημιουργήσετε ένα πρόγραμμα πληρωμής ανάλογα με τη χρήση για αυτόν τον ιστότοπο για να χρησιμοποιήσετε αυτόματη μετάφραση"
+         ],
+         "What happens when you share credits for automatic translation between sites?": [
+            "Τι συμβαίνει όταν μοιράζεστε μονάδες για αυτόματη μετάφραση μεταξύ ιστοτόπων;"
+         ],
+         "Translation credits for this site": [
+            "Μονάδες μετάφρασης για αυτόν τον ιστότοπο"
+         ],
+         "You can continue translating content normally on this site.": [
+            "Μπορείτε να συνεχίσετε να μεταφράζετε περιεχόμενο κανονικά σε αυτόν τον ιστότοπο."
+         ],
+         "Please keep in mind that there shouldn’t be a copy of this site at %s. If there still is a copy of it there, you will not be able to translate content on that site.": [
+            "Έχετε υπόψη ότι δεν πρέπει να υπάρχει αντίγραφο αυτού του ιστότοπου στο %s. Αν υπάρχει ακόμη αντίγραφό του εκεί, δεν θα μπορείτε να μεταφράζετε περιεχόμενο σε αυτόν τον ιστότοπο."
+         ],
+         "You indicated that you’re no longer running a copy of this site at %s. This means that:": [
+            "Υποδείξατε ότι δεν λειτουργείτε πλέον αντίγραφο αυτού του ιστότοπου στο %s. Αυτό σημαίνει ότι:"
+         ],
+         "You will not be able to use automatic translation on the old site": [
+            "Δεν θα μπορείτε να χρησιμοποιήσετε αυτόματη μετάφραση στον παλιό ιστότοπο"
+         ],
+         "If you access the old site, it will trigger warnings on this site": [
+            "Αν μπείτε στον παλιό ιστότοπο, θα ενεργοποιηθούν προειδοποιήσεις σε αυτόν τον ιστότοπο"
+         ],
+         "I understand and am no longer running this site at %s": [
+            "Κατανοώ και δεν λειτουργώ πλέον αυτόν τον ιστότοπο στο %s"
+         ],
+         "Back": [
+            "Πίσω"
+         ],
+         "Please check and confirm": [
+            "Ελέγξτε και επιβεβαιώστε"
+         ],
+         "WPML was unable to update our records with your new URL.": [
+            "Το WPML δεν μπόρεσε να ενημερώσει τα αρχεία μας με το νέο URL σας."
+         ],
+         "Error with moving translation information to new URL": [
+            "Σφάλμα κατά τη μετακίνηση πληροφοριών μετάφρασης στο νέο URL"
+         ],
+         "Looks like this site was previously at %s and now it’s at %s.": [
+            "Φαίνεται πως αυτός ο ιστότοπος ήταν νωρίτερα στο %s και τώρα βρίσκεται στο %s."
+         ],
+         "Do you still have the same site running at %s?": [
+            "Λειτουργείτε ακόμη τον ίδιο ιστότοπο στο %s;"
+         ],
+         "Yes": [
+            "Ναι"
+         ],
+         "This is only a copy - original site is still running": [
+            "Αυτό είναι μόνο ένα αντίγραφο - ο αρχικός ιστότοπος λειτουργεί ακόμη"
+         ],
+         "I changed the address of the site to this new one": [
+            "Άλλαξα τη διεύθυνση του ιστότοπου σε αυτή τη νέα"
+         ],
+         "WPML detected a new address for this site": [
+            "Το WPML ανίχνευσε μια νέα διεύθυνση για αυτόν τον ιστότοπο"
+         ],
+         "How to manage translations when migrating from development to production and more...": [
+            "Πώς θα διαχειρίζεστε μεταφράσεις κατά τη μεταβίβαση από ανάπτυξη σε παραγωγή και περισσότερα..."
+         ],
+         "Looks like this site is a copy of a different site, or moved to a different URL. Please contact your translation manager to update Translation Management plugin configuration.": [
+            "Φαίνεται ότι αυτός ο ιστότοπος είναι αντίγραφο άλλου ιστοτόπου ή μετακινήθηκε σε διαφορετικό URL. Επικοινωνήστε με τον διαχειριστή μετάφρασής σας, για να ενημερώσετε τη ρύθμιση της προσθήκης Translation Management."
+         ],
+         "Site Moved or Copied - Action Required": [
+            "Ο ιστότοπος μετακινήθηκε ή αντιγράφηκε: απαιτείται ενέργεια"
+         ],
+         "You or someone else moved this site to %s. Please keep in mind that:": [
+            "Εσείς ή κάποιος άλλος μετακίνησε αυτόν τον ιστότοπο στο %s. Έχετε υπόψη ότι:"
+         ],
+         "Translations that you do at %s will not appear on this site.": [
+            "Οι μεταφράσεις που κάνετε στο %s δεν θα εμφανίζονται σε αυτόν τον ιστότοπο."
+         ],
+         "You cannot edit translations on this site.": [
+            "Δεν μπορείτε να επεξεργαστείτε μεταφράσεις σε αυτόν τον ιστότοπο."
+         ],
+         "The site at %s is using the same credits for automatic translation as this site.": [
+            "Ο ιστότοπος στο %s χρησιμοποιεί τις ίδιες μονάδες για αυτόματη μετάφραση όπως αυτός ο ιστότοπος."
+         ],
+         "If you didn't intend to move this site to %s, you can <a>indicate that this site should be at %s</a>.": [
+            "Αν δεν σκοπεύατε να μετακινήσετε αυτόν τον ιστότοπο στο %s, μπορείτε <a>να υποδείξετε ότι αυτός ο ιστότοπος θα έπρεπε να είναι στο %s</a>."
+         ],
+         "This site has moved to a new location": [
+            "Αυτός ο ιστότοπος μετακινήθηκε σε νέα τοποθεσία"
+         ],
+         "Moving the site back here will mean that you will be able to translate on this domain again, but you will not be able to update translations at %s.": [
+            "Η μετακίνηση του ιστότοπου πίσω θα σημαίνει ότι θα μπορείτε να μεταφράζετε ξανά σε αυτόν τον τομέα, αλλά δεν θα μπορείτε να ενημερώσετε μεταφράσεις στο %s."
+         ],
+         "Yes - move back here": [
+            "Ναι - μετακίνηση πίσω εδώ"
+         ],
+         "No - keep the site on %s": [
+            "Όχι - να διατηρηθεί ο ιστότοπος στο %s"
+         ],
+         "Are you sure that this site should run on %s and not %s?": [
+            "Είστε βέβαιοι ότι αυτός ο ιστότοπος θα πρέπει να λειτουργεί στο %s και όχι στο %s;"
+         ]
+      }
+   }
+}

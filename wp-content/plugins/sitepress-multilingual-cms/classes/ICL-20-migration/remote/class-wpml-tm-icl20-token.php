@@ -56,8 +56,8 @@ class WPML_TM_ICL20_Token {
 			throw new WPML_TM_ICL20MigrationException( $response['response']['message'], $code );
 		}
 
-		if ( array_key_exists( 'body', $response ) ) {
-			$response_data = json_decode( $response['body'], JSON_OBJECT_AS_ARRAY );
+		if ( isset( $response['body'] ) ) {
+			$response_data = json_decode( $response['body'], true );
 
 			if ( array_key_exists( 'api_token', $response_data )
 			     && '' !== trim( $response_data['api_token'] ) ) {

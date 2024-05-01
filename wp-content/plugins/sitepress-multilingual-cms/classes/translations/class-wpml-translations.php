@@ -37,7 +37,7 @@ class WPML_Translations extends WPML_SP_User {
 	 */
 	public function get_translations( $trid, $wpml_element_type, $skipPrivilegeChecking = false ) {
 		$cache_key_args = array_filter( array( $trid, $wpml_element_type, $this->skip_empty, $this->all_statuses, $this->skip_recursions ) );
-		$cache_key      = md5( wp_json_encode( $cache_key_args ) );
+		$cache_key      = md5( (string) wp_json_encode( $cache_key_args ) );
 		$cache_found    = false;
 
 		$temp_elements = $this->wpml_cache->get( $cache_key, $cache_found );

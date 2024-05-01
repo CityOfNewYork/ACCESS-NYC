@@ -38,6 +38,7 @@ class App {
 			          is_admin()
 			          || ( defined( 'XMLRPC_REQUEST' ) && constant( 'XMLRPC_REQUEST' ) )
 			          || wpml_is_rest_request()
+			          || ( defined( 'DOING_CRON' ) && DOING_CRON )
 		          );
 	}
 }

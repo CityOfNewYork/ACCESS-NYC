@@ -4,10 +4,10 @@
  */
 
 use WPML\FP\Fns;
-use WPML\FP\Obj;
 
 class WPML_TM_REST_AMS_Clients extends WPML_REST_Base {
 
+	/** @var WPML_TM_AMS_API */
 	private $api;
 	private $ams_user_records;
 
@@ -15,7 +15,7 @@ class WPML_TM_REST_AMS_Clients extends WPML_REST_Base {
 	private $translator_activation_records;
 
 	/**
-	 * @var WPML_TM_ATE_AMS_Endpoints
+	 * @var WPML_TM_MCS_ATE_Strings
 	 */
 	private $strings;
 
@@ -74,6 +74,22 @@ class WPML_TM_REST_AMS_Clients extends WPML_REST_Base {
 			array(
 				'methods'  => 'GET',
 				'callback' => array( $this, 'get_console' ),
+			)
+		);
+
+		parent::register_route(
+			'/ams/engines',
+			array(
+				'methods'  => 'GET',
+				'callback' => array( $this, 'get_translation_engines' ),
+			)
+		);
+
+		parent::register_route(
+			'/ams/engines',
+			array(
+				'methods'  => 'POST',
+				'callback' => array( $this, 'update_translation_engines' ),
 			)
 		);
 	}
@@ -149,4 +165,18 @@ class WPML_TM_REST_AMS_Clients extends WPML_REST_Base {
 		return array( 'manage_translations', 'manage_options' );
 	}
 
+	public function get_translation_engines() {
+		return $this->api->get_translation_engines();
+	}
+
+	public function update_translation_engines( WP_REST_Request $request ) {
+		$params = $request->get_json_params();
+
+		$result = $this->api->update_translation_engines( $params );
+		if ( ! is_wp_error( $result ) ) {
+			do_action( 'wpml_tm_ate_translation_engines_updated' );
+		}
+
+		return $result;
+	}
 }

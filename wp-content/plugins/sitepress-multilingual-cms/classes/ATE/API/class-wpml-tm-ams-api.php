@@ -1,6 +1,6 @@
 <?php
 
-use WPML\TM\ATE\ClonedSites\FingerprintGenerator;
+use WPML\TM\ATE\API\FingerprintGenerator;
 use WPML\TM\ATE\Log\Entry;
 use WPML\TM\ATE\Log\Storage;
 use WPML\TM\ATE\Log\EventsTypes;
@@ -21,6 +21,8 @@ class WPML_TM_AMS_API {
 	const HTTP_ERROR_CODE_400 = 400;
 
 	private $auth;
+
+	/** @var WPML_TM_ATE_AMS_Endpoints */
 	private $endpoints;
 	private $wp_http;
 
@@ -143,6 +145,45 @@ class WPML_TM_AMS_API {
 					}
 					$result = $response_body;
 				}
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * @return WP_Error|null
+	 */
+	public function get_translation_engines() {
+		$result = null;
+
+		$url = $this->endpoints->get_translation_engines();
+		$response = $this->signed_request( 'GET', $url );
+		if ( $this->response_has_body( $response ) ) {
+			$result = $this->get_errors( $response );
+			if ( ! is_wp_error( $result ) ) {
+				$result = json_decode( $response['body'], true );
+			}
+		}
+		return $result;
+	}
+
+	/**
+	 * @param $engine_settings
+	 *
+	 * @return bool|WP_Error
+	 */
+	public function update_translation_engines( $engine_settings ) {
+		$result = false;
+
+		$url      = $this->endpoints->get_translation_engines();
+		$response = $this->signed_request( 'POST', $url, [ 'list' => $engine_settings ] );
+		if ( $this->response_has_body( $response ) ) {
+			$result = $this->get_errors( $response );
+			if ( ! is_wp_error( $result ) ) {
+				$result = json_decode( $response['body'], true );
+
+				return \WPML\FP\Obj::propOr( false, 'success', $result );
 			}
 		}
 
@@ -356,6 +397,19 @@ class WPML_TM_AMS_API {
 	}
 
 	/**
+	 * @param string $migrationCode
+	 *
+	 * @return array|WP_Error
+	 */
+	public function reportCopiedSiteWithCreditTransfer( $migrationCode ) {
+		return $this->processReport(
+			$this->endpoints->get_ams_copy_attached(),
+			'POST',
+			[ 'migration_code' => $migrationCode ]
+		);
+	}
+
+	/**
 	 * @param array $response Response from reportMovedSite()
 	 *
 	 * @return bool|WP_Error
@@ -449,12 +503,13 @@ class WPML_TM_AMS_API {
 	 *
 	 * @return array|WP_Error
 	 */
-	private function processReport( $url, $method ) {
+	private function processReport( $url, $method, $queryParams = [] ) {
 		$args = $this->prepareClonedSiteArguments( $method );
 
 		$url_parts = wp_parse_url( $url );
 
 		$registration_data     = $this->get_registration_data();
+		$query                 = $queryParams;
 		$query['shared_key']   = $registration_data['shared'];
 		$query['token']        = uuid_v5( wp_generate_uuid4(), $url );
 		$query['website_uuid'] = $this->auth->get_site_id();
@@ -473,6 +528,15 @@ class WPML_TM_AMS_API {
 	 * @return bool
 	 */
 	public function processCopyReportConfirmation( $response ) {
+		if (
+			! is_array( $response )
+			|| ! array_key_exists(  'response', $response )
+			|| ! array_key_exists( 'code', $response[ 'response' ] )
+			|| $response[ 'response' ][ 'code' ] !== 200
+		) {
+			return false;
+		}
+
 		if ( $this->response_has_body( $response ) ) {
 			$response_body = json_decode( $response['body'], true );
 
@@ -494,8 +558,11 @@ class WPML_TM_AMS_API {
 		$user_data = array();
 
 		foreach ( $users as $user ) {
-			$wp_user     = get_user_by( 'id', $user->ID );
-			$user_data[] = $this->get_user_data( $wp_user, $with_name_details );
+			$wp_user = get_user_by( 'id', $user->ID );
+
+			if ( $wp_user ) {
+				$user_data[] = $this->get_user_data( $wp_user, $with_name_details );
+			}
 		}
 
 		return $user_data;
@@ -673,7 +740,7 @@ class WPML_TM_AMS_API {
 	 * @return array|WP_Error
 	 */
 	private function request( $method, $url, array $params = null ) {
-		$lock = $this->clonedSitesHandler->checkCloneSiteLock();
+		$lock = $this->clonedSitesHandler->checkCloneSiteLock( $url );
 		if ( $lock ) {
 			return $lock;
 		}
@@ -685,14 +752,18 @@ class WPML_TM_AMS_API {
 			FingerprintGenerator::SITE_FINGERPRINT_HEADER => $this->fingerprintGenerator->getSiteFingerprint(),
 		];
 
+		$max_execution_time = ini_get( 'max_execution_time' );
+		$timeout = $max_execution_time ? (int) $max_execution_time / 2 : 1;
+
 		$args = [
 			'method'  => $method,
 			'headers' => $headers,
-			'timeout' => max( ini_get( 'max_execution_time' ) / 2, 5 ),
+			'timeout' => (float) max( $timeout, 5 ),
 		];
 
 		if ( $params ) {
-			$args['body'] = wp_json_encode( $params, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
+			$body = wp_json_encode( $params, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
+			$args['body'] = $body ?: '';
 		}
 
 		$response = $this->wp_http->request( $this->add_versions_to_url( $url ), $args );
@@ -729,7 +800,9 @@ class WPML_TM_AMS_API {
 	 */
 	private function add_versions_to_url( $url ) {
 		$url_parts = wp_parse_url( $url );
+		$url_parts = $url_parts ?: [];
 		$query     = array();
+
 		if ( array_key_exists( 'query', $url_parts ) ) {
 			parse_str( $url_parts['query'], $query );
 		}

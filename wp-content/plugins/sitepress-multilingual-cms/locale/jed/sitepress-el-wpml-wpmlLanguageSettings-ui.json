@@ -1,0 +1,28 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose the image file type for flags": [
+            "Επιλέξτε τον τύπο αρχείου εικόνας για σημαίες"
+         ],
+         "This option affects only the built-in WPML flags, not the custom uploaded ones.": [
+            "Αυτή η επιλογή επηρεάζει μόνο τις ενσωματωμένες σημαίες WPML, όχι τις προσαρμοσμένες που μεταφορτώθηκαν."
+         ],
+         "%s format": [
+            "%s μορφή"
+         ],
+         "Save": [
+            "Αποθήκευση"
+         ],
+         "The new format has been saved.": [
+            "Η νέα μορφή αποθηκεύτηκε."
+         ],
+         "Failed to save the new format": [
+            "Αποτυχία αποθήκευσης της νέας μορφής"
+         ]
+      }
+   }
+}

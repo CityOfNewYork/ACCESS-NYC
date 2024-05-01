@@ -2,7 +2,6 @@
 
 class WPML_Upgrade_Media_Duplication_In_Core implements IWPML_Upgrade_Command {
 
-	const DUPLICATE_FEATURED_META_KEY            = '_wpml_media_featured';
 	const FEATURED_AS_TRANSLATED_META_KEY        = '_wpml_featured_image_as_translated';
 	const TRANSIENT_DEFERRED_UPGRADE_IN_PROGRESS = 'wpml_upgrade_media_duplication_in_progress';
 	const MAX_TIME                               = 10;
@@ -38,8 +37,6 @@ class WPML_Upgrade_Media_Duplication_In_Core implements IWPML_Upgrade_Command {
 	 * @return bool
 	 */
 	public function run_admin() {
-		$this->update_global_settings();
-
 		if ( $this->has_notice() ) {
 			$this->create_or_refresh_notice();
 			return false;
@@ -220,7 +217,7 @@ class WPML_Upgrade_Media_Duplication_In_Core implements IWPML_Upgrade_Command {
 			 LEFT JOIN {$this->wpdb->prefix}icl_translations AS t
 			 	ON t.element_id = pm.post_id AND t.element_type LIKE 'post_%'
 			 LEFT JOIN {$this->wpdb->postmeta} AS duplicate_featured
-				ON duplicate_featured.post_id = pm.post_id AND duplicate_featured.meta_key = '" . self::DUPLICATE_FEATURED_META_KEY . "'
+				ON duplicate_featured.post_id = pm.post_id AND duplicate_featured.meta_key = '" . \WPML\Media\Option::DUPLICATE_FEATURED_KEY . "'
 			 WHERE pm.meta_key = '" . self::FEATURED_AS_TRANSLATED_META_KEY . "'
 				AND t.source_language_code IS NULL
 				AND duplicate_featured.meta_value IS NULL
@@ -242,7 +239,7 @@ class WPML_Upgrade_Media_Duplication_In_Core implements IWPML_Upgrade_Command {
 		$this->wpdb->query(
 			$this->wpdb->prepare(
 				"INSERT INTO {$this->wpdb->prefix}postmeta ( post_id, meta_key, meta_value )
-				 SELECT post_id, '" . self::DUPLICATE_FEATURED_META_KEY . "', %d
+				 SELECT post_id, '" . \WPML\Media\Option::DUPLICATE_FEATURED_KEY . "', %d
 		         FROM {$this->wpdb->postmeta} WHERE post_id IN(" . wpml_prepare_in( $post_ids ) . ")
 		            AND meta_key = '" . self::FEATURED_AS_TRANSLATED_META_KEY . "'",
 				$post->duplicate_featured
@@ -284,25 +281,10 @@ class WPML_Upgrade_Media_Duplication_In_Core implements IWPML_Upgrade_Command {
 				$this->get_media_attachment_duplication()->create_duplicate_attachment( (int) $attachment_id, (int) $post->ID, $language_code );
 			}
 		}
-
-		update_post_meta( $post->ID, '_wpml_media_duplicate', true );
 	}
 
 	private function should_duplicate_media() {
-		$settings = $this->get_media_settings();
-
-		return isset( $settings['new_content_settings']['duplicate_media'] )
-			 && $settings['new_content_settings']['duplicate_media'];
-	}
-
-	public function update_global_settings() {
-
-		$settings = $this->get_media_settings();
-		$settings['new_content_settings']['always_translate_media'] = true;
-		$settings['new_content_settings']['duplicate_media']        = true;
-		$settings['new_content_settings']['duplicate_featured']     = true;
-
-		update_option( WPML_Media_Duplication_Setup::MEDIA_SETTINGS_OPTION_KEY, $settings );
+		return \WPML\FP\Obj::prop( 'duplicate_media', \WPML\Media\Option::getNewContentSettings() );
 	}
 
 	private function cleanup_display_featured_as_translated_meta() {
@@ -311,10 +293,6 @@ class WPML_Upgrade_Media_Duplication_In_Core implements IWPML_Upgrade_Command {
 
 	private function mark_migration_completed() {
 		$this->wpml_upgrade->mark_command_as_executed( $this );
-	}
-
-	private function get_media_settings() {
-		return get_option( WPML_Media_Duplication_Setup::MEDIA_SETTINGS_OPTION_KEY, array() );
 	}
 
 	private function get_media_attachment_duplication() {

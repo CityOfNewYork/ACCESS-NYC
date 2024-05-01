@@ -64,14 +64,16 @@ class WPML_LS_Assets {
 		if ( $this->settings->can_load_script( $slug ) ) {
 
 			foreach ( $template->get_scripts() as $k => $url ) {
-				wp_enqueue_script( $template->get_resource_handler( $k ), $url, array(), $template->get_version() );
+				$site_scheme_url = set_url_scheme( $url );
+				wp_enqueue_script( $template->get_resource_handler( $k ), $site_scheme_url, array(), $template->get_version() );
 			}
 		}
 
 		if ( $this->settings->can_load_styles( $slug ) ) {
 
 			foreach ( $template->get_styles() as $k => $url ) {
-				wp_enqueue_style( $template->get_resource_handler( $k ), $url, array(), $template->get_version() );
+				$site_scheme_url = set_url_scheme( $url );
+				wp_enqueue_style( $template->get_resource_handler( $k ), $site_scheme_url, array(), $template->get_version() );
 			}
 		}
 	}

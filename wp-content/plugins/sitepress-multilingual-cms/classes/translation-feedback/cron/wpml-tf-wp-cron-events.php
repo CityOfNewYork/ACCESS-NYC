@@ -53,7 +53,8 @@ class WPML_TF_WP_Cron_Events implements IWPML_Action {
 
 	private function remove_synchronize_ratings_event() {
 		$timestamp = wp_next_scheduled( self::SYNCHRONIZE_RATINGS_EVENT );
-		wp_unschedule_event( $timestamp, self::SYNCHRONIZE_RATINGS_EVENT );
+
+		$timestamp && wp_unschedule_event( $timestamp, self::SYNCHRONIZE_RATINGS_EVENT );
 	}
 
 	public function synchronize_ratings() {

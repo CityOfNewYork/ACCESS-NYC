@@ -8,20 +8,32 @@
          "Accepted": [
             "Akzeptiert"
          ],
-         "Reviewing the next translation...": [
-            "Überprüfung der nächsten Übersetzung ..."
+         "Approved!": [
+            "Genehmigt!"
+         ],
+         "Loading the next translation for review...": [
+            "Die nächste zu überprüfende Übersetzung wird geladen ..."
          ],
          "Back": [
             "Zurück"
          ],
-         "Edit Translation": [
-            "Übersetzung bearbeiten"
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "Schalten Sie dies aus, um nach Beenden dieser Überprüfung nicht automatisch die nächste Übersetzung zu laden."
          ],
-         "There was an error in applying translation.": [
-            "Beim Übernehmen der Übersetzung ist ein Fehler aufgetreten."
+         "Turn on to automatically load the next translation after finishing this  .": [
+            "Aktivieren Sie diese Option, um nach Abschluss dieser Übersetzung automatisch die nächste Übersetzung zu laden."
+         ],
+         "Edit": [
+            "Bearbeiten"
+         ],
+         "Edit translation": [
+            "Übersetzung bearbeiten"
          ],
          "Please wait, applying translation..": [
             "Bitte warten Sie, die Übersetzung wird übernommen ..."
+         ],
+         "Next review": [
+            "Nächste Überprüfung"
          ],
          "Publish this translation": [
             "Diese Übersetzung veröffentlichen"
@@ -29,11 +41,14 @@
          "Accept this translation": [
             "Diese Übersetzung akzeptieren"
          ],
-         "Approved!": [
-            "Genehmigt!"
+         "Published!": [
+            "Veröffentlicht!"
          ],
-         "Loading the next translation for review...": [
-            "Die nächste zu überprüfende Übersetzung wird geladen ..."
+         "Someone is already reviewing this translation. Please try again later.": [
+            "Jemand überprüft diese Übersetzung bereits. Bitte versuchen Sie es später erneut."
+         ],
+         "There was an error in applying translation.": [
+            "Beim Übernehmen der Übersetzung ist ein Fehler aufgetreten."
          ]
       }
    }

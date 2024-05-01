@@ -13,21 +13,6 @@ class View {
 		$this->logs = $logs;
 	}
 
-	public function renderSupportSection() {
-		?>
-		<div class="wrap">
-			<h2 id="ate-log">
-				<?php esc_html_e( 'Advanced Translation Editor', 'wpml-translation-management' ); ?>
-			</h2>
-			<p>
-				<a href="<?php echo admin_url( 'admin.php?page=' . Hooks::SUBMENU_HANDLE ); ?>">
-					<?php echo sprintf( esc_html__( 'Error Logs (%d)', 'wpml-translation-management' ), $this->logs->count() ); ?>
-				</a>
-			</p>
-		</div>
-		<?php
-	}
-
 	public function renderPage() {
 		?>
 		<div class="wrap">
@@ -89,10 +74,10 @@ class View {
 				<?php echo esc_html( $entry->description ); ?>
 			</td>
 			<td class="wpml-job-id">
-				<?php echo esc_html( $entry->wpmlJobId ); ?>
+				<?php echo esc_html( (string) $entry->wpmlJobId ); ?>
 			</td>
 			<td class="ate-job-id">
-				<?php echo esc_html( $entry->ateJobId ); ?>
+				<?php echo esc_html( (string) $entry->ateJobId ); ?>
 			</td>
 			<td class="extra-data">
 				<?php echo esc_html( $entry->getExtraDataToString() ); ?>

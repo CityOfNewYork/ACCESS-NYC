@@ -42,6 +42,10 @@ abstract class SaveUser implements IHandler {
 		$lastName  = $get( 'last' );
 		$email     = filter_var( $get( 'email' ), FILTER_SANITIZE_EMAIL );
 		$userName  = $get( 'userName' );
+
+		if ( ! RoleValidator::isValid( $get( 'wpRole' ) ) ) {
+			return Either::left( __( 'The role was not found.', 'sitepress' ) );
+		}
 		$role      = RoleValidator::getTheHighestPossibleIfNotValid( $get( 'wpRole' ) );
 
 		if ( $email && $userName && $role ) {

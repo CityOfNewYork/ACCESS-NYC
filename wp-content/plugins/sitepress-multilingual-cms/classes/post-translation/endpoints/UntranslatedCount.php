@@ -24,6 +24,9 @@ class UntranslatedCount {
 	            SELECT RIGHT(element_type, LENGTH(element_type) - 5) as post_type, posts.ID
 	            FROM {$wpdb->prefix}icl_translations
 	            INNER JOIN {$wpdb->prefix}posts posts ON element_id = ID
+                
+                LEFT JOIN {$wpdb->postmeta} postmeta ON postmeta.post_id = posts.ID AND postmeta.meta_key = %s
+	                                        
 	            WHERE element_type IN ({$postIn})
 		           AND post_status = 'publish'
 		           AND source_language_code IS NULL
@@ -35,13 +38,15 @@ class UntranslatedCount {
 	                                       on icl_translations_inner.translation_id = icl_translations_status.translation_id
 	                   WHERE icl_translations_inner.trid = {$wpdb->prefix}icl_translations.trid
 	                     AND icl_translations_status.status NOT IN ({$statuses})
+	                     AND icl_translations_status.needs_update != 1
 	               ) < %d
+	               AND ( postmeta.meta_value IS NULL OR postmeta.meta_value = 'no' )
 	         ) as translations
 			GROUP BY translations.post_type;
 		";
 
 		$untranslatedPosts = $wpdb->get_results(
-			$wpdb->prepare( $query, Languages::getDefaultCode(), Lst::length( Languages::getSecondaries() ) ),
+			$wpdb->prepare( $query, \WPML_TM_Post_Edit_TM_Editor_Mode::POST_META_KEY_USE_NATIVE, Languages::getDefaultCode(), Lst::length( Languages::getSecondaries() ) ),
 			ARRAY_N
 		);
 

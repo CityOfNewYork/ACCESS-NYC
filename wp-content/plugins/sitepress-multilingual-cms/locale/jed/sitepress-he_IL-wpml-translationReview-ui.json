@@ -8,20 +8,32 @@
          "Accepted": [
             "התקבלה"
          ],
-         "Reviewing the next translation...": [
-            "בדיקת התרגום הבא."
+         "Approved!": [
+            "אושר!"
+         ],
+         "Loading the next translation for review...": [
+            "טוען את התרגום הבא לבדיקה..."
          ],
          "Back": [
             "חזרה"
          ],
-         "Edit Translation": [
-            "ערוך תרגום"
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "כבה כדי לא לטעון באופן אוטומטי את התרגום הבא לאחר סיום הבדיקה."
          ],
-         "There was an error in applying translation.": [
-            "אירעה שגיאה בהחלת התרגום."
+         "Turn on to automatically load the next translation after finishing this  .": [
+            "הפעל כדי לטעון באופן אוטומטי את התרגום הבא לאחר סיום הנוכחי."
+         ],
+         "Edit": [
+            "ערוך"
+         ],
+         "Edit translation": [
+            "ערוך תרגום"
          ],
          "Please wait, applying translation..": [
             "המתן, מחיל את התרגום."
+         ],
+         "Next review": [
+            "הבדיקה הבאה"
          ],
          "Publish this translation": [
             "פרסם תרגום זה."
@@ -29,11 +41,14 @@
          "Accept this translation": [
             "קבל תרגום זה"
          ],
-         "Approved!": [
-            "אושר!"
+         "Published!": [
+            "פורסם!"
          ],
-         "Loading the next translation for review...": [
-            "טוען את התרגום הבא לבדיקה..."
+         "Someone is already reviewing this translation. Please try again later.": [
+            "מישהו כבר בודק את התרגום הזה. נסה שוב מאוחר יותר."
+         ],
+         "There was an error in applying translation.": [
+            "אירעה שגיאה בהחלת התרגום."
          ]
       }
    }

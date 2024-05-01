@@ -25,7 +25,7 @@ class SaveTranslator extends SaveUser {
 			->toArray();
 
 		// $setRole :: WP_User -> WP_User
-		$setRole = Fns::tap( invoke( 'add_cap' )->with( \WPML_Translator_Role::CAPABILITY ) );
+		$setRole = Fns::tap( invoke( 'add_cap' )->with( \WPML\LIB\WP\User::CAP_TRANSLATE ) );
 
 		// $storePairs :: int -> int
 		$storePairs = Fns::tap( partialRight( [ make( \WPML_Language_Pair_Records::class ), 'store' ], $pairs ) );
@@ -34,7 +34,10 @@ class SaveTranslator extends SaveUser {
 		           ->map( $setRole )
 		           ->map( Obj::prop( 'ID' ) )
 		           ->map( $storePairs )
-		           ->map( Fns::tap( partial( 'do_action', 'wpml_update_translator' ) ) )
+		           ->map( function( $user ) {
+					   do_action( 'wpml_update_translator' );
+					   return $user;
+				   } )
 		           ->map( Fns::always( true ) );
 	}
 }

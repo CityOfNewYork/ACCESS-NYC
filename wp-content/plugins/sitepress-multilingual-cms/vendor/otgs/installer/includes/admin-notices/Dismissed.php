@@ -2,6 +2,8 @@
 
 namespace OTGS\Installer\AdminNotices;
 
+use OTGS\Installer\FP\Obj;
+
 class Dismissed {
 	const STORE_KEY = 'dismissed';
 
@@ -14,6 +16,29 @@ class Dismissed {
 	 */
 	public static function isDismissed( array $dismissedNotices, $repo, $id ) {
 		return isset( $dismissedNotices['repo'][ $repo ][ $id ] );
+	}
+
+	/**
+	 * @param string $plugin_slug
+	 * @param bool $network
+	 * @return void
+	 */
+	public static function dismissNoticeOnPluginActivation( $plugin_slug, $network ) {
+		$repositoryRecommendations = Obj::propOr([], 'repo', apply_filters( 'otgs_installer_admin_notices', [] ) );
+
+		$isPluginRecommendation = function( $plugin_attrs ) use ( $plugin_slug ) {
+			return '' == $plugin_slug || strpos( $plugin_slug, $plugin_attrs['glue_plugin_slug'] ) !== false;
+		};
+		foreach( $repositoryRecommendations as $repository => $notices ) {
+			if ( ! isset( $notices['plugin-activated'] ) ) {
+				continue;
+			}
+			$pluginRecommendationsToDisable = array_filter( $notices['plugin-activated'], $isPluginRecommendation );
+
+			foreach ( $pluginRecommendationsToDisable as $plugin => $recommendation ) {
+				self::dismissNoticeByTypeAndRepository( $repository, 'plugin-activated', $plugin );
+			}
+		}
 	}
 
 	/**
@@ -38,23 +63,48 @@ class Dismissed {
 	}
 
 	public static function dismissNotice() {
-		$data = filter_var_array( $_POST, [
-			'repository'       => FILTER_SANITIZE_STRING,
-			'noticeType'       => FILTER_SANITIZE_STRING,
-			'noticePluginSlug' => FILTER_SANITIZE_STRING,
+		$rawData = filter_var_array( $_POST, [
+			'repository'       => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+			'noticeType'       => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
+			'noticePluginSlug' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
 		] );
 
-		$dismissions = apply_filters( 'otgs_installer_admin_notices_dismissions', [] );
+		self::dismissNoticeByTypeAndRepository(
+			Obj::propOr('', 'repository', $rawData ),
+			Obj::propOr('', 'noticeType', $rawData ),
+			Obj::propOr('', 'noticePluginSlug', $rawData )
+		);
+
+		wp_send_json_success( [] );
+	}
+
+	public static function dismissRecommendationNoticeByPluginSlug( $dismissed, $data ) {
+		$dismissed['repo'][ $data['repository'] ][ $data['noticePluginSlug'] ] = time();
+		return $dismissed;
+	}
+
+	/**
+	 * @param string $dismissRepository
+	 * @param string $dismissNoticeType
+	 * @param string $dismissNoticePluginSlug
+	 * @return void
+	 */
+	private static function dismissNoticeByTypeAndRepository($dismissRepository, $dismissNoticeType, $dismissNoticePluginSlug) {
+		$dismissions = apply_filters('otgs_installer_admin_notices_dismissions', []);
 
 		$store = new Store();
 
-		$dismissed = $store->get( self::STORE_KEY, [] );
+		$dismissed = $store->get(self::STORE_KEY, []);
 
-		$dismissed = $dismissions[ $data['noticeType'] ]( $dismissed, $data );
+		$data = [
+			'repository' => $dismissRepository,
+			'noticeType' => $dismissNoticeType,
+			'noticePluginSlug' => $dismissNoticePluginSlug,
+		];
 
-		$store->save( self::STORE_KEY, $dismissed );
+		$dismissed = $dismissions[$dismissNoticeType]($dismissed, $data);
 
-		wp_send_json_success( [] );
+		$store->save(self::STORE_KEY, $dismissed);
 	}
 
 }

@@ -1,10 +1,12 @@
 <?php
 
+use WPML\API\Sanitize;
 use WPML\Setup\Option;
 use WPML\TM\API\Basket;
 use WPML\TM\ATE\ClonedSites\Lock as AteApiLock;
 use WPML\TM\Menu\TranslationBasket\Utility;
 use WPML\TM\Menu\TranslationServices\Section;
+use WPML\LIB\WP\User;
 use function WPML\Container\make;
 
 class WPML_TM_Menus_Management extends WPML_TM_Menus {
@@ -13,12 +15,6 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 
 	/** @var IWPML_Template_Service $template_service */
 	private $template_service;
-
-	/** @var WPML_Translation_Manager_Records $manager_records */
-	private $manager_records;
-
-	/** @var WPML_Translator_Records $translator_records */
-	private $translator_records;
 
 	private $active_languages;
 	private $translatable_types;
@@ -41,16 +37,8 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 	 */
 	private $admin_sections;
 
-	public function __construct(
-		IWPML_Template_Service $template_service,
-		WPML_Translation_Manager_Records $manager_records,
-		WPML_Translator_Records $translator_records
-	) {
+	public function __construct( IWPML_Template_Service $template_service ) {
 		$this->template_service   = $template_service;
-		$this->manager_records    = $manager_records;
-		$this->translator_records = $translator_records;
-
-		$wpml_wp_api = new WPML_WP_API();
 
 		$this->admin_sections = WPML\Container\make( 'WPML_TM_Admin_Sections' );
 		$this->admin_sections->init_hooks();
@@ -112,12 +100,12 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 	}
 
 	private function build_dashboard_item() {
-		$this->tab_items['dashboard'] = array(
+		$this->tab_items['dashboard'] = [
 			'caption'          => __( 'Dashboard', 'wpml-translation-management' ),
-			'current_user_can' => array( WPML_Manage_Translations_Role::CAPABILITY, 'manage_options' ),
-			'callback'         => array( $this, 'build_content_dashboard' ),
+			'current_user_can' => [ User::CAP_ADMINISTRATOR, User::CAP_MANAGE_TRANSLATIONS ],
+			'callback'         => [ $this, 'build_content_dashboard' ],
 			'order'            => 100,
-		);
+		];
 	}
 
 	public function build_content_dashboard() {
@@ -130,6 +118,8 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 		if ( $this->found_documents > $this->documents || $this->there_are_hidden_posts() ) {
 			$this->display_hidden_posts_message();
 		}
+
+		$this->build_dashboard_confirmation_messages_container();
 		$this->build_content_dashboard_remote_translations_controls();
 		$this->build_content_dashboard_filter();
 		$this->build_content_dashboard_results();
@@ -149,33 +139,14 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 		$this->current_language = $sitepress->get_current_language();
 		$this->source_language  = TranslationProxy_Basket::get_source_language();
 
-		if ( isset( $_COOKIE['wp-translation_dashboard_filter'] ) ) {
-			parse_str( $_COOKIE['wp-translation_dashboard_filter'], $this->translation_filter );
-
-			$this->translation_filter = filter_var_array(
-				$this->translation_filter,
-				array(
-					'type'                 => FILTER_SANITIZE_STRING,
-					'parent_type'          => FILTER_SANITIZE_STRING,
-					'parent_id'            => FILTER_SANITIZE_NUMBER_INT,
-					'from_lang'            => FILTER_SANITIZE_STRING,
-					'to_lang'              => FILTER_SANITIZE_STRING,
-					'tstatus'              => FILTER_SANITIZE_NUMBER_INT,
-					'status'               => FILTER_SANITIZE_STRING,
-					'translation_priority' => FILTER_SANITIZE_NUMBER_INT,
-					'title'                => FILTER_SANITIZE_STRING,
-					'sort_by'              => FILTER_SANITIZE_STRING,
-					'sort_order'           => FILTER_SANITIZE_STRING,
-				)
-			);
-		}
+        $this->translation_filter = \WPML\TM\TranslationDashboard\FiltersStorage::get();
 
 		if ( $this->source_language || ! isset( $this->translation_filter['from_lang'] ) ) {
 			if ( $this->source_language ) {
 				$this->translation_filter['from_lang'] = $this->source_language;
 			} else {
 				$this->translation_filter['from_lang'] = $this->current_language;
-				if ( array_key_exists( 'lang', $_GET ) && $lang = filter_var( $_GET['lang'], FILTER_SANITIZE_STRING, FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ) {
+				if ( $lang = Sanitize::stringProp( 'lang', $_GET ) ) {
 					$this->translation_filter['from_lang'] = $lang;
 				}
 			}
@@ -183,7 +154,7 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 
 		if ( ! isset( $this->translation_filter['to_lang'] ) ) {
 			$this->translation_filter['to_lang'] = '';
-			if ( array_key_exists( 'to_lang', $_GET ) && $lang = filter_var( $_GET['to_lang'], FILTER_SANITIZE_STRING, FILTER_SANITIZE_FULL_SPECIAL_CHARS ) ) {
+			if ( $lang = Sanitize::stringProp( 'to_lang', $_GET ) ) {
 				$this->translation_filter['to_lang'] = $lang;
 			}
 		}
@@ -206,8 +177,9 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 			$this->translation_filter['type'] = ''; // All Types.
 		}
 		$sort_order_next                 = $this->translation_filter['sort_order'] == 'ASC' ? 'DESC' : 'ASC';
-		$this->dashboard_title_sort_link = 'admin.php?page=' . WPML_TM_FOLDER . $this->get_page_slug() . '&sm=dashboard&icl_tm_action=sort&sort_by=title&sort_order=' . $sort_order_next;
-		$this->dashboard_date_sort_link  = 'admin.php?page=' . WPML_TM_FOLDER . $this->get_page_slug() . '&sm=dashboard&icl_tm_action=sort&sort_by=date&sort_order=' . $sort_order_next;
+        $nonce                           = wp_create_nonce( 'sort' );
+		$this->dashboard_title_sort_link = 'admin.php?page=' . WPML_TM_FOLDER . $this->get_page_slug() . '&sm=dashboard&icl_tm_action=sort&sort_by=title&sort_order=' . $sort_order_next . '&nonce=' . $nonce;
+		$this->dashboard_date_sort_link  = 'admin.php?page=' . WPML_TM_FOLDER . $this->get_page_slug() . '&sm=dashboard&icl_tm_action=sort&sort_by=date&sort_order=' . $sort_order_next . '&nonce=' . $nonce;
 
 		$this->post_statuses          = array(
 			'publish' => __( 'Published', 'wpml-translation-management' ),
@@ -248,6 +220,10 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 		$paged                            = (int) filter_input( INPUT_GET, 'paged', FILTER_SANITIZE_NUMBER_INT );
 		$this->translation_filter['page'] = $paged ? $paged - 1 : 0;
 		$this->filter_translation_type    = isset( $this->translation_filter['type'] ) ? $this->translation_filter['type'] : false;
+	}
+
+	private function build_dashboard_confirmation_messages_container() {
+		echo '<div id="wpml-tm-dashboard-sent-content-messages-container"></div>';
 	}
 
 	private function build_dashboard_documents() {
@@ -352,7 +328,7 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 				<?php do_action( 'wpml_tm_dashboard_word_count_estimation' ); ?>
 			</div>
 			<?php
-			if ( $this->dashboard_pagination && ! empty( $this->translation_filter['type'] ) ) {
+			if ( $this->dashboard_pagination ) {
 				do_action( 'wpml_tm_dashboard_pagination', $this->dashboard_pagination->get_items_per_page(), $this->found_documents );
 			}
 			?>
@@ -361,178 +337,8 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 		do_action( 'wpml_tm_after_translation_dashboard_documents' );
 	}
 
-	private function get_translate_tooltip_attributes() {
-		$translate_radio_message = $this->get_translate_tooltip_text();
-
-		if ( $translate_radio_message ) {
-			return ' class="js-otgs-popover-tooltip" data-tippy-zIndex="999999" title="' . esc_attr( $translate_radio_message ) . '"';
-		}
-
-		return null;
-	}
-
-	private function get_translate_tooltip_text() {
-		if (
-				! Option::shouldTranslateEverything()
-				&& ! wpml_tm_load_blog_translators()->has_translators()
-		) {
-			if ( ! wpml_translation_management()->has_active_service() ) {
-				/* translators: This text will be used to build a link to the translation roles page */
-				$translators_link = $this->get_translation_roles_link( __( 'at least one translator', 'wpml-translation-management' ) );
-
-				/* translators: This text will be used to build a link to the translation services page */
-				$translation_services_link = $this->get_translation_services_link( __( 'active and authenticated translation service', 'wpml-translation-management' ) );
-
-				/* translators: %1$s contains a link to the translation roles page with "at least one translator" as a text whilst %2$s is a link to the translation services page with "active and authenticated translation service" as a text */
-				$tooltip_text = __( 'To send content to translation first make sure you either have %1$s or an %2$s.', 'wpml-translation-management' );
-
-				return sprintf( $tooltip_text, $translators_link, $translation_services_link );
-			}
-
-			if ( wpml_translation_management()->service_activation_incomplete() ) {
-				/* translators: %s is replaced with the name of the active translation service */
-				$tooltip_text = __( 'To send content to translation first make sure "%s" is authenticated or you have at least one translator.', 'wpml-translation-management' );
-
-				$translation_services_link = $this->get_translation_services_link( TranslationProxy::get_current_service_name() );
-
-				return sprintf( $tooltip_text, $translation_services_link );
-			}
-		}
-
-		return null;
-	}
-
 	private function build_content_dashboard_documents_options() {
-		global $wpdb;
-
-		$translate_checked  = 'checked="checked"';
-		$duplicate_checked  = '';
-		$do_nothing_checked = '';
-
-		$flag_factory = new WPML_Flags_Factory( $wpdb );
-		$flags        = $flag_factory->create();
-
-		$translate_radio_text = __( 'Translate', 'wpml-translation-management' );
-
-		$translate_tooltip_attributes = $this->get_translate_tooltip_attributes();
-		if ( $translate_tooltip_attributes ) {
-			$translate_checked  = 'disabled="disabled"';
-			$do_nothing_checked = 'checked="checked"';
-		}
-
-		?>
-		<div class="tm-dashboard-translation-options">
-
-
-			<table id="icl_tm_languages" class="widefat">
-				<thead>
-				<tr>
-					<th><?php echo esc_html__( 'All Languages', 'wpml-translation-management' ); ?></th>
-					<td>
-						<label <?php echo $translate_tooltip_attributes; ?>>
-							<input type="radio" id="translate-all" value="1" name="radio-action-all" <?php echo $translate_checked; ?> /> <?php echo esc_html( $translate_radio_text ); ?>
-						</label>
-					</td>
-					<td>
-						<label>
-							<input type="radio" id="duplicate-all" value="2" name="radio-action-all" <?php echo $duplicate_checked; ?> />
-																												<?php
-																												echo esc_html__(
-																													'Duplicate content',
-																													'wpml-translation-management'
-																												)
-																												?>
-						</label>
-					</td>
-					<td>
-						<label>
-							<input type="radio" id="update-none" value="0" name="radio-action-all" <?php echo $do_nothing_checked; ?> /> <?php echo esc_html__( 'Do nothing', 'wpml-translation-management' ); ?>
-						</label>
-					</td>
-				</tr>
-				<tr class="blank_row">
-					<td colspan="3" style="height:6px!important;"></td>
-				</tr>
-				</thead>
-				<tbody>
-				<?php foreach ( $this->active_languages as $lang ) : ?>
-					<?php
-					if ( $lang['code'] == $this->translation_filter['from_lang'] ) {
-						continue;
-					}
-					$radio_prefix_html = '<input type="radio" name="tr_action[' . esc_attr( $lang['code'] ) . ']" ';
-					?>
-					<tr>
-						<th>
-							<?php echo $flags->get_flag_image( $lang['code'] ) ?>
-							<strong><?php echo esc_html( $lang['display_name'] ); ?></strong>
-						</th>
-						<td>
-							<label <?php echo $translate_tooltip_attributes; ?>>
-								<?php echo $radio_prefix_html; ?> value="1" <?php echo $translate_checked; ?>/>
-								<?php echo esc_html( $translate_radio_text ); ?>
-							</label>
-						</td>
-						<td>
-							<label>
-								<?php echo $radio_prefix_html; ?> value="2" <?php echo $duplicate_checked; ?>/>
-								<?php echo esc_html__( 'Duplicate content', 'wpml-translation-management' ); ?>
-							</label>
-						</td>
-						<td>
-							<label>
-								<?php echo $radio_prefix_html; ?> value="0" <?php echo $do_nothing_checked; ?>/>
-								<?php echo esc_html__( 'Do nothing', 'wpml-translation-management' ); ?>
-							</label>
-						</td>
-					</tr>
-				<?php endforeach; ?>
-				</tbody>
-			</table>
-
-			<input name="iclnonce" type="hidden" value="<?php echo wp_create_nonce( 'pro-translation-icl' ); ?>"/>
-			<?php
-			$tm_jobs_submit_disabled = disabled( empty( $this->selected_languages ) && empty( $this->selected_posts ), true, false );
-			$shouldUseBasket = Basket::shouldUse();
-			$tm_jobs_submit_caption = $shouldUseBasket
-				? __( 'Add selected content to translation basket', 'wpml-translation-management' )
-				: __( 'Translate selected content', 'wpml-translation-management' );
-			?>
-
-			<span class="wpml-display-block text-center wpml-margin-top-lg">
-				<button
-					id="icl_tm_jobs_submit"
-					class="button-primary button-lg wpml-tm-button-basket <?php echo $shouldUseBasket ? 'otgs-ico-basket' : ''; ?>"
-					data-use-basket="<?php echo $shouldUseBasket ? 1 : 0; ?>"
-					type="submit" <?php echo $tm_jobs_submit_disabled; ?>><?php echo $tm_jobs_submit_caption; ?>
-				</button>
-			</span>
-
-			<div id="icl_dup_ovr_warn" class="wpml-margin-top-base" style="display:none;">
-				<?php
-				$dup_message  = '<p>';
-				$dup_message .= __( 'Any existing content (translations) will be overwritten when creating duplicates.', 'wpml-translation-management' );
-				$dup_message .= '</p>';
-				$dup_message .= '<p>';
-				$dup_message .= __( "When duplicating content, please first duplicate parent pages to maintain the site's hierarchy.", 'wpml-translation-management' );
-				$dup_message .= '</p>';
-
-				ICL_AdminNotifier::display_instant_message( $dup_message, 'error' );
-
-				?>
-			</div>
-			<div style="width: 45%; margin: auto; position: relative; top: -30px;">
-				<?php
-				ICL_AdminNotifier::display_messages( 'translation-dashboard-under-translation-options' );
-				ICL_AdminNotifier::remove_message( 'items_added_to_basket' );
-				?>
-			</div>
-
-		</div>
-		<?php
-
-		wp_enqueue_script( 'wpml-tooltip' );
-		wp_enqueue_style( 'wpml-tooltip' );
+		echo '<div class="tm-dashboard-translation-options"></div>';
 	}
 
 
@@ -558,7 +364,7 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 			<?php
 			$active_languages = $sitepress->get_active_languages();
 			$lang_count       = count( $active_languages );
-			$lang_col_width   = ( $lang_count - 1 ) * 26 . 'px';
+			$lang_col_width   = ( $lang_count - 1 ) * 32 . 'px';
 			if ( $lang_count > 10 ) {
 				$lang_col_width = '30%';
 			}
@@ -641,13 +447,6 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 		}
 	}
 
-	/**
-	 * @return bool
-	 */
-	private function current_user_can_manage_translations() {
-		return current_user_can( WPML_Manage_Translations_Role::CAPABILITY );
-	}
-
 	private function build_content_dashboard_documents_sorting_link( $url, $label, $filter_argument ) {
 		$caption = $label;
 		if ( $this->translation_filter['sort_by'] === $filter_argument ) {
@@ -666,12 +465,12 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 
 		if ( $basket_items_count > 0 ) {
 
-			$this->tab_items['basket'] = array(
+			$this->tab_items['basket'] = [
 				'caption'          => $this->build_basket_item_caption( $basket_items_count ),
-				'current_user_can' => WPML_Manage_Translations_Role::CAPABILITY,
-				'callback'         => array( $this, 'build_content_basket' ),
+				'current_user_can' => [ User::CAP_ADMINISTRATOR, User::CAP_MANAGE_TRANSLATIONS ],
+				'callback'         => [ $this, 'build_content_basket' ],
 				'order'            => 101,
-			);
+			];
 
 		}
 	}
@@ -828,13 +627,13 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 		$jobs_count      = $jobs_repository->get_count( new WPML_TM_Jobs_Search_Params() );
 
 		if ( $jobs_count ) {
-			$this->tab_items['jobs'] = array(
+			$this->tab_items['jobs'] = [
 				'caption'          => __( 'Jobs', 'wpml-translation-management' ),
-				'current_user_can' => WPML_Manage_Translations_Role::CAPABILITY,
-				'callback'         => array( $this, 'build_content_translation_jobs' ),
+				'current_user_can' => [ User::CAP_ADMINISTRATOR, User::CAP_MANAGE_TRANSLATIONS ],
+				'callback'         => [ $this, 'build_content_translation_jobs' ],
 				'order'            => 100000,
-                'visible'           => ! Option::shouldTranslateEverything(),
-			);
+				'visible'          => ! Option::shouldTranslateEverything(),
+			];
 		}
 	}
 
@@ -973,31 +772,5 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 		}
 
 		return $translation_service_enabled;
-	}
-
-	/**
-	 * @return string
-	 */
-	private function get_translation_roles_link( $text ) {
-		return $this->get_tm_menu_link( WPML_TM_Translation_Roles_Section::SLUG, $text );
-	}
-
-	/**
-	 * @return string
-	 */
-	private function get_translation_services_link( $text ) {
-		return $this->get_tm_menu_link( Section::SLUG, $text );
-	}
-
-	private function get_tm_menu_link( $section, $text ) {
-		$admin_url = admin_url( 'admin.php' );
-
-		$args          = array(
-			'page' => urlencode( WPML_TM_FOLDER . WPML_Translation_Management::PAGE_SLUG_MANAGEMENT ),
-			'sm'   => urlencode( $section ),
-		);
-		$menu_link_url = add_query_arg( $args, $admin_url );
-
-		return '<a href="' . esc_url( $menu_link_url ) . '">' . esc_html( $text ) . '</a>';
 	}
 }

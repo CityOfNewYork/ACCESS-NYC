@@ -18,6 +18,8 @@ class Map {
 	private static $rid_to_jobId = [];
 
 	public static function init() {
+		self::$rid_to_jobId = [];
+
 		self::macro( 'fromJobId', curryN( 1, Fns::memorize( function ( $jobId ) {
 			$rid = Obj::prop( $jobId, array_flip( array_filter( self::$rid_to_jobId ) ) );
 			if ( $rid ) {

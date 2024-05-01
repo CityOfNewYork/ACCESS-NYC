@@ -74,7 +74,7 @@ class WPML_Current_Screen {
 			$post_id   = filter_var( $_GET['post'], FILTER_SANITIZE_NUMBER_INT );
 			$post_type = $this->get_post_type();
 
-			return get_post( $post_id, $post_type );
+			return get_post( (int) $post_id, $post_type );
 		}
 
 		return null;

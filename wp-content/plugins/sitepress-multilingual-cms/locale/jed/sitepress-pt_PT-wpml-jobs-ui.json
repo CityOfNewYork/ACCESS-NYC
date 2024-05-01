@@ -3,16 +3,56 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "en"
          },
-         "Insufficient funds": [
-            "Fundos insuficientes"
+         "Draft — Pending review": [
+            "Rascunho — Revisão pendente"
          ],
          "Complete": [
             "Completo"
          ],
+         "Insufficient funds": [
+            "Fundos insuficientes"
+         ],
+         "Edit": [
+            "Editar"
+         ],
+         "Resign": [
+            "Demitir-se"
+         ],
+         "Review": [
+            "Revisão"
+         ],
+         "Translate": [
+            "Traduzir"
+         ],
+         "View": [
+            "Visualizar"
+         ],
+         "Delete Translations": [
+            "Apagar Traduções"
+         ],
+         "Keep Translations as Draft": [
+            "Manter as Traduções como Rascunho"
+         ],
+         "Never mind. I want to review these translations.": [
+            "Não importa, pretendo rever essas traduções."
+         ],
+         "Cancel": [
+            "Cancelar"
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "Os trabalhos selecionados serão retirados da Fila de Traduções sem serem publicados. O que gostaria de fazer com as traduções?"
+         ],
+         "Cancel Translation Review": [
+            "Cancelar a Revisão da Tradução"
+         ],
          "Pending review": [
             "Revisão pendente"
+         ],
+         "Languages": [
+            "Línguas"
          ]
       }
    }

@@ -1,5 +1,6 @@
 <?php
 
+use WPML\API\Sanitize;
 use WPML\FP\Obj;
 use WPML\FP\Fns;
 use WPML\FP\Lst;
@@ -362,7 +363,7 @@ class WPML_LS_Settings {
 
 	/**
 	 * @param string $slot_group
-	 * @param string $slot_slug
+	 * @param string|int $slot_slug
 	 *
 	 * @return WPML_LS_Slot
 	 */
@@ -626,7 +627,7 @@ class WPML_LS_Settings {
 	public function widget_update_callback_filter( array $instance, array $new_instance, $old_instance, WP_Widget $widget ) {
 
 		if ( strpos( $widget->id_base, WPML_LS_Widget::SLUG ) === 0 ) {
-			$sidebar_id = isset( $_POST['sidebar'] ) ? filter_var( $_POST['sidebar'], FILTER_SANITIZE_STRING ) : false;
+			$sidebar_id =  Sanitize::stringProp( 'sidebar', $_POST );
 			$sidebar_id = $sidebar_id ? $sidebar_id : $this->find_parent_sidebar( $widget->id );
 			if ( $sidebar_id ) {
 				$this->maybe_init_settings();
@@ -660,7 +661,7 @@ class WPML_LS_Settings {
 	/**
 	 * Find in which sidebar a language switcher instance is set
 	 *
-	 * @param string $widget_to_find
+	 * @param mixed $widget_to_find
 	 *
 	 * @return bool|string
 	 */

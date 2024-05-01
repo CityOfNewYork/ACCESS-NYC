@@ -61,6 +61,11 @@ class OTGS_Products_Config_Xml {
 			if ( isset( $repository_config->apiurl ) ) {
 				$urls[strval( $repository_config->id )] = strval( $repository_config->apiurl );
 			}
+
+			$repo_upper = strtoupper( $repository_config->id );
+			if ( defined( "OTGS_INSTALLER_{$repo_upper}_API_URL" ) ) {
+				$urls[strval( $repository_config->id )] = constant( "OTGS_INSTALLER_{$repo_upper}_API_URL" );
+			}
 		}
 
 		return $urls;

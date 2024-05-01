@@ -1,0 +1,170 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "it_IT"
+         },
+         "Advanced": [
+            "Avanzato"
+         ],
+         "HTML anchor": [
+            "Ancora HTML"
+         ],
+         "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
+            "Aggiungi una scorciatoia a questo blocco quando si carica una pagina usando l'URL “#anchor”."
+         ],
+         "Additional CSS class(es)": [
+            "Classi aggiuntive CSS"
+         ],
+         "Separate multiple classes with spaces.": [
+            "Separa più classi con spazi."
+         ],
+         "Color": [
+            "Colore"
+         ],
+         "Dimensions": [
+            "Dimensioni"
+         ],
+         "BLOCK": [
+            "A blocchi"
+         ],
+         "Block margin": [
+            "Margine blocco"
+         ],
+         "Block padding": [
+            "Padding blocco"
+         ],
+         "LANGUAGE": [
+            "Lingua"
+         ],
+         "Language spacing": [
+            "Spaziatura lingua"
+         ],
+         "Language padding": [
+            "Padding lingua"
+         ],
+         "Display": [
+            "Mostra"
+         ],
+         "Show flag": [
+            "Mostra bandiera"
+         ],
+         "Show language name": [
+            "Mostra nome lingua"
+         ],
+         "Display language name in": [
+            "Mostra nome lingua in"
+         ],
+         "Style": [
+            "Stile"
+         ],
+         "Flag settings": [
+            "Impostazioni bandiera"
+         ],
+         "Width": [
+            "Larghezza"
+         ],
+         "Height": [
+            "Altezza"
+         ],
+         "Spacing": [
+            "Spaziatura"
+         ],
+         "Allow wrapping to multiple lines": [
+            "Consenti il wrapping su più linee"
+         ],
+         "Open on click": [
+            "Apri al clic"
+         ],
+         "Show arrow": [
+            "Mostra freccia"
+         ],
+         "Layout": [
+            "layout"
+         ],
+         "Justification": [
+            "Allineamento"
+         ],
+         "Orientation": [
+            "Orientamento"
+         ],
+         "Typography": [
+            "Tipografia"
+         ],
+         "Background": [
+            "Sfondo"
+         ],
+         "Language Text": [
+            "Testo lingua"
+         ],
+         "Language Background": [
+            "Sfondo lingua"
+         ],
+         "Current language text": [
+            "Testo lingua corrente"
+         ],
+         "Current language background": [
+            "Sfondo lingua corrente"
+         ],
+         "Full name": [
+            "Nome completo"
+         ],
+         "Code": [
+            "Codice"
+         ],
+         "Justify items left": [
+            "Allinea gli elementi a sinistra"
+         ],
+         "Justify items center": [
+            "Allinea gli elementi al centro"
+         ],
+         "Justify items right": [
+            "Allinea gli elementi a destra"
+         ],
+         "Justify items space between": [
+            "Allinea gli elementi con spazio tra le righe"
+         ],
+         "Horizontal": [
+            "Orizzontale"
+         ],
+         "Vertical": [
+            "Verticale"
+         ],
+         "Normal": [
+            "Normale"
+         ],
+         "Medium": [
+            "Media"
+         ],
+         "Large": [
+            "Grande"
+         ],
+         "X-Large": [
+            "Extra large"
+         ],
+         "Small": [
+            "Piccolo"
+         ],
+         "Displays the WPML Language Switcher.": [
+            "Mostra il selettore lingua WPML."
+         ],
+         "Language Switcher": [
+            "Selettore della lingua"
+         ],
+         "displays the WPML Language Switcher": [
+            "mostra il selettore lingua WPML"
+         ],
+         "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
+            "Mostra il selettore della lingua WPML. <br/> Scopri <a>come tradurre questo blocco</a>."
+         ],
+         "Navigation Language Switcher": [
+            "Selettore lingua di navigazione"
+         ],
+         "Reset all": [
+            "Azzera tutto"
+         ]
+      }
+   }
+}

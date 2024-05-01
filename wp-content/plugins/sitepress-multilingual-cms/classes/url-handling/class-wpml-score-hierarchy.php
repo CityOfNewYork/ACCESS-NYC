@@ -108,7 +108,7 @@ class WPML_Score_Hierarchy {
 	}
 
 	/**
-	 * @param stdClass $page
+	 * @param object $page
 	 *
 	 * @return bool
 	 */
@@ -117,7 +117,7 @@ class WPML_Score_Hierarchy {
 	}
 
 	/**
-	 * @param stdClass $current_page
+	 * @param object $current_page
 	 *
 	 * @return array
 	 */

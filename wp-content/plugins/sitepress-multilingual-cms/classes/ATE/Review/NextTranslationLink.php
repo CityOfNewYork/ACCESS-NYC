@@ -19,7 +19,7 @@ use function WPML\FP\pipe;
 
 class NextTranslationLink {
 
-	public static function get( $currentJob ) {
+	public static function get( $currentJob, $filterTargetLanguages ) {
 		global $sitepress;
 
 		$doNotFilterPreviewLang  = Fns::always( false );
@@ -41,14 +41,12 @@ class NextTranslationLink {
 		$restoreLang = function () use ( $sitepress ) {
 			$sitepress->switch_lang( null );
 		};
-
-		$getLink = Fns::converge( Fns::liftA2( PreviewLink::get() ), [
+		$getLink = Fns::converge( Fns::liftA2( PreviewLink::getWithLanguagesParam( $filterTargetLanguages ) ), [
 			$getTranslationPostId,
 			Maybe::safe( invoke( 'get_translate_job_id' ) )
 		] );
-
 		return Maybe::of( $currentJob )
-			->map( self::getNextJob() )
+			->map( self::getNextJob( $filterTargetLanguages ) )
 			->map( Fns::tap( $switchToPostLang ) )
 			->map( Fns::tap( $addPreviewLangFilter ) )
 			->chain( $getLink )
@@ -69,10 +67,14 @@ class NextTranslationLink {
 	/**
 	 * @return \Closure :: \stdClass -> \WPML_TM_Post_Job_Entity
 	 */
-	private static function getNextJob() {
-		return function ( $currentJob ) {
+	private static function getNextJob( $filterTargetLanguages ) {
+		return function ( $currentJob ) use ( $filterTargetLanguages ) {
 			$getJob = function ( $sourceLanguage, $targetLanguages ) use ( $currentJob ) {
 				$excludeCurrentJob = pipe( invoke( 'get_translate_job_id' ), Relation::equals( (int) $currentJob->job_id ), Logic::not() );
+
+				$postJobsEntitiesOnly = function ( $nextJob ) {
+					return $nextJob instanceof \WPML_TM_Post_Job_Entity;
+				};
 
 				$samePostTypes = function ( $nextJob ) use ( $currentJob ) {
 					$currentJobPostType = \get_post_type( $currentJob->original_doc_id );
@@ -83,12 +85,14 @@ class NextTranslationLink {
 
 				$nextJob = \wpml_collect(wpml_tm_get_jobs_repository()
 					->get( self::buildSearchParams( $sourceLanguage, $targetLanguages ) ) )
+					->filter( $postJobsEntitiesOnly )
 					->filter( $samePostTypes )
 					->first( $excludeCurrentJob );
 
 				if ( ! $nextJob ) {
 					$nextJob = \wpml_collect( wpml_tm_get_jobs_repository()
 						->get( self::buildSearchParams( $sourceLanguage, $targetLanguages ) ) )
+						->filter( $postJobsEntitiesOnly )
 						->first( $excludeCurrentJob );
 				}
 
@@ -97,17 +101,10 @@ class NextTranslationLink {
 
 			$languagePairs = \wpml_collect( Obj::propOr( [], 'language_pairs', Translators::getCurrent() ) );
 
-			$filterTargetLanguages = function ( $targetLanguages, $sourceLanguage ) {
-				$icl_translation_filter = WPML_Translations_Queue::get_cookie_filters();
-				if ( isset( $icl_translation_filter['to'] ) && '' !== $icl_translation_filter['to'] ) {
-					return [
-						'source'  => $sourceLanguage,
-						'targets' => [ $icl_translation_filter['to'] ],
-					];
-				}
+			$filterTargetLanguages = function ( $targetLanguages, $sourceLanguage ) use ( $filterTargetLanguages ) {
 				return [
 					'source'  => $sourceLanguage,
-					'targets' => $targetLanguages,
+					'targets' => is_array( $filterTargetLanguages ) ? $filterTargetLanguages : $targetLanguages,
 				];
 			};
 
@@ -129,6 +126,7 @@ class NextTranslationLink {
 	 */
 	private static function buildSearchParams( $sourceLang, array $targetLanguages ) {
 		return ( new \WPML_TM_Jobs_Search_Params() )
+			->set_custom_where_conditions( [ 'translations.element_type NOT LIKE "package_%"' ] )
 			->set_needs_review()
 			->set_source_language( $sourceLang )
 			->set_target_language( $targetLanguages );

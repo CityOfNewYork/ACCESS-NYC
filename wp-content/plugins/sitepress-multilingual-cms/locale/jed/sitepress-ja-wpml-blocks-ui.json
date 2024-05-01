@@ -1,0 +1,178 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Advanced": [
+            "詳細"
+         ],
+         "HTML anchor": [
+            "HTML アンカー"
+         ],
+         "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
+            "「#anchor」URL を使用してページを読み込む際に、このブロックへのショートカットを追加します。"
+         ],
+         "Additional CSS class(es)": [
+            "追加 CSS クラス (複数可)"
+         ],
+         "Separate multiple classes with spaces.": [
+            "複数クラスの場合は、スペースで区切ります。"
+         ],
+         "Color": [
+            "色"
+         ],
+         "Dimensions": [
+            "ディメンション"
+         ],
+         "BLOCK": [
+            "Block"
+         ],
+         "Block margin": [
+            "ブロック マージン"
+         ],
+         "Block padding": [
+            "ブロック パディング"
+         ],
+         "LANGUAGE": [
+            "言語"
+         ],
+         "Language spacing": [
+            "言語スペーシング"
+         ],
+         "Language padding": [
+            "言語パディング"
+         ],
+         "Display": [
+            "表示"
+         ],
+         "Show flag": [
+            "フラグを表示する"
+         ],
+         "Show language name": [
+            "言語名を表示する"
+         ],
+         "Display language name in": [
+            "言語名を表示:"
+         ],
+         "Style": [
+            "スタイル"
+         ],
+         "Flag settings": [
+            "フラグ設定"
+         ],
+         "Width": [
+            "幅"
+         ],
+         "Height": [
+            "高さ"
+         ],
+         "Spacing": [
+            "スペーシング"
+         ],
+         "Allow wrapping to multiple lines": [
+            "複数行への折り返しを許可する"
+         ],
+         "Open on click": [
+            "クリックで開く"
+         ],
+         "Show arrow": [
+            "矢印を表示する"
+         ],
+         "Layout": [
+            "レイアウト"
+         ],
+         "Justification": [
+            "ジャスティフィケーション"
+         ],
+         "Orientation": [
+            "オリエンテーション"
+         ],
+         "Typography": [
+            "タイポグラフィー"
+         ],
+         "Background": [
+            "背景"
+         ],
+         "Language Text": [
+            "言語テキスト"
+         ],
+         "Language Background": [
+            "言語バックグラウンド"
+         ],
+         "Current language text": [
+            "現在の言語テキスト"
+         ],
+         "Current language background": [
+            "現在の言語バックグラウンド"
+         ],
+         "Full name": [
+            "氏名"
+         ],
+         "Code": [
+            "コード"
+         ],
+         "Justify items left": [
+            "アイテムを左寄せにする"
+         ],
+         "Justify items center": [
+            "アイテムを中央寄せする"
+         ],
+         "Justify items right": [
+            "アイテムを右寄せにする"
+         ],
+         "Justify items space between": [
+            "アイテムを両端揃えにする"
+         ],
+         "Horizontal": [
+            "水平"
+         ],
+         "Vertical": [
+            "垂直"
+         ],
+         "Normal": [
+            "普通"
+         ],
+         "Medium": [
+            "中"
+         ],
+         "Large": [
+            "大"
+         ],
+         "X-Large": [
+            "X-Large"
+         ],
+         "Ab": [
+            "Ab"
+         ],
+         "AB": [
+            "AB"
+         ],
+         "ab": [
+            "ab"
+         ],
+         "Small": [
+            "小"
+         ],
+         "Displays the WPML Language Switcher.": [
+            "WPML 言語切り替え機能を表示します。"
+         ],
+         "Language Switcher": [
+            "言語切り替え機能"
+         ],
+         "displays the WPML Language Switcher": [
+            "WPML 言語切り替え機能を表示します"
+         ],
+         "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
+            "WPML 言語スイッチャーを表示する。 <br/> このブロックの翻訳方法を <a>学ぶ</a>。"
+         ],
+         "Navigation Language Switcher": [
+            "ナビゲーション言語切り替え機能"
+         ],
+         "Reset all": [
+            "すべてをリセット"
+         ]
+      }
+   }
+}

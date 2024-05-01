@@ -49,6 +49,21 @@ class WPML_TF_Frontend_Feedback_View {
 	 * @return string
 	 */
 	public function render_form() {
+		$jsAssets = [
+			includes_url() . 'js/jquery/jquery.min.js',
+			includes_url() . 'js/jquery/jquery-migrate.min.js',
+			includes_url() . 'js/jquery/ui/core.min.js',
+			includes_url() . 'js/jquery/ui/mouse.min.js',
+			includes_url() . 'js/jquery/ui/resizable.min.js',
+			includes_url() . 'js/jquery/ui/draggable.min.js',
+			includes_url() . 'js/jquery/ui/controlgroup.min.js',
+			includes_url() . 'js/jquery/ui/checkboxradio.min.js',
+			includes_url() . 'js/jquery/ui/button.min.js',
+			includes_url() . 'js/jquery/ui/dialog.min.js',
+			includes_url() . 'js/underscore.min.js',
+			includes_url() . 'js/wp-util.min.js',
+		];
+
 		$model = array(
 			'strings'       => array(
 				'dialog_title'      => __( 'Rate translation', 'sitepress' ),
@@ -74,6 +89,15 @@ class WPML_TF_Frontend_Feedback_View {
 			'action'        => WPML_TF_Frontend_AJAX_Hooks_Factory::AJAX_ACTION,
 			'nonce'         => wp_create_nonce( WPML_TF_Frontend_AJAX_Hooks_Factory::AJAX_ACTION ),
 			'source_url'    => $this->queried_object->get_source_url(),
+			'asset_url'     => [
+				'js' => implode(
+					';',
+					$jsAssets
+				),
+			],
+			'ajax'          => array(
+				'url' => admin_url( 'admin-ajax.php', 'relative' ),
+			),
 		);
 
 		return $this->template_service->show( $model, self::FORM_TEMPLATE );

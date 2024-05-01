@@ -6,10 +6,15 @@ use WPML\Core\WP\App\Resources;
 use WPML\Element\API\Languages;
 use WPML\FP\Fns;
 use WPML\FP\Lst;
+use WPML\FP\Maybe;
 use WPML\FP\Obj;
 use WPML\FP\Relation;
 use WPML\FP\Wrapper;
+use WPML\LIB\WP\Option as WPOption;
 use WPML\LIB\WP\User;
+use WPML\Setup\Endpoint\TranslationServices;
+use WPML\TM\Menu\TranslationServices\Endpoints\Activate;
+use WPML\TM\Menu\TranslationServices\Endpoints\Deactivate;
 use WPML\Setup\Option;
 use WPML\TranslationRoles\FindAvailableByRole;
 use WPML\TranslationRoles\GetManagerRecords;
@@ -31,20 +36,12 @@ class Initializer {
 
 	public static function getData() {
 
-		$originalLang = Obj::prop( 'code', Languages::getDefault() );
-		$userLang     = Languages::getUserLanguageCode()->getOrElse( $originalLang );
-
-		$secondaryCodes = pipe( Obj::without( $originalLang ), Obj::keys() );
-
 		return [
 			'name' => 'wpml_translation_roles_ui',
 			'data' => [
 				'endpoints'   => self::getEndPoints(),
-				'languages'   => [
-					'list'        => Obj::values( Languages::withFlags( Languages::getAll( $userLang ) ) ),
-					'secondaries' => $secondaryCodes( Languages::getActive() ),
-					'original'    => $originalLang,
-				],
+				'languages'   => self::getLanguagesData(),
+				/** @phpstan-ignore-next-line */
 				'translation' => self::getTranslationData( User::withEditLink() ),
 			]
 		];
@@ -59,24 +56,40 @@ class Initializer {
 			'getManagerRecords'    => GetManagerRecords::class,
 			'saveManager'          => SaveManager::class,
 			'removeManager'        => RemoveManager::class,
+			'getTranslationServices' => TranslationServices::class,
+			'activateService'        => Activate::class,
+			'deactivateService'      => Deactivate::class,
 		];
 	}
 
-	public static function getTranslationData( callable $userExtra = null ) {
+	public static function getTranslationData( callable $userExtra = null, $preload = true ) {
 		$currentUser = User::getCurrent();
 		$service     = Option::isTMAllowed() ? \TranslationProxy::get_current_service() : null;
 
 		return [
 			'canManageOptions' => $currentUser->has_cap( 'manage_options' ),
 			'adminUserName'    => $currentUser->display_name,
-			'translators'      => Fns::map(
+			'translators'      => $preload ? Fns::map(
 				User::withAvatar(),
 				make( \WPML_Translator_Records::class )->get_users_with_capability()
-			),
-			'managers'         => self::getManagers( $userExtra ),
+			) : null,
+			'managers'         => $preload ? self::getManagers( $userExtra ) : null,
 			'wpRoles'          => \WPML_WP_Roles::get_roles_up_to_user_level( $currentUser ),
 			'managerRoles'     => self::getTranslationManagerRoles( $currentUser ),
 			'service'          => ! is_wp_error( $service ) ? $service : null,
+		];
+	}
+
+	public static function getLanguagesData() {
+		$originalLang = Obj::prop( 'code', Languages::getDefault() );
+		$userLang     = Languages::getUserLanguageCode()->getOrElse( $originalLang );
+
+		$secondaryCodes = pipe( Obj::without( $originalLang ), Obj::keys() );
+
+		return [
+			'list'        => Obj::values( Languages::withFlags( Languages::getAll( $userLang ) ) ),
+			'secondaries' => $secondaryCodes( Languages::getActive() ),
+			'original'    => $originalLang,
 		];
 	}
 

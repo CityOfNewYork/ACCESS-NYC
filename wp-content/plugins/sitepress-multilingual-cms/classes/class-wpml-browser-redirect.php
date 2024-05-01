@@ -107,7 +107,7 @@ class WPML_Browser_Redirect {
 		 * @since 4.0.6
 		 *
 		 * @param bool $enqueue Defaults to `true`
-		 * @param bool $params  @see `wpml_browser_redirect_language_params`
+		 * @param array $params  @see `wpml_browser_redirect_language_params`
 		 */
 		do_action( 'wpml_enqueued_browser_redirect_language', $enqueue, $params );
 	}

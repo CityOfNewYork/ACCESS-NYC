@@ -8,7 +8,7 @@ class OTGS_Installer_Upgrade_Response {
 	private $plugins;
 
 	/**
-	 * @var array
+	 * @var OTGS_Installer_Repositories
 	 */
 	private $repositories;
 
@@ -37,6 +37,10 @@ class OTGS_Installer_Upgrade_Response {
 		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'modify_upgrade_response' ) );
 	}
 
+	/**
+	 * @param stdClass|null $update_plugins
+	 * @return mixed
+	 */
 	public function modify_upgrade_response( $update_plugins ) {
 		if ( isset( $update_plugins ) && is_object( $update_plugins ) ) {
 			foreach ( $this->plugins as $plugin ) {
@@ -51,7 +55,7 @@ class OTGS_Installer_Upgrade_Response {
 				];
 
 				if ( $this->should_skip_upgrade_process( $plugin, $update_plugins, $repository ) ) {
-					$update_plugins->no_update[$plugin->get_id() ] = $response;
+					$update_plugins->no_update[ $plugin->get_id() ] = $response;
 					continue;
 				}
 

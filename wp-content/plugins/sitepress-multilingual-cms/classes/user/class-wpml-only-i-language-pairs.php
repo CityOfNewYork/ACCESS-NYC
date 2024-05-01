@@ -16,7 +16,7 @@ class WPML_TM_Only_I_Language_Pairs implements IWPML_AJAX_Action, IWPML_DIC_Acti
 	public function update_language_pairs() {
 		$users = get_users( [
 			'meta_key'   => WPML_TM_Wizard_Options::ONLY_I_USER_META,
-			'meta_value' => true,
+			'meta_value' => '1',
 		] );
 
 		$all_language_pairs = WPML_All_Language_Pairs::get();

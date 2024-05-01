@@ -37,6 +37,7 @@ function icl_network_administration_menu() {
 		__( 'WPML', 'sitepress' ),
 		'manage_sitess',
 		WPML_PLUGIN_FOLDER . '/menu/network.php',
+		/** @phpstan-ignore-next-line WP doc issue. */
 		null,
 		ICL_PLUGIN_URL . '/res/img/icon16.png'
 	);

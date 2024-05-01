@@ -1,6 +1,6 @@
 <?php
 
-use WPML\TM\ATE\ClonedSites\FingerprintGenerator;
+use WPML\TM\ATE\API\FingerprintGenerator;
 use WPML\TM\ATE\Log\Entry;
 use WPML\TM\ATE\Log\EventsTypes;
 use WPML\TM\ATE\ClonedSites\ApiCommunication as ClonedSitesHandler;
@@ -12,11 +12,13 @@ use WPML\FP\Logic;
 use WPML\FP\Str;
 use WPML\Element\API\Entity\LanguageMapping;
 use WPML\LIB\WP\WordPress;
+use WPML\TM\Editor\ATEDetailedErrorMessage;
 use function WPML\FP\invoke;
 use function WPML\FP\pipe;
 use WPML\Element\API\Languages;
 use WPML\FP\Relation;
 use WPML\FP\Maybe;
+use WPML\TM\ATE\API\RequestException;
 
 /**
  * @author OnTheGo Systems
@@ -67,11 +69,20 @@ class WPML_TM_ATE_API {
 	}
 
 	/**
-	 * @param array $params
+	 * On success, it returns the map: wpmlJobId => ateJobId inside the 'jobs' key.
 	 *
+	 * @param array $params
 	 * @see https://bitbucket.org/emartini_crossover/ate/wiki/API/V1/jobs/create
 	 *
-	 * @return mixed
+	 * @return array{
+	 *  code: int,
+	 *  status: string,
+	 *  message: string,
+	 *  jobs: array{
+	 *    int: int
+	 *  }
+	 * } | WP_Error
+	 *
 	 * @throws \InvalidArgumentException
 	 */
 	public function create_jobs( array $params ) {
@@ -145,6 +156,9 @@ class WPML_TM_ATE_API {
 			return new WP_Error( 'communication_error', 'ATE communication is locked, please update configuration' );
 		}
 
+		$translator_email = filter_var( wp_get_current_user()->user_email, FILTER_SANITIZE_URL );
+		$return_url = filter_var( $return_url, FILTER_SANITIZE_URL );
+
 		$url = $this->endpoints->get_ate_editor();
 		$url = str_replace(
 			[
@@ -154,8 +168,8 @@ class WPML_TM_ATE_API {
 			],
 			[
 				$job_id,
-				urlencode( filter_var( wp_get_current_user()->user_email, FILTER_SANITIZE_URL ) ),
-				urlencode( filter_var( $return_url, FILTER_SANITIZE_URL ) ),
+				$translator_email ? urlencode( $translator_email ) : '',
+				$return_url ? urlencode( $return_url ) : '',
 			],
 			$url
 		);
@@ -190,12 +204,14 @@ class WPML_TM_ATE_API {
 
 		$result = $this->requestWithLog( $url, [ 'method' => 'POST', 'body' => $params ] );
 
-		return $result && ! is_wp_error( $result ) ?
-			[
-				'id'         => $result->job_id,
-				'ate_status' => Obj::propOr( WPML_TM_ATE_AMS_Endpoints::ATE_JOB_STATUS_CREATED, 'status', $result )
-			] :
-			false;
+		if ( ! is_object( $result ) || ! property_exists( $result, 'job_id' ) ) {
+			return false;
+		}
+
+		return [
+			'id'         => $result->job_id,
+			'ate_status' => Obj::propOr( WPML_TM_ATE_AMS_Endpoints::ATE_JOB_STATUS_CREATED, 'status', $result ),
+		];
 	}
 
 	/**
@@ -267,13 +283,14 @@ class WPML_TM_ATE_API {
 			return $url;
 		}
 
+		$body   = wp_json_encode( $pairs, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
 		$result = $this->wp_http->request(
 			$url,
 			array(
 				'timeout' => 60,
 				'method'  => $verb,
 				'headers' => $this->json_headers(),
-				'body'    => wp_json_encode( $pairs, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ),
+				'body'    => $body ?: '',
 			)
 		);
 
@@ -396,7 +413,65 @@ class WPML_TM_ATE_API {
 
 		return Maybe::of( $result )->reject( 'is_wp_error' );
 	}
-	
+
+	public function start_translation_memory_migration() {
+		$result = $this->requestWithLog(
+			$this->endpoints->startTranlsationMemoryIclMigration(),
+			[
+				'method' => 'POST',
+				'body'   => [
+					'site_identifier' => $this->get_website_id( site_url() ),
+					'ts_id'           => 10,
+					// random numbers for now, we should check what needs to be done for the final version.
+					'ts_access_key'   => 20,
+				],
+			]
+		);
+
+		return WordPress::handleError( $result );
+	}
+
+	public function check_translation_memory_migration() {
+		$result = $this->requestWithLog(
+			$this->endpoints->checkStatusTranlsationMemoryIclMigration(),
+			[
+				'method' => 'GET',
+				'body'   => [
+					'site_identifier' => $this->get_website_id( site_url() ),
+					'ts_id'           => 10,
+					// random numbers for now, we should check what needs to be done for the final version.
+					'ts_access_key'   => 20,
+				],
+			]
+		);
+
+		return WordPress::handleError( $result );
+	}
+
+	/**
+	 * @see https://ate.pages.onthegosystems.com/ate-docs/ATE/API/V1/icl/translators/import
+	 *
+	 * @param $iclToken
+	 * @param $iclServiceId
+	 *
+	 * @return callable|Either
+	 */
+	public function import_icl_translators( $tsId, $tsAccessKey ) {
+		$params = [
+			'site_identifier' => $this->auth->get_site_id(),
+			'ts_id'           => $tsId,
+			'ts_access_key'   => $tsAccessKey
+		];
+
+		$result = $this->requestWithLog( $this->endpoints->importIclTranslators(),
+			[
+				'method' => 'POST',
+				'body'   => $params
+			] );
+
+		return WordPress::handleError( $result );
+	}
+
 	private function get_response( $result ) {
 		$errors = $this->get_response_errors( $result );
 		if ( is_wp_error( $errors ) ) {
@@ -407,11 +482,14 @@ class WPML_TM_ATE_API {
 	}
 
 	private function get_response_body( $result ) {
-		if ( is_array( $result ) && array_key_exists( 'body', $result ) && ! is_wp_error( $result ) ) {
+		if ( is_array( $result ) && array_key_exists( 'body', $result ) ) {
 			$body = json_decode( $result['body'] );
 
 			if ( isset( $body->authenticated ) && ! (bool) $body->authenticated ) {
-				return new WP_Error( 'ate_auth_failed', $body->message );
+				return new WP_Error(
+					'ate_auth_failed',
+					isset( $body->message ) ? $body->message : ''
+				);
 			}
 
 			return $body;
@@ -467,23 +545,33 @@ class WPML_TM_ATE_API {
 	 * @param array|\stdClass|false|null $job
 	 *
 	 * @return string
-	 * @throws Requests_Exception
+	 * @throws RequestException The request to ATE failed.
 	 */
 	public function get_remote_xliff_content( $xliff_url, $job = null ) {
 
-		$entry = $this->prepare_xliff_log_entry( $xliff_url, $job );
-
-		wpml_tm_ate_ams_log( $entry, true );
-
-		/** @var \WP_Error|array $response */
-		$response = $this->wp_http->get( $xliff_url, array(
-			'timeout' => min( 30, ini_get( 'max_execution_time' ) ?: 10 )
-		) );
-
-		wpml_tm_ate_ams_log_remove( $entry );
+		$avoidLogDuplication = false;
+		try {
+			/** @var \WP_Error|array $response */
+			$response = $this->wp_http->get($xliff_url, array(
+				'timeout' => min(30, ini_get('max_execution_time') ?: 10)
+			));
+		} catch ( \Error $e ) {
+			$response = new \WP_Error(
+				'ate_request_failed',
+				'Started attempt to download xliff file. The process did not finish.',
+				[ 'errorMessage' => $e->getMessage(), 'debugTrace' => $e->getTraceAsString() ]
+			);
+			$avoidLogDuplication = true;
+		}
 
 		if ( is_wp_error( $response ) ) {
-			throw new Requests_Exception( $response->get_error_message(), $response->get_error_code() );
+			throw new RequestException(
+				$response->get_error_message(),
+				$response->get_error_code(),
+				$response->get_error_data(),
+			0,
+				$avoidLogDuplication
+			);
 		}
 
 		return $response['body'];
@@ -524,6 +612,28 @@ class WPML_TM_ATE_API {
 	}
 
 	/**
+	 * @param int $page
+	 *
+	 * @return \WPML\FP\Left|\WPML\FP\Right
+	 */
+	public function get_jobs_to_retranslation( int $page = 1 ) {
+		try {
+			$result = $this->requestWithLog(
+				$this->endpoints->get_retranslate(),
+				[
+					'method' => 'GET',
+					'body'   => [ 'page_number' => $page ],
+				]
+			);
+		} catch ( \Exception $e ) {
+			$result = new \WP_Error( $e->getCode(), $e->getMessage() );
+		}
+
+		return WordPress::handleError( $result );
+	}
+
+
+	/**
 	 * @see https://bitbucket.org/emartini_crossover/ate/wiki/API/V1/sync/all
 	 *
 	 * @param array $ateJobIds
@@ -561,7 +671,7 @@ class WPML_TM_ATE_API {
 	 * @return array|mixed|object|string|WP_Error|null
 	 */
 	private function request( $url, array $requestArgs = [] ) {
-		$lock = $this->clonedSitesHandler->checkCloneSiteLock();
+		$lock = $this->clonedSitesHandler->checkCloneSiteLock( $url );
 		if ( $lock ) {
 			return $lock;
 		}
@@ -584,7 +694,10 @@ class WPML_TM_ATE_API {
 			return $signedUrl;
 		}
 
-		if ( $bodyArgs ) {
+		// For GET requests there's no point sending parameters in the body.
+		// Actually, this will trigger an error in WP_HTTP Curl class when
+		// trying to build the params into a string.
+		if ( $bodyArgs && $requestArgs['method'] !== 'GET' ) {
 			$requestArgs['body'] = $this->encode_body_args( $bodyArgs );
 		}
 
@@ -599,9 +712,9 @@ class WPML_TM_ATE_API {
 
 	/**
 	 * @param string $url
-	 * @param array  $requestArgs
+	 * @param array $requestArgs
 	 *
-	 * @return array|mixed|object|string|WP_Error|null
+	 * @return array|int|float|object|string|WP_Error|null
 	 */
 	private function requestWithLog( $url, array $requestArgs = [] ) {
 		$response = $this->request( $url, $requestArgs );
@@ -610,35 +723,24 @@ class WPML_TM_ATE_API {
 			$entry              = new Entry();
 			$entry->eventType   = EventsTypes::SERVER_ATE;
 			$entry->description = $response->get_error_message();
-			$entry->extraData   = [
+			$errorCode = $response->get_error_code();
+			$entry->extraData = [
 				'url'         => $url,
 				'requestArgs' => $requestArgs,
 			];
 
+            if ( $errorCode ) {
+                $entry->extraData['status'] = $errorCode;
+            }
+			if ( $response->get_error_data( $errorCode ) ) {
+				$entry->extraData['details'] = $response->get_error_data( $errorCode );
+			}
+
 			wpml_tm_ate_ams_log( $entry );
+
+			ATEDetailedErrorMessage::saveDetailedError( $response );
 		}
 
 		return $response;
-	}
-
-	/**
-	 * @param string $xliff_url
-	 * @param array|\stdClass|false|null $job
-	 *
-	 * @return Entry
-	 */
-	private function prepare_xliff_log_entry( $xliff_url, $job ) {
-		$entry = new WPML\TM\ATE\Log\Entry();
-
-		if ( $job ) {
-			$entry->ateJobId    = Obj::prop('ateJobId', $job);
-			$entry->wpmlJobId   = Obj::prop('jobId', $job);
-		}
-
-		$entry->eventType = WPML\TM\ATE\Log\EventsTypes::SERVER_ATE;
-		$entry->description = 'Started attempt to download xliff file. The process did not finish.';
-		$entry->extraData = [ 'xliff_url' => $xliff_url ];
-
-		return $entry;
 	}
 }

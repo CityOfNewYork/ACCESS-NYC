@@ -10,6 +10,8 @@
  */
 
 use WPML\Language\Detection\CookieLanguage;
+use WPML\UrlHandling\WPLoginUrlConverterRules;
+use WPML\FP\Obj;
 
 abstract class WPML_Request {
 
@@ -72,6 +74,14 @@ abstract class WPML_Request {
 	 * @return string|false language code that can be determined from the currently requested URI.
 	 */
 	public function get_request_uri_lang() {
+		/**
+		 * Avoid returning language from URL when wpml_should_skip_saving_language_in_cookies filter hook returns TRUE
+		 * @see https://onthegosystems.myjetbrains.com/youtrack/issue/wpmldev-1544
+		 */
+		if ( apply_filters( 'wpml_should_skip_saving_language_in_cookies', false ) ) {
+			return false;
+		}
+
 		$req_url = isset( $_SERVER['HTTP_HOST'] )
 			? untrailingslashit( $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ) : '';
 
@@ -93,10 +103,71 @@ abstract class WPML_Request {
 	 * @return bool true if hidden languages are to be shown
 	 */
 	public function show_hidden() {
+		$queryVars = [];
+		if ( isset( $_SERVER['QUERY_STRING'] ) ) {
+			parse_str( $_SERVER['QUERY_STRING'], $queryVars );
+		}
+
+		$isReviewPostPage = (
+			Obj::has( 'wpmlReviewPostType', $queryVars ) &&
+			Obj::has( 'preview_id', $queryVars ) &&
+			Obj::has( 'preview_nonce', $queryVars ) &&
+			Obj::has( 'preview', $queryVars ) &&
+			Obj::has( 'jobId', $queryVars ) &&
+			Obj::has( 'returnUrl', $queryVars )
+		);
+
+		$isPostsListPage = false;
+		if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+			$uri = urldecode( $_SERVER['REQUEST_URI'] );
+			if ( is_admin() && $uri && strpos( $uri, 'edit.php' ) !== false ) {
+				$isPostsListPage = true;
+			}
+		}
 
 		return ! did_action( 'init' )
 			   || ( get_user_meta( get_current_user_id(), 'icl_show_hidden_languages', true )
-					|| ( ( is_admin() || wpml_is_rest_request() ) && current_user_can( 'manage_options' ) ) );
+					|| ( ( is_admin() || wpml_is_rest_request() ) && $this->isAdmin() ) )
+			  || ( ( $isPostsListPage || $isReviewPostPage ) && ( $this->isAdmin() || $this->isEditor() ) )
+			  || ( $isReviewPostPage && is_user_logged_in() && $this->isSubscriber() );
+	}
+
+	/**
+	 * @return boolean
+	 */
+	private function isAdmin() {
+		return current_user_can( 'manage_options' );
+	}
+
+	/**
+	 * @return boolean
+	 */
+	private function isEditor() {
+		$can = $this->getCaps();
+
+		return $can['read'] && $can['publish'] && $can['edit'] && \WPML\LIB\WP\User::isTranslator();
+	}
+
+	/**
+	 * @return boolean
+	 */
+	private function isSubscriber() {
+		return current_user_can( 'read' ) && \WPML\LIB\WP\User::isTranslator();
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getCaps() {
+		$canPublish   = current_user_can( 'publish_pages' ) || current_user_can( 'publish_posts' );
+		$canRead      = current_user_can( 'read_private_pages' ) || current_user_can( 'read_private_posts' );
+		$canEdit      = current_user_can( 'edit_posts' );
+
+		return [
+			'publish' => $canPublish,
+			'read'    => $canRead,
+			'edit'    => $canEdit,
+		];
 	}
 
 	/**

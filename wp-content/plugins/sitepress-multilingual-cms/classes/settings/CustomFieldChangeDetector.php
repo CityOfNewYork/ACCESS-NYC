@@ -2,16 +2,25 @@
 
 namespace WPML\TM\Settings;
 
-use WPML\Core\BackgroundTask;
+use WPML\Core\BackgroundTask\Service\BackgroundTaskService;
 use WPML\FP\Lst;
 use WPML\LIB\WP\Hooks;
 use WPML\WP\OptionManager;
 use function WPML\Container\make;
 
-class CustomFieldChangeDetector implements \IWPML_Backend_Action {
+class CustomFieldChangeDetector implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 	const PREVIOUS_SETTING = 'previous-custom-fields-to-translate';
 	const DETECTED_SETTING = 'detected-custom-fields-to-translate';
-	const LOCK_TIME        = 2 * MINUTE_IN_SECONDS;
+
+	/** @var BackgroundTaskService */
+	private $backgroundTaskService;
+
+	/**
+	 * @param BackgroundTaskService $backgroundTaskService
+	 */
+	public function __construct( BackgroundTaskService $backgroundTaskService ) {
+		$this->backgroundTaskService = $backgroundTaskService;
+	}
 
 	public function add_hooks() {
 		Hooks::onAction( 'wpml_after_tm_loaded', 1 )
@@ -59,19 +68,25 @@ class CustomFieldChangeDetector implements \IWPML_Backend_Action {
 		return OptionManager::getOr( [], 'TM', self::DETECTED_SETTING );
 	}
 
-	public static function processNewFields() {
+	public function processNewFields() {
 		$newFields = self::getDetected();
-		if ( count( $newFields ) ) {
+		if ( count( $newFields ) > 0 ) {
+			$newFields = array_unique( $newFields );
 
-			/**
-			 * Create a lock to make sure only one background task will run at a time.
-			 * We wont release the lock so it wont be able to run again until the time out is complete.
-			 */
+			/** @var ProcessNewTranslatableFields $backroundTaskEndpoint */
+			$backroundTaskEndpoint = make( ProcessNewTranslatableFields::class );
 
-			$lock = make( 'WPML\Utilities\Lock', [ ':name' => self::class ] );
-			if ( $lock->create( self::LOCK_TIME ) ) {
-				BackgroundTask::add( ProcessNewTranslatableFields::class, [ 'newFields' => $newFields ] );
+			$payload = wpml_collect( [ 'newFields' => $newFields ] );
+
+			if ( $backroundTaskEndpoint->getTotalRecords( $payload ) ) {
+				// We could do some optimization to avoid running again after consecutive changes on same field.
+				// But currently, it's more consistent to enqueue a new task every time, since there may be cases
+				// when the user is running a task affecting some custom field for long time, and wants to update again
+				// and ghet the posts re-processed.
+				$this->backgroundTaskService->add( $backroundTaskEndpoint, $payload );
 			}
+
+			self::remove( $newFields );
 		}
 	}
 }

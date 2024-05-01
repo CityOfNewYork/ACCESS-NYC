@@ -1,5 +1,7 @@
 <?php
 
+use WPML\API\Sanitize;
+
 class WPML_TM_Troubleshooting_Clear_TS extends WPML_TM_AJAX_Factory_Obsolete {
 	private $script_handle = 'wpml_clear_ts';
 
@@ -18,10 +20,9 @@ class WPML_TM_Troubleshooting_Clear_TS extends WPML_TM_AJAX_Factory_Obsolete {
 	}
 
 	public function clear_ts_action() {
-		$action              = filter_input( INPUT_POST, 'action', FILTER_SANITIZE_STRING );
-		$wpml_clear_ts_nonce = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_STRING );
-		$valid_nonce         = wp_verify_nonce( $wpml_clear_ts_nonce, $action );
-		if ( $valid_nonce && $_POST ) {
+		$action              = Sanitize::stringProp( 'action', $_POST );
+		$wpml_clear_ts_nonce = Sanitize::stringProp( 'nonce', $_POST );
+		if ( $action && $wpml_clear_ts_nonce && wp_verify_nonce( $wpml_clear_ts_nonce, $action ) ) {
 			$this->clear_tp_default_suid();
 			return $this->wpml_wp_api->wp_send_json_success( __( 'Ok!', 'wpml-translation-management' ) );
 		} else {
@@ -51,8 +52,8 @@ class WPML_TM_Troubleshooting_Clear_TS extends WPML_TM_AJAX_Factory_Obsolete {
 	}
 
 	public function load_action() {
-		$page           = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING );
-		$should_proceed = ! $this->wpml_wp_api->is_heartbeat() && ! $this->wpml_wp_api->is_ajax() && ! $this->wpml_wp_api->is_cron_job() && strpos( $page, 'sitepress-multilingual-cms/menu/troubleshooting.php' ) === 0;
+		$page           = Sanitize::stringProp( 'page', $_GET );
+		$should_proceed = ! $this->wpml_wp_api->is_heartbeat() && ! $this->wpml_wp_api->is_ajax() && ! $this->wpml_wp_api->is_cron_job() && $page && strpos( $page, 'sitepress-multilingual-cms/menu/troubleshooting.php' ) === 0;
 
 		if ( $should_proceed && TranslationProxy::get_tp_default_suid() ) {
 			$this->add_hooks();

@@ -427,7 +427,7 @@ function wpml_get_word_count( $string, $language = false ) {
 		$count = ceil( strlen( $string ) / WPML_API_MAGIC_NUMBER );
 	} elseif ( is_string( $string ) ) {
 		$words = preg_split( '/[\s\/]+/', $string, 0, PREG_SPLIT_NO_EMPTY );
-		$count = count( $words );
+		$count = is_array( $words ) ? count( $words ) : 0;
 	}
 
 	$cost = $count * WPML_API_COST_PER_WORD;
@@ -519,7 +519,7 @@ function wpml_generate_controls( $post_id, $cred_form_id, $current_language = fa
 			// edit translation
 			$controls[ $active_language['code'] ]['action'] = 'edit';
 			$post_url                                       = get_permalink( $translations[ $active_language['code'] ]->element_id );
-			if ( false === strpos( $post_url, '?' ) || ( false === strpos( $post_url, '?' ) && $sitepress_settings['language_negotiation_type'] != '3' ) ) {
+			if ( $post_url && ( false === strpos( $post_url, '?' ) || ( false === strpos( $post_url, '?' ) && $sitepress_settings['language_negotiation_type'] != '3' ) ) ) {
 				$controls[ $active_language['code'] ]['url'] = $post_url . '?action=edit_translation&cred-edit-form=' . $cred_form_id; // CRED edit form ID
 			} else {
 				$controls[ $active_language['code'] ]['url'] = $post_url . '&action=edit_translation&cred-edit-form=' . $cred_form_id; // CRED edit form ID
@@ -528,7 +528,7 @@ function wpml_generate_controls( $post_id, $cred_form_id, $current_language = fa
 			// add translation
 			$controls[ $active_language['code'] ]['action'] = 'create';
 			$post_url                                       = get_permalink( $post_id );
-			if ( false === strpos( $post_url, '?' ) || ( false === strpos( $post_url, '?' ) && $sitepress_settings['language_negotiation_type'] != '3' ) ) {
+			if ( $post_url && ( false === strpos( $post_url, '?' ) || ( false === strpos( $post_url, '?' ) && $sitepress_settings['language_negotiation_type'] != '3' ) ) ) {
 				$controls[ $active_language['code'] ]['url'] = get_permalink( $post_id ) . '?action=create_translation&trid=' . $trid . '&to_lang=' . $active_language['code'] . '&source_lang=' . $current_language . '&cred-edit-form=' . $cred_form_id; // CRED new form ID
 			} else {
 				$controls[ $active_language['code'] ]['url'] = get_permalink( $post_id ) . '&action=create_translation&trid=' . $trid . '&to_lang=' . $active_language['code'] . '&source_lang=' . $current_language . '&cred-edit-form=' . $cred_form_id; // CRED new form ID
@@ -552,7 +552,7 @@ function wpml_generate_controls( $post_id, $cred_form_id, $current_language = fa
  * @param int    $post_id Post ID
  * @param string $field   Post field
  *
- * @param bool   $field_name
+ * @param string|false   $field_name
  *
  * @return string or array
  */
@@ -590,11 +590,13 @@ function wpml_get_original_content( $post_id, $field, $field_name = false ) {
 			return $taxs;
 			break;
 		case 'taxonomies':
-			return wpml_get_synchronizing_taxonomies( $post_id, $field_name );
-			break;
+			return $field_name
+				? wpml_get_synchronizing_taxonomies( $post_id, $field_name )
+				: [];
 		case 'custom_fields':
-			return wpml_get_synchronizing_fields( $post_id, $field_name );
-			break;
+			return $field_name
+				? wpml_get_synchronizing_fields( $post_id, $field_name )
+				: [];
 		default:
 			break;
 	}
@@ -623,7 +625,7 @@ function wpml_get_synchronizing_taxonomies( $post_id, $tax_name ) {
 		$taxonomies = $wpdb->get_col(
 			$wpdb->prepare(
 				"
-                SELECT DISTINCT tx.taxonomy 
+                SELECT DISTINCT tx.taxonomy
                 FROM {$wpdb->term_taxonomy} tx JOIN {$wpdb->term_relationships} tr ON tx.term_taxonomy_id = tr.term_taxonomy_id
                 WHERE tr.object_id = %d
             ",

@@ -1,6 +1,12 @@
 <?php
 require_once dirname( __FILE__ ) . '/wpml-update-term-action.class.php';
 
+use WPML\FP\Lst;
+use WPML\FP\Fns;
+use WPML\FP\Obj;
+use WPML\FP\Logic;
+use function WPML\FP\pipe;
+
 /**
  * @since      3.1.8
  *
@@ -94,12 +100,11 @@ class WPML_Terms_Translations {
 
 	/**
 	 * @param string $slug
-	 * @param bool   $taxonomy
-	 * If $taxonomy is given, then slug existence is checked only for the specific taxonomy.
+	 * @param string $taxonomy
 	 *
 	 * @return bool
 	 */
-	private static function term_slug_exists( $slug, $taxonomy = false ) {
+	private static function term_slug_exists( $slug, $taxonomy ) {
 		global $wpdb;
 
 		$existing_term_prepared_query = $wpdb->prepare(
@@ -152,6 +157,7 @@ class WPML_Terms_Translations {
 	 * @param string|string[]|\WP_Post $post_type
 	 */
 	public static function quick_edit_terms_removal( $column_name, $post_type ) {
+		/** @var SitePress $sitepress */
 		global $sitepress, $wpdb;
 		if ( $column_name == 'icl_translations' ) {
 			$taxonomies                     = array_filter(
@@ -183,8 +189,7 @@ class WPML_Terms_Translations {
 				$terms_by_language_and_taxonomy[ $lang ][ $tax ][] = $term->term_id;
 			}
 			$terms_json = wp_json_encode( $terms_by_language_and_taxonomy );
-			$output     = '<div id="icl-terms-by-lang" style="display: none;">' . wp_kses_post( $terms_json ) . '</div>';
-			echo $output;
+			echo $terms_json ? '<div id="icl-terms-by-lang" style="display: none;">' . wp_kses_post( $terms_json ) . '</div>' : '';
 		}
 	}
 
@@ -239,7 +244,7 @@ class WPML_Terms_Translations {
 
 		$term                = false;
 		$lang_code           = false;
-		$taxonomy            = false;
+		$taxonomy            = '';
 		$original_id         = false;
 		$original_tax_id     = false;
 		$trid                = false;
@@ -339,7 +344,9 @@ class WPML_Terms_Translations {
 					)
 				);
 
-				$translated_slug = self::term_unique_slug( $translated_slug, $taxonomy, $lang_code );
+				$translated_slug = is_string( $lang_code )
+					? self::term_unique_slug( $translated_slug, $taxonomy, $lang_code )
+					: $translated_slug;
 			}
 			$new_translated_term = false;
 			if ( $term ) {
@@ -402,6 +409,10 @@ class WPML_Terms_Translations {
 		$post_translations        = $sitepress->get_element_translations( $post_trid, 'post_' . $post_type );
 		$terms_from_original_post = wp_get_post_terms( $post_id, $taxonomy );
 
+		if ( is_wp_error ( $terms_from_original_post ) ) {
+			return;
+		}
+
 		$is_original = true;
 
 		if ( $sitepress->get_original_element_id( $post_id, 'post_' . $post_type ) != $post_id ) {
@@ -415,6 +426,11 @@ class WPML_Terms_Translations {
 				continue;
 			}
 			$terms_from_translated_post = wp_get_post_terms( $translated_post_id, $taxonomy );
+
+			if ( is_wp_error ( $terms_from_translated_post ) ) {
+				continue;
+			}
+
 			if ( $is_original ) {
 				$duplicates = $sitepress->get_duplicates( $post_id );
 				if ( in_array( $translated_post_id, $duplicates ) ) {
@@ -467,16 +483,8 @@ class WPML_Terms_Translations {
 
 		// TODO: [WPML 3.2] We have a better way to check if the post is an external type (e.g. Package).
 		if ( get_post( $post_id ) ) {
-			$bulk = false;
-
-			if ( isset( $_REQUEST['bulk_edit'] ) ) {
-				$bulk = true;
-			}
-			if ( $bulk ) {
-				$tt_ids = array_merge( $tt_ids, $old_tt_ids );
-				self::quick_edited_post_terms( $post_id, $taxonomy, $tt_ids, $bulk );
-			}
 			self::set_tags_in_proper_language( $post_id, $tt_ids, $taxonomy, $old_tt_ids );
+
 			if ( $sitepress->get_setting( 'sync_post_taxonomies' ) ) {
 				$term_actions_helper = $sitepress->get_term_actions_helper();
 				$term_actions_helper->added_term_relationships( $post_id );
@@ -489,13 +497,15 @@ class WPML_Terms_Translations {
 	 * @param array  $tt_ids An array of term taxonomy IDs.
 	 * @param string $taxonomy Taxonomy slug.
 	 * @param array  $old_tt_ids Old array of term taxonomy IDs.
+	 * @param bool   $isBulkEdit
 	 */
 	private static function set_tags_in_proper_language( $post_id, $tt_ids, $taxonomy, $old_tt_ids ) {
-		if ( isset( $_POST['action'] ) && ( 'editpost' === $_POST['action'] || 'inline-save' === $_POST['action'] ) &&
-			 ! is_taxonomy_hierarchical( $taxonomy ) ) {
+		$isEditAction = isset( $_POST['action'] ) && ( 'editpost' === $_POST['action'] || 'inline-save' === $_POST['action'] );
+		$isBulkEdit   = isset( $_REQUEST['bulk_edit'] );
+		if ( $isEditAction || $isBulkEdit ) {
 			$tt_ids = array_map( 'intval', $tt_ids );
 			$tt_ids = array_diff( $tt_ids, $old_tt_ids );
-			self::quick_edited_post_terms( $post_id, $taxonomy, $tt_ids, false );
+			self::quick_edited_post_terms( $post_id, $taxonomy, $tt_ids );
 		}
 	}
 
@@ -503,7 +513,7 @@ class WPML_Terms_Translations {
 	 * @param int    $post_id
 	 * @param string $taxonomy
 	 * @param array  $changed_ttids
-	 * @param bool   $bulk
+	 *
 	 * Running this function will remove certain issues arising out of bulk adding of terms to posts of various languages.
 	 * This case can result in situations in which the WP Core functionality adds a term to a post, before the language assignment
 	 * operations of WPML are triggered. This leads to states in which terms can be assigned to a post even though their language
@@ -514,102 +524,148 @@ class WPML_Terms_Translations {
 	 * This function uses wpdb queries instead of the WordPress API, it is therefore save to be run out of
 	 * any language setting.
 	 */
-	public static function quick_edited_post_terms( $post_id, $taxonomy, $changed_ttids = array(), $bulk = false ) {
+	public static function quick_edited_post_terms( $post_id, $taxonomy, $newlyAddedTermIds ) {
 		global $wpdb, $sitepress, $wpml_post_translations;
 
-		$post_lang = $wpml_post_translations->get_element_lang_code( $post_id );
-		if ( ! $post_lang ) {
-			$post_lang = isset( $_POST['icl_post_language'] ) ? $_POST['icl_post_language'] : $post_lang;
-		}
-
-		if ( ! $sitepress->is_translated_taxonomy( $taxonomy ) || ! ( $post_lang ) ) {
+		$postLang = $wpml_post_translations->get_element_lang_code( $post_id ) ?: Obj::prop( 'icl_post_language', $_POST );
+		if ( ! $sitepress->is_translated_taxonomy( $taxonomy ) || ! ( $postLang ) ) {
 			return;
 		}
 
-		$query_for_allowed_ttids = $wpdb->prepare( "SELECT element_id FROM {$wpdb->prefix}icl_translations WHERE language_code = %s AND element_type = %s", $post_lang, 'tax_' . $taxonomy );
-		$allowed_ttids           = $wpdb->get_col( $query_for_allowed_ttids );
-		$new_ttids               = array();
+		$sql               = "SELECT element_id FROM {$wpdb->prefix}icl_translations WHERE language_code = %s AND element_type = %s";
+		$termIdsInPostLang = $wpdb->get_col( $wpdb->prepare( $sql, $postLang, 'tax_' . $taxonomy ) );
+		$termIdsInPostLang = Fns::map( \WPML\FP\Cast::toInt(), $termIdsInPostLang );
 
-		foreach ( $changed_ttids as $ttid ) {
+		$newlyCreatedTermIds = [];
 
-			if ( ! in_array( $ttid, $allowed_ttids ) ) {
+		$isInPostLang = Lst::includes( Fns::__, $termIdsInPostLang );
 
-				$wrong_term_where = array(
-					'object_id'        => $post_id,
-					'term_taxonomy_id' => $ttid,
-				);
+		if ( ! is_taxonomy_hierarchical( $taxonomy ) ) {
+			$getTermInPostLang = Obj::prop( 'idInPostLang' );
 
-				if ( is_taxonomy_hierarchical( $taxonomy ) ) {
-					// Hierarchical terms are simply deleted if they land on the wrong language
-					$wpdb->delete(
-						$wpdb->term_relationships,
-						array(
-							'object_id'        => $post_id,
-							'term_taxonomy_id' => $ttid,
-						)
-					);
-				} else {
+			$createTermIfNotExists = Logic::ifElse( $getTermInPostLang, Fns::identity(), self::createTerm( $taxonomy, $postLang ) );
 
-					/*
-					 Flat taxonomy terms could also be given via their names and not their ttids
-					 * In this case we append the ttids resulting from these names to the $changed_ttids array,
-					 * we do this only in the case of these terms actually being present in another but the
-					 * posts' language.
-					 */
+			$updateOrDeleteTermInPost = Logic::ifElse(
+				$getTermInPostLang,
+				self::updatePostTaxonomy( $post_id ),
+				pipe( Obj::prop( 'id' ), self::deletePostTaxonomy( $post_id ) )
+			);
 
-					$query_for_term_name = $wpdb->prepare( "SELECT t.name FROM {$wpdb->terms} AS t JOIN {$wpdb->term_taxonomy} AS tt ON t.term_id = tt.term_id WHERE tt.term_taxonomy_id=%d", $ttid );
-					$term_name           = $wpdb->get_var( $query_for_term_name );
-
-					$ttid_in_correct_lang = false;
-
-					if ( ! empty( $allowed_ttids ) ) {
-
-						$in = wpml_prepare_in( $allowed_ttids, '%d' );
-						// Try to get the ttid of a term in the correct language, that has the same
-						$ttid_in_correct_lang = $wpdb->get_var(
-							$wpdb->prepare(
-								"SELECT tt.term_taxonomy_id
-							FROM
-								{$wpdb->terms} AS t
-								JOIN {$wpdb->term_taxonomy} AS tt
-									ON t.term_id = tt.term_id
-							WHERE t.name=%s AND tt.taxonomy=%s AND tt.term_taxonomy_id IN ({$in})",
-								$term_name,
-								$taxonomy
-							)
-						);
-					}
-					if ( ! $ttid_in_correct_lang ) {
-						/*
-						 If we do not have a term by this name in the given taxonomy and language we have to create it.
-						 * In doing so we must avoid interactions with filtering by wpml on this functionality and ensure uniqueness for the slug of the newly created term.
-						 */
-
-						$new_term = wp_insert_term( $term_name, $taxonomy, array( 'slug' => self::term_unique_slug( sanitize_title( $term_name ), $taxonomy, $post_lang ) ) );
-						if ( isset( $new_term['term_taxonomy_id'] ) ) {
-							$ttid_in_correct_lang = $new_term['term_taxonomy_id'];
-							$trid                 = $bulk ? $sitepress->get_element_trid( $ttid, 'tax_' . $taxonomy ) : false;
-							$sitepress->set_element_language_details( $ttid_in_correct_lang, 'tax_' . $taxonomy, $trid, $post_lang );
-						}
-					}
-
-					if ( ! in_array( $ttid_in_correct_lang, $changed_ttids ) ) {
-						$wpdb->update( $wpdb->term_relationships, array( 'term_taxonomy_id' => $ttid_in_correct_lang ), $wrong_term_where );
-						$new_ttids [] = $ttid_in_correct_lang;
-					} else {
-						$wpdb->delete(
-							$wpdb->term_relationships,
-							array(
-								'object_id'        => $post_id,
-								'term_taxonomy_id' => $ttid,
-							)
-						);
-					}
-				}
-			}
+			$newlyCreatedTermIds = \wpml_collect( $newlyAddedTermIds )
+				->reject( $isInPostLang )
+				->map( self::appendTermName() )
+				->map( self::appendTermIdCounterpartInPostLang( $termIdsInPostLang, $taxonomy ) )
+				->map( $createTermIfNotExists )
+				->map( $updateOrDeleteTermInPost )
+				->all();
+		} else {
+			\wpml_collect( $newlyAddedTermIds )->reject( $isInPostLang )->each( self::deletePostTaxonomy( $post_id ) );
 		}
+
 		// Update term counts manually here, since using sql, will not trigger the updating of term counts automatically.
-		wp_update_term_count( array_merge( $changed_ttids, $new_ttids ), $taxonomy );
+		wp_update_term_count( array_merge( $newlyAddedTermIds, $newlyCreatedTermIds ), $taxonomy );
+	}
+
+	/**
+	 * @param int $postId
+	 *
+	 * @return Closure
+	 */
+	private static function deletePostTaxonomy( $postId ) {
+		return function ( $termId ) use ( $postId ) {
+			global $wpdb;
+
+			$wpdb->delete(
+				$wpdb->term_relationships,
+				[
+					'object_id'        => $postId,
+					'term_taxonomy_id' => $termId,
+				]
+			);
+		};
+	}
+
+	/**
+	 * @return Closure
+	 */
+	private static function appendTermName() {
+		return function ( $termId ) {
+			global $wpdb;
+
+			$sql      = "SELECT t.name FROM {$wpdb->terms} AS t JOIN {$wpdb->term_taxonomy} AS tt ON t.term_id = tt.term_id WHERE tt.term_taxonomy_id=%d";
+			$termName = $wpdb->get_var( $wpdb->prepare( $sql, $termId ) );
+
+			return [ 'id' => $termId, 'name' => $termName ];
+		};
+	}
+
+	/**
+	 * @param array $termIdsInPostLang
+	 * @param string $taxonomy
+	 *
+	 * @return Closure
+	 */
+	private static function appendTermIdCounterpartInPostLang( $termIdsInPostLang, $taxonomy ) {
+		return function ( $termData ) use ( $termIdsInPostLang, $taxonomy ) {
+			global $wpdb;
+			$idInPostLang = false;
+
+			if ( count( $termIdsInPostLang ) ) {
+				$in = wpml_prepare_in( $termIdsInPostLang, '%d' );
+
+				$sql = "
+					SELECT tt.term_taxonomy_id FROM {$wpdb->terms} AS t
+					JOIN {$wpdb->term_taxonomy} AS tt ON t.term_id = tt.term_id
+					WHERE t.name=%s AND tt.taxonomy=%s AND tt.term_taxonomy_id IN ({$in})
+				";
+
+				$idInPostLang = $wpdb->get_var( $wpdb->prepare( $sql, $termData['name'], $taxonomy ) );
+			}
+
+			return Obj::assoc( 'idInPostLang', $idInPostLang, $termData );
+		};
+	}
+
+	/**
+	 * @param string $taxonomy
+	 * @param string $postLang
+	 *
+	 * @return Closure
+	 */
+	private static function createTerm( $taxonomy, $postLang ) {
+		return function ( $termData ) use ( $taxonomy, $postLang ) {
+			global $sitepress;
+
+			$idInCorrectId = false;
+			$newTerm       = wp_insert_term( $termData['name'], $taxonomy, [ 'slug' => self::term_unique_slug( sanitize_title( $termData['name'] ), $taxonomy, $postLang ) ] );
+			if ( isset( $newTerm['term_taxonomy_id'] ) ) {
+				$idInCorrectId = $newTerm['term_taxonomy_id'];
+				$trid          = $sitepress->get_element_trid( $termData['id'], 'tax_' . $taxonomy );
+				$sitepress->set_element_language_details( $idInCorrectId, 'tax_' . $taxonomy, $trid, $postLang );
+			}
+
+			return Obj::assoc( 'idInPostLang', $idInCorrectId, $termData );
+		};
+	}
+
+	/**
+	 * @param int $postId
+	 *
+	 * @return Closure
+	 */
+	private static function updatePostTaxonomy( $postId ) {
+		return function ( $termData ) use ( $postId ) {
+			global $wpdb;
+
+			$wpdb->update(
+				$wpdb->term_relationships,
+				[ 'term_taxonomy_id' => $termData['idInPostLang'] ],
+				[
+					'object_id'        => $postId,
+					'term_taxonomy_id' => $termData['id'],
+				]
+			);
+		};
 	}
 
 	/**

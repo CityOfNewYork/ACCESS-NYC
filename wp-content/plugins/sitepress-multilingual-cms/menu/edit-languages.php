@@ -1,18 +1,17 @@
 <?php
 
+use WPML\API\Sanitize;
 use WPML\Element\API\Entity\LanguageMapping;
 use WPML\Element\API\Languages;
 use WPML\FP\Fns;
-use WPML\FP\Obj;
-use WPML\FP\Str;
-use WPML\FP\Lst;
 use WPML\FP\Logic;
+use WPML\FP\Lst;
+use WPML\FP\Obj;
 use WPML\FP\Relation;
+use WPML\FP\Str;
 use WPML\Setup\Option;
 use WPML\TM\API\ATE\CachedLanguageMappings;
-use WPML\TM\ATE\API\CachedATEAPI;
 use WPML\TM\API\ATE\LanguageMappings;
-use WPML\TM\ATE\API\CacheStorage\Transient;
 use function WPML\FP\pipe;
 
 class SitePress_EditLanguages {
@@ -121,8 +120,7 @@ class SitePress_EditLanguages {
 			}
 		}
 
-		$transientStorage = new Transient();
-		$transientStorage->delete( CachedATEAPI::CACHE_OPTION );
+		CachedLanguageMappings::clearCache();
 	}
 
 	/**
@@ -154,7 +152,23 @@ class SitePress_EditLanguages {
 						<strong><?php echo esc_html_x( 'Translations:', 'Edit languages page: subtitle #2', 'sitepress' ); ?></strong> <?php echo esc_html_x( 'the way the language name will be displayed in different languages.', 'Edit languages page: subtitle #2, description', 'sitepress' ); ?>
 					</li>
 					<li>
-						<strong><?php echo esc_html_x( 'Flag:', 'Edit languages page: subtitle #3', 'sitepress' ); ?></strong> <?php echo esc_html_x( 'the flag to display next to the language (optional). You can either upload your own flag or use one of WPML\'s built in flag images.', 'Edit languages page: subtitle #3, description', 'sitepress' ); ?>
+						<strong><?php echo esc_html_x( 'Flag:', 'Edit languages page: subtitle #3', 'sitepress' ); ?></strong>
+						<?php
+						$flag_link = 'https://wpml.org/documentation/getting-started-guide/language-setup/custom-language-flags/?utm_source=plugin&utm_medium=gui&utm_campaign=languages';
+						echo (
+							wp_kses_post(
+								sprintf(
+									/* translators: %s: link to flag documentation */
+									_x(
+										'the flag to display next to the language (optional). You can either upload your own flag or use one of WPML\'s built in flag images. Read more about <a href="%s" target="_blank" rel="noopener noreferrer">using flags</a>.',
+										'Edit languages page: subtitle #3, description',
+										'sitepress'
+									),
+									$flag_link
+								)
+							)
+						);
+						?>
 					</li>
 					<li>
 						<strong><?php echo esc_html_x( 'Default locale:', 'Edit languages page: subtitle #4', 'sitepress' ); ?></strong> <?php echo esc_html_x( 'This determines the locale value for this language. You should check the name of WordPress localization file to set this correctly.', 'Edit languages page: subtitle #4, description', 'sitepress' ); ?>
@@ -302,7 +316,7 @@ class SitePress_EditLanguages {
 
 		foreach ( $keys as $key ) {
 			if ( isset( $new_lang[ $key ] ) ) {
-				$new_lang[ $key ] = filter_var( $new_lang[ $key ], FILTER_SANITIZE_STRING );
+				$new_lang[ $key ] = Sanitize::stringProp( $key, $new_lang );
 			} else {
 				$new_lang[ $key ] = '';
 			}
@@ -423,7 +437,7 @@ class SitePress_EditLanguages {
 									<?php endif; ?>
 									<?php _e( 'Custom flag', 'sitepress' ); ?>
 								</label>
-								<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo esc_attr( $this->max_file_size ); ?>"/>
+								<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo esc_attr( (string) $this->max_file_size ); ?>"/>
 
 								<div class="wpml-edit-languages-flag-upload-wrapper"
 									<?php
@@ -452,7 +466,7 @@ class SitePress_EditLanguages {
 													?>
 													 checked="checked"<?php } ?> />
 										&nbsp;<img
-											src="<?php echo WPML_Flags::get_wpml_flags_url() . $lang['code'] . '.png'; ?>"
+											src="<?php echo WPML_Flags::get_wpml_flags_url() . $lang['code'] . '.' . WPML_Flags::get_wpml_flag_image_ext(); ?>"
 											alt="<?php echo esc_attr( $lang ['code'] ); ?>"/>
 										<?php esc_html_e( 'WPML flag', 'sitepress' ); ?>
 									</label>
@@ -741,7 +755,8 @@ class SitePress_EditLanguages {
 					if ( empty( $translation_value ) ) {
 						$translation_value = $data['english_name'];
 					}
-					$translation_code = filter_var( $_POST['icl_edit_languages']['add']['code'], FILTER_SANITIZE_STRING );
+					$translation_code = isset( $_POST['icl_edit_languages']['add']['code'] )
+                        ? Sanitize::string( $_POST['icl_edit_languages']['add']['code'] ) : false;
 				}
 
 				// Check if update.
@@ -789,7 +804,7 @@ class SitePress_EditLanguages {
 
 	/**
 	 * @param array<string,string|array<string,string>> $data
-	 * @param int                                       $id
+	 * @param int|string                                $id
 	 *
 	 * @return int
 	 */
@@ -800,13 +815,13 @@ class SitePress_EditLanguages {
 				$data['flag']  = $filename;
 				$from_template = 1;
 			} else {
-				$data['flag'] = $data['code'] . '.png';
+				$data['flag'] = $data['code'] . '.svg';
 				$this->set_errors( __( 'Error uploading flag file.', 'sitepress' ) );
 			}
 			$this->wpml_flags->clear();
 		} elseif ( empty( $data['flag'] ) || \WPML\FP\Relation::propEq( 'flag_upload', 'false', $data ) ) {
 			if( $this->isBuildInLang($data['code']) ) {
-				$data['flag'] = $data['code'] . '.png';
+				$data['flag'] = $data['code'] . '.svg';
 			} elseif (!empty($data['flag'])) {
 				$data['flag'] = basename($data['flag']);
 			} else {
@@ -830,7 +845,7 @@ class SitePress_EditLanguages {
 	}
 	/**
 	 * @param array<string,string|array<string,string>> $data
-	 * @param int                                       $id
+	 * @param int|string                                $id
 	 *
 	 * @return bool
 	 */
@@ -1298,7 +1313,7 @@ class SitePress_EditLanguages {
 	 */
 	private function get_add_language_from_post_data( $id ) {
 		$value = isset( $_POST['icl_edit_languages'][ $id ]['translations']['add'] ) ? stripslashes_deep( $_POST['icl_edit_languages'][ $id ]['translations']['add'] ) : '';
-		$value = filter_var( $value, FILTER_SANITIZE_STRING );
+		$value = filter_var( $value, FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 
 		return $value;
 	}
@@ -1312,7 +1327,7 @@ class SitePress_EditLanguages {
 	private function get_translations_data( $lang, $translation ) {
 		if ( $lang['id'] == 'add' ) {
 			$value = isset( $_POST['icl_edit_languages']['add']['translations'][ $translation['code'] ] ) ? $_POST['icl_edit_languages']['add']['translations'][ $translation['code'] ] : '';
-			$value = filter_var( $value, FILTER_SANITIZE_STRING );
+			$value = filter_var( $value, FILTER_SANITIZE_FULL_SPECIAL_CHARS );
 		} else {
 			$value = isset( $lang['translation'][ $translation['id'] ] ) ? $lang['translation'][ $translation['id'] ] : '';
 		}
@@ -1354,7 +1369,8 @@ class SitePress_EditLanguages {
 		$displayErrorMsg = function ( $languageNames ) {
 			$this->set_errors( sprintf(
 				__( 'The language mapping could not be saved for languages: %s', 'sitepress-multilingual-cms' ),
-				Lst::join( ', ', $languageNames )
+				/** @phpstan-ignore-next-line */
+				Lst::join( ', ', (array) $languageNames )
 			) );
 		};
 		$logError        = pipe( $findErrors, $getSourceNames, $displayErrorMsg );

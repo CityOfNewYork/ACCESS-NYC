@@ -31,7 +31,7 @@ class WPML_XML_Config_Validate {
 
 		$xml = file_get_contents( $file_full_path );
 
-		return $this->from_string( $xml );
+		return $xml ? $this->from_string( $xml ) : false;
 	}
 
 	/**

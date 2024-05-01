@@ -2,6 +2,8 @@
 
 namespace WPML\PB\Gutenberg\ConvertIdsInBlock;
 
+use WPML\Convert\Ids;
+
 class Base {
 
 	/**
@@ -14,32 +16,21 @@ class Base {
 	}
 
 	/**
-	 * @param array|int $ids
-	 * @param string    $elementSlug e.g. "page", "category", ...
-	 * @param string    $elementType "post" or "taxonomy".
+	 * @see Ids::convert(), supports string lists with any separator.
+	 *
+	 * @param array|int|string $ids
+	 * @param string           $elementSlug e.g. "page", "category", ...
+	 * @param string|null      $elementType "post" or "taxonomy".
 	 *
 	 * @return array|int
 	 */
-	public static function convertIds( $ids, $elementSlug, $elementType ) {
-		$isDisplayAsTranslated = self::isDisplayedAsTranslated( $elementSlug, $elementType );
+	public static function convertIds( $ids, $elementSlug, $elementType = null ) {
+		// In this context, it's probably better to always fall back to original.
+		// But for backward compatibility, we'll decide that based on the translation mode
+		// when the $elementType is explicitly passed.
+		$fallbackToOriginal = $elementType ? self::isDisplayedAsTranslated( $elementSlug, $elementType ) : true;
 
-		$getTranslation = function ( $id ) use ( $elementSlug, $isDisplayAsTranslated ) {
-			$newId = (int) wpml_object_id_filter( $id, $elementSlug );
-
-			if ( ! $newId && $isDisplayAsTranslated ) {
-				return (int) $id;
-			}
-
-			return $newId;
-		};
-
-		if ( is_array( $ids ) ) {
-			return wpml_collect( $ids )
-				->map( $getTranslation )
-				->toArray();
-		}
-
-		return $getTranslation( $ids );
+		return Ids::convert( $ids, $elementSlug, $fallbackToOriginal );
 	}
 
 	/**

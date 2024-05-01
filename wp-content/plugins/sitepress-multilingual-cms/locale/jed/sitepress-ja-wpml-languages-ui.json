@@ -5,6 +5,15 @@
          "": {
             "domain": "messages"
          },
+         "hide the translations instead.": [
+            "代わりに翻訳を非表示にします。"
+         ],
+         "Error happened! Please try again.": [
+            "エラーが発生しました！もう一度お試しください。"
+         ],
+         "Cancel": [
+            "キャンセル"
+         ],
          "Choose Content to Automatically Translate into": [
             "この言語に自動翻訳するコンテンツを選択してください"
          ],
@@ -17,35 +26,35 @@
          "Save": [
             "保存"
          ],
-         "Choose Content to Automatically Translate into New Language": [
-            "新しい言語に自動翻訳するコンテンツを選択してください"
+         "Add new languages": [
+            "新しい言語を追加"
          ],
-         "Add languages and start translating": [
-            "言語を追加し、翻訳を開始"
+         "Add new language": [
+            "新しい言語を追加"
          ],
-         "Add language and start translating": [
-            "言語を開始し、翻訳を開始"
+         "Never mind - don't add new languages": [
+            "キャンセル - 新しい言語を追加しない"
          ],
-         "Never mind. Don't add new languages": [
-            "取り消してください。新しい言語を追加しないでください"
+         "Never mind - don't add new language": [
+            "キャンセル - 新しい言語を追加しない"
          ],
-         "Never mind. Don't add new language": [
-            "取り消してください。新しい言語を追加しないでください"
+         "Choose which content to translate into the new language": [
+            "新しい言語に翻訳するコンテンツを選択する"
          ],
-         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
-            "既存の投稿とページを直ちに自動翻訳し、新しいコンテンツも作成次第翻訳されます。"
+         "Automatically translate all my posts and pages, plus new content as I create it.": [
+            "すべての投稿とページおよび作成された新しいコンテンツを自動翻訳する。"
          ],
          "Only automatically translate new content.": [
             "新しいコンテンツのみ自動翻訳。"
          ],
-         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
-            "サイトのコンテンツを自動的に翻訳する<a>全て翻訳</a> モードを使用しています。"
+         "Which content do you want to translate into the new language?": [
+            "どのコンテンツを新しい言語に翻訳しますか？"
          ],
-         "Which content do you want to automatically translate into your newly-added language?": [
-            "新しく追加した言語に、どのコンテンツを自動翻訳しますか？"
+         "When you unpause automatic translation, this content will be <a>translated automatically</a>.": [
+            "自動翻訳を一時停止しない場合、このコンテンツは<a>自動翻訳されます</a>。"
          ],
-         "You can translate existing content from the Translation Management Dashboard.": [
-            "Translation Managementダッシュボードで既存のコンテンツを翻訳できます。"
+         "You can still translate existing content any time from the Translation Management Dashboard.": [
+            "Translation Management ダッシュボードからいつでも既存のコンテンツを翻訳できます。"
          ]
       }
    }

@@ -36,7 +36,10 @@ abstract class WPML_Translate_Link_Targets_In_Content extends WPML_WPDB_User {
 	private function do_new_content() {
 
 		if ( $this->pro_translation && ! $this->scanning_in_progress ) {
-			$number_needing_to_be_fixed = $this->get_number_to_be_fixed();
+			$number_needing_to_be_fixed = $this->get_number_to_be_fixed(
+				0,
+				self::MAX_TO_FIX_FOR_NEW_CONTENT + 1
+			);
 			$this->fix( 0, self::MAX_TO_FIX_FOR_NEW_CONTENT );
 			return $number_needing_to_be_fixed <= self::MAX_TO_FIX_FOR_NEW_CONTENT;
 		} else {
@@ -68,6 +71,6 @@ abstract class WPML_Translate_Link_Targets_In_Content extends WPML_WPDB_User {
 
 	abstract protected function get_contents_with_links_needing_fix( $start = 0, $count = 0 );
 	abstract protected function get_content_type();
-	abstract public function get_number_to_be_fixed( $start_id = 0 );
+	abstract public function get_number_to_be_fixed( $start_id = 0, $limit = 0 );
 
 }

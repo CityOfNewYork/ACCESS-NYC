@@ -13,7 +13,7 @@ class OTGS_Installer_Instance {
 	public $version;
 
 	/**
-	 * @var string
+	 * @var string|bool
 	 */
 	public $high_priority;
 
@@ -33,7 +33,7 @@ class OTGS_Installer_Instance {
 	}
 
 	/**
-	 * @param string $high_priority
+	 * @param string|bool $high_priority
 	 *
 	 * @return $this
 	 */

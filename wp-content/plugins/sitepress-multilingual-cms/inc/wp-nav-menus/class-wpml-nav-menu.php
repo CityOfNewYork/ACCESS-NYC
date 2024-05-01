@@ -1,4 +1,7 @@
 <?php
+
+use WPML\API\Sanitize;
+
 class WPML_Nav_Menu {
 	private $current_menu;
 	private $current_lang;
@@ -44,7 +47,7 @@ class WPML_Nav_Menu {
 		add_action( 'init', array( $this, 'init' ) );
 		add_filter( 'wp_nav_menu_args', array( $this, 'wp_nav_menu_args_filter' ) );
 		add_filter( 'wp_nav_menu_items', array( $this, 'wp_nav_menu_items_filter' ) );
-		add_filter( 'nav_menu_meta_box_object', array( $this, '_enable_sitepress_query_filters' ) );
+		add_filter( 'nav_menu_meta_box_object', array( $this, '_enable_sitepress_query_filters' ), 11 );
 	}
 
 	/**
@@ -75,7 +78,7 @@ class WPML_Nav_Menu {
 			wp_enqueue_style( 'wp_nav_menus_css', ICL_PLUGIN_URL . '/res/css/wp-nav-menus.css', array(), ICL_SITEPRESS_VERSION, 'all' );
 
 			// filter posts by language
-			add_action( 'parse_query', array( $this, 'parse_query' ) );
+			add_action( 'parse_query', array( $this, 'action_parse_query' ) );
 		}
 
 		if ( is_admin() ) {
@@ -155,6 +158,18 @@ class WPML_Nav_Menu {
 
 	public function get_links_for_menu_strings_translation_ajax() {
 		global $icl_menus_sync, $wpml_post_translations, $wpml_term_translations;
+		$nonce = isset( $_GET['_nonce'] ) ? sanitize_text_field( $_GET['_nonce'] ) : '';
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( esc_html__( 'Unauthorized', 'sitepress' ), 401 );
+			return;
+		}
+
+		if ( ! wp_verify_nonce( $nonce, 'wpml_get_links_for_menu_strings_translation' ) ) {
+			wp_send_json_error( esc_html__( 'Invalid request!', 'sitepress' ), 400 );
+			return;
+		}
+
 		include_once WPML_PLUGIN_PATH . '/inc/wp-nav-menus/menus-sync.php';
 		$icl_menus_sync = new ICLMenusSync( $this->sitepress, $this->wpdb, $wpml_post_translations, $wpml_term_translations );
 		wp_send_json_success( $icl_menus_sync->get_links_for_menu_strings_translation() );
@@ -211,7 +226,7 @@ class WPML_Nav_Menu {
 		);
 		if ( ! empty( $untranslated_menu_items ) ) {
 			foreach ( $untranslated_menu_items as $item ) {
-				$sitepress->set_element_language_details( $item, 'post_nav_menu_item', null, $default_language );
+				$sitepress->set_element_language_details( $item, 'post_nav_menu_item', null, $default_language, null, true, true );
 			}
 		}
 	}
@@ -498,7 +513,7 @@ class WPML_Nav_Menu {
             SELECT lt.name AS language_name, l.code AS lang, COUNT(ts.translation_id) AS c
             FROM {$wpdb->prefix}icl_languages l
                 JOIN {$wpdb->prefix}icl_languages_translations lt ON lt.language_code = l.code
-                JOIN {$wpdb->prefix}icl_translations ts ON l.code = ts.language_code            
+                JOIN {$wpdb->prefix}icl_translations ts ON l.code = ts.language_code
             WHERE lt.display_language_code=%s
                 AND l.active = 1
                 AND ts.element_type = 'tax_nav_menu'
@@ -630,6 +645,14 @@ class WPML_Nav_Menu {
 
 		return $q;
 	}
+	/**
+	 * @param \WP_Query $q
+	 *
+	 * @return void
+	 */
+	public function action_parse_query( $q ) {
+		$this->parse_query( $q );
+	}
 
 	/**
 	 * @param mixed $val
@@ -642,8 +665,8 @@ class WPML_Nav_Menu {
 		$debug_backtrace = $sitepress->get_backtrace( 5 ); // Ignore objects and limit to first 5 stack frames, since 4 is the highest index we use
 
 		if ( isset( $debug_backtrace[4] ) && $debug_backtrace[4]['function'] === '_wp_auto_add_pages_to_menu' && ! empty( $val['auto_add'] ) ) {
-			$post_lang = isset( $_POST['icl_post_language'] ) ? filter_var( $_POST['icl_post_language'], FILTER_SANITIZE_STRING ) : false;
-			$post_lang = ! $post_lang && isset( $_POST['lang'] ) ? filter_var( $_POST['lang'], FILTER_SANITIZE_STRING ) : $post_lang;
+			$post_lang = Sanitize::stringProp( 'icl_post_language', $_POST );
+			$post_lang = ! $post_lang && isset( $_POST['lang'] ) ? Sanitize::string( $_POST['lang'] ) : $post_lang;
 			$post_lang = ! $post_lang && $this->is_duplication_mode() ? $sitepress->get_current_language() : $post_lang;
 
 			if ( $post_lang ) {
@@ -695,7 +718,7 @@ class WPML_Nav_Menu {
 		}
 
 		if ( ( ! is_object( $args['menu'] ) ) && is_numeric( $args['menu'] ) ) {
-				$args['menu'] = wp_get_nav_menu_object( self::convert_nav_menu_id( $args['menu'] ) );
+				$args['menu'] = wp_get_nav_menu_object( self::convert_nav_menu_id( (int) $args['menu'] ) );
 		}
 
 		if ( ( ! is_object( $args['menu'] ) ) && is_string( $args['menu'] ) ) {

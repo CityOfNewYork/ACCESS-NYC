@@ -2,6 +2,7 @@
 
 use WPML\Settings\PostType\Automatic;
 use WPML\UrlHandling\WPLoginUrlConverter;
+use WPML\AdminLanguageSwitcher\AdminLanguageSwitcher;
 
 /**
  * @package wpml-core
@@ -67,9 +68,19 @@ switch ( $request ) {
 		echo 1;
 		break;
 	case 'icl_login_page_translation':
+		$translateLoginPageIsEnabled = get_option( WPLoginUrlConverter::SETTINGS_KEY );
+		if ( ! $translateLoginPageIsEnabled && filter_input( INPUT_POST, 'login_page_translation', FILTER_VALIDATE_BOOLEAN ) ) {
+			AdminLanguageSwitcher::enable();
+		}
+
 		WPLoginUrlConverter::saveState(
 			(bool) filter_input( INPUT_POST, 'login_page_translation', FILTER_VALIDATE_INT )
 		);
+
+		AdminLanguageSwitcher::saveState(
+			(bool) filter_input( INPUT_POST, 'show_login_page_language_switcher', FILTER_VALIDATE_INT )
+		);
+
 		echo 1;
 		break;
 	case 'language_domains':

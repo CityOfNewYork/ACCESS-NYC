@@ -272,7 +272,7 @@ class WPML_Languages extends WPML_SP_And_PT_User {
 			$ls_language['url'] = $ls_language['translated_url'];
 			unset( $ls_language['translated_url'] );
 		} else {
-			$ls_language['url'] = $this->sitepress->language_url( $lang_code );
+			$ls_language['url'] = $this->sitepress->language_url( $lang_code, true );
 		}
 
 		$flag_url = $this->sitepress->get_flag_url( $lang_code );
@@ -339,7 +339,7 @@ class WPML_Languages extends WPML_SP_And_PT_User {
 					$args['link_empty_to']
 				);
 			} else {
-				$lang['translated_url'] = $this->sitepress->language_url( $lang['code'] );
+				$lang['translated_url'] = $this->sitepress->language_url( $lang['code'], true );
 			}
 		} else {
 			if ( $this->sitepress->get_current_language() != $lang['code'] ) {

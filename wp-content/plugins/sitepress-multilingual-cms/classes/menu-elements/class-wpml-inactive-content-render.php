@@ -15,11 +15,12 @@ class WPML_Inactive_Content_Render extends WPML_Twig_Template_Loader {
 	public function render() {
 		$model = array(
 			'content' => $this->inactive_content,
-			'strings' => array(
-				'title'    => __( "There is content in the following languages but it won't be visible on the site because those languages are not activated.", 'sitepress' ),
-				'language' => __( 'Language', 'sitepress' ),
-				'total'    => __( 'Total', 'sitepress' ),
-			),
+			'strings' => [
+				'title'                     => __( "You deactivated the following language(s) from your site, but there are still some existing translations saved in your database.", 'sitepress' ),
+				'more_info'                 => __( "If you don't plan to activate this language again, you can delete the associated content from your database.", "sitepress" ),
+				'language'                  => __( 'Language', 'sitepress' ),
+				'delete_translated_content' => __( 'Delete content', 'sitepress' )
+			],
 		);
 
 		return $this->get_template()->show( $model, self::TEMPLATE );

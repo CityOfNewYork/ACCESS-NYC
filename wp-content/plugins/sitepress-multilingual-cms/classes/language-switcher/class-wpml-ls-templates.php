@@ -13,11 +13,14 @@ class WPML_LS_Templates {
 	 */
 	private $wpml_file;
 
-	/* @var array $templates Collection of WPML_LS_Template */
+	/** @var array $templates Collection of WPML_LS_Template */
 	private $templates = false;
 
-	/* @var string $ds */
+	/** @var string $ds */
 	private $ds = DIRECTORY_SEPARATOR;
+
+	/** @var boolean $are_templates_loaded_from_cache */
+	private $are_templates_loaded_from_cache = false;
 
 	public function __construct( WPML_File $wpml_file = null ) {
 		if ( ! $wpml_file ) {
@@ -28,10 +31,21 @@ class WPML_LS_Templates {
 	}
 
 	public function init_hooks() {
-		add_action( 'after_setup_theme', array( $this, 'after_setup_theme_action' ) );
+		add_action( 'after_setup_theme', array( $this, 'action_after_setup_theme_action' ) );
 		add_action( 'activated_plugin', array( $this, 'activated_plugin_action' ) );
 		add_action( 'deactivated_plugin', array( $this, 'activated_plugin_action' ) );
 		add_action( 'switch_theme', array( $this, 'activated_plugin_action' ) );
+	}
+
+	public function action_after_setup_theme_action() {
+		$this->after_setup_theme_action();
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function are_templates_loaded_from_cache() {
+		return $this->are_templates_loaded_from_cache;
 	}
 
 	/**
@@ -54,7 +68,7 @@ class WPML_LS_Templates {
 		if ( null === $in_array ) {
 			$ret = $this->templates;
 		} else {
-			// PHP 5.3 Bug https://bugs.php.net/bug.php?id=34857
+			// PHP 5.3 Bug https://bugs.php.net/bug.php?id=34857º
 			$in_array = $in_array ? array_combine( $in_array, $in_array ) : $in_array;
 			$ret      = array_intersect_key( $this->templates, $in_array );
 		}
@@ -68,7 +82,7 @@ class WPML_LS_Templates {
 	 */
 	public function get_template( $template_slug ) {
 		$ret = new WPML_LS_Template( array() );
-		if ( array_key_exists( $template_slug, $this->templates ) ) {
+		if ( $this->templates && array_key_exists( $template_slug, $this->templates ) ) {
 			$ret = $this->templates[ $template_slug ];
 		}
 
@@ -116,7 +130,10 @@ class WPML_LS_Templates {
 
 			array_unshift( $dirs_to_scan, $wpml_core_path, $theme_path, $child_theme_path, $uploads_path );
 
-			$templates_paths = $this->scan_template_paths( $dirs_to_scan );
+			// We want to save only raw array data without WPML_LS_Template objects.
+			// If we save with objects some WP CLI tools like search-replace will not process those serialized objects.
+			$templates_array_data = [];
+			$templates_paths      = $this->scan_template_paths( $dirs_to_scan );
 
 			foreach ( $templates_paths as $template_path ) {
 				$template_path = $this->wpml_file->fix_dir_separator( $template_path );
@@ -129,14 +146,14 @@ class WPML_LS_Templates {
 					$tpl['name']     = isset( $config['name'] ) ? $config['name'] : null;
 					$tpl['name']     = $this->get_unique_name( $tpl['name'], $template_path );
 					$tpl['slug']     = sanitize_title_with_dashes( $tpl['name'] );
-					$tpl['base_uri'] = trailingslashit( $this->wpml_file->get_uri_from_path( $template_path ) );
+					$tpl['base_uri'] = trailingslashit( $this->wpml_file->get_uri_from_path( $template_path, false ) );
 					$tpl['css']      = $this->get_files( 'css', $template_path, $config );
 					$tpl['js']       = $this->get_files( 'js', $template_path, $config );
 
 					$tpl['flags_base_uri'] = isset( $config['flags_dir'] ) // todo: check with ../
-						? $this->wpml_file->get_uri_from_path( $template_path . $this->ds . $config['flags_dir'] ) : null;
+						? $this->wpml_file->get_uri_from_path( $template_path . $this->ds . $config['flags_dir'], false ) : null;
 					$tpl['flags_base_uri'] = ! isset( $tpl['flags_base_uri'] ) && file_exists( $template_path . $this->ds . 'flags' )
-						? $this->wpml_file->get_uri_from_path( $template_path . $this->ds . 'flags' ) : $tpl['flags_base_uri'];
+						? $this->wpml_file->get_uri_from_path( $template_path . $this->ds . 'flags', false ) : $tpl['flags_base_uri'];
 
 					$tpl['flag_extension'] = isset( $config['flag_extension'] )
 						? $config['flag_extension'] : null;
@@ -151,10 +168,11 @@ class WPML_LS_Templates {
 					$tpl['force_settings'] = isset( $config['settings'] )
 						? $config['settings'] : array();
 
-					$this->templates[ $tpl['slug'] ] = new WPML_LS_Template( $tpl );
+					$templates_array_data[ $tpl['slug'] ] = $tpl;
+					$this->templates[ $tpl['slug'] ]      = new WPML_LS_Template( $tpl );
 				}
 			}
-			update_option( self::OPTION_NAME, $this->templates );
+			$this->save_templates( $templates_array_data );
 		}
 
 		return $this->templates;
@@ -173,7 +191,7 @@ class WPML_LS_Templates {
 				continue;
 			}
 			$files = scandir( $dir );
-			$files = array_diff( $files, array( '..', '.' ) );
+			$files = $files ? array_diff( $files, array( '..', '.' ) ) : [];
 			if ( count( $files ) > 0 ) {
 				foreach ( $files as $file ) {
 					$template_path = $dir . '/' . $file;
@@ -200,7 +218,7 @@ class WPML_LS_Templates {
 		$configuration_file = $template_path . $this->ds . self::CONFIG_FILE;
 		if ( file_exists( $configuration_file ) ) {
 			$json_content = file_get_contents( $configuration_file );
-			$config       = json_decode( $json_content, true );
+			$config       = $json_content ? json_decode( $json_content, true ) : [];
 		}
 
 		return $config;
@@ -214,19 +232,20 @@ class WPML_LS_Templates {
 	 * @return array|null
 	 */
 	private function get_files( $ext, $template_path, $config ) {
-		$resources = array();
+		$resources    = array();
+		$trimProtocol = false;
 
 		if ( isset( $config[ $ext ] ) ) {
 			$config[ $ext ] = is_array( $config[ $ext ] ) ? $config[ $ext ] : array( $config[ $ext ] );
 			foreach ( $config[ $ext ] as $file ) {
 				$file        = untrailingslashit( $template_path ) . $this->ds . $file;
-				$resources[] = $this->wpml_file->get_uri_from_path( $file );
+				$resources[] = $this->wpml_file->get_uri_from_path( $file, $trimProtocol );
 			}
 		} else {
 			$search_path = $template_path . $this->ds . '*.' . $ext;
 			if ( glob( $search_path ) ) {
 				foreach ( glob( $search_path ) as $file ) {
-					$resources[] = $this->wpml_file->get_uri_from_path( $file );
+					$resources[] = $this->wpml_file->get_uri_from_path( $file, $trimProtocol );
 				}
 			}
 		}
@@ -286,11 +305,31 @@ class WPML_LS_Templates {
 	}
 
 	private function get_templates_from_transient() {
-		$templates = get_option( self::OPTION_NAME );
-		if ( $templates && ! $this->are_template_paths_valid( $templates ) ) {
-			$templates = false;
+		$this->are_templates_loaded_from_cache = false;
+		$templates                             = get_option( self::OPTION_NAME );
+
+		if ( $templates ) {
+			foreach ( $templates as $slug => $data ) {
+				if ( is_array( $data ) ) {
+					$templates[ $slug ] = new WPML_LS_Template( $data );
+				}
+			}
+
+			if ( $templates && ! $this->are_template_paths_valid( $templates ) ) {
+				return false;
+			}
+
+			$this->are_templates_loaded_from_cache = true;
 		}
+
 		return $templates;
+	}
+
+	/**
+	 * @param array $data
+	 */
+	private function save_templates( $data ) {
+		update_option( self::OPTION_NAME, $data );
 	}
 
 	/**

@@ -1,0 +1,29 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "it_IT"
+         },
+         "Choose the image file type for flags": [
+            "Scegli il tipo di file immagine per le bandiere"
+         ],
+         "This option affects only the built-in WPML flags, not the custom uploaded ones.": [
+            "Questa opzione ha effetto solo sulle bandiere integrate in WPML, non su quelle personalizzate caricate."
+         ],
+         "%s format": [
+            "Formato %s"
+         ],
+         "Save": [
+            "Salva"
+         ],
+         "The new format has been saved.": [
+            "Il nuovo formato è stato salvato."
+         ],
+         "Failed to save the new format": [
+            "Salvataggio del nuovo formato non riuscito"
+         ]
+      }
+   }
+}

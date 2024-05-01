@@ -86,7 +86,7 @@ abstract class WPML_Post_Translation extends WPML_Element_Translation {
 		 *
 		 * @since 4.4.0
 		 *
-		 * @param bool True if we should apply save post actions on the attachment, false otherwise (default false).
+		 * @param bool $apply_save_post_actions True if we should apply save post actions on the attachment, false otherwise (default false).
 		 * @param int  $post_id The attachment post ID.
 		 */
 		if ( apply_filters( 'wpml_apply_save_attachment_actions', false, $post_id ) ) {
@@ -213,7 +213,7 @@ abstract class WPML_Post_Translation extends WPML_Element_Translation {
 			do_action( 'wpml_tm_save_post', $post_vars['ID'], get_post( $post_vars['ID'] ), false );
 		}
 		// Flush object cache.
-		$this->flush_object_cache_for_groups( array( 'ls_languages', 'element_translations' ) );
+		$this->flush_object_cache_for_groups( array( 'ls_languages', WPML_ELEMENT_TRANSLATIONS_CACHE_GROUP ) );
 
 		do_action( 'wpml_after_save_post', $post_vars['ID'], $trid, $language_code, $source_language );
 	}
@@ -248,7 +248,7 @@ abstract class WPML_Post_Translation extends WPML_Element_Translation {
 				: $this->wpdb->prepare ( " AND wpml_translations.language_code = %s ", $source_lang_code );
 			$res            = $this->wpdb->get_var (
 				$this->wpdb->prepare (
-					"SELECT {$attribute}
+					"SELECT {$attribute} FROM {$this->wpdb->prefix}icl_translations wpml_translations
 					 " . $this->get_element_join() . "
 					 WHERE wpml_translations.trid=%d
 					{$source_snippet}
@@ -299,10 +299,11 @@ abstract class WPML_Post_Translation extends WPML_Element_Translation {
 
 	protected function get_element_join() {
 
-		return "FROM {$this->wpdb->prefix}icl_translations wpml_translations
+		return "
 				JOIN {$this->wpdb->posts} p
 					ON wpml_translations.element_id = p.ID
-						AND wpml_translations.element_type = CONCAT('post_', p.post_type)";
+						AND wpml_translations.element_type = CONCAT('post_', p.post_type)
+		";
 	}
 
 	protected function get_type_prefix() {

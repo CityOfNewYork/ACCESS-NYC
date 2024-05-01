@@ -8,6 +8,13 @@ class Collection {
 	 */
 	private $array;
 
+	/**
+	 * The items contained in the collection.
+	 *
+	 * @var mixed[]
+	 */
+	protected $items = [];
+
 	private function __construct( array $array ) {
 		$this->array = $array;
 	}
@@ -40,7 +47,9 @@ class Collection {
 
 		$items = array_map( $fn, $this->array, $keys );
 
-		return self::of( array_combine( $keys, $items ) );
+		$combined = array_combine( $keys, $items );
+
+		return self::of( false !== $combined ? $combined : [] );
 	}
 
 	/**
@@ -80,7 +89,7 @@ class Collection {
 	}
 
 	/**
-	 * @param Collection $other
+	 * @param array $other
 	 *
 	 * @return Collection
 	 */
@@ -91,7 +100,7 @@ class Collection {
 	/**
 	 * @param string $key
 	 *
-	 * @return mixed|Collection|NullCollection|
+	 * @return mixed|Collection|NullCollection|array
 	 */
 	public function get( $key = null ) {
 		if ( null !== $key ) {
@@ -128,6 +137,28 @@ class Collection {
 		}
 
 		return new NullCollection();
+	}
+
+	/**
+	 * Determine if an item exists at an offset.
+	 *
+	 * @param  mixed  $key
+	 * @return bool
+	 */
+	public function offsetExists($key)
+	{
+		return array_key_exists($key, $this->items);
+	}
+
+	/**
+	 * Determine if an item exists in the collection by key.
+	 *
+	 * @param  mixed  $key
+	 * @return bool
+	 */
+	public function has($key)
+	{
+		return $this->offsetExists($key);
 	}
 }
 

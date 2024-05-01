@@ -25,7 +25,7 @@ class WPML_TM_Sync_Jobs_Status {
 	 */
 	public function sync() {
 		return $this->update_tp_state_of_jobs(
-			$this->jobs_repository->get(
+			$this->jobs_repository->get_collection(
 				new WPML_TM_Jobs_Search_Params(
 					array(
 						'status' => array( ICL_TM_WAITING_FOR_TRANSLATOR, ICL_TM_IN_PROGRESS ),

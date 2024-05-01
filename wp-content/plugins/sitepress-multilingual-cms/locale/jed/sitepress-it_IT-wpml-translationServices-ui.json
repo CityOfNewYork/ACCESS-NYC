@@ -3,7 +3,8 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "it_IT"
          },
          "Connect this site to your %s account": [
             "Connetti questo sito al tuo account %s"
@@ -21,7 +22,7 @@
             "Visita <link_to_service /> per richiedere un token API. Questo token consente a WPML di connettersi al servizio di traduzioni <service_name /> per inviare e ricevere i lavori."
          ],
          "Search": [
-            "Ricerca"
+            "Cerca"
          ],
          "Settings": [
             "Impostazioni"

@@ -1,5 +1,7 @@
 <?php
 
+use WPML\FP\Str;
+
 abstract class WPML_URL_Converter_Abstract_Strategy implements IWPML_URL_Converter_Strategy {
 	protected $absolute_home;
 
@@ -48,6 +50,10 @@ abstract class WPML_URL_Converter_Abstract_Strategy implements IWPML_URL_Convert
 	}
 
 	public function validate_language( $language, $url ) {
+		if ( Str::includes( 'wp-login.php', $_SERVER['REQUEST_URI'] ) ) {
+			return $language;
+		}
+
 		return in_array( $language, $this->active_languages, true )
 			   || 'all' === $language && $this->get_url_helper()->is_url_admin( $url ) ? $language : $this->get_default_language();
 	}
@@ -102,7 +108,7 @@ abstract class WPML_URL_Converter_Abstract_Strategy implements IWPML_URL_Convert
 		 *
 		 * @since 4.3
 		 *
-		 * @param bool
+		 * @param bool $skip
 		 * @param string $source_url
 		 * @param string $lang_code
 		 * @return bool

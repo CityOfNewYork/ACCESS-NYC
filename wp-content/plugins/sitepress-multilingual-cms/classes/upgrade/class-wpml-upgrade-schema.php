@@ -15,7 +15,7 @@ class WPML_Upgrade_Schema {
 	 * @return bool
 	 */
 	public function does_table_exist( $table_name ) {
-		return (bool) count( $this->wpdb->get_results( "SHOW TABLES LIKE '{$this->wpdb->prefix}{$table_name}'" ) );
+		return $this->has_results( $this->wpdb->get_results( "SHOW TABLES LIKE '{$this->wpdb->prefix}{$table_name}'" ) );
 	}
 
 	/**
@@ -25,7 +25,7 @@ class WPML_Upgrade_Schema {
 	 * @return bool
 	 */
 	public function does_column_exist( $table_name, $column_name ) {
-		return (bool) count( $this->wpdb->get_results( "SHOW COLUMNS FROM {$this->wpdb->prefix}{$table_name} LIKE '{$column_name}'" ) );
+		return $this->has_results( $this->wpdb->get_results( "SHOW COLUMNS FROM {$this->wpdb->prefix}{$table_name} LIKE '{$column_name}'" ) );
 	}
 
 	/**
@@ -35,7 +35,7 @@ class WPML_Upgrade_Schema {
 	 * @return bool
 	 */
 	public function does_index_exist( $table_name, $index_name ) {
-		return (bool) count( $this->wpdb->get_results( "SHOW INDEXES FROM {$this->wpdb->prefix}{$table_name} WHERE key_name = '{$index_name}'" ) );
+		return $this->has_results( $this->wpdb->get_results( "SHOW INDEXES FROM {$this->wpdb->prefix}{$table_name} WHERE key_name = '{$index_name}'" ) );
 	}
 
 	/**
@@ -45,7 +45,12 @@ class WPML_Upgrade_Schema {
 	 * @return bool
 	 */
 	public function does_key_exist( $table_name, $key_name ) {
-		return (bool) count( $this->wpdb->get_results( "SHOW KEYS FROM {$this->wpdb->prefix}{$table_name} WHERE key_name = '{$key_name}'" ) );
+		return $this->has_results( $this->wpdb->get_results( "SHOW KEYS FROM {$this->wpdb->prefix}{$table_name} WHERE key_name = '{$key_name}'" ) );
+	}
+
+
+	private function has_results( $results ) {
+		return is_array( $results ) && count( $results );
 	}
 
 	/**
@@ -159,11 +164,11 @@ class WPML_Upgrade_Schema {
 		try {
 			return $this->wpdb->get_var(
 				$this->wpdb->prepare(
-					'SELECT CCSA.character_set_name 
-					FROM information_schema.`TABLES` T, 
-					information_schema.`COLLATION_CHARACTER_SET_APPLICABILITY` CCSA 
-					WHERE CCSA.collation_name = T.table_collation 
-					AND T.table_schema = "%s" 
+					'SELECT CCSA.character_set_name
+					FROM information_schema.`TABLES` T,
+					information_schema.`COLLATION_CHARACTER_SET_APPLICABILITY` CCSA
+					WHERE CCSA.collation_name = T.table_collation
+					AND T.table_schema = "%s"
 					AND T.table_name = "%s";',
 					$this->wpdb->dbname,
 					$table_name

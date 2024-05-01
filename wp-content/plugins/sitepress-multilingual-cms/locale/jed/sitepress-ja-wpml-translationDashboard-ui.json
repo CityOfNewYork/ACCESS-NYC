@@ -1,0 +1,235 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
+            "自動翻訳を一時停止しようとしたときにエラーが発生しました。少したってからもう一度お試しいただくか、当社サポートまでお問い合わせください。"
+         ],
+         "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
+            "自動翻訳を再開しようとしたときにエラーが発生しました。少したってからもう一度お試しいただくか、当社サポートまでお問い合わせください。"
+         ],
+         "Error": [
+            "エラー"
+         ],
+         "Draft — Pending review": [
+            "草稿 — レビュー待ち"
+         ],
+         "Complete": [
+            "完了"
+         ],
+         "Insufficient funds": [
+            "資金不足"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "保留中の自動翻訳はキャンセルされます。"
+         ],
+         "Save": [
+            "保存"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "コンテンツを翻訳するには、<a>Translation Management ダッシュボード</a>を開いてください。"
+         ],
+         "Review the translations before publishing": [
+            "公開する前に、翻訳をレビュー"
+         ],
+         "Publish translations and review them later": [
+            "翻訳を公開し、後でレビューする"
+         ],
+         "Publish translations without reviewing": [
+            "レビューなしで翻訳を公開する"
+         ],
+         "Translate Everything": [
+            "全て翻訳"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "WPMLは、公開または更新されるコンテンツを自動的に翻訳します"
+         ],
+         "How do you want to translate this site?": [
+            "このサイトをどのように翻訳しますか？"
+         ],
+         "Translate Some": [
+            "一部翻訳する"
+         ],
+         "I want to choose which content to translate": [
+            "翻訳コンテンツを選択する"
+         ],
+         "All Languages": [
+            "全言語"
+         ],
+         "Overwrite existing translations": [
+            "既存の翻訳を上書き"
+         ],
+         "Some of the content you want to translate is already translated": [
+            "翻訳したい内容の一部がすでに翻訳されています"
+         ],
+         "What do you want to do with the content that’s already translated?": [
+            "すでに翻訳されているコンテンツをどのように処理しますか？"
+         ],
+         "Leave existing translations as is": [
+            "既存の翻訳をそのままにする"
+         ],
+         "This also updates the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "これにより、サイトの翻訳メモリーも更新されます。詳細は、「<a href=\"%s\" target=\"_blank\">翻訳メモリー</a>」をお読みください"
+         ],
+         "Allows you to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "コンテンツを再翻訳し、サイトの翻訳メモリーを更新できるようにしますます。詳細は、「<a href=\"%s\" target=\"_blank\" >翻訳メモリー</a>」をお読みください"
+         ],
+         "Allows your translators to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "翻訳者がコンテンツを再翻訳し、サイトの翻訳メモリーを更新できるようにします。詳細は、「<a href=\"%s\" target=\"_blank\">翻訳メモリー</a>」をお読みください"
+         ],
+         "HINT: You can add a Note for translators in the table above with special instructions.": [
+            "HINT: 上記の表に翻訳者用のメモを追加して、特別な指示を出すことができます。"
+         ],
+         "Translate automatically": [
+            "自動的に翻訳"
+         ],
+         "How do you want to translate?": [
+            "どのように翻訳しますか？"
+         ],
+         "Assign to a translator": [
+            "翻訳者に割り当てる"
+         ],
+         "Translate myself": [
+            "自分で翻訳する"
+         ],
+         "You do not need translation credits to translate content yourself.": [
+            "翻訳クレジットがなくても、ご自身でコンテンツを翻訳することができます。"
+         ],
+         "You can only automatically translate content from your site's default language (English), to your site's other languages. Deselect content in your site's secondary languages to proceed.": [
+            "サイトのデフォルト言語（英語）からサイトの他言語へのみ自動翻訳できます。続けるには、サイトの第2言語のコンテンツを選択解除してください。"
+         ],
+         "You can only automatically translate content from your primary language (%s) to other languages. Use the language switcher at the top of this page to switch to %s.": [
+            "コンテンツの自動翻訳は、主要言語 (%s) からほかの言語へのみが可能です。このページの上部にある言語切り替え機能を使用して、%s に切り替えてください。"
+         ],
+         "Selected content includes items that were originally created in this language. Deselect these items to proceed.": [
+            "この言語で作ったアイテムを含むコンテンツを選択してください。続けるには、他のアイテムは選択解除してください。"
+         ],
+         "Add to Translation Queue": [
+            "翻訳キューに追加する"
+         ],
+         "Select a post or page to translate": [
+            "翻訳する記事またはページを選択する"
+         ],
+         "Translate or duplicate content to at least one language": [
+            "少なくともひとつの言語にコンテンツを翻訳または複製する"
+         ],
+         "Choose how you want to translate your content": [
+            "コンテンツの翻訳方法を選択します"
+         ],
+         "Selected content is already translated": [
+            "選択されたコンテンツはすでに翻訳されています"
+         ],
+         "Selected content includes items in a language other than your site's default language.": [
+            "サイトのデフォルト言語以外の言語にあるアイテムがコンテンツとして選択されました。"
+         ],
+         "Choose at least one translation action": [
+            "翻訳アクションを一つ以上選択してください"
+         ],
+         "Duplicate": [
+            "複製する"
+         ],
+         "Start translating and duplicating": [
+            "翻訳および複製を開始する"
+         ],
+         "Add to Translation Basket and duplicate": [
+            "翻訳バスケットに追加して複製する"
+         ],
+         "Add to Translation Queue and duplicate": [
+            "翻訳キューに追加して複製する"
+         ],
+         "Start translating": [
+            "翻訳を開始"
+         ],
+         "Add to Translation Basket": [
+            "翻訳バスケットに追加する"
+         ],
+         "One more thing...": [
+            "もうひとつ..."
+         ],
+         "What would you like to do when your content has finished translating automatically?": [
+            "コンテンツの自動翻訳が終了したら、どのようにしますか？"
+         ],
+         "Save settings": [
+            "設定を保存する"
+         ],
+         "This setting will apply to all future automatic translations. You can change this anytime in WPML → Settings.": [
+            "この設定は、今後のすべての自動翻訳に適用されます。この設定は WPML → [設定] でいつでも変更できます。"
+         ],
+         "Translate": [
+            "翻訳する"
+         ],
+         "Duplicate content": [
+            "コンテンツ複製"
+         ],
+         "Do nothing": [
+            "何もしない"
+         ],
+         "To assign content to a translator, first <a href=\"%s\" target=\"_blank\">add a translator</a> or <a href=\"%s\" target=\"_blank\">connect to a translation service</a>.": [
+            "翻訳者にコンテンツを割り当てるには、まず、[<a href=\"%s\" target=\"_blank\">翻訳者を追加</a>] または [<a href=\"%s\" target=\"_blank\">翻訳サービスに接続</a>] します。"
+         ],
+         "You need credits to use automatic translation.": [
+            "自動翻訳を利用するにはクレジットが必要です。"
+         ],
+         "Translators Tab": [
+            "トランスレータータブ"
+         ],
+         "Connection Error. Please wait a minute and reload this page. If the problem continues, please <a>contact WPML support</a>.": [
+            "接続エラーです。少したってから、このページを再読み込みしてください。問題が続く場合は、<a>WPMLサポートにお問い合わせ</a>ください。"
+         ],
+         "Finish setting up %s on your site": [
+            "サイトでの %s のセットアップを完了します"
+         ],
+         "You need to authenticate %s to send them content for translation. Visit the %s to finish the setup.": [
+            "翻訳用のコンテンツを送信するには、%s を認証する必要があります。%s にアクセスして設定を完了してください。"
+         ],
+         "Add a translator to use %s.": [
+            "%s を使用するには、翻訳者を追加してください。"
+         ],
+         "To send content to %s for translation, go to the %s to add a translator on your site.": [
+            "翻訳用としてコンテンツを %s に送信するには、%s にアクセスして、サイトに翻訳者を追加します。"
+         ],
+         "Your selected automatic translation engines do not support the following language(s): %s. Read more about <a>choosing a translation engine</a>.": [
+            "選択した自動翻訳エンジンでは、次の言語がサポートされていません: %s。詳細は、「<a>翻訳エンジンを選択する</a>」をお読みください。"
+         ],
+         "Some of the selected content is already being translated. This will cancel any in-progress translations.": [
+            "選択されたコンテンツの一部はすでに翻訳されています。これにより、進行中の翻訳がキャンセルされます。"
+         ],
+         "It is not possible to translate %s content automatically.": [
+            "%s のコンテンツを自動的に翻訳することはできません。"
+         ],
+         "Translate selected items yourself or deselect these items above.": [
+            "選択した項目をご自身で翻訳するか、上記の項目の選択を解除してください。"
+         ],
+         "Any existing content (translations) will be overwritten when creating duplicates.": [
+            "既存コンテンツ（翻訳）は複製を作成する時、上書きされます。"
+         ],
+         "When duplicating content, please first duplicate parent pages to maintain the site's hierarchy.": [
+            "コンテンツをコピーする場合、サイトの階層を維持するために、まず親ページをコピーしてください。"
+         ],
+         "Some of the content that you selected for translation includes fields that are encoded. Translators will not be able to work on this kind of content, so we removed it from the job.": [
+            "翻訳に選択したコンテンツにエンコードされた物が含まれます。トランスレーターはこの種類のコンテンツを翻訳できないため、ジョブから取り除かれます。"
+         ],
+         "To fix this problem, you need to tell WPML how these fields are encoded, so that WPML can decode them before sending for translation.": [
+            "この問題を修正するには、WPMLにこれらのフィールドのエンコード方法を指示し、WPMLが翻訳に送る前にデコードさせる必要があります。"
+         ],
+         "How to indicate to WPML that it needs to decode fields.": [
+            "WPML にフィールドのデコードの必要性を支持するには。"
+         ],
+         "WPML cannot send some of the content to translation": [
+            "WPMLは翻訳コンテンツの一部を送ることができません"
+         ],
+         "<s>%s</s>: There are base64 encoded fields in this document": [
+            "<s>%s</s>: このドキュメントには、\r\nbase64 でエンコード化されたフィールドが存在します"
+         ],
+         "Hide details": [
+            "詳細を隠す"
+         ],
+         "Show details": [
+            "詳細を表示"
+         ]
+      }
+   }
+}

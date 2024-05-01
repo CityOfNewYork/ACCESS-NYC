@@ -48,7 +48,29 @@ class WPML_Translation_Editor_UI {
 		if ( $job_instance->get_translator_id() <= 0 ) {
 			$job_instance->assign_to( $sitepress->get_wp_api()->get_current_user_id() );
 		}
+
+		add_action( 'admin_print_footer_scripts', [ $this, 'force_uncompressed_tinymce' ], 1 );
 	}
+
+	/**
+     * Force using uncompressed version tinymce which solves:
+     * https://onthegosystems.myjetbrains.com/youtrack/issue/wpmldev-191
+     *
+     * Seams the compressed and uncompressed have some difference, because even WP has a force_uncompressed_tinymce
+     * method, which is triggered whenever a custom theme on TinyMCE is used.
+     *
+	 * @return void
+	 */
+    public function force_uncompressed_tinymce() {
+        if( ! function_exists( 'wp_scripts' ) || ! function_exists( 'wp_register_tinymce_scripts' ) ) {
+            // WP is below 5.0.
+            return;
+        }
+
+		$wp_scripts = wp_scripts();
+		$wp_scripts->remove( 'wp-tinymce' );
+		wp_register_tinymce_scripts( $wp_scripts, true );
+    }
 
 	function render() {
 		list( $this->rtl_original, $this->rtl_translation ) = $this->init_rtl_settings();

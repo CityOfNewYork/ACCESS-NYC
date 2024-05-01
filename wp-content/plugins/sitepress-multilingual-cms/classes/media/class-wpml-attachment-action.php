@@ -171,7 +171,7 @@ class WPML_Attachment_Action implements IWPML_Action {
 	public function delete_file_filter( $file ) {
 		if ( $file ) {
 			$file_name           = $this->get_file_name( $file );
-			$sql                 = "SELECT pm.meta_id, pm.post_id FROM {$this->wpdb->postmeta} AS pm 
+			$sql                 = "SELECT pm.meta_id, pm.post_id FROM {$this->wpdb->postmeta} AS pm
 						WHERE pm.meta_value = %s AND pm.meta_key='_wp_attached_file'";
 			$attachment_prepared = $this->wpdb->prepare( $sql, [ $file_name ] );
 			$attachment          = $this->wpdb->get_row( $attachment_prepared );
@@ -187,7 +187,8 @@ class WPML_Attachment_Action implements IWPML_Action {
 	private function get_file_name( $file ) {
 		$file_name  = $this->get_file_name_without_size_from_full_name( $file );
 		$upload_dir = wp_upload_dir();
-		$path_parts = explode( "/", Str::replace( $upload_dir['basedir'], '', $file ) );
+		/** @phpstan-ignore-next-line */
+		$path_parts = $file ? explode( "/", Str::replace( $upload_dir['basedir'], '', $file ) ) : [];
 
 		if ( $path_parts ) {
 			$path_parts[ count( $path_parts ) - 1 ] = $file_name;

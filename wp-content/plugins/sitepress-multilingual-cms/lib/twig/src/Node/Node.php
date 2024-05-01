@@ -172,10 +172,14 @@ class Node implements \WPML\Core\Twig_NodeInterface
     {
         unset($this->nodes[$name]);
     }
+
+	#[\ReturnTypeWillChange]
     public function count()
     {
         return \count($this->nodes);
     }
+
+	#[\ReturnTypeWillChange]
     public function getIterator()
     {
         return new \ArrayIterator($this->nodes);

@@ -7,6 +7,7 @@ use WPML\Collect\Support\Traits\Macroable;
 /**
  * @method static string tail( string ...$str ) - Curried :: string->string
  * @method static array split( ...$delimiter, ...$str ) - Curried :: string->string->string
+ * @method static callable|array parse( ...$string ) - Curried :: string → array
  * @method static callable|bool includes( ...$needle, ...$str ) - Curried :: string → string → bool
  * @method static callable|string trim( ...$trim, ...$str ) - Curried :: string → string → string
  * @method static callable|string trimPrefix( ...$trim, ...$str ) - Curried :: string → string → string
@@ -49,6 +50,11 @@ class Str {
 
 		self::macro( 'split', curryN( 2, 'explode' ) );
 
+		self::macro( 'parse', curryN( 1, function( $string ) {
+			parse_str( $string, $parsedString );
+			return $parsedString;
+		} ) );
+
 		self::macro( 'trim', curryN( 2, flip( 'trim' ) ) );
 
 		self::macro( 'trimPrefix', curryN( 2, function( $prefix, $str ) {
@@ -59,11 +65,25 @@ class Str {
 			return $a . $b;
 		} ) );
 
-		self::macro( 'sub', curryN( 2, flip( function_exists( 'mb_substr' ) ? 'mb_substr' : 'substr' ) ) );
+		self::macro( 'sub', curryN( 2, function( $start, $string ) {
+			if ( function_exists( 'mb_substr' ) ) {
+				return mb_substr( $string, $start );
+			}
+
+			return substr( $string, $start );
+		} ) );
 
 		self::macro( 'tail', self::sub( 1 ) );
 
-		self::macro( 'pos', curryN( 2, flip( function_exists( 'mb_strpos' ) ? 'mb_strpos' : 'strpos' ) ) );
+		self::macro( 'pos', curryN( 2, function( $needle, $haystack ) {
+			$haystack = ( is_null( $haystack ) ) ? '' : $haystack;
+
+			if ( function_exists( 'mb_strpos' ) ) {
+				return mb_strpos( $haystack, $needle );
+			}
+
+			return strpos( $haystack, $needle );
+		} ) );
 
 		self::macro( 'startsWith', curryN( 2, pipe( self::pos(), Relation::equals( 0 ) ) ) );
 
@@ -103,6 +123,30 @@ class Str {
 		self::macro( 'toUpper', curryN( 1, 'strtoupper' ) );
 
 		self::macro( 'toLower', curryN( 1, 'strtolower' ) );
+	}
+
+	/**
+	 * Truncates a string to a maximum number of bytes keeping multibyte chars integrity.
+	 *
+	 * @param string $string
+	 * @param int $max_bytes
+	 * @param int|null $max_characters
+	 * @return string
+	 */
+	public static function truncate_bytes( $string, $max_bytes, $max_characters = null ) {
+		if ( $max_characters !== null ) {
+			$string = mb_substr( $string, 0, $max_characters );
+		} else {
+			$string = mb_substr( $string, 0, $max_bytes );
+			$max_characters = mb_strlen( $string );
+		}
+
+		// If the length of the string ( in bytes ) is still too big, we have to cut at least one more character.
+		if ( strlen( $string ) > $max_bytes ) {
+			return static::truncate_bytes( $string, $max_bytes, $max_characters - 1 );
+		}
+
+		return $string;
 	}
 }
 

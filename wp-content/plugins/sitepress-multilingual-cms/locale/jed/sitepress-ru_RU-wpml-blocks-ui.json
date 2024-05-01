@@ -1,0 +1,169 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Advanced": [
+            "Расширенный"
+         ],
+         "HTML anchor": [
+            "HTML-якорь"
+         ],
+         "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
+            "Добавьте ярлык к этому блоку при загрузке страницы с помощью URL-адреса “#якоря”."
+         ],
+         "Additional CSS class(es)": [
+            "Дополнительные классы CSS"
+         ],
+         "Separate multiple classes with spaces.": [
+            "Разделять несколько классов пробелами."
+         ],
+         "Color": [
+            "Цвет"
+         ],
+         "Dimensions": [
+            "Размеры"
+         ],
+         "BLOCK": [
+            "Блоков"
+         ],
+         "Block margin": [
+            "Поле блока"
+         ],
+         "Block padding": [
+            "Заполнение блока"
+         ],
+         "LANGUAGE": [
+            "Язык"
+         ],
+         "Language spacing": [
+            "Языковой интервал"
+         ],
+         "Language padding": [
+            "Заполнение языка"
+         ],
+         "Display": [
+            "Отображать"
+         ],
+         "Show flag": [
+            "Показать флаг"
+         ],
+         "Show language name": [
+            "Показать название языка"
+         ],
+         "Display language name in": [
+            "Отображать название языка в"
+         ],
+         "Style": [
+            "Стиль"
+         ],
+         "Flag settings": [
+            "Настройки флага"
+         ],
+         "Width": [
+            "Ширина"
+         ],
+         "Height": [
+            "Высота"
+         ],
+         "Spacing": [
+            "Интервал"
+         ],
+         "Allow wrapping to multiple lines": [
+            "Разрешить перенос на несколько строк"
+         ],
+         "Open on click": [
+            "Открыть по клику"
+         ],
+         "Show arrow": [
+            "Показать стрелку"
+         ],
+         "Layout": [
+            "Макет"
+         ],
+         "Justification": [
+            "Обоснование"
+         ],
+         "Orientation": [
+            "Ориентация"
+         ],
+         "Typography": [
+            "Оформление"
+         ],
+         "Background": [
+            "Фон"
+         ],
+         "Language Text": [
+            "Текст языка"
+         ],
+         "Language Background": [
+            "Фон языка"
+         ],
+         "Current language text": [
+            "Текст на текущем языке"
+         ],
+         "Current language background": [
+            "Фон текущего языка"
+         ],
+         "Full name": [
+            "Имя и фамилия"
+         ],
+         "Code": [
+            "Код"
+         ],
+         "Justify items left": [
+            "Выровнять по левому краю"
+         ],
+         "Justify items center": [
+            "Выровнять по центру"
+         ],
+         "Justify items right": [
+            "Выровнять по правому краю"
+         ],
+         "Justify items space between": [
+            "Выровнять по длине строки"
+         ],
+         "Horizontal": [
+            "Горизонтальный"
+         ],
+         "Vertical": [
+            "Вертикальный"
+         ],
+         "Normal": [
+            "Обычная"
+         ],
+         "Medium": [
+            "Средний"
+         ],
+         "Large": [
+            "Большой"
+         ],
+         "X-Large": [
+            "X-большой"
+         ],
+         "Small": [
+            "Маленький"
+         ],
+         "Displays the WPML Language Switcher.": [
+            "Отображает Переключатель языка WPML."
+         ],
+         "Language Switcher": [
+            "Переключатель языка"
+         ],
+         "displays the WPML Language Switcher": [
+            "отображает Переключатель языка WPML."
+         ],
+         "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
+            "Отображает переключатель языков в WPML. <br/> Узнать, <a>как перевести этот блок</a>."
+         ],
+         "Navigation Language Switcher": [
+            "Переключатель языка навигации"
+         ],
+         "Reset all": [
+            "Сбросить все"
+         ]
+      }
+   }
+}

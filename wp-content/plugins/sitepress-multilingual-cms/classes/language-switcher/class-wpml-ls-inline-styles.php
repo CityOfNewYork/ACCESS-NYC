@@ -38,7 +38,7 @@ class WPML_LS_Inline_Styles {
 
 		if ( $slot->is_menu() ) {
 			$css = $this->get_slot_color_picker_css_for_menus( $slot );
-		} elseif ( ! $slot->is_post_translations() ) {
+		} elseif ( ! $slot->is_post_translations() || $slot->is_footer() ) {
 			$css = $this->get_slot_color_picker_css_for_widgets_and_statics( $slot );
 		}
 
@@ -139,21 +139,21 @@ class WPML_LS_Inline_Styles {
 		}
 
 		if ( $slot->get( 'font_other_normal' ) || $slot->get( 'background_other_normal' ) ) {
-			$css .= "$wrapper_class a {";
+			$css .= "$wrapper_class a, $wrapper_class .wpml-ls-sub-menu a, $wrapper_class .wpml-ls-sub-menu a:link, $wrapper_class li:not(.wpml-ls-current-language) .wpml-ls-link, $wrapper_class li:not(.wpml-ls-current-language) .wpml-ls-link:link {";
 			$css .= $slot->get( 'font_other_normal' ) ? "color:{$slot->get( 'font_other_normal' )};" : '';
 			$css .= $slot->get( 'background_other_normal' ) ? "background-color:{$slot->get( 'background_other_normal' )};" : '';
 			$css .= '}';
 		}
 
 		if ( $slot->get( 'font_other_hover' ) || $slot->get( 'background_other_hover' ) ) {
-			$css .= "$wrapper_class a:hover,$wrapper_class a:focus {";
+			$css .= "$wrapper_class a, $wrapper_class .wpml-ls-sub-menu a:hover,$wrapper_class .wpml-ls-sub-menu a:focus, $wrapper_class .wpml-ls-sub-menu a:link:hover, $wrapper_class .wpml-ls-sub-menu a:link:focus  {";
 			$css .= $slot->get( 'font_other_hover' ) ? "color:{$slot->get( 'font_other_hover' )};" : '';
 			$css .= $slot->get( 'background_other_hover' ) ? "background-color:{$slot->get( 'background_other_hover' )};" : '';
 			$css .= '}';
 		}
 
 		if ( $slot->get( 'font_current_normal' ) || $slot->get( 'background_current_normal' ) ) {
-			$css .= "$wrapper_class {$prefix}current-language>a {";
+			$css .= "$wrapper_class {$prefix}current-language > a {";
 			$css .= $slot->get( 'font_current_normal' ) ? "color:{$slot->get( 'font_current_normal' )};" : '';
 			$css .= $slot->get( 'background_current_normal' ) ? "background-color:{$slot->get( 'background_current_normal' )};" : '';
 			$css .= '}';
@@ -207,7 +207,7 @@ class WPML_LS_Inline_Styles {
 	}
 
 	public function wp_enqueue_scripts_action() {
-			$this->enqueue_inline_styles();
+		$this->enqueue_inline_styles();
 	}
 
 	private function enqueue_inline_styles() {

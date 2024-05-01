@@ -102,7 +102,7 @@ class WPML_Slug_Filter extends WPML_Full_PT_API {
 		) {
 			$suffix = 2;
 			do {
-				$alt_post_name   = _truncate_post_slug( $slug, 200 - ( strlen( $suffix ) + 1 ) ) . "-$suffix";
+				$alt_post_name   = _truncate_post_slug( $slug, 200 - ( strlen( (string) $suffix ) + 1 ) ) . "-$suffix";
 				$suffix ++;
 			} while ( $this->post_slug_exists( $post_id, $post_language, $alt_post_name, $post_type, $post_parent ) );
 			$slug = $alt_post_name;

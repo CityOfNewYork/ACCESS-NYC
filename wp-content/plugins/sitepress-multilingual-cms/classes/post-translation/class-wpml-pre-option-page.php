@@ -1,31 +1,32 @@
 <?php
 
 class WPML_Pre_Option_Page extends WPML_WPDB_And_SP_User {
-	
+
 	const CACHE_GROUP = 'wpml_pre_option_page';
-	
+
 	private $switched;
 	private $lang;
-	
+
 	public function __construct( &$wpdb, &$sitepress, $switched, $lang ) {
 		parent::__construct( $wpdb, $sitepress );
-		
+
 		$this->switched = $switched;
 		$this->lang     = $lang;
 	}
-	
+
 	public function get( $type, $from_language = null ) {
 
 		$cache_key   = $type;
 		$cache_found = false;
-		
+
 		$cache       = new WPML_WP_Cache( self::CACHE_GROUP );
 		$results     = $cache->get( $cache_key, $cache_found );
 
 		if ( ( ( ! $cache_found || ! isset ( $results[ $type ] ) ) && ! $this->switched )
 		     || ( $this->switched && $this->sitepress->get_setting( 'setup_complete' ) )
 		) {
-			$results[ $type ] = array();
+			$results = [];
+			$results[ $type ] = [];
 			// Fetch for all languages and cache them.
 			$values = $this->wpdb->get_results(
 				$this->wpdb->prepare(
@@ -44,7 +45,7 @@ class WPML_Pre_Option_Page extends WPML_WPDB_And_SP_User {
 				)
 			);
 
-			if ( count( $values ) ) {
+			if ( is_array( $values ) && count( $values ) ) {
 				foreach ( $values as $lang_result ) {
 					$results [ $type ] [ $lang_result->language_code ] = $lang_result->element_id;
 				}
@@ -67,7 +68,7 @@ class WPML_Pre_Option_Page extends WPML_WPDB_And_SP_User {
 		if ( 'page' !== get_post_type( $post_id ) ) {
 			return;
 		}
-		
+
 		$post_id = (int) $post_id;
 		$page_on_front_current  = (int) $this->get( 'page_on_front' );
 		$page_for_posts_current = (int) $this->get( 'page_for_posts' );

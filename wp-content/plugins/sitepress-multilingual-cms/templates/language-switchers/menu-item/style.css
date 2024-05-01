@@ -7,3 +7,7 @@
   .rtl .wpml-ls-menu-item .wpml-ls-flag + span {
     margin-left: 0;
     margin-right: .3em; }
+
+ul .wpml-ls-menu-item a {
+  display: flex;
+  align-items: center; }

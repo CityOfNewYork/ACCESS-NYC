@@ -17,7 +17,7 @@ class WPML_Translate_Link_Targets_In_Strings_Global extends WPML_Translate_Link_
 		);
 	}
 
-	public function get_number_to_be_fixed( $start_id = 0 ) {
+	public function get_number_to_be_fixed( $start_id = 0, $limit = 0 ) {
 		return $this->wpdb->get_var(
 			$this->wpdb->prepare(
 				"SELECT COUNT(id) FROM {$this->wpdb->prefix}icl_string_translations WHERE id >= %d AND status = %d ORDER BY id ",

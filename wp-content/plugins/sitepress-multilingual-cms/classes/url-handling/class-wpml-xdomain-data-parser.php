@@ -1,5 +1,7 @@
 <?php
 
+use WPML\API\Sanitize;
+
 class WPML_XDomain_Data_Parser {
 
 	const SCRIPT_HANDLER = 'wpml-xdomain-data';
@@ -46,9 +48,11 @@ class WPML_XDomain_Data_Parser {
 				'css_selector' => $ls_parameters['css_prefix'] . 'item',
 				'ajax_url'     => admin_url( 'admin-ajax.php' ),
 				'current_lang' => apply_filters( 'wpml_current_language', '' ),
+				'_nonce'       => wp_create_nonce( 'wp_ajax_switching_language' ),
 			);
 
-			wp_enqueue_script( self::SCRIPT_HANDLER, ICL_PLUGIN_URL . '/res/js/xdomain-data.js', array( 'jquery' ), ICL_SITEPRESS_VERSION );
+			wp_enqueue_script( self::SCRIPT_HANDLER, ICL_PLUGIN_URL . '/res/js/xdomain-data.js', array(), ICL_SITEPRESS_VERSION );
+			wp_script_add_data( self::SCRIPT_HANDLER, 'strategy', 'defer' );
 			wp_localize_script( self::SCRIPT_HANDLER, 'wpml_xdomain_data', $js_xdomain_data );
 		}
 	}
@@ -74,6 +78,12 @@ class WPML_XDomain_Data_Parser {
 	}
 
 	public function send_xdomain_language_data() {
+		$nonce = isset( $_POST['_nonce'] ) ? sanitize_text_field( $_POST['_nonce'] ) : '';
+
+		if ( ! wp_verify_nonce( $nonce, 'wp_ajax_switching_language' ) ) {
+			wp_send_json_error( esc_html__( 'Invalid request!', 'sitepress' ), 400 );
+			return;
+		}
 
 		$data = $this->set_up_xdomain_language_data();
 
@@ -89,9 +99,9 @@ class WPML_XDomain_Data_Parser {
 			$xdomain_data_request = false;
 
 			if ( WPML_XDOMAIN_DATA_GET == $this->settings['xdomain_data'] ) {
-				$xdomain_data_request = isset( $_GET['xdomain_data'] ) ? filter_var( $_GET['xdomain_data'], FILTER_SANITIZE_STRING ) : false;
+				$xdomain_data_request = Sanitize::stringProp( 'xdomain_data', $_GET );
 			} elseif ( WPML_XDOMAIN_DATA_POST == $this->settings['xdomain_data'] ) {
-				$xdomain_data_request = isset( $_POST['xdomain_data'] ) ? urldecode( filter_var( $_POST['xdomain_data'], FILTER_SANITIZE_STRING ) ) : false;
+				$xdomain_data_request = urldecode( (string) Sanitize::stringProp( 'xdomain_data', $_POST ) );
 			}
 
 			if ( $xdomain_data_request ) {

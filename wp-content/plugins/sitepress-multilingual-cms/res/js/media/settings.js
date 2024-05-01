@@ -78,12 +78,14 @@
 			}
 
 			function wpml_media_options_form_scan_prepare() {
-
 				jQuery.ajax(
 					{
 						url:      ajaxurl,
 						type:     'POST',
-						data:     {action: 'wpml_media_scan_prepare'},
+						data:     {
+							action: 'wpml_media_scan_prepare',
+							nonce: wpml_media_settings_data.nonce_wpml_media_scan_prepare
+						},
 						dataType: 'json',
 						success:  function (ret) {
 							wpml_update_status(ret.message);
@@ -111,7 +113,10 @@
 						{
 							url:      ajaxurl,
 							type:     'POST',
-							data:     {action: 'wpml_media_set_initial_language'},
+							data:     {
+								action: 'wpml_media_set_initial_language',
+								nonce: wpml_media_settings_data.nonce_wpml_media_set_initial_language
+							},
 							dataType: 'json',
 							success:  function (ret) {
 								wpml_update_status(ret.message);
@@ -140,7 +145,10 @@
 						{
 							url:      ajaxurl,
 							type:     'POST',
-							data:     {action: 'wpml_media_translate_media'},
+							data:     {
+								action: 'wpml_media_translate_media',
+								nonce: wpml_media_settings_data.nonce_wpml_media_translate_media
+							},
 							dataType: 'json',
 							success:  function (ret) {
 								wpml_update_status(ret.message);
@@ -169,7 +177,10 @@
 						{
 							url:      ajaxurl,
 							type:     'POST',
-							data:     {action: 'wpml_media_duplicate_media'},
+							data:     {
+								action: 'wpml_media_duplicate_media',
+								nonce: wpml_media_settings_data.nonce_wpml_media_duplicate_media
+							},
 							dataType: 'json',
 							success:  function (ret) {
 								wpml_update_status(ret.message);
@@ -193,14 +204,13 @@
 
 			function wpml_media_duplicate_featured_images( left = null ) {
 				if (jQuery('#duplicate_featured', form).is(':checked')) {
-					const nonce = document.getElementById( 'wpml_media_settings_nonce' );
 					jQuery.ajax(
 						{
 							url:      ajaxurl,
 							type:     'POST',
 							data:     {
 								action: 'wpml_media_duplicate_featured_images',
-								nonce: nonce ? nonce.value : '',
+								nonce: wpml_media_settings_data.nonce_wpml_media_duplicate_featured_images,
 								featured_images_left: left
 							},
 							dataType: 'json',
@@ -224,12 +234,14 @@
 			}
 
 			function wpml_media_mark_processed() {
-
 				jQuery.ajax(
 					{
 						url:      ajaxurl,
 						type:     'POST',
-						data:     {action: 'wpml_media_mark_processed'},
+						data:     {
+							action: 'wpml_media_mark_processed',
+							nonce: wpml_media_settings_data.nonce_wpml_media_mark_processed
+						},
 						dataType: 'json',
 						success:  function (ret) {
 							wpml_media_options_form_finished(ret.message);
@@ -248,13 +260,13 @@
 				wpml_update_status('');
 				submitButton.attr('disabled', 'disabled');
 				jQuery(form).find('.content_default_progress').fadeIn();
-
 				jQuery.ajax(
 					{
 						url:      ajaxurl,
 						type:     'POST',
 						data:     {
-							action: 'wpml_media_set_content_prepare'
+							action: 'wpml_media_set_content_prepare',
+							nonce: wpml_media_settings_data.nonce_wpml_media_set_content_prepare
 						},
 						dataType: 'json',
 						success:  function (ret) {
@@ -273,7 +285,6 @@
 				wpml_update_status('');
 				submitButton.attr('disabled', 'disabled');
 				jQuery(form).find('.content_default_progress').fadeIn();
-
 				jQuery.ajax(
 					{
 						url:      ajaxurl,
@@ -282,7 +293,9 @@
 							action:                 'wpml_media_set_content_defaults',
 							always_translate_media: jQuery('input[name=content_default_always_translate_media]', form).is(':checked'),
 							duplicate_media:        jQuery('input[name=content_default_duplicate_media]', form).is(':checked'),
-							duplicate_featured:     jQuery('input[name=content_default_duplicate_featured]', form).is(':checked')
+							duplicate_featured:     jQuery('input[name=content_default_duplicate_featured]', form).is(':checked'),
+							translate_media_library_texts:     jQuery('input[name=translate_media_library_texts]', form).is(':checked'),
+              				nonce: wpml_media_settings_data.nonce_wpml_media_set_content_defaults
 						},
 						dataType: 'json',
 						success:  function (ret) {

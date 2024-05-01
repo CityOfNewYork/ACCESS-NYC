@@ -1,11 +1,15 @@
 <?php
 
-abstract class WPML_Translation_Roles_Records {
+use WPML\LIB\WP\Cache;
 
+abstract class WPML_Translation_Roles_Records {
 	const USERS_WITH_CAPABILITY    = 'LIKE';
 	const USERS_WITHOUT_CAPABILITY = 'NOT LIKE';
 	const MIN_SEARCH_LENGTH        = 3;
 	const CACHE_GROUP              = __CLASS__;
+
+	const CACHE_PREFIX   = 'wpml-cache-translators-';
+	const CACHE_KEY_KEYS = 'keys';
 
 	/** @var wpdb */
 	protected $wpdb;
@@ -27,11 +31,13 @@ abstract class WPML_Translation_Roles_Records {
 		$this->wpdb               = $wpdb;
 		$this->user_query_factory = $user_query_factory;
 		$this->wp_roles           = $wp_roles;
+
+		add_action( 'wpml_update_translator', [ $this, 'delete_cache' ], -10 );
 	}
 
 	public function has_users_with_capability() {
 		$sql = "
-				SELECT EXISTS( 
+				SELECT EXISTS(
 				   SELECT user_id
 				   FROM {$this->wpdb->usermeta}
 				   WHERE meta_key = '{$this->wpdb->prefix}capabilities' AND meta_value LIKE %s
@@ -73,13 +79,15 @@ abstract class WPML_Translation_Roles_Records {
 	 * @return bool
 	 */
 	public function does_user_have_capability( $user_id ) {
-		$users = $this->get_users_with_capability();
-		foreach ( $users as $user ) {
-			if ( (int) $user->ID === (int) $user_id ) {
-				return true;
+		$fn = Cache::memorize(
+			self::CACHE_GROUP . '_does_user_have_capability',
+			3600,
+			function ( $user_id ) {
+				return $this->fetch_user_capability( $user_id );
 			}
-		}
-		return false;
+		);
+
+		return $fn( $user_id );
 	}
 
 	/**
@@ -100,6 +108,34 @@ abstract class WPML_Translation_Roles_Records {
 	public function delete( $user_id ) {
 		$user = new WP_User( $user_id );
 		$user->remove_cap( $this->get_capability() );
+
+		$this->delete_cache();
+	}
+
+	public function delete_cache() {
+		$translators_keys = get_option( self::CACHE_PREFIX . self::CACHE_KEY_KEYS );
+		if ( ! $translators_keys ) {
+			return;
+		}
+
+		foreach ( $translators_keys as $cache_key ) {
+			delete_option( self::CACHE_PREFIX . $cache_key );
+		}
+
+		delete_option( self::CACHE_PREFIX . self::CACHE_KEY_KEYS );
+	}
+
+
+	private function set_cache( $key, $translators ) {
+		// Cache the results as option.
+		// Not using transient here to avoid having WordPress delete the keys
+		// entry without us being able to control it and it should only be
+		// deleted if all registered keys are deleted before.
+		$translators_keys   = get_option( self::CACHE_PREFIX . self::CACHE_KEY_KEYS );
+		$translators_keys   = $translators_keys ?: [];
+		$translators_keys[] = $key;
+		update_option( self::CACHE_PREFIX . self::CACHE_KEY_KEYS, $translators_keys, false );
+		update_option( self::CACHE_PREFIX . $key, $translators, false );
 	}
 
 	/**
@@ -112,40 +148,37 @@ abstract class WPML_Translation_Roles_Records {
 	private function get_records( $compare, $search = '', $limit = -1 ) {
 		$search = trim( $search );
 
-		$cache_key = md5( wp_json_encode( [ get_class( $this ), $compare, $search, $limit ] ) );
-		$cache     = wpml_get_cache( self::CACHE_GROUP );
-		$found     = false;
-		$results   = $cache->get( $cache_key, $found );
-		if ( $found ) {
-			return $results;
+		$cache_key = md5( (string) wp_json_encode( [ get_class( $this ), $compare, $search, $limit ] ) );
+
+		$translators = get_option( self::CACHE_PREFIX . $cache_key );
+		if ( is_array( $translators ) ) {
+			return $translators;
 		}
 
-		$query_args = array(
-			'fields'     => 'ID',
-			'meta_query' => array(
-				array(
-					'key'     => "{$this->wpdb->prefix}capabilities",
-					'value'   => $this->get_capability(),
-					'compare' => $compare,
-				),
-			),
-			'number'     => $limit,
+		$preparedUserQuery = $this->wpdb->prepare(
+			"SELECT u.id FROM {$this->wpdb->users} u INNER JOIN {$this->wpdb->usermeta} c ON c.user_id=u.ID AND CAST(c.meta_key AS BINARY)=%s AND c.meta_value {$compare} %s",
+			"{$this->wpdb->prefix}capabilities",
+			"%" . $this->get_capability() . "%"
 		);
 
-		if ( 'NOT LIKE' === $compare ) {
+		if ( self::USERS_WITHOUT_CAPABILITY === $compare ) {
 			$required_wp_roles = $this->get_required_wp_roles();
-			if ( $required_wp_roles ) {
-				$query_args['role__in'] = $required_wp_roles;
+			foreach( $required_wp_roles as $required_wp_role ) {
+				$preparedUserQuery .= $this->wpdb->prepare( " AND c.meta_value LIKE %s", "%{$required_wp_role}%" );
 			}
 		}
 
 		if ( $search ) {
-			$query_args['search']         = '*' . $search . '*';
-			$query_args['search_columns'] = array( 'user_login', 'user_nicename', 'user_email' );
+			$preparedUserQuery .= $this->wpdb->prepare( " AND (u.user_login LIKE %s OR u.user_nicename LIKE %s OR u.user_email LIKE %s)", "%{$search}%", "%{$search}%", "%{$search}%" );
 		}
 
-		$user_query = $this->user_query_factory->create( $query_args );
-		$users      = $user_query->get_results();
+		$preparedUserQuery .= ' ORDER BY user_login ASC';
+
+		if ( $limit > 0 ) {
+			$preparedUserQuery .= $this->wpdb->prepare(" LIMIT 0,%d", $limit );
+		}
+
+		$users      = $this->wpdb->get_col( $preparedUserQuery );
 
 		if ( $search && strlen( $search ) > self::MIN_SEARCH_LENGTH && ( $limit <= 0 || count( $users ) < $limit ) ) {
 			$users_from_metas = $this->get_records_from_users_metas( $compare, $search, $limit );
@@ -153,30 +186,30 @@ abstract class WPML_Translation_Roles_Records {
 			$users            = wpml_array_unique( $users_with_dupes, SORT_REGULAR );
 		}
 
-		$results = array();
+		$translators = array();
 		foreach ( $users as $user_id ) {
 			$user_data = get_userdata( $user_id );
 			if ( $user_data ) {
 				$language_pair_records = new WPML_Language_Pair_Records( $this->wpdb, new WPML_Language_Records( $this->wpdb ) );
 				$language_pairs        = $language_pair_records->get( $user_id );
 
-				$result    = (object) array(
+				$translators[] = (object) array(
 					'ID'             => $user_data->ID,
 					'full_name'      => trim( $user_data->first_name . ' ' . $user_data->last_name ),
 					'user_login'     => $user_data->user_login,
 					'user_email'     => $user_data->user_email,
 					'display_name'   => $user_data->display_name,
 					'language_pairs' => $language_pairs,
-					'roles'          => $user_data->roles
+					'roles'          => $user_data->roles,
 				);
-				$results[] = $result;
 			}
 		}
 
-		$cache->set( $cache_key, $results );
+		$this->set_cache( $cache_key, $translators );
 
-		return $results;
+		return $translators;
 	}
+
 
 	/**
 	 * @param string $compare
@@ -243,6 +276,24 @@ abstract class WPML_Translation_Roles_Records {
 
 		return $user_query->get_results();
 
+	}
+
+	/**
+	 * Fetches the capability for the user from DB
+	 *
+	 * @param int $user_id
+	 */
+	private function fetch_user_capability( $user_id ) {
+		$sql = "
+			   SELECT user_id
+			   FROM {$this->wpdb->usermeta}
+			   WHERE user_id = %d AND meta_key = %s AND meta_value LIKE %s
+			   LIMIT 1
+			";
+
+		$sql = $this->wpdb->prepare( $sql, $user_id, $this->wpdb->prefix . 'capabilities', '%' . $this->get_capability() . '%' );
+
+		return (bool) $this->wpdb->get_var( $sql );
 	}
 
 	/**

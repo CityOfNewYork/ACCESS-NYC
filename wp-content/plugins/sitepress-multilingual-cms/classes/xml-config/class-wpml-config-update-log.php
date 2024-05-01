@@ -67,7 +67,7 @@ class WPML_Config_Update_Log implements WPML_Log {
 				$offset = 0;
 			}
 
-			$data = array_slice( $data, $offset, $limit );
+			$data = array_slice( $data, (int) $offset, $limit );
 		}
 
 		return $data;

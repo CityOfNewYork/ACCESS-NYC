@@ -96,7 +96,7 @@ class WPML_Locale {
 			$wp_api  = $this->sitepress->get_wp_api();
 			$is_ajax = $wp_api->is_ajax();
 			if ( $is_ajax && isset( $_REQUEST['action'], $_REQUEST['lang'] ) ) {
-				$locale_lang_code = $_REQUEST['lang'];
+				$locale_lang_code = preg_replace( '/[^-a-zA-Z0-9_]/', '', $_REQUEST['lang'] );
 			} elseif ( $wp_api->is_admin()
 					   && ( ! $is_ajax
 							|| $this->sitepress->check_if_admin_action_from_referer() )
@@ -173,7 +173,8 @@ class WPML_Locale {
 			}
 			load_textdomain(
 				'sitepress',
-				WPML_PLUGIN_PATH . '/locale/sitepress-' . $this->get_locale( $lang_code ) . '.mo'
+				WPML_PLUGIN_PATH . '/locale/sitepress-' . $this->get_locale( $lang_code ) . '.mo',
+				is_string( $this->get_locale( $lang_code ) ) ? $this->get_locale( $lang_code ) : null
 			);
 		} else { // switch back
 			$l10n['sitepress'] = $original_l10n;

@@ -1,0 +1,95 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "en"
+         },
+         "Translation Memory was successfully copied to Advanced Translation Editor.": [
+            ""
+         ],
+         "Deactivate ICanLocalize.com as Translation Service on this site": [
+            ""
+         ],
+         "Missing a translator? Or were new jobs since the last copy of the Translation Memory?": [
+            ""
+         ],
+         "Enter here your ICanLocalize authentication details.": [
+            ""
+         ],
+         "API Token:": [
+            ""
+         ],
+         "Please enter valid value for ICL token.": [
+            ""
+         ],
+         "Enter ICL API token here": [
+            ""
+         ],
+         "Submit": [
+            ""
+         ],
+         "Sign up": [
+            ""
+         ],
+         "to ICanLocalize to receive your API token.": [
+            ""
+         ],
+         "Already have an account? Login and": [
+            ""
+         ],
+         "get your token.": [
+            ""
+         ],
+         "Copy new Translation Memory to Advanced Translation Memory": [
+            ""
+         ],
+         "Import translation memory": [
+            ""
+         ],
+         "ICanLocalize is already deactivated on this site": [
+            ""
+         ],
+         "You can still import Translators or Copy Translation Memory to Advanced Translator Editor": [
+            ""
+         ],
+         "Move from ICanLocalize.com to Advanced Translation Editor": [
+            ""
+         ],
+         "Import translators": [
+            ""
+         ],
+         "Come back": [
+            ""
+         ],
+         "Not supported pairs:": [
+            ""
+         ],
+         "ICanLocalize.com deactivated": [
+            ""
+         ],
+         "Translate memory is imported": [
+            ""
+         ],
+         "There is no translators in ICL": [
+            ""
+         ],
+         "Translators saved": [
+            ""
+         ],
+         "Flags must be:": [
+            ""
+         ],
+         "PNG, SVG, or JPG files": [
+            ""
+         ],
+         "18 x 12 pixels": [
+            ""
+         ],
+         "Read more about ": [
+            ""
+         ]
+      }
+   }
+}

@@ -28,6 +28,12 @@ class WPML_TM_Post_Job_Entity extends WPML_TM_Job_Entity {
 	/** @var string */
 	private $element_type;
 
+	/** @var int */
+	private $element_id;
+
+	/** @var string */
+	private $element_type_prefix;
+
 	/** @var string */
 	private $job_title;
 
@@ -182,6 +188,28 @@ class WPML_TM_Post_Job_Entity extends WPML_TM_Job_Entity {
 	 */
 	public function set_element_type( $element_type ) {
 		$this->element_type = $element_type;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function get_element_id() {
+		return $this->element_id;
+	}
+
+	/**
+	 * @param int $element_id
+	 */
+	public function set_element_id( $element_id ) {
+		$this->element_id = $element_id;
+	}
+
+	public function get_element_type_prefix() {
+		return $this->element_type_prefix;
+	}
+
+	public function set_element_type_prefix( $element_type ) {
+		$this->element_type_prefix = explode( '_', $element_type )[0];
 	}
 
 	/**

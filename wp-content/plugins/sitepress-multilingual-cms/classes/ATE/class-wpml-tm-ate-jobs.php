@@ -3,6 +3,7 @@
 use WPML\FP\Cast;
 use WPML\FP\Maybe;
 use WPML\TM\ATE\JobRecords;
+use WPML\TM\ATE\API\RequestException;
 use function WPML\FP\pipe;
 use function WPML\FP\partialRight;
 use WPML\FP\Obj;
@@ -61,41 +62,13 @@ class WPML_TM_ATE_Jobs {
 	}
 
 	/**
-	 * We update the status from ATE only for non-completed ATE statuses
-	 * in all other cases, we mark the job as completed when we receive it
-	 * from ATE in `WPML_TM_ATE_Jobs::apply` which calls `wpml_tm_save_data`.
-	 *
-	 * @param int $wpml_job_id
-	 * @param int $ate_status
-	 */
-	public function set_wpml_status_from_ate( $wpml_job_id, $ate_status ) {
-		$ate_status = (int) $ate_status;
-
-		switch ( $ate_status ) {
-			case WPML_TM_ATE_AMS_Endpoints::ATE_JOB_STATUS_CREATED:
-				$wpml_status = ICL_TM_WAITING_FOR_TRANSLATOR;
-				break;
-
-			case WPML_TM_ATE_AMS_Endpoints::ATE_JOB_STATUS_TRANSLATING:
-				$wpml_status = ICL_TM_IN_PROGRESS;
-				break;
-
-			default:
-				$wpml_status = null;
-		}
-
-		if ( $wpml_status ) {
-			WPML_TM_Update_Translation_Status::by_job_id( $wpml_job_id, (int) $wpml_status );
-		}
-	}
-
-	/**
 	 * @todo: Check possible duplicated code / We already have functionality to import XLIFF files from Translator's queue
 	 *
 	 * @param string $xliff
 	 *
 	 * @return bool|int
-	 * @throws \Requests_Exception|Exception
+	 * @throws RequestException The job could not be loaded.
+	 * @throws \Exception When the xliff cannot be applied to the job.
 	 */
 	public function apply( $xliff ) {
 		$factory       = wpml_tm_load_job_factory();
@@ -103,7 +76,10 @@ class WPML_TM_ATE_Jobs {
 		$xliff_reader  = $xliff_factory->general_xliff_reader();
 		$job_data      = $xliff_reader->get_data( $xliff );
 		if ( is_wp_error( $job_data ) ) {
-			throw new Requests_Exception( $job_data->get_error_message(), $job_data->get_error_code() );
+			throw new RequestException(
+				$job_data->get_error_message(),
+				$job_data->get_error_code()
+			);
 		}
 
 		kses_remove_filters();
@@ -161,7 +137,7 @@ class WPML_TM_ATE_Jobs {
 	/**
 	 * getJobTargetLanguage :: void → ( object → string|null )
 	 *
-	 * @return callback
+	 * @return callable
 	 */
 	private function getJobTargetLanguage() {
 		// $getJobEntityById :: int -> \WPML_TM_Job_Entity|false

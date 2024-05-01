@@ -1,5 +1,6 @@
 <?php
 
+use WPML\API\Sanitize;
 use WPML\FP\Fns;
 use WPML\FP\Json;
 use WPML\FP\Logic;
@@ -83,7 +84,7 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 
 	public function add_hooks() {
 		add_action( 'wpml_added_translation_job', [ $this, 'added_translation_job' ], 10, 2 );
-		add_action( 'wpml_added_translation_jobs', [ $this, 'added_translation_jobs' ], 10, 2 );
+		add_action( 'wpml_added_translation_jobs', [ $this, 'added_translation_jobs' ], 10, 3 );
 		add_action( 'admin_notices', [ $this, 'handle_messages' ] );
 
 		add_filter( 'wpml_tm_ate_jobs_data', [ $this, 'get_ate_jobs_data_filter' ], 10, 2 );
@@ -99,7 +100,7 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 
 					$this->resign_job_on_error( $ate_job_id );
 				}
-				$message = filter_var( $_GET['message'], FILTER_SANITIZE_STRING );
+				$message = Sanitize::stringProp( 'message', $_GET );
 				?>
 
 				<div class="error notice-error notice otgs-notice">
@@ -125,12 +126,13 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 	/**
 	 * @param array $jobs
      * @param int|null $sentFrom
+     * @param \WPML_TM_Translation_Batch $batch
 	 *
-	 * @return bool|void
+	 * @return void
 	 * @throws \InvalidArgumentException
 	 * @throws \RuntimeException
 	 */
-	public function added_translation_jobs( array $jobs, $sentFrom = null ) {
+	public function added_translation_jobs( array $jobs, $sentFrom = null, \WPML_TM_Translation_Batch $batch = null ) {
 		$oldEditor = wpml_tm_load_old_jobs_editor();
 		$job_ids   = Fns::reject( [ $oldEditor, 'shouldStickToWPMLEditor' ], Obj::propOr( [], 'local', $jobs ) );
 
@@ -138,11 +140,22 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 			return;
 		}
 
-		$jobs = Fns::map( 'wpml_tm_create_ATE_job_creation_model', $job_ids );
+		$translationModeSetInDashboard = $batch ? $batch->getTranslationMode() : null;
+		if ( $translationModeSetInDashboard === 'auto' ) {
+			$applyTranslationMemory = ! $batch || $batch->getHowToHandleExisting() === \WPML_TM_Translation_Batch::HANDLE_EXISTING_LEAVE;
+		} else {
+			// We don't want to clear Translation Memory for manual jobs.
+			// Most likely, such job will be almost immediately completed in ATE, but it is expected by users.
+			$applyTranslationMemory = true;
+		}
+
+		$jobs = Fns::map( function ( $jobId ) use ( $applyTranslationMemory ) {
+			return wpml_tm_create_ATE_job_creation_model( $jobId, $applyTranslationMemory );
+		}, $job_ids );
 
 		$responses = Fns::map(
 			Fns::unary( partialRight( [ $this, 'create_jobs' ], $sentFrom ) ),
-			$this->getChunkedJobs( $jobs )
+			$this->getChunkedJobs( $jobs, $translationModeSetInDashboard )
 		);
 		$created_jobs = $this->getResponsesJobs( $responses, $jobs );
 
@@ -156,11 +169,9 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 				$this->ate_jobs->store( $wpml_job_id, [ JobRecords::FIELD_ATE_JOB_ID => $ate_job_id ] );
 				$oldEditor->set( $wpml_job_id, WPML_TM_Editors::ATE );
 				$translationJob = wpml_tm_load_job_factory()->get_translation_job( $wpml_job_id, false, 0, true );
-				$jobType        = $this->getJobType( $translationJob );
-				wpml_tm_load_job_factory()->update_job_data(
-					$wpml_job_id,
-					[ 'automatic' => $jobType === 'auto' ? 1 : 0 ]
-				);
+				$jobType        = $this->getJobType( $translationJob, $translationModeSetInDashboard );
+
+				Jobs::setAutomaticStatus( $wpml_job_id, $jobType === 'auto' );
 
 				if ( $sentFrom === Jobs::SENT_RETRY ) {
 					Jobs::setStatus( $wpml_job_id, ICL_TM_WAITING_FOR_TRANSLATOR );
@@ -177,11 +188,11 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 						$this->logRetryError( $jobId );
 					};
 				} else {
-					$updateJob = function ( $jobId ) use ( $oldEditor ) {
+					$updateJob = function ( $jobId ) use ( $oldEditor, $translationModeSetInDashboard ) {
 						$this->logError( $jobId );
 
 						$translationJob = wpml_tm_load_job_factory()->get_translation_job( $jobId, false, 0, true );
-						$jobType        = $this->getJobType( $translationJob );
+						$jobType        = $this->getJobType( $translationJob, $translationModeSetInDashboard );
 						if ( $jobType === 'auto' ) {
 							Jobs::setStatus( $jobId, ICL_TM_ATE_NEEDS_RETRY );
 							$oldEditor->set( $jobId, WPML_TM_Editors::ATE );
@@ -243,7 +254,7 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 		$isAuto = Relation::propEq( 'type', 'auto', $jobsData );
 
 		return Wrapper::of( [ 'jobs' => $new, 'existing_jobs' => Lst::pluck( 'existing_ate_id', $existing ) ] )
-		              ->map( Obj::assoc( 'auto_translate', $isAuto && Option::shouldTranslateEverything() ) )
+		              ->map( Obj::assoc( 'auto_translate', $isAuto ) )
 		              ->map( Obj::assoc( 'preview', $isAuto && Option::shouldBeReviewed() ) )
 		              ->map( $setJobType )
 		              ->map( 'wp_json_encode' )
@@ -285,9 +296,9 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 		// Start of possibly dead code.
 		if (
 			! $this->is_second_attempt_to_get_jobs_data &&
-			$ate_jobs_to_create &&
-			$this->added_translation_jobs( array( 'local' => $ate_jobs_to_create ) )
+			$ate_jobs_to_create
 		) {
+			$this->added_translation_jobs( array( 'local' => $ate_jobs_to_create ) );
 			$ate_jobs_data                            = $this->get_ate_jobs_data( $translation_jobs );
 			$this->is_second_attempt_to_get_jobs_data = true;
 		}
@@ -305,7 +316,9 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 	 * @throws \InvalidArgumentException
 	 */
 	public function get_editor_url( $default_url, $job_id, $return_url = null ) {
-		if ( $this->translator_activation_records->is_current_user_activated() ) {
+		$isUserActivated = $this->translator_activation_records->is_current_user_activated();
+
+		if ( $isUserActivated || is_admin() ) {
 			$ate_job_id = $this->ate_jobs->get_ate_job_id( $job_id );
 			if ( $ate_job_id ) {
 				if ( ! $return_url ) {
@@ -449,10 +462,11 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 
 	/**
 	 * @param \WPML_TM_ATE_Models_Job_Create[] $jobs
+     * @param "auto"|"manual"|null $translationModeSetInDashboard
 	 *
 	 * @return array
 	 */
-	private function getChunkedJobs( $jobs ) {
+	private function getChunkedJobs( $jobs, $translationModeSetInDashboard ) {
 		$chunkedJobs      = [];
 		$currentChunk     = -1;
 		$currentWordCount = 0;
@@ -468,14 +482,15 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 
 		foreach ( $jobs as $job ) {
 			/** @var WPML_Element_Translation_Job $translationJob */
-			$translationJob = wpml_tm_load_job_factory()->get_translation_job( $job->source_id, false, 0, true );
+
+			$translationJob = wpml_tm_load_job_factory()->get_translation_job( $job->id, false, 0, true );
 			if ( $translationJob ) {
 
 				if ( ! Obj::prop( 'existing_ate_id', $job ) ) {
 					$currentWordCount += $translationJob->estimate_word_count();
 				}
 
-				$jobType = $this->getJobType( $translationJob );
+				$jobType = $this->getJobType( $translationJob, $translationModeSetInDashboard );
 				if ( $jobType !== $chunkType ) {
 					$chunkType = $jobType;
 					$newChunk( $chunkType );
@@ -499,7 +514,8 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 	 */
 	private function logRetryError( $jobId ) {
 		$job = Jobs::get( $jobId );
-		if ( $job && $job->ate_comm_retry_count ) {
+
+		if ( isset( $job->ate_comm_retry_count ) && $job->ate_comm_retry_count ) {
 			Storage::add( Entry::retryJob( $jobId,
 				[
 					'retry_count' => $job->ate_comm_retry_count
@@ -522,13 +538,21 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 		}
 	}
 
-	private function getJobType( $translationJob ) {
+	/**
+	 * @param $translationJob
+	 * @param "auto"|"manual"|null $translationModeSetInDashboard
+	 *
+	 * @return "manual"|"auto"
+	 */
+	private function getJobType( $translationJob, $translationModeSetInDashboard ) {
 		$document = $translationJob->get_original_document();
-		if ( ! $document || $document instanceof WPML_Package ) {
+		if ( ! $document ) {
 			return 'manual';
+		} elseif ( $translationModeSetInDashboard ) {
+			return $translationModeSetInDashboard;
 		} else {
 			return $translationJob->get_source_language_code() === Languages::getDefaultCode() &&
-                   Jobs::isEligibleForAutomaticTranslations( $translationJob->get_id() ) ? 'auto' : 'manual';
+				   Jobs::isEligibleForAutomaticTranslations( $translationJob->get_id() ) ? 'auto' : 'manual';
 		}
 	}
 }

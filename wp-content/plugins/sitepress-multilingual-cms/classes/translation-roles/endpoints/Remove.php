@@ -28,7 +28,6 @@ abstract class Remove implements IHandler {
 
 		// $doActions :: WP_user -> WP_user
 		$doActions = Fns::tap( function ( $user ) {
-			do_action( 'wpml_tm_ate_synchronize_translators' );
 			do_action( 'wpml_tm_remove_translation_role', $user, static::getCap() );
 		} );
 

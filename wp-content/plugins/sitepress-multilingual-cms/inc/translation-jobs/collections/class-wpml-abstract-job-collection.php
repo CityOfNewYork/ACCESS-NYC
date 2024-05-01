@@ -120,6 +120,8 @@ class WPML_Abstract_Job_Collection {
 				}
 			} elseif ( 'string' === $job->element_type_prefix ) {
 				$jobs[ $key ] = new WPML_String_Translation_Job( $job->job_id );
+			} elseif ( 'package' === $job->element_type_prefix ) {
+				$jobs[ $key ] = new WPML_Package_Translation_Job( $job->job_id );
 			} else {
 				$jobs[ $key ] = new WPML_External_Translation_Job( $job->job_id, $job->batch_id );
 			}

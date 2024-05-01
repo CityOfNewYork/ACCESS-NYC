@@ -53,6 +53,7 @@ abstract class AbstractQuery implements Query {
 				'translations.language_code AS target_language',
 				'translations.trid',
 				'translations.element_type',
+				'translations.element_id',
 				'translation_status.translation_service AS translation_service',
 				'translation_status.timestamp AS sent_date',
 				'translate_job.deadline_date AS deadline_date',
@@ -191,6 +192,7 @@ abstract class AbstractQuery implements Query {
 		}
 
 		$query_builder->set_numeric_value_filter( 'translation_status.rid', $params->get_id() );
+		$query_builder->set_numeric_value_filter( 'translation_status.rid', $params->get_ids() );
 		$query_builder->set_numeric_value_filter( 'translation_status.rid', $params->get_local_job_ids() );
 		$query_builder->set_numeric_value_filter(
 			'original_translations.element_id',
@@ -255,6 +257,10 @@ abstract class AbstractQuery implements Query {
 			}
 		} else {
 			$query_builder->set_status_filter( 'translation_status.status', $params );
+		}
+
+		if ( $params->should_exclude_cancelled() ) {
+			$query_builder->add_AND_where_condition( 'translation_status.status != 0' );
 		}
 	}
 

@@ -1,7 +1,7 @@
 <?php
 
 abstract class WPML_TM_Xliff_Shared extends WPML_TM_Job_Factory_User {
-	/** @var  WP_Error $error */
+	/** @var  ?WP_Error $error */
 	protected $error;
 
 	/** @var WPML_TM_Validate_HTML */
@@ -138,6 +138,10 @@ abstract class WPML_TM_Xliff_Shared extends WPML_TM_Job_Factory_User {
 	protected function validate_file( $name, $content, $current_user ) {
 		$xml = $this->check_xml_file( $name, $content );
 
+		if ( ! $xml ) {
+			return null;
+		}
+
 		$this->error = null;
 		if ( is_wp_error( $xml ) ) {
 			$this->error = $xml;
@@ -172,7 +176,7 @@ abstract class WPML_TM_Xliff_Shared extends WPML_TM_Job_Factory_User {
 	 */
 	function validate_file_name( $filename ) {
 		$ignored_files = apply_filters( 'wpml_xliff_ignored_files', array( '__MACOSX' ) );
-		return ! ( preg_match( '/(\/)/', $filename ) || in_array( $filename, $ignored_files, false ) );
+		return ! ( '/' === substr( $filename, -1 ) || '/' === substr( $filename, 0, 1 ) || in_array( $filename, $ignored_files, false ) );
 	}
 
 	protected function is_user_the_job_owner( $current_user, $job ) {
@@ -189,7 +193,7 @@ abstract class WPML_TM_Xliff_Shared extends WPML_TM_Job_Factory_User {
 	 * @param string $name
 	 * @param string $content
 	 *
-	 * @return bool|SimpleXMLElement|WP_Error
+	 * @return false|SimpleXMLElement|WP_Error
 	 */
 	protected function check_xml_file( $name, $content ) {
 		set_error_handler( array( $this, 'error_handler' ) );

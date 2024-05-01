@@ -3,7 +3,8 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "no"
          },
          "From:": [
             "从："
@@ -68,11 +69,8 @@
          "Add Translation Manager": [
             "添加翻译经理"
          ],
-         "Select an existing user and set as Translator": [
-            "选择一个现有用户，并设置为翻译"
-         ],
-         "Create a new user and set as Translator": [
-            "创建一个新用户，并设置为翻译"
+         "Add a Translation Manager": [
+            "添加翻译经理"
          ],
          "Set language pair(s)": [
             "设置语言对"
@@ -85,6 +83,12 @@
          ],
          "Add a Translator": [
             "添加译员"
+         ],
+         "Select an existing user and set as Translator": [
+            "选择一个现有用户，并设置为翻译"
+         ],
+         "Create a new user and set as Translator": [
+            "创建一个新用户，并设置为翻译"
          ],
          "Edit language pair(s) for translator": [
             "编辑翻译的语言对"
@@ -105,7 +109,7 @@
             "国旗"
          ],
          "Flag file": [
-            "旗帜文件"
+            "国旗文件"
          ],
          "You just added  language. Next, select it as the site's default language or a translation language.": [
             "您刚刚添加了语言。接下来，选择它作为网站的默认语言或翻译语言。"
@@ -131,26 +135,14 @@
          "Click here": [
             "点击这里"
          ],
-         "The name of your language as it will appear on your site's language switcher.": [
-            "将在网站语言切换器上显示的语言名称。"
-         ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
             "格式错误。它只能包含小写字母和 \"-\"。例如\"fr\"、 \"pt-br\"、\"zh-hans\""
-         ],
-         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
-            "数据库和URL中标识语言的唯一值。语言代码保存后无法更改。"
          ],
          "Language": [
             "语言"
          ],
-         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
-            "如果您的自定义语言与现有语言相似，则可以使用现有语言的拼写检查和自动翻译。例如，如果您的自定义语言是瑞士德语，则可以映射到德语作为拼写检查和自动翻译使用的语言。如果不将自定义语言映射到现有语言，则拼写检查和自动翻译功能将不可用在该语言中。"
-         ],
          "Location": [
             "地点"
-         ],
-         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
-            "从MO和PO文件加载翻译时，WPML会检查该值。默认区域设置包含在WordPress设置中 /wp-content/languages/ folder的文件名中。"
          ],
          "Code": [
             "代码"
@@ -158,20 +150,11 @@
          "The language will not be supported by automatic translations": [
             "自动翻译将不支持该语言"
          ],
-         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
-            "谷歌使用hreflang属性将用户引导到使用其相关语言和位置的站点。示例："
-         ],
          "Language mapping": [
             "语言映射"
          ],
-         "All English-speaking users: en": [
-            "所有讲英语的用户：en"
-         ],
          "Don't map this language": [
             "不要映射此语言"
-         ],
-         "English for UK users: en-gb": [
-            "英国用户英语：en-gb"
          ],
          "Default locale": [
             "默认的区域设置"
@@ -179,14 +162,14 @@
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
             "格式错误。它只能包含小写字母和 \"_\"。例如\"de\"、\"de_DE\"、\"zh_Hant_TW\""
          ],
-         "English for US users: en-us": [
-            "美国用户英语：en-us"
-         ],
          "hreflang": [
             "hreflang"
          ],
          "Encode url?": [
             "编码url？"
+         ],
+         "Flags must be:": [
+            "旗标必须是:"
          ],
          "NO": [
             "否"
@@ -200,8 +183,41 @@
          "Please fill in the field": [
             "请填写此字段"
          ],
+         "PNG, SVG, or JPG files": [
+            "PNG、SVG 或 JPG 文件"
+         ],
          "Save language": [
             "保存语言"
+         ],
+         "18 x 12 pixels": [
+            "18 x 12 像素"
+         ],
+         "Read more about ": [
+            "进一步了解"
+         ],
+         "The name of your language as it will appear on your site's language switcher.": [
+            "将在网站语言切换器上显示的语言名称。"
+         ],
+         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "数据库和URL中标识语言的唯一值。语言代码保存后无法更改。"
+         ],
+         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "如果您的自定义语言与现有语言相似，则可以使用现有语言的拼写检查和自动翻译。例如，如果您的自定义语言是瑞士德语，则可以映射到德语作为拼写检查和自动翻译使用的语言。如果不将自定义语言映射到现有语言，则拼写检查和自动翻译功能将不可用在该语言中。"
+         ],
+         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "从MO和PO文件加载翻译时，WPML会检查该值。默认区域设置包含在WordPress设置中 /wp-content/languages/ folder的文件名中。"
+         ],
+         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "谷歌使用hreflang属性将用户引导到使用其相关语言和位置的站点。示例："
+         ],
+         "All English-speaking users: en": [
+            "所有讲英语的用户：en"
+         ],
+         "English for UK users: en-gb": [
+            "英国用户英语：en-gb"
+         ],
+         "English for US users: en-us": [
+            "美国用户英语：en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
             "确定此语言中的URL是否已编码或使用ASCII字符（如果不确定，请将其保留为\"否\"）。"
@@ -230,18 +246,6 @@
          "What are the languages of your site?": [
             "您的网站使用什么语言？"
          ],
-         "+ Add a Translation Manager": [
-            "+添加翻译经理"
-         ],
-         "+ Add a Translator": [
-            "+ 添加译员"
-         ],
-         "%sLocal translators%s are users of your site that can log in and add, edit, and review your site's translations. Add a translator and their associated translation pairs to assign them translation jobs.": [
-            "%s本地译员%s是您网站的用户，他们可以登录、添加、编辑和查看网站的翻译。添加译员及其关联的翻译语言对，以便为其分配翻译工作。"
-         ],
-         "Translators": [
-            "译员"
-         ],
          "You can add a dedicated person to oversee everything translation-related on your site. %sTranslation Managers%s can add new local translators or professional translation services, create and assign translation jobs, review completed translations, and change translation-related settings.": [
             "可以增加一个专门人员来监督网站上所有翻译相关事项。%s翻译经理%s可以添加新的本地译员或专业翻译服务，创建和分配翻译工作，查看已完成的翻译，以及更改与翻译相关的设置。"
          ],
@@ -250,6 +254,15 @@
          ],
          "Note: All Administrators are automatically given Translation Manager privileges.": [
             "注意：所有管理员都自动获得翻译经理权限。"
+         ],
+         "%sLocal translators%s are users of your site that can log in and add, edit, and review your site's translations. Add a translator and their associated translation pairs to assign them translation jobs.": [
+            "%s本地译员%s是您网站的用户，他们可以登录、添加、编辑和查看网站的翻译。添加译员及其关联的翻译语言对，以便为其分配翻译工作。"
+         ],
+         "You can %shire an experienced translator%s to review your automatic translations for perfect quality.": [
+            "你可以%s雇用一名经验丰富的译员%s来审阅你的自动翻译以获得优质译文。"
+         ],
+         "Translators": [
+            "译员"
          ]
       }
    }

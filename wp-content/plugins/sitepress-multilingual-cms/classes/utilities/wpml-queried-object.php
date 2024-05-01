@@ -154,4 +154,8 @@ class WPML_Queried_Object {
 	public function is_instance_of_post_type() {
 		return $this->queried_object instanceof WP_Post_Type;
 	}
+
+	public function is_instance_of_user() {
+		return $this->queried_object instanceof WP_User;
+	}
 }

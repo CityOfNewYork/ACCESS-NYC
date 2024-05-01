@@ -26,7 +26,7 @@ class AutoTranslate implements IHandler {
 			}
 
 			$job_id = $wpml_translation_job_factory->create_local_post_job( $post_id, $language_code );
-			$job    = Jobs::get( $job_id );
+			$job    = Jobs::get( (int) $job_id );
 			if ( ! $job ) {
 				return Either::left( 'Job could not be created' );
 			}

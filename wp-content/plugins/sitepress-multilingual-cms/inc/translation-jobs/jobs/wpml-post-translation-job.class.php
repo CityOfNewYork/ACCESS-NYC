@@ -121,7 +121,7 @@ class WPML_Post_Translation_Job extends WPML_Element_Translation_Job {
 			$new_term = $new_term_action->execute();
 
 			foreach ( TermMeta::getTermMeta( $this->get_id(), $term->term_taxonomy_id ) as $meta ) {
-				update_term_meta( $new_term['term_taxonomy_id'], FieldId::getTermMetaKey( $meta->field_type ), $meta->field_data_translated );
+				update_term_meta( $new_term['term_id'], FieldId::getTermMetaKey( (string) $meta->field_type ), $meta->field_data_translated );
 			}
 		}
 
@@ -156,18 +156,22 @@ class WPML_Post_Translation_Job extends WPML_Element_Translation_Job {
 	 * @return string
 	 */
 	public function get_type_title() {
-		$post_type = get_post_type_object( $this->get_post_type() );
+		$post_type = $this->get_post_type();
+		if ( ! $post_type ) {
+			return '';
+		}
+		$post_type = get_post_type_object( $post_type );
 
 		return $post_type->labels->singular_name;
 	}
 
 	/**
-	 * @return string
+	 * @return string|false
 	 */
 	public function get_post_type() {
 		$original_post = $this->get_original_document();
 
-		return $original_post->post_type;
+		return $original_post ? $original_post->post_type : false;
 	}
 
 	protected function load_resultant_element_id() {
@@ -228,39 +232,32 @@ class WPML_Post_Translation_Job extends WPML_Element_Translation_Job {
 
 	protected function set_translated_term_values( $delete ) {
 		global $wpdb;
-
 		$translations_table = $wpdb->prefix . 'icl_translations';
 		$translate_table    = $wpdb->prefix . 'icl_translate';
 
 		$job_id                         = $this->get_id();
-		$get_target_terms_for_job_query = $wpdb->prepare( "
-					SELECT
-					  t.name,
-					  tt.description,
-					  iclt_original.element_id ttid,
-					  t.term_id tr_ttid
-					FROM {$wpdb->terms} t
-					JOIN {$wpdb->term_taxonomy} tt
-						ON t.term_id = tt.term_id
-					JOIN {$translations_table} iclt_translation
-						ON iclt_translation.element_id = tt.term_taxonomy_id
-							AND CONCAT('tax_', tt.taxonomy) = iclt_translation.element_type
-					JOIN {$translations_table} iclt_original
-						ON iclt_original.trid = iclt_translation.trid
-					JOIN {$translate_table} jobs
-						ON jobs.field_type = CONCAT('t_', iclt_original.element_id)
-					WHERE jobs.job_id = %d
-						AND iclt_translation.language_code = %s",
-			$job_id, $this->get_language_code() );
+		$get_target_terms_for_job_query = $wpdb->prepare("
+		SELECT
+		    {$wpdb->terms}.name,
+		    {$wpdb->term_taxonomy}.description,
+		    SUBSTR(translate.field_type, 3) original_term_id,
+		    {$wpdb->terms}.term_id translated_term_id
+		FROM {$translate_table} translate
+			INNER JOIN {$translations_table} original_translation ON original_translation.element_id = SUBSTR(translate.field_type, 3)
+			INNER JOIN {$translations_table} translation ON translation.trid = original_translation.trid AND translation.language_code = %s
+			INNER JOIN {$wpdb->term_taxonomy} ON {$wpdb->term_taxonomy}.term_taxonomy_id = translation.element_id AND CONCAT('tax_', {$wpdb->term_taxonomy}.taxonomy) = translation.element_type
+			INNER JOIN {$wpdb->terms} ON {$wpdb->terms}.term_id = {$wpdb->term_taxonomy}.term_id
+		WHERE translate.job_id = %d AND translate.field_type LIKE 't\_%'
+		", $this->get_language_code(), $job_id );
 
 		$term_values = $wpdb->get_results( $get_target_terms_for_job_query );
 		foreach ( $term_values as $term ) {
 			if ( $delete ) {
 				$conditions = [
-					"field_type LIKE 'tfield-%-{$term->ttid}'",  // Term fields
-					"field_type LIKE 'tfield-%-{$term->ttid}\_%'", // Term fields as array
-					"field_type = 't_{$term->ttid}'",
-					"field_type = 'tdesc_{$term->ttid}'",
+					"field_type LIKE 'tfield-%-{$term->original_term_id}'",  // Term fields
+					"field_type LIKE 'tfield-%-{$term->original_term_id}\_%'", // Term fields as array
+					"field_type = 't_{$term->original_term_id}'",
+					"field_type = 'tdesc_{$term->original_term_id}'",
 				];
 				$wpdb->query(
 					"DELETE FROM {$translate_table} WHERE job_id = $job_id AND "
@@ -270,20 +267,20 @@ class WPML_Post_Translation_Job extends WPML_Element_Translation_Job {
 				$wpdb->update(
 					$translate_table,
 					[ 'field_data_translated' => base64_encode( $term->name ), 'field_finished' => 1 ],
-					[ 'field_type' => 't_' . $term->ttid, 'job_id' => $job_id ]
+					[ 'field_type' => 't_' . $term->original_term_id, 'job_id' => $job_id ]
 				);
 				$wpdb->update(
 					$translate_table,
 					[ 'field_data_translated' => base64_encode( $term->description ), 'field_finished' => 1 ],
-					[ 'field_type' => 'tdesc_' . $term->ttid, 'job_id' => $job_id ]
+					[ 'field_type' => 'tdesc_' . $term->original_term_id, 'job_id' => $job_id ]
 				);
 
-				$meta_values = $wpdb->get_results( "SELECT meta_key, meta_value FROM {$wpdb->termmeta} WHERE term_id = {$term->tr_ttid}" );
+				$meta_values = $wpdb->get_results( "SELECT meta_key, meta_value FROM {$wpdb->termmeta} WHERE term_id = {$term->translated_term_id}" );
 				foreach ( $meta_values as $meta ) {
 					$wpdb->update(
 						$translate_table,
 						[ 'field_finished' => 1, 'field_data_translated' => base64_encode( $meta->meta_value ) ],
-						[ 'job_id' => $job_id, 'field_type' => 'tfield-' . $meta->meta_key . '-' . $term->ttid ]
+						[ 'job_id' => $job_id, 'field_type' => 'tfield-' . $meta->meta_key . '-' . $term->original_term_id ]
 					);
 				}
 			}

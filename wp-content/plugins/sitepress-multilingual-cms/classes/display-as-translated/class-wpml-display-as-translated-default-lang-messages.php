@@ -60,6 +60,7 @@ class WPML_Display_As_Translated_Default_Lang_Messages {
 
 		foreach ( $post_types as $post_type ) {
 			if ( $this->sitepress->is_display_as_translated_post_type( $post_type ) && get_posts(
+				/** @phpstan-ignore-next-line get_posts() has no "post_type" key defined. */
 				array(
 					'post_type'      => $post_type,
 					'posts_per_page' => 1,

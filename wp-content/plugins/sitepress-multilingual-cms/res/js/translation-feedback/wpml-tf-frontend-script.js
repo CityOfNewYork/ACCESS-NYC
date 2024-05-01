@@ -1,146 +1,273 @@
 /*jshint browser:true, devel:true */
-/*global jQuery, wp */
-(function($){
-    "use strict";
+/*wp */
+var WPMLCore = WPMLCore || {};
 
-    $(function () {
-        var form = $('.js-wpml-tf-feedback-form'),
-            openIcon = $('.js-wpml-tf-feedback-icon'),
-            ratingInput = form.find('input[name="wpml-tf-rating"]'),
-            sendButton = form.find('.js-wpml-tf-comment-button'),
-            documentId = form.find('input[name="document_id"]').val(),
-            documentType = form.find('input[name="document_type"]').val(),
-            action = form.find('input[name="action"]').val(),
-            nonce = form.find('input[name="nonce"]').val(),
-            noCommentThreshold = 4,
-            dialogInitialized = false,
-			feedbackId;
+WPMLCore.TranslationFeedback = function() {
+	this.form = this.byClass(document, 'js-wpml-tf-feedback-form');
+	this.openIcon = this.byClass(document, 'js-wpml-tf-feedback-icon');
+	this.ratingInputs = this.byQueryAll(this.form, 'input[name="wpml-tf-rating"]');
+	this.changeRating = this.byClass(this.form, 'js-wpml-tf-change-rating');
+	this.sendButton = this.byClass(this.form, 'js-wpml-tf-comment-button');
+	this.documentId = this.byQuery(this.form, 'input[name="document_id"]').value;
+	this.documentType = this.byQuery(this.form, 'input[name="document_type"]').value;
+	this.action = this.byQuery(this.form, 'input[name="action"]').value;
+	this.nonce = this.byQuery(this.form, 'input[name="nonce"]').value;
+	this.noCommentThreshold = 4;
+	this.dialogInitialized = false;
+	this.feedbackId = null;
+	this.assetUrl = {
+		'js': this.byQuery(this.form, 'input[name="asset_url_js"]').value.split(';'),
+	};
+	this.areAssetsLoaded = false;
+	this.ajaxUrl = this.byQuery(this.form, 'input[name="ajax_url"]').value;
 
-		var disableRating = function() {
-			ratingInput.prop('disabled', true);
-		};
+	var self = this;
 
-		var enableRating = function() {
-			if(feedbackId && !form.hasClass('wpml-tf-closing-rating')) {
-				ratingInput.prop('disabled', false);
-			}
-		};
-
-		var enableComment = function() {
-			sendButton.prop('disabled', false);
-		};
-
-		var displayClosingComment = function() {
-			form.removeClass('wpml-tf-pending-comment').addClass('wpml-tf-closing-comment');
-			window.setTimeout(destroyDialogAndButton, 3000);
-		};
-
-		var displayPendingComment = function() {
-			form.addClass('wpml-tf-pending-comment').removeClass('wpml-tf-closing-rating');
-			enableRating();
-		};
-
-		var displayClosingRating = function() {
-			form.addClass('wpml-tf-closing-rating').removeClass('wpml-tf-pending-comment');
-			disableRating();
-		};
-
-		var displayPendingRating = function() {
-			form.removeClass('wpml-tf-closing-rating').removeClass('wpml-tf-pending-comment');
-			enableRating();
-		};
-
-		var sendFeedback = function(data) {
-			var options;
-
-			if ( ! itLooksLikeSpam() ) {
-				disableRating();
-				form.addClass('wpml-tf-pending-request');
-
-				data.nonce         = nonce;
-				data.document_id   = documentId;
-				data.document_type = documentType;
-
-				options = {
-					data: data,
-					success: function(data) {
-						feedbackId = data.feedback_id;
-						form.addClass('wpml-tf-has-feedback-id').removeClass('wpml-tf-pending-request');
-						enableRating();
-						enableComment();
-					}
-				};
-
-				wp.ajax.send(action, options);
-			}
-		};
-
-		var itLooksLikeSpam = function() {
-			var more_comment = form.find('textarea[name="more_comment"]');
-			return ! dialogInitialized || more_comment.val();
-		};
-
-		var openForm = function() {
-			form.dialog({
-				dialogClass: 'wpml-tf-feedback-form-dialog otgs-ui-dialog',
-				closeOnEscape: true,
-				draggable: true,
-				modal: false,
-				title: form.data('dialog-title'),
-				dragStop: function() {
-					$(this).parent().height('auto');
-				}
-			});
-
-			dialogInitialized = true;
-
-			// Fix display glitch with bootstrap.js
-			$('.wpml-tf-feedback-form-dialog').find('.ui-dialog-titlebar-close').addClass('ui-button');
-		};
-
-		var destroyDialogAndButton = function() {
-			form.dialog( 'destroy' );
-			openIcon.remove();
-		};
-
-		openIcon.on('click', function(e) {
-			e.preventDefault();
-			openForm();
-		});
-
-		ratingInput.on('click', function() {
-			var data = {
-				rating: $(this).val()
-			};
-
-			if ( feedbackId ) {
-				data.feedback_id = feedbackId;
-			}
-
-			sendFeedback(data);
-
-			if(data.rating < noCommentThreshold) {
-				displayPendingComment();
-			} else {
-				displayClosingRating();
-			}
-		});
-
-		form.on('click', '.js-wpml-tf-change-rating', function(e) {
-			e.preventDefault();
-			displayPendingRating();
-		});
-
-		sendButton.on('click', function(e) {
-			e.preventDefault();
-			var data = {
-				content:     $('textarea[name="wpml-tf-comment"]').val(),
-				feedback_id: feedbackId
-			};
-
-			sendFeedback(data);
-			displayClosingComment();
-		});
-
+	this.openIcon.addEventListener('click', function(e) {
+		e.preventDefault();
+		self.openForm();
 	});
-})(jQuery);
+
+	for(var i = 0; i < this.ratingInputs.length; i++) {
+		this.ratingInputs[i].addEventListener('click', function(e) {
+			var data = {
+				rating: e.target.value,
+			};
+
+			if ( self.feedbackId ) {
+				data.feedback_id = self.feedbackId;
+			}
+
+			self.sendFeedback(data);
+
+			if(data.rating < self.noCommentThreshold) {
+				self.displayPendingComment();
+			} else {
+				self.displayClosingRating();
+			}
+		});
+	}
+
+	this.changeRating.addEventListener('click', function(e) {
+		e.preventDefault();
+		self.displayPendingRating();
+	});
+
+	this.sendButton.addEventListener('click', function(e) {
+		e.preventDefault();
+		var data = {
+			content: self.byQuery(document, 'textarea[name="wpml-tf-comment"]').value,
+			feedback_id: self.feedbackId,
+		};
+
+		self.sendFeedback(data);
+		self.displayClosingComment();
+	});
+};
+
+WPMLCore.TranslationFeedback.prototype = {
+	byClassAll: function(node, className) {
+		return node.getElementsByClassName(className);
+	},
+
+	byQueryAll: function(node, query) {
+		return node.querySelectorAll(query);
+	},
+
+	byClass: function(node, className) {
+		return this.byClassAll(node, className)[0];
+	},
+
+	byQuery: function(node, query) {
+		return this.byQueryAll(node, query)[0];
+	},
+
+	disableRating: function() {
+		for(var i = 0; i < this.ratingInputs.length; i++) {
+			this.ratingInputs[i].setAttribute('disabled', 'disabled');
+		}
+	},
+
+	enableRating: function() {
+		if(this.feedbackId && !this.form.classList.contains('wpml-tf-closing-rating')) {
+			for(var i = 0; i < this.ratingInputs.length; i++) {
+				this.ratingInputs[i].removeAttribute('disabled');
+			}
+		}
+	},
+
+	enableComment: function() {
+		this.sendButton.removeAttribute('disabled');
+	},
+
+	displayClosingComment: function() {
+		this.form.classList.remove('wpml-tf-pending-comment');
+		this.form.classList.add('wpml-tf-closing-comment');
+		var self = this;
+		window.setTimeout(function() {
+			self.destroyDialogAndButton.call(self);
+		}, 3000);
+	},
+
+	displayPendingComment: function() {
+		this.form.classList.add('wpml-tf-pending-comment');
+		this.form.classList.remove('wpml-tf-closing-rating');
+		this.enableRating();
+	},
+
+	displayClosingRating: function() {
+		this.form.classList.add('wpml-tf-closing-rating');
+		this.form.classList.remove('wpml-tf-pending-comment');
+		this.disableRating();
+	},
+
+	displayPendingRating: function() {
+		this.form.classList.remove('wpml-tf-closing-rating');
+		this.form.classList.remove('wpml-tf-pending-comment');
+		this.enableRating();
+	},
+
+	sendFeedback: function(data) {
+		var self = this;
+
+		if ( ! this.itLooksLikeSpam() ) {
+			this.disableRating();
+			this.form.classList.add('wpml-tf-pending-request');
+
+			data.nonce         = this.nonce;
+			data.document_id   = this.documentId;
+			data.document_type = this.documentType;
+			data.action        = this.action;
+
+			var params = [];
+			for(var prop in data) {
+				params.push(encodeURIComponent(prop) + '=' + encodeURIComponent(data[prop]));
+			}
+			params = params.join('&', params);
+
+			var req = new XMLHttpRequest();
+			req.open("POST", this.ajaxUrl);
+			req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			req.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+			req.setRequestHeader('Accept', 'application/json, text/javascript, */*; q=0.01');
+
+			req.onload = function() {
+				const response = JSON.parse(req.response);
+				const data = response.data;
+
+				self.feedbackId = data.feedback_id;
+				self.form.classList.add('wpml-tf-has-feedback-id');
+				self.form.classList.remove('wpml-tf-pending-request');
+				self.enableRating();
+				self.enableComment();
+			};
+
+			req.send(params);
+		}
+	},
+
+	itLooksLikeSpam: function() {
+		var more_comment = this.byQuery(this.form, 'textarea[name="more_comment"]');
+		return ! this.dialogInitialized || more_comment.value;
+	},
+
+	loadAsset: function(url) {
+		var self = this;
+		var scr = document.createElement('script');
+		var head = document.head || document.getElementsByTagName('head')[0];
+		scr.src = url;
+		scr.async = false;
+
+		scr.addEventListener('load', function() {
+			self.assetsLoadedCount++;
+			if(self.assetsLoadedCount === self.assetsToLoadCount) {
+				self.areAssetsLoaded = true;
+				self.execOpenForm();
+			}
+		});
+	
+		head.insertBefore(scr, head.firstChild);
+	},
+
+	openForm: function() {
+		if(this.areAssetsLoaded) {
+			this.execOpenForm();
+			return;
+		}
+
+		var assets = this.filterOnlyNotAlreadyLoadedAssets();
+
+		this.assetsLoadedCount = 0;
+		this.assetsToLoadCount = assets.length;
+		for(var i = 0; i < assets.length; i++) {
+			this.loadAsset(assets[i]);
+		}
+	},
+
+	filterOnlyNotAlreadyLoadedAssets: function() {
+		var loadedScripts = this.getScripts();
+		var loadScripts = [];
+		for(var i = 0; i < this.assetUrl.js.length; i++) {
+			var isAlreadyLoaded = false;
+			for(var j = 0; j < loadedScripts.length; j++) {
+				if(this.assetUrl.js[i] == loadedScripts[j]) {
+					isAlreadyLoaded = true;
+					break;
+				}
+			}
+
+			if(isAlreadyLoaded) {
+				continue;
+			}
+
+			loadScripts.push(this.assetUrl.js[i]);
+		}
+
+		return loadScripts;
+	},
+
+	getScripts: function() {
+		var allScripts = document.getElementsByTagName('script');
+		var scripts = [];
+		for(var i = 0; i < allScripts.length; i++) {
+			var src = allScripts[i].getAttribute('src');
+			if(typeof src != 'string') {
+				continue;
+			}
+
+			var srcParts = src.split('?');
+			scripts.push(srcParts[0]);
+		}
+
+		return scripts;
+	},
+
+	execOpenForm: function() {
+		jQuery(this.form).dialog({
+			dialogClass: 'wpml-tf-feedback-form-dialog otgs-ui-dialog',
+			closeOnEscape: true,
+			draggable: true,
+			modal: false,
+			title: this.form.getAttribute('data-dialog-title'),
+			dragStop: function() {
+				jQuery(this).parent().height('auto');
+			}
+		});
+
+		this.dialogInitialized = true;
+
+		// Fix display glitch with bootstrap.js
+		var dialog = this.byClass(document, 'wpml-tf-feedback-form-dialog');
+		var dialogClose = this.byClass(dialog, 'ui-dialog-titlebar-close');
+		dialogClose.classList.add('ui-button');
+	},
+
+	destroyDialogAndButton: function() {
+		jQuery(this.form).dialog( 'destroy' );
+		this.openIcon.parentNode.removeChild(this.openIcon);
+	},
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+	var tf = new WPMLCore.TranslationFeedback();
+});

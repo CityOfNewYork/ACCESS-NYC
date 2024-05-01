@@ -8,7 +8,11 @@
 class WPML_TM_TF_Feedback_List_Hooks implements IWPML_Action {
 
 	public function add_hooks() {
-		add_filter( 'wpml_use_tm_editor', array( $this, 'maybe_force_to_use_translation_editor' ) );
+		/**
+		 * Set high priority to let other users to override this value later to fulfill the requirements of
+		 * https://onthegosystems.myjetbrains.com/youtrack/issue/wpmldev-1161/Create-a-Hook-Api-to-disable-ATE-Editor-per-post
+		 */
+		add_filter( 'wpml_use_tm_editor', [ $this, 'maybe_force_to_use_translation_editor' ], 1, 1 );
 	}
 
 	/**

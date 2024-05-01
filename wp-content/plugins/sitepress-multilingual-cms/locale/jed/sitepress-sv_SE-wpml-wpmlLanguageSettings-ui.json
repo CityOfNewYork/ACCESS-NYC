@@ -1,0 +1,29 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "no"
+         },
+         "Choose the image file type for flags": [
+            "Välj bildfilstyp för flaggor"
+         ],
+         "This option affects only the built-in WPML flags, not the custom uploaded ones.": [
+            "Det här alternativet påverkar endast de inbyggda WPML-flaggorna, inte de anpassade flaggorna som laddats upp."
+         ],
+         "%s format": [
+            ""
+         ],
+         "Save": [
+            "Spara"
+         ],
+         "The new format has been saved.": [
+            "Det nya formatet har sparats."
+         ],
+         "Failed to save the new format": [
+            "Det gick inte att spara det nya formatet"
+         ]
+      }
+   }
+}

@@ -10,7 +10,7 @@ class OTGS_Installer_Support_Template {
 	private $requirements;
 
 	/**
-	 * @var OTGS_Installer_Instance[]
+	 * @var OTGS_Installer_Instances
 	 */
 	private $instances;
 
@@ -91,6 +91,7 @@ class OTGS_Installer_Support_Template {
 						'description' => __( 'Toolset API server', 'installer' )
 					),
 				),
+				/** @phpstan-ignore-next-line  */
 				'nonce'     => wp_nonce_field( OTGS_Installer_Connection_Test_Ajax::ACTION, OTGS_Installer_Connection_Test_Ajax::ACTION, false ),
 			),
 			'requirements' => $this->requirements->get(),

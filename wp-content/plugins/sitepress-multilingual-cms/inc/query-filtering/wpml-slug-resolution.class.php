@@ -21,6 +21,7 @@ abstract class WPML_Slug_Resolution extends WPML_WPDB_And_SP_User {
 	protected function get_ordered_langs() {
 		$lang_order = $this->sitepress->get_setting( 'languages_order' );
 		$lang_order = $lang_order ? $lang_order : array_keys( $this->sitepress->get_active_languages() );
+		$lang_order = is_array( $lang_order ) ? $lang_order : array();
 		array_unshift( $lang_order, $this->sitepress->get_current_language() );
 
 		return array_unique( $lang_order );

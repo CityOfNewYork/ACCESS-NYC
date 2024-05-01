@@ -60,7 +60,7 @@ class WPML_Model_Attachments {
 
 	/**
 	 * @param WP_Post|null $attachment
-	 * @param int $parent_id_of_attachement
+	 * @param int|false|null $parent_id_of_attachement
 	 * @param string $target_language
 	 *
 	 * @return int|null
@@ -121,8 +121,6 @@ class WPML_Model_Attachments {
 		$post->post_parent = $parent_id_in_target_language;
 		$post->ID          = null;
 
-		update_post_meta( $parent_id_in_target_language, '_wpml_media_duplicate', true ); // add the post meta if missing
-
 		$duplicated_attachment_id = $this->insert_attachment( $post );
 		if ( ! $duplicated_attachment_id ) {
 			throw new WPML_Media_Exception( 'Error occured during inserting duplicated attachment to db' );
@@ -146,6 +144,7 @@ class WPML_Model_Attachments {
 			unset( $GLOBALS['wp_filter']['add_attachment'] );
 		}
 
+		/** @phpstan-ignore-next-line (WP doc issue) */
 		$duplicated_attachment_id = wp_insert_post( $post );
 		if ( ! is_int( $duplicated_attachment_id ) ) {
 			$duplicated_attachment_id = 0;

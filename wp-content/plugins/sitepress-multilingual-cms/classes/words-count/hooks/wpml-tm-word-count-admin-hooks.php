@@ -23,7 +23,7 @@ class WPML_TM_Word_Count_Admin_Hooks implements IWPML_Action {
 			'word-count-report',
 			WPML_TM_URL . '/dist/js/word-count/app.js',
 			array( 'jquery-ui-dialog' ),
-			WPML_TM_VERSION
+			ICL_SITEPRESS_VERSION
 		);
 	}
 

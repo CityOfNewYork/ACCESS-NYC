@@ -25,7 +25,7 @@ class WPML_Elementor_Update_Media_Factory implements IWPML_PB_Media_Update_Facto
 		if ( ! $this->media_translate ) {
 			$this->media_translate = new WPML_Page_Builders_Media_Translate(
 				new WPML_Translation_Element_Factory( $sitepress ),
-				new WPML_Media_Image_Translate( $sitepress, new WPML_Media_Attachment_By_URL_Factory() )
+				new WPML_Media_Image_Translate( $sitepress, new WPML_Media_Attachment_By_URL_Factory(), new \WPML\Media\Factories\WPML_Media_Attachment_By_URL_Query_Factory() )
 			);
 		}
 

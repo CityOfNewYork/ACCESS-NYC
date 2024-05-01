@@ -14,7 +14,6 @@ class WPML_TM_Job_Action_Factory extends WPML_TM_Job_Factory_User {
 	}
 
 	public function save_action( array $data ) {
-
 		return new WPML_Save_Translation_Data_Action( $data, $this->job_factory->tm_records() );
 	}
 }

@@ -150,7 +150,8 @@ var WPML_core = WPML_core || {};
 			jQuery.ajax({
 										url:     ajaxurl,
 										data:    {
-											'action': 'wpml_get_links_for_menu_strings_translation'
+											'action': 'wpml_get_links_for_menu_strings_translation',
+											'_nonce': menus_sync.menusSyncNonce,
 										},
 										success: function (response) {
 											if (response.success && response.data.items) {
@@ -175,7 +176,11 @@ var WPML_core = WPML_core || {};
 
 												element.appendTo(jQuery('#icl_msync_confirm_form'));
 											}
-										}
+										},
+										error:   function (jqXHR, status, error) {
+											var parsed_response = jqXHR.statusText || status || error;
+											alert(parsed_response);
+										},
 									});
 
 		}

@@ -55,7 +55,7 @@ class WPML_TM_Troubleshooting_Fix_Translation_Jobs_TP_ID {
 
 	public function enqueue_scripts( $hook ) {
 		if ( WPML_PLUGIN_FOLDER . '/menu/troubleshooting.php' === $hook ) {
-			wp_enqueue_script( 'wpml-fix-tp-id', WPML_TM_URL . '/res/js/fix-tp-id.js', array( 'jquery' ), WPML_TM_VERSION );
+			wp_enqueue_script( 'wpml-fix-tp-id', WPML_TM_URL . '/res/js/fix-tp-id.js', array( 'jquery' ), ICL_SITEPRESS_VERSION );
 		}
 	}
 

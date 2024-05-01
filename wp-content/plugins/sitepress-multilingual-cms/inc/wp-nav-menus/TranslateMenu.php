@@ -14,8 +14,8 @@ class Translate implements \IWPML_Frontend_Action {
 	}
 
 	/**
-	 * @param array $items An array of menu item post objects.
-	 * @param object $menu The menu object.
+	 * @param array    $items An array of menu item post objects.
+	 * @param \WP_Term $menu The menu object.
 	 *
 	 * @return array
 	 */
@@ -34,24 +34,30 @@ class Translate implements \IWPML_Frontend_Action {
 	}
 
 	/**
-	 * @param object $item Menu item - post object
+	 * @param \WP_Post $item Menu item - post object.
 	 *
 	 * @return bool
 	 */
 	public static function hasTranslation( $item ) {
-		return $item->type !== 'post_type' || (bool) self::getTranslatedId( $item );
+		global $sitepress;
+		return 'post_type' !== $item->type || (bool) self::getTranslatedId( $item ) || $sitepress->is_display_as_translated_post_type( $item->object );
 	}
 
 	/**
-	 * @param object $item Menu item - post object
+	 * @param \WP_Post $item Menu item - post object.
 	 *
-	 * @return object
+	 * @return \WP_Post
 	 */
 	public static function translateItem( $item ) {
-		if ( $item->type === 'post_type' ) {
-			$translatedId = self::getTranslatedId( $item );
-			foreach ( get_object_vars( Post::get( $translatedId ) ) as $key => $value ) {
-				if ( $key !== 'menu_order' ) {
+		if ( 'post_type' === $item->type ) {
+			$translatedId = self::getTranslatedId( $item, true );
+			$post         = Post::get( $translatedId );
+			if ( ! $post instanceof \WP_Post ) {
+				return $item;
+			}
+			foreach ( get_object_vars( $post ) as $key => $value ) {
+				// We won't send the translated ID, since it affects front-end styles negatively.
+				if ( ! in_array( $key, [ 'menu_order', 'post_type', 'ID' ] ) ) {
 					$item->$key = $value;
 				}
 			}
@@ -63,16 +69,16 @@ class Translate implements \IWPML_Frontend_Action {
 	}
 
 	/**
-	 * @param object $item Menu item - post object
+	 * @param \WP_Post $item Menu item - post object.
 	 *
 	 * @return bool
 	 */
-	public static function canView ( $item ) {
-		return current_user_can( 'administrator' ) || $item->type !== 'post_type' || $item->post_status !== 'draft';
+	public static function canView( $item ) {
+		return current_user_can( 'administrator' ) || 'post_type' !== $item->type || 'draft' !== $item->post_status;
 	}
 
 	/**
-	 * @param object $menu The menu object.
+	 * @param \WP_Term $menu The menu object.
 	 *
 	 * @return bool
 	 */
@@ -81,11 +87,11 @@ class Translate implements \IWPML_Frontend_Action {
 	}
 
 	/**
-	 * @param object $item Menu item - post object
-	 *
+	 * @param \WP_Post $item Menu item - post object.
+	 * @param bool     $return_original_if_missing
 	 * @return int|null
 	 */
-	private static function getTranslatedId( $item ) {
-		return wpml_object_id_filter( $item->object_id, $item->object );
+	private static function getTranslatedId( $item, $return_original_if_missing = false ) {
+		return wpml_object_id_filter( $item->object_id, $item->object, $return_original_if_missing );
 	}
 }

@@ -1,0 +1,41 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "pl"
+         },
+         "Preparing...": [
+            "Przygotowuję..."
+         ],
+         "All jobs have been cancelled": [
+            "Wszystkie zlecenia zostały anulowane"
+         ],
+         "There is no more jobs to cancel": [
+            "Brak dalszych zleceń do anulowania"
+         ],
+         "The jobs cancellation has failed": [
+            "Anulowanie zlecenia nie powidło się"
+         ],
+         "Cancel in-progress automatic jobs": [
+            "Anuluj trwające zlecenia automatyczne"
+         ],
+         "Domain name has been updated": [
+            "Zaktualizowano nazwę domeny"
+         ],
+         "Domain name update has been failed": [
+            "Aktualizacja nazwy domeny nie powiodła się"
+         ],
+         "Update domain name in language switcher settings": [
+            "Zaktualizuj nazwę domeny w ustawieniach przełącznika języka"
+         ],
+         "Refresh license data to recognise license update": [
+            "Odśwież dane licencji w celu rozpoznania aktualizacji licencji"
+         ],
+         "WPML License has been refreshed": [
+            "Odświeżono licencję WPML"
+         ]
+      }
+   }
+}

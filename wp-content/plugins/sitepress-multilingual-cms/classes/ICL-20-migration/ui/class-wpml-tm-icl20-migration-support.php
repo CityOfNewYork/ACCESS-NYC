@@ -33,7 +33,7 @@ class WPML_TM_ICL20_Migration_Support {
 			$nonce  = filter_var( $_GET[ $nonce_arg ] );
 			$action = filter_var( $_GET[ $action_arg ] );
 
-			if ( wp_verify_nonce( $nonce, $action ) ) {
+			if ( $nonce && $action && wp_verify_nonce( $nonce, $action ) ) {
 				if ( self::PREFIX . 'reset' === $action ) {
 					update_option( WPML_TM_ICL20_Migration_Progress::OPTION_KEY_MIGRATION_LOCKED, false, false );
 				}

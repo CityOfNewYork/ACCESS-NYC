@@ -39,7 +39,10 @@ class WPML_TM_Jobs_Deadline_Estimate {
 
 		$estimated_days  = ceil( $max_words_in_lang / self::WORDS_PER_DAY );
 		$estimated_days += self::LATENCY_DAYS;
-		return date( 'Y-m-d', strtotime( '+' . $estimated_days . ' day' ) );
+
+		$date = new DateTime();
+		$date->modify( '+' . $estimated_days . ' day' );
+		return $date->format( 'Y-m-d' );
 	}
 
 	/**

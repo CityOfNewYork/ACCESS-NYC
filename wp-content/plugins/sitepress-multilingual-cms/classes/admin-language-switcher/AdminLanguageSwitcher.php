@@ -7,9 +7,12 @@ use WPML\FP\Maybe;
 use WPML\FP\Obj;
 use WPML\FP\Relation;
 use WPML\FP\Str;
+use WPML\LIB\WP\Option;
 use WPML\UrlHandling\WPLoginUrlConverter;
 
 class AdminLanguageSwitcher implements \IWPML_Frontend_Action {
+
+	const LANGUAGE_SWITCHER_KEY = 'wpml_show_login_page_language_switcher';
 
 	public function add_hooks() {
 		add_action( 'login_footer', [ $this, 'triggerDropdown' ] );
@@ -25,6 +28,10 @@ class AdminLanguageSwitcher implements \IWPML_Frontend_Action {
 
 		if ( $selectedLocale ) {
 			$languageCode = Languages::localeToCode( $selectedLocale );
+			if ( ! is_string( $languageCode ) ) {
+				return;
+			}
+
 			$secure       = ( 'https' === parse_url( wp_login_url(), PHP_URL_SCHEME ) );
 			setcookie( 'wp-wpml_login_lang', $languageCode, time() + 120, COOKIEPATH, COOKIE_DOMAIN, $secure );
 			setcookie( 'wp_lang', '', time() - 3600, COOKIEPATH, COOKIE_DOMAIN, $secure );
@@ -89,12 +96,12 @@ class AdminLanguageSwitcher implements \IWPML_Frontend_Action {
 	 * @return bool
 	 */
 	private function isLanguageSwitcherShown() {
-		return $this->isOnWpLoginPage( site_url( $_SERVER['REQUEST_URI'], 'login' ) ) && WPLoginUrlConverter::isEnabled();
+		return $this->isOnWpLoginPage( site_url( $_SERVER['REQUEST_URI'], 'login' ) ) && WPLoginUrlConverter::isEnabled() && self::isEnabled();
 	}
 
 	/**
 	 * @param $sitepress
-	 * @param callable $languageCode
+	 * @param string $languageCode
 	 *
 	 * @return string
 	 */
@@ -120,5 +127,27 @@ class AdminLanguageSwitcher implements \IWPML_Frontend_Action {
 		}
 
 		return $redirectTo;
+	}
+
+	/**
+	 * @param bool $state
+	 */
+	public static function saveState( $state ) {
+		Option::updateWithoutAutoLoad( self::LANGUAGE_SWITCHER_KEY, $state );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static function isEnabled() {
+		return Option::getOr( self::LANGUAGE_SWITCHER_KEY, true );
+	}
+
+	public static function enable() {
+		self::saveState( true );
+	}
+
+	public static function disable() {
+		self::saveState( false );
 	}
 }

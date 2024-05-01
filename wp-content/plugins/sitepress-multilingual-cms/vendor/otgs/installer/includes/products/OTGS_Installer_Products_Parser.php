@@ -30,9 +30,9 @@ class OTGS_Installer_Products_Parser {
 	}
 
 	/**
-	 * @param string $products_url
-	 * @param string $repository_id
-	 * @param string $response
+	 * @param string         $products_url
+	 * @param string         $repository_id
+	 * @param array|WP_Error $response
 	 *
 	 * @return array
 	 * @throws OTGS_Installer_Products_Parsing_Exception
@@ -50,8 +50,8 @@ class OTGS_Installer_Products_Parser {
 	}
 
 	/**
-	 * @param string $products_url
-	 * @param string $response
+	 * @param string         $products_url
+	 * @param array|WP_Error $response
 	 *
 	 * @return array
 	 * @throws OTGS_Installer_Products_Parsing_Exception

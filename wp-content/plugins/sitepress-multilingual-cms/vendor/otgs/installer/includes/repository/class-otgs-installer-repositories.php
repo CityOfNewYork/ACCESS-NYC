@@ -115,6 +115,7 @@ class OTGS_Installer_Repositories {
 	public function save_subscription( OTGS_Installer_Repository $repository ) {
 		$subscription = $repository->get_subscription();
 		unset( $this->installer->settings['repositories'][ $repository->get_id() ]['subscription'] );
+		unset( $this->installer->settings['repositories'][ $repository->get_id() ]['last_successful_subscription_fetch'] );
 
 		if ( $subscription ) {
 			$this->installer->settings['repositories'][ $repository->get_id() ]['subscription'] = array(

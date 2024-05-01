@@ -3,16 +3,56 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "en"
          },
-         "Insufficient funds": [
-            "資金不足"
+         "Draft — Pending review": [
+            "草稿 — 等候審閱"
          ],
          "Complete": [
             "完成"
          ],
+         "Insufficient funds": [
+            "資金不足"
+         ],
+         "Edit": [
+            "編輯"
+         ],
+         "Resign": [
+            "辭職"
+         ],
+         "Review": [
+            "審核"
+         ],
+         "Translate": [
+            "翻譯"
+         ],
+         "View": [
+            "查看"
+         ],
+         "Delete Translations": [
+            "移除翻譯"
+         ],
+         "Keep Translations as Draft": [
+            "將譯文保留為草稿"
+         ],
+         "Never mind. I want to review these translations.": [
+            "沒關係。我會審閱這些翻譯。"
+         ],
+         "Cancel": [
+            "取消"
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "這將從翻譯佇列中移除選定的工作，而不會發佈它們。您想如何處理這些翻譯？"
+         ],
+         "Cancel Translation Review": [
+            "取消翻譯審閱"
+         ],
          "Pending review": [
             "待審核"
+         ],
+         "Languages": [
+            "語言"
          ]
       }
    }

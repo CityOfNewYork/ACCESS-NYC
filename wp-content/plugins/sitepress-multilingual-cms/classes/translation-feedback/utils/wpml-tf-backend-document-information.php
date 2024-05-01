@@ -160,7 +160,7 @@ class WPML_TF_Backend_Document_Information extends WPML_TF_Document_Information 
 			}
 		} else {
 			$post_author_id  = get_post_field( 'post_author', $this->id );
-			$translator_name = get_the_author_meta( 'display_name', $post_author_id );
+			$translator_name = get_the_author_meta( 'display_name', (int) $post_author_id );
 		}
 
 		return $translator_name;

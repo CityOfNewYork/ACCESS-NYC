@@ -80,7 +80,7 @@ class WPML_Redirect_By_Param extends WPML_Redirection {
 	 * @param string $query_params_string
 	 * @param string $lang_code
 	 *
-	 * @return bool|string
+	 * @return array|false
 	 */
 	private function needs_redirect( $query_params_string, $lang_code ) {
 		global $sitepress;
@@ -152,10 +152,10 @@ class WPML_Redirect_By_Param extends WPML_Redirection {
 
 		if ( isset( $query_args['p'] ) ) {
 			$element_id   = $query_args['p'];
-			$element_type = 'post_' . get_post_type( $element_id );
+			$element_type = 'post_' . get_post_type( (int) $element_id );
 		} elseif ( isset( $query_args['cat'] ) ) {
 			$element_id   = $query_args['cat'];
-			$term         = get_term( $element_id );
+			$term         = get_term( (int) $element_id );
 			$element_type = 'tax_' . $term->taxonomy;
 		}
 

@@ -5,6 +5,15 @@
          "": {
             "domain": "messages"
          },
+         "hide the translations instead.": [
+            "verberg de vertalingen."
+         ],
+         "Error happened! Please try again.": [
+            "Er is een fout opgetreden! Probeer het opnieuw."
+         ],
+         "Cancel": [
+            "Annuleren"
+         ],
          "Choose Content to Automatically Translate into": [
             "Kies inhoud om automatisch te vertalen in"
          ],
@@ -17,35 +26,35 @@
          "Save": [
             "Opslaan"
          ],
-         "Choose Content to Automatically Translate into New Language": [
-            "Kies inhoud om automatisch in de nieuwe taal te vertalen"
+         "Add new languages": [
+            "Voeg nieuwe talen toe"
          ],
-         "Add languages and start translating": [
-            "Talen toevoegen en beginnen te vertalen"
+         "Add new language": [
+            "Voeg nieuwe taal toe"
          ],
-         "Add language and start translating": [
-            "Taal toevoegen en beginnen te vertalen"
+         "Never mind - don't add new languages": [
+            "Laat maar - voeg geen nieuwe talen toe"
          ],
-         "Never mind. Don't add new languages": [
-            "Laat maar. Voeg geen nieuwe talen toe"
+         "Never mind - don't add new language": [
+            "Laat maar - voeg geen nieuwe taal toe"
          ],
-         "Never mind. Don't add new language": [
-            "Laat maar. Voeg geen nieuwe taal toe"
+         "Choose which content to translate into the new language": [
+            "Kies welke inhoud in de nieuwe taal moet worden vertaald"
          ],
-         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
-            "Vertaal nu automatisch al mijn bestaande berichten en pagina's, plus nieuwe inhoud wanneer ik die maak."
+         "Automatically translate all my posts and pages, plus new content as I create it.": [
+            "Al mijn berichten en pagina's automatisch vertalen, plus nieuwe inhoud als ik die aanmaak."
          ],
          "Only automatically translate new content.": [
             "Vertaal alleen automatisch nieuwe inhoud."
          ],
-         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
-            "U gebruikt de <a>Alles vertalen</a> modus, die de inhoud van uw site automatisch vertaalt."
+         "Which content do you want to translate into the new language?": [
+            "Welke inhoud wil je in de nieuwe taal vertalen?"
          ],
-         "Which content do you want to automatically translate into your newly-added language?": [
-            "Welke inhoud wilt u automatisch laten vertalen in uw nieuw toegevoegde taal?"
+         "When you unpause automatic translation, this content will be <a>translated automatically</a>.": [
+            "Wanneer u de automatische vertaling onderbreken opheft, wordt deze inhoud <a>automatisch vertaald</a>."
          ],
-         "You can translate existing content from the Translation Management Dashboard.": [
-            "U kunt bestaande inhoud vertalen vanuit het Translation Management Dashboard."
+         "You can still translate existing content any time from the Translation Management Dashboard.": [
+            "Je kunt bestaande inhoud nog steeds op elk moment vertalen vanuit het Translation Management Dashboard."
          ]
       }
    }
