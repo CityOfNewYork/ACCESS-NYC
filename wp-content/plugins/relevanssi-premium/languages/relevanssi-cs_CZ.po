@@ -1,0 +1,3001 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Relevanssi Premium\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-21 05:40+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Mikko Saari <mikko@mikkosaari.fi>\n"
+"Language-Team: Mik013\n"
+"Language: cs_CZ\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _e;__;esc_attr__;esc_attr_e;esc_html__;_n;esc_html_e;"
+"esc_html_x;esc_attr_x;_x;__ngettext;__ngettext_noop;_n_noop;_nx;_nx_noop;_ex;"
+"_c;_nc\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: premium\n"
+"X-Poedit-SearchPath-2: lib\n"
+
+#: lib/admin-ajax.php:88
+#, php-format
+msgid "Indexed %1$d post (total %2$d), processed %3$d / %4$d."
+msgstr "Indexován %1$d příspěvek (celkem %2$d), zpracováno %3$d / %4$d."
+
+#: lib/excerpts-highlights.php:11
+msgid "There is no excerpt because this is a protected post."
+msgstr "Žádný Stručný obsah, protože toto je chráněný příspěvek."
+
+#: lib/indexing.php:226 premium/admin-ajax.php:96
+msgid "Indexing complete!"
+msgstr "Indexování dokončeno!"
+
+#: lib/indexing.php:229
+msgid "More to index..."
+msgstr "Více k indexování..."
+
+#: lib/init.php:47
+msgid ""
+"You do not have an index! Remember to build the index (click the \"Build the "
+"index\" button), otherwise searching won't work."
+msgstr ""
+"Nemáte index! Nezapomeňte index vytvořit (kliknutím na tlačítko &#8222;"
+"Vytvořit index&#8220;), jinak nebude vyhledávání fungovat."
+
+#: lib/init.php:63
+msgid ""
+"Multibyte string functions are not available. Relevanssi may not work well "
+"without them. Please install (or ask your host to install) the mbstring "
+"extension."
+msgstr ""
+"Funkce více bajtových řetězců nejsou k dispozici. Relevanssi bez nich nemusí "
+"fungovat dobře. Nainstalujte prosím (nebo požádejte svůj hosting o "
+"instalaci) rozšíření mbstring."
+
+#: lib/init.php:102 lib/init.php:103 lib/interface.php:1199
+msgid "User searches"
+msgstr "Uživatelská hledání"
+
+#: lib/init.php:247
+msgid "Settings"
+msgstr "Nastavení"
+
+#: lib/init.php:250
+msgid "Go Premium!"
+msgstr "Získat prémiovou verzi!"
+
+#: lib/interface.php:6
+msgid "Relevanssi Premium Search Options"
+msgstr "Relevanssi Premium možnosti vyhledávání"
+
+#: lib/interface.php:9
+msgid "Relevanssi Search Options"
+msgstr "Relevanssi možnosti vyhledávání"
+
+#: lib/interface.php:78 premium/interface.php:276 premium/interface.php:280
+msgid "User Searches"
+msgstr "Uživatelská hledání"
+
+#: lib/interface.php:80
+msgid "Relevanssi User Searches"
+msgstr "Relevanssi Uživatelská hledání"
+
+#: lib/interface.php:105
+msgid "Enable query logging to see stats here."
+msgstr "Aby se zde statistiky zobrazily, aktivujte logování dotazů."
+
+#: lib/interface.php:119
+msgid "Logs clear!"
+msgstr "Logy jsou vyčištěny!"
+
+#: lib/interface.php:122
+msgid "Clearing the logs failed."
+msgstr "Vyčištění logů se nezdařilo."
+
+#: lib/interface.php:389
+#, php-format
+msgid ""
+"<div id='message' class='updated fade'><p>Successfully added %d/%d terms to "
+"stopwords!</p></div>"
+msgstr ""
+"<div id='message' class='updated fade'><p> %d/%d výrazů bylo úspěšně přidáno "
+"do negativního slovníku!</p></div>"
+
+#: lib/interface.php:396
+#, php-format
+msgid ""
+"<div id='message' class='updated fade'><p>Term '%s' added to stopwords!</p></"
+"div>"
+msgstr ""
+"<div id='message' class='updated fade'><p>Výraz '%s' byl přidán do "
+"negativního slovníku!</p></div>"
+
+#: lib/interface.php:399
+#, php-format
+msgid ""
+"<div id='message' class='updated fade'><p>Couldn't add term '%s' to "
+"stopwords!</p></div>"
+msgstr ""
+"<div id='message' class='updated fade'><p>Výraz '%s' se nepodařilo přidat do "
+"negativního slovníku!</p></div>"
+
+#: lib/interface.php:438
+msgid ""
+"<div id='message' class='updated fade'><p>Stopwords removed! Remember to re-"
+"index.</p></div>"
+msgstr ""
+"<div id='message' class='updated fade'><p>Stopslova byla odebrána! "
+"Nezapomeňte re-indexovat.</p></div>"
+
+#: lib/interface.php:450
+#, php-format
+msgid "Term '%s' removed from stopwords! Re-index to get it back to index."
+msgstr ""
+"Výraz '%s' byl odebrán z negativního slovníku! Pro jeho vrácení do indexu je "
+"nutno re-indexovat."
+
+#: lib/interface.php:460
+#, php-format
+msgid "Couldn't remove term '%s' from stopwords!"
+msgstr "Z negativního slovníku nešlo odebrat výraz '%s'!"
+
+#: lib/interface.php:480
+msgid "25 most common words in the index"
+msgstr "25 nejčastějších slov v indexu"
+
+#: lib/interface.php:481
+msgid ""
+"These words are excellent stopword material. A word that appears in most of "
+"the posts in the database is quite pointless when searching. This is also an "
+"easy way to create a completely new stopword list, if one isn't available in "
+"your language. Click the icon after the word to add the word to the stopword "
+"list. The word will also be removed from the index, so rebuilding the index "
+"is not necessary."
+msgstr ""
+"Tato slova jsou vynikající materiál pro negativní slovník. Slovo, které se "
+"objeví ve většině příspěvků, je v databázi zcela nevhodné pro vyhledávání. "
+"Toto je také snadný způsob, jak vytvořit zcela nový negativní slovník, pokud "
+"již nějaký není pro váš jazyk k dispozici. Klikněte na ikonu za slovem a "
+"přidejte jej tak do negativního slovníku. Slovo bude také odstraněno z "
+"indexu, takže opětovné re-indexování není nutné."
+
+#: lib/interface.php:487
+msgid "Stopword Candidates"
+msgstr "Vhodná Stopslova"
+
+#: lib/interface.php:495
+msgid "Add to stopwords"
+msgstr "Přidat do negativního slovníku"
+
+#: lib/interface.php:517
+msgid "Total Searches"
+msgstr "Souhrn vyhledávání"
+
+#: lib/interface.php:520
+msgid "Totals"
+msgstr "Celkem"
+
+#: lib/interface.php:525
+msgid "Common Queries"
+msgstr "Často vyhledávané dotazy"
+
+#: lib/interface.php:529
+#, php-format
+msgid ""
+"Here you can see the %d most common user search queries, how many times "
+"those queries were made and how many results were found for those queries."
+msgstr ""
+"Zde můžete vidět %d nejčastěji vyhledávaných výrazů, kolikrát byly tyto "
+"řetězce hledány a kolik výsledků bylo u těchto dotazů nalezeno."
+
+#: lib/interface.php:532 lib/interface.php:548 lib/interface.php:580
+msgid "Today and yesterday"
+msgstr "Dnes a včera"
+
+#: lib/interface.php:536 lib/interface.php:552 lib/interface.php:581
+msgid "Last 7 days"
+msgstr "Posledních 7 dní"
+
+#: lib/interface.php:540 lib/interface.php:556
+#, php-format
+msgid "Last %d days"
+msgstr "Posledních %d dní"
+
+#: lib/interface.php:545
+msgid "Unsuccessful Queries"
+msgstr "Neúspěšné vyhledávané dotazy"
+
+#: lib/interface.php:563
+msgid "Reset Logs"
+msgstr "Vymazat logy"
+
+#: lib/interface.php:566
+#, php-format
+msgid "To reset the logs, type \"reset\" into the box here %s and click %s"
+msgstr ""
+"Logy lze promazat zapsáním řetězce &#8222;reset&#8220; do tohoto pole %s a "
+"kliknutím %s"
+
+#: lib/interface.php:582
+msgid "Last 30 days"
+msgstr "Posledních 30 dní"
+
+#: lib/interface.php:583
+msgid "Forever"
+msgstr "Od počátku"
+
+#: lib/interface.php:585
+msgid "When"
+msgstr "Kdy"
+
+#: lib/interface.php:585
+msgid "Searches"
+msgstr "Vyhledávání"
+
+#: lib/interface.php:617
+msgid "Query"
+msgstr "Dotaz"
+
+#: lib/interface.php:617
+msgid "Hits"
+msgstr "Shody"
+
+#: lib/interface.php:1066
+msgid "Overview"
+msgstr "Přehled"
+
+#: lib/interface.php:1067 lib/interface.php:1120
+msgid "Indexing"
+msgstr "Indexování"
+
+#: lib/interface.php:1068
+msgid "Attachments"
+msgstr "Přílohy"
+
+#: lib/interface.php:1069 lib/interface.php:1130 lib/interface.php:2253
+msgid "Searching"
+msgstr "Vyhledávání"
+
+#: lib/interface.php:1070
+msgid "Logging"
+msgstr "Logování"
+
+#: lib/interface.php:1071 lib/interface.php:1133
+msgid "Excerpts and highlights"
+msgstr "Stručné obsahy a zvýraznění"
+
+#: lib/interface.php:1072 lib/interface.php:2119 lib/interface.php:2124
+msgid "Synonyms"
+msgstr "Synonyma"
+
+#: lib/interface.php:1073 lib/interface.php:2150
+msgid "Stopwords"
+msgstr "Stopslova"
+
+#: lib/interface.php:1075
+msgid "Import / Export options"
+msgstr "Možnosti Importu / Exportu"
+
+#: lib/interface.php:1105
+msgid "Welcome to Relevanssi!"
+msgstr "Vítejte v Relevanssi!"
+
+#: lib/interface.php:1115
+msgid "Getting started"
+msgstr "Začínáme"
+
+#: lib/interface.php:1117
+msgid ""
+"You've already installed Relevanssi. That's a great first step towards good "
+"search experience!"
+msgstr ""
+"Plugin Relevanssi již máte nainstalovaný. To je skvělý krok k lepšímu "
+"vyhledávání!"
+
+#: lib/interface.php:1120
+#, php-format
+msgid ""
+"Now, you need an index. Head over to the %s%s%s tab to set up the basic "
+"indexing options and to build the index."
+msgstr ""
+"Nyní potřebujete index. Pro základní nastavení indexování a vytvoření indexu "
+"přejděte na záložku %s%s%s."
+
+#: lib/interface.php:1121
+msgid "You need to check at least the following options:"
+msgstr "Zkontrolujte alespoň následující nastavení:"
+
+#: lib/interface.php:1122
+msgid "Make sure the post types you want to include in the index are indexed."
+msgstr ""
+"Ujistěte se, že typy příspěvků, které chcete zahrnout do indexu, budou "
+"indexovány."
+
+#: lib/interface.php:1123
+#, php-format
+msgid ""
+"Do you use custom fields to store content you want included? If so, add "
+"those too. WooCommerce user? You probably want to include %s."
+msgstr ""
+"Používáte vlastní pole k ukládání obsahu, který chcete do indexu zahrnout? "
+"Pokud ano, přidejte i ta. Používáte WooCommerce? Pravděpodobně budete chtít "
+"zahrnout %s."
+
+#: lib/interface.php:1124
+msgid ""
+"Then just save the options and build the index. First time you have to do it "
+"manually, but after that, it's fully automatic: all changes are reflected in "
+"the index without reindexing. (That said, it's a good idea to rebuild the "
+"index once a year.)"
+msgstr ""
+"Pak už stačí nastavení uložit a vytvořit index. Poprvé to budete muset "
+"udělat ručně, ale poté už je to plně automatické: všechny změny se v indexu "
+"odrážejí bez reindexace. (Ačkoli není od věci index jednou ročně "
+"znovuvytvořit.)"
+
+#: lib/interface.php:1127
+msgid "Great, you already have an index!"
+msgstr "Skvěle, už máte index!"
+
+#: lib/interface.php:1130
+#, php-format
+msgid ""
+"On the %s%s%s tab, choose whether you want the default operator to be AND "
+"(less results, but more precise) or OR (more results, less precise)."
+msgstr ""
+"Na záložce %s%s%s zvolte, zda má být výchozím operátorem AND (méně výsledků, "
+"ale přesnější) nebo OR (více výsledků, méně přesných)."
+
+#: lib/interface.php:1133
+#, php-format
+msgid ""
+"The next step is the %s%s%s tab, where you can enable the custom excerpts "
+"that show the relevant part of post in the search results pages."
+msgstr ""
+"Dalším krokem je záložka %s%s%s, kde můžete povolit vlastní stručné obsahy, "
+"které budou zobrazovat příslušnou část příspěvku na stránkách s výsledky "
+"vyhledávání."
+
+#: lib/interface.php:1134
+msgid ""
+"There are couple of options related to that, so if you want highlighting in "
+"the results, you can adjust the styles for that to suit the look of your "
+"site."
+msgstr ""
+"Je tam pár nastavení, které s tím souvisejí, takže pokud chcete zvýraznění "
+"ve výsledcích vyhledávání, můžete upravit styly tak, aby vyhovovaly vzhledu "
+"vašeho webu."
+
+#: lib/interface.php:1137
+msgid ""
+"That's about it! Now you should have Relevanssi up and running. The rest of "
+"the options is mostly fine-tuning."
+msgstr ""
+"A to je vše! Tím by jste měli mít Relevanssi zprovozněné. Zbytek nastavení "
+"už je převážně ladění."
+
+#: lib/interface.php:1140
+msgid ""
+"Relevanssi doesn't have a separate search widget. Instead, Relevanssi uses "
+"the default search widget. Any standard search form will do!"
+msgstr ""
+"Relevanssi nemá samostatný widget pro vyhledávání. Místo toho Relevanssi "
+"používá výchozí widget pro vyhledávání. Všechny standardní vyhledávací "
+"formuláře budou fungovat!"
+
+#: lib/interface.php:1144
+msgid "For more information"
+msgstr "Další informace"
+
+#: lib/interface.php:1146
+msgid ""
+"Relevanssi uses the WordPress contextual help. Click 'Help' on the top right "
+"corner for more information on many Relevanssi topics."
+msgstr ""
+"Relevanssi používá kontextovou nápovědu WordPress. Klikněte na tlačítko "
+"&#8222;Nápověda&#8220; v pravém horním rohu a získáte další informace o "
+"mnoha Relevanssi tématech."
+
+#: lib/interface.php:1147
+#, php-format
+msgid ""
+"%sRelevanssi knowledge base%s has lots of information about advanced "
+"Relevanssi use, including plenty of code samples."
+msgstr ""
+"V %sRelevanssi znalostní bázi%s (v angličtině) najdete mnoho informací o "
+"pokročilém použití Relevanssi, včetně spousty vzorových kódů."
+
+#: lib/interface.php:1152
+msgid "Relevanssi on Facebook"
+msgstr "Relevanssi na Facebooku"
+
+#: lib/interface.php:1155
+msgid ""
+"Check out the Relevanssi page on Facebook for news and updates about "
+"Relevanssi."
+msgstr ""
+"Sledujte stránku Relevanssi na Facebooku pro inormace o novinkách a "
+"aktualizacích Relevanssi."
+
+#: lib/interface.php:1161
+msgid "Buy Relevanssi Premium"
+msgstr "Koupit Relevanssi Premium"
+
+#: lib/interface.php:1164
+msgid "Buy Relevanssi Premium now"
+msgstr "Koupte Relevanssi Premium nyní"
+
+#: lib/interface.php:1164
+#, php-format
+msgid ""
+"use coupon code %s for 20%% discount (valid at least until the end of %s)"
+msgstr ""
+"použijte kód kupónu %s pro získání 20%% slevy (platí nejméně do konce %s)"
+
+#: lib/interface.php:1165
+msgid "Here are some improvements Relevanssi Premium offers:"
+msgstr "Zde jsou některá vylepšení, která Relevanssi Premium nabízí:"
+
+#: lib/interface.php:1167
+msgid "PDF content indexing"
+msgstr "Indexace obsahu PDF"
+
+#: lib/interface.php:1168
+msgid "Index and search user profile pages"
+msgstr "Indexace a vyhledávání stránek uživatelských profilů"
+
+#: lib/interface.php:1169
+msgid "Index and search taxonomy term pages"
+msgstr "Indexace a vyhledávání taxonomie výrazů stránek"
+
+#: lib/interface.php:1170
+msgid "Multisite searches across many subsites"
+msgstr "Multisite hledání napříč mnoha subweby"
+
+#: lib/interface.php:1171
+msgid "WP CLI commands"
+msgstr "WP CLI příkazy"
+
+#: lib/interface.php:1172
+msgid "Adjust weights separately for each post type and taxonomy"
+msgstr "Oddělené nastavení vah pro příspěvky a taxonomii"
+
+#: lib/interface.php:1173
+msgid "Internal link anchors can be search terms for the target posts"
+msgstr "Interní vazby mohou být vyhledávacími podmínkami pro cílové příspěvky"
+
+#: lib/interface.php:1174
+msgid "Index and search any columns in the wp_posts database"
+msgstr "Indexace a vyhledávání libovolného sloupce v MySQL tabulce wp_posts"
+
+#: lib/interface.php:1175
+msgid ""
+"Hide Relevanssi branding from the User Searches page on a client installation"
+msgstr ""
+"Skrytí brandingu Relevanssi ze stránek uživatelských vyhledávání v instalaci "
+"klienta"
+
+#: lib/interface.php:1189
+msgid "Enable logs"
+msgstr "Zapnutí logování"
+
+#: lib/interface.php:1193 lib/interface.php:1196
+msgid "Keep a log of user queries."
+msgstr "Ukládat log uživatelských dotazů."
+
+#: lib/interface.php:1199
+#, php-format
+msgid ""
+"If enabled, Relevanssi will log user queries. The logs can be examined under "
+"'%s' on the Dashboard admin menu and are stored in the %s database table."
+msgstr ""
+"Je-li aktivováno, Relevanssi bude zaznamenávat uživatelské dotazy. Záznamy "
+"budou uloženy v databázové tabulce %s a mohou být prozkoumávány pod '%s' v "
+"admin menu Nástěnka."
+
+#: lib/interface.php:1204
+msgid "Log user IP"
+msgstr "Logování IP adresy uživatele"
+
+#: lib/interface.php:1208 lib/interface.php:1211
+msgid "Log the user's IP with the queries."
+msgstr "Spolu s dotazy logovat i uživatelovu IP adresu."
+
+#: lib/interface.php:1214
+msgid "If enabled, Relevanssi will log user's IP adress with the queries."
+msgstr ""
+"Je-li aktivováno, Relevanssi bude spolu s uživatelovými dotazy logovat i "
+"jeho IP adresu."
+
+#: lib/interface.php:1219
+msgid "Exclude users"
+msgstr "Vynechání uživatelů"
+
+#: lib/interface.php:1223
+msgid ""
+"Comma-separated list of numeric user IDs or user login names that will not "
+"be logged."
+msgstr ""
+"Čárkami oddělený seznam uživatelských jmen, nebo jejich číselných ID, "
+"jejichž hledání nebude logováno."
+
+#: lib/interface.php:1229
+msgid "Trim logs"
+msgstr "Redukce logů"
+
+#: lib/interface.php:1233
+msgid "How many days of logs to keep in the database."
+msgstr "Po kolik dní budou logy uchovány v databázi."
+
+#: lib/interface.php:1234
+#, php-format
+msgid " Set to %d for no trimming."
+msgstr " Nastavení na %d bude logy zachovávat."
+
+#: lib/interface.php:1249
+msgid "Default operator"
+msgstr "Výchozí operátor"
+
+#: lib/interface.php:1253
+msgid "AND - require all terms"
+msgstr "AND - vyžaduje všechny výrazy"
+
+#: lib/interface.php:1254
+msgid "OR - any term present is enough"
+msgstr "OR - výskyt jakéhokoli výrazu je dostatečný"
+
+#: lib/interface.php:1256
+msgid "This setting determines the default operator for the search."
+msgstr "Toto nastavení určuje výchozí operátor pro vyhledávání."
+
+#: lib/interface.php:1257
+#, php-format
+msgid ""
+"You can override this setting with the %s query parameter, like this: %s"
+msgstr "Toto nastavení můžete přepsat parametrem v dotazu %s, například: %s"
+
+#: lib/interface.php:1262
+msgid "Fallback to OR"
+msgstr "Přepnutí na OR"
+
+#: lib/interface.php:1266 lib/interface.php:1269
+msgid "Disable the OR fallback."
+msgstr "Zakázat přepnutí na OR."
+
+#: lib/interface.php:1272
+msgid ""
+"By default, if AND search fails to find any results, Relevanssi will switch "
+"the operator to OR and run the search again. You can prevent that by "
+"checking this option."
+msgstr ""
+"Ve výchozím nastavení, pokud AND vyhledání nevrátí žádné výsledky, "
+"Relevanssi přepne operátor na OR a provede vyhledávání znovu. Tomuto chování "
+"můžete zabránit tím, že zaškrtnete tuto možnost."
+
+#: lib/interface.php:1277
+msgid "Default order"
+msgstr "Výchozí pořadí"
+
+#: lib/interface.php:1281
+msgid "Relevance (highly recommended)"
+msgstr "Relevance (výrazně doporučeno)"
+
+#: lib/interface.php:1282
+msgid "Post date"
+msgstr "Datum příspěvku"
+
+#: lib/interface.php:1284
+#, php-format
+msgid ""
+"If you want to override this or use multi-layered ordering (eg. first order "
+"by relevance, but sort ties by post title), you can use the %s query "
+"variable. See Help for more information."
+msgstr ""
+"Chcete-li toto potlačit, anebo použít vícevrstvé uspořádání (např. první "
+"pořadí dle relevance, ale dále třídění vazeb podle názvu příspěvků), můžete "
+"použít proměnnou dotazu %s. Další informace naleznete v nápovědě."
+
+#: lib/interface.php:1286
+msgid ""
+" If you want date-based results, see the recent post bonus in the Weights "
+"section."
+msgstr ""
+" Chcete-li výsledky na základě data vytvoření, podívejte se na poslední "
+"příspěvek v sekci Váhy."
+
+#: lib/interface.php:1292
+msgid "Keyword matching"
+msgstr "Shoda klíčových slov"
+
+#: lib/interface.php:1296
+msgid "Whole words"
+msgstr "Celá slova"
+
+#: lib/interface.php:1297
+msgid "Partial words"
+msgstr "Části slov"
+
+#: lib/interface.php:1298
+msgid "Partial words if no hits for whole words"
+msgstr "Části slov, pokud Celá slova nic nevrátí"
+
+#: lib/interface.php:1300
+msgid ""
+"Whole words means Relevanssi only finds posts that include the whole search "
+"term."
+msgstr ""
+"Celá slova znamená, že Relevanssi vyhledá pouze příspěvky, které obsahují "
+"celý vyhledávaný výraz."
+
+#: lib/interface.php:1301
+msgid ""
+"Partial words also includes cases where the word in the index begins or ends "
+"with the search term (searching for 'ana' will match 'anaconda' or 'banana', "
+"but not 'banal'). See Help, if you want to make Relevanssi match also inside "
+"words."
+msgstr ""
+"Části slov zahrnují také případy, kdy slovo v indexu začíná nebo končí "
+"vyhledávaným pojmem (hledání &#8222;ana&#8220; najde &#8222;anakonda&#8220; "
+"nebo &#8222;katana&#8220;, ale ne &#8222;kanada&#8220;) Chcete-li, aby se "
+"Relevanssi našlo shodu také uvnitř slov, podívejte se do nápovědy."
+
+#: lib/interface.php:1306
+msgid "Weights"
+msgstr "Váhy"
+
+#: lib/interface.php:1309
+msgid ""
+"All the weights in the table are multipliers. To increase the weight of an "
+"element, use a higher number. To make an element less significant, use a "
+"number lower than 1."
+msgstr ""
+"Všechny váhy v tabulce jsou činitelé. Chcete-li zvýšit váhu prvku, použijte "
+"vyšší číslo. Chcete-li, aby prvek byl méně významný, použijte číslo nižší "
+"než 1."
+
+#: lib/interface.php:1313
+msgid "Element"
+msgstr "Prvek"
+
+#: lib/interface.php:1314
+msgid "Weight"
+msgstr "Váha"
+
+#: lib/interface.php:1319
+msgid "Content"
+msgstr "Obsah"
+
+#: lib/interface.php:1327
+msgid "Titles"
+msgstr "Názvy"
+
+#: lib/interface.php:1336
+msgid "Comment text"
+msgstr "Text komentáře"
+
+#: lib/interface.php:1356
+msgid "WPML"
+msgstr "WPML"
+
+#: lib/interface.php:1360 lib/interface.php:1363
+msgid "Limit results to current language."
+msgstr "Omezit výsledky na aktuální jazyk."
+
+#: lib/interface.php:1366
+msgid ""
+"Enabling this option will restrict the results to the currently active "
+"language. If the option is disabled, results will include posts in all "
+"languages."
+msgstr ""
+"Povolením této možnosti budou výsledky omezeny na aktuálně aktivní jazyk. Je-"
+"li tato volba vypnuta, budou výsledky obsahovat příspěvky ve všech jazycích."
+
+#: lib/interface.php:1373
+msgid "Polylang"
+msgstr "Polylang"
+
+#: lib/interface.php:1377 lib/interface.php:1380
+msgid "Allow results from all languages."
+msgstr "Povolit výsledky ze všech jazyků."
+
+#: lib/interface.php:1383
+msgid ""
+"By default Polylang restricts the search to the current language. Enabling "
+"this option will lift this restriction."
+msgstr ""
+"Ve výchozím nastavení Polylang omezuje vyhledávání na aktuální jazyk. "
+"Povolením této možnosti zrušíte toto omezení."
+
+#: lib/interface.php:1389
+msgid "Admin search"
+msgstr "Admin vyhledávání"
+
+#: lib/interface.php:1393 lib/interface.php:1396
+msgid "Use Relevanssi for admin searches."
+msgstr "Používat Relevanssi pro vyhledávání v administrátorském rozhraní."
+
+#: lib/interface.php:1399
+msgid ""
+"If checked, Relevanssi will be used for searches in the admin interface. The "
+"page search doesn't use Relevanssi, because WordPress works like that."
+msgstr ""
+"Je-li zaškrtnuto, Relevanssi se použije také pro vyhledávání v "
+"administrátorském rozhraní. Vyhledávání stránek Relevanssi nepoužívá, "
+"protože WordPress takto funguje."
+
+#: lib/interface.php:1404
+#, php-format
+msgid "Respect %s"
+msgstr "Zohlednění %s"
+
+#: lib/interface.php:1408
+msgid "Respect exclude_from_search for custom post types"
+msgstr "Zohlednit exclude_from_search pro vlastní typy příspěvků"
+
+#: lib/interface.php:1411
+#, php-format
+msgid "Respect %s for custom post types"
+msgstr "Zohlednit %s pro vlastní typy příspěvků"
+
+#: lib/interface.php:1413
+msgid ""
+"If checked, Relevanssi won't display posts of custom post types that have "
+"'exclude_from_search' set to true."
+msgstr ""
+"Je-li zaškrtnuto, Relevanssi nezobrazí příspěvky vlastních typů, které mají "
+"nastaveno &#8222;exclude_from_search&#8220; na true."
+
+#: lib/interface.php:1421
+msgid ""
+"You probably should uncheck this option, because you've set Relevanssi to "
+"index the following non-public post types:"
+msgstr ""
+"Pravděpodobně byste měli zrušit zaškrtnutí této možnosti, protože jste v "
+"Relevanssi nastavili indexování následujících neveřejných typů příspěvků:"
+
+#: lib/interface.php:1430
+msgid "Throttle searches"
+msgstr "Omezení vyhledávání"
+
+#: lib/interface.php:1434
+msgid "Throttling the search does not work when sorting the posts by date."
+msgstr "Přiškrcení hledání nefunguje při řazení příspěvků podle data."
+
+#: lib/interface.php:1438 lib/interface.php:1441
+msgid "Throttle searches."
+msgstr "Omezit vyhledávání."
+
+#: lib/interface.php:1445
+msgid "Your database is so small that you don't need to enable this."
+msgstr "Vaše databáze je tak malá, že toto zapínat nemusíte."
+
+#: lib/interface.php:1447
+msgid ""
+"If this option is checked, Relevanssi will limit search results to at most "
+"500 results per term. This will improve performance, but may cause some "
+"relevant documents to go unfound. See Help for more details."
+msgstr ""
+"Je-li tato volba zaškrtnuta, Relevanssi omezí počet výsledků vyhledávání na "
+"nejvýše 500 na každý výraz. Zvýší to výkonnost, ale může to způsobit, že "
+"relevantní dokumenty nebudou nalezeny. Podrobnější informace naleznete v "
+"nápovědě."
+
+#: lib/interface.php:1453
+msgid "Category restriction"
+msgstr "Omezení rubrik"
+
+#: lib/interface.php:1469
+msgid ""
+"You can restrict search results to a category for all searches. For "
+"restricting on a per-search basis and more options (eg. tag restrictions), "
+"see Help."
+msgstr ""
+"Můžete omezit výsledky vyhledávání na konkrétní kategorii pro všechna "
+"vyhledávání. Chcete-li omezit jen jedno dané vyhledávání či další možnosti "
+"(např. omezení podle štítku), pročtěte si nápovědu."
+
+#: lib/interface.php:1474
+msgid "Category exclusion"
+msgstr "Vyloučení rubrik"
+
+#: lib/interface.php:1490
+msgid ""
+"Posts in these categories are not included in search results. To exclude the "
+"posts completely from the index, see Help."
+msgstr ""
+"Příspěvky v těchto rubrikách nebudou zahrnuty do výsledků vyhledávání. "
+"Chcete-li příspěvky z indexu úplně vyloučit, pročtěte si nápovědu."
+
+#: lib/interface.php:1495
+msgid "Post exclusion"
+msgstr "Vyloučení příspěvků"
+
+#: lib/interface.php:1499
+msgid ""
+"Enter a comma-separated list of post or page ID's to exclude those pages "
+"from the search results."
+msgstr ""
+"Vložte čárkami oddělený seznam ID příspěvků či stránek, pro jejich vynechání "
+"z výsledků vyhledávání."
+
+#: lib/interface.php:1501
+msgid ""
+"With Relevanssi Premium, it's better to use the check box on post edit "
+"pages. That will remove the posts completely from the index, and will work "
+"with multisite searches unlike this setting."
+msgstr ""
+"S Relevanssi Premium je lepší používat zaškrtávací políčko na stránkách pro "
+"úpravu příspěvků. Tím se příspěvky zcela odstraní z indexu a na rozdíl od "
+"tohoto nastavení budou s multisite vyhledáváním fungovat."
+
+#: lib/interface.php:1512
+msgid "Custom excerpts/snippets"
+msgstr "Vlastní stručné obsahy/úryvky"
+
+#: lib/interface.php:1517
+msgid "Custom search result snippets"
+msgstr "Vlastní úryvky výsledků vyhledávání"
+
+#: lib/interface.php:1521 lib/interface.php:1524
+msgid "Create custom search result snippets"
+msgstr "Vytvářet vlastní úryvky výsledků vyhledávání"
+
+#: lib/interface.php:1527
+msgid "Only enable this if you actually use the custom excerpts."
+msgstr ""
+"Tuto možnost aktivujte pouze pokud vlastní stručné obsahy skutečně používáte."
+
+#: lib/interface.php:1532
+msgid "Length of the snippet"
+msgstr "Délka úryvku"
+
+#: lib/interface.php:1537
+msgid "characters"
+msgstr "znaků"
+
+#: lib/interface.php:1538
+msgid "words"
+msgstr "slov"
+
+#: lib/interface.php:1540
+msgid ""
+"Using words is much faster than characters. Don't use characters, unless you "
+"have a really good reason and your posts are short."
+msgstr ""
+"Použití slov je mnohem rychlejší než u znaků. Znaky nepoužívejte, pokud k "
+"tomu nemáte opravdu dobrý důvod a vaše příspěvky jsou krátké."
+
+#: lib/interface.php:1545
+msgid "Allowable tags in excerpts"
+msgstr "Přípustné značky ve stručných obsazích"
+
+#: lib/interface.php:1549
+msgid ""
+"List all tags you want to allow in excerpts. For example: &lt;p&gt;&lt;a&gt;"
+"&lt;strong&gt;."
+msgstr ""
+"Zadejte seznam všech značek, které chcete ve stručných obsazích povolit . "
+"Například: &lt;p&gt;&lt;a&gt;&lt;strong&gt;."
+
+#: lib/interface.php:1554
+msgid "Use custom fields for excerpts"
+msgstr "Použití vlastních polí pro stručné obsahy"
+
+#: lib/interface.php:1558 lib/interface.php:1561
+msgid "Use custom field content for building excerpts"
+msgstr "Pro vytváření stručných seznamů používat obsah vlastních polí"
+
+#: lib/interface.php:1564
+msgid ""
+"Use the custom fields setting for indexing for excerpt-making as well. "
+"Enabling this option will show custom field content in Relevanssi-generated "
+"excerpts."
+msgstr ""
+"Použití nastavení indexování vlastních polí také pro tvorbu stručných "
+"obsahů. Povolením této možnosti se bude obsah vlastních polí zobrazovat ve "
+"stručných obsazích generovaných Relevanssi."
+
+#: lib/interface.php:1565
+msgid "Enable this option to use PDF content for excerpts."
+msgstr "Aktivujte tuto volbu, chcete-li pro stručné obsahy použít obsah z PDF."
+
+#: lib/interface.php:1568
+msgid "Current custom field setting"
+msgstr "Aktuální nastavení vlastních polí"
+
+#: lib/interface.php:1570
+msgid "all visible custom fields"
+msgstr "všechna viditelná uživatelská pole"
+
+#: lib/interface.php:1571
+msgid "all custom fields"
+msgstr "všechna vlastní pole"
+
+#: lib/interface.php:1573
+msgid "Just PDF content"
+msgstr "Pouze PDF obsah"
+
+#: lib/interface.php:1573
+msgid "None selected"
+msgstr "Nevybráno"
+
+#: lib/interface.php:1579
+msgid "Search hit highlighting"
+msgstr "Zvýraznění nalezené shody"
+
+#: lib/interface.php:1584
+msgid "Highlight type"
+msgstr "Typ zvýraznění"
+
+#: lib/interface.php:1588
+msgid "No highlighting"
+msgstr "Žádné zvýraznění"
+
+#: lib/interface.php:1592 lib/interface.php:1602
+msgid "Text color"
+msgstr "Barva textu"
+
+#: lib/interface.php:1593 lib/interface.php:1610
+msgid "Background color"
+msgstr "Barva pozadí"
+
+#: lib/interface.php:1594
+msgid "CSS Style"
+msgstr "<acronym title=\"Cascading Style Sheets\">CSS</acronym> styl"
+
+#: lib/interface.php:1595
+msgid "CSS Class"
+msgstr "<acronym title=\"Cascading Style Sheets\">CSS</acronym> třída"
+
+#: lib/interface.php:1597 lib/interface.php:1712
+msgid "Requires custom snippets to work."
+msgstr "Pro správnou funkci vyžaduje vlastní úryvky."
+
+#: lib/interface.php:1618
+msgid "CSS style for highlights"
+msgstr ""
+"<acronym title=\"Cascading Style Sheets\">CSS</acronym> styl pro zvýraznění"
+
+#: lib/interface.php:1622
+#, php-format
+msgid ""
+"The highlights will be wrapped in a %s with this CSS in the style parameter."
+msgstr ""
+"Zvýraznění bude zabaleno ve %s s tímto acronym title=\"Cascading Style Sheets"
+"\">CSS</acronym> a parametrem stylu."
+
+#: lib/interface.php:1627
+msgid "CSS class for highlights"
+msgstr ""
+"<acronym title=\"Cascading Style Sheets\">CSS</acronym> třída pro zvýraznění"
+
+#: lib/interface.php:1631
+#, php-format
+msgid "The highlights will be wrapped in a %s with this class."
+msgstr "Zvýraznění bude zabaleno ve %s touto třídou."
+
+#: lib/interface.php:1636
+msgid "Highlight in titles"
+msgstr "Zvýraznění názvů"
+
+#: lib/interface.php:1640 lib/interface.php:1643
+msgid "Highlight query terms in titles"
+msgstr "Zvýraznit hledané výrazy v názvech"
+
+#: lib/interface.php:1646
+#, php-format
+msgid ""
+"Highlights in titles require changes to the search results template. You "
+"need to replace %s in the search results template with %s. For more "
+"information, see the contextual help."
+msgstr ""
+"Zvýraznění v názvech vyžaduje změny v šabloně výsledků vyhledávání. V "
+"šabloně výsledků vyhledávání musíte nahradit %s za %s. Další informace "
+"naleznete v kontextové nápovědě."
+
+#: lib/interface.php:1651
+msgid "Highlight in documents"
+msgstr "Zvýraznění v dokumentech"
+
+#: lib/interface.php:1655 lib/interface.php:1658
+msgid "Highlight query terms in documents"
+msgstr "Zvýraznit hledané výrazy v dokumentech"
+
+#: lib/interface.php:1661
+#, php-format
+msgid ""
+"Highlights hits when user opens the post from search results. This requires "
+"an extra parameter (%s) to the links from the search results pages, which "
+"Relevanssi should add automatically."
+msgstr ""
+"Zvýrazní shody pokud uživatel příspěvek otevře z výsledků vyhledávání. To "
+"vyžaduje zvláštní parametr (%s) v odkazech na stránce výsledků vyhledávání, "
+"který by mělo Relevanssi přidávat automaticky."
+
+#: lib/interface.php:1667
+msgid "Highlight in comments"
+msgstr "Zvýraznění v komentářích"
+
+#: lib/interface.php:1671 lib/interface.php:1674
+msgid "Highlight query terms in comments"
+msgstr "Zvýraznit hledané výrazy v komentářích"
+
+#: lib/interface.php:1677
+msgid ""
+"Highlights hits in comments when user opens the post from search results."
+msgstr ""
+"Zvýraznit shody v komentářích, když uživatel příspěvek otevře z výsledků "
+"vyhledávání."
+
+#: lib/interface.php:1682
+msgid "Highlighting problems with non-ASCII alphabet?"
+msgstr "Problém se zvýrazněním ne-ASCI znaků?"
+
+#: lib/interface.php:1686 lib/interface.php:1689
+msgid "Uncheck this if you use non-ASCII characters"
+msgstr "Zrušte zaškrtnutí používáte-li jiné znaky než ASCII"
+
+#: lib/interface.php:1692
+msgid ""
+"If you use non-ASCII characters (like Cyrillic alphabet) and the highlights "
+"don't work, unchecking this option may make the highlights work."
+msgstr ""
+"Pokud používáte jiné znaky než ASCII (např. azbuku) a zvýraznění nefungují, "
+"odškrtněte tuto volbu, aby zvýraznění začalo fungovat."
+
+#: lib/interface.php:1697
+msgid "Breakdown of search results"
+msgstr "Rozčlenění nalezených shod"
+
+#: lib/interface.php:1702
+msgid "Breakdown of search hits in excerpts"
+msgstr "Rozčlenění nalezených shod ve stručných obsazích"
+
+#: lib/interface.php:1706
+msgid "Show the breakdown of search hits in the excerpts"
+msgstr "Zobrazit rozčlenění nalezených shod ve stručných obsazích"
+
+#: lib/interface.php:1709
+msgid "Show the breakdown of search hits in the excerpts."
+msgstr "Zobrazit rozčlenění nalezených shod ve stručných obsazích."
+
+#: lib/interface.php:1717
+msgid "The breakdown format"
+msgstr "Formát rozčlenění"
+
+#: lib/interface.php:1721
+msgid ""
+"Use %body%, %title%, %tags% and %comments% to display the number of hits (in "
+"different parts of the post), %total% for total hits, %score% to display the "
+"document weight and %terms% to show how many hits each search term got."
+msgstr ""
+"Použijte %body%, %title%, %tags% a %comments% pro zobrazení počtu shod (v "
+"různých částech příspěvku), %total% pro součet shod, %score% pro zobrazení "
+"váhy dokumentu a %terms% pro zobrazení, kolik měl hledaný výraz shod."
+
+#: lib/interface.php:1747 lib/interface.php:2172 premium/interface.php:1382
+msgid "Save the options"
+msgstr "Uložit nastavení"
+
+#: lib/interface.php:1748 lib/interface.php:1753
+msgid "Build the index"
+msgstr "Vytvořit index"
+
+#: lib/interface.php:1749 lib/interface.php:1754
+msgid "Index unindexed posts"
+msgstr "Indexovat nezaindexované příspěvky"
+
+#: lib/interface.php:1753
+#, php-format
+msgid "%s empties the existing index and rebuilds it from scratch."
+msgstr "%s vyprázdní stávající index a vytvoří jej znovu, na čisto."
+
+#: lib/interface.php:1754
+#, php-format
+msgid ""
+"%s doesn't empty the index and only indexes those posts that are not "
+"indexed. You can use it if you have to interrupt building the index."
+msgstr ""
+"%s stávající index nevyprázdní, ale zaindexuje pouze ty příspěvky, které "
+"zatím nejsou indexovány. Toho můžete využít, pokud jste vytváření indexu "
+"museli přerušit."
+
+#: lib/interface.php:1755
+msgid "This doesn't index any taxonomy terms or users."
+msgstr "Toto neindexuje žádnou taxonomii ani uživatele."
+
+#: lib/interface.php:1759 premium/interface.php:732
+msgid "Time elapsed"
+msgstr "Uplynulý čas"
+
+#: lib/interface.php:1759 premium/interface.php:732
+msgid "Time remaining"
+msgstr "Zbývající čas"
+
+#: lib/interface.php:1759 premium/interface.php:732
+msgid "some time"
+msgstr "nějaký čas"
+
+#: lib/interface.php:1764
+msgid "State of the index"
+msgstr "Stav indexu"
+
+#: lib/interface.php:1765
+msgid "document in the index."
+msgstr "dokument v indexu."
+
+#: lib/interface.php:1767
+msgid "user in the index."
+msgstr "uživatel v indexu."
+
+#: lib/interface.php:1768
+msgid "taxonomy term in the index."
+msgstr "výrazů taxonomie v indexu."
+
+#: lib/interface.php:1771
+msgid "term in the index."
+msgstr "výraz v indexu."
+
+#: lib/interface.php:1772
+msgid "is the highest post ID indexed."
+msgstr "je nejvyšší ID zaindexovaného příspěvku."
+
+#: lib/interface.php:1779
+msgid ""
+"WARNING: You've chosen no post types to index. Nothing will be indexed. "
+"Choose some post types to index."
+msgstr ""
+"POZOR: Nevybrali jste k indexování žádné typy příspěvků. Nic nebude "
+"indexováno. Vyberte k indexování některé typy příspěvků."
+
+#: lib/interface.php:1783
+msgid "Indexing options"
+msgstr "Možnosti indexování"
+
+#: lib/interface.php:1785
+msgid ""
+"Any changes to the settings on this page require reindexing before they take "
+"effect."
+msgstr ""
+"Jakékoliv změny nastavení na této stránce, předtím, než se projeví, vyžadují "
+"reindexaci."
+
+#: lib/interface.php:1789
+msgid "Post types"
+msgstr "Typy příspěvků"
+
+#: lib/interface.php:1795
+msgid "Type"
+msgstr "Typ"
+
+#: lib/interface.php:1796 lib/interface.php:1858 premium/interface.php:628
+msgid "Index"
+msgstr "Index"
+
+#: lib/interface.php:1797
+msgid "Excluded from search?"
+msgstr "Vyloučit z vyhledávání?"
+
+#: lib/interface.php:1815 lib/interface.php:1875 premium/interface.php:647
+msgid "no"
+msgstr "ne"
+
+#: lib/interface.php:1815 lib/interface.php:1875 premium/interface.php:645
+msgid "yes"
+msgstr "ano"
+
+#: lib/interface.php:1844
+#, php-format
+msgid ""
+"%s includes all attachment types. If you want to index only some "
+"attachments, see %sControlling attachment types in the Knowledge base%s."
+msgstr ""
+"%s zahrnuje všechny typy příloh. Chcete-li indexovat pouze některé přílohy, "
+"viz %sŘízení typů příloh ve Znalostní bázi%s (v angličtině)."
+
+#: lib/interface.php:1850 premium/interface.php:621
+msgid "Taxonomies"
+msgstr "Taxonomie"
+
+#: lib/interface.php:1857 premium/interface.php:627
+msgid "Taxonomy"
+msgstr "Taxonomie"
+
+#: lib/interface.php:1859 premium/interface.php:629
+msgid "Public?"
+msgstr "Veřejné?"
+
+#: lib/interface.php:1895
+msgid ""
+"If you check a taxonomy here, the terms for that taxonomy are indexed with "
+"the posts. If you for example choose \"post_tag\", searching for a tag will "
+"find all posts that have the tag."
+msgstr ""
+"Pokud zde zaškrtnete taxonomii, výrazy pro tuto taxonomii budou indexovány "
+"spolu s příspěvky. Pokud například zvolíte &#8222;post_tag&#8220; hledání "
+"štítků najdete všechny příspěvky, které mají takový štítek."
+
+#: lib/interface.php:1902
+msgid "Comments"
+msgstr "Komentáře"
+
+#: lib/interface.php:1906 lib/interface.php:1920
+msgid "none"
+msgstr "žádné"
+
+#: lib/interface.php:1907
+msgid "comments"
+msgstr "komentáře"
+
+#: lib/interface.php:1908
+msgid "comments and pingbacks"
+msgstr "komentáře a pingbacks"
+
+#: lib/interface.php:1910
+msgid ""
+"If you choose to index comments, you can choose if you want to index just "
+"comments, or everything including comments and track- and pingbacks."
+msgstr ""
+"Pokud zvolíte indexovat komentáře, můžete rozhodnout, zda chcete indexovat "
+"pouze komentáře, nebo komentáře včetně sledování - pingbacks."
+
+#: lib/interface.php:1916
+msgid "Custom fields"
+msgstr "Vlastní pole"
+
+#: lib/interface.php:1921
+msgid "all"
+msgstr "všechna"
+
+#: lib/interface.php:1922
+msgid "visible"
+msgstr "viditelná"
+
+#: lib/interface.php:1923 lib/interface.php:1934
+msgid "some"
+msgstr "některá"
+
+#: lib/interface.php:1925
+msgid "'All' indexes all custom fields for posts."
+msgstr "&#8222;Všechna&#8220; indexuje všechna uživatelská pole."
+
+#: lib/interface.php:1926
+msgid ""
+"'Visible' only includes the custom fields that are visible in the user "
+"interface (with names that don't start with an underscore)."
+msgstr ""
+"&#8222;Viditelná&#8220; zahrnuje pouze vlastní pole, která jsou viditelná v "
+"uživatelském rozhraní (s názvy, které nezačínají podtržítkem)."
+
+#: lib/interface.php:1927
+msgid "'Some' lets you choose individual custom fields to index."
+msgstr ""
+"&#8222;Některá&#8220; vám umožní vybrat jednotlivá pole pro indexování."
+
+#: lib/interface.php:1930
+msgid ""
+"Enter a comma-separated list of custom fields to include in the index. With "
+"Relevanssi Premium, you can also use 'fieldname_%_subfieldname' notation for "
+"ACF repeater fields."
+msgstr ""
+"Zadejte seznam vlastních polí, oddělených čárkami, které chcete zahrnout do "
+"indexu. S Relevanssi Premium můžete pro opakující se pole <acronym title="
+"\"Advanced Custom Fields Plugin for WordPress\">ACF</acronym> použít také "
+"zápis 'fieldname_%_subfieldname'."
+
+#: lib/interface.php:1931
+msgid ""
+"You can use 'relevanssi_index_custom_fields' filter hook to adjust which "
+"custom fields are indexed."
+msgstr ""
+"Pomocí hook filtru 'relevantssi_index_custom_fields' můžete upravit, která "
+"vlastní pole budou indexována."
+
+#: lib/interface.php:1934
+#, php-format
+msgid ""
+"If you want the SKU included, choose %s and enter %s. Also see the "
+"contextual help for more details."
+msgstr ""
+"Chcete-li zahrnout <acronym title=\"Stock Keepeing Unit\">SKU</acronym>, "
+"zvolte %s a zadejte %s. Další podrobnosti naleznete v kontextové nápovědě."
+
+#: lib/interface.php:1943
+msgid "Author display names"
+msgstr "Zobrazovaná jména autorů"
+
+#: lib/interface.php:1947 lib/interface.php:1950
+msgid "Index the post author display name"
+msgstr "Indexovat zobrazovaná jména autorů příspěvků"
+
+#: lib/interface.php:1952
+msgid ""
+"Searching for the post author display name will return posts by that author."
+msgstr "Vyhledávání zobrazovaného jména autora vrátí příspěvky tohoto autora."
+
+#: lib/interface.php:1959 lib/interface.php:2305
+msgid "Excerpts"
+msgstr "Stručné obsahy"
+
+#: lib/interface.php:1963 lib/interface.php:1966 lib/interface.php:1987
+msgid "Index the post excerpt"
+msgstr "Indexovat stručný obsah příspěvků"
+
+#: lib/interface.php:1968
+msgid "Relevanssi will find posts by the content in the excerpt."
+msgstr "Relevanssi nalezne příspěvky podle obsahu Stručných obsahů."
+
+#: lib/interface.php:1970
+msgid ""
+"WooCommerce stores the product short description in the excerpt, so it's a "
+"good idea to index excerpts."
+msgstr ""
+"WooCommerce ukládá krátký popis produktu do stručného obsahu, tudíž je "
+"vhodné stručné obsahy indexovat."
+
+#: lib/interface.php:1978
+msgid "Shortcodes"
+msgstr "Zkrácené kódy"
+
+#: lib/interface.php:1983
+msgid "Expand shortcodes"
+msgstr "Vykonání zkrácených kódů"
+
+#: lib/interface.php:1990
+msgid "Expand shortcodes when indexing"
+msgstr "Při indexování vykonávat zkrácené kódy"
+
+#: lib/interface.php:1993
+msgid ""
+"WooCommerce has shortcodes that don't work well with Relevanssi. With "
+"WooCommerce, make sure the option is disabled."
+msgstr ""
+"WooCommerce používá zkrácené kódy, které s Relevanssi nefungují dobře. "
+"Používáte-li WooCommerce ujistěte se, že je tato volba vypnuta."
+
+#: lib/interface.php:1995
+msgid ""
+"If checked, Relevanssi will expand shortcodes in post content before "
+"indexing. Otherwise shortcodes will be stripped."
+msgstr ""
+"Je-li zaškrtnuto, Relevanssi před indexováním zpracuje zkrácené kódy v "
+"obsahu příspěvků. Jinak budou vynechány."
+
+#: lib/interface.php:1996
+msgid ""
+"If you use shortcodes to include dynamic content, Relevanssi will not keep "
+"the index updated, the index will reflect the status of the shortcode "
+"content at the moment of indexing."
+msgstr ""
+"Používáte-li ke zobrazení dynamického obsahu zkrácené kódy, Relevanssi "
+"nebude udržovat index aktualizovaný, index bude odrážet pouze stav obsahu "
+"zkráceného kódu v okamžiku indexování."
+
+#: lib/interface.php:2013
+msgid "Advanced indexing settings"
+msgstr "Rozšířená nastavení indexování"
+
+#: lib/interface.php:2015
+msgid "Show advanced settings"
+msgstr "Zobrazit rozšířená nastavení"
+
+#: lib/interface.php:2020
+msgid "Minimum word length"
+msgstr "Minimální délka slova"
+
+#: lib/interface.php:2024
+msgid "Words shorter than this many letters will not be indexed."
+msgstr "Slova kratší než tento počet znaků nebudou indexována."
+
+#: lib/interface.php:2025
+#, php-format
+msgid ""
+"To enable one-letter searches, you need to add a filter function on the "
+"filter hook %s that returns %s."
+msgstr ""
+"Pro aktivaci jednopísmenných hledání je třeba přidat filtrovací funkci na "
+"filtr hook %s který vrací %s."
+
+#: lib/interface.php:2029
+msgid "Punctuation control"
+msgstr "Řízení interpunkce"
+
+#: lib/interface.php:2030
+msgid ""
+"Here you can adjust how the punctuation is controlled. For more information, "
+"see help. Remember that any changes here require reindexing, otherwise "
+"searches will fail to find posts they should."
+msgstr ""
+"Zde můžete upravit, jak bude zacházeno s interpunkcí. Další informace "
+"naleznete v nápovědě. Nezapomeňte, že jakékoli zde provedené změny vyžadují "
+"reindexaci, jinak vyhledávání nenajde příspěvky, které by mělo."
+
+#: lib/interface.php:2034
+msgid "Hyphens and dashes"
+msgstr "Čárky a pomlčky"
+
+#: lib/interface.php:2038 lib/interface.php:2065 lib/interface.php:2079
+msgid "Keep"
+msgstr "Zachovat"
+
+#: lib/interface.php:2039 lib/interface.php:2052 lib/interface.php:2066
+#: lib/interface.php:2080
+msgid "Replace with spaces"
+msgstr "Nahradit mezerami"
+
+#: lib/interface.php:2040 lib/interface.php:2053 lib/interface.php:2067
+#: lib/interface.php:2081
+msgid "Remove"
+msgstr "Odebrat"
+
+#: lib/interface.php:2042
+msgid ""
+"How Relevanssi should handle hyphens and dashes (en and em dashes)? "
+"Replacing with spaces is generally the best option, but in some cases "
+"removing completely is the best option. Keeping them is rarely the best "
+"option."
+msgstr ""
+"Jak má Relevanssi zpracovávat čárky a pomlčky (krátké a dlouhé pomlčky)? "
+"Záměna mezerami je obecně nejlepší volbou, ale v některých případech je "
+"lepší jejich úplné odstranění. Jejich zachování nebývá dobrou volbou."
+
+#: lib/interface.php:2048
+msgid "Apostrophes and quotes"
+msgstr "Apostrofy a uvozovky"
+
+#: lib/interface.php:2055
+msgid ""
+"How Relevanssi should handle apostrophes and quotes? It's not possible to "
+"keep them; that would lead to problems. Default behaviour is to replace with "
+"spaces, but sometimes removing makes sense."
+msgstr ""
+"Jak má Relevanssi zpracovávat apostrofy a uvozovky? Není možné je zachovat - "
+"to by vedlo k problémům. Výchozí chování je nahrazovat je mezerami, ale "
+"jejich odstranění někdy dává větší smysl."
+
+#: lib/interface.php:2061
+msgid "Ampersands"
+msgstr "Ampersandy"
+
+#: lib/interface.php:2069
+msgid ""
+"How Relevanssi should handle ampersands? Replacing with spaces is generally "
+"the best option, but if you talk a lot about D&amp;D, for example, keeping "
+"the ampersands is useful."
+msgstr ""
+"Jak má Relevanssi zpracovávat ampersandy? Záměna mezerami je obecně nejlepší "
+"volbou, ale zmiňujeme-li se například často o D&amp;D, jejich zachování může "
+"být užitečné."
+
+#: lib/interface.php:2075
+msgid "Decimal separators"
+msgstr "Oddělovač desetinné čárky"
+
+#: lib/interface.php:2083
+msgid ""
+"How Relevanssi should handle periods between decimals? Replacing with spaces "
+"is the default option, but that often leads to the numbers being removed "
+"completely. If you need to search decimal numbers a lot, keep the periods."
+msgstr ""
+"Jak má Relevanssi zpracovávat tečky mezi čísly? Záměna mezerami je výchozí "
+"volbou, což ovšem často vede k úplnému odstranění čísel. Pokud potřebujete "
+"čísla vyhledávat často, tečky zachovejte."
+
+#: lib/interface.php:2095
+msgid "Hide advanced settings"
+msgstr "Skrýt rozšířená nastavení"
+
+#: lib/interface.php:2107
+msgid "Indexing attachment content"
+msgstr "Indexování obsahu příloh"
+
+#: lib/interface.php:2109
+msgid ""
+"With Relevanssi Premium, you can index the text contents of PDF attachments. "
+"The contents of the attachments are processed on an external service, which "
+"makes the feature reliable and light on your own server performance."
+msgstr ""
+"S Relevanssi Premium můžete indexovat textový obsah PDF příloh. Obsah příloh "
+"je zpracován externí službou, což činí tuto funkci spolehlivou a "
+"nezatěžující výkon vašeho vlastního serveru."
+
+#: lib/interface.php:2111
+#, php-format
+msgid ""
+"In order to access this and many other delightful Premium features, %s buy "
+"Relevanssi Premium here%s."
+msgstr ""
+"Chcete-li získat přístup k této a mnoha dalších perfektních Pémiových "
+"funkcí, %s kupte Relevanssi Premium zde%s."
+
+#: lib/interface.php:2127
+msgid ""
+"Add synonyms here to make the searches find better results. If you notice "
+"your users frequently misspelling a product name, or for other reasons use "
+"many names for one thing, adding synonyms will make the results better."
+msgstr ""
+"Aby vyhledávání nacházelo lepší výsledky, přidejte sem synonyma. Pokud si "
+"všimnete, že uživatelé často pletou název produktu, nebo z jiného důvodu "
+"používají mnoho jmen pro stejnou věc, přidání synonym zlepší výsledky."
+
+#: lib/interface.php:2129
+msgid ""
+"Do not go overboard, though, as too many synonyms can make the search "
+"confusing: users understand if a search query doesn't match everything, but "
+"they get confused if the searches match to unexpected things."
+msgstr ""
+"Avšak nepřežeňte to, protože příliš mnoho synonym může způsobit, že "
+"vyhledávání bude matoucí: uživatelé chápou, že vyhledávací dotaz nemusí "
+"najít vše, ale v případě, že vyhledávání vrací neočekávané výsledky, mohou "
+"být zmateni."
+
+#: lib/interface.php:2133
+msgid ""
+"The format here is <code>key = value</code>. If you add <code>dog = hound</"
+"code> to the list of synonyms, searches for <code>dog</code> automatically "
+"become a search for <code>dog hound</code> and will thus match to posts that "
+"include either <code>dog</code> or <code>hound</code>. This only works in OR "
+"searches: in AND searches the synonyms only restrict the search, as now the "
+"search only finds posts that contain <strong>both</strong> <code>dog</code> "
+"and <code>hound</code>."
+msgstr ""
+"Formát zde je <code>klíč = hodnota</code>. Pokud do seznamu synonym přidáte "
+"<code>pes = ohař</code>, hledání <code>pes</code> automaticky začne hledat "
+"<code>pes ohař</code> a hledání vyhoví příspěvky, které obsahují buď "
+"<code>pes</code> nebo <code>ohař</code>. Toto funguje pouze v OR hledáních: "
+"V hledáních AND synonyma pouze omezí vyhledávání, nyní hledání nalezne pouze "
+"příspěvky obsahující <strong>obojí</strong> <code>pes</code> a <code>ohař</"
+"code>."
+
+#: lib/interface.php:2135
+msgid ""
+"The synonyms are one direction only. If you want both directions, add the "
+"synonym again, reversed: <code>hound = dog</code>."
+msgstr ""
+"Synonyma jsou pouze jednosměrná. Pokud chcete oba směry, přidejte synonymum "
+"znovu, obráceně: <code> barák = dům </code>."
+
+#: lib/interface.php:2137
+msgid ""
+"It's possible to use phrases for the value, but not for the key. <code>dog = "
+"\"great dane\"</code> works, but <code>\"great dane\" = dog</code> doesn't."
+msgstr ""
+"Hodnoty mohou obsahovat fráze, ale klíč nikoliv <code>pes = \"německá doga"
+"\"</code> funguje, ale <code>\"německá doga\" = pes</code> ne."
+
+#: lib/interface.php:2140
+msgid ""
+"If you want to use synonyms in AND searches, enable synonym indexing on the "
+"Indexing tab."
+msgstr ""
+"Chcete-li používat synonyma i v AND vyhledávacích dotazech, aktivujte "
+"indexování synonymum na záložce Indexování."
+
+#: lib/interface.php:2190
+msgid ""
+"Enter a word here to add it to the list of stopwords. The word will "
+"automatically be removed from the index, so re-indexing is not necessary. "
+"You can enter many words at the same time, separate words with commas."
+msgstr ""
+"Sem zadejte slovo, které chcete přidat do negativního slovníku. Slovo bude "
+"automaticky odstraněno z indexu a re-indexování nebude nutné. Můžete zadat "
+"více slov najednou, jednotlivá slova oddělujte čárkami."
+
+#: lib/interface.php:2197
+msgid "Stopword(s) to add"
+msgstr "Stopslova k přidání"
+
+#: lib/interface.php:2201
+msgid "Add"
+msgstr "Přidat"
+
+#: lib/interface.php:2206
+msgid ""
+"Here's a list of stopwords in the database. Click a word to remove it from "
+"stopwords. Removing stopwords won't automatically return them to index, so "
+"you need to re-index all posts after removing stopwords to get those words "
+"back to index."
+msgstr ""
+"Zde je seznam stopslov v databázi. Kliknutím na slovo jej ze zakázaných "
+"odeberete. Po odebrání stopslov se tato automaticky nevrací do indexu, takže "
+"po odebrání stopslov je třeba re-indexovat všechny příspěvky, aby se taková "
+"slova dostala zpět do indexu."
+
+#: lib/interface.php:2212
+msgid "Current stopwords"
+msgstr "Aktuální stopslova"
+
+#: lib/interface.php:2229
+msgid "Remove all stopwords"
+msgstr "Odstranit všechna stopslova"
+
+#: lib/interface.php:2234
+msgid "Exportable list of stopwords"
+msgstr "Exportovatelný seznam stopslov"
+
+#: lib/interface.php:2238
+msgid ""
+"You can copy the list of stopwords here if you want to back up the list, "
+"copy it to a different blog or otherwise need the list."
+msgstr ""
+"Zde můžete zkopírovat seznam stopslov, pokud chcete seznam zálohovat, "
+"kopírovat jej do jiného webu, nebo s ním jinak pracovat."
+
+#: lib/interface.php:2255
+#, php-format
+msgid ""
+"To adjust the post order, you can use the %s query parameter. With %s, you "
+"can use multiple layers of different sorting methods. See <a "
+"href='%s'>WordPress Codex</a> for more details on using arrays for orderby."
+msgstr ""
+"Pro nastavení řazení příspěvků můžete použít parametr dotazu %s. S %s můžete "
+"přidávat vrstvy různých metod řazení. Pro více informací o použití polí a "
+"seřadit podle viz <a href='%s'>WordPress Codex</a> (v angličtině)."
+
+#: lib/interface.php:2256
+msgid ""
+"Inside-word matching is disabled by default, because it increases garbage "
+"results that don't really match the search term. If you want to enable it, "
+"add the following function to your theme functions.php:"
+msgstr ""
+"Shoda uvnitř slov je ve výchozím nastavení zakázána, protože zvyšuje počet "
+"výsledků, které ve skutečnosti neodpovídají hledanému výrazu. Chcete-li ji "
+"povolit, přidejte do functions.php vaší šalony následující funkci:"
+
+#: lib/interface.php:2261
+#, php-format
+msgid "In order to adjust the throttle limit, you can use the %s filter hook."
+msgstr "Chcete-li nastavit limity omezení, můžete použít hook filtr %s."
+
+#: lib/interface.php:2263
+msgid ""
+"It's not usually necessary to adjust the limit from 500, but in some cases "
+"performance gains can be achieved by setting a lower limit. We don't suggest "
+"going under 200, as low values will make the results worse."
+msgstr ""
+"Obvykle není nutné nastavovat limit pod 500, avšak v některých případech lze "
+"nastavením nižšího limitu dosáhnout zvýšení výkonnosti. Nedoporučujeme, jít "
+"pod 200, protože nízké hodnoty zhorší výsledky."
+
+#: lib/interface.php:2268
+msgid "Restrictions"
+msgstr "Omezení"
+
+#: lib/interface.php:2270
+msgid ""
+"If you want the general search to target all posts, but have a single search "
+"form target only certain posts, you can add a hidden input variable to the "
+"search form. "
+msgstr ""
+"Pokud chcete, aby se obecné vyhledávání zaměřilo na všechny příspěvky, ale "
+"máte jediný vyhledávací formulář cílící pouze na určité příspěvky, můžete do "
+"vyhledávacího formuláře přidat skrytou vstupní proměnnou. "
+
+#: lib/interface.php:2271
+msgid ""
+"For example in order to restrict the search to categories 10, 14 and 17, you "
+"could add this to the search form:"
+msgstr ""
+"Například pro omezení vyhledávání na rubriky 10, 14 a 17, můžete do "
+"vyhledávacího formuláře přidat:"
+
+#: lib/interface.php:2273
+msgid ""
+"To restrict the search to posts tagged with alfa AND beta, you could add "
+"this to the search form:"
+msgstr ""
+"Pro omezení vyhledávání na příspěvky označené alfa AND beta, můžete do "
+"vyhledávacího formuláře přidat:"
+
+#: lib/interface.php:2275
+#, php-format
+msgid "For all the possible options, see the Codex documentation for %s."
+msgstr ""
+"Pro všechna možná nastavení viz dokumentace Codex pro %s (v angličtině)."
+
+#: lib/interface.php:2280
+msgid "Exclusions"
+msgstr "Výjimky"
+
+#: lib/interface.php:2282
+#, php-format
+msgid ""
+"For more exclusion options, see the Codex documentation for %s. For example, "
+"to exclude tag ID 10, use"
+msgstr ""
+"Pro nastavení dalších výjimek, viz dokumentace Codex pro %s. Například, pro "
+"vynechání štítku ID 10, použijte"
+
+#: lib/interface.php:2284
+#, php-format
+msgid ""
+"To exclude posts from the index and not just from the search, you can use "
+"the %s filter hook. This would not index posts that have a certain taxonomy "
+"term:"
+msgstr ""
+"Chcete-li vyloučit příspěvky z indexu a nikoliv pouze z vyhledávání, můžete "
+"použít hook filtr %s. Tímto se nebudou indexovat příspěvky, které mají "
+"určitý termín taxonomie:"
+
+#: lib/interface.php:2291 lib/interface.php:2330
+#, php-format
+msgid ""
+"For more examples, see <a href='%s'>the related knowledge base posts</a>."
+msgstr ""
+"Pro více příkladů, viz <a href='%s'>odpovídající příspěvky ve znalostní "
+"bázi</a> (v angličtině)."
+
+#: lib/interface.php:2296
+msgid "Logs"
+msgstr "Logy"
+
+#: lib/interface.php:2298
+#, php-format
+msgid ""
+"By default, the User searches page shows 20 most common keywords. In order "
+"to see more, you can adjust the value with the %s filter hook, like this:"
+msgstr ""
+"Ve výchozím nastavení stránka Uživatelská hledání zobrazuje 20 nejčastějších "
+"klíčových slov. Chcete-li vidět více, můžete upravit hodnotu pomocí filtru "
+"hook %s, například takto:"
+
+#: lib/interface.php:2300
+#, php-format
+msgid ""
+"The complete logs are stored in the %s database table, where you can access "
+"them if you need more information than what the User searches page provides."
+msgstr ""
+"Kompletní logy jsou v databázové tabulce %s, kde k nim můžete přistupovat, "
+"pokud budete potřebovat více informací, než které poskytuje stránka "
+"Uživatelská hledání."
+
+#: lib/interface.php:2307
+msgid ""
+"Building custom excerpts can be slow. If you are not actually using the "
+"excerpts, make sure you disable the option."
+msgstr ""
+"Vytváření vlastních stručných obsahů může být pomalé. Pokud vlastní stručné "
+"obsahy nepoužíváte, tuto volbu vypněte."
+
+#: lib/interface.php:2308
+#, php-format
+msgid ""
+"Custom snippets require that the search results template uses %s to print "
+"out the excerpts."
+msgstr ""
+"Vlastní úryvky vyžadují, aby šablona výsledků hledání k jejich zobrazení "
+"používala %s."
+
+#: lib/interface.php:2309
+msgid ""
+"Generally, Relevanssi generates the excerpts from post content. If you want "
+"to include custom field content in the excerpt-building, this can be done "
+"with a simple setting from the excerpt settings."
+msgstr ""
+"Relevanssi obvykle generuje stručné obsahy z obsahu příspěvků. Chcete-li do "
+"vytváření stručných obsahů zahrnout obsah vlastního pole, lze to provést "
+"jednoduchým nastavením stručných obsahů."
+
+#: lib/interface.php:2310
+#, php-format
+msgid ""
+"If you want more control over what content Relevanssi uses to create the "
+"excerpts, you can use the %s and %s filter hooks to adjust the content."
+msgstr ""
+"Chcete-li získat větší kontrolu nad tím, jaký obsah Relevanssi používá k "
+"vytvoření sručných obsahů, můžete pomocí hook filtrů %s a %s obsah upravit."
+
+#: lib/interface.php:2311
+#, php-format
+msgid ""
+"Some shortcode do not work well with Relevanssi excerpt-generation. "
+"Relevanssi disables some shortcodes automatically to prevent problems. This "
+"can be adjusted with the %s filter hook."
+msgstr ""
+"Některé zkrácené kódy nefungují v Relevanssi při vytváření stručných obsahů "
+"dobře. Relevanssi automaticky zakáže některé zkrácené kódy, aby zabránilo "
+"problémům. Toto lze nastavit pomocí hook filtru %s."
+
+#: lib/interface.php:2312
+#, php-format
+msgid ""
+"If you want Relevanssi to build excerpts faster and don't mind that they may "
+"be less than perfect in quality, add a filter that returns true on hook %s."
+msgstr ""
+"Chcete-li, aby Relevanssi vytvářelo stručné obsahy rychleji a nevadí, že "
+"mohou být trochu horší co do kvality, přidejte filtr, který vrátí hodnotu "
+"true pro hook %s."
+
+#: lib/interface.php:2318
+msgid "Highlights"
+msgstr "Zvýraznění"
+
+#: lib/interface.php:2320
+msgid ""
+"Title highlights don't appear automatically, because that led to problems "
+"with highlights appearing in wrong places and messing up navigation menus, "
+"for example."
+msgstr ""
+"Zvýraznění názvů není automatické, neboť to vedlo k problémům, kdy se "
+"zvýraznění objevovalo na nesprávných místech a mohlo například poškodit "
+"navigační menu."
+
+#: lib/interface.php:2321
+#, php-format
+msgid ""
+"In order to see title highlights from Relevanssi, replace %s in the search "
+"results template with %s. It does the same thing, but supports Relevanssi "
+"title highlights."
+msgstr ""
+"Pro zobrazení zvýraznění v Relevanssi, nahraďte %s v šabloně výsledků "
+"vyhledávání za %s. Funguje to stejně, ale pomáhá to Relevanssi názvy "
+"zvýrazňovat."
+
+#: lib/interface.php:2326
+msgid "Punctuation"
+msgstr "Interpunkce"
+
+#: lib/interface.php:2328
+msgid ""
+"Relevanssi removes punctuation. Some punctuation is removed, some replaced "
+"with spaces. Advanced indexing settings include some of the more common "
+"settings people want to change."
+msgstr ""
+"Relevanssi odstraňuje interpunkci. Některá znamínka mohou být odstraněna, "
+"jiná nahrazena mezerami. Rozšířená nastavení indexování obsahuje některá "
+"běžná nastavení, která si lidé přejí měnit."
+
+#: lib/interface.php:2329
+#, php-format
+msgid ""
+"For more fine-tuned changes, you can use %s filter hook to adjust what is "
+"replaced with what, and %s filter hook to completely override the default "
+"punctuation control."
+msgstr ""
+"Pro ještě přesnější vyladěných nastavení můžete použít hook filtr %s pro "
+"nastavení toho, co bude čím nahrazováno, a hook filtr %s pro úplné potlačení "
+"výchozího řízení interpunkce."
+
+#: lib/interface.php:2335
+msgid "Helpful shortcodes"
+msgstr "Užitečné zkrácené kódy"
+
+#: lib/interface.php:2337
+#, php-format
+msgid ""
+"If you have content that you don't want indexed, you can wrap that content "
+"in a %s shortcode."
+msgstr ""
+"Máte-li obsah, který nechcete aby byl indexován, můžete jej zabalit do "
+"zkráceného kódu %s."
+
+#: lib/interface.php:2338
+#, php-format
+msgid ""
+"If you need a search form on some page on your site, you can use the %s "
+"shortcode to print out a basic search form."
+msgstr ""
+"Potřebujete-li vyhledávací formulář na některé ze stránek na vašem webu, "
+"můžete pomocí zkráceného kódu %s zobrazit základní vyhledávací formulář."
+
+#: lib/interface.php:2339
+#, php-format
+msgid ""
+"If you need to add query variables to the search form, the shortcode takes "
+"parameters, which are then printed out as hidden input fields. To get a "
+"search form with a post type restriction, you can use %s. To restrict the "
+"search to categories 10, 14 and 17, you can use %s and so on."
+msgstr ""
+"Potřebujete-li do vyhledávácího formuláře přidat proměnné dotazu, zkrácené "
+"kódy mohou přijímat parametry, které budou zobrazeny jako skrytá vstupní "
+"pole. Pro získání vyhledávacího formuláře s omezením na typ příspěvku, "
+"můžete použít %s. Pro omezení hledání na rubrik 10, 14 a 17, můžete použít "
+"%s, a tak dále."
+
+#: lib/interface.php:2344
+msgid "WooCommerce"
+msgstr "WooCommerce"
+
+#: lib/interface.php:2346
+msgid ""
+"If your SKUs include hyphens or other punctuation, do note that Relevanssi "
+"replaces most punctuation with spaces. That's going to cause issues with SKU "
+"searches."
+msgstr ""
+"Obsahují-li vaše <acronym title=\"Stock Keepeing Unit\">SKU</acronym> "
+"pomlčky nebo jiná interpunkční znaménka, pamatujte, že Relevanssi nahrazuje "
+"většinu interpunkce mezerami. Což bude způsobovat problémy s vyhledáváním "
+"SKU."
+
+#: lib/interface.php:2347
+#, php-format
+msgid ""
+"For more details how to fix that issue, see <a href='%s'>WooCommerce tips in "
+"Relevanssi user manual</a>."
+msgstr ""
+"Pro více informací, jak vyřešit tento problém, viz <a href='%s'>Uživatelský "
+"manuál WooCommerce tipy pro Relevanssi</a> (v angličtině)."
+
+#: lib/interface.php:2351 premium/interface.php:974
+msgid "For more information:"
+msgstr "Pro více informací:"
+
+#: lib/interface.php:2352 premium/interface.php:978
+msgid "Plugin knowledge base"
+msgstr "Znalostní báze pluginu (v angličtině)"
+
+#: lib/interface.php:2353 premium/interface.php:976
+msgid "WordPress.org forum"
+msgstr "WordPress.org forum"
+
+#: lib/interface.php:2377
+msgid "Click OK to copy Relevanssi options to all subsites"
+msgstr ""
+"Klepnutím na tlačítko OK zkopírujete nastavení Relevanssi na všechny "
+"podřízené weby"
+
+#: lib/interface.php:2378
+msgid "Are you sure you want to remove all stopwords?"
+msgstr "Opravdu chcete odstranit všechna stopslova?"
+
+#: lib/interface.php:2379
+msgid "Wiping out the index..."
+msgstr "Rušení indexu..."
+
+#: lib/interface.php:2380
+msgid "Done."
+msgstr "Hotovo."
+
+#: lib/interface.php:2381
+msgid "Indexing users..."
+msgstr "Indexování uživatelů..."
+
+#: lib/interface.php:2382
+msgid "Indexing the following taxonomies:"
+msgstr "Indexování následujících taxonomií:"
+
+#: lib/interface.php:2383
+msgid "Counting posts..."
+msgstr "Počítání příspěvků..."
+
+#: lib/interface.php:2384
+msgid "Counting taxonomy terms..."
+msgstr "Počítání taxonomických výrazů..."
+
+#: lib/interface.php:2385
+msgid "Counting users..."
+msgstr "Počítání uživatelů..."
+
+#: lib/interface.php:2386
+msgid "posts found."
+msgstr "nalezených příspěvků."
+
+#: lib/interface.php:2387
+msgid "taxonomy terms found."
+msgstr "nalezených výrazů taxonomie."
+
+#: lib/interface.php:2388
+msgid "users found."
+msgstr "uživatelů nenalezeno."
+
+#: lib/interface.php:2389
+msgid "Taxonomy term indexing is disabled."
+msgstr "Indexování výrazů taxonomie je vypnuté."
+
+#: lib/interface.php:2390
+msgid "User indexing is disabled."
+msgstr "Indexování uživatelů je vypnuté."
+
+#: lib/interface.php:2391
+msgid "Indexing complete."
+msgstr "Indexování dokončeno."
+
+#: lib/interface.php:2392
+msgid "posts excluded."
+msgstr "vyloučených příspěvků."
+
+#: lib/interface.php:2393
+msgid "Settings have changed, please save the options before indexing."
+msgstr "Nastavení bylo změněno, uložte jej před spuštěním indexování."
+
+#: lib/interface.php:2394
+msgid "Reload the page to refresh the state of the index."
+msgstr "Pro obnovení stavu indexu znovu načtěte stránku."
+
+#: lib/interface.php:2395
+msgid "Are you sure you want to delete all PDF content from the index?"
+msgstr "Opravdu chcete z indexu odstranit všechen PDF obsah?"
+
+#: lib/interface.php:2396
+msgid "Relevanssi PDF data wiped clean."
+msgstr "Relevanssi PDF data vyčištěna."
+
+#: lib/interface.php:2397
+msgid "hour"
+msgstr "hodina"
+
+#: lib/interface.php:2398
+msgid "hours"
+msgstr "hodin"
+
+#: lib/interface.php:2399
+msgid "about"
+msgstr "o"
+
+#: lib/interface.php:2400
+msgid "about an hour"
+msgstr "﻿asi hodinu"
+
+#: lib/interface.php:2401
+msgid "about an hour and a half"
+msgstr "asi hodinu a půl"
+
+#: lib/interface.php:2402
+msgid "minute"
+msgstr "minuta"
+
+#: lib/interface.php:2403
+msgid "minutes"
+msgstr "minuty"
+
+#: lib/interface.php:2404
+msgid "less than a minute"
+msgstr "méně než minuta"
+
+#: lib/interface.php:2405
+msgid "we're done!"
+msgstr "jsme hotovi!"
+
+#: premium/admin-ajax.php:112
+#, php-format
+msgid "Successfully indexed attachment id %d."
+msgstr "Úspěšně indexováno %d id příloh."
+
+#: premium/admin-ajax.php:115
+#, php-format
+msgid "Failed to index attachment id %1$d: %2$s"
+msgstr "Selhala indexace přílohy id %1$d: %2$s"
+
+#: premium/admin-ajax.php:190
+msgid "Attachment ID"
+msgstr "ID přílohy"
+
+#: premium/admin-ajax.php:247 premium/admin-ajax.php:251
+#, php-format
+msgid "%1$d taxonomy term, total %2$d / %3$d."
+msgstr "%1$d výraz taxonomie, celkem %2$d / %3$d."
+
+#: premium/admin-ajax.php:319
+#, php-format
+msgid "Indexed %1$d user (total %2$d), processed %3$d / %4$d."
+msgstr "Indexován %1$d uživatel (celkem %2$d), zpracováno %3$d / %4$d."
+
+#: premium/indexing.php:1052
+#, php-format
+msgid "Indexed %d taxonomy terms."
+msgstr "Indexováno %d výrazů taxonomie."
+
+#: premium/indexing.php:1054
+msgid "No taxonomies to index."
+msgstr "Žádné taxonomie k indexování."
+
+#: premium/interface.php:25 premium/interface.php:38
+msgid "API key"
+msgstr "API klíč"
+
+#: premium/interface.php:28
+msgid "API key is set"
+msgstr "API klíč je nastaven"
+
+#: premium/interface.php:29
+msgid "Remove the API key."
+msgstr "Odstranit API klíč."
+
+#: premium/interface.php:30 premium/interface.php:43
+msgid ""
+"A valid API key is required to use the automatic update feature and the PDF "
+"indexing. Otherwise the plugin will work just fine without an API key. Get "
+"your API key from Relevanssi.com."
+msgstr ""
+"Platný API klíč je potřeba pro funkce automatických aktualizací a indexaci "
+"PDF. Plugin však bude správně fungovat i bez API klíče. Svůj API klíč "
+"získáte na Relevanssi.com."
+
+#: premium/interface.php:41
+msgid "Set the API key:"
+msgstr "Nastavit API klíč:"
+
+#: premium/interface.php:63 premium/interface.php:138 premium/interface.php:944
+msgid "Internal links"
+msgstr "Interní odkazy"
+
+#: premium/interface.php:67
+msgid "No special processing for internal links"
+msgstr "Žádné zvláštní zpracování interních odkazů"
+
+#: premium/interface.php:68
+msgid "Index internal links for target documents only"
+msgstr "Indexovat interní odkazy pouze pro cílové dokumenty"
+
+#: premium/interface.php:69
+msgid "Index internal links for both target and source"
+msgstr "Indexovat interní odkazy pro cílové i zdrojové dokumenty"
+
+#: premium/interface.php:71
+msgid ""
+"Internal link anchor tags can be indexed for target document, both target "
+"and source or source only. See Help for more details."
+msgstr ""
+"Při zpracování interního odkazu může být indexován buď jen cílový dokument, "
+"cíl i zdroj, nebo pouze zdroj. Podrobnější informace naleznete v nápovědě."
+
+#: premium/interface.php:95
+msgid "Hide Relevanssi"
+msgstr "Skrytí Relevanssi"
+
+#: premium/interface.php:99 premium/interface.php:102
+msgid "Hide Relevanssi on edit pages"
+msgstr "Skrýt Relevanssi na stránce úprav příspěvku"
+
+#: premium/interface.php:105
+msgid "Enabling this option hides Relevanssi on all post edit pages."
+msgstr ""
+"Zapnutí této funkce skryje Relevanssi na všech stránkách úprav příspěvku."
+
+#: premium/interface.php:110
+msgid "Show Relevanssi for admins"
+msgstr "Zobrazení Relevanssi pro adminy"
+
+#: premium/interface.php:114
+msgid "Show Relevanssi for admins on edit pages"
+msgstr "Adminům při úpravě stránky Relevanssi zobrazovat"
+
+#: premium/interface.php:117
+msgid "Show Relevanssi on edit pages for admins"
+msgstr "Pro adminy Relevanssi na stránce úprav příspěvku zobrazovat"
+
+#: premium/interface.php:121
+#, php-format
+msgid ""
+"If Relevanssi is hidden on post edit pages, enabling this option will show "
+"Relevanssi features for admin-level users. Admin-level users are those with "
+"%1$s capabilities, but if you want to use a different capability, you can "
+"use the %2$s filter to modify that."
+msgstr ""
+"Pokud je Relevanssi na stránce úprav příspěvku skryto, zapnutí této možnosti "
+"zobrazí nastavení Relevanssi pro uživatele s úrovní oprávnění administrátor. "
+"Administrátoři mají oprávnění %1$s , ale pokud chcete použít jiné oprávnění, "
+"lze pro to využít filtr %2$s."
+
+#: premium/interface.php:169
+#, php-format
+msgid "Post type '%s':"
+msgstr "Typ příspěvku '%s':"
+
+#: premium/interface.php:204
+#, php-format
+msgid "Taxonomy '%s':"
+msgstr "Taxonomie '%s':"
+
+#: premium/interface.php:230
+msgid "Recent posts bonus weight:"
+msgstr "Bonus nedávného příspěvku:"
+
+#: premium/interface.php:250
+msgid "Recent posts bonus cutoff"
+msgstr "Stáří nedávného příspěvku"
+
+#: premium/interface.php:253
+msgid "days"
+msgstr "dní"
+
+#: premium/interface.php:254
+msgid ""
+"Posts newer than the day cutoff specified here will have their weight "
+"multiplied with the bonus above."
+msgstr ""
+"Příspěvky novější než uvedený počet dní budou mít svou váhu násobeny bonusem "
+"výše."
+
+#: premium/interface.php:271
+msgid "Hide Relevanssi branding"
+msgstr "Skrytí branding Relevanssi"
+
+#: premium/interface.php:276 premium/interface.php:280
+#, php-format
+msgid "Don't show Relevanssi branding on the '%s' screen."
+msgstr "Nezobrazovat Relevanssi branding na stránce '%s' ."
+
+#: premium/interface.php:300
+msgid "Highlight from external searches"
+msgstr "Zvýraznění z externích vyhledávání"
+
+#: premium/interface.php:304 premium/interface.php:313
+msgid "Highlight query terms in documents from external searches"
+msgstr "Zvýraznit v dokumentech všechny hledané výrazy z externího vyhledávání"
+
+#: premium/interface.php:316
+msgid ""
+"Highlights hits when user arrives from an external search. Currently "
+"supports Bing, Ask, Yahoo and AOL Search. Google hides the keyword "
+"information."
+msgstr ""
+"Zvýrazní shody pokud uživatel přichází z externího vyhledávání. Aktuálně "
+"jsou podporovány vyhledávače Bing, Ask, Yahoo a AOL. Google informaci o "
+"klíčovém slově skrývá."
+
+#: premium/interface.php:333
+msgid "Thousands separator"
+msgstr "Oddělovač tisíce"
+
+#: premium/interface.php:337
+msgid ""
+"If Relevanssi sees this character between numbers, it'll stick the numbers "
+"together no matter how the character would otherwise be handled. Especially "
+"useful if a space is used as a thousands separator."
+msgstr ""
+"Pokud Relevanssi najde tento znak mezi čísly, bude čísla z obou stran "
+"považovat za jediné, bez ohledu na to, jak by byl jinak tento znak "
+"zpracován. Zvláště užitečné, když je jako oddělovač tisíců použita mezera."
+
+#: premium/interface.php:354
+msgid "Disable these shortcodes"
+msgstr "Vypnout tyto zkrácené kódy"
+
+#: premium/interface.php:358
+msgid ""
+"Enter a comma-separated list of shortcodes. These shortcodes will not be "
+"expanded if expand shortcodes above is enabled. This is useful if a "
+"particular shortcode is causing problems in indexing."
+msgstr ""
+"Vložte čárkami oddělený seznam zkrácených kódů. I když je zpracování "
+"zkrácených kódů zapnuto, tyto zkrácené kódy zpracovány nebudou. To je "
+"užitečné, pokud při indexování způsobuje problémy nějaký konkrétní zkrácený "
+"kód."
+
+#: premium/interface.php:389
+msgid "MySQL columns"
+msgstr "MySQL sloupce"
+
+#: premium/interface.php:396
+#, php-format
+msgid ""
+"A comma-separated list of %s MySQL table columns to include in the index. "
+"Following columns are available: "
+msgstr ""
+"Čárkami oddělený seznam sloupců MySQL tabulky %s, které mají být zahrnuty do "
+"indexu. K dispozici jsou následující sloupce: "
+
+#: premium/interface.php:418 premium/interface.php:425
+msgid "Search all subsites"
+msgstr "Prohledávat všechny sub-weby"
+
+#: premium/interface.php:422
+msgid "Search all subsites."
+msgstr "Prohledávat všechny sub-weby."
+
+#: premium/interface.php:427
+msgid ""
+"If this option is checked, multisite searches will include all subsites. "
+"Warning: if you have dozens of sites in your network, the searches may "
+"become too slow. This can be overridden from the search form."
+msgstr ""
+"Je-li tato volba zaškrtnuta, multisite vyhledávání bude zahrnovat všechny "
+"sub-weby. Upozornění: pokud máte v síti desítky webů, vyhledávání se může "
+"velmi zpomalit. Toto může být přetíženo z vyhledávacího formuláře."
+
+#: premium/interface.php:433
+msgid "Search some subsites"
+msgstr "Prohledávat některé sub-weby"
+
+#: premium/interface.php:443
+msgid ""
+"Add a comma-separated list of blog ID values to have all search forms on "
+"this site search these multisite subsites. This can be overridden from the "
+"search form."
+msgstr ""
+"Přidejte čárkami oddělený seznam hodnot ID webů, aby všechny vyhledávací "
+"formuláře na tomto webu vyhledávaly tyto multisite sub-weby. Toto může být "
+"přetíženo z vyhledávacího formuláře."
+
+#: premium/interface.php:465
+msgid "Indexing user profiles"
+msgstr "Indexování uživatelských profilů"
+
+#: premium/interface.php:470
+msgid "Index user profiles"
+msgstr "Indexace uživatelských profilů"
+
+#: premium/interface.php:474 premium/interface.php:477
+msgid "Index user profiles."
+msgstr "Indexovat uživatelské profily."
+
+#: premium/interface.php:479
+msgid ""
+"Relevanssi will index user profiles. This includes first name, last name, "
+"display name and user description."
+msgstr ""
+"Relevanssi bude indexovat Uživatelské profily. To zahrnuje Jméno, Příjmení, "
+"Veřejně zobrazovat jako a Osobní informace."
+
+#: premium/interface.php:480
+msgid ""
+"This may require changes to search results template, see the contextual help."
+msgstr ""
+"Toto může vyžadovat změnu v šabloně výsledků vyhledávání, viz kontextová "
+"nápověda."
+
+#: premium/interface.php:486
+msgid "Index subscribers"
+msgstr "Indexace odběratelů"
+
+#: premium/interface.php:490 premium/interface.php:493
+msgid "Index also subscriber profiles."
+msgstr "Indexovat také profily odběratelů."
+
+#: premium/interface.php:495
+msgid ""
+"By default, Relevanssi indexes authors, editors, contributors and admins, "
+"but not subscribers. You can change that with this option."
+msgstr ""
+"Ve výchozím nastavení Relevanssi indexuje autory, editory, přispěvatele a "
+"administrátory, ale ne odběratele. Toto zde můžete změnit."
+
+#: premium/interface.php:502
+msgid "Extra fields"
+msgstr "Zvláštní pole"
+
+#: premium/interface.php:506
+msgid ""
+"A comma-separated list of extra user fields to include in the index. These "
+"can be user fields or user meta."
+msgstr ""
+"Čárkami oddělený seznam dalších uživatelských polí, která lze zahrnout do "
+"indexu. Mohou to být uživatelská pole nebo meta data."
+
+#: premium/interface.php:522
+msgid "Indexing synonyms"
+msgstr "Indexování synonym"
+
+#: premium/interface.php:526
+msgid "Index synonyms"
+msgstr "Indexace synonym"
+
+#: premium/interface.php:530 premium/interface.php:533
+msgid "Index synonyms for AND searches."
+msgstr "Indexovat synonyma pro AND hledání."
+
+#: premium/interface.php:536
+msgid ""
+"If checked, Relevanssi will use the synonyms in indexing. If you add "
+"<code>dog = hound</code> to the synonym list and enable this feature, every "
+"time the indexer sees <code>hound</code> in post content or post title, it "
+"will index it as <code>hound dog</code>. Thus, the post will be found when "
+"searching with either word. This makes it possible to use synonyms with AND "
+"searches, but will slow down indexing, especially with large databases and "
+"large lists of synonyms. This only works for post titles and post content. "
+"You can use multi-word keys and values, but phrases do not work."
+msgstr ""
+"Je-li zaškrtnuto, Relevanssi při indexování použije synonyma. Přidáte-li do "
+"seznamu synonym <code>pes = ohař</code> a zapnete tuto funkci, pokaždé když "
+"Indexer uvidí v obsahu nebo názvu příspěvku <code>ohař</code>, zaindexuje "
+"jej jako <code>ohař pes</code>. Příspěvek tak bude nalezen hledáním "
+"kteréhokoli z páru slov. Toto umožní použití synonym s AND hledáním, ale "
+"zpomalí indexování, zvláště u velké databáze a s velkým, seznamem synonym. "
+"Toto funguje pouze s názvy a obsahy příspěvků. Můžete použít víceslovné "
+"klíče a hodnoty, ale fráze nefungují."
+
+#: premium/interface.php:555
+msgid "Indexing PDF content"
+msgstr "Indexování obsahu PDF"
+
+#: premium/interface.php:560
+msgid "Index for parent"
+msgstr "Indexace rodiče"
+
+#: premium/interface.php:564 premium/interface.php:567
+msgid "Index PDF contents for parent post"
+msgstr "Indexovat obsah PDF u rodičovského příspěvku"
+
+#: premium/interface.php:570
+#, php-format
+msgid ""
+"If checked, Relevanssi indexes the PDF content both for the attachment post "
+"and the parent post. You can control the attachment post visibility by "
+"indexing or not indexing the post type %s."
+msgstr ""
+"Je-li zaškrtnuto, Relevanssi indexuje PDF obsah jak připojeného příspěvku "
+"tak i rodičovského příspěvku. Viditelnost připojeného příspěvku lze nastavit "
+"indexováním nebo neindexováním typu příspěvku %s."
+
+#: premium/interface.php:573
+#, php-format
+msgid ""
+"You have not chosen to index the post type %s. You won't see any PDF content "
+"in the search results, unless you check this option."
+msgstr ""
+"Nepovolili jste indexaci typu příspěvku %s. Dokud tuto volbu neaktivujete, "
+"ve výsledcích vyhledávání neuvidíte žádný obsah PDF."
+
+#: premium/interface.php:577
+msgid ""
+"Searching for PDF contents will now return both the attachment itself and "
+"the parent post. Are you sure you want both in the results?"
+msgstr ""
+"Vyhledání PDF obsahu nyní vrátí samotnou přílohu i jí rodičovský příspěvek. "
+"Opravdu chcete ve výsledcích obojí?"
+
+#: premium/interface.php:601
+msgid "Indexing taxonomy terms"
+msgstr "Indexování výrazů taxonomie"
+
+#: premium/interface.php:606
+msgid "Index taxonomy terms"
+msgstr "Indexace výrazů taxonomie"
+
+#: premium/interface.php:610 premium/interface.php:613
+msgid "Index taxonomy terms."
+msgstr "Indexovat výrazy taxonomie."
+
+#: premium/interface.php:615
+msgid ""
+"Relevanssi will index taxonomy terms (categories, tags and custom "
+"taxonomies). Searching for taxonomy term name will return the taxonomy term "
+"page."
+msgstr ""
+"Relevanssi bude indexovat výrazy taxonomie (rubriky, štítky, a vlastní "
+"taxonomie). Hledání jména výrazu taxonomie vrátí stránku výrazu taxonomie."
+
+#: premium/interface.php:682
+msgid "Import or export options"
+msgstr "Možnosti importu a exportu"
+
+#: premium/interface.php:684
+msgid ""
+"Here you find the current Relevanssi Premium options in a text format. Copy "
+"the contents of the text field to make a backup of your settings. You can "
+"also paste new settings here to change all settings at the same time. This "
+"is useful if you have default settings you want to use on every system."
+msgstr ""
+"Zde najdete aktuální nastavení Relevanssi Premium v textovém formátu. "
+"Zkopírujte obsah textového pole, jako zálohu vašeho nastavení. Můžete zde "
+"také vložit nové nastavení pro změnu všech parametrů najednou. To je "
+"užitečné, pokud chcete mít výchozí nastavení, které chcete použít na vícero "
+"systémech."
+
+#: premium/interface.php:688
+msgid "Current Settings"
+msgstr "Aktuální nastavení"
+
+#: premium/interface.php:692
+msgid "Import settings"
+msgstr "Importovat nastavení"
+
+#: premium/interface.php:697
+msgid ""
+"Note! Make sure you've got correct settings from a right version of "
+"Relevanssi. Settings from a different version of Relevanssi may or may not "
+"work and may or may not mess your settings."
+msgstr ""
+"Poznámka! Ujistěte se, že máte správné nastavení ze správné verze "
+"Relevanssi. Nastavení z jiné verze Relevanssi může nebo nemusí fungovat a "
+"může nebo nemusí pokazit vaše nastavení."
+
+#: premium/interface.php:724
+msgid "Read all unread PDFs"
+msgstr "Načíst všechna nenačtená PDFka"
+
+#: premium/interface.php:729
+#, php-format
+msgid ""
+"Clicking the button will read the contents of all the unread PDF files and "
+"store the contents to the %s custom field for future indexing. PDF files "
+"with errors will be skipped, except for the files with timeout and "
+"connection related errors: those will be attempted again."
+msgstr ""
+"Kliknutím na tlačítko se načtou všechny nenačtené PDF soubory a jejich obsah "
+"bude uložen do vlastního pole %s pro následné indexování. Chybující PDF "
+"soubory budou přeskočeny, s výjimkou takových chyb, které souvisejí s "
+"vypršením času či připojením; tyto budou vyzkušeny znova."
+
+#: premium/interface.php:737
+msgid "State of the PDFs"
+msgstr "Stav PDFek"
+
+#: premium/interface.php:752
+msgid "document has read PDF content."
+msgstr "dokument má načtený PDF obsah."
+
+#: premium/interface.php:753
+msgid "document has a PDF reading error."
+msgstr "dokument má chybu PDF načtení."
+
+#: premium/interface.php:755
+msgid "Show PDF errors"
+msgstr "Zobrazit PDF chyby"
+
+#: premium/interface.php:761
+msgid "Reset PDF content"
+msgstr "Resetování PDF obsahu"
+
+#: premium/interface.php:763
+msgid "Reset all PDF data from posts"
+msgstr "Resetovat všechna PDF data z příspěvků"
+
+#: premium/interface.php:765
+#, php-format
+msgid ""
+"This will remove all %1$s and %2$s custom fields from all posts. If you want "
+"to reread all PDF files, use this to clean up; clicking the reading button "
+"doesn't wipe the slate clean like it does in regular indexing."
+msgstr ""
+"Toto odstraní všechna %1$s a %2$s vlastní pole ze všech příspěvků. Chcete-li "
+"znovu načíst všechny PDF soubory, toto použijte pro vyčištění; kliknutím na "
+"tlačítko Načtení se neprovede promazání stavu tak, jak se tomu děje při "
+"normálním indexovaní."
+
+#: premium/interface.php:770
+msgid "Read new files"
+msgstr "Načítání nových souborů"
+
+#: premium/interface.php:774 premium/interface.php:777
+msgid "Read new files automatically"
+msgstr "Automaticky načítat nové soubory"
+
+#: premium/interface.php:779
+msgid ""
+"If this option is enabled, Relevanssi will automatically read the contents "
+"of new attachments as they are uploaded. This may cause unexpected delays in "
+"uploading posts. If this is not enabled, new attachments are not read "
+"automatically and need to be manually read and reindexed."
+msgstr ""
+"Je-li tato volba aktivní, Relevanssi bude načítat obsah nových příloh, "
+"jakmile budou nahrány. To může nečekaně způsobit zpomalení nahrávání příloh. "
+"Není-li aktivní, příloh nejsou načítány automaticky a je třeba je načíst a "
+"indexovat ručně."
+
+#: premium/interface.php:785
+msgid "Upload PDF files"
+msgstr "Nahrání PDF souborů"
+
+#: premium/interface.php:789 premium/interface.php:792
+msgid "Upload PDF files for reading"
+msgstr "Nahrávat PDF soubory k načtení"
+
+#: premium/interface.php:794
+msgid ""
+"By default, Relevanssi only sends a link to the PDF to the PDF reader. If "
+"your PDFs are not accessible (for example your site is inside an intranet, "
+"password protected, or a local dev site, and the PDF files can't be "
+"downloaded if given the URL of the file), check this option to upload the "
+"whole file to the reader."
+msgstr ""
+"Ve výchozím nastavení Relevanssi, pro načtení PDF souboru, odesílá pouze "
+"odkaz k němu. Nejsou-li vaše PDF dostupná, (například je váš web uvnitř "
+"intranetu, chráněn heslem, nebo na lokálním vývojovém prostředí a PDF "
+"soubory tak nemohou být pomocí daného odkazu staženy), zatrhněte toto "
+"políčko, aby se nahrával celý jejich obsah."
+
+#: premium/interface.php:800
+msgid "Link to PDFs"
+msgstr "Odkazování k PDFkům"
+
+#: premium/interface.php:804 premium/interface.php:807
+msgid "Link search results directly to PDF files"
+msgstr "Odkazovat ve výsledcích vyhledávání přímo k PDF souborům"
+
+#: premium/interface.php:809
+msgid ""
+"If this option is checked, attachment results in search results will link "
+"directly to the PDF file. Otherwise the results will link to the attachment "
+"page."
+msgstr ""
+"Je-li tato volba zaškrtnuta, nalezená příloha ve výsledku vyhledávání bude "
+"odkazovat přímo na PDF soubor. Jinak bude výsledek odkazovat na stránku, ke "
+"které je tato příloha připojena."
+
+#: premium/interface.php:812
+#, php-format
+msgid ""
+"You're not indexing the %s post type, so this setting doesn't have any "
+"effect."
+msgstr "Neindexujete příspěvky typu %s, takže toto nastavení nemá žádný vliv."
+
+#: premium/interface.php:816
+#, php-format
+msgid ""
+"You're not indexing the %s post type and haven't connected the PDFs to the "
+"post parents in the indexing settings. You won't be seeing any PDFs in the "
+"results."
+msgstr ""
+"Neindexujete příspěvky typu %s, a nenastavili jste v nastavení indexování "
+"vazbu mezi PDF souborem a rodičovskou stránkou. Ve výsledcích vyhledávání "
+"tak žádná PDFka neuvidíte."
+
+#: premium/interface.php:822
+msgid "Instructions"
+msgstr "Instrukce"
+
+#: premium/interface.php:825
+#, php-format
+msgid ""
+"When Relevanssi reads attachment content, the text is extracted and saved in "
+"the %s custom field for the attachment post. This alone does not add the "
+"attachment content in the Relevanssi index; it just makes the contents of "
+"the attachments easily available for the regular Relevanssi indexing process."
+msgstr ""
+"Když Relevanssi načte obsah přílohy, text se extrahuje a uloží do "
+"uživatelského pole %s pro příspěvek příloha. Toto samo o sobě nepřidává "
+"obsah přílohy do Relevanssi indexu; pouze obsah přílohy zpřístupňuje pro "
+"snadnější dostupnost pro standardní proces indexování Relevanssi."
+
+#: premium/interface.php:827
+#, php-format
+msgid ""
+"There are two ways to index the attachment content. If you choose to index "
+"the %s post type, Relevanssi will show the attachment posts in the results."
+msgstr ""
+"Existují dva způsoby jak indexovat obsah přílohy. Pokud se rozhodnete "
+"indexovat typ příspěvku %s, Relevanssi zobrazí ve výsledcích přílohy "
+"příspěvků."
+
+#: premium/interface.php:828
+msgid ""
+"You can also choose to index the attachment content for the parent post, in "
+"which case Relevanssi will show the parent post in the results (this setting "
+"can be found on the indexing settings). Obviously this does not find the "
+"content in attachments that are not attached to another post – if you just "
+"upload a file to the WordPress Media Library, it is not attached and won't "
+"be found unless you index the attachment posts."
+msgstr ""
+"Můžete také zvolit indexování obsahu přílohy pro rodičovský příspěvek, v "
+"takovém případě bude Relevanssi ve výsledcích zobrazovat rodičovský "
+"příspěvek (tuto možnost lze nalézt v nastavení indexování). Je zřejmé, že "
+"nebude nalezen obsah přílohy, která není připojena k žádnému příspěvku - "
+"pokud jen nahrajete soubor do knihovny WordPress Media Library, nebude "
+"připojen, a tak nebude nalezen, dokud nezaindexujete příspěvky příloh."
+
+#: premium/interface.php:829
+msgid ""
+"In any case, in order to see attachments in the results, you must read the "
+"attachment content here first, then build the index on the Indexing tab."
+msgstr ""
+"V každém případě, abyste viděli přílohy ve výsledcích, musíte zde nejprve "
+"načíst obsah přílohy a poté na záložce Indexování vytvořit index."
+
+#: premium/interface.php:830
+msgid ""
+"If you need to reread a PDF file, you can do read individual PDF files from "
+"Media Library. Choose an attachment and click 'Edit more details' to read "
+"the PDF content."
+msgstr ""
+"Potřebujete-li znovu načíst PDF soubor, můžete jej načíst jednotlivě z "
+"knihovny médií. Vyberte přílohu a klepnutím na &#8222;Upravit další "
+"informace&#8220;, poté načtěte jeho PDF obsah."
+
+#: premium/interface.php:834
+msgid "Key not valid?"
+msgstr "Neplatný klíč?"
+
+#: premium/interface.php:836
+msgid ""
+"Are you a new Relevanssi customer and seeing 'Key xxxxxx is not valid' error "
+"messages? New API keys are delivered to the PDF server once per hour, so if "
+"try again an hour later, the key should work."
+msgstr ""
+"Jste novým zákazníkem Relevanssi a vidíte chybu &#8222; Klíč xxxxxx není "
+"platný&#8220;? Nové API klíče bývají na PDF server ukládány jedenkrát za "
+"hodinu. Pokud to tedy zkusíte o hodinu později, mělo by to již fungovat."
+
+#: premium/interface.php:840
+msgid "Important!"
+msgstr "Důležité!"
+
+#: premium/interface.php:842
+msgid ""
+"In order to read the contents of the PDFs, the files are sent over to "
+"Relevanssiservices.com, a PDF processing service hosted on a Digital Ocean "
+"Droplet in the USA. The service creates a working copy of the files. The "
+"copy is removed after the file has been processed, but there are no "
+"guarantees that someone with an access to the server couldn't see the files. "
+"Do not read files with confidential information in them. In order to block "
+"individual files from reading, use the Relevanssi post controls on "
+"attachment edit page to exclude attachment posts from indexing."
+msgstr ""
+"Aby mohl být obsah PDF souborů načítán, jsou sobory odesílány "
+"prostřednictvím Relevanssiservices.com a jsou zpracovávány hostovanou "
+"službou Digital Ocean Droplet v USA. Služba vytváří pracovní kopii souborů. "
+"Poté, co je soubor zpracován, je kopie odstraněna, neexistuje však záruka, "
+"že by někdo s přístupem k serveru nemohl obsah souborů vidět. Nenechávejte "
+"načítat soubory s důvěrným obsahem."
+
+#: premium/interface.php:865
+msgid "Relevanssi post controls"
+msgstr "Relevanssi nastavení příspěvku"
+
+#: premium/interface.php:896
+msgid "Exclude this post or page from the index."
+msgstr "Vyloučit tento příspěvek nebo stránku z indexu."
+
+#: premium/interface.php:899
+msgid "Pin this post"
+msgstr "Upřednostnit tento příspěvek"
+
+#: premium/interface.php:900
+msgid ""
+"A comma-separated list of single word keywords or multi-word phrases. If any "
+"of these keywords are present in the search query, this post will be moved "
+"on top of the search results."
+msgstr ""
+"Čárkami oddělený seznam jednotlivých slov, nebo víceslovných frází. Pokud "
+"kterékoli z těchto slov bude součástí vyhledávaného řetězce, tento příspěvek "
+"bude umístěn na vrcholu výsledků vyhledávání."
+
+#: premium/interface.php:903
+msgid "Exclude this post"
+msgstr "Vynechat tento příspěvek"
+
+#: premium/interface.php:904
+msgid ""
+"A comma-separated list of single word keywords or multi-word phrases. If any "
+"of these keywords are present in the search query, this post will be removed "
+"from the search results."
+msgstr ""
+"Čárkami oddělený seznam jednotlivých slov, nebo víceslovných frází. Pokud "
+"kterékoli z těchto slov bude součástí vyhledávaného řetězce, tento příspěvek "
+"bude z výsledků vyhledávání odstraněn."
+
+#: premium/interface.php:918
+msgid "Boolean operators"
+msgstr "Boolean operátory"
+
+#: premium/interface.php:920
+msgid ""
+"Relevanssi Premium offers limited support for Boolean logic. In addition of "
+"setting the default operator from Relevanssi settings, you can use AND and "
+"NOT operators in searches."
+msgstr ""
+"Relevanssi Premium nabízí omezenou podporu Boolean logiky. Kromě nastavení "
+"výchozích operátorů v Relevanssi nastavení, můžete při hledání použít také "
+"operátory AND a NOT."
+
+#: premium/interface.php:921
+msgid "To use the NOT operator, prefix the search term with a minus sign:"
+msgstr "Pro použití operátoru NOT, uveďte před výrazem znaménko mínus:"
+
+#: premium/interface.php:922
+msgid "cats -dogs"
+msgstr "kočky -psy"
+
+#: premium/interface.php:923
+msgid ""
+"This would only show posts that have the word 'cats' but not the word 'dogs'."
+msgstr ""
+"Toto zobrazí pouze příspěvky, které obsahují slovo &#8222;kočky&#8220;, "
+"nikoliv slovo &#8222;psi&#8220;."
+
+#: premium/interface.php:924
+msgid ""
+"To use the AND operator, set the default operator to OR and prefix the "
+"search term with a plus sign:"
+msgstr ""
+"Pro použití operátoru AND, nastavte výchozí operátor OR a před výrazem "
+"uveďte znaménko plus:"
+
+#: premium/interface.php:925
+msgid "+cats dogs mice"
+msgstr "+kočky psy myši"
+
+#: premium/interface.php:926
+msgid ""
+"This would show posts that have the word 'cats' and either 'dogs' or 'mice' "
+"or both, and would prioritize posts that have all three."
+msgstr ""
+"Toto zobrazí příspěvky, které obsahují &#8222;kočky&#8220; a buď &#8222;"
+"psy&#8220;, nebo &#8222;myši&#8220;, anebo obojí. Upřednostněny budou ty, "
+"které obsahují všechny tři."
+
+#: premium/interface.php:931
+msgid "User profiles"
+msgstr "Uživatelské profily"
+
+#: premium/interface.php:934
+#, php-format
+msgid ""
+"Permalinks to user profiles may not always work on search results templates. "
+"%1$s should work, but if it doesn't, you can replace it with %2$s."
+msgstr ""
+"Permanentní odkaz k uživatelským profilům ne vždy se šablonou výsledků "
+"vyhledávání funguje. %1$s by měl fungovat, pokud ne, lze jej nahradit %2$s."
+
+#: premium/interface.php:936
+#, php-format
+msgid ""
+"To control which user meta fields are indexed, you can use the %s option. It "
+"should have a comma-separated list of user meta fields. It can be set like "
+"this (you only need to run this code once):"
+msgstr ""
+"Pro nastavení toho, která meta pole uživatelů budou indexována, můžete "
+"použít nastavení %s. Jedná se o čárkami oddělený seznam uživatelských meta "
+"polí (tento kód je třeba spustit pouze jednou):"
+
+#: premium/interface.php:939
+#, php-format
+msgid ""
+"For more details on user profiles and search results templates, see <a "
+"href='%s'>this knowledge base entry</a>."
+msgstr ""
+"Pro více informací o uživatelských profilech a šablonách výsledků "
+"vyhledávání, viz <a href='%s'>tento záznam znalostní báze</a> (v angličtině)."
+
+#: premium/interface.php:946
+msgid ""
+"This option sets how Relevanssi handles internal links that point to your "
+"own site."
+msgstr ""
+"Toto nastavení určuje jak bude Relevanssi zpracovávat odkazy vedoucí na "
+"vlastní web."
+
+#: premium/interface.php:947
+msgid ""
+"If you choose 'No special processing', Relevanssi doesn’t care about links "
+"and indexes the link anchor (the text of the link) like it is any other text."
+msgstr ""
+"Pokud zvolíte &#8222;Žádné zvláštní zpracování interních odkazů&#8220;, "
+"Relevanssi se o odkazy nebude starat a zaindexuje vazbu (text odkazu) jako "
+"jakýkoli jiný text."
+
+#: premium/interface.php:948
+msgid ""
+"If you choose 'Index internal links for target documents only', then the "
+"link is indexed like the link anchor text were the part of the link target, "
+"not the post where the link is."
+msgstr ""
+"Pokud zvolíte &#8222;Indexovat interní odkazy pouze pro cílové "
+"dokumenty&#8220; bude odkaz indexován jako vazba textu k cíli, nikoli "
+"příspěvek kde se odkaz nachází."
+
+#: premium/interface.php:949
+msgid ""
+"If you choose 'Index internal links for target and source', the link anchor "
+"text will count for both posts."
+msgstr ""
+"Pokud zvolíte &#8222;Indexovat interní odkazy pro cílové i zdrojové "
+"dokumenty&#8220; pak se vazba odkazu bude počítat do obou příspěvků."
+
+#: premium/interface.php:954
+msgid "Stemming"
+msgstr "Ořezávání"
+
+#: premium/interface.php:956
+msgid ""
+"By default Relevanssi doesn't understand anything about singular word forms, "
+"plurals or anything else. You can, however, add a stemmer that will stem all "
+"the words to their basic form, making all different forms equal in searching."
+msgstr ""
+"Ve výchozím nastavení Relevanssi nerozumí ničemu ohledně forem jednotných či "
+"množných čísel slov. Můžete však slova ořezat na jejich kořen a postavit je "
+"tak pro vyhledávání sobě na roveň."
+
+#: premium/interface.php:957
+msgid ""
+"To enable the English-language stemmer, add this to the theme functions.php:"
+msgstr ""
+"Pro aktivaci ořezávače pro anglický jazyk přidejte tento kód do functions."
+"php šablony:"
+
+#: premium/interface.php:959
+msgid "After you add the code, rebuild the index to get correct results."
+msgstr ""
+"Přidáte-li kód, vytvořte index znovu, abyste získávali správné výsledky."
+
+#: premium/interface.php:964
+msgid "WP CLI"
+msgstr "WP CLI"
+
+#: premium/interface.php:967
+#, php-format
+msgid ""
+"If you have WP CLI installed, Relevanssi Premium has some helpful commands. "
+"Use %s to get a list of available commands."
+msgstr ""
+"Máte-li instalováno WP CLI, Relevanssi Premium má nějaké užitečné funkce. "
+"Pro seznam dostupných příkazů použijte %s."
+
+#: premium/interface.php:969
+#, php-format
+msgid "You can also see %1$sthe user manual page%2$s."
+msgstr ""
+"Můžete také navštívit %1$sstránku s Uživatelským manuálem%2$s (v angličtině)."
+
+#: premium/interface.php:975
+msgid "Plugin support page"
+msgstr "Stránka podpory pluginu"
+
+#: premium/interface.php:1050
+msgid "Options updated!"
+msgstr "Nastavení bylo aktualizováno!"
+
+#: premium/interface.php:1350
+msgid "Relevanssi network options"
+msgstr "Relevanssi nastavení sítě"
+
+#: premium/interface.php:1385
+msgid "Copy options from one site to other sites"
+msgstr "Kopírovat nastavení z jednoho webu na ostatní"
+
+#: premium/interface.php:1386
+msgid ""
+"Choose a blog and copy all the options from that blog to all other blogs "
+"that have active Relevanssi Premium. Be careful! There's no way to undo the "
+"procedure!"
+msgstr ""
+"Vyberte web a zkopírujte všechna nastavení z tohoto webu na všechny ostatní, "
+"které mají aktivováno Relevanssi Premium. Buďte opatrní! Tento proces nelze "
+"vrátit zpět!"
+
+#: premium/interface.php:1393
+msgid "Copy options"
+msgstr "Kopírovat nastavení"
+
+#: premium/interface.php:1411
+msgid "Copy options to all other subsites"
+msgstr "Kopírovat nastavení na všechny sub-weby"
+
+#: premium/interface.php:1462
+#, php-format
+msgid "Copying options from blog %s"
+msgstr "Kopírování nastavení z webu %s"
+
+#: premium/interface.php:1478
+#, php-format
+msgid "Processing blog %s:"
+msgstr "Zpracovává se web %s:"
+
+#: premium/interface.php:1480
+msgid "Relevanssi is not active in this blog."
+msgstr "Relevanssi není pro tento web aktivováno."
+
+#: premium/interface.php:1491
+msgid "Options updated."
+msgstr "Nastavení aktualizováno."
+
+#: premium/pdf-upload.php:108
+msgid "Relevanssi PDF controls"
+msgstr "Relevanssi nastavení PDF"
+
+#: premium/pdf-upload.php:128
+msgid "Index PDF content"
+msgstr "Indexování obsahu PDF"
+
+#: premium/pdf-upload.php:132
+msgid "Indexer will fetch the file from your server."
+msgstr "Indexer načte soubor z vašeho serveru."
+
+#: premium/pdf-upload.php:135
+msgid "The file will be uploaded to the indexer."
+msgstr "Soubor bude nahrán na Indexer."
+
+#: premium/pdf-upload.php:139
+msgid "No API key set. API key is required for PDF indexing."
+msgstr "API klíč nebyl nastaven. API klíč je nezbytný pro indexování PDF."
+
+#: premium/pdf-upload.php:146
+msgid "PDF Content"
+msgstr "Obsah PDF"
+
+#: premium/pdf-upload.php:152
+msgid "PDF error message"
+msgstr "PDF chybová zpráva"
+
+#: premium/pdf-upload.php:157
+msgid ""
+"This page will reload after indexing and you can see the response from the "
+"PDF extracting server."
+msgstr ""
+"Tato stránka se znovu načte po indexaci a můžete vidět odpověď ze serveru "
+"pro extrahování PDF."

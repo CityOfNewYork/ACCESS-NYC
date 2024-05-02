@@ -1,0 +1,120 @@
+{
+    "translation-revision-date": "",
+    "generator": "WP-CLI\/2.6.0",
+    "source": "index.js",
+    "domain": "messages",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "messages",
+                "lang": "fi",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "not this": [
+                "ei t\u00e4t\u00e4"
+            ],
+            "use this": [
+                "k\u00e4yt\u00e4 t\u00e4t\u00e4"
+            ],
+            "How Relevanssi sees this post": [
+                "Kuinka Relevanssi n\u00e4kee artikkelin"
+            ],
+            "Title:": [
+                "Otsikko:"
+            ],
+            "Content:": [
+                "Sis\u00e4lt\u00f6:"
+            ],
+            "Author:": [
+                "Tekij\u00e4:"
+            ],
+            "Categories:": [
+                "Aiheet:"
+            ],
+            "Tags:": [
+                "Avainsanat:"
+            ],
+            "Other taxonomies:": [
+                "Muut taksonomiat:"
+            ],
+            "Comments:": [
+                "Kommentit:"
+            ],
+            "Custom fields:": [
+                "Avainkent\u00e4t:"
+            ],
+            "Excerpt:": [
+                "Ote:"
+            ],
+            "Links to this post:": [
+                "Sis\u00e4iset linkit:"
+            ],
+            "MySQL columns:": [
+                "MySQL-sarakkeet:"
+            ],
+            "Reason this post is not indexed:": [
+                "Miksi t\u00e4t\u00e4 artikkelia ei ole indeksoitu:"
+            ],
+            "Pinning": [
+                "Artikkelin kiinnitt\u00e4minen"
+            ],
+            "Pin this post for all searches it appears in.": [
+                "Kiinnit\u00e4 t\u00e4m\u00e4 artikkeli k\u00e4rkeen kaikissa hauissa, joissa se esiintyy."
+            ],
+            "A comma-separated list of single word keywords or multi-word phrases.": [
+                "Pilkuilla erotettu lista yksitt\u00e4isi\u00e4 hakusanoja tai monisanaisia hakulauseita."
+            ],
+            "If any of these keywords are present in the search query, this post will be moved on top of the search results.": [
+                "Jos joku n\u00e4ist\u00e4 hakusanoista esiintyy k\u00e4ytt\u00e4j\u00e4n haussa, t\u00e4m\u00e4 artikkeli kiinnitet\u00e4\u00e4n hakutulosten huipulle."
+            ],
+            "You can add weights to pinned keywords like this: 'keyword (100)'. The post with the highest weight will be sorted first if there are multiple posts pinned to the same keyword.": [
+                "Voit lis\u00e4t\u00e4 kiinnitetyille avainsanoille painoja n\u00e4in: \u2019avainsana (100)\u2019. Jos samalla avainsanalla on kiinnitetty useampi artikkeli, tuloslistan ensimm\u00e4iseksi nostetaan se, jonka paino on suurin."
+            ],
+            "Exclusion": [
+                "Artikkelien poissulkeminen"
+            ],
+            "Exclude this post or page from the index.": [
+                "Poista t\u00e4m\u00e4 artikkeli indeksist\u00e4."
+            ],
+            "Ignore post content in the indexing.": [
+                "\u00c4l\u00e4 huomioi artikkelin sis\u00e4lt\u00f6\u00e4 indeksoitaessa."
+            ],
+            "If any of these keywords are present in the search query, this post will be removed from the search results.": [
+                "Jos joku n\u00e4ist\u00e4 hakusanoista esiintyy k\u00e4ytt\u00e4j\u00e4n haussa, t\u00e4m\u00e4 artikkeli poistetaan hakutuloksista."
+            ],
+            "Related posts": [
+                "Aiheeseen liittyv\u00e4t artikkelit"
+            ],
+            "Don't append the related posts to this page.": [
+                "\u00c4l\u00e4 lis\u00e4\u00e4 samankaltaisia artikkeleita t\u00e4lle sivulle."
+            ],
+            "Don't show this as a related post for any post.": [
+                "\u00c4l\u00e4 n\u00e4yt\u00e4 t\u00e4t\u00e4 samankaltaisena artikkelina mill\u00e4\u00e4n sivulla."
+            ],
+            "A comma-separated list of keywords to use for the Related Posts feature.": [
+                "Pilkulla erotettu lista avainsanoja samankaltaisten artikkelien etsimiseen."
+            ],
+            "Anything entered here will used when searching for related posts. Using phrases with quotes is allowed, but will restrict the related posts to posts including that phrase.": [
+                "T\u00e4h\u00e4n merkittyj\u00e4 hakusanoja k\u00e4ytet\u00e4\u00e4n samankaltaisten artikkelien etsimiseen. Voit k\u00e4ytt\u00e4\u00e4 fraasihakua lainausmerkeill\u00e4, mutta se rajoittaa samankaltaiset artikkelit niihin, joissa fraasi esiintyy."
+            ],
+            "A comma-separated list of post IDs to use as related posts for this post": [
+                "Pilkuilla erotettu lista t\u00e4m\u00e4n artikkelin liittyvin\u00e4 artikkeleina k\u00e4ytett\u00e4vien artikkelien ID-numeroista"
+            ],
+            "Related posts for this post:": [
+                "Samankaltaiset artikkelit:"
+            ],
+            "Excluded posts for this post:": [
+                "\u00c4l\u00e4 k\u00e4yt\u00e4 samankaltaisina artikkeleina t\u00e4lle artikkelille:"
+            ],
+            "Insights": [
+                "Huomioita"
+            ],
+            "The most common search terms used to find this post:": [
+                "Yleisimm\u00e4t hakusanat, joilla t\u00e4m\u00e4 artikkeli l\u00f6ydet\u00e4\u00e4n:"
+            ],
+            "Low-ranking search terms used to find this post:": [
+                "Hakusanoja, joilla t\u00e4m\u00e4 artikkeli on l\u00f6ydetty matalilta sijoilta:"
+            ]
+        }
+    }
+}
