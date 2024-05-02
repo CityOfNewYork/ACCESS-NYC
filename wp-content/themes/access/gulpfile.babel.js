@@ -224,14 +224,13 @@ gulp.task('webpack', () =>
             loader: 'babel-loader',
             test: /\.js$/,
             exclude: {
-              test: /.\/node_modules/,
-              exclude: /.\/node_modules\/@nycopportunity/
+              and: [ /.\/node_modules/, { not: [ /.\/node_modules\/@nycopportunity/ ] } ]
             },
             // include: [
             //   /.\/src/,
             //   /.\/node_modules\/@nycopportunity\/access-patterns\/src/
             // ],
-            query: {
+            options: {
               // .babelrc
               presets: [
                 [
