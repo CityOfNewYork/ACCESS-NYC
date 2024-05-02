@@ -11,26 +11,20 @@ namespace Twilio\Rest;
 
 use Twilio\Domain;
 use Twilio\Exceptions\TwilioException;
-use Twilio\Rest\Preview\BulkExports as PreviewBulkExports;
 use Twilio\Rest\Preview\DeployedDevices as PreviewDeployedDevices;
 use Twilio\Rest\Preview\HostedNumbers as PreviewHostedNumbers;
 use Twilio\Rest\Preview\Marketplace as PreviewMarketplace;
 use Twilio\Rest\Preview\Sync as PreviewSync;
-use Twilio\Rest\Preview\TrustedComms as PreviewTrustedComms;
 use Twilio\Rest\Preview\Understand as PreviewUnderstand;
 use Twilio\Rest\Preview\Wireless as PreviewWireless;
 
 /**
- * @property \Twilio\Rest\Preview\BulkExports $bulkExports
  * @property \Twilio\Rest\Preview\DeployedDevices $deployedDevices
  * @property \Twilio\Rest\Preview\HostedNumbers $hostedNumbers
  * @property \Twilio\Rest\Preview\Marketplace $marketplace
  * @property \Twilio\Rest\Preview\Sync $sync
  * @property \Twilio\Rest\Preview\Understand $understand
  * @property \Twilio\Rest\Preview\Wireless $wireless
- * @property \Twilio\Rest\Preview\TrustedComms $trustedComms
- * @property \Twilio\Rest\Preview\BulkExports\ExportList $exports
- * @property \Twilio\Rest\Preview\BulkExports\ExportConfigurationList $exportConfiguration
  * @property \Twilio\Rest\Preview\DeployedDevices\FleetList $fleets
  * @property \Twilio\Rest\Preview\HostedNumbers\AuthorizationDocumentList $authorizationDocuments
  * @property \Twilio\Rest\Preview\HostedNumbers\HostedNumberOrderList $hostedNumberOrders
@@ -41,12 +35,6 @@ use Twilio\Rest\Preview\Wireless as PreviewWireless;
  * @property \Twilio\Rest\Preview\Wireless\CommandList $commands
  * @property \Twilio\Rest\Preview\Wireless\RatePlanList $ratePlans
  * @property \Twilio\Rest\Preview\Wireless\SimList $sims
- * @property \Twilio\Rest\Preview\TrustedComms\BrandedChannelList $brandedChannels
- * @property \Twilio\Rest\Preview\TrustedComms\BrandsInformationList $brandsInformation
- * @property \Twilio\Rest\Preview\TrustedComms\CpsList $cps
- * @property \Twilio\Rest\Preview\TrustedComms\CurrentCallList $currentCalls
- * @method \Twilio\Rest\Preview\BulkExports\ExportContext exports(string $resourceType)
- * @method \Twilio\Rest\Preview\BulkExports\ExportConfigurationContext exportConfiguration(string $resourceType)
  * @method \Twilio\Rest\Preview\DeployedDevices\FleetContext fleets(string $sid)
  * @method \Twilio\Rest\Preview\HostedNumbers\AuthorizationDocumentContext authorizationDocuments(string $sid)
  * @method \Twilio\Rest\Preview\HostedNumbers\HostedNumberOrderContext hostedNumberOrders(string $sid)
@@ -57,20 +45,14 @@ use Twilio\Rest\Preview\Wireless as PreviewWireless;
  * @method \Twilio\Rest\Preview\Wireless\CommandContext commands(string $sid)
  * @method \Twilio\Rest\Preview\Wireless\RatePlanContext ratePlans(string $sid)
  * @method \Twilio\Rest\Preview\Wireless\SimContext sims(string $sid)
- * @method \Twilio\Rest\Preview\TrustedComms\BrandedChannelContext brandedChannels(string $sid)
- * @method \Twilio\Rest\Preview\TrustedComms\BrandsInformationContext brandsInformation()
- * @method \Twilio\Rest\Preview\TrustedComms\CpsContext cps()
- * @method \Twilio\Rest\Preview\TrustedComms\CurrentCallContext currentCalls()
  */
 class Preview extends Domain {
-    protected $_bulkExports;
     protected $_deployedDevices;
     protected $_hostedNumbers;
     protected $_marketplace;
     protected $_sync;
     protected $_understand;
     protected $_wireless;
-    protected $_trustedComms;
 
     /**
      * Construct the Preview Domain
@@ -81,16 +63,6 @@ class Preview extends Domain {
         parent::__construct($client);
 
         $this->baseUrl = 'https://preview.twilio.com';
-    }
-
-    /**
-     * @return PreviewBulkExports Version bulkExports of preview
-     */
-    protected function getBulkExports(): PreviewBulkExports {
-        if (!$this->_bulkExports) {
-            $this->_bulkExports = new PreviewBulkExports($this);
-        }
-        return $this->_bulkExports;
     }
 
     /**
@@ -154,16 +126,6 @@ class Preview extends Domain {
     }
 
     /**
-     * @return PreviewTrustedComms Version trustedComms of preview
-     */
-    protected function getTrustedComms(): PreviewTrustedComms {
-        if (!$this->_trustedComms) {
-            $this->_trustedComms = new PreviewTrustedComms($this);
-        }
-        return $this->_trustedComms;
-    }
-
-    /**
      * Magic getter to lazy load version
      *
      * @param string $name Version to return
@@ -194,30 +156,6 @@ class Preview extends Domain {
         }
 
         throw new TwilioException('Unknown context ' . $name);
-    }
-
-    protected function getExports(): \Twilio\Rest\Preview\BulkExports\ExportList {
-        return $this->bulkExports->exports;
-    }
-
-    /**
-     * @param string $resourceType The type of communication – Messages, Calls,
-     *                             Conferences, and Participants
-     */
-    protected function contextExports(string $resourceType): \Twilio\Rest\Preview\BulkExports\ExportContext {
-        return $this->bulkExports->exports($resourceType);
-    }
-
-    protected function getExportConfiguration(): \Twilio\Rest\Preview\BulkExports\ExportConfigurationList {
-        return $this->bulkExports->exportConfiguration;
-    }
-
-    /**
-     * @param string $resourceType The type of communication – Messages, Calls,
-     *                             Conferences, and Participants
-     */
-    protected function contextExportConfiguration(string $resourceType): \Twilio\Rest\Preview\BulkExports\ExportConfigurationContext {
-        return $this->bulkExports->exportConfiguration($resourceType);
     }
 
     protected function getFleets(): \Twilio\Rest\Preview\DeployedDevices\FleetList {
@@ -329,41 +267,6 @@ class Preview extends Domain {
      */
     protected function contextSims(string $sid): \Twilio\Rest\Preview\Wireless\SimContext {
         return $this->wireless->sims($sid);
-    }
-
-    protected function getBrandedChannels(): \Twilio\Rest\Preview\TrustedComms\BrandedChannelList {
-        return $this->trustedComms->brandedChannels;
-    }
-
-    /**
-     * @param string $sid Branded Channel Sid.
-     */
-    protected function contextBrandedChannels(string $sid): \Twilio\Rest\Preview\TrustedComms\BrandedChannelContext {
-        return $this->trustedComms->brandedChannels($sid);
-    }
-
-    protected function getBrandsInformation(): \Twilio\Rest\Preview\TrustedComms\BrandsInformationList {
-        return $this->trustedComms->brandsInformation;
-    }
-
-    protected function contextBrandsInformation(): \Twilio\Rest\Preview\TrustedComms\BrandsInformationContext {
-        return $this->trustedComms->brandsInformation();
-    }
-
-    protected function getCps(): \Twilio\Rest\Preview\TrustedComms\CpsList {
-        return $this->trustedComms->cps;
-    }
-
-    protected function contextCps(): \Twilio\Rest\Preview\TrustedComms\CpsContext {
-        return $this->trustedComms->cps();
-    }
-
-    protected function getCurrentCalls(): \Twilio\Rest\Preview\TrustedComms\CurrentCallList {
-        return $this->trustedComms->currentCalls;
-    }
-
-    protected function contextCurrentCalls(): \Twilio\Rest\Preview\TrustedComms\CurrentCallContext {
-        return $this->trustedComms->currentCalls();
     }
 
     /**

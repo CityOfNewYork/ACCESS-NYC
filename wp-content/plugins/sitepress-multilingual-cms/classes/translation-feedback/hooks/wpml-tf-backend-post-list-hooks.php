@@ -57,6 +57,7 @@ class WPML_TF_Backend_Post_List_Hooks implements IWPML_Action {
 		$column_name          = __( 'Translation rating', 'sitepress' );
 
 		if ( array_key_exists( $key_to_insert_before, $columns ) ) {
+			/** @var int $insert_position The if makes sure the following will return an int. */
 			$insert_position   = array_search( $key_to_insert_before, array_keys( $columns ) );
 			$columns_before    = array_slice( $columns, 0, $insert_position, true );
 			$columns_to_insert = array( self::RATING_COLUMN_ID => $column_name );

@@ -35,16 +35,15 @@ class VerificationCheckList extends ListResource {
     /**
      * Create the VerificationCheckInstance
      *
-     * @param string $code The verification string
      * @param array|Options $options Optional Arguments
      * @return VerificationCheckInstance Created VerificationCheckInstance
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function create(string $code, array $options = []): VerificationCheckInstance {
+    public function create(array $options = []): VerificationCheckInstance {
         $options = new Values($options);
 
         $data = Values::of([
-            'Code' => $code,
+            'Code' => $options['code'],
             'To' => $options['to'],
             'VerificationSid' => $options['verificationSid'],
             'Amount' => $options['amount'],

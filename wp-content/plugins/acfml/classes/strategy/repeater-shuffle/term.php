@@ -23,6 +23,13 @@ class Term extends Strategy {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getEntityType() {
+		return 'taxonomy';
+	}
+
+	/**
 	 * @param mixed $id
 	 *
 	 * @return bool

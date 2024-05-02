@@ -1,0 +1,253 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "From:": [
+            "С:"
+         ],
+         "--Choose language--": [
+            "--Выбрать язык--"
+         ],
+         "to:": [
+            "на:"
+         ],
+         "Set language pair(s) for Translator %s:": [
+            "Задать языковую(ые) пару(ы) для переводчика %s:"
+         ],
+         "+ Add more language pairs for this translator": [
+            "+ Добавить этому переводчику другие языковые пары"
+         ],
+         "Translation Memory was successfully copied to Advanced Translation Editor.": [
+            "Переводческая память успешно скопирована а Расширенный редактор перевода."
+         ],
+         "Deactivate ICanLocalize.com as Translation Service on this site": [
+            "Отключить ICanLocalize.com в качестве службы переводов на этом сайте"
+         ],
+         "Missing a translator? Or were new jobs since the last copy of the Translation Memory?": [
+            "Нет переводчика? Или были новые заказы с момента последнего копирования переводческой памяти?"
+         ],
+         "Enter here your ICanLocalize authentication details.": [
+            "Введите здесь свои данные авторизации ICanLocalize."
+         ],
+         "API Token:": [
+            "API-ключ:"
+         ],
+         "Please enter valid value for ICL token.": [
+            "Введите действительное значение ключа ICL."
+         ],
+         "Enter ICL API token here": [
+            "Введите здесь API-ключ ICL"
+         ],
+         "Submit": [
+            "Подать"
+         ],
+         "Sign up": [
+            "Регистрация"
+         ],
+         "to ICanLocalize to receive your API token.": [
+            "в ICanLocalize для получения своего API-ключа."
+         ],
+         "Already have an account? Login and": [
+            "Уже есть учетная запись? Войдите в систему и"
+         ],
+         "get your token.": [
+            "получите свой ключ."
+         ],
+         "Copy new Translation Memory to Advanced Translation Memory": [
+            "Копировать переводческую память в память расширенного перевода"
+         ],
+         "Import translation memory": [
+            "Импортировать переводческую память"
+         ],
+         "ICanLocalize is already deactivated on this site": [
+            "ICanLocalize уже отключен на этом сайте"
+         ],
+         "You can still import Translators or Copy Translation Memory to Advanced Translator Editor": [
+            "Вы по-прежнему можете импортировать переводчиков или копировать переводческую память в Расширенный редактор перевода."
+         ],
+         "Move from ICanLocalize.com to Advanced Translation Editor": [
+            "Переместить из ICanLocalize.com в Расширенный редактор перевода"
+         ],
+         "Import translators": [
+            "Импортировать переводчиков"
+         ],
+         "Come back": [
+            "Назад"
+         ],
+         "Cancel": [
+            "Отмена"
+         ],
+         "Save": [
+            "Сохранить"
+         ],
+         "Name": [
+            "Имя"
+         ],
+         "Language Pairs": [
+            "Языковые пары"
+         ],
+         "Not supported pairs:": [
+            "Неподдерживаемые пары:"
+         ],
+         "ICanLocalize.com deactivated": [
+            "ICanLocalize.com отключен"
+         ],
+         "Translate memory is imported": [
+            "Переводческая память импортирована"
+         ],
+         "There is no translators in ICL": [
+            "На ICL нет переводчиков"
+         ],
+         "Translators saved": [
+            "Переводчики сохранены"
+         ],
+         "%s file upload failed.": [
+            "Не удалось загрузить файл %s."
+         ],
+         "Flag": [
+            "Флаг"
+         ],
+         "Flag file": [
+            "Файл флага"
+         ],
+         "You just added  language. Next, select it as the site's default language or a translation language.": [
+            "Вы только что добавили язык. Затем выберите его в качестве языка сайта по умолчанию или языка перевода."
+         ],
+         "Language added": [
+            "Язык добавлен"
+         ],
+         "The value \"%s\" already exists": [
+            "Значение \"%s\" уже существует"
+         ],
+         "Add a new language": [
+            "Добавить новый язык"
+         ],
+         "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
+            "Создайте язык для определенной страны, выбрав общий язык из списка ниже. Затем выберите страну, для которой его следует локализовать."
+         ],
+         "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
+            "Если выбрать сочетание, уже существующее в базе данных, WPML поможет заполнить необходимые поля. Подробнее о <AddingACustomLanguageLink />."
+         ],
+         "Cannot find?": [
+            "Не удается найти?"
+         ],
+         "Click here": [
+            "Щелкните здесь"
+         ],
+         "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
+            "Неверный формат. Может содержать только строчные буквы и \"-\". Например: \"fr\" , \"pt-br\", \"zh-hans\""
+         ],
+         "Language": [
+            "Язык"
+         ],
+         "Location": [
+            "Расположение"
+         ],
+         "Code": [
+            "Код"
+         ],
+         "The language will not be supported by automatic translations": [
+            "Этот язык не будет поддерживаться автоматическим переводом."
+         ],
+         "Language mapping": [
+            "Сопоставление языков"
+         ],
+         "Don't map this language": [
+            "Не сопоставлять этот язык"
+         ],
+         "Default locale": [
+            "Регион по умолчанию"
+         ],
+         "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
+            "Неверный формат. Может содержать только строчные буквы и \"_\". Например: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+         ],
+         "hreflang": [
+            "hreflang"
+         ],
+         "Encode url?": [
+            "Кодировать URL-адрес?"
+         ],
+         "Flags must be:": [
+            "Флаги должны быть:"
+         ],
+         "NO": [
+            "НЕТ"
+         ],
+         "YES": [
+            "ДА"
+         ],
+         " (required)": [
+            "(обязательно)"
+         ],
+         "Please fill in the field": [
+            "Заполните поле"
+         ],
+         "PNG, SVG, or JPG files": [
+            "Файлы PNG, SVG, или JPG"
+         ],
+         "Save language": [
+            "Сохранить язык"
+         ],
+         "18 x 12 pixels": [
+            "18 x 12 пикселей"
+         ],
+         "Read more about ": [
+            "Подробнее о"
+         ],
+         "The name of your language as it will appear on your site's language switcher.": [
+            "Отображаемое название языка в переключателе языка на вашем сайте."
+         ],
+         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "Уникальное значение, определяющее язык в базе данных и URL-адресе. После сохранения код языка нельзя изменить."
+         ],
+         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "Если пользовательский язык такой же, как и существующий, можно использовать проверку орфографии и автоматический перевод существующего языка. Например, если выбранный вами язык – швейцарский немецкий, его можно сопоставить с немецким языком, который будет использоваться для проверки орфографии и автоматического перевода. Если пользовательский язык не сопоставить с существующим, функции проверки орфографии и автоматического перевода для этого языка будут недоступны."
+         ],
+         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "Значение, которое WPML проверяет при загрузке переводов из файлов формата MO и PO. Регион по умолчанию включен в имена файлов в папке /wp-content/languages/ в настройках WordPress."
+         ],
+         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "Для направления пользователей на сайты в соответствии с их языком и местоположением Google использует атрибут hreflang. Примеры:"
+         ],
+         "All English-speaking users: en": [
+            "Все пользователи с английским языком: en"
+         ],
+         "English for UK users: en-gb": [
+            "Английский для пользователей из Великобритании: en-gb"
+         ],
+         "English for US users: en-us": [
+            "Английский для пользователей из США: en-us"
+         ],
+         "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
+            "Определяет закодированы ли URL-адреса на этом языке, либо же в них используются символы ASCII (если не уверены, оставьте \"Нет\")."
+         ],
+         "adding a custom language": [
+            "добавление пользовательского языка"
+         ],
+         "Default language": [
+            "Язык по умолчанию"
+         ],
+         "What is the current language of your website?": [
+            "Какой текущий язык вашего сайта?"
+         ],
+         "Translation languages": [
+            "Языки перевода"
+         ],
+         "Which languages do you want to translate your site into?": [
+            "На какие языки нужно перевести ваш сайт?"
+         ],
+         "If you cannot find languages that you need in the list": [
+            "Если в списке нет необходимых языков,"
+         ],
+         "create a custom language": [
+            "создайте пользовательский язык"
+         ],
+         "What are the languages of your site?": [
+            "Какой язык вашего сайта?"
+         ]
+      }
+   }
+}

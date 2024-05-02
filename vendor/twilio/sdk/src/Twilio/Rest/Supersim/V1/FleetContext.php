@@ -63,6 +63,7 @@ class FleetContext extends InstanceContext {
             'IpCommandsMethod' => $options['ipCommandsMethod'],
             'SmsCommandsUrl' => $options['smsCommandsUrl'],
             'SmsCommandsMethod' => $options['smsCommandsMethod'],
+            'DataLimit' => $options['dataLimit'],
         ]);
 
         $payload = $this->version->update('POST', $this->uri, [], $data);

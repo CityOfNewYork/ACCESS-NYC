@@ -1,0 +1,154 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/index.js:152
+msgid "not this"
+msgstr ""
+
+#: src/index.js:175
+msgid "use this"
+msgstr ""
+
+#: src/index.js:224
+msgid "How Relevanssi sees this post"
+msgstr ""
+
+#: src/index.js:228
+msgid "Title:"
+msgstr ""
+
+#: src/index.js:235
+msgid "Content:"
+msgstr ""
+
+#: src/index.js:242
+msgid "Author:"
+msgstr ""
+
+#: src/index.js:249
+msgid "Categories:"
+msgstr ""
+
+#: src/index.js:256
+msgid "Tags:"
+msgstr ""
+
+#: src/index.js:263
+msgid "Other taxonomies:"
+msgstr ""
+
+#: src/index.js:270
+msgid "Comments:"
+msgstr ""
+
+#: src/index.js:277
+msgid "Custom fields:"
+msgstr ""
+
+#: src/index.js:284
+msgid "Excerpt:"
+msgstr ""
+
+#: src/index.js:291
+msgid "Links to this post:"
+msgstr ""
+
+#: src/index.js:298
+msgid "MySQL columns:"
+msgstr ""
+
+#: src/index.js:306
+msgid "Reason this post is not indexed:"
+msgstr ""
+
+#: src/index.js:315
+msgid "Pinning"
+msgstr ""
+
+#: src/index.js:319
+msgid "Pin this post for all searches it appears in."
+msgstr ""
+
+#: src/index.js:338
+msgid ""
+"If any of these keywords are present in the search query, this post will be "
+"moved on top of the search results."
+msgstr ""
+
+#: src/index.js:343
+msgid ""
+"You can add weights to pinned keywords like this: 'keyword (100)'. The post "
+"with the highest weight will be sorted first if there are multiple posts "
+"pinned to the same keyword."
+msgstr ""
+
+#: src/index.js:349
+msgid "Exclusion"
+msgstr ""
+
+#: src/index.js:354
+msgid "Exclude this post or page from the index."
+msgstr ""
+
+#: src/index.js:364
+msgid "Ignore post content in the indexing."
+msgstr ""
+
+#: src/index.js:374
+msgid "A comma-separated list of single word keywords or multi-word phrases."
+msgstr ""
+
+#: src/index.js:383
+msgid ""
+"If any of these keywords are present in the search query, this post will be "
+"removed from the search results."
+msgstr ""
+
+#: src/index.js:391
+msgid "Related posts"
+msgstr ""
+
+#: src/index.js:396
+msgid "Don't append the related posts to this page."
+msgstr ""
+
+#: src/index.js:406
+msgid "Don't show this as a related post for any post."
+msgstr ""
+
+#: src/index.js:416
+msgid "A comma-separated list of keywords to use for the Related Posts feature."
+msgstr ""
+
+#: src/index.js:425
+msgid ""
+"Anything entered here will used when searching for related posts. Using "
+"phrases with quotes is allowed, but will restrict the related posts to "
+"posts including that phrase."
+msgstr ""
+
+#: src/index.js:431
+msgid "A comma-separated list of post IDs to use as related posts for this post"
+msgstr ""
+
+#: src/index.js:438
+msgid "Related posts for this post:"
+msgstr ""
+
+#: src/index.js:441
+msgid "Excluded posts for this post:"
+msgstr ""
+
+#: src/index.js:446
+msgid "Insights"
+msgstr ""
+
+#: src/index.js:448
+msgid "The most common search terms used to find this post:"
+msgstr ""
+
+#: src/index.js:455
+msgid "Low-ranking search terms used to find this post:"
+msgstr ""

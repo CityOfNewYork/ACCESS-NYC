@@ -44,7 +44,7 @@ class Hooks {
 	 * @return array
 	 */
 	public function filter( $value ) {
-		if ( empty( $value ) ) {
+		if ( empty( $value ) || apply_filters( 'wpml_st_disable_rewrite_rules', false ) ) {
 			return $value;
 		}
 

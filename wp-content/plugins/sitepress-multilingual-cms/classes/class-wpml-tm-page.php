@@ -1,10 +1,7 @@
 <?php
+use \WPML\FP\Obj;
 
 class WPML_TM_Page {
-
-	private static function is_tm_page( $page = null ) {
-		return is_admin() && isset( $_GET['page'] ) && $_GET['page'] === WPML_TM_FOLDER . $page;
-	}
 
 	public static function is_tm_dashboard() {
 		$is_tm_page = self::is_tm_page( WPML_Translation_Management::PAGE_SLUG_MANAGEMENT );
@@ -50,9 +47,17 @@ class WPML_TM_Page {
 	}
 
 	public static function get_translators_url( $params = array() ) {
-		$url          = admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/main.php' );
+		$url          = admin_url( 'admin.php?page=' . static::get_tm_folder() . '/menu/main.php' );
 		$params['sm'] = 'translators';
 
 		return add_query_arg( $params, $url );
+	}
+
+	private static function is_tm_page( $page = null ) {
+		return is_admin() && Obj::propOr( false, 'page', $_GET ) === static::get_tm_folder() . $page;
+	}
+
+	private static function get_tm_folder() {
+		return defined( 'WPML_TM_FOLDER' ) ? WPML_TM_FOLDER : '';
 	}
 }

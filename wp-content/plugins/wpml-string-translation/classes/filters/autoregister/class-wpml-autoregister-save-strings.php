@@ -37,10 +37,10 @@ class WPML_Autoregister_Save_Strings {
 	}
 
 	/**
-	 * @param string $value
-	 * @param string $name
-	 * @param string $domain
-	 * @param string $gettext_context
+	 * @param string|bool $value
+	 * @param string      $name
+	 * @param string      $domain
+	 * @param string      $gettext_context
 	 */
 	public function save( $value, $name, $domain, $gettext_context = '' ) {
 		$this->data[] = array(

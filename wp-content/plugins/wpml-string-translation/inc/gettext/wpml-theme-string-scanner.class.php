@@ -5,6 +5,7 @@ class WPML_Theme_String_Scanner extends WPML_String_Scanner implements IWPML_ST_
 	public function scan() {
 		$this->current_type = 'theme';
 		$this->scan_starting( $this->current_type );
+		/** @var WP_Theme $theme_info */
 		$theme_info         = wp_get_theme();
 		$text_domain        = $theme_info->get( 'TextDomain' );
 		$current_theme_name = array_key_exists( 'theme', $_POST ) ? $_POST['theme'] : '';
@@ -15,7 +16,8 @@ class WPML_Theme_String_Scanner extends WPML_String_Scanner implements IWPML_ST_
 		$this->scan_theme_files();
 		$this->set_stats( 'theme_localization_domains', $current_theme_name );
 
-		if ( $theme_info && ! is_wp_error( $theme_info ) ) {
+		//@todo test this properly
+		if ( $theme_info && $theme_info->exists() ) {
 			$this->remove_notice( $theme_info->get( 'Name' ) );
 		}
 
@@ -28,7 +30,7 @@ class WPML_Theme_String_Scanner extends WPML_String_Scanner implements IWPML_ST_
 		if ( array_key_exists( 'files', $_POST ) ) {
 
 			foreach ( $_POST['files'] as $file ) {
-				$file = filter_var( $file, FILTER_SANITIZE_STRING );
+				$file = (string) filter_var( $file, FILTER_SANITIZE_STRING );
 				if ( $this->file_hashing->hash_changed( $file ) ) {
 
 					$this->add_stat( sprintf( __( 'Scanning file: %s', 'wpml-string-translation' ), $file ) );

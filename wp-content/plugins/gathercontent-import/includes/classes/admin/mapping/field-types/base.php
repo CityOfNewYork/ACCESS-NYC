@@ -6,6 +6,7 @@
  */
 
 namespace GatherContent\Importer\Admin\Mapping\Field_Types;
+
 use GatherContent\Importer\Base as Plugin_Base;
 use GatherContent\Importer\Views\View;
 
@@ -36,12 +37,12 @@ abstract class Base extends Plugin_Base implements Type {
 	 * Possibilities include:
 	 *
 	 * array(
-	 * 	'text',
-	 * 	'text_rich',
-	 * 	'text_plain',
-	 * 	'files',
-	 * 	'choice_radio',
-	 * 	'choice_checkbox',
+	 *  'text',
+	 *  'text_rich',
+	 *  'text_plain',
+	 *  'files',
+	 *  'choice_radio',
+	 *  'choice_checkbox',
 	 * )
 	 *
 	 * @var array
@@ -64,10 +65,10 @@ abstract class Base extends Plugin_Base implements Type {
 	}
 
 	public function option_underscore_template( View $view ) {
-		$option = '<option <# if ( "'. $this->type_id() .'" === data.field_type ) { #>selected="selected"<# } #> value="'. $this->type_id() .'">' . $this->option_label . '</option>';
+		$option = '<option <# if ( "' . $this->type_id() . '" === data.field_type ) { #>selected="selected"<# } #> value="' . $this->type_id() . '">' . $this->option_label . '</option>';
 
 		if ( $types = $this->get_supported_types() ) {
-			$option = '<# if ( data.type in '. $types .' ) { #>' . $option . '<# } #>';
+			$option = '<# if ( data.type in ' . $types . ' ) { #>' . $option . '<# } #>';
 		}
 
 		echo "\n\t" . $option;
@@ -80,7 +81,7 @@ abstract class Base extends Plugin_Base implements Type {
 	}
 
 	public function underscore_option( $value, $label ) {
-		echo '<option <# if ( "'. $value .'" === data.field_value ) { #>selected="selected"<# } #> value="'. $value .'">'. $label .'</option>';
+		echo '<option <# if ( "' . $value . '" === data.field_value ) { #>selected="selected"<# } #> value="' . $value . '">' . $label . '</option>';
 	}
 
 	public function underscore_empty_option( $label ) {

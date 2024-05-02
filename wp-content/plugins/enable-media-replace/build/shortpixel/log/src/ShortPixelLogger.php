@@ -24,6 +24,8 @@ namespace EnableMediaReplace\ShortPixelLogger;
    protected $format_data = "\t %%data%% ";
 
    protected $hooks = array();
+
+	 private $logFile; // pointer resource to the logFile.
 /*   protected $hooks = array(
       'shortpixel_image_exists' => array('numargs' => 3),
       'shortpixel_webp_image_base' => array('numargs' => 2),
@@ -49,16 +51,19 @@ namespace EnableMediaReplace\ShortPixelLogger;
       $ns = __NAMESPACE__;
       $this->namespace = substr($ns, 0, strpos($ns, '\\')); // try to get first part of namespace
 
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended  -- This is not a form
       if (isset($_REQUEST['SHORTPIXEL_DEBUG'])) // manual takes precedence over constants
       {
         $this->is_manual_request = true;
         $this->is_active = true;
 
+				// phpcs:ignore WordPress.Security.NonceVerification.Recommended  -- This is not a form
         if ($_REQUEST['SHORTPIXEL_DEBUG'] === 'true')
         {
           $this->logLevel = DebugItem::LEVEL_INFO;
         }
         else {
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended  -- This is not a form
           $this->logLevel = intval($_REQUEST['SHORTPIXEL_DEBUG']);
         }
 
@@ -75,11 +80,8 @@ namespace EnableMediaReplace\ShortPixelLogger;
 
       if (defined('SHORTPIXEL_DEBUG_TARGET') && SHORTPIXEL_DEBUG_TARGET || $this->is_manual_request)
       {
-          //$this->logPath = SHORTPIXEL_BACKUP_FOLDER . "/shortpixel_log";
-          //$this->logMode = defined('SHORTPIXEL_LOG_OVERWRITE') ? 0 : FILE_APPEND;
           if (defined('SHORTPIXEL_LOG_OVERWRITE')) // if overwrite, do this on init once.
             file_put_contents($this->logPath,'-- Log Reset -- ' .PHP_EOL);
-
       }
 
       if ($this->is_active)
@@ -103,14 +105,19 @@ namespace EnableMediaReplace\ShortPixelLogger;
 
      if ($this->is_active && $this->is_manual_request && $user_is_administrator )
      {
-          $content_url = content_url();
-          $logPath = $this->logPath;
-          $pathpos = strpos($logPath, 'wp-content') + strlen('wp-content');
-          $logPart = substr($logPath, $pathpos);
-          $logLink = $content_url . $logPart;
+
+         $logPath = $this->logPath;
+         $uploads = wp_get_upload_dir();
+
+
+     		  if ( 0 === strpos( $logPath, $uploads['basedir'] ) ) { // Simple as it should, filepath and basedir share.
+                     // Replace file location with url location.
+                     $logLink = str_replace( $uploads['basedir'], $uploads['baseurl'], $logPath );
+     		  }
+
 
          $this->view = new \stdClass;
-         $this->view->logLink = $logLink;
+         $this->view->logLink = 'view-source:' . esc_url($logLink);
          add_action('admin_footer', array($this, 'loadView'));
      }
    }
@@ -127,6 +134,7 @@ namespace EnableMediaReplace\ShortPixelLogger;
    public function setLogPath($logPath)
    {
       $this->logPath = $logPath;
+			$this->getWriteFile(true); // reset the writeFile here.
    }
    protected function addLog($message, $level, $data = array())
    {
@@ -174,7 +182,7 @@ namespace EnableMediaReplace\ShortPixelLogger;
    {
       $items = $debugItem->getForFormat();
       $items['time_passed'] =  round ( ($items['time'] - $this->start_time), 5);
-      $items['time'] =  date('Y-m-d H:i:s', $items['time'] );
+      $items['time'] =  date('Y-m-d H:i:s', (int) $items['time'] );
 
       if ( ($items['caller']) && is_array($items['caller']) && count($items['caller']) > 0)
       {
@@ -184,15 +192,49 @@ namespace EnableMediaReplace\ShortPixelLogger;
 
       $line = $this->formatLine($items);
 
+			$file = $this->getWriteFile();
+
       // try to write to file. Don't write if directory doesn't exists (leads to notices)
-      if ($this->logPath && is_dir(dirname($this->logPath)) )
+      if ($file )
       {
-        file_put_contents($this->logPath,$line, FILE_APPEND);
+				fwrite($file, $line);
+//        file_put_contents($this->logPath,$line, FILE_APPEND);
       }
       else {
-        error_log($line);
+       // error_log($line);
       }
    }
+
+	 protected function getWriteFile($reset = false)
+	 {
+		 	if (! is_null($this->logFile) && $reset === false)
+			{
+					return $this->logFile;
+			}
+			elseif(is_object($this->logFile))
+			{
+				fclose($this->logFile);
+			}
+
+			$logDir = dirname($this->logPath);
+		  if (! is_dir($logDir) || ! is_writable($logDir))
+			{
+				error_log('ShortpixelLogger: Log Directory is not writable');
+				$this->logFile = false;
+				return false;
+			}
+
+			$file = fopen($this->logPath, 'a');
+			if ($file === false)
+			{
+				 error_log('ShortpixelLogger: File could not be opened / created: ' . $this->logPath);
+				 $this->logFile = false;
+				 return $file;
+			}
+
+			$this->logFile = $file;
+			return $file;
+	 }
 
    protected function formatLine($args = array() )
    {
@@ -337,15 +379,14 @@ namespace EnableMediaReplace\ShortPixelLogger;
        $controller = $this;
 
        $template_path = __DIR__ . '/' . $this->template  . '.php';
-      // var_dump( $template_path);
        if (file_exists($template_path))
        {
 
          include($template_path);
        }
        else {
-         self::addError("View $template could not be found in " . $template_path,
-         array('class' => get_class($this), 'req' => $_REQUEST));
+         self::addError("View $template for ShortPixelLogger could not be found in " . $template_path,
+         array('class' => get_class($this)));
        }
    }
 

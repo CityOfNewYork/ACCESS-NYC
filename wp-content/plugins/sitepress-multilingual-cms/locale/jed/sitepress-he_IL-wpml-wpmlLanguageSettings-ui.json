@@ -1,0 +1,28 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose the image file type for flags": [
+            "בחר את סוג קובץ התמונה עבור דגלים"
+         ],
+         "This option affects only the built-in WPML flags, not the custom uploaded ones.": [
+            "אפשרות זו תשפיע רק על הדגלים המובנים של WPML ולא על אלו המותאמים אישית ומועלים."
+         ],
+         "%s format": [
+            "תבנית %s"
+         ],
+         "Save": [
+            "שמור"
+         ],
+         "The new format has been saved.": [
+            "התבנית החדשה נשמרה."
+         ],
+         "Failed to save the new format": [
+            "שמירת התבנית החדשה נכשלה."
+         ]
+      }
+   }
+}

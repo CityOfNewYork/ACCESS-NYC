@@ -5,24 +5,50 @@
  */
 class WPML_TM_Dashboard_Pagination {
 
+	private $post_limit_number = 0;
+
 	public function add_hooks() {
-		add_filter( 'wpml_tm_dashboard_post_query_args', array( $this, 'filter_dashboard_post_query_args_for_pagination' ), 10, 2 );
 		add_action( 'wpml_tm_dashboard_pagination', array( $this, 'add_tm_dashboard_pagination' ), 10, 2 );
+		add_filter( 'wpml_tm_dashboard_post_query_args', array( $this, 'filter_dashboard_post_query_args_for_pagination' ), 10, 2 );
 	}
 
-	/**
-	 * @param array $query_args
-	 * @param array $args
-	 *
-	 * @return array
-	 */
 	public function filter_dashboard_post_query_args_for_pagination( $query_args, $args ) {
 		if ( ! empty( $args['type'] ) ) {
 			unset( $query_args['no_found_rows'] );
 		}
-
-		return $query_args;
 	}
+
+	/**
+	 * Sets value for posts limit query to be used in post_limits filter
+	 *
+	 * @param int $value
+	 *
+	 * @see https://onthegosystems.myjetbrains.com/youtrack/issue/wpmldev-616
+	 */
+	public function setPostsLimitValue( $value ) {
+		$this->post_limit_number = ( is_int( $value ) && $value > 0 ) ? $value : $this->post_limit_number;
+	}
+
+	/**
+	 * Resets value of posts limit variable.
+	 *
+	 * @see https://onthegosystems.myjetbrains.com/youtrack/issue/wpmldev-616
+	 */
+	public function resetPostsLimitValue() {
+		$this->post_limit_number = 0;
+	}
+
+	/**
+	 * Custom callback that's hooked into 'post_limits' filter to set custom limit of retrieved posts.
+	 *
+	 * @see https://onthegosystems.myjetbrains.com/youtrack/issue/wpmldev-616
+	 *
+	 * @return string
+	 */
+	public function getPostsLimitQueryValue() {
+		return ( 0 === $this->post_limit_number ) ? '' : 'LIMIT ' . $this->post_limit_number;
+	}
+
 
 	/**
 	 * @param integer $posts_per_page
@@ -39,8 +65,8 @@ class WPML_TM_Dashboard_Pagination {
 				'format'    => '',
 				'prev_text' => '&laquo;',
 				'next_text' => '&raquo;',
-				'total'     => $total_pages,
-				'current'   => $paged,
+				'total'     => (int) $total_pages,
+				'current'   => (int) $paged,
 			)
 		);
 		if ( $page_links ) {

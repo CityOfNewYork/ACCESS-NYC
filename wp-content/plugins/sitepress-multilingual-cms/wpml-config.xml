@@ -98,6 +98,9 @@
         <gutenberg-block type="core/list" translate="1">
             <xpath>//ul/li|//ol/li</xpath>
         </gutenberg-block>
+        <gutenberg-block type="core/list-item" translate="1">
+            <xpath>//li</xpath>
+        </gutenberg-block>
         <gutenberg-block type="core/quote" translate="1">
             <xpath>//blockquote/p</xpath>
             <xpath>//blockquote/cite</xpath>
@@ -144,8 +147,16 @@
         <gutenberg-block type="core/navigation-link" translate="1">
             <key name="label" />
             <key name="url" />
+            <key name="title" />
+            <key name="description" />
+        </gutenberg-block>
+        <gutenberg-block type="core/navigation-submenu" translate="1">
+            <key name="label" />
+            <key name="label" />
         </gutenberg-block>
         <gutenberg-block type="core/column" translate="0" />
+		<gutenberg-block type="wpml/language-switcher" translate="0" />
+        <gutenberg-block type="wpml/navigation-language-switcher" translate="0" />
         <gutenberg-block type="core/columns" translate="0" />
         <gutenberg-block type="core/code" translate="0" />
         <gutenberg-block type="core/more" translate="0" />
@@ -153,6 +164,10 @@
         <gutenberg-block type="core/separator" translate="0" />
         <gutenberg-block type="core/spacer" translate="0" />
         <gutenberg-block type="core/shortcode" translate="0" />
+        <gutenberg-block type="core/post-excerpt" translate="1">
+            <xpath>//p/a</xpath>
+            <key name="moreText" />
+        </gutenberg-block>
         <gutenberg-block type="core-embed/twitter" translate="1">
             <xpath>//figure/figcaption</xpath>
         </gutenberg-block>

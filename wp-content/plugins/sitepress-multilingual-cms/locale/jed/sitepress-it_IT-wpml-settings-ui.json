@@ -3,25 +3,32 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "it_IT"
          },
          "You can choose which posts to translate from the <strong>Translation Management Dashboard</strong>.": [
-            "Puoi selezionare gli articoli da tradurre dal <strong>dashboard di gestione delle traduzioni</strong>."
+            "Puoi selezionare gli articoli da tradurre dalla <strong>dashboard di gestione della traduzione</strong>."
          ],
-         "Yes, translate all of these posts automatically": [
-            "Sì, traduci automaticamente tutti questi articoli"
+         "Yes, translate <b>existing</b> and <b>future</b> content automatically": [
+            "Sì, traduci il contenuto <b>esistente</b> e <b>futuro</b> automaticamente"
+         ],
+         "Yes, but only translate <b>future</b> content automatically": [
+            "Sì, ma traduci solo il contenuto <b>futuro</b> automaticamente"
+         ],
+         "Yes, translate <b>future</b> content automatically": [
+            "Sì, traduci il contenuto <b>futuro</b> automaticamente"
          ],
          "No, I want to translate some of these posts, but not all": [
             "No, intendo tradurre alcuni di questi articoli, ma non tutti"
          ],
-         "Save": [
-            "Salva"
+         "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
+            "Se desideri tradurre automaticamente i contenuti del tuo sito, devi utilizzare l'editor di traduzione avanzato."
          ],
-         "Please confirm this translation setting": [
-            "Ti preghiamo di confermare questa impostazione di traduzione"
+         "Synchronize translators and translation managers with ATE": [
+            "Sincronizza i traduttori e i responsabili delle traduzioni con l'editor di traduzione avanzato"
          ],
-         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the <NumberOfItems /> existing items.": [
-            "Il tuo sito è impostato per tradurre automaticamente tutti i contenuti. Se rendi <PostTypesNames /> traducibili, WPML tradurrà automaticamente i <NumberOfItems /> elementi esistenti."
+         "Please try again in a few minutes. If the problem persists, please contact %sWPML support%s.": [
+            "Riprova tra qualche minuto. Se il problema persiste, contatta l'%sassistenza di WPML%s."
          ],
          "Are you OK with paying for this?": [
             "Sei disposto a pagare per questo?"
@@ -31,6 +38,19 @@
          ],
          "Make translatable": [
             "Rendilo traducibile"
+         ],
+         "Save": [
+            "Salva"
+         ],
+         "Please confirm this translation setting": [
+            "Ti preghiamo di confermare questa impostazione di traduzione"
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item.": [
+            "Il tuo sito è configurato per tradurre tutto il contenuto automaticamente. Quando renderai traducibili i <PostTypesNames />, WPML tradurrà automaticamente %1$d elemento esistente.",
+            "Il tuo sito è configurato per tradurre tutto il contenuto automaticamente. Quando renderai traducibili i <PostTypesNames />, WPML tradurrà automaticamente i %1$d elementi esistenti."
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate all future content.": [
+            "Il tuo sito è configurato per tradurre tutto il contenuto automaticamente. Quando renderai traducibili i <PostTypesNames />, WPML tradurrà automaticamente tutto il contenuto futuro."
          ]
       }
    }

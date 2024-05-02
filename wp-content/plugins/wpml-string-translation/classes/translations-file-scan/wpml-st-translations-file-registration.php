@@ -70,14 +70,14 @@ class WPML_ST_Translations_File_Registration {
 
 	/**
 	 * @param string|false $translations translations in the JED format
-	 * @param string       $file
+	 * @param string|false $file
 	 * @param string       $handle
 	 * @param string       $original_domain
 	 *
 	 * @return string|false
 	 */
 	public function add_json_translations_to_import_queue( $translations, $file, $handle, $original_domain ) {
-		if ( ! isset( $this->cache[ $file ] ) ) {
+		if ( $file && ! isset( $this->cache[ $file ] ) ) {
 			$registration_domain  = WPML_ST_JED_Domain::get( $original_domain, $handle );
 			$this->cache[ $file ] = $this->save_file_info( $original_domain, $registration_domain, $file );
 		}
@@ -97,7 +97,7 @@ class WPML_ST_Translations_File_Registration {
 			$file_path_pattern = $this->get_file_path_pattern( $file_path, $original_domain );
 
 			foreach ( $this->active_languages as $lang_data ) {
-				$file_path_in_lang = sprintf( $file_path_pattern, $lang_data['default_locale'] );
+				$file_path_in_lang = sprintf( (string) $file_path_pattern, $lang_data['default_locale'] );
 				$this->register_single_file( $registration_domain, $file_path_in_lang );
 			}
 		} catch ( Exception $e ) {
@@ -111,7 +111,7 @@ class WPML_ST_Translations_File_Registration {
 	 * @param string $file_path
 	 * @param string $original_domain
 	 *
-	 * @return string|string[]|null
+	 * @return string|null
 	 * @throws InvalidArgumentException
 	 */
 	private function get_file_path_pattern( $file_path, $original_domain ) {

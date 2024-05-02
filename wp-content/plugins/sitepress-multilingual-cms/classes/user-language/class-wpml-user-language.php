@@ -57,7 +57,7 @@ class WPML_User_Language {
 
 		add_action( 'wpml_switch_language_for_email', array( $this, 'switch_language_for_email_action' ), 10, 1 );
 		add_action( 'wpml_restore_language_from_email', array( $this, 'restore_language_from_email_action' ), 10, 0 );
-		add_action( 'profile_update', array( $this, 'sync_admin_user_language_action' ), 10, 2 );
+		add_action( 'profile_update', array( $this, 'sync_admin_user_language_action' ), 10, 1 );
 		add_action( 'wpml_language_cookie_added', array( $this, 'update_user_lang_on_cookie_update' ) );
 
 		if ( $this->is_editing_current_profile() || $this->is_editing_other_profile() ) {
@@ -286,6 +286,7 @@ class WPML_User_Language {
 			$notice->set_css_class_types( [ 'info' ] );
 			$notice->add_capability_check( [ 'manage_options' ] );
 			$notice->set_dismissible( true );
+			$notice->add_exclude_from_page( UIPage::TM_PAGE );
 			$notice->add_user_restriction( User::getCurrentId() );
 			$adminNotices->add_notice( $notice );
 		} else {

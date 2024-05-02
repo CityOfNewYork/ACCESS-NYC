@@ -1,0 +1,11 @@
+button.removepost, button.returnpost {
+	border: none;
+    text-decoration: underline;
+    padding: 0px;
+    color: #c92c2c;
+    cursor: pointer;
+}
+
+button.returnpost {
+	color: #28c62b;
+}

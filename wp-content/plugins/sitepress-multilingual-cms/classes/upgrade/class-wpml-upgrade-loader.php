@@ -15,9 +15,13 @@ use WPML\Upgrade\Commands\DropCodeLocaleIndexFromLocaleMap;
 use WPML\Upgrade\Commands\AddPrimaryKeyToLocaleMap;
 use WPML\Upgrade\Commands\AddCountryColumnToLanguages;
 use WPML\Upgrade\Commands\AddAutomaticColumnToIclTranslateJob;
+use WPML\Upgrade\Commands\RemoveEndpointsOption;
 use WPML\TM\Upgrade\Commands\AddReviewStatusColumnToTranslationStatus;
 use WPML\TM\Upgrade\Commands\AddAteCommunicationRetryColumnToTranslationStatus;
 use WPML\TM\Upgrade\Commands\AddAteSyncCountToTranslationJob;
+use WPML\TM\Upgrade\Commands\ResetTranslatorOfAutomaticJobs;
+use WPML\Upgrade\Commands\CreateBackgroundTaskTable;
+use WPML\Upgrade\Commands\RemoveTmWcmlPromotionNotice;
 
 /**
  * Class WPML_Upgrade_Loader
@@ -64,11 +68,11 @@ class WPML_Upgrade_Loader implements IWPML_Action {
 	/**
 	 * WPML_Upgrade_Loader constructor.
 	 *
-	 * @param SitePress                    $sitepress      SitePress instance.
-	 * @param WPML_Upgrade_Schema          $upgrade_schema Upgrade schema instance.
-	 * @param WPML_Settings_Helper         $settings       Settings Helper instance.
-	 * @param WPML_Notices                 $wpml_notices   Notices instance.
-	 * @param WPML_Upgrade_Command_Factory $factory        Upgrade Command Factory instance.
+	 * @param SitePress                    $sitepress        SitePress instance.
+	 * @param WPML_Upgrade_Schema          $upgrade_schema   Upgrade schema instance.
+	 * @param WPML_Settings_Helper         $settings         Settings Helper instance.
+	 * @param WPML_Notices                 $wpml_notices     Notices instance.
+	 * @param WPML_Upgrade_Command_Factory $factory          Upgrade Command Factory instance.
 	 */
 	public function __construct(
 		SitePress $sitepress,
@@ -122,8 +126,10 @@ class WPML_Upgrade_Loader implements IWPML_Action {
 			$this->factory->create_command_definition( AddContextIndexToStrings::class, array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
 			$this->factory->create_command_definition( AddStatusIndexToStringTranslations::class, array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
 			$this->factory->create_command_definition( AddStringPackageIdIndexToStrings::class, array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
+			$this->factory->create_command_definition( CreateBackgroundTaskTable::class, array( $this->upgrade_schema ), array( 'admin' ) ),
 			$this->factory->create_command_definition( DisableOptionsAutoloading::class, [], [ 'admin' ] ),
 			$this->factory->create_command_definition( RemoveRestDisabledNotice::class, [], [ 'admin' ] ),
+			$this->factory->create_command_definition( ResetTranslatorOfAutomaticJobs::class, [], [ 'admin' ] ),
 			$this->factory->create_command_definition( DropCodeLocaleIndexFromLocaleMap::class, array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
 			$this->factory->create_command_definition( AddPrimaryKeyToLocaleMap::class, array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
 			$this->factory->create_command_definition( AddCountryColumnToLanguages::class, [ $this->upgrade_schema ], [ 'admin', 'ajax', 'front-end' ] ),
@@ -136,6 +142,8 @@ class WPML_Upgrade_Loader implements IWPML_Action {
 			$this->factory->create_command_definition( 'WPML_TM_Add_TP_ID_Column_To_Translation_Status', [ $this->upgrade_schema ], array( 'admin', 'ajax', 'front-end' ) ),
 			$this->factory->create_command_definition( 'WPML_TM_Add_TP_Revision_And_TS_Status_Columns_To_Translation_Status', [ $this->upgrade_schema ], array( 'admin', 'ajax', 'front-end' ) ),
 			$this->factory->create_command_definition( 'WPML_TM_Add_TP_Revision_And_TS_Status_Columns_To_Core_Status', [ $this->upgrade_schema ], array( 'admin', 'ajax', 'front-end' ) ),
+			$this->factory->create_command_definition( RemoveEndpointsOption::class, [], [ 'admin', 'ajax', 'front-end' ] ),
+			$this->factory->create_command_definition( RemoveTmWcmlPromotionNotice::class, [], [ 'admin' ] ),
 		];
 
 		$upgrade = new WPML_Upgrade( $commands, $this->sitepress, $this->factory );

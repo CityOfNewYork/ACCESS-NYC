@@ -70,4 +70,8 @@ class Storage {
 				}
 			);
 	}
+
+	public function getCount(): int {
+		return count( OptionManager::getOr( [], self::OPTION_NAME, self::OPTION_GROUP ) );
+	}
 }

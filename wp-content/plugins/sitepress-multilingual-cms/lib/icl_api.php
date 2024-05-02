@@ -169,6 +169,10 @@ function icl_gzdecode( $data, &$filename = '', &$error = '', $maxlength = null )
 				return false;
 		}
 	} // zero-byte body content is allowed
+
+	if ( ! is_string( $data ) ) {
+		return false;
+	}
 	// Verifiy CRC32
 	$crc   = sprintf( '%u', crc32( $data ) );
 	$crcOK = $crc == $datacrc;

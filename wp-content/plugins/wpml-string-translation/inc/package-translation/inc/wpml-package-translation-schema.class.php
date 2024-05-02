@@ -54,21 +54,36 @@ class WPML_Package_Translation_Schema {
 						ADD `string_package_id` BIGINT unsigned NULL AFTER value,
 						ADD INDEX (`string_package_id`)';
 
-		return $wpdb->query( $sql );
+		$result = $wpdb->query( $sql );
+
+		// Action called after string_package_id column is added to icl_strings tale
+		do_action( 'wpml_st_strings_table_altered' );
+
+		return $result;
 	}
 
 	private static function add_type_to_icl_strings() {
 		global $wpdb;
 		$sql = 'ALTER TABLE `' . self::$table_name . "` ADD `type` VARCHAR(40) NOT NULL DEFAULT 'LINE' AFTER string_package_id";
 
-		return $wpdb->query( $sql );
+		$result = $wpdb->query( $sql );
+
+		// Action called after type column is added to icl_strings tale
+		do_action( 'wpml_st_strings_table_altered' );
+
+		return $result;
 	}
 
 	private static function add_title_to_icl_strings() {
 		global $wpdb;
 		$sql = 'ALTER TABLE `' . self::$table_name . '` ADD `title` VARCHAR(160) NULL AFTER type';
 
-		return $wpdb->query( $sql );
+		$result = $wpdb->query( $sql );
+
+		// Action called after title column is added to icl_strings tale
+		do_action( 'wpml_st_strings_table_altered' );
+
+		return $result;
 	}
 
 	public static function build_icl_strings_columns_if_required() {
@@ -90,7 +105,7 @@ class WPML_Package_Translation_Schema {
 				if ( ! self::current_table_has_column( 'title' ) ) {
 					self::add_title_to_icl_strings();
 				}
-				update_option( 'wpml-package-translation-string-table-updated', true );
+				update_option( 'wpml-package-translation-string-table-updated', true, 'no' );
 			}
 		}
 	}
@@ -111,7 +126,7 @@ class WPML_Package_Translation_Schema {
 				if ( ! self::current_table_has_column( 'view_link' ) ) {
 					self::add_view_link_to_icl_string_packages();
 				}
-				update_option( 'wpml-package-translation-string-packages-table-updated', '0.0.2' );
+				update_option( 'wpml-package-translation-string-packages-table-updated', '0.0.2', 'no' );
 			}
 		}
 	}

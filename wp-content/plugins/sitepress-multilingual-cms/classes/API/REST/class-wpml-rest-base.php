@@ -10,14 +10,14 @@ abstract class WPML_REST_Base {
 
 	const REST_NAMESPACE = 'wpml/v1';
 	/**
-	 * @var null
+	 * @var string
 	 */
 	protected $namespace;
 
 	/**
 	 * WPML_REST_Base constructor.
 	 *
-	 * @param null $namespace Defaults to `\WPML_REST_Base::REST_NAMESPACE`.
+	 * @param string|null $namespace Defaults to `\WPML_REST_Base::REST_NAMESPACE`.
 	 */
 	public function __construct( $namespace = null ) {
 		if ( ! $namespace ) {

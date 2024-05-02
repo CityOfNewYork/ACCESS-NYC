@@ -11,7 +11,7 @@ class WPML_Lang_Domains_Box extends WPML_SP_User {
 		$active_languages = $this->sitepress->get_active_languages();
 		$default_language = $this->sitepress->get_default_language();
 		$language_domains = $this->sitepress->get_setting( 'language_domains', array() );
-		$default_home     = $this->sitepress->convert_url( $this->sitepress->get_wp_api()->get_home_url(), $default_language );
+		$default_home     = (string) $this->sitepress->convert_url( $this->sitepress->get_wp_api()->get_home_url(), $default_language );
 		$home_schema      = wpml_parse_url( $default_home, PHP_URL_SCHEME ) . '://';
 		$home_path        = wpml_parse_url( $default_home, PHP_URL_PATH );
 		$is_per_domain    = WPML_LANGUAGE_NEGOTIATION_TYPE_DOMAIN === (int) $this->sitepress->get_setting( 'language_negotiation_type' );
@@ -51,7 +51,7 @@ class WPML_Lang_Domains_Box extends WPML_SP_User {
                                     value="<?php echo $this->get_language_domain( $code, $default_home, $language_domains ); ?>"
                                     data-language="<?php echo esc_attr( $code ); ?>"
                                     size="30"/>
-							<?php if ( isset( $home_path[1] ) ) { ?>
+							<?php if ( isset( $home_path[1] ) && is_string( $home_path[1] ) ) { ?>
                                 <code><?php echo esc_html( $home_path ); ?></code>
 							<?php } ?>
                         </td>

@@ -3,7 +3,8 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "en"
          },
          "Connect this site to your %s account": [
             "Підключіть цей веб-сайт до свого облікового запису %s"

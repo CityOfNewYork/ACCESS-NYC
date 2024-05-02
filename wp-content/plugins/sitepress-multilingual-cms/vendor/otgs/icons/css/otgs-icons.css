@@ -1,198 +1,503 @@
-@charset "UTF-8";
-
 @font-face {
-  font-family: "otgs-icons";
-  src:url("../fonts/otgs-icons.eot");
-  src:url("../fonts/otgs-icons.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/otgs-icons.woff") format("woff"),
-    url("../fonts/otgs-icons.ttf") format("truetype"),
-    url("../fonts/otgs-icons.svg#otgs-icons") format("svg");
-  font-weight: normal;
-  font-style: normal;
-
+    font-family: "otgs-icons";
+    src: url("../fonts/otgs-icons.eot?49e5d3e0aad3ed901389857c5c1533e7#iefix") format("embedded-opentype"),
+url("../fonts/otgs-icons.ttf?49e5d3e0aad3ed901389857c5c1533e7") format("truetype"),
+url("../fonts/otgs-icons.woff?49e5d3e0aad3ed901389857c5c1533e7") format("woff"),
+url("../fonts/otgs-icons.woff2?49e5d3e0aad3ed901389857c5c1533e7") format("woff2");
 }
 
-[class^="otgs-ico-"]:before,
-[class*=" otgs-ico-"]:before {
-  font-family: "otgs-icons" !important;
-  font-style: normal !important;
-  font-weight: normal !important;
-  font-variant: normal !important;
-  text-transform: none !important;
-  speak: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+[class*="otgs-ico"] {
+    display: inline-block;
+    transform: translate(0, 0);
 }
+[class*="otgs-ico"]:focus {
+   outline: none;
+}
+
+
+[class^="otgs-ico-"]:before, [class*=" otgs-ico-"]:before, [data-otgs-ico]:before {
+    font-family: otgs-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: text-bottom;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.otgs-ico-32:before {
+  font-size: 32px;
+}
+[data-otgs-ico]:before {
+  content: attr(data-otgs-ico);
+}
+
 
 .otgs-ico-note-add:before {
-  content: "\61";
+    content: "\61";
 }
 .otgs-ico-note-add-o:before {
-  content: "\62";
+    content: "\62";
 }
 .otgs-ico-translated:before {
-  content: "\63";
+    content: "\63";
 }
 .otgs-ico-yes:before {
-  content: "\64";
+    content: "\64";
 }
 .otgs-ico-in-progress:before {
-  content: "\65";
+    content: "\65";
 }
 .otgs-ico-copy:before {
-  content: "\66";
+    content: "\66";
 }
 .otgs-ico-copy-o:before {
-  content: "\67";
+    content: "\67";
 }
 .otgs-ico-note-edit:before {
-  content: "\69";
+    content: "\69";
 }
 .otgs-ico-add:before {
-  content: "\6b";
+    content: "\6b";
 }
 .otgs-ico-refresh:before {
-  content: "\6c";
+    content: "\6c";
 }
 .otgs-ico-no:before {
-  content: "\6e";
+    content: "\6e";
 }
 .otgs-ico-not-translated:before {
-  content: "\6f";
+    content: "\6f";
 }
 .otgs-ico-delete:before {
-  content: "\70";
+    content: "\70";
 }
 .otgs-ico-waiting:before {
-  content: "\71";
+    content: "\71";
 }
 .otgs-ico-warning:before {
-  content: "\73";
+    content: "\73";
 }
 .otgs-ico-original:before {
-  content: "\74";
+    content: "\74";
 }
 .otgs-ico-needs-update:before {
-  content: "\75";
+    content: "\75";
 }
 .otgs-ico-cred:before {
-  content: "\77";
+    content: "\77";
 }
 .otgs-ico-layouts:before {
-  content: "\78";
+    content: "\78";
 }
 .otgs-ico-module-manager:before {
-  content: "\79";
+    content: "\79";
 }
 .otgs-ico-toolset:before {
-  content: "\7a";
+    content: "\7a";
 }
 .otgs-ico-types:before {
-  content: "\41";
+    content: "\41";
 }
 .otgs-ico-views:before {
-  content: "\42";
+    content: "\42";
 }
 .otgs-ico-edit:before {
-  content: "\68";
+    content: "\68";
 }
 .otgs-ico-duplicate:before {
-  content: "\6d";
+    content: "\6d";
 }
 .otgs-ico-basket:before {
-  content: "\72";
+    content: "\72";
 }
 .otgs-ico-discoverwp:before {
-  content: "\43";
+    content: "\43";
 }
 .otgs-ico-otgs:before {
-  content: "\45";
+    content: "\45";
 }
 .otgs-ico-wrench:before {
-  content: "\46";
+    content: "\46";
 }
 .otgs-ico-link:before {
-  content: "\47";
+    content: "\47";
 }
 .otgs-ico-envelope-o:before {
-  content: "\48";
+    content: "\48";
 }
 .otgs-ico-user:before {
-  content: "\49";
+    content: "\49";
 }
 .otgs-ico-wpml-cms-nav:before {
-  content: "\4a";
+    content: "\4a";
 }
 .otgs-ico-wpml-media:before {
-  content: "\4b";
+    content: "\4b";
 }
 .otgs-ico-wpml-string-translation:before {
-  content: "\4c";
+    content: "\4c";
 }
 .otgs-ico-wpml-translation-management:before {
-  content: "\4d";
+    content: "\4d";
 }
 .otgs-ico-picture:before {
-  content: "\4e";
+    content: "\4e";
 }
 .otgs-ico-toolset-training:before {
-  content: "\4f";
+    content: "\4f";
 }
 .otgs-ico-access-title:before {
-  content: "\50";
+    content: "\50";
 }
 .otgs-ico-views-title:before {
-  content: "\51";
+    content: "\51";
 }
 .otgs-ico-cred-title:before {
-  content: "\52";
+    content: "\52";
 }
 .otgs-ico-layouts-title:before {
-  content: "\53";
+    content: "\53";
 }
 .otgs-ico-types-title:before {
-  content: "\54";
+    content: "\54";
 }
 .otgs-ico-module-manager-title:before {
-  content: "\55";
+    content: "\55";
 }
 .otgs-ico-access:before {
-  content: "\76";
+    content: "\76";
 }
 .otgs-ico-bullhorn:before {
-  content: "\56";
+    content: "\56";
 }
 .otgs-ico-comment:before {
-  content: "\57";
+    content: "\57";
 }
 .otgs-ico-quote:before {
-  content: "\58";
+    content: "\58";
 }
 .otgs-ico-star:before {
-  content: "\5a";
+    content: "\5a";
 }
 .otgs-ico-wpml:before {
-  content: "\44";
+    content: "\44";
 }
 .otgs-ico-edit-note-o:before {
-  content: "\6a";
+    content: "\6a";
 }
 .otgs-ico-spinner:before {
-  content: "\30";
+    content: "\30";
 }
 .otgs-ico-thumbsup:before {
-  content: "\59";
+    content: "\59";
 }
 .otgs-ico-status:before {
-  content: "\31";
+    content: "\31";
 }
 .otgs-ico-file:before {
-  content: "\32";
+    content: "\32";
 }
 .otgs-ico-cancel:before {
-  content: "\33";
+    content: "\33";
 }
 .otgs-ico-download:before {
-  content: "\34";
+    content: "\34";
+}
+.otgs-ico-close:before {
+    content: "\f158";
+}
+.otgs-ico-help:before {
+    content: "\f223";
+}
+.otgs-ico-info:before {
+    content: "\f348";
+}
+.otgs-ico-caret-up:before {
+    content: "\f142";
+}
+.otgs-ico-caret-right:before {
+    content: "\f139";
+}
+.otgs-ico-caret-down:before {
+    content: "\f140";
+}
+.otgs-ico-caret-left:before {
+    content: "\f141";
+}
+.otgs-ico-unlink:before {
+    content: "\f225";
+}
+.otgs-ico-translation:before {
+    content: "\f326";
+}
+.otgs-ico-new:before {
+    content: "\f534";
+}
+.otgs-ico-mail:before {
+    content: "\f466";
+}
+.otgs-ico-chat:before {
+    content: "\f125";
+}
+.otgs-ico-sent:before {
+    content: "\f310";
+}
+.otgs-ico-lock:before {
+    content: "\f160";
+}
+.otgs-ico-unlock:before {
+    content: "\f528";
+}
+.otgs-ico-media:before {
+    content: "\f233";
+}
+.otgs-ico-wpml-sticky-links:before {
+    content: "\f103";
+}
+.otgs-ico-add-circle-o:before {
+    content: "\f619";
+}
+.otgs-ico-add-circle:before {
+    content: "\f61a";
+}
+.otgs-ico-align-justify:before {
+    content: "\f61b";
+}
+.otgs-ico-archive:before {
+    content: "\f61c";
+}
+.otgs-ico-arrow-down:before {
+    content: "\f61d";
+}
+.otgs-ico-arrow-left:before {
+    content: "\f61e";
+}
+.otgs-ico-arrow-right:before {
+    content: "\f61f";
+}
+.otgs-ico-arrow-up:before {
+    content: "\f620";
+}
+.otgs-ico-bell-o:before {
+    content: "\f621";
+}
+.otgs-ico-bell:before {
+    content: "\f622";
+}
+.otgs-ico-bug:before {
+    content: "\f623";
+}
+.otgs-ico-bulb:before {
+    content: "\f624";
+}
+.otgs-ico-calculator:before {
+    content: "\f625";
+}
+.otgs-ico-check-circle-o:before {
+    content: "\f626";
+}
+.otgs-ico-check-circle:before {
+    content: "\f627";
+}
+.otgs-ico-clock:before {
+    content: "\f628";
+}
+.otgs-ico-delete-o:before {
+    content: "\f629";
+}
+.otgs-ico-doc:before {
+    content: "\f62a";
+}
+.otgs-ico-drag:before {
+    content: "\f62b";
+}
+.otgs-ico-envelope:before {
+    content: "\f62c";
+}
+.otgs-ico-external link:before {
+    content: "\f62d";
+}
+.otgs-ico-eye-hide:before {
+    content: "\f62e";
+}
+.otgs-ico-eye-show:before {
+    content: "\f62f";
+}
+.otgs-ico-flag:before {
+    content: "\f630";
+}
+.otgs-ico-frown:before {
+    content: "\f631";
+}
+.otgs-ico-history:before {
+    content: "\f632";
+}
+.otgs-ico-info-o:before {
+    content: "\f633";
+}
+.otgs-ico-key:before {
+    content: "\f634";
+}
+.otgs-ico-laptop:before {
+    content: "\f635";
+}
+.otgs-ico-lightning:before {
+    content: "\f636";
+}
+.otgs-ico-list-ul:before {
+    content: "\f637";
+}
+.otgs-ico-loading:before {
+    content: "\f638";
+}
+.otgs-ico-map:before {
+    content: "\f639";
+}
+.otgs-ico-meh:before {
+    content: "\f63a";
+}
+.otgs-ico-minus:before {
+    content: "\f63b";
+}
+.otgs-ico-needs-review:before {
+    content: "\f63c";
+}
+.otgs-ico-note-o:before {
+    content: "\f63d";
+}
+.otgs-ico-note:before {
+    content: "\f63e";
+}
+.otgs-ico-ok:before {
+    content: "\f63f";
+}
+.otgs-ico-photo:before {
+    content: "\f640";
+}
+.otgs-ico-plug:before {
+    content: "\f641";
+}
+.otgs-ico-question-circle-o:before {
+    content: "\f642";
+}
+.otgs-ico-question-circle:before {
+    content: "\f643";
+}
+.otgs-ico-search:before {
+    content: "\f644";
+}
+.otgs-ico-smile:before {
+    content: "\f645";
+}
+.otgs-ico-star-half:before {
+    content: "\f646";
+}
+.otgs-ico-star-o:before {
+    content: "\f647";
+}
+.otgs-ico-trash:before {
+    content: "\f648";
+}
+.otgs-ico-unarchive:before {
+    content: "\f649";
+}
+.otgs-ico-undo:before {
+    content: "\f64a";
+}
+.otgs-ico-upload:before {
+    content: "\f64b";
+}
+.otgs-ico-warning-o:before {
+    content: "\f64c";
+}
+.otgs-ico-calendar:before {
+    content: "\f64d";
+}
+.otgs-ico-filter:before {
+    content: "\f64e";
+}
+.otgs-ico-review:before {
+    content: "\f64f";
+}
+.otgs-ico-lightning-o:before {
+    content: "\f650";
+}
+.otgs-ico-card:before {
+    content: "\f651";
+}
+.otgs-ico-code:before {
+    content: "\f652";
+}
+.otgs-ico-coin:before {
+    content: "\f653";
+}
+.otgs-ico-connection:before {
+    content: "\f654";
+}
+.otgs-ico-discount:before {
+    content: "\f655";
+}
+.otgs-ico-funnel-o:before {
+    content: "\f656";
+}
+.otgs-ico-funnel:before {
+    content: "\f657";
+}
+.otgs-ico-guarantee:before {
+    content: "\f658";
+}
+.otgs-ico-infinity:before {
+    content: "\f659";
+}
+.otgs-ico-invoice:before {
+    content: "\f65a";
+}
+.otgs-ico-login:before {
+    content: "\f65b";
+}
+.otgs-ico-pause-circle-o:before {
+    content: "\f65c";
+}
+.otgs-ico-pause-circle:before {
+    content: "\f65d";
+}
+.otgs-ico-pause:before {
+    content: "\f65e";
+}
+.otgs-ico-play-circle-o:before {
+    content: "\f65f";
+}
+.otgs-ico-play-circle:before {
+    content: "\f660";
+}
+.otgs-ico-play:before {
+    content: "\f661";
+}
+.otgs-ico-settings:before {
+    content: "\f662";
+}
+.otgs-ico-statistics:before {
+    content: "\f663";
+}
+.otgs-ico-table:before {
+    content: "\f664";
+}
+.otgs-ico-youtube:before {
+    content: "\f665";
+}
+.otgs-ico-external-link:before {
+    content: "\f101";
+}
+.otgs-ico-lifesaver:before {
+    content: "\f102";
+}
+
+/***************************** OTGS ico aliases **************************/
+
+@-webkit-keyframes spin {
+	0%  {transform: rotate(0deg);}
+	100% {transform: rotate(360deg);}
 }

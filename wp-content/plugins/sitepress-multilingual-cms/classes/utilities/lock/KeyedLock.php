@@ -45,6 +45,10 @@ class KeyedLock extends Lock {
 
 	public function release() {
 		delete_option( $this->keyName );
+		// When running concurrent calls to delete_option, the cache might not be updated properly.
+		// And WP will skip its own cache invalidation.
+		wp_cache_delete( $this->keyName, 'options' );
+
 		return parent::release();
 	}
 

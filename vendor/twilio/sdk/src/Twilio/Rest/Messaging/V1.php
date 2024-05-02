@@ -14,25 +14,37 @@ use Twilio\Exceptions\TwilioException;
 use Twilio\InstanceContext;
 use Twilio\Rest\Messaging\V1\BrandRegistrationList;
 use Twilio\Rest\Messaging\V1\DeactivationsList;
+use Twilio\Rest\Messaging\V1\DomainCertsList;
+use Twilio\Rest\Messaging\V1\DomainConfigList;
 use Twilio\Rest\Messaging\V1\ExternalCampaignList;
 use Twilio\Rest\Messaging\V1\ServiceList;
+use Twilio\Rest\Messaging\V1\TollfreeVerificationList;
 use Twilio\Rest\Messaging\V1\UsecaseList;
 use Twilio\Version;
 
 /**
  * @property BrandRegistrationList $brandRegistrations
  * @property DeactivationsList $deactivations
+ * @property DomainCertsList $domainCerts
+ * @property DomainConfigList $domainConfig
  * @property ExternalCampaignList $externalCampaign
  * @property ServiceList $services
+ * @property TollfreeVerificationList $tollfreeVerifications
  * @property UsecaseList $usecases
  * @method \Twilio\Rest\Messaging\V1\BrandRegistrationContext brandRegistrations(string $sid)
+ * @method \Twilio\Rest\Messaging\V1\DomainCertsContext domainCerts(string $domainSid)
+ * @method \Twilio\Rest\Messaging\V1\DomainConfigContext domainConfig(string $domainSid)
  * @method \Twilio\Rest\Messaging\V1\ServiceContext services(string $sid)
+ * @method \Twilio\Rest\Messaging\V1\TollfreeVerificationContext tollfreeVerifications(string $sid)
  */
 class V1 extends Version {
     protected $_brandRegistrations;
     protected $_deactivations;
+    protected $_domainCerts;
+    protected $_domainConfig;
     protected $_externalCampaign;
     protected $_services;
+    protected $_tollfreeVerifications;
     protected $_usecases;
 
     /**
@@ -59,6 +71,20 @@ class V1 extends Version {
         return $this->_deactivations;
     }
 
+    protected function getDomainCerts(): DomainCertsList {
+        if (!$this->_domainCerts) {
+            $this->_domainCerts = new DomainCertsList($this);
+        }
+        return $this->_domainCerts;
+    }
+
+    protected function getDomainConfig(): DomainConfigList {
+        if (!$this->_domainConfig) {
+            $this->_domainConfig = new DomainConfigList($this);
+        }
+        return $this->_domainConfig;
+    }
+
     protected function getExternalCampaign(): ExternalCampaignList {
         if (!$this->_externalCampaign) {
             $this->_externalCampaign = new ExternalCampaignList($this);
@@ -71,6 +97,13 @@ class V1 extends Version {
             $this->_services = new ServiceList($this);
         }
         return $this->_services;
+    }
+
+    protected function getTollfreeVerifications(): TollfreeVerificationList {
+        if (!$this->_tollfreeVerifications) {
+            $this->_tollfreeVerifications = new TollfreeVerificationList($this);
+        }
+        return $this->_tollfreeVerifications;
     }
 
     protected function getUsecases(): UsecaseList {

@@ -6,6 +6,7 @@
             "key": "field_58c1020ec4450",
             "label": "Program Links",
             "name": "program_links",
+            "aria-label": "",
             "type": "post_object",
             "instructions": "Select up to 3 programs you would like to be highlighted in the search modal window.",
             "required": 1,
@@ -22,7 +23,8 @@
             "allow_null": 0,
             "multiple": 1,
             "return_format": "object",
-            "ui": 1
+            "ui": 1,
+            "bidirectional_target": []
         }
     ],
     "location": [
@@ -57,5 +59,8 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1555360136
+    "show_in_rest": false,
+    "modified": 1714587205,
+    "local_file": "\/var\/www\/html\/wp-content\/themes\/access\/acf-json\/group_58c101e96d115.json",
+    "acfml_field_group_mode": "advanced"
 }

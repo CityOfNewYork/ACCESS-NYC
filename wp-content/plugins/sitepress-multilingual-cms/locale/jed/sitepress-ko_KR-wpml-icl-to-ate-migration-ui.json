@@ -1,0 +1,253 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "From:": [
+            "원본 언어:"
+         ],
+         "--Choose language--": [
+            "--언어 선택--"
+         ],
+         "to:": [
+            "대상 언어:"
+         ],
+         "Set language pair(s) for Translator %s:": [
+            "번역가 %s에 대한 언어 쌍 설정:"
+         ],
+         "+ Add more language pairs for this translator": [
+            "+ 이 번역가에게 다른 언어 추가하기"
+         ],
+         "Translation Memory was successfully copied to Advanced Translation Editor.": [
+            "번역 메모리가 고급 번역 편집기에 성공적으로 복사되었습니다."
+         ],
+         "Deactivate ICanLocalize.com as Translation Service on this site": [
+            "이 사이트에서 ICanLocalize.com을 번역 서비스처럼 비활성화합니다"
+         ],
+         "Missing a translator? Or were new jobs since the last copy of the Translation Memory?": [
+            "번역가가 없나요? 아니면 번역 메모리의 마지막 복사본 이후 새로운 작업이 있었나요?"
+         ],
+         "Enter here your ICanLocalize authentication details.": [
+            "여기에 ICanLocalize 인증 세부 정보를 입력하세요."
+         ],
+         "API Token:": [
+            "API 토큰:"
+         ],
+         "Please enter valid value for ICL token.": [
+            "ICL 토큰의 올바른 값을 입력하세요."
+         ],
+         "Enter ICL API token here": [
+            "여기에 ICL API 토큰을 입력하세요"
+         ],
+         "Submit": [
+            "제출"
+         ],
+         "Sign up": [
+            "API 토큰을"
+         ],
+         "to ICanLocalize to receive your API token.": [
+            "받으려면 ICanLocalize에 등록하세요."
+         ],
+         "Already have an account? Login and": [
+            "이미 계정이 있으신가요? 로그인하여"
+         ],
+         "get your token.": [
+            "토큰을 받으세요."
+         ],
+         "Copy new Translation Memory to Advanced Translation Memory": [
+            "새 번역 메모리를 고급 번역 메모리에 복사하기"
+         ],
+         "Import translation memory": [
+            "번역 메모리 가져오기"
+         ],
+         "ICanLocalize is already deactivated on this site": [
+            "이 사이트에서 ICanLocalize가 이미 비활성화되었습니다"
+         ],
+         "You can still import Translators or Copy Translation Memory to Advanced Translator Editor": [
+            "번역가를 가져오거나 번역 메모리를 고급 번역기 편집기에 복사할 수도 있습니다"
+         ],
+         "Move from ICanLocalize.com to Advanced Translation Editor": [
+            "ICanLocalize.com에서 고급 번역 편집기로 이동"
+         ],
+         "Import translators": [
+            "번역가 가져오기"
+         ],
+         "Come back": [
+            "돌아오기"
+         ],
+         "Cancel": [
+            "취소"
+         ],
+         "Save": [
+            "저장"
+         ],
+         "Name": [
+            "이름"
+         ],
+         "Language Pairs": [
+            "언어 쌍"
+         ],
+         "Not supported pairs:": [
+            "지원되지 않는 쌍:"
+         ],
+         "ICanLocalize.com deactivated": [
+            "ICanLocalize.com 비활성화됨"
+         ],
+         "Translate memory is imported": [
+            "번역 메모리를 가져왔습니다"
+         ],
+         "There is no translators in ICL": [
+            "ICL에 번역가가 없습니다"
+         ],
+         "Translators saved": [
+            "번역가 저장됨"
+         ],
+         "%s file upload failed.": [
+            "%s 파일 업로드 실패."
+         ],
+         "Flag": [
+            "국기"
+         ],
+         "Flag file": [
+            "국기 파일"
+         ],
+         "You just added  language. Next, select it as the site's default language or a translation language.": [
+            "방금 언어를 추가했습니다. 계속하여 이 언어를 사이트의 기본 언어 또는 번역 언어로 선택하십시오."
+         ],
+         "Language added": [
+            "언어 추가됨"
+         ],
+         "The value \"%s\" already exists": [
+            "값 \"%s\"이(가) 이미 있습니다."
+         ],
+         "Add a new language": [
+            "새 언어 추가"
+         ],
+         "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
+            "아래 목록에서 일반적인 언어를 선택하여 국가별 언어를 생성하십시오. 그런 다음, 해당 언어가 현지화에 사용될 국가를 선택하십시오."
+         ],
+         "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
+            "WPML은 데이터베이스에 이미 있는 조합을 선택하여 필요한 필드를 채울 수 있습니다.  <AddingACustomLanguageLink />에 대한 자세한 내용을 살펴보십시오."
+         ],
+         "Cannot find?": [
+            "찾을 수 없습니까?"
+         ],
+         "Click here": [
+            "여기 클릭"
+         ],
+         "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
+            "잘못된 형식입니다. 소문자와 \"-\"만 포함할 수 있습니다. 예: \"fr\" , \"pt-br\", \"zh-hans\""
+         ],
+         "Language": [
+            "언어"
+         ],
+         "Location": [
+            "위치"
+         ],
+         "Code": [
+            "코드"
+         ],
+         "The language will not be supported by automatic translations": [
+            "이 언어는 자동 번역이 지원되지 않습니다."
+         ],
+         "Language mapping": [
+            "언어 매핑"
+         ],
+         "Don't map this language": [
+            "이 언어 매핑하지 않음"
+         ],
+         "Default locale": [
+            "기본 로케일"
+         ],
+         "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
+            "잘못된 형식입니다. 소문자와 \"-\"만 포함할 수 있습니다. 예: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+         ],
+         "hreflang": [
+            "hreflang"
+         ],
+         "Encode url?": [
+            "URL을 인코딩할까요?"
+         ],
+         "Flags must be:": [
+            "국기는 다음과 같아야 합니다:"
+         ],
+         "NO": [
+            "아니오"
+         ],
+         "YES": [
+            "예"
+         ],
+         " (required)": [
+            "(필수)"
+         ],
+         "Please fill in the field": [
+            "필드를 입력하십시오."
+         ],
+         "PNG, SVG, or JPG files": [
+            "PNG, SVG 또는 JPG 파일"
+         ],
+         "Save language": [
+            "언어 저장"
+         ],
+         "18 x 12 pixels": [
+            "18 x 12 픽셀"
+         ],
+         "Read more about ": [
+            "자세한 정보:"
+         ],
+         "The name of your language as it will appear on your site's language switcher.": [
+            "언어의 이름으로 사이트의 언어 변환기에 표시됩니다."
+         ],
+         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "데이터베이스와 URL에서 언어를 식별하는 고유 값. 저장 후에는 언어 코드를 변경할 수 없습니다."
+         ],
+         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "사용자 정의 언어가 기존 언어와 유사한 경우 기존 언어의 맞춤법 검사와 자동 번역을 사용할 수 있습니다. 예를 들어, 사용자 정의 언어가 독일어(스위스)인 경우 맞춤법 검사와 자동 번역에 사용할 언어로 독일어에 매핑할 수 있습니다. 사용자 정의 언어를 기존 언어에 매핑하지 않으면 해당 언어에서 맞춤법 검사와 자동 번역 기능을 사용할 수 없습니다."
+         ],
+         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "MO 및 PO 파일에서 번역을 로드할 때 WPML이 확인하는 값. 기본 로케일은 WordPress 설정의 /wp-content/languages/ 폴더에 있는 파일 이름에 포함되어 있습니다."
+         ],
+         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "Google은 hreflang 속성을 사용하여 사용자들에게 관련 언어 및 위치의 사이트로 안내합니다. 예:"
+         ],
+         "All English-speaking users: en": [
+            "모든 영어권 사용자: en"
+         ],
+         "English for UK users: en-gb": [
+            "UK 영어 사용자: en-gb"
+         ],
+         "English for US users: en-us": [
+            "US 영어 사용자: en-us"
+         ],
+         "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
+            "이 언어의 URL이 인코딩되었는지 또는 ASCII 문자를 사용하는지 결정합니다(확실하지 않으면 \"아니오\"로 두세요)."
+         ],
+         "adding a custom language": [
+            "사용자 정의 언어 추가하기"
+         ],
+         "Default language": [
+            "기본 언어"
+         ],
+         "What is the current language of your website?": [
+            "사이트의 현재 언어는 무엇입니까?"
+         ],
+         "Translation languages": [
+            "번역 언어"
+         ],
+         "Which languages do you want to translate your site into?": [
+            "사이트를 어떤 언어로 번역하기를 원하십니까?"
+         ],
+         "If you cannot find languages that you need in the list": [
+            "목록에서 원하는 언어를 찾을 수 없는 경우"
+         ],
+         "create a custom language": [
+            "사용자 정의 언어를 만드십시오."
+         ],
+         "What are the languages of your site?": [
+            "사이트의 언어는 무엇입니까?"
+         ]
+      }
+   }
+}

@@ -6,7 +6,7 @@ class DownloadsList {
 	public static function getDownloadRow( $download_id, $download, $site_key, $repository_id ) {
 		$url = OTGS_Installer()->append_site_key_to_download_url( $download['url'], $site_key, $repository_id );
 
-		$download_data = base64_encode( json_encode( [
+		$download_data = base64_encode( (string) json_encode( [
 			'url'           => $url,
 			'slug'          => $download['slug'],
 			'nonce'         => wp_create_nonce( 'install_plugin_' . $url ),

@@ -35,7 +35,7 @@
                                                     ) || WP_Installer()->dependencies->cant_download( $repository_id );
 
                                     ?>
-                                    <input type="checkbox" name="downloads[]" value="<?php echo base64_encode(json_encode($download_data)); ?>" <?php 
+                                    <input type="checkbox" name="downloads[]" value="<?php echo base64_encode( (string) json_encode($download_data)); ?>" <?php
                                         if($disabled): ?>disabled="disabled"<?php endif; ?> />&nbsp;
                                         
                                     </label>                                

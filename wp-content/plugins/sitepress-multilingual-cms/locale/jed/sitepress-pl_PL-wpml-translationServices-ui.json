@@ -3,7 +3,8 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "pl"
          },
          "Connect this site to your %s account": [
             "Połącz tę witrynę ze swoim kontem %s"
@@ -33,7 +34,7 @@
             "Dokumentacja"
          ],
          "Activate": [
-            "Włącz"
+            "Uruchom"
          ],
          "Name": [
             "Nazwa"

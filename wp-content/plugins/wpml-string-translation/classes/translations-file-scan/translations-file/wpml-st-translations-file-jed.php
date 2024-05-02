@@ -22,7 +22,7 @@ class WPML_ST_Translations_File_JED implements IWPML_ST_Translations_File {
 	 */
 	public function get_translations() {
 		$translations = array();
-		$data         = json_decode( file_get_contents( $this->filepath ) );
+		$data         = json_decode( (string) file_get_contents( $this->filepath ) );
 
 		if ( isset( $data->locale_data->messages ) ) {
 
@@ -68,7 +68,7 @@ class WPML_ST_Translations_File_JED implements IWPML_ST_Translations_File {
 		$context = '';
 		$parts   = explode( $this->decoded_eot_char, $string );
 
-		if ( count( $parts ) > 1 ) {
+		if ( $parts && count( $parts ) > 1 ) {
 			$context = $parts[0];
 			$string  = $parts[1];
 		}

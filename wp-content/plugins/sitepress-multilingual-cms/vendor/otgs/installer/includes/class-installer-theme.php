@@ -225,23 +225,19 @@ class Installer_Theme_Class {
         }
 
         //Step4, we are done looping, check if there are any repos that have themes
-        if ( empty($registration_status) ) {
-
+        if ( empty( $registration_status ) ) {
             //No registration on any repos
-            return FALSE;
-
-        } elseif ( !(empty($registration_status)) ) {
-
-            //Has some registration on some repos
-            //We then checked if this user has any active subscriptions
-            if ( empty($any_subscription_has_theme) ) {
-                //No subscription
-                return TRUE;
-            } else {
-                //Has subscription found
-                return FALSE;
-            }
+            return false;
         }
+
+		//Has some registration on some repos
+		//We then checked if this user has any active subscriptions
+		if ( empty($any_subscription_has_theme) ) {
+			//No subscription
+			return true;
+		}
+
+		return false;
     }
 
     /** Check if its the commercial plugin screen */
@@ -424,7 +420,7 @@ class Installer_Theme_Class {
             foreach ( $themes as $k => $theme ) {
                 if ( $slug == $theme['basename'] ) {
                     $theme['download_link'] = WP_Installer()->append_site_key_to_download_url( $theme['url'], $this->installer_site_key[$this->installer_theme_active_tab], $this->installer_theme_active_tab );
-                    $theme = json_decode( json_encode( $theme ), FALSE );
+                    $theme = json_decode( (string) json_encode( $theme ), false );
                     return $theme;
                 }
             }
@@ -570,7 +566,7 @@ class Installer_Theme_Class {
 	            }
 
 	            if ( $update_available ) {
-                    if ( (is_array( $update_available )) && (!(empty($update_available))) ) {
+                    if ( is_array( $update_available ) ) {
                         //Has updates available coming from this specific theme repo
                         //Let's loop through the themes that needs update
                         foreach ( $update_available as $theme_slug => $v ) {

@@ -5,6 +5,18 @@ namespace WPML\PB\Cornerstone;
 class Utils {
 
 	const MODULE_TYPE_PREFIX = 'classic:';
+	const LAYOUT_TYPES       = [
+		'bar',
+		'container',
+		'section',
+		'row',
+		'column',
+		'layout-row',
+		'layout-column',
+		'layout-grid',
+		'layout-cell',
+		'layout-div',
+	];
 
 	/**
 	 * @param array $data
@@ -24,11 +36,7 @@ class Utils {
 		// Remove the classic prefix before checking.
 		$type = preg_replace( '/^' . self::MODULE_TYPE_PREFIX . '/', '', $type );
 
-		return in_array(
-			$type,
-			[ 'bar', 'container', 'section', 'row', 'column', 'layout-row', 'layout-column', 'layout-grid', 'layout-cell' ],
-			true
-		);
+		return in_array( $type, self::LAYOUT_TYPES, true );
 	}
 
 }

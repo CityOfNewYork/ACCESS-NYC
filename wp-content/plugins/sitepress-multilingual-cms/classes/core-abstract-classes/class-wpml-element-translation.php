@@ -227,26 +227,49 @@ abstract class WPML_Element_Translation extends WPML_WPDB_User {
 			return;
 		}
 
-		$trid_snippet = ' tridt.element_id IN (' . wpml_prepare_in( $element_ids, '%d' ) . ')';
-		$sql          = $this->build_sql( $trid_snippet );
-		$elements     = $this->wpdb->get_results( $sql, ARRAY_A );
+		$elements = $this->wpdb->get_results( $this->get_sql_by_element_ids( $element_ids ), ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 		$this->group_and_populate_cache( $elements );
 	}
 
 	/**
-	 * @param string $trid_snippet
+	 * @return string
+	 */
+	private function get_base_sql() {
+		return "
+			SELECT
+				wpml_translations.translation_id,
+				wpml_translations.element_id,
+				wpml_translations.language_code,
+				wpml_translations.source_language_code,
+				wpml_translations.trid,
+				wpml_translations.element_type
+			FROM {$this->wpdb->prefix}icl_translations wpml_translations
+			" . $this->get_element_join();
+	}
+
+	/**
+	 * @param array $element_ids
 	 *
 	 * @return string
 	 */
-	private function build_sql( $trid_snippet ) {
+	private function get_sql_by_element_ids( $element_ids ) {
+		return $this->get_base_sql()
+		. "
+		JOIN {$this->wpdb->prefix}icl_translations tridt
+			ON tridt.element_type = wpml_translations.element_type
+				AND tridt.trid = wpml_translations.trid
+		WHERE tridt.element_id IN(" . wpml_prepare_in( $element_ids, '%d' ) . ")"; // phpcs:ignore Squiz.Strings.DoubleQuoteUsage.NotRequired
+	}
 
-		return 'SELECT wpml_translations.translation_id, wpml_translations.element_id, wpml_translations.language_code, wpml_translations.source_language_code, wpml_translations.trid, wpml_translations.element_type
-				    ' . $this->get_element_join() . "
-				    JOIN {$this->wpdb->prefix}icl_translations tridt
-				      ON tridt.element_type = wpml_translations.element_type
-				      AND tridt.trid = wpml_translations.trid
-				    WHERE {$trid_snippet}";
+	/**
+	 * @param int $trid
+	 *
+	 * @return string
+	 */
+	private function get_sql_by_trid( $trid ) {
+		return $this->get_base_sql()
+			. $this->wpdb->prepare( ' WHERE wpml_translations.trid = %d', $trid );
 	}
 
 	private function maybe_populate_cache( $element_id, $trid = false ) {
@@ -258,15 +281,12 @@ abstract class WPML_Element_Translation extends WPML_WPDB_User {
 		}
 		if ( ! $element_id || ! isset( $this->translations[ $element_id ] ) ) {
 			if ( ! $element_id ) {
-				$trid_snippet = $this->wpdb->prepare( ' tridt.trid = %d ', $trid );
+				$sql = $this->get_sql_by_trid( $trid );
 			} else {
-				$trid_snippet = $this->wpdb->prepare(
-					' tridt.trid = (SELECT trid ' . $this->get_element_join() . ' WHERE element_id = %d LIMIT 1)',
-					$element_id
-				);
+				$sql = $this->get_sql_by_element_ids( [ $element_id ] );
 			}
-			$sql      = $this->build_sql( $trid_snippet );
-			$elements = $this->wpdb->get_results( $sql, ARRAY_A );
+
+			$elements = $this->wpdb->get_results( $sql, ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 			$this->populate_cache( $elements );
 			if ( $element_id && ! isset( $this->translations[ $element_id ] ) ) {
 				$this->translations[ $element_id ] = array();

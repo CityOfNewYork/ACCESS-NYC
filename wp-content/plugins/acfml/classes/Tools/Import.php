@@ -2,8 +2,8 @@
 
 namespace ACFML\Tools;
 
-class Import extends Transfer {
-	public function init() {
+class Import extends Transfer implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
+	public function add_hooks() {
 		add_action( 'acf/import_field_group', [ $this, 'setLanguage' ] );
 	}
 	

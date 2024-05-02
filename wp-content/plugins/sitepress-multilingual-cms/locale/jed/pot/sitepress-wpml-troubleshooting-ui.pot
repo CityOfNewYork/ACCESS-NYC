@@ -1,0 +1,44 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/troubleshooting/cancelJobs/CancelJobs.js:17
+msgid "Preparing..."
+msgstr ""
+
+#: src/js/troubleshooting/cancelJobs/CancelJobs.js:77
+msgid "All jobs have been cancelled"
+msgstr ""
+
+#: src/js/troubleshooting/cancelJobs/CancelJobs.js:79
+msgid "There is no more jobs to cancel"
+msgstr ""
+
+#: src/js/troubleshooting/cancelJobs/CancelJobs.js:82
+msgid "The jobs cancellation has failed"
+msgstr ""
+
+#: src/js/troubleshooting/cancelJobs/CancelJobs.js:88
+msgid "Cancel in-progress automatic jobs"
+msgstr ""
+
+#: src/js/troubleshooting/lsTemplates/UpdateDomain.js:31
+msgid "Domain name has been updated"
+msgstr ""
+
+#: src/js/troubleshooting/lsTemplates/UpdateDomain.js:33
+msgid "Domain name update has been failed"
+msgstr ""
+
+#: src/js/troubleshooting/lsTemplates/UpdateDomain.js:41
+msgid "Update domain name in language switcher settings"
+msgstr ""
+
+#: src/js/troubleshooting/refreshLicense/RefreshLicense.js:14
+msgid "Refresh license data to recognise license update"
+msgstr ""
+
+#: src/js/troubleshooting/refreshLicense/useRefreshLicense.js:36
+msgid "WPML License has been refreshed"
+msgstr ""

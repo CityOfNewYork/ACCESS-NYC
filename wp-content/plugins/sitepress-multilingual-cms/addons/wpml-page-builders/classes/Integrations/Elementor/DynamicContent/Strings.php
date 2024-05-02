@@ -20,6 +20,8 @@ class Strings {
 		'before',
 		'after',
 		'fallback',
+		'video_url',
+		'shortcode',
 	];
 
 	/**

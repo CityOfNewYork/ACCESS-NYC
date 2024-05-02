@@ -5,46 +5,44 @@ if ( ! class_exists( 'acf_field_text' ) ) :
 	class acf_field_text extends acf_field {
 
 
-		/*
-		*  initialize
-		*
-		*  This function will setup the field type data
-		*
-		*  @type    function
-		*  @date    5/03/2014
-		*  @since   5.0.0
-		*
-		*  @param   n/a
-		*  @return  n/a
-		*/
+		/**
+		 * This function will setup the field type data
+		 *
+		 * @type    function
+		 * @date    5/03/2014
+		 * @since   5.0.0
+		 *
+		 * @param   n/a
+		 * @return  n/a
+		 */
 
 		function initialize() {
 
 			// vars
-			$this->name     = 'text';
-			$this->label    = __( 'Text', 'acf' );
-			$this->defaults = array(
+			$this->name          = 'text';
+			$this->label         = __( 'Text', 'acf' );
+			$this->description   = __( 'A basic text input, useful for storing single string values.', 'acf' );
+			$this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-text.png';
+			$this->doc_url       = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/text/', 'docs', 'field-type-selection' );
+			$this->defaults      = array(
 				'default_value' => '',
 				'maxlength'     => '',
 				'placeholder'   => '',
 				'prepend'       => '',
 				'append'        => '',
 			);
-
 		}
 
 
-		/*
-		*  render_field()
-		*
-		*  Create the HTML interface for your field
-		*
-		*  @param   $field - an array holding all the field's data
-		*
-		*  @type    action
-		*  @since   3.6
-		*  @date    23/01/13
-		*/
+		/**
+		 * Create the HTML interface for your field
+		 *
+		 * @param   $field - an array holding all the field's data
+		 *
+		 * @type    action
+		 * @since   3.6
+		 * @date    23/01/13
+		 */
 
 		function render_field( $field ) {
 			$html = '';
@@ -68,29 +66,31 @@ if ( ! class_exists( 'acf_field_text' ) ) :
 					$input_attrs[ $k ] = $field[ $k ];
 				}
 			}
+
+			if ( isset( $field['input-data'] ) && is_array( $field['input-data'] ) ) {
+				foreach ( $field['input-data'] as $name => $attr ) {
+					$input_attrs[ 'data-' . $name ] = $attr;
+				}
+			}
+
 			$html .= '<div class="acf-input-wrap">' . acf_get_text_input( acf_filter_attrs( $input_attrs ) ) . '</div>';
 
 			// Display.
-			echo $html;
+			echo $html; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- only safe HTML output generated and escaped by functions above.
 		}
 
 
-		/*
-		*  render_field_settings()
-		*
-		*  Create extra options for your field. This is rendered when editing a field.
-		*  The value of $field['name'] can be used (like bellow) to save extra data to the $field
-		*
-		*  @param   $field  - an array holding all the field's data
-		*
-		*  @type    action
-		*  @since   3.6
-		*  @date    23/01/13
-		*/
-
+		/**
+		 * Create extra options for your field. This is rendered when editing a field.
+		 * The value of $field['name'] can be used (like bellow) to save extra data to the $field
+		 *
+		 * @param   $field  - an array holding all the field's data
+		 *
+		 * @type    action
+		 * @since   3.6
+		 * @date    23/01/13
+		 */
 		function render_field_settings( $field ) {
-
-			// default_value
 			acf_render_field_setting(
 				$field,
 				array(
@@ -100,8 +100,37 @@ if ( ! class_exists( 'acf_field_text' ) ) :
 					'name'         => 'default_value',
 				)
 			);
+		}
 
-			// placeholder
+		/**
+		 * Renders the field settings used in the "Validation" tab.
+		 *
+		 * @since 6.0
+		 *
+		 * @param array $field The field settings array.
+		 * @return void
+		 */
+		function render_field_validation_settings( $field ) {
+			acf_render_field_setting(
+				$field,
+				array(
+					'label'        => __( 'Character Limit', 'acf' ),
+					'instructions' => __( 'Leave blank for no limit', 'acf' ),
+					'type'         => 'number',
+					'name'         => 'maxlength',
+				)
+			);
+		}
+
+		/**
+		 * Renders the field settings used in the "Presentation" tab.
+		 *
+		 * @since 6.0
+		 *
+		 * @param array $field The field settings array.
+		 * @return void
+		 */
+		function render_field_presentation_settings( $field ) {
 			acf_render_field_setting(
 				$field,
 				array(
@@ -112,7 +141,6 @@ if ( ! class_exists( 'acf_field_text' ) ) :
 				)
 			);
 
-			// prepend
 			acf_render_field_setting(
 				$field,
 				array(
@@ -123,7 +151,6 @@ if ( ! class_exists( 'acf_field_text' ) ) :
 				)
 			);
 
-			// append
 			acf_render_field_setting(
 				$field,
 				array(
@@ -133,18 +160,6 @@ if ( ! class_exists( 'acf_field_text' ) ) :
 					'name'         => 'append',
 				)
 			);
-
-			// maxlength
-			acf_render_field_setting(
-				$field,
-				array(
-					'label'        => __( 'Character Limit', 'acf' ),
-					'instructions' => __( 'Leave blank for no limit', 'acf' ),
-					'type'         => 'number',
-					'name'         => 'maxlength',
-				)
-			);
-
 		}
 
 		/**
@@ -192,7 +207,4 @@ if ( ! class_exists( 'acf_field_text' ) ) :
 
 	// initialize
 	acf_register_field_type( 'acf_field_text' );
-
 endif; // class_exists check
-
-

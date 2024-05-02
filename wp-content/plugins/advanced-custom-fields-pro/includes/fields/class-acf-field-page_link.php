@@ -5,26 +5,27 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 	class acf_field_page_link extends acf_field {
 
 
-		/*
-		*  __construct
-		*
-		*  This function will setup the field type data
-		*
-		*  @type    function
-		*  @date    5/03/2014
-		*  @since   5.0.0
-		*
-		*  @param   n/a
-		*  @return  n/a
-		*/
+		/**
+		 * This function will setup the field type data
+		 *
+		 * @type    function
+		 * @date    5/03/2014
+		 * @since   5.0.0
+		 *
+		 * @param   n/a
+		 * @return  n/a
+		 */
 
 		function initialize() {
 
 			// vars
-			$this->name     = 'page_link';
-			$this->label    = __( 'Page Link', 'acf' );
-			$this->category = 'relational';
-			$this->defaults = array(
+			$this->name          = 'page_link';
+			$this->label         = __( 'Page Link', 'acf' );
+			$this->category      = 'relational';
+			$this->description   = __( 'An interactive dropdown to select one or more posts, pages, custom post type items or archive URLs, with the option to search.', 'acf' );
+			$this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-page-link.png';
+			$this->doc_url       = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/page-link/', 'docs', 'field-type-selection' );
+			$this->defaults      = array(
 				'post_type'      => array(),
 				'taxonomy'       => array(),
 				'allow_null'     => 0,
@@ -35,22 +36,19 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 			// extra
 			add_action( 'wp_ajax_acf/fields/page_link/query', array( $this, 'ajax_query' ) );
 			add_action( 'wp_ajax_nopriv_acf/fields/page_link/query', array( $this, 'ajax_query' ) );
-
 		}
 
 
-		/*
-		*  ajax_query
-		*
-		*  description
-		*
-		*  @type    function
-		*  @date    24/10/13
-		*  @since   5.0.0
-		*
-		*  @param   $post_id (int)
-		*  @return  $post_id (int)
-		*/
+		/**
+		 * description
+		 *
+		 * @type    function
+		 * @date    24/10/13
+		 * @since   5.0.0
+		 *
+		 * @param   $post_id (int)
+		 * @return  $post_id (int)
+		 */
 
 		function ajax_query() {
 
@@ -89,7 +87,6 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 				// update vars
 				$args['s'] = $s;
 				$is_search = true;
-
 			}
 
 			// load field
@@ -100,13 +97,16 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 
 			// update $args
 			if ( ! empty( $field['post_type'] ) ) {
-
 				$args['post_type'] = acf_get_array( $field['post_type'] );
-
 			} else {
-
 				$args['post_type'] = acf_get_post_types();
+			}
 
+			// post status
+			if ( ! empty( $options['post_status'] ) ) {
+				$args['post_status'] = acf_get_array( $options['post_status'] );
+			} elseif ( ! empty( $field['post_status'] ) ) {
+				$args['post_status'] = acf_get_array( $field['post_status'] );
 			}
 
 			// create tax queries
@@ -120,13 +120,11 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 
 				// now create the tax queries
 				foreach ( $taxonomies as $taxonomy => $terms ) {
-
 					$args['tax_query'][] = array(
 						'taxonomy' => $taxonomy,
 						'field'    => 'slug',
 						'terms'    => $terms,
 					);
-
 				}
 			}
 
@@ -173,7 +171,6 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 
 			// loop
 			if ( ! empty( $groups ) ) {
-
 				foreach ( array_keys( $groups ) as $group_title ) {
 
 					// vars
@@ -187,28 +184,21 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 
 					// convert post objects to post titles
 					foreach ( array_keys( $posts ) as $post_id ) {
-
 						$posts[ $post_id ] = $this->get_post_title( $posts[ $post_id ], $field, $options['post_id'], $is_search );
-
 					}
 
 					// order posts by search
 					if ( $is_search && empty( $args['orderby'] ) && isset( $args['s'] ) ) {
-
 						$posts = acf_order_by_search( $posts, $args['s'] );
-
 					}
 
 					// append to $data
 					foreach ( array_keys( $posts ) as $post_id ) {
-
 						$data['children'][] = $this->get_post_result( $post_id, $posts[ $post_id ] );
-
 					}
 
 					// append to $results
 					$results[] = $data;
-
 				}
 			}
 
@@ -219,23 +209,20 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 					'limit'   => $args['posts_per_page'],
 				)
 			);
-
 		}
 
 
-		/*
-		*  get_post_result
-		*
-		*  This function will return an array containing id, text and maybe description data
-		*
-		*  @type    function
-		*  @date    7/07/2016
-		*  @since   5.4.0
-		*
-		*  @param   $id (mixed)
-		*  @param   $text (string)
-		*  @return  (array)
-		*/
+		/**
+		 * This function will return an array containing id, text and maybe description data
+		 *
+		 * @type    function
+		 * @date    7/07/2016
+		 * @since   5.4.0
+		 *
+		 * @param   $id (mixed)
+		 * @param   $text (string)
+		 * @return  (array)
+		 */
 
 		function get_post_result( $id, $text ) {
 
@@ -250,32 +237,27 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 			$pos    = strpos( $text, $search );
 
 			if ( $pos !== false ) {
-
 				$result['description'] = substr( $text, $pos + 2 );
 				$result['text']        = substr( $text, 0, $pos );
-
 			}
 
 			// return
 			return $result;
-
 		}
 
 
-		/*
-		*  get_post_title
-		*
-		*  This function returns the HTML for a result
-		*
-		*  @type    function
-		*  @date    1/11/2013
-		*  @since   5.0.0
-		*
-		*  @param   $post (object)
-		*  @param   $field (array)
-		*  @param   $post_id (int) the post_id to which this value is saved to
-		*  @return  (string)
-		*/
+		/**
+		 * This function returns the HTML for a result
+		 *
+		 * @type    function
+		 * @date    1/11/2013
+		 * @since   5.0.0
+		 *
+		 * @param   $post (object)
+		 * @param   $field (array)
+		 * @param   $post_id (int) the post_id to which this value is saved to
+		 * @return  (string)
+		 */
 
 		function get_post_title( $post, $field, $post_id = 0, $is_search = 0 ) {
 
@@ -294,22 +276,19 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 
 			// return
 			return $title;
-
 		}
 
 
-		/*
-		*  get_posts
-		*
-		*  This function will return an array of posts for a given field value
-		*
-		*  @type    function
-		*  @date    13/06/2014
-		*  @since   5.0.0
-		*
-		*  @param   $value (array)
-		*  @return  $value
-		*/
+		/**
+		 * This function will return an array of posts for a given field value
+		 *
+		 * @type    function
+		 * @date    13/06/2014
+		 * @since   5.0.0
+		 *
+		 * @param   $value (array)
+		 * @return  $value
+		 */
 
 		function get_posts( $value, $field ) {
 
@@ -320,20 +299,16 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 			$post__in = array();
 
 			foreach ( $value as $k => $v ) {
-
 				if ( is_numeric( $v ) ) {
 
 					// append to $post__in
 					$post__in[] = (int) $v;
-
 				}
 			}
 
 			// bail early if no posts
 			if ( empty( $post__in ) ) {
-
 				return $value;
-
 			}
 
 			// get posts
@@ -349,7 +324,6 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 
 			// append to $return
 			foreach ( $value as $k => $v ) {
-
 				if ( is_numeric( $v ) ) {
 
 					// extract first post
@@ -357,34 +331,27 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 
 					// append
 					if ( $post ) {
-
 						$return[] = $post;
-
 					}
 				} else {
-
 					$return[] = $v;
-
 				}
 			}
 
 			// return
 			return $return;
-
 		}
 
 
-		/*
-		*  render_field()
-		*
-		*  Create the HTML interface for your field
-		*
-		*  @param   $field - an array holding all the field's data
-		*
-		*  @type    action
-		*  @since   3.6
-		*  @date    23/01/13
-		*/
+		/**
+		 * Create the HTML interface for your field
+		 *
+		 * @param   $field - an array holding all the field's data
+		 *
+		 * @type    action
+		 * @since   3.6
+		 * @date    23/01/13
+		 */
 
 		function render_field( $field ) {
 
@@ -402,7 +369,6 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 
 				// set choices
 				if ( ! empty( $posts ) ) {
-
 					foreach ( array_keys( $posts ) as $i ) {
 
 						// vars
@@ -412,12 +378,10 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 
 							// append to choices
 							$field['choices'][ $post->ID ] = $this->get_post_title( $post, $field );
-
 						} else {
 
 							// append to choices
 							$field['choices'][ $post ] = $post;
-
 						}
 					}
 				}
@@ -428,22 +392,17 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 		}
 
 
-		/*
-		*  render_field_settings()
-		*
-		*  Create extra options for your field. This is rendered when editing a field.
-		*  The value of $field['name'] can be used (like bellow) to save extra data to the $field
-		*
-		*  @type    action
-		*  @since   3.6
-		*  @date    23/01/13
-		*
-		*  @param   $field  - an array holding all the field's data
-		*/
-
+		/**
+		 * Create extra options for your field. This is rendered when editing a field.
+		 * The value of $field['name'] can be used (like bellow) to save extra data to the $field
+		 *
+		 * @type    action
+		 * @since   3.6
+		 * @date    23/01/13
+		 *
+		 * @param   $field  - an array holding all the field's data
+		 */
 		function render_field_settings( $field ) {
-
-			// post_type
 			acf_render_field_setting(
 				$field,
 				array(
@@ -459,7 +418,21 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 				)
 			);
 
-			// taxonomy
+			acf_render_field_setting(
+				$field,
+				array(
+					'label'        => __( 'Filter by Post Status', 'acf' ),
+					'instructions' => '',
+					'type'         => 'select',
+					'name'         => 'post_status',
+					'choices'      => acf_get_pretty_post_statuses(),
+					'multiple'     => 1,
+					'ui'           => 1,
+					'allow_null'   => 1,
+					'placeholder'  => __( 'Any post status', 'acf' ),
+				)
+			);
+
 			acf_render_field_setting(
 				$field,
 				array(
@@ -475,19 +448,6 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 				)
 			);
 
-			// allow_null
-			acf_render_field_setting(
-				$field,
-				array(
-					'label'        => __( 'Allow Null?', 'acf' ),
-					'instructions' => '',
-					'name'         => 'allow_null',
-					'type'         => 'true_false',
-					'ui'           => 1,
-				)
-			);
-
-			// allow_archives
 			acf_render_field_setting(
 				$field,
 				array(
@@ -499,51 +459,63 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 				)
 			);
 
-			// multiple
 			acf_render_field_setting(
 				$field,
 				array(
-					'label'        => __( 'Select multiple values?', 'acf' ),
-					'instructions' => '',
+					'label'        => __( 'Select Multiple', 'acf' ),
+					'instructions' => 'Allow content editors to select multiple values',
 					'name'         => 'multiple',
 					'type'         => 'true_false',
 					'ui'           => 1,
 				)
 			);
-
 		}
 
+		/**
+		 * Renders the field settings used in the "Validation" tab.
+		 *
+		 * @since 6.0
+		 *
+		 * @param array $field The field settings array.
+		 * @return void
+		 */
+		function render_field_validation_settings( $field ) {
+			acf_render_field_setting(
+				$field,
+				array(
+					'label'        => __( 'Allow Null', 'acf' ),
+					'instructions' => '',
+					'name'         => 'allow_null',
+					'type'         => 'true_false',
+					'ui'           => 1,
+				)
+			);
+		}
 
-		/*
-		*  format_value()
-		*
-		*  This filter is appied to the $value after it is loaded from the db and before it is returned to the template
-		*
-		*  @type    filter
-		*  @since   3.6
-		*  @date    23/01/13
-		*
-		*  @param   $value (mixed) the value which was loaded from the database
-		*  @param   $post_id (mixed) the $post_id from which the value was loaded
-		*  @param   $field (array) the field array holding all the field options
-		*
-		*  @return  $value (mixed) the modified value
-		*/
+		/**
+		 * This filter is appied to the $value after it is loaded from the db and before it is returned to the template
+		 *
+		 * @type    filter
+		 * @since   3.6
+		 * @date    23/01/13
+		 *
+		 * @param   $value (mixed) the value which was loaded from the database
+		 * @param   $post_id (mixed) the post_id from which the value was loaded
+		 * @param   $field (array) the field array holding all the field options
+		 *
+		 * @return  $value (mixed) the modified value
+		 */
 
 		function format_value( $value, $post_id, $field ) {
 
 			// ACF4 null
 			if ( $value === 'null' ) {
-
 				return false;
-
 			}
 
 			// bail early if no value
 			if ( empty( $value ) ) {
-
 				return $value;
-
 			}
 
 			// get posts
@@ -557,44 +529,36 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 
 				// convert $post to permalink
 				if ( is_object( $post ) ) {
-
 					$post = get_permalink( $post );
-
 				}
 
 				// append back to $value
 				$value[ $i ] = $post;
-
 			}
 
 			// convert back from array if neccessary
 			if ( ! $field['multiple'] ) {
-
 				$value = array_shift( $value );
-
 			}
 
 			// return value
 			return $value;
-
 		}
 
 
-		/*
-		*  update_value()
-		*
-		*  This filter is appied to the $value before it is updated in the db
-		*
-		*  @type    filter
-		*  @since   3.6
-		*  @date    23/01/13
-		*
-		*  @param   $value - the value which will be saved in the database
-		*  @param   $post_id - the $post_id of which the value will be saved
-		*  @param   $field - the field array holding all the field options
-		*
-		*  @return  $value - the modified value
-		*/
+		/**
+		 * This filter is appied to the $value before it is updated in the db
+		 *
+		 * @type    filter
+		 * @since   3.6
+		 * @date    23/01/13
+		 *
+		 * @param   $value - the value which will be saved in the database
+		 * @param   $post_id - the post_id of which the value will be saved
+		 * @param   $field - the field array holding all the field options
+		 *
+		 * @return  $value - the modified value
+		 */
 
 		function update_value( $value, $post_id, $field ) {
 
@@ -622,11 +586,10 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 		/**
 		 * Validates page link fields updated via the REST API.
 		 *
-		 * @param bool  $valid
-		 * @param int   $value
-		 * @param array $field
-		 *
-		 * @return bool|WP_Error
+		 * @param  boolean $valid The current validity booleean
+		 * @param  integer $value The value of the field
+		 * @param  array   $field The field array
+		 * @return boolean|WP_Error
 		 */
 		public function validate_rest_value( $valid, $value, $field ) {
 			return acf_get_field_type( 'post_object' )->validate_rest_value( $valid, $value, $field );
@@ -665,9 +628,9 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 
 		/**
 		 * @see \acf_field::get_rest_links()
-		 * @param mixed      $value The raw (unformatted) field value.
-		 * @param int|string $post_id
-		 * @param array      $field
+		 * @param mixed          $value   The raw (unformatted) field value.
+		 * @param integer|string $post_id
+		 * @param array          $field
 		 * @return array
 		 */
 		public function get_rest_links( $value, $post_id, array $field ) {
@@ -695,21 +658,17 @@ if ( ! class_exists( 'acf_field_page_link' ) ) :
 		/**
 		 * Apply basic formatting to prepare the value for default REST output.
 		 *
-		 * @param mixed      $value
-		 * @param string|int $post_id
-		 * @param array      $field
+		 * @param mixed          $value
+		 * @param string|integer $post_id
+		 * @param array          $field
 		 * @return mixed
 		 */
 		public function format_value_for_rest( $value, $post_id, array $field ) {
 			return acf_format_numerics( $value );
 		}
-
 	}
 
 
 	// initialize
 	acf_register_field_type( 'acf_field_page_link' );
-
 endif; // class_exists check
-
-

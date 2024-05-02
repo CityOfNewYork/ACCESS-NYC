@@ -29,9 +29,11 @@ use WPML\FP\Functor\IdentityFunctor;
  * @method static callable pick( ...$props, ...$obj ) - Curried :: array->Collection|array->Collection|array
  * @method static callable pickAll( ...$props, ...$obj ) - Curried :: array->Collection|array->Collection|array
  * @method static callable pickBy( ...$predicate, ...$obj ) - Curried :: ( ( v, k ) → bool ) → Collection|array->Collection|array
+ * @method static callable pickByKey( ...$predicate, ...$obj ) - Curried :: ( ( k ) → bool ) → Collection|array->callable|Collection|array|object
  * @method static callable project( ...$props, ...$target ) - Curried :: array->Collection|array->Collection|array
  * @method static callable where( array $condition ) - Curried :: [string → ( * → bool )] → bool
  * @method static callable|bool has( ...$prop, ...$item ) - Curried :: string → a → bool
+ * @method static callable|bool hasPath( ...$path, ...$item ) - Curried :: array<string> → a → bool
  * @method static callable|mixed evolve( ...$transformations, ...$item ) - Curried :: array → array → array
  *
  * @method static callable|array objOf( ...$key, ...$value ) - Curried :: string->mixed->array
@@ -291,6 +293,26 @@ class Obj {
 			return self::matchType( $result, $item );
 		} ) );
 
+		self::macro( 'pickByKey', curryN( 2, function ( callable $predicate, $item ) {
+			return self::pickBy( pipe( Fns::nthArg( 1 ), $predicate ), $item );
+		} ) );
+
+		self::macro( 'hasPath', curryN( 2, function ( $path, $item ) {
+			$undefinedValue = new Undefined();
+			$currentElement = $item;
+
+			foreach ( $path as $pathProp ) {
+				$currentElement = Either::of( $currentElement )
+					->tryCatch( self::propOr( $undefinedValue, $pathProp ) )
+					->getOrElse( $undefinedValue );
+
+				if ( $undefinedValue === $currentElement ) {
+					return false;
+				}
+			}
+			return true;
+		} ) );
+
 		self::macro( 'has', curryN( 2, function ( $prop, $item ) {
 			if ( $item instanceof Collection ) {
 				return $item->has( $prop );
@@ -398,6 +420,34 @@ class Obj {
 		};
 
 		return call_user_func_array( curryN( 2, $without ), func_get_args() );
+	}
+
+	/**
+	 * Curried :: array|object -> array|object -> array|object
+	 *
+	 * It merges the new data with item.
+	 *
+	 * @param array|object $newData
+	 * @param array|object $item
+	 *
+	 * @return array|object
+	 */
+	public static function merge( $newData = null, $item = null ) {
+		$merge = function ( $newData, $item ) {
+			$isNested = Logic::anyPass( [ 'is_array', 'is_object' ] );
+
+			foreach ( (array) $newData as $key => $value ) {
+				if ( $isNested( $newData ) && Obj::has( $key, $item ) && $isNested( Obj::prop( $key, $item ) ) ) {
+					$item = Obj::assoc( $key, self::merge( $value, Obj::prop( $key, $item ) ), $item );
+				} else {
+					$item = Obj::assoc( $key, $value, $item );
+				}
+			}
+
+			return $item;
+		};
+
+		return call_user_func_array( curryN( 2, $merge ), func_get_args() );
 	}
 }
 

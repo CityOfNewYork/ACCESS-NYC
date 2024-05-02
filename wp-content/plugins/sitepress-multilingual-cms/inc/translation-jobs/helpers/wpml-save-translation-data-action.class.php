@@ -1,5 +1,7 @@
 <?php
 
+use WPML\Legacy\Translation\Save\SyncParentPost\SyncParentPost;
+
 class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With_API {
 
 	/** @var WPML_TM_Records $tm_records */
@@ -12,15 +14,18 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 	private $translate_link_targets_in_posts;
 	private $translate_link_targets_in_strings;
 
+	/** @var SyncParentPost $syncParentPost */
+	private $sync_parent_post;
+
 	public function __construct( $data, $tm_records ) {
-		global $wpdb, $ICL_Pro_Translation, $sitepress;
+		global $wpdb, $ICL_Pro_Translation, $sitepress, $wpml_post_translations;
 		parent::__construct();
 		$this->data                              = $data;
 		$this->tm_records                        = $tm_records;
 		$translate_link_targets_global_state     = new WPML_Translate_Link_Target_Global_State( $sitepress );
 		$this->translate_link_targets_in_posts   = new WPML_Translate_Link_Targets_In_Posts( $translate_link_targets_global_state, $wpdb, $ICL_Pro_Translation );
 		$this->translate_link_targets_in_strings = new WPML_Translate_Link_Targets_In_Strings( $translate_link_targets_global_state, $wpdb, new WPML_WP_API(), $ICL_Pro_Translation );
-
+		$this->sync_parent_post                  = new SyncParentPost( $wpdb, $sitepress, $wpml_post_translations );
 	}
 
 	function save_translation() {
@@ -144,14 +149,7 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 						$postarr['post_date'] = $original_post->post_date;
 					}
 
-					if ( $original_post->post_parent ) {
-						$parent_id = $wpml_post_translations->element_id_in( $original_post->post_parent, $job->language_code );
-					}
-
-					if ( isset( $parent_id ) && $sitepress->get_setting( 'sync_page_parent' ) ) {
-						$_POST['post_parent'] = $postarr['post_parent'] = $parent_id;
-						$_POST['parent_id']   = $postarr['parent_id'] = $parent_id;
-					}
+					$postarr = $this->sync_parent_post->linkParentTranslatedPostOrFlagOriginal( $original_post->post_parent, $job->language_code, $postarr );
 
 					$_POST['trid']                   = $translation_status->trid();
 					$_POST['lang']                   = $job->language_code;
@@ -183,8 +181,30 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 					}
 
 					$new_post_id = wpml_get_create_post_helper()->insert_post( $postarr, $job->language_code );
+					$this->sync_parent_post->linkUnlinkedChildPosts( $original_post->ID, $job->language_code, $new_post_id );
+
+					$link = get_edit_post_link( $new_post_id );
+					if ( '' === $link ) {
+						// the current user can't edit so just include permalink.
+						$link = get_permalink( $new_post_id );
+					}
+
+					if ( ! $element_id ) {
+						$wpdb->delete(
+							$wpdb->prefix . 'icl_translations',
+							array(
+								'element_id'   => $new_post_id,
+								'element_type' => 'post_' . $postarr['post_type'],
+							)
+						);
+						$wpdb->update( $wpdb->prefix . 'icl_translations', array( 'element_id' => $new_post_id ), array( 'translation_id' => $translation_id ) );
+						$user_message = __( 'Translation added: ', 'wpml-translation-management' ) . '<a href="' . $link . '">' . $postarr['post_title'] . '</a>.';
+					} else {
+						$user_message = __( 'Translation updated: ', 'wpml-translation-management' ) . '<a href="' . $link . '">' . $postarr['post_title'] . '</a>.';
+					}
 
 					icl_cache_clear( $postarr['post_type'] . 's_per_language' ); // clear post counter per language in cache
+					do_action( 'wpml_pro_translation_after_post_save', $new_post_id );
 
 					// set taxonomies for users with limited caps
 					if ( ! current_user_can( 'manage-categories' ) && ! empty( $postarr['tax_input'] ) ) {
@@ -240,26 +260,6 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 						\WPML\TM\Settings\Repository::getCustomFields()
 					);
 
-					$link = get_edit_post_link( $new_post_id );
-					if ( $link == '' ) {
-						// the current user can't edit so just include permalink
-						$link = get_permalink( $new_post_id );
-					}
-
-					if ( ! $element_id ) {
-						$wpdb->delete(
-							$wpdb->prefix . 'icl_translations',
-							array(
-								'element_id'   => $new_post_id,
-								'element_type' => 'post_' . $postarr['post_type'],
-							)
-						);
-						$wpdb->update( $wpdb->prefix . 'icl_translations', array( 'element_id' => $new_post_id ), array( 'translation_id' => $translation_id ) );
-						$user_message = __( 'Translation added: ', 'wpml-translation-management' ) . '<a href="' . $link . '">' . $postarr['post_title'] . '</a>.';
-					} else {
-						$user_message = __( 'Translation updated: ', 'wpml-translation-management' ) . '<a href="' . $link . '">' . $postarr['post_title'] . '</a>.';
-					}
-
 					// set stickiness
 					// is the original post a sticky post?
 					$sticky_posts       = get_option( 'sticky_posts' );
@@ -297,7 +297,7 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 				// Must be after save terms otherwise it gets lost.
 				if ( $sitepress->get_setting( 'sync_post_format' ) ) {
 					$_wp_post_format = get_post_format( $original_post->ID );
-					set_post_format( $new_post_id, $_wp_post_format );
+					$_wp_post_format && set_post_format( $new_post_id, $_wp_post_format );
 				}
 
 				do_action( 'icl_pro_translation_completed', $new_post_id, $data['fields'], $job );
@@ -431,7 +431,32 @@ class WPML_Save_Translation_Data_Action extends WPML_Translation_Job_Helper_With
 	 * @param callable $decoder
 	 */
 	private static function save_external( $element_type_prefix, $job, $decoder ) {
-		do_action( 'wpml_save_external', $element_type_prefix, $job, $decoder );
+		/**
+		 * Wether we should save the external package or not.
+		 *
+		 * Since string packages are translated automatically, they might need to be reviewed
+		 * When we want to review the string package translation, we should not save it right away.
+		 *
+		 * @since 4.6.8
+		 *
+		 * @param bool   $shouldSave        Whether we should save the external package or not.
+		 * @param string $elementTypePrefix The external element type prefix. Could be 'package' or 'st-batch'.
+		 * @param object $job               The translation job to save.
+		 */
+		if ( apply_filters( 'wpml_should_save_external', true, $element_type_prefix, $job ) ) {
+			/**
+			 * Save the external job.
+			 *
+			 * String packages and string batches hooks into this action to save the strings translations.
+			 *
+			 * @since 4.4.0
+			 *
+			 * @param string   $elementTypePrefix The external element type prefix. Could be 'package' or 'st-batch'.
+			 * @param object   $job               The translation job to save.
+			 * @param callable $decoder           Function to decode translation values.
+			 */
+			do_action( 'wpml_save_external', $element_type_prefix, $job, $decoder );
+		}
 	}
 
 	/**

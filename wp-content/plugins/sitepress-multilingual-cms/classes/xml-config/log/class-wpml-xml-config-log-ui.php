@@ -106,6 +106,6 @@ class WPML_XML_Config_Log_UI {
 
 		list( $sec, $usec ) = explode( '.', $time ); // split the microtime on .
 
-		return date( $dFormat, $sec ) . $usec;
+		return date( $dFormat, (int) $sec ) . $usec;
 	}
 }

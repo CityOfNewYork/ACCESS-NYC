@@ -58,7 +58,7 @@ class WPML_TP_Translations_Repository {
 			/**
 			 * It filters translations coming from the Translation Proxy.
 			 *
-			 * @param  \WPML_TP_Translation_Collection  $translations
+			 * @param  \WPML_TP_Translation_Collection|string  $translations
 			 * @param  \WPML_TM_Job_Entity  $job
 			 */
 			$translations = apply_filters( 'wpml_tm_proxy_translations', $translations, $job );

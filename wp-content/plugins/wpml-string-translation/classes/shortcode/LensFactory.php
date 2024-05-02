@@ -18,6 +18,7 @@ class LensFactory {
 
 		// $set :: string[]->array->array
 		$set = function ( $newValue, $jobData ) {
+			/** @var array $newValue */
 			$newValue = Obj::objOf( 'fields', Fns::map( Obj::objOf( 'data' ), $newValue ) );
 
 			return Obj::replaceRecursive( $newValue, $jobData );

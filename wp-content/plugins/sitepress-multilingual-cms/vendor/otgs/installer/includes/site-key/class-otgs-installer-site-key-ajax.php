@@ -1,22 +1,25 @@
 <?php
 
+use OTGS\Installer\Subscription\SubscriptionManagerFactory;
+
 class OTGS_Installer_Site_Key_Ajax {
 
-	private $subscription_fetch;
 	private $logger;
 	private $repositories;
 	private $subscription_factory;
+	private $subscriptionManagerFactory;
 
 	public function __construct(
-		OTGS_Installer_Fetch_Subscription $subscription_fetch,
 		OTGS_Installer_Logger $logger,
 		OTGS_Installer_Repositories $repositories,
-		OTGS_Installer_Subscription_Factory $subscription_factory
+		OTGS_Installer_Subscription_Factory $subscription_factory,
+		SubscriptionManagerFactory $subscriptionManagerFactory
+
 	) {
-		$this->subscription_fetch   = $subscription_fetch;
 		$this->logger               = $logger;
 		$this->repositories         = $repositories;
 		$this->subscription_factory = $subscription_factory;
+		$this->subscriptionManagerFactory = $subscriptionManagerFactory;
 	}
 
 	public function add_hooks() {
@@ -27,9 +30,9 @@ class OTGS_Installer_Site_Key_Ajax {
 	}
 
 	public function save() {
-		$repository = isset( $_POST['repository_id'] ) && $_POST['repository_id'] ? sanitize_text_field( $_POST['repository_id'] ) : null;
+		$repositoryId = isset( $_POST['repository_id'] ) && $_POST['repository_id'] ? sanitize_text_field( $_POST['repository_id'] ) : null;
 		$nonce      = isset( $_POST['nonce'] ) && $_POST['nonce'] ? sanitize_text_field( $_POST['nonce'] ) : null;
-		$site_key   = isset( $_POST[ 'site_key_' . $repository ] ) && $_POST[ 'site_key_' . $repository ] ? sanitize_text_field( $_POST[ 'site_key_' . $repository ] ) : null;
+		$site_key   = isset( $_POST[ 'site_key_' . $repositoryId ] ) && $_POST[ 'site_key_' . $repositoryId ] ? sanitize_text_field( $_POST[ 'site_key_' . $repositoryId ] ) : null;
 		$site_key   = preg_replace( '/[^A-Za-z0-9]/', '', $site_key );
 		$error      = '';
 
@@ -37,13 +40,14 @@ class OTGS_Installer_Site_Key_Ajax {
 			wp_send_json_success( [ 'error' => esc_html__( 'Empty site key!', 'installer' ) ] );
 			return;
 		}
-		if ( ! $repository || ! $nonce || ! wp_verify_nonce( $nonce, 'save_site_key_' . $repository ) ) {
+		if ( ! $repositoryId || ! $nonce || ! wp_verify_nonce( $nonce, 'save_site_key_' . $repositoryId ) ) {
 			wp_send_json_success( [ 'error' => esc_html__( 'Invalid request!', 'installer' ) ] );
 			return;
 		}
-
+		$repository = $this->repositories->get( $repositoryId );
 		try {
-			list ($subscription, $site_key_data) = $this->subscription_fetch->get( $repository, $site_key, WP_Installer::SITE_KEY_VALIDATION_SOURCE_REGISTRATION );
+			list ($subscription, $site_key_data) = $this->getSubscriptionData( $repositoryId, $repository, WP_Installer::SITE_KEY_VALIDATION_SOURCE_REGISTRATION, $site_key );
+
 			if ( $subscription ) {
 				$subscription_data = $this->subscription_factory->create( array(
 					'data'          => $subscription,
@@ -54,7 +58,6 @@ class OTGS_Installer_Site_Key_Ajax {
 					'registered_by' => get_current_user_id()
 				) );
 
-				$repository = $this->repositories->get( $repository );
 				$repository->set_subscription( $subscription_data );
 				$this->repositories->save_subscription( $repository );
 				$this->repositories->refresh();
@@ -64,8 +67,7 @@ class OTGS_Installer_Site_Key_Ajax {
 				$error = __( 'Invalid site key for the current site.', 'installer' ) . '<br /><div class="installer-footnote">' . __( 'Please note that the site key is case sensitive.', 'installer' ) . '</div>';
 			}
 		} catch ( Exception $e ) {
-			$repository_data = $this->repositories->get( $repository );
-			$error           = $this->get_error_message( $e, $repository_data );
+			$error           = $this->get_error_message( $e, $repository );
 		}
 
 		$response = array( 'error' => $error );
@@ -98,15 +100,15 @@ class OTGS_Installer_Site_Key_Ajax {
 	public function update() {
 		$error      = '';
 		$nonce      = isset( $_POST['nonce'] ) ? $_POST['nonce'] : null;
-		$repository = isset( $_POST['repository_id'] ) ? sanitize_text_field( $_POST['repository_id'] ) : null;
+		$repositoryId = isset( $_POST['repository_id'] ) ? sanitize_text_field( $_POST['repository_id'] ) : null;
 
-		if ( $nonce && $repository && wp_verify_nonce( $nonce, 'update_site_key_' . $repository ) ) {
-			$repository_data = $this->repositories->get( $repository );
-			$site_key        = $repository_data->get_subscription()->get_site_key();
+		if ( $nonce && $repositoryId && wp_verify_nonce( $nonce, 'update_site_key_' . $repositoryId ) ) {
+			$repository = $this->repositories->get( $repositoryId );
+			$site_key        = $repository->get_subscription()->get_site_key();
 
 			if ( $site_key ) {
 				try {
-					list ($subscription, $site_key_data) = $this->subscription_fetch->get( $repository, $site_key, WP_Installer::SITE_KEY_VALIDATION_SOURCE_REGISTRATION );
+					list( $subscription, $site_key_data ) = $this->getSubscriptionData( $repositoryId, $repository, WP_Installer::SITE_KEY_VALIDATION_SOURCE_REVALIDATION, $site_key );
 
 					if ( $subscription ) {
 						$subscription_data = $this->subscription_factory->create( array(
@@ -117,13 +119,13 @@ class OTGS_Installer_Site_Key_Ajax {
 							'site_url'      => get_site_url(),
 							'registered_by' => get_current_user_id(),
 						) );
-						$repository_data->set_subscription( $subscription_data );
+						$repository->set_subscription( $subscription_data );
 					} else {
-						$repository_data->set_subscription( null );
+						$repository->set_subscription( null );
 						$error = __( 'Invalid site key for the current site. If the error persists, try to un-register first and then register again with the same site key.', 'installer' );
 					}
 
-					$this->repositories->save_subscription( $repository_data );
+					$this->repositories->save_subscription( $repository );
 					$messages = $this->repositories->refresh( true );
 
 					if ( is_array( $messages ) ) {
@@ -133,7 +135,7 @@ class OTGS_Installer_Site_Key_Ajax {
 
 					$this->clean_plugins_update_cache();
 				} catch ( Exception $e ) {
-					$error = $this->get_error_message( $e, $repository_data );
+					$error = $this->get_error_message( $e, $repository );
 				}
 			}
 
@@ -154,7 +156,7 @@ class OTGS_Installer_Site_Key_Ajax {
 
 			$args['body'] = [
 				'action'   => 'user_email_exists',
-				'umail'    => MD5( $email . $siteKey ),
+				'umail'    => md5( $email . $siteKey ),
 				'site_key' => $siteKey,
 				'site_url' => get_site_url()
 			];
@@ -185,5 +187,21 @@ class OTGS_Installer_Site_Key_Ajax {
 
 	private function clean_plugins_update_cache() {
 		do_action( 'otgs_installer_clean_plugins_update_cache' );
+	}
+
+	/**
+	 * @param $repositoryId
+	 * @param OTGS_Installer_Repository $repository
+	 * @param $site_key
+	 *
+	 * @return array
+	 * @throws OTGS_Installer_Fetch_Subscription_Exception
+	 * @throws \OTGS\Installer\Api\Exception\InvalidProductBucketUrl
+	 */
+	private function getSubscriptionData( $repositoryId, OTGS_Installer_Repository $repository, $source, $site_key ) {
+		$subscriptionManager = $this->subscriptionManagerFactory->create( $repositoryId, $repository->get_api_url() );
+		list ( $subscription, $site_key_data ) = $subscriptionManager->fetch( $site_key, $source );
+
+		return array( $subscription, $site_key_data );
 	}
 }

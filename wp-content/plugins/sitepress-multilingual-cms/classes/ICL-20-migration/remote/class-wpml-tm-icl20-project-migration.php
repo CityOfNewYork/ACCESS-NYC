@@ -50,8 +50,8 @@ class WPML_TM_ICL20_Project {
 		$code = (int) $response['response']['code'];
 		if ( $code !== 200 ) {
 			$message = $response['response']['message'];
-			if ( array_key_exists( 'body', $response ) ) {
-				$body = json_decode( $response['body'], JSON_OBJECT_AS_ARRAY );
+			if ( isset( $response['body'] ) ) {
+				$body = json_decode( $response['body'], true );
 				if ( isset( $body['status']['message'] ) ) {
 					$message .= PHP_EOL . $body['status']['message'];
 				}
@@ -87,8 +87,8 @@ class WPML_TM_ICL20_Project {
 		$code = (int) $response['response']['code'];
 		if ( $code !== 200 ) {
 			$message = $response['response']['message'];
-			if ( array_key_exists( 'body', $response ) ) {
-				$body = json_decode( $response['body'], JSON_OBJECT_AS_ARRAY );
+			if ( isset( $response['body'] ) ) {
+				$body = json_decode( $response['body'], true );
 				if ( isset( $body['status']['message'] ) ) {
 					$message .= PHP_EOL . $body['status']['message'];
 				}

@@ -6,6 +6,7 @@
             "key": "field_58b480ca3081c",
             "label": "Lead Content",
             "name": "lead",
+            "aria-label": "",
             "type": "wysiwyg",
             "instructions": "This content appears at the top of the article in the header tag. This should be treated as a subtitle and only a limited amount of content. Body copy can be placed in sections below.",
             "required": 0,
@@ -27,6 +28,7 @@
             "key": "field_5e7f7a53b9c98",
             "label": "Section Jump Navigation",
             "name": "jump_navigation",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "Toggling this will show\/hide the jump navigation in the sidebar allowing the content to span the whole width of the page.",
             "required": 0,
@@ -48,6 +50,7 @@
             "key": "field_58b480f33081d",
             "label": "Sections",
             "name": "sections",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "The <b>Section title<\/b> will appear above the section content and will be used as the link text in the jump nav. Use regular case or title case. Do not use ALL CAPS. It is more difficult to read and scan.\r\n<br><br>\r\nNotes for <b>Section Content<\/b>; Refer to the <a href=\"https:\/\/blueprint.cityofnewyork.us\/content\/plain-language-and-readability\/\" target=\"_blank\">plain language best practices<\/a> for guidance.\r\n<br><br>\r\n<code>&lt;p&gt;<\/code> and <code>&lt;br&gt;<\/code> tags are added automatically to content on the front-end with single and double line breaks in regular content (WYSIWYG) editors.\r\n<br><br>\r\nSection titles appear as <code>&lth3&gt;<\/code> tags so use <code>&lth4&gt;<\/code> or lower. \r\n<br><br>\r\nEmbedded media items <b>must<\/b> have Alt Text for screen readers.\r\n<br><br>\r\nCustom elements and dynamic components also work in this field by inserting html with <b>Use Raw Content<\/b> checked. Refer to the <a href=\"https:\/\/accesspatterns.cityofnewyork.us\" target=\"_blank\">ACCESS NYC Patterns<\/a> for available patterns.",
             "required": 0,
@@ -69,6 +72,7 @@
                     "key": "field_58b481043081e",
                     "label": "Section Title",
                     "name": "section_title",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -84,12 +88,14 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "maxlength": ""
+                    "maxlength": "",
+                    "parent_repeater": "field_58b480f33081d"
                 },
                 {
                     "key": "field_5eaae85bcb73a",
                     "label": "Use Raw Content",
                     "name": "section_raw_content",
+                    "aria-label": "",
                     "type": "true_false",
                     "instructions": "",
                     "required": 0,
@@ -105,12 +111,14 @@
                     "default_value": 0,
                     "ui": 0,
                     "ui_on_text": "",
-                    "ui_off_text": ""
+                    "ui_off_text": "",
+                    "parent_repeater": "field_58b480f33081d"
                 },
                 {
                     "key": "field_58b481143081f",
                     "label": "Section Content",
                     "name": "section_content",
+                    "aria-label": "",
                     "type": "wysiwyg",
                     "instructions": "",
                     "required": 0,
@@ -134,12 +142,14 @@
                     "tabs": "all",
                     "toolbar": "basic",
                     "media_upload": 1,
-                    "delay": 0
+                    "delay": 0,
+                    "parent_repeater": "field_58b480f33081d"
                 },
                 {
                     "key": "field_5eab124d63016",
                     "label": "Section Content (Raw)",
                     "name": "section_raw",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -163,9 +173,11 @@
                     "maxlength": "",
                     "rows": "",
                     "new_lines": "",
-                    "wpml_cf_preferences": 0
+                    "wpml_cf_preferences": 0,
+                    "parent_repeater": "field_58b480f33081d"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         }
     ],
     "location": [
@@ -192,5 +204,8 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1591895228
+    "show_in_rest": false,
+    "modified": 1714587205,
+    "local_file": "\/var\/www\/html\/wp-content\/themes\/access\/acf-json\/group_58b4805a59296.json",
+    "acfml_field_group_mode": "advanced"
 }

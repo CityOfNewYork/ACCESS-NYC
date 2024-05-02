@@ -41,6 +41,10 @@ class WPML_Action_Filter_Loader {
 			$cli      = $loader_type->is( 'cli' );
 			$dic      = $loader_type->is( 'dic' );
 
+			// Following logic will only be used for the case that
+			// $loader is a class-string.
+			/** @var class-string $loader */
+
 			if ( $backend && $frontend ) {
 				$this->load_factory_or_action( $loader, $dic );
 			} elseif ( $backend && is_admin() ) {
@@ -60,8 +64,8 @@ class WPML_Action_Filter_Loader {
 	/**
 	 * Load factory
 	 *
-	 * @param string $loader Action loader.
-	 * @param bool   $use_dic
+	 * @param class-string $loader Action loader.
+	 * @param bool         $use_dic
 	 */
 	private function load_factory_or_action( $loader, $use_dic ) {
 		if ( $use_dic ) {
@@ -72,7 +76,7 @@ class WPML_Action_Filter_Loader {
 
 		if ( $action_or_factory instanceof IWPML_Action ) {
 			$action_or_factory->add_hooks();
-		} else {
+		} elseif ( $action_or_factory instanceof IWPML_Action_Loader_Factory ) {
 			$this->load_factory( $action_or_factory );
 		}
 	}

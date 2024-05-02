@@ -65,7 +65,7 @@ class emrCache
         $this->checkCaches();
 
         // general WP
-        if ($post_id > 0)
+        if ($args['flush_mode']  === 'post' && $post_id > 0)
           clean_post_cache($post_id);
         else
           wp_cache_flush();

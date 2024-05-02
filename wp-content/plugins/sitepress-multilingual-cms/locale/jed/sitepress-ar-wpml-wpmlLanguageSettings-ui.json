@@ -1,0 +1,28 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose the image file type for flags": [
+            "اختر نوع ملف الصورة للأعلام"
+         ],
+         "This option affects only the built-in WPML flags, not the custom uploaded ones.": [
+            "هذا الخيار يؤثر فقط على أعلام WPML المدمجة، وليس الأعلام المخصصة التي يتم تحميلها."
+         ],
+         "%s format": [
+            "التنسيق %s"
+         ],
+         "Save": [
+            "حفظ"
+         ],
+         "The new format has been saved.": [
+            "تم حفظ التنسيق الجديد."
+         ],
+         "Failed to save the new format": [
+            "فشل حفظ التنسيق الجديد"
+         ]
+      }
+   }
+}

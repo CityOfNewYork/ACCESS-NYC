@@ -50,7 +50,7 @@ class WPML_ST_Slug_Translation_API implements IWPML_Action {
 
 		add_filter( 'wpml_slug_translation_available', '__return_true', 1 );
 		add_action( 'wpml_activate_slug_translation', array( $this, 'activate_slug_translation_action' ), 1, 3 );
-		add_filter( 'wpml_get_slug_translation_url', array( $this, 'get_slug_translation_url_filter' ), 1, 3 );
+		add_filter( 'wpml_get_slug_translation_url', array( $this, 'get_slug_translation_url_filter' ), 1, 2 );
 	}
 
 	/**

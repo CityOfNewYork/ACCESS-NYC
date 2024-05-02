@@ -1,0 +1,148 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Mikko Saari <mikko@mikkosaari.fi>\n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/index.js:151
+msgid "not this"
+msgstr "ei tätä"
+
+#: src/index.js:174
+msgid "use this"
+msgstr "käytä tätä"
+
+#: src/index.js:199
+msgid "How Relevanssi sees this post"
+msgstr "Kuinka Relevanssi näkee artikkelin"
+
+#: src/index.js:203
+msgid "Title:"
+msgstr "Otsikko:"
+
+#: src/index.js:210
+msgid "Content:"
+msgstr "Sisältö:"
+
+#: src/index.js:217
+msgid "Author:"
+msgstr "Tekijä:"
+
+#: src/index.js:224
+msgid "Categories:"
+msgstr "Aiheet:"
+
+#: src/index.js:231
+msgid "Tags:"
+msgstr "Avainsanat:"
+
+#: src/index.js:238
+msgid "Other taxonomies:"
+msgstr "Muut taksonomiat:"
+
+#: src/index.js:245
+msgid "Comments:"
+msgstr "Kommentit:"
+
+#: src/index.js:252
+msgid "Custom fields:"
+msgstr "Avainkentät:"
+
+#: src/index.js:259
+msgid "Excerpt:"
+msgstr "Ote:"
+
+#: src/index.js:266
+msgid "Links to this post:"
+msgstr "Sisäiset linkit:"
+
+#: src/index.js:273
+msgid "MySQL columns:"
+msgstr "MySQL-sarakkeet:"
+
+#: src/index.js:281
+msgid "Reason this post is not indexed:"
+msgstr "Miksi tätä artikkelia ei ole indeksoitu:"
+
+#: src/index.js:290
+msgid "Pinning"
+msgstr "Artikkelin kiinnittäminen"
+
+#: src/index.js:294
+msgid "Pin this post for all searches it appears in."
+msgstr "Kiinnitä tämä artikkeli kärkeen kaikissa hauissa, joissa se esiintyy."
+
+#: src/index.js:304
+msgid ""
+"A comma-separated list of single word keywords or multi-word phrases. If any "
+"of these keywords are present in the search query, this post will be moved "
+"on top of the search results."
+msgstr ""
+"Pilkuilla erotettu lista yksittäisiä hakusanoja tai monisanaisia "
+"hakulauseita. Jos joku näistä hakusanoista esiintyy käyttäjän haussa, tämä "
+"artikkeli kiinnitetään hakutulosten huipulle."
+
+#: src/index.js:314
+msgid "Exclusion"
+msgstr "Artikkelien poissulkeminen"
+
+#: src/index.js:319
+msgid "Exclude this post or page from the index."
+msgstr "Poista tämä artikkeli indeksistä."
+
+#: src/index.js:329
+msgid ""
+"A comma-separated list of single word keywords or multi-word phrases. If any "
+"of these keywords are present in the search query, this post will be removed "
+"from the search results."
+msgstr ""
+"Pilkuilla erotettu lista yksittäisiä hakusanoja tai monisanaisia "
+"hakulauseita. Jos joku näistä hakusanoista esiintyy käyttäjän haussa, tämä "
+"artikkeli poistetaan hakutuloksista."
+
+#: src/index.js:341
+msgid "Related posts"
+msgstr "Aiheeseen liittyvät artikkelit"
+
+#: src/index.js:346
+msgid "Don't append the related posts to this page."
+msgstr "Älä lisää samankaltaisia artikkeleita tälle sivulle."
+
+#: src/index.js:356
+msgid "Don't show this as a related post for any post."
+msgstr "Älä näytä tätä samankaltaisena artikkelina millään sivulla."
+
+#: src/index.js:366
+msgid ""
+"A comma-separated list of keywords to use for the Related Posts feature. "
+"Anything entered here will used when searching for related posts. Using "
+"phrases with quotes is allowed, but will restrict the related posts to posts "
+"including that phrase."
+msgstr ""
+"Pilkulla erotettu lista avainsanoja samankaltaisten artikkelien etsimiseen. "
+"Tähän merkittyjä hakusanoja käytetään samankaltaisten artikkelien "
+"etsimiseen. Voit käyttää fraasihakua lainausmerkeillä, mutta se rajoittaa "
+"samankaltaiset artikkelit niihin, joissa fraasi esiintyy."
+
+#: src/index.js:376
+msgid ""
+"A comma-separated list of post IDs to use as related posts for this post"
+msgstr ""
+"Pilkuilla erotettu lista tämän artikkelin liittyvinä artikkeleina "
+"käytettävien artikkelien ID-numeroista"
+
+#: src/index.js:383
+msgid "Related posts for this post:"
+msgstr "Samankaltaiset artikkelit:"
+
+#: src/index.js:386
+msgid "Excluded posts for this post:"
+msgstr "Älä käytä samankaltaisina artikkeleina tälle artikkelille:"

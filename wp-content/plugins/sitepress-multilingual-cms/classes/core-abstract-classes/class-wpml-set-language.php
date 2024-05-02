@@ -10,6 +10,7 @@ class WPML_Set_Language extends WPML_Full_Translation_API {
 	 * @param string        $language_code
 	 * @param null|string   $src_language_code
 	 * @param bool          $check_duplicates
+	 * @param bool          $check_null
 	 *
 	 * @return bool|int|null|string
 	 */
@@ -19,10 +20,11 @@ class WPML_Set_Language extends WPML_Full_Translation_API {
 		$trid,
 		$language_code,
 		$src_language_code = null,
-		$check_duplicates = true
+		$check_duplicates = true,
+		$check_null = false
 	) {
 		if ( strlen( $el_type ) > 60 ) {
-			throw new InvalidArgumentException( 'The element type "' . $el_type . '"  is too long' );
+			return false;
 		}
 
 		$this->clear_cache();
@@ -31,7 +33,7 @@ class WPML_Set_Language extends WPML_Full_Translation_API {
 			$el_id
 		) ) === true
 		) {
-			throw new InvalidArgumentException( 'element_id and type do not match for element_id:' . $el_id . ' the database contains ' . $el_type_db . ' while this function was called with ' . $el_type );
+			return false;
 		}
 
 		$context = explode( '_', $el_type );
@@ -39,11 +41,21 @@ class WPML_Set_Language extends WPML_Full_Translation_API {
 
 		$src_language_code = $src_language_code === $language_code ? null : $src_language_code;
 
+		if ( $check_null && is_null( $trid ) ) {
+			// Check if there are any existing translations after check_duplicate corrections.
+			$existing = $this->get_existing( $el_type, $el_id );
+
+			if ( $existing ) {
+				$trid          = $existing->trid;
+				$language_code = $existing->language_code;
+			}
+		}
+
 		if ( $trid ) { // it's a translation of an existing element
 			/** @var int $trid  is an integer if not falsy */
 			$this->maybe_delete_orphan( $trid, $language_code, $el_id );
 			if ( $el_id && (bool) ( $translation_id = $this->is_language_change( $el_id, $el_type, $trid ) ) === true
-				 && (bool) $this->trid_lang_trans_id( $trid, $language_code ) === false
+				&& (bool) $this->trid_lang_trans_id( $trid, $language_code ) === false
 			) {
 				$this->wpdb->update(
 					$this->wpdb->prefix . 'icl_translations',
@@ -100,6 +112,28 @@ class WPML_Set_Language extends WPML_Full_Translation_API {
 		do_action( 'icl_set_element_language', $translation_id, $el_id, $language_code, $trid );
 
 		return $translation_id;
+	}
+
+	/**
+	 * Get the trid & language_code for element type and id
+	 *
+	 * @param string $element_type
+	 * @param int    $element_id
+	 *
+	 * @return null|int
+	 */
+	private function get_existing( $element_type, $element_id ) {
+		return $this->wpdb->get_row(
+			$this->wpdb->prepare(
+				"SELECT trid, language_code
+					FROM {$this->wpdb->prefix}icl_translations
+					WHERE element_type = %s
+					AND element_id = %d
+					LIMIT 1",
+				$element_type,
+				$element_id
+			)
+		);
 	}
 
 	/**
@@ -197,11 +231,11 @@ class WPML_Set_Language extends WPML_Full_Translation_API {
 	/**
 	 * Inserts a new row into icl_translations
 	 *
-	 * @param int    $el_id
-	 * @param int    $trid
-	 * @param string $el_type
-	 * @param string $language_code
-	 * @param string $src_language_code
+	 * @param int       $el_id
+	 * @param int|false $trid
+	 * @param string    $el_type
+	 * @param string    $language_code
+	 * @param string    $src_language_code
 	 *
 	 * @return int Translation ID of the new row
 	 */

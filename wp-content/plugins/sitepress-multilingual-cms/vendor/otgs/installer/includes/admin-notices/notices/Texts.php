@@ -26,11 +26,22 @@ class Texts {
 
 	public static function expired() {
 		// translators: %s Product name
-		$headingHTML = self::getHeadingHTML( __( 'You are using an expired %s account.', 'installer' ) );
+		$headingHTML = self::getHeadingHTML( __( 'Your %s account has expired.', 'installer' ) );
 		// translators: %s Product name
-		$bodyHTML = self::getBodyHTML( __( "Your site is using an expired %s account, which means you won't receive updates. This can lead to stability and security issues.", 'installer' ) ) .
+		$bodyHTML = self::getBodyHTML( __( "Your site is vulnerable to breaking changes in future WordPress releases. Purchase a new account to protect your site with the latest %s releases.", 'installer' ) ) .
 		            self::inButtonAreaHTML( self::getExpiredButtons() ) .
 		            self::getDismissHTML( Account::EXPIRED );
+
+		return self::insideDiv( 'expire', $headingHTML . $bodyHTML );
+	}
+
+	public static function inGrace() {
+		// translators: %s Product name
+		$headingHTML = self::getHeadingHTML( __( 'Your %s account has expired.', 'installer' ) );
+		// translators: %s Product name
+		$bodyHTML = self::getBodyHTML( __( "Your site is vulnerable to breaking changes in future WordPress releases. Renew your account to protect your site with the latest %s releases.", 'installer' ) ) .
+		            self::inButtonAreaHTML( self::getInGraceButtons() ) .
+		            self::getDismissHTML( Account::IN_GRACE );
 
 		return self::insideDiv( 'expire', $headingHTML . $bodyHTML );
 	}
@@ -145,15 +156,30 @@ class Texts {
 	 */
 	protected static function getExpiredButtons() {
 		$checkOrderStatusUrl = \WP_Installer::menu_url() . '&validate_repository=' . static::$repo;
-		$accountButton       = __( 'Extend your subscription', 'installer' );
+		$accountButton       = sprintf( __( 'Purchase %s', 'installer' ), static::$product );
 		$checkButton         = __( 'Check my order status', 'installer' );
 		$statusText          = __( 'Got renewal already?', 'installer' );
 		$productUrl          = \WP_Installer::instance()->get_product_data( static::$repo, 'url' );
 
-		return self::getPrimaryButtonHTML( $productUrl . '/account', $accountButton ) .
+		return self::getPrimaryButtonHTML( $productUrl . '/purchase/?utm_source=plugin&utm_medium=gui&utm_campaign=installer&utm_term=expired-over-30-days', $accountButton ) .
 		       self::getStatusHTML( $statusText ) .
 		       self::getRefreshButtonHTML( $checkOrderStatusUrl, $checkButton );
 	}
+
+	/**
+	 * @return string
+	 */
+	protected static function getInGraceButtons() {
+		$checkOrderStatusUrl = \WP_Installer::menu_url() . '&validate_repository=' . static::$repo;
+		$accountButton       = __( 'Renew your account', 'installer' );
+		$checkButton         = __( 'Check my order status', 'installer' );
+		$statusText          = __( 'Got renewal already?', 'installer' );
+		$productUrl          = \WP_Installer::instance()->get_product_data( static::$repo, 'url' );
+
+		return self::getPrimaryButtonHTML( $productUrl . '/account/?utm_source=plugin&utm_medium=gui&utm_campaign=installer&utm_term=expired-within-30-days', $accountButton ) .
+		    self::getStatusHTML( $statusText ) .
+		    self::getRefreshButtonHTML( $checkOrderStatusUrl, $checkButton );
+    }
 
 	/**
 	 * @return string
@@ -202,19 +228,20 @@ class Texts {
 	}
 
 	/**
-	 * @param string $url The method takes care of escaping the string.
 	 * @param string $text The method takes care of escaping the string.
+	 * @param array $parameters
 	 *
 	 * @return string
 	 */
 	protected static function getRecommendationInstallButtonHTML( $text, $parameters ) {
-		return
-			wp_nonce_field( 'recommendation_success_nonce', 'recommendation_success_nonce' ) .
-			'<input type="hidden" id="originalPluginData" value="' . base64_encode( json_encode( [
+
+		/** @phpstan-ignore-next-line  */
+		return wp_nonce_field( 'recommendation_success_nonce', 'recommendation_success_nonce', false ) .
+			'<input type="hidden" id="originalPluginData" value="' . base64_encode( (string) json_encode( [
 				'slug'          => $parameters['glue_check_slug'],
 				'repository_id' => $parameters['repository_id'],
 			] ) ) . '">' .
-			'<button class="js-install-recommended otgs-installer-notice-status-item otgs-installer-notice-status-item-btn" value="' . base64_encode( json_encode( $parameters['download_data'] ) ) . '">' . esc_html( $text ) . '</button><span class="spinner"></span>';
+			'<button class="js-install-recommended otgs-installer-notice-status-item otgs-installer-notice-status-item-btn" value="' . base64_encode( (string) json_encode( $parameters['download_data'] ) ) . '">' . esc_html( $text ) . '</button><span class="spinner"></span>';
 	}
 
 	/**

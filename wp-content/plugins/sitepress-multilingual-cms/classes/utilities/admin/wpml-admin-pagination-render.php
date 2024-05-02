@@ -60,7 +60,7 @@ class WPML_Admin_Pagination_Render {
 			$offset = 0;
 		}
 
-		return array_slice( $items, $offset, $limit );
+		return array_slice( $items, (int) $offset, $limit );
 
 	}
 }

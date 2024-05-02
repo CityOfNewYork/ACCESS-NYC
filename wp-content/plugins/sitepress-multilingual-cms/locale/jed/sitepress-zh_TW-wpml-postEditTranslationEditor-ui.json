@@ -1,0 +1,14 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "en"
+         },
+         "Cancel": [
+            "取消"
+         ]
+      }
+   }
+}

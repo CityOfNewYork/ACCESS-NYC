@@ -1,6 +1,7 @@
 <?php
 
 use WPML\FP\Obj;
+use WPML\LIB\WP\User;
 
 abstract class WPML_Translation_Job extends WPML_Translation_Job_Helper {
 	protected $basic_data;
@@ -68,19 +69,22 @@ abstract class WPML_Translation_Job extends WPML_Translation_Job_Helper {
 	}
 
 	/**
-	 * Checks whether the input user is allowed to edit this job
+	 * Checks whether the input user is allowed to edit this job.
+	 *
+	 * If he is an administrator, he is allowed to edit any job.
+	 * If he is an editor, he is allowed to edit any job as long as he's able to translate such language pair.
+	 * Otherwise, we check two conditions:
+	 *  - job needs to be assigned to the user or to no one
+	 *  - user needs to be able to translate the language pair
 	 *
 	 * @param WP_User $user
 	 *
 	 * @return bool
 	 */
 	public function user_can_translate( $user ) {
-		$translator_id          = $this->get_translator_id();
-		$user_can_take_this_job = 0 === $translator_id
-								|| $this->is_current_user_allowed_to_translate(
-									$user,
-									$translator_id
-								);
+		if ( User::isAdministrator( $user ) ) {
+			return apply_filters( 'wpml_user_can_translate', true, $user );
+		}
 
 		$translator_has_job_language_pairs = $this->blog_translators->is_translator(
 			$user->ID,
@@ -90,9 +94,15 @@ abstract class WPML_Translation_Job extends WPML_Translation_Job_Helper {
 			] )
 		);
 
-		$user_can_translate = ( $user_can_take_this_job && $translator_has_job_language_pairs )
-							  || user_can( $user, 'manage_options' );
-		return apply_filters( 'wpml_user_can_translate', $user_can_translate, $user );
+		if ( $translator_has_job_language_pairs && User::isEditor( $user ) ) {
+			return apply_filters( 'wpml_user_can_translate', true, $user );
+		}
+
+		$translator_id          = $this->get_translator_id();
+		$user_can_take_this_job = 0 === $translator_id
+		                          || $this->is_current_user_allowed_to_translate( $user, $translator_id );
+
+		return apply_filters( 'wpml_user_can_translate', $user_can_take_this_job && $translator_has_job_language_pairs, $user );
 	}
 
 	/**
@@ -392,9 +402,9 @@ abstract class WPML_Translation_Job extends WPML_Translation_Job_Helper {
 	protected function generate_lang_text() {
 		$this->maybe_load_basic_data();
 
-		return $this->lang_code_to_name( $this->get_source_language_code() )
+		return $this->lang_code_to_name( (string) $this->get_source_language_code() )
 			   . html_entity_decode( ' &raquo; ' )
-			   . $this->lang_code_to_name( $this->get_language_code() );
+			   . $this->lang_code_to_name( (string) $this->get_language_code() );
 	}
 
 	/**

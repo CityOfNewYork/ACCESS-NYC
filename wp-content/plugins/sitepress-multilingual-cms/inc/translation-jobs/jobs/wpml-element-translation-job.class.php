@@ -75,7 +75,7 @@ abstract class WPML_Element_Translation_Job extends WPML_Translation_Job {
 	 *                       of the target element to complete
 	 */
 	public function save_to_element( $complete = false ) {
-		global $wpdb, $wpml_post_translations, $wpml_term_translations;
+		global $wpdb, $wpml_term_translations, $wpml_post_translations;
 
 		$wpml_tm_records  = new WPML_TM_Records( $wpdb, $wpml_post_translations, $wpml_term_translations );
 		$save_data_action = new WPML_Save_Translation_Data_Action(
@@ -248,9 +248,9 @@ abstract class WPML_Element_Translation_Job extends WPML_Translation_Job {
 	protected function load_status() {
 		$this->maybe_load_basic_data();
 
-		$this->basic_data->status = ! empty( $this->basic_data->translated ) ? ICL_TM_COMPLETE : Obj::prop('status', $this->basic_data);
+		$status = ! empty( $this->basic_data->translated ) ? ICL_TM_COMPLETE : Obj::prop('status', $this->basic_data);
 
-		return TranslationManagement::get_job_status_string( $this->basic_data->status, Obj::prop( 'needs_update', $this->basic_data ) );
+		return TranslationManagement::get_job_status_string( $status, Obj::prop( 'needs_update', $this->basic_data ) );
 	}
 
 	/**

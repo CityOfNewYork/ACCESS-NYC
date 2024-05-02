@@ -15,11 +15,14 @@ function new_duplicated_terms_filter( $post_ids, $duplicates_only = true ) {
 		$collapsed = 'Taxonomy sync problem';
 
 		foreach ( $taxonomies as $taxonomy ) {
+			$tax = get_taxonomy( $taxonomy );
+			if ( ! $tax ) {
+				continue;
+			}
 			$text .= '<p><a href="admin.php?page='
 					 . WPML_PLUGIN_FOLDER . '/menu/taxonomy-translation.php&taxonomy='
-					. $taxonomy . '&sync=1">' . get_taxonomy_labels(
-						get_taxonomy( $taxonomy )
-					)->name . '</a></p>';
+				     . $taxonomy . '&sync=1">' .
+				    	get_taxonomy_labels( $tax )->name . '</a></p>';
 		}
 
 		$text .= '<p align="right"><a target="_blank" href="https://wpml.org/documentation/getting-started-guide/translating-post-categories-and-custom-taxonomies/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore#synchronizing-hierarchical-taxonomies">Help about translating taxonomy >></a></p>';

@@ -54,7 +54,7 @@ class WPML_TM_Word_Count_Set_Post {
 	}
 
 	/**
-	 * @param string $lang
+	 * @param string|null $lang
 	 *
 	 * @return int
 	 */

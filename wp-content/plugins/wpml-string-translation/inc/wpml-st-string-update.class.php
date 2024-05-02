@@ -25,6 +25,7 @@ class WPML_ST_String_Update {
 	 */
 	public function update_string( $domain, $name, $old_value, $new_value, $force_complete = false ) {
 		if ( $new_value != $old_value ) {
+			/** @var object{id: int, value: string, status: string, name: string} $string */
 			$string = $this->get_initial_string( $name, $domain, $old_value, $new_value );
 			$this->wpdb->update(
 				$this->wpdb->prefix . 'icl_strings',
@@ -47,7 +48,7 @@ class WPML_ST_String_Update {
 			 * @param string     $old_value
 			 * @param string     $new_value
 			 * @param bool|false $force_complete
-			 * @param stdClass   $string
+			 * @param object     $string
 			 */
 			do_action( 'wpml_st_update_string', $domain, $name, $old_value, $new_value, $force_complete, $string );
 		}
@@ -66,8 +67,9 @@ class WPML_ST_String_Update {
 	/**
 	 * Handles string status changes resulting from the string update
 	 *
-	 * @param object $string
-	 * @param bool   $force_complete if true, all translations will be marked as complete even though  a string's original value has been updated,
+	 * @param object{id: int, value: string, status: string, name: string} $string
+	 * @param bool                                                         $force_complete if true, all translations
+	 *                               will be marked as complete even though  a string's original value has been updated,
 	 *                               currently this applies to blogname and tagline strings
 	 */
 	private function handle_status_change( $string, $force_complete ) {
@@ -94,7 +96,7 @@ class WPML_ST_String_Update {
 	 * @param string $old_value
 	 * @param string $new_value
 	 *
-	 * @return object
+	 * @return object{id: int, value: string, status: string, name: string}
 	 */
 	private function get_initial_string( $name, $context, $old_value, $new_value ) {
 		$string = $this->read_string_from_db( $name, $context );
@@ -119,21 +121,22 @@ class WPML_ST_String_Update {
 	 * @param string $name
 	 * @param string $context
 	 *
-	 * @return object|null
+	 * @return object{id: int, value: string, status: string, name: string}|null
 	 */
 	private function read_string_from_db( $name, $context ) {
-
-		return $this->wpdb->get_row(
-			$this->wpdb->prepare(
-				" SELECT id, value, status, name
-																	FROM {$this->wpdb->prefix}icl_strings
-																	WHERE context = %s
-																		AND name = %s
-																	LIMIT 1",
-				$context,
-				$name
-			)
+		/** @var string $sql */
+		$sql = $this->wpdb->prepare(
+			" 
+				SELECT id, value, status, name
+				FROM {$this->wpdb->prefix}icl_strings
+				WHERE context = %s
+					AND name = %s
+				LIMIT 1",
+			$context,
+			$name
 		);
+
+		return $this->wpdb->get_row( $sql );
 	}
 
 	/**

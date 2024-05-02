@@ -21,7 +21,16 @@ class WPML_Package {
 	private $element_type_prefix;
 
 	/**
-	 * @param stdClass|WPML_Package|array|int $data_item
+	 * This gives a context to determine what's really
+	 * required to load. When set to `true`, we skip
+	 * some useless DB queries in the constructor.
+	 *
+	 * @var bool
+	 */
+	private $translate_only = false;
+
+	/**
+	 * @param stdClass|WPML_Package|array|int|WP_Post $data_item
 	 */
 	function __construct( $data_item ) {
 		$this->element_type_prefix = 'package';
@@ -167,6 +176,9 @@ class WPML_Package {
 			$update_query   = "UPDATE {$wpdb->prefix}icl_strings SET language=%s WHERE string_package_id=%d";
 			$update_prepare = $wpdb->prepare( $update_query, $language_code, $package_id );
 			$wpdb->query( $update_prepare );
+
+			// Action called after string is updated.
+			do_action( 'wpml_st_string_updated' );
 		}
 
 	}
@@ -254,10 +266,14 @@ class WPML_Package {
 		return $string_name;
 	}
 
+	/**
+	 * @param string $string_value
+	 * @param string $sanitized_string_name
+	 *
+	 * @return string|mixed
+	 */
 	function translate_string( $string_value, $sanitized_string_name ) {
-		$package_id = $this->get_package_id();
-
-		if ( $package_id ) {
+		if ( $this->translate_only || $this->get_package_id() ) {
 			$sanitized_string_name = $this->sanitize_string_name( $sanitized_string_name );
 
 			$string_context = $this->get_string_context_from_package();
@@ -294,7 +310,7 @@ class WPML_Package {
 		$string_id = apply_filters( 'wpml_string_id', null, $string_data );
 
 		if ( ! $string_id ) {
-			$string_id = icl_register_string( $string_context, $string_name, $string_value, null, $this->get_package_language() );
+			$string_id = icl_register_string( $string_context, $string_name, $string_value, false, $this->get_package_language() );
 		}
 
 		return $string_id;
@@ -345,6 +361,10 @@ class WPML_Package {
 		}
 
 		$this->sanitize_attributes();
+
+		if ( $this->translate_only ) {
+			return;
+		}
 
 		if ( $this->package_id_exists() || $this->package_name_and_kind_exists() ) {
 			$this->set_package_from_db();

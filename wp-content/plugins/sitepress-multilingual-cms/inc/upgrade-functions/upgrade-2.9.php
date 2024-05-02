@@ -56,11 +56,12 @@ $wpdb->insert(
 	)
 );
 
+$msFlag = wpml_get_flag_file_name('ms');
 $wpdb->insert(
 	$wpdb->prefix . 'icl_flags',
 	array(
 		'lang_code'     => 'ms',
-		'flag'          => 'ms.png',
+		'flag'          => $msFlag,
 		'from_template' => 0,
 	)
 );

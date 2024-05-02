@@ -119,8 +119,8 @@ define('POTX_CONTEXT_ERROR', FALSE);
  *
  * @param string          $file_path        Complete path to file to process.
  * @param int             $strip_prefix     An integer denoting the number of chars to strip from filepath for output.
- * @param callable|string $save_callback    Callback function to use to save the collected strings.
- * @param callable|string $version_callback Callback function to use to save collected version numbers.
+ * @param callable	      $save_callback    Callback function to use to save the collected strings.
+ * @param callable	      $version_callback Callback function to use to save collected version numbers.
  * @param string          $default_domain   Default domain to be used if one can't be found.
  */
 function _potx_process_file($file_path,
@@ -140,7 +140,7 @@ function _potx_process_file($file_path,
   _potx_find_version_number($code, $file_name, $version_callback);
 
   // Extract raw PHP language tokens.
-  $raw_tokens = token_get_all($code);
+  $raw_tokens = $code !== false ? token_get_all( $code ) : [];
   unset($code);
 
   // Remove whitespace and possible HTML (the later in templates for example),
@@ -180,8 +180,7 @@ function _potx_process_file($file_path,
   }
   unset($raw_tokens);
 
-  if(!empty($src_tokens))
-  foreach($src_tokens as $tk){
+  foreach( $src_tokens as $tk ) {
     _potx_find_t_calls_with_context($file_name, $save_callback, $tk, $default_domain);
   }
 
@@ -454,9 +453,9 @@ function _potx_find_t_calls_with_context(
 						// exception for gettext calls with contexts
 						if ( false !== $context_offset && isset( $_potx_tokens[ $ti + $context_offset ] ) ) {
 							if ( ! preg_match( '#^(\'|")(.+)#', @$_potx_tokens[ $ti + $context_offset ][ 1 ] ) ) {
-								$constant_val = @constant( $_potx_tokens[ $ti + $context_offset ][ 1 ] );
-								if ( ! is_null( $constant_val ) ) {
-									$context = $constant_val;
+								$constant_name = $_potx_tokens[ $ti + $context_offset ][ 1 ];
+								if ( defined( $constant_name ) ) {
+									$context = constant( $constant_name );
 								} else {
 									if ( function_exists( @$_potx_tokens[ $ti + $context_offset ][ 1 ] ) ) {
 										$context = @$_potx_tokens[ $ti + $context_offset ][ 1 ]();
@@ -543,7 +542,7 @@ function _potx_find_end_of_function($here, $open = '{', $close = '}') {
 /**
  * Helper to move past potx_t() and format_plural() arguments in search of context.
  *
- * @param string $here The token before the start of the arguments
+ * @param int $here The token index before the start of the arguments
  */
 function _potx_skip_args($here) {
   global $_potx_tokens;
@@ -634,13 +633,13 @@ function _potx_find_context($tf, $ti, $file, $function_name) {
  * Get the exact CVS version number from the file, so we can
  * push that into the generated output.
  *
- * @param string   $code             Complete source code of the file parsed.
- * @param string   $file             Name of the file parsed.
- * @param callable $version_callback Callback used to save the version information.
+ * @param string|false   $code             Complete source code of the file parsed.
+ * @param string   		 $file             Name of the file parsed.
+ * @param callable 		 $version_callback Callback used to save the version information.
  */
 function _potx_find_version_number($code, $file, $version_callback) {
   // Prevent CVS from replacing this pattern with actual info.
-  if (preg_match('!\\$I'.'d: ([^\\$]+) Exp \\$!', $code, $version_info)) {
+  if ( $code !== false && preg_match('!\\$I'.'d: ([^\\$]+) Exp \\$!', $code, $version_info)) {
     $version_callback($version_info[1], $file);
   }
   else {

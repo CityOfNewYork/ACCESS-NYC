@@ -3,7 +3,7 @@
 /**
  * @author OnTheGo Systems
  */
-class WPML_ACF_Xliff {
+class WPML_ACF_Xliff implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	/** @var wpdb $wpdb */
 	public $wpdb;
 	/** @var SitePress $sitepress */
@@ -24,7 +24,7 @@ class WPML_ACF_Xliff {
 		$this->sitepress = $sitepress;
 	}
 
-	public function init_hooks() {
+	public function add_hooks() {
 		add_action( 'save_post', array( $this, 'save_post' ), WPML_PRIORITY_BEFORE_EVERYTHING );
 		add_action( 'acf/update_field_group', array( $this, 'update_acf_field_group' ) );
 	}

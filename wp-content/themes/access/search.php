@@ -112,9 +112,22 @@ if (isset($_GET['program_cat'])) {
 
 $context['query'] = get_search_query();
 
-$context['posts'] = array_map(function($post) {
-  return new Controller\Programs($post);
-}, Timber::get_posts());
+$wp_query = new WP_Query(array(
+  's' => $context['query'],
+  'post_type' => array('programs'),
+  'nopaging' => true
+));
+relevanssi_do_query($wp_query);
+
+if ($wp_query->found_posts > 0) {
+  $wp_query_ids = wp_list_pluck($wp_query->posts, 'ID');
+
+  $context['posts'] = array_map(function($post) {
+    return new Controller\Programs($post);
+  }, Timber::get_posts($wp_query_ids));
+} else {
+  $context['posts'] = [];
+}
 
 $context['pagination'] = Timber::get_pagination();
 

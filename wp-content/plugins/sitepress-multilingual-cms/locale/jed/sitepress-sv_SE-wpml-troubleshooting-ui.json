@@ -1,0 +1,40 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Preparing...": [
+            "Förbereder..."
+         ],
+         "All jobs have been cancelled": [
+            "Alla jobb har avbrutits"
+         ],
+         "There is no more jobs to cancel": [
+            "Det finns inga fler jobb att avbryta"
+         ],
+         "The jobs cancellation has failed": [
+            "Annullering av jobben har misslyckats"
+         ],
+         "Cancel in-progress automatic jobs": [
+            "Avbryt pågående automatiska jobb"
+         ],
+         "Domain name has been updated": [
+            "Domännamnet har uppdaterats"
+         ],
+         "Domain name update has been failed": [
+            "Uppdatering av domännamnet har misslyckats"
+         ],
+         "Update domain name in language switcher settings": [
+            "Uppdatera domännamnet i språkväxlarens inställningar"
+         ],
+         "Refresh license data to recognise license update": [
+            "Uppdatera licensdata för att identifiera licensuppdatering"
+         ],
+         "WPML License has been refreshed": [
+            "WPML-licensen har uppdaterats"
+         ]
+      }
+   }
+}

@@ -11,8 +11,16 @@ class WPML_TM_Page_Builders {
 	/** @var SitePress $sitepress */
 	private $sitepress;
 
-	public function __construct( SitePress $sitepress ) {
+	/** @var \WPML_PB_Integration|null */
+	private $wpmlPbIntegration;
+
+	/**
+	 * @param SitePress $sitepress
+	 * @param WPML_PB_Integration|null $wpmlPbIntegration
+	 */
+	public function __construct( SitePress $sitepress, \WPML_PB_Integration $wpmlPbIntegration = null  ) {
 		$this->sitepress = $sitepress;
+		$this->wpmlPbIntegration = $wpmlPbIntegration;
 	}
 
 	/**
@@ -20,16 +28,23 @@ class WPML_TM_Page_Builders {
 	 *
 	 * @param array $translation_package Translation package.
 	 * @param mixed $post                Post.
+	 * @param bool  $isOriginal          If it's used as original post.
 	 *
 	 * @return array
 	 */
-	public function translation_job_data_filter( array $translation_package, $post ) {
+	public function translation_job_data_filter( array $translation_package, $post, $isOriginal = false ) {
 		if ( self::PACKAGE_TYPE_EXTERNAL !== $translation_package['type'] && isset( $post->ID ) ) {
 
 			$post_element        = new WPML_Post_Element( $post->ID, $this->sitepress );
 			$source_post_id      = $post->ID;
-			$source_post_element = $post_element->get_source_element();
 			$job_lang_from       = $post_element->get_language_code();
+
+			if ( ! $post_element->is_root_source() && $isOriginal && WPML_PB_Last_Translation_Edit_Mode::is_native_editor( $post->ID ) ) {
+				$this->getWpmlPbIntegration()->register_all_strings_for_translation( $post, true );
+				$source_post_element = $post_element->get_translation( $job_lang_from );
+			} else {
+				$source_post_element = $post_element->get_source_element();
+			}
 
 			if ( $source_post_element ) {
 				$source_post_id = $source_post_element->get_id();
@@ -232,5 +247,16 @@ class WPML_TM_Page_Builders {
 	 */
 	public function create_field_wrapper( $field_slug ) {
 		return new WPML_TM_Page_Builders_Field_Wrapper( $field_slug );
+	}
+
+	/**
+	 * @return \WPML_PB_Integration
+	 *
+	 */
+	private function getWpmlPbIntegration() {
+		if ( null === $this->wpmlPbIntegration ) {
+			$this->wpmlPbIntegration = \WPML\Container\make( \WPML_PB_Integration::class );
+		}
+		return $this->wpmlPbIntegration;
 	}
 }

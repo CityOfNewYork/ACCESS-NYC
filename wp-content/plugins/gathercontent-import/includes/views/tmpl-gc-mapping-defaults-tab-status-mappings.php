@@ -2,8 +2,12 @@
 	<tr id="gc-status-<?php echo esc_attr( $status->id ); ?>">
 		<td>
 			<div class="gc-item-status">
-				<span class="gc-status-color <?php if ( '#ffffff' === $status->color ) : ?> gc-status-color-white<?php endif; ?>" style="background-color:<?php echo esc_attr( $status->color ); ?>;" data-id="<?php echo esc_attr( $status->id ); ?>"></span>
-				<?php echo esc_attr( $status->name ); ?>
+				<span class="gc-status-color
+				<?php
+				if ( '#ffffff' === $status->color ) :
+					?>
+					 gc-status-color-white<?php endif; ?>" style="background-color:<?php echo esc_attr( $status->color ); ?>;" data-id="<?php echo esc_attr( $status->id ); ?>"></span>
+				<?php echo esc_attr( $status->display_name ); ?>
 			</div>
 		</td>
 		<td>
@@ -18,7 +22,7 @@
 			<select class="gc-default-mapping-select gc-select2" data-column="gc_status" name="<?php $this->output( 'option_base' ); ?>[gc_status][<?php echo esc_attr( $status->id ); ?>][after]"">
 				<option <# if ( ! data.gc_status[<?php echo esc_attr( $status->id ); ?>] || ! data.gc_status[<?php echo esc_attr( $status->id ); ?>].after ) { #>selected="selected"<# } #> value=""><?php _e( 'Do not change' ); ?></option>
 				<?php foreach ( $this->get( 'gc_status_options' ) as $status2 ) : ?>
-					<option data-color="<?php echo esc_attr( $status2->color ); ?>" data-description="<?php echo esc_attr( $status2->description ); ?>" <# if ( data.gc_status[<?php echo esc_attr( $status->id ); ?>] && data.gc_status[<?php echo esc_attr( $status->id ); ?>].after && '<?php echo esc_attr( $status2->id ); ?>' == data.gc_status[<?php echo esc_attr( $status->id ); ?>].after ) { #>selected="selected"<# } #> value="<?php echo esc_attr( $status2->id ); ?>"><?php echo esc_attr( $status2->name ); ?></option>
+					<option data-color="<?php echo esc_attr( $status2->color ); ?>" data-description="<?php echo esc_attr( $status2->description ); ?>" <# if ( data.gc_status[<?php echo esc_attr( $status->id ); ?>] && data.gc_status[<?php echo esc_attr( $status->id ); ?>].after && '<?php echo esc_attr( $status2->id ); ?>' == data.gc_status[<?php echo esc_attr( $status->id ); ?>].after ) { #>selected="selected"<# } #> value="<?php echo esc_attr( $status2->id ); ?>"><?php echo esc_attr( $status2->display_name ); ?></option>
 				<?php endforeach; ?>
 			</select>
 		</td>

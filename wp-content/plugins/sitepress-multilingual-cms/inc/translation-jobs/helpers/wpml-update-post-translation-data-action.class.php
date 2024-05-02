@@ -33,8 +33,8 @@ class WPML_TM_Update_Post_Translation_Data_Action extends WPML_TM_Update_Transla
 
 				foreach ( $package['contents'] as $field_name => $field ) {
 					if ( ! array_key_exists( $field_name, $prev_translation )
-					     && array_key_exists( $field_name, $translated_contents )
-					     && array_key_exists( 'data', $translated_contents[ $field_name ] )
+						 && isset( $translated_contents[ $field_name ] )
+						 && isset( $translated_contents[ $field_name ]['data'] )
 					) {
 						$prev_translation[ $field_name ] = new WPML_TM_Translated_Field(
 							'',

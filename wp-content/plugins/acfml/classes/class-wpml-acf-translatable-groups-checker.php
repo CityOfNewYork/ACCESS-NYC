@@ -1,8 +1,11 @@
 <?php
+
+use ACFML\Notice\Links;
+
 /**
  * @author OnTheGo Systems
  */
-class WPML_ACF_Translatable_Groups_Checker {
+class WPML_ACF_Translatable_Groups_Checker implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	const TRANSIENT_KEY = 'acfml_untranslated_groups';
 	const POST_TYPE     = 'acf-field-group';
 
@@ -11,7 +14,7 @@ class WPML_ACF_Translatable_Groups_Checker {
 	 */
 	private $untranslated_groups;
 
-	public function register_hooks() {
+	public function add_hooks() {
 		if ( is_admin() && $this->is_field_groups_translatable() ) {
 			add_action( 'admin_init', [ $this, 'check_untranslated_groups' ] );
 		}
@@ -35,16 +38,19 @@ class WPML_ACF_Translatable_Groups_Checker {
 	public function report_untranslated_groups() {
 		?>
 		<div class="notice notice-error is-dismissible">
-			<h2><?php esc_html_e( 'Some field groups are not translated.', 'acfml' ); ?></h2>
-			<p><?php esc_html_e( 'Field Groups are translatable, this will let you translate the ACF interface. If that\'s not a requirement for your website, consider setting the fields group to not Translatable. However some groups do not have a translation yet. This may create inconsistencies.', 'acfml' ); ?>
-				<?php esc_html_e( 'Read more about it on this ', 'acfml' ); ?>
-				<a href="https://wpml.org/documentation/related-projects/translate-sites-built-with-acf/#translating-field-groups"><?php esc_html_e( 'documentation article', 'acfml' ); ?></a>
+			<h2><?php esc_html_e( 'Change the field group translation setting', 'acfml' ); ?></h2>
+			<p>
+				<?php
+				printf(
+					/* translators: %1$s and %4$s are placeholders for <a> link tags and %2$s and %3$s are for <b> tags. */
+					esc_html__( 'You can translate field labels and labels for Choices using String Translation. To do this, %1$sset the field group post type to %2$sNot Translatable%3$s%4$s.', 'acfml' ),
+					'<a href="' . esc_url( Links::getAcfmlExpertDoc( [ 'anchor' => 'field-group-translation-settings' ] ) ) . '" class="wpml-external-link" target="_blank">',
+					'<b>',
+					'</b>',
+					'</a>'
+				);
+				?>
 			</p>
-			<ul>
-				<?php foreach ( $this->untranslated_groups as $group ) { ?>
-					<li><a href="<?php echo esc_url( get_edit_post_link( $group ) ); ?>"><?php echo esc_html( $group->post_title ); ?></a></li>
-				<?php } ?>
-			</ul>
 		</div>
 		<?php
 	}
@@ -64,7 +70,7 @@ class WPML_ACF_Translatable_Groups_Checker {
 	 * @return void
 	 */
 	public function on_save_settings() {
-		/* phpcs:disable WordPress.Security.NonceVerification.Missing */
+		/* phpcs:disable WordPress.Security.NonceVerification.Missing,WordPress.CSRF.NonceVerification.NoNonceVerification,WordPress.VIP.SuperGlobalInputUsage.AccessDetected */
 		if ( \WPML\FP\Relation::propEq( 'icl_ajx_action', 'icl_custom_posts_sync_options', $_POST ) ) {
 			delete_transient( self::TRANSIENT_KEY );
 		}
@@ -81,9 +87,11 @@ class WPML_ACF_Translatable_Groups_Checker {
 	 * @return array
 	 */
 	private function get_untranslated_field_groups() {
+		/* phpcs:ignore WordPress.VIP.RestrictedFunctions.get_posts_get_posts */
 		$groups = get_posts(
 			[
 				'post_type'      => self::POST_TYPE,
+				/* phpcs:ignore WordPress.VIP.PostsPerPage.posts_per_page_posts_per_page */
 				'posts_per_page' => -1,
 				'post_status'    => 'any',
 			]

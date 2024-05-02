@@ -3,16 +3,56 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "en"
          },
-         "Insufficient funds": [
-            "Недостатньо коштів"
+         "Draft — Pending review": [
+            "Чернетка – Чекає на перевірку"
          ],
          "Complete": [
             "Завершений"
          ],
+         "Insufficient funds": [
+            "Недостатньо коштів"
+         ],
+         "Edit": [
+            "Редагувати"
+         ],
+         "Resign": [
+            "Відмовитися"
+         ],
+         "Review": [
+            "Перевірити"
+         ],
+         "Translate": [
+            "Перекласти"
+         ],
+         "View": [
+            "Переглянути"
+         ],
+         "Delete Translations": [
+            "Видалити переклади"
+         ],
+         "Keep Translations as Draft": [
+            "Залишити переклади у вигляді чернеток"
+         ],
+         "Never mind. I want to review these translations.": [
+            "Не треба. Я хочу перевірити ці переклади."
+         ],
+         "Cancel": [
+            "Скасувати"
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "Вибрані замовлення будуть видалені з черги перекладів без публікування. Що зробити з перекладами?"
+         ],
+         "Cancel Translation Review": [
+            "Скасувати редагування перекладів"
+         ],
          "Pending review": [
             "Очікується перевірка"
+         ],
+         "Languages": [
+            "Мови"
          ]
       }
    }

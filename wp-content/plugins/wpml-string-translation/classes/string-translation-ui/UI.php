@@ -30,10 +30,13 @@ class UI implements \IWPML_Backend_Action_Loader {
 	}
 
 	public static function localize() {
+		/** @var array $languages */
+		$languages = Languages::withFlags( Languages::getAll() );
 		return [
 			'name' => 'wpml_st_main_ui',
 			'data' => [
-				'languageDetails' => Languages::withRtl( Languages::withFlags( Languages::getAll() ) ),
+				'defaultLang'     => Languages::getDefaultCode(),
+				'languageDetails' => Languages::withRtl( $languages ),
 				'endpoints'       => [
 					'saveTranslation'   => SaveTranslation::class,
 					'translationMemory' => apply_filters( 'wpml_st_translation_memory_endpoint', '' ),

@@ -48,16 +48,17 @@ class WPML_TM_Xliff_Writer {
 	 * Generate a XLIFF string for a given post or external type (e.g. package) job.
 	 *
 	 * @param int $job_id
+	 * @param bool $apply_memory
 	 *
 	 * @return string XLIFF representation of the job
 	 */
-	public function generate_job_xliff( $job_id ) {
+	public function generate_job_xliff( $job_id, $apply_memory = true ) {
 		/** @var TranslationManagement $iclTranslationManagement */
 		global $iclTranslationManagement;
 
 		// don't include not-translatable and don't auto-assign
 		$job                = $iclTranslationManagement->get_translation_job( (int) $job_id, false, false, 1 );
-		$translation_units  = $this->get_job_translation_units_data( $job );
+		$translation_units  = $this->get_job_translation_units_data( $job, $apply_memory );
 		$original           = $job_id . '-' . md5( $job_id . $job->original_doc_id );
 		$original_post_type = isset( $job->original_post_type ) ? $job->original_post_type : null;
 
@@ -222,10 +223,11 @@ class WPML_TM_Xliff_Writer {
 	 * Represented as a source and a target
 	 *
 	 * @param stdClass $job
+	 * @param bool     $apply_memory
 	 *
 	 * @return array The translation units data
 	 */
-	private function get_job_translation_units_data( $job ) {
+	private function get_job_translation_units_data( $job, $apply_memory ) {
 		$translation_units = array();
 		/** @var array $elements */
 		$elements = $job->elements;
@@ -266,8 +268,8 @@ class WPML_TM_Xliff_Writer {
 							$element->field_type,
 							$element->field_type,
 							$field_data,
-							$field_data_translated,
-							$element->translated_from_memory,
+							$apply_memory ? $field_data_translated : null,
+							$apply_memory && $element->translated_from_memory,
 							$element->field_wrap_tag,
 							$this->get_field_title( $element, $job )
 						);
@@ -353,6 +355,13 @@ class WPML_TM_Xliff_Writer {
 	) {
 		global $sitepress;
 
+		if ( $field_data === null ) {
+			$field_data = '';
+		}
+		if ( $field_data_translated === null ) {
+			$field_data_translated = '';
+		}
+
 		$field_data = $this->remove_invalid_chars( $field_data );
 
 		$translation_unit = array();
@@ -433,8 +442,11 @@ class WPML_TM_Xliff_Writer {
 	 */
 	private function generate_xliff_file( $xliff_content ) {
 		$file = fopen( 'php://temp', 'rb+' );
-		fwrite( $file, $xliff_content );
-		rewind( $file );
+
+		if ( $file ) {
+			fwrite( $file, $xliff_content );
+			rewind( $file );
+		}
 
 		return $file;
 	}

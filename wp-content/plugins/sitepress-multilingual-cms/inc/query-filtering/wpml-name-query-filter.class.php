@@ -263,6 +263,8 @@ abstract class WPML_Name_Query_Filter extends WPML_Slug_Resolution {
 	 */
 	private function get_multiple_slug_adjusted_IDs( $slugs ) {
 		$parent_slugs    = array_slice( $slugs, 0, - 1 );
+
+		/** @var array<object>|null $pages_with_name */
 		$pages_with_name = $this->wpdb->get_results(
 			'   SELECT p.ID, p.post_name, p.post_parent, par.post_name as parent_name
 			' . $this->get_from_join_snippet() . "
@@ -271,7 +273,12 @@ abstract class WPML_Name_Query_Filter extends WPML_Slug_Resolution {
 			" . $this->get_where_snippet() . ' p.post_name IN (' . wpml_prepare_in( $slugs ) . ')
 			ORDER BY par.post_name IN (' . wpml_prepare_in( $parent_slugs ) . ') DESC'
 		);
-		$query_scorer    = new WPML_Score_Hierarchy( $pages_with_name, $slugs );
+
+		if ( ! $pages_with_name ) {
+			return [];
+		}
+
+		$query_scorer = new WPML_Score_Hierarchy( $pages_with_name, $slugs );
 
 		return $query_scorer->get_possible_ids_ordered();
 	}

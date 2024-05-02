@@ -9,6 +9,9 @@ on:
 env:
     SYMFONY_PHPUNIT_DISABLE_RESULT_CACHE: 1
 
+permissions:
+  contents: read
+
 jobs:
     tests:
         name: "PHP ${{ matrix.php-version }}"
@@ -26,36 +29,24 @@ jobs:
                     - '7.4'
                     - '8.0'
                     - '8.1'
-                composer-options: ['']
+                    - '8.2'
                 experimental: [false]
 
         steps:
             - name: "Checkout code"
-              uses: actions/checkout@v2.3.3
+              uses: actions/checkout@v4
 
             - name: "Install PHP with extensions"
-              uses: shivammathur/setup-php@2.7.0
+              uses: shivammathur/setup-php@v2
               with:
                   coverage: "none"
                   php-version: ${{ matrix.php-version }}
                   ini-values: memory_limit=-1
-                  tools: composer:v2
 
             - name: "Add PHPUnit matcher"
               run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
-            - name: "Set composer cache directory"
-              id: composer-cache
-              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-            - name: "Cache composer"
-              uses: actions/cache@v2.1.2
-              with:
-                  path: ${{ steps.composer-cache.outputs.dir }}
-                  key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('composer.json') }}
-                  restore-keys: ${{ runner.os }}-${{ matrix.php-version }}-composer-
-
-            - run: composer install ${{ matrix.composer-options }}
+            - run: composer install
 
             - name: "Install PHPUnit"
               run: vendor/bin/simple-phpunit install
@@ -84,6 +75,7 @@ jobs:
                     - '7.4'
                     - '8.0'
                     - '8.1'
+                    - '8.2'
                 extension:
                     - 'extra/cssinliner-extra'
                     - 'extra/html-extra'
@@ -92,34 +84,21 @@ jobs:
                     - 'extra/markdown-extra'
                     - 'extra/string-extra'
                     - 'extra/twig-extra-bundle'
-                composer-options: ['']
                 experimental: [false]
 
         steps:
             - name: "Checkout code"
-              uses: actions/checkout@v2.3.3
+              uses: actions/checkout@v4
 
             - name: "Install PHP with extensions"
-              uses: shivammathur/setup-php@2.7.0
+              uses: shivammathur/setup-php@v2
               with:
                   coverage: "none"
                   php-version: ${{ matrix.php-version }}
                   ini-values: memory_limit=-1
-                  tools: composer:v2
 
             - name: "Add PHPUnit matcher"
               run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-
-            - name: "Set composer cache directory"
-              id: composer-cache
-              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-            - name: "Cache composer"
-              uses: actions/cache@v2.1.2
-              with:
-                  path: ${{ steps.composer-cache.outputs.dir }}
-                  key: ${{ runner.os }}-${{ matrix.php-version }}-${{ matrix.extension }}-${{ hashFiles('composer.json') }}
-                  restore-keys: ${{ runner.os }}-${{ matrix.php-version }}-${{ matrix.extension }}-
 
             - run: composer install
 
@@ -128,10 +107,6 @@ jobs:
 
             - name: "PHPUnit version"
               run: vendor/bin/simple-phpunit --version
-
-            - if: matrix.extension == 'extra/markdown-extra' && matrix.php-version == '8.0'
-              working-directory: ${{ matrix.extension}}
-              run: composer config platform.php 7.4.99
 
             - name: "Composer install"
               working-directory: ${{ matrix.extension}}
@@ -154,20 +129,17 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - '7.3'
+                    - '8.2'
 
         steps:
             - name: "Checkout code"
-              uses: actions/checkout@v2.3.3
+              uses: actions/checkout@v4
 
             - name: "Install PHP with extensions"
-              uses: shivammathur/setup-php@2.7.0
+              uses: shivammathur/setup-php@v2
               with:
                   coverage: "none"
                   extensions: "gd, pdo_sqlite"
                   php-version: ${{ matrix.php-version }}
                   ini-values: memory_limit=-1
                   tools: composer:v2
-
-            - run: bash ./tests/drupal_test.sh
-              shell: "bash"

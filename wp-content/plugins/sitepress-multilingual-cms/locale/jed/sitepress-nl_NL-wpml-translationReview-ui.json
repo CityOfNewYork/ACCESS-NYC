@@ -8,20 +8,32 @@
          "Accepted": [
             "Goedgekeurd"
          ],
-         "Reviewing the next translation...": [
-            "De volgende vertaling controleren..."
+         "Approved!": [
+            "Goedgekeurd!"
+         ],
+         "Loading the next translation for review...": [
+            "Laadt de volgende vertaling voor controle..."
          ],
          "Back": [
             "Terug"
          ],
-         "Edit Translation": [
-            "Vertaling bewerken"
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "Uitzetten om niet automatisch de volgende vertaling te laden na het beëindigen van deze controle."
          ],
-         "There was an error in applying translation.": [
-            "Er was een fout bij het aanvragen van de vertaling."
+         "Turn on to automatically load the next translation after finishing this  .": [
+            "Zet automatisch de volgende vertaling te laden aan, na het beëindigen van deze."
+         ],
+         "Edit": [
+            "Bewerken"
+         ],
+         "Edit translation": [
+            "Vertaling bewerken"
          ],
          "Please wait, applying translation..": [
             "Even geduld, vertaling aanvragen..."
+         ],
+         "Next review": [
+            "Volgende controle."
          ],
          "Publish this translation": [
             "Publiceer deze vertaling"
@@ -29,11 +41,14 @@
          "Accept this translation": [
             "Accepteer deze vertaling"
          ],
-         "Approved!": [
-            "Goedgekeurd!"
+         "Published!": [
+            "Gepubliceerd!"
          ],
-         "Loading the next translation for review...": [
-            "Laadt de volgende vertaling voor controle..."
+         "Someone is already reviewing this translation. Please try again later.": [
+            "Iemand beoordeelt deze vertaling al. Probeer het later nog eens."
+         ],
+         "There was an error in applying translation.": [
+            "Er was een fout bij het aanvragen van de vertaling."
          ]
       }
    }

@@ -26,6 +26,7 @@ class Redirect implements \IWPML_Backend_Action {
 			$query[ $param ] = Obj::pathOr( $value, [ $param, $value ], $redirections );
 		}
 
+		/** @phpstan-ignore-next-line */
 		if ( array_diff_assoc( Lst::flatten( $_GET ), Lst::flatten( $query ) ) ) {
 			if ( wp_safe_redirect( add_query_arg( $query ), 301, 'WPML' ) ) {
 				exit;

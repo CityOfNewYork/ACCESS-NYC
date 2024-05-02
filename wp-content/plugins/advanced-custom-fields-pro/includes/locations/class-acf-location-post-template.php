@@ -30,10 +30,10 @@ if ( ! class_exists( 'ACF_Location_Post_Template' ) ) :
 		 * @date    9/4/20
 		 * @since   5.9.0
 		 *
-		 * @param   array $rule The location rule.
-		 * @param   array $screen The screen args.
+		 * @param   array $rule        The location rule.
+		 * @param   array $screen      The screen args.
 		 * @param   array $field_group The field group settings.
-		 * @return  bool
+		 * @return  boolean
 		 */
 		public function match( $rule, $screen, $field_group ) {
 
@@ -82,7 +82,7 @@ if ( ! class_exists( 'ACF_Location_Post_Template' ) ) :
 		public function get_values( $rule ) {
 			return array_merge(
 				array(
-					'default' => apply_filters( 'default_page_template_title', __( 'Default Template', 'acf' ) ),
+					'default' => apply_filters( 'default_page_template_title', __( 'Default Template', 'acf' ), 'meta-box' ),
 				),
 				acf_get_post_templates()
 			);
@@ -122,5 +122,4 @@ if ( ! class_exists( 'ACF_Location_Post_Template' ) ) :
 
 	// initialize
 	acf_register_location_type( 'ACF_Location_Post_Template' );
-
 endif; // class_exists check

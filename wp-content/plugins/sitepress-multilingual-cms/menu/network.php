@@ -51,7 +51,7 @@ $text = isset( $text ) ? $text : '';
 			<label class="screen-reader-text" for="icl_ss"><?php echo esc_html( $text ); ?>:</label>
 			<input type="hidden" name="page" value="<?php echo esc_attr( $_GET['page'] ); ?>"/>
 			<input type="text" id="icl_ss" name="s" value="<?php _admin_search_query(); ?>"/>
-			<?php submit_button( __( 'Search', 'sitepress' ), 'button', false, false, array( 'id' => 'search-submit' ) ); ?>
+			<?php submit_button( __( 'Search', 'sitepress' ), 'button', '', false, array( 'id' => 'search-submit' ) ); ?>
 
 		</p>
 	</form>
@@ -110,7 +110,9 @@ $text = isset( $text ) ? $text : '';
 						$blog_states[] = $col[1];
 					}
 				}
+
 				$blog_state = '';
+				/** @phpstan-ignore-next-line WP doc issue in above get_blog_status. */
 				if ( ! empty( $blog_states ) ) {
 					$state_count = count( $blog_states );
 					$i           = 0;

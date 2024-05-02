@@ -30,14 +30,18 @@ class EnableATE implements IHandler {
 		if ( Obj::propOr( false, 'activated', $status ) ) {
 			$result = Either::right( true );
 		} else {
+			/** @var \WPML_TM_AMS_Users $amsUsers */
 			$amsUsers = make( \WPML_TM_AMS_Users::class );
+
+			/** @var \WPML_TM_AMS_API $amsApi */
+			$amsApi = make( \WPML_TM_AMS_API::class );
 
 			$saveLanguageMapping = Fns::tap( pipe(
 				[ Option::class, 'getLanguageMappings' ],
 				Logic::ifElse( Logic::isEmpty(), Fns::always( true ), [ LanguageMappings::class, 'saveMapping'] )
 			) );
 
-			$result = make( \WPML_TM_AMS_API::class )->register_manager(
+			$result = $amsApi->register_manager(
 				User::getCurrent(),
 				$amsUsers->get_translators(),
 				$amsUsers->get_managers()

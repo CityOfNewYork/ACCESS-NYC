@@ -8,9 +8,9 @@ class Sanitize {
 	 *
 	 * @return false|string
 	 */
-	public static function string( $value ) {
-		return is_string( $value ) || is_numeric($value)
-			? htmlspecialchars( strip_tags( $value ), ENT_QUOTES ) : false;
+	public static function string( $value, $flags = ENT_QUOTES ) {
+		return is_string( $value ) || is_numeric( $value )
+			? str_replace( '&amp;', '&', htmlspecialchars( strip_tags( $value ), $flags ) ) : false;
 	}
 
 	/**
@@ -19,7 +19,7 @@ class Sanitize {
 	 *
 	 * @return null|false|string
 	 */
-	public static function stringProp( $property, $arr ) {
-		return isset( $arr[ $property ] ) ? self::string( $arr[ $property ] ) : null;
+	public static function stringProp( $property, $arr, $flags = ENT_QUOTES ) {
+		return isset( $arr[ $property ] ) ? self::string( $arr[ $property ], $flags ) : null;
 	}
 }

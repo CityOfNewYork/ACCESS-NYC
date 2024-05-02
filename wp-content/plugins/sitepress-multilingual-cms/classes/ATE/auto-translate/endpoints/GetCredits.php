@@ -14,6 +14,6 @@ use function WPML\Container\make;
 class GetCredits implements IHandler {
 
 	public function run( Collection $data ) {
-		return Either::of( Account::getCredits() );
+		return Account::getCredits();
 	}
 }

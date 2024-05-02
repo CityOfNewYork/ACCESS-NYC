@@ -1,0 +1,245 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "fr_FR"
+         },
+         "Sending for translation": [
+            "Envoi à la traduction"
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "Connexion à l'éditeur de traduction avancé de WPML"
+         ],
+         "Try again": [
+            "Réessayer"
+         ],
+         "You don't have the rights to review this language": [
+            "Vous n'êtes pas autorisé à effectuer des révisions dans cette langue"
+         ],
+         "translations": [
+            "traductions"
+         ],
+         "left in the queue": [
+            "laissé dans la file d’attente"
+         ],
+         "Translation on hold": [
+            "Traduction en attente"
+         ],
+         "No translations in the queue": [
+            "Il n’y a pas de traduction dans la file d’attente"
+         ],
+         "%d translations left": [
+            "Il reste %d traductions"
+         ],
+         "%d min remaining": [
+            "Il reste %d min"
+         ],
+         "less than 1 min remaining": [
+            "Il reste moins d’1 min"
+         ],
+         "Automatic translation status": [
+            "Statut de la traduction automatique"
+         ],
+         "Translate Everything Automatically": [
+            "Tout traduire automatiquement"
+         ],
+         "Translate Everything Automatically is active": [
+            "Tout traduire automatiquement est activé"
+         ],
+         "Translate Everything Automatically is paused": [
+            "Tout traduire automatiquement est sur pause"
+         ],
+         "Translate Everything Automatically stopped": [
+            "Tout traduire automatiquement est arrêté"
+         ],
+         "Preparing content for translation": [
+            "Préparation des contenus à traduire"
+         ],
+         "Preparing more content for translation": [
+            "De nouveaux contenus sont en préparation pour être traduits"
+         ],
+         "An error occured, fix it to continue.": [
+            "Une erreur est survenue, corrigez-la afin de poursuivre."
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "Une erreur qui nécessite votre attention est survenue avec la traduction automatique. Corrigez-la pour pouvoir poursuivre."
+         ],
+         "Your default language, %s, must be mapped to a supported language in order to use automatic translation.": [
+            "Votre langue par défaut, %s, doit être associée à une langue prise en charge pour pouvoir avoir recours à la traduction automatique."
+         ],
+         "Your language, %s, must be mapped to a supported language in order to use automatic translation.": [
+            "Votre langue, %s, doit être associée à une langue prise en charge pour pouvoir avoir recours à la traduction automatique.",
+            "Sur votre site, les langues suivantes doivent être associées à une langue prise en charge pour pouvoir avoir recours à la traduction automatique : %s"
+         ],
+         "Content in those languages: %s, cannot be automatically translated unless you map them to a language that's different from the default.": [
+            "Les contenus dans ces langues : %s, ne peuvent être traduits automatiquement sauf s’ils sont associés à une langue différente de celle qui est enregistrée par défaut."
+         ],
+         "%d translation waiting for review": [
+            "%d traduction est en attente de relecture",
+            "%d traductions sont en attente de relecture"
+         ],
+         "Account credits used": [
+            "Crédits de compte épuisés"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "Lorsque vous aurez épuisé tous vos crédits prépayés, nous vous facturerons pour tout crédit supplémentaire que vous utiliserez à dater de la fin du mois"
+         ],
+         "Payment limit:": [
+            "Limite de paiement :"
+         ],
+         "%s credits": [
+            "%s crédits"
+         ],
+         "Credits used:": [
+            "Crédits épuisés :"
+         ],
+         "Credits left:": [
+            "Crédits restants :"
+         ],
+         "The number of credit you will receive an invoice for at the end of the month. View your pay-as-you-go details in your site’s automatic translation settings.": [
+            "Vous recevrez en fin de mois une facture correspondant au nombre de crédits. Visualisez les informations de vos crédits prépayés dans les paramètres de traduction automatique de votre site."
+         ],
+         "Calculating": [
+            "Calcul en cours"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "Crédits prépayés restants attribués à ce site sur WPML.org."
+         ],
+         "Prepaid credits left": [
+            "Crédits prépayés restants"
+         ],
+         "Pay-as-you-go credits used": [
+            "Crédits prépayés utilisés"
+         ],
+         "Resume": [
+            "Reprendre"
+         ],
+         "Stop": [
+            "Arrêter"
+         ],
+         "Fix it": [
+            "Corriger"
+         ],
+         "Pause": [
+            "Suspendez"
+         ],
+         "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
+            "Une erreur est survenue en mettant la Traduction automatique sur pause. Veuillez réessayer plus tard ou contactez notre assistance."
+         ],
+         "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
+            "Une erreur est survenue lors de la reprise de la Traduction automatique. Veuillez réessayer plus tard ou contactez notre assistance."
+         ],
+         "Error": [
+            "Erreur"
+         ],
+         "Draft — Pending review": [
+            "Brouillon : relecture en attente"
+         ],
+         "Complete": [
+            "Terminé"
+         ],
+         "Insufficient funds": [
+            "Fonds insuffisants"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "Découvrez comment traduire vos contenus dans le <a>Guide de démarrage</a>"
+         ],
+         "Let's Start Translating!": [
+            "Traduisons !"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "Choisissez les contenus depuis le Tableau de bord de traduction ci-dessous et créez votre premier travail de traduction !"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "Modifiez vos <a>paramètres de traduction automatique</a> (les travaux de traduction en cours seront exécutés avec les paramètres actuels)."
+         ],
+         "Read more about translating your site automatically.": [
+            "En savoir plus sur la traduction automatique de votre site."
+         ],
+         "Your site is being automatically translated!": [
+            "Votre site est en train d'être traduit automatiquement !"
+         ],
+         "Calculating...": [
+            "Calcul en cours..."
+         ],
+         "Do not close WP admin!": [
+            "Ne fermez pas l'administration WP !"
+         ],
+         "The number of translations": [
+            "Le nombre de traductions"
+         ],
+         "Translate Everything Automatically - running": [
+            "Tout traduire automatiquement - actuellement exécuté"
+         ],
+         "Translate Everything Automatically - active": [
+            "Tout traduire automatiquement - activé"
+         ],
+         "Pause automatic translation": [
+            "Mettre la traduction automatique sur pause"
+         ],
+         "WPML will finish in-progress translations but won't translate anything new.": [
+            "WPML achèvera les traductions en cours mais ne traduira rien de nouveau."
+         ],
+         "Translate Everything Automatically - paused": [
+            "Tout traduire automatiquement - sur pause"
+         ],
+         "Start automatic translation": [
+            "Démarrer la traduction automatique"
+         ],
+         "This uses %scredits%s to translate your existing content and anything you add or change later.": [
+            "Des %scrédits%s sont utilisés pour traduire les contenus disponibles ainsi que tout ce que vous ajouterez ou modifierez plus tard."
+         ],
+         "Start translating everything automatically": [
+            "Commencer à tout traduire automatiquement"
+         ],
+         "WPML will translate any new content you create into %1$s.": [
+            "WPML traduira tous les nouveaux contenus que vous créerez dans %1$s."
+         ],
+         "WPML will translate all new future content to %1$s and keep translations up to date when you make changes.": [
+            "WPML traduit tous les futurs contenus en %1$s et maintient les traductions à jour lorsque vous effectuez des modifications."
+         ],
+         "Do you want to translate existing content, too?": [
+            "Souhaitez-vous aussi traduire les contenus disponibles ?"
+         ],
+         "Yes, translate all new and existing content": [
+            "Oui, traduire tous les contenus nouveaux et disponibles"
+         ],
+         "No, only translate new content": [
+            "Non, traduire uniquement les nouveaux contenus"
+         ],
+         "You can translate existing content from the Translation Management Dashboard": [
+            "Vous pouvez traduire les contenus disponibles depuis le Tableau de bord de gestion de traduction"
+         ],
+         "Connection Error. Please wait a minute and reload this page. If the problem continues, please contact WPML support.": [
+            "Erreur de connexion. Veuillez patienter une minute, puis rechargez cette page. Si le problème persiste, veuillez contacter l'assistance WPML."
+         ],
+         "Automatic translation uses credits. %1$sRead more about automatic translation credits%2$s": [
+            "La traduction automatique fait appel à des crédits. %1$sEn savoir plus sur les crédits de traduction automatique%2$s"
+         ],
+         "You need credits to start translating everything.": [
+            "Des crédits sont requis pour commencer à traduire."
+         ],
+         "Cancel": [
+            "Annuler"
+         ],
+         "Start translating everything": [
+            "Commencer à tout traduire"
+         ],
+         "%1$d language": [
+            "%1$d langue",
+            "%1$d langues"
+         ],
+         "Please wait...": [
+            "Veuillez patienter..."
+         ],
+         "All new future content": [
+            "Tous les nouveaux contenus"
+         ],
+         "Translate Everything Automatically - stopped": [
+            "Tout traduire automatiquement - arrêté"
+         ]
+      }
+   }
+}

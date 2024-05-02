@@ -26,6 +26,9 @@ class LanguageMappings {
 
 	public static function withCanBeTranslatedAutomatically( $languages = null ) {
 		$fn = curryN( 1, function ( $languages ) {
+			if ( ! is_object( $languages ) && ! is_array( $languages ) ) {
+				return $languages;
+			}
 			$ateAPI             = static::getATEAPI();
 			$targetCodes        = Lst::pluck( 'code', Obj::values( $languages ) );
 			$supportedLanguages = $ateAPI->get_languages_supported_by_automatic_translations( $targetCodes )->getOrElse( [] );
@@ -143,13 +146,22 @@ class LanguageMappings {
 
 	public static function hasTheSameMappingAsDefaultLang( $language = null ) {
 		$fn = curryN( 1, function ( $language ) {
-			$defaultLanguage                  = Lst::last( static::withMapping( [ Languages::getDefault() ] ) );
+			$defaultLanguage = Lst::last( static::withMapping( [ Languages::getDefault() ] ) );
+			if ( ! is_object( $defaultLanguage ) && ! is_array( $defaultLanguage ) ) {
+				return false;
+			}
 			$defaultLanguageMappingTargetCode = Obj::pathOr( Obj::prop( 'code', $defaultLanguage ), [ 'mapping', 'targetCode' ], $defaultLanguage );
 
 			return Obj::pathOr( null, [ 'mapping', 'targetCode' ], $language ) === $defaultLanguageMappingTargetCode;
 		} );
 
-		return call_user_func_array( $fn, func_get_args() );
+		try {
+			$hasMapping = call_user_func_array( $fn, func_get_args() );
+		} catch ( \InvalidArgumentException $e ) {
+			$hasMapping = false;
+		}
+
+		return $hasMapping;
 	}
 
 	/**

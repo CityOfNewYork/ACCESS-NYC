@@ -13,9 +13,9 @@ class TranslationEntity {
 	private $stringRegistered;
 
 	/**
-	 * @param string $value
-	 * @param bool   $hasTranslation
-	 * @param bool   $stringRegistered
+	 * @param bool|string $value
+	 * @param bool        $hasTranslation
+	 * @param bool        $stringRegistered
 	 */
 	public function __construct( $value, $hasTranslation, $stringRegistered = true ) {
 		$this->value            = $value;

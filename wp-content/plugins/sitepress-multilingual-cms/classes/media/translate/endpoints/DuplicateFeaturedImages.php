@@ -5,7 +5,7 @@ namespace WPML\Media\Translate\Endpoint;
 use WPML\Ajax\IHandler;
 use WPML\Collect\Support\Collection;
 use WPML\FP\Obj;
-use WPML\LIB\WP\Option;
+use WPML\Media\Option;
 use function WPML\Container\make;
 use WPML\FP\Right;
 
@@ -26,6 +26,6 @@ class DuplicateFeaturedImages implements IHandler {
 	 * @return bool
 	 */
 	private function shouldDuplicateFeaturedImages() {
-		return (bool) Obj::pathOr( false, [ 'new_content_settings', 'duplicate_featured' ], Option::getOr( '_wpml_media', [] ) );
+		return (bool) Obj::prop( 'duplicate_featured', Option::getNewContentSettings() );
 	}
 }

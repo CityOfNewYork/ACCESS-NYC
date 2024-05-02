@@ -2,7 +2,7 @@
 
 namespace ACFML;
 
-class MigrateBlockPreferences {
+class MigrateBlockPreferences implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	const OPTION_KEY = 'acfml_block_migration_result';
 	const CHUNK_SIZE = 10;
 	const MIGRATED_VALUE = 'done';
@@ -21,7 +21,7 @@ class MigrateBlockPreferences {
 		 $this->fieldSettings = $fieldSettings;
 	}
 
-	public function init_hooks() {
+	public function add_hooks() {
 		add_action( 'init', [ $this, 'runMigration' ] );
 		add_action( 'plugins_loaded', [ $this, 'showProgressInfo' ] );
 	}

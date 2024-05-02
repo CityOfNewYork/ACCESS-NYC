@@ -1,5 +1,7 @@
 <?php
 
+use WPML\API\Sanitize;
+
 class WPML_Post_Edit_Ajax {
 	const AJAX_ACTION_SWITCH_POST_LANGUAGE = 'wpml_switch_post_language';
 
@@ -20,10 +22,11 @@ class WPML_Post_Edit_Ajax {
 			wp_send_json_error( 'Wrong Nonce' );
 		}
 
-		$lang        = filter_var( $_POST['term_language_code'], FILTER_SANITIZE_STRING );
-		$taxonomy    = filter_var( $_POST['taxonomy'], FILTER_SANITIZE_STRING );
-		$slug        = filter_var( $_POST['slug'], FILTER_SANITIZE_STRING );
-		$name        = filter_var( $_POST['name'], FILTER_SANITIZE_STRING );
+		$lang        = Sanitize::stringProp( 'term_language_code', $_POST );
+		$taxonomy    = Sanitize::stringProp( 'taxonomy', $_POST );
+		$slug        = Sanitize::stringProp( 'slug', $_POST );
+		$name        = Sanitize::stringProp( 'name', $_POST );
+
 		$trid        = filter_var( $_POST['trid'], FILTER_SANITIZE_NUMBER_INT );
 		$description = wp_kses_post( $_POST['description'] );
 		$meta_data   = isset( $_POST['meta_data'] ) ? $_POST['meta_data'] : array();
@@ -33,18 +36,17 @@ class WPML_Post_Edit_Ajax {
 
 		$new_term_object = self::save_term_ajax( $sitepress, $lang, $taxonomy, $slug, $name, $trid, $description, $meta_data );
 		$sitepress->get_wp_api()->wp_send_json_success( $new_term_object );
-
 	}
 
 	/**
-	 * @param \SitePress          $sitepress
-	 * @param string              $lang
-	 * @param string              $taxonomy
-	 * @param string              $slug
-	 * @param string              $name
-	 * @param int                 $trid
-	 * @param string              $description
-	 * @param array<string,mixed> $meta_data
+	 * @param \SitePress           $sitepress
+	 * @param ?string|false        $lang
+	 * @param ?string|false        $taxonomy
+	 * @param ?string|false        $slug
+	 * @param ?string|false        $name
+	 * @param ?int|false           $trid
+	 * @param ?string              $description
+	 * @param ?array<string,mixed> $meta_data
 	 *
 	 * @return \WP_Term|false
 	 */
@@ -260,6 +262,8 @@ class WPML_Post_Edit_Ajax {
 
 				$result = $to;
 			}
+
+			\WPML\LIB\WP\Cache::clearMemoizedFunction( 'get_source_language_by_trid', (int) $trid );
 		}
 
 		wp_send_json_success( $result );
@@ -267,6 +271,12 @@ class WPML_Post_Edit_Ajax {
 
 	public static function wpml_get_default_lang() {
 		global $sitepress;
+		$nonce = isset( $_POST['_icl_nonce'] ) ? sanitize_text_field( $_POST['_icl_nonce'] ) : '';
+
+		if ( ! wp_verify_nonce( $nonce, 'wpml_get_default_lang' ) ) {
+			wp_send_json_error( esc_html__( 'Invalid request!', 'sitepress' ), 400 );
+		}
+
 		wp_send_json_success( $sitepress->get_default_language() );
 	}
 
@@ -282,7 +292,7 @@ class WPML_Post_Edit_Ajax {
 
 		foreach ( $meta_data as $meta_key => $meta_value ) {
 			delete_term_meta( $term['term_id'], $meta_key );
-			$data = maybe_unserialize( stripslashes( $meta_value ) );
+			$data = self::safe_maybe_unserialize( stripslashes( $meta_value ) );
 			if ( ! add_term_meta( $term['term_id'], $meta_key, $data ) ) {
 				throw new RuntimeException( sprintf( 'Unable to add term meta form term: %d', $term['term_id'] ) );
 			}
@@ -293,4 +303,19 @@ class WPML_Post_Edit_Ajax {
 
 		return true;
 	}
+
+	/**
+	 * Safe unserialization for term metadata should not allow to unserialize classes.
+	 *
+	 * @param string $data
+	 * @return mixed
+	 */
+	private static function safe_maybe_unserialize( $data ) {
+		if ( is_serialized( $data ) ) { // Don't attempt to unserialize data that wasn't serialized going in.
+			return @unserialize( trim( $data ), [ 'allowed_classes' => false ] );
+		}
+
+		return $data;
+	}
+
 }

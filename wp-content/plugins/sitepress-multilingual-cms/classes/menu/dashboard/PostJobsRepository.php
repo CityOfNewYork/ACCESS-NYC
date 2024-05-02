@@ -61,6 +61,7 @@ class PostJobsRepository {
 			'isLocal'        => 'local' === $job->get_translation_service(),
 			'needsReview'    => Lst::includes( $job->get_review_status(), [ ReviewStatus::NEEDS_REVIEW, ReviewStatus::EDITING ] ),
 			'automatic'      => $job->is_automatic(),
+			'editor'         => $job->get_editor(),
 		];
 	}
 

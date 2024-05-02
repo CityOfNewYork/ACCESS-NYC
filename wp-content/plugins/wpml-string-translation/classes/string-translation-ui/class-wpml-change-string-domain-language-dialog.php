@@ -55,7 +55,7 @@ class WPML_Change_String_Domain_Language_Dialog extends WPML_WPDB_And_SP_User {
 							$domain_data = 'data-domain_lang="" ';
 						}
 						echo '<option value="' . $domain->context .
-									'" data-langs="' . esc_attr( wp_json_encode( $results ) ) .
+									'" data-langs="' . esc_attr( (string) wp_json_encode( $results ) ) .
 									'"' . $domain_data . '>' . $domain->context . '</option>';
 					}
 					?>

@@ -29,16 +29,24 @@ use function WPML\FP\invoke;
 use function WPML\FP\pipe;
 
 class TranslateEverything {
+	/**
+	 * @var UntranslatedPosts
+	 */
+	private $untranslatedPosts;
 
 	const LOCK_RELEASE_TIMEOUT = 2 * MINUTE_IN_SECONDS;
 	const QUEUE_SIZE = 15;
+
+	public function __construct( UntranslatedPosts $untranslatedPosts ) {
+		$this->untranslatedPosts = $untranslatedPosts;
+	}
 
 	public function run(
 		Collection $data,
 		Actions $actions
 	) {
 		if ( ! MediaOption::isSetupFinished() ) {
-			return Left::of( [ 'key' => 'waiting' ] );
+			return Left::of( [ 'key' => 'media-setup-not-finished' ] );
 		}
 
 		$lock = make( KeyedLock::class, [ ':name' => self::class ] );
@@ -65,34 +73,43 @@ class TranslateEverything {
 	 * @param Actions $actions
 	 */
 	private function translateEverything( Actions $actions ) {
-		$defaultLang        = Languages::getDefaultCode();
-		$secondaryLanguages = LanguageMappings::geCodesEligibleForAutomaticTranslations();
-		$postType           = self::getPostTypeToProcess( $secondaryLanguages );
+		list( $postType, $languagesToProcess ) = self::getPostTypeToProcess();
+		if ( ! $postType || ! $languagesToProcess ) {
+			return [];
+		}
 
-		$queueSize = $postType == 'attachment' ? self::QUEUE_SIZE * 2 : self::QUEUE_SIZE;
+		$elements = $this->untranslatedPosts->get( $languagesToProcess, $postType, self::QUEUE_SIZE  + 1 );
 
-		$elements = UntranslatedPosts::get( $secondaryLanguages, $postType, $queueSize + 1 );
-
-		if ( count( $elements ) <= $queueSize ) {
-			Option::markPostTypeAsCompleted( $postType, $secondaryLanguages );
+		if ( count( $elements ) <= self::QUEUE_SIZE  ) {
+			/**
+			 * We mark $postType as completed in all secondary languages, not only in eligible for automatic translations.
+			 * This is important due to the problem:
+			 * @see https://onthegosystems.myjetbrains.com/youtrack/issue/wpmldev-1456/Changing-translation-engines-configuration-may-trigger-Translate-Everything-process
+			 *
+			 * When we activate a new secondary language and it does not support automatic translations, we mark it as completed by default.
+			 * It is done to prevent unexpected triggering Translate Everything process for that language,
+			 * when it suddently becomes eligible, for example because adjustment of translation engines.
+			 */
+			Option::markPostTypeAsCompleted( $postType, Languages::getSecondaryCodes() );
 		}
 
 		return count( $elements ) ?
-			$actions->createNewTranslationJobs( $defaultLang, Lst::slice( 0, $queueSize, $elements ) ) :
+			$actions->createNewTranslationJobs( Languages::getDefaultCode(), Lst::slice( 0, self::QUEUE_SIZE, $elements ) ) :
 			[];
 	}
 
 	/**
-	 * @param string[] $secondaryLanguages
-	 *
-	 * @return string
+	 * @return array Eg. ['post', ['fr', 'de', 'es']]
 	 */
-	private static function getPostTypeToProcess( array $secondaryLanguages ) {
-		$postTypes = self::getPostTypesToTranslate( PostTypes::getAutomaticTranslatable(), $secondaryLanguages );
+	private static function getPostTypeToProcess() {
+		$postTypes = self::getPostTypesToTranslate(
+			PostTypes::getAutomaticTranslatable(),
+			LanguageMappings::geCodesEligibleForAutomaticTranslations()
+		);
 
 		return wpml_collect( $postTypes )
-			->prioritize( Relation::equals( 'post' ) )
-			->prioritize( Relation::equals( 'page' ) )
+			->prioritize( Relation::propEq(0, 'post') )
+			->prioritize( Relation::propEq(0, 'page') )
 			->first();
 	}
 
@@ -100,13 +117,20 @@ class TranslateEverything {
 	 * @param array $postTypes
 	 * @param array $targetLanguages
 	 *
-	 * @return string[] E.g. ['post', 'page']
+	 * @return array Eg. [['post', ['fr', 'de', 'es']], ['page', ['fr', 'de', 'es']]]
 	 */
 	public static function getPostTypesToTranslate( array $postTypes, array $targetLanguages ) {
-		$completed = Option::getTranslateEverythingCompleted();
-		$postTypesNotCompletedForTargets = pipe( Obj::propOr( [], Fns::__, $completed ), Lst::diff( $targetLanguages ), Lst::length() );
+		$completed                               = Option::getTranslateEverythingCompleted();
+		$getLanguageCodesNotCompletedForPostType = pipe( Obj::propOr( [], Fns::__, $completed ), Lst::diff( $targetLanguages ) );
 
-		return Fns::filter( $postTypesNotCompletedForTargets, $postTypes );
+		$getPostTypesToTranslate = pipe(
+			Fns::map( function ( $postType ) use ( $getLanguageCodesNotCompletedForPostType ) {
+				return [ $postType, $getLanguageCodesNotCompletedForPostType( $postType ) ];
+			} ),
+			Fns::filter( pipe( Obj::prop( 1 ), Lst::length() ) )
+		);
+
+		return $getPostTypesToTranslate( $postTypes );
 	}
 
 	/**
@@ -124,7 +148,7 @@ class TranslateEverything {
 	/**
 	 * Checks if Translate Everything is processed for a given Post Type and Language.
 	 *
-	 * @param string $postType
+	 * @param string|bool $postType
 	 * @param string $language
 	 *
 	 * @return bool

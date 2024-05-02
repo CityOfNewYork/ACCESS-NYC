@@ -6,6 +6,7 @@
             "key": "field_588001c1be752",
             "label": "Location Type",
             "name": "type",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -25,6 +26,7 @@
             "key": "field_58800243be753",
             "label": "Agency\/Org Name",
             "name": "division",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -44,6 +46,7 @@
             "key": "field_58800318be754",
             "label": "Street address",
             "name": "address_street",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -63,6 +66,7 @@
             "key": "field_5880032abe755",
             "label": "Street address 2",
             "name": "address_street_2",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -82,6 +86,7 @@
             "key": "field_58acf5f524f67",
             "label": "Borough",
             "name": "city",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -101,6 +106,7 @@
             "key": "field_58acf60c24f68",
             "label": "Zip Code",
             "name": "zip",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -120,6 +126,7 @@
             "key": "field_588003b6be759",
             "label": "Map location",
             "name": "address",
+            "aria-label": "",
             "type": "google_map",
             "instructions": "",
             "required": 0,
@@ -138,6 +145,7 @@
             "key": "field_58800366be756",
             "label": "Programs",
             "name": "programs",
+            "aria-label": "",
             "type": "relationship",
             "instructions": "",
             "required": 0,
@@ -159,12 +167,14 @@
                 "taxonomy"
             ],
             "elements": "",
-            "return_format": "object"
+            "return_format": "object",
+            "bidirectional_target": []
         },
         {
             "key": "field_58800382be757",
             "label": "Description",
             "name": "description",
+            "aria-label": "",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
@@ -184,6 +194,7 @@
             "key": "field_588003a0be758",
             "label": "Phone number",
             "name": "phone",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -196,13 +207,14 @@
             "min": 0,
             "max": 0,
             "layout": "table",
-            "button_label": "",
+            "button_label": "Add Row",
             "collapsed": "",
             "sub_fields": [
                 {
                     "key": "field_58ae02abc8269",
                     "label": "Phone Number",
                     "name": "number",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -216,12 +228,14 @@
                     "maxlength": "",
                     "placeholder": "",
                     "prepend": "",
-                    "append": ""
+                    "append": "",
+                    "parent_repeater": "field_588003a0be758"
                 },
                 {
                     "key": "field_58ae02c7c826a",
                     "label": "Extension",
                     "name": "extension",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -235,14 +249,17 @@
                     "maxlength": "",
                     "placeholder": "",
                     "prepend": "",
-                    "append": ""
+                    "append": "",
+                    "parent_repeater": "field_588003a0be758"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         },
         {
             "key": "field_58ae02de9b798",
             "label": "Office Id",
             "name": "office_id",
+            "aria-label": "",
             "type": "text",
             "instructions": "Unique identifying number for this office.",
             "required": 0,
@@ -262,6 +279,7 @@
             "key": "field_58c745cb8b3e9",
             "label": "Website",
             "name": "website",
+            "aria-label": "",
             "type": "url",
             "instructions": "",
             "required": 0,
@@ -305,5 +323,8 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1596566543
+    "show_in_rest": false,
+    "modified": 1714587205,
+    "local_file": "\/var\/www\/html\/wp-content\/themes\/access\/acf-json\/group_588001997a329.json",
+    "acfml_field_group_mode": "advanced"
 }

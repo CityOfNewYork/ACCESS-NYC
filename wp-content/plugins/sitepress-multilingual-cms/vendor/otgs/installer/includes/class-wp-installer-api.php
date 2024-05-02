@@ -27,8 +27,8 @@ class WP_Installer_API{
      *
      * @since 1.6.5
      *
-     * @param string The repository id (e.g. wpml)
-     * @return string The translation service id
+     * @param string $repository_id The repository id (e.g. wpml)
+     * @return string|false The translation service id or false if none is set
      */
     public static function get_preferred_ts($repository_id = 'wpml'){
 
@@ -45,8 +45,8 @@ class WP_Installer_API{
      *
      * @since 1.6.5
      *
-     * @param string The translation service id
-     * @param string The repository id (e.g. wpml)
+     * @param string $value The translation service id
+     * @param string $repository_id The repository id (e.g. wpml)
      */
     public static function set_preferred_ts( $value, $repository_id = 'wpml' ){
 
@@ -65,10 +65,10 @@ class WP_Installer_API{
      *
      * @since 1.6.5
      *
-     * @param string The repository id (e.g. wpml)
+     * @param string $repository_id The repository id (e.g. wpml)
      * @return string The translation service id or false
      */
-    public static function get_ts_referal($repository_id = 'wpml'){
+    public static function get_ts_referal( $repository_id = 'wpml' ) {
 
         if(isset(WP_Installer()->settings['repositories'][$repository_id]['ts_info']['referal'])){
             return WP_Installer()->settings['repositories'][$repository_id]['ts_info']['referal'];
@@ -83,8 +83,8 @@ class WP_Installer_API{
      *
      * @since 1.7.9
      *
-     * @param string The repository id (e.g. wpml)
-     * @return string The client id or false
+     * @param string $repository_id The repository id (e.g. wpml)
+     * @return string|false The client id or false
      */
     public static function get_ts_client_id( $repository_id = 'wpml' ){
 
@@ -103,7 +103,7 @@ class WP_Installer_API{
      *
      * @since 1.7.9
      *
-     * @param string The repository id (e.g. wpml)
+     * @param string $repository_id The repository id (e.g. wpml)
      * @return string The site key (or false)
      */
     public static function get_site_key( $repository_id = 'wpml' ){
@@ -117,7 +117,7 @@ class WP_Installer_API{
 	 *
 	 * @since 1.7.16
 	 *
-	 * @param string The repository id (e.g. wpml)
+	 * @param string $repository_id The repository id (e.g. wpml)
 	 * @return int The user id (or zero)
 	 */
 	public static function get_registering_user_id( $repository_id = 'wpml' ){

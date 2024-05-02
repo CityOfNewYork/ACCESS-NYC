@@ -1,0 +1,38 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "no"
+         },
+         "WPML Translation Editor": [
+            "WPML翻译编辑器"
+         ],
+         "Use only when you want to translate content from one of the few plugins that are not compatible with WPML’s translation editor or  if you would like to create different designs for the same page in different languages.": [
+            "仅当你想要翻译与 WPML 的翻译编辑器不兼容的少数插件之一的内容时，或者如果你想要使用其他语言为同一页面创建不同设计时，才使用它。"
+         ],
+         "WordPress Editor": [
+            "WordPress 编辑器"
+         ],
+         "Use the editor to translate:": [
+            "使用编辑器翻译:"
+         ],
+         "Apply": [
+            "应用"
+         ],
+         "Cancel": [
+            "取消"
+         ],
+         "This %s": [
+            "此%s"
+         ],
+         "All %s": [
+            "所有%s"
+         ],
+         "All the site's content": [
+            "所有网站内容"
+         ]
+      }
+   }
+}

@@ -1,7 +1,7 @@
 <?php
 
-class WPML_ACF_Editor_Hooks {
-	public function init_hooks() {
+class WPML_ACF_Editor_Hooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
+	public function add_hooks() {
 		add_filter( 'wpml_tm_editor_string_style', array( $this, 'wpml_tm_editor_string_style' ), 10, 3 );
 	}
 

@@ -6,31 +6,50 @@
             "domain": "messages"
          },
          "You can choose which posts to translate from the <strong>Translation Management Dashboard</strong>.": [
-            "Μπορείτε να επιλέξετε ποιες αναρτήσεις θα μεταφραστούν από τον <strong>πίνακα εργαλείων Διαχείρισης μετάφρασης</strong>."
+            "Μπορείτε να επιλέξετε ποιες δημοσιεύσεις θα μεταφραστούν από τον <strong>Πίνακα Εργαλείων Διαχείρισης Μετάφρασης</strong>."
          ],
-         "Yes, translate all of these posts automatically": [
-            "Ναι, να μεταφράζονται όλες αυτές οι αναρτήσεις αυτόματα"
+         "Yes, translate <b>existing</b> and <b>future</b> content automatically": [
+            "Ναι, να μεταφράζεται το <b>υπάρχον</b> και το <b>μελλοντικό</b> περιεχόμενο αυτόματα"
+         ],
+         "Yes, but only translate <b>future</b> content automatically": [
+            "Ναι, μα να μεταφράζεται μόνο το <b>μελλοντικό</b> περιεχόμενο αυτόματα"
+         ],
+         "Yes, translate <b>future</b> content automatically": [
+            "Ναι, να μεταφράζεται το <b>μελλοντικό</b> περιεχόμενο αυτόματα"
          ],
          "No, I want to translate some of these posts, but not all": [
-            "Όχι, θέλω να μεταφράζονται ορισμένες από αυτές τις αναρτήσεις, αλλά όχι όλες"
+            "Όχι, θέλω να μεταφράζονται ορισμένες από αυτές τις δημοσιεύσεις, αλλά όχι όλες"
          ],
-         "Save": [
-            "Αποθήκευση"
+         "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
+            "Πρέπει να χρησιμοποιήσετε τον Προηγμένο επεξεργαστή μεταφράσεων, αν θέλετε να μεταφράζετε αυτόματα το περιεχόμενό σας."
          ],
-         "Please confirm this translation setting": [
-            "Επιβεβαιώσετε αυτήν τη ρύθμιση μετάφρασης"
+         "Synchronize translators and translation managers with ATE": [
+            "Συγχρονισμός μεταφραστών και διαχειριστών μεταφράσεων με τον Προηγμένο επεξεργαστή μεταφράσεων"
          ],
-         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the <NumberOfItems /> existing items.": [
-            "Ο ιστότοπός σας έχει οριστεί έτσι ώστε να μεταφράζει αυτόματα όλο το περιεχόμενο. Όταν κάνετε τις αναρτήσεις <PostTypesNames /> μεταφράσιμες, το WPML θα μεταφράσει αυτόματα τα <NumberOfItems /> υπάρχοντα στοιχεία.."
+         "Please try again in a few minutes. If the problem persists, please contact %sWPML support%s.": [
+            "Δοκιμάστε ξανά σε λίγα λεπτά. Αν το πρόβλημα επιμείνει, επικοινωνήστε με τη ν %sυποστήριξη του WPML%s."
          ],
          "Are you OK with paying for this?": [
             "Συμφωνείτε να πληρώσετε για αυτήν την υπηρεσία;"
          ],
          "Cancel": [
-            "Άκυρο"
+            "Ακύρωση"
          ],
          "Make translatable": [
             "Να καταστούν μεταφράσιμες"
+         ],
+         "Save": [
+            "Αποθήκευση"
+         ],
+         "Please confirm this translation setting": [
+            "Επιβεβαιώστε αυτή τη ρύθμιση μετάφρασης"
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item.": [
+            "Ο ιστότοπός σας έχει ρυθμιστεί να μεταφράζει όλο το περιεχόμενο αυτόματα. Όταν κάνετε τα <PostTypesNames /> μεταφράσιμα, το WPML θα μεταφράζει αυτόματα το %1$d υπάρχον στοιχείο.",
+            "Ο ιστότοπός σας έχει ρυθμιστεί να μεταφράζει όλο το περιεχόμενο αυτόματα. Όταν κάνετε τα <PostTypesNames /> μεταφράσιμα, το WPML θα μεταφράζει αυτόματα τα %1$d υπάρχοντα στοιχεία."
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate all future content.": [
+            "Ο ιστότοπός σας έχει ρυθμιστεί να μεταφράζει όλο το περιεχόμενο αυτόματα. Όταν κάνετε τα <PostTypesNames /> μεταφράσιμα, το WPML θα μεταφράζει αυτόματα όλο το μελλοντικό περιεχόμενο."
          ]
       }
    }

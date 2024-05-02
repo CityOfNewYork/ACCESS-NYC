@@ -40,15 +40,37 @@ class WPML_ST_Translations_File_Scan_Factory {
 	 */
 	public function create_hooks() {
 		$st_upgrade = WPML\Container\make( 'WPML_ST_Upgrade' );
-		if ( $st_upgrade->has_command_been_executed( 'WPML_ST_Upgrade_MO_Scanning' ) ) {
-			return [
-				'stats-update'         => $this->get_stats_update(),
-				'string-status-update' => $this->get_string_status_update(),
-				'mo-file-registration' => $this->get_translations_file_registration(),
-			];
-		} else {
+		if ( ! $st_upgrade->has_command_been_executed( 'WPML_ST_Upgrade_MO_Scanning' ) ) {
 			return [];
 		}
+
+		$load = [
+			// Listener of 'wpml_st_translations_file_post_import' hook.
+			'stats-update' => $this->get_stats_update(),
+			'string-status-update' => $this->get_string_status_update(),
+		];
+
+		if (
+			current_user_can( 'manage_options' )
+			&& ( ! is_admin() || $this->isThemeAndLocalizationPage() )
+		) {
+			// Only register / update .mo files when the user is an admin.
+			// NOTE: it's tending to only load this on the Themen and Plugins
+			// localization page, but some .mo files are only loaded on the
+			// frontend (plugins which separating frontend and backend strings).
+			$load['mo-file-registration'] =
+				$this->store_translation_files_info_on_db();
+		}
+
+		return $load;
+	}
+
+	private function isThemeAndLocalizationPage() {
+		global $sitepress;
+
+		return $sitepress
+			->get_wp_api()
+			->is_core_page( 'theme-localization.php' );
 	}
 
 	/**
@@ -145,7 +167,7 @@ class WPML_ST_Translations_File_Scan_Factory {
 	/**
 	 * @return WPML_ST_Translations_File_Registration
 	 */
-	private function get_translations_file_registration() {
+	private function store_translation_files_info_on_db() {
 		return new WPML_ST_Translations_File_Registration(
 			$this->create_dictionary(),
 			$this->get_wpml_file(),

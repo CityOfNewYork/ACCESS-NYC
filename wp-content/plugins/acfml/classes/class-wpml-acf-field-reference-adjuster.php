@@ -3,7 +3,7 @@
 
 namespace ACFML;
 
-class FieldReferenceAdjuster {
+class FieldReferenceAdjuster implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 
 	/**
 	 * @var \SitePress
@@ -36,7 +36,7 @@ class FieldReferenceAdjuster {
 	/**
 	 * Register hooks.
 	 */
-	public function register_hooks() {
+	public function add_hooks() {
 		if ( $this->hooksShouldBeRegistered() ) {
 			add_filter( 'acf/load_reference', [ $this, 'translatedFieldReference' ], 10, 3 );
 		}

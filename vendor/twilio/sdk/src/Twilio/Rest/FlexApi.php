@@ -12,22 +12,43 @@ namespace Twilio\Rest;
 use Twilio\Domain;
 use Twilio\Exceptions\TwilioException;
 use Twilio\Rest\FlexApi\V1;
+use Twilio\Rest\FlexApi\V2;
 
 /**
  * @property \Twilio\Rest\FlexApi\V1 $v1
+ * @property \Twilio\Rest\FlexApi\V2 $v2
  * @property \Twilio\Rest\FlexApi\V1\ChannelList $channel
  * @property \Twilio\Rest\FlexApi\V1\ConfigurationList $configuration
  * @property \Twilio\Rest\FlexApi\V1\FlexFlowList $flexFlow
+ * @property \Twilio\Rest\FlexApi\V1\AssessmentsList $assessments
+ * @property \Twilio\Rest\FlexApi\V1\InsightsAssessmentsCommentList $insightsAssessmentsComment
+ * @property \Twilio\Rest\FlexApi\V1\InsightsQuestionnairesList $insightsQuestionnaires
+ * @property \Twilio\Rest\FlexApi\V1\InsightsQuestionnairesCategoryList $insightsQuestionnairesCategory
+ * @property \Twilio\Rest\FlexApi\V1\InsightsQuestionnairesQuestionList $insightsQuestionnairesQuestion
+ * @property \Twilio\Rest\FlexApi\V1\InsightsSegmentsList $insightsSegments
+ * @property \Twilio\Rest\FlexApi\V1\InsightsSessionList $insightsSession
+ * @property \Twilio\Rest\FlexApi\V1\InsightsSettingsAnswerSetsList $insightsSettingsAnswerSets
+ * @property \Twilio\Rest\FlexApi\V1\InsightsSettingsCommentList $insightsSettingsComment
+ * @property \Twilio\Rest\FlexApi\V1\InsightsUserRolesList $insightsUserRoles
  * @property \Twilio\Rest\FlexApi\V1\InteractionList $interaction
  * @property \Twilio\Rest\FlexApi\V1\WebChannelList $webChannel
+ * @property \Twilio\Rest\FlexApi\V2\WebChannelsList $webChannels
  * @method \Twilio\Rest\FlexApi\V1\ChannelContext channel(string $sid)
  * @method \Twilio\Rest\FlexApi\V1\ConfigurationContext configuration()
  * @method \Twilio\Rest\FlexApi\V1\FlexFlowContext flexFlow(string $sid)
+ * @method \Twilio\Rest\FlexApi\V1\AssessmentsContext assessments(string $assessmentId)
+ * @method \Twilio\Rest\FlexApi\V1\InsightsQuestionnairesContext insightsQuestionnaires(string $id)
+ * @method \Twilio\Rest\FlexApi\V1\InsightsQuestionnairesCategoryContext insightsQuestionnairesCategory(string $categoryId)
+ * @method \Twilio\Rest\FlexApi\V1\InsightsQuestionnairesQuestionContext insightsQuestionnairesQuestion(string $questionId)
+ * @method \Twilio\Rest\FlexApi\V1\InsightsSegmentsContext insightsSegments(string $segmentId)
+ * @method \Twilio\Rest\FlexApi\V1\InsightsSessionContext insightsSession()
+ * @method \Twilio\Rest\FlexApi\V1\InsightsUserRolesContext insightsUserRoles()
  * @method \Twilio\Rest\FlexApi\V1\InteractionContext interaction(string $sid)
  * @method \Twilio\Rest\FlexApi\V1\WebChannelContext webChannel(string $sid)
  */
 class FlexApi extends Domain {
     protected $_v1;
+    protected $_v2;
 
     /**
      * Construct the FlexApi Domain
@@ -48,6 +69,16 @@ class FlexApi extends Domain {
             $this->_v1 = new V1($this);
         }
         return $this->_v1;
+    }
+
+    /**
+     * @return V2 Version v2 of flex_api
+     */
+    protected function getV2(): V2 {
+        if (!$this->_v2) {
+            $this->_v2 = new V2($this);
+        }
+        return $this->_v2;
     }
 
     /**
@@ -114,6 +145,89 @@ class FlexApi extends Domain {
         return $this->v1->flexFlow($sid);
     }
 
+    protected function getAssessments(): \Twilio\Rest\FlexApi\V1\AssessmentsList {
+        return $this->v1->assessments;
+    }
+
+    /**
+     * @param string $assessmentId Assessment Id
+     */
+    protected function contextAssessments(string $assessmentId): \Twilio\Rest\FlexApi\V1\AssessmentsContext {
+        return $this->v1->assessments($assessmentId);
+    }
+
+    protected function getInsightsAssessmentsComment(): \Twilio\Rest\FlexApi\V1\InsightsAssessmentsCommentList {
+        return $this->v1->insightsAssessmentsComment;
+    }
+
+    protected function getInsightsQuestionnaires(): \Twilio\Rest\FlexApi\V1\InsightsQuestionnairesList {
+        return $this->v1->insightsQuestionnaires;
+    }
+
+    /**
+     * @param string $id Unique Questionnaire ID
+     */
+    protected function contextInsightsQuestionnaires(string $id): \Twilio\Rest\FlexApi\V1\InsightsQuestionnairesContext {
+        return $this->v1->insightsQuestionnaires($id);
+    }
+
+    protected function getInsightsQuestionnairesCategory(): \Twilio\Rest\FlexApi\V1\InsightsQuestionnairesCategoryList {
+        return $this->v1->insightsQuestionnairesCategory;
+    }
+
+    /**
+     * @param string $categoryId Category ID to update
+     */
+    protected function contextInsightsQuestionnairesCategory(string $categoryId): \Twilio\Rest\FlexApi\V1\InsightsQuestionnairesCategoryContext {
+        return $this->v1->insightsQuestionnairesCategory($categoryId);
+    }
+
+    protected function getInsightsQuestionnairesQuestion(): \Twilio\Rest\FlexApi\V1\InsightsQuestionnairesQuestionList {
+        return $this->v1->insightsQuestionnairesQuestion;
+    }
+
+    /**
+     * @param string $questionId Unique Question ID
+     */
+    protected function contextInsightsQuestionnairesQuestion(string $questionId): \Twilio\Rest\FlexApi\V1\InsightsQuestionnairesQuestionContext {
+        return $this->v1->insightsQuestionnairesQuestion($questionId);
+    }
+
+    protected function getInsightsSegments(): \Twilio\Rest\FlexApi\V1\InsightsSegmentsList {
+        return $this->v1->insightsSegments;
+    }
+
+    /**
+     * @param string $segmentId Unique segment Id
+     */
+    protected function contextInsightsSegments(string $segmentId): \Twilio\Rest\FlexApi\V1\InsightsSegmentsContext {
+        return $this->v1->insightsSegments($segmentId);
+    }
+
+    protected function getInsightsSession(): \Twilio\Rest\FlexApi\V1\InsightsSessionList {
+        return $this->v1->insightsSession;
+    }
+
+    protected function contextInsightsSession(): \Twilio\Rest\FlexApi\V1\InsightsSessionContext {
+        return $this->v1->insightsSession();
+    }
+
+    protected function getInsightsSettingsAnswerSets(): \Twilio\Rest\FlexApi\V1\InsightsSettingsAnswerSetsList {
+        return $this->v1->insightsSettingsAnswerSets;
+    }
+
+    protected function getInsightsSettingsComment(): \Twilio\Rest\FlexApi\V1\InsightsSettingsCommentList {
+        return $this->v1->insightsSettingsComment;
+    }
+
+    protected function getInsightsUserRoles(): \Twilio\Rest\FlexApi\V1\InsightsUserRolesList {
+        return $this->v1->insightsUserRoles;
+    }
+
+    protected function contextInsightsUserRoles(): \Twilio\Rest\FlexApi\V1\InsightsUserRolesContext {
+        return $this->v1->insightsUserRoles();
+    }
+
     protected function getInteraction(): \Twilio\Rest\FlexApi\V1\InteractionList {
         return $this->v1->interaction;
     }
@@ -134,6 +248,10 @@ class FlexApi extends Domain {
      */
     protected function contextWebChannel(string $sid): \Twilio\Rest\FlexApi\V1\WebChannelContext {
         return $this->v1->webChannel($sid);
+    }
+
+    protected function getWebChannels(): \Twilio\Rest\FlexApi\V2\WebChannelsList {
+        return $this->v2->webChannels;
     }
 
     /**

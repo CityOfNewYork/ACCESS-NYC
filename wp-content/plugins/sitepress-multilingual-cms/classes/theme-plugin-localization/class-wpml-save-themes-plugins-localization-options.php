@@ -56,7 +56,7 @@ class WPML_Save_Themes_Plugins_Localization_Options {
 		);
 
 		/**
-		 * @param array: array of settings rendered in theme/plugin localization screen
+		 * @param array $settings array of settings rendered in theme/plugin localization screen
 		 */
 		return apply_filters( 'wpml_localization_options_settings', $settings );
 	}

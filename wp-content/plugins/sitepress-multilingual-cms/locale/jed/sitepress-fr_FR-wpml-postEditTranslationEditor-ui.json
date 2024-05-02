@@ -1,0 +1,38 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "fr_FR"
+         },
+         "WPML Translation Editor": [
+            "Éditeur de traduction WPML"
+         ],
+         "Use only when you want to translate content from one of the few plugins that are not compatible with WPML’s translation editor or  if you would like to create different designs for the same page in different languages.": [
+            "À utiliser uniquement si vous souhaitez traduire des contenus à partir d’un ou de plusieurs plugins non compatibles avec l’éditeur de traduction WPML ou si vous voulez créer des conceptions différentes sur la même page dans diverses langues."
+         ],
+         "WordPress Editor": [
+            "Éditeur WordPress"
+         ],
+         "Use the editor to translate:": [
+            "Utiliser l’éditeur pour traduire :"
+         ],
+         "Apply": [
+            "Appliquer"
+         ],
+         "Cancel": [
+            "Annuler"
+         ],
+         "This %s": [
+            "Ce(tte) %s"
+         ],
+         "All %s": [
+            "Tous(tes) les %s"
+         ],
+         "All the site's content": [
+            "Tout le contenu du site"
+         ]
+      }
+   }
+}

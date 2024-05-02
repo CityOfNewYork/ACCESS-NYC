@@ -21,11 +21,13 @@ use function WPML\FP\curryN;
  * @method static callback|bool isTMTranslators( ...$get ) - Curried :: array → bool
  * @method static callback|bool isTMATE( ...$get ) - Curried :: array → bool
  * @method static callback|bool isTroubleshooting( ...$get ) - Curried :: array → bool
+ * @method static callback|bool isTranslationQueue( ...$get ) - Curried :: array → bool
  * @method static callback|bool isPage( ...$page, ...$get ) - Curried :: string → array → bool
  * @method static string getLanguages()
  * @method static string getTroubleshooting()
  * @method static string getTM()
  * @method static string getTMDashboard()
+ * @method static string getTMBasket()
  * @method static string getTMATE()
  * @method static string getTMTranslators()
  * @method static string getTMJobs()
@@ -59,9 +61,13 @@ class UIPage {
 
 		self::macro( 'isTroubleshooting', self::isPage( WPML_PLUGIN_FOLDER . '/menu/troubleshooting.php' ) );
 
+		self::macro( 'isTranslationQueue', self::isPage( 'tm/menu/translations-queue.php' ) );
+
 		self::macro( 'getTM', Fns::always( 'admin.php?page=' . self::TM_PAGE ) );
 
 		self::macro( 'getTMDashboard', Fns::always( self::getTM() . '&sm=dashboard' ) );
+
+		self::macro( 'getTMBasket', Fns::always( self::getTM() . '&sm=basket' ) );
 
 		self::macro( 'getTMATE', Fns::always( self::getTM() . '&sm=ate-ams' ) );
 

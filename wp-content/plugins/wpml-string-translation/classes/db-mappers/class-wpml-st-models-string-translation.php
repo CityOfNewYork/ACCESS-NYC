@@ -20,7 +20,7 @@ class WPML_ST_Models_String_Translation {
 	 * @param int $string_id
 	 * @param string $language
 	 * @param int $status
-	 * @param string $value
+	 * @param string|null $value
 	 */
 	public function __construct( $string_id, $language, $status, $value, $mo_string ) {
 		$this->string_id = (int) $string_id;

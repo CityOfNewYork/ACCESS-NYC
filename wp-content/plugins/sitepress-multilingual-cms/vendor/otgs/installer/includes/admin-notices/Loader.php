@@ -14,6 +14,7 @@ class Loader {
 		if ( $isAjax ) {
 			add_action( 'wp_ajax_installer_dismiss_nag', Dismissed::class . '::dismissNotice' );
 		}
+		add_action( 'activate_plugin', Dismissed::class . '::dismissNoticeOnPluginActivation', 10, 2 );
 	}
 
 	public static function initDisplay() {
@@ -23,7 +24,7 @@ class Loader {
 		/**
 		 * Filter and return installer admin notices
 		 *
-		 * @param array - an associative array of messages keyed by repository
+		 * @param array $messages - an associative array of messages keyed by repository
 		 * eg.
 		 * [ 'repo' => [ 'wpml' = [ 'message_id_1', 'message_id_2' ... ] ] ]
 		 */
@@ -34,7 +35,7 @@ class Loader {
 			/**
 			 * Filter and return configuration of where messages should be displayed
 			 *
-			 * @param array - an associative array keyed by repository
+			 * @param array $config - an associative array keyed by repository
 			 * eg.
 			 * [ 'repo' => [ 'wpml' => [
 			 *    'message_id_1' => [
@@ -50,7 +51,7 @@ class Loader {
 			 * Filter and return callback functions for retrieving the text for each message
 			 * The message id is passed to the callback function
 			 *
-			 * @param array - an associative array keyed by repository
+			 * @param array $texts - an associative array keyed by repository
 			 * eg.
 			 * [ 'repo' => [ 'wpml' => [
 			 *     'message_id_1' => some_callback_function,
@@ -72,7 +73,7 @@ class Loader {
 	}
 
 	public static function isDismissed( $repository_id, $notice_id ) {
-		$remainigNotices = static::refreshDismissed();
+		$remainigNotices = self::refreshDismissed();
 		return Dismissed::isDismissed( $remainigNotices, $repository_id, $notice_id );
 	}
 
@@ -108,7 +109,7 @@ class Loader {
 		 *
 		 * @param int $timeout
 		 * @param string $repo
-		 * @param string id - message id
+		 * @param string $id - message id
 		 * return a timestamp in seconds. eg WEEK_IN_SECONDS, etc
 		 */
 		$timeout = apply_filters(

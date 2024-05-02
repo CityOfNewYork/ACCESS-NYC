@@ -1,0 +1,178 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Advanced": [
+            "고급"
+         ],
+         "HTML anchor": [
+            "HTML 앵커"
+         ],
+         "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
+            "\"#anchor\" URL을 사용하여 페이지를 로드할 때 이 블록에 바로 가기를 추가합니다."
+         ],
+         "Additional CSS class(es)": [
+            "추가 CSS 클래스"
+         ],
+         "Separate multiple classes with spaces.": [
+            "여러 클래스를 공백으로 구분합니다."
+         ],
+         "Color": [
+            "색상"
+         ],
+         "Dimensions": [
+            "크기"
+         ],
+         "BLOCK": [
+            "블록"
+         ],
+         "Block margin": [
+            "블록 마진"
+         ],
+         "Block padding": [
+            "블록 패딩"
+         ],
+         "LANGUAGE": [
+            "언어"
+         ],
+         "Language spacing": [
+            "언어 간격"
+         ],
+         "Language padding": [
+            "언어 패딩"
+         ],
+         "Display": [
+            "표시"
+         ],
+         "Show flag": [
+            "국기 표시"
+         ],
+         "Show language name": [
+            "언어 이름 표시"
+         ],
+         "Display language name in": [
+            "언어 이름 표시:"
+         ],
+         "Style": [
+            "스타일"
+         ],
+         "Flag settings": [
+            "국기 설정"
+         ],
+         "Width": [
+            "폭"
+         ],
+         "Height": [
+            "높이"
+         ],
+         "Spacing": [
+            "간격"
+         ],
+         "Allow wrapping to multiple lines": [
+            "여러 줄로 줄 바꿈 허용"
+         ],
+         "Open on click": [
+            "클릭 시 열기"
+         ],
+         "Show arrow": [
+            "화살표 표시"
+         ],
+         "Layout": [
+            "레이아웃"
+         ],
+         "Justification": [
+            "양쪽 맞춤"
+         ],
+         "Orientation": [
+            "방향"
+         ],
+         "Typography": [
+            "타이포그래피"
+         ],
+         "Background": [
+            "배경"
+         ],
+         "Language Text": [
+            "언어 텍스트"
+         ],
+         "Language Background": [
+            "언어 배경"
+         ],
+         "Current language text": [
+            "현재 언어 텍스트"
+         ],
+         "Current language background": [
+            "현재 언어 배경"
+         ],
+         "Full name": [
+            "전체 이름"
+         ],
+         "Code": [
+            "코드"
+         ],
+         "Justify items left": [
+            "아이템을 왼쪽 정렬"
+         ],
+         "Justify items center": [
+            "아이템을 가운데 정렬"
+         ],
+         "Justify items right": [
+            "아이템을 오른쪽 정렬"
+         ],
+         "Justify items space between": [
+            "아이템을 양 끝에 배치하고 동일한 간격 유지"
+         ],
+         "Horizontal": [
+            "가로"
+         ],
+         "Vertical": [
+            "세로"
+         ],
+         "Normal": [
+            "기본"
+         ],
+         "Medium": [
+            "보통"
+         ],
+         "Large": [
+            "큼"
+         ],
+         "X-Large": [
+            "아주 큼"
+         ],
+         "Ab": [
+            "Ab"
+         ],
+         "AB": [
+            "AB"
+         ],
+         "ab": [
+            "ab"
+         ],
+         "Small": [
+            "작음"
+         ],
+         "Displays the WPML Language Switcher.": [
+            "WPML 언어 변환기를 표시합니다."
+         ],
+         "Language Switcher": [
+            "언어 변환기"
+         ],
+         "displays the WPML Language Switcher": [
+            "WPML 언어 변환기를 표시합니다"
+         ],
+         "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
+            "WPML 언어 변환기를 표시합니다. <br/> <a>이 블록을 번역하는 방법</a>을 알아보세요."
+         ],
+         "Navigation Language Switcher": [
+            "탐색 언어 변환기"
+         ],
+         "Reset all": [
+            "모두 재설정"
+         ]
+      }
+   }
+}

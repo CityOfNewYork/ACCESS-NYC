@@ -14,14 +14,14 @@ if ( ! \WPML\Plugins::isTMActive() && defined( 'WPML_TM_URL' ) ) {
 				'wpml-tm-editor-templates',
 				WPML_TM_URL . '/res/js/translation-editor/templates.js',
 				array(),
-				WPML_TM_VERSION,
+				ICL_SITEPRESS_VERSION,
 				true
 			);
 			wp_register_script(
 				'wpml-tm-editor-job',
 				WPML_TM_URL . '/res/js/translation-editor/wpml-tm-editor-job.js',
 				array( 'underscore', 'backbone' ),
-				WPML_TM_VERSION,
+				ICL_SITEPRESS_VERSION,
 				true
 			);
 
@@ -57,7 +57,7 @@ if ( ! \WPML\Plugins::isTMActive() && defined( 'WPML_TM_URL' ) ) {
 						array( 'wpml-tm-editor-job' ),
 						isset( $additional_requirements[ $script ] ) ? $additional_requirements[ $script ] : array()
 					),
-					WPML_TM_VERSION,
+					ICL_SITEPRESS_VERSION,
 					true
 				);
 			}
@@ -71,35 +71,35 @@ if ( ! \WPML\Plugins::isTMActive() && defined( 'WPML_TM_URL' ) ) {
 					'wpml-tm-editor-templates',
 					'wpml-tm-editor-job'
 				), $scripts ),
-				WPML_TM_VERSION,
+				ICL_SITEPRESS_VERSION,
 				true
 			);
 			wp_register_script(
 				'wpml-tp-polling-box-populate',
 				WPML_TM_URL . '/res/js/tp-polling/box-populate.js',
 				array( 'jquery' ),
-				WPML_TM_VERSION,
+				ICL_SITEPRESS_VERSION,
 				true
 			);
 			wp_register_script(
 				'wpml-tp-polling',
 				WPML_TM_URL . '/res/js/tp-polling/poll-for-translations.js',
 				array( 'wpml-tp-polling-box-populate' ),
-				WPML_TM_VERSION,
+				ICL_SITEPRESS_VERSION,
 				true
 			);
 			wp_register_script(
 				'wpml-tm-mcs',
 				WPML_TM_URL . '/res/js/mcs/wpml-tm-mcs.js',
 				array( 'wpml-tp-polling' ),
-				WPML_TM_VERSION,
+				ICL_SITEPRESS_VERSION,
 				true
 			);
 			wp_register_script(
 				'wpml-tm-mcs-translate-link-targets',
 				WPML_TM_URL . '/res/js/mcs/wpml-tm-mcs-translate-link-targets.js',
 				array(),
-				WPML_TM_VERSION,
+				ICL_SITEPRESS_VERSION,
 				true
 			);
 		}

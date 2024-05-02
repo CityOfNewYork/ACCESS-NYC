@@ -34,12 +34,12 @@ class WPML_URL_HTTP_Referer {
 		$referer_data = $request_uri_data = array();
 
 		if ( array_key_exists( 'HTTP_REFERER', $_SERVER ) ) {
-			$query = wpml_parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_QUERY );
+			$query = (string) wpml_parse_url( $_SERVER['HTTP_REFERER'], PHP_URL_QUERY );
 			parse_str( $query, $referer_data );
 		}
 
 		if ( array_key_exists( 'REQUEST_URI', $_SERVER ) ) {
-			$request_uri = wpml_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_QUERY );
+			$request_uri = (string) wpml_parse_url( $_SERVER['REQUEST_URI'], PHP_URL_QUERY );
 			parse_str( $request_uri, $request_uri_data );
 		}
 

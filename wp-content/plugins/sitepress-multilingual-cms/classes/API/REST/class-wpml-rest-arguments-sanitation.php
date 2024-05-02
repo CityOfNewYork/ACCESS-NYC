@@ -1,5 +1,7 @@
 <?php
 
+use WPML\API\Sanitize;
+
 /**
  * @author OnTheGo Systems
  *
@@ -43,7 +45,7 @@ class WPML_REST_Arguments_Sanitation {
 	 * @return bool
 	 */
 	static function string( $value ) {
-		return filter_var( $value, FILTER_SANITIZE_STRING );
+		return Sanitize::string( $value );
 	}
 
 	/**

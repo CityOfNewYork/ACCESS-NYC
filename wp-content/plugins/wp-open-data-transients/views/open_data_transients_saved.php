@@ -1,1 +1,0 @@
-<?= get_option($args['id'], null) ?>

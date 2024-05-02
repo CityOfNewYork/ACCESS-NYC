@@ -71,7 +71,8 @@ class WPML_Term_Adjust_Id {
 		$found       = false;
 		$cached_term = WPML_Non_Persistent_Cache::get( $key, __CLASS__, $found );
 		if ( $found ) {
-			return $cached_term;
+	        // See description on next return.
+            return is_object( $cached_term ) ? clone $cached_term : $cached_term;
 		}
 
 		$translated_id = $this->term_translation->element_id_in( $term->term_taxonomy_id, $this->sitepress->get_current_language() );
@@ -93,7 +94,22 @@ class WPML_Term_Adjust_Id {
 
 		WPML_Non_Persistent_Cache::set( $key, $term, __CLASS__ );
 
-		return $term;
+        // Clone term object otherwise WP uses the same term object
+        // whenever the term id matches. That leads to always have on all
+        // references the last queried object_id.
+        // Example:
+        // Term "a EN" with id 1 has a translation "a FR" with id 2.
+        // Querie contains en and fr post, language is en.
+        // EN post with id 10 has term 1. The term object will have term_id 1
+        // and object_id 10. FR post with id 12 has term 2. 2 will be adjusted
+        // to 1 as en is the current language. Instead of having two term
+        // objects now, WP will get the reference by id and updates the
+        // the object id. So both will have the object_id of the last queried:
+        // [ { term_id: 1, object_id: 12 }, { term_id: 1, object_id: 12 } ]
+        // To prevent that and get correct objects:
+        // [ { term_id: 1, object_id: 10 }, { term_id: 1, object_id: 12 } ]
+        // It's required to create a clone of the $term.
+        return is_object( $term ) ? clone $term : $term;
 	}
 
 	/**

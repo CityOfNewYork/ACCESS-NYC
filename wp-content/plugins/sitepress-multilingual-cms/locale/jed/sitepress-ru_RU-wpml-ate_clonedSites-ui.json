@@ -1,0 +1,181 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Close": [
+            "Закрыть"
+         ],
+         "Please take a screenshot of this message and report this issue to <a>WPML support</a>.": [
+            "Сделайте скриншот этого сообщения и доложите о проблеме <a>службе поддержки WPML</a>."
+         ],
+         "This copy of the site has the same content as the original site on %s, but it doesn’t have credits for automatic translation.": [
+            "Содержание этой копии сайта такое же, как и в исходном сайте %s, но у него нет кредитов для автоматичского перевода."
+         ],
+         "If you want to use automatic translation for this site in the future, you can either <a1>add credits to this site</a1> or <a2>share the credits from the original site</a2>.": [
+            "Если вы хотите воспользоваться автоматичческим переводом сайта в будущем, вы можете либо <a1>добавить кредиты к этому сайту,</a1> либо <a2>настроить совместное пользование кредитами с исходным сайтом</a2>."
+         ],
+         "There was an error checking for credits to share. Please take a screenshot of this message and report it in <a>WPML support</a>.": [
+            "Во время проверки доступных к совместному пользованию кредитов произошла ошибка. Сделайте скриншот этого сообщения и доложите об этом <a>службе поддержки WPML</a>."
+         ],
+         "You’re all set": [
+            "Все готово"
+         ],
+         "To allow the sites running on %s and %s to use the same credits for automatic translation, you need to:": [
+            "Для того, чтобы позволить сайтам %s и %s совместно пользоваться кредитами для автоматического перевода, вам необходимо:"
+         ],
+         "Follow <a>this link</a> to access the migration code (you can't get it by visiting %s manually)": [
+            "Пройти по <a>этой ссылке,</a> чтобы получить миграционный код (вы не можете получить его, пройдя на %s вручную)"
+         ],
+         "Click on <b>Copy migration code</b>": [
+            "Нажать <b>Копировать миграционный код</b>"
+         ],
+         "Paste the migration code into the field below.": [
+            "Вставить миграционный код в поле ниже."
+         ],
+         "Migration code": [
+            "Миграционный код"
+         ],
+         "Continue": [
+            "Продолжить"
+         ],
+         "Go back": [
+            "Назад"
+         ],
+         "Let’s connect the automatic translation credits between the two copies of this site": [
+            "Давайте настроим кредиты для автоматического перевода для обеих копий сайта"
+         ],
+         "WPML was unable to copy your site's translations, translation memory, and glossary to this new URL.": [
+            "WPML не удалось копировать перевод вашего сайта, переводческую память и глоссарий к новому URL."
+         ],
+         "Error with copying translation information to new URL": [
+            "Ошибка при копировании информации о переводе на новый URL"
+         ],
+         "Great. Now this site and its copy on %s are sharing the credits for automatic translation.": [
+            "Отлично. Теперь этот сайт и его копия на %s пользуются общими кредитами для автоматического перевода."
+         ],
+         "Credits that you add on either site will be available on both sites. If you stop using this site, you don’t need to worry about losing credits.": [
+            "Кредиты, добавленные на один из сайтов, будут доступны на любом из них. Если вы перестанете пользоваться этим сайтом, вам не придется беспокоиться по поводу утраты кредитов."
+         ],
+         "WPML was unable to connect your old and new URLs to share automatic translation credits.": [
+            "WPML не удалось подключить старый и новый URL, чтобы пользоваться общими кредитами для автоматического перевода."
+         ],
+         "Error with sharing automatic translation credits": [
+            "Ошибка совместного пользования кредитами для автоматического перевода"
+         ],
+         "The site on %s has %d credits for automatic translation. Do you want to share these credits between %s and this new location (%s)?": [
+            "У сайта на %s %d кредита(ов) для автоматического перевода. Вы хотите пользоваться общими кредитами на %s и в новой локации (%s)?"
+         ],
+         "The site on %s has a pay-as-you-go subscription for automatic translation. Do you want to share these credits between %s and this new location (%s)?": [
+            "Сайт на %s подписан на оплату по факту для автоматического перевода. Вы хотите пользоваться этими кредитами на %s и в новой локации (%s)?"
+         ],
+         "Yes (recommended)": [
+            "Да (рекомендуется)"
+         ],
+         "In the next step, you will receive instructions for how to approve the credits sharing": [
+            "Далее вы получите указания, как оформить совместное пользование кредитами"
+         ],
+         "No": [
+            "Нет"
+         ],
+         "You will need to assign credits or set up a pay-as-you-go plan for this site to use automatic translation": [
+            "Вам нужно закрепить кредиты или оформить план оплаты по факту для этого сайта, чтобы пользоваться автоматическим переводом"
+         ],
+         "What happens when you share credits for automatic translation between sites?": [
+            "Что происходит, когда вы пользуетесь общими кредитами для автоматического перевода на сайтах?"
+         ],
+         "Translation credits for this site": [
+            "Кредиты для перевода этого сайта"
+         ],
+         "You can continue translating content normally on this site.": [
+            "Вы можете продолжать переводить этот сайт классическим способом."
+         ],
+         "Please keep in mind that there shouldn’t be a copy of this site at %s. If there still is a copy of it there, you will not be able to translate content on that site.": [
+            "Обратите внимание, что копии этого сайта на %s не должно быть. Если она там есть, вы не сможете переводить контент того сайта."
+         ],
+         "You indicated that you’re no longer running a copy of this site at %s. This means that:": [
+            "Вы указали, что у вас больше нет копии этого сайта на %s. Это означает следующее:"
+         ],
+         "You will not be able to use automatic translation on the old site": [
+            "Вы не сможете использовать автоматический перевод на старом сайте"
+         ],
+         "If you access the old site, it will trigger warnings on this site": [
+            "Если вы зайдете на старый сайт, вы спровоцируете ряд предупреждений на нем"
+         ],
+         "I understand and am no longer running this site at %s": [
+            "Я понимаю выше сказанное, сайт %s больше не работает"
+         ],
+         "Back": [
+            "Назад"
+         ],
+         "Please check and confirm": [
+            "Проверьте и подтвердите"
+         ],
+         "WPML was unable to update our records with your new URL.": [
+            "WPML не удалось обновить журнал записей вашего нового URL."
+         ],
+         "Error with moving translation information to new URL": [
+            "Ошибка переноса переводческой информации на новый URL"
+         ],
+         "Looks like this site was previously at %s and now it’s at %s.": [
+            "Похоже, этот сайт был раньше на %s, а сейчас на %s."
+         ],
+         "Do you still have the same site running at %s?": [
+            "У вас такой же сайт работает на %s?"
+         ],
+         "Yes": [
+            "Да"
+         ],
+         "This is only a copy - original site is still running": [
+            "Это копия - оригинальный сайт все еще работает"
+         ],
+         "I changed the address of the site to this new one": [
+            "Я изменил(а) адрес сайта на новый"
+         ],
+         "WPML detected a new address for this site": [
+            "WPML обнаружил новый адрес этого сайта"
+         ],
+         "How to manage translations when migrating from development to production and more...": [
+            "Как управлять переводами в процессе миграции из среды разработки в продуктив и многое другое..."
+         ],
+         "Looks like this site is a copy of a different site, or moved to a different URL. Please contact your translation manager to update Translation Management plugin configuration.": [
+            "Похоже, этот сайт – копия другого сайта или же он был перенесен на другой URL-адрес. Обратитесь к своему менеджеру переводческих проектов, чтобы изменить настройки плагина Translation Management."
+         ],
+         "Site Moved or Copied - Action Required": [
+            "Сайт перемещен или скопирован – требуется действие"
+         ],
+         "You or someone else moved this site to %s. Please keep in mind that:": [
+            "Вы или кто-то другой переместили этот сайт на %s. Имейте в виду, что:"
+         ],
+         "Translations that you do at %s will not appear on this site.": [
+            "Переводы, которые вы делаете на %s, не появятся на этом сайте."
+         ],
+         "You cannot edit translations on this site.": [
+            "Вы не можете редактировать переводы на этом сайте."
+         ],
+         "The site at %s is using the same credits for automatic translation as this site.": [
+            "Сайт на %s использует те же кредиты для автоматического перевода, что и этот сайт."
+         ],
+         "If you didn't intend to move this site to %s, you can <a>indicate that this site should be at %s</a>.": [
+            "Если вы не хотели переместить этот сайт на %s, вы можете <a>указать, что он должен быть на %s</a>."
+         ],
+         "This site has moved to a new location": [
+            "Этот сайт перенесен в новую локацию"
+         ],
+         "Moving the site back here will mean that you will be able to translate on this domain again, but you will not be able to update translations at %s.": [
+            "Перенос сайта сюда означает, что вы снова сможете переводить на этом домене, но не сможете обновлять переводы на %s."
+         ],
+         "Yes - move back here": [
+            "Да - перенести сюда снова"
+         ],
+         "No - keep the site on %s": [
+            "Нет - оставить сайт на %s"
+         ],
+         "Are you sure that this site should run on %s and not %s?": [
+            "Вы уверены, что этот сайт должен работать на %s, а не на %s?"
+         ]
+      }
+   }
+}

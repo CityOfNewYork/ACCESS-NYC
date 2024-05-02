@@ -1,0 +1,40 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Preparing...": [
+            "준비 중..."
+         ],
+         "All jobs have been cancelled": [
+            "모든 작업이 취소되었습니다"
+         ],
+         "There is no more jobs to cancel": [
+            "더 이상 취소할 작업이 없습니다"
+         ],
+         "The jobs cancellation has failed": [
+            "작업 취소에 실패했습니다"
+         ],
+         "Cancel in-progress automatic jobs": [
+            "진행 중인 자동 작업을 취소합니다"
+         ],
+         "Domain name has been updated": [
+            "도메인 이름이 업데이트되었습니다"
+         ],
+         "Domain name update has been failed": [
+            "도메인 이름을 업데이트하지 못했습니다"
+         ],
+         "Update domain name in language switcher settings": [
+            "언어 변환기 설정에서 도메인 이름을 업데이트하세요"
+         ],
+         "Refresh license data to recognise license update": [
+            "라이선스 업데이트를 인식할 수 있도록 라이선스 데이터를 새로 고칩니다"
+         ],
+         "WPML License has been refreshed": [
+            "WPML 라이선스가 새로 고쳐졌습니다"
+         ]
+      }
+   }
+}

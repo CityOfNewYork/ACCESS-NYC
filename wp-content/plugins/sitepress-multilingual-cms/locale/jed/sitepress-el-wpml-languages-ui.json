@@ -5,6 +5,15 @@
          "": {
             "domain": "messages"
          },
+         "hide the translations instead.": [
+            "αντ' αυτού, απόκρυψη των μεταφράσεων."
+         ],
+         "Error happened! Please try again.": [
+            "Προέκυψε ένα σφάλμα! Δοκιμάστε ξανά."
+         ],
+         "Cancel": [
+            "Ακύρωση"
+         ],
          "Choose Content to Automatically Translate into": [
             "Επιλέξτε περιεχόμενο που θα μεταφράζεται αυτομάτως σε"
          ],
@@ -17,35 +26,35 @@
          "Save": [
             "Αποθήκευση"
          ],
-         "Choose Content to Automatically Translate into New Language": [
-            "Επιλέξτε περιεχόμενο που θα μεταφράζεται αυτομάτως στη νέα γλώσσα"
+         "Add new languages": [
+            "Προσθήκη νέων γλωσσών"
          ],
-         "Add languages and start translating": [
-            "Προσθήκη γλωσσών και έναρξη μετάφρασης"
+         "Add new language": [
+            "Προσθήκη νέας γλώσσας"
          ],
-         "Add language and start translating": [
-            "Προσθήκη γλώσσας και έναρξη μετάφρασης"
+         "Never mind - don't add new languages": [
+            "Δεν πειράζει - να μην προστεθούν νέες γλώσσες"
          ],
-         "Never mind. Don't add new languages": [
-            "Άλλαξα γνώμη. Να μην προστεθούν νέες γλώσσες."
+         "Never mind - don't add new language": [
+            "Δεν πειράζει - να μην προστεθεί νέα γλώσσα"
          ],
-         "Never mind. Don't add new language": [
-            "Άλλαξα γνώμη. Να μην προστεθεί νέα γλώσσα."
+         "Choose which content to translate into the new language": [
+            "Επιλέξτε ποιο περιεχόμενο θα μεταφραστεί στη νέα γλώσσα"
          ],
-         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
-            "Να μεταφραστούν τώρα αυτόματα όλες οι υπάρχουσες αναρτήσεις και σελίδες μου, καθώς και το νέο περιεχόμενο κατά τη δημιουργία του."
+         "Automatically translate all my posts and pages, plus new content as I create it.": [
+            "Να μεταφράζονται αυτόματα όλες οι αναρτήσεις και οι σελίδες μου, καθώς και νέο περιεχόμενο ενώ το δημιουργώ."
          ],
          "Only automatically translate new content.": [
             "Να μεταφράζεται αυτόματα μόνο το νέο περιεχόμενο."
          ],
-         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
-            "Χρησιμοποιείτε τη λειτουργία <a>Μετάφραση όλων</a> που μεταφράζει αυτόματα το περιεχόμενο του ιστότοπού σας."
+         "Which content do you want to translate into the new language?": [
+            "Ποιο περιεχόμενο θέλετε να μεταφραστεί στη νέα γλώσσα;"
          ],
-         "Which content do you want to automatically translate into your newly-added language?": [
-            "Ποιο περιεχόμενο θέλετε να μεταφράζεται αυτόματα στη νέα γλώσσα που προσθέσατε;"
+         "When you unpause automatic translation, this content will be <a>translated automatically</a>.": [
+            "Όταν αναιρείτε την παύση αυτόματης μετάφρασης, αυτό το περιεχόμενο θα <a>μεταφράζεται αυτόματα</a>."
          ],
-         "You can translate existing content from the Translation Management Dashboard.": [
-            "Μπορείτε να μεταφράσετε το υπάρχον περιεχόμενο από τον πίνακα εργαλείων Διαχείρισης μετάφρασης."
+         "You can still translate existing content any time from the Translation Management Dashboard.": [
+            "Μπορείτε και πάλι να μεταφράζετε υπάρχον περιεχόμενο οποιαδήποτε στιγμή από τον Πίνακα Διαχείρισης Μετάφρασης."
          ]
       }
    }

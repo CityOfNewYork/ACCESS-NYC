@@ -1,0 +1,185 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "lang": "no"
+         },
+         "Advanced": [
+            "高级"
+         ],
+         "HTML anchor": [
+            "HTML 锚点"
+         ],
+         "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
+            "使用“#anchor” URL 加载页面时，向此块添加一个捷径。"
+         ],
+         "Additional CSS class(es)": [
+            "额外 CSS 类"
+         ],
+         "Separate multiple classes with spaces.": [
+            "用空格分隔多个类。"
+         ],
+         "Color": [
+            "颜色"
+         ],
+         "px": [
+            ""
+         ],
+         "%": [
+            ""
+         ],
+         "Dimensions": [
+            "尺寸"
+         ],
+         "BLOCK": [
+            "块"
+         ],
+         "Block margin": [
+            "块外边距"
+         ],
+         "Block padding": [
+            "块内边距"
+         ],
+         "LANGUAGE": [
+            "语言"
+         ],
+         "Language spacing": [
+            "语言间距"
+         ],
+         "Language padding": [
+            "语言内边距"
+         ],
+         "Display": [
+            "显示"
+         ],
+         "Show flag": [
+            "显示国旗"
+         ],
+         "Show language name": [
+            "显示语言名称"
+         ],
+         "Display language name in": [
+            "显示语言名称"
+         ],
+         "Style": [
+            "样式"
+         ],
+         "Flag settings": [
+            "国旗设置"
+         ],
+         "Width": [
+            "宽度"
+         ],
+         "Height": [
+            "高"
+         ],
+         "Spacing": [
+            "间距"
+         ],
+         "Allow wrapping to multiple lines": [
+            "允许换行到多行"
+         ],
+         "Open on click": [
+            "点击打开"
+         ],
+         "Show arrow": [
+            "显示箭头"
+         ],
+         "Layout": [
+            "布局"
+         ],
+         "Justification": [
+            "调整"
+         ],
+         "Orientation": [
+            "方向"
+         ],
+         "Typography": [
+            "版式"
+         ],
+         "Background": [
+            "背景"
+         ],
+         "Language Text": [
+            "语言文本"
+         ],
+         "Language Background": [
+            "语言背景"
+         ],
+         "Current language text": [
+            "当前语言文本"
+         ],
+         "Current language background": [
+            "当前语言背景"
+         ],
+         "Full name": [
+            ""
+         ],
+         "Code": [
+            "代码"
+         ],
+         "Justify items left": [
+            ""
+         ],
+         "Justify items center": [
+            ""
+         ],
+         "Justify items right": [
+            ""
+         ],
+         "Justify items space between": [
+            ""
+         ],
+         "Horizontal": [
+            ""
+         ],
+         "Vertical": [
+            ""
+         ],
+         "Normal": [
+            "常规"
+         ],
+         "Medium": [
+            "中"
+         ],
+         "Large": [
+            "大"
+         ],
+         "X-Large": [
+            "特大"
+         ],
+         "Ab": [
+            "Ab"
+         ],
+         "AB": [
+            "AB"
+         ],
+         "ab": [
+            "ab"
+         ],
+         "Small": [
+            "小"
+         ],
+         "Displays the WPML Language Switcher.": [
+            "显示 WPML 语言切换器。"
+         ],
+         "Language Switcher": [
+            "语言切换器"
+         ],
+         "displays the WPML Language Switcher": [
+            "显示 WPML 语言切换器"
+         ],
+         "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
+            ""
+         ],
+         "Navigation Language Switcher": [
+            "导航语言切换器"
+         ],
+         "Reset all": [
+            "重置全部"
+         ]
+      }
+   }
+}

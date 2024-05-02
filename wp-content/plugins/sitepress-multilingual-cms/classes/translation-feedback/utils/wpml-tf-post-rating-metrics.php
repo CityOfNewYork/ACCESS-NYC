@@ -46,7 +46,7 @@ class WPML_TF_Post_Rating_Metrics {
 			$output .= '"></span>';
 		}
 
-		$output .= '</a> <span class="rating-quantity">(' . esc_html( $quantity ) . ')</span></div>';
+		$output .= '</a> <span class="rating-quantity">(' . esc_html( (string) $quantity ) . ')</span></div>';
 
 		return $output;
 
@@ -72,7 +72,7 @@ class WPML_TF_Post_Rating_Metrics {
 
 		$ratings = $this->wpdb->get_results( $query );
 
-		if ( $ratings ) {
+		if ( is_array( $ratings ) && count( $ratings ) ) {
 
 			$total = 0;
 			foreach ( $ratings as $rating ) {

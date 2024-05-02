@@ -1,0 +1,2 @@
+!function(){"use strict";!function(t){for(var e=function(e){var a=t[e];window.addEventListener("load",(function(){var t=document.createElement("iframe");t.setAttribute("src",a.dataset.googleStaticMap),t.setAttribute("class",a.attributes.class.value),t.setAttribute("width",a.attributes.width.value),t.setAttribute("height",a.attributes.height.value),t.setAttribute("frameborder",a.attributes.frameborder.value),a.replaceWith(t)}))},a=0;a<t.length;a++)e(a)}(document.querySelectorAll('[data-js="google-static-map"]'))}();
+//# sourceMappingURL=single-location.6498931a.js.map

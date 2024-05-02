@@ -1,12 +1,12 @@
 === WPS Hide Login ===
 
 Contributors: WPServeur, NicolasKulka, wpformation
-Donate link : https://www.paypal.me/donateWPServeur
-Tags: rename, login, wp-login, wp-login.php, custom login url, jetpack, wpserveur
+Donate link : https://www.paypal.me/donateKulkaNicolas
+Tags: rename, login, wp-login, wp-login.php, custom login url
 Requires at least: 4.1
-Tested up to: 5.9
+Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 1.9.4
+Stable tag: 1.9.15.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,8 +62,6 @@ Works with multisite, with subdomains and subfolders. Activating it for a networ
 
 If you’re using a **page caching plugin** other than WP Rocket, you should add the slug of the new login url to the list of pages not to cache. WP Rocket is already fully compatible with the plugin.
 
-For W3 Total Cache and WP Super Cache this plugin will give you a message with a link to the field you should update.
-
 = Français =
 
 Nécessite WordPress 4.1 ou supérieur. Toutes les choses liées à la connexion telles que le formulaire d'inscription, le formulaire de mot de passe perdu, le widget de connexion et les sessions expirées continuent de fonctionner.
@@ -81,12 +79,6 @@ Il est également compatible avec tout plugin qui se connecte au formulaire de c
 Fonctionne en multisite, avec sous-domaines ou sous dossiers. L'activer pour un réseau vous permet de définir une valeur par défaut pour l'ensemble du réseau. Les sites individuels peuvent toujours renommer leur page de connexion pour autre chose.
 
 Si vous utilisez un **plugin de mise en cache de pages** autre que WP Rocket, vous devez ajouter le slug de la nouvelle URL de connexion à la liste des pages à ne pas mettre en cache. WP Rocket est déjà entièrement compatible avec le plugin.
-
-Pour W3 Total Cache et WP Super Cache, ce plugin vous donnera un message avec un lien vers le champ que vous devriez mettre à jour.
-
-= GitHub =
-
-https://github.com/tabrisrp/wps-hide-login
 
 == Installation ==
 
@@ -147,6 +139,48 @@ Ce cas peut provenir de plugins modifiant vos fichiers .htaccess pour ajouter ou
 La première étape consiste à vérifier votre fichier .htaccess et à le comparer à un fichier .htaccess normal, pour voir si le problème provient de ce fichier.
 
 == Changelog ==
+
+= 1.9.15.2 =
+* Fix number tags
+
+= 1.9.15.1 =
+* Revert fix
+
+= 1.9.15 =
+* Fix vulnerability (Thanks @petitphp) : Login Page Disclosure
+
+= 1.9.14 =
+* Tested up to 6.5
+
+= 1.9.13.2 =
+* Remove admin notice
+
+= 1.9.13.1 =
+* Remove admin notice
+
+= 1.9.13 =
+* Fix dismiss admin notice
+
+= 1.9.12 =
+* Fix vulnerability (Thanks Naveen Muthusamy - Patchstack) : Bypass Vulnerability with multisite WordPress /wp-admin/install.php.
+* Add warning in options discussions settings.
+* Add warning in dashboard if comment_registration option is activated.
+
+= 1.9.11 =
+* Tested up to 6.4
+
+= 1.9.9 =
+* Tested up to 6.3
+
+= 1.9.8 =
+* Update readme
+
+= 1.9.7 =
+* Tested up to 6.1
+* Fix : is_login (Thanks @container)
+
+= 1.9.6 =
+* Tested up to 6.0
 
 = 1.9.4 =
 * Tested up to 5.9

@@ -10,7 +10,8 @@ class Builder implements \IWPML_Frontend_Action, \IWPML_Backend_Action, \IWPML_A
 
 	public function switch_to_user_language( $locale ) {
 		if ( isset( $_POST['action'] ) && ( 'et_fb_update_builder_assets' === $_POST['action'] ) ) { // phpcs:ignore WordPress.CSRF.NonceVerification
-			return get_user_locale();
+			$locale = get_user_locale();
+			switch_to_locale( $locale );
 		}
 
 		return $locale;

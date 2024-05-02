@@ -186,7 +186,7 @@ class WPML_TP_API_Services extends WPML_TP_Abstract_API {
 	}
 
 	/**
-	 * @param string $translation_service_id
+	 * @param string|int $translation_service_id
 	 *
 	 * @return null|WPML_TP_Service
 	 */

@@ -84,6 +84,11 @@ class Plugin {
 		add_filter( 'user_request_action_email_content', array( $this, 'user_request_action_email_content' ), 999, 2 );
 
 		add_filter( 'site_status_tests', array( $this, 'site_status_tests' ) );
+
+		add_action( 'wp_ajax_dismiss_admin_notice', array( $this, 'dismiss_admin_notice' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts_notifs' ) );
+		add_action( 'admin_notices', array( $this, 'warning_options_discussion' ) );
+		//add_action( 'admin_notices', array( $this, 'warning_notice_for_comment_registration' ) );
 	}
 
 	public function site_status_tests( $tests ) {
@@ -497,6 +502,8 @@ class Plugin {
 		                && isset( $_GET[ $this->new_login_slug() ] )
 		                && empty( $_GET[ $this->new_login_slug() ] ) ) ) {
 
+			$_SERVER['SCRIPT_NAME'] = $this->new_login_slug();
+
 			$pagenow = 'wp-login.php';
 
 		} elseif ( ( strpos( rawurldecode( $_SERVER['REQUEST_URI'] ), 'wp-register.php' ) !== false
@@ -521,7 +528,6 @@ class Plugin {
 	}
 
 	public function wp_loaded() {
-
 		global $pagenow;
 
 		$request = parse_url( rawurldecode( $_SERVER['REQUEST_URI'] ) );
@@ -541,7 +547,7 @@ class Plugin {
 			}
 
 			if ( ! is_user_logged_in() && isset( $request['path'] ) && $request['path'] === '/wp-admin/options.php' ) {
-				header('Location: ' . $this->new_redirect_url() );
+				header( 'Location: ' . $this->new_redirect_url() );
 				die;
 			}
 
@@ -609,39 +615,40 @@ class Plugin {
 	}
 
 	public function site_url( $url, $path, $scheme, $blog_id ) {
-
 		return $this->filter_wp_login_php( $url, $scheme );
-
 	}
 
 	public function network_site_url( $url, $path, $scheme ) {
-
 		return $this->filter_wp_login_php( $url, $scheme );
-
 	}
 
 	public function wp_redirect( $location, $status ) {
-
 		if ( strpos( $location, 'https://wordpress.com/wp-login.php' ) !== false ) {
 			return $location;
 		}
 
 		return $this->filter_wp_login_php( $location );
-
 	}
 
 	public function filter_wp_login_php( $url, $scheme = null ) {
+		global $pagenow;
 
 		if ( strpos( $url, 'wp-login.php?action=postpass' ) !== false ) {
 			return $url;
 		}
 
+		if ( is_multisite() && 'install.php' === $pagenow ) {
+			return $url;
+		}
+
+		/*if ( strpos( $url, 'wp-admin/?action=postpass' ) === false ) {
+			return $url;
+		}*/
+
 		if ( strpos( $url, 'wp-login.php' ) !== false && strpos( wp_get_referer(), 'wp-login.php' ) === false ) {
 
 			if ( is_ssl() ) {
-
 				$scheme = 'https';
-
 			}
 
 			$args = explode( '?', $url );
@@ -665,13 +672,10 @@ class Plugin {
 		}
 
 		return $url;
-
 	}
 
 	public function welcome_email( $value ) {
-
 		return $value = str_replace( 'wp-login.php', trailingslashit( get_site_option( 'whl_page', 'login' ) ), $value );
-
 	}
 
 	public function forbidden_slugs() {
@@ -749,4 +753,120 @@ class Plugin {
 		return $login_url;
 	}
 
+	/**
+	 * Handles Ajax request to persist notices dismissal.
+	 */
+	public function dismiss_admin_notice() {
+		check_ajax_referer( 'wps-hide-login-dismissible-notice' );
+
+		$option_name        = sanitize_text_field( $_POST['option_name'] );
+		$dismissible_length = sanitize_text_field( $_POST['dismissible_length'] );
+		$transient          = 0;
+		if ( 'forever' != $dismissible_length ) {
+			// If $dismissible_length is not an integer default to 1
+			$dismissible_length = ( 0 == absint( $dismissible_length ) ) ? 1 : $dismissible_length;
+			$transient          = absint( $dismissible_length ) * DAY_IN_SECONDS;
+			$dismissible_length = strtotime( absint( $dismissible_length ) . ' days' );
+		}
+		set_site_transient( $option_name, $dismissible_length, $transient );
+		wp_die();
+	}
+
+	/**
+	 * Load scripts
+	 */
+	public function admin_enqueue_scripts_notifs( $hook ) {
+
+		/*if ( 'options-general.php' != $hook ) {
+			return false;
+		}*/
+
+		wp_enqueue_script( 'wps-hide-login-functions', WPS_HIDE_LOGIN_URL . 'assets/js/functions.js', array(
+			'jquery',
+		), false, true );
+
+		wp_localize_script(
+			'wps-hide-login-functions',
+			'dismissible_notice',
+			array(
+				'nonce' => wp_create_nonce( 'wps-hide-login-dismissible-notice' ),
+			)
+		);
+	}
+
+	public function warning_options_discussion() {
+		if ( ! self::is_admin_notice_active( 'disable-notice-warning-comments' ) ) {
+			return false;
+		}
+
+		$current_screen = get_current_screen();
+
+		// Vérifie si la page actuelle est options-discussion.php
+		if ( $current_screen && $current_screen->id === 'options-discussion' ) :
+			/*if ( function_exists( 'wp_admin_notice' ) ) :
+				wp_admin_notice(
+					__( 'WPS Hide Login : Please note, if you check the comment_registration option "Users must be registered and logged in to comment", the login link will not be hidden on the comment block.', 'wps-hide-login' ),
+					array(
+						'type'        => 'warning',
+						'dismissible' => true,
+						'attributes'  => array( 'data-slug' => 'wps-hide-login' )
+					)
+				);
+			else :*/ ?>
+            <div class="wps-updates notice notice-warning is-dismissible"
+                 data-dismissible="disable-notice-warning-comments-forever">
+                <p><?php _e( 'WPS Hide Login : Please note, if you check the comment_registration option "Users must be registered and logged in to comment", the login link will not be hidden on the comment block.', 'wps-hide-login' ); ?></p>
+            </div>
+		<?php
+			//endif;
+		endif;
+	}
+
+	public function warning_notice_for_comment_registration() {
+		if ( ! self::is_admin_notice_active( 'disable-notice-warning-comment-registration' ) ) {
+			return false;
+		}
+
+		$comment_registration_option = get_option( 'comment_registration' );
+
+		if ( $comment_registration_option == '1' ) :
+			/*if ( function_exists( 'wp_admin_notice' ) ) :
+				wp_admin_notice(
+					__( 'WPS Hide Login : Please note that the comment_registration option “Users must be registered and logged in to comment” is activated on your site, the connection link will not be hidden on the comments block.', 'wps-hide-login' ),
+					array(
+						'type'        => 'warning',
+						'dismissible' => true,
+						'attributes'  => array( 'data-slug' => 'wps-hide-login' )
+					)
+				);
+			else :*/ ?>
+            <div class="wps-updates notice notice-warning is-dismissible"
+                 data-dismissible="disable-notice-warning-comment-registration-forever">
+                <p><?php _e( 'WPS Hide Login : Please note that the comment_registration option “Users must be registered and logged in to comment” is activated on your site, the connection link will not be hidden on the comments block.', 'wps-hide-login' ); ?></p>
+            </div>
+		<?php
+			//endif;
+		endif;
+	}
+
+	/**
+	 * Is admin notice active?
+	 *
+	 * @param string $arg data-dismissible content of notice.
+	 *
+	 * @return bool
+	 */
+	public static function is_admin_notice_active( $arg ) {
+		$array       = explode( '-', $arg );
+		$option_name = implode( '-', $array );
+		$db_record   = get_site_transient( $option_name );
+
+		if ( 'forever' == $db_record ) {
+			return false;
+		} elseif ( absint( $db_record ) >= time() ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 }

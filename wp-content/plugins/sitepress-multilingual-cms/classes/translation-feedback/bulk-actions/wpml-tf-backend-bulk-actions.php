@@ -1,5 +1,7 @@
 <?php
 
+use WPML\API\Sanitize;
+
 /**
  * Class WPML_TF_Backend_Bulk_Actions
  *
@@ -40,7 +42,7 @@ class WPML_TF_Backend_Bulk_Actions {
 
 		if ( $this->is_valid_request() && current_user_can( 'manage_options' ) ) {
 			$feedback_ids = array_map( 'intval', $_GET['feedback_ids'] );
-			$bulk_action  = filter_var( $_GET['bulk_action'], FILTER_SANITIZE_STRING );
+			$bulk_action = Sanitize::stringProp( 'bulk_action', $_GET );
 
 			$updated_feedback_ids = $feedback_ids;
 

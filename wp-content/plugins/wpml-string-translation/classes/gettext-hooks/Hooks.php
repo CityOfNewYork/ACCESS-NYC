@@ -122,10 +122,10 @@ class Hooks implements \IWPML_Action {
 	}
 
 	/**
-	 * @param string $translation
-	 * @param string $text
-	 * @param string $context
-	 * @param string $domain
+	 * @param string       $translation
+	 * @param string       $text
+	 * @param string|false $context
+	 * @param string       $domain
 	 *
 	 * @return string
 	 */
@@ -145,7 +145,7 @@ class Hooks implements \IWPML_Action {
 	 * @param string       $single
 	 * @param string       $plural
 	 * @param string       $number
-	 * @param string|array $domain
+	 * @param string       $domain
 	 * @param string|false $context
 	 *
 	 * @return string

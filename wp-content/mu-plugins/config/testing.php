@@ -46,9 +46,9 @@ require_once ABSPATH . 'wp-admin/includes/plugin.php';
  * Activate plugins
  */
 
-activate_plugin('google-authenticator/google-authenticator.php');
-activate_plugin('limit-login-attempts-reloaded/limit-login-attempts-reloaded.php');
-activate_plugin('rollbar/rollbar-php-wordpress.php');
+// activate_plugin('google-authenticator/google-authenticator.php');
+// activate_plugin('limit-login-attempts-reloaded/limit-login-attempts-reloaded.php');
+// activate_plugin('rollbar/rollbar-php-wordpress.php');
 
 /**
  * Enable the Redis Caching Plugin if we have WP_REDIS_HOST defined in
@@ -56,15 +56,15 @@ activate_plugin('rollbar/rollbar-php-wordpress.php');
  * transient caches.
  */
 
-if (null !== WP_REDIS_HOST) {
-  activate_plugin('redis-cache/redis-cache.php');
-}
+// if (null !== WP_REDIS_HOST) {
+//   activate_plugin('redis-cache/redis-cache.php');
+// }
 
 /**
  * Enable Query Monitor for advanced Wordpress Query debug and other tooling.
  */
 
-activate_plugin('query-monitor/query-monitor.php');
+// activate_plugin('query-monitor/query-monitor.php');
 
 /**
  * Allow local development requests

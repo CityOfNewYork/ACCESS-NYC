@@ -3,25 +3,35 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "en"
          },
          "Accepted": [
             "Aceite"
          ],
-         "Reviewing the next translation...": [
-            "A rever a próxima tradução..."
+         "Approved!": [
+            "Aprovado!"
+         ],
+         "Loading the next translation for review...": [
+            "A carregar a próxima tradução para revisão..."
          ],
          "Back": [
             "Para trás"
          ],
-         "Edit Translation": [
-            "Editar Tradução"
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "Desative para não carregar automaticamente a próxima tradução após terminar esta revisão."
          ],
-         "There was an error in applying translation.": [
-            "Ocorreu um erro ao submeter a tradução."
+         "Edit": [
+            "Editar"
+         ],
+         "Edit translation": [
+            "Editar tradução"
          ],
          "Please wait, applying translation..": [
             "Por favor aguarde, a submeter a tradução.."
+         ],
+         "Next review": [
+            "Próxima revisão"
          ],
          "Publish this translation": [
             "Publicar esta tradução"
@@ -29,11 +39,11 @@
          "Accept this translation": [
             "Aceitar esta tradução"
          ],
-         "Approved!": [
-            "Aprovado!"
+         "Published!": [
+            "Publicada!"
          ],
-         "Loading the next translation for review...": [
-            "A carregar a próxima tradução para revisão..."
+         "There was an error in applying translation.": [
+            "Ocorreu um erro ao submeter a tradução."
          ]
       }
    }

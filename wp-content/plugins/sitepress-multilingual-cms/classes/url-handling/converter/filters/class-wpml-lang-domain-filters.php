@@ -33,7 +33,7 @@ class WPML_Lang_Domain_Filters {
 		add_filter( 'login_url', array( $this, 'convert_url' ) );
 		add_filter( 'logout_url', array( $this, 'convert_logout_url' ) );
 		add_filter( 'admin_url', array( $this, 'admin_url_filter' ), 10, 2 );
-		add_filter( 'login_redirect', array( $this, 'convert_url' ), 1, 3 );
+		add_filter( 'login_redirect', array( $this, 'convert_url' ), 1, 1 );
 	}
 
 	/**

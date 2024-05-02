@@ -13,6 +13,8 @@ class NoticeModel //extends ShortPixelModel
   protected $is_dismissed = false; // for persistent notices,
   protected $suppress_until = null;
   protected $suppress_period = -1;
+	protected $include_screens = array();
+	protected $exclude_screens = array();
   public $is_removable = true; // if removable, display a notice dialog with red X or so.
   public $messageType = self::NOTICE_NORMAL;
 
@@ -20,6 +22,8 @@ class NoticeModel //extends ShortPixelModel
   protected $callback; // empty unless callback is needed
 
   public static $icons = array();
+
+  private static $jsDismissLoaded;
 
   const NOTICE_NORMAL = 1;
   const NOTICE_ERROR = 2;
@@ -31,7 +35,6 @@ class NoticeModel //extends ShortPixelModel
   {
       $this->message = $message;
       $this->messageType = $messageType;
-
   }
 
   public function isDone()
@@ -41,9 +44,7 @@ class NoticeModel //extends ShortPixelModel
     {
         if (time() >= $this->suppress_until)
         {
-            //Log::addDebug('')
             $this->is_persistent = false; // unpersist, so it will be cleaned and dropped.
-
         }
     }
 
@@ -96,6 +97,53 @@ class NoticeModel //extends ShortPixelModel
         $this->details[] = $detail;
   }
 
+	/**
+	* @param $method String Include or Exclude
+	* @param $includes String|Array  Screen Names to Include / Exclude either string, or array
+	*/
+	public function limitScreens($method, $screens)
+	{
+			if ($method == 'exclude')
+			{
+				 $var = 'exclude_screens';
+			}
+			else {
+				  $var = 'include_screens';
+			}
+
+			if (is_array($screens))
+			{
+				 $this->$var = array_merge($this->$var, $screens);
+			}
+			else {
+				 $this->{$var}[] = $screens; // strange syntax is PHP 5.6 compat.
+			}
+	}
+
+	/* Checks if Notice is allowed on this screen
+	* @param @screen_id String The screen Id to check ( most likely current one, via EnvironmentModel)
+	*/
+	public function checkScreen($screen_id)
+	{
+			if (in_array($screen_id, $this->exclude_screens))
+			{
+				 return false;
+			}
+			if (in_array($screen_id, $this->include_screens))
+			{
+				 return true;
+			}
+
+			// if include is set, don't show if not screen included.
+			if (count($this->include_screens) == 0)
+			{
+				return true;
+			}
+			else {
+				return false;
+			}
+	}
+
 
 
   /** Set a notice persistent. Meaning it shows every page load until dismissed.
@@ -134,6 +182,14 @@ class NoticeModel //extends ShortPixelModel
     self::$icons[$type] = $icon;
   }
 
+	public function _debug_getvar($var)
+	{
+		 if (property_exists($this, $var))
+		 {
+			  return $this->$var;
+		 }
+	}
+
   private function checkIncomplete($var)
   {
      return ($var instanceof \__PHP_Incomplete_Class);
@@ -142,7 +198,7 @@ class NoticeModel //extends ShortPixelModel
   public function getForDisplay()
   {
     $this->viewed = true;
-    $class = 'shortpixel notice ';
+    $class = 'shortpixel shortpixel-notice ';
 
     $icon = '';
 
@@ -163,9 +219,16 @@ class NoticeModel //extends ShortPixelModel
               return false;
       }
 
-       $return = call_user_func($this->callback, $this);
-       if ($return === false) // don't display is callback returns false explicitly.
-        return;
+			if (! is_callable($this->callback))
+			{
+				 return;
+			}
+			else {
+				$return = call_user_func($this->callback, $this);
+        if ($return === false) // don't display is callback returns false explicitly.
+         return;
+
+			}
     }
 
     switch($this->messageType)
@@ -217,10 +280,31 @@ class NoticeModel //extends ShortPixelModel
       $output .= "<div class='detail-content-wrapper'><p class='detail-content'>" . $this->parseDetails() . "</p></div>";
       $output .= '<label for="check-' . $id . '" class="hide-details"><span>' . __('Hide Details', 'shortpixel-image-optimiser') . '</span></label>';
 
-      $output .= '</div>'; // detail rapper
+      $output .= '</div>'; // detail wrapper
 
     }
-    $output .= "</span></div>";
+    $output .= "</span>";
+
+    if ($this->is_removable)
+    {
+			      $output .= '<button type="button" id="button-' . $id . '" class="notice-dismiss" data-dismiss="' . $this->suppress_period . '" ><span class="screen-reader-text">' . __('Dismiss this notice', 'shortpixel-image-optimiser') . '</span></button>';
+
+       if (! $this->is_persistent)
+       {
+                $output .= "<script type='text/javascript'>\n
+                                document.getElementById('button-$id').onclick = function()
+                                {
+                                  var el = document.getElementById('$id');
+                           				jQuery(el).fadeTo(100,0,function() {
+                               		jQuery(el).slideUp(100, 0, function () {
+                                  jQuery(el).remove();
+                               })
+                           });
+                         } </script>";
+       }
+    }
+
+    $output .= "</div>";
 
     if ($this->is_persistent && $this->is_removable)
     {
@@ -245,20 +329,37 @@ class NoticeModel //extends ShortPixelModel
 
   private function getDismissJS()
   {
-     $url = wp_json_encode(admin_url('admin-ajax.php'));
-    // $action = 'dismiss';
-    $nonce = wp_create_nonce('dismiss');
 
-    $data = wp_json_encode(array('action' => $this->notice_action, 'plugin_action' => 'dismiss', 'nonce' => $nonce, 'id' => $this->id, 'time' => $this->suppress_period));
+      $js = '';
+      if (is_null(self::$jsDismissLoaded))
+      {
+          $nonce = wp_create_nonce('dismiss');
+          $url = wp_json_encode(admin_url('admin-ajax.php'));
+          $js = "function shortpixel_notice_dismiss(event) {
+                    event.preventDefault();
+                    var ev = event.detail;
+                    var target = event.target;
+                    var parent = target.parentElement;
 
-  //  $data_string = "{action:'$this->notice_action'}";
+                    var data = {
+                      'plugin_action': 'dismiss',
+                      'action' : '$this->notice_action',
+                      'nonce' : '$nonce',
+                    }
+                    data.time = target.getAttribute('data-dismiss');
+                    data.id = parent.getAttribute('id');
+                    jQuery.post($url,data);
 
-      $js = "jQuery(document).on('click','#$this->id button.notice-dismiss',
-         function() {
-           var data = $data;
-           var url = $url;
-           jQuery.post(url, data); }
-      );";
+                    jQuery(parent).fadeTo(100,0,function() {
+                        jQuery(parent).slideUp(100, 0, function () {
+                            jQuery(parent).remove();
+                        })
+                    });
+          }";
+      }
+
+      $js .=  ' jQuery("#' . $this->id . '").find(".notice-dismiss").on("click", shortpixel_notice_dismiss); ';
+
       return "\n jQuery(document).ready(function(){ \n" . $js . "\n});";
   }
 

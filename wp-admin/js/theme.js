@@ -1300,7 +1300,7 @@ themes.view.Themes = wp.Backbone.View.extend({
 		// Find the next model within the collection.
 		nextModel = self.collection.at( self.collection.indexOf( model ) + 1 );
 
-		// Sanity check which also serves as a boundary test.
+		// Confidence check which also serves as a boundary test.
 		if ( nextModel !== undefined ) {
 
 			// We have a new theme...
@@ -1694,7 +1694,13 @@ themes.view.Installer = themes.view.Appearance.extend({
 	browse: function( section ) {
 		// Create a new collection with the proper theme data
 		// for each section.
-		this.collection.query( { browse: section } );
+		if ( 'block-themes' === section ) {
+			// Get the themes by sending Ajax POST request to api.wordpress.org/themes
+			// or searching the local cache.
+			this.collection.query( { tag: 'full-site-editing' } );
+		} else {
+			this.collection.query( { browse: section } );
+		}
 	},
 
 	// Sorting navigation.

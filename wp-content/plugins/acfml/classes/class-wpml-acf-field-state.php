@@ -4,7 +4,7 @@ namespace ACFML;
 
 use ACFML\Repeater\Shuffle\Strategy;
 
-class FieldState {
+class FieldState implements \IWPML_Backend_Action {
 	
 	/**
 	 * @var array Meta data before the shuffle.
@@ -27,7 +27,7 @@ class FieldState {
 		$this->shuffled = $shuffled;
 	}
 	
-	public function registerHooks() {
+	public function add_hooks() {
 		add_action( 'acf/save_post', [ $this, 'storeStateBefore' ], self::PRIORITY_BEFORE_CF_UPDATED );
 	}
 	

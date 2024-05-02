@@ -7,12 +7,20 @@ use WPML\FP\Fns;
 use WPML\FP\Lst;
 use WPML\FP\Str;
 use WPML\FP\Obj;
+use function WPML\FP\curryN;
 
 class OptionsPage extends Strategy {
 	/**
 	 * @var Collection Registered options pages IDs.
 	 */
 	protected $valid_ids;
+
+	/**
+	 * @return string
+	 */
+	public function getEntityType() {
+		return 'option';
+	}
 
 	/**
 	 * @param string $id
@@ -79,8 +87,12 @@ class OptionsPage extends Strategy {
 	 * @return array
 	 */
 	private function addNormalizedValuesForFieldState( $options, $prefix, $key, $value ) {
-		if ( $value instanceof \WP_Post || isset( $value['ID'] ) ) {
+		if ( $value instanceof \WP_Post || ( is_array( $value ) && isset( $value['ID'] ) ) ) {
 			return array_merge( $options, [ "${prefix}${key}" => Obj::prop( 'ID', $value ) ] );
+		} elseif ( $value instanceof \WP_Term ) {
+			return array_merge( $options, [ "${prefix}${key}" => Obj::prop( 'term_id', $value ) ] );
+		} elseif ( $this->isArrayOfStringsOrArrayOfIntegers( $value ) ) {
+			return array_merge( $options, [ "${prefix}${key}" => $value ] );
 		} elseif ( is_array( $value ) ) {
 			foreach ( $value as $index => $item ) {
 				if ( is_numeric( $index ) ) {
@@ -95,6 +107,25 @@ class OptionsPage extends Strategy {
 		} else {
 			return array_merge( $options, [ "${prefix}${key}" => $value ] );
 		}
+	}
+
+	/**
+	 * @param mixed $value
+	 *
+	 * @return bool
+	 */
+	private function isArrayOfStringsOrArrayOfIntegers( $value ) {
+		/**
+		 * $intIndexTypeValue callable(callable, mixed, int|string): bool
+		 */
+		$intIndexTypeValue = curryN( 3, function( $typeCheck, $value, $index ) {
+			return is_int( $index ) && $typeCheck( $value );
+		} );
+
+		return is_array( $value ) && (
+			count( $value ) === wpml_collect( $value )->filter( $intIndexTypeValue( 'is_string' ) )->count() ||
+			count( $value ) === wpml_collect( $value )->filter( $intIndexTypeValue( 'is_int' ) )->count()
+		);
 	}
 
 	/**
@@ -181,6 +212,18 @@ class OptionsPage extends Strategy {
 			}
 		}
 
-		return $this->element_translations[ $id ];
+		return (array) Obj::prop( $id, $this->element_translations );
+	}
+
+	/**
+	 * @param string $id
+	 *
+	 * @return bool
+	 */
+	public function isOriginal( $id ) {
+		$currentLanguages = apply_filters( 'wpml_current_language', null );
+		$defaultLanguage  = apply_filters( 'wpml_default_language', null );
+
+		return $defaultLanguage === $currentLanguages;
 	}
 }

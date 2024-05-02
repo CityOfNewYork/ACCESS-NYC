@@ -1,3 +1,43 @@
+**Twig 2 is not maintained anymore**
+
+# 2.16.0 (2023-12-22)
+
+ * Last version for the 2.x series
+ * Add SourcePolicyInterface to selectively enable the Sandbox based on a template's Source
+
+# 2.15.6 (2023-21-11)
+
+ * Add return type for Symfony 7 compatibility
+ * Fix premature loop exit in Security Policy lookup of allowed methods/properties
+
+# 2.15.5 (2023-05-03)
+
+ * Make the Lexer initialize itself lazily
+
+# 2.15.4 (2022-12-27)
+
+ * Fix optimizing closures callbacks
+ * Add a better exception when getting an undefined constant via `constant`
+ * Fix `if` nodes when outside of a block and with an empty body
+
+# 2.15.3 (2022-09-28)
+
+ * Fix a security issue on filesystem loader (possibility to load a template outside a configured directory)
+
+# 2.15.2 (2022-08-12)
+
+ * Allow inherited magic method to still run with calling class
+ * Fix CallExpression::reflectCallable() throwing TypeError
+ * Fix typo in naming (currency_code)
+
+# 2.15.1 (2022-05-17)
+
+* Fix optimizing non-public named closures
+
+# 2.15.0 (2022-05-15)
+
+ * Add support for named closures
+
 # 2.14.13 (2022-04-06)
 
  * Enable bytecode invalidation when auto_reload is enabled

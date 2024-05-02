@@ -1,5 +1,4 @@
 <?php
-
 /**
  * WPML Page Builders can be installed as a standalone glue plugin,
  * but it also comes packaged with WPML Core.
@@ -18,17 +17,20 @@
 /**
  * WARNING: INCREASE THIS LOADER VERSION ON EVERY NEW RELEASE.
  */
-$wpml_page_builders_version = 13;
+$wpml_page_builders_version = 22;
 
-add_action( 'init', function() use ( $wpml_page_builders_version ) {
-	if ( defined( 'WPML_PAGE_BUILDERS_LOADED' ) ) {
-		// A more recent version of WPML Page Builders is already active.
-		return;
-	}
+add_action(
+	'init',
+	function() use ( $wpml_page_builders_version ) {
+		if ( defined( 'WPML_PAGE_BUILDERS_LOADED' ) ) {
+			// A more recent version of WPML Page Builders is already active.
+			return;
+		}
 
-	// Define WPML_PAGE_BUILDERS_LOADED so any older instance of WPML Page Builders is not loaded.
-	define( 'WPML_PAGE_BUILDERS_LOADED', $wpml_page_builders_version );
+		// Define WPML_PAGE_BUILDERS_LOADED so any older instance of WPML Page Builders is not loaded.
+		define( 'WPML_PAGE_BUILDERS_LOADED', $wpml_page_builders_version );
 
-	require_once __DIR__ . '/app.php';
-
-}, 1 - $wpml_page_builders_version );
+		require_once __DIR__ . '/app.php';
+	},
+	1 - $wpml_page_builders_version
+);

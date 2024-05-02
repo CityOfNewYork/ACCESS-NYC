@@ -70,13 +70,13 @@ class WPML_PB_String_Registration {
 	/**
 	 * Register string.
 	 *
-	 * @param int    $post_id  Post Id.
-	 * @param string $content  String content.
-	 * @param string $type     String editor type.
-	 * @param string $title    String title.
-	 * @param string $name     String name.
-	 * @param int    $location String location.
-	 * @param string $wrap_tag String wrap tag.
+	 * @param int          $post_id  Post Id.
+	 * @param string|mixed $content  String content.
+	 * @param string       $type     String editor type.
+	 * @param string       $title    String title.
+	 * @param string       $name     String name.
+	 * @param int          $location String location.
+	 * @param string       $wrap_tag String wrap tag.
 	 *
 	 * @return null|integer $string_id
 	 */
@@ -92,7 +92,7 @@ class WPML_PB_String_Registration {
 
 		$string_id = 0;
 
-		if ( trim( $content ) ) {
+		if ( is_string( $content ) && trim( $content ) ) {
 
 			$string_name = $name ? $name : md5( $content );
 

@@ -6,6 +6,7 @@
             "key": "field_58912c8ce0bda",
             "label": "Hero Headline",
             "name": "hero_headline",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -25,6 +26,7 @@
             "key": "field_58a4d36cf9f9b",
             "label": "Hero Touts Heading",
             "name": "hero_touts_heading",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -44,6 +46,7 @@
             "key": "field_58912c8ce0c05",
             "label": "Hero Touts",
             "name": "hero_touts",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -59,12 +62,13 @@
             "min": 0,
             "max": 2,
             "layout": "row",
-            "button_label": "",
+            "button_label": "Add Row",
             "sub_fields": [
                 {
                     "key": "field_58912c8d18ddd",
                     "label": "Title",
                     "name": "title",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -78,12 +82,14 @@
                     "new_lines": "",
                     "maxlength": "",
                     "placeholder": "",
-                    "rows": ""
+                    "rows": "",
+                    "parent_repeater": "field_58912c8ce0c05"
                 },
                 {
                     "key": "field_58912c8d18e01",
                     "label": "Body",
                     "name": "body",
+                    "aria-label": "",
                     "type": "wysiwyg",
                     "instructions": "",
                     "required": 0,
@@ -97,12 +103,14 @@
                     "toolbar": "basic",
                     "media_upload": 0,
                     "default_value": "",
-                    "delay": 0
+                    "delay": 0,
+                    "parent_repeater": "field_58912c8ce0c05"
                 },
                 {
                     "key": "field_58912c8d18e1c",
                     "label": "Link Text",
                     "name": "link_text",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -116,12 +124,14 @@
                     "new_lines": "",
                     "maxlength": "",
                     "placeholder": "",
-                    "rows": ""
+                    "rows": "",
+                    "parent_repeater": "field_58912c8ce0c05"
                 },
                 {
                     "key": "field_58912c8d18e35",
                     "label": "Link URL",
                     "name": "link_url",
+                    "aria-label": "",
                     "type": "url",
                     "instructions": "",
                     "required": 0,
@@ -132,12 +142,14 @@
                         "id": ""
                     },
                     "default_value": "",
-                    "placeholder": ""
+                    "placeholder": "",
+                    "parent_repeater": "field_58912c8ce0c05"
                 },
                 {
                     "key": "field_58912c8d18e4e",
                     "label": "Link Type",
                     "name": "link_type",
+                    "aria-label": "",
                     "type": "select",
                     "instructions": "Refer to different button types and their use cases in the <a href=\"accesspatterns.cityofnewyork.us\/buttons\" target=\"_blank\">ACCESS NYC Patterns documentation<\/a>.",
                     "required": 0,
@@ -160,12 +172,14 @@
                     "ui": 0,
                     "return_format": "value",
                     "ajax": 0,
-                    "placeholder": ""
+                    "placeholder": "",
+                    "parent_repeater": "field_58912c8ce0c05"
                 },
                 {
                     "key": "field_58912c8d18e67",
                     "label": "Display link arrow?",
                     "name": "link_arrow",
+                    "aria-label": "",
                     "type": "true_false",
                     "instructions": "",
                     "required": 0,
@@ -179,12 +193,14 @@
                     "message": "Display an arrow by the link text?",
                     "ui": 0,
                     "ui_on_text": "",
-                    "ui_off_text": ""
+                    "ui_off_text": "",
+                    "parent_repeater": "field_58912c8ce0c05"
                 },
                 {
                     "key": "field_5ba3c8cdfd2cd",
                     "label": "New Window",
                     "name": "link_new_window",
+                    "aria-label": "",
                     "type": "true_false",
                     "instructions": "Wether to open the link in a new window or not.",
                     "required": 0,
@@ -198,12 +214,14 @@
                     "default_value": 0,
                     "ui": 0,
                     "ui_on_text": "",
-                    "ui_off_text": ""
+                    "ui_off_text": "",
+                    "parent_repeater": "field_58912c8ce0c05"
                 },
                 {
                     "key": "field_5ba3c907fd2ce",
                     "label": "Relationship",
                     "name": "link_relationship",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "Usually set to \"noreferrer noopener\" when opening in new window",
                     "required": 0,
@@ -217,14 +235,17 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "maxlength": ""
+                    "maxlength": "",
+                    "parent_repeater": "field_58912c8ce0c05"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         },
         {
             "key": "field_58a60d57bd0bd",
             "label": "Featured Programs Heading",
             "name": "featured_programs_heading",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -244,6 +265,7 @@
             "key": "field_58a60d6ebd0be",
             "label": "Featured Programs Subheading",
             "name": "featured_programs_subheading",
+            "aria-label": "",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
@@ -264,6 +286,7 @@
             "key": "field_58912c8ce0c21",
             "label": "Featured Programs",
             "name": "featured_programs",
+            "aria-label": "",
             "type": "relationship",
             "instructions": "",
             "required": 0,
@@ -286,12 +309,14 @@
             "elements": "",
             "min": "",
             "max": 4,
-            "return_format": "object"
+            "return_format": "object",
+            "bidirectional_target": []
         },
         {
             "key": "field_58acb0fee0eb4",
             "label": "Contact Us Heading",
             "name": "contact_us_heading",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -311,6 +336,7 @@
             "key": "field_5e9f0e9cad067",
             "label": "Contact Us Text",
             "name": "contact_us_text",
+            "aria-label": "",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
@@ -331,6 +357,7 @@
             "key": "field_58acb11629be8",
             "label": "Contact Us CTA",
             "name": "contact_us_cta",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -350,6 +377,7 @@
             "key": "field_58b4b3b9f2c3b",
             "label": "Contact Us Link",
             "name": "contact_us_link",
+            "aria-label": "",
             "type": "url",
             "instructions": "",
             "required": 0,
@@ -366,6 +394,7 @@
             "key": "field_5ba2ac7f790e0",
             "label": "Contact Us New Window",
             "name": "contact_us_new_window",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "Wether to open the link in a new window or not.",
             "required": 0,
@@ -385,6 +414,7 @@
             "key": "field_5ba2b1a338858",
             "label": "Contact Us Relationship",
             "name": "contact_us_relationship",
+            "aria-label": "",
             "type": "text",
             "instructions": "Usually set to \"nofollow noopener\" when opening in new window.",
             "required": 0,
@@ -433,5 +463,8 @@
     ],
     "active": true,
     "description": "",
-    "modified": 1617199351
+    "show_in_rest": false,
+    "modified": 1714587205,
+    "local_file": "\/var\/www\/html\/wp-content\/themes\/access\/acf-json\/group_58912c8cbc468.json",
+    "acfml_field_group_mode": "advanced"
 }

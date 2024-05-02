@@ -24,7 +24,7 @@ abstract class Enqueue extends Plugin_Base {
 	 * @return void
 	 */
 	public function admin_enqueue_style() {
-		\GatherContent\Importer\enqueue_style( 'gc-select2', 'vendor/select2-4.0.3/select2', array(), '4.0.3' );
+		\GatherContent\Importer\enqueue_style( 'gc-select2', 'vendor/select2-4.0.13/select2', array(), '4.0.13' );
 		\GatherContent\Importer\enqueue_style( 'gathercontent', 'gathercontent-importer' );
 
 		do_action( 'gc_admin_enqueue_style' );
@@ -48,7 +48,7 @@ abstract class Enqueue extends Plugin_Base {
 			wp_deregister_style( 'badgeos-select2-css' );
 		}
 
-		\GatherContent\Importer\enqueue_script( 'gc-select2', 'vendor/select2-4.0.3/select2', array( 'jquery' ), '4.0.3' );
+		\GatherContent\Importer\enqueue_script( 'gc-select2', 'vendor/select2-4.0.13/select2', array( 'jquery' ), '4.0.13' );
 
 		// If < WP 4.5, we need the newer version of underscore.js
 		if ( ! Utils::enqueued_at_least( 'underscore', '1.8.3' ) ) {

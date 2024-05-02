@@ -75,7 +75,8 @@ class Display {
 
 	/**
 	 * @param string $repo
-	 * @param string $ids
+	 * @param string $id
+	 * @param array $notice_params
 	 */
 	private function displayNotice( $repo, $id, $notice_params = [] ) {
 		$noticeId = $id;

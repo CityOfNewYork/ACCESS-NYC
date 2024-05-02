@@ -67,6 +67,11 @@ class MO extends \MO {
 	}
 
 	private function load() {
+		if ( $this->isLoaded() ) {
+			// Abort as the domain just needs to be loaded once.
+			return true;
+		}
+
 		$this->isLoading = true;
 		$this->loadTextDomain();
 

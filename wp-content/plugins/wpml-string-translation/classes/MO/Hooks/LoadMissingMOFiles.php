@@ -40,7 +40,14 @@ class LoadMissingMOFiles implements \IWPML_Action {
 	public function add_hooks() {
 		if ( $this->wasWpmlInstalledPriorToMoFlowChanges() ) {
 			add_filter( 'load_textdomain_mofile', [ $this, 'recordMissing' ], 10, 2 );
-			add_action( 'shutdown', [ $this, 'generateMissing' ] );
+
+			if ( $this->isThemeAndLocalizationPage() ) {
+				// By now this complete feature is probably only required to load
+				// generated files, but for the rare case that someone updates
+				// from < 4.3.0 and has missing files, the genration will still
+				// be triggered on the Themen and Plugins localization page.
+				add_action( 'shutdown', [ $this, 'generateMissing' ] );
+			}
 		}
 	}
 
@@ -68,13 +75,27 @@ class LoadMissingMOFiles implements \IWPML_Action {
 			return $mofile;
 		}
 
-		if ( ! $this->moFilesDictionary->find( $mofile ) ) {
+		// Light check to see if a file was already generated.
+		$generatedFile = $this->getGeneratedFileName( $mofile, $domain );
+		if (
+			self::isReadable( $generatedFile )
+			&& $this->moFilesDictionary->is_path_handled( $mofile, $domain )
+		) {
+			// The file exists AND the path is handled by ST.
+			return $generatedFile;
+		}
+
+		if ( ! $this->isThemeAndLocalizationPage() ) {
+			// All following code is for genarating missing files and that's
+			// only happening on the Theme and Plugins localization page.
+			// -> by now we should consider removing the generation completely.
 			return $mofile;
 		}
 
-		$generatedFile = $this->getGeneratedFileName( $mofile, $domain );
-		if ( self::isReadable( $generatedFile ) ) {
-			return $generatedFile;
+		// Heavy check to see if the file is handled by String Translation.
+		if ( ! $this->moFilesDictionary->find( $mofile ) ) {
+			// Not handled by String Translation.
+			return $mofile;
 		}
 
 		if ( $this->generateMissingMoFile->isNotProcessed( $generatedFile ) ) {
@@ -166,5 +187,14 @@ class LoadMissingMOFiles implements \IWPML_Action {
 	private function isNonDefaultWithMissingDomain( $fileName, $domain ) {
 		return 'default' !== $domain
 		       && preg_match( '/^[a-z]+_?[A-Z]*\.mo$/', $fileName );
+	}
+
+
+	private function isThemeAndLocalizationPage() {
+		global $sitepress;
+
+		return $sitepress
+			->get_wp_api()
+			->is_core_page( 'theme-localization.php' );
 	}
 }

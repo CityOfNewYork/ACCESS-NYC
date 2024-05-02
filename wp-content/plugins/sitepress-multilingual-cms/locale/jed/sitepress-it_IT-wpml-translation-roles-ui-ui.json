@@ -3,7 +3,8 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "it_IT"
          },
          "From:": [
             "Da:"
@@ -45,10 +46,10 @@
             "Nome utente"
          ],
          "Email": [
-            "E-mail"
+            "Email"
          ],
          "Search": [
-            "Ricerca"
+            "Cerca"
          ],
          "user": [
             "utente"
@@ -68,11 +69,8 @@
          "Add Translation Manager": [
             "Aggiungi il responsabile delle traduzioni"
          ],
-         "Select an existing user and set as Translator": [
-            "Seleziona un utente esistente e impostalo come traduttore"
-         ],
-         "Create a new user and set as Translator": [
-            "Crea un nuovo utente e impostalo come traduttore"
+         "Add a Translation Manager": [
+            "Aggiungi un responsabile delle traduzioni"
          ],
          "Set language pair(s)": [
             "Imposta una o più combinazioni linguistiche"
@@ -85,6 +83,12 @@
          ],
          "Add a Translator": [
             "Aggiungi un traduttore"
+         ],
+         "Select an existing user and set as Translator": [
+            "Seleziona un utente esistente e impostalo come traduttore"
+         ],
+         "Create a new user and set as Translator": [
+            "Crea un nuovo utente e impostalo come traduttore"
          ],
          "Edit language pair(s) for translator": [
             "Modifica una o più combinazioni linguistiche del traduttore"
@@ -131,26 +135,14 @@
          "Click here": [
             "Fai clic qui"
          ],
-         "The name of your language as it will appear on your site's language switcher.": [
-            "Il nome della tua lingua come apparirà sul selettore della lingua del tuo sito."
-         ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
             "Formato errato. Può contenere solo lettere minuscole e \"-\". Es.: \"fr\" , \"pt-br\", \"zh-hans\""
-         ],
-         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
-            "Un valore univoco che identifica la lingua all'interno del database e dell'URL. Una volta salvato, il codice della lingua non potrà essere modificato."
          ],
          "Language": [
             "Lingua"
          ],
-         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
-            "Se la tua lingua personalizzata è simile a una lingua esistente, puoi utilizzare il controllo ortografico e la traduzione automatica della lingua esistente. Ad esempio, se la tua lingua personalizzata è lo svizzero-tedesco, puoi mappare il tedesco come lingua da utilizzare per il controllo ortografico e la traduzione automatica. Se non associ la tua lingua personalizzata a una lingua esistente, le funzioni di controllo ortografico e di traduzione automatica non saranno disponibili per quella lingua."
-         ],
          "Location": [
             "Posizione"
-         ],
-         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
-            "Il valore che WPML verifica durante il caricamento delle traduzioni dai file MO e PO. Il codice predefinito della lingua è incluso nei nomi dei file all'interno della cartella di configurazione di WordPress /wp-content/languages/."
          ],
          "Code": [
             "Codice"
@@ -158,20 +150,11 @@
          "The language will not be supported by automatic translations": [
             "La lingua non sarà supportata dalle traduzioni automatiche"
          ],
-         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
-            "Google utilizza l'attributo hreflang per reindirizzare gli utenti ai siti nella lingua e nella posizione pertinenti. Esempi:"
-         ],
          "Language mapping": [
             "Mappatura della lingua"
          ],
-         "All English-speaking users: en": [
-            "Tutti gli utenti di lingua inglese: en"
-         ],
          "Don't map this language": [
             "Non mappare questa lingua"
-         ],
-         "English for UK users: en-gb": [
-            "Inglese per gli utenti del Regno Unito: en-gb"
          ],
          "Default locale": [
             "Codice predefinito della lingua"
@@ -179,14 +162,14 @@
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
             "Formato errato. Può contenere solo lettere minuscole e \"_\". Es.: \"de\" , \"de_DE\", \"zh_Hant_TW\""
          ],
-         "English for US users: en-us": [
-            "Inglese per gli utenti statunitensi: en-us"
-         ],
          "hreflang": [
             "hreflang"
          ],
          "Encode url?": [
             "Codificare l'URL?"
+         ],
+         "Flags must be:": [
+            "Le bandiere devono essere:"
          ],
          "NO": [
             "NO"
@@ -200,8 +183,41 @@
          "Please fill in the field": [
             "Compila il campo"
          ],
+         "PNG, SVG, or JPG files": [
+            "File PNG, SVG o JPG"
+         ],
          "Save language": [
             "Salva la lingua"
+         ],
+         "18 x 12 pixels": [
+            "18 x 12 pixel"
+         ],
+         "Read more about ": [
+            "Ulteriori informazioni sulla"
+         ],
+         "The name of your language as it will appear on your site's language switcher.": [
+            "Il nome della tua lingua come apparirà sul selettore della lingua del tuo sito."
+         ],
+         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+            "Un valore univoco che identifica la lingua all'interno del database e dell'URL. Una volta salvato, il codice della lingua non potrà essere modificato."
+         ],
+         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+            "Se la tua lingua personalizzata è simile a una lingua esistente, puoi utilizzare il controllo ortografico e la traduzione automatica della lingua esistente. Ad esempio, se la tua lingua personalizzata è lo svizzero-tedesco, puoi mappare il tedesco come lingua da utilizzare per il controllo ortografico e la traduzione automatica. Se non associ la tua lingua personalizzata a una lingua esistente, le funzioni di controllo ortografico e di traduzione automatica non saranno disponibili per quella lingua."
+         ],
+         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+            "Il valore che WPML verifica durante il caricamento delle traduzioni dai file MO e PO. Il codice predefinito della lingua è incluso nei nomi dei file all'interno della cartella di configurazione di WordPress /wp-content/languages/."
+         ],
+         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+            "Google utilizza l'attributo hreflang per reindirizzare gli utenti ai siti nella lingua e nella posizione pertinenti. Esempi:"
+         ],
+         "All English-speaking users: en": [
+            "Tutti gli utenti di lingua inglese: en"
+         ],
+         "English for UK users: en-gb": [
+            "Inglese per gli utenti del Regno Unito: en-gb"
+         ],
+         "English for US users: en-us": [
+            "Inglese per gli utenti statunitensi: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
             "Stabilisce se gli URL in questa lingua sono codificati o utilizzano caratteri ASCII (in caso di dubbi, lascia \"No\")."
@@ -230,18 +246,6 @@
          "What are the languages of your site?": [
             "Quali sono le lingue del tuo sito?"
          ],
-         "+ Add a Translation Manager": [
-            "Aggiungi un responsabile delle traduzioni"
-         ],
-         "+ Add a Translator": [
-            "Aggiungi un traduttore"
-         ],
-         "%sLocal translators%s are users of your site that can log in and add, edit, and review your site's translations. Add a translator and their associated translation pairs to assign them translation jobs.": [
-            "I %sTraduttori locali%s sono utenti del tuo sito che possono accedere a quest'ultimo, nonché aggiungere, modificare e rivedere le traduzioni. Aggiungi un traduttore e le relative combinazioni linguistiche per assegnargli i lavori di traduzione."
-         ],
-         "Translators": [
-            "Traduttori"
-         ],
          "You can add a dedicated person to oversee everything translation-related on your site. %sTranslation Managers%s can add new local translators or professional translation services, create and assign translation jobs, review completed translations, and change translation-related settings.": [
             "Puoi aggiungere una persona dedicata per supervisionare tutto quello che riguarda la traduzione sul tuo sito. Il %sresponsabile delle traduzioni%s può aggiungere nuovi traduttori locali o servizi di traduzione professionale, creare e assegnare lavori di traduzione, rivedere le traduzioni completate e modificare le impostazioni relative alla traduzione."
          ],
@@ -250,6 +254,15 @@
          ],
          "Note: All Administrators are automatically given Translation Manager privileges.": [
             "Nota: i privilegi di responsabile delle traduzioni vengono assegnati automaticamente a tutti gli amministratori."
+         ],
+         "%sLocal translators%s are users of your site that can log in and add, edit, and review your site's translations. Add a translator and their associated translation pairs to assign them translation jobs.": [
+            "I %sTraduttori locali%s sono utenti del tuo sito che possono accedere a quest'ultimo, nonché aggiungere, modificare e rivedere le traduzioni. Aggiungi un traduttore e le relative combinazioni linguistiche per assegnargli i lavori di traduzione."
+         ],
+         "You can %shire an experienced translator%s to review your automatic translations for perfect quality.": [
+            "Puoi %sassumere un traduttore esperto%s per revisionare le tue traduzioni automatiche in modo da ottenere una qualità perfetta."
+         ],
+         "Translators": [
+            "Traduttori"
          ]
       }
    }

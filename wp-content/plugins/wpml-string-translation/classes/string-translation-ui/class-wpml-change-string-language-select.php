@@ -33,7 +33,6 @@ class WPML_Change_String_Language_Select {
 			)
 		);
 
-		wp_nonce_field( 'wpml_change_string_language_nonce', 'wpml_change_string_language_nonce' );
 	}
 
 	/**

@@ -2,7 +2,7 @@
 
 namespace WPML\TM\Menu\TranslationQueue;
 
-use WPML\FP\Lst;
+use WPML\FP\Either;
 use WPML\FP\Obj;
 use WPML\TM\API\Job\Map;
 use WPML_Element_Translation_Job;
@@ -23,26 +23,43 @@ class CloneJobs {
 	private $apiClient;
 
 	/**
+	 * Number of microseconds to wait until an API call is repeated again in the case of failure.
+	 *
+	 * @var int
+	 */
+	private $repeatInterval;
+
+	/**
 	 * @param WPML_TM_ATE_Jobs $ateJobs
 	 * @param WPML_TM_ATE_API  $apiClient
+	 * @param int              $repeatInterval
 	 */
-	public function __construct( WPML_TM_ATE_Jobs $ateJobs, WPML_TM_ATE_API $apiClient ) {
-		$this->ateJobs   = $ateJobs;
-		$this->apiClient = $apiClient;
+	public function __construct( WPML_TM_ATE_Jobs $ateJobs, WPML_TM_ATE_API $apiClient, $repeatInterval = 5000000 ) {
+		$this->ateJobs        = $ateJobs;
+		$this->apiClient      = $apiClient;
+		$this->repeatInterval = $repeatInterval;
 	}
 
 	/**
 	 * @param WPML_Element_Translation_Job $jobObject
-	 * @param int|null $sentFrom
+	 * @param int|null                     $sentFrom
+	 * @param bool                         $hasBeenAlreadyRepeated
+	 *
+	 * @return Either<WPML_Element_Translation_Job>
 	 */
-	public function cloneCompletedATEJob( WPML_Element_Translation_Job $jobObject, $sentFrom = null ) {
-		if ( (int) $jobObject->get_status_value() === ICL_TM_COMPLETE ) {
-			$ateJobId = $this->ateJobs->get_ate_job_id( $jobObject->get_id() );
-			$result   = $this->apiClient->clone_job( $ateJobId, $jobObject, $sentFrom );
-			if ( $result ) {
-				$this->ateJobs->store( $jobObject->get_id(), [ JobRecords::FIELD_ATE_JOB_ID => $result['id'] ] );
-				$this->ateJobs->set_wpml_status_from_ate( $jobObject->get_id(), $result['ate_status'] );
-			}
+	public function cloneCompletedATEJob( WPML_Element_Translation_Job $jobObject, $sentFrom = null, $hasBeenAlreadyRepeated = false ) {
+		$ateJobId = (int) $jobObject->get_basic_data_property('editor_job_id');
+		$result   = $this->apiClient->clone_job( $ateJobId, $jobObject, $sentFrom );
+		if ( $result ) {
+			$this->ateJobs->store( $jobObject->get_id(), [ JobRecords::FIELD_ATE_JOB_ID => $result['id'] ] );
+
+			return Either::of( $jobObject );
+		} elseif ( ! $hasBeenAlreadyRepeated ) {
+			usleep( $this->repeatInterval );
+
+			return $this->cloneCompletedATEJob( $jobObject, $sentFrom, true );
+		} else {
+			return Either::left( $jobObject );
 		}
 	}
 
@@ -52,21 +69,19 @@ class CloneJobs {
 	 * @param int $wpmlJobId
 	 * @return bool
 	 */
-	public function maybeCloneWPMLJob( $wpmlJobId ) {
-		if ( ! $this->ateJobs->get_ate_job_id( $wpmlJobId ) ) {
-			$params = json_decode( wp_json_encode( [
-				'jobs' => [ wpml_tm_create_ATE_job_creation_model( $wpmlJobId ) ]
-			] ), true );
+	public function cloneWPMLJob( $wpmlJobId ) {
+		$params = json_decode( (string) wp_json_encode( [
+			'jobs' => [ wpml_tm_create_ATE_job_creation_model( $wpmlJobId ) ]
+		] ), true );
 
-			$response = $this->apiClient->create_jobs( $params );
+		$response = $this->apiClient->create_jobs( $params );
 
-			if ( ! is_wp_error( $response ) && Obj::prop( 'jobs', $response ) ) {
-				$this->ateJobs->store( $wpmlJobId, [ JobRecords::FIELD_ATE_JOB_ID => Obj::path( [ 'jobs', Map::fromJobId( $wpmlJobId ) ], $response ) ] );
-				wpml_tm_load_old_jobs_editor()->set( $wpmlJobId, WPML_TM_Editors::ATE );
-				$this->ateJobs->warm_cache( [ $wpmlJobId ] );
+		if ( ! is_wp_error( $response ) && Obj::prop( 'jobs', $response ) ) {
+			$this->ateJobs->store( $wpmlJobId, [ JobRecords::FIELD_ATE_JOB_ID => Obj::path( [ 'jobs', Map::fromJobId( $wpmlJobId ) ], $response ) ] );
+			wpml_tm_load_old_jobs_editor()->set( $wpmlJobId, WPML_TM_Editors::ATE );
+			$this->ateJobs->warm_cache( [ $wpmlJobId ] );
 
-				return true;
-			}
+			return true;
 		}
 
 		return false;

@@ -112,6 +112,33 @@ class WPML_ST_Translations_File_Dictionary_Storage_Table implements WPML_ST_Tran
 		return $result;
 	}
 
+	/**
+	 * Checks if the given $path is on the wp_icl_mo_files_domains table.
+	 * It's only there when ST has handled the file.
+	 *
+	 * @param string $path
+	 * @param string $domain
+	 *
+	 * @return bool
+	 */
+	public function is_path_handled( $path, $domain ) {
+		$file = new WPML_ST_Translations_File_Entry( $path, $domain );
+
+		// phpcs:disable WordPress.WP.PreparedSQL.NotPrepared
+		$id = $this->wpdb->get_var(
+			$this->wpdb->prepare(
+				"SELECT id
+				FROM {$this->wpdb->prefix}icl_mo_files_domains
+				WHERE file_path_md5 = %s
+				LIMIT 1",
+				$file->get_path_hash()
+			)
+		);
+		// phpcs:enable WordPress.WP.PreparedSQL.NotPrepared
+
+		return null !== $id;
+	}
+
 	private function load_data() {
 		if ( null === $this->data ) {
 			$this->data = array();

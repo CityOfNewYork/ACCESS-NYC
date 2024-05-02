@@ -3,25 +3,38 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "lang": "pl"
          },
          "Accepted": [
             "Zaakceptowano"
          ],
-         "Reviewing the next translation...": [
-            "Trwa sprawdzanie kolejnego tłumaczenia."
+         "Approved!": [
+            "Zatwierdzone!"
+         ],
+         "Loading the next translation for review...": [
+            "Trwa ładowanie kolejnego tłumaczenie do sprawdzenia."
          ],
          "Back": [
             "Wstecz"
          ],
-         "Edit Translation": [
-            "Edytuj tłumaczenie"
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "Wyłącz, aby kolejne tłumaczenie nie ładowało się automatycznie po ukończeniu tego sprawdzania."
          ],
-         "There was an error in applying translation.": [
-            "Wystąpił błąd w trakcie wdrażania tego tłumaczenia."
+         "Turn on to automatically load the next translation after finishing this  .": [
+            "Włącz, aby automatycznie wczytać kolejne tłumaczenie po skończeniu tego."
+         ],
+         "Edit": [
+            "Edycja"
+         ],
+         "Edit translation": [
+            "Edytuj tłumaczenie"
          ],
          "Please wait, applying translation..": [
             "Poczekaj, trwa wdrażanie tłumaczenia."
+         ],
+         "Next review": [
+            "Kolejne sprawdzanie"
          ],
          "Publish this translation": [
             "Opublikuj to tłumaczenie"
@@ -29,11 +42,14 @@
          "Accept this translation": [
             "Zaakceptuj to tłumaczenie"
          ],
-         "Approved!": [
-            "Zatwierdzone!"
+         "Published!": [
+            "Opublikowane!"
          ],
-         "Loading the next translation for review...": [
-            "Trwa ładowanie kolejnego tłumaczenie do sprawdzenia."
+         "Someone is already reviewing this translation. Please try again later.": [
+            "Ktoś już recenzuje to tłumaczenie. Spróbuj ponownie później."
+         ],
+         "There was an error in applying translation.": [
+            "Wystąpił błąd w trakcie wdrażania tego tłumaczenia."
          ]
       }
    }

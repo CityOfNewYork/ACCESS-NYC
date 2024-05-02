@@ -34,11 +34,11 @@ class WPML_Translation_Jobs_Migration_Hooks {
 
 	public function add_hooks_on_init() {
 		if ( $this->new_columns_are_not_added_yet() ) {
-			add_action( 'wpml_tm_lock_ui', array( $this, 'lock_tm_ui' ) );
+			add_filter( 'wpml_tm_lock_ui', array( $this, 'lock_tm_ui' ) );
 		} elseif ( $this->needs_migration() ) {
 			$this->notice->add_notice();
 
-			add_action( 'wpml_tm_lock_ui', array( $this, 'lock_tm_ui' ) );
+			add_filter( 'wpml_tm_lock_ui', array( $this, 'lock_tm_ui' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 			add_action(
 				'wp_ajax_' . WPML_Translation_Jobs_Migration_Ajax::ACTION,
@@ -70,7 +70,7 @@ class WPML_Translation_Jobs_Migration_Hooks {
 			'wpml-tm-translation-jobs-migration',
 			WPML_TM_URL . '/dist/js/translationJobsMigration/app.js',
 			array(),
-			WPML_TM_VERSION
+			ICL_SITEPRESS_VERSION
 		);
 	}
 

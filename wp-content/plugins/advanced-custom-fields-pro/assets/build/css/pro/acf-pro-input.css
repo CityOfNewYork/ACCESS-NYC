@@ -1,6 +1,7 @@
 /*!************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/advanced-custom-fields-pro/assets/src/sass/pro/acf-pro-input.scss ***!
   \************************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
 /*--------------------------------------------------------------------------------------------
 *
 *	Vars
@@ -9,6 +10,11 @@
 /* colors */
 /* acf-field */
 /* responsive */
+/*--------------------------------------------------------------------------------------------
+*
+*	ACF 6 ↓
+*
+*--------------------------------------------------------------------------------------------*/
 /*--------------------------------------------------------------------------------------------
 *
 *  Mixins
@@ -44,6 +50,9 @@
   margin: 0 0 8px;
   background: #F9F9F9;
 }
+.acf-repeater > table > tbody tr.acf-divider:not(:first-child) > td {
+  border-top: 10px solid #EAECF0;
+}
 .acf-repeater .acf-row-handle {
   width: 16px;
   text-align: center !important;
@@ -52,6 +61,18 @@
   /* icons */
   /* .order */
   /* remove */
+}
+.acf-repeater .acf-row-handle .acf-order-input-wrap {
+  width: 45px;
+}
+.acf-repeater .acf-row-handle .acf-order-input::-webkit-outer-spin-button,
+.acf-repeater .acf-row-handle .acf-order-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.acf-repeater .acf-row-handle .acf-order-input {
+  -moz-appearance: textfield;
+  text-align: center;
 }
 .acf-repeater .acf-row-handle .acf-icon {
   display: none;
@@ -78,6 +99,9 @@ body.browser-msie .acf-repeater .acf-row-handle .acf-icon.-minus {
 }
 .acf-repeater .acf-row-handle.order + td {
   border-left-color: #DFDFDF;
+}
+.acf-repeater .acf-row-handle.pagination {
+  cursor: auto;
 }
 .acf-repeater .acf-row-handle.remove {
   background: #F9F9F9;
@@ -150,6 +174,17 @@ body.acf-keydown-shift .acf-repeater .acf-row:hover > .acf-row-handle .acf-icon.
 }
 .acf-repeater.-max .acf-icon[data-event=add-row] {
   display: none !important;
+}
+.acf-repeater > .acf-actions .acf-button {
+  float: right;
+  pointer-events: auto !important;
+}
+.acf-repeater > .acf-actions .acf-tablenav {
+  float: right;
+  margin-right: 20px;
+}
+.acf-repeater > .acf-actions .acf-tablenav .current-page {
+  width: auto !important;
 }
 
 /*---------------------------------------------------------------------------------------------
@@ -625,11 +660,39 @@ html[dir=rtl] .acf-gallery .acf-gallery-side-data th.label {
   position: relative;
 }
 
-/*--------------------------------------------------------------------------------------------
+.acf-admin-single-options-page .select2-dropdown {
+  border-color: #6BB5D8 !important;
+  margin-top: -5px;
+  overflow: hidden;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.1);
+}
+.acf-admin-single-options-page .select2-dropdown.select2-dropdown--above {
+  margin-top: 0;
+}
+.acf-admin-single-options-page .select2-container--default .select2-results__option[aria-selected=true] {
+  background-color: #F9FAFB !important;
+  color: #667085;
+}
+.acf-admin-single-options-page .select2-container--default .select2-results__option[aria-selected=true]:hover {
+  color: #399CCB;
+}
+.acf-admin-single-options-page .select2-container--default .select2-results__option--highlighted[aria-selected] {
+  color: #fff !important;
+  background-color: #0783BE !important;
+}
+.acf-admin-single-options-page .select2-dropdown .select2-results__option {
+  margin-bottom: 0;
+}
+
+.acf-create-options-page-popup ~ .select2-container {
+  z-index: 999999999;
+}
+
+/*-----------------------------------------------------------------------------
 *
 *	ACF Blocks
 *
-*--------------------------------------------------------------------------------------------*/
+*----------------------------------------------------------------------------*/
 .acf-block-component .components-placeholder {
   margin: 0;
 }
@@ -641,6 +704,15 @@ html[dir=rtl] .acf-gallery .acf-gallery-side-data th.label {
   line-height: 1.4em;
   color: #444;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+.acf-block-component .acf-block-fields.acf-empty-block-fields {
+  border: 1px solid #1e1e1e;
+  padding: 12px;
+}
+.components-panel .acf-block-component .acf-block-fields.acf-empty-block-fields {
+  border: none;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 html[dir=rtl] .acf-block-component .acf-block-fields {
   text-align: right;
@@ -666,12 +738,30 @@ html[dir=rtl] .acf-block-component .acf-block-fields {
 .acf-block-body .acf-fields > .acf-field.acf-accordion .acf-accordion-title {
   padding: 16px 20px;
 }
+.acf-block-body .acf-button, .acf-block-body .acf-link a.button, .acf-block-body .acf-add-checkbox {
+  color: #2271b1 !important;
+  border-color: #2271b1 !important;
+  background: #f6f7f7 !important;
+  vertical-align: top;
+}
+.acf-block-body .acf-button.button-primary:hover, .acf-block-body .acf-link a.button.button-primary:hover, .acf-block-body .acf-add-checkbox.button-primary:hover {
+  color: white !important;
+  background: #2271b1 !important;
+}
+.acf-block-body .acf-button:focus, .acf-block-body .acf-link a.button:focus, .acf-block-body .acf-add-checkbox:focus {
+  outline: none !important;
+  background: #f6f7f7 !important;
+}
+.acf-block-body .acf-button:hover, .acf-block-body .acf-link a.button:hover, .acf-block-body .acf-add-checkbox:hover {
+  color: #0a4b78 !important;
+}
 .acf-block-body .acf-block-preview {
   min-height: 10px;
 }
 
 .acf-block-panel .acf-block-fields {
-  border-top: #e2e4e7 solid 1px;
+  border-top: #ddd solid 1px;
+  border-bottom: #ddd solid 1px;
   min-height: 1px;
 }
 .acf-block-panel .acf-block-fields:empty {

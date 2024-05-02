@@ -72,7 +72,7 @@ class WPML_Taxonomy_Translation_Help_Notice {
 	}
 
 	/**
-	 * @return bool|WP_Taxonomy
+	 * @return WP_Taxonomy|false
 	 */
 	private function get_current_translatable_taxonomy() {
 		$taxonomy = false;

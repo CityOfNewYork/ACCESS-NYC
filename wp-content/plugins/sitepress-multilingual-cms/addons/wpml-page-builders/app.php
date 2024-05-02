@@ -9,7 +9,7 @@ if ( WPML\PB\OldPlugin::handle() ) {
 	return;
 }
 
-define( 'WPML_PAGE_BUILDERS_VERSION', '2.0.3' );
+define( 'WPML_PAGE_BUILDERS_VERSION', '2.2.0' );
 define( 'WPML_PAGE_BUILDERS_PATH', __DIR__ );
 
 if ( ! class_exists( 'WPML_Core_Version_Check' ) ) {

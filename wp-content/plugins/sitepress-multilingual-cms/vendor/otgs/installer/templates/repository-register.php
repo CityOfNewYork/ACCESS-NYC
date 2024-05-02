@@ -77,13 +77,13 @@ class Register {
 	 * @return string
 	 */
 	private static function getRegisterLink( $model ) {
-		$buttonText = sprintf( esc_attr( 'register on %s.', 'installer' ), self::removeScheme( $model->productUrl ) );
+		$buttonText = sprintf( esc_attr( 'register on %s.' ), self::removeScheme( $model->productUrl ) );
 		ob_start();
 		?>
 		<a target="_blank" rel="nofollow"
 		   href="<?php echo esc_url( $model->productUrl ); ?>"><?php echo $buttonText ?></a>
 		<?php
-		return trim( ob_get_clean() );
+		return trim( (string) ob_get_clean() );
 	}
 
 }

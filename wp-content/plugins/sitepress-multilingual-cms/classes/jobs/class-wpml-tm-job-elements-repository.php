@@ -19,14 +19,16 @@ class WPML_TM_Job_Elements_Repository {
 	 */
 	public function get_job_elements( WPML_TM_Post_Job_Entity $job ) {
 		$sql = "
-			SELECT translate.* 
-			FROM {$this->wpdb->prefix}icl_translate translate 
+			SELECT translate.*
+			FROM {$this->wpdb->prefix}icl_translate translate
 			WHERE job_id = %d
 		";
 
 		$rowset = $this->wpdb->get_results( $this->wpdb->prepare( $sql, $job->get_translate_job_id() ) );
 
-		return array_map( array( $this, 'build_element_entity' ), $rowset );
+		return is_array( $rowset )
+			? array_map( array( $this, 'build_element_entity' ), $rowset )
+			: [];
 	}
 
 	/**

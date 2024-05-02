@@ -14,7 +14,7 @@ msgstr ""
 msgid "Read more about language configuration files."
 msgstr ""
 
-#: src/js/xmlConfigEditor/components/Controls.js:21
+#: src/js/xmlConfigEditor/components/Controls.js:22
 #: src/js/xmlConfigEditor/hooks/useEditorOptions.js:33
 msgid "Save"
 msgstr ""

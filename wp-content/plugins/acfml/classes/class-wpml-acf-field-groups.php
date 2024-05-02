@@ -3,7 +3,7 @@
 use WPML\FP\Fns;
 use WPML\FP\Obj;
 
-class WPML_ACF_Field_Groups {
+class WPML_ACF_Field_Groups implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	/**
 	 * @var SitePress
 	 */
@@ -19,7 +19,7 @@ class WPML_ACF_Field_Groups {
 		$this->sitepress = $sitepress;
 	}
 
-	public function register_hooks() {
+	public function add_hooks() {
 		if ( is_admin()
 			 && apply_filters( 'wpml_sub_setting', false, 'custom_posts_sync_option', self::POST_TYPE )
 		) {

@@ -21,6 +21,7 @@ use Twilio\Version;
  * @property string $callSid
  * @property string $callType
  * @property string $callState
+ * @property string $answeredBy
  * @property string $processingState
  * @property \DateTime $createdTime
  * @property \DateTime $startTime
@@ -38,6 +39,7 @@ use Twilio\Version;
  * @property array $attributes
  * @property array $properties
  * @property array $trust
+ * @property array $annotation
  */
 class CallSummaryInstance extends InstanceResource {
     /**
@@ -56,6 +58,7 @@ class CallSummaryInstance extends InstanceResource {
             'callSid' => Values::array_get($payload, 'call_sid'),
             'callType' => Values::array_get($payload, 'call_type'),
             'callState' => Values::array_get($payload, 'call_state'),
+            'answeredBy' => Values::array_get($payload, 'answered_by'),
             'processingState' => Values::array_get($payload, 'processing_state'),
             'createdTime' => Deserialize::dateTime(Values::array_get($payload, 'created_time')),
             'startTime' => Deserialize::dateTime(Values::array_get($payload, 'start_time')),
@@ -73,6 +76,7 @@ class CallSummaryInstance extends InstanceResource {
             'attributes' => Values::array_get($payload, 'attributes'),
             'properties' => Values::array_get($payload, 'properties'),
             'trust' => Values::array_get($payload, 'trust'),
+            'annotation' => Values::array_get($payload, 'annotation'),
         ];
 
         $this->solution = ['callSid' => $callSid, ];

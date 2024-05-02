@@ -5,6 +5,7 @@ namespace WPML\TM\Jobs\Dispatch;
 use WPML\Element\API\Post;
 use WPML\FP\Obj;
 use WPML\FP\Str;
+use WPML\TM\API\Jobs;
 
 class Posts extends Elements {
 
@@ -18,7 +19,7 @@ class Posts extends Elements {
 		parent::dispatch( $sendBatch, $messages, $buildBatch, $data, $type );
 	}
 
-	protected static function filterElements( Messages $messages, $postsData, $targetLanguages ) {
+	protected static function filterElements( Messages $messages, $postsData, $targetLanguages, $howToHandleExisting, $translateAutomatically ) {
 		$ignoredPostsMessages = [];
 		$postsToTranslation   = [];
 
@@ -39,8 +40,8 @@ class Posts extends Elements {
 					continue;
 				}
 
-				if ( self::hasInProgressJob( $post->ID, $post->post_type, $language ) ) {
-					$ignoredPostsMessages [] = $messages->ignoreInProgressPostMessage( $post, $language );
+				$job = Jobs::getElementJob( (int) $post->ID, 'post_' . $post->post_type, (string) $language );
+				if ( self::shouldJobBeIgnoredBecauseIsCompleted( $job, $howToHandleExisting, $translateAutomatically ) ) {
 					continue;
 				}
 

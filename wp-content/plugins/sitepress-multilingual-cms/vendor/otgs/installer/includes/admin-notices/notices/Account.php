@@ -13,6 +13,7 @@ class Account {
 
 	const NOT_REGISTERED = 'not-registered';
 	const EXPIRED = 'expired';
+	const IN_GRACE = 'in-grace';
 	const REFUNDED = 'refunded';
 	const GET_FIRST_INSTALL_TIME = 'get_first_install_time';
 	const DEVELOPMENT_MODE = 'development_mode';
@@ -30,6 +31,7 @@ class Account {
 		$noticeTypes = [
 			self::NOT_REGISTERED   => [ Account::class, 'shouldShowNotRegistered' ],
 			self::EXPIRED          => [ Account::class, 'shouldShowExpired' ],
+			self::IN_GRACE         => [ Account::class, 'shouldShowInGrace' ],
 			self::REFUNDED         => [ Account::class, 'shouldShowRefunded' ],
 			self::DEVELOPMENT_MODE => [ Account::class, 'shouldShowDevelopmentBanner' ],
 		];
@@ -67,6 +69,16 @@ class Account {
 	 */
 	public static function shouldShowExpired( \WP_Installer $installer, array $nag ) {
 		return $installer->repository_has_expired_subscription( $nag['repository_id'], 30 * DAY_IN_SECONDS );
+	}
+
+	/**
+	 * @param \WP_Installer $installer
+	 * @param array $nag
+	 *
+	 * @return bool
+	 */
+	public static function shouldShowInGrace( \WP_Installer $installer, array $nag ) {
+		return $installer->repository_has_in_grace_subscription( $nag['repository_id'], 30 * DAY_IN_SECONDS );
 	}
 
 	/**
@@ -125,6 +137,7 @@ class Account {
 				'wpml'    => [
 					Account::NOT_REGISTERED   => $wpmlPages,
 					Account::EXPIRED          => $wpmlPages,
+					Account::IN_GRACE         => $wpmlPages,
 					Account::REFUNDED         => $wpmlPages,
 					Account::DEVELOPMENT_MODE => $wpmlPages,
 				],
@@ -142,6 +155,7 @@ class Account {
 		$config = [
 			Account::NOT_REGISTERED   => [ 'screens' => [ 'plugins' ] ],
 			Account::EXPIRED          => [ 'screens' => [ 'plugins' ] ],
+			Account::IN_GRACE         => [ 'screens' => [ 'plugins' ] ],
 			Account::REFUNDED         => [ 'screens' => [ 'plugins', 'dashboard' ] ],
 			Account::DEVELOPMENT_MODE => [ 'screens' => [ 'plugins', 'dashboard', 'plugin-install' ] ],
 		];
@@ -160,12 +174,14 @@ class Account {
 				'wpml'    => [
 					Account::NOT_REGISTERED   => WPMLTexts::class . '::notRegistered',
 					Account::EXPIRED          => WPMLTexts::class . '::expired',
+					Account::IN_GRACE         => WPMLTexts::class . '::inGrace',
 					Account::REFUNDED         => WPMLTexts::class . '::refunded',
 					Account::DEVELOPMENT_MODE => WPMLTexts::class . '::developmentBanner',
 				],
 				'toolset' => [
 					Account::NOT_REGISTERED   => ToolsetTexts::class . '::notRegistered',
 					Account::EXPIRED          => ToolsetTexts::class . '::expired',
+					Account::IN_GRACE         => ToolsetTexts::class . '::inGrace',
 					Account::REFUNDED         => ToolsetTexts::class . '::refunded',
 					Account::DEVELOPMENT_MODE => ToolsetTexts::class . '::developmentBanner',
 				],

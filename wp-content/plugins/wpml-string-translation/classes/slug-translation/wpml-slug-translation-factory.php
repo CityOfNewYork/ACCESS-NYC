@@ -16,11 +16,11 @@ class WPML_Slug_Translation_Factory implements IWPML_Frontend_Action_Loader, IWP
 		$settings_factory = new WPML_ST_Slug_Translation_Settings_Factory();
 
 		$post_records = $records_factory->create( self::POST );
-		$tax_records  = $records_factory->create( self::TAX );
+		$tax_records  = $records_factory->createTaxRecords();
 
 		$global_settings = $settings_factory->create();
 		$post_settings   = $settings_factory->create( self::POST );
-		$tax_settings    = $settings_factory->create( self::TAX );
+		$tax_settings    = $settings_factory->createTaxSettings();
 
 		$term_link_filter = new WPML_ST_Term_Link_Filter( $tax_records, $sitepress, new WPML_WP_Cache_Factory(), $tax_settings );
 

@@ -249,12 +249,26 @@ abstract class WPML_TM_MCS_Custom_Field_Settings_Menu {
 		foreach ( $this->custom_fields_keys as $cf_key ) {
 			$setting       = $this->get_setting( $cf_key );
 			$status        = $setting->status();
-			$html_disabled = $setting->is_read_only() && ! $setting->is_unlocked() ? 'disabled="disabled"' : '';
+			$html_disabled = $setting->get_html_disabled();
+
 			?>
 			<div class="wpml-flex-table-row">
 				<div class="wpml-flex-table-cell name">
 					<?php
-					$this->unlock_button_ui->render( $setting->is_read_only(), $setting->is_unlocked(), $this->get_radio_name( $cf_key ), $this->get_unlock_name( $cf_key ) );
+					$override = false;
+					/**
+					 * This filter hook give the ability to override the
+					 * default custom field lock rendering.
+					 *
+					 * @since 4.6.0
+					 *
+					 * @param bool                      $override
+					 * @param WPML_Custom_Field_Setting $setting
+					 */
+					if ( ! apply_filters( 'wpml_custom_field_settings_override_lock_render', $override, $setting ) ) {
+						$this->unlock_button_ui->render( $setting->is_read_only(), $setting->is_unlocked(), $this->get_radio_name( $cf_key ), $this->get_unlock_name( $cf_key ) );
+					}
+
 					echo esc_html( $cf_key );
 					?>
 				</div>

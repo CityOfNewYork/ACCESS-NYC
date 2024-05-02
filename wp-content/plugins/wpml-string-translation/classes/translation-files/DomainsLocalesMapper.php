@@ -57,7 +57,9 @@ class DomainsLocalesMapper {
 			];
 		};
 
-		return Fns::map( $createEntity, Obj::values( Lst::pluck( 'default_locale', $getActiveLanguages() ) ) );
+		/** @var array $defaultLocaleList */
+		$defaultLocaleList = Lst::pluck( 'default_locale', $getActiveLanguages() );
+		return Fns::map( $createEntity, Obj::values( $defaultLocaleList ) );
 	}
 
 	/**

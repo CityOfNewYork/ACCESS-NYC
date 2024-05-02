@@ -31,7 +31,16 @@ class WPML_Create_Post_Helper {
 		}
 
 		if ( isset( $postarr['ID'] ) ) {
+			/**
+			 * Prevents from bug on multiple update post calls during one request.
+			 * During first update post call wrong terms in the original language were put to the cache in the process of post revision save.
+			 *
+			 * @see https://onthegosystems.myjetbrains.com/youtrack/issue/wpmldev-672
+			 */
+			$returnTrue = \WPML\FP\Fns::always( true );
+			add_filter( 'wpml_disable_term_adjust_id', $returnTrue );
 			$new_post_id = wp_update_post( $postarr, $wp_error );
+			remove_filter( 'wpml_disable_term_adjust_id', $returnTrue );
 		} else {
 			add_filter( 'wp_insert_post_empty_content', array( $this, 'allow_empty_post' ), 10, 0 );
 			$new_post_id = wp_insert_post( $postarr, $wp_error );

@@ -1,5 +1,7 @@
 <?php
 
+use WPML\FP\Str;
+
 class WPML_URL_Converter_Lang_Param_Helper {
 	/**
 	 * @var array
@@ -48,11 +50,30 @@ class WPML_URL_Converter_Lang_Param_Helper {
 		$url             = wpml_strip_subdir_from_url( $url );
 		$url_query_parts = wpml_parse_url( $url );
 		$url_query       = $this->has_query_part( $only_admin, $url_query_parts ) ? untrailingslashit( $url_query_parts['query'] ) : null;
+		$isLoginPageUrl  = Str::includes( 'wp-login.php', $_SERVER['REQUEST_URI'] );
+		$isLoginPage     = function( $vars ) use ( $isLoginPageUrl ) {
+			return $isLoginPageUrl && isset( $vars['wp_lang'] ) && is_string( $vars['wp_lang'] );
+		};
+		$getWpLang       = function( $vars ) {
+			$wp_lang = explode( '_', $vars['wp_lang'] );
+			return ( count( $wp_lang ) > 0 ) ? strtolower( $wp_lang[0] ) : null;
+		};
 
 		if ( null !== $url_query ) {
 			parse_str( $url_query, $vars );
 			if ( $this->can_retrieve_lang_from_query( $only_admin, $vars ) ) {
 				return $vars['lang'];
+			} else if ( $isLoginPage( $vars ) ) {
+				// Handling case when Language URL format is 'Language name added as a parameter'.
+				return $getWpLang( $vars );
+			}
+		}
+
+		// Handling case when Language URL format is 'Different languages in directories'.
+		if ( is_array( $url_query_parts ) && isset( $url_query_parts['query'] ) && is_string( $url_query_parts['query'] ) ) {
+			parse_str( $url_query_parts['query'], $vars );
+			if ( $isLoginPage( $vars ) ) {
+				return $getWpLang( $vars );
 			}
 		}
 

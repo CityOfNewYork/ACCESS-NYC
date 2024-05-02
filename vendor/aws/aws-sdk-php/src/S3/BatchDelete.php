@@ -112,7 +112,10 @@ class BatchDelete implements PromisorInterface
         return new self($client, $bucket, $fn, $options);
     }
 
-    public function promise()
+    /**
+     * @return PromiseInterface
+     */
+    public function promise(): PromiseInterface
     {
         if (!$this->cachedPromise) {
             $this->cachedPromise = $this->createPromise();

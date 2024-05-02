@@ -47,13 +47,13 @@ class WPML_URL_Converter {
 
 	/**
 	 * @param IWPML_URL_Converter_Strategy   $strategy
-	 * @param WPML_Resolve_Object_Url_Helper $object_url_helper
+	 * @param IWPML_Resolve_Object_Url		 $object_url_helper
 	 * @param string                         $default_language
 	 * @param array<string>                  $active_languages
 	 */
 	public function __construct(
 		IWPML_URL_Converter_Strategy $strategy,
-		WPML_Resolve_Object_Url_Helper $object_url_helper,
+		IWPML_Resolve_Object_Url $object_url_helper,
 		$default_language,
 		$active_languages
 	) {

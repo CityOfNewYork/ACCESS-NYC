@@ -1,5 +1,8 @@
 <div class="wpml-section-content-inner">
-    <h4>{{ strings.title }}</h4>
+    <div class="notice notice-warning inline clearfix">
+        <p><strong>{{ strings.title }}</strong></p>
+        <p>{{ strings.more_info }}</p>
+    </div>
     <table class="widefat inactive-content-table">
         <thead>
             <tr>
@@ -9,6 +12,7 @@
                         <th>{{ slug }}</th>
                     {% endfor %}
                 {% endfor %}
+                <th>{{ strings.delete_translated_content }}</th>
             </tr>
         </thead>
         <tbody>
@@ -18,16 +22,16 @@
                 {% for count in counts %}
                     <td>{{ count }}</td>
                 {% endfor %}
+                <td>
+                    <div
+                        class="wpml-delete-translated-content"
+                        data-language="{{ language }}"
+                        data-language-code="{{ content.getLangCode(language) }}"
+                        style="text-align: center"
+                    ></div>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
-        <tfoot>
-            <tr>
-                <th>{{ strings.total }}</th>
-                {% for count in content.get_total_counts %}
-                    <td>{{ count }}</td>
-                {% endfor %}
-            </tr>
-        </tfoot>
     </table>
 </div>

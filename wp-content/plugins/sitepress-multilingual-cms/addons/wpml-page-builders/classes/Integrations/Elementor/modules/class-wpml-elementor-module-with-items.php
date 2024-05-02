@@ -1,5 +1,7 @@
 <?php
 
+use WPML\FP\Obj;
+
 /**
  * Class WPML_Elementor_Module_With_Items
  */
@@ -45,7 +47,7 @@ abstract class WPML_Elementor_Module_With_Items implements IWPML_Page_Builders_M
 
 					$strings[] = new WPML_PB_String(
 						$item[ $field ],
-						$this->get_string_name( $node_id, $item[ $field ], $field, $element['widgetType'], $item['_id'] ),
+						$this->get_string_name( $node_id, $item, $element, $field ),
 						$this->get_title( $field ),
 						$this->get_editor_type( $field )
 					);
@@ -58,7 +60,7 @@ abstract class WPML_Elementor_Module_With_Items implements IWPML_Page_Builders_M
 
 						$strings[] = new WPML_PB_String(
 							$item[ $key ][ $inner_field ],
-							$this->get_string_name( $node_id, $item[ $key ][ $inner_field ], $inner_field, $element['widgetType'], $item['_id'] ),
+							$this->get_string_name( $node_id, $item, $element, $inner_field, $key ),
 							$this->get_title( $inner_field ),
 							$this->get_editor_type( $inner_field )
 						);
@@ -85,7 +87,7 @@ abstract class WPML_Elementor_Module_With_Items implements IWPML_Page_Builders_M
 						continue;
 					}
 
-					if ( $this->get_string_name( $node_id, $item[ $field ], $field, $element['widgetType'], $item['_id'] ) === $string->get_name() ) {
+					if ( $this->get_string_name( $node_id, $item, $element, $field ) === $string->get_name() ) {
 						$item[ $field ] = $string->get_value();
 						$item['index'] = $key;
 						return $item;
@@ -96,7 +98,7 @@ abstract class WPML_Elementor_Module_With_Items implements IWPML_Page_Builders_M
 							continue;
 						}
 
-						if ( $this->get_string_name( $node_id, $item[ $field_key ][ $inner_field ], $inner_field, $element['widgetType'], $item['_id'] ) === $string->get_name() ) {
+						if ( $this->get_string_name( $node_id, $item, $element, $inner_field, $field_key ) === $string->get_name() ) {
 							$item[ $field_key ][ $inner_field ] = $string->get_value();
 							$item['index'] = $key;
 							return $item;
@@ -108,16 +110,42 @@ abstract class WPML_Elementor_Module_With_Items implements IWPML_Page_Builders_M
 	}
 
 	/**
-	 * @param string $node_id
-	 * @param string $value
-	 * @param string $type
+	 * @param string $nodeId
+	 * @param array  $item
+	 * @param array  $element
+	 * @param string $field
 	 * @param string $key
-	 * @param string $item_id
 	 *
 	 * @return string
 	 */
-	private function get_string_name( $node_id, $value, $type, $key = '', $item_id = '' ) {
-		return $key . '-' . $type . '-' . $node_id . '-' . $item_id;
+	private function get_string_name( $nodeId, $item, $element, $field = '', $key = '' ) {
+		$widgetType   = Obj::prop( 'widgetType', $element );
+		$itemId       = Obj::prop( '_id', $item );
+		$name         =  $widgetType . '-' . $field . '-' . $nodeId . '-' . $itemId;
+
+		/**
+		 * Filter a package string name.
+		 *
+		 * Could be used for repeater or nested fields with the same key.
+		 *
+		 * @since 2.0.5
+		 *
+		 * @param string $name
+		 * @param array  $args {
+		 *     @type string $nodeId  Elementor node id.
+		 *     @type array  $item    The item that is being registered.
+		 *     @type array  $element The element that is being processed and registered.
+		 *     @type string $field   Optional. The item field that is being registered.
+		 *     @type string $key     Optional. The item field sub-key that is being registered.
+		 * }
+		 */
+		return apply_filters( "wpml_pb_elementor_register_string_name_$widgetType", $name, [
+			'nodeId'  => $nodeId,
+			'item'    => $item,
+			'element' => $element,
+			'field'   => $field,
+			'key'     => $key,
+		] );
 	}
 
 	/**

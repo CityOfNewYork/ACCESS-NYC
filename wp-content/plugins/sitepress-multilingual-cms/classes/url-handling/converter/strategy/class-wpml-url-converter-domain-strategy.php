@@ -130,7 +130,7 @@ class WPML_URL_Converter_Domain_Strategy extends WPML_URL_Converter_Abstract_Str
 	/**
 	 * @param string $url
 	 *
-	 * @return array|string
+	 * @return string
 	 */
 	private function strip_protocol( $url ) {
 		$url_parts = wpml_parse_url( $url );

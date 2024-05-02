@@ -137,8 +137,8 @@ class WPML_Term_Actions extends WPML_Full_Translation_API {
 				}
 
 				$this->wpdb->query(
-					"UPDATE {$this->wpdb->prefix}icl_translations 
-									 SET source_language_code = NULL 
+					"UPDATE {$this->wpdb->prefix}icl_translations
+									 SET source_language_code = NULL
 									 WHERE language_code = source_language_code"
 				);
 			}
@@ -146,44 +146,109 @@ class WPML_Term_Actions extends WPML_Full_Translation_API {
 	}
 
 	/**
+	 * Whether the term is original or not, there should be a post with same lang code as this term.
+	 * If the term is original, the post translation with same language code as term should be an unoriginal post (translation) because the original post already has its related term relation deleted.
+	 *
+	 * @param stdClass $term
+	 * @param array $postTranslations
+	 *
+	 * @return bool
+	 *
+	 * @see https://onthegosystems.myjetbrains.com/youtrack/issue/wpmldev-673
+	 */
+	public function isTranslatedTermValidForRelationDeletion( $term, $postTranslations ) {
+		$valid = isset( $postTranslations[ $term->language_code ] );
+
+		if ( $term->original && $valid ) {
+			$valid = ! $postTranslations[ $term->language_code ]->original;
+		}
+
+		return $valid;
+	}
+
+	/**
 	 * This action is hooked to the 'deleted_term_relationships' hook.
 	 * It removes terms from translated posts as soon as they are removed from the original post.
 	 * It only fires, if the setting 'sync_post_taxonomies' is activated.
 	 *
-	 * @param int   $post_id      ID of the post the deleted terms were attached to
-	 * @param array $delete_terms Array of term taxonomy id's for those terms that were deleted from the post.
+	 * @param int $post_id ID of the post the deleted terms were attached to
+	 * @param array $delete_terms Array of terms ids that were deleted from the post.
+	 * @param string $taxonomy
 	 */
-	public function deleted_term_relationships( $post_id, $delete_terms ) {
-		$post = get_post( $post_id );
-		$trid = $this->sitepress->get_element_trid( $post_id, 'post_' . $post->post_type );
-		if ( $trid ) {
-			$translations = $this->sitepress->get_element_translations( $trid, 'post_' . $post->post_type );
-			foreach ( $translations as $translation ) {
-				if ( $translation->original == 1 && $translation->element_id == $post_id ) {
-					$taxonomies = get_object_taxonomies( $post->post_type );
-					foreach ( $taxonomies as $taxonomy ) {
-						foreach ( $delete_terms as $delete_term ) {
-							$trid = $this->sitepress->get_element_trid( $delete_term, 'tax_' . $taxonomy );
-							if ( $trid ) {
-								$tags = $this->sitepress->get_element_translations( $trid, 'tax_' . $taxonomy );
-								foreach ( $tags as $tag ) {
-									if ( ! $tag->original && isset( $translations[ $tag->language_code ] ) ) {
-										$translated_post = $translations[ $tag->language_code ];
-										$this->wpdb->delete(
-											$this->wpdb->term_relationships,
-											array(
-												'object_id'        => $translated_post->element_id,
-												'term_taxonomy_id' => $tag->element_id,
-											)
-										);
-									}
-								}
-							}
-						}
-					}
-				}
-			}
+	public function deleted_term_relationships( $post_id, $delete_terms, $taxonomy ) {
+		$post     = get_post( $post_id );
+		$postTrid = $this->sitepress->get_element_trid( $post_id, 'post_' . $post->post_type );
+
+		if ( ! $postTrid ) {
+			return;
 		}
+
+		$isOriginalPost = function ( $translation ) use ( $post_id ) {
+			return $translation->original == 1 && $translation->element_id == $post_id;
+		};
+
+		$postTranslations = $this->sitepress->get_element_translations( $postTrid, 'post_' . $post->post_type );
+		$originalPost     = wpml_collect( $postTranslations )->filter( $isOriginalPost )->first();
+
+		if ( ! $originalPost ) { // only try to delete term relations if the target post is original.
+			return;
+		}
+
+		/**
+		 * @param int $termId
+		 *
+		 * @return bool|mixed|string|null
+		 */
+		$getTermsTrids = function ( $termId ) use ( $taxonomy ) {
+			return $this->sitepress->get_element_trid( $termId, 'tax_' . $taxonomy );
+		};
+
+		/**
+		 * @param int $trid
+		 *
+		 * @return bool
+		 */
+		$onlyValidTermsTrids = function ( $trid ) {
+			return \WPML\FP\Logic::isTruthy( $trid );
+		};
+
+		/**
+		 * @param int $trid
+		 *
+		 * @return stdClass[]
+		 */
+		$getDeletedTermsTranslations = function ( $trid ) use ( $taxonomy ) {
+			return $this->sitepress->get_element_translations( $trid, 'tax_' . $taxonomy );
+		};
+
+		/**
+		 * Performs DB query to delete term relations only if term translation is valid for relation deletion.
+		 *
+		 * @param stdClass $deletedTermTranslation
+		 *
+		 * @return void
+		 */
+		$deleteTermTranslationsRelations = function ( $deletedTermTranslation ) use ( $postTranslations ) {
+			if ( $this->isTranslatedTermValidForRelationDeletion( $deletedTermTranslation, $postTranslations ) ) {
+				$translated_post = $postTranslations[ $deletedTermTranslation->language_code ];
+				$this->wpdb->delete(
+					$this->wpdb->term_relationships,
+					array(
+						'object_id'        => $translated_post->element_id,
+						'term_taxonomy_id' => $deletedTermTranslation->element_id,
+					)
+				);
+			}
+		};
+
+		$deletedTermsTranslations = wpml_collect( $delete_terms )
+			->map( $getTermsTrids )
+			->filter( $onlyValidTermsTrids )
+			->map( $getDeletedTermsTranslations )
+			->flatten()
+			->toArray();
+
+		\WPML\FP\Fns::map( \WPML\FP\Fns::tap( $deleteTermTranslationsRelations ), $deletedTermsTranslations );
 	}
 
 	/**
@@ -227,7 +292,9 @@ class WPML_Term_Actions extends WPML_Full_Translation_API {
 				$object_id
 			);
 
-		$this->apply_added_term_changes( $this->wpdb->get_results( $current_ttids_sql ) );
+		$corrections = $this->wpdb->get_results( $current_ttids_sql );
+
+		is_array( $corrections ) && $this->apply_added_term_changes( $corrections );
 	}
 
 	/**
@@ -340,7 +407,7 @@ class WPML_Term_Actions extends WPML_Full_Translation_API {
 			$referrer = isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : '';
 			parse_str( (string) wpml_parse_url( $referrer, PHP_URL_QUERY ), $qvars );
 			$term_lang = ! empty( $qvars['post'] ) && $this->sitepress->is_translated_post_type(
-				get_post_type( $qvars['post'] )
+				get_post_type( (int) $qvars['post'] )
 			)
 				? $this->post_translations->get_element_lang_code( $qvars['post'] )
 				: ( isset( $qvars['lang'] ) ? $qvars['lang'] : null );

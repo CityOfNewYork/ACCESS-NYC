@@ -2,7 +2,21 @@
 
 namespace WPML\TM\Menu\TranslationRoles;
 
+use WPML\FP\Obj;
+
 class RoleValidator {
+
+	/**
+	 * Checks if a specific role is valid.
+	 *
+	 * @param string $roleName
+	 * @return bool
+	 */
+	public static function isValid( $roleName ) {
+		$wp_role = get_role( $roleName );
+		return $wp_role instanceof \WP_Role;
+	}
+
 	/**
 	 * @param string $roleName
 	 *
@@ -17,7 +31,7 @@ class RoleValidator {
 				return null;
 			}
 
-			$roleName = $wp_role->name;
+			$roleName = Obj::prop( 'name', $wp_role );
 		}
 
 		return $roleName;

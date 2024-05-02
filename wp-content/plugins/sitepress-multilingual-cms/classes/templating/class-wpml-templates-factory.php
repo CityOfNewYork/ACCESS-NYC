@@ -48,8 +48,8 @@ abstract class WPML_Templates_Factory {
 	abstract protected function init_template_base_dir();
 
 	/**
-	 * @param null $template
-	 * @param null $model
+	 * @param ?string $template
+	 * @param ?array<string,mixed> $model
 	 *
 	 * @throws \WPML\Core\Twig\Error\LoaderError
 	 * @throws \WPML\Core\Twig\Error\RuntimeError
@@ -60,8 +60,8 @@ abstract class WPML_Templates_Factory {
 	}
 
 	/**
-	 * @param string $template
-	 * @param array<string,mixed> $model
+	 * @param ?string $template
+	 * @param ?array<string,mixed> $model
 	 *
 	 * @return string
 	 * @throws \WPML\Core\Twig\Error\LoaderError

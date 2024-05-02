@@ -117,6 +117,7 @@ if ( ! function_exists( 'icl_cache_set' ) ) {
 		if ( empty( $switched ) && ! icl_disable_cache() ) {
 			$icl_cache = get_option( '_icl_cache' );
 			if ( false === $icl_cache ) {
+				$icl_cache = [];
 				delete_option( '_icl_cache' );
 			}
 

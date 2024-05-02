@@ -10,10 +10,10 @@ class WPML_Allowed_Redirect_Hosts extends WPML_SP_User {
 		$domains          = $this->sitepress->get_setting( 'language_domains' );
 		$default_language = $this->sitepress->get_default_language();
 		$default_home     = $this->sitepress->convert_url( $this->sitepress->get_wp_api()->get_home_url(), $default_language );
-		$home_schema      = wpml_parse_url( $default_home, PHP_URL_SCHEME ) . '://';
+		$home_schema      = wpml_parse_url( (string) $default_home, PHP_URL_SCHEME ) . '://';
 
 		if ( ! isset( $domains[ $default_language ] ) ) {
-			$domains[ $default_language ] = wpml_parse_url( $default_home, PHP_URL_HOST );
+			$domains[ $default_language ] = wpml_parse_url( (string) $default_home, PHP_URL_HOST );
 		}
 
 		$active_languages = $this->sitepress->get_active_languages();

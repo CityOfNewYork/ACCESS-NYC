@@ -9,7 +9,7 @@
 class WPML_ST_Verify_Dependencies {
 
 	/**
-	 * @param string $wpml_core_version
+	 * @param string|false $wpml_core_version
 	 */
 	function verify_wpml( $wpml_core_version ) {
 		if ( false === $wpml_core_version ) {

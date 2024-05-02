@@ -1,5 +1,6 @@
 <?php
 namespace GatherContent\Importer\Admin\Mapping\Field_Types;
+
 use GatherContent\Importer\Base as Plugin_Base;
 
 class Exception extends \Exception {}
@@ -36,7 +37,7 @@ class Types extends Plugin_Base {
 		$field_types = apply_filters( 'gathercontent_register_field_types_handlers', $this->core_types );
 
 		foreach ( $field_types as $type ) {
-			if ( ! ( $type instanceof Type  ) ) {
+			if ( ! ( $type instanceof Type ) ) {
 				throw new Exception( 'Field type handler needs to be of type GatherContent\\Importer\\Admin\\Mapping\Field_Types\\Type' );
 			}
 

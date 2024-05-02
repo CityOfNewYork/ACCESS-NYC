@@ -10,9 +10,9 @@
 
 use WPML\FP\Relation;
 
-class WPML_ACF_Pro {
+class WPML_ACF_Pro implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 
-	public function register_hooks() {
+	public function add_hooks() {
 		$isOverwritingFromOriginal = Relation::propEq( 'icl_ajx_action', 'set_duplication' );
 
 		// phpcs:ignore WordPress.VIP.SuperGlobalInputUsage.AccessDetected,WordPress.CSRF.NonceVerification.NoNonceVerification

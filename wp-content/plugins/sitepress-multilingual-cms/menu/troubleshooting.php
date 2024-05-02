@@ -1,5 +1,7 @@
 <?php
 
+use WPML\API\Sanitize;
+
 require_once WPML_PLUGIN_PATH . '/inc/functions-troubleshooting.php';
 
 global $wpdb;
@@ -17,12 +19,11 @@ function get_term_taxonomy_id_from_term_object( $term_object ) {
 function get_ATE_account_data() {
 	return get_option( WPML_TM_ATE_Authentication::AMS_DATA_KEY, [] );
 }
-
-$action = filter_input( INPUT_GET, 'debug_action', FILTER_SANITIZE_STRING );
-$nonce  = filter_input( INPUT_GET, 'nonce', FILTER_SANITIZE_STRING );
+$action = Sanitize::stringProp( 'debug_action', $_GET );
+$nonce  = Sanitize::stringProp( 'nonce', $_GET );
 if ( ! $action ) {
-	$action = filter_input( INPUT_POST, 'debug_action', FILTER_SANITIZE_STRING );
-	$nonce  = filter_input( INPUT_POST, 'nonce', FILTER_SANITIZE_STRING );
+	$action = Sanitize::stringProp( 'debug_action', $_POST );
+	$nonce  = Sanitize::stringProp( 'nonce', $_POST );
 }
 
 $otgs_twig_cache_disable_key = '_otgs_twig_cache_disabled';
@@ -30,7 +31,7 @@ if ( defined( 'WPML_Templates_Factory::OTGS_TWIG_CACHE_DISABLED_KEY' ) ) {
 	$otgs_twig_cache_disable_key = WPML_Templates_Factory::OTGS_TWIG_CACHE_DISABLED_KEY;
 }
 
-if ( isset( $action ) && wp_verify_nonce( $nonce, $action ) ) {
+if ( $nonce && $action && wp_verify_nonce( $nonce, $action ) ) {
 	ob_end_clean();
 	global $wpdb;
 	switch ( $action ) {
@@ -293,8 +294,9 @@ if ( isset( $action ) && wp_verify_nonce( $nonce, $action ) ) {
 
 			foreach ( get_taxonomies( array(), 'names' ) as $taxonomy ) {
 
-				$terms_objects = get_terms( $taxonomy, 'hide_empty=0' );
-				if ( $terms_objects ) {
+				$terms_objects = get_terms( [ 'taxonomy' => $taxonomy, 'hide_empty' => 0 ] );
+				if ( is_array( $terms_objects ) ) {
+					/** @phpstan-ignore-next-line For some reason 'get_term_taxonomy_id_from_term_object' is not recognised as function by PHPStan. */
 					$term_taxonomy_ids = array_map( 'get_term_taxonomy_id_from_term_object', $terms_objects );
 					wp_update_term_count( $term_taxonomy_ids, $taxonomy, true );
 				}
@@ -343,6 +345,10 @@ if ( wp_verify_nonce(
 <?php } ?>
 <?php
 
+// phpcs:disable
+echo \WPML\ICLToATEMigration\Loader::renderContainerIfNeeded();
+// phpcs:enable
+
 echo '<a href="#wpml-settings">' . __( 'WPML Settings', 'sitepress' ) . '</a>';
 echo '<br /><hr /><h3 id="wpml-settings"> ' . __( 'WPML settings', 'sitepress' ) . '</h3>';
 echo '<textarea style="font-size:10px;width:100%" wrap="off" rows="16" readonly="readonly">';
@@ -350,7 +356,7 @@ ob_start();
 print_r( $sitepress->get_settings() );
 $ob = ob_get_contents();
 ob_end_clean();
-echo esc_html( $ob );
+echo esc_html( (string) $ob );
 echo '</textarea>';
 
 ?>
@@ -832,6 +838,7 @@ if ( $shared ) {
 
 		<?php do_action( 'wpml_troubleshooting_after_setup_complete_cleanup_end' ); ?>
 		<?php do_action( 'after_setup_complete_troubleshooting_functions' ); ?>
+		<?php ICL_AdminNotifier::troubleshooting(); ?>
 
 	<?php } ?>
 
