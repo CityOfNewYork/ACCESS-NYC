@@ -16,6 +16,8 @@ class HashCalculator {
 			return self::hash( $value );
 		} elseif ( is_int( $value ) ) {
 			return self::hash( (string) $value );
+		} elseif ( is_bool( $value ) ) {
+			return self::hash( (string) $value );
 		} elseif ( is_array( $value ) && self::getID( $value ) ) {
 			return self::hash( (string) self::getID( $value ) );
 		} elseif ( ! $value ) { // Empty field(image, repeater, etc.).
