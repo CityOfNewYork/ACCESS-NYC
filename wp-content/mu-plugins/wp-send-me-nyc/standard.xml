@@ -23,6 +23,7 @@
 
   <!-- Ignore WordPress, Composer dependencies, and specific libraries -->
   <exclude-pattern>./vendor</exclude-pattern>
+  <exclude-pattern>./wp-content</exclude-pattern>
 
   <rule ref="PSR2" />
 

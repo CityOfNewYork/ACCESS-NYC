@@ -44,14 +44,12 @@ add_action('init', function() use ($email, $sms) {
 /**
  * SmsMe and EmailMe extend ContactMe. Each have settings that inherit some
  * settings from ContactMe. ContactMe was created for any generic email client
- * but EmailMe extends it for use with Amazon SES and adds additional settings
- * for. Bitly settings can be found in the ContactMe class. SmsMe creates the
- * configuration and api for Twilio.
+ * but EmailMe extends it for use with Amazon SES and adds additional settings.
+ * SmsMe creates the configuration and api for Twilio.
  *
  * @author NYC Opportunity
  */
 add_action('admin_init', function() use ($contact, $sms, $email) {
-  $contact->createBitlySection();
   $sms->createSettingsSection();
   $email->createSettingsSection();
 });
