@@ -43,7 +43,7 @@ class StepByStep {
      * Init
      */
 
-    (async () => {
+    (() => {
       /**
        * Show the first or queried step
        */
@@ -61,7 +61,7 @@ class StepByStep {
       this.toggle.focusable = [];
 
       // Hide inactive steps using the before toggle callback
-      await this.before(this.toggle);
+      this.before(this.toggle);
 
       /**
        * Set event listeners and callbacks
