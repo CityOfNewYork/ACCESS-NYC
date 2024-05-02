@@ -125,8 +125,7 @@ if ($wp_query->found_posts > 0) {
   $context['posts'] = array_map(function($post) {
     return new Controller\Programs($post);
   }, Timber::get_posts($wp_query_ids));
-} 
-else {
+} else {
   $context['posts'] = [];
 }
 
