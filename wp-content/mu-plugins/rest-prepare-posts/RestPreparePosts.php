@@ -95,7 +95,12 @@ class RestPreparePosts {
     $terms = array();
 
     foreach (get_taxonomies($this->tax_options, 'objects') as $taxonomy) {
-      $terms = array_merge($terms, get_the_terms($id, $taxonomy->name));
+      $taxonomy_terms = get_the_terms($id, $taxonomy->name);
+
+      // get_the_terms returns false if there are no terms
+      if ($taxonomy_terms !== false) {
+        $terms = array_merge($terms, $taxonomy_terms);
+      }
     }
 
     return $terms;
