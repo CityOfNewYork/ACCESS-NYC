@@ -24,7 +24,7 @@ add_filter('automatic_updates_is_vcs_checkout', '__return_false', 1);
 add_filter('auto_core_update_send_email', '__return_true');
 
 // Plugins
-add_filter('auto_update_plugin', '__return_true');
+// add_filter('auto_update_plugin', '__return_true');
 
 // or
 
