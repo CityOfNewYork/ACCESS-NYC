@@ -25,6 +25,8 @@ class Config {
 
   private $default = 'default.php';
 
+  private $secret = false;
+
   /** Placeholder for environment variables */
   private $envs = array();
 
