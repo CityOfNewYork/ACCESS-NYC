@@ -8,8 +8,8 @@
  */
 // phpcs:enable
 
-if (file_exists(WPMU_PLUGIN_DIR . '/wp-gc-templates-sync/GcTemplatesSync.php')) {
-  require_once WPMU_PLUGIN_DIR . '/wp-gc-templates-sync/GcTemplatesSync.php';
+// if (file_exists(WPMU_PLUGIN_DIR . '/wp-gc-templates-sync/GcTemplatesSync.php')) {
+//   require_once WPMU_PLUGIN_DIR . '/wp-gc-templates-sync/GcTemplatesSync.php';
 
-  new NYCO\GcTemplatesSync();
-}
+//   new NYCO\GcTemplatesSync();
+// }
