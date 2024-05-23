@@ -6,7 +6,7 @@ if (!defined('WPINC')) {
   die; //no direct access
 }
 
-require_once ABSPATH . WPINC . '/wp-db.php'; // wpdb; WordPress DB abstraction
+require_once ABSPATH . WPINC . '/class-wpdb.php'; // wpdb; WordPress DB abstraction
 require_once plugin_dir_path(__FILE__) . 'WordPressDatabaseSSL.php'; // wpdb class extention
 require_once plugin_dir_path(__FILE__) . 'Class.php';
 require_once plugin_dir_path(__FILE__) . 'Settings.php';
