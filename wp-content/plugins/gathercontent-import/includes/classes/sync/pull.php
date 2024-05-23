@@ -625,8 +625,15 @@ class Pull extends Base {
 		if ( 'text' === $this->element->type ) {
 			$terms = array_map( 'trim', explode( ',', sanitize_text_field( $this->element->value ) ) );
 		} elseif ( 'choice_checkbox' === $this->element->type ) {
-			error_log(print_r($this->element, true));
-			$terms = json_decode($this->element->value);
+			$element_value = $this->element->value;
+
+			// $element_value may be an empty array instead of an empty string
+			if (empty($element_value)) {
+				$terms = array();
+			}
+			else {
+				$terms = json_decode($this->element->value);
+			}
 		} else {
 			$terms = (array) $this->element->value;
 		}
