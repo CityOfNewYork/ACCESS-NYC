@@ -8,7 +8,7 @@ use \wpdb;
  * This class extends the wpdb WordPress Database Abstraction method. Both the
  * original class and this class need to be included in the same file to be used.
  *
- * require_once ABSPATH . WPINC . '/wp-db.php';
+ * require_once ABSPATH . WPINC . '/class-wpdb.php';
  * require_once plugin_dir_path(__FILE__) . 'wp-db-ssl.php';
  *
  * Then it can be used the same way wpdb is used with the additional certificate
