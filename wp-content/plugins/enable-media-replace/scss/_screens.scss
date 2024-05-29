@@ -1,0 +1,39 @@
+
+.enable-media-replace.emr-screen
+{
+
+	width: 90%;
+	background: #fff;
+	border: 1px solid #fff;
+	position: relative;
+	margin: 30px 0;
+
+	h3 {
+ 		font-size: 24px;
+		position: absolute;
+		top: -15px;
+		left: 30px;
+		padding: 16px 8px;
+		border: 1px solid #000;
+		background: #fff;
+		margin: 0;
+	}
+	.content
+	{
+		padding: 32px;
+
+	}
+	h1 {
+		 font-weight: 700;
+	}
+
+	p { font-size: 14px; }
+
+
+	.hide { display: none; }
+
+	&.error-screen {
+		 h1 { color: #ff0000; }
+	}
+
+}

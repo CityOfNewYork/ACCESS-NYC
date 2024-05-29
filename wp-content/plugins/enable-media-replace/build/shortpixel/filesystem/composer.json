@@ -1,0 +1,18 @@
+{
+    "name": "shortpixel/filesystem",
+    "description": "ShortPixel FileSystem",
+    "version": 1.0,
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bas",
+            "email": "bas@weblogmechanic.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": { "ShortPixel\\FileSystem\\" : "src" }
+    }
+}

@@ -1,0 +1,149 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: enable-media-replace\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-01-16 15:55+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Måns Jonasson <mans@thejonassons.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../enable-media-replace.php:40 ../enable-media-replace.php:79
+#: ../enable-media-replace.php:120
+msgid "Replace media"
+msgstr "Ersätt media"
+
+#: ../enable-media-replace.php:79
+msgid "Upload a new file"
+msgstr "Ladda upp en ny fil"
+
+#: ../enable-media-replace.php:79
+msgid "To replace the current file, click the link and upload a replacement."
+msgstr ""
+"För att ersätta den nuvarande filen, klicka på länken och ladda upp en ny "
+"fil."
+
+#: ../enable-media-replace.php:161
+msgid "Revised"
+msgstr "Uppdaterad"
+
+#: ../popup.php:14 ../upload.php:3
+msgid "You do not have permission to upload files."
+msgstr "Du har inte tillåtelse att ladda upp filer."
+
+#: ../popup.php:30
+msgid "Replace Media Upload"
+msgstr "Ladda upp ny fil"
+
+#: ../popup.php:46
+msgid "NOTE: You are about to replace the media file"
+msgstr "OBS: Du är på väg att ersätta filen"
+
+#: ../popup.php:46
+msgid "There is no undo. Think about it!"
+msgstr "Det finns inget sätt att ångra. Tänk efter först!"
+
+#: ../popup.php:48
+msgid "Choose a file to upload from your computer"
+msgstr "Välj en fil att ladda upp från din dator"
+
+#: ../popup.php:55
+msgid "Select media replacement type:"
+msgstr "Välj ersättningsform:"
+
+#: ../popup.php:57
+msgid "Just replace the file"
+msgstr "Ersätt bara filen"
+
+#: ../popup.php:58
+msgid "Note: This option requires you to upload a file of the same type ("
+msgstr "Detta val kräver att du laddar upp en fil av exakt samma typ ("
+
+#: ../popup.php:58
+msgid ""
+") as the one you are replacing. The name of the attachment will stay the "
+"same ("
+msgstr ") som den du ersätter. Namnet på filen kommer att behållas ("
+
+#: ../popup.php:58
+msgid ") no matter what the file you upload is called."
+msgstr ") oavsett vad filen du laddar upp heter på din dator."
+
+#: ../popup.php:61
+msgid "Replace the file, use new file name and update all links"
+msgstr "Ersätt filen, använd det nya filnamnet och uppdatera alla länkar"
+
+#: ../popup.php:62
+msgid ""
+"Note: If you check this option, the name and type of the file you are about "
+"to upload will replace the old file. All links pointing to the current file ("
+msgstr ""
+"Om du klickar i den här rutan kommer den även namnet och typen på den nya "
+"filen du laddar upp helt att ersätta den gamla. Alla länkar som pekar på den "
+"gamla filen ("
+
+#: ../popup.php:62
+msgid ") will be updated to point to the new file name."
+msgstr ") kommer att uppdateras så att de pekar på det nya filnamnet."
+
+#: ../popup.php:63
+msgid ""
+"Please note that if you upload a new image, only embeds/links of the "
+"original size image will be replaced in your posts."
+msgstr ""
+"Notera att om du laddar upp en ny bild kommer endast inbäddningar/länkar "
+"till originalstorleken att bytas ut i dina poster."
+
+#: ../popup.php:68
+msgid "Upload"
+msgstr "Ladda upp"
+
+#: ../popup.php:68
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: ../upload.php:26
+#, php-format
+msgid ""
+"The file %1$s can not be deleted by the web server, most likely because the "
+"permissions on the file are wrong."
+msgstr ""
+"Filen %1$s kan inte raderas av webbservern, troligen på grund av "
+"filrättigheterna."
+
+#: ../upload.php:84
+msgid "File type does not meet security guidelines. Try another."
+msgstr ""
+"Den här filen är inte tillåten enligt WordPress säkerhetsinställningar. "
+
+#~ msgid "Enable Media Replace"
+#~ msgstr "Ladda upp ny fil"
+
+#~ msgid ""
+#~ "This plugin allows you to replace any uploaded media file by uploading a "
+#~ "new one."
+#~ msgstr ""
+#~ "Detta plugin låter dig ersätta en fil i mediebiblioteket genom att ladda "
+#~ "upp en ny."
+
+#~ msgid "First, locate the uploaded file you want to replace, using the"
+#~ msgstr "Hitta först den fil du vill ersätta genom att bläddra i "
+
+#~ msgid "media library browser"
+#~ msgstr "mediebiblioteket"
+
+#~ msgid "Click the \"Edit\" link"
+#~ msgstr "Tryck på \"Redigera\"-länken"
+
+#~ msgid ""
+#~ "Second, click the link \"Upload a new file\" and follow the instructions."
+#~ msgstr "Tryck sen på länken \"Ladda upp ny fil\" och följ instruktionerna."
+
+#~ msgid "Replace media upload"
+#~ msgstr "Ladda upp ny fil"

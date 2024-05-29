@@ -1,0 +1,469 @@
+@import 'datepicker';
+@import 'screens';
+
+#emr-drop-area-active
+{
+//	border: 4px dashed #b4b9be;
+//	max-width: 600px;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 9999;
+	display: block;
+	background: rgba(0,0,0,0.5);
+	border: 6px dashed #AAA;
+
+	h3 {
+		font-size: 36px;
+		color: #ddd;
+		width: 200px;
+		left: 50%;
+		top: 50%;
+		position:absolute;
+	}
+
+	.drop-wrapper
+	{
+		margin: 0 auto;
+	}
+}
+
+// The main form.
+.emr_upload_form
+{
+  form
+  {
+    display: flex; //editor and upsell
+    .upsell-wrapper
+    {
+      margin-left: 10px;
+    }
+  }
+
+	.editor-wrapper
+	{
+		width: 100%;
+	}
+	.emr_drop_area {
+		display: none;
+	}
+
+	.wrapper
+  {
+//    margin: 15px 0;
+    padding: 18px;
+    border: 1px solid #ccc;
+
+    .section-header
+    {
+      font-size: 18px;
+      //text-align: center;
+      border-bottom: 1px solid #ccc;
+      padding: 6px 0;
+      margin: 0 0 15px 0;
+    }
+  }
+
+	.explainer {
+		font-size: 14px;
+		color: #555;
+		max-width: 800px;
+		margin: 20px 0;
+		.underline {
+			text-decoration-style: dotted;
+			text-decoration-line: underline;
+		}
+
+
+	}
+
+  .image_chooser.wrapper
+  {
+    min-height: 350px;
+
+
+    .image_previews
+    {
+      margin: 15px 0;
+			position: relative;
+
+      .image_placeholder
+      {
+        position: relative;
+        display: inline-block;
+        margin-right: 25px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        vertical-align: top;
+				box-sizing: border-box;
+				background: #fff;
+				max-width: calc(50% - 25px);
+
+				img { object-fit: contain; }
+
+				.upload-title
+				{
+					text-align: center;
+					position: absolute;
+					padding-top: 8px;
+					line-height: 20px;
+					font-weight: 700;
+					width: 100%;
+					left: 0;
+					top: 0;
+				}
+				#upload-file {
+					display: none;
+				}
+        .textlayer
+        {
+          font-size: 25px;
+          line-height: 25px;
+          opacity: 0.7;
+          position: absolute;
+          color: #ccc;
+          left: 48%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          border: 1px dashed #eee;
+          background-color: #333;
+          padding: 8px;
+					z-index: 5;
+          //max-width: 100%;
+        }
+        .dashicons
+        {
+          font-size: 60px;
+          position: absolute;
+          top: 50%;
+          margin-top: -30px;
+          left: 50%;
+          margin-left: -30px;
+          opacity: 0.5;
+
+        }
+        .image_size
+        {
+           text-align: center;
+           position: absolute;
+           bottom: -25px;
+           width: 100%;
+        }
+				.drag-and-drop-title
+				{
+					text-align: center;
+					font-weight: 400;
+					font-size: 14px;
+					width: 100%;
+					height: 100%;
+					position: absolute;
+					cursor: pointer;
+					top: 0;
+					left: 0;
+					z-index: 1;
+					span {
+							position: absolute;
+						//	left: 46%;
+							top: 50%;
+							transform: translate(-50%,-50%);
+							padding: 5px 10px;
+							width: 100%;
+
+					}
+				}
+        &.is_image
+        {
+          .dashicons::before, .dashicons { display: none }
+
+
+        }
+        &.not_image
+        {
+          img { display: none; }
+          .textlayer { display: none; }
+          &.is_document{
+            .textlayer {
+              font-size: 18px;
+              line-height: 20px;
+              display: block;
+
+            }
+          }
+        } // not_image
+      } // image_placeholder
+    } // image_previews
+  } // wrapper
+
+  .form-error, .form-warning
+  {
+    background: #fff;
+    padding: 8px;
+    border-left: 4px solid #ff0000;
+  //  display: inline-block;
+    margin: 10px 0;
+    display: none;
+    p {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+  }
+  .form-warning
+  {
+    border-left: 4px solid #ffb900;
+  }
+
+  .option-flex-wrapper
+  {
+    display: flex;
+  }
+
+  .replace_type.wrapper
+  {
+    flex: 1;
+    border: 1px solid #ccc;
+    margin: 15px 0;
+    .option
+    {
+      position: relative;
+      z-index: 1;
+      &.disabled
+      {
+      //  color: #eee;
+      }
+      label
+      {
+        font-size: 1.2em;
+      }
+      .nofeature-notice
+      {
+        border: 1px solid #ccc;
+        padding: 8px;
+        margin: 0;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        opacity: 0.8;
+        z-index: 9;
+        background: #444;
+        p {
+          text-align: center;
+          color: #fff;
+          margin: 15px 0;
+        }
+      }
+    }
+
+  }
+
+  .options.wrapper
+  {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 15px 0 15px 35px;
+    .custom_date
+    {
+      .emr_datepicker {
+        width: 150px;
+      }
+      .emr_hour, .emr_minute
+      {
+        width: 45px;
+      }
+    }
+		.replace_custom_date
+		{
+				margin-left: 5px;
+				&:hover {
+					text-decoration: underline;
+					cursor: pointer
+				}
+		}
+    ul
+    {
+      li
+      {
+        input
+        {
+          margin-right: 8px;
+        }
+      }
+    }
+    .option
+    {
+      label { vertical-align: top; }
+    }
+    .small
+    {
+      font-size: 10px;
+      vertical-align: top;
+      margin-left: 8px;
+    }
+    .custom_date
+    {
+      margin: 8px 0 0 25px;
+      visibility: hidden;
+      opacity: 0;
+      span.field-title {
+        display: inline-block;
+        margin-bottom: 4px;
+        color: #444;
+        //margin-left: 8px;
+        font-size: 12px;
+        width: 100%;
+        text-align: left;
+        vertical-align: middle;
+        line-height: 26px;
+        &::before
+        {
+          font-size: 20px;
+          vertical-align: top;
+          margin-right: 4px;
+        }
+      }
+    } // custom_date
+    .location_option
+    {
+      display: none;
+      margin-top: 12px;
+      label
+      {
+        vertical-align: baseline;
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .form_controls.wrapper
+  {
+    clear: both;
+    margin: 8px 0 15px 0;
+    border: 0;
+    padding: 0;
+    .button
+    {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  .shortpixel.notice
+  {
+     padding: 12px;
+  }
+
+	// *** UPSELL SNIPPET
+  .shortpixel-offer
+  {
+    background: #fff;
+    width: 250px;
+    min-height: 270px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    //margin: 0 0 10px 25px;
+    margin-bottom: 10px;
+    float: right;
+    clear: both;
+		background-color: #dcfdff;
+    h3 {
+      color: #00d0e5;
+      font-size: 18px;
+      text-align: center;
+      margin: 0;
+      line-height: 1.3em;
+    }
+		h4 {
+			// margin: 0;
+			 font-size: 16px;
+			 text-align: center;
+		}
+		.red { color: #ff0000; }
+		.cyan { color: #00d0e5; }
+		.grey { color: grey; }
+		.ucase { text-transform: uppercase; }
+		 a {
+			 	text-decoration: none
+		 }
+    .button-wrapper
+    {
+      text-align: center;
+      margin-top: 35px;
+      a {
+        background-color: #ff0000;
+        color: #fff;
+        display: inline-block;
+        padding: 8px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 20px;
+				text-transform: uppercase;
+      }
+    }
+		.hidden { display: none !important; }
+
+    .img-wrapper
+    {
+      text-align: center;
+      margin: 0 0 25px 0;
+      img { max-width: 140px; max-height: 140px; margin: 0; }
+    }
+
+
+		&.spio  // shortpixel
+		{
+		}
+    &.site-speed // Site speed
+    {
+    }
+		&.envira-shortpixel-install // envira
+		{
+				background: #fff;
+		}
+		&.theme-offer
+		{
+			 background: #fff;
+			 img {
+				 max-width: 100%;
+			 }
+		}
+  }
+
+  @media( max-width: 1200px)
+  {
+      .image_previews
+      {
+         text-align: center;
+      }
+      .option-flex-wrapper {
+        flex-direction: column;
+        .options.wrapper
+        { margin-left: 0;}
+      }
+  }
+  @media (max-width: 960px)
+  {
+    .upsell-wrapper { display: none; }
+  }
+	@media (max-width: 450px )
+	{
+			.replace_custom_date_wrapper {
+				 display: block;
+				 margin-top: 15px;
+				 font-size: 16px;
+
+			}
+			.location_option {
+				 label {
+					 	margin: 25px 0;
+						display: inline-block;
+				}
+
+			}
+	}
+} // emr_upload_form
