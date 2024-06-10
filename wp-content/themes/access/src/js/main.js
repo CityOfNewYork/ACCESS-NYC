@@ -161,30 +161,17 @@ import WebShare from 'utilities/web-share/web-share';
   });
 
   /**
-   * Capture the queries on Search page
-   */
-  (element => {
-    if (~window.location.href.indexOf('?s=') && element) {
-      window.addEventListener('load', () => {
-        let key = element.dataset.wtSearchKey;
-        let data = JSON.parse(element.dataset.wtSearchData);
-
-        Track.webtrends(key, data);
-      });
-    }
-  })(document.querySelector('[data-js="wt-search"]'));
-
-  /**
    * Submit the search form when a category is chosen.
    */
   (element => {
     if (element) {
-      let submitSearch = event => {
-        event.target.closest('form').submit();
+      let onFilter = event => {
+        var searchParams = new URLSearchParams(window.location.search);
+        searchParams.set("program_cat", event.target.value);
+        window.location.search = searchParams.toString();
       };
 
-      element.addEventListener('change', submitSearch);
-      element.addEventListener('input', submitSearch);
+      element.addEventListener('input', onFilter);
     }
   })(document.querySelector('[data-js="program-search-filter"]'));
 

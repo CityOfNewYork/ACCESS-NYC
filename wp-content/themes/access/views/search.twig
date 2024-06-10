@@ -4,22 +4,7 @@
 <main class="color-light-background" id="content">
   <form class="js-filtered-search" method="get" action="/">
     {{ fn('do_action', 'wpml_add_language_form_field' ) }}
-
-    {# <header class="c-header flex-col color-dark-background mb-3">
-      <label class="type-small w-full mb-2" for="program-search-field">{{__('Showing results for', 'accessnyctheme')}}</label>
-
-      <div class="input-search w-full">
-        <input name="s" type="text" value="{{ query }}" id="program-search-field" data-js="wt-search" data-wt-search-key="Search Results" data-wt-search-data='[{"WT.oss": "{{ query }}", "WT.oss_r": "{{ posts|length }}"}]'>
-
-        <button class="btn-text input-search__submit" type="submit">
-          <svg class="icon icon-ui-search">
-            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-ui-search"></use>
-
-          </svg><span class="sr-only">{{__('Submit', 'accessnyctheme')}}</span>
-        </button>
-      </div>
-    </header> #}
-
+    
     {% if alerts %}
     <div class="p-2 screen-tablet:p-3">
       {% for alert in alerts %}
@@ -30,7 +15,7 @@
     </div>
     {% endif %}
 
-    <div class="wrap screen-desktop:layout-sidebar-small-gutter">
+    <div class="wrap screen-desktop:layout-sidebar-small-gutter mt-3">
       <aside>
         <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
 
@@ -50,7 +35,9 @@
           {% else %}
             {# {% include 'partials/post-teaser.twig' %} #}
             {% for post in posts %}
-              {% include 'components/card.twig' with {'post': post} only %}
+              {% if searchCategory == '' or post.category_slug == searchCategory.slug %}
+                {% include 'components/card.twig' with {'post': post} only %}
+              {% endif %}
             {% endfor %}
           {% endif %}
         </div>

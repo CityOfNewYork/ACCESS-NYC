@@ -11,6 +11,7 @@
     </li>
     {% for category in categories %}
     <li>
+    {# TODO: indicate which filter is selected ("checked" is not doing anything)#}
       <label class="c-filter__item" for="filter-{{ category.slug }}" tabindex="-1">
         <input {% if category.slug == searchCategory.slug %}checked {% endif %}class="js-filter-radio sr-only" type="radio" name="program_cat" id="filter-{{ category.slug }}" value="{{ category.slug }}" tabindex="-1">{{ category.name }}
       </label>
