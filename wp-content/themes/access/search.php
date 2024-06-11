@@ -120,7 +120,8 @@ if (isset($_GET['program_cat'])) {
     'taxonomy' => 'programs', // the program category taxonomy
     'field' => 'slug',
     'terms' => $program_cat_slug
-  ));
+  )
+  );
 } else {
   $context['searchCategory'] = '';
 }
