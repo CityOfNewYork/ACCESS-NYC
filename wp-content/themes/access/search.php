@@ -112,6 +112,9 @@ $wp_query_arr = array(
   'nopaging' => true
 );
 
+// Sourabh: this was previously "program_cat", but that made the language switcher break
+// I'm not sure why, but the answer probably has to do with plugins/sitpress-multilingual-cms/sitepress.class.php
+// in the get_ls_languages function
 if (isset($_GET['program_category'])) {
   $program_cat_slug = $_GET['program_category'];
   $context['searchCategory'] = get_term_by('slug', $program_cat_slug, 'programs');
