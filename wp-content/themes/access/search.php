@@ -104,19 +104,28 @@ if (isset($_GET['lang'])) {
   }
 }
 
+$context['query'] = get_search_query();
+
+$wp_query_arr = array(
+  's' => $context['query'],
+  'post_type' => array('programs'),
+  'nopaging' => true
+);
+
 if (isset($_GET['program_cat'])) {
-  $context['searchCategory'] = get_term_by('slug', $_GET['program_cat'], 'programs');
+  $program_cat_slug = $_GET['program_cat'];
+  $context['searchCategory'] = get_term_by('slug', $program_cat_slug, 'programs');
+
+  $wp_query_arr['tax_query'] = array(array(
+    'taxonomy' => 'programs', // the program category taxonomy
+    'field' => 'slug',
+    'terms' => $program_cat_slug
+  ));
 } else {
   $context['searchCategory'] = '';
 }
 
-$context['query'] = get_search_query();
-
-$wp_query = new WP_Query(array(
-  's' => $context['query'],
-  'post_type' => array('programs'),
-  'nopaging' => true
-));
+$wp_query = new WP_Query($wp_query_arr);
 relevanssi_do_query($wp_query);
 
 if ($wp_query->found_posts > 0) {

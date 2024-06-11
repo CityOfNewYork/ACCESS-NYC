@@ -33,11 +33,8 @@
             <a class="js-filter-reset" href="/?s={{ query }}">{{ __('Clear filters.', 'accessnyctheme' )}}</a>
           </h1>
           {% else %}
-            {# {% include 'partials/post-teaser.twig' %} #}
             {% for post in posts %}
-              {% if searchCategory == '' or post.category_slug == searchCategory.slug %}
-                {% include 'components/card.twig' with {'post': post} only %}
-              {% endif %}
+              {% include 'components/card.twig' with {'post': post} only %}
             {% endfor %}
           {% endif %}
         </div>
