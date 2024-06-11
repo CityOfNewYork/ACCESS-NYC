@@ -112,8 +112,8 @@ $wp_query_arr = array(
   'nopaging' => true
 );
 
-if (isset($_GET['program_cat'])) {
-  $program_cat_slug = $_GET['program_cat'];
+if (isset($_GET['program_category'])) {
+  $program_cat_slug = $_GET['program_category'];
   $context['searchCategory'] = get_term_by('slug', $program_cat_slug, 'programs');
 
   $wp_query_arr['tax_query'] = array(array(

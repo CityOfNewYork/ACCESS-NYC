@@ -167,7 +167,7 @@ import WebShare from 'utilities/web-share/web-share';
     if (element) {
       let onFilter = event => {
         var searchParams = new URLSearchParams(window.location.search);
-        searchParams.set("program_cat", event.target.value);
+        searchParams.set("program_category", event.target.value);
         window.location.search = searchParams.toString();
       };
 
