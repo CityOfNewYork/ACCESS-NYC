@@ -1,0 +1,31 @@
+
+/* Styling for the edit attachment screen */
+#emr-replace-box, #emr-showthumbs-box
+{
+  .previewwrapper
+  {
+    display: inline-block;
+    position: relative;
+    clear: both;
+    margin: 3px 0;
+
+    img { max-width: 100%; }
+    span.label
+    {
+      font-size: 14px;
+      color: #fff;
+      position: absolute;
+      line-height: 16px;
+      margin-top: -8px;
+      top: 50%;
+      left: 0; right: 0;
+      background: rgba(0,0,0,0.5);
+      text-align: center;
+      padding: 4px 0;
+
+
+    }
+
+  }
+
+}
