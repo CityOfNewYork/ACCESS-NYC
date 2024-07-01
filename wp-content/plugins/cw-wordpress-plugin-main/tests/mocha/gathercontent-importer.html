@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mocha Tests</title>
+	<!-- Mocha styles -->
+	<link href="../../node_modules/mocha/mocha.css" rel="stylesheet">
+</head>
+<body>
+<div id="mocha"></div>
+<!-- Mocha Scripts -->
+<script src="../../node_modules/mocha/mocha.js"></script>
+<!-- Chai Scripts -->
+<script src="../../node_modules/chai/chai.js"></script>
+<script>
+	mocha.setup('bdd');
+</script>
+
+<!-- test HTML here-->
+
+<!-- links to test files here -->
+<script src="tests/gathercontent-importer.js"></script>
+<!-- run mocha after all test are loaded -->
+<script charset="utf-8" type="text/javascript">
+	mocha.run();
+</script>
+</body>
+</html>

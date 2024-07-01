@@ -1,0 +1,39 @@
+{
+  "name": "content-workflow/wp-importer",
+  "description": "Imports items from Content Workflow to your wordpress site",
+  "version": "1.0.0",
+  "type": "wordpress-plugin",
+  "keywords": [],
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "Content Workflow (by Bynder)",
+      "email": "support@gathercontent.com",
+      "homepage": "https://www.bynder.com/en/products/content-workflow/",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.0",
+    "techcrunch/wp-async-task": "dev-master",
+    "ralouphie/mimey": "^1.0"
+  },
+  "require-dev": {
+    "antecedent/patchwork": "2.1.*",
+    "phpunit/phpunit": "^9.4",
+    "brianium/paratest": "dev-master",
+    "10up/wp_mock": "0.4.2",
+    "dealerdirect/phpcodesniffer-composer-installer": "*",
+    "phpcompatibility/php-compatibility": "*",
+    "wp-coding-standards/wpcs": "*"
+  },
+  "scripts": {
+    "phpcbf": "./vendor/bin/phpcbf --standard=WordPress"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": false
+    }
+  }
+}

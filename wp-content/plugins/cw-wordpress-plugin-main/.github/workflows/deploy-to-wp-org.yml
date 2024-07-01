@@ -1,0 +1,25 @@
+name: Deploy to WordPress.org
+on:
+    push:
+        tags:
+            - "*"
+jobs:
+    tag:
+        name: New tag
+        runs-on: ubuntu-latest
+        steps:
+            # Clone the repo
+            -   uses: actions/checkout@master
+            # Prepare the release
+            -   run: ls
+            -   run: "composer install --no-dev"
+            # Release to WordPress.org
+            -   name: WordPress Plugin Deploy
+                id: deploy
+                uses: 10up/action-wordpress-plugin-deploy@2.2.2
+                with:
+                    generate-zip: true
+                env:
+                    SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+                    SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+                    SLUG: gathercontent-import

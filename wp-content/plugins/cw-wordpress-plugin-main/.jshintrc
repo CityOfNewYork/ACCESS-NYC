@@ -1,0 +1,25 @@
+{
+	"curly": true,
+	"eqeqeq": true,
+	"immed": true,
+	"latedef": true,
+	"newcap": true,
+	"noarg": true,
+	"sub": true,
+	"undef": true,
+	"boss": true,
+	"eqnull": true,
+	"validthis": true,
+	"globals": {
+		"exports": true,
+		"module": false,
+		"console": true,
+		"require": true,
+		"document": true,
+		"jQuery": true,
+		"wp": true,
+		"Backbone": true,
+		"_": true,
+		"window": true
+	}
+}

@@ -1,0 +1,51 @@
+{
+  "name": "gathercontent-importer",
+  "title": "Content Workflow (by Bynder)",
+  "description": "Imports items from Content Workflow to your wordpress site",
+  "version": "1.0.0",
+  "license": "GPLv2",
+  "scripts": {
+    "build": "grunt build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bynder/cw-wordpress-plugin"
+  },
+  "author": {
+    "name": "Content Workflow (by Bynder)",
+    "email": "support@gathercontent.com",
+    "url": "https://www.bynder.com/products/content-workflow/"
+  },
+  "engines": {
+    "node": ">=14.0.0 <16.20.3"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.7.7",
+    "babelify": "^6.3.0",
+    "browserify": "^11.1.0",
+    "browserify-shim": "^3.8.14",
+    "chai": "^3.5.0",
+    "glob": "~5.0.15",
+    "grunt": "^1.6.1",
+    "grunt-browserify": "^4.0.1",
+    "grunt-contrib-compress": "^2.0.0",
+    "grunt-sass": "^3.1.0",
+    "grunt-postcss": "^0.9.0",
+    "grunt-contrib-jshint": "^3.2.0",
+    "grunt-contrib-uglify": "^5.2.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^5.0.0",
+    "grunt-wp-readme-to-markdown": "^0.9.0",
+    "load-grunt-config": "~0.17.2",
+    "load-grunt-tasks": "^3.5.2",
+    "node-sass": "^9.0.0"
+  },
+  "browserify-shim": {
+    "jquery": "global:jQuery"
+  },
+  "keywords": [],
+  "dependencies": {
+    "grunt-dev-update": "^2.3.0",
+    "grunt-update": "^0.2.3"
+  }
+}
