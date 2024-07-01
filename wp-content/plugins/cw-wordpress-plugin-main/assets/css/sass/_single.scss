@@ -1,0 +1,102 @@
+#poststuff #gc-manage .inside {
+	margin: 0;
+	padding: 0;
+}
+
+.gc-major-publishing-actions {
+	padding: 10px;
+	// margin: 10px -12px -12px;
+	clear: both;
+	border-top: 1px solid #ddd;
+	background: #f5f5f5;
+}
+
+.gc-publishing-action {
+	text-align: right;
+	float: right;
+	line-height: 23px;
+
+	button.button, .button {
+		margin-left: .5em;
+	}
+}
+
+#gc-manage {
+	.dashicons {
+		color: #82878c;
+	}
+}
+
+#gc-status-selec2 {
+	padding: 5px 0;
+}
+
+#gc-related-data {
+	overflow: hidden;
+
+	&.no-js, &.gc-mapping-metabox:not( .gc-mapping-started ) {
+		text-align: center;
+	}
+
+	.spinner {
+		float: none;
+		margin: .2em;
+	}
+
+	> p {
+		text-align: center;
+	}
+}
+
+.misc-pub-post-status {
+	.gc-status-color {
+		display: block;
+		margin-top: 2px;
+		margin-left: 4px;
+	}
+
+	.gc-status-name {
+		font-weight: 600;
+	}
+}
+
+.gc-status-status {
+	&.current {
+		color: $greendk;
+	}
+
+	&.not-current {
+		color: $reddk;
+	}
+}
+
+.gc-no-mapping {
+	.spinner {
+		display: none;
+
+		&.is-active {
+			display: inline-block;
+		}
+	}
+
+	.gc-publishing-action {
+		text-align: center;
+		float: none;
+
+		button.button, .button {
+			margin-left: 0;
+		}
+	}
+}
+
+.gc-mapping-started {
+	label {
+		margin-bottom: .2em;
+		display: block;
+	}
+}
+
+.gc-metabox-status {
+	display: inline-block;
+	position: relative;
+}
