@@ -1,0 +1,112 @@
+{
+    "packages": [
+        {
+            "name": "ralouphie/mimey",
+            "version": "1.0.2",
+            "version_normalized": "1.0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ralouphie/mimey.git",
+                "reference": "2a0e997c733b7c2f9f8b61cafb006fd5fb9fa15a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ralouphie/mimey/zipball/2a0e997c733b7c2f9f8b61cafb006fd5fb9fa15a",
+                "reference": "2a0e997c733b7c2f9f8b61cafb006fd5fb9fa15a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7.0",
+                "satooshi/php-coveralls": ">=1.0"
+            },
+            "time": "2016-09-28T03:36:23+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Mimey\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ralph Khattar",
+                    "email": "ralph.khattar@gmail.com"
+                }
+            ],
+            "description": "PHP package for converting file extensions to MIME types and vice versa.",
+            "support": {
+                "issues": "https://github.com/ralouphie/mimey/issues",
+                "source": "https://github.com/ralouphie/mimey/tree/master"
+            },
+            "install-path": "../ralouphie/mimey"
+        },
+        {
+            "name": "techcrunch/wp-async-task",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/techcrunch/wp-async-task.git",
+                "reference": "9bdbbf9df4ff5179711bb58b9a2451296f6753dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/techcrunch/wp-async-task/zipball/9bdbbf9df4ff5179711bb58b9a2451296f6753dc",
+                "reference": "9bdbbf9df4ff5179711bb58b9a2451296f6753dc",
+                "shasum": ""
+            },
+            "require-dev": {
+                "10up/wp_mock": "dev-master",
+                "phpunit/phpunit": "*@stable"
+            },
+            "time": "2016-03-10T17:37:13+00:00",
+            "default-branch": true,
+            "type": "wordpress-plugin",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "wp-async-task.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Khadiwala",
+                    "role": "developer"
+                },
+                {
+                    "name": "Nicolas Vincent",
+                    "role": "developer"
+                },
+                {
+                    "name": "Eric Mann",
+                    "email": "eric.mann@10up.com",
+                    "role": "developer"
+                },
+                {
+                    "name": "John P. Bloch",
+                    "email": "john.bloch@10up.com",
+                    "role": "developer"
+                }
+            ],
+            "description": "Run asynchronous tasks for long-running operations in WordPress",
+            "support": {
+                "issues": "https://github.com/techcrunch/wp-async-task/issues",
+                "source": "https://github.com/techcrunch/wp-async-task/tree/master"
+            },
+            "install-path": "../techcrunch/wp-async-task"
+        }
+    ],
+    "dev": false,
+    "dev-package-names": []
+}
