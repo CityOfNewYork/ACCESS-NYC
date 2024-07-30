@@ -124,6 +124,8 @@ $context['alerts'] = array_map(function($post) {
 
 $context['schema'] = encode_schema($context['schema']);
 
+$context['page_type'] = 'eligible';
+
 /**
  * Render the view
  */
