@@ -392,26 +392,6 @@
             "wpml_cf_preferences": 0
         },
         {
-            "key": "field_589d49b8ced1e",
-            "label": "Display Screen for Eligibility Box",
-            "name": "display_screen_for_eligibility_box",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "Unchecking this box will hide the eligibility screener notification box.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": 1,
-            "message": "",
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
             "key": "field_58912c1a8a82d",
             "label": "Plain Language Eligibility",
             "name": "plain_language_eligibility",
@@ -1089,10 +1069,9 @@
         "discussion",
         "comments"
     ],
-    "active": 1,
+    "active": true,
     "description": "",
-    "show_in_rest": false,
-    "modified": 1714587205,
-    "local_file": "\/var\/www\/html\/wp-content\/themes\/access\/acf-json\/group_58912c1a62a9d.json",
-    "acfml_field_group_mode": "advanced"
+    "show_in_rest": 0,
+    "acfml_field_group_mode": "translation",
+    "modified": 1722449254
 }
