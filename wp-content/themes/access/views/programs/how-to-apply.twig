@@ -1,8 +1,6 @@
 <section id="how-to-apply" data-step="how-to-apply" class="outline-none active hidden:overflow print:active w-full" aria-hidden="false">
   <header>
     <h3>{{ stepNumber }}. {{ __('How to apply', 'accessnyc-program-detail') }}</h3>
-
-    <h4 class="font-normal">{{ __('Here are your options.', 'accessnyc-program-detail') }}</h4>
   </header>
 
   {# {% set sections = [
@@ -85,7 +83,28 @@
       } %}
     {% endif %}
 
-    {% include 'components/accordion.twig' with {this: this} only %}
+    <article id="{{ this.id }}" class="c-accordion">
+      <header class="c-accordion__header color-dark-background">
+        <p id="aria-lb-{{ this.id }}">
+          {{ this.header }}
+        </p>
+      </header>
+
+      <div class="c-accordion__body color-mid-background text-small screen-tablet:text-normal print:active hidden:overflow animated">
+        <div class="c-accordion__padding">
+          {{ this.body }}
+
+          {% if this.cta %}
+          <p class="print:hidden">
+            {% if this.itemtype %}<span class="hidden" aria-hidden="true">{{ this.cta.href }}</span>{% endif %}
+            <a class="btn btn-secondary btn-next text-small" href="{{ this.cta.href }}" {% if this.cta.target %}target="{{ this.cta.target }}"{% endif %} {% if this.cta.rel %}rel="{{ this.cta.rel }}"{% endif %}>
+              {{ this.cta.text }}
+            </a>
+          </p>
+          {% endif %}
+        </div>
+      </div>
+    </article>
   {% endfor %}
 
   <div class="c-alert-box bg-status-info print:hidden">
