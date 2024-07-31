@@ -8,7 +8,6 @@ import TranslateElement from 'modules/google-translate-element';
 import Accordion from 'components/accordion/accordion';
 import Filter from 'components/filter/filter';
 import AlertBanner from 'objects/alert-banner/alert-banner';
-import TextController from 'objects/text-controller/text-controller';
 
 // Patterns Framework
 import Icons from 'utilities/icons/icons';
@@ -17,6 +16,8 @@ import Copy from 'utilities/copy/copy';
 import localize from 'utilities/localize/localize';
 import Newsletter from 'utilities/newsletter/newsletter';
 import WebShare from 'utilities/web-share/web-share';
+
+import TextController from './toggle-controller';
 
 (function(window) {
   'use strict';
