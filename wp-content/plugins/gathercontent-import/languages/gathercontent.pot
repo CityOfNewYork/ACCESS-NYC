@@ -1,0 +1,301 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: GatherContent Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-22 00:40-0000\n"
+"PO-Revision-Date: 2015-07-22 00:41-0000\n"
+"Last-Translator: Mathew Chapman <mat@gathercontent.com>\n"
+"Language-Team: GatherContent <support@gathercontent.com>\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: curl.php:181 curl.php:191
+msgid "All"
+msgstr ""
+
+#: curl.php:292
+msgid "New entry"
+msgstr ""
+
+#: curl.php:299
+msgid "NONE"
+msgstr ""
+
+#: curl.php:302
+msgid "Parent Being Imported"
+msgstr ""
+
+#: curl.php:390
+msgid "Search... "
+msgstr ""
+
+#: curl.php:413 curl.php:414
+msgid "Title"
+msgstr ""
+
+#: curl.php:416 curl.php:417
+msgid "Caption"
+msgstr ""
+
+#: curl.php:419 curl.php:420
+msgid "Description"
+msgstr ""
+
+#: curl.php:422 curl.php:423
+msgid "Alt Text"
+msgstr ""
+
+#: curl.php:427
+#, php-format
+msgid "%s Title"
+msgstr ""
+
+#: curl.php:428
+#, php-format
+msgid "%s Content"
+msgstr ""
+
+#: curl.php:429
+#, php-format
+msgid "%s Excerpt"
+msgstr ""
+
+#: curl.php:430
+msgid "Featured Image"
+msgstr ""
+
+#: curl.php:431
+msgid "Tags"
+msgstr ""
+
+#: curl.php:432 curl.php:760
+msgid "Category"
+msgstr ""
+
+#: curl.php:433
+msgid "Author"
+msgstr ""
+
+#: curl.php:566 curl.php:567
+msgid "New Custom Field"
+msgstr ""
+
+#: curl.php:570 curl.php:571
+msgid "Do Not Import"
+msgstr ""
+
+#: curl.php:593
+msgid "Choose category"
+msgstr ""
+
+#: curl.php:752
+msgid "Import as"
+msgstr ""
+
+#: curl.php:756
+msgid "Import to"
+msgstr ""
+
+#: curl.php:764
+msgid "Parent"
+msgstr ""
+
+#: curl.php:768
+msgid "Status"
+msgstr ""
+
+#: curl.php:772
+msgid "Format"
+msgstr ""
+
+#: curl.php:776
+msgid "Repeat this configuration"
+msgstr ""
+
+#: curl.php:827
+#, php-format
+msgid ""
+"This item is empty. You can %sadd some content to this item in GatherContent"
+"%s."
+msgstr ""
+
+#: curl.php:866
+msgid "Tab"
+msgstr ""
+
+#: curl.php:868
+msgid "Map to"
+msgstr ""
+
+#: curl.php:926
+msgid ""
+"There was a problem contacting the API. Please check your server allows it."
+msgstr ""
+
+#: curl.php:933
+#, php-format
+msgid ""
+"There was a problem contacting the API. Please check your API credentials. "
+"%sAuth Settings%s"
+msgstr ""
+
+#: curl.php:968
+msgid "(no title)"
+msgstr ""
+
+#: gathercontent.php:175 gathercontent.php:182 gathercontent.php:195
+#: gathercontent.php:391
+msgid "Verification failed, please refreshing the item and try again ."
+msgstr ""
+
+#: gathercontent.php:291
+#, php-format
+msgid "There was an error with the file (%s)"
+msgstr ""
+
+#: gathercontent.php:296 gathercontent.php:310
+#, php-format
+msgid "Retrying to download (%s)"
+msgstr ""
+
+#: gathercontent.php:305
+#, php-format
+msgid "Failed to download the file (%s)"
+msgstr ""
+
+#: gathercontent.php:688 gathercontent.php:693
+msgid "There was a problem importing the item, please refresh and try again ."
+msgstr ""
+
+#: view/curl-error.php:5
+msgid "cURL not found"
+msgstr ""
+
+#: view/curl-error.php:8
+msgid ""
+"cURL was not found on your server. GatherContent requires cURL in order to "
+"connect to our services API. Please contact your host/webmaster to request "
+"they enable cURL."
+msgstr ""
+
+#: view/curl-error.php:9
+#, php-format
+msgid ""
+"If you have cURL installed and are seeing this error, please contact "
+"%ssupport@gathercontent.com%s"
+msgstr ""
+
+#: view/finished.php:5
+msgid "Success!"
+msgstr ""
+
+#: view/finished.php:9
+msgid "All of your selected content has been imported."
+msgstr ""
+
+#: view/finished.php:12
+msgid "Go back to project"
+msgstr ""
+
+#: view/item-import.php:10
+msgid "Importing items and text content..."
+msgstr ""
+
+#: view/item-import.php:11 view/media.php:11
+msgid "Item:"
+msgstr ""
+
+#: view/item-import.php:17
+msgid "Repeating configuration..."
+msgstr ""
+
+#: view/item-import.php:21 view/items.php:9
+msgid "Choose items to import"
+msgstr ""
+
+#: view/item-import.php:21 view/items.php:9
+msgid "Choose account"
+msgstr ""
+
+#: view/item-import.php:27
+msgid "Select different items"
+msgstr ""
+
+#: view/item-import.php:30 view/item-import.php:48
+msgid "Import selected items"
+msgstr ""
+
+#: view/item-import.php:37 view/items.php:27
+msgid "Items"
+msgstr ""
+
+#: view/items.php:19
+msgid "Search..."
+msgstr ""
+
+#: view/items.php:20 view/items.php:38
+msgid "Configure selected items"
+msgstr ""
+
+#: view/login.php:5
+msgid "Connect to your GatherContent account"
+msgstr ""
+
+#: view/login.php:9
+msgid "Your login URL"
+msgstr ""
+
+#: view/login.php:15
+msgid "API Key"
+msgstr ""
+
+#: view/login.php:15
+msgid ""
+"You can find your unique API key inside your GatherContent account by going "
+"to Personal Settings and opening the API tab."
+msgstr ""
+
+#: view/login.php:19
+msgid "Connect account"
+msgstr ""
+
+#: view/media.php:5
+msgid "Importing files"
+msgstr ""
+
+#: view/media.php:9
+msgid ""
+"<strong>Heads up!</strong> This process can take a while, it depends on how "
+"many files you have attached to your items. Just think how much time you're "
+"saving."
+msgstr ""
+
+#: view/media.php:15
+msgid "Overall Progress"
+msgstr ""
+
+#: view/media.php:20
+msgid "Cancel"
+msgstr ""
+
+#: view/projects.php:9
+msgid "Choose a project to import content from"
+msgstr ""
+
+#: view/projects.php:22
+msgid "No projects found"
+msgstr ""
+
+#: view/projects.php:26
+msgid "Change account settings"
+msgstr ""
+
+#: view/projects.php:30
+msgid "Import content"
+msgstr ""
