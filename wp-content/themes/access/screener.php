@@ -125,6 +125,13 @@ $context['alerts'] = array_map(function($post) {
 $context['schema'] = encode_schema($context['schema']);
 
 /**
+ * To disable newsletter form on screener pages,
+ * declare a variable 'page_type'
+ */
+
+$context['page_type'] = 'screener';
+
+/**
  * Render the view
  */
 
