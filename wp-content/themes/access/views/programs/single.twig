@@ -135,10 +135,6 @@
       </div>
       {% endif %} #}
 
-      <div class="wrap text-end pb-3">
-        <a href="#content" class="btn btn-small text-blue pointer-events-auto">{{ __('Back to top', 'accessnyctheme') }}</a>
-      </div>
-
       {% if alert_sitewide %}
       {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
       {% endif %}
