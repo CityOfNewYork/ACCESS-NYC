@@ -8,7 +8,6 @@ import TranslateElement from 'modules/google-translate-element';
 import Accordion from 'components/accordion/accordion';
 import Filter from 'components/filter/filter';
 import AlertBanner from 'objects/alert-banner/alert-banner';
-import TextController from 'objects/text-controller/text-controller';
 
 // Patterns Framework
 import Icons from 'utilities/icons/icons';
@@ -40,6 +39,14 @@ import WebShare from 'utilities/web-share/web-share';
   let accordion = new Accordion();
   accordion._toggle.settings.focusable = false;
 
+  /* The component selector */
+  let TextControllerSelector = '[data-js="text-controller"]';
+
+  /* Element selectors within the component */
+  let TextControllerSelectors = {
+    TOGGLE: '[data-js*="text-controller__control"]'
+  };
+
   /**
    * Instantiate Web Share and tracking callback
    */
@@ -64,17 +71,15 @@ import WebShare from 'utilities/web-share/web-share';
   })(document.querySelector(AlertBanner.selector));
 
   /**
-   * Instantiate Text Controller
+   * Instantiate Toggle for text Controller
    */
   (element => {
     if (element) {
-      let textController = new TextController(element);
-
-      // Disable the feature for setting the tabindex of potentially focusable
-      // elements within the component to prevent conflicts.
-      textController._toggle.settings.focusable = false;
+      if(element) new Toggle({
+        selector: TextControllerSelectors.TOGGLE
+      });
     }
-  })(document.querySelector(TextController.selector));
+  })(document.querySelector(TextControllerSelector));
 
   /**
    * Instantiate Newsletter and pass it translated strings
