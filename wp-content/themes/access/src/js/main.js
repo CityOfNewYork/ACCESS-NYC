@@ -17,8 +17,6 @@ import localize from 'utilities/localize/localize';
 import Newsletter from 'utilities/newsletter/newsletter';
 import WebShare from 'utilities/web-share/web-share';
 
-import TextController from './toggle-controller';
-
 (function(window) {
   'use strict';
 
@@ -40,6 +38,14 @@ import TextController from './toggle-controller';
   // elements within the component to prevent conflicts.
   let accordion = new Accordion();
   accordion._toggle.settings.focusable = false;
+
+  /* The component selector */
+  let TextControllerSelector = '[data-js="text-controller"]';
+
+  /* Element selectors within the component */
+  let TextControllerSelectors = {
+    TOGGLE: '[data-js*="text-controller__control"]'
+  };
 
   /**
    * Instantiate Web Share and tracking callback
@@ -65,17 +71,15 @@ import TextController from './toggle-controller';
   })(document.querySelector(AlertBanner.selector));
 
   /**
-   * Instantiate Text Controller
+   * Instantiate Toggle for text Controller
    */
   (element => {
     if (element) {
-      let textController = new TextController(element);
-
-      // Disable the feature for setting the tabindex of potentially focusable
-      // elements within the component to prevent conflicts.
-      textController._toggle.settings.focusable = false;
+      if(element) new Toggle({
+        selector: TextControllerSelectors.TOGGLE
+      });
     }
-  })(document.querySelector(TextController.selector));
+  })(document.querySelector(TextControllerSelector));
 
   /**
    * Instantiate Newsletter and pass it translated strings
