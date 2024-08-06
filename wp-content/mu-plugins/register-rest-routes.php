@@ -79,7 +79,7 @@ add_action('rest_api_init', function() {
         $data = array_map(function ($tax) {
           $tax['terms'] = get_terms(array(
             'taxonomy' => $tax['name'],
-            'hide_empty' => false,
+            'hide_empty' => true,
           ));
           return $tax;
         }, $data);
