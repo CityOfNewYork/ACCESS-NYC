@@ -81,7 +81,7 @@ preload_fonts($context['language_code']);
 $context['categories'] = get_categories(array(
   'post_type' => 'programs',
   'taxonomy' => 'programs',
-  'hide_empty' => false
+  'hide_empty' => true
 ));
 
 // Add label key for string translation
