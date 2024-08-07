@@ -14,12 +14,13 @@ add_action('wp_ajax_nopriv_feedback', 'FeedbackNYC\feedbackHandler');
  */
 function feedbackHandler() {
   $nonce = $_POST['feedback-nonce'];
-
-  $recaptcha = [
-    'secret'=> "6Lf0tTgUAAAAACnS4fRKqbLll_oFxFzeaVfbQxyX",
-    'response'=> $_POST['g-recaptcha-response']
-  ];
-
+  if (defined('GRECAPTCHA_SITE_SECRET')){
+    $recaptcha = [
+      'secret'=> GRECAPTCHA_SITE_SECRET,
+      'response'=> $_POST['g-recaptcha-response']
+    ];
+  }
+  
   $headers = [
     'Content-type: application/x-www-form-urlencoded',
   ];
@@ -32,31 +33,37 @@ function feedbackHandler() {
   curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($recaptcha));
   curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);
   $response = json_decode(curl_exec($curl));
-  var_dump($response);
-  //wp_send_json($recaptcha);
+  $responseResult = $response->success;
 
-  /*if (wp_verify_nonce($nonce, 'feedback')) {
-    try {
-      $client = get_airtable_client();
-      $feedback_fields = get_values_from_submission($_POST);
-      $airtable_record = create_record($feedback_fields, $client);
-
-      wp_send_json([
-        'success' => true,
-        'error' => 200,
-        'message' => __('Thank you for your feedback.'),
-        'retry' => false
-      ]);
-    } catch (Exception $e) {
-      $message = $e->getMessage();
-
+  if($responseResult == true)
+  {
+    if (wp_verify_nonce($nonce, 'feedback')) {
+      try {
+        $client = get_airtable_client();
+        $feedback_fields = get_values_from_submission($_POST);
+        $airtable_record = create_record($feedback_fields, $client);
+  
+        wp_send_json([
+          'success' => true,
+          'error' => 200,
+          'message' => __('Thank you for your feedback.'),
+          'retry' => false
+        ]);
+      } catch (Exception $e) {
+        $message = $e->getMessage();
+  
+        failure(400, $message);
+      }
+    } else {
+      $message = 'Feedback form nonce not verified';
+  
       failure(400, $message);
-    }
-  } else {
-    $message = 'Feedback form nonce not verified';
-
-    failure(400, $message);
-  };*/
+    };
+  }
+  else{
+    failure(400, "User is a robot");
+  }
+  
 }
 
 /**
