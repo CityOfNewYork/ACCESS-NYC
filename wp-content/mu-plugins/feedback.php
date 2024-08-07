@@ -16,8 +16,8 @@ function feedbackHandler() {
   $nonce = $_POST['feedback-nonce'];
 
   $recaptcha = [
-    'secret'=> "6Lf0tTgUAAAAACnS4fRKqbLll_oFxFzeaVfbQxyX",
-    'response'=> $_POST['g-recaptcha-response']
+    'secret' => "6Lf0tTgUAAAAACnS4fRKqbLll_oFxFzeaVfbQxyX",
+    'response' => $_POST['g-recaptcha-response']
   ];
 
   $headers = [
@@ -27,10 +27,10 @@ function feedbackHandler() {
   $url = 'https://www.google.com/recaptcha/api/siteverify';
   $curl = curl_init($url);
   curl_setopt($curl, CURLOPT_URL, $url);
-  curl_setopt($curl, CURLOPT_POST,1);
+  curl_setopt($curl, CURLOPT_POST, 1);
   curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
   curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($recaptcha));
-  curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
   $response = json_decode(curl_exec($curl));
   var_dump($response);
   //wp_send_json($recaptcha);
