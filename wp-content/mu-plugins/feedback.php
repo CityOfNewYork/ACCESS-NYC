@@ -15,7 +15,27 @@ add_action('wp_ajax_nopriv_feedback', 'FeedbackNYC\feedbackHandler');
 function feedbackHandler() {
   $nonce = $_POST['feedback-nonce'];
 
-  if (wp_verify_nonce($nonce, 'feedback')) {
+  $recaptcha = [
+    'secret'=> "6Lf0tTgUAAAAACnS4fRKqbLll_oFxFzeaVfbQxyX",
+    'response'=> $_POST['g-recaptcha-response']
+  ];
+
+  $headers = [
+    'Content-type: application/x-www-form-urlencoded',
+  ];
+  
+  $url = 'https://www.google.com/recaptcha/api/siteverify';
+  $curl = curl_init($url);
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_POST,1);
+  curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($recaptcha));
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);
+  $response = json_decode(curl_exec($curl));
+  var_dump($response);
+  //wp_send_json($recaptcha);
+
+  /*if (wp_verify_nonce($nonce, 'feedback')) {
     try {
       $client = get_airtable_client();
       $feedback_fields = get_values_from_submission($_POST);
@@ -36,7 +56,7 @@ function feedbackHandler() {
     $message = 'Feedback form nonce not verified';
 
     failure(400, $message);
-  };
+  };*/
 }
 
 /**
