@@ -14,10 +14,10 @@ add_action('wp_ajax_nopriv_feedback', 'FeedbackNYC\feedbackHandler');
  */
 function feedbackHandler() {
   $nonce = $_POST['feedback-nonce'];
-  if (defined('GRECAPTCHA_SITE_SECRET')){
+  if (defined('GRECAPTCHA_SITE_SECRET')) {
     $recaptcha = [
-      'secret'=> GRECAPTCHA_SITE_SECRET,
-      'response'=> $_POST['g-recaptcha-response']
+      'secret' => GRECAPTCHA_SITE_SECRET,
+      'response' => $_POST['g-recaptcha-response']
     ];
   }
   
@@ -28,15 +28,14 @@ function feedbackHandler() {
   $url = 'https://www.google.com/recaptcha/api/siteverify';
   $curl = curl_init($url);
   curl_setopt($curl, CURLOPT_URL, $url);
-  curl_setopt($curl, CURLOPT_POST,1);
+  curl_setopt($curl, CURLOPT_POST, 1);
   curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
   curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($recaptcha));
-  curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
   $response = json_decode(curl_exec($curl));
   $responseResult = $response->success;
 
-  if($responseResult == true)
-  {
+  if ($responseResult == true) {
     if (wp_verify_nonce($nonce, 'feedback')) {
       try {
         $client = get_airtable_client();
@@ -59,11 +58,9 @@ function feedbackHandler() {
   
       failure(400, $message);
     };
-  }
-  else{
+  } else {
     failure(400, "User is a robot");
   }
-  
 }
 
 /**
