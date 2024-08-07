@@ -9,16 +9,9 @@
 
   {% if post.heads_up | length %}
   <div id="how-it-works__checklist" class="o-content mb-4">
-    {{ post.get_field('field_58912c1a8a81b')|add_anyc_checklist|add_anyc_table_numeric }} {# heads_up #}
+    {{ post.get_field('field_58912c1a8a81b')|add_anyc_table_numeric }} {# heads_up #}
   </div>
 
-  <style>
-    {% for icon in post.get_field('field_589d4b65ced1f') %} {# heads_up_icons #}
-    #how-it-works__checklist > ul > li:nth-child({{ loop.index }}) {
-      background-image: url({{ icon.icon.url }});
-    }
-    {% endfor %}
-  </style>
   {% endif %}
 
   {% if nextStep != '' %}
