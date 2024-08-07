@@ -23,6 +23,10 @@ add_filter('timber/twig', function($twig) {
     return preg_replace("/<ul[^>]*>/", '<ul class="c-checklist">', $subject);
   }));
 
+  $twig->addFilter(new Timber\Twig_Filter('add_ul_margin', function($subject) {
+    return preg_replace("/<ul[^>]*>/", '<ul class="mt-3">', $subject);
+  }));
+
   /**
    * Add the numeric table class to <table> tags in a string of html content
    *
