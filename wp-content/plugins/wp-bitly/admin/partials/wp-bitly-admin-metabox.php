@@ -29,25 +29,27 @@
 </div>
 
 <script>
-    jQuery(document).ready(function(){
-        new Chartist.Line('.wpbitly-chart', {
-            labels: [<?php echo $labels_js; ?>],
-            series: [
-              [<?php echo $data_js; ?>]
-            ]
-          }, {
-            high: <?php echo $max; ?>,
-            low: 0,
-            fullWidth: true,
-            showArea: true,
-            showPoint: false,
-            axisY: {
-              onlyInteger: true
-            },
-            axisX: {
-              showLabel: false
-            }
-          });
-    });
+    jQuery(document).ready(function($) {
+       setTimeout(function () {
+            new Chartist.Line('.wpbitly-chart', {
+                labels: [<?php echo $labels_js; ?>],
+                series: [
+                  [<?php echo $data_js; ?>]
+                ]
+              }, {
+                high: <?php echo $max; ?>,
+                low: 0,
+                fullWidth: true,
+                showArea: true,
+                showPoint: false,
+                axisY: {
+                  onlyInteger: true
+                },
+                axisX: {
+                  showLabel: false
+                }
+              });
+        }, 500);
+  });
   
 </script>
