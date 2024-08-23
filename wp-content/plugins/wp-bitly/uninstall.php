@@ -9,6 +9,8 @@
 if (!defined('WP_UNINSTALL_PLUGIN'))
     die;
 
+if(!defined('WPBITLY_OPTIONS')) define('WPBITLY_OPTIONS', 'wpbitly-options');
+if(!defined('WPBITLY_AUTHORIZED')) define('WPBITLY_AUTHORIZED', 'wpbitly-authorized');
 
 /**
  *

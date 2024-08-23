@@ -235,7 +235,7 @@ class Wp_Bitly_Shortlink {
 	    }
 
 	    if (!empty($shortlink)) {
-	        $output = apply_filters('the_shortlink', sprintf('<a rel="shortlink" href="%s" title="%s">%s</a>', esc_url($shortlink), $title, $text), $shortlink, $text, $title);
+	        $output = apply_filters('the_shortlink', sprintf('<a rel="shortlink" href="%s" title="%s">%s</a>', esc_url($shortlink), esc_attr($title), esc_html($text)), $shortlink, $text, $title);
 	        $output = $before . $output . $after;
 	    }
 

@@ -347,7 +347,7 @@ class Wp_Bitly_Settings {
         }
         $current_default_domain = $this->wp_bitly_options->get_option( 'default_domain' );
         if( !$group_id ) {
-            $output = "<option value=''>bit.ly</option>";
+            $output = "<option value='bit.ly'>bit.ly</option>";
             if( wp_doing_ajax() ) {
                 echo $output;
                 die(); 
@@ -357,7 +357,7 @@ class Wp_Bitly_Settings {
         }
         $group_url = $this->wp_bitly_api->wpbitly_api( 'groups') . "/" . $group_id;
         $response_group = $this->wp_bitly_api->wpbitly_get( $group_url, $this->wp_bitly_options->get_option( 'oauth_token' ) );
-        $output = "<option value=''>bit.ly</option>";
+        $output = "<option value='bit.ly'>bit.ly</option>";
         if( count( (array) $response_group['bsds'] ) > 0 ) {
             foreach( $response_group['bsds'] as $domain ) {
                 if( $current_default_domain == $domain ) {
