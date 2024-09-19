@@ -11,6 +11,7 @@
 import del from 'del';
 import gulp from 'gulp';
 import rename from 'gulp-rename';
+import replace from 'gulp-replace';
 import hashFilename from 'gulp-hash-filename';
 import through from 'through2';
 import underscore from 'underscore';
@@ -150,7 +151,13 @@ gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
   .pipe(gulp.dest('./assets/styles'))
 );
 
-gulp.task('styles', gulp.series('clean:styles', 'sass'));
+gulp.task('replace-scss', function () {
+  return gulp.src('./assets/styles/style-ur.*.css')
+    .pipe(replace(/line-height:\s*[^;]+;/g, 'line-height:2;'))
+    .pipe(gulp.dest('./assets/styles'));
+});
+
+gulp.task('styles', gulp.series('clean:styles', 'sass', 'replace-scss'));
 
 /**
  * Scripts
