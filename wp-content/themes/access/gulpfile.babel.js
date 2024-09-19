@@ -151,6 +151,11 @@ gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
   .pipe(gulp.dest('./assets/styles'))
 );
 
+/**
+ * Replace line-height for all Typography in Urdu language to resolve text overlap issue.
+ * Use the gulp-replace package to replace line-height: {anyValue}; in the style-ur.[hash].css file with line-height: 2;
+ */
+
 gulp.task('replace-scss', function () {
   return gulp.src('./assets/styles/style-ur.*.css')
     .pipe(replace(/line-height:\s*[^;]+;/g, 'line-height:2;'))
