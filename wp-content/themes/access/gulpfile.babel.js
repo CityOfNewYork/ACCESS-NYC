@@ -158,6 +158,7 @@ gulp.task('sass', () => gulp.src(`${SRC}/scss/style-*.scss`)
 
 gulp.task('replace-scss', function () {
   return gulp.src('./assets/styles/style-ur.*.css')
+    .pipe(replace(/line-height:\s*[^;]+(?=\})/g, 'line-height:2;'))
     .pipe(replace(/line-height:\s*[^;]+;/g, 'line-height:2;'))
     .pipe(gulp.dest('./assets/styles'));
 });
