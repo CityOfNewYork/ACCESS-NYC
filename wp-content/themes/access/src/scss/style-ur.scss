@@ -2,3 +2,7 @@
 $language: 'ur';
 
 @import 'imports';
+
+section.hidden\:overflow{
+    overflow: visible!important;
+}
