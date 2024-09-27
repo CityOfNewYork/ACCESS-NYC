@@ -2,3 +2,11 @@
 $language: 'ur';
 
 @import 'imports';
+
+/** 
+    This style allows the overflowing content within the section tag on the program detail page 
+    to be fully visible without being cut off when the site is in Urdu  
+*/
+section.hidden\:overflow{
+    overflow: visible!important;
+}
