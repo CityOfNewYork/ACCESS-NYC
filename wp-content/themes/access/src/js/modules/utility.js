@@ -296,7 +296,9 @@ Utility.CONFIG = {
 
 /**
  * Valid zip codes in New York City. Source:
- * https://data.cityofnewyork.us/City-Government/Zip-code-breakdowns/6bic-qvek
+ * https://data.cityofnewyork.us/City-Government/Property-Address-Directory/bc8t-ecyu/about_data
+ * Note: ZIP code 00083 is for Central Park and can be used for testing in order to make it easy to
+ * filter out dummy data from site analytics. 
  * @type {array<String>}
  */
 Utility.NYC_ZIPS = [
