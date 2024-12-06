@@ -89,7 +89,6 @@ The theme for the site contains all of the PHP functions, templates, styling, an
   * **/elements** - Element pattern templates.
   * **/emails** - Email view templates
   * **/jst** - [Underscore templates](https://underscorejs.org/#template) used by twig files are pre-rendered buy Gulp and stored here.
-  * **/locations** - Locations feature templates.
   * **/objects** - Object pattern templates.
   * **/partials** - Misc. view template partials.
   * **/programs** - Programs feature templates.
