@@ -58,15 +58,16 @@
     <section class="wrap pt-2 screen-desktop:layout-sidebar-small-gutter" data-js="step-by-step">
       <aside>
         <nav class="c-side-nav print:hidden" data-js="program-nav">
-          <ol>
+          <ul>
             {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
             <li>
-              <a id="nav-link-{{ item.value }}" data-step-go-to="{{ item.value }}" class="active" href="#{{ item.value }}">
+            {# TODO: make these active again #}
+              <a id="nav-link-{{ item.value }}" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
                 {{ __(item.label, 'accessnyc-program-detail') }}
               </a>
             </li>
             {% endfor %}
-          </ol>
+          </ul>
         </nav>
 
         {% include 'programs/share.twig' %}
@@ -81,8 +82,6 @@
 
         {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
         {% include 'programs/' ~ item.value ~ '.twig' with {
-            'stepNumber': loop.index,
-            'nextStep': post.get_field('field_589e43563c471')[loop.index],
             'hidden': (loop.index > 1)
           } %}
         {% endfor %}
