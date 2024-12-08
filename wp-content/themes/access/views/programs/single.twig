@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  <main id="content" class="color-light-background">
+  <main id="content" class="color-light-background flex flex-col h-100vh">
 
     {% if alerts %}
     <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
@@ -19,7 +19,7 @@
       <a href="{{ post.get_permalink }}">{{ post.get_permalink }}</a>
     </p>
 
-    <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0 sticky top-0 bg-white">
+    <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0 sticky top-0 bg-white z-10">
       <div class="c-header__icon">
         <span class="hidden" aria-hidden="true">{{ post.category.name }}</span>
 
@@ -55,8 +55,8 @@
       </div>
     </header>
 
-    <section class="wrap pt-2 screen-desktop:layout-sidebar-small-gutter" data-js="step-by-step">
-      <aside>
+    <section class="wrap pt-2 flex flex-1 overflow-y-auto" data-js="step-by-step">
+      <aside class="sticky screen-desktop:mr-3 hidden screen-desktop:block">
         <nav class="c-side-nav print:hidden" data-js="program-nav">
           <ul>
             {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
@@ -73,7 +73,7 @@
         {% include 'programs/share.twig' %}
       </aside>
 
-      <article class="pt-2 screen-desktop:pt-0">
+      <article class="pt-2 screen-desktop:pt-0 flex-1 overflow-y-auto">
         {% set sectionArray = [] %}
 
         {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
