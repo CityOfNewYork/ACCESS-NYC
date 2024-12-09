@@ -1,0 +1,30 @@
+<section id="more-information" class="wrap" data-step="more-information" aria-hidden="false">
+    <header>
+    <h3 class="text-blue-dark">
+        {{ __('More information', 'accessnyc-program-detail') }}
+    </h3>
+    </header>
+
+    <div class="screen-desktop:layout-columns-gutter">
+    {# {% for method in [
+        'get_help_online',
+        'get_help_by_email',
+        'get_help_by_calling_311',
+        'get_help_by_calling_other_than_311',
+        'get_help_in_person'
+    ] %} #}
+    {% for method in [
+        'field_58912c1a8a996',
+        'field_58912c1a8a9a8',
+        'field_58912c1a8a9cb',
+        'field_58912c1a8a9ba',
+        'field_58912c1a8a984'
+    ] %}
+    {% if post.get_field(method) %}
+    <div>
+        {{ post.get_field(method) }}
+    </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+</section>

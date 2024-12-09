@@ -58,7 +58,7 @@
     <section class="wrap pt-2 screen-desktop:layout-sidebar-small-gutter" data-js="step-by-step">
       <aside>
         <nav class="c-side-nav print:hidden" data-js="program-nav">
-          <ol>
+          <ul>
             {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
             <li>
               <a id="nav-link-{{ item.value }}" data-step-go-to="{{ item.value }}" class="active" href="#{{ item.value }}">
@@ -66,7 +66,12 @@
               </a>
             </li>
             {% endfor %}
-          </ol>
+            <li>
+              <a id="nav-link-more-information" data-step-go-to="more-information" class="active" href="#more-information">
+                {{ __('More information', 'accessnyc-program-detail') }}
+              </a>
+            </li>
+          </ul>
         </nav>
 
         {% include 'programs/share.twig' %}
@@ -86,38 +91,9 @@
             'hidden': (loop.index > 1)
           } %}
         {% endfor %}
+
+        {% include 'programs/more-information.twig' with { 'post': post } %}
       </article>
-    </section>
-
-    <section class="wrap print:hidden">
-      <header>
-        <h3 class="text-blue-dark border-t-2 border-yellow-access pt-4 mt-4">
-          {{ __('More ways to get help with this program', 'accessnyc-program-detail') }}
-        </h3>
-      </header>
-
-      <div class="screen-desktop:layout-columns-gutter">
-        {# {% for method in [
-          'get_help_online',
-          'get_help_by_email',
-          'get_help_by_calling_311',
-          'get_help_by_calling_other_than_311',
-          'get_help_in_person'
-        ] %} #}
-        {% for method in [
-          'field_58912c1a8a996',
-          'field_58912c1a8a9a8',
-          'field_58912c1a8a9cb',
-          'field_58912c1a8a9ba',
-          'field_58912c1a8a984'
-        ] %}
-        {% if post.get_field(method) %}
-        <div>
-          {{ post.get_field(method) }}
-        </div>
-        {% endif %}
-        {% endfor %}
-      </div>
     </section>
 
     <footer class="wrap pt-4">
