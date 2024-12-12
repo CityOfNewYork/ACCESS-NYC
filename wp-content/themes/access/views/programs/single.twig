@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  <main id="content" class="color-light-background flex flex-col">
+  <main id="content" class="color-light-background flex flex-row">
 
     {% if alerts %}
     <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
@@ -19,103 +19,105 @@
       <a href="{{ post.get_permalink }}">{{ post.get_permalink }}</a>
     </p>
 
-    <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0 bg-white">
-      <div>
-        <h1 class="c-header__descriptor">
-          {% if post.status %}
-          <mark class="badge color-{{ post.status.type }}-status font-sans inline-block">{{ post.status.text }}</mark>
-          {% endif %}
-
-          {{ post.plain_language_program_name }}
-        </h1>
-
-        <h2 class="c-header__information color__alt mb-0">
-          <span>
-            {{ post.program_name }}
-          </span>
-
-          {% if post.program_acronym | length %}({{ post.program_acronym }}){% endif %}
-
-          {% if post.government_agency %} |
-            <span>
-              {{ post.government_agency }}
-            </span>
-          {% endif %}
-        </h2>
-
-        {% if post.url_of_online_application %}
-          <a class="btn btn-secondary btn-next text-small mt-3 py-2" href="{{ ost.url_of_online_application }}" target="_blank" rel="noopener noreferrer">
-              {{ post.apply_online_call_to_action ? post.apply_online_call_to_action : __('Apply now', 'accessnyc-program-detail') }}
+    {# Sections: desktop #}
+    <aside class="hidden screen-desktop:block p-3 mt-3 sticky self-start" style="top: 20px">
+      <nav class="c-side-nav print:hidden" data-js="program-nav">
+        <ul>
+          {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
+          <li class="pl-0">
+          {# TODO: make these active again #}
+            <a id="nav-link-{{ item.value }}" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
+              {{ __(item.label, 'accessnyc-program-detail') }}
             </a>
-        {% endif %}
-
-        {# Sections: tablet and mobile#}
-        <div class="block screen-desktop:hidden">
-          {% include 'programs/share.twig' %}
-          
-          <nav class="print:hidden flex flex-row" data-js="program-nav">
-            {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
-            {# TODO: make these active again #}
-              <a id="nav-link-{{ item.value }}" class="mr-2" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
-                {{ __(item.label, 'accessnyc-program-detail') }}
-              </a>
-            {% endfor %}
-
+          </li>
+          {% endfor %}
+          <li class="pl-0">
             <a id="nav-link-more-information" data-step-go-to="more-information" href="#more-information">
-                {{ __('More information', 'accessnyc-program-detail') }}
-              </a>
-          </nav>
-        </div>
-      </div>
-    </header>
+              {{ __('More information', 'accessnyc-program-detail') }}
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-    <section class="wrap pt-2 flex flex-1" data-js="step-by-step">
+      {% include 'programs/share.twig' %}
+    </aside>
 
-      {# Sections: desktop #}
-      <aside class="screen-desktop:mr-3 hidden screen-desktop:block sticky self-start" style="top: 20px">
-        <nav class="c-side-nav print:hidden" data-js="program-nav">
-          <ul>
-            {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
-            <li class="pl-0">
-            {# TODO: make these active again #}
-              <a id="nav-link-{{ item.value }}" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
-                {{ __(item.label, 'accessnyc-program-detail') }}
+    {# Header and main content#}
+    <div class="flex-1">
+      <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0 bg-white">
+        <div>
+          <h1 class="c-header__descriptor">
+            {% if post.status %}
+            <mark class="badge color-{{ post.status.type }}-status font-sans inline-block">{{ post.status.text }}</mark>
+            {% endif %}
+
+            {{ post.plain_language_program_name }}
+          </h1>
+
+          <h2 class="c-header__information color__alt mb-0">
+            <span>
+              {{ post.program_name }}
+            </span>
+
+            {% if post.program_acronym | length %}({{ post.program_acronym }}){% endif %}
+
+            {% if post.government_agency %} |
+              <span>
+                {{ post.government_agency }}
+              </span>
+            {% endif %}
+          </h2>
+
+          {% if post.url_of_online_application %}
+            <a class="btn btn-secondary btn-next text-small mt-3 py-2" href="{{ ost.url_of_online_application }}" target="_blank" rel="noopener noreferrer">
+                {{ post.apply_online_call_to_action ? post.apply_online_call_to_action : __('Apply now', 'accessnyc-program-detail') }}
               </a>
-            </li>
-            {% endfor %}
-            <li class="pl-0">
+          {% endif %}
+
+          {# Sections: tablet and mobile#}
+          <div class="block screen-desktop:hidden">
+            {% include 'programs/share.twig' %}
+            
+            <nav class="print:hidden flex flex-row" data-js="program-nav">
+              {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
+              {# TODO: make these active again #}
+                <a id="nav-link-{{ item.value }}" class="mr-2" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
+                  {{ __(item.label, 'accessnyc-program-detail') }}
+                </a>
+              {% endfor %}
+
               <a id="nav-link-more-information" data-step-go-to="more-information" href="#more-information">
-                {{ __('More information', 'accessnyc-program-detail') }}
-              </a>
-            </li>
-          </ul>
-        </nav>
+                  {{ __('More information', 'accessnyc-program-detail') }}
+                </a>
+            </nav>
+          </div>
+        </div>
+      </header>
+      <section class="wrap pt-2 flex flex-1" data-js="step-by-step">
+        <article class="pt-2 screen-desktop:pt-0 flex-1">
+          {% set sectionArray = [] %}
 
-        {% include 'programs/share.twig' %}
-      </aside>
+          {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
+          {% set sectionArray = sectionArray | merge([item.value])  %}
+          {% endfor %}
 
-      <article class="pt-2 screen-desktop:pt-0 flex-1">
-        {% set sectionArray = [] %}
+          {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
+          {% include 'programs/' ~ item.value ~ '.twig' with {
+              'hidden': (loop.index > 1)
+            } %}
+          {% endfor %}
 
-        {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
-        {% set sectionArray = sectionArray | merge([item.value])  %}
-        {% endfor %}
+          {% include 'programs/more-information.twig' with { 'post': post } %}
+        </article>
+      </section>
+      <footer class="wrap pt-4">
+        <p class="color__alt">
+          {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date(fn('get_option', 'date_format')) }}
+        </p>
+      </footer>
+    </div>
 
-        {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
-        {% include 'programs/' ~ item.value ~ '.twig' with {
-            'hidden': (loop.index > 1)
-          } %}
-        {% endfor %}
-
-        {% include 'programs/more-information.twig' with { 'post': post } %}
-      </article>
-    </section>
-
-    <footer class="wrap pt-4">
-      <p class="color__alt">
-        {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date(fn('get_option', 'date_format')) }}
-      </p>
-    </footer>
+    
 
     {# {% include 'components/feedback.twig' with {this: post, action: shareAction} only %} #}
 
