@@ -60,15 +60,19 @@
                 {{ __(item.label, 'accessnyc-program-detail') }}
               </a>
             {% endfor %}
+            
+            <a id="nav-link-more-information" data-step-go-to="more-information" href="#more-information">
+                {{ __('More information', 'accessnyc-program-detail') }}
+              </a>
           </nav>
         </div>
       </div>
     </header>
 
-    <section class="wrap pt-2 flex flex-1 overflow-y-auto" data-js="step-by-step">
+    <section class="wrap pt-2 flex flex-1" data-js="step-by-step">
 
       {# Sections: desktop #}
-      <aside class="sticky screen-desktop:mr-3 hidden screen-desktop:block">
+      <aside class="screen-desktop:mr-3 hidden screen-desktop:block">
         <nav class="c-side-nav print:hidden" data-js="program-nav">
           <ul>
             {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
@@ -79,8 +83,8 @@
               </a>
             </li>
             {% endfor %}
-            <li>
-              <a id="nav-link-more-information" data-step-go-to="more-information" class="active" href="#more-information">
+            <li class="pl-0">
+              <a id="nav-link-more-information" data-step-go-to="more-information" href="#more-information">
                 {{ __('More information', 'accessnyc-program-detail') }}
               </a>
             </li>
@@ -90,7 +94,7 @@
         {% include 'programs/share.twig' %}
       </aside>
 
-      <article class="pt-2 screen-desktop:pt-0 flex-1 overflow-y-auto">
+      <article class="pt-2 screen-desktop:pt-0 flex-1">
         {% set sectionArray = [] %}
 
         {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
