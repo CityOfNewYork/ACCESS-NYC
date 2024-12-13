@@ -19,7 +19,7 @@
       <a href="{{ post.get_permalink }}">{{ post.get_permalink }}</a>
     </p>
 
-    <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0 bg-white">
+    <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0 bg-white sticky screen-desktop:relative top-0 z-10">
       <div>
         <h1 class="c-header__descriptor">
           {% if post.status %}
@@ -53,7 +53,7 @@
         <div class="block screen-desktop:hidden">
           {% include 'programs/share.twig' %}
           
-          <nav class="print:hidden flex flex-row" data-js="program-nav">
+          <nav class="print:hidden flex flex-row overflow-x-auto" style="text-wrap: nowrap;" data-js="program-nav">
             {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
             {# TODO: make these active again #}
               <a id="nav-link-{{ item.value }}" class="mr-2" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
