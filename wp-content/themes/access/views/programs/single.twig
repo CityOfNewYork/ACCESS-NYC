@@ -43,7 +43,15 @@
           {% endif %}
         </h2>
 
-        {% if post.url_of_online_application %}
+        {% set how_to_apply_section = false %}
+
+        {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
+          {% if item.value == 'how-to-apply' %}
+            {% set how_to_apply_section = true %}
+          {% endif %}
+        {% endfor %}
+
+        {% if post.url_of_online_application and how_to_apply_section %}
           <a class="btn btn-secondary btn-next text-small mt-3 py-2" href="{{ ost.url_of_online_application }}" target="_blank" rel="noopener noreferrer">
               {{ post.apply_online_call_to_action ? post.apply_online_call_to_action : __('Apply now', 'accessnyc-program-detail') }}
             </a>
