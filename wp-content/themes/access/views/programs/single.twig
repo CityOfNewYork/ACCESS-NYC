@@ -78,13 +78,13 @@
           <nav class="print:hidden flex flex-row overflow-x-auto" style="text-wrap: nowrap;" data-js="program-nav">
             {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
             {# TODO: make these active again #}
-              <a id="nav-link-{{ item.value }}" class="mr-2" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
+              <a id="nav-link-{{ item.value }}" class="mr-2 nav-link" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
                 {{ __(item.label, 'accessnyc-program-detail') }}
               </a>
             {% endfor %}
             
             {% if more_information_section %}
-            <a id="nav-link-more-information" data-step-go-to="more-information" href="#more-information">
+            <a id="nav-link-more-information" class="nav-link" data-step-go-to="more-information" href="#more-information">
               {{ __('More information', 'accessnyc-program-detail') }}
             </a>
             {% endif %}
@@ -93,7 +93,7 @@
       </div>
     </header>
 
-    <section class="wrap pt-2 flex flex-1" data-js="step-by-step">
+    <div class="wrap pt-2 flex flex-1" data-js="step-by-step">
 
       {# Sections: desktop #}
       <aside class="screen-desktop:mr-3 hidden screen-desktop:block sticky self-start" style="top: 20px">
@@ -102,7 +102,7 @@
             {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
             <li class="pl-0">
             {# TODO: make these active again #}
-              <a id="nav-link-{{ item.value }}" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
+              <a id="nav-link-{{ item.value }}" class="nav-link" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
                 {{ __(item.label, 'accessnyc-program-detail') }}
               </a>
             </li>
@@ -110,7 +110,7 @@
 
             {% if more_information_section %}
               <li class="pl-0">
-                <a id="nav-link-more-information" data-step-go-to="more-information" href="#more-information">
+                <a id="nav-link-more-information" class="nav-link" data-step-go-to="more-information" href="#more-information">
                   {{ __('More information', 'accessnyc-program-detail') }}
                 </a>
               </li>
@@ -138,7 +138,7 @@
           {% include 'programs/more-information.twig' with { 'post': post } %}
         {% endif %}
       </article>
-    </section>
+    </div>
 
     <footer class="wrap pt-4">
       <p class="color__alt">
