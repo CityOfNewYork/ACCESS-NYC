@@ -1,5 +1,27 @@
 {% extends "base.twig" %}
 
+{% set more_information_section = false %}
+
+{% for method in [
+        'field_58912c1a8a996',
+        'field_58912c1a8a9a8',
+        'field_58912c1a8a9cb',
+        'field_58912c1a8a9ba',
+        'field_58912c1a8a984'
+    ] %}
+    {% if post.get_field(method) %}
+      {% set more_information_section = true %}
+    {% endif %}
+{% endfor %}
+
+{% set how_to_apply_section = false %}
+
+{% for item in post.get_field('field_589e43563c471') %} {# show_section #}
+  {% if item.value == 'how-to-apply' %}
+    {% set how_to_apply_section = true %}
+  {% endif %}
+{% endfor %}
+
 {% block content %}
   <main id="content" class="color-light-background flex flex-col">
 
@@ -43,14 +65,6 @@
           {% endif %}
         </h2>
 
-        {% set how_to_apply_section = false %}
-
-        {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
-          {% if item.value == 'how-to-apply' %}
-            {% set how_to_apply_section = true %}
-          {% endif %}
-        {% endfor %}
-
         {% if post.url_of_online_application and how_to_apply_section %}
           <a class="btn btn-secondary btn-next text-small mt-3 py-2" href="{{ ost.url_of_online_application }}" target="_blank" rel="noopener noreferrer">
               {{ post.apply_online_call_to_action ? post.apply_online_call_to_action : __('Apply now', 'accessnyc-program-detail') }}
@@ -68,10 +82,12 @@
                 {{ __(item.label, 'accessnyc-program-detail') }}
               </a>
             {% endfor %}
-
+            
+            {% if more_information_section %}
             <a id="nav-link-more-information" data-step-go-to="more-information" href="#more-information">
-                {{ __('More information', 'accessnyc-program-detail') }}
-              </a>
+              {{ __('More information', 'accessnyc-program-detail') }}
+            </a>
+            {% endif %}
           </nav>
         </div>
       </div>
@@ -91,11 +107,14 @@
               </a>
             </li>
             {% endfor %}
-            <li class="pl-0">
-              <a id="nav-link-more-information" data-step-go-to="more-information" href="#more-information">
-                {{ __('More information', 'accessnyc-program-detail') }}
-              </a>
-            </li>
+
+            {% if more_information_section %}
+              <li class="pl-0">
+                <a id="nav-link-more-information" data-step-go-to="more-information" href="#more-information">
+                  {{ __('More information', 'accessnyc-program-detail') }}
+                </a>
+              </li>
+            {% endif %}
           </ul>
         </nav>
 
@@ -115,7 +134,9 @@
           } %}
         {% endfor %}
 
-        {% include 'programs/more-information.twig' with { 'post': post } %}
+        {% if more_information_section %}
+          {% include 'programs/more-information.twig' with { 'post': post } %}
+        {% endif %}
       </article>
     </section>
 
