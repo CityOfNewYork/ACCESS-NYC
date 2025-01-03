@@ -10,36 +10,51 @@ import 'modules/share-form';
   /**
    * Instantiate the Program Guide
    */
-//   (element => {
-//     if (element) new StepByStep(element);
-//   })(document.querySelector(StepByStep.selector));
-
     document.addEventListener("DOMContentLoaded", () => {
+        const WINDOW_DELTA = 50;
+
         const sections = document.querySelectorAll("section");
-        const links = document.querySelectorAll(".nav-link");
-    
-        const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if(entry.target.id) {
-                    console.log("a");
-                    const current_link = document.querySelector(`#nav-link-${entry.target.id}`);
-                    if (entry.isIntersecting) {
-                        console.log("b");
-                        console.log(current_link);
-                        links.forEach((link) => link.classList.remove("active"));
-                        console.log(current_link.classList);
-                        current_link.classList.add("active");
+        const sideLinks = document.querySelectorAll(".side-nav-link");
+        const topLinks = document.querySelectorAll(".top-nav-link");
+        
+        // Function to update the active link
+        const updateActiveLink = () => {
+            let topSection = null;
+        
+            // Find the topmost section that is visible
+            sections.forEach((section) => {
+                const rect = section.getBoundingClientRect();
+                if (rect.bottom >= (0 + WINDOW_DELTA) && rect.top < (window.innerHeight - WINDOW_DELTA) ) {
+                    if (!topSection || rect.top < topSection.getBoundingClientRect().top) {
+                        topSection = section;
                     }
                 }
             });
-        },
-        {
-            root: null, // Use the viewport as the container
-            threshold: 0.5, // Trigger when 50% of the section is visible
-        }
-        );
-    
-        sections.forEach((section) => observer.observe(section));
+        
+            // Update the active state of links
+            sideLinks.forEach((link) => link.classList.remove("active"));
+            topLinks.forEach((link) => link.classList.remove("active"));
+
+            if (topSection) {
+                const activeSideLink = document.querySelector(`#side-nav-link-${topSection.id}`);
+                if (activeSideLink) {
+                    activeSideLink.classList.add("active");
+                }
+
+                const activeTopLink = document.querySelector(`#top-nav-link-${topSection.id}`);
+                if (activeTopLink) {
+                    activeTopLink.classList.add("active");
+                }
+            }
+        };
+        
+        // Attach event listeners for scroll and resize
+        window.addEventListener("scroll", updateActiveLink);
+        window.addEventListener("resize", updateActiveLink);
+        
+        // Initial check
+        updateActiveLink();
     });
+      
+      
 })();

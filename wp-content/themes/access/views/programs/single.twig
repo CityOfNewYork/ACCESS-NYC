@@ -78,13 +78,13 @@
           <nav class="print:hidden flex flex-row overflow-x-auto" style="text-wrap: nowrap;" data-js="program-nav">
             {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
             {# TODO: make these active again #}
-              <a id="nav-link-{{ item.value }}" class="mr-2 nav-link" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
+              <a id="top-nav-link-{{ item.value }}" class="mr-2 top-nav-link" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
                 {{ __(item.label, 'accessnyc-program-detail') }}
               </a>
             {% endfor %}
             
             {% if more_information_section %}
-            <a id="nav-link-more-information" class="nav-link" data-step-go-to="more-information" href="#more-information">
+            <a id="top-nav-link-more-information" class="top-nav-link" data-step-go-to="more-information" href="#more-information">
               {{ __('More information', 'accessnyc-program-detail') }}
             </a>
             {% endif %}
@@ -101,19 +101,28 @@
           <ul>
             {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
             <li class="pl-0">
-            {# TODO: make these active again #}
-              <a id="nav-link-{{ item.value }}" class="nav-link" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
+              <a id="side-nav-link-{{ item.value }}" class="side-nav-link" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
                 {{ __(item.label, 'accessnyc-program-detail') }}
               </a>
             </li>
+
+            {# This exists only to make the sidebar size consistent regardless of which element is active #}
+            <div aria-hidden="true" class="side-nav-link invisible font-bold pr-2" style="height: 0px">
+              {{ __(item.label, 'accessnyc-program-detail') }}
+            </div>
             {% endfor %}
 
             {% if more_information_section %}
               <li class="pl-0">
-                <a id="nav-link-more-information" class="nav-link" data-step-go-to="more-information" href="#more-information">
+                <a id="side-nav-link-more-information" class="side-nav-link" data-step-go-to="more-information" href="#more-information">
                   {{ __('More information', 'accessnyc-program-detail') }}
                 </a>
               </li>
+
+              {# This exists only to make the sidebar size consistent regardless of which element is active #}
+              <div aria-hidden="true" class="side-nav-link invisible font-bold pr-2" style="height: 0px">
+                {{ __('More information', 'accessnyc-program-detail') }}
+              </div>
             {% endif %}
           </ul>
         </nav>
