@@ -1,7 +1,29 @@
 {% extends "base.twig" %}
 
+{% set more_information_section = false %}
+
+{% for method in [
+        'field_58912c1a8a996',
+        'field_58912c1a8a9a8',
+        'field_58912c1a8a9cb',
+        'field_58912c1a8a9ba',
+        'field_58912c1a8a984'
+    ] %}
+    {% if post.get_field(method) %}
+      {% set more_information_section = true %}
+    {% endif %}
+{% endfor %}
+
+{% set how_to_apply_section = false %}
+
+{% for item in post.get_field('field_589e43563c471') %} {# show_section #}
+  {% if item.value == 'how-to-apply' %}
+    {% set how_to_apply_section = true %}
+  {% endif %}
+{% endfor %}
+
 {% block content %}
-  <main id="content" class="color-light-background">
+  <main id="content" class="color-light-background flex flex-col">
 
     {% if alerts %}
     <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
@@ -19,18 +41,8 @@
       <a href="{{ post.get_permalink }}">{{ post.get_permalink }}</a>
     </p>
 
-    <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0">
-      <div class="c-header__icon">
-        <span class="hidden" aria-hidden="true">{{ post.category.name }}</span>
-
-        {% include 'elements/icon.twig' with {
-          'icon': 'icon-card-' ~ post.category.slug ~ '-v' ~ post.icon.version,
-          'class': post.icon.class,
-          'title': post.category.name
-        } only %}
-      </div>
-
-      <div>
+    <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0 bg-white sticky screen-desktop:relative top-0 z-10">
+      <div class="w-full">
         <h1 class="c-header__descriptor">
           {% if post.status %}
           <mark class="badge color-{{ post.status.type }}-status font-sans inline-block">{{ post.status.text }}</mark>
@@ -53,37 +65,72 @@
           {% endif %}
         </h2>
 
-        {% if post.url_of_online_application %}
+        {% if post.url_of_online_application and how_to_apply_section %}
           <a class="btn btn-secondary btn-next text-small mt-3 py-2" href="{{ ost.url_of_online_application }}" target="_blank" rel="noopener noreferrer">
               {{ post.apply_online_call_to_action ? post.apply_online_call_to_action : __('Apply now', 'accessnyc-program-detail') }}
             </a>
         {% endif %}
+
+        {# Sections: tablet and mobile#}
+        <div class="block screen-desktop:hidden">
+          {% include 'programs/share.twig' %}
+          
+          <nav class="print:hidden flex flex-row overflow-x-auto" style="text-wrap: nowrap;" data-js="program-nav">
+            {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
+            {# TODO: make these active again #}
+              <a id="top-nav-link-{{ item.value }}" class="mr-2 top-nav-link" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
+                {{ __(item.label, 'accessnyc-program-detail') }}
+              </a>
+            {% endfor %}
+            
+            {% if more_information_section %}
+            <a id="top-nav-link-more-information" class="top-nav-link" data-step-go-to="more-information" href="#more-information">
+              {{ __('More information', 'accessnyc-program-detail') }}
+            </a>
+            {% endif %}
+          </nav>
+        </div>
       </div>
     </header>
 
-    <section class="wrap pt-2 screen-desktop:layout-sidebar-small-gutter" data-js="step-by-step">
-      <aside>
+    <div class="wrap pt-2 flex flex-1" data-js="step-by-step">
+
+      {# Sections: desktop #}
+      <aside class="screen-desktop:mr-3 hidden screen-desktop:block sticky self-start" style="top: 20px">
         <nav class="c-side-nav print:hidden" data-js="program-nav">
           <ul>
             {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
-            <li>
-              <a id="nav-link-{{ item.value }}" data-step-go-to="{{ item.value }}" class="active" href="#{{ item.value }}">
+            <li class="pl-0">
+              <a id="side-nav-link-{{ item.value }}" class="side-nav-link" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
                 {{ __(item.label, 'accessnyc-program-detail') }}
               </a>
             </li>
+
+            {# This exists only to make the sidebar size consistent regardless of which element is active #}
+            <div aria-hidden="true" class="side-nav-link invisible font-bold pr-2" style="height: 0px">
+              {{ __(item.label, 'accessnyc-program-detail') }}
+            </div>
             {% endfor %}
-            <li>
-              <a id="nav-link-more-information" data-step-go-to="more-information" class="active" href="#more-information">
+
+            {% if more_information_section %}
+              <li class="pl-0">
+                <a id="side-nav-link-more-information" class="side-nav-link" data-step-go-to="more-information" href="#more-information">
+                  {{ __('More information', 'accessnyc-program-detail') }}
+                </a>
+              </li>
+
+              {# This exists only to make the sidebar size consistent regardless of which element is active #}
+              <div aria-hidden="true" class="side-nav-link invisible font-bold pr-2" style="height: 0px">
                 {{ __('More information', 'accessnyc-program-detail') }}
-              </a>
-            </li>
+              </div>
+            {% endif %}
           </ul>
         </nav>
 
         {% include 'programs/share.twig' %}
       </aside>
 
-      <article class="pt-2 screen-desktop:pt-0">
+      <article class="pt-2 screen-desktop:pt-0 flex-1">
         {% set sectionArray = [] %}
 
         {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
@@ -92,15 +139,15 @@
 
         {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
         {% include 'programs/' ~ item.value ~ '.twig' with {
-            'stepNumber': loop.index,
-            'nextStep': post.get_field('field_589e43563c471')[loop.index],
             'hidden': (loop.index > 1)
           } %}
         {% endfor %}
 
-        {% include 'programs/more-information.twig' with { 'post': post } %}
+        {% if more_information_section %}
+          {% include 'programs/more-information.twig' with { 'post': post } %}
+        {% endif %}
       </article>
-    </section>
+    </div>
 
     <footer class="wrap pt-4">
       <p class="color__alt">

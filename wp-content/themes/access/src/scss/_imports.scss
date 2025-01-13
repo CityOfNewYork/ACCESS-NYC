@@ -115,3 +115,11 @@ $path-to-images: 'img/';
   text-overflow: ellipsis;
   white-space: nowrap
 }
+
+// this class isn't available in access-patterns for some reason
+
+@media screen and (min-width: 960px) {
+  .screen-desktop\:relative {
+    position: relative !important;
+  }
+}

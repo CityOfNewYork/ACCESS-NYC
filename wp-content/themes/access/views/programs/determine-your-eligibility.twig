@@ -1,6 +1,6 @@
 <section id="determine-your-eligibility" data-step="determine-your-eligibility" class="outline-none active hidden:overflow print:active w-full" aria-hidden="false">
   <header>
-    <h3>{{ stepNumber }}. {{ __('Determine your eligibility', 'accessnyc-program-detail') }}</h3>
+    <h3>{{ __('Determine your eligibility', 'accessnyc-program-detail') }}</h3>
   </header>
 
   {% if post.plain_language_eligibility | length %}
@@ -9,9 +9,5 @@
         {{ post.get_field('field_58912c1a8a82d')|add_ul_margin|add_anyc_table_numeric }} {# plain_language_eligibility #}
       </div>
     </div>
-  {% endif %}
-
-  {% if nextStep != '' %}
-  {% include 'programs/next-button.twig' %}
   {% endif %}
 </section>

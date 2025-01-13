@@ -171,18 +171,6 @@ class StepByStep {
       others[y].classList.remove(toggle.settings.activeClass);
     }
 
-    // Hide all sections unless it is the target section
-    for (let index = 0; index < this.steps.length; index++) {
-      let s = this.steps[index];
-
-      if (toggle.target === s) continue;
-
-      s.classList.remove(toggle.settings.activeClass);
-      s.classList.add(toggle.settings.inactiveClass);
-      s.setAttribute('aria-hidden', true);
-      s.removeAttribute('tabindex');
-    }
-
     return this;
   }
 
