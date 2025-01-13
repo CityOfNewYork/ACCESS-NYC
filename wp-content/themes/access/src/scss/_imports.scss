@@ -123,3 +123,10 @@ $path-to-images: 'img/';
     position: relative !important;
   }
 }
+
+.c-top-nav {
+  .active {
+    font-weight: 700;
+    text-decoration: none;
+  }
+}
