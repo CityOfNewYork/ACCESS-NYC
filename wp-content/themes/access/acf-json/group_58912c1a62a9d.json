@@ -392,6 +392,26 @@
             "wpml_cf_preferences": 0
         },
         {
+            "key": "field_589d49b8ced1e",
+            "label": "Display Screen for Eligibility Box",
+            "name": "display_screen_for_eligibility_box",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Unchecking this box will hide the eligibility screener notification box.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 1,
+            "message": "",
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_58912c1a8a82d",
             "label": "Plain Language Eligibility",
             "name": "plain_language_eligibility",
@@ -409,6 +429,29 @@
             "toolbar": "full",
             "media_upload": 0,
             "default_value": "",
+            "delay": 0
+        },
+        {
+            "key": "field_67884637728d7",
+            "label": "Immigration eligibility",
+            "name": "immigration_eligibility",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "relevanssi_exclude": 0,
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
             "delay": 0
         },
         {
@@ -1073,5 +1116,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "translation",
-    "modified": 1722449254
+    "modified": 1736984173
 }
