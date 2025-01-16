@@ -1,6 +1,5 @@
 /* eslint-env browser */
 
-import StepByStep from 'modules/step-by-step';
 // import 'modules/feedback';
 import 'modules/share-form';
 
@@ -17,6 +16,27 @@ import 'modules/share-form';
         const sideLinks = document.querySelectorAll(".side-nav-link");
         const topLinks = document.querySelectorAll(".top-nav-link");
         const header = document.querySelector("#program-guide-header");
+
+        // for top nav horizontal scrolling
+        function centerActiveLinkIfScrollable() {
+            const activeLink = document.querySelector(".top-nav-link.active");
+            const container = document.querySelector(".c-top-nav");
+          
+            if (activeLink && container && container.scrollWidth > container.clientWidth) {
+              // Proceed only if the container is scrollable
+              const linkRect = activeLink.getBoundingClientRect();
+              const containerRect = container.getBoundingClientRect();
+          
+              // Calculate the horizontal scroll offset
+              const offset = (containerRect.width / 2) - (linkRect.width / 2);
+              const scrollPosition = activeLink.offsetLeft - offset;
+          
+              // Smoothly scroll the container to center the active link
+              container.scrollTo({
+                left: scrollPosition
+              });
+            }
+        }
         
         // Function to update the active link
         const updateActiveLink = () => {
@@ -55,6 +75,8 @@ import 'modules/share-form';
 
                 if (activeTopLink) {
                     activeTopLink.classList.add("active");
+
+                    centerActiveLinkIfScrollable();
                 }
 
                 // Add the hash to the URL unless the user is at the top of the page
@@ -70,6 +92,7 @@ import 'modules/share-form';
         
         // Initial check for active link
         updateActiveLink();
+        centerActiveLinkIfScrollable();
 
         // Adjust scroll for direct hash navigation on page load
         if (window.location.hash) {
@@ -102,12 +125,15 @@ import 'modules/share-form';
                         window.scrollTo({
                             top: targetPosition
                         });
+
+                        centerActiveLinkIfScrollable();
                     }
 
                     history.pushState(null, "", `#${targetId}`);
                 }
             });
         });
+
     });
       
       
