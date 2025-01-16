@@ -53,7 +53,7 @@ add_filter('plugin_action_links_' . plugin_basename(__FILE__), function() {
  * @author NYC Opportunity
  */
 add_action('plugins_loaded', function() {
-  if (is_plugin_active('wp-bitly/wp-bitly.php') && defined('SMNYC_WPBITLY_OAUTH_TOKEN')) {
+  if (is_plugin_active('wp-bitly/wp-bitly.php') && defined('WPBITLY_OPTIONS') && defined('SMNYC_WPBITLY_OAUTH_TOKEN')) {
     $opts = get_option(WPBITLY_OPTIONS);
     $opts['oauth_token'] = SMNYC_WPBITLY_OAUTH_TOKEN;
 
