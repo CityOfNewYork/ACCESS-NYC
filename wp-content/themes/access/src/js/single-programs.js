@@ -6,6 +6,20 @@ import 'modules/share-form';
 (() => {
   'use strict';
 
+  function debounce(func, timeout = 100){
+    let timerFlag = null; // Variable to keep track of the timer
+
+    // Returning a throttled version 
+    return (...args) => {
+        if (timerFlag === null) { // If there is no timer currently running
+            func(...args); // Execute the main function 
+            timerFlag = setTimeout(() => { // Set a timer to clear the timerFlag after the specified delay
+                timerFlag = null; // Clear the timerFlag to allow the main function to be executed again
+            }, timeout);
+        }
+    };
+  }
+
   /**
    * Instantiate the Program Guide
    */
@@ -16,6 +30,18 @@ import 'modules/share-form';
         const sideLinks = document.querySelectorAll(".side-nav-link");
         const topLinks = document.querySelectorAll(".top-nav-link");
         const topNav = document.querySelector(".c-top-nav");
+
+        function getNavSize () {
+            if (window.getComputedStyle(topNav).display !== "none") {
+                const navBottom = topNav.getBoundingClientRect().bottom;
+                return {
+                    bottom: navBottom,
+                    size: navBottom - topNav.getBoundingClientRect().top
+                }
+            }
+
+            return { bottom: 0, size: 0 };
+        }
 
         // for top nav horizontal scrolling
         function centerActiveLinkIfScrollable() {
@@ -40,11 +66,7 @@ import 'modules/share-form';
         // Function to update the active link
         const updateActiveLink = () => {
             let topSection = null;
-            let navBottom = 0;
-
-            if (window.getComputedStyle(topNav).display !== "none") {
-                navBottom = topNav.getBoundingClientRect().bottom;
-            }
+            const { bottom: navBottom, size: _ } = getNavSize();
         
             // Find the topmost section that is visible
             sections.forEach((section) => {
@@ -90,7 +112,7 @@ import 'modules/share-form';
         };
         
         // Attach event listeners for scroll and resize
-        window.addEventListener("scroll", updateActiveLink);
+        window.addEventListener("scroll", debounce(updateActiveLink, 100));
         window.addEventListener("resize", updateActiveLink);
         
         // Initial check for active link
@@ -100,13 +122,7 @@ import 'modules/share-form';
         // Adjust scroll for direct hash navigation on page load
         if (window.location.hash) {
             requestAnimationFrame(() => {
-                let navBottom = topNav.getBoundingClientRect().bottom;
-                let navSize = navBottom - topNav.getBoundingClientRect().top;
-    
-                if (window.getComputedStyle(topNav).display !== "none") {
-                    navBottom = topNav.getBoundingClientRect().bottom;
-                    navSize = navBottom - topNav.getBoundingClientRect().top;
-                }
+                const { bottom: navBottom, size: navSize } = getNavSize();
     
                 if (navBottom > 0) {
                     const targetId = window.location.hash.substring(1);
@@ -124,13 +140,7 @@ import 'modules/share-form';
         // Adjust scroll when clicking jump links
         document.querySelectorAll(".top-nav-link").forEach((link) => {
             link.addEventListener("click", (e) => {
-                let navBottom = 0;
-                let navSize = 0;
-
-                if (window.getComputedStyle(topNav).display !== "none") {
-                    navBottom = topNav.getBoundingClientRect().bottom;
-                    navSize = navBottom - topNav.getBoundingClientRect().top;
-                }
+                const { bottom: navBottom, size: navSize } = getNavSize();
 
                 if (navBottom > 0) {
                     e.preventDefault(); // Prevent default jump behavior
