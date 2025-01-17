@@ -41,7 +41,7 @@
       <a href="{{ post.get_permalink }}">{{ post.get_permalink }}</a>
     </p>
 
-    <header id="program-guide-header" class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0 bg-white sticky screen-desktop:relative top-0 z-10">
+    <header id="program-guide-header" class="c-header px-2 pt-2 pb-0 screen-tablet:px-3 screen-desktop:py-3 mt-3 print:mt-0 bg-white">
       <div class="w-full">
         <h1 class="c-header__descriptor">
           {% if post.status %}
@@ -74,23 +74,23 @@
         {# Sections: tablet and mobile#}
         <div class="block screen-desktop:hidden">
           {% include 'programs/share.twig' %}
-          
-          <nav class="print:hidden flex flex-row overflow-x-auto c-top-nav" style="text-wrap: nowrap;" data-js="program-nav">
-            {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
-              <a id="top-nav-link-{{ item.value }}" class="mr-2 top-nav-link" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
-                {{ __(item.label, 'accessnyc-program-detail') }}
-              </a>
-            {% endfor %}
-            
-            {% if more_information_section %}
-            <a id="top-nav-link-more-information" class="top-nav-link" data-step-go-to="more-information" href="#more-information">
-              {{ __('More information', 'accessnyc-program-detail') }}
-            </a>
-            {% endif %}
-          </nav>
         </div>
       </div>
     </header>
+
+    <nav class="print:hidden screen-desktop:hidden flex flex-row overflow-x-auto c-top-nav sticky top-0 z-10 bg-white p-2 screen-tablet:p-3" style="text-wrap: nowrap;" data-js="program-nav">
+      {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
+        <a id="top-nav-link-{{ item.value }}" class="mr-2 top-nav-link" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
+          {{ __(item.label, 'accessnyc-program-detail') }}
+        </a>
+      {% endfor %}
+      
+      {% if more_information_section %}
+      <a id="top-nav-link-more-information" class="top-nav-link" data-step-go-to="more-information" href="#more-information">
+        {{ __('More information', 'accessnyc-program-detail') }}
+      </a>
+      {% endif %}
+    </nav>
 
     <div class="wrap pt-2 flex flex-1" data-js="step-by-step">
 

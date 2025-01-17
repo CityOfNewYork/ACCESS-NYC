@@ -1,12 +1,12 @@
 <div class="c-share print:hidden mt-2 screen-desktop:mt-0 flex-row screen-desktop:flex-col">{% apply spaceless %}
-  <a class="c-share__link" href="{{ post.get_permalink }}?print=1" target="_blank" rel="noopener noreferrer" data-js="track" data-track-key="Print" data-track-data='[{"action": "print"}]'>
+  <a class="c-share__link mb-0 screen-desktop:mb-3" href="{{ post.get_permalink }}?print=1" target="_blank" rel="noopener noreferrer" data-js="track" data-track-key="Print" data-track-data='[{"action": "print"}]'>
     <svg class="c-share__icon icon-ui"  tabindex="-1">
       <use xlink:href="#icon-ui-printer"></use>
     </svg>{{ __('Print', 'accessnyc-program-detail') }}
   </a>
 
   <button aria-controls="web-share-fallback" aria-expanded="false"
-    class="c-share__link btn-link underline font-normal"
+    class="c-share__link btn-link underline font-normal mb-0 screen-desktop:mb-3"
     data-js="web-share track" data-web-share='{{ post.web_share|json_encode|escape }}' data-track-key="Web Share" data-track-data='[{"action": "web-share"}]'>
     <svg class="c-share__icon icon-ui" tabindex="-1">
       <use xlink:href="#icon-ui-share-2"></use>
