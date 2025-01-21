@@ -106,6 +106,7 @@ class Site extends TimberSite {
      */
 
     $context['is_print'] = get_query_var('print', false); // Print view
+    $context['a_b_testing_on'] = get_field('field_6790152da121b', 'option'); // Whether A/B testing is turned on
     $context['variant'] = get_query_var('anyc_v', false); // A/B testing variant
 
     /**
