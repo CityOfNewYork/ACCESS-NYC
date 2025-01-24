@@ -106,8 +106,15 @@ class Site extends TimberSite {
      */
 
     $context['is_print'] = get_query_var('print', false); // Print view
-    $context['a_b_testing_on'] = get_field('field_6790152da121b', 'option'); // Whether A/B testing is turned on
-    $context['variant'] = get_query_var('anyc_v', false); // A/B testing variant
+    $context['a_b_testing_on'] = filter_var(get_field('field_6790152da121b', 'option'), FILTER_VALIDATE_BOOLEAN); // Whether A/B testing is turned on
+
+    // if A/B testing is on, add the A/B test variant to the session and the context
+    if ($context['a_b_testing_on']){
+      if (!isset($_SESSION['a_b_test_variant'])) {
+        $_SESSION['a_b_test_variant'] = rand(0, 1) ? 'a' : 'b';
+      }
+      $context['variant'] = $_SESSION['a_b_test_variant']; // A/B testing variant
+    }
 
     /**
      * Get the default page meta description for the page

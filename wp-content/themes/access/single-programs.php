@@ -74,6 +74,12 @@ $program = new Controller\Programs();
 
 $context = Timber::get_context();
 
+// If A/B testing is on, redirect the URL to the A/B test variant
+// The a_b_test_redirect function only performs a redirect if the query has not been set in the URL
+if ($context['a_b_testing_on']) {
+  a_b_test_redirect($context['variant']);
+}
+
 preload_fonts($context['language_code']);
 
 /**
@@ -144,6 +150,11 @@ if (get_field('alert')) {
 $context['alerts'] = array_map(function($post) {
   return new Controller\Alert($post);
 }, $context['alerts']);
+
+// A/B testing
+$current_url = home_url($wp->request);
+$current_url_with_query = add_query_arg('anyc_v', 'a', $current_url);
+wp_redirect($new_url);
 
 /**
  * Render the view
