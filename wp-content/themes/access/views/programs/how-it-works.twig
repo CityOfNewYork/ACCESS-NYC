@@ -1,0 +1,63 @@
+<section id="how-it-works" data-step="how-it-works" class="outline-none active hidden:overflow print:active w-full" aria-hidden="false">
+  <header>
+    <h3>{{ stepNumber }}. {{ __('How it Works', 'accessnyc-program-detail') }}</h3>
+  </header>
+
+  <div class="type-exposition">
+    {{ post.get_field('program_description') }}
+  </div>
+
+  {% if post.heads_up | length %}
+  <div id="how-it-works__checklist" class="o-content mb-4">
+    {{ post.get_field('field_58912c1a8a81b')|add_ul_margin|add_anyc_table_numeric }} {# heads_up #}
+  </div>
+
+  {% endif %}
+
+  {% if nextStep != '' %}
+  {% include 'programs/next-button.twig' %}
+  {% endif %}
+
+  <div class="program-related-categories">
+    <h4 class="mb-1">{{ __('Related', 'accessnyc-program-detail') }}</h4>
+
+    {% for category in post.terms(['programs', 'populations-served']) %}
+      {% if category.taxonomy == 'populations-served' %}
+        {% set url_param = 'pop_served' %}
+      {% elseif category.taxonomy == 'page-type' %}
+        {% set url_param = 'page_type' %}
+      {% else %}
+        {% set url_param = 'program_cat' %}
+      {% endif %}
+      <a class="btn btn-primary btn-tag mb-1 max-w-full" href="../?{{ url_param }}={{ category.slug }}">
+        <span class="truncate">{{ category.name }}</span>
+      </a>
+    {% endfor %}
+  </div>
+
+  <div class="hidden print:block" aria-hidden="true">
+    <h3>{{ __('More ways to get help with this program', 'accessnyc-program-detail') }}</h3>
+
+    <div>
+      {# Gets all the current help method fields and creates an array to be iterated below #}
+      {# {% for method in [
+        'get_help_online',
+        'get_help_by_email',
+        'get_help_by_calling_311',
+        'get_help_by_calling_other_than_311',
+        'get_help_in_person'
+      ] %} #}
+      {% for method in [
+        'field_58912c1a8a996',
+        'field_58912c1a8a9a8',
+        'field_58912c1a8a9cb',
+        'field_58912c1a8a9ba',
+        'field_58912c1a8a984'
+      ] %}
+      {% if post.get_field(method) %}
+      <div>{{ post.get_field(method) }}</div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,122 @@
+{% extends "base.twig" %}
+
+{% block content %}
+<main class="color-light-background" id="content">
+  {% if alerts %}
+  <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
+    {% for alert in alerts %}
+      {% set class = loop.last ? '' : 'mb-2 screen-tablet:mb-3' %}
+
+      {% include 'components/alert.twig' with {this: alert, class: class} only %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div data-js="preload">
+    <header class="c-header p-2 screen-tablet:p-3 {% if post.alerts %}{% else %}mt-3{% endif %} mb-3 print:mt-0">
+      <div>
+        <h1 class="c-header__descriptor text-blue-dark">{{ __('Programs', 'accessnyctheme') }}</h1>
+
+        <h2 class="c-header__information text-grey-mid mb-0 list-inline-comma">&nbsp;</h2>
+      </div>
+    </header>
+
+    <div class="wrap pb-3 screen-desktop:layout-sidebar-small-gutter">
+      <aside id="filter-programs">
+        <h2 class="type-h4 mb-0 hidden screen-desktop:inline-block">
+          {{ __('Filter Programs', 'accessnyctheme') }}:
+        </h2>
+
+        <span class="text-small screen-desktop:hidden">
+          {{ __('Filter Programs', 'accessnyctheme') }}
+        </span>
+
+        <div class="flex items-center justify-center py-4" v-if="!init">
+          {% include 'partials/spinner.twig' with {this: {class: 'icon-4 block text-yellow-access'}} only %}
+
+          &nbsp;&nbsp;
+
+          {{ __('Getting Filters', 'accessnyctheme') }}
+        </div>
+      </aside>
+
+      <div id="see-programs" class="pt-2 screen-desktop:pt-0">
+        <div class="layout-gutter p-3 bg-grey-lightest mb-3">
+          {% for post in posts %}
+            {% include 'components/card.twig' with {'post': post, 'short_post': short_post} only %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-js="programs"
+    data-categories="{{ categories.term_id }}"
+    data-served="{{ served.term_id }}"
+    data-page="{{ pagination.current }}"
+    data-per-page="{{ per_page }}"
+    data-pages="{{ pagination.total }}"
+    data-count="{{ count }}"
+    data-pagination-next-link="{{ pagination.next.link }}">
+    {# The client rendered template is stored in ./archive.vue #}
+  </div>
+
+  <div class="sticky bottom-0 pointer-events-none z-10">
+    {% if alert_sitewide %}
+    {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
+    {% endif %}
+  </div>
+</main>
+{% endblock %}
+
+{% block scripts_footer %}
+{% include 'partials/strings.twig' with {
+  'translation_id': 'accessnyctheme',
+  'csp_script_nonce': csp_script_nonce,
+  'strings': [
+    {
+      'label': 'Toggle All',
+      'slug': 'ARCHIVE_TOGGLE_ALL'
+    },
+    {
+      'label': 'Learn more',
+      'slug': 'ARCHIVE_LEARN_MORE'
+    },
+    {
+      'label': 'Apply',
+      'slug': 'ARCHIVE_APPLY'
+    },
+    {
+      'label': 'All',
+      'slug': 'ARCHIVE_ALL'
+    },
+    {
+      'label': 'Programs',
+      'slug': 'ARCHIVE_PROGRAMS'
+    },
+    {
+      'label': 'Filter Programs',
+      'slug': 'ARCHIVE_FILTER_PROGRAMS'
+    },
+    {
+      'label': 'No Results',
+      'slug': 'ARCHIVE_NO_RESULTS'
+    },
+    {
+      'label': 'See Programs',
+      'slug': 'ARCHIVE_SEE_PROGRAMS'
+    },
+    {
+      'label': 'Loading',
+      'slug': 'ARCHIVE_LOADING'
+    },
+    {
+      'label': 'Try deselecting some filters',
+      'slug': 'ARCHIVE_NO_RESULTS_INSTRUCTIONS'
+    },
+    {
+      'label': 'See More Results',
+      'slug': 'ARCHIVE_MORE_RESULTS'
+    }
+  ]} only %}
+{% endblock %}

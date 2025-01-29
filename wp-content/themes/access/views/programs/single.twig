@@ -1,0 +1,143 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  <main id="content" class="color-light-background">
+
+    {% if alerts %}
+    <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
+      {% for alert in alerts %}
+        {% set class = loop.last ? '' : 'mb-2 screen-tablet:mb-3' %}
+
+        {% include 'components/alert.twig' with {this: alert, class: class} only %}
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <p class="wrap m-0 pt-3 hidden print:block" aria-hidden="true">
+      <strong>{{ __('Get back to this page', 'accessnyc-program-detail') }}:</strong>
+
+      <a href="{{ post.get_permalink }}">{{ post.get_permalink }}</a>
+    </p>
+
+    <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0">
+      <div class="c-header__icon">
+        <span class="hidden" aria-hidden="true">{{ post.category.name }}</span>
+
+        {% include 'elements/icon.twig' with {
+          'icon': 'icon-card-' ~ post.category.slug ~ '-v' ~ post.icon.version,
+          'class': post.icon.class,
+          'title': post.category.name
+        } only %}
+      </div>
+
+      <div>
+        <h1 class="c-header__descriptor">
+          {% if post.status %}
+          <mark class="badge color-{{ post.status.type }}-status font-sans inline-block">{{ post.status.text }}</mark>
+          {% endif %}
+
+          {{ post.plain_language_program_name }}
+        </h1>
+
+        <h2 class="c-header__information color__alt mb-0">
+          <span>
+            {{ post.program_name }}
+          </span>
+
+          {% if post.program_acronym | length %}({{ post.program_acronym }}){% endif %}
+
+          {% if post.government_agency %} |
+            <span>
+              {{ post.government_agency }}
+            </span>
+          {% endif %}
+        </h2>
+      </div>
+    </header>
+
+    <section class="wrap pt-2 screen-desktop:layout-sidebar-small-gutter" data-js="step-by-step">
+      <aside>
+        <nav class="c-side-nav print:hidden" data-js="program-nav">
+          <ol>
+            {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
+            <li>
+              <a id="nav-link-{{ item.value }}" data-step-go-to="{{ item.value }}" class="active" href="#{{ item.value }}">
+                {{ __(item.label, 'accessnyc-program-detail') }}
+              </a>
+            </li>
+            {% endfor %}
+          </ol>
+        </nav>
+
+        {% include 'programs/share.twig' %}
+      </aside>
+
+      <article class="pt-2 screen-desktop:pt-0">
+        {% set sectionArray = [] %}
+
+        {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
+        {% set sectionArray = sectionArray | merge([item.value])  %}
+        {% endfor %}
+
+        {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
+        {% include 'programs/' ~ item.value ~ '.twig' with {
+            'stepNumber': loop.index,
+            'nextStep': post.get_field('field_589e43563c471')[loop.index],
+            'hidden': (loop.index > 1)
+          } %}
+        {% endfor %}
+      </article>
+    </section>
+
+    <section class="wrap print:hidden">
+      <header>
+        <h3 class="text-blue-dark border-t-2 border-yellow-access pt-4 mt-4">
+          {{ __('More ways to get help with this program', 'accessnyc-program-detail') }}
+        </h3>
+      </header>
+
+      <div class="screen-desktop:layout-columns-gutter">
+        {# {% for method in [
+          'get_help_online',
+          'get_help_by_email',
+          'get_help_by_calling_311',
+          'get_help_by_calling_other_than_311',
+          'get_help_in_person'
+        ] %} #}
+        {% for method in [
+          'field_58912c1a8a996',
+          'field_58912c1a8a9a8',
+          'field_58912c1a8a9cb',
+          'field_58912c1a8a9ba',
+          'field_58912c1a8a984'
+        ] %}
+        {% if post.get_field(method) %}
+        <div>
+          {{ post.get_field(method) }}
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+
+    <footer class="wrap pt-4">
+      <p class="color__alt">
+        {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date(fn('get_option', 'date_format')) }}
+      </p>
+    </footer>
+
+    {# {% include 'components/feedback.twig' with {this: post, action: shareAction} only %} #}
+
+    <div class="sticky bottom-0 z-10">
+      {# {% if fn('defined', 'AIRTABLE_FEEDBACK_BASE_KEY') and fn('defined', 'AIRTABLE_FEEDBACK_API_KEY') %}
+      <div class="wrap text-end pb-2">
+        <button aria-controls="aria-c-modal" aria-expanded="false" class="btn btn-small btn-tertiary" data-dialog="open" data-dialog-lock="true" data-js="dialog">{{ __('Feedback', 'accessnyctheme') }}</button>
+      </div>
+      {% endif %} #}
+
+      {% if alert_sitewide %}
+      {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
+      {% endif %}
+    </div>
+  </main>
+{% endblock %}

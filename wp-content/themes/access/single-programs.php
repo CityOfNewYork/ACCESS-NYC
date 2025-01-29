@@ -82,7 +82,7 @@ if ($context['a_b_testing_on']) {
 if ($context['a_b_testing_on'] && $context['variant'] == 'b') {
   enqueue_script('single-programs-b');
 } else {
-  enqueue_script('single-programs-b');
+  enqueue_script('single-programs');
 }
 
 preload_fonts($context['language_code']);
@@ -160,4 +160,4 @@ $context['alerts'] = array_map(function($post) {
  * Render the view
  */
 
-Timber::render('programs-b/single.twig', $context);
+Timber::render('programs/single.twig', $context);

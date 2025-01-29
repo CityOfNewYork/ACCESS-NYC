@@ -1,0 +1,157 @@
+<section id="how-to-apply" data-step="how-to-apply" class="outline-none active hidden:overflow print:active w-full" aria-hidden="false">
+  <header>
+    <h3>{{ stepNumber }}. {{ __('How to apply', 'accessnyc-program-detail') }}</h3>
+  </header>
+
+  {# {% set sections = [
+      'how_to_apply_or_enroll_online',
+      'how_to_apply_or_enroll_by_mail',
+      'how_to_apply_or_enroll_by_phone',
+      'how_to_apply_or_enroll_in_person'
+    ] %} #}
+
+  {% set sections = [
+      'field_58912c1a8a850',
+      'field_58912c1a8a885',
+      'field_58912c1a8a900',
+      'field_58912c1a8a8cb'
+    ] %}
+
+  {% set accordions = [] %}
+
+  {% for section in sections %}
+    {% if post.get_field(section) %}
+      {% set accordions = accordions|merge([section]) %}
+    {% endif %}
+  {% endfor %}
+
+  {% for accordion in accordions %}
+    {% if accordion == 'field_58912c1a8a850' %} {# online #}
+      {% set this = {
+        id: accordion|replace({'_': '-'}),
+        active: loop.index == 1 ? true : false,
+        header: __('Apply online', 'accessnyc-program-detail'),
+        body: '<span>' ~ post.get_field(accordion) ~ '</span>',
+        cta: post.apply_online_call_to_action ? {
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          href: post.url_of_online_application,
+          text: post.apply_online_call_to_action
+        } : false
+      } %}
+    {% endif %}
+
+    {% if accordion == 'field_58912c1a8a885' %} {# mail #}
+      {% set this = {
+        id: accordion|replace({'_': '-'}),
+        active: loop.index == 1 ? true : false,
+        header: __('Apply by mail', 'accessnyc-program-detail'),
+        body: '<span>' ~ post.get_field(accordion) ~ '</span>',
+        cta: post.apply_by_mail_call_to_action ? {
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          href: post.url_of_pdf_application_forms ? post.url_of_pdf_application_forms : post.application_forms_pdfs,
+          text: post.apply_by_mail_call_to_action
+        } : false
+      } %}
+    {% endif %}
+
+    {% if accordion == 'field_58912c1a8a900' %} {# phone #}
+      {% set this = {
+        id: accordion|replace({'_': '-'}),
+        active: loop.index == 1 ? true : false,
+        header: __('Apply by phone', 'accessnyc-program-detail'),
+        body: (post.get_field(accordion) and post.get_field('phone_numbers')) ?
+          '<span>' ~ post.get_field(accordion) ~ '</span>' ~ '<span>' ~ post.get_field('phone_numbers') ~ '</span>' :
+          '<span>' ~ post.get_field(accordion) ~ '</span>',
+        cta: false
+      } %}
+    {% endif %}
+
+    {% if accordion == 'field_58912c1a8a8cb' %} {# in_person #}
+      {% set this = {
+        id: accordion|replace({'_': '-'}),
+        active: loop.index == 1 ? true : false,
+        header: __('Apply in person', 'accessnyc-program-detail'),
+        body: '<span>' ~ post.get_field(accordion) ~ '</span>',
+        cta: (post.office_locations_url and post.apply_in_person_call_to_action) ? {
+          target: '_blank',
+          rel: 'noopener noreferrer',
+          href: post.office_locations_url,
+          text: post.apply_in_person_call_to_action|striptags
+        } : false
+      } %}
+    {% endif %}
+
+    <article id="{{ this.id }}" class="c-accordion">
+      <header class="c-accordion__header color-dark-background">
+        <p id="aria-lb-{{ this.id }}">
+          {{ this.header }}
+        </p>
+      </header>
+
+      <div class="c-accordion__body color-mid-background text-small screen-tablet:text-normal print:active hidden:overflow animated">
+        <div class="c-accordion__padding">
+          {{ this.body }}
+
+          {% if this.cta %}
+          <p class="print:hidden">
+            {% if this.itemtype %}<span class="hidden" aria-hidden="true">{{ this.cta.href }}</span>{% endif %}
+            <a class="btn btn-secondary btn-next text-small" href="{{ this.cta.href }}" {% if this.cta.target %}target="{{ this.cta.target }}"{% endif %} {% if this.cta.rel %}rel="{{ this.cta.rel }}"{% endif %}>
+              {{ this.cta.text }}
+            </a>
+          </p>
+          {% endif %}
+        </div>
+      </div>
+    </article>
+  {% endfor %}
+
+  <div class="c-alert-box bg-status-info print:hidden">
+    <div class="c-alert-box__icon" aria-hidden="true">
+      <svg class="c-alert-box__svg icon-4">
+        <use xlink:href="#icon-info"></use>
+      </svg>
+    </div>
+
+    <div class="c-alert-box__body">
+      <p>
+        <b>{{ __('Come back to it later.', 'accessnyc-program-detail') }}</b>
+
+        <br/>
+
+        {{ __('We can send you a link to this page to help you get back to it when you’re ready.', 'accessnyc-program-detail') }}</p>
+
+        <div class="layout-gutter screen-tablet:layout-columns-gutter">
+          {% include 'components/share-form.twig' with {this: {
+            type: 'tel',
+            button: __('Text', 'accessnyc-program-detail'),
+            placeholder: __('Phone Number', 'accessnyc-program-detail'),
+            post: post.share_action,
+            action: 'sms_send',
+            url: post.share_url,
+            hash: post.share_hash,
+            template: 'programs'
+          }} only %}
+
+          {% include 'components/share-form.twig' with {this: {
+            type: 'email',
+            button: __('Email', 'accessnyc-program-detail'),
+            placeholder: __('Email address', 'accessnyc-program-detail'),
+            post: post.share_action,
+            action: 'email_send',
+            url: post.share_url,
+            hash: post.share_hash,
+            template: 'programs'
+          }} only %}
+        </div>
+
+        <div class="mt-3 screen-tablet:m-0 hidden" aria-hidden="true" id="aria-db-share-disclaimer">
+          {% include 'components/disclaimer-small.twig' %}
+        </div>
+      </p>
+    </div>
+  </div>
+</section>
+
+{% include 'partials/strings-share.twig' %}
