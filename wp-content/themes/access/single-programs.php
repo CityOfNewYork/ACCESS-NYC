@@ -81,8 +81,7 @@ if ($context['a_b_testing_on']) {
 
 if ($context['a_b_testing_on'] && $context['variant'] == 'b') {
   enqueue_script('single-programs-b');
-}
-else {
+} else {
   enqueue_script('single-programs-b');
 }
 
