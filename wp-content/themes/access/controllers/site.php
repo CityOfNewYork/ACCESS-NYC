@@ -112,8 +112,7 @@ class Site extends TimberSite {
     if ($context['a_b_testing_on']) {
       if (isset($_COOKIE['ab_test_variant'])) {
         $context['variant'] = $_COOKIE['ab_test_variant'];
-      }
-      else {
+      } else {
         $variant = rand(0, 1) ? 'a' : 'b';
         setcookie('ab_test_variant', $variant, time() + (DAY_IN_SECONDS * 30), COOKIEPATH, COOKIE_DOMAIN);
         $context['variant'] = $variant;
