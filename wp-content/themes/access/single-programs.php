@@ -151,11 +151,6 @@ $context['alerts'] = array_map(function($post) {
   return new Controller\Alert($post);
 }, $context['alerts']);
 
-// A/B testing
-$current_url = home_url($wp->request);
-$current_url_with_query = add_query_arg('anyc_v', 'a', $current_url);
-wp_redirect($new_url);
-
 /**
  * Render the view
  */
