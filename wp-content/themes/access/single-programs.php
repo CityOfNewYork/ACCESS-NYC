@@ -31,7 +31,6 @@ enqueue_inline('google-recaptcha');
 // TODO: Evaluate coverage of individual polyfills and load per browser
 enqueue_script('polyfill');
 enqueue_script('main');
-enqueue_script('single-programs');
 
 /**
  * Manual DNS prefetch and preconnect headers that are not added through
@@ -78,6 +77,13 @@ $context = Timber::get_context();
 // The a_b_test_redirect function only performs a redirect if the query has not been set in the URL
 if ($context['a_b_testing_on']) {
   a_b_test_redirect($context['variant']);
+}
+
+if ($context['a_b_testing_on'] && $context['variant'] == 'b') {
+  enqueue_script('single-programs-b');
+}
+else {
+  enqueue_script('single-programs-b');
 }
 
 preload_fonts($context['language_code']);
@@ -155,4 +161,4 @@ $context['alerts'] = array_map(function($post) {
  * Render the view
  */
 
-Timber::render('programs/single.twig', $context);
+Timber::render('programs-b/single.twig', $context);
