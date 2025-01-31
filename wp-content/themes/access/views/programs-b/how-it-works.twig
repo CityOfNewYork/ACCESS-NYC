@@ -1,6 +1,6 @@
 <section id="how-it-works" data-step="how-it-works" class="outline-none active hidden:overflow print:active w-full" aria-hidden="false">
   <header>
-    <h3>{{ stepNumber }}. {{ __('How it Works', 'accessnyc-program-detail') }}</h3>
+    <h3>{{ __('How it Works', 'accessnyc-program-detail') }}</h3>
   </header>
 
   <div class="type-exposition">
@@ -13,27 +13,6 @@
   </div>
 
   {% endif %}
-
-  {% if nextStep != '' %}
-  {% include 'programs/next-button.twig' %}
-  {% endif %}
-
-  <div class="program-related-categories">
-    <h4 class="mb-1">{{ __('Related', 'accessnyc-program-detail') }}</h4>
-
-    {% for category in post.terms(['programs', 'populations-served']) %}
-      {% if category.taxonomy == 'populations-served' %}
-        {% set url_param = 'pop_served' %}
-      {% elseif category.taxonomy == 'page-type' %}
-        {% set url_param = 'page_type' %}
-      {% else %}
-        {% set url_param = 'program_cat' %}
-      {% endif %}
-      <a class="btn btn-primary btn-tag mb-1 max-w-full" href="../?{{ url_param }}={{ category.slug }}">
-        <span class="truncate">{{ category.name }}</span>
-      </a>
-    {% endfor %}
-  </div>
 
   <div class="hidden print:block" aria-hidden="true">
     <h3>{{ __('More ways to get help with this program', 'accessnyc-program-detail') }}</h3>

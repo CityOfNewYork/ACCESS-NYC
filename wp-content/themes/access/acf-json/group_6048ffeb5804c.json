@@ -119,6 +119,34 @@
             "save_other_choice": 0
         },
         {
+            "key": "field_6790152da121b",
+            "label": "Enable A\/B testing",
+            "name": "a-b-testing",
+            "aria-label": "",
+            "type": "radio",
+            "instructions": "Enable the A\/B tests that have been set up in the code.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "relevanssi_exclude": 0,
+            "wpml_cf_preferences": 0,
+            "choices": {
+                "true": "True",
+                "false": "False"
+            },
+            "default_value": "False",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "layout": "vertical",
+            "save_other_choice": 0
+        },
+        {
             "key": "field_6048facf4f835",
             "label": "Enable Google Tag Manager",
             "name": "google-tag-manager",
@@ -163,8 +191,7 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": false,
-    "modified": 1714587205,
-    "local_file": "\/var\/www\/html\/wp-content\/themes\/access\/acf-json\/group_6048ffeb5804c.json",
-    "acfml_field_group_mode": "advanced"
+    "show_in_rest": 0,
+    "acfml_field_group_mode": "translation",
+    "modified": 1737495886
 }

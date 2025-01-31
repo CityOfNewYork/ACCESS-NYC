@@ -31,7 +31,6 @@ enqueue_inline('google-recaptcha');
 // TODO: Evaluate coverage of individual polyfills and load per browser
 enqueue_script('polyfill');
 enqueue_script('main');
-enqueue_script('single-programs');
 
 /**
  * Manual DNS prefetch and preconnect headers that are not added through
@@ -73,6 +72,13 @@ add_filter('wp_resource_hints', function($urls, $relation_type) {
 $program = new Controller\Programs();
 
 $context = Timber::get_context();
+
+// If A/B testing is on, use the Javascript script that matches the variant
+if ($context['a_b_testing_on'] && $context['variant'] == 'b') {
+  enqueue_script('single-programs-b');
+} else {
+  enqueue_script('single-programs');
+}
 
 preload_fonts($context['language_code']);
 
@@ -149,4 +155,8 @@ $context['alerts'] = array_map(function($post) {
  * Render the view
  */
 
-Timber::render('programs/single.twig', $context);
+if ($context['a_b_testing_on'] && $context['variant'] == 'b') {
+  Timber::render('programs-b/single.twig', $context);
+} else {
+  Timber::render('programs/single.twig', $context);
+}

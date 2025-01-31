@@ -1,6 +1,6 @@
 <section id="how-to-apply" data-step="how-to-apply" class="outline-none active hidden:overflow print:active w-full" aria-hidden="false">
   <header>
-    <h3>{{ stepNumber }}. {{ __('How to apply', 'accessnyc-program-detail') }}</h3>
+    <h3>{{ __('How to apply', 'accessnyc-program-detail') }}</h3>
   </header>
 
   {# {% set sections = [
@@ -106,52 +106,6 @@
       </div>
     </article>
   {% endfor %}
-
-  <div class="c-alert-box bg-status-info print:hidden">
-    <div class="c-alert-box__icon" aria-hidden="true">
-      <svg class="c-alert-box__svg icon-4">
-        <use xlink:href="#icon-info"></use>
-      </svg>
-    </div>
-
-    <div class="c-alert-box__body">
-      <p>
-        <b>{{ __('Come back to it later.', 'accessnyc-program-detail') }}</b>
-
-        <br/>
-
-        {{ __('We can send you a link to this page to help you get back to it when you’re ready.', 'accessnyc-program-detail') }}</p>
-
-        <div class="layout-gutter screen-tablet:layout-columns-gutter">
-          {% include 'components/share-form.twig' with {this: {
-            type: 'tel',
-            button: __('Text', 'accessnyc-program-detail'),
-            placeholder: __('Phone Number', 'accessnyc-program-detail'),
-            post: post.share_action,
-            action: 'sms_send',
-            url: post.share_url,
-            hash: post.share_hash,
-            template: 'programs'
-          }} only %}
-
-          {% include 'components/share-form.twig' with {this: {
-            type: 'email',
-            button: __('Email', 'accessnyc-program-detail'),
-            placeholder: __('Email address', 'accessnyc-program-detail'),
-            post: post.share_action,
-            action: 'email_send',
-            url: post.share_url,
-            hash: post.share_hash,
-            template: 'programs'
-          }} only %}
-        </div>
-
-        <div class="mt-3 screen-tablet:m-0 hidden" aria-hidden="true" id="aria-db-share-disclaimer">
-          {% include 'components/disclaimer-small.twig' %}
-        </div>
-      </p>
-    </div>
-  </div>
 </section>
 
 {% include 'partials/strings-share.twig' %}

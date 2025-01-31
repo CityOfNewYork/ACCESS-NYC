@@ -1,29 +1,7 @@
 {% extends "base.twig" %}
 
-{% set more_information_section = false %}
-
-{% for method in [
-        'field_58912c1a8a996',
-        'field_58912c1a8a9a8',
-        'field_58912c1a8a9cb',
-        'field_58912c1a8a9ba',
-        'field_58912c1a8a984'
-    ] %}
-    {% if post.get_field(method) %}
-      {% set more_information_section = true %}
-    {% endif %}
-{% endfor %}
-
-{% set how_to_apply_section = false %}
-
-{% for item in post.get_field('field_589e43563c471') %} {# show_section #}
-  {% if item.value == 'how-to-apply' %}
-    {% set how_to_apply_section = true %}
-  {% endif %}
-{% endfor %}
-
 {% block content %}
-  <main id="content" class="color-light-background flex flex-col">
+  <main id="content" class="color-light-background">
 
     {% if alerts %}
     <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
@@ -41,8 +19,18 @@
       <a href="{{ post.get_permalink }}">{{ post.get_permalink }}</a>
     </p>
 
-    <header id="program-guide-header" class="c-header px-2 pt-2 pb-0 screen-tablet:px-3 screen-desktop:py-3 mt-3 print:mt-0 bg-white">
-      <div class="w-full">
+    <header class="c-header p-2 screen-tablet:p-3 mt-3 mb-3 print:mt-0">
+      <div class="c-header__icon">
+        <span class="hidden" aria-hidden="true">{{ post.category.name }}</span>
+
+        {% include 'elements/icon.twig' with {
+          'icon': 'icon-card-' ~ post.category.slug ~ '-v' ~ post.icon.version,
+          'class': post.icon.class,
+          'title': post.category.name
+        } only %}
+      </div>
+
+      <div>
         <h1 class="c-header__descriptor">
           {% if post.status %}
           <mark class="badge color-{{ post.status.type }}-status font-sans inline-block">{{ post.status.text }}</mark>
@@ -64,72 +52,27 @@
             </span>
           {% endif %}
         </h2>
-
-        {% if post.url_of_online_application and how_to_apply_section %}
-          <a class="btn btn-secondary btn-next text-small mt-3 py-2" href="{{ post.url_of_online_application }}" target="_blank" rel="noopener noreferrer">
-              {{ post.apply_online_call_to_action ? post.apply_online_call_to_action : __('Apply now', 'accessnyc-program-detail') }}
-            </a>
-        {% endif %}
-
-        {# Sections: tablet and mobile#}
-        <div class="block screen-desktop:hidden">
-          {% include 'programs/share.twig' %}
-        </div>
       </div>
     </header>
 
-    <nav class="print:hidden screen-desktop:hidden flex flex-row overflow-x-auto c-top-nav sticky top-0 z-10 bg-white p-2 screen-tablet:p-3" style="text-wrap: nowrap;" data-js="program-nav">
-      {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
-        <a id="top-nav-link-{{ item.value }}" class="mr-2 top-nav-link" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
-          {{ __(item.label, 'accessnyc-program-detail') }}
-        </a>
-      {% endfor %}
-      
-      {% if more_information_section %}
-      <a id="top-nav-link-more-information" class="top-nav-link" data-step-go-to="more-information" href="#more-information">
-        {{ __('More information', 'accessnyc-program-detail') }}
-      </a>
-      {% endif %}
-    </nav>
-
-    <div class="wrap pt-2 flex flex-1" data-js="step-by-step">
-
-      {# Sections: desktop #}
-      <aside class="screen-desktop:mr-3 hidden screen-desktop:block sticky self-start" style="top: 20px">
+    <section class="wrap pt-2 screen-desktop:layout-sidebar-small-gutter" data-js="step-by-step">
+      <aside>
         <nav class="c-side-nav print:hidden" data-js="program-nav">
-          <ul>
+          <ol>
             {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
-            <li class="pl-0">
-              <a id="side-nav-link-{{ item.value }}" class="side-nav-link" data-step-go-to="{{ item.value }}" href="#{{ item.value }}">
+            <li>
+              <a id="nav-link-{{ item.value }}" data-step-go-to="{{ item.value }}" class="active" href="#{{ item.value }}">
                 {{ __(item.label, 'accessnyc-program-detail') }}
               </a>
             </li>
-
-            {# This exists only to make the sidebar size consistent regardless of which element is active #}
-            <div aria-hidden="true" class="side-nav-link invisible font-bold pr-2" style="height: 0px">
-              {{ __(item.label, 'accessnyc-program-detail') }}
-            </div>
             {% endfor %}
-
-            {% if more_information_section %}
-              <li class="pl-0">
-                <a id="side-nav-link-more-information" class="side-nav-link" data-step-go-to="more-information" href="#more-information">
-                  {{ __('More information', 'accessnyc-program-detail') }}
-                </a>
-              </li>
-
-              {# This exists only to make the sidebar size consistent regardless of which element is active #}
-              <div aria-hidden="true" class="side-nav-link invisible font-bold pr-2" style="height: 0px">
-                {{ __('More information', 'accessnyc-program-detail') }}
-              </div>
-            {% endif %}
-          </ul>
+          </ol>
         </nav>
 
         {% include 'programs/share.twig' %}
       </aside>
 
-      <article class="pt-2 screen-desktop:pt-0 flex-1">
+      <article class="pt-2 screen-desktop:pt-0">
         {% set sectionArray = [] %}
 
         {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
@@ -137,72 +80,51 @@
         {% endfor %}
 
         {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
-          {% include 'programs/' ~ item.value ~ '.twig' with {
-              'hidden': (loop.index > 1)
-            } %}
-          <br>
+        {% include 'programs/' ~ item.value ~ '.twig' with {
+            'stepNumber': loop.index,
+            'nextStep': post.get_field('field_589e43563c471')[loop.index],
+            'hidden': (loop.index > 1)
+          } %}
         {% endfor %}
-
-        {% if more_information_section %}
-          {% include 'programs/more-information.twig' with { 'post': post } %}
-          <br>
-        {% endif %}
-
-        <div class="c-alert-box mb-3 bg-status-info print:hidden">
-          <div class="c-alert-box__icon" aria-hidden="true">
-            <svg class="c-alert-box__svg icon-4">
-              <use xlink:href="#icon-info"></use>
-            </svg>
-          </div>
-
-          <div class="c-alert-box__body">
-            <p>
-              <b>{{ __('Come back to it later.', 'accessnyc-program-detail') }}</b>
-
-              <br/>
-
-              {{ __('We can send you a link to this page to help you get back to it when you’re ready.', 'accessnyc-program-detail') }}</p>
-
-              <div class="layout-gutter screen-tablet:layout-columns-gutter">
-                {% include 'components/share-form.twig' with {this: {
-                  type: 'tel',
-                  button: __('Text', 'accessnyc-program-detail'),
-                  placeholder: __('Phone Number', 'accessnyc-program-detail'),
-                  post: post.share_action,
-                  action: 'sms_send',
-                  url: post.share_url,
-                  hash: post.share_hash,
-                  template: 'programs'
-                }} only %}
-
-                {% include 'components/share-form.twig' with {this: {
-                  type: 'email',
-                  button: __('Email', 'accessnyc-program-detail'),
-                  placeholder: __('Email address', 'accessnyc-program-detail'),
-                  post: post.share_action,
-                  action: 'email_send',
-                  url: post.share_url,
-                  hash: post.share_hash,
-                  template: 'programs'
-                }} only %}
-              </div>
-
-              <div class="mt-3 screen-tablet:m-0 hidden" aria-hidden="true" id="aria-db-share-disclaimer">
-                {% include 'components/disclaimer-small.twig' %}
-              </div>
-            </p>
-          </div>
-        </div>
-
-        <br>
-
-        <div>
-          <p class="color__alt">
-            {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date(fn('get_option', 'date_format')) }}
-          </p>
-        </div>
       </article>
-    </div>
+    </section>
+
+    <section class="wrap print:hidden">
+      <header>
+        <h3 class="text-blue-dark border-t-2 border-yellow-access pt-4 mt-4">
+          {{ __('More ways to get help with this program', 'accessnyc-program-detail') }}
+        </h3>
+      </header>
+
+      <div class="screen-desktop:layout-columns-gutter">
+        {# {% for method in [
+          'get_help_online',
+          'get_help_by_email',
+          'get_help_by_calling_311',
+          'get_help_by_calling_other_than_311',
+          'get_help_in_person'
+        ] %} #}
+        {% for method in [
+          'field_58912c1a8a996',
+          'field_58912c1a8a9a8',
+          'field_58912c1a8a9cb',
+          'field_58912c1a8a9ba',
+          'field_58912c1a8a984'
+        ] %}
+        {% if post.get_field(method) %}
+        <div>
+          {{ post.get_field(method) }}
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+
+    <footer class="wrap pt-4">
+      <p class="color__alt">
+        {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date(fn('get_option', 'date_format')) }}
+      </p>
+    </footer>
 
     {# {% include 'components/feedback.twig' with {this: post, action: shareAction} only %} #}
 

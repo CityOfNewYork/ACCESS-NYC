@@ -1,0 +1,9 @@
+<div class="print:hidden">
+  <h4 class="mb-1 text-small">{{ __('Next section', 'accessnyc-program-detail') }}:</h4>
+
+  <p>
+    <a data-step-go-to="{{ nextStep.value }}" class="btn btn-secondary btn-next text-small" href="#{{ nextStep.value }}">
+      {{ stepNumber + 1 }}. {{ __(nextStep.label, 'accessnyc-program-detail') }}
+    </a>
+  </p>
+</div>
