@@ -73,12 +73,7 @@ $program = new Controller\Programs();
 
 $context = Timber::get_context();
 
-// If A/B testing is on, redirect the URL to the A/B test variant
-// The a_b_test_redirect function only performs a redirect if the query has not been set in the URL
-if ($context['a_b_testing_on']) {
-  a_b_test_redirect($context['variant']);
-}
-
+// If A/B testing is on, use the Javascript script that matches the variant
 if ($context['a_b_testing_on'] && $context['variant'] == 'b') {
   enqueue_script('single-programs-b');
 } else {
@@ -160,4 +155,8 @@ $context['alerts'] = array_map(function($post) {
  * Render the view
  */
 
-Timber::render('programs/single.twig', $context);
+if ($context['a_b_testing_on'] && $context['variant'] == 'b') {
+  Timber::render('programs-b/single.twig', $context);
+} else {
+  Timber::render('programs/single.twig', $context);
+}

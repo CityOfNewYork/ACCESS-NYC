@@ -7,6 +7,11 @@
     {% block head %}
     <meta name="theme-color" content="#FFFFFF">
     <link rel="manifest" href="{{ theme.path }}/manifest.960190a2.json">
+
+    {% if variant is not null and variant is not empty %}
+    <meta name="a-b-variant" content="{{ variant }}">
+    {% endif %}
+    
     {% endblock %}
 
     {% block scripts_head %}{% endblock %}
