@@ -13,7 +13,7 @@
 
   {% if post.immigration_eligibility | length %}
     <div>
-      <h4>{{ __('Immigration eligibility', 'accessnyc-program-detail') }}</h3>
+      <h4>{{ __('Immigration status requirements', 'accessnyc-program-detail') }}</h3>
       <div class="o-content mb-4">
         {{ post.get_field('field_67884637728d7')|add_ul_margin }} {# immigration eligibility #}
       </div>
