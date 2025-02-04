@@ -97,7 +97,7 @@
           {% if this.cta %}
           <p class="print:hidden">
             {% if this.itemtype %}<span class="hidden" aria-hidden="true">{{ this.cta.href }}</span>{% endif %}
-            <a class="btn btn-secondary btn-next text-small" href="{{ this.cta.href }}" {% if this.cta.target %}target="{{ this.cta.target }}"{% endif %} {% if this.cta.rel %}rel="{{ this.cta.rel }}"{% endif %}>
+            <a data-location="accordion" class="btn btn-secondary btn-next text-small" href="{{ this.cta.href }}" {% if this.cta.target %}target="{{ this.cta.target }}"{% endif %} {% if this.cta.rel %}rel="{{ this.cta.rel }}"{% endif %}>
               {{ this.cta.text }}
             </a>
           </p>
