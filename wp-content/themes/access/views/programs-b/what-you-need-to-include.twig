@@ -11,7 +11,7 @@
     {% include 'components/accordion.twig' with {
       this: {
         id: 'what-you-need-to-include-' ~ loop.index,
-        active: (loop.index == 1) ? true : false,
+        active: false,
         header: item.heading,
         body: item.body
       }
