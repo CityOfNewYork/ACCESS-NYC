@@ -131,6 +131,7 @@
             action: 'sms_send',
             url: post.share_url,
             hash: post.share_hash,
+            program_name: post.program_name,
             template: 'programs'
           }} only %}
 
@@ -142,6 +143,7 @@
             action: 'email_send',
             url: post.share_url,
             hash: post.share_hash,
+            program_name: post.program_name,
             template: 'programs'
           }} only %}
         </div>
