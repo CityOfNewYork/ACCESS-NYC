@@ -112,8 +112,8 @@ class Site extends TimberSite {
     // The variant cookie is stored for 30 days
     if ($context['a_b_testing_on']) {
       if (isset($_COOKIE['ab_test_variant']) and (
-          $_COOKIE['ab_test_variant'] == 'a' 
-          or $_COOKIE['ab_test_variant'] == 'b') ) { // Variant cookie must be a valid value
+          $_COOKIE['ab_test_variant'] == 'a'
+          or $_COOKIE['ab_test_variant'] == 'b')) { // Variant cookie must be a valid value
         $context['variant'] = $_COOKIE['ab_test_variant'];
       } else {
         $variant = rand(0, 1) ? 'a' : 'b';
