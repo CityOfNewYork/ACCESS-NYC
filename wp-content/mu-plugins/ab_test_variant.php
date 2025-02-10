@@ -7,7 +7,7 @@
  */
 
 // Done in the init hook so that it is set before page caching logic
-add_action('init', function() {
+add_action( 'init', function() {
   global $ab_test_variant;
   
   if (isset($_COOKIE['ab_test_variant'])) {
