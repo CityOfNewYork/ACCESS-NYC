@@ -1,7 +1,7 @@
 /* eslint-env browser */
 
 import StepByStep from 'modules/step-by-step';
-// import 'modules/feedback';
+import 'modules/feedback';
 import 'modules/share-form';
 
 (() => {
