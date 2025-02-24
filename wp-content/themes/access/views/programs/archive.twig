@@ -40,6 +40,31 @@
         </div>
       </aside>
 
+      {# This list only exists so that the correct CSS classes are generated #}
+      <li class="c-filter-multi__item hidden">
+        <div class="c-filter-multi__item-header">
+          <label class="checkbox">
+            <span class="checkbox__label"></span>
+          </label>
+
+          <a class="c-filter-multi__item-header-toggle"  tabindex="-1">
+            <span class="map-filter-expand">{{__('Expand category', 'accessnyc-locations')}}</span>
+            <span class="map-filter-collapse">{{__('Collapse category', 'accessnyc-locations')}}</span>
+          </a>
+        </div>
+
+        <div class="c-filter-multi__item-group" aria-hidden="true">
+          <ul class="c-filter-multi__item-group-list">
+            <li class="c-filter-multi__item-group-subitem">
+              <label class="checkbox">
+                <input type="checkbox"tabindex="-1">
+                <span class="checkbox__label text-small font-normal"></span>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </li>
+
       <div id="see-programs" class="pt-2 screen-desktop:pt-0">
         <div class="layout-gutter p-3 bg-grey-lightest mb-3">
           {% for post in posts %}

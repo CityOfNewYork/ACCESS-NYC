@@ -30,7 +30,7 @@
 
       {% if show_apply %}
       <p class="hide-for-print">
-        <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}{% if "how-to-apply" in post.show_sections %}?step=how-to-apply{% endif %}" {% if target_blank %}target="_blank" rel="noopener"{% endif %}>{{__('Apply', 'accessnyc-results')}}</a>
+        <a class="btn btn-secondary btn-next" href="{{ post.get_permalink }}{% if "how-to-apply" in post.show_sections %}#how-to-apply{% endif %}" {% if target_blank %}target="_blank" rel="noopener"{% endif %}>{{__('Apply', 'accessnyc-results')}}</a>
       </p>
       {% endif %}
     </div>
