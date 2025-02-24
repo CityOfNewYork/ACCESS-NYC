@@ -37,6 +37,7 @@ class SmsMe extends ContactMe {
    *
    * @param   String  $url_shortened  Shortened url that is being shared.
    * @param   String  $url            Full url that is being shared.
+   * @param   String  $program_name   Name of the program that is being shared.
    * @param   String  $template       Slug of the template to retrieve.
    * @param   String  $lang           Language of the template to retrieve.
    *
