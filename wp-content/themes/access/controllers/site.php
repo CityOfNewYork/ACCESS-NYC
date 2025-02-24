@@ -108,6 +108,20 @@ class Site extends TimberSite {
     $context['is_print'] = get_query_var('print', false); // Print view
     $context['a_b_testing_on'] = filter_var(get_field('field_6790152da121b', 'option'), FILTER_VALIDATE_BOOLEAN);
 
+    // If A/B testing is on, add the A/B test variant to the cookies and the context
+    // The variant cookie is stored for 30 days
+    if ($context['a_b_testing_on']) {
+      if (isset($_COOKIE['ab_test_variant']) and (
+          $_COOKIE['ab_test_variant'] == 'a'
+          or $_COOKIE['ab_test_variant'] == 'b')) { // Variant cookie must be a valid value
+        $context['variant'] = $_COOKIE['ab_test_variant'];
+      } else {
+        $variant = rand(0, 1) ? 'a' : 'b';
+        setcookie('ab_test_variant', $variant, time() + (DAY_IN_SECONDS * 30), COOKIEPATH, COOKIE_DOMAIN);
+        $context['variant'] = $variant;
+      }
+    }
+
     /**
      * Get the default page meta description for the page
      */
