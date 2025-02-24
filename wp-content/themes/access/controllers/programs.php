@@ -51,7 +51,7 @@ class Programs extends Timber\Post {
 
     $this->share_action = admin_url('admin-ajax.php');
 
-    $this->share_url = $this->get_permalink() . '?step=how-to-apply';
+    $this->share_url = $this->get_permalink() . '#how-to-apply';
 
     $this->share_hash = SMNYC\hash($this->share_url);
 
