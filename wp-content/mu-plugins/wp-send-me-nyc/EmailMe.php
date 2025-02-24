@@ -87,6 +87,7 @@ class EmailMe extends ContactMe {
     // Replace program name
     $text_body = str_replace('{{ PROGRAM_NAME }}', $program_name, $text_body);
     $html = str_replace('{{ PROGRAM_NAME }}', $program_name, $html);
+    $subject = str_replace('{{ PROGRAM_NAME }}', $program_name, $subject);
 
     return array(
       'subject' => $subject,
