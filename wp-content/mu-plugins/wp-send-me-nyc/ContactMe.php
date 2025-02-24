@@ -151,11 +151,13 @@ class ContactMe {
 
       $url_shortened = (is_plugin_active('wp-bitly/wp-bitly.php')) ? $this->shorten($url) : $url;
 
+      $program_name = isset($_POST['program_name']) ? $_POST['program_name'] : '';
+
       $template = $_POST['template'];
 
       $lang = (!isset($_POST['lang']) || empty($_POST['lang'])) ? 'en' : $_POST['lang'];
 
-      $content = $this->content($url_shortened, $url, $share_text, $template, $lang);
+      $content = $this->content($url_shortened, $url, $program_name, $share_text, $template, $lang);
 
       $this->send($to, $content);
       $this->success($to, $guid, $url, $content);

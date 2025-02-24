@@ -39,13 +39,14 @@ class EmailMe extends ContactMe {
    *
    * @param   String  $url_shortened  Shortened url that is being shared.
    * @param   String  $url            Full url that is being shared.
+   * @param   String  $program_name   Name of the program that is being shared.
    * @param   String  $template       Slug of the template to retrieve.
    * @param   String  $share_text     Full url that is being shared.
    * @param   String  $lang           Language of the template to retrieve.
    *
    * @return  Array                   Includes the subject, html, and text bodies
    */
-  protected function content($url_shortened, $url, $share_text, $template, $lang) {
+  protected function content($url_shortened, $url, $program_name, $share_text, $template, $lang) {
     $controller = get_stylesheet_directory() . '/' . $this->template_controller;
 
     if (file_exists($controller)) {
@@ -82,6 +83,10 @@ class EmailMe extends ContactMe {
     // Replace Standard URL
     $text_body = str_replace('{{ URL }}', $url, $text_body);
     $html = str_replace('{{ URL }}', $url, $html);
+
+    // Replace program name
+    $text_body = str_replace('{{ PROGRAM_NAME }}', $program_name, $text_body);
+    $html = str_replace('{{ PROGRAM_NAME }}', $program_name, $html);
 
     return array(
       'subject' => $subject,
