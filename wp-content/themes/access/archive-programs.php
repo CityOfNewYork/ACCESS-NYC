@@ -71,7 +71,7 @@ $context['posts'] = array_map(function($post) {
 
 $context['pagination'] = Timber::get_pagination();
 
-$context['per_page'] = $wp_query->post_count;
+$context['per_page'] = 5; // default number of results per page
 
 $context['count'] = $wp_query->found_posts;
 
