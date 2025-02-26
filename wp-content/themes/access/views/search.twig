@@ -30,10 +30,11 @@
 
             <br class="hidden screen-desktop:inline-block">
 
+            {# If there is a search category selected, prompt the user to clear filters. Otherwise, direct the user to the program page #}
             {% if searchCategory.name | length %}
-              <a class="js-filter-reset" href="{{ language_code != 'en' ? '/' ~ language_code : '' }}/?s={{ query }}">{{ __('Clear filters.', 'accessnyctheme' )}}</a>
+              <a class="js-filter-reset" href="{{ language_code and language_code != 'en' ? '/' ~ language_code : '' }}/?s={{ query }}">{{ __('Clear filters.', 'accessnyctheme' )}}</a>
             {% else %}
-              <a class="js-filter-reset" href="{{ language_code != 'en' ? '/' ~ language_code : '' }}/programs">{{ __('See all programs.', 'accessnyctheme' )}}</a>
+              <a class="js-filter-reset" href="{{ language_code and language_code != 'en' ? '/' ~ language_code : '' }}/programs">{{ __('See all programs.', 'accessnyctheme' )}}</a>
             {% endif %}
 
           </h1>
