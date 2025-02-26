@@ -130,3 +130,34 @@ $path-to-images: 'img/';
     text-decoration: none;
   }
 }
+
+.table-numeric {
+  overflow-x: scroll;
+  display: block;
+  border-collapse: collapse;
+
+  tbody {
+    tr {
+      td {
+        background-color: white; // Default background color
+        border-width: thin;
+        border-color: white;
+
+        &:first-child {
+          position: sticky;
+          left: 0;
+          z-index: 10;
+          background-color: white; // Ensure it's above other columns
+        }
+      }
+
+      &:nth-child(odd) td {
+        background-color: $color-grey-lightest; // Apply alternating row color at td level
+      }
+
+      &:nth-child(odd) td:first-child {
+        background-color: $color-grey-lightest; // Ensure first column matches the row color
+      }
+    }
+  }
+}
