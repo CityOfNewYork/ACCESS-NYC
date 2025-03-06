@@ -134,14 +134,15 @@ $path-to-images: 'img/';
 .table-numeric {
   overflow-x: scroll;
   display: block;
-  border-collapse: collapse;
+  border-spacing: 0px;
 
   tbody {
     tr {
       td {
         background-color: white; // Default background color
-        border-width: thin;
+        border-width: 1px;
         border-color: white;
+        border-style: solid;
 
         &:first-child {
           position: sticky;
