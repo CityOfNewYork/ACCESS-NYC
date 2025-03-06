@@ -15,7 +15,7 @@ $removed_post_types = array(
   'homepage_tout',
   'homepage',
   'alert',
-  'program_search_links'
+  'search_suggestions'
 );
 
 add_filter('post_row_actions', 'HidePreviewLinks\post_type_links', 10, 1);

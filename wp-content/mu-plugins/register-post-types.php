@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: Register Post Types
- * Description: Adds custom post types: Homepage, Homepage Touts, Programs, Locations, Program Search Links, Alerts.
+ * Description: Adds custom post types: Homepage, Homepage Touts, Programs, Locations, Search Suggestions, Alerts.
  * Author: Blue State Digital
  */
 
@@ -129,21 +129,21 @@ add_action('init', function() {
   );
 
   register_post_type(
-    'program_search_links',
+    'search_suggestions',
     array(
       'labels' => array(
-        'name' => __('Program Search Links'),
-        'singular_name' => __('Program Search Link'),
-        'all_items' => __('All Program Search Links'),
+        'name' => __('Search Suggestions'),
+        'singular_name' => __('Search Suggestion'),
+        'all_items' => __('All Search Suggestions'),
         'add_new' => __('Add New'),
-        'add_new_item' => __('Add Program Search Link'),
+        'add_new_item' => __('Add Search Suggestion'),
         'edit' => __('Edit'),
-        'edit_item' => __('Edit Program'),
-        'new_item' => __('New Program'),
-        'view_item' => __('View Program'),
-        'search_items' => __('Search Programs'),
+        'edit_item' => __('Edit Suggestion'),
+        'new_item' => __('New Suggestion'),
+        'view_item' => __('View Suggestion'),
+        'search_items' => __('Search for Suggestions'),
       ),
-      'description' => __('Search Drawer Links to other Programs.'),
+      'description' => __('Search dropdown suggested links.'),
       'public' => true,
       'exclude_from_search' => true,
       'show_ui' => true,

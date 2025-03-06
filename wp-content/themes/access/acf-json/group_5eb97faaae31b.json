@@ -128,7 +128,7 @@
             {
                 "param": "post_type",
                 "operator": "!=",
-                "value": "program_search_links"
+                "value": "search_suggestions"
             },
             {
                 "param": "post_type",
