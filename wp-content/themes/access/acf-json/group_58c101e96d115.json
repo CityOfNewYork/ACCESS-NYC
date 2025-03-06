@@ -1,30 +1,53 @@
 {
     "key": "group_58c101e96d115",
-    "title": "Program Search Links",
+    "title": "Search Suggestions",
     "fields": [
         {
-            "key": "field_58c1020ec4450",
-            "label": "Program Links",
-            "name": "program_links",
+            "key": "field_67c8c3c358f5a",
+            "label": "Search suggestion list",
+            "name": "search_suggestion_list",
             "aria-label": "",
-            "type": "post_object",
-            "instructions": "Select up to 3 programs you would like to be highlighted in the search modal window.",
-            "required": 1,
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "post_type": [
-                "programs"
-            ],
-            "taxonomy": [],
-            "allow_null": 0,
-            "multiple": 1,
-            "return_format": "object",
-            "ui": 1,
-            "bidirectional_target": []
+            "show_in_rest": 0,
+            "relevanssi_exclude": 0,
+            "wpml_cf_preferences": 1,
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Row",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_67c8c3ea58f5b",
+                    "label": "Search suggestion",
+                    "name": "search_suggestion",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "show_in_rest": 0,
+                    "relevanssi_exclude": 0,
+                    "wpml_cf_preferences": 1,
+                    "return_format": "array",
+                    "parent_repeater": "field_67c8c3c358f5a"
+                }
+            ]
         }
     ],
     "location": [
@@ -32,7 +55,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "program_search_links"
+                "value": "search_suggestions"
             }
         ]
     ],
@@ -57,10 +80,9 @@
         "tags",
         "send-trackbacks"
     ],
-    "active": 1,
+    "active": true,
     "description": "",
-    "show_in_rest": false,
-    "modified": 1714587205,
-    "local_file": "\/var\/www\/html\/wp-content\/themes\/access\/acf-json\/group_58c101e96d115.json",
-    "acfml_field_group_mode": "advanced"
+    "show_in_rest": 0,
+    "acfml_field_group_mode": "translation",
+    "modified": 1741210685
 }

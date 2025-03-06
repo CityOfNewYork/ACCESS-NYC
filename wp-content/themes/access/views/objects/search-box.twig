@@ -27,23 +27,22 @@
         </form>
 
         <div class="o-search-box__suggestions">
-          <div class="o-search-box__suggestions-header">
-            <h3>{{ __('Programs', 'accessnyctheme') }}</h3>
-
-            <a class="link-more hidden screen-tablet:inline-block" href="{{ url_base }}/programs">{{ __('See all programs', 'accessnyctheme') }}</a>
+          <div>
+            <h4>{{ __('Popular searches', 'accessnyctheme') }}</h4>
           </div>
 
           {% if search_links %}
-          <div class="o-search-box__suggestions-body">
-            {% for link in search_links[0].get_field('field_58c1020ec4450') %} {# program_links #}
-            <div class="o-search-box__suggestions-item">
-              <a href="{{ link.link }}">{{ link.plain_language_program_name }}</a>
-            </div>
+          <div class="o-search-box__suggestions-body flex flex-wrap">
+            {% for link in search_links[0].get_field('field_67c8c3c358f5a') %} {# search suggestions #}
+              <a class="px-3 py-2 bg-white rounded-full mr-2 mb-2 text-blue-dark no-underline flex items-center flex-nowrap" style="font-size: 18px" href="{{ link['search_suggestion']['url'] }}">
+                <svg class="icon icon-ui icon-2 mr-2" aria-hidden="true">
+                  <use xlink:href="#icon-ui-search"></use>
+                </svg>
+                {{ link['search_suggestion']['title'] }}
+              </a>
             {% endfor %}
           </div>
           {% endif %}
-
-          <a class="link-more screen-tablet:hidden" href="{{ url_base }}/programs" aria-hidden="true">{{ __('see all programs', 'accessnyctheme') }}</a>
         </div>
       </div>
     </div>
