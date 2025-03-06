@@ -147,7 +147,7 @@ $path-to-images: 'img/';
         &:first-child {
           position: sticky;
           left: 0;
-          z-index: 10;
+          z-index: 5;
           background-color: white; // Ensure it's above other columns
         }
       }
