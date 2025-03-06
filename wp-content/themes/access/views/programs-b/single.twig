@@ -23,7 +23,7 @@
 {% endfor %}
 
 {% block content %}
-  <main id="content" class="color-light-background flex flex-col">
+  <main id="content" class="color-light-background screen-desktop:flex screen-desktop:flex-col">
 
     {% if alerts %}
     <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
@@ -92,7 +92,7 @@
       {% endif %}
     </nav>
 
-    <div class="wrap pt-2 flex flex-1" data-js="step-by-step">
+    <div class="wrap pt-2 screen-desktop:flex screen-desktop:flex-1" data-js="step-by-step">
 
       {# Sections: desktop #}
       <aside class="screen-desktop:mr-3 hidden screen-desktop:block sticky self-start" style="top: 20px">
