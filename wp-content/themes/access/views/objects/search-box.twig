@@ -26,7 +26,8 @@
           </div>
         </form>
 
-        {% if search_links and search_links|length > 0 and search_links[0].get_field('field_67c8c3c358f5a') > 0 %}
+        {# Search links is a post type. The specified field is an array of suggested search links. #}
+        {% if search_links and search_links|length > 0 and search_links[0].get_field('field_67c8c3c358f5a')|length > 0 %}
           <div class="o-search-box__suggestions">
             <div>
               <h4>{{ __('Popular searches', 'accessnyctheme') }}</h4>
