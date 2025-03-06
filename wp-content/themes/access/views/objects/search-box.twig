@@ -26,24 +26,24 @@
           </div>
         </form>
 
-        <div class="o-search-box__suggestions">
-          <div>
-            <h4>{{ __('Popular searches', 'accessnyctheme') }}</h4>
-          </div>
+        {% if search_links and search_links|length > 0 and search_links[0].get_field('field_67c8c3c358f5a') > 0 %}
+          <div class="o-search-box__suggestions">
+            <div>
+              <h4>{{ __('Popular searches', 'accessnyctheme') }}</h4>
+            </div>
 
-          {% if search_links %}
-          <div class="o-search-box__suggestions-body flex flex-wrap">
-            {% for link in search_links[0].get_field('field_67c8c3c358f5a') %} {# search suggestions #}
-              <a class="px-3 py-2 bg-white rounded-full mr-2 mb-2 text-blue-dark no-underline flex items-center flex-nowrap" style="font-size: 18px" href="{{ link['search_suggestion']['url'] }}">
-                <svg class="icon icon-ui icon-2 mr-2" aria-hidden="true">
-                  <use xlink:href="#icon-ui-search"></use>
-                </svg>
-                {{ link['search_suggestion']['title'] }}
-              </a>
-            {% endfor %}
+            <div class="o-search-box__suggestions-body flex flex-wrap">
+              {% for link in search_links[0].get_field('field_67c8c3c358f5a') %} {# search suggestions #}
+                <a class="px-3 py-2 bg-white rounded-full mr-2 mb-2 text-blue-dark no-underline flex items-center flex-nowrap" style="font-size: 18px" href="{{ link['search_suggestion']['url'] }}">
+                  <svg class="icon icon-ui icon-2 mr-2" aria-hidden="true">
+                    <use xlink:href="#icon-ui-search"></use>
+                  </svg>
+                  {{ link['search_suggestion']['title'] }}
+                </a>
+              {% endfor %}
+            </div>
           </div>
-          {% endif %}
-        </div>
+        {% endif %}
       </div>
     </div>
   </div>
