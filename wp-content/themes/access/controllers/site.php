@@ -59,7 +59,7 @@ class Site extends TimberSite {
      */
 
     $context['search_links'] = Timber::get_posts(array(
-      'post_type' => 'program_search_links',
+      'post_type' => 'search_suggestions',
       'numberposts' => 1
     ));
 

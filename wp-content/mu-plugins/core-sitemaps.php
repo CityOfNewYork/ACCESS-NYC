@@ -36,7 +36,7 @@ add_filter('wp_sitemaps_post_types', function($post_types) {
   unset($post_types['homepage_tout']);
   unset($post_types['smnyc-sms']);
   unset($post_types['smnyc-email']);
-  unset($post_types['program_search_links']);
+  unset($post_types['search_suggestions']);
   unset($post_types['alert']);
 
   return $post_types;
