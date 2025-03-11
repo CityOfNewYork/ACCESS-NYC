@@ -100,9 +100,11 @@ if (is_home()) {
    * @author NYC Opportunity
    */
 
-  $context['homepage_touts_latest_update'] = max(array_map(function($post) {
-    return $post->post_modified;
-  }, $context['homepage_touts']));
+  if (!empty($context['homepage_touts'])) {
+    $context['homepage_touts_latest_update'] = max(array_map(function($post) {
+      return $post->post_modified;
+    }, $context['homepage_touts']));
+  }
 
   // Alert
   $context['homepage_alert'] = Timber::get_post(array(
