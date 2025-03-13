@@ -32,10 +32,10 @@ add_filter('timber/twig', function($twig) {
    *
    * @param   String  $subject  The html containing any <table> tag
    *
-   * @return  String            The html with table-numeric class added
+   * @return  String            The html with table-formatted class added
    */
-  $twig->addFilter(new Timber\Twig_Filter('add_anyc_table_numeric', function($subject) {
-    return preg_replace("/<table[^>]*>/", '<table class="table-numeric">', $subject);
+  $twig->addFilter(new Timber\Twig_Filter('add_anyc_table_formatted', function($subject) {
+    return preg_replace("/<table[^>]*>/", '<table class="table-formatted">', $subject);
   }));
 
   return $twig;

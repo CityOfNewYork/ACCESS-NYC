@@ -6,7 +6,7 @@
   {% if post.plain_language_eligibility | length %}
     <div>
       <div class="o-content mb-4">
-        {{ post.get_field('field_58912c1a8a82d')|add_ul_margin|add_anyc_table_numeric }} {# plain_language_eligibility #}
+        {{ post.get_field('field_58912c1a8a82d')|add_ul_margin|add_anyc_table_formatted }} {# plain_language_eligibility #}
       </div>
     </div>
   {% endif %}
