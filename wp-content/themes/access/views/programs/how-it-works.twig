@@ -9,7 +9,7 @@
 
   {% if post.heads_up | length %}
   <div id="how-it-works__checklist" class="o-content mb-4">
-    {{ post.get_field('field_58912c1a8a81b')|add_ul_margin|add_anyc_table_numeric }} {# heads_up #}
+    {{ post.get_field('field_58912c1a8a81b')|add_ul_margin|add_anyc_table_formatted }} {# heads_up #}
   </div>
 
   {% endif %}
