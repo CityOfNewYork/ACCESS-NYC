@@ -1,21 +1,21 @@
-<div class="c-share print:hidden pb-2">{% apply spaceless %}
-  <a class="c-share__link" href="{{ post.get_permalink }}?print=1" target="_blank" rel="noopener noreferrer" data-js="track" data-track-key="Print" data-track-data='[{"action": "print"}]'>
+<div class="c-share print:hidden mt-2 screen-desktop:mt-0 flex-row screen-desktop:flex-col">{% apply spaceless %}
+  <a class="c-share__link mb-0 screen-desktop:mb-3" href="{{ post.get_permalink }}?print=1" target="_blank" rel="noopener noreferrer" data-js="track" data-track-key="Print" data-track-data='[{"action": "print"}]'>
     <svg class="c-share__icon icon-ui"  tabindex="-1">
       <use xlink:href="#icon-ui-printer"></use>
-    </svg>{{ __('Print the whole guide', 'accessnyc-program-detail') }}
+    </svg>{{ __('Print', 'accessnyc-program-detail') }}
   </a>
 
   <button aria-controls="web-share-fallback" aria-expanded="false"
-    class="c-share__link btn-link underline font-normal"
+    class="c-share__link btn-link underline font-normal mb-0 screen-desktop:mb-3"
     data-js="web-share track" data-web-share='{{ post.web_share|json_encode|escape }}' data-track-key="Web Share" data-track-data='[{"action": "web-share"}]'>
     <svg class="c-share__icon icon-ui" tabindex="-1">
       <use xlink:href="#icon-ui-share-2"></use>
-    </svg>{{ __('Share the guide', 'accessnyctheme') }}
+    </svg>{{ __('Share', 'accessnyctheme') }}
   </button>
 
   <div aria-hidden="true" class="c-share__section hidden:fadeInUp animated hidden" id="web-share-fallback" role="region">
     <label class="block mb-1 sr-only" for="web-share-url" tabindex="-1">
-      <b>{{ __('Share the Guide', 'accessnyctheme') }}</b>
+      <b>{{ __('Share', 'accessnyctheme') }}</b>
     </label>
 
     <input class="c-share__input" data-copy-target="web-share-url" id="web-share-url" name="web-share-url" type="text" value="{{ post.web_share.url }}" tabindex="-1" />

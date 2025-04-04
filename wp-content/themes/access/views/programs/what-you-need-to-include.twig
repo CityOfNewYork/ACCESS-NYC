@@ -1,7 +1,7 @@
 <section id="what-you-need-to-include" data-step="what-you-need-to-include" class="outline-none active hidden:overflow print:active w-full" aria-hidden="false">
   <header>
     <h3 class="text-blue-dark">
-      {{ stepNumber }}. {{__('What you need to include', 'accessnyc-program-detail')}}
+      {{__('What you need to include', 'accessnyc-program-detail')}}
     </h3>
   </header>
 
@@ -11,14 +11,10 @@
     {% include 'components/accordion.twig' with {
       this: {
         id: 'what-you-need-to-include-' ~ loop.index,
-        active: (loop.index == 1) ? true : false,
+        active: false,
         header: item.heading,
         body: item.body
       }
     } only %}
   {% endfor %}
-
-  {% if nextStep != '' %}
-  {% include 'programs/next-button.twig' %}
-  {% endif %}
 </section>
