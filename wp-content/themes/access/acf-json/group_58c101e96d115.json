@@ -18,7 +18,7 @@
             },
             "show_in_rest": 0,
             "relevanssi_exclude": 0,
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 3,
             "layout": "table",
             "pagination": 0,
             "min": 0,
@@ -43,7 +43,7 @@
                     },
                     "show_in_rest": 0,
                     "relevanssi_exclude": 0,
-                    "wpml_cf_preferences": 1,
+                    "wpml_cf_preferences": 3,
                     "return_format": "array",
                     "parent_repeater": "field_67c8c3c358f5a"
                 }
@@ -83,6 +83,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "acfml_field_group_mode": "translation",
-    "modified": 1741210685
+    "acfml_field_group_mode": "advanced",
+    "modified": 1743790548
 }
