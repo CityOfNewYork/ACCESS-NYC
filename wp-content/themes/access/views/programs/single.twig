@@ -73,7 +73,7 @@
 
         {# Sections: tablet and mobile#}
         <div class="block screen-desktop:hidden">
-          {% include 'programs-b/share.twig' %}
+          {% include 'programs/share.twig' %}
         </div>
       </div>
     </header>
@@ -126,7 +126,7 @@
           </ul>
         </nav>
 
-        {% include 'programs-b/share.twig' %}
+        {% include 'programs/share.twig' %}
       </aside>
 
       <article class="pt-2 screen-desktop:pt-0 flex-1">
@@ -137,14 +137,14 @@
         {% endfor %}
 
         {% for item in post.get_field('field_589e43563c471') %} {# show_section #}
-          {% include 'programs-b/' ~ item.value ~ '.twig' with {
+          {% include 'programs/' ~ item.value ~ '.twig' with {
               'hidden': (loop.index > 1)
             } %}
           <br>
         {% endfor %}
 
         {% if more_information_section %}
-          {% include 'programs-b/more-information.twig' with { 'post': post } %}
+          {% include 'programs/more-information.twig' with { 'post': post } %}
           <br>
         {% endif %}
 
