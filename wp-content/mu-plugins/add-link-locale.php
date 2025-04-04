@@ -7,7 +7,7 @@
  * https://access.nyc.gov/es/programs -> https://access.nyc.gov/es/programs
  * If locale is 'en':
  * https://access.nyc.gov/programs -> https://access.nyc.gov/programs
- * 
+ *
  * @param string $original_url    The original URL that may need localization
  * @param string $site_url        The base site URL without locale
  * @param string $site_url_localized The site URL with locale segment
