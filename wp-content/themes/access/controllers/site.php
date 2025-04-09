@@ -307,7 +307,7 @@ class Site extends TimberSite {
    * @return  Array/Boolean          If the alert is a special announcement
    */
   public function getAlertSchema($alert) {
-    return ($alert->item_scope === 'SpecialAnnouncement') ? array(
+    return ($alert !== false and $alert->item_scope === 'SpecialAnnouncement') ? array(
       '@context' => 'https://schema.org',
       '@type' => 'SpecialAnnouncement',
       'name' => $alert->post_title,
