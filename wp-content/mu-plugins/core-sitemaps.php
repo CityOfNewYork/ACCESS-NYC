@@ -43,13 +43,13 @@ add_filter('wp_sitemaps_post_types', function($post_types) {
 });
 
 // Remove eligibility results from sitemap
-add_filter( 'wp_sitemaps_posts_query_args', function( $args, $post_type ) {
-  if ( $post_type === 'page' ) {
+add_filter('wp_sitemaps_posts_query_args', function($args, $post_type) {
+  if ($post_type === 'page') {
       // Get the ID of the page you want to exclude
-      $page_to_exclude = get_page_by_path( 'eligibility/results' );
-      if ( $page_to_exclude ) {
-          $args['post__not_in'][] = $page_to_exclude->ID;
-      }
+      $page_to_exclude = get_page_by_path('eligibility/results');
+    if ($page_to_exclude) {
+        $args['post__not_in'][] = $page_to_exclude->ID;
+    }
   }
   return $args;
-}, 10, 2 );
+}, 10, 2);
