@@ -107,7 +107,7 @@ import WebShare from 'utilities/web-share/web-share';
 
       newsletter.strings = strings;
       newsletter.form.strings = strings;
-      newsletter.stringKeys.SUCCESS_SUBSCRIBED = 'Thank you for subscribing';
+      newsletter.stringKeys.SUCCESS_SUBSCRIBED = 'You\'re already subscribed';
     });
   })(document.querySelectorAll(Newsletter.selector));
 
