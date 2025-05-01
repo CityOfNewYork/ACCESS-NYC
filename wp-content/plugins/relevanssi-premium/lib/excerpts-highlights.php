@@ -513,7 +513,7 @@ function relevanssi_highlight_in_docs( $content ) {
 			$highlighted_content = relevanssi_highlight_terms( $content, $query, $in_docs );
 			if ( ! empty( $highlighted_content ) ) {
 				// Sometimes the content comes back empty; until I figure out why, this tries to be a solution.
-				$content = $highlighted_content;
+				$content = wp_kses_post( $highlighted_content );
 			}
 		}
 	}
@@ -1478,6 +1478,11 @@ function relevanssi_get_custom_field_content( $post_id ): array {
 			// Quick hack : allow indexing of PODS relationship custom fields. @author TMV.
 			if ( is_array( $value ) && isset( $value['post_title'] ) ) {
 				$value = $value['post_title'];
+			}
+
+			// Cast object values to arrays.
+			if ( is_object( $value ) ) {
+				$value = (array) $value;
 			}
 
 			// Flatten other array data.

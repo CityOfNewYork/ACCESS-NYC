@@ -300,7 +300,7 @@ class Controller_AJAX {
 	}
 	
 	public function _ajax_activate_callback() {
-		$userID = (int) @$_POST['user'];
+		$userID = (int) Utility_Array::arrayGet($_POST, 'user', 0);
 		$user = wp_get_current_user();
 		if ($user->ID != $userID) {
 			if (!user_can($user, Controller_Permissions::CAP_ACTIVATE_2FA_OTHERS)) {
@@ -332,7 +332,7 @@ class Controller_AJAX {
 	}
 	
 	public function _ajax_deactivate_callback() {
-		$userID = (int) @$_POST['user'];
+		$userID = (int) Utility_Array::arrayGet($_POST, 'user', 0);
 		$user = wp_get_current_user();
 		if ($user->ID != $userID) {
 			if (!user_can($user, Controller_Permissions::CAP_ACTIVATE_2FA_OTHERS)) {
@@ -358,7 +358,7 @@ class Controller_AJAX {
 	}
 	
 	public function _ajax_regenerate_callback() {
-		$userID = (int) @$_POST['user'];
+		$userID = (int) Utility_Array::arrayGet($_POST, 'user', 0);
 		$user = wp_get_current_user();
 		if ($user->ID != $userID) {
 			if (!user_can($user, Controller_Permissions::CAP_ACTIVATE_2FA_OTHERS)) {

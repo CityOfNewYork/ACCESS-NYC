@@ -15,7 +15,7 @@ class Model_IP {
 		}
 		
 		if (self::has_ipv6()) {
-			return @inet_ntop($ip);
+			return inet_ntop($ip);
 		}
 		
 		// IPv4
@@ -68,7 +68,7 @@ class Model_IP {
 	 */
 	public static function inet_pton($ip) {
 		if (self::has_ipv6()) {
-			$pton = @inet_pton($ip);
+			$pton = inet_pton($ip);
 			if ($pton === false) {
 				return false;
 			}
@@ -125,7 +125,7 @@ class Model_IP {
 	 * @return bool
 	 */
 	public static function has_ipv6() {
-		return defined('AF_INET6');
+		return defined('AF_INET6') && is_callable('inet_ntop') && is_callable('inet_pton');
 	}
 	
 	/**

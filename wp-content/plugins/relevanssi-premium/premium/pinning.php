@@ -212,7 +212,10 @@ function relevanssi_add_pinned_words_to_post_content( $content, $post ) {
  * @param object $post    The post object.
  */
 function relevanssi_pinning_backup( $content, $post ) {
-	if ( false === apply_filters( 'relevanssi_index_content', true ) ) {
+	/**
+	 * Documented in /lib/indexing.php.
+	 */
+	if ( false === apply_filters( 'relevanssi_index_content', true, $post ) ) {
 		$content = relevanssi_add_pinned_words_to_post_content( $content, $post );
 	}
 	return $content;

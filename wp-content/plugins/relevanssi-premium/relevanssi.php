@@ -13,7 +13,7 @@
  * Plugin Name: Relevanssi Premium
  * Plugin URI: https://www.relevanssi.com/
  * Description: This premium plugin replaces WordPress search with a relevance-sorting search.
- * Version: 2.25.2
+ * Version: 2.27.5
  * Author: Mikko Saari
  * Author URI: https://www.mikkosaari.fi/
  * Text Domain: relevanssi
@@ -22,7 +22,7 @@
  */
 
 /*
-	Copyright 2024 Mikko Saari  (email: mikko@mikkosaari.fi)
+	Copyright 2025 Mikko Saari  (email: mikko@mikkosaari.fi)
 
 	This file is part of Relevanssi Premium, a search plugin for WordPress.
 
@@ -82,8 +82,8 @@ $relevanssi_variables['content_boost_default']                 = 5;
 $relevanssi_variables['title_boost_default']                   = 5;
 $relevanssi_variables['link_boost_default']                    = 0.75;
 $relevanssi_variables['comment_boost_default']                 = 0.75;
-$relevanssi_variables['database_version']                      = 23;
-$relevanssi_variables['plugin_version']                        = '2.25.2';
+$relevanssi_variables['database_version']                      = 24;
+$relevanssi_variables['plugin_version']                        = '2.27.5';
 $relevanssi_variables['plugin_dir']                            = plugin_dir_path( __FILE__ );
 $relevanssi_variables['plugin_basename']                       = plugin_basename( __FILE__ );
 $relevanssi_variables['file']                                  = __FILE__;

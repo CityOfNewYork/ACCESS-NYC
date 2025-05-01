@@ -61,14 +61,17 @@ var windowFeatures = "menubar=0,location=0,resizable=yes,toolbar=0,scrollbars=ye
 
                 var confirm = window.confirm("Are you sure you want to disconnect your Bitly account?");
                 if( confirm ) {
-                    bitly_disconnect();
+                    let nonce = $( this ).data( 'wp_nonce' );
+                    bitly_disconnect( nonce );
                 }
 
             });        
 
-            function bitly_disconnect() {
+            function bitly_disconnect( nonce ) {
+                console.log( 'sendData' );
                 var sendData = {
                     action:'wpbitly_oauth_disconnect',
+                    nonce: nonce
                 };
 
                 $.ajax({

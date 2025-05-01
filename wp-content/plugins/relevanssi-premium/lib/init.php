@@ -225,7 +225,7 @@ function relevanssi_menu() {
 		 * @param string The capability required. Default 'edit_pages'.
 		 */
 		apply_filters( 'relevanssi_user_searches_capability', 'edit_pages' ),
-		$relevanssi_variables['file'],
+		'relevanssi_user_searches',
 		'relevanssi_search_stats'
 	);
 	add_dashboard_page(
@@ -321,8 +321,8 @@ function relevanssi_create_database_tables( $relevanssi_db_version ) {
 	customfield mediumint(9) NOT NULL DEFAULT '0',
 	mysqlcolumn mediumint(9) NOT NULL DEFAULT '0',
 	taxonomy_detail longtext NOT NULL,
-	customfield_detail longtext NOT NULL DEFAULT '',
-	mysqlcolumn_detail longtext NOT NULL DEFAULT '',
+	customfield_detail longtext NOT NULL,
+	mysqlcolumn_detail longtext NOT NULL,
 	type varchar(210) NOT NULL DEFAULT 'post',
 	item bigint(20) NOT NULL DEFAULT '0',
 	PRIMARY KEY doctermitem (doc, term, item)) $charset_collate";
@@ -392,6 +392,7 @@ function relevanssi_create_database_tables( $relevanssi_db_version ) {
 	user_id bigint(20) NOT NULL DEFAULT '0',
 	ip varchar(40) NOT NULL DEFAULT '',
 	session_id varchar(32) NOT NULL DEFAULT '',
+	source varchar(32) NOT NULL DEFAULT '',
 	PRIMARY KEY id (id)) $charset_collate;";
 
 	dbDelta( $sql );
@@ -524,10 +525,11 @@ function relevanssi_load_compatibility_code() {
 	defined( 'GROUPS_CORE_VERSION' ) && require_once 'compatibility/groups.php';
 	defined( 'NINJA_TABLES_VERSION' ) && require_once 'compatibility/ninjatables.php';
 	defined( 'PRLI_PLUGIN_NAME' ) && require_once 'compatibility/pretty-links.php';
-	defined( 'WPM_PRODUCT_GTIN_WC_VERSION' ) && require_once 'compatibility/product-gtin-ean-upc-isbn-for-woocommerce.php';
+	defined( 'SEOPRESS_VERSION' ) && require_once 'compatibility/seopress.php';
 	defined( 'SIMPLE_WP_MEMBERSHIP_VER' ) && require_once 'compatibility/simplemembership.php';
 	defined( 'THE_SEO_FRAMEWORK_VERSION' ) && require_once 'compatibility/seoframework.php';
 	defined( 'WPFD_VERSION' ) && require_once 'compatibility/wp-file-download.php';
+	defined( 'WPM_PRODUCT_GTIN_WC_VERSION' ) && require_once 'compatibility/product-gtin-ean-upc-isbn-for-woocommerce.php';
 	defined( 'WPMEM_VERSION' ) && require_once 'compatibility/wp-members.php';
 	defined( 'WPSEO_FILE' ) && require_once 'compatibility/yoast-seo.php';
 	function_exists( 'do_blocks' ) && require_once 'compatibility/gutenberg.php';
@@ -535,7 +537,6 @@ function relevanssi_load_compatibility_code() {
 	function_exists( 'members_content_permissions_enabled' ) && require_once 'compatibility/members.php';
 	function_exists( 'pmpro_has_membership_access' ) && require_once 'compatibility/paidmembershippro.php';
 	function_exists( 'rcp_user_can_access' ) && require_once 'compatibility/restrictcontentpro.php';
-	function_exists( 'seopress_get_toggle_titles_option' ) && '1' === seopress_get_toggle_titles_option() && require_once 'compatibility/seopress.php';
 	function_exists( 'wp_jv_prg_user_can_see_a_post' ) && require_once 'compatibility/wpjvpostreadinggroups.php';
 
 	// phpcs:disable WordPress.NamingConventions.ValidVariableName

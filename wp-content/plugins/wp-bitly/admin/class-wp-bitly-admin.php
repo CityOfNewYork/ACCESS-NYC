@@ -74,7 +74,7 @@ class Wp_Bitly_Admin {
 	 * @param      string    $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-        $this->plugin_name = $plugin_name;
+        $this->$plugin_name = $plugin_name;
         $this->version = $version;
 
         $this->wp_bitly_auth = new Wp_Bitly_Auth(); 
@@ -142,11 +142,23 @@ class Wp_Bitly_Admin {
 
         $prologue = __('WP Bitly is almost ready!', 'wp-bitly');
         $link = sprintf('<a href="%s">', admin_url('options-writing.php')) . __('settings page', 'wp-bitly') . '</a>';
-        $epilogue = sprintf(__('Please visit the %s to configure WP Bitly', 'wp-bitly'), $link);
+        $epilogue = sprintf(__('Please visit the %s to configure WP Bitly', 'wp-bitly'), esc_url($link));
 
         $message = apply_filters('wpbitly_setup_notice', sprintf('<div id="message" class="updated"><p>%s %s</p></div>', $prologue, $epilogue));
 
-        echo $message;
+        $allowed_html = array(
+            'a' => array(
+                'href' => array(),
+                'title' => array(),
+            ),
+            'p' => array(),
+            'div' => array(
+                'id' => array(),
+                'class' => array(),
+            ),
+        );
+
+       echo wp_kses($message, $allowed_html);
 
     }
 
@@ -203,8 +215,17 @@ class Wp_Bitly_Admin {
         $token = sanitize_text_field($_GET['access_token']);
 
         if ($this->wp_bitly_auth->isAuthorized()) {
-            echo '<div class="notice notice-success is-dismissible"><p><strong>' . __('Success!', 'wp-bitly') . '</strong> ' . __('WP Bitly is authorized, and you can start generating shortlinks!', 'wp-bitly') . '<br>';
-            echo sprintf('Your access token is: <code>%s</code>', $token) . '</p></div>';
+            $output = '<div class="notice notice-success is-dismissible"><p><strong>' . __('Success!', 'wp-bitly') . '</strong> ' . __('WP Bitly is authorized, and you can start generating shortlinks!', 'wp-bitly') . '<br>';
+            $output .= sprintf('Your access token is: <code>%s</code>', $token) . '</p></div>';
+
+            echo wp_kses($output, array(
+                'div' => array(
+                    'class' => array(), 
+                ),
+                'p' => array(),
+                'strong' => array(),
+                'code' => array(),
+            ));
         }
     }
 
@@ -215,7 +236,7 @@ class Wp_Bitly_Admin {
      */
     public function regenerate_successful_notice()
     {
-        echo '<div class="notice notice-success is-dismissible"><p><strong>' . __('Success!', 'wp-bitly') . '</strong> ' . __('The shortlink for this post has been regenerated.', 'wp-bitly') . '</p></div>';
+        echo '<div class="notice notice-success is-dismissible"><p><strong>' . esc_attr__('Success!', 'wp-bitly') . '</strong> ' . esc_attr__('The shortlink for this post has been regenerated.', 'wp-bitly') . '</p></div>';
     }
 
     /**

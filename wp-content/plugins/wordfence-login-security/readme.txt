@@ -1,10 +1,10 @@
 === Wordfence Login Security ===
 Contributors: wfryan, wfmattr, mmaunder, wfmatt
 Tags: security, login security, 2fa, two factor authentication, captcha, xml-rpc, mfa, 2 factor
-Requires at least: 4.5
-Requires PHP: 5.5
-Tested up to: 6.5
-Stable tag: 1.1.12
+Requires at least: 4.7
+Requires PHP: 7.0
+Tested up to: 6.7
+Stable tag: 1.1.15
 
 Secure your website with Wordfence Login Security, providing two-factor authentication, login and registration CAPTCHA, and XML-RPC protection.
 
@@ -57,6 +57,12 @@ Secure your website with Wordfence Login Security.
 3. Configuration options include XML-RPC protection and login page CAPTCHA.
 
 == Changelog ==
+
+= 1.1.15 - January 15, 2025 =
+* Change: Reworked setting caching to avoid issues with some object caches
+
+= 1.1.14 - January 2, 2025 =
+* Improvement: General compatibility improvements and better error handling for PHP 8+
 
 = 1.1.12 - June 6, 2024 =
 * Change: Revised the formatting of TOTP app URLs to prioritize the site's own URL for better sorting and display

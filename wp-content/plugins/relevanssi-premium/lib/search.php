@@ -661,7 +661,8 @@ function relevanssi_do_query( &$query ) {
 			$q,
 			$query
 		);
-		relevanssi_update_log( $query_string, $hits_count );
+		$source = $query->query_vars['rlv_source'] ?? '';
+		relevanssi_update_log( $query_string, $hits_count, $source );
 	}
 
 	$make_excerpts = 'on' === get_option( 'relevanssi_excerpts' ) ? true : false;
@@ -754,6 +755,8 @@ function relevanssi_limit_filter( $query ) {
 		} else {
 			$query = $query . " ORDER BY tf DESC LIMIT $limit";
 		}
+	} else {
+		$query = $query . " ORDER BY tf DESC";
 	}
 	return $query;
 }
@@ -1053,7 +1056,9 @@ function relevanssi_compile_search_args( $query, $q ) {
 	}
 	if ( ! empty( $query->query_vars['author_name'] ) ) {
 		$author_object = get_user_by( 'slug', $query->query_vars['author_name'] );
-		$author[]      = $author_object->ID;
+		if ( $author_object instanceof WP_User ) {
+			$author[] = $author_object->ID;
+		}
 	}
 
 	$post_query = array();
@@ -1750,19 +1755,24 @@ function relevanssi_compile_common_args( $query ) {
 	$date_query = relevanssi_wp_date_query_from_query_vars( $query );
 
 	$post_type = false;
-	if ( isset( $query->query_vars['post_type'] ) && is_array( $query->query_vars['post_type'] ) ) {
-		$query->query_vars['post_type'] = implode( ',', $query->query_vars['post_type'] );
-	}
 	if ( isset( $query->query_vars['post_type'] ) && 'any' !== $query->query_vars['post_type'] ) {
 		$post_type = $query->query_vars['post_type'];
 	}
 	if ( isset( $query->query_vars['post_types'] ) && 'any' !== $query->query_vars['post_types'] ) {
 		$post_type = $query->query_vars['post_types'];
 	}
+	if ( is_array( $post_type ) ) {
+		$post_type = implode( ',', $post_type );
+	}
 
 	$post_status = false;
 	if ( isset( $query->query_vars['post_status'] ) && 'any' !== $query->query_vars['post_status'] ) {
 		$post_status = $query->query_vars['post_status'];
+	}
+
+	$post_mime_type = false;
+	if ( isset( $query->query_vars['post_mime_type'] ) ) {
+		$post_mime_type = $query->query_vars['post_mime_type'];
 	}
 
 	return array(
@@ -1777,6 +1787,7 @@ function relevanssi_compile_common_args( $query ) {
 		'date_query'          => $date_query,
 		'post_type'           => $post_type,
 		'post_status'         => $post_status,
+		'post_mime_type'      => $post_mime_type,
 	);
 }
 

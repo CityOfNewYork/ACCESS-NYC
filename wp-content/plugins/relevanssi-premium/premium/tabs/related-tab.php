@@ -107,10 +107,11 @@ function relevanssi_related_tab() {
 	<?php // Translators: %s is the WP CLI command. ?>
 <p><?php printf( esc_html__( 'A pro tip: you can regenerate related posts for all posts with the WP CLI command %s.', 'relevanssi' ), '<code>wp relevanssi regenerate_related</code>' ); ?></p>
 
+<div id="related_display">
 <h3><?php esc_html_e( 'Displaying the related posts', 'relevanssi' ); ?></h3>
 
-<table class="form-table" role="presentation">
-	<tr>
+<table class="form-table" role="presentation" id="related_settings">
+	<tr id="row_enable_related">
 		<th scope="row">
 			<?php esc_html_e( 'Enable related posts', 'relevanssi' ); ?>
 		</th>
@@ -156,7 +157,9 @@ function relevanssi_related_tab() {
 		</td>
 	</tr>
 </table>
+</div>
 
+<div id="related_sources">
 <h3><?php esc_html_e( 'Choosing the related posts', 'relevanssi' ); ?></h3>
 
 <table class="form-table" role="presentation">
@@ -186,7 +189,11 @@ function relevanssi_related_tab() {
 			continue;
 		}
 		if ( ! isset( $taxonomies_list[ $taxonomy->name ] ) ) {
-			$not_indexed[] = $taxonomy->labels->name;
+			if ( $taxonomy->labels->name ) {
+				$not_indexed[] = $taxonomy->labels->name;
+			} else {
+				$not_indexed[] = $taxonomy->name;
+			}
 			continue;
 		}
 		$checked = '';
@@ -206,7 +213,7 @@ function relevanssi_related_tab() {
 		);
 		if ( 'title' !== $taxonomy->name ) {
 			printf(
-				'<label><input type="checkbox" name="relevanssi_related_restrict[]" %1$s value="%2$s" %3$s/> %4$s %5$s</label>',
+				'<label><input type="checkbox" name="relevanssi_related_restrict[]" %1$s value="%2$s" %3$s/> %4$s %5$s (<code>%2$s</code>)</label>',
 				$restrict_checked, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				esc_attr( $taxonomy->name ),
 				$disabled, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -238,14 +245,14 @@ function relevanssi_related_tab() {
 	?>
 	</td>
 	</tr>
-	<tr>
+	<tr id="row_number">
 		<th scope="row"><label for="relevanssi_related_number"><?php esc_html_e( 'Number of posts', 'relevanssi' ); ?></label></th>
 		<td>
 			<input type='number' name='relevanssi_related_number' id='relevanssi_related_number' size='4' placeholder='6' value='<?php echo esc_attr( $number ); ?>' <?php echo $disabled; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>/>
 			<p class="description"><?php esc_html_e( 'The number of related posts to show.', 'relevanssi' ); ?></p>
 		</td>
 	</tr>
-	<tr>
+	<tr id="row_months">
 		<th scope='row'><label for='relevanssi_related_months'><?php esc_html_e( 'Months to use', 'relevanssi' ); ?></label></th>
 		<td>
 			<input type='number' name='relevanssi_related_months' id='relevanssi_related_months' size='4' placeholder='12' value='<?php echo esc_attr( $months ); ?>' <?php echo $disabled; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>/>
@@ -303,7 +310,7 @@ function relevanssi_related_tab() {
 			<p class="description"><?php esc_html_e( 'The post types to use for related posts. Matching post type means that for each post type, only posts from the same post type are used for related posts.', 'relevanssi' ); ?></p>
 		</td>
 	</tr>
-	<tr>
+	<tr id="row_nothing">
 		<th scope="row"><label for="relevanssi_related_nothing"><?php esc_html_e( 'No related posts found', 'relevanssi' ); ?></label></th>
 		<td>
 			<select name="relevanssi_related_nothing" id="relevanssi_related_nothing" <?php echo $disabled; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
@@ -314,7 +321,7 @@ function relevanssi_related_tab() {
 			<p class="description"><?php esc_html_e( 'What to do when no related posts are found? The options are to show nothing and just disable the whole element, or to show random posts (either fully random, or from the same category). Do note that the related posts are cached, so the random posts do not change on every page load.', 'relevanssi' ); ?></p>
 		</td>
 	</tr>
-	<tr>
+	<tr id="row_not_enough">
 		<th scope="row"><label for="relevanssi_related_notenough"><?php esc_html_e( 'Not enough related posts found', 'relevanssi' ); ?></label></th>
 		<td>
 			<select name="relevanssi_related_notenough" id="relevanssi_related_notenough" <?php echo $disabled; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
@@ -326,7 +333,9 @@ function relevanssi_related_tab() {
 		</td>
 	</tr>
 </table>
+</div>
 
+<div id="style_options">
 <h3><?php esc_html_e( 'Style options', 'relevanssi' ); ?></h3>
 
 <p><?php esc_html_e( 'When you add the related posts to your site, Relevanssi will use a template to print out the results. These settings control how that template displays the posts. If you need to modify the related posts in a way these settings do not allow, you can always create your own template.', 'relevanssi' ); ?></p>
@@ -339,7 +348,7 @@ function relevanssi_related_tab() {
 </p>
 
 <table class="form-table" role="presentation">
-	<tr>
+	<tr id="row_display_titles">
 		<th scope="row">
 			<?php esc_html_e( 'Display titles', 'relevanssi' ); ?>
 		</th>
@@ -350,7 +359,7 @@ function relevanssi_related_tab() {
 			</label>
 		</td>
 	</tr>
-	<tr>
+	<tr id="row_display_thumbnails">
 		<th scope="row">
 			<?php esc_html_e( 'Display thumbnails', 'relevanssi' ); ?>
 		</th>
@@ -382,7 +391,7 @@ function relevanssi_related_tab() {
 		</td>
 	</tr>
 
-	<tr>
+	<tr id="row_display_excerpts">
 		<th scope="row">
 			<?php esc_html_e( 'Display excerpts', 'relevanssi' ); ?>
 		</th>
@@ -396,7 +405,7 @@ function relevanssi_related_tab() {
 		</td>
 	</tr>
 
-	<tr>
+	<tr id="row_related_width">
 		<th scope="row">
 			<label for="relevanssi_related_width"><?php esc_html_e( 'Minimum width', 'relevanssi' ); ?>
 				<span class="screen-reader-text"><?php esc_html_e( 'in pixels', 'relevanssi' ); ?></span>
@@ -408,13 +417,15 @@ function relevanssi_related_tab() {
 		</td>
 	</tr>
 </table>
+</div>
 
+<div id="related_caching">
 <h3><?php esc_html_e( 'Caching', 'relevanssi' ); ?></h3>
 
 <p><?php esc_html_e( 'The related posts are cached using WordPress transients. The related posts for each post are stored in a transient that is stored for two weeks. The cache for each post is flushed whenever the post is saved. When a post is made non-public (returned to draft, trashed), Relevanssi automatically flushes all related post caches where that post appears.', 'relevanssi' ); ?></p>
 
 <table class="form-table" role="presentation">
-	<tr>
+	<tr id="row_cache_admins">
 		<th scope="row">
 			<?php esc_html_e( 'Use cache for admins', 'relevanssi' ); ?>
 		</th>
@@ -427,7 +438,7 @@ function relevanssi_related_tab() {
 		</td>
 	</tr>
 
-	<tr>
+	<tr id="row_flush_cache">
 		<th scope="row">
 			<?php esc_html_e( 'Flush cache', 'relevanssi' ); ?>
 		</th>
@@ -441,6 +452,7 @@ function relevanssi_related_tab() {
 	</tr>
 
 </table>
+</div>
 	<?php
 }
 

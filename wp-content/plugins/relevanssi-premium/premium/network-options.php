@@ -87,7 +87,7 @@ function relevanssi_network_options() {
 	<td>
 	<?php
 
-	$raw_blog_list = get_sites( array( 'number' => 2000 ) );
+	$raw_blog_list = get_sites( array( 'number' => 50 ) );
 	$blog_list     = array();
 	foreach ( $raw_blog_list as $blog ) {
 		$details                         = get_blog_details( $blog->blog_id );
@@ -159,7 +159,7 @@ function relevanssi_copy_options_to_subsites( $data ) {
 
 	$results = $wpdb->get_results( $q ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.PreparedSQL.NotPrepared
 
-	$blog_list = get_sites( array( 'number' => 2000 ) );
+	$blog_list = get_sites( array( 'number' => 50 ) );
 	foreach ( $blog_list as $blog ) {
 		if ( $blog->blog_id === $sourceblog ) {
 			continue;

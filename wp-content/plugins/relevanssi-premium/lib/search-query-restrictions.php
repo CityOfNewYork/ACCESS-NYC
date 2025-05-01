@@ -30,10 +30,8 @@ function relevanssi_process_query_args( $args ) {
 		'or'  => array(),
 	);
 
-	if ( function_exists( 'wp_encode_emoji' ) ) {
-		$query             = wp_encode_emoji( $args['q'] );
-		$query_no_synonyms = wp_encode_emoji( $args['q_no_synonyms'] );
-	}
+	$query             = wp_encode_emoji( $args['q'] );
+	$query_no_synonyms = wp_encode_emoji( $args['q_no_synonyms'] );
 
 	if ( $args['sentence'] ) {
 		$query = relevanssi_remove_quotes( $query );
@@ -87,6 +85,16 @@ function relevanssi_process_query_args( $args ) {
 
 	if ( $args['post_status'] ) {
 		$query_restrictions .= relevanssi_process_post_status( $args['post_status'] );
+	}
+
+	if ( $args['post_mime_type'] ) {
+		global $wpdb;
+		$mime_where = wp_post_mime_type_where( $args['post_mime_type'], $wpdb->posts );
+		if ( $mime_where ) {
+			$mime_where          = str_replace( 'AND (', '', $mime_where );
+			$query_restrictions .= " AND relevanssi.doc IN (
+				SELECT ID FROM $wpdb->posts WHERE $mime_where";
+		}
 	}
 
 	return array(

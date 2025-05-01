@@ -44,7 +44,7 @@ class Wp_Bitly_Api {
 	    );
 
 	    if (!array_key_exists($api_call, $api_links)) {
-	        trigger_error(__('WP Bitly Error: No such API endpoint.', 'wp-bitly'));
+	        trigger_error(esc_attr__('WP Bitly Error: No such API endpoint.', 'wp-bitly'));
 	    }
 
 	    return WPBITLY_BITLY_API . $api_links[ $api_call ];

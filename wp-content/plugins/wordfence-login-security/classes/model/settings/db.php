@@ -9,6 +9,8 @@ class Model_DB extends Model_Settings {
 	const AUTOLOAD_NO = 'no';
 	const AUTOLOAD_YES = 'yes';
 	
+	private static $_cache = array();
+	
 	public function set($key, $value, $autoload = self::AUTOLOAD_YES, $allowOverwrite = true) {
 		global $wpdb;
 		$table = Controller_DB::shared()->settings;
@@ -68,8 +70,7 @@ class Model_DB extends Model_Settings {
 	private function _cached() {
 		global $wpdb;
 		
-		$settings = wp_cache_get('allsettings', 'wordfence-ls');
-		if (!$settings) {
+		if (empty(self::$_cache)) {
 			$table = Controller_DB::shared()->settings;
 			$suppress = $wpdb->suppress_errors();
 			$raw = $wpdb->get_results("SELECT `name`, `value` FROM `{$table}` WHERE `autoload` = 'yes'");
@@ -79,24 +80,23 @@ class Model_DB extends Model_Settings {
 				$settings[$o->name] = $o->value;
 			}
 			
-			wp_cache_add_non_persistent_groups('wordfence-ls');
-			wp_cache_add('allsettings', $settings, 'wordfence-ls');
+			self::$_cache = $settings;
 		}
 		
-		return $settings;
+		return self::$_cache;
 	}
 	
 	private function _update_cached($key, $value) {
 		$settings = $this->_cached();
 		$settings[$key] = $value;
-		wp_cache_set('allsettings', $settings, 'wordfence-ls');
+		self::$_cache = $settings;
 	}
 	
 	private function _remove_cached($key) {
 		$settings = $this->_cached();
 		if (isset($settings[$key])) {
 			unset($settings[$key]);
-			wp_cache_set('allsettings', $settings, 'wordfence-ls');
+			self::$_cache = $settings;
 		}
 	}
 	
@@ -112,7 +112,7 @@ class Model_DB extends Model_Settings {
 		$value = $wpdb->get_var($wpdb->prepare("SELECT `value` FROM `{$table}` WHERE name = %s", $key));
 		if ($value !== null) {
 			$settings[$key] = $value;
-			wp_cache_set('allsettings', $settings, 'wordfence-ls');
+			self::$_cache = $settings;
 		}
 		return $value;
 	}

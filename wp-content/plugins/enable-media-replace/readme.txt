@@ -1,11 +1,13 @@
 === Enable Media Replace ===
 Contributors: ShortPixel
 Donate link: https://www.paypal.me/resizeImage
-Tags: replace, attachment, media, files, replace image, remove background, replace jpg, change media, replace media, image, file
+Tags: replace, replace image, remove background, replace jpg, change media
 Requires at least: 4.9.7
-Tested up to: 6.5
+Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 4.1.5
+Stable tag: 4.1.6
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Easily replace any attached image/file by simply uploading a new file in the Media Library edit view - a real time saver!
 
@@ -57,12 +59,12 @@ If you want more control over the format in which the time is shown, you can use
 
 **Other plugins by [ShortPixel](https://shortpixel.com):**
 
+* [FastPixel Caching](https://wordpress.org/plugins/fastpixel-website-accelerator/) - WP Optimization made easy
 * [ShortPixel Image Optimizer](https://wordpress.org/plugins/shortpixel-image-optimiser/) - Image optimization & compression for all the images on your website, including WebP & AVIF delivery
 * [ShortPixel Adaptive Images](https://wordpress.org/plugins/shortpixel-adaptive-images/) - On-the-fly image optimization & CDN delivery
 * [Resize Image After Upload](https://wordpress.org/plugins/resize-image-after-upload/) - Automatically resize each uploaded image
 * [reGenerate Thumbnails Advanced](https://wordpress.org/plugins/regenerate-thumbnails-advanced/) - Easily regenerate thumbnails
 * [WP SVG Images](https://wordpress.org/plugins/wp-svg-images/) - Secure upload of SVG files to Media Library
-* [ShortPixel Critical CSS](https://wordpress.org/plugins/shortpixel-critical-css/) - Automatically generate above-the-fold CSS for fatster loading times and better SEO scores
 
 **Get in touch!**
 
@@ -77,6 +79,11 @@ If you want more control over the format in which the time is shown, you can use
 Please report security bugs found in the source code of the Enable Media Replace plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/enable-media-replace). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
 == Changelog ==
+
+= 4.1.6 =
+
+Release date: March 25, 2025
+* Fix: A potential "Reflected Cross-Site Scripting" vulnerability has been patched, responsibly disclosed by the PatchStack team.
 
 = 4.1.5 =
 

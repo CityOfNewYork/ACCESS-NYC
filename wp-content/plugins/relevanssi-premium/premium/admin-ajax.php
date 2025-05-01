@@ -103,7 +103,7 @@ function relevanssi_wipe_server_errors_action() {
 		$wpdb->postmeta,
 		array(
 			'meta_key'   => '_relevanssi_pdf_error',
-			'meta_value' => 'R_ERR06: Server did not respond.',
+			'meta_value' => RELEVANSSI_ERROR_06,
 		),
 		array(
 			'%s',

@@ -56,7 +56,6 @@ class Relevanssi_WP_Auto_Update {
 		$this->plugin_slug     = $plugin_slug;
 		list ($t1, $t2)        = explode( '/', $plugin_slug );
 		$this->slug            = str_replace( '.php', '', $t2 );
-
 		if ( 'on' !== get_option( 'relevanssi_do_not_call_home' ) ) {
 			// define the alternative API for updating checking.
 			add_filter( 'pre_set_site_transient_update_plugins', array( &$this, 'check_update' ) );

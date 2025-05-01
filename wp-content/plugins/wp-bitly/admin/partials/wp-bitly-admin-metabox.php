@@ -19,7 +19,7 @@
 
 <div id="wpbitly-actions">
     <div id="regenerate-action">
-        <a href="<?php echo add_query_arg('wpbr', 'true', $request_uri); ?>" class="regeneratelink">Regenerate</a>
+        <a href="<?php echo esc_html(add_query_arg('wpbr', 'true', esc_url($request_uri))); ?>" class="regeneratelink">Regenerate</a>
     </div>
 
     <div id="getshortlink-action">
@@ -30,14 +30,14 @@
 
 <script>
     jQuery(document).ready(function($) {
-       setTimeout(function () {
+        setTimeout(function () {
             new Chartist.Line('.wpbitly-chart', {
-                labels: [<?php echo $labels_js; ?>],
+                labels: [<?php echo esc_js(implode(',', $labels_arr));?>],
                 series: [
-                  [<?php echo $data_js; ?>]
+                  [<?php echo esc_js($data_js ); ?>]
                 ]
               }, {
-                high: <?php echo $max; ?>,
+                high: <?php echo (int) $max; ?>,
                 low: 0,
                 fullWidth: true,
                 showArea: true,
@@ -50,6 +50,6 @@
                 }
               });
         }, 500);
-  });
+    });
   
 </script>

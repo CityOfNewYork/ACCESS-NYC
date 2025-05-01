@@ -15,12 +15,15 @@ add_filter( 'relevanssi_index_custom_fields', 'relevanssi_add_pdf_customfield' )
 add_filter( 'relevanssi_pre_excerpt_content', 'relevanssi_add_pdf_content_to_excerpt', 10, 2 );
 add_filter( 'wp_media_attach_action', 'relevanssi_media_attach_action', 10, 3 );
 
-define( 'RELEVANSSI_ERROR_01', 'R_ERR01: ' . __( 'Post excluded from the index by the user.', 'relevanssi' ) );
-define( 'RELEVANSSI_ERROR_02', 'R_ERR02: ' . __( 'Relevanssi is in privacy mode and not allowed to contact Relevanssiservices.com.', 'relevanssi' ) );
-define( 'RELEVANSSI_ERROR_03', 'R_ERR03: ' . __( 'Attachment MIME type blocked.', 'relevanssi' ) );
-define( 'RELEVANSSI_ERROR_04', 'R_ERR04: ' . __( 'Attachment file size is too large.', 'relevanssi' ) );
-define( 'RELEVANSSI_ERROR_05', 'R_ERR05: ' . __( 'Attachment reading in process, please try again later.', 'relevanssi' ) );
-define( 'RELEVANSSI_ERROR_06', 'R_ERR06: ' . __( 'Server did not respond.', 'relevanssi' ) );
+add_action( 'init', function() {
+	// Avoid problems with _load_textdomain_just_in_time being called early.
+	define( 'RELEVANSSI_ERROR_01', 'R_ERR01: ' . __( 'Post excluded from the index by the user.', 'relevanssi' ) );
+	define( 'RELEVANSSI_ERROR_02', 'R_ERR02: ' . __( 'Relevanssi is in privacy mode and not allowed to contact Relevanssiservices.com.', 'relevanssi' ) );
+	define( 'RELEVANSSI_ERROR_03', 'R_ERR03: ' . __( 'Attachment MIME type blocked.', 'relevanssi' ) );
+	define( 'RELEVANSSI_ERROR_04', 'R_ERR04: ' . __( 'Attachment file size is too large.', 'relevanssi' ) );
+	define( 'RELEVANSSI_ERROR_05', 'R_ERR05: ' . __( 'Attachment reading in process, please try again later.', 'relevanssi' ) );
+	define( 'RELEVANSSI_ERROR_06', 'R_ERR06: ' . __( 'Server did not respond.', 'relevanssi' ) );
+} );
 
 /**
  * Reads the attachment content when an attachment is saved.
@@ -120,11 +123,38 @@ function relevanssi_add_pdf_customfield( $custom_fields ) {
 function relevanssi_prime_pdf_content( $hits, $query ) {
 	global $relevanssi_pdf_content;
 
+	if ( empty( $hits ) ) {
+		return $hits;
+	}
+
+	$multisite_search = false;
+	if ( isset( $hits[0]->blog_id) ) {
+		$multisite_search = true;
+		$multisite_posts  = array();
+	}
+
 	if ( ! isset( $query->query_vars['fields'] ) || empty( $query->query_vars['fields'] ) ) {
-		$relevanssi_pdf_content = relevanssi_get_post_meta_for_all_posts(
-			wp_list_pluck( $hits, 'ID' ),
-			'_relevanssi_pdf_content'
-		);
+		if ( $multisite_search ) {
+			foreach ( $hits as $hit ) {
+				$multisite_posts[ $hit->blog_id ][] = $hit->ID;
+			}
+		} else {
+			$relevanssi_pdf_content = relevanssi_get_post_meta_for_all_posts(
+				wp_list_pluck( $hits, 'ID' ),
+				'_relevanssi_pdf_content'
+			);
+		}
+	}
+
+	if ( $multisite_search && ! empty( $multisite_posts ) ) {
+		foreach ( $multisite_posts as $blog_id => $post_ids ) {
+			switch_to_blog( $blog_id );
+			$relevanssi_pdf_content[ $blog_id ] = relevanssi_get_post_meta_for_all_posts(
+				$post_ids,
+				'_relevanssi_pdf_content'
+			);
+			restore_current_blog();
+		}
 	}
 
 	return $hits;
@@ -149,8 +179,12 @@ function relevanssi_prime_pdf_content( $hits, $query ) {
  */
 function relevanssi_add_pdf_content_to_excerpt( $content, $post ) {
 	global $relevanssi_pdf_content;
-	$pdf_content = $relevanssi_pdf_content[ $post->ID ] ?? '';
-	$content    .= ' ' . $pdf_content;
+	if ( isset( $post->blog_id ) ) {
+		$pdf_content = $relevanssi_pdf_content[ $post->blog_id ][ $post->ID ] ?? '';
+	} else {
+		$pdf_content = $relevanssi_pdf_content[ $post->ID ] ?? '';
+	}
+	$content .= ' ' . $pdf_content;
 	return $content;
 }
 
@@ -511,6 +545,10 @@ function relevanssi_process_server_response( $response, $post_id ) {
 		}
 
 		if ( $content && stristr( $content, 'Tika server returned error code' ) ) {
+			$content_error = RELEVANSSI_ERROR_06;
+		}
+
+		if ( $content && stristr( $content, 'cURL error 35' ) ) {
 			$content_error = RELEVANSSI_ERROR_06;
 		}
 

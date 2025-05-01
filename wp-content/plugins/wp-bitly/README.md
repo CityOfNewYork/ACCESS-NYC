@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/watermelon503/bitly.svg?token=uPXx2RMyux8y6zxLL8f6&branch=main)](https://travis-ci.com/watermelon503/bitly)
 # WordPress Bitly Integration Plugin #
-This plugin is used to integrate WordPress posts with [Bitly](https://bitly.com/) by generating a Bitly shortlink for selected post types. It has been tested up to WordPress version 5.8.
+This plugin is used to integrate WordPress posts with [Bitly](https://bitly.com/) by generating a Bitly shortlink for selected post types. It has been tested up to WordPress version 6.7.2.
 ##  Installation ##
 Note: you must have a Bitly account in order to use this plugin. Any level of account will work.
 * Either install automatically through the WordPress admin, or download the .zip file, unzip to a folder, and upload the folder to your /wp-content/plugins/ directory. Read Installing Plugins in the WordPress Codex for details.
@@ -15,6 +15,7 @@ to "Connect with Bitly". If that works successfully the "Bitly OAuth Token" fiel
 
 Once you have an Authorization Token in place, you can proceed with the related configuration settings.
 * **Post Types:** Check which available post types will automatically have shortlinks created automatically upon creation. 
+* **Default Organization:** This select box will allow users with [Enterprise] (https://bitly.com/pages/pricing) level accounts to choose which Account the shortlinks will be associated with. Other account levels will just see their default Account listed.
 * **Default Group:** This select box will allow users with [Enterprise] (https://bitly.com/pages/pricing) level accounts to choose which Group the shortlinks will be associated with. Other account levels will just see their default Group listed.
 * **Default Domain:** This select box will allow users with [Basic or Enterprise] (https://bitly.com/pages/pricing) level accounts to choose the shortlink domain that will be used for link creation. By default (and the only option for Free users) this is bit.ly.
 * **Debug WP Bitly:** Checking this will create a debug log in /wp-content/plugins/wp-bitly/log/debug.txt.

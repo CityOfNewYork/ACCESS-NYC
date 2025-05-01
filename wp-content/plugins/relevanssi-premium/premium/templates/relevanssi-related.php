@@ -100,23 +100,27 @@ if ( ! empty( $related_posts ) ) :
 		$width = $style['width'];
 	}
 
-	?>
-<style>
-#relevanssi_related_grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(<?php echo $width; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>px, 1fr));
-	grid-column-gap: 10px;
-}
-.relevanssi_related_post h4 {
-	margin-top: 5px;
-	margin-bottom: 20px;
-}
-.relevanssi_related_grid_header {
-	grid-area: header;
-}
-.relevanssi_related_post.wide {
-	grid-column-end: span 2;
-}
-</style>
-	<?php
+	$custom_css = "
+	#relevanssi_related_grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax( {$width}px, 1fr));
+		grid-column-gap: 10px;
+	}
+	.relevanssi_related_post h4 {
+		margin-top: 5px;
+		margin-bottom: 20px;
+	}
+	.relevanssi_related_grid_header {
+		grid-area: header;
+	}
+	.relevanssi_related_post.wide {
+		grid-column-end: span 2;
+	}
+	";
+	$handle     = 'relevanssi-related-grid-styles';
+	wp_register_style( $handle, false, array(), 1, 'all' );
+	wp_add_inline_style( $handle, $custom_css );
+	wp_enqueue_style( $handle );
+
+
 endif; // This if clause checks for empty( $related_posts->posts ).

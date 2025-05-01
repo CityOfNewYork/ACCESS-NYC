@@ -62,7 +62,7 @@ function relevanssi_form_api_key( $context = null ) {
 	}
 	if ( ! empty( $api_key ) ) :
 		?>
-	<tr>
+	<tr id="row_api_key">
 		<th scope="row">
 			<?php esc_html_e( 'API key', 'relevanssi' ); ?>
 		</th>
@@ -75,7 +75,7 @@ function relevanssi_form_api_key( $context = null ) {
 		<?php
 	else :
 		?>
-	<tr>
+	<tr id="row_api_key">
 		<th scope="row">
 			<?php esc_html_e( 'API key', 'relevanssi' ); ?>
 		</th>
@@ -98,7 +98,7 @@ function relevanssi_form_do_not_call_home() {
 	$option          = get_option( 'relevanssi_do_not_call_home' );
 	$can_i_call_home = relevanssi_check( $option );
 	?>
-	<tr>
+	<tr id="row_disable_connections">
 		<th scope="row">
 			<?php esc_html_e( 'Disable outside connections', 'relevanssi' ); ?>
 		</th>
@@ -121,7 +121,7 @@ function relevanssi_form_update_translations() {
 	$option              = get_option( 'relevanssi_update_translations' );
 	$update_translations = relevanssi_check( $option );
 	?>
-	<tr>
+	<tr id="row_update_translations">
 		<th scope="row">
 			<?php esc_html_e( 'Update translations', 'relevanssi' ); ?>
 		</th>
@@ -151,7 +151,7 @@ function relevanssi_form_internal_links() {
 	$internal_links_noindex    = relevanssi_select( $internal_links, 'noindex' );
 
 	?>
-	<tr>
+	<tr id="row_internal_links">
 		<th scope="row">
 			<label for='relevanssi_internal_links'><?php esc_html_e( 'Internal links', 'relevanssi' ); ?></label>
 		</th>
@@ -187,7 +187,7 @@ function relevanssi_form_hide_post_controls() {
 		$show_post_controls_class = '';
 	}
 	?>
-	<tr>
+	<tr id="row_hide_relevanssi">
 		<th scope="row">
 			<?php esc_html_e( 'Hide Relevanssi', 'relevanssi' ); ?>
 		</th>
@@ -226,7 +226,7 @@ function relevanssi_form_hide_post_controls() {
 function relevanssi_form_link_weight() {
 	$link_boost = get_option( 'relevanssi_link_boost' );
 	?>
-	<tr>
+	<tr id="row_link_boost">
 		<td>
 			<label for="relevanssi_link_boost"><?php esc_html_e( 'Internal links', 'relevanssi' ); ?></label>
 		</td>
@@ -352,7 +352,7 @@ function relevanssi_form_recency_weight() {
 	$recency_bonus_array = get_option( 'relevanssi_recency_bonus' );
 	$recency_bonus       = $recency_bonus_array['bonus'];
 	?>
-		<tr>
+		<tr id="row_recency_bonus">
 			<td>
 				<label for='relevanssi_recency_bonus'><?php esc_html_e( 'Recent posts bonus weight:', 'relevanssi' ); ?></label>
 			</td>
@@ -372,7 +372,7 @@ function relevanssi_form_recency_cutoff() {
 	$recency_bonus_array = get_option( 'relevanssi_recency_bonus' );
 	$recency_bonus_days  = $recency_bonus_array['days'];
 	?>
-	<tr>
+	<tr id="row_recency_days">
 		<th scope="row">
 			<label for='relevanssi_recency_days'><?php esc_html_e( 'Recent posts bonus cutoff', 'relevanssi' ); ?></label>
 		</th>
@@ -394,7 +394,7 @@ function relevanssi_form_hide_branding() {
 	$hide_branding = get_option( 'relevanssi_hide_branding' );
 	$hide_branding = relevanssi_check( $hide_branding );
 	?>
-	<tr>
+	<tr id="row_hide_branding">
 		<th scope="row">
 			<?php esc_html_e( 'Hide Relevanssi branding', 'relevanssi' ); ?>
 		</th>
@@ -421,7 +421,7 @@ function relevanssi_form_hide_branding() {
 function relevanssi_form_thousands_separator() {
 	$thousand_separator = get_option( 'relevanssi_thousand_separator' );
 	?>
-	<tr>
+	<tr id="row_thousand_separator">
 		<th scope="row">
 			<label for='relevanssi_thousand_separator'><?php esc_html_e( 'Thousands separator', 'relevanssi' ); ?></label>
 		</th>
@@ -441,7 +441,7 @@ function relevanssi_form_thousands_separator() {
 function relevanssi_form_disable_shortcodes() {
 	$disable_shortcodes = get_option( 'relevanssi_disable_shortcodes' );
 	?>
-	<tr>
+	<tr id="row_disable_shortcodes">
 		<th scope="row">
 			<label for='relevanssi_disable_shortcodes'><?php esc_html_e( 'Disable these shortcodes', 'relevanssi' ); ?></label>
 		</th>
@@ -475,7 +475,7 @@ function relevanssi_form_mysql_columns() {
 	$columns = implode( ', ', $columns );
 
 	?>
-	<tr>
+	<tr id="row_mysql_columns">
 		<th scope="row">
 			<label for='relevanssi_mysql_columns'><?php esc_html_e( 'MySQL columns', 'relevanssi' ); ?></label>
 		</th>
@@ -505,7 +505,7 @@ function relevanssi_form_searchblogs_setting() {
 		$searchblogs_all = relevanssi_check( $searchblogs_all );
 
 		?>
-	<tr>
+	<tr id="row_searchblogs_all">
 		<th scope="row">
 			<label for='relevanssi_searchblogs_all'><?php esc_html_e( 'Search all subsites', 'relevanssi' ); ?></label>
 		</th>
@@ -520,7 +520,7 @@ function relevanssi_form_searchblogs_setting() {
 			</fieldset>
 		</td>
 	</tr>
-	<tr>
+	<tr id="row_searchblogs">
 		<th scope="row">
 			<label for='relevanssi_searchblogs'><?php esc_html_e( 'Search some subsites', 'relevanssi' ); ?></label>
 		</th>
@@ -556,10 +556,11 @@ function relevanssi_form_index_users() {
 		$fields_display = '';
 	}
 	?>
+	<div id="index_user_profiles">
 	<h2><?php esc_html_e( 'Indexing user profiles', 'relevanssi' ); ?></h2>
 
 	<table class="form-table">
-	<tr>
+	<tr id="row_index_profiles">
 		<th scope="row">
 			<?php esc_html_e( 'Index user profiles', 'relevanssi' ); ?>
 		</th>
@@ -601,6 +602,7 @@ function relevanssi_form_index_users() {
 		</td>
 	</tr>
 	</table>
+	</div>
 	<?php
 }
 
@@ -613,6 +615,7 @@ function relevanssi_form_index_synonyms() {
 	$index_synonyms = get_option( 'relevanssi_index_synonyms' );
 	$index_synonyms = relevanssi_check( $index_synonyms );
 	?>
+	<div id="indexing_synonyms">
 	<h3><?php esc_html_e( 'Indexing synonyms', 'relevanssi' ); ?></h3>
 	<table class="form-table">
 	<tr>
@@ -635,6 +638,7 @@ function relevanssi_form_index_synonyms() {
 		</td>
 	</tr>
 	</table>
+	</div>
 
 	<?php
 }
@@ -649,6 +653,7 @@ function relevanssi_form_index_pdf_parent() {
 	$index_pdf_parent = relevanssi_check( $index_pdf_parent );
 	$index_post_types = get_option( 'relevanssi_index_post_types', array() );
 	?>
+	<div id="index_pdf_content">
 	<h2><?php esc_html_e( 'Indexing PDF content', 'relevanssi' ); ?></h2>
 
 	<table class="form-table" role="presentation">
@@ -674,6 +679,7 @@ function relevanssi_form_index_pdf_parent() {
 	</td>
 	</tr>
 	</table>
+	</div>
 	<?php
 }
 
@@ -693,10 +699,11 @@ function relevanssi_form_index_taxonomies() {
 	}
 
 	?>
+	<div id="index_taxonomy_terms">
 	<h2><?php esc_html_e( 'Indexing taxonomy terms', 'relevanssi' ); ?></h2>
 
 	<table class="form-table" role="presentation">
-	<tr>
+	<tr id="row_index_terms">
 		<th scope="row">
 			<?php esc_html_e( 'Index taxonomy terms', 'relevanssi' ); ?>
 		</th>
@@ -772,6 +779,7 @@ function relevanssi_form_index_taxonomies() {
 		</td>
 	</tr>
 	</table>
+	</div>
 	<?php
 }
 
@@ -790,7 +798,7 @@ function relevanssi_form_index_post_type_archives() {
 	}
 
 	?>
-	<tr>
+	<tr id="row_index_post_type_archives">
 		<th scope="row">
 			<?php esc_html_e( 'Index post type archives', 'relevanssi' ); ?>
 		</th>
@@ -988,8 +996,8 @@ function relevanssi_update_premium_options() {
 	check_admin_referer( plugin_basename( $relevanssi_variables['file'] ), 'relevanssi_options' );
 
 	$request = $_REQUEST; // WPCS: Input var okay.
-	if ( ! isset( $request['tab'] ) ) {
-		$request['tab'] = '';
+	if ( ! isset( $request['rlv_tab'] ) ) {
+		$request['rlv_tab'] = '';
 	}
 
 	relevanssi_update_floatval( $request, 'relevanssi_link_boost', true, '0.75' );
@@ -998,7 +1006,7 @@ function relevanssi_update_premium_options() {
 		unset( $request['relevanssi_api_key'] );
 	}
 
-	if ( 'overview' === $request['tab'] ) {
+	if ( 'overview' === $request['rlv_tab'] ) {
 		relevanssi_turn_off_options(
 			$request,
 			array(
@@ -1010,7 +1018,7 @@ function relevanssi_update_premium_options() {
 		);
 	}
 
-	if ( 'indexing' === $request['tab'] ) {
+	if ( 'indexing' === $request['rlv_tab'] ) {
 		relevanssi_turn_off_options(
 			$request,
 			array(
@@ -1024,7 +1032,7 @@ function relevanssi_update_premium_options() {
 		);
 	}
 
-	if ( 'attachments' === $request['tab'] ) {
+	if ( 'attachments' === $request['rlv_tab'] ) {
 		relevanssi_turn_off_options(
 			$request,
 			array(
@@ -1035,7 +1043,7 @@ function relevanssi_update_premium_options() {
 		);
 	}
 
-	if ( 'searching' === $request['tab'] ) {
+	if ( 'searching' === $request['rlv_tab'] ) {
 		if ( isset( $request['relevanssi_recency_bonus'] ) && isset( $request['relevanssi_recency_days'] ) ) {
 			$relevanssi_recency_bonus          = array();
 			$relevanssi_recency_bonus['bonus'] = floatval( $request['relevanssi_recency_bonus'] );
@@ -1048,7 +1056,7 @@ function relevanssi_update_premium_options() {
 		}
 	}
 
-	if ( 'logging' === $request['tab'] ) {
+	if ( 'logging' === $request['rlv_tab'] ) {
 		relevanssi_turn_off_options(
 			$request,
 			array(
@@ -1059,12 +1067,12 @@ function relevanssi_update_premium_options() {
 		relevanssi_update_intval( $request, 'relevanssi_trim_click_logs', true, 180 );
 	}
 
-	if ( 'excerpts' === $request['tab'] ) {
+	if ( 'excerpts' === $request['rlv_tab'] ) {
 		relevanssi_update_intval( $request, 'relevanssi_max_excerpts', true, 1 );
 		relevanssi_update_intval( $request, 'relevanssi_trim_click_logs', true, 180 );
 	}
 
-	if ( 'related' === $request['tab'] ) {
+	if ( 'related' === $request['rlv_tab'] ) {
 		$settings = get_option( 'relevanssi_related_settings', relevanssi_related_default_settings() );
 
 		$settings['enabled']    = relevanssi_off_or_on( $request, 'relevanssi_related_enabled' );
@@ -1117,7 +1125,7 @@ function relevanssi_update_premium_options() {
 		update_option( 'relevanssi_related_style', $style );
 	}
 
-	if ( 'spamblock' === $request['tab'] ) {
+	if ( 'spamblock' === $request['rlv_tab'] ) {
 		$settings['keywords'] = stripslashes( $request['relevanssi_spamblock_keywords'] );
 		$settings['regex']    = stripslashes( $request['relevanssi_spamblock_regex'] );
 
@@ -1164,7 +1172,7 @@ function relevanssi_update_premium_options() {
 		false
 	);
 
-	if ( 'redirects' === $request['tab'] ) {
+	if ( 'redirects' === $request['rlv_tab'] ) {
 		$value = relevanssi_process_redirects( $request );
 		update_option( 'relevanssi_redirects', $value );
 	}

@@ -3,8 +3,8 @@ Contributors: clint.s, Kelseystevensonbitly
 Donate link: https://watermelonwebworks.com
 Tags: shortlink, bitly, url, shortener, custom domain, social, media, twitter, facebook, share
 Requires at least: 5.0
-Tested up to: 6.0.1
-Stable tag: 2.7.2
+Tested up to: 6.7.2
+Stable tag: 2.7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,12 @@ Click metrics for a short link will appear in the post’s or page’s settings.
 No. The first time a short link is requested for a particular post, the plugin will automatically generate one.
 
 == Changelog ==
+= 2.7.4 =
+* Fixed nonce verification on disconnected
+* Enforce capability check for authorized user operations
+* Escape all output to prevent XSS
+= 2.7.3 =
+* Security update.
 = 2.7.2 =
 * Security update.
 * Various additional minor fixes.

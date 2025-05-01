@@ -48,7 +48,7 @@ function relevanssi_attachments_tab() {
 	?>
 	<div id="attachments_tab">
 	<table class="form-table" role="presentation">
-	<tr>
+	<tr id="row_read_attachments">
 		<td>
 			<input type='button' id='index' value='<?php esc_html_e( 'Read all unread attachments', 'relevanssi' ); ?>' class='button-primary' /><br /><br />
 		</td>
@@ -64,7 +64,7 @@ function relevanssi_attachments_tab() {
 			<textarea id='relevanssi_results' rows='10' cols='80'></textarea>
 		</td>
 	</tr>
-	<tr>
+	<tr id="row_attachmnets_state">
 		<th scope="row"><?php esc_html_e( 'State of the attachments', 'relevanssi' ); ?></td>
 		<?php
 		$pdf_count = wp_cache_get( 'relevanssi_pdf_count' );
@@ -89,7 +89,7 @@ function relevanssi_attachments_tab() {
 			<textarea id="relevanssi_pdf_errors" rows="4" cols="120"></textarea>
 		</td>
 	</tr>
-	<tr>
+	<tr id="row_server_location">
 		<th scope="row"><label for="relevanssi_server_location"><?php esc_html_e( 'Server location', 'relevanssi' ); ?></label></th>
 		<td>
 			<select name="relevanssi_server_location" id="relevanssi_server_location">
@@ -98,7 +98,7 @@ function relevanssi_attachments_tab() {
 			</select>
 		</td>
 	</tr>
-	<tr>
+	<tr id="row_reset_attachment_content">
 		<th scope="row"><?php esc_html_e( 'Reset attachment content', 'relevanssi' ); ?></td>
 		<td>
 			<input type="button" id="reset" value="<?php esc_html_e( 'Reset all attachment data from posts', 'relevanssi' ); ?>" class="button-primary" />
@@ -107,14 +107,14 @@ function relevanssi_attachments_tab() {
 			<p class="description"><?php esc_html_e( 'If you have posts where you have modified the attachment content after reading it, this will leave those posts untouched.', 'relevanssi' ); ?></p>
 		</td>
 	</tr>
-	<tr>
+	<tr id="row_reset_server_errors">
 		<th scope="row"><?php esc_html_e( 'Clear server errors', 'relevanssi' ); ?></td>
 		<td>
 			<input type="button" id="clearservererrors" value="<?php esc_html_e( 'Clear server errors', 'relevanssi' ); ?>" class="button-primary" />
 			<p class="description"><?php esc_html_e( "This will clear all 'Server did not respond' errors from the posts, so you can try reading those files again.", 'relevanssi' ); ?></p>
 		</td>
 	</tr>
-	<tr>
+	<tr id="row_read_new_files">
 		<th scope="row">
 			<?php esc_html_e( 'Read new files', 'relevanssi' ); ?>
 		</th>
@@ -129,7 +129,7 @@ function relevanssi_attachments_tab() {
 		</fieldset>
 		</td>
 	</tr>
-	<tr>
+	<tr id="row_upload_files">
 		<th scope="row">
 			<?php esc_html_e( 'Upload files', 'relevanssi' ); ?>
 		</th>
@@ -144,7 +144,7 @@ function relevanssi_attachments_tab() {
 		</fieldset>
 		</td>
 	</tr>
-	<tr>
+	<tr id="row_link_files">
 		<th scope="row">
 			<?php esc_html_e( 'Link to files', 'relevanssi' ); ?>
 		</th>
@@ -167,7 +167,7 @@ function relevanssi_attachments_tab() {
 		</fieldset>
 		</td>
 	</tr>
-	<tr>
+	<tr id="row_instructions">
 		<th scope="row"><?php esc_html_e( 'Instructions', 'relevanssi' ); ?></th>
 		<td>
 			<?php /* translators: placeholder has the name of the custom field */ ?>
@@ -178,14 +178,14 @@ function relevanssi_attachments_tab() {
 			<p><?php esc_html_e( "If you need to reread a file, you can do read individual files from Media Library. Choose an attachment and click 'Edit more details' to read the content.", 'relevanssi' ); ?></p>
 		</td>
 	</tr>
-	<tr>
+	<tr id="row_key_not_valid">
 		<th scope="row"><?php esc_html_e( 'Key not valid?', 'relevanssi' ); ?></th>
 		<td>
 			<p><?php esc_html_e( "Are you a new Relevanssi customer and seeing 'Key xxxxxx is not valid' error messages? New API keys are delivered to the server once per hour, so if try again an hour later, the key should work.", 'relevanssi' ); ?></p>
 			<p><?php esc_html_e( "A 'Key 0 is not valid' error message means you're on a multisite, but have only entered the API key in the subsite settings. Set the API key in the network settings to fix that.", 'relevanssi' ); ?></p>
 		</td>
 	</tr>
-	<tr>
+	<tr id="row_important">
 		<th scope="row"><?php esc_html_e( 'Important!', 'relevanssi' ); ?></th>
 		<td>
 			<p><?php esc_html_e( "In order to read the contents of the files, the files are sent over to Relevanssiservices.com, a processing service hosted on a Digital Ocean Droplet. There are two servers: one in the US and another in the EU. The service creates a working copy of the files. The copy is removed after the file has been processed, but there are no guarantees that someone with an access to the server couldn't see the files. Do not read files with confidential information in them. In order to block individual files from reading, use the Relevanssi post controls on attachment edit page to exclude attachment posts from indexing.", 'relevanssi' ); ?></p>

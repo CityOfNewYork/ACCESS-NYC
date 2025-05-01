@@ -237,7 +237,7 @@ END
 		if ($_runInstallCalled) { return; }
 		$_runInstallCalled = true;
 		
-		if (function_exists('ignore_user_abort')) {
+		if (function_exists('ignore_user_abort') && is_callable('ignore_user_abort')) {
 			@ignore_user_abort(true);
 		}
 		
