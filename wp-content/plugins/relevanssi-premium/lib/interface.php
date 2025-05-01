@@ -159,15 +159,15 @@ function relevanssi_options_form() {
 	$display_save_button = true;
 
 	$active_tab = 'overview';
-	if ( isset( $_REQUEST['tab'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
-		$active_tab = $_REQUEST['tab']; // phpcs:ignore WordPress.Security.NonceVerification
+	if ( isset( $_REQUEST['rlv_tab'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+		$active_tab = $_REQUEST['rlv_tab']; // phpcs:ignore WordPress.Security.NonceVerification
 	}
 
 	if ( 'stopwords' === $active_tab ) {
 		$display_save_button = false;
 	}
 
-	printf( "<input type='hidden' name='tab' value='%s' />", esc_attr( $active_tab ) );
+	printf( "<input type='hidden' name='rlv_tab' value='%s' />", esc_attr( $active_tab ) );
 
 	$this_page = '?page=' . plugin_basename( $relevanssi_variables['file'] );
 
@@ -252,6 +252,9 @@ function relevanssi_options_form() {
 	 * @return array Filtered tab array.
 	 */
 	$tabs = apply_filters( 'relevanssi_tabs', $tabs );
+
+	$active_tab = relevanssi_check_active_tab( $active_tab, $tabs );
+
 	?>
 <h2 class="nav-tab-wrapper">
 	<?php
@@ -259,7 +262,7 @@ function relevanssi_options_form() {
 		$tabs,
 		function ( $tab ) use ( $this_page, $active_tab ) {
 			?>
-			<a href="<?php echo esc_attr( $this_page ); ?>&amp;tab=<?php echo esc_attr( $tab['slug'] ); ?>"
+			<a href="<?php echo esc_attr( $this_page ); ?>&amp;rlv_tab=<?php echo esc_attr( $tab['slug'] ); ?>"
 			class="nav-tab <?php echo esc_attr( $tab['slug'] === $active_tab ? 'nav-tab-active' : '' ); ?>">
 			<?php echo esc_html( $tab['name'] ); ?></a>
 			<?php
@@ -314,6 +317,7 @@ function relevanssi_add_admin_scripts( $hook ) {
 		'settings_page_relevanssi/relevanssi',
 		'dashboard_page_relevanssi/relevanssi',
 		'dashboard_page_relevanssi_admin_search',
+		'dashboard_page_relevanssi_user_searches',
 	);
 	/**
 	 * Filters the hooks where Relevanssi scripts are enqueued.
@@ -504,22 +508,58 @@ EOJSON;
 	}
 	?>
 <canvas id="search_chart" height="100"></canvas>
-<script>
-var ctx = document.getElementById('search_chart').getContext('2d');
-var myChart = new Chart(ctx, {
-	type: 'line',
-	data: {
-		labels: [<?php echo $labels; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>],
-		datasets: [<?php echo implode( ",\n", $datasets_array ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>],
-	},
-	options: {
-		scales: {
-			y: {
-				beginAtZero: true
+	<?php
+	$dataset = implode( ",\n", $datasets_array );
+	$script  = <<<EOJS
+	var ctx = document.getElementById('search_chart').getContext('2d');
+	var myChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: [$labels],
+			datasets: [$dataset],
+		},
+		options: {
+			scales: {
+				y: {
+					beginAtZero: true
+				}
 			}
 		}
+	});
+EOJS;
+	if ( function_exists( 'wp_print_inline_script_tag' ) ) {
+		// Introduced in 5.7.0.
+		wp_print_inline_script_tag( $script );
+	} else {
+		echo '<script>' . $script . '</script>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
-});
-</script>
-	<?php
+}
+
+/**
+ * Checks if the active tab exists in the tab list.
+ *
+ * If it doesn't, sets the active tab to the first tab in the list.
+ *
+ * @param string $active_tab The active tab.
+ * @param array  $tabs       The tab list.
+ *
+ * @return string The active tab.
+ */
+function relevanssi_check_active_tab( $active_tab, $tabs ) {
+	$active_tab_exists = false;
+	$first_tab_slug    = '';
+	foreach ( $tabs as $tab ) {
+		if ( ! $first_tab_slug ) {
+			$first_tab_slug = $tab['slug'];
+		}
+		if ( $tab['slug'] === $active_tab ) {
+			$active_tab_exists = true;
+			break;
+		}
+	}
+	if ( ! $active_tab_exists ) {
+		$active_tab = $first_tab_slug;
+	}
+
+	return $active_tab;
 }

@@ -246,8 +246,10 @@ function relevanssi_get_related_post_ids( $post_id, $use_cache = true ) {
 	/**
 	 * Runs before the related posts searches and can be used to adjust the
 	 * Relevanssi settings. By default disables query logging.
+	 *
+	 * @param int $post_id The post ID.
 	 */
-	do_action( 'pre_relevanssi_related' );
+	do_action( 'pre_relevanssi_related', $post_id );
 
 	$words         = relevanssi_related_generate_keywords( $post_id );
 	$related_posts = array();
@@ -342,8 +344,10 @@ function relevanssi_get_related_post_ids( $post_id, $use_cache = true ) {
 	/**
 	 * Runs after the related posts searches and can be used to adjust the
 	 * Relevanssi settings.
+	 *
+	 * @param int $post_id The post ID.
 	 */
-	do_action( 'post_relevanssi_related' );
+	do_action( 'post_relevanssi_related', $post_id );
 
 	$tax_query = array();
 	if ( 'random_cat' === $settings['notenough'] || 'random_cat' === $settings['nothing'] ) {
@@ -483,7 +487,7 @@ function relevanssi_the_related_posts( $post_id = null ) {
  */
 function relevanssi_related_posts_shortcode( $atts ) {
 	$post_id = null;
-	if ( isset( $atts['post_id'] ) && is_int( $atts['post_id'] ) ) {
+	if ( isset( $atts['post_id'] ) && intval( $atts['post_id'] ) > 0 ) {
 		$post_id = $atts['post_id'];
 	}
 	return relevanssi_related_posts( $post_id );

@@ -1639,7 +1639,7 @@ function relevanssi_index_post_type_archive( $post_type, $remove_first = true ) 
 	 * @param boolean If true, index the archive. Default true.
 	 * @param object  The post type object.
 	 */
-	if ( ! apply_filters( 'relevanssi_post_type_archive_ok', true, $post_type ) ) {
+	if ( ! apply_filters( 'relevanssi_post_type_archive_ok', true, $post_type_object ) ) {
 		relevanssi_delete_post_type_object( $post_type );
 		return;
 	}

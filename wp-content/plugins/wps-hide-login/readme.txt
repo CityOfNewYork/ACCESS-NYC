@@ -4,9 +4,9 @@ Contributors: WPServeur, NicolasKulka, wpformation
 Donate link : https://www.paypal.me/donateKulkaNicolas
 Tags: rename, login, wp-login, wp-login.php, custom login url
 Requires at least: 4.1
-Tested up to: 6.5
+Tested up to: 6.8
 Requires PHP: 7.0
-Stable tag: 1.9.15.2
+Stable tag: 1.9.17.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -139,6 +139,40 @@ Ce cas peut provenir de plugins modifiant vos fichiers .htaccess pour ajouter ou
 La première étape consiste à vérifier votre fichier .htaccess et à le comparer à un fichier .htaccess normal, pour voir si le problème provient de ce fichier.
 
 == Changelog ==
+
+= 1.9.17.2 =
+* Tested up to 6.8
+
+= 1.9.17.1 =
+* Fix link dashboard in admin network > sites
+
+= 1.9.17 =
+* Tested up to 6.6
+* Fix link dashboard in admin network > sites
+
+= 1.9.16.7 =
+* Fix Fatal Error with BuddyBoss
+
+= 1.9.16.6 =
+* Fix Fatal Error with BuddyBoss Platform
+
+= 1.9.16.5 =
+* Fix Fatal Error with BuddyBoss
+
+= 1.9.16.4 =
+* Fix vulnerability : https://www.sprocketsecurity.com/resources/discovering-wp-admin-urls-in-wordpress-with-gravityforms
+
+= 1.9.16.3 =
+* Fix NOTICE: PHP message: PHP Warning: Private methods cannot be final as they are never overridden by other classes (https://wordpress.org/support/topic/private-methods-cannot-be-final-as-they-are-never-overridden-by-other-classes-2/)
+
+= 1.9.16.2 =
+* Fix post_password if already logged in
+
+= 1.9.16.1 =
+* Change section desc
+
+= 1.9.16 =
+* Fix vulnerability : Login Page Disclosure
 
 = 1.9.15.2 =
 * Fix number tags

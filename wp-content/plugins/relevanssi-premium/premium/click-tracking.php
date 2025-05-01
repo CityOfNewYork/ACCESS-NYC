@@ -8,13 +8,27 @@
  * @see     https://www.relevanssi.com/
  */
 
-add_action( 'wp_head', 'relevanssi_log_click' );
-add_action( 'wp_footer', 'relevanssi_remove_clicktracking' );
+add_action( 'init', 'relevanssi_enable_clicktracking' );
 add_action( 'relevanssi_create_tables', 'relevanssi_create_tracking_table', 10, 2 );
-add_filter( 'relevanssi_hits_filter', 'relevanssi_record_positions', PHP_INT_MAX );
-add_filter( 'relevanssi_hits_to_show', 'relevanssi_current_page_hits', PHP_INT_MAX );
 add_action( 'relevanssi_trim_click_logs', 'relevanssi_trim_click_logs' );
 add_action( 'relevanssi_init', 'relevanssi_schedule_click_tracking_trim' );
+
+/**
+ * Adds the click tracking functionality.
+ *
+ * If the click tracking option is enabled, this function adds the necessary
+ * hooked functions to enable the click tracking.
+ */
+function relevanssi_enable_clicktracking() {
+	if ( 'on' !== get_option( 'relevanssi_click_tracking', 'off' ) ) {
+		return;
+	}
+	add_action( 'wp_head', 'relevanssi_log_click' );
+	add_action( 'wp_footer', 'relevanssi_remove_clicktracking' );
+	add_filter( 'relevanssi_hits_filter', 'relevanssi_record_positions', PHP_INT_MAX );
+	add_filter( 'relevanssi_hits_to_show', 'relevanssi_current_page_hits', PHP_INT_MAX );
+
+}
 
 /**
  * Logs the click.
@@ -30,11 +44,19 @@ function relevanssi_log_click() {
 		return;
 	}
 
-	if ( ! isset( $_REQUEST['_rt'] ) ) {
+	if ( ! isset( $_REQUEST['_rt'] ) || ! is_string( $_REQUEST['_rt'] ) ) {
+		return;
+	}
+
+	if ( ! isset( $_REQUEST['_rt_nonce'] ) || ! is_string( $_REQUEST['_rt_nonce'] ) ) {
 		return;
 	}
 
 	$post_id = relevanssi_get_post_identifier( $post );
+	if ( is_wp_error( $post_id ) ) {
+		return;
+	}
+
 	if ( isset( $_REQUEST['_rt_nonce'] ) &&
 		! wp_verify_nonce(
 			$_REQUEST['_rt_nonce'],
@@ -117,9 +139,15 @@ function relevanssi_add_tracking( string $permalink, $link_post = null ): string
 	if ( ! relevanssi_is_ok_to_log() ) {
 		return $permalink;
 	}
+	if ( is_numeric( $link_post ) ) {
+		$link_post = relevanssi_get_post( $link_post );
+	}
 	if ( ! $link_post ) {
 		global $post;
 		$link_post = $post;
+	}
+	if ( ! is_object( $link_post ) || is_wp_error( $link_post ) ) {
+		return $permalink;
 	}
 	$id = relevanssi_get_post_identifier( $link_post );
 	if ( ! isset( $link_post->blog_id ) || get_current_blog_id() === $link_post->blog_id ) {
@@ -145,14 +173,12 @@ function relevanssi_add_tracking( string $permalink, $link_post = null ): string
 	$time  = time();
 	$value = "$position|$page|$query|$time";
 
-	$permalink = esc_attr(
-		add_query_arg(
-			array(
-				'_rt'       => relevanssi_base64url_encode( $value ),
-				'_rt_nonce' => $nonce,
-			),
-			$permalink
-		)
+	$permalink = add_query_arg(
+		array(
+			'_rt'       => relevanssi_base64url_encode( $value ),
+			'_rt_nonce' => $nonce,
+		),
+		$permalink
 	);
 
 	$relevanssi_tracking_permalink[ $id ] = $permalink;
@@ -418,7 +444,7 @@ function relevanssi_show_insights( string $query ) {
 	global $wpdb, $relevanssi_variables;
 
 	?>
-	<a href="<?php echo get_admin_url( null, '?page=' . rawurlencode( $relevanssi_variables['plugin_basename'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"
+	<a href="<?php echo get_admin_url( null, '?page=relevanssi_user_searches' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"
 	><?php esc_html_e( 'Back to the User Searches page', 'relevanssi' ); ?></a>
 	<?php
 
@@ -565,7 +591,7 @@ function relevanssi_get_insights_url( $target ): string {
 	$parameter = is_int( $target ) ? 'post_insights' : 'insights';
 
 	return admin_url(
-		'admin.php?page=' . rawurlencode( $relevanssi_variables['plugin_basename'] )
+		'admin.php?page=relevanssi_user_searches'
 	) . '&' . $parameter . '=' . rawurlencode( $target );
 }
 
@@ -584,7 +610,7 @@ function relevanssi_show_post_insights( string $post_id_string ) {
 	$title   = get_the_title( $post_id );
 
 	?>
-	<a href="<?php echo get_admin_url( null, '?page=' . rawurlencode( $relevanssi_variables['plugin_basename'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"
+	<a href="<?php echo get_admin_url( null, '?page=relevanssi_user_searches' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"
 	><?php esc_html_e( 'Back to the User Searches page', 'relevanssi' ); ?></a>
 	<?php
 
@@ -934,13 +960,17 @@ function relevanssi_remove_clicktracking() {
 	if ( 'on' !== get_option( 'relevanssi_click_tracking', 'off' ) ) {
 		return;
 	}
-	?>
-	<script type="text/javascript">
+	$script = <<<EOJS
 	var relevanssi_rt_regex = /(&|\?)_(rt|rt_nonce)=(\w+)/g
 	var newUrl = window.location.search.replace(relevanssi_rt_regex, '')
 	history.replaceState(null, null, window.location.pathname + newUrl + window.location.hash)
-	</script>
-	<?php
+EOJS;
+	if ( function_exists( 'wp_print_inline_script_tag' ) ) {
+		// Introduced in 5.7.0.
+		wp_print_inline_script_tag( $script );
+	} else {
+		echo '<script>' . $script . '</script>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	}
 }
 
 /**
@@ -952,8 +982,7 @@ function relevanssi_remove_clicktracking() {
  * @return string The HTML link tag to link to the insights page.
  */
 function relevanssi_insights_link( $query ): string {
-	global $relevanssi_variables;
-	$insights_url = admin_url( 'admin.php?page=' . rawurlencode( $relevanssi_variables['plugin_basename'] ) )
+	$insights_url = admin_url( 'admin.php?page=relevanssi_user_searches' )
 		. '&insights=' . rawurlencode( $query->query );
 	$insights     = sprintf( "<a href='%s'>%s</a>", esc_url( $insights_url ), esc_html( relevanssi_hyphenate( $query->query ) ) );
 	return $insights;
@@ -1020,9 +1049,13 @@ function relevanssi_export_click_log() {
  *
  * @param object $post_object The post object.
  *
- * @return string Post ID or "blog ID-post ID".
+ * @return string|WP_Error Post ID, "blog ID-post ID" or a WP_Error in case of
+ * failure.
  */
 function relevanssi_get_post_identifier( $post_object ) {
+	if ( ! isset( $post_object->ID ) ) {
+		return new WP_Error( 'no_post_id', 'No post ID attribute.' );
+	}
 	if ( is_multisite() ) {
 		if ( isset( $post_object->blog_id ) ) {
 			return $post_object->blog_id . '-' . $post_object->ID;

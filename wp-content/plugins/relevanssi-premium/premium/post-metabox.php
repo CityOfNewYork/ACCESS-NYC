@@ -84,43 +84,52 @@ function relevanssi_post_metabox() {
 	?>
 	<input type="hidden" id="relevanssi_metabox" name="relevanssi_metabox" value="true" />
 
-	<p><strong><a name="<?php esc_html_e( 'How Relevanssi sees this post', 'relevanssi' ); ?>" href="#TB_inline?width=800&height=600&inlineId=relevanssi_sees_container" class="thickbox"><?php esc_html_e( 'How Relevanssi sees this post', 'relevanssi' ); ?></a></strong></p>
+	<div class="section relevanssi-sees-post">
+		<div class="contents">
+			<p><a name="<?php esc_html_e( 'How Relevanssi sees this post', 'relevanssi' ); ?>" href="#TB_inline?width=800&height=600&inlineId=relevanssi_sees_container" class="thickbox button"><?php esc_html_e( 'How Relevanssi sees this post', 'relevanssi' ); ?></a></p>
+		</div>
+	</div>
+	<div class="section relevanssi-pin-post">
+		<h3><?php esc_html_e( 'Pin this post', 'relevanssi' ); ?></h3>
+		<div class="contents">
+			<p><?php esc_html_e( 'A comma-separated list of single word keywords or multi-word phrases. If any of these keywords are present in the search query, this post will be moved on top of the search results.', 'relevanssi' ); ?></p>
+			<label for="relevanssi_pin" class="screen-reader-text"><?php esc_html_e( 'Pinned keywords for this post', 'relevanssi' ); ?></label>
+			<textarea id="relevanssi_pin" name="relevanssi_pin" cols="30" rows="2" style="max-width: 100%"><?php echo esc_html( $pin ); ?></textarea/>
 
-	<p><strong><?php esc_html_e( 'Pin this post', 'relevanssi' ); ?></strong></p>
-	<p><?php esc_html_e( 'A comma-separated list of single word keywords or multi-word phrases. If any of these keywords are present in the search query, this post will be moved on top of the search results.', 'relevanssi' ); ?></p>
-	<label for="relevanssi_pin" class="screen-reader-text"><?php esc_html_e( 'Pinned keywords for this post', 'relevanssi' ); ?></label>
-	<textarea id="relevanssi_pin" name="relevanssi_pin" cols="30" rows="2" style="max-width: 100%"><?php echo esc_html( $pin ); ?></textarea/>
+			<p><?php esc_html_e( "You can add weights to pinned keywords like this: 'keyword (100)'. The post with the highest weight will be sorted first if there are multiple posts pinned to the same keyword.", 'relevanssi' ); ?></p>
 
-	<p><?php esc_html_e( "You can add weights to pinned keywords like this: 'keyword (100)'. The post with the highest weight will be sorted first if there are multiple posts pinned to the same keyword.", 'relevanssi' ); ?></p>
+			<?php
+			if ( 0 === intval( get_option( 'relevanssi_content_boost' ) ) ) {
+				?>
+				<p><?php esc_html_e( "NOTE: You have set the post content weight to 0. This means that keywords that don't appear elsewhere in the post won't work, because they are indexed as part of the post content. If you set the post content weight to any positive value, the pinned keywords will work again.", 'relevanssi' ); ?></p>
+				<?php
+			}
+			?>
 
-	<?php
-	if ( 0 === intval( get_option( 'relevanssi_content_boost' ) ) ) {
-		?>
-		<p><?php esc_html_e( "NOTE: You have set the post content weight to 0. This means that keywords that don't appear elsewhere in the post won't work, because they are indexed as part of the post content. If you set the post content weight to any positive value, the pinned keywords will work again.", 'relevanssi' ); ?></p>
-		<?php
-	}
-	?>
+			<p class="checkbox"><input type="checkbox" id="relevanssi_pin_for_all" name="relevanssi_pin_for_all" <?php echo esc_attr( $pin_for_all ); ?> />
+			<label for="relevanssi_pin_for_all">
+				<?php esc_html_e( 'Pin this post for all searches it appears in.', 'relevanssi' ); ?>
+			</label></p>
+		</div>
+	</div>
+	<div class="section relevanssi-exclude-post">
+		<h3><?php esc_html_e( 'Exclude this post', 'relevanssi' ); ?></h3>
+		<div class="contents">
+			<p><?php esc_html_e( 'A comma-separated list of single word keywords or multi-word phrases. If any of these keywords are present in the search query, this post will be removed from the search results.', 'relevanssi' ); ?></p>
+			<label for="relevanssi_unpin" class="screen-reader-text"><?php esc_html_e( 'Excluded keywords for this post', 'relevanssi' ); ?></label>
+			<textarea id="relevanssi_unpin" name="relevanssi_unpin" cols="30" rows="2" style="max-width: 100%"><?php echo esc_html( $unpin ); ?></textarea>
 
-	<p><input type="checkbox" id="relevanssi_pin_for_all" name="relevanssi_pin_for_all" <?php echo esc_attr( $pin_for_all ); ?> />
-	<label for="relevanssi_pin_for_all">
-		<?php esc_html_e( 'Pin this post for all searches it appears in.', 'relevanssi' ); ?>
-	</label></p>
+			<p class="checkbox"><input type="checkbox" id="relevanssi_hide_post" name="relevanssi_hide_post" <?php echo esc_attr( $hide_post ); ?> />
+			<label for="relevanssi_hide_post">
+				<?php esc_html_e( 'Exclude this post or page from the index.', 'relevanssi' ); ?>
+			</label></p>
 
-	<p><strong><?php esc_html_e( 'Exclude this post', 'relevanssi' ); ?></strong></p>
-	<p><?php esc_html_e( 'A comma-separated list of single word keywords or multi-word phrases. If any of these keywords are present in the search query, this post will be removed from the search results.', 'relevanssi' ); ?></p>
-	<label for="relevanssi_unpin" class="screen-reader-text"><?php esc_html_e( 'Excluded keywords for this post', 'relevanssi' ); ?></label>
-	<textarea id="relevanssi_unpin" name="relevanssi_unpin" cols="30" rows="2" style="max-width: 100%"><?php echo esc_html( $unpin ); ?></textarea>
-
-	<p><input type="checkbox" id="relevanssi_hide_post" name="relevanssi_hide_post" <?php echo esc_attr( $hide_post ); ?> />
-	<label for="relevanssi_hide_post">
-		<?php esc_html_e( 'Exclude this post or page from the index.', 'relevanssi' ); ?>
-	</label></p>
-
-	<p><input type="checkbox" id="relevanssi_hide_content" name="relevanssi_hide_content" <?php echo esc_attr( $hide_content ); ?> />
-	<label for="relevanssi_hide_content">
-		<?php esc_html_e( 'Ignore post content in the indexing.', 'relevanssi' ); ?>
-	</label></p>
-
+			<p class="checkbox"><input type="checkbox" id="relevanssi_hide_content" name="relevanssi_hide_content" <?php echo esc_attr( $hide_content ); ?> />
+			<label for="relevanssi_hide_content">
+				<?php esc_html_e( 'Ignore post content in the indexing.', 'relevanssi' ); ?>
+			</label></p>
+		</div>
+	</div>
 	<?php
 	$related_posts_settings = get_option( 'relevanssi_related_settings', relevanssi_related_default_settings() );
 	if ( isset( $related_posts_settings['enabled'] ) && 'on' === $related_posts_settings['enabled'] ) {
@@ -389,52 +398,59 @@ function relevanssi_related_posts_metabox( $post_id ) {
 		$include_ids = '';
 	}
 	?>
-	<p><strong><?php esc_html_e( 'Related Posts', 'relevanssi' ); ?></strong></p>
+	<div class="section relevanssi-related-posts">
+		<h3><?php esc_html_e( 'Related Posts', 'relevanssi' ); ?></h3>
+		<div class="contents">
 
-	<p><label><input type="checkbox" name="relevanssi_related_no_append" id="relevanssi_related_no_append" <?php echo esc_attr( $no_append ); ?>/>
-	<?php esc_html_e( "Don't append the related posts to this page.", 'relevanssi' ); ?></label></p>
+			<p class="checkbox"><label><input type="checkbox" name="relevanssi_related_no_append" id="relevanssi_related_no_append" <?php echo esc_attr( $no_append ); ?>/>
+			<?php esc_html_e( "Don't append the related posts to this page.", 'relevanssi' ); ?></label></p>
 
-	<p><label><input type="checkbox" name="relevanssi_related_not_related" id="relevanssi_related_not_related" <?php echo esc_attr( $not_related ); ?>/>
-	<?php esc_html_e( "Don't show this as a related post for any post.", 'relevanssi' ); ?></label></p>
+			<p class="checkbox"><label><input type="checkbox" name="relevanssi_related_not_related" id="relevanssi_related_not_related" <?php echo esc_attr( $not_related ); ?>/>
+			<?php esc_html_e( "Don't show this as a related post for any post.", 'relevanssi' ); ?></label></p>
 
-	<p><strong><?php esc_html_e( 'Related Posts keywords', 'relevanssi' ); ?></strong></p>
-	<p><?php esc_html_e( 'A comma-separated list of keywords to use for the Related Posts feature. Anything entered here will be used when searching for related posts. Using phrases with quotes is allowed, but will restrict the related posts to posts including that phrase.', 'relevanssi' ); ?></p>
-	<label for="relevanssi_related_keywords" class="screen-reader-text"><?php esc_html_e( 'Related posts keywords for this post', 'relevanssi' ); ?></label>
-	<p><textarea id="relevanssi_related_keywords" name="relevanssi_related_keywords" cols="30" rows="2" style="max-width: 100%"><?php echo esc_html( $related ); ?></textarea></p>
+			<p><strong><?php esc_html_e( 'Related Posts keywords', 'relevanssi' ); ?></strong></p>
+			<p><?php esc_html_e( 'A comma-separated list of keywords to use for the Related Posts feature. Anything entered here will be used when searching for related posts. Using phrases with quotes is allowed, but will restrict the related posts to posts including that phrase.', 'relevanssi' ); ?></p>
+			<label for="relevanssi_related_keywords" class="screen-reader-text"><?php esc_html_e( 'Related posts keywords for this post', 'relevanssi' ); ?></label>
+			<p><textarea id="relevanssi_related_keywords" name="relevanssi_related_keywords" cols="30" rows="2" style="max-width: 100%"><?php echo esc_html( $related ); ?></textarea></p>
 
-	<p><label for="relevanssi_related_include_ids"><?php esc_html_e( 'A comma-separated list of post IDs to use as related posts for this post', 'relevanssi' ); ?></label>:</p>
-	<p><input type="text" id="relevanssi_related_include_ids" name="relevanssi_related_include_ids" value="<?php echo esc_html( $include_ids ); ?>"/></p>
+			<p><label for="relevanssi_related_include_ids"><?php esc_html_e( 'A comma-separated list of post IDs to use as related posts for this post', 'relevanssi' ); ?></label>:</p>
+			<p><input type="text" id="relevanssi_related_include_ids" name="relevanssi_related_include_ids" value="<?php echo esc_html( $include_ids ); ?>"/></p>
 
-	<p><?php esc_html_e( 'These are the related posts Relevanssi currently will show for this post:', 'relevanssi' ); ?></p>
+			<p><?php esc_html_e( 'These are the related posts Relevanssi currently will show for this post:', 'relevanssi' ); ?></p>
 
-	<input type="hidden" id="this_post_id" value="<?php echo esc_attr( $post_id ); ?>" />
-	<ol id='related_posts_list'>
-	<?php
-	echo relevanssi_generate_related_list( $post_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	?>
-	</ol>
+			<input type="hidden" id="this_post_id" value="<?php echo esc_attr( $post_id ); ?>" />
+			<ol id='related_posts_list'>
+			<?php
+			echo relevanssi_generate_related_list( $post_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			?>
+			</ol>
 
-	<p><?php esc_html_e( 'These posts are excluded from related posts for this post', 'relevanssi' ); ?>:</p>
-	<ul id='excluded_posts_list'>
-	<?php
-	echo relevanssi_generate_excluded_list( $post_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	?>
-	</ul>
+			<p><?php esc_html_e( 'These posts are excluded from related posts for this post', 'relevanssi' ); ?>:</p>
+			<ul id='excluded_posts_list'>
+			<?php
+			echo relevanssi_generate_excluded_list( $post_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			?>
+			</ul>
+		</div>
+	</div>
+	<div class="section relevanssi-insights">
+		<h3><?php esc_html_e( 'Insights', 'relevanssi' ); ?></h3>
+		<div class="contents">
+			<p><?php esc_html_e( 'The most common search terms for this post', 'relevanssi' ); ?>:</p>
+			<ol id='most_common_terms'>
+			<?php
+			echo relevanssi_generate_tracking_insights_most_common( $post_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			?>
+			</ol>
 
-	<p><strong><?php esc_html_e( 'Insights', 'relevanssi' ); ?></strong></p>
-	<p>The most common search terms for this post:</p>
-	<ol id='most_common_terms'>
-	<?php
-	echo relevanssi_generate_tracking_insights_most_common( $post_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	?>
-	</ol>
-
-	<p>Low-ranking search terms for this post:</p>
-	<ol id='low_ranking_terms'>
-	<?php
-	echo relevanssi_generate_tracking_insights_low_ranking( $post_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	?>
-	</ol>
+			<p><?php esc_html_e( 'Low-ranking search terms for this post', 'relevanssi' ); ?>:</p>
+			<ol id='low_ranking_terms'>
+			<?php
+			echo relevanssi_generate_tracking_insights_low_ranking( $post_id ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			?>
+			</ol>
+		</div>
+	</div>
 	<?php
 }
 

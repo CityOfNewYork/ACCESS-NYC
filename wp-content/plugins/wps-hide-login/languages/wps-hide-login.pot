@@ -2,21 +2,21 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WPS Hide Login 1.9.12\n"
+"Project-Id-Version: WPS Hide Login 1.9.16\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wps-hide-login\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-01-16T10:41:23+00:00\n"
+"POT-Creation-Date: 2024-06-11T09:20:48+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: wps-hide-login\n"
 
 #. Plugin Name of the plugin
-#: classes/plugin.php:218
-#: classes/plugin.php:241
+#: classes/plugin.php:220
+#: classes/plugin.php:243
 msgid "WPS Hide Login"
 msgstr ""
 
@@ -32,101 +32,109 @@ msgstr ""
 msgid "https://wpserveur.net"
 msgstr ""
 
-#: classes/plugin.php:218
+#: classes/plugin.php:220
 msgid "Please upgrade to the latest version of WordPress to activate"
 msgstr ""
 
-#: classes/plugin.php:224
+#: classes/plugin.php:226
 msgid "WPS Hide Login could not be activated because you already have Rename wp-login.php active. Please uninstall rename wp-login.php to use WPS Hide Login"
 msgstr ""
 
-#: classes/plugin.php:242
+#: classes/plugin.php:244
 msgid "This option allows you to set a networkwide default, which can be overridden by individual sites. Simply go to to the site’s permalink settings to change the url."
 msgstr ""
 
-#: classes/plugin.php:243
-#: classes/plugin.php:372
+#: classes/plugin.php:245
+#: classes/plugin.php:385
 msgid "Need help? Try the <a href=\"%1$s\" target=\"_blank\">support forum</a>. This plugin is kindly brought to you by <a href=\"%2$s\" target=\"_blank\">WPServeur</a>"
 msgstr ""
 
-#: classes/plugin.php:246
+#: classes/plugin.php:248
 msgid "Networkwide default"
 msgstr ""
 
-#: classes/plugin.php:248
+#: classes/plugin.php:250
 msgid "Redirection url default"
 msgstr ""
 
-#: classes/plugin.php:291
+#: classes/plugin.php:293
 msgid "Login url"
 msgstr ""
 
-#: classes/plugin.php:299
+#: classes/plugin.php:301
 msgid "Redirection url"
 msgstr ""
 
-#: classes/plugin.php:372
+#: classes/plugin.php:385
 msgid "WordPress specialized hosting"
 msgstr ""
 
-#: classes/plugin.php:373
+#: classes/plugin.php:386
 msgid "Discover our other plugins:"
 msgstr ""
 
-#: classes/plugin.php:374
-#: classes/plugin.php:375
+#: classes/plugin.php:387
+#: classes/plugin.php:388
 msgid "the plugin"
 msgstr ""
 
-#: classes/plugin.php:374
+#: classes/plugin.php:387
 msgid "WPS Bidouille"
 msgstr ""
 
-#: classes/plugin.php:375
+#: classes/plugin.php:388
 msgid "WPS Cleaner"
 msgstr ""
 
-#: classes/plugin.php:376
+#: classes/plugin.php:389
 msgid "and"
 msgstr ""
 
-#: classes/plugin.php:376
+#: classes/plugin.php:389
 msgid "WPS Limit Login"
 msgstr ""
 
-#: classes/plugin.php:385
+#: classes/plugin.php:390
+msgid "You want to find out how to simplify ecommerce with WordPress, try"
+msgstr ""
+
+#: classes/plugin.php:390
+msgid "WPBoutik"
+msgstr ""
+
+#: classes/plugin.php:399
 msgid "To set a networkwide default, go to <a href=\"%s\">Network Settings</a>."
 msgstr ""
 
-#: classes/plugin.php:405
+#: classes/plugin.php:419
 msgid "Protect your website by changing the login URL and preventing access to the wp-login.php page and the wp-admin directory to non-connected people."
 msgstr ""
 
-#: classes/plugin.php:420
+#: classes/plugin.php:434
 msgid "Redirect URL when someone tries to access the wp-login.php page and the wp-admin directory while not logged in."
 msgstr ""
 
-#: classes/plugin.php:434
+#: classes/plugin.php:448
 msgid "Your login page is now here: <strong><a href=\"%1$s\">%2$s</a></strong>. Bookmark this page!"
 msgstr ""
 
-#: classes/plugin.php:445
-#: classes/plugin.php:449
+#: classes/plugin.php:459
+#: classes/plugin.php:463
 msgid "Settings"
 msgstr ""
 
-#: classes/plugin.php:482
+#: classes/plugin.php:496
 msgid "This feature is not enabled."
 msgstr ""
 
-#: classes/plugin.php:524
+#: classes/plugin.php:538
 msgid "This has been disabled"
 msgstr ""
 
-#: classes/plugin.php:756
+#: classes/plugin.php:839
 msgid "WPS Hide Login : Please note, if you check the comment_registration option \"Users must be registered and logged in to comment\", the login link will not be hidden on the comment block."
 msgstr ""
 
-#: classes/plugin.php:767
+#: classes/plugin.php:866
 msgid "WPS Hide Login : Please note that the comment_registration option “Users must be registered and logged in to comment” is activated on your site, the connection link will not be hidden on the comments block."
 msgstr ""

@@ -46,7 +46,7 @@ class UIHelper
     //      'noheader' => true,
           'action' => $action,
           'attachment_id' => $attach_id,
-      ));
+      ), $url);
 
       if (isset($_REQUEST['SHORTPIXEL_DEBUG']))
       {

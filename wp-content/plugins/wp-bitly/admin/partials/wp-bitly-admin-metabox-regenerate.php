@@ -26,7 +26,7 @@ if($shortlink){
 
 <div id="wpbitly-actions">
     <div id="regenerate-action">
-        <a href="<?php echo add_query_arg('wpbr', 'true', $request_uri); ?>" class="regeneratelink"><?php echo $text;?></a>
+        <a href="<?php echo esc_html(add_query_arg('wpbr', 'true', esc_url($request_uri))); ?>" class="regeneratelink"><?php echo esc_attr($text);?></a>
     </div>
     <div class="clear"></div>
 

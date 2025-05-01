@@ -70,7 +70,7 @@ class Wp_Bitly_Options {
     public function get_option($option)
     {
         if (!isset($this->_options[ $option ])) {
-            trigger_error(sprintf(WPBITLY_ERROR, ' <code>' . $option . '</code>'), E_USER_ERROR);
+            trigger_error(sprintf(esc_attr(WPBITLY_ERROR), ' <code>' . esc_attr($option) . '</code>'), E_USER_ERROR);
         }
 
         return $this->_options[ $option ];
@@ -86,7 +86,7 @@ class Wp_Bitly_Options {
     public function set_option($option, $value)
     {
         if (!isset($this->_options[ $option ])) {
-            trigger_error(sprintf(WPBITLY_ERROR, ' <code>' . $option . '</code>'), E_USER_ERROR);
+            trigger_error(sprintf(esc_attr(WPBITLY_ERROR), ' <code>' . esc_attr($option) . '</code>'), E_USER_ERROR);
         }
 
         $this->_options[ $option ] = $value;

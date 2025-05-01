@@ -126,6 +126,7 @@ function relevanssi_premium_query_vars( $qv ) {
 	$qv[] = 'operator';
 	$qv[] = 'include_attachments';
 	$qv[] = 'coordinates';
+	$qv[] = 'rlv_source';
 	return $qv;
 }
 

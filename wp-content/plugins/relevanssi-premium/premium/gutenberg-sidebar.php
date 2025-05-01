@@ -126,6 +126,27 @@ function relevanssi_register_gutenberg_script() {
 		return;
 	}
 
+	$show_post_controls = true;
+	if ( 'on' === get_option( 'relevanssi_hide_post_controls' ) ) {
+		$show_post_controls = false;
+		/**
+		 * Adjusts the capability required to show the Relevanssi post controls
+		 * for admins.
+		 *
+		 * @param string $capability The minimum capability required, default
+		 * 'manage_options'.
+		 */
+		if (
+			'on' === get_option( 'relevanssi_show_post_controls' ) &&
+			current_user_can( apply_filters( 'relevanssi_options_capability', 'manage_options' ) )
+			) {
+			$show_post_controls = true;
+		}
+	}
+	if ( ! $show_post_controls ) {
+		return;
+	}
+
 	$file_location = 'premium/gutenberg-sidebar/';
 	if ( RELEVANSSI_DEVELOP ) {
 		$file_location = 'build/';

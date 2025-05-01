@@ -41,34 +41,6 @@ class AAL_Hook_Plugins extends AAL_Hook_Base {
 		$this->_add_log_plugin( 'deleted', $plugin_file );
 	}
 
-	public function hooks_plugin_modify( $location, $status ) {
-		if ( false !== strpos( $location, 'plugin-editor.php' ) ) {
-			if ( ( ! empty( $_POST ) && 'update' === $_REQUEST['action'] ) ) {
-				$aal_args = array(
-					'action'         => 'file_updated',
-					'object_type'    => 'Plugins',
-					'object_subtype' => 'plugin_unknown',
-					'object_id'      => 0,
-					'object_name'    => 'file_unknown',
-				);
-
-				if ( ! empty( $_REQUEST['file'] ) ) {
-					$aal_args['object_name'] = $_REQUEST['file'];
-					// Get plugin name
-					$plugin_dir  = explode( '/', $_REQUEST['file'] );
-					$plugin_data = array_values( get_plugins( '/' . $plugin_dir[0] ) );
-					$plugin_data = array_shift( $plugin_data );
-
-					$aal_args['object_subtype'] = $plugin_data['Name'];
-				}
-				aal_insert_log( $aal_args );
-			}
-		}
-
-		// We are need return the instance, for complete the filter.
-		return $location;
-	}
-
 	/**
 	 * @param Plugin_Upgrader $upgrader
 	 * @param array $extra
@@ -122,15 +94,28 @@ class AAL_Hook_Plugins extends AAL_Hook_Base {
 		}
 	}
 
+	public function hooks_auto_update_settings( $option, $value, $old_value ) {
+		$enabled_plugins = array_diff( $value, $old_value );
+		$disabled_plugins = array_diff( $old_value, $value );
+
+		foreach ( $disabled_plugins as $plugin ) {
+			$this->_add_log_plugin( 'auto_update_disabled', $plugin );
+		}
+
+		foreach ( $enabled_plugins as $plugin ) {
+			$this->_add_log_plugin( 'auto_update_enabled', $plugin );
+		}
+	}
+
 	public function __construct() {
 		add_action( 'activated_plugin', array( $this, 'hooks_activated_plugin' ) );
 		add_action( 'deactivated_plugin', array( $this, 'hooks_deactivated_plugin' ) );
 		
 		add_action( 'delete_plugin', array( $this, 'hooks_delete_plugin' ) );
 
-		add_filter( 'wp_redirect', array( $this, 'hooks_plugin_modify' ), 10, 2 );
-		
 		add_action( 'upgrader_process_complete', array( $this, 'hooks_plugin_install_or_update' ), 10, 2 );
+
+		add_action( 'update_site_option_auto_update_plugins', [ $this, 'hooks_auto_update_settings' ], 10, 3 );
 
 		parent::__construct();
 	}
