@@ -15,9 +15,6 @@ class DataPreSetup {
 	/** @var wpdb $db */
 	private $db;
 
-	/** @var Calculate $calculate */
-	private $calculate;
-
 	public function listTranslatableData() {
 		// Top items will be fetched first.
 		return [
@@ -36,14 +33,12 @@ class DataPreSetup {
 	}
 
 	/**
-	 * @param wpdb      $db
-	 * @param Calculate $calculate
+	 * @param wpdb $db
 	 *
 	 * @return void
 	 */
-	public function __construct( wpdb $db, Calculate $calculate ) {
-		$this->db        = $db;
-		$this->calculate = $calculate;
+	public function __construct( wpdb $db ) {
+		$this->db = $db;
 	}
 
 	public function fetch( Stack $stack ) {
@@ -161,7 +156,7 @@ class DataPreSetup {
 		$stack->addCount( count( $dataSet ) );
 
 		foreach ( $dataSet as $data ) {
-			$stack->addWords( $this->calculate->words( $dataExtract( $data ) ) );
+			$stack->addWords( apply_filters( 'wpml_word_count_words', 0, $dataExtract( $data ) ) );
 		}
 
 		return $stack;

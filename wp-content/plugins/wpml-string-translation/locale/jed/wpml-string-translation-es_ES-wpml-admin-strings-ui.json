@@ -1,0 +1,82 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Not included in String Translation": [
+            "No incluido en la Traducción de cadenas"
+         ],
+         "Registered and locked": [
+            "Registrado y bloqueado"
+         ],
+         "Text": [
+            "Texto"
+         ],
+         "Numeric": [
+            "Numérico"
+         ],
+         "All Types": [
+            "Todos los tipos"
+         ],
+         "Search": [
+            "Buscar"
+         ],
+         "Communication error": [
+            "Error de comunicación"
+         ],
+         "The action failed.": [
+            "La acción fracasó."
+         ],
+         "All (%d)": [
+            "Todos (%d)"
+         ],
+         "Included in String Translation (%d)": [
+            "Incluido en la traducción de cadenas (%d)"
+         ],
+         "Not included in String Translation (%d)": [
+            "No incluido en la traducción de cadenas (%d)"
+         ],
+         "This setting is locked by a WPML configuration file.": [
+            "Este ajuste está bloqueado por un archivo de configuración de WPML."
+         ],
+         "Option": [
+            "Opción"
+         ],
+         "Value": [
+            "Valor"
+         ],
+         "Type": [
+            "Tipo"
+         ],
+         "State": [
+            "Estado"
+         ],
+         "Export as a WPML configuration file": [
+            "Exportar como archivo de configuración WPML"
+         ],
+         "Cancel": [
+            "Cancelar"
+         ],
+         "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
+            "Guarda lo siguiente en un wpml-config.xml en la raíz de tu tema o plugin."
+         ],
+         "No options found.": [
+            "No se han encontrado opciones."
+         ],
+         "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
+            "Asegúrate de haber guardado las opciones de tu tema al menos una vez. Algunos temas sólo las añaden a la tabla wp_options después de que el usuario guarde explícitamente los cambios en los valores predeterminados del tema."
+         ],
+         "Add to String Translation": [
+            "Añadir a la traducción de cadenas"
+         ],
+         "Remove from String Translation": [
+            "Eliminar de la traducción de cadenas"
+         ],
+         "Included in String Translation": [
+            "Incluido en la traducción de cadenas"
+         ]
+      }
+   }
+}

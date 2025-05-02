@@ -1,0 +1,177 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-04-22T15:22:54+02:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: wpml\n"
+
+msgid "Could not fetch engines data"
+msgstr "无法获取引擎数据"
+
+msgid "Could not save settings"
+msgstr "无法保存设置"
+
+msgid "Automatic translation"
+msgstr "自动翻译"
+
+msgid "Saving..."
+msgstr "正在保存..."
+
+msgid "Save settings"
+msgstr "保存设置"
+
+msgid "Settings saved"
+msgstr "设置已保存"
+
+msgid "Some error occurred"
+msgstr "发生了一些错误"
+
+msgid "Loading..."
+msgstr "正在加载..."
+
+msgid "Failed to load engines"
+msgstr "加载引擎失败"
+
+msgid "Drag your default engine to the top and order the rest by priority."
+msgstr "将您的默认引擎拖到顶部，并按优先级排列其余引擎。"
+
+msgid "Which translation engines do you want to use?"
+msgstr "您想使用哪些翻译引擎？"
+
+msgid "Automatic translation engines differ in translation style and supported language pairs. If your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it."
+msgstr "自动翻译引擎在翻译风格和支持的语言对方面有所不同。如果您首选的翻译引擎不支持您想要使用的语言对，我们会退而使用您下一个支持该语言对的首选引擎。"
+
+msgid "WPML AI (beta) automatically detects the formality of your content and translates with the same formality."
+msgstr "WPML AI（测试版）自动检测您内容的正式程度，并以相同的正式程度进行翻译。"
+
+msgid "Auto-formality"
+msgstr "自动正式程度"
+
+msgid "Choose the tone of automatic translations for %s"
+msgstr "为%s选择自动翻译的语气"
+
+msgid "Your site doesn't use languages that offer formality settings."
+msgstr "您的网站没有使用提供正式程度设置的语言。"
+
+msgid "Edit formality"
+msgstr "编辑正式程度"
+
+msgid "%d credits per word"
+msgstr "%d每字积分"
+
+msgid "Backup %d"
+msgstr "备份 %d"
+
+msgid "Default"
+msgstr "默认"
+
+msgid "ON"
+msgstr "开启"
+
+msgid "OFF"
+msgstr "关闭"
+
+msgid "Documentation"
+msgstr "文档"
+
+msgid "DeepL's formality and how it helps get good translations"
+msgstr "DeepL的正式程度及其如何帮助获得良好翻译"
+
+msgid "Edit button"
+msgstr "编辑按钮"
+
+msgid "Examples for %s"
+msgstr "%s的示例"
+
+msgid "For example:"
+msgstr "例如："
+
+msgid "Formality settings for %s"
+msgstr "%s的正式程度设置"
+
+msgid "Formality level for %s"
+msgstr "%s的正式程度水平"
+
+msgid "Set formality for %s"
+msgstr "设置%s的正式程度"
+
+msgid ""
+"%d of your target languages can be translated using either a formal or informal tone.\n"
+" The tone which gives the best translation for each language is set by default."
+msgstr "您的目标语言中有%d可以使用正式或非正式语气进行翻译。\n 默认设置为每种语言最佳翻译效果的语气。"
+
+msgid "%s doesn't yet support formality options for %s."
+msgstr "%s尚不支持%s的正式程度选项。"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Update"
+msgstr "更新"
+
+msgid "Formal"
+msgstr "正式"
+
+msgid "Informal"
+msgstr "非正式"
+
+msgid "Don't translate drafts. Only translate when I publish content."
+msgstr "不要翻译草稿。只在我发布内容时翻译。"
+
+msgid "Translate drafts as I save them (consumes a bit more translation credits)."
+msgstr "在我保存草稿时就进行翻译（会消耗更多翻译额度）。"
+
+msgid "Do you want to translate drafts automatically?"
+msgstr "您是否想自动翻译草稿？"
+
+msgid "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s."
+msgstr "此功能仅在您从%s翻译仪表板%s启用 “\"自动翻译所有内容\"” 时可用。"
+
+msgid "Close modal"
+msgstr "关闭模态框"
+
+msgid "What would you like to do after WPML finishes translating your content automatically?"
+msgstr "WPML自动完成内容翻译后，您想做什么？"
+
+msgid "Wait for review"
+msgstr "等待审核"
+
+msgid "Recommended with DeepL, Google and Microsoft"
+msgstr "建议与DeepL、Google和Microsoft一起使用"
+
+msgid "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process."
+msgstr "DeepL、Google 和 Microsoft 提供了出色的翻译，但我们建议进行人工审核以确认其准确性。WPML AI 提供了比人工翻译更好的翻译结果，能够理解上下文，因此您可以放心地跳过审核过程。"
+
+msgid "WPML keeps translations unpublished, so you can review them first."
+msgstr "WPML保持翻译未发布状态，以便您先进行审核。"
+
+msgid "Your translators review and approve translations before publishing."
+msgstr "您的翻译人员在发布前审核并批准翻译。"
+
+msgid "Publish and mark for review"
+msgstr "发布并标记为待审核"
+
+msgid "WPML publishes translations immediately but flags them for you to check at your convenience."
+msgstr "WPML立即发布翻译，但标记它们以便您在方便时检查。"
+
+msgid "WPML publishes translations immediately but flags them for translators to review later."
+msgstr "WPML立即发布翻译，但标记它们以供翻译人员稍后审核。"
+
+msgid "Publish without review"
+msgstr "不审核直接发布"
+
+msgid "Recommended with WPML AI"
+msgstr "推荐使用WPML AI"
+
+msgid "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy."
+msgstr "WPML AI提供超越人工的翻译，很少需要改进，因此您可以自信地跳过审核过程。对于其他翻译引擎，建议进行人工审核以确认准确性。"
+
+msgid "WPML publishes translations immediately, skipping the review process."
+msgstr "WPML立即发布翻译，跳过审核过程。"

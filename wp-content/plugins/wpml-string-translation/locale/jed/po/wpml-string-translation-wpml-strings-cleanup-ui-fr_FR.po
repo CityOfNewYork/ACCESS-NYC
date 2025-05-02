@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/strings-cleanup/App.js:17
+msgid ""
+"Clean up the String Translation table by removing untranslated strings by "
+"domain."
+msgstr "Nettoyer la table de traduction des chaînes en supprimant les chaînes non traduites par domaine."
+
+#: src/js/strings-cleanup/App.js:30
+#: src/js/strings-cleanup/components/CleanupModal.js:38
+msgid "Remove strings by domain"
+msgstr "Supprimer les chaînes de caractères par domaine"
+
+#: src/js/strings-cleanup/components/CleanupButton.js:12
+msgid "Remove strings"
+msgstr "Supprimer les chaînes de caractères"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:51
+msgid "Cancel"
+msgstr "Annuler"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:55
+msgid "Remove"
+msgstr "Enlever"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:61
+msgid ""
+"The String Translation table currently contains strings from the domains "
+"listed below. If you do not plan to translate strings from a particular "
+"domain, select it below to remove its untranslated strings from the String "
+"Translation table. Any strings that already have translations will still be "
+"available."
+msgstr "La table de traduction des chaînes contient actuellement des chaînes provenant des domaines énumérés ci-dessous. Si vous n'envisagez pas de traduire les chaînes d'un domaine particulier, sélectionnez-le ci-dessous pour supprimer les chaînes non traduites de la table de traduction des chaînes. Les chaînes déjà traduites resteront disponibles."
+
+#: src/js/strings-cleanup/components/CleanupModal.js:66
+msgid "Search"
+msgstr "Recherche"
+
+#: src/js/strings-cleanup/components/CleanupProgress.js:21
+msgid "Removing strings from String Translation table"
+msgstr "Suppression des chaînes de caractères de la table de traduction des chaînes"
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:27
+msgid ""
+"To add strings back to the String Translation table, you may need to rescan "
+"translation files or register strings as translatable."
+msgstr "Pour ajouter à nouveau des chaînes à la table de traduction des chaînes, vous devrez peut-être analyser à nouveau les fichiers de traduction ou enregistrer les chaînes comme traduisibles."
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:29
+msgid "Read more about "
+msgstr "En savoir plus "
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:31
+msgid "scanning your site for strings and registering them as translatable."
+msgstr "analyse votre site à la recherche de chaînes de caractères et les enregistre comme traduisibles."
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:40
+msgid "Successfully removed strings"
+msgstr "Suppression réussie des chaînes de caractères"
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:44
+msgid "OK, Great"
+msgstr "OK, très bien"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:14
+msgid "Domain"
+msgstr "Domaine"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:18
+msgid "Strings count"
+msgstr "Nombre de chaînes"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:24
+msgid "Translated strings"
+msgstr "Chaînes traduites"

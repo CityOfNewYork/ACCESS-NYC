@@ -1,11 +1,21 @@
 <?php
 
+use WPML\FP\Lst;
+use WPML\FP\Relation;
+
 /**
  * Fetch the wpml config files for known plugins and themes
  *
  * @package wpml-core
  */
 class WPML_Config_Update {
+
+	const CONFIG_KEY_GLOBAL_NOTICES        = 'global-wpml-notices';
+	const OPTION_KEY_GLOBAL_NOTICES_CONFIG = 'wpml_global_notices_config';
+	const HTTP_REQUEST_ARGS                = [
+		'timeout' => 45,
+	];
+
 	/** @var bool */
 	private $has_errors;
 	private $log;
@@ -61,9 +71,8 @@ class WPML_Config_Update {
 	public function run() {
 		if ( ! $this->is_config_update_disabled() ) {
 			$this->has_errors = false;
-			$request_args     = array( 'timeout' => 45 );
 
-			$index_response = $this->http->get( ICL_REMOTE_WPML_CONFIG_FILES_INDEX . 'wpml-config/config-index.json', $request_args );
+			$index_response = $this->http->get( ICL_REMOTE_WPML_CONFIG_FILES_INDEX . 'wpml-config/config-index.json', self::HTTP_REQUEST_ARGS );
 
 			if ( ! $this->is_a_valid_remote_response( $index_response ) ) {
 				$this->log_response( $index_response, 'index', 'wpml-config/config-index.json' );
@@ -72,10 +81,11 @@ class WPML_Config_Update {
 
 				$plugins = isset( $arr->plugins ) ? $arr->plugins : array();
 				$themes  = isset( $arr->themes ) ? $arr->themes : array();
+				$global  = isset( $arr->global ) ? (array) $arr->global : array();
 
-				if ( $plugins || $themes ) {
+				if ( $plugins || $themes || $global ) {
 					update_option( 'wpml_config_index', $arr, false );
-					update_option( 'wpml_config_index_updated', time(), false );
+					update_option( 'wpml_config_index_updated', time() + get_option( 'gmt_offset' ) * HOUR_IN_SECONDS, false );
 
 					$config_files_original = get_option( 'wpml_config_files_arr', null );
 					$config_files          = maybe_unserialize( $config_files_original );
@@ -116,11 +126,10 @@ class WPML_Config_Update {
 							unset( $deleted_configs_for_themes[ $theme->name ] );
 
 							if ( ! isset( $config_files_for_themes[ $theme->name ] ) || md5( $config_files_for_themes[ $theme->name ] ) !== $theme->hash ) {
-								$theme_response = $this->http->get( ICL_REMOTE_WPML_CONFIG_FILES_INDEX . $theme->path, $request_args );
-								if ( ! $this->is_a_valid_remote_response( $theme_response ) ) {
-									$this->log_response( $theme_response, 'index', $theme->name );
-								} else {
-									$config_files_for_themes[ $theme->name ] = $theme_response['body'];
+								$theme_config = $this->fetch_config_file_content( $theme->path, $theme->name );
+
+								if ( $theme_config ) {
+									$config_files_for_themes[ $theme->name ] = $theme_config;
 								}
 							}
 						}
@@ -140,12 +149,10 @@ class WPML_Config_Update {
 							unset( $deleted_configs_for_plugins[ $plugin->name ] );
 
 							if ( ! isset( $config_files_for_plugins[ $plugin->name ] ) || md5( $config_files_for_plugins[ $plugin->name ] ) !== $plugin->hash ) {
-								$plugin_response = $this->http->get( ICL_REMOTE_WPML_CONFIG_FILES_INDEX . $plugin->path, $request_args );
+								$plugin_config = $this->fetch_config_file_content( $plugin->path, $plugin->name );
 
-								if ( ! $this->is_a_valid_remote_response( $plugin_response ) ) {
-									$this->log_response( $plugin_response, 'index', $plugin->name );
-								} else {
-									$config_files_for_plugins[ $plugin->name ] = $plugin_response['body'];
+								if ( $plugin_config ) {
+									$config_files_for_plugins[ $plugin->name ] = $plugin_config;
 								}
 							}
 						}
@@ -162,6 +169,24 @@ class WPML_Config_Update {
 					$config_files->plugins = $config_files_for_plugins;
 
 					update_option( 'wpml_config_files_arr', $config_files, false );
+
+					/**
+					 * Fetch and save/update the remote XML notices.
+					 * To keep DB entries light, we'll store it in a dedicated option.
+					 */
+					$remote_notices_config_index = Lst::find( Relation::propEq( 'name', self::CONFIG_KEY_GLOBAL_NOTICES ), $global );
+
+					if ( $remote_notices_config_index ) {
+						$local_notices_config = (string) get_option( self::OPTION_KEY_GLOBAL_NOTICES_CONFIG );
+
+						if ( ! $local_notices_config || md5( $local_notices_config ) !== $remote_notices_config_index->hash ) {
+							$local_notices_config = $this->fetch_config_file_content( $remote_notices_config_index->path, self::CONFIG_KEY_GLOBAL_NOTICES );
+
+							if ( $local_notices_config ) {
+								update_option( self::OPTION_KEY_GLOBAL_NOTICES_CONFIG, (string) $local_notices_config, false );
+							}
+						}
+					}
 				}
 			}
 
@@ -177,15 +202,22 @@ class WPML_Config_Update {
 		return ! $this->has_errors;
 	}
 
-	private function is_valid_wpml_config_files_arr( $wpml_config_files_arr ) {
-		$is_valid  = true;
-		$is_valid &= is_object( $wpml_config_files_arr );
+	/**
+	 * @param string $path
+	 * @param string $component_name
+	 *
+	 * @return string|null
+	 */
+	private function fetch_config_file_content( $path, $component_name ) {
+		$response = $this->http->get( ICL_REMOTE_WPML_CONFIG_FILES_INDEX . $path, self::HTTP_REQUEST_ARGS );
 
-		$at_least_plugins_or_themes  = false;
-		$at_least_plugins_or_themes |= isset( $wpml_config_files_arr->themes ) && is_array( $wpml_config_files_arr->themes ) && $wpml_config_files_arr->themes;
-		$at_least_plugins_or_themes |= isset( $wpml_config_files_arr->plugins ) && is_array( $wpml_config_files_arr->plugins ) && $wpml_config_files_arr->plugins;
+		if ( $this->is_a_valid_remote_response( $response ) ) {
+			return (string) $response['body'];
+		}
 
-		return $is_valid && $at_least_plugins_or_themes;
+		$this->log_response( $response, 'index', $component_name );
+
+		return null;
 	}
 
 	/**
@@ -287,6 +319,7 @@ class WPML_Config_Update {
 			delete_option( 'wpml_config_index' );
 			delete_option( 'wpml_config_index_updated' );
 			delete_option( 'wpml_config_files_arr' );
+			delete_option( self::OPTION_KEY_GLOBAL_NOTICES_CONFIG );
 
 			return true;
 		}

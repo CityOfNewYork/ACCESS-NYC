@@ -1,0 +1,31 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Warning:": [
+            "警告:"
+         ],
+         "Edits you're about to make will be lost": [
+            "これから行う編集は失われます"
+         ],
+         "You are about to edit this translation using %s.": [
+            "この翻訳を%sを使用して編集しようとしています。"
+         ],
+         "Any changes you make will be lost the next time you send this page for translation.": [
+            "次回このページを翻訳に送信する際、行った変更はすべて失われます。"
+         ],
+         "Go back": [
+            "戻る"
+         ],
+         "Edit in Advanced Translation Editor": [
+            "アドバンスド翻訳エディタで編集"
+         ],
+         "Edit anyway (Not recommended)": [
+            "それでも編集する（推奨されません）"
+         ]
+      }
+   }
+}

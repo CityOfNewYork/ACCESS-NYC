@@ -3,6 +3,7 @@
 namespace WPML\Compatibility\Divi;
 
 use SitePress;
+use WPML\FP\Obj;
 
 class ThemeBuilder implements \IWPML_Action {
 
@@ -25,9 +26,11 @@ class ThemeBuilder implements \IWPML_Action {
 		}
 
 		if ( $this->sitepress->is_setup_complete() ) {
+			add_filter( 'wpml_document_view_item_link', [ $this, 'document_view_layout_link' ], 10, 5 );
+			add_filter( 'wpml_document_edit_item_link', [ $this, 'document_edit_layout_link' ], 10, 5 );
+
 			if ( is_admin() ) {
 				add_action( 'init', [ $this, 'make_layouts_editable' ], 1000 ); // Before WPML_Sticky_Links::init.
-				add_filter( 'wpml_document_view_item_link', [ $this, 'document_view_layout_link' ], 10, 5 );
 			} else {
 				add_filter( 'get_post_metadata', [ $this, 'translate_layout_ids' ], 10, 4 );
 			}
@@ -103,8 +106,28 @@ class ThemeBuilder implements \IWPML_Action {
 	 * @return string
 	 */
 	public function document_view_layout_link( $link, $text, $job, $prefix, $type ) {
-		if ( 'post' === $prefix && $this->is_theme_layout( $type ) ) {
+		if ( $this->is_theme_layout_row( $prefix, $type ) ) {
 			$link = '';
+		}
+
+		return $link;
+	}
+
+	/**
+	 * Remove the 'Edit' link because you can't view layouts alone.
+	 *
+	 * @param string $link     The complete link.
+	 * @param string $oldLabel The old label for the link.
+	 * @param object $object   The corresponding translation job.
+	 * @param string $prefix   The prefix of the element type.
+	 * @param string $type     The element type.
+	 *
+	 * @return string
+	 */
+	public function document_edit_layout_link( $link, $oldLabel, $object, $prefix, $type ) {
+		if ( $this->is_theme_layout_row( $prefix, $type ) ) {
+			$id   = (int) Obj::prop( 'ID', $object );
+			$link = admin_url( sprintf( 'post.php?post=%d&action=edit', $id ) );
 		}
 
 		return $link;
@@ -113,11 +136,12 @@ class ThemeBuilder implements \IWPML_Action {
 	/**
 	 * Check if a certain Type is a theme builder layout.
 	 *
-	 * @param string $type The type to check.
+	 * @param string $prefix The prefix to check.
+	 * @param string $type   The type to check.
 	 *
 	 * @return bool
 	 */
-	private function is_theme_layout( $type ) {
-		return in_array( $type, $this->get_types(), true );
+	private function is_theme_layout_row( $prefix, $type ) {
+		return 'post' === $prefix && in_array( $type, $this->get_types(), true );
 	}
 }

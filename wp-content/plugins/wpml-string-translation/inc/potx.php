@@ -402,7 +402,7 @@ function _potx_find_t_calls_with_context(
 ) {
 	global $_potx_tokens, $_potx_lookup;
 
-	$filter_by_domain = isset( $_GET['domain'] ) ? filter_var( $_GET['domain'], FILTER_SANITIZE_STRING ) : null;
+	$filter_by_domain = isset( $_GET['domain'] ) ? (string) \WPML\API\Sanitize::string( $_GET['domain']) : null;
 
 	// Lookup tokens by function name.
 	if ( isset( $_potx_lookup[ $function_name ] ) ) {

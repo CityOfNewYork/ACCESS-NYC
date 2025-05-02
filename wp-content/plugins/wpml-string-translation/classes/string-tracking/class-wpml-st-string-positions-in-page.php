@@ -3,6 +3,7 @@
 class WPML_ST_String_Positions_In_Page extends WPML_ST_String_Positions {
 
 	const KIND = ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_PAGE;
+	const KIND_FRONTEND = ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_FRONTEND;
 	const TEMPLATE = 'positions-in-page.twig';
 
 	/** @var WPML_ST_String_Factory $string_factory */
@@ -35,6 +36,10 @@ class WPML_ST_String_Positions_In_Page extends WPML_ST_String_Positions {
 		$context = $string->get_context();
 
 		$urls = $this->get_mapper()->get_positions_by_string_and_kind( $string_id, self::KIND );
+		$urls = array_merge(
+			$urls,
+			$this->get_mapper()->get_positions_by_string_and_kind( $string_id, self::KIND_FRONTEND )
+		);
 
 		foreach ( $urls as $url ) {
 			$pages[] = array(

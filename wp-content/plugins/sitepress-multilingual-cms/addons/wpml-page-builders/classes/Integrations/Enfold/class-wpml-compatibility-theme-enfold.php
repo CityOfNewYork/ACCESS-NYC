@@ -18,10 +18,10 @@ class WPML_Compatibility_Theme_Enfold {
 
 
 	public function init_hooks() {
-		add_action( 'wp_insert_post', array( $this, 'wp_insert_post_action' ), 10, 2 );
-		add_filter( 'wpml_pb_before_replace_string_with_translation', array( $this, 'replace_single_quotes' ), 10, 2 );
-		add_filter( 'wpml_pb_shortcode_content_for_translation', array( $this, 'get_content_from_custom_field' ), 10, 2 );
-		add_action( 'icl_make_duplicate', array( $this, 'sync_duplicate' ), 10, 4 );
+		add_action( 'wp_insert_post', [ $this, 'wp_insert_post_action' ], 10, 2 );
+		add_filter( 'wpml_pb_before_replace_string_with_translation', [ $this, 'replace_single_quotes' ], 10, 2 );
+		add_filter( 'wpml_pb_shortcode_content_for_translation', [ $this, 'get_content_from_custom_field' ], 10, 2 );
+		add_action( 'icl_make_duplicate', [ $this, 'sync_duplicate' ], 10, 4 );
 		add_filter( 'wpml_pb_is_post_built_with_shortcodes', [ $this, 'isPostBuiltWithShortcodes' ], 10, 2 );
 	}
 
@@ -36,18 +36,16 @@ class WPML_Compatibility_Theme_Enfold {
 	 * @param WP_Post $post
 	 */
 	public function wp_insert_post_action( $post_id, $post ) {
-		if ( $this->is_using_standard_wp_editor() ) {
-			return;
-		}
-
-		if ( wp_is_post_revision( $post_id ) ) {
+		if ( $this->is_using_standard_wp_editor() || wp_is_post_revision( $post_id ) ) {
 			return;
 		}
 
 		$is_original = apply_filters( 'wpml_is_original_content', false, $post_id, 'post_' . $post->post_type );
 
-		if ( ! $is_original && $this->is_active( $post_id ) ) {
-			update_post_meta( $post_id, '_aviaLayoutBuilderCleanData', $post->post_content );
+		if ( ! $is_original ) {
+			if ( $this->is_active( $post_id ) && $this->is_post_using_tm_editor( $post_id ) ) {
+				update_post_meta( $post_id, '_aviaLayoutBuilderCleanData', $post->post_content );
+			}
 		}
 	}
 
@@ -100,10 +98,22 @@ class WPML_Compatibility_Theme_Enfold {
 	 */
 	private function is_using_standard_wp_editor() {
 		$doc_translation_method = isset( $this->translation_management->settings['doc_translation_method'] ) ?
-			$this->translation_management->settings['doc_translation_method'] :
-			ICL_TM_TMETHOD_MANUAL;
+		$this->translation_management->settings['doc_translation_method'] :
+		ICL_TM_TMETHOD_MANUAL;
 
 		return (string) ICL_TM_TMETHOD_MANUAL === (string) $doc_translation_method;
+	}
+
+	/**
+	 * @param int     $post_id
+	 *
+	 * @return bool
+	 */
+	protected function is_post_using_tm_editor( $post_id ) {
+		global $sitepress;
+		$is_using_tm_editor = \WPML_TM_Post_Edit_TM_Editor_Mode::is_using_tm_editor( $sitepress, $post_id );
+
+		return $is_using_tm_editor;
 	}
 
 	/**

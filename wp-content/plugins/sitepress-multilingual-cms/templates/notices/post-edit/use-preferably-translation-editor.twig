@@ -1,10 +1,17 @@
 <div id="wpml-tm-post-edit-alert" class="js-wpml-tm-post-edit-alert wpml-tm-post-edit-alert" style="display: none;">
     {{ nonce | raw }}
-    <p>{{ warning|raw }}</p>
-    <p class="text-center">
-        <a class="js-wpml-tm-go-back button button-secondary">{{ go_back_button }}</a>
-        <a class="js-wpml-tm-continue button button-secondary">{{ edit_anyway_button }}</a>
-        <a class="js-wpml-tm-open-in-te wpml-button button button-primary" href="{{ translation_editor_url }}">{{ open_in_te_button }}</a>
+    <p class="js-wpml-tm-warning-line-1"><i class="otgs-ico otgs-ico-warning-o"></i> {{ warning_line_1|raw }}</p>
+    <p>{{ warning_line_2|raw }}</p>
+    <p><strong>{{ warning_line_3|raw }}</strong></p>
+    <p class="text-center action-buttons">
+        <button class="js-wpml-tm-go-back wpml-button base-btn wpml-button--outlined">{{ go_back_button }}</button>
+        <a class="js-wpml-tm-open-in-te wpml-button base-btn" href="{{ translation_editor_url }}">{{ open_in_te_button }}</a>
+        <button class="js-wpml-tm-continue wpml-button base-btn button-alert">{{ edit_anyway_button }}</button>
     </p>
-    <p><label><input class="do-not-show-again" type="checkbox" value="1" data-action="{{ do_not_show_again_action }}">{{ do_not_show_again }}</label></p>
+    <p style="display: none;">
+        <label class="wpml-checkbox">
+            <input class="do-not-show-again" type="checkbox" value="1" data-action="{{ do_not_show_again_action }}">
+            <span>{{ do_not_show_again }}</span>
+        </label>
+    </p>
 </div>

@@ -139,7 +139,7 @@ class WPML_Endpoints_Support {
 					$buff_value = array();
 
 					foreach ( $value as $k => $v ) {
-						$k                = preg_replace( '/(\/|^)' . $endpoint_value . '(\/)?(\(\/\(\.\*\)\)\?\/\?\$)/', '$1' . $endpoint_translation . '$2$3', $k );
+						$k                = preg_replace( '/(\/|^)' . preg_quote( $endpoint_value, '/' ) . '(\/)?(\(\/\(\.\*\)\)\?\/\?\$)/', '$1' . $endpoint_translation . '$2$3', $k );
 						$buff_value[ $k ] = $v;
 					}
 					$value = $buff_value;
@@ -188,7 +188,6 @@ class WPML_Endpoints_Support {
 
 				foreach ( $endpoints as $key => $endpoint ) {
 					if ( isset( $wp->query_vars[ $key ] ) ) {
-
 						list( $link, $endpoint ) = apply_filters( 'wpml_endpoint_permalink_filter', array( $link, $endpoint ), $key );
 
 						$link = $this->get_endpoint_url( $this->get_endpoint_translation( $key, $endpoint, $current_lang ), $wp->query_vars[ $key ], $link, $page_lang );
@@ -197,7 +196,7 @@ class WPML_Endpoints_Support {
 			}
 		}
 
-		return $link;
+		return esc_url_raw( $link );
 	}
 
 	/**
@@ -211,6 +210,10 @@ class WPML_Endpoints_Support {
 	public function get_endpoint_url( $endpoint, $value = '', $permalink = '', $page_lang = false ) {
 
 		$value = apply_filters( 'wpml_endpoint_url_value', $value, $page_lang );
+		// Escape the value to prevent XSS attacks.
+		$value = wp_kses_normalize_entities( $value );
+		$value = str_replace( '&amp;', '&#038;', $value );
+		$value = str_replace( "'", '&#039;', $value );
 
 		if ( get_option( 'permalink_structure' ) ) {
 
@@ -224,7 +227,7 @@ class WPML_Endpoints_Support {
 			$url = add_query_arg( $endpoint, $value, $permalink );
 		}
 
-		return $url;
+		return esc_url_raw( $url );
 	}
 
 	/**
@@ -249,8 +252,8 @@ class WPML_Endpoints_Support {
 			}
 		}
 
-		return apply_filters( 'wpml_current_ls_language_url_endpoint', $url, $post_lang, $data, $current_endpoint );
-
+		$url = apply_filters( 'wpml_current_ls_language_url_endpoint', $url, $post_lang, $data, $current_endpoint );
+		return esc_url_raw( $url );
 	}
 
 	/**

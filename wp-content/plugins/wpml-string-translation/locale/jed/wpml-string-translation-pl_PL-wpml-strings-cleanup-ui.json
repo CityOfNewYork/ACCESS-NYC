@@ -1,0 +1,58 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Clean up the String Translation table by removing untranslated strings by domain.": [
+            "Wyczyść tabelę tłumaczeń ciągów, usuwając nieprzetłumaczone ciągi według domeny."
+         ],
+         "Remove strings by domain": [
+            "Usuń ciągi znaków według domeny"
+         ],
+         "Remove strings": [
+            "Usuń ciągi znaków"
+         ],
+         "Cancel": [
+            "Anuluj"
+         ],
+         "Remove": [
+            "Usuń"
+         ],
+         "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
+            "Tabela tłumaczeń ciągów znaków zawiera obecnie ciągi znaków z domen wymienionych poniżej. Jeśli nie planujesz tłumaczyć ciągów z określonej domeny, wybierz ją poniżej, aby usunąć nieprzetłumaczone ciągi z tabeli tłumaczeń ciągów. Wszystkie ciągi, które mają już tłumaczenia, będą nadal dostępne."
+         ],
+         "Search": [
+            "Szukaj"
+         ],
+         "Removing strings from String Translation table": [
+            "Usuwanie ciągów znaków z tabeli tłumaczeń ciągów znaków"
+         ],
+         "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
+            "Aby dodać ciągi z powrotem do tabeli tłumaczeń ciągów, może być konieczne ponowne przeskanowanie plików tłumaczeń lub zarejestrowanie ciągów jako przetłumaczalnych."
+         ],
+         "Read more about ": [
+            "Przeczytaj więcej o "
+         ],
+         "scanning your site for strings and registering them as translatable.": [
+            "skanuje Twoją witrynę w poszukiwaniu ciągów znaków i rejestruje je jako przetłumaczalne."
+         ],
+         "Successfully removed strings": [
+            "Pomyślnie usunięto ciągi znaków"
+         ],
+         "OK, Great": [
+            "OK, świetnie"
+         ],
+         "Domain": [
+            "Domena"
+         ],
+         "Strings count": [
+            "Liczenie ciągów znaków"
+         ],
+         "Translated strings": [
+            "Przetłumaczone ciągi znaków"
+         ]
+      }
+   }
+}

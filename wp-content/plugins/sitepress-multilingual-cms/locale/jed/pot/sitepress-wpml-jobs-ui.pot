@@ -3,20 +3,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/js/ate/status-icons/TranslationQueue.js:46
-#: src/js/jobs/components/Cells/StatusCell.js:22
-msgid "Draft — Pending review"
-msgstr ""
-
-#: src/js/ate/status-icons/TranslationQueue.js:49
-msgid "Complete"
-msgstr ""
-
-#: src/js/ate/status-icons/TranslationQueue.js:60
-#: src/js/jobs/components/Cells/StatusCell.js:32
-msgid "Insufficient funds"
-msgstr ""
-
 #: src/js/jobs/components/Actions/BatchSync.js:39
 msgid "Start batch sync"
 msgstr ""
@@ -46,6 +32,7 @@ msgid "Resign"
 msgstr ""
 
 #: src/js/jobs/components/Actions/Review.js:46
+#: src/js/jobs/components/Actions/ReviewInATE.js:35
 msgid "Review"
 msgstr ""
 
@@ -117,45 +104,62 @@ msgstr ""
 msgid "Assign"
 msgstr ""
 
-#: src/js/jobs/components/Cells/StatusCell.js:10
+#: src/js/jobs/components/Cells/StatusCell.js:11
+msgid "Cancelled"
+msgstr ""
+
+#: src/js/jobs/components/Cells/StatusCell.js:12
+#: src/js/jobs/model/store/columnsManagement.js:50
+msgid "Needs translation"
+msgstr ""
+
+#: src/js/jobs/components/Cells/StatusCell.js:13
 #: src/js/jobs/model/store/columnsManagement.js:46
 msgid "In progress"
 msgstr ""
 
-#: src/js/jobs/components/Cells/StatusCell.js:11
+#: src/js/jobs/components/Cells/StatusCell.js:14
 #: src/js/jobs/model/store/columnsManagement.js:23
 msgid "Translation ready to download"
 msgstr ""
 
-#: src/js/jobs/components/Cells/StatusCell.js:12
+#: src/js/jobs/components/Cells/StatusCell.js:15
 #: src/js/jobs/model/store/columnsManagement.js:38
 msgid "Completed"
 msgstr ""
 
-#: src/js/jobs/components/Cells/StatusCell.js:21
+#: src/js/jobs/components/Cells/StatusCell.js:25
+#. placeholder is the string package type. Could be WP Forms, ACF Field Groups.
+msgid "%s are immediately published because they don't support draft mode."
+msgstr ""
+
+#: src/js/jobs/components/Cells/StatusCell.js:37
 msgid "Published — Pending review"
 msgstr ""
 
-#: src/js/jobs/components/Cells/StatusCell.js:27
+#: src/js/jobs/components/Cells/StatusCell.js:38
+msgid "Draft — Pending review"
+msgstr ""
+
+#: src/js/jobs/components/Cells/StatusCell.js:43
+msgid "Review in progress"
+msgstr ""
+
+#: src/js/jobs/components/Cells/StatusCell.js:46
 msgid "Published — Review in progress"
 msgstr ""
 
-#: src/js/jobs/components/Cells/StatusCell.js:28
+#: src/js/jobs/components/Cells/StatusCell.js:47
 msgid "Draft — Review in progress"
 msgstr ""
 
-#: src/js/jobs/components/Cells/StatusCell.js:38
+#: src/js/jobs/components/Cells/StatusCell.js:51
+msgid "Insufficient funds"
+msgstr ""
+
+#: src/js/jobs/components/Cells/StatusCell.js:57
 #: src/js/jobs/model/store/columnsManagement.js:42
 msgid "Needs update"
-msgstr ""
-
-#: src/js/jobs/components/Cells/StatusCell.js:8
-msgid "Cancelled"
-msgstr ""
-
-#: src/js/jobs/components/Cells/StatusCell.js:9
-#: src/js/jobs/model/store/columnsManagement.js:50
-msgid "Needs translation"
 msgstr ""
 
 #: src/js/jobs/components/Cells/TitleCell.js:14
@@ -529,7 +533,7 @@ msgstr ""
 msgid "Failed to resign from jobs"
 msgstr ""
 
-#: src/js/jobs/model/store/synchronizeATEJobs.js:28
+#: src/js/jobs/model/store/synchronizeATEJobs.js:27
 msgid "The Advanced Editor jobs synchronization has failed"
 msgstr ""
 

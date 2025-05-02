@@ -1,0 +1,67 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/translationReview/components/AcceptedMessage.js:8
+msgid "Accepted"
+msgstr "承認済み"
+
+#: src/js/translationReview/components/AcceptedText.js:8
+msgid "Approved!"
+msgstr "承認されました！"
+
+#: src/js/translationReview/components/AcceptedText.js:9
+#: src/js/translationReview/components/PublishedText.js:9
+msgid "Loading the next translation for review..."
+msgstr "次の翻訳をレビューのために読み込んでいます..."
+
+#: src/js/translationReview/components/BackButton.js:7
+msgid "Back"
+msgstr "戻る"
+
+#: src/js/translationReview/components/ContinueReviewToggle.js:17
+msgid ""
+"Turn off to not automatically load the next translation after finishing "
+"this review."
+msgstr "このレビューを終えた後、自動的に次の翻訳を読み込まないようにするにはオフにしてください。"
+
+#: src/js/translationReview/components/ContinueReviewToggle.js:18
+msgid "Turn on to automatically load the next translation after finishing this  ."
+msgstr "このレビューを終えた後、自動的に次の翻訳を読み込むにはオンにしてください。"
+
+#: src/js/translationReview/components/EditButton.js:10
+msgid "Edit"
+msgstr "編集"
+
+#: src/js/translationReview/components/EditButton.js:9
+msgid "Edit translation"
+msgstr "翻訳を編集"
+
+#: src/js/translationReview/components/InProgressText.js:8
+msgid "Please wait, applying translation.."
+msgstr "お待ちください、翻訳を適用中です..."
+
+#: src/js/translationReview/components/NextTranslationReview.js:22
+msgid "Next review"
+msgstr "次のレビュー"
+
+#: src/js/translationReview/components/PublishButton.js:10
+msgid "Publish this translation"
+msgstr "この翻訳を公開する"
+
+#: src/js/translationReview/components/PublishButton.js:9
+msgid "Accept this translation"
+msgstr "この翻訳を承認する"
+
+#: src/js/translationReview/components/PublishedText.js:8
+msgid "Published!"
+msgstr "公開されました！"
+
+#: src/js/translationReview/hooks/useATESync.js:34
+msgid "Someone is already reviewing this translation. Please try again later."
+msgstr "既に他の人がこの翻訳をレビューしています。後でもう一度お試しください。"
+
+#: src/js/translationReview/store.js:29
+msgid "There was an error in applying translation."
+msgstr "翻訳の適用中にエラーが発生しました。"

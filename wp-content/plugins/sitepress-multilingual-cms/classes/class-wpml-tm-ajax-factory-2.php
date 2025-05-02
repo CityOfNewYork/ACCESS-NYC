@@ -16,6 +16,7 @@ class WPML_TM_Ajax_Factory extends WPML_Ajax_Factory {
 
 	public function get_class_names() {
 		return array(
+			'WPML_Ajax_Scan_Link_Targets',
 			'WPML_Ajax_Update_Link_Targets_In_Posts',
 			'WPML_Ajax_Update_Link_Targets_In_Strings',
 		);
@@ -25,6 +26,24 @@ class WPML_TM_Ajax_Factory extends WPML_Ajax_Factory {
 		global $ICL_Pro_Translation;
 
 		switch ( $class_name ) {
+			case 'WPML_Ajax_Scan_Link_Targets':
+				return new WPML_Ajax_Scan_Link_Targets(
+					new WPML_Translate_Link_Targets_In_Posts_Global(
+						new WPML_Translate_Link_Target_Global_State( $this->sitepress ),
+						$this->wpdb,
+						$ICL_Pro_Translation
+					),
+					wpml_is_st_loaded()
+						? new WPML_Translate_Link_Targets_In_Strings_Global(
+							new WPML_Translate_Link_Target_Global_State( $this->sitepress ),
+							$this->wpdb,
+							$this->wp_api,
+							$ICL_Pro_Translation
+						)
+						: null,
+					$this->post_data
+				);
+
 			case 'WPML_Ajax_Update_Link_Targets_In_Posts':
 				return new WPML_Ajax_Update_Link_Targets_In_Posts(
 					new WPML_Translate_Link_Target_Global_State( $this->sitepress ),

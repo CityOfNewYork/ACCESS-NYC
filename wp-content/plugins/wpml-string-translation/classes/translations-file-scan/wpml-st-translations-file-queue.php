@@ -160,6 +160,30 @@ class WPML_ST_Translations_File_Queue {
 		return count( $this->file_dictionary->get_not_imported_files() );
 	}
 
+	/**
+	 * @param QueueFilter $queueFilter
+	 * 
+	 * @return int
+	 */
+	public function getPendingByFilter( QueueFilter $queueFilter ) {
+		$this->file_dictionary->clear_skipped();
+		$files = $this->file_dictionary->get_not_imported_files();
+
+		if ( ! count( $files ) ) {
+			return 0;
+		}
+
+		$count = 0;
+
+		foreach ( $files as $file ) {
+			if ( $queueFilter->isSelected( $file ) ) {
+				$count++;
+			}
+		}
+
+		return $count;
+	}
+
 	public function mark_as_finished() {
 		foreach ( $this->file_dictionary->get_imported_files() as $file ) {
 			$file->set_status( WPML_ST_Translations_File_Entry::FINISHED );

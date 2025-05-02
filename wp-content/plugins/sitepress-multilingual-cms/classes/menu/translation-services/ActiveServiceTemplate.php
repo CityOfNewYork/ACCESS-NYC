@@ -27,14 +27,14 @@ class ActiveServiceTemplate {
 				'deactivate'             => __( 'Deactivate', 'wpml-translation-management' ),
 				'modal_header'           => sprintf(
 					__(
-						'Enter here your %s authentication details',
-						'wpml-translation-management'
+						'Enter your %s authentication details',
+						'sitepress'
 					),
 					$active_service->get_name()
 				),
 				'modal_tip'              => $active_service->get_popup_message() ?
 					$active_service->get_popup_message() :
-					__( 'You can find API token at %s site', 'wpml-translation-management' ),
+					__( 'You can find the API token at %s site', 'sitepress' ),
 				'modal_title'            => sprintf(
 					__( '%s authentication', 'wpml-translation-management' ),
 					$active_service->get_name()

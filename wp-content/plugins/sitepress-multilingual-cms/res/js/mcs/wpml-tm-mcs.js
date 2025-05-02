@@ -17,6 +17,7 @@ jQuery(function () {
 		var document_status = jQuery( 'input[name*="icl_translated_document_status"]:checked' ).val(),
       document_status_sync = jQuery( 'input[name*="icl_translated_document_status_sync"]:checked' ).val(),
 			page_url = jQuery( 'input[name*="icl_translated_document_page_url"]:checked' ).val(),
+      hide_translated_terms = jQuery('input[name="tm_block_retranslating_terms"]:checked').val(),
 			response_text = jQuery( '#icl_ajx_response_tdo' ),
 			spinner = '<span id="js-document-options-spinner" style="float: inherit; margin: 0" class="spinner is-active"></span>';
 
@@ -31,6 +32,7 @@ jQuery(function () {
 				nonce: jQuery( '#wpml-translated-document-options-nonce' ).val(),
 				document_status: document_status,
         document_status_sync: document_status_sync,
+        tm_block_retranslating_terms: hide_translated_terms,
 				page_url: page_url
 			},
 			success: function ( response ) {
@@ -60,4 +62,35 @@ jQuery(function () {
 			}
 		});
 	});
+
+  var radioButtons = document.querySelectorAll('input[name="t_method"]');
+
+  function updateTableClass() {
+    var table = document.querySelector('.t_method__table');
+    var useForOldTranslationsCheckbox = document.querySelector('.old-translations .wpml-checkbox');
+    useForOldTranslationsCheckbox.setAttribute('style', 'display: none;');
+
+    radioButtons.forEach(function(radio) {
+      var radioLabel = radio.nextElementSibling;
+      if (radio.checked) {
+        radioLabel.textContent = icl_enabled_text;
+        if (radio.value === "ATE") {
+          table.classList.add('t_method__ate-editor');
+          table.classList.remove('t_method__classic-editor');
+          useForOldTranslationsCheckbox.setAttribute('style', 'display: inline-block;');
+        } else if (radio.value === "1") {
+          table.classList.add('t_method__classic-editor');
+          table.classList.remove('t_method__ate-editor');
+        }
+      } else {
+        radioLabel.textContent = icl_choose_text;
+      }
+    });
+  }
+
+  updateTableClass();
+
+  radioButtons.forEach(function(radio) {
+    radio.addEventListener('change', updateTableClass);
+  });
 });

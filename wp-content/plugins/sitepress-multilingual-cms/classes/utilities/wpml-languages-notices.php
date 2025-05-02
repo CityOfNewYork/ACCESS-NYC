@@ -19,7 +19,7 @@ class WPML_Languages_Notices {
 
 	function maybe_create_notice_missing_menu_items( $languages_count ) {
 		if ( 1 === $languages_count ) {
-			$text   = __( 'You need to configure at least one more language in order to access "Theme and plugins localization" and "Media translation".', 'sitepress' );
+			$text   = __( 'You need to configure at least one more language in order to access "Theme and plugins localization" and "Media Translation" screens.', 'sitepress' );
 			$notice = new WPML_Notice( self::NOTICE_ID_MISSING_MENU_ITEMS, $text, self::NOTICE_GROUP );
 			$notice->set_css_class_types( 'info' );
 			$notice->set_dismissible( true );

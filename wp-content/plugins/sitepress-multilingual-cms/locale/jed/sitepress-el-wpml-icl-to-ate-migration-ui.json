@@ -9,43 +9,43 @@
             "Από:"
          ],
          "--Choose language--": [
-            "--Επιλογή γλώσσας--"
+            "--Επιλέξτε γλώσσα--"
          ],
          "to:": [
-            "σε:"
+            "προς:"
          ],
          "Set language pair(s) for Translator %s:": [
-            "Ορισμός ζεύγους ή ζευγών γλωσσών για μεταφραστή %s:"
+            "Ορίστε ζεύγη γλωσσών για τον Μεταφραστή %s:"
          ],
          "+ Add more language pairs for this translator": [
-            "+ Προσθήκη περισσότερων ζευγών γλωσσών για αυτόν τον μεταφραστή"
+            "+ Προσθέστε περισσότερα ζεύγη γλωσσών για αυτόν τον μεταφραστή"
          ],
          "Translation Memory was successfully copied to Advanced Translation Editor.": [
-            "Η Μεταφραστική Μνήμη αντιγράφηκε επιτυχώς στον Προηγμένο Επεξεργαστή Μετάφρασης."
+            "Η Μνήμη Μετάφρασης αντιγράφηκε με επιτυχία στον Προηγμένο Επεξεργαστή Μετάφρασης."
          ],
          "Deactivate ICanLocalize.com as Translation Service on this site": [
             "Απενεργοποίηση του ICanLocalize.com ως Υπηρεσία Μετάφρασης σε αυτόν τον ιστότοπο"
          ],
          "Missing a translator? Or were new jobs since the last copy of the Translation Memory?": [
-            "Σας λείπει ένας μεταφραστής; Ή προέκυψαν νέες εργασίες από το τελευταίο αντίγραφο της Μεταφραστικής Μνήμης;"
+            "Λείπει κάποιος μεταφραστής; Ή υπήρχαν νέες εργασίες από την τελευταία αντιγραφή της Μνήμης Μετάφρασης;?"
          ],
          "Enter here your ICanLocalize authentication details.": [
-            "Πληκτρολογήστε εδώ τα στοιχεία ελέγχου ταυτότητάς σας για το ICanLocalize."
+            "Εισάγετε εδώ τα στοιχεία ταυτοποίησης του ICanLocalize."
          ],
          "API Token:": [
             "Διακριτικό API:"
          ],
          "Please enter valid value for ICL token.": [
-            "Πληκτρολογήστε μια έγκυρη τιμή για το διακριτικό ICL."
+            "Παρακαλώ εισάγετε έγκυρη τιμή για το διακριτικό ICL."
          ],
          "Enter ICL API token here": [
-            "Πληκτρολογήστε το διακριτικό ICL API εδώ"
+            "Εισάγετε το διακριτικό API του ICL εδώ"
          ],
          "Submit": [
             "Υποβολή"
          ],
          "Sign up": [
-            "Κάντε εγγραφή"
+            "Εγγραφείτε"
          ],
          "to ICanLocalize to receive your API token.": [
             "στο ICanLocalize για να λάβετε το διακριτικό API σας."
@@ -57,25 +57,25 @@
             "λάβετε το διακριτικό σας."
          ],
          "Copy new Translation Memory to Advanced Translation Memory": [
-            "Αντιγραφή νέας Μεταφραστικής Μνήμης σε Προηγμένη Μεταφραστική Μνήμη"
+            "Αντιγραφή νέας Μνήμης Μετάφρασης στην Προηγμένη Μνήμη Μετάφρασης"
          ],
          "Import translation memory": [
-            "Εισαγωγή μεταφραστικής μνήμης"
+            "Εισαγωγή μνήμης μετάφρασης"
          ],
          "ICanLocalize is already deactivated on this site": [
             "Το ICanLocalize είναι ήδη απενεργοποιημένο σε αυτόν τον ιστότοπο"
          ],
          "You can still import Translators or Copy Translation Memory to Advanced Translator Editor": [
-            "Μπορείτε ακόμη να εισαγάγετε Μεταφραστές ή να κάνετε Αντιγραφή Μεταφραστικής Μνήμης στον Προηγμένο Επεξεργαστή Μετάφρασης"
+            "Μπορείτε ακόμα να εισάγετε Μεταφραστές ή να Αντιγράψετε τη Μνήμη Μετάφρασης στον Προηγμένο Επεξεργαστή Μετάφρασης"
          ],
          "Move from ICanLocalize.com to Advanced Translation Editor": [
-            "Μετακίνηση από το ICanLocalize.com στον Προηγμένο Επεξεργαστή Μετάφρασης"
+            "Μετάβαση από το ICanLocalize.com στον Προηγμένο Επεξεργαστή Μετάφρασης"
          ],
          "Import translators": [
             "Εισαγωγή μεταφραστών"
          ],
          "Come back": [
-            "Επιστρέψτε ξανά"
+            "Επιστροφή"
          ],
          "Cancel": [
             "Ακύρωση"
@@ -87,16 +87,16 @@
             "Όνομα"
          ],
          "Language Pairs": [
-            "Ζεύγη γλωσσών"
+            "Ζεύγη Γλωσσών"
          ],
          "Not supported pairs:": [
-            "Ζεύγη που δεν υποστηρίζονται:"
+            "Μη υποστηριζόμενα ζεύγη:"
          ],
          "ICanLocalize.com deactivated": [
             "Το ICanLocalize.com απενεργοποιήθηκε"
          ],
          "Translate memory is imported": [
-            "Η μεταφραστική μνήμη εισαγάγεται"
+            "Η μνήμη μετάφρασης εισήχθη"
          ],
          "There is no translators in ICL": [
             "Δεν υπάρχουν μεταφραστές στο ICL"
@@ -105,40 +105,40 @@
             "Οι μεταφραστές αποθηκεύτηκαν"
          ],
          "%s file upload failed.": [
-            "Απέτυχε το ανέβασμα του αρχείου %s."
+            "Η μεταφόρτωση του αρχείου %s απέτυχε."
          ],
          "Flag": [
             "Σημαία"
          ],
          "Flag file": [
-            "Επισήμανση αρχείου"
+            "Αρχείο σημαίας"
          ],
          "You just added  language. Next, select it as the site's default language or a translation language.": [
-            "Μόλις προσθέσατε τη γλώσσα. Στη συνέχεια, επιλέξτε την ως προεπιλεγμένη γλώσσα του ιστότοπου ή ως γλώσσα μετάφρασης."
+            "Μόλις προσθέσατε γλώσσα. Στη συνέχεια, επιλέξτε την ως την προεπιλεγμένη γλώσσα του ιστότοπου ή ως γλώσσα μετάφρασης."
          ],
          "Language added": [
-            "Προστέθηκε γλώσσα"
+            "Η γλώσσα προστέθηκε"
          ],
          "The value \"%s\" already exists": [
-            "Η τιμή \"%s\" υπάρχει ήδη"
+            "Η τιμή “%s” υπάρχει ήδη"
          ],
          "Add a new language": [
             "Προσθήκη νέας γλώσσας"
          ],
          "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
-            "Δημιουργήστε μια γλώσσα συγκεκριμένης χώρας, επιλέγοντας τη γενική γλώσσα από την παρακάτω λίστα και, έπειτα, τη χώρα για την οποία θα πρέπει να τοπικοποιηθεί."
+            "Δημιουργήστε μια γλώσσα ειδική για μια χώρα επιλέγοντας τη γενική γλώσσα από την παρακάτω λίστα. Στη συνέχεια, επιλέξτε τη χώρα για την οποία πρέπει να τοπικοποιηθεί."
          ],
          "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
-            "Επιλέγοντας έναν συνδυασμό που υπάρχει ήδη στη βάση δεδομένων, το WPML μπορεί να βοηθήσει με τη συμπλήρωση των απαραίτητων πεδίων. Διαβάστε περισσότερα για το θέμα <AddingACustomLanguageLink />."
+            "Επιλέγοντας έναν συνδυασμό που υπάρχει ήδη στη βάση δεδομένων, το WPML μπορεί να βοηθήσει στη συμπλήρωση των απαραίτητων πεδίων. Διαβάστε περισσότερα σχετικά με την <AddingACustomLanguageLink />."
          ],
          "Cannot find?": [
-            "Δεν τη βρίσκετε;"
+            "Δεν μπορείτε να βρείτε;?"
          ],
          "Click here": [
             "Κάντε κλικ εδώ"
          ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
-            "Λάθος μορφή. Μπορεί να περιέχει μόνο πεζά γράμματα και \"-\". Π.χ.: \"fr\" , \"pt-br\", \"zh-hans\"."
+            "Λανθασμένη μορφή. Μπορεί να περιέχει μόνο μικρά γράμματα και “-”. Π.χ: “fr”, “pt-br”, “zh-hans”"
          ],
          "Language": [
             "Γλώσσα"
@@ -147,31 +147,31 @@
             "Τοποθεσία"
          ],
          "Code": [
-            "Κώδικας"
+            "Κωδικός"
          ],
          "The language will not be supported by automatic translations": [
             "Η γλώσσα δεν θα υποστηρίζεται από αυτόματες μεταφράσεις"
          ],
          "Language mapping": [
-            "Αντιστοίχιση γλωσσών"
+            "Αντιστοίχιση γλώσσας"
          ],
          "Don't map this language": [
-            "Να μην αντιστοιχιστεί αυτή η γλώσσα"
+            "Μην αντιστοιχίσετε αυτή τη γλώσσα"
          ],
          "Default locale": [
-            "Προεπιλεγμένες τοπικές ρυθμίσεις"
+            "Προεπιλεγμένη τοπική ρύθμιση"
          ],
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
-            "Λάθος μορφή. Μπορεί να περιέχει μόνο πεζά γράμματα και \"_\". Π.χ.: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+            "Λανθασμένη μορφή. Μπορεί να περιέχει μόνο μικρά γράμματα και “_”. Π.χ: “de”, “de_DE”, “zh_Hant_TW”"
          ],
          "hreflang": [
             "hreflang"
          ],
          "Encode url?": [
-            "Να γίνει κωδικοποίηση του URL;"
+            "Κωδικοποίηση url;?"
          ],
          "Flags must be:": [
-            "Οι σημαίες πρέπει να:"
+            "Οι σημαίες πρέπει να είναι:"
          ],
          "NO": [
             "ΟΧΙ"
@@ -180,13 +180,13 @@
             "ΝΑΙ"
          ],
          " (required)": [
-            " (υποχρεωτικό)"
+            " (απαιτείται)"
          ],
          "Please fill in the field": [
-            "Συμπληρώστε το πεδίο"
+            "Παρακαλώ συμπληρώστε το πεδίο"
          ],
          "PNG, SVG, or JPG files": [
-            "Αρχεία PNG, SVG ή JPG"
+            "Αρχεία PNG, SVG, ή JPG"
          ],
          "Save language": [
             "Αποθήκευση γλώσσας"
@@ -195,58 +195,58 @@
             "18 x 12 pixel"
          ],
          "Read more about ": [
-            "Διαβάστε περισσότερα για"
+            "Διαβάστε περισσότερα για "
          ],
          "The name of your language as it will appear on your site's language switcher.": [
-            "Το όνομα της γλώσσας σας θα εμφανιστεί στον εναλλαγέα γλώσσας του ιστότοπού σας."
+            "Το όνομα της γλώσσας σας όπως θα εμφανίζεται στον επιλογέα γλώσσας του ιστότοπού σας."
          ],
          "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
-            "Μια μοναδική τιμή που προσδιορίζει τη γλώσσα στη βάση δεδομένων και το URL. Αφού αποθηκευτεί, ο κωδικός γλώσσας δεν μπορεί να αλλάξει."
+            "Μια μοναδική τιμή που προσδιορίζει τη γλώσσα στη βάση δεδομένων και τη διεύθυνση URL. Μόλις αποθηκευτεί, ο κωδικός γλώσσας δεν μπορεί να αλλάξει."
          ],
          "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
-            "Αν η προσαρμοσμένη γλώσσα είναι παρόμοια με μια υπάρχουσα γλώσσα, μπορείτε να χρησιμοποιήσετε τον ορθογραφικό έλεγχο και την αυτόματη μετάφραση της υπάρχουσας γλώσσας. Για παράδειγμα, αν η προσαρμοσμένη γλώσσα είναι τα Ελβετικά-Γερμανικά, μπορείτε να αντιστοιχίσετε τα Γερμανικά ως γλώσσα που θα χρησιμοποιείται για ορθογραφικό έλεγχο και αυτόματη μετάφραση. Αν δεν αντιστοιχίσετε την προσαρμοσμένη γλώσσα σε μια υπάρχουσα γλώσσα, ο ορθογραφικός έλεγχος και η αυτόματη μετάφραση δεν θα είναι διαθέσιμα στη συγκεκριμένη γλώσσα. "
+            "Εάν η προσαρμοσμένη γλώσσα σας είναι παρόμοια με μια υπάρχουσα γλώσσα, μπορείτε να χρησιμοποιήσετε τον ορθογραφικό έλεγχο και την αυτόματη μετάφραση της υπάρχουσας γλώσσας. Για παράδειγμα, εάν η προσαρμοσμένη γλώσσα σας είναι τα Ελβετικά Γερμανικά, μπορείτε να αντιστοιχίσετε στα Γερμανικά ως τη γλώσσα που θα χρησιμοποιηθεί για τον ορθογραφικό έλεγχο και την αυτόματη μετάφραση. Εάν δεν αντιστοιχίσετε την προσαρμοσμένη γλώσσα σας σε μια υπάρχουσα γλώσσα, οι λειτουργίες ορθογραφικού ελέγχου και αυτόματης μετάφρασης δεν θα είναι διαθέσιμες σε αυτή τη γλώσσα."
          ],
          "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
-            "Η τιμή που ελέγχει το WPML κατά τη φόρτωση μεταφράσεων από αρχεία MO και PO. Η προεπιλεγμένη τοποθεσία περιλαμβάνεται στα ονόματα αρχείων  στον φάκελο /wp-content/languages/ της διαμόρφωσης WordPress."
+            "Η τιμή που ελέγχει το WPML κατά τη φόρτωση μεταφράσεων από αρχεία MO και PO. Η προεπιλεγμένη τοπική ρύθμιση περιλαμβάνεται στα ονόματα αρχείων στον φάκελο  /wp-content/languages/ στη ρύθμιση του WordPress."
          ],
          "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
-            "Το Google χρησιμοποιεί την ιδιότητα hreflang για να κατευθύνει τους χρήστες σε ιστότοπους στη δική τους γλώσσα και τοποθεσία. Παραδείγματα:"
+            "Η Google χρησιμοποιεί το χαρακτηριστικό hreflang για να κατευθύνει τους χρήστες σε ιστότοπους στη σχετική γλώσσα και τοποθεσία τους. Παραδείγματα:"
          ],
          "All English-speaking users: en": [
             "Όλοι οι αγγλόφωνοι χρήστες: en"
          ],
          "English for UK users: en-gb": [
-            "Αγγλικά για χρήστες στο ΗΒ: en-gb"
+            "Αγγλικά για χρήστες του Ηνωμένου Βασιλείου: en-gb"
          ],
          "English for US users: en-us": [
-            "Αγγλικά για χρήστες στις ΗΠΑ: en-us"
+            "Αγγλικά για χρήστες των ΗΠΑ: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
-            "Καθορίζει εάν τα URL σε αυτήν τη γλώσσα κωδικοποιούνται ή χρησιμοποιούν χαρακτήρες ASCII (αν δεν γνωρίζετε με βεβαιότητα, αφήστε την επιλογή \"Όχι\")."
+            "Καθορίζει εάν οι διευθύνσεις URL σε αυτή τη γλώσσα είναι κωδικοποιημένες ή χρησιμοποιούν χαρακτήρες ASCII (εάν δεν είστε σίγουροι, αφήστε το ως “Όχι”)."
          ],
          "adding a custom language": [
             "προσθήκη προσαρμοσμένης γλώσσας"
+         ],
+         "What are the languages of your site?": [
+            "Ποιες είναι οι γλώσσες του ιστότοπού σας;?"
          ],
          "Default language": [
             "Προεπιλεγμένη γλώσσα"
          ],
          "What is the current language of your website?": [
-            "Ποια είναι η τρέχουσα γλώσσα του ιστότοπού σας;"
+            "Ποια είναι η τρέχουσα γλώσσα του ιστότοπού σας;?"
          ],
          "Translation languages": [
             "Γλώσσες μετάφρασης"
          ],
          "Which languages do you want to translate your site into?": [
-            "Σε ποιες γλώσσες θέλετε να μεταφράσετε τον ιστότοπό σας;"
+            "Σε ποιες γλώσσες θέλετε να μεταφράσετε τον ιστότοπό σας;?"
          ],
          "If you cannot find languages that you need in the list": [
-            "Αν δεν μπορείτε να βρείτε γλώσσες που χρειάζεστε στη λίστα,"
+            "Εάν δεν μπορείτε να βρείτε τις γλώσσες που χρειάζεστε στη λίστα"
          ],
          "create a custom language": [
             "δημιουργήστε μια προσαρμοσμένη γλώσσα"
-         ],
-         "What are the languages of your site?": [
-            "Ποιες είναι οι γλώσσες του ιστότοπού σας;"
          ]
       }
    }

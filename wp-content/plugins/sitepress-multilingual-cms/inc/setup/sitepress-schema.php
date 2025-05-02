@@ -3,6 +3,9 @@
  * @package wpml-core
  */
 
+use WPML\Infrastructure\WordPress\Component\Translation\Domain\Links\Repository;
+use WPML\Upgrade\Commands\CreateBackgroundTaskTable;
+
 function icl_reset_language_data() {
 	global $wpdb, $sitepress;
 
@@ -109,7 +112,8 @@ function icl_sitepress_activate() {
                  `review_status` ENUM('NEEDS_REVIEW', 'EDITING', 'ACCEPTED'),
                  `ate_comm_retry_count` INT(11) UNSIGNED DEFAULT 0,
                  PRIMARY KEY (`rid`),
-                 UNIQUE KEY `translation_id` (`translation_id`)
+                 UNIQUE KEY `translation_id` (`translation_id`),
+                 KEY `review_status` (`review_status`)
                 ) {$charset_collate}
             ";
 			if ( $wpdb->query( $sql ) === false ) {
@@ -204,7 +208,6 @@ function icl_sitepress_activate() {
 		}
 
 		/* general string translation */
-		$translation_priority_default = __( 'Optional', 'sitepress' );
 		$table_name                   = $wpdb->prefix . 'icl_strings';
 		$found_table                  = (string) $wpdb->get_var( "SHOW TABLES LIKE '{$table_name}'" );
 		if ( 0 !== strcasecmp( $found_table, $table_name ) ) {
@@ -376,6 +379,18 @@ function icl_sitepress_activate() {
 		if ( $wpdb->query( $icl_translation_sql ) === false ) {
 			throw new Exception( $wpdb->last_error );
 		}
+
+		// Create tables from wpml/wpml links translations.
+		if ( ! Repository::createDatabaseTables() ) {
+			throw new Exception( 'Failed to create database tables for links translations.' );
+		}
+
+		// Create tables for background tasks.
+		$icl_background_task = CreateBackgroundTaskTable::create_table_if_not_exists( $wpdb );
+		if ( ! $icl_background_task ) {
+			throw new Exception( $wpdb->last_error );
+		}
+
 	} catch ( Exception $e ) {
 		trigger_error( $e->getMessage(), E_USER_ERROR );
 		exit;

@@ -3,8 +3,7 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "lang": "pl"
+            "domain": "messages"
          },
          "From:": [
             "Język źródłowy:"
@@ -121,7 +120,7 @@
             "Dodano język."
          ],
          "The value \"%s\" already exists": [
-            "Wartość \"%s\" już istnieje."
+            "Wartość „%s” już istnieje"
          ],
          "Add a new language": [
             "Dodaj nowy język"
@@ -139,7 +138,7 @@
             "Kliknij tutaj"
          ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
-            "Nieprawidłowy format. Dozwolone są tylko małe litery oraz \"-\", np. \"fr\" , \"pt-br\", \"zh-hans\"."
+            "Nieprawidłowy format. Może zawierać tylko małe litery i „-”. Np.: „fr”, „pt-br”, „zh-hans”"
          ],
          "Language": [
             "Język"
@@ -163,7 +162,7 @@
             "Domyślny obszar językowy"
          ],
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
-            "Nieprawidłowy format. Dozwolone są tylko małe litery oraz  \"_\", np. \"de\" , \"de_DE\", \"zh_Hant_TW\"."
+            "Nieprawidłowy format. Może zawierać tylko małe litery i „_”. Np.: „de”, „de_DE”, „zh_Hant_TW”"
          ],
          "hreflang": [
             "hreflang"
@@ -223,10 +222,13 @@
             "Użytkownicy języka angielskiego w USA: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
-            "Określa, czy adresy URL w tym języku będą zakodowane lub czy będą używać znaków ASCII (jeśli nie masz pewności, wybierz \"Nie\")."
+            "Określa, czy adresy URL w tym języku są kodowane czy używają znaków ASCII (jeśli nie masz pewności, pozostaw jako „Nie”)."
          ],
          "adding a custom language": [
             "dodawanie własnego języka"
+         ],
+         "What are the languages of your site?": [
+            "W jakich językach jest Twoja strona?"
          ],
          "Default language": [
             "Język domyślny"
@@ -245,9 +247,6 @@
          ],
          "create a custom language": [
             "utwórz własny."
-         ],
-         "What are the languages of your site?": [
-            "W jakich językach jest Twoja strona?"
          ]
       }
    }

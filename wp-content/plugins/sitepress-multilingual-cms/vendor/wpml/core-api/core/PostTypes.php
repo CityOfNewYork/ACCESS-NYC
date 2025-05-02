@@ -52,18 +52,16 @@ class PostTypes {
 	}
 
 	/**
-	 * Gets post types that are automatically translatable.
-	 * Attachment post type is excluded.
+	 * All translatable posts are also automatically-translatable except attachments.
 	 *
 	 * @return array  eg. [ 'page', 'post' ]
 	 */
 	public static function getAutomaticTranslatable() {
-		$filters = Logic::allPass( [
-			[ Automatic::class, 'isAutomatic' ],
-			Logic::complement( Relation::equals( 'attachment' ) )
-		] );
+		$types = self::getTranslatable();
 
-		return Fns::filter( $filters, self::getOnlyTranslatable() );
+		$filters = Logic::complement( Relation::equals( 'attachment' ) );
+
+		return Fns::filter( $filters, $types );
 	}
 
 	public static function withNames( $postTypes ) {

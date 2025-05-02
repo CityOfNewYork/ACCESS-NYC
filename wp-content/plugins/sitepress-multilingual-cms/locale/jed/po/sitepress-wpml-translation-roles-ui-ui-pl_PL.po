@@ -1,0 +1,395 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/language/LanguagePairs.js:57
+msgid "From:"
+msgstr "Język źródłowy:"
+
+#: src/js/components/language/LanguagePairs.js:69
+msgid "--Choose language--"
+msgstr "--Wybierz język--"
+
+#: src/js/components/language/LanguagePairs.js:81
+msgid "to:"
+msgstr "Język docelowy:"
+
+#: src/js/components/language/SelectLanguagePairs.js:39
+msgid "Set language pair(s) for Translator %s:"
+msgstr "Ustaw pary językowe dla tłumacza %s:"
+
+#: src/js/components/language/SelectLanguagePairs.js:64
+msgid "+ Add more language pairs for this translator"
+msgstr "+ Dodaj więcej par językowych dla tego tłumacza"
+
+#: src/js/components/roles/CreateUser.js:100
+msgid "First Name"
+msgstr "Imię"
+
+#: src/js/components/roles/CreateUser.js:101
+msgid "Last Name"
+msgstr "Nazwisko"
+
+#: src/js/components/roles/CreateUser.js:105
+msgid "Role"
+msgstr "Rola"
+
+#: src/js/components/roles/CreateUser.js:137
+msgid "(required)"
+msgstr "(wymagane)"
+
+#: src/js/components/roles/CreateUser.js:46
+msgid ""
+"Make sure that you have provided a correct email address e.g. "
+"name@domain.com"
+msgstr "Upewnij się, że podałeś poprawny adres e-mail, np. name@domain.com"
+
+#: src/js/components/roles/CreateUser.js:64
+msgid "This field is required"
+msgstr "To pole jest wymagane"
+
+#: src/js/components/roles/CreateUser.js:84
+msgid "A translator can be any WordPress role."
+msgstr "Tłumaczem może być każda rola WordPress."
+
+#: src/js/components/roles/CreateUser.js:98
+msgid "Username"
+msgstr "Nazwa użytkownika"
+
+#: src/js/components/roles/CreateUser.js:99
+msgid "Email"
+msgstr "E-mail"
+
+#: src/js/components/roles/ExistingUserSelect.js:46
+msgid "Search"
+msgstr "Szukaj"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:47
+msgid "user"
+msgstr "użytkownik"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:47
+msgid "Editor"
+msgstr "Redaktor"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:61
+msgid "Select an existing %s and set as Translation Manager"
+msgstr "Wybierz istniejącego %s i ustaw jako Menedżera Tłumaczeń"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:72
+msgid "Create a new %s and set as Translation Manager"
+msgstr "Utwórz nowego %s i ustaw jako Menedżera Tłumaczeń"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:85
+#: src/js/components/translators/AddTranslatorDialog.js:121
+#: src/js/components/translators/EditLanguagesDialog.js:73
+#: src/js/setup/components/Steps/AddLanguagesModal.js:496
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:90
+msgid "Add Translation Manager"
+msgstr "Dodaj Menedżera Tłumaczeń"
+
+#: src/js/components/translation-managers/ManagerSection.js:27
+msgid "Add a Translation Manager"
+msgstr "Dodaj Menedżera Tłumaczeń"
+
+#: src/js/components/translators/AddTranslatorDialog.js:111
+msgid "Set language pair(s)"
+msgstr "Ustaw pary językowe"
+
+#: src/js/components/translators/AddTranslatorDialog.js:126
+msgid "Previous"
+msgstr "Poprzedni"
+
+#: src/js/components/translators/AddTranslatorDialog.js:129
+#: src/js/components/translators/EditLanguagesDialog.js:78
+msgid "Save"
+msgstr "Zapisz"
+
+#: src/js/components/translators/AddTranslatorDialog.js:65
+#: src/js/components/translators/UserSection.js:45
+msgid "Add a Translator"
+msgstr "Dodaj Tłumacza"
+
+#: src/js/components/translators/AddTranslatorDialog.js:91
+msgid "Select an existing user and set as Translator"
+msgstr "Wybierz istniejącego użytkownika i ustaw jako Tłumacza"
+
+#: src/js/components/translators/AddTranslatorDialog.js:95
+msgid "Create a new user and set as Translator"
+msgstr "Utwórz nowego użytkownika i ustaw jako Tłumacza"
+
+#: src/js/components/translators/EditLanguagesDialog.js:55
+msgid "Edit language pair(s) for translator"
+msgstr "Edytuj pary językowe dla tłumacza"
+
+#: src/js/components/translators/TranslatorsTable.js:128
+#: src/js/setup/components/Steps/AddLanguagesModal.js:346
+msgid "Name"
+msgstr "Nazwa"
+
+#: src/js/components/translators/TranslatorsTable.js:140
+msgid "Language Pairs"
+msgstr "Pary językowe"
+
+#: src/js/components/translators/TranslatorsTable.js:144
+msgid "You can translate to and from all languages"
+msgstr "Możesz tłumaczyć na wszystkie języki i z wszystkich języków"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:48
+msgid "%s file upload failed."
+msgstr "Przesyłanie pliku \"%s\" nie powiodło się."
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:69
+msgid "Flag"
+msgstr "Flaga"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:87
+msgid "Flag file"
+msgstr "Oznacz plik"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:160
+msgid ""
+"You just added  language. Next, select it as the site's default language or "
+"a translation language."
+msgstr "Właśnie dodałeś język. Teraz wybierz go jako domyślny język witryny lub język tłumaczenia."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:162
+msgid "Language added"
+msgstr "Dodano język"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:192
+msgid "The value \"%s\" already exists"
+msgstr "Wartość „%s” już istnieje"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:215
+msgid "Add a new language"
+msgstr "Dodaj nowy język"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:224
+msgid ""
+"Create a country-specific language by choosing the general language from "
+"the list below. Then, choose the country it should be localized for."
+msgstr "Utwórz język specyficzny dla danego kraju, wybierając język ogólny z poniższej listy. Następnie wybierz kraj, dla którego powinien być zlokalizowany."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:229
+msgid ""
+"By choosing a combination that already exists in the database, WPML can "
+"help fill out the necessary fields. Read more about "
+"<AddingACustomLanguageLink />."
+msgstr "Wybierając kombinację, która już istnieje w bazie danych, WPML może pomóc w wypełnieniu niezbędnych pól. Przeczytaj więcej o <AddingACustomLanguageLink />."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:242
+msgid "Cannot find?"
+msgstr "Nie możesz znaleźć?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:244
+msgid "Click here"
+msgstr "Kliknij tutaj"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:300
+msgid ""
+"The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" "
+", \"pt-br\", \"zh-hans\""
+msgstr "Nieprawidłowy format. Może zawierać tylko małe litery i „-”. Np.: „fr”, „pt-br”, „zh-hans”"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:308
+msgid "Language"
+msgstr "Język"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:331
+msgid "Location"
+msgstr "Lokalizacja"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:360
+msgid "Code"
+msgstr "Kod"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:374
+msgid "The language will not be supported by automatic translations"
+msgstr "Ten język nie będzie obsługiwany przez automatyczne tłumaczenia"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:392
+msgid "Language mapping"
+msgstr "Mapowanie języka"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:404
+msgid "Don't map this language"
+msgstr "Nie mapuj tego języka"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:418
+msgid "Default locale"
+msgstr "Domyślne ustawienia regionalne"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:423
+msgid ""
+"The wrong format. It may contain only small letters and \"_\". E.g: \"de\" "
+", \"de_DE\", \"zh_Hant_TW\""
+msgstr "Nieprawidłowy format. Może zawierać tylko małe litery i „_”. Np.: „de”, „de_DE”, „zh_Hant_TW”"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:435
+msgid "hreflang"
+msgstr "hreflang"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:449
+msgid "Encode url?"
+msgstr "Kodować URL?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:45
+msgid "Flags must be:"
+msgstr "Flagi muszą być:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:453
+msgid "NO"
+msgstr "NIE"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:454
+msgid "YES"
+msgstr "TAK"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:460
+msgid " (required)"
+msgstr " (wymagane)"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:483
+msgid "Please fill in the field"
+msgstr "Proszę wypełnić pole"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:49
+msgid "PNG, SVG, or JPG files"
+msgstr "Pliki PNG, SVG lub JPG"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:501
+msgid "Save language"
+msgstr "Zapisz język"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:52
+msgid "18 x 12 pixels"
+msgstr "18 x 12 pikseli"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:55
+msgid "Read more about "
+msgstr "Przeczytaj więcej o "
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:60
+msgid ""
+"The name of your language as it will appear on your site's language "
+"switcher."
+msgstr "Nazwa Twojego języka, która pojawi się w przełączniku języków na Twojej stronie."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:61
+msgid ""
+"A unique value that identifies the language in the database and URL. Once "
+"saved, the language code cannot be changed."
+msgstr "Unikalna wartość identyfikująca język w bazie danych i adresie URL. Po zapisaniu kod języka nie może być zmieniony."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:62
+msgid ""
+"If your custom language is similar to an existing language, you can use the "
+"existing language's spellcheck and automatic translation. For example, if "
+"your custom language is Swiss-German, you can map to German as the language "
+"to use for spellcheck and automatic translation. If you don't map your "
+"custom language to an existing language, spellcheck and automatic "
+"translation features will be unavailable in that language."
+msgstr "Jeśli Twój niestandardowy język jest podobny do istniejącego języka, możesz użyć sprawdzania pisowni i automatycznego tłumaczenia z tego istniejącego języka. Na przykład, jeśli Twoim niestandardowym językiem jest szwajcarski niemiecki, możesz mapować go na niemiecki jako język do użycia w sprawdzaniu pisowni i automatycznym tłumaczeniu. Jeśli nie zmapujesz swojego niestandardowego języka do istniejącego języka, funkcje sprawdzania pisowni i automatycznego tłumaczenia będą niedostępne w tym języku."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:66
+msgid ""
+"The value WPML checks when loading translations from MO and PO files. The "
+"default locale is included in the filenames in your /wp-content/languages/ "
+"folder in your WordPress setup."
+msgstr "Wartość, którą WPML sprawdza podczas ładowania tłumaczeń z plików MO i PO. Domyślne ustawienia regionalne są zawarte w nazwach plików w Twoim folderze  /wp-content/languages/ w konfiguracji WordPress."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:69
+msgid ""
+"Google uses the hreflang attribute to direct users to sites in their "
+"relevant language and location. Examples:"
+msgstr "Google używa atrybutu hreflang, aby kierować użytkowników do witryn w ich odpowiednim języku i lokalizacji. Przykłady:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:71
+msgid "All English-speaking users: en"
+msgstr "Wszyscy użytkownicy anglojęzyczni: en"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:72
+msgid "English for UK users: en-gb"
+msgstr "Angielski dla użytkowników z Wielkiej Brytanii: en-gb"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:73
+msgid "English for US users: en-us"
+msgstr "Angielski dla użytkowników z USA: en-us"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:81
+msgid ""
+"Determines if URLs in this language are encoded or use ASCII characters (if "
+"unsure, leave it as \"No\")."
+msgstr "Określa, czy adresy URL w tym języku są kodowane, czy używają znaków ASCII (w razie wątpliwości pozostaw jako „Nie”)."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:98
+msgid "adding a custom language"
+msgstr "dodawanie niestandardowego języka"
+
+#: src/js/setup/components/Steps/Languages.js:110
+msgid "What are the languages of your site?"
+msgstr "Jakie są języki Twojej strony?"
+
+#: src/js/setup/components/Steps/Languages.js:120
+msgid "Default language"
+msgstr "Język domyślny"
+
+#: src/js/setup/components/Steps/Languages.js:122
+msgid "What is the current language of your website?"
+msgstr "Jaki jest obecny język Twojej strony internetowej?"
+
+#: src/js/setup/components/Steps/Languages.js:133
+msgid "Translation languages"
+msgstr "Języki tłumaczenia"
+
+#: src/js/setup/components/Steps/Languages.js:135
+msgid "Which languages do you want to translate your site into?"
+msgstr "Na jakie języki chcesz przetłumaczyć swoją stronę?"
+
+#: src/js/setup/components/Steps/Languages.js:149
+msgid "If you cannot find languages that you need in the list"
+msgstr "Jeśli nie możesz znaleźć potrzebnych języków na liście"
+
+#: src/js/setup/components/Steps/Languages.js:150
+msgid "create a custom language"
+msgstr "utwórz niestandardowy język"
+
+#: src/js/translation-roles-ui/components/Managers.js:12
+msgid ""
+"You can add a dedicated person to oversee everything translation-related on "
+"your site. %sTranslation Managers%s can add new local translators or "
+"professional translation services, create and assign translation jobs, "
+"review completed translations, and change translation-related settings."
+msgstr "Możesz dodać dedykowaną osobę do nadzorowania wszystkiego, co związane z tłumaczeniami na Twojej stronie. %sMenedżerowie Tłumaczeń%s mogą dodawać nowych lokalnych tłumaczy lub profesjonalne usługi tłumaczeniowe, tworzyć i przydzielać zadania tłumaczeniowe, przeglądać ukończone tłumaczenia i zmieniać ustawienia związane z tłumaczeniami."
+
+#: src/js/translation-roles-ui/components/Managers.js:22
+msgid "Translation Managers"
+msgstr "Menedżerowie Tłumaczeń"
+
+#: src/js/translation-roles-ui/components/Managers.js:25
+msgid ""
+"Note: All Administrators are automatically given Translation Manager "
+"privileges."
+msgstr "Uwaga: Wszyscy Administratorzy automatycznie otrzymują uprawnienia Menedżera Tłumaczeń."
+
+#: src/js/translation-roles-ui/components/Users.js:14
+msgid ""
+"%sLocal translators%s are users of your site that can log in and add, edit, "
+"and review your site's translations. Add a translator and their associated "
+"translation pairs to assign them translation jobs."
+msgstr "%sLokalni tłumacze%s to użytkownicy Twojej strony, którzy mogą się zalogować i dodawać, edytować oraz przeglądać tłumaczenia Twojej strony. Dodaj tłumacza i powiązane z nim pary językowe, aby przydzielić mu zadania tłumaczeniowe."
+
+#: src/js/translation-roles-ui/components/Users.js:23
+msgid ""
+"You can %shire an experienced translator%s to review your automatic "
+"translations for perfect quality."
+msgstr "Możesz %szatrudnić doświadczonego tłumacza%s, aby sprawdził Twoje automatyczne tłumaczenia w celu uzyskania doskonałej jakości."
+
+#: src/js/translation-roles-ui/components/Users.js:33
+msgid "Translators"
+msgstr "Tłumacze"

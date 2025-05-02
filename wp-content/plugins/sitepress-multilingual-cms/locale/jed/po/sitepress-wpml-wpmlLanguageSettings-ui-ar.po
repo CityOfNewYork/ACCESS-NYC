@@ -1,0 +1,30 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:30
+msgid "Choose the image file type for flags"
+msgstr "اختر نوع ملف الصورة للأعلام"
+
+#: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:32
+msgid ""
+"This option affects only the built-in WPML flags, not the custom uploaded "
+"ones."
+msgstr "هذا الخيار يؤثر فقط على أعلام WPML المدمجة، وليس الأعلام المخصصة التي يتم تحميلها."
+
+#: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:41
+msgid "%s format"
+msgstr "التنسيق %s"
+
+#: src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js:56
+msgid "Save"
+msgstr "حفظ"
+
+#: src/js/wpmlLanguageSettings/DefaultFlagsFormat/hooks/useSave.js:20
+msgid "The new format has been saved."
+msgstr "تم حفظ التنسيق الجديد."
+
+#: src/js/wpmlLanguageSettings/DefaultFlagsFormat/hooks/useSave.js:25
+msgid "Failed to save the new format"
+msgstr "فشل حفظ التنسيق الجديد"

@@ -1,5 +1,5 @@
 <?php
-
+#[\AllowDynamicProperties]
 class WPML_Package {
 
 	const CACHE_GROUP = 'WPML_Package';
@@ -17,6 +17,7 @@ class WPML_Package {
 	public $name;
 	public $translation_element_type;
 	public $post_id;
+	public $translator_note;
 
 	private $element_type_prefix;
 

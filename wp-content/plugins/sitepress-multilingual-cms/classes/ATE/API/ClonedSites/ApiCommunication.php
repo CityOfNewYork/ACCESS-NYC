@@ -11,7 +11,7 @@ class ApiCommunication {
 
 	const SITE_CLONED_ERROR = 426;
 
-	const SITE_MOVED_OR_COPIED_MESSAGE = "WPML has detected a change in your site's URL. To continue translating your site, go to your <a href='%s'>WordPress Dashboard</a> and tell WPML if your site has been <a href='%s'>moved or copied</a>.";
+	const SITE_MOVED_OR_COPIED_MESSAGE  = "WPML has detected a change in your site's URL. To continue translating your site, go to your <a href='%s'>WordPress Dashboard</a> and tell WPML if your site has been <a href='%s'>moved or copied</a>.";
 	const SITE_MOVED_OR_COPIED_DOCS_URL = 'https://wpml.org/documentation/translating-your-contents/advanced-translation-editor/using-advanced-translation-editor-when-you-move-or-use-a-copy-of-your-site/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmltm';
 
 	/**
@@ -27,8 +27,11 @@ class ApiCommunication {
 	}
 
 	public function handleClonedSiteError( $response ) {
-		if ( self::SITE_CLONED_ERROR === $response['response']['code'] ) {
-			$parsedResponse = json_decode( $response['body'], true );
+		if (
+			isset( $response['response']['code'] )
+			&& self::SITE_CLONED_ERROR === $response['response']['code']
+		) {
+			$parsedResponse = isset( $response['body'] ) ? json_decode( $response['body'], true ) : [];
 			if ( isset( $parsedResponse['errors'] ) ) {
 				$this->handleClonedDetection( $parsedResponse['errors'] );
 			}

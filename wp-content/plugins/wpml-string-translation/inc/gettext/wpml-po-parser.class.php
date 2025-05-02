@@ -72,11 +72,12 @@ class WPML_PO_Parser {
 		$translation_language = 'en';
 
 		if ( isset( $_GET['context'] ) ) {
-			$po_title .= '_' . filter_var( $_GET['context'], FILTER_SANITIZE_STRING );
+			$sanitizedSuffix = \WPML\API\Sanitize::string( $_GET['context'] );
+			$po_title .= '_' . $sanitizedSuffix;
 		}
 
 		if ( isset( $_GET['translation_language'] ) ) {
-			$translation_language = filter_var( $_GET['translation_language'], FILTER_SANITIZE_STRING );
+			$translation_language = (string) \WPML\API\Sanitize::string( $_GET['translation_language'] );
 		}
 
 		$po = "";

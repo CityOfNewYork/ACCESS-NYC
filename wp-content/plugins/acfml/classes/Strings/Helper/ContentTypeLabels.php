@@ -50,8 +50,9 @@ class ContentTypeLabels {
 			$objectArgs[ $label ] = Obj::propOr( $objectArgs[ $label ], $label, $translatedLabels );
 		} );
 
-		array_walk( $objectArgs['labels'], function( &$value, $key ) use ( $translatedLabels ) {
-			$value = Obj::propOr( $value, $key, $translatedLabels );
+		$labels = Obj::propOr( [], 'labels', $objectArgs );
+		array_walk( $labels, function( $value, $key ) use ( &$objectArgs, $translatedLabels ) {
+			$objectArgs['labels'][ $key ] = Obj::propOr( $value, $key, $translatedLabels );
 		} );
 
 		return $objectArgs;

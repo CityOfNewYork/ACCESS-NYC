@@ -57,6 +57,8 @@ class ExpressionParser
         } else {
             @\trigger_error('Passing the operators as constructor arguments to ' . __METHOD__ . ' is deprecated since version 1.27. Pass the environment instead.', \E_USER_DEPRECATED);
             $this->env = $parser->getEnvironment();
+			// Inspection: having the current value for the $env variable is fine.
+			/* @phpcs:ignore */
             $this->unaryOperators = \func_get_arg(1);
             $this->binaryOperators = \func_get_arg(2);
         }

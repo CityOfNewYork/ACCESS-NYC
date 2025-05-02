@@ -1,0 +1,50 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
+            "Bạn phải sử dụng Trình biên tập Dịch thuật Nâng cao nếu bạn muốn dịch tự động nội dung của mình."
+         ],
+         "Synchronize translators and translation managers with ATE": [
+            "Đồng bộ những người dịch và quản lý dịch thuật bằng ATE"
+         ],
+         "Please try again in a few minutes. If the problem persists, please contact %sWPML support%s.": [
+            "Vui lòng thử lại sau vài phút. Nếu sự cố vẫn còn tiếp diễn, vui lòng liên hệ %sbộ phận hỗ trợ của WPML%s."
+         ],
+         "Save": [
+            "Lưu"
+         ],
+         "Please confirm this translation setting": [
+            "Vui lòng xác nhận cài đặt bản dịch này"
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item.": [
+            "Trang web của bạn được thiết lập để tự động dịch tất cả nội dung. Khi bạn thực hiện<PostTypesNames /> có thể dịch được, WPML sẽ tự động dịch%1$d mục hiện có.",
+            "Trang web của bạn được thiết lập để tự động dịch tất cả nội dung. Khi bạn thực hiện<PostTypesNames /> có thể dịch được, WPML sẽ tự động dịch%1$d các mục hiện có."
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate all future content.": [
+            "Trang web của bạn được thiết lập để tự động dịch tất cả nội dung. Khi bạn thực hiện<PostTypesNames /> có thể dịch được, WPML sẽ tự động dịch toàn bộ nội dung trong tương lai."
+         ],
+         "Are you OK with paying for this?": [
+            "Bạn cảm thấy ổn khi thanh toán cho việc này?"
+         ],
+         "Cancel": [
+            "Hủy"
+         ],
+         "Make translatable": [
+            "Cho phép có thể dịch"
+         ],
+         "Yes, translate <b>existing</b> and <b>future</b> content automatically": [
+            "Vâng, dịch<b> hiện có</b> Và<b> tương lai</b> nội dung tự động"
+         ],
+         "Yes, but only translate <b>future</b> content automatically": [
+            "Có, nhưng chỉ dịch thôi<b> tương lai</b> nội dung tự động"
+         ],
+         "Yes, translate <b>future</b> content automatically": [
+            "Vâng, dịch<b> tương lai</b> nội dung tự động"
+         ]
+      }
+   }
+}

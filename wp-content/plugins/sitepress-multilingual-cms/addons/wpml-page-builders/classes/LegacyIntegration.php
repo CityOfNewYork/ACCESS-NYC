@@ -14,6 +14,11 @@ class LegacyIntegration {
 
 		// WPBakery Page Builder (a.k.a. Visual Composer).
 		if ( defined( 'WPB_VC_VERSION' ) ) {
+			$integrationClasses[] = \WPML\Compatibility\WPBakery\Hooks\TranslationJobLabels::class;
+			$integrationClasses[] = \WPML\Compatibility\WPBakery\Hooks\TranslationJobImages::class;
+			$integrationClasses[] = \WPML\Compatibility\WPBakery\Hooks\TranslationGuiLabels::class;
+			$integrationClasses[] = \WPML\Compatibility\WPBakery\Hooks\Editor::class;
+
 			$wpml_visual_composer = new \WPML_Compatibility_Plugin_Visual_Composer( new \WPML_Debug_BackTrace( null, 12 ) );
 			$wpml_visual_composer->add_hooks();
 
@@ -33,9 +38,17 @@ class LegacyIntegration {
 			$integrationClasses[] = \WPML\Compatibility\FusionBuilder\DynamicContent::class;
 			$integrationClasses[] = \WPML\Compatibility\FusionBuilder\FormContent::class;
 			$integrationClasses[] = \WPML\Compatibility\FusionBuilder\Hooks\Editor::class;
+			$integrationClasses[] = \WPML\Compatibility\FusionBuilder\Hooks\TranslationJobLabels::class;
+			$integrationClasses[] = \WPML\Compatibility\FusionBuilder\Hooks\TranslationJobImages::class;
+			$integrationClasses[] = \WPML\Compatibility\FusionBuilder\Hooks\TranslationGuiLabels::class;
+			$integrationClasses[] = \WPML\Compatibility\FusionBuilder\Hooks\MultilingualOptions::class;
 		}
 
 		if ( function_exists( 'avia_lang_setup' ) ) {
+			$integrationClasses[] = \WPML\Compatibility\Enfold\Hooks\TranslationJobLabels::class;
+			$integrationClasses[] = \WPML\Compatibility\Enfold\Hooks\TranslationJobImages::class;
+			$integrationClasses[] = \WPML\Compatibility\Enfold\Hooks\TranslationGuiLabels::class;
+
 			// phpcs:disable WordPress.NamingConventions.ValidVariableName
 			global $iclTranslationManagement;
 			$enfold = new \WPML_Compatibility_Theme_Enfold( $iclTranslationManagement );
@@ -57,6 +70,10 @@ class LegacyIntegration {
 			$integrationClasses[] = \WPML\Compatibility\Divi\Hooks\Editor::class;
 			$integrationClasses[] = \WPML\Compatibility\Divi\Hooks\DomainsBackendEditor::class;
 			$integrationClasses[] = \WPML\Compatibility\Divi\Hooks\GutenbergUpdate::class;
+			$integrationClasses[] = \WPML\Compatibility\Divi\Hooks\TranslationJobLabels::class;
+			$integrationClasses[] = \WPML\Compatibility\Divi\Hooks\TranslationJobImages::class;
+			$integrationClasses[] = \WPML\Compatibility\Divi\Hooks\TranslationGuiLabels::class;
+			$integrationClasses[] = \WPML\Compatibility\Divi\ConvertThemeOptions::class;
 		}
 
 		$loader = new \WPML_Action_Filter_Loader();

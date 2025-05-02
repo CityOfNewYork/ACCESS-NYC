@@ -15,6 +15,7 @@ class WPML_ST_Taxonomy_Strings {
 	/** @var WPML_ST_String_Factory $string_factory */
 	private $string_factory;
 
+	/** @var array $translated_with_gettext_context Array of text strings with their domains. */
 	private $translated_with_gettext_context = array();
 
 	public function __construct(
@@ -57,14 +58,17 @@ class WPML_ST_Taxonomy_Strings {
 	 * @return int
 	 */
 	public function create_string_if_not_exist( $text, $gettext_context = '', $domain = '', $name = false ) {
+		// Apply filter to allow overriding the source language.
+		$source_lang = apply_filters( 'wpml_taxonomy_strings_source_language', null, $text, $name );
+
 		$string_id = $this->find_string_id( $text, $gettext_context, $domain, $name );
 
 		if ( ! $string_id ) {
 			$context   = $this->get_context( $domain, $gettext_context );
-			$string_id = icl_register_string( $context, (string) $name, $text );
+			$string_id = icl_register_string( $context, (string) $name, $text, false, $source_lang );
 		}
-
 		return $string_id;
+
 	}
 
 	private function get_context( $domain, $gettext_context ) {

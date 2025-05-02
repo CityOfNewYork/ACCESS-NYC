@@ -1,0 +1,244 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/ate/AutoTranslate.js:21
+msgid "Sending for translation"
+msgstr "Đang gửi để dịch"
+
+#: src/js/ate/TranslationDashboardJobsActions.js:23
+msgid ""
+"This content is being automatically translated. If you want to do something "
+"different with it cancel translation jobs first."
+msgstr "Nội dung này đang được dịch tự động. Nếu bạn muốn làm điều gì khác với nó, hãy hủy các công việc dịch trước."
+
+#: src/js/ate/enable/init.js:53
+msgid "Connecting to WPML’s Advanced Translation Editor"
+msgstr "Đang kết nối với Trình biên tập Dịch thuật Nâng cao của WPML"
+
+#: src/js/ate/enable/init.js:67
+msgid "Try again"
+msgstr "Thử lại"
+
+#: src/js/ate/review/init.js:17
+msgid "You don't have the rights to review this language"
+msgstr "Bạn không có quyền rà soát ngôn ngữ này"
+
+#: src/js/ate/status-bar/components/AteJobsStatus.js:33
+msgid "translations"
+msgstr "bản dịch"
+
+#: src/js/ate/status-bar/components/AteJobsStatus.js:34
+msgid "left in the queue"
+msgstr "còn lại trong hàng đợi"
+
+#: src/js/ate/status-bar/components/AteJobsStatus.js:43
+msgid "Translation on hold"
+msgstr "Dịch tạm dừng"
+
+#: src/js/ate/status-bar/components/AteJobsStatus.js:45
+#: src/js/ate/status-bar/components/constants.js:15
+msgid "No translations in the queue"
+msgstr "Không có bản dịch nào trong hàng đợi"
+
+#: src/js/ate/status-bar/components/AteJobsStatus.js:50
+msgid "%d translations left"
+msgstr "%d bản dịch còn lại"
+
+#: src/js/ate/status-bar/components/StatusBar/Notifications.js:38
+msgid "%d min remaining"
+msgstr "%d phút còn lại"
+
+#: src/js/ate/status-bar/components/StatusBar/Notifications.js:39
+msgid "less than 1 min remaining"
+msgstr "còn lại ít hơn 1 phút"
+
+#: src/js/ate/status-bar/components/constants.js:13
+#: src/js/ate/translate-everything/components/Status/index.js:50
+msgid "Automatic translation status"
+msgstr "Trạng thái dịch tự động"
+
+#: src/js/ate/status-bar/components/constants.js:17
+msgid "Translate Everything Automatically"
+msgstr "Dịch Mọi Thứ Tự Động"
+
+#: src/js/ate/status-bar/components/constants.js:19
+msgid "Translate Everything Automatically is active"
+msgstr "Dịch Mọi Thứ Tự Động đang hoạt động"
+
+#: src/js/ate/status-bar/components/constants.js:21
+msgid "Translate Everything Automatically is paused"
+msgstr "Dịch Mọi Thứ Tự Động đang tạm dừng"
+
+#: src/js/ate/status-bar/components/constants.js:23
+msgid "Translate Everything Automatically is stopped"
+msgstr "Chế độ Dịch Tất Cả Tự Động đã dừng"
+
+#: src/js/ate/status-bar/components/constants.js:25
+msgid "Out of Credits for Automatic Translation"
+msgstr "Hết Tín Dụng cho Dịch Tự Động"
+
+#: src/js/ate/status-bar/components/constants.js:28
+msgid "You have <b>1</b> prepaid translation credit in your wpml.org account. Assign these credits to your site to start using automatic translation"
+msgid_plural "You have <b>%s</b> prepaid translation credits in your wpml.org account. Assign these credits to your site to start using automatic translation"
+msgstr[0] "Bạn có <b>1</b> tín dụng dịch thuật trả trước trong tài khoản wpml.org của bạn. Gán các tín dụng này cho trang web của bạn để bắt đầu sử dụng dịch tự động"
+msgstr[1] "Bạn có <b>%s</b> tín dụng dịch thuật trả trước trong tài khoản wpml.org của bạn. Gán các tín dụng này cho trang web của bạn để bắt đầu sử dụng dịch tự động"
+
+#: src/js/ate/status-bar/components/constants.js:40
+#: src/js/ate/status-bar/components/sending/index.js:10
+msgid "Preparing content for translation"
+msgstr "Đang chuẩn bị nội dung cần dịch"
+
+#: src/js/ate/status-bar/components/constants.js:42
+#: src/js/ate/status-bar/components/sending/index.js:9
+msgid "Preparing more content for translation"
+msgstr "Đang chuẩn bị thêm nội dung cần dịch"
+
+#: src/js/ate/status-bar/components/constants.js:44
+msgid "An error occured, fix it to continue."
+msgstr "Đã xảy ra lỗi, hãy sửa để tiếp tục."
+
+#: src/js/ate/status-bar/components/constants.js:46
+msgid ""
+"There is an issue with automatic translation that needs your attention. Fix "
+"it to continue."
+msgstr "Đây là một sự cố với tính năng dịch tự động cần bạn chú ý. Hãy sửa để tiếp tục."
+
+#: src/js/ate/status-bar/components/constants.js:49
+#. %s is replaced by the name of the language.
+msgid ""
+"Your default language, %s, must be mapped to a supported language in order "
+"to use automatic translation."
+msgstr "Ngôn ngữ mặc định của bạn, %s, phải được ánh xạ tới một ngôn ngữ được hỗ trợ để sử dụng tính năng dịch tự động."
+
+#: src/js/ate/status-bar/components/constants.js:57
+#. %s is replaced by the language(s) name.
+msgid "Your language, %s, must be mapped to a supported language in order to use automatic translation."
+msgid_plural "The following languages on your site must be mapped to a supported language in order to use automatic translation: %s"
+msgstr[0] "Ngôn ngữ của bạn, %s, phải được ánh xạ tới một ngôn ngữ được hỗ trợ để sử dụng tính năng dịch tự động."
+msgstr[1] "Các ngôn ngữ sau trên trang web của bạn phải được ánh xạ tới một ngôn ngữ được hỗ trợ để sử dụng tính năng dịch tự động: %s"
+
+#: src/js/ate/status-bar/components/constants.js:67
+msgid ""
+"Content in those languages: %s, cannot be automatically translated unless "
+"you map them to a language that's different from the default."
+msgstr "Nội dung bằng các ngôn ngữ: %s, không thể được dịch tự động trừ khi bạn ánh xạ chúng tới một ngôn ngữ khác với ngôn ngữ mặc định."
+
+#: src/js/ate/status-bar/components/constants.js:77
+#. %d is replaced by the number of jobs to review.
+msgid "%d translation waiting for review"
+msgid_plural "%d translations waiting for review"
+msgstr[0] "%d bản dịch đang chờ xem xét"
+msgstr[1] "%d bản dịch đang chờ xem xét"
+
+#: src/js/ate/status-bar/components/credit/index.js:100
+msgid "Account credits used"
+msgstr "Tín dụng tài khoản đã dùng"
+
+#: src/js/ate/status-bar/components/credit/index.js:110
+msgid ""
+"Once you’ve used all your prepaid credits, we’ll invoice you for any "
+"additional credits you use after the end of the month"
+msgstr "Khi bạn đã sử dụng tất cả tín dụng trả trước, chúng tôi sẽ lập hóa đơn cho bất kỳ phần tín dụng bổ sung nào bạn sử dụng sau khi kết thúc tháng"
+
+#: src/js/ate/status-bar/components/credit/index.js:115
+msgid "Payment limit:"
+msgstr "Giới hạn thanh toán:"
+
+#: src/js/ate/status-bar/components/credit/index.js:116
+msgid "%s credits"
+msgstr "%s tín dụng"
+
+#: src/js/ate/status-bar/components/credit/index.js:119
+msgid "Credits used:"
+msgstr "Tín dụng đã dùng:"
+
+#: src/js/ate/status-bar/components/credit/index.js:123
+msgid "Credits left:"
+msgstr "Tín dụng còn lại:"
+
+#: src/js/ate/status-bar/components/credit/index.js:133
+msgid ""
+"The number of credit you will receive an invoice for at the end of the "
+"month. View your pay-as-you-go details in your site’s automatic translation "
+"settings."
+msgstr "Số tín dụng mà bạn sẽ nhận được hóa đơn vào cuối tháng. Xem chi tiết trả tiền theo mức sử dụng trong cài đặt dịch tự động của trang web của bạn."
+
+#: src/js/ate/status-bar/components/credit/index.js:139
+msgid "Calculating"
+msgstr "Đang tính toán"
+
+#: src/js/ate/status-bar/components/credit/index.js:59
+msgid "Remaining prepaid credits that are assigned to this site on WPML.org."
+msgstr "Tín dụng trả trước còn lại được gán cho trang web này trên WPML.org."
+
+#: src/js/ate/status-bar/components/credit/index.js:73
+msgid "Prepaid credits left"
+msgstr "Tín dụng trả trước còn lại"
+
+#: src/js/ate/status-bar/components/credit/index.js:99
+msgid "Pay-as-you-go credits used"
+msgstr "Tín dụng trả tiền theo mức sử dụng đã dùng"
+
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:17
+msgid "Stop"
+msgstr "Dừng"
+
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:26
+msgid "Fix it"
+msgstr "Sửa lỗi"
+
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:34
+msgid "Assign credits now"
+msgstr "Gán tín dụng ngay"
+
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:8
+msgid "Resume"
+msgstr "Tiếp tục"
+
+#: src/js/ate/status-icons/StatusUpdater.js:80
+msgid "Refreshing translation status"
+msgstr "Đang làm mới trạng thái dịch thuật"
+
+#: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:26
+msgid ""
+"Read more about how to translate your content in the <a>Getting Started "
+"Guide</a>"
+msgstr "Đọc thêm về cách thức dịch nội dung của bạn trong <a>Hướng dẫn bắt đầu</a>"
+
+#: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:36
+msgid "Let's Start Translating!"
+msgstr "Hãy bắt đầu dịch!"
+
+#: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:38
+msgid ""
+"Choose your content from the Translation Dashboard below and create your "
+"first translation job!"
+msgstr "Chọn nội dung của bạn từ Bảng điều khiển Dịch thuật dưới đây và tạo việc dịch đầu tiên của bạn!"
+
+#: src/js/ate/translate-everything/components/Status/index.js:105
+msgid ""
+"Change your <a>automatic translation settings</a> (in-progress translation "
+"jobs will be completed with the current settings)."
+msgstr "Thay đổi <a>cài đặt dịch tự động</a> của bạn (các công việc dịch thuật đang diễn ra sẽ được hoàn tất bằng cài đặt hiện thời)."
+
+#: src/js/ate/translate-everything/components/Status/index.js:115
+msgid "Read more about translating your site automatically."
+msgstr "Đọc thêm về việc dịch tự động trang web của bạn."
+
+#: src/js/ate/translate-everything/components/Status/index.js:49
+msgid "Your site is being automatically translated!"
+msgstr "Trang web của bạn đang được dịch tự động!"
+
+#: src/js/ate/translate-everything/components/Status/index.js:58
+msgid "Calculating..."
+msgstr "Đang tính toán..."
+
+#: src/js/ate/translate-everything/components/Status/index.js:88
+msgid "Do not close WP admin!"
+msgstr "Không đó mục quản trị của WP!"
+
+#: src/js/ate/translate-everything/components/Status/index.js:96
+msgid "The number of translations"
+msgstr "Số lượng bản dịch"

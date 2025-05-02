@@ -1,0 +1,149 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:13
+msgid "What should happen with your automatically translated content?"
+msgstr "Wat moet er gebeuren met uw automatisch vertaalde inhoud?"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:30
+msgid "Wait for review"
+msgstr "Wachten op beoordeling"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:31
+msgid "You check and approve translations before publishing."
+msgstr "U controleert en keurt vertalingen goed voordat ze worden gepubliceerd."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:32
+msgid "Your translators check and approve translations before publishing."
+msgstr "Uw vertalers controleren en keuren vertalingen goed voordat ze worden gepubliceerd."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:36
+msgid "Publish and mark for review"
+msgstr "Publiceren en markeren voor beoordeling"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:37
+msgid ""
+"WPML publishes translations immediately but flags them for you to check at "
+"your convenience."
+msgstr "WPML publiceert vertalingen onmiddellijk maar markeert ze zodat u ze op uw gemak kunt controleren."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:38
+msgid ""
+"WPML publishes translations immediately but flags them for your translators "
+"to check at their convenience."
+msgstr "WPML publiceert vertalingen onmiddellijk maar markeert ze zodat uw vertalers ze op hun gemak kunnen controleren."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:42
+msgid "Publish without review"
+msgstr "Publiceren zonder beoordeling"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:44
+msgid ""
+"The system publishes translations straight away, skipping the review "
+"process."
+msgstr "Het systeem publiceert vertalingen direct, waarbij het beoordelingsproces wordt overgeslagen."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:22
+msgid "Automatic translation"
+msgstr "Automatische vertaling"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:28
+msgid "What should happen with your automatically translated content"
+msgstr "Wat er moet gebeuren met je automatisch vertaalde inhoud"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:54
+msgid "Save settings"
+msgstr "Instellingen opslaan"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:13
+msgid "Translate drafts as I save them (consumes a bit more translation credits)."
+msgstr "Vertaal concepten terwijl ik ze opsla (verbruikt iets meer vertaalkredieten)."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:26
+msgid "Do you want to translate drafts automatically?"
+msgstr "Wilt u concepten automatisch laten vertalen?"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:42
+msgid ""
+"This feature is only available when you enable \"Translate Everything "
+"Automatically\" from the %sTranslation Dashboard%s."
+msgstr "Deze functie is alleen beschikbaar wanneer u “Alles automatisch vertalen” inschakelt vanuit het %sVertaaldashboard%s."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:9
+msgid "Don't translate drafts. Only translate when I publish content."
+msgstr "Vertaal geen concepten. Vertaal alleen wanneer ik inhoud publiceer."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:116
+msgid "%d credits/word"
+msgstr "%d credits/woord"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:15
+msgid "Informal"
+msgstr "Informeel"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:16
+msgid "Automatic"
+msgstr "Automatisch"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:17
+msgid "Formal"
+msgstr "Formeel"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:45
+msgid "Which translation engines do you want to use?"
+msgstr "Welke vertaalmotoren wil je gebruiken?"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:46
+msgid ""
+"Automatic translation engines differ in translation style and supported "
+"language pairs.\n"
+"If your preferred translation engine does not support a language pair that "
+"you want to use, we fall back to your next preferred engine that does "
+"support it.\n"
+msgstr "Automatische vertaalmachines verschillen in vertaalstijl en ondersteunde talenparen.\nAls je voorkeursvertaalmachine een talenpaar dat je wilt gebruiken niet ondersteunt, vallen we terug op je volgende voorkeursmachine die het wel ondersteunt.\n"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:48
+msgid "Drag & drop to sort from the most to the least preferred engine."
+msgstr "Sleep en zet neer om te sorteren van de meest naar de minst geprefereerde motor."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:51
+msgid "Choose the tone of your automatic translations."
+msgstr "Kies de toon van je automatische vertalingen."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:57
+msgid "Read more"
+msgstr "Meer lezen"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:73
+msgid "Learn more"
+msgstr "Meer informatie"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:92
+msgid "On"
+msgstr "Aan"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:93
+msgid "Off"
+msgstr "Uit"
+
+#: src/js/translation-method/store.js:120
+msgid "Could not load translation engines"
+msgstr "Kon vertaalmotoren niet laden"
+
+#: src/js/translation-method/store.js:140
+msgid "Could not update engine"
+msgstr "Kon motor niet updaten"
+
+#: src/js/translation-method/store.js:168
+msgid "Could not save review mode"
+msgstr "Kon beoordelingsmodus niet opslaan"
+
+#: src/js/translation-method/store.js:196
+msgid "Could not save translate everything drafts"
+msgstr "Kon 'alles vertalen' concepten niet opslaan"
+
+#: src/js/translation-method/store.js:97
+msgid "Settings saved successfully"
+msgstr "Instellingen succesvol opgeslagen"

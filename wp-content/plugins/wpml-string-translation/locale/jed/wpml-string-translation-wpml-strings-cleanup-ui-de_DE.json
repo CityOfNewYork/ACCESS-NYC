@@ -1,0 +1,58 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Clean up the String Translation table by removing untranslated strings by domain.": [
+            "Bereinigen Sie die String-Übersetzungstabelle, indem Sie unübersetzte Strings nach Domäne entfernen."
+         ],
+         "Remove strings by domain": [
+            "Strings nach Domäne entfernen"
+         ],
+         "Remove strings": [
+            "Zeichenketten entfernen"
+         ],
+         "Cancel": [
+            "Abbrechen"
+         ],
+         "Remove": [
+            "Entfernen"
+         ],
+         "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
+            "Die Tabelle Zeichenfolgenübersetzung enthält derzeit Zeichenfolgen aus den unten aufgeführten Bereichen. Wenn Sie nicht vorhaben, Zeichenfolgen aus einer bestimmten Domäne zu übersetzen, wählen Sie diese unten aus, um die nicht übersetzten Zeichenfolgen aus der Tabelle Zeichenfolgenübersetzung zu entfernen. Alle Zeichenfolgen, für die bereits Übersetzungen vorliegen, sind weiterhin verfügbar."
+         ],
+         "Search": [
+            "Suchen"
+         ],
+         "Removing strings from String Translation table": [
+            "Strings aus der String-Übersetzungstabelle entfernen"
+         ],
+         "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
+            "Um Zeichenketten wieder in die Zeichenketten-Übersetzungstabelle aufzunehmen, müssen Sie möglicherweise die Übersetzungsdateien erneut durchsuchen oder Zeichenketten als übersetzbar registrieren."
+         ],
+         "Read more about ": [
+            "Lesen Sie mehr über "
+         ],
+         "scanning your site for strings and registering them as translatable.": [
+            "Ihre Website nach Zeichenketten durchsucht und diese als übersetzbar registriert."
+         ],
+         "Successfully removed strings": [
+            "Erfolgreich entfernte Strings"
+         ],
+         "OK, Great": [
+            "OK, toll"
+         ],
+         "Domain": [
+            "Domain"
+         ],
+         "Strings count": [
+            "Strings zählen"
+         ],
+         "Translated strings": [
+            "Übersetzte Zeichenfolgen"
+         ]
+      }
+   }
+}

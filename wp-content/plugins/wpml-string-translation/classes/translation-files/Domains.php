@@ -18,7 +18,7 @@ use WPML\ST\Shortcode;
 class Domains {
 
 	const MO_DOMAINS_CACHE_GROUP = 'WPML_ST_CACHE';
-	const MO_DOMAINS_CACHE_KEY = 'wpml_string_translation_has_mo_domains';
+	const MO_DOMAINS_CACHE_KEY   = 'wpml_string_translation_has_mo_domains';
 
 	/** @var wpdb $wpdb */
 	private $wpdb;
@@ -35,8 +35,9 @@ class Domains {
 	/**
 	 * Domains constructor.
 	 *
-	 * @param PackageDomains $package_domains
-	 * @param WPML_ST_Translations_File_Dictionary $file_dictionary
+	 * @param wpdb                                 $wpdb            The WordPress database instance.
+	 * @param PackageDomains                       $package_domains The package domains instance.
+	 * @param WPML_ST_Translations_File_Dictionary $file_dictionary The translations file dictionary.
 	 */
 	public function __construct(
 		wpdb $wpdb,
@@ -58,11 +59,12 @@ class Domains {
 
 			$excluded_domains = self::getReservedDomains()->merge( $this->getJEDDomains() );
 
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 			$sql = "
 				SELECT DISTINCT context {$this->getCollateForContextColumn()}
 				FROM {$this->wpdb->prefix}icl_strings
 			";
-
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 			$mo_domains = wpml_collect( $this->wpdb->get_col( $sql ) )
 				->diff( $excluded_domains )
 				->values();
@@ -92,9 +94,12 @@ class Domains {
 
 		if ( ! $invalidationScheduled ) {
 			$invalidationScheduled = true;
-			add_action( 'shutdown', function () {
-				Cache::flushGroup( self::MO_DOMAINS_CACHE_GROUP );
-			} );
+			add_action(
+				'shutdown',
+				function () {
+					Cache::flushGroup( self::MO_DOMAINS_CACHE_GROUP );
+				}
+			);
 		}
 	}
 
@@ -102,22 +107,32 @@ class Domains {
 	 * @return string
 	 */
 	private function getCollateForContextColumn() {
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared		
 		$sql = "
 			SELECT COLLATION_NAME
 			 FROM information_schema.columns
 			 WHERE TABLE_SCHEMA = '" . DB_NAME . "' AND TABLE_NAME = '{$this->wpdb->prefix}icl_strings' AND COLUMN_NAME = 'context'
 		";
-
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$collation = $this->wpdb->get_var( $sql );
 		if ( ! $collation ) {
 			return '';
 		}
 
 		list( $type ) = explode( '_', $collation );
-		if ( in_array( $type, [ 'utf8', 'utf8mb4' ] ) ) {
-			return 'COLLATE ' . $type . '_bin';
+
+		// Whitelisted character sets that are known to support _bin collation.
+		$supported_charsets = [ 'utf8', 'utf8mb3', 'utf8mb4', 'latin1', 'latin2', 'ascii', 'binary' ];
+
+		if ( in_array( $type, $supported_charsets ) ) {
+			if ( 'binary' === $type ) {
+				return 'COLLATE binary';
+			} else {
+				return 'COLLATE ' . $type . '_bin';
+			}
 		}
 
+		// Return empty string for unsupported character sets to avoid MySQL errors.
 		return '';
 	}
 
@@ -138,10 +153,10 @@ class Domains {
 				 * so they are loaded on-demand.
 				 */
 				return null === $domain
-				       || 0 === strpos( $domain, WPML_Admin_Texts::DOMAIN_NAME_PREFIX )
-				       || $this->package_domains->isPackage( $domain )
-				       || Shortcode::STRING_DOMAIN === $domain
-				       || in_array( $domain, $native_mo_domains, true );
+					   || 0 === strpos( $domain, WPML_Admin_Texts::DOMAIN_NAME_PREFIX )
+					   || $this->package_domains->isPackage( $domain )
+					   || Shortcode::STRING_DOMAIN === $domain
+					   || in_array( $domain, $native_mo_domains, true );
 			}
 		)->values();
 	}

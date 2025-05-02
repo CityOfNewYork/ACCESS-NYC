@@ -1,0 +1,1197 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Untranslated strings that I encounter on front-end while logged in": [
+            "Giriş yapmış durumdayken ön yüzde karşılaştığım çevrilmemiş dizeler"
+         ],
+         "Untranslated strings that all front-end users encounter": [
+            "Tüm ön yüz kullanıcılarının karşılaştığı çevrilmemiş dizeler"
+         ],
+         "Disable auto-registration of strings": [
+            "Dizelerin otomatik kaydını devre dışı bırak"
+         ],
+         "Plugins": [
+            "Eklentiler"
+         ],
+         "Themes": [
+            "Temalar"
+         ],
+         "WordPress": [
+            "WordPress"
+         ],
+         "Other": [
+            "Diğer"
+         ],
+         "Error in fetching default translation batch name": [
+            "Varsayılan çeviri toplu iş adı getirilirken hata oluştu"
+         ],
+         "Error in fetching translation editor type.": [
+            "Çeviri düzenleyici türü getirilirken hata oluştu."
+         ],
+         "Error in fetching untranslated types count": [
+            "Çevrilmemiş tür sayısı getirilirken hata oluştu"
+         ],
+         "Error in fetching remote translation service data.": [
+            "Uzak çeviri hizmeti verileri getirilirken hata oluştu."
+         ],
+         "An error occurred while sending the translation.": [
+            "Çeviri gönderilirken bir hata oluştu."
+         ],
+         "Validation failed": [
+            "Doğrulama başarısız oldu"
+         ],
+         "Please wait until download finishes": [
+            "Lütfen indirme işlemi bitene kadar bekleyin"
+         ],
+         "You need to wait 5 minutes after the last check": [
+            "Son kontrolden sonra 5 dakika beklemeniz gerekmektedir"
+         ],
+         "Check status and get translations": [
+            "Durumu kontrol et ve çevirileri al"
+         ],
+         "Status: ": [
+            "Durum: "
+         ],
+         "Downloaded jobs: ": [
+            "İndirilen işler: "
+         ],
+         "Cancelled jobs: ": [
+            "İptal edilen işler: "
+         ],
+         "none of your translation jobs have been completed": [
+            "çeviri işlerinizden hiçbiri tamamlanmadı"
+         ],
+         "Checking translation jobs status. Please don't close this page!": [
+            "Çeviri işlerinin durumu kontrol ediliyor. Lütfen bu sayfayı kapatmayın!"
+         ],
+         " have been sent to remote translators": [
+            " uzak çevirmenlere gönderildi"
+         ],
+         " has been sent to remote translators": [
+            " uzak çevirmenlere gönderildi"
+         ],
+         "Last check: Never": [
+            "Son kontrol: Hiç"
+         ],
+         "Filtering is disabled to show all selected items. ": [
+            "Tüm seçili öğeleri göstermek için filtreleme devre dışı bırakıldı. "
+         ],
+         "Apply filters": [
+            "Filtreleri uygula"
+         ],
+         "%d item selected": [
+            "%d öğe seçildi",
+            "%d öğe seçildi"
+         ],
+         "(%d word count)": [
+            "(%d kelime sayısı)"
+         ],
+         "%s item not showing.": [
+            "%s öğe gösterilmiyor.",
+            "%s öğe gösterilmiyor."
+         ],
+         "Show all selected items": [
+            "Tüm seçili öğeleri göster"
+         ],
+         "Translate your content": [
+            "İçeriğinizi çevirin"
+         ],
+         "Unselect all": [
+            "Tüm seçimleri kaldır"
+         ],
+         "Source Language:": [
+            "Kaynak Dil:"
+         ],
+         "translated to:": [
+            "şu dile çevrildi:"
+         ],
+         "Filter": [
+            "Filtrele"
+         ],
+         "You are about to change the source language filter from %s to %s": [
+            "Kaynak dil filtresini %s'dan %s'a değiştirmek üzeresiniz"
+         ],
+         "Updating the source language filter will clear the items you've selected for translation. Are you sure you want to continue?": [
+            "Kaynak dil filtresini güncellemek, çeviri için seçtiğiniz öğeleri temizleyecektir. Devam etmek istediğinizden emin misiniz?"
+         ],
+         "Change source language": [
+            "Kaynak dili değiştir"
+         ],
+         "Cancel": [
+            "İptal"
+         ],
+         "All Statuses": [
+            "Tüm Durumlar"
+         ],
+         "All languages": [
+            "Tüm diller"
+         ],
+         "All translation statuses": [
+            "Tüm çeviri durumları"
+         ],
+         "Not completed": [
+            "Tamamlanmadı"
+         ],
+         "Needs updating": [
+            "Güncelleme gerekiyor"
+         ],
+         "Translation in progress": [
+            "Çeviri devam ediyor"
+         ],
+         "Translation complete": [
+            "Çeviri tamamlandı"
+         ],
+         "Global Filter": [
+            "Global Filtre"
+         ],
+         "Parent:": [
+            "Üst:"
+         ],
+         "Search parent by title": [
+            "Başlığa göre üst öğeyi ara"
+         ],
+         "Search by term title in %s": [
+            "%s içinde terim başlığına göre arama yapınız"
+         ],
+         "All taxonomies": [
+            "Tüm taksonomiler"
+         ],
+         "Loading": [
+            "Yükleniyor"
+         ],
+         "Taxonomy Term:": [
+            "Taksonomi Terimi:"
+         ],
+         "Loading terms": [
+            "Terimler yükleniyor"
+         ],
+         "No terms found": [
+            "Terim bulunamadı"
+         ],
+         "Filter by:": [
+            "Şuna göre filtrele:"
+         ],
+         "Title": [
+            "Başlık"
+         ],
+         "There is an issue with automatic translation that needs your attention.": [
+            "Otomatik çeviri ile ilgili dikkatinizi gerektiren bir sorun var."
+         ],
+         "Fix to continue translating automatically": [
+            "Otomatik çeviriye devam etmek için düzeltin"
+         ],
+         "View": [
+            "Görüntüle"
+         ],
+         "Edit": [
+            "Düzenle"
+         ],
+         "Edit note for the translators": [
+            "Çevirmenler için notu düzenle"
+         ],
+         "Add note for the translators": [
+            "Çevirmenler için not ekle"
+         ],
+         "This page is set to be %1$stranslated manually%2$s using the WordPress Editor": [
+            "Bu sayfa WordPress Düzenleyicisi kullanılarak %1$smanuel olarak çevrilmek%2$s üzere ayarlanmıştır"
+         ],
+         "(no title)": [
+            "(başlık yok)"
+         ],
+         "Image": [
+            "Görsel"
+         ],
+         "Date / Status": [
+            "Tarih / Durum"
+         ],
+         "Word count": [
+            "Kelime sayısı"
+         ],
+         "Loading items...": [
+            "Öğeler yükleniyor..."
+         ],
+         "%1$d %2$s selected": [
+            "%1$d %2$s seçildi"
+         ],
+         "items": [
+            "öğeler"
+         ],
+         "Filtering is disabled to show all selected items": [
+            "Tüm seçili öğeleri göstermek için filtreleme devre dışı bırakıldı"
+         ],
+         "Apply filter": [
+            "Filtreyi uygula"
+         ],
+         "%1$d %2$s not showing": [
+            "%1$d %2$s gösterilmiyor"
+         ],
+         "Show selected items": [
+            "Seçili öğeleri göster"
+         ],
+         " / page": [
+            " / sayfa"
+         ],
+         "Previous": [
+            "Önceki"
+         ],
+         "Next": [
+            "Sonraki"
+         ],
+         "Your site's content is too vast for a single translation batch. Use filters to reduce the selection, then \"select all\".": [
+            "Sitenizin içeriği tek bir çeviri toplu işi için çok geniş. Seçimi azaltmak için filtreleri kullanın, ardından “tümünü seç”."
+         ],
+         "The current filter captures too much content. Narrow it down to enable \"select all\" for translation.": [
+            "Mevcut filtre çok fazla içeriği kapsıyor. Çeviri için “tümünü seç” seçeneğini etkinleştirmek için daraltın."
+         ],
+         "Select All": [
+            "Tümünü Seç"
+         ],
+         "All %d items matching criteria are selected": [
+            "Kriterlere uyan tüm %d öğe seçildi"
+         ],
+         "All %d items in this section are selected": [
+            "Bu bölümdeki tüm %d öğe seçilmiştir"
+         ],
+         "You have too many items to send for translation at once. Apply a filter to narrow down the items to enable this option.": [
+            "Bir seferde çeviri için gönderilecek çok fazla öğeniz var. Bu seçeneği etkinleştirmek için öğeleri daraltmak için bir filtre uygulayın."
+         ],
+         "Clear selection": [
+            "Seçimi temizle"
+         ],
+         "Select all items that match this search": [
+            "Bu aramaya uyan tüm öğeleri seç"
+         ],
+         "Loading...": [
+            "Yükleniyor..."
+         ],
+         "Save note": [
+            "Notu kaydet"
+         ],
+         "The following target languages do not support automatic translation: %s. <a>Map to known languages</a> to enable automatic translation.": [
+            "Aşağıdaki hedef diller otomatik çeviriyi desteklemiyor: %s. Otomatik çeviriyi etkinleştirmek için <a>bilinen dillere eşleyin</a>."
+         ],
+         "The site's default language %s doesn't support automatic translation.": [
+            "Sitenin varsayılan dili %s otomatik çeviriyi desteklemiyor."
+         ],
+         "Some sections are hidden due to current filter settings or because they have no items. <show_all>Show all translation statuses</show_all>": [
+            "Bazı bölümler mevcut filtre ayarları nedeniyle veya hiç öğeleri olmadığı için gizlenmiştir. <show_all>Tüm çeviri durumlarını göster</show_all>"
+         ],
+         "Step 1": [
+            "Adım 1"
+         ],
+         "Select items for translation": [
+            "Çeviri için öğeleri seçin"
+         ],
+         "Clear filters": [
+            "Filtreleri temizle"
+         ],
+         "strings": [
+            "dizgiler"
+         ],
+         "WPML didn't find any %s matching your criteria.": [
+            "WPML, kriterlerinize uyan herhangi bir %s bulamadı."
+         ],
+         "You have too many items selected to use this feature. Deselect some of the items to enable it.": [
+            "Bu özelliği kullanmak için çok fazla öğe seçtiniz. Etkinleştirmek için bazı öğelerin seçimini kaldırın."
+         ],
+         "Show strings in:": [
+            "Dizeleri şurada göster:"
+         ],
+         "All domains": [
+            "Tüm alanlar"
+         ],
+         "All sources": [
+            "Tüm kaynaklar"
+         ],
+         "Frontend (viewed)": [
+            "Ön uç (görüntülenen)"
+         ],
+         "Backend (viewed)": [
+            "Arka uç (görüntülenen)"
+         ],
+         "Unknown": [
+            "Bilinmeyen"
+         ],
+         "String": [
+            "Dize"
+         ],
+         "All Translation Priorities": [
+            "Tüm Çeviri Öncelikleri"
+         ],
+         "This filter is available only if source is set to \"Frontend\" or \"Backend\".": [
+            "Bu filtre yalnızca kaynak “Frontend” veya “Backend” olarak ayarlandığında kullanılabilir."
+         ],
+         "front-end": [
+            "ön uç"
+         ],
+         "back-end": [
+            "arka uç"
+         ],
+         "viewed": [
+            "görüntülenen"
+         ],
+         "Domain": [
+            "Alan"
+         ],
+         "Source": [
+            "Kaynak"
+         ],
+         "Type": [
+            "Tür"
+         ],
+         "Strings in the theme and plugins": [
+            "Tema ve eklentilerdeki dizeler"
+         ],
+         "Translate front-end texts you can customize from the WordPress admin like footer text, copyright notices, plugin options and settings, time format, widget texts, and more.": [
+            "Alt bilgi metni, telif hakkı bildirimleri, eklenti seçenekleri ve ayarları, zaman biçimi, bileşen metinleri ve daha fazlası gibi WordPress yönetici panelinden özelleştirebileceğiniz ön uç metinlerini çevirin."
+         ],
+         "Translating Strings From Admin and Settings": [
+            "Yönetici ve Ayarlardaki Dizeleri Çevirme"
+         ],
+         "Translate texts in admin screens": [
+            "Yönetici ekranlarındaki metinleri çevir"
+         ],
+         "Translate User Meta Information": [
+            "Kullanıcı Meta Bilgilerini Çevir"
+         ],
+         "Making User Meta Information Translatable": [
+            "Kullanıcı Meta Bilgilerini Çevrilebilir Hale Getirme"
+         ],
+         "Translate user profile strings": [
+            "Kullanıcı profili dizelerini çevir"
+         ],
+         "You need to visit translations on your site's front-end (<a/>) and WPML will identify all untranslated strings and list them here. ": [
+            "Sitenizin ön ucundaki çevirileri ziyaret etmeniz gerekiyor (<a/>) ve WPML çevrilmemiş tüm dizeleri tanımlayarak burada listeleyecek."
+         ],
+         "hide details": [
+            "ayrıntıları gizle"
+         ],
+         "more details": [
+            "daha fazla ayrıntı"
+         ],
+         "Still can't find the strings you're looking to translate? Add more strings for translation.": [
+            "Çevirmek istediğiniz dizeleri hâlâ bulamıyor musunuz? Çeviri için daha fazla dize ekleyin."
+         ],
+         "Translate Everything translates only those strings which are registered in English language": [
+            "Translate Everything yalnızca İngilizce dilinde kayıtlı olan dizeleri çevirir"
+         ],
+         "Most strings from your plugins and theme are in English, so we’re showing them alongside your default language. Use the <b>Source Language</b> filter to view strings in a specific language.": [
+            "Eklentilerinizden ve temanızdan gelen çoğu dize İngilizce olduğu için, bunları varsayılan dilinizle birlikte gösteriyoruz. Belirli bir dildeki dizeleri görüntülemek için <b>Kaynak Dil</b> filtresini kullanın."
+         ],
+         "You’re using <b>%s</b> to cache your site, which may prevent WPML from automatically registering new strings. To fix this, clear your page cache, then visit your translated pages again on the frontend to detect new strings.": [
+            "Sitenizi önbelleğe almak için <b>%s</b> kullanıyorsunuz, bu da WPML'nin yeni dizeleri otomatik olarak kaydetmesini engelleyebilir. Bunu düzeltmek için sayfa önbelleğinizi temizleyin, ardından yeni dizeleri tespit etmek üzere çevrilmiş sayfalarınızı ön uçta tekrar ziyaret edin."
+         ],
+         "WPML can detect strings that appear on the site and list them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here only the strings that actually appear on the site, you need to enable this feature.": [
+            "WPML sitede görünen dizeleri algılayabilir ve burada listeleyebilir. Bu özellik, sitede gerçekten görünen dizeleri tanımlamanıza ve çevirmenize yardımcı olur. Burada yalnızca sitede gerçekten görünen dizeleri görmek için bu özelliği etkinleştirmeniz gerekir."
+         ],
+         "WPML detects strings that appear on the site and lists them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here all the strings in the site, you need to disable this feature.": [
+            "WPML sitede görünen dizeleri algılar ve burada listeler. Bu özellik, sitede gerçekten görünen dizeleri tanımlamanıza ve çevirmenize yardımcı olur. Sitedeki tüm dizeleri burada görmek için bu özelliği devre dışı bırakmanız gerekir."
+         ],
+         "Detect untranslated strings": [
+            "Çevrilmemiş dizeleri algıla"
+         ],
+         "WPML can detect untranslated strings and automatically register them for translation. This happens in real time as you or your visitors browse your website.": [
+            "WPML, çevrilmemiş dizeleri tespit edebilir ve otomatik olarak çeviri için kaydedebilir. Bu, siz veya ziyaretçileriniz web sitenizi gezinirken gerçek zamanlı olarak gerçekleşir."
+         ],
+         "Automatically register untranslated strings": [
+            "Çevrilmemiş dizeleri otomatik olarak kaydet"
+         ],
+         "Learn how to use auto-registration": [
+            "Otomatik kayıt özelliğini nasıl kullanacağınızı öğrenin"
+         ],
+         "recommended": [
+            "önerilen"
+         ],
+         "Also register strings from the website's back-end": [
+            "Ayrıca web sitesinin arka ucundaki dizeleri kaydedin"
+         ],
+         "Save settings": [
+            "Ayarları kaydet"
+         ],
+         "Request failed because of the network error": [
+            "Ağ hatası nedeniyle istek başarısız oldu"
+         ],
+         "Try again": [
+            "Tekrar dene"
+         ],
+         "Enabled": [
+            "Etkin"
+         ],
+         "Disabled": [
+            "Devre Dışı"
+         ],
+         "Modify": [
+            "Değiştir"
+         ],
+         "You can only translate %1$s from the site's default language (%2$s).": [
+            "Yalnızca sitenin varsayılan dilinden %1$s çevirebilirsiniz (%2$s)."
+         ],
+         "Leave existing translations as they are": [
+            "Mevcut çevirileri oldukları gibi bırak"
+         ],
+         "Overwrite existing translations": [
+            "Mevcut çevirilerin üzerine yaz"
+         ],
+         "Some of the content you want to translate is already translated": [
+            "Çevirmek istediğiniz içeriğin bir kısmı zaten çevrilmiş"
+         ],
+         "What do you want to do with the content that's already translated?": [
+            "Zaten çevrilmiş olan içerikle ne yapmak istiyorsunuz?"
+         ],
+         "Suggested deadline:": [
+            "Önerilen son tarih:"
+         ],
+         "Set a batch name and deadline": [
+            "Bir parti adı ve son tarih belirleyin"
+         ],
+         "You can assign a custom name to this batch for easy tracking and suggest a deadline to clarify the priority for translators.": [
+            "Kolay takip için bu partiye özel bir ad atayabilir ve çevirmenlere önceliği netleştirmek için bir son tarih önerebilirsiniz."
+         ],
+         "Batch name:": [
+            "Parti adı:"
+         ],
+         "Default translation engine: ": [
+            "Varsayılan çeviri motoru: "
+         ],
+         "Change": [
+            "Değiştir"
+         ],
+         "Failed to load engines": [
+            "Motorlar yüklenemedi"
+         ],
+         "Your Automatic Translation Credits": [
+            "Otomatik Çeviri Kredileriniz"
+         ],
+         "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s translator</add_yourself> to the site.<br/> Add yourself as %s translator and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Kendinizi çevirmen olarak atamak için, önce <add_yourself>kendini %s çevirmen olarak ekle</add_yourself> seçeneğini kullanarak siteye eklemeniz gerekir.<br/> Kendinizi %s çevirmen olarak ekleyin ve <check_again>tekrar kontrol et</check_again> seçeneğine tıklayın veya farklı bir çeviri seçeneği belirleyin."
+         ],
+         "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s to %s translator</add_yourself> to the site.<br/> Add yourself as %s to %s translator and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Kendinizi çevirmen olarak atamak için, önce <add_yourself>kendinizi %s'dan %s'a çevirmen olarak eklemeniz</add_yourself> gerekiyor.<br/> Kendinizi %s'dan %s'a çevirmen olarak ekleyin ve <check_again>tekrar kontrol et</check_again>'e tıklayın veya farklı bir çeviri seçeneği seçin."
+         ],
+         "Checking": [
+            "Kontrol ediliyor"
+         ],
+         "In order to assign a translation service, you first need to <activate_ts>activate a translation service</activate_ts>.<br/>Activate a translation service and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Bir çeviri hizmeti atamak için, önce <activate_ts>bir çeviri hizmetini etkinleştirmeniz</activate_ts> gerekir.<br/>Bir çeviri hizmetini etkinleştirin ve <check_again>tekrar kontrol et</check_again> seçeneğine tıklayın veya farklı bir çeviri seçeneği belirleyin."
+         ],
+         " Checking ": [
+            " Kontrol ediliyor "
+         ],
+         "In order to translate automatically, you first need to <enable_ate>enable WPML's Advanced Translation Editor</enable_ate>.<br/>Enable the Advanced Translation Editor and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Otomatik çeviri yapmak için önce <enable_ate>WPML'nin Gelişmiş Çeviri Düzenleyicisini etkinleştirmeniz</enable_ate> gerekir.<br/>Gelişmiş Çeviri Düzenleyicisini etkinleştirin ve <check_again>tekrar kontrol et</check_again> seçeneğine tıklayın veya farklı bir çeviri seçeneği belirleyin."
+         ],
+         "The items you selected were translated with the Classic Translation Editor and cannot be sent for automatic translation.": [
+            "Seçtiğiniz öğeler Klasik Çeviri Editörü ile çevrildi ve otomatik çeviri için gönderilemez."
+         ],
+         "Some of the items you selected were translated with the Classic Translation Editor. These cannot be sent for automatic translation.": [
+            "Seçtiğiniz öğelerin bazıları Klasik Çeviri Editörü ile çevrildi. Bunlar otomatik çeviri için gönderilemez."
+         ],
+         "Any existing content (translations) will be overwritten when creating duplicates.\nWhen duplicating content, please first duplicate parent pages to maintain the site's hierarchy.": [
+            "Kopyalar oluşturulurken mevcut içerik (çeviriler) üzerine yazılacaktır.\nİçeriği kopyalarken, lütfen sitenin hiyerarşisini korumak için önce üst sayfaları kopyalayın."
+         ],
+         "Some of the selected content is already being translated. This will cancel any in-progress translations.": [
+            "Seçilen içeriğin bir kısmı zaten çevriliyor. Bu, devam eden çevirileri iptal edecektir."
+         ],
+         "Connection Error. Please wait a minute and reload this page. If the problem continues, please contact WPML support.": [
+            "Bağlantı Hatası. Lütfen bir dakika bekleyin ve bu sayfayı yeniden yükleyin. Sorun devam ederse, lütfen WPML desteğiyle iletişime geçin."
+         ],
+         "Buy credits": [
+            "Kredi satın al"
+         ],
+         "You don't have enough credits to translate your content automatically.": [
+            "İçeriğinizi otomatik olarak çevirmek için yeterli krediniz yok."
+         ],
+         "In order to assign to a translator, you first need to <add_translators>add %s translators</add_translators> to the site.<br/> Add %s translators and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Bir çevirmene atamak için, önce <add_translators>%s çevirmen ekle</add_translators> seçeneğini kullanarak siteye eklemeniz gerekir.<br/> %s çevirmen ekleyin ve <check_again>tekrar kontrol et</check_again> seçeneğine tıklayın veya farklı bir çeviri seçeneği belirleyin."
+         ],
+         "In order to assign to a translator, you first need to <add_translators>add %s to %s translators</add_translators> to the site.<br/> Add %s to %s translators and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Bir çevirmene atamak için, önce <add_translators>%s'dan %s'a çevirmenler eklemeniz</add_translators> gerekiyor.<br/> %s'dan %s'a çevirmenler ekleyin ve <check_again>tekrar kontrol et</check_again>'e tıklayın veya farklı bir çeviri seçeneği seçin."
+         ],
+         "Your site doesn't have any reviewers for %s. This means that you’re the only person who can review these translations.": [
+            "Sitenizde %s için herhangi bir inceleyici yok. Bu, bu çevirileri inceleyebilecek tek kişinin siz olduğu anlamına gelir."
+         ],
+         "Your site doesn't have any reviewers yet. This means that you’re the only person who can review translations.": [
+            "Sitenizde henüz herhangi bir inceleyici yok. Bu, çevirileri inceleyebilecek tek kişinin siz olduğu anlamına gelir."
+         ],
+         "If you want other people to review the translations, go to <a>WPML → Translation Management → Translators</a> and add translators. They will be able to both review and translate content for you.": [
+            "Çevirileri başkalarının incelemesini istiyorsanız, <a>WPML → Çeviri Yönetimi → Çevirmenler</a> bölümüne gidin ve çevirmen ekleyin. Bu kişiler hem içeriği inceleyebilecek hem de sizin için çeviri yapabilecektir."
+         ],
+         "WPML does not support duplicating strings. Your selection to duplicate strings to %1$s will be ignored if you proceed with the translation.": [
+            "WPML, dizelerin çoğaltılmasını desteklememektedir. Çeviri ile devam ederseniz, dizeleri %1$s'e çoğaltma seçiminiz göz ardı edilecektir."
+         ],
+         "WPML does not support duplicating %1$s elements. Your selection to duplicate elements to %2$s will be ignored if you proceed with the translation.": [
+            "WPML, %1$s öğelerinin çoğaltılmasını desteklememektedir. Çeviri ile devam ederseniz, öğeleri %2$s'e çoğaltma seçiminiz göz ardı edilecektir."
+         ],
+         "WPML does not support duplicating %1$s elements and strings. Your selection to duplicate elements and strings to %2$s will be ignored if you proceed with the translation.": [
+            "WPML, %1$s öğelerinin ve dizelerin çoğaltılmasını desteklememektedir. Çeviri ile devam ederseniz, öğeleri ve dizeleri %2$s'e çoğaltma seçiminiz göz ardı edilecektir."
+         ],
+         "WPML does not support duplicating strings.": [
+            "WPML, dizelerin kopyalanmasını desteklemiyor."
+         ],
+         "WPML does not support duplicating %1$s elements.": [
+            "WPML, %1$s öğelerinin çoğaltılmasını desteklememektedir."
+         ],
+         "WPML does not support duplicating %1$s elements and strings.": [
+            "WPML, %1$s öğelerinin ve dizelerin çoğaltılmasını desteklememektedir."
+         ],
+         "Finish setting up %s on your site": [
+            "Sitenizde %s kurulumunu tamamlayın"
+         ],
+         "You need to authenticate %s to send them content for translation.<br/>Visit the <a>Translators tab</a> to finish the setup and click <check_again>check again</check_again> or choose a different translation option.": [
+            "%s'yi çeviri için içerik göndermek üzere doğrulamanız gerekiyor.<br/>Kurulumu tamamlamak için <a>Çevirmenler sekmesini</a> ziyaret edin ve <check_again>tekrar kontrol et</check_again> seçeneğine tıklayın veya farklı bir çeviri seçeneği belirleyin."
+         ],
+         "Set Up Translate Everything Automatically": [
+            "Her Şeyi Otomatik Olarak Çevir'i Ayarla"
+         ],
+         "WPML will translate your content into %d languages": [
+            "WPML içeriğinizi %d dile çevirecek"
+         ],
+         "Content selected for translation": [
+            "Çeviri için seçilen içerik"
+         ],
+         "Volume": [
+            "Hacim"
+         ],
+         "~ %d words": [
+            "~ %d kelime"
+         ],
+         "Total": [
+            "Toplam"
+         ],
+         "Sent for translation": [
+            "Çeviri için gönderildi"
+         ],
+         "Sending for translation failed": [
+            "Çeviri için gönderme başarısız oldu"
+         ],
+         "You selected multiple translation methods for content across different languages:": [
+            "Farklı diller için birden fazla çeviri yöntemi seçtiniz:"
+         ],
+         "Ok": [
+            "Tamam"
+         ],
+         "<s>1 item</s> is being translated automatically.": [
+            "<s>1 öğe</s> otomatik olarak çevriliyor.",
+            "<s>%d öğe</s> otomatik olarak çevriliyor."
+         ],
+         "You can track their progress at the top of the page.": [
+            "İlerlemelerini sayfanın üst kısmında takip edebilirsiniz."
+         ],
+         "From now on, WPML will automatically translate new content on your site.": [
+            "Bundan sonra, WPML sitenizde yeni içeriği otomatik olarak çevirecek."
+         ],
+         "This number might vary because you enabled the Translate Everything Automatically Mode.": [
+            "Bu sayı, Otomatik Olarak Her Şeyi Çevir Modunu etkinleştirdiğiniz için değişiklik gösterebilir."
+         ],
+         "From now on, WPML will automatically translate your site's content.": [
+            "Bundan sonra, WPML sitenizin içeriğini otomatik olarak çevirecek."
+         ],
+         "Automatic translations summary": [
+            "Otomatik çeviri özeti"
+         ],
+         "Some of the content that you selected for translation includes fields that are encoded. Translators will not be able to work on this kind of content, so we removed it from the job.": [
+            "Çeviri için seçtiğiniz içeriğin bir kısmı kodlanmış alanlar içeriyor. Çevirmenler bu tür içerikler üzerinde çalışamaz, bu nedenle onu işten çıkardık."
+         ],
+         "To fix this problem, please contact our support team and describe this issue.": [
+            "Bu sorunu çözmek için lütfen destek ekibimizle iletişime geçin ve bu sorunu açıklayın."
+         ],
+         "WPML cannot send some fo the content to translation": [
+            "WPML bazı içerikleri çeviriye gönderemiyor"
+         ],
+         "Open support ticket": [
+            "Destek bileti aç"
+         ],
+         "<s>1 item</s> has been successfully assigned to you! To check its status, please go to <s>WPML → Translations</s>. <translations_queue/>": [
+            "<s>1 öğe</s> başarıyla size atanmıştır! Durumunu kontrol etmek için lütfen <s>WPML → Çeviriler</s> bölümüne gidiniz. <translations_queue/>",
+            "<s>%d öğe</s> başarıyla size atanmıştır! Durum güncellemeleri için lütfen <s>WPML → Çeviriler</s> bölümüne gidiniz. <translations_queue/>"
+         ],
+         "Currently logged in translator summary": [
+            "Şu anda giriş yapmış çevirmen özeti"
+         ],
+         "Go to Translations": [
+            "Çevirilere Git"
+         ],
+         "<s>1 item</s> has been duplicated.": [
+            "<s>1 öğe</s> çoğaltılmıştır.",
+            "<s>%d öğe</s> çoğaltılmıştır."
+         ],
+         "Duplication summary": [
+            "Çoğaltma özeti"
+         ],
+         "There was a problem sending your content for translation.": [
+            "İçeriğinizi çeviriye gönderirken bir sorun oluştu."
+         ],
+         "Please try again in a few minutes. If the issue persists, please contact our support.": [
+            "Lütfen birkaç dakika sonra tekrar deneyin. Sorun devam ederse, lütfen destek ekibimizle iletişime geçin."
+         ],
+         "Some of the selected strings are already registered or translated into %s. Since their source language matches the target language, they cannot be retranslated.": [
+            "Seçilen dizelerin bazıları zaten %s diline kaydedilmiş veya çevrilmiş. Kaynak dilleri hedef dille eşleştiği için yeniden çevrilemezler."
+         ],
+         "Some of the selected content has already been translated from %s to %s and cannot be re-translated from %s to %s.": [
+            "Seçilen içeriğin bir kısmı zaten %s'dan %s'a çevrilmiş ve %s'dan %s'a yeniden çevrilemez."
+         ],
+         "Content already translated": [
+            "İçerik zaten çevrilmiş"
+         ],
+         "Some content couldn't be sent to translation.": [
+            "Bazı içerikler çeviriye gönderilemedi."
+         ],
+         "WPML did not create translations for some languages because of the following reasons:": [
+            "WPML, aşağıdaki sebeplerden dolayı bazı diller için çeviri oluşturmamıştır:"
+         ],
+         "<s>1 item</s> has been successfully sent to translators!": [
+            "<s>1 öğe</s> başarıyla çevirmenlere gönderilmiştir!",
+            "<s>%d öğe</s> başarıyla çevirmenlere gönderilmiştir!"
+         ],
+         "Local translations summary": [
+            "Yerel çeviriler özeti"
+         ],
+         "You can check their status in WPML → Translation": [
+            "Durumlarını WPML → Çeviri bölümünde kontrol edebilirsiniz"
+         ],
+         "Continue to %s": [
+            "%s'ya devam et"
+         ],
+         "We were unable to send the following batches for professional translation:": [
+            "Aşağıdaki grupları profesyonel çeviri için gönderemedik:"
+         ],
+         "<p><a><s>Contact WPML support for help</s></a></p>": [
+            "<p><a><s>Yardım için WPML desteği ile iletişime geçin</s></a></p>"
+         ],
+         "Translation Service": [
+            "Çeviri Hizmeti"
+         ],
+         "sending for professional translation..": [
+            "profesyonel çeviri için gönderiliyor.."
+         ],
+         "<s>%d item</s> is being sent for translation to %s. Please continue to their site to start the translation.": [
+            "<s>%d öğe</s> %s'a çeviri için gönderiliyor. Lütfen çeviriye başlamak için onların sitesine devam edin.",
+            "<s>%d öğe</s> %s'a çeviri için gönderiliyor. Lütfen çeviriye başlamak için onların sitesine devam edin."
+         ],
+         "Translation service translations summary": [
+            "Çeviri hizmeti çevirileri özeti"
+         ],
+         "One or more assigned translators are invalid. The translator may have been removed or their language permissions changed.<br/> Review your settings on the <translators_page>Translators page</translators_page>.": [
+            "Bir veya daha fazla atanmış çevirmen geçersiz. Çevirmen kaldırılmış veya dil izinleri değiştirilmiş olabilir.<br/> <translators_page>Çevirmenler sayfasında</translators_page> ayarlarınızı gözden geçirin."
+         ],
+         "The selected translation service is no longer valid. It may have been changed, unauthenticated, or deactivated.<br/> Review your settings on the <translators_page>Translators page</translators_page>.": [
+            "Seçilen çeviri hizmeti artık geçerli değil. Değiştirilmiş, kimliği doğrulanmamış veya devre dışı bırakılmış olabilir.<br/> <translators_page>Çevirmenler sayfasında</translators_page> ayarlarınızı gözden geçirin."
+         ],
+         "Currently selected translation editor doesn't support automatic translation. You must enable the Advanced Translation Editor to send content for automatic translation.<br/> Check your settings on the <wpml_settings>WPML settings page</wpml_settings>.": [
+            "Şu anda seçili olan çeviri editörü otomatik çeviriyi desteklemiyor. İçeriği otomatik çeviri için göndermek için Gelişmiş Çeviri Editörü'nü etkinleştirmelisiniz.<br/> <wpml_settings>WPML ayarlar sayfasında</wpml_settings> ayarlarınızı kontrol edin."
+         ],
+         "Validation error happened during send to translation.": [
+            "Çeviriye gönderme sırasında doğrulama hatası oluştu."
+         ],
+         "Sending for translation": [
+            "Çeviri için gönderiliyor"
+         ],
+         "Translate and Duplicate": [
+            "Çevir ve Çoğalt"
+         ],
+         "Duplicate": [
+            "Çoğalt"
+         ],
+         "Translate": [
+            "Çevir"
+         ],
+         "Selected content is already translated": [
+            "Seçilen içerik zaten çevrilmiş"
+         ],
+         "Please select a review option": [
+            "Lütfen bir inceleme seçeneği seçin"
+         ],
+         "Assign local translator or choose another option": [
+            "Yerel çevirmen atayın veya başka bir seçenek seçin"
+         ],
+         "Assign yourself or choose another option": [
+            "Kendinizi atayın veya başka bir seçenek seçin"
+         ],
+         "Activate translation service or choose another option": [
+            "Çeviri hizmetini etkinleştirin veya başka bir seçenek seçin"
+         ],
+         "Activate ATE or choose another option": [
+            "ATE'yi etkinleştirin veya başka bir seçenek seçin"
+         ],
+         "Authenticate translation service or choose another option": [
+            "Çeviri hizmetini doğrulayın veya başka bir seçenek seçin"
+         ],
+         "Please don't close this page or refresh it, as doing so will cancel the translation process.": [
+            "Lütfen bu sayfayı kapatmayınız veya yenilemeyiniz, zira bu işlem çeviri sürecini iptal edecektir."
+         ],
+         "<s>%s</s> cannot process more than <s>%d</s> jobs in a single batch. WPML will automatically split your jobs into separate batches to ensure an error-free delivery to <s>%s</s>. <br/><br/> Do you want to proceed?": [
+            "<s>%s</s> tek bir parti içinde <s>%d</s>'den fazla işi işleyemez. WPML, işlerinizi <s>%s</s>'ya hatasız bir şekilde teslim etmek için otomatik olarak ayrı partilere böler. <br/><br/> Devam etmek istiyor musunuz?"
+         ],
+         "WPML will send jobs to %s in separate batches": [
+            "WPML işleri %s'ya ayrı partiler halinde gönderecek"
+         ],
+         "Yes, send jobs in separate batches": [
+            "Evet, işleri ayrı partiler halinde gönder"
+         ],
+         "No, I will split jobs myself": [
+            "Hayır, işleri kendim böleceğim"
+         ],
+         "This will translate only your future content": [
+            "Bu sadece gelecekteki içeriğinizi çevirecek"
+         ],
+         "This will translate your entire site": [
+            "Bu tüm sitenizi çevirecek"
+         ],
+         "Translate everything automatically from now on, without asking me.": [
+            "Bundan sonra her şeyi bana sormadan otomatik olarak çevir."
+         ],
+         "What content do you want to translate?": [
+            "Hangi içeriği çevirmek istiyorsunuz?"
+         ],
+         "Translate my entire site": [
+            "Tüm sitemi çevir"
+         ],
+         "WPML will translate all of your site's content, including:": [
+            "WPML sitenizin tüm içeriğini çevirecek, buna şunlar dahil:"
+         ],
+         "Any content that already exists but hasn't been translated yet": [
+            "Halihazırda var olan ancak henüz çevrilmemiş herhangi bir içerik"
+         ],
+         "All new content you create in the future": [
+            "Gelecekte oluşturacağınız tüm yeni içerik"
+         ],
+         "Hide what WPML will translate now": [
+            "WPML'nin şimdi çevireceği şeyleri gizle"
+         ],
+         "See what WPML will translate now": [
+            "WPML'nin şimdi çevireceği şeyleri gör"
+         ],
+         "Translate only future content": [
+            "Sadece gelecekteki içeriği çevir"
+         ],
+         "WPML will translate only the content you create after enabling this translation mode.": [
+            "WPML yalnızca bu çeviri modunu etkinleştirdikten sonra oluşturduğunuz içeriği çevirecektir."
+         ],
+         "Existing untranslated content on your side will not be translated.": [
+            "Sitenizde mevcut olan çevrilmemiş içerik çevrilmeyecektir."
+         ],
+         "Existing content": [
+            "Mevcut içerik"
+         ],
+         "You selected to translate strings that are in %s. Only these strings will be translated to %s.": [
+            "%s'da olan dizeleri çevirmeyi seçtiniz. Sadece bu dizeler %s'ya çevrilecek."
+         ],
+         "You selected to translate strings that are in %s and %s. Only these strings will be translated to %s.": [
+            "%s ve %s'da olan dizeleri çevirmeyi seçtiniz. Sadece bu dizeler %s'ya çevrilecek."
+         ],
+         "Source language": [
+            "Kaynak dil"
+         ],
+         "Target language": [
+            "Hedef dil"
+         ],
+         "Translation Method": [
+            "Çeviri Yöntemi"
+         ],
+         "Translation service additional options": [
+            "Çeviri hizmeti ek seçenekleri"
+         ],
+         "Refresh": [
+            "Yenile"
+         ],
+         "Fetching translation service data...": [
+            "Çeviri hizmeti verileri getiriliyor..."
+         ],
+         "-": [
+            "-"
+         ],
+         "Translate automatically": [
+            "Otomatik olarak çevir"
+         ],
+         "Translate myself": [
+            "Kendim çevireceğim"
+         ],
+         "Assign a translator": [
+            "Bir çevirmen ata"
+         ],
+         "Assign translation service": [
+            "Çeviri hizmeti ata"
+         ],
+         "Do nothing": [
+            "Hiçbir şey yapma"
+         ],
+         "Please choose": [
+            "Lütfen seçin"
+         ],
+         "Choose a translator": [
+            "Bir çevirmen seçin"
+         ],
+         "First available": [
+            "İlk müsait olan"
+         ],
+         "(Me)": [
+            "(Ben)"
+         ],
+         "Translation controls": [
+            "Çeviri kontrolleri"
+         ],
+         "Step 2": [
+            "Adım 2"
+         ],
+         "Get More Features with WPML's Advanced Translation Editor": [
+            "WPML'nin Gelişmiş Çeviri Düzenleyicisi ile Daha Fazla Özellik Edinin"
+         ],
+         "Close banner": [
+            "Afişi kapat"
+         ],
+         "You're using the Classic Translation Editor, an old legacy tool, and missing out on the many features and efficiency of our Advanced Translation Editor:": [
+            "Eski bir araç olan Klasik Çeviri Düzenleyicisini kullanıyorsunuz ve Gelişmiş Çeviri Düzenleyicimizin birçok özelliğinden ve verimliliğinden mahrum kalıyorsunuz:"
+         ],
+         "Translation Memory": [
+            "Çeviri Belleği"
+         ],
+         "HTML Protection": [
+            "HTML Koruması"
+         ],
+         "Glossary": [
+            "Sözlük"
+         ],
+         "Spellchecker": [
+            "Yazım Denetleyicisi"
+         ],
+         "AI Assistant": [
+            "YZ Asistanı"
+         ],
+         "Automatic Translation": [
+            "Otomatik Çeviri"
+         ],
+         "Switch now for a faster, more convenient, and reliable translation experience.": [
+            "Daha hızlı, daha uygun ve güvenilir bir çeviri deneyimi için şimdi geçiş yapın."
+         ],
+         "Switch Now": [
+            "Şimdi Geç"
+         ],
+         "Learn More": [
+            "Daha Fazla Bilgi Edin"
+         ],
+         "<a><s>Read more about automatic translation credits</s></a>": [
+            "<a><s>Otomatik çeviri kredileri hakkında daha fazla bilgi edinin</s></a>"
+         ],
+         "I understand that automatic translation uses credits": [
+            "Otomatik çevirinin kredi kullandığını anlıyorum"
+         ],
+         "Translate Everything Automatically - credit wizard error": [
+            "Her Şeyi Otomatik Olarak Çevir - kredi sihirbazı hatası"
+         ],
+         "There was an error when loading the credit wizard.": [
+            "Kredi sihirbazı yüklenirken bir hata oluştu."
+         ],
+         "Translate Everything Automatically - no credits": [
+            "Her Şeyi Otomatik Olarak Çevir - kredi yok"
+         ],
+         "Start Translate Everything Automatically": [
+            "Her Şeyi Otomatik Çevirmeye Başla"
+         ],
+         "Continue": [
+            "Devam Et"
+         ],
+         "Go back": [
+            "Geri Dön"
+         ],
+         "You can start using Translate Everything Automatically after sending some content for translation. We recommend that you review these translations and make sure that they are good before translating your entire site's content.": [
+            "Bazı içeriği çeviri için gönderdikten sonra Her Şeyi Otomatik Çevir'i kullanmaya başlayabilirsiniz. Bu çevirileri gözden geçirmenizi ve sitenizin tüm içeriğini çevirmeden önce iyi olduklarından emin olmanızı öneririz."
+         ],
+         "Translate Everything Automatically - disabled": [
+            "Her Şeyi Otomatik Olarak Çevir - devre dışı"
+         ],
+         "Translate Everything Automatically": [
+            "Her Şeyi Otomatik Olarak Çevir"
+         ],
+         "Automatically translate your entire site, but only from %s to %s.": [
+            "Tüm sitenizi otomatik olarak çevirin, ancak yalnızca %s'den %s'ye."
+         ],
+         "Translate Everything Automatically - pausing": [
+            "Her Şeyi Otomatik Olarak Çevir - duraklatılıyor"
+         ],
+         "Translate Everything Automatically is pausing": [
+            "Her Şeyi Otomatik Olarak Çevir duraklatılıyor"
+         ],
+         "Translate Everything Automatically - paused": [
+            "Her Şeyi Otomatik Olarak Çevir - duraklatıldı"
+         ],
+         "%d translation left in the queue. Preparing more content for translation.": [
+            "Kuyrukta %d çeviri kaldı. Çeviri için daha fazla içerik hazırlanıyor.",
+            "Kuyrukta %d çeviri kaldı. Çeviri için daha fazla içerik hazırlanıyor."
+         ],
+         "Preparing content for translation...": [
+            "Çeviri için içerik hazırlanıyor..."
+         ],
+         "%d translation left in the queue...": [
+            "Kuyrukta %d çeviri kaldı...",
+            "Kuyrukta %d çeviri kaldı..."
+         ],
+         "Translate Everything Automatically has finished translating your content. There are no pending translations in the queue.": [
+            "Her Şeyi Otomatik Çevir özelliği içeriğinizi çevirmeyi tamamladı. Sırada bekleyen çeviri bulunmamaktadır."
+         ],
+         "Some items were translated using the Classic Translation Editor and cannot be sent for automatic translation. Please select these items and choose the option to translate them yourself.": [
+            "Bazı öğeler Klasik Çeviri Düzenleyicisi kullanılarak çevrildi ve otomatik çeviri için gönderilemez. Lütfen bu öğeleri seçin ve kendiniz çevirme seçeneğini belirleyin."
+         ],
+         "Translate Everything Automatically - enabled": [
+            "Her Şeyi Otomatik Olarak Çevir - etkinleştirildi"
+         ],
+         "Translate Everything Automatically is enabled": [
+            "Her Şeyi Otomatik Çevir etkinleştirildi"
+         ],
+         "As you create new content or edit existing content, WPML will automatically translate it, but only from %s to %s.": [
+            "Yeni içerik oluşturdukça veya mevcut içeriği düzenledikçe, WPML bunu otomatik olarak çevirecektir, ancak yalnızca %s'den %s'ye."
+         ],
+         "You have <s>%s</s> prepaid translation credits in your wpml.org account. Assign these credits to your site to start using automatic translation": [
+            "Wpml.org hesabınızda <s>%s</s> ön ödemeli çeviri kredisi bulunmaktadır. Otomatik çeviriyi kullanmaya başlamak için bu kredileri sitenize atayın"
+         ],
+         "Translation not running... there is an issue that needs your attention. Fix it to continue.": [
+            "Çeviri çalışmıyor... dikkatinizi gerektiren bir sorun var. Devam etmek için sorunu düzeltin."
+         ],
+         "Assign credits now": [
+            "Şimdi kredi ata"
+         ],
+         "Fix now": [
+            "Şimdi düzelt"
+         ],
+         "Translate Everything Automatically is stopped": [
+            "Her Şeyi Otomatik Olarak Çevir durduruldu"
+         ],
+         "Out of Credits for Automatic Translation": [
+            "Otomatik Çeviri için Kredi Kalmadı"
+         ],
+         "Automatic translations completed": [
+            "Otomatik çeviriler tamamlandı"
+         ],
+         "<s>1 translation</s> has been successfully translated automatically": [
+            "<s>1 çeviri</s> başarıyla otomatik olarak çevrildi",
+            "<s>%d çeviri</s> başarıyla otomatik olarak çevrildi"
+         ],
+         "Automatic jobs in progress": [
+            "Otomatik işler devam ediyor"
+         ],
+         "<s>%d automatic translation</s> is in progress": [
+            "<s>%d otomatik çeviri</s> devam etmektedir",
+            "<s>%d otomatik çeviri</s> devam etmektedir"
+         ],
+         "Your default language, %s, must be mapped to a supported language in order to use automatic translation": [
+            "Otomatik çeviri kullanabilmek için varsayılan diliniz %s, desteklenen bir dile eşleştirilmelidir"
+         ],
+         "Map the language": [
+            "Dili eşleştirin"
+         ],
+         "%d translations ": [
+            "%d çeviri "
+         ],
+         "%d translation ": [
+            "%d çeviri "
+         ],
+         "this includes translations from Translate Everything Automatically": [
+            "bu, Otomatik Olarak Her Şeyi Çevir'den gelen çevirileri içermektedir"
+         ],
+         "are waiting for your review": [
+            "incelemenizi bekliyor"
+         ],
+         "is waiting for your review": [
+            "incelemenizi bekliyor"
+         ],
+         "Review Translations": [
+            "Çevirileri İncele"
+         ],
+         "Translate existing content": [
+            "Mevcut içeriği çevir"
+         ],
+         "Translate now": [
+            "Şimdi çevir"
+         ],
+         "Starting with version 4.7, WPML will also automatically translate texts (strings) coming from %s.": [
+            "4.7 sürümünden itibaren WPML, %s'den gelen metinleri (dizgileri) de otomatik olarak çevirecek."
+         ],
+         "WPML will not translate existing texts of this type but any new ones you create will be automatically translated. If you prefer, you can <button />.": [
+            "WPML bu tür mevcut metinleri çevirmeyecek, ancak oluşturduğunuz yeni metinler otomatik olarak çevrilecek. Tercih ederseniz, <button /> yapabilirsiniz."
+         ],
+         "Starting with version 4.7, WPML will also automatically translate:": [
+            "4.7 sürümünden itibaren WPML ayrıca şunları otomatik olarak çevirecek:"
+         ],
+         "Content set to \"use translation if available or fallback to default language\": %s.": [
+            "“Çeviri varsa kullan veya varsayılan dile geri dön” olarak ayarlanmış içerik: %s."
+         ],
+         "Texts (strings) coming from: %s.": [
+            "%s'den gelen metinler (dizgiler)."
+         ],
+         "WPML will not translate existing content for these post types and texts but any new content you create will be automatically translated. If you prefer, you can start <button />.": [
+            "WPML bu gönderi türleri ve metinler için mevcut içeriği çevirmeyecek, ancak oluşturduğunuz yeni içerikler otomatik olarak çevrilecek. Tercih ederseniz, <button /> başlayabilirsiniz."
+         ],
+         "WPML will not translate existing content for these post types but any new content you create will be automatically translated. If you prefer, you can start <button />.": [
+            "WPML bu gönderi türleri için mevcut içeriği çevirmeyecek, ancak oluşturduğunuz yeni içerikler otomatik olarak çevrilecek. Tercih ederseniz, <button /> başlayabilirsiniz."
+         ],
+         "start translating existing content now": [
+            "mevcut içeriği şimdi çevirmeye başla"
+         ],
+         "The following target languages do not support automatic translations: %s": [
+            "Aşağıdaki hedef diller otomatik çevirileri desteklememektedir: %s"
+         ],
+         "To enable automatic translation map them to known languages.": [
+            "Otomatik çeviriyi etkinleştirmek için bunları bilinen dillere eşleştirin."
+         ],
+         "Map to known languages": [
+            "Bilinen dillere eşleştirin"
+         ],
+         "Translation status": [
+            "Çeviri durumu"
+         ],
+         "Default language does not support automatic translations.": [
+            "Varsayılan dil otomatik çevirileri desteklemiyor."
+         ],
+         "You must enable ATE to activate Translate Everything Automatically.": [
+            "Her Şeyi Otomatik Çevir'i etkinleştirmek için ATE'yi etkinleştirmelisiniz."
+         ],
+         "This item needs an update but cannot be translated automatically because it was manually translated.\nPlease, select the item and send for manual translation.": [
+            "Bu öğe bir güncelleme gerektiriyor ancak manuel olarak çevrildiği için otomatik olarak çevrilemez.\nLütfen öğeyi seçin ve manuel çeviri için gönderin."
+         ],
+         "This item needs update. Please, select the item and send for translation.": [
+            "Bu öğe güncelleme gerektiriyor. Lütfen öğeyi seçin ve çeviri için gönderin."
+         ],
+         "Translations completed with the Classic Translation Editor cannot be sent for automatic translation": [
+            "Klasik Çeviri Düzenleyicisi ile tamamlanan çeviriler otomatik çeviri için gönderilemez"
+         ],
+         "automatic translation": [
+            "otomatik çeviri"
+         ],
+         "unassigned": [
+            "atanmamış"
+         ],
+         "not translated": [
+            "çevrilmemiş"
+         ],
+         "waiting for translator": [
+            "çevirmen bekliyor"
+         ],
+         "in progress": [
+            "devam ediyor"
+         ],
+         "needs update": [
+            "güncelleme gerekiyor"
+         ],
+         "duplicate": [
+            "kopya"
+         ],
+         "complete": [
+            "tamamlandı"
+         ],
+         "needs review": [
+            "inceleme gerekiyor"
+         ],
+         "preparing for translation": [
+            "çeviri için hazırlanıyor"
+         ],
+         "needs attention": [
+            "dikkat gerekiyor"
+         ],
+         "%1$s: %2$s%3$s": [
+            "%1$s: %2$s%3$s"
+         ],
+         "Could not fetch engines data": [
+            "Motorların verileri alınamadı"
+         ],
+         "Error in fetching currently logged in translator": [
+            "Şu anda oturum açmış çevirmeni getirmede hata"
+         ],
+         "Error in fetching local translators": [
+            "Yerel çevirmenleri getirmede hata"
+         ],
+         "Published": [
+            "Yayınlandı"
+         ],
+         "Draft": [
+            "Taslak"
+         ],
+         "Trash": [
+            "Çöp"
+         ],
+         "Pending": [
+            "Beklemede"
+         ],
+         "Private": [
+            "Özel"
+         ],
+         "Future": [
+            "Gelecek"
+         ],
+         "Auto Draft": [
+            "Otomatik Taslak"
+         ],
+         "External": [
+            "Harici"
+         ],
+         "Collapse": [
+            "Daralt"
+         ],
+         "Expand": [
+            "Genişlet"
+         ],
+         "Close modal": [
+            "Modalı kapat"
+         ],
+         "Select an item": [
+            "Bir öğe seçin"
+         ],
+         "Search": [
+            "Arama"
+         ],
+         "No items found": [
+            "Öğe bulunamadı"
+         ],
+         "OFF": [
+            "KAPALI"
+         ],
+         "ON": [
+            "AÇIK"
+         ],
+         "%1$s Flag": [
+            "%1$s Bayrak"
+         ],
+         "What would you like to do after WPML finishes translating your content automatically?": [
+            "WPML içeriğinizi otomatik olarak çevirmeyi tamamladıktan sonra ne yapmak istersiniz?"
+         ],
+         "Wait for review": [
+            "İnceleme için bekle"
+         ],
+         "Recommended with DeepL, Google and Microsoft": [
+            "DeepL, Google ve Microsoft ile tavsiye edilir"
+         ],
+         "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process.": [
+            "DeepL, Google ve Microsoft mükemmel çeviriler sunmaktadır, ancak doğru olduklarından emin olmak için insan tarafından gözden geçirilmelerini tavsiye ediyoruz. WPML AI, bağlamı anlayan ve güvenle inceleme sürecini atlayabileceğiniz İnsan Çevirisinden Daha İyi çeviriler sunmaktadır."
+         ],
+         "WPML keeps translations unpublished, so you can review them first.": [
+            "WPML, önce inceleyebilmeniz için çevirileri yayınlanmamış olarak tutar."
+         ],
+         "Your translators review and approve translations before publishing.": [
+            "Çevirmenleriniz, yayınlamadan önce çevirileri inceler ve onaylar."
+         ],
+         "Publish and mark for review": [
+            "Yayınla ve inceleme için işaretle"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "WPML çevirileri hemen yayınlar ancak sizin uygun bir zamanda kontrol etmeniz için işaretler."
+         ],
+         "WPML publishes translations immediately but flags them for translators to review later.": [
+            "WPML çevirileri hemen yayınlar ancak çevirmenlerin daha sonra incelemesi için işaretler."
+         ],
+         "Publish without review": [
+            "İnceleme olmadan yayınla"
+         ],
+         "Recommended with WPML AI": [
+            "WPML AI ile önerilir"
+         ],
+         "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy.": [
+            "WPML AI, nadiren iyileştirme gerektiren İnsandan Daha İyi Çeviriler sağlar, böylece inceleme sürecini güvenle atlayabilirsiniz. Diğer çeviri motorları için, doğruluğu onaylamak adına insan incelemesi önerilir."
+         ],
+         "WPML publishes translations immediately, skipping the review process.": [
+            "WPML çevirileri inceleme sürecini atlayarak hemen yayınlar."
+         ]
+      }
+   }
+}

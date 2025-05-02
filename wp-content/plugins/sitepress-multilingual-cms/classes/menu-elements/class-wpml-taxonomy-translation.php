@@ -9,6 +9,9 @@
 class WPML_Taxonomy_Translation {
 
 	private $ui = null;
+	private $taxonomy = '';
+	private $args = array();
+	private $screen_options_factory = null;
 
 	/**
 	 * WPML_Taxonomy_Translation constructor.
@@ -20,15 +23,26 @@ class WPML_Taxonomy_Translation {
 	 * @param WPML_UI_Screen_Options_Factory $screen_options_factory
 	 */
 	public function __construct( $taxonomy = '', $args = array(), $screen_options_factory = null ) {
+		$this->taxonomy = $taxonomy;
+		$this->args = $args;
+		$this->screen_options_factory = $screen_options_factory;
+		add_action('init', array($this, 'prepareUi'), SitePress::INIT_HOOK_TRANSLATIONS_PRIORITY + 1 );
+	}
+
+	public function prepareUi() {
 		global $sitepress;
-		$this->ui = new WPML_Taxonomy_Translation_UI( $sitepress, $taxonomy, $args, $screen_options_factory );
+		$this->ui = new WPML_Taxonomy_Translation_UI( $sitepress, $this->taxonomy, $this->args, $this->screen_options_factory );
 	}
 
 	/**
 	 * Echos the HTML that serves as an entry point for the taxonomy translation
 	 * screen and enqueues necessary js.
+	 * This should be called only after the plugin translations are loaded. (``init`` hook)
 	 */
 	public function render() {
+		if ( ! $this->ui ) {
+			$this->prepareUi();
+		}
 		$this->ui->render();
 	}
 

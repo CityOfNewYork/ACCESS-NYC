@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/settings/UI/TranslationMethod.js:51
+msgid ""
+"You must use the Advanced Translation Editor if you want to translate your "
+"content automatically."
+msgstr "如果要自动翻译内容，必须使用高级翻译编辑器。"
+
+#: src/js/settings/UI/Troubleshooting.js:26
+msgid "Synchronize translators and translation managers with ATE"
+msgstr "将译员和翻译管理器与ATE同步"
+
+#: src/js/settings/UI/Troubleshooting.js:36
+msgid ""
+"Please try again in a few minutes. If the problem persists, please contact "
+"%sWPML support%s."
+msgstr "请几分钟后再试一次。如果问题仍然存在，请联系%sWPML 支持%s。"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:104
+msgid "Save"
+msgstr "保存"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:73
+msgid "Please confirm this translation setting"
+msgstr "请确认该翻译设置"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:76
+msgid "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item."
+msgid_plural "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing items."
+msgstr[0] "您的网站设置为自动翻译所有内容。当您将<PostTypesNames /> 设置为可翻译时，WPML 将自动翻译%1$d 现有项目。"
+msgstr[1] "您的网站设置为自动翻译所有内容。当您将<PostTypesNames /> 设置为可翻译时，WPML 将自动翻译%1$d 现有项目。"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:82
+msgid ""
+"Your site is set to translate all content automatically. When you make "
+"<PostTypesNames /> translatable, WPML will automatically translate all "
+"future content."
+msgstr "您的网站已设置为自动翻译所有内容。当您将<PostTypesNames /> 设置为可翻译时，WPML 将自动翻译今后的所有内容。"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:88
+msgid "Are you OK with paying for this?"
+msgstr "你愿意为此付费吗？"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:90
+msgid "Cancel"
+msgstr "取消"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:91
+msgid "Make translatable"
+msgstr "可翻译"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostTypeDialog.js:49
+msgid "Yes, translate <b>existing</b> and <b>future</b> content automatically"
+msgstr "是，自动翻译<b>现有</b>和<b>未来的</b>内容"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostTypeDialog.js:64
+msgid "Yes, but only translate <b>future</b> content automatically"
+msgstr "可以，但只能自动翻译<b>未来的</b>内容"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostTypeDialog.js:65
+msgid "Yes, translate <b>future</b> content automatically"
+msgstr "是，自动翻译<b>未来</b>内容"

@@ -120,7 +120,7 @@
             "נוספה שפה"
          ],
          "The value \"%s\" already exists": [
-            "הערך '%s' כבר קיים"
+            "הערך \"%s\" כבר קיים"
          ],
          "Add a new language": [
             "הוסף שפה חדשה"
@@ -138,7 +138,7 @@
             "לחץ כאן"
          ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
-            "התבנית שגויה. היא יכולה להכיל רק אותיות קטנות ו-'-'. למשל: 'fr', 'pt-br', 'zh-hans'"
+            "פורמט שגוי. יכול להכיל רק אותיות קטנות ו-\"-\". לדוגמה: \"fr\", \"pt-br\", \"zh-hans\""
          ],
          "Language": [
             "שפה"
@@ -150,7 +150,7 @@
             "קוד"
          ],
          "The language will not be supported by automatic translations": [
-            "בשפה לא תיתמך על-ידי תרגומים אוטומטיים"
+            "השפה לא תהיה נתמכת על ידי תרגומים אוטומטיים"
          ],
          "Language mapping": [
             "מיפוי שפה"
@@ -159,19 +159,19 @@
             "אל תמפה שפה זו"
          ],
          "Default locale": [
-            "אזור ברירת מחדל"
+            "מיקום ברירת מחדל"
          ],
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
-            "התבנית שגויה. היא יכולה להכיל רק אותיות קטנות ו-'_'. למשל: 'de', 'de_DE', 'zh_Hant_TW'"
+            "פורמט שגוי. יכול להכיל רק אותיות קטנות ו-\"_\". לדוגמה: \"de\", \"de_DE\", \"zh_Hant_TW\""
          ],
          "hreflang": [
             "hreflang"
          ],
          "Encode url?": [
-            "לקודד את כתובת ה-URL?"
+            "לקודד כתובת אתר?"
          ],
          "Flags must be:": [
-            "דגלים חייבים להיות:"
+            "הדגלים חייבים להיות:"
          ],
          "NO": [
             "לא"
@@ -180,13 +180,13 @@
             "כן"
          ],
          " (required)": [
-            "(חובה)"
+            " (נדרש)"
          ],
          "Please fill in the field": [
-            "מלא את השדה"
+            "אנא מלא את השדה"
          ],
          "PNG, SVG, or JPG files": [
-            "קובצי PNG, SVG או JPG"
+            "קבצי PNG, SVG, או JPG"
          ],
          "Save language": [
             "שמור שפה"
@@ -195,58 +195,58 @@
             "18 x 12 פיקסלים"
          ],
          "Read more about ": [
-            "קרא עוד אודות"
+            "קרא עוד אודות "
          ],
          "The name of your language as it will appear on your site's language switcher.": [
-            "שם השפה כפי שיופיע במעביר השפה באתר שלך."
+            "שם השפה שלך כפי שיופיע במחליף השפות באתר שלך."
          ],
          "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
-            "ערך ייחודי שמזהה את השפה במסד הנתונים ובכתובת ה-URL. לאחר השמירה לא יהיה ניתן לשנות את קוד השפה."
+            "ערך ייחודי המזהה את השפה במסד הנתונים ובכתובת האתר. לאחר השמירה, לא ניתן לשנות את קוד השפה."
          ],
          "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
-            "אם השפה המותאמת אישית דומה לשפה קיימת, תוכל להשתמש בבדיקת האיות ובתרגום האוטומטי של השפה הקיימת. לדוגמה, אם השפה המותאמת אישת שלך היא דרמנית-שוויצרית, תוכל למפות לגרמנית כשפה לשימוש עבור בדיקת איות ותרגום אוטומטי. אם לא תמפה את השפה המותאמת אישית לשפה קיימת, התכונות בדיקת איות ותרגום אוטומטי לא יהיו זמינות בשפה זו."
+            "אם השפה המותאמת אישית שלך דומה לשפה קיימת, תוכל להשתמש בבדיקת האיות והתרגום האוטומטי של השפה הקיימת. לדוגמה, אם השפה המותאמת אישית שלך היא גרמנית-שוויצרית, תוכל למפות לגרמנית כשפה לשימוש עבור בדיקת איות ותרגום אוטומטי. אם לא תמפה את השפה המותאמת אישית שלך לשפה קיימת, תכונות בדיקת האיות והתרגום האוטומטי לא יהיו זמינות בשפה זו."
          ],
          "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
-            "הערך ש-WPML בודק בעת טעינת תרגומים מקובצי MO ו-PO. מיקום ברירת המחדל כלות בשמות הקבצים בתיקייה /wp-content/languages/ של הגדרת WordPress."
+            "הערך ש-WPML בודק בעת טעינת תרגומים מקבצי MO ו-PO. המיקום ברירת המחדל נכלל בשמות הקבצים בתיקייה /wp-content/languages/ בהתקנת WordPress שלך."
          ],
          "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
-            "Google משתמשת במאפיין hreflang כדי לכוון משתמשים לאתרים הבשפות שרלוונטיות עבורם. דוגמאות:"
+            "Google משתמש במאפיין hreflang כדי להפנות משתמשים לאתרים בשפה ובמיקום הרלוונטיים להם. דוגמאות:"
          ],
          "All English-speaking users: en": [
-            "כל המשתמשים שהם דוברי אנגלית: en"
+            "כל המשתמשים דוברי אנגלית: en"
          ],
          "English for UK users: en-gb": [
-            "אנגלית עבור משתמשי UK: en-gb"
+            "אנגלית למשתמשים בבריטניה: en-gb"
          ],
          "English for US users: en-us": [
-            "אנגלית עבור משתמשי ארה\"ב: en-us"
+            "אנגלית למשתמשים בארה\"ב: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
-            "קובע אם כתובות URL בשפה זו יקודדו או ישתמשו בתווי ASCII (אם אינך בטוח, השאר \"No\")."
+            "קובע אם כתובות URL בשפה זו מקודדות או משתמשות בתווי ASCII (אם אינך בטוח, השאר זאת כ-\"לא\")."
          ],
          "adding a custom language": [
-            "מוסיף שפה מותאמת אישית"
+            "הוספת שפה מותאמת אישית"
+         ],
+         "What are the languages of your site?": [
+            "מהן השפות של האתר שלך?"
          ],
          "Default language": [
             "שפת ברירת מחדל"
          ],
          "What is the current language of your website?": [
-            "מה השפה הנוכחית של אתר האינטרנט שלך?"
+            "מהי השפה הנוכחית של האתר שלך?"
          ],
          "Translation languages": [
             "שפות תרגום"
          ],
          "Which languages do you want to translate your site into?": [
-            "לאיזה שפות אתה רוצה לתרגם את האתר שלך?"
+            "לאילו שפות ברצונך לתרגם את האתר שלך?"
          ],
          "If you cannot find languages that you need in the list": [
-            "אם אינך מוצא שפות שאתה צריך ברשימה"
+            "אם אינך יכול למצוא שפות שאתה צריך ברשימה"
          ],
          "create a custom language": [
             "צור שפה מותאמת אישית"
-         ],
-         "What are the languages of your site?": [
-            "מה השפות של האתר שלך?"
          ]
       }
    }

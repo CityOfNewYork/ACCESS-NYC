@@ -1,0 +1,70 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/troubleshooting/cancelJobs/CancelJobs.js:17
+msgid "Preparing..."
+msgstr "Preparazione in corso..."
+
+#: src/js/troubleshooting/cancelJobs/CancelJobs.js:77
+msgid "All jobs have been cancelled"
+msgstr "Tutti i lavori sono stati annullati"
+
+#: src/js/troubleshooting/cancelJobs/CancelJobs.js:79
+msgid "There is no more jobs to cancel"
+msgstr "Non vi sono altri lavori da annullare"
+
+#: src/js/troubleshooting/cancelJobs/CancelJobs.js:82
+msgid "The jobs cancellation has failed"
+msgstr "L'annullamento dei lavori non è riuscito"
+
+#: src/js/troubleshooting/cancelJobs/CancelJobs.js:88
+msgid "Cancel in-progress automatic jobs"
+msgstr "Annulla i lavori automatici in corso"
+
+#: src/js/troubleshooting/enableSecondaryDomainForATE/EnableSecondaryDomain.js:27
+msgid "Enabling WPML's Advanced Translation Editor..."
+msgstr "Attivazione dell'Editor di Traduzione Avanzato di WPML..."
+
+#: src/js/troubleshooting/enableSecondaryDomainForATE/EnableSecondaryDomain.js:28
+msgid "Force-enable WPML's Advanced Translation Editor"
+msgstr "Forza l'attivazione dell'Editor di Traduzione Avanzato di WPML"
+
+#: src/js/troubleshooting/enableSecondaryDomainForATE/EnableSecondaryDomain.js:37
+msgid ""
+"If you're running this website from two or more domains on the same "
+"installation, this action will allow both to use the Advanced Translation "
+"Editor. Don't use this if you've moved or copied the site to a different "
+"domain on a different server."
+msgstr "Se stai eseguendo questo sito web da due o più domini sulla stessa installazione, questa azione consentirà a entrambi di utilizzare l'Editor di Traduzione Avanzato. Non utilizzare questa opzione se hai spostato o copiato il sito su un dominio diverso su un server diverso."
+
+#: src/js/troubleshooting/enableSecondaryDomainForATE/EnableSecondaryDomain.js:41
+msgid "An error occurred while enabling WPML on both domains. Please try again."
+msgstr "Si è verificato un errore durante l'attivazione di WPML su entrambi i domini. Si prega di riprovare."
+
+#: src/js/troubleshooting/enableSecondaryDomainForATE/EnableSecondaryDomain.js:44
+msgid ""
+"You can now use the Advanced Translation Editor from this site, as well as "
+"the other site(s) running from a different domain on the same installation."
+msgstr "Ora puoi utilizzare l'Editor di Traduzione Avanzato da questo sito, così come dagli altri siti in esecuzione da un dominio diverso sulla stessa installazione."
+
+#: src/js/troubleshooting/lsTemplates/UpdateDomain.js:31
+msgid "Domain name has been updated"
+msgstr "Il nome del dominio è stato aggiornato"
+
+#: src/js/troubleshooting/lsTemplates/UpdateDomain.js:33
+msgid "Domain name update has been failed"
+msgstr "L'aggiornamento del nome del dominio non è riuscito"
+
+#: src/js/troubleshooting/lsTemplates/UpdateDomain.js:41
+msgid "Update domain name in language switcher settings"
+msgstr "Aggiorna il nome del dominio nelle impostazioni del selettore della lingua"
+
+#: src/js/troubleshooting/refreshLicense/RefreshLicense.js:14
+msgid "Refresh license data to recognise license update"
+msgstr "Ricarica i dati di licenza per riconoscere l'aggiornamento della licenza"
+
+#: src/js/troubleshooting/refreshLicense/useRefreshLicense.js:36
+msgid "WPML License has been refreshed"
+msgstr "La licenza WPML è stata ricaricata"

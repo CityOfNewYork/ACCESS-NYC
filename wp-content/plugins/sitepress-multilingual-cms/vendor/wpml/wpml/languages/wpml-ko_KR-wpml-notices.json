@@ -1,0 +1,44 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Add glossary terms": [
+            "용어집 용어 추가"
+         ],
+         "Minimize": [
+            "최소화"
+         ],
+         "Expand": [
+            "확장"
+         ],
+         "There's nothing yet in the Glossary": [
+            "용어집에 아직 아무것도 없습니다"
+         ],
+         "Looks like you're not yet using the glossary. Glossary can help you:": [
+            "아직 용어집을 사용하지 않고 있는 것 같습니다. 용어집은 다음과 같은 도움을 줄 수 있습니다:"
+         ],
+         "Improve the quality of the translation": [
+            "번역 품질 향상"
+         ],
+         "Ensure translation consistency": [
+            "번역 일관성 보장"
+         ],
+         "Reduce translation costs": [
+            "번역 비용 절감"
+         ],
+         "Improve SEO in translation languages": [
+            "번역 언어의 SEO 개선"
+         ],
+         "How to Use the Glossary for Accurate Translations": [
+            "정확한 번역을 위한 용어집 사용 방법"
+         ],
+         "%d item in the <a>Glossary</a>": [
+            "<a>용어집</a>에 %d개 항목",
+            "<a>용어집</a>에 %d개 항목"
+         ]
+      }
+   }
+}

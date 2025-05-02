@@ -61,7 +61,7 @@ class FieldNamePatterns {
 	 */
 	private function matches( $fieldName, $patterns ) {
 		foreach ( $patterns as $pattern ) {
-			if ( Str::match( '/^' . $pattern . '$/', preg_quote( $fieldName ) ) ) {
+			if ( Str::match( '/^' . $pattern . '$/', $fieldName ) ) {
 				return true;
 			}
 		}

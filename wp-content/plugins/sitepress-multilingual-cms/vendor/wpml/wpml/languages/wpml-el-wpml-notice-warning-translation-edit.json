@@ -1,0 +1,31 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Warning:": [
+            "Προειδοποίηση:"
+         ],
+         "Edits you're about to make will be lost": [
+            "Οι επεξεργασίες που πρόκειται να κάνετε θα χαθούν"
+         ],
+         "You are about to edit this translation using %s.": [
+            "Πρόκειται να επεξεργαστείτε αυτή τη μετάφραση χρησιμοποιώντας το %s."
+         ],
+         "Any changes you make will be lost the next time you send this page for translation.": [
+            "Οποιεσδήποτε αλλαγές κάνετε θα χαθούν την επόμενη φορά που θα στείλετε αυτή τη σελίδα για μετάφραση."
+         ],
+         "Go back": [
+            "Επιστροφή"
+         ],
+         "Edit in Advanced Translation Editor": [
+            "Επεξεργασία στον προηγμένο επεξεργαστή μεταφράσεων"
+         ],
+         "Edit anyway (Not recommended)": [
+            "Επεξεργασία ούτως ή άλλως (Δεν συνιστάται)"
+         ]
+      }
+   }
+}

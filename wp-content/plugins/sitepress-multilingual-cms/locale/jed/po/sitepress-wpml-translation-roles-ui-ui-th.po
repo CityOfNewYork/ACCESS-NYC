@@ -1,0 +1,395 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/language/LanguagePairs.js:57
+msgid "From:"
+msgstr "จาก:"
+
+#: src/js/components/language/LanguagePairs.js:69
+msgid "--Choose language--"
+msgstr "--เลือกภาษา--"
+
+#: src/js/components/language/LanguagePairs.js:81
+msgid "to:"
+msgstr "ไปยัง:"
+
+#: src/js/components/language/SelectLanguagePairs.js:39
+msgid "Set language pair(s) for Translator %s:"
+msgstr "ตั้งค่าคู่ภาษาสำหรับนักแปล %s:"
+
+#: src/js/components/language/SelectLanguagePairs.js:64
+msgid "+ Add more language pairs for this translator"
+msgstr "+ เพิ่มคู่ภาษาเพิ่มเติมสำหรับนักแปลคนนี้"
+
+#: src/js/components/roles/CreateUser.js:100
+msgid "First Name"
+msgstr "ชื่อ"
+
+#: src/js/components/roles/CreateUser.js:101
+msgid "Last Name"
+msgstr "นามสกุล"
+
+#: src/js/components/roles/CreateUser.js:105
+msgid "Role"
+msgstr "บทบาท"
+
+#: src/js/components/roles/CreateUser.js:137
+msgid "(required)"
+msgstr "(จำเป็น)"
+
+#: src/js/components/roles/CreateUser.js:46
+msgid ""
+"Make sure that you have provided a correct email address e.g. "
+"name@domain.com"
+msgstr "ตรวจสอบให้แน่ใจว่าคุณได้ให้ที่อยู่อีเมลที่ถูกต้อง เช่น name@domain.com"
+
+#: src/js/components/roles/CreateUser.js:64
+msgid "This field is required"
+msgstr "ต้องกรอกช่องนี้"
+
+#: src/js/components/roles/CreateUser.js:84
+msgid "A translator can be any WordPress role."
+msgstr "นักแปลสามารถเป็นบทบาท WordPress ใดก็ได้."
+
+#: src/js/components/roles/CreateUser.js:98
+msgid "Username"
+msgstr "ชื่อผู้ใช้"
+
+#: src/js/components/roles/CreateUser.js:99
+msgid "Email"
+msgstr "อีเมล"
+
+#: src/js/components/roles/ExistingUserSelect.js:46
+msgid "Search"
+msgstr "ค้นหา"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:47
+msgid "user"
+msgstr "ผู้ใช้"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:47
+msgid "Editor"
+msgstr "บรรณาธิการ"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:61
+msgid "Select an existing %s and set as Translation Manager"
+msgstr "เลือก %s ที่มีอยู่และตั้งเป็นผู้จัดการการแปล"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:72
+msgid "Create a new %s and set as Translation Manager"
+msgstr "สร้าง %s ใหม่และตั้งเป็นผู้จัดการการแปล"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:85
+#: src/js/components/translators/AddTranslatorDialog.js:121
+#: src/js/components/translators/EditLanguagesDialog.js:73
+#: src/js/setup/components/Steps/AddLanguagesModal.js:496
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:90
+msgid "Add Translation Manager"
+msgstr "เพิ่มผู้จัดการการแปล"
+
+#: src/js/components/translation-managers/ManagerSection.js:27
+msgid "Add a Translation Manager"
+msgstr "เพิ่มผู้จัดการการแปล"
+
+#: src/js/components/translators/AddTranslatorDialog.js:111
+msgid "Set language pair(s)"
+msgstr "ตั้งค่าคู่ภาษา"
+
+#: src/js/components/translators/AddTranslatorDialog.js:126
+msgid "Previous"
+msgstr "ก่อนหน้า"
+
+#: src/js/components/translators/AddTranslatorDialog.js:129
+#: src/js/components/translators/EditLanguagesDialog.js:78
+msgid "Save"
+msgstr "บันทึก"
+
+#: src/js/components/translators/AddTranslatorDialog.js:65
+#: src/js/components/translators/UserSection.js:45
+msgid "Add a Translator"
+msgstr "เพิ่มนักแปล"
+
+#: src/js/components/translators/AddTranslatorDialog.js:91
+msgid "Select an existing user and set as Translator"
+msgstr "เลือกผู้ใช้ที่มีอยู่และตั้งเป็นนักแปล"
+
+#: src/js/components/translators/AddTranslatorDialog.js:95
+msgid "Create a new user and set as Translator"
+msgstr "สร้างผู้ใช้ใหม่และตั้งเป็นนักแปล"
+
+#: src/js/components/translators/EditLanguagesDialog.js:55
+msgid "Edit language pair(s) for translator"
+msgstr "แก้ไขคู่ภาษาสำหรับนักแปล"
+
+#: src/js/components/translators/TranslatorsTable.js:128
+#: src/js/setup/components/Steps/AddLanguagesModal.js:346
+msgid "Name"
+msgstr "ชื่อ"
+
+#: src/js/components/translators/TranslatorsTable.js:140
+msgid "Language Pairs"
+msgstr "คู่ภาษา"
+
+#: src/js/components/translators/TranslatorsTable.js:144
+msgid "You can translate to and from all languages"
+msgstr "คุณสามารถแปลไปและจากทุกภาษาได้"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:48
+msgid "%s file upload failed."
+msgstr "การอัปโหลดไฟล์ %s ล้มเหลว."
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:69
+msgid "Flag"
+msgstr "ธง"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:87
+msgid "Flag file"
+msgstr "ไฟล์ธง"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:160
+msgid ""
+"You just added  language. Next, select it as the site's default language or "
+"a translation language."
+msgstr "คุณเพิ่งเพิ่มภาษา ต่อไป เลือกเป็นภาษาเริ่มต้นของเว็บไซต์หรือภาษาแปล."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:162
+msgid "Language added"
+msgstr "เพิ่มภาษาแล้ว"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:192
+msgid "The value \"%s\" already exists"
+msgstr "ค่า “%s” มีอยู่แล้ว"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:215
+msgid "Add a new language"
+msgstr "เพิ่มภาษาใหม่"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:224
+msgid ""
+"Create a country-specific language by choosing the general language from "
+"the list below. Then, choose the country it should be localized for."
+msgstr "สร้างภาษาเฉพาะประเทศโดยเลือกภาษาทั่วไปจากรายการด้านล่าง จากนั้นเลือกประเทศที่ควรจะแปลเป็นภาษาท้องถิ่น."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:229
+msgid ""
+"By choosing a combination that already exists in the database, WPML can "
+"help fill out the necessary fields. Read more about "
+"<AddingACustomLanguageLink />."
+msgstr "โดยการเลือกการผสมผสานที่มีอยู่แล้วในฐานข้อมูล WPML สามารถช่วยกรอกฟิลด์ที่จำเป็นได้ อ่านเพิ่มเติมเกี่ยวกับ <AddingACustomLanguageLink />."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:242
+msgid "Cannot find?"
+msgstr "ไม่พบ?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:244
+msgid "Click here"
+msgstr "คลิกที่นี่"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:300
+msgid ""
+"The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" "
+", \"pt-br\", \"zh-hans\""
+msgstr "รูปแบบไม่ถูกต้อง อาจมีเฉพาะตัวอักษรพิมพ์เล็กและ “-” เท่านั้น เช่น: “fr”, “pt-br”, “zh-hans”"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:308
+msgid "Language"
+msgstr "ภาษา"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:331
+msgid "Location"
+msgstr "ตำแหน่ง"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:360
+msgid "Code"
+msgstr "รหัส"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:374
+msgid "The language will not be supported by automatic translations"
+msgstr "ภาษานี้จะไม่รองรับการแปลอัตโนมัติ"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:392
+msgid "Language mapping"
+msgstr "การแมปภาษา"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:404
+msgid "Don't map this language"
+msgstr "ไม่ต้องแมปภาษานี้"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:418
+msgid "Default locale"
+msgstr "ภาษาเริ่มต้น"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:423
+msgid ""
+"The wrong format. It may contain only small letters and \"_\". E.g: \"de\" "
+", \"de_DE\", \"zh_Hant_TW\""
+msgstr "รูปแบบไม่ถูกต้อง อาจมีเฉพาะตัวอักษรพิมพ์เล็กและ “_” เท่านั้น เช่น: “de”, “de_DE”, “zh_Hant_TW”"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:435
+msgid "hreflang"
+msgstr "hreflang"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:449
+msgid "Encode url?"
+msgstr "เข้ารหัส URL หรือไม่?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:45
+msgid "Flags must be:"
+msgstr "ธงต้องเป็น:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:453
+msgid "NO"
+msgstr "ไม่"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:454
+msgid "YES"
+msgstr "ใช่"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:460
+msgid " (required)"
+msgstr " (จำเป็น)"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:483
+msgid "Please fill in the field"
+msgstr "กรุณากรอกข้อมูลในช่องนี้"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:49
+msgid "PNG, SVG, or JPG files"
+msgstr "ไฟล์ PNG, SVG หรือ JPG"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:501
+msgid "Save language"
+msgstr "บันทึกภาษา"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:52
+msgid "18 x 12 pixels"
+msgstr "18 x 12 พิกเซล"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:55
+msgid "Read more about "
+msgstr "อ่านเพิ่มเติมเกี่ยวกับ "
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:60
+msgid ""
+"The name of your language as it will appear on your site's language "
+"switcher."
+msgstr "ชื่อของภาษาของคุณที่จะปรากฏในตัวเลือกภาษาของเว็บไซต์ของคุณ."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:61
+msgid ""
+"A unique value that identifies the language in the database and URL. Once "
+"saved, the language code cannot be changed."
+msgstr "ค่าที่ไม่ซ้ำกันซึ่งระบุภาษาในฐานข้อมูลและ URL เมื่อบันทึกแล้ว รหัสภาษาไม่สามารถเปลี่ยนแปลงได้."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:62
+msgid ""
+"If your custom language is similar to an existing language, you can use the "
+"existing language's spellcheck and automatic translation. For example, if "
+"your custom language is Swiss-German, you can map to German as the language "
+"to use for spellcheck and automatic translation. If you don't map your "
+"custom language to an existing language, spellcheck and automatic "
+"translation features will be unavailable in that language."
+msgstr "หากภาษาที่กำหนดเองของคุณคล้ายกับภาษาที่มีอยู่ คุณสามารถใช้การตรวจสอบการสะกดและการแปลอัตโนมัติของภาษาที่มีอยู่ได้ ตัวอย่างเช่น หากภาษาที่กำหนดเองของคุณคือภาษาเยอรมันสวิส คุณสามารถแมปไปยังภาษาเยอรมันเพื่อใช้สำหรับการตรวจสอบการสะกดและการแปลอัตโนมัติ หากคุณไม่แมปภาษาที่กำหนดเองกับภาษาที่มีอยู่ คุณลักษณะการตรวจสอบการสะกดและการแปลอัตโนมัติจะไม่สามารถใช้งานได้ในภาษานั้น."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:66
+msgid ""
+"The value WPML checks when loading translations from MO and PO files. The "
+"default locale is included in the filenames in your /wp-content/languages/ "
+"folder in your WordPress setup."
+msgstr "ค่าที่ WPML ตรวจสอบเมื่อโหลดการแปลจากไฟล์ MO และ PO ภาษาเริ่มต้นถูกรวมอยู่ในชื่อไฟล์ในโฟลเดอร์  /wp-content/languages/ ในการตั้งค่า WordPress ของคุณ."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:69
+msgid ""
+"Google uses the hreflang attribute to direct users to sites in their "
+"relevant language and location. Examples:"
+msgstr "Google ใช้แอตทริบิวต์ hreflang เพื่อนำผู้ใช้ไปยังเว็บไซต์ในภาษาและตำแหน่งที่เกี่ยวข้อง ตัวอย่าง:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:71
+msgid "All English-speaking users: en"
+msgstr "ผู้ใช้ภาษาอังกฤษทั้งหมด: en"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:72
+msgid "English for UK users: en-gb"
+msgstr "ภาษาอังกฤษสำหรับผู้ใช้ในสหราชอาณาจักร: en-gb"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:73
+msgid "English for US users: en-us"
+msgstr "ภาษาอังกฤษสำหรับผู้ใช้ในสหรัฐอเมริกา: en-us"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:81
+msgid ""
+"Determines if URLs in this language are encoded or use ASCII characters (if "
+"unsure, leave it as \"No\")."
+msgstr "กำหนดว่า URL ในภาษานี้จะถูกเข้ารหัสหรือใช้อักขระ ASCII (หากไม่แน่ใจ ให้ปล่อยไว้เป็น “ไม่”)."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:98
+msgid "adding a custom language"
+msgstr "การเพิ่มภาษาที่กำหนดเอง"
+
+#: src/js/setup/components/Steps/Languages.js:110
+msgid "What are the languages of your site?"
+msgstr "ภาษาของเว็บไซต์คุณมีอะไรบ้าง?"
+
+#: src/js/setup/components/Steps/Languages.js:120
+msgid "Default language"
+msgstr "ภาษาเริ่มต้น"
+
+#: src/js/setup/components/Steps/Languages.js:122
+msgid "What is the current language of your website?"
+msgstr "ภาษาปัจจุบันของเว็บไซต์คุณคืออะไร?"
+
+#: src/js/setup/components/Steps/Languages.js:133
+msgid "Translation languages"
+msgstr "ภาษาแปล"
+
+#: src/js/setup/components/Steps/Languages.js:135
+msgid "Which languages do you want to translate your site into?"
+msgstr "คุณต้องการแปลเว็บไซต์ของคุณเป็นภาษาใดบ้าง?"
+
+#: src/js/setup/components/Steps/Languages.js:149
+msgid "If you cannot find languages that you need in the list"
+msgstr "หากคุณไม่พบภาษาที่คุณต้องการในรายการ"
+
+#: src/js/setup/components/Steps/Languages.js:150
+msgid "create a custom language"
+msgstr "สร้างภาษาที่กำหนดเอง"
+
+#: src/js/translation-roles-ui/components/Managers.js:12
+msgid ""
+"You can add a dedicated person to oversee everything translation-related on "
+"your site. %sTranslation Managers%s can add new local translators or "
+"professional translation services, create and assign translation jobs, "
+"review completed translations, and change translation-related settings."
+msgstr "คุณสามารถเพิ่มบุคคลที่กำหนดให้ดูแลทุกสิ่งที่เกี่ยวข้องกับการแปลบนเว็บไซต์ของคุณได้ %sผู้จัดการการแปล%s สามารถเพิ่มนักแปลท้องถิ่นใหม่หรือบริการแปลมืออาชีพ สร้างและมอบหมายงานแปล ตรวจสอบการแปลที่เสร็จสมบูรณ์ และเปลี่ยนการตั้งค่าที่เกี่ยวข้องกับการแปลได้."
+
+#: src/js/translation-roles-ui/components/Managers.js:22
+msgid "Translation Managers"
+msgstr "ผู้จัดการการแปล"
+
+#: src/js/translation-roles-ui/components/Managers.js:25
+msgid ""
+"Note: All Administrators are automatically given Translation Manager "
+"privileges."
+msgstr "หมายเหตุ: ผู้ดูแลระบบทั้งหมดจะได้รับสิทธิ์ผู้จัดการการแปลโดยอัตโนมัติ."
+
+#: src/js/translation-roles-ui/components/Users.js:14
+msgid ""
+"%sLocal translators%s are users of your site that can log in and add, edit, "
+"and review your site's translations. Add a translator and their associated "
+"translation pairs to assign them translation jobs."
+msgstr "%sนักแปลท้องถิ่น%s คือผู้ใช้เว็บไซต์ของคุณที่สามารถเข้าสู่ระบบและเพิ่ม แก้ไข และตรวจสอบการแปลของเว็บไซต์คุณได้ เพิ่มนักแปลและคู่ภาษาแปลที่เกี่ยวข้องเพื่อมอบหมายงานแปลให้กับพวกเขา."
+
+#: src/js/translation-roles-ui/components/Users.js:23
+msgid ""
+"You can %shire an experienced translator%s to review your automatic "
+"translations for perfect quality."
+msgstr "คุณสามารถ%sจ้างนักแปลที่มีประสบการณ์%sเพื่อตรวจสอบการแปลอัตโนมัติของคุณเพื่อคุณภาพที่สมบูรณ์แบบ."
+
+#: src/js/translation-roles-ui/components/Users.js:33
+msgid "Translators"
+msgstr "นักแปล"

@@ -27,11 +27,11 @@ class WPML_Post_Edit_Screen {
 		wp_enqueue_style( 'sitepress-post-edit',
 		                  ICL_PLUGIN_URL . '/res/css/post-edit.css',
 		                  array(),
-		                  ICL_SITEPRESS_VERSION );
+		                  ICL_SITEPRESS_SCRIPT_VERSION );
 		wp_enqueue_script( 'sitepress-post-edit',
 		                   ICL_PLUGIN_URL . '/res/js/post-edit.js',
 		                   array( 'jquery-ui-dialog', 'jquery-ui-autocomplete' ),
-		                   ICL_SITEPRESS_VERSION );
+		                   ICL_SITEPRESS_SCRIPT_VERSION );
 	}
 
 	/**

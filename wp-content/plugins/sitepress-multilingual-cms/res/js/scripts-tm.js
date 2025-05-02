@@ -69,14 +69,10 @@ var WPML_TM = WPML_TM || {};
         jQuery('form[name="icl_custom_posts_sync_options"]').submit(iclSaveForm);
         jQuery('form[name="icl_cf_translation"]').submit(iclSaveForm);
         jQuery('form[name="icl_tcf_translation"]').submit(iclSaveForm);
-        jQuery('form[name="wpml-old-jobs-editor"]').submit(iclSaveForm);
 
         var icl_translation_jobs_basket = jQuery('#icl-translation-jobs-basket');
         icl_translation_jobs_basket.find('th :checkbox').change(iclTmSelectAllJobsBasket);
         icl_translation_jobs_basket.find('td :checkbox').change(iclTmUpdateJobsSelectionBasket);
-        var icl_translation_jobs = jQuery('#icl-translation-jobs');
-        icl_translation_jobs.find('td.js-check-all :checkbox').change(iclTmSelectAllJobsSelection);
-        icl_translation_jobs.find('td :checkbox').change(update_translation_job_checkboxes);
 
         jQuery('#icl_tm_jobs_dup_submit').click(function () {
             return confirm(jQuery(this).next().html());
@@ -258,11 +254,6 @@ var WPML_TM = WPML_TM || {};
             !jQuery(tableSelector).find('.js-wpml-job-row :checkbox:not(:checked)').length
         );
     }
-
-    function update_translation_job_checkboxes() {
-        updateJobCheckboxes('#icl-translation-jobs');
-        updateTMSelectAllCheckbox('#icl-translation-jobs');
-    }
     function updateJobCheckboxes(table_selector) {
         var job_parent = jQuery(table_selector);
 
@@ -280,13 +271,6 @@ var WPML_TM = WPML_TM || {};
     function iclTmUpdateJobsSelectionBasket() {
         iclTmSelectAllJobsBasket(this);
         updateJobCheckboxes('#icl-translation-jobs-basket');
-    }
-
-    function iclTmSelectAllJobsSelection() {
-        jQuery('#icl-translation-jobs').find(':checkbox').prop(
-            'checked',
-            jQuery('#icl-translation-jobs td.js-check-all :checkbox').prop('checked')
-        );
     }
 
     if (typeof String.prototype.startsWith !== 'function') {

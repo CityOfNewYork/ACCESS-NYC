@@ -81,7 +81,7 @@ abstract class ModuleWithItems implements \IWPML_Page_Builders_Module {
 			}
 		}
 
-		return [];
+		return [ null, null ];
 	}
 
 	private function get_string_name( $node_id, $type, $key, $field ) {

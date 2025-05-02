@@ -8,7 +8,7 @@
   --wp-admin-border-width-focus:2px;
   --wp-block-synced-color:#7a00df;
   --wp-block-synced-color--rgb:122, 0, 223;
-  --wp-bound-block-color:#9747ff;
+  --wp-bound-block-color:var(--wp-block-synced-color);
 }
 @media (min-resolution:192dpi){
   :root{
@@ -60,16 +60,24 @@
 .customize-widgets-header-toolbar .customize-widgets-header-toolbar__inserter-toggle.components-button.has-icon{
   border-radius:2px;
   color:#fff;
-  height:24px;
+  height:32px;
   margin:12px 0 12px auto;
-  min-width:24px;
+  min-width:32px;
   padding:0;
 }
 .customize-widgets-header-toolbar .customize-widgets-header-toolbar__inserter-toggle.components-button.has-icon:before{
   content:none;
 }
+@media not (prefers-reduced-motion){
+  .customize-widgets-header-toolbar .customize-widgets-header-toolbar__inserter-toggle.components-button.has-icon svg{
+    transition:transform .2s cubic-bezier(.165, .84, .44, 1);
+  }
+}
 .customize-widgets-header-toolbar .customize-widgets-header-toolbar__inserter-toggle.components-button.has-icon.is-pressed{
   background:#1e1e1e;
+}
+.customize-widgets-header-toolbar .customize-widgets-header-toolbar__inserter-toggle.components-button.has-icon.is-pressed svg{
+  transform:rotate(45deg);
 }
 .customize-widgets-header-toolbar .components-button.has-icon.customize-widgets-editor-history-button.redo-button{
   margin-left:-12px;
@@ -135,7 +143,6 @@
 }
 .customize-widgets-keyboard-shortcut-help-modal__shortcut-description{
   flex:1;
-  flex-basis:auto;
   margin:0;
 }
 .customize-widgets-keyboard-shortcut-help-modal__shortcut-key-combination{
@@ -154,6 +161,10 @@
 }
 .customize-widgets-keyboard-shortcut-help-modal__shortcut-key:last-child{
   margin:0 0 0 .2rem;
+}
+
+.components-popover.more-menu-dropdown__content{
+  z-index:99998;
 }
 
 .customize-control-sidebar_block_editor .block-editor-block-list__block-popover{

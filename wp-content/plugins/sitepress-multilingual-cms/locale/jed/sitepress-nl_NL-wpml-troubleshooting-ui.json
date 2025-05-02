@@ -20,6 +20,21 @@
          "Cancel in-progress automatic jobs": [
             "Annuleer lopende automatische opdrachten"
          ],
+         "Enabling WPML's Advanced Translation Editor...": [
+            "WPML's Geavanceerde Vertaaleditor inschakelen..."
+         ],
+         "Force-enable WPML's Advanced Translation Editor": [
+            "WPML's Geavanceerde Vertaaleditor geforceerd inschakelen"
+         ],
+         "If you're running this website from two or more domains on the same installation, this action will allow both to use the Advanced Translation Editor. Don't use this if you've moved or copied the site to a different domain on a different server.": [
+            "Als u deze website vanaf twee of meer domeinen op dezelfde installatie uitvoert, zal deze actie beide in staat stellen de Geavanceerde Vertaaleditor te gebruiken. Gebruik dit niet als u de site naar een ander domein op een andere server hebt verplaatst of gekopieerd."
+         ],
+         "An error occurred while enabling WPML on both domains. Please try again.": [
+            "Er is een fout opgetreden bij het inschakelen van WPML op beide domeinen. Probeer het opnieuw."
+         ],
+         "You can now use the Advanced Translation Editor from this site, as well as the other site(s) running from a different domain on the same installation.": [
+            "U kunt nu de Geavanceerde Vertaaleditor gebruiken vanaf deze site, evenals de andere site(s) die draaien op een ander domein op dezelfde installatie."
+         ],
          "Domain name has been updated": [
             "Domeinnaam is bijgewerkt"
          ],

@@ -1,0 +1,150 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:13
+msgid "What should happen with your automatically translated content?"
+msgstr "Τι πρέπει να γίνει με το αυτόματα μεταφρασμένο περιεχόμενό σας;?"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:30
+msgid "Wait for review"
+msgstr "Αναμονή για έλεγχο"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:31
+msgid "You check and approve translations before publishing."
+msgstr "Ελέγχετε και εγκρίνετε τις μεταφράσεις πριν τη δημοσίευση."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:32
+msgid "Your translators check and approve translations before publishing."
+msgstr "Οι μεταφραστές σας ελέγχουν και εγκρίνουν τις μεταφράσεις πριν τη δημοσίευση."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:36
+msgid "Publish and mark for review"
+msgstr "Δημοσίευση και επισήμανση για έλεγχο"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:37
+msgid ""
+"WPML publishes translations immediately but flags them for you to check at "
+"your convenience."
+msgstr "Το WPML δημοσιεύει τις μεταφράσεις αμέσως αλλά τις επισημαίνει για να τις ελέγξετε όταν σας βολεύει."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:38
+msgid ""
+"WPML publishes translations immediately but flags them for your translators "
+"to check at their convenience."
+msgstr "Το WPML δημοσιεύει τις μεταφράσεις αμέσως αλλά τις επισημαίνει για να τις ελέγξουν οι μεταφραστές σας όταν τους βολεύει."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:42
+msgid "Publish without review"
+msgstr "Δημοσίευση χωρίς έλεγχο"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:44
+msgid ""
+"The system publishes translations straight away, skipping the review "
+"process."
+msgstr "Το σύστημα δημοσιεύει τις μεταφράσεις αμέσως, παραλείποντας τη διαδικασία ελέγχου."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:22
+msgid "Automatic translation"
+msgstr "Αυτόματη μετάφραση"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:28
+msgid "What should happen with your automatically translated content"
+msgstr "Τι πρέπει να γίνει με το αυτόματα μεταφρασμένο περιεχόμενό σας"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:54
+msgid "Save settings"
+msgstr "Αποθήκευση ρυθμίσεων"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:13
+msgid "Translate drafts as I save them (consumes a bit more translation credits)."
+msgstr "Μεταφράστε τα προσχέδια καθώς τα αποθηκεύω (καταναλώνει λίγο περισσότερες μονάδες μετάφρασης)."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:26
+msgid "Do you want to translate drafts automatically?"
+msgstr "Θέλετε να μεταφράζετε αυτόματα τα προσχέδια;?"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:42
+msgid ""
+"This feature is only available when you enable \"Translate Everything "
+"Automatically\" from the %sTranslation Dashboard%s."
+msgstr "Αυτή η λειτουργία είναι διαθέσιμη μόνο όταν ενεργοποιείτε την “Αυτόματη Μετάφραση Όλων” από τον %sΠίνακα Ελέγχου Μεταφράσεων%s."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:9
+msgid "Don't translate drafts. Only translate when I publish content."
+msgstr "Μην μεταφράζετε προσχέδια. Μετάφραση μόνο όταν δημοσιεύω περιεχόμενο."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:116
+msgid "%d credits/word"
+msgstr "%d μονάδες/λέξη"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:15
+msgid "Informal"
+msgstr "Ανεπίσημο"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:16
+msgid "Automatic"
+msgstr "Αυτόματο"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:17
+msgid "Formal"
+msgstr "Επίσημο"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:45
+msgid "Which translation engines do you want to use?"
+msgstr "Ποιες μηχανές μετάφρασης θέλετε να χρησιμοποιήσετε;?"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:46
+msgid ""
+"Automatic translation engines differ in translation style and supported "
+"language pairs.\n"
+"If your preferred translation engine does not support a language pair that "
+"you want to use, we fall back to your next preferred engine that does "
+"support it.\n"
+msgstr "Οι αυτόματες μηχανές μετάφρασης διαφέρουν στο στυλ μετάφρασης και τα υποστηριζόμενα ζεύγη γλωσσών.
+Αν η προτιμώμενη μηχανή μετάφρασής σας δεν υποστηρίζει ένα ζεύγος γλωσσών που θέλετε να χρησιμοποιήσετε, επιστρέφουμε στην επόμενη προτιμώμενη μηχανή που το υποστηρίζει.\n"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:48
+msgid "Drag & drop to sort from the most to the least preferred engine."
+msgstr "Σύρετε και αποθέστε για να ταξινομήσετε από την πιο προτιμώμενη στη λιγότερο προτιμώμενη μηχανή."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:51
+msgid "Choose the tone of your automatic translations."
+msgstr "Επιλέξτε τον τόνο των αυτόματων μεταφράσεών σας."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:57
+msgid "Read more"
+msgstr "Διαβάστε περισσότερα"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:73
+msgid "Learn more"
+msgstr "Μάθετε περισσότερα"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:92
+msgid "On"
+msgstr "Ενεργό"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:93
+msgid "Off"
+msgstr "Ανενεργό"
+
+#: src/js/translation-method/store.js:120
+msgid "Could not load translation engines"
+msgstr "Δεν ήταν δυνατή η φόρτωση των μηχανών μετάφρασης"
+
+#: src/js/translation-method/store.js:140
+msgid "Could not update engine"
+msgstr "Δεν ήταν δυνατή η ενημέρωση της μηχανής"
+
+#: src/js/translation-method/store.js:168
+msgid "Could not save review mode"
+msgstr "Δεν ήταν δυνατή η αποθήκευση της λειτουργίας ελέγχου"
+
+#: src/js/translation-method/store.js:196
+msgid "Could not save translate everything drafts"
+msgstr "Δεν ήταν δυνατή η αποθήκευση της μετάφρασης όλων των προσχεδίων"
+
+#: src/js/translation-method/store.js:97
+msgid "Settings saved successfully"
+msgstr "Οι ρυθμίσεις αποθηκεύτηκαν επιτυχώς"

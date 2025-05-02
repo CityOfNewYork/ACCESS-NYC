@@ -82,7 +82,7 @@ class WPML_Config_Update_Integrator {
 
 		if ( $this->get_worker()
 				  ->run() ) {
-			echo date( 'F j, Y H:i a', time() );
+			echo esc_html( date_i18n( __( 'F j, Y', 'sitepress' ), get_option( 'wpml_config_index_updated' ) ) . ' ' . date_i18n( __( 'g:i a T', 'sitepress' ), get_option( 'wpml_config_index_updated' ) ) );
 		}
 
 		die;

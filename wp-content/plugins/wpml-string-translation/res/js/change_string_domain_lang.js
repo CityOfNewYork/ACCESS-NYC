@@ -46,12 +46,21 @@ WPML_String_Translation.ChangeDomainLanguage = function () {
 				closeOnEscape: true,
 				buttons:       [
 					{
+						class: 'wpml-button base-btn wpml-button--outlined wpml-st-cancel-button',
+						text: 'Cancel',
+						click: function() {
+							jQuery( this ).dialog( 'close' );
+						}
+					},
+					{
 						id:    'wpml-change-domain-language-dialog-apply-button',
+						class: 'wpml-button base-btn',
 						text:  privateData.change_lang_dialog.data('button-text'),
 						click: applyChanges
 					}
 				],
 				close:         function () {
+					jQuery('body').removeClass('wpml-string-translation-select2-modal-ontop');
 					var languageSelector = jQuery('.js-simple-lang-selector-flags');
 					if (languageSelector) {
 						languageSelector.wpml_select2("close");
@@ -66,8 +75,17 @@ WPML_String_Translation.ChangeDomainLanguage = function () {
 
 	};
 
-	var showDialog = function () {
+	var showDialog = function ( event ) {
+		event.preventDefault();
 		privateData.change_lang_dialog.dialog('open');
+		privateData.change_lang_dialog.closest('.ui-dialog').addClass('wpml-st-modal-form').addClass('wpml-st-modal-form-translation-icon').addClass('wpml-st-modal-form-big-vertical-controls-spacer');
+
+		// We need to set title as block element to put inside block element with icon on new line, so should replace span with div.
+		var titleEl = privateData.change_lang_dialog.closest('.ui-dialog').find('.ui-dialog-title')[0];
+		titleEl.outerHTML = titleEl.outerHTML.replace(/<span/g, '<div').replace(/<\/span/g, '</div');
+
+		privateData.spinner.css('display', 'none');
+		jQuery('body').addClass('wpml-string-translation-select2-modal-ontop');
 	};
 
 	var showSummary = function () {
@@ -103,7 +121,7 @@ WPML_String_Translation.ChangeDomainLanguage = function () {
 				tr += '<tr>';
 			}
 			tr += '<td>';
-			tr += '<input class="js-lang" type="checkbox" value="' + data[i].language + '" />';
+			tr += '<input class="wpml-checkbox-native js-lang" type="checkbox" value="' + data[i].language + '" />';
 			tr += '</td>';
 			tr += '<td>';
 			tr += data[i].display_name;
@@ -130,7 +148,7 @@ WPML_String_Translation.ChangeDomainLanguage = function () {
 		var data;
 		var languages;
 		privateData.apply_button.prop('disabled', true);
-		privateData.spinner.addClass( 'is-active' );
+		privateData.spinner.css('display', 'inline-block').addClass( 'is-active' );
 
 		languages = [];
 		privateData.summary_div.find('.js-lang:checked').each(function () {
@@ -157,7 +175,7 @@ WPML_String_Translation.ChangeDomainLanguage = function () {
 						window.location.reload(true);
 					}
 					if (response.error) {
-						privateData.spinner.removeClass( 'is-active' );
+						privateData.spinner.removeClass( 'is-active' ).css('display', 'none');
 						alert(response.error);
 						privateData.apply_button.prop('disabled', false);
 					}

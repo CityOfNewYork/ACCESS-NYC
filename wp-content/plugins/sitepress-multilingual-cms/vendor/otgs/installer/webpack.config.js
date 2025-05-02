@@ -103,11 +103,26 @@ const domPurify = (env) => {
 	};
 };
 
+const notification = (env) => {
+	const isProduction = env === 'production';
+
+	return {
+		entry: ['whatwg-fetch', './src/js/notification/app.js'],
+		output: {
+			path: path.join(__dirname,  'dist'),
+			filename: path.join('js', 'notification', 'app.js'),
+		},
+		module: webPackModule(!isProduction),
+		devtool: isProduction ? '' : 'inline-source-map'
+	};
+};
+
 
 module.exports = [
 	componentSettings,
 	installerSupport,
 	expiredNotice,
+	notification,
 	domPurify
 ];
 

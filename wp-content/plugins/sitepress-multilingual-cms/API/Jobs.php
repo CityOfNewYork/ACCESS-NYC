@@ -27,7 +27,6 @@ use function WPML\FP\pipe;
  *
  * @method static callable|null|\stdClass getPostJob( ...$postId, ...$postType, ...$language ) : Curried:: int->string->string->null|\stdClass
  * @method static callable|null|\stdClass getTridJob( ...$trid, ...$language ) : Curried:: int->string->null|\stdClass
- * @method static callable|false|\stdClass get( ...$jobId ) : Curried:: int->false|\stdClass
  * @method static callable|void setNotTranslatedStatus( ...$jobId )  : Curried:: int->int
  * @method static callable|void setTranslationService( ...$jobId, $translationService ) : Curried:: int->int|string->int
  * @method static callable|void clearReviewStatus( ...$jobId ) : Curried:: int->int->int
@@ -408,6 +407,27 @@ class Jobs {
 		);
 
 		return $jobId;
+	}
+
+	/**
+	 * Returns object of the first found previous translation job if exists.
+	 *
+	 * @param $jobId
+	 *
+	 * @return object|null
+	 */
+	public static function getPreviousJob( $jobId ) {
+		global $wpdb;
+
+		$sql = "
+			SELECT * FROM {$wpdb->prefix}icl_translate_job job
+			WHERE job.job_id < %d AND job.rid = (
+				SELECT rid FROM {$wpdb->prefix}icl_translate_job WHERE job_id = %d
+			)			
+			ORDER BY job.job_id DESC
+		";
+
+		return $wpdb->get_row( $wpdb->prepare( $sql, $jobId, $jobId ) );
 	}
 }
 

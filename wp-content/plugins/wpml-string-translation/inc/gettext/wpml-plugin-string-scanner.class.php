@@ -17,8 +17,8 @@ class WPML_Plugin_String_Scanner extends WPML_String_Scanner implements IWPML_ST
 		$this->init_text_domain( $text_domain );
 		$this->scan_plugin_files();
 		$this->current_type = 'plugin';
-		$this->set_stats( 'plugin_localization_domains', $plugin_file );
-		$this->scan_response();
+		$stats = $this->set_stats( 'plugin_localization_domains', $plugin_file );
+		$this->scan_response( $stats );
 	}
 
 	private function scan_plugin_files( $dir_or_file = false, $recursion = 0 ) {

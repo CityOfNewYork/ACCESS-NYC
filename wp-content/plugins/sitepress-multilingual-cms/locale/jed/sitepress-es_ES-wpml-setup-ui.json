@@ -3,20 +3,19 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "lang": "es_ES"
+            "domain": "messages"
          },
          "From:": [
-            "Del:"
+            "De:"
          ],
          "--Choose language--": [
-            "--Seleccionar idioma--"
+            "--Elegir idioma--"
          ],
          "to:": [
-            "al:"
+            "a:"
          ],
          "Set language pair(s) for Translator %s:": [
-            "Establecer los pares de idiomas para el traductor %s:"
+            "Establecer par(es) de idiomas para el Traductor %s:"
          ],
          "+ Add more language pairs for this translator": [
             "+ Agregar más pares de idiomas para este traductor"
@@ -31,16 +30,16 @@
             "Rol"
          ],
          "(required)": [
-            " (requerido)"
+            "(requerido)"
          ],
          "Make sure that you have provided a correct email address e.g. name@domain.com": [
-            "Asegúrese de haber proporcionado la dirección de correo electrónico correcta, por ej., nombre@dominio.com"
+            "Asegúrate de haber proporcionado una dirección de correo electrónico correcta, por ejemplo, name@domain.com"
          ],
          "This field is required": [
             "Este campo es obligatorio"
          ],
          "A translator can be any WordPress role.": [
-            "Cualquier rol de WordPress puede ser traductor."
+            "Un traductor puede tener cualquier rol de WordPress."
          ],
          "Username": [
             "Nombre de usuario"
@@ -51,18 +50,6 @@
          "Search": [
             "Buscar"
          ],
-         "What should happen with your automatically translated content?": [
-            "¿Qué debe ocurrir con el contenido traducido de forma automática?"
-         ],
-         "Let me review it before it gets published": [
-            "Permitirme revisarlo antes de que se publique"
-         ],
-         "Publish right away but mark as not reviewed so I can take a look later": [
-            "Publicar de inmediato pero marcar como no revisado para que yo pueda darle una mirada más tarde"
-         ],
-         "Publish right away without reviewing": [
-            "Publicar de inmediato sin revisar"
-         ],
          "Who will translate?": [
             "¿Quién traducirá?"
          ],
@@ -70,79 +57,31 @@
             "Solo yo"
          ],
          "You will be the sole translator for this site.": [
-            "Será el único traductor para este sitio web."
+            "Serás el único traductor para este sitio."
          ],
          "Users of this site": [
             "Usuarios de este sitio"
          ],
          "You will choose or create new users of this WordPress site as the translators. You can also choose yourself. This allows you to set up a team of translators working in different language pairs.": [
-            "Usted seleccionará o creará nuevos usuarios de este sitio de WordPress como traductores. También puede seleccionarse a usted mismo. Esto le permite armar un equipo de traductores para trabajar con distintos pares de idiomas."
+            "Elegirás o crearás nuevos usuarios de este sitio WordPress como traductores. También puedes elegirte a ti mismo. Esto te permite configurar un equipo de traductores trabajando en diferentes pares de idiomas."
          ],
          "Translation Service: %s": [
-            "Servicio de traducción: %s"
+            "Servicio de Traducción: %s"
          ],
          "A Professional Translation Service": [
-            "Un servicio de traducción profesional"
+            "Un Servicio de Traducción Profesional"
          ],
          "You have preselected %s to translate your content. Finish setting it up by entering the API token they provided to you.": [
-            "Ha preseleccionado a %s para traducir su contenido. Finalice la configuración ingresando el token API que se le proporcionó."
+            "Has preseleccionado %s para traducir tu contenido. Termina de configurarlo introduciendo el token API que te proporcionaron."
          ],
          "WPML offers tight integration with over 70 translation services. You will choose the translation service that you prefer and enjoy a streamlined process for sending jobs and receiving completed translations.": [
-            "WPML ofrece una estrecha integración con más de 70 servicios de traducción. Usted seleccionará el servicio de traducción que prefiera y disfrutará de un proceso agilizado y eficiente para enviar trabajos y recibir las traducciones listas."
+            "WPML ofrece una integración estrecha con más de 70 servicios de traducción. Elegirás el servicio de traducción que prefieras y disfrutarás de un proceso simplificado para enviar trabajos y recibir traducciones completadas."
          ],
          "I want to set a \"Translation Manager\" who will choose the translators for this site": [
-            "Quiero establecer un \"Administrador de traducción\" que elija los traductores para este sitio"
+            "Quiero establecer un “Gerente de Traducción” que elegirá los traductores para este sitio"
          ],
          "You will choose a user of this site and delegate the setup of translators to him/her. Choose this option when you are building a website for a client, who will set up translator users or choose a translation service.": [
-            "Usted seleccionará un usuario de este sitio web y delegará la configuración de los traductores a esta persona. Seleccione esta opción si está creando un sitio web para un cliente, quien establecerá los usuarios traductores o seleccionará un servicio de traducción."
-         ],
-         "Translate Everything Automatically": [
-            "Traducir todo automáticamente"
-         ],
-         "Let WPML do the translating for you": [
-            "Permita que WPML haga la traducción por usted"
-         ],
-         "Translates all your published content automatically": [
-            "Traduce todo el contenido publicado de forma automática"
-         ],
-         "Uses machine translation powered by Google, Microsoft, or DeepL": [
-            "Utiliza la traducción automática con tecnología de Google, Microsoft o DeepL"
-         ],
-         "Instantly translates new content and updates translations whenever you edit a page or post": [
-            "Traduce al instante el contenido nuevo y actualiza las traducciones si se ha editado una página o una publicación"
-         ],
-         "You can review translations before publishing or hire professional reviewers": [
-            "Antes de publicar o contratar a revisores profesionales, puede revisar las traducciones"
-         ],
-         "Affordable and fast": [
-            "Asequible y rápido"
-         ],
-         "How would you like to translate the content?": [
-            "¿Cómo desea traducir el contenido?"
-         ],
-         "Choose": [
-            "Seleccionar"
-         ],
-         "Translate What You Choose": [
-            "Elija qué quiere traducir"
-         ],
-         "You decide what to translate and who'll translate it": [
-            "Usted decide qué traducir y quién traducirá"
-         ],
-         "Translate yourself": [
-            "Traducir usted mismo"
-         ],
-         "Use automatic translation on the content you choose": [
-            "Use la traducción automática en el contenido que elija"
-         ],
-         "Work with translators that are users of your site": [
-            "Trabaje con traductores que sean usuarios de su sitio"
-         ],
-         "or": [
-            "o"
-         ],
-         "Send to professional translation services": [
-            "Enviar a servicios de traducción profesional"
+            "Elegirás un usuario de este sitio y le delegarás la configuración de los traductores. Elige esta opción cuando estés construyendo un sitio web para un cliente, quien configurará los usuarios traductores o elegirá un servicio de traducción."
          ],
          "user": [
             "usuario"
@@ -151,22 +90,22 @@
             "Editor"
          ],
          "Select an existing %s and set as Translation Manager": [
-            "Seleccione un %s existente y establézcalo como administrador de traducción"
+            "Seleccionar un %s existente y establecer como Gestor de Traducción"
          ],
          "Create a new %s and set as Translation Manager": [
-            "Cree un nuevo %s y establézcalo como administrador de traducción"
+            "Crear un nuevo %s y establecer como Gestor de Traducción"
          ],
          "Cancel": [
             "Cancelar"
          ],
          "Add Translation Manager": [
-            "Agregar administrador de traducción"
+            "Agregar Gestor de Traducción"
          ],
          "Add a Translation Manager": [
-            "Agregar un administrador de traducción"
+            "Agregar un Gestor de Traducción"
          ],
          "Set language pair(s)": [
-            "Establecer pares de idiomas"
+            "Establecer par(es) de idiomas"
          ],
          "Previous": [
             "Anterior"
@@ -175,94 +114,94 @@
             "Guardar"
          ],
          "Add a Translator": [
-            "Agregar un traductor"
+            "Agregar un Traductor"
          ],
          "Select an existing user and set as Translator": [
-            "Seleccionar un usuario existente y establecerlo como traductor"
+            "Seleccionar un usuario existente y establecer como Traductor"
          ],
          "Create a new user and set as Translator": [
-            "Crear un usuario nuevo y establecerlo como traductor"
+            "Crear un nuevo usuario y establecer como Traductor"
          ],
          "Edit language pair(s) for translator": [
-            "Editar pares de idiomas para el traductor"
+            "Editar par(es) de idiomas para el traductor"
          ],
          "Name": [
             "Nombre"
          ],
          "Language Pairs": [
-            "Pares de idiomas"
+            "Pares de Idiomas"
          ],
          "You can translate to and from all languages": [
-            "Puede traducir desde y hacia todos los idiomas "
+            "Puede traducir hacia y desde todos los idiomas"
          ],
          "%s file upload failed.": [
-            "Error al cargar el archivo %s."
+            "La carga del archivo %s falló."
          ],
          "Flag": [
-            "Marcar"
+            "Bandera"
          ],
          "Flag file": [
-            "Marcar archivo"
+            "Archivo de bandera"
          ],
          "You just added  language. Next, select it as the site's default language or a translation language.": [
-            "Acaba de agregar un idioma. Ahora, selecciónelo como el idioma predeterminado del sitio web o como un idioma de traducción."
+            "Acabas de añadir un idioma. A continuación, selecciónalo como el idioma predeterminado del sitio o como un idioma de traducción."
          ],
          "Language added": [
-            "Idioma agregado"
+            "Idioma añadido"
          ],
          "The value \"%s\" already exists": [
-            "El valor \"%s\" ya existe"
+            "El valor “%s” ya existe"
          ],
          "Add a new language": [
-            "Agregar un idioma nuevo"
+            "Añadir un nuevo idioma"
          ],
          "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
-            "Cree un idioma específico de un país seleccionando el idioma general de la siguiente lista. Luego, seleccione el país para el que debe ser localizado."
+            "Crea un idioma específico de un país eligiendo el idioma general de la lista de abajo. Luego, elige el país para el que debe ser localizado."
          ],
          "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
-            "Al seleccionar una combinación que ya existe en la base de datos, WPML puede ayudar a completar los campos necesarios. Leer más sobre <AddingACustomLanguageLink />."
+            "Al elegir una combinación que ya existe en la base de datos, WPML puede ayudar a completar los campos necesarios. Lee más sobre <AddingACustomLanguageLink />."
          ],
          "Cannot find?": [
-            "¿No lo encuentra?"
+            "¿No lo encuentras?"
          ],
          "Click here": [
-            "Haga clic aquí"
+            "Haz clic aquí"
          ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
-            "Formato incorrecto. Puede contener solo letras en minúscula y \"-\". Por ej.: \"fr\" , \"pt-br\", \"zh-hans\""
+            "El formato es incorrecto. Solo puede contener letras minúsculas y “-”. Por ejemplo: “fr”, “pt-br”, “zh-hans”"
          ],
          "Language": [
             "Idioma"
          ],
          "Location": [
-            "Lugar"
+            "Ubicación"
          ],
          "Code": [
             "Código"
          ],
          "The language will not be supported by automatic translations": [
-            "El idioma no será admitido para la traducción automática"
+            "El idioma no será compatible con traducciones automáticas"
          ],
          "Language mapping": [
-            "Asignación de idiomas"
+            "Mapeo de idioma"
          ],
          "Don't map this language": [
-            "No asignar este idioma"
+            "No mapear este idioma"
          ],
          "Default locale": [
             "Configuración regional predeterminada"
          ],
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
-            "Formato incorrecto. Puede contener solo letras en minúscula y \"_\". Por ej.: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+            "El formato es incorrecto. Solo puede contener letras minúsculas y “_”. Por ejemplo: “de”, “de_DE”, “zh_Hant_TW”"
          ],
          "hreflang": [
             "hreflang"
          ],
          "Encode url?": [
-            "¿Codificar url?"
+            "¿Codificar URL?"
          ],
          "Flags must be:": [
-            "Los marcadores deben ser:"
+            "Las banderas deben ser:"
          ],
          "NO": [
             "NO"
@@ -274,7 +213,7 @@
             " (requerido)"
          ],
          "Please fill in the field": [
-            "Complete el campo"
+            "Por favor, rellena el campo"
          ],
          "PNG, SVG, or JPG files": [
             "Archivos PNG, SVG o JPG"
@@ -286,25 +225,25 @@
             "18 x 12 píxeles"
          ],
          "Read more about ": [
-            "Más información sobre"
+            "Leer más sobre "
          ],
          "The name of your language as it will appear on your site's language switcher.": [
-            "El nombre del idioma tal como aparecerá en el selector de idiomas del sitio web."
+            "El nombre de tu idioma tal como aparecerá en el selector de idiomas de tu sitio."
          ],
          "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
-            "Un valor único que identifica el idioma de la base de datos y la URL. Una vez guardado, el código de idioma no se puede cambiar."
+            "Un valor único que identifica el idioma en la base de datos y URL. Una vez guardado, el código de idioma no se puede cambiar."
          ],
          "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
-            "Si su idioma personalizado es similar a un idioma existente, puede usar el corrector de ortografía y la traducción automática del idioma existente. Por ejemplo, si su idioma es alemán de Suiza, puede configurar el alemán como idioma para usar en la corrección de ortografía y la traducción automática. Si no asigna su idioma personalizado a un idioma existente, las funciones de corrección ortográfica y traducción automática no estarán disponibles en ese idioma."
+            "Si tu idioma personalizado es similar a un idioma existente, puedes usar el corrector ortográfico y la traducción automática del idioma existente. Por ejemplo, si tu idioma personalizado es el alemán suizo, puedes mapearlo al alemán como idioma a usar para el corrector ortográfico y la traducción automática. Si no mapeas tu idioma personalizado a un idioma existente, las funciones de corrector ortográfico y traducción automática no estarán disponibles en ese idioma."
          ],
          "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
-            "El valor que WPML verifica al cargar traducciones desde archivos MO y PO. La configuración regional está incluida en el nombre de los archivos de la carpeta /wp-content/languages/ de la configuración de su WordPress."
+            "El valor que WPML verifica al cargar traducciones de archivos MO y PO. La configuración regional predeterminada está incluida en los nombres de archivo en tu carpeta  /wp-content/languages/ en tu instalación de WordPress."
          ],
          "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
-            "Google usa el atributo hreflang para dirigir a los usuarios a los sitios del idioma y lugar de relevancia. Por ejemplo:"
+            "Google utiliza el atributo hreflang para dirigir a los usuarios a sitios en su idioma y ubicación relevantes. Ejemplos:"
          ],
          "All English-speaking users: en": [
-            "Todos los usuario anglohablantes: en"
+            "Todos los usuarios de habla inglesa: en"
          ],
          "English for UK users: en-gb": [
             "Inglés para usuarios del Reino Unido: en-gb"
@@ -313,61 +252,85 @@
             "Inglés para usuarios de EE. UU.: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
-            "Determina si las URL de este idioma se codifican o usan caracteres ASCII (si no está seguro, déjelo en \"No\")."
+            "Determina si las URLs en este idioma están codificadas o utilizan caracteres ASCII (si no está seguro, déjelo como “No”)."
          ],
          "adding a custom language": [
-            "agregar un idioma personalizado"
+            "añadir un idioma personalizado"
          ],
          "Learn more about required server settings to use a different domain per language": [
-            "Más información sobre la configuración de servidor requerida para usar un dominio distinto por idioma"
+            "Aprenda más sobre la configuración de servidor requerida para usar un dominio diferente por idioma"
          ],
          "Language name added as a parameter": [
-            "Nombre del idioma agregado como parámetro"
+            "Nombre del idioma añadido como parámetro"
          ],
          "I will set up the domains for my secondary languages later.": [
-            "Configuraré los dominios para mi segundo idioma más tarde."
+            "Configuraré los dominios para mis idiomas secundarios más tarde."
          ],
          "The domain you have entered is invalid.": [
-            "El dominio ingresado no es válido."
+            "El dominio que ha ingresado no es válido."
          ],
          "The domain you have entered must be unique.": [
-            "El dominio ingresado debe ser único."
+            "El dominio que ha ingresado debe ser único."
          ],
          "Please Note: Your site won't work in your secondary languages until this is successfully set up or you switch to a different URL option.": [
-            "Aviso: el sitio web no funcionará con su idioma secundario hasta que este se configure correctamente o que se cambie a una opción de URL distinta."
+            "Tenga en cuenta: Su sitio no funcionará en sus idiomas secundarios hasta que esto se configure correctamente o cambie a una opción de URL diferente."
          ],
          "Learn more about Language URL Options": [
-            "Más información sobre las opciones de URL de idioma"
+            "Aprenda más sobre las Opciones de URL de Idioma"
          ],
          "How would you like to format your site's URL?": [
-            "¿Qué formato de URL de sitio web desea?"
+            "¿Cómo le gustaría formatear la URL de su sitio?"
          ],
          "Different languages in directories": [
-            "Distintos idiomas en los directorios"
+            "Diferentes idiomas en directorios"
          ],
          "The URL rewrite is not configured in your server.": [
             "La reescritura de URL no está configurada en su servidor."
          ],
          "Learn more about required server settings to display languages in directories": [
-            "Más información sobre la configuración de servidor requerida para mostrar los idiomas en los directorios"
+            "Aprenda más sobre la configuración de servidor requerida para mostrar idiomas en directorios"
          ],
          "I will fix my server settings to display languages in directories later.": [
-            "Ajustaré la configuración de servidor para mostrar los idiomas en los directorios más tarde."
+            "Arreglaré la configuración de mi servidor para mostrar idiomas en directorios más tarde."
          ],
          "Your server settings do not allow for languages in directories. ": [
-            "La configuración de servidor actual no admite idiomas en los directorios."
+            "La configuración de su servidor no permite idiomas en directorios."
          ],
          "Learn more about the required server settings.": [
-            "Más información sobre la configuración de servidor requerida."
+            "Aprenda más sobre la configuración de servidor requerida."
          ],
          "A different domain per language": [
-            "Un dominio distinto para cada idioma"
+            "Un dominio diferente por idioma"
+         ],
+         "Translate your pages": [
+            "Traduce tus páginas"
+         ],
+         "Translate your posts": [
+            "Traduce tus entradas"
+         ],
+         "Next, you need to set-up your multilingual store.": [
+            "A continuación, necesitas configurar tu tienda multilingüe."
+         ],
+         "Continue to WooCommerce Multilingual Setup": [
+            "Continuar con la configuración de WooCommerce Multilingüe"
+         ],
+         "Start translating your site by visiting the <s>Translation Dashboard</s>.": [
+            "Comienza a traducir tu sitio visitando el <s>Panel de Traducción</s>."
+         ],
+         "Go to Translation Dashboard": [
+            "Ir al Panel de Traducción"
+         ],
+         "Need help? <a>Using WPML's Plus Icons to Translate Content</a>": [
+            "¿Necesitas ayuda? <a>Usar los iconos Plus de WPML para traducir contenido</a>"
+         ],
+         "To start translating, look for the \"plus\" icons that WPML introduces next to content lists and editors. Click the \"plus\" icon under each language to translate.": [
+            "Para comenzar a traducir, busca los iconos de “más” que WPML introduce junto a las listas de contenido y editores. Haz clic en el icono de “más” debajo de cada idioma para traducir."
          ],
          "support forum": [
-            "foro de ayuda"
+            "foro de soporte"
          ],
          "There was a critical error setting up WPML. Please contact our <LinkToSupportForum /> to resolve it.": [
-            "Ocurrió un error grave al configurar WPML. Póngase en contacto con nuestro <LinkToSupportForum /> para resolverlo."
+            "Hubo un error crítico al configurar WPML. Por favor, contacte nuestro <LinkToSupportForum /> para resolverlo."
          ],
          "Hide error message": [
             "Ocultar mensaje de error"
@@ -375,168 +338,53 @@
          "Show error message": [
             "Mostrar mensaje de error"
          ],
-         "WPML is ready to translate your site": [
-            "WPML está listo para traducir su sitio web"
+         "Congratulations, your website is now multilingual with WPML!": [
+            "¡Felicidades, tu sitio web ahora es multilingüe con WPML!"
          ],
-         "WPML has started translating your site": [
-            "WPML ha empezado a traducir su sitio web"
+         "For language switcher customization and more language options, navigate to <a>WPML → Languages</a>.": [
+            "Para personalizar el selector de idiomas y más opciones de idioma, navega a <a>WPML → Idiomas</a>."
          ],
-         "When you're done editing content, go to <s>WPML → Translation Management</s> to start translations.": [
-            "Cuando termine de editar el contenido, vaya a <s>WPML → Administración de traducción</s> para empezar las traducciones."
-         ],
-         "View the status of the translations in <s>WPML → Translation Management</s>.": [
-            "Vea el estado de la traducción en <s>WPML → Administración de traducción</s>."
-         ],
-         "Go to <s>WPML → Translation Management</s> to choose what to translate.": [
-            "Vaya a <s>WPML → Administración de traducción</s> para seleccionar qué traducir."
-         ],
-         "You are ready to start translating": [
-            "Está listo para empezar a traducir"
-         ],
-         "Right now, your site has a nice language switcher in its footer. To enable other styles of language switchers, go to <s>WPML → Languages</s>.": [
-            "En este momento, su sitio web cuenta con un lindo selector de idioma en el pie de página. Para habilitar otros estilos de selector de idioma, vaya a <s>WPML → Idiomas</s>."
-         ],
-         "Language switcher customization": [
-            "Personalización del selector de idioma"
-         ],
-         "Your current setup will use a lot of translation credits": [
-            "Su configuración actual utilizará muchos créditos para traducción"
-         ],
-         "You decided to <b>Translate Everything Automatically</b> on a <span class=\"warning\">development site</span>": [
-            "Usted decidió <b>traducir todo automáticamente</b> en un <span class=\"warning\">sitio de desarrollo</span>"
-         ],
-         "You decided to <b>Translate Everything Automatically:</b>": [
-            "Decidió <b>Traducir todo automáticamente:</b>"
-         ],
-         "10,000 credits assigned by default to development sites": [
-            "10.000 créditos asignados de forma predeterminada a los sitios de desarrollo"
-         ],
-         "posts, pages...": [
-            "entradas, páginas..."
-         ],
-         "translated to": [
-            "traducido al"
-         ],
-         "<b>%1$d</b> language": [
-            "<b>%1$d</b> idioma",
-            "<b>%1$d</b> idiomas"
-         ],
-         "will cost approximately": [
-            "aproximadamente, costará"
-         ],
-         "credits": [
-            "créditos"
-         ],
-         "Loading details...": [
-            "Cargando detalles..."
-         ],
-         "Hide details": [
-            "Ocultar detalles"
-         ],
-         "Show details": [
-            "Mostrar detalles"
-         ],
-         "Your current setup will use approximately <b>%s</b> credits": [
-            "Su configuración actual consumirá <b>%s</b> créditos aproximadamente"
-         ],
-         "What do you want to do?": [
-            "¿Qué desea hacer?"
-         ],
-         "Since this is a development site, you may not want to spend credits on dummy content.": [
-            "Dado que este es un sitio de desarrollo, es posible que no desee gastar créditos en contenido ficticio."
-         ],
-         "Continue with this setup": [
-            "Continuar con esta configuración"
-         ],
-         "WPML will automatically translate your site’s content. When your credits run out, you can purchase more or sign up for pay-as-you-go to continue using automatic translation.": [
-            "WPML traducirá automáticamente el contenido de su sitio. Cuando se agoten los créditos, puede comprar más o suscribirse al pago por uso para seguir usando la traducción automática."
-         ],
-         "Make changes": [
-            "Hacer cambios"
-         ],
-         "You can use fewer credits by adjusting some of the settings you selected during setup.": [
-            "Puede usar menos créditos modificando algunas opciones que seleccionó durante la configuración."
-         ],
-         "Reduce the number of translation languages": [
-            "Reduzca la cantidad de idiomas de traducción"
-         ],
-         "The more languages you have on your site, the more credits it costs to translate. <b>You can always add more languages later.</b>": [
-            "Cuantos más idiomas tenga en su sitio, más créditos le costará traducir. <b>Podrá agregar más idiomas si lo desea más adelante.</b>"
-         ],
-         "Change site languages": [
-            "Cambiar los idiomas del sitio"
-         ],
-         "Change your translation mode": [
-            "Cambie el modo de traducción"
-         ],
-         "<b>Translate What You Choose</b> gives you more control over what gets translated, and you can still use automatic translation.": [
-            "<b>Traduzca lo que elija</b> le da más control sobre lo que se traduce y, además, puede usar la traducción automática."
-         ],
-         "Change translation mode": [
-            "Cambiar el modo de traduccón"
-         ],
-         "I'm OK with using this many translation credits,": [
-            "Me sirve usar esta cantidad de créditos para traducción,"
-         ],
-         "let's proceed and translate the whole site automatically.": [
-            "procedamos y traduzcamos todo el sitio automáticamente."
+         "What are the languages of your site?": [
+            "¿Cuáles son los idiomas de tu sitio?"
          ],
          "Default language": [
             "Idioma predeterminado"
          ],
          "What is the current language of your website?": [
-            "¿Cuál es el idioma actual de su sitio web?"
+            "¿Cuál es el idioma actual de tu sitio web?"
          ],
          "Translation languages": [
             "Idiomas de traducción"
          ],
          "Which languages do you want to translate your site into?": [
-            "¿A qué idiomas desea traducir su sitio web?"
+            "¿A qué idiomas quieres traducir tu sitio?"
          ],
          "If you cannot find languages that you need in the list": [
-            "Si no encuentra los idiomas que necesita en la lista"
+            "Si no puedes encontrar los idiomas que necesitas en la lista"
          ],
          "create a custom language": [
-            "cree un idioma personalizado"
-         ],
-         "What are the languages of your site?": [
-            "¿Cuáles son los idiomas de su sitio web?"
+            "crear un idioma personalizado"
          ],
          "If you don't have a WPML.org account or a valid subscription, %1$spurchase one%2$s to get automatic updates, full support, and a 30-day money-back guarantee.": [
-            "Si no tiene una cuenta de WPML.org o una suscripción válida, %1$scompre una%2$s para recibir actualizaciones gratis, soporte total y una garantía de devolución de dinero por 30 días."
+            "Si no tiene una cuenta WPML.org o una suscripción válida, %1$sadquiera una%2$s para obtener actualizaciones automáticas, soporte completo y una garantía de devolución de dinero de 30 días."
          ],
          "Already purchased WPML?": [
             "¿Ya compró WPML?"
          ],
          "Enter your site key from your WPML account to receive automatic updates.": [
-            "Introduzca la clave de su sitio web de la cuenta de WPML para recibir actualizaciones automáticas."
+            "Ingrese la clave de su sitio desde su cuenta WPML para recibir actualizaciones automáticas."
          ],
          "Site key": [
-            "Clave de sitio web"
+            "Clave del sitio"
          ],
          "Get a key for this site": [
             "Obtener una clave para este sitio"
          ],
-         "Are you ready to start translating now?": [
-            "¿Está listo para empezar a traducir ahora?"
-         ],
-         "Yes, start translating!": [
-            "¡Sí, empezar a traducir!"
-         ],
-         "WPML will translate your site for you using your automatic translation credits.": [
-            "WPML traducirá su sitio por usted usando sus créditos para traducción automática."
-         ],
-         "No, my content isn't finalized yet": [
-            "No, aún no es el contenido final"
-         ],
-         "When you're ready, start automatic translation from the Translation Management Dashboard.": [
-            "Cuando esté listo, inicie la traducción automática desde el Panel de administración de traducción."
-         ],
          "Improve your site’s translations using helpful plugins": [
-            "Mejore las traducciones de su sitio web usando plugines útiles"
+            "Mejore las traducciones de su sitio utilizando plugins útiles"
          ],
          "Based on the themes and other plugins running on your site, we recommend that you enable the following WPML components. These are included with your WPML purchase and allow you to translate strings, media, admin texts, and more.": [
-            "Según los temas y demás plugines activos en su sitio web, le recomendamos que active los siguientes componentes de WPML. Estos vienen incluidos en su compra de WPML y le permiten traducir cadenas, multimedia, textos de la administración y más."
+            "Basándonos en los temas y otros plugins que se ejecutan en su sitio, le recomendamos que active los siguientes componentes de WPML. Estos están incluidos con su compra de WPML y le permiten traducir cadenas de texto, medios, textos de administración y más."
          ],
          "Error in activating plugin.": [
             "Error al activar el plugin."
@@ -545,28 +393,19 @@
             "Error al instalar el plugin."
          ],
          "Yes, send theme and plugins information, in order to get faster support and compatibility alerts": [
-            "Sí, enviar la información del tema y los plugines para obtener ayuda más rápido y alertas de compatibilidad"
+            "Sí, enviar información de temas y plugins para obtener soporte más rápido y alertas de compatibilidad"
          ],
          "No, don't send this information and skip compatibility alerts": [
             "No, no enviar esta información y omitir las alertas de compatibilidad"
          ],
          "Do you want to get better and faster support?": [
-            "¿Desea obtener mejor ayuda y más rápido?"
+            "¿Desea obtener un soporte mejor y más rápido?"
          ],
          "The WPML plugin can send a list of active plugins and theme used in your site to wpml.org. This allows our support team to help you much faster and to contact you in advance about potential compatibility problems and their solutions.": [
-            "El plugin de WPML puede enviar a wpml.org una lista de los plugines y temas activos utilizados en su sitio. Esto le permite a nuestro equipo de soporte ayudarlo con mayor celeridad y ponerse en contacto con usted de antemano por motivos de problemas de compatibilidad potenciales y sus soluciones."
+            "El plugin WPML puede enviar una lista de plugins activos y el tema utilizado en su sitio a wpml.org. Esto permite a nuestro equipo de soporte ayudarle mucho más rápido y contactarle por adelantado sobre posibles problemas de compatibilidad y sus soluciones."
          ],
          "Privacy and data usage policy": [
-            "Privacidad y política de uso de datos"
-         ],
-         "<LinkToTheDifferentWaysYouCanTranslateYourSite/> for help with choosing the best mode for your site.": [
-            "<LinkToTheDifferentWaysYouCanTranslateYourSite/> para obtener ayuda para seleccionar el mejor modo para su sitio web."
-         ],
-         "Can't decide? Let us help!": [
-            "¿No se decide? ¡Permítanos ayudarle!"
-         ],
-         "Contact our support team": [
-            "Póngase en contacto con nuestro equipo de asistencia"
+            "Política de privacidad y uso de datos"
          ],
          "Error: %s": [
             "Error: %s"
@@ -575,49 +414,40 @@
             "Autenticar"
          ],
          "To send content and receive translations from <service_name />, enter the credentials you received from them.": [
-            "Para enviar contenido y recibir las traducciones de <service_name />, ingrese las credenciales que ellos le proporcionaron."
+            "Para enviar contenido y recibir traducciones de <service_name />, ingrese las credenciales que recibió de ellos."
          ],
          "Need credentials? Contact <link_to_service />": [
-            "¿Necesita las credenciales? Comuníquese con <link_to_service />"
+            "¿Necesita credenciales? Contacte a <link_to_service />"
          ],
          "Success! You can start sending content to %s for translation after you finish the setup wizard.": [
-            "¡Perfecto! Puede empezar a enviar contenido a %s para traducir después de finalizar con el asistente de configuración."
+            "¡Éxito! Puede comenzar a enviar contenido a %s para su traducción después de terminar el asistente de configuración."
          ],
          "The credentials are invalid. Please, try again.": [
-            "Las credenciales no son válidas. Inténtelo de nuevo."
+            "Las credenciales no son válidas. Por favor, inténtelo de nuevo."
          ],
          "Choose a Translation Service": [
-            "Seleccione un servicio de traducción"
+            "Elija un Servicio de Traducción"
          ],
          "Loading": [
             "Cargando"
          ],
          "A new language could not be added correctly": [
-            "No se pudo agregar un idioma nuevo correctamente"
-         ],
-         "Support": [
-            "Soporte"
-         ],
-         "Plugins": [
-            "Plugines"
-         ],
-         "Finished": [
-            "Finalizado"
+            "No se pudo añadir correctamente un nuevo idioma"
          ],
          "Back": [
-            "Volver"
+            "Atrás"
          ],
          "Continue": [
             "Continuar"
          ],
          "Skip": [
-            "Saltar"
+            "Omitir"
          ],
          "Install and activate": [
             "Instalar y activar"
          ],
          "Finish": [
-            "Terminar"
+            "Finalizar"
          ],
          "Languages": [
             "Idiomas"
@@ -628,14 +458,23 @@
          "Register WPML": [
             "Registrar WPML"
          ],
-         "Translation Mode": [
-            "Modo de traducción"
+         "Who Will Translate": [
+            "Quién traducirá"
+         ],
+         "Support": [
+            "Soporte"
+         ],
+         "Plugins": [
+            "Plugins"
+         ],
+         "Finished": [
+            "Finalizado"
          ],
          "Settings": [
-            "Ajustes"
+            "Configuración"
          ],
          "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
-            "Actualmente, no es posible conectar un servicio de traducción cuando se ha seleccionado WPML para traducir el contenido de su sitio web de forma automática. Para usar un servicio de traducción, cambie el modo en la página <LinkToSettingsPage />."
+            "Actualmente no es posible conectar un servicio de traducción cuando WPML está configurado para traducir el contenido de su sitio automáticamente. Para usar un servicio de traducción, por favor cambie su modo de traducción en la página de <LinkToSettingsPage />."
          ],
          "Documentation": [
             "Documentación"

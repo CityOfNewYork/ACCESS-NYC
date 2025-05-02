@@ -50,20 +50,37 @@ class AutoRegisterSettings {
 		$this->localization    = $localization;
 	}
 
+	public function getIsTypeOnlyViewedByAdmin() {
+		return apply_filters( 'wpml_st_get_setting', 'isAutoregisterStringsTypeOnlyViewedByAdmin' );
+	}
+
+	public function getIsTypeViewedByAllUsers() {
+		return apply_filters( 'wpml_st_get_setting', 'isAutoregisterStringsTypeViewedByAllUsers' );
+	}
+
+	public function getIsTypeDisabled() {
+		return apply_filters( 'wpml_st_get_setting', 'isAutoregisterStringsTypeDisabled' );
+	}
+
+	public function getTypeOnlyViewedByAdmin() {
+		return apply_filters( 'wpml_st_get_setting', 'autoregisterStringsTypeOnlyViewedByAdmin' );
+	}
+
+	public function getTypeViewedByAllUsers() {
+		return apply_filters( 'wpml_st_get_setting', 'autoregisterStringsTypeViewedByAllUsers' );
+	}
+
+	public function getTypeDisabled() {
+		return apply_filters( 'wpml_st_get_setting', 'autoregisterStringsTypeDisabled' );
+	}
+
+	public function getShouldRegisterBackendStrings() {
+		return apply_filters( 'wpml_st_get_setting', 'shouldRegisterBackendStrings' );
+	}
+
 	/** @return bool */
 	public function isEnabled() {
-		$setting = $this->getSetting( self::KEY_ENABLED, [ 'enabled' => false ] );
-
-		if ( $setting['enabled'] ) {
-			$elapsed_time       = time() - $setting['time'];
-			$isStillEnabled = self::RESET_AUTOLOAD_TIMEOUT > $elapsed_time;
-			$setting['enabled'] = $isStillEnabled;
-			if ( ! $isStillEnabled ) {
-				$this->setEnabled( false );
-			}
-		}
-
-		return $setting['enabled'];
+		return $this->getIsTypeOnlyViewedByAdmin() || $this->getIsTypeViewedByAllUsers();
 	}
 
 	/**
@@ -161,6 +178,10 @@ class AutoRegisterSettings {
 	 * @return bool
 	 */
 	public function isAdminOrPackageDomain( $domain ) {
+		if ( ! is_string( $domain ) || $domain === '' ) {
+			return false;
+		}
+
 		return 0 === strpos( $domain, \WPML_Admin_Texts::DOMAIN_NAME_PREFIX )
 			   || $this->package_domains->isPackage( $domain );
 	}
@@ -212,8 +233,8 @@ class AutoRegisterSettings {
 
 	/** @return string */
 	public function getFeatureEnabledDescription() {
-		return '<span class="icon otgs-ico-warning"></span> '
-			. __( "Automatic string registration will remain active for %s. Please visit the site's front-end to allow WPML to find strings for translation.", 'wpml-string-translation' );
+		return '<span class="icon otgs-ico-info-o"></span> '
+			. __( "Automatic string registration will remain active for <span class='counter-msg'>%s</span>. Please visit the site's front-end to allow WPML to find strings for translation.", 'wpml-string-translation' );
 	}
 
 	/** @return string */

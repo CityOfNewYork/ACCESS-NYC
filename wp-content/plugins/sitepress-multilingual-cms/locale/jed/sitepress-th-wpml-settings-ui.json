@@ -1,0 +1,50 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
+            "ต้องใช้ตัวแก้ไขการแปลขั้นสูงเพื่อแปลเนื้อหาอัตโนมัติ"
+         ],
+         "Synchronize translators and translation managers with ATE": [
+            "ซิงโครไนซ์นักแปลและผู้จัดการการแปลด้วย กิน"
+         ],
+         "Please try again in a few minutes. If the problem persists, please contact %sWPML support%s.": [
+            "โปรดลองอีกครั้งในอีกไม่กี่นาที หากปัญหายังคงมีอยู่ โปรดติดต่อ%s รองรับ WPML%s -."
+         ],
+         "Save": [
+            "บันทึก"
+         ],
+         "Please confirm this translation setting": [
+            "ยืนยันการตั้งค่าการแปลนี้"
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item.": [
+            "ไซต์ของคุณถูกตั้งค่าให้แปลเนื้อหาทั้งหมดโดยอัตโนมัติ เมื่อคุณทำ<PostTypesNames /> สามารถแปลได้ WPML จะแปลโดยอัตโนมัติ%1$d รายการที่มีอยู่.",
+            "ไซต์ของคุณถูกตั้งค่าให้แปลเนื้อหาทั้งหมดโดยอัตโนมัติ เมื่อคุณทำ<PostTypesNames /> สามารถแปลได้ WPML จะแปลโดยอัตโนมัติ%1$d รายการที่มีอยู่."
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate all future content.": [
+            "ไซต์ของคุณถูกตั้งค่าให้แปลเนื้อหาทั้งหมดโดยอัตโนมัติ เมื่อคุณทำ<PostTypesNames /> สามารถแปลได้ WPML จะแปลเนื้อหาทั้งหมดในอนาคตโดยอัตโนมัติ."
+         ],
+         "Are you OK with paying for this?": [
+            "ตกลงจ่ายเงินหรือไม่?"
+         ],
+         "Cancel": [
+            "ยกเลิก"
+         ],
+         "Make translatable": [
+            "ทำให้แปลได้"
+         ],
+         "Yes, translate <b>existing</b> and <b>future</b> content automatically": [
+            "ใช่ แปล<b> ที่มีอยู่เดิม</b> และ<b> อนาคต</b> เนื้อหาโดยอัตโนมัติ"
+         ],
+         "Yes, but only translate <b>future</b> content automatically": [
+            "ใช่แต่เพียงแปล<b> อนาคต</b> เนื้อหาโดยอัตโนมัติ"
+         ],
+         "Yes, translate <b>future</b> content automatically": [
+            "ใช่ครับ แปล<b> อนาคต</b> เนื้อหาโดยอัตโนมัติ"
+         ]
+      }
+   }
+}

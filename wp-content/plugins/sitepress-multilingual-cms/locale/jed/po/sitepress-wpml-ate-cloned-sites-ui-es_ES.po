@@ -1,0 +1,292 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/ate-cloned-sites/components/CloseButton.js:15
+msgid "Close"
+msgstr "Cerrar"
+
+#: src/js/ate-cloned-sites/components/ContactSupport.js:9
+msgid ""
+"Please take a screenshot of this message and report this issue to <a>WPML "
+"support</a>."
+msgstr "Por favor, tome una captura de pantalla de este mensaje e informe de este problema al <a>soporte de WPML</a>."
+
+#: src/js/ate-cloned-sites/steps/CopyCompleted.js:22
+msgid ""
+"This copy of the site has the same content as the original site on %s, but "
+"it doesn’t have credits for automatic translation."
+msgstr "Esta copia del sitio tiene el mismo contenido que el sitio original en %s, pero no cuenta con créditos para la traducción automática."
+
+#: src/js/ate-cloned-sites/steps/CopyCompleted.js:32
+msgid ""
+"If you want to use automatic translation for this site in the future, you "
+"can either <a1>add credits to this site</a1> or <a2>share the credits from "
+"the original site</a2>."
+msgstr "Si desea utilizar la traducción automática para este sitio en el futuro, puede <a1>agregar créditos a este sitio</a1> o <a2>compartir los créditos del sitio original</a2>."
+
+#: src/js/ate-cloned-sites/steps/CopyCompleted.js:48
+msgid ""
+"There was an error checking for credits to share. Please take a screenshot "
+"of this message and report it in <a>WPML support</a>."
+msgstr "Se produjo un error al verificar los créditos para compartir. Por favor, tome una captura de pantalla de este mensaje e infórmelo en el <a>soporte de WPML</a>."
+
+#: src/js/ate-cloned-sites/steps/CopyCompleted.js:9
+#: src/js/ate-cloned-sites/steps/CopyWithCreditsCompleted.js:8
+#: src/js/ate-cloned-sites/steps/MoveCompleted.js:9
+msgid "You’re all set"
+msgstr "Todo está listo"
+
+#: src/js/ate-cloned-sites/steps/CopyCredits.js:36
+msgid ""
+"To allow the sites running on %s and %s to use the same credits for "
+"automatic translation, you need to:"
+msgstr "Para permitir que los sitios que se ejecutan en %s y %s utilicen los mismos créditos para la traducción automática, es necesario que:"
+
+#: src/js/ate-cloned-sites/steps/CopyCredits.js:47
+msgid ""
+"Follow <a>this link</a> to access the migration code (you can't get it by "
+"visiting %s manually)"
+msgstr "Siga <a>este enlace</a> para acceder al código de migración (no puede obtenerlo visitando %s manualmente)"
+
+#: src/js/ate-cloned-sites/steps/CopyCredits.js:59
+msgid "Click on <b>Copy migration code</b>"
+msgstr "Haga clic en <b>Copiar código de migración</b>"
+
+#: src/js/ate-cloned-sites/steps/CopyCredits.js:68
+msgid "Paste the migration code into the field below."
+msgstr "Pegue el código de migración en el campo a continuación."
+
+#: src/js/ate-cloned-sites/steps/CopyCredits.js:77
+msgid "Migration code"
+msgstr "Código de migración"
+
+#: src/js/ate-cloned-sites/steps/CopyCredits.js:79
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:84
+#: src/js/ate-cloned-sites/steps/MoveConfirmation.js:57
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:76
+msgid "Continue"
+msgstr "Continuar"
+
+#: src/js/ate-cloned-sites/steps/CopyCredits.js:82
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:93
+msgid "Go back"
+msgstr "Volver"
+
+#: src/js/ate-cloned-sites/steps/CopyCredits.js:9
+msgid ""
+"Let’s connect the automatic translation credits between the two copies of "
+"this site"
+msgstr "Vamos a conectar los créditos de traducción automática entre las dos copias de este sitio"
+
+#: src/js/ate-cloned-sites/steps/CopyError.js:15
+msgid ""
+"WPML was unable to copy your site's translations, translation memory, and "
+"glossary to this new URL."
+msgstr "WPML no pudo copiar las traducciones, la memoria de traducción y el glosario de su sitio a esta nueva URL."
+
+#: src/js/ate-cloned-sites/steps/CopyError.js:7
+msgid "Error with copying translation information to new URL"
+msgstr "Error al copiar la información de traducción a la nueva URL"
+
+#: src/js/ate-cloned-sites/steps/CopyWithCreditsCompleted.js:11
+msgid ""
+"Great. Now this site and its copy on %s are sharing the credits for "
+"automatic translation."
+msgstr "Excelente. Ahora este sitio y su copia en %s están compartiendo los créditos para la traducción automática."
+
+#: src/js/ate-cloned-sites/steps/CopyWithCreditsCompleted.js:29
+msgid ""
+"Credits that you add on either site will be available on both sites. If you "
+"stop using this site, you don’t need to worry about losing credits."
+msgstr "Los créditos que agregue en cualquiera de los sitios estarán disponibles en ambos. Si deja de utilizar este sitio, no tiene que preocuparse por perder créditos."
+
+#: src/js/ate-cloned-sites/steps/CopyWithCreditsError.js:15
+msgid ""
+"WPML was unable to connect your old and new URLs to share automatic "
+"translation credits."
+msgstr "WPML no pudo conectar sus URL antiguas y nuevas para compartir los créditos de traducción automática."
+
+#: src/js/ate-cloned-sites/steps/CopyWithCreditsError.js:7
+msgid "Error with sharing automatic translation credits"
+msgstr "Error al compartir los créditos de traducción automática"
+
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:12
+msgid ""
+"The site on %s has %d credits for automatic translation. Do you want to "
+"share these credits between %s and this new location (%s)?"
+msgstr "El sitio en %s tiene %d créditos para traducción automática. ¿Desea compartir estos créditos entre %s y esta nueva ubicación (%s)?"
+
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:20
+msgid ""
+"The site on %s has a pay-as-you-go subscription for automatic translation. "
+"Do you want to share these credits between %s and this new location (%s)?"
+msgstr "El sitio en %s tiene una suscripción de pago por uso para traducción automática. ¿Desea compartir estos créditos entre %s y esta nueva ubicación (%s)?"
+
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:66
+msgid "Yes (recommended)"
+msgstr "Sí (recomendado)"
+
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:68
+msgid ""
+"In the next step, you will receive instructions for how to approve the "
+"credits sharing"
+msgstr "En el siguiente paso, recibirá instrucciones sobre cómo aprobar la compartición de créditos"
+
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:71
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:61
+msgid "No"
+msgstr "No"
+
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:73
+msgid ""
+"You will need to assign credits or set up a pay-as-you-go plan for this "
+"site to use automatic translation"
+msgstr "Necesitará asignar créditos o configurar un plan de pago por uso para que este sitio utilice la traducción automática"
+
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:87
+msgid "What happens when you share credits for automatic translation between sites?"
+msgstr "¿Qué sucede cuando comparte créditos para traducción automática entre sitios?"
+
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:9
+msgid "Translation credits for this site"
+msgstr "Créditos de traducción para este sitio"
+
+#: src/js/ate-cloned-sites/steps/MoveCompleted.js:20
+msgid "You can continue translating content normally on this site."
+msgstr "Puede continuar traduciendo contenido normalmente en este sitio."
+
+#: src/js/ate-cloned-sites/steps/MoveCompleted.js:31
+msgid ""
+"Please keep in mind that there shouldn’t be a copy of this site at %s. If "
+"there still is a copy of it there, you will not be able to translate "
+"content on that site."
+msgstr "Tenga en cuenta que no debería haber una copia de este sitio en %s. Si aún hay una copia allí, no podrá traducir contenido en ese sitio."
+
+#: src/js/ate-cloned-sites/steps/MoveConfirmation.js:32
+msgid ""
+"You indicated that you’re no longer running a copy of this site at %s. This "
+"means that:"
+msgstr "Usted indicó que ya no está ejecutando una copia de este sitio en %s. Esto significa que:"
+
+#: src/js/ate-cloned-sites/steps/MoveConfirmation.js:36
+msgid "You will not be able to use automatic translation on the old site"
+msgstr "No podrá utilizar la traducción automática en el sitio antiguo"
+
+#: src/js/ate-cloned-sites/steps/MoveConfirmation.js:39
+msgid "If you access the old site, it will trigger warnings on this site"
+msgstr "Si accede al sitio antiguo, se activarán advertencias en este sitio"
+
+#: src/js/ate-cloned-sites/steps/MoveConfirmation.js:48
+msgid "I understand and am no longer running this site at %s"
+msgstr "Entiendo y ya no estoy ejecutando este sitio en %s"
+
+#: src/js/ate-cloned-sites/steps/MoveConfirmation.js:60
+msgid "Back"
+msgstr "Atrás"
+
+#: src/js/ate-cloned-sites/steps/MoveConfirmation.js:8
+msgid "Please check and confirm"
+msgstr "Por favor, verifique y confirme"
+
+#: src/js/ate-cloned-sites/steps/MoveError.js:16
+msgid "WPML was unable to update our records with your new URL."
+msgstr "WPML no pudo actualizar nuestros registros con su nueva URL."
+
+#: src/js/ate-cloned-sites/steps/MoveError.js:7
+msgid "Error with moving translation information to new URL"
+msgstr "Error al mover la información de traducción a la nueva URL"
+
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:34
+msgid "Looks like this site was previously at %s and now it’s at %s."
+msgstr "Parece que este sitio estaba anteriormente en %s y ahora está en %s."
+
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:42
+msgid "Do you still have the same site running at %s?"
+msgstr "¿Todavía tiene el mismo sitio funcionando en %s?"
+
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:54
+msgid "Yes"
+msgstr "Sí"
+
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:57
+msgid "This is only a copy - original site is still running"
+msgstr "Esta es solo una copia - el sitio original sigue en funcionamiento"
+
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:64
+msgid "I changed the address of the site to this new one"
+msgstr "He cambiado la dirección del sitio a esta nueva"
+
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:8
+msgid "WPML detected a new address for this site"
+msgstr "WPML detectó una nueva dirección para este sitio"
+
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:80
+msgid ""
+"How to manage translations when migrating from development to production "
+"and more..."
+msgstr "Cómo gestionar las traducciones al migrar del desarrollo a la producción y más..."
+
+#: src/js/ate-cloned-sites/steps/NoAdmin.js:11
+msgid ""
+"Looks like this site is a copy of a different site, or moved to a different "
+"URL. Please contact your translation manager to update Translation "
+"Management plugin configuration."
+msgstr "Parece que este sitio es una copia de un sitio diferente o se ha trasladado a una URL diferente. Por favor, contacte a su gestor de traducciones para actualizar la configuración del plugin de Gestión de Traducciones."
+
+#: src/js/ate-cloned-sites/steps/NoAdmin.js:5
+msgid "Site Moved or Copied - Action Required"
+msgstr "Sitio Trasladado o Copiado - Acción Requerida"
+
+#: src/js/ate-cloned-sites/steps/RevertMove.js:35
+msgid "You or someone else moved this site to %s. Please keep in mind that:"
+msgstr "Usted u otra persona trasladó este sitio a %s. Por favor, tenga en cuenta que:"
+
+#: src/js/ate-cloned-sites/steps/RevertMove.js:49
+msgid "Translations that you do at %s will not appear on this site."
+msgstr "Las traducciones que realice en %s no aparecerán en este sitio."
+
+#: src/js/ate-cloned-sites/steps/RevertMove.js:55
+msgid "You cannot edit translations on this site."
+msgstr "No puede editar traducciones en este sitio."
+
+#: src/js/ate-cloned-sites/steps/RevertMove.js:66
+msgid ""
+"The site at %s is using the same credits for automatic translation as this "
+"site."
+msgstr "El sitio en %s está utilizando los mismos créditos para traducción automática que este sitio."
+
+#: src/js/ate-cloned-sites/steps/RevertMove.js:75
+msgid ""
+"If you didn't intend to move this site to %s, you can <a>indicate that this "
+"site should be at %s</a>."
+msgstr "Si no tenía la intención de trasladar este sitio a %s, puede <a>indicar que este sitio debería estar en %s</a>."
+
+#: src/js/ate-cloned-sites/steps/RevertMove.js:8
+msgid "This site has moved to a new location"
+msgstr "Este sitio se ha trasladado a una nueva ubicación"
+
+#: src/js/ate-cloned-sites/steps/RevertMove.js:95
+msgid ""
+"If you prefer not to move this site, you can <a>mark it as a copy</a> and "
+"enable automatic translation for it."
+msgstr "Si prefiere no trasladar este sitio, puede <a>marcarlo como una copia</a> y habilitar la traducción automática para él."
+
+#: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:38
+msgid ""
+"Moving the site back here will mean that you will be able to translate on "
+"this domain again, but you will not be able to update translations at %s."
+msgstr "Trasladar el sitio de vuelta aquí significará que usted podrá traducir en este dominio nuevamente, pero no podrá actualizar las traducciones en %s."
+
+#: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:50
+msgid "Yes - move back here"
+msgstr "Sí - trasladar de vuelta aquí"
+
+#: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:56
+msgid "No - keep the site on %s"
+msgstr "No - mantener el sitio en %s"
+
+#: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:9
+msgid "Are you sure that this site should run on %s and not %s?"
+msgstr "¿Está usted seguro de que este sitio debería ejecutarse en %s y no en %s?"

@@ -10,8 +10,13 @@ class WPML_ST_Verify_Dependencies {
 
 	/**
 	 * @param string|false $wpml_core_version
+	 * @param string|null  $dependenciesFilepath
 	 */
-	function verify_wpml( $wpml_core_version ) {
+	function verify_wpml( $wpml_core_version, string $dependenciesFilepath = null ) {
+		if ( is_null( $dependenciesFilepath ) ) {
+			$dependenciesFilepath = WPML_ST_PATH . '/wpml-dependencies.json';
+		}
+
 		if ( false === $wpml_core_version ) {
 			add_action(
 				'admin_notices',
@@ -20,7 +25,7 @@ class WPML_ST_Verify_Dependencies {
 					'notice_no_wpml',
 				)
 			);
-		} elseif ( version_compare( $wpml_core_version, '3.5', '<' ) ) {
+		} elseif ( ! WPML_Core_Version_Check::is_ok( $dependenciesFilepath ) ) {
 			add_action( 'admin_notices', array( $this, 'wpml_is_outdated' ) );
 		}
 	}

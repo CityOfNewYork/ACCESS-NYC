@@ -1,0 +1,44 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Add glossary terms": [
+            "添加术语表词条"
+         ],
+         "Minimize": [
+            "最小化"
+         ],
+         "Expand": [
+            "展开"
+         ],
+         "There's nothing yet in the Glossary": [
+            "术语表中还没有内容"
+         ],
+         "Looks like you're not yet using the glossary. Glossary can help you:": [
+            "看起来您还没有使用术语表。术语表可以帮助您："
+         ],
+         "Improve the quality of the translation": [
+            "提高翻译质量"
+         ],
+         "Ensure translation consistency": [
+            "确保翻译一致性"
+         ],
+         "Reduce translation costs": [
+            "降低翻译成本"
+         ],
+         "Improve SEO in translation languages": [
+            "改善翻译语言的搜索引擎优化"
+         ],
+         "How to Use the Glossary for Accurate Translations": [
+            "如何使用术语表进行准确翻译"
+         ],
+         "%d item in the <a>Glossary</a>": [
+            "<a>术语表</a>中有 %d 个条目",
+            "<a>术语表</a>中有 %d 个条目"
+         ]
+      }
+   }
+}

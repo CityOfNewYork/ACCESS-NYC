@@ -87,13 +87,23 @@ class FailureHooks implements \IWPML_Backend_Action {
 		        esc_html__( 'WPML String Translation is attempting to write .mo files with translations to folder:',
 			        'wpml-string-translation' ) . '<br/>' .
 		        str_replace( '\\', '/', $dir ) .
-		        '</p>';
+		        '</p>' . '<br/>' ;
 
 		$text .= '<p>' . esc_html__( 'This folder appears to be not writable. This is blocking translation for strings from appearing on the site.',
 				'wpml-string-translation' ) . '</p>';
 
-		$text .= '<p>' . esc_html__( 'To resolve this, please contact your hosting company and request that they make that folder writable.',
-				'wpml-string-translation' ) . '</p>';
+		$text .= '<ul>' .
+			'<li>' . sprintf(
+				esc_html__( 'If this is a %1$slocal development site%2$s, make sure that your local server can write to this folder.',
+				'wpml-string-translation' ),
+				'<strong>', '</strong>'
+			) . '</li>' .
+			'<li>' . sprintf(
+				esc_html__( 'If it\'s an %1$sonline site%2$s, contact your hosting company and request that they make that folder writable.',
+				'wpml-string-translation' ),
+				'<strong>', '</strong>'
+			) . '</li>' .
+			'</ul>';
 
 		$url = 'https://wpml.org/faq/cannot-write-mo-files/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlst';
 		$link = '<a href="' . $url . '" target="_blank" rel="noreferrer noopener" >' .

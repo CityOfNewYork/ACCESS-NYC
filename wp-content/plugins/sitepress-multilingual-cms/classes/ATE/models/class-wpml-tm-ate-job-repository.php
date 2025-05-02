@@ -1,22 +1,33 @@
 <?php
 
 use function WPML\FP\invoke;
+use WPML\TM\ATE\Jobs;
 
 class WPML_TM_ATE_Job_Repository {
 
 	/** @var WPML_TM_Jobs_Repository */
 	private $job_repository;
 
-	public function __construct( WPML_TM_Jobs_Repository $job_repository ) {
+	/** @var Jobs */
+	private $ateJobs;
+
+	public function __construct( WPML_TM_Jobs_Repository $job_repository, Jobs $ateJobs ) {
 		$this->job_repository  = $job_repository;
+		$this->ateJobs         = $ateJobs;
 	}
 
 	/**
+	 * If $onlyIds is true, it will return an array of ids instead of a collection of jobs. It is more optimized query which is used in the sync process to avoid loading all the jobs.
+	 *
 	 * @param bool $includeManualAndLongstandingJobs
 	 *
-	 * @return WPML_TM_Jobs_Collection
+	 * @return WPML_TM_Jobs_Collection|int[]
 	 */
-	public function get_jobs_to_sync( $includeManualAndLongstandingJobs = true ) {
+	public function get_jobs_to_sync( $includeManualAndLongstandingJobs = true, $onlyIds = false ) {
+		if ( $onlyIds ) {
+			return $this->ateJobs->getATEJobIdsToSync( $includeManualAndLongstandingJobs );
+		}
+
 		$searchParams = $this->getSearchParamsPrototype();
 		$searchParams->set_status( [ ICL_TM_WAITING_FOR_TRANSLATOR, ICL_TM_IN_PROGRESS ] );
 

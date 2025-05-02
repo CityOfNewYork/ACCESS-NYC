@@ -1,5 +1,6 @@
 <?php
 
+use WPML\Core\WP\App\Resources;
 use \WPML\FP\Obj;
 use WPML\LIB\WP\Option as Option;
 use WPML\LIB\WP\User;
@@ -40,7 +41,7 @@ class WPML_Widgets_Support_Backend implements IWPML_Action {
 	}
 
 	public function enqueue_scripts() {
-		wp_register_script( 'widgets-language-switcher-script', ICL_PLUGIN_URL . '/dist/js/widgets-language-switcher/app.js', array( 'wp-block-editor' ) );
+		wp_register_script( 'widgets-language-switcher-script', ICL_PLUGIN_URL . '/dist/js/widgets-language-switcher/app.js', array( 'wp-block-editor', Resources::vendorAsDependency() ) );
 		wp_localize_script(
 			'widgets-language-switcher-script',
 			'wpml_active_and_selected_languages',

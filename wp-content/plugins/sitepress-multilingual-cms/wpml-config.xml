@@ -18,9 +18,18 @@
         <custom-field action="ignore">_thumbnail_id</custom-field>
         <custom-field action="ignore">_wp_attached_file</custom-field>
         <custom-field action="translate">_wp_attachment_image_alt</custom-field>
+        <custom-field action="translate" encoding="json">footnotes</custom-field>
     </custom-fields>
+    <custom-fields-texts>
+        <key name="footnotes">
+            <key name="*">
+                <key name="content" label="Footnote" />
+            </key>
+        </key>
+    </custom-fields-texts>
     <taxonomies>
         <taxonomy translate="1">translation_priority</taxonomy>
+        <taxonomy translate="0">wp_theme</taxonomy>
     </taxonomies>
     <language-switcher-settings>
         <key name="link_empty">0</key>
@@ -146,16 +155,16 @@
         </gutenberg-block>
         <gutenberg-block type="core/navigation-link" translate="1">
             <key name="label" />
-            <key name="url" />
+            <key name="url" type="link" />
             <key name="title" />
             <key name="description" />
         </gutenberg-block>
         <gutenberg-block type="core/navigation-submenu" translate="1">
             <key name="label" />
-            <key name="label" />
+            <key name="url" type="link" />
         </gutenberg-block>
         <gutenberg-block type="core/column" translate="0" />
-		<gutenberg-block type="wpml/language-switcher" translate="0" />
+        <gutenberg-block type="wpml/language-switcher" translate="0" />
         <gutenberg-block type="wpml/navigation-language-switcher" translate="0" />
         <gutenberg-block type="core/columns" translate="0" />
         <gutenberg-block type="core/code" translate="0" />
@@ -270,5 +279,17 @@
         <gutenberg-block type="core/html" translate="1">
             <xpath>/*</xpath>
         </gutenberg-block>
+        <gutenberg-block type="core/details" translate="1">
+            <xpath>//summary</xpath>
+        </gutenberg-block>
+        <gutenberg-block type="core/social-link" translate="1">
+            <key name="url" type="link" />
+        </gutenberg-block>
+        <gutenberg-block type="core/query-pagination-previous" translate="1">
+            <key name="label" />
+        </gutenberg-block>
+        <gutenberg-block type="core/query-pagination-next" translate="1">
+            <key name="label" />
+        </gutenberg-block>        
     </gutenberg-blocks>
 </wpml-config>

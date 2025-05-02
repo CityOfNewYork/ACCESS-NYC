@@ -1,0 +1,58 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Clean up the String Translation table by removing untranslated strings by domain.": [
+            "按域删除未翻译的字符串，清理字符串翻译表。"
+         ],
+         "Remove strings by domain": [
+            "按域删除字符串"
+         ],
+         "Remove strings": [
+            "删除字符串"
+         ],
+         "Cancel": [
+            "取消"
+         ],
+         "Remove": [
+            "移除"
+         ],
+         "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
+            "字符串翻译表目前包含来自下列域的字符串。如果不打算翻译某个域的字符串，请在下面选择该域，以从字符串翻译表中删除其未翻译的字符串。任何已经有翻译的字符串仍然可用。"
+         ],
+         "Search": [
+            "搜索"
+         ],
+         "Removing strings from String Translation table": [
+            "从字符串翻译表中删除字符串"
+         ],
+         "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
+            "要将字符串添加回字符串翻译表，可能需要重新扫描翻译文件或将字符串注册为可翻译字符串。"
+         ],
+         "Read more about ": [
+            "了解更多 "
+         ],
+         "scanning your site for strings and registering them as translatable.": [
+            "扫描网站字符串，并将其注册为可翻译字符串。"
+         ],
+         "Successfully removed strings": [
+            "成功移除字符串"
+         ],
+         "OK, Great": [
+            "好的，很好"
+         ],
+         "Domain": [
+            "域名"
+         ],
+         "Strings count": [
+            "字符串计数"
+         ],
+         "Translated strings": [
+            "翻译字符串"
+         ]
+      }
+   }
+}

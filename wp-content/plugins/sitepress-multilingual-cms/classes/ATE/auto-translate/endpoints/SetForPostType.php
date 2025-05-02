@@ -7,28 +7,29 @@ use WPML\FP\Either;
 use WPML\Settings\PostType\Automatic;
 use WPML\Setup\Option;
 use WPML\Element\API\Languages;
+use WPML\TM\ATE\TranslateEverything\UntranslatedPosts;
 
 class SetForPostType {
+
+	/** @var UntranslatedPosts */
+	private $untranslatedPosts;
+
+	public function __construct( UntranslatedPosts $untranslatedPosts ) {
+		$this->untranslatedPosts = $untranslatedPosts;
+	}
+
 	public function run( Collection $data ) {
 		$postTypes = $data->get( 'postTypes' );
-		$automatic = (bool) $data->get( 'automatic' );
 		$onlyNew   = (bool) $data->get( 'onlyNew' );
 
 		foreach ( $postTypes as $type ) {
-			Automatic::set( $type, $automatic );
-
-			if ( $automatic && $onlyNew ) {
-				// Only future content should be translated.
-				Option::markPostTypeAsCompleted(
-					$type,
-					Languages::getSecondaryCodes()
-				);
-				continue;
+			if ( $onlyNew ) {
+				$this->untranslatedPosts->markTypeAsCompleted( $type );
+			} else {
+				// Not automatic or existing data should also be translated.
+				// => Remove the flag that the post type was already translated.
+				$this->untranslatedPosts->markPostTypeAsUncompleted( $type );
 			}
-
-			// Not automatic or existing data should also be translated.
-			// => Remove the flag that the post type was already translated.
-			Option::removePostTypeFromCompleted( $type );
 		}
 
 		return Either::of( true );

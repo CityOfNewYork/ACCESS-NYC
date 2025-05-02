@@ -1,0 +1,31 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Dissmiss Notice": [
+            "通知を閉じる"
+         ],
+         "Streamline your site's translation using WPML's Translation Dashboard": [
+            "WPMLの翻訳ダッシュボードを使用してサイトの翻訳を合理化"
+         ],
+         "Translate pages, posts, products and strings from one place": [
+            "1か所からページ、投稿、製品、文字列を翻訳"
+         ],
+         "Bulk automatic translation": [
+            "バルク自動翻訳"
+         ],
+         "Translate everything automatically": [
+            "すべてを自動翻訳する"
+         ],
+         "Go to the Translation Dashboard": [
+            "翻訳ダッシュボードに移動"
+         ],
+         "Learn More": [
+            "詳細を見る"
+         ]
+      }
+   }
+}

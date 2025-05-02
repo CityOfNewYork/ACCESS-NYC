@@ -1,0 +1,28 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Choose the image file type for flags": [
+            "เลือกชนิดไฟล์ธง"
+         ],
+         "This option affects only the built-in WPML flags, not the custom uploaded ones.": [
+            "มีผลเฉพาะแฟล็ก WPML ในตัว"
+         ],
+         "%s format": [
+            "%sรูปแบบ"
+         ],
+         "Save": [
+            "บันทึก"
+         ],
+         "The new format has been saved.": [
+            "บันทึกรูปแบบใหม่แล้ว"
+         ],
+         "Failed to save the new format": [
+            "ไม่สามารถบันทึกรูปแบบใหม่ได้"
+         ]
+      }
+   }
+}

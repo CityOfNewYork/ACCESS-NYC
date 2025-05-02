@@ -19,7 +19,8 @@ if ( ! class_exists( 'ACF_Admin' ) ) :
 			add_action( 'admin_body_class', array( $this, 'admin_body_class' ) );
 			add_action( 'current_screen', array( $this, 'current_screen' ) );
 			add_action( 'admin_notices', array( $this, 'maybe_show_escaped_html_notice' ) );
-			add_action( 'wp_ajax_acf/dismiss_escaped_html_notice', array( $this, 'dismiss_escaped_html_notice' ) );
+			add_action( 'admin_init', array( $this, 'dismiss_escaped_html_notice' ) );
+			add_action( 'admin_init', array( $this, 'clear_escaped_html_log' ) );
 			add_filter( 'parent_file', array( $this, 'ensure_menu_selection' ) );
 			add_filter( 'submenu_file', array( $this, 'ensure_submenu_selection' ) );
 		}
@@ -58,7 +59,6 @@ if ( ! class_exists( 'ACF_Admin' ) ) :
 				'acf-escaped-html-notice',
 				'acf_escaped_html_notice',
 				array(
-					'nonce'        => wp_create_nonce( 'acf/dismiss_escaped_html_notice' ),
 					'show_details' => __( 'Show&nbsp;details', 'acf' ),
 					'hide_details' => __( 'Hide&nbsp;details', 'acf' ),
 				)
@@ -220,6 +220,10 @@ if ( ! class_exists( 'ACF_Admin' ) ) :
 				return;
 			}
 
+			if ( get_option( 'acf_escaped_html_notice_dismissed' ) ) {
+				return;
+			}
+
 			$escaped = _acf_get_escaped_html_log();
 
 			// Notice for when HTML has already been escaped.
@@ -229,18 +233,55 @@ if ( ! class_exists( 'ACF_Admin' ) ) :
 		}
 
 		/**
-		 * Dismisses the escaped unsafe HTML notice by clearing the stored log.
+		 * Dismisses the escaped unsafe HTML notice.
 		 *
 		 * @since 6.2.5
 		 */
 		public function dismiss_escaped_html_notice() {
+			if ( empty( $_GET['acf-dismiss-esc-html-notice'] ) ) {
+				return;
+			}
+
+			$nonce = sanitize_text_field( wp_unslash( $_GET['acf-dismiss-esc-html-notice'] ) );
+
 			if (
-				! check_admin_referer( 'acf/dismiss_escaped_html_notice', 'nonce' ) ||
-				! current_user_can( acf_get_setting( 'capability' ) ) ) {
+				! wp_verify_nonce( $nonce, 'acf/dismiss_escaped_html_notice' ) ||
+				! current_user_can( acf_get_setting( 'capability' ) )
+			) {
+				return;
+			}
+
+			update_option( 'acf_escaped_html_notice_dismissed', true );
+
+			_acf_delete_escaped_html_log();
+
+			wp_safe_redirect( remove_query_arg( 'acf-dismiss-esc-html-notice' ) );
+			exit;
+		}
+
+		/**
+		 * Clear the escaped unsafe HTML log.
+		 *
+		 * @since 6.2.5
+		 */
+		public function clear_escaped_html_log() {
+			if ( empty( $_GET['acf-clear-esc-html-log'] ) ) {
+				return;
+			}
+
+			$nonce = sanitize_text_field( wp_unslash( $_GET['acf-clear-esc-html-log'] ) );
+
+			if (
+				! wp_verify_nonce( $nonce, 'acf/clear_escaped_html_log' ) ||
+				! current_user_can( acf_get_setting( 'capability' ) )
+			) {
 				return;
 			}
 
 			_acf_delete_escaped_html_log();
+
+			wp_safe_redirect( remove_query_arg( 'acf-clear-esc-html-log' ) );
+			exit;
 		}
 
 		/**
@@ -277,9 +318,18 @@ if ( ! class_exists( 'ACF_Admin' ) ) :
 			$wp_engine_link = acf_add_url_utm_tags( 'https://wpengine.com/', 'bx_prod_referral', acf_is_pro() ? 'acf_pro_plugin_footer_text' : 'acf_free_plugin_footer_text', false, 'acf_plugin', 'referral' );
 			$acf_link       = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/', 'footer', 'footer' );
 
+			if ( acf_is_pro() ) {
+				return sprintf(
+					/* translators: This text is prepended by a link to ACF's website, and appended by a link to WP Engine's website. */
+					'<a href="%1$s" target="_blank">ACF&#174;</a> and <a href="%1$s" target="_blank">ACF&#174; PRO</a> ' . __( 'are developed and maintained by', 'acf' ) . ' <a href="%2$s" target="_blank">WP Engine</a>.',
+					$acf_link,
+					$wp_engine_link
+				);
+			}
+
 			return sprintf(
 				/* translators: This text is prepended by a link to ACF's website, and appended by a link to WP Engine's website. */
-				'<a href="%1$s" target="_blank">' . ( acf_is_pro() ? 'ACF PRO' : 'ACF' ) . '</a> ' . __( 'is developed and maintained by', 'acf' ) . ' <a href="%2$s" target="_blank">WP Engine</a>.',
+				'<a href="%1$s" target="_blank">ACF&#174;</a> ' . __( 'is developed and maintained by', 'acf' ) . ' <a href="%2$s" target="_blank">WP Engine</a>.',
 				$acf_link,
 				$wp_engine_link
 			);

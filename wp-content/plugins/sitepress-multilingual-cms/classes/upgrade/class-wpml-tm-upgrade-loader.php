@@ -84,6 +84,12 @@ class WPML_TM_Upgrade_Loader implements IWPML_Action {
 			),
 
 			$this->factory->create_command_definition(
+				WPML\TM\Upgrade\Commands\CreateLinksTables::class,
+				[],
+				[ 'admin' ]
+			),
+
+			$this->factory->create_command_definition(
 				WPML\TM\Upgrade\Commands\RefreshTranslationServices::class,
 				[ \WPML\Container\make( RefreshServicesFactory::class ), Version::isHigherThanInstallation() ],
 				[ 'admin' ]

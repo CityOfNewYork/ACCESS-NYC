@@ -24,6 +24,22 @@ class LanguageMappings {
 	const IGNORE_MAPPING_OPTION = 'wpml-languages-ignore-mapping';
 	const IGNORE_MAPPING_ID = - 1;
 
+
+	public static function getAllLanguagesWithAutomaticSupportInfo(): array {
+		return static::withCanBeTranslatedAutomatically( Languages::getActive() );
+	}
+
+	public static function doesDefaultLanguageSupportAutomaticTranslations(): bool {
+		$languages = static::getAllLanguagesWithAutomaticSupportInfo();
+
+		$default = $languages[ Languages::getDefaultCode() ] ?? null;
+		if ( $default ) {
+			return Obj::prop( 'can_be_translated_automatically', $default );
+		}
+
+		return false;
+	}
+
 	public static function withCanBeTranslatedAutomatically( $languages = null ) {
 		$fn = curryN( 1, function ( $languages ) {
 			if ( ! is_object( $languages ) && ! is_array( $languages ) ) {

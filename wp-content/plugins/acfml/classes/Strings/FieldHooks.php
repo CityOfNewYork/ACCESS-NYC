@@ -58,6 +58,21 @@ class FieldHooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPM
 			return $fieldGroup;
 		}
 
+		/**
+		 * Filters whether an ACF entity should be translated.
+		 *
+		 * @param bool   $shouldTranslate Whether the entity should be translated. Default true.
+		 * @param array  $fieldGroup      The ACF entity array.
+		 * @param string $entityKind      The context in which the filter is applied. Default 'group'.
+		 *
+		 * @return bool Whether the field group should be translated.
+		 */
+		$shouldTranslate = apply_filters( 'acfml_should_translate_acf_entity', true, $fieldGroup, 'group' );
+
+		if ( ! $shouldTranslate ) {
+			return $fieldGroup;
+		}
+
 		return $this->translator->translateGroup( $fieldGroup );
 	}
 
@@ -72,6 +87,11 @@ class FieldHooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPM
 		}
 
 		if ( self::shouldSkipField( $field ) ) {
+			return $field;
+		}
+
+		$shouldTranslate = apply_filters( 'acfml_should_translate_acf_entity', true, $field, 'field' );
+		if ( ! $shouldTranslate ) {
 			return $field;
 		}
 

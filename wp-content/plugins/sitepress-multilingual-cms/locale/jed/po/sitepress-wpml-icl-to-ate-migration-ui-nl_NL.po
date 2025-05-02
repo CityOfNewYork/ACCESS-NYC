@@ -1,0 +1,364 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/language/LanguagePairs.js:57
+msgid "From:"
+msgstr "Van:"
+
+#: src/js/components/language/LanguagePairs.js:69
+msgid "--Choose language--"
+msgstr "--Kies taal--"
+
+#: src/js/components/language/LanguagePairs.js:81
+msgid "to:"
+msgstr "naar:"
+
+#: src/js/components/language/SelectLanguagePairs.js:39
+msgid "Set language pair(s) for Translator %s:"
+msgstr "Stel taalpaar(en) in voor Vertaler %s:"
+
+#: src/js/components/language/SelectLanguagePairs.js:64
+msgid "+ Add more language pairs for this translator"
+msgstr "+ Voeg meer taalparen toe voor deze vertaler"
+
+#: src/js/icl-to-ate-migration/components/DeactivateICL.js:19
+msgid "Translation Memory was successfully copied to Advanced Translation Editor."
+msgstr "Vertaalgeheugen is succesvol gekopieerd naar Geavanceerde Vertaaleditor."
+
+#: src/js/icl-to-ate-migration/components/DeactivateICL.js:30
+msgid "Deactivate ICanLocalize.com as Translation Service on this site"
+msgstr "Deactiveer ICanLocalize.com als Vertaalservice op deze site"
+
+#: src/js/icl-to-ate-migration/components/DeactivateICL.js:35
+msgid ""
+"Missing a translator? Or were new jobs since the last copy of the "
+"Translation Memory?"
+msgstr "Mist u een vertaler? Of waren er nieuwe opdrachten sinds de laatste kopie van het Vertaalgeheugen?"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:25
+msgid "Enter here your ICanLocalize authentication details."
+msgstr "Voer hier uw ICanLocalize authenticatiegegevens in."
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:33
+msgid "API Token:"
+msgstr "API Token:"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:43
+msgid "Please enter valid value for ICL token."
+msgstr "Voer een geldige waarde in voor ICL token."
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:50
+msgid "Enter ICL API token here"
+msgstr "Voer hier ICL API token in"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:62
+msgid "Submit"
+msgstr "Indienen"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:78
+msgid "Sign up"
+msgstr "Registreren"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:84
+msgid "to ICanLocalize to receive your API token."
+msgstr "bij ICanLocalize om uw API token te ontvangen."
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:91
+msgid "Already have an account? Login and"
+msgstr "Heeft u al een account? Log in en"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:98
+msgid "get your token."
+msgstr "haal uw token op."
+
+#: src/js/icl-to-ate-migration/components/Memory/BottomLink.js:16
+msgid "Copy new Translation Memory to Advanced Translation Memory"
+msgstr "Kopieer nieuw Vertaalgeheugen naar Geavanceerd Vertaalgeheugen"
+
+#: src/js/icl-to-ate-migration/components/Memory/MainButton.js:16
+msgid "Import translation memory"
+msgstr "Importeer vertaalgeheugen"
+
+#: src/js/icl-to-ate-migration/components/MigrationContainer.js:21
+msgid "ICanLocalize is already deactivated on this site"
+msgstr "ICanLocalize is al gedeactiveerd op deze site"
+
+#: src/js/icl-to-ate-migration/components/MigrationContainer.js:22
+msgid ""
+"You can still import Translators or Copy Translation Memory to Advanced "
+"Translator Editor"
+msgstr "U kunt nog steeds Vertalers importeren of Vertaalgeheugen kopiëren naar Geavanceerde Vertaaleditor"
+
+#: src/js/icl-to-ate-migration/components/MigrationContainer.js:27
+msgid "Move from ICanLocalize.com to Advanced Translation Editor"
+msgstr "Verplaats van ICanLocalize.com naar Geavanceerde Vertaaleditor"
+
+#: src/js/icl-to-ate-migration/components/Translators/BottomLink.js:17
+#: src/js/icl-to-ate-migration/components/Translators/Button.js:21
+#: src/js/icl-to-ate-migration/components/Translators/Modal.js:27
+msgid "Import translators"
+msgstr "Importeer vertalers"
+
+#: src/js/icl-to-ate-migration/components/Translators/EditLanguages.js:53
+msgid "Come back"
+msgstr "Ga terug"
+
+#: src/js/icl-to-ate-migration/components/Translators/Modal.js:36
+#: src/js/setup/components/Steps/AddLanguagesModal.js:496
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: src/js/icl-to-ate-migration/components/Translators/Modal.js:40
+msgid "Save"
+msgstr "Opslaan"
+
+#: src/js/icl-to-ate-migration/components/Translators/TranslatorsTable.js:47
+#: src/js/setup/components/Steps/AddLanguagesModal.js:346
+msgid "Name"
+msgstr "Naam"
+
+#: src/js/icl-to-ate-migration/components/Translators/TranslatorsTable.js:59
+msgid "Language Pairs"
+msgstr "Taalparen"
+
+#: src/js/icl-to-ate-migration/components/Translators/TranslatorsTable.js:93
+msgid "Not supported pairs:"
+msgstr "Niet-ondersteunde paren:"
+
+#: src/js/icl-to-ate-migration/model/deactivateICL.js:18
+msgid "ICanLocalize.com deactivated"
+msgstr "ICanLocalize.com gedeactiveerd"
+
+#: src/js/icl-to-ate-migration/model/translationMemory.js:12
+msgid "Translate memory is imported"
+msgstr "Vertaalgeheugen is geïmporteerd"
+
+#: src/js/icl-to-ate-migration/model/translators.js:26
+msgid "There is no translators in ICL"
+msgstr "Er zijn geen vertalers in ICL"
+
+#: src/js/icl-to-ate-migration/model/translators.js:45
+msgid "Translators saved"
+msgstr "Vertalers opgeslagen"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:48
+msgid "%s file upload failed."
+msgstr "%s bestand uploaden mislukt."
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:69
+msgid "Flag"
+msgstr "Vlag"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:87
+msgid "Flag file"
+msgstr "Vlagbestand"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:160
+msgid ""
+"You just added  language. Next, select it as the site's default language or "
+"a translation language."
+msgstr "U heeft zojuist een taal toegevoegd. Selecteer deze nu als de standaardtaal van de site of als een vertaaltaal."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:162
+msgid "Language added"
+msgstr "Taal toegevoegd"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:192
+msgid "The value \"%s\" already exists"
+msgstr "De waarde “%s” bestaat al"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:215
+msgid "Add a new language"
+msgstr "Voeg een nieuwe taal toe"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:224
+msgid ""
+"Create a country-specific language by choosing the general language from "
+"the list below. Then, choose the country it should be localized for."
+msgstr "Maak een landspecifieke taal door de algemene taal uit onderstaande lijst te kiezen. Kies vervolgens het land waarvoor het gelokaliseerd moet worden."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:229
+msgid ""
+"By choosing a combination that already exists in the database, WPML can "
+"help fill out the necessary fields. Read more about "
+"<AddingACustomLanguageLink />."
+msgstr "Door een combinatie te kiezen die al in de database bestaat, kan WPML helpen bij het invullen van de benodigde velden. Lees meer over <AddingACustomLanguageLink />."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:242
+msgid "Cannot find?"
+msgstr "Kunt u het niet vinden?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:244
+msgid "Click here"
+msgstr "Klik hier"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:300
+msgid ""
+"The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" "
+", \"pt-br\", \"zh-hans\""
+msgstr "Het verkeerde formaat. Het mag alleen kleine letters en “-” bevatten. Bijv.: “fr”, “pt-br”, “zh-hans”"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:308
+msgid "Language"
+msgstr "Taal"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:331
+msgid "Location"
+msgstr "Locatie"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:360
+msgid "Code"
+msgstr "Code"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:374
+msgid "The language will not be supported by automatic translations"
+msgstr "De taal zal niet worden ondersteund door automatische vertalingen"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:392
+msgid "Language mapping"
+msgstr "Taaltoewijzing"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:404
+msgid "Don't map this language"
+msgstr "Wijs deze taal niet toe"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:418
+msgid "Default locale"
+msgstr "Standaard locale"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:423
+msgid ""
+"The wrong format. It may contain only small letters and \"_\". E.g: \"de\" "
+", \"de_DE\", \"zh_Hant_TW\""
+msgstr "Het verkeerde formaat. Het mag alleen kleine letters en “_” bevatten. Bijv.: “de”, “de_DE”, “zh_Hant_TW”"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:435
+msgid "hreflang"
+msgstr "hreflang"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:449
+msgid "Encode url?"
+msgstr "URL coderen?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:45
+msgid "Flags must be:"
+msgstr "Vlaggen moeten zijn:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:453
+msgid "NO"
+msgstr "NEE"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:454
+msgid "YES"
+msgstr "JA"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:460
+msgid " (required)"
+msgstr " (verplicht)"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:483
+msgid "Please fill in the field"
+msgstr "Vul alstublieft het veld in"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:49
+msgid "PNG, SVG, or JPG files"
+msgstr "PNG, SVG, of JPG bestanden"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:501
+msgid "Save language"
+msgstr "Taal opslaan"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:52
+msgid "18 x 12 pixels"
+msgstr "18 x 12 pixels"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:55
+msgid "Read more about "
+msgstr "Lees meer over "
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:60
+msgid ""
+"The name of your language as it will appear on your site's language "
+"switcher."
+msgstr "De naam van uw taal zoals deze zal verschijnen in de taalschakelaar van uw site."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:61
+msgid ""
+"A unique value that identifies the language in the database and URL. Once "
+"saved, the language code cannot be changed."
+msgstr "Een unieke waarde die de taal identificeert in de database en URL. Eenmaal opgeslagen kan de taalcode niet worden gewijzigd."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:62
+msgid ""
+"If your custom language is similar to an existing language, you can use the "
+"existing language's spellcheck and automatic translation. For example, if "
+"your custom language is Swiss-German, you can map to German as the language "
+"to use for spellcheck and automatic translation. If you don't map your "
+"custom language to an existing language, spellcheck and automatic "
+"translation features will be unavailable in that language."
+msgstr "Als uw aangepaste taal lijkt op een bestaande taal, kunt u de spellingscontrole en automatische vertaling van de bestaande taal gebruiken. Bijvoorbeeld, als uw aangepaste taal Zwitsers-Duits is, kunt u deze toewijzen aan Duits als de taal voor spellingscontrole en automatische vertaling. Als u uw aangepaste taal niet toewijst aan een bestaande taal, zullen spellingscontrole en automatische vertaalfuncties niet beschikbaar zijn in die taal."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:66
+msgid ""
+"The value WPML checks when loading translations from MO and PO files. The "
+"default locale is included in the filenames in your /wp-content/languages/ "
+"folder in your WordPress setup."
+msgstr "De waarde die WPML controleert bij het laden van vertalingen uit MO- en PO-bestanden. De standaard locale is opgenomen in de bestandsnamen in uw /wp-content/languages/ map in uw WordPress-installatie."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:69
+msgid ""
+"Google uses the hreflang attribute to direct users to sites in their "
+"relevant language and location. Examples:"
+msgstr "Google gebruikt het hreflang-attribuut om gebruikers te verwijzen naar sites in hun relevante taal en locatie. Voorbeelden:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:71
+msgid "All English-speaking users: en"
+msgstr "Alle Engelstalige gebruikers: en"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:72
+msgid "English for UK users: en-gb"
+msgstr "Engels voor Britse gebruikers: en-gb"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:73
+msgid "English for US users: en-us"
+msgstr "Engels voor Amerikaanse gebruikers: en-us"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:81
+msgid ""
+"Determines if URLs in this language are encoded or use ASCII characters (if "
+"unsure, leave it as \"No\")."
+msgstr "Bepaalt of URL's in deze taal gecodeerd zijn of ASCII-tekens gebruiken (indien onzeker, laat het op “Nee” staan)."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:98
+msgid "adding a custom language"
+msgstr "een aangepaste taal toevoegen"
+
+#: src/js/setup/components/Steps/Languages.js:110
+msgid "What are the languages of your site?"
+msgstr "Wat zijn de talen van uw site?"
+
+#: src/js/setup/components/Steps/Languages.js:120
+msgid "Default language"
+msgstr "Standaardtaal"
+
+#: src/js/setup/components/Steps/Languages.js:122
+msgid "What is the current language of your website?"
+msgstr "Wat is de huidige taal van uw website?"
+
+#: src/js/setup/components/Steps/Languages.js:133
+msgid "Translation languages"
+msgstr "Vertaaltalen"
+
+#: src/js/setup/components/Steps/Languages.js:135
+msgid "Which languages do you want to translate your site into?"
+msgstr "In welke talen wilt u uw site vertalen?"
+
+#: src/js/setup/components/Steps/Languages.js:149
+msgid "If you cannot find languages that you need in the list"
+msgstr "Als u de talen die u nodig heeft niet kunt vinden in de lijst"
+
+#: src/js/setup/components/Steps/Languages.js:150
+msgid "create a custom language"
+msgstr "maak een aangepaste taal"

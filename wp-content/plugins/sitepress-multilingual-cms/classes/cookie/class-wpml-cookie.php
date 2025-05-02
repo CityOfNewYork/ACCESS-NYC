@@ -12,26 +12,27 @@ class WPML_Cookie {
 	 * @param string|null $sameSite
 	 */
 	public function set_cookie( $name, $value, $expires, $path, $domain, $HTTPOnly  = false, $sameSite = null ) {
+		$name  = is_null( $name ) ? '' : rawurlencode( $name );
+		$value = is_null( $value ) ? '' : rawurlencode( $value );
+
 		wp_cache_add_non_persistent_groups( __CLASS__ );
+
+		$sameSite = $sameSite ? $sameSite : 'Lax';
 
 		$entryHash = md5( (string) wp_json_encode( [ $name, $value, $path, $domain, $HTTPOnly, $sameSite ] ) );
 
 		if ( wp_cache_get( $name, __CLASS__ ) !== $entryHash ) {
 			$this->handle_cache_plugins( $name );
-			if ($sameSite) {
-				header(
-					'Set-Cookie: ' . rawurlencode( $name ) . '=' . rawurlencode( $value )
-					. ( $domain ? '; Domain=' . $domain : '' )
-					. ( $expires ? '; expires=' . gmdate( 'D, d-M-Y H:i:s', $expires ) . ' GMT' : '' )
-					. ( $path ? '; Path=' . $path : '' )
-					. ( $this->is_secure_connection() ? '; Secure' : '')
-					. ( $HTTPOnly ? '; HttpOnly' : '' )
-					. '; SameSite=' . $sameSite,
-					false
-				);
-			} else {
-				setcookie( $name, (string) $value, $expires, $path, $domain, $this->is_secure_connection(), $HTTPOnly );
-			}
+			header(
+				'Set-Cookie: ' . $name . '=' . $value
+				. ( $domain ? '; Domain=' . $domain : '' )
+				. ( $expires ? '; expires=' . gmdate( 'D, d-M-Y H:i:s', $expires ) . ' GMT' : '' )
+				. ( $path ? '; Path=' . $path : '' )
+				. ( $this->is_secure_connection() ? '; Secure' : '' )
+				. ( $HTTPOnly ? '; HttpOnly' : '' )
+				. '; SameSite=' . $sameSite,
+				false
+			);
 
 			wp_cache_set( $name, $entryHash, __CLASS__ );
 		}

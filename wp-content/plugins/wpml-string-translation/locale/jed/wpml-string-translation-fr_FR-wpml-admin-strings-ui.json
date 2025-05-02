@@ -1,0 +1,82 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Not included in String Translation": [
+            "Non inclus dans la traduction des chaînes de caractères"
+         ],
+         "Registered and locked": [
+            "Enregistré et verrouillé"
+         ],
+         "Text": [
+            "Texte"
+         ],
+         "Numeric": [
+            "Numérique"
+         ],
+         "All Types": [
+            "Tous les types"
+         ],
+         "Search": [
+            "Recherche"
+         ],
+         "Communication error": [
+            "Erreur de communication"
+         ],
+         "The action failed.": [
+            "L'action a échoué."
+         ],
+         "All (%d)": [
+            "Tous (%d)"
+         ],
+         "Included in String Translation (%d)": [
+            "Inclus dans la traduction des chaînes de caractères (%d)"
+         ],
+         "Not included in String Translation (%d)": [
+            "Non inclus dans la traduction des chaînes de caractères (%d)"
+         ],
+         "This setting is locked by a WPML configuration file.": [
+            "Ce paramètre est verrouillé par un fichier de configuration WPML."
+         ],
+         "Option": [
+            "Option"
+         ],
+         "Value": [
+            "Valeur"
+         ],
+         "Type": [
+            "Type"
+         ],
+         "State": [
+            "État"
+         ],
+         "Export as a WPML configuration file": [
+            "Exporter en tant que fichier de configuration WPML"
+         ],
+         "Cancel": [
+            "Annuler"
+         ],
+         "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
+            "Enregistrez ce qui suit dans un fichier wpml-config.xml à la racine de votre thème ou de votre plugin."
+         ],
+         "No options found.": [
+            "Aucune option n'a été trouvée."
+         ],
+         "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
+            "Assurez-vous d'avoir sauvegardé les options de votre thème au moins une fois. Certains thèmes ne les ajoutent à la table wp_options qu'après que l'utilisateur a explicitement enregistré les modifications apportées aux paramètres par défaut du thème."
+         ],
+         "Add to String Translation": [
+            "Ajouter à la traduction de la chaîne de caractères"
+         ],
+         "Remove from String Translation": [
+            "Supprimer de la traduction de la chaîne"
+         ],
+         "Included in String Translation": [
+            "Inclus dans la traduction des chaînes de caractères"
+         ]
+      }
+   }
+}

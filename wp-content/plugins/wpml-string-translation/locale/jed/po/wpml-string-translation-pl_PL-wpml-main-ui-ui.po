@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/main-ui/components/Actions.js:46
+msgid "Edit"
+msgstr "Edytuj"
+
+#: src/js/main-ui/components/Actions.js:57
+msgid "Shift+Tab"
+msgstr "Shift+tab"
+
+#: src/js/main-ui/components/Actions.js:62
+msgid "Tab"
+msgstr "Zakładka"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:104
+msgid "Translation to:"
+msgstr "Tłumaczenie na:"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:123
+msgid "Copy from original"
+msgstr "Kopia z oryginału"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:138
+msgid "Use Shift+Enter to add a new line."
+msgstr "Użyj Shift+Enter, aby dodać nową linię."
+
+#: src/js/main-ui/components/EditTranslationPopup.js:97
+msgid "Original:"
+msgstr "Oryginał:"
+
+#: src/js/main-ui/components/LanguagesCell.js:169
+msgid "Add %s translation"
+msgstr "Dodaj tłumaczenie %s "
+
+#: src/js/main-ui/components/LanguagesCell.js:188
+msgid "Edit %s translation"
+msgstr "Edytuj tłumaczenie %s "
+
+#: src/js/main-ui/components/LanguagesCell.js:198
+msgid "Add %s translation (the string appears on the site and is not translated)"
+msgstr "Dodaj tłumaczenie %s (ciąg znaków pojawia się na stronie i nie jest tłumaczony)"
+
+#: src/js/main-ui/components/LanguagesCell.js:63
+msgid "Original language %s"
+msgstr "Język oryginału %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:70
+msgid "Waiting for translator to %s"
+msgstr "Czekam na tłumacza do %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:77
+msgid "Translation in progress to %s"
+msgstr "Tłumaczenie w toku na %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:84
+msgid "In basket for translation to %s"
+msgstr "W koszyku do tłumaczenia na %s"
+
+#: src/js/main-ui/components/notification.js:13
+msgid "Translation saved."
+msgstr "Tłumaczenie zapisane."
+
+#: src/js/main-ui/components/notification.js:17
+msgid "Translation update failed."
+msgstr "Aktualizacja tłumaczenia nie powiodła się."

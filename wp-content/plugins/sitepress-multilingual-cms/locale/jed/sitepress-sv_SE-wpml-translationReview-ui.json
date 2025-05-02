@@ -6,22 +6,22 @@
             "domain": "messages"
          },
          "Accepted": [
-            "Godkänd"
+            "Accepterad"
          ],
          "Approved!": [
             "Godkänd!"
          ],
          "Loading the next translation for review...": [
-            "Läser in nästa översättning för granskning..."
+            "Laddar nästa översättning för granskning..."
          ],
          "Back": [
             "Tillbaka"
          ],
          "Turn off to not automatically load the next translation after finishing this review.": [
-            "Stäng av för att inte automatiskt ladda nästa översättning när du har avslutat den här granskningen."
+            "Stäng av för att inte automatiskt ladda nästa översättning efter att du avslutat denna granskning."
          ],
          "Turn on to automatically load the next translation after finishing this  .": [
-            "Slå på för att automatiskt läsa in nästa översättning efter att ha avslutat denna ."
+            "Slå på för att automatiskt ladda nästa översättning efter att du avslutat denna granskning."
          ],
          "Edit": [
             "Redigera"
@@ -30,7 +30,7 @@
             "Redigera översättning"
          ],
          "Please wait, applying translation..": [
-            "Vänta, tillämpar översättning.."
+            "Vänligen vänta, tillämpar översättning.."
          ],
          "Next review": [
             "Nästa granskning"
@@ -39,16 +39,16 @@
             "Publicera denna översättning"
          ],
          "Accept this translation": [
-            "Godkänn denna översättning"
+            "Acceptera denna översättning"
          ],
          "Published!": [
-            "Publicerat!"
+            "Publicerad!"
          ],
          "Someone is already reviewing this translation. Please try again later.": [
-            "Någon granskar redan den här översättningen. Försök igen senare."
+            "Någon granskar redan denna översättning. Vänligen försök igen senare."
          ],
          "There was an error in applying translation.": [
-            "Det gick inte att använda översättningen."
+            "Det uppstod ett fel vid tillämpningen av översättningen."
          ]
       }
    }

@@ -2,6 +2,7 @@
 
 use WPML\FP\Obj;
 use WPML\TM\API\Job\Map;
+use WPML\TM\API\Jobs;
 
 abstract class WPML_TM_Update_Translation_Data_Action extends WPML_Translation_Job_Helper_With_API {
 
@@ -25,14 +26,15 @@ abstract class WPML_TM_Update_Translation_Data_Action extends WPML_Translation_J
 	/**
 	 * Adds a translation job record in icl_translate_job
 	 *
-	 * @param mixed               $rid
-	 * @param mixed               $translator_id
-	 * @param       $translation_package
-	 * @param array               $batch_options
+	 * @param mixed    $rid
+	 * @param mixed    $translator_id
+	 * @param array    $translation_package
+	 * @param array    $batch_options
+	 * @param int|null $sendFrom
 	 *
 	 * @return bool|int
 	 */
-	function add_translation_job( $rid, $translator_id, array $translation_package, array $batch_options ) {
+	function add_translation_job( $rid, $translator_id, array $translation_package, array $batch_options, $sendFrom = null ) {
 		global $wpdb, $current_user;
 
 		$previousStatus = \WPML_TM_ICL_Translation_Status::makeByRid( $rid )->previous();
@@ -75,7 +77,7 @@ abstract class WPML_TM_Update_Translation_Data_Action extends WPML_Translation_J
 
 			$this->package_helper->save_package_to_job( $translation_package, $job_id, $prev_translation );
 			if ( (int) $translation_status->status !== ICL_TM_DUPLICATE ) {
-				$this->fire_notification_actions( $job_id, $translation_status, $translator_id );
+				$this->fire_notification_actions( $job_id, $translation_status, $translator_id, $sendFrom );
 			}
 		}
 
@@ -125,19 +127,39 @@ abstract class WPML_TM_Update_Translation_Data_Action extends WPML_Translation_J
 		return $prev_translations;
 	}
 
-	protected function fire_notification_actions( $job_id, $translation_status, $translator_id ) {
-		$job = wpml_tm_load_job_factory()->get_translation_job( $job_id, false, 0, true );
-		if ( $job && $translation_status->translation_service === 'local' ) {
-			if ( $this->get_tm_setting( array( 'notification', 'new-job' ) ) == ICL_TM_NOTIFICATION_IMMEDIATELY ) {
-				if ( $job_id ) {
-					if ( empty( $translator_id ) ) {
-						do_action( 'wpml_tm_new_job_notification', $job );
-					} else {
-						do_action( 'wpml_tm_assign_job_notification', $job, $translator_id );
-					}
-				}
-			}
-			do_action( 'wpml_added_local_translation_job', $job_id );
+	/**
+	 * @param int|bool $job_id
+	 * @param object   $translation_status
+	 * @param mixed    $translator_id
+	 * @param int|null $sendFrom
+	 */
+	protected function fire_notification_actions( $job_id, $translation_status, $translator_id, $sendFrom = null ) {
+		if ( ! $job_id ) {
+			return;
 		}
+		if ( 'local' !== $translation_status->translation_service ) {
+			return;
+		}
+
+		$job = wpml_tm_load_job_factory()->get_translation_job( $job_id, false, 0, true );
+		if ( ! $job ) {
+			return;
+		}
+
+		if ( ICL_TM_NOTIFICATION_IMMEDIATELY === (int) $this->get_tm_setting( array( 'notification', 'new-job' ) ) ) {
+			// Delay sending notifications from the Translation Dashboard, instead of sending them right away.
+			// The delay groups all changes into the WPML_TM_Batch_Report::BATCH_REPORT_OPTION option from eventual multiple translation jobs,
+			// and dispatches them on WPML_TM_Batch_Report_Email_Process::process_emails(), triggered by the 'wpml_tm_jobs_notification' action.
+			$shouldDelay = (bool) Jobs::SENT_VIA_DASHBOARD === $sendFrom;
+			if ( empty( $translator_id ) ) {
+				$actionHandle = $shouldDelay ? 'wpml_tm_new_job_notification_with_delay' : 'wpml_tm_new_job_notification';
+				do_action( $actionHandle, $job );
+			} else {
+				$actionHandle = $shouldDelay ? 'wpml_tm_assign_job_notification_with_delay' : 'wpml_tm_assign_job_notification';
+				do_action( $actionHandle, $job, $translator_id );
+			}
+		}
+
+		do_action( 'wpml_added_local_translation_job', $job_id );
 	}
 }

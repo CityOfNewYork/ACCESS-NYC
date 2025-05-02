@@ -20,6 +20,14 @@ class WPML_Theme_Plugin_Localization_UI {
 	}
 
 	/**
+	 * @param string $template
+	 * @param array  $data
+	 */
+	public function renderTemplate( $template, $data ) {
+		return $this->get_template_service()->show( $data, $template );
+	}
+
+	/**
 	 * @param IWPML_Theme_Plugin_Localization_UI_Strategy $localization_strategy
 	 */
 	public function render( IWPML_Theme_Plugin_Localization_UI_Strategy $localization_strategy ) {

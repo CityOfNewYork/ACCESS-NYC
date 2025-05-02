@@ -1,0 +1,70 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/troubleshooting/cancelJobs/CancelJobs.js:17
+msgid "Preparing..."
+msgstr "Förbereder..."
+
+#: src/js/troubleshooting/cancelJobs/CancelJobs.js:77
+msgid "All jobs have been cancelled"
+msgstr "Alla jobb har avbrutits"
+
+#: src/js/troubleshooting/cancelJobs/CancelJobs.js:79
+msgid "There is no more jobs to cancel"
+msgstr "Det finns inga fler jobb att avbryta"
+
+#: src/js/troubleshooting/cancelJobs/CancelJobs.js:82
+msgid "The jobs cancellation has failed"
+msgstr "Avbrytandet av jobben misslyckades"
+
+#: src/js/troubleshooting/cancelJobs/CancelJobs.js:88
+msgid "Cancel in-progress automatic jobs"
+msgstr "Avbryt pågående automatiska jobb"
+
+#: src/js/troubleshooting/enableSecondaryDomainForATE/EnableSecondaryDomain.js:27
+msgid "Enabling WPML's Advanced Translation Editor..."
+msgstr "Aktiverar WPML:s avancerade översättningsredigerare..."
+
+#: src/js/troubleshooting/enableSecondaryDomainForATE/EnableSecondaryDomain.js:28
+msgid "Force-enable WPML's Advanced Translation Editor"
+msgstr "Tvångsaktivera WPML:s avancerade översättningsredigerare"
+
+#: src/js/troubleshooting/enableSecondaryDomainForATE/EnableSecondaryDomain.js:37
+msgid ""
+"If you're running this website from two or more domains on the same "
+"installation, this action will allow both to use the Advanced Translation "
+"Editor. Don't use this if you've moved or copied the site to a different "
+"domain on a different server."
+msgstr "Om du kör webbplatsen från flera domäner på samma installation, tillåter detta båda att använda den avancerade översättningsredigeraren."
+
+#: src/js/troubleshooting/enableSecondaryDomainForATE/EnableSecondaryDomain.js:41
+msgid "An error occurred while enabling WPML on both domains. Please try again."
+msgstr "Ett fel uppstod vid aktivering av WPML på båda domänerna. Försök igen."
+
+#: src/js/troubleshooting/enableSecondaryDomainForATE/EnableSecondaryDomain.js:44
+msgid ""
+"You can now use the Advanced Translation Editor from this site, as well as "
+"the other site(s) running from a different domain on the same installation."
+msgstr "Du kan nu använda den avancerade översättningsredigeraren från denna och andra webbplatser på samma installation."
+
+#: src/js/troubleshooting/lsTemplates/UpdateDomain.js:31
+msgid "Domain name has been updated"
+msgstr "Domännamnet har uppdaterats"
+
+#: src/js/troubleshooting/lsTemplates/UpdateDomain.js:33
+msgid "Domain name update has been failed"
+msgstr "Uppdateringen av domännamnet misslyckades"
+
+#: src/js/troubleshooting/lsTemplates/UpdateDomain.js:41
+msgid "Update domain name in language switcher settings"
+msgstr "Uppdatera domännamn i inställningarna för språkväxlare"
+
+#: src/js/troubleshooting/refreshLicense/RefreshLicense.js:14
+msgid "Refresh license data to recognise license update"
+msgstr "Uppdatera licensdata för att känna igen licensuppdatering"
+
+#: src/js/troubleshooting/refreshLicense/useRefreshLicense.js:36
+msgid "WPML License has been refreshed"
+msgstr "WPML-licensen har uppdaterats"

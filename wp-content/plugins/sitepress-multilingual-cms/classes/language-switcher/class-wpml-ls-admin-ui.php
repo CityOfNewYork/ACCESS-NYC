@@ -583,6 +583,8 @@ class WPML_LS_Admin_UI extends WPML_Templates_Factory {
 		return array(
 			'confirmation_item_remove' => esc_html__( 'Do you really want to remove this item?', 'sitepress' ),
 			'leave_text_box_to_save'   => esc_html__( 'Leave the text box to auto-save', 'sitepress' ),
+			'menu_option_not_chosen'   => __( 'Choose which menu to display your language switcher', 'sitepress' ),
+			'widget_option_not_chosen' => __( 'Choose which widget to display your language switcher', 'sitepress' ),
 		);
 	}
 

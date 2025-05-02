@@ -3,8 +3,7 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "lang": "it_IT"
+            "domain": "messages"
          },
          "Advanced": [
             "Avanzato"
@@ -13,10 +12,10 @@
             "Ancora HTML"
          ],
          "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
-            "Aggiungi una scorciatoia a questo blocco quando si carica una pagina usando l'URL “#anchor”."
+            "Aggiungi un collegamento rapido a questo blocco durante il caricamento della pagina utilizzando l'URL “#anchor”."
          ],
          "Additional CSS class(es)": [
-            "Classi aggiuntive CSS"
+            "Classe(i) CSS aggiuntiva(e)"
          ],
          "Separate multiple classes with spaces.": [
             "Separa più classi con spazi."
@@ -24,44 +23,50 @@
          "Color": [
             "Colore"
          ],
+         "px": [
+            "px"
+         ],
+         "%": [
+            "%"
+         ],
          "Dimensions": [
             "Dimensioni"
          ],
          "BLOCK": [
-            "A blocchi"
+            "BLOCCO"
          ],
          "Block margin": [
-            "Margine blocco"
+            "Margine del blocco"
          ],
          "Block padding": [
-            "Padding blocco"
+            "Spaziatura interna del blocco"
          ],
          "LANGUAGE": [
-            "Lingua"
+            "LINGUA"
          ],
          "Language spacing": [
-            "Spaziatura lingua"
+            "Spaziatura della lingua"
          ],
          "Language padding": [
-            "Padding lingua"
+            "Spaziatura interna della lingua"
          ],
          "Display": [
-            "Mostra"
+            "Visualizzazione"
          ],
          "Show flag": [
             "Mostra bandiera"
          ],
          "Show language name": [
-            "Mostra nome lingua"
+            "Mostra nome della lingua"
          ],
          "Display language name in": [
-            "Mostra nome lingua in"
+            "Visualizza il nome della lingua in"
          ],
          "Style": [
             "Stile"
          ],
          "Flag settings": [
-            "Impostazioni bandiera"
+            "Impostazioni della bandiera"
          ],
          "Width": [
             "Larghezza"
@@ -73,7 +78,7 @@
             "Spaziatura"
          ],
          "Allow wrapping to multiple lines": [
-            "Consenti il wrapping su più linee"
+            "Consenti il ritorno a capo su più righe"
          ],
          "Open on click": [
             "Apri al clic"
@@ -82,7 +87,7 @@
             "Mostra freccia"
          ],
          "Layout": [
-            "layout"
+            "Layout"
          ],
          "Justification": [
             "Allineamento"
@@ -97,16 +102,16 @@
             "Sfondo"
          ],
          "Language Text": [
-            "Testo lingua"
+            "Testo della lingua"
          ],
          "Language Background": [
-            "Sfondo lingua"
+            "Sfondo della lingua"
          ],
          "Current language text": [
-            "Testo lingua corrente"
+            "Testo della lingua corrente"
          ],
          "Current language background": [
-            "Sfondo lingua corrente"
+            "Sfondo della lingua corrente"
          ],
          "Full name": [
             "Nome completo"
@@ -115,16 +120,16 @@
             "Codice"
          ],
          "Justify items left": [
-            "Allinea gli elementi a sinistra"
+            "Allinea elementi a sinistra"
          ],
          "Justify items center": [
-            "Allinea gli elementi al centro"
+            "Allinea elementi al centro"
          ],
          "Justify items right": [
-            "Allinea gli elementi a destra"
+            "Allinea elementi a destra"
          ],
          "Justify items space between": [
-            "Allinea gli elementi con spazio tra le righe"
+            "Allinea elementi con spazio tra"
          ],
          "Horizontal": [
             "Orizzontale"
@@ -136,34 +141,43 @@
             "Normale"
          ],
          "Medium": [
-            "Media"
+            "Medio"
          ],
          "Large": [
             "Grande"
          ],
          "X-Large": [
-            "Extra large"
+            "Extra grande"
+         ],
+         "Ab": [
+            "Ab"
+         ],
+         "AB": [
+            "AB"
+         ],
+         "ab": [
+            "ab"
          ],
          "Small": [
             "Piccolo"
          ],
          "Displays the WPML Language Switcher.": [
-            "Mostra il selettore lingua WPML."
+            "Visualizza il selettore di lingua WPML."
          ],
          "Language Switcher": [
-            "Selettore della lingua"
+            "Selettore di lingua"
          ],
          "displays the WPML Language Switcher": [
-            "mostra il selettore lingua WPML"
+            "visualizza il selettore di lingua WPML"
          ],
          "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
-            "Mostra il selettore della lingua WPML. <br/> Scopri <a>come tradurre questo blocco</a>."
+            "Visualizza il selettore di lingua WPML. <br/> Scopri <a>come tradurre questo blocco</a>."
          ],
          "Navigation Language Switcher": [
-            "Selettore lingua di navigazione"
+            "Selettore di lingua per la navigazione"
          ],
          "Reset all": [
-            "Azzera tutto"
+            "Reimposta tutto"
          ]
       }
    }

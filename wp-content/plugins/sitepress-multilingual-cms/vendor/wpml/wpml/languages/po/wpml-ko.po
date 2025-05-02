@@ -1,0 +1,30 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-08-20T13:42:04+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: wpml\n"
+
+#: src/config-admin-pages.php:83
+msgid "Translation Management"
+msgstr "번역 관리"
+
+#: src/Legacy/Component/ATE/Application/Query/Account.php:25
+msgid "Error getting credits"
+msgstr "크레딧 획득 오류"
+
+#: src/UserInterface/Web/Core/Component/Dashboard/Application/DashboardController.php:350
+#: src/UserInterface/Web/Core/Component/Dashboard/Application/DashboardController.php:352
+msgid "Strings"
+msgstr "문자열"
+
+#: src/UserInterface/Web/Core/Component/Dashboard/Application/DashboardController.php:351
+msgid "String"
+msgstr "문자열"

@@ -1,0 +1,44 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Add glossary terms": [
+            "Sözlük terimleri ekle"
+         ],
+         "Minimize": [
+            "Küçült"
+         ],
+         "Expand": [
+            "Genişlet"
+         ],
+         "There's nothing yet in the Glossary": [
+            "Sözlükte henüz hiçbir şey yok"
+         ],
+         "Looks like you're not yet using the glossary. Glossary can help you:": [
+            "Görünüşe göre henüz sözlüğü kullanmıyorsunuz. Sözlük size şu konularda yardımcı olabilir:"
+         ],
+         "Improve the quality of the translation": [
+            "Çeviri kalitesini artırmak"
+         ],
+         "Ensure translation consistency": [
+            "Çeviri tutarlılığını sağlamak"
+         ],
+         "Reduce translation costs": [
+            "Çeviri maliyetlerini azaltmak"
+         ],
+         "Improve SEO in translation languages": [
+            "Çeviri dillerinde SEO'yu iyileştirmek"
+         ],
+         "How to Use the Glossary for Accurate Translations": [
+            "Doğru Çeviriler için Sözlüğü Kullanma Yöntemi"
+         ],
+         "%d item in the <a>Glossary</a>": [
+            "<a>Sözlükte</a> %d öğe",
+            "<a>Sözlükte</a> %d öğe"
+         ]
+      }
+   }
+}

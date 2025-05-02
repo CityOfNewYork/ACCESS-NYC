@@ -1,0 +1,794 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\\nContent-Transfer-Encoding: 8bit"
+"\\nProject-Id-Version:WPML_EXPORT\\nPOT-Creation-Date: \\nPO-Revision-Date: "
+"\\nLast-Translator: \\nLanguage-Team: \\nLanguage:en\\nMIME-Version: 1.0\\n"
+
+msgid " They were added to the string translation table."
+msgstr "它們被新增到字串轉換表中。"
+
+msgid "%d new translation was added."
+msgstr "已新增%d個翻譯。"
+
+msgid "%d new translations were added."
+msgstr "已新增%d個翻譯。"
+
+msgid "%d translation was updated."
+msgstr "已更新%d個新翻譯。"
+
+msgid "%d translations were updated."
+msgstr "已更新%d個新翻譯。"
+
+msgid ""
+"%s slugs are set to be translated, but they are missing their translation"
+msgstr "%s別名被設為需要翻譯，但它們缺少翻譯"
+
+msgid "(original)"
+msgstr "（原文）"
+
+msgid ""
+"* This feature is only intended for sites that are in development. It will "
+"significantly slow down the site, but help you find strings that WPML cannot "
+"detect in the PHP code."
+msgstr ""
+"* 此功能僅適用於開發中的網站。這將大大降低網站速度，但是可以幫助您找到"
+"WPML無法在PHP程式碼中偵測到的字串。"
+
+msgid "-- Please select --"
+msgstr "-- 請選擇 --"
+
+msgid ".po file:"
+msgstr ".po 檔案："
+
+msgid "Active"
+msgstr "啟用"
+
+msgid "Add selected strings"
+msgstr "添加選定的字串"
+
+msgid "Add the new translations."
+msgstr "新增新的翻譯。"
+
+msgid "Admin Texts Translation"
+msgstr "管理文字翻譯"
+
+msgid "All"
+msgstr "全部"
+
+msgid "All Translation Priorities"
+msgstr "﻿所有翻譯優先順序"
+
+msgid "All domains"
+msgstr "所有網域"
+
+msgid "All strings"
+msgstr "所有字串"
+
+msgid "All strings in %s"
+msgstr "%s中的所有字串"
+
+msgid "Also create translations according to the .po file"
+msgstr "同時根據 .po 檔案創建譯文"
+
+msgid "Also include translations"
+msgstr "還包括翻譯"
+
+msgid "Also prevent similar messages in the future?"
+msgstr "還防止未來類似的訊息？"
+
+msgid "Apply"
+msgstr "套用"
+
+msgid ""
+"Are you sure you want to delete these packages?\\nTheir strings and "
+"translations will be deleted too."
+msgstr ""
+"您確定要移除這些包？\\n也將移除它们的字串和翻譯。"
+
+msgid ""
+"Are you sure you want to delete these strings?\\nTheir translations will be "
+"deleted too."
+msgstr ""
+"您確定要刪除這些字串嗎？\\n它們的翻譯也將被刪除。"
+
+msgid "Auto register strings for translation"
+msgstr "自動註冊字串以便翻譯"
+
+msgid "Auto-download WordPress translations"
+msgstr "自動下載WordPress的翻譯"
+
+msgid "Auto-register strings from these text domains"
+msgstr "自動註冊這些文字欄位中的字串"
+
+msgid ""
+"Automatic string registration will remain active for %s. Please visit the "
+"site's front-end to allow WPML to find strings for translation."
+msgstr ""
+"自動字串註冊將在"
+"%s內保持有效。請存取該網站的前端，以允許"
+"WPML尋找要翻譯的字串。"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Change the language of selected strings"
+msgstr "變更所選字串的語言"
+
+msgid "Change translation priority of selected strings"
+msgstr "變更所選字串的翻譯優先順序"
+
+msgid "Check other languages"
+msgstr "檢查其他語言"
+
+msgid "Cleanup and optimization completed!"
+msgstr "清理和最佳化完成！"
+
+msgid "Cleanup and optimize string tables"
+msgstr "清理和最佳化字串表"
+
+msgid "Click to toggle"
+msgstr "按一下切換"
+
+msgid "Close"
+msgstr "關閉"
+
+msgid "Complete"
+msgstr "完成"
+
+msgid "Completely translated strings"
+msgstr "完全翻譯的字串"
+
+msgid "Configure"
+msgstr "設定"
+
+msgid "Contains %s strings"
+msgstr "包含%s個字串"
+
+msgid "Context"
+msgstr "上下文"
+
+msgid "Current source language"
+msgstr "當前源語言"
+
+msgid "Default package language"
+msgstr "預設包語言"
+
+msgid "Delete Selected Packages"
+msgstr "移除所選包"
+
+msgid "Delete selected strings"
+msgstr "刪除選定的字串"
+
+msgid "Dismiss all notices"
+msgstr "關閉所有通知"
+
+msgid "Display %d results per page"
+msgstr "每頁面顯示 %d 個結果"
+
+msgid "Display all results"
+msgstr "顯示所有結果"
+
+msgid "Display packages for this kind:"
+msgstr "顯示此類型包："
+
+msgid "Display:"
+msgstr "顯示："
+
+msgid "Displaying %1$s&#8211;%2$s of %3$s"
+msgstr "顯示%1$s&#8211;%2$s / %3$s"
+
+msgid "Domain"
+msgstr "網域"
+
+msgid "Edit"
+msgstr "編輯"
+
+msgid "Error: please try again"
+msgstr "錯誤：請重試"
+
+msgid "Errors: %s"
+msgstr "錯誤：%s"
+
+msgid "Exact match"
+msgstr "完全符合"
+
+msgid "Existing translation"
+msgstr "現有翻譯"
+
+msgid "Exit search"
+msgstr "退出搜尋"
+
+msgid "Export strings into .po/.pot file"
+msgstr "將字串匯出到 .po/.pot 檔案"
+
+msgid "Failed downloading the language information file."
+msgstr "無法下載語言資訊檔案。"
+
+msgid ""
+"Failed downloading the language information file. Please go back and try a "
+"little later."
+msgstr "下載語言資訊檔案失敗。請返回並稍後重試。"
+
+msgid "File upload error"
+msgstr "檔案上傳錯誤"
+
+msgid "Files already scanned."
+msgstr "已掃描檔案。"
+
+msgid "For more details, see %s."
+msgstr "有關詳細資訊，請參閱%s。"
+
+msgid "Highlight color for strings"
+msgstr "字串的高亮色彩"
+
+msgid "Import"
+msgstr "匯入"
+
+msgid "Import / export .po"
+msgstr "匯入/匯出 .po"
+
+msgid "In domain:"
+msgstr "在域中："
+
+msgid "In progress"
+msgstr "進行中"
+
+msgid "In translation basket"
+msgstr "在翻譯購物籃中"
+
+msgid "Inactive"
+msgstr "不活動"
+
+msgid "Include translations"
+msgstr "包括翻譯"
+
+msgid "Info"
+msgstr "資訊"
+
+msgid "Invalid language: %s"
+msgstr "無效的語言：%s"
+
+msgid "Invalid nonce"
+msgstr "無效nonce"
+
+msgid "Kind"
+msgstr "類型"
+
+msgid "Language of domains"
+msgstr "網域的語言"
+
+msgid "Language of this %1$s is %2$s"
+msgstr "此%1$s的語言是%2$s"
+
+msgid "Languages of domains"
+msgstr "網域的語言"
+
+msgid "Loaded"
+msgstr "已載入"
+
+msgid "Look for strings while pages are rendered"
+msgstr "在呈現頁面時尋找字串"
+
+msgctxt "MO Import blocked 1/4"
+msgid "There is a problem with the String Translation table in your site."
+msgstr "您網站中的字串翻譯表有問題。"
+
+msgctxt "MO Import blocked 2/4"
+msgid ""
+"This problem is not causing a problem running the site right now, but can "
+"become a critical issue in the future."
+msgstr "這個問題現在不會導致網站執行問題，但將來可能變成大問題。"
+
+msgctxt "MO Import blocked 3/4"
+msgid "WPML support team knows how to fix it."
+msgstr "WPML支援團隊知道如何解決該問題。"
+
+msgctxt "MO Import blocked 4/4"
+msgid ""
+"Please add a message in the relevant <a href=\"%s\" target=\"_blank"
+"\">support thread</a> and we'll fix it for you."
+msgstr ""
+"請在相關<a href=\"%s\" target=\"_blank\">支援主題</"
+"a>中新增訊息，我們將為您解決。"
+
+msgctxt "MO Import blocked short 1/3"
+msgid ""
+"WPML cannot replace .mo files because of technical problems in the String "
+"Translation table."
+msgstr "由於字串翻譯表中的技術問題，WPML無法取代.mo檔案。"
+
+msgctxt "MO Import blocked short 2/3"
+msgid "WPML support team knows how to fix it."
+msgstr "WPML支援團隊知道如何解決該問題。"
+
+msgctxt "MO Import blocked short 3/3"
+msgid ""
+"Please add a message in the relevant <a href=\"%s\" target=\"_blank\" "
+">support thread</a> and we'll fix it for you."
+msgstr ""
+"請在相關<a href=\"%s\" target=\"_blank\" >支援主題</"
+"a>中新增訊息，我們將為您解決。"
+
+msgid "Missing parameters"
+msgstr "缺少參數"
+
+msgid "Missing version number for translation."
+msgstr "譯文缺少版本號。"
+
+msgid "More options"
+msgstr "更多選項"
+
+msgid "Multibyte String extension"
+msgstr "多位元組字串延伸"
+
+msgid "Multibyte String extension is required for WPML String Translation."
+msgstr "WPML 字串翻譯需要多位元組字串延伸。"
+
+msgid "Name"
+msgstr "名稱"
+
+msgid "Name: %s"
+msgstr "名稱：%s"
+
+msgid "Needs update"
+msgstr "需要更新"
+
+msgid "New translation"
+msgstr "新的翻譯"
+
+msgid "New translations (%d)"
+msgstr "新的翻譯(%d)"
+
+msgid "No - keep showing these message"
+msgstr "否 - 保持顯示這些訊息"
+
+msgid "No TextDomain"
+msgstr "沒有TextDomain"
+
+msgid ""
+"No action performed. Please select the strings that you need to update or "
+"add."
+msgstr "未執行操作。請選擇需要更新或新增的字串。"
+
+msgid "No packages found"
+msgstr "沒有找到封包"
+
+msgid "No records found"
+msgstr "找不到記錄"
+
+msgid "No string found"
+msgstr "未找到字串"
+
+msgid "No strings found"
+msgstr "未找到字串"
+
+msgid "No updates found."
+msgstr "沒有找到更新。"
+
+msgid "Nonce value is invalid"
+msgstr "Nonce值無效"
+
+msgid "Not loaded"
+msgstr "未載入"
+
+msgid "Not marked as 'complete'. Press 'Save' to enable."
+msgstr "未標記為'完成'。按「儲存」啟用。"
+
+msgid "Not translated"
+msgstr "未翻譯"
+
+msgid "Number of strings"
+msgstr "字串數量"
+
+msgid "PO export may be glitchy. We are working to fix it."
+msgstr "PO匯出可能出問題。我們正在努力解決這個問題。"
+
+msgid "Package Management"
+msgstr "包管理"
+
+msgid "Packages"
+msgstr "包"
+
+msgid "Partial Translation"
+msgstr "部分翻譯"
+
+msgid "Partial translation"
+msgstr "部分翻譯"
+
+msgid "Performance considerations"
+msgstr "效能考慮"
+
+msgid ""
+"Please activate WPML Multilingual CMS to have WPML String Translation "
+"working."
+msgstr "請激活WPML多語言CMS使WPML字串翻譯可用。"
+
+msgid "Please enter a domain!"
+msgstr "請輸入一個網域！"
+
+msgid "Please select at least one document to translate."
+msgstr "請選擇至少一個待譯文件。"
+
+msgid "Please select at least one language to translate into."
+msgstr "請選擇至少一個目的語言。"
+
+msgid "Please select the .po file to upload!"
+msgstr "請選擇要上傳的 .po 檔案！"
+
+msgid "Plugin"
+msgstr "外掛"
+
+msgid ""
+"Post \"%1$s\" will be ignored for %2$s, because translation is already in "
+"progress."
+msgstr "將略過文章 \"%1$s\"的 %2$s，因為已經進行翻譯了。"
+
+msgid ""
+"Post \"%1$s\" will be ignored for %2$s, because translation is already "
+"waiting for translator."
+msgstr ""
+"將略過文章\"%1$s\"的%2$s，因為已經在等譯員進行翻譯了。"
+
+msgid "Proceed"
+msgstr "繼續"
+
+msgid "Return to String Translation"
+msgstr "返回字串翻譯"
+
+msgid "Review changes and update"
+msgstr "審查變更並更新"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Scan selected plugins for strings"
+msgstr "掃描選定外掛程式中的字串"
+
+msgid "Scan selected themes for strings"
+msgstr "掃描選定主題中的字串"
+
+msgid "Scan successful! WPML found %s strings."
+msgstr "掃描成功！WPML找到%s個字串。"
+
+msgid "Scanning file: %s"
+msgstr "正在掃描檔案：%s"
+
+msgid "Search"
+msgstr "搜尋"
+
+msgid "Search for:"
+msgstr "搜尋："
+
+msgid "Select All"
+msgstr "全選"
+
+msgid "Select all"
+msgstr "選擇所有"
+
+msgid "Select domain:"
+msgstr "選擇網域："
+
+msgid "Select for which domain to set the language: "
+msgstr "選擇為哪個網域設定語言："
+
+msgid "Select what the strings are for:"
+msgstr "選擇以下項目的字串："
+
+msgid "Send to translation"
+msgstr "發送去翻譯"
+
+msgid "Set different slugs in different languages for %s."
+msgstr "為%s設定不同語言的不同別名。"
+
+msgid "Set the source language of these strings to:"
+msgstr "設定這些字串的源語言為："
+
+msgid "Show custom MO Files Pre-generation dialog box"
+msgstr "顯示自訂MO檔案預生成對話方塊"
+
+msgid "Showing only strings that contain %s"
+msgstr "只顯示含有 %s 的字串"
+
+msgid "Skipping file: %s"
+msgstr "正在跳過檔案：%s"
+
+msgid "Slug translations"
+msgstr "別名翻譯"
+
+msgid ""
+"Some of the strings selected belong to packages. You can only change the "
+"language of these strings if all strings in the packages are selected."
+msgstr "選擇的一些字串屬於包。僅當選擇了包中所有的字串，才能變更這些字串的語言。"
+
+msgid ""
+"Some themes and plugins don't properly set the textdomain (second argument) "
+"in GetText calls. When you select this option, WPML will assume that the "
+"strings found in GetText calls in the PHP files of the theme and plugin "
+"should have the textdomain with the theme/plugin's name."
+msgstr ""
+"某些主題和外掛程式在GetText呼叫中沒有正確設定"
+"textdomain（第二個參數）。當您選擇該選項時，"
+"WPML將假定在主題和外掛程式的PHP檔案中在"
+"GetText呼叫中找到的字串應具有含主題/外掛程式名稱的"
+"textdomain。"
+
+msgid "String"
+msgstr "字串"
+
+msgctxt "String Tracking warning: sentence 1"
+msgid ""
+"%s allows you to see where strings come from, so you can translate them "
+"accurately."
+msgstr "%s允許您檢視字串來自哪裡，因此您可以準確地翻譯它們。"
+
+msgctxt "String Tracking warning: sentence 1, anchor text"
+msgid "String Tracking"
+msgstr "字串跟蹤"
+
+msgctxt "String Tracking warning: sentence 2"
+msgid "It needs to parse the PHP source files and the output HTML."
+msgstr "它需要解析PHP原始檔和輸出HTML。"
+
+msgctxt "String Tracking warning: sentence 3"
+msgid ""
+"This feature is CPU-intensive and should only be used while you are "
+"developing sites."
+msgstr "該功能很耗費CPU資源，只應在您開髮網站時使用。"
+
+msgctxt "String Tracking warning: sentence 4"
+msgid ""
+"Remember to turn it off before going to production, to avoid performance "
+"problems."
+msgstr "記住在生產之前關閉它，以避免效能問題。"
+
+msgid "String Translation"
+msgstr "字串翻譯"
+
+msgid "String translation"
+msgstr "字串翻譯"
+
+msgid "Strings from all text domains are excluded"
+msgstr "排除所有文字欄位的字串"
+
+msgid "Strings from all text domains will be auto-registered"
+msgstr "將自動註冊來自所有文字網域的字串"
+
+msgid "Strings in need of translation"
+msgstr "需要翻譯的字串"
+
+msgid "Strings in the plugins"
+msgstr "外掛程式中的字串"
+
+msgid "Strings in the themes"
+msgstr "主題中的字串"
+
+msgid "Strings per page:"
+msgstr "每頁面字串："
+
+msgid "Strings translations updated"
+msgstr "字串翻譯已更新"
+
+msgid "Submit"
+msgstr "提交"
+
+msgid "Success!"
+msgstr "成功了！"
+
+msgid "Textdomain"
+msgstr "Textdomain"
+
+msgid "The database has been updated."
+msgstr "已經更新了資料庫。"
+
+msgid "The following files were processed:"
+msgstr "已處理了以下檔案："
+
+msgid "Theme"
+msgstr "主題"
+
+msgid "There is nothing to be updated or to be added."
+msgstr "沒有可更新或新增的內容。"
+
+msgid "There is nothing to translate."
+msgstr "沒有可翻譯的內容。"
+
+msgid ""
+"These are the strings that we found in your .po file. Please carefully "
+"review them. Then, click on the 'add' or 'cancel' buttons at the %1$sbottom "
+"of this screen%2$s. You can exclude individual strings by clearing the check "
+"boxes next to them."
+msgstr ""
+"這些是我們在您的."
+"po檔案中找到的字串。請仔細檢查。然後，按一下"
+"%1$s此螢幕底部"
+"%2$s的「新增」或「取消」按鈕。透過清除各字串旁的核取方塊，可以排除對應字串。"
+
+msgid "This domain currently has the following strings:"
+msgstr "此網域當前有以下字串："
+
+msgid ""
+"This folder appears to be not writable. This is blocking translation for "
+"strings from appearing on the site."
+msgstr "此資料夾似乎不可寫。這將阻止字串的翻譯出現在網站上。"
+
+msgid ""
+"This update includes %d new strings and %d updated strings. You can review "
+"the strings below. Then, go to the <a%s>bottom of this page</a> and click on "
+"the Proceed button."
+msgstr ""
+"此更新包含%d個新字串和"
+"%d個更新字串。你可以檢視下面的字串。然後，轉到<a"
+"%s>此頁面底部</a>，按「繼續」按鈕。"
+
+msgid ""
+"To resolve this, please contact your hosting company and request that they "
+"make that folder writable."
+msgstr "若要解決此問題，請與託管公司聯絡並讓他們使該資料夾可寫。"
+
+msgid "Track where strings appear on the site"
+msgstr "追蹤字串在網站上的出現位置"
+
+msgid ""
+"Translate custom post and taxonomy base slugs (via WPML String Translation)."
+msgstr ""
+"翻譯自訂文章和分類別基礎別名（透過WPML字串翻譯）。"
+
+msgid "Translate strings"
+msgstr "翻譯字串"
+
+msgid "Translate strings in %s"
+msgstr "翻譯%s中的字串"
+
+msgid "Translate texts in admin screens &raquo;"
+msgstr "翻譯管理螢幕中的文字&raquo;"
+
+msgid "Translating users of types: %s"
+msgstr "翻譯使用者類型：%s"
+
+msgid "Translation"
+msgstr "翻譯"
+
+msgid "Translation complete"
+msgstr "翻譯完成"
+
+msgid "Translation is in progress"
+msgstr "正在翻譯"
+
+msgid "Translation needed"
+msgstr "需要翻譯"
+
+msgid "Translation needs update"
+msgstr "翻譯需要更新"
+
+msgid "Translation status:"
+msgstr "翻譯狀態："
+
+msgid "Update Now"
+msgstr "立即更新"
+
+msgid "Updated %s translation is available"
+msgstr "更新的%s翻譯可用"
+
+msgid "Updated translations (%d)"
+msgstr "更新的翻譯(%d)"
+
+msgid ""
+"Use theme or plugin text domains when gettext calls do not use a string "
+"literal"
+msgstr ""
+"當"
+"gettext呼叫不逐字使用字串時，使用主題或外掛程式文字網域"
+
+msgid ""
+"Use this language as the default language for new strings in this domain"
+msgstr "使用此語言作為此網域中新字串的預設語言"
+
+msgid "View"
+msgstr "查看"
+
+msgid ""
+"WPML Package Translation is enabled but not effective. It requires <a href="
+"\"%s\">WPML</a>, String Translation and Translation Management in order to "
+"work."
+msgstr ""
+"已啟用 WPML 包翻譯，但無效。它需要 <a href=\"%s\">WPML</"
+"a>、字串翻譯和翻譯管理才能工作。"
+
+msgid ""
+"WPML String Translation is attempting to write .mo files with translations "
+"to folder:"
+msgstr "WPML字串翻譯正在嘗試將帶翻譯的.mo檔案寫入資料夾："
+
+msgid ""
+"WPML String Translation is enabled but not effective, because WPML is "
+"outdated. Please update WPML first."
+msgstr ""
+"已啟用WPML字串翻譯，但沒有生效，因為"
+"WPML已過期。請先更新WPML。"
+
+msgid ""
+"WPML String Translation will send all strings to WPML’s Advanced "
+"Translation Editor and to the translation services which are used."
+msgstr ""
+"WPML字串翻譯將所有字串傳送到"
+"WPML的進階翻譯編輯器以及使用的翻譯服務。"
+
+msgid "WPML Translation"
+msgstr "WPML翻譯"
+
+msgid ""
+"WPML can keep track of where strings are used on the public pages. "
+"Activating this feature will enable the 'view in page' functionality and "
+"make translation easier."
+msgstr "WPML 可以追蹤字串在公共頁面上的使用位置。啟用此功能將啟用「在頁面中檢視」功能並便於進行翻譯。"
+
+msgid "WPML could not delete the strings"
+msgstr "WPML無法移除字串"
+
+msgid ""
+"WPML needs to update the database. This update will help improve WPML's "
+"performance when fetching translated strings."
+msgstr ""
+"WPML需要更新資料庫。該更新將有助於提高"
+"WPML在擷取翻譯字串時的效能。"
+
+msgid "WPML's documentation on troubleshooting .mo files generation."
+msgstr "WPML關於.mo檔案生成疑難排解的文件。"
+
+msgid "Waiting for translator"
+msgstr "正在等待譯員"
+
+msgid ""
+"We have detected a problem with some tables in the database. Please contact "
+"%1$sWPML support%2$s to get this fixed."
+msgstr ""
+"我們偵測到資料庫中的某些表有問題。請聯絡%1$sWPML支援"
+"%2$s以修復此問題。"
+
+msgid "With Priority:"
+msgstr "優先順序為："
+
+msgid "Yes - disable these notifications completely"
+msgstr "是 - 完全禁用這些通知"
+
+msgid ""
+"You cannot add packages in this language to the basket since it already "
+"contains posts, packages or strings of another source language!\\n\\t\\t\\t"
+"\\t\\tEither submit the current basket and then add the post or delete the "
+"posts of differing language in the current basket"
+msgstr ""
+"您不能將這種語言的包新增到購物籃，因為它已經包含另一種源語言的文章、包或字串！"
+"\\n\\t\\t\\t\\t"
+"\\t要麼提交當前購物籃，然後新增文章，或者在當前購物籃中移除不同語言的文章"
+
+msgid "You excluded: "
+msgstr "您排除了："
+
+msgid ""
+"You have selected strings belonging to a package. Please select all strings "
+"from the affected package or unselect these strings."
+msgstr "您選擇了屬於某個包的字串。請選擇相關包中所有的字串或取消選擇這些字串。"
+
+msgid "You included: "
+msgstr "您已包括："
+
+msgid "and others"
+msgstr "及其他"
+
+msgid "edit"
+msgstr "編輯"
+
+msgid "new"
+msgstr "新"
+
+msgid "none"
+msgstr "無"
+
+msgid "select from existing"
+msgstr "從已有的選擇"
+
+msgid "view in page"
+msgstr "在頁面中檢視"
+
+msgid "view in source"
+msgstr "在源中檢視"

@@ -131,6 +131,7 @@ class Environment
         $this->addExtension(new \WPML\Core\Twig\Extension\CoreExtension());
         $this->addExtension(new \WPML\Core\Twig\Extension\EscaperExtension($options['autoescape']));
         $this->addExtension(new \WPML\Core\Twig\Extension\OptimizerExtension($options['optimizations']));
+        $this->addExtension(new \WPML\Core\Twig\Extension\ConstantExtension());
         $this->staging = new \WPML\Core\Twig\Extension\StagingExtension();
         // For BC
         if (\is_string($this->originalCache)) {

@@ -4,6 +4,10 @@ use WPML\FP\Relation;
 
 class WPML_Translation_Manager_Records extends WPML_Translation_Roles_Records {
 
+	protected function prepare_hooks() {
+		add_action( 'wpml_tm_ate_synchronize_managers', [ $this, 'on_translator_save' ], -10 );
+	}
+
 	/**
 	 * @return string
 	 */

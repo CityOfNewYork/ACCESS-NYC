@@ -57,7 +57,19 @@ class WPML_Display_As_Translated_Tax_Query implements IWPML_Action {
 	 * @return bool
 	 */
 	private function is_taxonomy_archive( WP_Query $q ) {
-		return $q->is_archive() && ( $q->is_category() || $q->is_tax() || $q->is_tag() );
+		$originalIsTaxonomyArchive = $q->is_archive() && ( $q->is_category() || $q->is_tax() || $q->is_tag() );
+
+		/**
+		 * This filter allows to programmatically enable/disable the taxonomy archive
+		 *
+		 * @since 4.7.2
+		 *
+		 * @param bool     $is_taxonomy_archive The original state.
+		 * @param WP_Query $q
+		 *
+		 * @return bool
+		 */
+		return (bool) apply_filters( 'wpml_display_as_translated_tax_query_is_archive', $originalIsTaxonomyArchive, $q );
 	}
 
 	/**

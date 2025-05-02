@@ -23,25 +23,7 @@ class CreateBackgroundTaskTable implements \IWPML_Upgrade_Command {
 	public function run() {
 		$wpdb = $this->schema->get_wpdb();
 
-		$table_name      = $wpdb->prefix . BackgroundTask::TABLE_NAME;
-		$charset_collate = SitePress_Setup::get_charset_collate();
-
-		$query = "
-			CREATE TABLE IF NOT EXISTS `{$table_name}` (
-				`task_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-				`task_type` VARCHAR(500) NOT NULL,
-				`task_status` SMALLINT UNSIGNED NOT NULL DEFAULT 0,
-				`starting_date` DATETIME NULL,
-				`total_count` INT UNSIGNED NOT NULL DEFAULT 0,
-				`completed_count` INT UNSIGNED NOT NULL DEFAULT 0,
-				`completed_ids` TEXT NULL DEFAULT NULL,
-				`payload` TEXT NULL DEFAULT NULL,
-				`retry_count` SMALLINT UNSIGNED NOT NULL DEFAULT 0
-			) {$charset_collate};
-		";
-
-		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-		$this->result = $wpdb->query( $query );
+		$this->result = self::create_table_if_not_exists( $wpdb );
 
 		return $this->result;
 	}
@@ -79,4 +61,31 @@ class CreateBackgroundTaskTable implements \IWPML_Upgrade_Command {
 	public function get_results() {
 		return $this->result;
 	}
+
+	/**
+	 * @param \wpdb $wpdb
+	 * @return bool
+	 */
+	public static function create_table_if_not_exists( $wpdb ) {
+		$table_name      = $wpdb->prefix . BackgroundTask::TABLE_NAME;
+		$charset_collate = SitePress_Setup::get_charset_collate();
+
+		$query = "
+			CREATE TABLE IF NOT EXISTS `{$table_name}` (
+				`task_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				`task_type` VARCHAR(500) NOT NULL,
+				`task_status` SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+				`starting_date` DATETIME NULL,
+				`total_count` INT UNSIGNED NOT NULL DEFAULT 0,
+				`completed_count` INT UNSIGNED NOT NULL DEFAULT 0,
+				`completed_ids` TEXT NULL DEFAULT NULL,
+				`payload` TEXT NULL DEFAULT NULL,
+				`retry_count` SMALLINT UNSIGNED NOT NULL DEFAULT 0
+			) {$charset_collate};
+		";
+
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		return $wpdb->query( $query );
+	}
+
 }

@@ -45,8 +45,8 @@ class DoubleQuotes implements \IWPML_Backend_Action, \IWPML_Frontend_Action {
 	}
 
 	/**
-	 * @param string $string
-	 * @param string $encoding
+	 * @param string|mixed $string
+	 * @param string       $encoding
 	 *
 	 * @return bool
 	 */

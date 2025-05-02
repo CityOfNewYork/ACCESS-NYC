@@ -1,0 +1,364 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/language/LanguagePairs.js:57
+msgid "From:"
+msgstr "출발:"
+
+#: src/js/components/language/LanguagePairs.js:69
+msgid "--Choose language--"
+msgstr "--언어 선택--"
+
+#: src/js/components/language/LanguagePairs.js:81
+msgid "to:"
+msgstr "도착:"
+
+#: src/js/components/language/SelectLanguagePairs.js:39
+msgid "Set language pair(s) for Translator %s:"
+msgstr "%s 번역가의 언어 쌍 설정:"
+
+#: src/js/components/language/SelectLanguagePairs.js:64
+msgid "+ Add more language pairs for this translator"
+msgstr "+ 이 번역가에 대한 언어 쌍 추가"
+
+#: src/js/icl-to-ate-migration/components/DeactivateICL.js:19
+msgid "Translation Memory was successfully copied to Advanced Translation Editor."
+msgstr "번역 메모리가 고급 번역 편집기로 성공적으로 복사되었습니다."
+
+#: src/js/icl-to-ate-migration/components/DeactivateICL.js:30
+msgid "Deactivate ICanLocalize.com as Translation Service on this site"
+msgstr "이 사이트에서 ICanLocalize.com을 번역 서비스로 비활성화"
+
+#: src/js/icl-to-ate-migration/components/DeactivateICL.js:35
+msgid ""
+"Missing a translator? Or were new jobs since the last copy of the "
+"Translation Memory?"
+msgstr "번역가가 없나요? 또는 마지막 번역 메모리 복사 이후 새로운 작업이 있었나요?"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:25
+msgid "Enter here your ICanLocalize authentication details."
+msgstr "여기에 ICanLocalize 인증 세부 정보를 입력하세요."
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:33
+msgid "API Token:"
+msgstr "API 토큰:"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:43
+msgid "Please enter valid value for ICL token."
+msgstr "ICL 토큰에 유효한 값을 입력해주세요."
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:50
+msgid "Enter ICL API token here"
+msgstr "여기에 ICL API 토큰을 입력하세요"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:62
+msgid "Submit"
+msgstr "제출"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:78
+msgid "Sign up"
+msgstr "가입하기"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:84
+msgid "to ICanLocalize to receive your API token."
+msgstr "iCanLocalize에 가입하여 API 토큰을 받으세요."
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:91
+msgid "Already have an account? Login and"
+msgstr "이미 계정이 있으신가요? 로그인하고"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:98
+msgid "get your token."
+msgstr "토큰을 받으세요."
+
+#: src/js/icl-to-ate-migration/components/Memory/BottomLink.js:16
+msgid "Copy new Translation Memory to Advanced Translation Memory"
+msgstr "새로운 번역 메모리를 고급 번역 메모리로 복사"
+
+#: src/js/icl-to-ate-migration/components/Memory/MainButton.js:16
+msgid "Import translation memory"
+msgstr "번역 메모리 가져오기"
+
+#: src/js/icl-to-ate-migration/components/MigrationContainer.js:21
+msgid "ICanLocalize is already deactivated on this site"
+msgstr "ICanLocalize는 이미 이 사이트에서 비활성화되었습니다"
+
+#: src/js/icl-to-ate-migration/components/MigrationContainer.js:22
+msgid ""
+"You can still import Translators or Copy Translation Memory to Advanced "
+"Translator Editor"
+msgstr "여전히 번역가를 가져오거나 번역 메모리를 고급 번역기 편집기로 복사할 수 있습니다"
+
+#: src/js/icl-to-ate-migration/components/MigrationContainer.js:27
+msgid "Move from ICanLocalize.com to Advanced Translation Editor"
+msgstr "ICanLocalize.com에서 고급 번역 편집기로 이동"
+
+#: src/js/icl-to-ate-migration/components/Translators/BottomLink.js:17
+#: src/js/icl-to-ate-migration/components/Translators/Button.js:21
+#: src/js/icl-to-ate-migration/components/Translators/Modal.js:27
+msgid "Import translators"
+msgstr "번역가 가져오기"
+
+#: src/js/icl-to-ate-migration/components/Translators/EditLanguages.js:53
+msgid "Come back"
+msgstr "돌아가기"
+
+#: src/js/icl-to-ate-migration/components/Translators/Modal.js:36
+#: src/js/setup/components/Steps/AddLanguagesModal.js:496
+msgid "Cancel"
+msgstr "취소"
+
+#: src/js/icl-to-ate-migration/components/Translators/Modal.js:40
+msgid "Save"
+msgstr "저장"
+
+#: src/js/icl-to-ate-migration/components/Translators/TranslatorsTable.js:47
+#: src/js/setup/components/Steps/AddLanguagesModal.js:346
+msgid "Name"
+msgstr "이름"
+
+#: src/js/icl-to-ate-migration/components/Translators/TranslatorsTable.js:59
+msgid "Language Pairs"
+msgstr "언어 쌍"
+
+#: src/js/icl-to-ate-migration/components/Translators/TranslatorsTable.js:93
+msgid "Not supported pairs:"
+msgstr "지원되지 않는 쌍:"
+
+#: src/js/icl-to-ate-migration/model/deactivateICL.js:18
+msgid "ICanLocalize.com deactivated"
+msgstr "ICanLocalize.com 비활성화됨"
+
+#: src/js/icl-to-ate-migration/model/translationMemory.js:12
+msgid "Translate memory is imported"
+msgstr "번역 메모리가 가져와졌습니다"
+
+#: src/js/icl-to-ate-migration/model/translators.js:26
+msgid "There is no translators in ICL"
+msgstr "ICL에 번역가가 없습니다"
+
+#: src/js/icl-to-ate-migration/model/translators.js:45
+msgid "Translators saved"
+msgstr "번역가가 저장되었습니다"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:48
+msgid "%s file upload failed."
+msgstr "%s 파일 업로드 실패."
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:69
+msgid "Flag"
+msgstr "국기"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:87
+msgid "Flag file"
+msgstr "국기 파일"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:160
+msgid ""
+"You just added  language. Next, select it as the site's default language or "
+"a translation language."
+msgstr "방금 언어를 추가하셨습니다. 다음으로, 이를 사이트의 기본 언어 또는 번역 언어로 선택하세요."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:162
+msgid "Language added"
+msgstr "언어가 추가됨"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:192
+msgid "The value \"%s\" already exists"
+msgstr "<q id=\"q-first-1\">%s</q> 값이 이미 존재합니다"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:215
+msgid "Add a new language"
+msgstr "새 언어 추가"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:224
+msgid ""
+"Create a country-specific language by choosing the general language from "
+"the list below. Then, choose the country it should be localized for."
+msgstr "아래 목록에서 일반 언어를 선택한 다음 현지화할 국가를 선택하여 국가별 언어를 만드세요."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:229
+msgid ""
+"By choosing a combination that already exists in the database, WPML can "
+"help fill out the necessary fields. Read more about "
+"<AddingACustomLanguageLink />."
+msgstr "데이터베이스에 이미 존재하는 조합을 선택하면 WPML이 필요한 필드를 채우는 데 도움을 줄 수 있습니다. <AddingACustomLanguageLink />에 대해 자세히 알아보세요."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:242
+msgid "Cannot find?"
+msgstr "찾을 수 없나요?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:244
+msgid "Click here"
+msgstr "여기를 클릭하세요"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:300
+msgid ""
+"The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" "
+", \"pt-br\", \"zh-hans\""
+msgstr "잘못된 형식입니다. 소문자와 <q id=\"q-first-1\">-</q>만 포함할 수 있습니다. 예: <q id=\"q-first-2\">fr</q>, <q id=\"q-first-3\">pt-br</q>, <q id=\"q-first-4\">zh-hans</q>"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:308
+msgid "Language"
+msgstr "언어"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:331
+msgid "Location"
+msgstr "위치"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:360
+msgid "Code"
+msgstr "코드"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:374
+msgid "The language will not be supported by automatic translations"
+msgstr "이 언어는 자동 번역에서 지원되지 않습니다"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:392
+msgid "Language mapping"
+msgstr "언어 매핑"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:404
+msgid "Don't map this language"
+msgstr "이 언어를 매핑하지 않음"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:418
+msgid "Default locale"
+msgstr "기본 로케일"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:423
+msgid ""
+"The wrong format. It may contain only small letters and \"_\". E.g: \"de\" "
+", \"de_DE\", \"zh_Hant_TW\""
+msgstr "잘못된 형식입니다. 소문자와 <q id=\"q-first-1\">_</q>만 포함할 수 있습니다. 예: <q id=\"q-first-2\">de</q>, <q id=\"q-first-3\">de_DE</q>, <q id=\"q-first-4\">zh_Hant_TW</q>"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:435
+msgid "hreflang"
+msgstr "hreflang"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:449
+msgid "Encode url?"
+msgstr "URL 인코딩?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:45
+msgid "Flags must be:"
+msgstr "국기는 다음과 같아야 합니다:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:453
+msgid "NO"
+msgstr "아니오"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:454
+msgid "YES"
+msgstr "예"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:460
+msgid " (required)"
+msgstr " (필수)"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:483
+msgid "Please fill in the field"
+msgstr "필드를 채워주세요"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:49
+msgid "PNG, SVG, or JPG files"
+msgstr "PNG, SVG, 또는 JPG 파일"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:501
+msgid "Save language"
+msgstr "언어 저장"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:52
+msgid "18 x 12 pixels"
+msgstr "18 x 12 픽셀"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:55
+msgid "Read more about "
+msgstr "자세히 알아보기 "
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:60
+msgid ""
+"The name of your language as it will appear on your site's language "
+"switcher."
+msgstr "사이트의 언어 전환기에 표시될 언어 이름입니다."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:61
+msgid ""
+"A unique value that identifies the language in the database and URL. Once "
+"saved, the language code cannot be changed."
+msgstr "데이터베이스와 URL에서 언어를 식별하는 고유한 값입니다. 저장 후에는 언어 코드를 변경할 수 없습니다."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:62
+msgid ""
+"If your custom language is similar to an existing language, you can use the "
+"existing language's spellcheck and automatic translation. For example, if "
+"your custom language is Swiss-German, you can map to German as the language "
+"to use for spellcheck and automatic translation. If you don't map your "
+"custom language to an existing language, spellcheck and automatic "
+"translation features will be unavailable in that language."
+msgstr "사용자 정의 언어가 기존 언어와 유사한 경우, 기존 언어의 맞춤법 검사와 자동 번역을 사용할 수 있습니다. 예를 들어, 사용자 정의 언어가 스위스 독일어라면 맞춤법 검사와 자동 번역에 독일어를 사용하도록 매핑할 수 있습니다. 사용자 정의 언어를 기존 언어에 매핑하지 않으면 해당 언어에서 맞춤법 검사와 자동 번역 기능을 사용할 수 없습니다."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:66
+msgid ""
+"The value WPML checks when loading translations from MO and PO files. The "
+"default locale is included in the filenames in your /wp-content/languages/ "
+"folder in your WordPress setup."
+msgstr "WPML이 MO 및 PO 파일에서 번역을 로드할 때 확인하는 값입니다. 기본 로케일은 WordPress 설정의  /wp-content/languages/ 폴더에 있는 파일 이름에 포함되어 있습니다."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:69
+msgid ""
+"Google uses the hreflang attribute to direct users to sites in their "
+"relevant language and location. Examples:"
+msgstr "Google은 hreflang 속성을 사용하여 사용자를 관련 언어 및 위치의 사이트로 안내합니다. 예시:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:71
+msgid "All English-speaking users: en"
+msgstr "모든 영어 사용자: en"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:72
+msgid "English for UK users: en-gb"
+msgstr "영국 사용자를 위한 영어: en-gb"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:73
+msgid "English for US users: en-us"
+msgstr "미국 사용자를 위한 영어: en-us"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:81
+msgid ""
+"Determines if URLs in this language are encoded or use ASCII characters (if "
+"unsure, leave it as \"No\")."
+msgstr "이 언어의 URL이 인코딩되어 있는지 또는 ASCII 문자를 사용하는지 결정합니다 (확실하지 않은 경우 <q id=\"q-first-1\">아니오</q>로 두세요)."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:98
+msgid "adding a custom language"
+msgstr "사용자 정의 언어 추가하기"
+
+#: src/js/setup/components/Steps/Languages.js:110
+msgid "What are the languages of your site?"
+msgstr "귀하의 사이트 언어는 무엇입니까?"
+
+#: src/js/setup/components/Steps/Languages.js:120
+msgid "Default language"
+msgstr "기본 언어"
+
+#: src/js/setup/components/Steps/Languages.js:122
+msgid "What is the current language of your website?"
+msgstr "현재 웹사이트의 언어는 무엇인가요?"
+
+#: src/js/setup/components/Steps/Languages.js:133
+msgid "Translation languages"
+msgstr "번역 언어"
+
+#: src/js/setup/components/Steps/Languages.js:135
+msgid "Which languages do you want to translate your site into?"
+msgstr "사이트를 어떤 언어로 번역하고 싶으신가요?"
+
+#: src/js/setup/components/Steps/Languages.js:149
+msgid "If you cannot find languages that you need in the list"
+msgstr "목록에서 필요한 언어를 찾을 수 없는 경우"
+
+#: src/js/setup/components/Steps/Languages.js:150
+msgid "create a custom language"
+msgstr "사용자 정의 언어 만들기"

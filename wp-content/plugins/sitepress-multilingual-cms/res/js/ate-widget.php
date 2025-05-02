@@ -2,8 +2,13 @@
 $constructor = '';
 $isJs        = false;
 
-$factory           = new WPML_TM_AMS_ATE_Console_Section_Factory();
-$ateConsoleSection = $factory->create();
+if ( isset( $_GET['section'] ) && $_GET['section'] === WPML_TM_AMS_Translation_Quality_Console_Section::SLUG ) {
+	$factory           = new WPML_TM_AMS_Translation_Quality_Console_Section_Factory();
+	$ateConsoleSection = $factory->create();
+} else {
+	$factory           = new WPML_TM_AMS_ATE_Console_Section_Factory();
+	$ateConsoleSection = $factory->create();
+}
 
 $response = wp_remote_request( $ateConsoleSection->getWidgetScriptUrl(), [ 'timeout' => 20 ] );
 
@@ -24,7 +29,7 @@ if ( is_wp_error( $response ) ) {
 
 	$app = wp_remote_retrieve_body( $response );
 
-	$constructor = wp_json_encode( $ateConsoleSection->get_widget_constructor() );
+	$constructor = wp_json_encode( $ateConsoleSection->get_ams_constructor() );
 	if ( ! $app || ! trim( $app ) ) {
 		$errors[] = 'Empty response when retrieving the ATE Widget App';
 	}
@@ -70,6 +75,6 @@ if( typeof ate_jobs_sync.ateCallbacks.invalidateCache === 'function' ) {
 }
 
 LoadEateWidget(params);
-	
+
 WIDGET_CONSTRUCTOR;
 }

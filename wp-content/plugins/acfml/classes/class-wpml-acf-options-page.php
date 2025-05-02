@@ -259,6 +259,7 @@ class WPML_ACF_Options_Page implements \IWPML_Backend_Action, \IWPML_Frontend_Ac
 			&& ! $this->is_block_id( $post_id )
 			&& ! $this->id_starts_with_user( $post_id )
 			&& ! $this->is_widget_id( $post_id )
+			&& self::isValidOptionPagePostId( $post_id )
 		) {
 			$cl = acf_get_setting( 'current_language' );
 			$dl = acf_get_setting( 'default_language' );
@@ -267,7 +268,25 @@ class WPML_ACF_Options_Page implements \IWPML_Backend_Action, \IWPML_Frontend_Ac
 				$post_id .= '_' . $cl;
 			}
 		}
+
 		return $post_id;
+	}
+
+	/**
+	 * @param string $postId
+	 *
+	 * @return bool
+	 */
+	private static function isValidOptionPagePostId( $postId ) {
+		if ( function_exists( 'acf_get_options_pages' ) ) {
+			$optionPages = acf_get_options_pages();
+
+			if ( $optionPages ) {
+				return wpml_collect( acf_get_options_pages() )->first( Relation::propEq( 'post_id', $postId ) );
+			}
+		}
+
+		return false;
 	}
 
 	/**

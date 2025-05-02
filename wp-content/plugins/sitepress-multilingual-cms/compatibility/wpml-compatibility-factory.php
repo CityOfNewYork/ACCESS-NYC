@@ -17,6 +17,8 @@ class WPML_Compatibility_Factory implements IWPML_Frontend_Action_Loader, IWPML_
 
 		$hooks['jetpack'] = new WPML_Compatibility_Jetpack();
 
+		$hooks['flatsome'] = new \WPML\Compatibility\Flatsome\Hooks();
+
 		return $hooks;
 	}
 }

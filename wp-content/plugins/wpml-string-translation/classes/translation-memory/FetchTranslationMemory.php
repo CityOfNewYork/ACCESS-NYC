@@ -38,12 +38,14 @@ class FetchTranslationMemory implements IHandler {
 	}
 
 	public function fetchSingleString( $data ) {
-		$string = Obj::prop( 'string', $data );
-		$source = Obj::prop( 'source', $data );
-		$target = Obj::prop( 'target', $data );
+		$string          = Obj::prop( 'string', $data );
+		$source          = Obj::prop( 'source', $data );
+		$target          = Obj::prop( 'target', $data );
+		$context         = Obj::prop( 'context', $data );
+		$gettext_context = Obj::prop( 'gettext_context', $data );
 
 		if ( $string && $source && $target ) {
-			return $this->records->get( [ $string ], $source, $target );
+			return $this->records->get( [ $string ], $source, $target, $context, $gettext_context );
 		} else {
 			return false;
 		}

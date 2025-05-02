@@ -1,0 +1,49 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Connect this site to your %s account": [
+            "เชื่อมต่อเว็บไซต์นี้กับบัญชี %s ของคุณ"
+         ],
+         "Error": [
+            "ข้อผิดพลาด"
+         ],
+         "« Use a different Translation Service": [
+            "« ใช้บริการแปลภาษาอื่น"
+         ],
+         "Authenticate": [
+            "ยืนยันตัวตน"
+         ],
+         "Visit <link_to_service /> to request an API Token. This token allows WPML to connect to <service_name /> to send and receive jobs.": [
+            "เยี่ยมชม <link_to_service /> เพื่อขอโทเค็น API โทเค็นนี้อนุญาตให้ WPML เชื่อมต่อกับ <service_name /> เพื่อส่งและรับงาน."
+         ],
+         "Search": [
+            "ค้นหา"
+         ],
+         "Settings": [
+            "การตั้งค่า"
+         ],
+         "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
+            "ขณะนี้ไม่สามารถเชื่อมต่อบริการแปลภาษาได้เมื่อ WPML ถูกตั้งค่าให้แปลเนื้อหาเว็บไซต์ของคุณโดยอัตโนมัติ หากต้องการใช้บริการแปลภาษา โปรดเปลี่ยนโหมดการแปลของคุณบนหน้า <LinkToSettingsPage />."
+         ],
+         "Documentation": [
+            "เอกสารประกอบ"
+         ],
+         "Activate": [
+            "เปิดใช้งาน"
+         ],
+         "Name": [
+            "ชื่อ"
+         ],
+         "Description": [
+            "คำอธิบาย"
+         ],
+         "Ranking": [
+            "การจัดอันดับ"
+         ]
+      }
+   }
+}

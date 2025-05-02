@@ -89,21 +89,7 @@ class WPML_Register_String_Filter extends WPML_Displayed_String_Filter {
 		$translation     = $this->get_translation( $untranslated_text, $name, $context );
 		$has_translation = $translation->hasTranslation();
 
-		if ( ! $translation->isStringRegistered() && $this->can_register_string( $untranslated_text, $name, $context ) ) {
-			list ( $name, $domain, $gettext_content ) = $this->transform_parameters( $name, $context );
-			list( $name, $domain )                    = array_map( array( $this, 'truncate_long_string' ), array( $name, $domain ) );
-
-			if ( ! in_array( $domain, $this->excluded_contexts ) ) {
-				$save_strings = $this->get_save_strings();
-				$save_strings->save( $untranslated_text, $name, $domain, $gettext_content );
-			}
-		}
-
 		return $translation->getValue();
-	}
-
-	private function can_register_string( $original_value, $name, $context ) {
-		return $original_value || ( $name && md5( '' ) !== $name && $context );
 	}
 
 	public function force_saving_of_autoregistered_strings() {
@@ -202,6 +188,8 @@ class WPML_Register_String_Filter extends WPML_Displayed_String_Filter {
 	}
 
 	private function save_string( $value, $allow_empty_value, $language, $domain, $context, $name ) {
+		$value = is_null( $value ) ? '' : $value;
+
 		if ( ! $this->block_save_strings && ( $allow_empty_value || 0 !== strlen( $value ) ) ) {
 
 			$args = array(
@@ -370,8 +358,8 @@ class WPML_Register_String_Filter extends WPML_Displayed_String_Filter {
 	 * @return WPML_WP_Cache
 	 */
 	private function get_domain_cache( $domain ) {
-		$found = false;
-		$this->registered_string_cache->get( $domain, $found );
+		$found        = false;
+		$domain_cache = $this->registered_string_cache->get( $domain, $found );
 
 		if ( ! $found ) {
 			// preload all the strings for this domain.
@@ -396,6 +384,6 @@ class WPML_Register_String_Filter extends WPML_Displayed_String_Filter {
 			$this->registered_string_cache->set( $domain, $domain_cache );
 		}
 
-		return $this->registered_string_cache->get( $domain, $found );
+		return $domain_cache;
 	}
 }

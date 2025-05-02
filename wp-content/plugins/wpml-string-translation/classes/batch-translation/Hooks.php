@@ -47,7 +47,8 @@ class Hooks {
 		callable $updateTranslationStatus,
 		callable $initializeTranslation
 	) {
-		WPHooks::onAction( 'wpml_tm_added_translation_element', 10, 2 )->then( spreadArgs( $initializeTranslation ) );
+		self::initializeStringTranslationStatusHooks( $initializeTranslation );
+
 		WPHooks::onAction( 'wpml_tm_job_in_progress', 10, 2 )->then( spreadArgs( $updateTranslationStatus ) );
 		WPHooks::onAction( 'wpml_tm_job_cancelled', 10, 1 )->then( spreadArgs( StringTranslations::cancelTranslations() ) );
 		WPHooks::onAction( 'wpml_tm_jobs_cancelled', 10, 1 )->then( spreadArgs( function ( $jobs ) {
@@ -62,6 +63,39 @@ class Hooks {
 
 			Fns::map( StringTranslations::cancelTranslations(), $jobs );
 		} ) );
+	}
+
+	/**
+	 * We have to defer the initialization of the translation status hooks because in the moment of triggering
+	 * `wpml_tm_added_translation_element` hook, the status in `wp_icl_translation_status` does not have its final value.
+	 *
+	 * If it is automatic ATE job, it can be set to `in-progress` immediately
+	 * in `WPML_TM_ATE_Jobs_Actions::added_translation_jobs`.
+	 *
+	 * @param callable $initializeTranslation
+	 *
+	 * @return void
+	 */
+	private static function initializeStringTranslationStatusHooks( callable $initializeTranslation ) {
+		$deferredInitializeTranslations = [];
+		$deferAddedTranslationElement   = function ( $element, $post ) use ( $initializeTranslation, &$deferredInitializeTranslations ) {
+			$deferredInitializeTranslations[] = function () use ( $element, $post, $initializeTranslation ) {
+				$initializeTranslation( $element, $post );
+			};
+		};
+
+		$callDeferredInitializeTranslations = function () use ( &$deferredInitializeTranslations ) {
+			foreach ( $deferredInitializeTranslations as $fn ) {
+				$fn();
+			}
+			$deferredInitializeTranslations = [];
+		};
+
+		WPHooks::onAction( 'wpml_tm_added_translation_element', 10, 2 )->then( spreadArgs( $deferAddedTranslationElement ) );
+
+		// The priority value must be greater than `WPML_TM_ATE_Jobs_Actions::added_translation_jobs` priority
+		// to make sure that the status is set correctly.
+		WPHooks::onAction( 'wpml_added_translation_jobs', 11, 0 )->then( $callDeferredInitializeTranslations );
 	}
 }
 

@@ -4,6 +4,7 @@ namespace WPML\TM\ATE\Review;
 
 use WPML\Element\API\Post as WPMLPost;
 use WPML\FP\Fns;
+use WPML\FP\Str;
 use WPML\FP\Logic;
 use WPML\FP\Lst;
 use WPML\FP\Maybe;
@@ -29,6 +30,11 @@ class ApplyJob implements \IWPML_Backend_Action, \IWPML_REST_Action, \IWPML_AJAX
 		}
 	}
 
+	/**
+	 * It sets "review_status" to "NEEDS_REVIEW" when the job is completed and it should be reviewed.
+	 *
+	 * @return void
+	 */
 	private static function addJobStatusHook() {
 		$applyReviewStatus = function ( $status, $job ) {
 			if (
@@ -37,7 +43,8 @@ class ApplyJob implements \IWPML_Backend_Action, \IWPML_REST_Action, \IWPML_AJAX
 			) {
 				Jobs::setReviewStatus(
 					(int) $job->job_id,
-					ReviewStatus::NEEDS_REVIEW );
+                    ReviewStatus::NEEDS_REVIEW
+                );
 			}
 
 			return $status;
@@ -47,6 +54,11 @@ class ApplyJob implements \IWPML_Backend_Action, \IWPML_REST_Action, \IWPML_AJAX
 		     ->then( spreadArgs( $applyReviewStatus ) );
 	}
 
+	/**
+	 * It sets the post status to "draft" when a new post is created and it should be reviewed.
+	 *
+	 * @return void
+	 */
 	private static function addTranslationCompleteHook() {
 		$isHoldToReviewMode = Fns::always( Option::getReviewMode() === 'before-publish' );
 
@@ -79,6 +91,13 @@ class ApplyJob implements \IWPML_Backend_Action, \IWPML_REST_Action, \IWPML_AJAX
 		     ->then( spreadArgs( $setPostStatus ) );
 	}
 
+	/**
+	 * It ensures that a draft post remains as draft after edition.
+     *
+	 * @see https://onthegosystems.myjetbrains.com/youtrack/issue/wpmlcore-8512
+	 *
+	 * @return void
+	 */
 	private static function addTranslationPreSaveHook() {
 		$keepDraftPostsDraftIfNeedsReview = function ( $postArr, $job ) {
 			if (
@@ -101,10 +120,56 @@ class ApplyJob implements \IWPML_Backend_Action, \IWPML_REST_Action, \IWPML_AJAX
 	 * @return bool
 	 */
 	private static function shouldBeReviewed( $job ) {
-		return ! Lst::includes( $job->element_type_prefix, self::$excluded_from_review )
-		       && $job->automatic
-		       && (int) $job->original_doc_id !== (int) get_option( 'page_for_posts' );
+		$isAutomatic = Obj::prop( 'automatic', $job );
+		if ( ! $isAutomatic ) {
+			return false;
+		}
+
+		$originalElementId = (int) Obj::prop( 'original_doc_id', $job );
+		$isHomePage        = $originalElementId && $originalElementId == (int) get_option( 'page_for_posts' );
+
+		if ( $isHomePage ) {
+			return false;
+		}
+
+		$excluded = apply_filters(
+			'wpml_tm_skip_element_type_from_review',
+			self::excludeElementTypes( $job ),
+			$job->original_post_type
+		);
+
+		if ( $excluded ) {
+			return false;
+		}
+
+		if ( ! property_exists( $job, 'completed_date' ) || ! $job->completed_date ) {
+			return true;
+		}
+
+		// Only set to review if it's a new job (not older than 60 seconds) and not
+		// a retranslation like it happens for glossary updates or formality changes.
+		// A 60 seconds timeframe is needed as the job is marked as completed before
+		// this shouldBeReviewed function is called.
+		return time() - strtotime( $job->completed_date ) < 60;
+
 	}
 
+	/**
+	 * @param object $job
+	 *
+	 * @return bool
+	 */
+	private static function excludeElementTypes( $job ): bool {
+		/** @var string $elementType e.g "post_post", "post_page", "post_attachment", "post_nav_menu_item", "package_gravityforms", "st-batch_strings" */
+		$elementType =Obj::prop( 'original_post_type', $job );
 
+		/**
+		 * We exclude packages here because they are handled in a separate class: PackageJob.
+		 */
+		if ( Str::startsWith( 'st-batch', $elementType ) || Str::startsWith( 'package', $elementType ) ) {
+			return true;
+		}
+
+		return false;
+	}
 }

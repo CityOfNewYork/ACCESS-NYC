@@ -130,6 +130,16 @@ class WPML_TP_Service extends WPML_TP_REST_Object implements Serializable {
 	/** @var \stdClass[] */
 	public $countries = [];
 
+	/**
+	 * @var int
+	 *
+	 * @since 4.7
+	 */
+	public $maximumJobsPerBatch;
+
+	/** @var bool */
+	public $auto_refresh_project_options;
+
 	public function __construct( stdClass $object = null ) {
 		parent::__construct( $object );
 		$this->set_custom_fields_data();
@@ -274,7 +284,7 @@ class WPML_TP_Service extends WPML_TP_REST_Object implements Serializable {
 	}
 
 	/**
-	 * @param  string $logo_preview_url
+	 * @param string $logo_preview_url
 	 */
 	public function set_logo_preview_url( $logo_preview_url ) {
 		$this->logo_preview_url = $logo_preview_url;
@@ -656,7 +666,7 @@ class WPML_TP_Service extends WPML_TP_REST_Object implements Serializable {
 	}
 
 	/**
-	 * @param  stdClass[] $countries
+	 * @param stdClass[] $countries
 	 */
 	public function set_countries( array $countries ) {
 		$this->countries = $countries;
@@ -687,49 +697,87 @@ class WPML_TP_Service extends WPML_TP_REST_Object implements Serializable {
 		}
 	}
 
+
+	/**
+	 * @param int $maximumJobsPerBatch
+	 *
+	 * @return void
+	 *
+	 * @since 4.7
+	 */
+	public function set_recommended_maximum_number_of_jobs_per_batch( $maximumJobsPerBatch ) {
+		$this->maximumJobsPerBatch = $maximumJobsPerBatch;
+	}
+
+
+	/**
+	 * @return int
+	 *
+	 * @since 4.7
+	 */
+	public function get_recommended_maximum_number_of_jobs_per_batch() {
+		return $this->maximumJobsPerBatch;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function get_auto_refresh_project_options() {
+		return $this->auto_refresh_project_options;
+	}
+
+	/**
+	 * @param bool $auto_refresh_project_options
+	 */
+	public function set_auto_refresh_project_options( $auto_refresh_project_options ) {
+		$this->auto_refresh_project_options = (bool) $auto_refresh_project_options;
+	}
+
 	/**
 	 * @return array
 	 */
 	protected function get_properties() {
 		return [
-			'id'                             => 'id',
-			'logo_url'                       => 'logo_url',
-			'logo_preview_url'               => 'logo_preview_url',
-			'url'                            => 'url',
-			'name'                           => 'name',
-			'description'                    => 'description',
-			'doc_url'                        => 'doc_url',
-			'tms'                            => 'tms',
-			'partner'                        => 'partner',
-			'custom_fields'                  => 'custom_fields',
-			'custom_fields_data'             => 'custom_fields_data',
-			'requires_authentication'        => 'requires_authentication',
-			'has_language_pairs'             => 'has_language_pairs',
-			'rankings'                       => 'rankings',
-			'popup_message'                  => 'popup_message',
-			'project_details_url'            => 'project_details_url',
-			'add_language_pair_url'          => 'add_language_pair_url',
-			'custom_text_url'                => 'custom_text_url',
-			'select_translator_iframe_url'   => 'select_translator_iframe_url',
-			'translator_contact_iframe_url'  => 'translator_contact_iframe_url',
-			'quote_iframe_url'               => 'quote_iframe_url',
-			'has_translator_selection'       => 'has_translator_selection',
-			'project_name_length'            => 'project_name_length',
-			'suid'                           => 'suid',
-			'notification'                   => 'notification',
-			'preview_bundle'                 => 'preview_bundle',
-			'deadline'                       => 'deadline',
-			'oauth'                          => 'oauth',
-			'oauth_url'                      => 'oauth_url',
-			'default_service'                => 'default_service',
-			'translation_feedback'           => 'translation_feedback',
-			'feedback_forward_method'        => 'feedback_forward_method',
-			'last_refresh'                   => 'last_refresh',
-			'how_to_get_credentials_desc'    => 'how_to_get_credentials_desc',
-			'how_to_get_credentials_url'     => 'how_to_get_credentials_url',
-			'client_create_account_page_url' => 'client_create_account_page_url',
-			'redirect_to_ts?'                => 'redirect_to_ts',
-			'countries'                      => 'countries',
+			'id'                                           => 'id',
+			'logo_url'                                     => 'logo_url',
+			'logo_preview_url'                             => 'logo_preview_url',
+			'url'                                          => 'url',
+			'name'                                         => 'name',
+			'description'                                  => 'description',
+			'doc_url'                                      => 'doc_url',
+			'tms'                                          => 'tms',
+			'partner'                                      => 'partner',
+			'custom_fields'                                => 'custom_fields',
+			'custom_fields_data'                           => 'custom_fields_data',
+			'requires_authentication'                      => 'requires_authentication',
+			'has_language_pairs'                           => 'has_language_pairs',
+			'rankings'                                     => 'rankings',
+			'popup_message'                                => 'popup_message',
+			'project_details_url'                          => 'project_details_url',
+			'add_language_pair_url'                        => 'add_language_pair_url',
+			'custom_text_url'                              => 'custom_text_url',
+			'select_translator_iframe_url'                 => 'select_translator_iframe_url',
+			'translator_contact_iframe_url'                => 'translator_contact_iframe_url',
+			'quote_iframe_url'                             => 'quote_iframe_url',
+			'has_translator_selection'                     => 'has_translator_selection',
+			'project_name_length'                          => 'project_name_length',
+			'suid'                                         => 'suid',
+			'notification'                                 => 'notification',
+			'preview_bundle'                               => 'preview_bundle',
+			'deadline'                                     => 'deadline',
+			'oauth'                                        => 'oauth',
+			'oauth_url'                                    => 'oauth_url',
+			'default_service'                              => 'default_service',
+			'translation_feedback'                         => 'translation_feedback',
+			'feedback_forward_method'                      => 'feedback_forward_method',
+			'last_refresh'                                 => 'last_refresh',
+			'how_to_get_credentials_desc'                  => 'how_to_get_credentials_desc',
+			'how_to_get_credentials_url'                   => 'how_to_get_credentials_url',
+			'client_create_account_page_url'               => 'client_create_account_page_url',
+			'redirect_to_ts?'                              => 'redirect_to_ts',
+			'countries'                                    => 'countries',
+			'recommended_maximum_number_of_jobs_per_batch' => 'recommended_maximum_number_of_jobs_per_batch',
+			'auto_refresh_project_options'				   =>  'auto_refresh_project_options',
 		];
 	}
 }

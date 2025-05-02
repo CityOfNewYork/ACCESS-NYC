@@ -46,15 +46,19 @@ class Strings {
 			);
 
 			if ( $matchingField ) {
-				return self::addBeforeAfterAndFallback( wpml_collect( [ $dynamicFields->pull( $dynamicFields->search( $matchingField ) ) ] ) );
+				return self::addBeforeAfterAndFallback( wpml_collect( [ $dynamicFields->pull( $dynamicFields->search( $matchingField ) ) ] ), $string->get_title() );
 			}
 
 			return $string;
 		};
 
+		$stringsForNonTranslatableFields = function( $dynamicFields ) {
+			return self::addBeforeAfterAndFallback( $dynamicFields );
+		};
+
 		return wpml_collect( $strings )
 			->map( $updateFromDynamicFields )
-			->merge( self::addBeforeAfterAndFallback( $dynamicFields ) )
+			->merge( $stringsForNonTranslatableFields( $dynamicFields ) )
 			->flatten()
 			->toArray();
 	}
@@ -94,10 +98,40 @@ class Strings {
 			);
 		};
 
-		return wpml_collect( reset( $element[ self::KEY_SETTINGS ] ) )
+		return wpml_collect( self::getFieldsFromModuleWithItems( $element[ self::KEY_SETTINGS ] ) )
 			->filter( $isDynamic )
 			->map( $getFields )
 			->flatten();
+	}
+
+	/**
+	 * @param array $module
+	 *
+	 * @return array|null
+	 */
+	public static function getFieldsFromModuleWithItems( $module ) {
+		$hasFields = function( $item ) {
+			return is_array( $item );
+		};
+
+		return wpml_collect( $module )
+			->first( $hasFields );
+	}
+
+	/**
+	 * @param array $module
+	 *
+	 * @return string
+	 */
+	public static function getKeyFromModuleWithItems( $module ) {
+		$hasFields = function( $item ) {
+			return is_array( $item );
+		};
+
+		return wpml_collect( $module )
+			->filter( $hasFields )
+			->keys()
+			->first();
 	}
 
 	/**
@@ -122,7 +156,7 @@ class Strings {
 	 */
 	private static function isModuleWithItems( array $element ) {
 		if ( isset( $element[ self::KEY_SETTINGS ] ) ) {
-			$firstSettingElement = reset( $element[ self::KEY_SETTINGS ] );
+			$firstSettingElement = self::getFieldsFromModuleWithItems( $element[ self::KEY_SETTINGS ] );
 			return is_array( $firstSettingElement ) && 0 === key( $firstSettingElement );
 		}
 
@@ -130,23 +164,27 @@ class Strings {
 	}
 
 	/**
-	 * @param Collection $dynamicFields
+	 * @param Collection  $dynamicFields
+	 * @param string|null $stringTitle
 	 *
 	 * @return Collection
 	 */
-	private static function addBeforeAfterAndFallback( Collection $dynamicFields ) {
-		$dynamicFieldToSettingStrings = function( Field $field ) {
+	private static function addBeforeAfterAndFallback( Collection $dynamicFields, $stringTitle = null ) {
+		$dynamicFieldToSettingStrings = function( Field $field ) use ( $stringTitle ) {
 			preg_match( self::SETTINGS_REGEX, $field->tagValue, $matches );
 
 			$isTranslatableSetting = function( $value, $settingField ) {
 				return $value && is_string( $value ) && in_array( $settingField, self::TRANSLATABLE_SETTINGS, true );
 			};
 
-			$buildStringFromSetting = function( $value, $settingField ) use ( $field ) {
+			$buildStringFromSetting = function( $value, $settingField ) use ( $field, $stringTitle ) {
+				// Get a title for dynamic strings attached to a field that isn't marked for translation.
+				$stringTitle = ( null === $stringTitle ) ? $field->tagKey : $stringTitle;
+
 				return new WPML_PB_String(
 					$value,
 					self::getStringName( $field->nodeId, $field->itemId, $field->tagKey, $settingField ),
-					sprintf( __( 'Dynamic content string: %s', 'sitepress' ), $field->tagKey ),
+					$stringTitle . ' (' . $settingField . ')',
 					'LINE'
 				);
 			};
@@ -216,8 +254,8 @@ class Strings {
 	private static function updateNodeWithItems( array $element, WPML_PB_String $string, array $stringNameParts ) {
 		list( , , $itemId, $dynamicField, $settingField ) = $stringNameParts;
 
-		$items   = wpml_collect( reset( $element[ self::KEY_SETTINGS ] ) );
-		$mainKey = key( $element[ self::KEY_SETTINGS ] );
+		$items   = wpml_collect( self::getFieldsFromModuleWithItems( $element[ self::KEY_SETTINGS ] ) );
+		$mainKey = self::getKeyFromModuleWithItems( $element[ self::KEY_SETTINGS ] );
 
 		$replaceStringInItem = function( array $item ) use ( $itemId, $string, $dynamicField, $settingField ) {
 			if (

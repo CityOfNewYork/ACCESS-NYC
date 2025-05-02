@@ -146,7 +146,7 @@ class WPML_LS_Inline_Styles {
 		}
 
 		if ( $slot->get( 'font_other_hover' ) || $slot->get( 'background_other_hover' ) ) {
-			$css .= "$wrapper_class a, $wrapper_class .wpml-ls-sub-menu a:hover,$wrapper_class .wpml-ls-sub-menu a:focus, $wrapper_class .wpml-ls-sub-menu a:link:hover, $wrapper_class .wpml-ls-sub-menu a:link:focus  {";
+			$css .= "$wrapper_class .wpml-ls-sub-menu a:hover,$wrapper_class .wpml-ls-sub-menu a:focus, $wrapper_class .wpml-ls-sub-menu a:link:hover, $wrapper_class .wpml-ls-sub-menu a:link:focus  {";
 			$css .= $slot->get( 'font_other_hover' ) ? "color:{$slot->get( 'font_other_hover' )};" : '';
 			$css .= $slot->get( 'background_other_hover' ) ? "background-color:{$slot->get( 'background_other_hover' )};" : '';
 			$css .= '}';
@@ -197,13 +197,18 @@ class WPML_LS_Inline_Styles {
 	 * @return string
 	 */
 	public function get_additional_style() {
-		$css = $this->sanitize_css( $this->settings->get_setting( 'additional_css' ) );
+		$additional_css = $this->settings->get_setting( 'additional_css' );
+		if ($additional_css) {
+			$css = $this->sanitize_css($additional_css);
 
-		if ( $css ) {
-			$css = '<style type="text/css" id="wpml-ls-inline-styles-additional-css">' . $css . '</style>' . PHP_EOL;
+
+			if ( $css ) {
+				$css = '<style type="text/css" id="wpml-ls-inline-styles-additional-css">' . $css . '</style>' . PHP_EOL;
+			}
+
+			return $css;
 		}
-
-		return $css;
+		return '';
 	}
 
 	public function wp_enqueue_scripts_action() {

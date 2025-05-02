@@ -8,6 +8,8 @@ use WPML\TM\API\Jobs;
 
 if ( ! class_exists( 'TranslationProxy_Basket' ) ) {
 	/**
+	 * Important! Do not remove this class. It is still used inside wpml/wpml package.
+	 *
 	 * TranslationProxy_basket collects all static methods to operate on
 	 * translations basket (cart)
 	 */
@@ -54,13 +56,33 @@ if ( ! class_exists( 'TranslationProxy_Basket' ) ) {
 					self::$basket = self::merge_baskets( self::$basket, $basket_portion );
 				}
 			}
-			if ( self::get_basket_items_count( true ) == 0 ) {
+
+			if (
+				self::get_basket_items_count( true ) == 0
+				&& ! isset( self::$basket[ 'name' ] )
+				&& ! isset( self::$basket[ 'batch' ] )
+				&& ! isset( self::$basket[ 'remote_target_languages' ] )
+			) {
 				self::$basket = [];
 			}
+
 			self::sync_target_languages();
 			self::update_basket_option( self::$basket );
 			self::update_basket_notifications();
 		}
+
+
+		public static function cleanBasket() {
+			self::get_basket();
+
+
+			unset( self::$basket['name'] );
+			unset( self::$basket['batch'] );
+			unset( self::$basket['remote_target_languages'] );
+
+			self::update_basket();
+		}
+
 
 		/**
 		 * @param array $basket
@@ -746,6 +768,8 @@ if ( ! class_exists( 'TranslationProxy_Basket' ) ) {
 
 
 		/**
+		 * Important! Do not remove this method. It is used inside wpml/wpml project.
+		 *
 		 * Sets target languages for remote service
 		 *
 		 * @param $remote_target_languages
@@ -758,6 +782,8 @@ if ( ! class_exists( 'TranslationProxy_Basket' ) ) {
 
 
 		/**
+		 * Important! Do not remove this method. It is used inside wpml/wpml project.
+		 *
 		 * Get target languages for remote service
 		 *
 		 * @return array | false

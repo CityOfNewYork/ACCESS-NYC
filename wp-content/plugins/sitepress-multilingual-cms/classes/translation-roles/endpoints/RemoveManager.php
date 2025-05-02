@@ -12,7 +12,6 @@ class RemoveManager extends Remove {
 	 */
 	public function run( Collection $data ) {
 		$result = parent::run( $data );
-		do_action( 'wpml_update_translator' );
 		do_action( 'wpml_tm_ate_synchronize_managers' );
 		return $result;
 	}

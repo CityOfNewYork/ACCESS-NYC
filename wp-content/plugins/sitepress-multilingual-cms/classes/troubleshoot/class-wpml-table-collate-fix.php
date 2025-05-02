@@ -52,7 +52,7 @@ class WPML_Table_Collate_Fix implements IWPML_AJAX_Action, IWPML_Backend_Action,
 
 	public function enqueue_scripts( $hook ) {
 		if ( WPML_PLUGIN_FOLDER . '/menu/troubleshooting.php' === $hook ) {
-			wp_enqueue_script( 'wpml-fix-tables-collation', ICL_PLUGIN_URL . '/res/js/fix-tables-collation.js', array( 'jquery' ), ICL_SITEPRESS_VERSION );
+			wp_enqueue_script( 'wpml-fix-tables-collation', ICL_PLUGIN_URL . '/res/js/fix-tables-collation.js', array( 'jquery' ), ICL_SITEPRESS_SCRIPT_VERSION );
 		}
 	}
 

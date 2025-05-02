@@ -61,10 +61,14 @@ class WPML_LS_Template extends WPML_Templates_Factory {
 	 * @throws \WPML\Core\Twig\Error\RuntimeError
 	 * @throws \WPML\Core\Twig\Error\SyntaxError
 	 */
-	public function get_html() {
+	public function get_html( $sandbox = false ) {
 		$ret = '';
 		if ( $this->template_paths || $this->template_string ) {
-			$ret = parent::get_view();
+			if ( $sandbox ) {
+				$ret = parent::get_sandbox_view( null, null );
+			} else {
+				$ret = parent::get_view( null, null );
+			}
 		}
 		return $ret;
 	}

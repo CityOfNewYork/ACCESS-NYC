@@ -19,7 +19,7 @@ class Condition {
 		if ( ! $request_body ) {
 			return false;
 		}
-		$data         = filter_var_array( (array)json_decode( $request_body ), FILTER_SANITIZE_STRING );
+		$data = (array) json_decode( $request_body );
 
 		return isset( $data['runForAllSites'] ) && $data['runForAllSites'];
 	}

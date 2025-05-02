@@ -160,6 +160,11 @@ class WPML_Post_Status extends WPML_WPDB_User {
 			)
 		);
 
+		if ( ! $translation_id ) {
+			// No translations for given post.
+			return false;
+		}
+
 		if ( $translation_id->status_id && $translation_id->transid ) {
 			$res                      = $this->wpdb->update (
 				$this->wpdb->prefix . 'icl_translation_status',

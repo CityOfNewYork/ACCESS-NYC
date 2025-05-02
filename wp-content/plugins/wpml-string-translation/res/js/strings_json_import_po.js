@@ -23,4 +23,6 @@ jQuery(function () {
 
 		jQuery( '#strings_json' ).val( JSON.stringify( strings ) );
 	});
+
+	jQuery('.js-wpml-btn-add-strings').prop('disabled', false);
 });

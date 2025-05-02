@@ -82,7 +82,6 @@ class WPML_Meta_Boxes_Post_Edit_HTML {
 				?>
 				<p><input id="icl_translate_independent" class="button-secondary" type="button" value="<?php esc_html_e( 'Translate independently', 'sitepress' ) ?>"/></p>
 				<?php wp_nonce_field( 'reset_duplication_nonce', '_icl_nonce_rd' ) ?>
-				<i><?php printf( esc_html__( 'WPML will no longer synchronize this %s with the original content.', 'sitepress' ), $this->post->post_type ); ?></i>
 			</div>
 		<?php
 		}
@@ -404,7 +403,21 @@ class WPML_Meta_Boxes_Post_Edit_HTML {
 				</td>
 			</tr>
 		</table>
-	<?php
+		<?php
+		if (
+			'draft' === $this->post->post_status
+			&& ! \WPML\Setup\Option::getTranslateEverythingDrafts()
+			&& \WPML\Setup\Option::getTranslateEverything()
+			&& \WPML\Setup\Option::getHasTranslateEverythingBeenEverUsed()
+		) {
+			echo '<div class="wpml-info-small wpml-spacing-top">';
+			printf(
+				esc_html__( '%sEnable automatic translation for drafts%s', 'sitepress' ),
+				'<a href="' . admin_url( \WPML\UIPage::getSettings() . '#translate-everything-drafts' ) . '">',
+				'</a>'
+			);
+			echo '</div>';
+		}
 	}
 
 	/**
@@ -412,7 +425,7 @@ class WPML_Meta_Boxes_Post_Edit_HTML {
 	 */
 	private function translation_summary( $status_display ) {
 		$dupes          = $this->sitepress->get_duplicates( $this->post->ID );
-		$not_show_flags = ! apply_filters( 'wpml_setting', false, 'show_translations_flag' );
+		$not_show_flags = ! apply_filters( 'wpml_setting', true, 'show_translations_flag' );
 		?>
         <div class="icl_box_paragraph">
             <p><b><?php esc_html_e( 'Translations', 'sitepress' ) ?></b>

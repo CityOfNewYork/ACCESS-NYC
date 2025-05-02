@@ -1,0 +1,79 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/languages/components/ConfirmDeleteTranslatedContentModal.js:22
+msgid "hide the translations instead."
+msgstr "verbergen Sie stattdessen die Übersetzungen."
+
+#: src/js/languages/components/ConfirmDeleteTranslatedContentModal.js:84
+msgid "Error happened! Please try again."
+msgstr "Fehler! Bitte erneut versuchen."
+
+#: src/js/languages/components/ConfirmDeleteTranslatedContentModal.js:92
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: src/js/languages/components/ConfirmEditLanguageSave.js:34
+msgid "Choose Content to Automatically Translate into"
+msgstr "Wählen Sie Inhalte zur automatischen Übersetzung auf"
+
+#: src/js/languages/components/ConfirmEditLanguageSave.js:37
+msgid "Save Changes and Enable Automatic Translation"
+msgstr "Änderungen speichern und automatische Übersetzung aktivieren"
+
+#: src/js/languages/components/ConfirmEditLanguageSave.js:38
+msgid "Cancel Language Changes"
+msgstr "Sprachänderungen abbrechen"
+
+#: src/js/languages/components/ConfirmEditLanguageSave.js:42
+#: src/js/languages/components/ConfirmNewLanguage.js:114
+msgid "Save"
+msgstr "Speichern"
+
+#: src/js/languages/components/ConfirmNewLanguage.js:101
+msgid "Add new languages"
+msgstr "Neue Sprachen hinzufügen"
+
+#: src/js/languages/components/ConfirmNewLanguage.js:102
+msgid "Add new language"
+msgstr "Neue Sprache hinzufügen"
+
+#: src/js/languages/components/ConfirmNewLanguage.js:105
+msgid "Never mind - don't add new languages"
+msgstr "Keine neuen Sprachen hinzufügen"
+
+#: src/js/languages/components/ConfirmNewLanguage.js:106
+msgid "Never mind - don't add new language"
+msgstr "Keine neue Sprache hinzufügen"
+
+#: src/js/languages/components/ConfirmNewLanguage.js:98
+msgid "Choose which content to translate into the new language"
+msgstr "Wählen Sie aus, welche Inhalte in die neue Sprache übersetzt werden sollen."
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:23
+msgid ""
+"Automatically translate all my posts and pages, plus new content as I "
+"create it."
+msgstr "Ich möchte all meine Beiträge und Seiten sowie neue Inhalte automatisch übersetzen lassen, sobald sie erstellt sind."
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:24
+msgid "Only automatically translate new content."
+msgstr "Nur neue Inhalte automatisch übersetzen."
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:26
+msgid "Which content do you want to translate into the new language?"
+msgstr "Welche Inhalte sollen in die neue Sprache übersetzt werden?"
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:29
+msgid ""
+"When you unpause automatic translation, this content will be <a>translated "
+"automatically</a>."
+msgstr "Wenn Sie die automatische Übersetzung fortsetzen, wird dieser Inhalt <a>automatisch übersetzt</a>."
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:62
+msgid ""
+"You can still translate existing content any time from the Translation "
+"Management Dashboard."
+msgstr "Sie können weiterhin vorhandene Inhalte über das Übersetzungsmanagement-Dashboard übersetzen."

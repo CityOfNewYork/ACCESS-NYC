@@ -1,0 +1,55 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Preparing...": [
+            "กำลังเตรียมการ..."
+         ],
+         "All jobs have been cancelled": [
+            "งานทั้งหมดถูกยกเลิกแล้ว"
+         ],
+         "There is no more jobs to cancel": [
+            "ไม่มีงานที่จะยกเลิกอีกแล้ว"
+         ],
+         "The jobs cancellation has failed": [
+            "การยกเลิกงานล้มเหลว"
+         ],
+         "Cancel in-progress automatic jobs": [
+            "ยกเลิกงานอัตโนมัติที่กำลังดำเนินการ"
+         ],
+         "Enabling WPML's Advanced Translation Editor...": [
+            "กำลังเปิดใช้งานตัวแก้ไขการแปลขั้นสูงของ WPML..."
+         ],
+         "Force-enable WPML's Advanced Translation Editor": [
+            "บังคับเปิดใช้งานตัวแก้ไขการแปลขั้นสูงของ WPML"
+         ],
+         "If you're running this website from two or more domains on the same installation, this action will allow both to use the Advanced Translation Editor. Don't use this if you've moved or copied the site to a different domain on a different server.": [
+            "หากคุณกำลังเรียกใช้เว็บไซต์นี้จากสองโดเมนขึ้นไปบนการติดตั้งเดียวกัน การดำเนินการนี้จะอนุญาตให้ทั้งสองโดเมนใช้ตัวแก้ไขการแปลขั้นสูงได้ อย่าใช้วิธีนี้หากคุณได้ย้ายหรือคัดลอกไซต์ไปยังโดเมนอื่นบนเซิร์ฟเวอร์ที่แตกต่างกัน."
+         ],
+         "An error occurred while enabling WPML on both domains. Please try again.": [
+            "เกิดข้อผิดพลาดขณะเปิดใช้งาน WPML บนทั้งสองโดเมน โปรดลองอีกครั้ง."
+         ],
+         "You can now use the Advanced Translation Editor from this site, as well as the other site(s) running from a different domain on the same installation.": [
+            "ตอนนี้คุณสามารถใช้ตัวแก้ไขการแปลขั้นสูงจากไซต์นี้ รวมถึงไซต์อื่น ๆ ที่ทำงานจากโดเมนอื่นบนการติดตั้งเดียวกันได้แล้ว."
+         ],
+         "Domain name has been updated": [
+            "อัปเดตชื่อโดเมนแล้ว"
+         ],
+         "Domain name update has been failed": [
+            "การอัปเดตชื่อโดเมนล้มเหลว"
+         ],
+         "Update domain name in language switcher settings": [
+            "อัปเดตชื่อโดเมนในการตั้งค่าตัวเลือกภาษา"
+         ],
+         "Refresh license data to recognise license update": [
+            "รีเฟรชข้อมูลใบอนุญาตเพื่อรับรู้การอัปเดตใบอนุญาต"
+         ],
+         "WPML License has been refreshed": [
+            "รีเฟรชใบอนุญาต WPML แล้ว"
+         ]
+      }
+   }
+}

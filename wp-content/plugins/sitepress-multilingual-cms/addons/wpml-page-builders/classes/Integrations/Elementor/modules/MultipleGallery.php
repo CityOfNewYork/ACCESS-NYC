@@ -9,7 +9,7 @@ class MultipleGallery extends \WPML_Elementor_Module_With_Items {
     protected function get_title( $field ) {
         switch ( $field ) {
             case 'gallery_title':
-                return esc_html__( 'Gallery Title:', 'sitepress' );
+                return esc_html__( 'Galleries: Gallery Title', 'sitepress' );
             default:
                 return '';
         }

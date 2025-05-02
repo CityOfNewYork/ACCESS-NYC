@@ -12,6 +12,7 @@ class WPML_Elementor_DB_Factory {
 			// @codingStandardsIgnoreLine
 			$elementor_db = new \Elementor\DB();
 
+			// @phpstan-ignore-next-line
 			if ( method_exists( $elementor_db, 'save_plain_text' ) ) {
 				$wpml_elementor_db = new WPML_Elementor_DB( $elementor_db );
 			}

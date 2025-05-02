@@ -1,0 +1,82 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Not included in String Translation": [
+            "不包括在字符串翻译中"
+         ],
+         "Registered and locked": [
+            "已注册并锁定"
+         ],
+         "Text": [
+            "文本"
+         ],
+         "Numeric": [
+            "数字"
+         ],
+         "All Types": [
+            "所有类型"
+         ],
+         "Search": [
+            "搜索"
+         ],
+         "Communication error": [
+            "通信错误"
+         ],
+         "The action failed.": [
+            "行动失败。"
+         ],
+         "All (%d)": [
+            "所有 (%d)"
+         ],
+         "Included in String Translation (%d)": [
+            "包含在字符串翻译中 (%d)"
+         ],
+         "Not included in String Translation (%d)": [
+            "不包括在字符串翻译中 (%d)"
+         ],
+         "This setting is locked by a WPML configuration file.": [
+            "此设置由 WPML 配置文件锁定。"
+         ],
+         "Option": [
+            "选项"
+         ],
+         "Value": [
+            "值"
+         ],
+         "Type": [
+            "类型"
+         ],
+         "State": [
+            "状态"
+         ],
+         "Export as a WPML configuration file": [
+            "导出为 WPML 配置文件"
+         ],
+         "Cancel": [
+            "取消"
+         ],
+         "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
+            "将以下内容保存到主题或插件根目录下的 wpml-config.xml。"
+         ],
+         "No options found.": [
+            "未找到任何选项。"
+         ],
+         "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
+            "确保至少保存过一次主题选项。有些主题只有在用户明确保存对主题默认设置的更改后，才会将这些选项添加到wp_options 表中。"
+         ],
+         "Add to String Translation": [
+            "添加到字符串翻译"
+         ],
+         "Remove from String Translation": [
+            "从字符串翻译中移除"
+         ],
+         "Included in String Translation": [
+            "包含在字符串翻译中"
+         ]
+      }
+   }
+}

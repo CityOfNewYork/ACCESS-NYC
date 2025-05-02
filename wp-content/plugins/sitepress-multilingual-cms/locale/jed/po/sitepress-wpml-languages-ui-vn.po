@@ -1,0 +1,79 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/languages/components/ConfirmDeleteTranslatedContentModal.js:22
+msgid "hide the translations instead."
+msgstr "Ẩn bản dịch."
+
+#: src/js/languages/components/ConfirmDeleteTranslatedContentModal.js:84
+msgid "Error happened! Please try again."
+msgstr "Đã xảy ra lỗi! Vui lòng thử lại."
+
+#: src/js/languages/components/ConfirmDeleteTranslatedContentModal.js:92
+msgid "Cancel"
+msgstr "Hủy"
+
+#: src/js/languages/components/ConfirmEditLanguageSave.js:34
+msgid "Choose Content to Automatically Translate into"
+msgstr "Chọn nội dung để tự động dịch sang"
+
+#: src/js/languages/components/ConfirmEditLanguageSave.js:37
+msgid "Save Changes and Enable Automatic Translation"
+msgstr "Lưu các thay đổi và Bật tính năng Dịch thuật Tự động"
+
+#: src/js/languages/components/ConfirmEditLanguageSave.js:38
+msgid "Cancel Language Changes"
+msgstr "Hủy các thay đổi ngôn ngữ"
+
+#: src/js/languages/components/ConfirmEditLanguageSave.js:42
+#: src/js/languages/components/ConfirmNewLanguage.js:114
+msgid "Save"
+msgstr "Lưu"
+
+#: src/js/languages/components/ConfirmNewLanguage.js:101
+msgid "Add new languages"
+msgstr "Thêm ngôn ngữ mới"
+
+#: src/js/languages/components/ConfirmNewLanguage.js:102
+msgid "Add new language"
+msgstr "Thêm ngôn ngữ."
+
+#: src/js/languages/components/ConfirmNewLanguage.js:105
+msgid "Never mind - don't add new languages"
+msgstr "Không sao - đừng thêm ngôn ngữ."
+
+#: src/js/languages/components/ConfirmNewLanguage.js:106
+msgid "Never mind - don't add new language"
+msgstr "Không sao - đừng thêm ngôn ngữ."
+
+#: src/js/languages/components/ConfirmNewLanguage.js:98
+msgid "Choose which content to translate into the new language"
+msgstr "Chọn nội dung cần dịch sang ngôn ngữ mới"
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:23
+msgid ""
+"Automatically translate all my posts and pages, plus new content as I "
+"create it."
+msgstr "Tự động dịch tất cả nội dung."
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:24
+msgid "Only automatically translate new content."
+msgstr "Chỉ tự động dịch nội dung mới."
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:26
+msgid "Which content do you want to translate into the new language?"
+msgstr "Bạn muốn dịch nội dung nào sang ngôn ngữ mới?"
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:29
+msgid ""
+"When you unpause automatic translation, this content will be <a>translated "
+"automatically</a>."
+msgstr "Khi bạn bỏ tạm dừng dịch tự động, nội dung này sẽ được<a> được dịch tự động</a>."
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:62
+msgid ""
+"You can still translate existing content any time from the Translation "
+"Management Dashboard."
+msgstr "Bạn vẫn có thể dịch nội dung hiện có bất kỳ lúc nào từ Bảng điều khiển quản lý bản dịch."

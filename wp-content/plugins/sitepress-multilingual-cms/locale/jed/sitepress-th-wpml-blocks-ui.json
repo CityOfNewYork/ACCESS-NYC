@@ -1,0 +1,184 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Advanced": [
+            "ขั้นสูง"
+         ],
+         "HTML anchor": [
+            "HTML anchor"
+         ],
+         "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
+            "เพิ่มทางลัดไปยังบล็อกนี้เมื่อโหลดหน้าโดยใช้ URL “#anchor”."
+         ],
+         "Additional CSS class(es)": [
+            "คลาส CSS เพิ่มเติม"
+         ],
+         "Separate multiple classes with spaces.": [
+            "แยกหลายคลาสด้วยช่องว่าง."
+         ],
+         "Color": [
+            "สี"
+         ],
+         "px": [
+            "พิกเซล"
+         ],
+         "%": [
+            "%"
+         ],
+         "Dimensions": [
+            "ขนาด"
+         ],
+         "BLOCK": [
+            "บล็อก"
+         ],
+         "Block margin": [
+            "ระยะขอบบล็อก"
+         ],
+         "Block padding": [
+            "ระยะขอบในบล็อก"
+         ],
+         "LANGUAGE": [
+            "ภาษา"
+         ],
+         "Language spacing": [
+            "ระยะห่างของภาษา"
+         ],
+         "Language padding": [
+            "ระยะขอบในของภาษา"
+         ],
+         "Display": [
+            "การแสดงผล"
+         ],
+         "Show flag": [
+            "แสดงธง"
+         ],
+         "Show language name": [
+            "แสดงชื่อภาษา"
+         ],
+         "Display language name in": [
+            "แสดงชื่อภาษาใน"
+         ],
+         "Style": [
+            "สไตล์"
+         ],
+         "Flag settings": [
+            "การตั้งค่าธง"
+         ],
+         "Width": [
+            "ความกว้าง"
+         ],
+         "Height": [
+            "ความสูง"
+         ],
+         "Spacing": [
+            "ระยะห่าง"
+         ],
+         "Allow wrapping to multiple lines": [
+            "อนุญาตให้ขึ้นบรรทัดใหม่"
+         ],
+         "Open on click": [
+            "เปิดเมื่อคลิก"
+         ],
+         "Show arrow": [
+            "แสดงลูกศร"
+         ],
+         "Layout": [
+            "เค้าโครง"
+         ],
+         "Justification": [
+            "การจัดวาง"
+         ],
+         "Orientation": [
+            "ทิศทาง"
+         ],
+         "Typography": [
+            "การจัดรูปแบบตัวอักษร"
+         ],
+         "Background": [
+            "พื้นหลัง"
+         ],
+         "Language Text": [
+            "ข้อความภาษา"
+         ],
+         "Language Background": [
+            "พื้นหลังภาษา"
+         ],
+         "Current language text": [
+            "ข้อความภาษาปัจจุบัน"
+         ],
+         "Current language background": [
+            "พื้นหลังภาษาปัจจุบัน"
+         ],
+         "Full name": [
+            "ชื่อเต็ม"
+         ],
+         "Code": [
+            "รหัส"
+         ],
+         "Justify items left": [
+            "จัดวางรายการชิดซ้าย"
+         ],
+         "Justify items center": [
+            "จัดวางรายการตรงกลาง"
+         ],
+         "Justify items right": [
+            "จัดวางรายการชิดขวา"
+         ],
+         "Justify items space between": [
+            "จัดวางรายการกระจายเต็มพื้นที่"
+         ],
+         "Horizontal": [
+            "แนวนอน"
+         ],
+         "Vertical": [
+            "แนวตั้ง"
+         ],
+         "Normal": [
+            "ปกติ"
+         ],
+         "Medium": [
+            "ปานกลาง"
+         ],
+         "Large": [
+            "ใหญ่"
+         ],
+         "X-Large": [
+            "ใหญ่พิเศษ"
+         ],
+         "Ab": [
+            "Ab"
+         ],
+         "AB": [
+            "AB"
+         ],
+         "ab": [
+            "ab"
+         ],
+         "Small": [
+            "เล็ก"
+         ],
+         "Displays the WPML Language Switcher.": [
+            "แสดงตัวสลับภาษา WPML."
+         ],
+         "Language Switcher": [
+            "ตัวสลับภาษา"
+         ],
+         "displays the WPML Language Switcher": [
+            "แสดงตัวสลับภาษา WPML"
+         ],
+         "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
+            "แสดงตัวสลับภาษา WPML <br/> เรียนรู้ <a>วิธีแปลบล็อกนี้</a>."
+         ],
+         "Navigation Language Switcher": [
+            "ตัวสลับภาษาในการนำทาง"
+         ],
+         "Reset all": [
+            "รีเซ็ตทั้งหมด"
+         ]
+      }
+   }
+}

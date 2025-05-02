@@ -1,0 +1,842 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\\nContent-Transfer-Encoding: 8bit"
+"\\nProject-Id-Version:WPML_EXPORT\\nPOT-Creation-Date: \\nPO-Revision-Date: "
+"\\nLast-Translator: \\nLanguage-Team: \\nLanguage:en\\nMIME-Version: 1.0\\n"
+
+msgid " They were added to the string translation table."
+msgstr "Їх додано до таблиці перекладу рядків."
+
+msgid "%d new translation was added."
+msgstr "Додано %d новий переклад."
+
+msgid "%d new translations were added."
+msgstr "Додано %d нових перекладів."
+
+msgid "%d translation was updated."
+msgstr "Оновлено %d переклад."
+
+msgid "%d translations were updated."
+msgstr "Оновлено %d перекладів."
+
+msgid ""
+"%s slugs are set to be translated, but they are missing their translation"
+msgstr "%s коротких заголовків помічено перекладеними, але перекладів немає"
+
+msgid "(original)"
+msgstr "(оригінал)"
+
+msgid ""
+"* This feature is only intended for sites that are in development. It will "
+"significantly slow down the site, but help you find strings that WPML cannot "
+"detect in the PHP code."
+msgstr ""
+"* Ця функція призначена тільки для веб-сайтів на стадії розробки. Це значно сповільнить роботу веб-сайту, але допоможе знайти рядки, які "
+"WPML не може виявити в PHP-коді."
+
+msgid "-- Please select --"
+msgstr "-- Виберіть --"
+
+msgid ".po file:"
+msgstr ".po-файл:"
+
+msgid "Active"
+msgstr "Активний"
+
+msgid "Add selected strings"
+msgstr "Додати вибрані рядки"
+
+msgid "Add the new translations."
+msgstr "Додати нові переклади."
+
+msgid "Admin Texts Translation"
+msgstr "Переклад текстів адміністрування"
+
+msgid "All"
+msgstr "Усі"
+
+msgid "All Translation Priorities"
+msgstr "Усі пріоритети перекладу"
+
+msgid "All domains"
+msgstr "Усі домени"
+
+msgid "All strings"
+msgstr "Усі рядки"
+
+msgid "All strings in %s"
+msgstr "Усі рядки в %s"
+
+msgid "Also create translations according to the .po file"
+msgstr ""
+"Також створити переклади на основі ."
+"po-файлу"
+
+msgid "Also include translations"
+msgstr "Також додати переклади"
+
+msgid "Also prevent similar messages in the future?"
+msgstr "Також запобігати появі схожих повідомлень у майбутньому?"
+
+msgid "Apply"
+msgstr "Застосувати"
+
+msgid ""
+"Are you sure you want to delete these packages?\\nTheir strings and "
+"translations will be deleted too."
+msgstr ""
+"Видалити ці пакети?"
+"\\nЇхні рядки та переклади також буде видалено."
+
+msgid ""
+"Are you sure you want to delete these strings?\\nTheir translations will be "
+"deleted too."
+msgstr ""
+"Справді видалити ці рядки?"
+"\\nЇх переклади також буде видалено."
+
+msgid "Auto register strings for translation"
+msgstr "Автоматично реєструвати рядки на переклад"
+
+msgid "Auto-download WordPress translations"
+msgstr ""
+"Автоматично завантажувати переклади "
+"WordPress"
+
+msgid "Auto-register strings from these text domains"
+msgstr "Автоматично реєструвати рядки з цих текстових областей"
+
+msgid ""
+"Automatic string registration will remain active for %s. Please visit the "
+"site's front-end to allow WPML to find strings for translation."
+msgstr ""
+"Автоматична реєстрація рядків буде активною протягом "
+"%s. Перейдіть у зовнішній інтерфейс веб-сайту, щоб дозволити "
+"WPML знаходити рядки на переклад."
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+msgid "Change the language of selected strings"
+msgstr "Змінити мову виділених рядків"
+
+msgid "Change translation priority of selected strings"
+msgstr "Змінити пріоритет перекладу виділених рядків"
+
+msgid "Check other languages"
+msgstr "Перевірити інші мови"
+
+msgid "Cleanup and optimization completed!"
+msgstr "Очищення й оптимізацію завершено!"
+
+msgid "Cleanup and optimize string tables"
+msgstr "Очистити й оптимізувати таблиці рядків"
+
+msgid "Click to toggle"
+msgstr "Клацніть, щоб переключити"
+
+msgid "Close"
+msgstr "Закрити"
+
+msgid "Complete"
+msgstr "Завершений"
+
+msgid "Completely translated strings"
+msgstr "Повністю перекладені рядки"
+
+msgid "Configure"
+msgstr "Налаштувати"
+
+msgid "Contains %s strings"
+msgstr "Містить %s рядків"
+
+msgid "Context"
+msgstr "Контекст"
+
+msgid "Current source language"
+msgstr "Поточна вихідна мова"
+
+msgid "Default package language"
+msgstr "Мова пакета за промовчанням"
+
+msgid "Delete Selected Packages"
+msgstr "Видалити вибрані пакети"
+
+msgid "Delete selected strings"
+msgstr "Видалити вибрані рядки"
+
+msgid "Dismiss all notices"
+msgstr "Закрити всі повідомлення"
+
+msgid "Display %d results per page"
+msgstr "Показувати %d результатів на сторінці"
+
+msgid "Display all results"
+msgstr "Показати всі результати"
+
+msgid "Display packages for this kind:"
+msgstr "Відобразити пакети цього виду:"
+
+msgid "Display:"
+msgstr "Показувати:"
+
+msgid "Displaying %1$s&#8211;%2$s of %3$s"
+msgstr "Показано %1$s&#8211;%2$s із %3$s"
+
+msgid "Domain"
+msgstr "Домен"
+
+msgid "Edit"
+msgstr "Редагувати"
+
+msgid "Error: please try again"
+msgstr "Помилка: повторіть спробу"
+
+msgid "Errors: %s"
+msgstr "Помилок: %s"
+
+msgid "Exact match"
+msgstr "Повний збіг"
+
+msgid "Existing translation"
+msgstr "Наявний переклад"
+
+msgid "Exit search"
+msgstr "Закрити пошук"
+
+msgid "Export strings into .po/.pot file"
+msgstr "Експортувати рядки в .po/.pot-файл"
+
+msgid "Failed downloading the language information file."
+msgstr "Не вдалося завантажити файл даних про мову."
+
+msgid ""
+"Failed downloading the language information file. Please go back and try a "
+"little later."
+msgstr "Не вдалося завантажити файл даних про мову. Поверніться і повторіть спробу пізніше."
+
+msgid "File upload error"
+msgstr "Не вдалося надіслати файл"
+
+msgid "Files already scanned."
+msgstr "Уже проскановані файли."
+
+msgid "For more details, see %s."
+msgstr "Докладніше в %s."
+
+msgid "Highlight color for strings"
+msgstr "Колір виділення рядків"
+
+msgid "Import"
+msgstr "Імпортувати"
+
+msgid "Import / export .po"
+msgstr "Імпортувати / експортувати .po-файл"
+
+msgid "In domain:"
+msgstr "У домені:"
+
+msgid "In progress"
+msgstr "Виконується"
+
+msgid "In translation basket"
+msgstr "У кошику перекладу"
+
+msgid "Inactive"
+msgstr "Неактивний"
+
+msgid "Include translations"
+msgstr "Включити переклади"
+
+msgid "Info"
+msgstr "Відомості"
+
+msgid "Invalid language: %s"
+msgstr "Неприпустима мова: %s"
+
+msgid "Invalid nonce"
+msgstr "Неприпустимий nonce"
+
+msgid "Kind"
+msgstr "Вид"
+
+msgid "Language of domains"
+msgstr "Мова доменів"
+
+msgid "Language of this %1$s is %2$s"
+msgstr "Мова %1$s – %2$s"
+
+msgid "Languages of domains"
+msgstr "Мови доменів"
+
+msgid "Loaded"
+msgstr "Завантажено"
+
+msgid "Look for strings while pages are rendered"
+msgstr "Шукати рядки під час обробки сторінок"
+
+msgctxt "MO Import blocked 1/4"
+msgid "There is a problem with the String Translation table in your site."
+msgstr "У таблиці Перекладу рядків на вашому сайті виявлено помилку."
+
+msgctxt "MO Import blocked 2/4"
+msgid ""
+"This problem is not causing a problem running the site right now, but can "
+"become a critical issue in the future."
+msgstr "Зараз вона не перешкоджає нормальній роботі сайту, але в майбутньому може спричинити критичну помилку."
+
+msgctxt "MO Import blocked 3/4"
+msgid "WPML support team knows how to fix it."
+msgstr ""
+"Група підтримки "
+"WPML знає, як вирішити цю проблему."
+
+msgctxt "MO Import blocked 4/4"
+msgid ""
+"Please add a message in the relevant <a href=\"%s\" target=\"_blank"
+"\">support thread</a> and we'll fix it for you."
+msgstr ""
+"Залиште повідомлення у відповідній <a href="
+"\"%s\" target=\"_blank\">темі підтримки</"
+"a> і ми все зробимо за вас."
+
+msgctxt "MO Import blocked short 1/3"
+msgid ""
+"WPML cannot replace .mo files because of technical problems in the String "
+"Translation table."
+msgstr ""
+"WPML не може замінити ."
+"mo-файли через технічні проблеми в таблиці Перекладу рядків."
+
+msgctxt "MO Import blocked short 2/3"
+msgid "WPML support team knows how to fix it."
+msgstr ""
+"Група підтримки "
+"WPML знає, як вирішити цю проблему."
+
+msgctxt "MO Import blocked short 3/3"
+msgid ""
+"Please add a message in the relevant <a href=\"%s\" target=\"_blank\" "
+">support thread</a> and we'll fix it for you."
+msgstr ""
+"Залиште повідомлення у відповідній <a href="
+"\"%s\" target=\"_blank\" >темі підтримки</"
+"a> і ми все зробимо за вас."
+
+msgid "Missing parameters"
+msgstr "Відсутні параметри"
+
+msgid "Missing version number for translation."
+msgstr "Немає номера версії для перекладу."
+
+msgid "More options"
+msgstr "Дод. параметри"
+
+msgid "Multibyte String extension"
+msgstr "Багатобайтове розширення рядків"
+
+msgid "Multibyte String extension is required for WPML String Translation."
+msgstr ""
+"WPML String "
+"Translation вимагає багатобайтове розширення рядків."
+
+msgid "Name"
+msgstr "Ім'я"
+
+msgid "Name: %s"
+msgstr "Ім'я: %s"
+
+msgid "Needs update"
+msgstr "Потрібно оновити"
+
+msgid "New translation"
+msgstr "Новий переклад"
+
+msgid "New translations (%d)"
+msgstr "Нові переклади (%d)"
+
+msgid "No - keep showing these message"
+msgstr "Ні – показувати ці повідомлення надалі"
+
+msgid "No TextDomain"
+msgstr "Немає TextDomain"
+
+msgid ""
+"No action performed. Please select the strings that you need to update or "
+"add."
+msgstr "Не виконано жодних дій. Виберіть рядки, які потрібно оновити або додати."
+
+msgid "No packages found"
+msgstr "Не знайдено жодного пакета"
+
+msgid "No records found"
+msgstr "Не знайдено жодного запису"
+
+msgid "No string found"
+msgstr "Не знайдено жодного рядка"
+
+msgid "No strings found"
+msgstr "Не знайдено жодного рядка"
+
+msgid "No updates found."
+msgstr "Оновлення не знайдено."
+
+msgid "Nonce value is invalid"
+msgstr "Неприпустиме значення NONCE"
+
+msgid "Not loaded"
+msgstr "Не завантажено"
+
+msgid "Not marked as 'complete'. Press 'Save' to enable."
+msgstr ""
+"Не позначено виконаним. Клацніть "
+"\"Зберегти\", щоб задіяти."
+
+msgid "Not translated"
+msgstr "Не перекладено"
+
+msgid "Number of strings"
+msgstr "Кількість рядків"
+
+msgid "PO export may be glitchy. We are working to fix it."
+msgstr ""
+"Експорт "
+"PO може працювати зі збоями. Ми працюємо над вирішенням проблеми."
+
+msgid "Package Management"
+msgstr "Керування пакетами"
+
+msgid "Packages"
+msgstr "Пакети"
+
+msgid "Partial Translation"
+msgstr "Частковий переклад"
+
+msgid "Partial translation"
+msgstr "Частковий переклад"
+
+msgid "Performance considerations"
+msgstr "Налаштування продуктивності"
+
+msgid ""
+"Please activate WPML Multilingual CMS to have WPML String Translation "
+"working."
+msgstr ""
+"Активуйте WPML Multilingual "
+"CMS, щоб запрацював Переклад рядків WPML."
+
+msgid "Please enter a domain!"
+msgstr "Введіть домен!"
+
+msgid "Please select at least one document to translate."
+msgstr "Виберіть принаймні один документ для перекладу."
+
+msgid "Please select at least one language to translate into."
+msgstr "Виберіть хоча б одну мову перекладу."
+
+msgid "Please select the .po file to upload!"
+msgstr "Виберіть .po-файл для завантаження!"
+
+msgid "Plugin"
+msgstr "Плагін"
+
+msgid ""
+"Post \"%1$s\" will be ignored for %2$s, because translation is already in "
+"progress."
+msgstr ""
+"Публікацію \"%1$s\" буде проігноровано для "
+"%2$s, оскільки переклад уже триває."
+
+msgid ""
+"Post \"%1$s\" will be ignored for %2$s, because translation is already "
+"waiting for translator."
+msgstr ""
+"Публікацію \"%1$s\" буде проігноровано для "
+"%2$s, оскільки переклад уже очікує на перекладача."
+
+msgid "Proceed"
+msgstr "Продовжити"
+
+msgid "Return to String Translation"
+msgstr "Повернутися до Перекладу рядків"
+
+msgid "Review changes and update"
+msgstr "Переглянути зміни й оновити"
+
+msgid "Save"
+msgstr "Зберегти"
+
+msgid "Scan selected plugins for strings"
+msgstr "Сканувати вибрані плагіни на наявність рядків"
+
+msgid "Scan selected themes for strings"
+msgstr "Сканувати вибрані теми на наявність рядків"
+
+msgid "Scan successful! WPML found %s strings."
+msgstr ""
+"Сканування пройшло успішно! WPML виявив "
+"%s рядків."
+
+msgid "Scanning file: %s"
+msgstr "Сканування файлу: %s"
+
+msgid "Search"
+msgstr "Пошук"
+
+msgid "Search for:"
+msgstr "Що шукати:"
+
+msgid "Select All"
+msgstr "Виділити все"
+
+msgid "Select all"
+msgstr "Виділити все"
+
+msgid "Select domain:"
+msgstr "Виберіть домен:"
+
+msgid "Select for which domain to set the language: "
+msgstr "Виберіть домен, якому потрібно задати мову:"
+
+msgid "Select what the strings are for:"
+msgstr "Виберіть призначення рядків:"
+
+msgid "Send to translation"
+msgstr "Надіслати на переклад"
+
+msgid "Set different slugs in different languages for %s."
+msgstr ""
+"Задайте для "
+"%s різні короткі заголовки різними мовами."
+
+msgid "Set the source language of these strings to:"
+msgstr "Задати вихідною мовою цих рядків таку мову:"
+
+msgid "Show custom MO Files Pre-generation dialog box"
+msgstr ""
+"Показувати діалогове вікно попереднього генерування користувацьких "
+"MO-файлів"
+
+msgid "Showing only strings that contain %s"
+msgstr "Показати лише рядки, що містять %s"
+
+msgid "Skipping file: %s"
+msgstr "Пропуск файлу: %s"
+
+msgid "Slug translations"
+msgstr "Переклади коротких заголовків"
+
+msgid ""
+"Some of the strings selected belong to packages. You can only change the "
+"language of these strings if all strings in the packages are selected."
+msgstr "Деякі з виділених рядків входять до складу пакетів. Мову цих рядків можна змінити, лише якщо вибрано всі рядки в пакетах."
+
+msgid ""
+"Some themes and plugins don't properly set the textdomain (second argument) "
+"in GetText calls. When you select this option, WPML will assume that the "
+"strings found in GetText calls in the PHP files of the theme and plugin "
+"should have the textdomain with the theme/plugin's name."
+msgstr ""
+"Деякі теми і плагіни неправильно задають "
+"textdomain (другий аргумент) у викликах "
+"GetText. Якщо вибрати цей параметр, "
+"WPML припустить, що у рядків, знайдених в "
+"GetText PHP-файлів теми і плагіна, має бути "
+"textdomain з іменем теми/плагіна."
+
+msgid "String"
+msgstr "Рядок"
+
+msgctxt "String Tracking warning: sentence 1"
+msgid ""
+"%s allows you to see where strings come from, so you can translate them "
+"accurately."
+msgstr "%s показує джерело рядків, щоб їх можна було точно перекласти."
+
+msgctxt "String Tracking warning: sentence 1, anchor text"
+msgid "String Tracking"
+msgstr "Відстеження рядків"
+
+msgctxt "String Tracking warning: sentence 2"
+msgid "It needs to parse the PHP source files and the output HTML."
+msgstr ""
+"Потрібен аналіз вихідних "
+"PHP-файлів і вивід HTML."
+
+msgctxt "String Tracking warning: sentence 3"
+msgid ""
+"This feature is CPU-intensive and should only be used while you are "
+"developing sites."
+msgstr "Ця функція навантажує ЦП. Її слід використовувати тільки під час розробки сайтів."
+
+msgctxt "String Tracking warning: sentence 4"
+msgid ""
+"Remember to turn it off before going to production, to avoid performance "
+"problems."
+msgstr "Не забудьте вимкнути її перед кінцевим результатом, щоб уникнути проблем із продуктивністю."
+
+msgid "String Translation"
+msgstr "Переклад рядків"
+
+msgid "String translation"
+msgstr "Переклад рядків"
+
+msgid "Strings from all text domains are excluded"
+msgstr "Рядки з усіх текстових областей виключено"
+
+msgid "Strings from all text domains will be auto-registered"
+msgstr "Рядки з усіх текстових областей буде зареєстровано автоматично"
+
+msgid "Strings in need of translation"
+msgstr "Рядки, що потребують перекладу"
+
+msgid "Strings in the plugins"
+msgstr "Рядки у плагінах"
+
+msgid "Strings in the themes"
+msgstr "Рядки в темах"
+
+msgid "Strings per page:"
+msgstr "Рядків на сторінці:"
+
+msgid "Strings translations updated"
+msgstr "Переклади рядків оновлено"
+
+msgid "Submit"
+msgstr "Надіслати"
+
+msgid "Success!"
+msgstr "Виконано!"
+
+msgid "Textdomain"
+msgstr "Textdomain"
+
+msgid "The database has been updated."
+msgstr "Базу даних оновлено."
+
+msgid "The following files were processed:"
+msgstr "Оброблені файли:"
+
+msgid "Theme"
+msgstr "Тема"
+
+msgid "There is nothing to be updated or to be added."
+msgstr "Нічого оновлювати чи додавати."
+
+msgid "There is nothing to translate."
+msgstr "Нічого перекладати."
+
+msgid ""
+"These are the strings that we found in your .po file. Please carefully "
+"review them. Then, click on the 'add' or 'cancel' buttons at the %1$sbottom "
+"of this screen%2$s. You can exclude individual strings by clearing the check "
+"boxes next to them."
+msgstr ""
+"Рядки, що було знайдено у ."
+"po-файлі. Ретельно перевірте їх. Потім клацніть кнопку «додати» або «скасувати» в "
+"%1$sнижній частині екрана"
+"%2$s. Можна виключити окремі рядки, знявши прапорці навпроти."
+
+msgid "This domain currently has the following strings:"
+msgstr "Наразі цей домен містить такі рядки:"
+
+msgid ""
+"This folder appears to be not writable. This is blocking translation for "
+"strings from appearing on the site."
+msgstr "Схоже, можливість запису в папку відсутня. Через це переклад рядків не відображається на веб-сайті."
+
+msgid ""
+"This update includes %d new strings and %d updated strings. You can review "
+"the strings below. Then, go to the <a%s>bottom of this page</a> and click on "
+"the Proceed button."
+msgstr ""
+"Це оновлення містить %d нових і "
+"%d оновлених рядків, які можна переглянути нижче. Потім перейдіть в "
+"<a%s>кінець цієї сторінки</"
+"a> та клацніть кнопку «Продовжити»."
+
+msgid ""
+"To resolve this, please contact your hosting company and request that they "
+"make that folder writable."
+msgstr "Щоб вирішити проблему, зверніться до хостинг-провайдера з проханням увімкнути запис у цю папку."
+
+msgid "Track where strings appear on the site"
+msgstr "Відслідковувати розміщення рядків на веб-сайті"
+
+msgid ""
+"Translate custom post and taxonomy base slugs (via WPML String Translation)."
+msgstr ""
+"Перекласти базові користувацькі короткі заголовки публікацій і класифікації "
+"(за допомогою Перекладу рядків WPML)."
+
+msgid "Translate strings"
+msgstr "Перекласти рядки"
+
+msgid "Translate strings in %s"
+msgstr "Перекласти рядки %s"
+
+msgid "Translate texts in admin screens &raquo;"
+msgstr ""
+"Перекласти тексти екранів адміністрування "
+"&raquo;"
+
+msgid "Translating users of types: %s"
+msgstr "Переклад таких типів користувачів: %s"
+
+msgid "Translation"
+msgstr "Переклад"
+
+msgid "Translation complete"
+msgstr "Переклад завершено"
+
+msgid "Translation is in progress"
+msgstr "Переклад виконується"
+
+msgid "Translation needed"
+msgstr "Потрібен переклад"
+
+msgid "Translation needs update"
+msgstr "Потрібно оновити переклад"
+
+msgid "Translation status:"
+msgstr "Стан перекладу:"
+
+msgid "Update Now"
+msgstr "Оновити зараз"
+
+msgid "Updated %s translation is available"
+msgstr ""
+"Доступний оновлений переклад такою мовою: "
+"%s"
+
+msgid "Updated translations (%d)"
+msgstr "Оновлені переклади (%d)"
+
+msgid ""
+"Use theme or plugin text domains when gettext calls do not use a string "
+"literal"
+msgstr ""
+"Використовувати аргументи text-"
+"domain теми або плагіна, коли у викликах "
+"gettext не використовується рядковий літерал"
+
+msgid ""
+"Use this language as the default language for new strings in this domain"
+msgstr "Використовувати цю мову як мову за промовчанням для нових рядків у цьому домені"
+
+msgid "View"
+msgstr "Переглянути"
+
+msgid ""
+"WPML Package Translation is enabled but not effective. It requires <a href="
+"\"%s\">WPML</a>, String Translation and Translation Management in order to "
+"work."
+msgstr ""
+"WPML Package "
+"Translation увімкнуто, але не задіяно. Щоб його задіяти, потрібні плагіни "
+"<a href=\"%s\">WPML</a>, String Translation і Translation Management."
+
+msgid ""
+"WPML String Translation is attempting to write .mo files with translations "
+"to folder:"
+msgstr ""
+"Переклад рядків WPML намагається зберегти ."
+"mo-файли з перекладами в папку:"
+
+msgid ""
+"WPML String Translation is enabled but not effective, because WPML is "
+"outdated. Please update WPML first."
+msgstr ""
+"Переклад рядків "
+"WPML увімкнуто, але не задіяно, оскільки версія "
+"WPML застаріла. Спершу оновіть WPML."
+
+msgid ""
+"WPML String Translation will send all strings to WPML’s Advanced "
+"Translation Editor and to the translation services which are used."
+msgstr ""
+"Плагін String Translation "
+"WPML надішле всі рядки в Розширений редактор перекладів та обраним службам перекладу."
+
+msgid "WPML Translation"
+msgstr "Переклад WPML"
+
+msgid ""
+"WPML can keep track of where strings are used on the public pages. "
+"Activating this feature will enable the 'view in page' functionality and "
+"make translation easier."
+msgstr "WPML може відстежувати, де на загальнодоступних сторінках використовуються рядки. Увімкнення цієї функції дасть змогу здійснювати «перегляд на сторінці» та спростить переклад."
+
+msgid "WPML could not delete the strings"
+msgstr "WPML не вдалося видалити рядки"
+
+msgid ""
+"WPML needs to update the database. This update will help improve WPML's "
+"performance when fetching translated strings."
+msgstr ""
+"WPML необхідно оновити базу даних. Це оновлення дасть змогу підвищити продуктивність "
+"WPML, коли отримуються перекладені рядки."
+
+msgid "WPML's documentation on troubleshooting .mo files generation."
+msgstr ""
+"Документація "
+"WPML з усунення неполадок із генеруванням ."
+"mo-файлів."
+
+msgid "Waiting for translator"
+msgstr "Очікується перекладач"
+
+msgid ""
+"We have detected a problem with some tables in the database. Please contact "
+"%1$sWPML support%2$s to get this fixed."
+msgstr ""
+"У деяких таблицях бази даних виявленопомилку. Зверніться до "
+"%1$sслужби підтримки WPML%2$s, щоб її виправити."
+
+msgid "With Priority:"
+msgstr "Із пріоритетом:"
+
+msgid "Yes - disable these notifications completely"
+msgstr "Так – повністю вимкнути ці повідомлення"
+
+msgid ""
+"You cannot add packages in this language to the basket since it already "
+"contains posts, packages or strings of another source language!\\n\\t\\t\\t"
+"\\t\\tEither submit the current basket and then add the post or delete the "
+"posts of differing language in the current basket"
+msgstr ""
+"Додати пакети цією мовою в кошик не можна, оскільки він уже містить усі публікації, пакети чи рядки іншої вихідної мови!"
+"\\n\\t\\t\\t\\t"
+"\\tАбо надішліть поточний кошик і потім додайте публікацію, або видаліть публікації іншою мовою в поточному кошику"
+
+msgid "You excluded: "
+msgstr "Ви виключили:"
+
+msgid ""
+"You have selected strings belonging to a package. Please select all strings "
+"from the affected package or unselect these strings."
+msgstr "Ви виділили рядки, що входять до складу пакета. Виділіть усі рядки у відповідному пакеті або зніміть виділення з цих рядків."
+
+msgid "You included: "
+msgstr "Ви включили:"
+
+msgid "and others"
+msgstr "тощо"
+
+msgid "edit"
+msgstr "змінити"
+
+msgid "new"
+msgstr "нове"
+
+msgid "none"
+msgstr "немає"
+
+msgid "select from existing"
+msgstr "вибрати з наявного"
+
+msgid "view in page"
+msgstr "переглянути на сторінці"
+
+msgid "view in source"
+msgstr "переглянути у джерелі"

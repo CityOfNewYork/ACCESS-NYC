@@ -31,14 +31,25 @@ class WPML_TM_Batch_Report_Hooks {
 
 	public function add_hooks() {
 		add_action( 'wpml_tm_assign_job_notification', array( $this, 'set_job' ) );
-		add_action( 'wpml_tm_new_job_notification', array( $this, 'set_job' ), 10, 1 );
+		add_action( 'wpml_tm_new_job_notification', array( $this, 'set_job' ) );
+		add_action( 'wpml_tm_assign_job_notification_with_delay', array( $this, 'set_job_with_delay' ) );
+		add_action( 'wpml_tm_new_job_notification_with_delay', array( $this, 'set_job_with_delay' ) );
 		add_action( 'wpml_tm_local_string_sent', array( $this, 'set_job' ) );
-		add_action( 'wpml_tm_basket_committed', array( $this->email_process, 'process_emails' ) );
+		add_action( 'wpml_tm_jobs_notification', array( $this->email_process, 'process_emails' ) );
 	}
 
 	public function set_job( $job ) {
 		if ( $job instanceof WPML_Translation_Job ) {
 			$this->batch_report->set_job( $job );
+		}
+	}
+
+	/**
+	 * @param WPML_Translation_Job $job
+	 */
+	public function set_job_with_delay( $job ) {
+		if ( $job instanceof WPML_Translation_Job ) {
+			$this->batch_report->set_job_with_delay( $job );
 		}
 	}
 }

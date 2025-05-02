@@ -1,0 +1,172 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Could not fetch engines data": [
+            "تعذر جلب بيانات المحركات"
+         ],
+         "Could not save settings": [
+            "تعذر حفظ الإعدادات"
+         ],
+         "Automatic translation": [
+            "ترجمة تلقائية"
+         ],
+         "Saving...": [
+            "جارٍ الحفظ..."
+         ],
+         "Save settings": [
+            "حفظ الإعدادات"
+         ],
+         "Settings saved": [
+            "تم حفظ الإعدادات"
+         ],
+         "Some error occurred": [
+            "حدث خطأ ما"
+         ],
+         "Loading...": [
+            "جارٍ التحميل..."
+         ],
+         "Failed to load engines": [
+            "فشل تحميل المحركات"
+         ],
+         "Drag your default engine to the top and order the rest by priority.": [
+            "اسحب محرك الترجمة الافتراضي إلى الأعلى ورتب الباقي حسب الأولوية."
+         ],
+         "Which translation engines do you want to use?": [
+            "ما هي محركات الترجمة التي ترغب في استخدامها؟?"
+         ],
+         "Automatic translation engines differ in translation style and supported language pairs. If your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it.": [
+            "تختلف محركات الترجمة الآلية في أسلوب الترجمة وأزواج اللغات المدعومة. إذا كان محرك الترجمة المفضل لديك لا يدعم زوج اللغات الذي ترغب في استخدامه، فإننا نعود إلى المحرك المفضل التالي الذي يدعمه."
+         ],
+         "WPML AI (beta) automatically detects the formality of your content and translates with the same formality.": [
+            "يكتشف WPML AI (تجريبي) تلقائيًا رسمية المحتوى الخاص بك ويترجم بنفس الرسمية."
+         ],
+         "Auto-formality": [
+            "الرسمية التلقائية"
+         ],
+         "Choose the tone of automatic translations for %s": [
+            "اختر نبرة الترجمات التلقائية لـ %s"
+         ],
+         "Your site doesn't use languages that offer formality settings.": [
+            "موقعك لا يستخدم لغات تقدم إعدادات الرسمية."
+         ],
+         "Edit formality": [
+            "تعديل الرسمية"
+         ],
+         "%d credits per word": [
+            "%d رصيد لكل كلمة"
+         ],
+         "Backup %d": [
+            "نسخة احتياطية %d"
+         ],
+         "Default": [
+            "افتراضي"
+         ],
+         "ON": [
+            "تشغيل"
+         ],
+         "OFF": [
+            "إيقاف"
+         ],
+         "Documentation": [
+            "الوثائق"
+         ],
+         "DeepL's formality and how it helps get good translations": [
+            "رسمية DeepL وكيف تساعد في الحصول على ترجمات جيدة"
+         ],
+         "Edit button": [
+            "زر التعديل"
+         ],
+         "Examples for %s": [
+            "أمثلة لـ %s"
+         ],
+         "For example:": [
+            "على سبيل المثال:"
+         ],
+         "Formality settings for %s": [
+            "إعدادات الرسمية لـ %s"
+         ],
+         "Formality level for %s": [
+            "مستوى الرسمية لـ %s"
+         ],
+         "Set formality for %s": [
+            "تعيين الرسمية لـ %s"
+         ],
+         "%d of your target languages can be translated using either a formal or informal tone.\n The tone which gives the best translation for each language is set by default.": [
+            "%d من لغاتك المستهدفة يمكن ترجمتها باستخدام نبرة رسمية أو غير رسمية.\n النبرة التي تعطي أفضل ترجمة لكل لغة يتم تعيينها افتراضيًا."
+         ],
+         "%s doesn't yet support formality options for %s.": [
+            "%s لا يدعم بعد خيارات الرسمية لـ %s."
+         ],
+         "Cancel": [
+            "إلغاء"
+         ],
+         "Update": [
+            "تحديث"
+         ],
+         "Formal": [
+            "رسمي"
+         ],
+         "Informal": [
+            "غير رسمي"
+         ],
+         "Don't translate drafts. Only translate when I publish content.": [
+            "لا تترجم المسودات. قم بالترجمة فقط عند نشر المحتوى."
+         ],
+         "Translate drafts as I save them (consumes a bit more translation credits).": [
+            "ترجمة المسودات أثناء حفظها (يستهلك المزيد من رصيد الترجمة)."
+         ],
+         "Do you want to translate drafts automatically?": [
+            "هل تريد ترجمة المسودات تلقائيًا؟?"
+         ],
+         "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s.": [
+            "هذه الميزة متاحة فقط عند تفعيل ”ترجمة كل شيء تلقائيًا“ من %sلوحة التحكم بالترجمة%s."
+         ],
+         "Close modal": [
+            "إغلاق النافذة"
+         ],
+         "What would you like to do after WPML finishes translating your content automatically?": [
+            "ماذا تريد أن تفعل بعد أن ينتهي WPML من ترجمة محتواك تلقائيًا؟?"
+         ],
+         "Wait for review": [
+            "انتظار المراجعة"
+         ],
+         "Recommended with DeepL, Google and Microsoft": [
+            "موصى به مع DeepL وGoogle وMicrosoft"
+         ],
+         "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process.": [
+            "تقدم DeepL وGoogle وMicrosoft ترجمات رائعة، ولكننا نوصي بمراجعة بشرية للتأكد من صحتها. يوفر WPML ترجمات أفضل من البشر تفهم السياق، لذا يمكنك تخطي عملية المراجعة بثقة."
+         ],
+         "WPML keeps translations unpublished, so you can review them first.": [
+            "يحتفظ WPML بالترجمات غير منشورة، حتى تتمكن من مراجعتها أولاً."
+         ],
+         "Your translators review and approve translations before publishing.": [
+            "يقوم المترجمون لديك بمراجعة واعتماد الترجمات قبل النشر."
+         ],
+         "Publish and mark for review": [
+            "النشر والتمييز للمراجعة"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "ينشر WPML الترجمات على الفور ولكنه يضع علامات عليها لتتحقق منها في وقت لاحق."
+         ],
+         "WPML publishes translations immediately but flags them for translators to review later.": [
+            "ينشر WPML الترجمات على الفور ولكنه يضع علامات عليها ليراجعها المترجمون لاحقًا."
+         ],
+         "Publish without review": [
+            "النشر بدون مراجعة"
+         ],
+         "Recommended with WPML AI": [
+            "موصى به مع WPML AI"
+         ],
+         "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy.": [
+            "يوفر WPML AI ترجمات أفضل من الإنسان نادرًا ما تحتاج إلى تحسينات، لذا يمكنك تخطي عملية المراجعة بثقة. بالنسبة لمحركات الترجمة الأخرى، يوصى بإجراء مراجعة بشرية للتأكد من الدقة."
+         ],
+         "WPML publishes translations immediately, skipping the review process.": [
+            "ينشر WPML الترجمات على الفور، متخطيًا عملية المراجعة."
+         ]
+      }
+   }
+}

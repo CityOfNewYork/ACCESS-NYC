@@ -3,6 +3,8 @@
 namespace WPML\ST\MO\JustInTime;
 
 use NOOP_Translations;
+use WPML\LIB\WP\WordPress;
+use WPML\ST\MO\Hooks\LoadTranslationFile;
 use WPML\ST\MO\LoadedMODictionary;
 
 class MO extends \MO {
@@ -92,7 +94,13 @@ class MO extends \MO {
 		$this->loaded_mo_dictionary
 			->getFiles( $this->domain, $this->locale )
 			->each( function( $mofile ) {
-				load_textdomain( $this->domain, $mofile );
+				$defaultTranslationPath =
+					LoadTranslationFile::getDefaultWordPressTranslationPath( $this->domain, $this->locale );
+
+				load_textdomain( $this->domain, $mofile, $this->locale );
+				if ( $defaultTranslationPath ) {
+					load_textdomain( $this->domain, $defaultTranslationPath, $this->locale );
+				}
 			} );
 	}
 

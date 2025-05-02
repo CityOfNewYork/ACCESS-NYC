@@ -1,0 +1,186 @@
+{
+  "translation-revision-date": "2024-08-20T09:32:58+00:00",
+  "generator": "WP-CLI/2.9.0",
+  "source": "src/js/ate/clonedSites/steps/CopyWithCreditsCompleted.js",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "en",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "Moving the site back here will mean that you will be able to translate on this domain again, but you will not be able to update translations at %s.": [
+        "Việc di chuyển trang web trở lại đây có nghĩa là bạn sẽ có thể dịch lại trên miền này, nhưng bạn sẽ không thể cập nhật bản dịch tại%s ."
+      ],
+      "Yes - move back here": [
+        "Có - quay lại đây"
+      ],
+      "No - keep the site on %s": [
+        "Không - giữ nguyên trang web%s"
+      ],
+      "Are you sure that this site should run on %s and not %s?": [
+        "Bạn có chắc chắn rằng trang web này sẽ chạy trên%s và không%s ?"
+      ],
+      "Continue": [
+        "Tiếp tục"
+      ],
+      "Go back": [
+        "Quay lại"
+      ],
+      "The site on %s has %d credits for automatic translation. Do you want to share these credits between %s and this new location (%s)?": [
+        "Trang web trên%s có%d tín dụng cho bản dịch tự động. Bạn có muốn chia sẻ những tín dụng này giữa%s và vị trí mới này(%s)?"
+      ],
+      "The site on %s has a pay-as-you-go subscription for automatic translation. Do you want to share these credits between %s and this new location (%s)?": [
+        "Trang web trên%s có đăng ký trả tiền khi sử dụng cho dịch tự động. Bạn có muốn chia sẻ những khoản tín dụng này giữa%s và vị trí mới này(%s)?"
+      ],
+      "Yes (recommended)": [
+        "Có (khuyến nghị)"
+      ],
+      "In the next step, you will receive instructions for how to approve the credits sharing": [
+        "Ở bước tiếp theo, bạn sẽ nhận được hướng dẫn về cách chấp thuận chia sẻ tín dụng"
+      ],
+      "No": [
+        "KHÔNG"
+      ],
+      "You will need to assign credits or set up a pay-as-you-go plan for this site to use automatic translation": [
+        "Bạn cần chỉ định tín dụng hoặc thiết lập kế hoạch trả tiền khi dùng dịch tự động."
+      ],
+      "What happens when you share credits for automatic translation between sites?": [
+        "Điều gì xảy ra khi chia sẻ tín dụng dịch tự động giữa các trang web?"
+      ],
+      "Translation credits for this site": [
+        "Bản dịch của trang web này"
+      ],
+      "Close": [
+        "Đóng"
+      ],
+      "This copy of the site has the same content as the original site on %s, but it doesn’t have credits for automatic translation.": [
+        "Bản sao này có cùng nội dung với trang gốc trên %s nhưng không có tín dụng dịch tự động."
+      ],
+      "If you want to use automatic translation for this site in the future, you can either <a1>add credits to this site</a1> or <a2>share the credits from the original site</a2>.": [
+        "Nếu bạn muốn sử dụng dịch tự động cho trang web này trong tương lai, bạn có thể<a1> thêm tín dụng vào trang web này</a1> hoặc<a2> chia sẻ các khoản tín dụng từ trang web gốc</a2>."
+      ],
+      "There was an error checking for credits to share. Please take a screenshot of this message and report it in <a>WPML support</a>.": [
+        "Đã xảy ra lỗi khi kiểm tra tín dụng để chia sẻ. Vui lòng chụp ảnh màn hình tin nhắn này và báo cáo trong<a> Hỗ trợ WPML</a>."
+      ],
+      "You’re all set": [
+        "Bạn đã sẵn sàng"
+      ],
+      "You can continue translating content normally on this site.": [
+        "Bạn có thể tiếp tục dịch nội dung trên trang này."
+      ],
+      "Please keep in mind that there shouldn’t be a copy of this site at %s. If there still is a copy of it there, you will not be able to translate content on that site.": [
+        "Xin lưu ý rằng không nên có bản sao của trang web này tại%s . Nếu vẫn còn bản sao ở đó, bạn sẽ không thể dịch nội dung trên trang web đó."
+      ],
+      "Please take a screenshot of this message and report this issue to <a>WPML support</a>.": [
+        "Vui lòng chụp ảnh màn hình tin nhắn này và báo cáo vấn đề này cho<a> Hỗ trợ WPML</a>."
+      ],
+      "WPML was unable to update our records with your new URL.": [
+        "WPML không thể cập nhật hồ sơ với URL mới của bạn."
+      ],
+      "Error with moving translation information to new URL": [
+        "Lỗi khi di chuyển thông tin dịch sang URL mới"
+      ],
+      "Looks like this site was previously at %s and now it’s at %s.": [
+        "Trang này trước đây ở %s và giờ ở %s."
+      ],
+      "Do you still have the same site running at %s?": [
+        "Bạn vẫn có cùng một trang web đang chạy tại%s ?"
+      ],
+      "Yes": [
+        "Đúng"
+      ],
+      "This is only a copy - original site is still running": [
+        "Đây chỉ là bản sao - trang gốc vẫn hoạt động."
+      ],
+      "I changed the address of the site to this new one": [
+        "Tôi đã thay đổi địa chỉ của trang web này thành địa chỉ mới này"
+      ],
+      "WPML detected a new address for this site": [
+        "WPML đã phát hiện một địa chỉ mới cho trang web này"
+      ],
+      "How to manage translations when migrating from development to production and more...": [
+        "Cách quản lý bản dịch khi di chuyển từ phát triển sang sản xuất và nhiều hơn nữa..."
+      ],
+      "You or someone else moved this site to %s. Please keep in mind that:": [
+        "Bạn hoặc ai đó đã di chuyển trang web này đến %s. Lưu ý rằng:"
+      ],
+      "Translations that you do at %s will not appear on this site.": [
+        "Bản dịch tại %s sẽ không xuất hiện trên trang này."
+      ],
+      "You cannot edit translations on this site.": [
+        "Bạn không thể chỉnh sửa bản dịch trên trang này."
+      ],
+      "The site at %s is using the same credits for automatic translation as this site.": [
+        "Trang tại %s dùng chung tín dụng dịch tự động với trang này."
+      ],
+      "If you didn't intend to move this site to %s, you can <a>indicate that this site should be at %s</a>.": [
+        "Nếu bạn không có ý định di chuyển trang web này đến%s , bạn có thể<a> chỉ ra rằng trang web này phải ở%s</a>."
+      ],
+      "This site has moved to a new location": [
+        "Trang web này đã chuyển đến một vị trí mới"
+      ],
+      "Looks like this site is a copy of a different site, or moved to a different URL. Please contact your translation manager to update Translation Management plugin configuration.": [
+        "Trang này là bản sao của trang khác hoặc chuyển đến URL khác. Liên hệ quản lý dịch thuật để cập nhật cấu hình plugin."
+      ],
+      "Site Moved or Copied - Action Required": [
+        "Trang web đã được di chuyển hoặc sao chép - cần thực hiện hành động"
+      ],
+      "To allow the sites running on %s and %s to use the same credits for automatic translation, you need to:": [
+        "Để các trang web trên %s và %s dùng chung tín dụng dịch tự động, bạn cần:"
+      ],
+      "Follow <a>this link</a> to access the migration code (you can't get it by visiting %s manually)": [
+        "Theo<a> liên kết này</a> để truy cập mã di chuyển (bạn không thể lấy được mã này bằng cách truy cập%s thủ công)"
+      ],
+      "Click on <b>Copy migration code</b>": [
+        "Nhấp vào<b> Sao chép mã di chuyển</b>"
+      ],
+      "Paste the migration code into the field below.": [
+        "Dán mã di chuyển vào trường bên dưới."
+      ],
+      "Migration code": [
+        "Mã di chuyển"
+      ],
+      "Let’s connect the automatic translation credits between the two copies of this site": [
+        "Hãy kết nối các khoản tín dụng dịch tự động giữa hai bản sao của trang web này"
+      ],
+      "You indicated that you’re no longer running a copy of this site at %s. This means that:": [
+        "Bạn không còn chạy bản sao của trang này tại %s. Điều này có nghĩa là:"
+      ],
+      "You will not be able to use automatic translation on the old site": [
+        "Bạn sẽ không thể sử dụng dịch tự động trên trang web cũ"
+      ],
+      "If you access the old site, it will trigger warnings on this site": [
+        "Truy cập trang cũ sẽ kích hoạt cảnh báo trên trang này."
+      ],
+      "I understand and am no longer running this site at %s": [
+        "Tôi hiểu và không còn điều hành trang web này nữa%s"
+      ],
+      "Back": [
+        "Mặt sau"
+      ],
+      "Please check and confirm": [
+        "Vui lòng kiểm tra và xác nhận"
+      ],
+      "WPML was unable to copy your site's translations, translation memory, and glossary to this new URL.": [
+        "WPML không thể sao chép bản dịch, bộ nhớ dịch và thuật ngữ của bạn vào URL mới."
+      ],
+      "Error with copying translation information to new URL": [
+        "Lỗi khi sao chép thông tin dịch sang URL mới"
+      ],
+      "WPML was unable to connect your old and new URLs to share automatic translation credits.": [
+        "WPML không thể kết nối URL cũ và mới của bạn để chia sẻ tín dụng dịch tự động."
+      ],
+      "Error with sharing automatic translation credits": [
+        "Lỗi khi chia sẻ tín dụng dịch tự động"
+      ],
+      "Great. Now this site and its copy on %s are sharing the credits for automatic translation.": [
+        "Trang này và bản sao trên %s đang chia sẻ tín dụng dịch tự động."
+      ],
+      "Credits that you add on either site will be available on both sites. If you stop using this site, you don’t need to worry about losing credits.": [
+        "Tín dụng thêm vào trang nào cũng có trên cả hai. Ngừng dùng trang này không mất tín dụng."
+      ]
+    }
+  }
+}

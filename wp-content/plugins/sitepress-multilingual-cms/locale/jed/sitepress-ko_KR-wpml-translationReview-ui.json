@@ -6,22 +6,22 @@
             "domain": "messages"
          },
          "Accepted": [
-            "승인됨"
+            "수락됨"
          ],
          "Approved!": [
             "승인됨!"
          ],
          "Loading the next translation for review...": [
-            "검토를 위해 다음 번역 로드 중..."
+            "다음 번역을 검토하기 위해 로딩 중..."
          ],
          "Back": [
-            "돌아가기"
+            "뒤로"
          ],
          "Turn off to not automatically load the next translation after finishing this review.": [
-            "이 검토를 마친 후에 다음 번역을 자동으로 로드하지 않도록 끕니다."
+            "이 검토를 마친 후 자동으로 다음 번역을 로드하지 않으려면 끄세요."
          ],
          "Turn on to automatically load the next translation after finishing this  .": [
-            "이 작업을 마친 후 다음 번역을 자동으로 로드하려면 활성화합니다."
+            "이 검토를 마친 후 자동으로 다음 번역을 로드하려면 켜세요."
          ],
          "Edit": [
             "편집"
@@ -30,25 +30,25 @@
             "번역 편집"
          ],
          "Please wait, applying translation..": [
-            "잠시만 기다려 주세요. 번역 적용 중.."
+            "잠시만 기다려주세요, 번역을 적용하는 중입니다.."
          ],
          "Next review": [
             "다음 검토"
          ],
          "Publish this translation": [
-            "이 번역 발행"
+            "이 번역 게시하기"
          ],
          "Accept this translation": [
-            "이 번역 수락"
+            "이 번역 수락하기"
          ],
          "Published!": [
-            "발행됨!"
+            "게시됨!"
          ],
          "Someone is already reviewing this translation. Please try again later.": [
-            "누군가 이미 이 번역을 검토하고 있습니다. 나중에 다시 시도하세요."
+            "이미 다른 사람이 이 번역을 검토 중입니다. 나중에 다시 시도해 주세요."
          ],
          "There was an error in applying translation.": [
-            "번역을 적용하는 동안 오류가 발생했습니다."
+            "번역 적용 중 오류가 발생했습니다."
          ]
       }
    }

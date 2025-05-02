@@ -10,7 +10,9 @@
 		{% endif %}
 
 		<p class="buttons-wrap">
-			<a class="button button-secondary" onclick="if(!confirm('{{ confirmation_message }}')) return false;"
+			<a
+				class="button-secondary wpml-button base-btn wpml-button--outlined"
+				onclick="if(!confirm('{{ confirmation_message }}')) return false;"
 			   href="{{ restore_page_url }}">{{ restore_button_label }}{% if theme_config_file %} *{% endif %}</a>
 		</p>
 	</div>

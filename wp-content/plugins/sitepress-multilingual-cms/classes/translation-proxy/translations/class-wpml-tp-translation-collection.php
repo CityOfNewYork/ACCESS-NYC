@@ -38,7 +38,7 @@ class WPML_TP_Translation_Collection implements IteratorAggregate {
 		return $this->target_language;
 	}
 
-	public function getIterator() {
+	public function getIterator(): Traversable {
 		return new ArrayIterator( $this->translations );
 	}
 

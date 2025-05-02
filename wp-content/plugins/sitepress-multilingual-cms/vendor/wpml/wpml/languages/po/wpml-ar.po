@@ -1,0 +1,67 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-04-22T15:22:58+02:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: wpml\n"
+
+#: src/config-admin-pages.php:90
+msgid "Translation Management"
+msgstr "إدارة الترجمة"
+
+#: src/config-admin-pages.php:254
+msgid "Automatic translation settings"
+msgstr "إعدادات الترجمة التلقائية"
+
+#: src/Legacy/Component/ATE/Application/Query/Account.php:20
+msgid "Error getting credits"
+msgstr "خطأ في الحصول على الأرصدة"
+
+#: src/Legacy/Component/ATE/Application/Query/Account.php:39
+msgid "Error getting account balances"
+msgstr "خطأ في الحصول على أرصدة الحساب"
+
+#: src/Legacy/Component/ATE/Application/Query/Glossary.php:26
+msgid "Error getting glossary data"
+msgstr "خطأ في الحصول على بيانات المسرد"
+
+#: src/Legacy/Component/ATE/Application/Service/EnginesService.php:140
+msgid "Error fetching translation engines"
+msgstr "خطأ في جلب محركات الترجمة"
+
+#: src/Legacy/Component/ATE/Application/Service/EnginesService.php:163
+msgid "Error fetching available formalities"
+msgstr "خطأ في جلب الأساليب الرسمية المتاحة"
+
+#: src/Legacy/Component/Translation/Sender/ErrorMapper/ErrorMapper.php:32
+msgid "The jobs could not be created."
+msgstr "تعذر إنشاء المهام."
+
+#: src/Legacy/Component/Translation/Sender/ErrorMapper/UnsupportedLanguagesInTranslationService.php:43
+msgid "The selected translation service doesn't support the following languages: %s"
+msgstr "خدمة الترجمة المحددة لا تدعم اللغات التالية: %s"
+
+#: src/UserInterface/Web/Core/Component/Dashboard/Application/DashboardController.php:304
+#: src/UserInterface/Web/Core/Component/Dashboard/Application/DashboardController.php:305
+#: src/UserInterface/Web/Core/Component/Dashboard/Application/DashboardController.php:306
+msgid "Other texts (Strings)"
+msgstr "نصوص أخرى (النصوص)"
+
+#: src/UserInterface/Web/Core/Component/Dashboard/Application/Endpoint/SendToTranslation/SendToTranslationController.php:48
+msgid "The request data for SendToTranslation is not valid."
+msgstr "بيانات الطلب لـ SendToTranslation غير صالحة."
+
+#: src/UserInterface/Web/Core/Component/Dashboard/Application/Endpoint/SendToTranslation/SendToTranslationController.php:61
+msgid "An error occurred while sending the translation."
+msgstr "حدث خطأ أثناء إرسال الترجمة."
+
+#: src/UserInterface/Web/Core/Component/Dashboard/Application/Endpoint/TranslateEverything/EnableController.php:45
+msgid "In order to translate automatically, you first need to enable WPML's Advanced Translation Editor"
+msgstr "لتتمكن من الترجمة تلقائيًا، يجب عليك أولاً تفعيل محرر الترجمة المتقدم الخاص بـ WPML"

@@ -54,10 +54,13 @@ class Collection {
 
 	/**
 	 * Converts array from key => vales to an array of pairs [ key, value ]
+	 *
 	 * @return Collection
 	 */
 	public function entities() {
-		$toPairs = function ( $value, $key ) { return [ $key, $value ]; };
+		$toPairs = function ( $value, $key ) {
+			return [ $key, $value ];
+		};
 
 		return $this->map( $toPairs );
 	}
@@ -142,38 +145,85 @@ class Collection {
 	/**
 	 * Determine if an item exists at an offset.
 	 *
-	 * @param  mixed  $key
+	 * @param mixed $key
+	 *
 	 * @return bool
 	 */
-	public function offsetExists($key)
-	{
-		return array_key_exists($key, $this->items);
+	public function offsetExists( $key ) {
+		return array_key_exists( $key, $this->items );
 	}
 
 	/**
 	 * Determine if an item exists in the collection by key.
 	 *
-	 * @param  mixed  $key
+	 * @param mixed $key
+	 *
 	 * @return bool
 	 */
-	public function has($key)
-	{
-		return $this->offsetExists($key);
+	public function has( $key ) {
+		return $this->offsetExists( $key );
+	}
+
+	/**
+	 * Returns true if any items in the collection pass the given truth test.
+	 *
+	 * @param callable $fn
+	 *
+	 * @return bool
+	 */
+	public function any( callable $fn ) {
+		return $this->filter( $fn )->count() > 0;
+	}
+
+	/** Count the number of items in the collection.
+	 *
+	 * @return int|null
+	 */
+	public function count() {
+		return count( $this->array );
+	}
+
+	/**
+	 * Returns the index of the first item that matches the given condition.
+	 *
+	 * @param callable $fn Callback that determines the match.
+	 * @return int Index of the first match, or -1 if not found.
+	 */
+	public function firstIndex( callable $fn ) {
+		foreach ( $this->array as $index=>$item ) {
+			if ( $fn( $item ) ) {
+				return $index;
+			}
+		}
+		return -1;
+
 	}
 }
 
 class NullCollection {
 
-	public function map( callable $fn ) { return $this; }
+	public function map( callable $fn ) {
+		return $this;
+	}
 
-	public function filter( callable $fn ) { return $this; }
+	public function filter( callable $fn ) {
+		return $this;
+	}
 
-	public function head() { return $this; }
+	public function head() {
+		return $this;
+	}
 
-	public function pluck() { return $this; }
+	public function pluck() {
+		return $this;
+	}
 
-	public function get() { return $this; }
+	public function get() {
+		return $this;
+	}
 
-	public function getOrNull() { return null; }
+	public function getOrNull() {
+		return null;
+	}
 
 }

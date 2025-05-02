@@ -1,0 +1,81 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/postEditTranslationEditor/components/PostTranslationEditorSettings.js:59
+msgid "WPML Translation Editor"
+msgstr "WPML Translation Editor"
+
+#: src/js/postEditTranslationEditor/components/PostTranslationEditorSettings.js:67
+msgid "WordPress Editor"
+msgstr "WordPress Editor"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:11
+msgid ""
+"Translate with the WordPress Editor when you want to create different "
+"designs for translations, or if you're translating content that's "
+"incompatible with WPML's Translation Editor."
+msgstr "Vertaal met de WordPress-editor wanneer je verschillende ontwerpen voor vertalingen wilt maken, of als je inhoud vertaalt die niet compatibel is met WPML's Vertaaleditor."
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:15
+msgid "What do you want to translate with the WordPress Editor?"
+msgstr "Wat wil je vertalen met de WordPress-editor?"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:16
+msgid "I understand, switch to the WordPress Editor"
+msgstr "Ik begrijp het, schakel over naar de WordPress-editor"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:17
+msgid "What do you want to translate with WPML Translation Editor?"
+msgstr "Wat wil je vertalen met WPML's Vertaaleditor?"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:18
+msgid "I understand, switch to WPML's Translation Editor"
+msgstr "Ik begrijp het, schakel over naar WPML's Vertaaleditor"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:44
+msgid "Apply"
+msgstr "Toepassen"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:45
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:52
+msgid "Only this %s"
+msgstr "Alleen dit %s"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:52
+msgid "Recommended"
+msgstr "Aanbevolen"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:53
+msgid "All %s"
+msgstr "Alle %s"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:54
+msgid "All the site's content"
+msgstr "Alle content van de site"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:61
+msgid "Are you sure?"
+msgstr "Weet je het zeker?"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:66
+msgid ""
+"The WordPress Editor doesn't offer Automatic Translation, Translation "
+"Memory and other features that make translation easier."
+msgstr "De WordPress-editor biedt geen Automatische Vertaling, Vertaalgeheugen en andere functies die het vertalen gemakkelijker maken."
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:69
+msgid ""
+"And, if you switch back to WPML's Translation Editor, you will need to "
+"translate from scratch what you translated with the WordPress editor."
+msgstr "En als je terugschakelt naar WPML's Vertaaleditor, zul je opnieuw moeten vertalen wat je met de WordPress-editor hebt vertaald."
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:76
+msgid ""
+"When you update content that you previously translated with the WordPress "
+"Editor, you will need to translate from scratch."
+msgstr "Wanneer je inhoud bijwerkt die je eerder met de WordPress-editor hebt vertaald, zul je opnieuw moeten vertalen."

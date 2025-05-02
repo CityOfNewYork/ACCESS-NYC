@@ -1,0 +1,292 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/ate/clonedSites/components/CloseButton.js:15
+msgid "Close"
+msgstr "Đóng"
+
+#: src/js/ate/clonedSites/components/ContactSupport.js:9
+msgid ""
+"Please take a screenshot of this message and report this issue to <a>WPML "
+"support</a>."
+msgstr "Vui lòng chụp màn hình thông báo này và báo cáo vấn đề cho <a>bộ phận hỗ trợ WPML</a>."
+
+#: src/js/ate/clonedSites/steps/CopyCompleted.js:22
+msgid ""
+"This copy of the site has the same content as the original site on %s, but "
+"it doesn’t have credits for automatic translation."
+msgstr "Bản sao này của trang web có cùng nội dung với trang web gốc trên %s, nhưng không có số dư cho dịch tự động."
+
+#: src/js/ate/clonedSites/steps/CopyCompleted.js:32
+msgid ""
+"If you want to use automatic translation for this site in the future, you "
+"can either <a1>add credits to this site</a1> or <a2>share the credits from "
+"the original site</a2>."
+msgstr "Nếu bạn muốn sử dụng dịch tự động cho trang web này trong tương lai, bạn có thể <a1>thêm số dư cho trang web này</a1> hoặc <a2>chia sẻ số dư từ trang web gốc</a2>."
+
+#: src/js/ate/clonedSites/steps/CopyCompleted.js:48
+msgid ""
+"There was an error checking for credits to share. Please take a screenshot "
+"of this message and report it in <a>WPML support</a>."
+msgstr "Đã xảy ra lỗi khi kiểm tra số dư để chia sẻ. Vui lòng chụp màn hình thông báo này và báo cáo nó cho <a>bộ phận hỗ trợ WPML</a>."
+
+#: src/js/ate/clonedSites/steps/CopyCompleted.js:9
+#: src/js/ate/clonedSites/steps/CopyWithCreditsCompleted.js:8
+#: src/js/ate/clonedSites/steps/MoveCompleted.js:9
+msgid "You’re all set"
+msgstr "Mọi thứ đã sẵn sàng"
+
+#: src/js/ate/clonedSites/steps/CopyCredits.js:36
+msgid ""
+"To allow the sites running on %s and %s to use the same credits for "
+"automatic translation, you need to:"
+msgstr "Để cho phép các trang web chạy trên %s và %s sử dụng cùng số dư cho dịch tự động, bạn cần:"
+
+#: src/js/ate/clonedSites/steps/CopyCredits.js:47
+msgid ""
+"Follow <a>this link</a> to access the migration code (you can't get it by "
+"visiting %s manually)"
+msgstr "Theo <a>liên kết này</a> để truy cập mã di chuyển (bạn không thể nhận được nó bằng cách truy cập %s thủ công)"
+
+#: src/js/ate/clonedSites/steps/CopyCredits.js:59
+msgid "Click on <b>Copy migration code</b>"
+msgstr "Nhấp vào <b>Sao chép mã di chuyển</b>"
+
+#: src/js/ate/clonedSites/steps/CopyCredits.js:68
+msgid "Paste the migration code into the field below."
+msgstr "Dán mã di chuyển vào trường bên dưới."
+
+#: src/js/ate/clonedSites/steps/CopyCredits.js:77
+msgid "Migration code"
+msgstr "Mã di chuyển"
+
+#: src/js/ate/clonedSites/steps/CopyCredits.js:79
+#: src/js/ate/clonedSites/steps/CreditDecision.js:84
+#: src/js/ate/clonedSites/steps/MoveConfirmation.js:57
+#: src/js/ate/clonedSites/steps/MoveOrCopy.js:76
+msgid "Continue"
+msgstr "Tiếp tục"
+
+#: src/js/ate/clonedSites/steps/CopyCredits.js:82
+#: src/js/ate/clonedSites/steps/CreditDecision.js:93
+msgid "Go back"
+msgstr "Quay lại"
+
+#: src/js/ate/clonedSites/steps/CopyCredits.js:9
+msgid ""
+"Let’s connect the automatic translation credits between the two copies of "
+"this site"
+msgstr "Hãy kết nối số dư dịch tự động giữa hai bản sao của trang web này"
+
+#: src/js/ate/clonedSites/steps/CopyError.js:15
+msgid ""
+"WPML was unable to copy your site's translations, translation memory, and "
+"glossary to this new URL."
+msgstr "WPML không thể sao chép bản dịch, bộ nhớ dịch và từ điển chuyên ngành của trang web của bạn sang URL mới này."
+
+#: src/js/ate/clonedSites/steps/CopyError.js:7
+msgid "Error with copying translation information to new URL"
+msgstr "Lỗi khi sao chép thông tin dịch sang URL mới"
+
+#: src/js/ate/clonedSites/steps/CopyWithCreditsCompleted.js:11
+msgid ""
+"Great. Now this site and its copy on %s are sharing the credits for "
+"automatic translation."
+msgstr "Tuyệt vời. Bây giờ trang web này và bản sao của nó trên %s đang chia sẻ số dư cho dịch tự động."
+
+#: src/js/ate/clonedSites/steps/CopyWithCreditsCompleted.js:29
+msgid ""
+"Credits that you add on either site will be available on both sites. If you "
+"stop using this site, you don’t need to worry about losing credits."
+msgstr "Số dư bạn thêm vào một trong hai trang web sẽ có sẵn trên cả hai trang. Nếu bạn ngừng sử dụng trang web này, bạn không cần phải lo lắng về việc mất số dư."
+
+#: src/js/ate/clonedSites/steps/CopyWithCreditsError.js:15
+msgid ""
+"WPML was unable to connect your old and new URLs to share automatic "
+"translation credits."
+msgstr "WPML không thể kết nối URL cũ và mới của bạn để chia sẻ số dư dịch tự động."
+
+#: src/js/ate/clonedSites/steps/CopyWithCreditsError.js:7
+msgid "Error with sharing automatic translation credits"
+msgstr "Lỗi khi chia sẻ số dư dịch tự động"
+
+#: src/js/ate/clonedSites/steps/CreditDecision.js:12
+msgid ""
+"The site on %s has %d credits for automatic translation. Do you want to "
+"share these credits between %s and this new location (%s)?"
+msgstr "Trang web trên %s có %d số dư cho dịch tự động. Bạn có muốn chia sẻ số dư này giữa %s và vị trí mới này (%s) không?"
+
+#: src/js/ate/clonedSites/steps/CreditDecision.js:20
+msgid ""
+"The site on %s has a pay-as-you-go subscription for automatic translation. "
+"Do you want to share these credits between %s and this new location (%s)?"
+msgstr "Trang web trên %s có gói đăng ký trả tiền theo sử dụng cho dịch tự động. Bạn có muốn chia sẻ số dư này giữa %s và vị trí mới này (%s) không?"
+
+#: src/js/ate/clonedSites/steps/CreditDecision.js:66
+msgid "Yes (recommended)"
+msgstr "Có (khuyến nghị)"
+
+#: src/js/ate/clonedSites/steps/CreditDecision.js:68
+msgid ""
+"In the next step, you will receive instructions for how to approve the "
+"credits sharing"
+msgstr "Trong bước tiếp theo, bạn sẽ nhận được hướng dẫn về cách phê duyệt việc chia sẻ số dư"
+
+#: src/js/ate/clonedSites/steps/CreditDecision.js:71
+#: src/js/ate/clonedSites/steps/MoveOrCopy.js:61
+msgid "No"
+msgstr "Không"
+
+#: src/js/ate/clonedSites/steps/CreditDecision.js:73
+msgid ""
+"You will need to assign credits or set up a pay-as-you-go plan for this "
+"site to use automatic translation"
+msgstr "Bạn sẽ cần phải chỉ định số dư hoặc thiết lập gói trả tiền theo sử dụng cho trang web này để sử dụng dịch tự động"
+
+#: src/js/ate/clonedSites/steps/CreditDecision.js:87
+msgid "What happens when you share credits for automatic translation between sites?"
+msgstr "Điều gì xảy ra khi bạn chia sẻ số dư cho dịch tự động giữa các trang web?"
+
+#: src/js/ate/clonedSites/steps/CreditDecision.js:9
+msgid "Translation credits for this site"
+msgstr "Số dư dịch cho trang web này"
+
+#: src/js/ate/clonedSites/steps/MoveCompleted.js:20
+msgid "You can continue translating content normally on this site."
+msgstr "Bạn có thể tiếp tục dịch nội dung bình thường trên trang web này."
+
+#: src/js/ate/clonedSites/steps/MoveCompleted.js:31
+msgid ""
+"Please keep in mind that there shouldn’t be a copy of this site at %s. If "
+"there still is a copy of it there, you will not be able to translate "
+"content on that site."
+msgstr "Xin lưu ý rằng không nên có bản sao của trang web này tại %s. Nếu vẫn còn bản sao của nó ở đó, bạn sẽ không thể dịch nội dung trên trang web đó."
+
+#: src/js/ate/clonedSites/steps/MoveConfirmation.js:32
+msgid ""
+"You indicated that you’re no longer running a copy of this site at %s. This "
+"means that:"
+msgstr "Bạn đã chỉ ra rằng bạn không còn chạy bản sao của trang web này tại %s. Điều này có nghĩa là:"
+
+#: src/js/ate/clonedSites/steps/MoveConfirmation.js:36
+msgid "You will not be able to use automatic translation on the old site"
+msgstr "Bạn sẽ không thể sử dụng dịch tự động trên trang web cũ"
+
+#: src/js/ate/clonedSites/steps/MoveConfirmation.js:39
+msgid "If you access the old site, it will trigger warnings on this site"
+msgstr "Nếu bạn truy cập trang web cũ, nó sẽ kích hoạt cảnh báo trên trang web này"
+
+#: src/js/ate/clonedSites/steps/MoveConfirmation.js:48
+msgid "I understand and am no longer running this site at %s"
+msgstr "Tôi hiểu và không còn chạy trang web này tại %s"
+
+#: src/js/ate/clonedSites/steps/MoveConfirmation.js:60
+msgid "Back"
+msgstr "Quay lại"
+
+#: src/js/ate/clonedSites/steps/MoveConfirmation.js:8
+msgid "Please check and confirm"
+msgstr "Vui lòng kiểm tra và xác nhận"
+
+#: src/js/ate/clonedSites/steps/MoveError.js:16
+msgid "WPML was unable to update our records with your new URL."
+msgstr "WPML không thể cập nhật hồ sơ của chúng tôi với URL mới của bạn."
+
+#: src/js/ate/clonedSites/steps/MoveError.js:7
+msgid "Error with moving translation information to new URL"
+msgstr "Lỗi khi di chuyển thông tin dịch sang URL mới"
+
+#: src/js/ate/clonedSites/steps/MoveOrCopy.js:34
+msgid "Looks like this site was previously at %s and now it’s at %s."
+msgstr "Có vẻ như trang web này trước đây ở %s và bây giờ nó ở %s."
+
+#: src/js/ate/clonedSites/steps/MoveOrCopy.js:42
+msgid "Do you still have the same site running at %s?"
+msgstr "Bạn vẫn còn chạy cùng một trang web tại %s không?"
+
+#: src/js/ate/clonedSites/steps/MoveOrCopy.js:54
+msgid "Yes"
+msgstr "Có"
+
+#: src/js/ate/clonedSites/steps/MoveOrCopy.js:57
+msgid "This is only a copy - original site is still running"
+msgstr "Đây chỉ là một bản sao - trang web gốc vẫn đang chạy"
+
+#: src/js/ate/clonedSites/steps/MoveOrCopy.js:64
+msgid "I changed the address of the site to this new one"
+msgstr "Tôi đã thay đổi địa chỉ của trang web thành địa chỉ mới này"
+
+#: src/js/ate/clonedSites/steps/MoveOrCopy.js:8
+msgid "WPML detected a new address for this site"
+msgstr "WPML đã phát hiện một địa chỉ mới cho trang web này"
+
+#: src/js/ate/clonedSites/steps/MoveOrCopy.js:80
+msgid ""
+"How to manage translations when migrating from development to production "
+"and more..."
+msgstr "Cách quản lý bản dịch khi di chuyển từ môi trường phát triển sang sản xuất và hơn thế nữa..."
+
+#: src/js/ate/clonedSites/steps/NoAdmin.js:11
+msgid ""
+"Looks like this site is a copy of a different site, or moved to a different "
+"URL. Please contact your translation manager to update Translation "
+"Management plugin configuration."
+msgstr "Có vẻ như trang web này là bản sao của một trang web khác, hoặc đã được chuyển sang một URL khác. Vui lòng liên hệ với quản lý dịch thuật của bạn để cập nhật cấu hình plugin Translation Management."
+
+#: src/js/ate/clonedSites/steps/NoAdmin.js:5
+msgid "Site Moved or Copied - Action Required"
+msgstr "Trang Web Đã Di Chuyển hoặc Sao Chép - Cần Hành Động"
+
+#: src/js/ate/clonedSites/steps/RevertMove.js:35
+msgid "You or someone else moved this site to %s. Please keep in mind that:"
+msgstr "Bạn hoặc ai đó đã di chuyển trang web này đến %s. Xin lưu ý rằng:"
+
+#: src/js/ate/clonedSites/steps/RevertMove.js:49
+msgid "Translations that you do at %s will not appear on this site."
+msgstr "Các bản dịch bạn thực hiện tại %s sẽ không xuất hiện trên trang web này."
+
+#: src/js/ate/clonedSites/steps/RevertMove.js:55
+msgid "You cannot edit translations on this site."
+msgstr "Bạn không thể chỉnh sửa bản dịch trên trang web này."
+
+#: src/js/ate/clonedSites/steps/RevertMove.js:66
+msgid ""
+"The site at %s is using the same credits for automatic translation as this "
+"site."
+msgstr "Trang web tại %s đang sử dụng cùng số dư cho dịch tự động như trang web này."
+
+#: src/js/ate/clonedSites/steps/RevertMove.js:75
+msgid ""
+"If you didn't intend to move this site to %s, you can <a>indicate that this "
+"site should be at %s</a>."
+msgstr "Nếu bạn không có ý định di chuyển trang web này đến %s, bạn có thể <a>chỉ ra rằng trang web này nên ở %s</a>."
+
+#: src/js/ate/clonedSites/steps/RevertMove.js:8
+msgid "This site has moved to a new location"
+msgstr "Trang web này đã được di chuyển đến một vị trí mới"
+
+#: src/js/ate/clonedSites/steps/RevertMove.js:95
+msgid ""
+"If you prefer not to move this site, you can <a>mark it as a copy</a> and "
+"enable automatic translation for it."
+msgstr "Nếu bạn không muốn di chuyển trang web này, bạn có thể <a>đánh dấu nó là một bản sao</a> và kích hoạt tính năng dịch tự động cho nó."
+
+#: src/js/ate/clonedSites/steps/RevertMoveConfirm.js:38
+msgid ""
+"Moving the site back here will mean that you will be able to translate on "
+"this domain again, but you will not be able to update translations at %s."
+msgstr "Việc chuyển trang web trở lại đây sẽ có nghĩa là bạn sẽ có thể dịch trên tên miền này một lần nữa, nhưng bạn sẽ không thể cập nhật bản dịch tại %s."
+
+#: src/js/ate/clonedSites/steps/RevertMoveConfirm.js:50
+msgid "Yes - move back here"
+msgstr "Có - chuyển trở lại đây"
+
+#: src/js/ate/clonedSites/steps/RevertMoveConfirm.js:56
+msgid "No - keep the site on %s"
+msgstr "Không - giữ trang web tại %s"
+
+#: src/js/ate/clonedSites/steps/RevertMoveConfirm.js:9
+msgid "Are you sure that this site should run on %s and not %s?"
+msgstr "Bạn có chắc chắn rằng trang web này nên chạy trên %s chứ không phải %s?"

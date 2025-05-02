@@ -4,7 +4,7 @@ namespace WPML\TM\ATE\Download;
 
 use Exception;
 use WPML\FP\Obj;
-use WPML\TM\ATE\ReturnedJobsQueue;
+use WPML\TM\ATE\ReturnedJobs;
 use WPML_TM_ATE_API;
 use WPML_TM_ATE_Jobs;
 
@@ -28,15 +28,14 @@ class Consumer {
 	 * @throws Exception
 	 */
 	public function process( $job ) {
-		$xliffContent = $this->ateApi->get_remote_xliff_content( Obj::prop('url', $job), $job );
+		$xliffContent = $this->ateApi->get_remote_xliff_content( Obj::prop( 'url', $job ), $job );
 		$wpmlJobId    = $this->ateJobs->apply( $xliffContent );
 
 		if ( $wpmlJobId ) {
-			$processedJob = Obj::assoc( 'jobId', $wpmlJobId, $job );
+			$job = Obj::assoc( 'jobId', $wpmlJobId, $job );
+			$job = Obj::assoc( 'status', ICL_TM_COMPLETE, $job );
 
-			ReturnedJobsQueue::remove( $wpmlJobId );
-
-			return $processedJob;
+			return $job;
 		}
 
 		return false;

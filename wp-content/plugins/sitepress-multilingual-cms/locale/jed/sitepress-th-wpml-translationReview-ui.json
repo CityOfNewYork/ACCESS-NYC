@@ -1,0 +1,55 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Accepted": [
+            "ได้รับการยอมรับ"
+         ],
+         "Approved!": [
+            "ได้รับการอนุมัติ!"
+         ],
+         "Loading the next translation for review...": [
+            "กำลังโหลดการแปลถัดไปเพื่อตรวจสอบ..."
+         ],
+         "Back": [
+            "ย้อนกลับ"
+         ],
+         "Turn off to not automatically load the next translation after finishing this review.": [
+            "ปิดเพื่อไม่ให้โหลดการแปลถัดไปโดยอัตโนมัติหลังจากเสร็จสิ้นการตรวจสอบนี้."
+         ],
+         "Turn on to automatically load the next translation after finishing this  .": [
+            "เปิดเพื่อโหลดการแปลถัดไปโดยอัตโนมัติหลังจากเสร็จสิ้นการตรวจสอบนี้."
+         ],
+         "Edit": [
+            "แก้ไข"
+         ],
+         "Edit translation": [
+            "แก้ไขการแปล"
+         ],
+         "Please wait, applying translation..": [
+            "กรุณารอสักครู่ กำลังใช้งานการแปล..."
+         ],
+         "Next review": [
+            "การตรวจสอบถัดไป"
+         ],
+         "Publish this translation": [
+            "เผยแพร่การแปลนี้"
+         ],
+         "Accept this translation": [
+            "ยอมรับการแปลนี้"
+         ],
+         "Published!": [
+            "เผยแพร่แล้ว!"
+         ],
+         "Someone is already reviewing this translation. Please try again later.": [
+            "มีผู้อื่นกำลังตรวจสอบการแปลนี้อยู่ กรุณาลองอีกครั้งในภายหลัง."
+         ],
+         "There was an error in applying translation.": [
+            "เกิดข้อผิดพลาดในการใช้งานการแปล."
+         ]
+      }
+   }
+}

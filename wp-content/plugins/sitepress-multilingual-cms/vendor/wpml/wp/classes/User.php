@@ -60,6 +60,37 @@ class User {
 		return self::userCan( self::getCurrentId(), $capability );
 	}
 
+
+	/**
+	 * Returns true if the current user is an admin.
+	 *
+	 * @return bool
+	 */
+	public static function currentUserIsAdmin() {
+		return self::currentUserCan( self::CAP_MANAGE_OPTIONS );
+	}
+
+
+	/**
+	 * Returns true if the current user is a translation manager or higher.
+	 *
+	 * @return bool
+	 */
+	public static function currentUserIsTranslationManagerOrHigher() {
+		return self::currentUserIsAdmin()
+			|| self::currentUserCan( self::CAP_MANAGE_TRANSLATIONS );
+	}
+
+	/**
+	 * Returns true if the current user is a translator or higher.
+	 *
+	 * @return bool
+	 */
+	public static function currentUserIsTranslatorOrHigher() {
+		return self::currentUserIsTranslationManagerOrHigher()
+			|| self::currentUserCan( self::CAP_TRANSLATE );
+	}
+
 	/**
 	 * @return int
 	 */

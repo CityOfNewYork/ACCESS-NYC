@@ -3,24 +3,53 @@
 namespace WPML\MediaTranslation;
 
 use WPML\LIB\WP\Attachment;
+use WPML\MediaTranslation\MediaCollector\Collector;
 
 class MediaImgParse {
+	private $media = [];
+	private $collector;
+
 	/**
 	 * @param string $text
 	 *
 	 * @return array
 	 */
 	public function get_imgs( $text ) {
-		$images = $this->get_from_img_tags( $text );
-
 		if ( $this->can_parse_blocks( $text ) ) {
+			/** @var WP_Block_Parser_Block[] $blocks */
 			$blocks = parse_blocks( $text );
-			$images = array_merge( $images, $this->get_from_css_background_images_in_blocks( $blocks ) );
+			$this->collect_media_in_blocks( $blocks, $this->media );
+			Attachment::addToCache( $this->media );
+			$images = $this->get_from_css_background_images_in_blocks( $blocks );
 		} else {
-			$images = array_merge( $images, $this->get_from_css_background_images( $text ) );
+			$images = $this->get_from_css_background_images( $text );
 		}
 
+		$images = array_merge( $this->get_from_img_tags( $text ), $images );
 		return $images;
+	}
+
+	/**
+	 * @param WP_Block_Parser_Block[] $blocks
+	 * @param array                   $mediaCollection
+	 */
+	public function collect_media_in_blocks( $blocks, &$mediaCollection = [] ) {
+		if ( $this->collector == null ) {
+			$file = __DIR__ . '/media-collector/block-definitions/all.php';
+
+			if ( ! file_exists( $file ) ) {
+				return $mediaCollection;
+			}
+
+			$this->collector = new Collector();
+			$this->collector->addCollectorBlocks(
+				require __DIR__ . '/media-collector/block-definitions/all.php'
+			);
+		}
+
+		$this->collector->collectMediaFromBlocks( $blocks, $mediaCollection );
+
+		return $mediaCollection;
 	}
 
 	/**
@@ -130,7 +159,7 @@ class MediaImgParse {
 	private function sanitize_block( $block ) {
 		$block = (object) $block;
 
-		if ( isset( $block->attrs ) ) {
+		if ( isset( $block->attrs ) && ! is_object( $block->attrs ) ) {
 			/** Sometimes `$block->attrs` is an object or an array, so we'll use an object */
 			$block->attrs = (object) $block->attrs;
 		}

@@ -3,8 +3,7 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "lang": "fr_FR"
+            "domain": "messages"
          },
          "From:": [
             "Langue source :"
@@ -136,7 +135,7 @@
             "Cliquez ici"
          ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
-            "Format incorrect. Seules les minuscules et \"-\" par ex. : \"fr\" , \"pt-br\", \"zh-hans\" sont autorisés."
+            "Mauvais format. Utilisez des lettres minuscules et des \"-\". Ex: \"fr\", \"pt-br\", \"zh-hans\""
          ],
          "Language": [
             "Langue"
@@ -160,7 +159,7 @@
             "Paramètres régionaux par défaut"
          ],
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
-            "Format incorrect. Seules les minuscules et \"_\" par ex. : \"de\" , \"de_DE\", \"zh_Hant_TW\" sont autorisés."
+            "Mauvais format. Utilisez des lettres minuscules et des \"_\". Ex: \"de\", \"de_DE\", \"zh_Hant_TW\""
          ],
          "hreflang": [
             "hreflang"
@@ -220,10 +219,13 @@
             "Anglais pour les utilisateurs des É-U : en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
-            "Détermine si les URL dans cette langue sont encodées ou font appel aux caractères ASCII (si vous n'êtes pas sûr, laissez sur \"Non\")."
+            "Détermine si les URL sont codées ou en ASCII (sinon, laissez \"Non\")."
          ],
          "adding a custom language": [
             "ajout d’une langue personnalisée"
+         ],
+         "What are the languages of your site?": [
+            "Quelles sont les langues de votre site ?"
          ],
          "Default language": [
             "Langue par défaut"
@@ -242,9 +244,6 @@
          ],
          "create a custom language": [
             "créez une langue personnalisée"
-         ],
-         "What are the languages of your site?": [
-            "Quelles sont les langues de votre site ?"
          ],
          "You can add a dedicated person to oversee everything translation-related on your site. %sTranslation Managers%s can add new local translators or professional translation services, create and assign translation jobs, review completed translations, and change translation-related settings.": [
             "Vous pouvez ajouter une personne dédiée à superviser tout ce qui concerne la traduction de votre site. Les %sGestionnaires de traduction%s peuvent ajouter de nouveaux traducteurs locaux ou des services de traduction professionnels, créer et attribuer des travaux de traduction, corriger des traductions terminées et modifier les paramètres de traduction."

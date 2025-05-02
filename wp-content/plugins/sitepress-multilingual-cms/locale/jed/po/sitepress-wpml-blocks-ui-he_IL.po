@@ -1,0 +1,244 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
+msgid "Advanced"
+msgstr "מתקדם"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:25
+msgid "HTML anchor"
+msgstr "עוגן HTML"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
+msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
+msgstr "הוסף קיצור דרך לבלוק זה בעת טעינת העמוד באמצעות כתובת ה-URL \"#anchor\"."
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
+msgid "Additional CSS class(es)"
+msgstr "מחלקות CSS נוספות"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
+msgid "Separate multiple classes with spaces."
+msgstr "הפרד בין מספר מחלקות באמצעות רווחים."
+
+#: src/js/blocks/LanguageSwitcher/Components/Color/Control.js:49
+msgid "Color"
+msgstr "צבע"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:346
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:42
+msgid "px"
+msgstr "פיקסלים"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:347
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:46
+msgid "%"
+msgstr "%"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:358
+msgid "Dimensions"
+msgstr "מידות"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:365
+msgid "BLOCK"
+msgstr "בלוק"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:371
+msgid "Block margin"
+msgstr "שוליים של הבלוק"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:388
+msgid "Block padding"
+msgstr "ריפוד של הבלוק"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:406
+msgid "LANGUAGE"
+msgstr "שפה"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:412
+msgid "Language spacing"
+msgstr "מרווח בין שפות"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
+msgid "Language padding"
+msgstr "ריפוד של השפה"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
+msgid "Display"
+msgstr "תצוגה"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:41
+msgid "Show flag"
+msgstr "הצג דגל"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:49
+msgid "Show language name"
+msgstr "הצג שם שפה"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:68
+msgid "Display language name in"
+msgstr "הצג את שם השפה ב"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:113
+msgid "Style"
+msgstr "סגנון"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:55
+msgid "Flag settings"
+msgstr "הגדרות דגל"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:59
+msgid "Width"
+msgstr "רוחב"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:62
+msgid "Height"
+msgstr "גובה"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:94
+msgid "Spacing"
+msgstr "מרווח"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:119
+msgid "Allow wrapping to multiple lines"
+msgstr "אפשר גלישה למספר שורות"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
+msgid "Open on click"
+msgstr "פתח בלחיצה"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:145
+msgid "Show arrow"
+msgstr "הצג חץ"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:60
+msgid "Layout"
+msgstr "פריסה"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:72
+msgid "Justification"
+msgstr "יישור"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:74
+msgid "Orientation"
+msgstr "כיוון"
+
+#: src/js/blocks/LanguageSwitcher/Components/Typography/Control.js:160
+msgid "Typography"
+msgstr "טיפוגרפיה"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:116
+#: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:25
+msgid "Background"
+msgstr "רקע"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:121
+msgid "Language Text"
+msgstr "טקסט שפה"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:126
+msgid "Language Background"
+msgstr "רקע שפה"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:131
+msgid "Current language text"
+msgstr "טקסט שפה נוכחית"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:136
+#: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:30
+msgid "Current language background"
+msgstr "רקע שפה נוכחית"
+
+#: src/js/blocks/LanguageSwitcher/attributes/display.js:5
+msgid "Full name"
+msgstr "שם מלא"
+
+#: src/js/blocks/LanguageSwitcher/attributes/display.js:9
+msgid "Code"
+msgstr "קוד"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:24
+msgid "Justify items left"
+msgstr "יישר פריטים לשמאל"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:29
+msgid "Justify items center"
+msgstr "יישר פריטים למרכז"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:34
+msgid "Justify items right"
+msgstr "יישר פריטים לימין"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
+msgid "Justify items space between"
+msgstr "יישר פריטים עם רווח ביניהם"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
+msgid "Horizontal"
+msgstr "אופקי"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:52
+msgid "Vertical"
+msgstr "אנכי"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:14
+msgid "Normal"
+msgstr "רגיל"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:19
+msgid "Medium"
+msgstr "בינוני"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:24
+msgid "Large"
+msgstr "גדול"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:29
+msgid "X-Large"
+msgstr "גדול במיוחד"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:35
+msgid "Ab"
+msgstr "אב"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:39
+msgid "AB"
+msgstr "אב"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:43
+msgid "ab"
+msgstr "אב"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:9
+msgid "Small"
+msgstr "קטן"
+
+#: src/js/blocks/LanguageSwitcher/index.js:36
+msgid "Displays the WPML Language Switcher."
+msgstr "מציג את מחליף השפות של WPML."
+
+#: src/js/blocks/LanguageSwitcher/index.js:42
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:47
+msgid "Language Switcher"
+msgstr "מחליף שפות"
+
+#: src/js/blocks/LanguageSwitcher/index.js:43
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:48
+msgid "displays the WPML Language Switcher"
+msgstr "מציג את מחליף השפות של WPML"
+
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:30
+msgid ""
+"Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
+"block</a>."
+msgstr "מציג את מחליף השפות של WPML. <br/> למד <a>כיצד לתרגם בלוק זה</a>."
+
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:38
+msgid "Navigation Language Switcher"
+msgstr "מחליף שפות לניווט"
+
+#: src/js/blocks/Shared/Controls/PanelSettingsDropdown.js:64
+msgid "Reset all"
+msgstr "אפס הכל"

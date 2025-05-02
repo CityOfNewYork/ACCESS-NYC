@@ -26,7 +26,7 @@ use function WPML\FP\spreadArgs;
  * @method static callable|void save( ...$element_type_prefix, ...$job, ...$decoder ) :: string → object → ( string → string → string ) → void
  * @method static callable|void addExisting( ...$prevTranslations, ...$package, ...$lang ) :: [WPML_TM_Translated_Field] → object → string → [WPML_TM_Translated_Field]
  * @method static callable|bool isTranslated( ...$field ) :: object → bool
- * @method static callable|void markTranslationsAsInProgress( ...$getJobStatus, ...$hasTranslation, ...$addTranslation, ...$post, ...$element) :: callable -> callable -> callable -> WPML_TM_Translation_Batch_Element -> \stdClass -> void
+ * @method static callable|void markTranslationsAsInProgress( ...$getJobStatus, ...$post, ...$element) :: callable -> callable -> callable -> WPML_TM_Translation_Batch_Element -> \stdClass -> void
  * @method static callable|void cancelTranslations(...$job) :: \WPML_TM_Job_Entity -> void
  */
 class StringTranslations {
@@ -52,7 +52,7 @@ class StringTranslations {
 			curryN(
 				3,
 				function ( $element_type_prefix, $job, callable $decoder ) {
-					if ( $element_type_prefix === 'st-batch' ) {
+					if ( 'st-batch' === $element_type_prefix ) {
 
 						// $decodeField :: field → string
 						$decodeField = pipe(
@@ -126,7 +126,7 @@ class StringTranslations {
 					$getTranslation = curryN(
 						3,
 						function ( $lang, $data, $stringId ) {
-							if ( $data['translate'] === 1 && self::isBatchId( $stringId ) ) {
+							if ( 1 === $data['translate'] && self::isBatchId( $stringId ) ) {
 								/** @var string $translation */
 								$translation = ST_API::getTranslation( self::decodeStringId( $stringId ), $lang );
 								return (object) [
@@ -173,9 +173,7 @@ class StringTranslations {
 						$statuses = \wpml_collect( $getJobStatus( $post->post_id ) );
 
 						$addTranslationWithStatus = function ( $stringId, $targetLanguage ) use ( $statuses ) {
-							$status = Option::shouldTranslateEverything()
-								? ICL_TM_IN_PROGRESS
-								: $statuses->get( $targetLanguage, ICL_STRING_TRANSLATION_NOT_TRANSLATED );
+							$status = $statuses->get( $targetLanguage, ICL_STRING_TRANSLATION_NOT_TRANSLATED );
 							ST_API::updateStatus( $stringId, $targetLanguage, $status );
 						};
 
@@ -192,7 +190,7 @@ class StringTranslations {
 	}
 
 	/**
-	 * @param string $element_type_prefix
+	 * @param string    $element_type_prefix
 	 * @param \stdClass $job
 	 * @return callable|void
 	 * @phpstan-return ( $job is not null ? void : callable )
@@ -202,7 +200,7 @@ class StringTranslations {
 			curryN(
 				2,
 				function ( $element_type_prefix, $job ) {
-					if ( $element_type_prefix === 'st-batch' ) {
+					if ( 'st-batch' === $element_type_prefix ) {
 						// $getStringId :: field → int
 						$getStringId = pipe( Obj::prop( 'field_type' ), self::decodeStringId() );
 
@@ -263,13 +261,13 @@ class StringTranslations {
 	}
 
 	/**
-	 * @param string $field
+	 * @param array $field
 	 *
 	 * @return callable|bool
 	 *
-	 * @phpstan-template A1 of string|curried
+	 * @phpstan-template A1 of array|curried
 	 * @phpstan-param ?A1 $field
-	 * @phpstan-return ($field is not null ? bool : callable(string):bool)
+	 * @phpstan-return ($field is not null ? bool : callable(array):bool)
 	 */
 	public static function isBatchField( $field = null ) {
 		return call_user_func_array(
@@ -282,7 +280,6 @@ class StringTranslations {
 			func_get_args()
 		);
 	}
-
 
 }
 

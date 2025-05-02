@@ -1,0 +1,177 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-04-22T15:22:54+02:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: wpml\n"
+
+msgid "Could not fetch engines data"
+msgstr "エンジンデータを取得できませんでした"
+
+msgid "Could not save settings"
+msgstr "設定を保存できませんでした"
+
+msgid "Automatic translation"
+msgstr "自動翻訳"
+
+msgid "Saving..."
+msgstr "保存中..."
+
+msgid "Save settings"
+msgstr "設定を保存"
+
+msgid "Settings saved"
+msgstr "設定が保存されました"
+
+msgid "Some error occurred"
+msgstr "エラーが発生しました"
+
+msgid "Loading..."
+msgstr "読み込み中..."
+
+msgid "Failed to load engines"
+msgstr "エンジンの読み込みに失敗しました"
+
+msgid "Drag your default engine to the top and order the rest by priority."
+msgstr "デフォルトのエンジンを一番上にドラッグし、残りを優先順位で並べ替えてください。"
+
+msgid "Which translation engines do you want to use?"
+msgstr "どの翻訳エンジンを使用しますか？"
+
+msgid "Automatic translation engines differ in translation style and supported language pairs. If your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it."
+msgstr "自動翻訳エンジンは、翻訳スタイルとサポートされる言語ペアが異なります。お好みの翻訳エンジンが使用したい言語ペアをサポートしていない場合、次に優先されるエンジンでその言語ペアをサポートしているものにフォールバックします。"
+
+msgid "WPML AI (beta) automatically detects the formality of your content and translates with the same formality."
+msgstr "WPML AI（ベータ版）はコンテンツの形式を自動的に検出し、同じ形式で翻訳します。"
+
+msgid "Auto-formality"
+msgstr "自動形式"
+
+msgid "Choose the tone of automatic translations for %s"
+msgstr "%sの自動翻訳のトーンを選択してください"
+
+msgid "Your site doesn't use languages that offer formality settings."
+msgstr "サイトは形式設定を提供する言語を使用していません。"
+
+msgid "Edit formality"
+msgstr "形式を編集"
+
+msgid "%d credits per word"
+msgstr "単語あたり%dクレジット"
+
+msgid "Backup %d"
+msgstr "バックアップ %d"
+
+msgid "Default"
+msgstr "デフォルト"
+
+msgid "ON"
+msgstr "オン"
+
+msgid "OFF"
+msgstr "オフ"
+
+msgid "Documentation"
+msgstr "ドキュメント"
+
+msgid "DeepL's formality and how it helps get good translations"
+msgstr "DeepLの形式と、それが良い翻訳を得るのにどのように役立つか"
+
+msgid "Edit button"
+msgstr "編集ボタン"
+
+msgid "Examples for %s"
+msgstr "%sの例"
+
+msgid "For example:"
+msgstr "例えば："
+
+msgid "Formality settings for %s"
+msgstr "%sの形式設定"
+
+msgid "Formality level for %s"
+msgstr "%sの形式レベル"
+
+msgid "Set formality for %s"
+msgstr "%sの形式を設定"
+
+msgid ""
+"%d of your target languages can be translated using either a formal or informal tone.\n"
+" The tone which gives the best translation for each language is set by default."
+msgstr "ターゲット言語の%dは、フォーマルまたはインフォーマルなトーンで翻訳できます。\n 各言語に最適な翻訳を提供するトーンがデフォルトで設定されています。"
+
+msgid "%s doesn't yet support formality options for %s."
+msgstr "%sは%sの形式オプションをまだサポートしていません。"
+
+msgid "Cancel"
+msgstr "キャンセル"
+
+msgid "Update"
+msgstr "更新"
+
+msgid "Formal"
+msgstr "フォーマル"
+
+msgid "Informal"
+msgstr "インフォーマル"
+
+msgid "Don't translate drafts. Only translate when I publish content."
+msgstr "下書きは翻訳しないでください。コンテンツを公開したときのみ翻訳します。"
+
+msgid "Translate drafts as I save them (consumes a bit more translation credits)."
+msgstr "下書きを保存する度に翻訳します（翻訳クレジットを少し多く消費します）。"
+
+msgid "Do you want to translate drafts automatically?"
+msgstr "下書きを自動的に翻訳しますか？"
+
+msgid "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s."
+msgstr "この機能は、%s翻訳ダッシュボード%sから「すべてを自動翻訳」を有効にした場合のみ利用できます。"
+
+msgid "Close modal"
+msgstr "モーダルを閉じる"
+
+msgid "What would you like to do after WPML finishes translating your content automatically?"
+msgstr "WPMLがコンテンツの自動翻訳を完了した後、何をしたいですか？"
+
+msgid "Wait for review"
+msgstr "レビュー待ち"
+
+msgid "Recommended with DeepL, Google and Microsoft"
+msgstr "DeepL、Google、Microsoftと併せて推奨"
+
+msgid "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process."
+msgstr "DeepL、Google、Microsoftは優れた翻訳を提供しますが、正確さを確認するために人間による確認をお勧めします。WPML AIは文脈を理解した人間以上の翻訳を提供するため、確認プロセスを自信を持ってスキップできます。"
+
+msgid "WPML keeps translations unpublished, so you can review them first."
+msgstr "WPMLは翻訳を未公開のままにし、先にレビューできるようにします。"
+
+msgid "Your translators review and approve translations before publishing."
+msgstr "翻訳者が公開前に翻訳をレビューし承認します。"
+
+msgid "Publish and mark for review"
+msgstr "公開してレビュー対象としてマーク"
+
+msgid "WPML publishes translations immediately but flags them for you to check at your convenience."
+msgstr "WPMLは翻訳をすぐに公開しますが、後で確認できるようにフラグを立てます。"
+
+msgid "WPML publishes translations immediately but flags them for translators to review later."
+msgstr "WPMLは翻訳をすぐに公開しますが、翻訳者が後でレビューできるようにフラグを立てます。"
+
+msgid "Publish without review"
+msgstr "レビューなしで公開"
+
+msgid "Recommended with WPML AI"
+msgstr "WPML AIで推奨"
+
+msgid "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy."
+msgstr "WPML AIは人間を超える翻訳を提供し、改善が必要なことはほとんどないので、レビュープロセスを自信を持ってスキップできます。他の翻訳エンジンの場合、正確性を確認するために人間によるレビューをお勧めします。"
+
+msgid "WPML publishes translations immediately, skipping the review process."
+msgstr "WPMLはレビュープロセスをスキップして、翻訳をすぐに公開します。"

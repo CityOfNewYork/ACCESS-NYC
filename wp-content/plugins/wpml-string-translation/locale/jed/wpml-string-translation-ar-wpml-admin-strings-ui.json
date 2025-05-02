@@ -1,0 +1,82 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Not included in String Translation": [
+            "غير مدرجة في ترجمة السلسلة"
+         ],
+         "Registered and locked": [
+            "مسجلة ومقفلة"
+         ],
+         "Text": [
+            "نص"
+         ],
+         "Numeric": [
+            "رقمي"
+         ],
+         "All Types": [
+            "كل الانواع"
+         ],
+         "Search": [
+            "يبحث"
+         ],
+         "Communication error": [
+            "خطأ في الاتصال"
+         ],
+         "The action failed.": [
+            "فشل الإجراء."
+         ],
+         "All (%d)": [
+            "الجميع (%d)"
+         ],
+         "Included in String Translation (%d)": [
+            "مضمن في ترجمة السلسلة (%d)"
+         ],
+         "Not included in String Translation (%d)": [
+            "غير مضمن في ترجمة السلسلة (%d)"
+         ],
+         "This setting is locked by a WPML configuration file.": [
+            "يتم قفل هذا الإعداد بواسطة ملف تكوين WPML."
+         ],
+         "Option": [
+            "خيار"
+         ],
+         "Value": [
+            "قيمة"
+         ],
+         "Type": [
+            "يكتب"
+         ],
+         "State": [
+            "ولاية"
+         ],
+         "Export as a WPML configuration file": [
+            "قم بالتصدير كملف تكوين WPML"
+         ],
+         "Cancel": [
+            "يلغي"
+         ],
+         "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
+            "احفظ ما يلي في ملف wpml-config.xml في جذر القالب أو المكون الإضافي الخاص بك."
+         ],
+         "No options found.": [
+            "لم يتم العثور على خيارات."
+         ],
+         "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
+            "تأكد من حفظ خيارات السمة الخاصة بك مرة واحدة على الأقل. تضيف بعض السمات هذه فقط إلى ملفwp_options الجدول بعد أن يقوم المستخدم بحفظ التغييرات بشكل صريح على الإعدادات الافتراضية للموضوع."
+         ],
+         "Add to String Translation": [
+            "أضف إلى سلسلة الترجمة"
+         ],
+         "Remove from String Translation": [
+            "إزالة من ترجمة السلسلة"
+         ],
+         "Included in String Translation": [
+            "المدرجة في ترجمة السلسلة"
+         ]
+      }
+   }
+}

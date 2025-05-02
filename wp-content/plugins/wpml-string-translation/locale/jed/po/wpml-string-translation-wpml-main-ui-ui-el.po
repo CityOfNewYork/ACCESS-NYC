@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/main-ui/components/Actions.js:46
+msgid "Edit"
+msgstr ""
+
+#: src/js/main-ui/components/Actions.js:57
+msgid "Shift+Tab"
+msgstr ""
+
+#: src/js/main-ui/components/Actions.js:62
+msgid "Tab"
+msgstr ""
+
+#: src/js/main-ui/components/EditTranslationPopup.js:102
+msgid "Translation to:"
+msgstr ""
+
+#: src/js/main-ui/components/EditTranslationPopup.js:121
+msgid "Copy from original"
+msgstr ""
+
+#: src/js/main-ui/components/EditTranslationPopup.js:136
+msgid "Use Shift+Enter to add a new line."
+msgstr ""
+
+#: src/js/main-ui/components/EditTranslationPopup.js:95
+msgid "Original:"
+msgstr ""
+
+#: src/js/main-ui/components/LanguagesCell.js:166
+msgid "Add %s translation"
+msgstr ""
+
+#: src/js/main-ui/components/LanguagesCell.js:185
+msgid "Edit %s translation"
+msgstr ""
+
+#: src/js/main-ui/components/LanguagesCell.js:61
+msgid "Original language %s"
+msgstr ""
+
+#: src/js/main-ui/components/LanguagesCell.js:68
+msgid "Waiting for translator to %s"
+msgstr ""
+
+#: src/js/main-ui/components/LanguagesCell.js:75
+msgid "Translation in progress to %s"
+msgstr ""
+
+#: src/js/main-ui/components/LanguagesCell.js:82
+msgid "In basket for translation to %s"
+msgstr ""
+
+#: src/js/main-ui/components/notification.js:13
+msgid "Translation saved."
+msgstr ""
+
+#: src/js/main-ui/components/notification.js:17
+msgid "Translation update failed."
+msgstr ""

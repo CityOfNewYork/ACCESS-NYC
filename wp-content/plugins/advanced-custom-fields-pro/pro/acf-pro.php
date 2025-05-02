@@ -18,13 +18,15 @@ if ( ! class_exists( 'acf_pro' ) ) :
 
 			// update setting
 			acf_update_setting( 'pro', true );
-			acf_update_setting( 'name', __( 'Advanced Custom Fields PRO', 'acf' ) );
+			acf_update_setting( 'name', 'Advanced Custom Fields PRO' );
+
+			// Initialize autoloaded classes.
+			acf_new_instance( 'ACF\Pro\Meta\Option' );
 
 			// includes
 			acf_include( 'pro/blocks.php' );
 			acf_include( 'pro/options-page.php' );
 			acf_include( 'pro/acf-ui-options-page-functions.php' );
-			acf_include( 'pro/class-acf-updates.php' );
 			acf_include( 'pro/updates.php' );
 
 			if ( is_admin() ) {
@@ -34,6 +36,8 @@ if ( ! class_exists( 'acf_pro' ) ) :
 
 			// actions
 			add_action( 'init', array( $this, 'register_assets' ) );
+			add_action( 'acf/init', array( $this, 'update_plugin_name' ) );
+			add_action( 'woocommerce_init', array( $this, 'init_hpos_integration' ), 99 );
 			add_action( 'acf/init_internal_post_types', array( $this, 'register_ui_options_pages' ) );
 			add_action( 'acf/include_fields', array( $this, 'include_options_pages' ) );
 			add_action( 'acf/include_field_types', array( $this, 'include_field_types' ), 5 );
@@ -48,6 +52,29 @@ if ( ! class_exists( 'acf_pro' ) ) :
 			add_filter( 'posts_where', array( $this, 'posts_where' ), 10, 2 );
 			add_filter( 'acf/internal_post_type/admin_body_classes', array( $this, 'admin_body_classes' ) );
 			add_filter( 'acf/internal_post_type_list/admin_body_classes', array( $this, 'admin_body_classes' ) );
+		}
+
+		/**
+		 * Updates the plugin name to make it translatable.
+		 *
+		 * @since 6.4
+		 *
+		 * @return void
+		 */
+		public function update_plugin_name() {
+			acf_update_setting( 'name', __( 'Advanced Custom Fields PRO', 'acf' ) );
+		}
+
+		/**
+		 * Initializes the ACF WooCommerce HPOS integration.
+		 *
+		 * @since 6.4
+		 *
+		 * @return void
+		 */
+		public function init_hpos_integration() {
+			acf_new_instance( 'ACF\Pro\Meta\WooOrder' );
+			acf_new_instance( 'ACF\Pro\Forms\WC_Order' );
 		}
 
 		/**
@@ -113,7 +140,7 @@ if ( ! class_exists( 'acf_pro' ) ) :
 		 */
 		public function register_assets() {
 			$version = acf_get_setting( 'version' );
-			$min     = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+			$min     = defined( 'ACF_DEVELOPMENT_MODE' ) && ACF_DEVELOPMENT_MODE ? '' : '.min';
 
 			// Register scripts.
 			wp_register_script( 'acf-pro-input', acf_get_url( "assets/build/js/pro/acf-pro-input{$min}.js" ), array( 'acf-input' ), $version );
@@ -121,15 +148,17 @@ if ( ! class_exists( 'acf_pro' ) ) :
 			wp_register_script( 'acf-pro-ui-options-page', acf_get_url( "assets/build/js/pro/acf-pro-ui-options-page{$min}.js" ), array( 'acf-input' ), $version );
 
 			// Register styles.
-			wp_register_style( 'acf-pro-input', acf_get_url( 'assets/build/css/pro/acf-pro-input.css' ), array( 'acf-input' ), $version );
-			wp_register_style( 'acf-pro-field-group', acf_get_url( 'assets/build/css/pro/acf-pro-field-group.css' ), array( 'acf-input' ), $version );
+			wp_register_style( 'acf-pro-input', acf_get_url( 'assets/build/css/pro/acf-pro-input' . $min . '.css' ), array( 'acf-input' ), $version );
+			wp_register_style( 'acf-pro-field-group', acf_get_url( 'assets/build/css/pro/acf-pro-field-group' . $min . '.css' ), array( 'acf-input' ), $version );
 
-			$to_localize = array(
-				'isLicenseActive'  => acf_pro_is_license_active(),
-				'isLicenseExpired' => acf_pro_is_license_expired(),
-			);
+			if ( is_admin() ) {
+				$to_localize = array(
+					'isLicenseActive'  => acf_pro_is_license_active(),
+					'isLicenseExpired' => acf_pro_is_license_expired(),
+				);
 
-			acf_localize_data( $to_localize );
+				acf_localize_data( $to_localize );
+			}
 		}
 
 		/**

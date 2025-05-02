@@ -9,7 +9,7 @@ WPML_String_Translation.ChangeLanguage = function () {
     var init = function () {
         jQuery(function () {
 
-            privateData.language_select = jQuery('#icl_st_change_lang_selected');
+            privateData.language_select = jQuery('#icl-st-change-lang-selected');
             privateData.language_select.on('change', applyChanges);
 
             privateData.spinner = jQuery('.icl-st-change-spinner');
@@ -18,6 +18,27 @@ WPML_String_Translation.ChangeLanguage = function () {
     };
 
 	var applyChanges = function () {
+        if(WPML_String_Translation.ExecBatchAction.isApplyBulkActionSelected()) {
+            WPML_String_Translation.ExecBatchAction.run(
+                wpml_st_exec_batch_action_data.initChangeStringLangOfDomain,
+                wpml_st_exec_batch_action_data.changeLanguageOfStringsInDomain,
+                {
+                    domain: jQuery('select[name="icl_st_filter_context"] option:selected').val(),
+                    targetLanguage: privateData.language_select.val(),
+                },
+                {
+                    beforeStart: function() {
+                        jQuery('#icl-st-change-lang-selected').attr('disabled', 'disabled');
+                    },
+                    onComplete: function(data) {
+                        jQuery('#icl-st-change-lang-selected').removeAttr('disabled');
+                        window.location.reload();
+                    },
+                }
+            );
+            return;
+        }
+
 		var checkBoxValue;
 		var data;
 		var i;

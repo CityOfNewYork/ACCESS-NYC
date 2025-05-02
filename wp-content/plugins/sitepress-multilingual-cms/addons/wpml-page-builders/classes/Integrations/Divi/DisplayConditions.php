@@ -2,6 +2,7 @@
 
 namespace WPML\Compatibility\Divi;
 
+use WPML\Convert\Ids;
 use WPML\LIB\WP\Hooks;
 use function WPML\FP\spreadArgs;
 use WPML\FP\Obj;
@@ -21,17 +22,15 @@ class DisplayConditions implements \IWPML_Frontend_Action {
 	 */
 	public function translateAttributes( $atts ) {
 		$displayConditions = Obj::prop( 'display_conditions', $atts );
-		
+
 		if ( $displayConditions && self::BASE64_EMPTY_ARRAY !== $displayConditions ) {
 			/* phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode */
-			$conditions = json_decode( base64_decode( $atts['display_conditions'] ), true );
+			$conditions = json_decode( base64_decode( $displayConditions ), true );
 
 			foreach ( $conditions as &$condition ) {
-				if ( 'categoryPage' === $condition['condition'] ) {
-					foreach ( $condition['conditionSettings']['categories'] as &$category ) {
-						$category['value'] = (string) apply_filters( 'wpml_object_id', $category['value'], $category['groupSlug'] );
-					}
-				}
+				$condition = $this->translateConditionIds( $condition, 'categories' );
+				$condition = $this->translateConditionIds( $condition, 'tags' );
+				$condition = $this->translateConditionIds( $condition, 'dynamicPosts' );
 			}
 
 			/* phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode */
@@ -41,4 +40,20 @@ class DisplayConditions implements \IWPML_Frontend_Action {
 		return $atts;
 	}
 
+	/**
+	 * @param array  $condition
+	 * @param string $type
+	 *
+	 * @return array
+	 */
+	private function translateConditionIds( $condition, $type ) {
+		if ( isset( $condition['conditionSettings'][ $type ] ) ) {
+			$elementType = 'dynamicPosts' === $type ? 'any_post' : 'any_term';
+			foreach ( $condition['conditionSettings'][ $type ] as &$category ) {
+				$category['value'] = Ids::convert( $category['value'], $elementType );
+			}
+		}
+
+		return $condition;
+	}
 }

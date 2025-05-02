@@ -1,0 +1,67 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/translationReview/components/AcceptedMessage.js:8
+msgid "Accepted"
+msgstr "수락됨"
+
+#: src/js/translationReview/components/AcceptedText.js:8
+msgid "Approved!"
+msgstr "승인됨!"
+
+#: src/js/translationReview/components/AcceptedText.js:9
+#: src/js/translationReview/components/PublishedText.js:9
+msgid "Loading the next translation for review..."
+msgstr "다음 번역을 검토하기 위해 로딩 중..."
+
+#: src/js/translationReview/components/BackButton.js:7
+msgid "Back"
+msgstr "뒤로"
+
+#: src/js/translationReview/components/ContinueReviewToggle.js:17
+msgid ""
+"Turn off to not automatically load the next translation after finishing "
+"this review."
+msgstr "이 검토를 마친 후 자동으로 다음 번역을 로드하지 않으려면 끄세요."
+
+#: src/js/translationReview/components/ContinueReviewToggle.js:18
+msgid "Turn on to automatically load the next translation after finishing this  ."
+msgstr "이 검토를 마친 후 자동으로 다음 번역을 로드하려면 켜세요."
+
+#: src/js/translationReview/components/EditButton.js:10
+msgid "Edit"
+msgstr "편집"
+
+#: src/js/translationReview/components/EditButton.js:9
+msgid "Edit translation"
+msgstr "번역 편집"
+
+#: src/js/translationReview/components/InProgressText.js:8
+msgid "Please wait, applying translation.."
+msgstr "잠시만 기다려주세요, 번역을 적용하는 중입니다.."
+
+#: src/js/translationReview/components/NextTranslationReview.js:22
+msgid "Next review"
+msgstr "다음 검토"
+
+#: src/js/translationReview/components/PublishButton.js:10
+msgid "Publish this translation"
+msgstr "이 번역 게시하기"
+
+#: src/js/translationReview/components/PublishButton.js:9
+msgid "Accept this translation"
+msgstr "이 번역 수락하기"
+
+#: src/js/translationReview/components/PublishedText.js:8
+msgid "Published!"
+msgstr "게시됨!"
+
+#: src/js/translationReview/hooks/useATESync.js:34
+msgid "Someone is already reviewing this translation. Please try again later."
+msgstr "이미 다른 사람이 이 번역을 검토 중입니다. 나중에 다시 시도해 주세요."
+
+#: src/js/translationReview/store.js:29
+msgid "There was an error in applying translation."
+msgstr "번역 적용 중 오류가 발생했습니다."

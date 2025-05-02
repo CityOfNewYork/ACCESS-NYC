@@ -1,161 +1,189 @@
 {
-   "domain": "messages",
-   "locale_data": {
-      "messages": {
-         "": {
-            "domain": "messages",
-            "lang": "en"
-         },
-         "Advanced": [
-            ""
-         ],
-         "HTML anchor": [
-            ""
-         ],
-         "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
-            ""
-         ],
-         "Additional CSS class(es)": [
-            ""
-         ],
-         "Separate multiple classes with spaces.": [
-            ""
-         ],
-         "Color": [
-            ""
-         ],
-         "Dimensions": [
-            ""
-         ],
-         "BLOCK": [
-            ""
-         ],
-         "Block margin": [
-            ""
-         ],
-         "Block padding": [
-            ""
-         ],
-         "LANGUAGE": [
-            ""
-         ],
-         "Language spacing": [
-            ""
-         ],
-         "Language padding": [
-            ""
-         ],
-         "Display": [
-            ""
-         ],
-         "Show flag": [
-            ""
-         ],
-         "Show language name": [
-            ""
-         ],
-         "Display language name in": [
-            ""
-         ],
-         "Style": [
-            ""
-         ],
-         "Flag settings": [
-            ""
-         ],
-         "Width": [
-            ""
-         ],
-         "Height": [
-            ""
-         ],
-         "Spacing": [
-            ""
-         ],
-         "Allow wrapping to multiple lines": [
-            ""
-         ],
-         "Open on click": [
-            ""
-         ],
-         "Show arrow": [
-            ""
-         ],
-         "Layout": [
-            ""
-         ],
-         "Justification": [
-            ""
-         ],
-         "Orientation": [
-            ""
-         ],
-         "Typography": [
-            ""
-         ],
-         "Background": [
-            ""
-         ],
-         "Language Text": [
-            ""
-         ],
-         "Language Background": [
-            ""
-         ],
-         "Current language text": [
-            ""
-         ],
-         "Current language background": [
-            ""
-         ],
-         "Small": [
-            ""
-         ],
-         "Normal": [
-            ""
-         ],
-         "Medium": [
-            ""
-         ],
-         "Large": [
-            ""
-         ],
-         "X-Large": [
-            ""
-         ],
-         "Ab": [
-            ""
-         ],
-         "AB": [
-            ""
-         ],
-         "ab": [
-            ""
-         ],
-         "Displays the WPML Language Switcher.": [
-            ""
-         ],
-         "Language Switcher": [
-            ""
-         ],
-         "displays the WPML Language Switcher": [
-            ""
-         ],
-         "Navigation Language Switcher": [
-            ""
-         ],
-         "Reset all": [
-            ""
-         ],
-         "Minimum value is : ": [
-            ""
-         ],
-         "Maximum value is : ": [
-            ""
-         ],
-         "Value must be a number!": [
-            ""
-         ]
-      }
-   }
+  "translation-revision-date": "2024-08-20T09:32:34+00:00",
+  "generator": "WP-CLI/2.9.0",
+  "source": "src/js/blocks/LanguageSwitcher/Components/Flag/Control.js",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "en",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "Full name": [
+        "Họ tên"
+      ],
+      "Code": [
+        "Mã"
+      ],
+      "Language Switcher": [
+        "Chuyển đổi ngôn ngữ"
+      ],
+      "displays the WPML Language Switcher": [
+        "Hiển thị Trình chuyển đổi ngôn ngữ"
+      ],
+      "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
+        "Hiển thị Trình chuyển đổi ngôn ngữ WPML.<br/> Học hỏi<a> làm thế nào để dịch khối này</a>."
+      ],
+      "Navigation Language Switcher": [
+        "Công cụ chuyển đổi ngôn ngữ điều hướng"
+      ],
+      "Display": [
+        "Trưng bày"
+      ],
+      "Show flag": [
+        "Hiển thị cờ"
+      ],
+      "Show language name": [
+        "Hiển thị tên ngôn ngữ"
+      ],
+      "Display language name in": [
+        "Tên ngôn ngữ trong"
+      ],
+      "Displays the WPML Language Switcher.": [
+        "Hiển thị Trình chuyển đổi ngôn ngữ."
+      ],
+      "Background": [
+        "Lý lịch"
+      ],
+      "Current language background": [
+        "Bối cảnh ngôn ngữ hiện tại"
+      ],
+      "Allow wrapping to multiple lines": [
+        "Cho phép ngắt dòng"
+      ],
+      "Open on click": [
+        "Mở khi nhấp"
+      ],
+      "Show arrow": [
+        "Hiển thị mũi tên"
+      ],
+      "Layout": [
+        "Cách trình bày"
+      ],
+      "Justification": [
+        "Biện minh"
+      ],
+      "Orientation": [
+        "Định hướng"
+      ],
+      "Justify items left": [
+        "Căn trái"
+      ],
+      "Justify items center": [
+        "Căn giữa các mục"
+      ],
+      "Justify items right": [
+        "Căn phải"
+      ],
+      "Justify items space between": [
+        "Căn khoảng cách"
+      ],
+      "Horizontal": [
+        "Ngang"
+      ],
+      "Vertical": [
+        "Dọc"
+      ],
+      "Normal": [
+        "Bình thường"
+      ],
+      "Medium": [
+        "Trung bình"
+      ],
+      "Large": [
+        "Lớn"
+      ],
+      "X-Large": [
+        "X-lớn"
+      ],
+      "Ab": [
+        "Ab"
+      ],
+      "AB": [
+        "B"
+      ],
+      "ab": [
+        "b"
+      ],
+      "Small": [
+        "Nhỏ"
+      ],
+      "Advanced": [
+        "Cao cấp"
+      ],
+      "HTML anchor": [
+        "Neo HTML"
+      ],
+      "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
+        "Thêm phím tắt khi tải trang với URL “#anchor”."
+      ],
+      "Additional CSS class(es)": [
+        "Các lớp CSS bổ sung"
+      ],
+      "Separate multiple classes with spaces.": [
+        "Phân tách nhiều lớp bằng dấu cách."
+      ],
+      "Language Text": [
+        "Văn bản ngôn ngữ"
+      ],
+      "Language Background": [
+        "Nền tảng ngôn ngữ"
+      ],
+      "Current language text": [
+        "Văn bản hiện tại"
+      ],
+      "px": [
+        "px"
+      ],
+      "%": [
+        "%"
+      ],
+      "Dimensions": [
+        "Kích thước"
+      ],
+      "BLOCK": [
+        "KHỐI"
+      ],
+      "Block margin": [
+        "Khối lề"
+      ],
+      "Block padding": [
+        "Khối đệm"
+      ],
+      "LANGUAGE": [
+        "NGÔN NGỮ"
+      ],
+      "Language spacing": [
+        "Khoảng cách ngôn ngữ"
+      ],
+      "Language padding": [
+        "Đệm ngôn ngữ"
+      ],
+      "Color": [
+        "Màu"
+      ],
+      "Reset all": [
+        "Đặt lại"
+      ],
+      "Typography": [
+        "Kiểu chữ"
+      ],
+      "Style": [
+        "Phong cách"
+      ],
+      "Flag settings": [
+        "Cài đặt cờ"
+      ],
+      "Width": [
+        "Rộng"
+      ],
+      "Height": [
+        "Cao"
+      ],
+      "Spacing": [
+        "Khoảng cách"
+      ]
+    }
+  }
 }

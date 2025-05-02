@@ -1,0 +1,364 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/language/LanguagePairs.js:57
+msgid "From:"
+msgstr "С:"
+
+#: src/js/components/language/LanguagePairs.js:69
+msgid "--Choose language--"
+msgstr "--Выберите язык--"
+
+#: src/js/components/language/LanguagePairs.js:81
+msgid "to:"
+msgstr "на:"
+
+#: src/js/components/language/SelectLanguagePairs.js:39
+msgid "Set language pair(s) for Translator %s:"
+msgstr "Установите языковые пары для переводчика %s:"
+
+#: src/js/components/language/SelectLanguagePairs.js:64
+msgid "+ Add more language pairs for this translator"
+msgstr "+ Добавить больше языковых пар для этого переводчика"
+
+#: src/js/icl-to-ate-migration/components/DeactivateICL.js:19
+msgid "Translation Memory was successfully copied to Advanced Translation Editor."
+msgstr "Память переводов успешно скопирована в Расширенный редактор переводов."
+
+#: src/js/icl-to-ate-migration/components/DeactivateICL.js:30
+msgid "Deactivate ICanLocalize.com as Translation Service on this site"
+msgstr "Деактивировать ICanLocalize.com как службу переводов на этом сайте"
+
+#: src/js/icl-to-ate-migration/components/DeactivateICL.js:35
+msgid ""
+"Missing a translator? Or were new jobs since the last copy of the "
+"Translation Memory?"
+msgstr "Не хватает переводчика? Или появились новые задания с момента последнего копирования Памяти переводов?"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:25
+msgid "Enter here your ICanLocalize authentication details."
+msgstr "Введите здесь ваши данные аутентификации ICanLocalize."
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:33
+msgid "API Token:"
+msgstr "API Токен:"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:43
+msgid "Please enter valid value for ICL token."
+msgstr "Пожалуйста, введите действительное значение для токена ICL."
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:50
+msgid "Enter ICL API token here"
+msgstr "Введите API токен ICL здесь"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:62
+msgid "Submit"
+msgstr "Отправить"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:78
+msgid "Sign up"
+msgstr "Зарегистрироваться"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:84
+msgid "to ICanLocalize to receive your API token."
+msgstr "в ICanLocalize, чтобы получить ваш API токен."
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:91
+msgid "Already have an account? Login and"
+msgstr "Уже есть аккаунт? Войдите и"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:98
+msgid "get your token."
+msgstr "получите ваш токен."
+
+#: src/js/icl-to-ate-migration/components/Memory/BottomLink.js:16
+msgid "Copy new Translation Memory to Advanced Translation Memory"
+msgstr "Скопировать новую Память переводов в Расширенную память переводов"
+
+#: src/js/icl-to-ate-migration/components/Memory/MainButton.js:16
+msgid "Import translation memory"
+msgstr "Импортировать память переводов"
+
+#: src/js/icl-to-ate-migration/components/MigrationContainer.js:21
+msgid "ICanLocalize is already deactivated on this site"
+msgstr "ICanLocalize уже деактивирован на этом сайте"
+
+#: src/js/icl-to-ate-migration/components/MigrationContainer.js:22
+msgid ""
+"You can still import Translators or Copy Translation Memory to Advanced "
+"Translator Editor"
+msgstr "Вы все еще можете импортировать переводчиков или копировать Память переводов в Расширенный редактор переводов"
+
+#: src/js/icl-to-ate-migration/components/MigrationContainer.js:27
+msgid "Move from ICanLocalize.com to Advanced Translation Editor"
+msgstr "Перейти с ICanLocalize.com на Расширенный редактор переводов"
+
+#: src/js/icl-to-ate-migration/components/Translators/BottomLink.js:17
+#: src/js/icl-to-ate-migration/components/Translators/Button.js:21
+#: src/js/icl-to-ate-migration/components/Translators/Modal.js:27
+msgid "Import translators"
+msgstr "Импортировать переводчиков"
+
+#: src/js/icl-to-ate-migration/components/Translators/EditLanguages.js:53
+msgid "Come back"
+msgstr "Вернуться"
+
+#: src/js/icl-to-ate-migration/components/Translators/Modal.js:36
+#: src/js/setup/components/Steps/AddLanguagesModal.js:496
+msgid "Cancel"
+msgstr "Отмена"
+
+#: src/js/icl-to-ate-migration/components/Translators/Modal.js:40
+msgid "Save"
+msgstr "Сохранить"
+
+#: src/js/icl-to-ate-migration/components/Translators/TranslatorsTable.js:47
+#: src/js/setup/components/Steps/AddLanguagesModal.js:346
+msgid "Name"
+msgstr "Имя"
+
+#: src/js/icl-to-ate-migration/components/Translators/TranslatorsTable.js:59
+msgid "Language Pairs"
+msgstr "Языковые пары"
+
+#: src/js/icl-to-ate-migration/components/Translators/TranslatorsTable.js:93
+msgid "Not supported pairs:"
+msgstr "Неподдерживаемые пары:"
+
+#: src/js/icl-to-ate-migration/model/deactivateICL.js:18
+msgid "ICanLocalize.com deactivated"
+msgstr "ICanLocalize.com деактивирован"
+
+#: src/js/icl-to-ate-migration/model/translationMemory.js:12
+msgid "Translate memory is imported"
+msgstr "Память переводов импортирована"
+
+#: src/js/icl-to-ate-migration/model/translators.js:26
+msgid "There is no translators in ICL"
+msgstr "В ICL нет переводчиков"
+
+#: src/js/icl-to-ate-migration/model/translators.js:45
+msgid "Translators saved"
+msgstr "Переводчики сохранены"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:48
+msgid "%s file upload failed."
+msgstr "Загрузка файла %s не удалась."
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:69
+msgid "Flag"
+msgstr "Флаг"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:87
+msgid "Flag file"
+msgstr "Файл флага"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:160
+msgid ""
+"You just added  language. Next, select it as the site's default language or "
+"a translation language."
+msgstr "Вы только что добавили язык. Далее выберите его как язык сайта по умолчанию или язык перевода."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:162
+msgid "Language added"
+msgstr "Язык добавлен"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:192
+msgid "The value \"%s\" already exists"
+msgstr "Значение “%s” уже существует"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:215
+msgid "Add a new language"
+msgstr "Добавить новый язык"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:224
+msgid ""
+"Create a country-specific language by choosing the general language from "
+"the list below. Then, choose the country it should be localized for."
+msgstr "Создайте язык для конкретной страны, выбрав общий язык из списка ниже. Затем выберите страну, для которой он должен быть локализован."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:229
+msgid ""
+"By choosing a combination that already exists in the database, WPML can "
+"help fill out the necessary fields. Read more about "
+"<AddingACustomLanguageLink />."
+msgstr "Выбрав комбинацию, которая уже существует в базе данных, WPML может помочь заполнить необходимые поля. Подробнее о <AddingACustomLanguageLink />."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:242
+msgid "Cannot find?"
+msgstr "Не можете найти?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:244
+msgid "Click here"
+msgstr "Нажмите здесь"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:300
+msgid ""
+"The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" "
+", \"pt-br\", \"zh-hans\""
+msgstr "Неверный формат. Может содержать только строчные буквы и “-”. Например: “fr”, “pt-br”, “zh-hans”"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:308
+msgid "Language"
+msgstr "Язык"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:331
+msgid "Location"
+msgstr "Местоположение"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:360
+msgid "Code"
+msgstr "Код"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:374
+msgid "The language will not be supported by automatic translations"
+msgstr "Язык не будет поддерживаться автоматическими переводами"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:392
+msgid "Language mapping"
+msgstr "Сопоставление языков"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:404
+msgid "Don't map this language"
+msgstr "Не сопоставлять этот язык"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:418
+msgid "Default locale"
+msgstr "Локаль по умолчанию"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:423
+msgid ""
+"The wrong format. It may contain only small letters and \"_\". E.g: \"de\" "
+", \"de_DE\", \"zh_Hant_TW\""
+msgstr "Неверный формат. Может содержать только строчные буквы и “_”. Например: “de”, “de_DE”, “zh_Hant_TW”"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:435
+msgid "hreflang"
+msgstr "hreflang"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:449
+msgid "Encode url?"
+msgstr "Кодировать URL?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:45
+msgid "Flags must be:"
+msgstr "Флаги должны быть:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:453
+msgid "NO"
+msgstr "НЕТ"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:454
+msgid "YES"
+msgstr "ДА"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:460
+msgid " (required)"
+msgstr " (обязательно)"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:483
+msgid "Please fill in the field"
+msgstr "Пожалуйста, заполните поле"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:49
+msgid "PNG, SVG, or JPG files"
+msgstr "Файлы PNG, SVG или JPG"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:501
+msgid "Save language"
+msgstr "Сохранить язык"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:52
+msgid "18 x 12 pixels"
+msgstr "18 x 12 пикселей"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:55
+msgid "Read more about "
+msgstr "Подробнее о "
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:60
+msgid ""
+"The name of your language as it will appear on your site's language "
+"switcher."
+msgstr "Название вашего языка, как оно будет отображаться в переключателе языков на вашем сайте."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:61
+msgid ""
+"A unique value that identifies the language in the database and URL. Once "
+"saved, the language code cannot be changed."
+msgstr "Уникальное значение, которое идентифицирует язык в базе данных и URL. После сохранения код языка изменить нельзя."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:62
+msgid ""
+"If your custom language is similar to an existing language, you can use the "
+"existing language's spellcheck and automatic translation. For example, if "
+"your custom language is Swiss-German, you can map to German as the language "
+"to use for spellcheck and automatic translation. If you don't map your "
+"custom language to an existing language, spellcheck and automatic "
+"translation features will be unavailable in that language."
+msgstr "Если ваш пользовательский язык похож на существующий язык, вы можете использовать проверку орфографии и автоматический перевод существующего языка. Например, если ваш пользовательский язык - швейцарский немецкий, вы можете сопоставить его с немецким языком для проверки орфографии и автоматического перевода. Если вы не сопоставите ваш пользовательский язык с существующим языком, функции проверки орфографии и автоматического перевода будут недоступны для этого языка."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:66
+msgid ""
+"The value WPML checks when loading translations from MO and PO files. The "
+"default locale is included in the filenames in your /wp-content/languages/ "
+"folder in your WordPress setup."
+msgstr "Значение, которое WPML проверяет при загрузке переводов из файлов MO и PO. Локаль по умолчанию включена в имена файлов в вашей папке /wp-content/languages/ в вашей установке WordPress."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:69
+msgid ""
+"Google uses the hreflang attribute to direct users to sites in their "
+"relevant language and location. Examples:"
+msgstr "Google использует атрибут hreflang для направления пользователей на сайты на их соответствующем языке и местоположении. Примеры:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:71
+msgid "All English-speaking users: en"
+msgstr "Все англоязычные пользователи: en"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:72
+msgid "English for UK users: en-gb"
+msgstr "Английский для пользователей из Великобритании: en-gb"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:73
+msgid "English for US users: en-us"
+msgstr "Английский для пользователей из США: en-us"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:81
+msgid ""
+"Determines if URLs in this language are encoded or use ASCII characters (if "
+"unsure, leave it as \"No\")."
+msgstr "Определяет, кодируются ли URL-адреса на этом языке или используют символы ASCII (если не уверены, оставьте “Нет”)."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:98
+msgid "adding a custom language"
+msgstr "добавлении пользовательского языка"
+
+#: src/js/setup/components/Steps/Languages.js:110
+msgid "What are the languages of your site?"
+msgstr "Какие языки на вашем сайте?"
+
+#: src/js/setup/components/Steps/Languages.js:120
+msgid "Default language"
+msgstr "Язык по умолчанию"
+
+#: src/js/setup/components/Steps/Languages.js:122
+msgid "What is the current language of your website?"
+msgstr "Какой текущий язык вашего веб-сайта?"
+
+#: src/js/setup/components/Steps/Languages.js:133
+msgid "Translation languages"
+msgstr "Языки перевода"
+
+#: src/js/setup/components/Steps/Languages.js:135
+msgid "Which languages do you want to translate your site into?"
+msgstr "На какие языки вы хотите перевести ваш сайт?"
+
+#: src/js/setup/components/Steps/Languages.js:149
+msgid "If you cannot find languages that you need in the list"
+msgstr "Если вы не можете найти нужные языки в списке"
+
+#: src/js/setup/components/Steps/Languages.js:150
+msgid "create a custom language"
+msgstr "создать пользовательский язык"

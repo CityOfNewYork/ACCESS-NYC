@@ -5,7 +5,6 @@
  */
 class WPML_TM_Mail_Notification {
 
-	const JOB_COMPLETE_TEMPLATE = 'notification/job-completed.twig';
 	const JOB_REVISED_TEMPLATE  = 'notification/job-revised.twig';
 	const JOB_CANCELED_TEMPLATE = 'notification/job-canceled.twig';
 
@@ -56,16 +55,17 @@ class WPML_TM_Mail_Notification {
 		add_action( 'wpml_tm_empty_mail_queue', array( $this, 'send_queued_mails' ), 10, 0 );
 
 		if ( $this->should_send_email_on_update() ) {
-			add_action( 'wpml_tm_complete_job_notification', array( $this, 'action_wpml_tm_job_complete_mail' ), 10, 2 );
 			add_action( 'wpml_tm_revised_job_notification', array( $this, 'action_revised_job_email' ), 10 );
 			add_action( 'wpml_tm_canceled_job_notification', array( $this, 'action_canceled_job_email' ), 10 );
 		}
 
 		add_action( 'wpml_tm_remove_job_notification', array( $this, 'action_translator_removed_mail' ), 10, 2 );
 		add_action( 'wpml_tm_resign_job_notification', array( $this, 'action_translator_resign_mail' ), 10, 2 );
-		add_action( 'icl_ajx_custom_call', array( $this, 'send_queued_mails' ), 10, 0 );
 		add_action( 'icl_pro_translation_completed', array( $this, 'send_queued_mails' ), 10, 0 );
 
+		if ( is_admin() ) {
+			add_action( 'shutdown', array( $this, 'send_queued_mails' ), 10, 0 );
+		}
 	}
 
 	/**
@@ -205,77 +205,6 @@ class WPML_TM_Mail_Notification {
 			'model'          => $model,
 		);
 	}
-
-	/**
-	 * @param WPML_Translation_Job|int $job_id
-	 * @param bool|false               $update
-	 *
-	 * @return void
-	 */
-	public function action_wpml_tm_job_complete_mail( $job_id, $update = false ) {
-		$this->wpml_tm_job_complete_mail( $job_id, $update );
-	}
-
-	/**
-	 * @param WPML_Translation_Job|int $job_id
-	 * @param bool|false               $update
-	 *
-	 * @return false|array representation of the email to be sent
-	 */
-	public function wpml_tm_job_complete_mail( $job_id, $update = false ) {
-		$basic_mail_data = $this->get_basic_mail_data( $job_id );
-		if ( null === $basic_mail_data ) {
-			return null;
-		}
-
-		$mail           = $basic_mail_data['mail'];
-		$document_title = $basic_mail_data['document_title'];
-		$translator     = $basic_mail_data['translator'];
-		$job            = $basic_mail_data['job'];
-		$model          = $basic_mail_data['model'];
-		$lang_from      = $model['lang_from'];
-		$lang_to        = $model['lang_to'];
-
-		if ( $update ) {
-			$mail['subject']  = sprintf(
-				__( 'Translator has updated translation job for %s', 'wpml-translation-management' ),
-				get_bloginfo( 'name' )
-			);
-			$body_placeholder = esc_html__(
-				'The translator %1$shas updated the translation job for "%2$s" from %3$s to %4$s.',
-				'wpml-translation-management'
-			);
-		} else {
-			$mail['subject']  = sprintf(
-				__( 'Translator has completed translation job for %s', 'wpml-translation-management' ),
-				get_bloginfo( 'name' )
-			);
-			$body_placeholder = esc_html__(
-				'The translator %1$shas completed the translation job for "%2$s" from %3$s to %4$s.',
-				'wpml-translation-management'
-			);
-		}
-		$translator_name      = ! empty( $translator->display_name ) ? '(' . $translator->display_name . ') ' : '';
-		$model['message']     = sprintf( $body_placeholder, $translator_name, $document_title, $lang_from, $lang_to );
-		$model['needs_help']  = array(
-			'title'                     => __( 'Need help with translation?', 'wpml-translation-management' ),
-			'options_or'                => __( 'or', 'wpml-translation-management' ),
-			'translators_link'          => admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/main.php&sm=translators' ),
-			'translators_text'          => __( 'Manage your translators', 'wpml-translation-management' ),
-			'translation_services_link' => admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/main.php&sm=translators' ),
-			'translation_services_text' => __( 'try a translation service', 'wpml-translation-management' ),
-		);
-		$model['overdue_job'] = ! $job->is_completed_on_time();
-
-		$mail['body'] = $this->email_view->render_model( $model, self::JOB_COMPLETE_TEMPLATE );
-		$mail['type'] = 'completed';
-		$this->enqueue_mail( $mail );
-
-		$this->sitepress->switch_locale();
-
-		return $mail;
-	}
-
 
 	/**
 	 * @param int $job_id

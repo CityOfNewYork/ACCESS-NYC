@@ -2,6 +2,8 @@
 
 namespace WPML\Notices;
 
+use WPML\Core\WP\App\Resources;
+
 class DismissNotices implements \IWPML_Backend_Action {
 
 	const OPTION    = 'wpml_dismiss_notice';
@@ -16,8 +18,8 @@ class DismissNotices implements \IWPML_Backend_Action {
 				wp_enqueue_script(
 					'wpml-dismiss-notice',
 					ICL_PLUGIN_URL . '/dist/js/notices/app.js',
-					[],
-					ICL_SITEPRESS_VERSION
+					[ Resources::vendorAsDependency() ],
+					ICL_SITEPRESS_SCRIPT_VERSION
 				);
 			}
 		);

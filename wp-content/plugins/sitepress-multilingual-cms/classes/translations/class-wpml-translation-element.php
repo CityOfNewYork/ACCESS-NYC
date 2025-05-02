@@ -60,6 +60,8 @@ abstract class WPML_Translation_Element extends WPML_SP_User {
 
 	abstract function get_element_id();
 
+	abstract public function get_element_type();
+
 	abstract function get_wpml_element_type();
 
 	/**

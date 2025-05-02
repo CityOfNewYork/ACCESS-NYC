@@ -28,11 +28,21 @@
 			<hr>
 			<label><%= labels.termMetaLabel%></label>
 			<div class="wpml-form-row">
-				<% _.each(original_term_meta, function(meta_data){ %>
+				<% _.each(original_term_meta, function(meta_data){
+					if (Array.isArray(meta_data.meta_value)) {
+						var value = meta_data.meta_value.join("");
+					}
+				%>
 					<label for="term-meta"><%= meta_data.meta_key %></label>
-					<input readonly value="<%- meta_data.meta_value %>" type="text">
-					<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="<%= labels.copyFromOriginal %>"></button>
-					<input name="term-meta" class="term-meta" data-meta-key="<%= meta_data.meta_key %>" value="<%- term_meta[meta_data.meta_key] %>" type="text">
+					<% if ( value.includes('\r\n') || value.includes('\n') ) { %>
+						<textarea readonly cols="22" rows="4"><%- meta_data.meta_value %></textarea>
+						<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="<%= labels.copyFromOriginal %>"></button>
+						<textarea name="term-meta" class="term-meta" data-meta-key="<%= meta_data.meta_key %>" cols="22" rows="4"><%- term_meta[meta_data.meta_key] %></textarea>
+					<% } else { %>
+						<input readonly value="<%- meta_data.meta_value %>" type="text">
+						<button class="button-copy button-secondary js-button-copy otgs-ico-copy" title="<%= labels.copyFromOriginal %>"></button>
+						<input name="term-meta" class="term-meta" data-meta-key="<%= meta_data.meta_key %>" value="<%- term_meta[meta_data.meta_key] %>" type="text">
+					<% } %>
 				<% }); %>
 			</div>
 		<% } %>

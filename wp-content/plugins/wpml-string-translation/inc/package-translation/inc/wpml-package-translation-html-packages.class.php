@@ -62,7 +62,7 @@ class WPML_Package_Translation_HTML_Packages {
 
 		<br/>
 
-		<input id="delete_packages" type="button" class="button-primary" value="<?php echo __( 'Delete Selected Packages', 'wpml-string-translation' ); ?>" disabled="disabled"/>
+		<input id="delete_packages" type="button" class="button-primary wpml-button base-btn" value="<?php echo __( 'Delete Selected Packages', 'wpml-string-translation' ); ?>" disabled="disabled"/>
 		&nbsp;
 		<span class="spinner"></span>
 		<span style="display:none" class="js-delete-confirm-message"><?php echo __( "Are you sure you want to delete these packages?\nTheir strings and translations will be deleted too.", 'wpml-string-translation' ); ?></span>
@@ -94,10 +94,10 @@ class WPML_Package_Translation_HTML_Packages {
 		?>
 		<tr>
 			<th scope="col" class="manage-column column-cb check-column">
-				<label for="select_all_package_<?php echo $position; ?>" style="display: none;">
+				<label for="select_all_package_<?php echo $position; ?>" class="visually-hidden">
 					<?php _e( 'Select All', 'wpml-string-translation' ); ?>
 				</label>
-				<input id="select_all_package_<?php echo $position; ?>" class="js_package_all_cb" type="checkbox"/>
+				<input id="select_all_package_<?php echo $position; ?>" class="wpml-checkbox-native js_package_all_cb" type="checkbox"/>
 			</th>
 			<th scope="col"><?php echo __( 'Kind', 'wpml-string-translation' ); ?></th>
 			<th scope="col"><?php echo __( 'Name', 'wpml-string-translation' ); ?></th>
@@ -147,7 +147,7 @@ class WPML_Package_Translation_HTML_Packages {
 			?>
 			<tr id="row_<?php echo $package_id; ?>" class="js_package js_package_<?php echo esc_attr( $package->kind_slug ); ?>">
 				<td>
-					<input id="package_<?php echo $package_id; ?>" class="js_package_row_cb" type="checkbox" value="<?php echo $package_id; ?>" <?php echo $disabled; ?>/>
+					<input id="package_<?php echo $package_id; ?>" class="wpml-checkbox-native js_package_row_cb" type="checkbox" value="<?php echo $package_id; ?>" <?php echo $disabled; ?>/>
 				</td>
 				<td class="js-package-kind">
 					<?php echo $package->kind; ?>

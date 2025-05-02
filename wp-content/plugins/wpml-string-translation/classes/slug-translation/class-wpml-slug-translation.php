@@ -3,6 +3,7 @@
 class WPML_Slug_Translation implements IWPML_Action {
 
 	const STRING_DOMAIN = 'WordPress';
+	const CACHE_GROUP   = 'wpml-string-slug';
 
 	/** @var array $post_link_cache */
 	private $post_link_cache = array();
@@ -208,7 +209,7 @@ class WPML_Slug_Translation implements IWPML_Action {
 			$types     = $post_slug_translation_settings['types'];
 			$cache_key = 'WPML_Slug_Translation::get_all_slug_translations' . md5( (string) json_encode( $types ) );
 
-			$slug_translations = wp_cache_get( $cache_key );
+			$slug_translations = wp_cache_get( $cache_key, self::CACHE_GROUP );
 
 			if ( ! is_array( $slug_translations ) ) {
 				$slug_translations = array();
@@ -234,7 +235,7 @@ class WPML_Slug_Translation implements IWPML_Action {
 					}
 				}
 
-				wp_cache_set( $cache_key, $slug_translations );
+				wp_cache_set( $cache_key, $slug_translations, self::CACHE_GROUP );
 			}
 		}
 

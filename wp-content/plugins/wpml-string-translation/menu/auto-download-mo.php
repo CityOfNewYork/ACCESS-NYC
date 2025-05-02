@@ -1,9 +1,9 @@
 <?php 
 global $sitepress, $WPML_ST_MO_Downloader;
 
-$language = isset( $_GET['download_mo'] ) ? filter_var( $_GET['download_mo'], FILTER_SANITIZE_STRING ) : false;
+$language = isset( $_GET['download_mo'] ) ? (string) \WPML\API\Sanitize::string( $_GET['download_mo'] ) : false;
 $active_languages = $sitepress->get_active_languages();
-$version = isset( $_GET['version'] ) ? filter_var( $_GET['version'], FILTER_SANITIZE_STRING ) : false;
+$version = isset( $_GET['version'] ) ? (string) \WPML\API\Sanitize::string( $_GET['version'] ) : false;
 
 $translations = array();
 if ( isset( $active_languages[ $language ] ) ) {
@@ -31,10 +31,10 @@ if ( isset( $_POST['action'] ) && $_POST['action'] == 'icl_admo_add_translations
 	    $new_translations = $translations['new'];
 	    foreach ( $new_translations as $tr ) {
 		    $translations_add[] = array(
-			    'string'          => filter_var( $tr['string'], FILTER_SANITIZE_STRING ),
-			    'translation'     => filter_var( $tr['new'], FILTER_SANITIZE_STRING ),
-			    'name'            => filter_var( $tr['name'], FILTER_SANITIZE_STRING ),
-			    'gettext_context' => filter_var( $tr['gettext_context'], FILTER_SANITIZE_STRING ),
+			    'string'          => (string) \WPML\API\Sanitize::string( $tr['string'] ),
+			    'translation'     => (string) \WPML\API\Sanitize::string( $tr['new'] ),
+			    'name'            => (string) \WPML\API\Sanitize::string( $tr['name'] ),
+			    'gettext_context' => (string) \WPML\API\Sanitize::string( $tr['gettext_context'] ),
 		    );
 	    }
 		if ( ! empty( $translations_add ) ) {
@@ -46,10 +46,10 @@ if ( isset( $_POST['action'] ) && $_POST['action'] == 'icl_admo_add_translations
 		foreach ( $_POST['selected'] as $idx => $v ) {
 			if ( ! empty( $v ) ) {
 				$translations_add[] = array(
-					'string'          => filter_var( base64_decode( $_POST['string'][ $idx ] ), FILTER_SANITIZE_STRING ),
-					'translation'     => filter_var( base64_decode( $_POST['translation'][ $idx ] ), FILTER_SANITIZE_STRING ),
-					'name'            => filter_var( base64_decode( $_POST['name'] [ $idx ] ), FILTER_SANITIZE_STRING ),
-					'gettext_context' => filter_var( base64_decode( $_POST['gettext_context'][ $idx ] ), FILTER_SANITIZE_STRING ),
+					'string'          => (string) \WPML\API\Sanitize::string( base64_decode( $_POST['string'][ $idx ] ) ),
+					'translation'     => (string) \WPML\API\Sanitize::string( base64_decode( $_POST['translation'][ $idx ] ) ),
+					'name'            => (string) \WPML\API\Sanitize::string( base64_decode( $_POST['name'] [ $idx ] ) ),
+					'gettext_context' => (string) \WPML\API\Sanitize::string( base64_decode( $_POST['gettext_context'][ $idx ] ) ),
 				);
 				$translations_updated ++;
 			}

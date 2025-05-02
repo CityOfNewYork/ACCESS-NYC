@@ -1,36 +1,70 @@
 <?php
+
 class WPML_ACF_Post_Ids implements WPML_ACF_Convertable {
 
 	/**
 	 * @param WPML_ACF_Field $acf_field
 	 *
-	 * @return string[]|string - should always be string[], string only when meta_value is "serialized twice"
+	 * @return string[]|string - should always be string[], string only when:
+	 *  - meta_value is "serialized"
+	 *  - exception Field Type - Page Object - Select Single (input is single string number)
 	 */
 	public function convert( WPML_ACF_Field $acf_field ) {
+		return $this->convertSerializationLayer( $acf_field );
+	}
 
+	/**
+	 * @param WPML_ACF_Field $acf_field
+	 *
+	 * @return string[]|string|null|null[]
+	 */
+	private function convertSerializationLayer( WPML_ACF_Field $acf_field ) {
 		$came_serialized = is_serialized( $acf_field->meta_value );
 
-		$ids_unpacked = maybe_unserialize( $acf_field->meta_value );
+		$mixedIds = $came_serialized
+			? maybe_unserialize( $acf_field->meta_value )
+			: $acf_field->meta_value;
 
-		if ( ! is_array( $ids_unpacked ) ) {
-			$ids_unpacked = [ $ids_unpacked ];
+		$mixedTranslatedIds = $this->convertStringOrArrayOfStringsLayer( $mixedIds, $acf_field );
+
+		return $came_serialized
+			? serialize( $mixedTranslatedIds )
+			: $mixedTranslatedIds;
+	}
+
+	/**
+	 * @param array|string|int|null|numeric-string $mixedIds
+	 * @param WPML_ACF_Field $acf_field
+	 *
+	 * @return string[]|string|null|numeric-string
+	 */
+	private function convertStringOrArrayOfStringsLayer( $mixedIds, WPML_ACF_Field $acf_field ) {
+
+		if ( is_array( $mixedIds ) ) {
+			return array_map( function ( $originalId ) use ( $acf_field ) {
+				return $this->convertOriginalIdToTranslationId( $originalId, $acf_field );
+			}, $mixedIds );
 		}
 
-		$ids = [];
-		foreach ( $ids_unpacked as $id ) {
-			$ids[] = new WPML_ACF_Post_Id( $id, $acf_field );
+		return $this->convertOriginalIdToTranslationId( $mixedIds, $acf_field );
+	}
+
+	/**
+	 * @param string|null|numeric-string $originalId
+	 * @param WPML_ACF_Field $acf_field
+	 *
+	 * @return string|null|numeric-string
+	 */
+	private function convertOriginalIdToTranslationId( $originalId, WPML_ACF_Field $acf_field ) {
+		if( is_null( $originalId ) ) {
+			return null;
 		}
 
-		$result = array_map(
-			function ( $id ) {
-				return (string) $id->convert()->id;
-			}, $ids
-		);
-
-		if ( $came_serialized ) {
-			$result = maybe_serialize( $result );
+		if ( ! is_numeric( $originalId ) ) {
+			return $originalId;
 		}
 
-		return $result;
+		return (string) ( new WPML_ACF_Post_Id( $originalId, $acf_field ) )
+			->convert()->id;
 	}
 }

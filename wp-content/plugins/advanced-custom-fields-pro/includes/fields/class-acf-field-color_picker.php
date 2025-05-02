@@ -15,7 +15,6 @@ if ( ! class_exists( 'acf_field_color_picker' ) ) :
 		 * @param   n/a
 		 * @return  n/a
 		 */
-
 		function initialize() {
 
 			// vars
@@ -43,13 +42,12 @@ if ( ! class_exists( 'acf_field_color_picker' ) ) :
 		 * @param   $post_id (int)
 		 * @return  $post_id (int)
 		 */
-
 		function input_admin_enqueue_scripts() {
 
 			// Register scripts for non-admin.
 			// Applies logic from wp_default_scripts() function defined in "wp-includes/script-loader.php".
 			if ( ! is_admin() ) {
-				$suffix  = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+				$suffix  = defined( 'ACF_DEVELOPMENT_MODE' ) && ACF_DEVELOPMENT_MODE ? '' : '.min';
 				$scripts = wp_scripts();
 				$scripts->add( 'iris', '/wp-admin/js/iris.min.js', array( 'jquery-ui-draggable', 'jquery-ui-slider', 'jquery-touch-punch' ), '1.0.7', 1 );
 				$scripts->add( 'wp-color-picker', "/wp-admin/js/color-picker$suffix.js", array( 'iris' ), false, 1 );
@@ -107,7 +105,6 @@ if ( ! class_exists( 'acf_field_color_picker' ) ) :
 		 * @since   3.6
 		 * @date    23/01/13
 		 */
-
 		function render_field( $field ) {
 			$text_input                             = acf_get_sub_array( $field, array( 'id', 'class', 'name', 'value' ) );
 			$hidden_input                           = acf_get_sub_array( $field, array( 'name', 'value' ) );
@@ -138,7 +135,6 @@ if ( ! class_exists( 'acf_field_color_picker' ) ) :
 		 *
 		 * @param   $field  - an array holding all the field's data
 		 */
-
 		function render_field_settings( $field ) {
 
 			// display_format

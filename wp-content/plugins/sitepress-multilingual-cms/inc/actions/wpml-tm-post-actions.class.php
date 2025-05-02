@@ -52,7 +52,7 @@ class WPML_TM_Post_Actions extends WPML_Translation_Job_Helper {
 			$this->save_translation_priority( $post_id );
 		}
 
-		if ( ! empty( $trid ) && ! $is_original ) {
+		if ( ! empty( $trid ) && ! $is_original && ! $this->is_quick_edit() ) {
 			$lang = $lang ? $lang : $this->get_save_post_lang( $lang, $post_id );
 			$res  = $wpdb->get_row( $wpdb->prepare( "
 			 SELECT element_id, language_code FROM {$wpdb->prefix}icl_translations WHERE trid=%d AND source_language_code IS NULL
@@ -128,6 +128,13 @@ class WPML_TM_Post_Actions extends WPML_Translation_Job_Helper {
 				}
 			}
 		}
+	}
+
+	private function is_quick_edit() {
+		if( ! array_key_exists( 'action', $_POST ) )
+			return false;
+
+		return $_POST['action'] === 'inline-save';
 	}
 
 	/**

@@ -42,7 +42,6 @@ class WPML_Language_Pair_Records implements ILanguagePairs {
 	public function store( $user_id, $language_pairs ) {
 		$language_pairs = $this->convert_to_storage_format( $language_pairs );
 		update_user_meta( $user_id, $this->meta_key, $language_pairs );
-		do_action( 'wpml_update_translator' );
 	}
 
 	/**
@@ -88,7 +87,7 @@ class WPML_Language_Pair_Records implements ILanguagePairs {
 		return $this->convert_from_storage_format( $language_pairs );
 	}
 
-	private function convert_to_storage_format( $language_pairs ) {
+	public function convert_to_storage_format( $language_pairs ) {
 		if ( $this->is_in_storage_format( $language_pairs ) ) {
 			return $language_pairs;
 		}

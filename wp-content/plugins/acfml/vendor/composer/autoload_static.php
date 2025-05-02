@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitfd6e1f799c200699649966b9d52d5b65
+class ComposerStaticInitff1a5445702eaf616c6f2580f8ddba5c
 {
     public static $classMap = array (
         'ACFML\\Container\\Config' => __DIR__ . '/../..' . '/classes/Container/Config.php',
@@ -72,6 +72,7 @@ class ComposerStaticInitfd6e1f799c200699649966b9d52d5b65
         'ACFML\\Strings\\Transformer\\Register' => __DIR__ . '/../..' . '/classes/Strings/Transformer/Register.php',
         'ACFML\\Strings\\Transformer\\Transformer' => __DIR__ . '/../..' . '/classes/Strings/Transformer/Transformer.php',
         'ACFML\\Strings\\Transformer\\Translate' => __DIR__ . '/../..' . '/classes/Strings/Transformer/Translate.php',
+        'ACFML\\Strings\\TranslateEverythingHooks' => __DIR__ . '/../..' . '/classes/Strings/TranslateEverythingHooks.php',
         'ACFML\\Strings\\TranslationJobFilter' => __DIR__ . '/../..' . '/classes/Strings/TranslationJobFilter.php',
         'ACFML\\Strings\\TranslationJobHooks' => __DIR__ . '/../..' . '/classes/Strings/TranslationJobHooks.php',
         'ACFML\\Strings\\Translator' => __DIR__ . '/../..' . '/classes/Strings/Translator.php',
@@ -84,6 +85,7 @@ class ComposerStaticInitfd6e1f799c200699649966b9d52d5b65
         'ACFML\\Strings\\Traversable\\Taxonomy' => __DIR__ . '/../..' . '/classes/Strings/Traversable/Taxonomy.php',
         'ACFML\\Strings\\Traversable\\Traversable' => __DIR__ . '/../..' . '/classes/Strings/Traversable/Traversable.php',
         'ACFML\\Taxonomy\\HooksFactory' => __DIR__ . '/../..' . '/classes/Taxonomy/HooksFactory.php',
+        'ACFML\\Tools\\AdminUrl' => __DIR__ . '/../..' . '/classes/Tools/AdminUrl.php',
         'ACFML\\Tools\\Export' => __DIR__ . '/../..' . '/classes/Tools/Export.php',
         'ACFML\\Tools\\Import' => __DIR__ . '/../..' . '/classes/Tools/Import.php',
         'ACFML\\Tools\\Local' => __DIR__ . '/../..' . '/classes/Tools/Local.php',
@@ -142,7 +144,7 @@ class ComposerStaticInitfd6e1f799c200699649966b9d52d5b65
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInitfd6e1f799c200699649966b9d52d5b65::$classMap;
+            $loader->classMap = ComposerStaticInitff1a5445702eaf616c6f2580f8ddba5c::$classMap;
 
         }, null, ClassLoader::class);
     }

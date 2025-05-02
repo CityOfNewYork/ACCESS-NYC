@@ -35,8 +35,10 @@ class WPML_Translation_Proxy_Basket_Networking {
 		$error_messages = $this->tm_instance->messages_by_type( 'error' );
 		if ( ( $has_error = (bool) $error_messages ) === true ) {
 			\WPML\TM\API\Batch::rollback( $batch->get_basket_name() );
-			$result['message']             = '';
-			$result['additional_messages'] = $error_messages;
+			$result = [
+				'message'             => '',
+				'additional_messages' => $error_messages,
+			];
 		}
 
 		return array( $has_error, $result, $error_messages );

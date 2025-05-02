@@ -19,6 +19,7 @@ class WPML_TM_Upgrade_Translation_Priorities_For_Posts implements IWPML_Upgrade_
 		$translation_priorities_actions->register_translation_priority_taxonomy();
 
 		WPML_TM_Translation_Priorities::insert_missing_default_terms();
+		WPML_TM_Translation_Priorities::insert_missing_term_relationship();
 
 		return $this->result;
 	}

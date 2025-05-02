@@ -1,0 +1,329 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/ate/status-icons/StatusUpdater.js:80
+msgid "Refreshing translation status"
+msgstr "Ανανέωση κατάστασης μετάφρασης"
+
+#: src/js/components/translation/TranslationMethod.js:115
+msgid "Your pending automatic translations will be canceled."
+msgstr "Οι εκκρεμείς αυτόματες μεταφράσεις σας θα ακυρωθούν."
+
+#: src/js/components/translation/TranslationMethod.js:119
+msgid "Save"
+msgstr "Αποθήκευση"
+
+#: src/js/components/translation/TranslationMethod.js:125
+msgid "Go to the <a>Translation Management Dashboard</a> to translate your content."
+msgstr "Μεταβείτε στον <a>Πίνακα Ελέγχου Διαχείρισης Μεταφράσεων</a> για να μεταφράσετε το περιεχόμενό σας."
+
+#: src/js/components/translation/TranslationMethod.js:142
+msgid "Review the translations before publishing"
+msgstr "Ελέγξτε τις μεταφράσεις πριν τη δημοσίευση"
+
+#: src/js/components/translation/TranslationMethod.js:143
+msgid "Publish translations and review them later"
+msgstr "Δημοσιεύστε τις μεταφράσεις και ελέγξτε τις αργότερα"
+
+#: src/js/components/translation/TranslationMethod.js:144
+msgid "Publish translations without reviewing"
+msgstr "Δημοσιεύστε τις μεταφράσεις χωρίς έλεγχο"
+
+#: src/js/components/translation/TranslationMethod.js:69
+msgid "Translate Everything"
+msgstr "Μετάφραση Όλων"
+
+#: src/js/components/translation/TranslationMethod.js:71
+msgid "WPML will automatically translate content that you publish or update"
+msgstr "Το WPML θα μεταφράζει αυτόματα το περιεχόμενο που δημοσιεύετε ή ενημερώνετε"
+
+#: src/js/components/translation/TranslationMethod.js:74
+msgid "How do you want to translate this site?"
+msgstr "Πώς θέλετε να μεταφράσετε αυτόν τον ιστότοπο;?"
+
+#: src/js/components/translation/TranslationMethod.js:97
+msgid "Translate Some"
+msgstr "Μετάφραση Μερικών"
+
+#: src/js/components/translation/TranslationMethod.js:99
+msgid "I want to choose which content to translate"
+msgstr "Θέλω να επιλέξω ποιο περιεχόμενο θα μεταφραστεί"
+
+#: src/js/translationDashboard/sending-to-translation/components/AllLanguages.js:25
+msgid "All Languages"
+msgstr "Όλες οι Γλώσσες"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:17
+msgid "Overwrite existing translations"
+msgstr "Αντικατάσταση υπαρχουσών μεταφράσεων"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:24
+msgid "Some of the content you want to translate is already translated"
+msgstr "Ένα μέρος του περιεχομένου που θέλετε να μεταφράσετε είναι ήδη μεταφρασμένο"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:30
+msgid "What do you want to do with the content that’s already translated?"
+msgstr "Τι θέλετε να κάνετε με το περιεχόμενο που είναι ήδη μεταφρασμένο;?"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:39
+msgid "Leave existing translations as is"
+msgstr "Διατήρηση των υπαρχουσών μεταφράσεων ως έχουν"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:64
+msgid "You chose to review translations before publishing."
+msgstr "Επιλέξατε να ελέγχετε τις μεταφράσεις πριν τη δημοσίευση."
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:65
+msgid ""
+"If you retranslate content that's already published, the changes will be "
+"applied directly to live pages or posts."
+msgstr "Εάν μεταφράσετε εκ νέου περιεχόμενο που είναι ήδη δημοσιευμένο, οι αλλαγές θα εφαρμοστούν απευθείας στις ζωντανές σελίδες ή αναρτήσεις."
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:82
+msgid ""
+"This also updates the translation memory for your site. Read more about <a "
+"href=\"%s\" target=\"_blank\" >translation memory</a>"
+msgstr "Αυτό ενημερώνει επίσης τη μεταφραστική μνήμη για τον ιστότοπό σας. Διαβάστε περισσότερα σχετικά με τη <a href=\"%s\" target=\"_blank\" >μεταφραστική μνήμη</a>"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:89
+msgid ""
+"Allows you to re-translate your content and update the translation memory "
+"for your site. Read more about <a href=\"%s\" target=\"_blank\" "
+">translation memory</a>"
+msgstr "Σας επιτρέπει να μεταφράσετε εκ νέου το περιεχόμενό σας και να ενημερώσετε τη μεταφραστική μνήμη για τον ιστότοπό σας. Διαβάστε περισσότερα για τη <a href=\"%s\" target=\"_blank\" >μεταφραστική μνήμη</a>"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:96
+msgid ""
+"Allows your translators to re-translate your content and update the "
+"translation memory for your site. Read more about <a href=\"%s\" "
+"target=\"_blank\" >translation memory</a>"
+msgstr "Επιτρέπει στους μεταφραστές σας να μεταφράσουν εκ νέου το περιεχόμενό σας και να ενημερώσουν τη μεταφραστική μνήμη για τον ιστότοπό σας. Διαβάστε περισσότερα για τη <a href=\"%s\" target=\"_blank\" >μεταφραστική μνήμη</a>"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:98
+msgid ""
+"HINT: You can add a Note for translators in the table above with special "
+"instructions."
+msgstr "ΥΠΟΔΕΙΞΗ: Μπορείτε να προσθέσετε μια Σημείωση για τους μεταφραστές στον παραπάνω πίνακα με ειδικές οδηγίες."
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:31
+msgid "Translate automatically"
+msgstr "Αυτόματη μετάφραση"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:37
+msgid "How do you want to translate?"
+msgstr "Πώς θέλετε να μεταφράσετε;?"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:55
+msgid "Assign to a translator"
+msgstr "Ανάθεση σε μεταφραστή"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:55
+msgid "Translate myself"
+msgstr "Μετάφραση από εμένα"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:60
+msgid "You do not need translation credits to translate content yourself."
+msgstr "Δεν χρειάζεστε μονάδες μετάφρασης για να μεταφράσετε το περιεχόμενο μόνοι σας."
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:87
+msgid ""
+"You can only automatically translate content from your site's default "
+"language (English), to your site's other languages. Deselect content in "
+"your site's secondary languages to proceed."
+msgstr "Μπορείτε να μεταφράσετε αυτόματα περιεχόμενο μόνο από την προεπιλεγμένη γλώσσα του ιστοτόπου σας (Αγγλικά) στις άλλες γλώσσες του ιστοτόπου σας. Αποεπιλέξτε το περιεχόμενο στις δευτερεύουσες γλώσσες του ιστοτόπου σας για να συνεχίσετε."
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:92
+#. %s is the name of the default language. </a>
+msgid ""
+"You can only automatically translate content from your primary language "
+"(%s) to other languages. Use the language switcher at the top of this page "
+"to switch to %s."
+msgstr "Μπορείτε να μεταφράσετε αυτόματα περιεχόμενο μόνο από την κύρια γλώσσα σας (%s) σε άλλες γλώσσες. Χρησιμοποιήστε τον επιλογέα γλώσσας στο πάνω μέρος αυτής της σελίδας για να μεταβείτε στα %s."
+
+#: src/js/translationDashboard/sending-to-translation/components/LanguageRow.js:49
+msgid ""
+"Selected content includes items that were originally created in this "
+"language. Deselect these items to proceed."
+msgstr "Το επιλεγμένο περιεχόμενο περιλαμβάνει στοιχεία που δημιουργήθηκαν αρχικά σε αυτήν τη γλώσσα. Αποεπιλέξτε αυτά τα στοιχεία για να συνεχίσετε."
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:100
+msgid "Add to Translation Queue"
+msgstr "Προσθήκη στην Ουρά Μετάφρασης"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:17
+msgid "Select a post or page to translate"
+msgstr "Επιλέξτε μια ανάρτηση ή σελίδα για μετάφραση"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:18
+msgid "Translate or duplicate content to at least one language"
+msgstr "Μεταφράστε ή αντιγράψτε περιεχόμενο σε τουλάχιστον μία γλώσσα"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:19
+msgid "Choose how you want to translate your content"
+msgstr "Επιλέξτε πώς θέλετε να μεταφράσετε το περιεχόμενό σας"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:20
+msgid "Selected content is already translated"
+msgstr "Το επιλεγμένο περιεχόμενο είναι ήδη μεταφρασμένο"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:21
+msgid ""
+"Selected content includes items in a language other than your site's "
+"default language."
+msgstr "Το επιλεγμένο περιεχόμενο περιλαμβάνει στοιχεία σε γλώσσα διαφορετική από την προεπιλεγμένη γλώσσα του ιστοτόπου σας."
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:74
+msgid "Choose at least one translation action"
+msgstr "Επιλέξτε τουλάχιστον μία ενέργεια μετάφρασης"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:78
+msgid "Duplicate"
+msgstr "Αντιγραφή"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:88
+msgid "Start translating and duplicating"
+msgstr "Έναρξη μετάφρασης και αντιγραφής"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:90
+msgid "Add to Translation Basket and duplicate"
+msgstr "Προσθήκη στο Καλάθι Μετάφρασης και αντιγραφή"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:92
+msgid "Add to Translation Queue and duplicate"
+msgstr "Προσθήκη στην Ουρά Μετάφρασης και αντιγραφή"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:96
+msgid "Start translating"
+msgstr "Έναρξη μετάφρασης"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:98
+msgid "Add to Translation Basket"
+msgstr "Προσθήκη στο Καλάθι Μετάφρασης"
+
+#: src/js/translationDashboard/sending-to-translation/components/TranslationReviewModal.js:37
+msgid "One more thing..."
+msgstr "Ένα ακόμη πράγμα..."
+
+#: src/js/translationDashboard/sending-to-translation/components/TranslationReviewModal.js:40
+msgid ""
+"What would you like to do when your content has finished translating "
+"automatically?"
+msgstr "Τι θα θέλατε να κάνετε όταν ολοκληρωθεί η αυτόματη μετάφραση του περιεχομένου σας;?"
+
+#: src/js/translationDashboard/sending-to-translation/components/TranslationReviewModal.js:51
+msgid "Save settings"
+msgstr "Αποθήκευση ρυθμίσεων"
+
+#: src/js/translationDashboard/sending-to-translation/components/TranslationReviewModal.js:61
+msgid ""
+"This setting will apply to all future automatic translations. You can "
+"change this anytime in WPML → Settings."
+msgstr "Αυτή η ρύθμιση θα εφαρμοστεί σε όλες τις μελλοντικές αυτόματες μεταφράσεις. Μπορείτε να την αλλάξετε οποιαδήποτε στιγμή στο WPML → Ρυθμίσεις."
+
+#: src/js/translationDashboard/sending-to-translation/model/store.js:19
+msgid "Translate"
+msgstr "Μετάφραση"
+
+#: src/js/translationDashboard/sending-to-translation/model/store.js:24
+msgid "Duplicate content"
+msgstr "Αντιγραφή περιεχομένου"
+
+#: src/js/translationDashboard/sending-to-translation/model/store.js:29
+msgid "Do nothing"
+msgstr "Καμία ενέργεια"
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:11
+msgid "You need credits to use automatic translation."
+msgstr "Χρειάζεστε μονάδες για να χρησιμοποιήσετε την αυτόματη μετάφραση."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:113
+msgid "Finish setting up %s on your site"
+msgstr "Ολοκληρώστε τη ρύθμιση του %s στον ιστότοπό σας"
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:117
+msgid ""
+"You need to authenticate %s to send them content for translation. Visit the "
+"%s to finish the setup."
+msgstr "Πρέπει να πιστοποιήσετε το %s για να τους στείλετε περιεχόμενο για μετάφραση. Επισκεφθείτε το %s για να ολοκληρώσετε τη ρύθμιση."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:14
+msgid ""
+"Connection Error. Please wait a minute and reload this page. If the problem "
+"continues, please <a>contact WPML support</a>."
+msgstr "Σφάλμα σύνδεσης. Παρακαλώ περιμένετε ένα λεπτό και ανανεώστε αυτή τη σελίδα. Εάν το πρόβλημα συνεχίζεται, παρακαλώ <a>επικοινωνήστε με την υποστήριξη του WPML</a>."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:143
+msgid "Add a translator to use %s."
+msgstr "Προσθέστε έναν μεταφραστή για να χρησιμοποιήσετε το %s."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:147
+msgid ""
+"To send content to %s for translation, go to the %s to add a translator on "
+"your site."
+msgstr "Για να στείλετε περιεχόμενο στο %s για μετάφραση, μεταβείτε στο %s για να προσθέσετε έναν μεταφραστή στον ιστότοπό σας."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:179
+msgid ""
+"Your selected automatic translation engines do not support the following "
+"language(s): %s. Read more about <a>choosing a translation engine</a>."
+msgstr "Οι επιλεγμένες μηχανές αυτόματης μετάφρασης δεν υποστηρίζουν τις ακόλουθες γλώσσες: %s. Διαβάστε περισσότερα σχετικά με την <a>επιλογή μηχανής μετάφρασης</a>."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:211
+msgid ""
+"Some of the selected content is already being translated. This will cancel "
+"any in-progress translations."
+msgstr "Ορισμένο από το επιλεγμένο περιεχόμενο μεταφράζεται ήδη. Αυτό θα ακυρώσει τυχόν μεταφράσεις που βρίσκονται σε εξέλιξη."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:44
+msgid ""
+"Any existing content (translations) will be overwritten when creating "
+"duplicates."
+msgstr "Τυχόν υπάρχον περιεχόμενο (μεταφράσεις) θα αντικατασταθεί κατά τη δημιουργία αντιγράφων."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:45
+msgid ""
+"When duplicating content, please first duplicate parent pages to maintain "
+"the site's hierarchy."
+msgstr "Κατά την αντιγραφή περιεχομένου, παρακαλούμε πρώτα να αντιγράψετε τις γονικές σελίδες για να διατηρήσετε την ιεραρχία του ιστότοπου."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:68
+msgid ""
+"To assign content to a translator, first <a href=\"%s\" "
+"target=\"_blank\">add a translator</a> or <a href=\"%s\" "
+"target=\"_blank\">connect to a translation service</a>."
+msgstr "Για να αναθέσετε περιεχόμενο σε έναν μεταφραστή, πρώτα <a href=\"%s\" target=\"_blank\">προσθέστε έναν μεταφραστή</a> ή <a href=\"%s\" target=\"_blank\">συνδεθείτε με μια υπηρεσία μετάφρασης</a>."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:94
+msgid "Translators Tab"
+msgstr "Καρτέλα Μεταφραστών"
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:12
+msgid ""
+"Some of the content that you selected for translation includes fields that "
+"are encoded. Translators will not be able to work on this kind of content, "
+"so we removed it from the job."
+msgstr "Ορισμένο από το περιεχόμενο που επιλέξατε για μετάφραση περιλαμβάνει πεδία που είναι κωδικοποιημένα. Οι μεταφραστές δεν θα μπορούν να εργαστούν σε αυτού του είδους το περιεχόμενο, οπότε το αφαιρέσαμε από την εργασία."
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:24
+msgid ""
+"To fix this problem, you need to tell WPML how these fields are encoded, so "
+"that WPML can decode them before sending for translation."
+msgstr "Για να διορθώσετε αυτό το πρόβλημα, πρέπει να πείτε στο WPML πώς είναι κωδικοποιημένα αυτά τα πεδία, ώστε το WPML να μπορεί να τα αποκωδικοποιήσει πριν τα στείλει για μετάφραση."
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:30
+msgid "WPML cannot send some of the content to translation"
+msgstr "Το WPML δεν μπορεί να στείλει ορισμένο περιεχόμενο για μετάφραση"
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:44
+msgid "<s>%s</s>: There are base64 encoded fields in this document"
+msgstr "<s>%s</s>: Υπάρχουν πεδία κωδικοποιημένα σε base64 σε αυτό το έγγραφο"
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:62
+msgid "Hide details"
+msgstr "Απόκρυψη λεπτομερειών"
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:62
+msgid "Show details"
+msgstr "Εμφάνιση λεπτομερειών"

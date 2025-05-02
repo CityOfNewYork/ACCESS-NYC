@@ -1,0 +1,31 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Dissmiss Notice": [
+            "Avfärda meddelande"
+         ],
+         "Streamline your site's translation using WPML's Translation Dashboard": [
+            "Effektivisera din webbplats översättning med WPML:s översättningspanel"
+         ],
+         "Translate pages, posts, products and strings from one place": [
+            "Översätt sidor, inlägg, produkter och strängar från ett ställe"
+         ],
+         "Bulk automatic translation": [
+            "Automatisk massöversättning"
+         ],
+         "Translate everything automatically": [
+            "Översätt allt automatiskt"
+         ],
+         "Go to the Translation Dashboard": [
+            "Gå till översättningspanelen"
+         ],
+         "Learn More": [
+            "Läs mer"
+         ]
+      }
+   }
+}

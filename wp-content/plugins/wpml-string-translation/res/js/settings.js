@@ -1,26 +1,40 @@
 /*jshint devel:true */
 /*global jQuery */
-var WPML_String_Translation = WPML_String_Translation || {};
 
-WPML_String_Translation.Settings = function () {
-	"use strict";
+jQuery(function (){
+	// Register String Tracking Dialog when it is enabled.
+	var dialogElem = jQuery("#wpml-track-strings-info-dialog");
 
-	var self = this;
+	dialogElem.dialog({
+		autoOpen:		false,
+		resizable:		false,
+		draggable:		false,
+		modal: 			true,
+		closeText: 		dialogElem.data('close-btn-label'),
+		closeOnEscape: 	true,
+		minWidth: 		600,
+		classes: {
+			'ui-dialog': 'wpml-track-strings-dialog-container'
+		},
+		buttons: [
+			{
+				class: 'st-track-strings-ok button button-secondary',
+				text: dialogElem.data('ok-btn-label'),
+				click: function () {
+					jQuery(this).dialog('close');
+				}
+			}
+		]
+	});
 
-    self.updateTrackStringWarning = function (event) {
-        var warning = jQuery('.js-track-strings-note');
-        if (jQuery(this).prop('checked')) {
-            warning.fadeIn();
-        } else {
-            warning.fadeOut();
-        }
-    };
-
-
-    jQuery(function () {
-        jQuery('#track_strings').on('click', self.updateTrackStringWarning);
-    });
-
-};
-
-WPML_String_Translation.settings = new WPML_String_Translation.Settings();
+	/**
+	 * Show Strings tracking dialog when "icl-save-form-icl_st_track_strings" is fired.
+	 *
+	 * @see {wpmlCustomEvent} in /sitepress-multilingual-cms/res/js/scripts.js
+ 	 */
+	jQuery(document).on('icl-save-form-icl_st_track_strings', function (){
+		if (jQuery('#track_strings').prop('checked')) {
+			jQuery( "#wpml-track-strings-info-dialog" ).dialog( "open" );
+		}
+	});
+});

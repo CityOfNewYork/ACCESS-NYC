@@ -1,0 +1,14 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/media-setup/components/MediaSetupStatus.js:15
+msgid "But..."
+msgstr "Maar..."
+
+#: src/js/media-setup/components/MediaSetupStatus.js:16
+msgid ""
+"Wait to translate any content that contains media until we're finished "
+"configuring it. It will be just a moment."
+msgstr "Wacht met het vertalen van inhoud die media bevat tot we klaar zijn met het configureren ervan. Het zal slechts een ogenblik duren."

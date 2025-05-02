@@ -8,7 +8,7 @@
             <p class="js-wpml-tf-settings-block wpml-tf-form-line">
                 <label for="wpml-tf-enable-translation-feedback">
                     <input type="checkbox" id="wpml-tf-enable-translation-feedback"
-                           name="enabled" value="{{ module_toggle.value }}" class="js-wpml-tf-trigger-save"
+                           name="enabled" value="{{ module_toggle.value }}" class="wpml-checkbox-native js-wpml-tf-trigger-save"
                            {% if module_toggle.selected %} checked="checked"{% endif %}
                            data-target=".js-wpml-tf-options-toggle-target">
                     {{ module_toggle.label }}
@@ -28,7 +28,7 @@
                         <li>
                             <label for="{{ input_id }}">
                                 <input type="radio" name="button_mode" id="{{ input_id }}"
-                                       class="js-wpml-tf-trigger-save" value="{{ mode.value }}"
+                                       class="wpml-radio-native js-wpml-tf-trigger-save" value="{{ mode.value }}"
                                        {% if mode.selected %} checked="checked"{% endif %}>
                                 {% if mode.link %}
                                     {% set link_before %}<a class="wpml-external-link" href="{{ mode.link }}" target="_blank">{% endset %}
@@ -50,7 +50,7 @@
                             {% set input_id = 'wpml_tf_icon_style_' ~ style.value %}
                             <li>
                                 <input type="radio" name="icon_style" id="{{ input_id }}"
-                                       class="js-wpml-tf-trigger-save" value="{{ style.value }}"
+                                       class="wpml-radio-native js-wpml-tf-trigger-save" value="{{ style.value }}"
                                         {% if style.selected %} checked="checked"{% endif %}>
                                 <label for="{{ input_id }}" class="{{ style.image_class }}"></label>
                             </li>
@@ -67,7 +67,7 @@
                         <li>
                             <label for="{{ input_id }}">
                                 <input type="checkbox" name="languages_to[]" id="{{ input_id }}"
-                                       class="js-wpml-tf-trigger-save" value="{{ language.value }}"
+                                       class="wpml-checkbox-native js-wpml-tf-trigger-save" value="{{ language.value }}"
                                        {% if language.selected %} checked="checked"{% endif %}>
                                 <img width="18" height="12" src="{{ language.flag_url }}" alt="{{ language.value }}">
                                 {{ language.label }}
@@ -86,7 +86,7 @@
                         <li>
                             <label for="{{ input_id }}">
                                 <input type="radio" name="display_mode" id="{{ input_id }}"
-                                       class="js-wpml-tf-trigger-save" value="{{ mode.value }}"
+                                       class="wpml-radio-native js-wpml-tf-trigger-save" value="{{ mode.value }}"
                                         {% if mode.selected %} checked="checked"{% endif %}>
                                 {% if mode.value == 'custom' %}
                                     {% include 'options-ui-custom-expiration.twig' with { 'disabled': not mode.selected } %}

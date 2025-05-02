@@ -33,6 +33,10 @@ add_action( 'wpml_parse_custom_config', 'wpml_st_parse_config', 10, 1 );
 function wpml_st_initialize_basic_strings() {
 	/** @var WPML_String_Translation $WPML_String_Translation */
 	global $sitepress, $pagenow, $WPML_String_Translation;
+	
+	if ( ! class_exists( 'WPML_ST_WP_Loaded_Action' ) ) {
+		return;
+	}
 
 	$load_action = new WPML_ST_WP_Loaded_Action(
 		$sitepress,

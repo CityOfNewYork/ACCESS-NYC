@@ -117,7 +117,7 @@
             "Язык добавлен"
          ],
          "The value \"%s\" already exists": [
-            "Значение \"%s\" уже существует"
+            "Значение “%s” уже существует"
          ],
          "Add a new language": [
             "Добавить новый язык"
@@ -135,7 +135,7 @@
             "Щелкните здесь"
          ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
-            "Неверный формат. Может содержать только строчные буквы и \"-\". Например: \"fr\" , \"pt-br\", \"zh-hans\""
+            "Неверный формат. Может содержать только строчные буквы и “-”. Например: “fr”, “pt-br”, “zh-hans”"
          ],
          "Language": [
             "Язык"
@@ -159,7 +159,7 @@
             "Регион по умолчанию"
          ],
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
-            "Неверный формат. Может содержать только строчные буквы и \"_\". Например: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+            "Неверный формат. Может содержать только строчные буквы и “_”. Например: “de”, “de_DE”, “zh_Hant_TW”"
          ],
          "hreflang": [
             "hreflang"
@@ -219,10 +219,13 @@
             "Английский для пользователей из США: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
-            "Определяет закодированы ли URL-адреса на этом языке, либо же в них используются символы ASCII (если не уверены, оставьте \"Нет\")."
+            "Определяет, кодируются ли URL-адреса на этом языке или используют ASCII-символы (если не уверены, оставьте “Нет”)."
          ],
          "adding a custom language": [
             "добавление пользовательского языка"
+         ],
+         "What are the languages of your site?": [
+            "Какой язык вашего сайта?"
          ],
          "Default language": [
             "Язык по умолчанию"
@@ -241,9 +244,6 @@
          ],
          "create a custom language": [
             "создайте пользовательский язык"
-         ],
-         "What are the languages of your site?": [
-            "Какой язык вашего сайта?"
          ],
          "You can add a dedicated person to oversee everything translation-related on your site. %sTranslation Managers%s can add new local translators or professional translation services, create and assign translation jobs, review completed translations, and change translation-related settings.": [
             "Вы можете добавить отдельное лицо, которое будет контролировать все связанное с переводом на вашем сайте. %sМенеджеры переводческих проектов%s могут добавлять новых собственных переводчиков или службы профессионального перевода, создавать и назначать заказы на перевод, проверять выполненные переводы и изменять настройки, связанные с переводом."

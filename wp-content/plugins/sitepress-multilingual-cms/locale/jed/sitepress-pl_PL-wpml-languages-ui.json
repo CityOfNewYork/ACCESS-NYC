@@ -3,8 +3,7 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "lang": "pl"
+            "domain": "messages"
          },
          "hide the translations instead.": [
             "zamiast tego ukryj tłumaczenia."

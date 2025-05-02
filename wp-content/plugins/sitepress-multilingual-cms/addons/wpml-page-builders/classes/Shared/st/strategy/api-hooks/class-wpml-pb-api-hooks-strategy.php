@@ -4,6 +4,7 @@ class WPML_PB_API_Hooks_Strategy implements IWPML_PB_Strategy {
 
 	/** @var  WPML_PB_Factory $factory */
 	private $factory;
+	/** @var string */
 	private $name;
 
 	public function __construct( $name ) {
@@ -18,13 +19,13 @@ class WPML_PB_API_Hooks_Strategy implements IWPML_PB_Strategy {
 	}
 
 	/**
-	 * @param string|int $post_id
-	 * @param string $content
+	 * @param string|int                      $post_id
+	 * @param string                          $content
 	 * @param WPML\PB\Shortcode\StringCleanUp $stringCleanUp
 	 *
 	 * @return bool
 	 */
-	public function register_strings_in_content( $post_id, $content, WPML\PB\Shortcode\StringCleanUp $stringCleanUp ) {
+	public function register_strings_in_content( $post_id, $content, WPML\PB\Shortcode\StringCleanUp $stringCleanUp = null ) {
 		return false;
 	}
 
@@ -50,7 +51,7 @@ class WPML_PB_API_Hooks_Strategy implements IWPML_PB_Strategy {
 		return $this->name;
 	}
 
-	public function get_update_post( $package_data) {
+	public function get_update_post( $package_data ) {
 		return $this->factory->get_update_post( $package_data, $this );
 	}
 

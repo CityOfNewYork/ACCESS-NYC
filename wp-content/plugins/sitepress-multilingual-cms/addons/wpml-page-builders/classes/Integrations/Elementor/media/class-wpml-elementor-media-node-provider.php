@@ -77,6 +77,19 @@ class WPML_Elementor_Media_Node_Provider {
 				case 'hotspot':
 					$node = new \WPML\PB\Elementor\Media\Modules\Hotspot( $this->media_translate );
 					break;
+				case 'link-in-bio':
+				case 'link-in-bio-var-2':
+				case 'link-in-bio-var-3':
+				case 'link-in-bio-var-4':
+				case 'link-in-bio-var-5':
+				case 'link-in-bio-var-6':
+				case 'link-in-bio-var-7':
+					$node = new \WPML\PB\Elementor\Media\Modules\LinkInBio( $this->media_translate );
+					break;
+
+				case 'contact-buttons':
+					$node = new \WPML\PB\Elementor\Media\Modules\ContactButtons( $this->media_translate );
+					break;
 
 				default:
 					$node = null;

@@ -1,18 +1,28 @@
 <?php
 
+/**
+ * A wrapper function for "file" being able to mock it in tests
+ */
+if ( ! function_exists('load_file') ) {
+	function load_file($file_name ) {
+		return file( $file_name ) ?: array();
+	}
+}
+
+
 class WPML_PO_Import {
 
 	private $lines;
 	private $strings;
 	private $error_str;
-	
+
 	public function __construct( $file_name ) {
 
 		global $wpdb;
-		
+
 		$this->strings = array( );
 		$this->error_str = '';
-		$this->lines   = file( $file_name ) ?: array();
+		$this->lines   = load_file( $file_name );
 
 		$fuzzy = 0;
 		$name = false;
@@ -39,7 +49,7 @@ class WPML_PO_Import {
 			$int = preg_match( '#msgid "(.*)"#im', trim( $this->lines[ $k ] ), $matches );
 			if ( $int ) {
 				list( $string, $k ) = $this->get_string( $matches[1], $k );
-				
+
 				$int    = preg_match( '#msgstr "(.*)"#im', trim( $this->lines[ $k + 1 ] ), $matches );
 				if ( $int ) {
 					list( $translation, $k ) = $this->get_string( $matches[ 1 ], $k + 1 );
@@ -60,13 +70,13 @@ class WPML_PO_Import {
 														$context
 														)
 													);
-	
+
 					if ( $date_time_flag ) {
 						$string      = str_replace( "\\\\", "\\", $string );
 						$translation = str_replace( "\\\\", "\\", $translation );
 						$name        = str_replace( "\\\\", "\\", $name );
 					}
-	
+
 					$this->strings[ ] = array(
 						'string'      => $string,
 						'translation' => $translation,
@@ -77,7 +87,7 @@ class WPML_PO_Import {
 					);
 				}
 				$k ++;
-				
+
 				$name    = false;
 				$context = '';
 			}
@@ -88,9 +98,9 @@ class WPML_PO_Import {
 		if ( empty( $this->strings ) ) {
 			$this->error_str = __( 'No string found', 'wpml-string-translation' );
 		}
-		
+
 	}
-	
+
 	private function get_string( $string, $k ) {
 
 		$string = $this->strip_slashes( $string );
@@ -107,25 +117,24 @@ class WPML_PO_Import {
 				}
 			}
 		}
-		
+
 		return array( $string, $k );
-		
+
 	}
-	
+
 	private function strip_slashes( $string ) {
-		$string = str_replace( '\"', '"', $string );
 		$string = str_replace( '\\\\', '\\', $string );
-		return $string;		
+		return $string;
 	}
-	
+
 	public function has_strings( ) {
 		return ! empty( $this->strings );
 	}
-	
+
 	public function get_strings( ) {
 		return $this->strings;
 	}
-	
+
 	public function get_errors( ) {
 		return $this->error_str;
 	}

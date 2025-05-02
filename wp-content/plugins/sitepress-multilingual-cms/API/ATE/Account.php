@@ -22,6 +22,25 @@ class Account {
 	}
 
 	/**
+	 * @return Either<array>
+	 */
+	public static function getAccountBalances() {
+		return WordPress::handleError( make( \WPML_TM_AMS_API::class )->getAccountBalances() )
+		                ->filter( Fns::identity() )
+						->bimap(
+							function( $response ) {
+								if ( is_wp_error( $response ) ) {
+									return [
+										'error' => $response->get_error_message(),
+									];
+								}
+								return $response;
+							},
+							Fns::identity()
+						);
+	}
+
+	/**
 	 * @param array $creditInfo
 	 *
 	 * @return bool

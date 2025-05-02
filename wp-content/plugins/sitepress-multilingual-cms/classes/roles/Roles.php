@@ -17,8 +17,7 @@ class Roles implements \IWPML_Backend_Action, \IWPML_AJAX_Action {
 		if ( ! WPRoles::hasCap( 'manage_options', $role ) ) {
 			$user = User::get( $userId );
 
-			wpml_collect( DefaultCapabilities::get() )
-				->keys()
+			wpml_collect( DefaultCapabilities::getKeys() )
 				->map( [ $user, 'remove_cap' ] );
 		}
 	}

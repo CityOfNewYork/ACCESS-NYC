@@ -1,0 +1,244 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
+msgid "Advanced"
+msgstr "Расширенные"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:25
+msgid "HTML anchor"
+msgstr "HTML-якорь"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
+msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
+msgstr "Добавьте ярлык для этого блока при загрузке страницы, используя URL “#anchor”."
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
+msgid "Additional CSS class(es)"
+msgstr "Дополнительный CSS-класс(ы)"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
+msgid "Separate multiple classes with spaces."
+msgstr "Разделяйте несколько классов пробелами."
+
+#: src/js/blocks/LanguageSwitcher/Components/Color/Control.js:49
+msgid "Color"
+msgstr "Цвет"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:346
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:42
+msgid "px"
+msgstr "px"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:347
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:46
+msgid "%"
+msgstr "%"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:358
+msgid "Dimensions"
+msgstr "Размеры"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:365
+msgid "BLOCK"
+msgstr "БЛОК"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:371
+msgid "Block margin"
+msgstr "Отступ блока"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:388
+msgid "Block padding"
+msgstr "Внутренний отступ блока"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:406
+msgid "LANGUAGE"
+msgstr "ЯЗЫК"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:412
+msgid "Language spacing"
+msgstr "Интервал языка"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
+msgid "Language padding"
+msgstr "Отступ языка"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
+msgid "Display"
+msgstr "Отображение"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:41
+msgid "Show flag"
+msgstr "Показать флаг"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:49
+msgid "Show language name"
+msgstr "Показать название языка"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:68
+msgid "Display language name in"
+msgstr "Отображать название языка в"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:113
+msgid "Style"
+msgstr "Стиль"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:55
+msgid "Flag settings"
+msgstr "Настройки флага"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:59
+msgid "Width"
+msgstr "Ширина"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:62
+msgid "Height"
+msgstr "Высота"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:94
+msgid "Spacing"
+msgstr "Интервал"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:119
+msgid "Allow wrapping to multiple lines"
+msgstr "Разрешить перенос на несколько строк"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
+msgid "Open on click"
+msgstr "Открыть при нажатии"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:145
+msgid "Show arrow"
+msgstr "Показать стрелку"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:60
+msgid "Layout"
+msgstr "Макет"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:72
+msgid "Justification"
+msgstr "Выравнивание"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:74
+msgid "Orientation"
+msgstr "Ориентация"
+
+#: src/js/blocks/LanguageSwitcher/Components/Typography/Control.js:160
+msgid "Typography"
+msgstr "Типография"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:116
+#: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:25
+msgid "Background"
+msgstr "Фон"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:121
+msgid "Language Text"
+msgstr "Текст языка"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:126
+msgid "Language Background"
+msgstr "Фон языка"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:131
+msgid "Current language text"
+msgstr "Текст текущего языка"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:136
+#: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:30
+msgid "Current language background"
+msgstr "Фон текущего языка"
+
+#: src/js/blocks/LanguageSwitcher/attributes/display.js:5
+msgid "Full name"
+msgstr "Полное название"
+
+#: src/js/blocks/LanguageSwitcher/attributes/display.js:9
+msgid "Code"
+msgstr "Код"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:24
+msgid "Justify items left"
+msgstr "Выровнять элементы по левому краю"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:29
+msgid "Justify items center"
+msgstr "Выровнять элементы по центру"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:34
+msgid "Justify items right"
+msgstr "Выровнять элементы по правому краю"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
+msgid "Justify items space between"
+msgstr "Выровнять элементы с пространством между"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
+msgid "Horizontal"
+msgstr "Горизонтальный"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:52
+msgid "Vertical"
+msgstr "Вертикальный"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:14
+msgid "Normal"
+msgstr "Обычный"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:19
+msgid "Medium"
+msgstr "Средний"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:24
+msgid "Large"
+msgstr "Большой"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:29
+msgid "X-Large"
+msgstr "Очень большой"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:35
+msgid "Ab"
+msgstr "Ab"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:39
+msgid "AB"
+msgstr "AB"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:43
+msgid "ab"
+msgstr "ab"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:9
+msgid "Small"
+msgstr "Маленький"
+
+#: src/js/blocks/LanguageSwitcher/index.js:36
+msgid "Displays the WPML Language Switcher."
+msgstr "Отображает переключатель языков WPML."
+
+#: src/js/blocks/LanguageSwitcher/index.js:42
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:47
+msgid "Language Switcher"
+msgstr "Переключатель языков"
+
+#: src/js/blocks/LanguageSwitcher/index.js:43
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:48
+msgid "displays the WPML Language Switcher"
+msgstr "отображает переключатель языков WPML"
+
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:30
+msgid ""
+"Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
+"block</a>."
+msgstr "Отображает переключатель языков WPML. <br/> Узнайте, <a>как перевести этот блок</a>."
+
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:38
+msgid "Navigation Language Switcher"
+msgstr "Навигационный переключатель языков"
+
+#: src/js/blocks/Shared/Controls/PanelSettingsDropdown.js:64
+msgid "Reset all"
+msgstr "Сбросить все"

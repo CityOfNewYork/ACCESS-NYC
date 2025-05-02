@@ -15,22 +15,37 @@
             "Det finns inga fler jobb att avbryta"
          ],
          "The jobs cancellation has failed": [
-            "Annullering av jobben har misslyckats"
+            "Avbrytandet av jobben misslyckades"
          ],
          "Cancel in-progress automatic jobs": [
             "Avbryt pågående automatiska jobb"
+         ],
+         "Enabling WPML's Advanced Translation Editor...": [
+            "Aktiverar WPML:s avancerade översättningsredigerare..."
+         ],
+         "Force-enable WPML's Advanced Translation Editor": [
+            "Tvångsaktivera WPML:s avancerade översättningsredigerare"
+         ],
+         "If you're running this website from two or more domains on the same installation, this action will allow both to use the Advanced Translation Editor. Don't use this if you've moved or copied the site to a different domain on a different server.": [
+            "Om du kör webbplatsen från flera domäner på samma installation, tillåter detta båda att använda den avancerade översättningsredigeraren."
+         ],
+         "An error occurred while enabling WPML on both domains. Please try again.": [
+            "Ett fel uppstod vid aktivering av WPML på båda domänerna. Försök igen."
+         ],
+         "You can now use the Advanced Translation Editor from this site, as well as the other site(s) running from a different domain on the same installation.": [
+            "Du kan nu använda den avancerade översättningsredigeraren från denna och andra webbplatser på samma installation."
          ],
          "Domain name has been updated": [
             "Domännamnet har uppdaterats"
          ],
          "Domain name update has been failed": [
-            "Uppdatering av domännamnet har misslyckats"
+            "Uppdateringen av domännamnet misslyckades"
          ],
          "Update domain name in language switcher settings": [
-            "Uppdatera domännamnet i språkväxlarens inställningar"
+            "Uppdatera domännamn i inställningarna för språkväxlare"
          ],
          "Refresh license data to recognise license update": [
-            "Uppdatera licensdata för att identifiera licensuppdatering"
+            "Uppdatera licensdata för att känna igen licensuppdatering"
          ],
          "WPML License has been refreshed": [
             "WPML-licensen har uppdaterats"

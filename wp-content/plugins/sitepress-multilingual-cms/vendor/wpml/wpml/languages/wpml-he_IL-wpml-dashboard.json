@@ -1,0 +1,1197 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Untranslated strings that I encounter on front-end while logged in": [
+            "מחרוזות לא מתורגמות שאני נתקל בהן בחזית בזמן התחברות"
+         ],
+         "Untranslated strings that all front-end users encounter": [
+            "מחרוזות לא מתורגמות שכל משתמשי החזית נתקלים בהן"
+         ],
+         "Disable auto-registration of strings": [
+            "השבת רישום אוטומטי של מחרוזות"
+         ],
+         "Plugins": [
+            "תוספים"
+         ],
+         "Themes": [
+            "ערכות נושא"
+         ],
+         "WordPress": [
+            "WordPress"
+         ],
+         "Other": [
+            "אחר"
+         ],
+         "Error in fetching default translation batch name": [
+            "שגיאה בקבלת שם אצווה ברירת מחדל לתרגום"
+         ],
+         "Error in fetching translation editor type.": [
+            "שגיאה בקבלת סוג עורך התרגום."
+         ],
+         "Error in fetching untranslated types count": [
+            "שגיאה בקבלת ספירת סוגים לא מתורגמים"
+         ],
+         "Error in fetching remote translation service data.": [
+            "שגיאה בקבלת נתוני שירות תרגום מרוחק."
+         ],
+         "An error occurred while sending the translation.": [
+            "אירעה שגיאה בעת שליחת התרגום."
+         ],
+         "Validation failed": [
+            "האימות נכשל"
+         ],
+         "Please wait until download finishes": [
+            "אנא המתן עד לסיום ההורדה"
+         ],
+         "You need to wait 5 minutes after the last check": [
+            "עליך להמתין 5 דקות לאחר הבדיקה האחרונה"
+         ],
+         "Check status and get translations": [
+            "בדוק סטטוס וקבל תרגומים"
+         ],
+         "Status: ": [
+            "סטטוס: "
+         ],
+         "Downloaded jobs: ": [
+            "משימות שהורדו: "
+         ],
+         "Cancelled jobs: ": [
+            "משימות שבוטלו: "
+         ],
+         "none of your translation jobs have been completed": [
+            "אף אחת ממשימות התרגום שלך לא הושלמה"
+         ],
+         "Checking translation jobs status. Please don't close this page!": [
+            "בודק סטטוס משימות תרגום. אנא אל תסגור דף זה!"
+         ],
+         " have been sent to remote translators": [
+            " נשלחו למתרגמים מרוחקים"
+         ],
+         " has been sent to remote translators": [
+            " נשלח למתרגמים מרוחקים"
+         ],
+         "Last check: Never": [
+            "בדיקה אחרונה: מעולם לא"
+         ],
+         "Filtering is disabled to show all selected items. ": [
+            "הסינון מושבת כדי להציג את כל הפריטים שנבחרו. "
+         ],
+         "Apply filters": [
+            "החל מסננים"
+         ],
+         "%d item selected": [
+            "%d פריט נבחר",
+            "%d פריטים נבחרו"
+         ],
+         "(%d word count)": [
+            "(%d ספירת מילים)"
+         ],
+         "%s item not showing.": [
+            "%s פריט לא מוצג.",
+            "%s פריטים לא מוצגים."
+         ],
+         "Show all selected items": [
+            "הצג את כל הפריטים שנבחרו"
+         ],
+         "Translate your content": [
+            "תרגם את התוכן שלך"
+         ],
+         "Unselect all": [
+            "בטל בחירה בהכל"
+         ],
+         "Source Language:": [
+            "שפת מקור:"
+         ],
+         "translated to:": [
+            "מתורגם ל:"
+         ],
+         "Filter": [
+            "סנן"
+         ],
+         "You are about to change the source language filter from %s to %s": [
+            "אתה עומד לשנות את מסנן שפת המקור מ-%s ל-%s"
+         ],
+         "Updating the source language filter will clear the items you've selected for translation. Are you sure you want to continue?": [
+            "עדכון מסנן שפת המקור ינקה את הפריטים שבחרת לתרגום. האם אתה בטוח שברצונך להמשיך?"
+         ],
+         "Change source language": [
+            "שנה שפת מקור"
+         ],
+         "Cancel": [
+            "ביטול"
+         ],
+         "All Statuses": [
+            "כל הסטטוסים"
+         ],
+         "All languages": [
+            "כל השפות"
+         ],
+         "All translation statuses": [
+            "כל סטטוסי התרגום"
+         ],
+         "Not completed": [
+            "לא הושלם"
+         ],
+         "Needs updating": [
+            "זקוק לעדכון"
+         ],
+         "Translation in progress": [
+            "תרגום בתהליך"
+         ],
+         "Translation complete": [
+            "התרגום הושלם"
+         ],
+         "Global Filter": [
+            "מסנן גלובלי"
+         ],
+         "Parent:": [
+            "הורה:"
+         ],
+         "Search parent by title": [
+            "חפש הורה לפי כותרת"
+         ],
+         "Search by term title in %s": [
+            "חפש לפי כותרת מונח ב-%s"
+         ],
+         "All taxonomies": [
+            "כל הטקסונומיות"
+         ],
+         "Loading": [
+            "טוען"
+         ],
+         "Taxonomy Term:": [
+            "מונח טקסונומיה:"
+         ],
+         "Loading terms": [
+            "טוען מונחים"
+         ],
+         "No terms found": [
+            "לא נמצאו מונחים"
+         ],
+         "Filter by:": [
+            "סנן לפי:"
+         ],
+         "Title": [
+            "כותרת"
+         ],
+         "There is an issue with automatic translation that needs your attention.": [
+            "יש בעיה עם התרגום האוטומטי שדורשת את תשומת לבך."
+         ],
+         "Fix to continue translating automatically": [
+            "תקן כדי להמשיך לתרגם אוטומטית"
+         ],
+         "View": [
+            "צפייה"
+         ],
+         "Edit": [
+            "ערוך"
+         ],
+         "Edit note for the translators": [
+            "ערוך הערה למתרגמים"
+         ],
+         "Add note for the translators": [
+            "הוסף הערה למתרגמים"
+         ],
+         "This page is set to be %1$stranslated manually%2$s using the WordPress Editor": [
+            "דף זה מוגדר להיות %1$sמתורגם ידנית%2$s באמצעות עורך WordPress"
+         ],
+         "(no title)": [
+            "(ללא כותרת)"
+         ],
+         "Image": [
+            "תמונה"
+         ],
+         "Date / Status": [
+            "תאריך / סטטוס"
+         ],
+         "Word count": [
+            "ספירת מילים"
+         ],
+         "Loading items...": [
+            "טוען פריטים..."
+         ],
+         "%1$d %2$s selected": [
+            "%1$d %2$s נבחרו"
+         ],
+         "items": [
+            "פריטים"
+         ],
+         "Filtering is disabled to show all selected items": [
+            "הסינון מושבת כדי להציג את כל הפריטים שנבחרו"
+         ],
+         "Apply filter": [
+            "החל מסנן"
+         ],
+         "%1$d %2$s not showing": [
+            "%1$d %2$s לא מוצגים"
+         ],
+         "Show selected items": [
+            "הצג פריטים נבחרים"
+         ],
+         " / page": [
+            " / עמוד"
+         ],
+         "Previous": [
+            "הקודם"
+         ],
+         "Next": [
+            "הבא"
+         ],
+         "Your site's content is too vast for a single translation batch. Use filters to reduce the selection, then \"select all\".": [
+            "התוכן באתר שלך נרחב מדי לאצוות תרגום אחת. השתמש במסננים כדי להפחית את הבחירה, ואז \"בחר הכל\"."
+         ],
+         "The current filter captures too much content. Narrow it down to enable \"select all\" for translation.": [
+            "המסנן הנוכחי תופס יותר מדי תוכן. צמצם אותו כדי לאפשר \"בחירת הכל\" לתרגום."
+         ],
+         "Select All": [
+            "בחר הכל"
+         ],
+         "All %d items matching criteria are selected": [
+            "כל %d הפריטים התואמים לקריטריונים נבחרו"
+         ],
+         "All %d items in this section are selected": [
+            "כל %d הפריטים בסעיף זה נבחרו"
+         ],
+         "You have too many items to send for translation at once. Apply a filter to narrow down the items to enable this option.": [
+            "יש לך יותר מדי פריטים לשליחה לתרגום בבת אחת. הפעל מסנן כדי לצמצם את הפריטים ולאפשר אפשרות זו."
+         ],
+         "Clear selection": [
+            "נקה בחירה"
+         ],
+         "Select all items that match this search": [
+            "בחר את כל הפריטים התואמים לחיפוש זה"
+         ],
+         "Loading...": [
+            "טוען..."
+         ],
+         "Save note": [
+            "שמור הערה"
+         ],
+         "The following target languages do not support automatic translation: %s. <a>Map to known languages</a> to enable automatic translation.": [
+            "שפות היעד הבאות אינן תומכות בתרגום אוטומטי: %s. <a>מפה לשפות ידועות</a> כדי לאפשר תרגום אוטומטי."
+         ],
+         "The site's default language %s doesn't support automatic translation.": [
+            "שפת ברירת המחדל של האתר %s אינה תומכת בתרגום אוטומטי."
+         ],
+         "Some sections are hidden due to current filter settings or because they have no items. <show_all>Show all translation statuses</show_all>": [
+            "חלק מהמקטעים מוסתרים עקב הגדרות הסינון הנוכחיות או מכיוון שאין בהם פריטים. <show_all>הצג את כל סטטוסי התרגום</show_all>"
+         ],
+         "Step 1": [
+            "שלב 1"
+         ],
+         "Select items for translation": [
+            "בחר פריטים לתרגום"
+         ],
+         "Clear filters": [
+            "נקה מסננים"
+         ],
+         "strings": [
+            "מחרוזות"
+         ],
+         "WPML didn't find any %s matching your criteria.": [
+            "WPML לא מצא %s התואמים לקריטריונים שלך."
+         ],
+         "You have too many items selected to use this feature. Deselect some of the items to enable it.": [
+            "יש לך יותר מדי פריטים נבחרים כדי להשתמש בתכונה זו. בטל בחירה בחלק מהפריטים כדי לאפשר אותה."
+         ],
+         "Show strings in:": [
+            "הצג מחרוזות ב:"
+         ],
+         "All domains": [
+            "כל התחומים"
+         ],
+         "All sources": [
+            "כל המקורות"
+         ],
+         "Frontend (viewed)": [
+            "חזית (נצפה)"
+         ],
+         "Backend (viewed)": [
+            "צד שרת (נצפה)"
+         ],
+         "Unknown": [
+            "לא ידוע"
+         ],
+         "String": [
+            "מחרוזת"
+         ],
+         "All Translation Priorities": [
+            "כל עדיפויות התרגום"
+         ],
+         "This filter is available only if source is set to \"Frontend\" or \"Backend\".": [
+            "מסנן זה זמין רק אם המקור מוגדר כ-\"ממשק משתמש\" או \"צד שרת\"."
+         ],
+         "front-end": [
+            "צד לקוח"
+         ],
+         "back-end": [
+            "צד שרת"
+         ],
+         "viewed": [
+            "נצפה"
+         ],
+         "Domain": [
+            "תחום"
+         ],
+         "Source": [
+            "מקור"
+         ],
+         "Type": [
+            "סוג"
+         ],
+         "Strings in the theme and plugins": [
+            "מחרוזות בערכת הנושא ובתוספים"
+         ],
+         "Translate front-end texts you can customize from the WordPress admin like footer text, copyright notices, plugin options and settings, time format, widget texts, and more.": [
+            "תרגם טקסטים בחזית האתר שניתן להתאים מפאנל הניהול של WordPress כמו טקסט כותרת תחתונה, הודעות זכויות יוצרים, אפשרויות והגדרות תוספים, פורמט זמן, טקסט וידג'טים ועוד."
+         ],
+         "Translating Strings From Admin and Settings": [
+            "תרגום מחרוזות מהניהול וההגדרות"
+         ],
+         "Translate texts in admin screens": [
+            "תרגום טקסטים במסכי הניהול"
+         ],
+         "Translate User Meta Information": [
+            "תרגום מידע מטא של משתמש"
+         ],
+         "Making User Meta Information Translatable": [
+            "הפיכת מידע מטא של משתמש לניתן לתרגום"
+         ],
+         "Translate user profile strings": [
+            "תרגום מחרוזות פרופיל משתמש"
+         ],
+         "You need to visit translations on your site's front-end (<a/>) and WPML will identify all untranslated strings and list them here. ": [
+            "עליך לבקר בתרגומים בחזית האתר שלך (<a/>) ו-WPML יזהה את כל המחרוזות שלא תורגמו ויציג אותן כאן."
+         ],
+         "hide details": [
+            "הסתר פרטים"
+         ],
+         "more details": [
+            "פרטים נוספים"
+         ],
+         "Still can't find the strings you're looking to translate? Add more strings for translation.": [
+            "עדיין לא מוצא את המחרוזות שברצונך לתרגם? הוסף עוד מחרוזות לתרגום."
+         ],
+         "Translate Everything translates only those strings which are registered in English language": [
+            "תרגום הכל מתרגם רק את המחרוזות שרשומות בשפה האנגלית"
+         ],
+         "Most strings from your plugins and theme are in English, so we’re showing them alongside your default language. Use the <b>Source Language</b> filter to view strings in a specific language.": [
+            "רוב המחרוזות מהתוספים והערכת הנושא שלך הן באנגלית, לכן אנו מציגים אותן לצד שפת ברירת המחדל שלך. השתמש במסנן <b>שפת מקור</b> כדי להציג מחרוזות בשפה ספציפית."
+         ],
+         "You’re using <b>%s</b> to cache your site, which may prevent WPML from automatically registering new strings. To fix this, clear your page cache, then visit your translated pages again on the frontend to detect new strings.": [
+            "אתה משתמש ב-<b>%s</b> כדי לשמור את האתר שלך במטמון, מה שעלול למנוע מ-WPML לרשום מחרוזות חדשות באופן אוטומטי. כדי לתקן זאת, נקה את מטמון העמוד שלך ולאחר מכן בקר שוב בעמודים המתורגמים שלך בחזית האתר כדי לזהות מחרוזות חדשות."
+         ],
+         "WPML can detect strings that appear on the site and list them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here only the strings that actually appear on the site, you need to enable this feature.": [
+            "WPML יכול לזהות מחרוזות שמופיעות באתר ולהציג אותן כאן. תכונה זו עוזרת לך לזהות את המחרוזות שמופיעות בפועל באתר ולתרגם אותן. כדי לראות כאן רק את המחרוזות שמופיעות בפועל באתר, עליך להפעיל תכונה זו."
+         ],
+         "WPML detects strings that appear on the site and lists them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here all the strings in the site, you need to disable this feature.": [
+            "WPML מזהה מחרוזות שמופיעות באתר ומציג אותן כאן. תכונה זו עוזרת לך לזהות את המחרוזות שמופיעות בפועל באתר ולתרגם אותן. כדי לראות כאן את כל המחרוזות באתר, עליך להשבית תכונה זו."
+         ],
+         "Detect untranslated strings": [
+            "זהה מחרוזות לא מתורגמות"
+         ],
+         "WPML can detect untranslated strings and automatically register them for translation. This happens in real time as you or your visitors browse your website.": [
+            "WPML יכול לזהות מחרוזות לא מתורגמות ולרשום אותן אוטומטית לתרגום. זה קורה בזמן אמת בעת גלישה באתר."
+         ],
+         "Automatically register untranslated strings": [
+            "רשום אוטומטית מחרוזות לא מתורגמות"
+         ],
+         "Learn how to use auto-registration": [
+            "למד כיצד להשתמש ברישום אוטומטי"
+         ],
+         "recommended": [
+            "מומלץ"
+         ],
+         "Also register strings from the website's back-end": [
+            "רשום גם מחרוזות מצד השרת של האתר"
+         ],
+         "Save settings": [
+            "שמור הגדרות"
+         ],
+         "Request failed because of the network error": [
+            "הבקשה נכשלה בשל שגיאת רשת"
+         ],
+         "Try again": [
+            "נסה שוב"
+         ],
+         "Enabled": [
+            "מופעל"
+         ],
+         "Disabled": [
+            "מושבת"
+         ],
+         "Modify": [
+            "שנה"
+         ],
+         "You can only translate %1$s from the site's default language (%2$s).": [
+            "ניתן לתרגם %1$s רק משפת ברירת המחדל של האתר (%2$s)."
+         ],
+         "Leave existing translations as they are": [
+            "השאר את התרגומים הקיימים כמות שהם"
+         ],
+         "Overwrite existing translations": [
+            "דרוס תרגומים קיימים"
+         ],
+         "Some of the content you want to translate is already translated": [
+            "חלק מהתוכן שאתה רוצה לתרגם כבר מתורגם"
+         ],
+         "What do you want to do with the content that's already translated?": [
+            "מה ברצונך לעשות עם התוכן שכבר מתורגם?"
+         ],
+         "Suggested deadline:": [
+            "מועד אחרון מוצע:"
+         ],
+         "Set a batch name and deadline": [
+            "קבע שם אצווה ומועד אחרון"
+         ],
+         "You can assign a custom name to this batch for easy tracking and suggest a deadline to clarify the priority for translators.": [
+            "אתה יכול להקצות שם מותאם אישית לאצווה זו למעקב קל ולהציע מועד אחרון להבהרת העדיפות למתרגמים."
+         ],
+         "Batch name:": [
+            "שם האצווה:"
+         ],
+         "Default translation engine: ": [
+            "מנוע תרגום ברירת מחדל: "
+         ],
+         "Change": [
+            "שנה"
+         ],
+         "Failed to load engines": [
+            "טעינת מנועים נכשלה"
+         ],
+         "Your Automatic Translation Credits": [
+            "נקודות זכות לתרגום אוטומטי שלך"
+         ],
+         "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s translator</add_yourself> to the site.<br/> Add yourself as %s translator and click <check_again>check again</check_again> or choose a different translation option.": [
+            "כדי להקצות את עצמך כמתרגם, עליך תחילה <add_yourself>להוסיף את עצמך כמתרגם %s</add_yourself> לאתר.<br/> הוסף את עצמך כמתרגם %s ולחץ על <check_again>בדוק שוב</check_again> או בחר אפשרות תרגום אחרת."
+         ],
+         "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s to %s translator</add_yourself> to the site.<br/> Add yourself as %s to %s translator and click <check_again>check again</check_again> or choose a different translation option.": [
+            "כדי להקצות את עצמך כמתרגם, עליך קודם <add_yourself>להוסיף את עצמך כמתרגם %s ל-%s</add_yourself> לאתר.<br/> הוסף את עצמך כמתרגם %s ל-%s ולחץ על <check_again>בדוק שוב</check_again> או בחר אפשרות תרגום אחרת."
+         ],
+         "Checking": [
+            "בודק"
+         ],
+         "In order to assign a translation service, you first need to <activate_ts>activate a translation service</activate_ts>.<br/>Activate a translation service and click <check_again>check again</check_again> or choose a different translation option.": [
+            "כדי להקצות שירות תרגום, עליך תחילה <activate_ts>להפעיל שירות תרגום</activate_ts>.<br/>הפעל שירות תרגום ולחץ על <check_again>בדוק שוב</check_again> או בחר אפשרות תרגום אחרת."
+         ],
+         " Checking ": [
+            " בודק "
+         ],
+         "In order to translate automatically, you first need to <enable_ate>enable WPML's Advanced Translation Editor</enable_ate>.<br/>Enable the Advanced Translation Editor and click <check_again>check again</check_again> or choose a different translation option.": [
+            "כדי לתרגם אוטומטית, עליך תחילה <enable_ate>להפעיל את עורך התרגום המתקדם של WPML</enable_ate>.<br/>הפעל את עורך התרגום המתקדם ולחץ על <check_again>בדוק שוב</check_again> או בחר אפשרות תרגום אחרת."
+         ],
+         "The items you selected were translated with the Classic Translation Editor and cannot be sent for automatic translation.": [
+            "הפריטים שבחרת תורגמו באמצעות עורך התרגום הקלאסי ולא ניתן לשלוח אותם לתרגום אוטומטי."
+         ],
+         "Some of the items you selected were translated with the Classic Translation Editor. These cannot be sent for automatic translation.": [
+            "חלק מהפריטים שבחרת תורגמו באמצעות עורך התרגום הקלאסי. לא ניתן לשלוח אותם לתרגום אוטומטי."
+         ],
+         "Any existing content (translations) will be overwritten when creating duplicates.\nWhen duplicating content, please first duplicate parent pages to maintain the site's hierarchy.": [
+            "כל תוכן קיים (תרגומים) יימחק בעת יצירת עותקים.\nבעת שכפול תוכן, אנא שכפל תחילה דפי הורה כדי לשמור על היררכיית האתר."
+         ],
+         "Some of the selected content is already being translated. This will cancel any in-progress translations.": [
+            "חלק מהתוכן שנבחר כבר נמצא בתהליך תרגום. פעולה זו תבטל כל תרגום שנמצא בתהליך."
+         ],
+         "Connection Error. Please wait a minute and reload this page. If the problem continues, please contact WPML support.": [
+            "שגיאת חיבור. אנא המתן דקה וטען מחדש דף זה. אם הבעיה נמשכת, אנא פנה לתמיכה של WPML."
+         ],
+         "Buy credits": [
+            "קנה נקודות זכות"
+         ],
+         "You don't have enough credits to translate your content automatically.": [
+            "אין לך מספיק נקודות זכות כדי לתרגם את התוכן שלך באופן אוטומטי."
+         ],
+         "In order to assign to a translator, you first need to <add_translators>add %s translators</add_translators> to the site.<br/> Add %s translators and click <check_again>check again</check_again> or choose a different translation option.": [
+            "כדי להקצות למתרגם, עליך תחילה <add_translators>להוסיף מתרגמים %s</add_translators> לאתר.<br/> הוסף מתרגמים %s ולחץ על <check_again>בדוק שוב</check_again> או בחר אפשרות תרגום אחרת."
+         ],
+         "In order to assign to a translator, you first need to <add_translators>add %s to %s translators</add_translators> to the site.<br/> Add %s to %s translators and click <check_again>check again</check_again> or choose a different translation option.": [
+            "כדי להקצות למתרגם, עליך קודם <add_translators>להוסיף מתרגמים %s ל-%s</add_translators> לאתר.<br/> הוסף מתרגמים %s ל-%s ולחץ על <check_again>בדוק שוב</check_again> או בחר אפשרות תרגום אחרת."
+         ],
+         "Your site doesn't have any reviewers for %s. This means that you’re the only person who can review these translations.": [
+            "לאתר שלך אין סוקרים עבור %s. משמעות הדבר היא שאתה האדם היחיד שיכול לסקור תרגומים אלה."
+         ],
+         "Your site doesn't have any reviewers yet. This means that you’re the only person who can review translations.": [
+            "לאתר שלך עדיין אין סוקרים. משמעות הדבר היא שאתה האדם היחיד שיכול לסקור תרגומים."
+         ],
+         "If you want other people to review the translations, go to <a>WPML → Translation Management → Translators</a> and add translators. They will be able to both review and translate content for you.": [
+            "אם ברצונך שאנשים אחרים יסקרו את התרגומים, עבור אל <a>WPML ← ניהול תרגום ← מתרגמים</a> והוסף מתרגמים. הם יוכלו גם לסקור וגם לתרגם תוכן עבורך."
+         ],
+         "WPML does not support duplicating strings. Your selection to duplicate strings to %1$s will be ignored if you proceed with the translation.": [
+            "WPML אינו תומך בשכפול מחרוזות. בחירתך לשכפל מחרוזות ל-%1$s תתעלם אם תמשיך בתרגום."
+         ],
+         "WPML does not support duplicating %1$s elements. Your selection to duplicate elements to %2$s will be ignored if you proceed with the translation.": [
+            "WPML אינו תומך בשכפול אלמנטי %1$s. בחירתך לשכפל אלמנטים ל-%2$s תתעלם אם תמשיך בתרגום."
+         ],
+         "WPML does not support duplicating %1$s elements and strings. Your selection to duplicate elements and strings to %2$s will be ignored if you proceed with the translation.": [
+            "WPML אינו תומך בשכפול אלמנטי ומחרוזות %1$s. בחירתך לשכפל אלמנטים ומחרוזות ל-%2$s תתעלם אם תמשיך בתרגום."
+         ],
+         "WPML does not support duplicating strings.": [
+            "WPML אינו תומך בשכפול מחרוזות."
+         ],
+         "WPML does not support duplicating %1$s elements.": [
+            "WPML אינו תומך בשכפול אלמנטי %1$s."
+         ],
+         "WPML does not support duplicating %1$s elements and strings.": [
+            "WPML אינו תומך בשכפול אלמנטי ומחרוזות %1$s."
+         ],
+         "Finish setting up %s on your site": [
+            "סיים את הגדרת %s באתר שלך"
+         ],
+         "You need to authenticate %s to send them content for translation.<br/>Visit the <a>Translators tab</a> to finish the setup and click <check_again>check again</check_again> or choose a different translation option.": [
+            "עליך לאמת את %s כדי לשלוח להם תוכן לתרגום.<br/>בקר בלשונית <a>מתרגמים</a> כדי לסיים את ההגדרה ולחץ על <check_again>בדוק שוב</check_again> או בחר אפשרות תרגום אחרת."
+         ],
+         "Set Up Translate Everything Automatically": [
+            "הגדר 'תרגם הכל אוטומטית'"
+         ],
+         "WPML will translate your content into %d languages": [
+            "WPML יתרגם את התוכן שלך ל-%d שפות"
+         ],
+         "Content selected for translation": [
+            "תוכן שנבחר לתרגום"
+         ],
+         "Volume": [
+            "נפח"
+         ],
+         "~ %d words": [
+            "~ %d מילים"
+         ],
+         "Total": [
+            "סך הכל"
+         ],
+         "Sent for translation": [
+            "נשלח לתרגום"
+         ],
+         "Sending for translation failed": [
+            "שליחה לתרגום נכשלה"
+         ],
+         "You selected multiple translation methods for content across different languages:": [
+            "בחרת מספר שיטות תרגום לתוכן בשפות שונות:"
+         ],
+         "Ok": [
+            "אישור"
+         ],
+         "<s>1 item</s> is being translated automatically.": [
+            "<s>פריט אחד</s> מתורגם אוטומטית.",
+            "<s>%d פריטים</s> מתורגמים אוטומטית."
+         ],
+         "You can track their progress at the top of the page.": [
+            "ניתן לעקוב אחר ההתקדמות שלהם בחלק העליון של העמוד."
+         ],
+         "From now on, WPML will automatically translate new content on your site.": [
+            "מעתה, WPML יתרגם אוטומטית תוכן חדש באתר שלך."
+         ],
+         "This number might vary because you enabled the Translate Everything Automatically Mode.": [
+            "מספר זה עשוי להשתנות מכיוון שהפעלת את מצב תרגום הכל אוטומטית."
+         ],
+         "From now on, WPML will automatically translate your site's content.": [
+            "מעתה, WPML יתרגם אוטומטית את תוכן האתר שלך."
+         ],
+         "Automatic translations summary": [
+            "סיכום תרגומים אוטומטיים"
+         ],
+         "Some of the content that you selected for translation includes fields that are encoded. Translators will not be able to work on this kind of content, so we removed it from the job.": [
+            "חלק מהתוכן שבחרת לתרגום כולל שדות מקודדים. מתרגמים לא יוכלו לעבוד על תוכן מסוג זה, לכן הסרנו אותו מהמשימה."
+         ],
+         "To fix this problem, please contact our support team and describe this issue.": [
+            "כדי לפתור בעיה זו, אנא צור קשר עם צוות התמיכה שלנו ותאר את הבעיה."
+         ],
+         "WPML cannot send some fo the content to translation": [
+            "WPML אינו יכול לשלוח חלק מהתוכן לתרגום"
+         ],
+         "Open support ticket": [
+            "פתח כרטיס תמיכה"
+         ],
+         "<s>1 item</s> has been successfully assigned to you! To check its status, please go to <s>WPML → Translations</s>. <translations_queue/>": [
+            "<s>פריט אחד</s> הוקצה לך בהצלחה! כדי לבדוק את הסטטוס שלו, אנא עבור אל <s>WPML ← תרגומים</s>. <translations_queue/>",
+            "<s>%d פריטים</s> הוקצו לך בהצלחה! לעדכוני סטטוס, אנא עבור אל <s>WPML ← תרגומים</s>. <translations_queue/>"
+         ],
+         "Currently logged in translator summary": [
+            "סיכום מתרגם מחובר כעת"
+         ],
+         "Go to Translations": [
+            "עבור לתרגומים"
+         ],
+         "<s>1 item</s> has been duplicated.": [
+            "<s>פריט אחד</s> שוכפל.",
+            "<s>%d פריטים</s> שוכפלו."
+         ],
+         "Duplication summary": [
+            "סיכום שכפול"
+         ],
+         "There was a problem sending your content for translation.": [
+            "הייתה בעיה בשליחת התוכן שלך לתרגום."
+         ],
+         "Please try again in a few minutes. If the issue persists, please contact our support.": [
+            "אנא נסה שוב בעוד מספר דקות. אם הבעיה נמשכת, אנא פנה לתמיכה שלנו."
+         ],
+         "Some of the selected strings are already registered or translated into %s. Since their source language matches the target language, they cannot be retranslated.": [
+            "חלק מהמחרוזות שנבחרו כבר רשומות או מתורגמות ל-%s. מכיוון ששפת המקור שלהן תואמת את שפת היעד, לא ניתן לתרגם אותן מחדש."
+         ],
+         "Some of the selected content has already been translated from %s to %s and cannot be re-translated from %s to %s.": [
+            "חלק מהתוכן שנבחר כבר תורגם מ-%s ל-%s ולא ניתן לתרגם אותו מחדש מ-%s ל-%s."
+         ],
+         "Content already translated": [
+            "תוכן כבר מתורגם"
+         ],
+         "Some content couldn't be sent to translation.": [
+            "לא ניתן היה לשלוח חלק מהתוכן לתרגום."
+         ],
+         "WPML did not create translations for some languages because of the following reasons:": [
+            "WPML לא יצר תרגומים עבור חלק מהשפות מהסיבות הבאות:"
+         ],
+         "<s>1 item</s> has been successfully sent to translators!": [
+            "<s>פריט אחד</s> נשלח בהצלחה למתרגמים!",
+            "<s>%d פריטים</s> נשלחו בהצלחה למתרגמים!"
+         ],
+         "Local translations summary": [
+            "סיכום תרגומים מקומיים"
+         ],
+         "You can check their status in WPML → Translation": [
+            "ניתן לבדוק את מצבם ב-WPML ← תרגום"
+         ],
+         "Continue to %s": [
+            "המשך ל-%s"
+         ],
+         "We were unable to send the following batches for professional translation:": [
+            "לא הצלחנו לשלוח את האצוות הבאות לתרגום מקצועי:"
+         ],
+         "<p><a><s>Contact WPML support for help</s></a></p>": [
+            "<p><a><s>צור קשר עם התמיכה של WPML לעזרה</s></a></p>"
+         ],
+         "Translation Service": [
+            "שירות תרגום"
+         ],
+         "sending for professional translation..": [
+            "שולח לתרגום מקצועי.."
+         ],
+         "<s>%d item</s> is being sent for translation to %s. Please continue to their site to start the translation.": [
+            "<s>%d פריט</s> נשלח לתרגום ל-%s. אנא המשך לאתר שלהם כדי להתחיל את התרגום.",
+            "<s>%d פריטים</s> נשלחים לתרגום ל-%s. אנא המשך לאתר שלהם כדי להתחיל את התרגום."
+         ],
+         "Translation service translations summary": [
+            "סיכום תרגומים של שירות תרגום"
+         ],
+         "One or more assigned translators are invalid. The translator may have been removed or their language permissions changed.<br/> Review your settings on the <translators_page>Translators page</translators_page>.": [
+            "מתרגם אחד או יותר שהוקצו אינם תקפים. ייתכן שהמתרגם הוסר או שהרשאות השפה שלו השתנו.<br/> בדוק את ההגדרות שלך ב<translators_page>דף המתרגמים</translators_page>."
+         ],
+         "The selected translation service is no longer valid. It may have been changed, unauthenticated, or deactivated.<br/> Review your settings on the <translators_page>Translators page</translators_page>.": [
+            "שירות התרגום שנבחר אינו תקף עוד. ייתכן שהוא שונה, לא מאומת או הושבת.<br/> בדוק את ההגדרות שלך ב<translators_page>דף המתרגמים</translators_page>."
+         ],
+         "Currently selected translation editor doesn't support automatic translation. You must enable the Advanced Translation Editor to send content for automatic translation.<br/> Check your settings on the <wpml_settings>WPML settings page</wpml_settings>.": [
+            "עורך התרגום הנבחר כעת אינו תומך בתרגום אוטומטי. עליך להפעיל את עורך התרגום המתקדם כדי לשלוח תוכן לתרגום אוטומטי.<br/> בדוק את ההגדרות שלך בדף <wpml_settings>ההגדרות של WPML</wpml_settings>."
+         ],
+         "Validation error happened during send to translation.": [
+            "אירעה שגיאת אימות במהלך השליחה לתרגום."
+         ],
+         "Sending for translation": [
+            "שולח לתרגום"
+         ],
+         "Translate and Duplicate": [
+            "תרגם ושכפל"
+         ],
+         "Duplicate": [
+            "שכפל"
+         ],
+         "Translate": [
+            "תרגם"
+         ],
+         "Selected content is already translated": [
+            "התוכן שנבחר כבר מתורגם"
+         ],
+         "Please select a review option": [
+            "אנא בחרו אפשרות סקירה"
+         ],
+         "Assign local translator or choose another option": [
+            "הקצו מתרגם מקומי או בחרו אפשרות אחרת"
+         ],
+         "Assign yourself or choose another option": [
+            "הקצו את עצמכם או בחרו אפשרות אחרת"
+         ],
+         "Activate translation service or choose another option": [
+            "הפעילו שירות תרגום או בחרו אפשרות אחרת"
+         ],
+         "Activate ATE or choose another option": [
+            "הפעילו ATE או בחרו אפשרות אחרת"
+         ],
+         "Authenticate translation service or choose another option": [
+            "אמתו שירות תרגום או בחרו אפשרות אחרת"
+         ],
+         "Please don't close this page or refresh it, as doing so will cancel the translation process.": [
+            "אנא אל תסגור דף זה או תרענן אותו, מכיוון שפעולה זו תבטל את תהליך התרגום."
+         ],
+         "<s>%s</s> cannot process more than <s>%d</s> jobs in a single batch. WPML will automatically split your jobs into separate batches to ensure an error-free delivery to <s>%s</s>. <br/><br/> Do you want to proceed?": [
+            "<s>%s</s> אינו יכול לעבד יותר מ-<s>%d</s> עבודות במנה אחת. WPML יפצל אוטומטית את העבודות שלכם למנות נפרדות כדי להבטיח משלוח ללא שגיאות ל-<s>%s</s>. <br/><br/> האם ברצונכם להמשיך?"
+         ],
+         "WPML will send jobs to %s in separate batches": [
+            "WPML ישלח עבודות ל-%s במנות נפרדות"
+         ],
+         "Yes, send jobs in separate batches": [
+            "כן, שלח עבודות במנות נפרדות"
+         ],
+         "No, I will split jobs myself": [
+            "לא, אפצל את העבודות בעצמי"
+         ],
+         "This will translate only your future content": [
+            "זה יתרגם רק את התוכן העתידי שלך"
+         ],
+         "This will translate your entire site": [
+            "זה יתרגם את כל האתר שלך"
+         ],
+         "Translate everything automatically from now on, without asking me.": [
+            "תרגם הכל אוטומטית מעכשיו, בלי לשאול אותי."
+         ],
+         "What content do you want to translate?": [
+            "איזה תוכן ברצונך לתרגם?"
+         ],
+         "Translate my entire site": [
+            "תרגם את כל האתר שלי"
+         ],
+         "WPML will translate all of your site's content, including:": [
+            "WPML יתרגם את כל התוכן של האתר שלך, כולל:"
+         ],
+         "Any content that already exists but hasn't been translated yet": [
+            "כל תוכן שכבר קיים אך טרם תורגם"
+         ],
+         "All new content you create in the future": [
+            "כל תוכן חדש שתיצור בעתיד"
+         ],
+         "Hide what WPML will translate now": [
+            "הסתר מה WPML יתרגם עכשיו"
+         ],
+         "See what WPML will translate now": [
+            "ראה מה WPML יתרגם עכשיו"
+         ],
+         "Translate only future content": [
+            "תרגם רק תוכן עתידי"
+         ],
+         "WPML will translate only the content you create after enabling this translation mode.": [
+            "WPML יתרגם רק את התוכן שתיצור לאחר הפעלת מצב תרגום זה."
+         ],
+         "Existing untranslated content on your side will not be translated.": [
+            "תוכן קיים שלא תורגם באתר שלך לא יתורגם."
+         ],
+         "Existing content": [
+            "תוכן קיים"
+         ],
+         "You selected to translate strings that are in %s. Only these strings will be translated to %s.": [
+            "בחרת לתרגם מחרוזות שנמצאות ב-%s. רק מחרוזות אלו יתורגמו ל-%s."
+         ],
+         "You selected to translate strings that are in %s and %s. Only these strings will be translated to %s.": [
+            "בחרת לתרגם מחרוזות שנמצאות ב-%s וב-%s. רק מחרוזות אלו יתורגמו ל-%s."
+         ],
+         "Source language": [
+            "שפת מקור"
+         ],
+         "Target language": [
+            "שפת יעד"
+         ],
+         "Translation Method": [
+            "שיטת תרגום"
+         ],
+         "Translation service additional options": [
+            "אפשרויות נוספות לשירות תרגום"
+         ],
+         "Refresh": [
+            "רענן"
+         ],
+         "Fetching translation service data...": [
+            "מאחזר נתוני שירות תרגום..."
+         ],
+         "-": [
+            "-"
+         ],
+         "Translate automatically": [
+            "תרגם אוטומטית"
+         ],
+         "Translate myself": [
+            "תרגם בעצמי"
+         ],
+         "Assign a translator": [
+            "הקצה מתרגם"
+         ],
+         "Assign translation service": [
+            "הקצה שירות תרגום"
+         ],
+         "Do nothing": [
+            "אל תעשה דבר"
+         ],
+         "Please choose": [
+            "אנא בחר"
+         ],
+         "Choose a translator": [
+            "בחר מתרגם"
+         ],
+         "First available": [
+            "ראשון זמין"
+         ],
+         "(Me)": [
+            "(אני)"
+         ],
+         "Translation controls": [
+            "בקרות תרגום"
+         ],
+         "Step 2": [
+            "שלב 2"
+         ],
+         "Get More Features with WPML's Advanced Translation Editor": [
+            "קבל תכונות נוספות עם עורך התרגום המתקדם של WPML"
+         ],
+         "Close banner": [
+            "סגור באנר"
+         ],
+         "You're using the Classic Translation Editor, an old legacy tool, and missing out on the many features and efficiency of our Advanced Translation Editor:": [
+            "אתה משתמש בעורך התרגום הקלאסי, כלי ישן ומיושן, ומפספס את התכונות והיעילות הרבות של עורך התרגום המתקדם שלנו:"
+         ],
+         "Translation Memory": [
+            "זיכרון תרגום"
+         ],
+         "HTML Protection": [
+            "הגנת HTML"
+         ],
+         "Glossary": [
+            "מילון מונחים"
+         ],
+         "Spellchecker": [
+            "בודק איות"
+         ],
+         "AI Assistant": [
+            "עוזר בינה מלאכותית"
+         ],
+         "Automatic Translation": [
+            "תרגום אוטומטי"
+         ],
+         "Switch now for a faster, more convenient, and reliable translation experience.": [
+            "עבור עכשיו לחוויית תרגום מהירה, נוחה ואמינה יותר."
+         ],
+         "Switch Now": [
+            "עבור עכשיו"
+         ],
+         "Learn More": [
+            "למד עוד"
+         ],
+         "<a><s>Read more about automatic translation credits</s></a>": [
+            "<a><s>קרא עוד על נקודות זכות לתרגום אוטומטי</s></a>"
+         ],
+         "I understand that automatic translation uses credits": [
+            "אני מבין שתרגום אוטומטי משתמש בנקודות זכות"
+         ],
+         "Translate Everything Automatically - credit wizard error": [
+            "תרגם הכל אוטומטית - שגיאת אשף הקרדיט"
+         ],
+         "There was an error when loading the credit wizard.": [
+            "אירעה שגיאה בטעינת אשף הקרדיט."
+         ],
+         "Translate Everything Automatically - no credits": [
+            "תרגם הכל אוטומטית - אין קרדיטים"
+         ],
+         "Start Translate Everything Automatically": [
+            "התחל לתרגם הכל אוטומטית"
+         ],
+         "Continue": [
+            "המשך"
+         ],
+         "Go back": [
+            "חזור"
+         ],
+         "You can start using Translate Everything Automatically after sending some content for translation. We recommend that you review these translations and make sure that they are good before translating your entire site's content.": [
+            "תוכל להתחיל להשתמש בתרגום הכל אוטומטית לאחר שליחת חלק מהתוכן לתרגום. אנו ממליצים לך לבדוק את התרגומים האלה ולוודא שהם טובים לפני תרגום כל תוכן האתר שלך."
+         ],
+         "Translate Everything Automatically - disabled": [
+            "תרגם הכל אוטומטית - מושבת"
+         ],
+         "Translate Everything Automatically": [
+            "תרגם הכל אוטומטית"
+         ],
+         "Automatically translate your entire site, but only from %s to %s.": [
+            "תרגם אוטומטית את כל האתר שלך, אבל רק מ-%s ל-%s."
+         ],
+         "Translate Everything Automatically - pausing": [
+            "תרגם הכל אוטומטית - מושהה"
+         ],
+         "Translate Everything Automatically is pausing": [
+            "תרגם הכל אוטומטית מושהה"
+         ],
+         "Translate Everything Automatically - paused": [
+            "תרגם הכל אוטומטית - מושהה"
+         ],
+         "%d translation left in the queue. Preparing more content for translation.": [
+            "%d תרגום נותר בתור. מכין עוד תוכן לתרגום.",
+            "%d תרגומים נותרו בתור. מכין עוד תוכן לתרגום."
+         ],
+         "Preparing content for translation...": [
+            "מכין תוכן לתרגום..."
+         ],
+         "%d translation left in the queue...": [
+            "%d תרגום נותר בתור...",
+            "%d תרגומים נותרו בתור..."
+         ],
+         "Translate Everything Automatically has finished translating your content. There are no pending translations in the queue.": [
+            "תרגום הכל אוטומטית סיים לתרגם את התוכן שלך. אין תרגומים ממתינים בתור."
+         ],
+         "Some items were translated using the Classic Translation Editor and cannot be sent for automatic translation. Please select these items and choose the option to translate them yourself.": [
+            "חלק מהפריטים תורגמו באמצעות עורך התרגום הקלאסי ולא ניתן לשלוח אותם לתרגום אוטומטי. אנא בחר פריטים אלה ובחר באפשרות לתרגם אותם בעצמך."
+         ],
+         "Translate Everything Automatically - enabled": [
+            "תרגם הכל אוטומטית - מופעל"
+         ],
+         "Translate Everything Automatically is enabled": [
+            "תרגום אוטומטי של הכל מופעל"
+         ],
+         "As you create new content or edit existing content, WPML will automatically translate it, but only from %s to %s.": [
+            "כאשר אתה יוצר תוכן חדש או עורך תוכן קיים, WPML יתרגם אותו אוטומטית, אך רק מ-%s ל-%s."
+         ],
+         "You have <s>%s</s> prepaid translation credits in your wpml.org account. Assign these credits to your site to start using automatic translation": [
+            "יש לך <s>%s</s> נקודות זכות לתרגום בחשבון wpml.org שלך. הקצה אותן לאתר שלך כדי להתחיל להשתמש בתרגום אוטומטי"
+         ],
+         "Translation not running... there is an issue that needs your attention. Fix it to continue.": [
+            "התרגום לא פועל... יש בעיה הדורשת את תשומת לבך. תקן אותה כדי להמשיך."
+         ],
+         "Assign credits now": [
+            "הקצה נקודות זכות עכשיו"
+         ],
+         "Fix now": [
+            "תקן עכשיו"
+         ],
+         "Translate Everything Automatically is stopped": [
+            "תרגם הכל אוטומטית מופסק"
+         ],
+         "Out of Credits for Automatic Translation": [
+            "אזלו נקודות הזכות לתרגום אוטומטי"
+         ],
+         "Automatic translations completed": [
+            "תרגומים אוטומטיים הושלמו"
+         ],
+         "<s>1 translation</s> has been successfully translated automatically": [
+            "<s>תרגום אחד</s> תורגם בהצלחה באופן אוטומטי",
+            "<s>%d תרגומים</s> תורגמו בהצלחה באופן אוטומטי"
+         ],
+         "Automatic jobs in progress": [
+            "משימות אוטומטיות בתהליך"
+         ],
+         "<s>%d automatic translation</s> is in progress": [
+            "<s>תרגום אוטומטי %d</s> מתבצע כעת",
+            "<s>%d תרגומים אוטומטיים</s> מתבצעים כעת"
+         ],
+         "Your default language, %s, must be mapped to a supported language in order to use automatic translation": [
+            "שפת ברירת המחדל שלך, %s, חייבת להיות ממופה לשפה נתמכת כדי להשתמש בתרגום אוטומטי"
+         ],
+         "Map the language": [
+            "מפה את השפה"
+         ],
+         "%d translations ": [
+            "%d תרגומים "
+         ],
+         "%d translation ": [
+            "%d תרגום "
+         ],
+         "this includes translations from Translate Everything Automatically": [
+            "זה כולל תרגומים מתרגום הכל אוטומטית"
+         ],
+         "are waiting for your review": [
+            "ממתינים לסקירה שלך"
+         ],
+         "is waiting for your review": [
+            "ממתין לסקירה שלך"
+         ],
+         "Review Translations": [
+            "בדוק תרגומים"
+         ],
+         "Translate existing content": [
+            "תרגם תוכן קיים"
+         ],
+         "Translate now": [
+            "תרגם עכשיו"
+         ],
+         "Starting with version 4.7, WPML will also automatically translate texts (strings) coming from %s.": [
+            "החל מגרסה 4.7, WPML יתרגם אוטומטית גם טקסטים (מחרוזות) שמגיעים מ-%s."
+         ],
+         "WPML will not translate existing texts of this type but any new ones you create will be automatically translated. If you prefer, you can <button />.": [
+            "WPML לא יתרגם טקסטים קיימים מסוג זה, אבל כל טקסט חדש שתיצור יתורגם אוטומטית. אם תעדיף, תוכל <button />."
+         ],
+         "Starting with version 4.7, WPML will also automatically translate:": [
+            "החל מגרסה 4.7, WPML יתרגם אוטומטית גם:"
+         ],
+         "Content set to \"use translation if available or fallback to default language\": %s.": [
+            "תוכן שהוגדר ל \"שימוש בתרגום אם זמין או חזרה לשפת ברירת המחדל\": %s."
+         ],
+         "Texts (strings) coming from: %s.": [
+            "טקסטים (מחרוזות) שמגיעים מ: %s."
+         ],
+         "WPML will not translate existing content for these post types and texts but any new content you create will be automatically translated. If you prefer, you can start <button />.": [
+            "WPML לא יתרגם תוכן קיים עבור סוגי פוסטים וטקסטים אלה, אבל כל תוכן חדש שתיצור יתורגם אוטומטית. אם תעדיף, תוכל להתחיל <button />."
+         ],
+         "WPML will not translate existing content for these post types but any new content you create will be automatically translated. If you prefer, you can start <button />.": [
+            "WPML לא יתרגם תוכן קיים עבור סוגי פוסטים אלה, אבל כל תוכן חדש שתיצור יתורגם אוטומטית. אם תעדיף, תוכל להתחיל <button />."
+         ],
+         "start translating existing content now": [
+            "להתחיל לתרגם תוכן קיים עכשיו"
+         ],
+         "The following target languages do not support automatic translations: %s": [
+            "שפות היעד הבאות אינן תומכות בתרגומים אוטומטיים: %s"
+         ],
+         "To enable automatic translation map them to known languages.": [
+            "כדי לאפשר תרגום אוטומטי, מפה אותן לשפות ידועות."
+         ],
+         "Map to known languages": [
+            "מפה לשפות ידועות"
+         ],
+         "Translation status": [
+            "סטטוס תרגום"
+         ],
+         "Default language does not support automatic translations.": [
+            "שפת ברירת המחדל אינה תומכת בתרגומים אוטומטיים."
+         ],
+         "You must enable ATE to activate Translate Everything Automatically.": [
+            "עליך להפעיל את ATE כדי להפעיל את תרגום הכל אוטומטית."
+         ],
+         "This item needs an update but cannot be translated automatically because it was manually translated.\nPlease, select the item and send for manual translation.": [
+            "פריט זה זקוק לעדכון אך לא ניתן לתרגם אותו אוטומטית מכיוון שהוא תורגם ידנית.\nאנא בחר את הפריט ושלח לתרגום ידני."
+         ],
+         "This item needs update. Please, select the item and send for translation.": [
+            "פריט זה זקוק לעדכון. אנא בחר את הפריט ושלח לתרגום."
+         ],
+         "Translations completed with the Classic Translation Editor cannot be sent for automatic translation": [
+            "תרגומים שהושלמו באמצעות עורך התרגום הקלאסי לא ניתן לשלוח לתרגום אוטומטי"
+         ],
+         "automatic translation": [
+            "תרגום אוטומטי"
+         ],
+         "unassigned": [
+            "לא הוקצה"
+         ],
+         "not translated": [
+            "לא מתורגם"
+         ],
+         "waiting for translator": [
+            "ממתין למתרגם"
+         ],
+         "in progress": [
+            "בתהליך"
+         ],
+         "needs update": [
+            "דורש עדכון"
+         ],
+         "duplicate": [
+            "כפול"
+         ],
+         "complete": [
+            "הושלם"
+         ],
+         "needs review": [
+            "דורש בדיקה"
+         ],
+         "preparing for translation": [
+            "מכין לתרגום"
+         ],
+         "needs attention": [
+            "דורש תשומת לב"
+         ],
+         "%1$s: %2$s%3$s": [
+            "%1$s: %2$s%3$s"
+         ],
+         "Could not fetch engines data": [
+            "לא ניתן היה לאחזר נתוני מנועים"
+         ],
+         "Error in fetching currently logged in translator": [
+            "שגיאה בהבאת המתרגם המחובר כעת"
+         ],
+         "Error in fetching local translators": [
+            "שגיאה בהבאת מתרגמים מקומיים"
+         ],
+         "Published": [
+            "פורסם"
+         ],
+         "Draft": [
+            "טיוטה"
+         ],
+         "Trash": [
+            "אשפה"
+         ],
+         "Pending": [
+            "ממתין"
+         ],
+         "Private": [
+            "פרטי"
+         ],
+         "Future": [
+            "עתידי"
+         ],
+         "Auto Draft": [
+            "טיוטה אוטומטית"
+         ],
+         "External": [
+            "חיצוני"
+         ],
+         "Collapse": [
+            "כווץ"
+         ],
+         "Expand": [
+            "הרחב"
+         ],
+         "Close modal": [
+            "סגור חלון מודאלי"
+         ],
+         "Select an item": [
+            "בחר פריט"
+         ],
+         "Search": [
+            "חיפוש"
+         ],
+         "No items found": [
+            "לא נמצאו פריטים"
+         ],
+         "OFF": [
+            "כבוי"
+         ],
+         "ON": [
+            "פועל"
+         ],
+         "%1$s Flag": [
+            "דגל %1$s"
+         ],
+         "What would you like to do after WPML finishes translating your content automatically?": [
+            "מה תרצה לעשות לאחר ש-WPML יסיים לתרגם את התוכן שלך אוטומטית?"
+         ],
+         "Wait for review": [
+            "המתן לסקירה"
+         ],
+         "Recommended with DeepL, Google and Microsoft": [
+            "מומלץ עם DeepL, Google ו-Microsoft"
+         ],
+         "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process.": [
+            "DeepL, Google ו-Microsoft מספקות תרגומים נהדרים, אבל אנו ממליצים על סקירה אנושית כדי לאשר שהם נכונים. WPML AI מספק תרגומים טובים יותר מבני אדם שמבינים הקשר, כך שתוכל לדלג בבטחה על תהליך הסקירה."
+         ],
+         "WPML keeps translations unpublished, so you can review them first.": [
+            "WPML שומר תרגומים כלא מפורסמים, כך שתוכל לסקור אותם תחילה."
+         ],
+         "Your translators review and approve translations before publishing.": [
+            "המתרגמים שלך סוקרים ומאשרים תרגומים לפני פרסום."
+         ],
+         "Publish and mark for review": [
+            "פרסם וסמן לסקירה"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "WPML מפרסם תרגומים מיד אך מסמן אותם לבדיקה שלך בזמנך החופשי."
+         ],
+         "WPML publishes translations immediately but flags them for translators to review later.": [
+            "WPML מפרסם תרגומים מיד אך מסמן אותם למתרגמים לסקירה מאוחרת יותר."
+         ],
+         "Publish without review": [
+            "פרסם ללא סקירה"
+         ],
+         "Recommended with WPML AI": [
+            "מומלץ עם WPML AI"
+         ],
+         "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy.": [
+            "WPML AI מספק תרגומים טובים יותר מאדם שלעתים רחוקות זקוקים לשיפורים, כך שתוכל לדלג בביטחון על תהליך הסקירה. עבור מנועי תרגום אחרים, מומלצת סקירה אנושית כדי לאשר דיוק."
+         ],
+         "WPML publishes translations immediately, skipping the review process.": [
+            "WPML מפרסם תרגומים מיד, תוך דילוג על תהליך הסקירה."
+         ]
+      }
+   }
+}

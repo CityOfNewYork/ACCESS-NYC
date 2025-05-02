@@ -1,5 +1,6 @@
 <?php
 
+#[AllowDynamicProperties]
 class WPML_LS_Menu_Item {
 
 	/**
@@ -45,8 +46,7 @@ class WPML_LS_Menu_Item {
 		$this->object_id        = isset( $lang['db_id'] ) ? $lang['db_id'] : null;
 		$this->db_id            = isset( $lang['db_id'] ) ? $lang['db_id'] : null;
 		$this->menu_item_parent = isset( $lang['menu_item_parent'] ) ? $lang['menu_item_parent'] : null;
-		$this->attr_title       = isset( $lang['display_name'] )
-			? $lang['display_name'] : ( isset( $lang['native_name'] ) ? $lang['native_name'] : '' );
+		$this->attr_title       = __( 'Switch to ', 'sitepress' ) . ( $lang['display_name'] ?? $lang['native_name'] ?? '' );
 		$this->title            = $item_content;
 		$this->post_title       = $item_content;
 		$this->url              = isset( $lang['url'] ) ? $lang['url'] : null;

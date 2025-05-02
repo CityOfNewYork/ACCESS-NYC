@@ -8,8 +8,10 @@ use WPML\Collect\Support\Collection;
 use WPML\FP\Lst;
 use WPML\FP\Obj;
 use WPML\TM\ATE\API\RequestException;
+use WPML\TM\ATE\Jobs;
 use WPML\TM\ATE\Log\Entry;
 use WPML\TM\ATE\Log\EventsTypes;
+use WPML\TM\ATE\Review\ReviewStatus;
 use WPML_TM_ATE_API;
 use function WPML\FP\pipe;
 
@@ -31,7 +33,18 @@ class Process {
 	 * @return Collection
 	 */
 	public function run( $jobs ) {
-		$jobs = \wpml_collect( $jobs )->map( function ( $job ) {
+		$appendNeedsReviewAndAutomaticValues = function ( $job ) {
+			$data = \WPML\TM\API\Jobs::get( Obj::prop('jobId', $job) );
+
+			$job = Obj::assoc( 'needsReview', ReviewStatus::doesJobNeedReview( $data ), $job );
+			$job = Obj::assoc( 'automatic', (bool) Obj::prop( 'automatic', $data ), $job );
+			$job = Obj::assoc( 'language_code', Obj::prop( 'language_code', $data ), $job );
+			$job = Obj::assoc( 'original_element_id', (int) Obj::prop( 'original_doc_id', $data ), $job );
+
+			return $job;
+		};
+
+		$downloadJob = function( $job ) {
 			$processedJob = null;
 
 			try {
@@ -48,8 +61,8 @@ class Process {
 						);
 
 						$message .= ' ' . $stringifyError(
-							$iclTranslationManagement->messages_by_type( 'error ')
-						);
+								$iclTranslationManagement->messages_by_type( 'error ')
+							);
 					}
 
 					throw new Exception( $message );
@@ -61,9 +74,13 @@ class Process {
 			}
 
 			return $processedJob;
-		} )->filter()->values();
+		};
+
+		$jobs = \wpml_collect( $jobs )->map( $downloadJob )->filter()->values()->map( $appendNeedsReviewAndAutomaticValues );
 
 		$this->acknowledgeAte( $jobs );
+
+		do_action( 'wpml_tm_ate_jobs_downloaded', $jobs );
 
 		return $jobs;
 	}

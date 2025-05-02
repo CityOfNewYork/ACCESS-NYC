@@ -22,7 +22,6 @@ class Strings {
 	 * @param string $locale
 	 *
 	 * @return array
-	 * @throws \WPML\Auryn\InjectionException
 	 */
 	public static function fromMo( $locale ) {
 		$langCode = Languages::localeToCode( $locale );

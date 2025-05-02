@@ -4,7 +4,7 @@ namespace WPML\PB\Elementor\LanguageSwitcher;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Color as SchemeColor;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 
 class WidgetAdaptor {
 
@@ -47,7 +47,7 @@ class WidgetAdaptor {
 	 * `start_controls_tab()`.
 	 */
 	public function registerControls() {
-		//Content Tab
+		// Content Tab.
 		$this->widget->start_controls_section(
 			'section_content',
 			[
@@ -60,7 +60,7 @@ class WidgetAdaptor {
 		$this->widget->add_control(
 			'style',
 			[
-				'label'   => __('Language switcher type', 'sitepress'),
+				'label'   => __( 'Language switcher type', 'sitepress' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => 'custom',
 				'options' => [
@@ -88,16 +88,6 @@ class WidgetAdaptor {
 				'type'         => Controls_Manager::SWITCHER,
 				'return_value' => 1,
 				'default'      => 1,
-				'conditions' => [
-					'relation' => 'and',
-					'terms'    => [
-						[
-							'name'     => 'style',
-							'operator' => '!=',
-							'value'   => 'custom',
-						]
-					]
-				],
 			]
 		);
 
@@ -152,9 +142,8 @@ class WidgetAdaptor {
 			[
 				'label'     => __( 'Text Color', 'sitepress' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => SchemeColor::get_type(),
-					'value' => SchemeColor::COLOR_3,
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
 				],
 				'default'   => '',
 				'selectors' => [
@@ -201,9 +190,8 @@ class WidgetAdaptor {
 			[
 				'label'     => __( 'Text Color', 'sitepress' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => SchemeColor::get_type(),
-					'value' => SchemeColor::COLOR_4,
+				'global'    => [
+					'default' => Global_Colors::COLOR_ACCENT,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .wpml-elementor-ls .wpml-ls-legacy-dropdown a:hover,
@@ -262,7 +250,7 @@ class WidgetAdaptor {
 		$this->widget->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name' => 'post_translation_typography',
+				'name'     => 'post_translation_typography',
 				'selector' => '{{WRAPPER}} .wpml-elementor-ls .wpml-ls-statics-post_translations',
 			]
 		);
@@ -272,9 +260,8 @@ class WidgetAdaptor {
 			[
 				'label'     => __( 'Text Color', 'sitepress' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => SchemeColor::get_type(),
-					'value' => SchemeColor::COLOR_3,
+				'global'    => [
+					'default' => Global_Colors::COLOR_TEXT,
 				],
 				'default'   => '',
 				'selectors' => [
@@ -343,13 +330,8 @@ class WidgetAdaptor {
 			'type'                          => $settings['style'],
 		);
 
-		if ( 'custom' === $settings['style'] ) {
-			//forcing in dropdown case
-			$args['display_link_for_current_lang'] = 1;
-		}
-
-		echo "<div " . $this->widget->get_render_attribute_string('wpml-elementor-ls') . ">";
-		do_action('wpml_language_switcher', $args);
-		echo "</div>";
+		echo '<div ' . $this->widget->get_render_attribute_string( 'wpml-elementor-ls' ) . '>';
+		do_action( 'wpml_language_switcher', $args );
+		echo '</div>';
 	}
 }

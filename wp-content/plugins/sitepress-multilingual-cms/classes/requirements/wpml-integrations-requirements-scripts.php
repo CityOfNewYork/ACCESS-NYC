@@ -1,5 +1,7 @@
 <?php
 
+use WPML\Core\WP\App\Resources;
+
 class WPML_Integrations_Requirements_Scripts {
 
 	public function add_translation_editor_notice_hook() {
@@ -7,7 +9,7 @@ class WPML_Integrations_Requirements_Scripts {
 	}
 
 	public function enqueue_translation_editor_notice_script() {
-		wp_enqueue_script( 'wpml-integrations-requirements-scripts', ICL_PLUGIN_URL . '/res/js/requirements/integrations-requirements.js', array( 'jquery' ) );
+		wp_enqueue_script( 'wpml-integrations-requirements-scripts', ICL_PLUGIN_URL . '/res/js/requirements/integrations-requirements.js', array( 'jquery' ), ICL_SITEPRESS_SCRIPT_VERSION );
 	}
 
 	public function add_plugins_activation_hook() {
@@ -15,6 +17,6 @@ class WPML_Integrations_Requirements_Scripts {
 	}
 
 	public function enqueue_plugin_activation_script() {
-		wp_enqueue_script( 'wpml-requirements-plugins-activation', ICL_PLUGIN_URL . '/dist/js/wpml-requirements/app.js', array(), ICL_SITEPRESS_VERSION );
+		wp_enqueue_script( 'wpml-requirements-plugins-activation', ICL_PLUGIN_URL . '/dist/js/wpml-requirements/app.js', array( Resources::vendorAsDependency() ), ICL_SITEPRESS_SCRIPT_VERSION );
 	}
 }

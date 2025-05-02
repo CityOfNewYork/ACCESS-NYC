@@ -16,10 +16,14 @@ class WPML_TM_Old_Editor implements IWPML_Action {
 	public function handle_custom_ajax_call( $call, $data ) {
 		if ( self::CUSTOM_AJAX_CALL === $call ) {
 			if ( ! isset( $data[ WPML_TM_Old_Jobs_Editor::OPTION_NAME ] ) ) {
-				return;
+				// Since WPML 4.7, the option is a checkbox.
+				// The default value when it's not checked is WPML.
+				$old_editor = WPML_TM_Editors::WPML;
+			} else {
+				$old_editor = strtolower($data[ WPML_TM_Old_Jobs_Editor::OPTION_NAME ]) == WPML_TM_Editors::ATE ?
+					WPML_TM_Editors::ATE :
+					WPML_TM_Editors::WPML;
 			}
-
-			$old_editor = $data[ WPML_TM_Old_Jobs_Editor::OPTION_NAME ];
 
 			if ( ! in_array( $old_editor, array( WPML_TM_Editors::WPML, WPML_TM_Editors::ATE ), true ) ) {
 				return;

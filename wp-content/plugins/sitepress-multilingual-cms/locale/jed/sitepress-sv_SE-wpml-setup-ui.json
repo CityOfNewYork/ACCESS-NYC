@@ -15,10 +15,10 @@
             "till:"
          ],
          "Set language pair(s) for Translator %s:": [
-            "Ange språkpar för översättaren %s:"
+            "Ställ in språkpar för översättare %s:"
          ],
          "+ Add more language pairs for this translator": [
-            "+ Lägg till fler språkpar för den här översättaren"
+            "+ Lägg till fler språkpar för denna översättare"
          ],
          "First Name": [
             "Förnamn"
@@ -30,16 +30,16 @@
             "Roll"
          ],
          "(required)": [
-            " (krävs)"
+            "(obligatoriskt)"
          ],
          "Make sure that you have provided a correct email address e.g. name@domain.com": [
-            "Se till att du har lämnat en korrekt e-postadress till exempel namn@domain.com"
+            "Se till att du har angett en korrekt e-postadress t.ex. name@domain.com"
          ],
          "This field is required": [
             "Detta fält är obligatoriskt"
          ],
          "A translator can be any WordPress role.": [
-            "En översättare kan vara vilken som helst WordPress -roll."
+            "En översättare kan ha vilken WordPress-roll som helst."
          ],
          "Username": [
             "Användarnamn"
@@ -50,32 +50,20 @@
          "Search": [
             "Sök"
          ],
-         "What should happen with your automatically translated content?": [
-            "Vad ska hända med ditt automatiskt översatta innehåll?"
-         ],
-         "Let me review it before it gets published": [
-            "Låt mig granska det innan det publiceras"
-         ],
-         "Publish right away but mark as not reviewed so I can take a look later": [
-            "Publicera direkt men markera som ej granskad så att jag kan ta en titt senare"
-         ],
-         "Publish right away without reviewing": [
-            "Publicera direkt utan att granska"
-         ],
          "Who will translate?": [
             "Vem ska översätta?"
          ],
          "Only myself": [
-            "Bara jag"
+            "Endast jag själv"
          ],
          "You will be the sole translator for this site.": [
-            "Du kommer att vara den enda översättaren för den här webbplatsen."
+            "Du kommer att vara den enda översättaren för denna webbplats."
          ],
          "Users of this site": [
-            "Användare på den här webbplatsen"
+            "Användare av denna webbplats"
          ],
          "You will choose or create new users of this WordPress site as the translators. You can also choose yourself. This allows you to set up a team of translators working in different language pairs.": [
-            "Du kommer att välja eller skapa nya användare av denna WordPress -webbplats som översättare. Du kan också välja själv. Detta gör att du kan skapa ett team av översättare som arbetar i olika språkpar istället."
+            "Du kommer att välja eller skapa nya användare av denna WordPress-webbplats som översättare. Du kan också välja dig själv. Detta gör att du kan sätta upp ett team av översättare som arbetar med olika språkpar."
          ],
          "Translation Service: %s": [
             "Översättningstjänst: %s"
@@ -84,85 +72,37 @@
             "En professionell översättningstjänst"
          ],
          "You have preselected %s to translate your content. Finish setting it up by entering the API token they provided to you.": [
-            "Du har valt %s för att översätta ditt innehåll. Slutför konfigureringen genom att ange den API-token du fått från dem."
+            "Du har förvalt %s för att översätta ditt innehåll. Slutför inställningen genom att ange API-token som de har gett dig."
          ],
          "WPML offers tight integration with over 70 translation services. You will choose the translation service that you prefer and enjoy a streamlined process for sending jobs and receiving completed translations.": [
-            "WPML erbjuder tät integrering med fler än 70 översättningstjänster. Du väljer den översättningstjänst du föredrar och kan njuta av en smidig process för att skicka jobb och få tillbaka färdiga översättningar."
+            "WPML erbjuder tät integration med över 70 översättningstjänster. Du väljer den översättningstjänst du föredrar och får en strömlinjeformad process för att skicka jobb och ta emot färdiga översättningar."
          ],
          "I want to set a \"Translation Manager\" who will choose the translators for this site": [
-            "Jag vill ange en \"Översättningshanterare\" som väljer översättare för denna webbplats"
+            "Jag vill utse en “Översättningsansvarig” som väljer översättarna för denna webbplats"
          ],
          "You will choose a user of this site and delegate the setup of translators to him/her. Choose this option when you are building a website for a client, who will set up translator users or choose a translation service.": [
-            "Du kommer att välja en användare på den här webbplatsen och delegera skapandet av översättare till honom/henne. Välj detta alternativ när du skapar en webbplats åt en kund som själv kommer att ange översättaranvändare eller välja en översättningstjänst."
-         ],
-         "Translate Everything Automatically": [
-            "Översätt allt automatiskt"
-         ],
-         "Let WPML do the translating for you": [
-            "Låt WPML göra översättningen åt dig"
-         ],
-         "Translates all your published content automatically": [
-            "Översätter automatiskt allt ditt publicerade innehåll"
-         ],
-         "Uses machine translation powered by Google, Microsoft, or DeepL": [
-            "Använde maskinöversättning från Google, Microsoft eller DeepL"
-         ],
-         "Instantly translates new content and updates translations whenever you edit a page or post": [
-            "Översätter omedelbart nytt innehåll och uppdaterar översättningar när du ändrar en sida eller ett inlägg"
-         ],
-         "You can review translations before publishing or hire professional reviewers": [
-            "Du kan granska översättningar innan du publicerar eller anlita professionella granskare"
-         ],
-         "Affordable and fast": [
-            "Prisvärt och snabbt"
-         ],
-         "How would you like to translate the content?": [
-            "Hur vill du översätta innehållet?"
-         ],
-         "Choose": [
-            "Välj"
-         ],
-         "Translate What You Choose": [
-            "Översätt det du själv väljer"
-         ],
-         "You decide what to translate and who'll translate it": [
-            "Du bestämmer vad som ska översättas och vem som ska översätta det"
-         ],
-         "Translate yourself": [
-            "Översätt själv"
-         ],
-         "Use automatic translation on the content you choose": [
-            "Använd automatisk översättning på det innehåll du väljer"
-         ],
-         "Work with translators that are users of your site": [
-            "Arbeta med översättare som är användare på din webbplats"
-         ],
-         "or": [
-            "eller"
-         ],
-         "Send to professional translation services": [
-            "Skicka till professionella översättningstjänster"
+            "Du kommer att välja en användare av denna webbplats och delegera inställningen av översättare till honom/henne. Välj detta alternativ när du bygger en webbplats åt en kund som kommer att ställa in översättaranvändare eller välja en översättningstjänst."
          ],
          "user": [
             "användare"
          ],
          "Editor": [
-            "Redigerare"
+            "Redaktör"
          ],
          "Select an existing %s and set as Translation Manager": [
-            "Välj en befintlig %s och ange som Översättningshanteraren"
+            "Välj en befintlig %s och utse som Översättningsansvarig"
          ],
          "Create a new %s and set as Translation Manager": [
-            "Skapa en ny %s och ange Översättningshanteraren"
+            "Skapa en ny %s och utse som Översättningsansvarig"
          ],
          "Cancel": [
             "Avbryt"
          ],
          "Add Translation Manager": [
-            "Lägg till översättningshanterare"
+            "Lägg till Översättningsansvarig"
          ],
          "Add a Translation Manager": [
-            "Lägg till en översättningshanterare"
+            "Lägg till en Översättningsansvarig"
          ],
          "Set language pair(s)": [
             "Ställ in språkpar"
@@ -174,16 +114,16 @@
             "Spara"
          ],
          "Add a Translator": [
-            "Lägg till en översättare"
+            "Lägg till en Översättare"
          ],
          "Select an existing user and set as Translator": [
-            "Välj en befintlig användare och ange som översättare"
+            "Välj en befintlig användare och utse som Översättare"
          ],
          "Create a new user and set as Translator": [
-            "Skapa en ny användare och ange som översättare"
+            "Skapa en ny användare och utse som Översättare"
          ],
          "Edit language pair(s) for translator": [
-            "Redigera översättarens språkpar"
+            "Redigera språkpar för översättare"
          ],
          "Name": [
             "Namn"
@@ -195,46 +135,46 @@
             "Du kan översätta till och från alla språk"
          ],
          "%s file upload failed.": [
-            "%s filöverföring misslyckades."
+            "%s filuppladdning misslyckades."
          ],
          "Flag": [
             "Flagga"
          ],
          "Flag file": [
-            "Flagga fil"
+            "Flaggfil"
          ],
          "You just added  language. Next, select it as the site's default language or a translation language.": [
-            "Du har precis lagt till språk. Välj sedan det som standardspråk för webbplatsen eller översättningsspråk."
+            "Du har just lagt till språk. Välj det nu som webbplatsens standardspråk eller som ett översättningsspråk."
          ],
          "Language added": [
-            "Språk tillagd"
+            "Språk tillagt"
          ],
          "The value \"%s\" already exists": [
-            "Värdet \"%s\" finns redan"
+            "Värdet “%s” finns redan"
          ],
          "Add a new language": [
             "Lägg till ett nytt språk"
          ],
          "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
-            "Skapa ett landsspecifikt språk genom att välja det allmänna språket i listan nedan. Välj sedan landet det ska vara lokaliserad för."
+            "Skapa ett landsspecifikt språk genom att välja det allmänna språket från listan nedan. Välj sedan landet det ska lokaliseras för."
          ],
          "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
             "Genom att välja en kombination som redan finns i databasen kan WPML hjälpa till att fylla i de nödvändiga fälten. Läs mer om <AddingACustomLanguageLink />."
          ],
          "Cannot find?": [
-            "Kan inte hitta?"
+            "Hittar du inte?"
          ],
          "Click here": [
             "Klicka här"
          ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
-            "Fel format. Den får bara innehålla små bokstäver och \"-\". T.ex. \"fr\", \"pt-br\", \"zh-hans\""
+            "Fel format. Det får endast innehålla små bokstäver och “-”. T.ex: “fr”, “pt-br”, “zh-hans”"
          ],
          "Language": [
             "Språk"
          ],
          "Location": [
-            "Lokalisering"
+            "Plats"
          ],
          "Code": [
             "Kod"
@@ -249,16 +189,16 @@
             "Mappa inte detta språk"
          ],
          "Default locale": [
-            "Standardspråkversion"
+            "Standardlokal"
          ],
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
-            "Fel format. Den får bara innehålla små bokstäver och \"_\". T.ex. \"de\", \"de_DE\", \"zh_Hant_TW\""
+            "Fel format. Det får endast innehålla små bokstäver och “_”. T.ex: “de”, “de_DE”, “zh_Hant_TW”"
          ],
          "hreflang": [
             "hreflang"
          ],
          "Encode url?": [
-            "Koda URL?"
+            "Koda url?"
          ],
          "Flags must be:": [
             "Flaggor måste vara:"
@@ -270,10 +210,10 @@
             "JA"
          ],
          " (required)": [
-            " (krävs)"
+            " (obligatoriskt)"
          ],
          "Please fill in the field": [
-            "Fyll i fältet"
+            "Vänligen fyll i fältet"
          ],
          "PNG, SVG, or JPG files": [
             "PNG-, SVG- eller JPG-filer"
@@ -285,88 +225,112 @@
             "18 x 12 pixlar"
          ],
          "Read more about ": [
-            "Läs mer om"
+            "Läs mer om "
          ],
          "The name of your language as it will appear on your site's language switcher.": [
-            "Namnet på språket så som det kommer att visas på webbplatsens språkväxlare."
+            "Namnet på ditt språk som det kommer att visas i din webbplats språkväljare."
          ],
          "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
-            "Ett unikt värde som identifierar språket i databasen och URL. Språkskoden kan inte ändras när den har sparats."
+            "Ett unikt värde som identifierar språket i databasen och URL:en. När det har sparats kan språkkoden inte ändras."
          ],
          "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
-            "Om ditt anpassade språk liknar ett befintligt språk kan du använda det befintliga språkets stavningskontroll och automatisk översättning. Om ditt anpassade språk till exempel är schweiziskt-tyska du kan mappa till tyska som det språk som ska användas för stavningskontroll och automatisk översättning. Om du inte mappar ditt anpassade språk till ett befintligt språk är stavningskontroll och automatiska översättningsfunktioner inte tillgängliga på det språket."
+            "Om ditt anpassade språk liknar ett befintligt språk kan du använda det befintliga språkets stavningskontroll och automatiska översättning. Till exempel, om ditt anpassade språk är schweizisk-tyska kan du mappa till tyska som språk att använda för stavningskontroll och automatisk översättning. Om du inte mappar ditt anpassade språk till ett befintligt språk kommer funktioner för stavningskontroll och automatisk översättning inte att vara tillgängliga på det språket."
          ],
          "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
-            "Värdet WPML kontrollerar när man läser in översättningar från MO- och PO-filer. Standardspråket ingår i filnamnen i mappen /wp-content/languages/ i din WordPress-installation."
+            "Det värde WPML kontrollerar vid inläsning av översättningar från MO- och PO-filer. Standardlokalen ingår i filnamnen i mappen /wp-content/languages/ i din WordPress-installation."
          ],
          "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
-            "Google använder attributet hreflang för att dirigera användare till webbplatser på deras relevanta språk och plats. Exempel:"
+            "Google använder hreflang-attributet för att dirigera användare till webbplatser på deras relevanta språk och plats. Exempel:"
          ],
          "All English-speaking users: en": [
-            "Alla engelsktalande användare: en"
+            "Alla engelskspråkiga användare: en"
          ],
          "English for UK users: en-gb": [
             "Engelska för brittiska användare: en-gb"
          ],
          "English for US users: en-us": [
-            "Engelska för USA-användare: en-us"
+            "Engelska för amerikanska användare: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
-            "Anger om webbadresser på detta språk är kodade eller använder ASCII-tecken (om du är osäker lämnar du det som \"No\")."
+            "Avgör om URL:er på detta språk är kodade eller använder ASCII-tecken (om du är osäker, lämna det som “Nej”)."
          ],
          "adding a custom language": [
             "lägga till ett anpassat språk"
          ],
          "Learn more about required server settings to use a different domain per language": [
-            "Läs mer om nödvändiga serverinställningar för att använda en annan domän per språk"
+            "Lär dig mer om nödvändiga serverinställningar för att använda en annan domän per språk"
          ],
          "Language name added as a parameter": [
-            "Språknamn tillagt som parameter"
+            "Språknamn tillagt som en parameter"
          ],
          "I will set up the domains for my secondary languages later.": [
-            "Jag kommer att ställa in domäner för mina sekundära språk senare."
+            "Jag kommer att konfigurera domänerna för mina sekundära språk senare."
          ],
          "The domain you have entered is invalid.": [
-            "Domänen som du har angett är ogiltig."
+            "Domänen du har angett är ogiltig."
          ],
          "The domain you have entered must be unique.": [
-            "Domänen som du har angett måste vara unik."
+            "Domänen du har angett måste vara unik."
          ],
          "Please Note: Your site won't work in your secondary languages until this is successfully set up or you switch to a different URL option.": [
-            "Observera: Din webbplats fungerar inte på dina sekundära språk förrän detta har konfigurerats eller om du byter till ett annat URL-alternativ."
+            "Observera: Din webbplats kommer inte att fungera på dina sekundära språk förrän detta är korrekt inställt eller du byter till ett annat URL-alternativ."
          ],
          "Learn more about Language URL Options": [
-            "Läs mer om alternativ för språk-URL"
+            "Lär dig mer om språk-URL-alternativ"
          ],
          "How would you like to format your site's URL?": [
-            "Hur skulle du vilja formatera webbplatsens URL?"
+            "Hur vill du formatera din webbplats URL?"
          ],
          "Different languages in directories": [
-            "Olika språk i register"
+            "Olika språk i kataloger"
          ],
          "The URL rewrite is not configured in your server.": [
             "URL-omskrivningen är inte konfigurerad på din server."
          ],
          "Learn more about required server settings to display languages in directories": [
-            "Läs mer om nödvändiga serverinställningar för att visa språk i kataloger"
+            "Lär dig mer om nödvändiga serverinställningar för att visa språk i kataloger"
          ],
          "I will fix my server settings to display languages in directories later.": [
             "Jag kommer att fixa mina serverinställningar för att visa språk i kataloger senare."
          ],
          "Your server settings do not allow for languages in directories. ": [
-            "Serverinställningarna tillåter inte språk i kataloger."
+            "Dina serverinställningar tillåter inte språk i kataloger."
          ],
          "Learn more about the required server settings.": [
-            "Läs mer om de serverinställningar som krävs."
+            "Lär dig mer om de nödvändiga serverinställningarna."
          ],
          "A different domain per language": [
-            "En enskild domän för varje språk"
+            "En annan domän per språk"
+         ],
+         "Translate your pages": [
+            "Översätt dina sidor"
+         ],
+         "Translate your posts": [
+            "Översätt dina inlägg"
+         ],
+         "Next, you need to set-up your multilingual store.": [
+            "Nästa steg är att konfigurera din flerspråkiga butik."
+         ],
+         "Continue to WooCommerce Multilingual Setup": [
+            "Fortsätt till WooCommerce Multilingual-konfiguration"
+         ],
+         "Start translating your site by visiting the <s>Translation Dashboard</s>.": [
+            "Börja översätta din webbplats genom att besöka <s>Översättningspanelen</s>."
+         ],
+         "Go to Translation Dashboard": [
+            "Gå till Översättningspanelen"
+         ],
+         "Need help? <a>Using WPML's Plus Icons to Translate Content</a>": [
+            "Behöver du hjälp? <a>Använda WPML:s Plus-ikoner för att översätta innehåll</a>"
+         ],
+         "To start translating, look for the \"plus\" icons that WPML introduces next to content lists and editors. Click the \"plus\" icon under each language to translate.": [
+            "För att börja översätta, leta efter “plus”-ikonerna som WPML inför bredvid innehållslistor och redigerare. Klicka på “plus”-ikonen under varje språk för att översätta."
          ],
          "support forum": [
             "supportforum"
          ],
          "There was a critical error setting up WPML. Please contact our <LinkToSupportForum /> to resolve it.": [
-            "Det uppstod ett kritiskt fel när WPML skulle konfigureras. Kontakta vårt <LinkToSupportForum /> för att lösa det."
+            "Det uppstod ett kritiskt fel vid konfigurationen av WPML. Kontakta vårt <LinkToSupportForum /> för att lösa det."
          ],
          "Hide error message": [
             "Dölj felmeddelande"
@@ -374,117 +338,20 @@
          "Show error message": [
             "Visa felmeddelande"
          ],
-         "WPML is ready to translate your site": [
-            "WPML är redo att översätta din webbplats"
+         "Congratulations, your website is now multilingual with WPML!": [
+            "Grattis, din webbplats är nu flerspråkig med WPML!"
          ],
-         "WPML has started translating your site": [
-            "WPML har börjat översätta din webbplats"
+         "For language switcher customization and more language options, navigate to <a>WPML → Languages</a>.": [
+            "För anpassning av språkväljaren och fler språkalternativ, gå till <a>WPML → Språk</a>."
          ],
-         "When you're done editing content, go to <s>WPML → Translation Management</s> to start translations.": [
-            "När du är klar med att redigera innehåll, gå till <s>WPML → Översättningshantering</s> för att starta översättningar."
-         ],
-         "View the status of the translations in <s>WPML → Translation Management</s>.": [
-            "Visa statusen för översättningarna i <s>WPML → Översättningshantering</s>."
-         ],
-         "Go to <s>WPML → Translation Management</s> to choose what to translate.": [
-            "Gå till <s>WPML → Översättningshantering</s> att välja vad som ska översättas."
-         ],
-         "You are ready to start translating": [
-            "Du är redo att börja översätta"
-         ],
-         "Right now, your site has a nice language switcher in its footer. To enable other styles of language switchers, go to <s>WPML → Languages</s>.": [
-            "Just nu har din webbplats en praktisk språkväxlare i sidfoten. För att aktivera andra stilar för språkväxlare, gå till <s>WPML → Språk</s>."
-         ],
-         "Language switcher customization": [
-            "Anpassning av språkväxlaren"
-         ],
-         "Your current setup will use a lot of translation credits": [
-            "Din nuvarande inställning kommer att använda en hel del översättningskrediter"
-         ],
-         "You decided to <b>Translate Everything Automatically</b> on a <span class=\"warning\">development site</span>": [
-            "Du bestämde dig för att <b>översätta allt automatiskt</b> på en <span class=\"warning\"> utvecklingsplats</span>"
-         ],
-         "You decided to <b>Translate Everything Automatically:</b>": [
-            "Du bestämde dig för att <b>översätta allt automatiskt:</b>"
-         ],
-         "10,000 credits assigned by default to development sites": [
-            "10 000 krediter tilldelade som standard till utvecklingsplatser"
-         ],
-         "posts, pages...": [
-            "inlägg, sidor..."
-         ],
-         "translated to": [
-            "översatt till"
-         ],
-         "<b>%1$d</b> language": [
-            "<b>%1$d</b> språk",
-            "<b>%1$d</b> språk"
-         ],
-         "will cost approximately": [
-            "kommer att kosta cirka"
-         ],
-         "credits": [
-            "krediter"
-         ],
-         "Loading details...": [
-            "Laddar detaljer..."
-         ],
-         "Hide details": [
-            "Dölj detaljer"
-         ],
-         "Show details": [
-            "Visa detaljer"
-         ],
-         "Your current setup will use approximately <b>%s</b> credits": [
-            "Din nuvarande uppsättning kommer att använda ungefär <b>%s</b> krediter"
-         ],
-         "What do you want to do?": [
-            "Vad vill du göra?"
-         ],
-         "Since this is a development site, you may not want to spend credits on dummy content.": [
-            "Eftersom detta är en utvecklingswebbplats vill du kanske inte använda krediter på dummyinnehåll."
-         ],
-         "Continue with this setup": [
-            "Fortsätt med denna uppsättning"
-         ],
-         "WPML will automatically translate your site’s content. When your credits run out, you can purchase more or sign up for pay-as-you-go to continue using automatic translation.": [
-            "WPML översätter automatiskt innehållet på din webbplats. När dina krediter tar slut kan du köpa mer eller registrera dig för pay-as-you-go för att fortsätta använda automatisk översättning."
-         ],
-         "Make changes": [
-            "Gör ändringar"
-         ],
-         "You can use fewer credits by adjusting some of the settings you selected during setup.": [
-            "Du kan använda färre krediter genom att justera några av de inställningar du valde under uppsättningen."
-         ],
-         "Reduce the number of translation languages": [
-            "Minska antalet språk för översättning"
-         ],
-         "The more languages you have on your site, the more credits it costs to translate. <b>You can always add more languages later.</b>": [
-            "Ju fler språk du har på din webbplats, desto fler krediter kostar det att översätta. <b>Du kan alltid lägga till fler spark senare.</b>"
-         ],
-         "Change site languages": [
-            "Ändra spark på webbplatsen"
-         ],
-         "Change your translation mode": [
-            "Ändra ditt översättningsmodus"
-         ],
-         "<b>Translate What You Choose</b> gives you more control over what gets translated, and you can still use automatic translation.": [
-            "<b>Översätt vad du väljer</b> ger dig mer kontroll över vad som ska översättas, och du kan fortfarande använda automatisk översättning."
-         ],
-         "Change translation mode": [
-            "Ändra översättningsmodus"
-         ],
-         "I'm OK with using this many translation credits,": [
-            "Det är OK för mig att använda så många översättningskrediter,"
-         ],
-         "let's proceed and translate the whole site automatically.": [
-            "låt oss fortsätta och översätta hela webbplatsen automatiskt."
+         "What are the languages of your site?": [
+            "Vilka är språken på din webbplats?"
          ],
          "Default language": [
             "Standardspråk"
          ],
          "What is the current language of your website?": [
-            "Vad är det aktuella språket på din webbplats?"
+            "Vad är det nuvarande språket på din webbplats?"
          ],
          "Translation languages": [
             "Översättningsspråk"
@@ -493,16 +360,13 @@
             "Vilka språk vill du översätta din webbplats till?"
          ],
          "If you cannot find languages that you need in the list": [
-            "Om du inte hittar de språk du behöver i listan"
+            "Om du inte kan hitta språk du behöver i listan"
          ],
          "create a custom language": [
             "skapa ett anpassat språk"
          ],
-         "What are the languages of your site?": [
-            "Vilka språk är språken på din webbplats?"
-         ],
          "If you don't have a WPML.org account or a valid subscription, %1$spurchase one%2$s to get automatic updates, full support, and a 30-day money-back guarantee.": [
-            "Om du inte har ett WPML.org-konto eller en giltig prenumeration, %1$sköp en%2$s för att få automatiska uppdateringar, fullständigt stöd och en 30-dagars pengarna tillbaka-garanti."
+            "Om du inte har ett WPML.org-konto eller en giltig prenumeration, %1$sköp en%2$s för att få automatiska uppdateringar, fullständig support och 30 dagars pengarna-tillbaka-garanti."
          ],
          "Already purchased WPML?": [
             "Har du redan köpt WPML?"
@@ -514,37 +378,22 @@
             "Webbplatsnyckel"
          ],
          "Get a key for this site": [
-            "Skaffa en nyckel till denna webbplats"
-         ],
-         "Are you ready to start translating now?": [
-            "Är du redo att börja översätta nu?"
-         ],
-         "Yes, start translating!": [
-            "Ja, börja med översättningen!"
-         ],
-         "WPML will translate your site for you using your automatic translation credits.": [
-            "WPML översätter din webbplats för dig med hjälp av dina automatiska översättningskrediter."
-         ],
-         "No, my content isn't finalized yet": [
-            "Nej, mitt innehåll är inte färdigt ännu"
-         ],
-         "When you're ready, start automatic translation from the Translation Management Dashboard.": [
-            "När du är redo startar du den automatiska översättningen från från Instrumentpanelen för översättningshantering."
+            "Skaffa en nyckel för denna webbplats"
          ],
          "Improve your site’s translations using helpful plugins": [
-            "Förbättra webbplatsens översättningar med hjälp av praktiska plugins"
+            "Förbättra din webbplats översättningar med hjälpsamma tillägg"
          ],
          "Based on the themes and other plugins running on your site, we recommend that you enable the following WPML components. These are included with your WPML purchase and allow you to translate strings, media, admin texts, and more.": [
-            "Baserat på teman och andra insticksprogram som körs på din webbplats, rekommenderar vi att du aktiverar följande WPML-komponenter. Dessa ingår i ditt WPML-köp och låter dig översätta strängar, media, administratörstexter och mer."
+            "Baserat på teman och andra tillägg som körs på din webbplats rekommenderar vi att du aktiverar följande WPML-komponenter. Dessa ingår i ditt WPML-köp och låter dig översätta strängar, media, admintexter och mer."
          ],
          "Error in activating plugin.": [
-            "Ett fel uppstod vid aktivering av plugin."
+            "Fel vid aktivering av tillägg."
          ],
          "Error in installing plugin.": [
-            "Fel vid installation av plugin."
+            "Fel vid installation av tillägg."
          ],
          "Yes, send theme and plugins information, in order to get faster support and compatibility alerts": [
-            "Ja, skicka information om tema och plugins för att få snabbare support- och kompatibilitetsvarningar"
+            "Ja, skicka information om tema och tillägg för att få snabbare support och kompatibilitetsvarningar"
          ],
          "No, don't send this information and skip compatibility alerts": [
             "Nej, skicka inte denna information och hoppa över kompatibilitetsvarningar"
@@ -553,19 +402,10 @@
             "Vill du få bättre och snabbare support?"
          ],
          "The WPML plugin can send a list of active plugins and theme used in your site to wpml.org. This allows our support team to help you much faster and to contact you in advance about potential compatibility problems and their solutions.": [
-            "Insticksprogrammet WPML kan skicka en lista över aktiva insticksprogram och tema som används på din webbplats till wpml.org. Detta gör att supportteamet kan hjälpa dig snabbare och kontakta dig om potentiella kompatibilitetsproblem och lösningen på desamma."
+            "WPML-tillägget kan skicka en lista över aktiva tillägg och tema som används på din webbplats till wpml.org. Detta gör att vårt supportteam kan hjälpa dig mycket snabbare och kontakta dig i förväg om potentiella kompatibilitetsproblem och deras lösningar."
          ],
          "Privacy and data usage policy": [
-            "Policy för integritet och dataanvändning"
-         ],
-         "<LinkToTheDifferentWaysYouCanTranslateYourSite/> for help with choosing the best mode for your site.": [
-            "<LinkToTheDifferentWaysYouCanTranslateYourSite/> för hjälp med att välja bäst metod för din webbplats."
-         ],
-         "Can't decide? Let us help!": [
-            "Svårt att bestämma dig? Låt oss hjälpa till!"
-         ],
-         "Contact our support team": [
-            "Kontakta vårt supportteam"
+            "Integritetspolicy och dataanvändningspolicy"
          ],
          "Error: %s": [
             "Fel: %s"
@@ -574,16 +414,16 @@
             "Autentisera"
          ],
          "To send content and receive translations from <service_name />, enter the credentials you received from them.": [
-            "Ange inloggningsuppgifterna du fått från <service_name /> för att skicka innehåll och ta emot översättningar från dem."
+            "För att skicka innehåll och ta emot översättningar från <service_name />, ange de inloggningsuppgifter du fått från dem."
          ],
          "Need credentials? Contact <link_to_service />": [
             "Behöver du inloggningsuppgifter? Kontakta <link_to_service />"
          ],
          "Success! You can start sending content to %s for translation after you finish the setup wizard.": [
-            "Grattis! Nu kan du skicka innehåll som ska översättas till %s så snart du shar slutfört installationsguiden."
+            "Lyckat! Du kan börja skicka innehåll till %s för översättning efter att du avslutat installationsguiden."
          ],
          "The credentials are invalid. Please, try again.": [
-            "Ogiltiga inloggningsuppgifter. Försök igen."
+            "Inloggningsuppgifterna är ogiltiga. Försök igen."
          ],
          "Choose a Translation Service": [
             "Välj en översättningstjänst"
@@ -593,15 +433,6 @@
          ],
          "A new language could not be added correctly": [
             "Ett nytt språk kunde inte läggas till korrekt"
-         ],
-         "Support": [
-            "Support"
-         ],
-         "Plugins": [
-            "Plugins"
-         ],
-         "Finished": [
-            "Klar"
          ],
          "Back": [
             "Tillbaka"
@@ -616,7 +447,7 @@
             "Installera och aktivera"
          ],
          "Finish": [
-            "Slutför"
+            "Avsluta"
          ],
          "Languages": [
             "Språk"
@@ -627,14 +458,23 @@
          "Register WPML": [
             "Registrera WPML"
          ],
-         "Translation Mode": [
-            "Översättningsläge"
+         "Who Will Translate": [
+            "Vem ska översätta"
+         ],
+         "Support": [
+            "Support"
+         ],
+         "Plugins": [
+            "Tillägg"
+         ],
+         "Finished": [
+            "Färdig"
          ],
          "Settings": [
             "Inställningar"
          ],
          "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
-            "Det är för närvarande inte möjligt att ansluta en översättningstjänst när WPML är inställt på att översätta webbplatsens innehåll automatiskt. Om du vill använda en översättningstjänst ändrar du översättningsläget på sidan <LinkToSettingsPage />."
+            "Det är för närvarande inte möjligt att ansluta en översättningstjänst när WPML är inställt på att översätta din webbplats innehåll automatiskt. För att använda en översättningstjänst, ändra ditt översättningsläge på sidan <LinkToSettingsPage />."
          ],
          "Documentation": [
             "Dokumentation"
@@ -646,7 +486,7 @@
             "Beskrivning"
          ],
          "Ranking": [
-            "Placering"
+            "Rankning"
          ]
       }
    }

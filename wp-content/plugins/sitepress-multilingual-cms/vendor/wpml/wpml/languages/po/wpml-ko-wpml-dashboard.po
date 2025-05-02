@@ -1,0 +1,1001 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-08-22T09:24:13+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: wpml\n"
+
+#: dashboard.js:2
+msgid "Untranslated strings that I encounter on front-end while logged in"
+msgstr "로그인한 상태에서 프론트엔드에서 번역되지 않은 문자열이 나타나는 경우"
+
+#: dashboard.js:2
+msgid "Untranslated strings that all front-end users encounter"
+msgstr "모든 프론트엔드 사용자가 접하는 번역되지 않은 문자열"
+
+#: dashboard.js:2
+msgid "Disable auto-registration of strings"
+msgstr "문자열 자동 등록 비활성화하기"
+
+#: dashboard.js:2
+msgid "Frontend"
+msgstr "프론트엔드"
+
+#: dashboard.js:2
+msgid "Backend"
+msgstr "백엔드"
+
+#: dashboard.js:2
+msgid "Plugins"
+msgstr "플러그인"
+
+#: dashboard.js:2
+msgid "Themes"
+msgstr "테마"
+
+#: dashboard.js:2
+msgid "WordPress"
+msgstr "WordPress"
+
+#: dashboard.js:2
+msgid "Other"
+msgstr "기타"
+
+#: dashboard.js:2
+msgid "Error in fetching default translation batch name"
+msgstr "기본 번역 배치 이름을 가져오는 동안 오류가 발생했습니다"
+
+#: dashboard.js:2
+msgid "Error in fetching translation editor type."
+msgstr "번역 편집기 유형을 가져오는 동안 오류가 발생했습니다."
+
+#: dashboard.js:2
+msgid "Error in fetching untranslated types count"
+msgstr "번역되지 않은 유형 수를 가져오는 동안 오류가 발생했습니다"
+
+#: dashboard.js:2
+msgid "Error in fetching remote translation service data."
+msgstr "원격 번역 서비스 데이터를 가져오는 동안 오류가 발생했습니다."
+
+#: dashboard.js:2
+msgid "Status checked: "
+msgstr "상태가 확인되었습니다: "
+
+#: dashboard.js:2
+msgid "none of your translation jobs have been completed"
+msgstr "번역 작업이 완료되지 않았습니다"
+
+#: dashboard.js:2
+msgid "Downloaded jobs: "
+msgstr "다운로드한 작업: "
+
+#: dashboard.js:2
+msgid "Cancelled jobs: "
+msgstr "취소된 작업: "
+
+#: dashboard.js:2
+msgid "Checking translation jobs status. Please don't close this page!"
+msgstr "번역 작업 상태를 확인 중입니다. 이 페이지를 닫지 마세요!"
+
+#: dashboard.js:2
+msgid "Last check: Never"
+msgstr "마지막 확인: 없음"
+
+#: dashboard.js:2
+msgid "Please wait until download finishes"
+msgstr "다운로드가 완료될 때까지 기다려주세요"
+
+#: dashboard.js:2
+msgid "You need to wait 5 minutes after last pick up"
+msgstr "마지막 픽업 후 5분을 기다려야 합니다"
+
+#: dashboard.js:2
+msgid "Check status and get translations"
+msgstr "상태 확인 및 번역 받기"
+
+#: dashboard.js:2
+msgid "Filtering is disabled to show all selected items. "
+msgstr "필터링이 비활성화되어 선택한 모든 항목이 표시됩니다. "
+
+#: dashboard.js:2
+msgid "Apply filters"
+msgstr "필터 적용하기"
+
+#: dashboard.js:2
+msgid "%s posts selected"
+msgstr "%s 선택한 게시물"
+
+#: dashboard.js:2
+msgid "(%d word count)"
+msgstr "(%d 단어 수)"
+
+#: dashboard.js:2
+msgid "%s item not showing."
+msgid_plural "%s items not showing."
+msgstr[0] "%s 항목이 표시되지 않습니다."
+msgstr[1] "%s 항목이 표시되지 않습니다."
+
+#: dashboard.js:2
+msgid "Show all selected items"
+msgstr "선택한 모든 항목 표시"
+
+#: dashboard.js:2
+msgid "Translate your content"
+msgstr "콘텐츠 번역"
+
+#: dashboard.js:2
+msgid "Unselect all"
+msgstr "모두 선택 취소"
+
+#: dashboard.js:2
+msgid "Source Language:"
+msgstr "소스 언어:"
+
+#: dashboard.js:2
+msgid "translated to:"
+msgstr "로 번역됩니다:"
+
+#: dashboard.js:2
+msgid "Clear filters"
+msgstr "필터 지우기"
+
+#: dashboard.js:2
+msgid "Filter"
+msgstr "필터"
+
+#: dashboard.js:2
+msgid "You are about to change the source language filter from %s to %s"
+msgstr "소스 언어 필터를 %s 에서 다음과 같이 변경하려고 합니다. %s"
+
+#: dashboard.js:2
+msgid "Updating the source language filter will clear the items you've selected for translation. Are you sure you want to continue?"
+msgstr "소스 언어 필터를 업데이트하면 번역을 위해 선택한 항목이 지워집니다. 계속 진행하시겠습니까?"
+
+#: dashboard.js:2
+msgid "Cancel"
+msgstr "취소"
+
+#: dashboard.js:2
+msgid "Change source language"
+msgstr "소스 언어 변경"
+
+#: dashboard.js:2
+msgid "All Statuses"
+msgstr "모든 상태"
+
+#: dashboard.js:2
+msgid "All languages"
+msgstr "모든 언어"
+
+#: dashboard.js:2
+msgid "All translation statuses"
+msgstr "모든 번역 상태"
+
+#: dashboard.js:2
+msgid "Not translated"
+msgstr "번역되지 않음"
+
+#: dashboard.js:2
+msgid "Not translated or needs updating"
+msgstr "번역되지 않았거나 업데이트가 필요함"
+
+#: dashboard.js:2
+msgid "Needs updating"
+msgstr "업데이트 필요"
+
+#: dashboard.js:2
+msgid "Translation in progress"
+msgstr "번역 진행 중"
+
+#: dashboard.js:2
+msgid "Translation complete"
+msgstr "번역 완료"
+
+#: dashboard.js:2
+msgid "Parent:"
+msgstr "부모:"
+
+#: dashboard.js:2
+msgid "All taxonomies"
+msgstr "모든 분류 체계"
+
+#: dashboard.js:2
+msgid "Taxonomy Term:"
+msgstr "분류 체계 용어입니다:"
+
+#: dashboard.js:2
+msgid "No terms found"
+msgstr "용어를 찾을 수 없습니다"
+
+#: dashboard.js:2
+msgid "Filter by:"
+msgstr "필터링 기준:"
+
+#: dashboard.js:2
+msgid "Title"
+msgstr "제목"
+
+#: dashboard.js:2
+msgid "View"
+msgstr "보기"
+
+#: dashboard.js:2
+msgid "Edit note for the translators"
+msgstr "번역가를 위한 편집 참고 사항"
+
+#: dashboard.js:2
+msgid "Add note for the translators"
+msgstr "번역자를 위한 메모 추가"
+
+#: dashboard.js:2
+msgid "(no title)"
+msgstr "(제목 없음)"
+
+#: dashboard.js:2
+msgid "Image"
+msgstr "이미지"
+
+#: dashboard.js:2
+msgid "Date / Status"
+msgstr "날짜/상태"
+
+#: dashboard.js:2
+msgid "Word count"
+msgstr "단어 수"
+
+#: dashboard.js:2
+msgid "Loading..."
+msgstr "로드 중..."
+
+#: dashboard.js:2
+msgid "No items"
+msgstr "항목 없음"
+
+#: dashboard.js:2
+msgid "%1$d %2$s selected"
+msgstr "%1$d %2$s 선택"
+
+#: dashboard.js:2
+msgid "Filtering is disabled to show all selected items"
+msgstr "필터링이 비활성화되어 선택한 모든 항목이 표시되지 않습니다"
+
+#: dashboard.js:2
+msgid "Apply filter"
+msgstr "필터 적용하기"
+
+#: dashboard.js:2
+msgid "%1$d %2$s not showing"
+msgstr "%1$d %2$s 표시되지 않음"
+
+#: dashboard.js:2
+msgid "Show selected items"
+msgstr "선택한 항목 표시"
+
+#: dashboard.js:2
+msgid "Previous"
+msgstr "이전 게시물"
+
+#: dashboard.js:2
+msgid "Next"
+msgstr "다음"
+
+#: dashboard.js:2
+msgid "Your site's content is too vast for a single translation batch. Use filters to reduce the selection, then \"select all\"."
+msgstr "사이트의 콘텐츠가 너무 방대하여 단일 번역 배치로 처리할 수 없습니다. 필터를 사용하여 선택 범위를 줄인 다음 \"모두 선택\"하세요."
+
+#: dashboard.js:2
+msgid "The current filter captures too much content. Narrow it down to enable \"select all\" for translation."
+msgstr "현재 필터가 너무 많은 콘텐츠를 캡처합니다. 범위를 좁혀 번역에 '모두 선택'을 사용하도록 설정하세요."
+
+#: dashboard.js:2
+msgid "Select All"
+msgstr "모두 선택"
+
+#: dashboard.js:2
+msgid "All %d items matching criteria are selected"
+msgstr "조건에 일치하는 모든 %d 항목이 선택됨"
+
+#: dashboard.js:2
+msgid "All %d items on this page are selected"
+msgstr "이 페이지의 모든 %d 항목이 선택됨"
+
+#: dashboard.js:2
+msgid "Unselect all items that match this search"
+msgstr "이 검색과 일치하는 모든 항목 선택 해제"
+
+#: dashboard.js:2
+msgid "Select all items that match this search"
+msgstr "이 검색어와 일치하는 모든 항목 선택"
+
+#: dashboard.js:2
+msgid "Save note"
+msgstr "노트 저장"
+
+#: dashboard.js:2
+msgid "Step 1"
+msgstr "1단계"
+
+#: dashboard.js:2
+msgid "Select items for translation"
+msgstr "번역할 항목 선택"
+
+#: dashboard.js:2
+msgid "You have too many items selected to use this feature. Deselect some of the items to enable it."
+msgstr "선택한 항목이 너무 많아 이 기능을 사용할 수 없습니다. 사용하려면 일부 항목을 선택 해제하세요."
+
+#: dashboard.js:2
+msgid "Show strings in:"
+msgstr "문자열을 입력합니다:"
+
+#: dashboard.js:2
+msgid "All domains"
+msgstr "모든 도메인"
+
+#: dashboard.js:2
+msgid "All sources"
+msgstr "모든 소스"
+
+#: dashboard.js:2
+msgid "String"
+msgstr "문자열"
+
+#: dashboard.js:2
+msgid "All Translation Priorities"
+msgstr "모든 번역 우선 순위"
+
+#: dashboard.js:2
+msgid "WPML doesn't know of any strings that need translation. Visit translations on your site's front-end (<a/>). WPML will identify all untranslated strings and list them here. To see all the strings in your site, disable \"Detect untranslated strings\" at the top of this section."
+msgstr "WPML 번역이 필요한 문자열을 알지 못합니다. 사이트의 프론트엔드에서 번역을 방문하세요(<a/>). WPML 번역되지 않은 모든 문자열을 식별하여 여기에 나열합니다. 사이트의 모든 문자열을 보려면 이 섹션 상단의 '번역되지 않은 문자열 감지'를 비활성화하세요."
+
+#: dashboard.js:2
+msgid "Domain"
+msgstr "도메인"
+
+#: dashboard.js:2
+msgid "Source"
+msgstr "소스"
+
+#: dashboard.js:2
+msgid "Type"
+msgstr "유형"
+
+#: dashboard.js:2
+msgid "Disabled"
+msgstr "장애인"
+
+#: dashboard.js:2
+msgid "WPML can detect strings that appear on the site and list them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here only the strings that actually appear on the site, you need to enable this feature."
+msgstr "WPML 는 사이트에 표시되는 문자열을 감지하여 여기에 나열할 수 있습니다. 이 기능을 사용하면 사이트에 실제로 표시되는 문자열을 식별하고 번역할 수 있습니다. 사이트에 실제로 표시되는 문자열만 여기에서 보려면 이 기능을 활성화해야 합니다."
+
+#: dashboard.js:2
+msgid "Enabled"
+msgstr "활성화됨"
+
+#: dashboard.js:2
+msgid "WPML detects strings that appear on the site and lists them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here all the strings in the site, you need to disable this feature."
+msgstr "WPML 는 사이트에 표시되는 문자열을 감지하여 여기에 나열합니다. 이 기능은 사이트에 실제로 나타나는 문자열을 식별하고 번역하는 데 도움이 됩니다. 사이트의 모든 문자열을 여기에서 보려면 이 기능을 비활성화해야 합니다."
+
+#: dashboard.js:2
+msgid "Detect untranslated strings"
+msgstr "번역되지 않은 문자열 감지"
+
+#: dashboard.js:2
+msgid "Modify"
+msgstr "수정"
+
+#: dashboard.js:2
+msgid "Automatically register untranslated strings"
+msgstr "번역되지 않은 문자열 자동 등록하기"
+
+#: dashboard.js:2
+msgid "Learn how to use auto-registration"
+msgstr "자동 등록 사용 방법 알아보기"
+
+#: dashboard.js:2
+msgid "recommended"
+msgstr "추천"
+
+#: dashboard.js:2
+msgid "Also register strings from the website's back-end"
+msgstr "또한 웹사이트 백엔드에서 문자열을 등록합니다"
+
+#: dashboard.js:2
+msgid "Save settings"
+msgstr "설정 저장"
+
+#: dashboard.js:2
+msgid "Leave existing translations as are"
+msgstr "기존 번역은 그대로 두세요"
+
+#: dashboard.js:2
+msgid "Overwrite existing translations"
+msgstr "기존 번역 덮어쓰기"
+
+#: dashboard.js:2
+msgid "Some of the content you want to translate is already translated"
+msgstr "번역하려는 콘텐츠 중 일부가 이미 번역되어 있습니다"
+
+#: dashboard.js:2
+msgid "What do you want to do with the content that's already translated?"
+msgstr "이미 번역된 콘텐츠로 무엇을 하고 싶으신가요?"
+
+#: dashboard.js:2
+msgid "What would you like to do when WPML finishes translating your content automatically?"
+msgstr "WPML 에서 콘텐츠 자동 번역이 완료되면 어떻게 하시겠습니까?"
+
+#: dashboard.js:2
+msgid "Choose how you want to handle your site's automatically translated content before it goes live. Remember that you can always edit translations, regardless of the review process."
+msgstr "사이트의 자동 번역된 콘텐츠를 게시하기 전에 처리할 방법을 선택하세요. 검토 프로세스에 관계없이 언제든지 번역을 편집할 수 있다는 점을 기억하세요."
+
+#: dashboard.js:2
+msgid "Wait for review"
+msgstr "검토 대기 중"
+
+#: dashboard.js:2
+msgid "You check and approve translations before publishing."
+msgstr "출판하기 전에 번역을 확인하고 승인합니다."
+
+#: dashboard.js:2
+msgid "Your translators check and approve translations before publishing."
+msgstr "번역가는 출판하기 전에 번역을 확인하고 승인합니다."
+
+#: dashboard.js:2
+msgid "Publish and mark for review"
+msgstr "검토를 위해 게시 및 표시하기"
+
+#: dashboard.js:2
+msgid "WPML publishes translations immediately but flags them for you to check at your convenience."
+msgstr "WPML 는 번역을 즉시 출판하지만 사용자가 편리하게 확인할 수 있도록 플래그를 표시합니다."
+
+#: dashboard.js:2
+msgid "WPML publishes translations immediately but flags them for your translators to check at their convenience."
+msgstr "WPML 는 번역을 즉시 출판하지만 번역가가 편리하게 확인할 수 있도록 플래그를 지정합니다."
+
+#: dashboard.js:2
+msgid "Publish without review"
+msgstr "검토 없이 출판하기"
+
+#: dashboard.js:2
+msgid "The system publishes translations straight away, skipping the review process."
+msgstr "이 시스템은 검토 과정을 생략하고 바로 번역을 출판합니다."
+
+#: dashboard.js:2
+msgid "Suggested deadline:"
+msgstr "제안 마감일:"
+
+#: dashboard.js:2
+msgid "Set a batch name and deadline"
+msgstr "배치 이름 및 마감일 설정"
+
+#: dashboard.js:2
+msgid "You can assign a custom name to this batch for easy tracking and suggest a deadline to clarify the priority for translators."
+msgstr "이 배치에 사용자 지정 이름을 지정하여 쉽게 추적하고 마감일을 제안하여 번역가의 우선 순위를 명확히 할 수 있습니다."
+
+#: dashboard.js:2
+msgid "Batch name:"
+msgstr "배치 이름:"
+
+#: dashboard.js:2
+msgid "Your Automatic Translation Credits"
+msgstr "자동 번역 크레딧"
+
+#: dashboard.js:2
+msgid "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s translator</add_yourself> to the site.<br/> Add yourself as %s translator and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "번역자로 자신을 지정하려면 먼저 사이트에 <add_yourself> %s 번역자로 자신을 추가해야</add_yourself> 합니다.<br/> %s 번역자로 자신을 추가하고 <check_again>다시 확인을</check_again> 클릭하거나 다른 번역 옵션을 선택합니다."
+
+#: dashboard.js:2
+msgid "Checking"
+msgstr "확인"
+
+#: dashboard.js:2
+msgid "In order to assign a translation service, you first need to <activate_ts>activate a translation service</activate_ts>.<br/>Activate a translation service and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "번역 서비스를 지정하려면 먼저 <activate_ts>번역 서비스를 활성화해야</activate_ts> 합니다.<br/>번역 서비스를 활성화한 후 <check_again>다시 확인을</check_again> 클릭하거나 다른 번역 옵션을 선택하세요."
+
+#: dashboard.js:2
+msgid "In order to translate automatically, you first need to <enable_ate>enable WPML's Advanced Translation Editor</enable_ate>.<br/>Enable the Advanced Translation Editor and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "In order to translate automatically, you first need to <enable_ate>enable WPML's Advanced Translation Editor</enable_ate>.<br/>Enable the Advanced Translation Editor and click <check_again>check again</check_again> or choose a different translation option."
+
+#: dashboard.js:2
+msgid ""
+"Any existing content (translations) will be overwritten when creating duplicates.\n"
+"When duplicating content, please first duplicate parent pages to maintain the site's hierarchy."
+msgstr "복제본을 만들 때 기존 콘텐츠(번역)는 모두 덮어씁니다.\n콘텐츠를 복제할 때는 먼저 상위 페이지를 복제하여 사이트의 계층 구조를 유지하세요."
+
+#: dashboard.js:2
+msgid "Some of the selected content is already being translated. This will cancel any in-progress translations."
+msgstr "선택한 콘텐츠 중 일부가 이미 번역 중입니다. 진행 중인 번역이 모두 취소됩니다."
+
+#: dashboard.js:2
+msgid "Buy credits"
+msgstr "크레딧 구매하기"
+
+#: dashboard.js:2
+msgid "You don't have enough credits to translate your content automatically."
+msgstr "콘텐츠를 자동으로 번역할 수 있는 크레딧이 충분하지 않습니다."
+
+#: dashboard.js:2
+msgid "In order to assign to a translator, you first need to <add_translators>add %s translators</add_translators> to the site.<br/> Add %s translators and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "번역사에게 할당하려면 먼저 사이트에 <add_translators> %s 번역사를 추가해야</add_translators> 합니다.<br/> %s 번역자를 추가하고 <check_again>다시 확인을</check_again> 클릭하거나 다른 번역 옵션을 선택합니다."
+
+#: dashboard.js:2
+msgid "Your site doesn't have any reviewers for %s. This means that you’re the only person who can review these translations."
+msgstr "귀하의 사이트에는 %s 에 대한 검토자가 없습니다. 즉, 번역을 검토할 수 있는 사람은 사용자 본인뿐입니다."
+
+#: dashboard.js:2
+msgid "Your site doesn't have any reviewers yet. This means that you’re the only person who can review translations."
+msgstr "사이트에 아직 검토자가 없습니다. 즉, 번역을 검토할 수 있는 사람은 번역자 본인뿐입니다."
+
+#: dashboard.js:2
+msgid "If you want other people to review the translations, go to <a>WPML → Translation Management → Translators</a> and add translators. They will be able to both review and translate content for you."
+msgstr "다른 사람이 번역을 검토하도록 하려면 <a>WPML → 번역 관리 → 번역자로</a> 이동하여 번역자를 추가하세요. 번역자는 콘텐츠를 검토하고 번역할 수 있습니다."
+
+#: dashboard.js:2
+msgid "WPML does not support duplicating strings."
+msgstr "WPML 는 문자열 복제를 지원하지 않습니다."
+
+#: dashboard.js:2
+msgid "Finish setting up %s on your site"
+msgstr "사이트에서 %s 설정 완료"
+
+#: dashboard.js:2
+msgid "You need to authenticate %s to send them content for translation.<br/>Visit the <a>Translators tab</a> to finish the setup and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "번역할 콘텐츠를 보내려면 %s 인증이 필요합니다.<br/><a>번역기 탭으로</a> 이동하여 설정을 완료하고 <check_again>다시 확인을</check_again> 클릭하거나 다른 번역 옵션을 선택합니다."
+
+#: dashboard.js:2
+msgid "Content selected for translation"
+msgstr "번역을 위해 선택한 콘텐츠"
+
+#: dashboard.js:2
+msgid "Volume"
+msgstr "볼륨"
+
+#: dashboard.js:2
+msgid "~ %d words"
+msgstr "~ %d 단어"
+
+#: dashboard.js:2
+msgid "Total"
+msgstr "합계"
+
+#: dashboard.js:2
+msgid "Sending for translation..."
+msgstr "번역을 위해 보내기..."
+
+#: dashboard.js:2
+msgid "Sending for translation failed"
+msgstr "번역을 위해 전송하지 못했습니다"
+
+#: dashboard.js:2
+msgid "You selected multiple translation methods for content across different languages:"
+msgstr "여러 언어의 콘텐츠에 대해 여러 번역 방법을 선택했습니다:"
+
+#: dashboard.js:2
+msgid "WPML did not create translations for some languages because:"
+msgstr "WPML 일부 언어에 대한 번역을 만들지 않았기 때문입니다:"
+
+#: dashboard.js:2
+msgid "Close"
+msgstr "닫기"
+
+#: dashboard.js:2
+msgid "1 item is being translated automatically."
+msgid_plural "%d items are being translated automatically."
+msgstr[0] "1개 항목이 자동으로 번역 중입니다."
+msgstr[1] "%d 항목이 자동으로 번역되고 있습니다."
+
+#: dashboard.js:2
+msgid "From now on, WPML will automatically translate new content on your site."
+msgstr "이제부터 WPML 에서 사이트의 새 콘텐츠를 자동으로 번역합니다."
+
+#: dashboard.js:2
+msgid "From now on, WPML will automatically translate your site's content."
+msgstr "이제부터 WPML 에서 사이트의 콘텐츠를 자동으로 번역합니다."
+
+#: dashboard.js:2
+msgid "Automatic translations summary"
+msgstr "자동 번역 요약"
+
+#: dashboard.js:2
+msgid "1 item has been duplicated."
+msgid_plural "%d items have been duplicated."
+msgstr[0] "1개 항목이 중복되었습니다."
+msgstr[1] "%d 항목이 중복되었습니다."
+
+#: dashboard.js:2
+msgid "Duplication summary"
+msgstr "중복 요약"
+
+#: dashboard.js:2
+msgid "There was a problem sending your content for translation."
+msgstr "번역을 위해 콘텐츠를 전송하는 동안 문제가 발생했습니다."
+
+#: dashboard.js:2
+msgid "Please try again in a few minutes. If the issue persists, please contact our support."
+msgstr "몇 분 후에 다시 시도해 주세요. 문제가 지속되면 지원팀에 문의하세요."
+
+#: dashboard.js:2
+msgid "1 item has been successfully sent to translators! To check its status, please visit the <s>Jobs</s> tab in <s>WPML → Translation Management</s>."
+msgid_plural "%d items have been successfully sent to translators! For status updates, please visit the <s>Jobs</s> tab in <s>WPML → Translation Management</s>."
+msgstr[0] "1건이 번역가에게 성공적으로 전송되었습니다! <s>작업</s> 상태를 확인하려면 <s>WPML → 번역 관리의 작업</s> 탭을 방문하세요."
+msgstr[1] "%d 항목이 번역가에게 성공적으로 전송되었습니다! 상태 업데이트를 확인하려면 <s>WPML → 번역 관리의</s> <s>작업</s> 탭을 방문하세요."
+
+#: dashboard.js:2
+msgid "Local translations summary"
+msgstr "현지 번역 요약"
+
+#: dashboard.js:2
+msgid "Go to Translation Jobs"
+msgstr "번역 작업으로 이동하기"
+
+#: dashboard.js:2
+msgid "%d item has been sent for translation to %s. Please continue to their site to start the translation."
+msgid_plural "%d items have been sent for translation to %s. Please continue to their site to start the translation."
+msgstr[0] "%d 항목이 번역을 위해 %s 으로 전송되었습니다. 번역을 시작하려면 해당 사이트로 계속 이동하세요."
+msgstr[1] "%d 항목이 번역을 위해 %s 으로 전송되었습니다. 번역을 시작하려면 해당 사이트로 계속 이동하세요."
+
+#: dashboard.js:2
+msgid "Translation service translations summary"
+msgstr "번역 서비스 번역 요약"
+
+#: dashboard.js:2
+msgid "Continue to %s"
+msgstr "계속하기 %s"
+
+#: dashboard.js:2
+msgid "Translate and Duplicate"
+msgstr "번역 및 복제"
+
+#: dashboard.js:2
+msgid "Duplicate"
+msgstr "중복"
+
+#: dashboard.js:2
+msgid "Translate"
+msgstr "번역"
+
+#: dashboard.js:2
+msgid "Selected content is already translated"
+msgstr "선택한 콘텐츠가 이미 번역되었습니다"
+
+#: dashboard.js:2
+msgid "Please select a review option"
+msgstr "검토 옵션을 선택하세요"
+
+#: dashboard.js:2
+msgid "Assign local translator or choose another option"
+msgstr "현지 번역사를 지정하거나 다른 옵션 선택"
+
+#: dashboard.js:2
+msgid "Assign yourself or choose another option"
+msgstr "직접 지정하거나 다른 옵션 선택"
+
+#: dashboard.js:2
+msgid "Activate translation service or choose another option"
+msgstr "번역 서비스를 활성화하거나 다른 옵션을 선택하세요"
+
+#: dashboard.js:2
+msgid "Activate ATE or choose another option"
+msgstr "먹기 활성화 또는 다른 옵션 선택"
+
+#: dashboard.js:2
+msgid "Authenticate translation service or choose another option"
+msgstr "번역 서비스 인증 또는 다른 옵션 선택"
+
+#: dashboard.js:2
+msgid "<s>%s</s> cannot process more than <s>%d</s> jobs in a single batch. WPML will automatically split your jobs into separate batches to ensure an error-free delivery to <s>%s</s>. <br/><br/> Do you want to proceed?"
+msgstr "<s>%s</s> 이상의 작업을 한 번에 처리할 수 없습니다. <s>%d</s> 작업을 한 번에 처리할 수 없습니다. WPML 는 작업을 자동으로 별도의 배치로 분할하여 오류 없는 배달을 보장합니다. <s>%s</s>. <br/><br/> 계속 진행하시겠습니까?"
+
+#: dashboard.js:2
+msgid "WPML will send jobs to %s in separate batches"
+msgstr "WPML 는 작업을 %s 으로 별도의 배치로 보냅니다"
+
+#: dashboard.js:2
+msgid "Yes, send jobs in separate batches"
+msgstr "예, 작업을 별도의 배치로 보내기"
+
+#: dashboard.js:2
+msgid "No, I will split jobs myself"
+msgstr "아니, 내가 직접 작업을 분할 할 것입니다"
+
+#: dashboard.js:2
+msgid "From now on, translate new content automatically, without asking me."
+msgstr "이제부터는 제가 요청하지 않아도 새 콘텐츠를 자동으로 번역하세요."
+
+#: dashboard.js:2
+msgid "Do you want to translate existing content too?"
+msgstr "기존 콘텐츠도 번역하고 싶으신가요?"
+
+#: dashboard.js:2
+msgid "Yes, translate all new and existing content"
+msgstr "예, 모든 신규 및 기존 콘텐츠를 번역합니다"
+
+#: dashboard.js:2
+msgid "No, only translate new content"
+msgstr "아니요, 새 콘텐츠만 번역합니다"
+
+#: dashboard.js:2
+msgid "You can translate existing content from the Translation Management Dashboard"
+msgstr "번역 관리 대시보드에서 기존 콘텐츠를 번역할 수 있습니다"
+
+#: dashboard.js:2
+msgid "Existing content"
+msgstr "기존 콘텐츠"
+
+#: dashboard.js:2
+msgid "You selected to translate strings that are in %s. Only these strings will be translated to %s."
+msgstr "%s 에 있는 문자열을 번역하도록 선택했습니다. 이 문자열만 %s 으로 번역됩니다."
+
+#: dashboard.js:2
+msgid "You selected to translate strings that are in %s and %s. Only these strings will be translated to %s."
+msgstr "%s 및 %s 에 있는 문자열을 번역하도록 선택했습니다. 이 문자열만 %s 으로 번역됩니다."
+
+#: dashboard.js:2
+msgid "Source language"
+msgstr "소스 언어"
+
+#: dashboard.js:2
+msgid "Target language"
+msgstr "대상 언어"
+
+#: dashboard.js:2
+msgid "Action"
+msgstr "액션"
+
+#: dashboard.js:2
+msgid "Select an option"
+msgstr "옵션 선택"
+
+#: dashboard.js:2
+msgid "-"
+msgstr "-"
+
+#: dashboard.js:2
+msgid "Translate automatically"
+msgstr "자동 번역하기"
+
+#: dashboard.js:2
+msgid "Translate myself"
+msgstr "직접 번역하기"
+
+#: dashboard.js:2
+msgid "Assign a translator"
+msgstr "번역가 지정하기"
+
+#: dashboard.js:2
+msgid "Assign translation service"
+msgstr "번역 서비스 할당"
+
+#: dashboard.js:2
+msgid "Do nothing"
+msgstr "아무것도 하지 않음"
+
+#: dashboard.js:2
+msgid "Please choose"
+msgstr "선택하세요"
+
+#: dashboard.js:2
+msgid "Choose a translator"
+msgstr "번역가 선택"
+
+#: dashboard.js:2
+msgid "First available"
+msgstr "먼저 사용 가능"
+
+#: dashboard.js:2
+msgid "(Me)"
+msgstr "(나)"
+
+#: dashboard.js:2
+msgid "Translation controls"
+msgstr "번역 제어"
+
+#: dashboard.js:2
+msgid "Step 2"
+msgstr "2단계"
+
+#: dashboard.js:2
+msgid "Action needed"
+msgstr "필요한 조치"
+
+#: dashboard.js:2
+msgid "Automatic jobs in progress"
+msgstr "자동 작업 진행 중"
+
+#: dashboard.js:2
+msgid "<s>%d automatic translation jobs</s> are currently in progress"
+msgstr "<s>%d 자동 번역 작업</s>이 현재 진행 중입니다"
+
+#: dashboard.js:2
+msgid "Pause"
+msgstr "일시 중지"
+
+#: dashboard.js:2
+msgid "Start"
+msgstr "시작"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - credit wizard error"
+msgstr "모든 내용을 자동으로 번역 - 크레딧 마법사 오류"
+
+#: dashboard.js:2
+msgid "There was an error when loading the credit wizard."
+msgstr "크레딧 마법사를 로드하는 동안 오류가 발생했습니다."
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - no credits"
+msgstr "모든 내용을 자동으로 번역 - 크레딧 없음"
+
+#: dashboard.js:2
+msgid "Start translating everything"
+msgstr "모든 번역 시작"
+
+#: dashboard.js:2
+msgid "Automatic translation uses credit. <a>Read more about automatic translation credits</a>"
+msgstr "자동 번역은 크레딧을 사용합니다. <a>자동 번역 크레딧에 대해 자세히 알아보기</a>"
+
+#: dashboard.js:2
+msgid "Start translating everything automatically"
+msgstr "모든 내용을 자동으로 번역 시작하기"
+
+#: dashboard.js:2
+msgid "WPML will translate any new content you create into %d languages."
+msgstr "WPML 는 새로 만드는 모든 콘텐츠를 %d 언어로 번역합니다."
+
+#: dashboard.js:2
+msgid "You will be able to start Translate Everything Automatically after you send some content for translation. We recommend that you review the translations and make sure that they are good before translating your entire site's content."
+msgstr "번역할 콘텐츠를 일부 전송한 후 모든 내용을 자동으로 번역을 시작할 수 있습니다. 전체 사이트의 콘텐츠를 번역하기 전에 번역을 검토하고 번역이 제대로 되었는지 확인하는 것이 좋습니다."
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - disabled"
+msgstr "모든 내용을 자동으로 번역 - 비활성화됨"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically"
+msgstr "모든 내용을 자동으로 번역"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - pausing"
+msgstr "모든 내용을 자동으로 번역 - 일시 중지하기"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically is pausing"
+msgstr "모든 내용을 자동으로 번역이 일시 중지 중입니다"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - paused"
+msgstr "모든 내용을 자동으로 번역 - 일시 중지됨"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically is paused"
+msgstr "모든 내용을 자동으로 번역이 일시 중지되었습니다"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically will translate all of your site's content and not only specific post types."
+msgstr "모든 내용 자동 번역은 특정 게시물 유형뿐만 아니라 사이트의 모든 내용을 자동으로 번역합니다."
+
+#: dashboard.js:2
+msgid "%d translations left in the queue. Preparing more content for translation."
+msgstr "%d 번역이 대기열에 남아 있습니다. 번역할 콘텐츠를 더 준비 중입니다."
+
+#: dashboard.js:2
+msgid "Preparing content for translation"
+msgstr "번역할 콘텐츠 준비하기"
+
+#: dashboard.js:2
+msgid "%d translations left in the queue"
+msgstr "%d 대기열에 남은 번역"
+
+#: dashboard.js:2
+msgid "All translations are up to date"
+msgstr "모든 번역이 최신 상태입니다"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - enabled"
+msgstr "모든 내용을 자동으로 번역 - 활성화됨"
+
+#: dashboard.js:2
+msgid "As you create new content or edit existing content, WPML will automatically translate it from %s to %s."
+msgstr "새 콘텐츠를 만들거나 기존 콘텐츠를 편집하면 WPML 에서 %s 에서 %s 로 자동 번역됩니다."
+
+#: dashboard.js:2
+msgid "Hide details"
+msgstr "세부 정보 숨기기"
+
+#: dashboard.js:2
+msgid "Show details"
+msgstr "세부 정보 보기"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically is stopped"
+msgstr "모든 내용을 자동으로 번역이 중지되었습니다"
+
+#: dashboard.js:2
+msgid "Translation not running… there is an issue that needs your attention. Fix it to continue."
+msgstr "번역이 실행되지 않습니다... 주의가 필요한 문제가 있습니다. 계속하려면 문제를 해결하세요."
+
+#: dashboard.js:2
+msgid "Fix now"
+msgstr "지금 수정"
+
+#: dashboard.js:2
+msgid "%d Translations are waiting for your review"
+msgstr "%d 번역이 검토를 기다리고 있습니다"
+
+#: dashboard.js:2
+msgid "Review Translations"
+msgstr "번역 검토"
+
+#: dashboard.js:2
+msgid "Error in fetching currently logged in translator"
+msgstr "현재 로그인한 번역기를 불러오는 동안 오류가 발생했습니다"
+
+#: dashboard.js:2
+msgid "Error in fetching local translators"
+msgstr "로컬 번역기 가져오기 오류"
+
+#: dashboard.js:2
+msgid "published"
+msgstr "출판"
+
+#: dashboard.js:2
+msgid "Collapse"
+msgstr "접기"
+
+#: dashboard.js:2
+msgid "Expand"
+msgstr "확장"
+
+#: dashboard.js:2
+msgid "Close modal"
+msgstr "모달 닫기"
+
+#: dashboard.js:2
+msgid "Search parent by title"
+msgstr "제목으로 상위 검색"
+
+#: dashboard.js:2
+msgid "No items found"
+msgstr "항목을 찾을 수 없습니다"
+
+#: dashboard.js:2
+msgid "%1$s Flag"
+msgstr "%1$s 깃발"
+
+#: dashboard.js:2
+msgid "not translated"
+msgstr "번역되지 않음"
+
+#: dashboard.js:2
+msgid "waiting for translator"
+msgstr "번역기 대기 중"
+
+#: dashboard.js:2
+msgid "in progress"
+msgstr "진행 중"
+
+#: dashboard.js:2
+msgid "needs update"
+msgstr "업데이트 필요"
+
+#: dashboard.js:2
+msgid "duplicate"
+msgstr "중복"
+
+#: dashboard.js:2
+msgid "complete"
+msgstr "완료"
+
+#: dashboard.js:2
+msgid "needs review"
+msgstr "검토 필요"
+
+#: dashboard.js:2
+msgid "%1$s: %2$s"
+msgstr "%1$s: %2$s"

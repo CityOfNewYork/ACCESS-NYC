@@ -1,35 +1,39 @@
 {
-   "domain": "messages",
-   "locale_data": {
-      "messages": {
-         "": {
-            "domain": "messages",
-            "lang": "en"
-         },
-         "How Browser Language Redirect Affects Google Indexing": [
-            "Cách thức Chuyển hướng Ngôn ngữ Trình duyệt Ảnh hưởng đến Lập chỉ mục Google"
-         ],
-         "Documentation": [
-            "Tài liệu"
-         ],
-         "Browser redirect affects Google indexing and search results": [
-            "Chuyển hướng trình duyệt ảnh hưởng đến việc lập chỉ mục Google và kết quả tìm kiếm"
-         ],
-         "Got it, activate anyway": [
-            "Tôi hiểu, vẫn kích hoạt"
-         ],
-         "Cancel": [
-            "Hủy"
-         ],
-         "When you redirect visitors based on their language, you also redirect Google. Google wants to see your site exactly like visitors see it, including any redirects that you apply.": [
-            "Khi bạn chuyển hướng khách truy cập theo ngôn ngữ của họ, bạn cũng chuyển hướng Google. Google muốn xem trang web của bạn chính xác như khách truy cập xem được, bao gồm bất kỳ chuyển hướng nào mà bạn áp dụng."
-         ],
-         "It is OK to redirect visitors based on their language, but you need to realize that this feature affects SEO.": [
-            "Việc chuyển hướng khách truy cập theo ngôn ngữ của họ vẫn ổn, nhưng bạn cần nhận thức rằng tính năng này sẽ ảnh hưởng đến SEO."
-         ],
-         "Before proceeding, we recommend that you read these two pages:": [
-            "Trước khi tiếp tục, chúng tôi gợi ý bạn nên đọc hai trang này:"
-         ]
-      }
-   }
+  "translation-revision-date": "2024-08-20T09:26:18+00:00",
+  "generator": "WP-CLI/2.9.0",
+  "source": "src/js/browser-language-redirect-dialog/texts.js",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "en",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "How Browser Language Redirect Affects Google Indexing": [
+        "Cách thức Chuyển hướng Ngôn ngữ Trình duyệt Ảnh hưởng đến Lập chỉ mục Google"
+      ],
+      "Documentation": [
+        "Tài liệu"
+      ],
+      "Browser redirect affects Google indexing and search results": [
+        "Chuyển hướng trình duyệt ảnh hưởng đến việc lập chỉ mục Google và kết quả tìm kiếm"
+      ],
+      "Got it, activate anyway": [
+        "Tôi hiểu, vẫn kích hoạt"
+      ],
+      "Cancel": [
+        "Hủy"
+      ],
+      "When you redirect visitors based on their language, you also redirect Google. Google wants to see your site exactly like visitors see it, including any redirects that you apply.": [
+        "Khi bạn chuyển hướng khách truy cập theo ngôn ngữ của họ, bạn cũng chuyển hướng Google. Google muốn xem trang web của bạn chính xác như khách truy cập xem được, bao gồm bất kỳ chuyển hướng nào mà bạn áp dụng."
+      ],
+      "It is OK to redirect visitors based on their language, but you need to realize that this feature affects SEO.": [
+        "Việc chuyển hướng khách truy cập theo ngôn ngữ của họ vẫn ổn, nhưng bạn cần nhận thức rằng tính năng này sẽ ảnh hưởng đến SEO."
+      ],
+      "Before proceeding, we recommend that you read these two pages:": [
+        "Trước khi tiếp tục, chúng tôi gợi ý bạn nên đọc hai trang này:"
+      ]
+    }
+  }
 }

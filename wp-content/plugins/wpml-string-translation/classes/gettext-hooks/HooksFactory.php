@@ -51,33 +51,11 @@ class HooksFactory implements \IWPML_Backend_Action_Loader, \IWPML_Frontend_Acti
 	private function getFilters() {
 		$filters = [];
 
-		/** @var Settings $settings */
-		$settings = make( Settings::class );
-
-		if ( $settings->isAutoRegistrationEnabled() ) {
-			$filters[] = make( Filters\StringTranslation::class );
-		}
-
-		if ( $this->isTrackingStrings( $settings ) ) {
-			$filters[] = make( Filters\StringTracking::class );
-		}
-
 		if ( $this->isHighlightingStrings() ) {
 			$filters[] = make( Filters\StringHighlighting::class );
 		}
 
 		return $filters;
-	}
-
-	/**
-	 * @param Settings $settings
-	 *
-	 * @return bool
-	 */
-	private function isTrackingStrings( Settings $settings ) {
-		return $settings->isTrackStringsEnabled()
-			   && current_user_can( 'edit_others_posts' )
-			   && ! is_admin();
 	}
 
 	/**

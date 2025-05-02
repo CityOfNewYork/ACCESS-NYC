@@ -5,21 +5,6 @@
          "": {
             "domain": "messages"
          },
-         "You can choose which posts to translate from the <strong>Translation Management Dashboard</strong>.": [
-            "يمكنك اختيار المقالات التي ترغب في ترجمتها من خلال <strong>لوحة أدوات إدارة الترجمة</strong>."
-         ],
-         "Yes, translate <b>existing</b> and <b>future</b> content automatically": [
-            "نعم، ترجم المحتوى <b>الحالي</b> و<b>المستقبلي</b> آليًا"
-         ],
-         "Yes, but only translate <b>future</b> content automatically": [
-            "نعم، ولكن قم فقط بترجمة المحتوى <b>المستقبلي</b> آليًا"
-         ],
-         "Yes, translate <b>future</b> content automatically": [
-            "نعم، ترجم المحتوى <b>المستقبلي</b> آليًا"
-         ],
-         "No, I want to translate some of these posts, but not all": [
-            "لا، أرغب في ترجمة بعض هذه المقالات، وليس جميعها"
-         ],
          "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
             "يجب عليك استخدام محرر الترجمة المتقدم إذا كنت ترغب في ترجمة محتواك آليًا."
          ],
@@ -28,6 +13,19 @@
          ],
          "Please try again in a few minutes. If the problem persists, please contact %sWPML support%s.": [
             "يُرجى إعادة المحاولة بعد عدة دقائق. إذا استمرت المشكلة، يُرجى التواصل مع %sدعم WPML%s."
+         ],
+         "Save": [
+            "حفظ"
+         ],
+         "Please confirm this translation setting": [
+            "يُرجى تأكيد إعداد الترجمة هذا"
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item.": [
+            "موقعك مضبوط على ترجمة كل المحتوى تلقائيًا. عندما تجعل <PostTypesNames /> قابلاً للترجمة، سيقوم WPML تلقائيًا بترجمة العنصر الموجود %1$d.",
+            "موقعك مضبوط على ترجمة كل المحتوى تلقائيًا. عندما تجعل <PostTypesNames /> قابلاً للترجمة، سيقوم WPML تلقائيًا بترجمة العناصر الموجودة %1$d."
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate all future content.": [
+            "تم تعيين موقعك إلى ترجمة كل المحتوى آليًا. عندما تجعل <PostTypesNames /> قابلًا للترجمة، سيقوم WPML بترجمة كل المحتوى المستقبلي."
          ],
          "Are you OK with paying for this?": [
             "هل أنت موافق على الدفع للحصول على هذا؟"
@@ -38,18 +36,14 @@
          "Make translatable": [
             "جعله قابلًا للترجمة"
          ],
-         "Save": [
-            "حفظ"
+         "Yes, translate <b>existing</b> and <b>future</b> content automatically": [
+            "نعم، ترجم المحتوى <b>الحالي</b> و<b>المستقبلي</b> آليًا"
          ],
-         "Please confirm this translation setting": [
-            "يُرجى تأكيد إعداد الترجمة هذا"
+         "Yes, but only translate <b>future</b> content automatically": [
+            "نعم، ولكن قم فقط بترجمة المحتوى <b>المستقبلي</b> آليًا"
          ],
-         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item.": [
-            "تم تعيين موقعك إلى ترجمة كل المحتوى آليًا. عندما تجعل <PostTypesNames /> قابلًا للترجمة، سيقوم WPML بترجمة عنصر %1$d الحالي آليًا.",
-            "تم تعيين موقعك إلى ترجمة كل المحتوى آليًا. عندما تجعل <PostTypesNames /> قابلًا للترجمة، سيقوم WPML بترجمة عناصر %1$d الحالية آليًا."
-         ],
-         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate all future content.": [
-            "تم تعيين موقعك إلى ترجمة كل المحتوى آليًا. عندما تجعل <PostTypesNames /> قابلًا للترجمة، سيقوم WPML بترجمة كل المحتوى المستقبلي."
+         "Yes, translate <b>future</b> content automatically": [
+            "نعم، ترجم المحتوى <b>المستقبلي</b> آليًا"
          ]
       }
    }

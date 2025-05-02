@@ -1,0 +1,58 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Edit": [
+            "Biên tập"
+         ],
+         "Shift+Tab": [
+            "Tab Shift+"
+         ],
+         "Tab": [
+            "Chuyển hướng"
+         ],
+         "Translation to:": [
+            "Bản dịch sang:"
+         ],
+         "Copy from original": [
+            "Sao chép từ bản gốc"
+         ],
+         "Use Shift+Enter to add a new line.": [
+            "Sử dụng Shift+Enter để thêm dòng mới."
+         ],
+         "Original:": [
+            "Nguyên bản:"
+         ],
+         "Add %s translation": [
+            "Thêm vào %s dịch"
+         ],
+         "Edit %s translation": [
+            "Biên tập %s dịch"
+         ],
+         "Add %s translation (the string appears on the site and is not translated)": [
+            "Thêm vào%s bản dịch (chuỗi xuất hiện trên trang web và không được dịch)"
+         ],
+         "Original language %s": [
+            "Ngôn ngữ gốc %s"
+         ],
+         "Waiting for translator to %s": [
+            "Đang chờ người dịch %s"
+         ],
+         "Translation in progress to %s": [
+            "Đang dịch sang %s"
+         ],
+         "In basket for translation to %s": [
+            "Trong giỏ để dịch sang %s"
+         ],
+         "Translation saved.": [
+            "Đã lưu bản dịch."
+         ],
+         "Translation update failed.": [
+            "Cập nhật bản dịch không thành công."
+         ]
+      }
+   }
+}

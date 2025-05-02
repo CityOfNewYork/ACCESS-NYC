@@ -1,6 +1,5 @@
 <?php
 
-use WPML\Settings\PostType\Automatic;
 use WPML\UrlHandling\WPLoginUrlConverter;
 use WPML\AdminLanguageSwitcher\AdminLanguageSwitcher;
 
@@ -27,16 +26,45 @@ switch ( $request ) {
 
 $request = wpml_get_authenticated_action();
 
+function user_is_admin_or_exit() {
+	if ( ! WPML\LIB\WP\User::currentUserIsAdmin() ) {
+		wp_die( 'Unauthorized', 403 );
+	}
+}
+
+function user_is_manager_or_exit() {
+	if ( ! WPML\LIB\WP\User::currentUserIsTranslationManagerOrHigher() ) {
+		wp_die( 'Unauthorized', 403 );
+	}
+}
+
+function user_is_translator_or_exit() {
+	if ( ! WPML\LIB\WP\User::currentUserIsTranslatorOrHigher() ) {
+		wp_die( 'Unauthorized', 403 );
+	}
+}
+
+function user_can_edit_post_or_exit() {
+	if ( ! current_user_can( 'edit_posts' ) ) {
+		wp_die( 'Unauthorized', 403 );
+	}
+}
+
+
 $iclsettings      = $this->get_settings();
 $default_language = $this->get_default_language();
 
 switch ( $request ) {
 	case 'icl_admin_language_options':
+		user_is_admin_or_exit();
+
 		$iclsettings['admin_default_language'] = $_POST['icl_admin_default_language'];
 		$this->save_settings( $iclsettings );
 		echo 1;
 		break;
 	case 'icl_page_sync_options':
+		user_is_admin_or_exit();
+
 		$iclsettings['sync_page_ordering']          = @intval( $_POST['icl_sync_page_ordering'] );
 		$iclsettings['sync_page_parent']            = @intval( $_POST['icl_sync_page_parent'] );
 		$iclsettings['sync_page_template']          = @intval( $_POST['icl_sync_page_template'] );
@@ -68,6 +96,8 @@ switch ( $request ) {
 		echo 1;
 		break;
 	case 'icl_login_page_translation':
+		user_is_admin_or_exit();
+
 		$translateLoginPageIsEnabled = get_option( WPLoginUrlConverter::SETTINGS_KEY );
 		if ( ! $translateLoginPageIsEnabled && filter_input( INPUT_POST, 'login_page_translation', FILTER_VALIDATE_BOOLEAN ) ) {
 			AdminLanguageSwitcher::enable();
@@ -84,89 +114,39 @@ switch ( $request ) {
 		echo 1;
 		break;
 	case 'language_domains':
+		user_is_admin_or_exit();
+
 		$language_domains_helper = new WPML_Lang_Domains_Box( $this );
 		echo $language_domains_helper->render();
 		break;
 	case 'dismiss_help':
+		user_is_admin_or_exit();
+
 		icl_set_setting( 'dont_show_help_admin_notice', true );
 		icl_save_settings();
 		break;
-	case 'dismiss_page_estimate_hint':
-		icl_set_setting( 'dismiss_page_estimate_hint', ! icl_get_setting( 'dismiss_page_estimate_hint' ) );
-		icl_save_settings();
-		break;
 	case 'dismiss_upgrade_notice':
+		user_is_admin_or_exit();
+
 		icl_set_setting( 'hide_upgrade_notice', implode( '.', array_slice( explode( '.', ICL_SITEPRESS_VERSION ), 0, 3 ) ) );
 		icl_save_settings();
 		break;
 	case 'toggle_show_translations':
-		icl_set_setting( 'show_translations_flag', intval( ! icl_get_setting( 'show_translations_flag', false ) ) );
-		icl_save_settings();
-		break;
-	case 'icl_messages':
-		// TODO: handle with Translation Proxy
-		if ( ! icl_get_setting( 'icl_disable_reminders' ) ) {
-			break;
-		}
-		exit;
-	case 'icl_help_links':
-		if ( isset( $iclq ) && $iclq ) {
-			$links = $iclq->get_help_links();
-			$lang  = icl_get_setting( 'admin_default_language' );
-			if ( ! isset( $links['resources'][ $lang ] ) ) {
-				$lang = 'en';
-			}
+		user_is_admin_or_exit();
 
-			if ( isset( $links['resources'][ $lang ] ) ) {
-				$output = '<ul>';
-				foreach ( $links['resources'][ $lang ]['resource'] as $resource ) {
-					if ( isset( $resource['attr'] ) ) {
-						$title       = $resource['attr']['title'];
-						$url         = $resource['attr']['url'];
-						$icon        = $resource['attr']['icon'];
-						$icon_width  = $resource['attr']['icon_width'];
-						$icon_height = $resource['attr']['icon_height'];
-					} else {
-						$title       = $resource['title'];
-						$url         = $resource['url'];
-						$icon        = $resource['icon'];
-						$icon_width  = $resource['icon_width'];
-						$icon_height = $resource['icon_height'];
-					}
-					$output .= '<li>';
-					if ( $icon ) {
-						$output .= '<img style="vertical-align: bottom; padding-right: 5px;" src="' . $icon . '"';
-						if ( $icon_width ) {
-							$output .= ' width="' . $icon_width . '"';
-						}
-						if ( $icon_height ) {
-							$output .= ' height="' . $icon_height . '"';
-						}
-						$output .= '>';
-					}
-					$output .= '<a href="' . $url . '">' . $title . '</a></li>';
-
-				}
-				$output .= '</ul>';
-				echo '1|' . $output;
-			} else {
-				echo '0|';
-			}
-		}
-		break;
-	case 'icl_show_sidebar':
-		icl_set_setting( 'icl_sidebar_minimized', $_POST['state'] == 'hide' ? 1 : 0 );
+		icl_set_setting( 'show_translations_flag', intval( ! wpml_get_setting( 'show_translations_flag', true ) ) );
 		icl_save_settings();
 		break;
 	case 'icl_promote_form':
+		user_is_admin_or_exit();
+
 		icl_set_setting( 'promote_wpml', @intval( $_POST['icl_promote'] ) );
 		icl_save_settings();
 		echo '1|';
 		break;
-	case 'save_translator_note':
-		update_post_meta( $_POST['post_id'], '_icl_translator_note', $_POST['note'] );
-		break;
 	case 'icl_st_track_strings':
+		user_is_manager_or_exit();
+
 		foreach ( $_POST['icl_st'] as $k => $v ) {
 			$iclsettings['st'][ $k ] = $v;
 		}
@@ -182,6 +162,8 @@ switch ( $request ) {
 		echo 1;
 		break;
 	case 'icl_st_more_options':
+		user_is_manager_or_exit();
+
 		$iclsettings['st']['translated-users'] = ! empty( $_POST['users'] ) ? array_keys( $_POST['users'] ) : [];
 		$this->save_settings( $iclsettings );
 		if ( ! empty( $iclsettings['st']['translated-users'] ) ) {
@@ -191,6 +173,8 @@ switch ( $request ) {
 		echo 1;
 		break;
 	case 'icl_hide_languages':
+		user_is_admin_or_exit();
+
 		$iclsettings['hidden_languages'] = empty( $_POST['icl_hidden_languages'] ) ? [] : $_POST['icl_hidden_languages'];
 		$this->set_setting( 'hidden_languages', [] ); // reset current value
 		$active_languages = $this->get_active_languages();
@@ -218,11 +202,15 @@ switch ( $request ) {
 		echo '1|' . $out;
 		break;
 	case 'icl_adjust_ids':
+		user_is_admin_or_exit();
+
 		$iclsettings['auto_adjust_ids'] = @intval( $_POST['icl_adjust_ids'] );
 		$this->save_settings( $iclsettings );
 		echo '1|';
 		break;
 	case 'icl_automatic_redirect':
+		user_is_admin_or_exit();
+
 		if ( ! isset( $_POST['icl_remember_language'] ) || $_POST['icl_remember_language'] < 24 ) {
 			$_POST['icl_remember_language'] = 24;
 		}
@@ -232,11 +220,15 @@ switch ( $request ) {
 		echo '1|';
 		break;
 	case 'icl_troubleshooting_more_options':
+		user_is_admin_or_exit();
+
 		$iclsettings['troubleshooting_options'] = $_POST['troubleshooting_options'];
 		$this->save_settings( $iclsettings );
 		echo '1|';
 		break;
 	case 'reset_languages':
+		user_is_admin_or_exit();
+
 		$setup_instance = wpml_get_setup_instance();
 		$setup_instance->reset_language_data();
 
@@ -245,21 +237,9 @@ switch ( $request ) {
 		$wpml_languages_notices = new WPML_Languages_Notices( wpml_get_admin_notices() );
 		$wpml_languages_notices->missing_languages( $wpml_localization->get_not_founds() );
 		break;
-	case 'icl_support_update_ticket':
-		if ( isset( $_POST['ticket'] ) ) {
-			$temp = str_replace( 'icl_support_ticket_', '', $_POST['ticket'] );
-			$temp = explode( '_', $temp );
-			$id   = (int) $temp[0];
-			$num  = (int) $temp[1];
-			if ( $id && $num ) {
-				if ( isset( $iclsettings['icl_support']['tickets'][ $id ] ) ) {
-					$iclsettings['icl_support']['tickets'][ $id ]['messages'] = $num;
-					$this->save_settings( $iclsettings );
-				}
-			}
-		}
-		break;
 	case 'icl_custom_tax_sync_options':
+		user_is_manager_or_exit();
+
 		$new_options      = ! empty( $_POST['icl_sync_tax'] ) ? $_POST['icl_sync_tax'] : [];
 		$unlocked_options = ! empty( $_POST['icl_sync_tax_unlocked'] ) ? $_POST['icl_sync_tax_unlocked'] : [];
 		/** @var WPML_Settings_Helper $settings_helper */
@@ -269,6 +249,8 @@ switch ( $request ) {
 		echo '1|';
 		break;
 	case 'icl_custom_posts_sync_options':
+		user_is_manager_or_exit();
+
 		$new_options      = ! empty( $_POST['icl_sync_custom_posts'] ) ? $_POST['icl_sync_custom_posts'] : [];
 		$unlocked_options = ! empty( $_POST['icl_sync_custom_posts_unlocked'] ) ? $_POST['icl_sync_custom_posts_unlocked'] : [];
 		/** @var WPML_Settings_Helper $settings_helper */
@@ -276,14 +258,11 @@ switch ( $request ) {
 		$settings_helper->update_cpt_unlocked_settings( $unlocked_options );
 		$settings_helper->update_cpt_sync_settings( $new_options );
 		$customPostTypes = ( new WPML_Post_Types( $sitepress ) )->get_translatable_and_readonly();
-		foreach ( array_keys( $customPostTypes ) as $postType ) {
-			if ( array_key_exists( $postType, $new_options ) ) {
-				Automatic::set( $postType, isset( $_POST['automatic_post_type'][ $postType ] ) );
-			}
-		}
 		echo '1|';
 		break;
 	case 'copy_from_original':
+		user_is_translator_or_exit();
+
 		/*
 		 * apply filtering as to add further elements
 		 * filters will have to like as such
@@ -319,11 +298,15 @@ switch ( $request ) {
 		echo wp_json_encode( WPML_Post_Edit_Ajax::copy_from_original_fields( $content_type, $excerpt_type, $trid, $lang ) );
 		break;
 	case 'save_user_preferences':
+		user_is_translator_or_exit();
+
 		$user_preferences = $this->get_user_preferences();
 		$this->set_user_preferences( array_merge_recursive( $user_preferences, $_POST['user_preferences'] ) );
 		$this->save_user_preferences();
 		break;
 	case 'wpml_cf_translation_preferences':
+		user_is_manager_or_exit();
+
 		if ( empty( $_POST[ WPML_POST_META_SETTING_INDEX_SINGULAR ] ) ) {
 			echo '<span style="color:#FF0000;">'
 				 . __( 'Error: No custom field', 'sitepress' ) . '</span>';
@@ -354,6 +337,8 @@ switch ( $request ) {
 		}
 		break;
 	case 'icl_seo_options':
+		user_is_admin_or_exit();
+
 		$seo = $sitepress->get_setting( 'seo', [] );
 
 		$seo['head_langs']                  = isset( $_POST['icl_seo_head_langs'] ) ? (int) $_POST['icl_seo_head_langs'] : 0;
@@ -363,16 +348,9 @@ switch ( $request ) {
 		$sitepress->set_setting( 'seo', $seo, true );
 		echo '1|';
 		break;
-	case 'dismiss_object_cache_warning':
-		$iclsettings['dismiss_object_cache_warning'] = true;
-		$this->save_settings( $iclsettings );
-		echo '1|';
-		break;
-	case 'update_option':
-		$iclsettings[ $_REQUEST['option'] ] = $_REQUEST['value'];
-		$this->save_settings( $iclsettings );
-		break;
-	case 'connect_translations':
+	case 'connect_translations': // This is used by the "Connect Translations" dialog.
+		user_can_edit_post_or_exit();
+
 		$new_trid      = $_POST['new_trid'];
 		$post_type     = $_POST['post_type'];
 		$post_id       = $_POST['post_id'];
@@ -459,7 +437,9 @@ switch ( $request ) {
 		}
 		echo wp_json_encode( true );
 		break;
-	case 'get_posts_from_trid':
+	case 'get_posts_from_trid': // This is used by the "Connect Translations" dialog.
+		user_can_edit_post_or_exit();
+
 		$trid      = $_POST['trid'];
 		$post_type = $_POST['post_type'];
 
@@ -478,7 +458,9 @@ switch ( $request ) {
 		}
 		echo wp_json_encode( $results );
 		break;
-	case 'get_orphan_posts':
+	case 'get_orphan_posts': // This is used by the "Connect Translations" dialog.
+		user_can_edit_post_or_exit();
+
 		$trid            = $_POST['trid'];
 		$post_type       = $_POST['post_type'];
 		$source_language = $_POST['source_language'];
@@ -487,12 +469,46 @@ switch ( $request ) {
 		echo wp_json_encode( $results );
 
 		break;
-	default:
-		if ( function_exists( 'ajax_' . $request ) ) {
-			$function_name = 'ajax_' . $request;
-			$function_name();
-		} else {
-			do_action( 'icl_ajx_custom_call', $request, $_REQUEST );
-		}
+	// classes/ATE/Hooks/class-wpml-tm-old-editor.php
+	case 'icl_doc_translation_method':
+		user_is_translator_or_exit();
+		do_action( 'icl_ajx_custom_call', $request, $_REQUEST );
+		break;
+	// modules/cache-plugins-integration/cache-plugins-integration.php
+	case 'wpml_cpi_options':
+	case 'wpml_cpi_clear_cache':
+		user_is_manager_or_exit();
+		do_action( 'icl_ajx_custom_call', $request, $_REQUEST );
+		break;
+	// inc/translation-management/translation-management.class.php
+	case 'assign_translator':
+	case 'icl_cf_translation':
+	case 'icl_tcf_translation':
+	case 'icl_doc_translation_method':
+	case 'reset_duplication':
+	case 'set_duplication':
+		user_is_translator_or_exit();
+		do_action( 'icl_ajx_custom_call', $request, $_REQUEST );
+		break;
+	// inc/translation-proxy/wpml-pro-translation.class.php
+	case 'set_pickup_mode':
+		user_is_manager_or_exit();
+		do_action( 'icl_ajx_custom_call', $request, $_REQUEST );
+		break;
+	//inc/upgrade-functions/upgrade-2.0.0.php
+	case 'wpml_upgrade_2_0_0':
+		user_is_manager_or_exit();
+		do_action( 'icl_ajx_custom_call', $request, $_REQUEST );
+		break;
+	//wpml-string-translation/inc/wpml-string-translation.class.php
+	case 'icl_st_delete_strings':
+		user_is_translator_or_exit();
+		do_action( 'icl_ajx_custom_call', $request, $_REQUEST );
+		break;
+	//wpml-string-translation/classes/slug-translation/class-wpml-slug-translation.php
+	case 'icl_slug_translation':
+		user_is_translator_or_exit();
+		do_action( 'icl_ajx_custom_call', $request, $_REQUEST );
+		break;
 }
 exit;

@@ -1,0 +1,40 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Preparing...": [
+            "准备..."
+         ],
+         "All jobs have been cancelled": [
+            "所有工作均已取消"
+         ],
+         "There is no more jobs to cancel": [
+            "没有更多工作要取消"
+         ],
+         "The jobs cancellation has failed": [
+            "取消工作岗位计划失败"
+         ],
+         "Cancel in-progress automatic jobs": [
+            "取消正在进行的自动作业"
+         ],
+         "Domain name has been updated": [
+            "域名已更新"
+         ],
+         "Domain name update has been failed": [
+            "域名更新失败"
+         ],
+         "Update domain name in language switcher settings": [
+            "更新语言切换器设置中的域名"
+         ],
+         "Refresh license data to recognise license update": [
+            "刷新许可证数据以识别许可证更新"
+         ],
+         "WPML License has been refreshed": [
+            "更新了 WPML 许可证"
+         ]
+      }
+   }
+}

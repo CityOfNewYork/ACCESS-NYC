@@ -20,6 +20,21 @@
          "Cancel in-progress automatic jobs": [
             "Отменить выполняемые автоматические задания"
          ],
+         "Enabling WPML's Advanced Translation Editor...": [
+            "Включение расширенного редактора переводов WPML..."
+         ],
+         "Force-enable WPML's Advanced Translation Editor": [
+            "Принудительное включение расширенного редактора переводов WPML"
+         ],
+         "If you're running this website from two or more domains on the same installation, this action will allow both to use the Advanced Translation Editor. Don't use this if you've moved or copied the site to a different domain on a different server.": [
+            "Если вы управляете этим сайтом с двух или более доменов на одной установке, это действие позволит использовать расширенный редактор переводов на обоих. Не используйте это, если вы перенесли или скопировали сайт на другой домен на другом сервере."
+         ],
+         "An error occurred while enabling WPML on both domains. Please try again.": [
+            "Произошла ошибка при включении WPML на обоих доменах. Пожалуйста, попробуйте снова."
+         ],
+         "You can now use the Advanced Translation Editor from this site, as well as the other site(s) running from a different domain on the same installation.": [
+            "Теперь вы можете использовать расширенный редактор переводов с этого сайта, а также с другого сайта (сайтов), работающего с другого домена на той же установке."
+         ],
          "Domain name has been updated": [
             "Доменное имя изменилось"
          ],

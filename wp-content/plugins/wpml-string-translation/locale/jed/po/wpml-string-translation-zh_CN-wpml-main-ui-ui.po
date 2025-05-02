@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/main-ui/components/Actions.js:46
+msgid "Edit"
+msgstr "编辑"
+
+#: src/js/main-ui/components/Actions.js:57
+msgid "Shift+Tab"
+msgstr "Shift+tab"
+
+#: src/js/main-ui/components/Actions.js:62
+msgid "Tab"
+msgstr "选项卡"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:104
+msgid "Translation to:"
+msgstr "翻译成："
+
+#: src/js/main-ui/components/EditTranslationPopup.js:123
+msgid "Copy from original"
+msgstr "原件副本"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:138
+msgid "Use Shift+Enter to add a new line."
+msgstr "使用 Shift+Enter 添加新行。"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:97
+msgid "Original:"
+msgstr "原创："
+
+#: src/js/main-ui/components/LanguagesCell.js:169
+msgid "Add %s translation"
+msgstr "添加 %s 翻译"
+
+#: src/js/main-ui/components/LanguagesCell.js:188
+msgid "Edit %s translation"
+msgstr "编辑 %s 翻译"
+
+#: src/js/main-ui/components/LanguagesCell.js:198
+msgid "Add %s translation (the string appears on the site and is not translated)"
+msgstr "添加%s 翻译（字符串出现在网站上，但不翻译）"
+
+#: src/js/main-ui/components/LanguagesCell.js:63
+msgid "Original language %s"
+msgstr "原文 %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:70
+msgid "Waiting for translator to %s"
+msgstr "等待翻译 %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:77
+msgid "Translation in progress to %s"
+msgstr "正在翻译为 %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:84
+msgid "In basket for translation to %s"
+msgstr "在篮子中将翻译成 %s"
+
+#: src/js/main-ui/components/notification.js:13
+msgid "Translation saved."
+msgstr "翻译有救了。"
+
+#: src/js/main-ui/components/notification.js:17
+msgid "Translation update failed."
+msgstr "翻译更新失败。"

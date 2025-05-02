@@ -2,6 +2,7 @@
 
 namespace WPML\BrowserLanguageRedirect;
 
+use WPML\Core\WP\App\Resources as AppResources;
 use WPML\LIB\WP\App\Resources;
 use WPML\LIB\WP\Nonce;
 
@@ -19,18 +20,19 @@ class Dialog implements \IWPML_Backend_Action {
 
 	public function enqueue_res() {
 		if ( $this->should_print_dialog() ) {
-			Resources::enqueue(
+			Resources::enqueueWithDeps(
 				'browser-language-redirect-dialog',
 				ICL_PLUGIN_URL,
 				WPML_PLUGIN_PATH,
-				ICL_SITEPRESS_VERSION,
+				ICL_SITEPRESS_SCRIPT_VERSION,
 				null,
 				[
 					'name' => 'wpmlBrowserLanguageRedirectDialog',
 					'data' => [
 						'endpoint' => self::ACCEPT_ACTION,
 					],
-				]
+				],
+				[ AppResources::vendorAsDependency() ]
 			);
 		}
 	}

@@ -6,19 +6,19 @@
             "domain": "messages"
          },
          "From:": [
-            "Vanuit:"
+            "Van:"
          ],
          "--Choose language--": [
-            "--Taal selecteren--"
+            "--Kies taal--"
          ],
          "to:": [
             "naar:"
          ],
          "Set language pair(s) for Translator %s:": [
-            "Taalpaar(paren) instellen voor Vertaler %s:"
+            "Stel taalpaar/taalparen in voor Vertaler %s:"
          ],
          "+ Add more language pairs for this translator": [
-            "+ Meer talenparen toevoegen voor deze vertaler"
+            "+ Voeg meer taalparen toe voor deze vertaler"
          ],
          "First Name": [
             "Voornaam"
@@ -30,16 +30,16 @@
             "Rol"
          ],
          "(required)": [
-            "(vereist)"
+            "(verplicht)"
          ],
          "Make sure that you have provided a correct email address e.g. name@domain.com": [
             "Zorg ervoor dat je een correct e-mailadres hebt opgegeven, bijv. name@domain.com"
          ],
          "This field is required": [
-            "Dit veld is vereist"
+            "Dit veld is verplicht"
          ],
          "A translator can be any WordPress role.": [
-            "Een vertaler kan elke WordPress functie zijn."
+            "Een vertaler kan elke WordPress-rol hebben."
          ],
          "Username": [
             "Gebruikersnaam"
@@ -50,110 +50,50 @@
          "Search": [
             "Zoeken"
          ],
-         "What should happen with your automatically translated content?": [
-            "Wat moet er gebeuren met je automatisch vertaalde inhoud?"
-         ],
-         "Let me review it before it gets published": [
-            "Let me review it before it gets published"
-         ],
-         "Publish right away but mark as not reviewed so I can take a look later": [
-            "Publiceer nu maar markeer het als niet beoordeeld zodat ik er later naar kan kijken."
-         ],
-         "Publish right away without reviewing": [
-            "Direct publiceren zonder herziening"
-         ],
          "Who will translate?": [
-            "Wie gaat er vertalen?"
+            "Wie gaat vertalen?"
          ],
          "Only myself": [
-            "Alleen ik"
+            "Alleen ikzelf"
          ],
          "You will be the sole translator for this site.": [
-            "Jij bent de enige vertaler voor deze site."
+            "Jij zult de enige vertaler voor deze site zijn."
          ],
          "Users of this site": [
             "Gebruikers van deze site"
          ],
          "You will choose or create new users of this WordPress site as the translators. You can also choose yourself. This allows you to set up a team of translators working in different language pairs.": [
-            "Je kiest of je creëert nieuwe gebruikers voor deze WordPress site als de vertalers. Je kunt ook jezelf kiezen. Zo kan je een team van vertalers samenstellen, die in verschillende talenparen werken."
+            "Je kunt bestaande gebruikers van deze WordPress-site kiezen of nieuwe gebruikers aanmaken als vertalers. Je kunt ook jezelf kiezen. Hiermee kun je een team van vertalers samenstellen die in verschillende taalparen werken."
          ],
          "Translation Service: %s": [
             "Vertaalservice: %s"
          ],
          "A Professional Translation Service": [
-            "Een professionele vertaalservice"
+            "Een Professionele Vertaalservice"
          ],
          "You have preselected %s to translate your content. Finish setting it up by entering the API token they provided to you.": [
-            "Je hebt %s voorgeselecteerd om je inhoud te vertalen. Voltooi de instelling door het invoeren van het API-token dat zij je hebben aangeleverd."
+            "Je hebt %s voorgeselecteerd om je inhoud te vertalen. Voltooi de installatie door de API-token in te voeren die zij je hebben verstrekt."
          ],
          "WPML offers tight integration with over 70 translation services. You will choose the translation service that you prefer and enjoy a streamlined process for sending jobs and receiving completed translations.": [
-            "WPML biedt een nauwe samenwerking tussen 70 vertaaldiensten. U kiest de vertaaldienst naar keuze en zult profiteren van een gestroomlijnd proces voor het versturen van opdrachten en voor het ontvangen van vertaalde inhoud."
+            "WPML biedt nauwe integratie met meer dan 70 vertaalservices. Je kiest de vertaalservice die je prefereert en geniet van een gestroomlijnd proces voor het verzenden van opdrachten en het ontvangen van voltooide vertalingen."
          ],
          "I want to set a \"Translation Manager\" who will choose the translators for this site": [
-            "Ik wil een \"Translation Manager\" aanstellen die voor deze site de vertalers zal kiezen"
+            "Ik wil een “Vertaalmanager” instellen die de vertalers voor deze site zal kiezen"
          ],
          "You will choose a user of this site and delegate the setup of translators to him/her. Choose this option when you are building a website for a client, who will set up translator users or choose a translation service.": [
-            "U zult een gebruiker van deze site kiezen en hem/haar dan verantwoordelijk maken voor het aanwijzen van vertalers. Kies deze optie als u een website voor een klant aan het maken bent die de vertalers of vertaaldienst zal aanwijzen."
-         ],
-         "Translate Everything Automatically": [
-            "Alles automatisch vertalen"
-         ],
-         "Let WPML do the translating for you": [
-            "Laat WPML de vertaling voor je doen"
-         ],
-         "Translates all your published content automatically": [
-            "Vertaalt al je gepubliceerde inhoud automatisch"
-         ],
-         "Uses machine translation powered by Google, Microsoft, or DeepL": [
-            "Gebruikt automatische vertaling met behulp van Google, Microsoft of DeepL."
-         ],
-         "Instantly translates new content and updates translations whenever you edit a page or post": [
-            "Vertaalt onmiddellijk nieuwe inhoud en werkt vertalingen bij wanneer je een pagina of een bericht bewerkt"
-         ],
-         "You can review translations before publishing or hire professional reviewers": [
-            "Je kunt vertalingen beoordelen voordat je ze publiceert, of professionele beoordelaars inhuren"
-         ],
-         "Affordable and fast": [
-            "Betaalbaar en snel"
-         ],
-         "How would you like to translate the content?": [
-            "Hoe wil je de inhoud vertalen?"
-         ],
-         "Choose": [
-            "Kiezen"
-         ],
-         "Translate What You Choose": [
-            "Vertaal waar je voor kiest"
-         ],
-         "You decide what to translate and who'll translate it": [
-            "Jij beslist wat er wordt vertaald en wie het vertaalt."
-         ],
-         "Translate yourself": [
-            "Zelf vertalen"
-         ],
-         "Use automatic translation on the content you choose": [
-            "Gebruik automatische vertaling op de inhoud die je kiest"
-         ],
-         "Work with translators that are users of your site": [
-            "Werk met vertalers die gebruikers zijn van je site"
-         ],
-         "or": [
-            "of"
-         ],
-         "Send to professional translation services": [
-            "Stuur naar professionele vertaaldiensten"
+            "Je kiest een gebruiker van deze site en delegeert de instelling van vertalers aan hem/haar. Kies deze optie wanneer je een website bouwt voor een klant, die vertalergebruikers zal instellen of een vertaalservice zal kiezen."
          ],
          "user": [
             "gebruiker"
          ],
          "Editor": [
-            "Editor"
+            "Redacteur"
          ],
          "Select an existing %s and set as Translation Manager": [
-            "Selecteer een bestaande %s en stel die in als Vertaalmanager"
+            "Selecteer een bestaande %s en stel in als Vertaalmanager"
          ],
          "Create a new %s and set as Translation Manager": [
-            "Maak een nieuwe %s aan en stel die in als Vertaalmanager"
+            "Maak een nieuwe %s aan en stel in als Vertaalmanager"
          ],
          "Cancel": [
             "Annuleren"
@@ -162,10 +102,10 @@
             "Vertaalmanager toevoegen"
          ],
          "Add a Translation Manager": [
-            "Voer een Vertaalmanager toe"
+            "Een Vertaalmanager toevoegen"
          ],
          "Set language pair(s)": [
-            "Taalcombinatie(s) instellen"
+            "Taalpaar/taalparen instellen"
          ],
          "Previous": [
             "Vorige"
@@ -174,61 +114,61 @@
             "Opslaan"
          ],
          "Add a Translator": [
-            "Voeg een vertaler toe"
+            "Een Vertaler toevoegen"
          ],
          "Select an existing user and set as Translator": [
-            "Selecteer een bestaande gebruiker en stel deze in als Vertaler"
+            "Selecteer een bestaande gebruiker en stel in als Vertaler"
          ],
          "Create a new user and set as Translator": [
-            "Maak een nieuwe gebruiker aan en stel deze in als Vertaler"
+            "Maak een nieuwe gebruiker aan en stel in als Vertaler"
          ],
          "Edit language pair(s) for translator": [
-            "Taalcombinatie(s) voor vertaler toevoegen"
+            "Taalpaar/taalparen voor vertaler bewerken"
          ],
          "Name": [
             "Naam"
          ],
          "Language Pairs": [
-            "Taalcombinaties"
+            "Taalparen"
          ],
          "You can translate to and from all languages": [
             "U kunt van en naar alle talen vertalen"
          ],
          "%s file upload failed.": [
-            "%s bestand uploaden is mislukt."
+            "%s bestand uploaden mislukt."
          ],
          "Flag": [
             "Vlag"
          ],
          "Flag file": [
-            "Bestand markeren"
+            "Vlagbestand"
          ],
          "You just added  language. Next, select it as the site's default language or a translation language.": [
-            "Je heeft zojuist een taal toegevoegd. Vervolgens selecteer je deze als de standaardtaal van de site, of als een vertaaltaal."
+            "Je hebt zojuist een taal toegevoegd. Selecteer deze nu als de standaardtaal van de site of als een vertaaltaal."
          ],
          "Language added": [
-            "Taal is toegevoegd"
+            "Taal toegevoegd"
          ],
          "The value \"%s\" already exists": [
-            "De waarde \"%s\" bestaat al."
+            "De waarde “%s” bestaat al"
          ],
          "Add a new language": [
-            "Voeg een nieuwe taal toe"
+            "Een nieuwe taal toevoegen"
          ],
          "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
-            "Maak een landspecifieke taal aan door de algemene taal uit de onderstaande lijst te kiezen. Kies vervolgens het land waarvoor de taal moet worden gelokaliseerd."
+            "Maak een landspecifieke taal door de algemene taal uit onderstaande lijst te kiezen. Kies vervolgens het land waarvoor het moet worden gelokaliseerd."
          ],
          "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
-            "Door een combinatie te kiezen die al in de database bestaat, kan WPML helpen met het invullen van de benodigde velden. Lees meer over <AddingACustomLanguageLink />."
+            "Door een combinatie te kiezen die al in de database bestaat, kan WPML helpen bij het invullen van de benodigde velden. Lees meer over <AddingACustomLanguageLink />."
          ],
          "Cannot find?": [
-            "Kun je het niet vinden?"
+            "Niet gevonden?"
          ],
          "Click here": [
             "Klik hier"
          ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
-            "Het verkeerde formaat. Er mogen alleen kleine letters en \"-\" in staan. B.v: \"fr\" , \"pt-br\", \"zh-hans\""
+            "Het verkeerde formaat. Het mag alleen kleine letters en “-” bevatten. Bijv.: “fr”, “pt-br”, “zh-hans”"
          ],
          "Language": [
             "Taal"
@@ -240,28 +180,28 @@
             "Code"
          ],
          "The language will not be supported by automatic translations": [
-            "De taal wordt niet ondersteund door automatische vertalingen"
+            "De taal zal niet worden ondersteund door automatische vertalingen"
          ],
          "Language mapping": [
-            "Taaloverzicht"
+            "Taaltoewijzing"
          ],
          "Don't map this language": [
             "Deze taal niet toewijzen"
          ],
          "Default locale": [
-            "Standaard lokale parameters"
+            "Standaard locale"
          ],
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
-            "Het verkeerde formaat.Er mogen alleen kleine letters en \"_\" in staan. B.v: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+            "Het verkeerde formaat. Het mag alleen kleine letters en “_” bevatten. Bijv.: “de”, “de_DE”, “zh_Hant_TW”"
          ],
          "hreflang": [
             "hreflang"
          ],
          "Encode url?": [
-            "Url coderen?"
+            "URL coderen?"
          ],
          "Flags must be:": [
-            "De vlaggen moeten zijn:"
+            "Vlaggen moeten:"
          ],
          "NO": [
             "NEE"
@@ -270,103 +210,127 @@
             "JA"
          ],
          " (required)": [
-            "(vereist)"
+            " (verplicht)"
          ],
          "Please fill in the field": [
-            "Gelieve het veld in te vullen"
+            "Vul dit veld in"
          ],
          "PNG, SVG, or JPG files": [
-            "PNG, SVG, of JPG bestanden"
+            "PNG-, SVG- of JPG-bestanden zijn"
          ],
          "Save language": [
             "Taal opslaan"
          ],
          "18 x 12 pixels": [
-            "18 x 12 pixels"
+            "18 x 12 pixels zijn"
          ],
          "Read more about ": [
-            "Lees meer over"
+            "Lees meer over "
          ],
          "The name of your language as it will appear on your site's language switcher.": [
-            "De naam van je taal zoals die zal verschijnen op de taalschakelaar van je site."
+            "De naam van je taal zoals deze zal verschijnen in de taalwisselaar van je site."
          ],
          "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
-            "Een unieke waarde die de taal identificeert in de database en URL. Eenmaal opgeslagen, kan de taalcode niet meer worden gewijzigd."
+            "Een unieke waarde die de taal identificeert in de database en URL. Eenmaal opgeslagen kan de taalcode niet worden gewijzigd."
          ],
          "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
-            "Als je aangepaste taal op een bestaande taal lijkt, kan je de spellingcontrole en automatische vertaling van de bestaande taal gebruiken. Als je aangepaste taal bijvoorbeeld Zwitsers-Duits is, kan je Duits toewijzen als de te gebruiken taal voor spellingcontrole en automatische vertaling. Als je je aangepaste taal niet aan een bestaande taal toewijst, zullen de functies voor spellingcontrole en automatische vertaling in die taal niet beschikbaar zijn."
+            "Als je aangepaste taal lijkt op een bestaande taal, kun je de spellingcontrole en automatische vertaling van de bestaande taal gebruiken. Als je aangepaste taal bijvoorbeeld Zwitserduits is, kun je het toewijzen aan Duits als de te gebruiken taal voor spellingcontrole en automatische vertaling. Als je je aangepaste taal niet toewijst aan een bestaande taal, zijn spellingcontrole en automatische vertaling niet beschikbaar in die taal."
          ],
          "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
-            "De waarde die WPML controleert bij het laden van vertalingen uit MO- en PO-bestanden. De standaard locatie is opgenomen in de bestandsnamen in je /wp-content/languages/ map in uw WordPress setup."
+            "De waarde die WPML controleert bij het laden van vertalingen uit MO- en PO-bestanden. De standaard locale is opgenomen in de bestandsnamen in je /wp-content/languages/ map in je WordPress-installatie."
          ],
          "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
-            "Google gebruikt het hreflang kenmerk om gebruikers naar sites in hun relevante taal en locatie te leiden. Voorbeelden:"
+            "Google gebruikt het hreflang-attribuut om gebruikers naar sites in hun relevante taal en locatie te leiden. Voorbeelden:"
          ],
          "All English-speaking users: en": [
             "Alle Engelstalige gebruikers: en"
          ],
          "English for UK users: en-gb": [
-            "Engels voor VK-gebruikers: en-gb"
+            "Engels voor gebruikers in het VK: en-gb"
          ],
          "English for US users: en-us": [
-            "Engels voor VS-gebruikers: en-us"
+            "Engels voor gebruikers in de VS: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
-            "Bepaalt of URL's in deze taal gecodeerd zijn of ASCII-tekens gebruiken (indien niet zeker, laat het dan op \"No\" staan)."
+            "Bepaalt of URL's in deze taal gecodeerd zijn of ASCII-tekens gebruiken (laat het op “Nee” staan als u het niet zeker weet)."
          ],
          "adding a custom language": [
-            "een aangepaste taal toevoegen..."
+            "een aangepaste taal toevoegen"
          ],
          "Learn more about required server settings to use a different domain per language": [
-            "Meer informatie over de vereiste serverinstellingen om per taal een ander domein te gebruiken"
+            "Leer meer over vereiste serverinstellingen om een ander domein per taal te gebruiken"
          ],
          "Language name added as a parameter": [
-            "Naam van de taal toegevoegd als een parameter"
+            "Taalnaam toegevoegd als parameter"
          ],
          "I will set up the domains for my secondary languages later.": [
-            "Ik stel de domeinen voor mijn secundaire talen later in."
+            "Ik zal de domeinen voor mijn secundaire talen later instellen."
          ],
          "The domain you have entered is invalid.": [
-            "Het door jou ingevoerde domein is ongeldig."
+            "Het domein dat u heeft ingevoerd is ongeldig."
          ],
          "The domain you have entered must be unique.": [
-            "Het door jou ingevoerde domein moet uniek zijn."
+            "Het domein dat u heeft ingevoerd moet uniek zijn."
          ],
          "Please Note: Your site won't work in your secondary languages until this is successfully set up or you switch to a different URL option.": [
-            "Let op: Je site zal niet in je secundaire talen werken, totdat dit succesvol is ingesteld of als je overschakelt naar een andere URL-optie."
+            "Let op: Uw site zal niet werken in uw secundaire talen totdat dit succesvol is ingesteld of u overschakelt naar een andere URL-optie."
          ],
          "Learn more about Language URL Options": [
-            "Meer informatie over Taal URL-opties"
+            "Leer meer over Taal-URL-opties"
          ],
          "How would you like to format your site's URL?": [
-            "Hoe wil je de URL van je site opmaken?"
+            "Hoe wilt u de URL van uw site formatteren?"
          ],
          "Different languages in directories": [
-            "Verschillende talen in bestandsmappen"
+            "Verschillende talen in mappen"
          ],
          "The URL rewrite is not configured in your server.": [
-            "De URL herschrijven is niet in je server geconfigureerd."
+            "De URL-herschrijving is niet geconfigureerd op uw server."
          ],
          "Learn more about required server settings to display languages in directories": [
-            "Meer informatie over de vereiste serverinstellingen om talen in mappen weer te geven"
+            "Leer meer over vereiste serverinstellingen om talen in mappen weer te geven"
          ],
          "I will fix my server settings to display languages in directories later.": [
-            "Ik pas mijn serverinstellingen later aan om talen in mappen weer te geven."
+            "Ik zal mijn serverinstellingen later aanpassen om talen in mappen weer te geven."
          ],
          "Your server settings do not allow for languages in directories. ": [
-            "Je serverinstellingen staan geen talen in mappen toe."
+            "Uw serverinstellingen staan geen talen in mappen toe."
          ],
          "Learn more about the required server settings.": [
-            "Meer informatie over de vereiste serverinstellingen."
+            "Leer meer over de vereiste serverinstellingen."
          ],
          "A different domain per language": [
             "Een ander domein per taal"
+         ],
+         "Translate your pages": [
+            "Vertaal je pagina's"
+         ],
+         "Translate your posts": [
+            "Vertaal je berichten"
+         ],
+         "Next, you need to set-up your multilingual store.": [
+            "Vervolgens moet je je meertalige winkel instellen."
+         ],
+         "Continue to WooCommerce Multilingual Setup": [
+            "Ga verder naar WooCommerce Meertalige Setup"
+         ],
+         "Start translating your site by visiting the <s>Translation Dashboard</s>.": [
+            "Begin met het vertalen van je site door het <s>Vertaaldashboard</s> te bezoeken."
+         ],
+         "Go to Translation Dashboard": [
+            "Ga naar Vertaaldashboard"
+         ],
+         "Need help? <a>Using WPML's Plus Icons to Translate Content</a>": [
+            "Hulp nodig? <a>WPML's Plus-pictogrammen gebruiken om inhoud te vertalen</a>"
+         ],
+         "To start translating, look for the \"plus\" icons that WPML introduces next to content lists and editors. Click the \"plus\" icon under each language to translate.": [
+            "Om te beginnen met vertalen, zoek naar de “plus”-pictogrammen die WPML naast inhoudslijsten en editors introduceert. Klik op het “plus”-pictogram onder elke taal om te vertalen."
          ],
          "support forum": [
             "ondersteuningsforum"
          ],
          "There was a critical error setting up WPML. Please contact our <LinkToSupportForum /> to resolve it.": [
-            "Er is een kritieke fout opgetreden bij het instellen van WPML. Neem contact met ons op <LinkToSupportForum /> om dit op te lossen."
+            "Er is een kritieke fout opgetreden bij het instellen van WPML. Neem contact op met ons <LinkToSupportForum /> om dit op te lossen."
          ],
          "Hide error message": [
             "Foutmelding verbergen"
@@ -374,168 +338,53 @@
          "Show error message": [
             "Foutmelding tonen"
          ],
-         "WPML is ready to translate your site": [
-            "WPML is klaar om je site te vertalen"
+         "Congratulations, your website is now multilingual with WPML!": [
+            "Gefeliciteerd, je website is nu meertalig met WPML!"
          ],
-         "WPML has started translating your site": [
-            "WPML is begonnen met het vertalen van je site"
+         "For language switcher customization and more language options, navigate to <a>WPML → Languages</a>.": [
+            "Voor aanpassing van de taalschakelaar en meer taalopties, ga naar <a>WPML → Talen</a>."
          ],
-         "When you're done editing content, go to <s>WPML → Translation Management</s> to start translations.": [
-            "Als je klaar bent met het bewerken van inhoud, ga dan naar <s>WPML → Vertaalbeheer</s> om vertalingen te starten."
-         ],
-         "View the status of the translations in <s>WPML → Translation Management</s>.": [
-            "Bekijk de status van de vertalingen in <s>WPML → Translation Management</s>."
-         ],
-         "Go to <s>WPML → Translation Management</s> to choose what to translate.": [
-            "Ga naar <s>WPML → Translation Management</s> om te kiezen wat vertaald moet worden."
-         ],
-         "You are ready to start translating": [
-            "Je bent klaar om met vertalen te beginnen"
-         ],
-         "Right now, your site has a nice language switcher in its footer. To enable other styles of language switchers, go to <s>WPML → Languages</s>.": [
-            "Op dit moment heeft je site een mooie taalswitcher in de voettekst. Om andere taalstijlen in te schakelen, ga naar <s>WPML → Languages</s>."
-         ],
-         "Language switcher customization": [
-            "Aanpassing van de taalschakelaar"
-         ],
-         "Your current setup will use a lot of translation credits": [
-            "Je huidige setup gebruikt veel vertaal credits"
-         ],
-         "You decided to <b>Translate Everything Automatically</b> on a <span class=\"warning\">development site</span>": [
-            "Je hebt besloten om <b>Alles automatisch te vertalen</b> op een <span class=\"warning\">development site</span>"
-         ],
-         "You decided to <b>Translate Everything Automatically:</b>": [
-            "Je hebt besloten om <b>Alles automatisch te vertalen:</b>"
-         ],
-         "10,000 credits assigned by default to development sites": [
-            "10.000 credits standaard toegewezen aan ontwikkelings sites"
-         ],
-         "posts, pages...": [
-            "berichten, pagina's..."
-         ],
-         "translated to": [
-            "vertaald naar het"
-         ],
-         "<b>%1$d</b> language": [
-            "<b>%1$d</b> taal",
-            "<b>%1$d</b> talen"
-         ],
-         "will cost approximately": [
-            "kost ongeveer"
-         ],
-         "credits": [
-            "credits"
-         ],
-         "Loading details...": [
-            "Details laden..."
-         ],
-         "Hide details": [
-            "Details verbergen"
-         ],
-         "Show details": [
-            "Details weergeven"
-         ],
-         "Your current setup will use approximately <b>%s</b> credits": [
-            "Je huidige setup gebruikt ongeveer <b>%s</b> credits."
-         ],
-         "What do you want to do?": [
-            "Wat wil je doen?"
-         ],
-         "Since this is a development site, you may not want to spend credits on dummy content.": [
-            "Aangezien dit een ontwikkelingssite is, wil je misschien geen credits uitgeven aan dummy-inhoud."
-         ],
-         "Continue with this setup": [
-            "Ga door met deze setup"
-         ],
-         "WPML will automatically translate your site’s content. When your credits run out, you can purchase more or sign up for pay-as-you-go to continue using automatic translation.": [
-            "WPML vertaalt automatisch de inhoud van je site. Als je credits op zijn, kun je er meer kopen of je aanmelden voor pay-as-you-go om de automatische vertaling te blijven gebruiken."
-         ],
-         "Make changes": [
-            "Breng wijzigingen aan"
-         ],
-         "You can use fewer credits by adjusting some of the settings you selected during setup.": [
-            "Je kunt minder credits gebruiken door enkele van de bij de setup gekozen instellingen aan te passen."
-         ],
-         "Reduce the number of translation languages": [
-            "Verminder het aantal vertaaltalen"
-         ],
-         "The more languages you have on your site, the more credits it costs to translate. <b>You can always add more languages later.</b>": [
-            "Hoe meer talen je op je site hebt, hoe meer credits het kost om te vertalen. <b>Je kunt later altijd meer talen toevoegen.</b>"
-         ],
-         "Change site languages": [
-            "Wijzig de talen van je site"
-         ],
-         "Change your translation mode": [
-            "Wijzig je vertaalmodus"
-         ],
-         "<b>Translate What You Choose</b> gives you more control over what gets translated, and you can still use automatic translation.": [
-            "<b>Vertaal wat je kiest</b> geeft je meer controle over wat er vertaald wordt, en je kunt nog steeds automatische vertaling gebruiken."
-         ],
-         "Change translation mode": [
-            "Wijzig vertaalmodus"
-         ],
-         "I'm OK with using this many translation credits,": [
-            "Ik ben akkoord met zoveel vertaalcredits,"
-         ],
-         "let's proceed and translate the whole site automatically.": [
-            "laten we doorgaan en de hele site automatisch vertalen."
+         "What are the languages of your site?": [
+            "Wat zijn de talen van je site?"
          ],
          "Default language": [
-            "Standaard taal"
+            "Standaardtaal"
          ],
          "What is the current language of your website?": [
             "Wat is de huidige taal van je website?"
          ],
          "Translation languages": [
-            "Vertalingstalen"
+            "Vertaaltalen"
          ],
          "Which languages do you want to translate your site into?": [
-            "In welke talen wilt je je site vertalen?"
+            "In welke talen wil je je site vertalen?"
          ],
          "If you cannot find languages that you need in the list": [
-            "Als je de talen die je nodig hebt niet in de lijst vindt,"
+            "Als je de talen die je nodig hebt niet kunt vinden in de lijst"
          ],
          "create a custom language": [
-            "maak dan een aangepaste taal aan"
-         ],
-         "What are the languages of your site?": [
-            "Wat zijn de talen van je site?"
+            "maak een aangepaste taal"
          ],
          "If you don't have a WPML.org account or a valid subscription, %1$spurchase one%2$s to get automatic updates, full support, and a 30-day money-back guarantee.": [
-            "Als je geen WPML.org account of geldig abonnement hebt, %1$spurchase one%2$s om automatische updates, volledige ondersteuning en een 30-dagen geld-terug-garantie te krijgen."
+            "Als u geen WPML.org-account of een geldige abonnement heeft, %1$skoop er dan een%2$s om automatische updates, volledige ondersteuning en een 30 dagen geld-terug-garantie te krijgen."
          ],
          "Already purchased WPML?": [
-            "Heb je WPML al gekocht?"
+            "WPML al aangeschaft?"
          ],
          "Enter your site key from your WPML account to receive automatic updates.": [
-            "Voer je site sleutel van je WPML account in om automatische updates te ontvangen."
+            "Voer uw sitesleutel van uw WPML-account in om automatische updates te ontvangen."
          ],
          "Site key": [
-            "Site sleutel"
+            "Sitesleutel"
          ],
          "Get a key for this site": [
-            "Haal een sleutel voor deze site op"
-         ],
-         "Are you ready to start translating now?": [
-            "Ben je klaar om te beginnen met vertalen?"
-         ],
-         "Yes, start translating!": [
-            "Ja, begin met vertalen!"
-         ],
-         "WPML will translate your site for you using your automatic translation credits.": [
-            "WPML zal je site voor je vertalen met behulp van je automatische vertaalcredits."
-         ],
-         "No, my content isn't finalized yet": [
-            "Nee, mijn inhoud is nog niet af..."
-         ],
-         "When you're ready, start automatic translation from the Translation Management Dashboard.": [
-            "Als je klaar bent, start je de automatische vertaling vanuit het Translation Management Dashboard."
+            "Krijg een sleutel voor deze site"
          ],
          "Improve your site’s translations using helpful plugins": [
-            "Verbeter de vertalingen van je site met behulp van slimme plugins"
+            "Verbeter de vertalingen van uw site met behulpzame plugins"
          ],
          "Based on the themes and other plugins running on your site, we recommend that you enable the following WPML components. These are included with your WPML purchase and allow you to translate strings, media, admin texts, and more.": [
-            "Gebaseerd op de thema's en andere plugins die op je site zijn geïnstalleerd, raden we je aan om de volgende WPML componenten in te schakelen. Deze zijn inbegrepen bij je WPML aankoop en stellen je in staat om teksten, media, administratieteksten en meer te vertalen."
+            "Op basis van de thema's en andere plugins die op uw site draaien, raden wij u aan de volgende WPML-componenten in te schakelen. Deze zijn inbegrepen bij uw WPML-aankoop en stellen u in staat om strings, media, administratieve teksten en meer te vertalen."
          ],
          "Error in activating plugin.": [
             "Fout bij het activeren van de plugin."
@@ -544,64 +393,46 @@
             "Fout bij het installeren van de plugin."
          ],
          "Yes, send theme and plugins information, in order to get faster support and compatibility alerts": [
-            "Ja, stuur thema en plugins informatie, om snellere ondersteuning en compatibiliteitwaarschuwingen te krijgen"
+            "Ja, stuur thema- en plugin-informatie om snellere ondersteuning en compatibiliteitswaarschuwingen te krijgen"
          ],
          "No, don't send this information and skip compatibility alerts": [
             "Nee, stuur deze informatie niet en sla compatibiliteitswaarschuwingen over"
          ],
          "Do you want to get better and faster support?": [
-            "Wil je betere en snellere ondersteuning?"
+            "Wilt u betere en snellere ondersteuning krijgen?"
          ],
          "The WPML plugin can send a list of active plugins and theme used in your site to wpml.org. This allows our support team to help you much faster and to contact you in advance about potential compatibility problems and their solutions.": [
-            "De WPML plugin kan een lijst met actieve plugins en thema's die gebruikt zijn op uw site naar wpml.org sturen. Hiermee kan ons hulpteam u veel sneller helpen en vooraf contact met u opnemen over potentiële compatibiliteitsproblemen en mogelijke oplossingen."
+            "De WPML-plugin kan een lijst van actieve plugins en het gebruikte thema op uw site naar wpml.org sturen. Dit stelt ons ondersteuningsteam in staat u veel sneller te helpen en u vooraf te contacteren over mogelijke compatibiliteitsproblemen en hun oplossingen."
          ],
          "Privacy and data usage policy": [
-            "Privacy- en datagebruikbeleid"
-         ],
-         "<LinkToTheDifferentWaysYouCanTranslateYourSite/> for help with choosing the best mode for your site.": [
-            "<LinkToTheDifferentWaysYouCanTranslateYourSite/> voor hulp bij het kiezen van de beste modus voor je site."
-         ],
-         "Can't decide? Let us help!": [
-            "Kan je niet beslissen? Laat ons helpen!"
-         ],
-         "Contact our support team": [
-            "Neem contact op met onze helpdesk"
+            "Privacy- en gegevensgebruiksbeleid"
          ],
          "Error: %s": [
             "Fout: %s"
          ],
          "Authenticate": [
-            "Authentiseren \r\n\n"
+            "Authenticeren"
          ],
          "To send content and receive translations from <service_name />, enter the credentials you received from them.": [
-            "Om inhoud te verzenden en vertalingen te ontvangen van <service_name />, voer je de referenties in die je van hen hebt ontvangen."
+            "Om inhoud te verzenden en vertalingen te ontvangen van <service_name />, voer de inloggegevens in die u van hen heeft ontvangen."
          ],
          "Need credentials? Contact <link_to_service />": [
-            "Referenties nodig? Neem contact op met <link_to_service />"
+            "Inloggegevens nodig? Neem contact op met <link_to_service />"
          ],
          "Success! You can start sending content to %s for translation after you finish the setup wizard.": [
-            "Succes! U kunt beginnen met het verzenden van inhoud naar %s voor vertaling, nadat je de installatiewizard hebt voltooid."
+            "Succes! U kunt beginnen met het verzenden van inhoud naar %s voor vertaling nadat u de installatiewizard heeft voltooid."
          ],
          "The credentials are invalid. Please, try again.": [
-            "De referenties zijn ongeldig. Probeer het opnieuw."
+            "De inloggegevens zijn ongeldig. Probeer het opnieuw."
          ],
          "Choose a Translation Service": [
-            "Een vertaaldienst kiezen"
+            "Kies een vertaalservice"
          ],
          "Loading": [
-            "Aan het laden"
+            "Laden"
          ],
          "A new language could not be added correctly": [
-            "Een nieuwe taal kon niet foutloos worden toegevoegd"
-         ],
-         "Support": [
-            "Support"
-         ],
-         "Plugins": [
-            "Plugins"
-         ],
-         "Finished": [
-            "Klaar"
+            "Een nieuwe taal kon niet correct worden toegevoegd"
          ],
          "Back": [
             "Terug"
@@ -627,14 +458,23 @@
          "Register WPML": [
             "Registreer WPML"
          ],
-         "Translation Mode": [
-            "Vertaalmodus"
+         "Who Will Translate": [
+            "Wie Gaat Vertalen"
+         ],
+         "Support": [
+            "Ondersteuning"
+         ],
+         "Plugins": [
+            "Plugins"
+         ],
+         "Finished": [
+            "Voltooid"
          ],
          "Settings": [
             "Instellingen"
          ],
          "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
-            "Het is momenteel niet mogelijk om een vertaalservice aan te sluiten als WPML is ingesteld om de inhoud van je site automatisch te vertalen. Als je een vertaalservice wilt gebruiken, verander dan je vertaalmodus op de <LinkToSettingsPage /> pagina."
+            "Het is momenteel niet mogelijk om een vertaalservice te verbinden wanneer WPML is ingesteld om de inhoud van uw site automatisch te vertalen. Om een vertaalservice te gebruiken, wijzig uw vertaalmodus op de <LinkToSettingsPage /> pagina."
          ],
          "Documentation": [
             "Documentatie"

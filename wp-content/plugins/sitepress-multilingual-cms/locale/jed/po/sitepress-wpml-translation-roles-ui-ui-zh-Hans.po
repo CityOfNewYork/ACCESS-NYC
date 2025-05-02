@@ -1,0 +1,395 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/language/LanguagePairs.js:57
+msgid "From:"
+msgstr "来自："
+
+#: src/js/components/language/LanguagePairs.js:69
+msgid "--Choose language--"
+msgstr "--选择语言--"
+
+#: src/js/components/language/LanguagePairs.js:81
+msgid "to:"
+msgstr "到："
+
+#: src/js/components/language/SelectLanguagePairs.js:39
+msgid "Set language pair(s) for Translator %s:"
+msgstr "为翻译人员%s设置语言对："
+
+#: src/js/components/language/SelectLanguagePairs.js:64
+msgid "+ Add more language pairs for this translator"
+msgstr "+ 为该翻译人员添加更多语言对"
+
+#: src/js/components/roles/CreateUser.js:100
+msgid "First Name"
+msgstr "名"
+
+#: src/js/components/roles/CreateUser.js:101
+msgid "Last Name"
+msgstr "姓"
+
+#: src/js/components/roles/CreateUser.js:105
+msgid "Role"
+msgstr "角色"
+
+#: src/js/components/roles/CreateUser.js:137
+msgid "(required)"
+msgstr "（必填）"
+
+#: src/js/components/roles/CreateUser.js:46
+msgid ""
+"Make sure that you have provided a correct email address e.g. "
+"name@domain.com"
+msgstr "确保您提供了正确的电子邮件地址，例如 name@domain.com"
+
+#: src/js/components/roles/CreateUser.js:64
+msgid "This field is required"
+msgstr "此字段为必填项"
+
+#: src/js/components/roles/CreateUser.js:84
+msgid "A translator can be any WordPress role."
+msgstr "翻译人员可以是任何WordPress角色。"
+
+#: src/js/components/roles/CreateUser.js:98
+msgid "Username"
+msgstr "用户名"
+
+#: src/js/components/roles/CreateUser.js:99
+msgid "Email"
+msgstr "电子邮件"
+
+#: src/js/components/roles/ExistingUserSelect.js:46
+msgid "Search"
+msgstr "搜索"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:47
+msgid "user"
+msgstr "用户"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:47
+msgid "Editor"
+msgstr "编辑者"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:61
+msgid "Select an existing %s and set as Translation Manager"
+msgstr "选择一个现有的%s并设置为翻译经理"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:72
+msgid "Create a new %s and set as Translation Manager"
+msgstr "创建一个新的%s并设置为翻译经理"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:85
+#: src/js/components/translators/AddTranslatorDialog.js:121
+#: src/js/components/translators/EditLanguagesDialog.js:73
+#: src/js/setup/components/Steps/AddLanguagesModal.js:496
+msgid "Cancel"
+msgstr "取消"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:90
+msgid "Add Translation Manager"
+msgstr "添加翻译经理"
+
+#: src/js/components/translation-managers/ManagerSection.js:27
+msgid "Add a Translation Manager"
+msgstr "添加翻译经理"
+
+#: src/js/components/translators/AddTranslatorDialog.js:111
+msgid "Set language pair(s)"
+msgstr "设置语言对"
+
+#: src/js/components/translators/AddTranslatorDialog.js:126
+msgid "Previous"
+msgstr "上一步"
+
+#: src/js/components/translators/AddTranslatorDialog.js:129
+#: src/js/components/translators/EditLanguagesDialog.js:78
+msgid "Save"
+msgstr "保存"
+
+#: src/js/components/translators/AddTranslatorDialog.js:65
+#: src/js/components/translators/UserSection.js:45
+msgid "Add a Translator"
+msgstr "添加翻译人员"
+
+#: src/js/components/translators/AddTranslatorDialog.js:91
+msgid "Select an existing user and set as Translator"
+msgstr "选择一个现有用户并设置为翻译人员"
+
+#: src/js/components/translators/AddTranslatorDialog.js:95
+msgid "Create a new user and set as Translator"
+msgstr "创建一个新用户并设置为翻译人员"
+
+#: src/js/components/translators/EditLanguagesDialog.js:55
+msgid "Edit language pair(s) for translator"
+msgstr "编辑翻译人员的语言对"
+
+#: src/js/components/translators/TranslatorsTable.js:128
+#: src/js/setup/components/Steps/AddLanguagesModal.js:346
+msgid "Name"
+msgstr "姓名"
+
+#: src/js/components/translators/TranslatorsTable.js:140
+msgid "Language Pairs"
+msgstr "语言对"
+
+#: src/js/components/translators/TranslatorsTable.js:144
+msgid "You can translate to and from all languages"
+msgstr "您可以翻译所有语言之间的内容"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:48
+msgid "%s file upload failed."
+msgstr "%s文件上传失败。"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:69
+msgid "Flag"
+msgstr "旗帜"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:87
+msgid "Flag file"
+msgstr "旗帜文件"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:160
+msgid ""
+"You just added  language. Next, select it as the site's default language or "
+"a translation language."
+msgstr "您刚刚添加了语言。接下来，将其选为网站的默认语言或翻译语言。"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:162
+msgid "Language added"
+msgstr "已添加语言"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:192
+msgid "The value \"%s\" already exists"
+msgstr "值 “%s” 已存在"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:215
+msgid "Add a new language"
+msgstr "添加新语言"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:224
+msgid ""
+"Create a country-specific language by choosing the general language from "
+"the list below. Then, choose the country it should be localized for."
+msgstr "通过从下面的列表中选择通用语言来创建特定国家的语言。然后，选择它应该本地化的国家。"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:229
+msgid ""
+"By choosing a combination that already exists in the database, WPML can "
+"help fill out the necessary fields. Read more about "
+"<AddingACustomLanguageLink />."
+msgstr "通过选择数据库中已存在的组合，WPML可以帮助填写必要的字段。阅读更多关于<AddingACustomLanguageLink />的信息。"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:242
+msgid "Cannot find?"
+msgstr "找不到？"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:244
+msgid "Click here"
+msgstr "点击这里"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:300
+msgid ""
+"The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" "
+", \"pt-br\", \"zh-hans\""
+msgstr "格式错误。它只能包含小写字母和 “-”。例如：“fr”，“pt-br”，“zh-hans”"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:308
+msgid "Language"
+msgstr "语言"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:331
+msgid "Location"
+msgstr "地点"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:360
+msgid "Code"
+msgstr "代码"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:374
+msgid "The language will not be supported by automatic translations"
+msgstr "该语言将不支持自动翻译"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:392
+msgid "Language mapping"
+msgstr "语言映射"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:404
+msgid "Don't map this language"
+msgstr "不要映射此语言"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:418
+msgid "Default locale"
+msgstr "默认区域设置"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:423
+msgid ""
+"The wrong format. It may contain only small letters and \"_\". E.g: \"de\" "
+", \"de_DE\", \"zh_Hant_TW\""
+msgstr "格式错误。它只能包含小写字母和 “_”。例如：“de”，“de_DE”，“zh_Hant_TW”"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:435
+msgid "hreflang"
+msgstr "hreflang"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:449
+msgid "Encode url?"
+msgstr "编码URL？"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:45
+msgid "Flags must be:"
+msgstr "旗帜必须是："
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:453
+msgid "NO"
+msgstr "否"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:454
+msgid "YES"
+msgstr "是"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:460
+msgid " (required)"
+msgstr "（必填）"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:483
+msgid "Please fill in the field"
+msgstr "请填写此字段"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:49
+msgid "PNG, SVG, or JPG files"
+msgstr "PNG、SVG或JPG文件"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:501
+msgid "Save language"
+msgstr "保存语言"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:52
+msgid "18 x 12 pixels"
+msgstr "18 x 12像素"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:55
+msgid "Read more about "
+msgstr "阅读更多关于"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:60
+msgid ""
+"The name of your language as it will appear on your site's language "
+"switcher."
+msgstr "您的语言在网站语言切换器上显示的名称。"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:61
+msgid ""
+"A unique value that identifies the language in the database and URL. Once "
+"saved, the language code cannot be changed."
+msgstr "在数据库和URL中标识语言的唯一值。保存后，语言代码不能更改。"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:62
+msgid ""
+"If your custom language is similar to an existing language, you can use the "
+"existing language's spellcheck and automatic translation. For example, if "
+"your custom language is Swiss-German, you can map to German as the language "
+"to use for spellcheck and automatic translation. If you don't map your "
+"custom language to an existing language, spellcheck and automatic "
+"translation features will be unavailable in that language."
+msgstr "如果您的自定义语言与现有语言相似，您可以使用现有语言的拼写检查和自动翻译。例如，如果您的自定义语言是瑞士德语，您可以映射到德语作为拼写检查和自动翻译的语言。如果您不将自定义语言映射到现有语言，则该语言将无法使用拼写检查和自动翻译功能。"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:66
+msgid ""
+"The value WPML checks when loading translations from MO and PO files. The "
+"default locale is included in the filenames in your /wp-content/languages/ "
+"folder in your WordPress setup."
+msgstr "WPML 从 MO 和 PO 文件加载翻译时检查的值。默认地域包含在 WordPress 设置中您的 /wp-content/languages/ 文件夹的文件名中。"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:69
+msgid ""
+"Google uses the hreflang attribute to direct users to sites in their "
+"relevant language and location. Examples:"
+msgstr "Google使用hreflang属性将用户引导到与他们相关的语言和位置的网站。示例："
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:71
+msgid "All English-speaking users: en"
+msgstr "所有英语用户：en"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:72
+msgid "English for UK users: en-gb"
+msgstr "英国用户的英语：en-gb"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:73
+msgid "English for US users: en-us"
+msgstr "美国用户的英语：en-us"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:81
+msgid ""
+"Determines if URLs in this language are encoded or use ASCII characters (if "
+"unsure, leave it as \"No\")."
+msgstr "确定此语言的URL是否进行编码或使用ASCII字符（如果不确定，请保留为 “否”）。"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:98
+msgid "adding a custom language"
+msgstr "添加自定义语言"
+
+#: src/js/setup/components/Steps/Languages.js:110
+msgid "What are the languages of your site?"
+msgstr "您网站的语言有哪些？"
+
+#: src/js/setup/components/Steps/Languages.js:120
+msgid "Default language"
+msgstr "默认语言"
+
+#: src/js/setup/components/Steps/Languages.js:122
+msgid "What is the current language of your website?"
+msgstr "您网站的当前语言是什么？"
+
+#: src/js/setup/components/Steps/Languages.js:133
+msgid "Translation languages"
+msgstr "翻译语言"
+
+#: src/js/setup/components/Steps/Languages.js:135
+msgid "Which languages do you want to translate your site into?"
+msgstr "您想将您的网站翻译成哪些语言？"
+
+#: src/js/setup/components/Steps/Languages.js:149
+msgid "If you cannot find languages that you need in the list"
+msgstr "如果您在列表中找不到所需的语言"
+
+#: src/js/setup/components/Steps/Languages.js:150
+msgid "create a custom language"
+msgstr "创建自定义语言"
+
+#: src/js/translation-roles-ui/components/Managers.js:12
+msgid ""
+"You can add a dedicated person to oversee everything translation-related on "
+"your site. %sTranslation Managers%s can add new local translators or "
+"professional translation services, create and assign translation jobs, "
+"review completed translations, and change translation-related settings."
+msgstr "您可以添加一个专门的人来监督网站上与翻译相关的所有事务。%s翻译经理%s可以添加新的本地翻译人员或专业翻译服务，创建和分配翻译任务，审核完成的翻译，以及更改与翻译相关的设置。"
+
+#: src/js/translation-roles-ui/components/Managers.js:22
+msgid "Translation Managers"
+msgstr "翻译经理"
+
+#: src/js/translation-roles-ui/components/Managers.js:25
+msgid ""
+"Note: All Administrators are automatically given Translation Manager "
+"privileges."
+msgstr "注意：所有管理员自动获得翻译经理权限。"
+
+#: src/js/translation-roles-ui/components/Users.js:14
+msgid ""
+"%sLocal translators%s are users of your site that can log in and add, edit, "
+"and review your site's translations. Add a translator and their associated "
+"translation pairs to assign them translation jobs."
+msgstr "%s本地翻译人员%s是您网站的用户，他们可以登录并添加、编辑和审核您网站的翻译。添加翻译人员及其相关的翻译语言对，以便为他们分配翻译任务。"
+
+#: src/js/translation-roles-ui/components/Users.js:23
+msgid ""
+"You can %shire an experienced translator%s to review your automatic "
+"translations for perfect quality."
+msgstr "您可以%s雇佣一位有经验的翻译人员%s来审核您的自动翻译，以确保完美的质量。"
+
+#: src/js/translation-roles-ui/components/Users.js:33
+msgid "Translators"
+msgstr "翻译人员"

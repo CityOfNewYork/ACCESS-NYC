@@ -18,7 +18,6 @@ class WPML_TM_Word_Count_Hooks_Factory implements IWPML_Backend_Action_Loader, I
 	public function create() {
 		$this->requested_types_status = get_option( self::OPTION_KEY_REQUESTED_TYPES_STATUS, false );
 
-		$this->add_refresh_hooks();
 		$this->add_process_hooks();
 		$this->add_admin_hooks();
 		$this->add_ajax_hooks();
@@ -26,17 +25,6 @@ class WPML_TM_Word_Count_Hooks_Factory implements IWPML_Backend_Action_Loader, I
 		return $this->hooks;
 	}
 
-	private function add_refresh_hooks() {
-		if ( $this->is_heartbeat_autosave() ) {
-			return;
-		}
-
-		$this->hooks['refresh'] = new WPML_TM_Word_Count_Refresh_Hooks(
-			$this->get_words_count_single_process_factory(),
-			$this->get_translation_element_factory(),
-			class_exists( 'WPML_ST_Package_Factory' ) ? new WPML_ST_Package_Factory() : null
-		);
-	}
 
 	private function add_process_hooks() {
 		if ( $this->requested_types_status === self::PROCESS_IN_PROGRESS ) {

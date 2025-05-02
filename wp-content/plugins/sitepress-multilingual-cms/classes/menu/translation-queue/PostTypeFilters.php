@@ -31,6 +31,7 @@ class PostTypeFilters {
 
 		$post_types = $sitepress->get_translatable_documents( true );
 		$post_types = apply_filters( 'wpml_get_translatable_types', $post_types );
+		$post_types = apply_filters( 'wpml_translation_queue_post_types_filter', $post_types );
 		$output     = [];
 
 		foreach ( $job_types as $job_type ) {

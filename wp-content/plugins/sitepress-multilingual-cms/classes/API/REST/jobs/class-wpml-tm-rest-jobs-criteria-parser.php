@@ -77,15 +77,8 @@ class WPML_TM_Rest_Jobs_Criteria_Parser {
 		if ( $request->get_param( 'status' ) !== null ) {
 			$statuses = Fns::map( Cast::toInt(), explode( ',', $request->get_param( 'status' ) ) );
 
-			if ( $statuses === [ ICL_TM_NEEDS_REVIEW ] ) {
-				$params->set_needs_review( true );
-			} else {
-				$params->set_status( Fns::reject( Relation::equals( ICL_TM_NEEDS_REVIEW ), $statuses ) );
-
-				if ( ! Lst::includes( ICL_TM_NEEDS_REVIEW, $statuses ) ) {
-					$params->set_needs_review( false );
-				}
-			}
+			$params->set_status( Fns::reject( Relation::equals( ICL_TM_NEEDS_REVIEW ), $statuses ) );
+			$params->set_needs_review( Lst::includes( ICL_TM_NEEDS_REVIEW, $statuses ) );
 		}
 		$params->set_exclude_cancelled();
 

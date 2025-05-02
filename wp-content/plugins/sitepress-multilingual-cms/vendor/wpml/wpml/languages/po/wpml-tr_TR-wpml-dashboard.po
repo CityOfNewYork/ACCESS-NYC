@@ -1,0 +1,1217 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-04-22T15:22:39+02:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: wpml\n"
+
+msgid "Untranslated strings that I encounter on front-end while logged in"
+msgstr "Giriş yapmış durumdayken ön yüzde karşılaştığım çevrilmemiş dizeler"
+
+msgid "Untranslated strings that all front-end users encounter"
+msgstr "Tüm ön yüz kullanıcılarının karşılaştığı çevrilmemiş dizeler"
+
+msgid "Disable auto-registration of strings"
+msgstr "Dizelerin otomatik kaydını devre dışı bırak"
+
+msgid "Plugins"
+msgstr "Eklentiler"
+
+msgid "Themes"
+msgstr "Temalar"
+
+msgid "WordPress"
+msgstr "WordPress"
+
+msgid "Other"
+msgstr "Diğer"
+
+msgid "Error in fetching default translation batch name"
+msgstr "Varsayılan çeviri toplu iş adı getirilirken hata oluştu"
+
+msgid "Error in fetching translation editor type."
+msgstr "Çeviri düzenleyici türü getirilirken hata oluştu."
+
+msgid "Error in fetching untranslated types count"
+msgstr "Çevrilmemiş tür sayısı getirilirken hata oluştu"
+
+msgid "Error in fetching remote translation service data."
+msgstr "Uzak çeviri hizmeti verileri getirilirken hata oluştu."
+
+msgid "An error occurred while sending the translation."
+msgstr "Çeviri gönderilirken bir hata oluştu."
+
+msgid "Validation failed"
+msgstr "Doğrulama başarısız oldu"
+
+msgid "Please wait until download finishes"
+msgstr "Lütfen indirme işlemi bitene kadar bekleyin"
+
+msgid "You need to wait 5 minutes after the last check"
+msgstr "Son kontrolden sonra 5 dakika beklemeniz gerekmektedir"
+
+msgid "Check status and get translations"
+msgstr "Durumu kontrol et ve çevirileri al"
+
+msgid "Status: "
+msgstr "Durum: "
+
+msgid "Downloaded jobs: "
+msgstr "İndirilen işler: "
+
+msgid "Cancelled jobs: "
+msgstr "İptal edilen işler: "
+
+msgid "none of your translation jobs have been completed"
+msgstr "çeviri işlerinizden hiçbiri tamamlanmadı"
+
+msgid "Checking translation jobs status. Please don't close this page!"
+msgstr "Çeviri işlerinin durumu kontrol ediliyor. Lütfen bu sayfayı kapatmayın!"
+
+msgid " have been sent to remote translators"
+msgstr " uzak çevirmenlere gönderildi"
+
+msgid " has been sent to remote translators"
+msgstr " uzak çevirmenlere gönderildi"
+
+msgid "Last check: Never"
+msgstr "Son kontrol: Hiç"
+
+msgid "Filtering is disabled to show all selected items. "
+msgstr "Tüm seçili öğeleri göstermek için filtreleme devre dışı bırakıldı. "
+
+msgid "Apply filters"
+msgstr "Filtreleri uygula"
+
+msgid "%d item selected"
+msgid_plural "%d items selected"
+msgstr[0] "%d öğe seçildi"
+msgstr[1] "%d öğe seçildi"
+
+msgid "(%d word count)"
+msgstr "(%d kelime sayısı)"
+
+msgid "%s item not showing."
+msgid_plural "%s items not showing."
+msgstr[0] "%s öğe gösterilmiyor."
+msgstr[1] "%s öğe gösterilmiyor."
+
+msgid "Show all selected items"
+msgstr "Tüm seçili öğeleri göster"
+
+msgid "Translate your content"
+msgstr "İçeriğinizi çevirin"
+
+msgid "Unselect all"
+msgstr "Tüm seçimleri kaldır"
+
+msgid "Source Language:"
+msgstr "Kaynak Dil:"
+
+msgid "translated to:"
+msgstr "şu dile çevrildi:"
+
+msgid "Filter"
+msgstr "Filtrele"
+
+msgid "You are about to change the source language filter from %s to %s"
+msgstr "Kaynak dil filtresini %s'dan %s'a değiştirmek üzeresiniz"
+
+msgid "Updating the source language filter will clear the items you've selected for translation. Are you sure you want to continue?"
+msgstr "Kaynak dil filtresini güncellemek, çeviri için seçtiğiniz öğeleri temizleyecektir. Devam etmek istediğinizden emin misiniz?"
+
+msgid "Change source language"
+msgstr "Kaynak dili değiştir"
+
+msgid "Cancel"
+msgstr "İptal"
+
+msgid "All Statuses"
+msgstr "Tüm Durumlar"
+
+msgid "All languages"
+msgstr "Tüm diller"
+
+msgid "All translation statuses"
+msgstr "Tüm çeviri durumları"
+
+msgid "Not completed"
+msgstr "Tamamlanmadı"
+
+msgid "Needs updating"
+msgstr "Güncelleme gerekiyor"
+
+msgid "Translation in progress"
+msgstr "Çeviri devam ediyor"
+
+msgid "Translation complete"
+msgstr "Çeviri tamamlandı"
+
+msgid "Global Filter"
+msgstr "Global Filtre"
+
+msgid "Parent:"
+msgstr "Üst:"
+
+msgid "Search parent by title"
+msgstr "Başlığa göre üst öğeyi ara"
+
+msgid "Search by term title in %s"
+msgstr "%s içinde terim başlığına göre arama yapınız"
+
+msgid "All taxonomies"
+msgstr "Tüm taksonomiler"
+
+msgid "Loading"
+msgstr "Yükleniyor"
+
+msgid "Taxonomy Term:"
+msgstr "Taksonomi Terimi:"
+
+msgid "Loading terms"
+msgstr "Terimler yükleniyor"
+
+msgid "No terms found"
+msgstr "Terim bulunamadı"
+
+msgid "Filter by:"
+msgstr "Şuna göre filtrele:"
+
+msgid "Title"
+msgstr "Başlık"
+
+msgid "There is an issue with automatic translation that needs your attention."
+msgstr "Otomatik çeviri ile ilgili dikkatinizi gerektiren bir sorun var."
+
+msgid "Fix to continue translating automatically"
+msgstr "Otomatik çeviriye devam etmek için düzeltin"
+
+msgid "View"
+msgstr "Görüntüle"
+
+msgid "Edit"
+msgstr "Düzenle"
+
+msgid "Edit note for the translators"
+msgstr "Çevirmenler için notu düzenle"
+
+msgid "Add note for the translators"
+msgstr "Çevirmenler için not ekle"
+
+msgid "This page is set to be %1$stranslated manually%2$s using the WordPress Editor"
+msgstr "Bu sayfa WordPress Düzenleyicisi kullanılarak %1$smanuel olarak çevrilmek%2$s üzere ayarlanmıştır"
+
+msgid "(no title)"
+msgstr "(başlık yok)"
+
+msgid "Image"
+msgstr "Görsel"
+
+msgid "Date / Status"
+msgstr "Tarih / Durum"
+
+msgid "Word count"
+msgstr "Kelime sayısı"
+
+msgid "Loading items..."
+msgstr "Öğeler yükleniyor..."
+
+msgid "%1$d %2$s selected"
+msgstr "%1$d %2$s seçildi"
+
+msgid "items"
+msgstr "öğeler"
+
+msgid "Filtering is disabled to show all selected items"
+msgstr "Tüm seçili öğeleri göstermek için filtreleme devre dışı bırakıldı"
+
+msgid "Apply filter"
+msgstr "Filtreyi uygula"
+
+msgid "%1$d %2$s not showing"
+msgstr "%1$d %2$s gösterilmiyor"
+
+msgid "Show selected items"
+msgstr "Seçili öğeleri göster"
+
+msgid " / page"
+msgstr " / sayfa"
+
+msgid "Previous"
+msgstr "Önceki"
+
+msgid "Next"
+msgstr "Sonraki"
+
+msgid "Your site's content is too vast for a single translation batch. Use filters to reduce the selection, then \"select all\"."
+msgstr "Sitenizin içeriği tek bir çeviri toplu işi için çok geniş. Seçimi azaltmak için filtreleri kullanın, ardından “tümünü seç”."
+
+msgid "The current filter captures too much content. Narrow it down to enable \"select all\" for translation."
+msgstr "Mevcut filtre çok fazla içeriği kapsıyor. Çeviri için “tümünü seç” seçeneğini etkinleştirmek için daraltın."
+
+msgid "Select All"
+msgstr "Tümünü Seç"
+
+msgid "All %d items matching criteria are selected"
+msgstr "Kriterlere uyan tüm %d öğe seçildi"
+
+msgid "All %d items in this section are selected"
+msgstr "Bu bölümdeki tüm %d öğe seçilmiştir"
+
+msgid "You have too many items to send for translation at once. Apply a filter to narrow down the items to enable this option."
+msgstr "Bir seferde çeviri için gönderilecek çok fazla öğeniz var. Bu seçeneği etkinleştirmek için öğeleri daraltmak için bir filtre uygulayın."
+
+msgid "Clear selection"
+msgstr "Seçimi temizle"
+
+msgid "Select all items that match this search"
+msgstr "Bu aramaya uyan tüm öğeleri seç"
+
+msgid "Loading..."
+msgstr "Yükleniyor..."
+
+msgid "Save note"
+msgstr "Notu kaydet"
+
+msgid "The following target languages do not support automatic translation: %s. <a>Map to known languages</a> to enable automatic translation."
+msgstr "Aşağıdaki hedef diller otomatik çeviriyi desteklemiyor: %s. Otomatik çeviriyi etkinleştirmek için <a>bilinen dillere eşleyin</a>."
+
+msgid "The site's default language %s doesn't support automatic translation."
+msgstr "Sitenin varsayılan dili %s otomatik çeviriyi desteklemiyor."
+
+msgid "Some sections are hidden due to current filter settings or because they have no items. <show_all>Show all translation statuses</show_all>"
+msgstr "Bazı bölümler mevcut filtre ayarları nedeniyle veya hiç öğeleri olmadığı için gizlenmiştir. <show_all>Tüm çeviri durumlarını göster</show_all>"
+
+msgid "Step 1"
+msgstr "Adım 1"
+
+msgid "Select items for translation"
+msgstr "Çeviri için öğeleri seçin"
+
+msgid "Clear filters"
+msgstr "Filtreleri temizle"
+
+msgid "strings"
+msgstr "dizgiler"
+
+msgid "WPML didn't find any %s matching your criteria."
+msgstr "WPML, kriterlerinize uyan herhangi bir %s bulamadı."
+
+msgid "You have too many items selected to use this feature. Deselect some of the items to enable it."
+msgstr "Bu özelliği kullanmak için çok fazla öğe seçtiniz. Etkinleştirmek için bazı öğelerin seçimini kaldırın."
+
+msgid "Show strings in:"
+msgstr "Dizeleri şurada göster:"
+
+msgid "All domains"
+msgstr "Tüm alanlar"
+
+msgid "All sources"
+msgstr "Tüm kaynaklar"
+
+msgid "Frontend (viewed)"
+msgstr "Ön uç (görüntülenen)"
+
+msgid "Backend (viewed)"
+msgstr "Arka uç (görüntülenen)"
+
+msgid "Unknown"
+msgstr "Bilinmeyen"
+
+msgid "String"
+msgstr "Dize"
+
+msgid "All Translation Priorities"
+msgstr "Tüm Çeviri Öncelikleri"
+
+msgid "This filter is available only if source is set to \"Frontend\" or \"Backend\"."
+msgstr "Bu filtre yalnızca kaynak “Frontend” veya “Backend” olarak ayarlandığında kullanılabilir."
+
+msgid "front-end"
+msgstr "ön uç"
+
+msgid "back-end"
+msgstr "arka uç"
+
+msgid "viewed"
+msgstr "görüntülenen"
+
+msgid "Domain"
+msgstr "Alan"
+
+msgid "Source"
+msgstr "Kaynak"
+
+msgid "Type"
+msgstr "Tür"
+
+msgid "Strings in the theme and plugins"
+msgstr "Tema ve eklentilerdeki dizeler"
+
+msgid "Translate front-end texts you can customize from the WordPress admin like footer text, copyright notices, plugin options and settings, time format, widget texts, and more."
+msgstr "Alt bilgi metni, telif hakkı bildirimleri, eklenti seçenekleri ve ayarları, zaman biçimi, bileşen metinleri ve daha fazlası gibi WordPress yönetici panelinden özelleştirebileceğiniz ön uç metinlerini çevirin."
+
+msgid "Translating Strings From Admin and Settings"
+msgstr "Yönetici ve Ayarlardaki Dizeleri Çevirme"
+
+msgid "Translate texts in admin screens"
+msgstr "Yönetici ekranlarındaki metinleri çevir"
+
+msgid "Translate User Meta Information"
+msgstr "Kullanıcı Meta Bilgilerini Çevir"
+
+msgid "Making User Meta Information Translatable"
+msgstr "Kullanıcı Meta Bilgilerini Çevrilebilir Hale Getirme"
+
+msgid "Translate user profile strings"
+msgstr "Kullanıcı profili dizelerini çevir"
+
+msgid "You need to visit translations on your site's front-end (<a/>) and WPML will identify all untranslated strings and list them here. "
+msgstr "Sitenizin ön ucundaki çevirileri ziyaret etmeniz gerekiyor (<a/>) ve WPML çevrilmemiş tüm dizeleri tanımlayarak burada listeleyecek."
+
+msgid "hide details"
+msgstr "ayrıntıları gizle"
+
+msgid "more details"
+msgstr "daha fazla ayrıntı"
+
+msgid "Still can't find the strings you're looking to translate? Add more strings for translation."
+msgstr "Çevirmek istediğiniz dizeleri hâlâ bulamıyor musunuz? Çeviri için daha fazla dize ekleyin."
+
+msgid "Translate Everything translates only those strings which are registered in English language"
+msgstr "Translate Everything yalnızca İngilizce dilinde kayıtlı olan dizeleri çevirir"
+
+msgid "Most strings from your plugins and theme are in English, so we’re showing them alongside your default language. Use the <b>Source Language</b> filter to view strings in a specific language."
+msgstr "Eklentilerinizden ve temanızdan gelen çoğu dize İngilizce olduğu için, bunları varsayılan dilinizle birlikte gösteriyoruz. Belirli bir dildeki dizeleri görüntülemek için <b>Kaynak Dil</b> filtresini kullanın."
+
+msgid "You’re using <b>%s</b> to cache your site, which may prevent WPML from automatically registering new strings. To fix this, clear your page cache, then visit your translated pages again on the frontend to detect new strings."
+msgstr "Sitenizi önbelleğe almak için <b>%s</b> kullanıyorsunuz, bu da WPML'nin yeni dizeleri otomatik olarak kaydetmesini engelleyebilir. Bunu düzeltmek için sayfa önbelleğinizi temizleyin, ardından yeni dizeleri tespit etmek üzere çevrilmiş sayfalarınızı ön uçta tekrar ziyaret edin."
+
+msgid "WPML can detect strings that appear on the site and list them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here only the strings that actually appear on the site, you need to enable this feature."
+msgstr "WPML sitede görünen dizeleri algılayabilir ve burada listeleyebilir. Bu özellik, sitede gerçekten görünen dizeleri tanımlamanıza ve çevirmenize yardımcı olur. Burada yalnızca sitede gerçekten görünen dizeleri görmek için bu özelliği etkinleştirmeniz gerekir."
+
+msgid "WPML detects strings that appear on the site and lists them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here all the strings in the site, you need to disable this feature."
+msgstr "WPML sitede görünen dizeleri algılar ve burada listeler. Bu özellik, sitede gerçekten görünen dizeleri tanımlamanıza ve çevirmenize yardımcı olur. Sitedeki tüm dizeleri burada görmek için bu özelliği devre dışı bırakmanız gerekir."
+
+msgid "Detect untranslated strings"
+msgstr "Çevrilmemiş dizeleri algıla"
+
+msgid "WPML can detect untranslated strings and automatically register them for translation. This happens in real time as you or your visitors browse your website."
+msgstr "WPML, çevrilmemiş dizeleri tespit edebilir ve otomatik olarak çeviri için kaydedebilir. Bu, siz veya ziyaretçileriniz web sitenizi gezinirken gerçek zamanlı olarak gerçekleşir."
+
+msgid "Automatically register untranslated strings"
+msgstr "Çevrilmemiş dizeleri otomatik olarak kaydet"
+
+msgid "Learn how to use auto-registration"
+msgstr "Otomatik kayıt özelliğini nasıl kullanacağınızı öğrenin"
+
+msgid "recommended"
+msgstr "önerilen"
+
+msgid "Also register strings from the website's back-end"
+msgstr "Ayrıca web sitesinin arka ucundaki dizeleri kaydedin"
+
+msgid "Save settings"
+msgstr "Ayarları kaydet"
+
+msgid "Request failed because of the network error"
+msgstr "Ağ hatası nedeniyle istek başarısız oldu"
+
+msgid "Try again"
+msgstr "Tekrar dene"
+
+msgid "Enabled"
+msgstr "Etkin"
+
+msgid "Disabled"
+msgstr "Devre Dışı"
+
+msgid "Modify"
+msgstr "Değiştir"
+
+msgid "You can only translate %1$s from the site's default language (%2$s)."
+msgstr "Yalnızca sitenin varsayılan dilinden %1$s çevirebilirsiniz (%2$s)."
+
+msgid "Leave existing translations as they are"
+msgstr "Mevcut çevirileri oldukları gibi bırak"
+
+msgid "Overwrite existing translations"
+msgstr "Mevcut çevirilerin üzerine yaz"
+
+msgid "Some of the content you want to translate is already translated"
+msgstr "Çevirmek istediğiniz içeriğin bir kısmı zaten çevrilmiş"
+
+msgid "What do you want to do with the content that's already translated?"
+msgstr "Zaten çevrilmiş olan içerikle ne yapmak istiyorsunuz?"
+
+msgid "Suggested deadline:"
+msgstr "Önerilen son tarih:"
+
+msgid "Set a batch name and deadline"
+msgstr "Bir parti adı ve son tarih belirleyin"
+
+msgid "You can assign a custom name to this batch for easy tracking and suggest a deadline to clarify the priority for translators."
+msgstr "Kolay takip için bu partiye özel bir ad atayabilir ve çevirmenlere önceliği netleştirmek için bir son tarih önerebilirsiniz."
+
+msgid "Batch name:"
+msgstr "Parti adı:"
+
+msgid "Default translation engine: "
+msgstr "Varsayılan çeviri motoru: "
+
+msgid "Change"
+msgstr "Değiştir"
+
+msgid "Failed to load engines"
+msgstr "Motorlar yüklenemedi"
+
+msgid "Your Automatic Translation Credits"
+msgstr "Otomatik Çeviri Kredileriniz"
+
+msgid "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s translator</add_yourself> to the site.<br/> Add yourself as %s translator and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Kendinizi çevirmen olarak atamak için, önce <add_yourself>kendini %s çevirmen olarak ekle</add_yourself> seçeneğini kullanarak siteye eklemeniz gerekir.<br/> Kendinizi %s çevirmen olarak ekleyin ve <check_again>tekrar kontrol et</check_again> seçeneğine tıklayın veya farklı bir çeviri seçeneği belirleyin."
+
+msgid "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s to %s translator</add_yourself> to the site.<br/> Add yourself as %s to %s translator and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Kendinizi çevirmen olarak atamak için, önce <add_yourself>kendinizi %s'dan %s'a çevirmen olarak eklemeniz</add_yourself> gerekiyor.<br/> Kendinizi %s'dan %s'a çevirmen olarak ekleyin ve <check_again>tekrar kontrol et</check_again>'e tıklayın veya farklı bir çeviri seçeneği seçin."
+
+msgid "Checking"
+msgstr "Kontrol ediliyor"
+
+msgid "In order to assign a translation service, you first need to <activate_ts>activate a translation service</activate_ts>.<br/>Activate a translation service and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Bir çeviri hizmeti atamak için, önce <activate_ts>bir çeviri hizmetini etkinleştirmeniz</activate_ts> gerekir.<br/>Bir çeviri hizmetini etkinleştirin ve <check_again>tekrar kontrol et</check_again> seçeneğine tıklayın veya farklı bir çeviri seçeneği belirleyin."
+
+msgid " Checking "
+msgstr " Kontrol ediliyor "
+
+msgid "In order to translate automatically, you first need to <enable_ate>enable WPML's Advanced Translation Editor</enable_ate>.<br/>Enable the Advanced Translation Editor and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Otomatik çeviri yapmak için önce <enable_ate>WPML'nin Gelişmiş Çeviri Düzenleyicisini etkinleştirmeniz</enable_ate> gerekir.<br/>Gelişmiş Çeviri Düzenleyicisini etkinleştirin ve <check_again>tekrar kontrol et</check_again> seçeneğine tıklayın veya farklı bir çeviri seçeneği belirleyin."
+
+msgid "The items you selected were translated with the Classic Translation Editor and cannot be sent for automatic translation."
+msgstr "Seçtiğiniz öğeler Klasik Çeviri Editörü ile çevrildi ve otomatik çeviri için gönderilemez."
+
+msgid "Some of the items you selected were translated with the Classic Translation Editor. These cannot be sent for automatic translation."
+msgstr "Seçtiğiniz öğelerin bazıları Klasik Çeviri Editörü ile çevrildi. Bunlar otomatik çeviri için gönderilemez."
+
+msgid ""
+"Any existing content (translations) will be overwritten when creating duplicates.\n"
+"When duplicating content, please first duplicate parent pages to maintain the site's hierarchy."
+msgstr "Kopyalar oluşturulurken mevcut içerik (çeviriler) üzerine yazılacaktır.
+İçeriği kopyalarken, lütfen sitenin hiyerarşisini korumak için önce üst sayfaları kopyalayın."
+
+msgid "Some of the selected content is already being translated. This will cancel any in-progress translations."
+msgstr "Seçilen içeriğin bir kısmı zaten çevriliyor. Bu, devam eden çevirileri iptal edecektir."
+
+msgid "Connection Error. Please wait a minute and reload this page. If the problem continues, please contact WPML support."
+msgstr "Bağlantı Hatası. Lütfen bir dakika bekleyin ve bu sayfayı yeniden yükleyin. Sorun devam ederse, lütfen WPML desteğiyle iletişime geçin."
+
+msgid "Buy credits"
+msgstr "Kredi satın al"
+
+msgid "You don't have enough credits to translate your content automatically."
+msgstr "İçeriğinizi otomatik olarak çevirmek için yeterli krediniz yok."
+
+msgid "In order to assign to a translator, you first need to <add_translators>add %s translators</add_translators> to the site.<br/> Add %s translators and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Bir çevirmene atamak için, önce <add_translators>%s çevirmen ekle</add_translators> seçeneğini kullanarak siteye eklemeniz gerekir.<br/> %s çevirmen ekleyin ve <check_again>tekrar kontrol et</check_again> seçeneğine tıklayın veya farklı bir çeviri seçeneği belirleyin."
+
+msgid "In order to assign to a translator, you first need to <add_translators>add %s to %s translators</add_translators> to the site.<br/> Add %s to %s translators and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Bir çevirmene atamak için, önce <add_translators>%s'dan %s'a çevirmenler eklemeniz</add_translators> gerekiyor.<br/> %s'dan %s'a çevirmenler ekleyin ve <check_again>tekrar kontrol et</check_again>'e tıklayın veya farklı bir çeviri seçeneği seçin."
+
+msgid "Your site doesn't have any reviewers for %s. This means that you’re the only person who can review these translations."
+msgstr "Sitenizde %s için herhangi bir inceleyici yok. Bu, bu çevirileri inceleyebilecek tek kişinin siz olduğu anlamına gelir."
+
+msgid "Your site doesn't have any reviewers yet. This means that you’re the only person who can review translations."
+msgstr "Sitenizde henüz herhangi bir inceleyici yok. Bu, çevirileri inceleyebilecek tek kişinin siz olduğu anlamına gelir."
+
+msgid "If you want other people to review the translations, go to <a>WPML → Translation Management → Translators</a> and add translators. They will be able to both review and translate content for you."
+msgstr "Çevirileri başkalarının incelemesini istiyorsanız, <a>WPML → Çeviri Yönetimi → Çevirmenler</a> bölümüne gidin ve çevirmen ekleyin. Bu kişiler hem içeriği inceleyebilecek hem de sizin için çeviri yapabilecektir."
+
+msgid "WPML does not support duplicating strings. Your selection to duplicate strings to %1$s will be ignored if you proceed with the translation."
+msgstr "WPML, dizelerin çoğaltılmasını desteklememektedir. Çeviri ile devam ederseniz, dizeleri %1$s'e çoğaltma seçiminiz göz ardı edilecektir."
+
+msgid "WPML does not support duplicating %1$s elements. Your selection to duplicate elements to %2$s will be ignored if you proceed with the translation."
+msgstr "WPML, %1$s öğelerinin çoğaltılmasını desteklememektedir. Çeviri ile devam ederseniz, öğeleri %2$s'e çoğaltma seçiminiz göz ardı edilecektir."
+
+msgid "WPML does not support duplicating %1$s elements and strings. Your selection to duplicate elements and strings to %2$s will be ignored if you proceed with the translation."
+msgstr "WPML, %1$s öğelerinin ve dizelerin çoğaltılmasını desteklememektedir. Çeviri ile devam ederseniz, öğeleri ve dizeleri %2$s'e çoğaltma seçiminiz göz ardı edilecektir."
+
+msgid "WPML does not support duplicating strings."
+msgstr "WPML, dizelerin kopyalanmasını desteklemiyor."
+
+msgid "WPML does not support duplicating %1$s elements."
+msgstr "WPML, %1$s öğelerinin çoğaltılmasını desteklememektedir."
+
+msgid "WPML does not support duplicating %1$s elements and strings."
+msgstr "WPML, %1$s öğelerinin ve dizelerin çoğaltılmasını desteklememektedir."
+
+msgid "Finish setting up %s on your site"
+msgstr "Sitenizde %s kurulumunu tamamlayın"
+
+msgid "You need to authenticate %s to send them content for translation.<br/>Visit the <a>Translators tab</a> to finish the setup and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "%s'yi çeviri için içerik göndermek üzere doğrulamanız gerekiyor.<br/>Kurulumu tamamlamak için <a>Çevirmenler sekmesini</a> ziyaret edin ve <check_again>tekrar kontrol et</check_again> seçeneğine tıklayın veya farklı bir çeviri seçeneği belirleyin."
+
+msgid "Set Up Translate Everything Automatically"
+msgstr "Her Şeyi Otomatik Olarak Çevir'i Ayarla"
+
+msgid "WPML will translate your content into %d languages"
+msgstr "WPML içeriğinizi %d dile çevirecek"
+
+msgid "Content selected for translation"
+msgstr "Çeviri için seçilen içerik"
+
+msgid "Volume"
+msgstr "Hacim"
+
+msgid "~ %d words"
+msgstr "~ %d kelime"
+
+msgid "Total"
+msgstr "Toplam"
+
+msgid "Sent for translation"
+msgstr "Çeviri için gönderildi"
+
+msgid "Sending for translation failed"
+msgstr "Çeviri için gönderme başarısız oldu"
+
+msgid "You selected multiple translation methods for content across different languages:"
+msgstr "Farklı diller için birden fazla çeviri yöntemi seçtiniz:"
+
+msgid "Ok"
+msgstr "Tamam"
+
+msgid "<s>1 item</s> is being translated automatically."
+msgid_plural "<s>%d items</s> are being translated automatically."
+msgstr[0] "<s>1 öğe</s> otomatik olarak çevriliyor."
+msgstr[1] "<s>%d öğe</s> otomatik olarak çevriliyor."
+
+msgid "You can track their progress at the top of the page."
+msgstr "İlerlemelerini sayfanın üst kısmında takip edebilirsiniz."
+
+msgid "From now on, WPML will automatically translate new content on your site."
+msgstr "Bundan sonra, WPML sitenizde yeni içeriği otomatik olarak çevirecek."
+
+msgid "This number might vary because you enabled the Translate Everything Automatically Mode."
+msgstr "Bu sayı, Otomatik Olarak Her Şeyi Çevir Modunu etkinleştirdiğiniz için değişiklik gösterebilir."
+
+msgid "From now on, WPML will automatically translate your site's content."
+msgstr "Bundan sonra, WPML sitenizin içeriğini otomatik olarak çevirecek."
+
+msgid "Automatic translations summary"
+msgstr "Otomatik çeviri özeti"
+
+msgid "Some of the content that you selected for translation includes fields that are encoded. Translators will not be able to work on this kind of content, so we removed it from the job."
+msgstr "Çeviri için seçtiğiniz içeriğin bir kısmı kodlanmış alanlar içeriyor. Çevirmenler bu tür içerikler üzerinde çalışamaz, bu nedenle onu işten çıkardık."
+
+msgid "To fix this problem, please contact our support team and describe this issue."
+msgstr "Bu sorunu çözmek için lütfen destek ekibimizle iletişime geçin ve bu sorunu açıklayın."
+
+msgid "WPML cannot send some fo the content to translation"
+msgstr "WPML bazı içerikleri çeviriye gönderemiyor"
+
+msgid "Open support ticket"
+msgstr "Destek bileti aç"
+
+msgid "<s>1 item</s> has been successfully assigned to you! To check its status, please go to <s>WPML → Translations</s>. <translations_queue/>"
+msgid_plural "<s>%d items</s> have been successfully assigned to you! For status updates, please go to <s>WPML → Translations</s>. <translations_queue/>"
+msgstr[0] "<s>1 öğe</s> başarıyla size atanmıştır! Durumunu kontrol etmek için lütfen <s>WPML → Çeviriler</s> bölümüne gidiniz. <translations_queue/>"
+msgstr[1] "<s>%d öğe</s> başarıyla size atanmıştır! Durum güncellemeleri için lütfen <s>WPML → Çeviriler</s> bölümüne gidiniz. <translations_queue/>"
+
+msgid "Currently logged in translator summary"
+msgstr "Şu anda giriş yapmış çevirmen özeti"
+
+msgid "Go to Translations"
+msgstr "Çevirilere Git"
+
+msgid "<s>1 item</s> has been duplicated."
+msgid_plural "<s>%d items</s> have been duplicated."
+msgstr[0] "<s>1 öğe</s> çoğaltılmıştır."
+msgstr[1] "<s>%d öğe</s> çoğaltılmıştır."
+
+msgid "Duplication summary"
+msgstr "Çoğaltma özeti"
+
+msgid "There was a problem sending your content for translation."
+msgstr "İçeriğinizi çeviriye gönderirken bir sorun oluştu."
+
+msgid "Please try again in a few minutes. If the issue persists, please contact our support."
+msgstr "Lütfen birkaç dakika sonra tekrar deneyin. Sorun devam ederse, lütfen destek ekibimizle iletişime geçin."
+
+msgid "Some of the selected strings are already registered or translated into %s. Since their source language matches the target language, they cannot be retranslated."
+msgstr "Seçilen dizelerin bazıları zaten %s diline kaydedilmiş veya çevrilmiş. Kaynak dilleri hedef dille eşleştiği için yeniden çevrilemezler."
+
+msgid "Some of the selected content has already been translated from %s to %s and cannot be re-translated from %s to %s."
+msgstr "Seçilen içeriğin bir kısmı zaten %s'dan %s'a çevrilmiş ve %s'dan %s'a yeniden çevrilemez."
+
+msgid "Content already translated"
+msgstr "İçerik zaten çevrilmiş"
+
+msgid "Some content couldn't be sent to translation."
+msgstr "Bazı içerikler çeviriye gönderilemedi."
+
+msgid "WPML did not create translations for some languages because of the following reasons:"
+msgstr "WPML, aşağıdaki sebeplerden dolayı bazı diller için çeviri oluşturmamıştır:"
+
+msgid "<s>1 item</s> has been successfully sent to translators!"
+msgid_plural "<s>%d items</s> have been successfully sent to translators!"
+msgstr[0] "<s>1 öğe</s> başarıyla çevirmenlere gönderilmiştir!"
+msgstr[1] "<s>%d öğe</s> başarıyla çevirmenlere gönderilmiştir!"
+
+msgid "Local translations summary"
+msgstr "Yerel çeviriler özeti"
+
+msgid "You can check their status in WPML → Translation"
+msgstr "Durumlarını WPML → Çeviri bölümünde kontrol edebilirsiniz"
+
+msgid "Continue to %s"
+msgstr "%s'ya devam et"
+
+msgid "We were unable to send the following batches for professional translation:"
+msgstr "Aşağıdaki grupları profesyonel çeviri için gönderemedik:"
+
+msgid "<p><a><s>Contact WPML support for help</s></a></p>"
+msgstr "<p><a><s>Yardım için WPML desteği ile iletişime geçin</s></a></p>"
+
+msgid "Translation Service"
+msgstr "Çeviri Hizmeti"
+
+msgid "sending for professional translation.."
+msgstr "profesyonel çeviri için gönderiliyor.."
+
+msgid "<s>%d item</s> is being sent for translation to %s. Please continue to their site to start the translation."
+msgid_plural "<s>%d items</s> are being sent for translation to %s. Please continue to their site to start the translation."
+msgstr[0] "<s>%d öğe</s> %s'a çeviri için gönderiliyor. Lütfen çeviriye başlamak için onların sitesine devam edin."
+msgstr[1] "<s>%d öğe</s> %s'a çeviri için gönderiliyor. Lütfen çeviriye başlamak için onların sitesine devam edin."
+
+msgid "Translation service translations summary"
+msgstr "Çeviri hizmeti çevirileri özeti"
+
+msgid "One or more assigned translators are invalid. The translator may have been removed or their language permissions changed.<br/> Review your settings on the <translators_page>Translators page</translators_page>."
+msgstr "Bir veya daha fazla atanmış çevirmen geçersiz. Çevirmen kaldırılmış veya dil izinleri değiştirilmiş olabilir.<br/> <translators_page>Çevirmenler sayfasında</translators_page> ayarlarınızı gözden geçirin."
+
+msgid "The selected translation service is no longer valid. It may have been changed, unauthenticated, or deactivated.<br/> Review your settings on the <translators_page>Translators page</translators_page>."
+msgstr "Seçilen çeviri hizmeti artık geçerli değil. Değiştirilmiş, kimliği doğrulanmamış veya devre dışı bırakılmış olabilir.<br/> <translators_page>Çevirmenler sayfasında</translators_page> ayarlarınızı gözden geçirin."
+
+msgid "Currently selected translation editor doesn't support automatic translation. You must enable the Advanced Translation Editor to send content for automatic translation.<br/> Check your settings on the <wpml_settings>WPML settings page</wpml_settings>."
+msgstr "Şu anda seçili olan çeviri editörü otomatik çeviriyi desteklemiyor. İçeriği otomatik çeviri için göndermek için Gelişmiş Çeviri Editörü'nü etkinleştirmelisiniz.<br/> <wpml_settings>WPML ayarlar sayfasında</wpml_settings> ayarlarınızı kontrol edin."
+
+msgid "Validation error happened during send to translation."
+msgstr "Çeviriye gönderme sırasında doğrulama hatası oluştu."
+
+msgid "Sending for translation"
+msgstr "Çeviri için gönderiliyor"
+
+msgid "Translate and Duplicate"
+msgstr "Çevir ve Çoğalt"
+
+msgid "Duplicate"
+msgstr "Çoğalt"
+
+msgid "Translate"
+msgstr "Çevir"
+
+msgid "Selected content is already translated"
+msgstr "Seçilen içerik zaten çevrilmiş"
+
+msgid "Please select a review option"
+msgstr "Lütfen bir inceleme seçeneği seçin"
+
+msgid "Assign local translator or choose another option"
+msgstr "Yerel çevirmen atayın veya başka bir seçenek seçin"
+
+msgid "Assign yourself or choose another option"
+msgstr "Kendinizi atayın veya başka bir seçenek seçin"
+
+msgid "Activate translation service or choose another option"
+msgstr "Çeviri hizmetini etkinleştirin veya başka bir seçenek seçin"
+
+msgid "Activate ATE or choose another option"
+msgstr "ATE'yi etkinleştirin veya başka bir seçenek seçin"
+
+msgid "Authenticate translation service or choose another option"
+msgstr "Çeviri hizmetini doğrulayın veya başka bir seçenek seçin"
+
+msgid "Please don't close this page or refresh it, as doing so will cancel the translation process."
+msgstr "Lütfen bu sayfayı kapatmayınız veya yenilemeyiniz, zira bu işlem çeviri sürecini iptal edecektir."
+
+msgid "<s>%s</s> cannot process more than <s>%d</s> jobs in a single batch. WPML will automatically split your jobs into separate batches to ensure an error-free delivery to <s>%s</s>. <br/><br/> Do you want to proceed?"
+msgstr "<s>%s</s> tek bir parti içinde <s>%d</s>'den fazla işi işleyemez. WPML, işlerinizi <s>%s</s>'ya hatasız bir şekilde teslim etmek için otomatik olarak ayrı partilere böler. <br/><br/> Devam etmek istiyor musunuz?"
+
+msgid "WPML will send jobs to %s in separate batches"
+msgstr "WPML işleri %s'ya ayrı partiler halinde gönderecek"
+
+msgid "Yes, send jobs in separate batches"
+msgstr "Evet, işleri ayrı partiler halinde gönder"
+
+msgid "No, I will split jobs myself"
+msgstr "Hayır, işleri kendim böleceğim"
+
+msgid "This will translate only your future content"
+msgstr "Bu sadece gelecekteki içeriğinizi çevirecek"
+
+msgid "This will translate your entire site"
+msgstr "Bu tüm sitenizi çevirecek"
+
+msgid "Translate everything automatically from now on, without asking me."
+msgstr "Bundan sonra her şeyi bana sormadan otomatik olarak çevir."
+
+msgid "What content do you want to translate?"
+msgstr "Hangi içeriği çevirmek istiyorsunuz?"
+
+msgid "Translate my entire site"
+msgstr "Tüm sitemi çevir"
+
+msgid "WPML will translate all of your site's content, including:"
+msgstr "WPML sitenizin tüm içeriğini çevirecek, buna şunlar dahil:"
+
+msgid "Any content that already exists but hasn't been translated yet"
+msgstr "Halihazırda var olan ancak henüz çevrilmemiş herhangi bir içerik"
+
+msgid "All new content you create in the future"
+msgstr "Gelecekte oluşturacağınız tüm yeni içerik"
+
+msgid "Hide what WPML will translate now"
+msgstr "WPML'nin şimdi çevireceği şeyleri gizle"
+
+msgid "See what WPML will translate now"
+msgstr "WPML'nin şimdi çevireceği şeyleri gör"
+
+msgid "Translate only future content"
+msgstr "Sadece gelecekteki içeriği çevir"
+
+msgid "WPML will translate only the content you create after enabling this translation mode."
+msgstr "WPML yalnızca bu çeviri modunu etkinleştirdikten sonra oluşturduğunuz içeriği çevirecektir."
+
+msgid "Existing untranslated content on your side will not be translated."
+msgstr "Sitenizde mevcut olan çevrilmemiş içerik çevrilmeyecektir."
+
+msgid "Existing content"
+msgstr "Mevcut içerik"
+
+msgid "You selected to translate strings that are in %s. Only these strings will be translated to %s."
+msgstr "%s'da olan dizeleri çevirmeyi seçtiniz. Sadece bu dizeler %s'ya çevrilecek."
+
+msgid "You selected to translate strings that are in %s and %s. Only these strings will be translated to %s."
+msgstr "%s ve %s'da olan dizeleri çevirmeyi seçtiniz. Sadece bu dizeler %s'ya çevrilecek."
+
+msgid "Source language"
+msgstr "Kaynak dil"
+
+msgid "Target language"
+msgstr "Hedef dil"
+
+msgid "Translation Method"
+msgstr "Çeviri Yöntemi"
+
+msgid "Translation service additional options"
+msgstr "Çeviri hizmeti ek seçenekleri"
+
+msgid "Refresh"
+msgstr "Yenile"
+
+msgid "Fetching translation service data..."
+msgstr "Çeviri hizmeti verileri getiriliyor..."
+
+msgid "-"
+msgstr "-"
+
+msgid "Translate automatically"
+msgstr "Otomatik olarak çevir"
+
+msgid "Translate myself"
+msgstr "Kendim çevireceğim"
+
+msgid "Assign a translator"
+msgstr "Bir çevirmen ata"
+
+msgid "Assign translation service"
+msgstr "Çeviri hizmeti ata"
+
+msgid "Do nothing"
+msgstr "Hiçbir şey yapma"
+
+msgid "Please choose"
+msgstr "Lütfen seçin"
+
+msgid "Choose a translator"
+msgstr "Bir çevirmen seçin"
+
+msgid "First available"
+msgstr "İlk müsait olan"
+
+msgid "(Me)"
+msgstr "(Ben)"
+
+msgid "Translation controls"
+msgstr "Çeviri kontrolleri"
+
+msgid "Step 2"
+msgstr "Adım 2"
+
+msgid "Get More Features with WPML's Advanced Translation Editor"
+msgstr "WPML'nin Gelişmiş Çeviri Düzenleyicisi ile Daha Fazla Özellik Edinin"
+
+msgid "Close banner"
+msgstr "Afişi kapat"
+
+msgid "You're using the Classic Translation Editor, an old legacy tool, and missing out on the many features and efficiency of our Advanced Translation Editor:"
+msgstr "Eski bir araç olan Klasik Çeviri Düzenleyicisini kullanıyorsunuz ve Gelişmiş Çeviri Düzenleyicimizin birçok özelliğinden ve verimliliğinden mahrum kalıyorsunuz:"
+
+msgid "Translation Memory"
+msgstr "Çeviri Belleği"
+
+msgid "HTML Protection"
+msgstr "HTML Koruması"
+
+msgid "Glossary"
+msgstr "Sözlük"
+
+msgid "Spellchecker"
+msgstr "Yazım Denetleyicisi"
+
+msgid "AI Assistant"
+msgstr "YZ Asistanı"
+
+msgid "Automatic Translation"
+msgstr "Otomatik Çeviri"
+
+msgid "Switch now for a faster, more convenient, and reliable translation experience."
+msgstr "Daha hızlı, daha uygun ve güvenilir bir çeviri deneyimi için şimdi geçiş yapın."
+
+msgid "Switch Now"
+msgstr "Şimdi Geç"
+
+msgid "Learn More"
+msgstr "Daha Fazla Bilgi Edin"
+
+msgid "<a><s>Read more about automatic translation credits</s></a>"
+msgstr "<a><s>Otomatik çeviri kredileri hakkında daha fazla bilgi edinin</s></a>"
+
+msgid "I understand that automatic translation uses credits"
+msgstr "Otomatik çevirinin kredi kullandığını anlıyorum"
+
+msgid "Translate Everything Automatically - credit wizard error"
+msgstr "Her Şeyi Otomatik Olarak Çevir - kredi sihirbazı hatası"
+
+msgid "There was an error when loading the credit wizard."
+msgstr "Kredi sihirbazı yüklenirken bir hata oluştu."
+
+msgid "Translate Everything Automatically - no credits"
+msgstr "Her Şeyi Otomatik Olarak Çevir - kredi yok"
+
+msgid "Start Translate Everything Automatically"
+msgstr "Her Şeyi Otomatik Çevirmeye Başla"
+
+msgid "Continue"
+msgstr "Devam Et"
+
+msgid "Go back"
+msgstr "Geri Dön"
+
+msgid "You can start using Translate Everything Automatically after sending some content for translation. We recommend that you review these translations and make sure that they are good before translating your entire site's content."
+msgstr "Bazı içeriği çeviri için gönderdikten sonra Her Şeyi Otomatik Çevir'i kullanmaya başlayabilirsiniz. Bu çevirileri gözden geçirmenizi ve sitenizin tüm içeriğini çevirmeden önce iyi olduklarından emin olmanızı öneririz."
+
+msgid "Translate Everything Automatically - disabled"
+msgstr "Her Şeyi Otomatik Olarak Çevir - devre dışı"
+
+msgid "Translate Everything Automatically"
+msgstr "Her Şeyi Otomatik Olarak Çevir"
+
+msgid "Automatically translate your entire site, but only from %s to %s."
+msgstr "Tüm sitenizi otomatik olarak çevirin, ancak yalnızca %s'den %s'ye."
+
+msgid "Translate Everything Automatically - pausing"
+msgstr "Her Şeyi Otomatik Olarak Çevir - duraklatılıyor"
+
+msgid "Translate Everything Automatically is pausing"
+msgstr "Her Şeyi Otomatik Olarak Çevir duraklatılıyor"
+
+msgid "Translate Everything Automatically - paused"
+msgstr "Her Şeyi Otomatik Olarak Çevir - duraklatıldı"
+
+msgid "%d translation left in the queue. Preparing more content for translation."
+msgid_plural "%d translations left in the queue. Preparing more content for translation."
+msgstr[0] "Kuyrukta %d çeviri kaldı. Çeviri için daha fazla içerik hazırlanıyor."
+msgstr[1] "Kuyrukta %d çeviri kaldı. Çeviri için daha fazla içerik hazırlanıyor."
+
+msgid "Preparing content for translation..."
+msgstr "Çeviri için içerik hazırlanıyor..."
+
+msgid "%d translation left in the queue..."
+msgid_plural "%d translations left in the queue..."
+msgstr[0] "Kuyrukta %d çeviri kaldı..."
+msgstr[1] "Kuyrukta %d çeviri kaldı..."
+
+msgid "Translate Everything Automatically has finished translating your content. There are no pending translations in the queue."
+msgstr "Her Şeyi Otomatik Çevir özelliği içeriğinizi çevirmeyi tamamladı. Sırada bekleyen çeviri bulunmamaktadır."
+
+msgid "Some items were translated using the Classic Translation Editor and cannot be sent for automatic translation. Please select these items and choose the option to translate them yourself."
+msgstr "Bazı öğeler Klasik Çeviri Düzenleyicisi kullanılarak çevrildi ve otomatik çeviri için gönderilemez. Lütfen bu öğeleri seçin ve kendiniz çevirme seçeneğini belirleyin."
+
+msgid "Translate Everything Automatically - enabled"
+msgstr "Her Şeyi Otomatik Olarak Çevir - etkinleştirildi"
+
+msgid "Translate Everything Automatically is enabled"
+msgstr "Her Şeyi Otomatik Çevir etkinleştirildi"
+
+msgid "As you create new content or edit existing content, WPML will automatically translate it, but only from %s to %s."
+msgstr "Yeni içerik oluşturdukça veya mevcut içeriği düzenledikçe, WPML bunu otomatik olarak çevirecektir, ancak yalnızca %s'den %s'ye."
+
+msgid "You have <s>%s</s> prepaid translation credits in your wpml.org account. Assign these credits to your site to start using automatic translation"
+msgstr "Wpml.org hesabınızda <s>%s</s> ön ödemeli çeviri kredisi bulunmaktadır. Otomatik çeviriyi kullanmaya başlamak için bu kredileri sitenize atayın"
+
+msgid "Translation not running... there is an issue that needs your attention. Fix it to continue."
+msgstr "Çeviri çalışmıyor... dikkatinizi gerektiren bir sorun var. Devam etmek için sorunu düzeltin."
+
+msgid "Assign credits now"
+msgstr "Şimdi kredi ata"
+
+msgid "Fix now"
+msgstr "Şimdi düzelt"
+
+msgid "Translate Everything Automatically is stopped"
+msgstr "Her Şeyi Otomatik Olarak Çevir durduruldu"
+
+msgid "Out of Credits for Automatic Translation"
+msgstr "Otomatik Çeviri için Kredi Kalmadı"
+
+msgid "Automatic translations completed"
+msgstr "Otomatik çeviriler tamamlandı"
+
+msgid "<s>1 translation</s> has been successfully translated automatically"
+msgid_plural "<s>%d translations</s> have been successfully translated automatically"
+msgstr[0] "<s>1 çeviri</s> başarıyla otomatik olarak çevrildi"
+msgstr[1] "<s>%d çeviri</s> başarıyla otomatik olarak çevrildi"
+
+msgid "Automatic jobs in progress"
+msgstr "Otomatik işler devam ediyor"
+
+msgid "<s>%d automatic translation</s> is in progress"
+msgid_plural "<s>%d automatic translations</s> are in progress"
+msgstr[0] "<s>%d otomatik çeviri</s> devam etmektedir"
+msgstr[1] "<s>%d otomatik çeviri</s> devam etmektedir"
+
+msgid "Your default language, %s, must be mapped to a supported language in order to use automatic translation"
+msgstr "Otomatik çeviri kullanabilmek için varsayılan diliniz %s, desteklenen bir dile eşleştirilmelidir"
+
+msgid "Map the language"
+msgstr "Dili eşleştirin"
+
+msgid "%d translations "
+msgstr "%d çeviri "
+
+msgid "%d translation "
+msgstr "%d çeviri "
+
+msgid "this includes translations from Translate Everything Automatically"
+msgstr "bu, Otomatik Olarak Her Şeyi Çevir'den gelen çevirileri içermektedir"
+
+msgid "are waiting for your review"
+msgstr "incelemenizi bekliyor"
+
+msgid "is waiting for your review"
+msgstr "incelemenizi bekliyor"
+
+msgid "Review Translations"
+msgstr "Çevirileri İncele"
+
+msgid "Translate existing content"
+msgstr "Mevcut içeriği çevir"
+
+msgid "Translate now"
+msgstr "Şimdi çevir"
+
+msgid "Starting with version 4.7, WPML will also automatically translate texts (strings) coming from %s."
+msgstr "4.7 sürümünden itibaren WPML, %s'den gelen metinleri (dizgileri) de otomatik olarak çevirecek."
+
+msgid "WPML will not translate existing texts of this type but any new ones you create will be automatically translated. If you prefer, you can <button />."
+msgstr "WPML bu tür mevcut metinleri çevirmeyecek, ancak oluşturduğunuz yeni metinler otomatik olarak çevrilecek. Tercih ederseniz, <button /> yapabilirsiniz."
+
+msgid "Starting with version 4.7, WPML will also automatically translate:"
+msgstr "4.7 sürümünden itibaren WPML ayrıca şunları otomatik olarak çevirecek:"
+
+msgid "Content set to \"use translation if available or fallback to default language\": %s."
+msgstr "“Çeviri varsa kullan veya varsayılan dile geri dön” olarak ayarlanmış içerik: %s."
+
+msgid "Texts (strings) coming from: %s."
+msgstr "%s'den gelen metinler (dizgiler)."
+
+msgid "WPML will not translate existing content for these post types and texts but any new content you create will be automatically translated. If you prefer, you can start <button />."
+msgstr "WPML bu gönderi türleri ve metinler için mevcut içeriği çevirmeyecek, ancak oluşturduğunuz yeni içerikler otomatik olarak çevrilecek. Tercih ederseniz, <button /> başlayabilirsiniz."
+
+msgid "WPML will not translate existing content for these post types but any new content you create will be automatically translated. If you prefer, you can start <button />."
+msgstr "WPML bu gönderi türleri için mevcut içeriği çevirmeyecek, ancak oluşturduğunuz yeni içerikler otomatik olarak çevrilecek. Tercih ederseniz, <button /> başlayabilirsiniz."
+
+msgid "start translating existing content now"
+msgstr "mevcut içeriği şimdi çevirmeye başla"
+
+msgid "The following target languages do not support automatic translations: %s"
+msgstr "Aşağıdaki hedef diller otomatik çevirileri desteklememektedir: %s"
+
+msgid "To enable automatic translation map them to known languages."
+msgstr "Otomatik çeviriyi etkinleştirmek için bunları bilinen dillere eşleştirin."
+
+msgid "Map to known languages"
+msgstr "Bilinen dillere eşleştirin"
+
+msgid "Translation status"
+msgstr "Çeviri durumu"
+
+msgid "Default language does not support automatic translations."
+msgstr "Varsayılan dil otomatik çevirileri desteklemiyor."
+
+msgid "You must enable ATE to activate Translate Everything Automatically."
+msgstr "Her Şeyi Otomatik Çevir'i etkinleştirmek için ATE'yi etkinleştirmelisiniz."
+
+msgid ""
+"This item needs an update but cannot be translated automatically because it was manually translated.\n"
+"Please, select the item and send for manual translation."
+msgstr "Bu öğe bir güncelleme gerektiriyor ancak manuel olarak çevrildiği için otomatik olarak çevrilemez.
+Lütfen öğeyi seçin ve manuel çeviri için gönderin."
+
+msgid "This item needs update. Please, select the item and send for translation."
+msgstr "Bu öğe güncelleme gerektiriyor. Lütfen öğeyi seçin ve çeviri için gönderin."
+
+msgid "Translations completed with the Classic Translation Editor cannot be sent for automatic translation"
+msgstr "Klasik Çeviri Düzenleyicisi ile tamamlanan çeviriler otomatik çeviri için gönderilemez"
+
+msgid "automatic translation"
+msgstr "otomatik çeviri"
+
+msgid "unassigned"
+msgstr "atanmamış"
+
+msgid "not translated"
+msgstr "çevrilmemiş"
+
+msgid "waiting for translator"
+msgstr "çevirmen bekliyor"
+
+msgid "in progress"
+msgstr "devam ediyor"
+
+msgid "needs update"
+msgstr "güncelleme gerekiyor"
+
+msgid "duplicate"
+msgstr "kopya"
+
+msgid "complete"
+msgstr "tamamlandı"
+
+msgid "needs review"
+msgstr "inceleme gerekiyor"
+
+msgid "preparing for translation"
+msgstr "çeviri için hazırlanıyor"
+
+msgid "needs attention"
+msgstr "dikkat gerekiyor"
+
+msgid "%1$s: %2$s%3$s"
+msgstr "%1$s: %2$s%3$s"
+
+msgid "Could not fetch engines data"
+msgstr "Motorların verileri alınamadı"
+
+msgid "Error in fetching currently logged in translator"
+msgstr "Şu anda oturum açmış çevirmeni getirmede hata"
+
+msgid "Error in fetching local translators"
+msgstr "Yerel çevirmenleri getirmede hata"
+
+msgid "Published"
+msgstr "Yayınlandı"
+
+msgid "Draft"
+msgstr "Taslak"
+
+msgid "Trash"
+msgstr "Çöp"
+
+msgid "Pending"
+msgstr "Beklemede"
+
+msgid "Private"
+msgstr "Özel"
+
+msgid "Future"
+msgstr "Gelecek"
+
+msgid "Auto Draft"
+msgstr "Otomatik Taslak"
+
+msgid "External"
+msgstr "Harici"
+
+msgid "Collapse"
+msgstr "Daralt"
+
+msgid "Expand"
+msgstr "Genişlet"
+
+msgid "Close modal"
+msgstr "Modalı kapat"
+
+msgid "Select an item"
+msgstr "Bir öğe seçin"
+
+msgid "Search"
+msgstr "Arama"
+
+msgid "No items found"
+msgstr "Öğe bulunamadı"
+
+msgid "OFF"
+msgstr "KAPALI"
+
+msgid "ON"
+msgstr "AÇIK"
+
+msgid "%1$s Flag"
+msgstr "%1$s Bayrak"
+
+msgid "What would you like to do after WPML finishes translating your content automatically?"
+msgstr "WPML içeriğinizi otomatik olarak çevirmeyi tamamladıktan sonra ne yapmak istersiniz?"
+
+msgid "Wait for review"
+msgstr "İnceleme için bekle"
+
+msgid "Recommended with DeepL, Google and Microsoft"
+msgstr "DeepL, Google ve Microsoft ile tavsiye edilir"
+
+msgid "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process."
+msgstr "DeepL, Google ve Microsoft mükemmel çeviriler sunmaktadır, ancak doğru olduklarından emin olmak için insan tarafından gözden geçirilmelerini tavsiye ediyoruz. WPML AI, bağlamı anlayan ve güvenle inceleme sürecini atlayabileceğiniz İnsan Çevirisinden Daha İyi çeviriler sunmaktadır."
+
+msgid "WPML keeps translations unpublished, so you can review them first."
+msgstr "WPML, önce inceleyebilmeniz için çevirileri yayınlanmamış olarak tutar."
+
+msgid "Your translators review and approve translations before publishing."
+msgstr "Çevirmenleriniz, yayınlamadan önce çevirileri inceler ve onaylar."
+
+msgid "Publish and mark for review"
+msgstr "Yayınla ve inceleme için işaretle"
+
+msgid "WPML publishes translations immediately but flags them for you to check at your convenience."
+msgstr "WPML çevirileri hemen yayınlar ancak sizin uygun bir zamanda kontrol etmeniz için işaretler."
+
+msgid "WPML publishes translations immediately but flags them for translators to review later."
+msgstr "WPML çevirileri hemen yayınlar ancak çevirmenlerin daha sonra incelemesi için işaretler."
+
+msgid "Publish without review"
+msgstr "İnceleme olmadan yayınla"
+
+msgid "Recommended with WPML AI"
+msgstr "WPML AI ile önerilir"
+
+msgid "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy."
+msgstr "WPML AI, nadiren iyileştirme gerektiren İnsandan Daha İyi Çeviriler sağlar, böylece inceleme sürecini güvenle atlayabilirsiniz. Diğer çeviri motorları için, doğruluğu onaylamak adına insan incelemesi önerilir."
+
+msgid "WPML publishes translations immediately, skipping the review process."
+msgstr "WPML çevirileri inceleme sürecini atlayarak hemen yayınlar."

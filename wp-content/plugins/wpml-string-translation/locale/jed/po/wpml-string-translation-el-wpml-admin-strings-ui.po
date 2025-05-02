@@ -1,0 +1,103 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/admin-strings/texts.js:10
+msgid "Not included in String Translation"
+msgstr "Δεν περιλαμβάνεται στη Μετάφραση"
+
+#: src/js/admin-strings/texts.js:11
+msgid "Registered and locked"
+msgstr "Καταχωρημένο και κλειδωμένο"
+
+#: src/js/admin-strings/texts.js:13
+msgid "Text"
+msgstr "Κείμενο"
+
+#: src/js/admin-strings/texts.js:14
+msgid "Numeric"
+msgstr "Αριθμητικό"
+
+#: src/js/admin-strings/texts.js:15
+msgid "All Types"
+msgstr "Όλοι οι τύποι"
+
+#: src/js/admin-strings/texts.js:17
+msgid "Search"
+msgstr "Αναζήτηση"
+
+#: src/js/admin-strings/texts.js:19
+msgid "Communication error"
+msgstr "Σφάλμα επικοινωνίας"
+
+#: src/js/admin-strings/texts.js:20
+msgid "The action failed."
+msgstr "Η ενέργεια απέτυχε."
+
+#: src/js/admin-strings/texts.js:22
+msgid "All (%d)"
+msgstr "Όλα (%d)"
+
+#: src/js/admin-strings/texts.js:23
+msgid "Included in String Translation (%d)"
+msgstr "Συμπεριλαμβάνεται (%d)"
+
+#: src/js/admin-strings/texts.js:24
+msgid "Not included in String Translation (%d)"
+msgstr "Δεν συμπεριλαμβάνεται (%d)"
+
+#: src/js/admin-strings/texts.js:26
+msgid "This setting is locked by a WPML configuration file."
+msgstr "Κλειδωμένο από αρχείο WPML."
+
+#: src/js/admin-strings/texts.js:28
+msgid "Option"
+msgstr "Επιλογή"
+
+#: src/js/admin-strings/texts.js:29
+msgid "Value"
+msgstr "Τιμή"
+
+#: src/js/admin-strings/texts.js:30
+msgid "Type"
+msgstr "Τύπος"
+
+#: src/js/admin-strings/texts.js:31
+msgid "State"
+msgstr "Κατάσταση"
+
+#: src/js/admin-strings/texts.js:34
+msgid "Export as a WPML configuration file"
+msgstr "Εξαγωγή ως αρχείο WPML"
+
+#: src/js/admin-strings/texts.js:35
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: src/js/admin-strings/texts.js:36
+msgid "Save the following to a wpml-config.xml in the root of your theme or plugin."
+msgstr "Αποθήκευση στο wpml-config.xml."
+
+#: src/js/admin-strings/texts.js:38
+msgid "No options found."
+msgstr "Δεν βρέθηκαν επιλογές."
+
+#: src/js/admin-strings/texts.js:39
+msgid ""
+"Make sure you saved your theme options at least once. Some themes only add "
+"these to the wp_options table after the user explicitly saves changes to "
+"the theme defaults."
+msgstr "Βεβαιωθείτε ότι έχετε αποθηκεύσει τις επιλογές του θέματος τουλάχιστον μία φορά. Ορισμένα θέματα τις προσθέτουν στον πίνακα wp_options μόνο αφού ο χρήστης αποθηκεύσει ρητά τις αλλαγές στις προεπιλογές του θέματος."
+
+#: src/js/admin-strings/texts.js:6
+msgid "Add to String Translation"
+msgstr "Προσθήκη στη μετάφραση"
+
+#: src/js/admin-strings/texts.js:7
+msgid "Remove from String Translation"
+msgstr "Αφαίρεση από τη μετάφραση"
+
+#: src/js/admin-strings/texts.js:9
+msgid "Included in String Translation"
+msgstr "Συμπεριλαμβάνεται"

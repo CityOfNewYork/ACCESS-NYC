@@ -217,4 +217,8 @@ class WPML_Package_TM_Jobs {
 
 		$wpdb->insert( $wpdb->prefix . 'icl_translate', $data );
 	}
+
+	public function get_package() {
+		return $this->package;
+	}
 }

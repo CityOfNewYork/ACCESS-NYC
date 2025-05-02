@@ -1,0 +1,138 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/mo-scan/LocalizationPageUI.js:20
+msgid "WPML has detected changed or new MO files"
+msgstr "WPML đã phát hiện thay đổi hoặc mới MO các tập tin"
+
+#: src/js/mo-scan/LocalizationPageUI.js:26
+msgid ""
+"There are new or updated .mo files. WPML needs to scan them to find strings "
+"for translation."
+msgstr "Có tệp .mo mới hoặc được cập nhật. WPML cần quét chúng để tìm chuỗi dịch."
+
+#: src/js/mo-scan/LocalizationPageUI.js:30
+#: src/js/mo-scan/texts.js:14
+msgid "Scan translation files"
+msgstr "Quét tập tin dịch"
+
+#: src/js/mo-scan/LocalizationPageUI.js:31
+#: src/js/mo-scan/texts.js:15
+msgid "Scanned %1$d of %2$d files..."
+msgstr "Đã quét %1$d của %2$d các tập tin..."
+
+#: src/js/mo-scan/pre-generate/UI.js:41
+msgid "Generated files for %1$d of %2$d sites..."
+msgstr "Các tập tin được tạo cho %1$d của %2$d các trang web..."
+
+#: src/js/mo-scan/pre-generate/UI.js:42
+msgid "Generated %1$d of %2$d files..."
+msgstr "Đã tạo %1$d của %2$d các tập tin..."
+
+#: src/js/mo-scan/pre-generate/UI.js:46
+msgid "WPML needs to generate .mo files"
+msgstr "WPML cần tạo tệp .mo"
+
+#: src/js/mo-scan/pre-generate/textProvider.js:10
+msgid ""
+"WPML String Translation uses .mo files instead of database calls. WPML "
+"needs to generate these .mo files in order for translations to appear on "
+"the front-end. However, the folder that should hold these .mo files is not "
+"open for writing."
+msgstr "Dịch chuỗi WPML sử dụng tệp .mo thay vì lệnh gọi cơ sở dữ liệu. WPML cần tạo các tệp .mo này để bản dịch xuất hiện ở giao diện người dùng. Tuy nhiên, thư mục chứa các tệp .mo này không mở để ghi."
+
+#: src/js/mo-scan/pre-generate/textProvider.js:13
+msgid ""
+"Please use your admin control panel or an FTP program to make the following "
+"folder writeable:"
+msgstr "Vui lòng sử dụng bảng điều khiển quản trị viên của bạn hoặc chương trình FTP để làm cho thư mục sau có thể ghi được:"
+
+#: src/js/mo-scan/pre-generate/textProvider.js:23
+msgid "There was a problem creating the .mo files"
+msgstr "Đã xảy ra sự cố khi tạo tệp .mo"
+
+#: src/js/mo-scan/pre-generate/textProvider.js:26
+msgid "You can try again now or try again later by going to "
+msgstr "Bạn có thể thử lại ngay bây giờ hoặc thử lại sau bằng cách truy cập "
+
+#: src/js/mo-scan/pre-generate/textProvider.js:34
+msgid "Translations are missing from the front-end until you generate .mo files"
+msgstr "Bản dịch bị thiếu ở giao diện người dùng cho đến khi bạn tạo tệp .mo"
+
+#: src/js/mo-scan/pre-generate/textProvider.js:37
+msgid ""
+"Your site doesn't have the .mo files that WPML needs in order to display "
+"translated strings on the front-end. To generate these .mo files, remember "
+"to go to "
+msgstr "Trang web của bạn không có tệp .mo mà WPML cần để hiển thị các chuỗi đã dịch ở giao diện người dùng. Để tạo các tệp .mo này, hãy nhớ truy cập "
+
+#: src/js/mo-scan/pre-generate/textProvider.js:38
+msgid "WPML->Theme and plugins localization."
+msgstr "WPML->Bản địa hóa chủ đề và plugin."
+
+#: src/js/mo-scan/pre-generate/textProvider.js:43
+msgid ""
+"WPML String Translation uses .mo files instead of database calls. WPML "
+"needs to generate these .mo files in order for translations to appear on "
+"the front-end."
+msgstr "Dịch chuỗi WPML sử dụng tệp .mo thay vì lệnh gọi cơ sở dữ liệu. WPML cần tạo các tệp .mo này để bản dịch xuất hiện ở giao diện người dùng."
+
+#: src/js/mo-scan/pre-generate/textProvider.js:51
+msgid "Try again"
+msgstr "Thử lại"
+
+#: src/js/mo-scan/pre-generate/textProvider.js:54
+msgid "Generate .mo files"
+msgstr "Tạo tệp .mo"
+
+#: src/js/mo-scan/pre-generate/textProvider.js:59
+msgid "Close this message"
+msgstr "Đóng tin nhắn này"
+
+#: src/js/mo-scan/texts.js:10
+msgid ""
+"Find additional texts that WordPress, the theme and plugins created and "
+"choose which ones to translate"
+msgstr "Tìm văn bản bổ sung mà WordPress, chủ đề và plugin đã tạo và chọn văn bản cần dịch"
+
+#: src/js/mo-scan/texts.js:11
+msgid "Choose texts for translation"
+msgstr "Chọn văn bản để dịch"
+
+#: src/js/mo-scan/texts.js:12
+msgid "Some of the translations have changed"
+msgstr "Một số bản dịch đã thay đổi"
+
+#: src/js/mo-scan/texts.js:13
+msgid "Scan the selected components to make new texts available for translation."
+msgstr "Quét các thành phần đã chọn để cung cấp văn bản mới cho bản dịch."
+
+#: src/js/mo-scan/texts.js:3
+msgid "Select all"
+msgstr "Chọn tất cả"
+
+#: src/js/mo-scan/texts.js:4
+msgid "Plugins:"
+msgstr "Bổ sung:"
+
+#: src/js/mo-scan/texts.js:5
+msgid "Themes:"
+msgstr "Chủ đề:"
+
+#: src/js/mo-scan/texts.js:6
+msgid "Core:"
+msgstr "Cốt lõi:"
+
+#: src/js/mo-scan/texts.js:7
+msgid "Can't find the strings you're looking to translate?"
+msgstr "Không thể tìm thấy chuỗi bạn đang muốn dịch?"
+
+#: src/js/mo-scan/texts.js:8
+msgid "Most likely you cannot see the strings you want to translate because:"
+msgstr "Rất có thể bạn không nhìn thấy được chuỗi bạn muốn dịch vì:"
+
+#: src/js/mo-scan/texts.js:9
+msgid "Texts are not selected for translation"
+msgstr "Văn bản không được chọn để dịch"

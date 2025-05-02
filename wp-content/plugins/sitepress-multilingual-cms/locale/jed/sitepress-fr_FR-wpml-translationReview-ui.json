@@ -3,8 +3,7 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "lang": "fr_FR"
+            "domain": "messages"
          },
          "Accepted": [
             "Accepté"

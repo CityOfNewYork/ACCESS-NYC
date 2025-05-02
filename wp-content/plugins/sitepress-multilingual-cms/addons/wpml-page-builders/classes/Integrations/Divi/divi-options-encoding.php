@@ -4,8 +4,8 @@ namespace WPML\Compatibility\Divi;
 
 class DiviOptionsEncoding implements \IWPML_Backend_Action, \IWPML_Frontend_Action {
 
-	const CHARS_ENCODED     = [ '%22', '%91', '%93' ];
-	const CHARS_DECODED     = [ '"', '[', ']' ];
+	const CHARS_ENCODED     = [ '%22', '%91', '%92', '%93' ];
+	const CHARS_DECODED     = [ '"', '[', '\\', ']' ];
 	const DELIMITER         = '_';
 	const TRANSLATABLE_KEYS = [ 'value', 'link_url', 'link_text' ];
 

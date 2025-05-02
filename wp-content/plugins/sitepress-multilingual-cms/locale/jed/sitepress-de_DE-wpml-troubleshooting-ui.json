@@ -20,6 +20,21 @@
          "Cancel in-progress automatic jobs": [
             "In Bearbeitung befindliche automatische Aufträge abbrechen"
          ],
+         "Enabling WPML's Advanced Translation Editor...": [
+            "Aktivieren des erweiterten Übersetzungs-Editors von WPML..."
+         ],
+         "Force-enable WPML's Advanced Translation Editor": [
+            "WPML's erweiterten Übersetzungs-Editor erzwingen"
+         ],
+         "If you're running this website from two or more domains on the same installation, this action will allow both to use the Advanced Translation Editor. Don't use this if you've moved or copied the site to a different domain on a different server.": [
+            "Wenn Sie diese Website von zwei oder mehr Domains auf derselben Installation betreiben, ermöglicht diese Aktion beiden die Verwendung des erweiterten Übersetzungs-Editors. Verwenden Sie dies nicht, wenn Sie die Website auf eine andere Domain auf einem anderen Server verschoben oder kopiert haben."
+         ],
+         "An error occurred while enabling WPML on both domains. Please try again.": [
+            "Beim Aktivieren von WPML auf beiden Domains ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+         ],
+         "You can now use the Advanced Translation Editor from this site, as well as the other site(s) running from a different domain on the same installation.": [
+            "Sie können den erweiterten Übersetzungs-Editor jetzt sowohl von dieser Website als auch von der/den anderen Website(s) verwenden, die von einer anderen Domain auf derselben Installation laufen."
+         ],
          "Domain name has been updated": [
             "Domainname aktualisiert"
          ],

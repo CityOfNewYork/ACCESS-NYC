@@ -36,6 +36,14 @@ class StringEntity {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function hasValue() {
+		$value = $this->getValue();
+		return is_string( $value ) && strlen( $value ) > 0;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getName() {

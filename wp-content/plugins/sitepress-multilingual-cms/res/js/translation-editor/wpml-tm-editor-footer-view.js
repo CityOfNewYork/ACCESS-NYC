@@ -2,154 +2,190 @@
 
 var WPML_TM = WPML_TM || {};
 
-(function () {
-	"use strict";
+( function () {
+  'use strict'
 
-	WPML_TM.editorFooterView = Backbone.View.extend({
-		tagName: 'footer',
-		className: 'wpml-translation-action-buttons',
+  WPML_TM.editorFooterView = Backbone.View.extend( {
+    tagName: 'footer',
+    className: 'wpml-translation-action-buttons',
 
-		events: {
-			'click .js-save': 'save',
-			'click .js-resign': 'resign',
-			'click .js-dialog-cancel': 'cancel',
-			'click .js-save-and-close': 'save_and_close',
-			'change .js-toggle-translated': 'toggleTranslated'
-		},
-		initialize: function (options) {
-			var self = this;
-			self.mainView = options.mainView;
-			self.listenTo(self.model, 'translationUpdated', self.setDirty);
-		},
-		save: function () {
-			var self = this;
-			self.doSave();
-		},
-		editIndependently: function () {
-			WpmlTmEditorModel.is_duplicate = false;
-		},
-		doSave: function () {
-			var self = this;
-			var saveMessage = jQuery('.js-saving-message');
-			saveMessage.show();
-			self.disableButtons(true);
-			self.listenToOnce(self.model, 'saveJobSuccess', function () {
-				saveMessage.hide();
-				self.disableButtons(false);
-			});
-			self.model.save(jQuery('#icl_tm_editor').serialize());
+    events: {
+      'click .js-save': 'save',
+      'click .js-resign': 'resign',
+      'click .js-dialog-cancel': 'cancel',
+      'click .js-save-and-close': 'save_and_close',
+      'change .js-toggle-translated': 'toggleTranslated',
+    },
+    initialize: function ( options ) {
+      var self = this
+      self.mainView = options.mainView
+      self.listenTo( self.model, 'translationUpdated', self.setDirty )
+    },
+    save: function () {
+      var self = this
+      self.doSave()
+    },
+    editIndependently: function () {
+      WpmlTmEditorModel.is_duplicate = false
+    },
+    doSave: function () {
+      var self = this
+      var saveMessage = jQuery( '.js-saving-message' )
+      saveMessage.show()
+      self.disableButtons( true )
+      self.listenToOnce( self.model, 'saveJobSuccess', function () {
+        saveMessage.hide()
+        self.disableButtons( false )
+      } )
+      var updatedValues = []
+      var $textAreas = jQuery('#icl_tm_editor textarea[name^="fields[package-string-"][name$="[data]"]')
+      $textAreas.each( function () {
+        var $textArea = jQuery( this )
+        var originalText = $textArea.val() || ''
+        var updatedText = originalText.replace(/(<([a-zA-Z0-9]+)[^>]*>[\s\S]*?<\/\2>)|(\r?\n)/g,
+          function (match, entireTagBlock) {
+            if (entireTagBlock) {
+              return entireTagBlock
+            }
+            return '<br>'
+          }
+        );
+        if ( originalText !== updatedText ) {
+          updatedValues.push( { element: $textArea, original: originalText } )
+          $textArea.val( updatedText )
+        }
+      } )
+      self.model.save( jQuery( '#icl_tm_editor' ).serialize() )
+      updatedValues.forEach( function ( item ) {
+        item.element.val( item.original )
+      } )
 
-			self.setDirty(false);
-			return self;
-		},
-		resign: function () {
-			if (window.confirm(tmEditorStrings.resign_translation)) {
-				window.location.href = WPML_core.sanitize( tmEditorStrings.resign_url );
-			}
-		},
-		cancel: function () {
-			this.redirect_to_return_url('wpml_tm_cancel=1');
-		},
-		save_and_close: function () {
-			var self = this;
-			self.listenToOnce(self.model, 'saveJobSuccess', function () {
-				self.setDirty(false);
-				this.redirect_to_return_url('wpml_tm_saved=1');
-			});
+      self.setDirty( false )
+      return self
+    },
+    resign: function () {
+      if (window.confirm( tmEditorStrings.resign_translation )) {
+        window.location.href = WPML_core.sanitize( tmEditorStrings.resign_url )
+      }
+    },
+    cancel: function () {
+      this.redirect_to_return_url( 'wpml_tm_cancel=1' )
+    },
+    save_and_close: function () {
+      var self = this
+      self.listenToOnce( self.model, 'saveJobSuccess', function () {
+        self.setDirty( false )
+        this.redirect_to_return_url( 'wpml_tm_saved=1' )
+      } )
 
-			self.save();
-		},
-		redirect_to_return_url: function (param_string) {
-			var url = WpmlTmEditorModel.return_url;
-			if (url.indexOf('?') < 0) {
-				url += '?' + param_string;
-			} else {
-				url += '&' + param_string;
-			}
-			window.location = WPML_core.sanitize( url );
-		},
-		render: function () {
-			var self = this;
-			self.$el.html(WPML_TM['templates/translation-editor/footer.html'](tmEditorStrings));
-			self.progressBar = self.$el.find('.js-progress-bar');
-			self.translationComplete = self.$el.find(':checkbox[name=complete]');
-			self.showProgressBar();
-			self.maybeShowTranslationComplete();
-			self.maybeHideHideCompletedSwitcher();
+      self.save()
+    },
+    redirect_to_return_url: function ( param_string ) {
+      var url = WpmlTmEditorModel.return_url
+      if (url.indexOf( '?' ) < 0) {
+        url += '?' + param_string
+      } else {
+        url += '&' + param_string
+      }
+      window.location = WPML_core.sanitize( url )
+    },
+    render: function () {
+      var self = this
+      self.$el.html( WPML_TM['templates/translation-editor/footer.html']( tmEditorStrings ) )
+      jQuery('#icl_tm_editor textarea[name^="fields[package-string-"][name$="[data]"]').each(function () {
+        var $textArea = jQuery(this)
+        var originalText = $textArea.val() || ''
+        var updatedText = originalText.replace(/(<([a-zA-Z0-9]+)[^>]*>[\s\S]*?<\/\2>)|(<br\s*\/?>)/g,
+          function (match, entireTagBlock) {
+            if (entireTagBlock) {
+              return entireTagBlock
+            }
+            return '\n'
+          }
+        );
+        if (originalText !== updatedText) {
+          $textArea.val(updatedText)
+        }
+      })
+      self.progressBar = self.$el.find( '.js-progress-bar' )
+      self.translationComplete = self.$el.find( ':checkbox[name=complete]' )
+      self.showProgressBar()
+      self.maybeShowTranslationComplete()
+      self.maybeHideHideCompletedSwitcher()
 
-			window.onbeforeunload = function (e) {
-				if (self.isDirty()) {
-					return tmEditorStrings.confirmNavigate;
-				}
-			};
-			_.defer(_.bind(self.maybeShowDuplicateDialog, self));
-		},
-		maybeShowDuplicateDialog: function () {
-			var self = this;
-			if (WpmlTmEditorModel.is_duplicate) {
-				self.dialog = new WPML_TM.editorEditIndependentlyDialog(self);
-			}
-		},
-		showProgressBar: function () {
+      window.onbeforeunload = function ( e ) {
+        if (self.isDirty()) {
+          return tmEditorStrings.confirmNavigate
+        }
+      }
+      _.defer( _.bind( self.maybeShowDuplicateDialog, self ) )
+    },
+    maybeShowDuplicateDialog: function () {
+      var self = this
+      if (WpmlTmEditorModel.is_duplicate) {
+        self.dialog = new WPML_TM.editorEditIndependentlyDialog( self )
+      }
+    },
+    showProgressBar: function () {
 
-			var self = this;
-			self.progressBar.css('display', WpmlTmEditorModel.requires_translation_complete_for_each_field ? 'inline-block' : 'none');
-			self.progressBar.find('.ui-progressbar-value').height(self.progressBar.find('.progress-bar-text').height());
-			self.progressBar.progressbar({});
-			var value = parseInt(self.model.progressPercentage(), 10);
-			self.progressBar.find('.progress-bar-text').html(value + '% Complete');
-			self.progressBar.find('.ui-progressbar-value').attr('data-progressbar-text', value + '% Complete');
-			self.progressBar.progressbar({value: value});
-			self.progressBar.find('.ui-progressbar-value').height(self.progressBar.find('.progress-bar-text').height());
+      var self = this
+      self.progressBar.css( 'display', WpmlTmEditorModel.requires_translation_complete_for_each_field ? 'inline-block' : 'none' )
+      self.progressBar.find( '.ui-progressbar-value' ).height( self.progressBar.find( '.progress-bar-text' ).height() )
+      self.progressBar.progressbar( {} )
+      var value = parseInt( self.model.progressPercentage(), 10 )
+      self.progressBar.find( '.progress-bar-text' ).html( value + '% Complete' )
+      self.progressBar.find( '.ui-progressbar-value' ).attr( 'data-progressbar-text', value + '% Complete' )
+      self.progressBar.progressbar( { value: value } )
+      self.progressBar.find( '.ui-progressbar-value' ).height( self.progressBar.find( '.progress-bar-text' ).height() )
 
-			return self;
-		},
-		setCompleteCheckBox: function () {
-			var self = this;
-			if (WpmlTmEditorModel.requires_translation_complete_for_each_field) {
-				self.translationComplete.prop('checked', self.model.progressPercentage() === 100);
-			}
-			return self;
-		},
-		maybeShowTranslationComplete: function () {
-			var self = this;
-			if (WpmlTmEditorModel.requires_translation_complete_for_each_field) {
-				self.translationComplete.parent().hide();
-			} else {
-				self.translationComplete.prop('checked', WpmlTmEditorModel.translation_is_complete);
-			}
-		},
-		maybeHideHideCompletedSwitcher: function () {
-			var self = this;
-			if (!WpmlTmEditorModel.display_hide_completed_switcher) {
-				self.$el.find('#wpml_tm_toggle_translated').parent().hide();
-			}
-		},
-		progressBar: function () {
-			return this.$el.find('.js-progress-bar');
-		},
-		setDirty: function (value) {
-			this.model.set('is_dirty', value);
-		},
-		isDirty: function () {
-			return this.model.get('is_dirty');
-		},
-		disableButtons: function (state) {
-			this.$el.find('.js-save, .js-resign, .js-dialog-cancel, .js-save-and-close').prop('disabled', state);
-		},
-		disableSaveButtons: function (state) {
-			this.$el.find('.js-save, .js-save-and-close').prop('disabled', state);
-		},
-		hideResignButton: function (state) {
-			if (state) {
-				this.$el.find('.js-resign').hide();
-			} else {
-				this.$el.find('.js-resign').show();
-			}
-		},
-		toggleTranslated: function() {
-			var toggle = this.$el.find('.js-toggle-translated');
-			this.mainView.hideTranslated(toggle.is(':checked'));
-		}
-	});
-}());
+      return self
+    },
+    setCompleteCheckBox: function () {
+      var self = this
+      if (WpmlTmEditorModel.requires_translation_complete_for_each_field) {
+        self.translationComplete.prop( 'checked', self.model.progressPercentage() === 100 )
+      }
+      return self
+    },
+    maybeShowTranslationComplete: function () {
+      var self = this
+      if (WpmlTmEditorModel.requires_translation_complete_for_each_field) {
+        self.translationComplete.parent().hide()
+      } else {
+        self.translationComplete.prop( 'checked', WpmlTmEditorModel.translation_is_complete )
+      }
+    },
+    maybeHideHideCompletedSwitcher: function () {
+      var self = this
+      if (!WpmlTmEditorModel.display_hide_completed_switcher) {
+        self.$el.find( '#wpml_tm_toggle_translated' ).parent().hide()
+      }
+    },
+    progressBar: function () {
+      return this.$el.find( '.js-progress-bar' )
+    },
+    setDirty: function ( value ) {
+      this.model.set( 'is_dirty', value )
+    },
+    isDirty: function () {
+      return this.model.get( 'is_dirty' )
+    },
+    disableButtons: function ( state ) {
+      this.$el.find( '.js-save, .js-resign, .js-dialog-cancel, .js-save-and-close' ).prop( 'disabled', state )
+    },
+    disableSaveButtons: function ( state ) {
+      this.$el.find( '.js-save, .js-save-and-close' ).prop( 'disabled', state )
+    },
+    hideResignButton: function ( state ) {
+      if (state) {
+        this.$el.find( '.js-resign' ).hide()
+      } else {
+        this.$el.find( '.js-resign' ).show()
+      }
+    },
+    toggleTranslated: function () {
+      var toggle = this.$el.find( '.js-toggle-translated' )
+      this.mainView.hideTranslated( toggle.is( ':checked' ) )
+    },
+  } )
+}() )

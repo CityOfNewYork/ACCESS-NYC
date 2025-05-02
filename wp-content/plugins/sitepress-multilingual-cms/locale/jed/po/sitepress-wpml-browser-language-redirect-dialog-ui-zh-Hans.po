@@ -1,0 +1,41 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/browser-language-redirect-dialog/texts.js:11
+msgid "How Browser Language Redirect Affects Google Indexing"
+msgstr "浏览器语言重定向如何影响谷歌索引"
+
+#: src/js/browser-language-redirect-dialog/texts.js:12
+msgid "Documentation"
+msgstr "文件"
+
+#: src/js/browser-language-redirect-dialog/texts.js:3
+msgid "Browser redirect affects Google indexing and search results"
+msgstr "浏览器重定向影响谷歌索引和搜索结果"
+
+#: src/js/browser-language-redirect-dialog/texts.js:4
+msgid "Got it, activate anyway"
+msgstr "明白，无论如何都要激活"
+
+#: src/js/browser-language-redirect-dialog/texts.js:5
+msgid "Cancel"
+msgstr "取消"
+
+#: src/js/browser-language-redirect-dialog/texts.js:7
+msgid ""
+"When you redirect visitors based on their language, you also redirect "
+"Google. Google wants to see your site exactly like visitors see it, "
+"including any redirects that you apply."
+msgstr "当您根据访客的语言对其进行重定向时，您也对 Google 进行了重定向。Google 希望看到的网站与访客看到的一模一样，包括您应用的任何重定向。"
+
+#: src/js/browser-language-redirect-dialog/texts.js:8
+msgid ""
+"It is OK to redirect visitors based on their language, but you need to "
+"realize that this feature affects SEO."
+msgstr "根据访客的语言重新定向访客是可以的，但您需要意识到这一功能会影响搜索引擎优化。"
+
+#: src/js/browser-language-redirect-dialog/texts.js:9
+msgid "Before proceeding, we recommend that you read these two pages:"
+msgstr "在继续操作之前，我们建议您阅读这两页内容："

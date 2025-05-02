@@ -1,11 +1,28 @@
 <?php
 
 use WPML\PB\Elementor\Helper\Node;
+use WPML\PB\TranslationJob\Groups;
 
 /**
  * Class WPML_Elementor_Register_Strings
  */
 class WPML_Elementor_Register_Strings extends WPML_Page_Builders_Register_Strings {
+
+	/**
+	 * @param WPML_PB_String $string
+	 * @param string         $node_id
+	 * @param mixed          $element
+	 * @param array          $package
+	 *
+	 * @return WPML_PB_String
+	 */
+	protected function filter_string_to_register( WPML_PB_String $string, $node_id, $element, $package ) {
+		if ( ! empty( $element['settings']['image']['id'] ) && Groups::isGroupLabel( $string->get_title() ) ) {
+			$string->set_title( Groups::appendImageIdToGroupLabel( $string->get_title(), $element['settings']['image']['id'] ) );
+		}
+
+		return $string;
+	}
 
 	/**
 	 * @param array $data_array

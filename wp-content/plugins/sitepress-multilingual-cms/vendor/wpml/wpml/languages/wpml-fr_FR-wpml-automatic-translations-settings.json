@@ -1,0 +1,172 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Could not fetch engines data": [
+            "Impossible de récupérer les données des moteurs"
+         ],
+         "Could not save settings": [
+            "Impossible d'enregistrer les paramètres"
+         ],
+         "Automatic translation": [
+            "Traduction automatique"
+         ],
+         "Saving...": [
+            "Enregistrement..."
+         ],
+         "Save settings": [
+            "Enregistrer les paramètres"
+         ],
+         "Settings saved": [
+            "Paramètres enregistrés"
+         ],
+         "Some error occurred": [
+            "Une erreur s'est produite"
+         ],
+         "Loading...": [
+            "Chargement..."
+         ],
+         "Failed to load engines": [
+            "Échec du chargement des moteurs"
+         ],
+         "Drag your default engine to the top and order the rest by priority.": [
+            "Faites glisser votre moteur par défaut vers le haut et ordonnez le reste par ordre de priorité."
+         ],
+         "Which translation engines do you want to use?": [
+            "Quels moteurs de traduction souhaitez-vous utiliser ?"
+         ],
+         "Automatic translation engines differ in translation style and supported language pairs. If your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it.": [
+            "Les moteurs de traduction automatique diffèrent par leur style de traduction et les combinaisons de langues prises en charge. Si votre moteur de traduction préféré ne prend pas en charge une combinaison de langues que vous souhaitez utiliser, nous nous rabattons sur votre moteur préféré suivant qui la prend en charge."
+         ],
+         "WPML AI (beta) automatically detects the formality of your content and translates with the same formality.": [
+            "WPML AI (bêta) détecte automatiquement la formalité de votre contenu et le traduit avec le même niveau de formalité."
+         ],
+         "Auto-formality": [
+            "Formalité automatique"
+         ],
+         "Choose the tone of automatic translations for %s": [
+            "Choisissez le ton des traductions automatiques pour %s"
+         ],
+         "Your site doesn't use languages that offer formality settings.": [
+            "Votre site n'utilise pas de langues qui offrent des paramètres de formalité."
+         ],
+         "Edit formality": [
+            "Modifier la formalité"
+         ],
+         "%d credits per word": [
+            "%d crédits par mot"
+         ],
+         "Backup %d": [
+            "Sauvegarde %d"
+         ],
+         "Default": [
+            "Par défaut"
+         ],
+         "ON": [
+            "ACTIVÉ"
+         ],
+         "OFF": [
+            "DÉSACTIVÉ"
+         ],
+         "Documentation": [
+            "Documentation"
+         ],
+         "DeepL's formality and how it helps get good translations": [
+            "La formalité de DeepL et comment elle aide à obtenir de bonnes traductions"
+         ],
+         "Edit button": [
+            "Bouton Modifier"
+         ],
+         "Examples for %s": [
+            "Exemples pour %s"
+         ],
+         "For example:": [
+            "Par exemple :"
+         ],
+         "Formality settings for %s": [
+            "Paramètres de formalité pour %s"
+         ],
+         "Formality level for %s": [
+            "Niveau de formalité pour %s"
+         ],
+         "Set formality for %s": [
+            "Définir la formalité pour %s"
+         ],
+         "%d of your target languages can be translated using either a formal or informal tone.\n The tone which gives the best translation for each language is set by default.": [
+            "%d de vos langues cibles peuvent être traduites en utilisant soit un ton formel, soit un ton informel.\n Le ton qui donne la meilleure traduction pour chaque langue est défini par défaut."
+         ],
+         "%s doesn't yet support formality options for %s.": [
+            "%s ne prend pas encore en charge les options de formalité pour %s."
+         ],
+         "Cancel": [
+            "Annuler"
+         ],
+         "Update": [
+            "Mettre à jour"
+         ],
+         "Formal": [
+            "Formel"
+         ],
+         "Informal": [
+            "Informel"
+         ],
+         "Don't translate drafts. Only translate when I publish content.": [
+            "Ne traduisez pas les brouillons. Traduisez uniquement lorsque je publie du contenu."
+         ],
+         "Translate drafts as I save them (consumes a bit more translation credits).": [
+            "Traduisez les brouillons dès que je les enregistre (consomme un peu plus de crédits de traduction)."
+         ],
+         "Do you want to translate drafts automatically?": [
+            "Voulez-vous traduire automatiquement les brouillons ?"
+         ],
+         "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s.": [
+            "Cette fonctionnalité n'est disponible que lorsque vous activez « Tout traduire automatiquement » depuis le %sTableau de bord de traduction%s."
+         ],
+         "Close modal": [
+            "Fermer la fenêtre modale"
+         ],
+         "What would you like to do after WPML finishes translating your content automatically?": [
+            "Que souhaitez-vous faire après que WPML ait terminé de traduire automatiquement votre contenu ?"
+         ],
+         "Wait for review": [
+            "Attendre la révision"
+         ],
+         "Recommended with DeepL, Google and Microsoft": [
+            "Recommandé avec DeepL, Google et Microsoft"
+         ],
+         "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process.": [
+            "DeepL, Google et Microsoft fournissent d'excellentes traductions, mais nous recommandons une révision humaine pour confirmer leur exactitude. WPML L'IA offre des traductions supérieures à celles des humains qui comprennent le contexte, vous permettant ainsi de passer outre le processus de révision en toute confiance."
+         ],
+         "WPML keeps translations unpublished, so you can review them first.": [
+            "WPML garde les traductions non publiées, afin que vous puissiez les examiner d'abord."
+         ],
+         "Your translators review and approve translations before publishing.": [
+            "Vos traducteurs examinent et approuvent les traductions avant la publication."
+         ],
+         "Publish and mark for review": [
+            "Publier et marquer pour révision"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "WPML publie immédiatement les traductions mais les marque pour que vous puissiez les vérifier à votre convenance."
+         ],
+         "WPML publishes translations immediately but flags them for translators to review later.": [
+            "WPML publie immédiatement les traductions mais les marque pour que les traducteurs les examinent ultérieurement."
+         ],
+         "Publish without review": [
+            "Publier sans révision"
+         ],
+         "Recommended with WPML AI": [
+            "Recommandé avec WPML AI"
+         ],
+         "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy.": [
+            "WPML AI fournit des traductions meilleures que celles des humains qui nécessitent rarement des améliorations, vous pouvez donc passer en toute confiance le processus de révision. Pour les autres moteurs de traduction, une révision humaine est recommandée pour confirmer l'exactitude."
+         ],
+         "WPML publishes translations immediately, skipping the review process.": [
+            "WPML publie immédiatement les traductions, en sautant le processus de révision."
+         ]
+      }
+   }
+}

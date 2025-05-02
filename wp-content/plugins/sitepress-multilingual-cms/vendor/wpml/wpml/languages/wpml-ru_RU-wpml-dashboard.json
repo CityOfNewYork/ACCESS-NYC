@@ -1,0 +1,1197 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Untranslated strings that I encounter on front-end while logged in": [
+            "Непереведенные строки, с которыми я сталкиваюсь на фронтенде, будучи авторизованным"
+         ],
+         "Untranslated strings that all front-end users encounter": [
+            "Непереведенные строки, с которыми сталкиваются все пользователи фронтенда"
+         ],
+         "Disable auto-registration of strings": [
+            "Отключить автоматическую регистрацию строк"
+         ],
+         "Plugins": [
+            "Плагины"
+         ],
+         "Themes": [
+            "Темы"
+         ],
+         "WordPress": [
+            "WordPress"
+         ],
+         "Other": [
+            "Другое"
+         ],
+         "Error in fetching default translation batch name": [
+            "Ошибка при получении имени пакета перевода по умолчанию"
+         ],
+         "Error in fetching translation editor type.": [
+            "Ошибка при получении типа редактора переводов."
+         ],
+         "Error in fetching untranslated types count": [
+            "Ошибка при получении количества непереведенных типов"
+         ],
+         "Error in fetching remote translation service data.": [
+            "Ошибка при получении данных удаленного сервиса переводов."
+         ],
+         "An error occurred while sending the translation.": [
+            "Произошла ошибка при отправке перевода."
+         ],
+         "Validation failed": [
+            "Ошибка проверки"
+         ],
+         "Please wait until download finishes": [
+            "Пожалуйста, дождитесь завершения загрузки"
+         ],
+         "You need to wait 5 minutes after the last check": [
+            "Вам необходимо подождать 5 минут после последней проверки"
+         ],
+         "Check status and get translations": [
+            "Проверить статус и получить переводы"
+         ],
+         "Status: ": [
+            "Статус: "
+         ],
+         "Downloaded jobs: ": [
+            "Загруженные задания: "
+         ],
+         "Cancelled jobs: ": [
+            "Отмененные задания: "
+         ],
+         "none of your translation jobs have been completed": [
+            "ни одно из ваших заданий на перевод не завершено"
+         ],
+         "Checking translation jobs status. Please don't close this page!": [
+            "Проверка статуса заданий на перевод. Пожалуйста, не закрывайте эту страницу!"
+         ],
+         " have been sent to remote translators": [
+            " были отправлены удаленным переводчикам"
+         ],
+         " has been sent to remote translators": [
+            " был отправлен удаленным переводчикам"
+         ],
+         "Last check: Never": [
+            "Последняя проверка: Никогда"
+         ],
+         "Filtering is disabled to show all selected items. ": [
+            "Фильтрация отключена, чтобы показать все выбранные элементы. "
+         ],
+         "Apply filters": [
+            "Применить фильтры"
+         ],
+         "%d item selected": [
+            "%d элемент выбран",
+            "%d элементов выбрано"
+         ],
+         "(%d word count)": [
+            "(%d количество слов)"
+         ],
+         "%s item not showing.": [
+            "%s элемент не отображается.",
+            "%s элементов не отображаются."
+         ],
+         "Show all selected items": [
+            "Показать все выбранные элементы"
+         ],
+         "Translate your content": [
+            "Перевести ваш контент"
+         ],
+         "Unselect all": [
+            "Отменить выбор всех"
+         ],
+         "Source Language:": [
+            "Исходный язык:"
+         ],
+         "translated to:": [
+            "переведено на:"
+         ],
+         "Filter": [
+            "Фильтр"
+         ],
+         "You are about to change the source language filter from %s to %s": [
+            "Вы собираетесь изменить фильтр исходного языка с %s на %s"
+         ],
+         "Updating the source language filter will clear the items you've selected for translation. Are you sure you want to continue?": [
+            "Обновление фильтра исходного языка очистит элементы, которые вы выбрали для перевода. Вы уверены, что хотите продолжить?"
+         ],
+         "Change source language": [
+            "Изменить исходный язык"
+         ],
+         "Cancel": [
+            "Отмена"
+         ],
+         "All Statuses": [
+            "Все статусы"
+         ],
+         "All languages": [
+            "Все языки"
+         ],
+         "All translation statuses": [
+            "Все статусы перевода"
+         ],
+         "Not completed": [
+            "Не завершено"
+         ],
+         "Needs updating": [
+            "Требует обновления"
+         ],
+         "Translation in progress": [
+            "Перевод в процессе"
+         ],
+         "Translation complete": [
+            "Перевод завершен"
+         ],
+         "Global Filter": [
+            "Глобальный фильтр"
+         ],
+         "Parent:": [
+            "Родительский:"
+         ],
+         "Search parent by title": [
+            "Поиск родительского элемента по заголовку"
+         ],
+         "Search by term title in %s": [
+            "Поиск по заголовку термина в %s"
+         ],
+         "All taxonomies": [
+            "Все таксономии"
+         ],
+         "Loading": [
+            "Загрузка"
+         ],
+         "Taxonomy Term:": [
+            "Термин таксономии:"
+         ],
+         "Loading terms": [
+            "Загрузка терминов"
+         ],
+         "No terms found": [
+            "Термины не найдены"
+         ],
+         "Filter by:": [
+            "Фильтровать по:"
+         ],
+         "Title": [
+            "Заголовок"
+         ],
+         "There is an issue with automatic translation that needs your attention.": [
+            "Есть проблема с автоматическим переводом, которая требует вашего внимания."
+         ],
+         "Fix to continue translating automatically": [
+            "Исправьте, чтобы продолжить автоматический перевод"
+         ],
+         "View": [
+            "Просмотр"
+         ],
+         "Edit": [
+            "Редактировать"
+         ],
+         "Edit note for the translators": [
+            "Редактировать примечание для переводчиков"
+         ],
+         "Add note for the translators": [
+            "Добавить примечание для переводчиков"
+         ],
+         "This page is set to be %1$stranslated manually%2$s using the WordPress Editor": [
+            "Эта страница настроена на %1$sручной перевод%2$s с использованием WordPress Редактора"
+         ],
+         "(no title)": [
+            "(без заголовка)"
+         ],
+         "Image": [
+            "Изображение"
+         ],
+         "Date / Status": [
+            "Дата / Статус"
+         ],
+         "Word count": [
+            "Количество слов"
+         ],
+         "Loading items...": [
+            "Загрузка элементов..."
+         ],
+         "%1$d %2$s selected": [
+            "%1$d %2$s выбрано"
+         ],
+         "items": [
+            "элементов"
+         ],
+         "Filtering is disabled to show all selected items": [
+            "Фильтрация отключена, чтобы показать все выбранные элементы"
+         ],
+         "Apply filter": [
+            "Применить фильтр"
+         ],
+         "%1$d %2$s not showing": [
+            "%1$d %2$s не отображаются"
+         ],
+         "Show selected items": [
+            "Показать выбранные элементы"
+         ],
+         " / page": [
+            " / страница"
+         ],
+         "Previous": [
+            "Предыдущий"
+         ],
+         "Next": [
+            "Следующий"
+         ],
+         "Your site's content is too vast for a single translation batch. Use filters to reduce the selection, then \"select all\".": [
+            "Содержимое вашего сайта слишком обширно для одного пакета перевода. Используйте фильтры, чтобы уменьшить выбор, затем “выберите все”."
+         ],
+         "The current filter captures too much content. Narrow it down to enable \"select all\" for translation.": [
+            "Текущий фильтр захватывает слишком много контента. Сузьте его, чтобы включить “выбрать все” для перевода."
+         ],
+         "Select All": [
+            "Выбрать все"
+         ],
+         "All %d items matching criteria are selected": [
+            "Все %d элементов, соответствующих критериям, выбраны"
+         ],
+         "All %d items in this section are selected": [
+            "Выбраны все элементы %d в данном разделе"
+         ],
+         "You have too many items to send for translation at once. Apply a filter to narrow down the items to enable this option.": [
+            "У вас слишком много элементов для одновременной отправки на перевод. Примените фильтр, чтобы сузить список элементов и включить эту опцию."
+         ],
+         "Clear selection": [
+            "Очистить выбор"
+         ],
+         "Select all items that match this search": [
+            "Выбрать все элементы, соответствующие этому поиску"
+         ],
+         "Loading...": [
+            "Загрузка..."
+         ],
+         "Save note": [
+            "Сохранить примечание"
+         ],
+         "The following target languages do not support automatic translation: %s. <a>Map to known languages</a> to enable automatic translation.": [
+            "Следующие целевые языки не поддерживают автоматический перевод: %s. <a>Сопоставьте с известными языками</a>, чтобы включить автоматический перевод."
+         ],
+         "The site's default language %s doesn't support automatic translation.": [
+            "Язык сайта по умолчанию %s не поддерживает автоматический перевод."
+         ],
+         "Some sections are hidden due to current filter settings or because they have no items. <show_all>Show all translation statuses</show_all>": [
+            "Некоторые разделы скрыты из-за текущих настроек фильтра или потому что в них нет элементов. <show_all>Показать все статусы перевода</show_all>"
+         ],
+         "Step 1": [
+            "Шаг 1"
+         ],
+         "Select items for translation": [
+            "Выберите элементы для перевода"
+         ],
+         "Clear filters": [
+            "Очистить фильтры"
+         ],
+         "strings": [
+            "строки"
+         ],
+         "WPML didn't find any %s matching your criteria.": [
+            "WPML не нашел %s, соответствующих вашим критериям."
+         ],
+         "You have too many items selected to use this feature. Deselect some of the items to enable it.": [
+            "У вас выбрано слишком много элементов для использования этой функции. Отмените выбор некоторых элементов, чтобы включить ее."
+         ],
+         "Show strings in:": [
+            "Показать строки в:"
+         ],
+         "All domains": [
+            "Все домены"
+         ],
+         "All sources": [
+            "Все источники"
+         ],
+         "Frontend (viewed)": [
+            "Фронтенд (просмотрено)"
+         ],
+         "Backend (viewed)": [
+            "Бэкенд (просмотрено)"
+         ],
+         "Unknown": [
+            "Неизвестно"
+         ],
+         "String": [
+            "Строка"
+         ],
+         "All Translation Priorities": [
+            "Все приоритеты перевода"
+         ],
+         "This filter is available only if source is set to \"Frontend\" or \"Backend\".": [
+            "Этот фильтр доступен только если источник установлен на “Frontend” или “Backend”."
+         ],
+         "front-end": [
+            "фронтенд"
+         ],
+         "back-end": [
+            "бэкенд"
+         ],
+         "viewed": [
+            "просмотрено"
+         ],
+         "Domain": [
+            "Домен"
+         ],
+         "Source": [
+            "Источник"
+         ],
+         "Type": [
+            "Тип"
+         ],
+         "Strings in the theme and plugins": [
+            "Строки в теме и плагинах"
+         ],
+         "Translate front-end texts you can customize from the WordPress admin like footer text, copyright notices, plugin options and settings, time format, widget texts, and more.": [
+            "Переведите тексты фронтенда, которые вы можете настроить из админки WordPress, такие как текст футера, уведомления об авторских правах, параметры и настройки плагинов, формат времени, тексты виджетов и многое другое."
+         ],
+         "Translating Strings From Admin and Settings": [
+            "Перевод строк из админки и настроек"
+         ],
+         "Translate texts in admin screens": [
+            "Переводить тексты на экранах администратора"
+         ],
+         "Translate User Meta Information": [
+            "Переводить метаинформацию пользователя"
+         ],
+         "Making User Meta Information Translatable": [
+            "Создание переводимой метаинформации пользователя"
+         ],
+         "Translate user profile strings": [
+            "Перевести строки профиля пользователя"
+         ],
+         "You need to visit translations on your site's front-end (<a/>) and WPML will identify all untranslated strings and list them here. ": [
+            "Вам нужно посетить переводы на фронтенде вашего сайта (<a/>) и WPML определит все непереведенные строки и перечислит их здесь."
+         ],
+         "hide details": [
+            "скрыть подробности"
+         ],
+         "more details": [
+            "больше подробностей"
+         ],
+         "Still can't find the strings you're looking to translate? Add more strings for translation.": [
+            "Всё ещё не можете найти строки для перевода? Добавьте больше строк для перевода."
+         ],
+         "Translate Everything translates only those strings which are registered in English language": [
+            "Translate Everything переводит только те строки, которые зарегистрированы на английском языке"
+         ],
+         "Most strings from your plugins and theme are in English, so we’re showing them alongside your default language. Use the <b>Source Language</b> filter to view strings in a specific language.": [
+            "Большинство строк из ваших плагинов и темы на английском языке, поэтому мы показываем их вместе с вашим языком по умолчанию. Используйте фильтр <b>Исходный язык</b>, чтобы просмотреть строки на определенном языке."
+         ],
+         "You’re using <b>%s</b> to cache your site, which may prevent WPML from automatically registering new strings. To fix this, clear your page cache, then visit your translated pages again on the frontend to detect new strings.": [
+            "Вы используете <b>%s</b> для кэширования вашего сайта, что может помешать WPML автоматически регистрировать новые строки. Чтобы исправить это, очистите кэш страницы, затем снова посетите ваши переведенные страницы на фронтенде для обнаружения новых строк."
+         ],
+         "WPML can detect strings that appear on the site and list them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here only the strings that actually appear on the site, you need to enable this feature.": [
+            "WPML может обнаруживать строки, которые появляются на сайте, и перечислять их здесь. Эта функция помогает вам определить строки, которые фактически появляются на сайте, и перевести их. Чтобы видеть здесь только строки, которые фактически появляются на сайте, вам нужно включить эту функцию."
+         ],
+         "WPML detects strings that appear on the site and lists them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here all the strings in the site, you need to disable this feature.": [
+            "WPML обнаруживает строки, которые появляются на сайте, и перечисляет их здесь. Эта функция помогает вам определить строки, которые фактически появляются на сайте, и перевести их. Чтобы увидеть здесь все строки на сайте, вам нужно отключить эту функцию."
+         ],
+         "Detect untranslated strings": [
+            "Обнаружить непереведенные строки"
+         ],
+         "WPML can detect untranslated strings and automatically register them for translation. This happens in real time as you or your visitors browse your website.": [
+            "WPML может обнаруживать непереведённые строки и автоматически регистрировать их для перевода. Это происходит в реальном времени, когда вы или ваши посетители просматривают ваш веб-сайт."
+         ],
+         "Automatically register untranslated strings": [
+            "Автоматически регистрировать непереведенные строки"
+         ],
+         "Learn how to use auto-registration": [
+            "Узнайте, как использовать автоматическую регистрацию"
+         ],
+         "recommended": [
+            "рекомендуется"
+         ],
+         "Also register strings from the website's back-end": [
+            "Также регистрировать строки из бэкенда сайта"
+         ],
+         "Save settings": [
+            "Сохранить настройки"
+         ],
+         "Request failed because of the network error": [
+            "Запрос не удался из-за сетевой ошибки"
+         ],
+         "Try again": [
+            "Попробовать снова"
+         ],
+         "Enabled": [
+            "Включено"
+         ],
+         "Disabled": [
+            "Отключено"
+         ],
+         "Modify": [
+            "Изменить"
+         ],
+         "You can only translate %1$s from the site's default language (%2$s).": [
+            "Вы можете переводить %1$s только с языка по умолчанию сайта (%2$s)."
+         ],
+         "Leave existing translations as they are": [
+            "Оставить существующие переводы без изменений"
+         ],
+         "Overwrite existing translations": [
+            "Перезаписать существующие переводы"
+         ],
+         "Some of the content you want to translate is already translated": [
+            "Некоторый контент, который вы хотите перевести, уже переведен"
+         ],
+         "What do you want to do with the content that's already translated?": [
+            "Что вы хотите сделать с контентом, который уже переведен?"
+         ],
+         "Suggested deadline:": [
+            "Предлагаемый срок:"
+         ],
+         "Set a batch name and deadline": [
+            "Задать имя пакета и срок выполнения"
+         ],
+         "You can assign a custom name to this batch for easy tracking and suggest a deadline to clarify the priority for translators.": [
+            "Вы можете присвоить этому пакету пользовательское имя для удобства отслеживания и предложить срок выполнения, чтобы уточнить приоритет для переводчиков."
+         ],
+         "Batch name:": [
+            "Имя пакета:"
+         ],
+         "Default translation engine: ": [
+            "Система автоматического перевода по умолчанию: "
+         ],
+         "Change": [
+            "Изменить"
+         ],
+         "Failed to load engines": [
+            "Не удалось загрузить системы автоматического перевода"
+         ],
+         "Your Automatic Translation Credits": [
+            "Ваши кредиты автоматического перевода"
+         ],
+         "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s translator</add_yourself> to the site.<br/> Add yourself as %s translator and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Чтобы назначить себя переводчиком, вам сначала нужно <add_yourself>добавить себя как %s переводчика</add_yourself> на сайт.<br/> Добавьте себя как %s переводчика и нажмите <check_again>проверить снова</check_again> или выберите другой вариант перевода."
+         ],
+         "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s to %s translator</add_yourself> to the site.<br/> Add yourself as %s to %s translator and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Чтобы назначить себя переводчиком, вам сначала нужно <add_yourself>добавить себя как переводчика с %s на %s</add_yourself> на сайт.<br/> Добавьте себя как переводчика с %s на %s и нажмите <check_again>проверить снова</check_again> или выберите другой вариант перевода."
+         ],
+         "Checking": [
+            "Проверка"
+         ],
+         "In order to assign a translation service, you first need to <activate_ts>activate a translation service</activate_ts>.<br/>Activate a translation service and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Чтобы назначить службу перевода, вам сначала нужно <activate_ts>активировать службу перевода</activate_ts>.<br/>Активируйте службу перевода и нажмите <check_again>проверить снова</check_again> или выберите другой вариант перевода."
+         ],
+         " Checking ": [
+            " Проверка "
+         ],
+         "In order to translate automatically, you first need to <enable_ate>enable WPML's Advanced Translation Editor</enable_ate>.<br/>Enable the Advanced Translation Editor and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Чтобы переводить автоматически, вам сначала нужно <enable_ate>включить расширенный редактор переводов WPML</enable_ate>.<br/>Включите расширенный редактор переводов и нажмите <check_again>проверить снова</check_again> или выберите другой вариант перевода."
+         ],
+         "The items you selected were translated with the Classic Translation Editor and cannot be sent for automatic translation.": [
+            "Выбранные вами элементы были переведены с помощью Классического редактора переводов и не могут быть отправлены на автоматический перевод."
+         ],
+         "Some of the items you selected were translated with the Classic Translation Editor. These cannot be sent for automatic translation.": [
+            "Некоторые из выбранных вами элементов были переведены с помощью Классического редактора переводов. Они не могут быть отправлены на автоматический перевод."
+         ],
+         "Any existing content (translations) will be overwritten when creating duplicates.\nWhen duplicating content, please first duplicate parent pages to maintain the site's hierarchy.": [
+            "Любой существующий контент (переводы) будет перезаписан при создании дубликатов.\nПри дублировании контента, пожалуйста, сначала дублируйте родительские страницы, чтобы сохранить иерархию сайта."
+         ],
+         "Some of the selected content is already being translated. This will cancel any in-progress translations.": [
+            "Некоторый из выбранного контента уже переводится. Это отменит все незавершенные переводы."
+         ],
+         "Connection Error. Please wait a minute and reload this page. If the problem continues, please contact WPML support.": [
+            "Ошибка подключения. Пожалуйста, подождите минуту и перезагрузите эту страницу. Если проблема сохраняется, обратитесь в службу поддержки WPML."
+         ],
+         "Buy credits": [
+            "Купить кредиты"
+         ],
+         "You don't have enough credits to translate your content automatically.": [
+            "У вас недостаточно кредитов для автоматического перевода вашего контента."
+         ],
+         "In order to assign to a translator, you first need to <add_translators>add %s translators</add_translators> to the site.<br/> Add %s translators and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Чтобы назначить переводчика, вам сначала нужно <add_translators>добавить %s переводчиков</add_translators> на сайт.<br/> Добавьте %s переводчиков и нажмите <check_again>проверить снова</check_again> или выберите другой вариант перевода."
+         ],
+         "In order to assign to a translator, you first need to <add_translators>add %s to %s translators</add_translators> to the site.<br/> Add %s to %s translators and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Чтобы назначить переводчика, вам сначала нужно <add_translators>добавить переводчиков с %s на %s</add_translators> на сайт.<br/> Добавьте переводчиков с %s на %s и нажмите <check_again>проверить снова</check_again> или выберите другой вариант перевода."
+         ],
+         "Your site doesn't have any reviewers for %s. This means that you’re the only person who can review these translations.": [
+            "На вашем сайте нет рецензентов для %s. Это означает, что вы единственный человек, который может проверять эти переводы."
+         ],
+         "Your site doesn't have any reviewers yet. This means that you’re the only person who can review translations.": [
+            "На вашем сайте пока нет рецензентов. Это означает, что вы единственный человек, который может проверять переводы."
+         ],
+         "If you want other people to review the translations, go to <a>WPML → Translation Management → Translators</a> and add translators. They will be able to both review and translate content for you.": [
+            "Если вы хотите, чтобы другие люди проверяли переводы, перейдите в <a>WPML → Управление переводом → Переводчики</a> и добавьте переводчиков. Они смогут как проверять, так и переводить контент для вас."
+         ],
+         "WPML does not support duplicating strings. Your selection to duplicate strings to %1$s will be ignored if you proceed with the translation.": [
+            "WPML не поддерживает дублирование строк. Ваш выбор дублировать строки в %1$s будет проигнорирован, если вы продолжите перевод."
+         ],
+         "WPML does not support duplicating %1$s elements. Your selection to duplicate elements to %2$s will be ignored if you proceed with the translation.": [
+            "WPML не поддерживает дублирование элементов %1$s. Ваш выбор дублировать элементы в %2$s будет проигнорирован, если вы продолжите перевод."
+         ],
+         "WPML does not support duplicating %1$s elements and strings. Your selection to duplicate elements and strings to %2$s will be ignored if you proceed with the translation.": [
+            "WPML не поддерживает дублирование элементов и строк %1$s. Ваш выбор дублировать элементы и строки в %2$s будет проигнорирован, если вы продолжите перевод."
+         ],
+         "WPML does not support duplicating strings.": [
+            "WPML не поддерживает дублирование строк."
+         ],
+         "WPML does not support duplicating %1$s elements.": [
+            "WPML не поддерживает дублирование элементов %1$s."
+         ],
+         "WPML does not support duplicating %1$s elements and strings.": [
+            "WPML не поддерживает дублирование элементов и строк %1$s."
+         ],
+         "Finish setting up %s on your site": [
+            "Завершите настройку %s на вашем сайте"
+         ],
+         "You need to authenticate %s to send them content for translation.<br/>Visit the <a>Translators tab</a> to finish the setup and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Вам нужно авторизовать %s, чтобы отправлять им контент для перевода.<br/>Посетите <a>вкладку Переводчики</a>, чтобы завершить настройку, и нажмите <check_again>проверить снова</check_again> или выберите другой вариант перевода."
+         ],
+         "Set Up Translate Everything Automatically": [
+            "Настроить автоматический перевод всего"
+         ],
+         "WPML will translate your content into %d languages": [
+            "WPML переведет ваш контент на %d языков"
+         ],
+         "Content selected for translation": [
+            "Контент, выбранный для перевода"
+         ],
+         "Volume": [
+            "Объем"
+         ],
+         "~ %d words": [
+            "~ %d слов"
+         ],
+         "Total": [
+            "Всего"
+         ],
+         "Sent for translation": [
+            "Отправлено на перевод"
+         ],
+         "Sending for translation failed": [
+            "Не удалось отправить на перевод"
+         ],
+         "You selected multiple translation methods for content across different languages:": [
+            "Вы выбрали несколько методов перевода для контента на разных языках:"
+         ],
+         "Ok": [
+            "Ок"
+         ],
+         "<s>1 item</s> is being translated automatically.": [
+            "<s>1 элемент</s> переводится автоматически.",
+            "<s>%d элементов</s> переводятся автоматически."
+         ],
+         "You can track their progress at the top of the page.": [
+            "Вы можете отслеживать их прогресс в верхней части страницы."
+         ],
+         "From now on, WPML will automatically translate new content on your site.": [
+            "Отныне WPML будет автоматически переводить новый контент на вашем сайте."
+         ],
+         "This number might vary because you enabled the Translate Everything Automatically Mode.": [
+            "Это число может варьироваться, поскольку Вы активировали режим автоматического перевода всего содержимого."
+         ],
+         "From now on, WPML will automatically translate your site's content.": [
+            "Отныне WPML будет автоматически переводить контент вашего сайта."
+         ],
+         "Automatic translations summary": [
+            "Сводка автоматических переводов"
+         ],
+         "Some of the content that you selected for translation includes fields that are encoded. Translators will not be able to work on this kind of content, so we removed it from the job.": [
+            "Некоторый контент, который вы выбрали для перевода, содержит закодированные поля. Переводчики не смогут работать с таким контентом, поэтому мы удалили его из задания."
+         ],
+         "To fix this problem, please contact our support team and describe this issue.": [
+            "Чтобы решить эту проблему, пожалуйста, свяжитесь с нашей службой поддержки и опишите эту проблему."
+         ],
+         "WPML cannot send some fo the content to translation": [
+            "WPML не может отправить некоторый контент на перевод"
+         ],
+         "Open support ticket": [
+            "Открыть тикет поддержки"
+         ],
+         "<s>1 item</s> has been successfully assigned to you! To check its status, please go to <s>WPML → Translations</s>. <translations_queue/>": [
+            "<s>1 элемент</s> был успешно назначен Вам! Чтобы проверить его статус, пожалуйста, перейдите в раздел <s>WPML → Переводы</s>. <translations_queue/>",
+            "<s>%d элемента</s> были успешно назначены Вам! Для получения обновлений статуса, пожалуйста, перейдите в раздел <s>WPML → Переводы</s>. <translations_queue/>"
+         ],
+         "Currently logged in translator summary": [
+            "Сводка для текущего авторизованного переводчика"
+         ],
+         "Go to Translations": [
+            "Перейти к Переводам"
+         ],
+         "<s>1 item</s> has been duplicated.": [
+            "<s>1 элемент</s> был продублирован.",
+            "<s>%d элемента</s> были продублированы."
+         ],
+         "Duplication summary": [
+            "Сводка дублирования"
+         ],
+         "There was a problem sending your content for translation.": [
+            "Возникла проблема при отправке вашего контента на перевод."
+         ],
+         "Please try again in a few minutes. If the issue persists, please contact our support.": [
+            "Пожалуйста, попробуйте снова через несколько минут. Если проблема сохраняется, обратитесь в нашу службу поддержки."
+         ],
+         "Some of the selected strings are already registered or translated into %s. Since their source language matches the target language, they cannot be retranslated.": [
+            "Некоторые из выбранных строк уже зарегистрированы или переведены на %s. Поскольку их исходный язык совпадает с целевым языком, они не могут быть переведены повторно."
+         ],
+         "Some of the selected content has already been translated from %s to %s and cannot be re-translated from %s to %s.": [
+            "Некоторый выбранный контент уже был переведен с %s на %s и не может быть переведен повторно с %s на %s."
+         ],
+         "Content already translated": [
+            "Контент уже переведен"
+         ],
+         "Some content couldn't be sent to translation.": [
+            "Некоторый контент не удалось отправить на перевод."
+         ],
+         "WPML did not create translations for some languages because of the following reasons:": [
+            "WPML не создал переводы для некоторых языков по следующим причинам:"
+         ],
+         "<s>1 item</s> has been successfully sent to translators!": [
+            "<s>1 элемент</s> был успешно отправлен переводчикам!",
+            "<s>%d элемента</s> были успешно отправлены переводчикам!"
+         ],
+         "Local translations summary": [
+            "Сводка локальных переводов"
+         ],
+         "You can check their status in WPML → Translation": [
+            "Вы можете проверить их статус в WPML → Перевод"
+         ],
+         "Continue to %s": [
+            "Перейти в %s"
+         ],
+         "We were unable to send the following batches for professional translation:": [
+            "Мы не смогли отправить следующие партии на профессиональный перевод:"
+         ],
+         "<p><a><s>Contact WPML support for help</s></a></p>": [
+            "<p><a><s>Обратитесь в службу поддержки WPML за помощью</s></a></p>"
+         ],
+         "Translation Service": [
+            "Служба перевода"
+         ],
+         "sending for professional translation..": [
+            "отправка на профессиональный перевод.."
+         ],
+         "<s>%d item</s> is being sent for translation to %s. Please continue to their site to start the translation.": [
+            "<s>%d элемент</s> отправляется на перевод в %s. Пожалуйста, перейдите на их сайт, чтобы начать перевод.",
+            "<s>%d элементов</s> отправляются на перевод в %s. Пожалуйста, перейдите на их сайт, чтобы начать перевод."
+         ],
+         "Translation service translations summary": [
+            "Сводка переводов службы переводов"
+         ],
+         "One or more assigned translators are invalid. The translator may have been removed or their language permissions changed.<br/> Review your settings on the <translators_page>Translators page</translators_page>.": [
+            "Один или несколько назначенных переводчиков недействительны. Возможно, переводчик был удален или изменились его языковые разрешения.<br/> Проверьте ваши настройки на <translators_page>странице Переводчики</translators_page>."
+         ],
+         "The selected translation service is no longer valid. It may have been changed, unauthenticated, or deactivated.<br/> Review your settings on the <translators_page>Translators page</translators_page>.": [
+            "Выбранная служба перевода больше не действительна. Возможно, она была изменена, не прошла аутентификацию или деактивирована.<br/> Проверьте ваши настройки на <translators_page>странице Переводчики</translators_page>."
+         ],
+         "Currently selected translation editor doesn't support automatic translation. You must enable the Advanced Translation Editor to send content for automatic translation.<br/> Check your settings on the <wpml_settings>WPML settings page</wpml_settings>.": [
+            "В настоящее время выбранный редактор переводов не поддерживает автоматический перевод. Вы должны включить Расширенный редактор переводов, чтобы отправлять контент для автоматического перевода.<br/> Проверьте ваши настройки на странице настроек <wpml_settings>WPML</wpml_settings>."
+         ],
+         "Validation error happened during send to translation.": [
+            "Произошла ошибка валидации при отправке на перевод."
+         ],
+         "Sending for translation": [
+            "Отправка на перевод"
+         ],
+         "Translate and Duplicate": [
+            "Перевести и дублировать"
+         ],
+         "Duplicate": [
+            "Дублировать"
+         ],
+         "Translate": [
+            "Перевести"
+         ],
+         "Selected content is already translated": [
+            "Выбранный контент уже переведен"
+         ],
+         "Please select a review option": [
+            "Пожалуйста, выберите вариант проверки"
+         ],
+         "Assign local translator or choose another option": [
+            "Назначить локального переводчика или выбрать другой вариант"
+         ],
+         "Assign yourself or choose another option": [
+            "Назначить себя или выбрать другой вариант"
+         ],
+         "Activate translation service or choose another option": [
+            "Активировать службу перевода или выбрать другой вариант"
+         ],
+         "Activate ATE or choose another option": [
+            "Активировать ATE или выбрать другой вариант"
+         ],
+         "Authenticate translation service or choose another option": [
+            "Аутентифицировать службу перевода или выбрать другой вариант"
+         ],
+         "Please don't close this page or refresh it, as doing so will cancel the translation process.": [
+            "Пожалуйста, не закрывайте эту страницу и не обновляйте ее, поскольку это приведет к отмене процесса перевода."
+         ],
+         "<s>%s</s> cannot process more than <s>%d</s> jobs in a single batch. WPML will automatically split your jobs into separate batches to ensure an error-free delivery to <s>%s</s>. <br/><br/> Do you want to proceed?": [
+            "<s>%s</s> не может обработать более <s>%d</s> заданий в одной партии. WPML автоматически разделит ваши задания на отдельные партии, чтобы обеспечить безошибочную доставку в <s>%s</s>. <br/><br/> Хотите продолжить?"
+         ],
+         "WPML will send jobs to %s in separate batches": [
+            "WPML отправит задания в %s отдельными партиями"
+         ],
+         "Yes, send jobs in separate batches": [
+            "Да, отправить задания отдельными партиями"
+         ],
+         "No, I will split jobs myself": [
+            "Нет, я разделю задания самостоятельно"
+         ],
+         "This will translate only your future content": [
+            "Это переведет только ваш будущий контент"
+         ],
+         "This will translate your entire site": [
+            "Это переведет весь ваш сайт"
+         ],
+         "Translate everything automatically from now on, without asking me.": [
+            "Переводить все автоматически с этого момента, не спрашивая меня."
+         ],
+         "What content do you want to translate?": [
+            "Какой контент вы хотите перевести?"
+         ],
+         "Translate my entire site": [
+            "Перевести весь мой сайт"
+         ],
+         "WPML will translate all of your site's content, including:": [
+            "WPML переведет весь контент вашего сайта, включая:"
+         ],
+         "Any content that already exists but hasn't been translated yet": [
+            "Любой существующий контент, который еще не был переведен"
+         ],
+         "All new content you create in the future": [
+            "Весь новый контент, который вы создадите в будущем"
+         ],
+         "Hide what WPML will translate now": [
+            "Скрыть, что WPML переведет сейчас"
+         ],
+         "See what WPML will translate now": [
+            "Показать, что WPML переведет сейчас"
+         ],
+         "Translate only future content": [
+            "Переводить только будущий контент"
+         ],
+         "WPML will translate only the content you create after enabling this translation mode.": [
+            "WPML будет переводить только контент, который вы создадите после включения этого режима перевода."
+         ],
+         "Existing untranslated content on your side will not be translated.": [
+            "Существующий непереведенный контент на вашем сайте не будет переведен."
+         ],
+         "Existing content": [
+            "Существующий контент"
+         ],
+         "You selected to translate strings that are in %s. Only these strings will be translated to %s.": [
+            "Вы выбрали перевод строк, которые находятся в %s. Только эти строки будут переведены на %s."
+         ],
+         "You selected to translate strings that are in %s and %s. Only these strings will be translated to %s.": [
+            "Вы выбрали перевод строк, которые находятся в %s и %s. Только эти строки будут переведены на %s."
+         ],
+         "Source language": [
+            "Исходный язык"
+         ],
+         "Target language": [
+            "Целевой язык"
+         ],
+         "Translation Method": [
+            "Метод перевода"
+         ],
+         "Translation service additional options": [
+            "Дополнительные опции службы перевода"
+         ],
+         "Refresh": [
+            "Обновить"
+         ],
+         "Fetching translation service data...": [
+            "Получение данных службы перевода..."
+         ],
+         "-": [
+            "-"
+         ],
+         "Translate automatically": [
+            "Перевести автоматически"
+         ],
+         "Translate myself": [
+            "Перевести самостоятельно"
+         ],
+         "Assign a translator": [
+            "Назначить переводчика"
+         ],
+         "Assign translation service": [
+            "Назначить службу перевода"
+         ],
+         "Do nothing": [
+            "Ничего не делать"
+         ],
+         "Please choose": [
+            "Пожалуйста, выберите"
+         ],
+         "Choose a translator": [
+            "Выберите переводчика"
+         ],
+         "First available": [
+            "Первый доступный"
+         ],
+         "(Me)": [
+            "(Я)"
+         ],
+         "Translation controls": [
+            "Элементы управления переводом"
+         ],
+         "Step 2": [
+            "Шаг 2"
+         ],
+         "Get More Features with WPML's Advanced Translation Editor": [
+            "Получите больше функций с Расширенным редактором переводов WPML"
+         ],
+         "Close banner": [
+            "Закрыть баннер"
+         ],
+         "You're using the Classic Translation Editor, an old legacy tool, and missing out on the many features and efficiency of our Advanced Translation Editor:": [
+            "Вы используете Классический редактор переводов, устаревший инструмент, и упускаете множество функций и эффективность нашего Расширенного редактора переводов:"
+         ],
+         "Translation Memory": [
+            "Память переводов"
+         ],
+         "HTML Protection": [
+            "Защита HTML"
+         ],
+         "Glossary": [
+            "Глоссарий"
+         ],
+         "Spellchecker": [
+            "Проверка орфографии"
+         ],
+         "AI Assistant": [
+            "ИИ-ассистент"
+         ],
+         "Automatic Translation": [
+            "Автоматический перевод"
+         ],
+         "Switch now for a faster, more convenient, and reliable translation experience.": [
+            "Переключитесь сейчас для более быстрого, удобного и надежного опыта перевода."
+         ],
+         "Switch Now": [
+            "Переключиться сейчас"
+         ],
+         "Learn More": [
+            "Узнать больше"
+         ],
+         "<a><s>Read more about automatic translation credits</s></a>": [
+            "<a><s>Узнать больше о кредитах автоматического перевода</s></a>"
+         ],
+         "I understand that automatic translation uses credits": [
+            "Я понимаю, что автоматический перевод использует кредиты"
+         ],
+         "Translate Everything Automatically - credit wizard error": [
+            "Автоматический перевод всего - ошибка мастера кредитов"
+         ],
+         "There was an error when loading the credit wizard.": [
+            "Произошла ошибка при загрузке мастера кредитов."
+         ],
+         "Translate Everything Automatically - no credits": [
+            "Автоматический перевод всего - нет кредитов"
+         ],
+         "Start Translate Everything Automatically": [
+            "Начать автоматический перевод всего"
+         ],
+         "Continue": [
+            "Продолжить"
+         ],
+         "Go back": [
+            "Вернуться назад"
+         ],
+         "You can start using Translate Everything Automatically after sending some content for translation. We recommend that you review these translations and make sure that they are good before translating your entire site's content.": [
+            "Вы можете начать использовать автоматический перевод всего после отправки некоторого контента на перевод. Мы рекомендуем вам проверить эти переводы и убедиться, что они хороши, прежде чем переводить весь контент вашего сайта."
+         ],
+         "Translate Everything Automatically - disabled": [
+            "Автоматический перевод всего - отключен"
+         ],
+         "Translate Everything Automatically": [
+            "Автоматический перевод всего"
+         ],
+         "Automatically translate your entire site, but only from %s to %s.": [
+            "Автоматически переводить весь ваш сайт, но только с %s на %s."
+         ],
+         "Translate Everything Automatically - pausing": [
+            "Автоматический перевод всего - приостанавливается"
+         ],
+         "Translate Everything Automatically is pausing": [
+            "Автоматический перевод всего приостанавливается"
+         ],
+         "Translate Everything Automatically - paused": [
+            "Автоматический перевод всего - приостановлен"
+         ],
+         "%d translation left in the queue. Preparing more content for translation.": [
+            "Остался %d перевод в очереди. Подготовка дополнительного контента для перевода.",
+            "Осталось %d переводов в очереди. Подготовка дополнительного контента для перевода."
+         ],
+         "Preparing content for translation...": [
+            "Подготовка контента для перевода..."
+         ],
+         "%d translation left in the queue...": [
+            "Остался %d перевод в очереди...",
+            "Осталось %d переводов в очереди..."
+         ],
+         "Translate Everything Automatically has finished translating your content. There are no pending translations in the queue.": [
+            "Автоматический перевод всего контента завершён. В очереди нет ожидающих переводов."
+         ],
+         "Some items were translated using the Classic Translation Editor and cannot be sent for automatic translation. Please select these items and choose the option to translate them yourself.": [
+            "Некоторые элементы были переведены с помощью Классического редактора переводов и не могут быть отправлены на автоматический перевод. Пожалуйста, выберите эти элементы и выберите опцию перевести их самостоятельно."
+         ],
+         "Translate Everything Automatically - enabled": [
+            "Автоматический перевод всего - включен"
+         ],
+         "Translate Everything Automatically is enabled": [
+            "Автоматический перевод всего включен"
+         ],
+         "As you create new content or edit existing content, WPML will automatically translate it, but only from %s to %s.": [
+            "По мере создания нового контента или редактирования существующего, WPML будет автоматически переводить его, но только с %s на %s."
+         ],
+         "You have <s>%s</s> prepaid translation credits in your wpml.org account. Assign these credits to your site to start using automatic translation": [
+            "У вас есть <s>%s</s> предоплаченных кредитов на перевод в вашем аккаунте wpml.org. Назначьте эти кредиты вашему сайту, чтобы начать использовать автоматический перевод"
+         ],
+         "Translation not running... there is an issue that needs your attention. Fix it to continue.": [
+            "Перевод не выполняется... возникла проблема, требующая вашего внимания. Устраните её, чтобы продолжить."
+         ],
+         "Assign credits now": [
+            "Назначить кредиты сейчас"
+         ],
+         "Fix now": [
+            "Исправить сейчас"
+         ],
+         "Translate Everything Automatically is stopped": [
+            "Автоматический перевод всего остановлен"
+         ],
+         "Out of Credits for Automatic Translation": [
+            "Недостаточно кредитов для автоматического перевода"
+         ],
+         "Automatic translations completed": [
+            "Автоматические переводы завершены"
+         ],
+         "<s>1 translation</s> has been successfully translated automatically": [
+            "<s>1 перевод</s> успешно переведён автоматически",
+            "<s>%d переводов</s> успешно переведены автоматически"
+         ],
+         "Automatic jobs in progress": [
+            "Выполняются автоматические задания"
+         ],
+         "<s>%d automatic translation</s> is in progress": [
+            "<s>%d автоматический перевод</s> выполняется",
+            "<s>%d автоматических переводов</s> выполняются"
+         ],
+         "Your default language, %s, must be mapped to a supported language in order to use automatic translation": [
+            "Ваш язык по умолчанию, %s, должен быть сопоставлен с поддерживаемым языком для использования автоматического перевода"
+         ],
+         "Map the language": [
+            "Сопоставить язык"
+         ],
+         "%d translations ": [
+            "%d переводов "
+         ],
+         "%d translation ": [
+            "%d перевод "
+         ],
+         "this includes translations from Translate Everything Automatically": [
+            "это включает переводы из режима автоматического перевода всего содержимого"
+         ],
+         "are waiting for your review": [
+            "ожидают вашей проверки"
+         ],
+         "is waiting for your review": [
+            "ожидает вашей проверки"
+         ],
+         "Review Translations": [
+            "Проверить переводы"
+         ],
+         "Translate existing content": [
+            "Перевести существующий контент"
+         ],
+         "Translate now": [
+            "Перевести сейчас"
+         ],
+         "Starting with version 4.7, WPML will also automatically translate texts (strings) coming from %s.": [
+            "Начиная с версии 4.7, WPML также будет автоматически переводить тексты (строки), поступающие из %s."
+         ],
+         "WPML will not translate existing texts of this type but any new ones you create will be automatically translated. If you prefer, you can <button />.": [
+            "WPML не будет переводить существующие тексты этого типа, но любые новые, которые вы создадите, будут переведены автоматически. Если вы предпочитаете, вы можете <button />."
+         ],
+         "Starting with version 4.7, WPML will also automatically translate:": [
+            "Начиная с версии 4.7, WPML также будет автоматически переводить:"
+         ],
+         "Content set to \"use translation if available or fallback to default language\": %s.": [
+            "Контент, настроенный на “использование перевода, если доступно, или возврат к языку по умолчанию”: %s."
+         ],
+         "Texts (strings) coming from: %s.": [
+            "Тексты (строки), поступающие из: %s."
+         ],
+         "WPML will not translate existing content for these post types and texts but any new content you create will be automatically translated. If you prefer, you can start <button />.": [
+            "WPML не будет переводить существующий контент для этих типов постов и текстов, но любой новый контент, который вы создадите, будет переведен автоматически. Если вы предпочитаете, вы можете начать <button />."
+         ],
+         "WPML will not translate existing content for these post types but any new content you create will be automatically translated. If you prefer, you can start <button />.": [
+            "WPML не будет переводить существующий контент для этих типов постов, но любой новый контент, который вы создадите, будет переведен автоматически. Если вы предпочитаете, вы можете начать <button />."
+         ],
+         "start translating existing content now": [
+            "начать перевод существующего контента сейчас"
+         ],
+         "The following target languages do not support automatic translations: %s": [
+            "Следующие целевые языки не поддерживают автоматический перевод: %s"
+         ],
+         "To enable automatic translation map them to known languages.": [
+            "Чтобы включить автоматический перевод, сопоставьте их с известными языками."
+         ],
+         "Map to known languages": [
+            "Сопоставить с известными языками"
+         ],
+         "Translation status": [
+            "Статус перевода"
+         ],
+         "Default language does not support automatic translations.": [
+            "Язык по умолчанию не поддерживает автоматические переводы."
+         ],
+         "You must enable ATE to activate Translate Everything Automatically.": [
+            "Вы должны включить ATE для активации автоматического перевода всего."
+         ],
+         "This item needs an update but cannot be translated automatically because it was manually translated.\nPlease, select the item and send for manual translation.": [
+            "Этот элемент нуждается в обновлении, но не может быть переведен автоматически, так как он был переведен вручную.\nПожалуйста, выберите элемент и отправьте на ручной перевод."
+         ],
+         "This item needs update. Please, select the item and send for translation.": [
+            "Этот элемент нуждается в обновлении. Пожалуйста, выберите элемент и отправьте на перевод."
+         ],
+         "Translations completed with the Classic Translation Editor cannot be sent for automatic translation": [
+            "Переводы, выполненные с помощью Классического редактора переводов, не могут быть отправлены на автоматический перевод"
+         ],
+         "automatic translation": [
+            "автоматический перевод"
+         ],
+         "unassigned": [
+            "неназначенный"
+         ],
+         "not translated": [
+            "не переведено"
+         ],
+         "waiting for translator": [
+            "ожидает переводчика"
+         ],
+         "in progress": [
+            "в процессе"
+         ],
+         "needs update": [
+            "требует обновления"
+         ],
+         "duplicate": [
+            "дубликат"
+         ],
+         "complete": [
+            "завершено"
+         ],
+         "needs review": [
+            "требует проверки"
+         ],
+         "preparing for translation": [
+            "подготовка к переводу"
+         ],
+         "needs attention": [
+            "требует внимания"
+         ],
+         "%1$s: %2$s%3$s": [
+            "%1$s: %2$s%3$s"
+         ],
+         "Could not fetch engines data": [
+            "Не удалось получить данные систем автоматического перевода"
+         ],
+         "Error in fetching currently logged in translator": [
+            "Ошибка при получении данных о текущем авторизованном переводчике"
+         ],
+         "Error in fetching local translators": [
+            "Ошибка при получении данных о локальных переводчиках"
+         ],
+         "Published": [
+            "Опубликовано"
+         ],
+         "Draft": [
+            "Черновик"
+         ],
+         "Trash": [
+            "Корзина"
+         ],
+         "Pending": [
+            "Ожидает проверки"
+         ],
+         "Private": [
+            "Личное"
+         ],
+         "Future": [
+            "Запланировано"
+         ],
+         "Auto Draft": [
+            "Автоматический черновик"
+         ],
+         "External": [
+            "Внешнее"
+         ],
+         "Collapse": [
+            "Свернуть"
+         ],
+         "Expand": [
+            "Развернуть"
+         ],
+         "Close modal": [
+            "Закрыть модальное окно"
+         ],
+         "Select an item": [
+            "Выберите элемент"
+         ],
+         "Search": [
+            "Поиск"
+         ],
+         "No items found": [
+            "Элементы не найдены"
+         ],
+         "OFF": [
+            "ВЫКЛ"
+         ],
+         "ON": [
+            "ВКЛ"
+         ],
+         "%1$s Flag": [
+            "Флаг %1$s"
+         ],
+         "What would you like to do after WPML finishes translating your content automatically?": [
+            "Что бы вы хотели сделать после того, как WPML закончит автоматический перевод вашего контента?"
+         ],
+         "Wait for review": [
+            "Ждать проверки"
+         ],
+         "Recommended with DeepL, Google and Microsoft": [
+            "Рекомендуется с DeepL, Google и Microsoft"
+         ],
+         "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process.": [
+            "DeepL, Google и Microsoft предоставляют превосходные переводы, однако мы рекомендуем проведение человеческой проверки для подтверждения их корректности. WPML Искусственный интеллект обеспечивает переводы, превосходящие человеческие, с пониманием контекста, что позволяет вам уверенно пропустить процесс рецензирования."
+         ],
+         "WPML keeps translations unpublished, so you can review them first.": [
+            "WPML сохраняет переводы неопубликованными, чтобы вы могли сначала их проверить."
+         ],
+         "Your translators review and approve translations before publishing.": [
+            "Ваши переводчики проверяют и утверждают переводы перед публикацией."
+         ],
+         "Publish and mark for review": [
+            "Опубликовать и пометить для проверки"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "WPML публикует переводы немедленно, но помечает их для вашей проверки в удобное для вас время."
+         ],
+         "WPML publishes translations immediately but flags them for translators to review later.": [
+            "WPML публикует переводы немедленно, но помечает их для последующей проверки переводчиками."
+         ],
+         "Publish without review": [
+            "Опубликовать без проверки"
+         ],
+         "Recommended with WPML AI": [
+            "Рекомендуется с WPML AI"
+         ],
+         "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy.": [
+            "WPML AI предоставляет переводы лучше, чем человеческие, которые редко нуждаются в улучшениях, поэтому вы можете уверенно пропустить процесс проверки. Для других механизмов перевода рекомендуется человеческая проверка для подтверждения точности."
+         ],
+         "WPML publishes translations immediately, skipping the review process.": [
+            "WPML публикует переводы немедленно, минуя процесс проверки."
+         ]
+      }
+   }
+}

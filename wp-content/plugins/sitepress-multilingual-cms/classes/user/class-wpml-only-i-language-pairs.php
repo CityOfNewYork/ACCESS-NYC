@@ -1,6 +1,6 @@
 <?php
 
-class WPML_TM_Only_I_Language_Pairs implements IWPML_AJAX_Action, IWPML_DIC_Action {
+class WPML_TM_Only_I_Language_Pairs implements IWPML_AJAX_Action, IWPML_DIC_Action, IWPML_Backend_Action {
 
 	/** @var WPML_Language_Pair_Records $language_pair_records */
 	private $language_pair_records;

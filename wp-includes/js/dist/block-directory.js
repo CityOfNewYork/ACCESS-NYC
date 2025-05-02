@@ -90,21 +90,19 @@ __webpack_require__.d(resolvers_namespaceObject, {
   getDownloadableBlocks: () => (resolvers_getDownloadableBlocks)
 });
 
-;// CONCATENATED MODULE: external "React"
-const external_React_namespaceObject = window["React"];
-;// CONCATENATED MODULE: external ["wp","plugins"]
+;// external ["wp","plugins"]
 const external_wp_plugins_namespaceObject = window["wp"]["plugins"];
-;// CONCATENATED MODULE: external ["wp","hooks"]
+;// external ["wp","hooks"]
 const external_wp_hooks_namespaceObject = window["wp"]["hooks"];
-;// CONCATENATED MODULE: external ["wp","blocks"]
+;// external ["wp","blocks"]
 const external_wp_blocks_namespaceObject = window["wp"]["blocks"];
-;// CONCATENATED MODULE: external ["wp","data"]
+;// external ["wp","data"]
 const external_wp_data_namespaceObject = window["wp"]["data"];
-;// CONCATENATED MODULE: external ["wp","element"]
+;// external ["wp","element"]
 const external_wp_element_namespaceObject = window["wp"]["element"];
-;// CONCATENATED MODULE: external ["wp","editor"]
+;// external ["wp","editor"]
 const external_wp_editor_namespaceObject = window["wp"]["editor"];
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/store/reducer.js
+;// ./node_modules/@wordpress/block-directory/build-module/store/reducer.js
 /**
  * WordPress dependencies
  */
@@ -207,46 +205,15 @@ const errorNotices = (state = {}, action) => {
   errorNotices
 }));
 
-;// CONCATENATED MODULE: external ["wp","blockEditor"]
+;// external ["wp","blockEditor"]
 const external_wp_blockEditor_namespaceObject = window["wp"]["blockEditor"];
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/store/utils/has-block-type.js
-/**
- * Check if a block list contains a specific block type. Recursively searches
- * through `innerBlocks` if they exist.
- *
- * @param {Object}   blockType A block object to search for.
- * @param {Object[]} blocks    The list of blocks to look through.
- *
- * @return {boolean} Whether the blockType is found.
- */
-function hasBlockType(blockType, blocks = []) {
-  if (!blocks.length) {
-    return false;
-  }
-  if (blocks.some(({
-    name
-  }) => name === blockType.name)) {
-    return true;
-  }
-  for (let i = 0; i < blocks.length; i++) {
-    if (hasBlockType(blockType, blocks[i].innerBlocks)) {
-      return true;
-    }
-  }
-  return false;
-}
-
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/store/selectors.js
+;// ./node_modules/@wordpress/block-directory/build-module/store/selectors.js
 /**
  * WordPress dependencies
  */
 
 
-
-/**
- * Internal dependencies
- */
-
+const EMPTY_ARRAY = [];
 
 /**
  * Returns true if application is requesting for downloadable blocks.
@@ -271,7 +238,7 @@ function isRequestingDownloadableBlocks(state, filterValue) {
  */
 function getDownloadableBlocks(state, filterValue) {
   var _state$downloadableBl2;
-  return (_state$downloadableBl2 = state.downloadableBlocks[filterValue]?.results) !== null && _state$downloadableBl2 !== void 0 ? _state$downloadableBl2 : [];
+  return (_state$downloadableBl2 = state.downloadableBlocks[filterValue]?.results) !== null && _state$downloadableBl2 !== void 0 ? _state$downloadableBl2 : EMPTY_ARRAY;
 }
 
 /**
@@ -294,11 +261,23 @@ function getInstalledBlockTypes(state) {
  *
  * @return {Array} Block type items.
  */
-const getNewBlockTypes = (0,external_wp_data_namespaceObject.createRegistrySelector)(select => state => {
-  const usedBlockTree = select(external_wp_blockEditor_namespaceObject.store).getBlocks();
+const getNewBlockTypes = (0,external_wp_data_namespaceObject.createRegistrySelector)(select => (0,external_wp_data_namespaceObject.createSelector)(state => {
   const installedBlockTypes = getInstalledBlockTypes(state);
-  return installedBlockTypes.filter(blockType => hasBlockType(blockType, usedBlockTree));
-});
+  if (!installedBlockTypes.length) {
+    return EMPTY_ARRAY;
+  }
+  const {
+    getBlockName,
+    getClientIdsWithDescendants
+  } = select(external_wp_blockEditor_namespaceObject.store);
+  const installedBlockNames = installedBlockTypes.map(blockType => blockType.name);
+  const foundBlockNames = getClientIdsWithDescendants().flatMap(clientId => {
+    const blockName = getBlockName(clientId);
+    return installedBlockNames.includes(blockName) ? blockName : [];
+  });
+  const newBlockTypes = installedBlockTypes.filter(blockType => foundBlockNames.includes(blockType.name));
+  return newBlockTypes.length > 0 ? newBlockTypes : EMPTY_ARRAY;
+}, state => [getInstalledBlockTypes(state), select(external_wp_blockEditor_namespaceObject.store).getClientIdsWithDescendants()]));
 
 /**
  * Returns the block types that have been installed on the server but are not
@@ -308,11 +287,23 @@ const getNewBlockTypes = (0,external_wp_data_namespaceObject.createRegistrySelec
  *
  * @return {Array} Block type items.
  */
-const getUnusedBlockTypes = (0,external_wp_data_namespaceObject.createRegistrySelector)(select => state => {
-  const usedBlockTree = select(external_wp_blockEditor_namespaceObject.store).getBlocks();
+const getUnusedBlockTypes = (0,external_wp_data_namespaceObject.createRegistrySelector)(select => (0,external_wp_data_namespaceObject.createSelector)(state => {
   const installedBlockTypes = getInstalledBlockTypes(state);
-  return installedBlockTypes.filter(blockType => !hasBlockType(blockType, usedBlockTree));
-});
+  if (!installedBlockTypes.length) {
+    return EMPTY_ARRAY;
+  }
+  const {
+    getBlockName,
+    getClientIdsWithDescendants
+  } = select(external_wp_blockEditor_namespaceObject.store);
+  const installedBlockNames = installedBlockTypes.map(blockType => blockType.name);
+  const foundBlockNames = getClientIdsWithDescendants().flatMap(clientId => {
+    const blockName = getBlockName(clientId);
+    return installedBlockNames.includes(blockName) ? blockName : [];
+  });
+  const unusedBlockTypes = installedBlockTypes.filter(blockType => !foundBlockNames.includes(blockType.name));
+  return unusedBlockTypes.length > 0 ? unusedBlockTypes : EMPTY_ARRAY;
+}, state => [getInstalledBlockTypes(state), select(external_wp_blockEditor_namespaceObject.store).getClientIdsWithDescendants()]));
 
 /**
  * Returns true if a block plugin install is in progress.
@@ -349,16 +340,16 @@ function getErrorNoticeForBlock(state, blockId) {
   return state.errorNotices[blockId];
 }
 
-;// CONCATENATED MODULE: external ["wp","i18n"]
+;// external ["wp","i18n"]
 const external_wp_i18n_namespaceObject = window["wp"]["i18n"];
-;// CONCATENATED MODULE: external ["wp","apiFetch"]
+;// external ["wp","apiFetch"]
 const external_wp_apiFetch_namespaceObject = window["wp"]["apiFetch"];
 var external_wp_apiFetch_default = /*#__PURE__*/__webpack_require__.n(external_wp_apiFetch_namespaceObject);
-;// CONCATENATED MODULE: external ["wp","notices"]
+;// external ["wp","notices"]
 const external_wp_notices_namespaceObject = window["wp"]["notices"];
-;// CONCATENATED MODULE: external ["wp","url"]
+;// external ["wp","url"]
 const external_wp_url_namespaceObject = window["wp"]["url"];
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/store/load-assets.js
+;// ./node_modules/@wordpress/block-directory/build-module/store/load-assets.js
 /**
  * WordPress dependencies
  */
@@ -430,7 +421,7 @@ async function loadAssets() {
   }
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/store/utils/get-plugin-url.js
+;// ./node_modules/@wordpress/block-directory/build-module/store/utils/get-plugin-url.js
 /**
  * Get the plugin's direct API link out of a block-directory response.
  *
@@ -449,7 +440,7 @@ function getPluginUrl(block) {
   return false;
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/store/actions.js
+;// ./node_modules/@wordpress/block-directory/build-module/store/actions.js
 /**
  * WordPress dependencies
  */
@@ -707,7 +698,7 @@ function clearErrorNotice(blockId) {
   };
 }
 
-;// CONCATENATED MODULE: ./node_modules/tslib/tslib.es6.mjs
+;// ./node_modules/tslib/tslib.es6.mjs
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -722,7 +713,7 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
-/* global Reflect, Promise, SuppressedError, Symbol */
+/* global Reflect, Promise, SuppressedError, Symbol, Iterator */
 
 var extendStatics = function(d, b) {
   extendStatics = Object.setPrototypeOf ||
@@ -833,8 +824,8 @@ function __awaiter(thisArg, _arguments, P, generator) {
 }
 
 function __generator(thisArg, body) {
-  var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-  return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+  var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+  return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
   function verb(n) { return function (v) { return step([n, v]); }; }
   function step(op) {
       if (f) throw new TypeError("Generator is already executing.");
@@ -938,8 +929,9 @@ function __await(v) {
 function __asyncGenerator(thisArg, _arguments, generator) {
   if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
   var g = generator.apply(thisArg, _arguments || []), i, q = [];
-  return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-  function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+  return i = Object.create((typeof AsyncIterator === "function" ? AsyncIterator : Object).prototype), verb("next"), verb("throw"), verb("return", awaitReturn), i[Symbol.asyncIterator] = function () { return this; }, i;
+  function awaitReturn(f) { return function (v) { return Promise.resolve(v).then(f, reject); }; }
+  function verb(n, f) { if (g[n]) { i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; if (f) i[n] = f(i[n]); } }
   function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
   function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
   function fulfill(value) { resume("next", value); }
@@ -972,10 +964,19 @@ var __setModuleDefault = Object.create ? (function(o, v) {
   o["default"] = v;
 };
 
+var ownKeys = function(o) {
+  ownKeys = Object.getOwnPropertyNames || function (o) {
+    var ar = [];
+    for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+    return ar;
+  };
+  return ownKeys(o);
+};
+
 function __importStar(mod) {
   if (mod && mod.__esModule) return mod;
   var result = {};
-  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
   __setModuleDefault(result, mod);
   return result;
 }
@@ -1005,16 +1006,18 @@ function __classPrivateFieldIn(state, receiver) {
 function __addDisposableResource(env, value, async) {
   if (value !== null && value !== void 0) {
     if (typeof value !== "object" && typeof value !== "function") throw new TypeError("Object expected.");
-    var dispose;
+    var dispose, inner;
     if (async) {
-        if (!Symbol.asyncDispose) throw new TypeError("Symbol.asyncDispose is not defined.");
-        dispose = value[Symbol.asyncDispose];
+      if (!Symbol.asyncDispose) throw new TypeError("Symbol.asyncDispose is not defined.");
+      dispose = value[Symbol.asyncDispose];
     }
     if (dispose === void 0) {
-        if (!Symbol.dispose) throw new TypeError("Symbol.dispose is not defined.");
-        dispose = value[Symbol.dispose];
+      if (!Symbol.dispose) throw new TypeError("Symbol.dispose is not defined.");
+      dispose = value[Symbol.dispose];
+      if (async) inner = dispose;
     }
     if (typeof dispose !== "function") throw new TypeError("Object not disposable.");
+    if (inner) dispose = function() { try { inner.call(this); } catch (e) { return Promise.reject(e); } };
     env.stack.push({ value: value, dispose: dispose, async: async });
   }
   else if (async) {
@@ -1033,20 +1036,34 @@ function __disposeResources(env) {
     env.error = env.hasError ? new _SuppressedError(e, env.error, "An error was suppressed during disposal.") : e;
     env.hasError = true;
   }
+  var r, s = 0;
   function next() {
-    while (env.stack.length) {
-      var rec = env.stack.pop();
+    while (r = env.stack.pop()) {
       try {
-        var result = rec.dispose && rec.dispose.call(rec.value);
-        if (rec.async) return Promise.resolve(result).then(next, function(e) { fail(e); return next(); });
+        if (!r.async && s === 1) return s = 0, env.stack.push(r), Promise.resolve().then(next);
+        if (r.dispose) {
+          var result = r.dispose.call(r.value);
+          if (r.async) return s |= 2, Promise.resolve(result).then(next, function(e) { fail(e); return next(); });
+        }
+        else s |= 1;
       }
       catch (e) {
-          fail(e);
+        fail(e);
       }
     }
+    if (s === 1) return env.hasError ? Promise.reject(env.error) : Promise.resolve();
     if (env.hasError) throw env.error;
   }
   return next();
+}
+
+function __rewriteRelativeImportExtension(path, preserveJsx) {
+  if (typeof path === "string" && /^\.\.?\//.test(path)) {
+      return path.replace(/\.(tsx)$|((?:\.d)?)((?:\.[^./]+?)?)\.([cm]?)ts$/i, function (m, tsx, d, ext, cm) {
+          return tsx ? preserveJsx ? ".jsx" : ".js" : d && (!ext || !cm) ? m : (d + ext + "." + cm.toLowerCase() + "js");
+      });
+  }
+  return path;
 }
 
 /* harmony default export */ const tslib_es6 = ({
@@ -1055,6 +1072,10 @@ function __disposeResources(env) {
   __rest,
   __decorate,
   __param,
+  __esDecorate,
+  __runInitializers,
+  __propKey,
+  __setFunctionName,
   __metadata,
   __awaiter,
   __generator,
@@ -1077,9 +1098,10 @@ function __disposeResources(env) {
   __classPrivateFieldIn,
   __addDisposableResource,
   __disposeResources,
+  __rewriteRelativeImportExtension,
 });
 
-;// CONCATENATED MODULE: ./node_modules/lower-case/dist.es2015/index.js
+;// ./node_modules/lower-case/dist.es2015/index.js
 /**
  * Source: ftp://ftp.unicode.org/Public/UCD/latest/ucd/SpecialCasing.txt
  */
@@ -1128,7 +1150,7 @@ function lowerCase(str) {
     return str.toLowerCase();
 }
 
-;// CONCATENATED MODULE: ./node_modules/no-case/dist.es2015/index.js
+;// ./node_modules/no-case/dist.es2015/index.js
 
 // Support camel case ("camelCase" -> "camel Case" and "CAMELCase" -> "CAMEL Case").
 var DEFAULT_SPLIT_REGEXP = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g];
@@ -1160,7 +1182,7 @@ function replace(input, re, value) {
     return re.reduce(function (input, re) { return input.replace(re, value); }, input);
 }
 
-;// CONCATENATED MODULE: ./node_modules/pascal-case/dist.es2015/index.js
+;// ./node_modules/pascal-case/dist.es2015/index.js
 
 
 function pascalCaseTransform(input, index) {
@@ -1179,7 +1201,7 @@ function pascalCase(input, options) {
     return noCase(input, __assign({ delimiter: "", transform: pascalCaseTransform }, options));
 }
 
-;// CONCATENATED MODULE: ./node_modules/camel-case/dist.es2015/index.js
+;// ./node_modules/camel-case/dist.es2015/index.js
 
 
 function camelCaseTransform(input, index) {
@@ -1197,7 +1219,7 @@ function camelCase(input, options) {
     return pascalCase(input, __assign({ transform: camelCaseTransform }, options));
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/store/resolvers.js
+;// ./node_modules/@wordpress/block-directory/build-module/store/resolvers.js
 /**
  * External dependencies
  */
@@ -1225,10 +1247,12 @@ const resolvers_getDownloadableBlocks = filterValue => async ({
     });
     const blocks = results.map(result => Object.fromEntries(Object.entries(result).map(([key, value]) => [camelCase(key), value])));
     dispatch(receiveDownloadableBlocks(blocks, filterValue));
-  } catch {}
+  } catch {
+    dispatch(receiveDownloadableBlocks([], filterValue));
+  }
 };
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/store/index.js
+;// ./node_modules/@wordpress/block-directory/build-module/store/index.js
 /**
  * WordPress dependencies
  */
@@ -1271,7 +1295,7 @@ const storeConfig = {
 const store = (0,external_wp_data_namespaceObject.createReduxStore)(STORE_NAME, storeConfig);
 (0,external_wp_data_namespaceObject.register)(store);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/components/auto-block-uninstaller/index.js
+;// ./node_modules/@wordpress/block-directory/build-module/components/auto-block-uninstaller/index.js
 /**
  * WordPress dependencies
  */
@@ -1307,15 +1331,17 @@ function AutoBlockUninstaller() {
   return null;
 }
 
-;// CONCATENATED MODULE: external ["wp","compose"]
+;// external ["wp","compose"]
 const external_wp_compose_namespaceObject = window["wp"]["compose"];
-;// CONCATENATED MODULE: external ["wp","components"]
+;// external ["wp","components"]
 const external_wp_components_namespaceObject = window["wp"]["components"];
-;// CONCATENATED MODULE: external ["wp","coreData"]
+;// external ["wp","coreData"]
 const external_wp_coreData_namespaceObject = window["wp"]["coreData"];
-;// CONCATENATED MODULE: external ["wp","htmlEntities"]
+;// ./node_modules/clsx/dist/clsx.mjs
+function r(e){var t,f,n="";if("string"==typeof e||"number"==typeof e)n+=e;else if("object"==typeof e)if(Array.isArray(e)){var o=e.length;for(t=0;t<o;t++)e[t]&&(f=r(e[t]))&&(n&&(n+=" "),n+=f)}else for(f in e)e[f]&&(n&&(n+=" "),n+=f);return n}function clsx(){for(var e,t,f=0,n="",o=arguments.length;f<o;f++)(e=arguments[f])&&(t=r(e))&&(n&&(n+=" "),n+=t);return n}/* harmony default export */ const dist_clsx = (clsx);
+;// external ["wp","htmlEntities"]
 const external_wp_htmlEntities_namespaceObject = window["wp"]["htmlEntities"];
-;// CONCATENATED MODULE: ./node_modules/@wordpress/icons/build-module/icon/index.js
+;// ./node_modules/@wordpress/icons/build-module/icon/index.js
 /**
  * WordPress dependencies
  */
@@ -1327,7 +1353,7 @@ const external_wp_htmlEntities_namespaceObject = window["wp"]["htmlEntities"];
  * Return an SVG icon.
  *
  * @param {IconProps}                                 props icon is the SVG component to render
- *                                                          size is a number specifiying the icon size in pixels
+ *                                                          size is a number specifying the icon size in pixels
  *                                                          Other props will be passed to wrapped SVG component
  * @param {import('react').ForwardedRef<HTMLElement>} ref   The forwarded ref to the SVG element.
  *
@@ -1347,57 +1373,62 @@ function Icon({
 }
 /* harmony default export */ const icon = ((0,external_wp_element_namespaceObject.forwardRef)(Icon));
 
-;// CONCATENATED MODULE: external ["wp","primitives"]
+;// external ["wp","primitives"]
 const external_wp_primitives_namespaceObject = window["wp"]["primitives"];
-;// CONCATENATED MODULE: ./node_modules/@wordpress/icons/build-module/library/star-filled.js
-
+;// external "ReactJSXRuntime"
+const external_ReactJSXRuntime_namespaceObject = window["ReactJSXRuntime"];
+;// ./node_modules/@wordpress/icons/build-module/library/star-filled.js
 /**
  * WordPress dependencies
  */
 
-const starFilled = (0,external_React_namespaceObject.createElement)(external_wp_primitives_namespaceObject.SVG, {
+
+const starFilled = /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_primitives_namespaceObject.SVG, {
   xmlns: "http://www.w3.org/2000/svg",
-  viewBox: "0 0 24 24"
-}, (0,external_React_namespaceObject.createElement)(external_wp_primitives_namespaceObject.Path, {
-  d: "M11.776 4.454a.25.25 0 01.448 0l2.069 4.192a.25.25 0 00.188.137l4.626.672a.25.25 0 01.139.426l-3.348 3.263a.25.25 0 00-.072.222l.79 4.607a.25.25 0 01-.362.263l-4.138-2.175a.25.25 0 00-.232 0l-4.138 2.175a.25.25 0 01-.363-.263l.79-4.607a.25.25 0 00-.071-.222L4.754 9.881a.25.25 0 01.139-.426l4.626-.672a.25.25 0 00.188-.137l2.069-4.192z"
-}));
+  viewBox: "0 0 24 24",
+  children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_primitives_namespaceObject.Path, {
+    d: "M11.776 4.454a.25.25 0 01.448 0l2.069 4.192a.25.25 0 00.188.137l4.626.672a.25.25 0 01.139.426l-3.348 3.263a.25.25 0 00-.072.222l.79 4.607a.25.25 0 01-.362.263l-4.138-2.175a.25.25 0 00-.232 0l-4.138 2.175a.25.25 0 01-.363-.263l.79-4.607a.25.25 0 00-.071-.222L4.754 9.881a.25.25 0 01.139-.426l4.626-.672a.25.25 0 00.188-.137l2.069-4.192z"
+  })
+});
 /* harmony default export */ const star_filled = (starFilled);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/icons/build-module/library/star-half.js
-
+;// ./node_modules/@wordpress/icons/build-module/library/star-half.js
 /**
  * WordPress dependencies
  */
 
-const starHalf = (0,external_React_namespaceObject.createElement)(external_wp_primitives_namespaceObject.SVG, {
+
+const starHalf = /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_primitives_namespaceObject.SVG, {
   xmlns: "http://www.w3.org/2000/svg",
-  viewBox: "0 0 24 24"
-}, (0,external_React_namespaceObject.createElement)(external_wp_primitives_namespaceObject.Path, {
-  d: "M9.518 8.783a.25.25 0 00.188-.137l2.069-4.192a.25.25 0 01.448 0l2.07 4.192a.25.25 0 00.187.137l4.626.672a.25.25 0 01.139.427l-3.347 3.262a.25.25 0 00-.072.222l.79 4.607a.25.25 0 01-.363.264l-4.137-2.176a.25.25 0 00-.233 0l-4.138 2.175a.25.25 0 01-.362-.263l.79-4.607a.25.25 0 00-.072-.222L4.753 9.882a.25.25 0 01.14-.427l4.625-.672zM12 14.533c.28 0 .559.067.814.2l1.895.997-.362-2.11a1.75 1.75 0 01.504-1.55l1.533-1.495-2.12-.308a1.75 1.75 0 01-1.317-.957L12 7.39v7.143z"
-}));
+  viewBox: "0 0 24 24",
+  children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_primitives_namespaceObject.Path, {
+    d: "M9.518 8.783a.25.25 0 00.188-.137l2.069-4.192a.25.25 0 01.448 0l2.07 4.192a.25.25 0 00.187.137l4.626.672a.25.25 0 01.139.427l-3.347 3.262a.25.25 0 00-.072.222l.79 4.607a.25.25 0 01-.363.264l-4.137-2.176a.25.25 0 00-.233 0l-4.138 2.175a.25.25 0 01-.362-.263l.79-4.607a.25.25 0 00-.072-.222L4.753 9.882a.25.25 0 01.14-.427l4.625-.672zM12 14.533c.28 0 .559.067.814.2l1.895.997-.362-2.11a1.75 1.75 0 01.504-1.55l1.533-1.495-2.12-.308a1.75 1.75 0 01-1.317-.957L12 7.39v7.143z"
+  })
+});
 /* harmony default export */ const star_half = (starHalf);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/icons/build-module/library/star-empty.js
-
+;// ./node_modules/@wordpress/icons/build-module/library/star-empty.js
 /**
  * WordPress dependencies
  */
 
-const starEmpty = (0,external_React_namespaceObject.createElement)(external_wp_primitives_namespaceObject.SVG, {
+
+const starEmpty = /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_primitives_namespaceObject.SVG, {
   xmlns: "http://www.w3.org/2000/svg",
-  viewBox: "0 0 24 24"
-}, (0,external_React_namespaceObject.createElement)(external_wp_primitives_namespaceObject.Path, {
-  fillRule: "evenodd",
-  d: "M9.706 8.646a.25.25 0 01-.188.137l-4.626.672a.25.25 0 00-.139.427l3.348 3.262a.25.25 0 01.072.222l-.79 4.607a.25.25 0 00.362.264l4.138-2.176a.25.25 0 01.233 0l4.137 2.175a.25.25 0 00.363-.263l-.79-4.607a.25.25 0 01.072-.222l3.347-3.262a.25.25 0 00-.139-.427l-4.626-.672a.25.25 0 01-.188-.137l-2.069-4.192a.25.25 0 00-.448 0L9.706 8.646zM12 7.39l-.948 1.921a1.75 1.75 0 01-1.317.957l-2.12.308 1.534 1.495c.412.402.6.982.503 1.55l-.362 2.11 1.896-.997a1.75 1.75 0 011.629 0l1.895.997-.362-2.11a1.75 1.75 0 01.504-1.55l1.533-1.495-2.12-.308a1.75 1.75 0 01-1.317-.957L12 7.39z",
-  clipRule: "evenodd"
-}));
+  viewBox: "0 0 24 24",
+  children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_primitives_namespaceObject.Path, {
+    fillRule: "evenodd",
+    d: "M9.706 8.646a.25.25 0 01-.188.137l-4.626.672a.25.25 0 00-.139.427l3.348 3.262a.25.25 0 01.072.222l-.79 4.607a.25.25 0 00.362.264l4.138-2.176a.25.25 0 01.233 0l4.137 2.175a.25.25 0 00.363-.263l-.79-4.607a.25.25 0 01.072-.222l3.347-3.262a.25.25 0 00-.139-.427l-4.626-.672a.25.25 0 01-.188-.137l-2.069-4.192a.25.25 0 00-.448 0L9.706 8.646zM12 7.39l-.948 1.921a1.75 1.75 0 01-1.317.957l-2.12.308 1.534 1.495c.412.402.6.982.503 1.55l-.362 2.11 1.896-.997a1.75 1.75 0 011.629 0l1.895.997-.362-2.11a1.75 1.75 0 01.504-1.55l1.533-1.495-2.12-.308a1.75 1.75 0 01-1.317-.957L12 7.39z",
+    clipRule: "evenodd"
+  })
+});
 /* harmony default export */ const star_empty = (starEmpty);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/components/block-ratings/stars.js
-
+;// ./node_modules/@wordpress/block-directory/build-module/components/block-ratings/stars.js
 /**
  * WordPress dependencies
  */
+
 
 
 function Stars({
@@ -1407,64 +1438,63 @@ function Stars({
   const fullStarCount = Math.floor(rating);
   const halfStarCount = Math.ceil(rating - fullStarCount);
   const emptyStarCount = 5 - (fullStarCount + halfStarCount);
-  return (0,external_React_namespaceObject.createElement)("span", {
-    "aria-label": (0,external_wp_i18n_namespaceObject.sprintf)( /* translators: %s: number of stars. */
-    (0,external_wp_i18n_namespaceObject.__)('%s out of 5 stars'), stars)
-  }, Array.from({
-    length: fullStarCount
-  }).map((_, i) => (0,external_React_namespaceObject.createElement)(icon, {
-    key: `full_stars_${i}`,
-    className: "block-directory-block-ratings__star-full",
-    icon: star_filled,
-    size: 16
-  })), Array.from({
-    length: halfStarCount
-  }).map((_, i) => (0,external_React_namespaceObject.createElement)(icon, {
-    key: `half_stars_${i}`,
-    className: "block-directory-block-ratings__star-half-full",
-    icon: star_half,
-    size: 16
-  })), Array.from({
-    length: emptyStarCount
-  }).map((_, i) => (0,external_React_namespaceObject.createElement)(icon, {
-    key: `empty_stars_${i}`,
-    className: "block-directory-block-ratings__star-empty",
-    icon: star_empty,
-    size: 16
-  })));
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)("span", {
+    "aria-label": (0,external_wp_i18n_namespaceObject.sprintf)(/* translators: %s: number of stars. */
+    (0,external_wp_i18n_namespaceObject.__)('%s out of 5 stars'), stars),
+    children: [Array.from({
+      length: fullStarCount
+    }).map((_, i) => /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(icon, {
+      className: "block-directory-block-ratings__star-full",
+      icon: star_filled,
+      size: 16
+    }, `full_stars_${i}`)), Array.from({
+      length: halfStarCount
+    }).map((_, i) => /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(icon, {
+      className: "block-directory-block-ratings__star-half-full",
+      icon: star_half,
+      size: 16
+    }, `half_stars_${i}`)), Array.from({
+      length: emptyStarCount
+    }).map((_, i) => /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(icon, {
+      className: "block-directory-block-ratings__star-empty",
+      icon: star_empty,
+      size: 16
+    }, `empty_stars_${i}`))]
+  });
 }
 /* harmony default export */ const stars = (Stars);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/components/block-ratings/index.js
-
+;// ./node_modules/@wordpress/block-directory/build-module/components/block-ratings/index.js
 /**
  * Internal dependencies
  */
 
+
 const BlockRatings = ({
   rating
-}) => (0,external_React_namespaceObject.createElement)("span", {
-  className: "block-directory-block-ratings"
-}, (0,external_React_namespaceObject.createElement)(stars, {
-  rating: rating
-}));
+}) => /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("span", {
+  className: "block-directory-block-ratings",
+  children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(stars, {
+    rating: rating
+  })
+});
 /* harmony default export */ const block_ratings = (BlockRatings);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/components/downloadable-block-icon/index.js
-
+;// ./node_modules/@wordpress/block-directory/build-module/components/downloadable-block-icon/index.js
 /**
  * WordPress dependencies
  */
+
 
 function DownloadableBlockIcon({
   icon
 }) {
   const className = 'block-directory-downloadable-block-icon';
-  return icon.match(/\.(jpeg|jpg|gif|png|svg)(?:\?.*)?$/) !== null ? (0,external_React_namespaceObject.createElement)("img", {
+  return icon.match(/\.(jpeg|jpg|gif|png|svg)(?:\?.*)?$/) !== null ? /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("img", {
     className: className,
     src: icon,
     alt: ""
-  }) : (0,external_React_namespaceObject.createElement)(external_wp_blockEditor_namespaceObject.BlockIcon, {
+  }) : /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_blockEditor_namespaceObject.BlockIcon, {
     className: className,
     icon: icon,
     showColors: true
@@ -1472,8 +1502,7 @@ function DownloadableBlockIcon({
 }
 /* harmony default export */ const downloadable_block_icon = (DownloadableBlockIcon);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/components/downloadable-block-notice/index.js
-
+;// ./node_modules/@wordpress/block-directory/build-module/components/downloadable-block-notice/index.js
 /**
  * WordPress dependencies
  */
@@ -1483,6 +1512,7 @@ function DownloadableBlockIcon({
 /**
  * Internal dependencies
  */
+
 
 const DownloadableBlockNotice = ({
   block
@@ -1491,27 +1521,21 @@ const DownloadableBlockNotice = ({
   if (!errorNotice) {
     return null;
   }
-  return (0,external_React_namespaceObject.createElement)("div", {
-    className: "block-directory-downloadable-block-notice"
-  }, (0,external_React_namespaceObject.createElement)("div", {
-    className: "block-directory-downloadable-block-notice__content"
-  }, errorNotice.message, errorNotice.isFatal ? ' ' + (0,external_wp_i18n_namespaceObject.__)('Try reloading the page.') : null));
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("div", {
+    className: "block-directory-downloadable-block-notice",
+    children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)("div", {
+      className: "block-directory-downloadable-block-notice__content",
+      children: [errorNotice.message, errorNotice.isFatal ? ' ' + (0,external_wp_i18n_namespaceObject.__)('Try reloading the page.') : null]
+    })
+  });
 };
 /* harmony default export */ const downloadable_block_notice = (DownloadableBlockNotice);
 
-;// CONCATENATED MODULE: external ["wp","privateApis"]
-const external_wp_privateApis_namespaceObject = window["wp"]["privateApis"];
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/lock-unlock.js
+;// ./node_modules/@wordpress/block-directory/build-module/components/downloadable-block-list-item/index.js
 /**
- * WordPress dependencies
+ * External dependencies
  */
 
-const {
-  lock,
-  unlock
-} = (0,external_wp_privateApis_namespaceObject.__dangerousOptInToUnstableAPIsOnlyForCoreModules)('I know using unstable features means my theme or plugin will inevitably break in the next version of WordPress.', '@wordpress/block-directory');
-
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/components/downloadable-block-list-item/index.js
 
 /**
  * WordPress dependencies
@@ -1531,11 +1555,8 @@ const {
 
 
 
-const {
-  CompositeItemV2: CompositeItem
-} = unlock(external_wp_components_namespaceObject.privateApis);
-
 // Return the appropriate block item label, given the block data and status.
+
 function getDownloadableBlockLabel({
   title,
   rating,
@@ -1547,28 +1568,27 @@ function getDownloadableBlockLabel({
 }) {
   const stars = Math.round(rating / 0.5) * 0.5;
   if (!isInstalled && hasNotice) {
-    /* translators: %1$s: block title */
+    /* translators: %s: block title */
     return (0,external_wp_i18n_namespaceObject.sprintf)('Retry installing %s.', (0,external_wp_htmlEntities_namespaceObject.decodeEntities)(title));
   }
   if (isInstalled) {
-    /* translators: %1$s: block title */
+    /* translators: %s: block title */
     return (0,external_wp_i18n_namespaceObject.sprintf)('Add %s.', (0,external_wp_htmlEntities_namespaceObject.decodeEntities)(title));
   }
   if (isInstalling) {
-    /* translators: %1$s: block title */
+    /* translators: %s: block title */
     return (0,external_wp_i18n_namespaceObject.sprintf)('Installing %s.', (0,external_wp_htmlEntities_namespaceObject.decodeEntities)(title));
   }
 
   // No ratings yet, just use the title.
   if (ratingCount < 1) {
-    /* translators: %1$s: block title */
+    /* translators: %s: block title */
     return (0,external_wp_i18n_namespaceObject.sprintf)('Install %s.', (0,external_wp_htmlEntities_namespaceObject.decodeEntities)(title));
   }
-  return (0,external_wp_i18n_namespaceObject.sprintf)( /* translators: %1$s: block title, %2$s: average rating, %3$s: total ratings count. */
+  return (0,external_wp_i18n_namespaceObject.sprintf)(/* translators: 1: block title, 2: average rating, 3: total ratings count. */
   (0,external_wp_i18n_namespaceObject._n)('Install %1$s. %2$s stars with %3$s review.', 'Install %1$s. %2$s stars with %3$s reviews.', ratingCount), (0,external_wp_htmlEntities_namespaceObject.decodeEntities)(title), stars, ratingCount);
 }
 function DownloadableBlockListItem({
-  composite,
   item,
   onClick
 }) {
@@ -1604,55 +1624,63 @@ function DownloadableBlockListItem({
   } else if (isInstalling) {
     statusText = (0,external_wp_i18n_namespaceObject.__)('Installing…');
   }
-  return (0,external_React_namespaceObject.createElement)(CompositeItem, {
-    render: (0,external_React_namespaceObject.createElement)(external_wp_components_namespaceObject.Button, {
-      __experimentalIsFocusable: true,
-      type: "button",
-      role: "option",
-      className: "block-directory-downloadable-block-list-item",
-      isBusy: isInstalling,
+  const itemLabel = getDownloadableBlockLabel(item, {
+    hasNotice,
+    isInstalled,
+    isInstalling
+  });
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_components_namespaceObject.Tooltip, {
+    placement: "top",
+    text: itemLabel,
+    children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(external_wp_components_namespaceObject.Composite.Item, {
+      className: dist_clsx('block-directory-downloadable-block-list-item', isInstalling && 'is-installing'),
+      accessibleWhenDisabled: true,
+      disabled: isInstalling || !isInstallable,
       onClick: event => {
         event.preventDefault();
         onClick();
       },
-      label: getDownloadableBlockLabel(item, {
-        hasNotice,
-        isInstalled,
-        isInstalling
-      }),
-      showTooltip: true,
-      tooltipPosition: "top center"
-    }),
-    store: composite,
-    disabled: isInstalling || !isInstallable
-  }, (0,external_React_namespaceObject.createElement)("div", {
-    className: "block-directory-downloadable-block-list-item__icon"
-  }, (0,external_React_namespaceObject.createElement)(downloadable_block_icon, {
-    icon: icon,
-    title: title
-  }), isInstalling ? (0,external_React_namespaceObject.createElement)("span", {
-    className: "block-directory-downloadable-block-list-item__spinner"
-  }, (0,external_React_namespaceObject.createElement)(external_wp_components_namespaceObject.Spinner, null)) : (0,external_React_namespaceObject.createElement)(block_ratings, {
-    rating: rating
-  })), (0,external_React_namespaceObject.createElement)("span", {
-    className: "block-directory-downloadable-block-list-item__details"
-  }, (0,external_React_namespaceObject.createElement)("span", {
-    className: "block-directory-downloadable-block-list-item__title"
-  }, (0,external_wp_element_namespaceObject.createInterpolateElement)((0,external_wp_i18n_namespaceObject.sprintf)( /* translators: %1$s: block title, %2$s: author name. */
-  (0,external_wp_i18n_namespaceObject.__)('%1$s <span>by %2$s</span>'), (0,external_wp_htmlEntities_namespaceObject.decodeEntities)(title), author), {
-    span: (0,external_React_namespaceObject.createElement)("span", {
-      className: "block-directory-downloadable-block-list-item__author"
+      "aria-label": itemLabel,
+      type: "button",
+      role: "option",
+      children: [/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)("div", {
+        className: "block-directory-downloadable-block-list-item__icon",
+        children: [/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(downloadable_block_icon, {
+          icon: icon,
+          title: title
+        }), isInstalling ? /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("span", {
+          className: "block-directory-downloadable-block-list-item__spinner",
+          children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_components_namespaceObject.Spinner, {})
+        }) : /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(block_ratings, {
+          rating: rating
+        })]
+      }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)("span", {
+        className: "block-directory-downloadable-block-list-item__details",
+        children: [/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("span", {
+          className: "block-directory-downloadable-block-list-item__title",
+          children: (0,external_wp_element_namespaceObject.createInterpolateElement)((0,external_wp_i18n_namespaceObject.sprintf)(/* translators: 1: block title. 2: author name. */
+          (0,external_wp_i18n_namespaceObject.__)('%1$s <span>by %2$s</span>'), (0,external_wp_htmlEntities_namespaceObject.decodeEntities)(title), author), {
+            span: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("span", {
+              className: "block-directory-downloadable-block-list-item__author"
+            })
+          })
+        }), hasNotice ? /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(downloadable_block_notice, {
+          block: item
+        }) : /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(external_ReactJSXRuntime_namespaceObject.Fragment, {
+          children: [/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("span", {
+            className: "block-directory-downloadable-block-list-item__desc",
+            children: !!statusText ? statusText : (0,external_wp_htmlEntities_namespaceObject.decodeEntities)(description)
+          }), isInstallable && !(isInstalled || isInstalling) && /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_components_namespaceObject.VisuallyHidden, {
+            children: (0,external_wp_i18n_namespaceObject.__)('Install block')
+          })]
+        })]
+      })]
     })
-  })), hasNotice ? (0,external_React_namespaceObject.createElement)(downloadable_block_notice, {
-    block: item
-  }) : (0,external_React_namespaceObject.createElement)(external_React_namespaceObject.Fragment, null, (0,external_React_namespaceObject.createElement)("span", {
-    className: "block-directory-downloadable-block-list-item__desc"
-  }, !!statusText ? statusText : (0,external_wp_htmlEntities_namespaceObject.decodeEntities)(description)), isInstallable && !(isInstalled || isInstalling) && (0,external_React_namespaceObject.createElement)(external_wp_components_namespaceObject.VisuallyHidden, null, (0,external_wp_i18n_namespaceObject.__)('Install block')))));
+  });
 }
 /* harmony default export */ const downloadable_block_list_item = (DownloadableBlockListItem);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/components/downloadable-blocks-list/index.js
-
+;// ./node_modules/@wordpress/block-directory/build-module/components/downloadable-blocks-list/index.js
 /**
  * WordPress dependencies
  */
@@ -1667,61 +1695,54 @@ function DownloadableBlockListItem({
 
 
 
-const {
-  CompositeV2: Composite,
-  useCompositeStoreV2: useCompositeStore
-} = unlock(external_wp_components_namespaceObject.privateApis);
 const noop = () => {};
 function DownloadableBlocksList({
   items,
   onHover = noop,
   onSelect
 }) {
-  const composite = useCompositeStore();
   const {
     installBlockType
   } = (0,external_wp_data_namespaceObject.useDispatch)(store);
   if (!items.length) {
     return null;
   }
-  return (0,external_React_namespaceObject.createElement)(Composite, {
-    store: composite,
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_components_namespaceObject.Composite, {
     role: "listbox",
     className: "block-directory-downloadable-blocks-list",
-    "aria-label": (0,external_wp_i18n_namespaceObject.__)('Blocks available for install')
-  }, items.map(item => {
-    return (0,external_React_namespaceObject.createElement)(downloadable_block_list_item, {
-      key: item.id,
-      composite: composite,
-      onClick: () => {
-        // Check if the block is registered (`getBlockType`
-        // will return an object). If so, insert the block.
-        // This prevents installing existing plugins.
-        if ((0,external_wp_blocks_namespaceObject.getBlockType)(item.name)) {
-          onSelect(item);
-        } else {
-          installBlockType(item).then(success => {
-            if (success) {
-              onSelect(item);
-            }
-          });
-        }
-        onHover(null);
-      },
-      onHover: onHover,
-      item: item
-    });
-  }));
+    "aria-label": (0,external_wp_i18n_namespaceObject.__)('Blocks available for install'),
+    children: items.map(item => {
+      return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(downloadable_block_list_item, {
+        onClick: () => {
+          // Check if the block is registered (`getBlockType`
+          // will return an object). If so, insert the block.
+          // This prevents installing existing plugins.
+          if ((0,external_wp_blocks_namespaceObject.getBlockType)(item.name)) {
+            onSelect(item);
+          } else {
+            installBlockType(item).then(success => {
+              if (success) {
+                onSelect(item);
+              }
+            });
+          }
+          onHover(null);
+        },
+        onHover: onHover,
+        item: item
+      }, item.id);
+    })
+  });
 }
 /* harmony default export */ const downloadable_blocks_list = (DownloadableBlocksList);
 
-;// CONCATENATED MODULE: external ["wp","a11y"]
+;// external ["wp","a11y"]
 const external_wp_a11y_namespaceObject = window["wp"]["a11y"];
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/components/downloadable-blocks-panel/inserter-panel.js
-
+;// ./node_modules/@wordpress/block-directory/build-module/components/downloadable-blocks-panel/inserter-panel.js
 /**
  * WordPress dependencies
  */
+
 
 
 
@@ -1732,41 +1753,33 @@ function DownloadableBlocksInserterPanel({
 }) {
   const count = downloadableItems.length;
   (0,external_wp_element_namespaceObject.useEffect)(() => {
-    (0,external_wp_a11y_namespaceObject.speak)((0,external_wp_i18n_namespaceObject.sprintf)( /* translators: %d: number of available blocks. */
+    (0,external_wp_a11y_namespaceObject.speak)((0,external_wp_i18n_namespaceObject.sprintf)(/* translators: %d: number of available blocks. */
     (0,external_wp_i18n_namespaceObject._n)('%d additional block is available to install.', '%d additional blocks are available to install.', count), count));
   }, [count]);
-  return (0,external_React_namespaceObject.createElement)(external_React_namespaceObject.Fragment, null, !hasLocalBlocks && (0,external_React_namespaceObject.createElement)("p", {
-    className: "block-directory-downloadable-blocks-panel__no-local"
-  }, (0,external_wp_i18n_namespaceObject.__)('No results available from your installed blocks.')), (0,external_React_namespaceObject.createElement)("div", {
-    className: "block-editor-inserter__quick-inserter-separator"
-  }), (0,external_React_namespaceObject.createElement)("div", {
-    className: "block-directory-downloadable-blocks-panel"
-  }, (0,external_React_namespaceObject.createElement)("div", {
-    className: "block-directory-downloadable-blocks-panel__header"
-  }, (0,external_React_namespaceObject.createElement)("h2", {
-    className: "block-directory-downloadable-blocks-panel__title"
-  }, (0,external_wp_i18n_namespaceObject.__)('Available to install')), (0,external_React_namespaceObject.createElement)("p", {
-    className: "block-directory-downloadable-blocks-panel__description"
-  }, (0,external_wp_i18n_namespaceObject.__)('Select a block to install and add it to your post.'))), children));
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(external_ReactJSXRuntime_namespaceObject.Fragment, {
+    children: [!hasLocalBlocks && /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("p", {
+      className: "block-directory-downloadable-blocks-panel__no-local",
+      children: (0,external_wp_i18n_namespaceObject.__)('No results available from your installed blocks.')
+    }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("div", {
+      className: "block-editor-inserter__quick-inserter-separator"
+    }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)("div", {
+      className: "block-directory-downloadable-blocks-panel",
+      children: [/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)("div", {
+        className: "block-directory-downloadable-blocks-panel__header",
+        children: [/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("h2", {
+          className: "block-directory-downloadable-blocks-panel__title",
+          children: (0,external_wp_i18n_namespaceObject.__)('Available to install')
+        }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("p", {
+          className: "block-directory-downloadable-blocks-panel__description",
+          children: (0,external_wp_i18n_namespaceObject.__)('Select a block to install and add it to your post.')
+        })]
+      }), children]
+    })]
+  });
 }
 /* harmony default export */ const inserter_panel = (DownloadableBlocksInserterPanel);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/icons/build-module/library/block-default.js
-
-/**
- * WordPress dependencies
- */
-
-const blockDefault = (0,external_React_namespaceObject.createElement)(external_wp_primitives_namespaceObject.SVG, {
-  xmlns: "http://www.w3.org/2000/svg",
-  viewBox: "0 0 24 24"
-}, (0,external_React_namespaceObject.createElement)(external_wp_primitives_namespaceObject.Path, {
-  d: "M19 8h-1V6h-5v2h-2V6H6v2H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-8c0-1.1-.9-2-2-2zm.5 10c0 .3-.2.5-.5.5H5c-.3 0-.5-.2-.5-.5v-8c0-.3.2-.5.5-.5h14c.3 0 .5.2.5.5v8z"
-}));
-/* harmony default export */ const block_default = (blockDefault);
-
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/components/downloadable-blocks-panel/no-results.js
-
+;// ./node_modules/@wordpress/block-directory/build-module/components/downloadable-blocks-panel/no-results.js
 /**
  * WordPress dependencies
  */
@@ -1774,21 +1787,26 @@ const blockDefault = (0,external_React_namespaceObject.createElement)(external_w
 
 
 function DownloadableBlocksNoResults() {
-  return (0,external_React_namespaceObject.createElement)(external_React_namespaceObject.Fragment, null, (0,external_React_namespaceObject.createElement)("div", {
-    className: "block-editor-inserter__no-results"
-  }, (0,external_React_namespaceObject.createElement)(icon, {
-    className: "block-editor-inserter__no-results-icon",
-    icon: block_default
-  }), (0,external_React_namespaceObject.createElement)("p", null, (0,external_wp_i18n_namespaceObject.__)('No results found.'))), (0,external_React_namespaceObject.createElement)("div", {
-    className: "block-editor-inserter__tips"
-  }, (0,external_React_namespaceObject.createElement)(external_wp_components_namespaceObject.Tip, null, (0,external_wp_i18n_namespaceObject.__)('Interested in creating your own block?'), (0,external_React_namespaceObject.createElement)("br", null), (0,external_React_namespaceObject.createElement)(external_wp_components_namespaceObject.ExternalLink, {
-    href: "https://developer.wordpress.org/block-editor/"
-  }, (0,external_wp_i18n_namespaceObject.__)('Get started here'), "."))));
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(external_ReactJSXRuntime_namespaceObject.Fragment, {
+    children: [/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("div", {
+      className: "block-editor-inserter__no-results",
+      children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("p", {
+        children: (0,external_wp_i18n_namespaceObject.__)('No results found.')
+      })
+    }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("div", {
+      className: "block-editor-inserter__tips",
+      children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(external_wp_components_namespaceObject.Tip, {
+        children: [(0,external_wp_i18n_namespaceObject.__)('Interested in creating your own block?'), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("br", {}), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(external_wp_components_namespaceObject.ExternalLink, {
+          href: "https://developer.wordpress.org/block-editor/",
+          children: [(0,external_wp_i18n_namespaceObject.__)('Get started here'), "."]
+        })]
+      })
+    })]
+  });
 }
 /* harmony default export */ const no_results = (DownloadableBlocksNoResults);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/components/downloadable-blocks-panel/index.js
-
+;// ./node_modules/@wordpress/block-directory/build-module/components/downloadable-blocks-panel/index.js
 /**
  * WordPress dependencies
  */
@@ -1805,7 +1823,8 @@ function DownloadableBlocksNoResults() {
 
 
 
-const EMPTY_ARRAY = [];
+
+const downloadable_blocks_panel_EMPTY_ARRAY = [];
 const useDownloadableBlocks = filterValue => (0,external_wp_data_namespaceObject.useSelect)(select => {
   const {
     getDownloadableBlocks,
@@ -1813,7 +1832,7 @@ const useDownloadableBlocks = filterValue => (0,external_wp_data_namespaceObject
     getInstalledBlockTypes
   } = select(store);
   const hasPermission = select(external_wp_coreData_namespaceObject.store).canUser('read', 'block-directory/search');
-  let downloadableBlocks = EMPTY_ARRAY;
+  let downloadableBlocks = downloadable_blocks_panel_EMPTY_ARRAY;
   if (hasPermission) {
     downloadableBlocks = getDownloadableBlocks(filterValue);
 
@@ -1838,7 +1857,7 @@ const useDownloadableBlocks = filterValue => (0,external_wp_data_namespaceObject
 
     // Return identical empty array when there are no blocks
     if (downloadableBlocks.length === 0) {
-      downloadableBlocks = EMPTY_ARRAY;
+      downloadableBlocks = downloadable_blocks_panel_EMPTY_ARRAY;
     }
   }
   return {
@@ -1860,35 +1879,41 @@ function DownloadableBlocksPanel({
     isLoading
   } = useDownloadableBlocks(filterValue);
   if (hasPermission === undefined || isLoading || isTyping) {
-    return (0,external_React_namespaceObject.createElement)(external_React_namespaceObject.Fragment, null, hasPermission && !hasLocalBlocks && (0,external_React_namespaceObject.createElement)(external_React_namespaceObject.Fragment, null, (0,external_React_namespaceObject.createElement)("p", {
-      className: "block-directory-downloadable-blocks-panel__no-local"
-    }, (0,external_wp_i18n_namespaceObject.__)('No results available from your installed blocks.')), (0,external_React_namespaceObject.createElement)("div", {
-      className: "block-editor-inserter__quick-inserter-separator"
-    })), (0,external_React_namespaceObject.createElement)("div", {
-      className: "block-directory-downloadable-blocks-panel has-blocks-loading"
-    }, (0,external_React_namespaceObject.createElement)(external_wp_components_namespaceObject.Spinner, null)));
+    return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(external_ReactJSXRuntime_namespaceObject.Fragment, {
+      children: [hasPermission && !hasLocalBlocks && /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(external_ReactJSXRuntime_namespaceObject.Fragment, {
+        children: [/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("p", {
+          className: "block-directory-downloadable-blocks-panel__no-local",
+          children: (0,external_wp_i18n_namespaceObject.__)('No results available from your installed blocks.')
+        }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("div", {
+          className: "block-editor-inserter__quick-inserter-separator"
+        })]
+      }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("div", {
+        className: "block-directory-downloadable-blocks-panel has-blocks-loading",
+        children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_components_namespaceObject.Spinner, {})
+      })]
+    });
   }
   if (false === hasPermission) {
     if (!hasLocalBlocks) {
-      return (0,external_React_namespaceObject.createElement)(no_results, null);
+      return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(no_results, {});
     }
     return null;
   }
   if (downloadableBlocks.length === 0) {
-    return hasLocalBlocks ? null : (0,external_React_namespaceObject.createElement)(no_results, null);
+    return hasLocalBlocks ? null : /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(no_results, {});
   }
-  return (0,external_React_namespaceObject.createElement)(inserter_panel, {
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(inserter_panel, {
     downloadableItems: downloadableBlocks,
-    hasLocalBlocks: hasLocalBlocks
-  }, (0,external_React_namespaceObject.createElement)(downloadable_blocks_list, {
-    items: downloadableBlocks,
-    onSelect: onSelect,
-    onHover: onHover
-  }));
+    hasLocalBlocks: hasLocalBlocks,
+    children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(downloadable_blocks_list, {
+      items: downloadableBlocks,
+      onSelect: onSelect,
+      onHover: onHover
+    })
+  });
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/plugins/inserter-menu-downloadable-blocks-panel/index.js
-
+;// ./node_modules/@wordpress/block-directory/build-module/plugins/inserter-menu-downloadable-blocks-panel/index.js
 /**
  * WordPress dependencies
  */
@@ -1899,35 +1924,37 @@ function DownloadableBlocksPanel({
 /**
  * Internal dependencies
  */
+
 
 function InserterMenuDownloadableBlocksPanel() {
   const [debouncedFilterValue, setFilterValue] = (0,external_wp_element_namespaceObject.useState)('');
   const debouncedSetFilterValue = (0,external_wp_compose_namespaceObject.debounce)(setFilterValue, 400);
-  return (0,external_React_namespaceObject.createElement)(external_wp_blockEditor_namespaceObject.__unstableInserterMenuExtension, null, ({
-    onSelect,
-    onHover,
-    filterValue,
-    hasItems
-  }) => {
-    if (debouncedFilterValue !== filterValue) {
-      debouncedSetFilterValue(filterValue);
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_blockEditor_namespaceObject.__unstableInserterMenuExtension, {
+    children: ({
+      onSelect,
+      onHover,
+      filterValue,
+      hasItems
+    }) => {
+      if (debouncedFilterValue !== filterValue) {
+        debouncedSetFilterValue(filterValue);
+      }
+      if (!debouncedFilterValue) {
+        return null;
+      }
+      return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(DownloadableBlocksPanel, {
+        onSelect: onSelect,
+        onHover: onHover,
+        filterValue: debouncedFilterValue,
+        hasLocalBlocks: hasItems,
+        isTyping: filterValue !== debouncedFilterValue
+      });
     }
-    if (!debouncedFilterValue) {
-      return null;
-    }
-    return (0,external_React_namespaceObject.createElement)(DownloadableBlocksPanel, {
-      onSelect: onSelect,
-      onHover: onHover,
-      filterValue: debouncedFilterValue,
-      hasLocalBlocks: hasItems,
-      isTyping: filterValue !== debouncedFilterValue
-    });
   });
 }
 /* harmony default export */ const inserter_menu_downloadable_blocks_panel = (InserterMenuDownloadableBlocksPanel);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/components/compact-list/index.js
-
+;// ./node_modules/@wordpress/block-directory/build-module/components/compact-list/index.js
 /**
  * WordPress dependencies
  */
@@ -1936,6 +1963,7 @@ function InserterMenuDownloadableBlocksPanel() {
 /**
  * Internal dependencies
  */
+
 
 function CompactList({
   items
@@ -1943,32 +1971,34 @@ function CompactList({
   if (!items.length) {
     return null;
   }
-  return (0,external_React_namespaceObject.createElement)("ul", {
-    className: "block-directory-compact-list"
-  }, items.map(({
-    icon,
-    id,
-    title,
-    author
-  }) => (0,external_React_namespaceObject.createElement)("li", {
-    key: id,
-    className: "block-directory-compact-list__item"
-  }, (0,external_React_namespaceObject.createElement)(downloadable_block_icon, {
-    icon: icon,
-    title: title
-  }), (0,external_React_namespaceObject.createElement)("div", {
-    className: "block-directory-compact-list__item-details"
-  }, (0,external_React_namespaceObject.createElement)("div", {
-    className: "block-directory-compact-list__item-title"
-  }, title), (0,external_React_namespaceObject.createElement)("div", {
-    className: "block-directory-compact-list__item-author"
-  }, (0,external_wp_i18n_namespaceObject.sprintf)( /* translators: %s: Name of the block author. */
-  (0,external_wp_i18n_namespaceObject.__)('By %s'), author))))));
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("ul", {
+    className: "block-directory-compact-list",
+    children: items.map(({
+      icon,
+      id,
+      title,
+      author
+    }) => /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)("li", {
+      className: "block-directory-compact-list__item",
+      children: [/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(downloadable_block_icon, {
+        icon: icon,
+        title: title
+      }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)("div", {
+        className: "block-directory-compact-list__item-details",
+        children: [/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("div", {
+          className: "block-directory-compact-list__item-title",
+          children: title
+        }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("div", {
+          className: "block-directory-compact-list__item-author",
+          children: (0,external_wp_i18n_namespaceObject.sprintf)(/* translators: %s: Name of the block author. */
+          (0,external_wp_i18n_namespaceObject.__)('By %s'), author)
+        })]
+      })]
+    }, id))
+  });
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/plugins/installed-blocks-pre-publish-panel/index.js
-var _window$wp$editPost;
-
+;// ./node_modules/@wordpress/block-directory/build-module/plugins/installed-blocks-pre-publish-panel/index.js
 /**
  * WordPress dependencies
  */
@@ -1982,31 +2012,26 @@ var _window$wp$editPost;
 
 
 
-// We shouldn't import the edit-post package directly
-// because it would include the wp-edit-post in all pages loading the block-directory script.
-const {
-  PluginPrePublishPanel
-} = (_window$wp$editPost = window?.wp?.editPost) !== null && _window$wp$editPost !== void 0 ? _window$wp$editPost : {};
 function InstalledBlocksPrePublishPanel() {
   const newBlockTypes = (0,external_wp_data_namespaceObject.useSelect)(select => select(store).getNewBlockTypes(), []);
   if (!newBlockTypes.length) {
     return null;
   }
-  return (0,external_React_namespaceObject.createElement)(PluginPrePublishPanel, {
-    icon: block_default,
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(external_wp_editor_namespaceObject.PluginPrePublishPanel, {
     title: (0,external_wp_i18n_namespaceObject.sprintf)(
     // translators: %d: number of blocks (number).
     (0,external_wp_i18n_namespaceObject._n)('Added: %d block', 'Added: %d blocks', newBlockTypes.length), newBlockTypes.length),
-    initialOpen: true
-  }, (0,external_React_namespaceObject.createElement)("p", {
-    className: "installed-blocks-pre-publish-panel__copy"
-  }, (0,external_wp_i18n_namespaceObject._n)('The following block has been added to your site.', 'The following blocks have been added to your site.', newBlockTypes.length)), (0,external_React_namespaceObject.createElement)(CompactList, {
-    items: newBlockTypes
-  }));
+    initialOpen: true,
+    children: [/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("p", {
+      className: "installed-blocks-pre-publish-panel__copy",
+      children: (0,external_wp_i18n_namespaceObject._n)('The following block has been added to your site.', 'The following blocks have been added to your site.', newBlockTypes.length)
+    }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(CompactList, {
+      items: newBlockTypes
+    })]
+  });
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/plugins/get-install-missing/install-button.js
-
+;// ./node_modules/@wordpress/block-directory/build-module/plugins/get-install-missing/install-button.js
 /**
  * WordPress dependencies
  */
@@ -2019,6 +2044,7 @@ function InstalledBlocksPrePublishPanel() {
 /**
  * Internal dependencies
  */
+
 
 function InstallButton({
   attributes,
@@ -2032,7 +2058,8 @@ function InstallButton({
   const {
     replaceBlock
   } = (0,external_wp_data_namespaceObject.useDispatch)(external_wp_blockEditor_namespaceObject.store);
-  return (0,external_React_namespaceObject.createElement)(external_wp_components_namespaceObject.Button, {
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_components_namespaceObject.Button, {
+    __next40pxDefaultSize: true,
     onClick: () => installBlockType(block).then(success => {
       if (success) {
         const blockType = (0,external_wp_blocks_namespaceObject.getBlockType)(block.name);
@@ -2042,15 +2069,16 @@ function InstallButton({
         }
       }
     }),
+    accessibleWhenDisabled: true,
     disabled: isInstallingBlock,
     isBusy: isInstallingBlock,
-    variant: "primary"
-  }, (0,external_wp_i18n_namespaceObject.sprintf)( /* translators: %s: block name */
-  (0,external_wp_i18n_namespaceObject.__)('Install %s'), block.title));
+    variant: "primary",
+    children: (0,external_wp_i18n_namespaceObject.sprintf)(/* translators: %s: block name */
+    (0,external_wp_i18n_namespaceObject.__)('Install %s'), block.title)
+  });
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/plugins/get-install-missing/index.js
-
+;// ./node_modules/@wordpress/block-directory/build-module/plugins/get-install-missing/index.js
 /**
  * WordPress dependencies
  */
@@ -2065,6 +2093,7 @@ function InstallButton({
 /**
  * Internal dependencies
  */
+
 
 
 const getInstallMissing = OriginalComponent => props => {
@@ -2091,11 +2120,11 @@ const getInstallMissing = OriginalComponent => props => {
 
   // The user can't install blocks, or the block isn't available for download.
   if (!hasPermission || !block) {
-    return (0,external_React_namespaceObject.createElement)(OriginalComponent, {
+    return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(OriginalComponent, {
       ...props
     });
   }
-  return (0,external_React_namespaceObject.createElement)(ModifiedWarning, {
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(ModifiedWarning, {
     ...props,
     originalBlock: block
   });
@@ -2125,33 +2154,36 @@ const ModifiedWarning = ({
     } = select(external_wp_blockEditor_namespaceObject.store);
     return canInsertBlockType('core/html', getBlockRootClientId(clientId));
   }, [clientId]);
-  let messageHTML = (0,external_wp_i18n_namespaceObject.sprintf)( /* translators: %s: block name */
+  let messageHTML = (0,external_wp_i18n_namespaceObject.sprintf)(/* translators: %s: block name */
   (0,external_wp_i18n_namespaceObject.__)('Your site doesn’t include support for the %s block. You can try installing the block or remove it entirely.'), originalBlock.title || originalName);
-  const actions = [(0,external_React_namespaceObject.createElement)(InstallButton, {
-    key: "install",
+  const actions = [/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(InstallButton, {
     block: originalBlock,
     attributes: props.attributes,
     clientId: props.clientId
-  })];
+  }, "install")];
   if (hasContent && hasHTMLBlock) {
-    messageHTML = (0,external_wp_i18n_namespaceObject.sprintf)( /* translators: %s: block name */
+    messageHTML = (0,external_wp_i18n_namespaceObject.sprintf)(/* translators: %s: block name */
     (0,external_wp_i18n_namespaceObject.__)('Your site doesn’t include support for the %s block. You can try installing the block, convert it to a Custom HTML block, or remove it entirely.'), originalBlock.title || originalName);
-    actions.push((0,external_React_namespaceObject.createElement)(external_wp_components_namespaceObject.Button, {
-      key: "convert",
+    actions.push(/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_components_namespaceObject.Button, {
+      __next40pxDefaultSize: true,
       onClick: convertToHTML,
-      variant: "tertiary"
-    }, (0,external_wp_i18n_namespaceObject.__)('Keep as HTML')));
+      variant: "tertiary",
+      children: (0,external_wp_i18n_namespaceObject.__)('Keep as HTML')
+    }, "convert"));
   }
-  return (0,external_React_namespaceObject.createElement)("div", {
-    ...(0,external_wp_blockEditor_namespaceObject.useBlockProps)()
-  }, (0,external_React_namespaceObject.createElement)(external_wp_blockEditor_namespaceObject.Warning, {
-    actions: actions
-  }, messageHTML), (0,external_React_namespaceObject.createElement)(external_wp_element_namespaceObject.RawHTML, null, originalUndelimitedContent));
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)("div", {
+    ...(0,external_wp_blockEditor_namespaceObject.useBlockProps)(),
+    children: [/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_blockEditor_namespaceObject.Warning, {
+      actions: actions,
+      children: messageHTML
+    }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_element_namespaceObject.RawHTML, {
+      children: originalUndelimitedContent
+    })]
+  });
 };
 /* harmony default export */ const get_install_missing = (getInstallMissing);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/plugins/index.js
-
+;// ./node_modules/@wordpress/block-directory/build-module/plugins/index.js
 /**
  * WordPress dependencies
  */
@@ -2165,9 +2197,15 @@ const ModifiedWarning = ({
 
 
 
+
 (0,external_wp_plugins_namespaceObject.registerPlugin)('block-directory', {
+  // The icon is explicitly set to undefined to prevent PluginPrePublishPanel
+  // from rendering the fallback icon pluginIcon.
+  icon: undefined,
   render() {
-    return (0,external_React_namespaceObject.createElement)(external_React_namespaceObject.Fragment, null, (0,external_React_namespaceObject.createElement)(AutoBlockUninstaller, null), (0,external_React_namespaceObject.createElement)(inserter_menu_downloadable_blocks_panel, null), (0,external_React_namespaceObject.createElement)(InstalledBlocksPrePublishPanel, null));
+    return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(external_ReactJSXRuntime_namespaceObject.Fragment, {
+      children: [/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(AutoBlockUninstaller, {}), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(inserter_menu_downloadable_blocks_panel, {}), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(InstalledBlocksPrePublishPanel, {})]
+    });
   }
 });
 (0,external_wp_hooks_namespaceObject.addFilter)('blocks.registerBlockType', 'block-directory/fallback', (settings, name) => {
@@ -2178,7 +2216,7 @@ const ModifiedWarning = ({
   return settings;
 });
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/block-directory/build-module/index.js
+;// ./node_modules/@wordpress/block-directory/build-module/index.js
 /**
  * Internal dependencies
  */

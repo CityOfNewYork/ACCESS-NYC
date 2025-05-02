@@ -935,6 +935,7 @@ if (\function_exists('mb_convert_encoding')) {
 if (\function_exists('mb_ord')) {
     function twig_ord($string)
     {
+		/* @phpcs:ignore */
         return \mb_ord($string, 'UTF-8');
     }
 } else {

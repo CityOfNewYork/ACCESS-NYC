@@ -10,8 +10,8 @@ class WPML_Color_Picker {
 	}
 
 	public function admin_print_scripts() {
-		wp_register_style( 'wpml-color-picker', ICL_PLUGIN_URL . '/res/css/colorpicker.css', array( 'wp-color-picker' ), ICL_SITEPRESS_VERSION );
-		wp_register_script( 'wpml-color-picker', ICL_PLUGIN_URL . '/res/js/wpml-color-picker.js', array( 'wp-color-picker' ), ICL_SITEPRESS_VERSION );
+		wp_register_style( 'wpml-color-picker', ICL_PLUGIN_URL . '/res/css/colorpicker.css', array( 'wp-color-picker' ), ICL_SITEPRESS_SCRIPT_VERSION );
+		wp_register_script( 'wpml-color-picker', ICL_PLUGIN_URL . '/res/js/wpml-color-picker.js', array( 'wp-color-picker' ), ICL_SITEPRESS_SCRIPT_VERSION );
 
 		wp_enqueue_style( 'wpml-color-picker' );
 		wp_enqueue_script( 'wpml-color-picker' );

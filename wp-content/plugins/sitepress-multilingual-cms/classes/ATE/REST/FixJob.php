@@ -2,7 +2,7 @@
 
 namespace WPML\TM\ATE\REST;
 
-use WPML\TM\ATE\ReturnedJobsQueue;
+use WPML\TM\ATE\ReturnedJobs;
 use WP_REST_Request;
 use WPML\Rest\Adaptor;
 use WPML\TM\REST\Base;
@@ -116,7 +116,6 @@ class FixJob extends Base {
 			}
 
 			if ( $receivedWpmlJobId ) {
-				ReturnedJobsQueue::remove( $wpmlJobId );
 				return true;
 			}
 		}

@@ -1,0 +1,79 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/languages/components/ConfirmDeleteTranslatedContentModal.js:22
+msgid "hide the translations instead."
+msgstr "ซ่อนการแปลแทน."
+
+#: src/js/languages/components/ConfirmDeleteTranslatedContentModal.js:84
+msgid "Error happened! Please try again."
+msgstr "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง."
+
+#: src/js/languages/components/ConfirmDeleteTranslatedContentModal.js:92
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#: src/js/languages/components/ConfirmEditLanguageSave.js:34
+msgid "Choose Content to Automatically Translate into"
+msgstr "เลือกเนื้อหาที่จะแปลโดยอัตโนมัติเป็น"
+
+#: src/js/languages/components/ConfirmEditLanguageSave.js:37
+msgid "Save Changes and Enable Automatic Translation"
+msgstr "บันทึกการเปลี่ยนแปลงและเปิดใช้งานการแปลอัตโนมัติ"
+
+#: src/js/languages/components/ConfirmEditLanguageSave.js:38
+msgid "Cancel Language Changes"
+msgstr "ยกเลิกการเปลี่ยนแปลงภาษา"
+
+#: src/js/languages/components/ConfirmEditLanguageSave.js:42
+#: src/js/languages/components/ConfirmNewLanguage.js:114
+msgid "Save"
+msgstr "บันทึก"
+
+#: src/js/languages/components/ConfirmNewLanguage.js:101
+msgid "Add new languages"
+msgstr "เพิ่มภาษาใหม่"
+
+#: src/js/languages/components/ConfirmNewLanguage.js:102
+msgid "Add new language"
+msgstr "เพิ่มภาษาใหม่"
+
+#: src/js/languages/components/ConfirmNewLanguage.js:105
+msgid "Never mind - don't add new languages"
+msgstr "ไม่เป็นไร - ไม่ต้องเพิ่มภาษาใหม่"
+
+#: src/js/languages/components/ConfirmNewLanguage.js:106
+msgid "Never mind - don't add new language"
+msgstr "ไม่เป็นไร - ไม่ต้องเพิ่มภาษาใหม่"
+
+#: src/js/languages/components/ConfirmNewLanguage.js:98
+msgid "Choose which content to translate into the new language"
+msgstr "เลือกเนื้อหาที่ต้องการแปลเป็นภาษาใหม่"
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:23
+msgid ""
+"Automatically translate all my posts and pages, plus new content as I "
+"create it."
+msgstr "แปลโพสต์และหน้าทั้งหมดของฉันโดยอัตโนมัติ รวมถึงเนื้อหาใหม่ขณะที่ฉันสร้าง."
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:24
+msgid "Only automatically translate new content."
+msgstr "แปลเฉพาะเนื้อหาใหม่โดยอัตโนมัติ."
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:26
+msgid "Which content do you want to translate into the new language?"
+msgstr "คุณต้องการแปลเนื้อหาใดเป็นภาษาใหม่?"
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:29
+msgid ""
+"When you unpause automatic translation, this content will be <a>translated "
+"automatically</a>."
+msgstr "เมื่อคุณยกเลิกการหยุดชั่วคราวการแปลอัตโนมัติ เนื้อหานี้จะได้รับการ<a>แปลโดยอัตโนมัติ</a>."
+
+#: src/js/languages/components/ConfirmNewLanguageDialog.js:62
+msgid ""
+"You can still translate existing content any time from the Translation "
+"Management Dashboard."
+msgstr "คุณยังสามารถแปลเนื้อหาที่มีอยู่ได้ทุกเมื่อจากแดชบอร์ดการจัดการการแปล."

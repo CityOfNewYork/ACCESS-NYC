@@ -120,7 +120,7 @@
             "Idioma adicionado"
          ],
          "The value \"%s\" already exists": [
-            "O valor \"%s\" já existe"
+            "O valor “%s” já existe"
          ],
          "Add a new language": [
             "Adicionar novo idioma"
@@ -138,7 +138,7 @@
             "Clique aqui"
          ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
-            "Formato errado. Ele só deve conter letras minúsculas e \"-\". P. ex.: \"fr\" , \"pt-br\", \"zh-hans\""
+            "O formato está incorreto. Pode conter apenas letras minúsculas e “-”. Por exemplo: “fr”, “pt-br”, “zh-hans”"
          ],
          "Language": [
             "Idioma"
@@ -162,7 +162,7 @@
             "Locale padrão"
          ],
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
-            "Formato errado. Ele só deve conter letras minúsculas e \"_\". P. ex.: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+            "O formato está incorreto. Pode conter apenas letras minúsculas e “_”. Por exemplo: “de”, “de_DE”, “zh_Hant_TW”"
          ],
          "hreflang": [
             "hreflang"
@@ -195,25 +195,25 @@
             "18 x 12 pixels"
          ],
          "Read more about ": [
-            "Leia mais sobre"
+            "Leia mais sobre "
          ],
          "The name of your language as it will appear on your site's language switcher.": [
-            "O nome do idioma na forma em que ele deve aparecer no seletor de idioma do seu site."
+            "O nome do seu idioma como aparecerá no seletor de idiomas do seu site."
          ],
          "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
-            "Um valor exclusivo que identifique o idioma no banco de dados e no URL. Depois de salvo, o código do idioma não pode ser alterado."
+            "Um valor único que identifica o idioma no banco de dados e na URL. Uma vez salvo, o código do idioma não pode ser alterado."
          ],
          "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
-            "Se seu idioma personalizado for semelhante a um idioma existente, você pode usar o corretor ortográfico e tradução automática do idioma existente. Por exemplo, se seu idioma personalizado for alemão da Suíça, você pode mapear o alemão como idioma a utilizar para correção ortográfica e tradução automática. Se você não mapear seu idioma personalizado para um idioma existente, os recursos de correção ortográfica e tradução automática ficarão indisponíveis naquele idioma."
+            "Se o seu idioma personalizado for semelhante a um idioma existente, você pode usar a verificação ortográfica e a tradução automática do idioma existente. Por exemplo, se o seu idioma personalizado for o alemão suíço, você pode mapear para o alemão como o idioma a ser usado para verificação ortográfica e tradução automática. Se você não mapear seu idioma personalizado para um idioma existente, os recursos de verificação ortográfica e tradução automática não estarão disponíveis nesse idioma."
          ],
          "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
-            "O valor que o WPML verifica ao carregar traduções de arquivos MO e PO. A localidade padrão está inclusa nos nomes de arquivo em sua pasta /wp-content/languages/ da configuração do WordPress."
+            "O valor que o WPML verifica ao carregar traduções de arquivos MO e PO. O local padrão está incluído nos nomes dos arquivos em sua pasta /wp-content/languages/ na sua configuração do WordPress."
          ],
          "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
-            "O Google utiliza o atributo hreflang para direcionar os usuários a sites no idioma e localização relevantes para eles. Exemplos:"
+            "O Google usa o atributo hreflang para direcionar os usuários para sites em seu idioma e localização relevantes. Exemplos:"
          ],
          "All English-speaking users: en": [
-            "Todos os usuários falantes de inglês: en"
+            "Todos os usuários que falam inglês: en"
          ],
          "English for UK users: en-gb": [
             "Inglês para usuários do Reino Unido: en-gb"
@@ -222,10 +222,13 @@
             "Inglês para usuários dos EUA: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
-            "Determina se os URLs nesse idioma são codificados ou usam caracteres ASCII (se não tiver certeza, escolha \"Não\")."
+            "Determina se as URLs neste idioma são codificadas ou usam caracteres ASCII (se não tiver certeza, deixe como “Não”)."
          ],
          "adding a custom language": [
-            "adição de um idioma personalizado"
+            "adicionando um idioma personalizado"
+         ],
+         "What are the languages of your site?": [
+            "Quais são os idiomas do seu site?"
          ],
          "Default language": [
             "Idioma padrão"
@@ -240,13 +243,10 @@
             "Para quais idiomas você deseja traduzir seu site?"
          ],
          "If you cannot find languages that you need in the list": [
-            "Se você não conseguir encontrar os idiomas de que precisa na lista,"
+            "Se você não conseguir encontrar os idiomas necessários na lista"
          ],
          "create a custom language": [
-            "crie um idioma personalizado"
-         ],
-         "What are the languages of your site?": [
-            "Quais são os idiomas do seu site?"
+            "criar um idioma personalizado"
          ]
       }
    }

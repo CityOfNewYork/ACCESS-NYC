@@ -14,7 +14,7 @@ class WPML_TF_Backend_Scripts {
 	 */
 	public function enqueue() {
 		$script = ICL_PLUGIN_URL . '/res/js/translation-feedback/wpml-tf-backend-script.js';
-		wp_register_script( self::HANDLE, $script, array( 'jquery', 'wp-util' ), ICL_SITEPRESS_VERSION );
+		wp_register_script( self::HANDLE, $script, array( 'jquery', 'wp-util' ), ICL_SITEPRESS_SCRIPT_VERSION );
 		wp_enqueue_script( self::HANDLE );
 	}
 }

@@ -1,0 +1,58 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Clean up the String Translation table by removing untranslated strings by domain.": [
+            "Καθαρισμός πίνακα μεταφράσεων."
+         ],
+         "Remove strings by domain": [
+            "Αφαίρεση ανά τομέα"
+         ],
+         "Remove strings": [
+            "Αφαίρεση συμβολοσειρών"
+         ],
+         "Cancel": [
+            "Ακύρωση"
+         ],
+         "Remove": [
+            "Αφαίρεση"
+         ],
+         "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
+            "Επιλέξτε τομείς προς αφαίρεση."
+         ],
+         "Search": [
+            "Αναζήτηση"
+         ],
+         "Removing strings from String Translation table": [
+            "Αφαίρεση από πίνακα μεταφράσεων"
+         ],
+         "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
+            "Επανεισαγωγή απαιτεί επανάληψη."
+         ],
+         "Read more about ": [
+            "Περαιτέρω πληροφορίες"
+         ],
+         "scanning your site for strings and registering them as translatable.": [
+            "σάρωση και καταχώριση μεταφράσεων."
+         ],
+         "Successfully removed strings": [
+            "Επιτυχής αφαίρεση"
+         ],
+         "OK, Great": [
+            "Εντάξει"
+         ],
+         "Domain": [
+            "Τομέας"
+         ],
+         "Strings count": [
+            "Πλήθος συμβολοσειρών"
+         ],
+         "Translated strings": [
+            "Μεταφρασμένες συμβολοσειρές"
+         ]
+      }
+   }
+}

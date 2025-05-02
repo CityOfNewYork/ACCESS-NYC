@@ -5,6 +5,7 @@ namespace WPML\Utilities;
 use function WPML\Container\make;
 
 class Lock implements ILock {
+	private static $active_locks = [];
 
 	/** @var \wpdb  */
 	private $wpdb;
@@ -43,30 +44,44 @@ class Lock implements ILock {
 			$release_timeout = HOUR_IN_SECONDS;
 		}
 
+		if ( isset( self::$active_locks[ $this->name ] ) ) {
+			// The lock for this type was already determinated.
+			// No matter if this request has the valid lock or not,
+			// only one task is allowed per type & request.
+			// REPLACE THIS WITH: return self::$active_locks[ $this->name ];
+			// as part of wpmldev-4141.
+			return false;
+		}
+
 		// Try to lock.
 		$lock_result = $this->wpdb->query( $this->wpdb->prepare( "INSERT IGNORE INTO {$this->wpdb->options} ( `option_name`, `option_value`, `autoload` ) VALUES (%s, %s, 'no') /* LOCK */", $this->name, time() ) );
 
 		if ( ! $lock_result ) {
 			$lock_result = get_option( $this->name );
 
-			// If a lock couldn't be created, and there isn't a lock, bail.
-			if ( ! $lock_result ) {
-				return false;
-			}
+			// No lock could be created and found
+			// OR the lock found is still valid (used by another request).
+			// => No lock for this request.
 
-			// Check to see if the lock is still valid. If it is, bail.
-			if ( $lock_result > ( time() - $release_timeout ) ) {
+			if ( ! $this->isValidLockTimeout($lock_result) ) {
+				// avoid to be locked out if the lock is empty in case of key corruption (db error/corruption)
+				// and set it as expired
+				$lock_result = 1;
+			}
+			if ( ! $lock_result || $lock_result > ( time() - $release_timeout ) ) {
+				self::$active_locks[ $this->name ] = false;
 				return false;
 			}
 
 			// There must exist an expired lock, clear it and re-gain it.
 			$this->release();
-
 			return $this->create( $release_timeout );
 		}
 
 		// Update the lock, as by this point we've definitely got a lock, just need to fire the actions.
-		update_option( $this->name, time() );
+		update_option( $this->name, time(), false );
+
+		self::$active_locks[ $this->name ] = true;
 
 		return true;
 	}
@@ -77,6 +92,20 @@ class Lock implements ILock {
 	 * @return bool True if the lock was successfully released. False on failure.
 	 */
 	public function release() {
+		unset( self::$active_locks[ $this->name ] );
 		return delete_option( $this->name );
 	}
+
+	/**
+	 * Check if the lock result is a valid timeout.
+	 * @param mixed $lock_result
+	 * @return bool
+	 */
+	private function isValidLockTimeout( $lock_result ) {
+
+		return is_numeric( $lock_result ) && $lock_result > 0;
+
+	}
+
+
 }

@@ -12,6 +12,41 @@ if ( ! class_exists( 'ACF_Ajax_Query_Users' ) ) :
 		var $action = 'acf/ajax/query_users';
 
 		/**
+		 * Verifies the request.
+		 *
+		 * @since 6.3.2
+		 *
+		 * @param array $request The request args.
+		 * @return  (bool|WP_Error) True on success, WP_Error on fail.
+		 */
+		public function verify_request( $request ) {
+			if ( empty( $request['nonce'] ) || empty( $request['field_key'] ) ) {
+				return new WP_Error( 'acf_invalid_args', __( 'Invalid request args.', 'acf' ), array( 'status' => 404 ) );
+			}
+
+			$nonce        = $request['nonce'];
+			$action       = $request['field_key'];
+			$field_action = true;
+
+			if ( isset( $request['conditional_logic'] ) && true === (bool) $request['conditional_logic'] ) {
+				if ( ! acf_current_user_can_admin() ) {
+					return new WP_Error( 'acf_invalid_permissions', __( 'Sorry, you do not have permission to do that.', 'acf' ) );
+				}
+
+				// Use the standard ACF admin nonce.
+				$nonce        = '';
+				$action       = '';
+				$field_action = false;
+			}
+
+			if ( ! acf_verify_ajax( $nonce, $action, $field_action ) ) {
+				return new WP_Error( 'acf_invalid_nonce', __( 'Invalid nonce.', 'acf' ), array( 'status' => 404 ) );
+			}
+
+			return true;
+		}
+
+		/**
 		 * init_request
 		 *
 		 * Called at the beginning of a request to setup properties.
@@ -141,12 +176,13 @@ if ( ! class_exists( 'ACF_Ajax_Query_Users' ) ) :
 				// Determine if more results exist.
 				// As this query does not return grouped results, the calculation can be exact (">").
 				$this->more = ( $total_users > count( $users ) + $args['offset'] );
-
 				// Otherwise, group results via role.
 			} else {
 
 				// Unset args that will interfer with query results.
 				unset( $args['role__in'], $args['role__not_in'] );
+
+				$args['search'] = $this->search ? $this->search : '';
 
 				// Loop over each role.
 				foreach ( $roles as $role => $role_label ) {

@@ -1,5 +1,7 @@
 <?php
 
+use WPML\Core\WP\App\Resources;
+
 /**
  * @author OnTheGo Systems
  */
@@ -231,8 +233,8 @@ class WPML_Notices {
 			wp_enqueue_script(
 				'block-editor-notices',
 				ICL_PLUGIN_URL . '/dist/js/blockEditorNotices/app.js',
-				array( 'wp-edit-post' ),
-				ICL_SITEPRESS_VERSION,
+				array( 'wp-edit-post', Resources::vendorAsDependency() ),
+				ICL_SITEPRESS_SCRIPT_VERSION,
 				true
 			);
 		}
@@ -242,7 +244,7 @@ class WPML_Notices {
 				'otgs-notices',
 				ICL_PLUGIN_URL . '/res/js/otgs-notices.js',
 				array( 'underscore' ),
-				ICL_SITEPRESS_VERSION,
+				ICL_SITEPRESS_SCRIPT_VERSION,
 				true
 			);
 

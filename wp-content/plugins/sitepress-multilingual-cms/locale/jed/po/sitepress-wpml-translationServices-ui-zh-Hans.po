@@ -1,0 +1,62 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/translationServices/components/AuthorizeModal.js:22
+msgid "Connect this site to your %s account"
+msgstr "将此网站连接到您的 %s 账户"
+
+#: src/js/translationServices/components/AuthorizeModal.js:45
+msgid "Error"
+msgstr "错误"
+
+#: src/js/translationServices/components/AuthorizeModal.js:57
+msgid "« Use a different Translation Service"
+msgstr "« 使用其他翻译服务"
+
+#: src/js/translationServices/components/AuthorizeModal.js:62
+msgid "Authenticate"
+msgstr "验证"
+
+#: src/js/translationServices/components/Connect.js:22
+msgid ""
+"Visit <link_to_service /> to request an API Token. This token allows WPML "
+"to connect to <service_name /> to send and receive jobs."
+msgstr "访问 <link_to_service /> 以请求 API 令牌。此令牌允许 WPML 连接到 <service_name /> 以发送和接收任务。"
+
+#: src/js/translationServices/components/SearchForm.js:13
+msgid "Search"
+msgstr "搜索"
+
+#: src/js/translationServices/components/Sections.js:16
+msgid "Settings"
+msgstr "设置"
+
+#: src/js/translationServices/components/Sections.js:42
+msgid ""
+"It’s not currently possible to connect a translation service when WPML is "
+"set to translate your site’s content automatically. To use a translation "
+"service, please change your translation mode on the <LinkToSettingsPage /> "
+"page."
+msgstr "当 WPML 设置为自动翻译您网站的内容时，目前无法连接翻译服务。要使用翻译服务，请在 <LinkToSettingsPage /> 页面上更改您的翻译模式。"
+
+#: src/js/translationServices/components/ServicesList.js:41
+msgid "Documentation"
+msgstr "文档"
+
+#: src/js/translationServices/components/ServicesList.js:57
+msgid "Activate"
+msgstr "激活"
+
+#: src/js/translationServices/components/ServicesList.js:69
+msgid "Name"
+msgstr "名称"
+
+#: src/js/translationServices/components/ServicesList.js:74
+msgid "Description"
+msgstr "描述"
+
+#: src/js/translationServices/components/ServicesList.js:81
+msgid "Ranking"
+msgstr "排名"

@@ -9,7 +9,7 @@ class WPML_PB_Handle_Post_Body implements IWPML_Backend_Action, IWPML_Frontend_A
 	}
 
 	public function add_hooks() {
-		add_filter( 'wpml_pb_should_body_be_translated', array( $this, 'should_translate' ), 10, 3 );
+		add_filter( 'wpml_pb_should_body_be_translated', array( $this, 'should_translate' ), 10, 2 );
 		add_action( 'wpml_pb_finished_adding_string_translations', array( $this, 'copy' ), 10, 3 );
 	}
 

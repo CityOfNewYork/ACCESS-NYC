@@ -57,43 +57,6 @@ class Download extends Base {
 			return [];
 		}
 
-		$jobs = make( Process::class )->run( $request->get_param( 'jobs' ) );
-
-		return $this->getJobs( $jobs, $request->get_param( 'returnUrl' ) )->all();
-	}
-
-	/**
-	 * @param Collection $processedJobs
-	 * @param string $returnUrl
-	 *
-	 * @return Collection
-	 */
-	public static function getJobs( Collection $processedJobs, $returnUrl ) {
-		$getLink = Logic::ifElse(
-			ReviewStatus::doesJobNeedReview(),
-			Fns::converge( PreviewLink::getWithSpecifiedReturnUrl( $returnUrl ), [ Obj::prop( 'translatedPostId' ), Obj::prop( 'jobId' ) ] ),
-			pipe( Obj::prop( 'jobId' ), Jobs::getEditUrl( $returnUrl ) )
-		);
-
-		$getLabel = Logic::ifElse(
-			ReviewStatus::doesJobNeedReview(),
-			StatusIcons::getReviewTitle( 'language_code' ),
-			StatusIcons::getEditTitle( 'language_code' )
-		);
-
-		return $processedJobs->pluck( 'jobId' )
-		                     ->map( Jobs::get() )
-		                     ->map( Obj::addProp( 'translatedPostId', Jobs::getTranslatedPostId() ) )
-		                     ->map( Obj::renameProp( 'job_id', 'jobId' ) )
-		                     ->map( Obj::renameProp( 'editor_job_id', 'ateJobId' ) )
-		                     ->map( Obj::addProp( 'viewLink', $getLink ) )
-		                     ->map( Obj::addProp( 'label', $getLabel ) )
-		                     ->map( Obj::pick( [ 'jobId', 'viewLink', 'automatic', 'status', 'label', 'review_status', 'ateJobId' ] ) )
-		                     ->map( Obj::evolve( [
-			                     'jobId'     => Cast::toInt(),
-			                     'automatic' => Cast::toInt(),
-			                     'status'    => Cast::toInt(),
-			                     'ateJobId'  => Cast::toInt(),
-		                     ] ) );
+		return make( Process::class )->run( $request->get_param( 'jobs' ) )->all();
 	}
 }

@@ -53,15 +53,8 @@ class WPML_TM_Jobs_Summary_Report_Process_Factory {
 	private function get_summary_report( $frequency ) {
 		global $sitepress, $wpdb;
 
-		$word_count_records_factory = new WPML_TM_Word_Count_Records_Factory();
-		$word_count_records         = $word_count_records_factory->create();
-		$single_process_factory     = new WPML_TM_Word_Count_Single_Process_Factory();
-		$single_process             = $single_process_factory->create();
-
 		return new WPML_TM_Jobs_Summary_Report(
 			new WPML_Translation_Jobs_Collection( $wpdb, array() ),
-			new WPML_TM_String( false, $word_count_records, $single_process ),
-			new WPML_TM_Post( false, $word_count_records, $single_process ),
 			$frequency,
 			new WPML_Translation_Element_Factory( $sitepress )
 		);

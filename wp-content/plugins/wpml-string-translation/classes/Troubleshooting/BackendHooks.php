@@ -43,7 +43,7 @@ class BackendHooks implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 
 		$this->displayLinkButton(
 			admin_url( sprintf( 'admin.php?page=%s', WPML_ST_FOLDER . '/menu/string-translation.php' ) ) . '&amp;troubleshooting=1',
-			esc_attr__( 'Clear invalid strings', 'wpml-string-translation' )
+			esc_attr__( 'Check for string issues', 'wpml-string-translation' )
 		);
 
 		?>

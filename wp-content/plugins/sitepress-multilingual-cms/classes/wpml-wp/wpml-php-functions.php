@@ -98,7 +98,7 @@ class WPML_PHP_Functions {
 	 * @return mixed
 	 */
 	public function version_compare( $version1, $version2, $operator = null ) {
-		return version_compare( $version1, $version2, $operator );
+		return version_compare( $version1 ?: '0.0.0', $version2 ?: '0.0.0', $operator );
 	}
 
 	/**

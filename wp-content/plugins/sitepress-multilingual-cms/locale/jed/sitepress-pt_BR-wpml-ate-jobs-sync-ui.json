@@ -8,6 +8,9 @@
          "Sending for translation": [
             "Enviando para tradução"
          ],
+         "This content is being automatically translated. If you want to do something different with it cancel translation jobs first.": [
+            "Este conteúdo está sendo traduzido automaticamente. Se você deseja fazer algo diferente, cancele os trabalhos de tradução primeiro."
+         ],
          "Connecting to WPML’s Advanced Translation Editor": [
             "Conexão ao WPML Advanced Translation Editor"
          ],
@@ -50,8 +53,15 @@
          "Translate Everything Automatically is paused": [
             "Traduzir tudo automaticamente está pausado"
          ],
-         "Translate Everything Automatically stopped": [
-            "Traduzir tudo automaticamente parado"
+         "Translate Everything Automatically is stopped": [
+            "Traduzir Tudo Automaticamente está parado"
+         ],
+         "Out of Credits for Automatic Translation": [
+            "Sem Créditos para Tradução Automática"
+         ],
+         "You have <b>1</b> prepaid translation credit in your wpml.org account. Assign these credits to your site to start using automatic translation": [
+            "Você tem <b>1</b> crédito de tradução pré-pago em sua conta wpml.org. Atribua esses créditos ao seu site para começar a usar a tradução automática",
+            "Você tem <b>%s</b> créditos de tradução pré-pagos em sua conta wpml.org. Atribua esses créditos ao seu site para começar a usar a tradução automática"
          ],
          "Preparing content for translation": [
             "Preparando conteúdo para tradução"
@@ -112,35 +122,20 @@
          "Pay-as-you-go credits used": [
             "Créditos pré-pagos usados"
          ],
-         "Resume": [
-            "Retomar"
-         ],
          "Stop": [
             "Pare"
          ],
          "Fix it": [
             "Corrigir"
          ],
-         "Pause": [
-            "Pause"
+         "Assign credits now": [
+            "Atribuir créditos agora"
          ],
-         "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
-            "Ocorreu um erro ao tentar pausar sua tradução automática. Tente novamente mais tarde ou entre em contato com nosso suporte."
+         "Resume": [
+            "Retomar"
          ],
-         "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
-            "Ocorreu um erro ao tentar retomar sua tradução automática. Tente novamente mais tarde ou entre em contato com nosso suporte."
-         ],
-         "Error": [
-            "Erro"
-         ],
-         "Draft — Pending review": [
-            "Rascunho — Revisão pendente"
-         ],
-         "Complete": [
-            "Concluído"
-         ],
-         "Insufficient funds": [
-            "Recursos insuficientes"
+         "Refreshing translation status": [
+            "Atualizando status de tradução"
          ],
          "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
             "Leia mais sobre como traduzir seu conteúdo no <a>Guia de Introdução</a>"
@@ -168,76 +163,6 @@
          ],
          "The number of translations": [
             "O número de traduções"
-         ],
-         "Translate Everything Automatically - running": [
-            "Traduzir tudo automaticamente - em execução"
-         ],
-         "Translate Everything Automatically - active": [
-            "Traduzir tudo automaticamente - ativo"
-         ],
-         "Pause automatic translation": [
-            "Pausar tradução automática"
-         ],
-         "WPML will finish in-progress translations but won't translate anything new.": [
-            "O WPML finalizará as traduções em andamento, mas não traduzirá nada novo."
-         ],
-         "Translate Everything Automatically - paused": [
-            "Traduzir tudo automaticamente - pausado"
-         ],
-         "Start automatic translation": [
-            "Iniciar tradução automática"
-         ],
-         "This uses %scredits%s to translate your existing content and anything you add or change later.": [
-            "Isso usa %scréditos%s para traduzir seu conteúdo existente e qualquer coisa que você adicionar ou alterar posteriormente."
-         ],
-         "Start translating everything automatically": [
-            "Comece a traduzir tudo automaticamente"
-         ],
-         "WPML will translate any new content you create into %1$s.": [
-            "O WPML traduzirá qualquer novo conteúdo que você criar para %1$s."
-         ],
-         "WPML will translate all new future content to %1$s and keep translations up to date when you make changes.": [
-            "O WPML traduzirá todo o novo conteúdo futuro para %1$s e manterá as traduções atualizadas quando você fizer alterações."
-         ],
-         "Do you want to translate existing content, too?": [
-            "Você também deseja traduzir o conteúdo existente?"
-         ],
-         "Yes, translate all new and existing content": [
-            "Sim, traduzir todo o conteúdo novo e existente"
-         ],
-         "No, only translate new content": [
-            "Não, somente traduzir novos conteúdos"
-         ],
-         "You can translate existing content from the Translation Management Dashboard": [
-            "Você pode traduzir o conteúdo existente no Painel de Gerenciamento de Tradução"
-         ],
-         "Connection Error. Please wait a minute and reload this page. If the problem continues, please contact WPML support.": [
-            "Erro de conexão. Aguarde um minuto e recarregue esta página. Se o problema persistir, entre em contato com o suporte do WPML."
-         ],
-         "Automatic translation uses credits. %1$sRead more about automatic translation credits%2$s": [
-            "A tradução automática usa créditos. %1$sLeia mais sobre créditos de tradução automática%2$s"
-         ],
-         "You need credits to start translating everything.": [
-            "Você precisa de créditos para começar a traduzir tudo."
-         ],
-         "Cancel": [
-            "Cancelar"
-         ],
-         "Start translating everything": [
-            "Comece a traduzir tudo"
-         ],
-         "%1$d language": [
-            "%1$d idioma",
-            "%1$d idiomas"
-         ],
-         "Please wait...": [
-            "Por favor, aguarde..."
-         ],
-         "All new future content": [
-            "Todo o novo conteúdo futuro"
-         ],
-         "Translate Everything Automatically - stopped": [
-            "Traduzir tudo automaticamente - parado"
          ]
       }
    }

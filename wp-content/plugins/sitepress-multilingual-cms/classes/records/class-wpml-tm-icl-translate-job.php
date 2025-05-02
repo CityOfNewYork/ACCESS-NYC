@@ -6,6 +6,12 @@ class WPML_TM_ICL_Translate_Job {
 	private $job_id = 0;
 	/** @var WPML_TM_Records $tm_records */
 	private $tm_records;
+
+	private $rid;
+	private $editor;
+	private $completed_date;
+	private $translated;
+
 	/**
 	 * WPML_TM_ICL_Translation_Status constructor.
 	 *
@@ -48,6 +54,7 @@ class WPML_TM_ICL_Translate_Job {
 	 */
 	public function update( $args ) {
 		$wpdb = $this->tm_records->wpdb();
+
 		$wpdb->update(
 			$wpdb->prefix . $this->table,
 			$args,
@@ -55,6 +62,35 @@ class WPML_TM_ICL_Translate_Job {
 		);
 
 		return $this;
+	}
+
+	public function complete() {
+		$completed_date = $this->completed_date();
+		if ( $this->translated() && $completed_date ) {
+			return;
+		}
+
+		// Make sure the complete date is not updated for retranslations of
+		// the same job (glossary updates).
+		$completed_date = $completed_date
+			? $completed_date
+			: date( 'Y-m-d H:i:s' );
+
+		$wpdb = $this->tm_records->wpdb();
+
+		$wpdb->query(
+			$wpdb->prepare(
+				"UPDATE {$wpdb->prefix}{$this->table}
+				SET completed_date = %s,
+					translated = 1
+				WHERE job_id = %d",
+				$completed_date,
+				$this->job_id
+			)
+		);
+
+		$this->completed_date = $completed_date;
+		$this->translated     = 1;
 	}
 
 	/**
@@ -75,23 +111,52 @@ class WPML_TM_ICL_Translate_Job {
 	}
 
 	public function rid() {
-		return $this->get_job_column( 'rid' );
+		if ( null === $this->rid ) {
+			$this->load_fields();
+		}
+
+		return $this->rid;
 	}
 
 	public function editor() {
-		return $this->get_job_column( 'editor' );
-	}
-
-	private function get_job_column( $column ) {
-		if ( ! trim( $column ) ) {
-			return null;
+		if ( null === $this->editor ) {
+			$this->load_fields();
 		}
 
+		return $this->editor;
+	}
+
+	public function completed_date() {
+		if ( null === $this->completed_date ) {
+			$this->load_fields();
+		}
+
+		return $this->completed_date;
+	}
+
+	public function translated() {
+		if ( null === $this->translated ) {
+			$this->load_fields();
+		}
+
+		return $this->translated;
+	}
+
+	private function load_fields() {
 		$wpdb = $this->tm_records->wpdb();
 
-		$query   = ' SELECT ' . $column . " FROM {$wpdb->prefix}{$this->table} WHERE job_id = %d LIMIT 1";
-		$prepare = $wpdb->prepare( $query, $this->job_id );
+		$fields = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT `rid`, `editor`, `translated`, `completed_date`
+				FROM {$wpdb->prefix}{$this->table}
+				WHERE job_id = %d LIMIT 1",
+				$this->job_id
+			)
+		);
 
-		return $wpdb->get_var( $prepare );
+		$this->rid            = $fields->rid;
+		$this->editor         = $fields->editor;
+		$this->translated     = $fields->translated;
+		$this->completed_date = $fields->completed_date;
 	}
 }

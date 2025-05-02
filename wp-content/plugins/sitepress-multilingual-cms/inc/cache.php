@@ -128,7 +128,7 @@ if ( ! function_exists( 'icl_cache_set' ) ) {
 					unset( $icl_cache[ $key ] );
 				}
 
-				update_option( '_icl_cache', $icl_cache, 'no' );
+				update_option( '_icl_cache', $icl_cache );
 			}
 		}
 	}
@@ -174,7 +174,7 @@ if ( ! function_exists( 'icl_cache_clear' ) ) {
 							}
 						}
 					}
-					update_option( '_icl_cache', $icl_cache, 'no' );
+					update_option( '_icl_cache', $icl_cache );
 				}
 			}
 		}

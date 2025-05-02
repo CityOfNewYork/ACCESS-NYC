@@ -8,14 +8,23 @@
          "WPML Translation Editor": [
             "WPML Editor für Übersetzungen"
          ],
-         "Use only when you want to translate content from one of the few plugins that are not compatible with WPML’s translation editor or  if you would like to create different designs for the same page in different languages.": [
-            "Verwenden Sie diese Option nur, wenn Sie Inhalte aus einem der wenigen Plugins übersetzen möchten, die nicht mit dem Übersetzungseditor von WPML kompatibel sind, oder wenn Sie verschiedene Designs für dieselbe Seite in verschiedenen Sprachen erstellen möchten."
-         ],
          "WordPress Editor": [
             "WordPress Editor"
          ],
-         "Use the editor to translate:": [
-            "Verwenden Sie den Editor zum Übersetzen von:"
+         "Translate with the WordPress Editor when you want to create different designs for translations, or if you're translating content that's incompatible with WPML's Translation Editor.": [
+            "Übersetzen Sie mit dem WordPress-Editor, wenn Sie unterschiedliche Designs für Übersetzungen erstellen möchten oder wenn Sie Inhalte übersetzen, die nicht mit WPMLs Übersetzungs-Editor kompatibel sind."
+         ],
+         "What do you want to translate with the WordPress Editor?": [
+            "Was möchten Sie mit dem WordPress-Editor übersetzen?"
+         ],
+         "I understand, switch to the WordPress Editor": [
+            "Ich verstehe, zum WordPress-Editor wechseln"
+         ],
+         "What do you want to translate with WPML Translation Editor?": [
+            "Was möchten Sie mit dem WPML-Übersetzungs-Editor übersetzen?"
+         ],
+         "I understand, switch to WPML's Translation Editor": [
+            "Ich verstehe, zum WPML-Übersetzungs-Editor wechseln"
          ],
          "Apply": [
             "Übernehmen"
@@ -23,14 +32,29 @@
          "Cancel": [
             "Abbrechen"
          ],
-         "This %s": [
-            "Diese/n/s %s"
+         "Only this %s": [
+            "Nur dieses %s"
+         ],
+         "Recommended": [
+            "Empfohlen"
          ],
          "All %s": [
             "Alle %s"
          ],
          "All the site's content": [
             "Den gesamten Inhalt der Website"
+         ],
+         "Are you sure?": [
+            "Sind Sie sicher?"
+         ],
+         "The WordPress Editor doesn't offer Automatic Translation, Translation Memory and other features that make translation easier.": [
+            "Der WordPress-Editor bietet keine automatische Übersetzung, kein Übersetzungsspeicher und andere Funktionen, die das Übersetzen erleichtern."
+         ],
+         "And, if you switch back to WPML's Translation Editor, you will need to translate from scratch what you translated with the WordPress editor.": [
+            "Und wenn Sie zum WPML-Übersetzungs-Editor zurückwechseln, müssen Sie das, was Sie mit dem WordPress-Editor übersetzt haben, von Grund auf neu übersetzen."
+         ],
+         "When you update content that you previously translated with the WordPress Editor, you will need to translate from scratch.": [
+            "Wenn Sie Inhalte aktualisieren, die Sie zuvor mit dem WordPress-Editor übersetzt haben, müssen Sie von Grund auf neu übersetzen."
          ]
       }
    }

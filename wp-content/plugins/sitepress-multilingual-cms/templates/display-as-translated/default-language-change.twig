@@ -1,7 +1,7 @@
 {% if lang_has_changed %}
     <div class="notice notice-info inline is-dismissible otgs-is-dismissible wpml-default-lang-after-message">
         <p>
-            {{ after_message }} <a class="wpml-external-link" target="_blank" href="{{ help_link }}">{{ help_text }}</a>
+            {{ after_message }} <a class="wpml-external-link" target="_blank" href="{{ after_help_link }}">{{ after_help_text }}</a>.
             <span class="notice-dismiss" ></span>
         </p>
     </div>
@@ -11,7 +11,7 @@
     <i class="otgs-ico-warning"></i>
     <div>
         <p>
-            {{ before_message }} <a class="wpml-external-link" target="_blank" href="{{ help_link }}">{{ help_text }}</a>
+            {{ before_message }} <a class="wpml-external-link" target="_blank" href="{{ before_help_link }}">{{ before_help_text }}</a>.
         </p>
         <p>
             <label class="wpml-display-block"><input type="checkbox" class="display-as-translated-changing-default-language"> {{ got_it }}</label>

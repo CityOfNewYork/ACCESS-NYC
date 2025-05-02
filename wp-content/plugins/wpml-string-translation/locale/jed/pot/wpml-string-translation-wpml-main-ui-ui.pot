@@ -15,43 +15,47 @@ msgstr ""
 msgid "Tab"
 msgstr ""
 
-#: src/js/main-ui/components/EditTranslationPopup.js:102
+#: src/js/main-ui/components/EditTranslationPopup.js:104
 msgid "Translation to:"
 msgstr ""
 
-#: src/js/main-ui/components/EditTranslationPopup.js:121
+#: src/js/main-ui/components/EditTranslationPopup.js:123
 msgid "Copy from original"
 msgstr ""
 
-#: src/js/main-ui/components/EditTranslationPopup.js:136
+#: src/js/main-ui/components/EditTranslationPopup.js:138
 msgid "Use Shift+Enter to add a new line."
 msgstr ""
 
-#: src/js/main-ui/components/EditTranslationPopup.js:95
+#: src/js/main-ui/components/EditTranslationPopup.js:97
 msgid "Original:"
 msgstr ""
 
-#: src/js/main-ui/components/LanguagesCell.js:166
+#: src/js/main-ui/components/LanguagesCell.js:169
 msgid "Add %s translation"
 msgstr ""
 
-#: src/js/main-ui/components/LanguagesCell.js:185
+#: src/js/main-ui/components/LanguagesCell.js:188
 msgid "Edit %s translation"
 msgstr ""
 
-#: src/js/main-ui/components/LanguagesCell.js:61
+#: src/js/main-ui/components/LanguagesCell.js:198
+msgid "Add %s translation (the string appears on the site and is not translated)"
+msgstr ""
+
+#: src/js/main-ui/components/LanguagesCell.js:63
 msgid "Original language %s"
 msgstr ""
 
-#: src/js/main-ui/components/LanguagesCell.js:68
+#: src/js/main-ui/components/LanguagesCell.js:70
 msgid "Waiting for translator to %s"
 msgstr ""
 
-#: src/js/main-ui/components/LanguagesCell.js:75
+#: src/js/main-ui/components/LanguagesCell.js:77
 msgid "Translation in progress to %s"
 msgstr ""
 
-#: src/js/main-ui/components/LanguagesCell.js:82
+#: src/js/main-ui/components/LanguagesCell.js:84
 msgid "In basket for translation to %s"
 msgstr ""
 

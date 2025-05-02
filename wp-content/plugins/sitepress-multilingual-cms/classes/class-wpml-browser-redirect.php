@@ -27,7 +27,7 @@ class WPML_Browser_Redirect {
 	}
 
 	public function enqueue_scripts() {
-		wp_register_script( 'wpml-browser-redirect', ICL_PLUGIN_URL . '/dist/js/browser-redirect/app.js', array(), ICL_SITEPRESS_VERSION );
+		wp_register_script( 'wpml-browser-redirect', ICL_PLUGIN_URL . '/dist/js/browser-redirect/app.js', array(), ICL_SITEPRESS_SCRIPT_VERSION );
 
 		$args['skip_missing'] = intval( $this->sitepress->get_setting( 'automatic_redirect' ) == 1 );
 

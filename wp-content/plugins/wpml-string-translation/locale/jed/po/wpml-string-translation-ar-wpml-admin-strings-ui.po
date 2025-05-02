@@ -1,0 +1,103 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/admin-strings/texts.js:10
+msgid "Not included in String Translation"
+msgstr "غير مدرجة في ترجمة السلسلة"
+
+#: src/js/admin-strings/texts.js:11
+msgid "Registered and locked"
+msgstr "مسجلة ومقفلة"
+
+#: src/js/admin-strings/texts.js:13
+msgid "Text"
+msgstr "نص"
+
+#: src/js/admin-strings/texts.js:14
+msgid "Numeric"
+msgstr "رقمي"
+
+#: src/js/admin-strings/texts.js:15
+msgid "All Types"
+msgstr "كل الانواع"
+
+#: src/js/admin-strings/texts.js:17
+msgid "Search"
+msgstr "يبحث"
+
+#: src/js/admin-strings/texts.js:19
+msgid "Communication error"
+msgstr "خطأ في الاتصال"
+
+#: src/js/admin-strings/texts.js:20
+msgid "The action failed."
+msgstr "فشل الإجراء."
+
+#: src/js/admin-strings/texts.js:22
+msgid "All (%d)"
+msgstr "الجميع (%d)"
+
+#: src/js/admin-strings/texts.js:23
+msgid "Included in String Translation (%d)"
+msgstr "مضمن في ترجمة السلسلة (%d)"
+
+#: src/js/admin-strings/texts.js:24
+msgid "Not included in String Translation (%d)"
+msgstr "غير مضمن في ترجمة السلسلة (%d)"
+
+#: src/js/admin-strings/texts.js:26
+msgid "This setting is locked by a WPML configuration file."
+msgstr "يتم قفل هذا الإعداد بواسطة ملف تكوين WPML."
+
+#: src/js/admin-strings/texts.js:28
+msgid "Option"
+msgstr "خيار"
+
+#: src/js/admin-strings/texts.js:29
+msgid "Value"
+msgstr "قيمة"
+
+#: src/js/admin-strings/texts.js:30
+msgid "Type"
+msgstr "يكتب"
+
+#: src/js/admin-strings/texts.js:31
+msgid "State"
+msgstr "ولاية"
+
+#: src/js/admin-strings/texts.js:34
+msgid "Export as a WPML configuration file"
+msgstr "قم بالتصدير كملف تكوين WPML"
+
+#: src/js/admin-strings/texts.js:35
+msgid "Cancel"
+msgstr "يلغي"
+
+#: src/js/admin-strings/texts.js:36
+msgid "Save the following to a wpml-config.xml in the root of your theme or plugin."
+msgstr "احفظ ما يلي في ملف wpml-config.xml في جذر القالب أو المكون الإضافي الخاص بك."
+
+#: src/js/admin-strings/texts.js:38
+msgid "No options found."
+msgstr "لم يتم العثور على خيارات."
+
+#: src/js/admin-strings/texts.js:39
+msgid ""
+"Make sure you saved your theme options at least once. Some themes only add "
+"these to the wp_options table after the user explicitly saves changes to "
+"the theme defaults."
+msgstr "تأكد من حفظ خيارات السمة الخاصة بك مرة واحدة على الأقل. تضيف بعض السمات هذه فقط إلى ملفwp_options الجدول بعد أن يقوم المستخدم بحفظ التغييرات بشكل صريح على الإعدادات الافتراضية للموضوع."
+
+#: src/js/admin-strings/texts.js:6
+msgid "Add to String Translation"
+msgstr "أضف إلى سلسلة الترجمة"
+
+#: src/js/admin-strings/texts.js:7
+msgid "Remove from String Translation"
+msgstr "إزالة من ترجمة السلسلة"
+
+#: src/js/admin-strings/texts.js:9
+msgid "Included in String Translation"
+msgstr "المدرجة في ترجمة السلسلة"

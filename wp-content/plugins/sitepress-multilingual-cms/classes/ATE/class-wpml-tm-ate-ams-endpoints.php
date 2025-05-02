@@ -27,9 +27,14 @@ class WPML_TM_ATE_AMS_Endpoints {
 	const ENDPOINTS_SUBSCRIPTION_STATUS = '/api/wpml/websites/{WEBSITE_UUID}/translators/{translator_email}';
 	const ENDPOINTS_WEBSITES            = '/api/wpml/websites';
 	const ENDPOINTS_CREDITS             = '/api/wpml/credits';
+	const ENDPOINTS_ACCOUNT_BALANCES    = '/api/wpml/account_balances';
 	const ENDPOINTS_RESUME_ALL          = '/api/wpml/jobs/resume/all';
 	const ENDPOINTS_SEND_SITEKEY        = '/api/wpml/websites/assign_key';
 	const ENDPOINTS_TRANSLATION_ENGINES = '/api/wpml/engines';
+	const ENDPOINTS_AVAILABLE_FORMALITIES = '/api/wpml/engines/available_formalities';
+
+
+	const ENDPOINTS_GLOSSARY_COUNTS = '/api/wpml/glossary_counts';
 
 	/**
 	 * AMS CLONED SITES
@@ -274,6 +279,14 @@ class WPML_TM_ATE_AMS_Endpoints {
 		return $this->get_endpoint_url( self::SERVICE_AMS, self::ENDPOINTS_TRANSLATION_ENGINES );
 	}
 
+	public function get_available_formalities() {
+		return $this->get_endpoint_url( self::SERVICE_AMS, self::ENDPOINTS_AVAILABLE_FORMALITIES );
+	}
+
+	public function get_glossary_counts() {
+		return $this->get_endpoint_url( self::SERVICE_AMS, self::ENDPOINTS_GLOSSARY_COUNTS );
+	}
+
 	/**
 	 * @param null|int|string|array $job_params
 	 *
@@ -447,6 +460,14 @@ class WPML_TM_ATE_AMS_Endpoints {
 	 */
 	public function get_credits() {
 		return $this->get_endpoint_url( self::SERVICE_AMS, self::ENDPOINTS_CREDITS );
+	}
+
+	/**
+	 * @return string
+	 * @throws \InvalidArgumentException
+	 */
+	public function get_account_balances() {
+		return $this->get_endpoint_url( self::SERVICE_AMS, self::ENDPOINTS_ACCOUNT_BALANCES );
 	}
 
 	/**

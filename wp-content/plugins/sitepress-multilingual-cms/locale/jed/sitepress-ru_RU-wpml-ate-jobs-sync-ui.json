@@ -8,6 +8,9 @@
          "Sending for translation": [
             "Отправка на перевод"
          ],
+         "This content is being automatically translated. If you want to do something different with it cancel translation jobs first.": [
+            "Этот контент переводится автоматически. Если вы хотите сделать с ним что-то другое, сначала отмените задания на перевод."
+         ],
          "Connecting to WPML’s Advanced Translation Editor": [
             "Подключение к Расширенному редактору перевода WPML"
          ],
@@ -50,8 +53,15 @@
          "Translate Everything Automatically is paused": [
             "Переводить все автоматически - приостановлено"
          ],
-         "Translate Everything Automatically stopped": [
-            "Переводить все автоматически остановлено"
+         "Translate Everything Automatically is stopped": [
+            "Автоматический перевод всего остановлен"
+         ],
+         "Out of Credits for Automatic Translation": [
+            "Закончились кредиты для автоматического перевода"
+         ],
+         "You have <b>1</b> prepaid translation credit in your wpml.org account. Assign these credits to your site to start using automatic translation": [
+            "У вас есть <b>1</b> предоплаченный кредит на перевод на вашем аккаунте wpml.org. Назначьте этот кредит вашему сайту, чтобы начать использовать автоматический перевод",
+            "У вас есть <b>%s</b> предоплаченных кредитов на перевод на вашем аккаунте wpml.org. Назначьте эти кредиты вашему сайту, чтобы начать использовать автоматический перевод"
          ],
          "Preparing content for translation": [
             "Подготовка контента к переводу"
@@ -69,15 +79,15 @@
             "Для использования автоматического перевода ваш язык по умолчанию (%s) необходимо сопоставить с поддерживаемым языком."
          ],
          "Your language, %s, must be mapped to a supported language in order to use automatic translation.": [
-            "Ваш язык %s должен быть сопоставлен с поддерживаемым языком, чтобы использовать автоматический перевод.",
-            "Следующие языки на вашем сайте должны быть сопоставлены с поддерживаемым языком, чтобы использовать автоматический перевод: %s"
+            "Ваш язык, %s, должен быть сопоставлен с поддерживаемым языком для использования автоматического перевода.",
+            "Следующие языки на вашем сайте должны быть сопоставлены с поддерживаемым языком для использования автоматического перевода: %s"
          ],
          "Content in those languages: %s, cannot be automatically translated unless you map them to a language that's different from the default.": [
             "Контент на этих языках: %s нельзя перевести автоматически, если их не сопоставить с языком, отличным от языка по умолчанию."
          ],
          "%d translation waiting for review": [
             "%d перевод ожидает проверки",
-            "Переводов, ожидающих проверки: %d"
+            "%d переводов ожидают проверки"
          ],
          "Account credits used": [
             "Использованные кредиты учетной записи"
@@ -112,35 +122,20 @@
          "Pay-as-you-go credits used": [
             "Использованы кредиты с оплатой по мере использования"
          ],
-         "Resume": [
-            "Продолжить"
-         ],
          "Stop": [
             "Остановить"
          ],
          "Fix it": [
             "Исправить"
          ],
-         "Pause": [
-            "Приостановить"
+         "Assign credits now": [
+            "Назначить кредиты сейчас"
          ],
-         "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
-            "Произошла ошибка при попытке приостановить Автоматический перевод. Повторите попытку позже или свяжитесь с нашей службой поддержки."
+         "Resume": [
+            "Продолжить"
          ],
-         "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
-            "Произошла ошибка при попытке возобновить Автоматический перевод. Повторите попытку позже или свяжитесь с нашей службой поддержки."
-         ],
-         "Error": [
-            "Ошибка"
-         ],
-         "Draft — Pending review": [
-            "Черновик — Ожидает проверки"
-         ],
-         "Complete": [
-            "Завершено"
-         ],
-         "Insufficient funds": [
-            "Недостаточно средств"
+         "Refreshing translation status": [
+            "Обновление статуса перевода"
          ],
          "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
             "Подробнее о переводе контента читайте в <a>Руководстве по началу работы</a>."
@@ -168,76 +163,6 @@
          ],
          "The number of translations": [
             "Количество переводов"
-         ],
-         "Translate Everything Automatically - running": [
-            "Переводить все автоматически - работает"
-         ],
-         "Translate Everything Automatically - active": [
-            "Переводить все автоматически - активно"
-         ],
-         "Pause automatic translation": [
-            "Приостановить автоматический перевод"
-         ],
-         "WPML will finish in-progress translations but won't translate anything new.": [
-            "WPML завершит текущие переводы, но не будет переводить ничего нового."
-         ],
-         "Translate Everything Automatically - paused": [
-            "Переводить все автоматически - приостановлено"
-         ],
-         "Start automatic translation": [
-            "Начать автоматический перевод"
-         ],
-         "This uses %scredits%s to translate your existing content and anything you add or change later.": [
-            "Это использует %sкредиты%s для перевода вашего существующего контента и всего, что вы добавите или измените позже."
-         ],
-         "Start translating everything automatically": [
-            "Начать переводить все автоматически"
-         ],
-         "WPML will translate any new content you create into %1$s.": [
-            "WPML переведет любой новый контент, который вы создаете на %1$s."
-         ],
-         "WPML will translate all new future content to %1$s and keep translations up to date when you make changes.": [
-            "WPML будет переводить весь новый контент на %1$s и поддерживать переводы в актуальном состоянии, когда вы будете вносить изменения."
-         ],
-         "Do you want to translate existing content, too?": [
-            "Хотите также перевести существующий контент?"
-         ],
-         "Yes, translate all new and existing content": [
-            "Да, переводить весь новый и существующий контент"
-         ],
-         "No, only translate new content": [
-            "Нет, переводить только новый контент"
-         ],
-         "You can translate existing content from the Translation Management Dashboard": [
-            "Вы можете перевести существующий контент с Панели управления переводами."
-         ],
-         "Connection Error. Please wait a minute and reload this page. If the problem continues, please contact WPML support.": [
-            "Ошибка подключения. Пожалуйста, подождите минуту и перезагрузите эту страницу. Если проблема не исчезнет, обратитесь в службу поддержки WPML."
-         ],
-         "Automatic translation uses credits. %1$sRead more about automatic translation credits%2$s": [
-            "Автоматический перевод использует кредиты. %1$sПодробнее о кредитах автоматического перевода%2$s"
-         ],
-         "You need credits to start translating everything.": [
-            "Вам нужны кредиты, чтобы начать переводить все."
-         ],
-         "Cancel": [
-            "Отмена"
-         ],
-         "Start translating everything": [
-            "Начать перевод всего"
-         ],
-         "%1$d language": [
-            "%1$d язык",
-            "%1$d языка(ов)"
-         ],
-         "Please wait...": [
-            "Пожалуйста, подождите..."
-         ],
-         "All new future content": [
-            "Весь новый будущий контент"
-         ],
-         "Translate Everything Automatically - stopped": [
-            "Переводить все автоматически - остановлено"
          ]
       }
    }

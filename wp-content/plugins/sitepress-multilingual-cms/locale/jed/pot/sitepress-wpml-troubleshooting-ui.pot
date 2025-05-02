@@ -23,6 +23,32 @@ msgstr ""
 msgid "Cancel in-progress automatic jobs"
 msgstr ""
 
+#: src/js/troubleshooting/enableSecondaryDomainForATE/EnableSecondaryDomain.js:27
+msgid "Enabling WPML's Advanced Translation Editor..."
+msgstr ""
+
+#: src/js/troubleshooting/enableSecondaryDomainForATE/EnableSecondaryDomain.js:28
+msgid "Force-enable WPML's Advanced Translation Editor"
+msgstr ""
+
+#: src/js/troubleshooting/enableSecondaryDomainForATE/EnableSecondaryDomain.js:37
+msgid ""
+"If you're running this website from two or more domains on the same "
+"installation, this action will allow both to use the Advanced Translation "
+"Editor. Don't use this if you've moved or copied the site to a different "
+"domain on a different server."
+msgstr ""
+
+#: src/js/troubleshooting/enableSecondaryDomainForATE/EnableSecondaryDomain.js:41
+msgid "An error occurred while enabling WPML on both domains. Please try again."
+msgstr ""
+
+#: src/js/troubleshooting/enableSecondaryDomainForATE/EnableSecondaryDomain.js:44
+msgid ""
+"You can now use the Advanced Translation Editor from this site, as well as "
+"the other site(s) running from a different domain on the same installation."
+msgstr ""
+
 #: src/js/troubleshooting/lsTemplates/UpdateDomain.js:31
 msgid "Domain name has been updated"
 msgstr ""

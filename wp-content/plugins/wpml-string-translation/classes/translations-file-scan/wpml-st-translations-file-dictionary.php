@@ -89,4 +89,8 @@ class WPML_ST_Translations_File_Dictionary {
 					 ->values()
 					 ->toArray();
 	}
+
+	public function getAllUniquePluginComponentIds( array $extensions = [] ): array {
+		return $this->storage->findAllUniqueComponentIds( 'plugin', $extensions );
+	}
 }

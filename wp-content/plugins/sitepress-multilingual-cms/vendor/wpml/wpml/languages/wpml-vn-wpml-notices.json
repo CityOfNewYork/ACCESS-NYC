@@ -1,0 +1,44 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Add glossary terms": [
+            "Thêm các thuật ngữ vào bảng chú giải"
+         ],
+         "Minimize": [
+            "Thu nhỏ"
+         ],
+         "Expand": [
+            "Mở rộng"
+         ],
+         "There's nothing yet in the Glossary": [
+            "Chưa có gì trong Bảng chú giải"
+         ],
+         "Looks like you're not yet using the glossary. Glossary can help you:": [
+            "Có vẻ như bạn chưa sử dụng bảng chú giải. Bảng chú giải có thể giúp bạn:"
+         ],
+         "Improve the quality of the translation": [
+            "Cải thiện chất lượng bản dịch"
+         ],
+         "Ensure translation consistency": [
+            "Đảm bảo tính nhất quán trong bản dịch"
+         ],
+         "Reduce translation costs": [
+            "Giảm chi phí dịch thuật"
+         ],
+         "Improve SEO in translation languages": [
+            "Cải thiện SEO trong các ngôn ngữ dịch"
+         ],
+         "How to Use the Glossary for Accurate Translations": [
+            "Cách sử dụng Bảng chú giải để dịch chính xác"
+         ],
+         "%d item in the <a>Glossary</a>": [
+            "%d mục trong <a>Bảng chú giải</a>",
+            "%d mục trong <a>Bảng chú giải</a>"
+         ]
+      }
+   }
+}

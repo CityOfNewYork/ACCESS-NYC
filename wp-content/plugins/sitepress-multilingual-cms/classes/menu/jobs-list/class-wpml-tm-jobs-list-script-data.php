@@ -3,6 +3,7 @@
 use WPML\FP\Obj;
 use WPML\FP\Fns;
 use WPML\FP\Relation;
+use WPML\TM\ATE\AutoTranslate\Endpoint\GetJobsCount;
 use WPML\TM\ATE\AutoTranslate\Endpoint\SyncLock;
 use WPML\TM\ATE\Jobs;
 use WPML\TM\Menu\TranslationQueue\PostTypeFilters;
@@ -15,6 +16,7 @@ use WPML\TM\API\Translators;
 use WPML\Element\API\Languages;
 use function WPML\FP\pipe;
 use function WPML\FP\System\sanitizeString;
+use function WPML\Container\make;
 
 class WPML_TM_Jobs_List_Script_Data {
 
@@ -60,7 +62,8 @@ class WPML_TM_Jobs_List_Script_Data {
 				new WPML_Translator_Records(
 					$wpdb,
 					new WPML_WP_User_Query_Factory(),
-					wp_roles()
+					wp_roles(),
+					new \WPML\TranslationRoles\Service\AdministratorRoleManager()
 				)
 			);
 		}
@@ -98,9 +101,12 @@ class WPML_TM_Jobs_List_Script_Data {
 
 		$isATEEnabled = \WPML_TM_ATE_Status::is_enabled_and_activated();
 
+		/** @var Jobs $jobs */
+		$jobs = make( Jobs::class );
+
 		$data = [
 			'isATEEnabled'        => $isATEEnabled,
-			'ateJobsToSync'       => $isATEEnabled ? Jobs::getJobsToSync() : [],
+			'hasAnyJobsToSync'    => $isATEEnabled ? $jobs->hasAnyToSync() : false,
 			'languages'           => $this->language_names->get_active_languages(),
 			'translatedByFilters' => $this->translated_by_filter->get(),
 			'localTranslators'    => $this->translators->get(),
@@ -109,11 +115,12 @@ class WPML_TM_Jobs_List_Script_Data {
 			'translationService'  => $translation_service,
 			'siteKey'             => WP_Installer::instance()->get_site_key( 'wpml' ),
 			'batchUrl'            => OTG_TRANSLATION_PROXY_URL . '/projects/%d/external',
-			'endpoints'           => [
+			'endpoints' => [
 				'syncLock'                   => SyncLock::class,
 				'approveTranslationsReviews' => ApproveTranslations::class,
 				'cancelTranslationReviews'   => Cancel::class,
 				'resign'                     => Resign::class,
+				'getJobsCount'               => GetJobsCount::class,
 			],
 			'types'               => $this->getTypesForFilter(),
 			'queryFilters'        => $this->getFiltersFromUrl(),

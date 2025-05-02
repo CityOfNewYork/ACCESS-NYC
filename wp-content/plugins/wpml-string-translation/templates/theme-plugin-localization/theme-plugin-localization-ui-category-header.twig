@@ -1,0 +1,17 @@
+<tr class="category-header" data-togglecategory="{{ type }}">
+    <th class="checkbox-column">
+        <input class="wpml-checkbox-native" type="checkbox">
+    </th>
+    <th colspan="2">{{ component }}</th>
+    <th class="wpml-col-right" colspan="4">
+        {% if render_filters %}
+        <ul class="state-selector">
+            <li data-status="all">{{ all_text }} ({{ status_count.active + status_count.inactive }})</li>
+            <li class="state-selector-separator">|</li>
+            <li data-status="active" class="active">{{ active_text }} ({{ status_count.active }})</li>
+            <li class="state-selector-separator">|</li>
+            <li data-status="inactive">{{ inactive_text }} ({{ status_count.inactive }})</li>
+        </ul>
+        {% endif %}
+    </th>
+</tr>

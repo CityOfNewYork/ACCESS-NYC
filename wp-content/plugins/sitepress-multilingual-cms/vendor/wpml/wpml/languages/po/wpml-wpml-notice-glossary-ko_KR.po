@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-04-22T15:22:56+02:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: wpml\n"
+
+msgid "Add glossary terms"
+msgstr "용어집 용어 추가"
+
+msgid "Minimize"
+msgstr "최소화"
+
+msgid "Expand"
+msgstr "확장"
+
+msgid "There's nothing yet in the Glossary"
+msgstr "용어집에 아직 아무것도 없습니다"
+
+msgid "Looks like you're not yet using the glossary. Glossary can help you:"
+msgstr "아직 용어집을 사용하고 있지 않은 것 같습니다. 용어집은 다음과 같은 도움을 줄 수 있습니다:"
+
+msgid "Improve the quality of the translation"
+msgstr "번역 품질 향상"
+
+msgid "Ensure translation consistency"
+msgstr "번역 일관성 보장"
+
+msgid "Reduce translation costs"
+msgstr "번역 비용 절감"
+
+msgid "Improve SEO in translation languages"
+msgstr "번역 언어의 SEO 개선"
+
+msgid "How to Use the Glossary for Accurate Translations"
+msgstr "정확한 번역을 위한 용어집 사용 방법"
+
+msgid "%d item in the <a>Glossary</a>"
+msgid_plural "%d items in the <a>Glossary</a>"
+msgstr[0] "<a>용어집</a>에 %d개 항목"
+msgstr[1] "<a>용어집</a>에 %d개 항목"

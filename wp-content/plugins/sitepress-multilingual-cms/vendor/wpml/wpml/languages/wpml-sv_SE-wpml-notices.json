@@ -1,0 +1,44 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Add glossary terms": [
+            "Lägg till ordlisteord"
+         ],
+         "Minimize": [
+            "Minimera"
+         ],
+         "Expand": [
+            "Expandera"
+         ],
+         "There's nothing yet in the Glossary": [
+            "Det finns inget i ordlistan ännu"
+         ],
+         "Looks like you're not yet using the glossary. Glossary can help you:": [
+            "Det verkar som att du inte använder ordlistan ännu. Ordlistan kan hjälpa dig att:"
+         ],
+         "Improve the quality of the translation": [
+            "Förbättra översättningskvaliteten"
+         ],
+         "Ensure translation consistency": [
+            "Säkerställa översättningskonsistens"
+         ],
+         "Reduce translation costs": [
+            "Minska översättningskostnader"
+         ],
+         "Improve SEO in translation languages": [
+            "Förbättra SEO i översättningsspråk"
+         ],
+         "How to Use the Glossary for Accurate Translations": [
+            "Hur man använder ordlistan för noggranna översättningar"
+         ],
+         "%d item in the <a>Glossary</a>": [
+            "%d objekt i <a>Ordlistan</a>",
+            "%d objekt i <a>Ordlistan</a>"
+         ]
+      }
+   }
+}

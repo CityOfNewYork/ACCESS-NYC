@@ -117,7 +117,7 @@
             "נוספה שפה"
          ],
          "The value \"%s\" already exists": [
-            "הערך '%s' כבר קיים"
+            "הערך \"%s\" כבר קיים"
          ],
          "Add a new language": [
             "הוסף שפה חדשה"
@@ -135,7 +135,7 @@
             "לחץ כאן"
          ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
-            "התבנית שגויה. היא יכולה להכיל רק אותיות קטנות ו-'-'. למשל: 'fr', 'pt-br', 'zh-hans'"
+            "הפורמט שגוי. הוא יכול להכיל רק אותיות קטנות ו-\"-\". לדוגמה: \"fr\", \"pt-br\", \"zh-hans\""
          ],
          "Language": [
             "שפה"
@@ -159,7 +159,7 @@
             "אזור ברירת מחדל"
          ],
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
-            "התבנית שגויה. היא יכולה להכיל רק אותיות קטנות ו-'_'. למשל: 'de', 'de_DE', 'zh_Hant_TW'"
+            "הפורמט שגוי. הוא יכול להכיל רק אותיות קטנות ו-\"_\". לדוגמה: \"de\", \"de_DE\", \"zh_Hant_TW\""
          ],
          "hreflang": [
             "hreflang"
@@ -219,10 +219,13 @@
             "אנגלית עבור משתמשי ארה\"ב: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
-            "קובע אם כתובות URL בשפה זו יקודדו או ישתמשו בתווי ASCII (אם אינך בטוח, השאר \"No\")."
+            "קובע אם כתובות URL בשפה זו מקודדות או משתמשות בתווי ASCII (אם אינך בטוח, השאר זאת כ-\"לא\")."
          ],
          "adding a custom language": [
             "מוסיף שפה מותאמת אישית"
+         ],
+         "What are the languages of your site?": [
+            "מה השפות של האתר שלך?"
          ],
          "Default language": [
             "שפת ברירת מחדל"
@@ -241,9 +244,6 @@
          ],
          "create a custom language": [
             "צור שפה מותאמת אישית"
-         ],
-         "What are the languages of your site?": [
-            "מה השפות של האתר שלך?"
          ],
          "You can add a dedicated person to oversee everything translation-related on your site. %sTranslation Managers%s can add new local translators or professional translation services, create and assign translation jobs, review completed translations, and change translation-related settings.": [
             "ניתן להוסיף אדם ייעודי שיפקח על כל מה שקשור לתרגומים באתר שלך. %sמנהלי תרגום%s יכולים להוסיף מתרגמים מקומיים חדשים או שירותי תרגום מקצועיים, ליצור משימות תרגום ולהקצות אותם, לבדוק תרגומים שהושלמו ולשנות הגדרות שקשורות בתרגום."

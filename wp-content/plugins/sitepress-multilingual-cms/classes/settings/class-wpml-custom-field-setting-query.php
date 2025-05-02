@@ -45,16 +45,12 @@ class WPML_Custom_Field_Setting_Query {
 
 		$limit_offset = $this->get_limit_offset( $args );
 
-		$query = "SELECT SQL_CALC_FOUND_ROWS DISTINCT meta_key FROM {$this->table}" . $where . $limit_offset;
+		$query = "SELECT DISTINCT meta_key FROM {$this->table}"
+			. $where
+			. ' ORDER BY meta_id ASC '
+			. $limit_offset;
 
 		return $this->wpdb->get_col( $query );
-	}
-
-	/**
-	 * @return int
-	 */
-	public function get_total_rows() {
-		return (int) $this->wpdb->get_var( 'SELECT FOUND_ROWS();' );
 	}
 
 	/**
@@ -98,7 +94,7 @@ class WPML_Custom_Field_Setting_Query {
 			$limit_offset = $this->wpdb->prepare(
 				' LIMIT %d OFFSET %d',
 				$args['items_per_page'],
-				( $args['page'] - 1 ) * $args['items_per_page']
+				( $args['page'] - 1 ) * ( $args['items_per_page'] - 1 )
 			);
 		}
 

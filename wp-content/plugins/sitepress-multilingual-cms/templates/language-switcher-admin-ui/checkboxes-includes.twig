@@ -7,7 +7,7 @@
         <label>
             <input
                     type="checkbox"
-                    class="js-wpml-ls-setting-display_flags js-wpml-ls-toggle-suboptions js-wpml-ls-trigger-update"
+                    class="wpml-checkbox-native js-wpml-ls-setting-display_flags js-wpml-ls-toggle-suboptions js-wpml-ls-trigger-update"
                     data-target=".js-wpml-ls-flag-sizes"
                     data-show-on-checked="1"
                     value="1"
@@ -47,21 +47,21 @@
         </ul>
     </li>
     <li>
-        <label><input type="checkbox" class="js-wpml-ls-setting-display_names_in_native_lang js-wpml-ls-trigger-update"
+        <label><input type="checkbox" class="wpml-checkbox-native js-wpml-ls-setting-display_names_in_native_lang js-wpml-ls-trigger-update"
                       name="{% if name_base %}{{ name_base }}[display_names_in_native_lang]{% else %}display_names_in_native_lang{% endif %}"
                     {% if force.display_names_in_native_lang is defined %} disabled="disabled"{% endif %}
                       value="1"{% if slot_settings.display_names_in_native_lang %} checked="checked"{% endif %}> {{ strings.misc.label_include_native_lang }}
         </label>
     </li>
     <li>
-        <label><input type="checkbox" class="js-wpml-ls-setting-display_names_in_current_lang js-wpml-ls-trigger-update"
+        <label><input type="checkbox" class="wpml-checkbox-native js-wpml-ls-setting-display_names_in_current_lang js-wpml-ls-trigger-update"
                       name="{% if name_base %}{{ name_base }}[display_names_in_current_lang]{% else %}display_names_in_current_lang{% endif %}"
                     {% if force.display_names_in_current_lang is defined %} disabled="disabled"{% endif %}
                       value="1"{% if slot_settings.display_names_in_current_lang|default(1) %} checked="checked"{% endif %}> {{ strings.misc.label_include_display_lang }}
         </label>
     </li>
     <li>
-        <label><input type="checkbox" class="js-wpml-ls-setting-display_link_for_current_lang js-wpml-ls-trigger-update"
+        <label><input type="checkbox" class="wpml-checkbox-native js-wpml-ls-setting-display_link_for_current_lang js-wpml-ls-trigger-update"
                       name="{% if name_base %}{{ name_base }}[display_link_for_current_lang]{% else %}display_link_for_current_lang{% endif %}"
                     {% if force.display_link_for_current_lang is defined or is_hierarchical %} disabled="disabled"{% endif %}
                       value="1"{% if slot_settings.display_link_for_current_lang|default(1) %} checked="checked"{% endif %}> {{ strings.misc.label_include_current_lang }}

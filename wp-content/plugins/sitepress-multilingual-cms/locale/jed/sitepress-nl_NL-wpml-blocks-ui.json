@@ -23,6 +23,12 @@
          "Color": [
             "Kleur"
          ],
+         "px": [
+            "px"
+         ],
+         "%": [
+            "%"
+         ],
          "Dimensions": [
             "Afmetingen"
          ],
@@ -75,16 +81,16 @@
             "Terugloop naar meerdere regels toestaan"
          ],
          "Open on click": [
-            "Openen met een klik"
+            "Openen bij klik"
          ],
          "Show arrow": [
             "Pijl weergeven"
          ],
          "Layout": [
-            "Layout"
+            "Lay-out"
          ],
          "Justification": [
-            "Verantwoording"
+            "Uitlijning"
          ],
          "Orientation": [
             "Oriëntatie"
@@ -96,10 +102,10 @@
             "Achtergrond"
          ],
          "Language Text": [
-            "Tekst taal"
+            "Taaltekst"
          ],
          "Language Background": [
-            "Taal achtergrond"
+            "Taalachtergrond"
          ],
          "Current language text": [
             "Huidige taaltekst"
@@ -114,16 +120,16 @@
             "Code"
          ],
          "Justify items left": [
-            "Rechtvaardig items links"
+            "Items links uitlijnen"
          ],
          "Justify items center": [
-            "Rechtvaardig items midden"
+            "Items centreren"
          ],
          "Justify items right": [
-            "Rechtvaardig items rechts"
+            "Items rechts uitlijnen"
          ],
          "Justify items space between": [
-            "Rechtvaardig items met tussenruimte"
+            "Items gelijkmatig verdelen"
          ],
          "Horizontal": [
             "Horizontaal"
@@ -135,34 +141,43 @@
             "Normaal"
          ],
          "Medium": [
-            "Middelgroot"
+            "Medium"
          ],
          "Large": [
             "Groot"
          ],
          "X-Large": [
-            "Zeer groot"
+            "Extra groot"
+         ],
+         "Ab": [
+            "Ab"
+         ],
+         "AB": [
+            "AB"
+         ],
+         "ab": [
+            "ab"
          ],
          "Small": [
             "Klein"
          ],
          "Displays the WPML Language Switcher.": [
-            "Geeft de WPML-taalschakelaar weer."
+            "Toont de WPML Taalwisselaar."
          ],
          "Language Switcher": [
-            "Taalschakelaar"
+            "Taalwisselaar"
          ],
          "displays the WPML Language Switcher": [
-            "geeft de WPML Taalschakelaar weer"
+            "toont de WPML Taalwisselaar"
          ],
          "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
-            "Toont de WPML taalswitcher. <br/> Leer <a>hoe dit blok te vertalen</a>."
+            "Toont de WPML Taalwisselaar. <br/> Leer <a>hoe u dit blok kunt vertalen</a>."
          ],
          "Navigation Language Switcher": [
-            "Navigatie Taal Schakelaar"
+            "Navigatie Taalwisselaar"
          ],
          "Reset all": [
-            "Alles opnieuw instellen"
+            "Alles resetten"
          ]
       }
    }

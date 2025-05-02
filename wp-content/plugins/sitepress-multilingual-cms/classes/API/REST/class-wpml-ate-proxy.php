@@ -125,7 +125,7 @@ class Proxy extends \WPML_REST_Base {
 		if ( 200 === $status_code ) {
 			header( "{$protocol} {$status_code} {$status_message}" );
 		} else {
-			header( "Status: ${status_code} ${status_message}" );
+			header( "Status: {$status_code} {$status_message}" );
 		}
 		header( "Content-Type: {$content_type}" );
 

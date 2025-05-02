@@ -26,6 +26,9 @@ abstract class WPML_Page_Builders_Register_Strings {
 	/** @var int $string_location */
 	private $string_location;
 
+	/** @var int $group_index */
+	private $group_index;
+
 	public function __construct(
 		IWPML_Page_Builders_Translatable_Nodes $translatable_nodes,
 		IWPML_Page_Builders_Data_Settings $data_settings,
@@ -41,13 +44,14 @@ abstract class WPML_Page_Builders_Register_Strings {
 
 	/**
 	 * @param WP_Post $post
-	 * @param array $package
+	 * @param array   $package
 	 */
 	public function register_strings( WP_Post $post, array $package ) {
 
 		do_action( 'wpml_start_string_package_registration', $package );
 
 		$this->string_location = 1;
+		$this->group_index     = 0;
 
 		if ( $this->data_settings->is_handling_post( $post->ID ) ) {
 
@@ -69,7 +73,6 @@ abstract class WPML_Page_Builders_Register_Strings {
 			}
 
 			if ( $this->reuse_translations ) {
-				// @phpstan-ignore-next-line
 				$this->reuse_translations->find_and_reuse( $post->ID, $existing_strings );
 			}
 		}
@@ -79,12 +82,14 @@ abstract class WPML_Page_Builders_Register_Strings {
 
 	/**
 	 * @param string $node_id
-	 * @param mixed $element
-	 * @param array $package
+	 * @param mixed  $element
+	 * @param array  $package
 	 */
 	protected function register_strings_for_node( $node_id, $element, array $package ) {
 		$strings = $this->translatable_nodes->get( $node_id, $element );
 		foreach ( $strings as $string ) {
+			$string = $this->filter_string_to_register( $string, $node_id, $element, $package );
+
 			$this->string_registration->register_string(
 				$package['post_id'],
 				$string->get_value(),
@@ -92,11 +97,26 @@ abstract class WPML_Page_Builders_Register_Strings {
 				$string->get_title(),
 				$string->get_name(),
 				$this->string_location,
-				$string->get_wrap_tag()
+				$string->get_wrap_tag(),
+				$this->group_index
 			);
 
 			$this->string_location++;
 		}
+
+		$this->group_index ++;
+	}
+
+	/**
+	 * @param WPML_PB_String $string
+	 * @param string         $node_id
+	 * @param mixed          $element
+	 * @param array          $package
+	 *
+	 * @return WPML_PB_String
+	 */
+	protected function filter_string_to_register( WPML_PB_String $string, $node_id, $element, $package ) {
+		return $string;
 	}
 
 	/**

@@ -1,0 +1,67 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-01-21T12:50:32+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: wpml\n"
+
+#: src/config-admin-pages.php:90
+msgid "Translation Management"
+msgstr "Översättningshantering"
+
+#: src/config-admin-pages.php:249
+msgid "Automatic translation settings"
+msgstr "Inställningar för automatisk översättning"
+
+#: src/Legacy/Component/ATE/Application/Query/Account.php:26
+msgid "Error getting credits"
+msgstr "Fel vid hämtning av krediter"
+
+#: src/Legacy/Component/ATE/Application/Query/Account.php:62
+msgid "Error getting account balances"
+msgstr "Fel vid hämtning av kontosaldon"
+
+#: src/Legacy/Component/ATE/Application/Query/Glossary.php:26
+msgid "Error getting glossary data"
+msgstr "Fel vid hämtning av ordlistdata"
+
+#: src/Legacy/Component/ATE/Application/Service/EnginesService.php:140
+msgid "Error fetching translation engines"
+msgstr "Fel vid hämtning av översättningsmotorer"
+
+#: src/Legacy/Component/ATE/Application/Service/EnginesService.php:163
+msgid "Error fetching available formalities"
+msgstr "Fel vid hämtning av tillgängliga formaliteter"
+
+#: src/Legacy/Component/Translation/Sender/ErrorMapper/ErrorMapper.php:32
+msgid "The jobs could not be created."
+msgstr "Jobben kunde inte skapas."
+
+#: src/Legacy/Component/Translation/Sender/ErrorMapper/UnsupportedLanguagesInTranslationService.php:43
+msgid "The selected translation service doesn't support the following languages: %s"
+msgstr "Den valda översättningstjänsten stöder inte följande språk: %s"
+
+#: src/UserInterface/Web/Core/Component/Dashboard/Application/DashboardController.php:297
+#: src/UserInterface/Web/Core/Component/Dashboard/Application/DashboardController.php:298
+#: src/UserInterface/Web/Core/Component/Dashboard/Application/DashboardController.php:299
+msgid "Other texts (Strings)"
+msgstr "Andra texter (Strängar)"
+
+#: src/UserInterface/Web/Core/Component/Dashboard/Application/Endpoint/SendToTranslation/SendToTranslationController.php:48
+msgid "The request data for SendToTranslation is not valid."
+msgstr "Begärandata för SendToTranslation är inte giltig."
+
+#: src/UserInterface/Web/Core/Component/Dashboard/Application/Endpoint/SendToTranslation/SendToTranslationController.php:61
+msgid "An error occurred while sending the translation."
+msgstr "Ett fel uppstod vid sändning av översättningen."
+
+#: src/UserInterface/Web/Core/Component/Dashboard/Application/Endpoint/TranslateEverything/EnableController.php:45
+msgid "In order to translate automatically, you first need to enable WPML's Advanced Translation Editor"
+msgstr "För att översätta automatiskt måste du först aktivera WPML:s avancerade översättningsredigerare"

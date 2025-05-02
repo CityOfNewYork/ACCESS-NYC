@@ -7,6 +7,12 @@ msgstr ""
 msgid "Sending for translation"
 msgstr ""
 
+#: src/js/ate/TranslationDashboardJobsActions.js:23
+msgid ""
+"This content is being automatically translated. If you want to do something "
+"different with it cancel translation jobs first."
+msgstr ""
+
 #: src/js/ate/enable/init.js:53
 msgid "Connecting to WPML’s Advanced Translation Editor"
 msgstr ""
@@ -32,7 +38,7 @@ msgid "Translation on hold"
 msgstr ""
 
 #: src/js/ate/status-bar/components/AteJobsStatus.js:45
-#: src/js/ate/status-bar/components/constants.js:13
+#: src/js/ate/status-bar/components/constants.js:15
 msgid "No translations in the queue"
 msgstr ""
 
@@ -48,56 +54,69 @@ msgstr ""
 msgid "less than 1 min remaining"
 msgstr ""
 
-#: src/js/ate/status-bar/components/constants.js:11
-#: src/js/ate/translate-everything/components/Status/index.js:51
+#: src/js/ate/status-bar/components/constants.js:13
+#: src/js/ate/translate-everything/components/Status/index.js:50
 msgid "Automatic translation status"
 msgstr ""
 
-#: src/js/ate/status-bar/components/constants.js:15
+#: src/js/ate/status-bar/components/constants.js:17
 msgid "Translate Everything Automatically"
 msgstr ""
 
-#: src/js/ate/status-bar/components/constants.js:17
+#: src/js/ate/status-bar/components/constants.js:19
 msgid "Translate Everything Automatically is active"
 msgstr ""
 
-#: src/js/ate/status-bar/components/constants.js:19
-#: src/js/ate/translate-everything/pause/components/StatusBar/Paused.js:20
+#: src/js/ate/status-bar/components/constants.js:21
 msgid "Translate Everything Automatically is paused"
 msgstr ""
 
-#: src/js/ate/status-bar/components/constants.js:21
-msgid "Translate Everything Automatically stopped"
-msgstr ""
-
 #: src/js/ate/status-bar/components/constants.js:23
-#: src/js/ate/status-bar/components/sending/index.js:11
-msgid "Preparing content for translation"
+msgid "Translate Everything Automatically is stopped"
 msgstr ""
 
 #: src/js/ate/status-bar/components/constants.js:25
+msgid "Out of Credits for Automatic Translation"
+msgstr ""
+
+#: src/js/ate/status-bar/components/constants.js:28
+msgid ""
+"You have <b>1</b> prepaid translation credit in your wpml.org account. "
+"Assign these credits to your site to start using automatic translation"
+msgid_plural ""
+"You have <b>%s</b> prepaid translation credits in your wpml.org account. "
+"Assign these credits to your site to start using automatic translation"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/js/ate/status-bar/components/constants.js:40
 #: src/js/ate/status-bar/components/sending/index.js:10
+msgid "Preparing content for translation"
+msgstr ""
+
+#: src/js/ate/status-bar/components/constants.js:42
+#: src/js/ate/status-bar/components/sending/index.js:9
 msgid "Preparing more content for translation"
 msgstr ""
 
-#: src/js/ate/status-bar/components/constants.js:27
+#: src/js/ate/status-bar/components/constants.js:44
 msgid "An error occured, fix it to continue."
 msgstr ""
 
-#: src/js/ate/status-bar/components/constants.js:29
+#: src/js/ate/status-bar/components/constants.js:46
 msgid ""
 "There is an issue with automatic translation that needs your attention. Fix "
 "it to continue."
 msgstr ""
 
-#: src/js/ate/status-bar/components/constants.js:32
+#: src/js/ate/status-bar/components/constants.js:49
 #. %s is replaced by the name of the language.
 msgid ""
 "Your default language, %s, must be mapped to a supported language in order "
 "to use automatic translation."
 msgstr ""
 
-#: src/js/ate/status-bar/components/constants.js:40
+#: src/js/ate/status-bar/components/constants.js:57
 #. %s is replaced by the language(s) name.
 msgid ""
 "Your language, %s, must be mapped to a supported language in order to use "
@@ -108,13 +127,13 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/js/ate/status-bar/components/constants.js:50
+#: src/js/ate/status-bar/components/constants.js:67
 msgid ""
 "Content in those languages: %s, cannot be automatically translated unless "
 "you map them to a language that's different from the default."
 msgstr ""
 
-#: src/js/ate/status-bar/components/constants.js:60
+#: src/js/ate/status-bar/components/constants.js:77
 #. %d is replaced by the number of jobs to review.
 msgid "%d translation waiting for review"
 msgid_plural "%d translations waiting for review"
@@ -171,50 +190,23 @@ msgid "Pay-as-you-go credits used"
 msgstr ""
 
 #: src/js/ate/status-bar/model/notification-center-action-presets.js:17
-#: src/js/ate/translate-everything/pause/components/StatusBar/Paused.js:24
-msgid "Resume"
-msgstr ""
-
-#: src/js/ate/status-bar/model/notification-center-action-presets.js:26
 msgid "Stop"
 msgstr ""
 
-#: src/js/ate/status-bar/model/notification-center-action-presets.js:35
-#: src/js/ate/translate-everything/pause/components/StatusBar/Stopped.js:17
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:26
 msgid "Fix it"
 msgstr ""
 
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:34
+msgid "Assign credits now"
+msgstr ""
+
 #: src/js/ate/status-bar/model/notification-center-action-presets.js:8
-#: src/js/ate/translate-everything/pause/components/StatusBar/Active.js:27
-msgid "Pause"
+msgid "Resume"
 msgstr ""
 
-#: src/js/ate/status-bar/model/pauseAndResume.js:28
-msgid ""
-"There was an error when trying to pause your Automatic Translation. Please "
-"try again later or contact our support."
-msgstr ""
-
-#: src/js/ate/status-bar/model/pauseAndResume.js:56
-msgid ""
-"There was an error when trying to resume your Automatic Translation. Please "
-"try again later or contact our support."
-msgstr ""
-
-#: src/js/ate/status-bar/model/pauseAndResume.js:59
-msgid "Error"
-msgstr ""
-
-#: src/js/ate/status-icons/TranslationQueue.js:46
-msgid "Draft — Pending review"
-msgstr ""
-
-#: src/js/ate/status-icons/TranslationQueue.js:49
-msgid "Complete"
-msgstr ""
-
-#: src/js/ate/status-icons/TranslationQueue.js:60
-msgid "Insufficient funds"
+#: src/js/ate/status-icons/StatusUpdater.js:80
+msgid "Refreshing translation status"
 msgstr ""
 
 #: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:26
@@ -233,134 +225,28 @@ msgid ""
 "first translation job!"
 msgstr ""
 
-#: src/js/ate/translate-everything/components/Status/index.js:106
+#: src/js/ate/translate-everything/components/Status/index.js:105
 msgid ""
 "Change your <a>automatic translation settings</a> (in-progress translation "
 "jobs will be completed with the current settings)."
 msgstr ""
 
-#: src/js/ate/translate-everything/components/Status/index.js:116
+#: src/js/ate/translate-everything/components/Status/index.js:115
 msgid "Read more about translating your site automatically."
 msgstr ""
 
-#: src/js/ate/translate-everything/components/Status/index.js:50
+#: src/js/ate/translate-everything/components/Status/index.js:49
 msgid "Your site is being automatically translated!"
 msgstr ""
 
-#: src/js/ate/translate-everything/components/Status/index.js:59
+#: src/js/ate/translate-everything/components/Status/index.js:58
 msgid "Calculating..."
 msgstr ""
 
-#: src/js/ate/translate-everything/components/Status/index.js:89
+#: src/js/ate/translate-everything/components/Status/index.js:88
 msgid "Do not close WP admin!"
 msgstr ""
 
-#: src/js/ate/translate-everything/components/Status/index.js:97
+#: src/js/ate/translate-everything/components/Status/index.js:96
 msgid "The number of translations"
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/Active.js:23
-msgid "Translate Everything Automatically - running"
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/Active.js:24
-msgid "Translate Everything Automatically - active"
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/Active.js:28
-msgid "Pause automatic translation"
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/Active.js:39
-msgid "WPML will finish in-progress translations but won't translate anything new."
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/Paused.js:21
-msgid "Translate Everything Automatically - paused"
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/Paused.js:25
-msgid "Start automatic translation"
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/Paused.js:28
-msgid ""
-"This uses %scredits%s to translate your existing content and anything you "
-"add or change later."
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:21
-msgid "Start translating everything automatically"
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:24
-#. %1$s will be replaced with 'xx languages'.
-msgid "WPML will translate any new content you create into %1$s."
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:27
-#. %1$s will be replaced with 'xx languages'.
-msgid ""
-"WPML will translate all new future content to %1$s and keep translations up "
-"to date when you make changes."
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:29
-msgid "Do you want to translate existing content, too?"
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:31
-msgid "Yes, translate all new and existing content"
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:33
-msgid "No, only translate new content"
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:35
-msgid "You can translate existing content from the Translation Management Dashboard"
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:37
-msgid ""
-"Connection Error. Please wait a minute and reload this page. If the problem "
-"continues, please contact WPML support."
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:41
-#. %1$s opening link tag <a>, %2$s closing link tag </a>.
-msgid ""
-"Automatic translation uses credits. %1$sRead more about automatic "
-"translation credits%2$s"
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:49
-msgid "You need credits to start translating everything."
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:50
-msgid "Cancel"
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:51
-msgid "Start translating everything"
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Confirm.js:71
-#. %1$d is replaced by the number of active languages.
-msgid "%1$d language"
-msgid_plural "%1$d languages"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/Initialise.js:29
-msgid "Please wait..."
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/ResumeWizard/PostCount.js:101
-msgid "All new future content"
-msgstr ""
-
-#: src/js/ate/translate-everything/pause/components/StatusBar/Stopped.js:14
-msgid "Translate Everything Automatically - stopped"
 msgstr ""

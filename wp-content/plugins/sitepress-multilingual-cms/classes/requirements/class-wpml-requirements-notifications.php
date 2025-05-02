@@ -1,5 +1,7 @@
 <?php
 
+use WPML\Setup\Option;
+
 /**
  * @author OnTheGo Systems
  */
@@ -33,14 +35,81 @@ class WPML_Requirements_Notification {
 
 	public function get_message( $issues, $limit = 0 ) {
 		if ( $issues ) {
-			$strings = array(
-				'title' => sprintf( __( 'To easily translate %s, you need to add the following WPML components:', 'sitepress' ), $this->get_product_names( $issues ) ),
-			);
+			$product_name = $this->get_product_names( $issues );
+
+			if ( 'Elementor' === $product_name ) {
+				$requirements = $issues['requirements'];
+
+				if ( 1 === count( $requirements ) && 'WPML String Translation' === $requirements[0]['name'] ) {
+					if ( Option::isTMAllowed() ) {
+						$strings = $this->get_elementor_message_for_regular_account( $product_name );
+					} else {
+						$strings = $this->get_elementor_message_for_blog_account( $product_name );
+					}
+
+					$issues = [];
+				} else {
+					// When the product_name is Elementor but there is more than one required plugin or the required plugin is not string translation.
+					$strings = $this->get_default_message( $issues );
+				}
+			} else {
+				// When the product_name is not Elementor(default case).
+				$strings = $this->get_default_message( $issues );
+			}
 
 			return $this->get_shared_message( $strings, $issues, $limit );
 		}
 
 		return null;
+	}
+
+	private function get_default_message( $issues ) {
+		return [
+			/* translators: %s is the product name, */
+			'title' => sprintf( __( 'To easily translate %s, you need to add the following WPML components:', 'sitepress' ), $this->get_product_names( $issues ) ),
+		];
+	}
+
+	private function get_elementor_message_for_blog_account( $product_name ) {
+		$message_text_first_part_url = 'https://wpml.org/documentation/plugins-compatibility/elementor/translate-elementor-site-wpml-multilingual-blog/?utm_source=plugin&utm_medium=gui&utm_campaign=elementor';
+		$message_text_last_part_url  = 'https://wpml.org/account/?utm_source=plugin&utm_medium=gui&utm_campaign=elementor';
+
+		return [
+			'title'   => __( 'Your WPML Blog account only allows you to manually translate Elementor content', 'sitepress' ),
+			'message' => sprintf(
+			/* translators: %1$s, %3$s, %6$s and %7$s are opening and closing link tags, %2$s and %5$s are the product name, %3$s are break tags. */
+				esc_html__( '%1$sLearn how to translate %2$s content manually%3$s %4$sAlternatively, to translate %5$s content using the Advanced Translation Editor, automatic translation, professional services, or by other users on your site %6$supgrade to WPML CMS account%7$s.', 'sitepress' ),
+				'<a href="' . $message_text_first_part_url . '" target="_blank">',
+				$product_name,
+				'</a>',
+				'<br><br>',
+				$product_name,
+				'<a href="' . $message_text_last_part_url . '" target="_blank">',
+				'</a>'
+			),
+		];
+	}
+
+	private function get_elementor_message_for_regular_account( $product_name ) {
+		$title_link_url = admin_url( 'plugin-install.php?tab=commercial' );
+		$message_url    = 'https://wpml.org/documentation/plugins-compatibility/elementor/?utm_source=plugin&utm_medium=gui&utm_campaign=elementor';
+
+		return [
+			'title'   => sprintf(
+			/* translators: %1$s is the product name, %2$s and %3$s are opening and closing link tag. */
+				esc_html__( 'To translate content created with %1$s, you need to %2$sinstall WPML String Translation%3$s', 'sitepress' ),
+				$product_name,
+				'<a href="' . $title_link_url . '" target="_blank">',
+				'</a>'
+			),
+			'message' => sprintf(
+			/* translators: %1$s and %3$s are opening and closing link tags, %2$s is the product name. */
+				esc_html__( '%1$sLearn how to translate %2$s content%3$s', 'sitepress' ),
+				'<a href="' . $message_url . '" target="_blank">',
+				$product_name,
+				'</a>'
+			),
+		];
 	}
 
 	private function get_shared_message( $strings, $issues, $limit = 0 ) {

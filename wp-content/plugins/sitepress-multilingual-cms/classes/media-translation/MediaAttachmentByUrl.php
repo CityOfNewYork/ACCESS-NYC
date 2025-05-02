@@ -64,6 +64,7 @@ class MediaAttachmentByUrl {
 		SELECT ID FROM {$this->wpdb->posts} p
 		JOIN {$this->wpdb->prefix}icl_translations t ON t.element_id = p.ID
 		WHERE t.element_type='post_attachment' AND t.language_code=%s AND p.guid=%s
+		LIMIT 1
 		",
 				$this->language,
 				$this->url

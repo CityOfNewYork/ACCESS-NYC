@@ -6,16 +6,16 @@
             "domain": "messages"
          },
          "hide the translations instead.": [
-            "dölj översättningen istället."
+            "dölj översättningarna istället."
          ],
          "Error happened! Please try again.": [
-            "Ett fel inträffade! Försök igen."
+            "Ett fel inträffade! Vänligen försök igen."
          ],
          "Cancel": [
             "Avbryt"
          ],
          "Choose Content to Automatically Translate into": [
-            "Väj innehåll att automatiskt översätta till"
+            "Välj innehåll att automatiskt översätta till"
          ],
          "Save Changes and Enable Automatic Translation": [
             "Spara ändringar och aktivera automatisk översättning"
@@ -30,31 +30,31 @@
             "Lägg till nya språk"
          ],
          "Add new language": [
-            "Lägg till ett nytt språk"
+            "Lägg till nytt språk"
          ],
          "Never mind - don't add new languages": [
-            "Strunta i det - lägg inte till nya språk"
+            "Glöm det - lägg inte till nya språk"
          ],
          "Never mind - don't add new language": [
-            "Strunta i det - lägg inte till något nytt språk"
+            "Glöm det - lägg inte till nytt språk"
          ],
          "Choose which content to translate into the new language": [
             "Välj vilket innehåll som ska översättas till det nya språket"
          ],
          "Automatically translate all my posts and pages, plus new content as I create it.": [
-            "Översätt automatiskt alla mina inlägg och sidor, samt nytt innehåll när jag skapar det."
+            "Översätt automatiskt alla mina inlägg och sidor, plus nytt innehåll när jag skapar det."
          ],
          "Only automatically translate new content.": [
-            "Översätt bara nytt innehåll automatiskt."
+            "Översätt endast nytt innehåll automatiskt."
          ],
          "Which content do you want to translate into the new language?": [
             "Vilket innehåll vill du översätta till det nya språket?"
          ],
          "When you unpause automatic translation, this content will be <a>translated automatically</a>.": [
-            "När du avaktiverar automatisk översättning kommer detta innehåll <a> att översättas automatiskt</a>."
+            "När du återupptar automatisk översättning kommer detta innehåll att <a>översättas automatiskt</a>."
          ],
          "You can still translate existing content any time from the Translation Management Dashboard.": [
-            "Du kan fortfarande översätta befintligt innehåll när som helst från kontrollpanelen för översättningshantering."
+            "Du kan fortfarande översätta befintligt innehåll när som helst från instrumentpanelen för översättningshantering."
          ]
       }
    }

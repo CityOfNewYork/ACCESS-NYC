@@ -1,32 +1,45 @@
 {
-   "domain": "messages",
-   "locale_data": {
-      "messages": {
-         "": {
-            "domain": "messages",
-            "lang": "en"
-         },
-         "Preparing...": [
-            ""
-         ],
-         "All jobs have been cancelled": [
-            ""
-         ],
-         "There is no more jobs to cancel": [
-            ""
-         ],
-         "The jobs cancellation has failed": [
-            ""
-         ],
-         "Cancel in-progress automatic jobs": [
-            ""
-         ],
-         "Refresh license data to recognise license update": [
-            ""
-         ],
-         "WPML License has been refreshed": [
-            ""
-         ]
-      }
-   }
+  "translation-revision-date": "2024-08-20T09:50:57+00:00",
+  "generator": "WP-CLI/2.9.0",
+  "source": "src/js/troubleshooting/refreshLicense/useRefreshLicense.js",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "en",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "Preparing...": [
+        "Chuẩn bị..."
+      ],
+      "All jobs have been cancelled": [
+        "Tất cả công việc đã bị hủy"
+      ],
+      "There is no more jobs to cancel": [
+        "Không còn công việc nào để hủy"
+      ],
+      "The jobs cancellation has failed": [
+        "Hủy công việc thất bại"
+      ],
+      "Cancel in-progress automatic jobs": [
+        "Hủy công việc tự động đang làm"
+      ],
+      "Domain name has been updated": [
+        "Tên miền đã được cập nhật"
+      ],
+      "Domain name update has been failed": [
+        "Cập nhật tên miền thất bại"
+      ],
+      "Update domain name in language switcher settings": [
+        "Cập nhật tên miền trong cài đặt ngôn ngữ"
+      ],
+      "Refresh license data to recognise license update": [
+        "Làm mới dữ liệu giấy phép"
+      ],
+      "WPML License has been refreshed": [
+        "Giấy phép WPML đã được làm mới"
+      ]
+    }
+  }
 }

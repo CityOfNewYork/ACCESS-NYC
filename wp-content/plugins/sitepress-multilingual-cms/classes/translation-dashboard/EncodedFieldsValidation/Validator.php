@@ -2,14 +2,10 @@
 
 namespace WPML\TM\TranslationDashboard\EncodedFieldsValidation;
 
-use WPML\FP\Fns;
-use WPML\FP\Logic;
 use WPML\FP\Lst;
 use WPML\FP\Obj;
-use WPML\FP\Str;
 use WPML\LIB\WP\Post;
 use WPML\TM\TranslationDashboard\SentContentMessages;
-use function WPML\FP\invoke;
 use function WPML\FP\spreadArgs;
 
 class Validator {
@@ -80,6 +76,57 @@ class Validator {
 		}
 
 		return $data;
+	}
+
+	/**
+	 * @param int[] $postIds
+	 * @param int[] $packageIds
+	 *
+	 * @return int[][]
+	 */
+	public function getInvalidPostAndPackageIds( $postIds, $packageIds ) {
+		$invalidPostIds    = [];
+		$invalidPackageIds = [];
+		$postIds           = array_unique( $postIds );
+		$packageIds        = array_unique( $packageIds );
+
+		if ( is_array( $postIds ) && ! empty( $postIds ) ) {
+			$invalidPostIds = $this->findElementsIdsWithEncodedFields( 'post', $postIds );
+		}
+
+		if ( is_array( $packageIds ) && ! empty( $packageIds ) ) {
+			$invalidPackageIds = $this->findElementsIdsWithEncodedFields( 'package', $packageIds );
+		}
+
+		return [ $invalidPostIds, $invalidPackageIds ];
+	}
+
+	/**
+	 * @param string $type
+	 * @param int[] $elementsIds
+	 *
+	 * @return int[]
+	 */
+	private function findElementsIdsWithEncodedFields( $type, $elementsIds ) {
+		$elementsIdsWithEncodedFields = [];
+
+		$extractElementId = function ( ErrorEntry $errorEntry ) {
+			return $errorEntry->elementId;
+		};
+
+		if ( 'post' === $type ) {
+			$elementsIdsWithEncodedFields = array_map(
+				$extractElementId,
+				$this->findPostsWithEncodedFields( $elementsIds )
+			);
+		} elseif ( 'package' === $type ) {
+			$elementsIdsWithEncodedFields = array_map(
+				$extractElementId,
+				$this->findPackagesWithEncodedFields( $elementsIds )
+			);
+		}
+
+		return $elementsIdsWithEncodedFields;
 	}
 
 	/**

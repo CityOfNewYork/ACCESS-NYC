@@ -117,7 +117,7 @@
             "언어 추가됨"
          ],
          "The value \"%s\" already exists": [
-            "값 \"%s\"이(가) 이미 있습니다."
+            "<q id=\"q-first-1\">%s</q> 값이 이미 존재합니다"
          ],
          "Add a new language": [
             "새 언어 추가"
@@ -135,7 +135,7 @@
             "여기 클릭"
          ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
-            "잘못된 형식입니다. 소문자와 \"-\"만 포함할 수 있습니다. 예: \"fr\" , \"pt-br\", \"zh-hans\""
+            "잘못된 형식입니다. 소문자와 <q id=\"q-first-1\">-</q>만 포함할 수 있습니다. 예: <q id=\"q-first-2\">fr</q>, <q id=\"q-first-3\">pt-br</q>, <q id=\"q-first-4\">zh-hans</q>"
          ],
          "Language": [
             "언어"
@@ -159,7 +159,7 @@
             "기본 로케일"
          ],
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
-            "잘못된 형식입니다. 소문자와 \"-\"만 포함할 수 있습니다. 예: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+            "잘못된 형식입니다. 소문자와 <q id=\"q-first-1\">_</q>만 포함할 수 있습니다. 예: <q id=\"q-first-2\">de</q>, <q id=\"q-first-3\">de_DE</q>, <q id=\"q-first-4\">zh_Hant_TW</q>"
          ],
          "hreflang": [
             "hreflang"
@@ -219,10 +219,13 @@
             "US 영어 사용자: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
-            "이 언어의 URL이 인코딩되었는지 또는 ASCII 문자를 사용하는지 결정합니다(확실하지 않으면 \"아니오\"로 두세요)."
+            "이 언어의 URL이 인코딩되었는지 또는 ASCII 문자를 사용하는지 결정합니다(확실하지 않은 경우 <q id=\"q-first-1\">아니오</q>로 두십시오)."
          ],
          "adding a custom language": [
             "사용자 정의 언어 추가하기"
+         ],
+         "What are the languages of your site?": [
+            "사이트의 언어는 무엇입니까?"
          ],
          "Default language": [
             "기본 언어"
@@ -241,9 +244,6 @@
          ],
          "create a custom language": [
             "사용자 정의 언어를 만드십시오."
-         ],
-         "What are the languages of your site?": [
-            "사이트의 언어는 무엇입니까?"
          ],
          "You can add a dedicated person to oversee everything translation-related on your site. %sTranslation Managers%s can add new local translators or professional translation services, create and assign translation jobs, review completed translations, and change translation-related settings.": [
             "사이트에서 번역과 관련된 모든 것을 관리할 전담 사용자를 추가할 수 있습니다. %s번역 관리자%s는 새로운 로컬 번역가나 전문 번역 서비스 제공자를 추가하고 번역 작업을 생성 및 할당하며, 완료된 번역을 검토하고 번역 관련 설정을 변경할 수 있습니다."

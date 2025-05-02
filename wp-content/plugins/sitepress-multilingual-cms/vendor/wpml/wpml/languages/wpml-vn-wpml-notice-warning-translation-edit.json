@@ -1,0 +1,31 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Warning:": [
+            "Cảnh báo:"
+         ],
+         "Edits you're about to make will be lost": [
+            "Các chỉnh sửa bạn sắp thực hiện sẽ bị mất"
+         ],
+         "You are about to edit this translation using %s.": [
+            "Bạn sắp chỉnh sửa bản dịch này bằng %s."
+         ],
+         "Any changes you make will be lost the next time you send this page for translation.": [
+            "Bất kỳ thay đổi nào bạn thực hiện sẽ bị mất vào lần tiếp theo bạn gửi trang này để dịch."
+         ],
+         "Go back": [
+            "Quay lại"
+         ],
+         "Edit in Advanced Translation Editor": [
+            "Chỉnh sửa trong trình biên dịch nâng cao"
+         ],
+         "Edit anyway (Not recommended)": [
+            "Vẫn chỉnh sửa (Không khuyến nghị)"
+         ]
+      }
+   }
+}

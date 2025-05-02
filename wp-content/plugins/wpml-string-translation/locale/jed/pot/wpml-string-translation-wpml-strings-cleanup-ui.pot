@@ -3,15 +3,15 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/js/strings-cleanup/App.js:16
-#: src/js/strings-cleanup/components/CleanupModal.js:38
-msgid "Remove strings by domain"
-msgstr ""
-
-#: src/js/strings-cleanup/App.js:18
+#: src/js/strings-cleanup/App.js:17
 msgid ""
 "Clean up the String Translation table by removing untranslated strings by "
 "domain."
+msgstr ""
+
+#: src/js/strings-cleanup/App.js:30
+#: src/js/strings-cleanup/components/CleanupModal.js:38
+msgid "Remove strings by domain"
 msgstr ""
 
 #: src/js/strings-cleanup/components/CleanupButton.js:12

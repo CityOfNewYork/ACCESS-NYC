@@ -1,0 +1,31 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Warning:": [
+            "Warnung:"
+         ],
+         "Edits you're about to make will be lost": [
+            "Änderungen, die Sie vornehmen möchten, gehen verloren"
+         ],
+         "You are about to edit this translation using %s.": [
+            "Sie sind im Begriff, diese Übersetzung mit %s zu bearbeiten."
+         ],
+         "Any changes you make will be lost the next time you send this page for translation.": [
+            "Jegliche Änderungen, die Sie vornehmen, gehen verloren, wenn Sie diese Seite das nächste Mal zur Übersetzung senden."
+         ],
+         "Go back": [
+            "Zurück"
+         ],
+         "Edit in Advanced Translation Editor": [
+            "Im erweiterten Übersetzungseditor bearbeiten"
+         ],
+         "Edit anyway (Not recommended)": [
+            "Trotzdem bearbeiten (Nicht empfohlen)"
+         ]
+      }
+   }
+}

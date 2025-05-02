@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-03-12T08:47:08+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: wpml\n"
+
+msgid "Add glossary terms"
+msgstr "Sözlük terimleri ekle"
+
+msgid "Minimize"
+msgstr "Küçült"
+
+msgid "Expand"
+msgstr "Genişlet"
+
+msgid "There's nothing yet in the Glossary"
+msgstr "Sözlükte henüz hiçbir şey yok"
+
+msgid "Looks like you're not yet using the glossary. Glossary can help you:"
+msgstr "Görünüşe göre henüz sözlüğü kullanmıyorsunuz. Sözlük size şu konularda yardımcı olabilir:"
+
+msgid "Improve the quality of the translation"
+msgstr "Çeviri kalitesini artırmak"
+
+msgid "Ensure translation consistency"
+msgstr "Çeviri tutarlılığını sağlamak"
+
+msgid "Reduce translation costs"
+msgstr "Çeviri maliyetlerini azaltmak"
+
+msgid "Improve SEO in translation languages"
+msgstr "Çeviri dillerinde SEO'yu iyileştirmek"
+
+msgid "How to Use the Glossary for Accurate Translations"
+msgstr "Doğru Çeviriler için Sözlüğü Kullanma Yöntemi"
+
+msgid "%d item in the <a>Glossary</a>"
+msgid_plural "%d items in the <a>Glossary</a>"
+msgstr[0] "<a>Sözlükte</a> %d öğe"
+msgstr[1] "<a>Sözlükte</a> %d öğe"

@@ -18,12 +18,6 @@ class WPML_Gutenberg_Integration_Factory {
 			$integrations->add(
 				make( '\WPML\PB\Gutenberg\ReusableBlocks\Integration' )
 			);
-
-			if ( is_admin() ) {
-				$integrations->add(
-					make( '\WPML\PB\Gutenberg\ReusableBlocks\AdminIntegration' )
-				);
-			}
 		}
 
 		if ( ! is_admin() ) {
@@ -43,6 +37,14 @@ class WPML_Gutenberg_Integration_Factory {
 
 		$integrations->add(
 			make( \WPML\PB\Gutenberg\Widgets\Block\RegisterStrings::class )
+		);
+
+		$integrations->add(
+			make( \WPML\PB\Gutenberg\Hooks\TranslationJobImages::class )
+		);
+
+		$integrations->add(
+			make( \WPML\PB\Gutenberg\Hooks\TranslationGuiLabels::class )
 		);
 
 		return $integrations;

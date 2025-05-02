@@ -15,6 +15,8 @@ use WPML\API\PostTypes;
 use WPML\TM\API\Jobs;
 use function WPML\FP\partial;
 use WPML\LIB\WP\User;
+use WPML\FP\Relation;
+use function WPML\FP\pipe;
 
 class WPML_TM_Translation_Status_Display {
 
@@ -53,21 +55,26 @@ class WPML_TM_Translation_Status_Display {
 	 */
 	private $wpdb;
 
+	/** @var TranslateEverything\UntranslatedPosts  */
+	private $untranslatedPosts;
+
 	/**
 	 * WPML_TM_Translation_Status_Display constructor.
 	 *
-	 * @param wpdb $wpdb
-	 * @param SitePress $sitepress
-	 * @param WPML_Post_Status $status_helper
+	 * @param wpdb                         $wpdb
+	 * @param SitePress                    $sitepress
+	 * @param WPML_Post_Status             $status_helper
 	 * @param WPML_Translation_Job_Factory $job_factory
-	 * @param WPML_TM_API $tm_api
+	 * @param WPML_TM_API                  $tm_api
+	 * @param TranslateEverything\UntranslatedPosts $untranslatedPosts
 	 */
 	public function __construct(
 		wpdb $wpdb,
 		SitePress $sitepress,
 		WPML_Post_Status $status_helper,
 		WPML_Translation_Job_Factory $job_factory,
-		WPML_TM_API $tm_api
+		WPML_TM_API $tm_api,
+		TranslateEverything\UntranslatedPosts $untranslatedPosts
 	) {
 		$this->post_translations = $sitepress->post_translations();
 		$this->wpdb              = $wpdb;
@@ -75,6 +82,7 @@ class WPML_TM_Translation_Status_Display {
 		$this->job_factory       = $job_factory;
 		$this->tm_api            = $tm_api;
 		$this->sitepress         = $sitepress;
+		$this->untranslatedPosts = $untranslatedPosts;
 	}
 
 	public function init() {
@@ -189,42 +197,36 @@ class WPML_TM_Translation_Status_Display {
 
 		$this->maybe_load_stats( $trid );
 		if ( ( $this->is_remote( $trid, $lang ) && $this->is_in_progress( $trid, $lang ) ) || $this->it_needs_retry( $trid, $lang ) ) {
-			$language = $this->sitepress->get_language_details( $lang );
-			$text     = sprintf(
-				__(
-					"You can't edit this translation, because this translation to %s is already in progress.",
-					'wpml-translation-management'
-				),
-				$language['display_name']
-			);
+			$ts_name = TranslationProxy::get_service_name( intval( $this->statuses[ $trid ][ $lang ]['translation_service'] ) );
+			$text    = sprintf( __( 'Waiting for translation from %s', 'sitepress' ), $ts_name );
 
 		} elseif ( $this->is_in_basket( $trid, $lang ) ) {
 			$text = __(
 				'Cannot edit this item, because it is currently in the translation basket.',
-				'wpml-translation-management'
+				'sitepress'
 			);
 		} elseif ( $this->is_lang_pair_allowed( $lang, null, $original_post_id ) && $this->is_in_progress( $trid, $lang ) ) {
 			$language = $this->sitepress->get_language_details( $lang );
 
-			if ( $this->shouldAutoTranslate( $trid, $original_post_id, $lang ) ) {
-				$text = sprintf( __( '%s: Waiting for automatic translation', 'wpml-translation-management' ), $language['display_name'] );
+			if ( $this->shouldAutoTranslate( $trid, $original_post_id, $lang ) && $this->has_no_manual_translation( $trid, $lang ) ) {
+				$text = sprintf( __( '%s: Waiting for automatic translation', 'sitepress' ), $language['display_name'] );
 			} else {
-				$text = sprintf( __( 'Edit the %s translation', 'wpml-translation-management' ), $language['display_name'] );
+				$text = $this->get_in_progress_status_txt( $trid, $lang, $language );
 			}
 		} elseif ( ! $this->is_lang_pair_allowed( $lang, $source_lang, $original_post_id ) ) {
 			$language        = $this->sitepress->get_language_details( $lang );
 			$source_language = $this->sitepress->get_language_details( $source_lang );
 			$text            = sprintf(
-				__( 'You don\'t have the rights to translate from %1$s to %2$s', 'wpml-translation-management' ),
+				__( 'You don\'t have the rights to translate from %1$s to %2$s', 'sitepress' ),
 				$source_language['display_name'],
 				$language['display_name']
 			);
 		} elseif ( ! $this->has_user_rights_to_translate( $trid, $lang ) ) {
-			$text = __( "You can only edit translations assigned to you.", 'wpml-translation-management' );
+			$text = __( 'You can only edit translations assigned to you.', 'sitepress' );
 		}
 
 		if ( $this->isTranslateEverythingInProgress( $trid, $original_post_id, $lang ) ) {
-			$text = __( 'WPML is translating your content automatically. You can monitor the progress in the admin bar.', 'wpml-translation-management' );
+			$text = __( 'WPML is translating your content automatically. You can monitor the progress in the admin bar.', 'sitepress' );
 		}
 
 		return $text;
@@ -252,9 +254,10 @@ class WPML_TM_Translation_Status_Display {
 		// I.e. Job created on post update while a Translation Service is
 		// active, but before that service has been able to translate the post,
 		// the user switched to Translate Everything.
-		$job_is_canceled =
-			Obj::assocPath( [ $trid, $lang, 'status' ], ICL_TM_NOT_TRANSLATED );
-
+		$job_is_canceled  = pipe(
+			Obj::path( [ $trid, $lang, 'status' ] ),
+			Relation::equals( ICL_TM_NOT_TRANSLATED )
+		);
 		$job_is_automatic = Obj::path( [ $trid, $lang, 'automatic' ] );
 
 		return Logic::anyPass(
@@ -268,9 +271,9 @@ class WPML_TM_Translation_Status_Display {
 
 	/**
 	 * @param string $link
-	 * @param int $post_id
+	 * @param int    $post_id
 	 * @param string $lang
-	 * @param int $trid
+	 * @param int    $trid
 	 *
 	 * @return string
 	 */
@@ -307,7 +310,7 @@ class WPML_TM_Translation_Status_Display {
 			! $this->is_lang_pair_allowed( $lang, $source_lang, $post_id ) ||
 			$this->it_needs_retry( $trid, $lang )
 		) {
-			$link                                               = '';
+			$link = '';
 			$this->original_links[ $post_id ][ $lang ][ $trid ] = ''; // Also block the native editor
 		} elseif ( $source_lang_code !== $lang ) {
 			$job_id = null;
@@ -354,9 +357,9 @@ class WPML_TM_Translation_Status_Display {
 
 	/**
 	 * @param string $html
-	 * @param int $post_id
+	 * @param int    $post_id
 	 * @param string $lang
-	 * @param int $trid
+	 * @param int    $trid
 	 *
 	 * @return string
 	 */
@@ -442,16 +445,19 @@ class WPML_TM_Translation_Status_Display {
 		}
 
 		// We add the lang parameter to the return url to return from CTE to the post list in the same language.
-		return add_query_arg( [
-			'lang'    => Languages::getCurrentCode(),
-			'referer' => 'ate',
-		], $url );
+		return add_query_arg(
+            [
+				'lang'    => Languages::getCurrentCode(),
+				'referer' => 'ate',
+			],
+            $url
+        );
 	}
 
 	/**
 	 * @param string $lang_to
 	 * @param string $lang_from
-	 * @param int $post_id
+	 * @param int    $post_id
 	 *
 	 * @return bool
 	 */
@@ -474,7 +480,7 @@ class WPML_TM_Translation_Status_Display {
 	 * All admins and editors can edit any translation.
 	 * Other translators can edit only translations which either are assigned to them or unassigned.
 	 *
-	 * @param int $trid
+	 * @param int    $trid
 	 * @param string $lang
 	 *
 	 * @return bool
@@ -506,7 +512,6 @@ class WPML_TM_Translation_Status_Display {
 	 * @param int $trid
 	 *
 	 * @todo make this into a proper active record user
-	 *
 	 */
 	private function maybe_load_stats( $trid ) {
 		if ( ! $this->stats_preloaded ) {
@@ -527,11 +532,14 @@ class WPML_TM_Translation_Status_Display {
 	}
 
 	private function is_in_progress( $trid, $lang ) {
-		return Lst::includes( (int) Obj::path( [ $trid, $lang, 'status' ], $this->statuses ), [
-			ICL_TM_IN_PROGRESS,
-			ICL_TM_WAITING_FOR_TRANSLATOR,
-			ICL_TM_ATE_NEEDS_RETRY
-		] );
+		return Lst::includes(
+            (int) Obj::path( [ $trid, $lang, 'status' ], $this->statuses ),
+            [
+				ICL_TM_IN_PROGRESS,
+				ICL_TM_WAITING_FOR_TRANSLATOR,
+				ICL_TM_ATE_NEEDS_RETRY,
+			]
+        );
 	}
 
 	private function it_needs_retry( $trid, $lang ) {
@@ -556,9 +564,8 @@ class WPML_TM_Translation_Status_Display {
 		$postType = Post::getType( $postId );
 		return $postType
 			   && Option::shouldTranslateEverything()
-		       && ! Option::isPausedTranslateEverything()
 		       && $this->shouldAutoTranslate( $trid, $postId, $language )
-		       && ! TranslateEverything::isEverythingProcessedForPostTypeAndLanguage( $postType, $language )
+		       && ! $this->untranslatedPosts->isPostTypeProcessedForTypeAndLanguage( $postType, $language )
 		       && Lst::includes( Post::getType( $postId ), PostTypes::getAutomaticTranslatable() );
 	}
 
@@ -571,11 +578,34 @@ class WPML_TM_Translation_Status_Display {
 		       $this->shouldUseTMEditor( $postId ) &&
 		       Automatic::shouldTranslate( get_post_type( $postId ) ) &&
 		       CachedLanguageMappings::isCodeEligibleForAutomaticTranslations( $targetLang ) &&
-			   $this->has_no_manual_translation( $trid, $targetLang );
+		       $this->doesExistingJobSupportsAte( $trid, $postId, $targetLang );
 	}
 
 	/**
-	 * @param int $trid
+	 * A given post may already have an existing translation created in CTE.
+	 * Depending on the WPML Settings, we may want to exclude such translation from automatic re-translation.
+	 * @see wpmldev-3871
+	 *
+	 * @param int    $trid
+	 * @param int    $postIdD
+	 * @param string $targetLang
+	 *
+	 * @return bool
+	 */
+	private function doesExistingJobSupportsAte( $trid, $postId, $targetLang ): bool {
+		$jobId = isset( $this->statuses[ $trid ][ $targetLang ]['job_id'] )
+			? $this->statuses[ $trid ][ $targetLang ]['job_id']
+			: null;
+
+		if ( ! $jobId ) {
+			return true;
+		}
+
+		return ! wpml_tm_load_old_jobs_editor()->shouldStickToWPMLEditor( $jobId, Jobs::get( $jobId ) );
+	}
+
+	/**
+	 * @param int    $trid
 	 * @param string $lang
 	 *
 	 * @return bool
@@ -584,5 +614,35 @@ class WPML_TM_Translation_Status_Display {
 		$job = Obj::path( [ $trid, $lang ], $this->statuses );
 
 		return Jobs::shouldBeATESynced( $job );
+	}
+
+	/**
+	 * Get tooltip text for In-progress jobs based on translator ID.
+	 *
+	 * @param int    $trid
+	 * @param string $lang
+	 * @param array  $language_details
+	 *
+	 * @return string Tooltip text.
+	 */
+	private function get_in_progress_status_txt( $trid, $lang, $language_details ) {
+		// If it is an automatic job.
+		if ( Obj::path( [ $trid, $lang, 'automatic' ], $this->statuses ) ) {
+			// Translators: %s: Language display name.
+			return sprintf(
+				__( 'Complete the %s translation', 'sitepress' ),
+				$language_details['display_name']
+			);
+		}
+
+		// If it is not an automatic job.
+		$translator_id = Obj::path( [ $trid, $lang, 'translator_id' ], $this->statuses );
+		$status_txt    = $translator_id
+			// Translators: %s: Language display name.
+			? __( '%s translation assigned to local translator', 'sitepress' )
+			// Translators: %s: Language display name.
+			: __( '%s translation awaiting first available translator', 'sitepress' );
+
+		return sprintf( $status_txt, $language_details['display_name'] );
 	}
 }

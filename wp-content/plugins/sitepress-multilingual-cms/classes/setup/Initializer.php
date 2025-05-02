@@ -13,9 +13,9 @@ use WPML\FP\Obj;
 use WPML\FP\Wrapper;
 use WPML\LIB\WP\Option as WPOption;
 use WPML\LIB\WP\User;
+use WPML\Setup\Endpoint\ShouldShowWCMLMessages;
 use WPML\Setup\Endpoint\CheckTMAllowed;
 use WPML\Setup\Endpoint\CurrentStep;
-use WPML\TM\ATE\TranslateEverything\Pause\View as PauseTranslateEverything;
 use WPML\TM\ATE\TranslateEverything\TranslatableData\View as TranslatableData;
 use WPML\TM\ATE\TranslateEverything\TranslatableData\DataPreSetup;
 
@@ -68,13 +68,13 @@ class Initializer {
 					'licenseStep'            => Endpoint\LicenseStep::class,
 					'translationStep'        => Endpoint\TranslationStep::class,
 					'setTranslateEverything' => SetTranslateEverything::class,
-					'pauseTranslateEverything' => PauseTranslateEverything::class,
 					'recommendedPlugins'     => Endpoint\RecommendedPlugins::class,
 					'finishStep'             => Endpoint\FinishStep::class,
 					'addLanguages'           => Endpoint\AddLanguages::class,
 					'upload'                 => Upload::class,
 					'checkTMAllowed'         => CheckTMAllowed::class,
 					'translatableData'         => TranslatableData::class,
+					'shouldShowWCMLMessages'   => ShouldShowWCMLMessages::class,
 				], TranslationRolesInitializer::getEndPoints() ),
 				'languages'            => [
 					'list'                  => Obj::values( Languages::withFlags( Languages::getAll( $userLang ) ) ),
@@ -96,11 +96,15 @@ class Initializer {
 				],
 				'isTMAllowed'              => Option::isTMAllowed() === true,
 				'isTMDisabled'             => Option::isTMAllowed() === false,
+				'isWCMLWizardWaiting'      => ShouldShowWCMLMessages::getOption(),
 				'ateBaseUrl'               => self::getATEBaseUrl(),
 				'whenFinishedUrlLanguages' => admin_url( UIPage::getLanguages() ),
 				'whenFinishedUrlTM'        => admin_url( UIPage::getTM() ),
 				'ateSignUpUrl'             => admin_url( UIPage::getTMATE() ),
 				'languagesMenuUrl'         => admin_url( UIPage::getLanguages() ),
+				'postsListingUrl'          => admin_url( 'edit.php' ),
+				'pagesListingUrl'          => admin_url( 'edit.php?post_type=page' ),
+				'WCMLWizardUrl'            => admin_url( 'index.php?page=wcml-setup' ),
 				'adminUserName'            => User::getCurrent()->display_name,
 				'translation'              => Lst::concat(
 					TranslationMethodSettings::getModeSettingsData(),

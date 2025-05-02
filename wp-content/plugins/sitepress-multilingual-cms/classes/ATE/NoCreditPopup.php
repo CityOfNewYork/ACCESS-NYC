@@ -22,7 +22,7 @@ class NoCreditPopup {
 	/**
 	 * @return array
 	 */
-	public function getData( $ateJobIds = null ) {
+	public function getData() {
 		$registration_data = make( \WPML_TM_AMS_API::class )->get_registration_data();
 
 		$data = [
@@ -37,10 +37,6 @@ class NoCreditPopup {
 			'container'    => '#wpml-ate-console-container',
 			'languages'    => $this->getLanguagesData(),
 		];
-
-		if ( $ateJobIds ) {
-			$data['job_list'] = $ateJobIds;
-		}
 
 		return $data;
 	}

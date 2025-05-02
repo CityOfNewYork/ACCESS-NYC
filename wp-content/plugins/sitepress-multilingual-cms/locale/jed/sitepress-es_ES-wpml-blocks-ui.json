@@ -3,8 +3,7 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "lang": "es_ES"
+            "domain": "messages"
          },
          "Advanced": [
             "Avanzada"
@@ -23,6 +22,12 @@
          ],
          "Color": [
             "Color"
+         ],
+         "px": [
+            "px"
+         ],
+         "%": [
+            "%"
          ],
          "Dimensions": [
             "Dimensiones"

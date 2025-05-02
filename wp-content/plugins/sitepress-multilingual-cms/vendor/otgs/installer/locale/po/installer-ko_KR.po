@@ -1,0 +1,818 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-04-08T10:19:58+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: installer\n"
+
+#. translators: %1$s and %2$s are opening and closing link tags.
+#: includes/admin-notices/notices/Account.php:107
+msgid "This site is registered on wpml.org as a development site. %1$sLearn more%2$s"
+msgstr "이 사이트는 wpml.org에 개발 사이트로 등록되어 있습니다. %1$sLearn more%2$s"
+
+#: includes/admin-notices/notices/Account.php:111
+msgid "Development Site"
+msgstr "개발 사이트"
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:18
+msgid "You are using an unregistered version of %s and are not receiving compatibility and security updates"
+msgstr "등록되지 않은 %s 버전을 사용 중이며 호환성 및 보안 업데이트를 받지 못하고 있습니다"
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:20
+msgid "%s plugin must be registered in order to receive stability and security updates. Without these updates, the plugin may become incompatible with new versions of WordPress, which include security patches."
+msgstr "안정 및 보안 업데이트를 받으려면 %s 플러그인을 등록해야 합니다. 이러한 업데이트가 없으면 플러그인이 보안 패치가 포함된 새 버전의 워드프레스와 호환되지 않을 수 있습니다."
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:29
+#: includes/admin-notices/notices/Texts.php:40
+msgid "Your %s account has expired."
+msgstr "%s 계정이 만료되었습니다."
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:31
+msgid "Your site is vulnerable to breaking changes in future WordPress releases. Purchase a new account to protect your site with the latest %s releases."
+msgstr "귀하의 사이트는 향후 워드프레스 릴리스의 변경 사항에 취약합니다. 새 계정을 구매하여 최신 %s 릴리스로 사이트를 보호하세요."
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:42
+msgid "Your site is vulnerable to breaking changes in future WordPress releases. Renew your account to protect your site with the latest %s releases."
+msgstr "귀하의 사이트는 향후 워드프레스 릴리스의 변경 사항에 취약합니다. 계정을 갱신하여 최신 %s 릴리스로 사이트를 보호하세요."
+
+#. translators: %s Product url
+#: includes/admin-notices/notices/Texts.php:52
+msgid "This site is registered on %s as a development site."
+msgstr "이 사이트는 %s 에 개발 사이트로 등록되어 있습니다."
+
+#. translators: %1$s is the text "update the site key" inside a link and %2$s is the text "Learn more" inside a link
+#: includes/admin-notices/notices/Texts.php:54
+msgid "When this site goes live, remember to %1$s from \"development\" to \"production\" to remove this message. %2$s"
+msgstr "이 사이트가 라이브 상태가 되면 %1$s 을 \"개발\"에서 \"프로덕션\"으로 변경하여 이 메시지를 제거하세요. %2$s"
+
+#: includes/admin-notices/notices/Texts.php:57
+msgid "update the site key"
+msgstr "사이트 키 업데이트"
+
+#: includes/admin-notices/notices/Texts.php:58
+msgid "Learn more"
+msgstr "자세히 보기"
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:66
+msgid "Remember to remove %s from this website"
+msgstr "이 웹사이트에서 %s 을 삭제하는 것을 잊지 마세요"
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:68
+msgid "This site is using the %s plugin, which has not been paid for. After receiving a refund, you should remove this plugin from your sites. Using unregistered plugins means you are not receiving stability and security updates and will ultimately lead to problems running the site."
+msgstr "이 사이트는 결제하지 않은 %s 플러그인을 사용하고 있습니다. 환불을 받은 후에는 사이트에서 이 플러그인을 제거해야 합니다. 등록되지 않은 플러그인을 사용하면 안정성 및 보안 업데이트를 받지 못하므로 결국 사이트 운영에 문제가 발생할 수 있습니다."
+
+#. translators: %1$s Product name %2$s host name (ex. wpml.org)
+#: includes/admin-notices/notices/Texts.php:76
+msgid "%1$s plugin cannot connect to %2$s"
+msgstr "%1$s 플러그인이 %2$s에 연결할 수 없습니다"
+
+#. translators: %1$s Product name %2$s host name (ex. wpml.org)
+#: includes/admin-notices/notices/Texts.php:79
+msgid "%1$s needs to connect to its server to check for new releases and security updates. Something in the network or security settings is preventing this. Please allow outgoing communication to %2$s to remove this notice."
+msgstr "%1$s는 새 릴리스와 보안 업데이트를 확인하기 위해 서버에 연결해야 합니다. 네트워크나 보안 설정의 어떤 것이 이를 방해하고 있습니다. 이 알림을 제거하려면 %2$s로 나가는 통신을 허용하세요."
+
+#: includes/admin-notices/notices/Texts.php:81
+msgid "Need help?"
+msgstr "도움 필요?"
+
+#. translators: %1$s is `communication error details` %2$s is ex. wpml.org technical support
+#: includes/admin-notices/notices/Texts.php:83
+msgid "See the %1$s and let us know in %2$s."
+msgstr "%1$s를 확인하고 %2$s로 알려주세요."
+
+#. translators: %1$s is `communication error details` %2$s is ex. wpml.org technical support
+#: includes/admin-notices/notices/Texts.php:84
+msgid "communication error details"
+msgstr "통신 오류 세부 정보"
+
+#. translators: %s is host name (ex. wpml.org)
+#: includes/admin-notices/notices/Texts.php:86
+msgid "%s technical support"
+msgstr "%s 기술 지원"
+
+#: includes/admin-notices/notices/Texts.php:96
+msgid "Please install %s to allow translating %s."
+msgstr "%s을 번역할 수 있도록 %s을 설치하세요."
+
+#: includes/admin-notices/notices/Texts.php:135
+msgid "Install and activate"
+msgstr "설치 및 활성화"
+
+#: includes/admin-notices/notices/Texts.php:136
+msgid "Ignore and don't ask me again"
+msgstr "무시하고 다시 묻지 마세요"
+
+#: includes/admin-notices/notices/Texts.php:147
+#: includes/class-wp-installer.php:525
+#: includes/upgrade/AutoUpgrade.php:114
+#: templates/repository-register.php:49
+msgid "Register"
+msgstr "등록하기"
+
+#: includes/admin-notices/notices/Texts.php:148
+msgid "This is a development / staging site"
+msgstr "개발/스테이징 사이트입니다"
+
+#: includes/admin-notices/notices/Texts.php:159
+msgid "Purchase %s"
+msgstr "구매 %s"
+
+#: includes/admin-notices/notices/Texts.php:160
+#: includes/admin-notices/notices/Texts.php:175
+#: includes/admin-notices/notices/Texts.php:189
+#: templates/repository-refunded.php:15
+msgid "Check my order status"
+msgstr "주문 상태 확인"
+
+#: includes/admin-notices/notices/Texts.php:161
+#: includes/admin-notices/notices/Texts.php:176
+msgid "Got renewal already?"
+msgstr "이미 갱신하셨나요?"
+
+#: includes/admin-notices/notices/Texts.php:174
+msgid "Renew your account"
+msgstr "계정 갱신"
+
+#: includes/admin-notices/notices/Texts.php:190
+#: templates/repository-refunded.php:14
+msgid "Bought again?"
+msgstr "다시 구매?"
+
+#: includes/admin-notices/notices/Texts.php:203
+msgid "Dismiss"
+msgstr "해지"
+
+#: includes/class-installer-dependencies.php:98
+msgid ""
+"Downloading is not possible. WordPress cannot create required folders because of the\n"
+"                                        256 characters limitation of the current Windows environment."
+msgstr "폴더 생성 불가로 다운로드 불가능. 윈도우 256자 제한."
+
+#: includes/class-installer-dependencies.php:257
+msgid "Return to the updates page"
+msgstr "업데이트 페이지로 돌아가기"
+
+#: includes/class-installer-dependencies.php:293
+msgid "OTGS Installer"
+msgstr "OTGS 인스톨러"
+
+#: includes/class-installer-dependencies.php:298
+msgid "%s, responsible for receiving automated updates for WPML and Toolset, requires the following PHP component(s) in order to function:"
+msgstr "%s은 WPML 및 Toolset에 대한 자동 업데이트를 수신하는 역할을 하며 작동하려면 다음 PHP 구성 요소가 필요합니다"
+
+#: includes/class-installer-dependencies.php:305
+msgid "Learn more: %s"
+msgstr "자세히 알아보기: %s"
+
+#: includes/class-installer-theme.php:890
+msgid "To install and update %s, please %sregister%s %s for this site."
+msgstr "%s을 설치하고 업데이트하려면 이 사이트에 대해 %sregister%s %s을(를) 요청하세요."
+
+#: includes/class-installer-upgrader-skins.php:47
+msgid "We were not able to copy some plugin files. This is usually due to issues with permissions for WordPress content or plugins folder."
+msgstr "일부 플러그인 파일을 복사할 수 없습니다. 이는 일반적으로 워드프레스 콘텐츠 또는 플러그인 폴더에 대한 권한 문제로 인해 발생합니다."
+
+#: includes/class-otgs-installer-plugins-page-notice.php:93
+msgid "Your %s account has expired. %sPurchase today%s to protect your site from breaking changes in future WordPress releases."
+msgstr "%s 계정이 만료되었습니다. %s오늘 구매하세요%s. 향후 WordPress 릴리스에서 사이트가 손상되는 변경 사항으로부터 보호됩니다."
+
+#: includes/class-otgs-installer-plugins-page-notice.php:101
+msgid "Your %s account has expired. %sRenew today%s to protect your site from breaking changes in future WordPress releases."
+msgstr "%s 계정이 만료되었습니다. %s오늘 갱신%s하여 향후 WordPress 릴리스에서 사이트가 손상되는 변경 사항으로부터 보호되도록 하세요."
+
+#: includes/class-otgs-installer-plugins-page-notice.php:109
+msgid "Remember to remove %s from this website. %sCheck my order status%s"
+msgstr "이 웹사이트에서 %s 을 삭제해야 합니다. %s내 주문 상태 확인%s"
+
+#: includes/class-otgs-installer-plugins-page-notice.php:119
+msgid "You have an old, free subscription for Toolset Types which doesn't provide automatic updates. %sUpgrade your account%s"
+msgstr "자동 업데이트를 제공하지 않는 구형 무료 Toolset Types 구독을 사용 중입니다. %s계정 업그레이드%s"
+
+#: includes/class-otgs-installer-plugins-page-notice.php:129
+msgid "You are using an unregistered version of %s and are not receiving compatibility and security updates. %sRegister now%s"
+msgstr "등록되지 않은 %s 버전을 사용하고 있으며 호환성 및 보안 업데이트를 받지 못하고 있습니다. %sRegister now%s"
+
+#: includes/class-otgs-installer-plugins-page-notice.php:156
+msgid "You are using the complementary %1$s. For the %2$s, %3$s."
+msgstr "보완적인 %1$s를 사용하고 있습니다. %2$s의 경우 %3$s입니다."
+
+#: includes/class-otgs-installer-plugins-page-notice.php:157
+msgid "complete set of features"
+msgstr "전체 기능 세트"
+
+#: includes/class-otgs-installer-plugins-page-notice.php:157
+msgid "upgrade to Toolset"
+msgstr "툴셋으로 업그레이드"
+
+#: includes/class-otgs-installer-subscription-warning-message.php:65
+msgid "Renew today"
+msgstr "오늘 갱신하기"
+
+#: includes/class-otgs-installer-subscription-warning-message.php:65
+msgid "to protect your site from breaking changes in future WordPress releases."
+msgstr "를 추가하여 향후 워드프레스 릴리스의 변경 사항으로부터 사이트를 보호할 수 있습니다."
+
+#: includes/class-otgs-installer-subscription-warning-message.php:72
+msgid "Your %s account expires in %d day."
+msgid_plural "Your %s account expires in %d days."
+msgstr[0] "귀하의 %s 계정이 %d일 후에 만료됩니다."
+msgstr[1] "귀하의 %s 계정은 %d일 후에 만료됩니다."
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:97
+msgid "Reporting to"
+msgstr "보고 대상"
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:98
+msgid "Report to"
+msgstr "보고 대상"
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:99
+msgid "Send theme and plugins information, in order to get faster support and compatibility alerts"
+msgstr "테마 및 플러그인 정보를 전송하여 더 빠른 지원 및 호환성 알림을 받습니다"
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:101
+msgid "Don't send this information and skip compatibility alerts"
+msgstr "이 정보를 보내지 않고 호환성 알림을 건너뛰세요"
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:103
+msgid "which theme and plugins you are using."
+msgstr "어떤 테마와 플러그인을 사용하고 있는지 확인합니다."
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:142
+msgid "Privacy and data usage policy"
+msgstr "개인정보 및 데이터 사용 정책"
+
+#: includes/class-wp-installer-channels.php:40
+msgid "Development"
+msgstr "개발"
+
+#: includes/class-wp-installer-channels.php:42
+msgid "Beta"
+msgstr "베타"
+
+#: includes/class-wp-installer-channels.php:44
+msgid "Production"
+msgstr "프로덕션"
+
+#: includes/class-wp-installer.php:190
+msgid "Installing %s"
+msgstr "%s 설치 중"
+
+#: includes/class-wp-installer.php:191
+msgid "Updating %s"
+msgstr "%s 업데이트 중"
+
+#: includes/class-wp-installer.php:192
+msgid "Activating %s"
+msgstr "%s 활성화"
+
+#: includes/class-wp-installer.php:358
+#: includes/class-wp-installer.php:359
+#: includes/class-wp-installer.php:1124
+msgid "Installer"
+msgstr "설치자"
+
+#: includes/class-wp-installer.php:513
+msgid "Upgrade"
+msgstr "업그레이드"
+
+#: includes/class-wp-installer.php:519
+msgid "Registered"
+msgstr "등록됨"
+
+#: includes/class-wp-installer.php:701
+msgid ""
+"You are using an invalid site key defined as the constant %s (most likely in wp-config.php).\n"
+"                                                Please remove it or use the correct value in order to be able to register correctly."
+msgstr "상수 %s(대부분 wp-config.php에 있음)로 정의된 잘못된 사이트 키를 사용하고 있습니다.\n 올바르게 등록하려면 해당 키를 제거하거나 올바른 값을 사용하세요."
+
+#: includes/class-wp-installer.php:824
+msgid "Commercial"
+msgstr "상업용"
+
+#: includes/class-wp-installer.php:1014
+msgid "Installer cannot display the products information because the automatic updating for %s was explicitly disabled with the configuration below (usually in wp-config.php):"
+msgstr "%s에 대한 자동 업데이트가 아래 구성(일반적으로 wp-config.php에 있음)에서 명시적으로 비활성화되었기 때문에 설치 프로그램이 제품 정보를 표시할 수 없습니다"
+
+#: includes/class-wp-installer.php:1016
+msgid "In order to see the products information, please run the %smanual updates check%s to initialize the products list or (temporarily) remove the above code."
+msgstr "제품 정보를 확인하려면 %s수동 업데이트 확인%s을 실행하여 제품 목록을 초기화하거나 위 코드를 (일시적으로) 제거하세요."
+
+#: includes/class-wp-installer.php:1044
+msgid "Installer cannot contact our updates server to get information about the available products and check for new versions. If you are seeing this message for the first time, you can ignore it, as it may be a temporary communication problem. If the problem persists and your WordPress admin is slowing down, you can disable automated version checks. Add the following line to your wp-config.php file:"
+msgstr "설치 프로그램이 사용 가능한 제품에 대한 정보를 얻고 새 버전을 확인하기 위해 업데이트 서버에 연결할 수 없습니다. 이 메시지가 처음 표시되는 경우 일시적인 통신 문제일 수 있으므로 무시해도 됩니다. 문제가 지속되고 워드프레스 관리자 속도가 느려지는 경우 자동 버전 확인을 비활성화할 수 있습니다. wp-config.php 파일에 다음 줄을 추가합니다:"
+
+#: includes/class-wp-installer.php:1071
+#: includes/class-wp-installer.php:1075
+msgid "Information about new versions is invalid. It may be a temporary communication problem, please check for updates again."
+msgstr "새 버전에 대한 정보가 유효하지 않습니다. 일시적인 통신 문제일 수 있으니 업데이트를 다시 확인해 주세요."
+
+#: includes/class-wp-installer.php:1115
+msgid "Sorry, you are not allowed to manage Installer for this site."
+msgstr "죄송합니다. 이 사이트의 설치 관리자는 관리할 수 없습니다."
+
+#: includes/class-wp-installer.php:1154
+msgid "No repositories defined."
+msgstr "정의된 리포지토리가 없습니다."
+
+#: includes/class-wp-installer.php:1376
+msgid "We have preselected the plugins your site needs to be fully multilingual."
+msgstr "귀하의 사이트가 완전히 다국어화되는 데 필요한 플러그인들을 미리 선택해 두었습니다."
+
+#: includes/class-wp-installer.php:1612
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:67
+msgid "Invalid site key for the current site."
+msgstr "현재 사이트에 대한 사이트 키가 잘못되었습니다."
+
+#: includes/class-wp-installer.php:1613
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:67
+msgid "Please note that the site key is case sensitive."
+msgstr "사이트 키는 대소문자를 구분합니다."
+
+#: includes/class-wp-installer.php:1618
+msgid "%s cannot access %s to register. Try again to see if it's a temporary problem. If the problem continues, make sure that this site has access to the Internet."
+msgstr "%s은 등록하기 위해 %s에 액세스할 수 없습니다. 일시적인 문제인지 다시 시도해 보세요. 문제가 계속되면 이 사이트가 인터넷에 액세스할 수 있는지 확인하세요."
+
+#: includes/class-wp-installer.php:2259
+msgid "Connection failed! Please refresh the page and try again. (%s)"
+msgstr "연결에 실패했습니다! 페이지를 새로고침하고 다시 시도하세요. (%s)"
+
+#: includes/class-wp-installer.php:2262
+msgid "Your subscription appears to no longer be valid. Please try to register again using a valid site key."
+msgstr "구독이 더 이상 유효하지 않은 것 같습니다. 유효한 사이트 키를 사용하여 다시 등록해 보세요."
+
+#: includes/class-wp-installer.php:2891
+#: includes/class-wp-installer.php:2953
+msgid "%s cannot update because your site's registration is not valid. Please %sregister %s%s again for this site first."
+msgstr "%s은 귀하의 사이트 등록이 유효하지 않기 때문에 업데이트할 수 없습니다. 먼저 이 사이트에 대해 %s%s%s을 다시 등록하세요."
+
+#: includes/class-wp-installer.php:2976
+msgid "Update Plugin"
+msgstr "플러그인 업데이트"
+
+#: includes/class-wp-installer.php:2977
+msgid "Return to the plugins page"
+msgstr "플러그인 페이지로 돌아가기"
+
+#: includes/products/commercial-tab/DownloadsList.php:28
+msgid "(embedded)"
+msgstr "(임베디드)"
+
+#: includes/products/commercial-tab/DownloadsList.php:42
+msgid "Release notes"
+msgstr "릴리스 노트"
+
+#: includes/products/OTGS_Installer_Products_Parser.php:101
+msgid "Information about versions of %s are invalid. It may be a temporary communication problem, please check for updates again."
+msgstr "%s 버전에 대한 정보가 잘못되었습니다. 일시적인 통신 문제일 수 있습니다. 업데이트를 다시 확인하세요."
+
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:40
+msgid "Empty site key!"
+msgstr "사이트 키 비우기!"
+
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:44
+msgid "Invalid request!"
+msgstr "잘못된 요청입니다!"
+
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:125
+msgid "Invalid site key for the current site. If the error persists, try to un-register first and then register again with the same site key."
+msgstr "현재 사이트에 대한 사이트 키가 잘못되었습니다. 오류가 계속되면 먼저 등록을 취소한 다음 동일한 사이트 키로 다시 등록해 보세요."
+
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:179
+msgid "%s cannot access %s to register. Try again to see if it's a temporary problem. If the problem continues, make sure that this site has access to the Internet. You can still use the plugin without registration, but you will not receive automated updates."
+msgstr "%s은 등록하기 위해 %s에 액세스할 수 없습니다. 일시적인 문제인지 다시 시도해 보세요. 문제가 계속되면 이 사이트가 인터넷에 액세스할 수 있는지 확인하세요. 등록 없이도 플러그인을 사용할 수 있지만 자동 업데이트는 받을 수 없습니다."
+
+#: includes/support/class-otgs-installer-support-hooks.php:20
+#: includes/support/class-otgs-installer-support-template.php:39
+#: includes/support/class-otgs-installer-support-template.php:43
+#: includes/support/class-otgs-installer-support-template.php:56
+msgid "Installer Support"
+msgstr "설치 관리자 지원"
+
+#: includes/support/class-otgs-installer-support-template.php:40
+msgid "For retrieving Installer debug information use the %s page."
+msgstr "설치 프로그램 디버그 정보를 검색하려면 %s 페이지를 이용하세요."
+
+#: includes/support/class-otgs-installer-support-template.php:58
+msgid "Installer Log"
+msgstr "설치 로그"
+
+#: includes/support/class-otgs-installer-support-template.php:59
+msgid "Request URL"
+msgstr "요청 URL"
+
+#: includes/support/class-otgs-installer-support-template.php:60
+msgid "Request Arguments"
+msgstr "요청 인수"
+
+#: includes/support/class-otgs-installer-support-template.php:61
+msgid "Response"
+msgstr "응답"
+
+#: includes/support/class-otgs-installer-support-template.php:62
+msgid "Component"
+msgstr "구성 요소"
+
+#: includes/support/class-otgs-installer-support-template.php:63
+msgid "Time"
+msgstr "시간"
+
+#: includes/support/class-otgs-installer-support-template.php:64
+msgid "Log is empty"
+msgstr "로그 비어 있음"
+
+#: includes/support/class-otgs-installer-support-template.php:67
+msgid "Installer System Status"
+msgstr "설치 관리자 시스템 상태"
+
+#: includes/support/class-otgs-installer-support-template.php:68
+msgid "Check Now"
+msgstr "지금 확인"
+
+#: includes/support/class-otgs-installer-support-template.php:71
+msgid "Required PHP Libraries"
+msgstr "필수 PHP 라이브러리"
+
+#: includes/support/class-otgs-installer-support-template.php:74
+msgid "All Installer Instances"
+msgstr "모든 설치 관리자 인스턴스"
+
+#: includes/support/class-otgs-installer-support-template.php:75
+msgid "Path"
+msgstr "경로"
+
+#: includes/support/class-otgs-installer-support-template.php:76
+msgid "Version"
+msgstr "버전"
+
+#: includes/support/class-otgs-installer-support-template.php:77
+msgid "High priority"
+msgstr "높은 우선순위"
+
+#: includes/support/class-otgs-installer-support-template.php:78
+msgid "Delegated"
+msgstr "위임"
+
+#: includes/support/class-otgs-installer-support-template.php:86
+msgid "WPML API server"
+msgstr "WPML API 서버"
+
+#: includes/support/class-otgs-installer-support-template.php:91
+msgid "Toolset API server"
+msgstr "툴셋 API 서버"
+
+#: includes/upgrade/AutoUpgrade.php:115
+msgid " to use auto-updates"
+msgstr "자동 업데이트 사용"
+
+#: loader.php:72
+msgid "This site is registered on %s as a development site. Switch to a production site key to %s."
+msgstr "이 사이트는 %s에 개발 사이트로 등록되어 있습니다. %s의 프로덕션 사이트 키로 전환하세요."
+
+#: loader.php:77
+msgid "This site is registered on Toolset.com as a development site."
+msgstr "이 사이트는 Toolset.com에 개발 사이트로 등록되어 있습니다."
+
+#: templates/channel-selector.php:3
+msgid "Updates channel:"
+msgstr "채널 업데이트:"
+
+#: templates/channel-selector.php:12
+msgid "To select different update channels (beta, development) you must update your existing products to their most recent stable versions."
+msgstr "다른 업데이트 채널(베타, 개발)을 선택하려면 기존 제품을 가장 최신의 안정적인 버전으로 업데이트해야 합니다."
+
+#: templates/channel-selector.php:15
+msgid "Updating the plugins on your site. Please don't close this page or navigate away."
+msgstr "사이트의 플러그인 업데이트하기. 이 페이지를 닫거나 다른 페이지로 이동하지 마세요."
+
+#: templates/channel-selector.php:25
+msgid "Something went wrong and we could not install all updates from the %s channel. Click here to %stry again%s. If the errors persist, please switch back to the Production channel and contact the %s%s support%s."
+msgstr "문제가 발생하여 %s 채널에서 모든 업데이트를 설치할 수 없습니다. 여기를 클릭하여 %s다시 시도하세요%s. 오류가 계속되면 프로덕션 채널로 다시 전환한 후 %s%s 지원팀%s에 문의하세요."
+
+#: templates/channel-selector.php:33
+msgid "There was a problem switching to the %s channel. You can %sretry%s. If the problem continues, please %sdownload %s%s and install again manually"
+msgstr "%s 채널로 전환하는 중에 문제가 발생했습니다. %s다시 시도%s할 수 있습니다. 문제가 계속되면 %s%s을 다운로드%s하여 수동으로 다시 설치하세요"
+
+#: templates/channel-selector.php:47
+msgid "Cancel"
+msgstr "취소"
+
+#: templates/channel-selector.php:48
+msgid "Switch"
+msgstr "스위치"
+
+#: templates/channel-selector.php:51
+msgid "The plugins will update to the most recent version in the channel that you selected."
+msgstr "플러그인은 선택한 채널에서 가장 최신 버전으로 업데이트됩니다."
+
+#: templates/channel-selector.php:55
+msgid "Remember my preference."
+msgstr "내 선호도를 기억하세요."
+
+#: templates/channel-selector.php:62
+msgid "You are using a potentially less stable channel for %s. If you didn't enable this on purpose, you should switch to the 'Production' channel."
+msgstr "%s에 대해 잠재적으로 덜 안정적인 채널을 사용하고 있습니다. 의도적으로 이것을 활성화하지 않은 경우 'Production' 채널로 전환해야 합니다."
+
+#: templates/downloads-list-compact.php:8
+#: templates/downloads-list.php:29
+msgid "Plugin"
+msgstr "플러그인"
+
+#: templates/downloads-list-compact.php:9
+msgid "Available"
+msgstr "사용 가능"
+
+#: templates/downloads-list-compact.php:10
+#: templates/downloads-list.php:30
+msgid "Installed"
+msgstr "설치됨"
+
+#: templates/downloads-list-compact.php:11
+msgid "Downloading"
+msgstr "다운로드"
+
+#: templates/downloads-list-compact.php:12
+msgid "Activate"
+msgstr "활성화"
+
+#: templates/downloads-list-compact.php:52
+msgid "downloading..."
+msgstr "다운로드 중..."
+
+#: templates/downloads-list-compact.php:53
+msgid "failed!"
+msgstr "실패!"
+
+#: templates/downloads-list-compact.php:53
+msgid "downloaded"
+msgstr "다운로드"
+
+#: templates/downloads-list-compact.php:56
+msgid "activating"
+msgstr "활성화"
+
+#: templates/downloads-list-compact.php:57
+msgid "activated"
+msgstr "활성화됨"
+
+#: templates/downloads-list-compact.php:65
+#: templates/downloads-list.php:55
+msgid "Downloading is not possible because WordPress cannot write into the plugins folder. %sHow to fix%s."
+msgstr "워드프레스에서 플러그인 폴더에 쓸 수 없기 때문에 다운로드할 수 없습니다. %s수정 방법%s."
+
+#: templates/downloads-list-compact.php:72
+#: templates/downloads-list.php:62
+msgid "Download"
+msgstr "다운로드"
+
+#: templates/downloads-list-compact.php:74
+#: templates/downloads-list.php:66
+msgid "Activate after download"
+msgstr "다운로드 후 활성화"
+
+#: templates/downloads-list-compact.php:77
+#: templates/downloads-list.php:70
+msgid "Operation complete!"
+msgstr "작업 완료!"
+
+#: templates/downloads-list-compact.php:79
+msgid ""
+"Download failed!\n"
+"\n"
+"Click OK to revalidate your subscription or CANCEL to try again."
+msgstr "다운로드 실패. 구독 재확인 또는 재시도."
+
+#: templates/downloads-list.php:31
+msgid "Current"
+msgstr "현재"
+
+#: templates/downloads-list.php:32
+msgid "Released"
+msgstr "출시"
+
+#: templates/downloads-list.php:72
+msgid ""
+"Download failed!\n"
+"\n"
+"Please refresh the page and try again."
+msgstr "다운로드 실패. 페이지 새로고침 후 재시도."
+
+#: templates/products-compact.php:5
+msgid "Incorrect setup"
+msgstr "잘못된 설정"
+
+#: templates/products-compact.php:25
+msgid "Invalid product"
+msgstr "잘못된 제품"
+
+#: templates/products-compact.php:36
+msgid "Unknown repository"
+msgstr "알 수 없는 리포지토리"
+
+#: templates/products-compact.php:44
+msgid " Your current site key (%s) does not match the selected product (%s)."
+msgstr " 현재 사이트 키 (%s)이 선택한 제품 (%s)과 일치하지 않습니다."
+
+#: templates/products-compact.php:65
+msgid "Buy %s"
+msgstr "구매 %s"
+
+#: templates/products-compact.php:69
+msgid "Already bought %s?"
+msgstr "이미 %s?"
+
+#: templates/products-compact.php:74
+#: templates/repository-register.php:20
+msgid "Site-key was set by %s, most likely in wp-config.php. Please remove the constant before attempting to register."
+msgstr "Site-key가 %s, 대부분 wp-config.php에서 설정되었습니다. 등록을 시도하기 전에 상수를 제거하세요."
+
+#: templates/products-compact.php:77
+msgid "Enter site key"
+msgstr "사이트 키 입력"
+
+#: templates/products-compact.php:85
+msgid "Add"
+msgstr "추가"
+
+#: templates/products-compact.php:94
+msgid "Subscription is expired."
+msgstr "구독이 만료되었습니다."
+
+#: templates/products-compact.php:103
+msgid "Renew %s"
+msgstr "갱신 %s"
+
+#: templates/products-compact.php:114
+msgid "Are you sure you want to remove this site key?"
+msgstr "이 사이트 키를 제거하시겠습니까?"
+
+#: templates/products-compact.php:119
+#: templates/repository-registered-buttons.php:12
+msgid "Site-key was set by %s, most likely in wp-config.php. Please remove the constant before attempting to unregister."
+msgstr "Site-key가 %s, 대부분 wp-config.php에서 설정되었습니다. 등록 취소를 시도하기 전에 상수를 제거하세요."
+
+#: templates/products-compact.php:122
+msgid "Remove current site key (%s)"
+msgstr "현재 사이트 키 (%s) 제거"
+
+#: templates/products-compact.php:138
+msgid "%s support on wpml.org"
+msgstr "%s wpml.org에서 지원"
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:17
+msgid "Do you have an account on %s?"
+msgstr "%s에 계정이 있나요?"
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:18
+msgid "Great! You just need to extend your subscription."
+msgstr "좋아요! 구독을 연장하기만 하면 됩니다."
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:20
+msgid "You have a %s account. You just need to extend your subscription."
+msgstr "%s 계정이 있습니다. 구독을 연장하기만 하면 됩니다."
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:21
+msgid "Extend Subscription"
+msgstr "구독 연장"
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:23
+msgid "OK. You need to set up renewal for %s."
+msgstr "OK. %s에 대한 갱신을 설정해야 합니다."
+
+#. translators: %1$s and %2$s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:25
+msgid "You do not have a %1$s account yet. You need to set up a renewal for %2$s."
+msgstr "아직 %1$s 계정이 없습니다. %2$s에 대한 갱신을 설정해야 합니다."
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:27
+msgid "Set Up Renewal For %s"
+msgstr "%s에 대한 갱신 설정"
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:28
+msgid "No worries. We can check that for you."
+msgstr "걱정하지 마세요. 저희가 확인해 드리겠습니다."
+
+#: templates/repository-end-users.php:29
+msgid "Check"
+msgstr "확인"
+
+#: templates/repository-end-users.php:30
+msgid "Your Email Address"
+msgstr "이메일 주소"
+
+#: templates/repository-end-users.php:37
+msgid "Yes"
+msgstr "예"
+
+#: templates/repository-end-users.php:41
+msgid "No"
+msgstr "아니요"
+
+#: templates/repository-end-users.php:45
+msgid "I do not remember"
+msgstr "기억이 나지 않습니다"
+
+#: templates/repository-expired.php:12
+msgid "You are using an expired account of %s."
+msgstr "만료된 %s 계정을 사용하고 있습니다."
+
+#: templates/repository-expired.php:13
+msgid "It means you will not receive updates. This can lead to stability and even security issues."
+msgstr "업데이트를 받지 못한다는 뜻입니다. 이는 안정성 및 보안 문제로 이어질 수 있습니다."
+
+#: templates/repository-expired.php:14
+msgid "Have you already renewed your license?"
+msgstr "이미 라이선스를 갱신하셨나요?"
+
+#: templates/repository-expired.php:15
+msgid "Refresh account status"
+msgstr "계정 상태 새로 고침"
+
+#: templates/repository-legacy-free.php:9
+msgid "Upgrade your account"
+msgstr "계정 업그레이드"
+
+#: templates/repository-legacy-free.php:11
+msgid "You have an old, free subscription for Toolset Types which doesn't provide automatic updates. %s"
+msgstr "자동 업데이트를 제공하지 않는 구형 무료 Toolset Types 구독을 사용 중입니다. %s"
+
+#: templates/repository-listing.php:105
+msgid "Click to see individual components options."
+msgstr "개별 구성 요소 옵션을 보려면 클릭합니다."
+
+#: templates/repository-listing.php:105
+msgid "Individual components"
+msgstr "개별 구성 요소"
+
+#: templates/repository-listing.php:147
+msgid "This page lets you install plugins and update existing plugins. To remove any of these plugins, go to the %splugins%s page and if you have the permission to remove plugins you should be able to do this."
+msgstr "이 페이지에서는 플러그인을 설치하고 기존 플러그인을 업데이트할 수 있습니다. 이러한 플러그인을 제거하려면 %s플러그인%s 페이지로 이동하고 플러그인을 제거할 수 있는 권한이 있는 경우 이 작업을 수행할 수 있어야 합니다."
+
+#: templates/repository-refunded.php:12
+msgid "Remember to remove %s from this website."
+msgstr "이 웹사이트에서 %s 을 삭제하는 것을 잊지 마세요."
+
+#: templates/repository-refunded.php:13
+msgid "This site is using %s plugin, which is not paid for. After receiving a refund, you should remove this plugin from your sites. Using unregistered plugins means that you are not receiving stability and security updates and will ultimately lead to problems running the site."
+msgstr "이 사이트는 유료가 아닌 %s 플러그인을 사용하고 있습니다. 환불을 받은 후에는 사이트에서 이 플러그인을 제거해야 합니다. 등록되지 않은 플러그인을 사용하면 안정성 및 보안 업데이트를 받지 못하므로 결국 사이트 운영에 문제가 발생할 수 있습니다."
+
+#: templates/repository-register.php:14
+msgid "Already purchased %s?"
+msgstr "이미 구매한 %s?"
+
+#: templates/repository-register.php:23
+msgid "Register %s"
+msgstr "등록 %s"
+
+#: templates/repository-register.php:35
+msgid "Enter the site key, from your %1$s account, to receive automatic updates for %2$s."
+msgstr "%1$s 계정의 사이트 키를 입력하여 %2$s에 대한 자동 업데이트를 받으세요."
+
+#: templates/repository-register.php:47
+msgid "Site key"
+msgstr "사이트 키"
+
+#: templates/repository-register.php:51
+msgid "Get a key for this site"
+msgstr "이 사이트의 키 받기"
+
+#: templates/repository-registered-buttons.php:17
+msgid "Are you sure you want to unregister?"
+msgstr "등록을 취소하시겠습니까?"
+
+#: templates/repository-registered-buttons.php:22
+msgid "Unregister %s from this site"
+msgstr "이 사이트에서 %s 등록 취소하기"
+
+#: templates/repository-registered-buttons.php:30
+msgid "Check for updates"
+msgstr "업데이트 확인"
+
+#: templates/repository-registered.php:10
+msgid "%s is registered on this site. You will receive automatic updates until %s"
+msgstr "%s이 이 사이트에 등록되었습니다. %s까지 자동 업데이트를 받게 됩니다"
+
+#: templates/repository-registered.php:11
+msgid "%s is registered on this site. Your Lifetime account gives you updates for life."
+msgstr "%s이 이 사이트에 등록되었습니다. 귀하의 Lifetime 계정은 평생 업데이트를 제공합니다."

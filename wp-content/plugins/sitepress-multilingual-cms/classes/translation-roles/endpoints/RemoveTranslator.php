@@ -37,7 +37,6 @@ class RemoveTranslator extends Remove {
 		             	$runParentRemove
 		             )
 		             ->map( function( $result ) {
-		             	do_action( 'wpml_udpate_translator' );
 		             	do_action( 'wpml_tm_ate_synchronize_translators' );
 		             	return $result;
 		             } );

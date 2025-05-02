@@ -1,0 +1,58 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Edit": [
+            "Επεξεργασία"
+         ],
+         "Shift+Tab": [
+            "Shift+Tab"
+         ],
+         "Tab": [
+            "Tab"
+         ],
+         "Translation to:": [
+            "Μετάφραση προς:"
+         ],
+         "Copy from original": [
+            "Αντιγραφή πρωτοτύπου"
+         ],
+         "Use Shift+Enter to add a new line.": [
+            "Shift+Enter: νέα γραμμή."
+         ],
+         "Original:": [
+            "Πρωτότυπο:"
+         ],
+         "Add %s translation": [
+            "Προσθήκη %s"
+         ],
+         "Edit %s translation": [
+            "Επεξεργασία %s"
+         ],
+         "Add %s translation (the string appears on the site and is not translated)": [
+            "Προσθήκη %s (αμετάφραστο)"
+         ],
+         "Original language %s": [
+            "Γλώσσα πηγής %s"
+         ],
+         "Waiting for translator to %s": [
+            "Αναμονή μεταφραστή %s"
+         ],
+         "Translation in progress to %s": [
+            "Μετάφραση σε εξέλιξη %s"
+         ],
+         "In basket for translation to %s": [
+            "Σε αναμονή %s"
+         ],
+         "Translation saved.": [
+            "Αποθήκευση επιτυχής."
+         ],
+         "Translation update failed.": [
+            "Αποτυχία ενημέρωσης."
+         ]
+      }
+   }
+}

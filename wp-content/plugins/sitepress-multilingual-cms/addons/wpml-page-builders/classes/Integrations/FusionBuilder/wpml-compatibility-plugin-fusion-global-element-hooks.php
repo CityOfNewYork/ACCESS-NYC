@@ -127,7 +127,28 @@ class WPML_Compatibility_Plugin_Fusion_Global_Element_Hooks extends BaseHooks im
 	 * @return array
 	 */
 	public function add_language_column_header( $columns ) {
-		return $this->custom_columns->add_posts_management_column( $columns );
+		if ( $this->getLibraryPostTypeTranslatable() ) {
+			$columns = $this->custom_columns->add_posts_management_column( $columns );
+		}
+
+		return $columns;
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function getLibraryPostTypeTranslatable() {
+		/* phpcs:ignore WordPress.Security.NonceVerification.Recommended */
+		if ( ! isset( $_GET['type'] ) ) {
+			return true;
+		}
+
+		/* phpcs:ignore WordPress.Security.NonceVerification.Recommended */
+		$type = 'template' === $_GET['type']
+			? 'fusion_template'
+			: 'fusion_element';
+
+		return apply_filters( 'wpml_is_translated_post_type', false, $type );
 	}
 
 	public function enqueue_scripts() {
@@ -160,7 +181,10 @@ class WPML_Compatibility_Plugin_Fusion_Global_Element_Hooks extends BaseHooks im
 	 */
 	public function add_language_column_content( $column_name, $item = null ) {
 		$id = $item ? $item['id'] : null;
-		$this->custom_columns->add_content_for_posts_management_column( $column_name, $id );
+
+		if ( $id && apply_filters( 'wpml_is_translated_post_type', false, get_post_type( $id ) ) ) {
+			$this->custom_columns->add_content_for_posts_management_column( $column_name, $id );
+		}
 	}
 
 	public function get_template_translation_icons() {

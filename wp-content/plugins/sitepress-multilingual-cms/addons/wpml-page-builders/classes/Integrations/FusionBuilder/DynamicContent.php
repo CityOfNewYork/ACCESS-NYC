@@ -7,13 +7,13 @@ use WPML\Compatibility\BaseDynamicContent;
 class DynamicContent extends BaseDynamicContent {
 
 	/** @var array */
-	protected $positions = [ 'before', 'after', 'fallback' ];
+	protected $positions = [ 'before', 'after', 'fallback', 'singular_text', 'plural_text' ];
 
 	/**
 	 * Sets $positions dynamic content to be translatable.
 	 *
 	 * @param string|array $string   The decoded string so far.
-	 * @param string $encoding The encoding used.
+	 * @param string       $encoding The encoding used.
 	 *
 	 * @return string|array
 	 */

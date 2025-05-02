@@ -25,29 +25,33 @@ class StatusIcons implements \IWPML_Backend_Action {
 			return;
 		}
 
-		$ifNeedsReview = function ( $fn ) {
-			$doesNeedReview = function( $job ) {
-				// Treat null as ACCEPTED.
-				$review_status = isset( $job['review_status'] ) && $job['review_status']
-					? $job['review_status']
-					: ReviewStatus::ACCEPTED;
-				return ReviewStatus::needsReview( $review_status );
-			};
-
-			return Logic::ifElse( $doesNeedReview, $fn, Obj::prop( 'default' ) );
-		};
-
 		Hooks::onFilter( 'wpml_css_class_to_translation', PHP_INT_MAX , 6 )
 		     ->then( Hooks::getArgs( [ 0 => 'default', 2 => 'languageCode', 3 => 'trid', 4 => 'status', 5 => 'review_status' ] ) )
-		     ->then( $ifNeedsReview( Fns::always( 'otgs-ico-needs-review' ) ) );
+		     ->then( static::ifNeedsReview( Fns::always( 'otgs-ico-needs-review' ) ) );
 
-		Hooks::onFilter( 'wpml_text_to_translation', PHP_INT_MAX, 7 )
-		     ->then( Hooks::getArgs( [ 0 => 'default', 2 => 'languageCode', 3 => 'trid', 5 => 'status', 6 => 'review_status' ] ) )
-		     ->then( $ifNeedsReview ( self::getReviewTitle( 'languageCode' ) ) );
+		add_action( 'init', [ __CLASS__, 'addGetReviewTitleFilter' ] );
 
 		Hooks::onFilter( 'wpml_link_to_translation', PHP_INT_MAX, 7 )
 		     ->then( Hooks::getArgs( [ 0 => 'default', 1 => 'postId', 2 => 'langCode', 3 => 'trid', 5 => 'status', 6 => 'review_status' ] ) )
 		     ->then( $this->setLink() );
+	}
+
+	public static function ifNeedsReview( $fn ) {
+		$doesNeedReview = function( $job ) {
+			// Treat null as ACCEPTED.
+			$review_status = isset( $job['review_status'] ) && $job['review_status']
+				? $job['review_status']
+				: ReviewStatus::ACCEPTED;
+			return ReviewStatus::needsReview( $review_status );
+		};
+
+		return Logic::ifElse( $doesNeedReview, $fn, Obj::prop( 'default' ) );
+	}
+
+	public static function addGetReviewTitleFilter() {
+		Hooks::onFilter( 'wpml_text_to_translation', PHP_INT_MAX, 7 )
+			->then( Hooks::getArgs( [ 0 => 'default', 2 => 'languageCode', 3 => 'trid', 5 => 'status', 6 => 'review_status' ] ) )
+			->then( static::ifNeedsReview( self::getReviewTitle( 'languageCode' ) ) );
 	}
 
 	public static function getReviewTitle( $langProp ) {

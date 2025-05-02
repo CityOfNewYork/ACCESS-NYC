@@ -1,0 +1,1187 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-01-21T12:50:28+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: wpml\n"
+
+msgid "Untranslated strings that I encounter on front-end while logged in"
+msgstr "Oöversatta strängar som jag stöter på i frontend medan jag är inloggad"
+
+msgid "Untranslated strings that all front-end users encounter"
+msgstr "Oöversatta strängar som alla frontend-användare stöter på"
+
+msgid "Disable auto-registration of strings"
+msgstr "Inaktivera automatisk registrering av strängar"
+
+msgid "Plugins"
+msgstr "Plugins"
+
+msgid "Themes"
+msgstr "Teman"
+
+msgid "WordPress"
+msgstr "WordPress"
+
+msgid "Other"
+msgstr "Övrigt"
+
+msgid "Error in fetching default translation batch name"
+msgstr "Fel vid hämtning av standardnamn för översättningssats"
+
+msgid "Error in fetching translation editor type."
+msgstr "Fel vid hämtning av översättarredigerartyp."
+
+msgid "Error in fetching untranslated types count"
+msgstr "Fel vid hämtning av antal oöversatta typer"
+
+msgid "Error in fetching remote translation service data."
+msgstr "Fel vid hämtning av data för fjärröversättningstjänst."
+
+msgid "An error occurred while sending the translation."
+msgstr "Ett fel uppstod vid sändning av översättningen."
+
+msgid "Validation failed"
+msgstr "Validering misslyckades"
+
+msgid "Please wait until download finishes"
+msgstr "Vänta tills nedladdningen är klar"
+
+msgid "You need to wait 5 minutes after the last check"
+msgstr "Du måste vänta 5 minuter efter den senaste kontrollen"
+
+msgid "Check status and get translations"
+msgstr "Kontrollera status och hämta översättningar"
+
+msgid "Status: "
+msgstr "Status: "
+
+msgid "Downloaded jobs: "
+msgstr "Nedladdade jobb: "
+
+msgid "Cancelled jobs: "
+msgstr "Avbrutna jobb: "
+
+msgid "none of your translation jobs have been completed"
+msgstr "inga av dina översättningsjobb har slutförts"
+
+msgid "Checking translation jobs status. Please don't close this page!"
+msgstr "Kontrollerar status för översättningsjobb. Vänligen stäng inte denna sida!"
+
+msgid " have been sent to remote translators"
+msgstr " har skickats till externa översättare"
+
+msgid " has been sent to remote translators"
+msgstr " har skickats till externa översättare"
+
+msgid "Last check: Never"
+msgstr "Senaste kontroll: Aldrig"
+
+msgid "Filtering is disabled to show all selected items. "
+msgstr "Filtrering är inaktiverad för att visa alla valda objekt. "
+
+msgid "Apply filters"
+msgstr "Tillämpa filter"
+
+msgid "%d item selected"
+msgid_plural "%d items selected"
+msgstr[0] "%d objekt valt"
+msgstr[1] "%d objekt valda"
+
+msgid "(%d word count)"
+msgstr "(%d ordantal)"
+
+msgid "%s item not showing."
+msgid_plural "%s items not showing."
+msgstr[0] "%s objekt visas inte."
+msgstr[1] "%s objekt visas inte."
+
+msgid "Show all selected items"
+msgstr "Visa alla valda objekt"
+
+msgid "Translate your content"
+msgstr "Översätt ditt innehåll"
+
+msgid "Unselect all"
+msgstr "Avmarkera alla"
+
+msgid "Source Language:"
+msgstr "Källspråk:"
+
+msgid "translated to:"
+msgstr "översatt till:"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "You are about to change the source language filter from %s to %s"
+msgstr "Du är på väg att ändra källspråksfiltret från %s till %s"
+
+msgid "Updating the source language filter will clear the items you've selected for translation. Are you sure you want to continue?"
+msgstr "Att uppdatera källspråksfiltret kommer att rensa de objekt du har valt för översättning. Är du säker på att du vill fortsätta?"
+
+msgid "Change source language"
+msgstr "Ändra källspråk"
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "All Statuses"
+msgstr "Alla statusar"
+
+msgid "All languages"
+msgstr "Alla språk"
+
+msgid "All translation statuses"
+msgstr "Alla översättningsstatusar"
+
+msgid "Not completed"
+msgstr "Ej slutfört"
+
+msgid "Needs updating"
+msgstr "Behöver uppdateras"
+
+msgid "Translation in progress"
+msgstr "Översättning pågår"
+
+msgid "Translation complete"
+msgstr "Översättning klar"
+
+msgid "Global Filter"
+msgstr "Globalt filter"
+
+msgid "Parent:"
+msgstr "Överordnad:"
+
+msgid "All taxonomies"
+msgstr "Alla taxonomier"
+
+msgid "Taxonomy Term:"
+msgstr "Taxonomiterm:"
+
+msgid "No terms found"
+msgstr "Inga termer hittades"
+
+msgid "Filter by:"
+msgstr "Filtrera efter:"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "There is an issue with automatic translation that needs your attention."
+msgstr "Det finns ett problem med automatisk översättning som kräver din uppmärksamhet."
+
+msgid "Fix to continue translating automatically"
+msgstr "Åtgärda för att fortsätta översätta automatiskt"
+
+msgid "View"
+msgstr "Visa"
+
+msgid "Edit"
+msgstr "Redigera"
+
+msgid "Edit note for the translators"
+msgstr "Redigera anteckning för översättarna"
+
+msgid "Add note for the translators"
+msgstr "Lägg till anteckning för översättarna"
+
+msgid "This page is set to be %1$stranslated manually%2$s using the WordPress Editor"
+msgstr "Denna sida är inställd att %1$söversättas manuellt%2$s med WordPress-redigeraren"
+
+msgid "(no title)"
+msgstr "(ingen titel)"
+
+msgid "Image"
+msgstr "Bild"
+
+msgid "Date / Status"
+msgstr "Datum / Status"
+
+msgid "Word count"
+msgstr "Ordantal"
+
+msgid "Loading items..."
+msgstr "Laddar objekt..."
+
+msgid "%1$d %2$s selected"
+msgstr "%1$d %2$s valda"
+
+msgid "items"
+msgstr "objekt"
+
+msgid "Filtering is disabled to show all selected items"
+msgstr "Filtrering är inaktiverad för att visa alla valda objekt"
+
+msgid "Apply filter"
+msgstr "Tillämpa filter"
+
+msgid "%1$d %2$s not showing"
+msgstr "%1$d %2$s visas inte"
+
+msgid "Show selected items"
+msgstr "Visa valda objekt"
+
+msgid " / page"
+msgstr " / sida"
+
+msgid "Previous"
+msgstr "Föregående"
+
+msgid "Next"
+msgstr "Nästa"
+
+msgid "Your site's content is too vast for a single translation batch. Use filters to reduce the selection, then \"select all\"."
+msgstr "Ditt webbplatsinnehåll är för omfattande för en enda översättningsbatch. Använd filter för att minska urvalet, och “välj sedan alla”."
+
+msgid "The current filter captures too much content. Narrow it down to enable \"select all\" for translation."
+msgstr "Det nuvarande filtret fångar upp för mycket innehåll. Begränsa det för att aktivera “välj alla” för översättning."
+
+msgid "Select All"
+msgstr "Välj alla"
+
+msgid "All %d items matching criteria are selected"
+msgstr "Alla %d objekt som matchar kriterierna är valda"
+
+msgid "All %d items in this section are selected"
+msgstr "Alla %d objekt i den här sektionen är valda"
+
+msgid "You have too many items to send for translation at once. Apply a filter to narrow down the items to enable this option."
+msgstr "Du har för många objekt att skicka för översättning på en gång. Använd ett filter för att begränsa objekten och aktivera detta alternativ."
+
+msgid "Clear selection"
+msgstr "Rensa val"
+
+msgid "Select all items that match this search"
+msgstr "Välj alla objekt som matchar denna sökning"
+
+msgid "Loading..."
+msgstr "Laddar..."
+
+msgid "Save note"
+msgstr "Spara anteckning"
+
+msgid "The following target languages do not support automatic translation: %s. <a>Map to known languages</a> to enable automatic translation."
+msgstr "Följande målspråk stöder inte automatisk översättning: %s. <a>Mappa till kända språk</a> för att aktivera automatisk översättning."
+
+msgid "The site's default language %s doesn't support automatic translation."
+msgstr "Webbplatsens standardspråk %s stöder inte automatisk översättning."
+
+msgid "Some sections are hidden due to current filter settings or because they have no items. <show_all>Show all translation statuses</show_all>"
+msgstr "Vissa sektioner är dolda på grund av nuvarande filterinställningar eller för att de inte har några objekt. <show_all>Visa alla översättningsstatusar</show_all>"
+
+msgid "Step 1"
+msgstr "Steg 1"
+
+msgid "Select items for translation"
+msgstr "Välj objekt för översättning"
+
+msgid "Clear filters"
+msgstr "Rensa filter"
+
+msgid "strings"
+msgstr "strängar"
+
+msgid "WPML didn't find any %s matching your criteria."
+msgstr "WPML hittade inga %s som matchar dina kriterier."
+
+msgid "You have too many items selected to use this feature. Deselect some of the items to enable it."
+msgstr "Du har för många objekt valda för att använda denna funktion. Avmarkera några av objekten för att aktivera den."
+
+msgid "Show strings in:"
+msgstr "Visa strängar i:"
+
+msgid "All domains"
+msgstr "Alla domäner"
+
+msgid "All sources"
+msgstr "Alla källor"
+
+msgid "Frontend (viewed)"
+msgstr "Frontend (visad)"
+
+msgid "Backend (viewed)"
+msgstr "Backend (visad)"
+
+msgid "Unknown"
+msgstr "Okänd"
+
+msgid "String"
+msgstr "Sträng"
+
+msgid "All Translation Priorities"
+msgstr "Alla översättningsprioriteringar"
+
+msgid "This filter is available only if source is set to \"Frontend\" or \"Backend\"."
+msgstr "Detta filter är endast tillgängligt om källan är inställd på “Frontend” eller “Backend”."
+
+msgid "front-end"
+msgstr "frontend"
+
+msgid "back-end"
+msgstr "backend"
+
+msgid "viewed"
+msgstr "visad"
+
+msgid "Domain"
+msgstr "Domän"
+
+msgid "Source"
+msgstr "Källa"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Strings in the theme and plugins"
+msgstr "Strängar i temat och tillägg"
+
+msgid "Translate front-end texts you can customize from the WordPress admin like footer text, copyright notices, plugin options and settings, time format, widget texts, and more."
+msgstr "Översätt frontend-texter som du kan anpassa från WordPress-admin som sidfottext, upphovsrättsmeddelanden, pluginalternativ och inställningar, tidsformat, widgettexter och mer."
+
+msgid "Translating Strings From Admin and Settings"
+msgstr "Översätter strängar från Admin och Inställningar"
+
+msgid "Translate texts in admin screens"
+msgstr "Översätt texter i administratörsskärmar"
+
+msgid "Translate User Meta Information"
+msgstr "Översätt användarmetainformation"
+
+msgid "Making User Meta Information Translatable"
+msgstr "Gör användarmetainformation översättningsbar"
+
+msgid "Translate user profile strings"
+msgstr "Översätt användarprofilsträngar"
+
+msgid "You need to visit translations on your site's front-end (<a/>) and WPML will identify all untranslated strings and list them here. "
+msgstr "Du behöver besöka översättningar på din webbplats frontend (<a/>) och WPML kommer att identifiera alla oöversatta strängar och lista dem här."
+
+msgid "hide details"
+msgstr "dölj detaljer"
+
+msgid "more details"
+msgstr "mer detaljer"
+
+msgid "Still can't find the strings you're looking to translate? Add more strings for translation."
+msgstr "Hittar du fortfarande inte strängarna du vill översätta? Lägg till fler strängar för översättning."
+
+msgid "Translate Everything translates only those strings which are registered in English language"
+msgstr "Översätt allt översätter endast de strängar som är registrerade på engelska"
+
+msgid "Most strings from your plugins and theme are in English, so we’re showing them alongside your default language. Use the <b>Source Language</b> filter to view strings in a specific language."
+msgstr "De flesta strängar från dina plugins och teman är på engelska, så vi visar dem tillsammans med ditt standardspråk. Använd filtret <b>Källspråk</b> för att visa strängar på ett specifikt språk."
+
+msgid "WPML can detect strings that appear on the site and list them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here only the strings that actually appear on the site, you need to enable this feature."
+msgstr "WPML kan upptäcka strängar som visas på webbplatsen och lista dem här. Denna funktion hjälper dig att identifiera de strängar som faktiskt visas på webbplatsen och översätta dem. För att endast se de strängar som faktiskt visas på webbplatsen här behöver du aktivera denna funktion."
+
+msgid "WPML detects strings that appear on the site and lists them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here all the strings in the site, you need to disable this feature."
+msgstr "WPML upptäcker strängar som visas på webbplatsen och listar dem här. Denna funktion hjälper dig att identifiera de strängar som faktiskt visas på webbplatsen och översätta dem. För att se alla strängar på webbplatsen här behöver du inaktivera denna funktion."
+
+msgid "Detect untranslated strings"
+msgstr "Upptäck oöversatta strängar"
+
+msgid "WPML can detect untranslated strings and automatically register them for translation. This happens in real time as you or your visitors browse your website."
+msgstr "WPML kan upptäcka oöversatta strängar och automatiskt registrera dem för översättning. Detta sker i realtid när du eller dina besökare surfar på din webbplats."
+
+msgid "Automatically register untranslated strings"
+msgstr "Registrera automatiskt oöversatta strängar"
+
+msgid "Learn how to use auto-registration"
+msgstr "Lär dig hur du använder automatisk registrering"
+
+msgid "recommended"
+msgstr "rekommenderas"
+
+msgid "Also register strings from the website's back-end"
+msgstr "Registrera också strängar från webbplatsens backend"
+
+msgid "Save settings"
+msgstr "Spara inställningar"
+
+msgid "Request failed because of the network error"
+msgstr "Begäran misslyckades på grund av nätverksfel"
+
+msgid "Try again"
+msgstr "Försök igen"
+
+msgid "Enabled"
+msgstr "Aktiverad"
+
+msgid "Disabled"
+msgstr "Inaktiverad"
+
+msgid "Modify"
+msgstr "Ändra"
+
+msgid "You can only translate %1$s from the site's default language (%2$s)."
+msgstr "Du kan endast översätta %1$s från webbplatsens standardspråk (%2$s)."
+
+msgid "Leave existing translations as they are"
+msgstr "Lämna befintliga översättningar som de är"
+
+msgid "Overwrite existing translations"
+msgstr "Skriv över befintliga översättningar"
+
+msgid "Some of the content you want to translate is already translated"
+msgstr "En del av innehållet du vill översätta är redan översatt"
+
+msgid "What do you want to do with the content that's already translated?"
+msgstr "Vad vill du göra med innehåll som redan är översatt?"
+
+msgid "Suggested deadline:"
+msgstr "Föreslagen deadline:"
+
+msgid "Set a batch name and deadline"
+msgstr "Ange ett batchnamn och deadline"
+
+msgid "You can assign a custom name to this batch for easy tracking and suggest a deadline to clarify the priority for translators."
+msgstr "Du kan tilldela ett anpassat namn till denna batch för enkel spårning och föreslå ett slutdatum för att förtydliga prioriteten för översättare."
+
+msgid "Batch name:"
+msgstr "Batchnamn:"
+
+msgid "Your Automatic Translation Credits"
+msgstr "Dina automatiska översättningskrediter"
+
+msgid "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s translator</add_yourself> to the site.<br/> Add yourself as %s translator and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "För att tilldela dig själv som översättare behöver du först <add_yourself>lägga till dig själv som %s översättare</add_yourself> på webbplatsen.<br/> Lägg till dig själv som %s översättare och klicka på <check_again>kontrollera igen</check_again> eller välj ett annat översättningsalternativ."
+
+msgid "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s to %s translator</add_yourself> to the site.<br/> Add yourself as %s to %s translator and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "För att tilldela dig själv som översättare måste du först <add_yourself>lägga till dig själv som %s till %s översättare</add_yourself> på webbplatsen.<br/> Lägg till dig själv som %s till %s översättare och klicka på <check_again>kontrollera igen</check_again> eller välj ett annat översättningsalternativ."
+
+msgid "Checking"
+msgstr "Kontrollerar"
+
+msgid "In order to assign a translation service, you first need to <activate_ts>activate a translation service</activate_ts>.<br/>Activate a translation service and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "För att tilldela en översättningstjänst behöver du först <activate_ts>aktivera en översättningstjänst</activate_ts>.<br/>Aktivera en översättningstjänst och klicka på <check_again>kontrollera igen</check_again> eller välj ett annat översättningsalternativ."
+
+msgid " Checking "
+msgstr " Kontrollerar "
+
+msgid "In order to translate automatically, you first need to <enable_ate>enable WPML's Advanced Translation Editor</enable_ate>.<br/>Enable the Advanced Translation Editor and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "För att översätta automatiskt behöver du först <enable_ate>aktivera WPML:s avancerade översättningsredigerare</enable_ate>.<br/>Aktivera den avancerade översättningsredigeraren och klicka på <check_again>kontrollera igen</check_again> eller välj ett annat översättningsalternativ."
+
+msgid "The items you selected were translated with the Classic Translation Editor and cannot be sent for automatic translation."
+msgstr "Objekten du valde översattes med den klassiska översättningsredigeraren och kan inte skickas för automatisk översättning."
+
+msgid "Some of the items you selected were translated with the Classic Translation Editor. These cannot be sent for automatic translation."
+msgstr "Några av objekten du valde översattes med den klassiska översättningsredigeraren. Dessa kan inte skickas för automatisk översättning."
+
+msgid ""
+"Any existing content (translations) will be overwritten when creating duplicates.\n"
+"When duplicating content, please first duplicate parent pages to maintain the site's hierarchy."
+msgstr "Allt befintligt innehåll (översättningar) kommer att skrivas över när duplikat skapas.
+När du duplicerar innehåll, vänligen duplicera först överordnade sidor för att behålla webbplatsens hierarki."
+
+msgid "Some of the selected content is already being translated. This will cancel any in-progress translations."
+msgstr "En del av det valda innehållet översätts redan. Detta kommer att avbryta alla pågående översättningar."
+
+msgid "Connection Error. Please wait a minute and reload this page. If the problem continues, please contact WPML support."
+msgstr "Anslutningsfel. Vänta en minut och ladda om den här sidan. Om problemet kvarstår, kontakta WPML-supporten."
+
+msgid "Buy credits"
+msgstr "Köp krediter"
+
+msgid "You don't have enough credits to translate your content automatically."
+msgstr "Du har inte tillräckligt med krediter för att översätta ditt innehåll automatiskt."
+
+msgid "In order to assign to a translator, you first need to <add_translators>add %s translators</add_translators> to the site.<br/> Add %s translators and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "För att tilldela en översättare behöver du först <add_translators>lägga till %s översättare</add_translators> på webbplatsen.<br/> Lägg till %s översättare och klicka på <check_again>kontrollera igen</check_again> eller välj ett annat översättningsalternativ."
+
+msgid "In order to assign to a translator, you first need to <add_translators>add %s to %s translators</add_translators> to the site.<br/> Add %s to %s translators and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "För att tilldela till en översättare måste du först <add_translators>lägga till %s till %s översättare</add_translators> på webbplatsen.<br/> Lägg till %s till %s översättare och klicka på <check_again>kontrollera igen</check_again> eller välj ett annat översättningsalternativ."
+
+msgid "Your site doesn't have any reviewers for %s. This means that you’re the only person who can review these translations."
+msgstr "Din webbplats har inga granskare för %s. Detta innebär att du är den enda personen som kan granska dessa översättningar."
+
+msgid "Your site doesn't have any reviewers yet. This means that you’re the only person who can review translations."
+msgstr "Din webbplats har inga granskare än. Detta innebär att du är den enda personen som kan granska översättningar."
+
+msgid "If you want other people to review the translations, go to <a>WPML → Translation Management → Translators</a> and add translators. They will be able to both review and translate content for you."
+msgstr "Om du vill att andra personer ska granska översättningarna, gå till <a>WPML → Översättningshantering → Översättare</a> och lägg till översättare. De kommer att kunna både granska och översätta innehåll åt dig."
+
+msgid "WPML does not support duplicating strings. Your selection to duplicate strings to %1$s will be ignored if you proceed with the translation."
+msgstr "WPML stöder inte duplicering av strängar. Ditt val att duplicera strängar till %1$s kommer att ignoreras om du fortsätter med översättningen."
+
+msgid "WPML does not support duplicating %1$s elements. Your selection to duplicate elements to %2$s will be ignored if you proceed with the translation."
+msgstr "WPML stöder inte duplicering av %1$s element. Ditt val att duplicera element till %2$s kommer att ignoreras om du fortsätter med översättningen."
+
+msgid "WPML does not support duplicating %1$s elements and strings. Your selection to duplicate elements and strings to %2$s will be ignored if you proceed with the translation."
+msgstr "WPML stöder inte duplicering av %1$s element och strängar. Ditt val att duplicera element och strängar till %2$s kommer att ignoreras om du fortsätter med översättningen."
+
+msgid "WPML does not support duplicating strings."
+msgstr "WPML stöder inte duplicering av strängar."
+
+msgid "WPML does not support duplicating %1$s elements."
+msgstr "WPML stöder inte duplicering av %1$s element."
+
+msgid "WPML does not support duplicating %1$s elements and strings."
+msgstr "WPML stöder inte duplicering av %1$s element och strängar."
+
+msgid "Finish setting up %s on your site"
+msgstr "Slutför konfigurationen av %s på din webbplats"
+
+msgid "You need to authenticate %s to send them content for translation.<br/>Visit the <a>Translators tab</a> to finish the setup and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Du behöver autentisera %s för att skicka dem innehåll för översättning.<br/>Besök <a>fliken Översättare</a> för att slutföra konfigurationen och klicka på <check_again>kontrollera igen</check_again> eller välj ett annat översättningsalternativ."
+
+msgid "Set Up Translate Everything Automatically"
+msgstr "Konfigurera Översätt allt automatiskt"
+
+msgid "WPML will translate your content into %d languages"
+msgstr "WPML kommer att översätta ditt innehåll till %d språk"
+
+msgid "Content selected for translation"
+msgstr "Innehåll valt för översättning"
+
+msgid "Volume"
+msgstr "Volym"
+
+msgid "~ %d words"
+msgstr "~ %d ord"
+
+msgid "Total"
+msgstr "Totalt"
+
+msgid "Preparing your content for translation"
+msgstr "Förbereder ditt innehåll för översättning"
+
+msgid "If you refresh or leave this page now, some translations might be canceled. Please stay on this page until the process completes."
+msgstr "Om du uppdaterar eller lämnar den här sidan nu kan vissa översättningar avbrytas. Vänligen stanna på den här sidan tills processen är klar."
+
+msgid "Stay here"
+msgstr "Stanna här"
+
+msgid "Leave"
+msgstr "Lämna"
+
+msgid "Sent for translation"
+msgstr "Skickat för översättning"
+
+msgid "Sending for translation failed"
+msgstr "Skickande för översättning misslyckades"
+
+msgid "You selected multiple translation methods for content across different languages:"
+msgstr "Du valde flera översättningsmetoder för innehåll på olika språk:"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "<s>1 item</s> is being translated automatically."
+msgid_plural "<s>%d items</s> are being translated automatically."
+msgstr[0] "<s>1 objekt</s> översätts automatiskt."
+msgstr[1] "<s>%d objekt</s> översätts automatiskt."
+
+msgid "From now on, WPML will automatically translate new content on your site."
+msgstr "Från och med nu kommer WPML att automatiskt översätta nytt innehåll på din webbplats."
+
+msgid "From now on, WPML will automatically translate your site's content."
+msgstr "Från och med nu kommer WPML att automatiskt översätta innehållet på din webbplats."
+
+msgid "Automatic translations summary"
+msgstr "Sammanfattning av automatiska översättningar"
+
+msgid "You can track their progress at the top of the page."
+msgstr "Du kan följa deras framsteg högst upp på sidan."
+
+msgid "Some of the content that you selected for translation includes fields that are encoded. Translators will not be able to work on this kind of content, so we removed it from the job."
+msgstr "En del av innehållet du valt för översättning innehåller kodade fält. Översättare kommer inte att kunna arbeta med denna typ av innehåll, så vi tog bort det från jobbet."
+
+msgid "To fix this problem, please contact our support team and describe this issue."
+msgstr "För att lösa detta problem, vänligen kontakta vårt supportteam och beskriv problemet."
+
+msgid "WPML cannot send some fo the content to translation"
+msgstr "WPML kan inte skicka en del av innehållet för översättning"
+
+msgid "Open support ticket"
+msgstr "Öppna supportärende"
+
+msgid "One item has been successfully assigned to you! To check its status, please go to <s>WPML → Translations</s>. <translations_queue/>"
+msgid_plural "%d items have been successfully assigned to you! For status updates, please go to <s>WPML → Translations</s>. <translations_queue/>"
+msgstr[0] "Ett objekt har framgångsrikt tilldelats dig! För att kontrollera dess status, gå till <s>WPML → Översättningar</s>. <translations_queue/>"
+msgstr[1] "%d objekt har framgångsrikt tilldelats dig! För statusuppdateringar, gå till <s>WPML → Översättningar</s>. <translations_queue/>"
+
+msgid "Currently logged in translator summary"
+msgstr "Sammanfattning för inloggad översättare"
+
+msgid "Go to Translations"
+msgstr "Gå till Översättningar"
+
+msgid "One item has been duplicated."
+msgid_plural "%d items have been duplicated."
+msgstr[0] "Ett objekt har duplicerats."
+msgstr[1] "%d objekt har duplicerats."
+
+msgid "Duplication summary"
+msgstr "Sammanfattning av duplicering"
+
+msgid "There was a problem sending your content for translation."
+msgstr "Det uppstod ett problem när ditt innehåll skulle skickas för översättning."
+
+msgid "Please try again in a few minutes. If the issue persists, please contact our support."
+msgstr "Vänligen försök igen om några minuter. Om problemet kvarstår, kontakta vår support."
+
+msgid "Some of the selected strings are already registered or translated into %s. Since their source language matches the target language, they cannot be retranslated."
+msgstr "Några av de valda strängarna är redan registrerade eller översatta till %s. Eftersom deras källspråk matchar målspråket kan de inte översättas igen."
+
+msgid "Some of the selected content has already been translated from %s to %s and cannot be re-translated from %s to %s."
+msgstr "En del av det valda innehållet har redan översatts från %s till %s och kan inte översättas igen från %s till %s."
+
+msgid "Content already translated"
+msgstr "Innehåll redan översatt"
+
+msgid "Some content couldn't be sent to translation."
+msgstr "Vissa innehåll kunde inte skickas för översättning."
+
+msgid "WPML couldn't create translations for some languages because:"
+msgstr "WPML kunde inte skapa översättningar för vissa språk eftersom:"
+
+msgid "One item has been successfully sent to translators!"
+msgid_plural "<s>%d items</s> have been successfully sent to translators!"
+msgstr[0] "Ett objekt har framgångsrikt skickats till översättare!"
+msgstr[1] "<s>%d objekt</s> har framgångsrikt skickats till översättare!"
+
+msgid "Local translations summary"
+msgstr "Sammanfattning av lokala översättningar"
+
+msgid "You can check their status in WPML → Translation"
+msgstr "Du kan kontrollera deras status i WPML → Översättning"
+
+msgid "Continue to %s"
+msgstr "Fortsätt till %s"
+
+msgid "We were unable to send the following batches for professional translation:"
+msgstr "Vi kunde inte skicka följande satser för professionell översättning:"
+
+msgid "<p><a><s>Contact WPML support for help</s></a></p>"
+msgstr "<p><a><s>Kontakta WPML-support för hjälp</s></a></p>"
+
+msgid "Translation Service"
+msgstr "Översättningstjänst"
+
+msgid "sending for professional translation.."
+msgstr "skickar för professionell översättning.."
+
+msgid "<s>%d item</s> is being sent for translation to %s. Please continue to their site to start the translation."
+msgid_plural "<s>%d items</s> are being sent for translation to %s. Please continue to their site to start the translation."
+msgstr[0] "<s>%d objekt</s> skickas för översättning till %s. Fortsätt till deras webbplats för att påbörja översättningen."
+msgstr[1] "<s>%d objekt</s> skickas för översättning till %s. Fortsätt till deras webbplats för att påbörja översättningen."
+
+msgid "Translation service translations summary"
+msgstr "Sammanfattning av översättningstjänstens översättningar"
+
+msgid "One or more assigned translators are invalid. The translator may have been removed or their language permissions changed.<br/> Review your settings on the <translators_page>Translators page</translators_page>."
+msgstr "En eller flera tilldelade översättare är ogiltiga. Översättaren kan ha tagits bort eller deras språkbehörigheter ändrats.<br/> Granska dina inställningar på <translators_page>Översättarsidan</translators_page>."
+
+msgid "The selected translation service is no longer valid. It may have been changed, unauthenticated, or deactivated.<br/> Review your settings on the <translators_page>Translators page</translators_page>."
+msgstr "Den valda översättningstjänsten är inte längre giltig. Den kan ha ändrats, avautentiserats eller inaktiverats.<br/> Granska dina inställningar på <translators_page>Översättarsidan</translators_page>."
+
+msgid "Currently selected translation editor doesn't support automatic translation. You must enable the Advanced Translation Editor to send content for automatic translation.<br/> Check your settings on the <wpml_settings>WPML settings page</wpml_settings>."
+msgstr "Den för närvarande valda översättningsredigeraren stöder inte automatisk översättning. Du måste aktivera Advanced Translation Editor för att skicka innehåll för automatisk översättning.<br/> Kontrollera dina inställningar på <wpml_settings>WPML-inställningssidan</wpml_settings>."
+
+msgid "Validation error happened during send to translation."
+msgstr "Ett valideringsfel inträffade under sändningen till översättning."
+
+msgid "Sending for translation"
+msgstr "Skickar för översättning"
+
+msgid "Translate and Duplicate"
+msgstr "Översätt och duplicera"
+
+msgid "Duplicate"
+msgstr "Duplicera"
+
+msgid "Translate"
+msgstr "Översätt"
+
+msgid "Selected content is already translated"
+msgstr "Det valda innehållet är redan översatt"
+
+msgid "Please select a review option"
+msgstr "Vänligen välj ett granskningsalternativ"
+
+msgid "Assign local translator or choose another option"
+msgstr "Tilldela lokal översättare eller välj ett annat alternativ"
+
+msgid "Assign yourself or choose another option"
+msgstr "Tilldela dig själv eller välj ett annat alternativ"
+
+msgid "Activate translation service or choose another option"
+msgstr "Aktivera översättningstjänst eller välj ett annat alternativ"
+
+msgid "Activate ATE or choose another option"
+msgstr "Aktivera ATE eller välj ett annat alternativ"
+
+msgid "Authenticate translation service or choose another option"
+msgstr "Autentisera översättningstjänst eller välj ett annat alternativ"
+
+msgid "<s>%s</s> cannot process more than <s>%d</s> jobs in a single batch. WPML will automatically split your jobs into separate batches to ensure an error-free delivery to <s>%s</s>. <br/><br/> Do you want to proceed?"
+msgstr "<s>%s</s> kan inte hantera mer än <s>%d</s> jobb i en enda sats. WPML kommer automatiskt att dela upp dina jobb i separata satser för att säkerställa en felfri leverans till <s>%s</s>. <br/><br/> Vill du fortsätta?"
+
+msgid "WPML will send jobs to %s in separate batches"
+msgstr "WPML kommer att skicka jobb till %s i separata satser"
+
+msgid "Yes, send jobs in separate batches"
+msgstr "Ja, skicka jobb i separata satser"
+
+msgid "No, I will split jobs myself"
+msgstr "Nej, jag kommer att dela upp jobben själv"
+
+msgid "This will translate only your future content"
+msgstr "Detta kommer att översätta endast ditt framtida innehåll"
+
+msgid "This will translate your entire site"
+msgstr "Detta kommer att översätta hela din webbplats"
+
+msgid "Translate everything automatically from now on, without asking me."
+msgstr "Översätt allt automatiskt från och med nu, utan att fråga mig."
+
+msgid "What content do you want to translate?"
+msgstr "Vilket innehåll vill du översätta?"
+
+msgid "Translate my entire site"
+msgstr "Översätt hela min webbplats"
+
+msgid "WPML will translate all of your site's content, including:"
+msgstr "WPML kommer att översätta allt innehåll på din webbplats, inklusive:"
+
+msgid "Any content that already exists but hasn't been translated yet"
+msgstr "Allt innehåll som redan finns men ännu inte har översatts"
+
+msgid "All new content you create in the future"
+msgstr "Allt nytt innehåll du skapar i framtiden"
+
+msgid "Hide what WPML will translate now"
+msgstr "Dölj vad WPML kommer att översätta nu"
+
+msgid "See what WPML will translate now"
+msgstr "Se vad WPML kommer att översätta nu"
+
+msgid "Translate only future content"
+msgstr "Översätt endast framtida innehåll"
+
+msgid "WPML will translate only the content you create after enabling this translation mode."
+msgstr "WPML kommer att översätta endast det innehåll du skapar efter att ha aktiverat detta översättningsläge."
+
+msgid "Existing untranslated content on your side will not be translated."
+msgstr "Befintligt oöversatt innehåll på din sida kommer inte att översättas."
+
+msgid "Existing content"
+msgstr "Befintligt innehåll"
+
+msgid "You selected to translate strings that are in %s. Only these strings will be translated to %s."
+msgstr "Du valde att översätta strängar som finns i %s. Endast dessa strängar kommer att översättas till %s."
+
+msgid "You selected to translate strings that are in %s and %s. Only these strings will be translated to %s."
+msgstr "Du valde att översätta strängar som finns i %s och %s. Endast dessa strängar kommer att översättas till %s."
+
+msgid "Source language"
+msgstr "Källspråk"
+
+msgid "Target language"
+msgstr "Målspråk"
+
+msgid "Translation Method"
+msgstr "Översättningsmetod"
+
+msgid "Translation service additional options"
+msgstr "Ytterligare alternativ för översättningstjänst"
+
+msgid "Refresh"
+msgstr "Uppdatera"
+
+msgid "Fetching translation service data..."
+msgstr "Hämtar data från översättningstjänsten..."
+
+msgid "-"
+msgstr "-"
+
+msgid "Translate automatically"
+msgstr "Översätt automatiskt"
+
+msgid "Translate myself"
+msgstr "Översätt själv"
+
+msgid "Assign a translator"
+msgstr "Tilldela en översättare"
+
+msgid "Assign translation service"
+msgstr "Tilldela översättningstjänst"
+
+msgid "Do nothing"
+msgstr "Gör ingenting"
+
+msgid "Please choose"
+msgstr "Vänligen välj"
+
+msgid "Choose a translator"
+msgstr "Välj en översättare"
+
+msgid "First available"
+msgstr "Första tillgängliga"
+
+msgid "(Me)"
+msgstr "(Jag)"
+
+msgid "Translation controls"
+msgstr "Översättningskontroller"
+
+msgid "Step 2"
+msgstr "Steg 2"
+
+msgid "Get More Features with WPML's Advanced Translation Editor"
+msgstr "Få fler funktioner med WPML:s avancerade översättningsredigerare"
+
+msgid "Close banner"
+msgstr "Stäng banner"
+
+msgid "You're using the Classic Translation Editor, an old legacy tool, and missing out on the many features and efficiency of our Advanced Translation Editor:"
+msgstr "Du använder den klassiska översättningsredigeraren, ett gammalt verktyg, och går miste om många funktioner och effektiviteten i vår avancerade översättningsredigerare:"
+
+msgid "Translation Memory"
+msgstr "Översättningsminne"
+
+msgid "HTML Protection"
+msgstr "HTML-skydd"
+
+msgid "Glossary"
+msgstr "Ordlista"
+
+msgid "Spellchecker"
+msgstr "Stavningskontroll"
+
+msgid "AI Assistant"
+msgstr "AI-assistent"
+
+msgid "Automatic Translation"
+msgstr "Automatisk översättning"
+
+msgid "Switch now for a faster, more convenient, and reliable translation experience."
+msgstr "Byt nu för en snabbare, bekvämare och pålitligare översättningsupplevelse."
+
+msgid "Switch Now"
+msgstr "Byt nu"
+
+msgid "Learn More"
+msgstr "Läs mer"
+
+msgid "<a><s>Read more about automatic translation credits</s></a>"
+msgstr "<a><s>Läs mer om krediter för automatisk översättning</s></a>"
+
+msgid "I understand that automatic translation uses credits"
+msgstr "Jag förstår att automatisk översättning använder krediter"
+
+msgid "Translate Everything Automatically - credit wizard error"
+msgstr "Översätt allt automatiskt - kreditguide fel"
+
+msgid "There was an error when loading the credit wizard."
+msgstr "Det uppstod ett fel när kreditguiden laddades."
+
+msgid "Translate Everything Automatically - no credits"
+msgstr "Översätt allt automatiskt - inga krediter"
+
+msgid "Start Translate Everything Automatically"
+msgstr "Starta översätt allt automatiskt"
+
+msgid "Continue"
+msgstr "Fortsätt"
+
+msgid "Go back"
+msgstr "Gå tillbaka"
+
+msgid "You can start using Translate Everything Automatically after sending some content for translation. We recommend that you review these translations and make sure that they are good before translating your entire site's content."
+msgstr "Du kan börja använda Översätt allt automatiskt efter att ha skickat visst innehåll för översättning. Vi rekommenderar att du granskar dessa översättningar och ser till att de är bra innan du översätter hela webbplatsens innehåll."
+
+msgid "Translate Everything Automatically - disabled"
+msgstr "Översätt allt automatiskt - inaktiverad"
+
+msgid "Translate Everything Automatically"
+msgstr "Översätt allt automatiskt"
+
+msgid "Automatically translate your entire site, but only from %s to %s."
+msgstr "Översätt automatiskt hela din webbplats, men endast från %s till %s."
+
+msgid "Translate Everything Automatically - pausing"
+msgstr "Översätt allt automatiskt - pausar"
+
+msgid "Translate Everything Automatically is pausing"
+msgstr "Översätt allt automatiskt pausar"
+
+msgid "Translate Everything Automatically - paused"
+msgstr "Översätt allt automatiskt - pausad"
+
+msgid "%d translation left in the queue. Preparing more content for translation."
+msgid_plural "%d translations left in the queue. Preparing more content for translation."
+msgstr[0] "%d översättning kvar i kön. Förbereder mer innehåll för översättning."
+msgstr[1] "%d översättningar kvar i kön. Förbereder mer innehåll för översättning."
+
+msgid "Preparing content for translation..."
+msgstr "Förbereder innehåll för översättning..."
+
+msgid "%d translation left in the queue..."
+msgid_plural "%d translations left in the queue..."
+msgstr[0] "%d översättning kvar i kön..."
+msgstr[1] "%d översättningar kvar i kön..."
+
+msgid "Translate Everything Automatically has finished translating your content. There are no pending translations in the queue."
+msgstr "Översätt allt automatiskt har avslutat översättningen av ditt innehåll. Det finns inga väntande översättningar i kön."
+
+msgid "Some items were translated using the Classic Translation Editor and cannot be sent for automatic translation. Please select these items and choose the option to translate them yourself."
+msgstr "Vissa objekt översattes med hjälp av den klassiska översättningsredigeraren och kan inte skickas för automatisk översättning. Vänligen välj dessa objekt och välj alternativet att översätta dem själv."
+
+msgid "Translate Everything Automatically - enabled"
+msgstr "Översätt allt automatiskt - aktiverad"
+
+msgid "Translate Everything Automatically is enabled"
+msgstr "Översätt allt automatiskt är aktiverad"
+
+msgid "As you create new content or edit existing content, WPML will automatically translate it, but only from %s to %s."
+msgstr "När du skapar nytt innehåll eller redigerar befintligt innehåll kommer WPML att översätta det automatiskt, men endast från %s till %s."
+
+msgid "You have <s>%s</s> prepaid translation credits in your wpml.org account. Assign these credits to your site to start using automatic translation"
+msgstr "Du har <s>%s</s> förbetalda översättningskrediter på ditt wpml.org-konto. Tilldela dessa krediter till din webbplats för att börja använda automatisk översättning"
+
+msgid "Translation not running... there is an issue that needs your attention. Fix it to continue."
+msgstr "Översättning körs inte... det finns ett problem som kräver din uppmärksamhet. Åtgärda det för att fortsätta."
+
+msgid "Assign credits now"
+msgstr "Tilldela krediter nu"
+
+msgid "Fix now"
+msgstr "Åtgärda nu"
+
+msgid "Translate Everything Automatically is stopped"
+msgstr "Översätt allt automatiskt har stoppats"
+
+msgid "Out of Credits for Automatic Translation"
+msgstr "Slut på krediter för automatisk översättning"
+
+msgid "Automatic translations completed"
+msgstr "Automatiska översättningar slutförda"
+
+msgid "<s>1 translation</s> has been successfully translated automatically"
+msgid_plural "<s>%d translations</s> have been successfully translated automatically"
+msgstr[0] "<s>1 översättning</s> har översatts automatiskt"
+msgstr[1] "<s>%d översättningar</s> har översatts automatiskt"
+
+msgid "Automatic jobs in progress"
+msgstr "Automatiska jobb pågår"
+
+msgid "<s>%d automatic translation</s> is in progress"
+msgid_plural "<s>%d automatic translations</s> are in progress"
+msgstr[0] "<s>%d automatisk översättning</s> pågår"
+msgstr[1] "<s>%d automatiska översättningar</s> pågår"
+
+msgid "Your default language, %s, must be mapped to a supported language in order to use automatic translation"
+msgstr "Ditt standardspråk, %s, måste mappas till ett stött språk för att använda automatisk översättning"
+
+msgid "Map the language"
+msgstr "Mappa språket"
+
+msgid "%d translations "
+msgstr "%d översättningar "
+
+msgid "%d translation "
+msgstr "%d översättning "
+
+msgid "are waiting for your review"
+msgstr "väntar på din granskning"
+
+msgid "is waiting for your review"
+msgstr "väntar på din granskning"
+
+msgid "Review Translations"
+msgstr "Granska översättningar"
+
+msgid "Translate existing content"
+msgstr "Översätt befintligt innehåll"
+
+msgid "Translate now"
+msgstr "Översätt nu"
+
+msgid "Starting with version 4.7, WPML will also automatically translate texts (strings) coming from %s."
+msgstr "Från och med version 4.7 kommer WPML även att automatiskt översätta texter (strängar) som kommer från %s."
+
+msgid "WPML will not translate existing texts of this type but any new ones you create will be automatically translated. If you prefer, you can <button />."
+msgstr "WPML kommer inte att översätta befintliga texter av denna typ, men alla nya du skapar kommer att översättas automatiskt. Om du föredrar kan du <button />."
+
+msgid "Starting with version 4.7, WPML will also automatically translate:"
+msgstr "Från och med version 4.7 kommer WPML även att automatiskt översätta:"
+
+msgid "Content set to \"use translation if available or fallback to default language\": %s."
+msgstr "Innehåll inställt på “använd översättning om tillgänglig eller återgå till standardspråk”: %s."
+
+msgid "Texts (strings) coming from: %s."
+msgstr "Texter (strängar) som kommer från: %s."
+
+msgid "WPML will not translate existing content for these post types and texts but any new content you create will be automatically translated. If you prefer, you can start <button />."
+msgstr "WPML kommer inte att översätta befintligt innehåll för dessa inläggstyper och texter, men allt nytt innehåll du skapar kommer att översättas automatiskt. Om du föredrar kan du börja <button />."
+
+msgid "WPML will not translate existing content for these post types but any new content you create will be automatically translated. If you prefer, you can start <button />."
+msgstr "WPML kommer inte att översätta befintligt innehåll för dessa inläggstyper, men allt nytt innehåll du skapar kommer att översättas automatiskt. Om du föredrar kan du börja <button />."
+
+msgid "start translating existing content now"
+msgstr "börja översätta befintligt innehåll nu"
+
+msgid "The following target languages do not support automatic translations: %s"
+msgstr "Följande målspråk stöder inte automatiska översättningar: %s"
+
+msgid "To enable automatic translation map them to known languages."
+msgstr "För att aktivera automatisk översättning, mappa dem till kända språk."
+
+msgid "Map to known languages"
+msgstr "Mappa till kända språk"
+
+msgid "Translation status"
+msgstr "Översättningsstatus"
+
+msgid "Default language does not support automatic translations."
+msgstr "Standardspråket stöder inte automatiska översättningar."
+
+msgid "You must enable ATE to activate Translate Everything Automatically."
+msgstr "Du måste aktivera ATE för att aktivera Översätt allt automatiskt."
+
+msgid ""
+"This item needs an update but cannot be translated automatically because it was manually translated.\n"
+"Please, select the item and send for manual translation."
+msgstr "Detta objekt behöver en uppdatering men kan inte översättas automatiskt eftersom det översattes manuellt.
+Välj objektet och skicka för manuell översättning."
+
+msgid "This item needs update. Please, select the item and send for translation."
+msgstr "Detta objekt behöver uppdateras. Vänligen välj objektet och skicka för översättning."
+
+msgid "Translations completed with the Classic Translation Editor cannot be sent for automatic translation"
+msgstr "Översättningar som slutförts med den klassiska översättningsredigeraren kan inte skickas för automatisk översättning"
+
+msgid "not translated"
+msgstr "inte översatt"
+
+msgid "waiting for translator"
+msgstr "väntar på översättare"
+
+msgid "in progress"
+msgstr "pågår"
+
+msgid "needs update"
+msgstr "behöver uppdateras"
+
+msgid "duplicate"
+msgstr "dubblett"
+
+msgid "complete"
+msgstr "färdig"
+
+msgid "needs review"
+msgstr "behöver granskning"
+
+msgid "preparing for translation"
+msgstr "förbereder för översättning"
+
+msgid "needs attention"
+msgstr "behöver uppmärksamhet"
+
+msgid "%1$s: %2$s"
+msgstr "%1$s: %2$s"
+
+msgid "Error in fetching currently logged in translator"
+msgstr "Fel vid hämtning av inloggad översättare"
+
+msgid "Error in fetching local translators"
+msgstr "Fel vid hämtning av lokala översättare"
+
+msgid "Published"
+msgstr "Publicerad"
+
+msgid "Draft"
+msgstr "Utkast"
+
+msgid "Trash"
+msgstr "Papperskorg"
+
+msgid "Pending"
+msgstr "Väntar"
+
+msgid "Private"
+msgstr "Privat"
+
+msgid "Future"
+msgstr "Framtida"
+
+msgid "Auto Draft"
+msgstr "Automatiskt utkast"
+
+msgid "External"
+msgstr "Extern"
+
+msgid "Collapse"
+msgstr "Komprimera"
+
+msgid "Expand"
+msgstr "Expandera"
+
+msgid "Close modal"
+msgstr "Stäng modal"
+
+msgid "Select an item"
+msgstr "Välj ett objekt"
+
+msgid "Search parent by title"
+msgstr "Sök överordnad efter titel"
+
+msgid "No items found"
+msgstr "Inga objekt hittades"
+
+msgid "OFF"
+msgstr "AV"
+
+msgid "ON"
+msgstr "PÅ"
+
+msgid "%1$s Flag"
+msgstr "%1$s Flagga"
+
+msgid "What would you like to do after WPML finishes translating your content automatically?"
+msgstr "Vad vill du göra efter att WPML har avslutat den automatiska översättningen av ditt innehåll?"
+
+msgid "Wait for review"
+msgstr "Vänta på granskning"
+
+msgid "Recommended with DeepL, Google and Azure"
+msgstr "Rekommenderas med DeepL, Google och Azure"
+
+msgid "DeepL, Google, and Azure deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process."
+msgstr "DeepL, Google och Azure ger bra översättningar, men vi rekommenderar en mänsklig granskning för att bekräfta att de är korrekta. WPML AI ger bättre än mänskliga översättningar som förstår kontext, så du kan tryggt hoppa över granskningsprocessen."
+
+msgid "WPML keeps translations unpublished, so you can review them first."
+msgstr "WPML håller översättningarna opublicerade så att du kan granska dem först."
+
+msgid "Your translators review and approve translations before publishing."
+msgstr "Dina översättare granskar och godkänner översättningar innan publicering."
+
+msgid "Publish and mark for review"
+msgstr "Publicera och markera för granskning"
+
+msgid "WPML publishes translations immediately but flags them for you to check at your convenience."
+msgstr "WPML publicerar översättningar omedelbart men flaggar dem för att du ska kunna kontrollera dem när det passar."
+
+msgid "WPML publishes translations immediately but flags them for translators to review later."
+msgstr "WPML publicerar översättningar omedelbart men flaggar dem för översättare att granska senare."
+
+msgid "Publish without review"
+msgstr "Publicera utan granskning"
+
+msgid "Recommended with WPML AI"
+msgstr "Rekommenderas med WPML AI"
+
+msgid "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy."
+msgstr "WPML AI ger bättre än mänskliga översättningar som sällan behöver förbättringar, så du kan tryggt hoppa över granskningsprocessen. För andra översättningsmotorer rekommenderas en mänsklig granskning för att bekräfta noggrannheten."
+
+msgid "WPML publishes translations immediately, skipping the review process."
+msgstr "WPML publicerar översättningar omedelbart, utan granskning."

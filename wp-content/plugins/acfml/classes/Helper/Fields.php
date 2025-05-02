@@ -19,7 +19,7 @@ class Fields {
 	 */
 	public static function iterate( $fields, $transformField, $transformLayout, $fieldBasePattern = '' ) {
 		foreach ( $fields as &$field ) {
-			$fieldPattern = $fieldBasePattern . $field['name'];
+			$fieldPattern = $fieldBasePattern . preg_quote( $field['name'] );
 			$field        = $transformField( $field, $fieldPattern );
 
 			if ( isset( $field['sub_fields'] ) ) {

@@ -17,7 +17,12 @@ WPML_core.languageSwitcher = (function( $, wpml_ls ) {
 		additionalCssStyleId = 'wpml-ls-inline-styles-additional-css',
 		dialogInlineStyleId  = 'wpml-ls-inline-styles-dialog',
 		currentItemSlug,
-		slotInlineStylesBackup;
+		slotInlineStylesBackup,
+		displayOptionCheckboxes = [
+			".js-wpml-ls-setting-display_flags",
+			".js-wpml-ls-setting-display_names_in_native_lang",
+			".js-wpml-ls-setting-display_names_in_current_lang"
+		];
 
 	var init = function () {
 		form         	 = $('#wpml-ls-settings-form');
@@ -50,6 +55,7 @@ WPML_core.languageSwitcher = (function( $, wpml_ls ) {
         forceRefreshOnBrowserBackButton();
         setupWizardNextEvent();
         preventClickOnPreviewLinks();
+        attachDisplayCheckboxEvent();
     };
 
 	var maybeInitAdditionalCssStyle = function() {
@@ -125,6 +131,21 @@ WPML_core.languageSwitcher = (function( $, wpml_ls ) {
             openTooltip($(this));
         });
     };
+
+	var attachDisplayCheckboxEvent = function (context) {
+		// Collect checkboxes
+		displayOptionCheckboxes.forEach(function(selector) {
+			if (context) {
+				var checkboxes = $(selector, context); // Search within context
+			} else {
+				var checkboxes = $(selector); // Search whole DOM
+			}
+
+			if (checkboxes.length) {
+				checkboxes.on('change', checkCheckboxes);
+			}
+		});
+	}
 
     var initLanguageSortable = function () {
         $('#wpml-ls-languages-order').sortable({
@@ -289,6 +310,7 @@ WPML_core.languageSwitcher = (function( $, wpml_ls ) {
 				subform = targetNode.find('.js-wpml-ls-subform');
 			}
 
+			attachDisplayCheckboxEvent(subform);
 			cloneSubformIntoDialog(subform);
 		});
 	};
@@ -597,7 +619,28 @@ WPML_core.languageSwitcher = (function( $, wpml_ls ) {
 	};
 
 	var missingSlotWarning = function(subform) {
-		subform.find('.js-wpml-ls-available-slots').addClass('wpml-ls-required');
+    const slotsSelect = subform.find( '.js-wpml-ls-available-slots' );
+    slotsSelect.addClass( 'wpml-ls-required' );
+
+    const chooseOptionAlert = $( '<div/>', {
+      class: 'ant-alert ant-alert-error',
+      role: 'alert',
+      'data-show': 'true'
+    } );
+    const alertIcon = $( '<i/>', { class: 'ant-alert-icon otgs-ico otgs-ico-warning-o' } );
+    const alertContent = $( '<div/>', { class: 'ant-alert-content' } );
+    const alertMessage = $( '<div/>', {
+      class: 'ant-alert-message',
+      text: slotsSelect.hasClass( 'js-wpml-ls-available-menus' )
+        ? wpml_ls.strings.menu_option_not_chosen
+        : wpml_ls.strings.widget_option_not_chosen
+    } );
+    const alertDescription = $( '<div/>', { class: 'ant-alert-description' } );
+
+    alertContent.append( alertMessage, alertDescription );
+    chooseOptionAlert.append( alertIcon, alertContent );
+    slotsSelect.after( chooseOptionAlert );
+
 		dialogBox.animate({scrollTop:0}, 300);
 		$('.js-wpml-ls-dialog-save').prop('disabled', false);
 	};
@@ -802,6 +845,35 @@ WPML_core.languageSwitcher = (function( $, wpml_ls ) {
 
 		return settings;
 	};
+
+	var checkCheckboxes = function() {
+		var triggeredCheckbox = $(this);
+		var resultArray = [triggeredCheckbox];
+
+		// Loop through displayOptionCheckboxes to find siblings and populate resultArray
+		displayOptionCheckboxes.forEach(function(selector) {
+			var siblingCheckbox = triggeredCheckbox.closest('li').siblings('li').find(selector);
+
+			if (siblingCheckbox.length > 0) {
+				resultArray.push(siblingCheckbox);
+			}
+		});
+
+		// Filter the array to keep only checked checkboxes
+		var checkedArray = resultArray.filter(function(jqueryObj) {
+			return jqueryObj.is(':checked');
+		});
+
+		if (checkedArray.length === 1) {
+			// Disable the only checked checkbox
+			checkedArray[0].prop('disabled', true);
+		} else if (checkedArray.length > 1) {
+			// Enable all disabled checkboxes
+			resultArray.forEach(function(jqueryObj) {
+				jqueryObj.prop('disabled', false);
+			});
+		}
+	}
 
 	var showSpinner = function(wrapper) {
 		$('.js-wpml-ls-messages').removeClass('success error').hide().empty();

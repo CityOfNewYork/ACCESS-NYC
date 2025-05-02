@@ -26,7 +26,7 @@ class WPML_Change_String_Language_Select {
 		$lang_selector = new WPML_Simple_Language_Selector( $this->sitepress );
 		echo $lang_selector->render(
 			array(
-				'id'                 => 'icl_st_change_lang_selected',
+				'id'                 => 'icl-st-change-lang-selected',
 				'class'              => 'wpml-select2-button',
 				'please_select_text' => __( 'Change the language of selected strings', 'wpml-string-translation' ),
 				'disabled'           => true,

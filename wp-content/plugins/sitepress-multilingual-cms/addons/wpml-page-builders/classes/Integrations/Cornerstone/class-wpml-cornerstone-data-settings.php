@@ -24,7 +24,7 @@ class WPML_Cornerstone_Data_Settings implements IWPML_Page_Builders_Data_Setting
 	}
 
 	/**
-	 * @param array $data
+	 * @param array|string $data
 	 *
 	 * @return array
 	 */

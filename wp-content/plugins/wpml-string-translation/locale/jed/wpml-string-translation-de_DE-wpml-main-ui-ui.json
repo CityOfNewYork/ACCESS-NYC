@@ -1,0 +1,58 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Edit": [
+            "Bearbeiten"
+         ],
+         "Shift+Tab": [
+            "Umschalttaste+Tabulator"
+         ],
+         "Tab": [
+            "Registerkarte"
+         ],
+         "Translation to:": [
+            "Übersetzung in:"
+         ],
+         "Copy from original": [
+            "Kopie vom Original"
+         ],
+         "Use Shift+Enter to add a new line.": [
+            "Verwenden Sie Shift+Enter, um eine neue Zeile hinzuzufügen."
+         ],
+         "Original:": [
+            "Original:"
+         ],
+         "Add %s translation": [
+            "%s Übersetzung hinzufügen"
+         ],
+         "Edit %s translation": [
+            "Bearbeiten %s Übersetzung"
+         ],
+         "Add %s translation (the string appears on the site and is not translated)": [
+            "%s Übersetzung hinzufügen (der String erscheint auf der Website und wird nicht übersetzt)"
+         ],
+         "Original language %s": [
+            "Originalsprache %s"
+         ],
+         "Waiting for translator to %s": [
+            "Warten auf den Übersetzer %s"
+         ],
+         "Translation in progress to %s": [
+            "Übersetzung in Arbeit nach %s"
+         ],
+         "In basket for translation to %s": [
+            "Im Korb für die Übersetzung in %s"
+         ],
+         "Translation saved.": [
+            "Übersetzung gespeichert."
+         ],
+         "Translation update failed.": [
+            "Aktualisierung der Übersetzung fehlgeschlagen."
+         ]
+      }
+   }
+}

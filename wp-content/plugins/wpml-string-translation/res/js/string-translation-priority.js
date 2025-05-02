@@ -20,6 +20,27 @@ WPML_String_Translation.ChangeTranslationPriority = function () {
     };
 
     var applyChanges = function () {
+        if(WPML_String_Translation.ExecBatchAction.isApplyBulkActionSelected()) {
+            WPML_String_Translation.ExecBatchAction.run(
+                wpml_st_exec_batch_action_data.countStringsInDomainWithDifferentPriority,
+                wpml_st_exec_batch_action_data.changeTranslationPriorityBatchOfStringsInDomain,
+                {
+                    domain: jQuery('select[name="icl_st_filter_context"] option:selected').val(),
+                    priority: privateData.translation_priority_select.val(),
+                },
+                {
+                    beforeStart: function() {
+                        jQuery('#icl-st-change-translation-priority-selected').attr('disabled', 'disabled');
+                    },
+                    onComplete: function(data) {
+                        jQuery('#icl-st-change-translation-priority-selected').removeAttr('disabled');
+                        window.location.reload();
+                    },
+                }
+            );
+            return;
+        }
+
         var checkBoxValue;
         var data;
         var i;

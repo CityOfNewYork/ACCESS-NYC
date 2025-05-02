@@ -1,95 +1,258 @@
 {
-   "domain": "messages",
-   "locale_data": {
-      "messages": {
-         "": {
-            "domain": "messages",
-            "lang": "en"
-         },
-         "Translation Memory was successfully copied to Advanced Translation Editor.": [
-            ""
-         ],
-         "Deactivate ICanLocalize.com as Translation Service on this site": [
-            ""
-         ],
-         "Missing a translator? Or were new jobs since the last copy of the Translation Memory?": [
-            ""
-         ],
-         "Enter here your ICanLocalize authentication details.": [
-            ""
-         ],
-         "API Token:": [
-            ""
-         ],
-         "Please enter valid value for ICL token.": [
-            ""
-         ],
-         "Enter ICL API token here": [
-            ""
-         ],
-         "Submit": [
-            ""
-         ],
-         "Sign up": [
-            ""
-         ],
-         "to ICanLocalize to receive your API token.": [
-            ""
-         ],
-         "Already have an account? Login and": [
-            ""
-         ],
-         "get your token.": [
-            ""
-         ],
-         "Copy new Translation Memory to Advanced Translation Memory": [
-            ""
-         ],
-         "Import translation memory": [
-            ""
-         ],
-         "ICanLocalize is already deactivated on this site": [
-            ""
-         ],
-         "You can still import Translators or Copy Translation Memory to Advanced Translator Editor": [
-            ""
-         ],
-         "Move from ICanLocalize.com to Advanced Translation Editor": [
-            ""
-         ],
-         "Import translators": [
-            ""
-         ],
-         "Come back": [
-            ""
-         ],
-         "Not supported pairs:": [
-            ""
-         ],
-         "ICanLocalize.com deactivated": [
-            ""
-         ],
-         "Translate memory is imported": [
-            ""
-         ],
-         "There is no translators in ICL": [
-            ""
-         ],
-         "Translators saved": [
-            ""
-         ],
-         "Flags must be:": [
-            ""
-         ],
-         "PNG, SVG, or JPG files": [
-            ""
-         ],
-         "18 x 12 pixels": [
-            ""
-         ],
-         "Read more about ": [
-            ""
-         ]
-      }
-   }
+  "translation-revision-date": "2024-08-20T09:36:24+00:00",
+  "generator": "WP-CLI/2.9.0",
+  "source": "src/js/icl-to-ate-migration/components/Translators/EditLanguages.js",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "en",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "Set language pair(s) for Translator %s:": [
+        "Đặt cặp ngôn ngữ cho Translator%s :"
+      ],
+      "+ Add more language pairs for this translator": [
+        "+ Thêm cặp ngôn ngữ"
+      ],
+      "Import translators": [
+        "Nhập dịch giả"
+      ],
+      "Cancel": [
+        "Hủy bỏ"
+      ],
+      "Save": [
+        "Cứu"
+      ],
+      "Name": [
+        "Tên"
+      ],
+      "You just added  language. Next, select it as the site's default language or a translation language.": [
+        "Bạn vừa thêm ngôn ngữ."
+      ],
+      "Language added": [
+        "Ngôn ngữ đã thêm"
+      ],
+      "The value \"%s\" already exists": [
+        "Giá trị \"%s \" đã tồn tại"
+      ],
+      "Add a new language": [
+        "Thêm ngôn ngữ mới"
+      ],
+      "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
+        "Tạo ngôn ngữ cụ thể cho quốc gia."
+      ],
+      "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
+        "Bằng cách chọn một kết hợp đã tồn tại trong cơ sở dữ liệu, WPML có thể giúp điền vào các trường cần thiết. Đọc thêm về<AddingACustomLanguageLink />."
+      ],
+      "Cannot find?": [
+        "Không tìm thấy?"
+      ],
+      "Click here": [
+        "Nhấp vào đây"
+      ],
+      "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
+        "Định dạng không đúng."
+      ],
+      "Language": [
+        "Ngôn ngữ"
+      ],
+      "Location": [
+        "Vị trí"
+      ],
+      "Code": [
+        "Mã số"
+      ],
+      "The language will not be supported by automatic translations": [
+        "Ngôn ngữ sẽ không được hỗ trợ bởi bản dịch tự động"
+      ],
+      "Language mapping": [
+        "Bản đồ ngôn ngữ"
+      ],
+      "Don't map this language": [
+        "Đừng lập bản đồ ngôn ngữ này"
+      ],
+      "Default locale": [
+        "Ngôn ngữ mặc định"
+      ],
+      "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
+        "Định dạng không đúng. Nó chỉ có thể chứa các chữ cái thường và \"_\". Ví dụ: \"de\", \"de_DE \", \"zh_Hant_TW \""
+      ],
+      "hreflang": [
+        "hreflang"
+      ],
+      "Encode url?": [
+        "Mã hóa url?"
+      ],
+      "Flags must be:": [
+        "Cờ phải:"
+      ],
+      "NO": [
+        "KHÔNG"
+      ],
+      "YES": [
+        "ĐÚNG"
+      ],
+      " (required)": [
+        " (yêu cầu)"
+      ],
+      "Please fill in the field": [
+        "Vui lòng điền vào trường"
+      ],
+      "PNG, SVG, or JPG files": [
+        "PNG , HÌNH ẢNH , hoặc JPG tập tin"
+      ],
+      "Save language": [
+        "Lưu ngôn ngữ"
+      ],
+      "18 x 12 pixels": [
+        "18 x 12 pixel"
+      ],
+      "Read more about ": [
+        "Đọc thêm về "
+      ],
+      "The name of your language as it will appear on your site's language switcher.": [
+        "Tên ngôn ngữ của bạn."
+      ],
+      "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
+        "Giá trị duy nhất xác định ngôn ngữ trong cơ sở dữ liệu và URL. Sau khi lưu, mã ngôn ngữ không thể thay đổi."
+      ],
+      "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
+        "Kiểm tra chính tả và dịch tự động."
+      ],
+      "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
+        "Giá trị WPML kiểm tra khi tải bản dịch từ NHIỀU HƠN Và PO tập tin. Ngôn ngữ mặc định được bao gồm trong tên tập tin trong /wp-content/languages/ thư mục trong thiết lập WordPress của bạn."
+      ],
+      "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
+        "Google sử dụng thuộc tính hreflang."
+      ],
+      "All English-speaking users: en": [
+        "Người dùng nói tiếng Anh: en"
+      ],
+      "English for UK users: en-gb": [
+        "Tiếng Anh cho ANH QUỐC người dùng: en-gb"
+      ],
+      "English for US users: en-us": [
+        "Tiếng Anh cho CHÚNG TA người dùng: en-us"
+      ],
+      "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
+        "Xác định xem URL có được mã hóa."
+      ],
+      "adding a custom language": [
+        "thêm ngôn ngữ tùy chỉnh"
+      ],
+      "Translation Memory was successfully copied to Advanced Translation Editor.": [
+        "Bộ nhớ dịch đã được sao chép thành công vào Trình biên tập dịch nâng cao."
+      ],
+      "Deactivate ICanLocalize.com as Translation Service on this site": [
+        "Hủy kích hoạt ICanLocalize.com"
+      ],
+      "Missing a translator? Or were new jobs since the last copy of the Translation Memory?": [
+        "Thiếu người dịch? Có công việc mới?"
+      ],
+      "Translate memory is imported": [
+        "Bộ nhớ dịch được nhập"
+      ],
+      "Language Pairs": [
+        "Cặp ngôn ngữ"
+      ],
+      "Not supported pairs:": [
+        "Cặp không hỗ trợ:"
+      ],
+      "From:": [
+        "Từ:"
+      ],
+      "--Choose language--": [
+        "--Chọn ngôn ngữ--"
+      ],
+      "to:": [
+        "đẾN:"
+      ],
+      "%s file upload failed.": [
+        "%stải tập tin lên không thành công."
+      ],
+      "Flag": [
+        "Lá cờ"
+      ],
+      "Flag file": [
+        "Tệp cờ"
+      ],
+      "Default language": [
+        "Ngôn ngữ mặc định"
+      ],
+      "What is the current language of your website?": [
+        "Ngôn ngữ hiện tại của trang web?"
+      ],
+      "Translation languages": [
+        "Ngôn ngữ dịch thuật"
+      ],
+      "Which languages do you want to translate your site into?": [
+        "Bạn muốn dịch trang web sang ngôn ngữ nào?"
+      ],
+      "If you cannot find languages that you need in the list": [
+        "Nếu không tìm thấy ngôn ngữ trong danh sách"
+      ],
+      "create a custom language": [
+        "tạo ngôn ngữ tùy chỉnh"
+      ],
+      "What are the languages of your site?": [
+        "Trang web của bạn sử dụng ngôn ngữ nào?"
+      ],
+      "There is no translators in ICL": [
+        "Không có dịch giả trong ICL"
+      ],
+      "Translators saved": [
+        "Người dịch đã lưu"
+      ],
+      "Enter here your ICanLocalize authentication details.": [
+        "Nhập thông tin xác thực ICanLocalize."
+      ],
+      "API Token:": [
+        "Mã thông báo API:"
+      ],
+      "Please enter valid value for ICL token.": [
+        "Vui lòng nhập giá trị hợp lệ cho ICL mã thông báo."
+      ],
+      "Enter ICL API token here": [
+        "Đi vào ICL Mã thông báo API ở đây"
+      ],
+      "Submit": [
+        "Nộp"
+      ],
+      "Sign up": [
+        "Đăng ký"
+      ],
+      "to ICanLocalize to receive your API token.": [
+        "đến ICanLocalize để nhận mã API."
+      ],
+      "Already have an account? Login and": [
+        "Đã có tài khoản? Đăng nhập và"
+      ],
+      "get your token.": [
+        "nhận mã thông báo của bạn."
+      ],
+      "Import translation memory": [
+        "Nhập bộ nhớ dịch"
+      ],
+      "Copy new Translation Memory to Advanced Translation Memory": [
+        "Sao chép Bộ nhớ dịch mới vào Bộ nhớ dịch nâng cao"
+      ],
+      "ICanLocalize is already deactivated on this site": [
+        "ICanLocalize đã bị vô hiệu hóa"
+      ],
+      "You can still import Translators or Copy Translation Memory to Advanced Translator Editor": [
+        "Nhập hoặc sao chép Bộ nhớ dịch"
+      ],
+      "Move from ICanLocalize.com to Advanced Translation Editor": [
+        "Di chuyển từ icanlocalize.com sang trình biên dịch nâng cao"
+      ],
+      "ICanLocalize.com deactivated": [
+        "ICanLocalize.com đã bị vô hiệu hóa"
+      ],
+      "Come back": [
+        "Sự trở lại"
+      ]
+    }
+  }
 }

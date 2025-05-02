@@ -747,15 +747,6 @@ foreach ( acf_get_combined_post_type_settings_tabs() as $tab_key => $tab_label )
 				)
 			);
 
-			$acf_dashicon_class_name = __( 'Dashicon class name', 'acf' );
-			$acf_dashicon_link       = '<a href="https://developer.wordpress.org/resource/dashicons/" target="_blank">' . $acf_dashicon_class_name . '</a>';
-
-			$acf_menu_icon_instructions = sprintf(
-				/* translators: %s = "dashicon class name", link to the WordPress dashicon documentation. */
-				__( 'The icon used for the post type menu item in the admin dashboard. Can be a URL or %s to use for the icon.', 'acf' ),
-				$acf_dashicon_link
-			);
-
 			acf_render_field_wrap(
 				array(
 					'type'         => 'text',
@@ -795,44 +786,91 @@ foreach ( acf_get_combined_post_type_settings_tabs() as $tab_key => $tab_label )
 				'field'
 			);
 
+			// Set the default value for the icon field.
+			$acf_default_icon_value = array(
+				'type'  => 'dashicons',
+				'value' => 'dashicons-admin-post',
+			);
+
+			if ( empty( $acf_post_type['menu_icon'] ) ) {
+				$acf_post_type['menu_icon'] = $acf_default_icon_value;
+			}
+
+			// Backwards compatibility for before the icon picker was introduced.
+			if ( is_string( $acf_post_type['menu_icon'] ) ) {
+				// If the old value was a string that starts with dashicons-, assume it's a dashicon.
+				if ( false !== strpos( $acf_post_type['menu_icon'], 'dashicons-' ) ) {
+					$acf_post_type['menu_icon'] = array(
+						'type'  => 'dashicons',
+						'value' => $acf_post_type['menu_icon'],
+					);
+				} else {
+					$acf_post_type['menu_icon'] = array(
+						'type'  => 'url',
+						'value' => $acf_post_type['menu_icon'],
+					);
+				}
+			}
+
 			acf_render_field_wrap(
 				array(
-					'type'         => 'text',
-					'name'         => 'menu_icon',
-					'key'          => 'menu_icon',
-					'prefix'       => 'acf_post_type',
-					'value'        => $acf_post_type['menu_icon'],
-					'label'        => __( 'Menu Icon', 'acf' ),
-					'placeholder'  => 'dashicons-admin-post',
-					'instructions' => $acf_menu_icon_instructions,
-					'conditions'   => array(
-						'field'    => 'show_in_menu',
-						'operator' => '==',
-						'value'    => 1,
+					'type'        => 'icon_picker',
+					'name'        => 'menu_icon',
+					'key'         => 'menu_icon',
+					'prefix'      => 'acf_post_type',
+					'value'       => $acf_post_type['menu_icon'],
+					'label'       => __( 'Menu Icon', 'acf' ),
+					'placeholder' => 'dashicons-admin-post',
+					'conditions'  => array(
+						array(
+							'field'    => 'show_in_menu',
+							'operator' => '==',
+							'value'    => '1',
+						),
+						array(
+							'field'    => 'admin_menu_parent',
+							'operator' => '==',
+							'value'    => '',
+						),
 					),
 				),
 				'div',
 				'field'
 			);
 
-			acf_render_field_wrap(
-				array(
-					'type'         => 'text',
-					'name'         => 'register_meta_box_cb',
-					'key'          => 'register_meta_box_cb',
-					'prefix'       => 'acf_post_type',
-					'value'        => $acf_post_type['register_meta_box_cb'],
-					'label'        => __( 'Custom Meta Box Callback', 'acf' ),
-					'instructions' => __( 'A PHP function name to be called when setting up the meta boxes for the edit screen.', 'acf' ),
-					'conditions'   => array(
-						'field'    => 'show_ui',
-						'operator' => '==',
-						'value'    => '1',
+			$acf_enable_meta_box_cb_edit  = acf_get_setting( 'enable_meta_box_cb_edit' );
+			$acf_meta_box_cb_instructions = __( 'A PHP function name to be called when setting up the meta boxes for the edit screen. For security, this callback will be executed in a special context without access to any superglobals like $_POST or $_GET.', 'acf' );
+
+			// Only show if user is allowed to update, or if it already has a value.
+			if ( $acf_enable_meta_box_cb_edit || ! empty( $acf_post_type['register_meta_box_cb'] ) ) {
+				if ( ! $acf_enable_meta_box_cb_edit ) {
+					if ( is_multisite() ) {
+						$acf_meta_box_cb_instructions .= ' ' . __( 'By default only super admin users can edit this setting.', 'acf' );
+					} else {
+						$acf_meta_box_cb_instructions .= ' ' . __( 'By default only admin users can edit this setting.', 'acf' );
+					}
+				}
+
+				acf_render_field_wrap(
+					array(
+						'type'         => 'text',
+						'name'         => 'register_meta_box_cb',
+						'key'          => 'register_meta_box_cb',
+						'prefix'       => 'acf_post_type',
+						'value'        => $acf_post_type['register_meta_box_cb'],
+						'label'        => __( 'Custom Meta Box Callback', 'acf' ),
+						'instructions' => $acf_meta_box_cb_instructions,
+						'readonly'     => ! $acf_enable_meta_box_cb_edit,
+						'conditions'   => array(
+							'field'    => 'show_ui',
+							'operator' => '==',
+							'value'    => '1',
+						),
 					),
-				),
-				'div',
-				'field'
-			);
+					'div',
+					'field'
+				);
+			}
 
 			acf_render_field_wrap(
 				array(

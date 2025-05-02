@@ -1,0 +1,867 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\\nContent-Transfer-Encoding: 8bit"
+"\\nProject-Id-Version:WPML_EXPORT\\nPOT-Creation-Date: \\nPO-Revision-Date: "
+"\\nLast-Translator: \\nLanguage-Team: \\nLanguage:en\\nMIME-Version: 1.0\\n"
+
+msgid " They were added to the string translation table."
+msgstr "Chúng đã được thêm vào bản dịch thuật chuỗi ký tự."
+
+msgid "%d new translation was added."
+msgstr "%d bản dịch mới đã được thêm vào."
+
+msgid "%d new translations were added."
+msgstr "%d bản dịch mới đã được thêm vào."
+
+msgid "%d translation was updated."
+msgstr "%d bản dịch đã được cập nhật."
+
+msgid "%d translations were updated."
+msgstr "%d bản dịch đã được cập nhật."
+
+msgid ""
+"%s slugs are set to be translated, but they are missing their translation"
+msgstr ""
+"%s slug được đặt ở chế độ đã dịch, nhưng chúng đang "
+"bị thiếu bản dịch"
+
+msgid "(original)"
+msgstr "(gốc)"
+
+msgid ""
+"* This feature is only intended for sites that are in development. It will "
+"significantly slow down the site, but help you find strings that WPML cannot "
+"detect in the PHP code."
+msgstr ""
+"*Tính năng này chỉ dành cho các trang web đang trong quá trình phá"
+"t triển. Nó sẽ làm chậm tốc độ của trang web rất nhiều, "
+"nhưng giúp bạn tìm thấy các chuỗi ký tự mà WPML không thể "
+"phát hiện trong mã PHP."
+
+msgid "-- Please select --"
+msgstr "-- Vui lòng lựa chọn --"
+
+msgid ".po file:"
+msgstr "tập tin .po:"
+
+msgid "Active"
+msgstr "Kích hoạt"
+
+msgid "Add selected strings"
+msgstr "Thêm các chuỗi ký tự được chọn"
+
+msgid "Add the new translations."
+msgstr "Thêm các bản dịch mới."
+
+msgid "Admin Texts Translation"
+msgstr "Dịch tin nhắn quản trị"
+
+msgid "All"
+msgstr "Tất cả"
+
+msgid "All Translation Priorities"
+msgstr "Tất cả các ưu tiên bản dịch"
+
+msgid "All domains"
+msgstr "Tất cả các tên miền"
+
+msgid "All strings"
+msgstr "Tất cả chuỗi ký tự"
+
+msgid "All strings in %s"
+msgstr "Tất cả chuỗi ký tự trong %s"
+
+msgid "Also create translations according to the .po file"
+msgstr "Cũng có thể tạo ra các bản dịch bằng tập tin .po."
+
+msgid "Also include translations"
+msgstr "Cũng bao gồm các bản dịch"
+
+msgid "Also prevent similar messages in the future?"
+msgstr "Cũng ngăn chặn các tin nhắn tương tự trong tương lai?"
+
+msgid "Apply"
+msgstr "Áp dụng"
+
+msgid ""
+"Are you sure you want to delete these packages?\\nTheir strings and "
+"translations will be deleted too."
+msgstr ""
+"Bạn có chắc là bạn muốn xóa các gói dữ liệu này?\\nCác "
+"chuỗi ký tự và bản dịch của chúng cũng sẽ bị xóa."
+
+msgid ""
+"Are you sure you want to delete these strings?\\nTheir translations will be "
+"deleted too."
+msgstr ""
+"Bạn có chắc là muốn xóa các chuỗi ký tự này?\\nCác bản "
+"dịch của chúng cũng sẽ bị xóa."
+
+msgid "Auto register strings for translation"
+msgstr "Tự động đăng ký chuỗi ký tự cần dịch"
+
+msgid "Auto-download WordPress translations"
+msgstr "Tự động tải về các bản dịch WordPress"
+
+msgid "Auto-register strings from these text domains"
+msgstr ""
+"Tự động đăng ký các chuỗi ký tự từ các miền văn bản nà"
+"y"
+
+msgid ""
+"Automatic string registration will remain active for %s. Please visit the "
+"site's front-end to allow WPML to find strings for translation."
+msgstr ""
+"Quá trình đăng ký chuỗi ký tự tự động sẽ duy trì hoạ"
+"t động cho %s. Vui lòng truy cập front-end của trang web để cho "
+"phép WPML tìm kiếm các chuỗi ký tự cần dịch."
+
+msgid "Cancel"
+msgstr "Hủy"
+
+msgid "Change the language of selected strings"
+msgstr "Thay đổi ngôn ngữ của chuỗi ký tự đã chọn"
+
+msgid "Change translation priority of selected strings"
+msgstr ""
+"Thay đổi thứ tự ưu tiên của chuỗi ký tự được chọn"
+
+msgid "Check other languages"
+msgstr "Kiểm tra các ngôn ngữ khác"
+
+msgid "Cleanup and optimization completed!"
+msgstr "Đã hoàn tất việc dọn dẹp và tối ưu hóa!"
+
+msgid "Cleanup and optimize string tables"
+msgstr "Dọn dẹp và tối ưu các bảng chuỗi ký tự"
+
+msgid "Click to toggle"
+msgstr "Nhấp để chuyển"
+
+msgid "Close"
+msgstr "Đóng"
+
+msgid "Complete"
+msgstr "Hoàn thành"
+
+msgid "Completely translated strings"
+msgstr "Các chuỗi ký tự được dịch hoàn toàn"
+
+msgid "Configure"
+msgstr "Thiết lập (cấu hình)"
+
+msgid "Contains %s strings"
+msgstr "Chứa %s chuỗi ký tự"
+
+msgid "Context"
+msgstr "Ngữ cảnh"
+
+msgid "Current source language"
+msgstr "Ngôn ngữ gốc hiện thời"
+
+msgid "Default package language"
+msgstr "Ngôn ngữ mặc định của gói dữ liệu"
+
+msgid "Delete Selected Packages"
+msgstr "Xóa các gói dữ liệu đã chọn"
+
+msgid "Delete selected strings"
+msgstr "Xóa các chuỗi ký tự được chọn"
+
+msgid "Dismiss all notices"
+msgstr "Hủy bỏ tất cả thông báo"
+
+msgid "Display %d results per page"
+msgstr "Hiển thị %d kết quả mỗi trang"
+
+msgid "Display all results"
+msgstr "Hiển thị tất cả kết quả"
+
+msgid "Display packages for this kind:"
+msgstr "Hiển thị gói dữ liệu dành cho loại này:"
+
+msgid "Display:"
+msgstr "Hiển thị:"
+
+msgid "Displaying %1$s&#8211;%2$s of %3$s"
+msgstr "Đang hiển thị %1$s&#8211;%2$s của %3$s"
+
+msgid "Domain"
+msgstr "Tên miền"
+
+msgid "Edit"
+msgstr "Sửa"
+
+msgid "Error: please try again"
+msgstr "Lỗi: vui lòng thử lại"
+
+msgid "Errors: %s"
+msgstr "Lỗi: %s"
+
+msgid "Exact match"
+msgstr "Tìm kiếm chính xác (exact match)"
+
+msgid "Existing translation"
+msgstr "Bản dịch hiện có"
+
+msgid "Exit search"
+msgstr "Dừng tìm kiếm"
+
+msgid "Export strings into .po/.pot file"
+msgstr "Xuất các chuỗi ký tự ra tập tin .po/.pot."
+
+msgid "Failed downloading the language information file."
+msgstr "Thất bại khi tải về tập tin thông tin ngôn ngữ."
+
+msgid ""
+"Failed downloading the language information file. Please go back and try a "
+"little later."
+msgstr ""
+"Thất bại khi tải về các tập tin thông tin ngôn ngữ. Vui lòng "
+"quay lại và thử lại sau."
+
+msgid "File upload error"
+msgstr "Lỗi tải lên tập tin"
+
+msgid "Files already scanned."
+msgstr "Các tập tin đã được quét."
+
+msgid "For more details, see %s."
+msgstr "Để biết chi tiết, hãy xem %s."
+
+msgid "Highlight color for strings"
+msgstr "Làm nổi bật màu sắc cho các chuỗi ký tự"
+
+msgid "Import"
+msgstr "Nhập vào (Import)"
+
+msgid "Import / export .po"
+msgstr "Nhập / xuất tập tin .po"
+
+msgid "In domain:"
+msgstr "Trong miền:"
+
+msgid "In progress"
+msgstr "Đang xử lý"
+
+msgid "In translation basket"
+msgstr "Trong giỏ dịch thuật"
+
+msgid "Inactive"
+msgstr "Chưa kích hoạt"
+
+msgid "Include translations"
+msgstr "Bao gồm các bản dịch"
+
+msgid "Info"
+msgstr "Thông tin"
+
+msgid "Invalid language: %s"
+msgstr "Ngôn ngữ không hợp lệ: %s"
+
+msgid "Invalid nonce"
+msgstr "Nonce không hợp lệ"
+
+msgid "Kind"
+msgstr "Loại"
+
+msgid "Language of domains"
+msgstr "Ngôn ngữ của các tên miền"
+
+msgid "Language of this %1$s is %2$s"
+msgstr "Ngôn ngữ của %1$s này là %2$s"
+
+msgid "Languages of domains"
+msgstr "Các ngôn ngữ của các tên miền"
+
+msgid "Loaded"
+msgstr "Đã tải"
+
+msgid "Look for strings while pages are rendered"
+msgstr "Tìm kiếm các chuỗi ký tự khi các trang được truy xuất"
+
+msgctxt "MO Import blocked 1/4"
+msgid "There is a problem with the String Translation table in your site."
+msgstr ""
+"Có sự cố với bảng Dịch thuật Chuỗi ký tự trong trang web "
+"của bạn."
+
+msgctxt "MO Import blocked 2/4"
+msgid ""
+"This problem is not causing a problem running the site right now, but can "
+"become a critical issue in the future."
+msgstr ""
+"Sự cố này không gây ra lỗ chạy trang web ngay tại thời điể"
+"m này nhưng có thể trở thành lỗi nghiêm trọng trong tương lai."
+
+msgctxt "MO Import blocked 3/4"
+msgid "WPML support team knows how to fix it."
+msgstr "Đội hỗ trợ WPML biết cách khắc phục lỗi này."
+
+msgctxt "MO Import blocked 4/4"
+msgid ""
+"Please add a message in the relevant <a href=\"%s\" target=\"_blank"
+"\">support thread</a> and we'll fix it for you."
+msgstr ""
+"Vui lòng thêm tin nhắn vào <a href=\"%s\" target=\"_blank\" >Đoạn "
+"tuyến hỗ trợ</a> liên quan và chúng tôi sẽ sửa nó cho bạn."
+
+msgctxt "MO Import blocked short 1/3"
+msgid ""
+"WPML cannot replace .mo files because of technical problems in the String "
+"Translation table."
+msgstr ""
+"WPML không thể thay thế các tập tin .mo vì các sự cố kỹ "
+"thuật trong bảng Dịch thuật Chuỗi ký tự."
+
+msgctxt "MO Import blocked short 2/3"
+msgid "WPML support team knows how to fix it."
+msgstr "Đội hỗ trợ WPML biết cách khắc phục lỗi này."
+
+msgctxt "MO Import blocked short 3/3"
+msgid ""
+"Please add a message in the relevant <a href=\"%s\" target=\"_blank\" "
+">support thread</a> and we'll fix it for you."
+msgstr ""
+"Vui lòng thêm tin nhắn vào <a href=\"%s\" target=\"_blank\" >Đoạn "
+"tuyến hỗ trợ</a> liên quan và chúng tôi sẽ sửa nó cho bạn."
+
+msgid "Missing parameters"
+msgstr "Các tham số còn thiếu"
+
+msgid "Missing version number for translation."
+msgstr "Thiếu số phiên bản của bản dịch."
+
+msgid "More options"
+msgstr "Các tùy chọn khác"
+
+msgid "Multibyte String extension"
+msgstr "Trình mở rộng Chuỗi ký tự nhiều byte"
+
+msgid "Multibyte String extension is required for WPML String Translation."
+msgstr ""
+"Trình mở rộng Chuỗi ký tự nhiều byte là bắt buộc đối vớ"
+"i WPML String Translation."
+
+msgid "Name"
+msgstr "Tên"
+
+msgid "Name: %s"
+msgstr "Tên: %s"
+
+msgid "Needs update"
+msgstr "Cần cập nhật"
+
+msgid "New translation"
+msgstr "Bản dịch mới"
+
+msgid "New translations (%d)"
+msgstr "Các bản dịch mới (%d)"
+
+msgid "No - keep showing these message"
+msgstr "Không - tiếp tục hiển thị các tin nhắn này"
+
+msgid "No TextDomain"
+msgstr "Không có miền văn bản"
+
+msgid ""
+"No action performed. Please select the strings that you need to update or "
+"add."
+msgstr ""
+"Không thao tác nào được thực thi. Hãy chọn các chuỗi ký tự "
+"bạn muốn cập nhật hoặc thêm vào."
+
+msgid "No packages found"
+msgstr "Không tìm thấy gói (package) nào"
+
+msgid "No records found"
+msgstr "Không tìm thấy kết quả"
+
+msgid "No string found"
+msgstr "Không tìm thấy chuỗi ký tự nào"
+
+msgid "No strings found"
+msgstr "Không tìm thấy chuỗi ký tự"
+
+msgid "No updates found."
+msgstr "Không tìm thấy bản cập nhật."
+
+msgid "Nonce value is invalid"
+msgstr "Giá trị nonce không hợp lệ"
+
+msgid "Not loaded"
+msgstr "Chưa được tải"
+
+msgid "Not marked as 'complete'. Press 'Save' to enable."
+msgstr ""
+"Chưa được đánh dấu 'hoàn tất'. Nhấn 'Lưu' để kích hoạt."
+
+msgid "Not translated"
+msgstr "Chưa được dịch"
+
+msgid "Number of strings"
+msgstr "Số lượng chuỗi ký tự"
+
+msgid "PO export may be glitchy. We are working to fix it."
+msgstr ""
+"Việc xuất PO có thể gặp sự cố. Chúng tôi đang nghiên cứ"
+"u để sửa nó."
+
+msgid "Package Management"
+msgstr "Quản lý gói dữ liệu"
+
+msgid "Packages"
+msgstr "Các gói dữ liệu"
+
+msgid "Partial Translation"
+msgstr "Bản dịch một phần"
+
+msgid "Partial translation"
+msgstr "Một phần bản dịch"
+
+msgid "Performance considerations"
+msgstr "Cân nhắc về hiệu suất"
+
+msgid ""
+"Please activate WPML Multilingual CMS to have WPML String Translation "
+"working."
+msgstr ""
+"Vui lòng kích hoạt WPML Multilingual CMS để cho phép WPML String "
+"Translation hoạt động."
+
+msgid "Please enter a domain!"
+msgstr "Vui lòng nhập tên miền!"
+
+msgid "Please select at least one document to translate."
+msgstr "Vui lòng chọn ít nhất một tài liệu để dịch."
+
+msgid "Please select at least one language to translate into."
+msgstr "Vui lòng chọn ít nhất một ngôn ngữ để chuyển ngữ."
+
+msgid "Please select the .po file to upload!"
+msgstr "Vui lòng chọn tập tin .po để tải lên!"
+
+msgid "Plugin"
+msgstr "Plugin"
+
+msgid ""
+"Post \"%1$s\" will be ignored for %2$s, because translation is already in "
+"progress."
+msgstr ""
+"Bài đăng \"%1$s\" sẽ bị bỏ qua đối với %2$s, vì quá trình "
+"dịch thuật đang diễn ra."
+
+msgid ""
+"Post \"%1$s\" will be ignored for %2$s, because translation is already "
+"waiting for translator."
+msgstr ""
+"Bài đăng \"%1$s\" sẽ bị bỏ qua đối với %2$s, vì quá trình "
+"dịch thuật đang đợi biên dịch viên."
+
+msgid "Proceed"
+msgstr "Tiến hành"
+
+msgid "Return to String Translation"
+msgstr "Trả về Dịch chuỗi ký tự"
+
+msgid "Review changes and update"
+msgstr "Xem lại các thay đổi và cập nhật"
+
+msgid "Save"
+msgstr "Lưu"
+
+msgid "Scan selected plugins for strings"
+msgstr "Quét plugin đã chọn để tìm chuỗi ký tự"
+
+msgid "Scan selected themes for strings"
+msgstr "Quét giao diện đã chọn để tìm chuỗi ký tự"
+
+msgid "Scan successful! WPML found %s strings."
+msgstr "Quét thành công! WPML đã tìm thấy %s chuỗi ký tự."
+
+msgid "Scanning file: %s"
+msgstr "Đang quét tập tin: %s"
+
+msgid "Search"
+msgstr "Tìm kiếm"
+
+msgid "Search for:"
+msgstr "Tìm kiếm:"
+
+msgid "Select All"
+msgstr "Chọn tất cả"
+
+msgid "Select all"
+msgstr "Chọn tất cả"
+
+msgid "Select domain:"
+msgstr "Chọn tên miền:"
+
+msgid "Select for which domain to set the language: "
+msgstr "Chọn tên miền để cài đặt ngôn ngữ:"
+
+msgid "Select what the strings are for:"
+msgstr "Chọn các chuỗi ký tự cho ngôn ngữ:"
+
+msgid "Send to translation"
+msgstr "Gửi đi để dịch"
+
+msgid "Set different slugs in different languages for %s."
+msgstr ""
+"Thiết lập các slug khác nhau trong các ngôn ngữ khác nhau cho %s."
+
+msgid "Set the source language of these strings to:"
+msgstr "Đặt ngôn ngữ gốc của các chuỗi ký tự này là:"
+
+msgid "Show custom MO Files Pre-generation dialog box"
+msgstr ""
+"Hiển thị hộp thoại tạo trước các tập tin MO tùy biến"
+
+msgid "Showing only strings that contain %s"
+msgstr "Chỉ hiển thị các chuỗi ký tự chứa %s"
+
+msgid "Skipping file: %s"
+msgstr "Bỏ qua tập tin: %s"
+
+msgid "Slug translations"
+msgstr "Các bản dịch slug"
+
+msgid ""
+"Some of the strings selected belong to packages. You can only change the "
+"language of these strings if all strings in the packages are selected."
+msgstr ""
+"Một số chuỗi ký tự được chọn thuộc về các gói phần "
+"mềm. Bạn chỉ có thể thay đổi ngôn ngữ của các chuỗi ký "
+"tự này nếu toàn bộ chuỗi ký tự trong các gói này được "
+"chọn."
+
+msgid ""
+"Some themes and plugins don't properly set the textdomain (second argument) "
+"in GetText calls. When you select this option, WPML will assume that the "
+"strings found in GetText calls in the PHP files of the theme and plugin "
+"should have the textdomain with the theme/plugin's name."
+msgstr ""
+"Một số giao diện hoặc plugin không thiết lập miền văn bả"
+"n đúng cách (đối số thứ hai) trong lệnh Gọi văn bản. Khi "
+"bạn chọn tùy chọn này, WPML sẽ giả sử rằng các chuỗi ký "
+"tự được tìm thấy trong lệnh Gọi văn bản trong các tập tin "
+"PHP của giao diện và plugin phải có miền văn bản với tên củ"
+"a giao diện/plugin."
+
+msgid "String"
+msgstr "Chuỗi ký tự"
+
+msgctxt "String Tracking warning: sentence 1"
+msgid ""
+"%s allows you to see where strings come from, so you can translate them "
+"accurately."
+msgstr ""
+"%s cho phép bạn xem các chuỗi ký tự đến từ đâu, để bạn "
+"có thể dịch chúng một cách chính xác nhất."
+
+msgctxt "String Tracking warning: sentence 1, anchor text"
+msgid "String Tracking"
+msgstr "Theo dõi chuỗi ký tự"
+
+msgctxt "String Tracking warning: sentence 2"
+msgid "It needs to parse the PHP source files and the output HTML."
+msgstr "Nó cần phân tích các tập tin nguồn PHP và HTML đầu ra."
+
+msgctxt "String Tracking warning: sentence 3"
+msgid ""
+"This feature is CPU-intensive and should only be used while you are "
+"developing sites."
+msgstr ""
+"Tính năng này chiếm nhiều CPU và chỉ nên được sử dụng khi "
+"bạn đang phát triển các trang web."
+
+msgctxt "String Tracking warning: sentence 4"
+msgid ""
+"Remember to turn it off before going to production, to avoid performance "
+"problems."
+msgstr ""
+"Hãy nhớ tắt nó trước khi đi vào sản xuất, để tránh các "
+"lỗi hoạt động."
+
+msgid "String Translation"
+msgstr "Dịch chuỗi ký tự"
+
+msgid "String translation"
+msgstr "Dịch chuỗi ký tự"
+
+msgid "Strings from all text domains are excluded"
+msgstr ""
+"Loại trừ các chuỗi ký tự từ tất cả các miền văn bản"
+
+msgid "Strings from all text domains will be auto-registered"
+msgstr ""
+"Chuỗi ký tự từ tất cả tên miền văn bản sẽ được đăng "
+"ký tự động"
+
+msgid "Strings in need of translation"
+msgstr "Các chuỗi ký tự cần dịch"
+
+msgid "Strings in the plugins"
+msgstr "Các chuỗi ký tự trong các plugin"
+
+msgid "Strings in the themes"
+msgstr "Chuỗi ký tự trong giao diện"
+
+msgid "Strings per page:"
+msgstr "Số chuỗi ký tự mỗi trang:"
+
+msgid "Strings translations updated"
+msgstr "Bản dịch của chuỗi ký tự được cập nhật"
+
+msgid "Submit"
+msgstr "Gửi"
+
+msgid "Success!"
+msgstr "Thành công!"
+
+msgid "Textdomain"
+msgstr "Miền văn bản"
+
+msgid "The database has been updated."
+msgstr "Cơ sở dữ liệu đã được cập nhật."
+
+msgid "The following files were processed:"
+msgstr "Các tập tin sau đã được xử lý:"
+
+msgid "Theme"
+msgstr "Giao diện"
+
+msgid "There is nothing to be updated or to be added."
+msgstr "Không có gì sẽ được cập nhật hay thêm vào."
+
+msgid "There is nothing to translate."
+msgstr "Không còn gì để dịch."
+
+msgid ""
+"These are the strings that we found in your .po file. Please carefully "
+"review them. Then, click on the 'add' or 'cancel' buttons at the %1$sbottom "
+"of this screen%2$s. You can exclude individual strings by clearing the check "
+"boxes next to them."
+msgstr ""
+"Có các chuỗi ký tự mà chúng tôi tìm thấy trong tập tin .po "
+"của bạn. Vui lòng xem xét kỹ chúng. Rồi nhấp vào các nút "
+"'thêm' hoặc 'hủy' ở %1$sphần dưới cùng của màn hình này"
+"%2$s. Bạn có thể loại trừ từng chuỗi ký tự bằng cách xóa "
+"các hộp chọn gần chúng."
+
+msgid "This domain currently has the following strings:"
+msgstr "Tên miền này hiện đã có các chuỗi ký tự sau:"
+
+msgid ""
+"This folder appears to be not writable. This is blocking translation for "
+"strings from appearing on the site."
+msgstr ""
+"Có vẻ như không thể ghi vào thư mục này. Đây là bản dịch "
+"tạo khối dành cho các chuỗi ký tự xuất hiện trên trang web."
+
+msgid ""
+"This update includes %d new strings and %d updated strings. You can review "
+"the strings below. Then, go to the <a%s>bottom of this page</a> and click on "
+"the Proceed button."
+msgstr ""
+"Lần cập nhật này gồm %d chuỗi ký tự mới và %d chuỗi ký "
+"tự được cập nhật. Bạn có thể xem lại các chuỗi ký tự "
+"này ở phía dưới. Sau đó, đi tới <a%s>cuối trang</a> và nhấp "
+"vào nút Tiến hành (Proceed)."
+
+msgid ""
+"To resolve this, please contact your hosting company and request that they "
+"make that folder writable."
+msgstr ""
+"Để xử lý sự cố này, vui lòng liên hệ với công ty  lưu "
+"trữ và yêu cầu họ tạo thư mục có thể ghi."
+
+msgid "Track where strings appear on the site"
+msgstr ""
+"Theo dõi xem các chuỗi ký tự xuất hiện ở đâu trên website"
+
+msgid ""
+"Translate custom post and taxonomy base slugs (via WPML String Translation)."
+msgstr ""
+"Dịch các bài viết tùy chỉnh và các slug có nguồn gốc từ "
+"thẻ taxonomy (thông qua tính năng Dịch thuật Chuỗi ký tự WPML)."
+
+msgid "Translate strings"
+msgstr "Dịch chuỗi ký tự"
+
+msgid "Translate strings in %s"
+msgstr "Dịch chuỗi ký tự trong %s"
+
+msgid "Translate texts in admin screens &raquo;"
+msgstr "Dịch các văn bản trong màn hình quản trị &raquo;"
+
+msgid "Translating users of types: %s"
+msgstr "Dịch các nhóm người dùng: %s"
+
+msgid "Translation"
+msgstr "Bản dịch"
+
+msgid "Translation complete"
+msgstr "Bản dịch hoàn tất"
+
+msgid "Translation is in progress"
+msgstr "Đang trong quá trình dịch"
+
+msgid "Translation needed"
+msgstr "Cần dịch"
+
+msgid "Translation needs update"
+msgstr "Bản dịch cần cập nhật"
+
+msgid "Translation status:"
+msgstr "Trạng thái bản dịch:"
+
+msgid "Update Now"
+msgstr "Cập nhật ngay"
+
+msgid "Updated %s translation is available"
+msgstr "Có sẵn bản dịch %s cập nhật"
+
+msgid "Updated translations (%d)"
+msgstr "Các bản dịch đã được cập nhật (%d)"
+
+msgid ""
+"Use theme or plugin text domains when gettext calls do not use a string "
+"literal"
+msgstr ""
+"Sử dụng giao diện hoặc tên miền văn bản plugin khi lệnh gọ"
+"i văn bản không dùng ký tự của chuỗi ký tự"
+
+msgid ""
+"Use this language as the default language for new strings in this domain"
+msgstr ""
+"Sử dụng ngôn ngữ này là ngôn ngữ mặc định cho các chuỗi "
+"ký tự mới trong tên miền này"
+
+msgid "View"
+msgstr "Xem"
+
+msgid ""
+"WPML Package Translation is enabled but not effective. It requires <a href="
+"\"%s\">WPML</a>, String Translation and Translation Management in order to "
+"work."
+msgstr ""
+"WPML Package Translation đã được bật nhưng không hoạt động. "
+"Nó cần <a href=\"%s\">WPML</a>, String Translation và Translation "
+"Management để làm việc."
+
+msgid ""
+"WPML String Translation is attempting to write .mo files with translations "
+"to folder:"
+msgstr ""
+"Chức năng Dịch thuật Chuỗi ký tự WPML đang thử ghi các tập "
+"tin .mo bằng các bản dịch vào thư mục:"
+
+msgid ""
+"WPML String Translation is enabled but not effective, because WPML is "
+"outdated. Please update WPML first."
+msgstr ""
+"WPML String Translation đã được kích hoạt nhưng không hoạt độ"
+"ng vì WPML quá cũ. Vui lòng cập nhật WPML trước."
+
+msgid ""
+"WPML String Translation will send all strings to WPML’s Advanced "
+"Translation Editor and to the translation services which are used."
+msgstr ""
+"Tính năng Dịch thuật chuỗi ký tự của WPML sẽ gửi tất các "
+"chuỗi ký tự đến Trình biên tập Dịch thuật Nâng cao của "
+"WPML và đến các dịch vụ dịch thuật được sử dụng."
+
+msgid "WPML Translation"
+msgstr "WPML Translation"
+
+msgid ""
+"WPML can keep track of where strings are used on the public pages. "
+"Activating this feature will enable the 'view in page' functionality and "
+"make translation easier."
+msgstr ""
+"WPML có thể theo dõi được vị trí các chuỗi ký tự được "
+"sử dụng trên các trang (public page). Kích hoạt tính năng này "
+"sẽ kích hoạt chức năng 'xem trong trang' và giúp cho việc dịch "
+"dễ dàng hơn."
+
+msgid "WPML could not delete the strings"
+msgstr "WPML không thể xóa các chuỗi ký tự này"
+
+msgid ""
+"WPML needs to update the database. This update will help improve WPML's "
+"performance when fetching translated strings."
+msgstr ""
+"WPML cần cập nhật cơ sở dữ liệu. Việc cập nhật này sẽ "
+"giúp cải thiện hoạt động của WPML khi tìm nạp các chuỗi "
+"ký tự."
+
+msgid "WPML's documentation on troubleshooting .mo files generation."
+msgstr ""
+"Tài liệu của WPML về quá trình tạo các tập tin .mo xử lý "
+"sự cố."
+
+msgid "Waiting for translator"
+msgstr "Chờ người dịch"
+
+msgid ""
+"We have detected a problem with some tables in the database. Please contact "
+"%1$sWPML support%2$s to get this fixed."
+msgstr ""
+"Chúng tôi đã phát hiện lỗi với một số bảng trong cơ sở "
+"dữ liệu. Vui lòng liên hệ %1$sBộ phận hỗ trợ WPML"
+"%2$s để được khắc phục."
+
+msgid "With Priority:"
+msgstr "Với mức Ưu tiên:"
+
+msgid "Yes - disable these notifications completely"
+msgstr "Có - vô hiệu hóa hoàn toàn các thông báo này"
+
+msgid ""
+"You cannot add packages in this language to the basket since it already "
+"contains posts, packages or strings of another source language!\\n\\t\\t\\t"
+"\\t\\tEither submit the current basket and then add the post or delete the "
+"posts of differing language in the current basket"
+msgstr ""
+"Bạn không thể thêm các gói dữ liệu của ngôn ngữ này vào "
+"giỏ dịch thuật vì nó đã bao gồm các bài viết, các gói dữ "
+"liệu hoặc chuỗi ký tự của ngôn ngữ gốc khác!\\n\\t\\t\\t\\t"
+"\\tHoặc gửi giỏ dịch thuật hiện thời và sau đó thêm bài "
+"viết này hoặc xóa các bài viết của ngôn ngữ khác trong giỏ "
+"dịch thuật hiện thời."
+
+msgid "You excluded: "
+msgstr "Bạn đã loại trừ:"
+
+msgid ""
+"You have selected strings belonging to a package. Please select all strings "
+"from the affected package or unselect these strings."
+msgstr ""
+"Bạn vừa chọn các chuỗi ký tự thuộc về một gói. Vui lòng "
+"chọn toàn bộ chuỗi ký tự từ gói bị ảnh hưởng hoặc bỏ "
+"chọn các chuỗi ký tự này."
+
+msgid "You included: "
+msgstr "Bạn đã bao gồm:"
+
+msgid "and others"
+msgstr "và các mục khác"
+
+msgid "edit"
+msgstr "sửa"
+
+msgid "new"
+msgstr "mới"
+
+msgid "none"
+msgstr "không"
+
+msgid "select from existing"
+msgstr "lựa chọn từ các mục hiện có"
+
+msgid "view in page"
+msgstr "xem trong trang"
+
+msgid "view in source"
+msgstr "xem trong mã nguồn"

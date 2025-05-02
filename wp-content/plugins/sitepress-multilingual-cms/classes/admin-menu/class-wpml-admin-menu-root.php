@@ -1,5 +1,7 @@
 <?php
 
+use WPML\LIB\WP\User;
+
 class WPML_Admin_Menu_Root {
 	private $capability;
 	private $function;
@@ -58,7 +60,12 @@ class WPML_Admin_Menu_Root {
 		add_menu_page(
 			$this->get_page_title(),
 			$this->get_menu_title(),
-			$this->get_capability(),
+			// The root menu item must match with the first menu item capability.
+			// The only case for adjusting this is when having the manage_translations
+			// capability for showing the dashboard.
+			current_user_can( User::CAP_MANAGE_TRANSLATIONS )
+				? User::CAP_MANAGE_TRANSLATIONS
+				: $this->get_capability(),
 			$root_slug,
 			$this->get_function(),
 			$this->get_icon_url(),
@@ -204,7 +211,6 @@ class WPML_Admin_Menu_Root {
 	public function init_hooks() {
 		add_action( 'wpml_admin_menu_register_item', array( $this, 'register_menu_item' ) );
 		add_action( 'admin_menu', array( $this, 'build' ) );
-		add_action( 'set_wpml_root_menu_capability', [ $this, 'set_capability' ], 10, 1 );
 	}
 
 	/**

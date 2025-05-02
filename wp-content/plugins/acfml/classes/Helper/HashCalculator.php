@@ -12,11 +12,11 @@ class HashCalculator {
 	 * @return string
 	 */
 	public static function calculate( $value ) {
+		$value = self::normalize( $value );
+
 		if ( is_string( $value ) ) {
 			return self::hash( $value );
-		} elseif ( is_int( $value ) ) {
-			return self::hash( (string) $value );
-		} elseif ( is_bool( $value ) ) {
+		} elseif ( is_numeric( $value ) ) {
 			return self::hash( (string) $value );
 		} elseif ( is_array( $value ) && self::getID( $value ) ) {
 			return self::hash( (string) self::getID( $value ) );
@@ -87,5 +87,20 @@ class HashCalculator {
 		ksort( $array );
 		$hashes = wpml_collect( $array )->map( [ self::class, 'calculate' ] )->toArray();
 		return self::hash( implode( $hashes ) );
+	}
+
+	/**
+	 * @param mixed $value
+	 *
+	 * @return array|int|mixed
+	 */
+	public static function normalize( $value ) {
+		if ( is_bool( $value ) ) {
+			$value = (int) $value;
+		} elseif ( is_object( $value ) ) {
+			$value = (array) $value;
+		}
+
+		return $value;
 	}
 }

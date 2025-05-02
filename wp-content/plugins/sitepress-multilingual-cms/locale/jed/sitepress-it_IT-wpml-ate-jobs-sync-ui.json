@@ -3,11 +3,13 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "lang": "it_IT"
+            "domain": "messages"
          },
          "Sending for translation": [
             "Invio in traduzione"
+         ],
+         "This content is being automatically translated. If you want to do something different with it cancel translation jobs first.": [
+            "Questo contenuto viene tradotto automaticamente. Se vuoi fare qualcosa di diverso, annulla prima i lavori di traduzione."
          ],
          "Connecting to WPML’s Advanced Translation Editor": [
             "Connessione all'editor di traduzione avanzato di WPML"
@@ -51,8 +53,15 @@
          "Translate Everything Automatically is paused": [
             "Traduci tutto automaticamente è in pausa"
          ],
-         "Translate Everything Automatically stopped": [
-            "Traduci tutto automaticamente arrestato"
+         "Translate Everything Automatically is stopped": [
+            "La traduzione automatica di tutto è interrotta"
+         ],
+         "Out of Credits for Automatic Translation": [
+            "Crediti esauriti per la traduzione automatica"
+         ],
+         "You have <b>1</b> prepaid translation credit in your wpml.org account. Assign these credits to your site to start using automatic translation": [
+            "Hai <b>1</b> credito di traduzione prepagato nel tuo account wpml.org. Assegna questi crediti al tuo sito per iniziare a utilizzare la traduzione automatica",
+            "Hai <b>%s</b> crediti di traduzione prepagati nel tuo account wpml.org. Assegna questi crediti al tuo sito per iniziare a utilizzare la traduzione automatica"
          ],
          "Preparing content for translation": [
             "Preparazione dei contenuti per la traduzione"
@@ -70,8 +79,8 @@
             "Per utilizzare la traduzione automatica, la lingua predefinita (%s) deve essere associata a una lingua supportata."
          ],
          "Your language, %s, must be mapped to a supported language in order to use automatic translation.": [
-            "La tua lingua, %s, deve essere associata a una lingua supportata per poter utilizzare la traduzione automatica.",
-            "Le lingue seguenti sul tuo sito devono essere associate a una lingua supportata per poter utilizzare la traduzione automatica: %s"
+            "La tua lingua, %s, deve essere associata a una lingua supportata per utilizzare la traduzione automatica.",
+            "Le seguenti lingue sul tuo sito devono essere associate a una lingua supportata per utilizzare la traduzione automatica: %s"
          ],
          "Content in those languages: %s, cannot be automatically translated unless you map them to a language that's different from the default.": [
             "Il contenuto in quelle lingue: %s, non può essere tradotto automaticamente a meno che non le associ a una lingua che sia diversa da quella di default."
@@ -113,35 +122,20 @@
          "Pay-as-you-go credits used": [
             "Crediti per il pagamento a consumo utilizzati"
          ],
-         "Resume": [
-            "Riprendi"
-         ],
          "Stop": [
             "Interrompi, arresta"
          ],
          "Fix it": [
             "Sistemalo"
          ],
-         "Pause": [
-            "Pausa"
+         "Assign credits now": [
+            "Assegna i crediti ora"
          ],
-         "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
-            "Si è verificato un errore nella messa in pausa della tua traduzione automatica. Riprova più tardi o contatta la nostra assistenza."
+         "Resume": [
+            "Riprendi"
          ],
-         "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
-            "Si è verificato un errore nel riprendere la tua traduzione automatica. Riprova più tardi o contatta la nostra assistenza."
-         ],
-         "Error": [
-            "Errore"
-         ],
-         "Draft — Pending review": [
-            "Bozza — In attesa di revisione"
-         ],
-         "Complete": [
-            "Completato"
-         ],
-         "Insufficient funds": [
-            "Fondi insufficienti"
+         "Refreshing translation status": [
+            "Aggiornamento dello stato di traduzione"
          ],
          "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
             "Consulta la <a>Guida introduttiva</a> per ottenere maggiori informazioni sulle modalità di traduzione dei contenuti del tuo sito"
@@ -169,76 +163,6 @@
          ],
          "The number of translations": [
             "Il numero di traduzioni"
-         ],
-         "Translate Everything Automatically - running": [
-            "Traduci tutto automaticamente: in corso"
-         ],
-         "Translate Everything Automatically - active": [
-            "Traduci tutto automaticamente: attivo"
-         ],
-         "Pause automatic translation": [
-            "Metti in pausa la traduzione automatica"
-         ],
-         "WPML will finish in-progress translations but won't translate anything new.": [
-            "WPML terminerà le traduzioni in corso, ma non tradurrà nulla di nuovo."
-         ],
-         "Translate Everything Automatically - paused": [
-            "Traduci tutto automaticamente: in pausa"
-         ],
-         "Start automatic translation": [
-            "Avvia la traduzione automatica"
-         ],
-         "This uses %scredits%s to translate your existing content and anything you add or change later.": [
-            "Saranno usati i %screditi%s per tradurre il tuo contenuto esistente e qualsiasi elemento che aggiungerai o cambierai in seguito."
-         ],
-         "Start translating everything automatically": [
-            "Inizia a tradurre tutto automaticamente"
-         ],
-         "WPML will translate any new content you create into %1$s.": [
-            "WPML tradurrà qualsiasi nuovo contenuto che creerai in %1$s."
-         ],
-         "WPML will translate all new future content to %1$s and keep translations up to date when you make changes.": [
-            "WPML tradurrà tutto il nuovo contenuto futuro in %1$s e manterrà le traduzioni aggiornate quando effettuerai dei cambiamenti."
-         ],
-         "Do you want to translate existing content, too?": [
-            "Vuoi tradurre anche il contenuto esistente?"
-         ],
-         "Yes, translate all new and existing content": [
-            "Sì, traduci tutto il contenuto nuovo ed esistente"
-         ],
-         "No, only translate new content": [
-            "No, traduci solo il nuovo contenuto"
-         ],
-         "You can translate existing content from the Translation Management Dashboard": [
-            "Puoi tradurre il contenuto esistente dalla dashboard di gestione della traduzione"
-         ],
-         "Connection Error. Please wait a minute and reload this page. If the problem continues, please contact WPML support.": [
-            "Errore di connessione. Attendi un minuto e ricarica questa pagina. Se il problema persiste, contatta l'assistenza WPML."
-         ],
-         "Automatic translation uses credits. %1$sRead more about automatic translation credits%2$s": [
-            "La traduzione automatica usa i crediti. %1$sLeggi di più sui crediti per la traduzione automatica%2$s"
-         ],
-         "You need credits to start translating everything.": [
-            "Ti servono crediti per iniziare a tradurre il tutto."
-         ],
-         "Cancel": [
-            "Annulla"
-         ],
-         "Start translating everything": [
-            "Inizia a tradurre tutto"
-         ],
-         "%1$d language": [
-            "%1$d lingua",
-            "%1$d lingue"
-         ],
-         "Please wait...": [
-            "Attendere..."
-         ],
-         "All new future content": [
-            "Tutto il nuovo contenuto futuro"
-         ],
-         "Translate Everything Automatically - stopped": [
-            "Traduci tutto automaticamente: arrestato"
          ]
       }
    }

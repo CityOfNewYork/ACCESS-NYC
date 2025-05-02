@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/main-ui/components/Actions.js:46
+msgid "Edit"
+msgstr "편집하다"
+
+#: src/js/main-ui/components/Actions.js:57
+msgid "Shift+Tab"
+msgstr "Shift+탭"
+
+#: src/js/main-ui/components/Actions.js:62
+msgid "Tab"
+msgstr "탭"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:102
+msgid "Translation to:"
+msgstr "다음으로 번역:"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:121
+msgid "Copy from original"
+msgstr "원본에서 복사"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:136
+msgid "Use Shift+Enter to add a new line."
+msgstr "새 줄을 추가하려면 Shift+Enter를 사용하세요."
+
+#: src/js/main-ui/components/EditTranslationPopup.js:95
+msgid "Original:"
+msgstr "원래의:"
+
+#: src/js/main-ui/components/LanguagesCell.js:166
+msgid "Add %s translation"
+msgstr "추가하다 %s 번역"
+
+#: src/js/main-ui/components/LanguagesCell.js:185
+msgid "Edit %s translation"
+msgstr "편집하다 %s 번역"
+
+#: src/js/main-ui/components/LanguagesCell.js:61
+msgid "Original language %s"
+msgstr "원어 %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:68
+msgid "Waiting for translator to %s"
+msgstr "번역가를 기다리는 중 %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:75
+msgid "Translation in progress to %s"
+msgstr "번역 진행 중 %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:82
+msgid "In basket for translation to %s"
+msgstr "번역할 장바구니에 담기 %s"
+
+#: src/js/main-ui/components/notification.js:13
+msgid "Translation saved."
+msgstr "번역이 저장되었습니다."
+
+#: src/js/main-ui/components/notification.js:17
+msgid "Translation update failed."
+msgstr "번역 업데이트에 실패했습니다."

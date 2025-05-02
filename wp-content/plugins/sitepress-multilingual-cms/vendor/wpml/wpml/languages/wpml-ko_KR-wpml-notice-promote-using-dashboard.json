@@ -1,0 +1,31 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Dissmiss Notice": [
+            "알림 해제"
+         ],
+         "Streamline your site's translation using WPML's Translation Dashboard": [
+            "WPML의 번역 대시보드를 사용하여 사이트 번역 간소화"
+         ],
+         "Translate pages, posts, products and strings from one place": [
+            "페이지, 게시물, 제품 및 문자열을 한 곳에서 번역"
+         ],
+         "Bulk automatic translation": [
+            "대량 자동 번역"
+         ],
+         "Translate everything automatically": [
+            "모든 내용을 자동으로 번역"
+         ],
+         "Go to the Translation Dashboard": [
+            "번역 대시보드로 이동"
+         ],
+         "Learn More": [
+            "자세히 알아보기"
+         ]
+      }
+   }
+}

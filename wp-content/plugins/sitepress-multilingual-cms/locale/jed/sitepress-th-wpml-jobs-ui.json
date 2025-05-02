@@ -1,0 +1,407 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Start batch sync": [
+            "เริ่มการซิงค์แบบกลุ่ม"
+         ],
+         "Cancel job": [
+            "ยกเลิกงาน"
+         ],
+         "Continue reviewing": [
+            "ดำเนินการตรวจสอบต่อ"
+         ],
+         "Start downloading XLIFF file": [
+            "เริ่มดาวน์โหลดไฟล์ XLIFF"
+         ],
+         "Edit": [
+            "แก้ไข"
+         ],
+         "Get translation": [
+            "รับการแปล"
+         ],
+         "Resign": [
+            "ลาออก"
+         ],
+         "Review": [
+            "ตรวจสอบ"
+         ],
+         "Translate": [
+            "แปล"
+         ],
+         "Take and Translate": [
+            "รับและแปล"
+         ],
+         "View": [
+            "ดู"
+         ],
+         "Delete Translations": [
+            "ลบการแปล"
+         ],
+         "Keep Translations as Draft": [
+            "เก็บการแปลเป็นฉบับร่าง"
+         ],
+         "Never mind. I want to review these translations.": [
+            "ไม่เป็นไร ฉันต้องการตรวจสอบการแปลเหล่านี้."
+         ],
+         "Cancel": [
+            "ยกเลิก"
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "นี่จะลบงานที่เลือกออกจากคิวการแปลโดยไม่เผยแพร่ คุณต้องการทำอย่างไรกับการแปล?"
+         ],
+         "Cancel Translation Review": [
+            "ยกเลิกการตรวจสอบการแปล"
+         ],
+         "Bulk actions": [
+            "การดำเนินการแบบกลุ่ม"
+         ],
+         "Apply": [
+            "นำไปใช้"
+         ],
+         "Actions applied to multiple translation jobs can take a few seconds. Please do not leave the page.": [
+            "การดำเนินการที่ใช้กับงานแปลหลายงานอาจใช้เวลาสองสามวินาที โปรดอย่าออกจากหน้านี้."
+         ],
+         "Actions applied to multiple translation jobs can take a few minutes. Please do not leave the page.": [
+            "การดำเนินการที่ใช้กับงานแปลหลายงานอาจใช้เวลาสองสามนาที โปรดอย่าออกจากหน้านี้."
+         ],
+         "Select translator": [
+            "เลือกผู้แปล"
+         ],
+         "Assign": [
+            "มอบหมาย"
+         ],
+         "Cancelled": [
+            "ยกเลิกแล้ว"
+         ],
+         "Needs translation": [
+            "ต้องการการแปล"
+         ],
+         "In progress": [
+            "กำลังดำเนินการ"
+         ],
+         "Translation ready to download": [
+            "การแปลพร้อมให้ดาวน์โหลด"
+         ],
+         "Completed": [
+            "เสร็จสมบูรณ์"
+         ],
+         "%s are immediately published because they don't support draft mode.": [
+            "%s จะถูกเผยแพร่ทันทีเนื่องจากไม่รองรับโหมดฉบับร่าง."
+         ],
+         "Published — Pending review": [
+            "เผยแพร่แล้ว — รอการตรวจสอบ"
+         ],
+         "Draft — Pending review": [
+            "ฉบับร่าง — รอการตรวจสอบ"
+         ],
+         "Review in progress": [
+            "กำลังตรวจสอบ"
+         ],
+         "Published — Review in progress": [
+            "เผยแพร่แล้ว — กำลังตรวจสอบ"
+         ],
+         "Draft — Review in progress": [
+            "ฉบับร่าง — กำลังตรวจสอบ"
+         ],
+         "Insufficient funds": [
+            "เงินไม่เพียงพอ"
+         ],
+         "Needs update": [
+            "ต้องการการอัปเดต"
+         ],
+         "View original": [
+            "ดูต้นฉบับ"
+         ],
+         "(no title)": [
+            "(ไม่มีชื่อเรื่อง)"
+         ],
+         "Automatic translation": [
+            "การแปลอัตโนมัติ"
+         ],
+         "TP ID: %d": [
+            "TP ID: %d"
+         ],
+         "Reset": [
+            "รีเซ็ต"
+         ],
+         "Filter": [
+            "กรอง"
+         ],
+         "ID (%s)": [
+            "ID (%s)"
+         ],
+         "Title (%s)": [
+            "ชื่อเรื่อง (%s)"
+         ],
+         "Type (%s)": [
+            "ประเภท (%s)"
+         ],
+         "Language (%s)": [
+            "ภาษา (%s)"
+         ],
+         "Batch name (%s)": [
+            "ชื่อกลุ่ม (%s)"
+         ],
+         "Status (%s)": [
+            "สถานะ (%s)"
+         ],
+         "Translated by (%s)": [
+            "แปลโดย (%s)"
+         ],
+         "Sent date (%s)": [
+            "วันที่ส่ง (%s)"
+         ],
+         "Deadline (%s)": [
+            "กำหนดส่ง (%s)"
+         ],
+         "Clear all filters": [
+            "ล้างตัวกรองทั้งหมด"
+         ],
+         "Any Translation Service": [
+            "บริการแปลใดๆ"
+         ],
+         "Any WordPress Translator": [
+            "ผู้แปล WordPress คนใดก็ได้"
+         ],
+         "From": [
+            "จาก"
+         ],
+         "To": [
+            "ถึง"
+         ],
+         "Anyone": [
+            "ทุกคน"
+         ],
+         "Include jobs from translation services": [
+            "รวมงานจากบริการแปล"
+         ],
+         "All types": [
+            "ทุกประเภท"
+         ],
+         "Select visible columns": [
+            "เลือกคอลัมน์ที่ต้องการให้แสดง"
+         ],
+         "Sort descending": [
+            "เรียงจากมากไปน้อย"
+         ],
+         "Sort ascending": [
+            "เรียงจากน้อยไปมาก"
+         ],
+         "Cancel sorting": [
+            "ยกเลิกการเรียงลำดับ"
+         ],
+         "The bulk action is running...": [
+            "กำลังดำเนินการแบบกลุ่ม..."
+         ],
+         "Export all jobs to XLIFF 1.0": [
+            "ส่งออกงานทั้งหมดเป็น XLIFF 1.0"
+         ],
+         "Export all filtered jobs to XLIFF 1.0": [
+            "ส่งออกงานที่กรองทั้งหมดเป็น XLIFF 1.0"
+         ],
+         "Export all jobs to XLIFF 1.1": [
+            "ส่งออกงานทั้งหมดเป็น XLIFF 1.1"
+         ],
+         "Export all filtered jobs to XLIFF 1.1": [
+            "ส่งออกงานที่กรองทั้งหมดเป็น XLIFF 1.1"
+         ],
+         "Export all jobs to XLIFF 1.2": [
+            "ส่งออกงานทั้งหมดเป็น XLIFF 1.2"
+         ],
+         "Export all filtered jobs to XLIFF 1.2": [
+            "ส่งออกงานที่กรองทั้งหมดเป็น XLIFF 1.2"
+         ],
+         "Export": [
+            "ส่งออก"
+         ],
+         "Select File": [
+            "เลือกไฟล์"
+         ],
+         ".xliff .zip": [
+            ".xliff .zip"
+         ],
+         "Importing": [
+            "กำลังนำเข้า"
+         ],
+         "Import": [
+            "นำเข้า"
+         ],
+         "Import / Export XLIFF": [
+            "นำเข้า / ส่งออก XLIFF"
+         ],
+         "Actions": [
+            "การดำเนินการ"
+         ],
+         "Batch name": [
+            "ชื่อกลุ่ม"
+         ],
+         "Filter by %s": [
+            "กรองตาม %s"
+         ],
+         "Title": [
+            "ชื่อเรื่อง"
+         ],
+         "Approve translation reviews": [
+            "อนุมัติการตรวจสอบการแปล"
+         ],
+         "Cancel jobs": [
+            "ยกเลิกงาน"
+         ],
+         "Cancel translation reviews": [
+            "ยกเลิกการตรวจสอบการแปล"
+         ],
+         "Export to XLIFF %s": [
+            "ส่งออกเป็น XLIFF %s"
+         ],
+         "Get translations": [
+            "รับการแปล"
+         ],
+         "This action does not apply to any of the selected translation jobs": [
+            "การดำเนินการนี้ไม่สามารถใช้กับงานแปลที่เลือกได้"
+         ],
+         "Translations have been downloaded": [
+            "ดาวน์โหลดการแปลเรียบร้อยแล้ว"
+         ],
+         "Translation has been downloaded": [
+            "ดาวน์โหลดการแปลเรียบร้อยแล้ว"
+         ],
+         "Translations could not be downloaded": [
+            "ไม่สามารถดาวน์โหลดการแปลได้"
+         ],
+         "Translation could not be downloaded": [
+            "ไม่สามารถดาวน์โหลดการแปลได้"
+         ],
+         "Approving translations reviews failed!": [
+            "การอนุมัติการตรวจสอบการแปลล้มเหลว!"
+         ],
+         "Failed approving translations for the following posts: ": [
+            "ไม่สามารถอนุมัติการแปลสำหรับโพสต์ต่อไปนี้: "
+         ],
+         "Translations reviews approved successfully!": [
+            "อนุมัติการตรวจสอบการแปลสำเร็จ!"
+         ],
+         "No valid jobs selected to approve translations reviews!": [
+            "ไม่มีงานที่ถูกต้องที่เลือกเพื่ออนุมัติการตรวจสอบการแปล!"
+         ],
+         "The translator has been assigned to the job": [
+            "มอบหมายผู้แปลให้กับงานแล้ว"
+         ],
+         "The translator could not be assigned to the job": [
+            "ไม่สามารถมอบหมายผู้แปลให้กับงานได้"
+         ],
+         "The jobs have been cancelled": [
+            "ยกเลิกงานแล้ว"
+         ],
+         "The job has been cancelled": [
+            "ยกเลิกงานแล้ว"
+         ],
+         "The jobs could not be cancelled": [
+            "ไม่สามารถยกเลิกงานได้"
+         ],
+         "The job could not be cancelled": [
+            "ไม่สามารถยกเลิกงานได้"
+         ],
+         "Translation reviews have been canceled": [
+            "ยกเลิกการตรวจสอบการแปลแล้ว"
+         ],
+         "Translation review has been canceled": [
+            "ยกเลิกการตรวจสอบการแปลแล้ว"
+         ],
+         "Translation reviews could not be canceled": [
+            "ไม่สามารถยกเลิกการตรวจสอบการแปลได้"
+         ],
+         "Translation review could not be canceled": [
+            "ไม่สามารถยกเลิกการตรวจสอบการแปลได้"
+         ],
+         "Sent on": [
+            "ส่งเมื่อ"
+         ],
+         "Deadline": [
+            "กำหนดส่ง"
+         ],
+         "Status": [
+            "สถานะ"
+         ],
+         "Pending review": [
+            "รอการตรวจสอบ"
+         ],
+         "ID": [
+            "ID"
+         ],
+         "Type": [
+            "ประเภท"
+         ],
+         "Languages": [
+            "ภาษา"
+         ],
+         "Translated by": [
+            "แปลโดย"
+         ],
+         "Download XLIFF file couldn't be finished": [
+            "ไม่สามารถดาวน์โหลดไฟล์ XLIFF ให้เสร็จสิ้นได้"
+         ],
+         "Could not load jobs for export": [
+            "ไม่สามารถโหลดงานสำหรับการส่งออกได้"
+         ],
+         "The export to XLIFF failed": [
+            "การส่งออกเป็น XLIFF ล้มเหลว"
+         ],
+         "Imported %d jobs": [
+            "นำเข้า %d งานแล้ว"
+         ],
+         "Imported one job": [
+            "นำเข้าหนึ่งงานแล้ว"
+         ],
+         "Could not import any job": [
+            "ไม่สามารถนำเข้างานใดๆ ได้"
+         ],
+         "Import failed!": [
+            "การนำเข้าล้มเหลว!"
+         ],
+         "Loading translations queue": [
+            "กำลังโหลดคิวการแปล"
+         ],
+         "Loading translation jobs": [
+            "กำลังโหลดงานแปล"
+         ],
+         "Jobs could not be loaded": [
+            "ไม่สามารถโหลดงานได้"
+         ],
+         "Specify some jobs to resign": [
+            "ระบุงานบางอย่างที่ต้องการลาออก"
+         ],
+         "We could not resign jobs: %s": [
+            "เราไม่สามารถลาออกจากงาน: %s"
+         ],
+         "Resigned from jobs": [
+            "ลาออกจากงานแล้ว"
+         ],
+         "Resigned from job": [
+            "ลาออกจากงานแล้ว"
+         ],
+         "Failed to resign from jobs": [
+            "ไม่สามารถลาออกจากงานได้"
+         ],
+         "The Advanced Editor jobs synchronization has failed": [
+            "การซิงโครไนซ์งานของตัวแก้ไขขั้นสูงล้มเหลว"
+         ],
+         "Synchronization with the Professional Translation service has failed": [
+            "การซิงโครไนซ์กับบริการแปลมืออาชีพล้มเหลว"
+         ],
+         "%d translation has been downloaded": [
+            "ดาวน์โหลด %d การแปลแล้ว",
+            "ดาวน์โหลด %d การแปลแล้ว"
+         ],
+         "Batch sync finished successfully!": [
+            "การซิงค์แบบกลุ่มเสร็จสมบูรณ์!"
+         ],
+         "Batch sync couldn't be finished": [
+            "ไม่สามารถทำการซิงค์แบบกลุ่มให้เสร็จสิ้นได้"
+         ]
+      }
+   }
+}

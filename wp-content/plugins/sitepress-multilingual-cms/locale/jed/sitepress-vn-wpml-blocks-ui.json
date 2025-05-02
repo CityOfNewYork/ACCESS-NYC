@@ -1,0 +1,184 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Advanced": [
+            "Nâng cao"
+         ],
+         "HTML anchor": [
+            "Điểm neo HTML"
+         ],
+         "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
+            "Thêm lối tắt đến khối này khi tải trang bằng cách sử dụng URL <q id=\"q-first-1\">#anchor</q>."
+         ],
+         "Additional CSS class(es)": [
+            "Lớp CSS bổ sung"
+         ],
+         "Separate multiple classes with spaces.": [
+            "Phân tách nhiều lớp bằng dấu cách."
+         ],
+         "Color": [
+            "Màu sắc"
+         ],
+         "px": [
+            "px"
+         ],
+         "%": [
+            "%"
+         ],
+         "Dimensions": [
+            "Kích thước"
+         ],
+         "BLOCK": [
+            "KHỐI"
+         ],
+         "Block margin": [
+            "Lề khối"
+         ],
+         "Block padding": [
+            "Đệm khối"
+         ],
+         "LANGUAGE": [
+            "NGÔN NGỮ"
+         ],
+         "Language spacing": [
+            "Khoảng cách ngôn ngữ"
+         ],
+         "Language padding": [
+            "Đệm ngôn ngữ"
+         ],
+         "Display": [
+            "Hiển thị"
+         ],
+         "Show flag": [
+            "Hiển thị cờ"
+         ],
+         "Show language name": [
+            "Hiển thị tên ngôn ngữ"
+         ],
+         "Display language name in": [
+            "Hiển thị tên ngôn ngữ bằng"
+         ],
+         "Style": [
+            "Kiểu"
+         ],
+         "Flag settings": [
+            "Cài đặt cờ"
+         ],
+         "Width": [
+            "Chiều rộng"
+         ],
+         "Height": [
+            "Chiều cao"
+         ],
+         "Spacing": [
+            "Khoảng cách"
+         ],
+         "Allow wrapping to multiple lines": [
+            "Cho phép xuống dòng"
+         ],
+         "Open on click": [
+            "Mở khi nhấp chuột"
+         ],
+         "Show arrow": [
+            "Hiển thị mũi tên"
+         ],
+         "Layout": [
+            "Bố cục"
+         ],
+         "Justification": [
+            "Căn chỉnh"
+         ],
+         "Orientation": [
+            "Hướng"
+         ],
+         "Typography": [
+            "Kiểu chữ"
+         ],
+         "Background": [
+            "Nền"
+         ],
+         "Language Text": [
+            "Văn bản ngôn ngữ"
+         ],
+         "Language Background": [
+            "Nền ngôn ngữ"
+         ],
+         "Current language text": [
+            "Văn bản ngôn ngữ hiện tại"
+         ],
+         "Current language background": [
+            "Nền ngôn ngữ hiện tại"
+         ],
+         "Full name": [
+            "Tên đầy đủ"
+         ],
+         "Code": [
+            "Mã"
+         ],
+         "Justify items left": [
+            "Căn trái các mục"
+         ],
+         "Justify items center": [
+            "Căn giữa các mục"
+         ],
+         "Justify items right": [
+            "Căn phải các mục"
+         ],
+         "Justify items space between": [
+            "Căn đều các mục"
+         ],
+         "Horizontal": [
+            "Ngang"
+         ],
+         "Vertical": [
+            "Dọc"
+         ],
+         "Normal": [
+            "Bình thường"
+         ],
+         "Medium": [
+            "Trung bình"
+         ],
+         "Large": [
+            "Lớn"
+         ],
+         "X-Large": [
+            "Cực lớn"
+         ],
+         "Ab": [
+            "Ab"
+         ],
+         "AB": [
+            "AB"
+         ],
+         "ab": [
+            "ab"
+         ],
+         "Small": [
+            "Nhỏ"
+         ],
+         "Displays the WPML Language Switcher.": [
+            "Hiển thị Bộ chuyển đổi ngôn ngữ WPML."
+         ],
+         "Language Switcher": [
+            "Bộ chuyển đổi ngôn ngữ"
+         ],
+         "displays the WPML Language Switcher": [
+            "hiển thị Bộ chuyển đổi ngôn ngữ WPML"
+         ],
+         "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
+            "Hiển thị Bộ chuyển đổi ngôn ngữ WPML. <br/> Tìm hiểu <a>cách dịch khối này</a>."
+         ],
+         "Navigation Language Switcher": [
+            "Bộ chuyển đổi ngôn ngữ điều hướng"
+         ],
+         "Reset all": [
+            "Đặt lại tất cả"
+         ]
+      }
+   }
+}

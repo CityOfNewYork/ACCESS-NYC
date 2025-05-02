@@ -19,6 +19,14 @@ class WPML_TM_Serialized_Custom_Field_Package_Handler {
 			10,
 			2
 		);
+
+		add_filter(
+			'wpml_tm_adjust_translation_fields',
+			array(
+				$this,
+				'set_title_for_whitelisted_attributes',
+			)
+		);
 	}
 
 	/**
@@ -46,7 +54,7 @@ class WPML_TM_Serialized_Custom_Field_Package_Handler {
 	/**
 	 * Matches the attributes array to the whitelist array
 	 * The whitelist array has the attribute as the key to another array for sub keys
-	 * eg. array( 'attribute1' => array( 'subkey1' => array() ) )
+	 * eg. array( 'attribute1' => array( 'subkey1' => '' ) )
 	 *
 	 * @param array $attributes - The attributes in the custom field.
 	 * @param array $whitelist - The whitelist attributes to match against.
@@ -66,6 +74,55 @@ class WPML_TM_Serialized_Custom_Field_Package_Handler {
 		}
 
 		return false;
+	}
+
+	/**
+	 * @param array[] $fields
+	 *
+	 * @return array[]
+	 */
+	public function set_title_for_whitelisted_attributes( $fields ) {
+		foreach ( $fields as $index => $field ) {
+			list( $custom_field, $attributes ) = WPML_TM_Field_Type_Encoding::decode( $field['field_type'] );
+			if ( $custom_field && $attributes ) {
+				$settings             = $this->custom_field_setting_factory->post_meta_setting( $custom_field );
+				$attributes_whitelist = $settings->get_attributes_whitelist();
+
+				if ( $attributes_whitelist ) {
+					$title = $this->find_title_in_order( $attributes, $attributes_whitelist );
+					if ( '' !== $title ) {
+						$fields[ $index ]['title'] = $title;
+					}
+				}
+			}
+		}
+
+		return $fields;
+	}
+
+	/**
+	 * Matches the attributes array to the whitelist array to find the label
+	 * The whitelist array has the attribute nested keys and the value is the label
+	 * eg. array( 'attribute1' => array( 'subkey1' => 'Label' ) )
+	 *
+	 * @param array $attributes    The attributes in the custom field.
+	 * @param array $whitelist     The whitelist attributes to match against.
+	 * @param int   $current_depth The current depth in the attributes array.
+	 *
+	 * @return string
+	 */
+	private function find_title_in_order( $attributes, $whitelist, $current_depth = 0 ) {
+		$current_attribute = $attributes[ $current_depth ];
+		$wildcard_match    = $this->match_with_wildcards( $current_attribute, array_keys( $whitelist ) );
+		if ( $wildcard_match ) {
+			if ( count( $attributes ) === $current_depth + 1 ) {
+				return $whitelist[ $current_attribute ] ?? '';
+			} else {
+				return $this->find_title_in_order( $attributes, $whitelist[ $wildcard_match ], $current_depth + 1 );
+			}
+		}
+
+		return '';
 	}
 
 	/**

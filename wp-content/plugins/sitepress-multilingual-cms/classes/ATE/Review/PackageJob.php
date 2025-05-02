@@ -21,7 +21,6 @@ class PackageJob implements \IWPML_Backend_Action, \IWPML_REST_Action {
 	public function add_hooks() {
 		if ( \WPML_TM_ATE_Status::is_enabled_and_activated() && Option::shouldBeReviewed() ) {
 			self::addReviewStatusHook();
-			self::addSavePackageHook();
 			self::addTranslationCompleteHook();
 		}
 	}
@@ -45,42 +44,12 @@ class PackageJob implements \IWPML_Backend_Action, \IWPML_REST_Action {
 						wpml_collect( $jobsIds )
 							->flatten()
 							->map( Jobs::get() )
+							->filter( Fns::identity() )
 							->filter( Fns::unary( [ self::class, 'isPackageJob' ] ) )
 							->map( $setNeedsReview );
 					}
 				)
 			);
-	}
-
-	/**
-	 * @return void
-	 */
-	private static function addSavePackageHook() {
-		/** @var callable(null|string):callable $isReviewStatus */
-		$isReviewStatus = Relation::propEq( 'review_status' );
-
-		/** @var callable(object):bool $mightNeedReview */
-		$mightNeedReview = Logic::anyPass(
-			[
-				$isReviewStatus( ReviewStatus::ACCEPTED ),     // a previous job was completed.
-				$isReviewStatus( ReviewStatus::NEEDS_REVIEW ), // a previous job needs update.
-				$isReviewStatus( null ),                       // new job.
-			]
-		);
-
-		/** @var callable(bool, string, object):bool $shouldSaveStringPackageTranslation */
-		$shouldSaveStringPackageTranslation = function( $shouldSave, $typePrefix, $job ) use ( $mightNeedReview ) {
-			if ( self::ELEMENT_TYPE_PREFIX === $typePrefix && self::isAutomatic( $job ) && $mightNeedReview( $job )
-				&& Option::HOLD_FOR_REVIEW === Option::getReviewMode()
-			) {
-				return false;
-			}
-
-			return $shouldSave;
-		};
-
-		Hooks::onFilter( 'wpml_should_save_external', 10, 3 )
-			->then( spreadArgs( $shouldSaveStringPackageTranslation ) );
 	}
 
 	/**

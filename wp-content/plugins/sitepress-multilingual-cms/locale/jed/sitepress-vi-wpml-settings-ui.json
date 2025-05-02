@@ -1,47 +1,61 @@
 {
-   "domain": "messages",
-   "locale_data": {
-      "messages": {
-         "": {
-            "domain": "messages",
-            "lang": "en"
-         },
-         "You can choose which posts to translate from the <strong>Translation Management Dashboard</strong>.": [
-            "Bạn có thể chọn bài đăng nào cần dịch <strong>Bảng điều khiển Quản lý Dịch thuật</strong>."
-         ],
-         "Yes, translate all of these posts automatically": [
-            "Có, tự động dịch tất cả các bài đăng này"
-         ],
-         "No, I want to translate some of these posts, but not all": [
-            "Không, tôi muốn dịch một vài bài đăng trong số này, nhưng không phải tất cả"
-         ],
-         "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
-            "Bạn phải sử dụng Trình biên tập Dịch thuật Nâng cao nếu bạn muốn dịch tự động nội dung của mình."
-         ],
-         "Synchronize translators and translation managers with ATE": [
-            "Đồng bộ những người dịch và quản lý dịch thuật bằng ATE"
-         ],
-         "Please try again in a few minutes. If the problem persists, please contact %sWPML support%s.": [
-            "Vui lòng thử lại sau vài phút. Nếu sự cố vẫn còn tiếp diễn, vui lòng liên hệ %sbộ phận hỗ trợ của WPML%s."
-         ],
-         "Save": [
-            "Lưu"
-         ],
-         "Please confirm this translation setting": [
-            "Vui lòng xác nhận cài đặt bản dịch này"
-         ],
-         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the <NumberOfItems /> existing items.": [
-            "Trang web của bạn được thiết lập để dịch tự động tất cả nội dung. Khi bạn cho phép <PostTypesNames /> có thể dịch được, WPML sẽ tự động dịch  <NumberOfItems /> hạng mục có sẵn."
-         ],
-         "Are you OK with paying for this?": [
-            "Bạn cảm thấy ổn khi thanh toán cho việc này?"
-         ],
-         "Cancel": [
-            "Hủy"
-         ],
-         "Make translatable": [
-            "Cho phép có thể dịch"
-         ]
-      }
-   }
+  "translation-revision-date": "2024-08-20T09:38:28+00:00",
+  "generator": "WP-CLI/2.9.0",
+  "source": "src/js/components/translate-everything/ConfirmNewTranslatablePostTypeDialog.js",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "en",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "Are you OK with paying for this?": [
+        "Bạn cảm thấy ổn khi thanh toán cho việc này?"
+      ],
+      "Cancel": [
+        "Hủy"
+      ],
+      "Make translatable": [
+        "Cho phép có thể dịch"
+      ],
+      "Save": [
+        "Lưu"
+      ],
+      "Please confirm this translation setting": [
+        "Vui lòng xác nhận cài đặt bản dịch này"
+      ],
+      "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item.": [
+        "Trang web của bạn được thiết lập để tự động dịch tất cả nội dung. Khi bạn thực hiện<PostTypesNames /> có thể dịch được, WPML sẽ tự động dịch%1$d mục hiện có.",
+        "Trang web của bạn được thiết lập để tự động dịch tất cả nội dung. Khi bạn thực hiện<PostTypesNames /> có thể dịch được, WPML sẽ tự động dịch%1$d các mục hiện có."
+      ],
+      "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate all future content.": [
+        "Trang web của bạn được thiết lập để tự động dịch tất cả nội dung. Khi bạn thực hiện<PostTypesNames /> có thể dịch được, WPML sẽ tự động dịch toàn bộ nội dung trong tương lai."
+      ],
+      "Synchronize translators and translation managers with ATE": [
+        "Đồng bộ những người dịch và quản lý dịch thuật bằng ATE"
+      ],
+      "Please try again in a few minutes. If the problem persists, please contact %sWPML support%s.": [
+        "Vui lòng thử lại sau vài phút. Nếu sự cố vẫn còn tiếp diễn, vui lòng liên hệ %sbộ phận hỗ trợ của WPML%s."
+      ],
+      "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
+        "Bạn phải sử dụng Trình biên tập Dịch thuật Nâng cao nếu bạn muốn dịch tự động nội dung của mình."
+      ],
+      "You can choose which posts to translate from the <strong>Translation Management Dashboard</strong>.": [
+        "Bạn có thể chọn bài đăng nào cần dịch <strong>Bảng điều khiển Quản lý Dịch thuật</strong>."
+      ],
+      "Yes, translate <b>existing</b> and <b>future</b> content automatically": [
+        "Vâng, dịch<b> hiện có</b> Và<b> tương lai</b> nội dung tự động"
+      ],
+      "Yes, but only translate <b>future</b> content automatically": [
+        "Có, nhưng chỉ dịch thôi<b> tương lai</b> nội dung tự động"
+      ],
+      "Yes, translate <b>future</b> content automatically": [
+        "Vâng, dịch<b> tương lai</b> nội dung tự động"
+      ],
+      "No, I want to translate some of these posts, but not all": [
+        "Không, tôi muốn dịch một vài bài đăng trong số này, nhưng không phải tất cả"
+      ]
+    }
+  }
 }

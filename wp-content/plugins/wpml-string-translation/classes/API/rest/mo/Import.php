@@ -49,13 +49,20 @@ class Import extends \WPML\ST\Rest\Base {
 	public function import( \WP_REST_Request $request ) {
 		/** @var WPML_ST_Translations_File_Queue $queue */
 
-		$queue = \WPML\Container\make( \WPML_ST_Translations_File_Scan_Factory::class )->create_queue();
-		$queue->import( new QueueFilter(
+		$queue       = \WPML\Container\make( \WPML_ST_Translations_File_Scan_Factory::class )->create_queue();
+		$queueFilter = new QueueFilter(
 			$request->get_param( 'plugins' ),
 			$request->get_param( 'themes' ),
 			$request->get_param( 'other' )
-		) );
+		);
 
-		return [ 'remaining' => $queue->get_pending() ];
+		$totalPending = $queue->getPendingByFilter( $queueFilter );
+		$queue->import( $queueFilter );
+
+		return [
+			'total'        => $totalPending,
+			'remaining'    => $queue->get_pending(),
+			'scan_message' => __( 'WPML found %s new or updated .mo files. Their texts were added to the translations table.', 'wpml-string-translation' ),
+		];
 	}
 }

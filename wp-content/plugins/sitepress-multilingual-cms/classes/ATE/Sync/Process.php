@@ -95,7 +95,7 @@ class Process {
 	 * @return Result
 	 */
 	private function runSyncInit( Result $result, $includeManualAndLongstandingJobs = true ) {
-		$ateJobIds = $this->getAteJobIdsToSync( $includeManualAndLongstandingJobs );
+		$ateJobIds = $this->ateRepository->get_jobs_to_sync( $includeManualAndLongstandingJobs, true );
 
 
 		if ( $ateJobIds ) {

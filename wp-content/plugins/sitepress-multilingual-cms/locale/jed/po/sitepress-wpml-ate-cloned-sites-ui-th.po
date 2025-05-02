@@ -1,0 +1,292 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/ate-cloned-sites/components/CloseButton.js:15
+msgid "Close"
+msgstr "ปิด"
+
+#: src/js/ate-cloned-sites/components/ContactSupport.js:9
+msgid ""
+"Please take a screenshot of this message and report this issue to <a>WPML "
+"support</a>."
+msgstr "กรุณาถ่ายภาพหน้าจอข้อความนี้และรายงานปัญหานี้ไปยัง <a>ฝ่ายสนับสนุนของ WPML</a>."
+
+#: src/js/ate-cloned-sites/steps/CopyCompleted.js:22
+msgid ""
+"This copy of the site has the same content as the original site on %s, but "
+"it doesn’t have credits for automatic translation."
+msgstr "สำเนาของเว็บไซต์นี้มีเนื้อหาเดียวกันกับเว็บไซต์ต้นฉบับบน %s แต่ไม่มีเครดิตสำหรับการแปลอัตโนมัติ."
+
+#: src/js/ate-cloned-sites/steps/CopyCompleted.js:32
+msgid ""
+"If you want to use automatic translation for this site in the future, you "
+"can either <a1>add credits to this site</a1> or <a2>share the credits from "
+"the original site</a2>."
+msgstr "หากคุณต้องการใช้การแปลอัตโนมัติสำหรับเว็บไซต์นี้ในอนาคต คุณสามารถ <a1>เพิ่มเครดิตให้กับเว็บไซต์นี้</a1> หรือ <a2>แบ่งปันเครดิตจากเว็บไซต์ต้นฉบับ</a2>."
+
+#: src/js/ate-cloned-sites/steps/CopyCompleted.js:48
+msgid ""
+"There was an error checking for credits to share. Please take a screenshot "
+"of this message and report it in <a>WPML support</a>."
+msgstr "เกิดข้อผิดพลาดในการตรวจสอบเครดิตที่จะแบ่งปัน กรุณาถ่ายภาพหน้าจอข้อความนี้และรายงานไปยัง <a>ฝ่ายสนับสนุนของ WPML</a>."
+
+#: src/js/ate-cloned-sites/steps/CopyCompleted.js:9
+#: src/js/ate-cloned-sites/steps/CopyWithCreditsCompleted.js:8
+#: src/js/ate-cloned-sites/steps/MoveCompleted.js:9
+msgid "You’re all set"
+msgstr "คุณพร้อมแล้ว"
+
+#: src/js/ate-cloned-sites/steps/CopyCredits.js:36
+msgid ""
+"To allow the sites running on %s and %s to use the same credits for "
+"automatic translation, you need to:"
+msgstr "เพื่ออนุญาตให้เว็บไซต์ที่ทำงานบน %s และ %s ใช้เครดิตเดียวกันสำหรับการแปลอัตโนมัติ คุณจำเป็นต้อง:"
+
+#: src/js/ate-cloned-sites/steps/CopyCredits.js:47
+msgid ""
+"Follow <a>this link</a> to access the migration code (you can't get it by "
+"visiting %s manually)"
+msgstr "ทำตาม <a>ลิงก์นี้</a> เพื่อเข้าถึงรหัสการย้าย (คุณไม่สามารถรับได้โดยการเข้าชม %s ด้วยตนเอง)"
+
+#: src/js/ate-cloned-sites/steps/CopyCredits.js:59
+msgid "Click on <b>Copy migration code</b>"
+msgstr "คลิกที่ <b>คัดลอกรหัสการย้าย</b>"
+
+#: src/js/ate-cloned-sites/steps/CopyCredits.js:68
+msgid "Paste the migration code into the field below."
+msgstr "วางรหัสการย้ายลงในช่องด้านล่าง."
+
+#: src/js/ate-cloned-sites/steps/CopyCredits.js:77
+msgid "Migration code"
+msgstr "รหัสการย้าย"
+
+#: src/js/ate-cloned-sites/steps/CopyCredits.js:79
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:84
+#: src/js/ate-cloned-sites/steps/MoveConfirmation.js:57
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:76
+msgid "Continue"
+msgstr "ดำเนินการต่อ"
+
+#: src/js/ate-cloned-sites/steps/CopyCredits.js:82
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:93
+msgid "Go back"
+msgstr "ย้อนกลับ"
+
+#: src/js/ate-cloned-sites/steps/CopyCredits.js:9
+msgid ""
+"Let’s connect the automatic translation credits between the two copies of "
+"this site"
+msgstr "มาเชื่อมต่อเครดิตการแปลอัตโนมัติระหว่างสำเนาทั้งสองของเว็บไซต์นี้กัน"
+
+#: src/js/ate-cloned-sites/steps/CopyError.js:15
+msgid ""
+"WPML was unable to copy your site's translations, translation memory, and "
+"glossary to this new URL."
+msgstr "WPML ไม่สามารถคัดลอกการแปล หน่วยความจำการแปล และอภิธานศัพท์ของเว็บไซต์คุณไปยัง URL ใหม่นี้ได้."
+
+#: src/js/ate-cloned-sites/steps/CopyError.js:7
+msgid "Error with copying translation information to new URL"
+msgstr "เกิดข้อผิดพลาดในการคัดลอกข้อมูลการแปลไปยัง URL ใหม่"
+
+#: src/js/ate-cloned-sites/steps/CopyWithCreditsCompleted.js:11
+msgid ""
+"Great. Now this site and its copy on %s are sharing the credits for "
+"automatic translation."
+msgstr "ยอดเยี่ยม ตอนนี้เว็บไซต์นี้และสำเนาของมันบน %s กำลังแบ่งปันเครดิตสำหรับการแปลอัตโนมัติ."
+
+#: src/js/ate-cloned-sites/steps/CopyWithCreditsCompleted.js:29
+msgid ""
+"Credits that you add on either site will be available on both sites. If you "
+"stop using this site, you don’t need to worry about losing credits."
+msgstr "เครดิตที่คุณเพิ่มในเว็บไซต์ใดก็ตามจะสามารถใช้ได้ในทั้งสองเว็บไซต์ หากคุณหยุดใช้เว็บไซต์นี้ คุณไม่ต้องกังวลเกี่ยวกับการสูญเสียเครดิต."
+
+#: src/js/ate-cloned-sites/steps/CopyWithCreditsError.js:15
+msgid ""
+"WPML was unable to connect your old and new URLs to share automatic "
+"translation credits."
+msgstr "WPML ไม่สามารถเชื่อมต่อ URL เก่าและใหม่ของคุณเพื่อแบ่งปันเครดิตการแปลอัตโนมัติได้."
+
+#: src/js/ate-cloned-sites/steps/CopyWithCreditsError.js:7
+msgid "Error with sharing automatic translation credits"
+msgstr "เกิดข้อผิดพลาดในการแบ่งปันเครดิตการแปลอัตโนมัติ"
+
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:12
+msgid ""
+"The site on %s has %d credits for automatic translation. Do you want to "
+"share these credits between %s and this new location (%s)?"
+msgstr "เว็บไซต์บน %s มีเครดิต %d สำหรับการแปลอัตโนมัติ คุณต้องการแบ่งปันเครดิตเหล่านี้ระหว่าง %s และตำแหน่งใหม่นี้ (%s) หรือไม่?"
+
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:20
+msgid ""
+"The site on %s has a pay-as-you-go subscription for automatic translation. "
+"Do you want to share these credits between %s and this new location (%s)?"
+msgstr "เว็บไซต์บน %s มีการสมัครสมาชิกแบบจ่ายตามการใช้งานสำหรับการแปลอัตโนมัติ คุณต้องการแบ่งปันเครดิตเหล่านี้ระหว่าง %s และตำแหน่งใหม่นี้ (%s) หรือไม่?"
+
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:66
+msgid "Yes (recommended)"
+msgstr "ใช่ (แนะนำ)"
+
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:68
+msgid ""
+"In the next step, you will receive instructions for how to approve the "
+"credits sharing"
+msgstr "ในขั้นตอนถัดไป คุณจะได้รับคำแนะนำวิธีอนุมัติการแบ่งปันเครดิต"
+
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:71
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:61
+msgid "No"
+msgstr "ไม่"
+
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:73
+msgid ""
+"You will need to assign credits or set up a pay-as-you-go plan for this "
+"site to use automatic translation"
+msgstr "คุณจะต้องกำหนดเครดิตหรือตั้งค่าแผนจ่ายตามการใช้งานสำหรับเว็บไซต์นี้เพื่อใช้การแปลอัตโนมัติ"
+
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:87
+msgid "What happens when you share credits for automatic translation between sites?"
+msgstr "เกิดอะไรขึ้นเมื่อคุณแบ่งปันเครดิตสำหรับการแปลอัตโนมัติระหว่างเว็บไซต์?"
+
+#: src/js/ate-cloned-sites/steps/CreditDecision.js:9
+msgid "Translation credits for this site"
+msgstr "เครดิตการแปลสำหรับเว็บไซต์นี้"
+
+#: src/js/ate-cloned-sites/steps/MoveCompleted.js:20
+msgid "You can continue translating content normally on this site."
+msgstr "คุณสามารถดำเนินการแปลเนื้อหาได้ตามปกติบนเว็บไซต์นี้."
+
+#: src/js/ate-cloned-sites/steps/MoveCompleted.js:31
+msgid ""
+"Please keep in mind that there shouldn’t be a copy of this site at %s. If "
+"there still is a copy of it there, you will not be able to translate "
+"content on that site."
+msgstr "โปรดทราบว่าไม่ควรมีสำเนาของเว็บไซต์นี้ที่ %s หากยังคงมีสำเนาอยู่ที่นั่น คุณจะไม่สามารถแปลเนื้อหาบนเว็บไซต์นั้นได้."
+
+#: src/js/ate-cloned-sites/steps/MoveConfirmation.js:32
+msgid ""
+"You indicated that you’re no longer running a copy of this site at %s. This "
+"means that:"
+msgstr "คุณระบุว่าคุณไม่ได้ใช้งานสำเนาของเว็บไซต์นี้ที่ %s อีกต่อไป นั่นหมายความว่า:"
+
+#: src/js/ate-cloned-sites/steps/MoveConfirmation.js:36
+msgid "You will not be able to use automatic translation on the old site"
+msgstr "คุณจะไม่สามารถใช้การแปลอัตโนมัติบนเว็บไซต์เก่าได้"
+
+#: src/js/ate-cloned-sites/steps/MoveConfirmation.js:39
+msgid "If you access the old site, it will trigger warnings on this site"
+msgstr "หากคุณเข้าถึงเว็บไซต์เก่า มันจะทำให้เกิดคำเตือนบนเว็บไซต์นี้"
+
+#: src/js/ate-cloned-sites/steps/MoveConfirmation.js:48
+msgid "I understand and am no longer running this site at %s"
+msgstr "ฉันเข้าใจและไม่ได้ใช้งานเว็บไซต์นี้ที่ %s อีกต่อไป"
+
+#: src/js/ate-cloned-sites/steps/MoveConfirmation.js:60
+msgid "Back"
+msgstr "กลับ"
+
+#: src/js/ate-cloned-sites/steps/MoveConfirmation.js:8
+msgid "Please check and confirm"
+msgstr "กรุณาตรวจสอบและยืนยัน"
+
+#: src/js/ate-cloned-sites/steps/MoveError.js:16
+msgid "WPML was unable to update our records with your new URL."
+msgstr "WPML ไม่สามารถอัปเดตบันทึกของเราด้วย URL ใหม่ของคุณได้."
+
+#: src/js/ate-cloned-sites/steps/MoveError.js:7
+msgid "Error with moving translation information to new URL"
+msgstr "เกิดข้อผิดพลาดในการย้ายข้อมูลการแปลไปยัง URL ใหม่"
+
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:34
+msgid "Looks like this site was previously at %s and now it’s at %s."
+msgstr "ดูเหมือนว่าเว็บไซต์นี้เคยอยู่ที่ %s และตอนนี้อยู่ที่ %s."
+
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:42
+msgid "Do you still have the same site running at %s?"
+msgstr "คุณยังคงมีเว็บไซต์เดียวกันที่ทำงานอยู่ที่ %s หรือไม่?"
+
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:54
+msgid "Yes"
+msgstr "ใช่"
+
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:57
+msgid "This is only a copy - original site is still running"
+msgstr "นี่เป็นเพียงสำเนา - เว็บไซต์ต้นฉบับยังคงทำงานอยู่"
+
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:64
+msgid "I changed the address of the site to this new one"
+msgstr "ฉันได้เปลี่ยนที่อยู่ของเว็บไซต์เป็นที่อยู่ใหม่นี้"
+
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:8
+msgid "WPML detected a new address for this site"
+msgstr "WPML ตรวจพบที่อยู่ใหม่สำหรับเว็บไซต์นี้"
+
+#: src/js/ate-cloned-sites/steps/MoveOrCopy.js:80
+msgid ""
+"How to manage translations when migrating from development to production "
+"and more..."
+msgstr "วิธีจัดการการแปลเมื่อย้ายจากการพัฒนาไปสู่การผลิตและอื่นๆ..."
+
+#: src/js/ate-cloned-sites/steps/NoAdmin.js:11
+msgid ""
+"Looks like this site is a copy of a different site, or moved to a different "
+"URL. Please contact your translation manager to update Translation "
+"Management plugin configuration."
+msgstr "ดูเหมือนว่าเว็บไซต์นี้เป็นสำเนาของเว็บไซต์อื่น หรือย้ายไปยัง URL อื่น กรุณาติดต่อผู้จัดการการแปลของคุณเพื่ออัปเดตการกำหนดค่าปลั๊กอิน Translation Management."
+
+#: src/js/ate-cloned-sites/steps/NoAdmin.js:5
+msgid "Site Moved or Copied - Action Required"
+msgstr "เว็บไซต์ถูกย้ายหรือคัดลอก - จำเป็นต้องดำเนินการ"
+
+#: src/js/ate-cloned-sites/steps/RevertMove.js:35
+msgid "You or someone else moved this site to %s. Please keep in mind that:"
+msgstr "คุณหรือบางคนได้ย้ายเว็บไซต์นี้ไปที่ %s โปรดทราบว่า:"
+
+#: src/js/ate-cloned-sites/steps/RevertMove.js:49
+msgid "Translations that you do at %s will not appear on this site."
+msgstr "การแปลที่คุณทำที่ %s จะไม่ปรากฏบนเว็บไซต์นี้."
+
+#: src/js/ate-cloned-sites/steps/RevertMove.js:55
+msgid "You cannot edit translations on this site."
+msgstr "คุณไม่สามารถแก้ไขการแปลบนเว็บไซต์นี้ได้."
+
+#: src/js/ate-cloned-sites/steps/RevertMove.js:66
+msgid ""
+"The site at %s is using the same credits for automatic translation as this "
+"site."
+msgstr "เว็บไซต์ที่ %s กำลังใช้เครดิตเดียวกันสำหรับการแปลอัตโนมัติกับเว็บไซต์นี้."
+
+#: src/js/ate-cloned-sites/steps/RevertMove.js:75
+msgid ""
+"If you didn't intend to move this site to %s, you can <a>indicate that this "
+"site should be at %s</a>."
+msgstr "หากคุณไม่ได้ตั้งใจย้ายเว็บไซต์นี้ไปที่ %s คุณสามารถ <a>ระบุว่าเว็บไซต์นี้ควรอยู่ที่ %s</a>."
+
+#: src/js/ate-cloned-sites/steps/RevertMove.js:8
+msgid "This site has moved to a new location"
+msgstr "เว็บไซต์นี้ได้ย้ายไปยังตำแหน่งใหม่"
+
+#: src/js/ate-cloned-sites/steps/RevertMove.js:95
+msgid ""
+"If you prefer not to move this site, you can <a>mark it as a copy</a> and "
+"enable automatic translation for it."
+msgstr "หากคุณไม่ต้องการย้ายเว็บไซต์นี้ คุณสามารถ <a>ทำเครื่องหมายว่าเป็นสำเนา</a> และเปิดใช้งานการแปลอัตโนมัติสำหรับมัน."
+
+#: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:38
+msgid ""
+"Moving the site back here will mean that you will be able to translate on "
+"this domain again, but you will not be able to update translations at %s."
+msgstr "การย้ายเว็บไซต์กลับมาที่นี่จะทำให้คุณสามารถแปลบนโดเมนนี้ได้อีกครั้ง แต่คุณจะไม่สามารถอัปเดตการแปลที่ %s ได้."
+
+#: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:50
+msgid "Yes - move back here"
+msgstr "ใช่ - ย้ายกลับมาที่นี่"
+
+#: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:56
+msgid "No - keep the site on %s"
+msgstr "ไม่ - ให้เว็บไซต์อยู่ที่ %s ต่อไป"
+
+#: src/js/ate-cloned-sites/steps/RevertMoveConfirm.js:9
+msgid "Are you sure that this site should run on %s and not %s?"
+msgstr "คุณแน่ใจหรือไม่ว่าเว็บไซต์นี้ควรทำงานบน %s และไม่ใช่ %s?"

@@ -14,14 +14,14 @@ class WPML_Theme_String_Scanner extends WPML_String_Scanner implements IWPML_ST_
 		$this->text_domain  = $current_theme->get( 'TextDomain' );
 		$this->init_text_domain( $text_domain );
 		$this->scan_theme_files();
-		$this->set_stats( 'theme_localization_domains', $current_theme_name );
+		$stats = $this->set_stats( 'theme_localization_domains', $current_theme_name );
 
 		//@todo test this properly
 		if ( $theme_info && $theme_info->exists() ) {
 			$this->remove_notice( $theme_info->get( 'Name' ) );
 		}
 
-		$this->scan_response();
+		$this->scan_response( $stats );
 	}
 
 	private function scan_theme_files() {
@@ -30,7 +30,7 @@ class WPML_Theme_String_Scanner extends WPML_String_Scanner implements IWPML_ST_
 		if ( array_key_exists( 'files', $_POST ) ) {
 
 			foreach ( $_POST['files'] as $file ) {
-				$file = (string) filter_var( $file, FILTER_SANITIZE_STRING );
+				$file = (string) \WPML\API\Sanitize::string( $file );
 				if ( $this->file_hashing->hash_changed( $file ) ) {
 
 					$this->add_stat( sprintf( __( 'Scanning file: %s', 'wpml-string-translation' ), $file ) );

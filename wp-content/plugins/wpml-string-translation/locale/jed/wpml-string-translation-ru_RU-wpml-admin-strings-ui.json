@@ -1,0 +1,82 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Not included in String Translation": [
+            "Не включено в Перевод строки"
+         ],
+         "Registered and locked": [
+            "Зарегистрировано и заблокировано"
+         ],
+         "Text": [
+            "Текст"
+         ],
+         "Numeric": [
+            "Числовой"
+         ],
+         "All Types": [
+            "Все типы"
+         ],
+         "Search": [
+            "Поиск"
+         ],
+         "Communication error": [
+            "Ошибка связи"
+         ],
+         "The action failed.": [
+            "Действие не удалось."
+         ],
+         "All (%d)": [
+            "Все (%d)"
+         ],
+         "Included in String Translation (%d)": [
+            "Включено в перевод строк (%d)"
+         ],
+         "Not included in String Translation (%d)": [
+            "Не включено в Перевод строк (%d)"
+         ],
+         "This setting is locked by a WPML configuration file.": [
+            "Эта настройка блокируется файлом конфигурации WPML."
+         ],
+         "Option": [
+            "Вариант"
+         ],
+         "Value": [
+            "Значение"
+         ],
+         "Type": [
+            "Тип"
+         ],
+         "State": [
+            "Государство"
+         ],
+         "Export as a WPML configuration file": [
+            "Экспорт в файл конфигурации WPML"
+         ],
+         "Cancel": [
+            "Отмена"
+         ],
+         "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
+            "Сохраните следующее в файле wpml-config.xml в корне Вашей темы или плагина."
+         ],
+         "No options found.": [
+            "Никаких вариантов не найдено."
+         ],
+         "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
+            "Убедитесь, что Вы сохранили параметры темы хотя бы один раз. Некоторые темы добавляют их в таблицу wp_options только после того, как пользователь явно сохранит изменения в настройках темы по умолчанию."
+         ],
+         "Add to String Translation": [
+            "Добавьте к переводу строки"
+         ],
+         "Remove from String Translation": [
+            "Удалите из перевода строки"
+         ],
+         "Included in String Translation": [
+            "Включено в перевод строки"
+         ]
+      }
+   }
+}

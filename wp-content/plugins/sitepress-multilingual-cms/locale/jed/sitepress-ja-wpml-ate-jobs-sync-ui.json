@@ -8,6 +8,9 @@
          "Sending for translation": [
             "翻訳に送る"
          ],
+         "This content is being automatically translated. If you want to do something different with it cancel translation jobs first.": [
+            "このコンテンツは自動的に翻訳されています。別の操作を行いたい場合は、まず翻訳ジョブをキャンセルしてください。"
+         ],
          "Connecting to WPML’s Advanced Translation Editor": [
             "WPMLのアドバンス翻訳エディターに接続中"
          ],
@@ -50,8 +53,15 @@
          "Translate Everything Automatically is paused": [
             "「すべてを自動的に翻訳する」が一時停止されています"
          ],
-         "Translate Everything Automatically stopped": [
-            "「すべてを自動で翻訳する」が停止されました"
+         "Translate Everything Automatically is stopped": [
+            "自動翻訳がすべて停止しました"
+         ],
+         "Out of Credits for Automatic Translation": [
+            "自動翻訳のクレジットが不足しています"
+         ],
+         "You have <b>1</b> prepaid translation credit in your wpml.org account. Assign these credits to your site to start using automatic translation": [
+            "Wpml.orgアカウントに<b>1</b>の前払い翻訳クレジットがあります。自動翻訳を開始するには、このクレジットをサイトに割り当ててください",
+            "Wpml.orgアカウントに<b>%s</b>の前払い翻訳クレジットがあります。自動翻訳を開始するには、これらのクレジットをサイトに割り当ててください"
          ],
          "Preparing content for translation": [
             "翻訳用のコンテンツを準備中"
@@ -69,15 +79,15 @@
             "自動翻訳を使用するには、あなたのデフォルト言語、%sを対応言語のマップで示す必要があります。"
          ],
          "Your language, %s, must be mapped to a supported language in order to use automatic translation.": [
-            "自動翻訳を使用するには、ご使用の 言語 %s がサポート済み言語にマップされている必要があります。",
-            "自動翻訳を使用するには、サイト上で、サポート済み言語に次の言語がマップされている必要があります: %s"
+            "自動翻訳を使用するには、あなたの言語、%s、をサポートされている言語にマッピングする必要があります。",
+            "自動翻訳を使用するには、あなたのサイトの以下の言語をサポートされている言語にマッピングする必要があります：%s"
          ],
          "Content in those languages: %s, cannot be automatically translated unless you map them to a language that's different from the default.": [
             "これらの言語のコンテンツ: %s、はこれらをデフォルトと異なる言語に地図を付けなければ、自動翻訳できません。"
          ],
          "%d translation waiting for review": [
-            "%d 翻訳がレビュー待機中です",
-            "%d翻訳がレビュー待ちです"
+            "%d 件の翻訳がレビュー待ちです",
+            "%d 件の翻訳がレビュー待ちです"
          ],
          "Account credits used": [
             "アカウントクレジットを使用しました"
@@ -112,132 +122,47 @@
          "Pay-as-you-go credits used": [
             "使用済みの従量課金型のクレジット"
          ],
-         "Resume": [
-            "再開する"
-         ],
          "Stop": [
             "ストップします"
          ],
          "Fix it": [
             "修正する"
          ],
-         "Pause": [
-            "一時停止します"
+         "Assign credits now": [
+            "今すぐクレジットを割り当てる"
          ],
-         "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
-            "自動翻訳を一時停止しようとしたときにエラーが発生しました。少したってからもう一度お試しいただくか、当社サポートまでお問い合わせください。"
+         "Resume": [
+            "再開する"
          ],
-         "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
-            "自動翻訳を再開しようとしたときにエラーが発生しました。少したってからもう一度お試しいただくか、当社サポートまでお問い合わせください。"
-         ],
-         "Error": [
-            "エラー"
-         ],
-         "Draft — Pending review": [
-            "草稿 — レビュー待ち"
-         ],
-         "Complete": [
-            "完了"
-         ],
-         "Insufficient funds": [
-            "資金不足"
+         "Refreshing translation status": [
+            "翻訳ステータスを更新中"
          ],
          "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
-            "<a>スタートガイド</a>でコンテンツ翻訳方法の詳細をお読みください"
+            "コンテンツの翻訳方法については、<a>はじめてのガイド</a>をご覧ください"
          ],
          "Let's Start Translating!": [
             "翻訳を始めましょう！"
          ],
          "Choose your content from the Translation Dashboard below and create your first translation job!": [
-            "下の翻訳ダッシュボードでコンテンツを選択し、最初の翻訳ジョブを作成しましょう！"
+            "以下の翻訳ダッシュボードからコンテンツを選択し、最初の翻訳ジョブを作成してください！"
          ],
          "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
-            "<a>自動翻訳設定</a> (進行中の翻訳ジョブは、現在の設定で完了します)を変更してください。"
+            "<a>自動翻訳設定</a>を変更してください（進行中の翻訳ジョブは現在の設定で完了します）。"
          ],
          "Read more about translating your site automatically.": [
-            "サイトの自動翻訳について、詳しくお読みください。"
+            "サイトの自動翻訳についての詳細を読む。"
          ],
          "Your site is being automatically translated!": [
-            "サイトは自動翻訳されました！"
+            "あなたのサイトは自動翻訳中です！"
          ],
          "Calculating...": [
             "計算中..."
          ],
          "Do not close WP admin!": [
-            "WP管理を閉じないでください！"
+            "WP管理画面を閉じないでください！"
          ],
          "The number of translations": [
-            "翻訳数"
-         ],
-         "Translate Everything Automatically - running": [
-            "すべてを自動的に翻訳する - 実行中"
-         ],
-         "Translate Everything Automatically - active": [
-            "すべてを自動的に翻訳する - アクティブ"
-         ],
-         "Pause automatic translation": [
-            "自動翻訳を一時停止する"
-         ],
-         "WPML will finish in-progress translations but won't translate anything new.": [
-            "WPML では、進行中の翻訳については完了させますが、新しいものは翻訳しません。"
-         ],
-         "Translate Everything Automatically - paused": [
-            "すべてを自動的に翻訳する - 一時停止済み"
-         ],
-         "Start automatic translation": [
-            "自動翻訳を開始する"
-         ],
-         "This uses %scredits%s to translate your existing content and anything you add or change later.": [
-            "これは、%sクレジット%sを使用して、既存のコンテンツや、あとから追加または変更した内容を翻訳します。"
-         ],
-         "Start translating everything automatically": [
-            "すべての翻訳を自動で開始する"
-         ],
-         "WPML will translate any new content you create into %1$s.": [
-            "WPML では、作成した新しいコンテンツを%1$sに翻訳します。"
-         ],
-         "WPML will translate all new future content to %1$s and keep translations up to date when you make changes.": [
-            "WPML では、今後の新しいコンテンツをすべて%1$sに翻訳し、変更があった場合は翻訳を最新の状態に保ちます。"
-         ],
-         "Do you want to translate existing content, too?": [
-            "既存のコンテンツも翻訳しますか？"
-         ],
-         "Yes, translate all new and existing content": [
-            "はい、新規および既存のコンテンツをすべて翻訳します"
-         ],
-         "No, only translate new content": [
-            "いいえ、新しいコンテンツのみを翻訳します"
-         ],
-         "You can translate existing content from the Translation Management Dashboard": [
-            "翻訳管理ダッシュボードから、既存のコンテンツを翻訳することができます。"
-         ],
-         "Connection Error. Please wait a minute and reload this page. If the problem continues, please contact WPML support.": [
-            "接続エラーです。しばらくお待ちいただき、このページを再読み込みしてください。問題が解決しない場合は、WPML サポートにお問い合わせください。"
-         ],
-         "Automatic translation uses credits. %1$sRead more about automatic translation credits%2$s": [
-            "自動翻訳ではクレジットを使用します。%1$s自動翻訳クレジットについて詳しく読む%2$s"
-         ],
-         "You need credits to start translating everything.": [
-            "すべての翻訳を開始するにはクレジットが必要です。"
-         ],
-         "Cancel": [
-            "キャンセル"
-         ],
-         "Start translating everything": [
-            "すべての翻訳を開始する"
-         ],
-         "%1$d language": [
-            "%1$d 言語",
-            "%1$d 言語"
-         ],
-         "Please wait...": [
-            "お待ちください..."
-         ],
-         "All new future content": [
-            "今後のすべての新規コンテンツ"
-         ],
-         "Translate Everything Automatically - stopped": [
-            "すべてを自動的に翻訳する - 停止済み"
+            "翻訳の数"
          ]
       }
    }

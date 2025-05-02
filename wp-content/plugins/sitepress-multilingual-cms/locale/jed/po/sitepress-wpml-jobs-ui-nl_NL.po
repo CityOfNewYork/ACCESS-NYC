@@ -1,0 +1,556 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/jobs/components/Actions/BatchSync.js:39
+msgid "Start batch sync"
+msgstr "Start batchsynchronisatie"
+
+#: src/js/jobs/components/Actions/Cancel.js:35
+msgid "Cancel job"
+msgstr "Taak annuleren"
+
+#: src/js/jobs/components/Actions/ContinieReview.js:44
+msgid "Continue reviewing"
+msgstr "Doorgaan met beoordelen"
+
+#: src/js/jobs/components/Actions/DownloadXLIFF.js:33
+msgid "Start downloading XLIFF file"
+msgstr "Start downloaden XLIFF-bestand"
+
+#: src/js/jobs/components/Actions/Edit.js:38
+msgid "Edit"
+msgstr "Bewerken"
+
+#: src/js/jobs/components/Actions/GetTranslation.js:31
+msgid "Get translation"
+msgstr "Vertaling ophalen"
+
+#: src/js/jobs/components/Actions/Resign.js:35
+msgid "Resign"
+msgstr "Aftreden"
+
+#: src/js/jobs/components/Actions/Review.js:46
+#: src/js/jobs/components/Actions/ReviewInATE.js:35
+msgid "Review"
+msgstr "Beoordelen"
+
+#: src/js/jobs/components/Actions/TakeAndTranslate.js:33
+msgid "Translate"
+msgstr "Vertalen"
+
+#: src/js/jobs/components/Actions/TakeAndTranslate.js:33
+msgid "Take and Translate"
+msgstr "Nemen en vertalen"
+
+#: src/js/jobs/components/Actions/View.js:22
+msgid "View"
+msgstr "Bekijken"
+
+#: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:48
+msgid "Delete Translations"
+msgstr "Vertalingen verwijderen"
+
+#: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:56
+msgid "Keep Translations as Draft"
+msgstr "Vertalingen als concept bewaren"
+
+#: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:63
+msgid "Never mind. I want to review these translations."
+msgstr "Laat maar. Ik wil deze vertalingen beoordelen."
+
+#: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:74
+#: src/js/jobs/components/Filters/ActionFilters.js:60
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:80
+msgid ""
+"This will remove the selected jobs from the Translations Queue without "
+"publishing them. What would you like to do with the translations?"
+msgstr "Dit zal de geselecteerde taken uit de vertalingswachtrij verwijderen zonder ze te publiceren. Wat wilt u met de vertalingen doen?"
+
+#: src/js/jobs/components/BulkActions/Actions/AbortReviewsDialog.js:84
+msgid "Cancel Translation Review"
+msgstr "Vertaalbeoordeling annuleren"
+
+#: src/js/jobs/components/BulkActions/BulkActions.js:39
+msgid "Bulk actions"
+msgstr "Bulkacties"
+
+#: src/js/jobs/components/BulkActions/BulkActions.js:81
+#: src/js/jobs/components/Filters/ActionFilters.js:61
+msgid "Apply"
+msgstr "Toepassen"
+
+#: src/js/jobs/components/BulkActions/Info.js:10
+msgid ""
+"Actions applied to multiple translation jobs can take a few seconds. Please "
+"do not leave the page."
+msgstr "Acties die op meerdere vertaaltaken worden toegepast, kunnen enkele seconden duren. Verlaat de pagina niet."
+
+#: src/js/jobs/components/BulkActions/Info.js:9
+msgid ""
+"Actions applied to multiple translation jobs can take a few minutes. Please "
+"do not leave the page."
+msgstr "Acties die op meerdere vertaaltaken worden toegepast, kunnen enkele minuten duren. Verlaat de pagina niet."
+
+#: src/js/jobs/components/Cells/AssignTranslator.js:35
+msgid "Select translator"
+msgstr "Selecteer vertaler"
+
+#: src/js/jobs/components/Cells/AssignTranslator.js:41
+msgid "Assign"
+msgstr "Toewijzen"
+
+#: src/js/jobs/components/Cells/StatusCell.js:11
+msgid "Cancelled"
+msgstr "Geannuleerd"
+
+#: src/js/jobs/components/Cells/StatusCell.js:12
+#: src/js/jobs/model/store/columnsManagement.js:50
+msgid "Needs translation"
+msgstr "Moet worden vertaald"
+
+#: src/js/jobs/components/Cells/StatusCell.js:13
+#: src/js/jobs/model/store/columnsManagement.js:46
+msgid "In progress"
+msgstr "In uitvoering"
+
+#: src/js/jobs/components/Cells/StatusCell.js:14
+#: src/js/jobs/model/store/columnsManagement.js:23
+msgid "Translation ready to download"
+msgstr "Vertaling klaar om te downloaden"
+
+#: src/js/jobs/components/Cells/StatusCell.js:15
+#: src/js/jobs/model/store/columnsManagement.js:38
+msgid "Completed"
+msgstr "Voltooid"
+
+#: src/js/jobs/components/Cells/StatusCell.js:25
+#. placeholder is the string package type. Could be WP Forms, ACF Field Groups.
+msgid "%s are immediately published because they don't support draft mode."
+msgstr "%s worden onmiddellijk gepubliceerd omdat ze geen conceptmodus ondersteunen."
+
+#: src/js/jobs/components/Cells/StatusCell.js:37
+msgid "Published — Pending review"
+msgstr "Gepubliceerd — In afwachting van beoordeling"
+
+#: src/js/jobs/components/Cells/StatusCell.js:38
+msgid "Draft — Pending review"
+msgstr "Concept — In afwachting van beoordeling"
+
+#: src/js/jobs/components/Cells/StatusCell.js:43
+msgid "Review in progress"
+msgstr "Beoordeling in uitvoering"
+
+#: src/js/jobs/components/Cells/StatusCell.js:46
+msgid "Published — Review in progress"
+msgstr "Gepubliceerd — Beoordeling in uitvoering"
+
+#: src/js/jobs/components/Cells/StatusCell.js:47
+msgid "Draft — Review in progress"
+msgstr "Concept — Beoordeling in uitvoering"
+
+#: src/js/jobs/components/Cells/StatusCell.js:51
+msgid "Insufficient funds"
+msgstr "Onvoldoende saldo"
+
+#: src/js/jobs/components/Cells/StatusCell.js:57
+#: src/js/jobs/model/store/columnsManagement.js:42
+msgid "Needs update"
+msgstr "Moet worden bijgewerkt"
+
+#: src/js/jobs/components/Cells/TitleCell.js:14
+msgid "View original"
+msgstr "Origineel bekijken"
+
+#: src/js/jobs/components/Cells/TitleCell.js:9
+msgid "(no title)"
+msgstr "(geen titel)"
+
+#: src/js/jobs/components/Cells/TranslatorCell.js:21
+#: src/js/jobs/components/Filters/FiltersList.js:63
+#: src/js/jobs/components/Filters/TranslatedBy.js:32
+msgid "Automatic translation"
+msgstr "Automatische vertaling"
+
+#: src/js/jobs/components/Cells/TranslatorCell.js:42
+msgid "TP ID: %d"
+msgstr "TP ID: %d"
+
+#: src/js/jobs/components/Filters/Buttons.js:8
+msgid "Reset"
+msgstr "Resetten"
+
+#: src/js/jobs/components/Filters/Buttons.js:9
+msgid "Filter"
+msgstr "Filter"
+
+#: src/js/jobs/components/Filters/FiltersList.js:103
+msgid "ID (%s)"
+msgstr "ID (%s)"
+
+#: src/js/jobs/components/Filters/FiltersList.js:105
+msgid "Title (%s)"
+msgstr "Titel (%s)"
+
+#: src/js/jobs/components/Filters/FiltersList.js:107
+msgid "Type (%s)"
+msgstr "Type (%s)"
+
+#: src/js/jobs/components/Filters/FiltersList.js:109
+msgid "Language (%s)"
+msgstr "Taal (%s)"
+
+#: src/js/jobs/components/Filters/FiltersList.js:111
+msgid "Batch name (%s)"
+msgstr "Batchnaam (%s)"
+
+#: src/js/jobs/components/Filters/FiltersList.js:113
+msgid "Status (%s)"
+msgstr "Status (%s)"
+
+#: src/js/jobs/components/Filters/FiltersList.js:115
+msgid "Translated by (%s)"
+msgstr "Vertaald door (%s)"
+
+#: src/js/jobs/components/Filters/FiltersList.js:117
+msgid "Sent date (%s)"
+msgstr "Verzenddatum (%s)"
+
+#: src/js/jobs/components/Filters/FiltersList.js:119
+msgid "Deadline (%s)"
+msgstr "Deadline (%s)"
+
+#: src/js/jobs/components/Filters/FiltersList.js:159
+msgid "Clear all filters"
+msgstr "Alle filters wissen"
+
+#: src/js/jobs/components/Filters/FiltersList.js:55
+#: src/js/jobs/components/Filters/TranslatedBy.js:37
+msgid "Any Translation Service"
+msgstr "Elke vertaalservice"
+
+#: src/js/jobs/components/Filters/FiltersList.js:59
+#: src/js/jobs/components/Filters/TranslatedBy.js:42
+msgid "Any WordPress Translator"
+msgstr "Elke WordPress-vertaler"
+
+#: src/js/jobs/components/Filters/Languages.js:72
+msgid "From"
+msgstr "Van"
+
+#: src/js/jobs/components/Filters/Languages.js:84
+msgid "To"
+msgstr "Tot"
+
+#: src/js/jobs/components/Filters/TranslatedBy.js:28
+msgid "Anyone"
+msgstr "Iedereen"
+
+#: src/js/jobs/components/Filters/TranslationServiceJobsSwitcher.js:7
+msgid "Include jobs from translation services"
+msgstr "Taken van vertaaldiensten opnemen"
+
+#: src/js/jobs/components/Filters/TypeFilter.js:33
+msgid "All types"
+msgstr "Alle types"
+
+#: src/js/jobs/components/Filters/VisibleColumns.js:16
+msgid "Select visible columns"
+msgstr "Zichtbare kolommen selecteren"
+
+#: src/js/jobs/components/Table.js:128
+msgid "Sort descending"
+msgstr "Aflopend sorteren"
+
+#: src/js/jobs/components/Table.js:129
+msgid "Sort ascending"
+msgstr "Oplopend sorteren"
+
+#: src/js/jobs/components/Table.js:130
+msgid "Cancel sorting"
+msgstr "Sortering annuleren"
+
+#: src/js/jobs/components/Table.js:97
+msgid "The bulk action is running..."
+msgstr "De bulkactie wordt uitgevoerd..."
+
+#: src/js/jobs/components/XliffBox/Export.js:54
+msgid "Export all jobs to XLIFF 1.0"
+msgstr "Exporteer alle opdrachten naar XLIFF 1.0"
+
+#: src/js/jobs/components/XliffBox/Export.js:55
+msgid "Export all filtered jobs to XLIFF 1.0"
+msgstr "Exporteer alle gefilterde opdrachten naar XLIFF 1.0"
+
+#: src/js/jobs/components/XliffBox/Export.js:61
+msgid "Export all jobs to XLIFF 1.1"
+msgstr "Exporteer alle opdrachten naar XLIFF 1.1"
+
+#: src/js/jobs/components/XliffBox/Export.js:62
+msgid "Export all filtered jobs to XLIFF 1.1"
+msgstr "Exporteer alle gefilterde opdrachten naar XLIFF 1.1"
+
+#: src/js/jobs/components/XliffBox/Export.js:68
+msgid "Export all jobs to XLIFF 1.2"
+msgstr "Exporteer alle opdrachten naar XLIFF 1.2"
+
+#: src/js/jobs/components/XliffBox/Export.js:69
+msgid "Export all filtered jobs to XLIFF 1.2"
+msgstr "Exporteer alle gefilterde opdrachten naar XLIFF 1.2"
+
+#: src/js/jobs/components/XliffBox/Export.js:81
+msgid "Export"
+msgstr "Exporteren"
+
+#: src/js/jobs/components/XliffBox/Import.js:38
+msgid "Select File"
+msgstr "Selecteer bestand"
+
+#: src/js/jobs/components/XliffBox/Import.js:39
+msgid ".xliff .zip"
+msgstr ".xliff .zip"
+
+#: src/js/jobs/components/XliffBox/Import.js:52
+msgid "Importing"
+msgstr "Importeren"
+
+#: src/js/jobs/components/XliffBox/Import.js:53
+msgid "Import"
+msgstr "Importeren"
+
+#: src/js/jobs/components/XliffBox/XliffBox.js:19
+msgid "Import / Export XLIFF"
+msgstr "XLIFF importeren / exporteren"
+
+#: src/js/jobs/components/actionColumn.js:13
+msgid "Actions"
+msgstr "Acties"
+
+#: src/js/jobs/components/columns.js:113
+#: src/js/jobs/model/store/columnsManagement.js:90
+msgid "Batch name"
+msgstr "Batchnaam"
+
+#: src/js/jobs/components/columns.js:184
+msgid "Filter by %s"
+msgstr "Filteren op %s"
+
+#: src/js/jobs/components/columns.js:66
+#: src/js/jobs/model/store/columnsManagement.js:71
+msgid "Title"
+msgstr "Titel"
+
+#: src/js/jobs/hooks/BulkActions/useCreateApproveTranslationReviewsAction.js:13
+msgid "Approve translation reviews"
+msgstr "Vertaalbeoordelingen goedkeuren"
+
+#: src/js/jobs/hooks/BulkActions/useCreateCancelAction.js:20
+msgid "Cancel jobs"
+msgstr "Opdrachten annuleren"
+
+#: src/js/jobs/hooks/BulkActions/useCreateCancelTranslationReviewsAction.js:16
+msgid "Cancel translation reviews"
+msgstr "Vertaalbeoordelingen annuleren"
+
+#: src/js/jobs/hooks/BulkActions/useCreateExportXLIFFAction.js:12
+msgid "Export to XLIFF %s"
+msgstr "Exporteren naar XLIFF %s"
+
+#: src/js/jobs/hooks/BulkActions/useGetTranslationsAction.js:13
+msgid "Get translations"
+msgstr "Vertalingen ophalen"
+
+#: src/js/jobs/hooks/BulkActions/useNotApplicableJobsSelected.js:15
+msgid "This action does not apply to any of the selected translation jobs"
+msgstr "Deze actie is niet van toepassing op de geselecteerde vertaalopdrachten"
+
+#: src/js/jobs/model/store/applyTranslations.js:30
+msgid "Translations have been downloaded"
+msgstr "Vertalingen zijn gedownload"
+
+#: src/js/jobs/model/store/applyTranslations.js:31
+msgid "Translation has been downloaded"
+msgstr "Vertaling is gedownload"
+
+#: src/js/jobs/model/store/applyTranslations.js:36
+msgid "Translations could not be downloaded"
+msgstr "Vertalingen konden niet worden gedownload"
+
+#: src/js/jobs/model/store/applyTranslations.js:37
+msgid "Translation could not be downloaded"
+msgstr "Vertaling kon niet worden gedownload"
+
+#: src/js/jobs/model/store/approveTranslationsReviews.js:10
+msgid "Approving translations reviews failed!"
+msgstr "Goedkeuren van vertaalbeoordelingen mislukt!"
+
+#: src/js/jobs/model/store/approveTranslationsReviews.js:38
+msgid "Failed approving translations for the following posts: "
+msgstr "Goedkeuren van vertalingen voor de volgende berichten mislukt: "
+
+#: src/js/jobs/model/store/approveTranslationsReviews.js:51
+msgid "Translations reviews approved successfully!"
+msgstr "Vertaalbeoordelingen succesvol goedgekeurd!"
+
+#: src/js/jobs/model/store/approveTranslationsReviews.js:57
+msgid "No valid jobs selected to approve translations reviews!"
+msgstr "Geen geldige opdrachten geselecteerd om vertaalbeoordelingen goed te keuren!"
+
+#: src/js/jobs/model/store/assignTranslator.js:17
+msgid "The translator has been assigned to the job"
+msgstr "De vertaler is toegewezen aan de opdracht"
+
+#: src/js/jobs/model/store/assignTranslator.js:22
+#: src/js/jobs/model/store/openEditor.js:29
+msgid "The translator could not be assigned to the job"
+msgstr "De vertaler kon niet worden toegewezen aan de opdracht"
+
+#: src/js/jobs/model/store/cancelJobs.js:22
+msgid "The jobs have been cancelled"
+msgstr "De opdrachten zijn geannuleerd"
+
+#: src/js/jobs/model/store/cancelJobs.js:23
+msgid "The job has been cancelled"
+msgstr "De opdracht is geannuleerd"
+
+#: src/js/jobs/model/store/cancelJobs.js:30
+msgid "The jobs could not be cancelled"
+msgstr "De opdrachten konden niet worden geannuleerd"
+
+#: src/js/jobs/model/store/cancelJobs.js:31
+msgid "The job could not be cancelled"
+msgstr "De opdracht kon niet worden geannuleerd"
+
+#: src/js/jobs/model/store/cancelTranslationReviews.js:26
+msgid "Translation reviews have been canceled"
+msgstr "Vertaalbeoordelingen zijn geannuleerd"
+
+#: src/js/jobs/model/store/cancelTranslationReviews.js:27
+msgid "Translation review has been canceled"
+msgstr "Vertaalbeoordeling is geannuleerd"
+
+#: src/js/jobs/model/store/cancelTranslationReviews.js:33
+msgid "Translation reviews could not be canceled"
+msgstr "Vertaalbeoordelingen konden niet worden geannuleerd"
+
+#: src/js/jobs/model/store/cancelTranslationReviews.js:34
+msgid "Translation review could not be canceled"
+msgstr "Vertaalbeoordeling kon niet worden geannuleerd"
+
+#: src/js/jobs/model/store/columnsManagement.js:106
+msgid "Sent on"
+msgstr "Verzonden op"
+
+#: src/js/jobs/model/store/columnsManagement.js:114
+msgid "Deadline"
+msgstr "Deadline"
+
+#: src/js/jobs/model/store/columnsManagement.js:121
+msgid "Status"
+msgstr "Status"
+
+#: src/js/jobs/model/store/columnsManagement.js:54
+msgid "Pending review"
+msgstr "Wacht op beoordeling"
+
+#: src/js/jobs/model/store/columnsManagement.js:65
+msgid "ID"
+msgstr "ID"
+
+#: src/js/jobs/model/store/columnsManagement.js:77
+msgid "Type"
+msgstr "Type"
+
+#: src/js/jobs/model/store/columnsManagement.js:83
+msgid "Languages"
+msgstr "Talen"
+
+#: src/js/jobs/model/store/columnsManagement.js:99
+msgid "Translated by"
+msgstr "Vertaald door"
+
+#: src/js/jobs/model/store/downloadXliff.js:11
+msgid "Download XLIFF file couldn't be finished"
+msgstr "Downloaden van XLIFF-bestand kon niet worden voltooid"
+
+#: src/js/jobs/model/store/exportToXLIFF.js:20
+msgid "Could not load jobs for export"
+msgstr "Kon geen opdrachten laden voor export"
+
+#: src/js/jobs/model/store/exportToXLIFF.js:44
+msgid "The export to XLIFF failed"
+msgstr "De export naar XLIFF is mislukt"
+
+#: src/js/jobs/model/store/importXLIFF.js:26
+msgid "Imported %d jobs"
+msgstr "%d opdrachten geïmporteerd"
+
+#: src/js/jobs/model/store/importXLIFF.js:27
+msgid "Imported one job"
+msgstr "Eén opdracht geïmporteerd"
+
+#: src/js/jobs/model/store/importXLIFF.js:41
+msgid "Could not import any job"
+msgstr "Kon geen enkele opdracht importeren"
+
+#: src/js/jobs/model/store/importXLIFF.js:45
+msgid "Import failed!"
+msgstr "Importeren mislukt!"
+
+#: src/js/jobs/model/store/jobs.js:18
+msgid "Loading translations queue"
+msgstr "Vertalingswachtrij wordt geladen"
+
+#: src/js/jobs/model/store/jobs.js:19
+msgid "Loading translation jobs"
+msgstr "Vertaalopdrachten worden geladen"
+
+#: src/js/jobs/model/store/jobs.js:82
+msgid "Jobs could not be loaded"
+msgstr "Opdrachten konden niet worden geladen"
+
+#: src/js/jobs/model/store/resign.js:12
+msgid "Specify some jobs to resign"
+msgstr "Specificeer enkele opdrachten om af te zien"
+
+#: src/js/jobs/model/store/resign.js:22
+msgid "We could not resign jobs: %s"
+msgstr "We konden niet afzien van opdrachten: %s"
+
+#: src/js/jobs/model/store/resign.js:34
+msgid "Resigned from jobs"
+msgstr "Afgezien van opdrachten"
+
+#: src/js/jobs/model/store/resign.js:35
+msgid "Resigned from job"
+msgstr "Afgezien van opdracht"
+
+#: src/js/jobs/model/store/resign.js:39
+msgid "Failed to resign from jobs"
+msgstr "Afzien van opdrachten mislukt"
+
+#: src/js/jobs/model/store/synchronizeATEJobs.js:27
+msgid "The Advanced Editor jobs synchronization has failed"
+msgstr "De synchronisatie van de Geavanceerde Editor-opdrachten is mislukt"
+
+#: src/js/jobs/model/store/synchronizeTranslationProxyJobs.js:12
+msgid "Synchronization with the Professional Translation service has failed"
+msgstr "Synchronisatie met de Professionele Vertaalservice is mislukt"
+
+#: src/js/jobs/model/store/translationBatchSync.js:68
+msgid "%d translation has been downloaded"
+msgid_plural "%d translations have been downloaded"
+msgstr[0] "%d vertaling is gedownload"
+msgstr[1] "%d vertalingen zijn gedownload"
+
+#: src/js/jobs/model/store/translationBatchSync.js:83
+msgid "Batch sync finished successfully!"
+msgstr "Batchsynchronisatie succesvol voltooid!"
+
+#: src/js/jobs/model/store/translationBatchSync.js:88
+msgid "Batch sync couldn't be finished"
+msgstr "Batchsynchronisatie kon niet worden voltooid"
