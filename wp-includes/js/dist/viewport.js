@@ -58,11 +58,11 @@ __webpack_require__.d(selectors_namespaceObject, {
   isViewportMatch: () => (isViewportMatch)
 });
 
-;// CONCATENATED MODULE: external ["wp","compose"]
+;// external ["wp","compose"]
 const external_wp_compose_namespaceObject = window["wp"]["compose"];
-;// CONCATENATED MODULE: external ["wp","data"]
+;// external ["wp","data"]
 const external_wp_data_namespaceObject = window["wp"]["data"];
-;// CONCATENATED MODULE: ./node_modules/@wordpress/viewport/build-module/store/reducer.js
+;// ./node_modules/@wordpress/viewport/build-module/store/reducer.js
 /**
  * Reducer returning the viewport state, as keys of breakpoint queries with
  * boolean value representing whether query is matched.
@@ -81,7 +81,7 @@ function reducer(state = {}, action) {
 }
 /* harmony default export */ const store_reducer = (reducer);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/viewport/build-module/store/actions.js
+;// ./node_modules/@wordpress/viewport/build-module/store/actions.js
 /**
  * Returns an action object used in signalling that viewport queries have been
  * updated. Values are specified as an object of breakpoint query keys where
@@ -101,7 +101,7 @@ function setIsMatching(values) {
   };
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/viewport/build-module/store/selectors.js
+;// ./node_modules/@wordpress/viewport/build-module/store/selectors.js
 /**
  * Returns true if the viewport matches the given query, or false otherwise.
  *
@@ -139,7 +139,7 @@ function isViewportMatch(state, query) {
   return !!state[query];
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/viewport/build-module/store/index.js
+;// ./node_modules/@wordpress/viewport/build-module/store/index.js
 /**
  * WordPress dependencies
  */
@@ -167,7 +167,7 @@ const store = (0,external_wp_data_namespaceObject.createReduxStore)(STORE_NAME, 
 });
 (0,external_wp_data_namespaceObject.register)(store);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/viewport/build-module/listener.js
+;// ./node_modules/@wordpress/viewport/build-module/listener.js
 /**
  * WordPress dependencies
  */
@@ -215,10 +215,9 @@ const addDimensionsEventListener = (breakpoints, operators) => {
 };
 /* harmony default export */ const listener = (addDimensionsEventListener);
 
-;// CONCATENATED MODULE: external "React"
-const external_React_namespaceObject = window["React"];
-;// CONCATENATED MODULE: ./node_modules/@wordpress/viewport/build-module/with-viewport-match.js
-
+;// external "ReactJSXRuntime"
+const external_ReactJSXRuntime_namespaceObject = window["ReactJSXRuntime"];
+;// ./node_modules/@wordpress/viewport/build-module/with-viewport-match.js
 /**
  * WordPress dependencies
  */
@@ -247,6 +246,7 @@ const external_React_namespaceObject = window["React"];
  *
  * @return {Function} Higher-order component.
  */
+
 const withViewportMatch = queries => {
   const queryEntries = Object.entries(queries);
   const useViewPortQueriesResult = () => Object.fromEntries(queryEntries.map(([key, query]) => {
@@ -264,7 +264,7 @@ const withViewportMatch = queries => {
   return (0,external_wp_compose_namespaceObject.createHigherOrderComponent)(WrappedComponent => {
     return (0,external_wp_compose_namespaceObject.pure)(props => {
       const queriesResult = useViewPortQueriesResult();
-      return (0,external_React_namespaceObject.createElement)(WrappedComponent, {
+      return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(WrappedComponent, {
         ...props,
         ...queriesResult
       });
@@ -273,7 +273,7 @@ const withViewportMatch = queries => {
 };
 /* harmony default export */ const with_viewport_match = (withViewportMatch);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/viewport/build-module/if-viewport-matches.js
+;// ./node_modules/@wordpress/viewport/build-module/if-viewport-matches.js
 /**
  * WordPress dependencies
  */
@@ -309,7 +309,7 @@ const ifViewportMatches = query => (0,external_wp_compose_namespaceObject.create
 }), (0,external_wp_compose_namespaceObject.ifCondition)(props => props.isViewportMatch)]), 'ifViewportMatches');
 /* harmony default export */ const if_viewport_matches = (ifViewportMatches);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/viewport/build-module/index.js
+;// ./node_modules/@wordpress/viewport/build-module/index.js
 /**
  * Internal dependencies
  */

@@ -9,6 +9,7 @@ use WPML\Collect\Support\Collection;
 use WPML\FP\Either;
 use WPML\LIB\WP\User;
 use WPML\TM\ATE\AutoTranslate\Endpoint\EnableATE;
+use WPML\TranslationRoles\Service\AdministratorRoleManager;
 use WPML\UrlHandling\WPLoginUrlConverter;
 use function WPML\Container\make;
 use WPML\FP\Lst;
@@ -18,6 +19,14 @@ use WPML\TM\Menu\TranslationServices\Endpoints\Deactivate;
 use WPML\TranslationMode\Endpoint\SetTranslateEverything;
 
 class FinishStep implements IHandler {
+
+	private $administratorRoleManager;
+
+	public function __construct(
+		AdministratorRoleManager $administratorRoleManager
+	) {
+		$this->administratorRoleManager = $administratorRoleManager;
+	}
 
 	public function run( Collection $data ) {
 		// Prepare media setup which will run right after finishing WPML setup.
@@ -31,13 +40,22 @@ class FinishStep implements IHandler {
 
 		self::enableFooterLanguageSwitcher();
 
-		if ( Option::isPausedTranslateEverything() ) {
-			// Resave translate everything settings as now languages
-			// are activated, which happened on 'finish_step2'.
-			make( SetTranslateEverything::class )->run(
-				wpml_collect( [ 'onlyNew' => true ] )
-			);
-		}
+		/**
+		 * 1. Setting 'translateEverything = false' because starting from WPML 4.7, when user finishes wizard,
+		 * he should have TranslateEverything paused initially.
+		 *
+		 * 2. Setting 'reviewMode = null' because starting from WPML 4.7, user should have NO default review mode selected,
+		 * he'll need to select review mode when he sends content to automatic translation
+		 *
+		 * 3. Setting 'onlyNew = true' to resave TranslateEverything settings as now languages are activated, which happened on 'finish_step2'.
+		 */
+		make( SetTranslateEverything::class )->run(
+			wpml_collect( [
+				'translateEverything' => false,
+				'reviewMode'          => null,
+				'onlyNew'             => true
+			] )
+		);
 
 		$translationMode = Option::getTranslationMode();
 		if ( ! Lst::includes( 'users', $translationMode ) ) {
@@ -49,9 +67,7 @@ class FinishStep implements IHandler {
 		}
 
 
-		if ( Lst::includes( 'myself', $translationMode ) ) {
-			self::setCurrentUserToTranslateAllLangs();
-		}
+		$this->administratorRoleManager->initializeAllAdministrators();
 
 		if ( Option::isTMAllowed( ) ) {
 			Option::setTranslateEverythingDefault();
@@ -82,14 +98,4 @@ class FinishStep implements IHandler {
 		$lsSettings->save_settings( $settings );
 	}
 
-	private static function setCurrentUserToTranslateAllLangs() {
-		$currentUser = User::getCurrent();
-		$currentUser->add_cap( \WPML\LIB\WP\User::CAP_TRANSLATE );
-		User::updateMeta( $currentUser->ID, \WPML_TM_Wizard_Options::ONLY_I_USER_META, true );
-
-		make( \WPML_Language_Pair_Records::class )->store(
-			$currentUser->ID,
-			\WPML_All_Language_Pairs::get()
-		);
-	}
 }

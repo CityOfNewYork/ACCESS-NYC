@@ -1,0 +1,31 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Warning:": [
+            "경고:"
+         ],
+         "Edits you're about to make will be lost": [
+            "지금 하려는 편집 내용이 손실됩니다"
+         ],
+         "You are about to edit this translation using %s.": [
+            "%s을(를) 사용하여 이 번역을 편집하려고 합니다."
+         ],
+         "Any changes you make will be lost the next time you send this page for translation.": [
+            "변경한 내용은 다음에 이 페이지를 번역을 위해 보낼 때 손실됩니다."
+         ],
+         "Go back": [
+            "돌아가기"
+         ],
+         "Edit in Advanced Translation Editor": [
+            "고급 번역 편집기에서 편집"
+         ],
+         "Edit anyway (Not recommended)": [
+            "그래도 편집 (권장하지 않음)"
+         ]
+      }
+   }
+}

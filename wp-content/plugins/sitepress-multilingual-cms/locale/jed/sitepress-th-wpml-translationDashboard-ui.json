@@ -1,0 +1,217 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Refreshing translation status": [
+            "กำลังรีเฟรชสถานะการแปล"
+         ],
+         "Your pending automatic translations will be canceled.": [
+            "การแปลอัตโนมัติที่รอดำเนินการของคุณจะถูกยกเลิก."
+         ],
+         "Save": [
+            "บันทึก"
+         ],
+         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+            "ไปที่ <a>แดชบอร์ดการจัดการการแปล</a> เพื่อแปลเนื้อหาของคุณ."
+         ],
+         "Review the translations before publishing": [
+            "ตรวจสอบการแปลก่อนเผยแพร่"
+         ],
+         "Publish translations and review them later": [
+            "เผยแพร่การแปลและตรวจสอบในภายหลัง"
+         ],
+         "Publish translations without reviewing": [
+            "เผยแพร่การแปลโดยไม่ตรวจสอบ"
+         ],
+         "Translate Everything": [
+            "แปลทั้งหมด"
+         ],
+         "WPML will automatically translate content that you publish or update": [
+            "WPML จะแปลเนื้อหาที่คุณเผยแพร่หรืออัปเดตโดยอัตโนมัติ"
+         ],
+         "How do you want to translate this site?": [
+            "คุณต้องการแปลเว็บไซต์นี้อย่างไร?"
+         ],
+         "Translate Some": [
+            "แปลบางส่วน"
+         ],
+         "I want to choose which content to translate": [
+            "ฉันต้องการเลือกเนื้อหาที่จะแปล"
+         ],
+         "All Languages": [
+            "ทุกภาษา"
+         ],
+         "Overwrite existing translations": [
+            "เขียนทับการแปลที่มีอยู่"
+         ],
+         "Some of the content you want to translate is already translated": [
+            "เนื้อหาบางส่วนที่คุณต้องการแปลได้รับการแปลแล้ว"
+         ],
+         "What do you want to do with the content that’s already translated?": [
+            "คุณต้องการทำอย่างไรกับเนื้อหาที่แปลไว้แล้ว?"
+         ],
+         "Leave existing translations as is": [
+            "ปล่อยการแปลที่มีอยู่ไว้ตามเดิม"
+         ],
+         "You chose to review translations before publishing.": [
+            "คุณเลือกที่จะตรวจสอบการแปลก่อนเผยแพร่."
+         ],
+         "If you retranslate content that's already published, the changes will be applied directly to live pages or posts.": [
+            "หากคุณแปลเนื้อหาที่เผยแพร่แล้วซ้ำ การเปลี่ยนแปลงจะถูกนำไปใช้กับหน้าหรือโพสต์ที่ใช้งานอยู่โดยตรง."
+         ],
+         "This also updates the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "นี่ยังอัปเดตหน่วยความจำการแปลสำหรับเว็บไซต์ของคุณด้วย อ่านเพิ่มเติมเกี่ยวกับ <a href=\"%s\" target=\"_blank\" >หน่วยความจำการแปล</a>"
+         ],
+         "Allows you to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "อนุญาตให้คุณแปลเนื้อหาของคุณใหม่และอัปเดตหน่วยความจำการแปลสำหรับเว็บไซต์ของคุณ อ่านเพิ่มเติมเกี่ยวกับ <a href=\"%s\" target=\"_blank\" >หน่วยความจำการแปล</a>"
+         ],
+         "Allows your translators to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+            "อนุญาตให้นักแปลของคุณแปลเนื้อหาของคุณใหม่และอัปเดตหน่วยความจำการแปลสำหรับเว็บไซต์ของคุณ อ่านเพิ่มเติมเกี่ยวกับ <a href=\"%s\" target=\"_blank\" >หน่วยความจำการแปล</a>"
+         ],
+         "HINT: You can add a Note for translators in the table above with special instructions.": [
+            "คำแนะนำ: คุณสามารถเพิ่มบันทึกสำหรับนักแปลในตารางด้านบนพร้อมคำแนะนำพิเศษ."
+         ],
+         "Translate automatically": [
+            "แปลโดยอัตโนมัติ"
+         ],
+         "How do you want to translate?": [
+            "คุณต้องการแปลอย่างไร?"
+         ],
+         "Assign to a translator": [
+            "มอบหมายให้นักแปล"
+         ],
+         "Translate myself": [
+            "แปลด้วยตัวเอง"
+         ],
+         "You do not need translation credits to translate content yourself.": [
+            "คุณไม่จำเป็นต้องมีเครดิตการแปลเพื่อแปลเนื้อหาด้วยตัวเอง."
+         ],
+         "You can only automatically translate content from your site's default language (English), to your site's other languages. Deselect content in your site's secondary languages to proceed.": [
+            "คุณสามารถแปลเนื้อหาโดยอัตโนมัติจากภาษาเริ่มต้นของเว็บไซต์ของคุณ (ภาษาอังกฤษ) เป็นภาษาอื่น ๆ ของเว็บไซต์ของคุณเท่านั้น ยกเลิกการเลือกเนื้อหาในภาษารองของเว็บไซต์ของคุณเพื่อดำเนินการต่อ."
+         ],
+         "You can only automatically translate content from your primary language (%s) to other languages. Use the language switcher at the top of this page to switch to %s.": [
+            "คุณสามารถแปลเนื้อหาโดยอัตโนมัติจากภาษาหลักของคุณ (%s) เป็นภาษาอื่น ๆ เท่านั้น ใช้ตัวเลือกภาษาที่ด้านบนของหน้านี้เพื่อสลับไปยัง %s."
+         ],
+         "Selected content includes items that were originally created in this language. Deselect these items to proceed.": [
+            "เนื้อหาที่เลือกรวมถึงรายการที่สร้างขึ้นในภาษานี้ ยกเลิกการเลือกรายการเหล่านี้เพื่อดำเนินการต่อ."
+         ],
+         "Add to Translation Queue": [
+            "เพิ่มไปยังคิวการแปล"
+         ],
+         "Select a post or page to translate": [
+            "เลือกโพสต์หรือหน้าที่จะแปล"
+         ],
+         "Translate or duplicate content to at least one language": [
+            "แปลหรือทำซ้ำเนื้อหาเป็นอย่างน้อยหนึ่งภาษา"
+         ],
+         "Choose how you want to translate your content": [
+            "เลือกวิธีที่คุณต้องการแปลเนื้อหาของคุณ"
+         ],
+         "Selected content is already translated": [
+            "เนื้อหาที่เลือกได้รับการแปลแล้ว"
+         ],
+         "Selected content includes items in a language other than your site's default language.": [
+            "เนื้อหาที่เลือกรวมถึงรายการในภาษาอื่นที่ไม่ใช่ภาษาเริ่มต้นของเว็บไซต์ของคุณ."
+         ],
+         "Choose at least one translation action": [
+            "เลือกการดำเนินการแปลอย่างน้อยหนึ่งอย่าง"
+         ],
+         "Duplicate": [
+            "ทำซ้ำ"
+         ],
+         "Start translating and duplicating": [
+            "เริ่มแปลและทำซ้ำ"
+         ],
+         "Add to Translation Basket and duplicate": [
+            "เพิ่มไปยังตะกร้าการแปลและทำซ้ำ"
+         ],
+         "Add to Translation Queue and duplicate": [
+            "เพิ่มไปยังคิวการแปลและทำซ้ำ"
+         ],
+         "Start translating": [
+            "เริ่มแปล"
+         ],
+         "Add to Translation Basket": [
+            "เพิ่มไปยังตะกร้าการแปล"
+         ],
+         "One more thing...": [
+            "อีกหนึ่งเรื่อง..."
+         ],
+         "What would you like to do when your content has finished translating automatically?": [
+            "คุณต้องการทำอะไรเมื่อเนื้อหาของคุณแปลโดยอัตโนมัติเสร็จสิ้น?"
+         ],
+         "Save settings": [
+            "บันทึกการตั้งค่า"
+         ],
+         "This setting will apply to all future automatic translations. You can change this anytime in WPML → Settings.": [
+            "การตั้งค่านี้จะใช้กับการแปลอัตโนมัติทั้งหมดในอนาคต คุณสามารถเปลี่ยนแปลงได้ทุกเมื่อใน WPML → การตั้งค่า."
+         ],
+         "Translate": [
+            "แปล"
+         ],
+         "Duplicate content": [
+            "ทำซ้ำเนื้อหา"
+         ],
+         "Do nothing": [
+            "ไม่ต้องทำอะไร"
+         ],
+         "You need credits to use automatic translation.": [
+            "คุณต้องมีเครดิตเพื่อใช้การแปลอัตโนมัติ."
+         ],
+         "Finish setting up %s on your site": [
+            "ตั้งค่า %s บนเว็บไซต์ของคุณให้เสร็จสิ้น"
+         ],
+         "You need to authenticate %s to send them content for translation. Visit the %s to finish the setup.": [
+            "คุณต้องยืนยันตัวตน %s เพื่อส่งเนื้อหาสำหรับการแปล เยี่ยมชม %s เพื่อตั้งค่าให้เสร็จสิ้น."
+         ],
+         "Connection Error. Please wait a minute and reload this page. If the problem continues, please <a>contact WPML support</a>.": [
+            "ข้อผิดพลาดในการเชื่อมต่อ โปรดรอสักครู่และโหลดหน้านี้ใหม่ หากปัญหายังคงเกิดขึ้น โปรด <a>ติดต่อฝ่ายสนับสนุน WPML</a>."
+         ],
+         "Add a translator to use %s.": [
+            "เพิ่มนักแปลเพื่อใช้ %s."
+         ],
+         "To send content to %s for translation, go to the %s to add a translator on your site.": [
+            "หากต้องการส่งเนื้อหาไปยัง %s สำหรับการแปล ไปที่ %s เพื่อเพิ่มนักแปลบนเว็บไซต์ของคุณ."
+         ],
+         "Your selected automatic translation engines do not support the following language(s): %s. Read more about <a>choosing a translation engine</a>.": [
+            "เครื่องมือแปลอัตโนมัติที่คุณเลือกไม่รองรับภาษาต่อไปนี้: %s อ่านเพิ่มเติมเกี่ยวกับ <a>การเลือกเครื่องมือแปล</a>."
+         ],
+         "Some of the selected content is already being translated. This will cancel any in-progress translations.": [
+            "เนื้อหาบางส่วนที่เลือกกำลังอยู่ในระหว่างการแปล การดำเนินการนี้จะยกเลิกการแปลที่กำลังดำเนินการอยู่."
+         ],
+         "Any existing content (translations) will be overwritten when creating duplicates.": [
+            "เนื้อหา (การแปล) ที่มีอยู่จะถูกเขียนทับเมื่อสร้างสำเนา."
+         ],
+         "When duplicating content, please first duplicate parent pages to maintain the site's hierarchy.": [
+            "เมื่อทำการสร้างสำเนาเนื้อหา โปรดสร้างสำเนาหน้าหลักก่อนเพื่อรักษาลำดับชั้นของเว็บไซต์."
+         ],
+         "To assign content to a translator, first <a href=\"%s\" target=\"_blank\">add a translator</a> or <a href=\"%s\" target=\"_blank\">connect to a translation service</a>.": [
+            "หากต้องการมอบหมายเนื้อหาให้กับนักแปล โปรด <a href=\"%s\" target=\"_blank\">เพิ่มนักแปล</a> หรือ <a href=\"%s\" target=\"_blank\">เชื่อมต่อกับบริการแปล</a> ก่อน."
+         ],
+         "Translators Tab": [
+            "แท็บนักแปล"
+         ],
+         "Some of the content that you selected for translation includes fields that are encoded. Translators will not be able to work on this kind of content, so we removed it from the job.": [
+            "เนื้อหาบางส่วนที่คุณเลือกสำหรับการแปลมีฟิลด์ที่ถูกเข้ารหัส นักแปลจะไม่สามารถทำงานกับเนื้อหาประเภทนี้ได้ ดังนั้นเราจึงได้นำออกจากงาน."
+         ],
+         "To fix this problem, you need to tell WPML how these fields are encoded, so that WPML can decode them before sending for translation.": [
+            "เพื่อแก้ไขปัญหานี้ คุณต้องบอก WPML ว่าฟิลด์เหล่านี้ถูกเข้ารหัสอย่างไร เพื่อให้ WPML สามารถถอดรหัสก่อนส่งไปแปลได้."
+         ],
+         "WPML cannot send some of the content to translation": [
+            "WPML ไม่สามารถส่งเนื้อหาบางส่วนไปแปลได้"
+         ],
+         "<s>%s</s>: There are base64 encoded fields in this document": [
+            "<s>%s</s>: มีฟิลด์ที่เข้ารหัสแบบ base64 ในเอกสารนี้"
+         ],
+         "Hide details": [
+            "ซ่อนรายละเอียด"
+         ],
+         "Show details": [
+            "แสดงรายละเอียด"
+         ]
+      }
+   }
+}

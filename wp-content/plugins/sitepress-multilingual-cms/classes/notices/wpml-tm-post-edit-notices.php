@@ -93,11 +93,20 @@ class WPML_TM_Post_Edit_Notices {
 			'wpml-tm-post-edit-alert',
 			WPML_TM_URL . '/res/js/post-edit-alert.js',
 			array( 'jquery', 'jquery-ui-dialog' ),
-			ICL_SITEPRESS_VERSION
+			ICL_SITEPRESS_SCRIPT_VERSION
 		);
 	}
 
 	public function display_notices() {
+
+		/**
+		 * We don't need to display notices when translate everything automatically is active.
+		 * @see wpmldev-3416
+		 */
+		if ( \WPML\Setup\Option::shouldTranslateEverything() ) {
+			return;
+		}
+
 		$trid    = $this->super_globals->get( 'trid', FILTER_SANITIZE_NUMBER_INT, FILTER_NULL_ON_FAILURE );
 		$post_id = $this->super_globals->get( 'post', FILTER_SANITIZE_NUMBER_INT, FILTER_NULL_ON_FAILURE );
 		$lang    = $this->super_globals->get( 'lang', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_NULL_ON_FAILURE );
@@ -164,13 +173,9 @@ class WPML_TM_Post_Edit_Notices {
 			}elseif ( $this->is_waiting_for_a_translation( (int) $this->post_status->get_status( $post_id, $trid, $lang ) ) ) {
 				$model = array(
 					'warning' => sprintf(
-						__( '%sWarning:%s You are trying to edit a translation that is currently in the process of being added using WPML.', 'wpml-translation-management' ),
+						__( '%sWarning:%s You are about to edit your translation using the standard WordPress editor but your site is configured to use the WPML Translation Editor. Any edits you do here will be lost if you later open it in the WPML Translation Editor.', 'wpml-translation-management' ),
 						'<strong>',
 						'</strong>'
-					),
-					'check_dashboard' => sprintf(
-						__( 'Please refer to the <a href="%s">Translation Management dashboard</a> for the exact status of this translation.', 'wpml-translation-management' ),
-						admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/main.php&' )
 					),
 				);
 
@@ -184,18 +189,16 @@ class WPML_TM_Post_Edit_Notices {
 			) {
 
 				$model = array(
-					'warning' => sprintf(
-						__( '%sWarning:%s You are trying to edit a translation using the standard WordPress editor but your site is configured to use the WPML Translation Editor.', 'wpml-translation-management' ),
-						'<strong>',
-						'</strong>'
-					),
-				    'go_back_button'         => __( 'Go back', 'wpml-translation-management' ),
-				    'edit_anyway_button'     => __( 'Edit anyway', 'wpml-translation-management' ),
-				    'open_in_te_button'      => __( 'Open in Translation Editor', 'wpml-translation-management' ),
-				    'translation_editor_url' => $this->get_translation_editor_link( $post_element ),
-					'do_not_show_again'      => __( "Don't show this warning again", 'wpml-translation-management' ),
-					'do_not_show_again_action' => self::DO_NOT_SHOW_AGAIN_USE_PREFERABLY_TE_ACTION,
-					'nonce'                  => wp_nonce_field(
+					'warning_line_1' 						=> sprintf(__( '%sWarning:%s Edits you\'re about to make will be lost', 'sitepress' ), '<span>', '</span>'),
+					'warning_line_2' 						=> __( 'You are about to edit this translation using the standard WordPress editor.', 'sitepress' ),
+					'warning_line_3' 						=> __( 'Any changes you make will be lost the next time you send this page for translation.', 'sitepress' ),
+					'go_back_button'						=> __( 'Go Back', 'sitepress' ),
+					'edit_anyway_button'				=> __( 'Edit Anyway (Not Recommended)', 'sitepress' ),
+					'open_in_te_button'					=> __( 'Edit in Advanced Translation Editor', 'sitepress' ),
+					'translation_editor_url'		=> $this->get_translation_editor_link( $post_element ),
+					'do_not_show_again'					=> __( "Don't show this warning again", 'sitepress' ),
+					'do_not_show_again_action'	=> self::DO_NOT_SHOW_AGAIN_USE_PREFERABLY_TE_ACTION,
+					'nonce'                  		=> wp_nonce_field(
 						self::DO_NOT_SHOW_AGAIN_USE_PREFERABLY_TE_ACTION,
 						self::DO_NOT_SHOW_AGAIN_USE_PREFERABLY_TE_ACTION,
 						true,

@@ -243,7 +243,7 @@ class WPML_Translations extends WPML_SP_User {
 		if ( ! $this->all_statuses && 'post_attachment' !== $element_type && ! is_admin() ) {
 			$public_statuses_where = $this->get_public_statuses();
 			// the current user may not be the admin but may have read private post/page caps!
-			if ( current_user_can( 'read_private_pages' ) || current_user_can( 'read_private_posts' ) || $skipPrivilegeChecking ) {
+			if ( ( defined( 'WP_CLI' ) && WP_CLI ) || current_user_can( 'read_private_pages' ) || current_user_can( 'read_private_posts' ) || $skipPrivilegeChecking ) {
 				$sql_parts['where'][] = ' AND (p.post_status IN (' . $public_statuses_where . ", 'draft', 'private', 'pending' ))";
 			} else {
 				$sql_parts['where'][] = ' AND (';

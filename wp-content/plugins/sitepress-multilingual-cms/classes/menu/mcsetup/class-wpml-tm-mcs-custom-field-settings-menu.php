@@ -19,8 +19,14 @@ abstract class WPML_TM_MCS_Custom_Field_Settings_Menu {
 	/** @var string[] Custom field keys */
 	private $custom_fields_keys;
 
-	/** @var int $total_keys */
-	private $total_keys;
+	/** @var bool $has_more If there are more fields to load. */
+	private $has_more;
+
+	/** @var bool If all fields should be loaded. */
+	private $load_all_fields = false;
+
+	/** @var int $highest_page_loaded */
+	private $highest_page_loaded;
 
 	/** @var array Custom field options */
 	private $custom_field_options;
@@ -55,19 +61,31 @@ abstract class WPML_TM_MCS_Custom_Field_Settings_Menu {
 		if ( null === $this->custom_fields_keys ) {
 			$args = array_merge(
 				array(
-					'hide_system_fields' => ! $this->settings_factory->show_system_fields,
-					'items_per_page'     => self::ITEMS_PER_PAGE,
-					'page'               => 1,
+					'hide_system_fields'  => ! $this->settings_factory->show_system_fields,
+					'items_per_page'      => self::ITEMS_PER_PAGE,
+					'page'                => 1,
+					'highest_page_loaded' => 1,
 				),
 				$args
 			);
 
-			$this->custom_fields_keys = $this->get_query()->get( $args );
-			$this->total_keys         = $this->get_query()->get_total_rows();
+			$this->load_all_fields     = (int) $args['page'] < 0;
+			$this->highest_page_loaded = (int) $args['highest_page_loaded'];
 
-			if ( $this->custom_fields_keys ) {
-				natcasesort( $this->custom_fields_keys );
+			// Fetch one more item than the wanted items per page.
+			$this->custom_fields_keys = $this->get_query()->get( array_merge( $args, [ 'items_per_page' => $args['items_per_page'] + 1 ] ) );
+
+			// Check if we have more items to load.
+			$this->has_more = $this->load_all_fields
+				? false
+				: count( $this->custom_fields_keys ) > $args['items_per_page'];
+
+			if ( $this->has_more ) {
+				// Remove the extra loaded item as it should not be displayed.
+				array_pop( $this->custom_fields_keys );
 			}
+
+			natcasesort( $this->custom_fields_keys );
 		}
 	}
 
@@ -119,7 +137,7 @@ abstract class WPML_TM_MCS_Custom_Field_Settings_Menu {
 					} else {
 						if ( esc_attr( $this->kind_shorthand() ) === 'cf' ) {
 							?>
-                            <label><input type="checkbox" <?php if ( CfMetaBoxOption::get() ) : ?> checked="checked"
+                            <label><input class="wpml-checkbox-native" type="checkbox" <?php if ( CfMetaBoxOption::get() ) : ?> checked="checked"
 							              <?php endif; ?>id="show_cf_meta_box" name="translate_media"
                                           value="1"/>&nbsp;<?php esc_html_e( 'Show "Multilingual Content Setup" meta box on post edit screen.', 'sitepress' ); ?>
                             </label>
@@ -144,7 +162,7 @@ abstract class WPML_TM_MCS_Custom_Field_Settings_Menu {
 						<p class="buttons-wrap">
 							<span class="icl_ajx_response"
 								  id="icl_ajx_response_<?php echo esc_attr( $this->kind_shorthand() ); ?>"></span>
-							<input type="submit" class="button-primary"
+							<input type="submit" class="button-primary wpml-button base-btn"
 								   value="<?php echo esc_attr__( 'Save', 'wpml-translation-management' ); ?>"/>
 						</p>
 						<?php
@@ -181,7 +199,7 @@ abstract class WPML_TM_MCS_Custom_Field_Settings_Menu {
 	private function render_radio( $cf_key, $html_disabled, $status, $ref_status ) {
 		ob_start();
 		?>
-		<input type="radio" name="<?php echo $this->get_radio_name( $cf_key ); ?>"
+		<input class="wpml-radio-native" type="radio" name="<?php echo $this->get_radio_name( $cf_key ); ?>"
 			   value="<?php echo esc_attr( $ref_status ); ?>"
 			   title="<?php echo esc_attr( $ref_status ); ?>" <?php echo $html_disabled; ?>
 			   <?php
@@ -296,7 +314,20 @@ abstract class WPML_TM_MCS_Custom_Field_Settings_Menu {
 	 */
 	public function render_pagination( $items_per_page, $current_page ) {
 		$pagination = new WPML_TM_MCS_Pagination_Render_Factory( $items_per_page );
-		echo $pagination->create( $this->total_keys, $current_page )->render();
+
+		if ( $this->load_all_fields ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo $pagination->create( count( $this->custom_fields_keys ), $current_page )->render();
+			return;
+		}
+
+		$current_fields_count = count( $this->custom_fields_keys );
+		$total_items_so_far   = 1 === $current_page && $current_fields_count < $items_per_page
+			? $current_fields_count
+			: $items_per_page * $this->highest_page_loaded + ( $this->has_more ? 1 : 0 );
+
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo $pagination->create( $total_items_so_far, $current_page )->render();
 	}
 
 	abstract public function get_no_data_message();

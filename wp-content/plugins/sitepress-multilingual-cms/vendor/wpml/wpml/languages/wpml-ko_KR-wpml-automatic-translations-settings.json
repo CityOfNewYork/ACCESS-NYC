@@ -1,0 +1,172 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Could not fetch engines data": [
+            "엔진 데이터를 가져올 수 없습니다"
+         ],
+         "Could not save settings": [
+            "설정을 저장할 수 없습니다"
+         ],
+         "Automatic translation": [
+            "자동 번역"
+         ],
+         "Saving...": [
+            "저장 중..."
+         ],
+         "Save settings": [
+            "설정 저장"
+         ],
+         "Settings saved": [
+            "설정이 저장되었습니다"
+         ],
+         "Some error occurred": [
+            "오류가 발생했습니다"
+         ],
+         "Loading...": [
+            "로딩 중..."
+         ],
+         "Failed to load engines": [
+            "엔진 로드에 실패했습니다"
+         ],
+         "Drag your default engine to the top and order the rest by priority.": [
+            "기본 엔진을 맨 위로 끌어다 놓고 나머지를 우선순위에 따라 정렬하세요."
+         ],
+         "Which translation engines do you want to use?": [
+            "어떤 번역 엔진을 사용하시겠습니까?"
+         ],
+         "Automatic translation engines differ in translation style and supported language pairs. If your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it.": [
+            "자동 번역 엔진은 번역 스타일과 지원되는 언어 쌍에 따라 다릅니다. 선호하는 번역 엔진이 사용하려는 언어 쌍을 지원하지 않는 경우, 해당 언어 쌍을 지원하는 다음 선호 엔진으로 전환됩니다."
+         ],
+         "WPML AI (beta) automatically detects the formality of your content and translates with the same formality.": [
+            "WPML AI (베타)는 콘텐츠의 격식을 자동으로 감지하고 동일한 격식으로 번역합니다."
+         ],
+         "Auto-formality": [
+            "자동 격식"
+         ],
+         "Choose the tone of automatic translations for %s": [
+            "%s에 대한 자동 번역의 어조 선택"
+         ],
+         "Your site doesn't use languages that offer formality settings.": [
+            "귀하의 사이트는 격식 설정을 제공하는 언어를 사용하지 않습니다."
+         ],
+         "Edit formality": [
+            "격식 수정"
+         ],
+         "%d credits per word": [
+            "단어당 %d 크레딧"
+         ],
+         "Backup %d": [
+            "백업 %d"
+         ],
+         "Default": [
+            "기본값"
+         ],
+         "ON": [
+            "켜짐"
+         ],
+         "OFF": [
+            "꺼짐"
+         ],
+         "Documentation": [
+            "문서"
+         ],
+         "DeepL's formality and how it helps get good translations": [
+            "DeepL의 격식과 좋은 번역을 얻는 방법"
+         ],
+         "Edit button": [
+            "수정 버튼"
+         ],
+         "Examples for %s": [
+            "%s에 대한 예시"
+         ],
+         "For example:": [
+            "예를 들어:"
+         ],
+         "Formality settings for %s": [
+            "%s에 대한 격식 설정"
+         ],
+         "Formality level for %s": [
+            "%s에 대한 격식 수준"
+         ],
+         "Set formality for %s": [
+            "%s에 대한 격식 설정"
+         ],
+         "%d of your target languages can be translated using either a formal or informal tone.\n The tone which gives the best translation for each language is set by default.": [
+            "목표 언어의 %d는 공식적이거나 비공식적인 어조로 번역될 수 있습니다.\n 각 언어에 가장 적합한 번역을 제공하는 어조가 기본적으로 설정됩니다."
+         ],
+         "%s doesn't yet support formality options for %s.": [
+            "%s는 아직 %s에 대한 격식 옵션을 지원하지 않습니다."
+         ],
+         "Cancel": [
+            "취소"
+         ],
+         "Update": [
+            "업데이트"
+         ],
+         "Formal": [
+            "공식적"
+         ],
+         "Informal": [
+            "비공식적"
+         ],
+         "Don't translate drafts. Only translate when I publish content.": [
+            "초안은 번역하지 마세요. 내용을 게시할 때만 번역하세요."
+         ],
+         "Translate drafts as I save them (consumes a bit more translation credits).": [
+            "초안을 저장할 때마다 번역하세요 (번역 크레딧을 조금 더 소비합니다)."
+         ],
+         "Do you want to translate drafts automatically?": [
+            "초안을 자동으로 번역하시겠습니까?"
+         ],
+         "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s.": [
+            "이 기능은 %s번역 대시보드%s에서 \"모든 것을 자동으로 번역\"을 활성화할 때만 사용할 수 있습니다."
+         ],
+         "Close modal": [
+            "모달 닫기"
+         ],
+         "What would you like to do after WPML finishes translating your content automatically?": [
+            "WPML이 콘텐츠를 자동으로 번역한 후 어떤 작업을 수행하시겠습니까?"
+         ],
+         "Wait for review": [
+            "검토 대기"
+         ],
+         "Recommended with DeepL, Google and Microsoft": [
+            "DeepL, Google 및 Microsoft와 함께 권장됨"
+         ],
+         "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process.": [
+            "DeepL, Google, Microsoft는 훌륭한 번역을 제공하지만, 정확성을 확인하기 위해 사람의 검토를 권장합니다. WPML AI는 맥락을 이해하는 인간보다 우수한 번역을 제공하므로 검토 과정을 자신 있게 건너뛸 수 있습니다."
+         ],
+         "WPML keeps translations unpublished, so you can review them first.": [
+            "WPML은 번역을 게시하지 않고 보관하여 먼저 검토할 수 있도록 합니다."
+         ],
+         "Your translators review and approve translations before publishing.": [
+            "번역자가 게시 전에 번역을 검토하고 승인합니다."
+         ],
+         "Publish and mark for review": [
+            "게시 및 검토 표시"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "WPML은 번역을 즉시 게시하지만 편의에 따라 확인할 수 있도록 표시합니다."
+         ],
+         "WPML publishes translations immediately but flags them for translators to review later.": [
+            "WPML은 번역을 즉시 게시하지만 번역자가 나중에 검토할 수 있도록 표시합니다."
+         ],
+         "Publish without review": [
+            "검토 없이 게시"
+         ],
+         "Recommended with WPML AI": [
+            "WPML AI와 함께 권장됨"
+         ],
+         "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy.": [
+            "WPML AI는 개선이 거의 필요 없는 인간보다 나은 번역을 제공하므로 검토 과정을 자신 있게 건너뛸 수 있습니다. 다른 번역 엔진의 경우 정확성을 확인하기 위해 인간의 검토가 권장됩니다."
+         ],
+         "WPML publishes translations immediately, skipping the review process.": [
+            "WPML은 검토 과정을 건너뛰고 번역을 즉시 게시합니다."
+         ]
+      }
+   }
+}

@@ -1,0 +1,150 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:13
+msgid "What should happen with your automatically translated content?"
+msgstr "您希望如何处理自动翻译的内容？"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:30
+msgid "Wait for review"
+msgstr "等待审核"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:31
+msgid "You check and approve translations before publishing."
+msgstr "您在发布前检查和批准翻译。"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:32
+msgid "Your translators check and approve translations before publishing."
+msgstr "您的翻译人员在发布前检查和批准翻译。"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:36
+msgid "Publish and mark for review"
+msgstr "发布并标记为审核"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:37
+msgid ""
+"WPML publishes translations immediately but flags them for you to check at "
+"your convenience."
+msgstr "WPML 会立即发布翻译，但会为您标记以便在方便时检查。"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:38
+msgid ""
+"WPML publishes translations immediately but flags them for your translators "
+"to check at their convenience."
+msgstr "WPML 会立即发布翻译，但会为您的翻译人员标记以便他们在方便时检查。"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:42
+msgid "Publish without review"
+msgstr "发布无需审核"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:44
+msgid ""
+"The system publishes translations straight away, skipping the review "
+"process."
+msgstr "系统会直接发布翻译，跳过审核过程。"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:22
+msgid "Automatic translation"
+msgstr "自动翻译"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:28
+msgid "What should happen with your automatically translated content"
+msgstr "您的自动翻译内容应该如何处理"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:54
+msgid "Save settings"
+msgstr "保存设置"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:13
+msgid "Translate drafts as I save them (consumes a bit more translation credits)."
+msgstr "在我保存草稿时翻译它们（会消耗更多翻译额度）。"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:26
+msgid "Do you want to translate drafts automatically?"
+msgstr "您想要自动翻译草稿吗？"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:42
+msgid ""
+"This feature is only available when you enable \"Translate Everything "
+"Automatically\" from the %sTranslation Dashboard%s."
+msgstr "此功能仅在您从%s翻译仪表板%s启用 “自动翻译所有内容” 时可用。"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:9
+msgid "Don't translate drafts. Only translate when I publish content."
+msgstr "不翻译草稿。仅在我发布内容时翻译。"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:116
+msgid "%d credits/word"
+msgstr "%d积分/字"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:15
+msgid "Informal"
+msgstr "非正式"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:16
+msgid "Automatic"
+msgstr "自动"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:17
+msgid "Formal"
+msgstr "正式"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:45
+msgid "Which translation engines do you want to use?"
+msgstr "您想使用哪些翻译引擎？"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:46
+msgid ""
+"Automatic translation engines differ in translation style and supported "
+"language pairs.\n"
+"If your preferred translation engine does not support a language pair that "
+"you want to use, we fall back to your next preferred engine that does "
+"support it.\n"
+msgstr "自动翻译引擎在翻译风格和支持的语言对方面有所不同。
+如果您首选的翻译引擎不支持您想使用的语言对，我们会回退到您下一个支持该语言对的首选引擎。\n"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:48
+msgid "Drag & drop to sort from the most to the least preferred engine."
+msgstr "拖放以从最喜欢到最不喜欢的引擎排序。"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:51
+msgid "Choose the tone of your automatic translations."
+msgstr "选择您的自动翻译的语气。"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:57
+msgid "Read more"
+msgstr "阅读更多"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:73
+msgid "Learn more"
+msgstr "了解更多"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:92
+msgid "On"
+msgstr "开启"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:93
+msgid "Off"
+msgstr "关闭"
+
+#: src/js/translation-method/store.js:120
+msgid "Could not load translation engines"
+msgstr "无法加载翻译引擎"
+
+#: src/js/translation-method/store.js:140
+msgid "Could not update engine"
+msgstr "无法更新引擎"
+
+#: src/js/translation-method/store.js:168
+msgid "Could not save review mode"
+msgstr "无法保存审核模式"
+
+#: src/js/translation-method/store.js:196
+msgid "Could not save translate everything drafts"
+msgstr "无法保存翻译所有内容的草稿"
+
+#: src/js/translation-method/store.js:97
+msgid "Settings saved successfully"
+msgstr "设置保存成功"

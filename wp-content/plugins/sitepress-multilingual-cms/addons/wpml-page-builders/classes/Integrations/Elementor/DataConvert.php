@@ -6,19 +6,26 @@ class DataConvert {
 
 	/**
 	 * @param array $data
+	 * @param bool  $escape
 	 *
 	 * @return string
 	 */
-	public static function serialize( array $data ) {
-		return wp_slash( wp_json_encode( $data ) );
+	public static function serialize( array $data, $escape = true ) {
+		$data = wp_json_encode( $data );
+		if ( $escape ) {
+			$data = wp_slash( $data );
+		}
+
+		return $data;
 	}
 
 	/**
 	 * @param array|string $data
+	 * @param bool         $associative
 	 *
 	 * @return array
 	 */
-	public static function unserialize( $data ) {
+	public static function unserialize( $data, $associative = true ) {
 		if ( self::isElementorArray( $data ) ) {
 			return $data;
 		}
@@ -29,17 +36,18 @@ class DataConvert {
 			return $value;
 		}
 
-		return self::unserializeString( $value );
+		return self::unserializeString( $value, $associative );
 	}
 
 	/**
 	 * @param string $string
+	 * @param bool   $associative
 	 *
 	 * @return array
 	 */
-	private static function unserializeString( $string ) {
+	private static function unserializeString( $string, $associative ) {
 		// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize
-		return is_serialized( $string ) ? unserialize( $string ) : json_decode( $string, true );
+		return is_serialized( $string ) ? unserialize( $string ) : json_decode( $string, $associative );
 	}
 
 	/**

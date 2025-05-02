@@ -80,7 +80,6 @@ class WPML_PB_String_Translation_By_Strategy extends WPML_PB_String_Translation 
 		$result = $this->wpdb->get_row( $sql );
 
 		if ( $result ) {
-			// @phpstan-ignore-next-line
 			return array( $result->string_package_id, $result->id, $result->language );
 		} else {
 			return array( null, null, null );

@@ -1,0 +1,172 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Could not fetch engines data": [
+            "Kon enginegegevens niet ophalen"
+         ],
+         "Could not save settings": [
+            "Kon instellingen niet opslaan"
+         ],
+         "Automatic translation": [
+            "Automatische vertaling"
+         ],
+         "Saving...": [
+            "Opslaan..."
+         ],
+         "Save settings": [
+            "Instellingen opslaan"
+         ],
+         "Settings saved": [
+            "Instellingen opgeslagen"
+         ],
+         "Some error occurred": [
+            "Er is een fout opgetreden"
+         ],
+         "Loading...": [
+            "Laden..."
+         ],
+         "Failed to load engines": [
+            "Kon engines niet laden"
+         ],
+         "Drag your default engine to the top and order the rest by priority.": [
+            "Sleep je standaard vertaalmotor naar boven en zet de rest op volgorde van prioriteit."
+         ],
+         "Which translation engines do you want to use?": [
+            "Welke vertaalmachines wilt u gebruiken?"
+         ],
+         "Automatic translation engines differ in translation style and supported language pairs. If your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it.": [
+            "Automatische vertaalmotoren verschillen in vertaalstijl en ondersteunde talenparen. Als je favoriete vertaalmotor een talenpaar niet ondersteunt dat je wilt gebruiken, vallen we terug op je volgende favoriete motor die het wel ondersteunt."
+         ],
+         "WPML AI (beta) automatically detects the formality of your content and translates with the same formality.": [
+            "WPML AI (bèta) detecteert automatisch de formaliteit van uw inhoud en vertaalt met dezelfde formaliteit."
+         ],
+         "Auto-formality": [
+            "Auto-formaliteit"
+         ],
+         "Choose the tone of automatic translations for %s": [
+            "Kies de toon van automatische vertalingen voor %s"
+         ],
+         "Your site doesn't use languages that offer formality settings.": [
+            "Uw site gebruikt geen talen die formaliteitsinstellingen aanbieden."
+         ],
+         "Edit formality": [
+            "Formaliteit bewerken"
+         ],
+         "%d credits per word": [
+            "%d credits per woord"
+         ],
+         "Backup %d": [
+            "Back-up %d"
+         ],
+         "Default": [
+            "Standaard"
+         ],
+         "ON": [
+            "AAN"
+         ],
+         "OFF": [
+            "UIT"
+         ],
+         "Documentation": [
+            "Documentatie"
+         ],
+         "DeepL's formality and how it helps get good translations": [
+            "DeepL's formaliteit en hoe het helpt bij het krijgen van goede vertalingen"
+         ],
+         "Edit button": [
+            "Bewerk knop"
+         ],
+         "Examples for %s": [
+            "Voorbeelden voor %s"
+         ],
+         "For example:": [
+            "Bijvoorbeeld:"
+         ],
+         "Formality settings for %s": [
+            "Formaliteitsinstellingen voor %s"
+         ],
+         "Formality level for %s": [
+            "Formaliteitsniveau voor %s"
+         ],
+         "Set formality for %s": [
+            "Stel formaliteit in voor %s"
+         ],
+         "%d of your target languages can be translated using either a formal or informal tone.\n The tone which gives the best translation for each language is set by default.": [
+            "%d van uw doeltalen kunnen worden vertaald met een formele of informele toon.\n De toon die de beste vertaling voor elke taal geeft, is standaard ingesteld."
+         ],
+         "%s doesn't yet support formality options for %s.": [
+            "%s ondersteunt nog geen formaliteitsopties voor %s."
+         ],
+         "Cancel": [
+            "Annuleren"
+         ],
+         "Update": [
+            "Bijwerken"
+         ],
+         "Formal": [
+            "Formeel"
+         ],
+         "Informal": [
+            "Informeel"
+         ],
+         "Don't translate drafts. Only translate when I publish content.": [
+            "Vertaal geen concepten. Vertaal alleen als ik content publiceer."
+         ],
+         "Translate drafts as I save them (consumes a bit more translation credits).": [
+            "Vertaal concepten zodra ik ze opsla (kost iets meer vertaalcredits)."
+         ],
+         "Do you want to translate drafts automatically?": [
+            "Wilt u concepten automatisch laten vertalen?"
+         ],
+         "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s.": [
+            "Deze functie is alleen beschikbaar als je “Alles Automatisch Vertalen” aanzet in het %sVertaaldashboard%s."
+         ],
+         "Close modal": [
+            "Sluit modal"
+         ],
+         "What would you like to do after WPML finishes translating your content automatically?": [
+            "Wat wilt u doen nadat WPML klaar is met het automatisch vertalen van uw inhoud?"
+         ],
+         "Wait for review": [
+            "Wachten op beoordeling"
+         ],
+         "Recommended with DeepL, Google and Microsoft": [
+            "Aanbevolen met DeepL, Google en Microsoft"
+         ],
+         "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process.": [
+            "DeepL, Google en Microsoft leveren geweldige vertalingen, maar we raden aan om ze door een mens te laten checken om zeker te weten dat ze kloppen. WPML AI levert Beter Dan Menselijke Vertalingen die de context snappen, zodat je met een gerust hart het reviewproces kunt overslaan."
+         ],
+         "WPML keeps translations unpublished, so you can review them first.": [
+            "WPML houdt vertalingen ongepubliceerd, zodat u ze eerst kunt beoordelen."
+         ],
+         "Your translators review and approve translations before publishing.": [
+            "Uw vertalers beoordelen en keuren vertalingen goed voordat ze worden gepubliceerd."
+         ],
+         "Publish and mark for review": [
+            "Publiceren en markeren voor beoordeling"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "WPML publiceert vertalingen onmiddellijk, maar markeert ze zodat u ze naar wens kunt controleren."
+         ],
+         "WPML publishes translations immediately but flags them for translators to review later.": [
+            "WPML publiceert vertalingen onmiddellijk, maar markeert ze zodat vertalers ze later kunnen beoordelen."
+         ],
+         "Publish without review": [
+            "Publiceren zonder beoordeling"
+         ],
+         "Recommended with WPML AI": [
+            "Aanbevolen met WPML AI"
+         ],
+         "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy.": [
+            "WPML AI biedt Betere Dan Menselijke Vertalingen die zelden verbeteringen nodig hebben, zodat u het beoordelingsproces met vertrouwen kunt overslaan. Voor andere vertaalmachines wordt een menselijke beoordeling aanbevolen om de nauwkeurigheid te bevestigen."
+         ],
+         "WPML publishes translations immediately, skipping the review process.": [
+            "WPML publiceert vertalingen onmiddellijk, waarbij het beoordelingsproces wordt overgeslagen."
+         ]
+      }
+   }
+}

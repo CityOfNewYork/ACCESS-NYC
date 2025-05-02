@@ -27,7 +27,7 @@
             "Inställningar"
          ],
          "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
-            "Det är för närvarande inte möjligt att ansluta en översättningstjänst när WPML är inställt på att översätta webbplatsens innehåll automatiskt. Om du vill använda en översättningstjänst ändrar du översättningsläget på sidan <LinkToSettingsPage />."
+            "Det är för närvarande inte möjligt att ansluta en översättningstjänst när WPML är inställt på att översätta din webbplats innehåll automatiskt. För att använda en översättningstjänst, vänligen ändra ditt översättningsläge på sidan <LinkToSettingsPage />."
          ],
          "Documentation": [
             "Dokumentation"
@@ -42,7 +42,7 @@
             "Beskrivning"
          ],
          "Ranking": [
-            "Placering"
+            "Rankning"
          ]
       }
    }

@@ -14,7 +14,7 @@ class Hooks implements \IWPML_Frontend_Action, \IWPML_DIC_Action {
 				'wpml-ajax-navigation',
 				ICL_PLUGIN_URL . '/dist/js/ajaxNavigation/app.js',
 				[],
-				ICL_SITEPRESS_VERSION
+				ICL_SITEPRESS_SCRIPT_VERSION
 			);
 		}
 	}

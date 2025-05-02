@@ -1,0 +1,34 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "How Browser Language Redirect Affects Google Indexing": [
+            "การเปลี่ยนเส้นทางภาษาเบราว์เซอร์ส่งผลต่อการจัดทำดัชนีของ Google อย่างไร"
+         ],
+         "Documentation": [
+            "เอกสาร"
+         ],
+         "Browser redirect affects Google indexing and search results": [
+            "การเปลี่ยนเส้นทางเบราว์เซอร์ส่งผลต่อการจัดทำดัชนีและผลการค้นหาของ Google"
+         ],
+         "Got it, activate anyway": [
+            "เข้าใจแล้ว เปิดใช้งานได้เลย"
+         ],
+         "Cancel": [
+            "ยกเลิก"
+         ],
+         "When you redirect visitors based on their language, you also redirect Google. Google wants to see your site exactly like visitors see it, including any redirects that you apply.": [
+            "การเปลี่ยนเส้นทางภาษามีผลต่อ Google เช่นกัน"
+         ],
+         "It is OK to redirect visitors based on their language, but you need to realize that this feature affects SEO.": [
+            "การเปลี่ยนเส้นทางภาษามีผลต่อ SEO"
+         ],
+         "Before proceeding, we recommend that you read these two pages:": [
+            "อ่านสองหน้านี้ก่อน:"
+         ]
+      }
+   }
+}

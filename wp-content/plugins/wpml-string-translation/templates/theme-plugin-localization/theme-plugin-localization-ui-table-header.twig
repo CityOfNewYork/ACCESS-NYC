@@ -1,0 +1,20 @@
+<thead
+    {% for field, data in nonces %}
+        data-{{ field }}-action="{{ data.action }}" data-{{ field }}-nonce="{{ data.nonce }}"
+    {% endfor %}
+    {% for field, data in endpoints %}
+        data-{{ field }}-endpoint="{{ data.endpoint }}" data-{{ field }}-nonce="{{ data.nonce }}"
+    {% endfor %}
+>
+    <tr class="table-header">
+        <th class="checkbox-column">
+            <input class="wpml-checkbox-native" type="checkbox">
+        </th>
+        <th class="name-column-heading">{{ name }}</th>
+        <th>{{ status }}</th>
+        <th>{{ textdomain }}</th>
+        <th class="action-column-heading">{{ action }}</th>
+        <th class="wpml-col-center"><span class="otgs-ico-translated" title="{{ completed_title }}"></span></th>
+        <th class="wpml-col-center"><span class="otgs-ico-needs-update" title="{{ needs_update_title }}"></span></th>
+    </tr>
+</thead>

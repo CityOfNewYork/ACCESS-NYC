@@ -1,0 +1,763 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\\nContent-Transfer-Encoding: 8bit"
+"\\nProject-Id-Version:WPML_EXPORT\\nPOT-Creation-Date: \\nPO-Revision-Date: "
+"\\nLast-Translator: \\nLanguage-Team: \\nLanguage:en\\nMIME-Version: 1.0\\n"
+
+msgid " Your current site key (%s) does not match the selected product (%s)."
+msgstr "當前網站金鑰（%s）與選定產品（%s）不一致。"
+
+msgid " to use auto-updates"
+msgstr "以使用自動更新"
+
+msgid ""
+"%1$s needs to connect to its server to check for new releases and security "
+"updates. Something in the network or security settings is preventing this. "
+"Please allow outgoing communication to %2$s to remove this notice."
+msgstr ""
+"%1$s需要連線到伺服器才能檢查新版本和安全更新。網路或安全設定中的某些項正在阻止該連線。請允許對外通信至"
+"%2$s才能刪除此通知。"
+
+msgid "%1$s plugin cannot connect to %2$s"
+msgstr "%1$s外掛程式無法連線到%2$s"
+
+msgid "%1$sGet a key for this site%2$s"
+msgstr "%1$s獲取此網站的金鑰%2$s"
+
+msgid ""
+"%s cannot access %s to register. Try again to see if it's a temporary "
+"problem. If the problem continues, make sure that this site has access to "
+"the Internet."
+msgstr ""
+"%s無法存取"
+"%s以進行註冊。請再試一次，看看這是不是暫時的問題。如果問題仍存在，請確保此網站可以存取網際網路。"
+
+msgid ""
+"%s cannot access %s to register. Try again to see if it's a temporary "
+"problem. If the problem continues, make sure that this site has access to "
+"the Internet. You can still use the plugin without registration, but you "
+"will not receive automated updates."
+msgstr ""
+"%s無法存取"
+"%s進行註冊。再試一次，看看是否是暫時性的問題。如果問題仍然存在，請確保此網站可連線到網際網路。無需註冊您仍然可以使用外掛程式，但您將不會收到自動更新。"
+
+msgid ""
+"%s cannot update because your site's registration is not valid. Please "
+"%sregister %s%s again for this site first."
+msgstr ""
+"%s不能更新，因為您的網站註冊無效。請先為這個網站再次"
+"%s註冊%s%s。"
+
+msgid ""
+"%s is registered on this site. You will receive automatic updates until %s"
+msgstr "%s已在本網站上註冊。您會收到自動更新，直到%s"
+
+msgid ""
+"%s is registered on this site. Your Lifetime account gives you updates for "
+"life."
+msgstr "%s已在本網站上註冊。您的終身帳戶為您提供終身的更新。"
+
+msgid ""
+"%s plugin must be registered in order to receive stability and security "
+"updates. Without these updates, the plugin may become incompatible with new "
+"versions of WordPress, which include security patches."
+msgstr ""
+"%s外掛程式必須註冊才能接收穩定性和安全更新。如果沒有這些更新，外掛程式可能會與包括安全補丁的新版"
+"WordPress不相容。"
+
+msgid "%s support on wpml.org"
+msgstr "wpml.org上的%s支援"
+
+msgid "%s technical support"
+msgstr "%s技術支援"
+
+msgid ""
+"%s, responsible for receiving automated updates for WPML and Toolset, "
+"requires the following PHP component(s) in order to function:"
+msgstr ""
+"%s（負責接收WPML和工具集的自動更新）需要以下"
+"PHP組件才能運行："
+
+msgid "%sRenew here%s."
+msgstr "%s這裡更新%s。"
+
+msgid "(embedded)"
+msgstr "（嵌入）"
+
+msgid "Activate"
+msgstr "激活"
+
+msgid "Activate after download"
+msgstr "下載後激活"
+
+msgid "Activating %s"
+msgstr "正在激活%s"
+
+msgid "Add"
+msgstr "新增"
+
+msgid "All Installer Instances"
+msgstr "全部安裝程式執行個體"
+
+msgid "Already bought %s?"
+msgstr "已經購買了%s？"
+
+msgid "Already purchased %s?"
+msgstr "已經購買了%s？"
+
+msgid "Are you sure you want to remove this site key?"
+msgstr "您確定要移除此網站金鑰？"
+
+msgid "Are you sure you want to unregister?"
+msgstr "您確定要取消註冊？"
+
+msgid "Available"
+msgstr "可用"
+
+msgid "Beta"
+msgstr "試用版"
+
+msgid "Bought again?"
+msgstr "再次購買？"
+
+msgid "Buy %s"
+msgstr "購買%s"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Check"
+msgstr "檢查"
+
+msgid "Check Now"
+msgstr "馬上檢查"
+
+msgid "Check for updates"
+msgstr "檢查更新"
+
+msgid "Check my order status"
+msgstr "檢查我的訂單狀態"
+
+msgid "Click to see individual components options."
+msgstr "按一下檢視單個元件選項。"
+
+msgid "Commercial"
+msgstr "商用"
+
+msgid "Component"
+msgstr "元件"
+
+msgid "Connection failed! Please refresh the page and try again. (%s)"
+msgstr "連線失敗!請重新整理頁面後重試。（%s）"
+
+msgid "Current"
+msgstr "當前"
+
+msgid "Delegated"
+msgstr "已委派"
+
+msgid "Development"
+msgstr "開發"
+
+msgid "Dismiss"
+msgstr "解雇"
+
+msgid "Do you have an account on %s?"
+msgstr "您在%s上有帳戶嗎?"
+
+msgid "Don't send this information and skip compatibility alerts"
+msgstr "請勿傳送此資訊並跳過相容性通知"
+
+msgid "Download"
+msgstr "下載"
+
+msgid ""
+"Download failed!\\n\\nClick OK to revalidate your subscription or CANCEL to "
+"try again."
+msgstr ""
+"下載失敗!\\n"
+"\\n點選「好」可使訂閱重新生效或點選「取消」重試。"
+
+msgid "Download failed!\\n\\nPlease refresh the page and try again."
+msgstr "下載失敗!\\n\\n請重新整理頁面後重試。"
+
+msgid "Downloading"
+msgstr "正在下載"
+
+msgid ""
+"Downloading is not possible because WordPress cannot write into the plugins "
+"folder. %sHow to fix%s."
+msgstr ""
+"因為WordPress不能寫入到外掛程式資料夾，無法下載。"
+"%s如何修復%s。"
+
+msgid ""
+"Downloading is not possible. WordPress cannot create required folders "
+"because of the\\n                                        256 characters "
+"limitation of the current Windows environment."
+msgstr ""
+"無法下載。由於當前Windows環境的256個字元限制，"
+"\\nWordPress無法建立所需的資料夾。"
+
+msgid "Empty site key!"
+msgstr "網站金鑰為空！"
+
+msgid "Enter site key"
+msgstr "輸入網站金鑰"
+
+msgid "Enter the site key for %1$s."
+msgstr "輸入%1$s的網站金鑰。"
+
+msgid ""
+"Enter the site key, from your %1$s account, to receive automatic updates for "
+"%2$s."
+msgstr ""
+"從您的%1$s帳戶輸入網站金鑰，這樣才能接收"
+"%2$s的自動更新。"
+
+msgid "Extend Subscription"
+msgstr "延長訂閱"
+
+msgid "Extend your subscription"
+msgstr "延長訂閱"
+
+msgid "For retrieving Installer debug information use the %s page."
+msgstr "使用%s頁面可檢索安裝程式調試資訊。"
+
+msgid "Get a key for this site"
+msgstr "獲取此網站的金鑰"
+
+msgid "Got renewal already?"
+msgstr "已經續訂了？"
+
+msgid "Great! You just need to extend your subscription."
+msgstr "太好了！您只需要延長您的訂閱。"
+
+msgid "High priority"
+msgstr "高優先順序"
+
+msgid "I do not remember"
+msgstr "我不記得了"
+
+msgid "I moved the site to this new URL"
+msgstr "我已將此網站移到這個新URL"
+
+msgid "Ignore and don't ask me again"
+msgstr "忽略，別再問我"
+
+msgid ""
+"In order to see the products information, please run the %smanual updates "
+"check%s to initialize the products list or (temporarily) remove the above "
+"code."
+msgstr ""
+"為了檢視產品資訊，請執行%s手動檢查更新"
+"%s，以初始化產品清單或（暫時）去掉以上程式碼。"
+
+msgid "Incorrect setup"
+msgstr "設定不正確"
+
+msgid "Individual components"
+msgstr "單個元件"
+
+msgid ""
+"Information about new versions is invalid. It may be a temporary "
+"communication problem, please check for updates again."
+msgstr "有關新版本的資訊無效。這可能是暫時的通訊問題，請再次檢查更新。"
+
+msgid ""
+"Information about versions of %s are invalid. It may be a temporary "
+"communication problem, please check for updates again."
+msgstr ""
+"有關"
+"%s版本的資訊無效。這可能是暫時的通訊問題，請再次檢查更新。"
+
+msgid "Install and activate"
+msgstr "安裝並啟用"
+
+msgid "Installed"
+msgstr "已安裝"
+
+msgid "Installer"
+msgstr "安裝程式"
+
+msgid "Installer Log"
+msgstr "安裝程式記錄"
+
+msgid "Installer Support"
+msgstr "安裝程式支援"
+
+msgid "Installer System Status"
+msgstr "安裝程式系統狀態"
+
+msgid ""
+"Installer cannot contact our updates server to get information about the "
+"available products and check for new versions. If you are seeing this "
+"message for the first time, you can ignore it, as it may be a temporary "
+"communication problem. If the problem persists and your WordPress admin is "
+"slowing down, you can disable automated version checks. Add the following "
+"line to your wp-config.php file:"
+msgstr ""
+"安裝程式無法與我們的更新伺服器聯絡以獲得有關可用產品的資訊以及檢查是否有新的版本。如果您是第一次看到這條訊息，可以略過它，因為這可能是一個暫時的通信問題。如果問題一直存在，且您的"
+"WordPress管理頁面變慢，可以禁用自動版本檢查。新增一下一行到"
+"wp-config.php檔案："
+
+msgid ""
+"Installer cannot display the products information because the automatic "
+"updating for %s was explicitly disabled with the configuration below "
+"(usually in wp-config.php):"
+msgstr ""
+"安裝程式無法顯示產品資訊，因為以下设定明確禁用"
+"%s的自動更新（通常在wp-config.php中）："
+
+msgid "Installing %s"
+msgstr "正在安裝%s"
+
+msgid "Invalid product"
+msgstr "無效產品"
+
+msgid "Invalid request!"
+msgstr "無效要求!"
+
+msgid "Invalid site key for the current site."
+msgstr "當前網站的網站金鑰無效。"
+
+msgid ""
+"Invalid site key for the current site. If the error persists, try to un-"
+"register first and then register again with the same site key."
+msgstr "當前網站的網站金鑰無效。若該錯誤持續出現，請先設法取消註冊，然後用同樣的網站金鑰再次註冊。"
+
+msgid "Is this still a development site?"
+msgstr "這仍是一個開發網站嗎？"
+
+msgid ""
+"It looks like this site is a copy of a different site, or it has moved to a "
+"different URL."
+msgstr ""
+"看起來此網站是其他網站的副本，或已移動到其他URL。"
+
+msgid ""
+"It means you will not receive updates. This can lead to stability and even "
+"security issues."
+msgstr "這意味著您將不會收到更新。這可能導致穩定性甚至安全問題。"
+
+msgid "Learn more"
+msgstr "瞭解詳情"
+
+msgid "Learn more: %s"
+msgstr "瞭解詳情：%s"
+
+msgid "Log is empty"
+msgstr "記錄為空"
+
+msgid "More details"
+msgstr "更多詳情"
+
+msgid "Need help?"
+msgstr "需要幫助?"
+
+msgid "Next"
+msgstr "下一步"
+
+msgid "No"
+msgstr "否"
+
+msgid "No repositories defined."
+msgstr "未定義庫。"
+
+msgid "No worries. We can check that for you."
+msgstr "別擔心。我們可以幫您查一下。"
+
+msgid "OK. You need to set up renewal for %s."
+msgstr "好的。您需要為%s設定續訂。"
+
+msgid "OTGS Installer"
+msgstr "OTGS Installer"
+
+msgid "Operation complete!"
+msgstr "操作完成！"
+
+msgid "Path"
+msgstr "路徑"
+
+msgid "Please install %s to allow translating %s."
+msgstr "請安裝%s才能允許翻譯%s。"
+
+msgid "Please note that the site key is case sensitive."
+msgstr "請注意，網站金鑰大小寫視為相異。"
+
+msgid ""
+"Please update the URL of currently used site key %1$sin your account%2$s."
+msgstr "請更新%1$s您的帳戶中%2$s當前使用的網站金鑰的URL。"
+
+msgid "Please update your site key's URL %1$sin your account%2$s."
+msgstr "請%1$s在您的帳戶中%2$s更新網站金鑰的URL。"
+
+msgid ""
+"Please update your site key's URL and set it as a production site %1$sin "
+"your account%2$s."
+msgstr ""
+"請更新網站金鑰的URL，並%1$s在您的帳戶中"
+"%2$s將其設定為生產網站。"
+
+msgid "Plugin"
+msgstr "外掛"
+
+msgid "Privacy and data usage policy"
+msgstr "隱私和資料使用政策"
+
+msgid "Production"
+msgstr "製作"
+
+msgid "Register"
+msgstr "註冊"
+
+msgid "Register %s"
+msgstr "註冊%s"
+
+msgid "Registered"
+msgstr "已註冊"
+
+msgid "Release notes"
+msgstr "版本附注"
+
+msgid "Released"
+msgstr "已發佈"
+
+msgid "Remember my preference."
+msgstr "記住我的偏好。"
+
+msgid "Remember to remove %s from this website"
+msgstr "請記得從此網站中移除%s"
+
+msgid "Remember to remove %s from this website."
+msgstr "請記得從該網站移除%s。"
+
+msgid "Remember to remove %s from this website. %sCheck my order status%s"
+msgstr "請記得從該網站移除%s。%s檢查我的訂單狀態%s"
+
+msgid "Remove current site key (%s)"
+msgstr "移除當前網站金鑰（%s）"
+
+msgid "Renew %s"
+msgstr "更新%s"
+
+msgid "Report to"
+msgstr "報告至"
+
+msgid "Reporting to"
+msgstr "正在報告至"
+
+msgid "Request Arguments"
+msgstr "要求引數"
+
+msgid "Request URL"
+msgstr "要求URL"
+
+msgid "Required PHP Libraries"
+msgstr "必要的PHP庫"
+
+msgid "Response"
+msgstr "回應"
+
+msgid "Return to the plugins page"
+msgstr "返回外掛程式頁面"
+
+msgid "Return to the updates page"
+msgstr "返回到更新頁面"
+
+msgid "Save"
+msgstr "儲存"
+
+msgid "See the %1$s and let us know in %2$s."
+msgstr "請檢視%1$s並在%2$s中告知我們。"
+
+msgid ""
+"Send theme and plugins information, in order to get faster support and "
+"compatibility alerts"
+msgstr "傳送主題和外掛程式資訊，以獲得更快的支援和相容性通知"
+
+msgid "Set Up Renewal For %s"
+msgstr "為%s設定續訂"
+
+msgid "Site Moved or Copied - %s require your action"
+msgstr "網站已移動或複製 - %s需要您的操作"
+
+msgid "Site key"
+msgstr "網站金鑰"
+
+msgid ""
+"Site-key was set by %s, most likely in wp-config.php. Please remove the "
+"constant before attempting to register."
+msgstr ""
+"網站鍵由%s設定，很可能在wp-config."
+"php中。請在嘗試註冊之前移除該常數。"
+
+msgid ""
+"Site-key was set by %s, most likely in wp-config.php. Please remove the "
+"constant before attempting to unregister."
+msgstr ""
+"網站鍵由%s設定，很可能在wp-config."
+"php中。請在嘗試取消註冊之前移除該常數。"
+
+msgid ""
+"Something went wrong and we could not install all updates from the %s "
+"channel. Click here to %stry again%s. If the errors persist, please switch "
+"back to the Production channel and contact the %s%s support%s."
+msgstr ""
+"出錯了，我們無法安裝來自"
+"%s頻道的所有更新。按一下這裡可%s重試"
+"%s。若錯誤仍存在，請轉回製作頻道後聯絡%s%s支援%s。"
+
+msgid "Sorry, you are not allowed to manage Installer for this site."
+msgstr "很抱歉，您不能管理此網站的安裝程式。"
+
+msgid "Subscription is expired."
+msgstr "訂閱過期。"
+
+msgid "Switch"
+msgstr "切換"
+
+msgid ""
+"The plugins will update to the most recent version in the channel that you "
+"selected."
+msgstr "該外掛程式將更新至你選定頻道中的最新版本。"
+
+msgid ""
+"There was a problem switching to the %s channel. You can %sretry%s. If the "
+"problem continues, please %sdownload %s%s and install again manually"
+msgstr ""
+"切換到%s頻道時出現問題。你可以%s重試"
+"%s。若問題繼續存在，請%s下載%s%s後手動重新安裝"
+
+msgid "This is a copy of my original site"
+msgstr "這是我原來網站的副本"
+
+msgid "This is a development / staging site"
+msgstr "這是一個開發/測試網站"
+
+msgid ""
+"This page lets you install plugins and update existing plugins. To remove "
+"any of these plugins, go to the %splugins%s page and if you have the "
+"permission to remove plugins you should be able to do this."
+msgstr ""
+"此頁面讓您可以安裝外掛程式並更新現有的外掛程式。要移除這些外掛程式中的任意一個，轉到"
+"%s外掛程式"
+"%s頁面，如果允許您移除外掛程式，您應該能夠做到這一點。"
+
+msgid "This site is registered on %s as a development site."
+msgstr "此網站已在%s上註冊為開發網站。"
+
+msgid "This site is registered on Toolset.com as a development site."
+msgstr "此網站在Toolset.com上註冊為開發網站。"
+
+msgid "This site is registered on WPML.org as a development site."
+msgstr "此網站在WPML.org上註冊為開發網站。"
+
+msgid ""
+"This site is using %s plugin, which is not paid for. After receiving a "
+"refund, you should remove this plugin from your sites. Using unregistered "
+"plugins means that you are not receiving stability and security updates and "
+"will ultimately lead to problems running the site."
+msgstr ""
+"此網站正在使用未付費的"
+"%s外掛程式。在收到退款後，您應該從您的網站上移除此外掛程式。使用未註冊的外掛程式意味著您不會收到穩定和安全更新，最終將導致運行網站出現問題。"
+
+msgid ""
+"This site is using the %s plugin, which has not been paid for. After "
+"receiving a refund, you should remove this plugin from your sites. Using "
+"unregistered plugins means you are not receiving stability and security "
+"updates and will ultimately lead to problems running the site."
+msgstr ""
+"此網站正在使用尚未付費的"
+"%s外掛程式。在收到退款後，您應從您的網站上移除此外掛程式。使用未註冊的外掛程式意味著您不會收到穩定性和安全更新，最終將導致網站運行出現問題。"
+
+msgid "Time"
+msgstr "時間"
+
+msgid "To install and update %s, please %sregister%s %s for this site."
+msgstr "要安裝和更新%s，請為此網站%s註冊%s %s。"
+
+msgid ""
+"To select different update channels (beta, development) you must update your "
+"existing products to their most recent stable versions."
+msgstr "選擇不同更新頻道（測試版，開發）必須更新你的現有產品至最新穩定版本。"
+
+msgid "Toolset API server"
+msgstr "工具集API伺服器"
+
+msgid "Unknown repository"
+msgstr "未知庫"
+
+msgid "Unregister %s from this site"
+msgstr "從此網站取消註冊%s"
+
+msgid "Update Plugin"
+msgstr "更新外掛程式"
+
+msgid "Updates channel:"
+msgstr "更新頻道："
+
+msgid "Updating %s"
+msgstr "正在更新%s"
+
+msgid ""
+"Updating the plugins on your site. Please don't close this page or navigate "
+"away."
+msgstr "正在更新你的網站上的外掛程式。請不要關閉該頁面或轉到其它頁面。"
+
+msgid "Upgrade"
+msgstr "升級"
+
+msgid "Upgrade your account"
+msgstr "升級您的帳戶"
+
+msgid "Version"
+msgstr "版本"
+
+msgid "WPML API server"
+msgstr "WPML API伺服器"
+
+msgid ""
+"We were not able to copy some plugin files. This is usually due to issues "
+"with permissions for WordPress content or plugins folder."
+msgstr ""
+"我們無法複製一些外掛程式檔。這通常是由於"
+"WordPress內容或外掛程式資料夾的許可權問題。"
+
+msgid ""
+"When this site goes live, remember to %1$s from \"development\" to "
+"\"production\" to remove this message. %2$s"
+msgstr ""
+"當此網站上線時，請記住%1$s，將\"開發\"更改為\"生產"
+"\"以移除此訊息。%2$s"
+
+msgid "Yes"
+msgstr "是"
+
+msgid ""
+"You are using a potentially less stable channel for %s. If you didn't enable "
+"this on purpose, you should switch to the 'Production' channel."
+msgstr ""
+"你正在使用可能較不穩定的"
+"%s頻道。若你未特意啟用該項，你應切換到「製作」頻道。"
+
+msgid "You are using an expired %s account."
+msgstr "您使用的是過期的%s帳戶。"
+
+msgid "You are using an expired account of %s."
+msgstr "您使用的是過期的%s帳戶。"
+
+msgid "You are using an expired account of %s. %sExtend your subscription%s"
+msgstr "您使用的是過期的%s帳戶。%s請延長訂閱%s"
+
+msgid ""
+"You are using an invalid site key defined as the constant %s (most likely in "
+"wp-config.php).\\n                                                Please "
+"remove it or use the correct value in order to be able to register correctly."
+msgstr ""
+"您正在使用定義為常量%s的無效網站金鑰（很可能在wp-"
+"config.php中配置）。"
+"\\n請將其移除或使用正確的值以便能夠正確註冊。"
+
+msgid ""
+"You are using an unregistered version of %s and are not receiving "
+"compatibility and security updates"
+msgstr ""
+"您正在使用未註冊的%s版本，將不會收到相容性和安全更新"
+
+msgid ""
+"You are using an unregistered version of %s and are not receiving "
+"compatibility and security updates. %sRegister now%s"
+msgstr ""
+"您使用的是未註冊的%s版本，將不會收到相容和安全更新。"
+"%s立即註冊%s"
+
+msgid "You are using the complementary %1$s. For the %2$s, %3$s."
+msgstr "你正在使用免費贈送的%1$s。如需%2$s，請%3$s。"
+
+msgid ""
+"You do not have a %1$s account yet. You need to set up a renewal for %2$s."
+msgstr "您還沒有%1$s帳戶。您需要為%2$s設定續訂。"
+
+msgid "You have a %s account. You just need to extend your subscription."
+msgstr "您有一個%s帳戶。您只需要延長您的訂閱。"
+
+msgid ""
+"You have an old Types-free subscription, which doesn't provide automatic "
+"updates. %s"
+msgstr "您使用的是舊的無Types訂閱，它不提供自動更新。%s"
+
+msgid ""
+"You have an old Types-free subscription, which doesn't provide automatic "
+"updates. %sUpgrade your account%s"
+msgstr ""
+"您使用的是舊的無Types訂閱，它不提供自動更新。"
+"%s升級您的帳戶%s"
+
+msgid ""
+"You will have to renew your subscription in order to continue getting the "
+"updates and support."
+msgstr "您必須續訂以便繼續獲得更新和支援。"
+
+msgid "Your Email Address"
+msgstr "您的電子郵箱"
+
+msgid ""
+"Your site is using an expired %s account, which means you won't receive "
+"updates. This can lead to stability and security issues."
+msgstr ""
+"您的網站正在使用過期的"
+"%s帳戶，這意味著您將不會收到更新。這可能導致穩定性和安全問題。"
+
+msgid ""
+"Your subscription appears to no longer be valid. Please try to register "
+"again using a valid site key."
+msgstr "訂閱似乎不再有效。請嘗試使用有效的網站金鑰再次註冊。"
+
+msgid "Your subscription expires in %d day."
+msgstr "您的訂閱在%d天后到期。"
+
+msgid "Your subscription expires in %d days."
+msgstr "您的訂閱在%d天后到期。"
+
+msgid "activated"
+msgstr "已激活"
+
+msgid "activating"
+msgstr "正在激活"
+
+msgid "communication error details"
+msgstr "通信錯誤詳情"
+
+msgid "complete set of features"
+msgstr "整套功能"
+
+msgid "downloaded"
+msgstr "已下載"
+
+msgid "downloading..."
+msgstr "下載中..."
+
+msgid "failed!"
+msgstr "失敗！"
+
+msgid "installed"
+msgstr "已安裝"
+
+msgid "installing..."
+msgstr "安裝中..."
+
+msgid "update the site key"
+msgstr "更新此網站金鑰"
+
+msgid "updated"
+msgstr "已更新"
+
+msgid "updating..."
+msgstr "更新中..."
+
+msgid "upgrade to Toolset"
+msgstr "升級到工具集"
+
+msgid "which theme and plugins you are using."
+msgstr "你正在使用哪個主題和外掛程式。"

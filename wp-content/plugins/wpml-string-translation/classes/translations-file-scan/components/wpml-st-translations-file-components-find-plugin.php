@@ -10,12 +10,16 @@ class WPML_ST_Translations_File_Components_Find_Plugin implements WPML_ST_Transl
 	/** @var array */
 	private $plugin_ids;
 
+	/** @var string */
+	private $languages_plugin_dir;
+
 	/**
 	 * @param WPML_Debug_BackTrace $debug_backtrace
 	 */
 	public function __construct( WPML_Debug_BackTrace $debug_backtrace ) {
 		$this->debug_backtrace = $debug_backtrace;
 		$this->plugin_dir = realpath( WPML_PLUGINS_DIR );
+		$this->languages_plugin_dir = WP_LANG_DIR . '/plugins/';
 	}
 
 	public function find_id( $file ) {
@@ -30,6 +34,10 @@ class WPML_ST_Translations_File_Components_Find_Plugin implements WPML_ST_Transl
 	private function find_plugin_directory( $file ) {
 		if ( false !== strpos( $file, $this->plugin_dir ) ) {
 			return $this->extract_plugin_directory( $file );
+		}
+
+		if ( false !== strpos( $file, $this->languages_plugin_dir ) ) {
+			return $this->extract_plugin_directory_from_languages_directory( $file );
 		}
 
 		return $this->find_plugin_directory_in_backtrace();
@@ -66,6 +74,28 @@ class WPML_ST_Translations_File_Components_Find_Plugin implements WPML_ST_Transl
 		$dir = explode( DIRECTORY_SEPARATOR, $dir );
 
 		return trim( $dir[0], DIRECTORY_SEPARATOR );
+	}
+
+	/**
+	 * @param string $file_path
+	 *
+	 * Examples: $file_path = "/var/www/mysite/wp-content/languages/plugins/akismet-da_DK.mo".
+	 *           $file_path = "/var/www/mysite/wp-content/languages/plugins/akismet-ca.mo".
+	 *
+	 * @return string
+	 */
+	private function extract_plugin_directory_from_languages_directory( $file_path ) {
+		$parts     = explode( DIRECTORY_SEPARATOR, $file_path );
+		$file_name = current( explode( '.', end( $parts ) ) );
+
+		if ( false !== strpos( $file_name, '_' ) ) {
+			return substr( current( explode( '_', $file_name ) ), 0, -3 );
+		}
+
+		$parts = explode( '-', $file_name );
+		array_pop( $parts );
+
+		return implode( '-', $parts );
 	}
 
 	/**

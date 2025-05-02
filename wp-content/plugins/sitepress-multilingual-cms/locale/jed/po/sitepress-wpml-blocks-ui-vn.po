@@ -1,0 +1,244 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
+msgid "Advanced"
+msgstr "Nâng cao"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:25
+msgid "HTML anchor"
+msgstr "Điểm neo HTML"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
+msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
+msgstr "Thêm lối tắt đến khối này khi tải trang bằng cách sử dụng URL <q id=\"q-first-1\">#anchor</q>."
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
+msgid "Additional CSS class(es)"
+msgstr "Lớp CSS bổ sung"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
+msgid "Separate multiple classes with spaces."
+msgstr "Phân tách nhiều lớp bằng dấu cách."
+
+#: src/js/blocks/LanguageSwitcher/Components/Color/Control.js:49
+msgid "Color"
+msgstr "Màu sắc"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:346
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:42
+msgid "px"
+msgstr "px"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:347
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:46
+msgid "%"
+msgstr "%"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:358
+msgid "Dimensions"
+msgstr "Kích thước"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:365
+msgid "BLOCK"
+msgstr "KHỐI"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:371
+msgid "Block margin"
+msgstr "Lề khối"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:388
+msgid "Block padding"
+msgstr "Đệm khối"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:406
+msgid "LANGUAGE"
+msgstr "NGÔN NGỮ"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:412
+msgid "Language spacing"
+msgstr "Khoảng cách ngôn ngữ"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
+msgid "Language padding"
+msgstr "Đệm ngôn ngữ"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
+msgid "Display"
+msgstr "Hiển thị"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:41
+msgid "Show flag"
+msgstr "Hiển thị cờ"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:49
+msgid "Show language name"
+msgstr "Hiển thị tên ngôn ngữ"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:68
+msgid "Display language name in"
+msgstr "Hiển thị tên ngôn ngữ bằng"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:113
+msgid "Style"
+msgstr "Kiểu"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:55
+msgid "Flag settings"
+msgstr "Cài đặt cờ"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:59
+msgid "Width"
+msgstr "Chiều rộng"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:62
+msgid "Height"
+msgstr "Chiều cao"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:94
+msgid "Spacing"
+msgstr "Khoảng cách"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:119
+msgid "Allow wrapping to multiple lines"
+msgstr "Cho phép xuống dòng"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
+msgid "Open on click"
+msgstr "Mở khi nhấp chuột"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:145
+msgid "Show arrow"
+msgstr "Hiển thị mũi tên"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:60
+msgid "Layout"
+msgstr "Bố cục"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:72
+msgid "Justification"
+msgstr "Căn chỉnh"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:74
+msgid "Orientation"
+msgstr "Hướng"
+
+#: src/js/blocks/LanguageSwitcher/Components/Typography/Control.js:160
+msgid "Typography"
+msgstr "Kiểu chữ"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:116
+#: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:25
+msgid "Background"
+msgstr "Nền"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:121
+msgid "Language Text"
+msgstr "Văn bản ngôn ngữ"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:126
+msgid "Language Background"
+msgstr "Nền ngôn ngữ"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:131
+msgid "Current language text"
+msgstr "Văn bản ngôn ngữ hiện tại"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:136
+#: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:30
+msgid "Current language background"
+msgstr "Nền ngôn ngữ hiện tại"
+
+#: src/js/blocks/LanguageSwitcher/attributes/display.js:5
+msgid "Full name"
+msgstr "Tên đầy đủ"
+
+#: src/js/blocks/LanguageSwitcher/attributes/display.js:9
+msgid "Code"
+msgstr "Mã"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:24
+msgid "Justify items left"
+msgstr "Căn trái các mục"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:29
+msgid "Justify items center"
+msgstr "Căn giữa các mục"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:34
+msgid "Justify items right"
+msgstr "Căn phải các mục"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
+msgid "Justify items space between"
+msgstr "Căn đều các mục"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
+msgid "Horizontal"
+msgstr "Ngang"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:52
+msgid "Vertical"
+msgstr "Dọc"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:14
+msgid "Normal"
+msgstr "Bình thường"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:19
+msgid "Medium"
+msgstr "Trung bình"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:24
+msgid "Large"
+msgstr "Lớn"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:29
+msgid "X-Large"
+msgstr "Cực lớn"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:35
+msgid "Ab"
+msgstr "Ab"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:39
+msgid "AB"
+msgstr "AB"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:43
+msgid "ab"
+msgstr "ab"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:9
+msgid "Small"
+msgstr "Nhỏ"
+
+#: src/js/blocks/LanguageSwitcher/index.js:36
+msgid "Displays the WPML Language Switcher."
+msgstr "Hiển thị Bộ chuyển đổi ngôn ngữ WPML."
+
+#: src/js/blocks/LanguageSwitcher/index.js:42
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:47
+msgid "Language Switcher"
+msgstr "Bộ chuyển đổi ngôn ngữ"
+
+#: src/js/blocks/LanguageSwitcher/index.js:43
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:48
+msgid "displays the WPML Language Switcher"
+msgstr "hiển thị Bộ chuyển đổi ngôn ngữ WPML"
+
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:30
+msgid ""
+"Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
+"block</a>."
+msgstr "Hiển thị Bộ chuyển đổi ngôn ngữ WPML. <br/> Tìm hiểu <a>cách dịch khối này</a>."
+
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:38
+msgid "Navigation Language Switcher"
+msgstr "Bộ chuyển đổi ngôn ngữ điều hướng"
+
+#: src/js/blocks/Shared/Controls/PanelSettingsDropdown.js:64
+msgid "Reset all"
+msgstr "Đặt lại tất cả"

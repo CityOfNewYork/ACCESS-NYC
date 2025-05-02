@@ -20,7 +20,7 @@ class WPML_Compatibility_Gutenberg implements IWPML_Action {
 	}
 
 	public function load_textdomain_filter() {
-		if ( $this->php_functions->defined( 'WPML_ST_VERSION' )
+		if ( wpml_is_st_loaded()
 			&& $this->php_functions->function_exists( 'gutenberg_load_plugin_textdomain' )
 		) {
 			add_filter( 'override_load_textdomain', array( $this, 'unblock_gutenberg_domain' ), PHP_INT_MAX, 2 );

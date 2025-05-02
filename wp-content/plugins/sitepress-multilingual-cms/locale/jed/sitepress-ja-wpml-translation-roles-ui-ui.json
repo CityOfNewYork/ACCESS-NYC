@@ -117,7 +117,7 @@
             "言語が追加されました"
          ],
          "The value \"%s\" already exists": [
-            "\"%s\" 値は既に存在します"
+            "値「%s」は既に存在しています"
          ],
          "Add a new language": [
             "新しい言語を追加してください"
@@ -135,7 +135,7 @@
             "ここをクリック"
          ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
-            "間違ったフォーマット。小文字と \"-\"のみを含んでください。例: \"fr\" , \"pt-br\", \"zh-hans\""
+            "形式が正しくありません。小文字と「-」のみを含むことができます。例：「fr」、「pt-br」、「zh-hans」"
          ],
          "Language": [
             "言語"
@@ -159,7 +159,7 @@
             "初期設定ロケール"
          ],
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
-            "間違ったフォーマット。小文字と\"_\"のみを含んでください。例: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+            "形式が正しくありません。小文字と「_」のみを含むことができます。例：「de」、「de_DE」、「zh_Hant_TW」"
          ],
          "hreflang": [
             "hreflang"
@@ -219,10 +219,13 @@
             "アメリカユーザーの英語: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
-            "この言語のURLがエンコードされているか、ASCII 文字を使用するかを特定します (はっきりしない場合、\"No\"にしてください)。"
+            "この言語のURLがエンコードされているか、ASCll文字を使用しているかを決定します（不明な場合は、「いいえ」のままにしてください）。"
          ],
          "adding a custom language": [
             "カスタム言語を追加"
+         ],
+         "What are the languages of your site?": [
+            "サイトにどの言語を使用していますか？"
          ],
          "Default language": [
             "デフォルト言語"
@@ -241,9 +244,6 @@
          ],
          "create a custom language": [
             "カスタム言語を作成できます"
-         ],
-         "What are the languages of your site?": [
-            "サイトにどの言語を使用していますか？"
          ],
          "You can add a dedicated person to oversee everything translation-related on your site. %sTranslation Managers%s can add new local translators or professional translation services, create and assign translation jobs, review completed translations, and change translation-related settings.": [
             "サイトに翻訳関連の全ての業務を監督する専任者を追加できます。%sTranslation Managers%s は、新しいローカルトランスレーターや専門的な翻訳サービスを追加し、翻訳ジョブの作成と割り当て、完了した翻訳のレビュー、翻訳関連の設定変更を実施します。"

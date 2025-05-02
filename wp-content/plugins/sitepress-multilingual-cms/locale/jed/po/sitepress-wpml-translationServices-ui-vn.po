@@ -1,0 +1,62 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/translationServices/components/AuthorizeModal.js:22
+msgid "Connect this site to your %s account"
+msgstr "Kết nối trang web này với tài khoản %s của bạn"
+
+#: src/js/translationServices/components/AuthorizeModal.js:45
+msgid "Error"
+msgstr "Lỗi"
+
+#: src/js/translationServices/components/AuthorizeModal.js:57
+msgid "« Use a different Translation Service"
+msgstr "« Sử dụng Dịch vụ Dịch thuật khác"
+
+#: src/js/translationServices/components/AuthorizeModal.js:62
+msgid "Authenticate"
+msgstr "Xác thực"
+
+#: src/js/translationServices/components/Connect.js:22
+msgid ""
+"Visit <link_to_service /> to request an API Token. This token allows WPML "
+"to connect to <service_name /> to send and receive jobs."
+msgstr "Truy cập <link_to_service /> để yêu cầu một API Token. Token này cho phép WPML kết nối với <service_name /> để gửi và nhận các công việc."
+
+#: src/js/translationServices/components/SearchForm.js:13
+msgid "Search"
+msgstr "Tìm kiếm"
+
+#: src/js/translationServices/components/Sections.js:16
+msgid "Settings"
+msgstr "Cài đặt"
+
+#: src/js/translationServices/components/Sections.js:42
+msgid ""
+"It’s not currently possible to connect a translation service when WPML is "
+"set to translate your site’s content automatically. To use a translation "
+"service, please change your translation mode on the <LinkToSettingsPage /> "
+"page."
+msgstr "Hiện tại không thể kết nối dịch vụ dịch thuật khi WPML được cài đặt để tự động dịch nội dung trang web của bạn. Để sử dụng dịch vụ dịch thuật, vui lòng thay đổi chế độ dịch thuật của bạn trên trang <LinkToSettingsPage />."
+
+#: src/js/translationServices/components/ServicesList.js:41
+msgid "Documentation"
+msgstr "Tài liệu"
+
+#: src/js/translationServices/components/ServicesList.js:57
+msgid "Activate"
+msgstr "Kích hoạt"
+
+#: src/js/translationServices/components/ServicesList.js:69
+msgid "Name"
+msgstr "Tên"
+
+#: src/js/translationServices/components/ServicesList.js:74
+msgid "Description"
+msgstr "Mô tả"
+
+#: src/js/translationServices/components/ServicesList.js:81
+msgid "Ranking"
+msgstr "Xếp hạng"

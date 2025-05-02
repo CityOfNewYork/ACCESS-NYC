@@ -1,0 +1,184 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Close": [
+            ""
+         ],
+         "Please take a screenshot of this message and report this issue to <a>WPML support</a>.": [
+            ""
+         ],
+         "This copy of the site has the same content as the original site on %s, but it doesn’t have credits for automatic translation.": [
+            ""
+         ],
+         "If you want to use automatic translation for this site in the future, you can either <a1>add credits to this site</a1> or <a2>share the credits from the original site</a2>.": [
+            ""
+         ],
+         "There was an error checking for credits to share. Please take a screenshot of this message and report it in <a>WPML support</a>.": [
+            ""
+         ],
+         "You’re all set": [
+            ""
+         ],
+         "To allow the sites running on %s and %s to use the same credits for automatic translation, you need to:": [
+            ""
+         ],
+         "Follow <a>this link</a> to access the migration code (you can't get it by visiting %s manually)": [
+            ""
+         ],
+         "Click on <b>Copy migration code</b>": [
+            ""
+         ],
+         "Paste the migration code into the field below.": [
+            ""
+         ],
+         "Migration code": [
+            ""
+         ],
+         "Continue": [
+            ""
+         ],
+         "Go back": [
+            ""
+         ],
+         "Let’s connect the automatic translation credits between the two copies of this site": [
+            ""
+         ],
+         "WPML was unable to copy your site's translations, translation memory, and glossary to this new URL.": [
+            ""
+         ],
+         "Error with copying translation information to new URL": [
+            ""
+         ],
+         "Great. Now this site and its copy on %s are sharing the credits for automatic translation.": [
+            ""
+         ],
+         "Credits that you add on either site will be available on both sites. If you stop using this site, you don’t need to worry about losing credits.": [
+            ""
+         ],
+         "WPML was unable to connect your old and new URLs to share automatic translation credits.": [
+            ""
+         ],
+         "Error with sharing automatic translation credits": [
+            ""
+         ],
+         "The site on %s has %d credits for automatic translation. Do you want to share these credits between %s and this new location (%s)?": [
+            "サイト%sには自動翻訳用の%dクレジットがあります。これらのクレジットを%sとこの新しい場所(%s)の間で共有しますか？"
+         ],
+         "The site on %s has a pay-as-you-go subscription for automatic translation. Do you want to share these credits between %s and this new location (%s)?": [
+            "サイト%sには自動翻訳用の従量制サブスクリプションがあります。これらのクレジットを%sとこの新しい場所(%s)の間で共有しますか？"
+         ],
+         "Yes (recommended)": [
+            "はい（推奨）"
+         ],
+         "In the next step, you will receive instructions for how to approve the credits sharing": [
+            "次のステップで、クレジット共有の承認方法についての指示を受け取ります"
+         ],
+         "No": [
+            "いいえ"
+         ],
+         "You will need to assign credits or set up a pay-as-you-go plan for this site to use automatic translation": [
+            "このサイトで自動翻訳を使用するには、クレジットを割り当てるか、従量制プランを設定する必要があります"
+         ],
+         "What happens when you share credits for automatic translation between sites?": [
+            "サイト間で自動翻訳のクレジットを共有するとどうなりますか？"
+         ],
+         "Translation credits for this site": [
+            "このサイトの翻訳クレジット"
+         ],
+         "You can continue translating content normally on this site.": [
+            "このサイトで通常通りコンテンツを翻訳し続けることができます。"
+         ],
+         "Please keep in mind that there shouldn’t be a copy of this site at %s. If there still is a copy of it there, you will not be able to translate content on that site.": [
+            "%sにこのサイトのコピーがないことをご確認ください。もしそこにまだコピーがある場合、そのサイトでコンテンツを翻訳することはできません。"
+         ],
+         "You indicated that you’re no longer running a copy of this site at %s. This means that:": [
+            "%sでこのサイトのコピーを実行していないことを示しました。これは以下を意味します："
+         ],
+         "You will not be able to use automatic translation on the old site": [
+            "古いサイトで自動翻訳を使用することはできません"
+         ],
+         "If you access the old site, it will trigger warnings on this site": [
+            "古いサイトにアクセスすると、このサイトで警告がトリガーされます"
+         ],
+         "I understand and am no longer running this site at %s": [
+            "理解しました。%sでこのサイトを実行していません"
+         ],
+         "Back": [
+            "戻る"
+         ],
+         "Please check and confirm": [
+            "確認してください"
+         ],
+         "WPML was unable to update our records with your new URL.": [
+            "WPMLは新しいURLで記録を更新できませんでした。"
+         ],
+         "Error with moving translation information to new URL": [
+            "新しいURLへの翻訳情報の移動中にエラーが発生しました"
+         ],
+         "Looks like this site was previously at %s and now it’s at %s.": [
+            "このサイトは以前%sにありましたが、現在は%sにあるようです。"
+         ],
+         "Do you still have the same site running at %s?": [
+            "%sで同じサイトをまだ実行していますか？"
+         ],
+         "Yes": [
+            "はい"
+         ],
+         "This is only a copy - original site is still running": [
+            "これはコピーのみです - オリジナルサイトはまだ稼働中です"
+         ],
+         "I changed the address of the site to this new one": [
+            "サイトのアドレスをこの新しいものに変更しました"
+         ],
+         "WPML detected a new address for this site": [
+            "WPMLがこのサイトの新しいアドレスを検出しました"
+         ],
+         "How to manage translations when migrating from development to production and more...": [
+            "開発から本番環境への移行時の翻訳管理方法など..."
+         ],
+         "Looks like this site is a copy of a different site, or moved to a different URL. Please contact your translation manager to update Translation Management plugin configuration.": [
+            "このサイトは別のサイトのコピーか、異なるURLに移動したようです。翻訳マネージャーに連絡して、翻訳管理プラグインの設定を更新してください。"
+         ],
+         "Site Moved or Copied - Action Required": [
+            "サイトの移動またはコピー - アクションが必要です"
+         ],
+         "You or someone else moved this site to %s. Please keep in mind that:": [
+            "あなたまたは他の誰かがこのサイトを%sに移動しました。以下の点に注意してください："
+         ],
+         "Translations that you do at %s will not appear on this site.": [
+            "%sで行った翻訳はこのサイトには表示されません。"
+         ],
+         "You cannot edit translations on this site.": [
+            "このサイトで翻訳を編集することはできません。"
+         ],
+         "The site at %s is using the same credits for automatic translation as this site.": [
+            "%sのサイトは、このサイトと同じ自動翻訳用クレジットを使用しています。"
+         ],
+         "If you didn't intend to move this site to %s, you can <a>indicate that this site should be at %s</a>.": [
+            "%sにこのサイトを移動する意図がなかった場合は、<a>このサイトが%sにあるべきだと示すことができます</a>。"
+         ],
+         "This site has moved to a new location": [
+            "このサイトは新しい場所に移動しました"
+         ],
+         "If you prefer not to move this site, you can <a>mark it as a copy</a> and enable automatic translation for it.": [
+            "このサイトを移動したくない場合は、<a>コピーとしてマークし</a>、自動翻訳を有効にすることができます。"
+         ],
+         "Moving the site back here will mean that you will be able to translate on this domain again, but you will not be able to update translations at %s.": [
+            "サイトをここに戻すことは、このドメインで再び翻訳できるようになりますが、%sで翻訳を更新することはできなくなります。"
+         ],
+         "Yes - move back here": [
+            "はい - ここに戻します"
+         ],
+         "No - keep the site on %s": [
+            "いいえ - サイトを%sに保持します"
+         ],
+         "Are you sure that this site should run on %s and not %s?": [
+            "このサイトが%sではなく%sで実行されるべきだと確信していますか？"
+         ]
+      }
+   }
+}

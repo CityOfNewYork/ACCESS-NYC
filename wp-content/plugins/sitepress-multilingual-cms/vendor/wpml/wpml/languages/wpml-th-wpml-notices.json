@@ -1,0 +1,44 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Add glossary terms": [
+            "เพิ่มคำศัพท์ในอภิธานศัพท์"
+         ],
+         "Minimize": [
+            "ย่อ"
+         ],
+         "Expand": [
+            "ขยาย"
+         ],
+         "There's nothing yet in the Glossary": [
+            "ยังไม่มีอะไรในอภิธานศัพท์"
+         ],
+         "Looks like you're not yet using the glossary. Glossary can help you:": [
+            "ดูเหมือนว่าคุณยังไม่ได้ใช้อภิธานศัพท์ อภิธานศัพท์สามารถช่วยคุณ:"
+         ],
+         "Improve the quality of the translation": [
+            "ปรับปรุงคุณภาพของการแปล"
+         ],
+         "Ensure translation consistency": [
+            "รับรองความสอดคล้องในการแปล"
+         ],
+         "Reduce translation costs": [
+            "ลดค่าใช้จ่ายในการแปล"
+         ],
+         "Improve SEO in translation languages": [
+            "ปรับปรุง SEO ในภาษาที่แปล"
+         ],
+         "How to Use the Glossary for Accurate Translations": [
+            "วิธีใช้อภิธานศัพท์เพื่อการแปลที่แม่นยำ"
+         ],
+         "%d item in the <a>Glossary</a>": [
+            "%d รายการใน<a>อภิธานศัพท์</a>",
+            "%d รายการใน<a>อภิธานศัพท์</a>"
+         ]
+      }
+   }
+}

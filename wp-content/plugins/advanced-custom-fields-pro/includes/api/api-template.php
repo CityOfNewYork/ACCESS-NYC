@@ -115,10 +115,14 @@ function the_field( $selector, $post_id = false, $format_value = true ) {
 		$unescaped_value = implode( ', ', $unescaped_value );
 	}
 
+	if ( ! is_scalar( $unescaped_value ) ) {
+		$unescaped_value = false;
+	}
+
 	$field_type = is_array( $field ) && isset( $field['type'] ) ? $field['type'] : 'text';
 	if ( apply_filters( 'acf/the_field/allow_unsafe_html', false, $selector, $post_id, $field_type, $field ) ) {
 		$value = $unescaped_value;
-	} elseif ( (string) $value !== (string) $unescaped_value ) {
+	} elseif ( $unescaped_value !== false && (string) $value !== (string) $unescaped_value ) {
 		do_action( 'acf/removed_unsafe_html', __FUNCTION__, $selector, $field, $post_id );
 	}
 
@@ -139,6 +143,11 @@ function the_field( $selector, $post_id = false, $format_value = true ) {
 function _acf_log_escaped_html( $function, $selector, $field, $post_id ) {
 	// If the notice isn't shown, no use in logging the errors.
 	if ( apply_filters( 'acf/admin/prevent_escaped_html_notice', false ) ) {
+		return;
+	}
+
+	// If the notice has been dismissed, don't log further errors.
+	if ( get_option( 'acf_escaped_html_notice_dismissed' ) ) {
 		return;
 	}
 
@@ -191,7 +200,7 @@ function _acf_get_escaped_html_log() {
  * @return boolean True on success, or false on failure.
  */
 function _acf_update_escaped_html_log( $escaped = array() ) {
-	return update_option( 'acf_escaped_html_log', (array) $escaped, true );
+	return update_option( 'acf_escaped_html_log', (array) $escaped, false );
 }
 
 /**
@@ -884,10 +893,14 @@ function the_sub_field( $field_name, $format_value = true ) {
 		$unescaped_value = implode( ', ', $unescaped_value );
 	}
 
+	if ( ! is_scalar( $unescaped_value ) ) {
+		$unescaped_value = false;
+	}
+
 	$field_type = is_array( $field ) && isset( $field['type'] ) ? $field['type'] : 'text';
 	if ( apply_filters( 'acf/the_field/allow_unsafe_html', false, $field_name, 'sub_field', $field_type, $field ) ) {
 		$value = $unescaped_value;
-	} elseif ( (string) $value !== (string) $unescaped_value ) {
+	} elseif ( $unescaped_value !== false && (string) $value !== (string) $unescaped_value ) {
 		do_action( 'acf/removed_unsafe_html', __FUNCTION__, $field_name, $field, false );
 	}
 
@@ -994,7 +1007,11 @@ function get_row_layout() {
 function acf_shortcode( $atts ) {
 	// Return if the ACF shortcode is disabled.
 	if ( ! acf_get_setting( 'enable_shortcode' ) ) {
-		return;
+		if ( is_preview() ) {
+			return apply_filters( 'acf/shortcode/disabled_message', esc_html__( '[The ACF shortcode is disabled on this site]', 'acf' ) );
+		} else {
+			return;
+		}
 	}
 
 	if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() ) {
@@ -1007,7 +1024,7 @@ function acf_shortcode( $atts ) {
 	// Limit previews of ACF shortcode data for users without publish_posts permissions.
 	$preview_capability = apply_filters( 'acf/shortcode/preview_capability', 'publish_posts' );
 	if ( is_preview() && ! current_user_can( $preview_capability ) ) {
-		return apply_filters( 'acf/shortcode/preview_capability_message', __( '[ACF shortcode value disabled for preview]', 'acf' ) );
+		return apply_filters( 'acf/shortcode/preview_capability_message', esc_html__( '[ACF shortcode value disabled for preview]', 'acf' ) );
 	}
 
 	// Mitigate issue where some AJAX requests can return ACF field data.
@@ -1026,6 +1043,21 @@ function acf_shortcode( $atts ) {
 		'acf'
 	);
 
+	// Decode the post ID for filtering.
+	$post_id         = acf_get_valid_post_id( $atts['post_id'] );
+	$decoded_post_id = acf_decode_post_id( $post_id );
+
+	// If we've decoded to a post, ensure the post is publicly visible.
+	if ( $decoded_post_id['type'] === 'post' ) {
+		if ( $atts['post_id'] !== false && ( (int) $atts['post_id'] !== (int) acf_get_valid_post_id() ) && ( ! is_post_publicly_viewable( $decoded_post_id['id'] ) ) && apply_filters( 'acf/shortcode/prevent_access_to_fields_on_non_public_posts', true ) ) {
+			if ( is_preview() ) {
+				return apply_filters( 'acf/shortcode/post_not_public_message', esc_html__( '[The ACF shortcode cannot display fields from non-public posts]', 'acf' ) );
+			} else {
+				return;
+			}
+		}
+	}
+
 	$access_already_prevented = apply_filters( 'acf/prevent_access_to_unknown_fields', false );
 	$filter_applied           = false;
 
@@ -1034,15 +1066,27 @@ function acf_shortcode( $atts ) {
 		add_filter( 'acf/prevent_access_to_unknown_fields', '__return_true' );
 	}
 
-	// Decode the post ID for filtering.
-	$post_id         = acf_get_valid_post_id( $atts['post_id'] );
-	$decoded_post_id = acf_decode_post_id( $post_id );
-
 	// Try to get the field value, ensuring any non-safe HTML is stripped from wysiwyg fields via `acf_the_content`
 	$field = get_field_object( $atts['field'], $post_id, $atts['format_value'], true, true );
 	$value = $field ? $field['value'] : get_field( $atts['field'], $post_id, $atts['format_value'], true );
 
 	$field_type = is_array( $field ) && isset( $field['type'] ) ? $field['type'] : 'text';
+
+	if ( ! acf_field_type_supports( $field_type, 'bindings', true ) ) {
+		if ( is_preview() ) {
+			return apply_filters( 'acf/shortcode/field_not_supported_message', '[' . esc_html__( 'The requested ACF field type does not support output in bindings or the ACF Shortcode.', 'acf' ) . ']' );
+		} else {
+			return;
+		}
+	}
+
+	if ( isset( $field['allow_in_bindings'] ) && ! $field['allow_in_bindings'] ) {
+		if ( is_preview() ) {
+			return apply_filters( 'acf/shortcode/field_not_allowed_message', '[' . esc_html__( 'The requested ACF field is not allowed to be output in bindings or the ACF Shortcode.', 'acf' ) . ']' );
+		} else {
+			return;
+		}
+	}
 
 	if ( apply_filters( 'acf/shortcode/prevent_access', false, $atts, $decoded_post_id['id'], $decoded_post_id['type'], $field_type, $field ) ) {
 		return;
@@ -1055,10 +1099,6 @@ function acf_shortcode( $atts ) {
 	// Temporarily always get the unescaped version for action comparison.
 	$unescaped_value = get_field( $atts['field'], $post_id, $atts['format_value'], false );
 
-	if ( $filter_applied ) {
-		remove_filter( 'acf/prevent_access_to_unknown_fields', '__return_true' );
-	}
-
 	// Remove the filter preventing access to unknown filters now we've got all the values.
 	if ( $filter_applied ) {
 		remove_filter( 'acf/prevent_access_to_unknown_fields', '__return_true' );
@@ -1068,10 +1108,14 @@ function acf_shortcode( $atts ) {
 		$unescaped_value = implode( ', ', $unescaped_value );
 	}
 
+	if ( ! is_scalar( $unescaped_value ) ) {
+		$unescaped_value = false;
+	}
+
 	// Handle getting the unescaped version if we're allowed unsafe html.
 	if ( apply_filters( 'acf/shortcode/allow_unsafe_html', false, $atts, $field_type, $field ) ) {
 		$value = $unescaped_value;
-	} elseif ( (string) $value !== (string) $unescaped_value ) {
+	} elseif ( $unescaped_value !== false && (string) $value !== (string) $unescaped_value ) {
 		do_action( 'acf/removed_unsafe_html', __FUNCTION__, $atts['field'], $field, $post_id );
 	}
 

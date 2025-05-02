@@ -1,0 +1,172 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Could not fetch engines data": [
+            "לא ניתן לאחזר נתוני מנועים"
+         ],
+         "Could not save settings": [
+            "לא ניתן לשמור הגדרות"
+         ],
+         "Automatic translation": [
+            "תרגום אוטומטי"
+         ],
+         "Saving...": [
+            "שומר..."
+         ],
+         "Save settings": [
+            "שמור הגדרות"
+         ],
+         "Settings saved": [
+            "ההגדרות נשמרו"
+         ],
+         "Some error occurred": [
+            "אירעה שגיאה כלשהי"
+         ],
+         "Loading...": [
+            "טוען..."
+         ],
+         "Failed to load engines": [
+            "טעינת המנועים נכשלה"
+         ],
+         "Drag your default engine to the top and order the rest by priority.": [
+            "גרור את מנוע בררת המחדל שלך לראש הרשימה וסדר את השאר לפי סדר עדיפות."
+         ],
+         "Which translation engines do you want to use?": [
+            "באילו מנועי תרגום ברצונך להשתמש?"
+         ],
+         "Automatic translation engines differ in translation style and supported language pairs. If your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it.": [
+            "מנועי תרגום אוטומטיים נבדלים בסגנון התרגום ובצמדי השפות הנתמכים. אם מנוע התרגום המועדף עליך אינו תומך בצמד שפות שברצונך להשתמש בו, אנו נעבור למנוע המועדף הבא שלך שכן תומך בו."
+         ],
+         "WPML AI (beta) automatically detects the formality of your content and translates with the same formality.": [
+            "WPML AI (בטא) מזהה אוטומטית את הפורמליות של התוכן שלך ומתרגם באותה רמת פורמליות."
+         ],
+         "Auto-formality": [
+            "פורמליות אוטומטית"
+         ],
+         "Choose the tone of automatic translations for %s": [
+            "בחר את הטון של תרגומים אוטומטיים עבור %s"
+         ],
+         "Your site doesn't use languages that offer formality settings.": [
+            "האתר שלך אינו משתמש בשפות המציעות הגדרות פורמליות."
+         ],
+         "Edit formality": [
+            "ערוך פורמליות"
+         ],
+         "%d credits per word": [
+            "%d נקודות זכות למילה"
+         ],
+         "Backup %d": [
+            "גיבוי %d"
+         ],
+         "Default": [
+            "ברירת מחדל"
+         ],
+         "ON": [
+            "פעיל"
+         ],
+         "OFF": [
+            "כבוי"
+         ],
+         "Documentation": [
+            "תיעוד"
+         ],
+         "DeepL's formality and how it helps get good translations": [
+            "הפורמליות של DeepL וכיצד היא עוזרת לקבל תרגומים טובים"
+         ],
+         "Edit button": [
+            "כפתור עריכה"
+         ],
+         "Examples for %s": [
+            "דוגמאות עבור %s"
+         ],
+         "For example:": [
+            "לדוגמה:"
+         ],
+         "Formality settings for %s": [
+            "הגדרות פורמליות עבור %s"
+         ],
+         "Formality level for %s": [
+            "רמת פורמליות עבור %s"
+         ],
+         "Set formality for %s": [
+            "הגדר פורמליות עבור %s"
+         ],
+         "%d of your target languages can be translated using either a formal or informal tone.\n The tone which gives the best translation for each language is set by default.": [
+            "%d משפות היעד שלך ניתנות לתרגום בטון פורמלי או לא פורמלי.\n הטון שנותן את התרגום הטוב ביותר לכל שפה מוגדר כברירת מחדל."
+         ],
+         "%s doesn't yet support formality options for %s.": [
+            "%s עדיין אינו תומך באפשרויות פורמליות עבור %s."
+         ],
+         "Cancel": [
+            "ביטול"
+         ],
+         "Update": [
+            "עדכון"
+         ],
+         "Formal": [
+            "פורמלי"
+         ],
+         "Informal": [
+            "לא פורמלי"
+         ],
+         "Don't translate drafts. Only translate when I publish content.": [
+            "אל תתרגם טיוטות. תרגם רק כשאני מפרסם תוכן."
+         ],
+         "Translate drafts as I save them (consumes a bit more translation credits).": [
+            "תרגם טיוטות כשאני שומר אותן (צורך קצת יותר נקודות זכות לתרגום)."
+         ],
+         "Do you want to translate drafts automatically?": [
+            "האם ברצונך לתרגם טיוטות אוטומטית?"
+         ],
+         "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s.": [
+            "תכונה זו זמינה רק כאשר מפעילים \"תרגום הכל אוטומטית\" מ%sלוח בקרת התרגום%s."
+         ],
+         "Close modal": [
+            "סגור חלונית"
+         ],
+         "What would you like to do after WPML finishes translating your content automatically?": [
+            "מה ברצונך לעשות לאחר ש-WPML מסיים לתרגם את התוכן שלך אוטומטית?"
+         ],
+         "Wait for review": [
+            "המתן לבדיקה"
+         ],
+         "Recommended with DeepL, Google and Microsoft": [
+            "מומלץ עם DeepL, Google ו-Microsoft"
+         ],
+         "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process.": [
+            "DeepL, Google ו-Microsoft מספקים תרגומים נהדרים, אבל אנו ממליצים על סקירה אנושית כדי לאשר שהם נכונים. WPML מספק תרגומים טובים יותר מבני אדם שמבינים הקשר, כך שתוכל לדלג בביטחון על תהליך הסקירה."
+         ],
+         "WPML keeps translations unpublished, so you can review them first.": [
+            "WPML שומר תרגומים כלא מפורסמים, כך שתוכל לבדוק אותם תחילה."
+         ],
+         "Your translators review and approve translations before publishing.": [
+            "המתרגמים שלך בודקים ומאשרים תרגומים לפני הפרסום."
+         ],
+         "Publish and mark for review": [
+            "פרסם וסמן לבדיקה"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "WPML מפרסם תרגומים מיד אך מסמן אותם לבדיקה בנוחות שלך."
+         ],
+         "WPML publishes translations immediately but flags them for translators to review later.": [
+            "WPML מפרסם תרגומים מיד אך מסמן אותם למתרגמים לבדיקה מאוחר יותר."
+         ],
+         "Publish without review": [
+            "פרסם ללא בדיקה"
+         ],
+         "Recommended with WPML AI": [
+            "מומלץ עם WPML AI"
+         ],
+         "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy.": [
+            "WPML AI מספק תרגומים טובים יותר מתרגום אנושי שלעתים רחוקות זקוקים לשיפורים, כך שתוכל לדלג בביטחון על תהליך הבדיקה. עבור מנועי תרגום אחרים, מומלצת בדיקה אנושית כדי לאשר דיוק."
+         ],
+         "WPML publishes translations immediately, skipping the review process.": [
+            "WPML מפרסם תרגומים מיד, מדלג על תהליך הבדיקה."
+         ]
+      }
+   }
+}

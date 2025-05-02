@@ -1,14 +1,33 @@
 {
-   "domain": "messages",
-   "locale_data": {
-      "messages": {
-         "": {
-            "domain": "messages",
-            "lang": "en"
-         },
-         "Save": [
-            "Lưu"
-         ]
-      }
-   }
+  "translation-revision-date": "2024-08-20T09:51:40+00:00",
+  "generator": "WP-CLI/2.9.0",
+  "source": "src/js/wpmlLanguageSettings/DefaultFlagsFormat/Section.js",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "en",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "The new format has been saved.": [
+        "Định dạng mới đã được lưu."
+      ],
+      "Failed to save the new format": [
+        "Không lưu được định dạng mới"
+      ],
+      "Choose the image file type for flags": [
+        "Chọn loại tệp hình ảnh cho cờ"
+      ],
+      "This option affects only the built-in WPML flags, not the custom uploaded ones.": [
+        "Chỉ ảnh hưởng đến cờ WPML tích hợp."
+      ],
+      "%s format": [
+        "%sđịnh dạng"
+      ],
+      "Save": [
+        "Lưu"
+      ]
+    }
+  }
 }

@@ -4,7 +4,7 @@
  * @subpackage wpml-core
  */
 
-if( class_exists( 'TranslationProxy_Project' ) ) {
+if ( class_exists( 'TranslationProxy_Project' ) ) {
 	// Workaround for UnitTests.
 	return;
 }
@@ -206,31 +206,53 @@ class TranslationProxy_Project {
 	/**
 	 * @throws WPML_TP_Batch_Exception
 	 *
-	 * @param bool $source_language
-	 * @param bool $target_languages
+	 * @param string|null $source_language
+	 * @param string[]|null $target_languages
+	 * @param array<string,string> | null $tp_batch_info
 	 *
 	 * @internal param bool $name
 	 * @return false|WPML_TP_Batch
 	 */
-	function get_batch_job(
-		$source_language = false,
-		$target_languages = false
-	) {
+	private function get_batch_job( $source_language = null, $target_languages = null, $tp_batch_info = null ) {
+
 		$batch_data = TranslationProxy_Basket::get_batch_data();
 
 		if ( ! $batch_data ) {
-			if ( ! $source_language ) {
-				$source_language = TranslationProxy_Basket::get_source_language();
-			}
-			if ( ! $target_languages ) {
-				$target_languages = TranslationProxy_Basket::get_remote_target_languages();
-			}
+			if ( isset( $tp_batch_info ) ) {
 
-			if ( ! $source_language || ! $target_languages ) {
+				$prepareTpBatchExtraFields = function ( $extraFields ) {
+					$preparedExtraFields = [];
+
+					foreach ( $extraFields as $extraField ) {
+						$preparedExtraFields[ $extraField[ 'fieldName' ] ] = $extraField[ 'fieldValue' ];
+					}
+
+					return $preparedExtraFields;
+				};
+
+				$deadline = false;
+
+				if ( is_string( $tp_batch_info[ 'deadline' ] ) ) {
+					$deadline = strtotime( $tp_batch_info[ 'deadline' ] );
+				} elseif ( $tp_batch_info[ 'deadline' ] instanceof DateTime ) {
+					$deadline = ( $tp_batch_info[ 'deadline' ] )->getTimestamp();
+				}
+
+				$basicBatchData = [
+					'source_language'  => $source_language,
+					'target_languages' => $target_languages,
+					'name'             => $tp_batch_info[ 'batchName' ],
+					'deadline'         => $deadline
+				];
+
+				$batchExtraFields = isset( $tp_batch_info[ 'extraFields' ] )
+					? $prepareTpBatchExtraFields( $tp_batch_info[ 'extraFields' ] )
+					: false;
+			} else {
 				return false;
 			}
 
-			$batch_data = $this->create_batch_job( $source_language, $target_languages );
+			$batch_data = $this->create_batch_job( $basicBatchData, $batchExtraFields );
 
 			if ( $batch_data ) {
 				TranslationProxy_Basket::set_batch_data( $batch_data );
@@ -241,13 +263,16 @@ class TranslationProxy_Project {
 	}
 
 	/**
+	 * @param string|null $source_language
+	 * @param string[]|null $target_languages
 	 * @throws WPML_TP_Batch_Exception
+	 * @param array<string,string> | null $tp_batch_info
 	 *
 	 * @return false|int
 	 */
-	function get_batch_job_id() {
+	function get_batch_job_id( $source_language = null, $target_languages = null, $tp_batch_info = null ) {
 		$ret        = false;
-		$batch_data = $this->get_batch_job();
+		$batch_data = $this->get_batch_job( $source_language, $target_languages, $tp_batch_info );
 
 		if ( $batch_data ) {
 			$ret = $batch_data->get_id();
@@ -256,40 +281,22 @@ class TranslationProxy_Project {
 		return $ret;
 	}
 
-	/**
-	 * @throws WPML_TP_Batch_Exception
-	 *
-	 * @param bool             $source_language
-	 * @param      $target_languages
-	 *
-	 * @internal param bool $name
-	 * @return false|WPML_TP_Batch
-	 */
-	public function create_batch_job( $source_language, $target_languages ) {
-		$batch_name    = TranslationProxy_Basket::get_basket_name();
-		$batch_options = TranslationProxy_Basket::get_options();
-		$extra_fields  = TranslationProxy_Basket::get_basket_extra_fields();
+	public function create_batch_job( $batchData, $extraFields ) {
 
-		$batch_data = array(
-			'source_language'  => $source_language,
-			'target_languages' => $target_languages,
-			'name'             => $batch_name,
-		);
-
-		if ( ! $batch_data['source_language'] ) {
-			$batch_data['source_language'] = TranslationProxy_Basket::get_source_language();
+		if ( ! $batchData[ 'source_language' ] ) {
+			$batchData[ 'source_language' ] = TranslationProxy_Basket::get_source_language();
 		}
 
-		if ( ! $batch_data['target_languages'] ) {
-			$batch_data['target_languages'] = TranslationProxy_Basket::get_remote_target_languages();
+		if ( ! $batchData[ 'target_languages' ] ) {
+			$batchData[ 'target_languages' ] = TranslationProxy_Basket::get_remote_target_languages();
 		}
 
-		if ( ! $batch_data['source_language'] || ! $batch_data['target_languages'] ) {
+		if ( ! $batchData[ 'source_language' ] || ! $batchData[ 'target_languages' ] ) {
 			return false;
 		}
 
-		if ( ! $batch_data['name'] ) {
-			$batch_data['name'] = sprintf(
+		if ( ! $batchData[ 'name' ] ) {
+			$batchData[ 'name' ] = sprintf(
 				__(
 					'%s: WPML Translation Jobs',
 					'wpml-translation-management'
@@ -298,14 +305,11 @@ class TranslationProxy_Project {
 			);
 		}
 
-		TranslationProxy_Basket::set_basket_name( $batch_data['name'] );
+		TranslationProxy_Basket::set_basket_name( $batchData[ 'name' ] );
 
-		if ( isset( $batch_options['deadline_date'] ) ) {
-			$batch_data['deadline'] = strtotime( $batch_options['deadline_date'] );
-		}
-
-		return $this->tp_client->batches()->create( $batch_data, $extra_fields );
+		return $this->tp_client->batches()->create( $batchData, $extraFields );
 	}
+
 
 	/**
 	 *
@@ -322,6 +326,7 @@ class TranslationProxy_Project {
 	 * @param int    $word_count
 	 * @param int    $translator_id
 	 * @param string $note
+	 * @param array<string,string> | null $tp_batch_info
 	 *
 	 * @return bool|int
 	 */
@@ -335,10 +340,23 @@ class TranslationProxy_Project {
 		$word_count,
 		$translator_id = 0,
 		$note = '',
-		$uuid = null
+		$uuid = null,
+		$tp_batch_info = null
 	) {
 
-		$batch_id = $this->get_batch_job_id();
+		/**
+		 * For now, we have to keep `TranslationProxy_Basket::get_remote_target_languages()`.
+		 * In wpml/wpml code, `WPML\Legacy\Component\Translation\Sender\TranslationSender::sendToTranslation`, we set
+		 * those languages by calling \TranslationProxy_Basket::set_remote_target_languages( $targetLanguages );
+		 *
+		 * We need all the target languages to create the batch job, because they are needed for batch validation.
+		 * It is impossible to pass the target languages in a better way without vast refactoring.
+		 */
+		$batch_id = $this->get_batch_job_id(
+			$source_language,
+			TranslationProxy_Basket::get_remote_target_languages() ?: null,
+			$tp_batch_info
+		);
 
 		if ( ! $batch_id ) {
 			return false;
@@ -369,7 +387,7 @@ class TranslationProxy_Project {
 	 *
 	 * @return array|bool|mixed|null|stdClass|string
 	 */
-	function commit_batch_job( $tp_batch_id = false ) {
+	function commit_batch_job( $tp_batch_id = false, $cleanBasketNameAndBatch = false ) {
 		$tp_batch_id = $tp_batch_id ? $tp_batch_id : $this->get_batch_job_id();
 
 		if ( ! $tp_batch_id ) {
@@ -416,6 +434,10 @@ class TranslationProxy_Project {
 					array( 'id' => $batch_id )
 				);
 			}
+		}
+
+		if ( $cleanBasketNameAndBatch ) {
+			TranslationProxy_Basket::cleanBasket();
 		}
 
 		return isset( $response ) ? $response : false;

@@ -12,7 +12,7 @@ class WPML_Localization {
 	 * @param wpdb $wpdb
 	 */
 	public function __construct( wpdb $wpdb ) {
-		$this->wpdb = $wpdb;
+		$this->wpdb        = $wpdb;
 	}
 
 	public function get_theme_localization_stats( $theme_localization_domains = array() ) {
@@ -177,5 +177,63 @@ class WPML_Localization {
 		}
 
 		return $stats;
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getBaseStUrl() {
+		return admin_url( 'admin.php?page=' . WPML_ST_FOLDER . '/menu/string-translation.php' );
+	}
+
+	/**
+	 * @param array  $localization_stats
+	 * @param string $localization_file
+	 * @param array  $localization_data
+	 *
+	 * @return array
+	 */
+	public function getDomainsFromLocalizationStats( $localization_stats, $localization_file, $localization_data ) {
+		$domains = array_key_exists( $localization_file, $localization_stats ) ? $localization_stats[ $localization_file ] : false;
+
+		if ( $domains ) {
+			return \wpml_collect( $domains )->map( function ( $stats, $domain ) {
+				return $this->get_component( $domain, $stats );
+			} )->toArray();
+		}
+
+		$textDomain = \WPML\FP\Obj::propOr( __( 'No TextDomain', 'wpml-string-translation' ), 'TextDomain', $localization_data );
+
+		return [ $textDomain => $this->get_component( $textDomain, [ 'complete' => 0, 'incomplete' => 0 ] ) ];
+	}
+
+	/**
+	 * @param string $domain
+	 * @param array  $stats
+	 *
+	 * @return array
+	 */
+	private function get_component( $domain, array $stats ) {
+		return array(
+			'translated'              => $stats['complete'],
+			'needs_update'            => $stats['incomplete'],
+			'needs_update_link'       => add_query_arg(
+				array(
+					'context' => $domain,
+					'status'  => ICL_STRING_TRANSLATION_NOT_TRANSLATED,
+				),
+				$this->getBaseStUrl()
+			),
+			'translated_link'         => add_query_arg(
+				array(
+					'context' => $domain,
+					'status'  => ICL_STRING_TRANSLATION_COMPLETE,
+				),
+				$this->getBaseStUrl()
+			),
+			'domain_link'             => add_query_arg( array( 'context' => $domain ), $this->getBaseStUrl() ),
+			'title_needs_translation' => sprintf( __( 'Translate strings in %s', 'wpml-string-translation' ), $domain ),
+			'title_all_strings'       => sprintf( __( 'All strings in %s', 'wpml-string-translation' ), $domain ),
+		);
 	}
 }

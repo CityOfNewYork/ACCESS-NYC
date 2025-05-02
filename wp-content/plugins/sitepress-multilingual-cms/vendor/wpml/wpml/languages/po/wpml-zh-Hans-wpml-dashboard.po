@@ -1,0 +1,1001 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-08-22T09:24:13+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: wpml\n"
+
+#: dashboard.js:2
+msgid "Untranslated strings that I encounter on front-end while logged in"
+msgstr "登录时在前端遇到的未翻译字符串"
+
+#: dashboard.js:2
+msgid "Untranslated strings that all front-end users encounter"
+msgstr "所有前端用户都会遇到的未翻译字符串"
+
+#: dashboard.js:2
+msgid "Disable auto-registration of strings"
+msgstr "禁用字符串的自动注册"
+
+#: dashboard.js:2
+msgid "Frontend"
+msgstr "前端"
+
+#: dashboard.js:2
+msgid "Backend"
+msgstr "后台"
+
+#: dashboard.js:2
+msgid "Plugins"
+msgstr "插件"
+
+#: dashboard.js:2
+msgid "Themes"
+msgstr "主题"
+
+#: dashboard.js:2
+msgid "WordPress"
+msgstr "WordPress"
+
+#: dashboard.js:2
+msgid "Other"
+msgstr "其他"
+
+#: dashboard.js:2
+msgid "Error in fetching default translation batch name"
+msgstr "获取默认翻译批名称时出错"
+
+#: dashboard.js:2
+msgid "Error in fetching translation editor type."
+msgstr "获取翻译编辑器类型时出错。"
+
+#: dashboard.js:2
+msgid "Error in fetching untranslated types count"
+msgstr "获取未翻译类型计数时出错"
+
+#: dashboard.js:2
+msgid "Error in fetching remote translation service data."
+msgstr "获取远程翻译服务数据时出错。"
+
+#: dashboard.js:2
+msgid "Status checked: "
+msgstr "已检查状态： "
+
+#: dashboard.js:2
+msgid "none of your translation jobs have been completed"
+msgstr "您的翻译工作尚未完成"
+
+#: dashboard.js:2
+msgid "Downloaded jobs: "
+msgstr "下载的工作： "
+
+#: dashboard.js:2
+msgid "Cancelled jobs: "
+msgstr "取消工作： "
+
+#: dashboard.js:2
+msgid "Checking translation jobs status. Please don't close this page!"
+msgstr "检查翻译工作状态。请不要关闭此页面！"
+
+#: dashboard.js:2
+msgid "Last check: Never"
+msgstr "最后一次检查：从未"
+
+#: dashboard.js:2
+msgid "Please wait until download finishes"
+msgstr "请等待下载完成"
+
+#: dashboard.js:2
+msgid "You need to wait 5 minutes after last pick up"
+msgstr "您需要在最后一次接送后等待 5 分钟"
+
+#: dashboard.js:2
+msgid "Check status and get translations"
+msgstr "检查状态并获取翻译"
+
+#: dashboard.js:2
+msgid "Filtering is disabled to show all selected items. "
+msgstr "禁用筛选功能可显示所有选定项目。 "
+
+#: dashboard.js:2
+msgid "Apply filters"
+msgstr "应用过滤器"
+
+#: dashboard.js:2
+msgid "%s posts selected"
+msgstr "%s 所选职位"
+
+#: dashboard.js:2
+msgid "(%d word count)"
+msgstr "(%d 字数)"
+
+#: dashboard.js:2
+msgid "%s item not showing."
+msgid_plural "%s items not showing."
+msgstr[0] "%s 项目未显示。"
+msgstr[1] "%s 未显示的项目。"
+
+#: dashboard.js:2
+msgid "Show all selected items"
+msgstr "显示所有选定项目"
+
+#: dashboard.js:2
+msgid "Translate your content"
+msgstr "翻译您的内容"
+
+#: dashboard.js:2
+msgid "Unselect all"
+msgstr "全部取消选择"
+
+#: dashboard.js:2
+msgid "Source Language:"
+msgstr "源语言："
+
+#: dashboard.js:2
+msgid "translated to:"
+msgstr "译为："
+
+#: dashboard.js:2
+msgid "Clear filters"
+msgstr "清除过滤器"
+
+#: dashboard.js:2
+msgid "Filter"
+msgstr "筛选"
+
+#: dashboard.js:2
+msgid "You are about to change the source language filter from %s to %s"
+msgstr "您将把源语言过滤器从%s 更改为%s"
+
+#: dashboard.js:2
+msgid "Updating the source language filter will clear the items you've selected for translation. Are you sure you want to continue?"
+msgstr "更新源语言筛选器将清除您选择的翻译项目。您确定要继续吗？"
+
+#: dashboard.js:2
+msgid "Cancel"
+msgstr "取消"
+
+#: dashboard.js:2
+msgid "Change source language"
+msgstr "更改源语言"
+
+#: dashboard.js:2
+msgid "All Statuses"
+msgstr "所有状态"
+
+#: dashboard.js:2
+msgid "All languages"
+msgstr "所有语言"
+
+#: dashboard.js:2
+msgid "All translation statuses"
+msgstr "所有翻译状态"
+
+#: dashboard.js:2
+msgid "Not translated"
+msgstr "未翻译"
+
+#: dashboard.js:2
+msgid "Not translated or needs updating"
+msgstr "未翻译或需要更新"
+
+#: dashboard.js:2
+msgid "Needs updating"
+msgstr "需要更新"
+
+#: dashboard.js:2
+msgid "Translation in progress"
+msgstr "翻译中"
+
+#: dashboard.js:2
+msgid "Translation complete"
+msgstr "翻译完毕"
+
+#: dashboard.js:2
+msgid "Parent:"
+msgstr "家长"
+
+#: dashboard.js:2
+msgid "All taxonomies"
+msgstr "所有分类标准"
+
+#: dashboard.js:2
+msgid "Taxonomy Term:"
+msgstr "分类术语："
+
+#: dashboard.js:2
+msgid "No terms found"
+msgstr "未找到术语"
+
+#: dashboard.js:2
+msgid "Filter by:"
+msgstr "筛选方式"
+
+#: dashboard.js:2
+msgid "Title"
+msgstr "标题"
+
+#: dashboard.js:2
+msgid "View"
+msgstr "查看"
+
+#: dashboard.js:2
+msgid "Edit note for the translators"
+msgstr "给译者的编辑说明"
+
+#: dashboard.js:2
+msgid "Add note for the translators"
+msgstr "为译者添加注释"
+
+#: dashboard.js:2
+msgid "(no title)"
+msgstr "(无标题）"
+
+#: dashboard.js:2
+msgid "Image"
+msgstr "图像"
+
+#: dashboard.js:2
+msgid "Date / Status"
+msgstr "日期/状态"
+
+#: dashboard.js:2
+msgid "Word count"
+msgstr "字数"
+
+#: dashboard.js:2
+msgid "Loading..."
+msgstr "加载中..."
+
+#: dashboard.js:2
+msgid "No items"
+msgstr "无项目"
+
+#: dashboard.js:2
+msgid "%1$d %2$s selected"
+msgstr "%1$d %2$s 选定的"
+
+#: dashboard.js:2
+msgid "Filtering is disabled to show all selected items"
+msgstr "禁用筛选功能，以显示所有选定项目"
+
+#: dashboard.js:2
+msgid "Apply filter"
+msgstr "应用过滤器"
+
+#: dashboard.js:2
+msgid "%1$d %2$s not showing"
+msgstr "%1$d %2$s 不显示"
+
+#: dashboard.js:2
+msgid "Show selected items"
+msgstr "显示选定项目"
+
+#: dashboard.js:2
+msgid "Previous"
+msgstr "上一步"
+
+#: dashboard.js:2
+msgid "Next"
+msgstr "下一"
+
+#: dashboard.js:2
+msgid "Your site's content is too vast for a single translation batch. Use filters to reduce the selection, then \"select all\"."
+msgstr "您的网站内容太多，无法进行批量翻译。使用筛选器减少选择范围，然后 \"全选\"。"
+
+#: dashboard.js:2
+msgid "The current filter captures too much content. Narrow it down to enable \"select all\" for translation."
+msgstr "当前过滤器捕获的内容太多。缩小范围，启用 \"全选 \"进行翻译。"
+
+#: dashboard.js:2
+msgid "Select All"
+msgstr "选择所有"
+
+#: dashboard.js:2
+msgid "All %d items matching criteria are selected"
+msgstr "符合标准的所有%d 项目均被选中"
+
+#: dashboard.js:2
+msgid "All %d items on this page are selected"
+msgstr "本页面上的所有%d 项目均已选定"
+
+#: dashboard.js:2
+msgid "Unselect all items that match this search"
+msgstr "取消选择与此搜索匹配的所有项目"
+
+#: dashboard.js:2
+msgid "Select all items that match this search"
+msgstr "选择与此搜索匹配的所有项目"
+
+#: dashboard.js:2
+msgid "Save note"
+msgstr "保存备注"
+
+#: dashboard.js:2
+msgid "Step 1"
+msgstr "步骤 1"
+
+#: dashboard.js:2
+msgid "Select items for translation"
+msgstr "选择翻译项目"
+
+#: dashboard.js:2
+msgid "You have too many items selected to use this feature. Deselect some of the items to enable it."
+msgstr "您选择的项目太多，无法使用此功能。取消选择某些项目即可启用该功能。"
+
+#: dashboard.js:2
+msgid "Show strings in:"
+msgstr "显示字符串："
+
+#: dashboard.js:2
+msgid "All domains"
+msgstr "所有领域"
+
+#: dashboard.js:2
+msgid "All sources"
+msgstr "所有来源"
+
+#: dashboard.js:2
+msgid "String"
+msgstr "字符串"
+
+#: dashboard.js:2
+msgid "All Translation Priorities"
+msgstr "所有翻译优先事项"
+
+#: dashboard.js:2
+msgid "WPML doesn't know of any strings that need translation. Visit translations on your site's front-end (<a/>). WPML will identify all untranslated strings and list them here. To see all the strings in your site, disable \"Detect untranslated strings\" at the top of this section."
+msgstr "WPML 不知道任何需要翻译的字符串。访问网站前端 ( ) 上的翻译。 将识别所有未翻译字符串并在此列出。要查看网站中的所有字符串，请禁用本节顶部的 \"检测未翻译字符串。<a/> WPML "
+
+#: dashboard.js:2
+msgid "Domain"
+msgstr "域名"
+
+#: dashboard.js:2
+msgid "Source"
+msgstr "来源"
+
+#: dashboard.js:2
+msgid "Type"
+msgstr "类型"
+
+#: dashboard.js:2
+msgid "Disabled"
+msgstr "已禁用"
+
+#: dashboard.js:2
+msgid "WPML can detect strings that appear on the site and list them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here only the strings that actually appear on the site, you need to enable this feature."
+msgstr "WPML 可以检测网站上出现的字符串，并在此列出。该功能可帮助您识别网站上实际出现的字符串并对其进行翻译。要只在此处查看网站上实际出现的字符串，您需要启用此功能。"
+
+#: dashboard.js:2
+msgid "Enabled"
+msgstr "已启用"
+
+#: dashboard.js:2
+msgid "WPML detects strings that appear on the site and lists them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here all the strings in the site, you need to disable this feature."
+msgstr "WPML 检测网站上出现的字符串并在此列出。该功能可帮助您识别网站上实际出现的字符串并对其进行翻译。要在此处查看网站中的所有字符串，需要禁用此功能。"
+
+#: dashboard.js:2
+msgid "Detect untranslated strings"
+msgstr "检测未翻译字符串"
+
+#: dashboard.js:2
+msgid "Modify"
+msgstr "修改"
+
+#: dashboard.js:2
+msgid "Automatically register untranslated strings"
+msgstr "自动注册未翻译的字符串"
+
+#: dashboard.js:2
+msgid "Learn how to use auto-registration"
+msgstr "了解如何使用自动注册"
+
+#: dashboard.js:2
+msgid "recommended"
+msgstr "推荐"
+
+#: dashboard.js:2
+msgid "Also register strings from the website's back-end"
+msgstr "还可从网站后台注册字符串"
+
+#: dashboard.js:2
+msgid "Save settings"
+msgstr "保存设置"
+
+#: dashboard.js:2
+msgid "Leave existing translations as are"
+msgstr "保留现有翻译"
+
+#: dashboard.js:2
+msgid "Overwrite existing translations"
+msgstr "覆盖现有翻译"
+
+#: dashboard.js:2
+msgid "Some of the content you want to translate is already translated"
+msgstr "您要翻译的部分内容已经翻译完毕"
+
+#: dashboard.js:2
+msgid "What do you want to do with the content that's already translated?"
+msgstr "您想如何处理已翻译的内容？"
+
+#: dashboard.js:2
+msgid "What would you like to do when WPML finishes translating your content automatically?"
+msgstr "WPML 自动完成内容翻译后，您想做什么？"
+
+#: dashboard.js:2
+msgid "Choose how you want to handle your site's automatically translated content before it goes live. Remember that you can always edit translations, regardless of the review process."
+msgstr "选择如何在网站上线前处理自动翻译的内容。请记住，无论审核过程如何，您都可以编辑翻译内容。"
+
+#: dashboard.js:2
+msgid "Wait for review"
+msgstr "等待审查"
+
+#: dashboard.js:2
+msgid "You check and approve translations before publishing."
+msgstr "在发布之前，您要检查并批准翻译。"
+
+#: dashboard.js:2
+msgid "Your translators check and approve translations before publishing."
+msgstr "您的译员会在发布前检查并批准译文。"
+
+#: dashboard.js:2
+msgid "Publish and mark for review"
+msgstr "发布并标记以供审查"
+
+#: dashboard.js:2
+msgid "WPML publishes translations immediately but flags them for you to check at your convenience."
+msgstr "WPML 立即发布译文，但会标记译文，以便您在方便时查看。"
+
+#: dashboard.js:2
+msgid "WPML publishes translations immediately but flags them for your translators to check at their convenience."
+msgstr "WPML 会立即发布译文，但会标记译文，供译员在方便时检查。"
+
+#: dashboard.js:2
+msgid "Publish without review"
+msgstr "未经审查即发布"
+
+#: dashboard.js:2
+msgid "The system publishes translations straight away, skipping the review process."
+msgstr "该系统可直接发布译文，跳过审核过程。"
+
+#: dashboard.js:2
+msgid "Suggested deadline:"
+msgstr "建议的截止日期："
+
+#: dashboard.js:2
+msgid "Set a batch name and deadline"
+msgstr "设置批次名称和截止日期"
+
+#: dashboard.js:2
+msgid "You can assign a custom name to this batch for easy tracking and suggest a deadline to clarify the priority for translators."
+msgstr "您可以为该批次指定一个自定义名称，以便于跟踪，还可以建议一个截止日期，以明确翻译人员的优先级。"
+
+#: dashboard.js:2
+msgid "Batch name:"
+msgstr "批次名称："
+
+#: dashboard.js:2
+msgid "Your Automatic Translation Credits"
+msgstr "您的自动翻译积分"
+
+#: dashboard.js:2
+msgid "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s translator</add_yourself> to the site.<br/> Add yourself as %s translator and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "In order to assign yourself as translator, you first need to <add_yourself>add yourself as <t1c481aa9></t1c481aa9> translator</add_yourself> to the site.<br/> Add yourself as <t1c481aa9></t1c481aa9> translator and click <check_again>check again</check_again> or choose a different translation option."
+
+#: dashboard.js:2
+msgid "Checking"
+msgstr "检查"
+
+#: dashboard.js:2
+msgid "In order to assign a translation service, you first need to <activate_ts>activate a translation service</activate_ts>.<br/>Activate a translation service and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "In order to assign a translation service, you first need to <activate_ts>activate a translation service</activate_ts>.<br/>Activate a translation service and click <check_again>check again</check_again> or choose a different translation option."
+
+#: dashboard.js:2
+msgid "In order to translate automatically, you first need to <enable_ate>enable WPML's Advanced Translation Editor</enable_ate>.<br/>Enable the Advanced Translation Editor and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "In order to translate automatically, you first need to <enable_ate>enable WPML's Advanced Translation Editor</enable_ate>.<br/>Enable the Advanced Translation Editor and click <check_again>check again</check_again> or choose a different translation option."
+
+#: dashboard.js:2
+msgid ""
+"Any existing content (translations) will be overwritten when creating duplicates.\n"
+"When duplicating content, please first duplicate parent pages to maintain the site's hierarchy."
+msgstr "\n在复制内容时，请首先复制父页面，以保持网站的层次结构。"
+
+#: dashboard.js:2
+msgid "Some of the selected content is already being translated. This will cancel any in-progress translations."
+msgstr "部分所选内容已在翻译中。这将取消任何正在进行的翻译。"
+
+#: dashboard.js:2
+msgid "Buy credits"
+msgstr "购买点数"
+
+#: dashboard.js:2
+msgid "You don't have enough credits to translate your content automatically."
+msgstr "您没有足够的信用额度来自动翻译您的内容。"
+
+#: dashboard.js:2
+msgid "In order to assign to a translator, you first need to <add_translators>add %s translators</add_translators> to the site.<br/> Add %s translators and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "In order to assign to a translator, you first need to <add_translators>add <t1c481aa9></t1c481aa9> translators</add_translators> to the site.<br/> Add <t1c481aa9></t1c481aa9> translators and click <check_again>check again</check_again> or choose a different translation option."
+
+#: dashboard.js:2
+msgid "Your site doesn't have any reviewers for %s. This means that you’re the only person who can review these translations."
+msgstr "您的网站上没有%s 的审核人员。这意味着您是唯一可以审核这些翻译的人。"
+
+#: dashboard.js:2
+msgid "Your site doesn't have any reviewers yet. This means that you’re the only person who can review translations."
+msgstr "您的网站还没有任何审校人员。这意味着您是唯一可以审核翻译的人。"
+
+#: dashboard.js:2
+msgid "If you want other people to review the translations, go to <a>WPML → Translation Management → Translators</a> and add translators. They will be able to both review and translate content for you."
+msgstr "如果您希望其他人审阅翻译，请访问<a>WPML → 翻译管理 → 翻译员</a>并添加翻译员。他们将可以为您审阅和翻译内容。"
+
+#: dashboard.js:2
+msgid "WPML does not support duplicating strings."
+msgstr "WPML 不支持重复字符串。"
+
+#: dashboard.js:2
+msgid "Finish setting up %s on your site"
+msgstr "完成在网站上设置%s "
+
+#: dashboard.js:2
+msgid "You need to authenticate %s to send them content for translation.<br/>Visit the <a>Translators tab</a> to finish the setup and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "您需要验证%s，才能将内容发送给他们进行翻译。<br/>访问<a>翻译选项卡</a>完成设置，并单击<check_again>再次选中</check_again>或选择不同的翻译选项。"
+
+#: dashboard.js:2
+msgid "Content selected for translation"
+msgstr "选定翻译的内容"
+
+#: dashboard.js:2
+msgid "Volume"
+msgstr "容量"
+
+#: dashboard.js:2
+msgid "~ %d words"
+msgstr "~%d 字"
+
+#: dashboard.js:2
+msgid "Total"
+msgstr "总计"
+
+#: dashboard.js:2
+msgid "Sending for translation..."
+msgstr "发送翻译..."
+
+#: dashboard.js:2
+msgid "Sending for translation failed"
+msgstr "发送翻译失败"
+
+#: dashboard.js:2
+msgid "You selected multiple translation methods for content across different languages:"
+msgstr "您为不同语言的内容选择了多种翻译方法："
+
+#: dashboard.js:2
+msgid "WPML did not create translations for some languages because:"
+msgstr "WPML 没有为某些语言创建翻译，因为"
+
+#: dashboard.js:2
+msgid "Close"
+msgstr "关闭"
+
+#: dashboard.js:2
+msgid "1 item is being translated automatically."
+msgid_plural "%d items are being translated automatically."
+msgstr[0] "1 个项目正在自动翻译中。"
+msgstr[1] "%d 项目正在自动翻译。"
+
+#: dashboard.js:2
+msgid "From now on, WPML will automatically translate new content on your site."
+msgstr "从现在起，WPML 将自动翻译您网站上的新内容。"
+
+#: dashboard.js:2
+msgid "From now on, WPML will automatically translate your site's content."
+msgstr "从现在起，WPML 将自动翻译您的网站内容。"
+
+#: dashboard.js:2
+msgid "Automatic translations summary"
+msgstr "自动翻译摘要"
+
+#: dashboard.js:2
+msgid "1 item has been duplicated."
+msgid_plural "%d items have been duplicated."
+msgstr[0] "1 个项目重复。"
+msgstr[1] "%d 项目已经重复。"
+
+#: dashboard.js:2
+msgid "Duplication summary"
+msgstr "复制摘要"
+
+#: dashboard.js:2
+msgid "There was a problem sending your content for translation."
+msgstr "发送您的内容进行翻译时出现问题。"
+
+#: dashboard.js:2
+msgid "Please try again in a few minutes. If the issue persists, please contact our support."
+msgstr "请几分钟后再试一次。如果问题仍然存在，请联系我们的支持人员。"
+
+#: dashboard.js:2
+msgid "1 item has been successfully sent to translators! To check its status, please visit the <s>Jobs</s> tab in <s>WPML → Translation Management</s>."
+msgid_plural "%d items have been successfully sent to translators! For status updates, please visit the <s>Jobs</s> tab in <s>WPML → Translation Management</s>."
+msgstr[0] "1 个项目已成功发送给译员！要查看其状态，请访问 <s>WPML → Translation Management</s> 中的 <s>Jobs</s> 选项卡。"
+msgstr[1] "%d 项目已成功发送给译员！有关状态更新，请访问 <s>WPML → 翻译管理</s> 中的 <s>Jobs</s> 选项卡。"
+
+#: dashboard.js:2
+msgid "Local translations summary"
+msgstr "本地翻译摘要"
+
+#: dashboard.js:2
+msgid "Go to Translation Jobs"
+msgstr "转到翻译工作"
+
+#: dashboard.js:2
+msgid "%d item has been sent for translation to %s. Please continue to their site to start the translation."
+msgid_plural "%d items have been sent for translation to %s. Please continue to their site to start the translation."
+msgstr[0] "%d 项目已发送至 进行翻译。请继续访问其网站开始翻译。%s"
+msgstr[1] "%d 项目已发送翻译至 。请继续访问他们的网站开始翻译。%s"
+
+#: dashboard.js:2
+msgid "Translation service translations summary"
+msgstr "翻译服务 翻译摘要"
+
+#: dashboard.js:2
+msgid "Continue to %s"
+msgstr "继续%s"
+
+#: dashboard.js:2
+msgid "Translate and Duplicate"
+msgstr "翻译和复制"
+
+#: dashboard.js:2
+msgid "Duplicate"
+msgstr "重复"
+
+#: dashboard.js:2
+msgid "Translate"
+msgstr "翻译"
+
+#: dashboard.js:2
+msgid "Selected content is already translated"
+msgstr "所选内容已翻译"
+
+#: dashboard.js:2
+msgid "Please select a review option"
+msgstr "请选择审查选项"
+
+#: dashboard.js:2
+msgid "Assign local translator or choose another option"
+msgstr "指定本地翻译或选择其他选项"
+
+#: dashboard.js:2
+msgid "Assign yourself or choose another option"
+msgstr "自己分配或选择其他选项"
+
+#: dashboard.js:2
+msgid "Activate translation service or choose another option"
+msgstr "激活翻译服务或选择其他选项"
+
+#: dashboard.js:2
+msgid "Activate ATE or choose another option"
+msgstr "激活ATE或选择其他选项"
+
+#: dashboard.js:2
+msgid "Authenticate translation service or choose another option"
+msgstr "验证翻译服务或选择其他选项"
+
+#: dashboard.js:2
+msgid "<s>%s</s> cannot process more than <s>%d</s> jobs in a single batch. WPML will automatically split your jobs into separate batches to ensure an error-free delivery to <s>%s</s>. <br/><br/> Do you want to proceed?"
+msgstr "<s>%s</s>不能在一个批次中处理超过 <s>%d</s>WPML 会自动将作业分成不同的批次，以确保无差错地将作业交付给 <s>%s</s>. <br/><br/> 您要继续吗？"
+
+#: dashboard.js:2
+msgid "WPML will send jobs to %s in separate batches"
+msgstr "WPML 将分批把工作发送到%s "
+
+#: dashboard.js:2
+msgid "Yes, send jobs in separate batches"
+msgstr "是，分批发送工作"
+
+#: dashboard.js:2
+msgid "No, I will split jobs myself"
+msgstr "不，我会自己分工"
+
+#: dashboard.js:2
+msgid "From now on, translate new content automatically, without asking me."
+msgstr "从现在起，自动翻译新内容，无需询问我。"
+
+#: dashboard.js:2
+msgid "Do you want to translate existing content too?"
+msgstr "您还想翻译现有内容吗？"
+
+#: dashboard.js:2
+msgid "Yes, translate all new and existing content"
+msgstr "是，翻译所有新内容和现有内容"
+
+#: dashboard.js:2
+msgid "No, only translate new content"
+msgstr "不，只翻译新内容"
+
+#: dashboard.js:2
+msgid "You can translate existing content from the Translation Management Dashboard"
+msgstr "您可以从 翻译管理控制面板 \"翻译现有内容"
+
+#: dashboard.js:2
+msgid "Existing content"
+msgstr "现有内容"
+
+#: dashboard.js:2
+msgid "You selected to translate strings that are in %s. Only these strings will be translated to %s."
+msgstr "您选择翻译%s 中的字符串。只有这些字符串将被翻译到%s 。"
+
+#: dashboard.js:2
+msgid "You selected to translate strings that are in %s and %s. Only these strings will be translated to %s."
+msgstr "您选择翻译%s 和%s 中的字符串。只有这些字符串将被翻译到%s 。"
+
+#: dashboard.js:2
+msgid "Source language"
+msgstr "来源语言"
+
+#: dashboard.js:2
+msgid "Target language"
+msgstr "目标语言"
+
+#: dashboard.js:2
+msgid "Action"
+msgstr "操作"
+
+#: dashboard.js:2
+msgid "Select an option"
+msgstr "选择一个选项"
+
+#: dashboard.js:2
+msgid "-"
+msgstr "-"
+
+#: dashboard.js:2
+msgid "Translate automatically"
+msgstr "自动翻译"
+
+#: dashboard.js:2
+msgid "Translate myself"
+msgstr "我自己翻译"
+
+#: dashboard.js:2
+msgid "Assign a translator"
+msgstr "指派一名翻译"
+
+#: dashboard.js:2
+msgid "Assign translation service"
+msgstr "指定翻译服务"
+
+#: dashboard.js:2
+msgid "Do nothing"
+msgstr "什么也不做"
+
+#: dashboard.js:2
+msgid "Please choose"
+msgstr "请选择"
+
+#: dashboard.js:2
+msgid "Choose a translator"
+msgstr "选择译员"
+
+#: dashboard.js:2
+msgid "First available"
+msgstr "首次提供"
+
+#: dashboard.js:2
+msgid "(Me)"
+msgstr "我"
+
+#: dashboard.js:2
+msgid "Translation controls"
+msgstr "翻译控制"
+
+#: dashboard.js:2
+msgid "Step 2"
+msgstr "步骤 2"
+
+#: dashboard.js:2
+msgid "Action needed"
+msgstr "需要采取的行动"
+
+#: dashboard.js:2
+msgid "Automatic jobs in progress"
+msgstr "进行中的自动工作"
+
+#: dashboard.js:2
+msgid "<s>%d automatic translation jobs</s> are currently in progress"
+msgstr "<s>%d 自动翻译工作</s>正在进行中"
+
+#: dashboard.js:2
+msgid "Pause"
+msgstr "暂停"
+
+#: dashboard.js:2
+msgid "Start"
+msgstr "开始"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - credit wizard error"
+msgstr "自动翻译所有内容 - 信用向导错误"
+
+#: dashboard.js:2
+msgid "There was an error when loading the credit wizard."
+msgstr "加载信贷向导时出现错误。"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - no credits"
+msgstr "自动翻译所有内容 - 无需学分"
+
+#: dashboard.js:2
+msgid "Start translating everything"
+msgstr "开始翻译所有内容"
+
+#: dashboard.js:2
+msgid "Automatic translation uses credit. <a>Read more about automatic translation credits</a>"
+msgstr "自动翻译使用学分。<a>了解有关自动翻译信用的更多信息</a>"
+
+#: dashboard.js:2
+msgid "Start translating everything automatically"
+msgstr "开始自动翻译所有内容"
+
+#: dashboard.js:2
+msgid "WPML will translate any new content you create into %d languages."
+msgstr "WPML 会将您创建的任何新内容翻译成 语言。%d "
+
+#: dashboard.js:2
+msgid "You will be able to start Translate Everything Automatically after you send some content for translation. We recommend that you review the translations and make sure that they are good before translating your entire site's content."
+msgstr "发送一些需要翻译的内容后，您就可以开始自动翻译所有内容。我们建议您在翻译整个网站的内容之前，先查看翻译内容并确保翻译效果良好。"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - disabled"
+msgstr "自动翻译所有内容 - 已禁用"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically"
+msgstr "自动翻译所有内容"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - pausing"
+msgstr "自动翻译所有内容 - 暂停"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically is pausing"
+msgstr "自动翻译一切正在暂停"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - paused"
+msgstr "自动翻译所有内容 - 暂停"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically is paused"
+msgstr "暂停自动翻译所有内容"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically will translate all of your site's content and not only specific post types."
+msgstr "自动翻译所有内容将翻译网站的所有内容，而不仅仅是特定的帖子类型。"
+
+#: dashboard.js:2
+msgid "%d translations left in the queue. Preparing more content for translation."
+msgstr "%d 队列中剩余的翻译。准备翻译更多内容。"
+
+#: dashboard.js:2
+msgid "Preparing content for translation"
+msgstr "准备翻译内容"
+
+#: dashboard.js:2
+msgid "%d translations left in the queue"
+msgstr "%d 待译"
+
+#: dashboard.js:2
+msgid "All translations are up to date"
+msgstr "所有译文均为最新版本"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - enabled"
+msgstr "自动翻译所有内容 - 已启用"
+
+#: dashboard.js:2
+msgid "As you create new content or edit existing content, WPML will automatically translate it from %s to %s."
+msgstr "当您创建新内容或编辑现有内容时，WPML 会自动将其从%s 翻译为%s 。"
+
+#: dashboard.js:2
+msgid "Hide details"
+msgstr "隐藏详细信息"
+
+#: dashboard.js:2
+msgid "Show details"
+msgstr "显示详细信息"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically is stopped"
+msgstr "已停止自动翻译所有内容"
+
+#: dashboard.js:2
+msgid "Translation not running… there is an issue that needs your attention. Fix it to continue."
+msgstr "翻译未运行......有一个问题需要您注意。修复后才能继续。"
+
+#: dashboard.js:2
+msgid "Fix now"
+msgstr "立即修复"
+
+#: dashboard.js:2
+msgid "%d Translations are waiting for your review"
+msgstr "%d 译文等待您的审阅"
+
+#: dashboard.js:2
+msgid "Review Translations"
+msgstr "审查翻译"
+
+#: dashboard.js:2
+msgid "Error in fetching currently logged in translator"
+msgstr "获取当前登录的翻译器时出错"
+
+#: dashboard.js:2
+msgid "Error in fetching local translators"
+msgstr "获取本地翻译时出错"
+
+#: dashboard.js:2
+msgid "published"
+msgstr "已出版"
+
+#: dashboard.js:2
+msgid "Collapse"
+msgstr "崩溃"
+
+#: dashboard.js:2
+msgid "Expand"
+msgstr "展开"
+
+#: dashboard.js:2
+msgid "Close modal"
+msgstr "关闭模态"
+
+#: dashboard.js:2
+msgid "Search parent by title"
+msgstr "按标题搜索父母"
+
+#: dashboard.js:2
+msgid "No items found"
+msgstr "未找到项目"
+
+#: dashboard.js:2
+msgid "%1$s Flag"
+msgstr "%1$s 旗帜"
+
+#: dashboard.js:2
+msgid "not translated"
+msgstr "未翻译"
+
+#: dashboard.js:2
+msgid "waiting for translator"
+msgstr "等待翻译"
+
+#: dashboard.js:2
+msgid "in progress"
+msgstr "进行中"
+
+#: dashboard.js:2
+msgid "needs update"
+msgstr "需要更新"
+
+#: dashboard.js:2
+msgid "duplicate"
+msgstr "重复"
+
+#: dashboard.js:2
+msgid "complete"
+msgstr "完成"
+
+#: dashboard.js:2
+msgid "needs review"
+msgstr "需要审查"
+
+#: dashboard.js:2
+msgid "%1$s: %2$s"
+msgstr "%1$s:%2$s"

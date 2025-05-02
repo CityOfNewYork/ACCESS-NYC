@@ -9,15 +9,15 @@ class Reviews extends \WPML_Elementor_Module_With_Items {
     protected function get_title( $field ) {
         switch ( $field ) {
             case 'content':
-                return esc_html__( 'Comment Contents', 'sitepress' );
+                return esc_html__( 'Reviews: Comment Contents', 'sitepress' );
             case 'name':
-                return esc_html__( 'Commenter Name', 'sitepress' );
+                return esc_html__( 'Reviews: Commenter Name', 'sitepress' );
             case 'title':
-                return esc_html__( 'Comment Title', 'sitepress' );
+                return esc_html__( 'Reviews: Comment Title', 'sitepress' );
             case 'image':
-                return esc_html__( 'Comment Image', 'sitepress' );
+                return esc_html__( 'Reviews: Comment Image', 'sitepress' );
             case 'url':
-                return esc_html__( 'Comment Link', 'sitepress' );
+                return esc_html__( 'Reviews: Comment Link', 'sitepress' );
             default:
                 return '';
         }

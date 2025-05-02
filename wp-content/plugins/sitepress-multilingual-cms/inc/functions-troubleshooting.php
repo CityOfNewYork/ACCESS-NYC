@@ -75,6 +75,7 @@ function icl_reset_wpml( $blog_id = false ) {
 			'wpml_config_index',
 			'wpml_config_index_updated',
 			'wpml_config_files_arr',
+			\WPML_Config_Update::OPTION_KEY_GLOBAL_NOTICES_CONFIG,
 			'wpml_language_switcher',
 			'wpml_notices',
 			'wpml_start_version',

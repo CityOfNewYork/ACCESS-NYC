@@ -331,32 +331,32 @@ msgstr ""
 msgid "adding a custom language"
 msgstr ""
 
-#: src/js/setup/components/Steps/Languages.js:102
+#: src/js/setup/components/Steps/Languages.js:110
+msgid "What are the languages of your site?"
+msgstr ""
+
+#: src/js/setup/components/Steps/Languages.js:120
 msgid "Default language"
 msgstr ""
 
-#: src/js/setup/components/Steps/Languages.js:104
+#: src/js/setup/components/Steps/Languages.js:122
 msgid "What is the current language of your website?"
 msgstr ""
 
-#: src/js/setup/components/Steps/Languages.js:115
+#: src/js/setup/components/Steps/Languages.js:133
 msgid "Translation languages"
 msgstr ""
 
-#: src/js/setup/components/Steps/Languages.js:117
+#: src/js/setup/components/Steps/Languages.js:135
 msgid "Which languages do you want to translate your site into?"
 msgstr ""
 
-#: src/js/setup/components/Steps/Languages.js:132
+#: src/js/setup/components/Steps/Languages.js:149
 msgid "If you cannot find languages that you need in the list"
 msgstr ""
 
-#: src/js/setup/components/Steps/Languages.js:133
+#: src/js/setup/components/Steps/Languages.js:150
 msgid "create a custom language"
-msgstr ""
-
-#: src/js/setup/components/Steps/Languages.js:92
-msgid "What are the languages of your site?"
 msgstr ""
 
 #: src/js/translation-roles-ui/components/Managers.js:12

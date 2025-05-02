@@ -1,17 +1,21 @@
 {
-   "domain": "messages",
-   "locale_data": {
-      "messages": {
-         "": {
-            "domain": "messages",
-            "lang": "en"
-         },
-         "But...": [
-            "Nhưng..."
-         ],
-         "Wait to translate any content that contains media until we're finished configuring it. It will be just a moment.": [
-            "Hãy đợi để dịch nội dung bất kỳ chưa đa phương tiện cho đến khi chúng tôi hoàn tất việc cấu hình. Sẽ chỉ mất một chút thời gian."
-         ]
-      }
-   }
+  "translation-revision-date": "2024-08-20T09:34:53+00:00",
+  "generator": "WP-CLI/2.9.0",
+  "source": "src/js/media-setup/components/MediaSetupStatus.js",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "en",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "But...": [
+        "Nhưng..."
+      ],
+      "Wait to translate any content that contains media until we're finished configuring it. It will be just a moment.": [
+        "Hãy đợi để dịch nội dung bất kỳ chưa đa phương tiện cho đến khi chúng tôi hoàn tất việc cấu hình. Sẽ chỉ mất một chút thời gian."
+      ]
+    }
+  }
 }

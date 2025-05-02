@@ -1,0 +1,172 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Could not fetch engines data": [
+            "Δεν ήταν δυνατή η ανάκτηση δεδομένων μηχανών"
+         ],
+         "Could not save settings": [
+            "Δεν ήταν δυνατή η αποθήκευση ρυθμίσεων"
+         ],
+         "Automatic translation": [
+            "Αυτόματη μετάφραση"
+         ],
+         "Saving...": [
+            "Αποθήκευση..."
+         ],
+         "Save settings": [
+            "Αποθήκευση ρυθμίσεων"
+         ],
+         "Settings saved": [
+            "Οι ρυθμίσεις αποθηκεύτηκαν"
+         ],
+         "Some error occurred": [
+            "Παρουσιάστηκε κάποιο σφάλμα"
+         ],
+         "Loading...": [
+            "Φόρτωση..."
+         ],
+         "Failed to load engines": [
+            "Αποτυχία φόρτωσης μηχανών"
+         ],
+         "Drag your default engine to the top and order the rest by priority.": [
+            "Σύρετε την προεπιλεγμένη μηχανή σας στην κορυφή και ταξινομήστε τις υπόλοιπες κατά προτεραιότητα."
+         ],
+         "Which translation engines do you want to use?": [
+            "Ποιες μηχανές μετάφρασης θέλετε να χρησιμοποιήσετε;?"
+         ],
+         "Automatic translation engines differ in translation style and supported language pairs. If your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it.": [
+            "Οι αυτόματες μηχανές μετάφρασης διαφέρουν ως προς το ύφος μετάφρασης και τα υποστηριζόμενα ζεύγη γλωσσών. Εάν η προτιμώμενη μηχανή μετάφρασής σας δεν υποστηρίζει ένα ζεύγος γλωσσών που επιθυμείτε να χρησιμοποιήσετε, ανατρέχουμε στην επόμενη προτιμώμενη μηχανή σας που το υποστηρίζει."
+         ],
+         "WPML AI (beta) automatically detects the formality of your content and translates with the same formality.": [
+            "Το WPML AI (beta) ανιχνεύει αυτόματα την τυπικότητα του περιεχομένου σας και μεταφράζει με την ίδια τυπικότητα."
+         ],
+         "Auto-formality": [
+            "Αυτόματη τυπικότητα"
+         ],
+         "Choose the tone of automatic translations for %s": [
+            "Επιλέξτε τον τόνο των αυτόματων μεταφράσεων για %s"
+         ],
+         "Your site doesn't use languages that offer formality settings.": [
+            "Ο ιστότοπός σας δεν χρησιμοποιεί γλώσσες που προσφέρουν ρυθμίσεις τυπικότητας."
+         ],
+         "Edit formality": [
+            "Επεξεργασία τυπικότητας"
+         ],
+         "%d credits per word": [
+            "%d πιστώσεις ανά λέξη"
+         ],
+         "Backup %d": [
+            "Αντίγραφο ασφαλείας %d"
+         ],
+         "Default": [
+            "Προεπιλογή"
+         ],
+         "ON": [
+            "ΕΝΕΡΓΟ"
+         ],
+         "OFF": [
+            "ΑΝΕΝΕΡΓΟ"
+         ],
+         "Documentation": [
+            "Τεκμηρίωση"
+         ],
+         "DeepL's formality and how it helps get good translations": [
+            "Η τυπικότητα του DeepL και πώς βοηθά στην επίτευξη καλών μεταφράσεων"
+         ],
+         "Edit button": [
+            "Κουμπί επεξεργασίας"
+         ],
+         "Examples for %s": [
+            "Παραδείγματα για %s"
+         ],
+         "For example:": [
+            "Για παράδειγμα:"
+         ],
+         "Formality settings for %s": [
+            "Ρυθμίσεις τυπικότητας για %s"
+         ],
+         "Formality level for %s": [
+            "Επίπεδο τυπικότητας για %s"
+         ],
+         "Set formality for %s": [
+            "Ορισμός τυπικότητας για %s"
+         ],
+         "%d of your target languages can be translated using either a formal or informal tone.\n The tone which gives the best translation for each language is set by default.": [
+            "%d των γλωσσών-στόχων σας μπορούν να μεταφραστούν χρησιμοποιώντας είτε επίσημο είτε ανεπίσημο τόνο.\n Ο τόνος που παρέχει την καλύτερη μετάφραση για κάθε γλώσσα έχει οριστεί ως προεπιλογή."
+         ],
+         "%s doesn't yet support formality options for %s.": [
+            "Το %s δεν υποστηρίζει ακόμη επιλογές τυπικότητας για %s."
+         ],
+         "Cancel": [
+            "Ακύρωση"
+         ],
+         "Update": [
+            "Ενημέρωση"
+         ],
+         "Formal": [
+            "Τυπικό"
+         ],
+         "Informal": [
+            "Ανεπίσημο"
+         ],
+         "Don't translate drafts. Only translate when I publish content.": [
+            "Μην μεταφράζετε προσχέδια. Μεταφράστε μόνο όταν δημοσιεύω περιεχόμενο."
+         ],
+         "Translate drafts as I save them (consumes a bit more translation credits).": [
+            "Μεταφράστε προσχέδια καθώς τα αποθηκεύω (καταναλώνει λίγο περισσότερες μονάδες μετάφρασης)."
+         ],
+         "Do you want to translate drafts automatically?": [
+            "Θέλετε να μεταφράζονται αυτόματα τα προσχέδια;?"
+         ],
+         "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s.": [
+            "Αυτή η λειτουργία είναι διαθέσιμη μόνο όταν ενεργοποιήσετε την επιλογή “Αυτόματη Μετάφραση Όλων” από τον %sΠίνακα Ελέγχου Μεταφράσεων%s."
+         ],
+         "Close modal": [
+            "Κλείσιμο παραθύρου"
+         ],
+         "What would you like to do after WPML finishes translating your content automatically?": [
+            "Τι θα θέλατε να κάνετε αφού το WPML ολοκληρώσει την αυτόματη μετάφραση του περιεχομένου σας;?"
+         ],
+         "Wait for review": [
+            "Αναμονή για επανεξέταση"
+         ],
+         "Recommended with DeepL, Google and Microsoft": [
+            "Συνιστάται με DeepL, Google και Microsoft"
+         ],
+         "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process.": [
+            "Η DeepL, η Google και η Microsoft παρέχουν εξαιρετικές μεταφράσεις, αλλά συνιστούμε ανθρώπινη επισκόπηση για να επιβεβαιωθεί η ορθότητά τους. Το WPML AI προσφέρει Μεταφράσεις Καλύτερες από τις Ανθρώπινες που κατανοούν το πλαίσιο, ώστε να μπορείτε με βεβαιότητα να παραλείψετε τη διαδικασία επανεξέτασης."
+         ],
+         "WPML keeps translations unpublished, so you can review them first.": [
+            "Το WPML διατηρεί τις μεταφράσεις μη δημοσιευμένες, ώστε να μπορείτε να τις επανεξετάσετε πρώτα."
+         ],
+         "Your translators review and approve translations before publishing.": [
+            "Οι μεταφραστές σας επανεξετάζουν και εγκρίνουν τις μεταφράσεις πριν από τη δημοσίευση."
+         ],
+         "Publish and mark for review": [
+            "Δημοσίευση και επισήμανση για επανεξέταση"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "Το WPML δημοσιεύει τις μεταφράσεις αμέσως αλλά τις επισημαίνει για να τις ελέγξετε όταν σας βολεύει."
+         ],
+         "WPML publishes translations immediately but flags them for translators to review later.": [
+            "Το WPML δημοσιεύει τις μεταφράσεις αμέσως αλλά τις επισημαίνει για να τις επανεξετάσουν οι μεταφραστές αργότερα."
+         ],
+         "Publish without review": [
+            "Δημοσίευση χωρίς επανεξέταση"
+         ],
+         "Recommended with WPML AI": [
+            "Συνιστάται με WPML AI"
+         ],
+         "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy.": [
+            "Το WPML AI παρέχει Μεταφράσεις Καλύτερες από Ανθρώπινες που σπάνια χρειάζονται βελτιώσεις, επιτρέποντάς σας να παραλείψετε με σιγουριά τη διαδικασία επισκόπησης. Για άλλες μηχανές μετάφρασης, συνιστάται ανθρώπινη επισκόπηση για επιβεβαίωση της ακρίβειας."
+         ],
+         "WPML publishes translations immediately, skipping the review process.": [
+            "Το WPML δημοσιεύει τις μεταφράσεις αμέσως, παραλείποντας τη διαδικασία επανεξέτασης."
+         ]
+      }
+   }
+}

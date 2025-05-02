@@ -9,6 +9,7 @@ use WPML\FP\Maybe;
 use WPML\FP\Relation;
 use WPML\PB\Shutdown\Hooks as ShutdownHooks;
 use function WPML\FP\invoke;
+use function WPML\FP\partial;
 use function WPML\FP\partialRight;
 use function WPML\FP\pipe;
 
@@ -40,7 +41,7 @@ class Hooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC
 
 	public function add_hooks() {
 		if ( Settings::isEnabled() && $this->isTmLoaded() ) {
-			add_filter( 'wpml_tm_delegate_translation_statuses_update', [ $this, 'enqueueTranslationStatusUpdate'], 10, 3 );
+			add_filter( 'wpml_tm_delegate_translation_statuses_update', [ $this, 'enqueueTranslationStatusUpdate' ], 10, 3 );
 			add_filter( 'wpml_tm_post_md5_content', [ $this, 'getMd5ContentFromPackageStrings' ], 10, 2 );
 			add_action( 'shutdown', [ $this, 'afterRegisterAllStringsInShutdown' ], ShutdownHooks::PRIORITY_REGISTER_STRINGS + 1 );
 		}
@@ -126,12 +127,24 @@ class Hooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC
 		$ifCompleted = pipe( [ TranslationStatus::class, 'get' ], Relation::equals( ICL_TM_COMPLETE ) );
 
 		// $resaveElement :: \WPML_Post_Element → null
-		$resaveElement = \WPML\FP\Fns::unary( partialRight( [ $this->pbIntegration, 'resave_post_translation_in_shutdown' ], false ) );
+		$resaveElement = Fns::unary( partialRight( [ $this->pbIntegration, 'resave_post_translation_in_shutdown' ], false ) );
+
+		$callAction = function( \WPML_Post_Element $post ) {
+			$postId = $post->get_element_id();
+
+			/**
+			 * Triggered when translations are auto-updated for a page builder post.
+			 *
+			 * @param int $postId
+			 */
+			do_action( 'wpml_pb_translations_auto_updated', $postId );
+		};
 
 		wpml_collect( $this->elementFactory->create_post( $postId )->get_translations() )
 			->reject( $ifOriginal )
 			->filter( $ifCompleted )
-			->each( $resaveElement );
+			->each( $resaveElement )
+			->each( $callAction );
 	}
 
 	/**
@@ -144,7 +157,7 @@ class Hooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC
 			$post = get_post( $postId );
 
 			return $post instanceof \WP_Post
-			       && $this->pageBuilt->is_page_builder_page( $post );
+				&& $this->pageBuilt->is_page_builder_page( $post );
 		};
 
 		return self::getPackages( $postId )

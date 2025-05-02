@@ -57,7 +57,7 @@ class WPML_Lang_Domains_Box extends WPML_SP_User {
                         </td>
                         <td>
                             <p style="white-space: nowrap"><input
-                                        class="validate_language_domain"
+                                        class="wpml-checkbox-native validate_language_domain"
                                         type="checkbox"
                                         id="validate_language_domains_<?php echo esc_attr( $code ); ?>"
                                         name="validate_language_domains[]"
@@ -83,7 +83,7 @@ class WPML_Lang_Domains_Box extends WPML_SP_User {
             <tr>
                 <td colspan="2">
                     <label for="sso_enabled">
-                        <input type="checkbox" id="sso_enabled" name="sso_enabled"
+                        <input class="wpml-checkbox-native" type="checkbox" id="sso_enabled" name="sso_enabled"
                                value="1" <?php checked( $is_sso_enabled, true, true ); ?>>
 						<?php esc_html_e( 'Auto sign-in and sign-out users from all domains', 'sitepress' ); ?>
                     </label>

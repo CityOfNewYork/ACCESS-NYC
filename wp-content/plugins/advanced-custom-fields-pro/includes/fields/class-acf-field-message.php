@@ -16,7 +16,6 @@ if ( ! class_exists( 'acf_field_message' ) ) :
 		 * @param   n/a
 		 * @return  n/a
 		 */
-
 		function initialize() {
 
 			// vars
@@ -25,7 +24,10 @@ if ( ! class_exists( 'acf_field_message' ) ) :
 			$this->category      = 'layout';
 			$this->description   = __( 'Used to display a message to editors alongside other fields. Useful for providing additional context or instructions around your fields.', 'acf' );
 			$this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-message.png';
-			$this->supports      = array( 'required' => false );
+			$this->supports      = array(
+				'required' => false,
+				'bindings' => false,
+			);
 			$this->defaults      = array(
 				'message'   => '',
 				'esc_html'  => 0,
@@ -43,7 +45,6 @@ if ( ! class_exists( 'acf_field_message' ) ) :
 		 * @since   3.6
 		 * @date    23/01/13
 		 */
-
 		function render_field( $field ) {
 
 			// vars
@@ -127,7 +128,6 @@ if ( ! class_exists( 'acf_field_message' ) ) :
 		 * @param   $field (array)
 		 * @return  $field
 		 */
-
 		function translate_field( $field ) {
 
 			// translate

@@ -15,7 +15,6 @@ if ( ! class_exists( 'acf_field__group' ) ) :
 		 * @param   n/a
 		 * @return  n/a
 		 */
-
 		function initialize() {
 
 			// vars
@@ -25,6 +24,9 @@ if ( ! class_exists( 'acf_field__group' ) ) :
 			$this->description   = __( 'Provides a way to structure fields into groups to better organize the data and the edit screen.', 'acf' );
 			$this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-group.png';
 			$this->doc_url       = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/group/', 'docs', 'field-type-selection' );
+			$this->supports      = array(
+				'bindings' => false,
+			);
 			$this->defaults      = array(
 				'sub_fields' => array(),
 				'layout'     => 'block',
@@ -48,7 +50,6 @@ if ( ! class_exists( 'acf_field__group' ) ) :
 		 *
 		 * @return  $field - the field array holding all the field options
 		 */
-
 		function load_field( $field ) {
 
 			// vars
@@ -76,7 +77,6 @@ if ( ! class_exists( 'acf_field__group' ) ) :
 		 * @param   $field (array) the field array holding all the field options
 		 * @return  $value
 		 */
-
 		function load_value( $value, $post_id, $field ) {
 
 			// bail early if no sub fields
@@ -154,7 +154,6 @@ if ( ! class_exists( 'acf_field__group' ) ) :
 		 *
 		 * @return  $value - the modified value
 		 */
-
 		function update_value( $value, $post_id, $field ) {
 
 			// bail early if no value
@@ -210,7 +209,6 @@ if ( ! class_exists( 'acf_field__group' ) ) :
 		 * @param   $field (array)
 		 * @return  $field
 		 */
-
 		function prepare_field_for_db( $field ) {
 
 			// bail early if no sub fields
@@ -239,7 +237,6 @@ if ( ! class_exists( 'acf_field__group' ) ) :
 		 * @since   3.6
 		 * @date    23/01/13
 		 */
-
 		function render_field( $field ) {
 
 			// bail early if no sub fields
@@ -289,7 +286,6 @@ if ( ! class_exists( 'acf_field__group' ) ) :
 		 * @param   $post_id (int)
 		 * @return  $post_id (int)
 		 */
-
 		function render_field_block( $field ) {
 
 			// vars
@@ -316,7 +312,6 @@ if ( ! class_exists( 'acf_field__group' ) ) :
 		 * @param   $post_id (int)
 		 * @return  $post_id (int)
 		 */
-
 		function render_field_table( $field ) {
 
 			?>
@@ -381,7 +376,6 @@ if ( ! class_exists( 'acf_field__group' ) ) :
 		 *
 		 * @param   $field  - an array holding all the field's data
 		 */
-
 		function render_field_settings( $field ) {
 
 			// vars
@@ -435,7 +429,6 @@ if ( ! class_exists( 'acf_field__group' ) ) :
 		 * @param   $post_id (int)
 		 * @return  $post_id (int)
 		 */
-
 		function validate_value( $valid, $value, $field, $input ) {
 
 			// bail early if no $value
@@ -484,7 +477,6 @@ if ( ! class_exists( 'acf_field__group' ) ) :
 		 *
 		 * @return  $field - the modified field
 		 */
-
 		function duplicate_field( $field ) {
 
 			// get sub fields
@@ -561,7 +553,6 @@ if ( ! class_exists( 'acf_field__group' ) ) :
 		 * @param   array  $field    The field settings
 		 * @return  void
 		 */
-
 		function delete_value( $post_id, $meta_key, $field ) {
 
 			// bail early if no sub fields

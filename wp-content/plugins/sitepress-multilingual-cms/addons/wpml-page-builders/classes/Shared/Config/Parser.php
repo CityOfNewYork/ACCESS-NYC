@@ -6,8 +6,14 @@ use WPML\FP\Fns;
 use WPML\FP\Lst;
 use WPML\FP\Maybe;
 use WPML\FP\Obj;
+use WPML\PB\ConvertIds\Helper;
 
 class Parser {
+
+	const EXCLUDE_TYPES = [
+		Helper::TYPE_POST_IDS,
+		Helper::TYPE_TAXONOMY_IDS,
+	];
 
 	/** @var string $configRoot */
 	private $configRoot;
@@ -91,6 +97,10 @@ class Parser {
 		$parsedFields = [];
 
 		foreach ( $this->normalize( $rawFields ) as $field ) {
+			if ( in_array( Obj::path( [ 'attr', 'type' ], $field ), self::EXCLUDE_TYPES, true ) ) {
+				continue;
+			}
+
 			$key     = Obj::path( [ 'attr', 'key_of' ], $field );
 			$fieldId = Obj::path( [ 'attr', 'field_id' ], $field );
 

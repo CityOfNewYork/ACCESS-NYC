@@ -1,0 +1,44 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Add glossary terms": [
+            "הוסף מונחי מילון"
+         ],
+         "Minimize": [
+            "צמצם"
+         ],
+         "Expand": [
+            "הרחב"
+         ],
+         "There's nothing yet in the Glossary": [
+            "אין עדיין דבר במילון"
+         ],
+         "Looks like you're not yet using the glossary. Glossary can help you:": [
+            "נראה שעדיין לא השתמשת במילון. המילון יכול לעזור לך:"
+         ],
+         "Improve the quality of the translation": [
+            "לשפר את איכות התרגום"
+         ],
+         "Ensure translation consistency": [
+            "להבטיח עקביות בתרגום"
+         ],
+         "Reduce translation costs": [
+            "להפחית עלויות תרגום"
+         ],
+         "Improve SEO in translation languages": [
+            "לשפר SEO בשפות התרגום"
+         ],
+         "How to Use the Glossary for Accurate Translations": [
+            "כיצד להשתמש במילון לתרגומים מדויקים"
+         ],
+         "%d item in the <a>Glossary</a>": [
+            "%d פריט ב<a>מילון</a>",
+            "%d פריטים ב<a>מילון</a>"
+         ]
+      }
+   }
+}

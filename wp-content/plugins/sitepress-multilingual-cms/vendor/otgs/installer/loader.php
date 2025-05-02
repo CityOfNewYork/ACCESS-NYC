@@ -26,6 +26,11 @@ if ( ! function_exists( 'otgs_is_rest_request' ) ) {
 	}
 }
 
+if ( file_exists( __DIR__ . '/../../otgs/icons/loader.php' ) ) {
+	$vendor_root_url = plugins_url( '/', __FILE__ )  . '../..'; // This variable is required in otgs/icons/loader.php
+	require_once __DIR__ . '/../../otgs/icons/loader.php';
+}
+
 $is_cron_request   = defined( 'DOING_CRON' ) && DOING_CRON;
 $is_wp_cli_request = defined( 'WP_CLI' ) && WP_CLI;
 
@@ -62,7 +67,7 @@ if ( ! $is_cron_request && ! $is_wp_cli_request && ! is_admin() && ! otgs_is_res
 				) {
 
 					$showFrontendBanner = function () use ( $repository_id ) {
-						$removeFrontendBannerLink = 'https://wpml.org/faq/how-to-remove-the-this-site-is-registered-on-wpml-org-as-a-development-site-notice/';
+						$removeFrontendBannerLink = 'https://wpml.org/faq/how-to-remove-the-this-site-is-registered-on-wpml-org-as-a-development-site-notice/?utm_source=plugin&utm_medium=gui&utm_campaign=wpml-core&utm_term=footer-notice';
 						$wpmlText = sprintf(
 							__( 'This site is registered on %s as a development site. Switch to a production site key to %s.', 'installer' ),
 							'<a href="https://wpml.org">wpml.org</a>', '<a href="' . $removeFrontendBannerLink . '">remove this banner</a>'
@@ -114,7 +119,7 @@ $wp_installer_instance = dirname( __FILE__ ) . '/installer.php';
 global $wp_installer_instances;
 $wp_installer_instances[ $wp_installer_instance ] = [
 	'bootfile' => $wp_installer_instance,
-	'version'  => '3.1.6'
+	'version'  => '3.1.13'
 ];
 
 /**

@@ -55,10 +55,14 @@ class WPML_Term_Element extends WPML_Translation_Element {
 	public function get_wpml_element_type() {
 		$element_type = '';
 		if ( ! is_wp_error( $this->get_wp_element_type() ) ) {
-			$element_type = 'tax_' . $this->get_wp_element_type();
+			$element_type = $this->get_element_type() . '_' . $this->get_wp_element_type();
 		}
 
 		return $element_type;
+	}
+
+	public function get_element_type() {
+		return 'tax';
 	}
 
 	public function get_element_id() {

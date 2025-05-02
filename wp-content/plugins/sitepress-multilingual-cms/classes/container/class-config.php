@@ -2,6 +2,8 @@
 
 namespace WPML\Container;
 
+use WPML\TM\ATE\AutoTranslate\Endpoint\GetJobsCount;
+
 class Config {
 
 	public static function getSharedInstances() {
@@ -61,6 +63,15 @@ class Config {
 				$languagePairs = new \WPML_Language_Pair_Records( $wpdb, new \WPML_Language_Records( $wpdb ) );
 
 				return new \WPML\User\UsersByCapsRepository( $wpdb, $languagePairs );
+			},
+			GetJobsCount::class => function() {
+				return new GetJobsCount(
+					new \WPML\TM\ATE\AutoTranslate\Repository\CachedJobsCount(
+						new \WPML\TM\ATE\AutoTranslate\Repository\JobsCount(
+							new \WPML\TM\ATE\Jobs()
+						)
+					)
+				);
 			},
 		];
 	}

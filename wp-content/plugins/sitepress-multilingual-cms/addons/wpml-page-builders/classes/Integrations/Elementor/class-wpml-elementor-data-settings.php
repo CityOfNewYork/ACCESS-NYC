@@ -32,10 +32,10 @@ class WPML_Elementor_Data_Settings implements IWPML_Page_Builders_Data_Settings 
 	}
 
 	/**
-	 * @param  array  $value
-	 * @param  int    $translated_post_id
-	 * @param  int    $original_post_id
-	 * @param  string $meta_key
+	 * @param array|mixed $value
+	 * @param int         $translated_post_id
+	 * @param int         $original_post_id
+	 * @param string      $meta_key
 	 *
 	 * @return mixed
 	 */

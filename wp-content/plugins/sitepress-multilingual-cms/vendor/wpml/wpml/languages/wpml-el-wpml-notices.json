@@ -1,0 +1,44 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Add glossary terms": [
+            "Προσθήκη όρων γλωσσαρίου"
+         ],
+         "Minimize": [
+            "Ελαχιστοποίηση"
+         ],
+         "Expand": [
+            "Επέκταση"
+         ],
+         "There's nothing yet in the Glossary": [
+            "Δεν υπάρχει ακόμη τίποτα στο Γλωσσάριο"
+         ],
+         "Looks like you're not yet using the glossary. Glossary can help you:": [
+            "Φαίνεται ότι δεν χρησιμοποιείτε ακόμη το γλωσσάριο. Το Γλωσσάριο μπορεί να σας βοηθήσει να:"
+         ],
+         "Improve the quality of the translation": [
+            "Βελτιώσετε την ποιότητα της μετάφρασης"
+         ],
+         "Ensure translation consistency": [
+            "Διασφαλίσετε τη συνέπεια της μετάφρασης"
+         ],
+         "Reduce translation costs": [
+            "Μειώσετε το κόστος μετάφρασης"
+         ],
+         "Improve SEO in translation languages": [
+            "Βελτιώσετε το SEO στις γλώσσες μετάφρασης"
+         ],
+         "How to Use the Glossary for Accurate Translations": [
+            "Πώς να χρησιμοποιήσετε το Γλωσσάριο για ακριβείς μεταφράσεις"
+         ],
+         "%d item in the <a>Glossary</a>": [
+            "%d στοιχείο στο <a>Γλωσσάριο</a>",
+            "%d στοιχεία στο <a>Γλωσσάριο</a>"
+         ]
+      }
+   }
+}

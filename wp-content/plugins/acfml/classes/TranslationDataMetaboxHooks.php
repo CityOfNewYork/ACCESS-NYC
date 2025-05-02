@@ -3,6 +3,7 @@
 namespace ACFML;
 
 use ACFML\Strings\Package;
+use ACFML\Tools\AdminUrl;
 use ACFML\TranslationDataTrait;
 use WPML\LIB\WP\Hooks;
 use function WPML\FP\spreadArgs;
@@ -75,13 +76,14 @@ class TranslationDataMetaboxHooks implements \IWPML_Backend_Action {
 	 * @param string $status
 	 */
 	private function labelsTranslationsStatusInfo( $status ) {
+		$tmDashboardUrl = AdminUrl::getWPMLTMDashboardPackageSection( $this->contentTypeHelper->getLabelTranslationsPackageSlug() );
 		echo '<div class="acfml-translation-status-metabox acfml-labels-translation-status">'
 			. '<span class="acfml-translation-info-title">' . esc_html( $this->contentTypeHelper->getLabelsTranslationInfoLabel() ) . '</span>'
 			. $this->getTranslationInformation( Package::status2text( $status ) ) // phpcs:disable WordPress.XSS.EscapeOutput.OutputNotEscaped
 			. sprintf(
-				/* translators: %1$s and %2$s are placeholders for bold tags. */
+				/* translators: %1$s and %2$s are placeholders for link tags. */
 				esc_html__( '%1$sTranslate labels%2$s', 'acfml' ),
-				'<a href="' . esc_url( admin_url( 'admin.php?page=tm/menu/main.php' ) ) . '" title="" class="wpml-external-link" target="_blank">',
+				'<a href="' . esc_url( $tmDashboardUrl ) . '" title="" class="wpml-external-link" target="_blank">',
 				'</a>'
 			)
 			. '</div>';

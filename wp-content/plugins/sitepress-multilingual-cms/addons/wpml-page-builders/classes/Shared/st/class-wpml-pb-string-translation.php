@@ -91,11 +91,13 @@ class WPML_PB_String_Translation {
 	}
 
 	/**
-	 * @param string $string_value
+	 * @param string|null $string_value
 	 *
 	 * @return string
 	 */
 	public function get_string_hash( $string_value ) {
+		$string_value = is_null( $string_value ) ? '' : $string_value;
+
 		return md5( $string_value );
 	}
 }

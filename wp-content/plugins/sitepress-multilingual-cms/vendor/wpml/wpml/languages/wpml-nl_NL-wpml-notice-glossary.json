@@ -1,0 +1,44 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Add glossary terms": [
+            "Voeg termen toe aan de woordenlijst"
+         ],
+         "Minimize": [
+            "Minimaliseren"
+         ],
+         "Expand": [
+            "Uitklappen"
+         ],
+         "There's nothing yet in the Glossary": [
+            "Er staat nog niks in de woordenlijst"
+         ],
+         "Looks like you're not yet using the glossary. Glossary can help you:": [
+            "Ziet ernaar uit dat je de woordenlijst nog niet gebruikt. Een woordenlijst kan je helpen om:"
+         ],
+         "Improve the quality of the translation": [
+            "De kwaliteit van de vertaling te verbeteren"
+         ],
+         "Ensure translation consistency": [
+            "Consistentie in vertalingen te waarborgen"
+         ],
+         "Reduce translation costs": [
+            "Vertaalkosten te verlagen"
+         ],
+         "Improve SEO in translation languages": [
+            "SEO in vertaalde talen te verbeteren"
+         ],
+         "How to Use the Glossary for Accurate Translations": [
+            "Hoe je de woordenlijst gebruikt voor nauwkeurige vertalingen"
+         ],
+         "%d item in the <a>Glossary</a>": [
+            "%d item in de <a>Woordenlijst</a>",
+            "%d items in de <a>Woordenlijst</a>"
+         ]
+      }
+   }
+}

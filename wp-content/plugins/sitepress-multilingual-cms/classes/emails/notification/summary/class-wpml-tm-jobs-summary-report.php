@@ -13,16 +13,6 @@ class WPML_TM_Jobs_Summary_Report {
 	private $jobs = array();
 
 	/**
-	 * @var WPML_TM_String
-	 */
-	private $string_counter;
-
-	/**
-	 * @var WPML_TM_Post
-	 */
-	private $post_counter;
-
-	/**
 	 * @var string
 	 */
 	private $type;
@@ -34,14 +24,10 @@ class WPML_TM_Jobs_Summary_Report {
 
 	public function __construct(
 		WPML_Translation_Jobs_Collection $jobs_collection,
-		WPML_TM_String $string_counter,
-		WPML_TM_Post $post_counter,
 		$type,
 		WPML_Translation_Element_Factory $element_factory
 	) {
 		$this->jobs_collection = $jobs_collection;
-		$this->string_counter  = $string_counter;
-		$this->post_counter    = $post_counter;
 		$this->type            = $type;
 		$this->element_factory = $element_factory;
 		$this->build_completed_jobs();
@@ -116,13 +102,11 @@ class WPML_TM_Jobs_Summary_Report {
 			}
 
 			if ( 'String' === $job->get_type() ) {
-				$this->string_counter->set_id( $job->get_original_element_id() );
 				$number_of_strings ++;
-				$number_of_words_in_strings += $this->string_counter->get_words_count();
+				$number_of_words_in_strings += apply_filters( 'wpml_word_count_calculate_string', 0, $job->get_original_element_id() );
 			} else {
-				$this->post_counter->set_id( $job->get_original_element_id() );
 				$counters[ $manager_id ][ $lang_pair ]['number_of_pages'] += 1;
-				$counters[ $manager_id ][ $lang_pair ]['number_of_words'] += $this->post_counter->get_words_count();
+				$counters[ $manager_id ][ $lang_pair ]['number_of_words'] += apply_filters( 'wpml_word_count_calculate_post', 0, $job->get_original_element_id() );
 
 				$this->jobs[ $manager_id ][ WPML_TM_Jobs_Summary::JOBS_WAITING_KEY ][ $lang_pair ] = array(
 					'lang_pair'         => $job->get_source_language_code( true ) . ' ' . __( 'to', 'wpml-translation-management' ) . ' ' . $job->get_language_code( true ),

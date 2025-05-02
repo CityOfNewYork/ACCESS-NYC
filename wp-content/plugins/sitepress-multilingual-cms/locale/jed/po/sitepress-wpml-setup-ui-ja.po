@@ -1,0 +1,736 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/language/LanguagePairs.js:57
+msgid "From:"
+msgstr "元言語:"
+
+#: src/js/components/language/LanguagePairs.js:69
+msgid "--Choose language--"
+msgstr "--言語を選択--"
+
+#: src/js/components/language/LanguagePairs.js:81
+msgid "to:"
+msgstr "翻訳先:"
+
+#: src/js/components/language/SelectLanguagePairs.js:39
+msgid "Set language pair(s) for Translator %s:"
+msgstr "翻訳者%sの言語ペアを設定:"
+
+#: src/js/components/language/SelectLanguagePairs.js:64
+msgid "+ Add more language pairs for this translator"
+msgstr "+ この翻訳者にさらに言語ペアを追加"
+
+#: src/js/components/roles/CreateUser.js:100
+msgid "First Name"
+msgstr "名"
+
+#: src/js/components/roles/CreateUser.js:101
+msgid "Last Name"
+msgstr "姓"
+
+#: src/js/components/roles/CreateUser.js:105
+msgid "Role"
+msgstr "役割"
+
+#: src/js/components/roles/CreateUser.js:137
+msgid "(required)"
+msgstr "（必須）"
+
+#: src/js/components/roles/CreateUser.js:46
+msgid ""
+"Make sure that you have provided a correct email address e.g. "
+"name@domain.com"
+msgstr "正しいメールアドレスを入力していることを確認してください。例：name@domain.com"
+
+#: src/js/components/roles/CreateUser.js:64
+msgid "This field is required"
+msgstr "このフィールドは必須です"
+
+#: src/js/components/roles/CreateUser.js:84
+msgid "A translator can be any WordPress role."
+msgstr "翻訳者は任意のWordPressの役割が可能です。"
+
+#: src/js/components/roles/CreateUser.js:98
+msgid "Username"
+msgstr "ユーザー名"
+
+#: src/js/components/roles/CreateUser.js:99
+msgid "Email"
+msgstr "メール"
+
+#: src/js/components/roles/ExistingUserSelect.js:46
+#: src/js/translationServices/components/SearchForm.js:13
+msgid "Search"
+msgstr "検索"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:23
+msgid "Who will translate?"
+msgstr "誰が翻訳しますか？"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:27
+msgid "Only myself"
+msgstr "自分のみ"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:28
+msgid "You will be the sole translator for this site."
+msgstr "あなたがこのサイトの唯一の翻訳者になります。"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:35
+msgid "Users of this site"
+msgstr "このサイトのユーザー"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:36
+msgid ""
+"You will choose or create new users of this WordPress site as the "
+"translators. You can also choose yourself. This allows you to set up a team "
+"of translators working in different language pairs."
+msgstr "このWordPressサイトの既存のユーザーを選択するか、新しいユーザーを作成して翻訳者として設定します。自分自身を選択することもできます。これにより、異なる言語ペアで作業する翻訳者チームを設定できます。"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:45
+msgid "Translation Service: %s"
+msgstr "翻訳サービス：%s"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:46
+msgid "A Professional Translation Service"
+msgstr "プロフェッショナル翻訳サービス"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:49
+msgid ""
+"You have preselected %s to translate your content. Finish setting it up by "
+"entering the API token they provided to you."
+msgstr "コンテンツの翻訳に%sを事前に選択しました。提供されたAPIトークンを入力して設定を完了してください。"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:50
+msgid ""
+"WPML offers tight integration with over 70 translation services. You will "
+"choose the translation service that you prefer and enjoy a streamlined "
+"process for sending jobs and receiving completed translations."
+msgstr "WPMLは70以上の翻訳サービスと緊密に統合されています。お好みの翻訳サービスを選択し、ジョブの送信と完了した翻訳の受け取りのための合理化されたプロセスを楽しむことができます。"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:59
+msgid ""
+"I want to set a \"Translation Manager\" who will choose the translators for "
+"this site"
+msgstr "このサイトの翻訳者を選ぶ「翻訳マネージャー」を設定したいです"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:60
+msgid ""
+"You will choose a user of this site and delegate the setup of translators "
+"to him/her. Choose this option when you are building a website for a "
+"client, who will set up translator users or choose a translation service."
+msgstr "このサイトのユーザーを選択し、翻訳者の設定を委任します。クライアント向けにウェブサイトを構築しており、クライアントが翻訳者ユーザーを設定したり翻訳サービスを選択したりする場合に、このオプションを選択してください。"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:47
+msgid "user"
+msgstr "ユーザー"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:47
+msgid "Editor"
+msgstr "編集者"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:61
+msgid "Select an existing %s and set as Translation Manager"
+msgstr "既存の%sを選択し、翻訳マネージャーとして設定する"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:72
+msgid "Create a new %s and set as Translation Manager"
+msgstr "新しい%sを作成し、翻訳マネージャーとして設定する"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:85
+#: src/js/components/translators/AddTranslatorDialog.js:121
+#: src/js/components/translators/EditLanguagesDialog.js:73
+#: src/js/setup/components/Steps/AddLanguagesModal.js:496
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/ListModal.js:32
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:90
+msgid "Add Translation Manager"
+msgstr "翻訳マネージャーを追加"
+
+#: src/js/components/translation-managers/ManagerSection.js:27
+msgid "Add a Translation Manager"
+msgstr "翻訳マネージャーを追加する"
+
+#: src/js/components/translators/AddTranslatorDialog.js:111
+msgid "Set language pair(s)"
+msgstr "言語ペアを設定する"
+
+#: src/js/components/translators/AddTranslatorDialog.js:126
+msgid "Previous"
+msgstr "前へ"
+
+#: src/js/components/translators/AddTranslatorDialog.js:129
+#: src/js/components/translators/EditLanguagesDialog.js:78
+msgid "Save"
+msgstr "保存"
+
+#: src/js/components/translators/AddTranslatorDialog.js:65
+#: src/js/components/translators/UserSection.js:45
+msgid "Add a Translator"
+msgstr "翻訳者を追加する"
+
+#: src/js/components/translators/AddTranslatorDialog.js:91
+msgid "Select an existing user and set as Translator"
+msgstr "既存のユーザーを選択し、翻訳者として設定する"
+
+#: src/js/components/translators/AddTranslatorDialog.js:95
+msgid "Create a new user and set as Translator"
+msgstr "新しいユーザーを作成し、翻訳者として設定する"
+
+#: src/js/components/translators/EditLanguagesDialog.js:55
+msgid "Edit language pair(s) for translator"
+msgstr "翻訳者の言語ペアを編集する"
+
+#: src/js/components/translators/TranslatorsTable.js:128
+#: src/js/setup/components/Steps/AddLanguagesModal.js:346
+#: src/js/translationServices/components/ServicesList.js:69
+msgid "Name"
+msgstr "名前"
+
+#: src/js/components/translators/TranslatorsTable.js:140
+msgid "Language Pairs"
+msgstr "言語ペア"
+
+#: src/js/components/translators/TranslatorsTable.js:144
+msgid "You can translate to and from all languages"
+msgstr "すべての言語から、そしてすべての言語へ翻訳できます"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:48
+msgid "%s file upload failed."
+msgstr "%sファイルのアップロードに失敗しました。"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:69
+msgid "Flag"
+msgstr "フラグ"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:87
+msgid "Flag file"
+msgstr "ファイルにフラグを立てる"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:160
+msgid ""
+"You just added  language. Next, select it as the site's default language or "
+"a translation language."
+msgstr "言語を追加しました。次に、サイトのデフォルト言語または翻訳言語として選択してください。"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:162
+msgid "Language added"
+msgstr "言語が追加されました"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:192
+msgid "The value \"%s\" already exists"
+msgstr "値「%s」は既に存在します"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:215
+msgid "Add a new language"
+msgstr "新しい言語を追加"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:224
+msgid ""
+"Create a country-specific language by choosing the general language from "
+"the list below. Then, choose the country it should be localized for."
+msgstr "以下のリストから一般的な言語を選択し、次にローカライズする国を選択して、国別の言語を作成します。"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:229
+msgid ""
+"By choosing a combination that already exists in the database, WPML can "
+"help fill out the necessary fields. Read more about "
+"<AddingACustomLanguageLink />."
+msgstr "データベースに既に存在する組み合わせを選択すると、WPMLが必要なフィールドの入力を支援できます。<AddingACustomLanguageLink />についてさらに詳しく読む。"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:242
+msgid "Cannot find?"
+msgstr "見つかりませんか？"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:244
+msgid "Click here"
+msgstr "ここをクリック"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:300
+msgid ""
+"The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" "
+", \"pt-br\", \"zh-hans\""
+msgstr "フォーマットが間違っています。小文字と「-」のみを含むことができます。例：「fr」、「pt-br」、「zh-hans」"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:308
+msgid "Language"
+msgstr "言語"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:331
+msgid "Location"
+msgstr "場所"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:360
+msgid "Code"
+msgstr "コード"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:374
+msgid "The language will not be supported by automatic translations"
+msgstr "この言語は自動翻訳ではサポートされません"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:392
+msgid "Language mapping"
+msgstr "言語マッピング"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:404
+msgid "Don't map this language"
+msgstr "この言語をマッピングしない"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:418
+msgid "Default locale"
+msgstr "デフォルトロケール"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:423
+msgid ""
+"The wrong format. It may contain only small letters and \"_\". E.g: \"de\" "
+", \"de_DE\", \"zh_Hant_TW\""
+msgstr "フォーマットが間違っています。小文字と「_」のみを含むことができます。例：「de」、「de_DE」、「zh_Hant_TW」"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:435
+msgid "hreflang"
+msgstr "hreflang"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:449
+msgid "Encode url?"
+msgstr "URLをエンコードしますか？"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:45
+msgid "Flags must be:"
+msgstr "フラグは以下の条件を満たす必要があります："
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:453
+msgid "NO"
+msgstr "いいえ"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:454
+msgid "YES"
+msgstr "はい"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:460
+msgid " (required)"
+msgstr "（必須）"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:483
+msgid "Please fill in the field"
+msgstr "フィールドに記入してください"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:49
+msgid "PNG, SVG, or JPG files"
+msgstr "PNG、SVG、またはJPGファイル"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:501
+msgid "Save language"
+msgstr "言語を保存"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:52
+msgid "18 x 12 pixels"
+msgstr "18 x 12ピクセル"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:55
+msgid "Read more about "
+msgstr "詳細について読む"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:60
+msgid ""
+"The name of your language as it will appear on your site's language "
+"switcher."
+msgstr "サイトの言語スイッチャーに表示される言語の名前。"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:61
+msgid ""
+"A unique value that identifies the language in the database and URL. Once "
+"saved, the language code cannot be changed."
+msgstr "データベースとURLで言語を識別する一意の値。保存後、言語コードは変更できません。"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:62
+msgid ""
+"If your custom language is similar to an existing language, you can use the "
+"existing language's spellcheck and automatic translation. For example, if "
+"your custom language is Swiss-German, you can map to German as the language "
+"to use for spellcheck and automatic translation. If you don't map your "
+"custom language to an existing language, spellcheck and automatic "
+"translation features will be unavailable in that language."
+msgstr "カスタム言語が既存の言語に類似している場合、既存の言語のスペルチェックと自動翻訳を使用できます。例えば、カスタム言語がスイスドイツ語の場合、スペルチェックと自動翻訳に使用する言語としてドイツ語にマッピングできます。カスタム言語を既存の言語にマッピングしない場合、その言語ではスペルチェックと自動翻訳機能は利用できません。"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:66
+msgid ""
+"The value WPML checks when loading translations from MO and PO files. The "
+"default locale is included in the filenames in your /wp-content/languages/ "
+"folder in your WordPress setup."
+msgstr "WPML が MO や PO ファイルから翻訳を読み込むときにチェックする値です。デフォルトのロケールは、WordPress セットアップの  /wp-content/languages/ フォルダ内のファイル名に含まれています。"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:69
+msgid ""
+"Google uses the hreflang attribute to direct users to sites in their "
+"relevant language and location. Examples:"
+msgstr "Googleはhreflang属性を使用して、ユーザーを関連する言語と場所のサイトに誘導します。例："
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:71
+msgid "All English-speaking users: en"
+msgstr "すべての英語話者ユーザー：en"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:72
+msgid "English for UK users: en-gb"
+msgstr "イギリスのユーザー向け英語：en-gb"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:73
+msgid "English for US users: en-us"
+msgstr "アメリカのユーザー向け英語：en-us"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:81
+msgid ""
+"Determines if URLs in this language are encoded or use ASCII characters (if "
+"unsure, leave it as \"No\")."
+msgstr "この言語のURLがエンコードされているか、ASCII文字を使用しているかを決定します（不明な場合は、「いいえ」のままにしてください）。"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:98
+msgid "adding a custom language"
+msgstr "カスタム言語の追加"
+
+#: src/js/setup/components/Steps/Address.js:103
+msgid ""
+"Learn more about required server settings to use a different domain per "
+"language"
+msgstr "言語ごとに異なるドメインを使用するために必要なサーバー設定について詳しく学ぶ"
+
+#: src/js/setup/components/Steps/Address.js:113
+msgid "Language name added as a parameter"
+msgstr "パラメータとして追加された言語名"
+
+#: src/js/setup/components/Steps/Address.js:160
+msgid "I will set up the domains for my secondary languages later."
+msgstr "後で二次言語のドメインを設定します。"
+
+#: src/js/setup/components/Steps/Address.js:209
+msgid "The domain you have entered is invalid."
+msgstr "入力されたドメインが無効です。"
+
+#: src/js/setup/components/Steps/Address.js:211
+msgid "The domain you have entered must be unique."
+msgstr "入力されたドメインは一意である必要があります。"
+
+#: src/js/setup/components/Steps/Address.js:231
+msgid ""
+"Please Note: Your site won't work in your secondary languages until this is "
+"successfully set up or you switch to a different URL option."
+msgstr "注意：これが正常に設定されるか、別のURL設定に切り替えるまで、サイトは二次言語で機能しません。"
+
+#: src/js/setup/components/Steps/Address.js:53
+msgid "Learn more about Language URL Options"
+msgstr "言語URLオプションについて詳しく学ぶ"
+
+#: src/js/setup/components/Steps/Address.js:60
+msgid "How would you like to format your site's URL?"
+msgstr "サイトのURLをどのように形式化しますか？"
+
+#: src/js/setup/components/Steps/Address.js:65
+msgid "Different languages in directories"
+msgstr "ディレクトリ内の異なる言語"
+
+#: src/js/setup/components/Steps/Address.js:74
+msgid "The URL rewrite is not configured in your server."
+msgstr "URLの書き換えがサーバーで設定されていません。"
+
+#: src/js/setup/components/Steps/Address.js:77
+msgid ""
+"Learn more about required server settings to display languages in "
+"directories"
+msgstr "ディレクトリ内に言語を表示するために必要なサーバー設定について詳しく学ぶ"
+
+#: src/js/setup/components/Steps/Address.js:82
+msgid "I will fix my server settings to display languages in directories later."
+msgstr "後でディレクトリ内に言語を表示するためのサーバー設定を修正します。"
+
+#: src/js/setup/components/Steps/Address.js:84
+msgid "Your server settings do not allow for languages in directories. "
+msgstr "サーバー設定ではディレクトリ内の言語が許可されていません。"
+
+#: src/js/setup/components/Steps/Address.js:87
+msgid "Learn more about the required server settings."
+msgstr "必要なサーバー設定について詳しく学ぶ"
+
+#: src/js/setup/components/Steps/Address.js:96
+msgid "A different domain per language"
+msgstr "言語ごとに異なるドメイン"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:108
+msgid "Translate your pages"
+msgstr "ページを翻訳する"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:113
+msgid "Translate your posts"
+msgstr "投稿を翻訳する"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:29
+msgid "Next, you need to set-up your multilingual store."
+msgstr "次に、多言語ストアをセットアップする必要があります。"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:46
+msgid "Continue to WooCommerce Multilingual Setup"
+msgstr "WooCommerce多言語セットアップに進む"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:54
+msgid "Start translating your site by visiting the <s>Translation Dashboard</s>."
+msgstr "<s>翻訳ダッシュボード</s>にアクセスして、サイトの翻訳を開始してください。"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:72
+msgid "Go to Translation Dashboard"
+msgstr "翻訳ダッシュボードへ移動"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:80
+msgid "Need help? <a>Using WPML's Plus Icons to Translate Content</a>"
+msgstr "サポートが必要ですか？ <a>WPMLのプラスアイコンを使用してコンテンツを翻訳する</a>"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:99
+msgid ""
+"To start translating, look for the \"plus\" icons that WPML introduces next "
+"to content lists and editors. Click the \"plus\" icon under each language "
+"to translate."
+msgstr "翻訳を開始するには、WPMLがコンテンツリストとエディターの横に導入する「プラス」アイコンを探してください。各言語の下にある「プラス」アイコンをクリックして翻訳します。"
+
+#: src/js/setup/components/Steps/Finished/CriticalError.js:10
+msgid "support forum"
+msgstr "サポートフォーラム"
+
+#: src/js/setup/components/Steps/Finished/CriticalError.js:14
+msgid ""
+"There was a critical error setting up WPML. Please contact our "
+"<LinkToSupportForum /> to resolve it."
+msgstr "WPMLの設定中に重大なエラーが発生しました。解決するには<LinkToSupportForum />にお問い合わせください。"
+
+#: src/js/setup/components/Steps/Finished/CriticalError.js:23
+msgid "Hide error message"
+msgstr "エラーメッセージを非表示"
+
+#: src/js/setup/components/Steps/Finished/CriticalError.js:23
+msgid "Show error message"
+msgstr "エラーメッセージを表示"
+
+#: src/js/setup/components/Steps/Finished/Header.js:12
+msgid "Congratulations, your website is now multilingual with WPML!"
+msgstr "おめでとうございます。WPMLでウェブサイトが多言語になりました！"
+
+#: src/js/setup/components/Steps/Finished/LanguageSwitcherBox.js:6
+msgid ""
+"For language switcher customization and more language options, navigate to "
+"<a>WPML → Languages</a>."
+msgstr "言語スイッチャーのカスタマイズやその他の言語オプションについては、<a>WPML → 言語</a>に移動してください。"
+
+#: src/js/setup/components/Steps/Languages.js:110
+msgid "What are the languages of your site?"
+msgstr "サイトの言語は何ですか？"
+
+#: src/js/setup/components/Steps/Languages.js:120
+msgid "Default language"
+msgstr "デフォルト言語"
+
+#: src/js/setup/components/Steps/Languages.js:122
+msgid "What is the current language of your website?"
+msgstr "ウェブサイトの現在の言語は何ですか？"
+
+#: src/js/setup/components/Steps/Languages.js:133
+msgid "Translation languages"
+msgstr "翻訳言語"
+
+#: src/js/setup/components/Steps/Languages.js:135
+msgid "Which languages do you want to translate your site into?"
+msgstr "サイトをどの言語に翻訳したいですか？"
+
+#: src/js/setup/components/Steps/Languages.js:149
+msgid "If you cannot find languages that you need in the list"
+msgstr "リストに必要な言語が見つからない場合"
+
+#: src/js/setup/components/Steps/Languages.js:150
+msgid "create a custom language"
+msgstr "カスタム言語を作成する"
+
+#: src/js/setup/components/Steps/License.js:27
+#. %1$s is <a href="..."> and %2$s is </a>
+msgid ""
+"If you don't have a WPML.org account or a valid subscription, %1$spurchase "
+"one%2$s to get automatic updates, full support, and a 30-day money-back "
+"guarantee."
+msgstr "WPML.orgアカウントまたは有効なサブスクリプションをお持ちでない場合は、%1$s購入%2$sして自動更新、フルサポート、30日間の返金保証を受けられます。"
+
+#: src/js/setup/components/Steps/License.js:58
+msgid "Already purchased WPML?"
+msgstr "すでにWPMLを購入済みですか？"
+
+#: src/js/setup/components/Steps/License.js:62
+msgid "Enter your site key from your WPML account to receive automatic updates."
+msgstr "WPMLアカウントからサイトキーを入力して自動更新を受け取ってください。"
+
+#: src/js/setup/components/Steps/License.js:69
+msgid "Site key"
+msgstr "サイトキー"
+
+#: src/js/setup/components/Steps/License.js:76
+msgid "Get a key for this site"
+msgstr "このサイト用のキーを取得する"
+
+#: src/js/setup/components/Steps/Plugins.js:130
+msgid "Improve your site’s translations using helpful plugins"
+msgstr "役立つプラグインを使用してサイトの翻訳を改善する"
+
+#: src/js/setup/components/Steps/Plugins.js:135
+msgid ""
+"Based on the themes and other plugins running on your site, we recommend "
+"that you enable the following WPML components. These are included with your "
+"WPML purchase and allow you to translate strings, media, admin texts, and "
+"more."
+msgstr "サイトで実行されているテーマや他のプラグインに基づいて、以下のWPMLコンポーネントを有効にすることをお勧めします。これらはWPMLの購入に含まれており、文字列、メディア、管理テキストなどを翻訳することができます。"
+
+#: src/js/setup/components/Steps/Plugins.js:97
+msgid "Error in activating plugin."
+msgstr "プラグインの有効化中にエラーが発生しました。"
+
+#: src/js/setup/components/Steps/Plugins.js:99
+msgid "Error in installing plugin."
+msgstr "プラグインのインストール中にエラーが発生しました。"
+
+#: src/js/setup/components/Steps/Support.js:22
+msgid ""
+"Yes, send theme and plugins information, in order to get faster support and "
+"compatibility alerts"
+msgstr "はい、より迅速なサポートと互換性アラートを得るために、テーマとプラグインの情報を送信します"
+
+#: src/js/setup/components/Steps/Support.js:25
+msgid "No, don't send this information and skip compatibility alerts"
+msgstr "いいえ、この情報を送信せず、互換性アラートをスキップします"
+
+#: src/js/setup/components/Steps/Support.js:34
+msgid "Do you want to get better and faster support?"
+msgstr "より良く、より迅速なサポートを受けたいですか？"
+
+#: src/js/setup/components/Steps/Support.js:39
+msgid ""
+"The WPML plugin can send a list of active plugins and theme used in your "
+"site to wpml.org. This allows our support team to help you much faster and "
+"to contact you in advance about potential compatibility problems and their "
+"solutions."
+msgstr "WPMLプラグインは、サイトで使用されているアクティブなプラグインとテーマのリストをwpml.orgに送信することができます。これにより、サポートチームがより迅速にサポートを提供し、潜在的な互換性の問題とその解決策について事前に連絡することができます。"
+
+#: src/js/setup/components/Steps/Support.js:51
+msgid "Privacy and data usage policy"
+msgstr "プライバシーとデータ使用ポリシー"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Authorize/Actions.js:16
+msgid "Error: %s"
+msgstr "エラー: %s"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Authorize/Actions.js:36
+msgid "Authenticate"
+msgstr "認証"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:24
+msgid ""
+"To send content and receive translations from <service_name />, enter the "
+"credentials you received from them."
+msgstr "<service_name />にコンテンツを送信し、翻訳を受け取るには、そこから受け取った認証情報を入力してください。"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:30
+msgid "Need credentials? Contact <link_to_service />"
+msgstr "認証情報が必要ですか？<link_to_service />に連絡してください"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:34
+msgid ""
+"Success! You can start sending content to %s for translation after you "
+"finish the setup wizard."
+msgstr "成功！セットアップウィザードを完了すると、%sに翻訳用のコンテンツを送信できるようになります。"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:58
+msgid "The credentials are invalid. Please, try again."
+msgstr "認証情報が無効です。もう一度お試しください。"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/ListModal.js:12
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Main.js:84
+msgid "Choose a Translation Service"
+msgstr "翻訳サービスを選択"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Main.js:71
+msgid "Loading"
+msgstr "読み込み中"
+
+#: src/js/setup/models/Languages.js:57
+msgid "A new language could not be added correctly"
+msgstr "新しい言語を正しく追加できませんでした"
+
+#: src/js/setup/store.js:108
+msgid "Back"
+msgstr "戻る"
+
+#: src/js/setup/store.js:113
+msgid "Continue"
+msgstr "続ける"
+
+#: src/js/setup/store.js:118
+msgid "Skip"
+msgstr "スキップ"
+
+#: src/js/setup/store.js:122
+msgid "Install and activate"
+msgstr "インストールして有効化"
+
+#: src/js/setup/store.js:127
+msgid "Finish"
+msgstr "完了"
+
+#: src/js/setup/store.js:70
+msgid "Languages"
+msgstr "言語"
+
+#: src/js/setup/store.js:73
+msgid "URL Format"
+msgstr "URL形式"
+
+#: src/js/setup/store.js:76
+msgid "Register WPML"
+msgstr "WPMLを登録"
+
+#: src/js/setup/store.js:79
+msgid "Who Will Translate"
+msgstr "誰が翻訳するか"
+
+#: src/js/setup/store.js:84
+msgid "Support"
+msgstr "サポート"
+
+#: src/js/setup/store.js:87
+msgid "Plugins"
+msgstr "プラグイン"
+
+#: src/js/setup/store.js:90
+msgid "Finished"
+msgstr "完了"
+
+#: src/js/translationServices/components/Sections.js:16
+msgid "Settings"
+msgstr "設定"
+
+#: src/js/translationServices/components/Sections.js:42
+msgid ""
+"It’s not currently possible to connect a translation service when WPML is "
+"set to translate your site’s content automatically. To use a translation "
+"service, please change your translation mode on the <LinkToSettingsPage /> "
+"page."
+msgstr "現在、WPMLがサイトのコンテンツを自動的に翻訳するように設定されている場合、翻訳サービスを接続することはできません。翻訳サービスを使用するには、<LinkToSettingsPage />ページで翻訳モードを変更してください。"
+
+#: src/js/translationServices/components/ServicesList.js:41
+msgid "Documentation"
+msgstr "ドキュメンテーション"
+
+#: src/js/translationServices/components/ServicesList.js:57
+msgid "Activate"
+msgstr "有効化"
+
+#: src/js/translationServices/components/ServicesList.js:74
+msgid "Description"
+msgstr "説明"
+
+#: src/js/translationServices/components/ServicesList.js:81
+msgid "Ranking"
+msgstr "ランキング"

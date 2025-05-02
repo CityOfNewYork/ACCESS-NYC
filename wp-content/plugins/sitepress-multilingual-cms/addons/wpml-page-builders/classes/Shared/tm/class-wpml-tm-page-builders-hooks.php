@@ -2,7 +2,7 @@
 
 class WPML_TM_Page_Builders_Hooks {
 
-	/* @var WPML_TM_Page_Builders $worker */
+	/** @var WPML_TM_Page_Builders $worker */
 	private $worker;
 
 	/** @var SitePress $sitepress */
@@ -12,6 +12,7 @@ class WPML_TM_Page_Builders_Hooks {
 	 * WPML_TM_Page_Builders constructor.
 	 *
 	 * @param WPML_TM_Page_Builders $worker
+	 * @param SitePress             $sitepress
 	 */
 	public function __construct( WPML_TM_Page_Builders $worker = null, SitePress $sitepress ) {
 		$this->worker    = $worker;
@@ -19,12 +20,13 @@ class WPML_TM_Page_Builders_Hooks {
 	}
 
 	public function init_hooks() {
-		add_filter( 'wpml_tm_translation_job_data',         array( $this, 'translation_job_data_filter' ), 10, 3 );
-		add_action( 'wpml_pro_translation_completed',       array( $this, 'pro_translation_completed_action' ), 10, 3 );
-		add_filter( 'wpml_tm_adjust_translation_fields',    array( $this, 'adjust_translation_fields_filter' ), 10, 2 );
-		add_filter( 'wpml_tm_job_layout',                   array( $this, 'job_layout_filter' ) );
-		add_filter( 'wpml_link_to_translation',             array( $this, 'link_to_translation_filter' ), 20, 4 );
-		add_filter( 'wpml_get_translatable_types',          array( $this, 'remove_shortcode_strings_type_filter' ), 11);
+		add_filter( 'wpml_tm_translation_job_data', array( $this, 'translation_job_data_filter' ), 10, 3 );
+		add_action( 'wpml_pro_translation_completed', array( $this, 'pro_translation_completed_action' ), 10, 3 );
+		add_filter( 'wpml_tm_adjust_translation_fields', array( $this, 'adjust_translation_fields_filter' ), 10, 2 );
+		add_filter( 'wpml_tm_adjust_translation_job', array( $this, 'adjust_translation_job_filter' ) );
+		add_filter( 'wpml_tm_job_layout', array( $this, 'job_layout_filter' ) );
+		add_filter( 'wpml_link_to_translation', array( $this, 'link_to_translation_filter' ), 20, 4 );
+		add_filter( 'wpml_get_translatable_types', array( $this, 'remove_shortcode_strings_type_filter' ), 11 );
 	}
 
 	/**
@@ -35,8 +37,7 @@ class WPML_TM_Page_Builders_Hooks {
 	 * @return array
 	 */
 	public function translation_job_data_filter( array $translation_package, $post, $isOriginal = false ) {
-		$worker = $this->get_worker();
-		return $worker->translation_job_data_filter( $translation_package, $post, $isOriginal );
+		return $this->get_worker()->translation_job_data_filter( $translation_package, $post, $isOriginal );
 	}
 
 	/**
@@ -45,8 +46,7 @@ class WPML_TM_Page_Builders_Hooks {
 	 * @param stdClass $job
 	 */
 	public function pro_translation_completed_action( $new_post_id, array $fields, stdClass $job ) {
-		$worker = $this->get_worker();
-		$worker->pro_translation_completed_action( $new_post_id, $fields, $job );
+		$this->get_worker()->pro_translation_completed_action( $new_post_id, $fields, $job );
 	}
 
 	/**
@@ -58,10 +58,16 @@ class WPML_TM_Page_Builders_Hooks {
 	 * @return array
 	 */
 	public function adjust_translation_fields_filter( array $fields, $job ) {
-		$worker = $this->get_worker();
-		$fields = $worker->adjust_translation_fields_filter( $fields, $job );
+		return $this->get_worker()->adjust_translation_fields_filter( $fields, $job );
+	}
 
-		return $fields;
+	/**
+	 * @param array $fields
+	 *
+	 * @return array
+	 */
+	public function adjust_translation_job_filter( array $fields ) {
+		return $this->get_worker()->adjust_translation_job_filter( $fields );
 	}
 
 	/**
@@ -70,8 +76,7 @@ class WPML_TM_Page_Builders_Hooks {
 	 * @return array
 	 */
 	public function job_layout_filter( array $layout ) {
-		$worker = $this->get_worker();
-		return $worker->job_layout_filter( $layout );
+		return $this->get_worker()->job_layout_filter( $layout );
 	}
 
 	/**
@@ -82,9 +87,8 @@ class WPML_TM_Page_Builders_Hooks {
 	 *
 	 * @return string
 	 */
-	public function link_to_translation_filter( $link, $post_id, $lang, $trid  ) {
-		$worker = $this->get_worker();
-		return $worker->link_to_translation_filter( $link, $post_id, $lang, $trid );
+	public function link_to_translation_filter( $link, $post_id, $lang, $trid ) {
+		return $this->get_worker()->link_to_translation_filter( $link, $post_id, $lang, $trid );
 	}
 
 	/**
@@ -107,7 +111,7 @@ class WPML_TM_Page_Builders_Hooks {
 	 * @return WPML_TM_Page_Builders
 	 */
 	private function get_worker() {
-		if ( ! $this->worker ) {
+		if ( null === $this->worker ) {
 			$this->worker = new WPML_TM_Page_Builders( $this->sitepress );
 		}
 

@@ -1,56 +1,66 @@
 {
-   "domain": "messages",
-   "locale_data": {
-      "messages": {
-         "": {
-            "domain": "messages",
-            "lang": "en"
-         },
-         "Cancel": [
-            "Hủy"
-         ],
-         "Choose Content to Automatically Translate into": [
-            "Chọn nội dung để tự động dịch sang"
-         ],
-         "Save Changes and Enable Automatic Translation": [
-            "Lưu các thay đổi và Bật tính năng Dịch thuật Tự động"
-         ],
-         "Cancel Language Changes": [
-            "Hủy các thay đổi ngôn ngữ"
-         ],
-         "Save": [
-            "Lưu"
-         ],
-         "Add languages and start translating": [
-            "Thêm các ngôn ngữ và bắt đầu dịch."
-         ],
-         "Add language and start translating": [
-            "Thêm ngôn ngữ và bắt đầu dịch."
-         ],
-         "Never mind. Don't add new languages": [
-            "Không sao. Không thêm các ngôn ngữ mới"
-         ],
-         "Never mind. Don't add new language": [
-            "Không sao. Không thêm ngôn ngữ mới"
-         ],
-         "Choose Content to Automatically Translate into New Language": [
-            "Chọn nội dung để Tự động Dịch sang Ngôn ngữ mới"
-         ],
-         "Automatically translate all of my existing posts and pages right now, plus new content as I create it.": [
-            "Tự động dịch tất cả các bài đăng và trang hiện có của tôi ngay, cùng với nội dung mới như tôi đã tạo."
-         ],
-         "Only automatically translate new content.": [
-            "Chỉ tự động dịch nội dung mới."
-         ],
-         "You are using <a>Translate Everything</a> mode, which translates your site content automatically.": [
-            "Bạn đang sử dụng chế độ <a>Dịch mọi thứ</a>, chế độ tự động dịch nội dung trang web của bạn."
-         ],
-         "Which content do you want to automatically translate into your newly-added language?": [
-            "Nội dung nào bạn muốn tự động dịch sang ngôn ngữ mới bổ sung của mình?"
-         ],
-         "You can translate existing content from the Translation Management Dashboard.": [
-            "Bạn có thể dịch nội dung có sẵn từ Bảng điều khiển Quản lý Dịch thuật."
-         ]
-      }
-   }
+  "translation-revision-date": "2024-08-20T09:34:35+00:00",
+  "generator": "WP-CLI/2.9.0",
+  "source": "src/js/languages/components/ConfirmNewLanguageDialog.js",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "en",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "hide the translations instead.": [
+        "Ẩn bản dịch."
+      ],
+      "Error happened! Please try again.": [
+        "Đã xảy ra lỗi! Vui lòng thử lại."
+      ],
+      "Cancel": [
+        "Hủy"
+      ],
+      "Choose Content to Automatically Translate into": [
+        "Chọn nội dung để tự động dịch sang"
+      ],
+      "Save Changes and Enable Automatic Translation": [
+        "Lưu các thay đổi và Bật tính năng Dịch thuật Tự động"
+      ],
+      "Cancel Language Changes": [
+        "Hủy các thay đổi ngôn ngữ"
+      ],
+      "Save": [
+        "Lưu"
+      ],
+      "Add new languages": [
+        "Thêm ngôn ngữ mới"
+      ],
+      "Add new language": [
+        "Thêm ngôn ngữ."
+      ],
+      "Never mind - don't add new languages": [
+        "Không sao - đừng thêm ngôn ngữ."
+      ],
+      "Never mind - don't add new language": [
+        "Không sao - đừng thêm ngôn ngữ."
+      ],
+      "Choose which content to translate into the new language": [
+        "Chọn nội dung cần dịch sang ngôn ngữ mới"
+      ],
+      "Automatically translate all my posts and pages, plus new content as I create it.": [
+        "Tự động dịch tất cả nội dung."
+      ],
+      "Only automatically translate new content.": [
+        "Chỉ tự động dịch nội dung mới."
+      ],
+      "Which content do you want to translate into the new language?": [
+        "Bạn muốn dịch nội dung nào sang ngôn ngữ mới?"
+      ],
+      "When you unpause automatic translation, this content will be <a>translated automatically</a>.": [
+        "Khi bạn bỏ tạm dừng dịch tự động, nội dung này sẽ được<a> được dịch tự động</a>."
+      ],
+      "You can still translate existing content any time from the Translation Management Dashboard.": [
+        "Bạn vẫn có thể dịch nội dung hiện có bất kỳ lúc nào từ Bảng điều khiển quản lý bản dịch."
+      ]
+    }
+  }
 }

@@ -3,11 +3,10 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "lang": "no"
+            "domain": "messages"
          },
          "The wpml-config.xml file in the root folder of your theme and plugins tells WPML which content is translatable. You can override these settings with your own custom settings by adding them below.": [
-            "Filen wpml-config.xml i rotmappen i ditt tema och plugins berättar för WPML vilket innehåll som är översättningsbart. Du kan åsidosätta dessa inställningar med dina egna anpassade inställningar genom att lägga till dem nedan."
+            "Filen wpml-config.xml i rotmappen för ditt tema och tillägg berättar för WPML vilket innehåll som kan översättas. Du kan åsidosätta dessa inställningar med dina egna anpassade inställningar genom att lägga till dem nedan."
          ],
          "Read more about language configuration files.": [
             "Läs mer om språkkonfigurationsfiler."
@@ -22,10 +21,10 @@
             "Genvägar"
          ],
          "Fold/Unfold code": [
-            "Dölj/visa kod"
+            "Vik/Veckla ut kod"
          ],
          "Auto format": [
-            "Autoformat"
+            "Automatiskt format"
          ]
       }
    }

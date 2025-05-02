@@ -1,0 +1,82 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Not included in String Translation": [
+            "Không có trong bản dịch chuỗi"
+         ],
+         "Registered and locked": [
+            "Đã đăng ký và bị khóa"
+         ],
+         "Text": [
+            "Chữ"
+         ],
+         "Numeric": [
+            "Số"
+         ],
+         "All Types": [
+            "Các loại"
+         ],
+         "Search": [
+            "Tìm kiếm"
+         ],
+         "Communication error": [
+            "Lỗi giao tiếp"
+         ],
+         "The action failed.": [
+            "Hành động này không thành công."
+         ],
+         "All (%d)": [
+            "Tất cả (%d)"
+         ],
+         "Included in String Translation (%d)": [
+            "Bao gồm trong dịch chuỗi (%d)"
+         ],
+         "Not included in String Translation (%d)": [
+            "Không có trong Dịch chuỗi (%d)"
+         ],
+         "This setting is locked by a WPML configuration file.": [
+            "Cài đặt này bị khóa bởi tệp cấu hình WPML."
+         ],
+         "Option": [
+            "Lựa chọn"
+         ],
+         "Value": [
+            "Giá trị"
+         ],
+         "Type": [
+            "Kiểu"
+         ],
+         "State": [
+            "Tình trạng"
+         ],
+         "Export as a WPML configuration file": [
+            "Xuất dưới dạng tệp cấu hình WPML"
+         ],
+         "Cancel": [
+            "Hủy bỏ"
+         ],
+         "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
+            "Lưu phần sau vào wpml-config.xml trong thư mục gốc của chủ đề hoặc plugin của bạn."
+         ],
+         "No options found.": [
+            "Không tìm thấy tùy chọn nào."
+         ],
+         "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
+            "Đảm bảo bạn đã lưu các tùy chọn chủ đề của mình ít nhất một lần. Một số chủ đề chỉ thêm những thứ này vàowp_options table sau khi người dùng lưu rõ ràng các thay đổi đối với mặc định của chủ đề."
+         ],
+         "Add to String Translation": [
+            "Thêm vào bản dịch chuỗi"
+         ],
+         "Remove from String Translation": [
+            "Xóa khỏi bản dịch chuỗi"
+         ],
+         "Included in String Translation": [
+            "Bao gồm trong bản dịch chuỗi"
+         ]
+      }
+   }
+}

@@ -28,7 +28,7 @@ interface IWPML_Page_Builders_Data_Settings {
 	/**
 	 * @param mixed $data
 	 *
-	 * @return array
+	 * @return array|mixed
 	 */
 	public function convert_data_to_array( $data );
 

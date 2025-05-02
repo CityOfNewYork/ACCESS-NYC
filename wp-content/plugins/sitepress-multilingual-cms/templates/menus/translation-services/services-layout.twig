@@ -2,10 +2,15 @@
     <input type="hidden" class="{{ key }}" name="{{ key }}" value="{{ nonce }}">
 {% endfor %}
 <div class="wpml-tm-ts-admin-section wpml-section">
-	<h2>{{ strings.translation_services }}</h2>
-	<p>
-		{{ strings.translation_services_description|raw }}
-	</p>
+    <h2>{{ strings.translation_services }}</h2>
+
+    <div class="wpml-ts-description">
+        <p>
+            {{ strings.translation_services_description|raw }}
+        </p>
+        <button id="add-unlisted-translation-service" class="ant-btn ant-btn-tertiary wpml-antd-button wpml-antd-button-tertiary wpml-ts-text-xs">{{ strings.enable_unlisted_translation_service }}</button>
+    </div>
+
     {{ active_service|raw }}
 
     {% if false == has_preferred_service and has_services %}

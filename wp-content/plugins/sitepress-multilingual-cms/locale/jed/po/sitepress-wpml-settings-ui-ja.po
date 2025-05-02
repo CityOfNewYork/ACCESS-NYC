@@ -1,0 +1,65 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/settings/UI/TranslationMethod.js:51
+msgid ""
+"You must use the Advanced Translation Editor if you want to translate your "
+"content automatically."
+msgstr "コンテンツを自動翻訳するには、アドバンス翻訳エディターを使用する必要があります。"
+
+#: src/js/settings/UI/Troubleshooting.js:26
+msgid "Synchronize translators and translation managers with ATE"
+msgstr "ATEで翻訳者と翻訳マネジャーを同期"
+
+#: src/js/settings/UI/Troubleshooting.js:36
+msgid ""
+"Please try again in a few minutes. If the problem persists, please contact "
+"%sWPML support%s."
+msgstr "数分後に再度お試しください。問題が続くようなら、%sWPMLサポート%sにお問い合わせください。"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:104
+msgid "Save"
+msgstr "保存"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:73
+msgid "Please confirm this translation setting"
+msgstr "この翻訳設定を確認してください"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:76
+msgid "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item."
+msgid_plural "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing items."
+msgstr[0] "あなたのサイトはすべてのコンテンツを自動的に翻訳するように設定されています。<PostTypesNames /> を翻訳可能にすると、WPML は%1$d 既存の項目を自動的に翻訳します。"
+msgstr[1] "あなたのサイトはすべてのコンテンツを自動的に翻訳するように設定されています。<PostTypesNames /> を翻訳可能にすると、WPML は%1$d の既存項目を自動的に翻訳します。"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:82
+msgid ""
+"Your site is set to translate all content automatically. When you make "
+"<PostTypesNames /> translatable, WPML will automatically translate all "
+"future content."
+msgstr "あなたのサイトは全てのコンテンツを自動翻訳するように設定されています。<PostTypesNames /> を翻訳可能にするとき、WPMLは将来の全てのアイテムを自動翻訳します。"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:88
+msgid "Are you OK with paying for this?"
+msgstr "この購入を続けますか？"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:90
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostType.js:91
+msgid "Make translatable"
+msgstr "翻訳可能にする"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostTypeDialog.js:49
+msgid "Yes, translate <b>existing</b> and <b>future</b> content automatically"
+msgstr "はい、<b>既存</b>と<b>将来</b>のコンテンツを自動翻訳してください"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostTypeDialog.js:64
+msgid "Yes, but only translate <b>future</b> content automatically"
+msgstr "はい、ただし<b>将来</b>のコンテンツのみ自動翻訳してください"
+
+#: src/js/settings/components/ConfirmNewTranslatablePostTypeDialog.js:65
+msgid "Yes, translate <b>future</b> content automatically"
+msgstr "はい、<b>将来</b>のコンテンツを自動翻訳してください"

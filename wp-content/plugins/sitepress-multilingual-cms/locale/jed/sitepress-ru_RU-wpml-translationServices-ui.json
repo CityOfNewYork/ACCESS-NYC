@@ -6,19 +6,19 @@
             "domain": "messages"
          },
          "Connect this site to your %s account": [
-            "Подключите этот сайт к своей учетной записи %s"
+            "Подключить этот сайт к вашей учетной записи %s"
          ],
          "Error": [
             "Ошибка"
          ],
          "« Use a different Translation Service": [
-            "« Использовать другую службу переводов"
+            "« Использовать другую службу перевода"
          ],
          "Authenticate": [
-            "Авторизовать"
+            "Аутентификация"
          ],
          "Visit <link_to_service /> to request an API Token. This token allows WPML to connect to <service_name /> to send and receive jobs.": [
-            "Перейдите в <link_to_service />, чтобы сделать запрос на API-ключ. Он позволяет WPML подключаться к <service_name /> для отправки и получения заказов."
+            "Посетите <link_to_service />, чтобы запросить API-токен. Этот токен позволяет WPML подключаться к <service_name /> для отправки и получения заданий."
          ],
          "Search": [
             "Поиск"
@@ -27,7 +27,7 @@
             "Настройки"
          ],
          "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
-            "В настоящее время невозможно подключить службу переводов, если WPML настроен на автоматический перевод контента вашего сайта. Чтобы использовать службу переводов, измените режим перевода на странице <LinkToSettingsPage />."
+            "В настоящее время невозможно подключить службу перевода, когда WPML настроен на автоматический перевод содержимого вашего сайта. Чтобы использовать службу перевода, пожалуйста, измените режим перевода на странице <LinkToSettingsPage />."
          ],
          "Documentation": [
             "Документация"

@@ -26,6 +26,14 @@ class WPML_TM_XLIFF {
 	private $xliff_version;
 
 	/**
+	 * A custom schema to recognize the tool:source-language-domain and tool:target-language-domain attributes in the <file> tag
+	 * without invalidating the XLIFF file.
+	 *
+	 * @var string
+	 */
+	const XLIFF_CUSTOM_ATTRIBUTES_NAMESPACE = 'https://cdn.wpml.org/xliff/custom-attributes.xsd';
+
+	/**
 	 * WPML_TM_XLIFF constructor.
 	 *
 	 * @param string $xliff_version
@@ -50,7 +58,7 @@ class WPML_TM_XLIFF {
 	 */
 	public function setFileAttributes( $attributes ) {
 		foreach ( $attributes as $name => $value ) {
-			$this->file->setAttribute( $name, $value );
+			$this->file->setAttribute( $name, is_null( $value ) ? '' : $value );
 		}
 
 		return $this;
@@ -248,6 +256,7 @@ class WPML_TM_XLIFF {
 		}
 		$this->root->setAttribute( 'version', $version );
 		$this->root->setAttribute( 'xmlns', 'urn:oasis:names:tc:xliff:document:' . $version );
+		$this->root->setAttribute('xmlns:tool',self::XLIFF_CUSTOM_ATTRIBUTES_NAMESPACE);
 	}
 
 }

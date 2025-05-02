@@ -23,6 +23,12 @@
          "Color": [
             "色"
          ],
+         "px": [
+            "px"
+         ],
+         "%": [
+            "%"
+         ],
          "Dimensions": [
             "ディメンション"
          ],
@@ -132,7 +138,7 @@
             "垂直"
          ],
          "Normal": [
-            "普通"
+            "通常"
          ],
          "Medium": [
             "中"
@@ -141,7 +147,7 @@
             "大"
          ],
          "X-Large": [
-            "X-Large"
+            "特大"
          ],
          "Ab": [
             "Ab"
@@ -156,22 +162,22 @@
             "小"
          ],
          "Displays the WPML Language Switcher.": [
-            "WPML 言語切り替え機能を表示します。"
+            "WPML言語スイッチャーを表示します。"
          ],
          "Language Switcher": [
-            "言語切り替え機能"
+            "言語スイッチャー"
          ],
          "displays the WPML Language Switcher": [
-            "WPML 言語切り替え機能を表示します"
+            "wPML言語スイッチャーを表示します"
          ],
          "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
-            "WPML 言語スイッチャーを表示する。 <br/> このブロックの翻訳方法を <a>学ぶ</a>。"
+            "WPML言語スイッチャーを表示します。<br/>このブロックの<a>翻訳方法を学ぶ</a>。"
          ],
          "Navigation Language Switcher": [
-            "ナビゲーション言語切り替え機能"
+            "ナビゲーション言語スイッチャー"
          ],
          "Reset all": [
-            "すべてをリセット"
+            "すべてリセット"
          ]
       }
    }

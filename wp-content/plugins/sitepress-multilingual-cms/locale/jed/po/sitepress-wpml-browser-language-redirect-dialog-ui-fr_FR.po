@@ -1,0 +1,41 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/browser-language-redirect-dialog/texts.js:11
+msgid "How Browser Language Redirect Affects Google Indexing"
+msgstr "Comment la redirection en fonction de la langue du navigateur peut influer sur l'indexation de Google"
+
+#: src/js/browser-language-redirect-dialog/texts.js:12
+msgid "Documentation"
+msgstr "Documentation"
+
+#: src/js/browser-language-redirect-dialog/texts.js:3
+msgid "Browser redirect affects Google indexing and search results"
+msgstr "La redirection du navigateur influe sur l'indexation de Google et les résultats de la recherche"
+
+#: src/js/browser-language-redirect-dialog/texts.js:4
+msgid "Got it, activate anyway"
+msgstr "J'ai compris, activer quand même"
+
+#: src/js/browser-language-redirect-dialog/texts.js:5
+msgid "Cancel"
+msgstr "Annuler"
+
+#: src/js/browser-language-redirect-dialog/texts.js:7
+msgid ""
+"When you redirect visitors based on their language, you also redirect "
+"Google. Google wants to see your site exactly like visitors see it, "
+"including any redirects that you apply."
+msgstr "Lorsque vous redirigez les visiteurs en fonction de leur langue, vous redirigez également Google. Google souhaite voir votre site exactement comme les visiteurs le voient, ce qui inclut toutes les redirections que vous appliquez."
+
+#: src/js/browser-language-redirect-dialog/texts.js:8
+msgid ""
+"It is OK to redirect visitors based on their language, but you need to "
+"realize that this feature affects SEO."
+msgstr "Il n'est pas contre-indiqué de rediriger les visiteurs en fonction de leur langue, mais vous devez savoir que cette fonctionnalité influe sur le SEO."
+
+#: src/js/browser-language-redirect-dialog/texts.js:9
+msgid "Before proceeding, we recommend that you read these two pages:"
+msgstr "Avant de poursuivre, nous vous recommandons de lire ces deux pages :"

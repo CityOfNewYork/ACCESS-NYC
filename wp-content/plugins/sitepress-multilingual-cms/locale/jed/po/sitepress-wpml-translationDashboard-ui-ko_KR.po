@@ -1,0 +1,329 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/ate/status-icons/StatusUpdater.js:80
+msgid "Refreshing translation status"
+msgstr "번역 상태 새로고침 중"
+
+#: src/js/components/translation/TranslationMethod.js:115
+msgid "Your pending automatic translations will be canceled."
+msgstr "대기 중인 자동 번역이 취소됩니다."
+
+#: src/js/components/translation/TranslationMethod.js:119
+msgid "Save"
+msgstr "저장"
+
+#: src/js/components/translation/TranslationMethod.js:125
+msgid "Go to the <a>Translation Management Dashboard</a> to translate your content."
+msgstr "<a>번역 관리 대시보드</a>로 이동하여 콘텐츠를 번역하세요."
+
+#: src/js/components/translation/TranslationMethod.js:142
+msgid "Review the translations before publishing"
+msgstr "게시 전 번역 검토하기"
+
+#: src/js/components/translation/TranslationMethod.js:143
+msgid "Publish translations and review them later"
+msgstr "번역 게시 후 나중에 검토하기"
+
+#: src/js/components/translation/TranslationMethod.js:144
+msgid "Publish translations without reviewing"
+msgstr "검토 없이 번역 게시하기"
+
+#: src/js/components/translation/TranslationMethod.js:69
+msgid "Translate Everything"
+msgstr "모두 번역하기"
+
+#: src/js/components/translation/TranslationMethod.js:71
+msgid "WPML will automatically translate content that you publish or update"
+msgstr "WPML이 게시하거나 업데이트하는 콘텐츠를 자동으로 번역합니다"
+
+#: src/js/components/translation/TranslationMethod.js:74
+msgid "How do you want to translate this site?"
+msgstr "이 사이트를 어떻게 번역하시겠습니까?"
+
+#: src/js/components/translation/TranslationMethod.js:97
+msgid "Translate Some"
+msgstr "일부 번역하기"
+
+#: src/js/components/translation/TranslationMethod.js:99
+msgid "I want to choose which content to translate"
+msgstr "번역할 콘텐츠를 직접 선택하고 싶습니다"
+
+#: src/js/translationDashboard/sending-to-translation/components/AllLanguages.js:25
+msgid "All Languages"
+msgstr "모든 언어"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:17
+msgid "Overwrite existing translations"
+msgstr "기존 번역 덮어쓰기"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:24
+msgid "Some of the content you want to translate is already translated"
+msgstr "번역하려는 일부 콘텐츠가 이미 번역되어 있습니다"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:30
+msgid "What do you want to do with the content that’s already translated?"
+msgstr "이미 번역된 콘텐츠를 어떻게 처리하시겠습니까?"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:39
+msgid "Leave existing translations as is"
+msgstr "기존 번역을 그대로 두기"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:64
+msgid "You chose to review translations before publishing."
+msgstr "번역을 게시하기 전에 검토하기로 선택하셨습니다."
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:65
+msgid ""
+"If you retranslate content that's already published, the changes will be "
+"applied directly to live pages or posts."
+msgstr "이미 게시된 콘텐츠를 재번역하면 변경 사항이 라이브 페이지나 게시물에 직접 적용됩니다."
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:82
+msgid ""
+"This also updates the translation memory for your site. Read more about <a "
+"href=\"%s\" target=\"_blank\" >translation memory</a>"
+msgstr "이렇게 하면 사이트의 번역 메모리도 업데이트됩니다. <a href=\"%s\" target=\"_blank\" >번역 메모리</a>에 대해 자세히 알아보세요"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:89
+msgid ""
+"Allows you to re-translate your content and update the translation memory "
+"for your site. Read more about <a href=\"%s\" target=\"_blank\" "
+">translation memory</a>"
+msgstr "콘텐츠를 다시 번역하고 사이트의 번역 메모리를 업데이트할 수 있습니다. <a href=\"%s\" target=\"_blank\" >번역 메모리</a>에 대해 자세히 알아보세요"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:96
+msgid ""
+"Allows your translators to re-translate your content and update the "
+"translation memory for your site. Read more about <a href=\"%s\" "
+"target=\"_blank\" >translation memory</a>"
+msgstr "번역자가 귀하의 콘텐츠를 다시 번역하고 귀하의 사이트에 대한 번역 메모리를 업데이트할 수 있도록 합니다. <a href=\"%s\" target=\"_blank\" >번역 메모리</a>에 대해 자세히 알아보세요"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:98
+msgid ""
+"HINT: You can add a Note for translators in the table above with special "
+"instructions."
+msgstr "힌트: 위 표에서 특별 지침이 포함된 번역자용 메모를 추가할 수 있습니다."
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:31
+msgid "Translate automatically"
+msgstr "자동으로 번역"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:37
+msgid "How do you want to translate?"
+msgstr "어떻게 번역하시겠습니까?"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:55
+msgid "Assign to a translator"
+msgstr "번역가에게 할당"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:55
+msgid "Translate myself"
+msgstr "직접 번역"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:60
+msgid "You do not need translation credits to translate content yourself."
+msgstr "직접 콘텐츠를 번역하는 데는 번역 크레딧이 필요하지 않습니다."
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:87
+msgid ""
+"You can only automatically translate content from your site's default "
+"language (English), to your site's other languages. Deselect content in "
+"your site's secondary languages to proceed."
+msgstr "사이트의 기본 언어(영어)에서 다른 언어로만 콘텐츠를 자동 번역할 수 있습니다. 계속하려면 사이트의 보조 언어의 콘텐츠 선택을 취소하세요."
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:92
+#. %s is the name of the default language. </a>
+msgid ""
+"You can only automatically translate content from your primary language "
+"(%s) to other languages. Use the language switcher at the top of this page "
+"to switch to %s."
+msgstr "주 언어 (%s)에서 다른 언어로만 콘텐츠를 자동 번역할 수 있습니다. 이 페이지 상단의 언어 전환기를 사용하여 %s로 전환하세요."
+
+#: src/js/translationDashboard/sending-to-translation/components/LanguageRow.js:49
+msgid ""
+"Selected content includes items that were originally created in this "
+"language. Deselect these items to proceed."
+msgstr "선택한 콘텐츠에 이 언어로 원래 작성된 항목이 포함되어 있습니다. 계속하려면 이 항목들의 선택을 취소하세요."
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:100
+msgid "Add to Translation Queue"
+msgstr "번역 대기열에 추가"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:17
+msgid "Select a post or page to translate"
+msgstr "번역할 게시물 또는 페이지 선택"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:18
+msgid "Translate or duplicate content to at least one language"
+msgstr "적어도 하나의 언어로 콘텐츠 번역 또는 복제"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:19
+msgid "Choose how you want to translate your content"
+msgstr "콘텐츠를 번역할 방법 선택"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:20
+msgid "Selected content is already translated"
+msgstr "선택한 콘텐츠는 이미 번역되었습니다"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:21
+msgid ""
+"Selected content includes items in a language other than your site's "
+"default language."
+msgstr "선택한 콘텐츠에 사이트의 기본 언어가 아닌 언어의 항목이 포함되어 있습니다."
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:74
+msgid "Choose at least one translation action"
+msgstr "최소 하나의 번역 작업 선택"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:78
+msgid "Duplicate"
+msgstr "복제"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:88
+msgid "Start translating and duplicating"
+msgstr "번역 및 복제 시작"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:90
+msgid "Add to Translation Basket and duplicate"
+msgstr "번역 바구니에 추가 및 복제"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:92
+msgid "Add to Translation Queue and duplicate"
+msgstr "번역 대기열에 추가 및 복제"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:96
+msgid "Start translating"
+msgstr "번역 시작"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:98
+msgid "Add to Translation Basket"
+msgstr "번역 바구니에 추가"
+
+#: src/js/translationDashboard/sending-to-translation/components/TranslationReviewModal.js:37
+msgid "One more thing..."
+msgstr "한 가지 더..."
+
+#: src/js/translationDashboard/sending-to-translation/components/TranslationReviewModal.js:40
+msgid ""
+"What would you like to do when your content has finished translating "
+"automatically?"
+msgstr "콘텐츠 자동 번역이 완료되면 어떻게 하시겠습니까?"
+
+#: src/js/translationDashboard/sending-to-translation/components/TranslationReviewModal.js:51
+msgid "Save settings"
+msgstr "설정 저장"
+
+#: src/js/translationDashboard/sending-to-translation/components/TranslationReviewModal.js:61
+msgid ""
+"This setting will apply to all future automatic translations. You can "
+"change this anytime in WPML → Settings."
+msgstr "이 설정은 향후 모든 자동 번역에 적용됩니다. WPML → 설정에서 언제든지 변경할 수 있습니다."
+
+#: src/js/translationDashboard/sending-to-translation/model/store.js:19
+msgid "Translate"
+msgstr "번역"
+
+#: src/js/translationDashboard/sending-to-translation/model/store.js:24
+msgid "Duplicate content"
+msgstr "콘텐츠 복제"
+
+#: src/js/translationDashboard/sending-to-translation/model/store.js:29
+msgid "Do nothing"
+msgstr "아무것도 하지 않음"
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:11
+msgid "You need credits to use automatic translation."
+msgstr "자동 번역을 사용하려면 크레딧이 필요합니다."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:113
+msgid "Finish setting up %s on your site"
+msgstr "사이트에서 %s 설정 완료하기"
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:117
+msgid ""
+"You need to authenticate %s to send them content for translation. Visit the "
+"%s to finish the setup."
+msgstr "%s에 번역할 콘텐츠를 보내려면 인증이 필요합니다. %s를 방문하여 설정을 완료하세요."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:14
+msgid ""
+"Connection Error. Please wait a minute and reload this page. If the problem "
+"continues, please <a>contact WPML support</a>."
+msgstr "연결 오류. 잠시 기다렸다가 이 페이지를 새로고침하세요. 문제가 지속되면 <a>WPML 지원팀에 문의</a>하세요."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:143
+msgid "Add a translator to use %s."
+msgstr "%s를 사용하려면 번역가를 추가하세요."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:147
+msgid ""
+"To send content to %s for translation, go to the %s to add a translator on "
+"your site."
+msgstr "%s에 번역할 콘텐츠를 보내려면 %s로 이동하여 사이트에 번역가를 추가하세요."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:179
+msgid ""
+"Your selected automatic translation engines do not support the following "
+"language(s): %s. Read more about <a>choosing a translation engine</a>."
+msgstr "선택한 자동 번역 엔진이 다음 언어를 지원하지 않습니다: %s. <a>번역 엔진 선택</a>에 대해 자세히 알아보세요."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:211
+msgid ""
+"Some of the selected content is already being translated. This will cancel "
+"any in-progress translations."
+msgstr "선택한 일부 콘텐츠가 이미 번역 중입니다. 이 작업은 진행 중인 번역을 취소합니다."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:44
+msgid ""
+"Any existing content (translations) will be overwritten when creating "
+"duplicates."
+msgstr "복제를 생성할 때 기존 콘텐츠(번역)가 덮어쓰기됩니다."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:45
+msgid ""
+"When duplicating content, please first duplicate parent pages to maintain "
+"the site's hierarchy."
+msgstr "콘텐츠를 복제할 때는 사이트의 계층 구조를 유지하기 위해 먼저 상위 페이지를 복제하세요."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:68
+msgid ""
+"To assign content to a translator, first <a href=\"%s\" "
+"target=\"_blank\">add a translator</a> or <a href=\"%s\" "
+"target=\"_blank\">connect to a translation service</a>."
+msgstr "번역가에게 콘텐츠를 할당하려면 먼저 <a href=\"%s\" target=\"_blank\">번역가를 추가</a>하거나 <a href=\"%s\" target=\"_blank\">번역 서비스에 연결</a>하십시오."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:94
+msgid "Translators Tab"
+msgstr "번역가 탭"
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:12
+msgid ""
+"Some of the content that you selected for translation includes fields that "
+"are encoded. Translators will not be able to work on this kind of content, "
+"so we removed it from the job."
+msgstr "번역을 위해 선택한 일부 콘텐츠에 인코딩된 필드가 포함되어 있습니다. 번역가가 이러한 종류의 콘텐츠를 작업할 수 없으므로 작업에서 제외했습니다."
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:24
+msgid ""
+"To fix this problem, you need to tell WPML how these fields are encoded, so "
+"that WPML can decode them before sending for translation."
+msgstr "이 문제를 해결하려면 WPML에 이러한 필드가 어떻게 인코딩되었는지 알려주어야 합니다. 그래야 WPML이 번역을 위해 보내기 전에 이를 디코딩할 수 있습니다."
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:30
+msgid "WPML cannot send some of the content to translation"
+msgstr "WPML이 일부 콘텐츠를 번역으로 보낼 수 없습니다"
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:44
+msgid "<s>%s</s>: There are base64 encoded fields in this document"
+msgstr "<s>%s</s>: 이 문서에는 base64로 인코딩된 필드가 있습니다"
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:62
+msgid "Hide details"
+msgstr "세부 정보 숨기기"
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:62
+msgid "Show details"
+msgstr "세부 정보 표시"

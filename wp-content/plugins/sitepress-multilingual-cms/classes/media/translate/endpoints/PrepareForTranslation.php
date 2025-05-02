@@ -9,12 +9,13 @@ use WPML\FP\Left;
 use WPML\FP\Right;
 use WPML\Media\Option;
 use WPML\Utilities\KeyedLock;
+use WPML\Element\API\Languages;
 
 class PrepareForTranslation implements IHandler {
 	const LOCK_RELEASE_TIMEOUT = 2 * MINUTE_IN_SECONDS;
 
 	public function run( Collection $data ) {
-		if ( Option::isSetupFinished() ) {
+		if ( $this->isThereOnlyOneActiveLanguage() || Option::isSetupFinished() ) {
 			return Left::of( [ 'key' => false ] );
 		}
 
@@ -28,5 +29,18 @@ class PrepareForTranslation implements IHandler {
 		} else {
 			return Left::of( [ 'key' => 'in-use', ] );
 		}
+	}
+
+	/**
+	 * By this situation we mean that we have only the default language and ZERO target languages!
+	 * You can't have such situation after WPML Setup. You have to go to WPML > Languages and
+	 * manually unselect all target languages.
+	 *
+	 * @return bool
+	 */
+	private function isThereOnlyOneActiveLanguage(): bool {
+		$activeLanguages = Languages::getActive();
+
+		return count( $activeLanguages ) === 1;
 	}
 }

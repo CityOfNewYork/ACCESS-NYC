@@ -21,7 +21,7 @@ class WPML_ACF_Repeater_Shuffle implements \IWPML_Backend_Action {
 	/**
 	 * @var array Meta data after the shuffle.
 	 */
-	private $meta_data_after_move;
+	private $meta_data_after_move = [];
 	/**
 	 * @var array Final metadata values in another languages to save
 	 */

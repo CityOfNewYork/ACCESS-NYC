@@ -1,0 +1,395 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/language/LanguagePairs.js:57
+msgid "From:"
+msgstr "מ:"
+
+#: src/js/components/language/LanguagePairs.js:69
+msgid "--Choose language--"
+msgstr "--בחר שפה--"
+
+#: src/js/components/language/LanguagePairs.js:81
+msgid "to:"
+msgstr "ל:"
+
+#: src/js/components/language/SelectLanguagePairs.js:39
+msgid "Set language pair(s) for Translator %s:"
+msgstr "הגדר זוגות שפות עבור מתרגם %s:"
+
+#: src/js/components/language/SelectLanguagePairs.js:64
+msgid "+ Add more language pairs for this translator"
+msgstr "+ הוסף עוד זוגות שפות עבור מתרגם זה"
+
+#: src/js/components/roles/CreateUser.js:100
+msgid "First Name"
+msgstr "שם פרטי"
+
+#: src/js/components/roles/CreateUser.js:101
+msgid "Last Name"
+msgstr "שם משפחה"
+
+#: src/js/components/roles/CreateUser.js:105
+msgid "Role"
+msgstr "תפקיד"
+
+#: src/js/components/roles/CreateUser.js:137
+msgid "(required)"
+msgstr "(חובה)"
+
+#: src/js/components/roles/CreateUser.js:46
+msgid ""
+"Make sure that you have provided a correct email address e.g. "
+"name@domain.com"
+msgstr "ודא שסיפקת כתובת דוא\"ל נכונה, למשל name@domain.com"
+
+#: src/js/components/roles/CreateUser.js:64
+msgid "This field is required"
+msgstr "זה שדה חובה"
+
+#: src/js/components/roles/CreateUser.js:84
+msgid "A translator can be any WordPress role."
+msgstr "מתרגם יכול להיות בכל תפקיד WordPress."
+
+#: src/js/components/roles/CreateUser.js:98
+msgid "Username"
+msgstr "שם משתמש"
+
+#: src/js/components/roles/CreateUser.js:99
+msgid "Email"
+msgstr "דואר אלקטרוני"
+
+#: src/js/components/roles/ExistingUserSelect.js:46
+msgid "Search"
+msgstr "חיפוש"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:47
+msgid "user"
+msgstr "משתמש"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:47
+msgid "Editor"
+msgstr "עורך"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:61
+msgid "Select an existing %s and set as Translation Manager"
+msgstr "בחר %s קיים והגדר כ'מנהל התרגום'"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:72
+msgid "Create a new %s and set as Translation Manager"
+msgstr "צור %s חדש והגדר אותו כ'מנהל התרגום'"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:85
+#: src/js/components/translators/AddTranslatorDialog.js:121
+#: src/js/components/translators/EditLanguagesDialog.js:73
+#: src/js/setup/components/Steps/AddLanguagesModal.js:496
+msgid "Cancel"
+msgstr "ביטול"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:90
+msgid "Add Translation Manager"
+msgstr "הוסף מנהל תרגום"
+
+#: src/js/components/translation-managers/ManagerSection.js:27
+msgid "Add a Translation Manager"
+msgstr "הוסף מנהל תרגום"
+
+#: src/js/components/translators/AddTranslatorDialog.js:111
+msgid "Set language pair(s)"
+msgstr "הגדר זוגות שפות"
+
+#: src/js/components/translators/AddTranslatorDialog.js:126
+msgid "Previous"
+msgstr "הקודם"
+
+#: src/js/components/translators/AddTranslatorDialog.js:129
+#: src/js/components/translators/EditLanguagesDialog.js:78
+msgid "Save"
+msgstr "שמור"
+
+#: src/js/components/translators/AddTranslatorDialog.js:65
+#: src/js/components/translators/UserSection.js:45
+msgid "Add a Translator"
+msgstr "הוסף מתרגם"
+
+#: src/js/components/translators/AddTranslatorDialog.js:91
+msgid "Select an existing user and set as Translator"
+msgstr "בחר משתמש קיים והגדר כמתרגם"
+
+#: src/js/components/translators/AddTranslatorDialog.js:95
+msgid "Create a new user and set as Translator"
+msgstr "צור משתמש חדש והגדר כמתרגם"
+
+#: src/js/components/translators/EditLanguagesDialog.js:55
+msgid "Edit language pair(s) for translator"
+msgstr "ערוך זוגות שפות עבור מתרגם"
+
+#: src/js/components/translators/TranslatorsTable.js:128
+#: src/js/setup/components/Steps/AddLanguagesModal.js:346
+msgid "Name"
+msgstr "שם"
+
+#: src/js/components/translators/TranslatorsTable.js:140
+msgid "Language Pairs"
+msgstr "זוגות שפות"
+
+#: src/js/components/translators/TranslatorsTable.js:144
+msgid "You can translate to and from all languages"
+msgstr "ניתן לתרגם לכל שפה ואל כל שפה"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:48
+msgid "%s file upload failed."
+msgstr "העלאת הקובץ %s נכשלה."
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:69
+msgid "Flag"
+msgstr "דגל"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:87
+msgid "Flag file"
+msgstr "סמן בדגל את הקובץ"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:160
+msgid ""
+"You just added  language. Next, select it as the site's default language or "
+"a translation language."
+msgstr "זה עתה הוספת שפה. עכשיו, בחור אותה כשפת ברירת המחדל של האתר או כשפת תרגום."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:162
+msgid "Language added"
+msgstr "נוספה שפה"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:192
+msgid "The value \"%s\" already exists"
+msgstr "הערך \"%s\" כבר קיים"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:215
+msgid "Add a new language"
+msgstr "הוסף שפה חדשה"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:224
+msgid ""
+"Create a country-specific language by choosing the general language from "
+"the list below. Then, choose the country it should be localized for."
+msgstr "צור שפה ספציפית לארץ על-ידי בחירת השפה הכללית מהרשימה שלהלן. לאחר מכן בחר את הארץ שעבורה יש לבצע לוקליזציה."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:229
+msgid ""
+"By choosing a combination that already exists in the database, WPML can "
+"help fill out the necessary fields. Read more about "
+"<AddingACustomLanguageLink />."
+msgstr "על-ידי בחירה של שילוב שכבר קיים במסד הנתונים, WPML יכול לעזור במילוי השדות הנחוצים. קרא עוד אודות <AddingACustomLanguageLink />."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:242
+msgid "Cannot find?"
+msgstr "לא מוצא?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:244
+msgid "Click here"
+msgstr "לחץ כאן"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:300
+msgid ""
+"The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" "
+", \"pt-br\", \"zh-hans\""
+msgstr "הפורמט שגוי. הוא יכול להכיל רק אותיות קטנות ו-\"-\". לדוגמה: \"fr\", \"pt-br\", \"zh-hans\""
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:308
+msgid "Language"
+msgstr "שפה"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:331
+msgid "Location"
+msgstr "מיקום"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:360
+msgid "Code"
+msgstr "קוד"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:374
+msgid "The language will not be supported by automatic translations"
+msgstr "בשפה לא תיתמך על-ידי תרגומים אוטומטיים"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:392
+msgid "Language mapping"
+msgstr "מיפוי שפה"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:404
+msgid "Don't map this language"
+msgstr "אל תמפה שפה זו"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:418
+msgid "Default locale"
+msgstr "אזור ברירת מחדל"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:423
+msgid ""
+"The wrong format. It may contain only small letters and \"_\". E.g: \"de\" "
+", \"de_DE\", \"zh_Hant_TW\""
+msgstr "הפורמט שגוי. הוא יכול להכיל רק אותיות קטנות ו-\"_\". לדוגמה: \"de\", \"de_DE\", \"zh_Hant_TW\""
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:435
+msgid "hreflang"
+msgstr "hreflang"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:449
+msgid "Encode url?"
+msgstr "לקודד את כתובת ה-URL?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:45
+msgid "Flags must be:"
+msgstr "דגלים חייבים להיות:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:453
+msgid "NO"
+msgstr "לא"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:454
+msgid "YES"
+msgstr "כן"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:460
+msgid " (required)"
+msgstr "(חובה)"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:483
+msgid "Please fill in the field"
+msgstr "מלא את השדה"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:49
+msgid "PNG, SVG, or JPG files"
+msgstr "קובצי PNG, SVG או JPG"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:501
+msgid "Save language"
+msgstr "שמור שפה"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:52
+msgid "18 x 12 pixels"
+msgstr "18 x 12 פיקסלים"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:55
+msgid "Read more about "
+msgstr "קרא עוד אודות"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:60
+msgid ""
+"The name of your language as it will appear on your site's language "
+"switcher."
+msgstr "שם השפה כפי שיופיע במעביר השפה באתר שלך."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:61
+msgid ""
+"A unique value that identifies the language in the database and URL. Once "
+"saved, the language code cannot be changed."
+msgstr "ערך ייחודי שמזהה את השפה במסד הנתונים ובכתובת ה-URL. לאחר השמירה לא יהיה ניתן לשנות את קוד השפה."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:62
+msgid ""
+"If your custom language is similar to an existing language, you can use the "
+"existing language's spellcheck and automatic translation. For example, if "
+"your custom language is Swiss-German, you can map to German as the language "
+"to use for spellcheck and automatic translation. If you don't map your "
+"custom language to an existing language, spellcheck and automatic "
+"translation features will be unavailable in that language."
+msgstr "אם השפה המותאמת אישית דומה לשפה קיימת, תוכל להשתמש בבדיקת האיות ובתרגום האוטומטי של השפה הקיימת. לדוגמה, אם השפה המותאמת אישת שלך היא דרמנית-שוויצרית, תוכל למפות לגרמנית כשפה לשימוש עבור בדיקת איות ותרגום אוטומטי. אם לא תמפה את השפה המותאמת אישית לשפה קיימת, התכונות בדיקת איות ותרגום אוטומטי לא יהיו זמינות בשפה זו."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:66
+msgid ""
+"The value WPML checks when loading translations from MO and PO files. The "
+"default locale is included in the filenames in your /wp-content/languages/ "
+"folder in your WordPress setup."
+msgstr "הערך ש-WPML בודק בעת טעינת תרגומים מקובצי MO ו-PO. מיקום ברירת המחדל כלות בשמות הקבצים בתיקייה /wp-content/languages/ של הגדרת WordPress."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:69
+msgid ""
+"Google uses the hreflang attribute to direct users to sites in their "
+"relevant language and location. Examples:"
+msgstr "Google משתמשת במאפיין hreflang כדי לכוון משתמשים לאתרים הבשפות שרלוונטיות עבורם. דוגמאות:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:71
+msgid "All English-speaking users: en"
+msgstr "כל המשתמשים שהם דוברי אנגלית: en"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:72
+msgid "English for UK users: en-gb"
+msgstr "אנגלית עבור משתמשי UK: en-gb"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:73
+msgid "English for US users: en-us"
+msgstr "אנגלית עבור משתמשי ארה\"ב: en-us"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:81
+msgid ""
+"Determines if URLs in this language are encoded or use ASCII characters (if "
+"unsure, leave it as \"No\")."
+msgstr "קובע אם כתובות URL בשפה זו מקודדות או משתמשות בתווי ASCII (אם אינך בטוח, השאר זאת כ-\"לא\")."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:98
+msgid "adding a custom language"
+msgstr "מוסיף שפה מותאמת אישית"
+
+#: src/js/setup/components/Steps/Languages.js:110
+msgid "What are the languages of your site?"
+msgstr "מה השפות של האתר שלך?"
+
+#: src/js/setup/components/Steps/Languages.js:120
+msgid "Default language"
+msgstr "שפת ברירת מחדל"
+
+#: src/js/setup/components/Steps/Languages.js:122
+msgid "What is the current language of your website?"
+msgstr "מה השפה הנוכחית של אתר האינטרנט שלך?"
+
+#: src/js/setup/components/Steps/Languages.js:133
+msgid "Translation languages"
+msgstr "שפות תרגום"
+
+#: src/js/setup/components/Steps/Languages.js:135
+msgid "Which languages do you want to translate your site into?"
+msgstr "לאיזה שפות אתה רוצה לתרגם את האתר שלך?"
+
+#: src/js/setup/components/Steps/Languages.js:149
+msgid "If you cannot find languages that you need in the list"
+msgstr "אם אינך מוצא שפות שאתה צריך ברשימה"
+
+#: src/js/setup/components/Steps/Languages.js:150
+msgid "create a custom language"
+msgstr "צור שפה מותאמת אישית"
+
+#: src/js/translation-roles-ui/components/Managers.js:12
+msgid ""
+"You can add a dedicated person to oversee everything translation-related on "
+"your site. %sTranslation Managers%s can add new local translators or "
+"professional translation services, create and assign translation jobs, "
+"review completed translations, and change translation-related settings."
+msgstr "ניתן להוסיף אדם ייעודי שיפקח על כל מה שקשור לתרגומים באתר שלך. %sמנהלי תרגום%s יכולים להוסיף מתרגמים מקומיים חדשים או שירותי תרגום מקצועיים, ליצור משימות תרגום ולהקצות אותם, לבדוק תרגומים שהושלמו ולשנות הגדרות שקשורות בתרגום."
+
+#: src/js/translation-roles-ui/components/Managers.js:22
+msgid "Translation Managers"
+msgstr "מנהלי תרגום"
+
+#: src/js/translation-roles-ui/components/Managers.js:25
+msgid ""
+"Note: All Administrators are automatically given Translation Manager "
+"privileges."
+msgstr "הערה: כל מנהלי המערכת מקבליםבאופן אוטומטי זכויות של 'מנהל תרגום'."
+
+#: src/js/translation-roles-ui/components/Users.js:14
+msgid ""
+"%sLocal translators%s are users of your site that can log in and add, edit, "
+"and review your site's translations. Add a translator and their associated "
+"translation pairs to assign them translation jobs."
+msgstr "%sמתרגמים מקומיים%s הם משתמשים באתר שלך מיכולים להיכנס, להוסיף, לערוך ולבדוק את התרגומים באתר שלך. הוסף מתרגם ואת זוגות השפות המשוייכים אליו כדי להקצות לו משימות תרגום."
+
+#: src/js/translation-roles-ui/components/Users.js:23
+msgid ""
+"You can %shire an experienced translator%s to review your automatic "
+"translations for perfect quality."
+msgstr "תוכל %sלשכור מתרגם מנוסה%s שיבדוק את התרגומים האוטומטיים כדי שתקבל איכות מושלמת."
+
+#: src/js/translation-roles-ui/components/Users.js:33
+msgid "Translators"
+msgstr "מתרגמים"

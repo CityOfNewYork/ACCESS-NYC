@@ -30,7 +30,7 @@ class Settings {
 
 	/** @return string */
 	public function getTrackStringColor() {
-		return (string) $this->getSTSetting( 'hl_color', '' );
+		return (string) $this->getSTSetting( 'hl_color', '#e83200' );
 	}
 
 	/** @return bool */

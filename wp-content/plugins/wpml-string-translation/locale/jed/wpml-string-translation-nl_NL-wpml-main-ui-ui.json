@@ -1,0 +1,58 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Edit": [
+            "Bewerken"
+         ],
+         "Shift+Tab": [
+            "Shift+tab"
+         ],
+         "Tab": [
+            "Tab"
+         ],
+         "Translation to:": [
+            "Vertaling naar:"
+         ],
+         "Copy from original": [
+            "Kopie van origineel"
+         ],
+         "Use Shift+Enter to add a new line.": [
+            "Gebruik Shift+Enter om een nieuwe regel toe te voegen."
+         ],
+         "Original:": [
+            "Origineel:"
+         ],
+         "Add %s translation": [
+            "%s vertaling toevoegen"
+         ],
+         "Edit %s translation": [
+            "Bewerk %s vertaling"
+         ],
+         "Add %s translation (the string appears on the site and is not translated)": [
+            "%s vertaling toevoegen (de string verschijnt op de site en wordt niet vertaald)"
+         ],
+         "Original language %s": [
+            "Originele taal %s"
+         ],
+         "Waiting for translator to %s": [
+            "Wachten op vertaler om %s"
+         ],
+         "Translation in progress to %s": [
+            "Vertaling in uitvoering naar %s"
+         ],
+         "In basket for translation to %s": [
+            "In mand voor vertaling naar %s"
+         ],
+         "Translation saved.": [
+            "Vertaling opgeslagen."
+         ],
+         "Translation update failed.": [
+            "Vertaalupdate mislukt."
+         ]
+      }
+   }
+}

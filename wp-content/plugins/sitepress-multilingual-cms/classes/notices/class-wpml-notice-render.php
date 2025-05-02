@@ -175,7 +175,7 @@ class WPML_Notice_Render {
 	 */
 	private function get_dismiss_html( $localized_text = null ) {
 		$dismiss_html  = '';
-		$dismiss_html .= '<span class="otgs-notice-dismiss notice-dismiss">';
+		$dismiss_html .= '<span class="otgs-notice-dismiss notice-dismiss" role="button" tabindex="0">';
 		$dismiss_html .= '<span class="screen-reader-text"><input class="otgs-notice-dismiss-check" type="checkbox" value="1" />';
 		if ( $localized_text ) {
 			$dismiss_html .= esc_html( $localized_text );

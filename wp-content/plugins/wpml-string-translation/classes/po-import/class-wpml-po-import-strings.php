@@ -6,10 +6,20 @@ class WPML_PO_Import_Strings {
 
 	private $errors;
 
+	/** @var SitePress $sitepress */
+	private $sitepress;
+
+	public function __construct( \SitePress $sitepress ) {
+		$this->sitepress = $sitepress;
+	}
+
 	public function maybe_import_po_add_strings() {
-		if ( array_key_exists( 'icl_po_upload', $_POST ) && wp_verify_nonce( $_POST[ '_wpnonce' ], 'icl_po_form' ) ) {
+		if ( array_key_exists( 'icl_po_upload', $_POST ) && isset( $_POST['_wpnonce'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'icl_po_form' ) ) {
 			add_filter( 'wpml_st_get_po_importer', array( $this, 'import_po' ) );
-		} elseif ( array_key_exists( 'action', $_POST ) && 'icl_st_save_strings' === $_POST[ 'action' ] ) {
+			return;
+		}
+
+		if ( array_key_exists( 'action', $_POST ) && 'icl_st_save_strings' === $_POST['action'] && isset( $_POST['_wpnonce'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'add_po_strings' ) ) {
 			$this->add_strings();
 		}
 	}
@@ -36,23 +46,48 @@ class WPML_PO_Import_Strings {
 	}
 
 	private function add_strings() {
-		$strings = json_decode( $_POST['strings_json'] );
+		/** @var WPML_ST_String_Factory $wpml_st_string_factory */
+		$wpml_st_string_factory = WPML\Container\make( WPML_ST_String_Factory::class );
+		$strings                = json_decode( $_POST['strings_json'] );
+		$source_lang            = $this->get_filtered_source_lang();
 
-		foreach ( $strings as $k => $string ) {
-			$original = wp_kses_post( $string->original );
-			$context  = filter_var( $string->context, FILTER_SANITIZE_STRING );
+		foreach ( (array) $strings as $string ) {
+			$original = WPML_Kses_Post::wp_kses_post_preserve_tags_format( $string->original );
+			$context  = (string) \WPML\API\Sanitize::string( $string->context );
 
 			$string->original = str_replace( '\n', "\n", $original );
 			$name             = isset( $string->name )
-				? (string) filter_var( $string->name, FILTER_SANITIZE_STRING ) : md5( $original );
+				? (string) \WPML\API\Sanitize::string( $string->name ) : md5( $original );
 
 			$string_id = icl_register_string( array(
-				'domain'  => filter_var( $_POST['icl_st_domain_name'], FILTER_SANITIZE_STRING ),
+				'domain'  => (string) \WPML\API\Sanitize::string( $_POST['icl_st_domain_name']),
 				'context' => $context
 			),
 				$name,
-				$original
+				$original,
+				false,
+				$source_lang
 			);
+
+			if ( ! $string_id ) {
+				continue;
+			}
+
+			$registered_string_lang = $wpml_st_string_factory->find_by_id( $string_id )->get_language();
+			if ( $registered_string_lang !== $source_lang ) {
+				// If any string already exists in different language than selected source language, exit with error.
+				$source_lang_details = $this->sitepress->get_language_details( $source_lang );
+				$registered_string_lang_details = $this->sitepress->get_language_details( $registered_string_lang );
+				$this->errors = sprintf(
+					/* translators: 1: Language name, 2: Language name, 3: Opening anchor tag, 4: Closing anchor tag. */
+					esc_html__( 'You\'re trying to import strings that are already registered in %1$s. To import them as %2$s, first %3$schange the source language of existing strings%4$s using String Translation. Then, try importing them again.', 'wpml-string-translation' ),
+					$registered_string_lang_details['display_name'] ?? $registered_string_lang,
+					$source_lang_details['display_name'] ?? $source_lang,
+					'<a target="_blank" class="external-link" href="https://wpml.org/documentation/getting-started-guide/string-translation/how-to-change-the-source-language-of-strings/?utm_source=plugin&utm_medium=gui&utm_campaign=string-translation">',
+					'</a>'
+				);
+				break;
+			}
 
 			$this->maybe_add_translation( $string_id, $string );
 		}
@@ -75,5 +110,15 @@ class WPML_PO_Import_Strings {
 				icl_update_string_status( $string_id );
 			}
 		}
+	}
+
+	/**
+	 * Wrapper function for `filter_input()`.
+	 * @return string
+	 */
+	protected function get_filtered_source_lang(): string {
+		return ! empty( $_POST['icl_st_po_source_language'] )
+			? filter_input( INPUT_POST, 'icl_st_po_source_language', FILTER_SANITIZE_FULL_SPECIAL_CHARS )
+			: '';
 	}
 }

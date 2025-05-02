@@ -19,7 +19,7 @@ class OldPlugin {
 	public static function handle() {
 		if (
 			defined( 'WPML_PAGE_BUILDERS_VERSION' )
-			&& version_compare( constant( 'WPML_PAGE_BUILDERS_VERSION' ), '2', '<' )
+			&& version_compare( constant( 'WPML_PAGE_BUILDERS_VERSION' ), '2', '<' ) // @phpstan-ignore-line
 		) {
 			deactivate_plugins( 'wpml-page-builders/plugin.php' );
 			self::addNotice();

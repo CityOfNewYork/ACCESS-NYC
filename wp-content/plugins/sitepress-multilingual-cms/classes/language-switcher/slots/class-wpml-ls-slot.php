@@ -192,6 +192,14 @@ class WPML_LS_Slot {
 				'type'        => 'string',
 				'twig_string' => 1,
 			),
+			// Post translation.
+			'display_before_content'        => array( 'type' => 'int' ),
+			'display_after_content'         => array( 'type' => 'int' ),
+			'availability_text'             => array( 'type' => 'string' ),
+			// Menu.
+			'position_in_menu'              => array( 'type' => 'string' ),
+			// Widget.
+			'widget_title'                  => array( 'type' => 'string' ),
 		);
 	}
 

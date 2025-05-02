@@ -20,6 +20,21 @@
          "Cancel in-progress automatic jobs": [
             "إلغاء مهام الترجمة الآلية قيد التنفيذ"
          ],
+         "Enabling WPML's Advanced Translation Editor...": [
+            "تفعيل محرر الترجمة المتقدم من WPML..."
+         ],
+         "Force-enable WPML's Advanced Translation Editor": [
+            "فرض تفعيل محرر الترجمة المتقدم من WPML"
+         ],
+         "If you're running this website from two or more domains on the same installation, this action will allow both to use the Advanced Translation Editor. Don't use this if you've moved or copied the site to a different domain on a different server.": [
+            "إذا كنت تدير هذا الموقع من نطاقين أو أكثر على نفس التثبيت، فإن هذا الإجراء سيسمح لكليهما باستخدام محرر الترجمة المتقدم. لا تستخدم هذا إذا كنت قد نقلت أو نسخت الموقع إلى نطاق مختلف على خادم آخر."
+         ],
+         "An error occurred while enabling WPML on both domains. Please try again.": [
+            "حدث خطأ أثناء تفعيل WPML على كلا النطاقين. يرجى المحاولة مرة أخرى."
+         ],
+         "You can now use the Advanced Translation Editor from this site, as well as the other site(s) running from a different domain on the same installation.": [
+            "يمكنك الآن استخدام محرر الترجمة المتقدم من هذا الموقع، بالإضافة إلى الموقع (المواقع) الأخرى التي تعمل من نطاق مختلف على نفس التثبيت."
+         ],
          "Domain name has been updated": [
             "تم تحديث اسم النطاق"
          ],

@@ -1,0 +1,58 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Edit": [
+            "לַעֲרוֹך"
+         ],
+         "Shift+Tab": [
+            "Shift+Tab"
+         ],
+         "Tab": [
+            "כרטיסייה"
+         ],
+         "Translation to:": [
+            "תרגום ל:"
+         ],
+         "Copy from original": [
+            "העתק מהמקור"
+         ],
+         "Use Shift+Enter to add a new line.": [
+            "השתמש ב-Shift+Enter כדי להוסיף שורה חדשה."
+         ],
+         "Original:": [
+            "מְקוֹרִי:"
+         ],
+         "Add %s translation": [
+            "לְהוֹסִיף %s תִרגוּם"
+         ],
+         "Edit %s translation": [
+            "לַעֲרוֹך %s תִרגוּם"
+         ],
+         "Add %s translation (the string appears on the site and is not translated)": [
+            "לְהוֹסִיף%s תרגום (המחרוזת מופיעה באתר ואינה מתורגמת)"
+         ],
+         "Original language %s": [
+            "שפת מקור %s"
+         ],
+         "Waiting for translator to %s": [
+            "מחכה למתרגם ל %s"
+         ],
+         "Translation in progress to %s": [
+            "מתבצע תרגום ל %s"
+         ],
+         "In basket for translation to %s": [
+            "בסל לתרגום ל %s"
+         ],
+         "Translation saved.": [
+            "התרגום נשמר."
+         ],
+         "Translation update failed.": [
+            "עדכון התרגום נכשל."
+         ]
+      }
+   }
+}

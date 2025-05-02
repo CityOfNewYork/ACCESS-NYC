@@ -1,5 +1,7 @@
 <?php
 
+use WPML\Core\WP\App\Resources;
+
 class WPML_Translation_Jobs_Migration_Hooks {
 
 	private $notice;
@@ -69,8 +71,8 @@ class WPML_Translation_Jobs_Migration_Hooks {
 		wp_enqueue_script(
 			'wpml-tm-translation-jobs-migration',
 			WPML_TM_URL . '/dist/js/translationJobsMigration/app.js',
-			array(),
-			ICL_SITEPRESS_VERSION
+			array( Resources::vendorAsDependency() ),
+			ICL_SITEPRESS_SCRIPT_VERSION
 		);
 	}
 

@@ -5,6 +5,8 @@
  */
 class WPML_Multilingual_Options {
 
+	const NOTICE_GROUP = 'wpml-multilingual-options';
+
 	private $array_helper;
 	private $registered_options = array();
 	private $sitepress;
@@ -59,10 +61,11 @@ class WPML_Multilingual_Options {
 	}
 
 	/**
-	 * @param string $option_name
+	 * @param string|null $option_name
+	 * @param string[]    $option_pages
 	 */
-	public function multilingual_options_action( $option_name ) {
-		if ( ! in_array( $option_name, $this->registered_options, true ) ) {
+	public function multilingual_options_action( $option_name = null, $option_pages = [] ) {
+		if ( $option_name && ! in_array( $option_name, $this->registered_options, true ) ) {
 			$this->registered_options[] = $option_name;
 			$current_language           = $this->sitepress->get_current_language();
 			$default_language           = $this->sitepress->get_default_language();
@@ -71,10 +74,30 @@ class WPML_Multilingual_Options {
 				add_filter( "pre_update_option_{$option_name}", array( $this, 'pre_update_option_filter' ), 10, 3 );
 			}
 		}
+		foreach ( $option_pages as $page_id ) {
+			$this->add_notice( $page_id );
+		}
+	}
+
+	/**
+	 * @param string $page_id
+	 */
+	private function add_notice( $page_id ) {
+		$notice_id     = md5( $page_id );
+		$admin_notices = wpml_get_admin_notices();
+		$admin_notices->remove_notice( self::NOTICE_GROUP, $notice_id );
+
+		$text   = '<h4>' . __( 'You can set different options for each language', 'sitepress' ) . '</h4>'
+			. '<p>' . __( 'Use the language switcher in the top admin bar to switch languages, then set and save options for each language individually.', 'sitepress' ) . '</p>';
+		$notice = new \WPML_Notice( $notice_id, $text, self::NOTICE_GROUP );
+		$notice->set_css_class_types( 'notice-info' );
+		$notice->set_restrict_to_screen_ids( [ $page_id ] );
+		$notice->set_dismissible( true );
+		$admin_notices->add_notice( $notice, true );
 	}
 
 	public function init_hooks() {
-		add_action( 'wpml_multilingual_options', array( $this, 'multilingual_options_action' ) );
+		add_action( 'wpml_multilingual_options', array( $this, 'multilingual_options_action' ), 10, 2 );
 		add_action( 'icl_after_set_default_language', array( $this, 'default_language_changed_action' ), 10, 2 );
 	}
 

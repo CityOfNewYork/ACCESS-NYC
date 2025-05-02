@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-04-22T15:22:56+02:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: wpml\n"
+
+msgid "Add glossary terms"
+msgstr "Agregar términos al glosario"
+
+msgid "Minimize"
+msgstr "Minimizar"
+
+msgid "Expand"
+msgstr "Expandir"
+
+msgid "There's nothing yet in the Glossary"
+msgstr "Aún no hay nada en el Glosario"
+
+msgid "Looks like you're not yet using the glossary. Glossary can help you:"
+msgstr "Parece que aún no está utilizando el glosario. El Glosario puede ayudarle a:"
+
+msgid "Improve the quality of the translation"
+msgstr "Mejorar la calidad de la traducción"
+
+msgid "Ensure translation consistency"
+msgstr "Garantizar la coherencia de la traducción"
+
+msgid "Reduce translation costs"
+msgstr "Reducir los costos de traducción"
+
+msgid "Improve SEO in translation languages"
+msgstr "Mejorar el SEO en los idiomas de traducción"
+
+msgid "How to Use the Glossary for Accurate Translations"
+msgstr "Cómo utilizar el glosario para obtener traducciones precisas"
+
+msgid "%d item in the <a>Glossary</a>"
+msgid_plural "%d items in the <a>Glossary</a>"
+msgstr[0] "%d elemento en el <a>Glosario</a>"
+msgstr[1] "%d elementos en el <a>Glosario</a>"

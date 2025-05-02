@@ -1,5 +1,6 @@
 <?php
 
+use WPML\FP\Maybe;
 use WPML\TM\ATE\API\FingerprintGenerator;
 use WPML\TM\ATE\Log\Entry;
 use WPML\TM\ATE\Log\Storage;
@@ -152,7 +153,7 @@ class WPML_TM_AMS_API {
 	}
 
 	/**
-	 * @return WP_Error|null
+	 * @return mixed|WP_Error|null
 	 */
 	public function get_translation_engines() {
 		$result = null;
@@ -166,6 +167,36 @@ class WPML_TM_AMS_API {
 			}
 		}
 		return $result;
+	}
+
+
+	/**
+	 * @return mixed|WP_Error|null
+	 */
+	public function get_available_formalities() {
+		$result = null;
+
+		$url = $this->endpoints->get_available_formalities();
+		$response = $this->signed_request( 'GET', $url );
+		if ( $this->response_has_body( $response ) ) {
+			$result = $this->get_errors( $response );
+			if ( ! is_wp_error( $result ) ) {
+				$result = json_decode( $response['body'], true );
+			}
+		}
+		return $result;
+	}
+
+	/**
+	 * @return mixed|WP_Error|null
+	 */
+	public function getGlossaryCount() {
+		$result = $this->getSignedResult(
+			'GET',
+			$this->endpoints->get_glossary_counts()
+		);
+
+		return Maybe::of( $result )->reject( 'is_wp_error' );
 	}
 
 	/**
@@ -826,6 +857,16 @@ class WPML_TM_AMS_API {
 		return $this->getSignedResult(
 			'GET',
 			$this->endpoints->get_credits()
+		);
+	}
+
+	/**
+	 * @return array|WP_Error
+	 */
+	public function getAccountBalances() {
+		return $this->getSignedResult(
+			'GET',
+			$this->endpoints->get_account_balances()
 		);
 	}
 

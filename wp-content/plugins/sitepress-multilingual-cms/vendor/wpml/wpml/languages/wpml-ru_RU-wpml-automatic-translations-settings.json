@@ -1,0 +1,172 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Could not fetch engines data": [
+            "Не удалось получить данные о движках"
+         ],
+         "Could not save settings": [
+            "Не удалось сохранить настройки"
+         ],
+         "Automatic translation": [
+            "Автоматический перевод"
+         ],
+         "Saving...": [
+            "Сохранение..."
+         ],
+         "Save settings": [
+            "Сохранить настройки"
+         ],
+         "Settings saved": [
+            "Настройки сохранены"
+         ],
+         "Some error occurred": [
+            "Произошла ошибка"
+         ],
+         "Loading...": [
+            "Загрузка..."
+         ],
+         "Failed to load engines": [
+            "Не удалось загрузить движки"
+         ],
+         "Drag your default engine to the top and order the rest by priority.": [
+            "Перетащите выбранный по умолчанию механизм наверх и расположите остальные по приоритету."
+         ],
+         "Which translation engines do you want to use?": [
+            "Какие движки перевода вы хотите использовать?"
+         ],
+         "Automatic translation engines differ in translation style and supported language pairs. If your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it.": [
+            "Системы автоматического перевода различаются стилем перевода и поддерживаемыми языковыми парами. Если предпочитаемая вами система перевода не поддерживает нужную вам языковую пару, мы обращаемся к следующей предпочитаемой системе, которая её поддерживает."
+         ],
+         "WPML AI (beta) automatically detects the formality of your content and translates with the same formality.": [
+            "WPML AI (бета) автоматически определяет формальность вашего контента и переводит с той же формальностью."
+         ],
+         "Auto-formality": [
+            "Автоматическая формальность"
+         ],
+         "Choose the tone of automatic translations for %s": [
+            "Выберите тон автоматических переводов для %s"
+         ],
+         "Your site doesn't use languages that offer formality settings.": [
+            "На вашем сайте не используются языки, предлагающие настройки формальности."
+         ],
+         "Edit formality": [
+            "Редактировать формальность"
+         ],
+         "%d credits per word": [
+            "%d кредитов за слово"
+         ],
+         "Backup %d": [
+            "Резервная копия %d"
+         ],
+         "Default": [
+            "По умолчанию"
+         ],
+         "ON": [
+            "ВКЛ"
+         ],
+         "OFF": [
+            "ВЫКЛ"
+         ],
+         "Documentation": [
+            "Документация"
+         ],
+         "DeepL's formality and how it helps get good translations": [
+            "Формальность DeepL и как она помогает получить хорошие переводы"
+         ],
+         "Edit button": [
+            "Кнопка редактирования"
+         ],
+         "Examples for %s": [
+            "Примеры для %s"
+         ],
+         "For example:": [
+            "Например:"
+         ],
+         "Formality settings for %s": [
+            "Настройки формальности для %s"
+         ],
+         "Formality level for %s": [
+            "Уровень формальности для %s"
+         ],
+         "Set formality for %s": [
+            "Установить формальность для %s"
+         ],
+         "%d of your target languages can be translated using either a formal or informal tone.\n The tone which gives the best translation for each language is set by default.": [
+            "%d ваших целевых языков можно переводить, используя либо формальный, либо неформальный тон.\n По умолчанию установлен тон, который дает наилучший перевод для каждого языка."
+         ],
+         "%s doesn't yet support formality options for %s.": [
+            "%s пока не поддерживает параметры формальности для %s."
+         ],
+         "Cancel": [
+            "Отмена"
+         ],
+         "Update": [
+            "Обновить"
+         ],
+         "Formal": [
+            "Формальный"
+         ],
+         "Informal": [
+            "Неформальный"
+         ],
+         "Don't translate drafts. Only translate when I publish content.": [
+            "Не переводите черновики. Переводите только после публикации контента."
+         ],
+         "Translate drafts as I save them (consumes a bit more translation credits).": [
+            "Переводите черновики по мере их сохранения (расходует несколько больше кредитов на перевод)."
+         ],
+         "Do you want to translate drafts automatically?": [
+            "Хотите ли вы автоматически переводить черновики?"
+         ],
+         "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s.": [
+            "Данная функция доступна только при активации опции “Автоматически переводить всё” на %sПанели управления переводами%s."
+         ],
+         "Close modal": [
+            "Закрыть модальное окно"
+         ],
+         "What would you like to do after WPML finishes translating your content automatically?": [
+            "Что бы вы хотели сделать после того, как WPML завершит автоматический перевод вашего контента?"
+         ],
+         "Wait for review": [
+            "Ждать проверки"
+         ],
+         "Recommended with DeepL, Google and Microsoft": [
+            "Рекомендуется с DeepL, Google и Microsoft"
+         ],
+         "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process.": [
+            "DeepL, Google и Microsoft предоставляют отличные переводы, однако мы рекомендуем проведение человеческой проверки для подтверждения их корректности. WPML ИИ обеспечивает переводы, превосходящие человеческие, с пониманием контекста, что позволяет уверенно пропустить процесс проверки."
+         ],
+         "WPML keeps translations unpublished, so you can review them first.": [
+            "WPML сохраняет переводы неопубликованными, чтобы вы могли сначала их проверить."
+         ],
+         "Your translators review and approve translations before publishing.": [
+            "Ваши переводчики проверяют и утверждают переводы перед публикацией."
+         ],
+         "Publish and mark for review": [
+            "Опубликовать и отметить для проверки"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "WPML публикует переводы немедленно, но помечает их для проверки вами в удобное для вас время."
+         ],
+         "WPML publishes translations immediately but flags them for translators to review later.": [
+            "WPML публикует переводы немедленно, но помечает их для последующей проверки переводчиками."
+         ],
+         "Publish without review": [
+            "Опубликовать без проверки"
+         ],
+         "Recommended with WPML AI": [
+            "Рекомендуется с WPML AI"
+         ],
+         "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy.": [
+            "WPML AI предоставляет переводы лучше, чем человеческие, которые редко нуждаются в улучшении, поэтому вы можете уверенно пропустить процесс проверки. Для других систем перевода рекомендуется человеческая проверка для подтверждения точности."
+         ],
+         "WPML publishes translations immediately, skipping the review process.": [
+            "WPML публикует переводы немедленно, пропуская процесс проверки."
+         ]
+      }
+   }
+}

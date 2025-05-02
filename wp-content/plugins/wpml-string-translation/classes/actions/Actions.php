@@ -15,7 +15,6 @@ class Actions {
 			'WPML_ST_Theme_Plugin_Hooks_Factory',
 			'WPML_ST_Taxonomy_Labels_Translation_Factory',
 			'WPML_ST_String_Translation_AJAX_Hooks_Factory',
-			'WPML_ST_Remote_String_Translation_Factory',
 			'WPML_ST_Privacy_Content_Factory',
 			'WPML_ST_String_Tracking_AJAX_Factory',
 			\WPML_ST_Translation_Memory::class,
@@ -34,6 +33,7 @@ class Actions {
 			\WPML\ST\Main\UI::class,
 			\WPML\ST\StringsCleanup\UI::class,
 			\WPML\ST\DisplayAsTranslated\CheckRedirect::class,
+			\WPML\ST\TranslationJob\AdminTextHooks::class,
 		);
 	}
 }

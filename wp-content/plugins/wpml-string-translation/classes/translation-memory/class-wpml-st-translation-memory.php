@@ -14,7 +14,14 @@ class WPML_ST_Translation_Memory implements IWPML_AJAX_Action, IWPML_Backend_Act
 	}
 
 	public function add_hooks() {
-		add_filter( 'wpml_st_get_translation_memory', [ $this, 'get_translation_memory' ], 10, 2 );
+		/**
+		 * We've disabled the use of ST translation memory by default in favor of ATE.
+		 * Use WPML_USE_ST_TRANSLATION_MEMORY constant if it is still needed for clients using CTE or TS.
+		 * See wpmldev-3262
+		 */
+		if ( defined( 'WPML_USE_ST_TRANSLATION_MEMORY' ) && WPML_USE_ST_TRANSLATION_MEMORY ) {
+			add_filter( 'wpml_st_get_translation_memory', [ $this, 'get_translation_memory' ], 10, 2 );
+		}
 		add_filter( 'wpml_st_translation_memory_endpoint', Fns::always( FetchTranslationMemory::class ) );
 	}
 

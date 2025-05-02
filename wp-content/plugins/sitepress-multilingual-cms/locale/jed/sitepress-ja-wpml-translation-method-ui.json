@@ -5,483 +5,83 @@
          "": {
             "domain": "messages"
          },
-         "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
-            "自動翻訳を一時停止しようとしたときにエラーが発生しました。少したってからもう一度お試しいただくか、当社サポートまでお問い合わせください。"
-         ],
-         "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
-            "自動翻訳を再開しようとしたときにエラーが発生しました。少したってからもう一度お試しいただくか、当社サポートまでお問い合わせください。"
-         ],
-         "Error": [
-            "エラー"
-         ],
-         "Draft — Pending review": [
-            "草稿 — レビュー待ち"
-         ],
-         "Complete": [
-            "完了"
-         ],
-         "Insufficient funds": [
-            "資金不足"
-         ],
-         "Translate Everything Automatically - running": [
-            "すべてを自動的に翻訳する - 実行中"
-         ],
-         "Translate Everything Automatically - active": [
-            "すべてを自動的に翻訳する - アクティブ"
-         ],
-         "Pause": [
-            "一時停止します"
-         ],
-         "Pause automatic translation": [
-            "自動翻訳を一時停止する"
-         ],
-         "WPML will finish in-progress translations but won't translate anything new.": [
-            "WPML では、進行中の翻訳については完了させますが、新しいものは翻訳しません。"
-         ],
-         "Translate Everything Automatically is paused": [
-            "「すべてを自動的に翻訳する」が一時停止されています"
-         ],
-         "Translate Everything Automatically - paused": [
-            "すべてを自動的に翻訳する - 一時停止済み"
-         ],
-         "Resume": [
-            "再開する"
-         ],
-         "Start automatic translation": [
-            "自動翻訳を開始する"
-         ],
-         "This uses %scredits%s to translate your existing content and anything you add or change later.": [
-            "これは、%sクレジット%sを使用して、既存のコンテンツや、あとから追加または変更した内容を翻訳します。"
-         ],
-         "Start translating everything automatically": [
-            "すべての翻訳を自動で開始する"
-         ],
-         "WPML will translate any new content you create into %1$s.": [
-            "WPML では、作成した新しいコンテンツを%1$sに翻訳します。"
-         ],
-         "WPML will translate all new future content to %1$s and keep translations up to date when you make changes.": [
-            "WPML では、今後の新しいコンテンツをすべて%1$sに翻訳し、変更があった場合は翻訳を最新の状態に保ちます。"
-         ],
-         "Do you want to translate existing content, too?": [
-            "既存のコンテンツも翻訳しますか？"
-         ],
-         "Yes, translate all new and existing content": [
-            "はい、新規および既存のコンテンツをすべて翻訳します"
-         ],
-         "No, only translate new content": [
-            "いいえ、新しいコンテンツのみを翻訳します"
-         ],
-         "You can translate existing content from the Translation Management Dashboard": [
-            "翻訳管理ダッシュボードから、既存のコンテンツを翻訳することができます。"
-         ],
-         "Connection Error. Please wait a minute and reload this page. If the problem continues, please contact WPML support.": [
-            "接続エラーです。しばらくお待ちいただき、このページを再読み込みしてください。問題が解決しない場合は、WPML サポートにお問い合わせください。"
-         ],
-         "Automatic translation uses credits. %1$sRead more about automatic translation credits%2$s": [
-            "自動翻訳ではクレジットを使用します。%1$s自動翻訳クレジットについて詳しく読む%2$s"
-         ],
-         "You need credits to start translating everything.": [
-            "すべての翻訳を開始するにはクレジットが必要です。"
-         ],
-         "Cancel": [
-            "キャンセル"
-         ],
-         "Start translating everything": [
-            "すべての翻訳を開始する"
-         ],
-         "%1$d language": [
-            "%1$d 言語",
-            "%1$d 言語"
-         ],
-         "Please wait...": [
-            "お待ちください..."
-         ],
-         "All new future content": [
-            "今後のすべての新規コンテンツ"
-         ],
-         "Translate Everything Automatically - stopped": [
-            "すべてを自動的に翻訳する - 停止済み"
-         ],
-         "Fix it": [
-            "修正する"
-         ],
-         "From:": [
-            "翻訳前："
-         ],
-         "--Choose language--": [
-            "--言語選択--"
-         ],
-         "to:": [
-            "翻訳後："
-         ],
-         "Set language pair(s) for Translator %s:": [
-            "言語ペアを次の翻訳者%sに設定:"
-         ],
-         "+ Add more language pairs for this translator": [
-            "+ この翻訳者に他の言語ペアを追加"
-         ],
-         "First Name": [
-            "名"
-         ],
-         "Last Name": [
-            "姓"
-         ],
-         "Role": [
-            "役割"
-         ],
-         "(required)": [
-            " (必要)"
-         ],
-         "Make sure that you have provided a correct email address e.g. name@domain.com": [
-            "正しいメールアドレスであることを確認してください。例、name@domain.com"
-         ],
-         "This field is required": [
-            "このフィールドは必要です"
-         ],
-         "A translator can be any WordPress role.": [
-            "翻訳者はいかなるWordPressの役割にも設定できます。"
-         ],
-         "Username": [
-            "ユーザーネーム"
-         ],
-         "Email": [
-            "メール"
-         ],
-         "Search": [
-            "検索"
-         ],
          "What should happen with your automatically translated content?": [
-            "自動翻訳されたコンテンツはどうなるのでしょうか？"
+            "自動翻訳されたコンテンツをどうしますか？"
          ],
-         "Let me review it before it gets published": [
-            "公開する前にレビューさせてください"
+         "Wait for review": [
+            "レビュー待ち"
          ],
-         "Publish right away but mark as not reviewed so I can take a look later": [
-            "すぐに公開するが、後で確認できるように未レビューとしてマークする"
+         "You check and approve translations before publishing.": [
+            "公開前に翻訳をチェックして承認します。"
          ],
-         "Publish right away without reviewing": [
-            "レビューせずにすぐに公開する"
+         "Your translators check and approve translations before publishing.": [
+            "あなたの翻訳者が公開前に翻訳をチェックして承認します。"
          ],
-         "Who will translate?": [
-            "誰が翻訳しますか？"
+         "Publish and mark for review": [
+            "公開してレビュー用にマーク"
          ],
-         "Only myself": [
-            "自分のみ"
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "WPMLは翻訳をすぐに公開しますが、あなたが都合の良いときにチェックできるようフラグを立てます。"
          ],
-         "You will be the sole translator for this site.": [
-            "このサイトの唯一の翻訳者になります。"
+         "WPML publishes translations immediately but flags them for your translators to check at their convenience.": [
+            "WPMLは翻訳をすぐに公開しますが、あなたの翻訳者が都合の良いときにチェックできるようフラグを立てます。"
          ],
-         "Users of this site": [
-            "このサイトのユーザー"
+         "Publish without review": [
+            "レビューなしで公開"
          ],
-         "You will choose or create new users of this WordPress site as the translators. You can also choose yourself. This allows you to set up a team of translators working in different language pairs.": [
-            "このWordPressサイトのユーザーを翻訳者として選択するか、新しいユーザーを作成します。これにより、色々な言語ペアに取り組む翻訳者チームを設定できます。"
-         ],
-         "Translation Service: %s": [
-            "翻訳サービス: %s"
-         ],
-         "A Professional Translation Service": [
-            "専門的な翻訳サービス"
-         ],
-         "You have preselected %s to translate your content. Finish setting it up by entering the API token they provided to you.": [
-            "コンテンツの翻訳に %s を事前選択しています。提供されている API トークンを入力して、設定を完了してください。"
-         ],
-         "WPML offers tight integration with over 70 translation services. You will choose the translation service that you prefer and enjoy a streamlined process for sending jobs and receiving completed translations.": [
-            "WPMLは70以上の翻訳サービスを統合しています。自分が好きな翻訳サービスを選び、ジョブの送信、翻訳の受信などのプロセスを効率化することが可能です。"
-         ],
-         "I want to set a \"Translation Manager\" who will choose the translators for this site": [
-            "このサイトの翻訳者を選ぶ \"Translation Manager\" を設定する"
-         ],
-         "You will choose a user of this site and delegate the setup of translators to him/her. Choose this option when you are building a website for a client, who will set up translator users or choose a translation service.": [
-            "このサイトのユーザーを選択し、その人に翻訳者設定の責任を譲渡することができます。クライアントためにウェブサイトを構築するとき、そのクライアントが翻訳者ユーザーを設定する、または翻訳サービスを選択する場合、このオプションをお選びください。"
-         ],
-         "Translate Everything Automatically": [
-            "すべてを自動で翻訳する"
-         ],
-         "Let WPML do the translating for you": [
-            "WPML に翻訳を任せる"
-         ],
-         "Translates all your published content automatically": [
-            "公開したすべてのコンテンツを自動的に翻訳する"
-         ],
-         "Uses machine translation powered by Google, Microsoft, or DeepL": [
-            "Google、Microsoft、または DeepL が提供する機械翻訳を使用します"
-         ],
-         "Instantly translates new content and updates translations whenever you edit a page or post": [
-            "ページや記事を編集するたびに、新しいコンテンツを瞬時に翻訳したり、翻訳内容を更新します"
-         ],
-         "You can review translations before publishing or hire professional reviewers": [
-            "公開前に翻訳をレビューしたり、プロのレビューアーを雇うことができます"
-         ],
-         "Affordable and fast": [
-            "お求めやすい価格と高速性"
-         ],
-         "How would you like to translate the content?": [
-            "どのようにコンテンツを翻訳しますか？"
-         ],
-         "Choose": [
-            "選択"
-         ],
-         "Translate What You Choose": [
-            "選択したものを翻訳する"
-         ],
-         "You decide what to translate and who'll translate it": [
-            "何を翻訳するか、誰が翻訳するかを決定できます"
-         ],
-         "Translate yourself": [
-            "自分で翻訳する"
-         ],
-         "Use automatic translation on the content you choose": [
-            "選択したコンテンツに自動翻訳を使用する"
-         ],
-         "Work with translators that are users of your site": [
-            "あなたのサイトのユーザーである翻訳者と一緒に取り組む"
-         ],
-         "or": [
-            "または"
-         ],
-         "Send to professional translation services": [
-            "専門翻訳サービスに送る"
-         ],
-         "Save settings": [
-            "設定を保存する"
-         ],
-         "Continue": [
-            "続ける"
-         ],
-         "Start over": [
-            "最初からやり直す"
-         ],
-         "Back": [
-            "戻る"
-         ],
-         "user": [
-            "ユーザー"
-         ],
-         "Editor": [
-            "エディター"
-         ],
-         "Select an existing %s and set as Translation Manager": [
-            "既存の%sを選択し、Translation Managerとして設定する"
-         ],
-         "Create a new %s and set as Translation Manager": [
-            "新規の%sを作成し、Translation Managerとして設定する"
-         ],
-         "Add Translation Manager": [
-            "Translation Managerを追加"
-         ],
-         "Add a Translation Manager": [
-            "翻訳マネジャーを追加"
-         ],
-         "Set language pair(s)": [
-            "言語ペアを設定"
-         ],
-         "Previous": [
-            "前"
-         ],
-         "Save": [
-            "保存"
-         ],
-         "Add a Translator": [
-            "翻訳者を追加"
-         ],
-         "Select an existing user and set as Translator": [
-            "既存のユーザーをトランスレーターとして設定"
-         ],
-         "Create a new user and set as Translator": [
-            "新ユーザーを作成し、トランスレーターとして設定する"
-         ],
-         "Edit language pair(s) for translator": [
-            "トランスレーターの言語ペアを編集"
-         ],
-         "Name": [
-            "名前"
-         ],
-         "Language Pairs": [
-            "言語ペア"
-         ],
-         "You can translate to and from all languages": [
-            "全ての言語から全ての言語に翻訳できます。"
-         ],
-         "%s file upload failed.": [
-            "%sファイルのアップロード失敗。"
-         ],
-         "Flag": [
-            "国旗"
-         ],
-         "Flag file": [
-            "ファイルをフラッグ"
-         ],
-         "You just added  language. Next, select it as the site's default language or a translation language.": [
-            "言語が追加されました。次に、サイトのデフォルト言語または翻訳言語を選択してください。"
-         ],
-         "Language added": [
-            "言語が追加されました"
-         ],
-         "The value \"%s\" already exists": [
-            "\"%s\" 値は既に存在します"
-         ],
-         "Add a new language": [
-            "新しい言語を追加してください"
-         ],
-         "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
-            "下のリストから一般的な言語を選択することで、国指定の言語を作成します。その後ローカライズの対象国を選びます。"
-         ],
-         "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
-            "データベースに既に存在する組み合わせを選択すると、 WPMLが必要なフィールドを入力します。 詳しくは<AddingACustomLanguageLink />をお読みください。"
-         ],
-         "Cannot find?": [
-            "見つかりませんか？"
-         ],
-         "Click here": [
-            "ここをクリック"
-         ],
-         "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
-            "間違ったフォーマット。小文字と \"-\"のみを含んでください。例: \"fr\" , \"pt-br\", \"zh-hans\""
-         ],
-         "Language": [
-            "言語"
-         ],
-         "Location": [
-            "位置"
-         ],
-         "Code": [
-            "コード"
-         ],
-         "The language will not be supported by automatic translations": [
-            "この言語は自動翻訳にサポートされていません"
-         ],
-         "Language mapping": [
-            "言語マッピング"
-         ],
-         "Don't map this language": [
-            "この言語は地図上で指定しないでください"
-         ],
-         "Default locale": [
-            "初期設定ロケール"
-         ],
-         "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
-            "間違ったフォーマット。小文字と\"_\"のみを含んでください。例: \"de\" , \"de_DE\", \"zh_Hant_TW\""
-         ],
-         "hreflang": [
-            "hreflang"
-         ],
-         "Encode url?": [
-            "URLをエンコードしますか？\r\n"
-         ],
-         "Flags must be:": [
-            "フラッグは必須："
-         ],
-         "NO": [
-            "いいえ"
-         ],
-         "YES": [
-            "はい"
-         ],
-         " (required)": [
-            " (必要)"
-         ],
-         "Please fill in the field": [
-            "フィールドに入力してください"
-         ],
-         "PNG, SVG, or JPG files": [
-            "PNG、SVG、または JPG ファイル"
-         ],
-         "Save language": [
-            "言語を保存"
-         ],
-         "18 x 12 pixels": [
-            "18 x 12 ピクセル"
-         ],
-         "Read more about ": [
-            "詳細は次でお読みください"
-         ],
-         "The name of your language as it will appear on your site's language switcher.": [
-            "サイトの言語スイッチャーに表示される言語名。"
-         ],
-         "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
-            "データベースとURLの言語を識別する独自の値。保存すると、言語コードは変更できません。"
-         ],
-         "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
-            "カスタム言語が既存の言語に似ている場合、既存の言語のスペルチェックと自動翻訳を使用できます。例えば、あなたのカスタム言語がスイスドイツ語の場合、スペルチェックと自動翻訳の言語には、地図上でドイツ語を指定できます。地図上でカスタム言語を既存の言語として指定しない場合、スペルチェックと自動翻訳機能はその言語で利用できなくなります。"
-         ],
-         "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
-            "MOとPOファイルから翻訳を読み込むとき、WPMLがチェックする値。デフォルトロケールは、あなたのWordPress 設定の/wp-content/languages/フォルダのファイル名に含まれています。"
-         ],
-         "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
-            "Googleは、ユーザーを彼らの関連言語と位置のサイトにダイレクトする際、hreflang属性を使用します。例："
-         ],
-         "All English-speaking users: en": [
-            "全ての英語を話すユーザー: en"
-         ],
-         "English for UK users: en-gb": [
-            "イギリスユーザーの英語: en-gb"
-         ],
-         "English for US users: en-us": [
-            "アメリカユーザーの英語: en-us"
-         ],
-         "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
-            "この言語のURLがエンコードされているか、ASCII 文字を使用するかを特定します (はっきりしない場合、\"No\"にしてください)。"
-         ],
-         "adding a custom language": [
-            "カスタム言語を追加"
-         ],
-         "Default language": [
-            "デフォルト言語"
-         ],
-         "What is the current language of your website?": [
-            "あなたのウェブサイトの現在の言語は何ですか？"
-         ],
-         "Translation languages": [
-            "翻訳言語"
-         ],
-         "Which languages do you want to translate your site into?": [
-            "サイト用にどの言語に翻訳したいですか？"
-         ],
-         "If you cannot find languages that you need in the list": [
-            "リストに必要な言語がない場合"
-         ],
-         "create a custom language": [
-            "カスタム言語を作成できます"
-         ],
-         "What are the languages of your site?": [
-            "サイトにどの言語を使用していますか？"
+         "The system publishes translations straight away, skipping the review process.": [
+            "システムはレビュープロセスをスキップして、翻訳をすぐに公開します。"
          ],
          "Automatic translation": [
             "自動翻訳"
          ],
          "What should happen with your automatically translated content": [
-            "自動翻訳されたコンテンツがどのように処理されるか"
+            "自動翻訳されたコンテンツをどうするか"
+         ],
+         "Save settings": [
+            "設定を保存"
+         ],
+         "Translate drafts as I save them (consumes a bit more translation credits).": [
+            "下書きを保存する際に翻訳する（翻訳クレジットを少し多く消費します）。"
+         ],
+         "Do you want to translate drafts automatically?": [
+            "下書きを自動的に翻訳しますか？"
+         ],
+         "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s.": [
+            "この機能は%s翻訳ダッシュボード%sから「すべてを自動的に翻訳する」を有効にした場合にのみ利用可能です。"
+         ],
+         "Don't translate drafts. Only translate when I publish content.": [
+            "下書きを翻訳しない。コンテンツを公開するときのみ翻訳する。"
          ],
          "%d credits/word": [
-            "%d クレジット/ワード"
+            "%dクレジット/ワード"
          ],
          "Informal": [
-            "非公式"
+            "カジュアル"
          ],
          "Automatic": [
             "自動"
          ],
          "Formal": [
-            "公式"
+            "フォーマル"
          ],
          "Which translation engines do you want to use?": [
             "どの翻訳エンジンを使用しますか？"
          ],
          "Automatic translation engines differ in translation style and supported language pairs.\nIf your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it.\n": [
-            "自動翻訳エンジンには、それぞれ翻訳スタイルや対応する言語ペアが用意されています。\nご希望の翻訳エンジンがその言語ペアに対応していない場合は、対応している次の優先エンジンに切り替えます。\n"
+            "自動翻訳エンジンは、翻訳スタイルやサポートする言語ペアが異なります。\nあなたが使用したい言語ペアをサポートしていない場合、私たちはそれをサポートしている次の優先エンジンにフォールバック.\n"
          ],
          "Drag & drop to sort from the most to the least preferred engine.": [
-            "ドラッグ & ドロップで、優先順位の高いエンジンから低いエンジンへ並び替えが可能です。"
+            "最も優先されるエンジンから最も優先されないエンジンの順にドラッグ＆ドロップで並べ替えてください。"
          ],
          "Choose the tone of your automatic translations.": [
-            "自動翻訳のトーンを選択します。"
+            "自動翻訳のトーンを選択してください。"
          ],
          "Read more": [
-            "詳しく読む"
+            "詳細を読む"
          ],
          "Learn more": [
-            "詳しい情報を学ぶ"
+            "詳細情報"
          ],
          "On": [
             "オン"
@@ -489,128 +89,20 @@
          "Off": [
             "オフ"
          ],
-         "You must use the <b>Advanced Translation Editor</b> if you want to translate your content automatically.": [
-            "コンテンツを自動的に翻訳する場合は、<b>高度な翻訳エディター</b>を使用する必要があります。"
+         "Could not load translation engines": [
+            "翻訳エンジンを読み込めませんでした"
          ],
-         "You currently use a translation service to translate your content. To translate your site automatically, first disconnect your translation service in your %1$sTranslation Management settings%2$s.": [
-            "現在、コンテンツの翻訳に翻訳サービスを使用しています。サイトを自動的に翻訳するには、まず、[%1$s翻訳管理設定%2$s] で翻訳サービスとの接続を解除してください。"
+         "Could not update engine": [
+            "エンジンを更新できませんでした"
          ],
-         "Translation Mode": [
-            "翻訳モード"
+         "Could not save review mode": [
+            "レビューモードを保存できませんでした"
          ],
-         "How to translate your site's content": [
-            "サイトコンテンツの翻訳方法"
-         ],
-         "Change mode": [
-            "モードを変更"
-         ],
-         "You decide what to translate and who’ll translate it.": [
-            "何を訳すか、誰が訳すかを決めるのはご自身です。"
-         ],
-         "Let WPML do the translating for you.": [
-            "WPML に翻訳を任せます。"
-         ],
-         "To use automatic translation, <a>sign up for pay-as-you-go</a> or <a2>assign credits to your site</a2>.": [
-            "自動翻訳を使用するには、 <a>利用時払いに登録する</a> か <a2>サイトにクレジットを割り当ててください</a2>。"
-         ],
-         "There was an error when loading the credit wizard.": [
-            "クレジット ウィザードの読み込み中にエラーが発生しました。"
-         ],
-         "Translation mode settings summary": [
-            "翻訳モード設定の概要"
-         ],
-         "You decided to:": [
-            "次が決定されています: "
-         ],
-         "Translate everything <b>automatically</b>": [
-            "すべてを<b>自動で</b>翻訳する"
-         ],
-         "Pay for credits as you go": [
-            "クレジットをその都度支払う"
-         ],
-         "Assign credits to your site on WPML.org": [
-            "WPML.org でご使用のサイトにクレジットを割り当てる"
-         ],
-         "Review translations <b>after</b> publishing.": [
-            "公開<b>後</b>に翻訳をレビューします。"
-         ],
-         "Review translations <b>before</b> publishing.": [
-            "公開<b>前</b>翻訳をレビューします。"
-         ],
-         "Publish translations <b>without</b> review.": [
-            "<b>レビューなし</b>で翻訳を公開します。"
-         ],
-         "Translate only <b>future</b> content.": [
-            "<b>今後</b>のコンテンツのみを翻訳する。"
-         ],
-         "Translate <b>current</b> and <b>future</b> content.": [
-            "<b>現在</b>および<b>今後</b>のコンテンツを翻訳する。"
-         ],
-         "Translate all my current content plus new content as I create it.": [
-            "現在のすべてのコンテンツと、今後私が作成する新しいコンテンツを翻訳します。"
-         ],
-         "Only translate new content I create starting now.": [
-            "これから新規に作成するコンテンツのみを翻訳する。"
-         ],
-         "What should WPML translate?": [
-            "WPML では何を翻訳すべきですか？"
-         ],
-         "Translate Everything mode uses automatic translation credits to translate all your site's content instantly.": [
-            "[Translate Everything (すべて翻訳する)] モードでは、自動翻訳クレジットを使用して、サイトのすべてのコンテンツを瞬時に翻訳します。"
-         ],
-         "Error: %s": [
-            "エラー: %s"
-         ],
-         "Authenticate": [
-            "認証する"
-         ],
-         "To send content and receive translations from <service_name />, enter the credentials you received from them.": [
-            "<service_name />にコンテンツを送信して翻訳を受け取るには、そのサービスから受け取った資格情報を入力してください。"
-         ],
-         "Need credentials? Contact <link_to_service />": [
-            "資格情報がご必要ですか？<link_to_service />にお問い合わせください"
-         ],
-         "Success! You can start sending content to %s for translation after you finish the setup wizard.": [
-            "正常に完了しました！セットアップ ウィザードの終了後、コンテンツを %s に送信し、翻訳を開始することができます。"
-         ],
-         "The credentials are invalid. Please, try again.": [
-            "資格情報が無効です。もう一度お試しください。"
-         ],
-         "Choose a Translation Service": [
-            "翻訳サービスを選択"
-         ],
-         "Loading": [
-            "読み込み中"
+         "Could not save translate everything drafts": [
+            "すべてを翻訳する下書きを保存できませんでした"
          ],
          "Settings saved successfully": [
             "設定が正常に保存されました"
-         ],
-         "Could not load translation engines": [
-            "翻訳エンジンを読み込むことができませんでした"
-         ],
-         "Could not update engine": [
-            "エンジンをアップデートできませんでした"
-         ],
-         "Could not save review mode": [
-            "レビュー モードを保存できませんでした"
-         ],
-         "Settings": [
-            "設定"
-         ],
-         "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
-            "WPMLがサイトコンテンツの自動翻訳に設定されている場合、翻訳サービスに接続することはできません。翻訳サービスを利用するには、<LinkToSettingsPage />ページで翻訳モードを変更してください。\r\n"
-         ],
-         "Documentation": [
-            "ドキュメンテーション"
-         ],
-         "Activate": [
-            "認証"
-         ],
-         "Description": [
-            "説明"
-         ],
-         "Ranking": [
-            "ランキング"
          ]
       }
    }

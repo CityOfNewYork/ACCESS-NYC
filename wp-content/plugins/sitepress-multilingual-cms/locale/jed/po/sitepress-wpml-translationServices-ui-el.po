@@ -1,0 +1,62 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/translationServices/components/AuthorizeModal.js:22
+msgid "Connect this site to your %s account"
+msgstr "Συνδέστε αυτόν τον ιστότοπο στον λογαριασμό σας %s"
+
+#: src/js/translationServices/components/AuthorizeModal.js:45
+msgid "Error"
+msgstr "Σφάλμα"
+
+#: src/js/translationServices/components/AuthorizeModal.js:57
+msgid "« Use a different Translation Service"
+msgstr "« Χρησιμοποιήστε διαφορετική Υπηρεσία Μετάφρασης"
+
+#: src/js/translationServices/components/AuthorizeModal.js:62
+msgid "Authenticate"
+msgstr "Πιστοποίηση"
+
+#: src/js/translationServices/components/Connect.js:22
+msgid ""
+"Visit <link_to_service /> to request an API Token. This token allows WPML "
+"to connect to <service_name /> to send and receive jobs."
+msgstr "Επισκεφθείτε το <link_to_service /> για να ζητήσετε ένα API Token. Αυτό το token επιτρέπει στο WPML να συνδεθεί με το <service_name /> για την αποστολή και λήψη εργασιών."
+
+#: src/js/translationServices/components/SearchForm.js:13
+msgid "Search"
+msgstr "Αναζήτηση"
+
+#: src/js/translationServices/components/Sections.js:16
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: src/js/translationServices/components/Sections.js:42
+msgid ""
+"It’s not currently possible to connect a translation service when WPML is "
+"set to translate your site’s content automatically. To use a translation "
+"service, please change your translation mode on the <LinkToSettingsPage /> "
+"page."
+msgstr "Προς το παρόν δεν είναι δυνατή η σύνδεση μιας υπηρεσίας μετάφρασης όταν το WPML έχει ρυθμιστεί να μεταφράζει αυτόματα το περιεχόμενο του ιστότοπού σας. Για να χρησιμοποιήσετε μια υπηρεσία μετάφρασης, παρακαλούμε αλλάξτε τη λειτουργία μετάφρασης στη σελίδα <LinkToSettingsPage />."
+
+#: src/js/translationServices/components/ServicesList.js:41
+msgid "Documentation"
+msgstr "Τεκμηρίωση"
+
+#: src/js/translationServices/components/ServicesList.js:57
+msgid "Activate"
+msgstr "Ενεργοποίηση"
+
+#: src/js/translationServices/components/ServicesList.js:69
+msgid "Name"
+msgstr "Όνομα"
+
+#: src/js/translationServices/components/ServicesList.js:74
+msgid "Description"
+msgstr "Περιγραφή"
+
+#: src/js/translationServices/components/ServicesList.js:81
+msgid "Ranking"
+msgstr "Κατάταξη"

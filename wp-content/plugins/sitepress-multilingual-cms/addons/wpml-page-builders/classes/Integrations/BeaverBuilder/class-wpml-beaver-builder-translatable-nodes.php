@@ -55,9 +55,7 @@ class WPML_Beaver_Builder_Translatable_Nodes implements IWPML_Page_Builders_Tran
 				foreach ( $this->get_integration_instances( $node_data ) as $node ) {
 					try {
 						$strings = $node->get( $node_id, $settings, $strings );
-						// phpcs:disable Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 					} catch ( Exception $e ) {}
-					// phpcs:enable Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 				}
 			}
 		}
@@ -91,9 +89,7 @@ class WPML_Beaver_Builder_Translatable_Nodes implements IWPML_Page_Builders_Tran
 				foreach ( $this->get_integration_instances( $node_data ) as $node ) {
 					try {
 						$node->update( $node_id, $settings, $string );
-						// phpcs:disable Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 					} catch ( Exception $e ) {}
-					// phpcs:enable Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 				}
 			}
 		}
@@ -112,9 +108,7 @@ class WPML_Beaver_Builder_Translatable_Nodes implements IWPML_Page_Builders_Tran
 		if ( isset( $node_data['integration-class'] ) ) {
 			try {
 				$instances[] = new $node_data['integration-class']();
-				// phpcs:disable Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 			} catch ( Exception $e ) {}
-			// phpcs:enable Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 		}
 
 		if ( isset( $node_data['fields_in_item'] ) ) {
@@ -200,7 +194,7 @@ class WPML_Beaver_Builder_Translatable_Nodes implements IWPML_Page_Builders_Tran
 				'fields'     => array(
 					array(
 						'field'       => 'heading',
-						'type'        => __( 'Heading', 'sitepress' ),
+						'type'        => __( 'Heading: Title', 'sitepress' ),
 						'editor_type' => 'LINE',
 					),
 					array(
@@ -235,7 +229,7 @@ class WPML_Beaver_Builder_Translatable_Nodes implements IWPML_Page_Builders_Tran
 				'fields'     => array(
 					array(
 						'field'       => 'text',
-						'type'        => __( 'Text Editor', 'sitepress' ),
+						'type'        => __( 'Text Editor: Text', 'sitepress' ),
 						'editor_type' => 'VISUAL',
 					),
 				),

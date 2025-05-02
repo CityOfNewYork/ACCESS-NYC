@@ -9,14 +9,14 @@
     <li>
         <label>
             <input type="radio" name="{% if name_base %}{{ name_base }}[position_in_menu]{% else %}position_in_menu{% endif %}"
-                   class=" js-wpml-ls-trigger-update"
+                   class="wpml-radio-native js-wpml-ls-trigger-update"
                    value="before"{% if menu_position == 'before' %} checked="checked"{% endif %}>{{ strings.menus.position_first_item }}
         </label>
     </li>
     <li>
         <label>
             <input type="radio" name="{% if name_base %}{{ name_base }}[position_in_menu]{% else %}position_in_menu{% endif %}"
-                   class=" js-wpml-ls-trigger-update"
+                   class="wpml-radio-native js-wpml-ls-trigger-update"
                    value="after"{% if menu_position == 'after' %} checked="checked"{% endif %}>{{ strings.menus.position_last_item }}
         </label>
     </li>

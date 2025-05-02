@@ -105,6 +105,10 @@ class ModeDefaults {
 			Mode::TRANSLATION  => self::COPY,
 			Mode::LOCALIZATION => self::COPY_ONCE,
 		],
+		'icon_picker' => [
+			Mode::TRANSLATION  => self::COPY,
+			Mode::LOCALIZATION => self::COPY_ONCE,
+		],
 		// Layout
 		'message' => [
 			Mode::TRANSLATION  => self::TRANSLATE,

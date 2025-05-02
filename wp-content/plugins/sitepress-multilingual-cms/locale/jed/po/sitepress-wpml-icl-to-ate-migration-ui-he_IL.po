@@ -1,0 +1,364 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/language/LanguagePairs.js:57
+msgid "From:"
+msgstr "מ:"
+
+#: src/js/components/language/LanguagePairs.js:69
+msgid "--Choose language--"
+msgstr "--בחר שפה--"
+
+#: src/js/components/language/LanguagePairs.js:81
+msgid "to:"
+msgstr "ל:"
+
+#: src/js/components/language/SelectLanguagePairs.js:39
+msgid "Set language pair(s) for Translator %s:"
+msgstr "הגדר זוגות שפות עבור מתרגם %s:"
+
+#: src/js/components/language/SelectLanguagePairs.js:64
+msgid "+ Add more language pairs for this translator"
+msgstr "+ הוסף עוד זוגות שפות עבור מתרגם זה"
+
+#: src/js/icl-to-ate-migration/components/DeactivateICL.js:19
+msgid "Translation Memory was successfully copied to Advanced Translation Editor."
+msgstr "זיכרון התרגום הועתק בהצלחה אל 'עורך התרגום המתקדם'."
+
+#: src/js/icl-to-ate-migration/components/DeactivateICL.js:30
+msgid "Deactivate ICanLocalize.com as Translation Service on this site"
+msgstr "השבת את ICanLocalize.com כשירות התרגום באתר זה"
+
+#: src/js/icl-to-ate-migration/components/DeactivateICL.js:35
+msgid ""
+"Missing a translator? Or were new jobs since the last copy of the "
+"Translation Memory?"
+msgstr "חסר לך מתרגם? או שהיו עבודות חדשות מאז ההעתקה האחרונה של זיכרון התרגום?"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:25
+msgid "Enter here your ICanLocalize authentication details."
+msgstr "הזן כאן את פרטי האימות שלך ב-ICanLocalize."
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:33
+msgid "API Token:"
+msgstr "אסימון API:"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:43
+msgid "Please enter valid value for ICL token."
+msgstr "הזן ערך חוקי עבור אסימון ICL."
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:50
+msgid "Enter ICL API token here"
+msgstr "הזן כאן אסימון ICL API"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:62
+msgid "Submit"
+msgstr "שלח"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:78
+msgid "Sign up"
+msgstr "הירשם"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:84
+msgid "to ICanLocalize to receive your API token."
+msgstr "ל-ICanLocalize לקבל את אסימון ה-API שלך."
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:91
+msgid "Already have an account? Login and"
+msgstr "כבר יש לך חשבון? היכנס ו"
+
+#: src/js/icl-to-ate-migration/components/ICLToken.js:98
+msgid "get your token."
+msgstr "קבל את האסימון שלך."
+
+#: src/js/icl-to-ate-migration/components/Memory/BottomLink.js:16
+msgid "Copy new Translation Memory to Advanced Translation Memory"
+msgstr "העתק את זיכרון התרגום החדש אל 'זיכרון תרגום מתקדם'"
+
+#: src/js/icl-to-ate-migration/components/Memory/MainButton.js:16
+msgid "Import translation memory"
+msgstr "ייבא זיכרון תרגום"
+
+#: src/js/icl-to-ate-migration/components/MigrationContainer.js:21
+msgid "ICanLocalize is already deactivated on this site"
+msgstr "ICanLocalize כבר מושבת באתר זה"
+
+#: src/js/icl-to-ate-migration/components/MigrationContainer.js:22
+msgid ""
+"You can still import Translators or Copy Translation Memory to Advanced "
+"Translator Editor"
+msgstr "עדיין תוכל לייבא מתרגמים או להעתיק את זיכרון התרגום על 'עורך התרגום המתקדם'"
+
+#: src/js/icl-to-ate-migration/components/MigrationContainer.js:27
+msgid "Move from ICanLocalize.com to Advanced Translation Editor"
+msgstr "העבר מ-ICanLocalize.com ל'עורך התרגום המתקדם'"
+
+#: src/js/icl-to-ate-migration/components/Translators/BottomLink.js:17
+#: src/js/icl-to-ate-migration/components/Translators/Button.js:21
+#: src/js/icl-to-ate-migration/components/Translators/Modal.js:27
+msgid "Import translators"
+msgstr "ייבא מתרגמים"
+
+#: src/js/icl-to-ate-migration/components/Translators/EditLanguages.js:53
+msgid "Come back"
+msgstr "חזור חזרה"
+
+#: src/js/icl-to-ate-migration/components/Translators/Modal.js:36
+#: src/js/setup/components/Steps/AddLanguagesModal.js:496
+msgid "Cancel"
+msgstr "ביטול"
+
+#: src/js/icl-to-ate-migration/components/Translators/Modal.js:40
+msgid "Save"
+msgstr "שמור"
+
+#: src/js/icl-to-ate-migration/components/Translators/TranslatorsTable.js:47
+#: src/js/setup/components/Steps/AddLanguagesModal.js:346
+msgid "Name"
+msgstr "שם"
+
+#: src/js/icl-to-ate-migration/components/Translators/TranslatorsTable.js:59
+msgid "Language Pairs"
+msgstr "זוגות שפות"
+
+#: src/js/icl-to-ate-migration/components/Translators/TranslatorsTable.js:93
+msgid "Not supported pairs:"
+msgstr "זוגות לא נתמכים:"
+
+#: src/js/icl-to-ate-migration/model/deactivateICL.js:18
+msgid "ICanLocalize.com deactivated"
+msgstr "ICanLocalize.com מושבת"
+
+#: src/js/icl-to-ate-migration/model/translationMemory.js:12
+msgid "Translate memory is imported"
+msgstr "בוצע ייבוא לזיכרון התרגום"
+
+#: src/js/icl-to-ate-migration/model/translators.js:26
+msgid "There is no translators in ICL"
+msgstr "אין מתרגמים ב-ICL"
+
+#: src/js/icl-to-ate-migration/model/translators.js:45
+msgid "Translators saved"
+msgstr "המתרגמים נשמרו"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:48
+msgid "%s file upload failed."
+msgstr "העלאת הקובץ %s נכשלה."
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:69
+msgid "Flag"
+msgstr "דגל"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:87
+msgid "Flag file"
+msgstr "סמן בדגל את הקובץ"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:160
+msgid ""
+"You just added  language. Next, select it as the site's default language or "
+"a translation language."
+msgstr "זה עתה הוספת שפה. עכשיו, בחור אותה כשפת ברירת המחדל של האתר או כשפת תרגום."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:162
+msgid "Language added"
+msgstr "נוספה שפה"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:192
+msgid "The value \"%s\" already exists"
+msgstr "הערך \"%s\" כבר קיים"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:215
+msgid "Add a new language"
+msgstr "הוסף שפה חדשה"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:224
+msgid ""
+"Create a country-specific language by choosing the general language from "
+"the list below. Then, choose the country it should be localized for."
+msgstr "צור שפה ספציפית לארץ על-ידי בחירת השפה הכללית מהרשימה שלהלן. לאחר מכן בחר את הארץ שעבורה יש לבצע לוקליזציה."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:229
+msgid ""
+"By choosing a combination that already exists in the database, WPML can "
+"help fill out the necessary fields. Read more about "
+"<AddingACustomLanguageLink />."
+msgstr "על-ידי בחירה של שילוב שכבר קיים במסד הנתונים, WPML יכול לעזור במילוי השדות הנחוצים. קרא עוד אודות <AddingACustomLanguageLink />."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:242
+msgid "Cannot find?"
+msgstr "לא מוצא?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:244
+msgid "Click here"
+msgstr "לחץ כאן"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:300
+msgid ""
+"The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" "
+", \"pt-br\", \"zh-hans\""
+msgstr "פורמט שגוי. יכול להכיל רק אותיות קטנות ו-\"-\". לדוגמה: \"fr\", \"pt-br\", \"zh-hans\""
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:308
+msgid "Language"
+msgstr "שפה"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:331
+msgid "Location"
+msgstr "מיקום"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:360
+msgid "Code"
+msgstr "קוד"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:374
+msgid "The language will not be supported by automatic translations"
+msgstr "השפה לא תהיה נתמכת על ידי תרגומים אוטומטיים"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:392
+msgid "Language mapping"
+msgstr "מיפוי שפה"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:404
+msgid "Don't map this language"
+msgstr "אל תמפה שפה זו"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:418
+msgid "Default locale"
+msgstr "מיקום ברירת מחדל"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:423
+msgid ""
+"The wrong format. It may contain only small letters and \"_\". E.g: \"de\" "
+", \"de_DE\", \"zh_Hant_TW\""
+msgstr "פורמט שגוי. יכול להכיל רק אותיות קטנות ו-\"_\". לדוגמה: \"de\", \"de_DE\", \"zh_Hant_TW\""
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:435
+msgid "hreflang"
+msgstr "hreflang"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:449
+msgid "Encode url?"
+msgstr "לקודד כתובת אתר?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:45
+msgid "Flags must be:"
+msgstr "הדגלים חייבים להיות:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:453
+msgid "NO"
+msgstr "לא"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:454
+msgid "YES"
+msgstr "כן"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:460
+msgid " (required)"
+msgstr " (נדרש)"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:483
+msgid "Please fill in the field"
+msgstr "אנא מלא את השדה"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:49
+msgid "PNG, SVG, or JPG files"
+msgstr "קבצי PNG, SVG, או JPG"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:501
+msgid "Save language"
+msgstr "שמור שפה"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:52
+msgid "18 x 12 pixels"
+msgstr "18 x 12 פיקסלים"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:55
+msgid "Read more about "
+msgstr "קרא עוד אודות "
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:60
+msgid ""
+"The name of your language as it will appear on your site's language "
+"switcher."
+msgstr "שם השפה שלך כפי שיופיע במחליף השפות באתר שלך."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:61
+msgid ""
+"A unique value that identifies the language in the database and URL. Once "
+"saved, the language code cannot be changed."
+msgstr "ערך ייחודי המזהה את השפה במסד הנתונים ובכתובת האתר. לאחר השמירה, לא ניתן לשנות את קוד השפה."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:62
+msgid ""
+"If your custom language is similar to an existing language, you can use the "
+"existing language's spellcheck and automatic translation. For example, if "
+"your custom language is Swiss-German, you can map to German as the language "
+"to use for spellcheck and automatic translation. If you don't map your "
+"custom language to an existing language, spellcheck and automatic "
+"translation features will be unavailable in that language."
+msgstr "אם השפה המותאמת אישית שלך דומה לשפה קיימת, תוכל להשתמש בבדיקת האיות והתרגום האוטומטי של השפה הקיימת. לדוגמה, אם השפה המותאמת אישית שלך היא גרמנית-שוויצרית, תוכל למפות לגרמנית כשפה לשימוש עבור בדיקת איות ותרגום אוטומטי. אם לא תמפה את השפה המותאמת אישית שלך לשפה קיימת, תכונות בדיקת האיות והתרגום האוטומטי לא יהיו זמינות בשפה זו."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:66
+msgid ""
+"The value WPML checks when loading translations from MO and PO files. The "
+"default locale is included in the filenames in your /wp-content/languages/ "
+"folder in your WordPress setup."
+msgstr "הערך ש-WPML בודק בעת טעינת תרגומים מקבצי MO ו-PO. המיקום ברירת המחדל נכלל בשמות הקבצים בתיקייה /wp-content/languages/ בהתקנת WordPress שלך."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:69
+msgid ""
+"Google uses the hreflang attribute to direct users to sites in their "
+"relevant language and location. Examples:"
+msgstr "Google משתמש במאפיין hreflang כדי להפנות משתמשים לאתרים בשפה ובמיקום הרלוונטיים להם. דוגמאות:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:71
+msgid "All English-speaking users: en"
+msgstr "כל המשתמשים דוברי אנגלית: en"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:72
+msgid "English for UK users: en-gb"
+msgstr "אנגלית למשתמשים בבריטניה: en-gb"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:73
+msgid "English for US users: en-us"
+msgstr "אנגלית למשתמשים בארה\"ב: en-us"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:81
+msgid ""
+"Determines if URLs in this language are encoded or use ASCII characters (if "
+"unsure, leave it as \"No\")."
+msgstr "קובע אם כתובות URL בשפה זו מקודדות או משתמשות בתווי ASCII (אם אינך בטוח, השאר זאת כ-\"לא\")."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:98
+msgid "adding a custom language"
+msgstr "הוספת שפה מותאמת אישית"
+
+#: src/js/setup/components/Steps/Languages.js:110
+msgid "What are the languages of your site?"
+msgstr "מהן השפות של האתר שלך?"
+
+#: src/js/setup/components/Steps/Languages.js:120
+msgid "Default language"
+msgstr "שפת ברירת מחדל"
+
+#: src/js/setup/components/Steps/Languages.js:122
+msgid "What is the current language of your website?"
+msgstr "מהי השפה הנוכחית של האתר שלך?"
+
+#: src/js/setup/components/Steps/Languages.js:133
+msgid "Translation languages"
+msgstr "שפות תרגום"
+
+#: src/js/setup/components/Steps/Languages.js:135
+msgid "Which languages do you want to translate your site into?"
+msgstr "לאילו שפות ברצונך לתרגם את האתר שלך?"
+
+#: src/js/setup/components/Steps/Languages.js:149
+msgid "If you cannot find languages that you need in the list"
+msgstr "אם אינך יכול למצוא שפות שאתה צריך ברשימה"
+
+#: src/js/setup/components/Steps/Languages.js:150
+msgid "create a custom language"
+msgstr "צור שפה מותאמת אישית"

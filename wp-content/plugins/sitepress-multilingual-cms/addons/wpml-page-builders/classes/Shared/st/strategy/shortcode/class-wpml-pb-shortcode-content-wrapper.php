@@ -9,7 +9,7 @@ use function WPML\FP\pipe;
 
 class WPML_PB_Shortcode_Content_Wrapper {
 
-	const WRAPPER_SHORTCODE_NAME  = 'wpml_string_wrapper';
+	const WRAPPER_SHORTCODE_NAME = 'wpml_string_wrapper';
 
 	/** @var string $content */
 	private $content;
@@ -78,7 +78,7 @@ class WPML_PB_Shortcode_Content_Wrapper {
 		$shortcode_name         = $this->get_shortcode_name( $open_bracket_position );
 		$close_bracket_position = $this->get_shortcode_end( $open_bracket_position, $shortcode_name );
 		$is_closing             = isset( $this->content_array[ $open_bracket_position + 1 ] )
-		                          && '/' === $this->content_array[ $open_bracket_position + 1 ];
+			&& '/' === $this->content_array[ $open_bracket_position + 1 ];
 
 		if ( ! in_array( $shortcode_name, $this->valid_shortcodes, true ) ) {
 			return $close_bracket_position;
@@ -214,16 +214,20 @@ class WPML_PB_Shortcode_Content_Wrapper {
 	 */
 	private function get_shortcode_end( $open_bracket_position, $shortcode_name ) {
 		$char_position = $open_bracket_position + mb_strlen( $shortcode_name );
-		$is_in_quotes  = false;
+
+		$is_in_single_quotes = false;
+		$is_in_double_quotes = false;
 
 		while ( isset( $this->content_array[ $char_position ] )
-				&& ( ']' !== $this->content_array[ $char_position ] || $is_in_quotes )
+				&& ( ']' !== $this->content_array[ $char_position ] || $is_in_single_quotes || $is_in_double_quotes )
 		) {
-			if ( in_array( $this->content_array[ $char_position ], array( '"', "'" ), true ) ) {
-				$is_in_quotes = ! $is_in_quotes;
+			if ( ! $is_in_single_quotes && '"' === $this->content_array[ $char_position ] ) {
+				$is_in_double_quotes = ! $is_in_double_quotes;
+			} elseif ( ! $is_in_double_quotes && "'" === $this->content_array[ $char_position ] ) {
+				$is_in_single_quotes = ! $is_in_single_quotes;
 			}
 
-			$char_position++;
+			$char_position ++;
 		}
 
 		return $char_position;
@@ -307,7 +311,7 @@ class WPML_PB_Shortcode_Content_Wrapper {
 		return str_replace(
 			[
 				'[' . self::WRAPPER_SHORTCODE_NAME . ']',
-				'[/' . self::WRAPPER_SHORTCODE_NAME . ']'
+				'[/' . self::WRAPPER_SHORTCODE_NAME . ']',
 			],
 			'',
 			$content

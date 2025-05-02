@@ -1,0 +1,172 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Could not fetch engines data": [
+            "无法获取引擎数据"
+         ],
+         "Could not save settings": [
+            "无法保存设置"
+         ],
+         "Automatic translation": [
+            "自动翻译"
+         ],
+         "Saving...": [
+            "正在保存..."
+         ],
+         "Save settings": [
+            "保存设置"
+         ],
+         "Settings saved": [
+            "设置已保存"
+         ],
+         "Some error occurred": [
+            "发生了一些错误"
+         ],
+         "Loading...": [
+            "正在加载..."
+         ],
+         "Failed to load engines": [
+            "加载引擎失败"
+         ],
+         "Drag your default engine to the top and order the rest by priority.": [
+            "将您的默认引擎拖到顶部，并按优先级排列其余引擎。"
+         ],
+         "Which translation engines do you want to use?": [
+            "您想使用哪些翻译引擎？"
+         ],
+         "Automatic translation engines differ in translation style and supported language pairs. If your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it.": [
+            "自动翻译引擎在翻译风格和支持的语言对方面有所不同。如果您首选的翻译引擎不支持您想要使用的语言对，我们会退而使用您下一个支持该语言对的首选引擎。"
+         ],
+         "WPML AI (beta) automatically detects the formality of your content and translates with the same formality.": [
+            "WPML AI（测试版）自动检测您内容的正式程度，并以相同的正式程度进行翻译。"
+         ],
+         "Auto-formality": [
+            "自动正式程度"
+         ],
+         "Choose the tone of automatic translations for %s": [
+            "为%s选择自动翻译的语气"
+         ],
+         "Your site doesn't use languages that offer formality settings.": [
+            "您的网站没有使用提供正式程度设置的语言。"
+         ],
+         "Edit formality": [
+            "编辑正式程度"
+         ],
+         "%d credits per word": [
+            "%d每字积分"
+         ],
+         "Backup %d": [
+            "备份 %d"
+         ],
+         "Default": [
+            "默认"
+         ],
+         "ON": [
+            "开启"
+         ],
+         "OFF": [
+            "关闭"
+         ],
+         "Documentation": [
+            "文档"
+         ],
+         "DeepL's formality and how it helps get good translations": [
+            "DeepL的正式程度及其如何帮助获得良好翻译"
+         ],
+         "Edit button": [
+            "编辑按钮"
+         ],
+         "Examples for %s": [
+            "%s的示例"
+         ],
+         "For example:": [
+            "例如："
+         ],
+         "Formality settings for %s": [
+            "%s的正式程度设置"
+         ],
+         "Formality level for %s": [
+            "%s的正式程度水平"
+         ],
+         "Set formality for %s": [
+            "设置%s的正式程度"
+         ],
+         "%d of your target languages can be translated using either a formal or informal tone.\n The tone which gives the best translation for each language is set by default.": [
+            "您的目标语言中有%d可以使用正式或非正式语气进行翻译。\n 默认设置为每种语言最佳翻译效果的语气。"
+         ],
+         "%s doesn't yet support formality options for %s.": [
+            "%s尚不支持%s的正式程度选项。"
+         ],
+         "Cancel": [
+            "取消"
+         ],
+         "Update": [
+            "更新"
+         ],
+         "Formal": [
+            "正式"
+         ],
+         "Informal": [
+            "非正式"
+         ],
+         "Don't translate drafts. Only translate when I publish content.": [
+            "不要翻译草稿。只在我发布内容时翻译。"
+         ],
+         "Translate drafts as I save them (consumes a bit more translation credits).": [
+            "在我保存草稿时就进行翻译（会消耗更多翻译额度）。"
+         ],
+         "Do you want to translate drafts automatically?": [
+            "您是否想自动翻译草稿？"
+         ],
+         "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s.": [
+            "此功能仅在您从%s翻译仪表板%s启用 “\"自动翻译所有内容\"” 时可用。"
+         ],
+         "Close modal": [
+            "关闭模态框"
+         ],
+         "What would you like to do after WPML finishes translating your content automatically?": [
+            "WPML自动完成内容翻译后，您想做什么？"
+         ],
+         "Wait for review": [
+            "等待审核"
+         ],
+         "Recommended with DeepL, Google and Microsoft": [
+            "建议与DeepL、Google和Microsoft一起使用"
+         ],
+         "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process.": [
+            "DeepL、Google 和 Microsoft 提供了出色的翻译，但我们建议进行人工审核以确认其准确性。WPML AI 提供了比人工翻译更好的翻译结果，能够理解上下文，因此您可以放心地跳过审核过程。"
+         ],
+         "WPML keeps translations unpublished, so you can review them first.": [
+            "WPML保持翻译未发布状态，以便您先进行审核。"
+         ],
+         "Your translators review and approve translations before publishing.": [
+            "您的翻译人员在发布前审核并批准翻译。"
+         ],
+         "Publish and mark for review": [
+            "发布并标记为待审核"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "WPML立即发布翻译，但标记它们以便您在方便时检查。"
+         ],
+         "WPML publishes translations immediately but flags them for translators to review later.": [
+            "WPML立即发布翻译，但标记它们以供翻译人员稍后审核。"
+         ],
+         "Publish without review": [
+            "不审核直接发布"
+         ],
+         "Recommended with WPML AI": [
+            "推荐使用WPML AI"
+         ],
+         "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy.": [
+            "WPML AI提供超越人工的翻译，很少需要改进，因此您可以自信地跳过审核过程。对于其他翻译引擎，建议进行人工审核以确认准确性。"
+         ],
+         "WPML publishes translations immediately, skipping the review process.": [
+            "WPML立即发布翻译，跳过审核过程。"
+         ]
+      }
+   }
+}

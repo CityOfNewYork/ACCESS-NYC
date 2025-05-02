@@ -39,7 +39,7 @@ function icl_network_administration_menu() {
 		WPML_PLUGIN_FOLDER . '/menu/network.php',
 		/** @phpstan-ignore-next-line WP doc issue. */
 		null,
-		ICL_PLUGIN_URL . '/res/img/icon16.png'
+		ICL_PLUGIN_URL . '/res/img/icon16.svg'
 	);
 	add_submenu_page(
 		WPML_PLUGIN_FOLDER . '/menu/network.php',

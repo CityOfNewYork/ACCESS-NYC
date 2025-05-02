@@ -51,7 +51,7 @@ class WPML_XDomain_Data_Parser {
 				'_nonce'       => wp_create_nonce( 'wp_ajax_switching_language' ),
 			);
 
-			wp_enqueue_script( self::SCRIPT_HANDLER, ICL_PLUGIN_URL . '/res/js/xdomain-data.js', array(), ICL_SITEPRESS_VERSION );
+			wp_enqueue_script( self::SCRIPT_HANDLER, ICL_PLUGIN_URL . '/res/js/xdomain-data.js', array(), ICL_SITEPRESS_SCRIPT_VERSION );
 			wp_script_add_data( self::SCRIPT_HANDLER, 'strategy', 'defer' );
 			wp_localize_script( self::SCRIPT_HANDLER, 'wpml_xdomain_data', $js_xdomain_data );
 		}

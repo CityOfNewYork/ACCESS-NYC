@@ -89,10 +89,19 @@ class WPML_Post_Synchronization extends WPML_SP_And_PT_User {
 	}
 
 	public function sync_with_duplicates( $post_id ) {
-		$duplicates = $this->sitepress->get_duplicates( $post_id );
-		foreach ( array_keys( $duplicates ) as $lang_code ) {
+		$duplicates      = $this->sitepress->get_duplicates( $post_id );
+		$languages       = array_keys ( $duplicates );
+		$filter_callback = function () use ( $languages ) {
+			return $languages;
+		};
+
+		add_filter( 'wpml_prefetch_languages_for_mt_attachments', $filter_callback);
+
+		foreach ( $languages as $lang_code ) {
 			$this->sitepress->make_duplicate( $post_id, $lang_code );
 		}
+
+		remove_filter( 'wpml_prefetch_languages_for_mt_attachments', $filter_callback );
 	}
 
 	/**

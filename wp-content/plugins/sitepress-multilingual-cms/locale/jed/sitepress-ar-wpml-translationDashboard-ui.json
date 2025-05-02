@@ -5,140 +5,131 @@
          "": {
             "domain": "messages"
          },
-         "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
-            "حدث خطأ أثناء محاولة إيقاف ترجمتك الآلية مؤقتًا. يُرجى إعادة المحاولة لاحقًا أو التواصل مع فريق الدعم لدينا."
-         ],
-         "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
-            "حدث خطأ أثناء محاولة استئناف ترجمتك الآلية. يُرجى إعادة المحاولة لاحقًا أو التواصل مع فريق الدعم لدينا."
-         ],
-         "Error": [
-            "خطأ"
-         ],
-         "Draft — Pending review": [
-            "مسودة — المراجعة معلقة"
-         ],
-         "Complete": [
-            "اكتملت"
-         ],
-         "Insufficient funds": [
-            "رصيد غير كافٍ"
+         "Refreshing translation status": [
+            "تحديث حالة الترجمة"
          ],
          "Your pending automatic translations will be canceled.": [
-            "سيتم إلغاء ترجماتك الآلية المعلقة."
+            "سيتم إلغاء الترجمات التلقائية المعلقة الخاصة بك."
          ],
          "Save": [
             "حفظ"
          ],
          "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
-            "اذهب إلى <a>لوحة أدوات إدارة الترجمة</a> لترجمة محتواك."
+            "انتقل إلى <a>لوحة تحكم إدارة الترجمة</a> لترجمة المحتوى الخاص بك."
          ],
          "Review the translations before publishing": [
             "مراجعة الترجمات قبل النشر"
          ],
          "Publish translations and review them later": [
-            "نشر الترجمات ومراجعتهم لاحقًا"
+            "نشر الترجمات ومراجعتها لاحقًا"
          ],
          "Publish translations without reviewing": [
-            "نشر الترجمات بدون مراجعة"
+            "نشر الترجمات دون مراجعة"
          ],
          "Translate Everything": [
             "ترجمة كل شيء"
          ],
          "WPML will automatically translate content that you publish or update": [
-            "سيقوم WPML آليًا بترجمة المحتوى الذي تقوم بنشره أو تحديثه."
+            "سيقوم WPML تلقائيًا بترجمة المحتوى الذي تنشره أو تحدثه"
          ],
          "How do you want to translate this site?": [
-            "كيف ترغب في ترجمة هذا الموقع؟"
+            "كيف تريد ترجمة هذا الموقع؟?"
          ],
          "Translate Some": [
             "ترجمة البعض"
          ],
          "I want to choose which content to translate": [
-            "أرغب في تحديد المحتوى المراد ترجمته"
+            "أريد اختيار المحتوى الذي أرغب في ترجمته"
          ],
          "All Languages": [
             "جميع اللغات"
          ],
          "Overwrite existing translations": [
-            "استبدال الترجمات الحالية"
+            "استبدال الترجمات الموجودة"
          ],
          "Some of the content you want to translate is already translated": [
-            "جزء من المحتوى الذي تريد ترجمته تمت ترجمته بالفعل"
+            "بعض المحتوى الذي تريد ترجمته مترجم بالفعل"
          ],
          "What do you want to do with the content that’s already translated?": [
-            "ما الذي تريد فعله مع المحتوى المترجم بالفعل؟"
+            "ماذا تريد أن تفعل بالمحتوى المترجم بالفعل؟?"
          ],
          "Leave existing translations as is": [
-            "ترك الترجمات الحالية كما هي"
+            "ترك الترجمات الموجودة كما هي"
+         ],
+         "You chose to review translations before publishing.": [
+            "لقد اخترت مراجعة الترجمات قبل النشر."
+         ],
+         "If you retranslate content that's already published, the changes will be applied directly to live pages or posts.": [
+            "إذا قمت بإعادة ترجمة محتوى تم نشره بالفعل، فسيتم تطبيق التغييرات مباشرة على الصفحات أو المنشورات المباشرة."
          ],
          "This also updates the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
-            "يقوم هذا أيضًا بتحديث ذاكرة الترجمة لموقعك. اقرأ المزيد عن <a href=\"%s\" target=\"_blank\" >ذاكرة الترجمة</a>"
+            "يؤدي هذا أيضًا إلى تحديث ذاكرة الترجمة لموقعك. قراءة المزيد حول <a href=\"%s\" target=\"_blank\" > ذاكرة الترجمة </a>"
          ],
          "Allows you to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
-            "يتيح لك إعادة ترجمة محتواك وتحديث ذاكرة الترجمة لموقعك. اقرأ المزيد عن <a href=\"%s\" target=\"_blank\" >ذاكرة الترجمة</a>"
+            "يتيح لك إعادة ترجمة المحتوى الخاص بك وتحديث ذاكرة الترجمة لموقعك. اقرأ المزيد عن <a href=\"%s\" target=\"_blank\" > ذاكرة الترجمة </a>"
          ],
          "Allows your translators to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
-            "يتيح لمترجميك إعادة ترجمة محتواك وتحديث ذاكرة الترجمة لموقعك. اقرأ المزيد عن <a href=\"%s\" target=\"_blank\" >ذاكرة الترجمة</a>"
+            "يسمح للمترجمين بإعادة ترجمة المحتوى الخاص بك وتحديث ذاكرة الترجمة لموقعك. قراءة المزيد حول <a href=\"%s\" target=\"_blank\" > ذاكرة الترجمة </a>"
          ],
          "HINT: You can add a Note for translators in the table above with special instructions.": [
-            "تنويه: يمكنك إضافة ملاحظة للمترجمين في الجدول أعلاه مع أي تعليمات خاصة."
+            "تلميح: يمكنك إضافة ملاحظة للمترجمين في الجدول أعلاه مع تعليمات خاصة."
          ],
          "Translate automatically": [
-            "الترجمة تلقائيًا"
+            "ترجمة تلقائيًا"
          ],
          "How do you want to translate?": [
-            "كيف ترغب في الترجمة؟"
+            "كيف تريد الترجمة؟?"
          ],
          "Assign to a translator": [
-            "تعيين إلى مترجم"
+            "تعيين لمترجم"
          ],
          "Translate myself": [
-            "الترجمة بنفسك"
+            "الترجمة بنفسي"
          ],
          "You do not need translation credits to translate content yourself.": [
-            "لست في حاجة إلى نقاط رصيد الترجمة لترجمة المحتوى بنفسك."
+            "لست بحاجة إلى رصيد ترجمة لترجمة المحتوى بنفسك."
          ],
          "You can only automatically translate content from your site's default language (English), to your site's other languages. Deselect content in your site's secondary languages to proceed.": [
-            "يمكنك فقط ترجمة المحتوى آليًا من اللغة الافتراضية لموقعك (اللغة الإنجليزية) إلى اللغات الأخرى للموقع. قم بإلغاء تحديد المحتوى باللغات الثانوية لموقعك للمتابعة."
+            "يمكنك فقط ترجمة المحتوى تلقائيًا من اللغة الافتراضية لموقعك (الإنجليزية) إلى اللغات الأخرى لموقعك. قم بإلغاء تحديد المحتوى باللغات الثانوية لموقعك للمتابعة."
          ],
          "You can only automatically translate content from your primary language (%s) to other languages. Use the language switcher at the top of this page to switch to %s.": [
-            "يمكنك فقط ترجمة المحتوى آليًا من لغتك الأساسية (%s) إلى اللغات الأخرى. استخدم محوّل اللغة في قمة هذه الصفحة للتحويل إلى %s."
+            "يمكنك فقط ترجمة المحتوى تلقائيًا من لغتك الأساسية (%s) إلى اللغات الأخرى. استخدم مبدل اللغة في أعلى هذه الصفحة للتبديل إلى %s."
          ],
          "Selected content includes items that were originally created in this language. Deselect these items to proceed.": [
-            "المحتوى المحدد يشتمل على العناصر التي تم إنشاؤها أصلًا بهذه اللغة. قم بإلغاء تحديد تلك العناصر للمتابعة."
+            "يتضمن المحتوى المحدد عناصر تم إنشاؤها أصلاً بهذه اللغة. قم بإلغاء تحديد هذه العناصر للمتابعة."
          ],
          "Add to Translation Queue": [
-            "إضافة إلى قائمة مهام الترجمة"
+            "إضافة إلى قائمة انتظار الترجمة"
          ],
          "Select a post or page to translate": [
-            "تحديد مقال أو صفحة لترجمته"
+            "حدد مقالاً أو صفحة للترجمة"
          ],
          "Translate or duplicate content to at least one language": [
-            "ترجمة المحتوى أو عمل نسخة مكررة منه إلى لغة واحدة على الأقل"
+            "ترجمة أو نسخ المحتوى إلى لغة واحدة على الأقل"
          ],
          "Choose how you want to translate your content": [
-            "اختر الطريقة التي تريد بها ترجمة محتواك"
+            "اختر كيفية ترجمة المحتوى الخاص بك"
          ],
          "Selected content is already translated": [
             "المحتوى المحدد مترجم بالفعل"
          ],
          "Selected content includes items in a language other than your site's default language.": [
-            "المحتوى المحدد يشتمل على العناصر بلغة أخرى غير اللغة الافتراضية لموقعك."
+            "يتضمن المحتوى المحدد عناصر بلغة غير اللغة الافتراضية لموقعك."
          ],
          "Choose at least one translation action": [
             "اختر إجراء ترجمة واحد على الأقل"
          ],
          "Duplicate": [
-            "نسخ مكرر"
+            "نسخ"
          ],
          "Start translating and duplicating": [
-            "بدء الترجمة والنسخ المكرر"
+            "بدء الترجمة والنسخ"
          ],
          "Add to Translation Basket and duplicate": [
-            "الإضافة إلى سلة الترجمة وعمل نسخة مكررة"
+            "إضافة إلى سلة الترجمة ونسخ"
          ],
          "Add to Translation Queue and duplicate": [
-            "إضافة إلى قائمة مهام الترجمة وعمل نسخة مكررة"
+            "إضافة إلى قائمة انتظار الترجمة ونسخ"
          ],
          "Start translating": [
             "بدء الترجمة"
@@ -147,88 +138,79 @@
             "إضافة إلى سلة الترجمة"
          ],
          "One more thing...": [
-            "هناك شيء آخر..."
+            "شيء واحد آخر..."
          ],
          "What would you like to do when your content has finished translating automatically?": [
-            "ما الذي تريد فعله بعد الانتهاء من ترجمة محتواك آليًا؟"
+            "ماذا تريد أن تفعل عندما ينتهي ترجمة المحتوى الخاص بك تلقائيًا؟?"
          ],
          "Save settings": [
             "حفظ الإعدادات"
          ],
          "This setting will apply to all future automatic translations. You can change this anytime in WPML → Settings.": [
-            "سوف يتم تطبيق هذا الإعداد على جميع الترجمات الآلية المستقبلية. يمكنك تغيير هذا في أي وقت من خلال التوجه إلى WPML ← الإعدادات."
+            "سيتم تطبيق هذا الإعداد على جميع الترجمات التلقائية المستقبلية. يمكنك تغيير هذا في أي وقت في WPML ← الإعدادات."
          ],
          "Translate": [
-            "ترجم"
+            "ترجمة"
          ],
          "Duplicate content": [
             "نسخ المحتوى"
          ],
          "Do nothing": [
-            "عدم فعل شيء"
-         ],
-         "To assign content to a translator, first <a href=\"%s\" target=\"_blank\">add a translator</a> or <a href=\"%s\" target=\"_blank\">connect to a translation service</a>.": [
-            "لتعيين المحتوى إلى مترجم، قم أولًا <a href=\"%s\" target=\"_blank\">بإضافة مترجم</a> أو <a href=\"%s\" target=\"_blank\">الربط بإحدى خدمات الترجمة</a>."
+            "عدم فعل أي شيء"
          ],
          "You need credits to use automatic translation.": [
-            "أنت في حاجة إلى نقاط رصيد لاستخدام خدمة الترجمة الآلية."
-         ],
-         "Translators Tab": [
-            "علامة التبويب 'المترجمون'"
-         ],
-         "Connection Error. Please wait a minute and reload this page. If the problem continues, please <a>contact WPML support</a>.": [
-            "خطأ في الاتصال. يُرجى الانتظار لمدة دقيقة، ثم إعادة تحميل هذه الصفحة. إذا استمرت المشكلة، يُرجى <a>التواصل مع فريق دعم WPML</a>."
+            "تحتاج إلى رصيد لاستخدام الترجمة التلقائية."
          ],
          "Finish setting up %s on your site": [
-            "استكمل إعداد %s على موقعك"
+            "إنهاء إعداد %s على موقعك"
          ],
          "You need to authenticate %s to send them content for translation. Visit the %s to finish the setup.": [
-            "أنت في حاجة إلى المصادقة على %s لإرسال المحتوى إليهم لترجمته. قم بزيارة %s لاستكمال الإعداد."
+            "تحتاج إلى مصادقة %s لإرسال المحتوى إليهم للترجمة. قم بزيارة %s لإنهاء الإعداد."
+         ],
+         "Connection Error. Please wait a minute and reload this page. If the problem continues, please <a>contact WPML support</a>.": [
+            "خطأ في الاتصال. يرجى الانتظار لدقيقة وإعادة تحميل هذه الصفحة. إذا استمرت المشكلة، يرجى <a>الاتصال بدعم WPML</a>."
          ],
          "Add a translator to use %s.": [
-            "إضافة مترجم لاستخدام %s."
+            "أضف مترجمًا لاستخدام %s."
          ],
          "To send content to %s for translation, go to the %s to add a translator on your site.": [
-            "لإرسال المحتوى إلى %s لترجمته، اذهب إلى %s لإضافة مترجم على موقعك."
+            "لإرسال المحتوى إلى %s للترجمة، انتقل إلى %s لإضافة مترجم على موقعك."
          ],
          "Your selected automatic translation engines do not support the following language(s): %s. Read more about <a>choosing a translation engine</a>.": [
-            "محركات الترجمة الآلية المحددة لا تدعم اللغة (اللغات) التالية: %s. اقرأ المزيد عن <a>اختيار محرك ترجمة</a>."
+            "محركات الترجمة التلقائية المحددة لا تدعم اللغة (اللغات) التالية: %s. اقرأ المزيد عن <a>اختيار محرك الترجمة</a>."
          ],
          "Some of the selected content is already being translated. This will cancel any in-progress translations.": [
-            "بعض المحتويات المحددة تتم ترجمتها بالفعل. سيؤدي هذا إلى إلغاء أي ترجمات قيد التنفيذ."
-         ],
-         "It is not possible to translate %s content automatically.": [
-            "من غير الممكن ترجمة محتوى %s آليًا."
-         ],
-         "Translate selected items yourself or deselect these items above.": [
-            "ترجم العناصر المحددة بنفسك أو ألغِ تحديد تلك العناصر أعلاه."
+            "بعض المحتوى المحدد قيد الترجمة بالفعل. سيؤدي هذا إلى إلغاء أي ترجمات قيد التقدم."
          ],
          "Any existing content (translations) will be overwritten when creating duplicates.": [
-            "سيتم استبدال أي محتوى (ترجمات) موجود عند عمل نسخ مطابقة."
+            "سيتم استبدال أي محتوى موجود (ترجمات) عند إنشاء نسخ مكررة."
          ],
          "When duplicating content, please first duplicate parent pages to maintain the site's hierarchy.": [
-            "عند عمل نسخة مطابقة من المحتوى، برجاء عمل نسخة مطابقة من الصفحات الرئيسية أولاً للمحافظة على تسلسل الموقع."
+            "عند نسخ المحتوى، يرجى نسخ الصفحات الأصلية أولاً للحفاظ على تسلسل الموقع."
+         ],
+         "To assign content to a translator, first <a href=\"%s\" target=\"_blank\">add a translator</a> or <a href=\"%s\" target=\"_blank\">connect to a translation service</a>.": [
+            "لتعيين محتوى إلى مترجم، قم أولاً <a href=\"%s\" target=\"_blank\">بإضافة مترجم</a> أو <a href=\"%s\" target=\"_blank\">الاتصال بخدمة ترجمة</a>."
+         ],
+         "Translators Tab": [
+            "علامة تبويب المترجمين"
          ],
          "Some of the content that you selected for translation includes fields that are encoded. Translators will not be able to work on this kind of content, so we removed it from the job.": [
-            "بعض المحتوى الذي اخترته للترجمة يشتمل على حقول مشفرة. لن يكون بمقدور المترجمين العمل على هذا النوع من المحتوى، ولذا قمنا بإزالته من مهمة الترجمة."
+            "بعض المحتوى الذي حددته للترجمة يتضمن حقولاً مشفرة. لن يتمكن المترجمون من العمل على هذا النوع من المحتوى، لذلك قمنا بإزالته من المهمة."
          ],
          "To fix this problem, you need to tell WPML how these fields are encoded, so that WPML can decode them before sending for translation.": [
-            "لإصلاح هذه المشكلة، فأنت في حاجة لإخبار WPML بكيفية تشفير هذا الحقول، وذلك كي يمكن لـ WPML فك تشفيرهم قبل إرسالهم للترجمة."
-         ],
-         "How to indicate to WPML that it needs to decode fields.": [
-            "كيفية إخبار WPML أنه يجب عليه فك تشفير الحقول."
+            "لحل هذه المشكلة، تحتاج إلى إخبار WPML كيفية تشفير هذه الحقول، حتى يتمكن WPML من فك تشفيرها قبل إرسالها للترجمة."
          ],
          "WPML cannot send some of the content to translation": [
-            "WPML غير قادر على إرسال بعض المحتوى للترجمة"
+            "لا يمكن لـ WPML إرسال بعض المحتوى للترجمة"
          ],
          "<s>%s</s>: There are base64 encoded fields in this document": [
-            "<s>%s</s>: هناك حقول مشفرة بتشفير base64 في هذا المستند"
+            "<s>%s</s>: توجد حقول مشفرة بترميز base64 في هذا المستند"
          ],
          "Hide details": [
             "إخفاء التفاصيل"
          ],
          "Show details": [
-            "عرض التفاصيل"
+            "إظهار التفاصيل"
          ]
       }
    }

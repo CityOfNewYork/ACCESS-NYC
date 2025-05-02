@@ -3,8 +3,7 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "lang": "pl"
+            "domain": "messages"
          },
          "Preparing...": [
             "Przygotowuję..."
@@ -20,6 +19,21 @@
          ],
          "Cancel in-progress automatic jobs": [
             "Anuluj trwające zlecenia automatyczne"
+         ],
+         "Enabling WPML's Advanced Translation Editor...": [
+            "Włączanie Zaawansowanego Edytora Tłumaczeń WPML..."
+         ],
+         "Force-enable WPML's Advanced Translation Editor": [
+            "Wymuś włączenie Zaawansowanego Edytora Tłumaczeń WPML"
+         ],
+         "If you're running this website from two or more domains on the same installation, this action will allow both to use the Advanced Translation Editor. Don't use this if you've moved or copied the site to a different domain on a different server.": [
+            "Jeśli prowadzisz tę witrynę z dwóch lub więcej domen na tej samej instalacji, ta akcja pozwoli obu korzystać z Zaawansowanego Edytora Tłumaczeń. Nie używaj tej opcji, jeśli przeniosłeś lub skopiowałeś witrynę na inną domenę na innym serwerze."
+         ],
+         "An error occurred while enabling WPML on both domains. Please try again.": [
+            "Wystąpił błąd podczas włączania WPML na obu domenach. Spróbuj ponownie."
+         ],
+         "You can now use the Advanced Translation Editor from this site, as well as the other site(s) running from a different domain on the same installation.": [
+            "Możesz teraz korzystać z Zaawansowanego Edytora Tłumaczeń z tej witryny, a także z innych witryn działających z innej domeny na tej samej instalacji."
          ],
          "Domain name has been updated": [
             "Zaktualizowano nazwę domeny"

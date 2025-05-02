@@ -3,7 +3,7 @@
 
 	<p><?php _e( 'Configuration for compatibility between your active plugins and theme is updated automatically on daily basis.', 'sitepress' ); ?></p>
 	<div id="icl_theme_plugins_compatibility">
-		<p><?php printf( __( 'Last checked on %s', 'sitepress' ), '<span id="wpml_conf_upd">' . date( 'F j, Y H:i a', get_option( 'wpml_config_index_updated' ) ) . '</span>' ); ?></p>
+		<p><?php printf( __( 'Last checked on %s', 'sitepress' ), '<span id="wpml_conf_upd">' . date_i18n( __( 'F j, Y', 'sitepress' ), get_option( 'wpml_config_index_updated' ) ) . ' '. date_i18n( __( 'g:i a T', 'sitepress' ), get_option( 'wpml_config_index_updated' ) ) . '</span>' ); ?></p>
 
 		<input class="button" id="update_wpml_config" value="<?php echo __( 'Update', 'sitepress' ); ?>" type="button" style="float:left;"/>
 

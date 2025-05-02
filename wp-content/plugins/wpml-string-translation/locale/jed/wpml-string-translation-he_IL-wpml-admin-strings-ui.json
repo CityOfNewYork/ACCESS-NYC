@@ -1,0 +1,82 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Not included in String Translation": [
+            "לא כלול בתרגום מחרוזת"
+         ],
+         "Registered and locked": [
+            "רשום ונעול"
+         ],
+         "Text": [
+            "טֶקסט"
+         ],
+         "Numeric": [
+            "מספרי"
+         ],
+         "All Types": [
+            "כל הסוגים"
+         ],
+         "Search": [
+            "לחפש"
+         ],
+         "Communication error": [
+            "שגיאת תקשורת"
+         ],
+         "The action failed.": [
+            "הפעולה נכשלה."
+         ],
+         "All (%d)": [
+            "את כל (%d)"
+         ],
+         "Included in String Translation (%d)": [
+            "כלול בתרגום מחרוזת (%d)"
+         ],
+         "Not included in String Translation (%d)": [
+            "לא כלול בתרגום מחרוזת (%d)"
+         ],
+         "This setting is locked by a WPML configuration file.": [
+            "הגדרה זו נעולה על ידי קובץ תצורה של WPML."
+         ],
+         "Option": [
+            "אוֹפְּצִיָה"
+         ],
+         "Value": [
+            "ערך"
+         ],
+         "Type": [
+            "סוּג"
+         ],
+         "State": [
+            "מדינה"
+         ],
+         "Export as a WPML configuration file": [
+            "ייצא כקובץ תצורה של WPML"
+         ],
+         "Cancel": [
+            "לְבַטֵל"
+         ],
+         "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
+            "שמור את הדברים הבאים בקובץ wpml-config.xml בשורש ערכת הנושא או הפלאגין שלך."
+         ],
+         "No options found.": [
+            "לא נמצאו אפשרויות."
+         ],
+         "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
+            "ודא ששמרת את אפשרויות העיצוב שלך לפחות פעם אחת. ערכות נושא מסוימות רק מוסיפים אותן ל-wp_options טבלה לאחר שהמשתמש שומר במפורש שינויים בברירות המחדל של ערכת הנושא."
+         ],
+         "Add to String Translation": [
+            "הוסף לתרגום מחרוזת"
+         ],
+         "Remove from String Translation": [
+            "הסר מתרגום מחרוזת"
+         ],
+         "Included in String Translation": [
+            "כלול בתרגום מחרוזת"
+         ]
+      }
+   }
+}

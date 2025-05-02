@@ -109,9 +109,7 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 		if ( isset( $node_data['integration-class'] ) ) {
 			try {
 				$instances[] = new $node_data['integration-class']();
-				// phpcs:disable Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 			} catch ( Exception $e ) {}
-			// phpcs:enable Generic.CodeAnalysis.EmptyStatement.DetectedCatch
 		}
 
 		if ( isset( $node_data['fields_in_item'] ) ) {
@@ -177,32 +175,32 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 	 */
 	public static function get_nodes_to_translate() {
 		return [
-			'card'                  => [
+			'card'                    => [
 				'conditions' => [ '_type' => 'card' ],
 				'fields'     => [
 					[
 						'field'       => 'card_front_text_content',
-						'type'        => __( 'Card: front text content', 'sitepress' ),
+						'type'        => __( 'Card: Front Text Content', 'sitepress' ),
 						'editor_type' => 'VISUAL',
 					],
 					[
 						'field'       => 'card_back_text_content',
-						'type'        => __( 'Card: back text content', 'sitepress' ),
+						'type'        => __( 'Card: Back Text Content', 'sitepress' ),
 						'editor_type' => 'VISUAL',
 					],
 					[
 						'field'       => 'anchor_text_primary_content',
-						'type'        => __( 'Card: anchor text primary content', 'sitepress' ),
+						'type'        => __( 'Card: Anchor Text Primary Content', 'sitepress' ),
 						'editor_type' => 'VISUAL',
 					],
 					[
 						'field'       => 'anchor_text_secondary_content',
-						'type'        => __( 'Card: anchor text secondary content', 'sitepress' ),
+						'type'        => __( 'Card: Anchor Text Secondary Content', 'sitepress' ),
 						'editor_type' => 'LINE',
 					],
 					[
 						'field'       => 'anchor_href',
-						'type'        => __( 'Card: anchor link', 'sitepress' ),
+						'type'        => __( 'Card: Anchor Link', 'sitepress' ),
 						'editor_type' => 'LINK',
 					],
 				],
@@ -212,7 +210,7 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 				'fields'     => [
 					[
 						'field'       => 'alert_content',
-						'type'        => __( 'Alert Content', 'sitepress' ),
+						'type'        => __( 'Alert Content: Alert', 'sitepress' ),
 						'editor_type' => 'VISUAL',
 					],
 				],
@@ -222,7 +220,7 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 				'fields'     => [
 					[
 						'field'       => 'text_content',
-						'type'        => __( 'Text content', 'sitepress' ),
+						'type'        => __( 'Text Content: Text', 'sitepress' ),
 						'editor_type' => 'VISUAL',
 					],
 				],
@@ -232,12 +230,12 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 				'fields'     => [
 					[
 						'field'       => 'quote_content',
-						'type'        => __( 'Quote content', 'sitepress' ),
+						'type'        => __( 'Quote: Quote Content', 'sitepress' ),
 						'editor_type' => 'VISUAL',
 					],
 					[
 						'field'       => 'quote_cite_content',
-						'type'        => __( 'Quote: cite content', 'sitepress' ),
+						'type'        => __( 'Quote: Quote Cite', 'sitepress' ),
 						'editor_type' => 'LINE',
 					],
 				],
@@ -247,12 +245,12 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 				'fields'     => [
 					[
 						'field'       => 'counter_number_prefix_content',
-						'type'        => __( 'Counter: number prefix', 'sitepress' ),
+						'type'        => __( 'Counter: Number Prefix', 'sitepress' ),
 						'editor_type' => 'LINE',
 					],
 					[
 						'field'       => 'counter_number_suffix_content',
-						'type'        => __( 'Counter: number suffix', 'sitepress' ),
+						'type'        => __( 'Counter: Number Suffix', 'sitepress' ),
 						'editor_type' => 'LINE',
 					],
 				],
@@ -262,7 +260,7 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 				'fields'     => [
 					[
 						'field'       => 'content',
-						'type'        => __( 'Content Area: content', 'sitepress' ),
+						'type'        => __( 'Content Area: Content', 'sitepress' ),
 						'editor_type' => 'AREA',
 					],
 				],
@@ -272,7 +270,7 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 				'fields'     => [
 					[
 						'field'       => 'breadcrumbs_home_label_text',
-						'type'        => __( 'Breadcrumbs: home label text', 'sitepress' ),
+						'type'        => __( 'Breadcrumbs: Home Label Text', 'sitepress' ),
 						'editor_type' => 'LINE',
 					],
 				],
@@ -282,7 +280,7 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 				'fields'     => [
 					[
 						'field'       => 'audio_embed_code',
-						'type'        => __( 'Audio: embed code', 'sitepress' ),
+						'type'        => __( 'Audio: Embed Code', 'sitepress' ),
 						'editor_type' => 'VISUAL',
 					],
 				],
@@ -292,7 +290,7 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 				'fields'     => [
 					[
 						'field'       => 'text_content',
-						'type'        => __( 'Headline text content', 'sitepress' ),
+						'type'        => __( 'Headline Content: Headline', 'sitepress' ),
 						'editor_type' => 'VISUAL',
 					],
 				],
@@ -302,7 +300,7 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 				'fields'     => [
 					[
 						'field'       => 'off_canvas_content',
-						'type'        => __( 'Canvas content', 'sitepress' ),
+						'type'        => __( 'Canvas Content: Canvas', 'sitepress' ),
 						'editor_type' => 'VISUAL',
 					],
 				],
@@ -312,7 +310,7 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 				'fields'     => [
 					[
 						'field'       => 'modal_content',
-						'type'        => __( 'Modal content', 'sitepress' ),
+						'type'        => __( 'Modal Content: Modal', 'sitepress' ),
 						'editor_type' => 'VISUAL',
 					],
 				],
@@ -322,7 +320,7 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 				'fields'     => [
 					[
 						'field'       => 'dropdown_content',
-						'type'        => __( 'Dropdown content', 'sitepress' ),
+						'type'        => __( 'Dropdown Content: Dropdown', 'sitepress' ),
 						'editor_type' => 'VISUAL',
 					],
 				],
@@ -332,12 +330,12 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 				'fields'     => [
 					[
 						'field'       => 'anchor_text_primary_content',
-						'type'        => __( 'Anchor text: primary content', 'sitepress' ),
+						'type'        => __( 'Anchor Text: Primary Content', 'sitepress' ),
 						'editor_type' => 'LINE',
 					],
 					[
 						'field'       => 'anchor_text_secondary_content',
-						'type'        => __( 'Anchor text: secondary content', 'sitepress' ),
+						'type'        => __( 'Anchor Text: Secondary Content', 'sitepress' ),
 						'editor_type' => 'LINE',
 					],
 				],
@@ -347,7 +345,7 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 				'fields'     => [
 					[
 						'field'       => 'video_embed_code',
-						'type'        => __( 'Video: embed code', 'sitepress' ),
+						'type'        => __( 'Video: Embed Code', 'sitepress' ),
 						'editor_type' => 'LINE',
 					],
 				],
@@ -357,7 +355,7 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 				'fields'     => [
 					[
 						'field'       => 'search_placeholder',
-						'type'        => __( 'Search Inline: placeholder', 'sitepress' ),
+						'type'        => __( 'Search Inline: Placeholder', 'sitepress' ),
 						'editor_type' => 'LINE',
 					],
 				],
@@ -367,7 +365,7 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 				'fields'     => [
 					[
 						'field'       => 'search_placeholder',
-						'type'        => __( 'Search Modal: placeholder', 'sitepress' ),
+						'type'        => __( 'Search Modal: Placeholder', 'sitepress' ),
 						'editor_type' => 'LINE',
 					],
 				],
@@ -377,7 +375,7 @@ class WPML_Cornerstone_Translatable_Nodes implements IWPML_Page_Builders_Transla
 				'fields'     => [
 					[
 						'field'       => 'search_placeholder',
-						'type'        => __( 'Search Dropdown: placeholder', 'sitepress' ),
+						'type'        => __( 'Search Dropdown: Placeholder', 'sitepress' ),
 						'editor_type' => 'LINE',
 					],
 				],

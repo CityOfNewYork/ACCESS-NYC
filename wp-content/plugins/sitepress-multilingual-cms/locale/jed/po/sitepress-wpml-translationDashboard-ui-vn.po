@@ -1,0 +1,329 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/ate/status-icons/StatusUpdater.js:80
+msgid "Refreshing translation status"
+msgstr "Đang làm mới trạng thái dịch"
+
+#: src/js/components/translation/TranslationMethod.js:115
+msgid "Your pending automatic translations will be canceled."
+msgstr "Các bản dịch tự động đang chờ xử lý của bạn sẽ bị hủy bỏ."
+
+#: src/js/components/translation/TranslationMethod.js:119
+msgid "Save"
+msgstr "Lưu"
+
+#: src/js/components/translation/TranslationMethod.js:125
+msgid "Go to the <a>Translation Management Dashboard</a> to translate your content."
+msgstr "Đi đến <a>Bảng điều khiển Quản lý Dịch thuật</a> để dịch nội dung của bạn."
+
+#: src/js/components/translation/TranslationMethod.js:142
+msgid "Review the translations before publishing"
+msgstr "Xem xét bản dịch trước khi xuất bản"
+
+#: src/js/components/translation/TranslationMethod.js:143
+msgid "Publish translations and review them later"
+msgstr "Xuất bản bản dịch và xem xét sau"
+
+#: src/js/components/translation/TranslationMethod.js:144
+msgid "Publish translations without reviewing"
+msgstr "Xuất bản bản dịch mà không xem xét"
+
+#: src/js/components/translation/TranslationMethod.js:69
+msgid "Translate Everything"
+msgstr "Dịch Tất cả"
+
+#: src/js/components/translation/TranslationMethod.js:71
+msgid "WPML will automatically translate content that you publish or update"
+msgstr "WPML sẽ tự động dịch nội dung mà bạn xuất bản hoặc cập nhật"
+
+#: src/js/components/translation/TranslationMethod.js:74
+msgid "How do you want to translate this site?"
+msgstr "Bạn muốn dịch trang web này như thế nào?"
+
+#: src/js/components/translation/TranslationMethod.js:97
+msgid "Translate Some"
+msgstr "Dịch Một số"
+
+#: src/js/components/translation/TranslationMethod.js:99
+msgid "I want to choose which content to translate"
+msgstr "Tôi muốn chọn nội dung nào để dịch"
+
+#: src/js/translationDashboard/sending-to-translation/components/AllLanguages.js:25
+msgid "All Languages"
+msgstr "Tất cả Ngôn ngữ"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:17
+msgid "Overwrite existing translations"
+msgstr "Ghi đè lên bản dịch hiện có"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:24
+msgid "Some of the content you want to translate is already translated"
+msgstr "Một số nội dung bạn muốn dịch đã được dịch rồi"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:30
+msgid "What do you want to do with the content that’s already translated?"
+msgstr "Bạn muốn làm gì với nội dung đã được dịch?"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:39
+msgid "Leave existing translations as is"
+msgstr "Giữ nguyên bản dịch hiện có"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:64
+msgid "You chose to review translations before publishing."
+msgstr "Bạn đã chọn xem xét bản dịch trước khi xuất bản."
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:65
+msgid ""
+"If you retranslate content that's already published, the changes will be "
+"applied directly to live pages or posts."
+msgstr "Nếu bạn dịch lại nội dung đã được xuất bản, các thay đổi sẽ được áp dụng trực tiếp vào các trang hoặc bài viết trực tuyến."
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:82
+msgid ""
+"This also updates the translation memory for your site. Read more about <a "
+"href=\"%s\" target=\"_blank\" >translation memory</a>"
+msgstr "Điều này cũng cập nhật bộ nhớ dịch cho trang web của bạn. Đọc thêm về <a href=\"%s\" target=\"_blank\" >bộ nhớ dịch</a>"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:89
+msgid ""
+"Allows you to re-translate your content and update the translation memory "
+"for your site. Read more about <a href=\"%s\" target=\"_blank\" "
+">translation memory</a>"
+msgstr "Cho phép bạn dịch lại nội dung và cập nhật bộ nhớ dịch cho trang web của bạn. Đọc thêm về <a href=\"%s\" target=\"_blank\" >bộ nhớ dịch</a>"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:96
+msgid ""
+"Allows your translators to re-translate your content and update the "
+"translation memory for your site. Read more about <a href=\"%s\" "
+"target=\"_blank\" >translation memory</a>"
+msgstr "Cho phép các dịch giả của bạn dịch lại nội dung và cập nhật bộ nhớ dịch cho trang web của bạn. Đọc thêm về <a href=\"%s\" target=\"_blank\" >bộ nhớ dịch</a>"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:98
+msgid ""
+"HINT: You can add a Note for translators in the table above with special "
+"instructions."
+msgstr "GỢI Ý: Bạn có thể thêm Ghi chú cho dịch giả trong bảng trên với các hướng dẫn đặc biệt."
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:31
+msgid "Translate automatically"
+msgstr "Dịch tự động"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:37
+msgid "How do you want to translate?"
+msgstr "Bạn muốn dịch như thế nào?"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:55
+msgid "Assign to a translator"
+msgstr "Giao cho một dịch giả"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:55
+msgid "Translate myself"
+msgstr "Tự dịch"
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:60
+msgid "You do not need translation credits to translate content yourself."
+msgstr "Bạn không cần tín dụng dịch thuật để tự dịch nội dung."
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:87
+msgid ""
+"You can only automatically translate content from your site's default "
+"language (English), to your site's other languages. Deselect content in "
+"your site's secondary languages to proceed."
+msgstr "Bạn chỉ có thể tự động dịch nội dung từ ngôn ngữ mặc định của trang web của bạn (tiếng Anh) sang các ngôn ngữ khác của trang web. Bỏ chọn nội dung trong các ngôn ngữ phụ của trang web để tiếp tục."
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToTranslate.js:92
+#. %s is the name of the default language. </a>
+msgid ""
+"You can only automatically translate content from your primary language "
+"(%s) to other languages. Use the language switcher at the top of this page "
+"to switch to %s."
+msgstr "Bạn chỉ có thể tự động dịch nội dung từ ngôn ngữ chính (%s) sang các ngôn ngữ khác. Sử dụng công cụ chuyển đổi ngôn ngữ ở đầu trang này để chuyển sang %s."
+
+#: src/js/translationDashboard/sending-to-translation/components/LanguageRow.js:49
+msgid ""
+"Selected content includes items that were originally created in this "
+"language. Deselect these items to proceed."
+msgstr "Nội dung được chọn bao gồm các mục được tạo ban đầu bằng ngôn ngữ này. Bỏ chọn các mục này để tiếp tục."
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:100
+msgid "Add to Translation Queue"
+msgstr "Thêm vào Hàng đợi Dịch thuật"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:17
+msgid "Select a post or page to translate"
+msgstr "Chọn một bài viết hoặc trang để dịch"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:18
+msgid "Translate or duplicate content to at least one language"
+msgstr "Dịch hoặc sao chép nội dung sang ít nhất một ngôn ngữ"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:19
+msgid "Choose how you want to translate your content"
+msgstr "Chọn cách bạn muốn dịch nội dung của mình"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:20
+msgid "Selected content is already translated"
+msgstr "Nội dung được chọn đã được dịch"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:21
+msgid ""
+"Selected content includes items in a language other than your site's "
+"default language."
+msgstr "Nội dung được chọn bao gồm các mục bằng ngôn ngữ khác với ngôn ngữ mặc định của trang web của bạn."
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:74
+msgid "Choose at least one translation action"
+msgstr "Chọn ít nhất một hành động dịch thuật"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:78
+msgid "Duplicate"
+msgstr "Sao chép"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:88
+msgid "Start translating and duplicating"
+msgstr "Bắt đầu dịch và sao chép"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:90
+msgid "Add to Translation Basket and duplicate"
+msgstr "Thêm vào Giỏ Dịch thuật và sao chép"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:92
+msgid "Add to Translation Queue and duplicate"
+msgstr "Thêm vào Hàng đợi Dịch thuật và sao chép"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:96
+msgid "Start translating"
+msgstr "Bắt đầu dịch"
+
+#: src/js/translationDashboard/sending-to-translation/components/SendButton.js:98
+msgid "Add to Translation Basket"
+msgstr "Thêm vào Giỏ Dịch thuật"
+
+#: src/js/translationDashboard/sending-to-translation/components/TranslationReviewModal.js:37
+msgid "One more thing..."
+msgstr "Còn một điều nữa..."
+
+#: src/js/translationDashboard/sending-to-translation/components/TranslationReviewModal.js:40
+msgid ""
+"What would you like to do when your content has finished translating "
+"automatically?"
+msgstr "Bạn muốn làm gì khi nội dung của bạn đã được dịch tự động xong?"
+
+#: src/js/translationDashboard/sending-to-translation/components/TranslationReviewModal.js:51
+msgid "Save settings"
+msgstr "Lưu cài đặt"
+
+#: src/js/translationDashboard/sending-to-translation/components/TranslationReviewModal.js:61
+msgid ""
+"This setting will apply to all future automatic translations. You can "
+"change this anytime in WPML → Settings."
+msgstr "Cài đặt này sẽ áp dụng cho tất cả các bản dịch tự động trong tương lai. Bạn có thể thay đổi điều này bất cứ lúc nào trong WPML → Cài đặt."
+
+#: src/js/translationDashboard/sending-to-translation/model/store.js:19
+msgid "Translate"
+msgstr "Dịch"
+
+#: src/js/translationDashboard/sending-to-translation/model/store.js:24
+msgid "Duplicate content"
+msgstr "Sao chép nội dung"
+
+#: src/js/translationDashboard/sending-to-translation/model/store.js:29
+msgid "Do nothing"
+msgstr "Không làm gì"
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:11
+msgid "You need credits to use automatic translation."
+msgstr "Bạn cần tín dụng để sử dụng dịch tự động."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:113
+msgid "Finish setting up %s on your site"
+msgstr "Hoàn thành thiết lập %s trên trang web của bạn"
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:117
+msgid ""
+"You need to authenticate %s to send them content for translation. Visit the "
+"%s to finish the setup."
+msgstr "Bạn cần xác thực %s để gửi nội dung cho họ dịch. Truy cập %s để hoàn thành thiết lập."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:14
+msgid ""
+"Connection Error. Please wait a minute and reload this page. If the problem "
+"continues, please <a>contact WPML support</a>."
+msgstr "Lỗi Kết nối. Vui lòng đợi một phút và tải lại trang này. Nếu vấn đề vẫn tiếp diễn, vui lòng <a>liên hệ hỗ trợ WPML</a>."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:143
+msgid "Add a translator to use %s."
+msgstr "Thêm một dịch giả để sử dụng %s."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:147
+msgid ""
+"To send content to %s for translation, go to the %s to add a translator on "
+"your site."
+msgstr "Để gửi nội dung đến %s để dịch, hãy đến %s để thêm một dịch giả vào trang web của bạn."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:179
+msgid ""
+"Your selected automatic translation engines do not support the following "
+"language(s): %s. Read more about <a>choosing a translation engine</a>."
+msgstr "Các công cụ dịch tự động bạn đã chọn không hỗ trợ (các) ngôn ngữ sau: %s. Đọc thêm về <a>cách chọn công cụ dịch thuật</a>."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:211
+msgid ""
+"Some of the selected content is already being translated. This will cancel "
+"any in-progress translations."
+msgstr "Một số nội dung đã chọn đang được dịch. Điều này sẽ hủy bỏ bất kỳ bản dịch đang trong quá trình thực hiện nào."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:44
+msgid ""
+"Any existing content (translations) will be overwritten when creating "
+"duplicates."
+msgstr "Mọi nội dung (bản dịch) hiện có sẽ bị ghi đè khi tạo bản sao."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:45
+msgid ""
+"When duplicating content, please first duplicate parent pages to maintain "
+"the site's hierarchy."
+msgstr "Khi sao chép nội dung, vui lòng sao chép các trang chính trước để duy trì cấu trúc phân cấp của trang web."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:68
+msgid ""
+"To assign content to a translator, first <a href=\"%s\" "
+"target=\"_blank\">add a translator</a> or <a href=\"%s\" "
+"target=\"_blank\">connect to a translation service</a>."
+msgstr "Để giao nội dung cho một dịch giả, trước tiên hãy <a href=\"%s\" target=\"_blank\">thêm một dịch giả</a> hoặc <a href=\"%s\" target=\"_blank\">kết nối với một dịch vụ dịch thuật</a>."
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:94
+msgid "Translators Tab"
+msgstr "Tab Dịch giả"
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:12
+msgid ""
+"Some of the content that you selected for translation includes fields that "
+"are encoded. Translators will not be able to work on this kind of content, "
+"so we removed it from the job."
+msgstr "Một số nội dung bạn đã chọn để dịch bao gồm các trường được mã hóa. Người dịch sẽ không thể làm việc với loại nội dung này, vì vậy chúng tôi đã loại bỏ nó khỏi công việc."
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:24
+msgid ""
+"To fix this problem, you need to tell WPML how these fields are encoded, so "
+"that WPML can decode them before sending for translation."
+msgstr "Để khắc phục vấn đề này, bạn cần cho WPML biết các trường này được mã hóa như thế nào, để WPML có thể giải mã chúng trước khi gửi đi dịch."
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:30
+msgid "WPML cannot send some of the content to translation"
+msgstr "WPML không thể gửi một số nội dung để dịch"
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:44
+msgid "<s>%s</s>: There are base64 encoded fields in this document"
+msgstr "<s>%s</s>: Có các trường được mã hóa base64 trong tài liệu này"
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:62
+msgid "Hide details"
+msgstr "Ẩn chi tiết"
+
+#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:62
+msgid "Show details"
+msgstr "Hiển thị chi tiết"

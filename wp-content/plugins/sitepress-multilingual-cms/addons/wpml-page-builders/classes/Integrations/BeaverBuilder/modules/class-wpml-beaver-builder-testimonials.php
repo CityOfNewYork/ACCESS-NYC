@@ -13,7 +13,7 @@ class WPML_Beaver_Builder_Testimonials extends WPML_Beaver_Builder_Module_With_I
 	protected function get_title( $field ) {
 		switch( $field ) {
 			case 'testimonial':
-				return esc_html__( 'Testimonial content', 'sitepress' );
+				return esc_html__( 'Testimonial: content', 'sitepress' );
 
 			default:
 				return '';

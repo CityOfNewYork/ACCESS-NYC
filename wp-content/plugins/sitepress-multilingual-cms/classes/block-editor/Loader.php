@@ -11,10 +11,16 @@ use function WPML\FP\spreadArgs;
 
 class Loader implements \IWPML_Backend_Action, \IWPML_REST_Action {
 
+	const BLOCK_LANGUAGE_SWITCHER            = 'wpml/language-switcher';
+	const BLOCK_LANGUAGE_SWITCHER_NAVIGATION = 'wpml/navigation-language-switcher';
+
 	const SCRIPT_NAME = 'wpml-blocks';
 
 	/** @var array Contains the script data that needs to be localized for the registered blocks. */
 	private $localizedScriptData = [];
+
+	/** @var [string] Name of blocks which css is already loaded. */
+	private $cssLoaded = [];
 
 	public function add_hooks() {
 		if ( \WPML_Block_Editor_Helper::is_active() ) {
@@ -22,8 +28,12 @@ class Loader implements \IWPML_Backend_Action, \IWPML_REST_Action {
 			     ->then( [ $this, 'registerBlocks' ] )
 			     ->then( [ $this, 'maybeEnqueueNavigationBlockStyles' ] );
 
-			Hooks::onAction( 'wp_enqueue_scripts' )
-			     ->then( [ $this, 'enqueueBlockStyles' ] );
+			add_filter(
+				'render_block',
+				[ $this, 'frontendPrintStyleIfBlockIsUsed' ],
+				10,
+				2
+			);
 
 			Hooks::onAction( 'enqueue_block_editor_assets' )
 			     ->then( [ $this, 'enqueueBlockAssets' ] );
@@ -69,17 +79,75 @@ class Loader implements \IWPML_Backend_Action, \IWPML_REST_Action {
 			'wp-element',
 		], $this->getEditorDependencies() );
 		$localizedScriptData = [ 'name' => 'WPMLBlocks', 'data' => $this->localizedScriptData ];
-		$enqueuedApp         = Resources::enqueueApp( 'blocks' );
+		$enqueuedApp = Resources::enqueueAppWithoutVendor( 'blocks' );
 		$enqueuedApp( $localizedScriptData, $dependencies );
 	}
 
-	public function enqueueBlockStyles() {
-		wp_enqueue_style(
-			self::SCRIPT_NAME,
-			ICL_PLUGIN_URL . '/dist/css/blocks/styles.css',
-			[],
-			ICL_SITEPRESS_VERSION
+	public function frontendPrintStyleIfBlockIsUsed( $content, $block ) {
+		if ( is_admin() ) {
+			// Dependening on the setup the backend might also use render_block.
+			// We don't want to include the style in that case as the full css
+			// file is already loaded. Same for ajax requests.
+			return $content;
+		}
+
+		if (
+			self::BLOCK_LANGUAGE_SWITCHER !== $block['blockName'] &&
+			self::BLOCK_LANGUAGE_SWITCHER_NAVIGATION !== $block['blockName']
+		) {
+			// No language switcher block.
+			return $content;
+		}
+
+		// Always include language switcher styles.
+		$css = $this->styleLanguageSwitcher();
+
+		// Check if the navigation language switcher is used.
+		if ( self::BLOCK_LANGUAGE_SWITCHER_NAVIGATION === $block['blockName'] ) {
+			$css .= $this->styleLanguageSwitcherNavigation();
+
+			// Both css files are loaded, so we can remove the filter.
+			remove_filter(
+				'render_block',
+				[ $this, 'frontendPrintStyleIfBlockIsUsed' ]
+			);
+		}
+
+		return ! empty( $css )
+			? '<style>' . $css . '</style>' . $content
+			: $content;
+	}
+
+	/**
+	 * @return string
+	 */
+	private function styleLanguageSwitcher() {
+		if ( in_array( self::BLOCK_LANGUAGE_SWITCHER, $this->cssLoaded, true ) ) {
+			return '';
+		}
+
+		$this->cssLoaded[] = self::BLOCK_LANGUAGE_SWITCHER;
+		$css = file_get_contents(
+			WPML_PLUGIN_PATH . '/dist/css/blocks/language-switcher.css'
 		);
+
+		return $css ?: '';
+	}
+
+	/**
+	 * @return string
+	 */
+	private function styleLanguageSwitcherNavigation() {
+		if ( in_array( self::BLOCK_LANGUAGE_SWITCHER_NAVIGATION, $this->cssLoaded, true ) ) {
+			return '';
+		}
+
+		$this->cssLoaded[] = self::BLOCK_LANGUAGE_SWITCHER_NAVIGATION;
+		$css = file_get_contents(
+			WPML_PLUGIN_PATH . '/dist/css/blocks/language-switcher-navigation.css'
+		);
+
+		return $css ?: '';
 	}
 
 	/**

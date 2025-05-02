@@ -18,7 +18,8 @@ class WPML_TM_ATE_Translator_Message_Classic_Editor_Factory implements IWPML_Bac
 				new WPML_Translation_Manager_Records(
 					$wpdb,
 					wpml_tm_get_wp_user_query_factory(),
-					wp_roles()
+					wp_roles(),
+					new \WPML\TranslationRoles\Service\AdministratorRoleManager()
 				),
 				wpml_tm_get_wp_user_factory(),
 				new WPML_TM_ATE_Request_Activation_Email(

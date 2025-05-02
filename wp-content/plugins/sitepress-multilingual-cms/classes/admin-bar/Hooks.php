@@ -34,7 +34,7 @@ class Hooks implements \IWPML_Frontend_Action, \IWPML_DIC_Action {
 				$translateLink = apply_filters( 'wpml_link_to_translation', '', $originalID, $lang, $trid );
 
 				if ( $translateLink ) {
-					$img = '<img class="ab-icon" src="' . ICL_PLUGIN_URL . '/res/img/icon16.png">';
+					$img = '<img class="ab-icon" src="' . ICL_PLUGIN_URL . '/res/img/icon16.svg">';
 					$wpAdminMenu->add_menu(
 						[
 							'id'    => 'translate',
@@ -48,6 +48,6 @@ class Hooks implements \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	}
 
 	public function enqueueScripts() {
-		wp_enqueue_style( 'wpml-tm-admin-bar', WPML_TM_URL . '/res/css/admin-bar-style.css', array(), ICL_SITEPRESS_VERSION );
+		wp_enqueue_style( 'wpml-tm-admin-bar', WPML_TM_URL . '/res/css/admin-bar-style.css', array(), ICL_SITEPRESS_SCRIPT_VERSION );
 	}
 }

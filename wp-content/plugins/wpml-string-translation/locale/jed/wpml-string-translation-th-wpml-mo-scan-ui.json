@@ -1,0 +1,97 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "WPML has detected changed or new MO files": [
+            "WPML ตรวจพบการเปลี่ยนแปลงหรือใหม่ เดือน ไฟล์"
+         ],
+         "There are new or updated .mo files. WPML needs to scan them to find strings for translation.": [
+            "มีไฟล์ .mo ใหม่หรือที่อัปเดต WPML จำเป็นต้องสแกนเพื่อค้นหาสตริงสำหรับการแปล."
+         ],
+         "Scan translation files": [
+            "สแกนไฟล์การแปล"
+         ],
+         "Scanned %1$d of %2$d files...": [
+            "สแกนแล้ว %1$d ของ %2$d ไฟล์..."
+         ],
+         "Generated files for %1$d of %2$d sites...": [
+            "ไฟล์ที่สร้างขึ้นสำหรับ %1$d ของ %2$d เว็บไซต์..."
+         ],
+         "Generated %1$d of %2$d files...": [
+            "สร้างขึ้น %1$d ของ %2$d ไฟล์..."
+         ],
+         "WPML needs to generate .mo files": [
+            "WPML จำเป็นต้องสร้างไฟล์ .mo"
+         ],
+         "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end. However, the folder that should hold these .mo files is not open for writing.": [
+            "การแปลสตริง WPML ใช้ไฟล์ .mo แทนการเรียกฐานข้อมูล WPML จำเป็นต้องสร้างไฟล์ .mo เหล่านี้เพื่อให้คำแปลปรากฏที่ส่วนหน้า อย่างไรก็ตาม โฟลเดอร์ที่ควรเก็บไฟล์ .mo เหล่านี้ไม่ได้เปิดไว้สำหรับเขียน."
+         ],
+         "Please use your admin control panel or an FTP program to make the following folder writeable:": [
+            "โปรดใช้แผงควบคุมผู้ดูแลระบบหรือโปรแกรม FTP เพื่อทำให้โฟลเดอร์ต่อไปนี้สามารถเขียนได้:"
+         ],
+         "There was a problem creating the .mo files": [
+            "เกิดปัญหาในการสร้างไฟล์ .mo"
+         ],
+         "You can try again now or try again later by going to ": [
+            "คุณสามารถลองอีกครั้งตอนนี้หรือลองอีกครั้งในภายหลังโดยไปที่ "
+         ],
+         "Translations are missing from the front-end until you generate .mo files": [
+            "การแปลหายไปจากส่วนหน้าจนกว่าคุณจะสร้างไฟล์ .mo"
+         ],
+         "Your site doesn't have the .mo files that WPML needs in order to display translated strings on the front-end. To generate these .mo files, remember to go to ": [
+            "เว็บไซต์ของคุณไม่มีไฟล์ .mo ที่ WPML ต้องใช้เพื่อแสดงสตริงที่แปลแล้วที่ส่วนหน้า หากต้องการสร้างไฟล์ .mo เหล่านี้ อย่าลืมไปที่ "
+         ],
+         "WPML->Theme and plugins localization.": [
+            "WPML->การแปลธีมและปลั๊กอิน."
+         ],
+         "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end.": [
+            "การแปลสตริง WPML ใช้ไฟล์ .mo แทนการเรียกฐานข้อมูล WPML จำเป็นต้องสร้างไฟล์ .mo เหล่านี้เพื่อให้คำแปลปรากฏที่ส่วนหน้า."
+         ],
+         "Try again": [
+            "ลองอีกครั้ง"
+         ],
+         "Generate .mo files": [
+            "สร้างไฟล์ .mo"
+         ],
+         "Close this message": [
+            "ปิดข้อความนี้"
+         ],
+         "Find additional texts that WordPress, the theme and plugins created and choose which ones to translate": [
+            "ค้นหาข้อความเพิ่มเติมที่ WordPress ธีมและปลั๊กอินสร้างขึ้น และเลือกข้อความที่จะแปล"
+         ],
+         "Choose texts for translation": [
+            "เลือกข้อความสำหรับการแปล"
+         ],
+         "Some of the translations have changed": [
+            "การแปลบางส่วนมีการเปลี่ยนแปลง"
+         ],
+         "Scan the selected components to make new texts available for translation.": [
+            "สแกนส่วนประกอบที่เลือกเพื่อให้ข้อความใหม่พร้อมสำหรับการแปล."
+         ],
+         "Select all": [
+            "เลือกทั้งหมด"
+         ],
+         "Plugins:": [
+            "ปลั๊กอิน:"
+         ],
+         "Themes:": [
+            "ธีมส์:"
+         ],
+         "Core:": [
+            "แกนหลัก:"
+         ],
+         "Can't find the strings you're looking to translate?": [
+            "ไม่พบสตริงที่คุณต้องการแปลใช่ไหม?"
+         ],
+         "Most likely you cannot see the strings you want to translate because:": [
+            "เป็นไปได้มากว่าคุณจะไม่เห็นสตริงที่คุณต้องการแปลเนื่องจาก:"
+         ],
+         "Texts are not selected for translation": [
+            "ไม่ได้เลือกข้อความสำหรับการแปล"
+         ]
+      }
+   }
+}

@@ -58,7 +58,7 @@ msgstr ""
 msgid "Published!"
 msgstr ""
 
-#: src/js/translationReview/hooks/useATESync.js:36
+#: src/js/translationReview/hooks/useATESync.js:34
 msgid "Someone is already reviewing this translation. Please try again later."
 msgstr ""
 

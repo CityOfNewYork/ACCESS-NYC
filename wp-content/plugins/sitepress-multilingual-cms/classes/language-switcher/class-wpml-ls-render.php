@@ -72,15 +72,17 @@ class WPML_LS_Render extends WPML_SP_User {
 			$this->assets->maybe_late_enqueue_template( $slot->template() );
 			$this->current_template = clone $this->templates->get_template( $slot->template() );
 
+			$sandbox = false;
 			if ( $slot->template_string() ) {
 				$this->current_template->set_template_string( $slot->template_string() );
+				$sandbox = true;
 			}
 
 			$model = $this->model_build->get( $slot, $this->current_template->get_template_data() );
 
 			if ( $model['languages'] ) {
 				$this->current_template->set_model( $model );
-				$html = $this->current_template->get_html();
+				$html = $this->current_template->get_html( $sandbox );
 			}
 		}
 

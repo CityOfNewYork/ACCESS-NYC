@@ -5,21 +5,6 @@
          "": {
             "domain": "messages"
          },
-         "You can choose which posts to translate from the <strong>Translation Management Dashboard</strong>.": [
-            "Você pode escolher quais posts traduzir através do <strong>painel do Translation Management</strong>."
-         ],
-         "Yes, translate <b>existing</b> and <b>future</b> content automatically": [
-            "Sim, traduzir conteúdo <b>existente</b> e <b>futuro</b> automaticamente"
-         ],
-         "Yes, but only translate <b>future</b> content automatically": [
-            "Sim, mas apenas traduzir conteúdo <b>futuro</b> automaticamente"
-         ],
-         "Yes, translate <b>future</b> content automatically": [
-            "Sim, traduzir conteúdo <b>futuro</b> automaticamente"
-         ],
-         "No, I want to translate some of these posts, but not all": [
-            "Não, quero traduzir alguns desses posts, mas não todos"
-         ],
          "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
             "Você deve usar o Advanced Translation Editor se quiser traduzir seu conteúdo automaticamente."
          ],
@@ -28,6 +13,19 @@
          ],
          "Please try again in a few minutes. If the problem persists, please contact %sWPML support%s.": [
             "Tente novamente daqui a alguns minutos. Se o problema continuar, entre em contato com %so suporte do WPML%s."
+         ],
+         "Save": [
+            "Salvar"
+         ],
+         "Please confirm this translation setting": [
+            "Confirme essa configuração de tradução"
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item.": [
+            "Seu site está configurado para traduzir todo o conteúdo automaticamente. Quando você tornar <PostTypesNames /> traduzível, o WPML traduzirá automaticamente o item existente %1$d.",
+            "Seu site está configurado para traduzir todo o conteúdo automaticamente. Quando você tornar <PostTypesNames /> traduzível, o WPML traduzirá automaticamente os %1$d itens existentes."
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate all future content.": [
+            "Seu site está configurado para traduzir todo o conteúdo automaticamente. Ao tornar <PostTypesNames /> traduzível, o WPML traduzirá automaticamente todo o conteúdo futuro."
          ],
          "Are you OK with paying for this?": [
             "Você concorda em pagar por isso?"
@@ -38,18 +36,14 @@
          "Make translatable": [
             "Tornar traduzível"
          ],
-         "Save": [
-            "Salvar"
+         "Yes, translate <b>existing</b> and <b>future</b> content automatically": [
+            "Sim, traduzir conteúdo <b>existente</b> e <b>futuro</b> automaticamente"
          ],
-         "Please confirm this translation setting": [
-            "Confirme essa configuração de tradução"
+         "Yes, but only translate <b>future</b> content automatically": [
+            "Sim, mas apenas traduzir conteúdo <b>futuro</b> automaticamente"
          ],
-         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item.": [
-            "Seu site está configurado para traduzir todo o conteúdo automaticamente. Ao tornar <PostTypesNames /> traduzível, o WPML traduzirá automaticamente o item existente de %1$d.",
-            "Seu site está configurado para traduzir todo o conteúdo automaticamente. Ao tornar <PostTypesNames /> traduzível, o WPML traduzirá automaticamente os itens existentes de %1$d ."
-         ],
-         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate all future content.": [
-            "Seu site está configurado para traduzir todo o conteúdo automaticamente. Ao tornar <PostTypesNames /> traduzível, o WPML traduzirá automaticamente todo o conteúdo futuro."
+         "Yes, translate <b>future</b> content automatically": [
+            "Sim, traduzir conteúdo <b>futuro</b> automaticamente"
          ]
       }
    }

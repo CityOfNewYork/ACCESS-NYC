@@ -1,0 +1,150 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:13
+msgid "What should happen with your automatically translated content?"
+msgstr "מה צריך לקרות עם התוכן שתורגם אוטומטית?"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:30
+msgid "Wait for review"
+msgstr "המתן לסקירה"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:31
+msgid "You check and approve translations before publishing."
+msgstr "אתה בודק ומאשר תרגומים לפני פרסום."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:32
+msgid "Your translators check and approve translations before publishing."
+msgstr "המתרגמים שלך בודקים ומאשרים תרגומים לפני פרסום."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:36
+msgid "Publish and mark for review"
+msgstr "פרסם וסמן לסקירה"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:37
+msgid ""
+"WPML publishes translations immediately but flags them for you to check at "
+"your convenience."
+msgstr "WPML מפרסם תרגומים מיד אך מסמן אותם לבדיקתך בזמנך הפנוי."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:38
+msgid ""
+"WPML publishes translations immediately but flags them for your translators "
+"to check at their convenience."
+msgstr "WPML מפרסם תרגומים מיד אך מסמן אותם לבדיקת המתרגמים שלך בזמנם הפנוי."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:42
+msgid "Publish without review"
+msgstr "פרסם ללא סקירה"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:44
+msgid ""
+"The system publishes translations straight away, skipping the review "
+"process."
+msgstr "המערכת מפרסמת תרגומים מיד, מדלגת על תהליך הסקירה."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:22
+msgid "Automatic translation"
+msgstr "תרגום אוטומטי"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:28
+msgid "What should happen with your automatically translated content"
+msgstr "מה צריך לקרות עם התוכן שתורגם אוטומטית"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:54
+msgid "Save settings"
+msgstr "שמור הגדרות"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:13
+msgid "Translate drafts as I save them (consumes a bit more translation credits)."
+msgstr "תרגם טיוטות כשאני שומר אותן (צורך מעט יותר נקודות זכות לתרגום)."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:26
+msgid "Do you want to translate drafts automatically?"
+msgstr "האם ברצונך לתרגם טיוטות באופן אוטומטי?"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:42
+msgid ""
+"This feature is only available when you enable \"Translate Everything "
+"Automatically\" from the %sTranslation Dashboard%s."
+msgstr "תכונה זו זמינה רק כאשר אתה מפעיל \"תרגם הכל אוטומטית\" מתוך %sלוח הבקרה של התרגום%s."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:9
+msgid "Don't translate drafts. Only translate when I publish content."
+msgstr "אל תתרגם טיוטות. תרגם רק כשאני מפרסם תוכן."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:116
+msgid "%d credits/word"
+msgstr "%d נקודות זכות/מילה"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:15
+msgid "Informal"
+msgstr "לא פורמלי"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:16
+msgid "Automatic"
+msgstr "אוטומטי"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:17
+msgid "Formal"
+msgstr "פורמלי"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:45
+msgid "Which translation engines do you want to use?"
+msgstr "באילו מנועי תרגום תרצה להשתמש?"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:46
+msgid ""
+"Automatic translation engines differ in translation style and supported "
+"language pairs.\n"
+"If your preferred translation engine does not support a language pair that "
+"you want to use, we fall back to your next preferred engine that does "
+"support it.\n"
+msgstr "מנועי תרגום אוטומטיים נבדלים בסגנון התרגום ובזוגות השפות הנתמכים.
+אם מנוע התרגום המועדף עליך אינו תומך בזוג שפות שברצונך להשתמש בו, אנו נעבור למנוע המועדף הבא שלך שכן תומך בזוג זה.\n"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:48
+msgid "Drag & drop to sort from the most to the least preferred engine."
+msgstr "גרור ושחרר כדי למיין מהמועדף ביותר למועדף פחות."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:51
+msgid "Choose the tone of your automatic translations."
+msgstr "בחר את הטון של התרגומים האוטומטיים שלך."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:57
+msgid "Read more"
+msgstr "קרא עוד"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:73
+msgid "Learn more"
+msgstr "למד עוד"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:92
+msgid "On"
+msgstr "פעיל"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:93
+msgid "Off"
+msgstr "כבוי"
+
+#: src/js/translation-method/store.js:120
+msgid "Could not load translation engines"
+msgstr "לא ניתן לטעון מנועי תרגום"
+
+#: src/js/translation-method/store.js:140
+msgid "Could not update engine"
+msgstr "לא ניתן לעדכן מנוע"
+
+#: src/js/translation-method/store.js:168
+msgid "Could not save review mode"
+msgstr "לא ניתן לשמור מצב סקירה"
+
+#: src/js/translation-method/store.js:196
+msgid "Could not save translate everything drafts"
+msgstr "לא ניתן לשמור טיוטות של תרגום הכל"
+
+#: src/js/translation-method/store.js:97
+msgid "Settings saved successfully"
+msgstr "ההגדרות נשמרו בהצלחה"

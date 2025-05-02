@@ -18,17 +18,10 @@ use WPML\Setup\Option;
 class StatusBar {
 
 	/**
-	 * @param bool $hasAutomaticJobsInProgress
-	 * @param int $needsReviewCount
-	 * @param bool $hasBackgroundTasksInProgress
-	 *
 	 * @return void
 	 */
-	public static function add_hooks( $hasAutomaticJobsInProgress = false, $needsReviewCount = 0, $hasBackgroundTasksInProgress = false ) {
-		if (
-			User::canManageTranslations()
-			&& ( Option::shouldTranslateEverything() || $hasAutomaticJobsInProgress || $needsReviewCount > 0 || $hasBackgroundTasksInProgress )
-		) {
+	public static function add_hooks() {
+		if ( User::canManageTranslations() ) {
 			Hooks::onAction( 'admin_bar_menu', 999 )
 			     ->then( spreadArgs( [ self::class, 'add' ] ) );
 		}
@@ -42,6 +35,7 @@ class StatusBar {
 				'title'  => '<i id="wpml-status-bar-icon" class="otgs-ico otgs-ico-wpml"></i>' .
 					'<span id="wp-admin-bar-ate-status-bar-badge"></span>',
 				'href'   => false,
+				'meta'   => [ 'class' => 'wpml-status-bar-hidden' ]
 			]
 		);
 		$adminBar->add_node(

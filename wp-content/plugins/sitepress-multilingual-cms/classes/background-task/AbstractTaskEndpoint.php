@@ -31,6 +31,10 @@ abstract class AbstractTaskEndpoint implements TaskEndpointInterface {
 		$this->backgroundTaskService = $backgroundTaskService;
 	}
 
+	public function isValidTask( $task_id ) {
+		return true;
+	}
+
 	public function isDisplayed() {
 		return true;
 	}

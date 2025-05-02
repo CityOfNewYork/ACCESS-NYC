@@ -1,0 +1,244 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
+msgid "Advanced"
+msgstr "Προχωρημένα"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:25
+msgid "HTML anchor"
+msgstr "HTML άγκυρα"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
+msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
+msgstr "Προσθέστε μια συντόμευση σε αυτό το μπλοκ κατά τη φόρτωση της σελίδας χρησιμοποιώντας τη διεύθυνση URL “#anchor”."
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
+msgid "Additional CSS class(es)"
+msgstr "Πρόσθετη(ες) κλάση(εις) CSS"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
+msgid "Separate multiple classes with spaces."
+msgstr "Διαχωρίστε πολλαπλές κλάσεις με κενά."
+
+#: src/js/blocks/LanguageSwitcher/Components/Color/Control.js:49
+msgid "Color"
+msgstr "Χρώμα"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:346
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:42
+msgid "px"
+msgstr "px"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:347
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:46
+msgid "%"
+msgstr "%"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:358
+msgid "Dimensions"
+msgstr "Διαστάσεις"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:365
+msgid "BLOCK"
+msgstr "ΜΠΛΟΚ"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:371
+msgid "Block margin"
+msgstr "Περιθώριο μπλοκ"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:388
+msgid "Block padding"
+msgstr "Εσωτερικό περιθώριο μπλοκ"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:406
+msgid "LANGUAGE"
+msgstr "ΓΛΩΣΣΑ"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:412
+msgid "Language spacing"
+msgstr "Απόσταση γλώσσας"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
+msgid "Language padding"
+msgstr "Εσωτερικό περιθώριο γλώσσας"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
+msgid "Display"
+msgstr "Εμφάνιση"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:41
+msgid "Show flag"
+msgstr "Εμφάνιση σημαίας"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:49
+msgid "Show language name"
+msgstr "Εμφάνιση ονόματος γλώσσας"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:68
+msgid "Display language name in"
+msgstr "Εμφάνιση ονόματος γλώσσας σε"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:113
+msgid "Style"
+msgstr "Στυλ"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:55
+msgid "Flag settings"
+msgstr "Ρυθμίσεις σημαίας"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:59
+msgid "Width"
+msgstr "Πλάτος"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:62
+msgid "Height"
+msgstr "Ύψος"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:94
+msgid "Spacing"
+msgstr "Απόσταση"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:119
+msgid "Allow wrapping to multiple lines"
+msgstr "Επιτρέπεται η αναδίπλωση σε πολλαπλές γραμμές"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
+msgid "Open on click"
+msgstr "Άνοιγμα με κλικ"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:145
+msgid "Show arrow"
+msgstr "Εμφάνιση βέλους"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:60
+msgid "Layout"
+msgstr "Διάταξη"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:72
+msgid "Justification"
+msgstr "Στοίχιση"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:74
+msgid "Orientation"
+msgstr "Προσανατολισμός"
+
+#: src/js/blocks/LanguageSwitcher/Components/Typography/Control.js:160
+msgid "Typography"
+msgstr "Τυπογραφία"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:116
+#: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:25
+msgid "Background"
+msgstr "Φόντο"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:121
+msgid "Language Text"
+msgstr "Κείμενο γλώσσας"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:126
+msgid "Language Background"
+msgstr "Φόντο γλώσσας"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:131
+msgid "Current language text"
+msgstr "Κείμενο τρέχουσας γλώσσας"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:136
+#: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:30
+msgid "Current language background"
+msgstr "Φόντο τρέχουσας γλώσσας"
+
+#: src/js/blocks/LanguageSwitcher/attributes/display.js:5
+msgid "Full name"
+msgstr "Πλήρες όνομα"
+
+#: src/js/blocks/LanguageSwitcher/attributes/display.js:9
+msgid "Code"
+msgstr "Κωδικός"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:24
+msgid "Justify items left"
+msgstr "Στοίχιση στοιχείων αριστερά"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:29
+msgid "Justify items center"
+msgstr "Στοίχιση στοιχείων στο κέντρο"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:34
+msgid "Justify items right"
+msgstr "Στοίχιση στοιχείων δεξιά"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
+msgid "Justify items space between"
+msgstr "Στοίχιση στοιχείων με ίσες αποστάσεις"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
+msgid "Horizontal"
+msgstr "Οριζόντια"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:52
+msgid "Vertical"
+msgstr "Κάθετα"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:14
+msgid "Normal"
+msgstr "Κανονικό"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:19
+msgid "Medium"
+msgstr "Μεσαίο"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:24
+msgid "Large"
+msgstr "Μεγάλο"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:29
+msgid "X-Large"
+msgstr "Πολύ μεγάλο"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:35
+msgid "Ab"
+msgstr "Αβ"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:39
+msgid "AB"
+msgstr "ΑΒ"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:43
+msgid "ab"
+msgstr "αβ"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:9
+msgid "Small"
+msgstr "Μικρό"
+
+#: src/js/blocks/LanguageSwitcher/index.js:36
+msgid "Displays the WPML Language Switcher."
+msgstr "Εμφανίζει τον Εναλλάκτη Γλώσσας WPML."
+
+#: src/js/blocks/LanguageSwitcher/index.js:42
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:47
+msgid "Language Switcher"
+msgstr "Εναλλάκτης Γλώσσας"
+
+#: src/js/blocks/LanguageSwitcher/index.js:43
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:48
+msgid "displays the WPML Language Switcher"
+msgstr "εμφανίζει τον Εναλλάκτη Γλώσσας WPML"
+
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:30
+msgid ""
+"Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
+"block</a>."
+msgstr "Εμφανίζει τον Εναλλάκτη Γλώσσας WPML. <br/> Μάθετε <a>πώς να μεταφράσετε αυτό το μπλοκ</a>."
+
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:38
+msgid "Navigation Language Switcher"
+msgstr "Εναλλάκτης Γλώσσας Πλοήγησης"
+
+#: src/js/blocks/Shared/Controls/PanelSettingsDropdown.js:64
+msgid "Reset all"
+msgstr "Επαναφορά όλων"

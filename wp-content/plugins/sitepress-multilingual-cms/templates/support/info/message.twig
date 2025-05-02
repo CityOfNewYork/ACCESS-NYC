@@ -1,5 +1,7 @@
 {% if more_url is defined and message != '' %}
-	<a href="{{ more_url }}" target="_blank">{{ message }}</a>
+	<a class="wpml-external-link" href="{{ more_url }}" target="_blank">
+		<span>{{ message }}</span>
+	</a>
 {% else %}
 	{{ message ?: more_url }}
 {% endif %}

@@ -3,34 +3,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/js/ate/status-bar/model/pauseAndResume.js:28
-msgid ""
-"There was an error when trying to pause your Automatic Translation. Please "
-"try again later or contact our support."
-msgstr ""
-
-#: src/js/ate/status-bar/model/pauseAndResume.js:56
-msgid ""
-"There was an error when trying to resume your Automatic Translation. Please "
-"try again later or contact our support."
-msgstr ""
-
-#: src/js/ate/status-bar/model/pauseAndResume.js:59
-msgid "Error"
-msgstr ""
-
-#: src/js/ate/status-icons/TranslationQueue.js:46
-msgid "Draft — Pending review"
-msgstr ""
-
-#: src/js/ate/status-icons/TranslationQueue.js:49
-msgid "Complete"
-msgstr ""
-
-#: src/js/ate/status-icons/TranslationQueue.js:60
-msgid "Insufficient funds"
-msgstr ""
-
 #: src/js/components/translation/TranslationMethod.js:115
 msgid "Your pending automatic translations will be canceled."
 msgstr ""
@@ -95,27 +67,37 @@ msgstr ""
 msgid "Leave existing translations as is"
 msgstr ""
 
-#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:76
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:64
+msgid "You chose to review translations before publishing."
+msgstr ""
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:65
+msgid ""
+"If you retranslate content that's already published, the changes will be "
+"applied directly to live pages or posts."
+msgstr ""
+
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:82
 msgid ""
 "This also updates the translation memory for your site. Read more about <a "
 "href=\"%s\" target=\"_blank\" >translation memory</a>"
 msgstr ""
 
-#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:83
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:89
 msgid ""
 "Allows you to re-translate your content and update the translation memory "
 "for your site. Read more about <a href=\"%s\" target=\"_blank\" "
 ">translation memory</a>"
 msgstr ""
 
-#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:90
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:96
 msgid ""
 "Allows your translators to re-translate your content and update the "
 "translation memory for your site. Read more about <a href=\"%s\" "
 "target=\"_blank\" >translation memory</a>"
 msgstr ""
 
-#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:92
+#: src/js/translationDashboard/sending-to-translation/components/HowToHandleExistingTranslations.js:98
 msgid ""
 "HINT: You can add a Note for translators in the table above with special "
 "instructions."
@@ -248,19 +230,18 @@ msgstr ""
 msgid "Do nothing"
 msgstr ""
 
-#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:103
-msgid ""
-"To assign content to a translator, first <a href=\"%s\" "
-"target=\"_blank\">add a translator</a> or <a href=\"%s\" "
-"target=\"_blank\">connect to a translation service</a>."
-msgstr ""
-
 #: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:11
 msgid "You need credits to use automatic translation."
 msgstr ""
 
-#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:129
-msgid "Translators Tab"
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:113
+msgid "Finish setting up %s on your site"
+msgstr ""
+
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:117
+msgid ""
+"You need to authenticate %s to send them content for translation. Visit the "
+"%s to finish the setup."
 msgstr ""
 
 #: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:14
@@ -269,87 +250,47 @@ msgid ""
 "continues, please <a>contact WPML support</a>."
 msgstr ""
 
-#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:148
-msgid "Finish setting up %s on your site"
-msgstr ""
-
-#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:152
-msgid ""
-"You need to authenticate %s to send them content for translation. Visit the "
-"%s to finish the setup."
-msgstr ""
-
-#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:178
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:143
 msgid "Add a translator to use %s."
 msgstr ""
 
-#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:182
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:147
 msgid ""
 "To send content to %s for translation, go to the %s to add a translator on "
 "your site."
 msgstr ""
 
-#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:214
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:179
 msgid ""
 "Your selected automatic translation engines do not support the following "
 "language(s): %s. Read more about <a>choosing a translation engine</a>."
 msgstr ""
 
-#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:246
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:211
 msgid ""
 "Some of the selected content is already being translated. This will cancel "
 "any in-progress translations."
 msgstr ""
 
-#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:47
-msgid "It is not possible to translate %s content automatically."
-msgstr ""
-
-#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:48
-msgid "Translate selected items yourself or deselect these items above."
-msgstr ""
-
-#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:79
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:44
 msgid ""
 "Any existing content (translations) will be overwritten when creating "
 "duplicates."
 msgstr ""
 
-#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:80
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:45
 msgid ""
 "When duplicating content, please first duplicate parent pages to maintain "
 "the site's hierarchy."
 msgstr ""
 
-#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:12
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:68
 msgid ""
-"Some of the content that you selected for translation includes fields that "
-"are encoded. Translators will not be able to work on this kind of content, "
-"so we removed it from the job."
+"To assign content to a translator, first <a href=\"%s\" "
+"target=\"_blank\">add a translator</a> or <a href=\"%s\" "
+"target=\"_blank\">connect to a translation service</a>."
 msgstr ""
 
-#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:24
-msgid ""
-"To fix this problem, you need to tell WPML how these fields are encoded, so "
-"that WPML can decode them before sending for translation."
-msgstr ""
-
-#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:31
-msgid "How to indicate to WPML that it needs to decode fields."
-msgstr ""
-
-#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:38
-msgid "WPML cannot send some of the content to translation"
-msgstr ""
-
-#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:52
-msgid "<s>%s</s>: There are base64 encoded fields in this document"
-msgstr ""
-
-#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:70
-msgid "Hide details"
-msgstr ""
-
-#: src/js/translationDashboard/sent-content-messages/EncodedFieldsError.js:70
-msgid "Show details"
+#: src/js/translationDashboard/sending-to-translation/model/warningMessages.js:94
+msgid "Translators Tab"
 msgstr ""

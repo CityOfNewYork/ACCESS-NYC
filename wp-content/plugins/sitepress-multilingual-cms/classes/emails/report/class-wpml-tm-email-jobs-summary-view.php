@@ -50,6 +50,10 @@ class WPML_TM_Email_Jobs_Summary_View extends WPML_TM_Email_View {
 	public function render_jobs_list( $language_pairs, $translator_id, $title_singular, $title_plural = '' ) {
 		$this->empty_assigned_jobs();
 
+		if ( ! WPML_User_Jobs_Notification_Settings::is_new_job_notification_enabled( $translator_id ) ) {
+			return null;
+		}
+
 		$model = array(
 			'strings' => array(
 				'strings_text' => __( 'Strings', 'wpml-translation-management' ),
@@ -64,14 +68,19 @@ class WPML_TM_Email_Jobs_Summary_View extends WPML_TM_Email_View {
 
 		foreach ( $language_pairs as $lang_pair => $elements ) {
 
-			$languages = explode( '|', $lang_pair );
-			$args      = array(
+			$languages   = explode( '|', $lang_pair );
+			$source_lang = $this->sitepress->get_language_details( $languages[0] );
+			$target_lang = $this->sitepress->get_language_details( $languages[1] );
+			if ( ! $source_lang || ! $target_lang ) {
+					continue;
+			}
+
+			$args = array(
 				'lang_from' => $languages[0],
-				'lang_to' => $languages[1]
+				'lang_to'   => $languages[1]
 			);
 
-			if ( $this->blog_translators->is_translator( $translator_id, $args ) &&
-			     WPML_User_Jobs_Notification_Settings::is_new_job_notification_enabled( $translator_id ) ) {
+			if ( $this->blog_translators->is_translator( $translator_id, $args ) ) {
 
 				$model_elements = array();
 				$string_added   = false;
@@ -96,8 +105,6 @@ class WPML_TM_Email_Jobs_Summary_View extends WPML_TM_Email_View {
 					$this->add_assigned_job( $element['job_id'], $element['type'] );
 				}
 
-				$source_lang                     = $this->sitepress->get_language_details( $languages[0] );
-				$target_lang                     = $this->sitepress->get_language_details( $languages[1] );
 				$model['lang_pairs'][$lang_pair] = array(
 					'title'    => sprintf( __( 'From %1$s to %2$s:', 'wpml-translation-management' ), $source_lang['english_name'], $target_lang['english_name'] ),
 					'elements' => $model_elements,

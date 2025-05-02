@@ -1,0 +1,244 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:20
+msgid "Advanced"
+msgstr "Avancé(es)"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:25
+msgid "HTML anchor"
+msgstr "Ancre HTML"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:42
+msgid "Add a shortcut to this block when loading the page using the “#anchor” URL."
+msgstr "Ajouter un raccourci à ce bloc au moment de télécharger la page à l’aide de l’URL “#anchor”."
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:48
+msgid "Additional CSS class(es)"
+msgstr "Classe(s) CSS supplémentaire(s)"
+
+#: src/js/blocks/LanguageSwitcher/Components/Advanced/Control.js:65
+msgid "Separate multiple classes with spaces."
+msgstr "Séparer les multiples classes avec des espaces."
+
+#: src/js/blocks/LanguageSwitcher/Components/Color/Control.js:49
+msgid "Color"
+msgstr "Couleur"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:346
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:42
+msgid "px"
+msgstr "px"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:347
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:46
+msgid "%"
+msgstr "%"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:358
+msgid "Dimensions"
+msgstr "Dimensions"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:365
+msgid "BLOCK"
+msgstr "Bloc"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:371
+msgid "Block margin"
+msgstr "Marge de bloc"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:388
+msgid "Block padding"
+msgstr "Marge intérieure du bloc"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:406
+msgid "LANGUAGE"
+msgstr "Langue"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:412
+msgid "Language spacing"
+msgstr "Espacement de langue"
+
+#: src/js/blocks/LanguageSwitcher/Components/Dimensions/Control.js:425
+msgid "Language padding"
+msgstr "Marge intérieure de langue"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:37
+msgid "Display"
+msgstr "Affichage"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:41
+msgid "Show flag"
+msgstr "Afficher l’indicateur"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:49
+msgid "Show language name"
+msgstr "Afficher le nom de la langue"
+
+#: src/js/blocks/LanguageSwitcher/Components/Display/Control.js:68
+msgid "Display language name in"
+msgstr "Afficher le nom de la langue en"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:113
+msgid "Style"
+msgstr "Style"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:55
+msgid "Flag settings"
+msgstr "Paramètres d’indicateurs"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:59
+msgid "Width"
+msgstr "Largeur"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:62
+msgid "Height"
+msgstr "Hauteur"
+
+#: src/js/blocks/LanguageSwitcher/Components/Flag/Control.js:94
+msgid "Spacing"
+msgstr "Espacement"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:119
+msgid "Allow wrapping to multiple lines"
+msgstr "Permettre le retour à la ligne sur des lignes multiples"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:132
+msgid "Open on click"
+msgstr "Ouvrir d’un clic"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:145
+msgid "Show arrow"
+msgstr "Afficher la flèche"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:60
+msgid "Layout"
+msgstr "Mise en page"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:72
+msgid "Justification"
+msgstr "Justification"
+
+#: src/js/blocks/LanguageSwitcher/Components/Layout/Control.js:74
+msgid "Orientation"
+msgstr "Orientation"
+
+#: src/js/blocks/LanguageSwitcher/Components/Typography/Control.js:160
+msgid "Typography"
+msgstr "Typographie"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:116
+#: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:25
+msgid "Background"
+msgstr "Arrière-plan"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:121
+msgid "Language Text"
+msgstr "Texte de langue"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:126
+msgid "Language Background"
+msgstr "Arrière-plan de langue"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:131
+msgid "Current language text"
+msgstr "Texte actuel de la langue"
+
+#: src/js/blocks/LanguageSwitcher/attributes/color.js:136
+#: src/js/blocks/NavigationLanguageSwitcher/attributes/color.js:30
+msgid "Current language background"
+msgstr "Arrière-plan actuel de la langue"
+
+#: src/js/blocks/LanguageSwitcher/attributes/display.js:5
+msgid "Full name"
+msgstr "Nom complet"
+
+#: src/js/blocks/LanguageSwitcher/attributes/display.js:9
+msgid "Code"
+msgstr "Code"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:24
+msgid "Justify items left"
+msgstr "Aligner les éléments à gauche"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:29
+msgid "Justify items center"
+msgstr "Aligner les éléments au centre"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:34
+msgid "Justify items right"
+msgstr "Aligner les éléments à droite"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:39
+msgid "Justify items space between"
+msgstr "Aligner l'espace des éléments entre"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:47
+msgid "Horizontal"
+msgstr "Horizontal"
+
+#: src/js/blocks/LanguageSwitcher/attributes/layout.js:52
+msgid "Vertical"
+msgstr "Vertical"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:14
+msgid "Normal"
+msgstr "Normal"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:19
+msgid "Medium"
+msgstr "Moyen"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:24
+msgid "Large"
+msgstr "Grand"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:29
+msgid "X-Large"
+msgstr "Extra grand"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:35
+msgid "Ab"
+msgstr "Ab"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:39
+msgid "AB"
+msgstr "AB"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:43
+msgid "ab"
+msgstr "ab"
+
+#: src/js/blocks/LanguageSwitcher/attributes/typography.js:9
+msgid "Small"
+msgstr "Petit"
+
+#: src/js/blocks/LanguageSwitcher/index.js:36
+msgid "Displays the WPML Language Switcher."
+msgstr "Affiche le sélecteur de langue WPML."
+
+#: src/js/blocks/LanguageSwitcher/index.js:42
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:47
+msgid "Language Switcher"
+msgstr "Sélecteur de langue"
+
+#: src/js/blocks/LanguageSwitcher/index.js:43
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:48
+msgid "displays the WPML Language Switcher"
+msgstr "affiche le sélecteur de langue WPML"
+
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:30
+msgid ""
+"Displays the WPML Language Switcher. <br/> Learn <a>how to translate this "
+"block</a>."
+msgstr "Affiche le sélecteur de langue WPML. <br/> Découvrez <a>comment traduire ce bloc</a>."
+
+#: src/js/blocks/NavigationLanguageSwitcher/index.js:38
+msgid "Navigation Language Switcher"
+msgstr "Sélecteur de langue de navigation"
+
+#: src/js/blocks/Shared/Controls/PanelSettingsDropdown.js:64
+msgid "Reset all"
+msgstr "Tout réinitialiser"

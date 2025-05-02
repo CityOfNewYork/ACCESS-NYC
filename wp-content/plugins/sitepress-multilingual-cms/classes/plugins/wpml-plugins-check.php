@@ -17,6 +17,7 @@ class WPML_Plugins_Check {
 
 		if ( version_compare( $st_version, $required_versions['wpml-string-translation'], '<' ) ) {
 			remove_action( 'wpml_before_init', 'load_wpml_st_basics' );
+			remove_action( 'plugins_loaded', 'icl_st_init' );
 		}
 
 		if ( version_compare( $wcml_version, $required_versions['woocommerce-multilingual'], '<' ) ) {

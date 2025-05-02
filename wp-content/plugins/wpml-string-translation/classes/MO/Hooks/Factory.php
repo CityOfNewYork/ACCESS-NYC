@@ -49,6 +49,7 @@ class Factory implements \IWPML_Backend_Action_Loader, \IWPML_Frontend_Action_Lo
 				':manager'               => $manager,
 				':getDomainsByStringIds' => DomainsRepository::getByStringIds(),
 			] ),
+			make( GetFilepathesForTranslationFiles::class ),
 		];
 	}
 }

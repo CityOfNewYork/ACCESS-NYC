@@ -1,0 +1,736 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/language/LanguagePairs.js:57
+msgid "From:"
+msgstr "Από:"
+
+#: src/js/components/language/LanguagePairs.js:69
+msgid "--Choose language--"
+msgstr "--Επιλέξτε γλώσσα--"
+
+#: src/js/components/language/LanguagePairs.js:81
+msgid "to:"
+msgstr "προς:"
+
+#: src/js/components/language/SelectLanguagePairs.js:39
+msgid "Set language pair(s) for Translator %s:"
+msgstr "Ορίστε ζεύγος/η γλωσσών για τον Μεταφραστή %s:"
+
+#: src/js/components/language/SelectLanguagePairs.js:64
+msgid "+ Add more language pairs for this translator"
+msgstr "+ Προσθέστε περισσότερα ζεύγη γλωσσών για αυτόν τον μεταφραστή"
+
+#: src/js/components/roles/CreateUser.js:100
+msgid "First Name"
+msgstr "Όνομα"
+
+#: src/js/components/roles/CreateUser.js:101
+msgid "Last Name"
+msgstr "Επώνυμο"
+
+#: src/js/components/roles/CreateUser.js:105
+msgid "Role"
+msgstr "Ρόλος"
+
+#: src/js/components/roles/CreateUser.js:137
+msgid "(required)"
+msgstr "(απαιτείται)"
+
+#: src/js/components/roles/CreateUser.js:46
+msgid ""
+"Make sure that you have provided a correct email address e.g. "
+"name@domain.com"
+msgstr "Βεβαιωθείτε ότι έχετε δώσει μια σωστή διεύθυνση email π.χ. name@domain.com"
+
+#: src/js/components/roles/CreateUser.js:64
+msgid "This field is required"
+msgstr "Αυτό το πεδίο είναι υποχρεωτικό"
+
+#: src/js/components/roles/CreateUser.js:84
+msgid "A translator can be any WordPress role."
+msgstr "Ένας μεταφραστής μπορεί να έχει οποιονδήποτε ρόλο WordPress."
+
+#: src/js/components/roles/CreateUser.js:98
+msgid "Username"
+msgstr "Όνομα χρήστη"
+
+#: src/js/components/roles/CreateUser.js:99
+msgid "Email"
+msgstr "Email"
+
+#: src/js/components/roles/ExistingUserSelect.js:46
+#: src/js/translationServices/components/SearchForm.js:13
+msgid "Search"
+msgstr "Αναζήτηση"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:23
+msgid "Who will translate?"
+msgstr "Ποιος θα μεταφράσει;?"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:27
+msgid "Only myself"
+msgstr "Μόνο εγώ"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:28
+msgid "You will be the sole translator for this site."
+msgstr "Θα είστε ο μοναδικός μεταφραστής για αυτόν τον ιστότοπο."
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:35
+msgid "Users of this site"
+msgstr "Χρήστες αυτού του ιστότοπου"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:36
+msgid ""
+"You will choose or create new users of this WordPress site as the "
+"translators. You can also choose yourself. This allows you to set up a team "
+"of translators working in different language pairs."
+msgstr "Θα επιλέξετε ή θα δημιουργήσετε νέους χρήστες αυτού του ιστότοπου WordPress ως μεταφραστές. Μπορείτε επίσης να επιλέξετε τον εαυτό σας. Αυτό σας επιτρέπει να δημιουργήσετε μια ομάδα μεταφραστών που εργάζονται σε διαφορετικά ζεύγη γλωσσών."
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:45
+msgid "Translation Service: %s"
+msgstr "Υπηρεσία Μετάφρασης: %s"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:46
+msgid "A Professional Translation Service"
+msgstr "Μια Επαγγελματική Υπηρεσία Μετάφρασης"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:49
+msgid ""
+"You have preselected %s to translate your content. Finish setting it up by "
+"entering the API token they provided to you."
+msgstr "Έχετε προεπιλέξει το %s για τη μετάφραση του περιεχομένου σας. Ολοκληρώστε τη ρύθμιση εισάγοντας το API token που σας παρείχαν."
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:50
+msgid ""
+"WPML offers tight integration with over 70 translation services. You will "
+"choose the translation service that you prefer and enjoy a streamlined "
+"process for sending jobs and receiving completed translations."
+msgstr "Το WPML προσφέρει στενή ενσωμάτωση με πάνω από 70 υπηρεσίες μετάφρασης. Θα επιλέξετε την υπηρεσία μετάφρασης που προτιμάτε και θα απολαύσετε μια απλοποιημένη διαδικασία για την αποστολή εργασιών και τη λήψη ολοκληρωμένων μεταφράσεων."
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:59
+msgid ""
+"I want to set a \"Translation Manager\" who will choose the translators for "
+"this site"
+msgstr "Θέλω να ορίσω έναν “Διαχειριστή Μετάφρασης” που θα επιλέξει τους μεταφραστές για αυτόν τον ιστότοπο"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:60
+msgid ""
+"You will choose a user of this site and delegate the setup of translators "
+"to him/her. Choose this option when you are building a website for a "
+"client, who will set up translator users or choose a translation service."
+msgstr "Θα επιλέξετε έναν χρήστη αυτού του ιστότοπου και θα του/της αναθέσετε τη ρύθμιση των μεταφραστών. Επιλέξτε αυτή την επιλογή όταν δημιουργείτε έναν ιστότοπο για έναν πελάτη, ο οποίος θα ρυθμίσει τους χρήστες μεταφραστές ή θα επιλέξει μια υπηρεσία μετάφρασης."
+
+#: src/js/components/translation-managers/AddManagerDialog.js:47
+msgid "user"
+msgstr "χρήστη"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:47
+msgid "Editor"
+msgstr "Συντάκτης"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:61
+msgid "Select an existing %s and set as Translation Manager"
+msgstr "Επιλέξτε έναν υπάρχοντα %s και ορίστε τον ως Διαχειριστή Μετάφρασης"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:72
+msgid "Create a new %s and set as Translation Manager"
+msgstr "Δημιουργήστε έναν νέο %s και ορίστε τον ως Διαχειριστή Μετάφρασης"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:85
+#: src/js/components/translators/AddTranslatorDialog.js:121
+#: src/js/components/translators/EditLanguagesDialog.js:73
+#: src/js/setup/components/Steps/AddLanguagesModal.js:496
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/ListModal.js:32
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:90
+msgid "Add Translation Manager"
+msgstr "Προσθήκη Διαχειριστή Μετάφρασης"
+
+#: src/js/components/translation-managers/ManagerSection.js:27
+msgid "Add a Translation Manager"
+msgstr "Προσθήκη Διαχειριστή Μετάφρασης"
+
+#: src/js/components/translators/AddTranslatorDialog.js:111
+msgid "Set language pair(s)"
+msgstr "Ορισμός ζεύγους/η γλωσσών"
+
+#: src/js/components/translators/AddTranslatorDialog.js:126
+msgid "Previous"
+msgstr "Προηγούμενο"
+
+#: src/js/components/translators/AddTranslatorDialog.js:129
+#: src/js/components/translators/EditLanguagesDialog.js:78
+msgid "Save"
+msgstr "Αποθήκευση"
+
+#: src/js/components/translators/AddTranslatorDialog.js:65
+#: src/js/components/translators/UserSection.js:45
+msgid "Add a Translator"
+msgstr "Προσθήκη Μεταφραστή"
+
+#: src/js/components/translators/AddTranslatorDialog.js:91
+msgid "Select an existing user and set as Translator"
+msgstr "Επιλέξτε έναν υπάρχοντα χρήστη και ορίστε τον ως Μεταφραστή"
+
+#: src/js/components/translators/AddTranslatorDialog.js:95
+msgid "Create a new user and set as Translator"
+msgstr "Δημιουργήστε έναν νέο χρήστη και ορίστε τον ως Μεταφραστή"
+
+#: src/js/components/translators/EditLanguagesDialog.js:55
+msgid "Edit language pair(s) for translator"
+msgstr "Επεξεργασία ζεύγους/η γλωσσών για τον μεταφραστή"
+
+#: src/js/components/translators/TranslatorsTable.js:128
+#: src/js/setup/components/Steps/AddLanguagesModal.js:346
+#: src/js/translationServices/components/ServicesList.js:69
+msgid "Name"
+msgstr "Όνομα"
+
+#: src/js/components/translators/TranslatorsTable.js:140
+msgid "Language Pairs"
+msgstr "Ζεύγη Γλωσσών"
+
+#: src/js/components/translators/TranslatorsTable.js:144
+msgid "You can translate to and from all languages"
+msgstr "Μπορείτε να μεταφράσετε προς και από όλες τις γλώσσες"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:48
+msgid "%s file upload failed."
+msgstr "Η μεταφόρτωση του αρχείου %s απέτυχε."
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:69
+msgid "Flag"
+msgstr "Σημαία"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:87
+msgid "Flag file"
+msgstr "Αρχείο σημαίας"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:160
+msgid ""
+"You just added  language. Next, select it as the site's default language or "
+"a translation language."
+msgstr "Μόλις προσθέσατε γλώσσα. Στη συνέχεια, επιλέξτε την ως την προεπιλεγμένη γλώσσα του ιστότοπου ή ως γλώσσα μετάφρασης."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:162
+msgid "Language added"
+msgstr "Η γλώσσα προστέθηκε"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:192
+msgid "The value \"%s\" already exists"
+msgstr "Η τιμή “%s” υπάρχει ήδη"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:215
+msgid "Add a new language"
+msgstr "Προσθήκη νέας γλώσσας"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:224
+msgid ""
+"Create a country-specific language by choosing the general language from "
+"the list below. Then, choose the country it should be localized for."
+msgstr "Δημιουργήστε μια γλώσσα συγκεκριμένης χώρας επιλέγοντας τη γενική γλώσσα από την παρακάτω λίστα. Στη συνέχεια, επιλέξτε τη χώρα για την οποία θα πρέπει να τοπικοποιηθεί."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:229
+msgid ""
+"By choosing a combination that already exists in the database, WPML can "
+"help fill out the necessary fields. Read more about "
+"<AddingACustomLanguageLink />."
+msgstr "Επιλέγοντας έναν συνδυασμό που υπάρχει ήδη στη βάση δεδομένων, το WPML μπορεί να βοηθήσει στη συμπλήρωση των απαραίτητων πεδίων. Διαβάστε περισσότερα σχετικά με την <AddingACustomLanguageLink />."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:242
+msgid "Cannot find?"
+msgstr "Δεν μπορείτε να το βρείτε;?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:244
+msgid "Click here"
+msgstr "Κάντε κλικ εδώ"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:300
+msgid ""
+"The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" "
+", \"pt-br\", \"zh-hans\""
+msgstr "Λανθασμένη μορφή. Μπορεί να περιέχει μόνο μικρά γράμματα και “-”. Π.χ.: “fr”, “pt-br”, “zh-hans”"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:308
+msgid "Language"
+msgstr "Γλώσσα"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:331
+msgid "Location"
+msgstr "Τοποθεσία"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:360
+msgid "Code"
+msgstr "Κωδικός"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:374
+msgid "The language will not be supported by automatic translations"
+msgstr "Η γλώσσα δεν θα υποστηρίζεται από αυτόματες μεταφράσεις"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:392
+msgid "Language mapping"
+msgstr "Αντιστοίχιση γλώσσας"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:404
+msgid "Don't map this language"
+msgstr "Μην αντιστοιχίσετε αυτή τη γλώσσα"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:418
+msgid "Default locale"
+msgstr "Προεπιλεγμένη τοπική ρύθμιση"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:423
+msgid ""
+"The wrong format. It may contain only small letters and \"_\". E.g: \"de\" "
+", \"de_DE\", \"zh_Hant_TW\""
+msgstr "Λανθασμένη μορφή. Μπορεί να περιέχει μόνο μικρά γράμματα και “_”. Π.χ.: “de”, “de_DE”, “zh_Hant_TW”"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:435
+msgid "hreflang"
+msgstr "hreflang"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:449
+msgid "Encode url?"
+msgstr "Κωδικοποίηση URL;?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:45
+msgid "Flags must be:"
+msgstr "Οι σημαίες πρέπει να είναι:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:453
+msgid "NO"
+msgstr "ΟΧΙ"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:454
+msgid "YES"
+msgstr "ΝΑΙ"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:460
+msgid " (required)"
+msgstr " (απαιτείται)"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:483
+msgid "Please fill in the field"
+msgstr "Παρακαλώ συμπληρώστε το πεδίο"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:49
+msgid "PNG, SVG, or JPG files"
+msgstr "Αρχεία PNG, SVG, ή JPG"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:501
+msgid "Save language"
+msgstr "Αποθήκευση γλώσσας"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:52
+msgid "18 x 12 pixels"
+msgstr "18 x 12 pixels"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:55
+msgid "Read more about "
+msgstr "Διαβάστε περισσότερα για "
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:60
+msgid ""
+"The name of your language as it will appear on your site's language "
+"switcher."
+msgstr "Το όνομα της γλώσσας σας όπως θα εμφανίζεται στον επιλογέα γλώσσας του ιστότοπού σας."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:61
+msgid ""
+"A unique value that identifies the language in the database and URL. Once "
+"saved, the language code cannot be changed."
+msgstr "Μια μοναδική τιμή που προσδιορίζει τη γλώσσα στη βάση δεδομένων και το URL. Μόλις αποθηκευτεί, ο κωδικός γλώσσας δεν μπορεί να αλλάξει."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:62
+msgid ""
+"If your custom language is similar to an existing language, you can use the "
+"existing language's spellcheck and automatic translation. For example, if "
+"your custom language is Swiss-German, you can map to German as the language "
+"to use for spellcheck and automatic translation. If you don't map your "
+"custom language to an existing language, spellcheck and automatic "
+"translation features will be unavailable in that language."
+msgstr "Εάν η προσαρμοσμένη γλώσσα σας είναι παρόμοια με μια υπάρχουσα γλώσσα, μπορείτε να χρησιμοποιήσετε τον ορθογραφικό έλεγχο και την αυτόματη μετάφραση της υπάρχουσας γλώσσας. Για παράδειγμα, εάν η προσαρμοσμένη γλώσσα σας είναι τα Ελβετικά Γερμανικά, μπορείτε να την αντιστοιχίσετε στα Γερμανικά ως τη γλώσσα που θα χρησιμοποιηθεί για τον ορθογραφικό έλεγχο και την αυτόματη μετάφραση. Εάν δεν αντιστοιχίσετε την προσαρμοσμένη γλώσσα σας σε μια υπάρχουσα γλώσσα, οι λειτουργίες ορθογραφικού ελέγχου και αυτόματης μετάφρασης δεν θα είναι διαθέσιμες σε αυτή τη γλώσσα."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:66
+msgid ""
+"The value WPML checks when loading translations from MO and PO files. The "
+"default locale is included in the filenames in your /wp-content/languages/ "
+"folder in your WordPress setup."
+msgstr "Η τιμή που ελέγχει το WPML κατά τη φόρτωση μεταφράσεων από αρχεία MO και PO. Η προεπιλεγμένη τοπική ρύθμιση περιλαμβάνεται στα ονόματα αρχείων στο φάκελο  /wp-content/languages/ στην εγκατάσταση WordPress σας."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:69
+msgid ""
+"Google uses the hreflang attribute to direct users to sites in their "
+"relevant language and location. Examples:"
+msgstr "Η Google χρησιμοποιεί το χαρακτηριστικό hreflang για να κατευθύνει τους χρήστες σε ιστότοπους στη σχετική γλώσσα και τοποθεσία τους. Παραδείγματα:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:71
+msgid "All English-speaking users: en"
+msgstr "Όλοι οι αγγλόφωνοι χρήστες: en"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:72
+msgid "English for UK users: en-gb"
+msgstr "Αγγλικά για χρήστες του Ηνωμένου Βασιλείου: en-gb"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:73
+msgid "English for US users: en-us"
+msgstr "Αγγλικά για χρήστες των ΗΠΑ: en-us"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:81
+msgid ""
+"Determines if URLs in this language are encoded or use ASCII characters (if "
+"unsure, leave it as \"No\")."
+msgstr "Καθορίζει εάν τα URL σε αυτή τη γλώσσα είναι κωδικοποιημένα ή χρησιμοποιούν χαρακτήρες ASCII (εάν δεν είστε σίγουροι, αφήστε το ως “Όχι”)."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:98
+msgid "adding a custom language"
+msgstr "προσθήκη προσαρμοσμένης γλώσσας"
+
+#: src/js/setup/components/Steps/Address.js:103
+msgid ""
+"Learn more about required server settings to use a different domain per "
+"language"
+msgstr "Μάθετε περισσότερα για τις απαιτούμενες ρυθμίσεις διακομιστή για τη χρήση διαφορετικού τομέα ανά γλώσσα"
+
+#: src/js/setup/components/Steps/Address.js:113
+msgid "Language name added as a parameter"
+msgstr "Το όνομα της γλώσσας προστέθηκε ως παράμετρος"
+
+#: src/js/setup/components/Steps/Address.js:160
+msgid "I will set up the domains for my secondary languages later."
+msgstr "Θα ρυθμίσω τους τομείς για τις δευτερεύουσες γλώσσες μου αργότερα."
+
+#: src/js/setup/components/Steps/Address.js:209
+msgid "The domain you have entered is invalid."
+msgstr "Ο τομέας που έχετε εισάγει δεν είναι έγκυρος."
+
+#: src/js/setup/components/Steps/Address.js:211
+msgid "The domain you have entered must be unique."
+msgstr "Ο τομέας που έχετε εισάγει πρέπει να είναι μοναδικός."
+
+#: src/js/setup/components/Steps/Address.js:231
+msgid ""
+"Please Note: Your site won't work in your secondary languages until this is "
+"successfully set up or you switch to a different URL option."
+msgstr "Παρακαλώ σημειώστε: Ο ιστότοπός σας δεν θα λειτουργεί στις δευτερεύουσες γλώσσες μέχρι να ρυθμιστεί επιτυχώς ή να αλλάξετε σε διαφορετική επιλογή URL."
+
+#: src/js/setup/components/Steps/Address.js:53
+msgid "Learn more about Language URL Options"
+msgstr "Μάθετε περισσότερα για τις Επιλογές URL Γλώσσας"
+
+#: src/js/setup/components/Steps/Address.js:60
+msgid "How would you like to format your site's URL?"
+msgstr "Πώς θα θέλατε να μορφοποιήσετε το URL του ιστοτόπου σας;?"
+
+#: src/js/setup/components/Steps/Address.js:65
+msgid "Different languages in directories"
+msgstr "Διαφορετικές γλώσσες σε καταλόγους"
+
+#: src/js/setup/components/Steps/Address.js:74
+msgid "The URL rewrite is not configured in your server."
+msgstr "Η επανεγγραφή URL δεν έχει ρυθμιστεί στον διακομιστή σας."
+
+#: src/js/setup/components/Steps/Address.js:77
+msgid ""
+"Learn more about required server settings to display languages in "
+"directories"
+msgstr "Μάθετε περισσότερα για τις απαιτούμενες ρυθμίσεις διακομιστή για την εμφάνιση γλωσσών σε καταλόγους"
+
+#: src/js/setup/components/Steps/Address.js:82
+msgid "I will fix my server settings to display languages in directories later."
+msgstr "Θα διορθώσω τις ρυθμίσεις του διακομιστή μου για να εμφανίζονται οι γλώσσες σε καταλόγους αργότερα."
+
+#: src/js/setup/components/Steps/Address.js:84
+msgid "Your server settings do not allow for languages in directories. "
+msgstr "Οι ρυθμίσεις του διακομιστή σας δεν επιτρέπουν γλώσσες σε καταλόγους."
+
+#: src/js/setup/components/Steps/Address.js:87
+msgid "Learn more about the required server settings."
+msgstr "Μάθετε περισσότερα για τις απαιτούμενες ρυθμίσεις διακομιστή."
+
+#: src/js/setup/components/Steps/Address.js:96
+msgid "A different domain per language"
+msgstr "Διαφορετικός τομέας ανά γλώσσα"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:108
+msgid "Translate your pages"
+msgstr "Μεταφράστε τις σελίδες σας"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:113
+msgid "Translate your posts"
+msgstr "Μεταφράστε τις αναρτήσεις σας"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:29
+msgid "Next, you need to set-up your multilingual store."
+msgstr "Στη συνέχεια, πρέπει να ρυθμίσετε το πολύγλωσσο κατάστημά σας."
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:46
+msgid "Continue to WooCommerce Multilingual Setup"
+msgstr "Συνέχεια στη Ρύθμιση WooCommerce Multilingual"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:54
+msgid "Start translating your site by visiting the <s>Translation Dashboard</s>."
+msgstr "Ξεκινήστε τη μετάφραση του ιστοτόπου σας επισκεπτόμενοι τον <s>Πίνακα Ελέγχου Μετάφρασης</s>."
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:72
+msgid "Go to Translation Dashboard"
+msgstr "Μετάβαση στον Πίνακα Ελέγχου Μετάφρασης"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:80
+msgid "Need help? <a>Using WPML's Plus Icons to Translate Content</a>"
+msgstr "Χρειάζεστε βοήθεια; <a>Χρήση των Εικονιδίων Συν του WPML για τη Μετάφραση Περιεχομένου</a>"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:99
+msgid ""
+"To start translating, look for the \"plus\" icons that WPML introduces next "
+"to content lists and editors. Click the \"plus\" icon under each language "
+"to translate."
+msgstr "Για να ξεκινήσετε τη μετάφραση, αναζητήστε τα εικονίδια “συν” που εισάγει το WPML δίπλα στις λίστες περιεχομένου και τους επεξεργαστές. Κάντε κλικ στο εικονίδιο “συν” κάτω από κάθε γλώσσα για να μεταφράσετε."
+
+#: src/js/setup/components/Steps/Finished/CriticalError.js:10
+msgid "support forum"
+msgstr "φόρουμ υποστήριξης"
+
+#: src/js/setup/components/Steps/Finished/CriticalError.js:14
+msgid ""
+"There was a critical error setting up WPML. Please contact our "
+"<LinkToSupportForum /> to resolve it."
+msgstr "Υπήρξε ένα κρίσιμο σφάλμα κατά τη ρύθμιση του WPML. Παρακαλώ επικοινωνήστε με το <LinkToSupportForum /> μας για να το επιλύσετε."
+
+#: src/js/setup/components/Steps/Finished/CriticalError.js:23
+msgid "Hide error message"
+msgstr "Απόκρυψη μηνύματος σφάλματος"
+
+#: src/js/setup/components/Steps/Finished/CriticalError.js:23
+msgid "Show error message"
+msgstr "Εμφάνιση μηνύματος σφάλματος"
+
+#: src/js/setup/components/Steps/Finished/Header.js:12
+msgid "Congratulations, your website is now multilingual with WPML!"
+msgstr "Συγχαρητήρια, ο ιστότοπός σας είναι τώρα πολύγλωσσος με το WPML!"
+
+#: src/js/setup/components/Steps/Finished/LanguageSwitcherBox.js:6
+msgid ""
+"For language switcher customization and more language options, navigate to "
+"<a>WPML → Languages</a>."
+msgstr "Για προσαρμογή του εναλλάκτη γλωσσών και περισσότερες επιλογές γλώσσας, πλοηγηθείτε στο <a>WPML → Γλώσσες</a>."
+
+#: src/js/setup/components/Steps/Languages.js:110
+msgid "What are the languages of your site?"
+msgstr "Ποιες είναι οι γλώσσες του ιστοτόπου σας;?"
+
+#: src/js/setup/components/Steps/Languages.js:120
+msgid "Default language"
+msgstr "Προεπιλεγμένη γλώσσα"
+
+#: src/js/setup/components/Steps/Languages.js:122
+msgid "What is the current language of your website?"
+msgstr "Ποια είναι η τρέχουσα γλώσσα του ιστοτόπου σας;?"
+
+#: src/js/setup/components/Steps/Languages.js:133
+msgid "Translation languages"
+msgstr "Γλώσσες μετάφρασης"
+
+#: src/js/setup/components/Steps/Languages.js:135
+msgid "Which languages do you want to translate your site into?"
+msgstr "Σε ποιες γλώσσες θέλετε να μεταφράσετε τον ιστότοπό σας;?"
+
+#: src/js/setup/components/Steps/Languages.js:149
+msgid "If you cannot find languages that you need in the list"
+msgstr "Εάν δεν μπορείτε να βρείτε γλώσσες που χρειάζεστε στη λίστα"
+
+#: src/js/setup/components/Steps/Languages.js:150
+msgid "create a custom language"
+msgstr "δημιουργήστε μια προσαρμοσμένη γλώσσα"
+
+#: src/js/setup/components/Steps/License.js:27
+#. %1$s is <a href="..."> and %2$s is </a>
+msgid ""
+"If you don't have a WPML.org account or a valid subscription, %1$spurchase "
+"one%2$s to get automatic updates, full support, and a 30-day money-back "
+"guarantee."
+msgstr "Εάν δεν έχετε λογαριασμό WPML.org ή έγκυρη συνδρομή, %1$sαγοράστε ένα%2$s για να λάβετε αυτόματες ενημερώσεις, πλήρη υποστήριξη και εγγύηση επιστροφής χρημάτων 30 ημερών."
+
+#: src/js/setup/components/Steps/License.js:58
+msgid "Already purchased WPML?"
+msgstr "Έχετε ήδη αγοράσει το WPML;?"
+
+#: src/js/setup/components/Steps/License.js:62
+msgid "Enter your site key from your WPML account to receive automatic updates."
+msgstr "Εισάγετε το κλειδί ιστοτόπου από τον λογαριασμό σας στο WPML για να λαμβάνετε αυτόματες ενημερώσεις."
+
+#: src/js/setup/components/Steps/License.js:69
+msgid "Site key"
+msgstr "Κλειδί ιστοτόπου"
+
+#: src/js/setup/components/Steps/License.js:76
+msgid "Get a key for this site"
+msgstr "Λήψη κλειδιού για αυτόν τον ιστότοπο"
+
+#: src/js/setup/components/Steps/Plugins.js:130
+msgid "Improve your site’s translations using helpful plugins"
+msgstr "Βελτιώστε τις μεταφράσεις του ιστοτόπου σας χρησιμοποιώντας χρήσιμα πρόσθετα"
+
+#: src/js/setup/components/Steps/Plugins.js:135
+msgid ""
+"Based on the themes and other plugins running on your site, we recommend "
+"that you enable the following WPML components. These are included with your "
+"WPML purchase and allow you to translate strings, media, admin texts, and "
+"more."
+msgstr "Με βάση τα θέματα και άλλα πρόσθετα που εκτελούνται στον ιστότοπό σας, συνιστούμε να ενεργοποιήσετε τα ακόλουθα στοιχεία του WPML. Αυτά περιλαμβάνονται στην αγορά του WPML σας και σας επιτρέπουν να μεταφράζετε συμβολοσειρές, πολυμέσα, κείμενα διαχείρισης και άλλα."
+
+#: src/js/setup/components/Steps/Plugins.js:97
+msgid "Error in activating plugin."
+msgstr "Σφάλμα κατά την ενεργοποίηση του πρόσθετου."
+
+#: src/js/setup/components/Steps/Plugins.js:99
+msgid "Error in installing plugin."
+msgstr "Σφάλμα κατά την εγκατάσταση του πρόσθετου."
+
+#: src/js/setup/components/Steps/Support.js:22
+msgid ""
+"Yes, send theme and plugins information, in order to get faster support and "
+"compatibility alerts"
+msgstr "Ναι, αποστολή πληροφοριών θέματος και πρόσθετων, για ταχύτερη υποστήριξη και ειδοποιήσεις συμβατότητας"
+
+#: src/js/setup/components/Steps/Support.js:25
+msgid "No, don't send this information and skip compatibility alerts"
+msgstr "Όχι, μην στέλνετε αυτές τις πληροφορίες και παραλείψτε τις ειδοποιήσεις συμβατότητας"
+
+#: src/js/setup/components/Steps/Support.js:34
+msgid "Do you want to get better and faster support?"
+msgstr "Θέλετε να λάβετε καλύτερη και ταχύτερη υποστήριξη;?"
+
+#: src/js/setup/components/Steps/Support.js:39
+msgid ""
+"The WPML plugin can send a list of active plugins and theme used in your "
+"site to wpml.org. This allows our support team to help you much faster and "
+"to contact you in advance about potential compatibility problems and their "
+"solutions."
+msgstr "Το πρόσθετο WPML μπορεί να στείλει μια λίστα με ενεργά πρόσθετα και το θέμα που χρησιμοποιείται στον ιστότοπό σας στο wpml.org. Αυτό επιτρέπει στην ομάδα υποστήριξής μας να σας βοηθήσει πολύ πιο γρήγορα και να επικοινωνήσει μαζί σας εκ των προτέρων για πιθανά προβλήματα συμβατότητας και τις λύσεις τους."
+
+#: src/js/setup/components/Steps/Support.js:51
+msgid "Privacy and data usage policy"
+msgstr "Πολιτική απορρήτου και χρήσης δεδομένων"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Authorize/Actions.js:16
+msgid "Error: %s"
+msgstr "Σφάλμα: %s"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Authorize/Actions.js:36
+msgid "Authenticate"
+msgstr "Πιστοποίηση"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:24
+msgid ""
+"To send content and receive translations from <service_name />, enter the "
+"credentials you received from them."
+msgstr "Για να στείλετε περιεχόμενο και να λάβετε μεταφράσεις από την <service_name />, εισαγάγετε τα διαπιστευτήρια που λάβατε από αυτούς."
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:30
+msgid "Need credentials? Contact <link_to_service />"
+msgstr "Χρειάζεστε διαπιστευτήρια; Επικοινωνήστε με την <link_to_service />"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:34
+msgid ""
+"Success! You can start sending content to %s for translation after you "
+"finish the setup wizard."
+msgstr "Επιτυχία! Μπορείτε να ξεκινήσετε την αποστολή περιεχομένου στο %s για μετάφραση αφού ολοκληρώσετε τον οδηγό ρύθμισης."
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:58
+msgid "The credentials are invalid. Please, try again."
+msgstr "Τα διαπιστευτήρια δεν είναι έγκυρα. Παρακαλώ, προσπαθήστε ξανά."
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/ListModal.js:12
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Main.js:84
+msgid "Choose a Translation Service"
+msgstr "Επιλέξτε μια Υπηρεσία Μετάφρασης"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Main.js:71
+msgid "Loading"
+msgstr "Φόρτωση"
+
+#: src/js/setup/models/Languages.js:57
+msgid "A new language could not be added correctly"
+msgstr "Δεν ήταν δυνατή η σωστή προσθήκη νέας γλώσσας"
+
+#: src/js/setup/store.js:108
+msgid "Back"
+msgstr "Πίσω"
+
+#: src/js/setup/store.js:113
+msgid "Continue"
+msgstr "Συνέχεια"
+
+#: src/js/setup/store.js:118
+msgid "Skip"
+msgstr "Παράλειψη"
+
+#: src/js/setup/store.js:122
+msgid "Install and activate"
+msgstr "Εγκατάσταση και ενεργοποίηση"
+
+#: src/js/setup/store.js:127
+msgid "Finish"
+msgstr "Τέλος"
+
+#: src/js/setup/store.js:70
+msgid "Languages"
+msgstr "Γλώσσες"
+
+#: src/js/setup/store.js:73
+msgid "URL Format"
+msgstr "Μορφή URL"
+
+#: src/js/setup/store.js:76
+msgid "Register WPML"
+msgstr "Εγγραφή WPML"
+
+#: src/js/setup/store.js:79
+msgid "Who Will Translate"
+msgstr "Ποιος θα Μεταφράσει"
+
+#: src/js/setup/store.js:84
+msgid "Support"
+msgstr "Υποστήριξη"
+
+#: src/js/setup/store.js:87
+msgid "Plugins"
+msgstr "Πρόσθετα"
+
+#: src/js/setup/store.js:90
+msgid "Finished"
+msgstr "Ολοκληρώθηκε"
+
+#: src/js/translationServices/components/Sections.js:16
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: src/js/translationServices/components/Sections.js:42
+msgid ""
+"It’s not currently possible to connect a translation service when WPML is "
+"set to translate your site’s content automatically. To use a translation "
+"service, please change your translation mode on the <LinkToSettingsPage /> "
+"page."
+msgstr "Δεν είναι δυνατή η σύνδεση με μια υπηρεσία μετάφρασης όταν το WPML έχει ρυθμιστεί να μεταφράζει αυτόματα το περιεχόμενο του ιστοτόπου σας. Για να χρησιμοποιήσετε μια υπηρεσία μετάφρασης, παρακαλούμε αλλάξτε τη λειτουργία μετάφρασης στη σελίδα <LinkToSettingsPage />."
+
+#: src/js/translationServices/components/ServicesList.js:41
+msgid "Documentation"
+msgstr "Τεκμηρίωση"
+
+#: src/js/translationServices/components/ServicesList.js:57
+msgid "Activate"
+msgstr "Ενεργοποίηση"
+
+#: src/js/translationServices/components/ServicesList.js:74
+msgid "Description"
+msgstr "Περιγραφή"
+
+#: src/js/translationServices/components/ServicesList.js:81
+msgid "Ranking"
+msgstr "Κατάταξη"

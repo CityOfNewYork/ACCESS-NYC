@@ -1,0 +1,58 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Edit": [
+            "편집하다"
+         ],
+         "Shift+Tab": [
+            "Shift+탭"
+         ],
+         "Tab": [
+            "탭"
+         ],
+         "Translation to:": [
+            "다음으로 번역:"
+         ],
+         "Copy from original": [
+            "원본에서 복사"
+         ],
+         "Use Shift+Enter to add a new line.": [
+            "새 줄을 추가하려면 Shift+Enter를 사용하세요."
+         ],
+         "Original:": [
+            "원래의:"
+         ],
+         "Add %s translation": [
+            "추가하다 %s 번역"
+         ],
+         "Edit %s translation": [
+            "편집하다 %s 번역"
+         ],
+         "Add %s translation (the string appears on the site and is not translated)": [
+            "%s 번역 추가(문자열이 사이트에 표시되며 번역되지 않음)"
+         ],
+         "Original language %s": [
+            "원어 %s"
+         ],
+         "Waiting for translator to %s": [
+            "번역가를 기다리는 중 %s"
+         ],
+         "Translation in progress to %s": [
+            "번역 진행 중 %s"
+         ],
+         "In basket for translation to %s": [
+            "번역할 장바구니에 담기 %s"
+         ],
+         "Translation saved.": [
+            "번역이 저장되었습니다."
+         ],
+         "Translation update failed.": [
+            "번역 업데이트에 실패했습니다."
+         ]
+      }
+   }
+}

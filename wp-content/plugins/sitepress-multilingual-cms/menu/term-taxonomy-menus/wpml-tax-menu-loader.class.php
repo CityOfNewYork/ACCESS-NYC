@@ -77,7 +77,7 @@ class WPML_Tax_Menu_Loader {
 	}
 
 	public function js_scripts_tags() {
-		wp_enqueue_script( 'sitepress-tags', ICL_PLUGIN_URL . '/res/js/tags.js', array(), ICL_SITEPRESS_VERSION );
+		wp_enqueue_script( 'sitepress-tags', ICL_PLUGIN_URL . '/res/js/tags.js', array(), ICL_SITEPRESS_SCRIPT_VERSION );
 	}
 
 	function wp_dropdown_cats_select_parent( $html, $args ) {

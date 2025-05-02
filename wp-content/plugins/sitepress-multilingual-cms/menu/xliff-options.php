@@ -64,7 +64,7 @@ $new_line_labels = array(
 				<?php foreach ( $new_line_labels as $mode => $label ) { ?>
 					<p>
 						<label>
-							<input type="radio" name="icl_xliff_newlines"
+							<input class="wpml-radio-native" type="radio" name="icl_xliff_newlines"
 								   value="<?php echo esc_attr( (string) $mode ); ?>"<?php checked( $xliff_newlines, $mode ); ?>/>
 							<?php echo esc_html( $label ); ?>
 						</label>
@@ -74,7 +74,7 @@ $new_line_labels = array(
 			</div>
 			<p class="buttons-wrap">
 				<span class="icl_ajx_response" id="icl_ajx_response"></span>
-				<input type="submit" class="button-primary"
+				<input type="submit" class="button-primary wpml-button base-btn"
 					   value="<?php esc_attr_e( 'Save', 'wpml-translation-management' ); ?>"/>
 			</p>
 		</form>

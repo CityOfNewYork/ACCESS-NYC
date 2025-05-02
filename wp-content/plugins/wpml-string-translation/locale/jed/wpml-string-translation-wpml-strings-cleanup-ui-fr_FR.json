@@ -1,0 +1,58 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Clean up the String Translation table by removing untranslated strings by domain.": [
+            "Nettoyer la table de traduction des chaînes en supprimant les chaînes non traduites par domaine."
+         ],
+         "Remove strings by domain": [
+            "Supprimer les chaînes de caractères par domaine"
+         ],
+         "Remove strings": [
+            "Supprimer les chaînes de caractères"
+         ],
+         "Cancel": [
+            "Annuler"
+         ],
+         "Remove": [
+            "Enlever"
+         ],
+         "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
+            "La table de traduction des chaînes contient actuellement des chaînes provenant des domaines énumérés ci-dessous. Si vous n'envisagez pas de traduire les chaînes d'un domaine particulier, sélectionnez-le ci-dessous pour supprimer les chaînes non traduites de la table de traduction des chaînes. Les chaînes déjà traduites resteront disponibles."
+         ],
+         "Search": [
+            "Recherche"
+         ],
+         "Removing strings from String Translation table": [
+            "Suppression des chaînes de caractères de la table de traduction des chaînes"
+         ],
+         "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
+            "Pour ajouter à nouveau des chaînes à la table de traduction des chaînes, vous devrez peut-être analyser à nouveau les fichiers de traduction ou enregistrer les chaînes comme traduisibles."
+         ],
+         "Read more about ": [
+            "En savoir plus "
+         ],
+         "scanning your site for strings and registering them as translatable.": [
+            "analyse votre site à la recherche de chaînes de caractères et les enregistre comme traduisibles."
+         ],
+         "Successfully removed strings": [
+            "Suppression réussie des chaînes de caractères"
+         ],
+         "OK, Great": [
+            "OK, très bien"
+         ],
+         "Domain": [
+            "Domaine"
+         ],
+         "Strings count": [
+            "Nombre de chaînes"
+         ],
+         "Translated strings": [
+            "Chaînes traduites"
+         ]
+      }
+   }
+}

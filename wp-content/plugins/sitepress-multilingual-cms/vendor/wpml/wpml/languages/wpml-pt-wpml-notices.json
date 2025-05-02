@@ -1,0 +1,44 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Add glossary terms": [
+            "Adicionar termos ao glossário"
+         ],
+         "Minimize": [
+            "Minimizar"
+         ],
+         "Expand": [
+            "Expandir"
+         ],
+         "There's nothing yet in the Glossary": [
+            "Não há nada ainda no Glossário"
+         ],
+         "Looks like you're not yet using the glossary. Glossary can help you:": [
+            "Parece que você ainda não está usando o glossário. O Glossário pode ajudá-lo a:"
+         ],
+         "Improve the quality of the translation": [
+            "Melhorar a qualidade da tradução"
+         ],
+         "Ensure translation consistency": [
+            "Garantir consistência na tradução"
+         ],
+         "Reduce translation costs": [
+            "Reduzir custos de tradução"
+         ],
+         "Improve SEO in translation languages": [
+            "Melhorar SEO nos idiomas de tradução"
+         ],
+         "How to Use the Glossary for Accurate Translations": [
+            "Como usar o glossário para traduções precisas"
+         ],
+         "%d item in the <a>Glossary</a>": [
+            "%d item no <a>Glossário</a>",
+            "%d itens no <a>Glossário</a>"
+         ]
+      }
+   }
+}

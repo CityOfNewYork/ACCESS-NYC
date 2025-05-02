@@ -5,7 +5,6 @@ namespace WPML\TM\Settings;
 use WPML\Collect\Support\Collection;
 use WPML\Core\BackgroundTask\Command\UpdateBackgroundTask;
 use WPML\Core\BackgroundTask\Model\BackgroundTask;
-use WPML\Core\BackgroundTask\Repository\BackgroundTaskRepository;
 use WPML\BackgroundTask\AbstractTaskEndpoint;
 use WPML\Core\BackgroundTask\Service\BackgroundTaskService;
 use WPML\Element\API\PostTranslations;
@@ -96,10 +95,12 @@ class ProcessNewTranslatableFields extends AbstractTaskEndpoint {
 
 		return $this->wpdb->get_col(
 			$this->wpdb->prepare(
-				"SELECT DISTINCT post_id
-						FROM {$this->wpdb->prefix}postmeta
-						WHERE meta_key IN ({$fieldsIn})
-						ORDER BY post_id ASC
+				"SELECT DISTINCT pm.post_id
+						FROM {$this->wpdb->postmeta} AS pm
+						INNER JOIN {$this->wpdb->posts} AS p
+							ON p.ID = pm.post_id
+						WHERE pm.meta_key IN ({$fieldsIn})
+						ORDER BY pm.post_id ASC
 						LIMIT %d OFFSET %d",
 				self::POSTS_PER_REQUEST,
 				($page-1)*self::POSTS_PER_REQUEST
@@ -126,6 +127,11 @@ class ProcessNewTranslatableFields extends AbstractTaskEndpoint {
 		);
 	}
 
+	private function isTranslateEverythingActive() {
+		return \WPML_TM_ATE_Status::is_enabled_and_activated()
+			&& Option::shouldTranslateEverything();
+	}
+
 	/**
 	 * @param array $postIds
 	 */
@@ -134,11 +140,7 @@ class ProcessNewTranslatableFields extends AbstractTaskEndpoint {
 			$translations = PostTranslations::getIfOriginal( $postId );
 			$updater      = $this->postActions->get_translation_statuses_updater( $postId, $translations );
 			$needsUpdate  = $updater();
-			if (
-				$needsUpdate
-				&& \WPML_TM_ATE_Status::is_enabled_and_activated()
-				&& Option::shouldTranslateEverything()
-			) {
+			if ( $needsUpdate && $this->isTranslateEverythingActive() ) {
 				$this->autotranslateActions->sendToTranslation( $postId );
 			}
 		}

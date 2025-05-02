@@ -40,6 +40,14 @@ class WPML_Package_Helper {
 		$delete_query   = "DELETE FROM {$wpdb->prefix}icl_string_packages WHERE id=%d";
 		$delete_prepare = $wpdb->prepare( $delete_query, $package_id );
 		$wpdb->query( $delete_prepare );
+
+		// Delete translation files.
+		$package = $tm->get_package();
+		$domain  = $package->kind_slug . '-' . $package->name;
+		// See Manager->getFilepath() method.
+		$domain = str_replace( '/', '-', $domain );
+
+		do_action( 'wpml_st_refresh_domain', $domain );
 	}
 
 	/**
@@ -103,10 +111,15 @@ class WPML_Package_Helper {
 
 	function string_title_from_id_filter( $default, $string_id ) {
 		global $wpdb;
-		$string_title_query = 'SELECT title FROM ' . $wpdb->prefix . 'icl_strings WHERE id=%d';
-		$string_title_sql   = $wpdb->prepare( $string_title_query, array( $string_id ) );
 
-		$string_title = $wpdb->get_var( $string_title_sql );
+		$string_title = false;
+
+		if ( $string_id ) {
+			$string_title_query = 'SELECT title FROM ' . $wpdb->prefix . 'icl_strings WHERE id=%d';
+			$string_title_sql   = $wpdb->prepare( $string_title_query, array( $string_id ) );
+
+			$string_title = $wpdb->get_var( $string_title_sql );
+		}
 
 		if ( ! $string_title ) {
 			$string_title = $default;
@@ -149,8 +162,18 @@ class WPML_Package_Helper {
 			$this->package_cleanup->record_register_string( $package, $this->last_registered_string_id );
 		}
 
-		// Action called after string is registered
+		// Action called after string is registered.
 		do_action( 'wpml_st_string_registered' );
+
+		/**
+		 * Fires after a string is registered as part of a string package.
+		 *
+		 * @since 3.2.10
+		 *
+		 * @param WPML_Package $package
+		 *
+		 */
+		do_action( 'wpml_st_package_string_registered', $package );
 
 		return $string_value;
 	}
@@ -443,7 +466,8 @@ class WPML_Package_Helper {
 		$package_job = new WPML_Package_TM( $package );
 		$package_job->set_language_details( $_POST['package_lang'] );
 
-		$args = filter_var_array( json_decode( base64_decode( $_POST['args'] ) ), FILTER_SANITIZE_STRING );
+		$args = json_decode( base64_decode( $_POST['args'] ) );
+		$args = array_map( 'sanitize_text_field', (array) $args );
 
 		$package_metabox = new WPML_Package_Translation_Metabox( $package, $wpdb, $sitepress, $args );
 		$response        = array(
@@ -717,13 +741,13 @@ class WPML_Package_Helper {
 	}
 
 	/**
-	 * @param mixed $package
-	 * @param int   $package_id
+	 * @param mixed     $package
+	 * @param int|array $package_data
 	 *
 	 * @return WPML_Package
 	 */
-	public function get_string_package( $package, $package_id ) {
-		return $this->package_factory->create( $package_id );
+	public function get_string_package( $package, $package_data ) {
+		return $this->package_factory->create( $package_data );
 	}
 
 	public function start_string_package_registration_action( $package ) {
@@ -732,6 +756,81 @@ class WPML_Package_Helper {
 
 	public function delete_unused_package_strings_action( $package ) {
 		$this->package_cleanup->delete_unused_strings( $this->package_factory->create( $package ) );
+	}
+	
+	/**
+	 * @param string[] $packages
+	 *
+	 * @return string[]
+	 */
+	public function get_active_string_package_kinds( $packages ) {
+		$addons = [
+			'WPML_PAGE_BUILDERS_VERSION'        => [
+				'Block' => [
+					'title'  => 'Widget',
+					'plural' => 'Widgets',
+					'slug'   => 'Block',
+				],
+			],
+			'ACFML_VERSION'                     => [
+				'acf-field-group'         => [
+					'title'  => 'Widget',
+					'plural' => 'Widgets',
+					'slug'   => 'acf-field-group',
+				],
+				'acf-post-type-labels'    => [
+					'title'  => 'ACF Custom Post Type',
+					'plural' => 'ACF Custom Post Type',
+					'slug'   => 'acf-post-type-labels',
+				],
+				'acf-taxonomy-labels'     => [
+					'title'  => 'ACF Custom Taxonomy',
+					'plural' => 'ACF Custom Taxonomies',
+					'slug'   => 'acf-taxonomy-labels',
+				],
+				'acf-options-page-labels' => [
+					'title'  => 'ACF Option Page',
+					'plural' => 'ACF Option Pages',
+					'slug'   => 'acf-options-page-labels',
+				],
+			],
+			'WPML_WP_FORMS_VERSION'             => [
+				'wpforms'  => [
+					'title'  => 'WP Form',
+					'plural' => 'WP Forms',
+					'slug'   => 'wpforms',
+				],
+			],
+			'GRAVITYFORMS_MULTILINGUAL_VERSION' => [
+				'gravity_form'  => [
+					'title'  => 'Gravity Form',
+					'plural' => 'Gravity Forms',
+					'slug'   => 'gravity_form',
+				],
+			],
+			'WPML_NINJA_FORMS_VERSION'          => [
+				'ninja-forms'  => [
+					'title'  => 'Ninja Form',
+					'plural' => 'Ninja Forms',
+					'slug'   => 'ninja-forms',
+				],
+			],
+		];
+
+		$isAddonEnabled = function( $value, $key ) {
+			return defined( $key );
+		};
+
+		$automaticPackages = wpml_collect( $addons )
+			->filter( $isAddonEnabled )
+			->collapse()
+			->all();
+
+		if ( is_array( $packages ) ) {
+			return array_merge( $packages, $automaticPackages );
+		}
+
+		return $automaticPackages;
 	}
 
 }

@@ -22,7 +22,9 @@ class WPML_TM_Translation_Batch_Factory {
 	 */
 	public function create( array $batch_data ) {
 		$translators = isset( $batch_data['translators'] ) ? $batch_data['translators'] : array();
-		$basket_name = Sanitize::stringProp( 'basket_name', $batch_data );
+		$basket_name = isset( $_POST['basket_name'] )
+			? filter_input( INPUT_POST, 'basket_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES )
+			: wp_unslash( $batch_data['basket_name'] );
 
 		$elements    = apply_filters(
 			'wpml_tm_batch_factory_elements',

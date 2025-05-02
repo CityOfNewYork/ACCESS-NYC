@@ -129,7 +129,9 @@ class WPML_TP_Sync_Update_Job {
 			)
 		);
 
-		return unserialize( $previous_state );
+		return $previous_state
+			? unserialize( $previous_state )
+			: null;
 	}
 
 	/**

@@ -7,7 +7,7 @@ use ACFML\Helper\FieldGroup;
 use ACFML\Helper\Resources;
 use ACFML\Notice\Links;
 use ACFML\Strings\Package;
-use ACFML\Strings\TranslationJobHooks;
+use ACFML\Tools\AdminUrl;
 use ACFML\Upgrade\Commands\MigrateToV2;
 use WPML\FP\Obj;
 use WPML\FP\Wrapper;
@@ -47,7 +47,6 @@ class UIHooks implements \IWPML_Action {
 	private static function getData() {
 		$fieldGroupId        = Obj::prop( 'ID', get_post() );
 		$fieldGroup          = (array) acf_get_field_group( $fieldGroupId );
-		$fieldGroupMode      = Mode::getMode( $fieldGroup );
 		$isNewGroup          = self::isNewGroup( $fieldGroupId );
 		$attachedPosts       = AttachedPosts::getCount( $fieldGroupId );
 		$nonTranslatableType = DetectNonTranslatableLocations::getDetectedType( $fieldGroupId );
@@ -60,8 +59,8 @@ class UIHooks implements \IWPML_Action {
 				],
 				'fieldGroupId'                       => $fieldGroupId,
 				'pluginImageURI'                     => ACFML_PLUGIN_URL . '/assets/img/',
-				'fieldGroupMode'                     => $fieldGroupMode,
-				'STModalData'                        => self::getSTModal( $fieldGroupId, $fieldGroupMode ),
+				'fieldGroupMode'                     => Mode::getMode( $fieldGroup ),
+				'STModalData'                        => self::getSTModal( $fieldGroupId ),
 				'strings'                            => self::getStrings( $attachedPosts, $nonTranslatableType ),
 				'hasAcfml1Tooltip'                   => $isNewGroup && MigrateToV2::needsNotification(),
 				'hasTranslateCptModal'               => (bool) $nonTranslatableType,
@@ -82,12 +81,11 @@ class UIHooks implements \IWPML_Action {
 	}
 
 	/**
-	 * @param int         $fieldGroupId
-	 * @param null|string $fieldGroupMode
+	 * @param int $fieldGroupId
 	 *
 	 * @return array
 	 */
-	private static function getSTModal( $fieldGroupId, $fieldGroupMode ) {
+	private static function getSTModal( $fieldGroupId ) {
 		$status = Package::create( $fieldGroupId )->getStatus();
 
 		switch ( $status ) {
@@ -103,65 +101,44 @@ class UIHooks implements \IWPML_Action {
 					'okText'       => esc_html__( 'Activate now', 'acfml' ),
 					'cancelText'   => esc_html__( 'Go back', 'acfml' ),
 					'redirectOnOk' => admin_url( '/plugins.php' ),
+					'footerText'   => null,
 				];
 
 			case Package::STATUS_NOT_REGISTERED:
 				return [
-					'title'        => esc_html__( 'Choose a translation option for your field groups', 'acfml' ),
-					'content'      => esc_html__( 'To translate field labels in String Translation, please complete the Multilingual Setup for your existing field groups and save your changes.', 'acfml' ),
+					'title'        => esc_html__( 'Set Up Field Group Translation', 'acfml' ),
+					'content'      => esc_html__( 'To translate field labels from the Translation Management dashboard, finish the Multilingual Setup and save your field group settings.', 'acfml' ),
 					'okText'       => esc_html__( 'OK', 'acfml' ),
-					'cancelText'   => esc_html__( 'Cancel', 'acfml' ),
+					'cancelText'   => null,
 					'redirectOnOk' => null,
+					'footerText'   => null,
 				];
 
 			case Package::STATUS_NOT_TRANSLATED:
 				return [
-					'title'        => esc_html__( 'Translating field labels', 'acfml' ),
-					'content'      => [
-						Mode::TRANSLATION  => '<p>' . esc_html__( 'The first time you translate a post that uses this field group, you can translate the field labels in the Advanced Translation Editor or using automatic translation.', 'acfml' ) . '</p>'
-											  . '<p>' . esc_html__( 'Or, you can translate the field labels on the String Translation page anytime.', 'acfml' ) . '</p>'
-											  . '<p>' . sprintf(
-												  /* translators: %1$s and %2$s will wrap the string in a <a> link html tag */
-							                      esc_html__( 'Don’t want to translate field labels? %1$sLearn how to disable field label translation%2$s', 'acfml' ),
-							                      '<a href="' . Links::getAcfmlTranslateLabels( 'excluding-field-labels-from-the-advanced-translation-editor' ) . '" class="wpml-external-link" target="_blank">',
-							                      '</a>'
-						                      ) . '</p>',
-						Mode::LOCALIZATION => '<p>' . esc_html__( 'You can translate field labels and labels for Choices in String Translation.', 'acfml' ) . '</p>',
-						Mode::ADVANCED     => '<p>'
-											  . sprintf(
-												  /* translators: %1$s and %2$s will wrap the string in a <a> link html tag */
-												  esc_html__( 'You can translate field labels in the Advanced Translation Editor or in String Translation, depending on the %1$stranslation preferences you select for your custom fields%2$s.', 'acfml' ),
-												  '<a href="' . Links::getAcfmlExpertDoc( [ 'utm_content' => 'notification' ] ) . '" class="wpml-external-link" target="_blank">',
-												  '</a>'
-											  )
-											  . '</p>',
-					],
-					'okText'       => [
-						Mode::TRANSLATION  => esc_html__( 'Translate in String Translation', 'acfml' ),
-						Mode::LOCALIZATION => esc_html__( 'Go to String Translation', 'acfml' ),
-						Mode::ADVANCED     => esc_html__( 'Go to String Translation', 'acfml' ),
-					],
-					'cancelText'   => [
-						Mode::TRANSLATION  => TranslationJobHooks::isEnabled() ? esc_html__( 'Translate with the post', 'acfml' ) : esc_html__( 'Go back', 'acfml' ),
-						Mode::LOCALIZATION => esc_html__( 'Go back', 'acfml' ),
-						Mode::ADVANCED     => esc_html__( 'Go back', 'acfml' ),
-					],
-					'redirectOnOk' => self::getLinkToST( $fieldGroupId ),
+					'title'        => esc_html__( 'Translate Field Labels', 'acfml' ),
+					'content'      => '<p>' . esc_html__( 'To translate field labels, use the Translation Management dashboard.', 'acfml' ) . '</p>',
+					'okText'       => esc_html__( 'Translate in Translation Management', 'acfml' ),
+					'cancelText'   => null,
+					'redirectOnOk' => self::getLinkToTMDashboard( $fieldGroupId ),
+					'footerText'   => '<p>' . sprintf(
+						/* translators: %1$s and %2$s will wrap the string in a <a> link html tag */
+						esc_html__( 'Don’t want to translate field labels? %1$sLearn how to disable field label translation%2$s', 'acfml' ),
+						'<a href="' . Links::getAcfmlTranslateLabels( 'excluding-field-labels-from-the-advanced-translation-editor' ) . '" class="wpml-external-link" target="_blank">',
+						'</a>'
+					) . '</p>',
 				];
 
 			case Package::STATUS_PARTIALLY_TRANSLATED:
 			case Package::STATUS_FULLY_TRANSLATED:
 			default:
-				$content = Package::STATUS_PARTIALLY_TRANSLATED === $status
-					? esc_html__( 'You already translated the labels in this field group. You can update these translations on the String Translation page.', 'acfml' )
-					: esc_html__( 'You already translated all field labels. You can update these translations on the String Translation page.', 'acfml' );
-
 				return [
-					'title'        => esc_html__( 'Translating field labels', 'acfml' ),
-					'content'      => '<p>' . $content . '</p>',
-					'okText'       => esc_html__( 'Go to String Translation', 'acfml' ),
+					'title'        => esc_html__( 'Fields Labels Already Translated', 'acfml' ),
+					'content'      => '<p>' . esc_html__( 'You already translated all field labels in this group. To update any translations, go to the Translation Management dashboard.', 'acfml' ) . '</p>',
+					'okText'       => esc_html__( 'Go to Translation Management', 'acfml' ),
 					'cancelText'   => esc_html__( 'Go back', 'acfml' ),
-					'redirectOnOk' => self::getLinkToST( $fieldGroupId ),
+					'redirectOnOk' => self::getLinkToTMDashboard( $fieldGroupId ),
+					'footerText'   => null,
 				];
 		}
 	}
@@ -171,11 +148,9 @@ class UIHooks implements \IWPML_Action {
 	 *
 	 * @return string
 	 */
-	private static function getLinkToST( $fieldGroupId ) {
-		return sprintf(
-			admin_url( 'admin.php?page=wpml-string-translation/menu/string-translation.php&context=%s' ),
-			Package::FIELD_GROUP_PACKAGE_KIND_SLUG . '-' . $fieldGroupId
-		);
+	private static function getLinkToTMDashboard( $fieldGroupId ) {
+		/* @todo: The TM Dashboard does not support filtering in generic sections, besides the Strings section */
+		return AdminUrl::getWPMLTMDashboardPackageSection( Package::FIELD_GROUP_PACKAGE_KIND_SLUG );
 	}
 
 	/**

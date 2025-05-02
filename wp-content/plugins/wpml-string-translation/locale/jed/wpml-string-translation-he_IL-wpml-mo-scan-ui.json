@@ -1,0 +1,97 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "WPML has detected changed or new MO files": [
+            "WPML זיהה שינוי או חדש מו קבצים"
+         ],
+         "There are new or updated .mo files. WPML needs to scan them to find strings for translation.": [
+            "ישנם קבצי .mo חדשים או מעודכנים. WPML צריך לסרוק אותם כדי למצוא מחרוזות לתרגום."
+         ],
+         "Scan translation files": [
+            "סרוק קבצי תרגום"
+         ],
+         "Scanned %1$d of %2$d files...": [
+            "נסרק %1$d שֶׁל %2$d קבצים..."
+         ],
+         "Generated files for %1$d of %2$d sites...": [
+            "קבצים שנוצרו עבור %1$d שֶׁל %2$d אתרים..."
+         ],
+         "Generated %1$d of %2$d files...": [
+            "נוצר %1$d שֶׁל %2$d קבצים..."
+         ],
+         "WPML needs to generate .mo files": [
+            "WPML צריך ליצור קבצי .mo"
+         ],
+         "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end. However, the folder that should hold these .mo files is not open for writing.": [
+            "WPML String Translation משתמש בקבצי .mo במקום קריאות למסד נתונים. WPML צריך ליצור קבצי .mo אלה כדי שתרגומים יופיעו בחזית הקצה. עם זאת, התיקיה שאמורה להכיל קבצי .mo אלה אינה פתוחה לכתיבה."
+         ],
+         "Please use your admin control panel or an FTP program to make the following folder writeable:": [
+            "אנא השתמש בלוח הבקרה של המנהל או בתוכנת FTP כדי להפוך את התיקיה הבאה לניתנת לכתיבה:"
+         ],
+         "There was a problem creating the .mo files": [
+            "הייתה בעיה ביצירת קובצי ה- .mo"
+         ],
+         "You can try again now or try again later by going to ": [
+            "אתה יכול לנסות שוב עכשיו או לנסות שוב מאוחר יותר על ידי מעבר אל "
+         ],
+         "Translations are missing from the front-end until you generate .mo files": [
+            "חסרים תרגומים בחזית הקצה עד שתיצור קבצי .mo"
+         ],
+         "Your site doesn't have the .mo files that WPML needs in order to display translated strings on the front-end. To generate these .mo files, remember to go to ": [
+            "לאתר שלך אין את קבצי ה- .mo ש-WPML צריך כדי להציג מחרוזות מתורגמות בחזית הקצה. כדי ליצור קבצי .mo אלה, זכור ללכת אל "
+         ],
+         "WPML->Theme and plugins localization.": [
+            "WPML->לוקליזציה של ערכות נושא ותוספים."
+         ],
+         "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end.": [
+            "WPML String Translation משתמש בקבצי .mo במקום קריאות למסד נתונים. WPML צריך ליצור קבצי .mo אלה כדי שתרגומים יופיעו בחזית הקצה."
+         ],
+         "Try again": [
+            "נסה שוב"
+         ],
+         "Generate .mo files": [
+            "צור קבצי .mo"
+         ],
+         "Close this message": [
+            "סגור את ההודעה הזו"
+         ],
+         "Find additional texts that WordPress, the theme and plugins created and choose which ones to translate": [
+            "מצא טקסטים נוספים ש-WordPress, הנושא והתוספים יצרו ובחר אילו מהם לתרגם"
+         ],
+         "Choose texts for translation": [
+            "בחר טקסטים לתרגום"
+         ],
+         "Some of the translations have changed": [
+            "חלק מהתרגומים השתנו"
+         ],
+         "Scan the selected components to make new texts available for translation.": [
+            "סרוק את הרכיבים שנבחרו כדי להפוך טקסטים חדשים לזמינים לתרגום."
+         ],
+         "Select all": [
+            "בחר הכל"
+         ],
+         "Plugins:": [
+            "תוספים:"
+         ],
+         "Themes:": [
+            "ערכות נושא:"
+         ],
+         "Core:": [
+            "הליבה:"
+         ],
+         "Can't find the strings you're looking to translate?": [
+            "אינך מוצא את המחרוזות שאתה מחפש לתרגם?"
+         ],
+         "Most likely you cannot see the strings you want to translate because:": [
+            "סביר להניח שאינך יכול לראות את המחרוזות שברצונך לתרגם כי:"
+         ],
+         "Texts are not selected for translation": [
+            "טקסטים לא נבחרים לתרגום"
+         ]
+      }
+   }
+}

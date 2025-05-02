@@ -24,9 +24,9 @@ class WPML_Admin_Scripts_Setup extends WPML_Full_Translation_API {
 	}
 
 	public function register_styles() {
-		wp_register_style( 'otgs-dialogs', ICL_PLUGIN_URL . '/res/css/otgs-dialogs.css', array( 'wp-jquery-ui-dialog' ), ICL_SITEPRESS_VERSION );
-		wp_register_style( 'wpml-dialog', ICL_PLUGIN_URL . '/res/css/dialog.css', array( 'otgs-dialogs' ), ICL_SITEPRESS_VERSION );
-		wp_register_style( 'wpml-wizard', ICL_PLUGIN_URL . '/res/css/wpml-wizard.css', [], ICL_SITEPRESS_VERSION );
+		wp_register_style( 'otgs-dialogs', ICL_PLUGIN_URL . '/res/css/otgs-dialogs.css', array( 'wp-jquery-ui-dialog' ), ICL_SITEPRESS_SCRIPT_VERSION );
+		wp_register_style( 'wpml-dialog', ICL_PLUGIN_URL . '/res/css/dialog.css', array( 'otgs-dialogs' ), ICL_SITEPRESS_SCRIPT_VERSION );
+		wp_register_style( 'wpml-wizard', ICL_PLUGIN_URL . '/res/css/wpml-wizard.css', [], ICL_SITEPRESS_SCRIPT_VERSION );
 	}
 
 	private function print_js_globals() {
@@ -46,7 +46,9 @@ class WPML_Admin_Scripts_Setup extends WPML_Full_Translation_API {
                 icl_default_mark = '<?php echo icl_js_escape( __( 'default', 'sitepress' ) ); ?>',
                 icl_this_lang = '<?php echo esc_js( $this->sitepress->get_current_language() ); ?>',
                 icl_ajxloaderimg_src = '<?php echo esc_url( ICL_PLUGIN_URL ); ?>/res/img/ajax-loader.gif',
-                icl_cat_adder_msg = '<?php echo icl_js_escape( sprintf( __( 'To add categories that already exist in other languages go to the <a%s>category management page</a>', 'sitepress' ), ' href="' . admin_url( 'edit-tags.php?taxonomy=category' ) . '"' ) ); ?>';
+                icl_cat_adder_msg = '<?php echo icl_js_escape( sprintf( __( 'To add categories that already exist in other languages go to the <a%s>category management page</a>', 'sitepress' ), ' href="' . admin_url( 'edit-tags.php?taxonomy=category' ) . '"' ) ); ?>',
+				icl_choose_text = '<?php echo icl_js_escape( __('Choose', 'sitepress') ); ?>',
+				icl_enabled_text = '<?php echo icl_js_escape( __('Enabled', 'sitepress') ); ?>';
             // ]]>
 
 			<?php
@@ -221,7 +223,7 @@ class WPML_Admin_Scripts_Setup extends WPML_Full_Translation_API {
 				'wpml-color-picker',
 				ICL_PLUGIN_URL . '/res/css/colorpicker.css',
 				array( 'wp-color-picker' ),
-				ICL_SITEPRESS_VERSION
+				ICL_SITEPRESS_SCRIPT_VERSION
 			);
 			wp_enqueue_style( 'wpml-color-picker' );
 			wp_enqueue_script( 'jquery-ui-sortable' );
@@ -394,7 +396,9 @@ class WPML_Admin_Scripts_Setup extends WPML_Full_Translation_API {
 								$current_lang,
 								false
 							) : $term->term_id;
-						$js[]    = "jQuery('#in-" . $tax . '-' . $term_id . "').prop('checked', true);";
+						$js[]    = 'jQuery(\'input[id^="in-' . $tax . '-' . $term_id . '"]\').filter(function() {
+										return /^in-' . $tax . '-' . $term_id . '(-\\d+)?$/.test(this.id);
+									}).prop(\'checked\', true);';
 					} else {
 						if ( in_array( $tax, $translatable_taxs ) ) {
 							$term_id = $this->term_translations->term_id_in( $term->term_id, $current_lang, false );
@@ -458,9 +462,9 @@ class WPML_Admin_Scripts_Setup extends WPML_Full_Translation_API {
 			$page_basename = str_replace( '.php', '', $page );
 			$page_basename = preg_replace( '/[^\w-]/', '', $page_basename );
 		}
-		wp_enqueue_style( 'sitepress-style', ICL_PLUGIN_URL . '/res/css/style.css', array(), ICL_SITEPRESS_VERSION );
+		wp_enqueue_style( 'sitepress-style', ICL_PLUGIN_URL . '/res/css/style.css', array(), ICL_SITEPRESS_SCRIPT_VERSION );
 		if ( isset( $page_basename ) && file_exists( WPML_PLUGIN_PATH . '/res/css/' . $page_basename . '.css' ) ) {
-			wp_enqueue_style( 'sitepress-' . $page_basename, ICL_PLUGIN_URL . '/res/css/' . $page_basename . '.css', array(), ICL_SITEPRESS_VERSION );
+			wp_enqueue_style( 'sitepress-' . $page_basename, ICL_PLUGIN_URL . '/res/css/' . $page_basename . '.css', array(), ICL_SITEPRESS_SCRIPT_VERSION );
 		}
 
 		wp_enqueue_style( 'wpml-dialog' );

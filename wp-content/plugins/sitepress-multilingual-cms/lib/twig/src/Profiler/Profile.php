@@ -138,6 +138,7 @@ class Profile implements \IteratorAggregate, \Serializable
     }
     /**
      * @internal
+	 * @phpcs:disable PHPCompatibility.FunctionNameRestrictions.NewMagicMethods.__serializeFound
      */
     public function __serialize()
     {
@@ -145,7 +146,8 @@ class Profile implements \IteratorAggregate, \Serializable
     }
     /**
      * @internal
-     */
+	 * @phpcs:disable PHPCompatibility.FunctionNameRestrictions.NewMagicMethods.__unserializeFound
+	 */
     public function __unserialize(array $data)
     {
         list($this->template, $this->name, $this->type, $this->starts, $this->ends, $this->profiles) = $data;

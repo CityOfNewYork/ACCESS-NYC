@@ -12,16 +12,22 @@
             "עוגן HTML"
          ],
          "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
-            "הוסף קיצור דרך לבלוק זה בעת טעינת הדף באמצעות כתובת URL “#anchor”."
+            "הוסף קיצור דרך לבלוק זה בעת טעינת העמוד באמצעות כתובת ה-URL \"#anchor\"."
          ],
          "Additional CSS class(es)": [
             "מחלקות CSS נוספות"
          ],
          "Separate multiple classes with spaces.": [
-            "הפרד בין מחלקות באמצעות רווחים."
+            "הפרד בין מספר מחלקות באמצעות רווחים."
          ],
          "Color": [
             "צבע"
+         ],
+         "px": [
+            "פיקסלים"
+         ],
+         "%": [
+            "%"
          ],
          "Dimensions": [
             "מידות"
@@ -30,19 +36,19 @@
             "בלוק"
          ],
          "Block margin": [
-            "שולי בלוק"
+            "שוליים של הבלוק"
          ],
          "Block padding": [
-            "ריפוד בלוק"
+            "ריפוד של הבלוק"
          ],
          "LANGUAGE": [
             "שפה"
          ],
          "Language spacing": [
-            "ריווח שפה"
+            "מרווח בין שפות"
          ],
          "Language padding": [
-            "ריפוד שפה"
+            "ריפוד של השפה"
          ],
          "Display": [
             "תצוגה"
@@ -54,7 +60,7 @@
             "הצג שם שפה"
          ],
          "Display language name in": [
-            "הצג שם שפה ב-"
+            "הצג את שם השפה ב"
          ],
          "Style": [
             "סגנון"
@@ -69,7 +75,7 @@
             "גובה"
          ],
          "Spacing": [
-            "ריווח"
+            "מרווח"
          ],
          "Allow wrapping to multiple lines": [
             "אפשר גלישה למספר שורות"
@@ -123,7 +129,7 @@
             "יישר פריטים לימין"
          ],
          "Justify items space between": [
-            "יישר רווח בין פריטים"
+            "יישר פריטים עם רווח ביניהם"
          ],
          "Horizontal": [
             "אופקי"
@@ -143,23 +149,32 @@
          "X-Large": [
             "גדול במיוחד"
          ],
+         "Ab": [
+            "אב"
+         ],
+         "AB": [
+            "אב"
+         ],
+         "ab": [
+            "אב"
+         ],
          "Small": [
             "קטן"
          ],
          "Displays the WPML Language Switcher.": [
-            "מציג את מחליף השפה של WPML."
+            "מציג את מחליף השפות של WPML."
          ],
          "Language Switcher": [
-            "מעביר שפה"
+            "מחליף שפות"
          ],
          "displays the WPML Language Switcher": [
-            "מציג את מחליף השפה של WPML"
+            "מציג את מחליף השפות של WPML"
          ],
          "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
-            "מציג את מחליף השפה של WPML. <br/> למד <a>כיצד לתרגם בלוק זה</a>."
+            "מציג את מחליף השפות של WPML. <br/> למד <a>כיצד לתרגם בלוק זה</a>."
          ],
          "Navigation Language Switcher": [
-            "מחליף שפה בניווט"
+            "מחליף שפות לניווט"
          ],
          "Reset all": [
             "אפס הכל"

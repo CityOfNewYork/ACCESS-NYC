@@ -1,0 +1,109 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "What should happen with your automatically translated content?": [
+            "Điều gì nên xảy ra với nội dung được dịch tự động của bạn?"
+         ],
+         "Wait for review": [
+            "Chờ xét duyệt"
+         ],
+         "You check and approve translations before publishing.": [
+            "Bạn kiểm tra và phê duyệt bản dịch trước khi xuất bản."
+         ],
+         "Your translators check and approve translations before publishing.": [
+            "Các dịch giả của bạn kiểm tra và phê duyệt bản dịch trước khi xuất bản."
+         ],
+         "Publish and mark for review": [
+            "Xuất bản và đánh dấu để xét duyệt"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "WPML xuất bản bản dịch ngay lập tức nhưng đánh dấu chúng để bạn kiểm tra khi thuận tiện."
+         ],
+         "WPML publishes translations immediately but flags them for your translators to check at their convenience.": [
+            "WPML xuất bản bản dịch ngay lập tức nhưng đánh dấu chúng để dịch giả của bạn kiểm tra khi thuận tiện."
+         ],
+         "Publish without review": [
+            "Xuất bản mà không cần xét duyệt"
+         ],
+         "The system publishes translations straight away, skipping the review process.": [
+            "Hệ thống xuất bản bản dịch ngay lập tức, bỏ qua quy trình xét duyệt."
+         ],
+         "Automatic translation": [
+            "Dịch tự động"
+         ],
+         "What should happen with your automatically translated content": [
+            "Điều gì nên xảy ra với nội dung được dịch tự động của bạn"
+         ],
+         "Save settings": [
+            "Lưu cài đặt"
+         ],
+         "Translate drafts as I save them (consumes a bit more translation credits).": [
+            "Dịch bản nháp khi tôi lưu chúng (tiêu tốn nhiều tín dụng dịch thuật hơn một chút)."
+         ],
+         "Do you want to translate drafts automatically?": [
+            "Bạn có muốn dịch bản nháp tự động không?"
+         ],
+         "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s.": [
+            "Tính năng này chỉ khả dụng khi bạn kích hoạt <q id=\"q-first-1\">Dịch Mọi Thứ Tự Động</q> từ %sBảng Điều Khiển Dịch Thuật%s."
+         ],
+         "Don't translate drafts. Only translate when I publish content.": [
+            "Không dịch bản nháp. Chỉ dịch khi tôi xuất bản nội dung."
+         ],
+         "%d credits/word": [
+            "%d tín dụng/từ"
+         ],
+         "Informal": [
+            "Không trang trọng"
+         ],
+         "Automatic": [
+            "Tự động"
+         ],
+         "Formal": [
+            "Trang trọng"
+         ],
+         "Which translation engines do you want to use?": [
+            "Bạn muốn sử dụng công cụ dịch nào?"
+         ],
+         "Automatic translation engines differ in translation style and supported language pairs.\nIf your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it.\n": [
+            "Các công cụ dịch tự động khác nhau về phong cách dịch và các cặp ngôn ngữ được hỗ trợ.\nNếu công cụ dịch ưa thích của bạn không hỗ trợ cặp ngôn ngữ bạn muốn sử dụng, chúng tôi sẽ chuyển sang công cụ ưa thích tiếp theo của bạn có hỗ trợ nó.\n"
+         ],
+         "Drag & drop to sort from the most to the least preferred engine.": [
+            "Kéo & thả để sắp xếp từ công cụ ưa thích nhất đến ít ưa thích nhất."
+         ],
+         "Choose the tone of your automatic translations.": [
+            "Chọn giọng điệu cho bản dịch tự động của bạn."
+         ],
+         "Read more": [
+            "Đọc thêm"
+         ],
+         "Learn more": [
+            "Tìm hiểu thêm"
+         ],
+         "On": [
+            "Bật"
+         ],
+         "Off": [
+            "Tắt"
+         ],
+         "Could not load translation engines": [
+            "Không thể tải các công cụ dịch thuật"
+         ],
+         "Could not update engine": [
+            "Không thể cập nhật công cụ"
+         ],
+         "Could not save review mode": [
+            "Không thể lưu chế độ xem xét"
+         ],
+         "Could not save translate everything drafts": [
+            "Không thể lưu bản nháp dịch mọi thứ"
+         ],
+         "Settings saved successfully": [
+            "Đã lưu cài đặt thành công"
+         ]
+      }
+   }
+}

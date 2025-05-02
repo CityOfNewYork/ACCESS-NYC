@@ -1,0 +1,82 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Not included in String Translation": [
+            "ไม่รวมอยู่ในการแปลสตริง"
+         ],
+         "Registered and locked": [
+            "ลงทะเบียนและล็อคแล้ว"
+         ],
+         "Text": [
+            "ข้อความ"
+         ],
+         "Numeric": [
+            "ตัวเลข"
+         ],
+         "All Types": [
+            "ทุกประเภท"
+         ],
+         "Search": [
+            "ค้นหา"
+         ],
+         "Communication error": [
+            "ข้อผิดพลาดในการสื่อสาร"
+         ],
+         "The action failed.": [
+            "การดำเนินการล้มเหลว"
+         ],
+         "All (%d)": [
+            "ทั้งหมด (%d)"
+         ],
+         "Included in String Translation (%d)": [
+            "รวมอยู่ในการแปลสตริง (%d)"
+         ],
+         "Not included in String Translation (%d)": [
+            "ไม่รวมอยู่ในการแปลสตริง (%d)"
+         ],
+         "This setting is locked by a WPML configuration file.": [
+            "การตั้งค่านี้ถูกล็อกโดยไฟล์การกำหนดค่า WPML"
+         ],
+         "Option": [
+            "ตัวเลือก"
+         ],
+         "Value": [
+            "ค่า"
+         ],
+         "Type": [
+            "พิมพ์"
+         ],
+         "State": [
+            "สถานะ"
+         ],
+         "Export as a WPML configuration file": [
+            "ส่งออกเป็นไฟล์การกำหนดค่า WPML"
+         ],
+         "Cancel": [
+            "ยกเลิก"
+         ],
+         "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
+            "บันทึกสิ่งต่อไปนี้ลงใน wpml-config.xml ในรูทของธีมหรือปลั๊กอินของคุณ"
+         ],
+         "No options found.": [
+            "ไม่พบตัวเลือก"
+         ],
+         "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
+            "ตรวจสอบให้แน่ใจว่าคุณได้บันทึกตัวเลือกธีมของคุณอย่างน้อยหนึ่งครั้ง บางธีมจะเพิ่มสิ่งเหล่านี้ลงในเท่านั้นwp_options ตารางหลังจากที่ผู้ใช้บันทึกการเปลี่ยนแปลงค่าเริ่มต้นของธีมอย่างชัดเจน"
+         ],
+         "Add to String Translation": [
+            "เพิ่มในการแปลสตริง"
+         ],
+         "Remove from String Translation": [
+            "ลบออกจากการแปลสตริง"
+         ],
+         "Included in String Translation": [
+            "รวมอยู่ในการแปลสตริง"
+         ]
+      }
+   }
+}

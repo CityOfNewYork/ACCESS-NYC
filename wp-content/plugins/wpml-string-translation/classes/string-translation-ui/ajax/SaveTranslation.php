@@ -16,7 +16,7 @@ class SaveTranslation implements IHandler {
 		$translation = Obj::prop( 'translation', $data );
 		$lang        = Obj::prop( 'lang', $data );
 
-		if ( $id && $translation && $lang ) {
+		if ( $id && trim( $translation ?? '' ) !== '' && $lang ) {
 			return Either::of( STAPI::saveTranslation( $id, $lang, $translation, ICL_TM_COMPLETE ) );
 		} else {
 			return Either::left( 'invalid data' );

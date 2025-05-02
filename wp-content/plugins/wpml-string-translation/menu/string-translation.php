@@ -1,6 +1,8 @@
 <?php
 
 use WPML\ST\Gettext\AutoRegisterSettings;
+use function WPML\Container\make;
+use WPML\UIPage;
 
 /** @var WPML_String_Translation $WPML_String_Translation */
 global $sitepress, $WPML_String_Translation, $wpdb, $wp_query;
@@ -82,6 +84,11 @@ function _icl_string_translation_rtl_textarea( $language ) {
 
 $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 
+/** @var WPML_PO_Import_Strings $wpml_po_import_strings */
+$wpml_po_import_strings = WPML\Container\make( WPML_PO_Import_Strings::class );
+
+wp_enqueue_script( 'wpml-tooltip', WPML_ST_URL . '/res/js/tooltip.js', array( 'wp-pointer', 'jquery' ), WPML_ST_VERSION );
+wp_enqueue_style( 'wpml-tooltip', WPML_ST_URL . '/res/css/tooltip/tooltip.css', array( 'wp-pointer' ), WPML_ST_VERSION );
 ?>
 <div class="wrap<?php if ($is_troubleshooting): ?> st-troubleshooting<?php endif; ?>">
 	<h2><?php echo esc_html__( $is_troubleshooting ? 'String Troubleshooting' : 'String translation', 'wpml-string-translation' ); ?></h2>
@@ -128,6 +135,11 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 			name="icl_st_domain_name"
 			value="<?php echo $icl_st_domain; ?>"
 		/>
+		<input
+			type="hidden"
+			name="icl_st_po_source_language"
+			value="<?php echo filter_input( INPUT_POST, 'icl_st_po_source_language', FILTER_SANITIZE_FULL_SPECIAL_CHARS ); ?>"
+		/>
 
 		<table id="icl_po_strings" class="widefat" cellspacing="0">
 			<thead>
@@ -149,7 +161,7 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 					$k++;
 					?>
 					<tr>
-						<td><input class="icl_st_row_cb" type="checkbox" name="icl_strings_selected[]"
+						<td><input class="icl_st_row_cb js-icl-st-row-cb" type="checkbox" name="icl_strings_selected[]"
 							<?php
 							if ( $str['exists'] || $use_po_translations !== true ) :
 								?>
@@ -176,17 +188,16 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 		</table>
 		<a name="add_po_strings_confirm"></a>
 
-			<p><span style="float: left"><input class="js-wpml-btn-cancel button" type="button" value="<?php echo esc_attr__( 'Cancel', 'wpml-string-translation' ); ?>"
+			<p><span style="float: left"><input class="js-wpml-btn-cancel button wpml-button base-btn gray-light-btn" type="button" value="<?php echo esc_attr__( 'Cancel', 'wpml-string-translation' ); ?>"
 												onclick="location.href='admin.php?page=<?php echo htmlspecialchars( $_GET['page'], ENT_QUOTES ); ?>'"/>
-		&nbsp;<input class="js-wpml-btn-add-strings button-primary" type="submit" value="<?php echo esc_attr__( 'Add selected strings', 'wpml-string-translation' ); ?>"/></span><span class="spinner" style="float: left"></span>
+		&nbsp;<input disabled="disabled" class="js-wpml-btn-add-strings button-primary wpml-button base-btn" type="submit" value="<?php echo esc_attr__( 'Add selected strings', 'wpml-string-translation' ); ?>"/></span><span class="spinner" style="float: left"></span>
 		</p>
 		</form>
 
 	<?php else : ?>
 
-		<p class="wpml-string-translation-filter">
-			<?php echo esc_html__( 'Display:', 'wpml-string-translation' ); ?>
-		<select name="icl_st_filter_status">
+		<div class="wpml-string-translation-filter">
+		<select aria-label="<?php echo esc_html__( 'Display:', 'wpml-string-translation' ); ?>" name="icl_st_filter_status">
 			<?php
 			$createOption = function( $str, $option ) use ( $status_filter ) {
 				$selected = selected( $option, $status_filter, false );
@@ -202,15 +213,54 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 			$createOption( __( 'Translation needed', 'wpml-string-translation' ), ICL_TM_NOT_TRANSLATED );
 			$createOption( __( 'Waiting for translator', 'wpml-string-translation' ), ICL_TM_WAITING_FOR_TRANSLATOR );
 			$createOption( __( 'Partial Translation', 'wpml-string-translation' ), ICL_STRING_TRANSLATION_PARTIAL );
+			$createOption( __( 'Auto-registered, translation needed', 'wpml-string-translation' ), ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_FRONTEND );
 	?>
 
 		</select>
+		<span style="white-space:nowrap">
+			<label for="icl_st_filter_search" class="wpml-string-translation-filter-search">
+				<span class="visually-hidden"><?php echo esc_html__( 'Search for:', 'wpml-string-translation' ); ?></span>
+				<input
+					placeholder="<?php echo esc_html__( 'Search', 'wpml-string-translation' ); ?>"
+					type="text" id="icl_st_filter_search" value="<?php echo $search_filter; ?>"
+				/>
+			</label>
+			<div class="wpml-string-translation-filter__checkboxes" style="display: none;">
+				<label for="icl_st_filter_search_em">
+					<input
+						type="checkbox"
+						id="icl_st_filter_search_em"
+						value="1"
+						<?php
+						if ( $exact_match ) :
+							?>
+							checked="checked"
+						<?php endif; ?>
+					/>
+					<span><?php echo esc_html__( 'Exact match', 'wpml-string-translation' ); ?></span>
+				</label>
+
+				<label for="search_translation">
+					<input
+						type="checkbox"
+						id="search_translation"
+						value="1"
+						<?php
+						if ( $search_translation ) :
+							?>
+							checked="checked"
+						<?php endif; ?>
+						class="js-otgs-popover-tooltip"
+						title="<?php echo esc_attr__( 'Search in both the original language and in translations. Searching in translations may take a bit of time.', 'wpml-string-translation' ); ?>"
+					/>
+					<span><?php echo esc_html__( 'Include translations', 'wpml-string-translation' ); ?></span>
+				</label>
+			</div>
+		</span>
 
 			<?php if ( ! empty( $icl_contexts ) ) : ?>
-				&nbsp;&nbsp;
 				<span style="white-space:nowrap">
-				<?php echo esc_html__( 'In domain:', 'wpml-string-translation' ); ?>
-					<select name="icl_st_filter_context">
+					<select aria-label="<?php echo esc_html__( 'In domain:', 'wpml-string-translation' ); ?>" name="icl_st_filter_context">
 						<option value=""
 								<?php
 								if ( $context_filter === false ) :
@@ -232,11 +282,9 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 					</select>
 		</span>
 			<?php endif; ?>
-
 		<?php if ( $translation_priorities ) : ?>
 			<span style="white-space:nowrap">
-				<?php echo esc_html__( 'With Priority:', 'wpml-string-translation' ); ?>
-				<select name="icl-st-filter-translation-priority">
+				<select aria-label="<?php echo esc_html__( 'With Priority:', 'wpml-string-translation' ); ?>" name="icl-st-filter-translation-priority">
 					<option value=""><?php esc_html_e( 'All Translation Priorities', 'wpml-string-translation' ); ?></option>
 					<?php
 					foreach ( $translation_priorities as $translation_priority ) {
@@ -249,59 +297,155 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 				</select>
 			</span>
 		<?php endif; ?>
-		&nbsp;&nbsp;
-		<span style="white-space:nowrap">
-		<label>
-		<?php echo esc_html__( 'Search for:', 'wpml-string-translation' ); ?>
-		<input type="text" id="icl_st_filter_search" value="<?php echo $search_filter; ?>" />
+			<?php $search_filter_safe = is_null($search_filter) || $search_filter === false ? '' : $search_filter; ?>
+		<input class="button" type="button" value="<?php esc_attr_e( 'Filter', 'wpml-string-translation' ); ?>" id="icl_st_filter_search_sb"/>
+		<label for="icl_st_filter_search_remove" style="white-space:nowrap;">
+			<span class="visually-hidden">
+				<?php printf( esc_html__( 'Showing only strings that contain %s', 'wpml-string-translation' ), '<i>' . esc_html( $search_filter_safe ) . '</i>' ); ?>
+			</span>
+			<input style="display:none;" class="button" type="button" value="<?php esc_attr_e( 'x &nbsp;Clear filters', 'wpml-string-translation' ); ?>" id="icl_st_filter_search_remove"/>
 		</label>
 
-		<label>
-		<input type="checkbox" id="icl_st_filter_search_em" value="1"
-		<?php
-		if ( $exact_match ) :
-			?>
- checked="checked"<?php endif; ?> />
-			<?php echo esc_html__( 'Exact match', 'wpml-string-translation' ); ?>
-		</label>
+		</div>
+		<div id="wpml-mo-scan-st-page"<?php if ( ! $search_filter ) : ?> style="display: none"<?php endif; ?>>
+			<div class="wpml-strings-widgets-wrap wpml-strings-single-widget-wrap">
+				<div class="wpml-string-widgets clear">
+					<div class="postbox-container">
+						<div class="postbox closed">
+							<div class="hndle-wrap clear">
+								<h3 class="hndle">
+									<span><?php echo esc_html__( "Can't find the strings you're looking to translate? Add more strings for translation.", 'wpml-string-translation' ); ?></span>
+								</h3>
+								<div class="handlediv" title="<?php echo esc_attr__( 'Click to toggle', 'wpml-string-translation' ); ?>">
+									<div class="icon-wrap">
+										<div class="icon-text">more details</div>
+										<svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg>
+									</div>
+								</div>
+							</div>
+							<div class="inside wpml-st-translate-user-fields">
+								<?php
+									/** @var AutoRegisterSettings $auto_register_settings */
+									$auto_register_settings = WPML\Container\make( AutoRegisterSettings::class );
+								?>
+								<p class="link-wrap">
+									<a href="admin.php?page=<?php echo WPML_PLUGIN_FOLDER; ?>/menu/theme-localization.php" class="external-link"><?php esc_html_e( 'Strings in the theme and plugins', 'wpml-string-translation' ); ?></a>
+								</p>
+								<p class="link-wrap">
+									<a
+										href="admin.php?page=<?php echo WPML_ST_FOLDER; ?>/menu/string-translation.php&amp;trop=1"
+										class="external-link js-wpml-translate-admin-texts js-wpml-st-tooltip-open wpml-st-tooltip-open"
+										data-content="<?php echo esc_attr__( 'Translate front-end texts you can customize from the WordPress admin like footer text, copyright notices, plugin options and settings, time format, widget texts, and more.', 'wpml-string-translation' ); ?>"
+										data-link-text="<?php echo esc_attr__( 'Translating Strings From Admin and Settings', 'wpml-string-translation' ); ?>"
+										data-link-url="https://wpml.org/documentation/getting-started-guide/string-translation/finding-strings-that-dont-appear-on-the-string-translation-page/?utm_source=plugin&utm_medium=gui&utm_campaign=string-translation&utm_term=admin-texts-tooltip#translate-admin-and-settings-strings"
+										data-link-target="blank"
+									>
+										<?php esc_html_e( 'Translate texts in admin screens', 'wpml-string-translation' ); ?>
+									</a>
+								</p>
+								<p class="link-wrap">
+									<a
+										href="#"
+										class="wpml-st-link-no-border external-link js-wpml-translate-user-fields js-wpml-st-tooltip-open wpml-st-tooltip-open"
+										data-content="<?php echo esc_attr__( 'Translate User Meta Information', 'wpml-string-translation' ); ?>"
+										data-link-text="<?php echo esc_attr__( 'Making User Meta Information Translatable', 'wpml-string-translation' ); ?>"
+										data-link-url="https://wpml.org/documentation/getting-started-guide/string-translation/translating-user-meta-information-with-wpml/?utm_source=plugin&utm_campaign=string-translation&utm_medium=gui&utm_term=user-meta-tooltip"
+										data-link-target="blank"
+									>
+										<?php esc_html_e( 'Translate User Meta Information', 'wpml-string-translation' ); ?>
+									</a>
+								</p>
 
-		<label>
-		<input
-			type="checkbox"
-			id="search_translation"
-			value="1"
-			<?php
-			if ( $search_translation ) :
-				?>
-				checked="checked"<?php endif; ?>
-			class="js-otgs-popover-tooltip"
-			title="<?php echo esc_attr__( 'Search in both the original language and in translations. Searching in translations may take a bit of time.' ); ?>"
-		/>
-			<?php echo esc_html__( 'Include translations', 'wpml-string-translation' ); ?>
-		</label>
+								<div class="wpml-st-select-translate-user-fields-box"
+									 style="display:none;"
+									 title="<?php echo esc_attr__( 'Translate User Meta Information', 'wpml-string-translation' ); ?>"
+									 data-saveButtonTitle="<?php echo esc_attr__( 'Apply', 'wpml-string-translation' ); ?>"
+									 data-cancelButtonTitle="<?php echo esc_attr__( 'Cancel', 'wpml-string-translation' ); ?>"
+									 data-saveConfirmMsg="<?php echo esc_attr__( 'Data saved', 'wpml-string-translation' ); ?>"
+								>
+									<div class="wpml-st-select-translate-user-fields-box-subheading">
+										<p>
+											<?php echo esc_html__( 'WPML allows you to translate user information like the name, nickname, biography, and more.', 'wpml-string-translation' ); ?>
+										</p>
+										<p>
+											<?php echo esc_html__( 'Select the user roles whose information you want to make translatable and then use the String Translation page to translate it.', 'wpml-string-translation' ); ?>
+										</p>
+										<p>
+											<?php echo sprintf(
+												esc_html__( 'Learn more about %1$stranslating user meta information.%2$s', 'wpml-string-translation' ),
+												'<a class="wpml-st-link-no-border" href="https://wpml.org/documentation/getting-started-guide/string-translation/translating-user-meta-information-with-wpml/?utm_source=plugin&utm_campaign=string-translation&utm_medium=gui&utm_term=user-meta-dialog" target="_blank">',
+												'</a>'
+											); ?>
+										</p>
+									</div>
+									<form id="icl_st_more_options" name="icl_st_more_options" method="post" action="">
+										<?php wp_nonce_field( 'icl_st_more_options_nonce', '_icl_nonce' ); ?>
+										<?php
+											$editable_roles = get_editable_roles();
+											if ( ! isset( $string_settings['translated-users'] ) ) {
+												$string_settings['translated-users'] = array();
+											}
+											$areAllChecked = true;
+											foreach ( $editable_roles as $role => $details ) {
+												$name = translate_user_role( $details['name'] );
+												if ( ! in_array( $role, (array) $string_settings['translated-users'] ) ) {
+													$areAllChecked = false;
+												}
+											}
+										?>
 
-		<input class="button" type="button" value="<?php esc_attr_e( 'Search', 'wpml-string-translation' ); ?>" id="icl_st_filter_search_sb"/>
-		</span>
+										<div class="checkboxes-select-all-box modal-float-childs clear">
+											<div class="checkbox-wrap checkbox-select-all-wrap">
+												<div class="checkbox">
+													<p class="select-all-wrap">
+														<input type="checkbox" name="select_all" <?php checked( $areAllChecked ); ?> />
+														<span class='checkbox-label'><?php echo esc_html__( 'Select all', 'wpml-string-translation' ); ?></span>
+													</p>
+												</div>
+											</div>
+										</div>
 
-		<?php if ( $search_filter ) : ?>
-		<span style="white-space:nowrap">
-			<?php printf( esc_html__( 'Showing only strings that contain %s', 'wpml-string-translation' ), '<i>' . esc_html( $search_filter ) . '</i>' ); ?>
-			<input class="button" type="button" value="<?php esc_attr_e( 'Exit search', 'wpml-string-translation' ); ?>" id="icl_st_filter_search_remove"/>
-		</span>
-		<?php endif; ?>
+										<div class="separator separator-no-padding-top"></div>
 
-		</p>
-		<div id="wpml-mo-scan-st-page"></div>
+										<div class="checkboxes-list">
+											<?php foreach ( $editable_roles as $role => $details ) : ?>
+												<?php
+													$name    = translate_user_role( $details['name'] );
+													$checked = in_array( $role, (array) $string_settings['translated-users'] ) ? ' checked="checked"' : '';
+												?>
+												<div class="checkbox-wrap">
+													<div class="checkbox">
+														<input
+															type="checkbox"
+															name="users[<?php echo $role; ?>]"
+															value="1"
+															<?php echo $checked; ?>
+														/>
+														<span class='checkbox-label'><?php echo $name; ?></span>
+													</div>
+												</div>
+											<?php endforeach; ?>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="wpml-mo-scan-st-page-pregenerate"></div>
+		</div>
+		<!-- Consider removal
 		<?php if ( ! empty( $icl_contexts ) ) : ?>
 			<p><a href="#" id="wpml-language-of-domains-link"><?php esc_html_e( 'Languages of domains', 'wpml-string-translation' ); ?></a></p>
 		<?php endif; ?>
+		-->
 		<?php
 		$string_translation_table_ui = new WPML_String_Translation_Table( icl_get_string_translations() );
 		$string_translation_table_ui->render();
 
 		if ( ! empty( $icl_contexts ) ) {
-			$string_factory                       = new WPML_ST_String_Factory( $wpdb );
-			$change_string_domain_language_dialog = new WPML_Change_String_Domain_Language_Dialog( $wpdb, $sitepress, $string_factory );
+			$change_string_domain_language_dialog = make( \WPML_Change_String_Domain_Language_Dialog::class );
 			$change_string_domain_language_dialog->render( $icl_contexts );
 		}
 		$get_show_results = filter_var( isset( $_GET['show_results'] ) ? $_GET['show_results'] : '', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
@@ -333,7 +477,7 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 		}
 		?>
 
-	<div class="tablenav icl-st-tablenav">
+	<div class="tablenav icl-st-tablenav js-icl-st-tablenav">
 		<?php
 		if ( $wp_query->found_posts > 10 ) {
 			$paged = filter_input( INPUT_GET, 'paged', FILTER_SANITIZE_NUMBER_INT );
@@ -361,8 +505,8 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 						'format'    => '',
 						'total'     => (int) $wp_query->max_num_pages,
 						'current'   => (int) $paged,
-						'prev_text' => '&laquo;',
-						'next_text' => '&raquo;',
+						'prev_text' => '',
+						'next_text' => '',
 						'add_args'  => isset( $icl_translation_filter ) ? $icl_translation_filter : array(),
 					)
 				);
@@ -378,7 +522,7 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 
 					if ( $page_links ) {
 						$page_links_text = sprintf(
-							'<span class="displaying-num">' . esc_html__( 'Displaying %1$s&#8211;%2$s of %3$s', 'wpml-string-translation' ) . '</span>%4$s',
+							'<span class="displaying-num">' . esc_html__( 'Displaying %1$s&#8211;%2$s of %3$s', 'wpml-string-translation' ) . '</span><div class="page-buttons">%4$s</div>',
 							number_format_i18n( ( (int) $paged - 1 ) * $wp_query->query_vars['posts_per_page'] + 1 ),
 							number_format_i18n( min( (int) $paged * $wp_query->query_vars['posts_per_page'], $wp_query->found_posts ) ),
 							number_format_i18n( $wp_query->found_posts ),
@@ -391,9 +535,9 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 					if ( ! $get_show_results ) {
 						?>
 						<div class="icl-st-per-page">
+						<span><?php
+						echo esc_html__( 'Strings per page:', 'wpml-string-translation' );?></span>
 						<?php
-						echo esc_html__( 'Strings per page:', 'wpml-string-translation' );
-
 						$strings_per_page = $wp_query->query_vars['posts_per_page'];
 
 						$option_values = array( 10, 20, 50, 100 );
@@ -415,7 +559,7 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 							<select name="icl_st_per_page"
 									onchange="location.href='<?php echo esc_url( $url_page_size ); ?>&amp;strings_per_page='+this.value">
 							<?php echo implode( $options ); ?>
-							</select>&nbsp;
+							</select>
 							<a href="<?php echo esc_url( $url_show_all_results ); ?>"><?php echo esc_html__( 'Display all results', 'wpml-string-translation' ); ?></a>
 						</div>
 						<?php
@@ -424,29 +568,24 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 			</div>
 				<?php
 			}
-		}
-		?>
+		} else {?>
+			<div></div>
+		<?php }?>
 
 		<?php if ( current_user_can( 'manage_options' ) || current_user_can( 'manage_translations' ) ) :  // the rest is only for admins or translation mangagers, not for editors ?>
 
 		<div class="icl-st-bulk-actions">
 			<input type="hidden" id="_icl_nonce_dstr"
 				   value="<?php echo wp_create_nonce( 'icl_st_delete_strings_nonce' ); ?>"/>
-						<div id="wpml-st-package-incomplete"
+						<div class="error notice-error otgs-notice notice" id="wpml-st-package-incomplete"
 							 style="display:none;color:red;"><?php echo esc_html__( 'You have selected strings belonging to a package. Please select all strings from the affected package or unselect these strings.', 'wpml-string-translation' ); ?></div>
-						<div id="wpml-st-non-default-language-string" data-show="true" class="ant-alert ant-alert-warning ant-alert-warning-override"
-							 role="alert" style="display:none;">
-							<i class="ant-alert-icon otgs-ico otgs-ico-warning-o"></i>
-							<div class="ant-alert-content">
-								<div class="ant-alert-message"><?php echo esc_html__( 'Selected strings are not in the site\'s default language and will not be translated automatically if you\'re using the "Translate Everything Automatically" mode. Instead, after sending them for translation here, you need to go to the WPML -> Translations page and translate them manually.', 'wpml-string-translation' ); ?></div>
-								<div class="ant-alert-description"></div>
-							</div>
-						</div>
-			<input type="button" class="button button-secondary" id="icl_st_delete_selected"
-				   value="<?php echo esc_attr__( 'Delete selected strings', 'wpml-string-translation' ); ?>"
+			<button type="button" class="button button-secondary" id="icl-st-delete-selected"
 				   data-confirm="<?php echo esc_attr__( "Are you sure you want to delete these strings?\nTheir translations will be deleted too.", 'wpml-string-translation' ); ?>"
 				   data-error="<?php echo __( 'WPML could not delete the strings', 'wpml-string-translation' ); ?>"
-				   disabled="disabled"/>
+					disabled="disabled"
+			>
+				<?php echo esc_attr__( 'Delete selected strings', 'wpml-string-translation' ); ?>
+			</button>
 
 			<?php
 
@@ -465,258 +604,233 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 		</div>
 			</div>
 
-		<br clear="all" />
-
-			<?php do_action( 'wpml_st_below_menu', $status_filter_lang, 10, 2 ); ?>
-
 		<br style="clear:both;" />
-		<div id="dashboard-widgets-wrap" class="wpml-strings-widgets">
-			<div id="dashboard-widgets" class="metabox-holder">
+		<div class="wpml-strings-widgets-wrap">
+			<div class="wpml-string-widgets clear">
 
-				<?php if ( current_user_can( 'manage_options' ) ) : ?>
-
-				<div class="postbox-container" style="width: 49%;">
-					<div id="normal-sortables-stsel" class="meta-box-sortables ui-sortable">
-
-						<div id="dashboard_wpml_stsel_1" class="postbox">
-							<div class="handlediv" title="<?php echo esc_attr__( 'Click to toggle', 'wpml-string-translation' ); ?>">
-                                <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg>
-							</div>
-							<h3 class="hndle">
-								<span><?php echo esc_html__( 'Track where strings appear on the site', 'wpml-string-translation' ); ?></span>
-							</h3>
-							<div class="inside">
-								<p class="sub"><?php echo esc_html__( "WPML can keep track of where strings are used on the public pages. Activating this feature will enable the 'view in page' functionality and make translation easier.", 'wpml-string-translation' ); ?></p>
-								<form id="icl_st_track_strings" name="icl_st_track_strings" action="">
-									<?php wp_nonce_field( 'icl_st_track_strings_nonce', '_icl_nonce' ); ?>
-									<p class="icl_form_errors" style="display:none"></p>
-									<ul>
-										<li>
-											   <input type="hidden" name="icl_st[track_strings]" value="0" />
-											<?php
-											$track_strings         = array_key_exists( 'track_strings', $string_settings ) && $string_settings['track_strings'];
-											$track_strings_checked = checked( true, $track_strings, false );
-											$track_strings_display = ' style="color: red;' . ( ! $track_strings ? 'display: none;' : '' ) . '""';
-
-											$url               = 'https://wpml.org/documentation/getting-started-guide/string-translation/finding-strings-that-dont-appear-on-the-string-translation-page/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlst';
-											$message_sentences = array();
-
-											$anchor_text         = esc_attr_x( 'String Tracking', 'String Tracking warning: sentence 1, anchor text', 'wpml-string-translation' );
-											$message_sentences[] = esc_html_x( '%s allows you to see where strings come from, so you can translate them accurately.', 'String Tracking warning: sentence 1', 'wpml-string-translation' );
-											$message_sentences[] = esc_html_x( 'It needs to parse the PHP source files and the output HTML.', 'String Tracking warning: sentence 2', 'wpml-string-translation' );
-											$message_sentences[] = esc_html_x( 'This feature is CPU-intensive and should only be used while you are developing sites.', 'String Tracking warning: sentence 3', 'wpml-string-translation' );
-											$message_sentences[] = esc_html_x( 'Remember to turn it off before going to production, to avoid performance problems.', 'String Tracking warning: sentence 4', 'wpml-string-translation' );
-
-											$anchor  = '<a href="' . $url . '" target="_blank">' . $anchor_text . '</a>';
-											$message = sprintf( implode( ' ', $message_sentences ), $anchor );
-											?>
-											<input type="checkbox" id="track_strings" name="icl_st[track_strings]" value="1" <?php echo $track_strings_checked; ?> />
-											<label for="track_strings"><?php esc_html_e( 'Track where strings appear on the site', 'wpml-string-translation' ); ?></label>
-											<p class="js-track-strings-note" <?php echo $track_strings_display; ?>>
-												<?php echo $message; ?>
-											</p>
-											<p><a href="https://wpml.org/faq/prevent-performance-issues-with-wpml/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlst" target="_blank"><?php esc_html_e( 'Performance considerations', 'wpml-string-translation' ); ?>&nbsp;&raquo;</a></p>
-										</li>
-										<li>
-											<?php
-
-											$hl_color_default                                  = '#FFFF00';
-																					 $hl_color = ! empty( $string_settings['hl_color'] ) ? $string_settings['hl_color'] : $hl_color_default;
-											$hl_color_label                                    = __( 'Highlight color for strings', 'wpml-string-translation' );
-											$color_picker_args                                 = array(
-												'input_name_group' => 'icl_st',
-												'input_name_id' => 'hl_color',
-												'default' => $hl_color_default,
-												'value'   => $hl_color,
-												'label'   => $hl_color_label,
-											);
-
-											$wpml_color_picker = new WPML_Color_Picker( $color_picker_args );
-
-											echo $wpml_color_picker->get_current_language_color_selector_control();
-
-											?>
-										</li>
-									</ul>
-									<p>
-										<input class="button-secondary" type="submit" name="iclt_st_save" value="<?php esc_attr_e( 'Apply', 'wpml-string-translation' ); ?>"/>
-									<span class="icl_ajx_response" id="icl_ajx_response2" style="display:inline"></span>
-									</p>
-								</form>
-
-							</div>
+				<div class="postbox-container">
+					<div class="wpml-strings-widgets-header clear">
+						<div class="utilities-icon">
 						</div>
-						<div id="dashboard_wpml_cleanup_strings" class="postbox"></div>
 
-						<div id="dashboard_wpml_stsel_1.5" class="postbox wpml-st-auto-register-strings">
+						<h2><?php echo __('Utilities', 'wpml-string-translation'); ?></h2>
+					</div>
+
+					<?php if ( current_user_can( 'manage_options' ) ) : ?>
+
+						<!-- manage_options / Auto register untranslated strings -->
+						<div id="dashboard_wpml_st_autoregister" class="postbox wpml-st-auto-register-strings closed">
 							<?php
 							/** @var AutoRegisterSettings $auto_register_settings */
 							$auto_register_settings = WPML\Container\make( AutoRegisterSettings::class );
 							?>
-							<div class="handlediv" title="<?php echo esc_attr__( 'Click to toggle', 'wpml-string-translation' ); ?>">
-                                <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg>
-							</div>
-							<h3 class="hndle">
-								<span><?php echo esc_html__( 'Auto register strings for translation', 'wpml-string-translation' ); ?></span>
-							</h3>
-							<div class="inside">
-								<p>
-									<label for="auto_register_enabled">
-										<input type="checkbox"
-											   class="js-auto-register-enabled"
-											   id="<?php echo AutoRegisterSettings::KEY_ENABLED; ?>"
-											   name="<?php echo AutoRegisterSettings::KEY_ENABLED; ?>"
-											   <?php checked( true, $auto_register_settings->isEnabled() ); ?>"
-										>
-										<?php echo esc_html__( 'Look for strings while pages are rendered', 'wpml-string-translation' ); ?>
-									</label>
-								</p>
-
-								<p class="js-auto-register-description sub"
-								   data-enabled-string="<?php echo esc_attr( $auto_register_settings->getFeatureEnabledDescription() ); ?>"
-								   data-disabled-string="<?php echo esc_attr( $auto_register_settings->getFeatureDisabledDescription() ); ?>"
-								   data-running-countdown="<?php echo $auto_register_settings->getTimeToAutoDisable(); ?>"
-								   data-reset-countdown="<?php echo AutoRegisterSettings::RESET_AUTOLOAD_TIMEOUT; ?>"
-								></p>
-
-								<div class="wpml-st-excluded-info-wrapper"
-									<?php echo ! $auto_register_settings->isEnabled() ? 'style="display:none"' : ''; ?>
-								>
-									<p class="wpml-st-excluded-info"
-									   data-all-included="<?php echo esc_attr__( 'Strings from all text domains will be auto-registered', 'wpml-string-translation' ); ?>"
-									   data-all-excluded="<?php echo esc_attr__( 'Strings from all text domains are excluded', 'wpml-string-translation' ); ?>"
-									   data-excluded-preview="<?php echo esc_attr__( 'You excluded: ', 'wpml-string-translation' ); ?>"
-									   data-included-preview="<?php echo esc_attr__( 'You included: ', 'wpml-string-translation' ); ?>"
-									   data-preview-suffix="<?php echo esc_attr__( 'and others', 'wpml-string-translation' ); ?>"
-									>
-
-									</p>
-									<p>
-										<input type="button"
-											   class="button-secondary js-wpml-autoregister-edit-contexts"
-											   value="<?php echo esc_attr__( 'Edit', 'wpml-string-translation' ); ?>"
-										/>
-									</p>
-
-									<div class="wpml-st-exclude-contexts-box"
-										 style="display:none;"
-										 title="<?php echo esc_attr__( 'Auto-register strings from these text domains', 'wpml-string-translation' ); ?>"
-									>
-										<form method="post" action="" data-nonce="<?php echo wp_create_nonce( 'wpml-st-cancel-button' ); ?>" >
-											<?php
-											$excluded     = $auto_register_settings->getExcludedDomains();
-											$has_excluded = count( $excluded ) > 0;
-											?>
-
-											<div id="wpml-st-filter-and-select-all-box">
-												<input type="input" name="search" placeholder="<?php echo esc_attr__( 'Search', 'wpml-string-translation' ); ?>" />
-
-												<br/>
-
-												<p>
-													<input type="checkbox" name="select_all" <?php checked( false, $has_excluded ); ?> />
-													<span><?php echo esc_html__( 'Select all', 'wpml-string-translation' ); ?></span>
-												</p>
-											</div>
-
-											<div class="contexts">
-												<?php foreach ( $auto_register_settings->getDomainsAndTheirExcludeStatus() as $context => $status ) : ?>
-													<?php if ( strlen( $context ) ) : ?>
-													<p>
-														<input
-															type="checkbox"
-															name="<?php echo AutoRegisterSettings::KEY_EXCLUDED_DOMAINS; ?>[]"
-															value="<?php echo $context; ?>"
-															<?php checked( false, $status ); ?>
-														/>
-														<span><?php echo $context; ?></span>
-													</p>
-													<?php endif; ?>
-												<?php endforeach; ?>
-											</div>
-										</form>
+							<div class="hndle-wrap clear">
+								<h3 class="hndle">
+									<span><?php echo esc_html__( 'Auto register untranslated strings', 'wpml-string-translation' ); ?></span>
+									<?php
+									if ( $auto_register_settings->getIsTypeDisabled() ) {
+										?>
+										<span class="wpml-string-widgets-notice">
+											<?php echo sprintf( esc_html__( 'This feature is disabled. %1$sClick here to enable it.%2$s', 'wpml-string-translation' ), '<span>', '</span>' ); ?>
+										</span>
+										<?php
+									}
+									?>
+								</h3>
+								<div class="handlediv" title="<?php echo esc_attr__( 'Click to toggle', 'wpml-string-translation' ); ?>">
+									<div class="icon-wrap">
+										<svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg>
 									</div>
 								</div>
-							</div><!-- .wpml-st-excluded-info-wrapper -->
-						</div>
-
-
-					</div>
-				</div>
-
-				<?php endif; ?>
-
-				<div class="postbox-container" style="width: 49%;">
-					<div id="normal-sortables-poie" class="meta-box-sortables ui-sortable">
-						<div id="dashboard_wpml_st_poie" class="postbox">
-							<div class="handlediv" title="<?php echo esc_attr__( 'Click to toggle', 'wpml-string-translation' ); ?>">
-                                <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg>
 							</div>
+							<div class="inside">
+								<p><?php echo __('WPML can detect untranslated strings and automatically register them for translation. WPML will register any untranslated strings encountered while browsing the site.', 'wpml-string-translation'); ?></p>
+								<label for="autoregister-strings-type-only-viewed-by-admin" style="display: block; padding-top: 10px; padding-bottom: 10px">
+									<input type="radio"
+										   class="wpml-radio-native js-auto-register-enabled"
+										   id="autoregister-strings-type-only-viewed-by-admin"
+										   name="<?php echo AutoRegisterSettings::KEY_ENABLED; ?>"
+										   value="<?php echo $auto_register_settings->getTypeOnlyViewedByAdmin(); ?>"
+									<?php checked( true, $auto_register_settings->getIsTypeOnlyViewedByAdmin() ); ?>
+									>
+									<?php echo esc_html__( 'Untranslated strings that I encounter while logged in', 'wpml-string-translation' ); ?>
+									<mark class="wpml-blue-badge"><?php echo __('recommended', 'wpml-string-translation'); ?></mark>
+								</label>
+								<label for="autoregister-strings-type-viewed-by-all-users" style="display: block; padding-top: 10px; padding-bottom: 10px">
+									<input type="radio"
+										   class="wpml-radio-native js-auto-register-enabled"
+										   id="autoregister-strings-type-viewed-by-all-users"
+										   name="<?php echo AutoRegisterSettings::KEY_ENABLED; ?>"
+										   value="<?php echo $auto_register_settings->getTypeViewedByAllUsers(); ?>"
+									<?php checked( true, $auto_register_settings->getIsTypeViewedByAllUsers() ); ?>
+									>
+									<?php echo esc_html__( 'Untranslated strings that all logged in, logged out users, and site visitors encounter', 'wpml-string-translation' ); ?>
+								</label>
+								<label for="autoregister-strings-type-disabled" style="display: block; padding-top: 10px; padding-bottom: 10px">
+									<input type="radio"
+										   class="wpml-radio-native js-auto-register-enabled"
+										   id="autoregister-strings-type-disabled"
+										   name="<?php echo AutoRegisterSettings::KEY_ENABLED; ?>"
+										   value="<?php echo $auto_register_settings->getTypeDisabled(); ?>"
+									<?php checked( true, $auto_register_settings->getIsTypeDisabled() ); ?>
+									>
+									<?php echo esc_html__( 'Disable auto register of untranslated strings', 'wpml-string-translation' ); ?>
+								</label>
+
+								<div class="wpml-st-excluded-info-wrapper clear" style="padding-top: 10px; display: flex; align-items: center">
+									<p class="button-wrap">
+										<input type="button"
+											   id="save-autoregister-strings-type"
+											   class="button-secondary wpml-button base-btn wpml-button--outlined"
+											   value="<?php echo esc_attr__( 'Save settings', 'wpml-string-translation' ); ?>"
+										/>
+										<span class="icl_ajx_response" id="icl-ajx-response-autoregister-strings-type" style="display:inline"></span>
+									</p>
+									<div style="margin-left: 15px">
+										<label
+											htmlFor="autoregister-strings-should-register-backend-strings"
+										>
+											<input
+												id="autoregister-strings-should-register-backend-strings"
+												class="wpml-checkbox-native"
+												type="checkbox"
+											<?php checked( true, $auto_register_settings->getShouldRegisterBackendStrings() ); ?>
+											<?php echo $auto_register_settings->getIsTypeDisabled() ? 'disabled="disabled"' : ""; ?>
+											/>
+											<span <?php echo $auto_register_settings->getIsTypeDisabled() ? 'class="wpml-disabled-text"' : ""; ?>>
+												<?php echo __('Also register strings from the website\'s back-end', 'sitepress'); ?>
+											</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- EO Auto register untranslated strings -->
+
+						<!-- manage_options / Translate strings automatically -->
+						<div id="dashboard_wpml_open_tm_page" class="postbox closed">
+							<div class="hndle-wrap clear">
+								<h3 class="hndle">
+									<span><?php echo esc_html__( 'Translate strings automatically, with your translators or a translation service', 'wpml-string-translation' ); ?></span>
+								</h3>
+								<div class="handlediv" title="<?php echo esc_attr__( 'Click to toggle', 'wpml-string-translation' ); ?>">
+									<div class="icon-wrap">
+										<svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg>
+									</div>
+								</div>
+							</div>
+							<div class="inside">
+								<p><?php echo sprintf( esc_html__( "Use WPML's %1\$sTranslation Dashboard%2\$s to send strings to translation.", 'wpml-string-translation' ), '<a href="' . UIPage::getTM() . '">', '</a>' ); ?></p>
+							</div>
+						</div>
+						<!-- EO Translate strings automatically -->
+
+					<?php endif; ?>
+
+					<!-- Import / export .po -->
+					<div id="dashboard_wpml_st_poie" class="postbox closed">
+						<div class="hndle-wrap clear">
 							<h3 class="hndle">
 								<span><?php echo esc_html__( 'Import / export .po', 'wpml-string-translation' ); ?></span>
 							</h3>
-							<div class="inside">
+							<div class="handlediv" title="<?php echo esc_attr__( 'Click to toggle', 'wpml-string-translation' ); ?>">
+								<div class="icon-wrap">
+									<svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg>
+								</div>
+							</div>
+						</div>
+						<div class="inside float-childs clear column-borders">
+							<div class="column form-in-column">
 								<h5><?php echo esc_html__( 'Import', 'wpml-string-translation' ); ?></h5>
+								<?php
+								if ( $wpml_po_import_strings->get_errors() ) {
+									?>
+									<div id="wpml-st-import-error-notice-js" class="otgs-notice warning st-po-import-error"><p><?php echo $wpml_po_import_strings->get_errors(); ?></p></div>
+									<?php
+								}
+								?>
 								<form id="icl_st_po_form" action="" name="icl_st_po_form" method="post" enctype="multipart/form-data">
 									<?php wp_nonce_field( 'icl_po_form' ); ?>
-									<p class="sub">
-										<label for="icl_po_file"><?php echo esc_html__( '.po file:', 'wpml-string-translation' ); ?></label>
-										<input id="icl_po_file" class="button primary" type="file" name="icl_po_file" />
-									</p>
-									<p class="sub" style="line-height:2.3em">
-										<input type="checkbox" name="icl_st_po_translations" id="icl_st_po_translations" />
-										<label for="icl_st_po_translations"><?php echo esc_html__( 'Also create translations according to the .po file', 'wpml-string-translation' ); ?></label>
-										<select name="icl_st_po_language" id="icl_st_po_language" style="display:none">
-										<?php
-										foreach ( $active_languages as $al ) :
-											if ( $al['code'] == $string_settings['strings_language'] ) {
-												continue;}
+									<div class="sub clear field-bottom-spacer">
+										<div class="file-upload-field-label">
+											<label for="icl_po_file"><?php echo esc_html__( '.po file :', 'wpml-string-translation' ); ?></label>
+										</div>
+										<div class="file-upload-field">
+											<div class="upload-icon"></div>
+											<input id="icl_po_file" class="button primary" type="file" name="icl_po_file" />
+										</div>
+									</div>
+									<div class="sub field-bottom-spacer">
+										<p><label for="st-i-source-lang"><?php esc_html_e( 'Select the original language of strings to import', 'wpml-string-translation' ); ?></label></p>
+										<select class="st-i-source-lang-select" name="icl_st_po_source_language" id="st-i-source-lang">
+											<option value="en"><?php esc_html_e( 'English', 'wpml-string-translation' ); ?></option>
+											<?php
+											foreach ( $active_languages as $lang ) {
+												if ( $lang['code'] === 'en' ) {
+													// We need English to be on top and always there even if not active.
+													continue;
+												}
+												?>
+												<option value="<?php echo esc_attr( $lang['code'] ); ?>"><?php echo esc_html( $lang['display_name'] ); ?></option>
+												<?php
+											}
 											?>
-										<option value="<?php echo esc_attr( $al['code'] ); ?>"><?php echo esc_html( $al['display_name'] ); ?></option>
-										<?php endforeach; ?>
 										</select>
-									</p>
-									<p class="sub" style="line-height:2.3em"    >
+									</div>
+									<div class="sub field-bottom-spacer">
+										<div class="clear">
+											<div class="checkbox-and-select-checkbox checkbox-and-small-select-checkbox">
+												<input type="checkbox" class="wpml-checkbox-native" name="icl_st_po_translations" id="icl_st_po_translations" />
+												<label for="icl_st_po_translations"><?php echo esc_html__( 'Also create translations according to the .po file', 'wpml-string-translation' ); ?></label>
+											</div>
+											<div class="checkbox-and-select-select checkbox-and-small-select-select">
+												<select name="icl_st_po_language" id="icl_st_po_language" style="display:none">
+												<?php
+												foreach ( $active_languages as $al ) :
+													?>
+													<option value="<?php echo esc_attr( $al['code'] ); ?>"><?php echo esc_html( $al['display_name'] ); ?></option>
+												<?php endforeach; ?>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="sub field-bottom-spacer">
 										<?php echo esc_html__( 'Select what the strings are for:', 'wpml-string-translation' ); ?>
 										<?php if ( ! empty( $available_contexts ) ) : ?>
-
-										&nbsp;&nbsp;
-										<span>
-										<select name="icl_st_i_context">
-											<option value="">-------</option>
-											<?php foreach ( $available_contexts as $v ) : ?>
-											<option value="<?php echo esc_attr( (string) $v ); ?>"
-																	  <?php
-																		if ( $context_filter == $v ) :
-																			?>
- selected="selected"<?php endif; ?>><?php echo $v; ?></option>
-											<?php endforeach; ?>
-										</select>
-										<a href="#"
-										   onclick="var __nxt = jQuery(this).parent().next(); jQuery(this).prev().val(''); jQuery(this).parent().fadeOut('fast',function(){__nxt.fadeIn('fast')});return false;"><?php echo esc_html__( 'new', 'wpml-string-translation' ); ?></a>
-										</span>
+										<br/>
+										<div class="clear">
+											<div class="select-and-button-select">
+												<input type="text" name="icl_st_i_context_new" id="icl_st_i_context_new" style="display: none" />
+												<select name="icl_st_i_context" id="icl_st_i_context">
+													<option value="">-------</option>
+													<?php foreach ( $available_contexts as $v ) : ?>
+													<option value="<?php echo esc_attr( (string) $v ); ?>"
+																			<?php
+																				if ( $context_filter == $v ) :
+																					?>
+		selected="selected"<?php endif; ?>><?php echo $v; ?></option>
+													<?php endforeach; ?>
+												</select>
+											</div>
+											<div class="select-and-button-button">
+												<button class="button-secondary wpml-button base-btn wpml-button--outlined" id="icl_st_importpo_newbutton"><?php echo esc_html__( 'New', 'wpml-string-translation' ); ?></button>
+												<button class="button-secondary wpml-button base-btn wpml-button--outlined" style="display: none" id="icl_st_importpo_existingbutton"><?php echo esc_html__( 'Select from existing', 'wpml-string-translation' ); ?></button>
+											</div>
+										</div>
 										<?php endif; ?>
-										<span
-										<?php
-										if ( ! empty( $available_contexts ) ) :
-											?>
- style="display:none"<?php endif ?>>
-										<input type="text" name="icl_st_i_context_new" />
-										<?php if ( ! empty( $available_contexts ) ) : ?>
-											<a href="#"
-											   onclick="var __prv = jQuery(this).parent().prev(); jQuery(this).prev().val(''); jQuery(this).parent().fadeOut('fast',function(){__prv.fadeIn('fast')});return false;"><?php echo esc_html__( 'select from existing', 'wpml-string-translation' ); ?></a>
-										<?php endif ?>
-										</span>
-									</p>
+									</div>
 
-									<p>
-										<input class="button" name="icl_po_upload" id="icl_po_upload" type="submit" value="<?php echo esc_attr__( 'Submit', 'wpml-string-translation' ); ?>"/>
+									<p class="button-wrap">
+										<input class="button-secondary wpml-button base-btn wpml-button--outlined" name="icl_po_upload" id="icl_po_upload" type="submit" value="<?php echo esc_attr__( 'Submit', 'wpml-string-translation' ); ?>"/>
 										<span id="icl_st_err_domain" class="icl_error_text" style="display:none"><?php echo esc_html__( 'Please enter a domain!', 'wpml-string-translation' ); ?></span>
 										<span id="icl_st_err_po" class="icl_error_text" style="display:none"><?php echo esc_html__( 'Please select the .po file to upload!', 'wpml-string-translation' ); ?></span>
 									</p>
 
 								</form>
-								<?php if ( ! empty( $icl_contexts ) ) : ?>
+							</div>
+							<div class="spacer-column"></div>
+							<?php if ( ! empty( $icl_contexts ) ) : ?>
+							<div class="column form-in-column">
 								<h5><?php echo esc_html__( 'Export strings into .po/.pot file', 'wpml-string-translation' ); ?></h5>
 									<?php
 									if ( version_compare( WPML_ST_VERSION, '2.2', '<=' ) ) {
@@ -729,115 +843,295 @@ $po_importer = apply_filters( 'wpml_st_get_po_importer', null );
 									?>
 								<form method="post" action="">
 									<?php wp_nonce_field( 'icl_po_export' ); ?>
-								<p>
-									<?php echo esc_html__( 'Select domain:', 'wpml-string-translation' ); ?>
-									<select name="icl_st_e_context" id="icl_st_e_context">
-										<?php foreach ( $icl_contexts as $v ) : ?>
-										<option value="<?php echo esc_attr( $v->context ); ?>"
-																  <?php
-																	if ( $context_filter == $v->context ) :
-																		?>
- selected="selected"<?php endif; ?>><?php echo $v->context . ' (' . $v->c . ')'; ?></option>
-										<?php endforeach; ?>
-									</select>
-							   </p>
-							   <p style="line-height:2.3em">
-									<input type="checkbox" name="icl_st_pe_translations" id="icl_st_pe_translations" checked="checked" value="1" onchange="if(jQuery(this).prop('checked'))jQuery('#icl_st_e_language').fadeIn('fast'); else jQuery('#icl_st_e_language').fadeOut('fast')" />
-								   <label for="icl_st_pe_translations"><?php echo esc_html__( 'Also include translations', 'wpml-string-translation' ); ?></label>
-									<select name="icl_st_e_language" id="icl_st_e_language">
-									<?php
-									foreach ( $active_languages as $al ) :
-										if ( $al['code'] == $string_settings['strings_language'] ) {
-											continue;}
-										?>
-									<option value="<?php echo esc_attr( $al['code'] ); ?>"><?php echo esc_html( $al['display_name'] ); ?></option>
-									<?php endforeach; ?>
-									</select>
-								</p>
-									<p><input type="submit" class="button-secondary" name="icl_st_pie_e" value="<?php echo esc_attr__( 'Submit', 'wpml-string-translation' ); ?>"/></p>
-								<?php endif ?>
+									<div class="field-bottom-spacer">
+										<p><?php echo esc_html__( 'Select domain:', 'wpml-string-translation' ); ?></p>
+										<select name="icl_st_e_context" id="icl_st_e_context">
+											<?php foreach ( $icl_contexts as $v ) : ?>
+											<option value="<?php echo esc_attr( $v->context ); ?>"
+																	<?php
+																		if ( $context_filter == $v->context ) :
+																			?>
+	selected="selected"<?php endif; ?>><?php echo $v->context . ' (' . $v->c . ')'; ?></option>
+											<?php endforeach; ?>
+										</select>
+									</div>
+									<div>
+										<div class="clear field-bottom-spacer">
+											<div class="checkbox-and-select-checkbox">
+												<input type="checkbox" class="wpml-checkbox-native" name="icl_st_pe_translations" id="icl_st_pe_translations" checked="checked" value="1" onchange="if(jQuery(this).prop('checked'))jQuery('#icl_st_e_language').fadeIn('fast'); else jQuery('#icl_st_e_language').fadeOut('fast')" />
+												<label for="icl_st_pe_translations"><?php echo esc_html__( 'Also include translations', 'wpml-string-translation' ); ?></label>
+											</div>
+											<div class="checkbox-and-select-select">
+												<select name="icl_st_e_language" id="icl_st_e_language">
+												<?php
+												$poExportTranslationLangs = $active_languages;
+												if ( isset( $poExportTranslationLangs['en'] ) ) {
+													// Push English at last.
+													$temp = $poExportTranslationLangs['en'];
+													unset( $poExportTranslationLangs['en'] );
+													$poExportTranslationLangs['en'] = $temp;
+													unset( $temp );
+												}
+												foreach ( $poExportTranslationLangs as $al ) :
+												?>
+													<option value="<?php echo esc_attr( $al['code'] ); ?>"><?php echo esc_html( $al['display_name'] ); ?></option>
+												<?php endforeach; ?>
+												</select>
+											</div>
+										</div>
+									</div>
+									<p class="button-wrap"><input type="submit" class="button-secondary wpml-button base-btn wpml-button--outlined" name="icl_st_pie_e" value="<?php echo esc_attr__( 'Submit', 'wpml-string-translation' ); ?>"/></p>
 								</form>
 							</div>
+							<?php endif ?>
 						</div>
 					</div>
-				</div>
+					<!-- EO Import / export .po -->
 
-				<?php if ( current_user_can( 'manage_options' ) ) : ?>
 
-				<div class="postbox-container" style="width: 49%;">
-					<div id="normal-sortables-moreoptions" class="meta-box-sortables ui-sortable">
-						<div id="dashboard_wpml_st_poie" class="postbox">
-							<div class="handlediv" title="<?php echo esc_attr__( 'Click to toggle', 'wpml-string-translation' ); ?>">
-                                <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg>
+					<?php if ( current_user_can( 'manage_options' ) ) : ?>
+						<!-- manage_options / Cleanup strings  -->
+						<div id="dashboard_wpml_cleanup_strings" class="postbox closed">
+							<div class="hndle-wrap clear">
+								<h3 class="hndle">
+									<span><?php echo esc_html__( 'Remove strings by domain', 'wpml-string-translation' ); ?></span>
+								</h3>
+								<div class="handlediv" title="<?php echo esc_attr__( 'Click to toggle', 'wpml-string-translation' ); ?>">
+									<div class="icon-wrap">
+										<svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg>
+									</div>
+								</div>
 							</div>
-							<h3 class="hndle">
-								<span><?php echo esc_html__( 'More options', 'wpml-string-translation' ); ?></span>
-							</h3>
+							<div id="dashboard_wpml_cleanup_strings_content" class="inside">
+							</div>
+						</div>
+						<!-- EO Cleanup strings -->
+
+
+						<!-- manage_options / Set the original language of themes and plugins -->
+						<div id="dashboard_wpml_set_orig_lang" class="postbox closed">
+							<div class="hndle-wrap clear">
+								<h3 class="hndle">
+									<span><?php echo esc_html__( 'Set the original language of themes and plugins', 'wpml-string-translation' ); ?></span>
+								</h3>
+								<div class="handlediv" title="<?php echo esc_attr__( 'Click to toggle', 'wpml-string-translation' ); ?>">
+									<div class="icon-wrap">
+										<svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg>
+									</div>
+								</div>
+							</div>
 							<div class="inside">
-								<form id="icl_st_more_options" name="icl_st_more_options" method="post">
+								<p><?php echo __( "By default WPML assumes that strings in themes and plugins are in English. If you're using a theme or plugin that has strings in other languages you can set the language of text-domains.", 'wpml-string-translation' ); ?></p>
+
+								<div class="wpml-st-excluded-info-wrapper clear">
+									<p class="button-wrap">
+										<input type="button"
+											   class="button-secondary wpml-button base-btn wpml-button--outlined"
+											   id="wpml-language-of-domains-link"
+											   value="<?php echo __( "Set the language of text-domains", "sitepress" ); ?>"
+										/>
+									</p>
+								</div>
+							</div>
+						</div>
+						<!-- EO Set the original language of themes and plugins -->
+					<?php endif; ?>
+
+					<!-- Not seeing strings that you are looking for? -->
+					<div id="dashboard_wpml_open_admin_st" class="postbox closed">
+						<div class="hndle-wrap clear">
+							<h3 class="hndle">
+								<span><?php echo esc_html__( 'Not seeing strings that you are looking for?', 'wpml-string-translation' ); ?></span>
+							</h3>
+							<div class="handlediv" title="<?php echo esc_attr__( 'Click to toggle', 'wpml-string-translation' ); ?>">
+								<div class="icon-wrap">
+									<svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg>
+								</div>
+							</div>
+						</div>
+						<div class="inside">
+							<p><?php echo sprintf( esc_html__( "You can add to the String Translations table texts that appear in the admin screens of the theme and plugins. To do this, go to %1\$sAdmin Texts Translation%2\$s", 'wpml-string-translation' ), '<a href="admin.php?page='.  WPML_ST_FOLDER . '/menu/string-translation.php&amp;trop=1">', '</a>' ); ?></p>
+						</div>
+					</div>
+					<!-- EO Not seeing strings that you are looking for? -->
+
+					<!-- Translate User properties -->
+					<!-- @todo is this and previous supposed to be outside the current_user_can( 'manage_options' ) condition? it was inside before-->
+					<div id="dashboard_wpml_user_properties" class="postbox closed">
+						<div class="hndle-wrap clear">
+							<h3 class="hndle">
+								<span><?php echo esc_html__( 'Translate User properties', 'wpml-string-translation' ); ?></span>
+							</h3>
+							<div class="handlediv" title="<?php echo esc_attr__( 'Click to toggle', 'wpml-string-translation' ); ?>">
+								<div class="icon-wrap">
+									<svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg>
+								</div>
+							</div>
+						</div>
+						<div class="inside">
+							<form id="icl_st_more_options_utilities" name="icl_st_more_options" method="post" action="">
 								<?php wp_nonce_field( 'icl_st_more_options_nonce', '_icl_nonce' ); ?>
-								<div>
-									<?php
-									$editable_roles = get_editable_roles();
-									if ( ! isset( $string_settings['translated-users'] ) ) {
-										$string_settings['translated-users'] = array();
+								<?php
+								$editable_roles = get_editable_roles();
+								if ( ! isset( $string_settings['translated-users'] ) ) {
+									$string_settings['translated-users'] = array();
+								}
+
+								$tnames = array();
+								foreach ( $editable_roles as $role => $details ) {
+									if ( in_array( $role, $string_settings['translated-users'] ) ) {
+										$tnames[] = translate_user_role( $details['name'] );
 									}
+								}
 
-									$tnames = array();
-									foreach ( $editable_roles as $role => $details ) {
-										if ( in_array( $role, $string_settings['translated-users'] ) ) {
-											$tnames[] = translate_user_role( $details['name'] );
-										}
-									}
+								$tustr = '<span id="icl_st_tusers_list">';
+								if ( ! empty( $tnames ) ) {
+									$tustr .= join( ', ', array_map( 'translate_user_role', $tnames ) );
+								} else {
+									$tustr = esc_html__( 'none', 'wpml-string-translation' );
+								}
+								$tustr .= '</span>';
 
-									$tustr = '<span id="icl_st_tusers_list">';
-									if ( ! empty( $tnames ) ) {
-										$tustr .= join( ', ', array_map( 'translate_user_role', $tnames ) );
-									} else {
-										$tustr = esc_html__( 'none', 'wpml-string-translation' );
-									}
-									$tustr .= '</span>';
-									$tustr .= '&nbsp;&nbsp;<a href="#" onclick="jQuery(\'#icl_st_tusers\').slideToggle();return false;">' . esc_html__( 'edit', 'wpml-string-translation' ) . '</a>';
+								?>
+								<p><?php echo sprintf( esc_html__( "Choose the user roles you would like to make translatable: %s", 'wpml-string-translation' ), $tustr ) ?></p>
 
-									?>
-									<?php printf( __( 'Translating users of types: %s', 'wpml-string-translation' ), $tustr ); ?>
-
-
-									<div id="icl_st_tusers" style="padding:6px;display: none;">
-									<?php
-									foreach ( $editable_roles as $role => $details ) {
+								<div id="roles_list" class="checkboxes-list" style="display: none">
+									<?php foreach ( $editable_roles as $role => $details ) : ?>
+										<?php
 										$name    = translate_user_role( $details['name'] );
 										$checked = in_array( $role, (array) $string_settings['translated-users'] ) ? ' checked="checked"' : '';
 										?>
-										<label><input type="checkbox" name="users[<?php echo $role; ?>]" value="1"<?php echo $checked; ?>/>&nbsp;<span><?php echo $name; ?></span></label>&nbsp;
-										<?php
-									}
-									?>
-									</div>
-
+										<div class="checkbox-wrap">
+											<div class="checkbox">
+												<input
+													type="checkbox" class="wpml-checkbox-native"
+													name="users[<?php echo $role; ?>]"
+													value="1"
+													<?php echo $checked; ?>
+												/>
+												<span class='checkbox-label'><?php echo $name; ?></span>
+											</div>
+										</div>
+									<?php endforeach; ?>
 								</div>
-                                <br />
-								<p class="submit">
-									<input class="button-secondary" type="submit" value="<?php esc_attr_e( 'Apply', 'wpml-string-translation' ); ?>" />
-									<span class="icl_ajx_response" id="icl_ajx_response4" style="display:inline"></span>
-								</p>
 
+								<div id="action-buttons" class="clear">
+									<p class="button-wrap">
+										<input type="submit"
+											   class="button-secondary wpml-button base-btn wpml-button--outlined"
+											   id="wpml-user-properties"
+											   data-editUserRoleText="<?php echo esc_attr__( 'Edit user roles', 'wpml-string-translation' ); ?>"
+											   data-applyText="<?php echo esc_attr__( 'Apply', 'wpml-string-translation' ); ?>"
+											   value="<?php echo __( "Edit user roles", 'wpml-string-translation' ); ?>"
+										/>
+									</p>
+									<p class="link-wrap">
+										<a href="https://wpml.org/documentation/getting-started-guide/string-translation/translating-user-meta-information-with-wpml/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlst" target="_blank" class="external-link"><?php esc_html_e( 'Translating User Meta Information With WPML', 'wpml-string-translation' ); ?></a>
+									</p>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!-- EO Translate User properties -->
+
+					<?php if ( current_user_can( 'manage_options' ) ) : ?>
+						<!-- manage_options / String tracking -->
+						<div id="dashboard_wpml_stsel_1" class="postbox closed postbox-last">
+							<div class="hndle-wrap clear">
+								<h3 class="hndle">
+									<span><?php echo esc_html__( 'Track where strings appear on the site', 'wpml-string-translation' ); ?></span>
+								</h3>
+								<div class="handlediv" title="<?php echo esc_attr__( 'Click to toggle', 'wpml-string-translation' ); ?>">
+									<div class="icon-wrap">
+										<svg viewBox="64 64 896 896" focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 0 0 302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 0 0 0-50.4z"></path></svg>
+									</div>
+								</div>
+							</div>
+							<div class="inside">
+								<p class="sub">
+									<?php
+									echo esc_html__(
+										"This feature helps you find where the text (strings) appears on your site, so you can translate it more easily. 
+											It may slow down your site while it's running, so it's best to use it only during development. 
+											Remember to turn it off when your site goes live to keep things running smoothly.",
+										'wpml-string-translation'
+									);
+									?>
+								</p>
+								<p class="link-wrap">
+									<a href="https://wpml.org/documentation/getting-started-guide/string-translation/finding-strings-that-dont-appear-on-the-string-translation-page/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlst" target="_blank" class="external-link"><?php esc_html_e( 'Learn more about finding strings', 'wpml-string-translation' ); ?></a>
+								</p>
+								<form id="icl_st_track_strings" name="icl_st_track_strings" class="clear" action="">
+									<?php wp_nonce_field( 'icl_st_track_strings_nonce', '_icl_nonce' ); ?>
+									<p class="icl_form_errors" style="display:none"></p>
+									<ul>
+										<li class="list-vertical-spacer">
+											<input type="hidden" name="icl_st[track_strings]" value="0" />
+											<?php
+											$track_strings         = array_key_exists( 'track_strings', $string_settings ) && $string_settings['track_strings'];
+											$track_strings_checked = checked( true, $track_strings, false );
+											?>
+											<input type="checkbox" class="wpml-checkbox-native" id="track_strings" name="icl_st[track_strings]" value="1" <?php echo $track_strings_checked; ?> />
+											<label for="track_strings"><?php esc_html_e( 'Track where strings appear on the site', 'wpml-string-translation' ); ?></label>
+										</li>
+										<li class="clear wpml-picker-container">
+											<?php
+
+											$hl_color_default                                  = '#FFFF00';
+											$hl_color = ! empty( $string_settings['hl_color'] ) ? $string_settings['hl_color'] : $hl_color_default;
+											$hl_color_label                                    = __( 'Highlight color for strings', 'wpml-string-translation' );
+											$color_picker_args                                 = array(
+												'input_name_group' => 'icl_st',
+												'input_name_id' => 'hl_color',
+												'default' => $hl_color_default,
+												'value'   => $hl_color,
+												'label'   => $hl_color_label,
+												'labelNoNewline' => true,
+											);
+
+											$wpml_color_picker = new WPML_Color_Picker( $color_picker_args );
+
+											echo $wpml_color_picker->get_current_language_color_selector_control();
+
+											?>
+										</li>
+									</ul>
+									<p class="button-wrap">
+										<input class="button-secondary wpml-button base-btn wpml-button-outlined" type="submit" name="iclt_st_save" value="<?php esc_attr_e( 'Apply', 'wpml-string-translation' ); ?>"/>
+										<span class="icl_ajx_response" id="icl_ajx_response2" style="display:inline"></span>
+									</p>
 								</form>
 
-
-
 							</div>
-					</div>
+						</div>
+						<!-- EO String tracking -->
+					<?php endif; ?>
 				</div>
-
-				<?php endif; ?>
-
 			</div>
 		</div>
 
-		<br clear="all" /><br />
-
-			<a href="admin.php?page=<?php echo WPML_ST_FOLDER; ?>/menu/string-translation.php&amp;trop=1"><?php esc_html_e( 'Translate texts in admin screens &raquo;', 'wpml-string-translation' ); ?></a>
+	<!-- String Tracking warning dialog. -->
+	<div id="wpml-track-strings-info-dialog"
+		 class="hidden"
+		 title="<?php esc_attr_e( 'String Tracking Enabled', 'wpml-string-translation' ); ?>"
+		 data-ok-btn-label="<?php esc_attr_e( 'OK', 'wpml-string-translation' ); ?>"
+		 data-close-btn-label="<?php esc_attr_e( 'Close', 'wpml-string-translation' ); ?>">
+		<p>
+			<?php
+			echo esc_html__(
+				'WPML will now track where your site\'s text (strings) appears as you browse both the admin and front-end.',
+				'wpml-string-translation'
+			);
+			?>
+			<br />
+			<?php
+			echo esc_html__(
+				'Be sure to turn off this feature before your site goes live to avoid performance issues.',
+				'wpml-string-translation'
+			);
+			?>
+		</p>
+	</div>
 
 	<?php endif; // if(current_user_can('manage_options') ?>
 	<?php endif; ?>

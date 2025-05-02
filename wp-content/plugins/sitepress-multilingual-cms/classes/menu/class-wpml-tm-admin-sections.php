@@ -89,6 +89,7 @@ class WPML_TM_Admin_Sections {
 		$admin_sections_factories = array(
 			WPML_TM_Translation_Roles_Section_Factory::class,
 			WPML_TM_AMS_ATE_Console_Section_Factory::class,
+			WPML_TM_AMS_Translation_Quality_Console_Section_Factory::class,
 		);
 
 		return apply_filters( 'wpml_tm_admin_sections_factories', $admin_sections_factories );

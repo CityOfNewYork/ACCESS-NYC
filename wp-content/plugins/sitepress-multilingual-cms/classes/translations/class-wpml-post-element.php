@@ -27,13 +27,17 @@ class WPML_Post_Element extends WPML_Translation_Element implements WPML_Duplica
 	public function get_wpml_element_type() {
 		$element_type = '';
 		if ( ! is_wp_error( $this->get_wp_element_type() ) ) {
-			$element_type = 'post_' . $this->get_wp_element_type();
+			$element_type = $this->get_element_type() . '_' . $this->get_wp_element_type();
 		}
 		return $element_type;
 	}
 
 	function get_element_id() {
 		return $this->id;
+	}
+
+	function get_element_type () {
+		return 'post';
 	}
 
 	/**

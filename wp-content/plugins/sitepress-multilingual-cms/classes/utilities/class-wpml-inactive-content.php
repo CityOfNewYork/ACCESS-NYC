@@ -142,7 +142,7 @@ class WPML_Inactive_Content {
 
 			if ( $tax_results ) {
 				foreach ( $tax_results as $r ) {
-					if ( ! $this->is_only_default_category( $r ) ) {
+					if ( ! $this->is_only_default_category( $r ) && taxonomy_exists( $r->taxonomy ) ) {
 						$this->inactive[ $r->language ]['taxonomy'][ $r->taxonomy ] = $r->c;
 					}
 				}

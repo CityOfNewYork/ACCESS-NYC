@@ -31,8 +31,10 @@ class WPML_Taxonomy_Translation_UI {
 		$this->taxonomy     = $taxonomy ? $taxonomy : false;
 
 		if ( $screen_options_factory ) {
-			$help_title = esc_html__( 'Taxonomy Translation', 'sitepress' );
-			$help_text  = $this->get_help_text();
+			$help_title = function() {
+				return esc_html__( 'Taxonomy Translation', 'sitepress' );
+			};
+			$help_text  = [ $this, 'get_help_text' ];
 
 			$this->screen_options = $screen_options_factory->create_pagination(
 				'taxonomy_translation_per_page',
@@ -87,7 +89,7 @@ class WPML_Taxonomy_Translation_UI {
 	/**
 	 * @return string
 	 */
-	private function get_help_text() {
+	public function get_help_text() {
 		/* translators: this is the title of a documentation page used to terminate the sentence "is not possible to ..."  */
 		$translate_base_taxonomy_slug_link_title = esc_html__(
 			'translate the base taxonomy slugs with WPML',

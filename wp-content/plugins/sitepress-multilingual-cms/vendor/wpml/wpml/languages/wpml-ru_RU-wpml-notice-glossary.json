@@ -1,0 +1,44 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Add glossary terms": [
+            "Добавить термины в глоссарий"
+         ],
+         "Minimize": [
+            "Свернуть"
+         ],
+         "Expand": [
+            "Развернуть"
+         ],
+         "There's nothing yet in the Glossary": [
+            "В глоссарии пока ничего нет"
+         ],
+         "Looks like you're not yet using the glossary. Glossary can help you:": [
+            "Похоже, вы еще не используете глоссарий. Глоссарий может помочь вам:"
+         ],
+         "Improve the quality of the translation": [
+            "Улучшить качество перевода"
+         ],
+         "Ensure translation consistency": [
+            "Обеспечить согласованность перевода"
+         ],
+         "Reduce translation costs": [
+            "Снизить затраты на перевод"
+         ],
+         "Improve SEO in translation languages": [
+            "Улучшить SEO на языках перевода"
+         ],
+         "How to Use the Glossary for Accurate Translations": [
+            "Как использовать глоссарий для точных переводов"
+         ],
+         "%d item in the <a>Glossary</a>": [
+            "%d элемент в <a>Глоссарии</a>",
+            "%d элементов в <a>Глоссарии</a>"
+         ]
+      }
+   }
+}

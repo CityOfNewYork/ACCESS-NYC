@@ -5,15 +5,6 @@
          "": {
             "domain": "messages"
          },
-         "Draft — Pending review": [
-            "Черновик — Ожидает проверки"
-         ],
-         "Complete": [
-            "Завершено"
-         ],
-         "Insufficient funds": [
-            "Недостаточно средств"
-         ],
          "Start batch sync": [
             "Начать синхронизацию партии"
          ],
@@ -83,6 +74,12 @@
          "Assign": [
             "Назначить"
          ],
+         "Cancelled": [
+            "Отменена"
+         ],
+         "Needs translation": [
+            "Требуется перевод"
+         ],
          "In progress": [
             "в процессе"
          ],
@@ -92,8 +89,17 @@
          "Completed": [
             "завершено"
          ],
+         "%s are immediately published because they don't support draft mode.": [
+            "%s публикуются немедленно, поскольку они не поддерживают режим черновика."
+         ],
          "Published — Pending review": [
             "Опубликовано — Ожидает проверки"
+         ],
+         "Draft — Pending review": [
+            "Черновик — Ожидает проверки"
+         ],
+         "Review in progress": [
+            "Идет проверка"
          ],
          "Published — Review in progress": [
             "Опубликовано — Выполняется проверка"
@@ -101,14 +107,11 @@
          "Draft — Review in progress": [
             "Черновик — Идет проверка"
          ],
+         "Insufficient funds": [
+            "Недостаточно средств"
+         ],
          "Needs update": [
             "Необходимо обновление"
-         ],
-         "Cancelled": [
-            "Отменена"
-         ],
-         "Needs translation": [
-            "Требуется перевод"
          ],
          "View original": [
             "Смотреть оригинал"
@@ -390,8 +393,8 @@
             "Синхронизация со службой профессионального перевода не удалась"
          ],
          "%d translation has been downloaded": [
-            "%d перевод загружен",
-            "%d перевода(-ов) загружено"
+            "%d перевод был загружен",
+            "%d Переводы были загружены"
          ],
          "Batch sync finished successfully!": [
             "Синхронизация партии успешно завершена!"

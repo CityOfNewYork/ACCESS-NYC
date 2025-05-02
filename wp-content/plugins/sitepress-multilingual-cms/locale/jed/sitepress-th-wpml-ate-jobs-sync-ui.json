@@ -1,0 +1,169 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Sending for translation": [
+            "กำลังส่งเพื่อแปล"
+         ],
+         "This content is being automatically translated. If you want to do something different with it cancel translation jobs first.": [
+            "เนื้อหานี้กำลังถูกแปลโดยอัตโนมัติ หากคุณต้องการทำอย่างอื่นกับเนื้อหานี้ โปรดยกเลิกงานแปลก่อน."
+         ],
+         "Connecting to WPML’s Advanced Translation Editor": [
+            "กำลังเชื่อมต่อกับโปรแกรมแก้ไขการแปลขั้นสูงของ WPML"
+         ],
+         "Try again": [
+            "ลองอีกครั้ง"
+         ],
+         "You don't have the rights to review this language": [
+            "คุณไม่มีสิทธิ์ตรวจสอบภาษานี้"
+         ],
+         "translations": [
+            "การแปล"
+         ],
+         "left in the queue": [
+            "เหลืออยู่ในคิว"
+         ],
+         "Translation on hold": [
+            "การแปลถูกระงับ"
+         ],
+         "No translations in the queue": [
+            "ไม่มีการแปลในคิว"
+         ],
+         "%d translations left": [
+            "%d การแปลที่เหลือ"
+         ],
+         "%d min remaining": [
+            "%d นาทีที่เหลือ"
+         ],
+         "less than 1 min remaining": [
+            "เหลือเวลาน้อยกว่า 1 นาที"
+         ],
+         "Automatic translation status": [
+            "สถานะการแปลอัตโนมัติ"
+         ],
+         "Translate Everything Automatically": [
+            "แปลทุกอย่างโดยอัตโนมัติ"
+         ],
+         "Translate Everything Automatically is active": [
+            "การแปลทุกอย่างโดยอัตโนมัติกำลังทำงาน"
+         ],
+         "Translate Everything Automatically is paused": [
+            "การแปลทุกอย่างโดยอัตโนมัติถูกหยุดชั่วคราว"
+         ],
+         "Translate Everything Automatically is stopped": [
+            "การแปลทุกอย่างโดยอัตโนมัติถูกหยุด"
+         ],
+         "Out of Credits for Automatic Translation": [
+            "เครดิตสำหรับการแปลอัตโนมัติหมดแล้ว"
+         ],
+         "You have <b>1</b> prepaid translation credit in your wpml.org account. Assign these credits to your site to start using automatic translation": [
+            "คุณมีเครดิตการแปลแบบชำระล่วงหน้า <b>1</b> เครดิตในบัญชี wpml.org ของคุณ กรุณาจัดสรรเครดิตเหล่านี้ให้กับเว็บไซต์ของคุณเพื่อเริ่มใช้การแปลอัตโนมัติ",
+            "คุณมีเครดิตการแปลแบบชำระล่วงหน้า <b>%s</b> เครดิตในบัญชี wpml.org ของคุณ กรุณาจัดสรรเครดิตเหล่านี้ให้กับเว็บไซต์ของคุณเพื่อเริ่มใช้การแปลอัตโนมัติ"
+         ],
+         "Preparing content for translation": [
+            "กำลังเตรียมเนื้อหาสำหรับการแปล"
+         ],
+         "Preparing more content for translation": [
+            "กำลังเตรียมเนื้อหาเพิ่มเติมสำหรับการแปล"
+         ],
+         "An error occured, fix it to continue.": [
+            "เกิดข้อผิดพลาด แก้ไขเพื่อดำเนินการต่อ."
+         ],
+         "There is an issue with automatic translation that needs your attention. Fix it to continue.": [
+            "มีปัญหากับการแปลอัตโนมัติที่ต้องการความสนใจจากคุณ แก้ไขเพื่อดำเนินการต่อ."
+         ],
+         "Your default language, %s, must be mapped to a supported language in order to use automatic translation.": [
+            "ภาษาเริ่มต้นของคุณ %s ต้องถูกจับคู่กับภาษาที่รองรับเพื่อใช้การแปลอัตโนมัติ."
+         ],
+         "Your language, %s, must be mapped to a supported language in order to use automatic translation.": [
+            "ภาษาของคุณ %s ต้องถูกจับคู่กับภาษาที่รองรับเพื่อใช้การแปลอัตโนมัติ.",
+            "ภาษาต่อไปนี้บนเว็บไซต์ของคุณต้องถูกจับคู่กับภาษาที่รองรับเพื่อใช้การแปลอัตโนมัติ: %s"
+         ],
+         "Content in those languages: %s, cannot be automatically translated unless you map them to a language that's different from the default.": [
+            "เนื้อหาในภาษาเหล่านี้: %s ไม่สามารถแปลโดยอัตโนมัติได้ เว้นแต่คุณจะจับคู่กับภาษาที่แตกต่างจากภาษาเริ่มต้น."
+         ],
+         "%d translation waiting for review": [
+            "%d การแปลรอการตรวจสอบ",
+            "%d การแปลรอการตรวจสอบ"
+         ],
+         "Account credits used": [
+            "เครดิตบัญชีที่ใช้ไป"
+         ],
+         "Once you’ve used all your prepaid credits, we’ll invoice you for any additional credits you use after the end of the month": [
+            "เมื่อคุณใช้เครดิตที่ชำระล่วงหน้าหมดแล้ว เราจะออกใบแจ้งหนี้สำหรับเครดิตเพิ่มเติมที่คุณใช้หลังจากสิ้นเดือน"
+         ],
+         "Payment limit:": [
+            "ขีดจำกัดการชำระเงิน:"
+         ],
+         "%s credits": [
+            "%s เครดิต"
+         ],
+         "Credits used:": [
+            "เครดิตที่ใช้ไป:"
+         ],
+         "Credits left:": [
+            "เครดิตที่เหลือ:"
+         ],
+         "The number of credit you will receive an invoice for at the end of the month. View your pay-as-you-go details in your site’s automatic translation settings.": [
+            "จำนวนเครดิตที่คุณจะได้รับใบแจ้งหนี้ ณ สิ้นเดือน ดูรายละเอียดการชำระเงินตามการใช้งานในการตั้งค่าการแปลอัตโนมัติของเว็บไซต์ของคุณ."
+         ],
+         "Calculating": [
+            "กำลังคำนวณ"
+         ],
+         "Remaining prepaid credits that are assigned to this site on WPML.org.": [
+            "เครดิตที่ชำระล่วงหน้าที่เหลือซึ่งถูกกำหนดให้กับเว็บไซต์นี้บน WPML.org."
+         ],
+         "Prepaid credits left": [
+            "เครดิตที่ชำระล่วงหน้าที่เหลือ"
+         ],
+         "Pay-as-you-go credits used": [
+            "เครดิตแบบชำระตามการใช้งานที่ใช้ไป"
+         ],
+         "Stop": [
+            "หยุด"
+         ],
+         "Fix it": [
+            "แก้ไข"
+         ],
+         "Assign credits now": [
+            "จัดสรรเครดิตเดี๋ยวนี้"
+         ],
+         "Resume": [
+            "ดำเนินการต่อ"
+         ],
+         "Refreshing translation status": [
+            "กำลังรีเฟรชสถานะการแปล"
+         ],
+         "Read more about how to translate your content in the <a>Getting Started Guide</a>": [
+            "อ่านเพิ่มเติมเกี่ยวกับวิธีการแปลเนื้อหาของคุณใน <a>คู่มือเริ่มต้นใช้งาน</a>"
+         ],
+         "Let's Start Translating!": [
+            "มาเริ่มแปลกันเถอะ!"
+         ],
+         "Choose your content from the Translation Dashboard below and create your first translation job!": [
+            "เลือกเนื้อหาของคุณจากแดชบอร์ดการแปลด้านล่างและสร้างงานแปลแรกของคุณ!"
+         ],
+         "Change your <a>automatic translation settings</a> (in-progress translation jobs will be completed with the current settings).": [
+            "เปลี่ยน<a>การตั้งค่าการแปลอัตโนมัติ</a>ของคุณ (งานแปลที่กำลังดำเนินการจะเสร็จสมบูรณ์ด้วยการตั้งค่าปัจจุบัน)."
+         ],
+         "Read more about translating your site automatically.": [
+            "อ่านเพิ่มเติมเกี่ยวกับการแปลเว็บไซต์ของคุณโดยอัตโนมัติ."
+         ],
+         "Your site is being automatically translated!": [
+            "เว็บไซต์ของคุณกำลังถูกแปลโดยอัตโนมัติ!"
+         ],
+         "Calculating...": [
+            "กำลังคำนวณ..."
+         ],
+         "Do not close WP admin!": [
+            "อย่าปิดหน้า WP admin!"
+         ],
+         "The number of translations": [
+            "จำนวนการแปล"
+         ]
+      }
+   }
+}

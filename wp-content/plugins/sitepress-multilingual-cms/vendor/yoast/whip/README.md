@@ -1,3 +1,7 @@
+[![CS](https://github.com/Yoast/whip/actions/workflows/cs.yml/badge.svg)](https://github.com/Yoast/whip/actions/workflows/cs.yml)
+[![Test](https://github.com/Yoast/whip/actions/workflows/test.yml/badge.svg)](https://github.com/Yoast/whip/actions/workflows/test.yml)
+[![Coverage Status](https://coveralls.io/repos/github/Yoast/whip/badge.svg?branch=main)](https://coveralls.io/github/Yoast/whip?branch=main)
+
 # whip
 A WordPress package to nudge users to upgrade their software versions (starting with PHP)
 
@@ -5,18 +9,7 @@ A WordPress package to nudge users to upgrade their software versions (starting 
 
 ## Requirements
 
-The following versions of PHP are supported:
-
-* PHP 5.3
-* PHP 5.4
-* PHP 5.5
-* PHP 5.6
-* PHP 7.0
-* PHP 7.1
-* PHP 7.2
-* PHP 7.3
-* PHP 7.4
-* PHP 8.0
+All the PHP versions from 5.3 up to the latest are supported.
 
 WordPress is also required for certain functionality:
 
@@ -80,7 +73,7 @@ add_filter( 'whip_hosting_page_url_wordpress', '__return_true' );
 
 We follow [semantic versioning][semver] with an extra strict rule for MAJOR versions. We will do a major version bump whenever we add new methods. We have to do this because of the shared namespace in PHP. When this package will be used in multiple plugins we cannot safely add and use a method without bumping a major version. This is because the version without the new method may be autoloaded and then a fatal error occurs.
 
-This also means that any major version bump is accompanied by a change of all class names in the package. So for version 2 of this package all classes will be postfixed with `_v2`. This prevents fatal errors when two plugins include different versions of this package.
+This also means that any major version bump is accompanied by an update of every namespace in the package. So for version 3 of this package all the `Yoast\WHIPv2` namespaces will become `Yoast\WHIPv3`. This prevents fatal errors when two plugins include different versions of this package.
 
 ## Changelog
 

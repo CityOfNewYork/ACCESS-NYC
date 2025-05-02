@@ -115,7 +115,7 @@ class WPML_Custom_Field_XML_Settings_Import {
 		$sub_fields = array();
 
 		foreach( $data as $key ) {
-			$sub_fields[ $key['attr']['name'] ] = isset( $key['key'] ) ? $this->get_custom_field_texts_keys( $key['key'] ) : array();
+			$sub_fields[ $key['attr']['name'] ] = isset( $key['key'] ) ? $this->get_custom_field_texts_keys( $key['key'] ) : $key['attr']['label'] ?? '';
 		}
 		return $sub_fields;
 	}

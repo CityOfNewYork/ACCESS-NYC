@@ -14,6 +14,6 @@
         {% include 'tooltip.twig' with { "content": add_tooltip } %}
     </span>
 
-	<button class="js-wpml-ls-open-dialog button-secondary"{% if disabled %} disabled="disabled"{% endif %}
+	<button class="button-secondary js-wpml-ls-open-dialog wpml-button base-btn wpml-button--outlined"{% if disabled %} disabled="disabled"{% endif %}
 			data-target="{{ button_target }}">+ {{ button_label }}</button>
 </p>

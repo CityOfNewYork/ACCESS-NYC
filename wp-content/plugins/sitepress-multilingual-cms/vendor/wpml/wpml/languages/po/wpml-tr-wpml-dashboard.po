@@ -1,0 +1,1001 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-08-22T09:24:13+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: wpml\n"
+
+#: dashboard.js:2
+msgid "Untranslated strings that I encounter on front-end while logged in"
+msgstr "Oturum açtığımda ön uçta karşılaştığım çevrilmemiş dizeler"
+
+#: dashboard.js:2
+msgid "Untranslated strings that all front-end users encounter"
+msgstr "Tüm ön uç kullanıcılarının karşılaştığı çevrilmemiş dizeler"
+
+#: dashboard.js:2
+msgid "Disable auto-registration of strings"
+msgstr "Dizelerin otomatik kaydını devre dışı bırakma"
+
+#: dashboard.js:2
+msgid "Frontend"
+msgstr "Ön Uç"
+
+#: dashboard.js:2
+msgid "Backend"
+msgstr "Arka uç"
+
+#: dashboard.js:2
+msgid "Plugins"
+msgstr "Eklentiler"
+
+#: dashboard.js:2
+msgid "Themes"
+msgstr "Temalar"
+
+#: dashboard.js:2
+msgid "WordPress"
+msgstr "Wordpress"
+
+#: dashboard.js:2
+msgid "Other"
+msgstr "Diğer"
+
+#: dashboard.js:2
+msgid "Error in fetching default translation batch name"
+msgstr "Varsayılan çeviri toplu iş adı alınırken hata oluştu"
+
+#: dashboard.js:2
+msgid "Error in fetching translation editor type."
+msgstr "Çeviri düzenleyicisi türü getirilirken hata oluştu."
+
+#: dashboard.js:2
+msgid "Error in fetching untranslated types count"
+msgstr "Çevrilmemiş tür sayısı getirilirken hata oluştu"
+
+#: dashboard.js:2
+msgid "Error in fetching remote translation service data."
+msgstr "Uzak çeviri hizmeti verileri alınırken hata oluştu."
+
+#: dashboard.js:2
+msgid "Status checked: "
+msgstr "Durum kontrol edildi: "
+
+#: dashboard.js:2
+msgid "none of your translation jobs have been completed"
+msgstr "çeviri işlerinizden hiçbiri tamamlanmadı"
+
+#: dashboard.js:2
+msgid "Downloaded jobs: "
+msgstr "İndirilen işler: "
+
+#: dashboard.js:2
+msgid "Cancelled jobs: "
+msgstr "İptal edilen işler: "
+
+#: dashboard.js:2
+msgid "Checking translation jobs status. Please don't close this page!"
+msgstr "Çeviri işlerinin durumu kontrol ediliyor. Lütfen bu sayfayı kapatmayın!"
+
+#: dashboard.js:2
+msgid "Last check: Never"
+msgstr "Son kontrol: Hiçbir zaman"
+
+#: dashboard.js:2
+msgid "Please wait until download finishes"
+msgstr "Lütfen indirme işlemi bitene kadar bekleyin"
+
+#: dashboard.js:2
+msgid "You need to wait 5 minutes after last pick up"
+msgstr "Son alımdan sonra 5 dakika beklemeniz gerekiyor"
+
+#: dashboard.js:2
+msgid "Check status and get translations"
+msgstr "Durumu kontrol edin ve çevirileri alın"
+
+#: dashboard.js:2
+msgid "Filtering is disabled to show all selected items. "
+msgstr "Seçilen tüm öğeleri göstermek için filtreleme devre dışı bırakılır. "
+
+#: dashboard.js:2
+msgid "Apply filters"
+msgstr "Filtreleri uygula"
+
+#: dashboard.js:2
+msgid "%s posts selected"
+msgstr "%s seçilen gönderiler"
+
+#: dashboard.js:2
+msgid "(%d word count)"
+msgstr "(%d kelime sayısı)"
+
+#: dashboard.js:2
+msgid "%s item not showing."
+msgid_plural "%s items not showing."
+msgstr[0] "%s öğe gösterilmiyor."
+msgstr[1] "%s öğeler gösterilmiyor."
+
+#: dashboard.js:2
+msgid "Show all selected items"
+msgstr "Seçilen tüm öğeleri göster"
+
+#: dashboard.js:2
+msgid "Translate your content"
+msgstr "İçeriğinizi tercüme edin"
+
+#: dashboard.js:2
+msgid "Unselect all"
+msgstr "Tümünün seçimini kaldır"
+
+#: dashboard.js:2
+msgid "Source Language:"
+msgstr "Kaynak dil:"
+
+#: dashboard.js:2
+msgid "translated to:"
+msgstr "tercüme edildi:"
+
+#: dashboard.js:2
+msgid "Clear filters"
+msgstr "Filtreleri temizle"
+
+#: dashboard.js:2
+msgid "Filter"
+msgstr "Filtre"
+
+#: dashboard.js:2
+msgid "You are about to change the source language filter from %s to %s"
+msgstr "Kaynak dil filtresini %s adresinden şu adrese değiştirmek üzeresiniz %s"
+
+#: dashboard.js:2
+msgid "Updating the source language filter will clear the items you've selected for translation. Are you sure you want to continue?"
+msgstr "Kaynak dil filtresini güncellemek, çeviri için seçtiğiniz öğeleri temizleyecektir. Devam etmek istediğinizden emin misiniz?"
+
+#: dashboard.js:2
+msgid "Cancel"
+msgstr "İptal"
+
+#: dashboard.js:2
+msgid "Change source language"
+msgstr "Kaynak dili değiştir"
+
+#: dashboard.js:2
+msgid "All Statuses"
+msgstr "Tüm durumlar"
+
+#: dashboard.js:2
+msgid "All languages"
+msgstr "Tüm diller"
+
+#: dashboard.js:2
+msgid "All translation statuses"
+msgstr "Tüm çeviri durumları"
+
+#: dashboard.js:2
+msgid "Not translated"
+msgstr "Tercüme edilmedi"
+
+#: dashboard.js:2
+msgid "Not translated or needs updating"
+msgstr "Çevrilmemiş veya güncellenmesi gerekiyor"
+
+#: dashboard.js:2
+msgid "Needs updating"
+msgstr "Güncellenmesi gerekiyor"
+
+#: dashboard.js:2
+msgid "Translation in progress"
+msgstr "Çeviri devam ediyor"
+
+#: dashboard.js:2
+msgid "Translation complete"
+msgstr "Çeviri tamamlandı"
+
+#: dashboard.js:2
+msgid "Parent:"
+msgstr "Ebeveyn:"
+
+#: dashboard.js:2
+msgid "All taxonomies"
+msgstr "Tüm taksonomiler"
+
+#: dashboard.js:2
+msgid "Taxonomy Term:"
+msgstr "Taksonomi terimi:"
+
+#: dashboard.js:2
+msgid "No terms found"
+msgstr "Terim bulunamadı"
+
+#: dashboard.js:2
+msgid "Filter by:"
+msgstr "Filtreye göre:"
+
+#: dashboard.js:2
+msgid "Title"
+msgstr "Başlık"
+
+#: dashboard.js:2
+msgid "View"
+msgstr "Görünüm"
+
+#: dashboard.js:2
+msgid "Edit note for the translators"
+msgstr "Çevirmenler için düzenleme notu"
+
+#: dashboard.js:2
+msgid "Add note for the translators"
+msgstr "Çevirmenler için not ekleyin"
+
+#: dashboard.js:2
+msgid "(no title)"
+msgstr "(başlık yok)"
+
+#: dashboard.js:2
+msgid "Image"
+msgstr "Resim"
+
+#: dashboard.js:2
+msgid "Date / Status"
+msgstr "Tarih / durum"
+
+#: dashboard.js:2
+msgid "Word count"
+msgstr "Kelime sayısı"
+
+#: dashboard.js:2
+msgid "Loading..."
+msgstr "Yükleniyor..."
+
+#: dashboard.js:2
+msgid "No items"
+msgstr "Ürün yok"
+
+#: dashboard.js:2
+msgid "%1$d %2$s selected"
+msgstr "%1$d %2$s seçilmiş"
+
+#: dashboard.js:2
+msgid "Filtering is disabled to show all selected items"
+msgstr "Seçilen tüm öğeleri göstermek için filtreleme devre dışı bırakılır"
+
+#: dashboard.js:2
+msgid "Apply filter"
+msgstr "Filtre uygula"
+
+#: dashboard.js:2
+msgid "%1$d %2$s not showing"
+msgstr "%1$d %2$s gösterilmiyor"
+
+#: dashboard.js:2
+msgid "Show selected items"
+msgstr "Seçili öğeleri göster"
+
+#: dashboard.js:2
+msgid "Previous"
+msgstr "Önceki"
+
+#: dashboard.js:2
+msgid "Next"
+msgstr "Sonraki"
+
+#: dashboard.js:2
+msgid "Your site's content is too vast for a single translation batch. Use filters to reduce the selection, then \"select all\"."
+msgstr "Sitenizin içeriği tek bir çeviri grubu için çok geniş. Seçimi azaltmak için filtreleri kullanın, ardından \"tümünü seçin\"."
+
+#: dashboard.js:2
+msgid "The current filter captures too much content. Narrow it down to enable \"select all\" for translation."
+msgstr "Mevcut filtre çok fazla içerik yakalıyor. Çeviri için \"tümünü seç\" seçeneğini etkinleştirmek üzere daraltın."
+
+#: dashboard.js:2
+msgid "Select All"
+msgstr "Tümünü seçin"
+
+#: dashboard.js:2
+msgid "All %d items matching criteria are selected"
+msgstr "Kriterlerle eşleşen tüm %d öğeleri seçilir"
+
+#: dashboard.js:2
+msgid "All %d items on this page are selected"
+msgstr "Bu sayfadaki tüm %d öğeleri seçilmiştir"
+
+#: dashboard.js:2
+msgid "Unselect all items that match this search"
+msgstr "Bu aramayla eşleşen tüm öğelerin seçimini kaldırın"
+
+#: dashboard.js:2
+msgid "Select all items that match this search"
+msgstr "Bu aramayla eşleşen tüm öğeleri seçin"
+
+#: dashboard.js:2
+msgid "Save note"
+msgstr "Not kaydet"
+
+#: dashboard.js:2
+msgid "Step 1"
+msgstr "Adım 1"
+
+#: dashboard.js:2
+msgid "Select items for translation"
+msgstr "Çeviri için öğeleri seçin"
+
+#: dashboard.js:2
+msgid "You have too many items selected to use this feature. Deselect some of the items to enable it."
+msgstr "Bu özelliği kullanmak için çok fazla öğe seçtiniz. Etkinleştirmek için bazı öğelerin seçimini kaldırın."
+
+#: dashboard.js:2
+msgid "Show strings in:"
+msgstr "Dizeleri göster:"
+
+#: dashboard.js:2
+msgid "All domains"
+msgstr "Tüm alan adları"
+
+#: dashboard.js:2
+msgid "All sources"
+msgstr "Tüm kaynaklar"
+
+#: dashboard.js:2
+msgid "String"
+msgstr "Dize"
+
+#: dashboard.js:2
+msgid "All Translation Priorities"
+msgstr "Tüm çeviri öncelikleri"
+
+#: dashboard.js:2
+msgid "WPML doesn't know of any strings that need translation. Visit translations on your site's front-end (<a/>). WPML will identify all untranslated strings and list them here. To see all the strings in your site, disable \"Detect untranslated strings\" at the top of this section."
+msgstr "WPML, çevrilmesi gereken herhangi bir dizge bilmiyor. Sitenizin ön ucundaki çevirileri ziyaret edin (<a/>). WPML çevrilmemiş tüm dizgileri belirleyecek ve burada listeleyecektir. Sitenizdeki tüm dizeleri görmek için, bu bölümün üst kısmındaki \"Çevrilmemiş dizeleri algıla\" seçeneğini devre dışı bırakın."
+
+#: dashboard.js:2
+msgid "Domain"
+msgstr "Etki Alanı"
+
+#: dashboard.js:2
+msgid "Source"
+msgstr "Kaynak"
+
+#: dashboard.js:2
+msgid "Type"
+msgstr "Tip"
+
+#: dashboard.js:2
+msgid "Disabled"
+msgstr "Engelli"
+
+#: dashboard.js:2
+msgid "WPML can detect strings that appear on the site and list them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here only the strings that actually appear on the site, you need to enable this feature."
+msgstr "WPML, sitede görünen dizeleri algılayabilir ve bunları burada listeleyebilir. Bu özellik, sitede gerçekten görünen dizeleri belirlemenize ve bunları çevirmenize yardımcı olur. Burada yalnızca sitede gerçekten görünen dizeleri görmek için bu özelliği etkinleştirmeniz gerekir."
+
+#: dashboard.js:2
+msgid "Enabled"
+msgstr "Etkin"
+
+#: dashboard.js:2
+msgid "WPML detects strings that appear on the site and lists them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here all the strings in the site, you need to disable this feature."
+msgstr "WPML, sitede görünen dizeleri algılar ve bunları burada listeler. Bu özellik, sitede gerçekten görünen dizgileri belirlemenize ve bunları çevirmenize yardımcı olur. Sitedeki tüm dizgileri burada görmek için bu özelliği devre dışı bırakmanız gerekir."
+
+#: dashboard.js:2
+msgid "Detect untranslated strings"
+msgstr "Çevrilmemiş dizeleri algıla"
+
+#: dashboard.js:2
+msgid "Modify"
+msgstr "Değiştirmek"
+
+#: dashboard.js:2
+msgid "Automatically register untranslated strings"
+msgstr "Çevrilmemiş dizeleri otomatik olarak kaydetme"
+
+#: dashboard.js:2
+msgid "Learn how to use auto-registration"
+msgstr "Otomatik kaydı nasıl kullanacağınızı öğrenin"
+
+#: dashboard.js:2
+msgid "recommended"
+msgstr "tavsiye edilir"
+
+#: dashboard.js:2
+msgid "Also register strings from the website's back-end"
+msgstr "Ayrıca web sitesinin arka ucundan dizeleri kaydedin"
+
+#: dashboard.js:2
+msgid "Save settings"
+msgstr "Ayarları kaydet"
+
+#: dashboard.js:2
+msgid "Leave existing translations as are"
+msgstr "Mevcut çevirileri olduğu gibi bırakın"
+
+#: dashboard.js:2
+msgid "Overwrite existing translations"
+msgstr "Mevcut çevirilerin üzerine yaz"
+
+#: dashboard.js:2
+msgid "Some of the content you want to translate is already translated"
+msgstr "Çevirmek istediğiniz içeriğin bir kısmı zaten çevrilmiş durumda"
+
+#: dashboard.js:2
+msgid "What do you want to do with the content that's already translated?"
+msgstr "Halihazırda çevrilmiş olan içerikle ne yapmak istiyorsunuz?"
+
+#: dashboard.js:2
+msgid "What would you like to do when WPML finishes translating your content automatically?"
+msgstr "WPML içeriğinizi otomatik olarak çevirmeyi bitirdiğinde ne yapmak istersiniz?"
+
+#: dashboard.js:2
+msgid "Choose how you want to handle your site's automatically translated content before it goes live. Remember that you can always edit translations, regardless of the review process."
+msgstr "Sitenizin otomatik olarak çevrilen içeriğini yayına girmeden önce nasıl ele almak istediğinizi seçin. İnceleme sürecinden bağımsız olarak çevirileri her zaman düzenleyebileceğinizi unutmayın."
+
+#: dashboard.js:2
+msgid "Wait for review"
+msgstr "İnceleme için bekleyin"
+
+#: dashboard.js:2
+msgid "You check and approve translations before publishing."
+msgstr "Yayınlamadan önce çevirileri kontrol eder ve onaylarsınız."
+
+#: dashboard.js:2
+msgid "Your translators check and approve translations before publishing."
+msgstr "Çevirmenleriniz yayınlamadan önce çevirileri kontrol eder ve onaylar."
+
+#: dashboard.js:2
+msgid "Publish and mark for review"
+msgstr "Yayınlayın ve inceleme için işaretleyin"
+
+#: dashboard.js:2
+msgid "WPML publishes translations immediately but flags them for you to check at your convenience."
+msgstr "WPML çevirileri hemen yayınlar, ancak istediğiniz zaman kontrol etmeniz için işaretler."
+
+#: dashboard.js:2
+msgid "WPML publishes translations immediately but flags them for your translators to check at their convenience."
+msgstr "WPML çevirileri hemen yayınlar, ancak çevirmenlerinizin uygun bir zamanda kontrol etmeleri için işaretler."
+
+#: dashboard.js:2
+msgid "Publish without review"
+msgstr "İnceleme yapmadan yayınla"
+
+#: dashboard.js:2
+msgid "The system publishes translations straight away, skipping the review process."
+msgstr "Sistem, çevirileri inceleme sürecini atlayarak doğrudan yayınlar."
+
+#: dashboard.js:2
+msgid "Suggested deadline:"
+msgstr "Önerilen son tarih:"
+
+#: dashboard.js:2
+msgid "Set a batch name and deadline"
+msgstr "Bir toplu iş adı ve son tarih belirleyin"
+
+#: dashboard.js:2
+msgid "You can assign a custom name to this batch for easy tracking and suggest a deadline to clarify the priority for translators."
+msgstr "Kolay takip için bu partiye özel bir ad atayabilir ve çevirmenlerin önceliğini netleştirmek için bir son tarih önerebilirsiniz."
+
+#: dashboard.js:2
+msgid "Batch name:"
+msgstr "Parti adı:"
+
+#: dashboard.js:2
+msgid "Your Automatic Translation Credits"
+msgstr "Otomatik çeviri kredileriniz"
+
+#: dashboard.js:2
+msgid "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s translator</add_yourself> to the site.<br/> Add yourself as %s translator and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Kendinizi çevirmen olarak atamak için öncelikle siteye <add_yourself>kendinizi %sçevirmen</add_yourself> olarak eklemeniz gerekir.<br/> Kendinizi %sçevirmen olarak ekleyin ve <check_again>tekrar kontrol et</check_again> seçeneğine tıklayın veya farklı bir çeviri seçeneği seçin."
+
+#: dashboard.js:2
+msgid "Checking"
+msgstr "Kontrol"
+
+#: dashboard.js:2
+msgid "In order to assign a translation service, you first need to <activate_ts>activate a translation service</activate_ts>.<br/>Activate a translation service and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Bir çeviri hizmeti atamak için öncelikle <activate_ts>bir çeviri hizmetini etkinleştirmeniz</activate_ts> gerekir.<br/>Bir çeviri hizmetini etkinleştirin ve <check_again>tekrar kontrol et</check_again> seçeneğine tıklayın veya farklı bir çeviri seçeneği seçin."
+
+#: dashboard.js:2
+msgid "In order to translate automatically, you first need to <enable_ate>enable WPML's Advanced Translation Editor</enable_ate>.<br/>Enable the Advanced Translation Editor and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Otomatik olarak çevirmek için öncelikle <enable_ate>WPML'nin Gelişmiş Çeviri Düzenleyicisini etkinleştirmeniz</enable_ate> gerekir.<br/>Gelişmiş Çeviri Düzenleyicisini etkinleştirin ve <check_again>tekrar kontrol et</check_again> seçeneğine tıklayın veya farklı bir çeviri seçeneği seçin."
+
+#: dashboard.js:2
+msgid ""
+"Any existing content (translations) will be overwritten when creating duplicates.\n"
+"When duplicating content, please first duplicate parent pages to maintain the site's hierarchy."
+msgstr "Kopyalar oluşturulurken mevcut içeriklerin (çevirilerin) üzerine yazılacaktır.\nİçeriği kopyalarken, sitenin hiyerarşisini korumak için lütfen önce ana sayfaları kopyalayın."
+
+#: dashboard.js:2
+msgid "Some of the selected content is already being translated. This will cancel any in-progress translations."
+msgstr "Seçilen içeriğin bir kısmı zaten çevriliyor. Bu, devam eden çevirileri iptal edecektir."
+
+#: dashboard.js:2
+msgid "Buy credits"
+msgstr "Kredi satın alın"
+
+#: dashboard.js:2
+msgid "You don't have enough credits to translate your content automatically."
+msgstr "İçeriğinizi otomatik olarak çevirmek için yeterli krediniz yok."
+
+#: dashboard.js:2
+msgid "In order to assign to a translator, you first need to <add_translators>add %s translators</add_translators> to the site.<br/> Add %s translators and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Bir çevirmene atama yapmak için öncelikle <add_translators> %s çevirmenlerini siteye eklemeniz</add_translators> gerekir.<br/> %s çevirmenlerini ekleyin ve <check_again>tekrar kontrol</check_again> et seçeneğine tıklayın veya farklı bir çeviri seçeneği seçin."
+
+#: dashboard.js:2
+msgid "Your site doesn't have any reviewers for %s. This means that you’re the only person who can review these translations."
+msgstr "Sitenizde %s için herhangi bir yorumcu bulunmuyor. Bu, bu çevirileri inceleyebilecek tek kişinin siz olduğunuz anlamına gelir."
+
+#: dashboard.js:2
+msgid "Your site doesn't have any reviewers yet. This means that you’re the only person who can review translations."
+msgstr "Sitenizde henüz hiç yorumcu yok. Bu, çevirileri inceleyebilecek tek kişinin siz olduğunuz anlamına gelir."
+
+#: dashboard.js:2
+msgid "If you want other people to review the translations, go to <a>WPML → Translation Management → Translators</a> and add translators. They will be able to both review and translate content for you."
+msgstr "Başkalarının çevirileri incelemesini istiyorsanız, <a>WPML → Çeviri Yönetimi → Çevirmenler</a> bölümüne gidin ve çevirmen ekleyin. Sizin için içeriği hem inceleyebilecek hem de çevirebileceklerdir."
+
+#: dashboard.js:2
+msgid "WPML does not support duplicating strings."
+msgstr "WPML, dizelerin çoğaltılmasını desteklemez."
+
+#: dashboard.js:2
+msgid "Finish setting up %s on your site"
+msgstr "Sitenizde %s kurulumunu tamamlayın"
+
+#: dashboard.js:2
+msgid "You need to authenticate %s to send them content for translation.<br/>Visit the <a>Translators tab</a> to finish the setup and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Çeviri için içerik göndermek üzere %s adresinin kimliğini doğrulamanız gerekir.<br/>Kurulumu tamamlamak için <a>Çevirmenler sekmesini</a> ziyaret edin ve <check_again>tekrar kontrol</check_again> et seçeneğine tıklayın veya farklı bir çeviri seçeneği seçin."
+
+#: dashboard.js:2
+msgid "Content selected for translation"
+msgstr "Çeviri için seçilen içerik"
+
+#: dashboard.js:2
+msgid "Volume"
+msgstr "Cilt"
+
+#: dashboard.js:2
+msgid "~ %d words"
+msgstr "~ %d kelimeler"
+
+#: dashboard.js:2
+msgid "Total"
+msgstr "Toplam"
+
+#: dashboard.js:2
+msgid "Sending for translation..."
+msgstr "Çeviri için gönderiyorum..."
+
+#: dashboard.js:2
+msgid "Sending for translation failed"
+msgstr "Çeviri için gönderme başarısız oldu"
+
+#: dashboard.js:2
+msgid "You selected multiple translation methods for content across different languages:"
+msgstr "Farklı dillerdeki içerikler için birden fazla çeviri yöntemi seçtiniz:"
+
+#: dashboard.js:2
+msgid "WPML did not create translations for some languages because:"
+msgstr "WPML bazı diller için çeviri oluşturmadı çünkü:"
+
+#: dashboard.js:2
+msgid "Close"
+msgstr "Kapat"
+
+#: dashboard.js:2
+msgid "1 item is being translated automatically."
+msgid_plural "%d items are being translated automatically."
+msgstr[0] "1 öğe otomatik olarak çevriliyor."
+msgstr[1] "%d öğeler otomatik olarak çevrilmektedir."
+
+#: dashboard.js:2
+msgid "From now on, WPML will automatically translate new content on your site."
+msgstr "Şu andan itibaren WPML, sitenizdeki yeni içeriği otomatik olarak çevirecektir."
+
+#: dashboard.js:2
+msgid "From now on, WPML will automatically translate your site's content."
+msgstr "Şu andan itibaren WPML sitenizin içeriğini otomatik olarak çevirecektir."
+
+#: dashboard.js:2
+msgid "Automatic translations summary"
+msgstr "Otomatik çeviriler özeti"
+
+#: dashboard.js:2
+msgid "1 item has been duplicated."
+msgid_plural "%d items have been duplicated."
+msgstr[0] "1 öğe çoğaltılmıştır."
+msgstr[1] "%d öğeler çoğaltılmıştır."
+
+#: dashboard.js:2
+msgid "Duplication summary"
+msgstr "Çoğaltma özeti"
+
+#: dashboard.js:2
+msgid "There was a problem sending your content for translation."
+msgstr "İçeriğinizi çeviri için gönderirken bir sorun oluştu."
+
+#: dashboard.js:2
+msgid "Please try again in a few minutes. If the issue persists, please contact our support."
+msgstr "Lütfen birkaç dakika içinde tekrar deneyin. Sorun devam ederse, lütfen destek ekibimizle iletişime geçin."
+
+#: dashboard.js:2
+msgid "1 item has been successfully sent to translators! To check its status, please visit the <s>Jobs</s> tab in <s>WPML → Translation Management</s>."
+msgid_plural "%d items have been successfully sent to translators! For status updates, please visit the <s>Jobs</s> tab in <s>WPML → Translation Management</s>."
+msgstr[0] "1 öğe çevirmenlere başarıyla gönderildi! Durumunu kontrol etmek için lütfen <s>WPML → Çeviri Yönetimi</s>'ndeki <s>İşler</s> sekmesini ziyaret edin."
+msgstr[1] "%d öğeler çevirmenlere başarıyla gönderildi! Durum güncellemeleri için lütfen <s>WPML → Çeviri Yönetimi</s>'ndeki <s>İşler</s> sekmesini ziyaret edin."
+
+#: dashboard.js:2
+msgid "Local translations summary"
+msgstr "Yerel çevirilerin özeti"
+
+#: dashboard.js:2
+msgid "Go to Translation Jobs"
+msgstr "Çeviri işlerine git"
+
+#: dashboard.js:2
+msgid "%d item has been sent for translation to %s. Please continue to their site to start the translation."
+msgid_plural "%d items have been sent for translation to %s. Please continue to their site to start the translation."
+msgstr[0] "%d ürün %s adresine çevrilmek üzere gönderilmiştir. Çeviriye başlamak için lütfen sitelerine devam edin."
+msgstr[1] "%d öğeler %s adresine çevrilmek üzere gönderilmiştir. Çeviriye başlamak için lütfen sitelerine devam edin."
+
+#: dashboard.js:2
+msgid "Translation service translations summary"
+msgstr "Çeviri hizmeti çevirileri özeti"
+
+#: dashboard.js:2
+msgid "Continue to %s"
+msgstr "Devam et %s"
+
+#: dashboard.js:2
+msgid "Translate and Duplicate"
+msgstr "Çevirin ve çoğaltın"
+
+#: dashboard.js:2
+msgid "Duplicate"
+msgstr "Yinelenen"
+
+#: dashboard.js:2
+msgid "Translate"
+msgstr "Tercüme et"
+
+#: dashboard.js:2
+msgid "Selected content is already translated"
+msgstr "Seçilen içerik zaten çevrilmiş"
+
+#: dashboard.js:2
+msgid "Please select a review option"
+msgstr "Lütfen bir inceleme seçeneği seçin"
+
+#: dashboard.js:2
+msgid "Assign local translator or choose another option"
+msgstr "Yerel çevirmen atayın veya başka bir seçenek seçin"
+
+#: dashboard.js:2
+msgid "Assign yourself or choose another option"
+msgstr "Kendinizi atayın veya başka bir seçenek seçin"
+
+#: dashboard.js:2
+msgid "Activate translation service or choose another option"
+msgstr "Çeviri hizmetini etkinleştirin veya başka bir seçenek seçin"
+
+#: dashboard.js:2
+msgid "Activate ATE or choose another option"
+msgstr "YEDI ' YI etkinleştirin veya başka bir seçenek seçin"
+
+#: dashboard.js:2
+msgid "Authenticate translation service or choose another option"
+msgstr "Çeviri hizmetinin kimliğini doğrulayın veya başka bir seçenek belirleyin"
+
+#: dashboard.js:2
+msgid "<s>%s</s> cannot process more than <s>%d</s> jobs in a single batch. WPML will automatically split your jobs into separate batches to ensure an error-free delivery to <s>%s</s>. <br/><br/> Do you want to proceed?"
+msgstr "<s>%s</s> daha fazla işlem yapamaz <s>%d</s> işleri tek bir partide. WPML, hatasız bir teslimat sağlamak için işlerinizi otomatik olarak ayrı gruplara ayıracaktır. <s>%s</s>. <br/><br/> Devam etmek istiyor musun?"
+
+#: dashboard.js:2
+msgid "WPML will send jobs to %s in separate batches"
+msgstr "WPML, işleri ayrı gruplar halinde %s adresine gönderecektir"
+
+#: dashboard.js:2
+msgid "Yes, send jobs in separate batches"
+msgstr "Evet, işleri ayrı gruplar halinde gönderin"
+
+#: dashboard.js:2
+msgid "No, I will split jobs myself"
+msgstr "Hayır, işleri kendim böleceğim"
+
+#: dashboard.js:2
+msgid "From now on, translate new content automatically, without asking me."
+msgstr "Şu andan itibaren yeni içerikleri bana sormadan otomatik olarak çevirin."
+
+#: dashboard.js:2
+msgid "Do you want to translate existing content too?"
+msgstr "Mevcut içeriği de çevirmek istiyor musunuz?"
+
+#: dashboard.js:2
+msgid "Yes, translate all new and existing content"
+msgstr "Evet, tüm yeni ve mevcut içeriği çevirin"
+
+#: dashboard.js:2
+msgid "No, only translate new content"
+msgstr "Hayır, sadece yeni içerikleri çevirin"
+
+#: dashboard.js:2
+msgid "You can translate existing content from the Translation Management Dashboard"
+msgstr "Mevcut içeriği Çeviri Yönetimi Panosundan çevirebilirsiniz"
+
+#: dashboard.js:2
+msgid "Existing content"
+msgstr "Mevcut içerik"
+
+#: dashboard.js:2
+msgid "You selected to translate strings that are in %s. Only these strings will be translated to %s."
+msgstr "%s adresindeki dizeleri çevirmeyi seçtiniz. Yalnızca bu dizeler %s adresine çevrilecektir."
+
+#: dashboard.js:2
+msgid "You selected to translate strings that are in %s and %s. Only these strings will be translated to %s."
+msgstr "%s ve %s adreslerinde bulunan dizeleri çevirmeyi seçtiniz. Yalnızca bu dizeler %s adresine çevrilecektir."
+
+#: dashboard.js:2
+msgid "Source language"
+msgstr "Kaynak dil"
+
+#: dashboard.js:2
+msgid "Target language"
+msgstr "Hedef dil"
+
+#: dashboard.js:2
+msgid "Action"
+msgstr "Eylem"
+
+#: dashboard.js:2
+msgid "Select an option"
+msgstr "Bir seçenek seçin"
+
+#: dashboard.js:2
+msgid "-"
+msgstr "-"
+
+#: dashboard.js:2
+msgid "Translate automatically"
+msgstr "Otomatik olarak çevir"
+
+#: dashboard.js:2
+msgid "Translate myself"
+msgstr "Kendimi tercüme et"
+
+#: dashboard.js:2
+msgid "Assign a translator"
+msgstr "Bir çevirmen atayın"
+
+#: dashboard.js:2
+msgid "Assign translation service"
+msgstr "Çeviri hizmeti atayın"
+
+#: dashboard.js:2
+msgid "Do nothing"
+msgstr "Hiçbir şey yapmayın"
+
+#: dashboard.js:2
+msgid "Please choose"
+msgstr "Lütfen seçiniz"
+
+#: dashboard.js:2
+msgid "Choose a translator"
+msgstr "Bir çevirmen seçin"
+
+#: dashboard.js:2
+msgid "First available"
+msgstr "İlk mevcut"
+
+#: dashboard.js:2
+msgid "(Me)"
+msgstr "(Ben)"
+
+#: dashboard.js:2
+msgid "Translation controls"
+msgstr "Çeviri kontrolleri"
+
+#: dashboard.js:2
+msgid "Step 2"
+msgstr "Adım 2"
+
+#: dashboard.js:2
+msgid "Action needed"
+msgstr "Yapılması gerekenler"
+
+#: dashboard.js:2
+msgid "Automatic jobs in progress"
+msgstr "Otomatik işler devam ediyor"
+
+#: dashboard.js:2
+msgid "<s>%d automatic translation jobs</s> are currently in progress"
+msgstr "<s>%d otomatik çeviri işleri</s> şu anda devam ediyor"
+
+#: dashboard.js:2
+msgid "Pause"
+msgstr "Duraklat"
+
+#: dashboard.js:2
+msgid "Start"
+msgstr "Başlangıç"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - credit wizard error"
+msgstr "Her Şeyi Otomatik Olarak Çevir - kredi sihirbazı hatası"
+
+#: dashboard.js:2
+msgid "There was an error when loading the credit wizard."
+msgstr "Kredi sihirbazı yüklenirken bir hata oluştu."
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - no credits"
+msgstr "Her Şeyi Otomatik Olarak Çevir - kredi yok"
+
+#: dashboard.js:2
+msgid "Start translating everything"
+msgstr "Her şeyi çevirmeye başlayın"
+
+#: dashboard.js:2
+msgid "Automatic translation uses credit. <a>Read more about automatic translation credits</a>"
+msgstr "Otomatik çeviri kredi kullanır. <a>Otomatik çeviri kredileri hakkında daha fazla bilgi edinin</a>"
+
+#: dashboard.js:2
+msgid "Start translating everything automatically"
+msgstr "Her şeyi otomatik olarak çevirmeye başlayın"
+
+#: dashboard.js:2
+msgid "WPML will translate any new content you create into %d languages."
+msgstr "WPML, oluşturduğunuz tüm yeni içerikleri %d dillerine çevirecektir."
+
+#: dashboard.js:2
+msgid "You will be able to start Translate Everything Automatically after you send some content for translation. We recommend that you review the translations and make sure that they are good before translating your entire site's content."
+msgstr "Çeviri için bazı içerikler gönderdikten sonra Her Şeyi Otomatik Olarak Çevir'i başlatabileceksiniz. Sitenizin tüm içeriğini çevirmeden önce çevirileri incelemenizi ve iyi olduklarından emin olmanızı öneririz."
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - disabled"
+msgstr "Her Şeyi Otomatik Olarak Çevir - devre dışı"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically"
+msgstr "Her şeyi otomatik olarak çevirin"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - pausing"
+msgstr "Her Şeyi Otomatik Olarak Çevir - duraklatma"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically is pausing"
+msgstr "Her Şeyi Otomatik Olarak Çevir duraklatılıyor"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - paused"
+msgstr "Her Şeyi Otomatik Olarak Çevir - duraklatıldı"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically is paused"
+msgstr "Her Şeyi Otomatik Olarak Çevir duraklatıldı"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically will translate all of your site's content and not only specific post types."
+msgstr "Her Şeyi Otomatik Olarak Çevir, yalnızca belirli gönderi türlerini değil, sitenizin tüm içeriğini çevirir."
+
+#: dashboard.js:2
+msgid "%d translations left in the queue. Preparing more content for translation."
+msgstr "%d Kuyrukta kalan çeviriler. Çeviri için daha fazla içerik hazırlanıyor."
+
+#: dashboard.js:2
+msgid "Preparing content for translation"
+msgstr "Çeviri için içerik hazırlama"
+
+#: dashboard.js:2
+msgid "%d translations left in the queue"
+msgstr "%d kuyrukta kalan çeviriler"
+
+#: dashboard.js:2
+msgid "All translations are up to date"
+msgstr "Tüm çeviriler günceldir"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - enabled"
+msgstr "Her Şeyi Otomatik Olarak Çevir - etkin"
+
+#: dashboard.js:2
+msgid "As you create new content or edit existing content, WPML will automatically translate it from %s to %s."
+msgstr "Yeni içerik oluşturduğunuzda veya mevcut içeriği düzenlediğinizde, WPML içeriği otomatik olarak %s adresinden %s adresine çevirecektir."
+
+#: dashboard.js:2
+msgid "Hide details"
+msgstr "Ayrıntıları gizle"
+
+#: dashboard.js:2
+msgid "Show details"
+msgstr "Detayları göster"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically is stopped"
+msgstr "Her Şeyi Otomatik Olarak Çevir durduruldu"
+
+#: dashboard.js:2
+msgid "Translation not running… there is an issue that needs your attention. Fix it to continue."
+msgstr "Çeviri çalışmıyor... İlgilenmeniz gereken bir sorun var. Devam etmek için düzeltin."
+
+#: dashboard.js:2
+msgid "Fix now"
+msgstr "Şimdi düzeltin"
+
+#: dashboard.js:2
+msgid "%d Translations are waiting for your review"
+msgstr "%d Çeviriler incelemenizi bekliyor"
+
+#: dashboard.js:2
+msgid "Review Translations"
+msgstr "Çevirileri gözden geçirin"
+
+#: dashboard.js:2
+msgid "Error in fetching currently logged in translator"
+msgstr "Şu anda oturum açmış çevirmen getirilirken hata oluştu"
+
+#: dashboard.js:2
+msgid "Error in fetching local translators"
+msgstr "Yerel çevirmenleri getirirken hata oluştu"
+
+#: dashboard.js:2
+msgid "published"
+msgstr "yayınlandı"
+
+#: dashboard.js:2
+msgid "Collapse"
+msgstr "Çöküş"
+
+#: dashboard.js:2
+msgid "Expand"
+msgstr "Genişlet"
+
+#: dashboard.js:2
+msgid "Close modal"
+msgstr "Modalı kapat"
+
+#: dashboard.js:2
+msgid "Search parent by title"
+msgstr "Ebeveyni başlığa göre ara"
+
+#: dashboard.js:2
+msgid "No items found"
+msgstr "Hiçbir öğe bulunamadı"
+
+#: dashboard.js:2
+msgid "%1$s Flag"
+msgstr "%1$s Bayrak"
+
+#: dashboard.js:2
+msgid "not translated"
+msgstr "tercüme edilmedi"
+
+#: dashboard.js:2
+msgid "waiting for translator"
+msgstr "çevirmen bekleniyor"
+
+#: dashboard.js:2
+msgid "in progress"
+msgstr "devam ediyor"
+
+#: dashboard.js:2
+msgid "needs update"
+msgstr "güncelleme gerekiyor"
+
+#: dashboard.js:2
+msgid "duplicate"
+msgstr "çoğaltmak"
+
+#: dashboard.js:2
+msgid "complete"
+msgstr "tamamlandı"
+
+#: dashboard.js:2
+msgid "needs review"
+msgstr "gözden geçirilmesi gerekiyor"
+
+#: dashboard.js:2
+msgid "%1$s: %2$s"
+msgstr "%1$s: %2$s"

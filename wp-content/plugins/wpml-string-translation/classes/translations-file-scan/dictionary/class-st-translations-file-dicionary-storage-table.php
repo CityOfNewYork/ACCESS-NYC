@@ -160,4 +160,28 @@ class WPML_ST_Translations_File_Dictionary_Storage_Table implements WPML_ST_Tran
 	public function reset() {
 		$this->data = null;
 	}
+
+	public function findAllUniqueComponentIds( string $componentType = null, array $fileExtensions = [] ): array {
+		$sql = "SELECT DISTINCT(component_id) FROM {$this->wpdb->prefix}icl_mo_files_domains";
+
+		$conditions = [];
+
+		if ( $componentType !== null ) {
+			$conditions[] = $this->wpdb->prepare( 'component_type = %s', $componentType );
+		}
+
+		if ( count( $fileExtensions ) > 0 ) {
+			$likeConditions = [];
+			foreach ( $fileExtensions as $fileExtension ) {
+				$likeConditions[] = $this->wpdb->prepare( 'file_path LIKE %s', '%' . $this->wpdb->esc_like( '.' . $fileExtension ) );
+			}
+			$conditions[] = '(' . implode( ' OR ', $likeConditions ) . ')';
+		}
+
+		if ( ! empty( $conditions ) ) {
+			$sql .= ' WHERE ' . implode( ' AND ', $conditions );
+		}
+
+		return $this->wpdb->get_col( $sql );
+	}
 }

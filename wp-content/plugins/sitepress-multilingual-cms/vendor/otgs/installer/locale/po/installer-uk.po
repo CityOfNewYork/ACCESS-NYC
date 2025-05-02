@@ -1,0 +1,830 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\\nContent-Transfer-Encoding: 8bit"
+"\\nProject-Id-Version:WPML_EXPORT\\nPOT-Creation-Date: \\nPO-Revision-Date: "
+"\\nLast-Translator: \\nLanguage-Team: \\nLanguage:en\\nMIME-Version: 1.0\\n"
+
+msgid " Your current site key (%s) does not match the selected product (%s)."
+msgstr ""
+"Ваш поточний ключ веб-сайту "
+"(%s) не відповідає вибраному продукту (%s)."
+
+msgid " to use auto-updates"
+msgstr "щоб використовувати автоматичне оновлення"
+
+msgid ""
+"%1$s needs to connect to its server to check for new releases and security "
+"updates. Something in the network or security settings is preventing this. "
+"Please allow outgoing communication to %2$s to remove this notice."
+msgstr ""
+"%1$s потрібно підключитися до свого сервера, щоб перевірити наявність нових випусків та оновлень безпеки. Щось у мережі або налаштуваннях безпеки створює перешкоди. Дозвольте вихідний зв'язок із "
+"%2$s, щоб прибрати це попередження."
+
+msgid "%1$s plugin cannot connect to %2$s"
+msgstr "Плагін %1$s не може підключитися до %2$s"
+
+msgid "%1$sGet a key for this site%2$s"
+msgstr "%1$sОтримати ключ для цього веб-сайту%2$s"
+
+msgid ""
+"%s cannot access %s to register. Try again to see if it's a temporary "
+"problem. If the problem continues, make sure that this site has access to "
+"the Internet."
+msgstr ""
+"%s не може отримати доступ до "
+"%s для реєстрації. Повторіть спробу, щоб перевірити, чи ця помилка тимчасова. Якщо проблема не зникає, переконайтеся, що веб-сайт має доступ до Інтернету."
+
+msgid ""
+"%s cannot access %s to register. Try again to see if it's a temporary "
+"problem. If the problem continues, make sure that this site has access to "
+"the Internet. You can still use the plugin without registration, but you "
+"will not receive automated updates."
+msgstr ""
+"%s не може отримати доступ до "
+"%s для реєстрації. Повторіть спробу, щоб переконатися, що ця проблема не носить постійний характер. Під час повторного виникнення помилки перевірте наявність доступу до Інтернету. Можна використовувати плагін без реєстрації, але ви не будете отримувати автоматичні оновлення."
+
+msgid ""
+"%s cannot update because your site's registration is not valid. Please "
+"%sregister %s%s again for this site first."
+msgstr ""
+"%s неможливо оновити, оскільки реєстрація вашого веб-сайту неприпустима. Спочатку "
+"%sзареєструйте %s"
+"%s знову для цього веб-сайту."
+
+msgid ""
+"%s is registered on this site. You will receive automatic updates until %s"
+msgstr ""
+"%s зареєстровано на цьому веб-сайті. Ви будете отримувати автоматичні оновлення до "
+"%s"
+
+msgid ""
+"%s is registered on this site. Your Lifetime account gives you updates for "
+"life."
+msgstr "%s зареєстровано на цьому веб-сайті. Ваш постійний обліковий запис забезпечує вам оновлення на необмежений термін."
+
+msgid ""
+"%s plugin must be registered in order to receive stability and security "
+"updates. Without these updates, the plugin may become incompatible with new "
+"versions of WordPress, which include security patches."
+msgstr ""
+"Щоб отримувати оновлення стабільності та системи безпеки, плагін "
+"%s має бути зареєстрованим. Без цих оновлень плагін може втратити сумісність із новими версіями "
+"WordPress, що містять виправлення безпеки."
+
+msgid "%s support on wpml.org"
+msgstr "Підтримка %s на wpml.org"
+
+msgid "%s technical support"
+msgstr "Технічна підтримка %s"
+
+msgid ""
+"%s, responsible for receiving automated updates for WPML and Toolset, "
+"requires the following PHP component(s) in order to function:"
+msgstr ""
+"Для роботи "
+"%s, що відповідає за отримання автоматичних оновлень для "
+"WPML і Toolset, потрібні такі компоненти:"
+
+msgid "%sRenew here%s."
+msgstr "%sПоновити тут%s."
+
+msgid "(embedded)"
+msgstr "(вбудовано)"
+
+msgid "Activate"
+msgstr "Активувати"
+
+msgid "Activate after download"
+msgstr "Активувати після завантаження"
+
+msgid "Activating %s"
+msgstr "Активація %s"
+
+msgid "Add"
+msgstr "Додати"
+
+msgid "All Installer Instances"
+msgstr "Усі екземпляри Установлювача"
+
+msgid "Already bought %s?"
+msgstr "Вже купили %s?"
+
+msgid "Already purchased %s?"
+msgstr "Уже придбали %s?"
+
+msgid "Are you sure you want to remove this site key?"
+msgstr "Видалити цей ключ веб-сайту?"
+
+msgid "Are you sure you want to unregister?"
+msgstr "Справді скасувати реєстрацію?"
+
+msgid "Available"
+msgstr "Доступно"
+
+msgid "Beta"
+msgstr "Бета"
+
+msgid "Bought again?"
+msgstr "Купили ще раз?"
+
+msgid "Buy %s"
+msgstr "Купити %s"
+
+msgid "Cancel"
+msgstr "Скасувати"
+
+msgid "Check"
+msgstr "Перевірити"
+
+msgid "Check Now"
+msgstr "Перевірити"
+
+msgid "Check for updates"
+msgstr "Перевірити наявність оновлень"
+
+msgid "Check my order status"
+msgstr "Перевірити стан мого замовлення"
+
+msgid "Click to see individual components options."
+msgstr "Клацніть для перегляду окремих параметрів компонентів."
+
+msgid "Commercial"
+msgstr "Реклама"
+
+msgid "Component"
+msgstr "Компонент"
+
+msgid "Connection failed! Please refresh the page and try again. (%s)"
+msgstr ""
+"Не вдалося підключитися! Оновіть сторінку та повторіть спробу. "
+"(%s)"
+
+msgid "Current"
+msgstr "Поточна"
+
+msgid "Delegated"
+msgstr "Делеговано"
+
+msgid "Development"
+msgstr "Розробка"
+
+msgid "Dismiss"
+msgstr "Відхилити"
+
+msgid "Do you have an account on %s?"
+msgstr "У вас є обліковий запис на %s?"
+
+msgid "Don't send this information and skip compatibility alerts"
+msgstr "Не надсилати ці відомості та пропустити оповіщення про сумісність"
+
+msgid "Download"
+msgstr "Завантажити"
+
+msgid ""
+"Download failed!\\n\\nClick OK to revalidate your subscription or CANCEL to "
+"try again."
+msgstr ""
+"Помилка завантаження!\\n"
+"\\nКлацніть «ГАРАЗД», щоб перевірити свою підписку повторно, або «СКАСУВАТИ», щоб повторити спробу."
+
+msgid "Download failed!\\n\\nPlease refresh the page and try again."
+msgstr ""
+"Помилка завантаження!\\n"
+"\\nОновіть сторінку та повторіть спробу."
+
+msgid "Downloading"
+msgstr "Завантаження"
+
+msgid ""
+"Downloading is not possible because WordPress cannot write into the plugins "
+"folder. %sHow to fix%s."
+msgstr ""
+"Завантаження неможливе, оскільки "
+"WordPress не може виконати запис у папку плагінів. "
+"%sЯк виправити%s."
+
+msgid ""
+"Downloading is not possible. WordPress cannot create required folders "
+"because of the\\n                                        256 characters "
+"limitation of the current Windows environment."
+msgstr ""
+"Завантаження неможливе. "
+"WordPress не може створити необхідні папки через"
+"\\nобмеження поточного середовища Windows у "
+"256 знаків."
+
+msgid "Empty site key!"
+msgstr "Порожній ключ веб-сайту!"
+
+msgid "Enter site key"
+msgstr "Ввести ключ веб-сайту"
+
+msgid "Enter the site key for %1$s."
+msgstr "Введіть ключ веб-сайту для %1$s."
+
+msgid ""
+"Enter the site key, from your %1$s account, to receive automatic updates for "
+"%2$s."
+msgstr ""
+"Щоб отримувати автоматичні оновлення для "
+"%2$s, введіть ключ веб-сайту зі свого облікового запису "
+"%1$s."
+
+msgid "Extend Subscription"
+msgstr "Продовжити підписку"
+
+msgid "Extend your subscription"
+msgstr "Продовжте свою підписку"
+
+msgid "For retrieving Installer debug information use the %s page."
+msgstr ""
+"Щоб отримати налагоджувальні відомості Установлювача, перейдіть на сторінку "
+"%s."
+
+msgid "Get a key for this site"
+msgstr "Отримати ключ для цього веб-сайту"
+
+msgid "Got renewal already?"
+msgstr "Уже є оновлення?"
+
+msgid "Great! You just need to extend your subscription."
+msgstr "Чудово! Просто потрібно продовжити підписку."
+
+msgid "High priority"
+msgstr "Висока важливість"
+
+msgid "I do not remember"
+msgstr "Я не пам'ятаю"
+
+msgid "I moved the site to this new URL"
+msgstr ""
+"Я переніс(ла) веб-сайт на цю нову URL-адресу."
+
+msgid "Ignore and don't ask me again"
+msgstr "Ігнорувати й надалі не питати"
+
+msgid ""
+"In order to see the products information, please run the %smanual updates "
+"check%s to initialize the products list or (temporarily) remove the above "
+"code."
+msgstr ""
+"Для перегляду даних про продукт виконайте "
+"%sперевірку оновлень вручну"
+"%s, щоб ініціалізувати список продуктів, або "
+"(тимчасово) видаліть код угорі."
+
+msgid "Incorrect setup"
+msgstr "Неправильне налаштування"
+
+msgid "Individual components"
+msgstr "Окремі компоненти"
+
+msgid ""
+"Information about new versions is invalid. It may be a temporary "
+"communication problem, please check for updates again."
+msgstr "Інформація про нові версії неправильна. Це може бути тимчасова помилка зв'язку. Перевірте наявність оновлень ще раз."
+
+msgid ""
+"Information about versions of %s are invalid. It may be a temporary "
+"communication problem, please check for updates again."
+msgstr ""
+"Інформація про версії "
+"%s неправильна. Це може бути тимчасова помилка зв'язку. Перевірте наявність оновлень ще раз."
+
+msgid "Install and activate"
+msgstr "Установити й активувати"
+
+msgid "Installed"
+msgstr "Встановлено"
+
+msgid "Installer"
+msgstr "Установлювач"
+
+msgid "Installer Log"
+msgstr "Журнал Установлювача"
+
+msgid "Installer Support"
+msgstr "Підтримка Установлювача"
+
+msgid "Installer System Status"
+msgstr "Стан системи Установлювача"
+
+msgid ""
+"Installer cannot contact our updates server to get information about the "
+"available products and check for new versions. If you are seeing this "
+"message for the first time, you can ignore it, as it may be a temporary "
+"communication problem. If the problem persists and your WordPress admin is "
+"slowing down, you can disable automated version checks. Add the following "
+"line to your wp-config.php file:"
+msgstr ""
+"Установлювач не може підключитися до нашого сервера оновлень, щоб отримати відомості про доступні продукти та перевірити наявність нових версій. Якщо це повідомлення з'явилося вперше, на нього можна не звертати уваги, оскільки його причиною може бути тимчасова помилка зв'язку. У разі повторного виникнення помилки та повільної роботи панелі адміністрування "
+"WordPress можна вимкнути автоматичну перевірку оновлень. Додайте цей рядок у свій файл "
+"wp-config.php:"
+
+msgid ""
+"Installer cannot display the products information because the automatic "
+"updating for %s was explicitly disabled with the configuration below "
+"(usually in wp-config.php):"
+msgstr ""
+"Установлювач не може відобразити відомості про продукт, оскільки автоматичне оновлення "
+"%s було явно вимкнуто за допомогою зазначеної нижче конфігурації "
+"(зазвичай у wp-config.php):"
+
+msgid "Installing %s"
+msgstr "Установлення %s"
+
+msgid "Invalid product"
+msgstr "Неприпустимий продукт"
+
+msgid "Invalid request!"
+msgstr "Неприпустимий запит!"
+
+msgid "Invalid site key for the current site."
+msgstr "Неприпустимий ключ поточного веб-сайту."
+
+msgid ""
+"Invalid site key for the current site. If the error persists, try to un-"
+"register first and then register again with the same site key."
+msgstr "Неприпустимий ключ для поточного веб-сайту. Якщо проблема не зникне, спочатку спробуйте скасувати реєстрацію, а потім повторіть її, використовуючи той самий ключ веб-сайту."
+
+msgid "Is this still a development site?"
+msgstr "Цей веб-сайт все ще тестовий?"
+
+msgid ""
+"It looks like this site is a copy of a different site, or it has moved to a "
+"different URL."
+msgstr ""
+"Схоже, що цей веб-сайт – копія іншого веб-сайту або ж його перенесено на іншу "
+"URL-адресу."
+
+msgid ""
+"It means you will not receive updates. This can lead to stability and even "
+"security issues."
+msgstr "Це означає, що ви не отримуватимете оновлення. Через це можуть виникнути проблеми стабільності і навіть безпеки."
+
+msgid "Learn more"
+msgstr "Докладніше"
+
+msgid "Learn more: %s"
+msgstr "Докладніше: %s"
+
+msgid "Log is empty"
+msgstr "Журнал порожній"
+
+msgid "More details"
+msgstr "Докладніше"
+
+msgid "Need help?"
+msgstr "Потрібна довідка?"
+
+msgid "Next"
+msgstr "Далі"
+
+msgid "No"
+msgstr "Ні"
+
+msgid "No repositories defined."
+msgstr "Репозиторії не визначено."
+
+msgid "No worries. We can check that for you."
+msgstr "Не хвилюйтеся. Ми можемо перевірити за вас."
+
+msgid "OK. You need to set up renewal for %s."
+msgstr "Гаразд. Слід задати оновлення для %s."
+
+msgid "OTGS Installer"
+msgstr "Установлювач OTGS"
+
+msgid "Operation complete!"
+msgstr "Операцію завершено!"
+
+msgid "Path"
+msgstr "Шлях"
+
+msgid "Please install %s to allow translating %s."
+msgstr ""
+"Установіть %s, щоб дозволити переклад %s."
+
+msgid "Please note that the site key is case sensitive."
+msgstr "Зверніть увагу: у ключі сайту враховується регістр."
+
+msgid ""
+"Please update the URL of currently used site key %1$sin your account%2$s."
+msgstr ""
+"Оновіть %1$sу своєму обліковому записі%2$s "
+"URL-адресу ключа веб-сайту, що використовується зараз."
+
+msgid "Please update your site key's URL %1$sin your account%2$s."
+msgstr ""
+"Оновіть %1$sу своєму обліковому записі%2$s "
+"URL-адресу ключа веб-сайту."
+
+msgid ""
+"Please update your site key's URL and set it as a production site %1$sin "
+"your account%2$s."
+msgstr ""
+"Оновіть %1$sу своєму обліковому записі%2$s "
+"URL-адресу ключа веб-сайту і задайте його як веб-сайт на стадії розробки."
+
+msgid "Plugin"
+msgstr "Плагін"
+
+msgid "Privacy and data usage policy"
+msgstr "Політика конфіденційності та використання даних"
+
+msgid "Production"
+msgstr "Виробництво"
+
+msgid "Register"
+msgstr "Зареєструвати"
+
+msgid "Register %s"
+msgstr "Зареєструвати %s"
+
+msgid "Registered"
+msgstr "Зареєстровано"
+
+msgid "Release notes"
+msgstr "Нотатки про випуск"
+
+msgid "Released"
+msgstr "Дата випуску"
+
+msgid "Remember my preference."
+msgstr "Запам’ятати мій вибір."
+
+msgid "Remember to remove %s from this website"
+msgstr ""
+"Не забудьте видалити %s з цього веб-сайту"
+
+msgid "Remember to remove %s from this website."
+msgstr ""
+"Не забудьте видалити %s з цього веб-сайту."
+
+msgid "Remember to remove %s from this website. %sCheck my order status%s"
+msgstr ""
+"Не забудьте видалити %s з цього веб-сайту. "
+"%sПеревірити стан мого замовлення%s"
+
+msgid "Remove current site key (%s)"
+msgstr "Видалити поточний ключ веб-сайту (%s)"
+
+msgid "Renew %s"
+msgstr "Відновити %s"
+
+msgid "Report to"
+msgstr "Повідомити"
+
+msgid "Reporting to"
+msgstr "Надсилання звіту в"
+
+msgid "Request Arguments"
+msgstr "Аргументи запита"
+
+msgid "Request URL"
+msgstr "URL-адреса запита"
+
+msgid "Required PHP Libraries"
+msgstr "Необхідні бібліотеки PHP"
+
+msgid "Response"
+msgstr "Відповідь"
+
+msgid "Return to the plugins page"
+msgstr "Повернутися на сторінку плагінів"
+
+msgid "Return to the updates page"
+msgstr "Повернутися на сторінку оновлення"
+
+msgid "Save"
+msgstr "Зберегти"
+
+msgid "See the %1$s and let us know in %2$s."
+msgstr "Перегляньте %1$s і повідомте нам у %2$s."
+
+msgid ""
+"Send theme and plugins information, in order to get faster support and "
+"compatibility alerts"
+msgstr "Надіслати відомості про тему та плагіни, щоб отримати швидшу підтримку та сповіщення про сумісність"
+
+msgid "Set Up Renewal For %s"
+msgstr "Задати оновлення для %s."
+
+msgid "Site Moved or Copied - %s require your action"
+msgstr ""
+"Веб-сайт переміщено або скопійовано – для "
+"%s потрібні дії"
+
+msgid "Site key"
+msgstr "Ключ веб-сайту"
+
+msgid ""
+"Site-key was set by %s, most likely in wp-config.php. Please remove the "
+"constant before attempting to register."
+msgstr ""
+"Ключ веб-сайту задано %s, швидше за все у wp-"
+"config."
+"php. Спочатку видаліть константу, а потім спробуйте зареєструватися."
+
+msgid ""
+"Site-key was set by %s, most likely in wp-config.php. Please remove the "
+"constant before attempting to unregister."
+msgstr ""
+"Ключ веб-сайту задано %s, швидше за все у wp-"
+"config."
+"php. Спочатку видаліть константу, а потім спробуйте скасувати реєстрацію."
+
+msgid ""
+"Something went wrong and we could not install all updates from the %s "
+"channel. Click here to %stry again%s. If the errors persist, please switch "
+"back to the Production channel and contact the %s%s support%s."
+msgstr ""
+"Стався збій. Не вдалося встановити всі оновлення з каналу "
+"%s. Клацніть тут, щоб %sповторити спробу "
+"%s. Якщо помилки повторюються, перейдіть у канал «Виробництво» та зверніться до "
+"%sслужби підтримки %s%s."
+
+msgid "Sorry, you are not allowed to manage Installer for this site."
+msgstr "На жаль, ви не можете керувати Установлювачем на цьому веб-сайті."
+
+msgid "Subscription is expired."
+msgstr "Термін дії передплати минув."
+
+msgid "Switch"
+msgstr "Змінити"
+
+msgid ""
+"The plugins will update to the most recent version in the channel that you "
+"selected."
+msgstr "Плагіни буде оновлено до найостаннішої версії в обраному вами каналі."
+
+msgid ""
+"There was a problem switching to the %s channel. You can %sretry%s. If the "
+"problem continues, please %sdownload %s%s and install again manually"
+msgstr ""
+"Не вдалося перейти в канал %s. Можна "
+"%sповторити спробу"
+"%s. Якщо проблема не зникла, %sзавантажте %s"
+"%s і встановіть вручну"
+
+msgid "This is a copy of my original site"
+msgstr "Це копія мого початкового веб-сайту"
+
+msgid "This is a development / staging site"
+msgstr "Це тестовий/установлювальний веб-сайт"
+
+msgid ""
+"This page lets you install plugins and update existing plugins. To remove "
+"any of these plugins, go to the %splugins%s page and if you have the "
+"permission to remove plugins you should be able to do this."
+msgstr ""
+"Ця сторінка дає можливість установлювати  й оновлювати наявні плагіни. Щоб видалити будь-який із цих плагінів, перейдіть на сторінку "
+"%sплагіни"
+"%s. Плагіни видаляються за умови, якщо у вас є відповідний дозвіл."
+
+msgid "This site is registered on %s as a development site."
+msgstr ""
+"Цей веб-сайт зареєстрований на "
+"%s як тестовий."
+
+msgid "This site is registered on Toolset.com as a development site."
+msgstr ""
+"Цей веб-сайт зареєстрований на Toolset."
+"com як тестовий."
+
+msgid "This site is registered on WPML.org as a development site."
+msgstr ""
+"Цей веб-сайт зареєстрований на WPML."
+"org як тестовий."
+
+msgid ""
+"This site is using %s plugin, which is not paid for. After receiving a "
+"refund, you should remove this plugin from your sites. Using unregistered "
+"plugins means that you are not receiving stability and security updates and "
+"will ultimately lead to problems running the site."
+msgstr ""
+"На цьому веб-сайті використовується плагін "
+"%s, за який не заплачено. Після повернення коштів ви маєте видалити цей плагін зі своїх веб-сайтів. Якщо використовувати незареєстровані плагіни, то ви не отримуватимете оновлення стабільності та системи безпеки, що зрештою призведе до проблем у роботі веб-сайту."
+
+msgid ""
+"This site is using the %s plugin, which has not been paid for. After "
+"receiving a refund, you should remove this plugin from your sites. Using "
+"unregistered plugins means you are not receiving stability and security "
+"updates and will ultimately lead to problems running the site."
+msgstr ""
+"На цьому веб-сайті використовується плагін "
+"%s, за який не було заплачено. Після повернення коштів ви маєте видалити цей плагін зі своїх веб-сайтів. Якщо використовувати незареєстровані плагіни, ви не отримуватимете оновлення стабільності та системи безпеки, що зрештою призведе до проблем у роботі веб-сайту."
+
+msgid "Time"
+msgstr "Час"
+
+msgid "To install and update %s, please %sregister%s %s for this site."
+msgstr ""
+"Щоб установити й оновити %s, необхідно "
+"%sзареєструвати%s %s для цього веб-сайту."
+
+msgid ""
+"To select different update channels (beta, development) you must update your "
+"existing products to their most recent stable versions."
+msgstr ""
+"Щоб вибрати різні канали оновлень "
+"(бета, розробка), слід оновити наявні продукти до останніх стабільних версій."
+
+msgid "Toolset API server"
+msgstr "API-сервер Toolset"
+
+msgid "Unknown repository"
+msgstr "Невідомий репозиторій"
+
+msgid "Unregister %s from this site"
+msgstr ""
+"Скасувати реєстрацію %s цього веб-сайту"
+
+msgid "Update Plugin"
+msgstr "Оновити плагін"
+
+msgid "Updates channel:"
+msgstr "Канал оновлень:"
+
+msgid "Updating %s"
+msgstr "Оновлення %s"
+
+msgid ""
+"Updating the plugins on your site. Please don't close this page or navigate "
+"away."
+msgstr "Оновлення плагінів на вашому сайті. Не закривайте і не залишайте цю сторінку."
+
+msgid "Upgrade"
+msgstr "Підвищити версію"
+
+msgid "Upgrade your account"
+msgstr "Оновіть свій обліковий запис"
+
+msgid "Version"
+msgstr "Версія"
+
+msgid "WPML API server"
+msgstr "API-сервер WPML"
+
+msgid ""
+"We were not able to copy some plugin files. This is usually due to issues "
+"with permissions for WordPress content or plugins folder."
+msgstr ""
+"Не вдалося скопіювати деякі файли плагіна. Зазвичай це відбувається через проблеми з дозволами для вмісту "
+"WordPress або папки плагінів."
+
+msgid ""
+"When this site goes live, remember to %1$s from \"development\" to "
+"\"production\" to remove this message. %2$s"
+msgstr ""
+"Коли цей веб-сайт буде запущений, не забудьте "
+"%1$s з \"тестового \" на \"на стадії розробки"
+"\", щоб видалити це повідомлення. %2$s"
+
+msgid "Yes"
+msgstr "Так"
+
+msgid ""
+"You are using a potentially less stable channel for %s. If you didn't enable "
+"this on purpose, you should switch to the 'Production' channel."
+msgstr ""
+"Ви використовуєте потенційно менш стабільний канал для "
+"%s. Якщо це не спеціально, вам слід перейти в канал «Виробництво»."
+
+msgid "You are using an expired %s account."
+msgstr "Ваш обліковий запис %s прострочено."
+
+msgid "You are using an expired account of %s."
+msgstr "Ваш обліковий запис %s прострочено."
+
+msgid "You are using an expired account of %s. %sExtend your subscription%s"
+msgstr ""
+"Ваш обліковий запис %s прострочено. "
+"%sПродовжте свою підписку%s"
+
+msgid ""
+"You are using an invalid site key defined as the constant %s (most likely in "
+"wp-config.php).\\n                                                Please "
+"remove it or use the correct value in order to be able to register correctly."
+msgstr ""
+"Ви використовуєте неприпустимий ключ веб-сайту, визначений як константа "
+"%s (швидше за все у wp-config.php)."
+"\\n Видаліть його або використовуйте правильне значення, щоб можна було зареєструватися належним чином."
+
+msgid ""
+"You are using an unregistered version of %s and are not receiving "
+"compatibility and security updates"
+msgstr ""
+"Ви використовуєте незареєстровану версію "
+"%s і не отримуєте оновлення сумісності та системи безпеки"
+
+msgid ""
+"You are using an unregistered version of %s and are not receiving "
+"compatibility and security updates. %sRegister now%s"
+msgstr ""
+"Ви використовуєте незареєстровану версію "
+"%s і не отримуєте оновлення сумісності та системи безпеки. "
+"%sЗареєструватися%s"
+
+msgid "You are using the complementary %1$s. For the %2$s, %3$s."
+msgstr ""
+"Ви використовуєте додатковий %1$s. Для %2$s, "
+"%3$s."
+
+msgid ""
+"You do not have a %1$s account yet. You need to set up a renewal for %2$s."
+msgstr ""
+"У вас поки немає облікового запису "
+"%1$s. Слід задати оновлення для %2$s."
+
+msgid "You have a %s account. You just need to extend your subscription."
+msgstr ""
+"У вас є обліковий запис "
+"%s. Просто потрібно продовжити підписку."
+
+msgid ""
+"You have an old Types-free subscription, which doesn't provide automatic "
+"updates. %s"
+msgstr ""
+"У вас застаріла передплата без "
+"Types, що не передбачає автоматичних оновлень. "
+"%s"
+
+msgid ""
+"You have an old Types-free subscription, which doesn't provide automatic "
+"updates. %sUpgrade your account%s"
+msgstr ""
+"У вас застаріла передплата без "
+"Types, що не передбачає автоматичних оновлень. "
+"%sОновіть свій обліковий запис%s"
+
+msgid ""
+"You will have to renew your subscription in order to continue getting the "
+"updates and support."
+msgstr "Щоб надалі отримувати оновлення та технічну підтримку, потрібно оновити передплату."
+
+msgid "Your Email Address"
+msgstr "Ваша електронна адреса:"
+
+msgid ""
+"Your site is using an expired %s account, which means you won't receive "
+"updates. This can lead to stability and security issues."
+msgstr ""
+"На вашому веб-сайті використовується прострочений обліковий запис "
+"%s, тому ви не отримуватимете оновлення. Через це можуть виникнути проблеми стабільності та безпеки."
+
+msgid ""
+"Your subscription appears to no longer be valid. Please try to register "
+"again using a valid site key."
+msgstr "Очевидно, ваша передплата більше не дійсна. Повторіть спробу реєстрації, використовуючи правильний ключ веб-сайту."
+
+msgid "Your subscription expires in %d day."
+msgstr ""
+"Ваша передплата закінчується через "
+"%d день."
+
+msgid "Your subscription expires in %d days."
+msgstr ""
+"Днів до закінчення вашої передплати: %d."
+
+msgid "activated"
+msgstr "активовано"
+
+msgid "activating"
+msgstr "активація"
+
+msgid "communication error details"
+msgstr "відомості про помилку зв'язку"
+
+msgid "complete set of features"
+msgstr "повний набір функцій"
+
+msgid "downloaded"
+msgstr "завантажено"
+
+msgid "downloading..."
+msgstr "завантаження..."
+
+msgid "failed!"
+msgstr "не вдалося!"
+
+msgid "installed"
+msgstr "установлено"
+
+msgid "installing..."
+msgstr "установлення..."
+
+msgid "update the site key"
+msgstr "оновити ключ веб-сайту"
+
+msgid "updated"
+msgstr "оновлено"
+
+msgid "updating..."
+msgstr "оновлення…"
+
+msgid "upgrade to Toolset"
+msgstr "підвищити версію до Toolset"
+
+msgid "which theme and plugins you are using."
+msgstr "про тему та плагіни, що використовуються."

@@ -30,7 +30,8 @@ class TranslationJobHooks implements \IWPML_Action {
 	 * @return bool
 	 */
 	public static function isEnabled() {
-		return ! ( defined( 'ACFML_EXCLUDE_FIELD_GROUP_STRINGS_IN_POST_JOBS' ) && ACFML_EXCLUDE_FIELD_GROUP_STRINGS_IN_POST_JOBS );
+		return defined( 'ACFML_EXCLUDE_FIELD_GROUP_STRINGS_IN_POST_JOBS' ) &&
+			false === constant( 'ACFML_EXCLUDE_FIELD_GROUP_STRINGS_IN_POST_JOBS' );
 	}
 
 	/**

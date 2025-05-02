@@ -1,0 +1,149 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:13
+msgid "What should happen with your automatically translated content?"
+msgstr "ماذا يجب أن يحدث مع المحتوى المترجم تلقائيًا؟?"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:30
+msgid "Wait for review"
+msgstr "انتظار المراجعة"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:31
+msgid "You check and approve translations before publishing."
+msgstr "تقوم بالتحقق والموافقة على الترجمات قبل النشر."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:32
+msgid "Your translators check and approve translations before publishing."
+msgstr "يقوم المترجمون لديك بالتحقق والموافقة على الترجمات قبل النشر."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:36
+msgid "Publish and mark for review"
+msgstr "النشر والتحديد للمراجعة"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:37
+msgid ""
+"WPML publishes translations immediately but flags them for you to check at "
+"your convenience."
+msgstr "يقوم WPML بنشر الترجمات فورًا ولكن يضع عليها علامات لتتحقق منها في الوقت المناسب لك."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:38
+msgid ""
+"WPML publishes translations immediately but flags them for your translators "
+"to check at their convenience."
+msgstr "يقوم WPML بنشر الترجمات فورًا ولكن يضع عليها علامات ليتحقق منها المترجمون لديك في الوقت المناسب لهم."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:42
+msgid "Publish without review"
+msgstr "النشر بدون مراجعة"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:44
+msgid ""
+"The system publishes translations straight away, skipping the review "
+"process."
+msgstr "ينشر النظام الترجمات مباشرة، متخطيًا عملية المراجعة."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:22
+msgid "Automatic translation"
+msgstr "الترجمة التلقائية"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:28
+msgid "What should happen with your automatically translated content"
+msgstr "ماذا يجب أن يحدث للمحتوى المترجم تلقائيًا"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:54
+msgid "Save settings"
+msgstr "حفظ الإعدادات"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:13
+msgid "Translate drafts as I save them (consumes a bit more translation credits)."
+msgstr "ترجمة المسودات عند حفظها (يستهلك قدرًا أكبر قليلاً من رصيد الترجمة)."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:26
+msgid "Do you want to translate drafts automatically?"
+msgstr "هل تريد ترجمة المسودات تلقائيًا؟?"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:42
+msgid ""
+"This feature is only available when you enable \"Translate Everything "
+"Automatically\" from the %sTranslation Dashboard%s."
+msgstr "هذه الميزة متاحة فقط عند تفعيل ”ترجمة كل شيء تلقائيًا“ من %sلوحة التحكم بالترجمة%s."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:9
+msgid "Don't translate drafts. Only translate when I publish content."
+msgstr "لا تترجم المسودات. قم بالترجمة فقط عند نشر المحتوى."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:116
+msgid "%d credits/word"
+msgstr "%d رصيد/كلمة"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:15
+msgid "Informal"
+msgstr "غير رسمي"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:16
+msgid "Automatic"
+msgstr "تلقائي"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:17
+msgid "Formal"
+msgstr "رسمي"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:45
+msgid "Which translation engines do you want to use?"
+msgstr "ما هي محركات الترجمة التي تريد استخدامها؟?"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:46
+msgid ""
+"Automatic translation engines differ in translation style and supported "
+"language pairs.\n"
+"If your preferred translation engine does not support a language pair that "
+"you want to use, we fall back to your next preferred engine that does "
+"support it.\n"
+msgstr "تختلف محركات الترجمة التلقائية في أسلوب الترجمة وأزواج اللغات المدعومة.\nإذا كان محرك الترجمة المفضل لديك لا يدعم زوج اللغة الذي تريد استخدامه، فإننا نرجع إلى محركك المفضل التالي الذي يدعمه.\n"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:48
+msgid "Drag & drop to sort from the most to the least preferred engine."
+msgstr "اسحب وأفلت للترتيب من المحرك الأكثر تفضيلاً إلى الأقل تفضيلاً."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:51
+msgid "Choose the tone of your automatic translations."
+msgstr "اختر نبرة ترجماتك التلقائية."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:57
+msgid "Read more"
+msgstr "اقرأ المزيد"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:73
+msgid "Learn more"
+msgstr "تعرف على المزيد"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:92
+msgid "On"
+msgstr "تشغيل"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:93
+msgid "Off"
+msgstr "إيقاف"
+
+#: src/js/translation-method/store.js:120
+msgid "Could not load translation engines"
+msgstr "تعذر تحميل محركات الترجمة"
+
+#: src/js/translation-method/store.js:140
+msgid "Could not update engine"
+msgstr "تعذر تحديث المحرك"
+
+#: src/js/translation-method/store.js:168
+msgid "Could not save review mode"
+msgstr "تعذر حفظ وضع المراجعة"
+
+#: src/js/translation-method/store.js:196
+msgid "Could not save translate everything drafts"
+msgstr "تعذر حفظ مسودات ترجمة كل شيء"
+
+#: src/js/translation-method/store.js:97
+msgid "Settings saved successfully"
+msgstr "تم حفظ الإعدادات بنجاح"

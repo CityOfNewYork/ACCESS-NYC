@@ -1,0 +1,31 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Warning:": [
+            "אזהרה:"
+         ],
+         "Edits you're about to make will be lost": [
+            "העריכות שאתה עומד לבצע יאבדו"
+         ],
+         "You are about to edit this translation using %s.": [
+            "אתה עומד לערוך את התרגום הזה באמצעות %s."
+         ],
+         "Any changes you make will be lost the next time you send this page for translation.": [
+            "כל שינוי שתבצע יאבד בפעם הבאה שתשלח את העמוד הזה לתרגום."
+         ],
+         "Go back": [
+            "חזור"
+         ],
+         "Edit in Advanced Translation Editor": [
+            "ערוך בעורך התרגום המתקדם"
+         ],
+         "Edit anyway (Not recommended)": [
+            "ערוך בכל זאת (לא מומלץ)"
+         ]
+      }
+   }
+}

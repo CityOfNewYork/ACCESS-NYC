@@ -41,26 +41,7 @@ class WPML_Languages_AJAX {
 			$lang_codes                 = filter_var( $_POST['languages'], FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY );
 			$setup_instance             = wpml_get_setup_instance();
 			if ( $lang_codes && $setup_instance->set_active_languages( $lang_codes ) ) {
-				$active_languages = $this->sitepress->get_active_languages();
-				$html_response    = '';
-
-				foreach ( (array) $active_languages as $lang ) {
-					$is_default     = ( $this->default_language === $lang['code'] );
-					$html_response .= '<li ';
-					if ( $is_default ) {
-						$html_response .= 'class="default_language"';
-					}
-					$html_response .= '><label><input type="radio" name="default_language" value="' . $lang['code'] . '" ';
-					if ( $is_default ) {
-						$html_response .= 'checked="checked"';
-					}
-					$html_response .= '>' . $lang['display_name'];
-					if ( $is_default ) {
-						$html_response .= ' (' . __( 'default', 'sitepress' ) . ')';
-					}
-					$html_response               .= '</label></li>';
-					$response['enabledLanguages'] = $html_response;
-				}
+				$response['enabledLanguages'] = $this->generate_language_options_html();
 
 				$response['noLanguages'] = 1;
 				if ( ( count( $lang_codes ) > 1 ) || ( $old_active_languages_count > 1 && count( $lang_codes ) < 2 ) ) {
@@ -94,6 +75,38 @@ class WPML_Languages_AJAX {
 		} else {
 			wp_send_json_success( $response );
 		}
+	}
+
+
+	public function generate_language_options_html() {
+		$hidden_languages = $this->sitepress->get_setting( 'hidden_languages' );
+		$active_languages = $this->sitepress->get_active_languages();
+		$output           = '';
+
+		foreach ( (array) $active_languages as $lang ) {
+			if ( ! empty( $hidden_languages ) && in_array( $lang['code'], $hidden_languages, true ) ) {
+				$hidden = '&nbsp<strong style="color:#f00">(' . esc_html__( 'hidden', 'sitepress' ) . ')</strong>';
+			} else {
+				$hidden = '';
+			}
+
+			$is_default = ( $this->default_language === $lang['code'] );
+			$output    .= '<li ';
+			if ( $is_default ) {
+				$output .= 'class="selected"';
+			}
+			$output .= '><label><input type="radio" name="default_language" value="' . $lang['code'] . '" ';
+			if ( $is_default ) {
+				$output .= 'checked="checked"';
+			}
+			$output .= '>' . $lang['display_name'] . $hidden;
+			if ( $is_default ) {
+				$output .= ' (' . __( 'default', 'sitepress' ) . ')';
+			}
+			$output .= '</label></li>';
+		}
+
+		return $output;
 	}
 
 	public function set_default_language_action() {

@@ -12,6 +12,9 @@ class WPML_Cornerstone_Register_Strings extends WPML_Page_Builders_Register_Stri
 		foreach ( $data_array as $data ) {
 			if ( isset( $data['_type'] ) && ! Utils::typeIsLayout( $data['_type'] ) ) {
 				$this->register_strings_for_node( Utils::getNodeId( $data ), $data, $package );
+				if ( Utils::shouldCheckForSubmodules( $data['_type'] ) ) {
+					$this->register_strings_for_modules( $data, $package );
+				}
 			} elseif ( is_array( $data ) ) {
 				$this->register_strings_for_modules( $data, $package );
 			}

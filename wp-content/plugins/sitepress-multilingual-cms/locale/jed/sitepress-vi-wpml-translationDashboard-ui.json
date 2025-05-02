@@ -1,59 +1,240 @@
 {
-   "domain": "messages",
-   "locale_data": {
-      "messages": {
-         "": {
-            "domain": "messages",
-            "lang": "en"
-         },
-         "Error": [
-            "Lỗi"
-         ],
-         "Draft — Pending review": [
-            "Bản nháp - Đang chờ rà soát"
-         ],
-         "Complete": [
-            "Hoàn thành"
-         ],
-         "Insufficient funds": [
-            "Không đủ tiền"
-         ],
-         "Your pending automatic translations will be canceled.": [
-            "Các bản dịch tự động đang chờ xử lý của bạn sẽ bị hủy."
-         ],
-         "Save": [
-            "Lưu"
-         ],
-         "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
-            "Đi đến mục <a>Bảng điều khiển Quản lý Dịch thuật</a> để dịch nội dung của bạn."
-         ],
-         "Review the translations before publishing": [
-            "Rà soát bản dịch trước khi đăng tải"
-         ],
-         "Publish translations and review them later": [
-            "Đăng tải các bản dịch và rà soát sau"
-         ],
-         "Publish translations without reviewing": [
-            "Đăng tải các bản dịch mà không cần rà soát"
-         ],
-         "Translate Everything": [
-            "Dịch mọi thứ"
-         ],
-         "WPML will automatically translate content that you publish or update": [
-            "WPML sẽ tự động dịch nội dung mà bạn đăng tải hoặc cập nhật"
-         ],
-         "How do you want to translate this site?": [
-            "Cách thức bạn muốn dịch trang web này?"
-         ],
-         "Translate Some": [
-            "Dịch một số"
-         ],
-         "I want to choose which content to translate": [
-            "Tôi muốn chọn nội dung cần dịch"
-         ],
-         "Translate": [
-            "Dịch"
-         ]
-      }
-   }
+  "translation-revision-date": "2024-08-20T09:54:01+00:00",
+  "generator": "WP-CLI/2.9.0",
+  "source": "src/js/ate/status-icons/TranslationQueue.js",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "en",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "Translate automatically": [
+        "Dịch tự động"
+      ],
+      "How do you want to translate?": [
+        "Bạn muốn dịch như thế nào?"
+      ],
+      "Assign to a translator": [
+        "Giao cho người dịch"
+      ],
+      "Translate myself": [
+        "Tự dịch"
+      ],
+      "You do not need translation credits to translate content yourself.": [
+        "Bạn không cần ghi rõ nguồn dịch để tự dịch nội dung."
+      ],
+      "You can only automatically translate content from your site's default language (English), to your site's other languages. Deselect content in your site's secondary languages to proceed.": [
+        "Chỉ có thể tự động dịch từ tiếng Anh sang ngôn ngữ khác. Bỏ chọn nội dung ngôn ngữ thứ cấp để tiếp tục."
+      ],
+      "You can only automatically translate content from your primary language (%s) to other languages. Use the language switcher at the top of this page to switch to %s.": [
+        "Chỉ có thể tự động dịch từ ngôn ngữ chính (%s) sang ngôn ngữ khác. Dùng công cụ chuyển đổi ngôn ngữ để chuyển sang %s."
+      ],
+      "Selected content includes items that were originally created in this language. Deselect these items to proceed.": [
+        "Nội dung đã chọn bao gồm các mục ban đầu được tạo bằng ngôn ngữ này. Bỏ chọn các mục này để tiếp tục."
+      ],
+      "Your pending automatic translations will be canceled.": [
+        "Các bản dịch tự động đang chờ xử lý của bạn sẽ bị hủy."
+      ],
+      "Save": [
+        "Lưu"
+      ],
+      "Go to the <a>Translation Management Dashboard</a> to translate your content.": [
+        "Đi đến mục <a>Bảng điều khiển Quản lý Dịch thuật</a> để dịch nội dung của bạn."
+      ],
+      "Review the translations before publishing": [
+        "Rà soát bản dịch trước khi đăng tải"
+      ],
+      "Publish translations and review them later": [
+        "Đăng tải các bản dịch và rà soát sau"
+      ],
+      "Publish translations without reviewing": [
+        "Đăng tải các bản dịch mà không cần rà soát"
+      ],
+      "Translate Everything": [
+        "Dịch mọi thứ"
+      ],
+      "WPML will automatically translate content that you publish or update": [
+        "WPML sẽ tự động dịch nội dung mà bạn đăng tải hoặc cập nhật"
+      ],
+      "How do you want to translate this site?": [
+        "Cách thức bạn muốn dịch trang web này?"
+      ],
+      "Translate Some": [
+        "Dịch một số"
+      ],
+      "I want to choose which content to translate": [
+        "Tôi muốn chọn nội dung cần dịch"
+      ],
+      "Translate": [
+        "Dịch"
+      ],
+      "Duplicate content": [
+        "Nội dung trùng lặp"
+      ],
+      "Do nothing": [
+        "Không làm gì cả"
+      ],
+      "To assign content to a translator, first <a href=\"%s\" target=\"_blank\">add a translator</a> or <a href=\"%s\" target=\"_blank\">connect to a translation service</a>.": [
+        "Để chỉ định nội dung cho người dịch, trước tiên<a href=\"%s\" target=\"_blank\"> thêm một người dịch</a> hoặc<a href=\"%s\" target=\"_blank\"> kết nối với dịch vụ dịch thuật</a>."
+      ],
+      "You need credits to use automatic translation.": [
+        "Cần tín dụng để dùng dịch tự động."
+      ],
+      "Translators Tab": [
+        "Tab biên dịch"
+      ],
+      "Connection Error. Please wait a minute and reload this page. If the problem continues, please <a>contact WPML support</a>.": [
+        "Lỗi kết nối. Vui lòng đợi một phút và tải lại trang này. Nếu sự cố vẫn tiếp diễn, vui lòng<a> liên hệ hỗ trợ WPML</a>."
+      ],
+      "Finish setting up %s on your site": [
+        "Hoàn tất thiết lập%s trên trang web của bạn"
+      ],
+      "You need to authenticate %s to send them content for translation. Visit the %s to finish the setup.": [
+        "Bạn cần phải xác thực%s để gửi cho họ nội dung để dịch. Truy cập%s để hoàn tất thiết lập."
+      ],
+      "Add a translator to use %s.": [
+        "Thêm một trình dịch để sử dụng%s ."
+      ],
+      "To send content to %s for translation, go to the %s to add a translator on your site.": [
+        "Để gửi nội dung đến %s, vào %s để thêm người dịch."
+      ],
+      "Your selected automatic translation engines do not support the following language(s): %s. Read more about <a>choosing a translation engine</a>.": [
+        "Công cụ dịch tự động bạn chọn không hỗ trợ các ngôn ngữ sau:%s . Đọc thêm về<a> chọn một công cụ dịch thuật</a>."
+      ],
+      "Some of the selected content is already being translated. This will cancel any in-progress translations.": [
+        "Một số nội dung đã chọn hiện đang được dịch. Thao tác này sẽ hủy mọi bản dịch đang thực hiện."
+      ],
+      "It is not possible to translate %s content automatically.": [
+        "Không thể dịch được%s nội dung tự động."
+      ],
+      "Translate selected items yourself or deselect these items above.": [
+        "Tự dịch các mục đã chọn hoặc bỏ chọn các mục ở trên."
+      ],
+      "Any existing content (translations) will be overwritten when creating duplicates.": [
+        "Bất kỳ nội dung hiện có (bản dịch) nào cũng sẽ bị ghi đè khi tạo bản sao."
+      ],
+      "When duplicating content, please first duplicate parent pages to maintain the site's hierarchy.": [
+        "Khi sao chép nội dung, sao chép trang mẹ trước để duy trì thứ bậc."
+      ],
+      "Some of the content that you selected for translation includes fields that are encoded. Translators will not be able to work on this kind of content, so we removed it from the job.": [
+        "Một số nội dung bạn chọn để dịch bao gồm các trường được mã hóa. Người dịch sẽ không thể làm việc trên loại nội dung này, vì vậy chúng tôi đã xóa nó khỏi công việc."
+      ],
+      "To fix this problem, you need to tell WPML how these fields are encoded, so that WPML can decode them before sending for translation.": [
+        "Để khắc phục sự cố này, bạn cần cho WPML biết cách mã hóa các trường này để WPML có thể giải mã chúng trước khi gửi đi dịch."
+      ],
+      "How to indicate to WPML that it needs to decode fields.": [
+        "Chỉ ra cho WPML rằng cần giải mã các trường."
+      ],
+      "WPML cannot send some of the content to translation": [
+        "WPML không thể gửi một số nội dung để dịch"
+      ],
+      "<s>%s</s>: There are base64 encoded fields in this document": [
+        "<s>%s</s>: Có các trường được mã hóa base64 trong tài liệu này"
+      ],
+      "Hide details": [
+        "Ẩn chi tiết"
+      ],
+      "Show details": [
+        "Hiển thị chi tiết"
+      ],
+      "Add to Translation Queue": [
+        "Thêm vào hàng đợi dịch"
+      ],
+      "Select a post or page to translate": [
+        "Chọn bài đăng hoặc trang để dịch"
+      ],
+      "Translate or duplicate content to at least one language": [
+        "Dịch hoặc sao chép nội dung sang ít nhất một ngôn ngữ"
+      ],
+      "Choose how you want to translate your content": [
+        "Chọn cách bạn muốn dịch nội dung của mình"
+      ],
+      "Selected content is already translated": [
+        "Nội dung đã chọn đã được dịch"
+      ],
+      "Selected content includes items in a language other than your site's default language.": [
+        "Nội dung được chọn có ngôn ngữ khác với ngôn ngữ mặc định."
+      ],
+      "Choose at least one translation action": [
+        "Chọn ít nhất một hành động dịch"
+      ],
+      "Duplicate": [
+        "Nhân bản"
+      ],
+      "Start translating and duplicating": [
+        "Bắt đầu dịch và sao chép"
+      ],
+      "Add to Translation Basket and duplicate": [
+        "Thêm vào Giỏ dịch và sao chép"
+      ],
+      "Add to Translation Queue and duplicate": [
+        "Thêm vào Hàng đợi dịch và sao chép"
+      ],
+      "Start translating": [
+        "Bắt đầu dịch"
+      ],
+      "Add to Translation Basket": [
+        "Thêm vào giỏ dịch"
+      ],
+      "Overwrite existing translations": [
+        "Ghi đè lên bản dịch hiện có"
+      ],
+      "Some of the content you want to translate is already translated": [
+        "Một số nội dung bạn muốn dịch đã được dịch rồi"
+      ],
+      "What do you want to do with the content that’s already translated?": [
+        "Bạn muốn làm gì với nội dung đã được dịch?"
+      ],
+      "Leave existing translations as is": [
+        "Để nguyên bản dịch hiện tại"
+      ],
+      "This also updates the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+        "Điều này cũng cập nhật bộ nhớ dịch cho trang web của bạn. Đọc thêm về<a href=\"%s\" target=\"_blank\" > bộ nhớ dịch thuật</a>"
+      ],
+      "Allows you to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+        "Cho phép bạn dịch lại nội dung của mình và cập nhật bộ nhớ dịch cho trang web của bạn. Đọc thêm về<a href=\"%s\" target=\"_blank\" > bộ nhớ dịch thuật</a>"
+      ],
+      "Allows your translators to re-translate your content and update the translation memory for your site. Read more about <a href=\"%s\" target=\"_blank\" >translation memory</a>": [
+        "Cho phép người dịch của bạn dịch lại nội dung của bạn và cập nhật bộ nhớ dịch cho trang web của bạn. Đọc thêm về<a href=\"%s\" target=\"_blank\" > bộ nhớ dịch thuật</a>"
+      ],
+      "HINT: You can add a Note for translators in the table above with special instructions.": [
+        "GỢI Ý: Thêm Ghi chú cho người dịch với hướng dẫn đặc biệt."
+      ],
+      "There was an error when trying to pause your Automatic Translation. Please try again later or contact our support.": [
+        "Đã xảy ra lỗi khi tạm dừng Dịch tự động. Thử lại sau hoặc liên hệ hỗ trợ."
+      ],
+      "There was an error when trying to resume your Automatic Translation. Please try again later or contact our support.": [
+        "Đã xảy ra lỗi khi cố gắng tiếp tục Dịch tự động. Vui lòng thử lại sau hoặc liên hệ với bộ phận hỗ trợ của chúng tôi."
+      ],
+      "Error": [
+        "Lỗi"
+      ],
+      "One more thing...": [
+        "Còn một điều nữa..."
+      ],
+      "What would you like to do when your content has finished translating automatically?": [
+        "Bạn muốn làm gì khi nội dung của bạn đã được dịch tự động xong?"
+      ],
+      "Save settings": [
+        "Lưu cài đặt"
+      ],
+      "This setting will apply to all future automatic translations. You can change this anytime in WPML → Settings.": [
+        "Thiết lập này áp dụng cho các bản dịch tự động tương lai. Thay đổi bất kỳ lúc nào trong WPML → Thiết lập."
+      ],
+      "All Languages": [
+        "Tất cả các ngôn ngữ"
+      ],
+      "Draft — Pending review": [
+        "Bản nháp - Đang chờ rà soát"
+      ],
+      "Complete": [
+        "Hoàn thành"
+      ],
+      "Insufficient funds": [
+        "Không đủ tiền"
+      ]
+    }
+  }
 }

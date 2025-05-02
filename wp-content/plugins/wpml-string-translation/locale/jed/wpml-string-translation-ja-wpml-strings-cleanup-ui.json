@@ -1,0 +1,58 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Clean up the String Translation table by removing untranslated strings by domain.": [
+            "ドメインごとに未翻訳の文字列を削除して、文字列変換テーブルをクリーンアップする。"
+         ],
+         "Remove strings by domain": [
+            "ドメインごとに文字列を削除する"
+         ],
+         "Remove strings": [
+            "文字列の削除"
+         ],
+         "Cancel": [
+            "キャンセル"
+         ],
+         "Remove": [
+            "削除"
+         ],
+         "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
+            "文字列翻訳テーブルには現在、以下のドメインの文字列が含まれています。特定のドメインからの文字列を翻訳する予定がない場合、そのドメインを以下で選択すると、文字列翻訳テーブルから未翻訳の文字列が削除されます。すでに翻訳がある文字列は、そのまま使用できます。"
+         ],
+         "Search": [
+            "検索"
+         ],
+         "Removing strings from String Translation table": [
+            "文字列翻訳テーブルから文字列を削除する"
+         ],
+         "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
+            "文字列を文字列翻訳テーブルに戻すには、翻訳ファイルを再スキャンするか、文字列を翻訳可能として登録する必要があるかもしれません。"
+         ],
+         "Read more about ": [
+            "続きを読む "
+         ],
+         "scanning your site for strings and registering them as translatable.": [
+            "あなたのサイトの文字列をスキャンし、翻訳可能なものとして登録します。"
+         ],
+         "Successfully removed strings": [
+            "文字列の削除に成功"
+         ],
+         "OK, Great": [
+            "よし、いいぞ"
+         ],
+         "Domain": [
+            "ドメイン"
+         ],
+         "Strings count": [
+            "ストリングスカウント"
+         ],
+         "Translated strings": [
+            "翻訳された文字列"
+         ]
+      }
+   }
+}

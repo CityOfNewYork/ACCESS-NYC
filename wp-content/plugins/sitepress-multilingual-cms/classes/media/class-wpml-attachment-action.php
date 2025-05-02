@@ -171,9 +171,9 @@ class WPML_Attachment_Action implements IWPML_Action {
 	public function delete_file_filter( $file ) {
 		if ( $file ) {
 			$file_name           = $this->get_file_name( $file );
-			$sql                 = "SELECT pm.meta_id, pm.post_id FROM {$this->wpdb->postmeta} AS pm
-						WHERE pm.meta_value = %s AND pm.meta_key='_wp_attached_file'";
-			$attachment_prepared = $this->wpdb->prepare( $sql, [ $file_name ] );
+			$scaled_file_name    = $this->get_file_name( $file, true );
+			$sql                 = "SELECT pm.meta_id, pm.post_id FROM {$this->wpdb->postmeta} AS pm WHERE pm.meta_value IN ( %s, %s ) AND pm.meta_key='_wp_attached_file'";
+			$attachment_prepared = $this->wpdb->prepare( $sql, $file_name, $scaled_file_name );
 			$attachment          = $this->wpdb->get_row( $attachment_prepared );
 
 			if ( ! empty( $attachment ) ) {
@@ -184,8 +184,8 @@ class WPML_Attachment_Action implements IWPML_Action {
 		return $file;
 	}
 
-	private function get_file_name( $file ) {
-		$file_name  = $this->get_file_name_without_size_from_full_name( $file );
+	private function get_file_name( $file, $scaled = false ) {
+		$file_name  = $this->get_file_name_without_size_from_full_name( $file, $scaled );
 		$upload_dir = wp_upload_dir();
 		/** @phpstan-ignore-next-line */
 		$path_parts = $file ? explode( "/", Str::replace( $upload_dir['basedir'], '', $file ) ) : [];
@@ -201,14 +201,16 @@ class WPML_Attachment_Action implements IWPML_Action {
 	 * Get file name without a size, i.e. 'a-600x400.png' -> 'a.png'.
 	 *
 	 * @param string $file Full file name.
+	 * @param bool   $scaled Add '-scaled' suffix for the file name.
 	 *
-	 * @return mixed|string|string[]|null
+	 * @return string|null
 	 */
-	private function get_file_name_without_size_from_full_name( $file ) {
-		$file_name = preg_replace( '/^(.+)\-\d+x\d+(\.\w+)$/', '$1$2', $file );
-		$file_name = preg_replace( '/^[\s\S]+(\/.+)$/', '$1', $file_name );
-		$file_name = str_replace( '/', '', $file_name );
+	private function get_file_name_without_size_from_full_name( $file, $scaled = false ) {
+		$extension       = pathinfo( $file, PATHINFO_EXTENSION );
+		$replace_pattern = '/(-\d+x\d+)?\.' . $extension . '$/';
+		$replacement     = ( $scaled ? '-scaled' : '' ) . ".$extension";
+		$filename_parts  = explode( '/', preg_replace( $replace_pattern, $replacement, $file ) );
 
-		return $file_name;
+		return array_pop( $filename_parts );
 	}
 }

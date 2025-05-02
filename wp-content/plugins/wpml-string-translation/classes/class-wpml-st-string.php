@@ -148,10 +148,12 @@ class WPML_ST_String {
 					$status = ICL_TM_NOT_TRANSLATED;
 				}
 			} else {
-				if ( in_array( ICL_TM_NOT_TRANSLATED, $translations ) ) {
+				if ( $this->areAllTranslationsComplete( $translations ) ) {
+					$status = ICL_TM_COMPLETE;
+				} elseif ( in_array( ICL_TM_COMPLETE, $translations ) ) {
 					$status = ICL_STRING_TRANSLATION_PARTIAL;
 				} else {
-					$status = ICL_TM_COMPLETE;
+					$status = ICL_TM_NOT_TRANSLATED;
 				}
 			}
 		} else {
@@ -164,6 +166,23 @@ class WPML_ST_String {
 
 		return $status;
 	}
+
+
+	/**
+	 * @param int[] $translations
+	 *
+	 * @return bool
+	 */
+	private function areAllTranslationsComplete( array $translations ) {
+		foreach ( $translations as $translation ) {
+			if ( $translation != ICL_TM_COMPLETE ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 
 	/**
 	 * @param array  $translations
@@ -193,9 +212,6 @@ class WPML_ST_String {
 			return false;
 		}
 
-		/** @var $ICL_Pro_Translation WPML_Pro_Translation */
-		global $ICL_Pro_Translation;
-
 		/** @var \stdClass $res */
 		$res = $this->wpdb->get_row(
 			$this->wpdb->prepare(
@@ -224,6 +240,10 @@ class WPML_ST_String {
 			$translation_data['batch_id'] = $batch_id;
 		}
 		if ( ! is_null( $value ) ) {
+			if ( is_string( $value ) ) {
+				$value = $this->normalize_line_breaks( $value );
+			}
+
 			$translation_data['value'] = $value;
 		}
 		if ( $translator_id ) {
@@ -260,8 +280,21 @@ class WPML_ST_String {
 			$st_id = $this->wpdb->insert_id;
 		}
 
+		/** @var $ICL_Pro_Translation WPML_Pro_Translation */
+		global $ICL_Pro_Translation;
 		if ( $ICL_Pro_Translation ) {
-			$ICL_Pro_Translation->fix_links_to_translated_content( $st_id, $language, 'string', [ 'value' => $value, 'string_id' => $this->string_id ] );
+			// Early stage link fixing in string translations.
+			// Keeping this for 3rd party page-builders compatibilty. Some of
+			// them do not use the post_content field to store the post content.
+			$ICL_Pro_Translation->fix_links_to_translated_content(
+				$st_id,
+				$language,
+				'string',
+				[
+					'value'     => $value,
+					'string_id' => $this->string_id,
+				]
+			);
 		}
 
 		icl_update_string_status( $this->string_id );
@@ -351,5 +384,21 @@ class WPML_ST_String {
 		}
 
 		return $this->string_properties;
+	}
+
+	/**
+	 * @param string $translation_string
+	 * @return string
+	 */
+	public function normalize_line_breaks( $translation_string ) {
+		$original_string = $this->get_value();
+		/**
+		 * If the original string has \r\n character, replace \n with \r\n in the translation string to display line break in emails, HTTP requests and some text-based protocols.
+		 */
+		if ( is_string( $original_string ) && strpos( $original_string, "\r\n" ) !== false ) {
+			$translation_string = preg_replace( '/(?<!\r)\n/', "\r\n", $translation_string );
+		}
+
+		return $translation_string;
 	}
 }

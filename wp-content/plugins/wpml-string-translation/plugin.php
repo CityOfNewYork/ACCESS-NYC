@@ -2,10 +2,10 @@
 /**
  * Plugin Name: WPML String Translation
  * Plugin URI: https://wpml.org/
- * Description: Adds theme and plugins localization capabilities to WPML | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/string-translation-3-2-11/">WPML String Translation 3.2.11 release notes</a>
+ * Description: Adds theme and plugins localization capabilities to WPML | <a href="https://wpml.org/documentation/getting-started-guide/string-translation/">Documentation</a> | <a href="https://wpml.org/version/wpml-string-translation-3-3-3/">WPML String Translation 3.3.3 release notes</a>
  * Author: OnTheGoSystems
  * Author URI: http://www.onthegosystems.com/
- * Version: 3.2.11
+ * Version: 3.3.3
  * Plugin Slug: wpml-string-translation
  *
  * @package WPML\ST
@@ -15,18 +15,37 @@ if ( defined( 'WPML_ST_VERSION' ) || get_option( '_wpml_inactive' ) ) {
 	return;
 }
 
-define( 'WPML_ST_VERSION', '3.2.11' );
-
 // Do not uncomment the following line!
 // If you need to use this constant, use it in the wp-config.php file
 // define( 'WPML_PT_VERSION_DEV', '2.2.3-dev' );
-define( 'WPML_ST_PATH', dirname( __FILE__ ) );
-
-require_once WPML_ST_PATH . '/classes/class-wpml-st-initialize.php';
-$wpml_st_initialize = new WPML_ST_Initialize();
-$wpml_st_initialize->load();
+if ( ! defined( 'WPML_ST_PATH' ) ) {
+	define( 'WPML_ST_PATH', dirname( __FILE__ ) );
+}
 
 add_action( 'admin_init', 'wpml_st_verify_wpml' );
+
+//define( 'ICL_SITEPRESS_VERSION', '3.3.3' );
+if ( ! defined( 'ICL_SITEPRESS_VERSION' ) ) {
+	return;
+}
+
+// If it has a tag, it must be the same tag as this plugin
+if ( ! WPML_Core_Version_Check::is_ok( dirname( __FILE__ ) . '/wpml-dependencies.json' ) ) {
+	return;
+}
+
+
+define( 'WPML_ST_VERSION', '3.3.3' );
+
+
+require WPML_ST_PATH . '/inc/functions-load.php';
+require WPML_ST_PATH . '/inc/constants.php';
+
+require_once WPML_ST_PATH . '/classes/class-wpml-st-initialize.php';
+$config             = require_once WPML_ST_PATH . '/StringTranslation/config.php';
+$wpml_st_initialize = new WPML_ST_Initialize( $config );
+$wpml_st_initialize->load();
+
 function wpml_st_verify_wpml() {
 	if ( ! class_exists( 'WPML_ST_Verify_Dependencies' ) ) {
 		require_once WPML_ST_PATH . '/classes/class-wpml-st-verify-dependencies.php';
@@ -73,9 +92,6 @@ function load_wpml_st_basics() {
 	}
 
 	global $WPML_String_Translation, $sitepress;
-
-	require WPML_ST_PATH . '/inc/functions-load.php';
-	require WPML_ST_PATH . '/inc/constants.php';
 
 	$WPML_String_Translation = WPML\Container\make( WPML_String_Translation::class );
 	$WPML_String_Translation->set_basic_hooks();

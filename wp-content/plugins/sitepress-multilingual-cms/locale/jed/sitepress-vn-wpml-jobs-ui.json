@@ -1,0 +1,407 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Start batch sync": [
+            "Bắt đầu đồng bộ hóa hàng loạt"
+         ],
+         "Cancel job": [
+            "Hủy công việc"
+         ],
+         "Continue reviewing": [
+            "Tiếp tục xem xét"
+         ],
+         "Start downloading XLIFF file": [
+            "Bắt đầu tải xuống tệp XLIFF"
+         ],
+         "Edit": [
+            "Sửa"
+         ],
+         "Get translation": [
+            "Nhận bản dịch"
+         ],
+         "Resign": [
+            "Từ bỏ"
+         ],
+         "Review": [
+            "Đánh giá"
+         ],
+         "Translate": [
+            "Dịch"
+         ],
+         "Take and Translate": [
+            "Lấy và Dịch"
+         ],
+         "View": [
+            "Xem"
+         ],
+         "Delete Translations": [
+            "Xóa các bản dịch"
+         ],
+         "Keep Translations as Draft": [
+            "Giữ các bản dịch dưới dạng Bản nháp"
+         ],
+         "Never mind. I want to review these translations.": [
+            "Không sao. Tôi muốn rà soát các bản dịch này."
+         ],
+         "Cancel": [
+            "Hủy"
+         ],
+         "This will remove the selected jobs from the Translations Queue without publishing them. What would you like to do with the translations?": [
+            "Việc này sẽ xóa các công việc đã chọn khỏi Hàng chờ Bản dịch mà không đăng tải chúng. Bạn muốn làm gì với các bản dịch?"
+         ],
+         "Cancel Translation Review": [
+            "Hủy việc rà soát bản dịch"
+         ],
+         "Bulk actions": [
+            "Hành động hàng loạt"
+         ],
+         "Apply": [
+            "Áp dụng"
+         ],
+         "Actions applied to multiple translation jobs can take a few seconds. Please do not leave the page.": [
+            "Các hành động áp dụng cho nhiều công việc dịch thuật có thể mất vài giây. Vui lòng không rời khỏi trang."
+         ],
+         "Actions applied to multiple translation jobs can take a few minutes. Please do not leave the page.": [
+            "Các hành động áp dụng cho nhiều công việc dịch thuật có thể mất vài phút. Vui lòng không rời khỏi trang."
+         ],
+         "Select translator": [
+            "Chọn người dịch"
+         ],
+         "Assign": [
+            "Phân công"
+         ],
+         "Cancelled": [
+            "Đã hủy"
+         ],
+         "Needs translation": [
+            "Cần dịch"
+         ],
+         "In progress": [
+            "Đang tiến hành"
+         ],
+         "Translation ready to download": [
+            "Bản dịch sẵn sàng để tải xuống"
+         ],
+         "Completed": [
+            "Đã hoàn thành"
+         ],
+         "%s are immediately published because they don't support draft mode.": [
+            "%s được xuất bản ngay lập tức vì chúng không hỗ trợ chế độ bản nháp."
+         ],
+         "Published — Pending review": [
+            "Đã xuất bản — Chờ xem xét"
+         ],
+         "Draft — Pending review": [
+            "Bản nháp - Đang chờ rà soát"
+         ],
+         "Review in progress": [
+            "Đang trong quá trình xem xét"
+         ],
+         "Published — Review in progress": [
+            "Đã xuất bản — Đang xem xét"
+         ],
+         "Draft — Review in progress": [
+            "Bản nháp — Đang xem xét"
+         ],
+         "Insufficient funds": [
+            "Không đủ tiền"
+         ],
+         "Needs update": [
+            "Cần cập nhật"
+         ],
+         "View original": [
+            "Xem bản gốc"
+         ],
+         "(no title)": [
+            "(không có tiêu đề)"
+         ],
+         "Automatic translation": [
+            "Dịch tự động"
+         ],
+         "TP ID: %d": [
+            "TP ID: %d"
+         ],
+         "Reset": [
+            "Đặt lại"
+         ],
+         "Filter": [
+            "Lọc"
+         ],
+         "ID (%s)": [
+            "ID (%s)"
+         ],
+         "Title (%s)": [
+            "Tiêu đề (%s)"
+         ],
+         "Type (%s)": [
+            "Loại (%s)"
+         ],
+         "Language (%s)": [
+            "Ngôn ngữ (%s)"
+         ],
+         "Batch name (%s)": [
+            "Tên lô (%s)"
+         ],
+         "Status (%s)": [
+            "Trạng thái (%s)"
+         ],
+         "Translated by (%s)": [
+            "Được dịch bởi (%s)"
+         ],
+         "Sent date (%s)": [
+            "Ngày gửi (%s)"
+         ],
+         "Deadline (%s)": [
+            "Hạn chót (%s)"
+         ],
+         "Clear all filters": [
+            "Xóa tất cả bộ lọc"
+         ],
+         "Any Translation Service": [
+            "Bất kỳ Dịch vụ Dịch thuật nào"
+         ],
+         "Any WordPress Translator": [
+            "Bất kỳ Người dịch WordPress nào"
+         ],
+         "From": [
+            "Từ"
+         ],
+         "To": [
+            "Đến"
+         ],
+         "Anyone": [
+            "Bất kỳ ai"
+         ],
+         "Include jobs from translation services": [
+            "Bao gồm công việc từ dịch vụ dịch thuật"
+         ],
+         "All types": [
+            "Tất cả các loại"
+         ],
+         "Select visible columns": [
+            "Chọn cột hiển thị"
+         ],
+         "Sort descending": [
+            "Sắp xếp giảm dần"
+         ],
+         "Sort ascending": [
+            "Sắp xếp tăng dần"
+         ],
+         "Cancel sorting": [
+            "Hủy sắp xếp"
+         ],
+         "The bulk action is running...": [
+            "Đang thực hiện hành động hàng loạt..."
+         ],
+         "Export all jobs to XLIFF 1.0": [
+            "Xuất tất cả công việc sang XLIFF 1.0"
+         ],
+         "Export all filtered jobs to XLIFF 1.0": [
+            "Xuất tất cả công việc đã lọc sang XLIFF 1.0"
+         ],
+         "Export all jobs to XLIFF 1.1": [
+            "Xuất tất cả công việc sang XLIFF 1.1"
+         ],
+         "Export all filtered jobs to XLIFF 1.1": [
+            "Xuất tất cả công việc đã lọc sang XLIFF 1.1"
+         ],
+         "Export all jobs to XLIFF 1.2": [
+            "Xuất tất cả công việc sang XLIFF 1.2"
+         ],
+         "Export all filtered jobs to XLIFF 1.2": [
+            "Xuất tất cả công việc đã lọc sang XLIFF 1.2"
+         ],
+         "Export": [
+            "Xuất"
+         ],
+         "Select File": [
+            "Chọn Tệp"
+         ],
+         ".xliff .zip": [
+            ".xliff .zip"
+         ],
+         "Importing": [
+            "Đang nhập"
+         ],
+         "Import": [
+            "Nhập"
+         ],
+         "Import / Export XLIFF": [
+            "Nhập / Xuất XLIFF"
+         ],
+         "Actions": [
+            "Hành động"
+         ],
+         "Batch name": [
+            "Tên lô"
+         ],
+         "Filter by %s": [
+            "Lọc theo %s"
+         ],
+         "Title": [
+            "Tiêu đề"
+         ],
+         "Approve translation reviews": [
+            "Phê duyệt xem xét bản dịch"
+         ],
+         "Cancel jobs": [
+            "Hủy công việc"
+         ],
+         "Cancel translation reviews": [
+            "Hủy xem xét bản dịch"
+         ],
+         "Export to XLIFF %s": [
+            "Xuất sang XLIFF %s"
+         ],
+         "Get translations": [
+            "Nhận bản dịch"
+         ],
+         "This action does not apply to any of the selected translation jobs": [
+            "Hành động này không áp dụng cho bất kỳ công việc dịch thuật nào đã chọn"
+         ],
+         "Translations have been downloaded": [
+            "Các bản dịch đã được tải xuống"
+         ],
+         "Translation has been downloaded": [
+            "Bản dịch đã được tải xuống"
+         ],
+         "Translations could not be downloaded": [
+            "Không thể tải xuống các bản dịch"
+         ],
+         "Translation could not be downloaded": [
+            "Không thể tải xuống bản dịch"
+         ],
+         "Approving translations reviews failed!": [
+            "Phê duyệt xem xét bản dịch thất bại!"
+         ],
+         "Failed approving translations for the following posts: ": [
+            "Không thể phê duyệt bản dịch cho các bài viết sau: "
+         ],
+         "Translations reviews approved successfully!": [
+            "Xem xét bản dịch đã được phê duyệt thành công!"
+         ],
+         "No valid jobs selected to approve translations reviews!": [
+            "Không có công việc hợp lệ nào được chọn để phê duyệt xem xét bản dịch!"
+         ],
+         "The translator has been assigned to the job": [
+            "Người dịch đã được phân công cho công việc"
+         ],
+         "The translator could not be assigned to the job": [
+            "Không thể phân công người dịch cho công việc"
+         ],
+         "The jobs have been cancelled": [
+            "Các công việc đã bị hủy"
+         ],
+         "The job has been cancelled": [
+            "Công việc đã bị hủy"
+         ],
+         "The jobs could not be cancelled": [
+            "Không thể hủy các công việc"
+         ],
+         "The job could not be cancelled": [
+            "Không thể hủy công việc"
+         ],
+         "Translation reviews have been canceled": [
+            "Xem xét bản dịch đã bị hủy"
+         ],
+         "Translation review has been canceled": [
+            "Xem xét bản dịch đã bị hủy"
+         ],
+         "Translation reviews could not be canceled": [
+            "Không thể hủy xem xét bản dịch"
+         ],
+         "Translation review could not be canceled": [
+            "Không thể hủy bỏ việc xem xét bản dịch"
+         ],
+         "Sent on": [
+            "Gửi lúc"
+         ],
+         "Deadline": [
+            "Hạn chót"
+         ],
+         "Status": [
+            "Trạng thái"
+         ],
+         "Pending review": [
+            "Đang chờ đánh giá"
+         ],
+         "ID": [
+            "ID"
+         ],
+         "Type": [
+            "Loại"
+         ],
+         "Languages": [
+            "Ngôn ngữ"
+         ],
+         "Translated by": [
+            "Được dịch bởi"
+         ],
+         "Download XLIFF file couldn't be finished": [
+            "Không thể hoàn tất việc tải xuống tệp XLIFF"
+         ],
+         "Could not load jobs for export": [
+            "Không thể tải các công việc để xuất"
+         ],
+         "The export to XLIFF failed": [
+            "Việc xuất sang XLIFF thất bại"
+         ],
+         "Imported %d jobs": [
+            "Đã nhập %d công việc"
+         ],
+         "Imported one job": [
+            "Đã nhập một công việc"
+         ],
+         "Could not import any job": [
+            "Không thể nhập bất kỳ công việc nào"
+         ],
+         "Import failed!": [
+            "Nhập thất bại!"
+         ],
+         "Loading translations queue": [
+            "Đang tải hàng đợi bản dịch"
+         ],
+         "Loading translation jobs": [
+            "Đang tải các công việc dịch thuật"
+         ],
+         "Jobs could not be loaded": [
+            "Không thể tải các công việc"
+         ],
+         "Specify some jobs to resign": [
+            "Chỉ định một số công việc để từ chối"
+         ],
+         "We could not resign jobs: %s": [
+            "Chúng tôi không thể từ chối các công việc: %s"
+         ],
+         "Resigned from jobs": [
+            "Đã từ chối các công việc"
+         ],
+         "Resigned from job": [
+            "Đã từ chối công việc"
+         ],
+         "Failed to resign from jobs": [
+            "Không thể từ chối các công việc"
+         ],
+         "The Advanced Editor jobs synchronization has failed": [
+            "Đồng bộ hóa công việc của Trình biên tập Nâng cao đã thất bại"
+         ],
+         "Synchronization with the Professional Translation service has failed": [
+            "Đồng bộ hóa với dịch vụ Dịch thuật Chuyên nghiệp đã thất bại"
+         ],
+         "%d translation has been downloaded": [
+            "%d bản dịch đã được tải xuống",
+            "%d bản dịch đã được tải xuống"
+         ],
+         "Batch sync finished successfully!": [
+            "Đồng bộ hóa hàng loạt hoàn tất thành công!"
+         ],
+         "Batch sync couldn't be finished": [
+            "Không thể hoàn tất đồng bộ hóa hàng loạt"
+         ]
+      }
+   }
+}

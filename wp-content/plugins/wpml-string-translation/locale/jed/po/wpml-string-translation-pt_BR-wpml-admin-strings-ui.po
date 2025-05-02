@@ -1,0 +1,103 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/admin-strings/texts.js:10
+msgid "Not included in String Translation"
+msgstr "Não incluído na tradução de strings"
+
+#: src/js/admin-strings/texts.js:11
+msgid "Registered and locked"
+msgstr "Registrado e bloqueado"
+
+#: src/js/admin-strings/texts.js:13
+msgid "Text"
+msgstr "Texto"
+
+#: src/js/admin-strings/texts.js:14
+msgid "Numeric"
+msgstr "Numérico"
+
+#: src/js/admin-strings/texts.js:15
+msgid "All Types"
+msgstr "Todos os tipos"
+
+#: src/js/admin-strings/texts.js:17
+msgid "Search"
+msgstr "Pesquisar"
+
+#: src/js/admin-strings/texts.js:19
+msgid "Communication error"
+msgstr "Erro de comunicação"
+
+#: src/js/admin-strings/texts.js:20
+msgid "The action failed."
+msgstr "A ação falhou."
+
+#: src/js/admin-strings/texts.js:22
+msgid "All (%d)"
+msgstr "Todos (%d)"
+
+#: src/js/admin-strings/texts.js:23
+msgid "Included in String Translation (%d)"
+msgstr "Incluído na tradução de strings (%d)"
+
+#: src/js/admin-strings/texts.js:24
+msgid "Not included in String Translation (%d)"
+msgstr "Não incluído na tradução de strings (%d)"
+
+#: src/js/admin-strings/texts.js:26
+msgid "This setting is locked by a WPML configuration file."
+msgstr "Essa configuração é bloqueada por um arquivo de configuração do WPML."
+
+#: src/js/admin-strings/texts.js:28
+msgid "Option"
+msgstr "Opção"
+
+#: src/js/admin-strings/texts.js:29
+msgid "Value"
+msgstr "Valor"
+
+#: src/js/admin-strings/texts.js:30
+msgid "Type"
+msgstr "Tipo"
+
+#: src/js/admin-strings/texts.js:31
+msgid "State"
+msgstr "Estado"
+
+#: src/js/admin-strings/texts.js:34
+msgid "Export as a WPML configuration file"
+msgstr "Exportar como um arquivo de configuração do WPML"
+
+#: src/js/admin-strings/texts.js:35
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/js/admin-strings/texts.js:36
+msgid "Save the following to a wpml-config.xml in the root of your theme or plugin."
+msgstr "Salve o seguinte em um wpml-config.xml na raiz do seu tema ou plug-in."
+
+#: src/js/admin-strings/texts.js:38
+msgid "No options found."
+msgstr "Não foram encontradas opções."
+
+#: src/js/admin-strings/texts.js:39
+msgid ""
+"Make sure you saved your theme options at least once. Some themes only add "
+"these to the wp_options table after the user explicitly saves changes to "
+"the theme defaults."
+msgstr "Certifique-se de que você salvou as opções do tema pelo menos uma vez. Alguns temas só as adicionam à tabela wp_options depois que o usuário salva explicitamente as alterações nos padrões do tema."
+
+#: src/js/admin-strings/texts.js:6
+msgid "Add to String Translation"
+msgstr "Adicionar à tradução de strings"
+
+#: src/js/admin-strings/texts.js:7
+msgid "Remove from String Translation"
+msgstr "Remover da tradução da string"
+
+#: src/js/admin-strings/texts.js:9
+msgid "Included in String Translation"
+msgstr "Incluído na tradução de strings"

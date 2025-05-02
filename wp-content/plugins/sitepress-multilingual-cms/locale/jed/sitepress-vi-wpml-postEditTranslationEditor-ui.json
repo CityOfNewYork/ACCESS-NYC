@@ -1,14 +1,42 @@
 {
-   "domain": "messages",
-   "locale_data": {
-      "messages": {
-         "": {
-            "domain": "messages",
-            "lang": "en"
-         },
-         "Cancel": [
-            "Hủy"
-         ]
-      }
-   }
+  "translation-revision-date": "2024-08-20T09:35:36+00:00",
+  "generator": "WP-CLI/2.9.0",
+  "source": "src/js/postEditTranslationEditor/components/PostTranslationEditorSettings.js",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "en",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "Use the editor to translate:": [
+        "Sử dụng trình soạn thảo để dịch:"
+      ],
+      "Apply": [
+        "Áp dụng"
+      ],
+      "Cancel": [
+        "Hủy"
+      ],
+      "This %s": [
+        "Cái này%s"
+      ],
+      "All %s": [
+        "Tất cả%s"
+      ],
+      "All the site's content": [
+        "Tất cả nội dung của trang web"
+      ],
+      "WPML Translation Editor": [
+        "Trình biên dịch Wpml"
+      ],
+      "Use only when you want to translate content from one of the few plugins that are not compatible with WPML’s translation editor or  if you would like to create different designs for the same page in different languages.": [
+        "Chỉ sử dụng khi bạn muốn dịch nội dung từ một trong số ít plugin không tương thích với trình chỉnh sửa dịch của WPML hoặc nếu bạn muốn tạo nhiều thiết kế khác nhau cho cùng một trang bằng nhiều ngôn ngữ khác nhau."
+      ],
+      "WordPress Editor": [
+        "Trình biên tập Wordpress"
+      ]
+    }
+  }
 }

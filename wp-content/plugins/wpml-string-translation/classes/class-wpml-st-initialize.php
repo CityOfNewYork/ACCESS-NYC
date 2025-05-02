@@ -2,26 +2,25 @@
 
 class WPML_ST_Initialize {
 
+	/** @var array */
+	private $config;
+
+	public function __construct( array $config = [] ) {
+		$this->config = $config;
+	}
+
 	public function load() {
 		add_action( 'plugins_loaded', array( $this, 'run' ), - PHP_INT_MAX );
 	}
 
 	public function run() {
-		if ( ! $this->hasMinimalCoreRequirements() ) {
-			return;
-		}
-
 		$this->includeAutoloader();
 		$this->configureDIC();
 		$this->loadEarlyHooks();
-	}
 
-	private function hasMinimalCoreRequirements() {
-		if ( ! class_exists( 'WPML_Core_Version_Check' ) ) {
-			require_once WPML_ST_PATH . '/vendor/wpml-shared/wpml-lib-dependencies/src/dependencies/class-wpml-core-version-check.php';
-		}
+		$app = new \WPML\StringTranslation\Application( $this->config );
+		$app->run();
 
-		return WPML_Core_Version_Check::is_ok( WPML_ST_PATH . '/wpml-dependencies.json' );
 	}
 
 	private function includeAutoloader() {

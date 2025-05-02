@@ -14,7 +14,7 @@ use WPML\Element\API\Languages;
 add_action( 'plugins_loaded', 'icl_st_init' );
 
 function icl_st_init() {
-	global $sitepress_settings, $sitepress, $wpdb, $icl_st_err_str, $pagenow, $authordata;
+	global $sitepress_settings, $sitepress, $pagenow, $authordata;
 
 	if ( empty( $sitepress_settings['setup_complete'] ) || ( $pagenow === 'site-new.php' && isset( $_REQUEST['action'] ) && 'add-site' === $_REQUEST['action'] ) ) {
 		return;
@@ -53,9 +53,8 @@ function icl_st_init() {
 	// handle po file upload
 
 	new WPML_PO_Import_Strings_Scripts();
-	$po_import_strings = new WPML_PO_Import_Strings();
+	$po_import_strings = WPML\Container\make( WPML_PO_Import_Strings::class );
 	$po_import_strings->maybe_import_po_add_strings();
-	$icl_st_err_str = $po_import_strings->get_errors();
 
 	// handle po export
 	if ( isset( $_POST['icl_st_pie_e'] ) && wp_verify_nonce( $_POST['_wpnonce'], 'icl_po_export' ) ) {
@@ -65,10 +64,10 @@ function icl_st_init() {
 		}
 		$_GET['show_results'] = 'all';
 		if ( $_POST['icl_st_e_context'] ) {
-			$_GET['context'] = filter_var( $_POST['icl_st_e_context'], FILTER_SANITIZE_STRING );
+			$_GET['context'] = (string) \WPML\API\Sanitize::string( $_POST['icl_st_e_context'] );
 		}
 
-		$_GET['translation_language'] = filter_var( $_POST['icl_st_e_language'], FILTER_SANITIZE_STRING );
+		$_GET['translation_language'] = (string) \WPML\API\Sanitize::string( $_POST['icl_st_e_language'] );
 		$strings                      = icl_get_string_translations();
 		if ( ! empty( $strings ) ) {
 			$po = icl_st_generate_po_file( $strings );
@@ -77,10 +76,10 @@ function icl_st_init() {
 		}
 		if ( ! isset( $_POST['icl_st_pe_translations'] ) ) {
 			$popot  = 'pot';
-			$poname = $_POST['icl_st_e_context'] ? filter_var( urlencode( $_POST['icl_st_e_context'] ), FILTER_SANITIZE_STRING ) : 'all_context';
+			$poname = $_POST['icl_st_e_context'] ? (string) \WPML\API\Sanitize::string( urlencode( $_POST['icl_st_e_context'] )) : 'all_context';
 		} else {
 			$popot  = 'po';
-			$poname = filter_var( $_GET['context'], FILTER_SANITIZE_STRING ) . '-' . filter_var( $_GET['translation_language'], FILTER_SANITIZE_STRING );
+			$poname = \WPML\API\Sanitize::string( $_GET['context'] ?? '' ) . '-' . \WPML\API\Sanitize::string( $_GET['translation_language'] ?? '' );
 		}
 		header( 'Content-Type: application/force-download' );
 		header( 'Content-Type: application/octet-stream' );
@@ -105,9 +104,6 @@ function icl_st_init() {
 	add_action( 'update_option_widget_text', 'icl_st_update_text_widgets_actions', 5, 2 );
 	add_action( 'update_option_sidebars_widgets', 'wpml_st_init_register_widget_titles' );
 
-	if ( $icl_st_err_str ) {
-		add_action( 'admin_notices', 'icl_st_admin_notices' );
-	}
 	if ( isset( $_REQUEST['string-translated'] ) && $_REQUEST['string-translated'] == true ) {
 		add_action( 'admin_notices', 'icl_st_admin_notices_string_updated' );
 	}
@@ -140,11 +136,14 @@ function wpml_st_init_register_widget_titles() {
 		}
 		$name = preg_replace( '#-[0-9]+#', '', $aw );
 
-		$value = get_option( 'widget_' . $name );
+		$value = get_option( 'widget_' . $name, [] );
 		if ( isset( $value[ $suffix ]['title'] ) && $value[ $suffix ]['title'] ) {
 			$w_title = $value[ $suffix ]['title'];
 		} else {
 			$w_title                   = wpml_get_default_widget_title( $aw );
+			if ( ! isset( $value[ $suffix ] ) || ! is_array( $value[ $suffix ] ) ) {
+				$value[ $suffix ] = [];
+			}
 			$value[ $suffix ]['title'] = $w_title;
 			update_option( 'widget_' . $name, $value );
 		}
@@ -747,29 +746,6 @@ function icl_sw_must_track_strings() {
 	return false;
 }
 
-function icl_st_track_string( $text, $domain, $kind = ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_PAGE ) {
-
-	if ( is_multisite() && ms_is_switched() ) {
-		return;
-	}
-
-	require_once dirname( __FILE__ ) . '/gettext/wpml-string-scanner.class.php';
-
-	static $string_scanner = null;
-	if ( ! $string_scanner ) {
-		try {
-			$wp_filesystem  = wpml_get_filesystem_direct();
-			$string_scanner = new WPML_String_Scanner( $wp_filesystem, new WPML_ST_File_Hashing() );
-		} catch ( Exception $e ) {
-			trigger_error( $e->getMessage(), E_USER_WARNING );
-		}
-	}
-
-	if ( $string_scanner ) {
-		$string_scanner->track_string( $text, $domain, $kind );
-	}
-}
-
 /**
  * @param string $translation
  * @param string $text
@@ -973,13 +949,6 @@ function icl_st_get_contexts( $status ) {
 	return $wpml_strings->get_per_domain_counts( $status );
 }
 
-function icl_st_admin_notices() {
-	global $icl_st_err_str;
-	if ( $icl_st_err_str ) {
-		echo '<div class="error"><p>' . $icl_st_err_str . '</p></div>';
-	}
-}
-
 function icl_st_generate_po_file( $strings ) {
 
 	require_once WPML_ST_PATH . '/inc/gettext/wpml-po-parser.class.php';
@@ -1145,7 +1114,7 @@ function icl_translation_add_string_translation( $rid, $translation, $lang_code 
 function icl_st_admin_notices_string_updated() {
 	?>
 	<div class="updated">
-			<p><?php _e( 'Strings translations updated', 'wpml-string-translation' ); ?></p>
+			<p><?php _e( 'Translations for strings updated', 'wpml-string-translation' ); ?></p>
 	</div>
 	<?php
 }

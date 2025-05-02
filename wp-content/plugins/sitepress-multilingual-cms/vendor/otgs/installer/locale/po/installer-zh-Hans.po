@@ -1,0 +1,820 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-01-16T17:01:33+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: installer\n"
+
+msgid "Translate with PTC"
+msgstr "使用PTC翻译"
+
+#. translators: %1$s and %2$s are opening and closing link tags.
+#: includes/admin-notices/notices/Account.php:107
+msgid "This site is registered on wpml.org as a development site. %1$sLearn more%2$s"
+msgstr "本网站在 wpml.org 上注册为开发网站。%1$sLearn more%2$s"
+
+#: includes/admin-notices/notices/Account.php:111
+msgid "Development Site"
+msgstr "发展用地"
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:18
+msgid "You are using an unregistered version of %s and are not receiving compatibility and security updates"
+msgstr "您使用的是未注册版本的%s，无法获得兼容性和安全更新"
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:20
+msgid "%s plugin must be registered in order to receive stability and security updates. Without these updates, the plugin may become incompatible with new versions of WordPress, which include security patches."
+msgstr "%s插件必须注册才能接收稳定性和安全更新"
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:29
+#: includes/admin-notices/notices/Texts.php:40
+msgid "Your %s account has expired."
+msgstr "您的 %s 账户已过期。"
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:31
+msgid "Your site is vulnerable to breaking changes in future WordPress releases. Purchase a new account to protect your site with the latest %s releases."
+msgstr "您的网站容易受到未来 WordPress 版本中破坏性更改的影响。购买一个新账户，使用最新的 %s 版本保护您的网站。"
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:42
+msgid "Your site is vulnerable to breaking changes in future WordPress releases. Renew your account to protect your site with the latest %s releases."
+msgstr "您的网站容易受到未来 WordPress 版本中破坏性更改的影响。续订您的帐户，以便使用最新的 %s 版本保护您的网站。"
+
+#: includes/admin-notices/notices/Texts.php:52
+msgid "This site is registered on %s as a development site."
+msgstr "此网站在%s注册为开发站点"
+
+#. translators: %1$s is the text "update the site key" inside a link and %2$s is the text "Learn more" inside a link
+#: includes/admin-notices/notices/Texts.php:54
+msgid "When this site goes live, remember to %1$s from \"development\" to \"production\" to remove this message. %2$s"
+msgstr "网站上线后，请记住将 %1$s 从 \"开发 \"转为 \"生产\"，以删除此信息。%2$s"
+
+#: includes/admin-notices/notices/Texts.php:57
+msgid "update the site key"
+msgstr "更新站点密钥"
+
+#: includes/admin-notices/notices/Texts.php:58
+msgid "Learn more"
+msgstr "了解更多"
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:66
+msgid "Remember to remove %s from this website"
+msgstr "记得从此网站移除%s"
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:68
+msgid "This site is using the %s plugin, which has not been paid for. After receiving a refund, you should remove this plugin from your sites. Using unregistered plugins means you are not receiving stability and security updates and will ultimately lead to problems running the site."
+msgstr "此站点使用未付费的%s插件，请移除"
+
+#. translators: %1$s Product name %2$s host name (ex. wpml.org)
+#: includes/admin-notices/notices/Texts.php:76
+msgid "%1$s plugin cannot connect to %2$s"
+msgstr "%1$s插件无法连接到%2$s"
+
+#. translators: %1$s Product name %2$s host name (ex. wpml.org)
+#: includes/admin-notices/notices/Texts.php:79
+msgid "%1$s needs to connect to its server to check for new releases and security updates. Something in the network or security settings is preventing this. Please allow outgoing communication to %2$s to remove this notice."
+msgstr "%1$s 需要连接到服务器以检查新版本和安全更新。网络或安全设置阻止了这一操作。请允许向 %2$s 发送通信，以删除此通知。"
+
+#: includes/admin-notices/notices/Texts.php:81
+msgid "Need help?"
+msgstr "需要帮助？"
+
+#. translators: %1$s is `communication error details` %2$s is ex. wpml.org technical support
+#: includes/admin-notices/notices/Texts.php:83
+msgid "See the %1$s and let us know in %2$s."
+msgstr "查看%1$s并在%2$s告知我们"
+
+#: includes/admin-notices/notices/Texts.php:84
+msgid "communication error details"
+msgstr "通信错误详情"
+
+#. translators: %s is host name (ex. wpml.org)
+#: includes/admin-notices/notices/Texts.php:86
+msgid "%s technical support"
+msgstr "%s技术支持"
+
+#: includes/admin-notices/notices/Texts.php:96
+msgid "Please install %s to allow translating %s."
+msgstr "请安装%s以允许翻译%s"
+
+#: includes/admin-notices/notices/Texts.php:135
+msgid "Install and activate"
+msgstr "安装并激活"
+
+#: includes/admin-notices/notices/Texts.php:136
+msgid "Ignore and don't ask me again"
+msgstr "忽略且不再询问"
+
+#: includes/admin-notices/notices/Texts.php:147
+#: includes/class-wp-installer.php:545
+#: includes/upgrade/AutoUpgrade.php:114
+#: templates/repository-register.php:49
+msgid "Register"
+msgstr "注册"
+
+#: includes/admin-notices/notices/Texts.php:148
+msgid "This is a development / staging site"
+msgstr "这是开发/暂存站点"
+
+#: includes/admin-notices/notices/Texts.php:159
+msgid "Purchase %s"
+msgstr "购买 %s"
+
+#: includes/admin-notices/notices/Texts.php:160
+#: includes/admin-notices/notices/Texts.php:175
+#: includes/admin-notices/notices/Texts.php:189
+#: templates/repository-refunded.php:15
+msgid "Check my order status"
+msgstr "检查订单状态"
+
+#: includes/admin-notices/notices/Texts.php:161
+#: includes/admin-notices/notices/Texts.php:176
+msgid "Got renewal already?"
+msgstr "已续订？"
+
+#: includes/admin-notices/notices/Texts.php:174
+msgid "Renew your account"
+msgstr "续费"
+
+#: includes/admin-notices/notices/Texts.php:190
+#: templates/repository-refunded.php:14
+msgid "Bought again?"
+msgstr "重新购买？"
+
+#: includes/admin-notices/notices/Texts.php:203
+msgid "Dismiss"
+msgstr "关闭"
+
+#: includes/class-installer-dependencies.php:98
+msgid ""
+"Downloading is not possible. WordPress cannot create required folders because of the\n"
+"                                        256 characters limitation of the current Windows environment."
+msgstr "无法下载。Windows环境限制256字符,WordPress无法创建所需文件夹。"
+
+#: includes/class-installer-dependencies.php:257
+msgid "Return to the updates page"
+msgstr "返回更新页面"
+
+#: includes/class-installer-dependencies.php:293
+msgid "OTGS Installer"
+msgstr "OTGS安装程序"
+
+#: includes/class-installer-dependencies.php:298
+msgid "%s, responsible for receiving automated updates for WPML and Toolset, requires the following PHP component(s) in order to function:"
+msgstr "%s需要以下PHP组件才能正常运行:"
+
+#: includes/class-installer-dependencies.php:305
+msgid "Learn more: %s"
+msgstr "了解更多:%s"
+
+#: includes/class-installer-theme.php:890
+msgid "To install and update %s, please %sregister%s %s for this site."
+msgstr "安装更新%s,请%sregister%s %s此站点。"
+
+#: includes/class-installer-upgrader-skins.php:47
+msgid "We were not able to copy some plugin files. This is usually due to issues with permissions for WordPress content or plugins folder."
+msgstr "无法复制某些插件文件。通常是WordPress内容或插件文件夹权限问题。"
+
+#: includes/class-otgs-installer-plugins-page-notice.php:93
+msgid "Your %s account has expired. %sPurchase today%s to protect your site from breaking changes in future WordPress releases."
+msgstr "您的 %s 账户已过期。%s立即购买%s，以保护您的网站免受未来 WordPress 版本中出现的破坏性更改的影响。"
+
+#: includes/class-otgs-installer-plugins-page-notice.php:101
+msgid "Your %s account has expired. %sRenew today%s to protect your site from breaking changes in future WordPress releases."
+msgstr "您的 %s 账户已过期。%s立即续费%s，以保护您的网站免受未来 WordPress 版本中出现的破坏性更改的影响。"
+
+#: includes/class-otgs-installer-plugins-page-notice.php:109
+msgid "Remember to remove %s from this website. %sCheck my order status%s"
+msgstr "记得从此网站删除%s。%s查看订单状态%s"
+
+#: includes/class-otgs-installer-plugins-page-notice.php:119
+msgid "You have an old, free subscription for Toolset Types which doesn't provide automatic updates. %sUpgrade your account%s"
+msgstr "您的Toolset Types订阅为旧版免费版，无法自动更新。%s升级您的账户%s"
+
+#: includes/class-otgs-installer-plugins-page-notice.php:129
+msgid "You are using an unregistered version of %s and are not receiving compatibility and security updates. %sRegister now%s"
+msgstr "您正在使用未注册版%s,未收到兼容性和安全更新。%s立即注册%s"
+
+#: includes/class-otgs-installer-plugins-page-notice.php:156
+msgid "You are using the complementary %1$s. For the %2$s, %3$s."
+msgstr "您正在使用免费%1$s。%2$s请%3$s。"
+
+#: includes/class-otgs-installer-plugins-page-notice.php:157
+msgid "complete set of features"
+msgstr "完整功能集"
+
+#: includes/class-otgs-installer-plugins-page-notice.php:157
+msgid "upgrade to Toolset"
+msgstr "升级到Toolset"
+
+#: includes/class-otgs-installer-subscription-warning-message.php:65
+msgid "Renew today"
+msgstr "立即续订"
+
+#: includes/class-otgs-installer-subscription-warning-message.php:65
+msgid "to protect your site from breaking changes in future WordPress releases."
+msgstr "以保护您的网站免受未来 WordPress 版本中出现的破坏性更改的影响。"
+
+#: includes/class-otgs-installer-subscription-warning-message.php:72
+msgid "Your %s account expires in %d day."
+msgid_plural "Your %s account expires in %d days."
+msgstr[0] "您的 %s 账户将在 %d 天后过期。"
+msgstr[1] "您的 %s 账户将在 %d 天后过期。"
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:97
+msgid "Reporting to"
+msgstr "报告给"
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:98
+msgid "Report to"
+msgstr "报告给"
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:99
+msgid "Send theme and plugins information, in order to get faster support and compatibility alerts"
+msgstr "发送主题和插件信息,以获得更快支持和兼容性警报"
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:101
+msgid "Don't send this information and skip compatibility alerts"
+msgstr "不发送此信息并跳过兼容性警报"
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:103
+msgid "which theme and plugins you are using."
+msgstr "您使用的主题和插件。"
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:142
+msgid "Privacy and data usage policy"
+msgstr "隐私和数据使用政策"
+
+#: includes/class-wp-installer-channels.php:40
+msgid "Development"
+msgstr "开发"
+
+#: includes/class-wp-installer-channels.php:42
+msgid "Beta"
+msgstr "测试版"
+
+#: includes/class-wp-installer-channels.php:44
+msgid "Production"
+msgstr "生产"
+
+#: includes/class-wp-installer.php:193
+msgid "Installing %s"
+msgstr "正在安装%s"
+
+#: includes/class-wp-installer.php:194
+msgid "Updating %s"
+msgstr "正在更新%s"
+
+#: includes/class-wp-installer.php:195
+msgid "Activating %s"
+msgstr "正在激活%s"
+
+#: includes/class-wp-installer.php:359
+#: includes/class-wp-installer.php:360
+#: includes/class-wp-installer.php:1183
+msgid "Installer"
+msgstr "安装程序"
+
+#: includes/class-wp-installer.php:534
+msgid "Upgrade"
+msgstr "升级"
+
+#: includes/class-wp-installer.php:539
+msgid "Registered"
+msgstr "已注册"
+
+#: includes/class-wp-installer.php:743
+msgid ""
+"You are using an invalid site key defined as the constant %s (most likely in wp-config.php).\n"
+"                                                Please remove it or use the correct value in order to be able to register correctly."
+msgstr "您使用的站点密钥无效,定义为常量%s(可能在wp-config.php中)。"
+
+#: includes/class-wp-installer.php:877
+msgid "Commercial"
+msgstr "商业"
+
+#: includes/class-wp-installer.php:1076
+msgid "Installer cannot display the products information because the automatic updating for %s was explicitly disabled with the configuration below (usually in wp-config.php):"
+msgstr "安装程序无法显示产品信息,因为%s的自动更新被禁用:"
+
+#: includes/class-wp-installer.php:1078
+msgid "In order to see the products information, please run the %smanual updates check%s to initialize the products list or (temporarily) remove the above code."
+msgstr "查看产品信息,请运行%s手动更新检查%s或删除上述代码。"
+
+#: includes/class-wp-installer.php:1105
+msgid "Installer cannot contact our updates server to get information about the available products and check for new versions. If you are seeing this message for the first time, you can ignore it, as it may be a temporary communication problem. If the problem persists and your WordPress admin is slowing down, you can disable automated version checks. Add the following line to your wp-config.php file:"
+msgstr "安装程序无法连接更新服务器。如首次看到此消息可忽略。"
+
+#: includes/class-wp-installer.php:1131
+#: includes/class-wp-installer.php:1135
+msgid "Information about new versions is invalid. It may be a temporary communication problem, please check for updates again."
+msgstr "版本信息无效。可能是暂时通信问题,请再次检查更新。"
+
+#: includes/class-wp-installer.php:1175
+msgid "Sorry, you are not allowed to manage Installer for this site."
+msgstr "抱歉,您无权管理此站点的安装程序。"
+
+#: includes/class-wp-installer.php:1221
+msgid "No repositories defined."
+msgstr "未定义存储库。"
+
+#: includes/class-wp-installer.php:1597
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:67
+msgid "Invalid site key for the current site."
+msgstr "当前站点的站点密钥无效"
+
+#: includes/class-wp-installer.php:1598
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:67
+msgid "Please note that the site key is case sensitive."
+msgstr "请注意站点密钥区分大小写。"
+
+#: includes/class-wp-installer.php:1604
+msgid "%s cannot access %s to register. Try again to see if it's a temporary problem. If the problem continues, make sure that this site has access to the Internet."
+msgstr "%s无法访问%s注册。再试一次,可能是暂时问题。"
+
+#: includes/class-wp-installer.php:2302
+msgid "Connection failed! Please refresh the page and try again. (%s)"
+msgstr "连接失败！请刷新页面并重试。(%s)"
+
+#: includes/class-wp-installer.php:2305
+msgid "Your subscription appears to no longer be valid. Please try to register again using a valid site key."
+msgstr "您的订阅似乎已失效。请使用有效的站点密钥重新注册。"
+
+#: includes/class-wp-installer.php:3009
+#: includes/class-wp-installer.php:3087
+msgid "%s cannot update because your site's registration is not valid. Please %sregister %s%s again for this site first."
+msgstr "%s 无法更新，因为您的网站注册无效。请先 %s重新为该网站注册 %s%s。"
+
+#: includes/class-wp-installer.php:3111
+msgid "Update Plugin"
+msgstr "更新插件"
+
+#: includes/class-wp-installer.php:3112
+msgid "Return to the plugins page"
+msgstr "返回插件页面"
+
+#: includes/products/commercial-tab/DownloadsList.php:29
+msgid "(embedded)"
+msgstr "(嵌入)"
+
+#: includes/products/commercial-tab/DownloadsList.php:43
+msgid "Release notes"
+msgstr "发布说明"
+
+#: includes/products/OTGS_Installer_Products_Parser.php:101
+msgid "Information about versions of %s are invalid. It may be a temporary communication problem, please check for updates again."
+msgstr "%s版本信息无效，可能是临时通信问题"
+
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:40
+msgid "Empty site key!"
+msgstr "站点密钥为空!"
+
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:44
+msgid "Invalid request!"
+msgstr "无效请求!"
+
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:125
+msgid "Invalid site key for the current site. If the error persists, try to un-register first and then register again with the same site key."
+msgstr "当前站点的站点密钥无效。如果错误持续,请先注销再用相同密钥重新注册。"
+
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:179
+msgid "%s cannot access %s to register. Try again to see if it's a temporary problem. If the problem continues, make sure that this site has access to the Internet. You can still use the plugin without registration, but you will not receive automated updates."
+msgstr "%s无法访问%s进行注册。再试一次,可能是暂时问题。"
+
+#: includes/support/class-otgs-installer-support-hooks.php:20
+#: includes/support/class-otgs-installer-support-template.php:39
+#: includes/support/class-otgs-installer-support-template.php:43
+#: includes/support/class-otgs-installer-support-template.php:56
+msgid "Installer Support"
+msgstr "安装程序支持"
+
+#: includes/support/class-otgs-installer-support-template.php:40
+msgid "For retrieving Installer debug information use the %s page."
+msgstr "使用%s页面获取安装程序调试信息。"
+
+#: includes/support/class-otgs-installer-support-template.php:58
+msgid "Installer Log"
+msgstr "安装程序日志"
+
+#: includes/support/class-otgs-installer-support-template.php:59
+msgid "Request URL"
+msgstr "请求URL"
+
+#: includes/support/class-otgs-installer-support-template.php:60
+msgid "Request Arguments"
+msgstr "请求参数"
+
+#: includes/support/class-otgs-installer-support-template.php:61
+msgid "Response"
+msgstr "响应"
+
+#: includes/support/class-otgs-installer-support-template.php:62
+msgid "Component"
+msgstr "组件"
+
+#: includes/support/class-otgs-installer-support-template.php:63
+msgid "Time"
+msgstr "时间"
+
+#: includes/support/class-otgs-installer-support-template.php:64
+msgid "Log is empty"
+msgstr "日志为空"
+
+#: includes/support/class-otgs-installer-support-template.php:67
+msgid "Installer System Status"
+msgstr "安装程序系统状态"
+
+#: includes/support/class-otgs-installer-support-template.php:68
+msgid "Check Now"
+msgstr "立即检查"
+
+#: includes/support/class-otgs-installer-support-template.php:71
+msgid "Required PHP Libraries"
+msgstr "必需的PHP库"
+
+#: includes/support/class-otgs-installer-support-template.php:74
+msgid "All Installer Instances"
+msgstr "所有安装程序实例"
+
+#: includes/support/class-otgs-installer-support-template.php:75
+msgid "Path"
+msgstr "路径"
+
+#: includes/support/class-otgs-installer-support-template.php:76
+msgid "Version"
+msgstr "版本"
+
+#: includes/support/class-otgs-installer-support-template.php:77
+msgid "High priority"
+msgstr "高优先级"
+
+#: includes/support/class-otgs-installer-support-template.php:78
+msgid "Delegated"
+msgstr "委托"
+
+#: includes/support/class-otgs-installer-support-template.php:86
+msgid "WPML API server"
+msgstr "WPML API服务器"
+
+#: includes/support/class-otgs-installer-support-template.php:91
+msgid "Toolset API server"
+msgstr "Toolset API服务器"
+
+#: includes/upgrade/AutoUpgrade.php:115
+msgid " to use auto-updates"
+msgstr "使用自动更新"
+
+#: loader.php:67
+msgid "This site is registered on %s as a development site. Switch to a production site key to %s."
+msgstr "此站点在 %s 上注册为开发站点。切换到生产站点密钥 %s。"
+
+#: loader.php:72
+msgid "This site is registered on Toolset.com as a development site."
+msgstr "此站点在 Toolset.com 注册为开发站点"
+
+#: templates/channel-selector.php:3
+msgid "Updates channel:"
+msgstr "更新渠道:"
+
+#: templates/channel-selector.php:12
+msgid "To select different update channels (beta, development) you must update your existing products to their most recent stable versions."
+msgstr "要选择不同的更新渠道,必须先将现有产品更新至最新稳定版。"
+
+#: templates/channel-selector.php:15
+msgid "Updating the plugins on your site. Please don't close this page or navigate away."
+msgstr "正在更新站点插件。请勿关闭或离开此页面。"
+
+#: templates/channel-selector.php:25
+msgid "Something went wrong and we could not install all updates from the %s channel. Click here to %stry again%s. If the errors persist, please switch back to the Production channel and contact the %s%s support%s."
+msgstr "出错了，我们无法从 %s 频道安装所有更新。请单击此处 %s重试%s。如果错误仍然存在，请切换回生产频道并联系 %s%s 支持%s。"
+
+#: templates/channel-selector.php:33
+msgid "There was a problem switching to the %s channel. You can %sretry%s. If the problem continues, please %sdownload %s%s and install again manually"
+msgstr "切换到 %s 频道时出现问题。您可以 %s重试%s。如果问题仍然存在，请 %s下载 %s%s 并重新手动安装。"
+
+#: templates/channel-selector.php:47
+msgid "Cancel"
+msgstr "取消"
+
+#: templates/channel-selector.php:48
+msgid "Switch"
+msgstr "切换"
+
+#: templates/channel-selector.php:51
+msgid "The plugins will update to the most recent version in the channel that you selected."
+msgstr "插件将更新到您所选渠道的最新版本。"
+
+#: templates/channel-selector.php:55
+msgid "Remember my preference."
+msgstr "记住我的偏好。"
+
+#: templates/channel-selector.php:62
+msgid "You are using a potentially less stable channel for %s. If you didn't enable this on purpose, you should switch to the 'Production' channel."
+msgstr "您正在使用一个可能不太稳定的 %s 频道。如果您不是故意启用此功能，则应切换到 \"生产 \"频道。"
+
+#: templates/downloads-list-compact.php:8
+#: templates/downloads-list.php:15
+#: templates/downloads-list.php:44
+msgid "Plugin"
+msgstr "插件"
+
+#: templates/downloads-list-compact.php:9
+msgid "Available"
+msgstr "可用"
+
+#: templates/downloads-list-compact.php:10
+#: templates/downloads-list.php:16
+#: templates/downloads-list.php:45
+msgid "Installed"
+msgstr "已安装"
+
+#: templates/downloads-list-compact.php:11
+msgid "Downloading"
+msgstr "正在下载"
+
+#: templates/downloads-list-compact.php:12
+msgid "Activate"
+msgstr "激活"
+
+#: templates/downloads-list-compact.php:52
+msgid "downloading..."
+msgstr "正在下载..."
+
+#: templates/downloads-list-compact.php:53
+msgid "failed!"
+msgstr "失败！"
+
+#: templates/downloads-list-compact.php:53
+msgid "downloaded"
+msgstr "已下载"
+
+#: templates/downloads-list-compact.php:56
+msgid "activating"
+msgstr "正在激活"
+
+#: templates/downloads-list-compact.php:57
+msgid "activated"
+msgstr "已激活"
+
+#: templates/downloads-list-compact.php:65
+#: templates/downloads-list.php:71
+msgid "Downloading is not possible because WordPress cannot write into the plugins folder. %sHow to fix%s."
+msgstr "无法下载是因为 WordPress 无法写入插件文件夹。%s如何修复%s。"
+
+#: templates/downloads-list-compact.php:72
+#: templates/downloads-list.php:78
+msgid "Download"
+msgstr "下载"
+
+#: templates/downloads-list-compact.php:74
+#: templates/downloads-list.php:82
+msgid "Activate after download"
+msgstr "下载后激活"
+
+#: templates/downloads-list-compact.php:77
+#: templates/downloads-list.php:86
+msgid "Operation complete!"
+msgstr "操作完成!"
+
+#: templates/downloads-list-compact.php:79
+msgid ""
+"Download failed!\n"
+"\n"
+"Click OK to revalidate your subscription or CANCEL to try again."
+msgstr "下载失败!
+
+点击确定重新验证订阅,或取消重试。"
+
+#: templates/downloads-list.php:17
+#: templates/downloads-list.php:46
+msgid "Current"
+msgstr "当前"
+
+#: templates/downloads-list.php:18
+#: templates/downloads-list.php:47
+msgid "Released"
+msgstr "发布"
+
+#: templates/downloads-list.php:88
+msgid ""
+"Download failed!\n"
+"\n"
+"Please refresh the page and try again."
+msgstr "下载失败!
+
+请刷新页面重试。"
+
+#: templates/products-compact.php:5
+msgid "Incorrect setup"
+msgstr "设置不正确"
+
+#: templates/products-compact.php:25
+msgid "Invalid product"
+msgstr "无效产品"
+
+#: templates/products-compact.php:36
+msgid "Unknown repository"
+msgstr "未知存储库"
+
+#: templates/products-compact.php:44
+msgid " Your current site key (%s) does not match the selected product (%s)."
+msgstr "您当前的网站密钥（%s）与所选产品（%s）不匹配。"
+
+#: templates/products-compact.php:65
+msgid "Buy %s"
+msgstr "购买 %s"
+
+#: templates/products-compact.php:69
+msgid "Already bought %s?"
+msgstr "已经购买了 %s？"
+
+#: templates/products-compact.php:74
+#: templates/repository-register.php:20
+msgid "Site-key was set by %s, most likely in wp-config.php. Please remove the constant before attempting to register."
+msgstr "Site-key 由 %s 设置，很可能在 wp-config.php。请在尝试注册前删除该常数。"
+
+#: templates/products-compact.php:77
+msgid "Enter site key"
+msgstr "输入站点密钥"
+
+#: templates/products-compact.php:85
+msgid "Add"
+msgstr "添加"
+
+#: templates/products-compact.php:94
+msgid "Subscription is expired."
+msgstr "订阅已过期。"
+
+#: templates/products-compact.php:103
+msgid "Renew %s"
+msgstr "更新 %s"
+
+#: templates/products-compact.php:114
+msgid "Are you sure you want to remove this site key?"
+msgstr "确定要移除此站点密钥吗?"
+
+#: templates/products-compact.php:119
+#: templates/repository-registered-buttons.php:12
+msgid "Site-key was set by %s, most likely in wp-config.php. Please remove the constant before attempting to unregister."
+msgstr "Site-key 被 %s 设置，很可能在 wp-config.php。请在取消注册前删除该常数。"
+
+#: templates/products-compact.php:122
+msgid "Remove current site key (%s)"
+msgstr "删除当前站点密钥 (%s)"
+
+#: templates/products-compact.php:138
+msgid "%s support on wpml.org"
+msgstr "%s 支持 wpml.org"
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:17
+msgid "Do you have an account on %s?"
+msgstr "您在 %s 上有账户吗？"
+
+#: templates/repository-end-users.php:18
+msgid "Great! You just need to extend your subscription."
+msgstr "太好了!您只需延长订阅即可。"
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:20
+msgid "You have a %s account. You just need to extend your subscription."
+msgstr "您有一个 %s 账户。您只需延长订阅期限。"
+
+#: templates/repository-end-users.php:21
+msgid "Extend Subscription"
+msgstr "延长订阅"
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:23
+msgid "OK. You need to set up renewal for %s."
+msgstr "好的。您需要为 %s 设置续订。"
+
+#. translators: %1$s and %2$s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:25
+msgid "You do not have a %1$s account yet. You need to set up a renewal for %2$s."
+msgstr "您还没有 %1$s 帐户。您需要为 %2$s 续费。"
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:27
+msgid "Set Up Renewal For %s"
+msgstr "为 %s 设置续费"
+
+#: templates/repository-end-users.php:28
+msgid "No worries. We can check that for you."
+msgstr "别担心。我们可以为您检查。"
+
+#: templates/repository-end-users.php:29
+msgid "Check"
+msgstr "检查"
+
+#: templates/repository-end-users.php:30
+msgid "Your Email Address"
+msgstr "您的电子邮件地址"
+
+#: templates/repository-end-users.php:37
+msgid "Yes"
+msgstr "是"
+
+#: templates/repository-end-users.php:41
+msgid "No"
+msgstr "否"
+
+#: templates/repository-end-users.php:45
+msgid "I do not remember"
+msgstr "我不记得了"
+
+#: templates/repository-expired.php:12
+msgid "You are using an expired account of %s."
+msgstr "您使用的账户 %s 已过期。"
+
+#: templates/repository-expired.php:13
+msgid "It means you will not receive updates. This can lead to stability and even security issues."
+msgstr "这意味着您将无法收到更新,可能导致稳定性甚至安全问题。"
+
+#: templates/repository-expired.php:14
+msgid "Have you already renewed your license?"
+msgstr "您是否已经更新了驾照？"
+
+#: templates/repository-expired.php:15
+msgid "Refresh account status"
+msgstr "刷新账户状态"
+
+#: templates/repository-legacy-free.php:9
+msgid "Upgrade your account"
+msgstr "升级您的账号"
+
+#: templates/repository-legacy-free.php:11
+msgid "You have an old, free subscription for Toolset Types which doesn't provide automatic updates. %s"
+msgstr "您的Toolset Types订阅为旧版免费版，无法自动更新。%s"
+
+#: templates/repository-listing.php:105
+msgid "Click to see individual components options."
+msgstr "点击查看单独组件选项。"
+
+#: templates/repository-listing.php:105
+msgid "Individual components"
+msgstr "单独组件"
+
+#: templates/repository-listing.php:147
+msgid "This page lets you install plugins and update existing plugins. To remove any of these plugins, go to the %splugins%s page and if you have the permission to remove plugins you should be able to do this."
+msgstr "本页面可让您安装插件和更新现有插件。要移除任何这些插件，请访问 %splugins%s 页面，如果您有移除插件的权限，您应该可以移除这些插件。"
+
+#: templates/repository-refunded.php:12
+msgid "Remember to remove %s from this website."
+msgstr "记住从本网站删除 %s。"
+
+#: templates/repository-refunded.php:13
+msgid "This site is using %s plugin, which is not paid for. After receiving a refund, you should remove this plugin from your sites. Using unregistered plugins means that you are not receiving stability and security updates and will ultimately lead to problems running the site."
+msgstr "该网站正在使用 %s 插件，该插件未付费。收到退款后，您应从网站上删除该插件。使用未注册的插件意味着您无法收到稳定性和安全性更新，最终会导致网站运行出现问题。"
+
+#: templates/repository-register.php:14
+msgid "Already purchased %s?"
+msgstr "已购买 %s？"
+
+#: templates/repository-register.php:23
+msgid "Register %s"
+msgstr "注册 %s"
+
+#: templates/repository-register.php:35
+msgid "Enter the site key, from your %1$s account, to receive automatic updates for %2$s."
+msgstr "输入您 %1$s 账户中的网站密钥，以接收 %2$s 的自动更新。"
+
+#: templates/repository-register.php:47
+msgid "Site key"
+msgstr "站点密钥"
+
+#: templates/repository-register.php:51
+msgid "Get a key for this site"
+msgstr "获取此站点的密钥"
+
+#: templates/repository-registered-buttons.php:17
+msgid "Are you sure you want to unregister?"
+msgstr "确定要注销吗？"
+
+#: templates/repository-registered-buttons.php:22
+msgid "Unregister %s from this site"
+msgstr "从此站点注销 %s"
+
+#: templates/repository-registered-buttons.php:30
+msgid "Check for updates"
+msgstr "检查更新"
+
+#: templates/repository-registered.php:10
+msgid "%s is registered on this site. You will receive automatic updates until %s"
+msgstr "%s 已在本网站注册。您将收到自动更新，直至 %s"
+
+#: templates/repository-registered.php:11
+msgid "%s is registered on this site. Your Lifetime account gives you updates for life."
+msgstr "%s 已注册，终身更新"

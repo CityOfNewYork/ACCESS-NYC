@@ -36,7 +36,7 @@ if ( ! class_exists( 'ICL_AdminNotifier' ) ) {
 				$handle,
 				ICL_PLUGIN_URL . '/res/js/icl-admin-notifier.js',
 				array( 'jquery' ),
-				ICL_SITEPRESS_VERSION,
+				ICL_SITEPRESS_SCRIPT_VERSION,
 				true
 			);
 			wp_localize_script(

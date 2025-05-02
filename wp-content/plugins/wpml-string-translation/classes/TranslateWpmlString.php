@@ -2,7 +2,6 @@
 
 namespace WPML\ST;
 
-use WPML\ST\Gettext\Settings as GettextSettings;
 use WPML\ST\MO\Hooks\LanguageSwitch;
 use WPML\ST\MO\File\Manager;
 use WPML\ST\StringsFilter\Provider;
@@ -22,14 +21,8 @@ class TranslateWpmlString {
 	/** @var WPML_Locale $locale */
 	private $locale;
 
-	/** @var GettextSettings $gettextSettings */
-	private $gettextSettings;
-
 	/** @var Manager $fileManager */
 	private $fileManager;
-
-	/** @var bool $isAutoRegisterDisabled */
-	private $isAutoRegisterDisabled;
 
 	/** @var bool $lock */
 	private $lock = false;
@@ -38,19 +31,16 @@ class TranslateWpmlString {
 		Provider $filterProvider,
 		LanguageSwitch $languageSwitch,
 		WPML_Locale $locale,
-		GettextSettings $gettextSettings,
 		Manager $fileManager
 	) {
 		$this->filterProvider  = $filterProvider;
 		$this->languageSwitch  = $languageSwitch;
 		$this->locale          = $locale;
-		$this->gettextSettings = $gettextSettings;
 		$this->fileManager     = $fileManager;
 	}
 
 	public function init() {
 		$this->languageSwitch->initCurrentLocale();
-		$this->isAutoRegisterDisabled = ! $this->gettextSettings->isAutoRegistrationEnabled();
 	}
 
 	/**
@@ -72,7 +62,7 @@ class TranslateWpmlString {
 
 		if ( wpml_st_is_requested_blog() ) {
 
-			if ( $this->isAutoRegisterDisabled && self::canTranslateWithMO( $value, $name ) ) {
+			if ( self::canTranslateWithMO( $value, $name ) ) {
 				$value = $this->translateByMOFile( $wpmlContext, $name, $value, $hasTranslation, $targetLang );
 			} else {
 				$value = $this->translateByDBQuery( $wpmlContext, $name, $value, $hasTranslation, $targetLang );
@@ -106,11 +96,26 @@ class TranslateWpmlString {
 			}
 		};
 
+		/*
+		 * This function is called when icl_translate function from /inc/functions.php is called.
+		 * Examples of such calls: from Admin_Texts class translate_single function, /src/Display/l18N.php function in NextGenGallery plugin.
+		 * So, those are custom requests for translations from other plugins or our custom functionality(like admin texts).
+		 * There is a difference between usual gettext calls from plugins and calls from here:
+		 *      __( 'value', 'domain' ); // From plugins we pass only untranslated value from 'value' column from 'icl_strings' table.
+		 *      __( 'name', 'domain'); // From this function we can pass also 'name' column from 'icl_strings' table and not value.
+		 * That could lead to situation when we have autoregistered a string with name setup inside value column instead of the name column.
+		 * That can also create 'phantom' strings in strings table which look like real ones but have value setup as a name and name is missing.
+		 * To avoid this, we should disable autoregistration during next gettext call and autoregister string manually by passing both name and value.
+		 */
+		do_action( 'wpml_st_update_settings', 'disableAutoregistration' );
 		$new_value      = $this->withMOLocale( $targetLang, $translateByName );
 		$hasTranslation = $new_value !== $name;
 		if ( $hasTranslation ) {
 			$value = $new_value;
+		} else {
+			do_action('wpml_st_add_to_queue', $value, $domain, $gettextContext, $name);
 		}
+		do_action( 'wpml_st_update_settings', 'enableAutoregistration' );
 
 		return $value;
 	}

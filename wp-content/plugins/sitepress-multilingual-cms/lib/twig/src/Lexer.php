@@ -95,10 +95,22 @@ class Lexer implements \WPML\Core\Twig_LexerInterface
         } else {
             $this->source = $code;
         }
-        if ((int) \ini_get('mbstring.func_overload') & 2) {
+        if (
+			// check if PHP is lower than 8.0
+			version_compare(PHP_VERSION, '8.0', '<')
+			/* @phpcs:ignore */
+			&& (int) \ini_get('mbstring.func_overload') & 2
+		) {
             @\trigger_error('Support for having "mbstring.func_overload" different from 0 is deprecated version 1.29 and will be removed in 2.0.', \E_USER_DEPRECATED);
         }
-        if (\function_exists('mb_internal_encoding') && (int) \ini_get('mbstring.func_overload') & 2) {
+
+        if (
+			//only for PHP< 8.0, after this, this setting is removed.
+			version_compare(PHP_VERSION, '8.0', '<')
+			&&
+			\function_exists('mb_internal_encoding')
+			/* @phpcs:ignore PHPCompatibility.IniDirectives.RemovedIniDirectives.mbstring_func_overloadDeprecated */
+			&& (int) \ini_get('mbstring.func_overload') & 2) {
             $mbEncoding = \mb_internal_encoding();
             \mb_internal_encoding('ASCII');
         } else {

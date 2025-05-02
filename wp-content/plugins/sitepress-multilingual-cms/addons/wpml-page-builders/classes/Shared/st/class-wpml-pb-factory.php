@@ -59,7 +59,7 @@ class WPML_PB_Factory {
 	}
 
 	public function get_update_post( $package_data, IWPML_PB_Strategy $strategy ) {
-		return new WPML_PB_Update_Post( $this->wpdb, $this->sitepress, $package_data, $strategy );
+		return new WPML_PB_Update_Post( $this->sitepress, $package_data, $strategy );
 	}
 
 	public function get_shortcode_content_updater( IWPML_PB_Strategy $strategy ) {

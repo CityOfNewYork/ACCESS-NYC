@@ -1,0 +1,82 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Not included in String Translation": [
+            "Δεν περιλαμβάνεται στη Μετάφραση"
+         ],
+         "Registered and locked": [
+            "Καταχωρημένο και κλειδωμένο"
+         ],
+         "Text": [
+            "Κείμενο"
+         ],
+         "Numeric": [
+            "Αριθμητικό"
+         ],
+         "All Types": [
+            "Όλοι οι τύποι"
+         ],
+         "Search": [
+            "Αναζήτηση"
+         ],
+         "Communication error": [
+            "Σφάλμα επικοινωνίας"
+         ],
+         "The action failed.": [
+            "Η ενέργεια απέτυχε."
+         ],
+         "All (%d)": [
+            "Όλα (%d)"
+         ],
+         "Included in String Translation (%d)": [
+            "Συμπεριλαμβάνεται (%d)"
+         ],
+         "Not included in String Translation (%d)": [
+            "Δεν συμπεριλαμβάνεται (%d)"
+         ],
+         "This setting is locked by a WPML configuration file.": [
+            "Κλειδωμένο από αρχείο WPML."
+         ],
+         "Option": [
+            "Επιλογή"
+         ],
+         "Value": [
+            "Τιμή"
+         ],
+         "Type": [
+            "Τύπος"
+         ],
+         "State": [
+            "Κατάσταση"
+         ],
+         "Export as a WPML configuration file": [
+            "Εξαγωγή ως αρχείο WPML"
+         ],
+         "Cancel": [
+            "Ακύρωση"
+         ],
+         "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
+            "Αποθήκευση στο wpml-config.xml."
+         ],
+         "No options found.": [
+            "Δεν βρέθηκαν επιλογές."
+         ],
+         "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
+            "Βεβαιωθείτε ότι έχετε αποθηκεύσει τις επιλογές του θέματος τουλάχιστον μία φορά. Ορισμένα θέματα τις προσθέτουν στον πίνακα wp_options μόνο αφού ο χρήστης αποθηκεύσει ρητά τις αλλαγές στις προεπιλογές του θέματος."
+         ],
+         "Add to String Translation": [
+            "Προσθήκη στη μετάφραση"
+         ],
+         "Remove from String Translation": [
+            "Αφαίρεση από τη μετάφραση"
+         ],
+         "Included in String Translation": [
+            "Συμπεριλαμβάνεται"
+         ]
+      }
+   }
+}

@@ -45,7 +45,7 @@ class WPML_Main_Admin_Menu {
 				'capability' => 'wpml_manage_languages',
 				'menu_slug',
 				'function'   => null,
-				'icon_url'   => ICL_PLUGIN_URL . '/res/img/icon16.png',
+				'icon_url'   => null,
 			)
 		);
 

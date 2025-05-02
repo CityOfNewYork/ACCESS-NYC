@@ -1,11 +1,11 @@
 {% set count = 0 %}
 	<h3>
-		{{ strings.title }}
+		{{ strings.title | raw }}
 	</h3>
 
 	{% if strings.message %}
 		<p>
-			{{ strings.message }}
+			{{ strings.message | raw }}
 		</p>
 	{% endif %}
 

@@ -16,11 +16,11 @@ class WPML_Cornerstone_Accordion extends WPML_Cornerstone_Module_With_Items {
 	 */
 	protected function get_title( $field ) {
 		if ( 'accordion_item_header_content' === $field ) {
-			return esc_html__( 'Accordion: header content', 'sitepress' );
+			return esc_html__( 'Accordion: Header', 'sitepress' );
 		}
 
 		if ( 'accordion_item_content' === $field ) {
-			return esc_html__( 'Accordion: content', 'sitepress' );
+			return esc_html__( 'Accordion: Content', 'sitepress' );
 		}
 
 		return '';

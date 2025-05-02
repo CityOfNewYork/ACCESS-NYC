@@ -21,15 +21,27 @@ class WPML_TM_Batch_Report_Email_Builder {
 	private $email_template;
 
 	/**
+	 * @var int[]
+	 */
+	private $orphaned_translators_ids;
+
+	/**
+	 * @var int[]
+	 */
+	private $dnd_translators_ids;
+
+	/**
 	 * WPML_TM_Notification_Batch_Email constructor.
 	 *
 	 * @param WPML_TM_Batch_Report            $batch_report
 	 * @param WPML_TM_Email_Jobs_Summary_View $email_template
 	 */
 	public function __construct( WPML_TM_Batch_Report $batch_report, WPML_TM_Email_Jobs_Summary_View $email_template ) {
-		$this->batch_report   = $batch_report;
-		$this->email_template = $email_template;
-		$this->emails         = array();
+		$this->batch_report             = $batch_report;
+		$this->email_template           = $email_template;
+		$this->emails                   = array();
+		$this->orphaned_translators_ids = [];
+		$this->dnd_translators_ids      = [];
 	}
 
 	/**
@@ -37,45 +49,55 @@ class WPML_TM_Batch_Report_Email_Builder {
 	 */
 	public function prepare_assigned_jobs_emails( $batch_jobs ) {
 		foreach ( $batch_jobs as $translator_id => $language_pairs ) {
-
-			if ( 0 !== $translator_id ) {
-
-				$translator = get_userdata( $translator_id );
-				$title            = __( 'You have been assigned to new translation job(s):', 'wpml-translation-management' );
-				$render_jobs_list = $this->email_template->render_jobs_list( $language_pairs, $translator_id, $title );
-
-				if ( null === $render_jobs_list ) {
-					continue;
-				}
-
-				$body       = $this->email_template->render_header( $translator->display_name );
-				$body      .= $render_jobs_list;
-
-				$assigned_jobs  = $this->email_template->get_assigned_jobs();
-				$title_singular = __( 'There is 1 job, which you can take (not specifically assigned to you):', 'wpml-translation-management' );
-				$title_plural   = __( 'There are %s jobs, which you can take (not specifically assigned to you):', 'wpml-translation-management' );
-				$unassigned_jobs_body = $this->email_template->render_jobs_list(
-					$this->batch_report->get_unassigned_jobs(),
-					$translator_id,
-					$title_singular,
-					$title_plural
-				);
-
-				if ( null !== $unassigned_jobs_body ) {
-					$body .= $unassigned_jobs_body;
-				}
-
-				$body          .= $this->email_template->render_footer();
-				$email['body']  = $body;
-				$email          = $this->add_attachments( $email, $assigned_jobs );
-				$this->emails[] = array(
-					'translator_id' => $translator->ID,
-					'email'         => $translator->user_email,
-					'subject'       => $this->get_subject_assigned_job(),
-					'body'          => $body,
-					'attachment'    => array_key_exists( 'attachment', $email ) ? $email['attachment'] : array(),
-				);
+			if ( 0 === $translator_id ) {
+				continue;
 			}
+
+			$translator = get_userdata( $translator_id );
+			if ( ! $translator ) {
+				$this->orphaned_translators_ids[] = $translator_id;
+				continue;
+			}
+
+			if ( ! WPML_User_Jobs_Notification_Settings::is_new_job_notification_enabled( $translator_id ) ) {
+				$this->dnd_translators_ids[] = $translator_id;
+				continue;
+			}
+
+			$title            = __( 'You have been assigned to new translation job(s):', 'wpml-translation-management' );
+			$render_jobs_list = $this->email_template->render_jobs_list( $language_pairs, $translator_id, $title );
+
+			if ( null === $render_jobs_list ) {
+				continue;
+			}
+
+			$body       = $this->email_template->render_header( $translator->display_name );
+			$body      .= $render_jobs_list;
+
+			$assigned_jobs  = $this->email_template->get_assigned_jobs();
+			$title_singular = __( 'There is 1 job, which you can take (not specifically assigned to you):', 'wpml-translation-management' );
+			$title_plural   = __( 'There are %s jobs, which you can take (not specifically assigned to you):', 'wpml-translation-management' );
+			$unassigned_jobs_body = $this->email_template->render_jobs_list(
+				$this->batch_report->get_unassigned_jobs(),
+				$translator_id,
+				$title_singular,
+				$title_plural
+			);
+
+			if ( null !== $unassigned_jobs_body ) {
+				$body .= $unassigned_jobs_body;
+			}
+
+			$body          .= $this->email_template->render_footer();
+			$email['body']  = $body;
+			$email          = $this->add_attachments( $email, $assigned_jobs );
+			$this->emails[] = array(
+				'translator_id' => $translator->ID,
+				'email'         => $translator->user_email,
+				'subject'       => $this->get_subject_assigned_job(),
+				'body'          => $body,
+				'attachment'    => array_key_exists( 'attachment', $email ) ? $email['attachment'] : array(),
+			);
 		}
 	}
 
@@ -93,6 +115,10 @@ class WPML_TM_Batch_Report_Email_Builder {
 			foreach ( $translators as $translator ) {
 
 				$translator_user = get_userdata( $translator );
+				if ( ! $translator_user ) {
+					$this->orphaned_translators_ids[] = $translator;
+					continue;
+				}
 				$render_jobs_list = $this->email_template->render_jobs_list( $unassigned_jobs, $translator_user->ID, $title_singular, $title_plural );
 
 				if ( null !== $render_jobs_list ) {
@@ -159,4 +185,19 @@ class WPML_TM_Batch_Report_Email_Builder {
 	public function get_emails() {
 		return $this->emails;
 	}
+
+	/**
+	 * @return array
+	 */
+	public function get_orphaned_translators_ids() {
+		return $this->orphaned_translators_ids;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function get_dnd_translators_ids() {
+		return $this->dnd_translators_ids;
+	}
+
 }

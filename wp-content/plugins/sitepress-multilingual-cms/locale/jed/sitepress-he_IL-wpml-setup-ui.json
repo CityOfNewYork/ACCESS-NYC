@@ -15,10 +15,10 @@
             "ל:"
          ],
          "Set language pair(s) for Translator %s:": [
-            "הגדר זוגות שפות עבור מתרגם %s:"
+            "הגדר זוג(ות) שפה עבור מתרגם %s:"
          ],
          "+ Add more language pairs for this translator": [
-            "+ הוסף עוד זוגות שפות עבור מתרגם זה"
+            "+ הוסף עוד זוגות שפה למתרגם זה"
          ],
          "First Name": [
             "שם פרטי"
@@ -30,13 +30,13 @@
             "תפקיד"
          ],
          "(required)": [
-            "(חובה)"
+            "(נדרש)"
          ],
          "Make sure that you have provided a correct email address e.g. name@domain.com": [
-            "ודא שסיפקת כתובת דוא\"ל נכונה, למשל name@domain.com"
+            "ודא שסיפקת כתובת דואר אלקטרוני נכונה, לדוגמה name@domain.com"
          ],
          "This field is required": [
-            "זה שדה חובה"
+            "שדה זה הוא חובה"
          ],
          "A translator can be any WordPress role.": [
             "מתרגם יכול להיות בכל תפקיד WordPress."
@@ -50,18 +50,6 @@
          "Search": [
             "חיפוש"
          ],
-         "What should happen with your automatically translated content?": [
-            "מה צריך לקרות עם התוכן שתורגם באופן אוטומטי?"
-         ],
-         "Let me review it before it gets published": [
-            "אפשר לי לבדוק אותו לפני הפרסום"
-         ],
-         "Publish right away but mark as not reviewed so I can take a look later": [
-            "פרסם מייד אבל סמן שלא עבר בדיקה כדי שאוכל להעיף מבט מאוחר יותר"
-         ],
-         "Publish right away without reviewing": [
-            "פרסם מיד מבלי לבצע בדיקה"
-         ],
          "Who will translate?": [
             "מי יתרגם?"
          ],
@@ -72,10 +60,10 @@
             "אתה תהיה המתרגם היחיד עבור אתר זה."
          ],
          "Users of this site": [
-            "משתמשים של אתר זה"
+            "משתמשי אתר זה"
          ],
          "You will choose or create new users of this WordPress site as the translators. You can also choose yourself. This allows you to set up a team of translators working in different language pairs.": [
-            "אתה תבחר משתמשים או תיצור משתמשים חדשים של אתר WordPress זה כמתרגמים. תוכל גם לבחור את עצמך. זה יאפשר לך להגדיר צוות מתרגמים שעובדים בזוגות שפות שונים."
+            "תוכל לבחור או ליצור משתמשים חדשים באתר WordPress זה כמתרגמים. תוכל גם לבחור את עצמך. זה מאפשר לך להקים צוות מתרגמים העובדים בזוגות שפה שונים."
          ],
          "Translation Service: %s": [
             "שירות תרגום: %s"
@@ -84,64 +72,16 @@
             "שירות תרגום מקצועי"
          ],
          "You have preselected %s to translate your content. Finish setting it up by entering the API token they provided to you.": [
-            "בחרת מראש את %s שיתרגם אתהתוכן שלך. המשך בהגדרה על-ידי הזנת אסימון ה-API שהם סיפקו לך."
+            "בחרת מראש ב-%s לתרגום התוכן שלך. סיים את ההגדרה על ידי הזנת אסימון ה-API שסיפקו לך."
          ],
          "WPML offers tight integration with over 70 translation services. You will choose the translation service that you prefer and enjoy a streamlined process for sending jobs and receiving completed translations.": [
-            "WPML מספק אינטגרציה הדוקה עם יותר מ-70 שירותי תרגום. אתה תבחר שירות תרגום שאתה מעדיף ותיהנה מתהליך מהיר לשליחת עבודות ולקבלת תרגומים מוכנים."
+            "WPML מציע אינטגרציה הדוקה עם למעלה מ-70 שירותי תרגום. תבחר את שירות התרגום המועדף עליך ותיהנה מתהליך מרוכז לשליחת עבודות וקבלת תרגומים מוכנים."
          ],
          "I want to set a \"Translation Manager\" who will choose the translators for this site": [
-            "אני רוצה להגדיר 'מנהל תרגום' שיבחר את המתרגמים עבור אתר זה."
+            "אני רוצה להגדיר \"מנהל תרגום\" שיבחר את המתרגמים עבור אתר זה"
          ],
          "You will choose a user of this site and delegate the setup of translators to him/her. Choose this option when you are building a website for a client, who will set up translator users or choose a translation service.": [
-            "אתה תבחר משתמש של אתר זה ותקצה לו את הגדרת המתרגמים. בחר אפשרות זו כשאתה בונה אתר עבור לקוח, שיגדיר משתמשים מתרגמים או יבחר שירות תרגום."
-         ],
-         "Translate Everything Automatically": [
-            "תרגם הכל באופן אוטומטי"
-         ],
-         "Let WPML do the translating for you": [
-            "אפשר ל-WPML לבצע את התרגום עבורך"
-         ],
-         "Translates all your published content automatically": [
-            "מתרגם את כל התוכן המפורסם שלך באופן אוטומטי"
-         ],
-         "Uses machine translation powered by Google, Microsoft, or DeepL": [
-            "משתמש בתרגום מכונה המופעל על-ידי Google, Microsoft או DeepL"
-         ],
-         "Instantly translates new content and updates translations whenever you edit a page or post": [
-            "מתרגם מיד תוכן חדש ומעדכן תרגומים בכל פעם שאתה עורך דף או פוסט"
-         ],
-         "You can review translations before publishing or hire professional reviewers": [
-            "תוכל לבדוק תרגומים לפני הפרסום או לשכור בודקים מקצועיים"
-         ],
-         "Affordable and fast": [
-            "מחיר משתלם ומהיר"
-         ],
-         "How would you like to translate the content?": [
-            "כיצד תרצה לתרגם את התוכן?"
-         ],
-         "Choose": [
-            "בחר"
-         ],
-         "Translate What You Choose": [
-            "תרגם מה שאתה בוחר"
-         ],
-         "You decide what to translate and who'll translate it": [
-            "אתה מחליט מה לתרגם ומי יתרגם את זה"
-         ],
-         "Translate yourself": [
-            "תרגם בעצמך"
-         ],
-         "Use automatic translation on the content you choose": [
-            "השתמש בתרגום אוטומטי עבור התוכן שאתה בוחר"
-         ],
-         "Work with translators that are users of your site": [
-            "עבוד עם מתרגמים שהם משתמשי האתר שלך"
-         ],
-         "or": [
-            "או"
-         ],
-         "Send to professional translation services": [
-            "שלח לשירותי תרגום מקצועיים"
+            "תבחר משתמש באתר זה ותאציל לו את הגדרת המתרגמים. בחר באפשרות זו כאשר אתה בונה אתר עבור לקוח, אשר יגדיר משתמשים מתרגמים או יבחר שירות תרגום."
          ],
          "user": [
             "משתמש"
@@ -150,10 +90,10 @@
             "עורך"
          ],
          "Select an existing %s and set as Translation Manager": [
-            "בחר %s קיים והגדר כ'מנהל התרגום'"
+            "בחר %s קיים והגדר כמנהל תרגום"
          ],
          "Create a new %s and set as Translation Manager": [
-            "צור %s חדש והגדר אותו כ'מנהל התרגום'"
+            "צור %s חדש והגדר כמנהל תרגום"
          ],
          "Cancel": [
             "ביטול"
@@ -165,7 +105,7 @@
             "הוסף מנהל תרגום"
          ],
          "Set language pair(s)": [
-            "הגדר זוגות שפות"
+            "הגדר זוג(ות) שפה"
          ],
          "Previous": [
             "הקודם"
@@ -183,43 +123,43 @@
             "צור משתמש חדש והגדר כמתרגם"
          ],
          "Edit language pair(s) for translator": [
-            "ערוך זוגות שפות עבור מתרגם"
+            "ערוך זוג(ות) שפה למתרגם"
          ],
          "Name": [
             "שם"
          ],
          "Language Pairs": [
-            "זוגות שפות"
+            "זוגות שפה"
          ],
          "You can translate to and from all languages": [
-            "ניתן לתרגם לכל שפה ואל כל שפה"
+            "אתה יכול לתרגם לכל השפות ומהן"
          ],
          "%s file upload failed.": [
-            "העלאת הקובץ %s נכשלה."
+            "העלאת קובץ %s נכשלה."
          ],
          "Flag": [
             "דגל"
          ],
          "Flag file": [
-            "סמן בדגל את הקובץ"
+            "קובץ דגל"
          ],
          "You just added  language. Next, select it as the site's default language or a translation language.": [
-            "זה עתה הוספת שפה. עכשיו, בחור אותה כשפת ברירת המחדל של האתר או כשפת תרגום."
+            "הרגע הוספת שפה. כעת, בחר אותה כשפת ברירת המחדל של האתר או כשפת תרגום."
          ],
          "Language added": [
-            "נוספה שפה"
+            "שפה נוספה"
          ],
          "The value \"%s\" already exists": [
-            "הערך '%s' כבר קיים"
+            "הערך \"%s\" כבר קיים"
          ],
          "Add a new language": [
             "הוסף שפה חדשה"
          ],
          "Create a country-specific language by choosing the general language from the list below. Then, choose the country it should be localized for.": [
-            "צור שפה ספציפית לארץ על-ידי בחירת השפה הכללית מהרשימה שלהלן. לאחר מכן בחר את הארץ שעבורה יש לבצע לוקליזציה."
+            "צור שפה ספציפית למדינה על ידי בחירת השפה הכללית מהרשימה למטה. לאחר מכן, בחר את המדינה שעבורה יש לבצע לוקליזציה."
          ],
          "By choosing a combination that already exists in the database, WPML can help fill out the necessary fields. Read more about <AddingACustomLanguageLink />.": [
-            "על-ידי בחירה של שילוב שכבר קיים במסד הנתונים, WPML יכול לעזור במילוי השדות הנחוצים. קרא עוד אודות <AddingACustomLanguageLink />."
+            "על ידי בחירת שילוב שכבר קיים במסד הנתונים, WPML יכול לעזור למלא את השדות הנדרשים. קרא עוד על <AddingACustomLanguageLink />."
          ],
          "Cannot find?": [
             "לא מוצא?"
@@ -228,7 +168,7 @@
             "לחץ כאן"
          ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
-            "התבנית שגויה. היא יכולה להכיל רק אותיות קטנות ו-'-'. למשל: 'fr', 'pt-br', 'zh-hans'"
+            "פורמט שגוי. הוא יכול להכיל רק אותיות קטנות ו-\"-\". לדוגמה: \"fr\" , \"pt-br\", \"zh-hans\""
          ],
          "Language": [
             "שפה"
@@ -240,7 +180,7 @@
             "קוד"
          ],
          "The language will not be supported by automatic translations": [
-            "בשפה לא תיתמך על-ידי תרגומים אוטומטיים"
+            "השפה לא תהיה נתמכת על ידי תרגומים אוטומטיים"
          ],
          "Language mapping": [
             "מיפוי שפה"
@@ -249,16 +189,16 @@
             "אל תמפה שפה זו"
          ],
          "Default locale": [
-            "אזור ברירת מחדל"
+            "מיקום ברירת מחדל"
          ],
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
-            "התבנית שגויה. היא יכולה להכיל רק אותיות קטנות ו-'_'. למשל: 'de', 'de_DE', 'zh_Hant_TW'"
+            "פורמט שגוי. הוא יכול להכיל רק אותיות קטנות ו-\"_\". לדוגמה: \"de\" , \"de_DE\", \"zh_Hant_TW\""
          ],
          "hreflang": [
             "hreflang"
          ],
          "Encode url?": [
-            "לקודד את כתובת ה-URL?"
+            "לקודד כתובת URL?"
          ],
          "Flags must be:": [
             "דגלים חייבים להיות:"
@@ -270,13 +210,13 @@
             "כן"
          ],
          " (required)": [
-            "(חובה)"
+            " (נדרש)"
          ],
          "Please fill in the field": [
-            "מלא את השדה"
+            "אנא מלא את השדה"
          ],
          "PNG, SVG, or JPG files": [
-            "קובצי PNG, SVG או JPG"
+            "קבצי PNG, SVG, או JPG"
          ],
          "Save language": [
             "שמור שפה"
@@ -285,88 +225,112 @@
             "18 x 12 פיקסלים"
          ],
          "Read more about ": [
-            "קרא עוד אודות"
+            "קרא עוד על "
          ],
          "The name of your language as it will appear on your site's language switcher.": [
-            "שם השפה כפי שיופיע במעביר השפה באתר שלך."
+            "שם השפה שלך כפי שיופיע במחליף השפות באתר שלך."
          ],
          "A unique value that identifies the language in the database and URL. Once saved, the language code cannot be changed.": [
-            "ערך ייחודי שמזהה את השפה במסד הנתונים ובכתובת ה-URL. לאחר השמירה לא יהיה ניתן לשנות את קוד השפה."
+            "ערך ייחודי המזהה את השפה במסד הנתונים ובכתובת URL. לאחר השמירה, לא ניתן לשנות את קוד השפה."
          ],
          "If your custom language is similar to an existing language, you can use the existing language's spellcheck and automatic translation. For example, if your custom language is Swiss-German, you can map to German as the language to use for spellcheck and automatic translation. If you don't map your custom language to an existing language, spellcheck and automatic translation features will be unavailable in that language.": [
-            "אם השפה המותאמת אישית דומה לשפה קיימת, תוכל להשתמש בבדיקת האיות ובתרגום האוטומטי של השפה הקיימת. לדוגמה, אם השפה המותאמת אישת שלך היא דרמנית-שוויצרית, תוכל למפות לגרמנית כשפה לשימוש עבור בדיקת איות ותרגום אוטומטי. אם לא תמפה את השפה המותאמת אישית לשפה קיימת, התכונות בדיקת איות ותרגום אוטומטי לא יהיו זמינות בשפה זו."
+            "אם השפה המותאמת אישית שלך דומה לשפה קיימת, תוכל להשתמש בבדיקת האיות והתרגום האוטומטי של השפה הקיימת. לדוגמה, אם השפה המותאמת אישית שלך היא גרמנית-שוויצרית, תוכל למפות לגרמנית כשפה לשימוש עבור בדיקת איות ותרגום אוטומטי. אם לא תמפה את השפה המותאמת אישית שלך לשפה קיימת, תכונות בדיקת האיות והתרגום האוטומטי לא יהיו זמינות בשפה זו."
          ],
          "The value WPML checks when loading translations from MO and PO files. The default locale is included in the filenames in your /wp-content/languages/ folder in your WordPress setup.": [
-            "הערך ש-WPML בודק בעת טעינת תרגומים מקובצי MO ו-PO. מיקום ברירת המחדל כלות בשמות הקבצים בתיקייה /wp-content/languages/ של הגדרת WordPress."
+            "הערך ש-WPML בודק בעת טעינת תרגומים מקבצי MO ו-PO. המיקום ברירת המחדל כלול בשמות הקבצים בתיקיית  /wp-content/languages/ בהתקנת WordPress שלך."
          ],
          "Google uses the hreflang attribute to direct users to sites in their relevant language and location. Examples:": [
-            "Google משתמשת במאפיין hreflang כדי לכוון משתמשים לאתרים הבשפות שרלוונטיות עבורם. דוגמאות:"
+            "Google משתמש במאפיין hreflang כדי להפנות משתמשים לאתרים בשפה ובמיקום הרלוונטיים להם. דוגמאות:"
          ],
          "All English-speaking users: en": [
-            "כל המשתמשים שהם דוברי אנגלית: en"
+            "כל המשתמשים דוברי אנגלית: en"
          ],
          "English for UK users: en-gb": [
-            "אנגלית עבור משתמשי UK: en-gb"
+            "אנגלית למשתמשים בבריטניה: en-gb"
          ],
          "English for US users: en-us": [
-            "אנגלית עבור משתמשי ארה\"ב: en-us"
+            "אנגלית למשתמשים בארה\"ב: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
-            "קובע אם כתובות URL בשפה זו יקודדו או ישתמשו בתווי ASCII (אם אינך בטוח, השאר \"No\")."
+            "קובע אם כתובות URL בשפה זו מקודדות או משתמשות בתווי ASCII (אם אינך בטוח, השאר זאת כ-\"לא\")."
          ],
          "adding a custom language": [
-            "מוסיף שפה מותאמת אישית"
+            "הוספת שפה מותאמת אישית"
          ],
          "Learn more about required server settings to use a different domain per language": [
-            "למד עוד אודות הגדרות שרת נדרשות כדי להשתמש בדוממים שונה לכל שפה"
+            "למד עוד על הגדרות השרת הנדרשות כדי להשתמש בדומיין שונה לכל שפה"
          ],
          "Language name added as a parameter": [
-            "שם שפה נוסף כפרמטר"
+            "שם השפה נוסף כפרמטר"
          ],
          "I will set up the domains for my secondary languages later.": [
-            "אני אגדיר את הדומיינים עבור השפות המשניות מאוחר יותר."
+            "אגדיר את הדומיינים לשפות המשניות שלי מאוחר יותר."
          ],
          "The domain you have entered is invalid.": [
-            "הדומיין שהגדרת אינו חוקי."
+            "הדומיין שהזנת אינו תקין."
          ],
          "The domain you have entered must be unique.": [
-            "על הדומיין שאתה מזין להיות ייחודי."
+            "הדומיין שהזנת חייב להיות ייחודי."
          ],
          "Please Note: Your site won't work in your secondary languages until this is successfully set up or you switch to a different URL option.": [
-            "שים לב: האתר שלך לא יעבוד בשפות המשניות עד להגדרה מוצלחת או מעבר לאפשרות אחרת לכתובות URL."
+            "שים לב: האתר שלך לא יעבוד בשפות המשניות שלך עד שזה יוגדר בהצלחה או שתעבור לאפשרות כתובת URL אחרת."
          ],
          "Learn more about Language URL Options": [
-            "מידע נוסף אודות אפשרויות לכתובות URL של שפות"
+            "למד עוד על אפשרויות כתובת URL לשפה"
          ],
          "How would you like to format your site's URL?": [
-            "כיצד תרצה לפרמט את כתובות ה-URL של האתר שלך?"
+            "איך תרצה לעצב את כתובת ה-URL של האתר שלך?"
          ],
          "Different languages in directories": [
-            "שפות שונות בספריות"
+            "שפות שונות בתיקיות"
          ],
          "The URL rewrite is not configured in your server.": [
-            "הכתיבה מחדש של כתובות URL לא מוגדרת התצורת השרת שלך."
+            "שכתוב ה-URL אינו מוגדר בשרת שלך."
          ],
          "Learn more about required server settings to display languages in directories": [
-            "למד עוד אודות הגדרות השרת הנדרשות להצגת שפות בספריות"
+            "למד עוד על הגדרות השרת הנדרשות להצגת שפות בתיקיות"
          ],
          "I will fix my server settings to display languages in directories later.": [
-            "אני אתקן את הגדרות השרת להצגת שפות בספריות מאוחר יותר."
+            "אתקן את הגדרות השרת שלי כדי להציג שפות בתיקיות מאוחר יותר."
          ],
          "Your server settings do not allow for languages in directories. ": [
-            "הגדרות השרת לא מאפשרות שפות בספריות."
+            "הגדרות השרת שלך אינן מאפשרות שפות בתיקיות."
          ],
          "Learn more about the required server settings.": [
-            "למד עוד אודות הגדרות השרת הנדרשות."
+            "למד עוד על הגדרות השרת הנדרשות."
          ],
          "A different domain per language": [
-            "דומיין אחר לכל שפה"
+            "דומיין שונה לכל שפה"
+         ],
+         "Translate your pages": [
+            "תרגם את הדפים שלך"
+         ],
+         "Translate your posts": [
+            "תרגם את הפוסטים שלך"
+         ],
+         "Next, you need to set-up your multilingual store.": [
+            "כעת, עליך להגדיר את החנות הרב-לשונית שלך."
+         ],
+         "Continue to WooCommerce Multilingual Setup": [
+            "המשך להגדרת WooCommerce Multilingual"
+         ],
+         "Start translating your site by visiting the <s>Translation Dashboard</s>.": [
+            "התחל לתרגם את האתר שלך על ידי ביקור ב<s>לוח הבקרה לתרגום</s>."
+         ],
+         "Go to Translation Dashboard": [
+            "עבור ללוח הבקרה לתרגום"
+         ],
+         "Need help? <a>Using WPML's Plus Icons to Translate Content</a>": [
+            "זקוק לעזרה? <a>שימוש בסמלי הפלוס של WPML לתרגום תוכן</a>"
+         ],
+         "To start translating, look for the \"plus\" icons that WPML introduces next to content lists and editors. Click the \"plus\" icon under each language to translate.": [
+            "כדי להתחיל בתרגום, חפש את סמלי ה \"פלוס\" שWPML מציג ליד רשימות תוכן ועורכים. לחץ על סמל ה \"פלוס\" מתחת לכל שפה כדי לתרגם."
          ],
          "support forum": [
-            "פורום התמיכה"
+            "פורום תמיכה"
          ],
          "There was a critical error setting up WPML. Please contact our <LinkToSupportForum /> to resolve it.": [
-            "אירעה שגיאה קריטית בהגדרה של WPML. צור קשר עם <LinkToSupportForum /> כדי לפתור אותה."
+            "אירעה שגיאה קריטית בהגדרת WPML. אנא צור קשר עם <LinkToSupportForum /> שלנו כדי לפתור אותה."
          ],
          "Hide error message": [
             "הסתר הודעת שגיאה"
@@ -374,168 +338,53 @@
          "Show error message": [
             "הצג הודעת שגיאה"
          ],
-         "WPML is ready to translate your site": [
-            "WPML מוכן לתרגום האתר שלך"
+         "Congratulations, your website is now multilingual with WPML!": [
+            "ברכות, האתר שלך כעת רב-לשוני עם WPML!"
          ],
-         "WPML has started translating your site": [
-            "WPML התחיל לתרגם את האתר שלך"
+         "For language switcher customization and more language options, navigate to <a>WPML → Languages</a>.": [
+            "להתאמה אישית של מחליף השפות ואפשרויות שפה נוספות, נווט אל <a>WPML ← שפות</a>."
          ],
-         "When you're done editing content, go to <s>WPML → Translation Management</s> to start translations.": [
-            "כאשר תסיים ליצור תוכן, עבור אל <s>WPML ← ניהול התרגום</s> כדי להתחיל בתרגום."
-         ],
-         "View the status of the translations in <s>WPML → Translation Management</s>.": [
-            "הצג את סטטוס התרגומים ב-<s>WPML ← ניהול התרגום</s>."
-         ],
-         "Go to <s>WPML → Translation Management</s> to choose what to translate.": [
-            "עבור אל <s>WPML ← ניהול התרגום</s> כדי לבחור מה לתרגם."
-         ],
-         "You are ready to start translating": [
-            "אתה מוכן להתחיל בתרגום"
-         ],
-         "Right now, your site has a nice language switcher in its footer. To enable other styles of language switchers, go to <s>WPML → Languages</s>.": [
-            "כרגע, יש לאתר שלך מעביר שפה בכותרת התחתית כדי לאפשר סגונונת אחרים של מעבירי שפה, עבור אל <s>WPML ← שפות</s>."
-         ],
-         "Language switcher customization": [
-            "התאמה אישית של מעביר השפה"
-         ],
-         "Your current setup will use a lot of translation credits": [
-            "ההגדרה הנוכחית שלך תשתמש בהרבה נקודות זיכוי לתרגום"
-         ],
-         "You decided to <b>Translate Everything Automatically</b> on a <span class=\"warning\">development site</span>": [
-            "החלטת ל<b>תרגם את הכל באופן אוטומטי</b> ב<span class=\"warning\">אתר פיתוח</span>"
-         ],
-         "You decided to <b>Translate Everything Automatically:</b>": [
-            "החלטת ל<b>תרגם את הכל באופן אוטומטי:</b>"
-         ],
-         "10,000 credits assigned by default to development sites": [
-            "10,000 נקודות זיכוי מוקצות כברירת מחדל לאתרי פיתוח"
-         ],
-         "posts, pages...": [
-            "פוסטים, דפים..."
-         ],
-         "translated to": [
-            "תורגם ל-"
-         ],
-         "<b>%1$d</b> language": [
-            "<b>%1$d</b> שפה",
-            "<b>%1$d</b> שפות"
-         ],
-         "will cost approximately": [
-            "יעלה בערך"
-         ],
-         "credits": [
-            "נקודות זיכוי"
-         ],
-         "Loading details...": [
-            "טוען פרטים..."
-         ],
-         "Hide details": [
-            "הסתר פרטים"
-         ],
-         "Show details": [
-            "הצג פרטים"
-         ],
-         "Your current setup will use approximately <b>%s</b> credits": [
-            "ההגדרה הנוכחית שלך תשתמש בערך ב-<b>%s</b> נקודות זיכוי"
-         ],
-         "What do you want to do?": [
-            "מה אתה רוצה לעשות?"
-         ],
-         "Since this is a development site, you may not want to spend credits on dummy content.": [
-            "מכיוון שזה אתר פיתוח, יתכן שלא תרצה להוציא כל-כך הרבה נקודות זיכוי על תוכן דמה."
-         ],
-         "Continue with this setup": [
-            "המשך בהגדרה זו"
-         ],
-         "WPML will automatically translate your site’s content. When your credits run out, you can purchase more or sign up for pay-as-you-go to continue using automatic translation.": [
-            "WPML יתרגם באופן אוטומטי את תוכן האתר. כאשר ייגמרו לך נקודות הזיכוי, תוכל לרכוש עוד או להירשם לאפשרות של שלם בהתאם לשימוש כדי להמשיך את השימוש בתרגום האוטומטי."
-         ],
-         "Make changes": [
-            "בצע שינויים"
-         ],
-         "You can use fewer credits by adjusting some of the settings you selected during setup.": [
-            "תוכל להשתמש בפחות נקודות זיכוי על-ידי כוונון חלק מההגדרות שבחרת במהלך ההגדרה."
-         ],
-         "Reduce the number of translation languages": [
-            "צמצם את מספר שפות התרגום"
-         ],
-         "The more languages you have on your site, the more credits it costs to translate. <b>You can always add more languages later.</b>": [
-            "ככל שיהיו לך יותר שפות באתר, כך יהיה צורך ביותר נקודות זיכוי עבור התרגום. <b>תמיד תוכל להוסיף עוד שפות מאוחר יותר.</b>"
-         ],
-         "Change site languages": [
-            "שנה את שפות התאר"
-         ],
-         "Change your translation mode": [
-            "שנה את מצב התרגום"
-         ],
-         "<b>Translate What You Choose</b> gives you more control over what gets translated, and you can still use automatic translation.": [
-            "<b>תרגם מה שאתה בוחר</b> נותן לך יותר שליטה על מה שיתורגם, ועדיין תוכל להשתמש בתרגום אוטומטי."
-         ],
-         "Change translation mode": [
-            "שנה את מצב התרגום"
-         ],
-         "I'm OK with using this many translation credits,": [
-            "מתאים לי להשתמש בכמות זו של נקודות זיכוי לתרגום."
-         ],
-         "let's proceed and translate the whole site automatically.": [
-            "הבה נתקדם ונתרגם את כל האתר באופן אוטומטי."
+         "What are the languages of your site?": [
+            "מהן השפות של האתר שלך?"
          ],
          "Default language": [
             "שפת ברירת מחדל"
          ],
          "What is the current language of your website?": [
-            "מה השפה הנוכחית של אתר האינטרנט שלך?"
+            "מהי השפה הנוכחית של האתר שלך?"
          ],
          "Translation languages": [
             "שפות תרגום"
          ],
          "Which languages do you want to translate your site into?": [
-            "לאיזה שפות אתה רוצה לתרגם את האתר שלך?"
+            "לאילו שפות ברצונך לתרגם את האתר שלך?"
          ],
          "If you cannot find languages that you need in the list": [
-            "אם אינך מוצא שפות שאתה צריך ברשימה"
+            "אם אינך מוצא שפות שאתה זקוק להן ברשימה"
          ],
          "create a custom language": [
             "צור שפה מותאמת אישית"
          ],
-         "What are the languages of your site?": [
-            "מה השפות של האתר שלך?"
-         ],
          "If you don't have a WPML.org account or a valid subscription, %1$spurchase one%2$s to get automatic updates, full support, and a 30-day money-back guarantee.": [
-            "אם אין לך חשבון WPML.org או מינוי בתוקף, %1$sרכוש אחד%2$s כדי לקבל עדכונים אוטומטיים, תמיכה מלאה והחזר כספי מובטח ל-30 יום."
+            "אם אין לך חשבון WPML.org או מנוי תקף, %1$sרכוש אחד%2$s כדי לקבל עדכונים אוטומטיים, תמיכה מלאה, והבטחת החזר כספי תוך 30 יום."
          ],
          "Already purchased WPML?": [
-            "כבר רכשת את WPML?"
+            "כבר רכשת WPML?"
          ],
          "Enter your site key from your WPML account to receive automatic updates.": [
-            "הזן את מפתח האתר מחשבון WPML שלך כדי לקבל עדכונים אוטומטיים."
+            "הזן את מפתח האתר שלך מחשבון WPML שלך כדי לקבל עדכונים אוטומטיים."
          ],
          "Site key": [
             "מפתח אתר"
          ],
          "Get a key for this site": [
-            "קבל מפתח עבור אתר זה"
-         ],
-         "Are you ready to start translating now?": [
-            "האם אתה מוכן להתחיל בתרגום עכשיו?"
-         ],
-         "Yes, start translating!": [
-            "כן, התחל בתרגום!"
-         ],
-         "WPML will translate your site for you using your automatic translation credits.": [
-            "WPML יתרגם את האתר עבורך וישתמש בנקודות הזיכוי לתרגום אוטומטי.."
-         ],
-         "No, my content isn't finalized yet": [
-            "לא, התוכן שלי עדיין לא סופי"
-         ],
-         "When you're ready, start automatic translation from the Translation Management Dashboard.": [
-            "כאשר תהיה מוכן, התחל תרגום אוטומטי מ'לוח המחוונים של ניהול התרגום'."
+            "קבל מפתח לאתר זה"
          ],
          "Improve your site’s translations using helpful plugins": [
-            "שפר את תרגומי האתר שלך באמצעות תוספים שימושיים"
+            "שפר את תרגומי האתר שלך באמצעות תוספים מועילים"
          ],
          "Based on the themes and other plugins running on your site, we recommend that you enable the following WPML components. These are included with your WPML purchase and allow you to translate strings, media, admin texts, and more.": [
-            "על בסיס ערכות העיצוב ותוספים אחרים הרציםב אתר שלך, אנו ממליצים שתפעל את רכיבי WPML הבאים. אלו כלולים ברכישה של WPML ומאפשריםלך לתרגם מחרוזות, מדיה, טקסטים לניהול ועוד."
+            "בהתבסס על הערכות נושא ותוספים אחרים הפועלים באתר שלך, אנו ממליצים להפעיל את הרכיבים הבאים של WPML. אלה כלולים ברכישת WPML שלך ומאפשרים לך לתרגם מחרוזות, מדיה, טקסטים מנהליים ועוד."
          ],
          "Error in activating plugin.": [
             "שגיאה בהפעלת התוסף."
@@ -544,46 +393,37 @@
             "שגיאה בהתקנת התוסף."
          ],
          "Yes, send theme and plugins information, in order to get faster support and compatibility alerts": [
-            "כן, שלח מידע אודות ערכות עיצוב ותוספים כדי לקבל תמיכה מהירה יותר והתראות תאימות."
+            "כן, שלח מידע על ערכת הנושא והתוספים, כדי לקבל תמיכה מהירה יותר והתראות תאימות"
          ],
          "No, don't send this information and skip compatibility alerts": [
-            "לא, אל תשלח מידע זה ודלג על התראות תאימות."
+            "לא, אל תשלח מידע זה ודלג על התראות תאימות"
          ],
          "Do you want to get better and faster support?": [
-            "האם אתה רוצה לקבל תמיכה טובה יותר ומהירה יותר?"
+            "האם אתה רוצה לקבל תמיכה טובה ומהירה יותר?"
          ],
          "The WPML plugin can send a list of active plugins and theme used in your site to wpml.org. This allows our support team to help you much faster and to contact you in advance about potential compatibility problems and their solutions.": [
-            "התוסף WPML יכול לשלוח רשימה של תוספים וערכות עיצוב שמשמים באתר שלך אל wpml.org. פעולה זו תאפשר לצוותהתמיכה שלנו לעזור לך הברה יותר מהר וליצור איתך קשר מראש בנוגע לבעיות תאימות פוטנציאליות והפתרונות שלהן."
+            "התוסף WPML יכול לשלוח רשימה של תוספים פעילים וערכת נושא המשמשים באתר שלך ל-wpml.org. זה מאפשר לצוות התמיכה שלנו לעזור לך הרבה יותר מהר וליצור איתך קשר מראש לגבי בעיות תאימות פוטנציאליות ופתרונותיהן."
          ],
          "Privacy and data usage policy": [
             "מדיניות פרטיות ושימוש בנתונים"
-         ],
-         "<LinkToTheDifferentWaysYouCanTranslateYourSite/> for help with choosing the best mode for your site.": [
-            "<LinkToTheDifferentWaysYouCanTranslateYourSite/> עבור עזרה בבחירת המצב המתאים ביותר לאתר שלך."
-         ],
-         "Can't decide? Let us help!": [
-            "לא יכול להחליט? תן לנו לעזור!"
-         ],
-         "Contact our support team": [
-            "צור קשר עם צוות התמיכה שלנו"
          ],
          "Error: %s": [
             "שגיאה: %s"
          ],
          "Authenticate": [
-            "בצע אימות"
+            "אימות"
          ],
          "To send content and receive translations from <service_name />, enter the credentials you received from them.": [
-            "כדי לשלוח תוכן ולקבל תרגומים מ-<service_name />, הזן את פרטי הכניסה שקיבלת מהם."
+            "כדי לשלוח תוכן ולקבל תרגומים מ-<service_name />, הזן את האישורים שקיבלת מהם."
          ],
          "Need credentials? Contact <link_to_service />": [
-            "זקוק לפרטי כניסה? צור קשר עם <link_to_service />"
+            "צריך אישורים? צור קשר עם <link_to_service />"
          ],
          "Success! You can start sending content to %s for translation after you finish the setup wizard.": [
-            "הצלחה! תוכל להתחיל בשליחת תוכן לתרגום אל %s לאחר שתסיים את אשף ההגדרה."
+            "הצלחה! תוכל להתחיל לשלוח תוכן ל-%s לתרגום לאחר שתסיים את אשף ההגדרות."
          ],
          "The credentials are invalid. Please, try again.": [
-            "פרטי הכניסה לא בתוקף. נסה שוב."
+            "האישורים אינם תקפים. אנא נסה שוב."
          ],
          "Choose a Translation Service": [
             "בחר שירות תרגום"
@@ -592,16 +432,7 @@
             "טוען"
          ],
          "A new language could not be added correctly": [
-            "לא ניתן להוסיף שפה חדשה בהצלחה"
-         ],
-         "Support": [
-            "תמיכה"
-         ],
-         "Plugins": [
-            "תוספים"
-         ],
-         "Finished": [
-            "הסתיים"
+            "לא ניתן היה להוסיף שפה חדשה כראוי"
          ],
          "Back": [
             "חזרה"
@@ -622,19 +453,28 @@
             "שפות"
          ],
          "URL Format": [
-            "תבנית כתובת URL"
+            "פורמט כתובת URL"
          ],
          "Register WPML": [
             "רשום את WPML"
          ],
-         "Translation Mode": [
-            "מצב תרגום"
+         "Who Will Translate": [
+            "מי יתרגם"
+         ],
+         "Support": [
+            "תמיכה"
+         ],
+         "Plugins": [
+            "תוספים"
+         ],
+         "Finished": [
+            "הסתיים"
          ],
          "Settings": [
             "הגדרות"
          ],
          "It’s not currently possible to connect a translation service when WPML is set to translate your site’s content automatically. To use a translation service, please change your translation mode on the <LinkToSettingsPage /> page.": [
-            "כרגע לא ניתן לחבר שירות תרגום כאשר WPML מוגדר לתרגום האתר באופן אוטומטי. כדי להשתמש בשירות תרגום, שנה את מצב התרגום בדף <LinkToSettingsPage />."
+            "כרגע לא ניתן להתחבר לשירות תרגום כאשר WPML מוגדר לתרגם את תוכן האתר שלך אוטומטית. כדי להשתמש בשירות תרגום, אנא שנה את מצב התרגום שלך בדף <LinkToSettingsPage />."
          ],
          "Documentation": [
             "תיעוד"

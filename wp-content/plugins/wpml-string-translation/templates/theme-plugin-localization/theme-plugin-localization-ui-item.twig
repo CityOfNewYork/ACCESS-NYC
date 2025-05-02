@@ -1,0 +1,114 @@
+{% set showDomainsList = true %}
+{% if component_data.domains|length < 2 %}
+    {% set showDomainsList = false %}
+{% endif %}
+<tr
+    class="item{{ component_data.active ? ' active' }}"
+    data-itemcategory="{{ type }}"
+    data-themepluginitem="1"
+    data-componentidformoscan="{{ component_data.component_id_for_mo_scan }}"
+    data-isactive="{% if component_data.active %}1{% else %}0{% endif %}"
+    {% if not component_data.active %}style="display: none"{% endif %}
+>
+    <td class="checkbox-column">
+        <input class="wpml-checkbox-native" type="checkbox" name="{{ type }}[]" id="{{ type }}-{{ component_data.id }}" value="{{ dir_and_file }}" data-component-name="{{ component_data.component_name|replace(' ', '-')|lower }}">
+    </td>
+    <td class="name-cell">
+        <label for="{{ type }}-{{ component_data.id }}">{% if show_active_label and component_data.active %}<span class="bold-label">{{ active_text }}:</span> {% endif %}{{ component_data.component_name }}</label>
+    </td>
+    <td class="icon-cell">
+        {% set iconClass = "" %}
+        {% set status = "not-scanned" %}
+        {% if component_data.needs_rescan %}
+            {% set iconClass = " warning-icon" %}
+            {% set status = "needs-update" %}
+        {% elseif component_data.completed %}
+            {% set iconClass = " checked-icon" %}
+            {% set status = "completed" %}
+        {% endif %}
+        <div
+            class="js-otgs-popover-tooltip icon{{ iconClass }}"
+            title="{{ component_data.statusIconTitle }}"
+            data-status="{{ status }}"
+        >
+        </div>
+    </td>
+    <td class="domain-label-cell">
+        {% if component_data.domains %}
+            <ul>
+                {% if showDomainsList %}
+                    <li class="toggle-list-items">
+                        <a href="#" data-showtext="{{ show_textdomains }}" data-hidetext="{{ hide_textdomains }}">
+                            {{ show_textdomains }}
+                        </a>
+                    </li>
+                {% endif %}
+                {% for domain, domains_statistics in component_data.domains %}
+                    <li{% if showDomainsList %} data-domainListItem="1" style="display: none"{% endif %}><a title="{{ domains_statistics.title_all_strings }}" href="{{ domains_statistics.domain_link }}">{{ domain }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </td>
+
+    <td class="wpml-create-po-file domain-info-cell action-column-cell">
+        {% if component_data.domains %}
+            <ul class="icon-list"{% if showDomainsList %} data-domainListItem="1" style="display: none"{% endif %}>
+                {% if showDomainsList %}
+                    <li class="spacerListItem">-</li>
+                {% endif %}
+
+                {% for domain, domains_statistics in component_data.domains %}
+                    <li>
+                        {% if domains_statistics.translated or domains_statistics.needs_update %}
+                            <a class="wpml_st_pop_download icon download-icon js-otgs-popover-tooltip"
+                               data-file="{{ dir_and_file|e  }}" data-domain="{{ domain|e }}"
+                               href="#"
+                               title="{{ download_po }}"
+                               ></a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </td>
+
+    <td class="wpml-translated domain-info-cell">
+        {% if component_data.domains %}
+            <ul{% if showDomainsList %} data-domainListItem="1" style="display: none"{% endif %}>
+                {% if showDomainsList %}
+                    <li class="spacerListItem">-</li>
+                {% endif %}
+
+                {% for domain, domains_statistics in component_data.domains %}
+                    <li>
+                        {{ domains_statistics.translated }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </td>
+
+    <td class="wpml-needs-update domain-info-cell">
+        {% if component_data.domains %}
+        <ul{% if showDomainsList %} data-domainListItem="1" style="display: none"{% endif %}>
+            {% if showDomainsList %}
+                <li class="spacerListItem">-</li>
+            {% endif %}
+
+            {% for domain, domains_statistics in component_data.domains %}
+                <li>
+                    {% if domains_statistics.needs_update %}
+                    <a title="{{ domains_statistics.title_needs_translation }}" href="{{ domains_statistics.needs_update_link }}">
+                        {% endif %}
+                        {{ domains_statistics.needs_update }}
+                        {% if domains_statistics.needs_update %}
+                    </a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </td>
+
+    {% set current = current - 1 %}
+</tr>

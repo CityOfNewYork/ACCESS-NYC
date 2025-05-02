@@ -29,12 +29,33 @@ if ( ! class_exists( 'acf_field_relationship' ) ) :
 				'return_format'        => 'object',
 				'bidirectional_target' => array(),
 			);
+			add_filter( 'acf/conditional_logic/choices', array( $this, 'render_field_relation_conditional_choices' ), 10, 3 );
 
 			// extra
 			add_action( 'wp_ajax_acf/fields/relationship/query', array( $this, 'ajax_query' ) );
 			add_action( 'wp_ajax_nopriv_acf/fields/relationship/query', array( $this, 'ajax_query' ) );
 		}
 
+		/**
+		 * Filters choices in relation conditions.
+		 *
+		 * @since 6.3
+		 *
+		 * @param array  $choices           The selected choice.
+		 * @param array  $conditional_field The conditional field settings object.
+		 * @param string $rule_value        The rule value.
+		 * @return array
+		 */
+		public function render_field_relation_conditional_choices( $choices, $conditional_field, $rule_value ) {
+			if ( ! is_array( $conditional_field ) || $conditional_field['type'] !== 'relationship' ) {
+				return $choices;
+			}
+			if ( ! empty( $rule_value ) ) {
+				$post_title = get_the_title( $rule_value );
+				$choices    = array( $rule_value => $post_title );
+			}
+			return $choices;
+		}
 
 		/**
 		 * description
@@ -46,7 +67,6 @@ if ( ! class_exists( 'acf_field_relationship' ) ) :
 		 * @param   $post_id (int)
 		 * @return  $post_id (int)
 		 */
-
 		function input_admin_enqueue_scripts() {
 
 			// localize
@@ -60,46 +80,44 @@ if ( ! class_exists( 'acf_field_relationship' ) ) :
 			);
 		}
 
-
 		/**
-		 * description
+		 * Returns AJAX results for the Relationship field.
 		 *
-		 * @type    function
-		 * @date    24/10/13
-		 * @since   5.0.0
+		 * @since 5.0.0
 		 *
-		 * @param   $post_id (int)
-		 * @return  $post_id (int)
+		 * @return void
 		 */
+		public function ajax_query() {
+			$nonce             = acf_request_arg( 'nonce', '' );
+			$key               = acf_request_arg( 'field_key', '' );
+			$conditional_logic = (bool) acf_request_arg( 'conditional_logic', false );
 
-		function ajax_query() {
+			if ( $conditional_logic ) {
+				if ( ! acf_current_user_can_admin() ) {
+					die();
+				}
 
-			// validate
-			if ( ! acf_verify_ajax() ) {
+				// Use the standard ACF admin nonce.
+				$nonce = '';
+				$key   = '';
+			}
+
+			if ( ! acf_verify_ajax( $nonce, $key, ! $conditional_logic ) ) {
 				die();
 			}
 
-			// get choices
-			$response = $this->get_ajax_query( $_POST );
-
-			// return
-			acf_send_ajax_results( $response );
+			acf_send_ajax_results( $this->get_ajax_query( $_POST ) );
 		}
-
 
 		/**
 		 * This function will return an array of data formatted for use in a select2 AJAX response
 		 *
-		 * @type    function
-		 * @date    15/10/2014
 		 * @since   5.0.9
 		 *
-		 * @param   $options (array)
-		 * @return  (array)
+		 * @param array $options An array of options for the query.
+		 * @return array
 		 */
-
-		function get_ajax_query( $options = array() ) {
-
+		public function get_ajax_query( $options = array() ) {
 			// defaults
 			$options = wp_parse_args(
 				$options,
@@ -109,6 +127,7 @@ if ( ! class_exists( 'acf_field_relationship' ) ) :
 					'field_key' => '',
 					'paged'     => 1,
 					'post_type' => '',
+					'include'   => '',
 					'taxonomy'  => '',
 				)
 			);
@@ -130,8 +149,7 @@ if ( ! class_exists( 'acf_field_relationship' ) ) :
 			$args['paged']          = intval( $options['paged'] );
 
 			// search
-			if ( $options['s'] !== '' ) {
-
+			if ( $options['s'] !== '' && empty( $options['include'] ) ) {
 				// strip slashes (search may be integer)
 				$s = wp_unslash( strval( $options['s'] ) );
 
@@ -189,6 +207,11 @@ if ( ! class_exists( 'acf_field_relationship' ) ) :
 						'terms'    => $v,
 					);
 				}
+			}
+
+			if ( ! empty( $options['include'] ) ) {
+				// If we have an include, we need to return only the selected posts.
+				$args['post__in'] = array( $options['include'] );
 			}
 
 			// filters
@@ -250,7 +273,6 @@ if ( ! class_exists( 'acf_field_relationship' ) ) :
 			return $response;
 		}
 
-
 		/**
 		 * This function will return an array containing id, text and maybe description data
 		 *
@@ -262,7 +284,6 @@ if ( ! class_exists( 'acf_field_relationship' ) ) :
 		 * @param   $text (string)
 		 * @return  (array)
 		 */
-
 		function get_post_result( $id, $text ) {
 
 			// vars
@@ -288,7 +309,6 @@ if ( ! class_exists( 'acf_field_relationship' ) ) :
 		 * @param   $post_id (int) the post_id to which this value is saved to
 		 * @return  (string)
 		 */
-
 		function get_post_title( $post, $field, $post_id = 0, $is_search = 0 ) {
 
 			// get post_id
@@ -334,7 +354,6 @@ if ( ! class_exists( 'acf_field_relationship' ) ) :
 		 * @since   3.6
 		 * @date    23/01/13
 		 */
-
 		function render_field( $field ) {
 
 			// vars
@@ -398,6 +417,7 @@ if ( ! class_exists( 'acf_field_relationship' ) ) :
 				'data-paged'     => 1,
 				'data-post_type' => '',
 				'data-taxonomy'  => '',
+				'data-nonce'     => wp_create_nonce( 'acf_field_' . $this->name . '_' . $field['key'] ),
 			);
 
 			?>
@@ -681,7 +701,6 @@ if ( ! class_exists( 'acf_field_relationship' ) ) :
 		 *
 		 * @return  $value (mixed) the modified value
 		 */
-
 		function format_value( $value, $post_id, $field ) {
 
 			// bail early if no value
@@ -722,7 +741,6 @@ if ( ! class_exists( 'acf_field_relationship' ) ) :
 		 * @param   $post_id (int)
 		 * @return  $post_id (int)
 		 */
-
 		function validate_value( $valid, $value, $field, $input ) {
 
 			// default

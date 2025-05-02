@@ -1,0 +1,36 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/xmlConfigEditor/components/Container.js:25
+msgid ""
+"The wpml-config.xml file in the root folder of your theme and plugins tells "
+"WPML which content is translatable. You can override these settings with "
+"your own custom settings by adding them below."
+msgstr "主题和插件根目录下的 wpml-config.xml 文件会告诉 WPML 哪些内容可以翻译。您可以在下面添加自己的自定义设置来覆盖这些设置。"
+
+#: src/js/xmlConfigEditor/components/Container.js:29
+msgid "Read more about language configuration files."
+msgstr "了解有关语言配置文件的更多信息。"
+
+#: src/js/xmlConfigEditor/components/Controls.js:22
+#: src/js/xmlConfigEditor/hooks/useEditorOptions.js:33
+msgid "Save"
+msgstr "保存"
+
+#: src/js/xmlConfigEditor/components/Messages.js:43
+msgid "Error"
+msgstr "错误"
+
+#: src/js/xmlConfigEditor/components/SideBar.js:14
+msgid "Shortcuts"
+msgstr "捷径"
+
+#: src/js/xmlConfigEditor/hooks/useEditorOptions.js:19
+msgid "Fold/Unfold code"
+msgstr "折叠/展开代码"
+
+#: src/js/xmlConfigEditor/hooks/useEditorOptions.js:26
+msgid "Auto format"
+msgstr "自动格式"

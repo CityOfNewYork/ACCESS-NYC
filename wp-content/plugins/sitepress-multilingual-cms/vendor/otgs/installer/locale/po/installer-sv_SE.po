@@ -1,0 +1,818 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-04-08T10:19:58+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: installer\n"
+
+#. translators: %1$s and %2$s are opening and closing link tags.
+#: includes/admin-notices/notices/Account.php:107
+msgid "This site is registered on wpml.org as a development site. %1$sLearn more%2$s"
+msgstr "Den här webbplatsen är registrerad på wpml.org som utvecklingsplats. %1$sLäs mer%2$s"
+
+#: includes/admin-notices/notices/Account.php:111
+msgid "Development Site"
+msgstr "Utvecklingsplats"
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:18
+msgid "You are using an unregistered version of %s and are not receiving compatibility and security updates"
+msgstr "Du använder en oregistrerad version av %s och får inga uppdateringar"
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:20
+msgid "%s plugin must be registered in order to receive stability and security updates. Without these updates, the plugin may become incompatible with new versions of WordPress, which include security patches."
+msgstr "%s måste registreras för att få uppdateringar."
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:29
+#: includes/admin-notices/notices/Texts.php:40
+msgid "Your %s account has expired."
+msgstr "Ditt %s-konto har löpt ut."
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:31
+msgid "Your site is vulnerable to breaking changes in future WordPress releases. Purchase a new account to protect your site with the latest %s releases."
+msgstr "Din webbplats är sårbar för ändringar i framtida WordPress-utgåvor. Köp ett nytt konto för att skydda din webbplats med de senaste %s versionerna."
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:42
+msgid "Your site is vulnerable to breaking changes in future WordPress releases. Renew your account to protect your site with the latest %s releases."
+msgstr "Din webbplats är sårbar för ändringar i framtida WordPress-utgåvor. Förnya ditt konto för att skydda din webbplats med de senaste %s versionerna."
+
+#. translators: %s Product url
+#: includes/admin-notices/notices/Texts.php:52
+msgid "This site is registered on %s as a development site."
+msgstr "Denna webbplats är registrerad på %s som utvecklingsplats."
+
+#. translators: %1$s is the text "update the site key" inside a link and %2$s is the text "Learn more" inside a link
+#: includes/admin-notices/notices/Texts.php:54
+msgid "When this site goes live, remember to %1$s from \"development\" to \"production\" to remove this message. %2$s"
+msgstr "När webbplatsen lanseras, kom ihåg att %1$s från “utveckling” till “produktion”. %2$s"
+
+#: includes/admin-notices/notices/Texts.php:57
+msgid "update the site key"
+msgstr "uppdatera webbplatsnyckeln"
+
+#: includes/admin-notices/notices/Texts.php:58
+msgid "Learn more"
+msgstr "Läs mer"
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:66
+msgid "Remember to remove %s from this website"
+msgstr "Kom ihåg att ta bort %s från denna webbplats"
+
+#. translators: %s Product name
+#: includes/admin-notices/notices/Texts.php:68
+msgid "This site is using the %s plugin, which has not been paid for. After receiving a refund, you should remove this plugin from your sites. Using unregistered plugins means you are not receiving stability and security updates and will ultimately lead to problems running the site."
+msgstr "Denna webbplats använder %s utan betalning. Ta bort pluginet."
+
+#. translators: %1$s Product name %2$s host name (ex. wpml.org)
+#: includes/admin-notices/notices/Texts.php:76
+msgid "%1$s plugin cannot connect to %2$s"
+msgstr "%1$s kan inte ansluta till %2$s"
+
+#. translators: %1$s Product name %2$s host name (ex. wpml.org)
+#: includes/admin-notices/notices/Texts.php:79
+msgid "%1$s needs to connect to its server to check for new releases and security updates. Something in the network or security settings is preventing this. Please allow outgoing communication to %2$s to remove this notice."
+msgstr "%1$s behöver ansluta till sin server för att söka efter nya versioner och säkerhetsuppdateringar. Något i nätverks- eller säkerhetsinställningarna förhindrar detta. Tillåt utgående kommunikation till %2$s för att ta bort detta meddelande."
+
+#: includes/admin-notices/notices/Texts.php:81
+msgid "Need help?"
+msgstr "Behöver du hjälp?"
+
+#. translators: %1$s is `communication error details` %2$s is ex. wpml.org technical support
+#: includes/admin-notices/notices/Texts.php:83
+msgid "See the %1$s and let us know in %2$s."
+msgstr "Se %1$s och meddela oss i %2$s."
+
+#. translators: %1$s is `communication error details` %2$s is ex. wpml.org technical support
+#: includes/admin-notices/notices/Texts.php:84
+msgid "communication error details"
+msgstr "kommunikationsfeldetaljer"
+
+#. translators: %s is host name (ex. wpml.org)
+#: includes/admin-notices/notices/Texts.php:86
+msgid "%s technical support"
+msgstr "%s teknisk support"
+
+#: includes/admin-notices/notices/Texts.php:96
+msgid "Please install %s to allow translating %s."
+msgstr "Installera %s för att översätta %s."
+
+#: includes/admin-notices/notices/Texts.php:135
+msgid "Install and activate"
+msgstr "Installera och aktivera"
+
+#: includes/admin-notices/notices/Texts.php:136
+msgid "Ignore and don't ask me again"
+msgstr "Ignorera och fråga inte igen"
+
+#: includes/admin-notices/notices/Texts.php:147
+#: includes/class-wp-installer.php:525
+#: includes/upgrade/AutoUpgrade.php:114
+#: templates/repository-register.php:49
+msgid "Register"
+msgstr "Registrera"
+
+#: includes/admin-notices/notices/Texts.php:148
+msgid "This is a development / staging site"
+msgstr "Detta är en utvecklings-/testwebbplats"
+
+#: includes/admin-notices/notices/Texts.php:159
+msgid "Purchase %s"
+msgstr "Köp %s"
+
+#: includes/admin-notices/notices/Texts.php:160
+#: includes/admin-notices/notices/Texts.php:175
+#: includes/admin-notices/notices/Texts.php:189
+#: templates/repository-refunded.php:15
+msgid "Check my order status"
+msgstr "Kontrollera min orderstatus"
+
+#: includes/admin-notices/notices/Texts.php:161
+#: includes/admin-notices/notices/Texts.php:176
+msgid "Got renewal already?"
+msgstr "Har du redan förnyat?"
+
+#: includes/admin-notices/notices/Texts.php:174
+msgid "Renew your account"
+msgstr "Förnya ditt konto"
+
+#: includes/admin-notices/notices/Texts.php:190
+#: templates/repository-refunded.php:14
+msgid "Bought again?"
+msgstr "Har du köpt igen?"
+
+#: includes/admin-notices/notices/Texts.php:203
+msgid "Dismiss"
+msgstr "Avfärda"
+
+#: includes/class-installer-dependencies.php:98
+msgid ""
+"Downloading is not possible. WordPress cannot create required folders because of the\n"
+"                                        256 characters limitation of the current Windows environment."
+msgstr "Nedladdning ej möjlig. Windows 256-teckensbegränsning."
+
+#: includes/class-installer-dependencies.php:257
+msgid "Return to the updates page"
+msgstr "Återgå till uppdateringssidan"
+
+#: includes/class-installer-dependencies.php:293
+msgid "OTGS Installer"
+msgstr "OTGS-installerare"
+
+#: includes/class-installer-dependencies.php:298
+msgid "%s, responsible for receiving automated updates for WPML and Toolset, requires the following PHP component(s) in order to function:"
+msgstr "%s kräver följande PHP-komponenter:"
+
+#: includes/class-installer-dependencies.php:305
+msgid "Learn more: %s"
+msgstr "Läs mer: %s"
+
+#: includes/class-installer-theme.php:890
+msgid "To install and update %s, please %sregister%s %s for this site."
+msgstr "För att installera %s, vänligen %sregister%s %s."
+
+#: includes/class-installer-upgrader-skins.php:47
+msgid "We were not able to copy some plugin files. This is usually due to issues with permissions for WordPress content or plugins folder."
+msgstr "Kunde inte kopiera vissa plugin-filer. Kontrollera behörigheter."
+
+#: includes/class-otgs-installer-plugins-page-notice.php:93
+msgid "Your %s account has expired. %sPurchase today%s to protect your site from breaking changes in future WordPress releases."
+msgstr "Ditt %s-konto har löpt ut. %sKöp idag%s."
+
+#: includes/class-otgs-installer-plugins-page-notice.php:101
+msgid "Your %s account has expired. %sRenew today%s to protect your site from breaking changes in future WordPress releases."
+msgstr "Ditt %s-konto har löpt ut. %sFörnya idag%s."
+
+#: includes/class-otgs-installer-plugins-page-notice.php:109
+msgid "Remember to remove %s from this website. %sCheck my order status%s"
+msgstr "Ta bort %s. %sKontrollera orderstatus%s"
+
+#: includes/class-otgs-installer-plugins-page-notice.php:119
+msgid "You have an old, free subscription for Toolset Types which doesn't provide automatic updates. %sUpgrade your account%s"
+msgstr "Du har en gammal gratisprenumeration på Toolset Types som saknar automatiska uppdateringar. %sUppgradera ditt konto%s"
+
+#: includes/class-otgs-installer-plugins-page-notice.php:129
+msgid "You are using an unregistered version of %s and are not receiving compatibility and security updates. %sRegister now%s"
+msgstr "Oregistrerad %s. Inga uppdateringar. %sRegistrera nu%s"
+
+#: includes/class-otgs-installer-plugins-page-notice.php:156
+msgid "You are using the complementary %1$s. For the %2$s, %3$s."
+msgstr "Du använder %1$s. För %2$s, %3$s."
+
+#: includes/class-otgs-installer-plugins-page-notice.php:157
+msgid "complete set of features"
+msgstr "komplett funktionsuppsättning"
+
+#: includes/class-otgs-installer-plugins-page-notice.php:157
+msgid "upgrade to Toolset"
+msgstr "uppgradera till Toolset"
+
+#: includes/class-otgs-installer-subscription-warning-message.php:65
+msgid "Renew today"
+msgstr "Förnya idag"
+
+#: includes/class-otgs-installer-subscription-warning-message.php:65
+msgid "to protect your site from breaking changes in future WordPress releases."
+msgstr "för att skydda din webbplats från framtida ändringar."
+
+#: includes/class-otgs-installer-subscription-warning-message.php:72
+msgid "Your %s account expires in %d day."
+msgid_plural "Your %s account expires in %d days."
+msgstr[0] "Ditt %s-konto löper ut om %d dag."
+msgstr[1] "Ditt %s-konto löper ut om %d dagar."
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:97
+msgid "Reporting to"
+msgstr "Rapporterar till"
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:98
+msgid "Report to"
+msgstr "Rapportera till"
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:99
+msgid "Send theme and plugins information, in order to get faster support and compatibility alerts"
+msgstr "Skicka tema- och plugininformation för snabbare support"
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:101
+msgid "Don't send this information and skip compatibility alerts"
+msgstr "Skicka inte denna information"
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:103
+msgid "which theme and plugins you are using."
+msgstr "tema och plugins du använder."
+
+#: includes/class-otgs-installer-wp-share-local-components-setting-hooks.php:142
+msgid "Privacy and data usage policy"
+msgstr "Integritetspolicy"
+
+#: includes/class-wp-installer-channels.php:40
+msgid "Development"
+msgstr "Utveckling"
+
+#: includes/class-wp-installer-channels.php:42
+msgid "Beta"
+msgstr "Beta"
+
+#: includes/class-wp-installer-channels.php:44
+msgid "Production"
+msgstr "Produktion"
+
+#: includes/class-wp-installer.php:190
+msgid "Installing %s"
+msgstr "Installerar %s"
+
+#: includes/class-wp-installer.php:191
+msgid "Updating %s"
+msgstr "Uppdaterar %s"
+
+#: includes/class-wp-installer.php:192
+msgid "Activating %s"
+msgstr "Aktiverar %s"
+
+#: includes/class-wp-installer.php:358
+#: includes/class-wp-installer.php:359
+#: includes/class-wp-installer.php:1124
+msgid "Installer"
+msgstr "Installerare"
+
+#: includes/class-wp-installer.php:513
+msgid "Upgrade"
+msgstr "Uppgradera"
+
+#: includes/class-wp-installer.php:519
+msgid "Registered"
+msgstr "Registrerad"
+
+#: includes/class-wp-installer.php:701
+msgid ""
+"You are using an invalid site key defined as the constant %s (most likely in wp-config.php).\n"
+"                                                Please remove it or use the correct value in order to be able to register correctly."
+msgstr "Du använder en ogiltig webbplatsnyckel som definieras som konstanten %s (troligen i wp-config.php).\n Ta bort den eller använd rätt värde för att kunna registrera dig korrekt."
+
+#: includes/class-wp-installer.php:824
+msgid "Commercial"
+msgstr "Kommersiell"
+
+#: includes/class-wp-installer.php:1014
+msgid "Installer cannot display the products information because the automatic updating for %s was explicitly disabled with the configuration below (usually in wp-config.php):"
+msgstr "Installeraren kan inte visa produktinformationen eftersom den automatiska uppdateringen för %s uttryckligen avaktiverades med konfigurationen nedan (vanligtvis i wp-config.php):"
+
+#: includes/class-wp-installer.php:1016
+msgid "In order to see the products information, please run the %smanual updates check%s to initialize the products list or (temporarily) remove the above code."
+msgstr "För att se produktinformationen, kör %smanuell uppdateringskontroll%s för att initiera produktlistan eller (tillfälligt) ta bort ovanstående kod."
+
+#: includes/class-wp-installer.php:1044
+msgid "Installer cannot contact our updates server to get information about the available products and check for new versions. If you are seeing this message for the first time, you can ignore it, as it may be a temporary communication problem. If the problem persists and your WordPress admin is slowing down, you can disable automated version checks. Add the following line to your wp-config.php file:"
+msgstr "Kan ej kontakta uppdateringsserver"
+
+#: includes/class-wp-installer.php:1071
+#: includes/class-wp-installer.php:1075
+msgid "Information about new versions is invalid. It may be a temporary communication problem, please check for updates again."
+msgstr "Ogiltig info om nya versioner."
+
+#: includes/class-wp-installer.php:1115
+msgid "Sorry, you are not allowed to manage Installer for this site."
+msgstr "Ej behörig att hantera Installer."
+
+#: includes/class-wp-installer.php:1154
+msgid "No repositories defined."
+msgstr "Inga arkiv definierade."
+
+#: includes/class-wp-installer.php:1376
+msgid "We have preselected the plugins your site needs to be fully multilingual."
+msgstr "Vi har förvalt de plugins som din webbplats behöver för att vara helt flerspråkig."
+
+#: includes/class-wp-installer.php:1612
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:67
+msgid "Invalid site key for the current site."
+msgstr "Ogiltig webbplatsnyckel."
+
+#: includes/class-wp-installer.php:1613
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:67
+msgid "Please note that the site key is case sensitive."
+msgstr "Nyckeln är skiftlägeskänslig."
+
+#: includes/class-wp-installer.php:1618
+msgid "%s cannot access %s to register. Try again to see if it's a temporary problem. If the problem continues, make sure that this site has access to the Internet."
+msgstr "%s kan inte komma åt %s för att registrera sig. Försök igen för att se om det är ett tillfälligt problem. Om problemet kvarstår ska du kontrollera att den här webbplatsen har tillgång till Internet."
+
+#: includes/class-wp-installer.php:2259
+msgid "Connection failed! Please refresh the page and try again. (%s)"
+msgstr "Anslutningen misslyckades! Uppdatera sidan och försök igen. (%s)"
+
+#: includes/class-wp-installer.php:2262
+msgid "Your subscription appears to no longer be valid. Please try to register again using a valid site key."
+msgstr "Prenumeration ogiltig."
+
+#: includes/class-wp-installer.php:2891
+#: includes/class-wp-installer.php:2953
+msgid "%s cannot update because your site's registration is not valid. Please %sregister %s%s again for this site first."
+msgstr "%s kan inte uppdateras eftersom registreringen av din webbplats inte är giltig. Vänligen %sregistrera %s%s igen för den här webbplatsen först."
+
+#: includes/class-wp-installer.php:2976
+msgid "Update Plugin"
+msgstr "Uppdatera plugin"
+
+#: includes/class-wp-installer.php:2977
+msgid "Return to the plugins page"
+msgstr "Tillbaka till pluginsidan"
+
+#: includes/products/commercial-tab/DownloadsList.php:28
+msgid "(embedded)"
+msgstr "(inbäddad)"
+
+#: includes/products/commercial-tab/DownloadsList.php:42
+msgid "Release notes"
+msgstr "Versionsnoteringar"
+
+#: includes/products/OTGS_Installer_Products_Parser.php:101
+msgid "Information about versions of %s are invalid. It may be a temporary communication problem, please check for updates again."
+msgstr "Information om versioner av %s är ogiltig. Det kan vara ett tillfälligt kommunikationsproblem, vänligen kontrollera om det finns uppdateringar igen."
+
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:40
+msgid "Empty site key!"
+msgstr "Tom webbplatsnyckel!"
+
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:44
+msgid "Invalid request!"
+msgstr "Ogiltig begäran!"
+
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:125
+msgid "Invalid site key for the current site. If the error persists, try to un-register first and then register again with the same site key."
+msgstr "Ogiltig webbplatsnyckel."
+
+#: includes/site-key/class-otgs-installer-site-key-ajax.php:179
+msgid "%s cannot access %s to register. Try again to see if it's a temporary problem. If the problem continues, make sure that this site has access to the Internet. You can still use the plugin without registration, but you will not receive automated updates."
+msgstr "%s kan inte komma åt %s för att registrera sig. Försök igen för att se om det är ett tillfälligt problem. Om problemet kvarstår, se till att den här webbplatsen har tillgång till Internet. Du kan fortfarande använda insticksprogrammet utan registrering, men du kommer inte att få automatiska uppdateringar."
+
+#: includes/support/class-otgs-installer-support-hooks.php:20
+#: includes/support/class-otgs-installer-support-template.php:39
+#: includes/support/class-otgs-installer-support-template.php:43
+#: includes/support/class-otgs-installer-support-template.php:56
+msgid "Installer Support"
+msgstr "Installer Support"
+
+#: includes/support/class-otgs-installer-support-template.php:40
+msgid "For retrieving Installer debug information use the %s page."
+msgstr "Hämta felsökningsinfo på %s."
+
+#: includes/support/class-otgs-installer-support-template.php:58
+msgid "Installer Log"
+msgstr "Installer-logg"
+
+#: includes/support/class-otgs-installer-support-template.php:59
+msgid "Request URL"
+msgstr "Begärd URL"
+
+#: includes/support/class-otgs-installer-support-template.php:60
+msgid "Request Arguments"
+msgstr "Begärda argument"
+
+#: includes/support/class-otgs-installer-support-template.php:61
+msgid "Response"
+msgstr "Svar"
+
+#: includes/support/class-otgs-installer-support-template.php:62
+msgid "Component"
+msgstr "Komponent"
+
+#: includes/support/class-otgs-installer-support-template.php:63
+msgid "Time"
+msgstr "Tid"
+
+#: includes/support/class-otgs-installer-support-template.php:64
+msgid "Log is empty"
+msgstr "Loggen är tom"
+
+#: includes/support/class-otgs-installer-support-template.php:67
+msgid "Installer System Status"
+msgstr "Installer systemstatus"
+
+#: includes/support/class-otgs-installer-support-template.php:68
+msgid "Check Now"
+msgstr "Kontrollera nu"
+
+#: includes/support/class-otgs-installer-support-template.php:71
+msgid "Required PHP Libraries"
+msgstr "Nödvändiga PHP-bibliotek"
+
+#: includes/support/class-otgs-installer-support-template.php:74
+msgid "All Installer Instances"
+msgstr "Alla Installer-instanser"
+
+#: includes/support/class-otgs-installer-support-template.php:75
+msgid "Path"
+msgstr "Sökväg"
+
+#: includes/support/class-otgs-installer-support-template.php:76
+msgid "Version"
+msgstr "Version"
+
+#: includes/support/class-otgs-installer-support-template.php:77
+msgid "High priority"
+msgstr "Hög prioritet"
+
+#: includes/support/class-otgs-installer-support-template.php:78
+msgid "Delegated"
+msgstr "Delegerad"
+
+#: includes/support/class-otgs-installer-support-template.php:86
+msgid "WPML API server"
+msgstr "WPML API-server"
+
+#: includes/support/class-otgs-installer-support-template.php:91
+msgid "Toolset API server"
+msgstr "Toolset API-server"
+
+#: includes/upgrade/AutoUpgrade.php:115
+msgid " to use auto-updates"
+msgstr "För auto-uppdateringar"
+
+#: loader.php:72
+msgid "This site is registered on %s as a development site. Switch to a production site key to %s."
+msgstr "Den här webbplatsen är registrerad på %s som en utvecklingswebbplats. Byt till en nyckel för produktionsplats till %s."
+
+#: loader.php:77
+msgid "This site is registered on Toolset.com as a development site."
+msgstr "Registrerad som utvecklingssajt."
+
+#: templates/channel-selector.php:3
+msgid "Updates channel:"
+msgstr "Uppdateringskanal:"
+
+#: templates/channel-selector.php:12
+msgid "To select different update channels (beta, development) you must update your existing products to their most recent stable versions."
+msgstr "Uppdatera till senaste stabila."
+
+#: templates/channel-selector.php:15
+msgid "Updating the plugins on your site. Please don't close this page or navigate away."
+msgstr "Uppdaterar plugins. Stäng ej sidan."
+
+#: templates/channel-selector.php:25
+msgid "Something went wrong and we could not install all updates from the %s channel. Click here to %stry again%s. If the errors persist, please switch back to the Production channel and contact the %s%s support%s."
+msgstr "Något gick fel och vi kunde inte installera alla uppdateringar från kanalen %s. Klicka här för att %sförsöka igen%s. Om felen kvarstår ska du växla tillbaka till produktionskanalen och kontakta supporten på %s%s%s."
+
+#: templates/channel-selector.php:33
+msgid "There was a problem switching to the %s channel. You can %sretry%s. If the problem continues, please %sdownload %s%s and install again manually"
+msgstr "Problem vid byte till %s-kanalen. %sFörsök igen%s eller %sladda ner %s%s och installera manuellt"
+
+#: templates/channel-selector.php:47
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: templates/channel-selector.php:48
+msgid "Switch"
+msgstr "Byt"
+
+#: templates/channel-selector.php:51
+msgid "The plugins will update to the most recent version in the channel that you selected."
+msgstr "Plugin-uppdateringar sker till senaste versionen i vald kanal."
+
+#: templates/channel-selector.php:55
+msgid "Remember my preference."
+msgstr "Kom ihåg mitt val."
+
+#: templates/channel-selector.php:62
+msgid "You are using a potentially less stable channel for %s. If you didn't enable this on purpose, you should switch to the 'Production' channel."
+msgstr "Du använder en potentiellt mindre stabil kanal för %s. Byt till “Produktion” om det inte var avsiktligt."
+
+#: templates/downloads-list-compact.php:8
+#: templates/downloads-list.php:29
+msgid "Plugin"
+msgstr "Plugin"
+
+#: templates/downloads-list-compact.php:9
+msgid "Available"
+msgstr "Tillgänglig"
+
+#: templates/downloads-list-compact.php:10
+#: templates/downloads-list.php:30
+msgid "Installed"
+msgstr "Installerad"
+
+#: templates/downloads-list-compact.php:11
+msgid "Downloading"
+msgstr "Laddar ner"
+
+#: templates/downloads-list-compact.php:12
+msgid "Activate"
+msgstr "Aktivera"
+
+#: templates/downloads-list-compact.php:52
+msgid "downloading..."
+msgstr "laddar ner..."
+
+#: templates/downloads-list-compact.php:53
+msgid "failed!"
+msgstr "misslyckades!"
+
+#: templates/downloads-list-compact.php:53
+msgid "downloaded"
+msgstr "nedladdad"
+
+#: templates/downloads-list-compact.php:56
+msgid "activating"
+msgstr "aktiverar"
+
+#: templates/downloads-list-compact.php:57
+msgid "activated"
+msgstr "aktiverad"
+
+#: templates/downloads-list-compact.php:65
+#: templates/downloads-list.php:55
+msgid "Downloading is not possible because WordPress cannot write into the plugins folder. %sHow to fix%s."
+msgstr "Nedladdning ej möjlig. WordPress kan inte skriva till plugin-mappen. %sLösning%s."
+
+#: templates/downloads-list-compact.php:72
+#: templates/downloads-list.php:62
+msgid "Download"
+msgstr "Ladda ner"
+
+#: templates/downloads-list-compact.php:74
+#: templates/downloads-list.php:66
+msgid "Activate after download"
+msgstr "Aktivera efter nedladdning"
+
+#: templates/downloads-list-compact.php:77
+#: templates/downloads-list.php:70
+msgid "Operation complete!"
+msgstr "Åtgärd slutförd!"
+
+#: templates/downloads-list-compact.php:79
+msgid ""
+"Download failed!\n"
+"\n"
+"Click OK to revalidate your subscription or CANCEL to try again."
+msgstr "Nedladdning misslyckades! Klicka OK för att validera prenumerationen eller AVBRYT för att försöka igen."
+
+#: templates/downloads-list.php:31
+msgid "Current"
+msgstr "Nuvarande"
+
+#: templates/downloads-list.php:32
+msgid "Released"
+msgstr "Släppt"
+
+#: templates/downloads-list.php:72
+msgid ""
+"Download failed!\n"
+"\n"
+"Please refresh the page and try again."
+msgstr "Nedladdning misslyckades! Uppdatera sidan och försök igen."
+
+#: templates/products-compact.php:5
+msgid "Incorrect setup"
+msgstr "Felaktig konfiguration"
+
+#: templates/products-compact.php:25
+msgid "Invalid product"
+msgstr "Ogiltig produkt"
+
+#: templates/products-compact.php:36
+msgid "Unknown repository"
+msgstr "Okänt arkiv"
+
+#: templates/products-compact.php:44
+msgid " Your current site key (%s) does not match the selected product (%s)."
+msgstr "Din nuvarande webbplatsnyckel (%s) matchar inte vald produkt (%s)."
+
+#: templates/products-compact.php:65
+msgid "Buy %s"
+msgstr "Köp %s"
+
+#: templates/products-compact.php:69
+msgid "Already bought %s?"
+msgstr "Redan köpt %s?"
+
+#: templates/products-compact.php:74
+#: templates/repository-register.php:20
+msgid "Site-key was set by %s, most likely in wp-config.php. Please remove the constant before attempting to register."
+msgstr "Webbplatsnyckel satt av %s, troligen i wp-config.php. Ta bort konstanten innan registrering."
+
+#: templates/products-compact.php:77
+msgid "Enter site key"
+msgstr "Ange webbplatsnyckel"
+
+#: templates/products-compact.php:85
+msgid "Add"
+msgstr "Lägg till"
+
+#: templates/products-compact.php:94
+msgid "Subscription is expired."
+msgstr "Prenumerationen har gått ut."
+
+#: templates/products-compact.php:103
+msgid "Renew %s"
+msgstr "Förnya %s"
+
+#: templates/products-compact.php:114
+msgid "Are you sure you want to remove this site key?"
+msgstr "Vill du verkligen ta bort denna webbplatsnyckel?"
+
+#: templates/products-compact.php:119
+#: templates/repository-registered-buttons.php:12
+msgid "Site-key was set by %s, most likely in wp-config.php. Please remove the constant before attempting to unregister."
+msgstr "Webbplatsnyckel satt av %s, troligen i wp-config.php. Ta bort konstanten innan avregistrering."
+
+#: templates/products-compact.php:122
+msgid "Remove current site key (%s)"
+msgstr "Ta bort nuvarande webbplatsnyckel (%s)"
+
+#: templates/products-compact.php:138
+msgid "%s support on wpml.org"
+msgstr "%s-support på wpml.org"
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:17
+msgid "Do you have an account on %s?"
+msgstr "Har du ett konto på %s?"
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:18
+msgid "Great! You just need to extend your subscription."
+msgstr "Bra! Du behöver bara förlänga din prenumeration."
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:20
+msgid "You have a %s account. You just need to extend your subscription."
+msgstr "Du har ett %s-konto. Du behöver bara förlänga din prenumeration."
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:21
+msgid "Extend Subscription"
+msgstr "Förläng prenumeration"
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:23
+msgid "OK. You need to set up renewal for %s."
+msgstr "OK. Du behöver konfigurera förnyelse för %s."
+
+#. translators: %1$s and %2$s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:25
+msgid "You do not have a %1$s account yet. You need to set up a renewal for %2$s."
+msgstr "Du har inget %1$s-konto än. Du behöver konfigurera förnyelse för %2$s."
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:27
+msgid "Set Up Renewal For %s"
+msgstr "Konfigurera förnyelse för %s"
+
+#. translators: %s replaced with wpml.org or toolset.com
+#: templates/repository-end-users.php:28
+msgid "No worries. We can check that for you."
+msgstr "Inga problem. Vi kan kontrollera det åt dig."
+
+#: templates/repository-end-users.php:29
+msgid "Check"
+msgstr "Kontrollera"
+
+#: templates/repository-end-users.php:30
+msgid "Your Email Address"
+msgstr "Din e-postadress"
+
+#: templates/repository-end-users.php:37
+msgid "Yes"
+msgstr "Ja"
+
+#: templates/repository-end-users.php:41
+msgid "No"
+msgstr "Nej"
+
+#: templates/repository-end-users.php:45
+msgid "I do not remember"
+msgstr "Jag kommer inte ihåg"
+
+#: templates/repository-expired.php:12
+msgid "You are using an expired account of %s."
+msgstr "Du använder ett utgånget konto för %s."
+
+#: templates/repository-expired.php:13
+msgid "It means you will not receive updates. This can lead to stability and even security issues."
+msgstr "Det innebär att du inte får uppdateringar. Detta kan leda till stabilitets- och säkerhetsproblem."
+
+#: templates/repository-expired.php:14
+msgid "Have you already renewed your license?"
+msgstr "Har du redan förnyat din licens?"
+
+#: templates/repository-expired.php:15
+msgid "Refresh account status"
+msgstr "Uppdatera kontostatus"
+
+#: templates/repository-legacy-free.php:9
+msgid "Upgrade your account"
+msgstr "Uppgradera ditt konto"
+
+#: templates/repository-legacy-free.php:11
+msgid "You have an old, free subscription for Toolset Types which doesn't provide automatic updates. %s"
+msgstr "Du har en gammal gratisprenumeration på Toolset Types som saknar automatiska uppdateringar. %s"
+
+#: templates/repository-listing.php:105
+msgid "Click to see individual components options."
+msgstr "Klicka för att se alternativ för enskilda komponenter."
+
+#: templates/repository-listing.php:105
+msgid "Individual components"
+msgstr "Enskilda komponenter"
+
+#: templates/repository-listing.php:147
+msgid "This page lets you install plugins and update existing plugins. To remove any of these plugins, go to the %splugins%s page and if you have the permission to remove plugins you should be able to do this."
+msgstr "Här kan du installera och uppdatera plugins. För att ta bort plugins, gå till %splugins%s-sidan."
+
+#: templates/repository-refunded.php:12
+msgid "Remember to remove %s from this website."
+msgstr "Kom ihåg att ta bort %s från denna webbplats."
+
+#: templates/repository-refunded.php:13
+msgid "This site is using %s plugin, which is not paid for. After receiving a refund, you should remove this plugin from your sites. Using unregistered plugins means that you are not receiving stability and security updates and will ultimately lead to problems running the site."
+msgstr "Denna webbplats använder obetalda %s-plugins. Ta bort dem efter återbetalning för att undvika problem."
+
+#: templates/repository-register.php:14
+msgid "Already purchased %s?"
+msgstr "Redan köpt %s?"
+
+#: templates/repository-register.php:23
+msgid "Register %s"
+msgstr "Registrera %s"
+
+#: templates/repository-register.php:35
+msgid "Enter the site key, from your %1$s account, to receive automatic updates for %2$s."
+msgstr "Ange webbplatsnyckeln från ditt %1$s-konto för automatiska uppdateringar av %2$s."
+
+#: templates/repository-register.php:47
+msgid "Site key"
+msgstr "Webbplatsnyckel"
+
+#: templates/repository-register.php:51
+msgid "Get a key for this site"
+msgstr "Få en nyckel för denna webbplats"
+
+#: templates/repository-registered-buttons.php:17
+msgid "Are you sure you want to unregister?"
+msgstr "Är du säker på att du vill avregistrera?"
+
+#: templates/repository-registered-buttons.php:22
+msgid "Unregister %s from this site"
+msgstr "Avregistrera %s från denna webbplats"
+
+#: templates/repository-registered-buttons.php:30
+msgid "Check for updates"
+msgstr "Sök efter uppdateringar"
+
+#: templates/repository-registered.php:10
+msgid "%s is registered on this site. You will receive automatic updates until %s"
+msgstr "%s är registrerat. Du får automatiska uppdateringar till %s"
+
+#: templates/repository-registered.php:11
+msgid "%s is registered on this site. Your Lifetime account gives you updates for life."
+msgstr "%s är registrerat. Ditt livstidskonto ger dig uppdateringar för alltid."

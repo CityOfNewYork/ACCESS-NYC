@@ -16,11 +16,11 @@ class WPML_Cornerstone_Tabs extends WPML_Cornerstone_Module_With_Items {
 	 */
 	protected function get_title( $field ) {
 		if ( 'tab_label_content' === $field ) {
-			return esc_html__( 'Tabs: label', 'sitepress' );
+			return esc_html__( 'Tabs: Tab Label', 'sitepress' );
 		}
 
 		if ( 'tab_content' === $field ) {
-			return esc_html__( 'Tabs: content', 'sitepress' );
+			return esc_html__( 'Tabs: Tab Content', 'sitepress' );
 		}
 
 		return '';

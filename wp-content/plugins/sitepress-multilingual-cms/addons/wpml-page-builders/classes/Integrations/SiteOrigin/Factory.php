@@ -10,6 +10,8 @@ class Factory {
 			[
 				HandleCustomFieldsFactory::class,
 				Config\Factory::class,
+				Hooks\WordCount::class,
+				Hooks\TranslationJobImages::class,
 			]
 		);
 

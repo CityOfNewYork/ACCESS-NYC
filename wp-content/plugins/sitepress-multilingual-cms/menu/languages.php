@@ -192,6 +192,7 @@ $resource( [
 											?>
  class="selected"<?php endif; ?>>
 									<input id="default_language_<?php echo esc_attr( $lang['code'] ); ?>"
+										   class="wpml-radio-native"
 										   name="default_language" type="radio"
 										   value="<?php echo esc_attr( $lang['code'] ); ?>" <?php checked( $is_default ); ?> />
 									<label for="default_language_<?php echo esc_attr( $lang['code'] ); ?>">
@@ -208,16 +209,16 @@ $resource( [
 
 						<?php wp_nonce_field('wpml_set_default_language', 'set_default_language_nonce'); ?>
 						<p class="buttons-wrap">
-							<button id="icl_cancel_default_button" class="button-secondary action"><?php esc_html_e( 'Cancel', 'sitepress' ); ?></button>
-							<button id="icl_save_default_button" class="button-primary action"><?php esc_html_e( 'Save', 'sitepress' ); ?></button>
+							<button id="icl_cancel_default_button" class="button-secondary wpml-button base-btn wpml-button--outlined action"><?php esc_html_e( 'Cancel', 'sitepress' ); ?></button>
+							<button id="icl_save_default_button" class="button-primary wpml-button base-btn action"><?php esc_html_e( 'Save', 'sitepress' ); ?></button>
 						</p>
 
                         <p>
                             <button id="icl_change_default_button"
-                                    class="button-secondary action <?php if ( count( $active_languages ) < 2 ): ?>hidden<?php endif ?>">
+                                    class=" button-secondary wpml-button base-btn wpml-button--outlined action <?php if ( count( $active_languages ) < 2 ): ?>hidden<?php endif ?>">
 								<?php esc_html_e( 'Change default language', 'sitepress' ) ?>
                             </button>
-                            <button id="icl_add_remove_button" class="button-secondary action">
+                            <button id="icl_add_remove_button" class="button-secondary wpml-button base-btn wpml-button--outlined action">
 								<?php esc_html_e( 'Add / Remove languages', 'sitepress' ) ?>
                             </button>
                         </p>
@@ -238,6 +239,7 @@ $resource( [
 									<li class="<?php echo implode( ' ', $language_item_classes ); ?>">
 										<label for="wpml-language-<?php echo $lang['code']; ?>">
 											<input type="checkbox" id="wpml-language-<?php echo esc_attr( $lang['code'] ); ?>"
+												   class="wpml-checkbox-native"
 												   value="<?php echo esc_attr( $lang['code'] ); ?>" <?php echo $checked . ' ' . $disabled; ?>/>
 											<?php echo $sitepress->get_flag_image($lang['code']) ?>
 											<?php echo esc_html( $lang['display_name'] ); ?>
@@ -249,7 +251,7 @@ $resource( [
 							</ul>
 
 							<div class="buttons-wrap">
-								<input id="icl_cancel_language_selection" type="button" class="button-secondary action"
+								<input id="icl_cancel_language_selection" type="button" class="button-secondary wpml-button base-btn wpml-button--outlined action"
 									   value="<?php esc_attr_e( 'Cancel', 'sitepress' ); ?>" />
 								<input id="icl_save_language_selection" type="button" class="button-primary action"
 									   value="<?php esc_attr_e( 'Save', 'sitepress' ); ?>" style="display:none"/>
@@ -270,7 +272,7 @@ $resource( [
 					</div> <!-- wpml-section-content-inner -->
 
 					<?php if ( $inactive_content && $inactive_content->has_entries() ) : ?>
-						<div class="wpml-section-content-inner">
+						<div id="wpml-inactive-language-content-wrapper" class="wpml-section-content-inner">
 							<?php
 							$render_inactive_content = new WPML_Inactive_Content_Render(
 								$inactive_content,
@@ -314,7 +316,7 @@ $resource( [
 								?>
 								<li>
 									<label>
-										<input type="radio" name="icl_language_negotiation_type" value="1" <?php checked( 1 == $language_negotiation_type ); ?> />
+										<input class="wpml-radio-native" type="radio" name="icl_language_negotiation_type" value="1" <?php checked( 1 == $language_negotiation_type ); ?> />
 										<?php esc_html_e( 'Different languages in directories', 'sitepress' ); ?>
 										<span class="explanation-text">
 										(
@@ -333,7 +335,7 @@ $resource( [
 										display:none;<?php endif; ?>" >
 										<p class="sub-section">
 											<label>
-												<input type="checkbox" name="use_directory" id="icl_use_directory" value="1"
+												<input class="wpml-checkbox-native" type="checkbox" name="use_directory" id="icl_use_directory" value="1"
 													<?php checked( ! empty( $setting_urls['directory_for_default_language'] ) ); ?> />
 												<?php esc_html_e( 'Use directory for default language', 'sitepress' ); ?>
 											</label>
@@ -352,6 +354,11 @@ $resource( [
 												<li>
 													<label for="wpml_show_on_root_html_file">
 														<input id="wpml_show_on_root_html_file" type="radio" name="show_on_root"
+															<?php if($setting_urls['show_on_root'] === 'html_file'):?>
+																class="wpml-radio-native active"
+															<?php else:?>
+																class="wpml-radio-native"
+															<?php endif;?>
 															   value="html_file" <?php checked( 'html_file' === $setting_urls['show_on_root'] ); ?> />
 														<?php esc_html_e( 'HTML file', 'sitepress' ); ?> &ndash;
 														<span class="explanation-text">
@@ -369,6 +376,12 @@ $resource( [
 												<li>
 													<label>
 														<input id="wpml_show_on_root_page" type="radio" name="show_on_root" value="page"
+	                                                      <?php if($setting_urls['show_on_root'] === 'page'):?>
+		                                                    class="wpml-radio-native active"
+	                                                      <?php else:?>
+		                                                    class="wpml-radio-native"
+	                                                      <?php endif;?>
+
 														   <?php checked( 'page' === $setting_urls['show_on_root'] ); ?>
 														   <?php
 															if ( $setting_urls['show_on_root'] === 'page' ) :
@@ -409,7 +422,7 @@ $resource( [
 															?>
 															style="display:none"<?php endif; ?>>
 														  <label>
-															  <input type="checkbox" name="hide_language_switchers" id="icl_hide_language_switchers"
+															  <input class="wpml-checkbox-native" type="checkbox" name="hide_language_switchers" id="icl_hide_language_switchers"
 																	 value="1" <?php checked( $setting_urls['hide_language_switchers'] ); ?> />
 															  <?php esc_html_e( 'Hide language switchers on the root page', 'sitepress' ); ?>
 														  </label>
@@ -438,7 +451,7 @@ $resource( [
 										<ul>
 											<li>
                                                 <?php esc_html_e( "Your server settings do not allow for languages in directories.", 'sitepress' ); ?>
-                                                <a href="https://wpml.org/documentation/getting-started-guide/language-setup/cannot-activate-language-directories/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore"><?php esc_html_e( 'Learn more about the required server settings.', 'sitepress'); ?></a>
+                                                <a href="https://wpml.org/documentation/getting-started-guide/language-setup/language-url-options/cannot-activate-language-directories/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore"><?php esc_html_e( 'Learn more about the required server settings.', 'sitepress'); ?></a>
                                             </li>
 											<li><?php esc_html_e( 'URL rewriting is not enabled in your web server.', 'sitepress' ); ?></li>
 											<li><?php esc_html_e( 'The web server cannot write to the .htaccess file', 'sitepress' ); ?></li>
@@ -456,8 +469,8 @@ $resource( [
 								}
 								?>
 								<li>
-									<label>
-										<input <?php echo $icl_lnt_disabled; ?>id="icl_lnt_domains" type="radio" name="icl_language_negotiation_type"
+									<label for="icl_lnt_domains">
+										<input <?php echo $icl_lnt_disabled; ?>id="icl_lnt_domains" type="radio" class="wpml-radio-native" name="icl_language_negotiation_type"
 											   value="2" <?php checked( 2 == $language_negotiation_type ); ?> />
 										<?php esc_html_e( 'A different domain per language', 'sitepress' ); ?>
 										<?php if ( $icl_lnt_disabled ) : ?>
@@ -486,7 +499,7 @@ $resource( [
 										<p><?php esc_html_e( 'Pass session arguments between domains through the language switcher', 'sitepress' ); ?></p>
 										<p>
 											<label>
-												<input type="radio" name="icl_xdomain_data"
+												<input class="wpml-radio-native" type="radio" name="icl_xdomain_data"
 													   value="<?php echo WPML_XDOMAIN_DATA_GET; ?>"
 													   <?php checked( WPML_XDOMAIN_DATA_GET === (int) $sitepress_settings['xdomain_data'] ); ?>/>
 												<?php esc_html_e( 'Pass arguments via GET (the url)', 'sitepress' ); ?>
@@ -494,7 +507,7 @@ $resource( [
 										</p>
 										<p>
 											<label>
-												<input type="radio" name="icl_xdomain_data"
+												<input class="wpml-radio-native" type="radio" name="icl_xdomain_data"
 													   value="<?php echo WPML_XDOMAIN_DATA_POST; ?>"
 													   <?php checked( WPML_XDOMAIN_DATA_POST === (int) $sitepress_settings['xdomain_data'] ); ?>/>
 												<?php esc_html_e( 'Pass arguments via POST', 'sitepress' ); ?>
@@ -502,7 +515,7 @@ $resource( [
 										</p>
 										<p>
 											<label>
-												<input type="radio" name="icl_xdomain_data"
+												<input class="wpml-radio-native" type="radio" name="icl_xdomain_data"
 													   value="<?php echo WPML_XDOMAIN_DATA_OFF; ?>"
 													   <?php checked( WPML_XDOMAIN_DATA_OFF === (int) $sitepress_settings['xdomain_data'] ); ?>/>
 												<?php esc_html_e( 'Disable this feature', 'sitepress' ); ?>
@@ -531,7 +544,7 @@ $resource( [
 								</li>
 								<li>
 									<label>
-										<input type="radio" name="icl_language_negotiation_type" value="3" <?php checked( 3 == $language_negotiation_type ); ?> />
+										<input type="radio" class="wpml-radio-native" name="icl_language_negotiation_type" value="3" <?php checked( 3 == $language_negotiation_type ); ?> />
 										<?php esc_html_e( 'Language name added as a parameter', 'sitepress' ); ?>
 										<span class="explanation-text">
 											<?php echo sprintf( '(%s?lang=%s - %s)', get_home_url(), esc_html( $sample_lang['code'] ), esc_html( $sample_lang['display_name'] ) ); ?>
@@ -543,7 +556,7 @@ $resource( [
 							<div class="wpml-form-errors icl_form_errors" style="display: none;"></div>
 							<p class="buttons-wrap">
 								<span class="icl_ajx_response" id="icl_ajx_response2"></span>
-								<input class="button button-primary" name="save" value="<?php esc_html_e( 'Save', 'sitepress' ); ?>" type="submit" />
+								<input class="button-primary wpml-button base-btn" name="save" value="<?php esc_html_e( 'Save', 'sitepress' ); ?>" type="submit" />
 							</p>
 						</form>
 					</div>
@@ -608,7 +621,7 @@ $resource( [
 						<p><?php printf( __( 'Each user can choose the admin language. You can edit your language preferences by visiting your <a href="%s">profile page</a>.', 'sitepress' ), 'profile.php#wpml' ); ?></p>
 						<p class="buttons-wrap">
 							<span class="icl_ajx_response" id="icl_ajx_response_al"></span>
-							<input class="button button-primary" name="save" value="<?php esc_html_e( 'Save', 'sitepress' ); ?>" type="submit" />
+							<input class="button-primary wpml-button base-btn" name="save" value="<?php esc_html_e( 'Save', 'sitepress' ); ?>" type="submit" />
 						</p>
 					</form>
 				</div>
@@ -632,7 +645,7 @@ $resource( [
 							?>
 							<p>
 								<label>
-									<input type="checkbox" name="icl_hidden_languages[]" value="<?php echo esc_attr( $l['code'] ); ?>"
+									<input class="wpml-checkbox-native" type="checkbox" name="icl_hidden_languages[]" value="<?php echo esc_attr( $l['code'] ); ?>"
 										<?php checked( ! empty( $hidden_languages ) && in_array( $l['code'], $hidden_languages ) ); ?>  />
 									<?php echo esc_html( $l['display_name'] ); ?>
 								</label>
@@ -671,7 +684,7 @@ $resource( [
 						</p>
 						<p class="buttons-wrap">
 							<span class="icl_ajx_response" id="icl_ajx_response_hl"></span>
-							<input class="button button-primary" name="save" value="<?php esc_attr_e( 'Save', 'sitepress' ); ?>" type="submit" />
+							<input class="button-primary wpml-button base-btn" name="save" value="<?php esc_attr_e( 'Save', 'sitepress' ); ?>" type="submit" />
 						</p>
 					</form>
 				</div>
@@ -687,13 +700,13 @@ $resource( [
 							<p><?php esc_html_e( 'This feature turns themes into multilingual, without having to edit their PHP files.', 'sitepress' ); ?></p>
 							<p>
 								<label>
-									<input type="checkbox" value="1" name="icl_adjust_ids" <?php checked( $sitepress->get_setting( 'auto_adjust_ids' ) ); ?> />
+									<input class="wpml-checkbox-native" type="checkbox" value="1" name="icl_adjust_ids" <?php checked( $sitepress->get_setting( 'auto_adjust_ids' ) ); ?> />
 									<?php esc_html_e( 'Adjust IDs for multilingual functionality', 'sitepress' ); ?>
 								</label>
 							</p>
 							<p class="buttons-wrap">
 								<span class="icl_ajx_response" id="icl_ajx_response_ai"></span>
-								<input class="button button-primary" name="save" value="<?php esc_attr_e( 'Save', 'sitepress' ); ?>" type="submit" />
+								<input class="button-primary wpml-button base-btn" name="save" value="<?php esc_attr_e( 'Save', 'sitepress' ); ?>" type="submit" />
 							</p>
 						</form>
 				</div>
@@ -710,15 +723,15 @@ $resource( [
 						<?php wp_nonce_field( 'icl_automatic_redirect_nonce', '_icl_nonce' ); ?>
 						<ul>
 							<li><label>
-								<input type="radio" value="0" name="icl_automatic_redirect" <?php checked( empty( $automatic_redirect ) ); ?> />
+								<input class="wpml-radio-native" type="radio" value="0" name="icl_automatic_redirect" <?php checked( empty( $automatic_redirect ) ); ?> />
 								<?php esc_html_e( 'Disable browser language redirect', 'sitepress' ); ?>
 							</label></li>
 							<li><label>
-									<input type="radio" value="1" name="icl_automatic_redirect" <?php checked( 1, $automatic_redirect ); ?> />
+									<input type="radio" class="wpml-radio-native" value="1" name="icl_automatic_redirect" <?php checked( 1, $automatic_redirect ); ?> />
 								<?php esc_html_e( 'Redirect visitors based on browser language only if translations exist', 'sitepress' ); ?>
 							</label></li>
 							<li><label>
-									<input type="radio" value="2" name="icl_automatic_redirect" <?php checked( 2, $automatic_redirect ); ?> />
+									<input type="radio" class="wpml-radio-native" value="2" name="icl_automatic_redirect" <?php checked( 2, $automatic_redirect ); ?> />
 								<?php esc_html_e( 'Always redirect visitors based on browser language (redirect to home page if translations are missing)', 'sitepress' ); ?>
 							</label></li>
 						</ul>
@@ -756,7 +769,7 @@ $resource( [
 						</div>
 						<p class="buttons-wrap">
 							<span class="icl_ajx_response" id="icl_ajx_response_ar"></span>
-							<input class="button button-primary" name="save" value="<?php esc_attr_e( 'Save', 'sitepress' ); ?>" type="submit" />
+							<input class="button-primary wpml-button base-btn" name="save" value="<?php esc_attr_e( 'Save', 'sitepress' ); ?>" type="submit" />
 						</p>
 					</form>
 				</div>
@@ -796,13 +809,13 @@ $resource( [
             <form id="icl_promote_form" name="icl_promote_form" action="">
 				<?php wp_nonce_field( 'icl_promote_form_nonce', '_icl_nonce' ); ?>
                 <p>
-                    <label><input type="checkbox" name="icl_promote" <?php checked( $sitepress->get_setting( 'promote_wpml' ) ) ?> value="1"/>
+                    <label><input type="checkbox" class="wpml-checkbox-native" name="icl_promote" <?php checked( $sitepress->get_setting( 'promote_wpml' ) ) ?> value="1"/>
 						<?php printf( __( "Tell the world your site is running multilingual with WPML (places a message in your site's footer) - <a href=\"%s\">read more</a>", 'sitepress' ), 'https://wpml.org/?page_id=4560' ); ?>
                     </label>
                 </p>
                 <p class="buttons-wrap">
                     <span class="icl_ajx_response" id="icl_ajx_response_lv"></span>
-                    <input class="button button-primary" name="save" value="<?php esc_attr_e( 'Save', 'sitepress' ) ?>" type="submit"/>
+                    <input class="button-primary wpml-button base-btn" name="save" value="<?php esc_attr_e( 'Save', 'sitepress' ) ?>" type="submit"/>
                 </p>
             </form>
         </div>

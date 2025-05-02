@@ -41,7 +41,7 @@ class WPML_TM_ICL20_Migration_Notices {
 			if ( ! $ever_started
 				 && $requires_migration
 				 && ! $this->progress->is_migration_incomplete() ) {
-				$this->build_migration_required();
+				add_action( 'init', array( $this, 'build_migration_required' ) );
 				add_action( 'wpml-notices-scripts-enqueued', array( $this, 'admin_enqueue_scripts' ) );
 
 				return;

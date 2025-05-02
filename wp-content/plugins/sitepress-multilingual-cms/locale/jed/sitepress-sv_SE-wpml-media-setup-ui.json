@@ -6,10 +6,10 @@
             "domain": "messages"
          },
          "But...": [
-            "Men ..."
+            "Men..."
          ],
          "Wait to translate any content that contains media until we're finished configuring it. It will be just a moment.": [
-            "Vänta med att översätta innehåll som innehåller media tills vi är klara med konfigureringen av det. Det tar bara ett ögonblick."
+            "Vänta med att översätta innehåll med media tills vi är klara."
          ]
       }
    }

@@ -7,6 +7,9 @@ use WPML\ST\Gettext\Settings;
 
 class StringHighlighting implements IFilter {
 
+	const HIGHLIGHT_ID_TO_REPLACE_IN_HTML_START = 'WPMLHIGHLIGHTSTRINGSTART';
+	const HIGHLIGHT_ID_TO_REPLACE_IN_HTML_END = 'WPMLHIGHLIGHTSTRINGEND';
+
 	/** @var Settings $settings */
 	private $settings;
 
@@ -28,11 +31,9 @@ class StringHighlighting implements IFilter {
 		}
 
 		if ( $this->isHighlighting( $domain, $text ) ) {
-			$translation = '<span style="background-color:'
-						   . esc_attr( $this->settings->getTrackStringColor() )
-						   . '">'
-						   . $translation
-						   . '</span>';
+			$translation = self::HIGHLIGHT_ID_TO_REPLACE_IN_HTML_START
+				. $translation
+				. self::HIGHLIGHT_ID_TO_REPLACE_IN_HTML_END;
 		}
 
 		return $translation;

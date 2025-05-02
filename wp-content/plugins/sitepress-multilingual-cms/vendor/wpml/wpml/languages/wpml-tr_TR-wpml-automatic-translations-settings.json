@@ -1,0 +1,172 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Could not fetch engines data": [
+            "Motor verileri alınamadı"
+         ],
+         "Could not save settings": [
+            "Ayarlar kaydedilemedi"
+         ],
+         "Automatic translation": [
+            "Otomatik çeviri"
+         ],
+         "Saving...": [
+            "Kaydediliyor..."
+         ],
+         "Save settings": [
+            "Ayarları kaydet"
+         ],
+         "Settings saved": [
+            "Ayarlar kaydedildi"
+         ],
+         "Some error occurred": [
+            "Bir hata oluştu"
+         ],
+         "Loading...": [
+            "Yükleniyor..."
+         ],
+         "Failed to load engines": [
+            "Motorlar yüklenemedi"
+         ],
+         "Drag your default engine to the top and order the rest by priority.": [
+            "Varsayılan motorunuzu en üste sürükleyin ve diğerlerini öncelik sırasına göre düzenleyin."
+         ],
+         "Which translation engines do you want to use?": [
+            "Hangi çeviri motorlarını kullanmak istiyorsunuz?"
+         ],
+         "Automatic translation engines differ in translation style and supported language pairs. If your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it.": [
+            "Otomatik çeviri motorları, çeviri tarzı ve desteklenen dil çiftleri bakımından farklılık gösterir. Tercih ettiğiniz çeviri motoru, kullanmak istediğiniz bir dil çiftini desteklemiyorsa, destekleyen bir sonraki tercih ettiğiniz motora geçiş yaparız."
+         ],
+         "WPML AI (beta) automatically detects the formality of your content and translates with the same formality.": [
+            "WPML AI (beta) içeriğinizin resmiyetini otomatik olarak algılar ve aynı resmiyetle çeviri yapar."
+         ],
+         "Auto-formality": [
+            "Otomatik resmiyet"
+         ],
+         "Choose the tone of automatic translations for %s": [
+            "%s için otomatik çevirilerin tonunu seçin"
+         ],
+         "Your site doesn't use languages that offer formality settings.": [
+            "Siteniz resmiyet ayarları sunan dilleri kullanmıyor."
+         ],
+         "Edit formality": [
+            "Resmiyeti düzenle"
+         ],
+         "%d credits per word": [
+            "Kelime başına %d kredi"
+         ],
+         "Backup %d": [
+            "%d Yedekleme"
+         ],
+         "Default": [
+            "Varsayılan"
+         ],
+         "ON": [
+            "AÇIK"
+         ],
+         "OFF": [
+            "KAPALI"
+         ],
+         "Documentation": [
+            "Dokümantasyon"
+         ],
+         "DeepL's formality and how it helps get good translations": [
+            "DeepL'in resmiyeti ve iyi çeviriler elde etmeye nasıl yardımcı olduğu"
+         ],
+         "Edit button": [
+            "Düzenle butonu"
+         ],
+         "Examples for %s": [
+            "%s için örnekler"
+         ],
+         "For example:": [
+            "Örneğin:"
+         ],
+         "Formality settings for %s": [
+            "%s için resmiyet ayarları"
+         ],
+         "Formality level for %s": [
+            "%s için resmiyet seviyesi"
+         ],
+         "Set formality for %s": [
+            "%s için resmiyeti ayarlayın"
+         ],
+         "%d of your target languages can be translated using either a formal or informal tone.\n The tone which gives the best translation for each language is set by default.": [
+            "Hedef dillerinizin %d'i resmi veya gayri resmi bir tonla çevrilebilir.\n Her dil için en iyi çeviriyi veren ton varsayılan olarak ayarlanmıştır."
+         ],
+         "%s doesn't yet support formality options for %s.": [
+            "%s, %s için henüz resmiyet seçeneklerini desteklemiyor."
+         ],
+         "Cancel": [
+            "İptal"
+         ],
+         "Update": [
+            "Güncelle"
+         ],
+         "Formal": [
+            "Resmi"
+         ],
+         "Informal": [
+            "Gayri resmi"
+         ],
+         "Don't translate drafts. Only translate when I publish content.": [
+            "Taslakları tercüme etmeyin. Yalnızca içeriği yayınladığımda tercüme edin."
+         ],
+         "Translate drafts as I save them (consumes a bit more translation credits).": [
+            "Taslakları kaydettiğim anda tercüme edin (biraz daha fazla tercüme kredisi tüketir)."
+         ],
+         "Do you want to translate drafts automatically?": [
+            "Taslakları otomatik olarak çevirmek istiyor musunuz?"
+         ],
+         "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s.": [
+            "Bu özellik yalnızca %sTercüme Kontrol Paneli%s'nden “Her Şeyi Otomatik Olarak Tercüme Et” seçeneğini etkinleştirdiğinizde kullanılabilir."
+         ],
+         "Close modal": [
+            "Modalı kapat"
+         ],
+         "What would you like to do after WPML finishes translating your content automatically?": [
+            "WPML içeriğinizi otomatik olarak çevirmeyi bitirdikten sonra ne yapmak istersiniz?"
+         ],
+         "Wait for review": [
+            "İnceleme için bekle"
+         ],
+         "Recommended with DeepL, Google and Microsoft": [
+            "DeepL, Google ve Microsoft ile tavsiye edilir"
+         ],
+         "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process.": [
+            "DeepL, Google ve Microsoft mükemmel çeviriler sunmaktadır, ancak doğru olduklarını teyit etmek için insan tarafından gözden geçirilmesini tavsiye etmekteyiz. WPML AI, bağlamı anlayan ve İnsan Çevirisinden Daha İyi Çeviriler sunmakta olup, bu sayede gözden geçirme sürecini güvenle atlayabilirsiniz."
+         ],
+         "WPML keeps translations unpublished, so you can review them first.": [
+            "WPML çevirileri yayınlanmamış olarak tutar, böylece önce onları inceleyebilirsiniz."
+         ],
+         "Your translators review and approve translations before publishing.": [
+            "Çevirmenleriniz yayınlamadan önce çevirileri inceler ve onaylar."
+         ],
+         "Publish and mark for review": [
+            "Yayınla ve inceleme için işaretle"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "WPML çevirileri hemen yayınlar ancak size uygun olduğunda kontrol etmeniz için işaretler."
+         ],
+         "WPML publishes translations immediately but flags them for translators to review later.": [
+            "WPML çevirileri hemen yayınlar ancak çevirmenlerin daha sonra incelemesi için işaretler."
+         ],
+         "Publish without review": [
+            "İnceleme olmadan yayınla"
+         ],
+         "Recommended with WPML AI": [
+            "WPML AI ile önerilir"
+         ],
+         "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy.": [
+            "WPML AI nadiren iyileştirme gerektiren İnsandan Daha İyi Çeviriler sağlar, böylece inceleme sürecini güvenle atlayabilirsiniz. Diğer çeviri motorları için, doğruluğu onaylamak üzere insan incelemesi önerilir."
+         ],
+         "WPML publishes translations immediately, skipping the review process.": [
+            "WPML çevirileri inceleme sürecini atlayarak hemen yayınlar."
+         ]
+      }
+   }
+}

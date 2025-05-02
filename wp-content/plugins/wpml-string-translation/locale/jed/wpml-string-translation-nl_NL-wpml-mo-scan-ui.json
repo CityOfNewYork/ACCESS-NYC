@@ -1,0 +1,97 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "WPML has detected changed or new MO files": [
+            "WPML heeft gewijzigde of nieuwe MO-BESTANDEN gedetecteerd"
+         ],
+         "There are new or updated .mo files. WPML needs to scan them to find strings for translation.": [
+            "Er zijn nieuwe of bijgewerkte .mo-bestanden. WPML moet ze scannen om strings voor vertaling te vinden."
+         ],
+         "Scan translation files": [
+            "Vertaalbestanden scannen"
+         ],
+         "Scanned %1$d of %2$d files...": [
+            "Gescande %1$d van %2$d bestanden..."
+         ],
+         "Generated files for %1$d of %2$d sites...": [
+            "Genereerde bestanden voor %1$d van %2$d sites..."
+         ],
+         "Generated %1$d of %2$d files...": [
+            "Genereerde %1$d van %2$d bestanden..."
+         ],
+         "WPML needs to generate .mo files": [
+            "WPML moet .mo-bestanden genereren"
+         ],
+         "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end. However, the folder that should hold these .mo files is not open for writing.": [
+            "WPML String Translation gebruikt .mo-bestanden in plaats van databaseaanroepen. WPML moet deze .mo-bestanden genereren om vertalingen op de voorkant te laten verschijnen. De map waarin deze .mo-bestanden zouden moeten staan, is echter niet open om te schrijven."
+         ],
+         "Please use your admin control panel or an FTP program to make the following folder writeable:": [
+            "Gebruik je beheerpaneel of een FTP-programma om de volgende map schrijfbaar te maken:"
+         ],
+         "There was a problem creating the .mo files": [
+            "Er is een probleem opgetreden bij het maken van de .mo-bestanden"
+         ],
+         "You can try again now or try again later by going to ": [
+            "Je kunt het nu opnieuw proberen of het later nog eens proberen door naar "
+         ],
+         "Translations are missing from the front-end until you generate .mo files": [
+            "Vertalingen ontbreken in de front-end totdat je .mo-bestanden genereert"
+         ],
+         "Your site doesn't have the .mo files that WPML needs in order to display translated strings on the front-end. To generate these .mo files, remember to go to ": [
+            "Je site heeft niet de .mo-bestanden die WPML nodig heeft om vertaalde strings weer te geven op de voorkant. Om deze .mo-bestanden te genereren, ga je naar "
+         ],
+         "WPML->Theme and plugins localization.": [
+            "WPML->Thema en plugins lokalisatie."
+         ],
+         "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end.": [
+            "WPML String Translation gebruikt .mo-bestanden in plaats van databaseaanroepen. WPML moet deze .mo-bestanden genereren om vertalingen op de voorkant te laten verschijnen."
+         ],
+         "Try again": [
+            "Probeer het opnieuw"
+         ],
+         "Generate .mo files": [
+            ".mo-bestanden genereren"
+         ],
+         "Close this message": [
+            "Sluit dit bericht"
+         ],
+         "Find additional texts that WordPress, the theme and plugins created and choose which ones to translate": [
+            "Zoek extra teksten die WordPress, het thema en de plugins hebben gemaakt en kies welke je wilt vertalen."
+         ],
+         "Choose texts for translation": [
+            "Kies teksten voor vertaling"
+         ],
+         "Some of the translations have changed": [
+            "Sommige vertalingen zijn veranderd"
+         ],
+         "Scan the selected components to make new texts available for translation.": [
+            "Scan de geselecteerde onderdelen om nieuwe teksten beschikbaar te maken voor vertaling."
+         ],
+         "Select all": [
+            "Alles selecteren"
+         ],
+         "Plugins:": [
+            "Plugins:"
+         ],
+         "Themes:": [
+            "Thema's:"
+         ],
+         "Core:": [
+            "Kern:"
+         ],
+         "Can't find the strings you're looking to translate?": [
+            "Kun je de strings die je wilt vertalen niet vinden?"
+         ],
+         "Most likely you cannot see the strings you want to translate because:": [
+            "Waarschijnlijk kun je de strings die je wilt vertalen niet zien omdat:"
+         ],
+         "Texts are not selected for translation": [
+            "Teksten worden niet geselecteerd voor vertaling"
+         ]
+      }
+   }
+}

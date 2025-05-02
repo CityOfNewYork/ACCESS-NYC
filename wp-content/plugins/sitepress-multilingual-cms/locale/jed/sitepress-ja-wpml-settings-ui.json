@@ -5,21 +5,6 @@
          "": {
             "domain": "messages"
          },
-         "You can choose which posts to translate from the <strong>Translation Management Dashboard</strong>.": [
-            "<strong>Translation Management ダッシュボード</strong>から翻訳する投稿を選択できます。"
-         ],
-         "Yes, translate <b>existing</b> and <b>future</b> content automatically": [
-            "はい、<b>既存</b>と<b>将来</b>のコンテンツを自動翻訳してください"
-         ],
-         "Yes, but only translate <b>future</b> content automatically": [
-            "はい、ただし<b>将来</b>のコンテンツのみ自動翻訳してください"
-         ],
-         "Yes, translate <b>future</b> content automatically": [
-            "はい、<b>将来</b>のコンテンツを自動翻訳してください"
-         ],
-         "No, I want to translate some of these posts, but not all": [
-            "いいえ、投稿の一部は翻訳しますが、全ては翻訳しません"
-         ],
          "You must use the Advanced Translation Editor if you want to translate your content automatically.": [
             "コンテンツを自動翻訳するには、アドバンス翻訳エディターを使用する必要があります。"
          ],
@@ -28,6 +13,19 @@
          ],
          "Please try again in a few minutes. If the problem persists, please contact %sWPML support%s.": [
             "数分後に再度お試しください。問題が続くようなら、%sWPMLサポート%sにお問い合わせください。"
+         ],
+         "Save": [
+            "保存"
+         ],
+         "Please confirm this translation setting": [
+            "この翻訳設定を確認してください"
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item.": [
+            "あなたのサイトはすべてのコンテンツを自動的に翻訳するように設定されています。<PostTypesNames /> を翻訳可能にすると、WPML は%1$d 既存の項目を自動的に翻訳します。",
+            "あなたのサイトはすべてのコンテンツを自動的に翻訳するように設定されています。<PostTypesNames /> を翻訳可能にすると、WPML は%1$d の既存項目を自動的に翻訳します。"
+         ],
+         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate all future content.": [
+            "あなたのサイトは全てのコンテンツを自動翻訳するように設定されています。<PostTypesNames /> を翻訳可能にするとき、WPMLは将来の全てのアイテムを自動翻訳します。"
          ],
          "Are you OK with paying for this?": [
             "この購入を続けますか？"
@@ -38,18 +36,14 @@
          "Make translatable": [
             "翻訳可能にする"
          ],
-         "Save": [
-            "保存"
+         "Yes, translate <b>existing</b> and <b>future</b> content automatically": [
+            "はい、<b>既存</b>と<b>将来</b>のコンテンツを自動翻訳してください"
          ],
-         "Please confirm this translation setting": [
-            "この翻訳設定を確認してください"
+         "Yes, but only translate <b>future</b> content automatically": [
+            "はい、ただし<b>将来</b>のコンテンツのみ自動翻訳してください"
          ],
-         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate the %1$d existing item.": [
-            "あなたのサイトは全てのコンテンツを自動翻訳するように設定されています。<PostTypesNames /> を翻訳可能にするとき、WPMLは %1$d 既存アイテムを自動翻訳します。",
-            "あなたのサイトは全てのコンテンツを自動翻訳するように設定されています。<PostTypesNames /> を翻訳可能にするとき、WPMLは %1$d 既存アイテムを自動翻訳します。"
-         ],
-         "Your site is set to translate all content automatically. When you make <PostTypesNames /> translatable, WPML will automatically translate all future content.": [
-            "あなたのサイトは全てのコンテンツを自動翻訳するように設定されています。<PostTypesNames /> を翻訳可能にするとき、WPMLは将来の全てのアイテムを自動翻訳します。"
+         "Yes, translate <b>future</b> content automatically": [
+            "はい、<b>将来</b>のコンテンツを自動翻訳してください"
          ]
       }
    }

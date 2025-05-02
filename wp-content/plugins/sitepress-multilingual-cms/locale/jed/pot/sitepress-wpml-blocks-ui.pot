@@ -125,7 +125,7 @@ msgstr ""
 msgid "Orientation"
 msgstr ""
 
-#: src/js/blocks/LanguageSwitcher/Components/Typography/Control.js:127
+#: src/js/blocks/LanguageSwitcher/Components/Typography/Control.js:160
 msgid "Typography"
 msgstr ""
 

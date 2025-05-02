@@ -1,0 +1,840 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\\nContent-Transfer-Encoding: 8bit"
+"\\nProject-Id-Version:WPML_EXPORT\\nPOT-Creation-Date: \\nPO-Revision-Date: "
+"\\nLast-Translator: \\nLanguage-Team: \\nLanguage:en\\nMIME-Version: 1.0\\n"
+
+msgid " They were added to the string translation table."
+msgstr " Foram adicionados à tabela do String Translation."
+
+msgid "%d new translation was added."
+msgstr "%d nova tradução foi adicionada."
+
+msgid "%d new translations were added."
+msgstr "%d novas traduções foram adicionadas."
+
+msgid "%d translation was updated."
+msgstr "%d tradução foi atualizada."
+
+msgid "%d translations were updated."
+msgstr "%d traduções foram atualizadas."
+
+msgid ""
+"%s slugs are set to be translated, but they are missing their translation"
+msgstr ""
+"os slugs %s estão prontos para serem traduzidos, mas as respetivas traduçõ"
+"es estão em falta"
+
+msgid "(original)"
+msgstr "(original)"
+
+msgid ""
+"* This feature is only intended for sites that are in development. It will "
+"significantly slow down the site, but help you find strings that WPML cannot "
+"detect in the PHP code."
+msgstr ""
+"* Esta funcionalidade destina-se apenas a websites em desenvolvimento. Torna "
+"o website significativamente mais lento, mas ajuda-o a encontrar strings que "
+"o WPML não consegue detetar no código PHP."
+
+msgid "-- Please select --"
+msgstr "-- Seleccionar --"
+
+msgid ".po file:"
+msgstr "ficheiro .po:"
+
+msgid "Active"
+msgstr "Activo"
+
+msgid "Add selected strings"
+msgstr "Adicionar as strings seleccionadas"
+
+msgid "Add the new translations."
+msgstr "Adicionar as novas traduções."
+
+msgid "Admin Texts Translation"
+msgstr "Tradução de textos de administração"
+
+msgid "All"
+msgstr "Todos"
+
+msgid "All Translation Priorities"
+msgstr "Todas as Prioridades da Tradução"
+
+msgid "All domains"
+msgstr "Todos os domínios "
+
+msgid "All strings"
+msgstr "Todas as strings"
+
+msgid "All strings in %s"
+msgstr "Todas as strings em %s"
+
+msgid "Also create translations according to the .po file"
+msgstr "Criar também traduções de acordo com o ficheiro .po"
+
+msgid "Also include translations"
+msgstr "Incluir também traduções"
+
+msgid "Also prevent similar messages in the future?"
+msgstr "Então, prevenir mensagens semelhantes no futuro?"
+
+msgid "Apply"
+msgstr "Candidatar"
+
+msgid ""
+"Are you sure you want to delete these packages?\\nTheir strings and "
+"translations will be deleted too."
+msgstr ""
+"Tem a certeza que pretende apagar estes pacotes?\\nOs seus textos e traduçõ"
+"es também serão apagados."
+
+msgid ""
+"Are you sure you want to delete these strings?\\nTheir translations will be "
+"deleted too."
+msgstr ""
+"Tem a certeza de que quer apagar estas strings?\\nAs suas traduções també"
+"m será apagadas."
+
+msgid "Auto register strings for translation"
+msgstr "Auto registar strings para tradução"
+
+msgid "Auto-download WordPress translations"
+msgstr "Descarregar as traduções do WordPress automaticamente"
+
+msgid "Auto-register strings from these text domains"
+msgstr "Auto-registar textos destes domínios de texto"
+
+msgid ""
+"Automatic string registration will remain active for %s. Please visit the "
+"site's front-end to allow WPML to find strings for translation."
+msgstr ""
+"O registo automático de strings permanecerá ativo durante %s. Visite o "
+"frontend do website para permitir que o WPML encontre strings para traduçã"
+"o."
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Change the language of selected strings"
+msgstr "Alterar o idioma dos textos seleccionados"
+
+msgid "Change translation priority of selected strings"
+msgstr "Alterar a prioridade de tradução das strings selecionadas"
+
+msgid "Check other languages"
+msgstr "Verificar outros idiomas"
+
+msgid "Cleanup and optimization completed!"
+msgstr "Limpeza e otimização concluída!"
+
+msgid "Cleanup and optimize string tables"
+msgstr "Limpar e otimizar tabelas de strings"
+
+msgid "Click to toggle"
+msgstr "Pressione para identificar"
+
+msgid "Close"
+msgstr "Fechar"
+
+msgid "Complete"
+msgstr "Completo"
+
+msgid "Completely translated strings"
+msgstr "Strings completamente traduzidas"
+
+msgid "Configure"
+msgstr "Configurar"
+
+msgid "Contains %s strings"
+msgstr "Contém %s textos"
+
+msgid "Context"
+msgstr "Contexto"
+
+msgid "Current source language"
+msgstr "Idioma de origem actual"
+
+msgid "Default package language"
+msgstr "Idioma do pacote padrão"
+
+msgid "Delete Selected Packages"
+msgstr "Apagar Pacotes Selecionados"
+
+msgid "Delete selected strings"
+msgstr "Apagar strings seleccionadas"
+
+msgid "Dismiss all notices"
+msgstr "Desativar todos os avisos"
+
+msgid "Display %d results per page"
+msgstr "Apresentar %d resultados por página"
+
+msgid "Display all results"
+msgstr "Apresentar todos os resultados"
+
+msgid "Display packages for this kind:"
+msgstr "Mostrar pacotes deste tipo:"
+
+msgid "Display:"
+msgstr "Mostrar:"
+
+msgid "Displaying %1$s&#8211;%2$s of %3$s"
+msgstr "A mostrar %1$s&#8211;%2$s de %3$s"
+
+msgid "Domain"
+msgstr "Domínio"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Error: please try again"
+msgstr "Erro: tente novamente"
+
+msgid "Errors: %s"
+msgstr "Erros: %s"
+
+msgid "Exact match"
+msgstr "Coincidência exacta"
+
+msgid "Existing translation"
+msgstr "Tradução existente"
+
+msgid "Exit search"
+msgstr "Sair de procura"
+
+msgid "Export strings into .po/.pot file"
+msgstr "Exportar strings para ficheiro .po/.pot"
+
+msgid "Failed downloading the language information file."
+msgstr "Falha ao descarregar o ficheiro de informações linguísticas."
+
+msgid ""
+"Failed downloading the language information file. Please go back and try a "
+"little later."
+msgstr ""
+"Falha ao baixar o ficheiro com informações sobre idiomas. Por favor, volte "
+"a tentar um pouco mais tarde."
+
+msgid "File upload error"
+msgstr "Erro de carregamento de ficheiro"
+
+msgid "Files already scanned."
+msgstr "Pesquisa efetuada nos ficheiros"
+
+msgid "For more details, see %s."
+msgstr "Para mais informações, consulte %s."
+
+msgid "Highlight color for strings"
+msgstr "Realçar cor nas strings"
+
+msgid "Import"
+msgstr "Importar"
+
+msgid "Import / export .po"
+msgstr "Importar / exportar .po"
+
+msgid "In domain:"
+msgstr "No domínio:"
+
+msgid "In progress"
+msgstr "Em progresso"
+
+msgid "In translation basket"
+msgstr "no cesto de traduções"
+
+msgid "Inactive"
+msgstr "Inativo"
+
+msgid "Include translations"
+msgstr "Incluir traduções"
+
+msgid "Info"
+msgstr "Informação"
+
+msgid "Invalid language: %s"
+msgstr "Idioma inválido: %s"
+
+msgid "Invalid nonce"
+msgstr "Nonce inválido"
+
+msgid "Kind"
+msgstr "Tipo"
+
+msgid "Language of domains"
+msgstr "Idioma dos domínios "
+
+msgid "Language of this %1$s is %2$s"
+msgstr "O idioma deste %1$s é %2$s"
+
+msgid "Languages of domains"
+msgstr "Idiomas de domínios"
+
+msgid "Loaded"
+msgstr "Carregado(a)"
+
+msgid "Look for strings while pages are rendered"
+msgstr "Procurar strings enquanto as páginas são geradas"
+
+msgctxt "MO Import blocked 1/4"
+msgid "There is a problem with the String Translation table in your site."
+msgstr "Ocorreu um erro na tabela de Tradução de String no seu website."
+
+msgctxt "MO Import blocked 2/4"
+msgid ""
+"This problem is not causing a problem running the site right now, but can "
+"become a critical issue in the future."
+msgstr ""
+"De momento este problema não está a causar nenhum impacto na performance "
+"do website, mas pode tornar-se num problema critico no futuro."
+
+msgctxt "MO Import blocked 3/4"
+msgid "WPML support team knows how to fix it."
+msgstr "A equipa de suporte do WPML sabe como corrigir."
+
+msgctxt "MO Import blocked 4/4"
+msgid ""
+"Please add a message in the relevant <a href=\"%s\" target=\"_blank"
+"\">support thread</a> and we'll fix it for you."
+msgstr ""
+"Adicione uma mensagem no <a href=\"%s\" target=\"_blank\">tema de suporte</"
+"a> relevante e será resolvido por nós."
+
+msgctxt "MO Import blocked short 1/3"
+msgid ""
+"WPML cannot replace .mo files because of technical problems in the String "
+"Translation table."
+msgstr ""
+"Os ficheiros .mo não podem ser substituídos pelo WPML devido a problemas "
+"técnicos na tabela de Tradução de Strings."
+
+msgctxt "MO Import blocked short 2/3"
+msgid "WPML support team knows how to fix it."
+msgstr "A equipa de suporte do WPML sabe como corrigir."
+
+msgctxt "MO Import blocked short 3/3"
+msgid ""
+"Please add a message in the relevant <a href=\"%s\" target=\"_blank\" "
+">support thread</a> and we'll fix it for you."
+msgstr ""
+"Adicione uma mensagem ao <a href=\"%s\" target=\"_blank\" >tema de suporte</"
+"a> relevante e será corrigido por nós."
+
+msgid "Missing parameters"
+msgstr "Parâmetros em falta"
+
+msgid "Missing version number for translation."
+msgstr "Número da versão em falta para a tradução."
+
+msgid "More options"
+msgstr "Mais opções"
+
+msgid "Multibyte String extension"
+msgstr "Extensão da Cadeia Multibyte"
+
+msgid "Multibyte String extension is required for WPML String Translation."
+msgstr "É necessário uma Cadeia Multibyte para o WPML String Translation."
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "Name: %s"
+msgstr "Nome: %s"
+
+msgid "Needs update"
+msgstr "Necessita actualização"
+
+msgid "New translation"
+msgstr "Nova tradução"
+
+msgid "New translations (%d)"
+msgstr "Novas traduções (%d)"
+
+msgid "No - keep showing these message"
+msgstr "Não - continuar a mostrar estas mensagens"
+
+msgid "No TextDomain"
+msgstr "Nenhum Domínio de Texto"
+
+msgid ""
+"No action performed. Please select the strings that you need to update or "
+"add."
+msgstr ""
+"Nenhuma ação executada. Por favor, selecione as strings que precisa de "
+"atualizar ou adicionar."
+
+msgid "No packages found"
+msgstr "Sem pacotes encontrados"
+
+msgid "No records found"
+msgstr "Sem registos encontrados"
+
+msgid "No string found"
+msgstr "Nenhuma string encontrada"
+
+msgid "No strings found"
+msgstr "Nenhuma string encontrada"
+
+msgid "No updates found."
+msgstr "Nenhuma atualização encontrada."
+
+msgid "Nonce value is invalid"
+msgstr "Valor Nonce é inválido"
+
+msgid "Not loaded"
+msgstr "Não carregado(a)"
+
+msgid "Not marked as 'complete'. Press 'Save' to enable."
+msgstr "Não assinalado como 'completo'. Para ativar, carregue em 'Guardar'."
+
+msgid "Not translated"
+msgstr "Não traduzido"
+
+msgid "Number of strings"
+msgstr "Número de textos"
+
+msgid "PO export may be glitchy. We are working to fix it."
+msgstr ""
+"A exportação de PO pode não correr bem. Estamos a trabalhar para corrigir "
+"esta falha."
+
+msgid "Package Management"
+msgstr "Gestão de Pacote"
+
+msgid "Packages"
+msgstr "Pacotes"
+
+msgid "Partial Translation"
+msgstr "Tradução Parcial"
+
+msgid "Partial translation"
+msgstr "Tradução parcial"
+
+msgid "Performance considerations"
+msgstr "Considerações sobre o desempenho"
+
+msgid ""
+"Please activate WPML Multilingual CMS to have WPML String Translation "
+"working."
+msgstr ""
+"Ativar o WPML Multilingual CMS para que o WPML Tradução de Texto funcione."
+
+msgid "Please enter a domain!"
+msgstr "Por favor insira um domínio!"
+
+msgid "Please select at least one document to translate."
+msgstr "Por favor, seleccione, pelo menos, um documento a traduzir."
+
+msgid "Please select at least one language to translate into."
+msgstr "Seleccione, pelo menos, uma língua para traduzir"
+
+msgid "Please select the .po file to upload!"
+msgstr "Por favor, seleccione o ficheiro.po a carregar!"
+
+msgid "Plugin"
+msgstr "Plugin"
+
+msgid ""
+"Post \"%1$s\" will be ignored for %2$s, because translation is already in "
+"progress."
+msgstr ""
+"O artigo \"%1$s\" será ignorado para %2$s, porque a tradução já está a "
+"ser efetuada."
+
+msgid ""
+"Post \"%1$s\" will be ignored for %2$s, because translation is already "
+"waiting for translator."
+msgstr ""
+"O artigo \"%1$s\" será ignorado para %2$s, porque a tradução está a "
+"aguardar um tradutor."
+
+msgid "Proceed"
+msgstr "Continuar"
+
+msgid "Return to String Translation"
+msgstr "Voltar à tradução de String"
+
+msgid "Review changes and update"
+msgstr "Analisar as alterações e atualizar"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Scan selected plugins for strings"
+msgstr "Pesquisar strings nos plugins selecionados "
+
+msgid "Scan selected themes for strings"
+msgstr "Pesquisar strings nos temas selecionados"
+
+msgid "Scan successful! WPML found %s strings."
+msgstr "Pesquisa efetuada com sucesso! O WPML encontrou %s strings."
+
+msgid "Scanning file: %s"
+msgstr "A analisar o ficheiro: %s"
+
+msgid "Search"
+msgstr "Procurar"
+
+msgid "Search for:"
+msgstr "Procurar por:"
+
+msgid "Select All"
+msgstr "Selecionar Todos"
+
+msgid "Select all"
+msgstr "Seleccionar todas"
+
+msgid "Select domain:"
+msgstr "Seleccionar domínio:"
+
+msgid "Select for which domain to set the language: "
+msgstr "Seleccione para qual domínio deve ser definido o idioma:"
+
+msgid "Select what the strings are for:"
+msgstr "Seleccione para que são as strings:"
+
+msgid "Send to translation"
+msgstr "Enviar para tradução"
+
+msgid "Set different slugs in different languages for %s."
+msgstr "Definir slugs diferentes para diferentes idiomas para %s."
+
+msgid "Set the source language of these strings to:"
+msgstr "Definir o idioma de origem destes textos como:"
+
+msgid "Show custom MO Files Pre-generation dialog box"
+msgstr ""
+"Mostrar caixa de diálogo de pré-geração de ficheiros MO personalizados"
+
+msgid "Showing only strings that contain %s"
+msgstr "A apresentar apenas as strings que contêm %s"
+
+msgid "Skipping file: %s"
+msgstr "Excluindo o ficheiro: %s"
+
+msgid "Slug translations"
+msgstr "Traduções de Slug"
+
+msgid ""
+"Some of the strings selected belong to packages. You can only change the "
+"language of these strings if all strings in the packages are selected."
+msgstr ""
+"Alguns dos textos seleccionados pertencem a pacotes. Apenas pode alterar o "
+"idioma destes textos se todos os textos destes pacotes forem seleccionados."
+
+msgid ""
+"Some themes and plugins don't properly set the textdomain (second argument) "
+"in GetText calls. When you select this option, WPML will assume that the "
+"strings found in GetText calls in the PHP files of the theme and plugin "
+"should have the textdomain with the theme/plugin's name."
+msgstr ""
+"Alguns temas e plugins não definem adequadamente o domínio de texto "
+"(segundo argumento) em chamadas GetText. Quando selecionar esta opção, o "
+"WPML assumirá que as strings encontradas nas chamadas GetText nos ficheiros "
+"PHP do tema ou dos plugins devem incluir o domínio de texto no nome do tema/"
+"plugins."
+
+msgid "String"
+msgstr "String"
+
+msgctxt "String Tracking warning: sentence 1"
+msgid ""
+"%s allows you to see where strings come from, so you can translate them "
+"accurately."
+msgstr ""
+"%s permite-lhe ver a origem dos textos, para que possa traduzi-los "
+"corretamente."
+
+msgctxt "String Tracking warning: sentence 1, anchor text"
+msgid "String Tracking"
+msgstr "Registo de Texto"
+
+msgctxt "String Tracking warning: sentence 2"
+msgid "It needs to parse the PHP source files and the output HTML."
+msgstr ""
+"É necessário analisar os ficheiros da fonte PHP e a exportação HTML."
+
+msgctxt "String Tracking warning: sentence 3"
+msgid ""
+"This feature is CPU-intensive and should only be used while you are "
+"developing sites."
+msgstr ""
+"Esta funcionalidade é muito intensa a nível de CPU e deve ser utilizada "
+"apenas quando estiver a programar websites."
+
+msgctxt "String Tracking warning: sentence 4"
+msgid ""
+"Remember to turn it off before going to production, to avoid performance "
+"problems."
+msgstr ""
+"Lembrar de a desativar antes de iniciar a produção para evitar problemas "
+"no desempenho. "
+
+msgid "String Translation"
+msgstr "Tradução de string"
+
+msgid "String translation"
+msgstr "Tradução da string"
+
+msgid "Strings from all text domains are excluded"
+msgstr "Textos de todos os domínios de texto serão excluídos"
+
+msgid "Strings from all text domains will be auto-registered"
+msgstr "Strings de todos os domínios de texto serão autorregistadas "
+
+msgid "Strings in need of translation"
+msgstr "Strings não traduzidas"
+
+msgid "Strings in the plugins"
+msgstr "Strings nos plugins"
+
+msgid "Strings in the themes"
+msgstr "Strings nos temas"
+
+msgid "Strings per page:"
+msgstr "Strings por página:"
+
+msgid "Strings translations updated"
+msgstr "Traduções dos textos atualizados"
+
+msgid "Submit"
+msgstr "Submeter"
+
+msgid "Success!"
+msgstr "Sucesso!"
+
+msgid "Textdomain"
+msgstr "Domínio de texto"
+
+msgid "The database has been updated."
+msgstr "A base de dados foi atualizada."
+
+msgid "The following files were processed:"
+msgstr "Os seguintes ficheiros foram processados:"
+
+msgid "Theme"
+msgstr "Tema"
+
+msgid "There is nothing to be updated or to be added."
+msgstr "Não há nada a atualizar ou a adicionar."
+
+msgid "There is nothing to translate."
+msgstr "Não há nada para traduzir."
+
+msgid ""
+"These are the strings that we found in your .po file. Please carefully "
+"review them. Then, click on the 'add' or 'cancel' buttons at the %1$sbottom "
+"of this screen%2$s. You can exclude individual strings by clearing the check "
+"boxes next to them."
+msgstr ""
+"Estas são as strings que encontramos no seu ficheiro \".po\". Reveja-as "
+"cuidadosamente. Depois, clique nos botões 'adicionar' ou 'cancelar' no "
+"%1$sfinal deste ecrã%2$s. Pode excluir strings individuais, eliminando a "
+"seleção nas caixas de verificação junto das mesmas."
+
+msgid "This domain currently has the following strings:"
+msgstr "Este domínio inclui actualmente os seguintes textos: "
+
+msgid ""
+"This folder appears to be not writable. This is blocking translation for "
+"strings from appearing on the site."
+msgstr ""
+"Este diretório parece não permitir a escrita. Esta inibição está a "
+"impedir que a tradução apareça no website."
+
+msgid ""
+"This update includes %d new strings and %d updated strings. You can review "
+"the strings below. Then, go to the <a%s>bottom of this page</a> and click on "
+"the Proceed button."
+msgstr ""
+"Esta atualização inclui %d strings novas e %d strings atualizadas. Pode "
+"analisar as strings abaixo. Em seguida, vá para o <a%s>final desta página</"
+"a> e clique no botão Continuar."
+
+msgid ""
+"To resolve this, please contact your hosting company and request that they "
+"make that folder writable."
+msgstr ""
+"Para corrigir esta questão, contacte a empresa de alojamento e solicite que "
+"ativem a permissão de escrita nesse diretório."
+
+msgid "Track where strings appear on the site"
+msgstr "Rastrear onde aparecem strings no sítio"
+
+msgid ""
+"Translate custom post and taxonomy base slugs (via WPML String Translation)."
+msgstr ""
+"Traduzir artigo personalizado e slugs base de taxonomia (através do WPML "
+"String Translation)."
+
+msgid "Translate strings"
+msgstr "Traduzir as strings"
+
+msgid "Translate strings in %s"
+msgstr "Traduzir strings em %s"
+
+msgid "Translate texts in admin screens &raquo;"
+msgstr "Tradução de textos em ecrãs admin &raquo;"
+
+msgid "Translating users of types: %s"
+msgstr "A traduzir os utilizadores de tipos: %s"
+
+msgid "Translation"
+msgstr "Tradução"
+
+msgid "Translation complete"
+msgstr "Tradução completa"
+
+msgid "Translation is in progress"
+msgstr "A tradução está a decorrer"
+
+msgid "Translation needed"
+msgstr "Tradução necessária"
+
+msgid "Translation needs update"
+msgstr "A tradução necessita de actualização"
+
+msgid "Translation status:"
+msgstr "Estado da tradução:"
+
+msgid "Update Now"
+msgstr "Atualizar Agora"
+
+msgid "Updated %s translation is available"
+msgstr "Está disponível a tradução atualizada de %s"
+
+msgid "Updated translations (%d)"
+msgstr "Traduções atualizadas (%d)"
+
+msgid ""
+"Use theme or plugin text domains when gettext calls do not use a string "
+"literal"
+msgstr ""
+"Usar domínios de texto do tema ou plugins quando chamadas gettext não "
+"usarem uma string literal"
+
+msgid ""
+"Use this language as the default language for new strings in this domain"
+msgstr ""
+"Utilize este idioma como o idioma padrão para novos textos neste domínio"
+
+msgid "View"
+msgstr "Visualizar"
+
+msgid ""
+"WPML Package Translation is enabled but not effective. It requires <a href="
+"\"%s\">WPML</a>, String Translation and Translation Management in order to "
+"work."
+msgstr ""
+"O WPML Package Translation está ativo mas não em execução. Necessita o "
+"<a href=\"%s\">WPML</a>, String Translation e Translation Management para "
+"que possa ser executado."
+
+msgid ""
+"WPML String Translation is attempting to write .mo files with translations "
+"to folder:"
+msgstr ""
+"O WPML String Translation está a tentar alterar os ficheiros .mo com "
+"traduções no diretório:"
+
+msgid ""
+"WPML String Translation is enabled but not effective, because WPML is "
+"outdated. Please update WPML first."
+msgstr ""
+"WPML Tradução de Texto está activo mas não eficiente, porque o WPML "
+"está desactualizado. Por favor actualize primeiro o WPML."
+
+msgid ""
+"WPML String Translation will send all strings to WPML’s Advanced "
+"Translation Editor and to the translation services which are used."
+msgstr ""
+"WPML String Translation enviará todas as strings para o Editor de Traduçã"
+"o Avançado do WPML e para os serviços de tradução que são utilizados."
+
+msgid "WPML Translation"
+msgstr "Tradução do WPML"
+
+msgid ""
+"WPML can keep track of where strings are used on the public pages. "
+"Activating this feature will enable the 'view in page' functionality and "
+"make translation easier."
+msgstr ""
+"WPML pode rastrear onde são utilizadas as strings em páginas públicas. A "
+"activação desta funcionalidade permitirá a funcionalidade the 'visualizar "
+"em página' e tornará a tradução mais fácil."
+
+msgid "WPML could not delete the strings"
+msgstr "O WPML não conseguiu apagar as strings"
+
+msgid ""
+"WPML needs to update the database. This update will help improve WPML's "
+"performance when fetching translated strings."
+msgstr ""
+"A base de dados do WPML precisa ser atualizada. Esta atualização ajudará "
+"a melhorar o desempenho do WPML ao obter os textos traduzidos."
+
+msgid "WPML's documentation on troubleshooting .mo files generation."
+msgstr ""
+"Documentação do WPML sobre como resolver problemas com a criação de "
+"ficheiros .mo."
+
+msgid "Waiting for translator"
+msgstr "À espera de tradutor"
+
+msgid ""
+"We have detected a problem with some tables in the database. Please contact "
+"%1$sWPML support%2$s to get this fixed."
+msgstr ""
+"Detectámos um problema com algumas tabelas na base de dados. Contacte a "
+"%1$sAssistência ao WPML%2$s para corrigir este problema."
+
+msgid "With Priority:"
+msgstr "Com prioridade:"
+
+msgid "Yes - disable these notifications completely"
+msgstr "Sim - desativar estas notificações completamente"
+
+msgid ""
+"You cannot add packages in this language to the basket since it already "
+"contains posts, packages or strings of another source language!\\n\\t\\t\\t"
+"\\t\\tEither submit the current basket and then add the post or delete the "
+"posts of differing language in the current basket"
+msgstr ""
+"Não pode adicionar no cesto pacotes para este idioma uma vez que já conté"
+"m artigos, pacotes ou textos de outro idioma de partida!\\n\\t\\t\\t\\t\\tOu "
+"submete o cesto atual e depois adiciona adiciona o artigo, ou apaga os "
+"artigos de idiomas diferentes no cesto atual"
+
+msgid "You excluded: "
+msgstr "Excluiu: "
+
+msgid ""
+"You have selected strings belonging to a package. Please select all strings "
+"from the affected package or unselect these strings."
+msgstr ""
+"Seleccionou textos que pertencem a um pacote. Por favor seleccione todos os "
+"textos do pacote afectado ou desmarque estes textos."
+
+msgid "You included: "
+msgstr "Inclui: "
+
+msgid "and others"
+msgstr "e outros"
+
+msgid "edit"
+msgstr "editar"
+
+msgid "new"
+msgstr "novo"
+
+msgid "none"
+msgstr "nenhum"
+
+msgid "select from existing"
+msgstr "seleccionar a partir de existentes"
+
+msgid "view in page"
+msgstr "visualizar na página"
+
+msgid "view in source"
+msgstr "visualizar na fonte"

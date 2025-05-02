@@ -1,0 +1,67 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/translationReview/components/AcceptedMessage.js:8
+msgid "Accepted"
+msgstr "ได้รับการยอมรับ"
+
+#: src/js/translationReview/components/AcceptedText.js:8
+msgid "Approved!"
+msgstr "ได้รับการอนุมัติ!"
+
+#: src/js/translationReview/components/AcceptedText.js:9
+#: src/js/translationReview/components/PublishedText.js:9
+msgid "Loading the next translation for review..."
+msgstr "กำลังโหลดการแปลถัดไปเพื่อตรวจสอบ..."
+
+#: src/js/translationReview/components/BackButton.js:7
+msgid "Back"
+msgstr "ย้อนกลับ"
+
+#: src/js/translationReview/components/ContinueReviewToggle.js:17
+msgid ""
+"Turn off to not automatically load the next translation after finishing "
+"this review."
+msgstr "ปิดเพื่อไม่ให้โหลดการแปลถัดไปโดยอัตโนมัติหลังจากเสร็จสิ้นการตรวจสอบนี้."
+
+#: src/js/translationReview/components/ContinueReviewToggle.js:18
+msgid "Turn on to automatically load the next translation after finishing this  ."
+msgstr "เปิดเพื่อโหลดการแปลถัดไปโดยอัตโนมัติหลังจากเสร็จสิ้นการตรวจสอบนี้."
+
+#: src/js/translationReview/components/EditButton.js:10
+msgid "Edit"
+msgstr "แก้ไข"
+
+#: src/js/translationReview/components/EditButton.js:9
+msgid "Edit translation"
+msgstr "แก้ไขการแปล"
+
+#: src/js/translationReview/components/InProgressText.js:8
+msgid "Please wait, applying translation.."
+msgstr "กรุณารอสักครู่ กำลังใช้งานการแปล..."
+
+#: src/js/translationReview/components/NextTranslationReview.js:22
+msgid "Next review"
+msgstr "การตรวจสอบถัดไป"
+
+#: src/js/translationReview/components/PublishButton.js:10
+msgid "Publish this translation"
+msgstr "เผยแพร่การแปลนี้"
+
+#: src/js/translationReview/components/PublishButton.js:9
+msgid "Accept this translation"
+msgstr "ยอมรับการแปลนี้"
+
+#: src/js/translationReview/components/PublishedText.js:8
+msgid "Published!"
+msgstr "เผยแพร่แล้ว!"
+
+#: src/js/translationReview/hooks/useATESync.js:34
+msgid "Someone is already reviewing this translation. Please try again later."
+msgstr "มีผู้อื่นกำลังตรวจสอบการแปลนี้อยู่ กรุณาลองอีกครั้งในภายหลัง."
+
+#: src/js/translationReview/store.js:29
+msgid "There was an error in applying translation."
+msgstr "เกิดข้อผิดพลาดในการใช้งานการแปล."

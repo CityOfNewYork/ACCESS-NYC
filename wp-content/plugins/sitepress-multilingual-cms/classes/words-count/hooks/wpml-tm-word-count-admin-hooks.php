@@ -1,5 +1,7 @@
 <?php
 
+use WPML\Core\WP\App\Resources;
+
 class WPML_TM_Word_Count_Admin_Hooks implements IWPML_Action {
 
 	/** @var WPML_WP_API $wp_api */
@@ -22,8 +24,8 @@ class WPML_TM_Word_Count_Admin_Hooks implements IWPML_Action {
 		wp_enqueue_script(
 			'word-count-report',
 			WPML_TM_URL . '/dist/js/word-count/app.js',
-			array( 'jquery-ui-dialog' ),
-			ICL_SITEPRESS_VERSION
+			array( 'jquery-ui-dialog', Resources::vendorAsDependency() ),
+			ICL_SITEPRESS_SCRIPT_VERSION
 		);
 	}
 

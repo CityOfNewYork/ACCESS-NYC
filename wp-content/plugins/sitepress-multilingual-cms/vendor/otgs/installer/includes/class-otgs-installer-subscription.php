@@ -2,8 +2,11 @@
 
 class OTGS_Installer_Subscription {
 
+	const WPML_SUBSCRIPTION_TYPE_BLOG = 6718;
+
 	const SUBSCRIPTION_STATUS_INACTIVE = 0;
 	const SUBSCRIPTION_STATUS_ACTIVE = 1;
+
 	const SUBSCRIPTION_STATUS_EXPIRED = 2;
 	const SUBSCRIPTION_STATUS_INACTIVE_UPGRADED = 3;
 	const SUBSCRIPTION_STATUS_ACTIVE_NO_EXPIRATION = 4;
@@ -97,6 +100,14 @@ class OTGS_Installer_Subscription {
 			       self::SUBSCRIPTION_STATUS_EXPIRED === $this->get_status()
 			       || ( $this->get_expiration() && strtotime( $this->get_expiration() ) <= time() - $expiredForPeriod )
 		       );
+	}
+
+	/**
+	 * Check if the subscription is a WPML blog subscription.
+	 * @return bool
+	 */
+	public function is_wpml_blog_subscription() {
+		return $this->type === self::WPML_SUBSCRIPTION_TYPE_BLOG;
 	}
 
 	/**

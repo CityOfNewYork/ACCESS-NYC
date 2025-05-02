@@ -33,7 +33,7 @@ class TriggerSynchronization implements \IWPML_Backend_Action, \IWPML_DIC_Action
 			<input id="wpml_tm_ate_source_id_migration_btn"
 				   type="button"
 				   class="button-secondary"
-				   value="<?php esc_attr_e( 'Synchronize local job ids with ATE jobs', 'wpml-translation-manager' ); ?>"
+				   value="<?php esc_attr_e( 'Synchronize local job ids with ATE jobs', 'sitepress' ); ?>"
 				   data-action="<?php echo self::ACTION_ID; ?>"
 				   data-nonce="<?php echo wp_create_nonce( self::ACTION_ID ); ?>"
 			/>
@@ -43,7 +43,7 @@ class TriggerSynchronization implements \IWPML_Backend_Action, \IWPML_DIC_Action
 			<?php
 			esc_attr_e(
 				'Synchronize local job ids with their ATE counterparts. You will have to refresh a few times any admin page to accomplish the process.',
-				'wpml-translation-manager'
+				'sitepress'
 			)
 			?>
 					</small>
@@ -57,7 +57,7 @@ class TriggerSynchronization implements \IWPML_Backend_Action, \IWPML_DIC_Action
 				self::ACTION_ID,
 				WPML_TM_URL . '/res/js/ate-jobs-migration.js',
 				[ 'jquery' ],
-				ICL_SITEPRESS_VERSION
+				ICL_SITEPRESS_SCRIPT_VERSION
 			);
 
 			wp_localize_script(

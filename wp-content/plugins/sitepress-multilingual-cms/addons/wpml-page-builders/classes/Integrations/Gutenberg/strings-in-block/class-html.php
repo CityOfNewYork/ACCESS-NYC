@@ -182,7 +182,7 @@ class HTML extends Base {
 
 	private static function preserveNewLines( $original, $translation ) {
 		$endsWith = function ( $find, $s ) {
-			return Str::sub( - Str::len( $find ), $s ) === $find; // @phpstan-ignore-line
+			return Str::sub( - Str::len( $find ), $s ) === $find;
 		};
 
 		if ( Str::startsWith( "\n", $original ) && ! Str::startsWith( "\n", $translation ) ) {

@@ -37,6 +37,6 @@ class WPML_API_Hook_Permalink implements IWPML_Action {
 			$url = $this->url_converter->convert_url( $url, $lang );
 		}
 
-		return $url;
+		return esc_url_raw( $url );
 	}
 }

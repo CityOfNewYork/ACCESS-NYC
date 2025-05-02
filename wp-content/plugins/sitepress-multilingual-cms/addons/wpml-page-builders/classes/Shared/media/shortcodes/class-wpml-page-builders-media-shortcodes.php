@@ -90,7 +90,7 @@ class WPML_Page_Builders_Media_Shortcodes {
 		foreach ( $attributes as $attribute => $data ) {
 			$pattern = '/(\[' . $tag . '(?: [^\]]* | )' . $attribute . '=(?:"|\'))([^"\']*)/';
 			$type    = isset( $data['type'] ) ? $data['type'] : '';
-			$content = preg_replace_callback( $pattern, array( $this, $this->get_callback( $type ) ), $content );
+			$content = preg_replace_callback( $pattern, $this->get_callback( $type ), $content );
 		}
 
 		return $content;
@@ -106,20 +106,20 @@ class WPML_Page_Builders_Media_Shortcodes {
 	private function translate_content( $content, $tag, array $data ) {
 		$pattern = '/(\[(?:' . $tag . ')[^\]]*\])([^\[]+)/';
 		$type    = isset( $data['type'] ) ? $data['type'] : '';
-		return preg_replace_callback( $pattern, array( $this, $this->get_callback( $type ) ), $content );
+		return preg_replace_callback( $pattern, $this->get_callback( $type ), $content );
 	}
 
 	/**
 	 * @param string $type
 	 *
-	 * @return string
+	 * @return callable
 	 */
 	private function get_callback( $type ) {
 		if ( self::TYPE_URL === $type ) {
-			return 'replace_url_callback';
+			return [ $this, 'replace_url_callback' ];
 		}
 
-		return 'replace_ids_callback';
+		return [ $this, 'replace_ids_callback' ];
 	}
 
 	/**

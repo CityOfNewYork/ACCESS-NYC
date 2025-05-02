@@ -65,6 +65,13 @@ class WPML_PB_String {
 	}
 
 	/**
+	 * @param string $title
+	 */
+	public function set_title( $title ) {
+		$this->title = $title;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function get_editor_type() {

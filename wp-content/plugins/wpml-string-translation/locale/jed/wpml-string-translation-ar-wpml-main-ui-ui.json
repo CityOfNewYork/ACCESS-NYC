@@ -1,0 +1,58 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Edit": [
+            "يحرر"
+         ],
+         "Shift+Tab": [
+            "التحول+علامة التبويب"
+         ],
+         "Tab": [
+            "فاتورة غير مدفوعة"
+         ],
+         "Translation to:": [
+            "الترجمة إلى:"
+         ],
+         "Copy from original": [
+            "نسخة من الأصل"
+         ],
+         "Use Shift+Enter to add a new line.": [
+            "استخدم Shift+Enter لإضافة سطر جديد."
+         ],
+         "Original:": [
+            "إبداعي:"
+         ],
+         "Add %s translation": [
+            "يضيف %s ترجمة"
+         ],
+         "Edit %s translation": [
+            "يحرر %s ترجمة"
+         ],
+         "Add %s translation (the string appears on the site and is not translated)": [
+            "إضافة %s ترجمة (تظهر السلسلة على الموقع ولا تتم ترجمتها)"
+         ],
+         "Original language %s": [
+            "اللغة الأصلية %s"
+         ],
+         "Waiting for translator to %s": [
+            "في انتظار المترجم %s"
+         ],
+         "Translation in progress to %s": [
+            "جاري الترجمة إلى %s"
+         ],
+         "In basket for translation to %s": [
+            "في سلة للترجمة إلى %s"
+         ],
+         "Translation saved.": [
+            "تم حفظ الترجمة."
+         ],
+         "Translation update failed.": [
+            "فشل تحديث الترجمة."
+         ]
+      }
+   }
+}

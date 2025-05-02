@@ -77,8 +77,10 @@ class WPML_ST_Upgrade {
 		$this->maybe_run( 'WPML_ST_Upgrade_DB_Longtext_String_Value' );
 		$this->maybe_run( 'WPML_ST_Upgrade_DB_Strings_Add_Translation_Priority_Field' );
 		$this->maybe_run( 'WPML_ST_Upgrade_DB_String_Packages_Word_Count' );
+		$this->maybe_run( 'WPML_ST_Upgrade_DB_String_Packages_Translator_Note' );
 		$this->maybe_run( '\WPML\ST\Upgrade\Command\RegenerateMoFilesWithStringNames' );
 		$this->maybe_run( \WPML\ST\Upgrade\Command\MigrateMultilingualWidgets::class );
+		$this->maybe_run( \WPML\ST\Upgrade\Command\UpgradeAutoregisteringStrings::class );
 	}
 
 	/**
@@ -90,6 +92,7 @@ class WPML_ST_Upgrade {
 		// It has to be maybe_run.
 		$this->maybe_run( 'WPML_ST_Upgrade_MO_Scanning' );
 		$this->maybe_run( 'WPML_ST_Upgrade_DB_String_Packages_Word_Count' );
+		$this->maybe_run( 'WPML_ST_Upgrade_DB_String_Packages_Translator_Note' );
 	}
 
 	/**
@@ -98,6 +101,7 @@ class WPML_ST_Upgrade {
 	private function run_front_end() {
 		$this->maybe_run( 'WPML_ST_Upgrade_MO_Scanning' );
 		$this->maybe_run( 'WPML_ST_Upgrade_DB_String_Packages_Word_Count' );
+		$this->maybe_run( 'WPML_ST_Upgrade_DB_String_Packages_Translator_Note' );
 	}
 
 	/**

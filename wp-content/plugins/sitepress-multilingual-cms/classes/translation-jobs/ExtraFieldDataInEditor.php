@@ -21,14 +21,42 @@ class ExtraFieldDataInEditor implements \IWPML_Backend_Action {
 
 	public function add_hooks() {
 		add_filter( 'wpml_tm_adjust_translation_fields', [ $this, 'appendTitleAndStyle' ], 1, 3 );
+		add_filter( 'wpml_tm_adjust_translation_fields', [ $this, 'maybeApplyTitleFallback' ], PHP_INT_MAX );
 	}
 
-	public function appendTitleAndStyle( array $fields, $job, $originalPost ) {
+	/**
+	 * @param array                             $fields
+	 * @param \stdClass                         $job
+	 * @param \WP_Post|\WPML_Package|null|mixed $originalEntity
+	 *
+	 * @return array|callable|\Closure|mixed|object
+	 */
+	public function appendTitleAndStyle( array $fields, $job, $originalEntity ) {
 		$appendTitleAndStyleStrategy = $this->isExternalElement( $job ) ?
-			$this->appendToExternalField( $originalPost ) :
-			$this->addTitleAndAdjustStyle( $job, $originalPost );
+			$this->appendToExternalField( $job, $originalEntity ) :
+			$this->addTitleAndAdjustStyle( $job, $originalEntity );
 
 		return Fns::map( pipe( $appendTitleAndStyleStrategy, $this->adjustFieldStyleForUnsafeContent() ), $fields );
+	}
+
+	/**
+	 * @param array $fields
+	 *
+	 * @return array
+	 */
+	public function maybeApplyTitleFallback( array $fields ) {
+		foreach ( $fields as &$field ) {
+			if ( isset( $field['title_fallback'], $field['title'] ) ) {
+
+				if ( $field['title'] === $field['field_type'] ) {
+					$field['title'] = $field['title_fallback'];
+				}
+
+				unset( $field['title_fallback'] );
+			}
+		}
+
+		return $fields;
 	}
 
 	private function addTitleAndAdjustStyle( $job, $originalPost ) {
@@ -47,13 +75,29 @@ class ExtraFieldDataInEditor implements \IWPML_Backend_Action {
 		return isset( $job->element_type_prefix ) && wpml_load_core_tm()->is_external_type( $job->element_type_prefix );
 	}
 
-	private function appendToExternalField( $originalPost ) {
-		return function ( $field ) use ( $originalPost ) {
-			$field['title']       = apply_filters( 'wpml_tm_editor_string_name', $field['field_type'], $originalPost );
-			$field['field_style'] = $this->applyStyleFilter(
+	/**
+	 * @param \stdClass                         $job
+	 * @param \WP_Post|\WPML_Package|null|mixed $originalEntity
+	 *
+	 * @return \Closure(array):array
+	 */
+	private function appendToExternalField( $job, $originalEntity ) {
+		$hasIncomingOriginalEntity = true;
+
+		if ( ! $originalEntity && Relation::propEq( 'element_type_prefix', 'package', $job ) ) {
+			$hasIncomingOriginalEntity = false;
+			$originalEntity            = apply_filters( 'wpml_st_get_string_package', null, Obj::prop( 'original_doc_id', $job ) );
+		}
+
+		return function ( $field ) use ( $hasIncomingOriginalEntity, $originalEntity ) {
+			$title = apply_filters( 'wpml_tm_editor_string_name', $field['field_type'], $originalEntity );
+
+			$field['title']          = $hasIncomingOriginalEntity ? $title : $field['field_type'];
+			$field['title_fallback'] = $title;
+			$field['field_style']    = $this->applyStyleFilter(
 				Obj::propOr( '', 'field_style', $field ),
 				$field['field_type'],
-				$originalPost
+				$originalEntity
 			);
 
 			return $field;

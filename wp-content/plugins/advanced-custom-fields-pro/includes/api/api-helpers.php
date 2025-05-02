@@ -682,27 +682,48 @@ function acf_verify_nonce( $value ) {
 }
 
 /**
- * acf_verify_ajax
- *
- * This function will return true if the current AJAX request is valid
+ * Returns true if the current AJAX request is valid.
  * It's action will also allow WPML to set the lang and avoid AJAX get_posts issues
  *
  * @since   5.2.3
  *
- * @param   n/a
- * @return  (boolean)
+ * @param string  $nonce           The nonce to check.
+ * @param string  $action          The action of the nonce.
+ * @param boolean $action_is_field If the action is a field, modify the action to match validate the field type.
+ * @return boolean
  */
-function acf_verify_ajax() {
-
-	// bail early if not acf nonce
-	if ( empty( $_REQUEST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_REQUEST['nonce'] ), 'acf_nonce' ) ) {
+function acf_verify_ajax( $nonce = '', $action = '', $action_is_field = false ) {
+	// Bail early if we don't have a nonce to check.
+	if ( empty( $nonce ) && empty( $_REQUEST['nonce'] ) ) {
 		return false;
 	}
 
-	// action for 3rd party customization
+	// Build the action if we're trying to validate a specific field nonce.
+	if ( $action_is_field ) {
+		if ( ! acf_is_field_key( $action ) ) {
+			return false;
+		}
+
+		$field = acf_get_field( $action );
+
+		if ( empty( $field['type'] ) ) {
+			return false;
+		}
+
+		$action = 'acf_field_' . $field['type'] . '_' . $action;
+	}
+
+	$nonce_to_check = ! empty( $nonce ) ? $nonce : $_REQUEST['nonce']; // phpcs:ignore WordPress.Security -- We're verifying a nonce here.
+	$nonce_action   = ! empty( $action ) ? $action : 'acf_nonce';
+
+	// Bail if nonce can't be verified.
+	if ( ! wp_verify_nonce( sanitize_text_field( $nonce_to_check ), $nonce_action ) ) {
+		return false;
+	}
+
+	// Action for 3rd party customization (WPML).
 	do_action( 'acf/verify_ajax' );
 
-	// return
 	return true;
 }
 
@@ -1153,7 +1174,7 @@ function acf_get_posts( $args = array() ) {
 		$args['post_status'] = acf_get_post_stati();
 	}
 
-	// Check if specifc post ID's have been provided.
+	// Check if specific post IDs have been provided.
 	if ( $args['post__in'] ) {
 
 		// Clean value into an array of IDs.
@@ -1361,22 +1382,26 @@ function acf_get_grouped_posts( $args ) {
 	return $data;
 }
 
-function _acf_orderby_post_type( $ordeby, $wp_query ) {
-
-	// global
+/**
+ * The internal ACF function to add order by post types for use in `acf_get_grouped_posts`
+ *
+ * @param string $orderby  The current orderby value for a query.
+ * @param object $wp_query The WP_Query.
+ * @return string The potentially modified orderby string.
+ */
+function _acf_orderby_post_type( $orderby, $wp_query ) {
 	global $wpdb;
 
-	// get post types
 	$post_types = $wp_query->get( 'post_type' );
 
-	// prepend SQL
+	// Prepend the SQL.
 	if ( is_array( $post_types ) ) {
+		$post_types = array_map( 'esc_sql', $post_types );
 		$post_types = implode( "','", $post_types );
-		$ordeby     = "FIELD({$wpdb->posts}.post_type,'$post_types')," . $ordeby;
+		$orderby    = "FIELD({$wpdb->posts}.post_type,'$post_types')," . $orderby;
 	}
 
-	// return
-	return $ordeby;
+	return $orderby;
 }
 
 function acf_get_post_title( $post = 0, $is_search = false ) {
@@ -2707,6 +2732,31 @@ function acf_current_user_can_admin() {
 }
 
 /**
+ * Wrapper function for current_user_can( 'edit_post', $post_id ).
+ *
+ * @since 6.3.4
+ *
+ * @param integer $post_id The post ID to check.
+ * @return boolean
+ */
+function acf_current_user_can_edit_post( int $post_id ): bool {
+	/**
+	 * The `edit_post` capability is a meta capability, which
+	 * gets converted to the correct post type object `edit_post`
+	 * equivalent.
+	 *
+	 * If the post type does not have `map_meta_cap` enabled and the user is
+	 * not manually mapping the `edit_post` capability, this will fail
+	 * unless the role has the `edit_post` capability added to a user/role.
+	 *
+	 * However, more (core) stuff will likely break in this scenario.
+	 */
+	$user_can_edit = current_user_can( 'edit_post', $post_id );
+
+	return (bool) apply_filters( 'acf/current_user_can_edit_post', $user_can_edit, $post_id );
+}
+
+/**
  * acf_get_filesize
  *
  * This function will return a numeric value of bytes for a given filesize string
@@ -3109,28 +3159,19 @@ function acf_is_row_collapsed( $field_key = '', $row_index = 0 ) {
 }
 
 /**
- * acf_get_attachment_image
+ * Return an image tag for the provided attachment ID
  *
- * description
+ * @since 5.5.0
+ * @deprecated 6.3.2
  *
- * @since   5.5.0
- *
- * @param   $post_id (int)
- * @return  $post_id (int)
+ * @param integer $attachment_id The attachment ID
+ * @param string  $size          The image size to use in the image tag.
+ * @return false
  */
 function acf_get_attachment_image( $attachment_id = 0, $size = 'thumbnail' ) {
-
-	// vars
-	$url = wp_get_attachment_image_src( $attachment_id, 'thumbnail' );
-	$alt = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
-
-	// bail early if no url
-	if ( ! $url ) {
-		return '';
-	}
-
-	// return
-	$value = '<img src="' . $url . '" alt="' . $alt . '" />';
+	// report function as deprecated
+	_deprecated_function( __FUNCTION__, '6.3.2' );
+	return false;
 }
 
 /**
@@ -3949,3 +3990,20 @@ function acf_is_multisite_main_site() {
 	}
 	return false;
 }
+
+/**
+ * Allow filterable permissions metabox callbacks.
+ *
+ * @since   6.3.10
+ *
+ * @param   boolean $enable_meta_box_cb_edit Can the current user edit metabox callbacks.
+ * @return  boolean
+ */
+function acf_settings_enable_meta_box_cb_edit( $enable_meta_box_cb_edit ): bool {
+	if ( ! is_super_admin() ) {
+		return false;
+	}
+
+	return (bool) $enable_meta_box_cb_edit;
+}
+add_filter( 'acf/settings/enable_meta_box_cb_edit', 'acf_settings_enable_meta_box_cb_edit', 1 );

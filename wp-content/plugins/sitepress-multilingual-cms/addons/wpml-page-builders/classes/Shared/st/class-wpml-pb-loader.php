@@ -8,7 +8,7 @@ class WPML_PB_Loader {
 
 	public function __construct(
 		WPML_ST_Settings $st_settings,
-		$pb_integration = null // Only needed for testing
+		$pb_integration = null // Only needed for testing.
 	) {
 		share( Config::getSharedClasses() );
 
@@ -73,6 +73,7 @@ class WPML_PB_Loader {
 			WPML\PB\Shutdown\Hooks::class,
 			WPML\PB\GutenbergCleanup\ShortcodeHooks::class,
 			WPML\PB\Shortcode\AdjustIdsHooks::class,
+			WPML\PB\Strings\RegisterHooks::class,
 		];
 
 		make( WPML_Action_Filter_Loader::class )->load( $hooks );

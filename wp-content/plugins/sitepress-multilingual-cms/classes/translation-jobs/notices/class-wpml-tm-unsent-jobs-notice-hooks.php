@@ -38,7 +38,7 @@ class WPML_TM_Unsent_Jobs_Notice_Hooks {
 
 	public function add_hooks() {
 		add_action( 'wpml_tm_jobs_translator_notification', array( $this, 'email_for_job' ) );
-		add_action( 'wpml_tm_basket_committed', array( $this, 'add_notice' ) );
+		add_action( 'wpml_tm_jobs_notification', array( $this, 'add_notice' ) );
 		add_action( 'shutdown', array( $this, 'remove_notice' ) );
 	}
 

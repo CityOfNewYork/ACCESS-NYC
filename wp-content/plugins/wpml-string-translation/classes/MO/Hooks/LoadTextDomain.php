@@ -6,7 +6,8 @@ use WPML\ST\MO\File\Manager;
 use WPML\ST\MO\LoadedMODictionary;
 use WPML_ST_Translations_File_Locale;
 use function WPML\FP\partial;
-
+use WPML\LIB\WP\WordPress;
+use WPML\ST\MO\Hooks\LoadTranslationFile;
 
 class LoadTextDomain implements \IWPML_Action {
 
@@ -64,9 +65,11 @@ class LoadTextDomain implements \IWPML_Action {
 			return $override;
 		}
 
+
 		if ( ! $this->isCustomMOLoaded( $domain ) ) {
 			remove_filter( 'override_load_textdomain', [ $this, 'overrideLoadTextDomain' ], 10 );
-			$locale      = $this->file_locale->get( $mofile, $domain );
+			$locale = $this->file_locale->get( $mofile, $domain );
+			$this->fallbackDefaultTranslations( $mofile, $domain, $locale );
 			$this->loadCustomMOFile( $domain, $mofile, $locale );
 			add_filter( 'override_load_textdomain', [ $this, 'overrideLoadTextDomain' ], 10, 3 );
 		}
@@ -105,10 +108,27 @@ class LoadTextDomain implements \IWPML_Action {
 		$wpml_mofile = $this->file_manager->get( $domain, $locale );
 
 		if ( $wpml_mofile && $wpml_mofile !== $mofile ) {
+			$defaultTextdomainPath = LoadTranslationFile::getDefaultWordPressTranslationPath( $domain, $locale );
+
 			load_textdomain( $domain, $wpml_mofile );
+
+			if ( $defaultTextdomainPath ) {
+				$this->maybeLoadWordPressJITMoFile( $defaultTextdomainPath, $domain );
+			}
 		}
 
 		$this->setCustomMOLoaded( $domain );
+	}
+
+	/**
+	 * @param string|null $path
+	 * @param string $domain
+	 * @return void
+	 */
+	private function maybeLoadWordPressJITMoFile( $path, $domain ) {
+		if( file_exists( $path ) ) {
+			load_textdomain( $domain, $path );
+		}
 	}
 
 	private function reloadAlreadyLoadedMOFiles() {
@@ -134,5 +154,27 @@ class LoadTextDomain implements \IWPML_Action {
 
 	public function languageHasSwitched() {
 		$this->loaded_domains = [];
+	}
+
+	/**
+	 * @param $mofile
+	 * @param $domain
+	 */
+	public function fallbackDefaultTranslations( $mofile, $domain, $locale) {
+		// Since version 6.7, WP will not attempt anymore to load translations
+		// from the default WordPress translation path if the MO file is not found.
+		// It will set $GLOBALS['l10n'][ $domain ] to a NOOP_Translations object and
+		// WP JIT mechanism won't be triggered anymore.
+		// Thus, WPML is not able to load custom translations anymore.
+		// If any of these translation sources is available, we will force it to load before this happens.
+		if (WordPress::versionCompare('>', '6.6.999') && is_string( $mofile )) {
+			$wpml_mofile = $this->file_manager->get($domain, $locale);
+
+			$replaced_mofile = LoadTranslationFile::replaceMoExtensionWithPhp( $mofile );
+			if (!file_exists($mofile) && !file_exists($replaced_mofile) && $wpml_mofile) {
+				$defaultTranslationsFile = LoadTranslationFile::getDefaultWordPressTranslationPath($domain, $locale) ?: $wpml_mofile;
+				LoadTranslationFile::replaceTranslationFile($domain, $mofile, $defaultTranslationsFile);
+			}
+		}
 	}
 }

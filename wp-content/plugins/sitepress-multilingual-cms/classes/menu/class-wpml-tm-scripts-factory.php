@@ -33,15 +33,11 @@ class WPML_TM_Scripts_Factory {
 		wp_register_script(
 			'ate-translation-editor-classic',
 			WPML_TM_URL . '/dist/js/ate-translation-editor-classic/app.js',
-			array(),
+			array( Resources::vendorAsDependency() ),
 			false,
 			true
 		);
 
-		if ( WPML_TM_Page::is_tm_dashboard() ) {
-			$this->localize_script( 'wpml-tm-dashboard' );
-			wp_enqueue_script( 'wpml-tm-dashboard' );
-		}
 		if (
 			WPML_TM_Page::is_tm_translators()
 			|| UIPage::isTroubleshooting( $_GET )
@@ -74,7 +70,7 @@ class WPML_TM_Scripts_Factory {
 				'wpml-tm-multilingual-content-setup',
 				WPML_TM_URL . '/res/css/multilingual-content-setup.css',
 				array(),
-				ICL_SITEPRESS_VERSION
+				ICL_SITEPRESS_SCRIPT_VERSION
 			);
 		}
 
@@ -83,7 +79,7 @@ class WPML_TM_Scripts_Factory {
 				'wpml-tm-translation-notifications',
 				WPML_TM_URL . '/res/css/translation-notifications.css',
 				array(),
-				ICL_SITEPRESS_VERSION
+				ICL_SITEPRESS_SCRIPT_VERSION
 			);
 		}
 	}
@@ -117,6 +113,7 @@ class WPML_TM_Scripts_Factory {
 					'displayNewMessage'      => \WPML\TM\TranslationDashboard\Endpoints\DisplayNeedSyncMessage::class,
 					'setTranslateEverything' => \WPML\TranslationMode\Endpoint\SetTranslateEverything::class,
 					'getCredits'             => \WPML\TM\ATE\AutoTranslate\Endpoint\GetCredits::class,
+					'getAccountBalances'     => \WPML\TM\ATE\AutoTranslate\Endpoint\GetAccountBalances::class,
 				],
 				'strings'              => [
 					'numberOfTranslationStringsSingle' => __( '%d translation job', 'wpml-translation-management' ),
@@ -212,7 +209,7 @@ class WPML_TM_Scripts_Factory {
 	public function build_localize_script_data($additional_data = array()  ) {
 		$data = array(
 			'hasATEEnabled'      => WPML_TM_ATE_Status::is_enabled(),
-			'restUrl'            => untrailingslashit( rest_url() ),
+			'restUrl'            => untrailingslashit( $this->getRestUrl() ),
 			'restNonce'          => wp_create_nonce( 'wp_rest' ),
 			'syncJobStatesNonce' => wp_create_nonce( 'sync-job-states' ),
 			'ate'                => $this->create_ate()
@@ -323,5 +320,16 @@ class WPML_TM_Scripts_Factory {
 
 		return $this->create_ate_strings()
 					->get_status();
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getRestUrl(): string {
+		$restUrl = get_rest_url();
+		if ( get_option( 'permalink_structure' ) === '' ) {
+			$restUrl = add_query_arg( 'rest_route', '/', home_url( '/' ) );
+		}
+		return $restUrl;
 	}
 }

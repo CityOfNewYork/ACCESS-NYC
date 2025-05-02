@@ -1,50 +1,60 @@
 {
-   "domain": "messages",
-   "locale_data": {
-      "messages": {
-         "": {
-            "domain": "messages",
-            "lang": "en"
-         },
-         "Accepted": [
-            "Đã chấp thuận"
-         ],
-         "Approved!": [
-            "Đã phê duyệt!"
-         ],
-         "Loading the next translation for review...": [
-            "Đang tải bản dịch tiếp theo để rà soát..."
-         ],
-         "Back": [
-            "Quay lại"
-         ],
-         "Turn off to not automatically load the next translation after finishing this review.": [
-            "Tắt để không tự động tải bản dịch tiếp theo sau khi hoàn tất phần rà soát này."
-         ],
-         "Edit": [
-            "Sửa"
-         ],
-         "Edit translation": [
-            "Sửa bản dịch"
-         ],
-         "Please wait, applying translation..": [
-            "Vui lòng đợi, đang áp dụng quá trình dịch thuật..."
-         ],
-         "Next review": [
-            "Lần rà soát tiếp theo"
-         ],
-         "Publish this translation": [
-            "Đăng tải bản dịch này"
-         ],
-         "Accept this translation": [
-            "Chấp nhận bản dịch này"
-         ],
-         "Published!": [
-            "Đã đăng tải!"
-         ],
-         "There was an error in applying translation.": [
-            "Đã có lỗi khi áp dụng quá trình dịch thuật."
-         ]
-      }
-   }
+  "translation-revision-date": "2024-08-20T09:48:28+00:00",
+  "generator": "WP-CLI/2.9.0",
+  "source": "src/js/translationReview/components/EditButton.js",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "en",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "Someone is already reviewing this translation. Please try again later.": [
+        "Đã có người xem xét bản dịch này. Vui lòng thử lại sau."
+      ],
+      "Next review": [
+        "Lần rà soát tiếp theo"
+      ],
+      "Turn off to not automatically load the next translation after finishing this review.": [
+        "Tắt để không tự động tải bản dịch tiếp theo sau khi hoàn tất phần rà soát này."
+      ],
+      "Turn on to automatically load the next translation after finishing this  .": [
+        "Bật để tự động tải bản dịch tiếp theo sau khi hoàn tất việc này."
+      ],
+      "Approved!": [
+        "Đã phê duyệt!"
+      ],
+      "Loading the next translation for review...": [
+        "Đang tải bản dịch tiếp theo để rà soát..."
+      ],
+      "Published!": [
+        "Đã đăng tải!"
+      ],
+      "Please wait, applying translation..": [
+        "Vui lòng đợi, đang áp dụng quá trình dịch thuật..."
+      ],
+      "Publish this translation": [
+        "Đăng tải bản dịch này"
+      ],
+      "Accept this translation": [
+        "Chấp nhận bản dịch này"
+      ],
+      "Back": [
+        "Quay lại"
+      ],
+      "There was an error in applying translation.": [
+        "Đã có lỗi khi áp dụng quá trình dịch thuật."
+      ],
+      "Accepted": [
+        "Đã chấp thuận"
+      ],
+      "Edit": [
+        "Sửa"
+      ],
+      "Edit translation": [
+        "Sửa bản dịch"
+      ]
+    }
+  }
 }

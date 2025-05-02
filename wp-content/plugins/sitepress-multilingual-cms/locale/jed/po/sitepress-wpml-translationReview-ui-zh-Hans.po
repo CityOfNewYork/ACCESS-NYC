@@ -1,0 +1,67 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/translationReview/components/AcceptedMessage.js:8
+msgid "Accepted"
+msgstr "已接受"
+
+#: src/js/translationReview/components/AcceptedText.js:8
+msgid "Approved!"
+msgstr "已批准！"
+
+#: src/js/translationReview/components/AcceptedText.js:9
+#: src/js/translationReview/components/PublishedText.js:9
+msgid "Loading the next translation for review..."
+msgstr "正在加载下一个待审核的翻译..."
+
+#: src/js/translationReview/components/BackButton.js:7
+msgid "Back"
+msgstr "返回"
+
+#: src/js/translationReview/components/ContinueReviewToggle.js:17
+msgid ""
+"Turn off to not automatically load the next translation after finishing "
+"this review."
+msgstr "关闭以避免在完成此次审核后自动加载下一个翻译。"
+
+#: src/js/translationReview/components/ContinueReviewToggle.js:18
+msgid "Turn on to automatically load the next translation after finishing this  ."
+msgstr "开启以在完成此次审核后自动加载下一个翻译。"
+
+#: src/js/translationReview/components/EditButton.js:10
+msgid "Edit"
+msgstr "编辑"
+
+#: src/js/translationReview/components/EditButton.js:9
+msgid "Edit translation"
+msgstr "编辑翻译"
+
+#: src/js/translationReview/components/InProgressText.js:8
+msgid "Please wait, applying translation.."
+msgstr "请稍候，正在应用翻译.."
+
+#: src/js/translationReview/components/NextTranslationReview.js:22
+msgid "Next review"
+msgstr "下一个审核"
+
+#: src/js/translationReview/components/PublishButton.js:10
+msgid "Publish this translation"
+msgstr "发布此翻译"
+
+#: src/js/translationReview/components/PublishButton.js:9
+msgid "Accept this translation"
+msgstr "接受此翻译"
+
+#: src/js/translationReview/components/PublishedText.js:8
+msgid "Published!"
+msgstr "已发布！"
+
+#: src/js/translationReview/hooks/useATESync.js:36
+msgid "Someone is already reviewing this translation. Please try again later."
+msgstr "已有人正在审核此翻译。请稍后再试。"
+
+#: src/js/translationReview/store.js:29
+msgid "There was an error in applying translation."
+msgstr "应用翻译时出现错误。"

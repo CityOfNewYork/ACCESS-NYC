@@ -1,0 +1,31 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Dissmiss Notice": [
+            "تجاهل الإشعار"
+         ],
+         "Streamline your site's translation using WPML's Translation Dashboard": [
+            "قم بتبسيط ترجمة موقعك باستخدام لوحة تحكم الترجمة في WPML"
+         ],
+         "Translate pages, posts, products and strings from one place": [
+            "ترجمة الصفحات والمقالات والمنتجات والنصوص من مكان واحد"
+         ],
+         "Bulk automatic translation": [
+            "الترجمة الآلية للمحتوى بكميات كبيرة"
+         ],
+         "Translate everything automatically": [
+            "ترجمة كل شيء آليًا"
+         ],
+         "Go to the Translation Dashboard": [
+            "انتقل إلى لوحة تحكم الترجمة"
+         ],
+         "Learn More": [
+            "اعرف المزيد"
+         ]
+      }
+   }
+}

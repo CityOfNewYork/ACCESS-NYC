@@ -14,6 +14,8 @@ class WPML_Beaver_Builder_Integration_Factory {
 				\WPML\PB\BeaverBuilder\Config\Factory::class,
 				\WPML\PB\BeaverBuilder\Hooks\Editor::class,
 				\WPML\PB\BeaverBuilder\Hooks\Menu::class,
+				\WPML\PB\BeaverBuilder\Hooks\Cache::class,
+				\WPML\PB\BeaverBuilder\Hooks\TranslationGuiLabels::class,
 
 				// BeaverThemer.
 				\WPML\PB\BeaverBuilder\BeaverThemer\HooksFactory::class,
@@ -25,7 +27,7 @@ class WPML_Beaver_Builder_Integration_Factory {
 
 		$string_registration_factory = new WPML_String_Registration_Factory( $data_settings->get_pb_name() );
 		$string_registration = $string_registration_factory->create();
-		
+
 		$register_strings = new WPML_Beaver_Builder_Register_Strings( $nodes, $data_settings, $string_registration );
 		$update_translation = new WPML_Beaver_Builder_Update_Translation( $nodes, $data_settings );
 

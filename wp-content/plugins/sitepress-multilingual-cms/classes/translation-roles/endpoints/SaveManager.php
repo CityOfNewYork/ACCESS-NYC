@@ -26,8 +26,7 @@ class SaveManager extends SaveUser {
 		           ->map( $setRole )
 		           ->map( [ self::class, 'sendInstructions' ] )
 		           ->map( function( $user ) {
-					   do_action( 'wpml_update_translator' );
-					   do_action( 'wpml_tm_ate_synchronize_managers' );
+					   do_action( 'wpml_tm_ate_synchronize_managers', $user->ID );
 					   return true;
 				   } );
 	}
@@ -68,6 +67,6 @@ class SaveManager extends SaveUser {
 
 		Hooks::callWithFilter( $sendMail, 'wp_mail_from_name', $forceDisplayName );
 
-		return true;
+		return $manager;
 	}
 }

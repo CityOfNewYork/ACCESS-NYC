@@ -1,0 +1,1001 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-08-22T09:24:13+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: wpml\n"
+
+#: dashboard.js:2
+msgid "Untranslated strings that I encounter on front-end while logged in"
+msgstr "Các chuỗi chưa dịch mà tôi gặp phải ở giao diện khi đăng nhập"
+
+#: dashboard.js:2
+msgid "Untranslated strings that all front-end users encounter"
+msgstr "Các chuỗi chưa dịch mà tất cả người dùng front-end gặp phải"
+
+#: dashboard.js:2
+msgid "Disable auto-registration of strings"
+msgstr "Vô hiệu hóa việc tự động đăng ký chuỗi"
+
+#: dashboard.js:2
+msgid "Frontend"
+msgstr "Giao diện"
+
+#: dashboard.js:2
+msgid "Backend"
+msgstr "Phần sau"
+
+#: dashboard.js:2
+msgid "Plugins"
+msgstr "Các plugin"
+
+#: dashboard.js:2
+msgid "Themes"
+msgstr "Chủ đề"
+
+#: dashboard.js:2
+msgid "WordPress"
+msgstr "WordPress"
+
+#: dashboard.js:2
+msgid "Other"
+msgstr "Khác"
+
+#: dashboard.js:2
+msgid "Error in fetching default translation batch name"
+msgstr "Lỗi khi lấy tên lô dịch mặc định"
+
+#: dashboard.js:2
+msgid "Error in fetching translation editor type."
+msgstr "Có lỗi khi tìm loại trình soạn thảo bản dịch."
+
+#: dashboard.js:2
+msgid "Error in fetching untranslated types count"
+msgstr "Lỗi khi lấy số lượng các loại chưa dịch"
+
+#: dashboard.js:2
+msgid "Error in fetching remote translation service data."
+msgstr "Có lỗi khi lấy dữ liệu dịch vụ dịch thuật từ xa."
+
+#: dashboard.js:2
+msgid "Status checked: "
+msgstr "Trạng thái đã được kiểm tra: "
+
+#: dashboard.js:2
+msgid "none of your translation jobs have been completed"
+msgstr "không có công việc dịch thuật nào của bạn được hoàn thành"
+
+#: dashboard.js:2
+msgid "Downloaded jobs: "
+msgstr "Các công việc đã tải xuống: "
+
+#: dashboard.js:2
+msgid "Cancelled jobs: "
+msgstr "Các công việc đã hủy: "
+
+#: dashboard.js:2
+msgid "Checking translation jobs status. Please don't close this page!"
+msgstr "Đang kiểm tra trạng thái công việc dịch thuật. Vui lòng không đóng trang này!"
+
+#: dashboard.js:2
+msgid "Last check: Never"
+msgstr "Kiểm tra lần cuối: Không bao giờ"
+
+#: dashboard.js:2
+msgid "Please wait until download finishes"
+msgstr "Vui lòng đợi cho đến khi tải xuống hoàn tất"
+
+#: dashboard.js:2
+msgid "You need to wait 5 minutes after last pick up"
+msgstr "Bạn cần phải đợi 5 phút sau lần lấy hàng cuối cùng"
+
+#: dashboard.js:2
+msgid "Check status and get translations"
+msgstr "Kiểm tra trạng thái và nhận bản dịch"
+
+#: dashboard.js:2
+msgid "Filtering is disabled to show all selected items. "
+msgstr "Tính năng lọc bị vô hiệu hóa để hiển thị tất cả các mục đã chọn. "
+
+#: dashboard.js:2
+msgid "Apply filters"
+msgstr "Áp dụng bộ lọc"
+
+#: dashboard.js:2
+msgid "%s posts selected"
+msgstr "%sbài viết đã chọn"
+
+#: dashboard.js:2
+msgid "(%d word count)"
+msgstr "(%d số lượng từ)"
+
+#: dashboard.js:2
+msgid "%s item not showing."
+msgid_plural "%s items not showing."
+msgstr[0] "%smục không hiển thị."
+msgstr[1] "%scác mục không hiển thị."
+
+#: dashboard.js:2
+msgid "Show all selected items"
+msgstr "Hiển thị tất cả các mục đã chọn"
+
+#: dashboard.js:2
+msgid "Translate your content"
+msgstr "Dịch nội dung của bạn"
+
+#: dashboard.js:2
+msgid "Unselect all"
+msgstr "Bỏ chọn tất cả"
+
+#: dashboard.js:2
+msgid "Source Language:"
+msgstr "Ngôn ngữ nguồn:"
+
+#: dashboard.js:2
+msgid "translated to:"
+msgstr "được dịch thành:"
+
+#: dashboard.js:2
+msgid "Clear filters"
+msgstr "Xóa bộ lọc"
+
+#: dashboard.js:2
+msgid "Filter"
+msgstr "Lọc"
+
+#: dashboard.js:2
+msgid "You are about to change the source language filter from %s to %s"
+msgstr "Bạn sắp thay đổi bộ lọc ngôn ngữ nguồn từ%s ĐẾN%s"
+
+#: dashboard.js:2
+msgid "Updating the source language filter will clear the items you've selected for translation. Are you sure you want to continue?"
+msgstr "Cập nhật bộ lọc ngôn ngữ nguồn sẽ xóa các mục bạn đã chọn để dịch. Bạn có chắc chắn muốn tiếp tục không?"
+
+#: dashboard.js:2
+msgid "Cancel"
+msgstr "Hủy bỏ"
+
+#: dashboard.js:2
+msgid "Change source language"
+msgstr "Thay đổi ngôn ngữ nguồn"
+
+#: dashboard.js:2
+msgid "All Statuses"
+msgstr "Tất cả các trạng thái"
+
+#: dashboard.js:2
+msgid "All languages"
+msgstr "Tất cả các ngôn ngữ"
+
+#: dashboard.js:2
+msgid "All translation statuses"
+msgstr "Tất cả trạng thái bản dịch"
+
+#: dashboard.js:2
+msgid "Not translated"
+msgstr "Chưa dịch"
+
+#: dashboard.js:2
+msgid "Not translated or needs updating"
+msgstr "Chưa được dịch hoặc cần cập nhật"
+
+#: dashboard.js:2
+msgid "Needs updating"
+msgstr "Cần cập nhật"
+
+#: dashboard.js:2
+msgid "Translation in progress"
+msgstr "Đang trong quá trình dịch"
+
+#: dashboard.js:2
+msgid "Translation complete"
+msgstr "Bản dịch hoàn tất"
+
+#: dashboard.js:2
+msgid "Parent:"
+msgstr "Phụ huynh:"
+
+#: dashboard.js:2
+msgid "All taxonomies"
+msgstr "Tất cả các phân loại"
+
+#: dashboard.js:2
+msgid "Taxonomy Term:"
+msgstr "Thuật ngữ phân loại:"
+
+#: dashboard.js:2
+msgid "No terms found"
+msgstr "Không tìm thấy thuật ngữ nào"
+
+#: dashboard.js:2
+msgid "Filter by:"
+msgstr "Lọc theo:"
+
+#: dashboard.js:2
+msgid "Title"
+msgstr "Tiêu đề"
+
+#: dashboard.js:2
+msgid "View"
+msgstr "Xem"
+
+#: dashboard.js:2
+msgid "Edit note for the translators"
+msgstr "Chỉnh sửa ghi chú cho người dịch"
+
+#: dashboard.js:2
+msgid "Add note for the translators"
+msgstr "Thêm ghi chú cho người dịch"
+
+#: dashboard.js:2
+msgid "(no title)"
+msgstr "(không có tiêu đề)"
+
+#: dashboard.js:2
+msgid "Image"
+msgstr "Hình ảnh"
+
+#: dashboard.js:2
+msgid "Date / Status"
+msgstr "Ngày / trạng thái"
+
+#: dashboard.js:2
+msgid "Word count"
+msgstr "Số lượng từ"
+
+#: dashboard.js:2
+msgid "Loading..."
+msgstr "Đang tải..."
+
+#: dashboard.js:2
+msgid "No items"
+msgstr "Không có mục nào"
+
+#: dashboard.js:2
+msgid "%1$d %2$s selected"
+msgstr "%1$d%2$sđã chọn"
+
+#: dashboard.js:2
+msgid "Filtering is disabled to show all selected items"
+msgstr "Lọc bị vô hiệu hóa để hiển thị tất cả các mục đã chọn"
+
+#: dashboard.js:2
+msgid "Apply filter"
+msgstr "Áp dụng bộ lọc"
+
+#: dashboard.js:2
+msgid "%1$d %2$s not showing"
+msgstr "%1$d%2$skhông hiển thị"
+
+#: dashboard.js:2
+msgid "Show selected items"
+msgstr "Hiển thị các mục đã chọn"
+
+#: dashboard.js:2
+msgid "Previous"
+msgstr "Trước"
+
+#: dashboard.js:2
+msgid "Next"
+msgstr "Kế tiếp"
+
+#: dashboard.js:2
+msgid "Your site's content is too vast for a single translation batch. Use filters to reduce the selection, then \"select all\"."
+msgstr "Nội dung trang web của bạn quá lớn đối với một đợt dịch duy nhất. Sử dụng bộ lọc để thu hẹp phạm vi lựa chọn, sau đó \"chọn tất cả\"."
+
+#: dashboard.js:2
+msgid "The current filter captures too much content. Narrow it down to enable \"select all\" for translation."
+msgstr "Bộ lọc hiện tại thu thập quá nhiều nội dung. Thu hẹp lại để bật \"chọn tất cả\" cho bản dịch."
+
+#: dashboard.js:2
+msgid "Select All"
+msgstr "Chọn tất cả"
+
+#: dashboard.js:2
+msgid "All %d items matching criteria are selected"
+msgstr "Tất cả%d các mục phù hợp với tiêu chí được chọn"
+
+#: dashboard.js:2
+msgid "All %d items on this page are selected"
+msgstr "Tất cả%d các mục trên trang này được chọn"
+
+#: dashboard.js:2
+msgid "Unselect all items that match this search"
+msgstr "Bỏ chọn tất cả các mục phù hợp với tìm kiếm này"
+
+#: dashboard.js:2
+msgid "Select all items that match this search"
+msgstr "Chọn tất cả các mục phù hợp với tìm kiếm này"
+
+#: dashboard.js:2
+msgid "Save note"
+msgstr "Lưu ghi chú"
+
+#: dashboard.js:2
+msgid "Step 1"
+msgstr "Bước 1"
+
+#: dashboard.js:2
+msgid "Select items for translation"
+msgstr "Chọn mục để dịch"
+
+#: dashboard.js:2
+msgid "You have too many items selected to use this feature. Deselect some of the items to enable it."
+msgstr "Bạn đã chọn quá nhiều mục để sử dụng tính năng này. Hãy bỏ chọn một số mục để bật tính năng này."
+
+#: dashboard.js:2
+msgid "Show strings in:"
+msgstr "Hiển thị chuỗi trong:"
+
+#: dashboard.js:2
+msgid "All domains"
+msgstr "Tất cả các miền"
+
+#: dashboard.js:2
+msgid "All sources"
+msgstr "Tất cả các nguồn"
+
+#: dashboard.js:2
+msgid "String"
+msgstr "Sợi dây"
+
+#: dashboard.js:2
+msgid "All Translation Priorities"
+msgstr "Tất cả các ưu tiên dịch thuật"
+
+#: dashboard.js:2
+msgid "WPML doesn't know of any strings that need translation. Visit translations on your site's front-end (<a/>). WPML will identify all untranslated strings and list them here. To see all the strings in your site, disable \"Detect untranslated strings\" at the top of this section."
+msgstr "WPMLkhông biết bất kỳ chuỗi nào cần dịch. Truy cập bản dịch trên giao diện trang web của bạn (<a/>).WPML sẽ xác định tất cả các chuỗi chưa dịch và liệt kê chúng ở đây. Để xem tất cả các chuỗi trong trang web của bạn, hãy tắt \"Phát hiện các chuỗi chưa dịch\" ở đầu phần này."
+
+#: dashboard.js:2
+msgid "Domain"
+msgstr "Lãnh địa"
+
+#: dashboard.js:2
+msgid "Source"
+msgstr "Nguồn"
+
+#: dashboard.js:2
+msgid "Type"
+msgstr "Kiểu"
+
+#: dashboard.js:2
+msgid "Disabled"
+msgstr "Tàn tật"
+
+#: dashboard.js:2
+msgid "WPML can detect strings that appear on the site and list them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here only the strings that actually appear on the site, you need to enable this feature."
+msgstr "WPMLcó thể phát hiện các chuỗi xuất hiện trên trang web và liệt kê chúng ở đây. Tính năng này giúp bạn xác định các chuỗi thực sự xuất hiện trên trang web và dịch chúng. Để chỉ xem các chuỗi thực sự xuất hiện trên trang web, bạn cần bật tính năng này."
+
+#: dashboard.js:2
+msgid "Enabled"
+msgstr "Đã bật"
+
+#: dashboard.js:2
+msgid "WPML detects strings that appear on the site and lists them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here all the strings in the site, you need to disable this feature."
+msgstr "WPMLphát hiện các chuỗi xuất hiện trên trang web và liệt kê chúng ở đây. Tính năng này giúp bạn xác định các chuỗi thực sự xuất hiện trên trang web và dịch chúng. Để xem tất cả các chuỗi trong trang web, bạn cần tắt tính năng này."
+
+#: dashboard.js:2
+msgid "Detect untranslated strings"
+msgstr "Phát hiện chuỗi chưa được dịch"
+
+#: dashboard.js:2
+msgid "Modify"
+msgstr "Biến đổi"
+
+#: dashboard.js:2
+msgid "Automatically register untranslated strings"
+msgstr "Tự động đăng ký các chuỗi chưa dịch"
+
+#: dashboard.js:2
+msgid "Learn how to use auto-registration"
+msgstr "Tìm hiểu cách sử dụng đăng ký tự động"
+
+#: dashboard.js:2
+msgid "recommended"
+msgstr "khuyến khích"
+
+#: dashboard.js:2
+msgid "Also register strings from the website's back-end"
+msgstr "Cũng đăng ký các chuỗi từ phần cuối của trang web"
+
+#: dashboard.js:2
+msgid "Save settings"
+msgstr "Lưu cài đặt"
+
+#: dashboard.js:2
+msgid "Leave existing translations as are"
+msgstr "Để nguyên bản dịch hiện tại"
+
+#: dashboard.js:2
+msgid "Overwrite existing translations"
+msgstr "Ghi đè lên bản dịch hiện có"
+
+#: dashboard.js:2
+msgid "Some of the content you want to translate is already translated"
+msgstr "Một số nội dung bạn muốn dịch đã được dịch rồi"
+
+#: dashboard.js:2
+msgid "What do you want to do with the content that's already translated?"
+msgstr "Bạn muốn làm gì với nội dung đã được dịch?"
+
+#: dashboard.js:2
+msgid "What would you like to do when WPML finishes translating your content automatically?"
+msgstr "Bạn muốn làm gì khiWPML tự động hoàn tất việc dịch nội dung của bạn?"
+
+#: dashboard.js:2
+msgid "Choose how you want to handle your site's automatically translated content before it goes live. Remember that you can always edit translations, regardless of the review process."
+msgstr "Chọn cách bạn muốn xử lý nội dung được dịch tự động của trang web trước khi nó được đưa vào hoạt động. Hãy nhớ rằng bạn luôn có thể chỉnh sửa bản dịch, bất kể quy trình đánh giá."
+
+#: dashboard.js:2
+msgid "Wait for review"
+msgstr "Chờ xem xét"
+
+#: dashboard.js:2
+msgid "You check and approve translations before publishing."
+msgstr "Bạn kiểm tra và phê duyệt bản dịch trước khi xuất bản."
+
+#: dashboard.js:2
+msgid "Your translators check and approve translations before publishing."
+msgstr "Người dịch sẽ kiểm tra và phê duyệt bản dịch trước khi xuất bản."
+
+#: dashboard.js:2
+msgid "Publish and mark for review"
+msgstr "Xuất bản và đánh dấu để xem xét"
+
+#: dashboard.js:2
+msgid "WPML publishes translations immediately but flags them for you to check at your convenience."
+msgstr "WPMLxuất bản bản dịch ngay lập tức nhưng đánh dấu chúng để bạn có thể kiểm tra khi thuận tiện."
+
+#: dashboard.js:2
+msgid "WPML publishes translations immediately but flags them for your translators to check at their convenience."
+msgstr "WPMLxuất bản bản dịch ngay lập tức nhưng đánh dấu chúng để người dịch có thể kiểm tra khi thuận tiện."
+
+#: dashboard.js:2
+msgid "Publish without review"
+msgstr "Đăng mà không cần xem xét"
+
+#: dashboard.js:2
+msgid "The system publishes translations straight away, skipping the review process."
+msgstr "Hệ thống sẽ xuất bản bản dịch ngay lập tức, bỏ qua quá trình kiểm duyệt."
+
+#: dashboard.js:2
+msgid "Suggested deadline:"
+msgstr "Hạn chót đề xuất:"
+
+#: dashboard.js:2
+msgid "Set a batch name and deadline"
+msgstr "Đặt tên lô và thời hạn"
+
+#: dashboard.js:2
+msgid "You can assign a custom name to this batch for easy tracking and suggest a deadline to clarify the priority for translators."
+msgstr "Bạn có thể đặt tên tùy chỉnh cho đợt này để dễ theo dõi và đề xuất thời hạn để làm rõ mức độ ưu tiên cho người dịch."
+
+#: dashboard.js:2
+msgid "Batch name:"
+msgstr "Tên lô:"
+
+#: dashboard.js:2
+msgid "Your Automatic Translation Credits"
+msgstr "Tín dụng dịch tự động của bạn"
+
+#: dashboard.js:2
+msgid "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s translator</add_yourself> to the site.<br/> Add yourself as %s translator and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Để tự giao cho mình vai trò là người biên dịch, trước tiên bạn cần phải<add_yourself> thêm chính bạn vào%s người phiên dịch</add_yourself> đến trang web.<br/> Thêm chính bạn là%s dịch giả và nhấp chuột<check_again> kiểm tra lại</check_again> hoặc chọn một tùy chọn dịch khác."
+
+#: dashboard.js:2
+msgid "Checking"
+msgstr "Kiểm tra"
+
+#: dashboard.js:2
+msgid "In order to assign a translation service, you first need to <activate_ts>activate a translation service</activate_ts>.<br/>Activate a translation service and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Để chỉ định một dịch vụ dịch thuật, trước tiên bạn cần phải<activate_ts> kích hoạt dịch vụ dịch thuật</activate_ts>.<br/> Kích hoạt dịch vụ dịch thuật và nhấp vào<check_again> kiểm tra lại</check_again> hoặc chọn một tùy chọn dịch khác."
+
+#: dashboard.js:2
+msgid "In order to translate automatically, you first need to <enable_ate>enable WPML's Advanced Translation Editor</enable_ate>.<br/>Enable the Advanced Translation Editor and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Để dịch tự động, trước tiên bạn cần phải<enable_ate> bật Trình biên tập dịch nâng cao của WPML</enable_ate>.<br/> Bật Trình biên dịch nâng cao và nhấp vào<check_again> kiểm tra lại</check_again> hoặc chọn một tùy chọn dịch khác."
+
+#: dashboard.js:2
+msgid ""
+"Any existing content (translations) will be overwritten when creating duplicates.\n"
+"When duplicating content, please first duplicate parent pages to maintain the site's hierarchy."
+msgstr "Bất kỳ nội dung hiện có (bản dịch) nào cũng sẽ bị ghi đè khi tạo bản sao.\n Khi sao chép nội dung, trước tiên hãy sao chép các trang mẹ để duy trì thứ bậc của trang web."
+
+#: dashboard.js:2
+msgid "Some of the selected content is already being translated. This will cancel any in-progress translations."
+msgstr "Một số nội dung đã chọn hiện đang được dịch. Thao tác này sẽ hủy mọi bản dịch đang thực hiện."
+
+#: dashboard.js:2
+msgid "Buy credits"
+msgstr "Mua tín dụng"
+
+#: dashboard.js:2
+msgid "You don't have enough credits to translate your content automatically."
+msgstr "Bạn không có đủ tín dụng để dịch nội dung của mình tự động."
+
+#: dashboard.js:2
+msgid "In order to assign to a translator, you first need to <add_translators>add %s translators</add_translators> to the site.<br/> Add %s translators and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Để giao cho một biên dịch viên, trước tiên bạn cần phải<add_translators> thêm vào%s người dịch</add_translators> đến trang web.<br/> Thêm vào%s người dịch và nhấp chuột<check_again> kiểm tra lại</check_again> hoặc chọn một tùy chọn dịch khác."
+
+#: dashboard.js:2
+msgid "Your site doesn't have any reviewers for %s. This means that you’re the only person who can review these translations."
+msgstr "Trang web của bạn không có bất kỳ người đánh giá nào%s . Điều này có nghĩa là bạn là người duy nhất có thể xem lại các bản dịch này."
+
+#: dashboard.js:2
+msgid "Your site doesn't have any reviewers yet. This means that you’re the only person who can review translations."
+msgstr "Trang web của bạn chưa có người đánh giá nào. Điều này có nghĩa là bạn là người duy nhất có thể đánh giá bản dịch."
+
+#: dashboard.js:2
+msgid "If you want other people to review the translations, go to <a>WPML → Translation Management → Translators</a> and add translators. They will be able to both review and translate content for you."
+msgstr "Nếu bạn muốn người khác xem lại bản dịch, hãy vào<a>WPML → Quản lý biên dịch → Biên dịch viên</a> và thêm người dịch. Họ sẽ có thể xem xét và dịch nội dung cho bạn."
+
+#: dashboard.js:2
+msgid "WPML does not support duplicating strings."
+msgstr "WPMLkhông hỗ trợ việc sao chép chuỗi."
+
+#: dashboard.js:2
+msgid "Finish setting up %s on your site"
+msgstr "Hoàn tất thiết lập%s trên trang web của bạn"
+
+#: dashboard.js:2
+msgid "You need to authenticate %s to send them content for translation.<br/>Visit the <a>Translators tab</a> to finish the setup and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Bạn cần phải xác thực%s để gửi cho họ nội dung cần dịch.<br/> Ghé thăm<a> Tab biên dịch</a> để hoàn tất thiết lập và nhấp vào<check_again> kiểm tra lại</check_again> hoặc chọn một tùy chọn dịch khác."
+
+#: dashboard.js:2
+msgid "Content selected for translation"
+msgstr "Nội dung được chọn để dịch"
+
+#: dashboard.js:2
+msgid "Volume"
+msgstr "Âm lượng"
+
+#: dashboard.js:2
+msgid "~ %d words"
+msgstr "~%d từ"
+
+#: dashboard.js:2
+msgid "Total"
+msgstr "Tổng cộng"
+
+#: dashboard.js:2
+msgid "Sending for translation..."
+msgstr "Đang gửi để dịch..."
+
+#: dashboard.js:2
+msgid "Sending for translation failed"
+msgstr "Gửi để dịch không thành công"
+
+#: dashboard.js:2
+msgid "You selected multiple translation methods for content across different languages:"
+msgstr "Bạn đã chọn nhiều phương pháp dịch cho nội dung trên nhiều ngôn ngữ khác nhau:"
+
+#: dashboard.js:2
+msgid "WPML did not create translations for some languages because:"
+msgstr "WPMLkhông tạo bản dịch cho một số ngôn ngữ vì:"
+
+#: dashboard.js:2
+msgid "Close"
+msgstr "Đóng"
+
+#: dashboard.js:2
+msgid "1 item is being translated automatically."
+msgid_plural "%d items are being translated automatically."
+msgstr[0] "1 mục đang được dịch tự động."
+msgstr[1] "%dcác mục đang được dịch tự động."
+
+#: dashboard.js:2
+msgid "From now on, WPML will automatically translate new content on your site."
+msgstr "Từ bây giờ,WPML sẽ tự động dịch nội dung mới trên trang web của bạn."
+
+#: dashboard.js:2
+msgid "From now on, WPML will automatically translate your site's content."
+msgstr "Từ bây giờ,WPML sẽ tự động dịch nội dung trang web của bạn."
+
+#: dashboard.js:2
+msgid "Automatic translations summary"
+msgstr "Tóm tắt bản dịch tự động"
+
+#: dashboard.js:2
+msgid "1 item has been duplicated."
+msgid_plural "%d items have been duplicated."
+msgstr[0] "Có 1 mục bị trùng lặp."
+msgstr[1] "%dcác mục đã được sao chép."
+
+#: dashboard.js:2
+msgid "Duplication summary"
+msgstr "Tóm tắt trùng lặp"
+
+#: dashboard.js:2
+msgid "There was a problem sending your content for translation."
+msgstr "Đã xảy ra sự cố khi gửi nội dung của bạn để dịch."
+
+#: dashboard.js:2
+msgid "Please try again in a few minutes. If the issue persists, please contact our support."
+msgstr "Vui lòng thử lại sau vài phút. Nếu sự cố vẫn tiếp diễn, vui lòng liên hệ với bộ phận hỗ trợ của chúng tôi."
+
+#: dashboard.js:2
+msgid "1 item has been successfully sent to translators! To check its status, please visit the <s>Jobs</s> tab in <s>WPML → Translation Management</s>."
+msgid_plural "%d items have been successfully sent to translators! For status updates, please visit the <s>Jobs</s> tab in <s>WPML → Translation Management</s>."
+msgstr[0] "1 mục đã được gửi thành công đến người dịch! Để kiểm tra trạng thái của mục, vui lòng truy cập<s> Việc làm</s> tab trong<s>WPML → Quản lý dịch thuật</s>."
+msgstr[1] "%dcác mục đã được gửi thành công đến người dịch! Để cập nhật trạng thái, vui lòng truy cập<s> Việc làm</s> tab trong<s>WPML → Quản lý dịch thuật</s>."
+
+#: dashboard.js:2
+msgid "Local translations summary"
+msgstr "Tóm tắt bản dịch địa phương"
+
+#: dashboard.js:2
+msgid "Go to Translation Jobs"
+msgstr "Đi đến việc dịch thuật"
+
+#: dashboard.js:2
+msgid "%d item has been sent for translation to %s. Please continue to their site to start the translation."
+msgid_plural "%d items have been sent for translation to %s. Please continue to their site to start the translation."
+msgstr[0] "%dmục đã được gửi để dịch%s . Vui lòng tiếp tục đến trang web của họ để bắt đầu dịch."
+msgstr[1] "%dcác mục đã được gửi để dịch%s . Vui lòng tiếp tục đến trang web của họ để bắt đầu dịch."
+
+#: dashboard.js:2
+msgid "Translation service translations summary"
+msgstr "Tóm tắt dịch vụ dịch thuật"
+
+#: dashboard.js:2
+msgid "Continue to %s"
+msgstr "Tiếp tục%s"
+
+#: dashboard.js:2
+msgid "Translate and Duplicate"
+msgstr "Dịch và sao chép"
+
+#: dashboard.js:2
+msgid "Duplicate"
+msgstr "Nhân bản"
+
+#: dashboard.js:2
+msgid "Translate"
+msgstr "Dịch"
+
+#: dashboard.js:2
+msgid "Selected content is already translated"
+msgstr "Nội dung đã chọn đã được dịch"
+
+#: dashboard.js:2
+msgid "Please select a review option"
+msgstr "Vui lòng chọn một tùy chọn đánh giá"
+
+#: dashboard.js:2
+msgid "Assign local translator or choose another option"
+msgstr "Chỉ định người dịch địa phương hoặc chọn tùy chọn khác"
+
+#: dashboard.js:2
+msgid "Assign yourself or choose another option"
+msgstr "Tự chỉ định hoặc chọn tùy chọn khác"
+
+#: dashboard.js:2
+msgid "Activate translation service or choose another option"
+msgstr "Kích hoạt dịch vụ dịch thuật hoặc chọn tùy chọn khác"
+
+#: dashboard.js:2
+msgid "Activate ATE or choose another option"
+msgstr "Kích hoạt ĂN hoặc chọn một tùy chọn khác"
+
+#: dashboard.js:2
+msgid "Authenticate translation service or choose another option"
+msgstr "Xác thực dịch vụ dịch thuật hoặc chọn tùy chọn khác"
+
+#: dashboard.js:2
+msgid "<s>%s</s> cannot process more than <s>%d</s> jobs in a single batch. WPML will automatically split your jobs into separate batches to ensure an error-free delivery to <s>%s</s>. <br/><br/> Do you want to proceed?"
+msgstr "<s>%s</s>không thể xử lý nhiều hơn<s>%d</s> việc làm trong một đợt duy nhất.WPML sẽ tự động chia công việc của bạn thành các đợt riêng biệt để đảm bảo giao hàng không có lỗi<s>%s</s>.<br/><br/> Bạn có muốn tiếp tục không?"
+
+#: dashboard.js:2
+msgid "WPML will send jobs to %s in separate batches"
+msgstr "WPMLsẽ gửi công việc đến%s trong các lô riêng biệt"
+
+#: dashboard.js:2
+msgid "Yes, send jobs in separate batches"
+msgstr "Có, gửi công việc theo từng đợt riêng biệt"
+
+#: dashboard.js:2
+msgid "No, I will split jobs myself"
+msgstr "Không, tôi sẽ tự chia công việc"
+
+#: dashboard.js:2
+msgid "From now on, translate new content automatically, without asking me."
+msgstr "Từ bây giờ, hãy tự động dịch nội dung mới mà không cần hỏi tôi."
+
+#: dashboard.js:2
+msgid "Do you want to translate existing content too?"
+msgstr "Bạn có muốn dịch nội dung hiện có không?"
+
+#: dashboard.js:2
+msgid "Yes, translate all new and existing content"
+msgstr "Có, dịch tất cả nội dung mới và hiện có"
+
+#: dashboard.js:2
+msgid "No, only translate new content"
+msgstr "Không, chỉ dịch nội dung mới"
+
+#: dashboard.js:2
+msgid "You can translate existing content from the Translation Management Dashboard"
+msgstr "Bạn có thể dịch nội dung hiện có từ Bảng điều khiển quản lý bản dịch"
+
+#: dashboard.js:2
+msgid "Existing content"
+msgstr "Nội dung hiện có"
+
+#: dashboard.js:2
+msgid "You selected to translate strings that are in %s. Only these strings will be translated to %s."
+msgstr "Bạn đã chọn dịch các chuỗi có trong%s . Chỉ những chuỗi này sẽ được dịch sang%s ."
+
+#: dashboard.js:2
+msgid "You selected to translate strings that are in %s and %s. Only these strings will be translated to %s."
+msgstr "Bạn đã chọn dịch các chuỗi có trong%s Và%s . Chỉ những chuỗi này sẽ được dịch sang%s ."
+
+#: dashboard.js:2
+msgid "Source language"
+msgstr "Ngôn ngữ nguồn"
+
+#: dashboard.js:2
+msgid "Target language"
+msgstr "Ngôn ngữ mục tiêu"
+
+#: dashboard.js:2
+msgid "Action"
+msgstr "Hoạt động"
+
+#: dashboard.js:2
+msgid "Select an option"
+msgstr "Chọn một tùy chọn"
+
+#: dashboard.js:2
+msgid "-"
+msgstr "-"
+
+#: dashboard.js:2
+msgid "Translate automatically"
+msgstr "Dịch tự động"
+
+#: dashboard.js:2
+msgid "Translate myself"
+msgstr "Dịch bản thân tôi"
+
+#: dashboard.js:2
+msgid "Assign a translator"
+msgstr "Chỉ định một biên dịch viên"
+
+#: dashboard.js:2
+msgid "Assign translation service"
+msgstr "Chỉ định dịch vụ dịch thuật"
+
+#: dashboard.js:2
+msgid "Do nothing"
+msgstr "Không làm gì cả"
+
+#: dashboard.js:2
+msgid "Please choose"
+msgstr "Vui lòng chọn"
+
+#: dashboard.js:2
+msgid "Choose a translator"
+msgstr "Chọn một người dịch"
+
+#: dashboard.js:2
+msgid "First available"
+msgstr "Đầu tiên có sẵn"
+
+#: dashboard.js:2
+msgid "(Me)"
+msgstr "(Tôi)"
+
+#: dashboard.js:2
+msgid "Translation controls"
+msgstr "Kiểm soát dịch thuật"
+
+#: dashboard.js:2
+msgid "Step 2"
+msgstr "Bước 2"
+
+#: dashboard.js:2
+msgid "Action needed"
+msgstr "Hành động cần thiết"
+
+#: dashboard.js:2
+msgid "Automatic jobs in progress"
+msgstr "Công việc tự động đang tiến hành"
+
+#: dashboard.js:2
+msgid "<s>%d automatic translation jobs</s> are currently in progress"
+msgstr "<s>%dcông việc dịch thuật tự động</s> hiện đang trong quá trình tiến hành"
+
+#: dashboard.js:2
+msgid "Pause"
+msgstr "Tạm dừng"
+
+#: dashboard.js:2
+msgid "Start"
+msgstr "Bắt đầu"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - credit wizard error"
+msgstr "Dịch mọi thứ tự động - lỗi trình hướng dẫn tín dụng"
+
+#: dashboard.js:2
+msgid "There was an error when loading the credit wizard."
+msgstr "Đã xảy ra lỗi khi tải trình hướng dẫn tín dụng."
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - no credits"
+msgstr "Dịch mọi thứ tự động - không cần ghi công"
+
+#: dashboard.js:2
+msgid "Start translating everything"
+msgstr "Bắt đầu dịch mọi thứ"
+
+#: dashboard.js:2
+msgid "Automatic translation uses credit. <a>Read more about automatic translation credits</a>"
+msgstr "Bản dịch tự động sử dụng credit.<a> Đọc thêm về tín dụng dịch tự động</a>"
+
+#: dashboard.js:2
+msgid "Start translating everything automatically"
+msgstr "Bắt đầu dịch mọi thứ tự động"
+
+#: dashboard.js:2
+msgid "WPML will translate any new content you create into %d languages."
+msgstr "WPMLsẽ dịch bất kỳ nội dung mới nào bạn tạo ra thành%d ngôn ngữ."
+
+#: dashboard.js:2
+msgid "You will be able to start Translate Everything Automatically after you send some content for translation. We recommend that you review the translations and make sure that they are good before translating your entire site's content."
+msgstr "Bạn sẽ có thể bắt đầu Translate Everything Automatically sau khi bạn gửi một số nội dung để dịch. Chúng tôi khuyên bạn nên xem lại các bản dịch và đảm bảo rằng chúng tốt trước khi dịch toàn bộ nội dung trang web của bạn."
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - disabled"
+msgstr "Dịch mọi thứ tự động - đã tắt"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically"
+msgstr "Dịch mọi thứ tự động"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - pausing"
+msgstr "Dịch mọi thứ tự động - tạm dừng"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically is pausing"
+msgstr "Dịch mọi thứ tự động đang tạm dừng"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - paused"
+msgstr "Dịch mọi thứ tự động - tạm dừng"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically is paused"
+msgstr "Dịch mọi thứ tự động đã tạm dừng"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically will translate all of your site's content and not only specific post types."
+msgstr "Tính năng Translate Everything Automatically sẽ dịch toàn bộ nội dung trên trang web của bạn chứ không chỉ một số loại bài đăng cụ thể."
+
+#: dashboard.js:2
+msgid "%d translations left in the queue. Preparing more content for translation."
+msgstr "%dbản dịch còn trong hàng đợi. Đang chuẩn bị thêm nội dung để dịch."
+
+#: dashboard.js:2
+msgid "Preparing content for translation"
+msgstr "Chuẩn bị nội dung để dịch"
+
+#: dashboard.js:2
+msgid "%d translations left in the queue"
+msgstr "%dbản dịch còn lại trong hàng đợi"
+
+#: dashboard.js:2
+msgid "All translations are up to date"
+msgstr "Tất cả các bản dịch đều được cập nhật"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - enabled"
+msgstr "Dịch mọi thứ tự động - đã bật"
+
+#: dashboard.js:2
+msgid "As you create new content or edit existing content, WPML will automatically translate it from %s to %s."
+msgstr "Khi bạn tạo nội dung mới hoặc chỉnh sửa nội dung hiện có,WPML sẽ tự động dịch nó từ%s ĐẾN%s ."
+
+#: dashboard.js:2
+msgid "Hide details"
+msgstr "Ẩn chi tiết"
+
+#: dashboard.js:2
+msgid "Show details"
+msgstr "Hiển thị chi tiết"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically is stopped"
+msgstr "Dịch mọi thứ tự động đã dừng lại"
+
+#: dashboard.js:2
+msgid "Translation not running… there is an issue that needs your attention. Fix it to continue."
+msgstr "Bản dịch không chạy… có một vấn đề cần bạn lưu ý. Hãy sửa lỗi để tiếp tục."
+
+#: dashboard.js:2
+msgid "Fix now"
+msgstr "Sửa ngay"
+
+#: dashboard.js:2
+msgid "%d Translations are waiting for your review"
+msgstr "%dBản dịch đang chờ bạn xem xét"
+
+#: dashboard.js:2
+msgid "Review Translations"
+msgstr "Đánh giá bản dịch"
+
+#: dashboard.js:2
+msgid "Error in fetching currently logged in translator"
+msgstr "Lỗi khi tải trình dịch hiện đang đăng nhập"
+
+#: dashboard.js:2
+msgid "Error in fetching local translators"
+msgstr "Lỗi khi tìm kiếm trình biên dịch cục bộ"
+
+#: dashboard.js:2
+msgid "published"
+msgstr "đã xuất bản"
+
+#: dashboard.js:2
+msgid "Collapse"
+msgstr "Sụp đổ"
+
+#: dashboard.js:2
+msgid "Expand"
+msgstr "Mở rộng"
+
+#: dashboard.js:2
+msgid "Close modal"
+msgstr "Đóng cửa sổ"
+
+#: dashboard.js:2
+msgid "Search parent by title"
+msgstr "Tìm kiếm cha mẹ theo tiêu đề"
+
+#: dashboard.js:2
+msgid "No items found"
+msgstr "Không tìm thấy mục nào"
+
+#: dashboard.js:2
+msgid "%1$s Flag"
+msgstr "%1$sLá cờ"
+
+#: dashboard.js:2
+msgid "not translated"
+msgstr "chưa được dịch"
+
+#: dashboard.js:2
+msgid "waiting for translator"
+msgstr "đang chờ người dịch"
+
+#: dashboard.js:2
+msgid "in progress"
+msgstr "đang tiến hành"
+
+#: dashboard.js:2
+msgid "needs update"
+msgstr "cần cập nhật"
+
+#: dashboard.js:2
+msgid "duplicate"
+msgstr "nhân bản"
+
+#: dashboard.js:2
+msgid "complete"
+msgstr "hoàn thành"
+
+#: dashboard.js:2
+msgid "needs review"
+msgstr "cần xem xét lại"
+
+#: dashboard.js:2
+msgid "%1$s: %2$s"
+msgstr "%1$s:%2$s"

@@ -108,14 +108,8 @@ class WPML_Compatibility_Divi implements \IWPML_DIC_Action, \IWPML_Backend_Actio
 	}
 
 	private function register_layouts() {
-		/**
-		 * @phpstan-ignore-next-line
-		 */
 		if ( function_exists( 'et_builder_should_load_framework' ) && ! et_builder_should_load_framework() ) {
 			if ( function_exists( 'et_builder_register_layouts' ) ) {
-				/**
-				 * @phpstan-ignore-next-line
-				 */
 				et_builder_register_layouts();
 			} else {
 				$lib_file = ET_BUILDER_DIR . 'feature/Library.php';
@@ -124,6 +118,7 @@ class WPML_Compatibility_Divi implements \IWPML_DIC_Action, \IWPML_Backend_Actio
 					&& defined( 'ET_BUILDER_DIR' )
 					&& file_exists( $lib_file )
 				) {
+					/* @phpstan-ignore-next-line */
 					require_once $lib_file;
 				}
 

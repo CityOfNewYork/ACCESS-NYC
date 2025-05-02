@@ -1,0 +1,109 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "What should happen with your automatically translated content?": [
+            "อะไรควรเกิดขึ้นกับเนื้อหาที่แปลโดยอัตโนมัติของคุณ?"
+         ],
+         "Wait for review": [
+            "รอการตรวจสอบ"
+         ],
+         "You check and approve translations before publishing.": [
+            "คุณตรวจสอบและอนุมัติการแปลก่อนเผยแพร่."
+         ],
+         "Your translators check and approve translations before publishing.": [
+            "นักแปลของคุณตรวจสอบและอนุมัติการแปลก่อนเผยแพร่."
+         ],
+         "Publish and mark for review": [
+            "เผยแพร่และทำเครื่องหมายเพื่อตรวจสอบ"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "WPML เผยแพร่การแปลทันทีแต่ทำเครื่องหมายไว้ให้คุณตรวจสอบตามความสะดวก."
+         ],
+         "WPML publishes translations immediately but flags them for your translators to check at their convenience.": [
+            "WPML เผยแพร่การแปลทันทีแต่ทำเครื่องหมายไว้ให้นักแปลของคุณตรวจสอบตามความสะดวก."
+         ],
+         "Publish without review": [
+            "เผยแพร่โดยไม่ต้องตรวจสอบ"
+         ],
+         "The system publishes translations straight away, skipping the review process.": [
+            "ระบบเผยแพร่การแปลทันทีโดยข้ามขั้นตอนการตรวจสอบ."
+         ],
+         "Automatic translation": [
+            "การแปลอัตโนมัติ"
+         ],
+         "What should happen with your automatically translated content": [
+            "อะไรควรเกิดขึ้นกับเนื้อหาที่แปลโดยอัตโนมัติของคุณ"
+         ],
+         "Save settings": [
+            "บันทึกการตั้งค่า"
+         ],
+         "Translate drafts as I save them (consumes a bit more translation credits).": [
+            "แปลฉบับร่างขณะที่ฉันบันทึก (ใช้เครดิตการแปลเพิ่มขึ้นเล็กน้อย)."
+         ],
+         "Do you want to translate drafts automatically?": [
+            "คุณต้องการแปลฉบับร่างโดยอัตโนมัติหรือไม่?"
+         ],
+         "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s.": [
+            "คุณสมบัตินี้จะใช้ได้เมื่อคุณเปิดใช้งาน “แปลทุกอย่างโดยอัตโนมัติ” จาก %sแดชบอร์ดการแปล%s."
+         ],
+         "Don't translate drafts. Only translate when I publish content.": [
+            "ไม่ต้องแปลฉบับร่าง แปลเฉพาะเมื่อฉันเผยแพร่เนื้อหา."
+         ],
+         "%d credits/word": [
+            "%d เครดิต/คำ"
+         ],
+         "Informal": [
+            "ไม่เป็นทางการ"
+         ],
+         "Automatic": [
+            "อัตโนมัติ"
+         ],
+         "Formal": [
+            "เป็นทางการ"
+         ],
+         "Which translation engines do you want to use?": [
+            "คุณต้องการใช้เครื่องมือแปลภาษาใดบ้าง?"
+         ],
+         "Automatic translation engines differ in translation style and supported language pairs.\nIf your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it.\n": [
+            "เครื่องมือแปลอัตโนมัติแต่ละตัวมีรูปแบบการแปลและคู่ภาษาที่รองรับแตกต่างกัน\nหากเครื่องมือแปลที่คุณต้องการไม่รองรับคู่ภาษาที่คุณต้องการใช้ เราจะเปลี่ยนไปใช้เครื่องมือที่คุณชอบถัดไปที่รองรับคู่ภาษานั้น\n"
+         ],
+         "Drag & drop to sort from the most to the least preferred engine.": [
+            "ลากและวางเพื่อจัดเรียงจากเครื่องมือที่ชอบมากที่สุดไปยังน้อยที่สุด."
+         ],
+         "Choose the tone of your automatic translations.": [
+            "เลือกโทนของการแปลอัตโนมัติของคุณ."
+         ],
+         "Read more": [
+            "อ่านเพิ่มเติม"
+         ],
+         "Learn more": [
+            "เรียนรู้เพิ่มเติม"
+         ],
+         "On": [
+            "เปิด"
+         ],
+         "Off": [
+            "ปิด"
+         ],
+         "Could not load translation engines": [
+            "ไม่สามารถโหลดเครื่องมือแปลได้"
+         ],
+         "Could not update engine": [
+            "ไม่สามารถอัปเดตเครื่องมือได้"
+         ],
+         "Could not save review mode": [
+            "ไม่สามารถบันทึกโหมดการตรวจสอบได้"
+         ],
+         "Could not save translate everything drafts": [
+            "ไม่สามารถบันทึกการแปลฉบับร่างทั้งหมดได้"
+         ],
+         "Settings saved successfully": [
+            "บันทึกการตั้งค่าเรียบร้อยแล้ว"
+         ]
+      }
+   }
+}

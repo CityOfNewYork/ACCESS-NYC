@@ -18,52 +18,32 @@ class AddMediaDataToTranslationPackage implements \IWPML_Backend_Action {
 
 	public function add_hooks() {
 		if ( Option::getTranslateMediaLibraryTexts() ) {
-			add_action( 'wpml_tm_translation_job_data', [ $this, 'add_media_strings' ], PHP_INT_MAX, 2 );
+			add_filter( 'wpml_tm_translation_job_data', [ $this, 'add_media_strings' ], PHP_INT_MAX, 2 );
 		}
 	}
 
 	public function add_media_strings( $package, $post ) {
-
-		$basket = \TranslationProxy_Basket::get_basket( true );
-
 		$bundled_media_data = $this->get_bundled_media_to_translate( $post );
 		if ( $bundled_media_data ) {
 
 			foreach ( $bundled_media_data as $attachment_id => $data ) {
 				foreach ( $data as $field => $value ) {
-					if (
-						isset( $basket['post'][ $post->ID ]['media-translation'] ) &&
-						! in_array( $attachment_id, $basket['post'][ $post->ID ]['media-translation'] )
-					) {
-						$options = [
-							'translate' => 0,
-							'data'      => true,
-							'format'    => '',
-						];
-					} else {
-						$options = [
-							'translate' => 1,
-							'data'      => base64_encode( $value ),
-							'format'    => 'base64',
-						];
-					}
+					$options = [
+						'translate' => 1,
+						'data'      => base64_encode( $value ),
+						'format'    => 'base64',
+					];
 					$package['contents'][ 'media_' . $attachment_id . '_' . $field ] = $options;
 				}
 
-				if (
-					isset( $basket['post'][ $post->ID ]['media-translation'] ) &&
-					in_array( $attachment_id, $basket['post'][ $post->ID ]['media-translation'] )
-				) {
-					$package['contents'][ 'should_translate_media_image_' . $attachment_id ] = [
-						'translate' => 0,
-						'data'      => true,
-						'format'    => '',
-					];
-				}
+				$package['contents'][ 'should_translate_media_image_' . $attachment_id ] = [
+					'translate' => 0,
+					'data'      => true,
+					'format'    => '',
+				];
 			}
 
 			$package = $this->add_placeholders_for_duplicate_fields( $package, $bundled_media_data );
-
 		}
 
 		return $package;

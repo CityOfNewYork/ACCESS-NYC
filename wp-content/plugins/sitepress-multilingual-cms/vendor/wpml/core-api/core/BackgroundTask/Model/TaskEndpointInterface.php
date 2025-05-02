@@ -8,6 +8,9 @@ use WPML\FP\Right;
 interface TaskEndpointInterface {
 
 	/** @return bool */
+	public function isValidTask( $task_id );
+
+	/** @return bool */
 	public function isDisplayed();
 
 	/** @return string */

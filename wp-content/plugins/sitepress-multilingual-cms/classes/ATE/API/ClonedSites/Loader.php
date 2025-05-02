@@ -44,7 +44,7 @@ class Loader implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 		Hooks::onAction( 'admin_enqueue_scripts' )
 		     ->then( function () {
 			     if ( $this->shouldRender() ) {
-				     $fn = Resources::enqueueApp( 'ate/clonedSites' );
+				     $fn = Resources::enqueueApp( 'ate-cloned-sites' );
 				     $fn( $this->getData() );
 			     }
 		     } );

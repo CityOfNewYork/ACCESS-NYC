@@ -8,6 +8,28 @@ abstract class WPML_Templates_Factory {
 	const NOTICE_GROUP                 = 'template_factory';
 	const OTGS_TWIG_CACHE_DISABLED_KEY = '_otgs_twig_cache_disabled';
 
+	/*
+	 * List of tags and filters that are allowed in the sandbox mode.
+	 * Specifically excluded 'include' and 'import' tags.
+	 * Excluded the 'filter', 'reduce', 'map' filters.
+	 */
+	const SANDBOX_FUNCTIONS = [
+		'attribute', 'block', 'constant', 'country_names', 'country_timezones', 'currency_names', 'cycle', 'date',
+		'html_classes', 'language_names', 'locale_names', 'max', 'min', 'parent', 'random', 'range', 'script_names',
+		'source', 'template_from_string', 'timezone_names'
+	];
+	const SANDBOX_TAGS = [ 'apply', 'autoescape', 'block', 'cache', 'do', 'embed', 'flush', 'for', 'from', 'if',
+		'macro', 'set', 'with'
+	];
+	const SANDBOX_FILTERS = ['abs', 'batch', 'capitalize', 'column', 'convert_encoding', 'country_name',
+		'currency_name', 'currency_symbol', 'data_uri', 'date', 'date_modify', 'default', 'escape', 'first',
+		'format','format_currency', 'format_date', 'format_datetime', 'format_number', 'format_time',
+		'html_to_markdown', 'inky_to_html', 'inline_css', 'join', 'json_encode', 'keys', 'language_name',
+		'last', 'length', 'locale_name', 'lower', 'markdown_to_html', 'merge', 'nl2br', 'number_format',
+		'replace', 'reverse', 'round', 'sort', 'spaceless', 'striptags', 'title', 'trim', 'upper',
+		'url_encode', 'url_decode', 'u', 'wordwrap'
+	];
+
 	/** @var array */
 	protected $custom_filters;
 
@@ -27,6 +49,9 @@ abstract class WPML_Templates_Factory {
 
 	/** @var Twig_Environment */
 	protected $twig;
+
+	/** @var Twig_Environment */
+	protected $sandboxTwig;
 
 	/**
 	 * WPML_Templates_Factory constructor.
@@ -57,6 +82,38 @@ abstract class WPML_Templates_Factory {
 	 */
 	public function show( $template = null, $model = null ) {
 		echo $this->get_view( $template, $model );
+	}
+
+	public function get_sandbox_view( $template = null, $model = null ) {
+		$output = '';
+		$this->maybe_init_sandbox_twig();
+
+		if ( null === $model ) {
+			$model = $this->get_model();
+		}
+		if ( null === $template ) {
+			$template = $this->get_template();
+		}
+
+		try {
+			$output = $this->sandboxTwig->render( $template, $model );
+		} catch ( RuntimeException $e ) {
+			if ( $this->is_caching_enabled() ) {
+				$this->disable_twig_cache();
+				$this->sandboxTwig = null;
+				$this->maybe_init_sandbox_twig();
+				$output = $this->get_sandbox_view( $template, $model );
+			} else {
+				$this->add_exception_notice( $e );
+			}
+		} catch ( Twig_Error_Syntax $e ) {
+			$message = 'Invalid Twig template string: ' . $e->getRawMessage() . "\n" . $template;
+			$this->get_wp_api()->error_log( $message );
+		} catch ( WPML\Core\Twig\Sandbox\SecurityNotAllowedFilterError $e ) {
+			$this->get_wp_api()->error_log( $e->getMessage() );
+		}
+
+		return $output;
 	}
 
 	/**
@@ -99,42 +156,11 @@ abstract class WPML_Templates_Factory {
 	}
 
 	protected function maybe_init_twig() {
-		if ( ! $this->twig ) {
-			$loader = $this->get_twig_loader();
+		$this->_init_twig( false );
+	}
 
-			$environment_args = array();
-
-			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-				$environment_args['debug'] = true;
-			}
-
-			if ( $this->is_caching_enabled() ) {
-				$wpml_cache_directory  = new WPML_Cache_Directory( $this->get_wp_api() );
-				$this->cache_directory = $wpml_cache_directory->get( 'twig' );
-
-				if ( $this->cache_directory ) {
-					$environment_args['cache']       = $this->cache_directory;
-					$environment_args['auto_reload'] = true;
-				} else {
-					$this->disable_twig_cache();
-				}
-			}
-
-			$this->twig = $this->get_wp_api()->get_twig_environment( $loader, $environment_args );
-			if ( $this->custom_functions && count( $this->custom_functions ) > 0 ) {
-				foreach ( $this->custom_functions as $custom_function ) {
-					$this->twig->addFunction( $custom_function );
-				}
-			}
-			if ( $this->custom_filters && count( $this->custom_filters ) > 0 ) {
-				foreach ( $this->custom_filters as $custom_filter ) {
-					$this->twig->addFilter( $custom_filter );
-				}
-			}
-			if ( Obj::propOr( false, 'debug', $environment_args ) ) {
-				$this->twig->addExtension( new \WPML\Core\Twig\Extension\DebugExtension() );
-			}
-		}
+	protected function maybe_init_sandbox_twig() {
+		$this->_init_twig( true );
 	}
 
 	abstract public function get_template();
@@ -203,5 +229,60 @@ abstract class WPML_Templates_Factory {
 		}
 
 		return $loader;
+	}
+
+
+	protected function _init_twig( $sandbox = false ) {
+		if ( ( ! $this->twig && ! $sandbox ) || ( ! $this->sandboxTwig && $sandbox ) ) {
+			$loader = $this->get_twig_loader();
+
+			$environment_args = array();
+
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				$environment_args['debug'] = true;
+			}
+
+			if ( $this->is_caching_enabled() ) {
+				$wpml_cache_directory  = new WPML_Cache_Directory( $this->get_wp_api() );
+				$this->cache_directory = $wpml_cache_directory->get( 'twig' );
+
+				if ( $this->cache_directory ) {
+					$environment_args['cache']       = $this->cache_directory;
+					$environment_args['auto_reload'] = true;
+				} else {
+					$this->disable_twig_cache();
+				}
+			}
+
+			$twig = $this->get_wp_api()->get_twig_environment( $loader, $environment_args );
+			if ( $this->custom_functions && count( $this->custom_functions ) > 0 ) {
+				foreach ( $this->custom_functions as $custom_function ) {
+					$twig->addFunction( $custom_function );
+				}
+			}
+			if ( $this->custom_filters && count( $this->custom_filters ) > 0 ) {
+				foreach ( $this->custom_filters as $custom_filter ) {
+					$twig->addFilter( $custom_filter );
+				}
+			}
+			if ( Obj::propOr( false, 'debug', $environment_args ) ) {
+				$twig->addExtension( new \WPML\Core\Twig\Extension\DebugExtension() );
+			}
+			if ( $sandbox && ( ! defined( 'WPML_LS_TEMPLATE_UNSAFE_MODE' ) || ! WPML_LS_TEMPLATE_UNSAFE_MODE ) ) {
+				$policy = new \WPML\Core\Twig\Sandbox\SecurityPolicy(
+					self::SANDBOX_TAGS,
+					self::SANDBOX_FILTERS,
+					[],
+					[],
+					self::SANDBOX_FUNCTIONS
+				);
+				$twig->addExtension( new \WPML\Core\Twig\Extension\SandboxExtension( $policy, true ) );
+			}
+			if ( $sandbox ) {
+				$this->sandboxTwig = $twig;
+			} else {
+				$this->twig = $twig;
+			}
+		}
 	}
 }

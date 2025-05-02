@@ -34,7 +34,10 @@ class RetranslationPreparer {
 	public function delegate( array $ateJobIds ): array {
 		$rowset = \wpml_collect( $this->wpdb->get_results( $this->buildSelectQuery( $ateJobIds ) ) );
 
-		list( $jobsWhichShouldBeReFetched, $outdatedJobs ) = $rowset->partition( Obj::prop( 'is_the_most_recent_job' ) );
+		list( $jobsWhichShouldBeReFetched, $outdatedJobs ) = $rowset->partition( function($job) {
+			return Obj::prop( 'is_the_most_recent_job', $job ) && !Obj::prop('needs_update', $job);
+		} );
+
 
 		if ( count( $jobsWhichShouldBeReFetched ) ) {
 			$this->turnJobsIntoInProgress( $jobsWhichShouldBeReFetched );
@@ -56,7 +59,7 @@ class RetranslationPreparer {
 		";
 
 		$select = "
-			SELECT tranlation_status.rid, icl_translate_job1.job_id, icl_translate_job1.editor_job_id, ({$isTheMostRecentJob}) as is_the_most_recent_job
+			SELECT tranlation_status.rid, tranlation_status.needs_update, icl_translate_job1.job_id, icl_translate_job1.editor_job_id, ({$isTheMostRecentJob}) as is_the_most_recent_job
 			FROM {$this->wpdb->prefix}icl_translation_status tranlation_status
 			INNER JOIN {$this->wpdb->prefix}icl_translate_job icl_translate_job1 ON icl_translate_job1.rid = tranlation_status.rid
 			WHERE icl_translate_job1.editor_job_id IN (" . implode( ',', $ateJobIds ) . ")
@@ -72,7 +75,7 @@ class RetranslationPreparer {
 				WHERE rid IN (" . implode( ',', $jobsWhichShouldBeReFetched->pluck( 'rid' )->toArray() ) . ")
 			";
 
-		$query = $this->wpdb->prepare( $query, ICL_TM_WAITING_FOR_TRANSLATOR );
+		$query = $this->wpdb->prepare( $query, ICL_TM_IN_PROGRESS );
 
 		$this->wpdb->query( $query );
 	}

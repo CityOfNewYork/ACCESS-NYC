@@ -8,13 +8,10 @@ class WPML_PB_Update_Post {
 	private $package_data;
 	/** @var  IWPML_PB_Strategy $strategy */
 	private $strategy;
-	/** @var  wpdb $wpdb */
-	private $wpdb;
 	/** @var  SitePress $sitepress */
 	private $sitepress;
 
-	public function __construct( $wpdb, $sitepress, $package_data, IWPML_PB_Strategy $strategy ) {
-		$this->wpdb         = $wpdb;
+	public function __construct( $sitepress, $package_data, IWPML_PB_Strategy $strategy ) {
 		$this->sitepress    = $sitepress;
 		$this->package_data = $package_data;
 		$this->strategy     = $strategy;

@@ -1,0 +1,172 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Could not fetch engines data": [
+            "エンジンデータを取得できませんでした"
+         ],
+         "Could not save settings": [
+            "設定を保存できませんでした"
+         ],
+         "Automatic translation": [
+            "自動翻訳"
+         ],
+         "Saving...": [
+            "保存中..."
+         ],
+         "Save settings": [
+            "設定を保存"
+         ],
+         "Settings saved": [
+            "設定が保存されました"
+         ],
+         "Some error occurred": [
+            "エラーが発生しました"
+         ],
+         "Loading...": [
+            "読み込み中..."
+         ],
+         "Failed to load engines": [
+            "エンジンの読み込みに失敗しました"
+         ],
+         "Drag your default engine to the top and order the rest by priority.": [
+            "デフォルトのエンジンを一番上にドラッグし、残りを優先順位で並べ替えてください。"
+         ],
+         "Which translation engines do you want to use?": [
+            "どの翻訳エンジンを使用しますか？"
+         ],
+         "Automatic translation engines differ in translation style and supported language pairs. If your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it.": [
+            "自動翻訳エンジンは、翻訳スタイルとサポートされる言語ペアが異なります。お好みの翻訳エンジンが使用したい言語ペアをサポートしていない場合、次に優先されるエンジンでその言語ペアをサポートしているものにフォールバックします。"
+         ],
+         "WPML AI (beta) automatically detects the formality of your content and translates with the same formality.": [
+            "WPML AI（ベータ版）はコンテンツの形式を自動的に検出し、同じ形式で翻訳します。"
+         ],
+         "Auto-formality": [
+            "自動形式"
+         ],
+         "Choose the tone of automatic translations for %s": [
+            "%sの自動翻訳のトーンを選択してください"
+         ],
+         "Your site doesn't use languages that offer formality settings.": [
+            "サイトは形式設定を提供する言語を使用していません。"
+         ],
+         "Edit formality": [
+            "形式を編集"
+         ],
+         "%d credits per word": [
+            "単語あたり%dクレジット"
+         ],
+         "Backup %d": [
+            "バックアップ %d"
+         ],
+         "Default": [
+            "デフォルト"
+         ],
+         "ON": [
+            "オン"
+         ],
+         "OFF": [
+            "オフ"
+         ],
+         "Documentation": [
+            "ドキュメント"
+         ],
+         "DeepL's formality and how it helps get good translations": [
+            "DeepLの形式と、それが良い翻訳を得るのにどのように役立つか"
+         ],
+         "Edit button": [
+            "編集ボタン"
+         ],
+         "Examples for %s": [
+            "%sの例"
+         ],
+         "For example:": [
+            "例えば："
+         ],
+         "Formality settings for %s": [
+            "%sの形式設定"
+         ],
+         "Formality level for %s": [
+            "%sの形式レベル"
+         ],
+         "Set formality for %s": [
+            "%sの形式を設定"
+         ],
+         "%d of your target languages can be translated using either a formal or informal tone.\n The tone which gives the best translation for each language is set by default.": [
+            "ターゲット言語の%dは、フォーマルまたはインフォーマルなトーンで翻訳できます。\n 各言語に最適な翻訳を提供するトーンがデフォルトで設定されています。"
+         ],
+         "%s doesn't yet support formality options for %s.": [
+            "%sは%sの形式オプションをまだサポートしていません。"
+         ],
+         "Cancel": [
+            "キャンセル"
+         ],
+         "Update": [
+            "更新"
+         ],
+         "Formal": [
+            "フォーマル"
+         ],
+         "Informal": [
+            "インフォーマル"
+         ],
+         "Don't translate drafts. Only translate when I publish content.": [
+            "下書きは翻訳しないでください。コンテンツを公開したときのみ翻訳します。"
+         ],
+         "Translate drafts as I save them (consumes a bit more translation credits).": [
+            "下書きを保存する度に翻訳します（翻訳クレジットを少し多く消費します）。"
+         ],
+         "Do you want to translate drafts automatically?": [
+            "下書きを自動的に翻訳しますか？"
+         ],
+         "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s.": [
+            "この機能は、%s翻訳ダッシュボード%sから「すべてを自動翻訳」を有効にした場合のみ利用できます。"
+         ],
+         "Close modal": [
+            "モーダルを閉じる"
+         ],
+         "What would you like to do after WPML finishes translating your content automatically?": [
+            "WPMLがコンテンツの自動翻訳を完了した後、何をしたいですか？"
+         ],
+         "Wait for review": [
+            "レビュー待ち"
+         ],
+         "Recommended with DeepL, Google and Microsoft": [
+            "DeepL、Google、Microsoftと併せて推奨"
+         ],
+         "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process.": [
+            "DeepL、Google、Microsoftは優れた翻訳を提供しますが、正確さを確認するために人間による確認をお勧めします。WPML AIは文脈を理解した人間以上の翻訳を提供するため、確認プロセスを自信を持ってスキップできます。"
+         ],
+         "WPML keeps translations unpublished, so you can review them first.": [
+            "WPMLは翻訳を未公開のままにし、先にレビューできるようにします。"
+         ],
+         "Your translators review and approve translations before publishing.": [
+            "翻訳者が公開前に翻訳をレビューし承認します。"
+         ],
+         "Publish and mark for review": [
+            "公開してレビュー対象としてマーク"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "WPMLは翻訳をすぐに公開しますが、後で確認できるようにフラグを立てます。"
+         ],
+         "WPML publishes translations immediately but flags them for translators to review later.": [
+            "WPMLは翻訳をすぐに公開しますが、翻訳者が後でレビューできるようにフラグを立てます。"
+         ],
+         "Publish without review": [
+            "レビューなしで公開"
+         ],
+         "Recommended with WPML AI": [
+            "WPML AIで推奨"
+         ],
+         "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy.": [
+            "WPML AIは人間を超える翻訳を提供し、改善が必要なことはほとんどないので、レビュープロセスを自信を持ってスキップできます。他の翻訳エンジンの場合、正確性を確認するために人間によるレビューをお勧めします。"
+         ],
+         "WPML publishes translations immediately, skipping the review process.": [
+            "WPMLはレビュープロセスをスキップして、翻訳をすぐに公開します。"
+         ]
+      }
+   }
+}

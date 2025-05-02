@@ -1,0 +1,175 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-01-21T12:50:32+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: wpml\n"
+
+msgid "Could not fetch engines data"
+msgstr "Kunde inte hämta motordata"
+
+msgid "Could not save settings"
+msgstr "Kunde inte spara inställningar"
+
+msgid "Automatic translation"
+msgstr "Automatisk översättning"
+
+msgid "Saving..."
+msgstr "Sparar..."
+
+msgid "Save settings"
+msgstr "Spara inställningar"
+
+msgid "Settings saved"
+msgstr "Inställningar sparade"
+
+msgid "Some error occurred"
+msgstr "Ett fel uppstod"
+
+msgid "Loading..."
+msgstr "Laddar..."
+
+msgid "Failed to load engines"
+msgstr "Kunde inte ladda motorer"
+
+msgid "Drag & drop to sort from the most to the least preferred engine."
+msgstr "Dra och släpp för att sortera från den mest till den minst föredragna motorn."
+
+msgid "Which translation engines do you want to use?"
+msgstr "Vilka översättningsmotorer vill du använda?"
+
+msgid "Automatic translation engines differ in translation style and supported language pairs. If your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it. Learn more about,"
+msgstr "Automatiska översättningsmotorer skiljer sig åt i översättningsstil och stödda språkpar. Om din föredragna översättningsmotor inte stöder ett språkpar du vill använda, faller vi tillbaka på din nästa föredragna motor som stöder det. Lär dig mer om,"
+
+msgid "WPML AI (beta) automatically detects the formality of your content and translates with the same formality."
+msgstr "WPML AI (beta) upptäcker automatiskt formaliteten i ditt innehåll och översätter med samma formalitet."
+
+msgid "Auto-formality"
+msgstr "Auto-formalitet"
+
+msgid "Choose the tone of automatic translations for %s"
+msgstr "Välj tonen för automatiska översättningar för %s"
+
+msgid "Your site doesn't use languages that offer formality settings."
+msgstr "Din webbplats använder inte språk som erbjuder formalitetsinställningar."
+
+msgid "Edit formality"
+msgstr "Redigera formalitet"
+
+msgid "ON"
+msgstr "PÅ"
+
+msgid "OFF"
+msgstr "AV"
+
+msgid "%d credits per word"
+msgstr "%d krediter per ord"
+
+msgid "Documentation"
+msgstr "Dokumentation"
+
+msgid "DeepL's formality and how it helps get good translations"
+msgstr "DeepLs formalitet och hur den hjälper till att få bra översättningar"
+
+msgid "Edit button"
+msgstr "Redigera-knapp"
+
+msgid "Examples for %s"
+msgstr "Exempel för %s"
+
+msgid "For example:"
+msgstr "Till exempel:"
+
+msgid "Formality settings for %s"
+msgstr "Formalitetsinställningar för %s"
+
+msgid "Formality level for %s"
+msgstr "Formalitetsnivå för %s"
+
+msgid "Set formality for %s"
+msgstr "Ställ in formalitet för %s"
+
+msgid ""
+"%d of your target languages can be translated using either a formal or informal tone.\n"
+" The tone which gives the best translation for each language is set by default."
+msgstr "%d av dina målspråk kan översättas med antingen formell eller informell ton.
+Tonen som ger den bästa översättningen för varje språk är inställd som standard."
+
+msgid "%s doesn't yet support formality options for %s."
+msgstr "%s stöder ännu inte formalitetsalternativ för %s."
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Update"
+msgstr "Uppdatera"
+
+msgid "Default"
+msgstr "Standard"
+
+msgid "Formal"
+msgstr "Formell"
+
+msgid "Informal"
+msgstr "Informell"
+
+msgid "Don't translate drafts. Only translate when I publish content."
+msgstr "Översätt inte utkast. Översätt endast när jag publicerar innehåll."
+
+msgid "Translate drafts as I save them (consumes a bit more translation credits)."
+msgstr "Översätt utkast när jag sparar dem (förbrukar lite fler översättningskrediter)."
+
+msgid "Do you want to translate drafts automatically?"
+msgstr "Vill du översätta utkast automatiskt?"
+
+msgid "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s."
+msgstr "Denna funktion är endast tillgänglig när du aktiverar “Översätt allt automatiskt” från %sÖversättningspanelen%s."
+
+msgid "Close modal"
+msgstr "Stäng modal"
+
+msgid "What would you like to do after WPML finishes translating your content automatically?"
+msgstr "Vad vill du göra efter att WPML har avslutat den automatiska översättningen av ditt innehåll?"
+
+msgid "Wait for review"
+msgstr "Vänta på granskning"
+
+msgid "Recommended with DeepL, Google and Azure"
+msgstr "Rekommenderas med DeepL, Google och Azure"
+
+msgid "DeepL, Google, and Azure deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process."
+msgstr "DeepL, Google och Azure ger bra översättningar, men vi rekommenderar en mänsklig granskning för att bekräfta att de är korrekta. WPML AI ger Bättre än mänskliga översättningar som förstår kontext, så du kan tryggt hoppa över granskningsprocessen."
+
+msgid "WPML keeps translations unpublished, so you can review them first."
+msgstr "WPML håller översättningar opublicerade så att du kan granska dem först."
+
+msgid "Your translators review and approve translations before publishing."
+msgstr "Dina översättare granskar och godkänner översättningar innan publicering."
+
+msgid "Publish and mark for review"
+msgstr "Publicera och markera för granskning"
+
+msgid "WPML publishes translations immediately but flags them for you to check at your convenience."
+msgstr "WPML publicerar översättningar omedelbart men flaggar dem för att du ska kunna kontrollera dem när det passar dig."
+
+msgid "WPML publishes translations immediately but flags them for translators to review later."
+msgstr "WPML publicerar översättningar omedelbart men flaggar dem för att översättare ska granska dem senare."
+
+msgid "Publish without review"
+msgstr "Publicera utan granskning"
+
+msgid "Recommended with WPML AI"
+msgstr "Rekommenderas med WPML AI"
+
+msgid "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy."
+msgstr "WPML AI ger Bättre än mänskliga översättningar som sällan behöver förbättringar, så du kan tryggt hoppa över granskningsprocessen. För andra översättningsmotorer rekommenderas en mänsklig granskning för att bekräfta noggrannheten."
+
+msgid "WPML publishes translations immediately, skipping the review process."
+msgstr "WPML publicerar översättningar omedelbart, utan granskningsprocessen."

@@ -29,8 +29,21 @@ class Endpoint implements IHandler {
 	 * @return Right<{lockKey: bool|string, nextPage: int}>|Left<{lockKey: bool|string, nextPage: int}> it returns next page number or 0 if there are no more pages
 	 */
 	public function run( Collection $data ) {
+		/**
+		 * @see wpmldev-2748
+		 * The first call is done immediately after the Update translation button is clicked in the ATE Tools page.
+		 * For sure, ATE process is not completed yet, so there is no sense to call their API yet.
+		 * Instead of that, we schedule the next check in the future.
+		 */
+		if ( $data->get( 'firstSchedule', false ) ) {
+			$this->scheduler->scheduleNextRun();
+
+			return Either::of( [] );
+		}
+
 		$lockKey = $this->syncLock->create( $data->get( 'lockKey' ) );
 		if ( ! $lockKey ) {
+			$this->scheduler->scheduleNextRun();
 			return Either::left( [ 'lockKey' => false, 'nextPage' => 0 ] );
 		}
 

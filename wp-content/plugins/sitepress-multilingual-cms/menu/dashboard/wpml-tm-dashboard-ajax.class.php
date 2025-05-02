@@ -9,7 +9,7 @@ class WPML_Dashboard_Ajax {
 			'wpml-tm-dashboard-scripts',
 			WPML_TM_URL . '/res/js/tm-dashboard/wpml-tm-dashboard.js',
 			array( 'jquery', 'backbone', 'wpml-tm-progressbar' ),
-			ICL_SITEPRESS_VERSION
+			ICL_SITEPRESS_SCRIPT_VERSION
 		);
 		$wpml_tm_strings = $this->get_wpml_tm_script_js_strings();
 		wp_localize_script( 'wpml-tm-dashboard-scripts', 'wpml_tm_strings', $wpml_tm_strings );

@@ -2,6 +2,7 @@
 define( 'WPML_ST_FOLDER', basename( WPML_ST_PATH ) );
 
 define( 'WPML_ST_URL', plugins_url( '', dirname( __FILE__ ) ) );
+define( 'WPML_ST_MENU_URL', WPML_ST_FOLDER . '/menu/string-translation.php' );
 
 // Old ST status constants, kept for backward compatibility with plugins that use them, like WCML
 define( 'ICL_STRING_TRANSLATION_PARTIAL', 2 );
@@ -16,7 +17,10 @@ define( 'ICL_STRING_TRANSLATION_STYLESHEET_DIRECTORY', get_stylesheet_directory(
 define( 'ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_SOURCE', 0 );
 define( 'ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_PAGE', 1 );
 define( 'ICL_STRING_TRANSLATION_STRING_TRACKING_THRESHOLD', 5 );
-
+define( 'ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_FRONTEND', 6 );
+define( 'ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_BACKEND', 7 );
+define( 'ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_REST', 8 );
+define( 'ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_AJAX', 9 );
 define( 'ICL_STRING_TRANSLATION_AUTO_REGISTER_THRESHOLD', 500 );
 
 if ( ! defined( 'ICL_STRING_TRANSLATION_DYNAMIC_CONTEXT' ) ) {

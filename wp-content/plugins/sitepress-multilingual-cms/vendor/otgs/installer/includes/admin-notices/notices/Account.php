@@ -101,14 +101,20 @@ class Account {
 		/** @var \WP_Admin_Bar $wp_admin_bar */
 		global $wp_admin_bar;
 
-		$helpText = __( 'This site is registered on wpml.org as a development site.', 'installer' );
+		$learnMoreLink = 'https://wpml.org/faq/how-to-remove-the-this-site-is-registered-on-wpml-org-as-a-development-site-notice/?utm_source=plugin&utm_medium=gui&utm_campaign=wpml-core';
+		$helpText = sprintf(
+			/* translators: %1$s and %2$s are opening and closing link tags. */
+			__( 'This site is registered on wpml.org as a development site. %1$sLearn more%2$s', 'installer' ),
+			'<a href="' . esc_url( $learnMoreLink ) . '" target="_blank">',
+			'</a>'
+		);
 		$text = __( 'Development Site', 'installer' );
 
 		$wp_admin_bar->add_menu(
 			array(
 				'parent' => false,
 				'id'     => 'otgs-wpml-development',
-				'title'  => '<i  class="otgs-ico-sitepress-multilingual-cms js-otgs-popover-tooltip" data-tippy-zIndex="999999" title="' . $helpText . '" > ' . $text . '</i>',
+				'title'  => '<i  class="otgs-ico-sitepress-multilingual-cms js-otgs-popover-tooltip" data-tippy-zIndex="999999" title="' . esc_attr( $helpText ) . '" > ' . $text . '</i>',
 				'href'   => false,
 			)
 		);

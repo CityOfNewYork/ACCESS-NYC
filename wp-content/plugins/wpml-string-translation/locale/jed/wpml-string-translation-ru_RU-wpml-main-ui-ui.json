@@ -1,0 +1,58 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Edit": [
+            "Редактировать"
+         ],
+         "Shift+Tab": [
+            "Shift+tab"
+         ],
+         "Tab": [
+            "Вкладка"
+         ],
+         "Translation to:": [
+            "Перевод на:"
+         ],
+         "Copy from original": [
+            "Копия с оригинала"
+         ],
+         "Use Shift+Enter to add a new line.": [
+            "Используйте Shift+Enter, чтобы добавить новую строку."
+         ],
+         "Original:": [
+            "Оригинал:"
+         ],
+         "Add %s translation": [
+            "Добавить перевод %s "
+         ],
+         "Edit %s translation": [
+            "Редактировать перевод %s "
+         ],
+         "Add %s translation (the string appears on the site and is not translated)": [
+            "Добавьте перевод %s (строка появляется на сайте и не переводится)"
+         ],
+         "Original language %s": [
+            "Язык оригинала %s"
+         ],
+         "Waiting for translator to %s": [
+            "Ожидание переводчика %s"
+         ],
+         "Translation in progress to %s": [
+            "Незавершенный перевод в %s"
+         ],
+         "In basket for translation to %s": [
+            "В корзину для перевода на %s"
+         ],
+         "Translation saved.": [
+            "Перевод сохранен."
+         ],
+         "Translation update failed.": [
+            "Обновление перевода не удалось."
+         ]
+      }
+   }
+}

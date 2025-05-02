@@ -1,5 +1,7 @@
 <?php
 
+use WPML\Core\WP\App\Resources;
+
 class WPML_TM_TS_Instructions_Hooks implements IWPML_Action {
 	/** @var WPML_TM_TS_Instructions_Notice */
 	private $notice;
@@ -15,7 +17,10 @@ class WPML_TM_TS_Instructions_Hooks implements IWPML_Action {
 
 
 	public function add_hooks() {
-		add_action( 'wpml_tp_project_created', array( $this, 'display_message' ), 10, 3 );
+		// We remove this notice based on the discussion from wpmldev-3595
+		// We don't remove the whole code because we might want to enable it back in the future
+		// Remember to add back the tests removed on the same commit
+		// add_action( 'wpml_tp_project_created', array( $this, 'display_message' ), 10, 3 ).
 		add_action( 'init', array( $this, 'add_hooks_on_init' ), 10, 0 );
 
 		add_action( 'wpml_tp_service_de_authorized', array( $this, 'dismiss' ), 10, 0 );
@@ -48,8 +53,8 @@ class WPML_TM_TS_Instructions_Hooks implements IWPML_Action {
 		wp_register_script(
 			$handle,
 			WPML_TM_URL . '/dist/js/translationServiceInstruction/app.js',
-			array(),
-			ICL_SITEPRESS_VERSION
+			array( Resources::vendorAsDependency() ),
+			ICL_SITEPRESS_SCRIPT_VERSION
 		);
 
 		$data = array(

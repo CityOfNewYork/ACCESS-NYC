@@ -1,0 +1,61 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "hide the translations instead.": [
+            "Ẩn bản dịch."
+         ],
+         "Error happened! Please try again.": [
+            "Đã xảy ra lỗi! Vui lòng thử lại."
+         ],
+         "Cancel": [
+            "Hủy"
+         ],
+         "Choose Content to Automatically Translate into": [
+            "Chọn nội dung để tự động dịch sang"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "Lưu các thay đổi và Bật tính năng Dịch thuật Tự động"
+         ],
+         "Cancel Language Changes": [
+            "Hủy các thay đổi ngôn ngữ"
+         ],
+         "Save": [
+            "Lưu"
+         ],
+         "Add new languages": [
+            "Thêm ngôn ngữ mới"
+         ],
+         "Add new language": [
+            "Thêm ngôn ngữ."
+         ],
+         "Never mind - don't add new languages": [
+            "Không sao - đừng thêm ngôn ngữ."
+         ],
+         "Never mind - don't add new language": [
+            "Không sao - đừng thêm ngôn ngữ."
+         ],
+         "Choose which content to translate into the new language": [
+            "Chọn nội dung cần dịch sang ngôn ngữ mới"
+         ],
+         "Automatically translate all my posts and pages, plus new content as I create it.": [
+            "Tự động dịch tất cả nội dung."
+         ],
+         "Only automatically translate new content.": [
+            "Chỉ tự động dịch nội dung mới."
+         ],
+         "Which content do you want to translate into the new language?": [
+            "Bạn muốn dịch nội dung nào sang ngôn ngữ mới?"
+         ],
+         "When you unpause automatic translation, this content will be <a>translated automatically</a>.": [
+            "Khi bạn bỏ tạm dừng dịch tự động, nội dung này sẽ được<a> được dịch tự động</a>."
+         ],
+         "You can still translate existing content any time from the Translation Management Dashboard.": [
+            "Bạn vẫn có thể dịch nội dung hiện có bất kỳ lúc nào từ Bảng điều khiển quản lý bản dịch."
+         ]
+      }
+   }
+}

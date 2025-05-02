@@ -88,12 +88,13 @@ abstract class Base implements StringsInBlock {
 	}
 
 	/**
-	 * @param string $string
+	 * @param string|null $string
 	 *
 	 * @return string
 	 */
 	public static function get_string_type( $string ) {
 		$type = 'LINE';
+		$string = is_null( $string ) ? '' : $string;
 
 		if ( strpos( $string, "\n" ) !== false || mb_strlen( $string ) > self::LONG_STRING_LENGTH ) {
 			$type = 'AREA';

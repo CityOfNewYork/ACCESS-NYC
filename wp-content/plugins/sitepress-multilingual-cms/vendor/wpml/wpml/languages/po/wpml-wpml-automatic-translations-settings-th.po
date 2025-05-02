@@ -1,0 +1,177 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-04-22T15:22:54+02:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: wpml\n"
+
+msgid "Could not fetch engines data"
+msgstr "ไม่สามารถดึงข้อมูลเครื่องมือแปลได้"
+
+msgid "Could not save settings"
+msgstr "ไม่สามารถบันทึกการตั้งค่าได้"
+
+msgid "Automatic translation"
+msgstr "การแปลอัตโนมัติ"
+
+msgid "Saving..."
+msgstr "กำลังบันทึก..."
+
+msgid "Save settings"
+msgstr "บันทึกการตั้งค่า"
+
+msgid "Settings saved"
+msgstr "บันทึกการตั้งค่าแล้ว"
+
+msgid "Some error occurred"
+msgstr "เกิดข้อผิดพลาดบางอย่าง"
+
+msgid "Loading..."
+msgstr "กำลังโหลด..."
+
+msgid "Failed to load engines"
+msgstr "ไม่สามารถโหลดเครื่องมือแปลได้"
+
+msgid "Drag your default engine to the top and order the rest by priority."
+msgstr "ลากเครื่องมือแปลภาษาอัตโนมัติเริ่มต้นของคุณไว้ด้านบนสุดและจัดลำดับที่เหลือตามลำดับความสำคัญ."
+
+msgid "Which translation engines do you want to use?"
+msgstr "คุณต้องการใช้เครื่องมือแปลใดบ้าง?"
+
+msgid "Automatic translation engines differ in translation style and supported language pairs. If your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it."
+msgstr "เครื่องมือแปลภาษาอัตโนมัติแต่ละตัวมีรูปแบบการแปลและคู่ภาษาที่รองรับแตกต่างกัน หากเครื่องมือแปลภาษาที่คุณต้องการไม่รองรับคู่ภาษาที่คุณต้องการใช้ เราจะเลือกใช้เครื่องมือแปลภาษาที่คุณชื่นชอบถัดไปที่รองรับคู่ภาษานั้น."
+
+msgid "WPML AI (beta) automatically detects the formality of your content and translates with the same formality."
+msgstr "WPML AI (เบต้า) ตรวจจับความเป็นทางการของเนื้อหาของคุณโดยอัตโนมัติและแปลด้วยระดับความเป็นทางการเดียวกัน."
+
+msgid "Auto-formality"
+msgstr "ความเป็นทางการอัตโนมัติ"
+
+msgid "Choose the tone of automatic translations for %s"
+msgstr "เลือกโทนของการแปลอัตโนมัติสำหรับ %s"
+
+msgid "Your site doesn't use languages that offer formality settings."
+msgstr "เว็บไซต์ของคุณไม่ได้ใช้ภาษาที่มีการตั้งค่าความเป็นทางการ."
+
+msgid "Edit formality"
+msgstr "แก้ไขความเป็นทางการ"
+
+msgid "%d credits per word"
+msgstr "%d เครดิตต่อคำ"
+
+msgid "Backup %d"
+msgstr "สำรองข้อมูล %d"
+
+msgid "Default"
+msgstr "ค่าเริ่มต้น"
+
+msgid "ON"
+msgstr "เปิด"
+
+msgid "OFF"
+msgstr "ปิด"
+
+msgid "Documentation"
+msgstr "เอกสารประกอบ"
+
+msgid "DeepL's formality and how it helps get good translations"
+msgstr "ความเป็นทางการของ DeepL และวิธีที่ช่วยให้ได้การแปลที่ดี"
+
+msgid "Edit button"
+msgstr "ปุ่มแก้ไข"
+
+msgid "Examples for %s"
+msgstr "ตัวอย่างสำหรับ %s"
+
+msgid "For example:"
+msgstr "ตัวอย่างเช่น:"
+
+msgid "Formality settings for %s"
+msgstr "การตั้งค่าความเป็นทางการสำหรับ %s"
+
+msgid "Formality level for %s"
+msgstr "ระดับความเป็นทางการสำหรับ %s"
+
+msgid "Set formality for %s"
+msgstr "ตั้งค่าความเป็นทางการสำหรับ %s"
+
+msgid ""
+"%d of your target languages can be translated using either a formal or informal tone.\n"
+" The tone which gives the best translation for each language is set by default."
+msgstr "%d ของภาษาเป้าหมายของคุณสามารถแปลโดยใช้โทนที่เป็นทางการหรือไม่เป็นทางการได้\n โทนที่ให้การแปลที่ดีที่สุดสำหรับแต่ละภาษาถูกตั้งค่าเป็นค่าเริ่มต้น."
+
+msgid "%s doesn't yet support formality options for %s."
+msgstr "%s ยังไม่รองรับตัวเลือกความเป็นทางการสำหรับ %s."
+
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+msgid "Update"
+msgstr "อัปเดต"
+
+msgid "Formal"
+msgstr "เป็นทางการ"
+
+msgid "Informal"
+msgstr "ไม่เป็นทางการ"
+
+msgid "Don't translate drafts. Only translate when I publish content."
+msgstr "อย่าแปลฉบับร่าง แปลเฉพาะเมื่อฉันเผยแพร่เนื้อหา."
+
+msgid "Translate drafts as I save them (consumes a bit more translation credits)."
+msgstr "แปลฉบับร่างเมื่อฉันบันทึก (ใช้เครดิตการแปลมากขึ้นเล็กน้อย)."
+
+msgid "Do you want to translate drafts automatically?"
+msgstr "คุณต้องการแปลฉบับร่างโดยอัตโนมัติหรือไม่?"
+
+msgid "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s."
+msgstr "คุณสมบัตินี้มีให้ใช้เฉพาะเมื่อคุณเปิดใช้งาน “ฯแปลทุกอย่างโดยอัตโนมัติฯ” จาก %sแดชบอร์ดการแปล%s."
+
+msgid "Close modal"
+msgstr "ปิดหน้าต่าง"
+
+msgid "What would you like to do after WPML finishes translating your content automatically?"
+msgstr "คุณต้องการทำอะไรหลังจาก WPML แปลเนื้อหาของคุณโดยอัตโนมัติเสร็จสิ้น?"
+
+msgid "Wait for review"
+msgstr "รอการตรวจสอบ"
+
+msgid "Recommended with DeepL, Google and Microsoft"
+msgstr "แนะนำให้ใช้กับ DeepL, Google และ Microsoft"
+
+msgid "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process."
+msgstr "DeepL, Google และ Microsoft มอบการแปลที่ยอดเยี่ยม แต่เราแนะนำให้มีการตรวจสอบโดยมนุษย์เพื่อยืนยันว่าถูกต้อง WPML AI มอบการแปลที่ดีกว่ามนุษย์ที่เข้าใจบริบท ดังนั้นคุณจึงสามารถข้ามขั้นตอนการตรวจสอบได้อย่างมั่นใจ."
+
+msgid "WPML keeps translations unpublished, so you can review them first."
+msgstr "WPML จะเก็บการแปลไว้โดยไม่เผยแพร่ เพื่อให้คุณสามารถตรวจสอบก่อน."
+
+msgid "Your translators review and approve translations before publishing."
+msgstr "นักแปลของคุณจะตรวจสอบและอนุมัติการแปลก่อนเผยแพร่."
+
+msgid "Publish and mark for review"
+msgstr "เผยแพร่และทำเครื่องหมายเพื่อตรวจสอบ"
+
+msgid "WPML publishes translations immediately but flags them for you to check at your convenience."
+msgstr "WPML จะเผยแพร่การแปลทันที แต่จะทำเครื่องหมายเพื่อให้คุณตรวจสอบเมื่อสะดวก."
+
+msgid "WPML publishes translations immediately but flags them for translators to review later."
+msgstr "WPML จะเผยแพร่การแปลทันที แต่จะทำเครื่องหมายเพื่อให้นักแปลตรวจสอบในภายหลัง."
+
+msgid "Publish without review"
+msgstr "เผยแพร่โดยไม่ต้องตรวจสอบ"
+
+msgid "Recommended with WPML AI"
+msgstr "แนะนำสำหรับ WPML AI"
+
+msgid "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy."
+msgstr "WPML AI ให้การแปลที่ดีกว่ามนุษย์ซึ่งแทบไม่ต้องปรับปรุง ดังนั้นคุณสามารถข้ามขั้นตอนการตรวจสอบได้อย่างมั่นใจ สำหรับเครื่องมือแปลอื่นๆ แนะนำให้มีการตรวจสอบโดยมนุษย์เพื่อยืนยันความถูกต้อง."
+
+msgid "WPML publishes translations immediately, skipping the review process."
+msgstr "WPML จะเผยแพร่การแปลทันทีโดยข้ามขั้นตอนการตรวจสอบ."

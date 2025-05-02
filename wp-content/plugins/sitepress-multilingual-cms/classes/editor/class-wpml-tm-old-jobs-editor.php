@@ -35,10 +35,11 @@ class WPML_TM_Old_Jobs_Editor {
 
 	/**
 	 * @param int $job_id
+	 * @param object|false $previousJob
 	 *
 	 * @return bool
 	 */
-	public function shouldStickToWPMLEditor( $job_id ) {
+	public function shouldStickToWPMLEditor( $job_id, $previousJob = false ) {
 		$sql = "
 			SELECT job.editor
 			FROM {$this->wpdb->prefix}icl_translate_job job
@@ -48,7 +49,7 @@ class WPML_TM_Old_Jobs_Editor {
 			ORDER BY job.job_id DESC
 		";
 
-		$previousJobEditor = $this->wpdb->get_var( $this->wpdb->prepare( $sql, $job_id, $job_id ) );
+		$previousJobEditor = $previousJob ? $previousJob->editor : $this->wpdb->get_var( $this->wpdb->prepare( $sql, $job_id, $job_id ) );
 
 		return $previousJobEditor === WPML_TM_Editors::WPML && get_option( self::OPTION_NAME, null ) === WPML_TM_Editors::WPML;
 	}

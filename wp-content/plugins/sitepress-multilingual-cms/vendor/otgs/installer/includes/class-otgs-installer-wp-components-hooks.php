@@ -50,7 +50,7 @@ class OTGS_Installer_WP_Components_Hooks {
 	}
 
 	public function schedule_components_report() {
-		if ( ! wp_next_scheduled( self::EVENT_SEND_COMPONENTS_MONTHLY ) ) {
+		if ( ! wp_next_scheduled( self::EVENT_SEND_COMPONENTS_MONTHLY ) && $this->sender->allow_schedule_event() ) {
 			wp_schedule_event( strtotime( self::REPORT_SCHEDULING_PERIOD ), self::MONTHLY_CRON, self::EVENT_SEND_COMPONENTS_MONTHLY );
 		}
 	}

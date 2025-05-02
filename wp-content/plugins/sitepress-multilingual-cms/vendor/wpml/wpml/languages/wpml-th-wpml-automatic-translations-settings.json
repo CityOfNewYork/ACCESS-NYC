@@ -1,0 +1,172 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Could not fetch engines data": [
+            "ไม่สามารถดึงข้อมูลเครื่องมือแปลได้"
+         ],
+         "Could not save settings": [
+            "ไม่สามารถบันทึกการตั้งค่าได้"
+         ],
+         "Automatic translation": [
+            "การแปลอัตโนมัติ"
+         ],
+         "Saving...": [
+            "กำลังบันทึก..."
+         ],
+         "Save settings": [
+            "บันทึกการตั้งค่า"
+         ],
+         "Settings saved": [
+            "บันทึกการตั้งค่าแล้ว"
+         ],
+         "Some error occurred": [
+            "เกิดข้อผิดพลาดบางอย่าง"
+         ],
+         "Loading...": [
+            "กำลังโหลด..."
+         ],
+         "Failed to load engines": [
+            "ไม่สามารถโหลดเครื่องมือแปลได้"
+         ],
+         "Drag your default engine to the top and order the rest by priority.": [
+            "ลากเครื่องมือแปลภาษาอัตโนมัติเริ่มต้นของคุณไว้ด้านบนสุดและจัดลำดับที่เหลือตามลำดับความสำคัญ."
+         ],
+         "Which translation engines do you want to use?": [
+            "คุณต้องการใช้เครื่องมือแปลใดบ้าง?"
+         ],
+         "Automatic translation engines differ in translation style and supported language pairs. If your preferred translation engine does not support a language pair that you want to use, we fall back to your next preferred engine that does support it.": [
+            "เครื่องมือแปลภาษาอัตโนมัติแต่ละตัวมีรูปแบบการแปลและคู่ภาษาที่รองรับแตกต่างกัน หากเครื่องมือแปลภาษาที่คุณต้องการไม่รองรับคู่ภาษาที่คุณต้องการใช้ เราจะเลือกใช้เครื่องมือแปลภาษาที่คุณชื่นชอบถัดไปที่รองรับคู่ภาษานั้น."
+         ],
+         "WPML AI (beta) automatically detects the formality of your content and translates with the same formality.": [
+            "WPML AI (เบต้า) ตรวจจับความเป็นทางการของเนื้อหาของคุณโดยอัตโนมัติและแปลด้วยระดับความเป็นทางการเดียวกัน."
+         ],
+         "Auto-formality": [
+            "ความเป็นทางการอัตโนมัติ"
+         ],
+         "Choose the tone of automatic translations for %s": [
+            "เลือกโทนของการแปลอัตโนมัติสำหรับ %s"
+         ],
+         "Your site doesn't use languages that offer formality settings.": [
+            "เว็บไซต์ของคุณไม่ได้ใช้ภาษาที่มีการตั้งค่าความเป็นทางการ."
+         ],
+         "Edit formality": [
+            "แก้ไขความเป็นทางการ"
+         ],
+         "%d credits per word": [
+            "%d เครดิตต่อคำ"
+         ],
+         "Backup %d": [
+            "สำรองข้อมูล %d"
+         ],
+         "Default": [
+            "ค่าเริ่มต้น"
+         ],
+         "ON": [
+            "เปิด"
+         ],
+         "OFF": [
+            "ปิด"
+         ],
+         "Documentation": [
+            "เอกสารประกอบ"
+         ],
+         "DeepL's formality and how it helps get good translations": [
+            "ความเป็นทางการของ DeepL และวิธีที่ช่วยให้ได้การแปลที่ดี"
+         ],
+         "Edit button": [
+            "ปุ่มแก้ไข"
+         ],
+         "Examples for %s": [
+            "ตัวอย่างสำหรับ %s"
+         ],
+         "For example:": [
+            "ตัวอย่างเช่น:"
+         ],
+         "Formality settings for %s": [
+            "การตั้งค่าความเป็นทางการสำหรับ %s"
+         ],
+         "Formality level for %s": [
+            "ระดับความเป็นทางการสำหรับ %s"
+         ],
+         "Set formality for %s": [
+            "ตั้งค่าความเป็นทางการสำหรับ %s"
+         ],
+         "%d of your target languages can be translated using either a formal or informal tone.\n The tone which gives the best translation for each language is set by default.": [
+            "%d ของภาษาเป้าหมายของคุณสามารถแปลโดยใช้โทนที่เป็นทางการหรือไม่เป็นทางการได้\n โทนที่ให้การแปลที่ดีที่สุดสำหรับแต่ละภาษาถูกตั้งค่าเป็นค่าเริ่มต้น."
+         ],
+         "%s doesn't yet support formality options for %s.": [
+            "%s ยังไม่รองรับตัวเลือกความเป็นทางการสำหรับ %s."
+         ],
+         "Cancel": [
+            "ยกเลิก"
+         ],
+         "Update": [
+            "อัปเดต"
+         ],
+         "Formal": [
+            "เป็นทางการ"
+         ],
+         "Informal": [
+            "ไม่เป็นทางการ"
+         ],
+         "Don't translate drafts. Only translate when I publish content.": [
+            "อย่าแปลฉบับร่าง แปลเฉพาะเมื่อฉันเผยแพร่เนื้อหา."
+         ],
+         "Translate drafts as I save them (consumes a bit more translation credits).": [
+            "แปลฉบับร่างเมื่อฉันบันทึก (ใช้เครดิตการแปลมากขึ้นเล็กน้อย)."
+         ],
+         "Do you want to translate drafts automatically?": [
+            "คุณต้องการแปลฉบับร่างโดยอัตโนมัติหรือไม่?"
+         ],
+         "This feature is only available when you enable \"Translate Everything Automatically\" from the %sTranslation Dashboard%s.": [
+            "คุณสมบัตินี้มีให้ใช้เฉพาะเมื่อคุณเปิดใช้งาน “ฯแปลทุกอย่างโดยอัตโนมัติฯ” จาก %sแดชบอร์ดการแปล%s."
+         ],
+         "Close modal": [
+            "ปิดหน้าต่าง"
+         ],
+         "What would you like to do after WPML finishes translating your content automatically?": [
+            "คุณต้องการทำอะไรหลังจาก WPML แปลเนื้อหาของคุณโดยอัตโนมัติเสร็จสิ้น?"
+         ],
+         "Wait for review": [
+            "รอการตรวจสอบ"
+         ],
+         "Recommended with DeepL, Google and Microsoft": [
+            "แนะนำให้ใช้กับ DeepL, Google และ Microsoft"
+         ],
+         "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process.": [
+            "DeepL, Google และ Microsoft มอบการแปลที่ยอดเยี่ยม แต่เราแนะนำให้มีการตรวจสอบโดยมนุษย์เพื่อยืนยันว่าถูกต้อง WPML AI มอบการแปลที่ดีกว่ามนุษย์ที่เข้าใจบริบท ดังนั้นคุณจึงสามารถข้ามขั้นตอนการตรวจสอบได้อย่างมั่นใจ."
+         ],
+         "WPML keeps translations unpublished, so you can review them first.": [
+            "WPML จะเก็บการแปลไว้โดยไม่เผยแพร่ เพื่อให้คุณสามารถตรวจสอบก่อน."
+         ],
+         "Your translators review and approve translations before publishing.": [
+            "นักแปลของคุณจะตรวจสอบและอนุมัติการแปลก่อนเผยแพร่."
+         ],
+         "Publish and mark for review": [
+            "เผยแพร่และทำเครื่องหมายเพื่อตรวจสอบ"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "WPML จะเผยแพร่การแปลทันที แต่จะทำเครื่องหมายเพื่อให้คุณตรวจสอบเมื่อสะดวก."
+         ],
+         "WPML publishes translations immediately but flags them for translators to review later.": [
+            "WPML จะเผยแพร่การแปลทันที แต่จะทำเครื่องหมายเพื่อให้นักแปลตรวจสอบในภายหลัง."
+         ],
+         "Publish without review": [
+            "เผยแพร่โดยไม่ต้องตรวจสอบ"
+         ],
+         "Recommended with WPML AI": [
+            "แนะนำสำหรับ WPML AI"
+         ],
+         "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy.": [
+            "WPML AI ให้การแปลที่ดีกว่ามนุษย์ซึ่งแทบไม่ต้องปรับปรุง ดังนั้นคุณสามารถข้ามขั้นตอนการตรวจสอบได้อย่างมั่นใจ สำหรับเครื่องมือแปลอื่นๆ แนะนำให้มีการตรวจสอบโดยมนุษย์เพื่อยืนยันความถูกต้อง."
+         ],
+         "WPML publishes translations immediately, skipping the review process.": [
+            "WPML จะเผยแพร่การแปลทันทีโดยข้ามขั้นตอนการตรวจสอบ."
+         ]
+      }
+   }
+}

@@ -27,7 +27,7 @@ class Dismissed {
 		$repositoryRecommendations = Obj::propOr([], 'repo', apply_filters( 'otgs_installer_admin_notices', [] ) );
 
 		$isPluginRecommendation = function( $plugin_attrs ) use ( $plugin_slug ) {
-			return '' == $plugin_slug || strpos( $plugin_slug, $plugin_attrs['glue_plugin_slug'] ) !== false;
+			return '' === $plugin_slug || strpos( $plugin_slug, $plugin_attrs['glue_plugin_slug'] ) !== false;
 		};
 		foreach( $repositoryRecommendations as $repository => $notices ) {
 			if ( ! isset( $notices['plugin-activated'] ) ) {

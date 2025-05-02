@@ -33,7 +33,7 @@ class ShortcodeHooks implements \IWPML_Backend_Action {
 			/**
 			 * @since WPML 4.4.9
 			 *
-			 * @param bool     false
+			 * @param bool     $is_built_with_shortcodes
 			 * @param \WP_Post $post
 			 */
 			return apply_filters( 'wpml_pb_is_post_built_with_shortcodes', false, $post );

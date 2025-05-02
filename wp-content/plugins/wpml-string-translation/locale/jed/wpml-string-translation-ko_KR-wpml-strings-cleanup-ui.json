@@ -1,0 +1,58 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Clean up the String Translation table by removing untranslated strings by domain.": [
+            "도메인별로 번역되지 않은 문자열을 제거하여 문자열 번역 테이블을 정리합니다."
+         ],
+         "Remove strings by domain": [
+            "도메인별로 문자열 제거"
+         ],
+         "Remove strings": [
+            "문자열 제거"
+         ],
+         "Cancel": [
+            "취소"
+         ],
+         "Remove": [
+            "제거하다"
+         ],
+         "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
+            "문자열 번역 테이블에는 현재 아래 나열된 도메인의 문자열이 포함되어 있습니다. 특정 도메인의 문자열을 번역하지 않으려면 아래에서 해당 도메인을 선택하여 문자열 번역 테이블에서 번역되지 않은 문자열을 제거하세요. 이미 번역된 문자열은 계속 사용할 수 있습니다."
+         ],
+         "Search": [
+            "찾다"
+         ],
+         "Removing strings from String Translation table": [
+            "문자열 번역 테이블에서 문자열 제거"
+         ],
+         "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
+            "문자열 번역 테이블에 문자열을 다시 추가하려면 번역 파일을 다시 검색하거나 문자열을 번역 가능으로 등록해야 할 수도 있습니다."
+         ],
+         "Read more about ": [
+            "자세히 알아보기 "
+         ],
+         "scanning your site for strings and registering them as translatable.": [
+            "사이트에서 문자열을 검색하고 번역 가능한 것으로 등록합니다."
+         ],
+         "Successfully removed strings": [
+            "문자열을 성공적으로 제거했습니다."
+         ],
+         "OK, Great": [
+            "좋아요, 엄청난"
+         ],
+         "Domain": [
+            "도메인"
+         ],
+         "Strings count": [
+            "문자열 개수"
+         ],
+         "Translated strings": [
+            "번역된 문자열"
+         ]
+      }
+   }
+}

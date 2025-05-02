@@ -50,8 +50,7 @@ class WPML_Term_Actions extends WPML_Full_Translation_API {
 			$src_language
 		);
 
-		add_action( 'created_term', array( $this, 'sync_term_meta' ), 10, 2 );
-		add_action( 'edited_term', array( $this, 'sync_term_meta' ), 10, 2 );
+		add_action( "saved_{$taxonomy}", array( $this, 'sync_term_meta' ), PHP_INT_MAX, 2 );
 	}
 
 	/**

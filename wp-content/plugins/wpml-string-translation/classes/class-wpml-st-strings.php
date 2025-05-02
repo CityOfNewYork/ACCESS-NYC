@@ -29,6 +29,7 @@ class WPML_ST_Strings {
 		$string_translations = array();
 
 		$extra_cond = '';
+		$joins      = [];
 
 		$active_languages = $this->sitepress->get_active_languages();
 
@@ -42,6 +43,10 @@ class WPML_ST_Strings {
 				$extra_cond .= ' AND s.status = ' . ICL_TM_COMPLETE;
 			} elseif ( ICL_STRING_TRANSLATION_PARTIAL === $status_filter ) {
 				$extra_cond .= ' AND s.status = ' . ICL_STRING_TRANSLATION_PARTIAL;
+			} elseif ( ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_FRONTEND === $status_filter ) {
+				$joins[] = "INNER JOIN {$this->wpdb->prefix}icl_string_positions string_positions ON s.id = string_positions.string_id";
+				$extra_cond .= ' AND string_positions.kind = ' . ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_FRONTEND;
+				$extra_cond .= ' AND s.status IN (' . ICL_STRING_TRANSLATION_PARTIAL . ',' . ICL_TM_NEEDS_UPDATE . ',' . ICL_TM_NOT_TRANSLATED . ',' . ICL_TM_WAITING_FOR_TRANSLATOR . ')';
 			} elseif ( ICL_TM_WAITING_FOR_TRANSLATOR !== $status_filter ) {
 				$extra_cond .= ' AND s.status IN (' . ICL_STRING_TRANSLATION_PARTIAL . ',' . ICL_TM_NEEDS_UPDATE . ',' . ICL_TM_NOT_TRANSLATED . ',' . ICL_TM_WAITING_FOR_TRANSLATOR . ')';
 			}
@@ -57,13 +62,7 @@ class WPML_ST_Strings {
 			}
 		}
 
-		if ( array_key_exists( 'context', $_GET ) ) {
-			$context = stripslashes( html_entity_decode( (string) Sanitize::stringProp( 'context', $_GET ), ENT_QUOTES ) );
-
-			if ( self::EMPTY_CONTEXT_LABEL === $context ) {
-				$context = '';
-			}
-		}
+		$context = $this->get_context();
 
 		if ( isset( $context ) ) {
 			/** @phpstan-ignore-next-line */
@@ -81,7 +80,6 @@ class WPML_ST_Strings {
 
 		$search_filter = $this->get_search_filter();
 
-		$joins     = [];
 		$sql_query = ' WHERE 1 ';
 		if ( ICL_TM_WAITING_FOR_TRANSLATOR === $status_filter ) {
 			$sql_query .= ' AND s.status = ' . ICL_TM_WAITING_FOR_TRANSLATOR;
@@ -90,13 +88,20 @@ class WPML_ST_Strings {
 			$joins[]    = "LEFT JOIN {$this->wpdb->prefix}icl_string_translations str ON str.string_id = s.id";
 		}
 
-		if ( $this->is_troubleshooting_filter_enabled() ) {
-			// This is a troubleshooting filter, it should display only String Translation elements that are in a wrong state.
-			// @see wpmldev-1920 - Strings that are incorrectly duplicated when re-translating a post that was edited using native editor.
+		$excluded_package_condition = $this->get_excluded_string_package_condition();
 
+		if ( '' !== $excluded_package_condition || $this->is_troubleshooting_filter_enabled() ) {
 			$joins[] = ' LEFT JOIN  ' . $this->wpdb->prefix . 'icl_string_packages sp ON sp.ID = s.string_package_id';
-			$joins[] = ' INNER JOIN  ' . $this->wpdb->prefix . 'icl_translate it ON it.field_data_translated = sp.name';
-			$sql_query .=' AND it.field_type="original_id"';
+
+			if ( '' !== $excluded_package_condition ) {
+				$sql_query .= $excluded_package_condition;
+			}
+
+			if ( $this->is_troubleshooting_filter_enabled() ) {
+				// This is a troubleshooting filter, it should display only String Translation elements that are in a wrong state.
+				// @see wpmldev-1920 - Strings that are incorrectly duplicated when re-translating a post that was edited using native editor.
+				$joins[] = ' INNER JOIN  ' . $this->wpdb->prefix . 'icl_translate it ON it.field_data_translated = sp.name and it.field_type="original_id"';
+			}
 		}
 
 		$res = $this->get_results( $sql_query, $extra_cond, $offset, $limit, $joins );
@@ -106,22 +111,23 @@ class WPML_ST_Strings {
 			if ( isset( $_GET['translation_language'] ) ) {
 				/** @var string $translation_language */
 				$translation_language = esc_sql( $_GET['translation_language'] );
-				$extra_cond .= " AND language='" . $translation_language . "'";
+				$extra_cond          .= " AND language='" . $translation_language . "'";
 			}
 
 			foreach ( $res as $row ) {
 				$string_translations[ $row['string_id'] ] = $row;
 
-				// phpcs:disable WordPress.WP.PreparedSQL.NotPrepared
 				$tr = $this->wpdb->get_results(
+					// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQL.NotPrepared
 					$this->wpdb->prepare(
 						"
-                    SELECT id, language, status, value, mo_string, translator_id, translation_date  
-                    FROM {$this->wpdb->prefix}icl_string_translations 
-                    WHERE string_id=%d {$extra_cond}
-                ",
+							SELECT id, language, status, value, mo_string, translator_id, translation_date  
+							FROM {$this->wpdb->prefix}icl_string_translations 
+							WHERE string_id=%d {$extra_cond}
+						",
 						$row['string_id']
 					),
+					// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQL.NotPrepared
 					ARRAY_A
 				);
 
@@ -134,6 +140,52 @@ class WPML_ST_Strings {
 		}
 
 		return WPML\ST\Basket\Status::add( $string_translations, array_keys( $active_languages ) );
+	}
+
+	/**
+	 * Get the context from the URL and check if it is a page builder.
+	 * If it is then check that the PB is selected to show. If not then don't use the context.
+	 *
+	 * @return string|null
+	 */
+	private function get_context() {
+		if ( ! array_key_exists( 'context', $_GET ) ) {
+			return null;
+		}
+
+		$context = stripslashes( html_entity_decode( (string) Sanitize::stringProp( 'context', $_GET ), ENT_QUOTES ) );
+
+		if ( self::EMPTY_CONTEXT_LABEL === $context ) {
+			return '';
+		}
+
+		$parts = explode( '-', $context );
+		if ( count( $parts ) < 2 ) {
+			return $context;
+		}
+
+		list( $kind_slug, $name ) = $parts;
+
+		$excluded_package_condition = $this->get_excluded_string_package_condition( false );
+
+		if ( '' === $excluded_package_condition ) {
+			return $context;
+		}
+
+		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQL.NotPrepared
+		$query  = $this->wpdb->prepare(
+			"SELECT kind FROM {$this->wpdb->prefix}icl_string_packages sp WHERE kind_slug = %s AND name = %s {$excluded_package_condition} LIMIT 1",
+			$kind_slug,
+			$name
+		);
+		$result = $this->wpdb->get_row( $query );
+		// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQL.NotPrepared
+
+		if ( $result ) {
+			return null;
+		}
+
+		return $context;
 	}
 
 	/**
@@ -206,8 +258,8 @@ class WPML_ST_Strings {
 		/** @var string $search_filter_html */
 		$search_filter_html = esc_html( (string) $search_filter );
 
-		$column = esc_sql( $column );
-		$search_filter = esc_sql( (string) $search_filter );
+		$column             = esc_sql( $column );
+		$search_filter      = esc_sql( (string) $search_filter );
 		$search_filter_html = esc_sql( $search_filter_html );
 
 		if ( $search_filter === $search_filter_html ) {
@@ -216,8 +268,6 @@ class WPML_ST_Strings {
 				? "$column = '$search_filter'"
 				: "$column LIKE '%$search_filter%'";
 		}
-		/** @var string $replaced_search_filter */
-		$replaced_search_filter = $search_filter ? str_replace( "'", "&#039;", $search_filter ) : '';
 
 		// Special characters involved - search also for HTML version.
 		return $exact_match
@@ -227,27 +277,69 @@ class WPML_ST_Strings {
 
 	public function get_per_domain_counts( $status ) {
 		$extra_cond = '';
+		$extra_sql  = '';
 
 		if ( false !== $status ) {
+			$status = (int) $status;
+
 			if ( ICL_TM_COMPLETE === $status ) {
 				$extra_cond .= ' AND s.status = ' . ICL_TM_COMPLETE;
+			} elseif ( ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_FRONTEND === $status ) {
+				$extra_sql  .= " INNER JOIN {$this->wpdb->prefix}icl_string_positions string_positions ON s.id = string_positions.string_id";
+				$extra_cond .= ' AND string_positions.kind = ' . ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_FRONTEND;
+				$extra_cond .= ' AND s.status IN (' . ICL_STRING_TRANSLATION_PARTIAL . ',' . ICL_TM_NEEDS_UPDATE . ',' . ICL_TM_NOT_TRANSLATED . ')';
 			} else {
 				$extra_cond .= ' AND s.status IN (' . ICL_STRING_TRANSLATION_PARTIAL . ',' . ICL_TM_NEEDS_UPDATE . ',' . ICL_TM_NOT_TRANSLATED . ')';
 			}
 		}
 
-		$results = $this->wpdb->get_results(
-			"
-        SELECT context, COUNT(context) AS c
-        FROM {$this->wpdb->prefix}icl_strings s
-        WHERE 1 {$extra_cond} AND TRIM(s.value) <> ''
-        GROUP BY context
-        ORDER BY context ASC"
-		);
+		$excluded_package_condition = $this->get_excluded_string_package_condition();
 
-		return $results;
+		$join_clause = '';
+		if ( '' !== $excluded_package_condition ) {
+			$join_clause = "LEFT JOIN {$this->wpdb->prefix}icl_string_packages sp ON s.string_package_id = sp.ID";
+		}
+
+		$query = "
+			SELECT context, COUNT(context) AS c
+			FROM {$this->wpdb->prefix}icl_strings s
+			{$join_clause}
+			{$extra_sql}
+			WHERE 1 {$extra_cond} AND TRIM(s.value) <> ''
+			{$excluded_package_condition}
+			GROUP BY context
+			ORDER BY context ASC
+		";
+
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+		return $this->wpdb->get_results( $query );
+		// phpcs:enable WordPress.DB.PreparedSQL.NotPrepared
 	}
 
+	private function get_excluded_string_package_condition( $is_exclusive = true ) {
+		$user_meta     = get_user_meta( get_current_user_id(), 'context_page_builder_hide_options', true );
+		$user_meta     = $user_meta ? $user_meta : [];
+		$page_builders = (array) apply_filters( 'wpml_get_page_builder_text_domains', [] );
+		$not_selected  = [];
+
+		foreach ( $page_builders as $page_builder ) {
+			if ( isset( $user_meta[ $page_builder ] ) && 'on' === $user_meta[ $page_builder ] ) {
+				continue;
+			}
+			$not_selected[] = $page_builder;
+		}
+
+		if ( empty( $not_selected ) ) {
+			return '';
+		}
+
+		$not_sql             = $is_exclusive ? 'NOT' : '';
+		$check_sp_id_text    = $is_exclusive ? '  OR s.string_package_id IS NULL ' : '';
+		$not_selected_string = "'" . implode( "', '", $not_selected ) . "'";
+		$sql                 = " AND (sp.kind {$not_sql} IN ( {$not_selected_string} ) {$check_sp_id_text}) ";
+
+		return $sql;
+	}
 
 	private function get_strings_per_page() {
 		$st_settings = $this->sitepress->get_setting( 'st' );
@@ -259,31 +351,48 @@ class WPML_ST_Strings {
 		$query  = $this->build_sql_start( $selects, $joins );
 		$query .= $where_snippet;
 		$query .= " {$extra_cond} ";
-		$query .= $this->filter_empty_order_snippet( $offset, $limit );
+		$query .= $this->filter_empty_value();
+		$query .= $this->order_limits( $offset, $limit );
+
+		$query_count  = $this->build_sql_count_start( $joins );
+		$query_count .= $where_snippet;
+		$query_count .= " {$extra_cond} ";
+		$query_count .= $this->filter_empty_value();
+
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared
+		$num_rows = $this->wpdb->get_var( $query_count );
 
 		$res = $this->wpdb->get_results( $query, ARRAY_A );
-		$this->set_pagination_counts( $limit );
+		// phpcs:enable WordPress.DB.PreparedSQL.NotPrepared
+		$this->set_pagination_counts( $limit, $num_rows );
 
 		return $res;
 	}
 
-	private function filter_empty_order_snippet( $offset, $limit ) {
-
-		return " AND TRIM(s.value) <> '' ORDER BY string_id DESC LIMIT {$offset},{$limit}";
+	private function filter_empty_value() {
+		return " AND TRIM(s.value) <> ''";
 	}
 
-	private function set_pagination_counts( $limit ) {
+	private function order_limits( $offset, $limit ) {
+		return "  ORDER BY string_id DESC LIMIT {$offset},{$limit}";
+	}
+
+	private function set_pagination_counts( $limit, $num_rows ) {
 		if ( ! is_null( $this->wp_query ) ) {
-			$this->wp_query->found_posts                  = $this->wpdb->get_var( 'SELECT FOUND_ROWS()' );
+			$this->wp_query->found_posts                  = $num_rows;
 			$this->wp_query->query_vars['posts_per_page'] = $limit;
 			$this->wp_query->max_num_pages                = ceil( $this->wp_query->found_posts / $limit );
 		}
 	}
 
 	private function build_sql_start( $selects = array(), $joins = array() ) {
-		array_unshift( $selects, 'SQL_CALC_FOUND_ROWS DISTINCT(s.id) AS string_id, s.language AS string_language, s.string_package_id, s.context, s.gettext_context, s.name, s.value, s.status AS status, s.translation_priority' );
+		array_unshift( $selects, 'DISTINCT s.id AS string_id, s.language AS string_language, s.string_package_id, s.context, s.gettext_context, s.name, s.value, s.status AS status, s.translation_priority' );
 
 		return 'SELECT ' . implode( ', ', $selects ) . " FROM {$this->wpdb->prefix}icl_strings s " . implode( PHP_EOL, $joins ) . ' ';
+	}
+
+	private function build_sql_count_start( $joins = array() ) {
+		return "SELECT COUNT(DISTINCT s.id) FROM {$this->wpdb->prefix}icl_strings s " . implode( PHP_EOL, $joins ) . ' ';
 	}
 
 	/**
@@ -329,7 +438,7 @@ class WPML_ST_Strings {
 	 * @return bool
 	 */
 	private function is_troubleshooting_filter_enabled() {
-		return array_key_exists( 'troubleshooting', $_GET ) && $_GET['troubleshooting'] === '1';
+		return '1' === array_key_exists( 'troubleshooting', $_GET ) && $_GET['troubleshooting'];
 	}
 
 	/**

@@ -59,7 +59,7 @@ class Field {
 		$pattern = '/^' . $this->tagKey . '-.*-' . $this->nodeId . '$/';
 
 		if ( $this->itemId ) {
-			$pattern = '/^' . $this->tagKey . '-.*-' . $this->nodeId . '-' . $this->itemId . '$/';
+			$pattern = '/^.*-' . $this->tagKey . '-' . $this->nodeId . '-' . $this->itemId . '$/';
 		}
 
 		return (bool) preg_match( $pattern, $string->get_name() );

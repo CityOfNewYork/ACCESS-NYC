@@ -1,0 +1,82 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Not included in String Translation": [
+            "文字列翻訳には含まれません"
+         ],
+         "Registered and locked": [
+            "登録とロック"
+         ],
+         "Text": [
+            "テキスト"
+         ],
+         "Numeric": [
+            "数値"
+         ],
+         "All Types": [
+            "全種類"
+         ],
+         "Search": [
+            "検索"
+         ],
+         "Communication error": [
+            "通信エラー"
+         ],
+         "The action failed.": [
+            "アクションは失敗した。"
+         ],
+         "All (%d)": [
+            "すべて (%d)"
+         ],
+         "Included in String Translation (%d)": [
+            "文字列翻訳に含まれるもの (%d)"
+         ],
+         "Not included in String Translation (%d)": [
+            "文字列翻訳には含まれません (%d)"
+         ],
+         "This setting is locked by a WPML configuration file.": [
+            "この設定はWPML設定ファイルによってロックされます。"
+         ],
+         "Option": [
+            "オプション"
+         ],
+         "Value": [
+            "値"
+         ],
+         "Type": [
+            "タイプ"
+         ],
+         "State": [
+            "州"
+         ],
+         "Export as a WPML configuration file": [
+            "WPML設定ファイルとしてエクスポート"
+         ],
+         "Cancel": [
+            "キャンセル"
+         ],
+         "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
+            "テーマまたはプラグインのルートにあるwpml-config.xmlに以下を保存します。"
+         ],
+         "No options found.": [
+            "オプションが見つかりません。"
+         ],
+         "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
+            "テーマオプションを少なくとも一度は保存したことを確認してください。テーマによっては、ユーザーが明示的にテーマデフォルトの変更を保存した後にのみ、wp_options テーブルに追加するものもあります。"
+         ],
+         "Add to String Translation": [
+            "文字列翻訳に追加"
+         ],
+         "Remove from String Translation": [
+            "文字列翻訳から削除"
+         ],
+         "Included in String Translation": [
+            "文字列翻訳に含まれる"
+         ]
+      }
+   }
+}

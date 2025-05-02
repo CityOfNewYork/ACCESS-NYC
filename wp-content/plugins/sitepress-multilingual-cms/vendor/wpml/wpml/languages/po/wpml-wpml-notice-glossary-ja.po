@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-04-22T15:22:56+02:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: wpml\n"
+
+msgid "Add glossary terms"
+msgstr "用語集用語を追加"
+
+msgid "Minimize"
+msgstr "最小化"
+
+msgid "Expand"
+msgstr "展開"
+
+msgid "There's nothing yet in the Glossary"
+msgstr "用語集にはまだ何もありません"
+
+msgid "Looks like you're not yet using the glossary. Glossary can help you:"
+msgstr "用語集をまだ使用していないようです。用語集は以下の点で役立ちます："
+
+msgid "Improve the quality of the translation"
+msgstr "翻訳の品質を向上させる"
+
+msgid "Ensure translation consistency"
+msgstr "翻訳の一貫性を確保する"
+
+msgid "Reduce translation costs"
+msgstr "翻訳コストを削減する"
+
+msgid "Improve SEO in translation languages"
+msgstr "翻訳言語のSEOを改善する"
+
+msgid "How to Use the Glossary for Accurate Translations"
+msgstr "正確な翻訳のための用語集の使用方法"
+
+msgid "%d item in the <a>Glossary</a>"
+msgid_plural "%d items in the <a>Glossary</a>"
+msgstr[0] "<a>用語集</a>に%d項目"
+msgstr[1] "<a>用語集</a>に%d項目"

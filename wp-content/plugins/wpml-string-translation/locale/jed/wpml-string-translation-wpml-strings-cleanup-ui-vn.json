@@ -1,0 +1,58 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Clean up the String Translation table by removing untranslated strings by domain.": [
+            "Dọn dẹp bảng Dịch chuỗi bằng cách loại bỏ các chuỗi chưa được dịch theo tên miền."
+         ],
+         "Remove strings by domain": [
+            "Xóa chuỗi theo tên miền"
+         ],
+         "Remove strings": [
+            "Xóa chuỗi"
+         ],
+         "Cancel": [
+            "Hủy bỏ"
+         ],
+         "Remove": [
+            "Di dời"
+         ],
+         "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
+            "Bảng dịch chuỗi hiện chứa các chuỗi từ các miền được liệt kê bên dưới. Nếu bạn không định dịch các chuỗi từ một miền cụ thể, hãy chọn miền đó bên dưới để xóa các chuỗi chưa được dịch khỏi bảng Dịch chuỗi. Bất kỳ chuỗi nào đã có bản dịch sẽ vẫn có sẵn."
+         ],
+         "Search": [
+            "Tìm kiếm"
+         ],
+         "Removing strings from String Translation table": [
+            "Xóa chuỗi khỏi bảng dịch chuỗi"
+         ],
+         "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
+            "Để thêm các chuỗi trở lại bảng Dịch chuỗi, bạn có thể cần quét lại các tệp dịch hoặc đăng ký các chuỗi dưới dạng có thể dịch được."
+         ],
+         "Read more about ": [
+            "Đọc thêm về "
+         ],
+         "scanning your site for strings and registering them as translatable.": [
+            "quét trang web của bạn để tìm chuỗi và đăng ký chúng dưới dạng có thể dịch được."
+         ],
+         "Successfully removed strings": [
+            "Đã xóa chuỗi thành công"
+         ],
+         "OK, Great": [
+            "ĐƯỢC RỒI, Tuyệt"
+         ],
+         "Domain": [
+            "Lãnh địa"
+         ],
+         "Strings count": [
+            "Số lượng dây"
+         ],
+         "Translated strings": [
+            "Chuỗi đã dịch"
+         ]
+      }
+   }
+}

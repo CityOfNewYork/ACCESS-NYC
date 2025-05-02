@@ -37,9 +37,4 @@ class DomainsWithMultisite implements \IWPML_Backend_Action {
 
 		return $url;
 	}
-
-	private static function isUsingDomains() {
-		return apply_filters( 'wpml_setting', [], 'language_domains' )
-			&& constant( 'WPML_LANGUAGE_NEGOTIATION_TYPE_DOMAIN' ) === (int) apply_filters( 'wpml_setting', 1, 'language_negotiation_type' );
-	}
 }

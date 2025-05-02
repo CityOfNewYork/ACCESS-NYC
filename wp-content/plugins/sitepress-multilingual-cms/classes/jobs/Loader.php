@@ -4,10 +4,17 @@ namespace WPML\TM\Jobs;
 
 use WPML\Core\WP\App\Resources;
 use WPML\LIB\WP\Hooks;
+use WPML\TranslationRoles\Service\AdministratorRoleManager;
 use WPML\UIPage;
 
-class Loader implements \IWPML_Backend_Action {
+class Loader implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 
+	private $administratorRoleManager;
+	public function __construct(
+		AdministratorRoleManager $administratorRoleManager
+	) {
+		$this->administratorRoleManager = $administratorRoleManager;
+	}
 	public function add_hooks() {
 		if ( wpml_is_ajax() ) {
 			return;
@@ -15,9 +22,14 @@ class Loader implements \IWPML_Backend_Action {
 
 		if ( UIPage::isTMJobs( $_GET ) || UIPage::isTranslationQueue( $_GET ) ) {
 			Hooks::onAction( 'wp_loaded' )
+				->then( [ $this, 'verifyAdminInitialization' ] )
 			     ->then( [ $this, 'getData' ] )
 			     ->then( Resources::enqueueApp( 'jobs' ) );
 		}
+	}
+
+	public function verifyAdminInitialization() {
+		$this->administratorRoleManager->verifyCurrentUser();
 	}
 
 	public function getData() {

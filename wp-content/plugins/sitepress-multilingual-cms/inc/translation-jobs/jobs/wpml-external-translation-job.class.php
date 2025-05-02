@@ -5,6 +5,7 @@ require_once WPML_TM_PATH . '/inc/translation-jobs/jobs/wpml-translation-job.cla
 class WPML_External_Translation_Job extends WPML_Element_Translation_Job {
 
 	function get_original_document() {
+	  $this->maybe_load_basic_data();
 
 		return apply_filters(
 			'wpml_get_translatable_item',

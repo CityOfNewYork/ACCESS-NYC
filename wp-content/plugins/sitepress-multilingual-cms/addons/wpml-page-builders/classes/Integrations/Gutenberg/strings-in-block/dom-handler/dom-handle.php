@@ -29,11 +29,11 @@ abstract class DOMHandle {
 	public function getDom( $html ) {
 		$dom = new \DOMDocument();
 		\libxml_use_internal_errors( true );
-		$html = mb_convert_encoding( $html, 'HTML-ENTITIES', 'UTF-8' );
+		$html = mb_encode_numericentity( $html, [ 0x80, 0x1FFFFF, 0, 0x1FFFFF ], 'UTF-8' );
 		$dom->loadHTML( '<div>' . $html . '</div>' );
 		\libxml_clear_errors();
 
-		// Remove doc type and <html> <body> wrappers
+		// Remove doc type and <html> <body> wrappers.
 		$dom->removeChild( $dom->doctype );
 
 		/**
@@ -82,7 +82,6 @@ abstract class DOMHandle {
 			$search       = '/(>)(' . $search_value . ')(<)/';
 		}
 
-
 		foreach ( $block->innerContent as &$inner_content ) {
 			if ( $inner_content ) {
 				$inner_content = preg_replace( $search, '${1}' . $translation . '${3}', $inner_content );
@@ -114,7 +113,7 @@ abstract class DOMHandle {
 			[ $this, 'removeCdataFromScriptTag' ]
 		);
 
-		return [ $removeCdata($innerHTML), $type ];
+		return [ $removeCdata( $innerHTML ), $type ];
 	}
 
 	/**
@@ -152,12 +151,12 @@ abstract class DOMHandle {
 			// @phpstan-ignore-next-line
 			$element->parentNode->setAttribute( $element->name, $value );
 		} elseif ( $element instanceof \DOMText ) {
-			$clone = $this->cloneNodeWithoutChildren( $element );
+			$clone            = $this->cloneNodeWithoutChildren( $element );
 			$clone->nodeValue = $value;
 			$element->parentNode->replaceChild( $clone, $element );
 		} else {
-			$clone = $this->cloneNodeWithoutChildren( $element );
-			$fragment = $this->getDom( $value )->firstChild; // Skip the wrapping div
+			$clone    = $this->cloneNodeWithoutChildren( $element );
+			$fragment = $this->getDom( $value )->firstChild; // Skip the wrapping div.
 			foreach ( $fragment->childNodes as $child ) {
 				$clone->appendChild( $element->ownerDocument->importNode( $child, true ) );
 			}
@@ -201,7 +200,8 @@ abstract class DOMHandle {
 				'></source>' => '/>',
 				'></track>'  => '/>',
 				'></wbr>'    => '/>',
-			] ) );
+			]
+		) );
 	}
 
 	public static function removeCdataFromStyleTag( $innerHTML ) {

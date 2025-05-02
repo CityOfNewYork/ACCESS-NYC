@@ -1,0 +1,81 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/postEditTranslationEditor/components/PostTranslationEditorSettings.js:59
+msgid "WPML Translation Editor"
+msgstr "Επεξεργαστής Μετάφρασης WPML"
+
+#: src/js/postEditTranslationEditor/components/PostTranslationEditorSettings.js:67
+msgid "WordPress Editor"
+msgstr "Επεξεργαστής WordPress"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:11
+msgid ""
+"Translate with the WordPress Editor when you want to create different "
+"designs for translations, or if you're translating content that's "
+"incompatible with WPML's Translation Editor."
+msgstr "Χρησιμοποιήστε τον Επεξεργαστή WordPress για μετάφραση όταν θέλετε να δημιουργήσετε διαφορετικά σχέδια για τις μεταφράσεις, ή εάν μεταφράζετε περιεχόμενο που δεν είναι συμβατό με τον Επεξεργαστή Μετάφρασης του WPML."
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:15
+msgid "What do you want to translate with the WordPress Editor?"
+msgstr "Τι θέλετε να μεταφράσετε με τον Επεξεργαστή WordPress;?"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:16
+msgid "I understand, switch to the WordPress Editor"
+msgstr "Κατάλαβα, μετάβαση στον Επεξεργαστή WordPress"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:17
+msgid "What do you want to translate with WPML Translation Editor?"
+msgstr "Τι θέλετε να μεταφράσετε με τον Επεξεργαστή Μετάφρασης WPML;?"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:18
+msgid "I understand, switch to WPML's Translation Editor"
+msgstr "Κατάλαβα, μετάβαση στον Επεξεργαστή Μετάφρασης του WPML"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:44
+msgid "Apply"
+msgstr "Εφαρμογή"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:45
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:52
+msgid "Only this %s"
+msgstr "Μόνο αυτό το %s"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:52
+msgid "Recommended"
+msgstr "Προτεινόμενο"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:53
+msgid "All %s"
+msgstr "Όλα τα %s"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:54
+msgid "All the site's content"
+msgstr "Όλο το περιεχόμενο του ιστότοπου"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:61
+msgid "Are you sure?"
+msgstr "Είστε σίγουροι;?"
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:66
+msgid ""
+"The WordPress Editor doesn't offer Automatic Translation, Translation "
+"Memory and other features that make translation easier."
+msgstr "Ο Επεξεργαστής WordPress δεν προσφέρει Αυτόματη Μετάφραση, Μνήμη Μετάφρασης και άλλα χαρακτηριστικά που διευκολύνουν τη μετάφραση."
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:69
+msgid ""
+"And, if you switch back to WPML's Translation Editor, you will need to "
+"translate from scratch what you translated with the WordPress editor."
+msgstr "Και, αν επιστρέψετε στον Επεξεργαστή Μετάφρασης του WPML, θα χρειαστεί να μεταφράσετε από την αρχή ό,τι μεταφράσατε με τον επεξεργαστή WordPress."
+
+#: src/js/postEditTranslationEditor/components/SaveModal.js:76
+msgid ""
+"When you update content that you previously translated with the WordPress "
+"Editor, you will need to translate from scratch."
+msgstr "Όταν ενημερώνετε περιεχόμενο που προηγουμένως μεταφράσατε με τον Επεξεργαστή WordPress, θα χρειαστεί να το μεταφράσετε από την αρχή."

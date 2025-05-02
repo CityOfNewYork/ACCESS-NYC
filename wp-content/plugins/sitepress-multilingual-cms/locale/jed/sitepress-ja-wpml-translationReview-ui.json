@@ -12,16 +12,16 @@
             "承認されました！"
          ],
          "Loading the next translation for review...": [
-            "次の翻訳をレビュー用に読み込み中です..."
+            "次の翻訳をレビューのために読み込んでいます..."
          ],
          "Back": [
             "戻る"
          ],
          "Turn off to not automatically load the next translation after finishing this review.": [
-            "このレビュー終了後に、次の翻訳を自動的に読み込まない場合、オフにしてください。"
+            "このレビューを終えた後、自動的に次の翻訳を読み込まないようにするにはオフにしてください。"
          ],
          "Turn on to automatically load the next translation after finishing this  .": [
-            "オンにすると、この翻訳の終了後、次の翻訳が自動で読み込まれます。"
+            "このレビューを終えた後、自動的に次の翻訳を読み込むにはオンにしてください。"
          ],
          "Edit": [
             "編集"
@@ -30,13 +30,13 @@
             "翻訳を編集"
          ],
          "Please wait, applying translation..": [
-            "お待ちください、翻訳を適用中です.."
+            "お待ちください、翻訳を適用中です..."
          ],
          "Next review": [
             "次のレビュー"
          ],
          "Publish this translation": [
-            "この翻訳を公開"
+            "この翻訳を公開する"
          ],
          "Accept this translation": [
             "この翻訳を承認する"
@@ -45,10 +45,10 @@
             "公開されました！"
          ],
          "Someone is already reviewing this translation. Please try again later.": [
-            "どなたかがすでにこの翻訳をレビューしています。のちほどもう一度お試しください。"
+            "既に他の人がこの翻訳をレビューしています。後でもう一度お試しください。"
          ],
          "There was an error in applying translation.": [
-            "翻訳の適用にエラーが発生しました。"
+            "翻訳の適用中にエラーが発生しました。"
          ]
       }
    }

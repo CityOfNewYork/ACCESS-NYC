@@ -1,0 +1,99 @@
+#gc-items-search {
+	float: left;
+}
+
+#sync-tabs .tablenav {
+	clear: none;
+}
+
+#sync-tabs {
+	margin-bottom: 1.5em;
+
+	.gc-check-column {
+		width: 20px;
+		padding: 6px 0 6px 6px;
+		vertical-align: middle;
+	}
+
+	#gc-edit {
+		width: 20px;
+	}
+
+	// For now, until we can have more than one mapping on this page.
+	th:nth-child( 5 ), td:nth-child( 5 ) {
+		display: none;
+	}
+}
+
+.gc-sync-progress {
+	#progress {
+		padding: 0;
+		border: 1px solid #e5e5e5;
+		-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+	}
+
+	table {
+		background: none;
+	}
+
+	#gc-items-search {
+		display: none;
+	}
+}
+
+.gc-progress-bar {
+	position: relative;
+
+	&:before {
+		content: '';
+		background: #dbf4f6;
+		height: 38px;
+		display: block;
+		width: 100%;
+	}
+}
+
+.gc-progress-bar-partial {
+	background: #0ab3c4;
+	height: 38px;
+	color: #fff;
+	text-align: center;
+	line-height: 38px;
+	font-weight: bold;
+	margin-top: -38px;
+	-webkit-transition: width 400ms ease-in-out;
+	-moz-transition: width 400ms ease-in-out;
+	-o-transition: width 400ms ease-in-out;
+	transition: width 400ms ease-in-out;
+
+	span {
+		display: block;
+		min-width: 3.2em;
+	}
+}
+
+.gc-sync-table {
+	border-spacing: 0;
+	width: 100%;
+	clear: both;
+	margin: 0;
+}
+
+#gc-reload-spinner {
+	.gc-loader {
+		padding-left: 32px;
+		width: auto;
+		line-height: 1.5em;
+	}
+}
+
+.gc-status-warning {
+	color: orange;
+	font-size: 10px;
+	display: none;
+}
+
+.gc-status-warning.not-current {
+	display: block;
+}

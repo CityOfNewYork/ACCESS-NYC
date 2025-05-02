@@ -1,0 +1,82 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Not included in String Translation": [
+            "Niet opgenomen in String Vertaling"
+         ],
+         "Registered and locked": [
+            "Geregistreerd en vergrendeld"
+         ],
+         "Text": [
+            "Tekst"
+         ],
+         "Numeric": [
+            "Numeriek"
+         ],
+         "All Types": [
+            "Alle soorten"
+         ],
+         "Search": [
+            "Zoeken"
+         ],
+         "Communication error": [
+            "Communicatiefout"
+         ],
+         "The action failed.": [
+            "De actie is mislukt."
+         ],
+         "All (%d)": [
+            "Alle (%d)"
+         ],
+         "Included in String Translation (%d)": [
+            "Opgenomen in String Vertaling (%d)"
+         ],
+         "Not included in String Translation (%d)": [
+            "Niet opgenomen in String Vertaling (%d)"
+         ],
+         "This setting is locked by a WPML configuration file.": [
+            "Deze instelling wordt vergrendeld door een WPML configuratiebestand."
+         ],
+         "Option": [
+            "Optie"
+         ],
+         "Value": [
+            "Waarde"
+         ],
+         "Type": [
+            "Type"
+         ],
+         "State": [
+            "Land"
+         ],
+         "Export as a WPML configuration file": [
+            "Exporteren als een WPML configuratiebestand"
+         ],
+         "Cancel": [
+            "Annuleren"
+         ],
+         "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
+            "Sla het volgende op in een wpml-config.xml in de root van je thema of plugin."
+         ],
+         "No options found.": [
+            "Geen opties gevonden."
+         ],
+         "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
+            "Zorg ervoor dat je je thema-opties minstens één keer hebt opgeslagen. Sommige thema's voegen deze pas toe aan de wp_options tabel nadat de gebruiker expliciet wijzigingen in de standaardinstellingen van het thema heeft opgeslagen."
+         ],
+         "Add to String Translation": [
+            "Toevoegen aan stringvertaling"
+         ],
+         "Remove from String Translation": [
+            "Verwijderen uit stringvertaling"
+         ],
+         "Included in String Translation": [
+            "Opgenomen in stringvertaling"
+         ]
+      }
+   }
+}

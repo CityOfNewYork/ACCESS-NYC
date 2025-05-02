@@ -24,6 +24,8 @@ class Package {
 	 * @param \WPML_Package|null $package
 	 */
 	public static function delete( $package ) {
-		$package && do_action( 'wpml_delete_package', $package->name, $package->kind );
+		if ( $package ) {
+			do_action( 'wpml_delete_package', $package->name, $package->kind );
+		}
 	}
 }

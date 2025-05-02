@@ -1,0 +1,736 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/language/LanguagePairs.js:57
+msgid "From:"
+msgstr "Von:"
+
+#: src/js/components/language/LanguagePairs.js:69
+msgid "--Choose language--"
+msgstr "--Sprache wählen--"
+
+#: src/js/components/language/LanguagePairs.js:81
+msgid "to:"
+msgstr "nach:"
+
+#: src/js/components/language/SelectLanguagePairs.js:39
+msgid "Set language pair(s) for Translator %s:"
+msgstr "Sprachpaar(e) für Übersetzer %s festlegen:"
+
+#: src/js/components/language/SelectLanguagePairs.js:64
+msgid "+ Add more language pairs for this translator"
+msgstr "+ Weitere Sprachpaare für diesen Übersetzer hinzufügen"
+
+#: src/js/components/roles/CreateUser.js:100
+msgid "First Name"
+msgstr "Vorname"
+
+#: src/js/components/roles/CreateUser.js:101
+msgid "Last Name"
+msgstr "Nachname"
+
+#: src/js/components/roles/CreateUser.js:105
+msgid "Role"
+msgstr "Rolle"
+
+#: src/js/components/roles/CreateUser.js:137
+msgid "(required)"
+msgstr "(erforderlich)"
+
+#: src/js/components/roles/CreateUser.js:46
+msgid ""
+"Make sure that you have provided a correct email address e.g. "
+"name@domain.com"
+msgstr "Stellen Sie sicher, dass Sie eine korrekte E-Mail-Adresse angegeben haben, z.B. name@domain.com"
+
+#: src/js/components/roles/CreateUser.js:64
+msgid "This field is required"
+msgstr "Dieses Feld ist erforderlich"
+
+#: src/js/components/roles/CreateUser.js:84
+msgid "A translator can be any WordPress role."
+msgstr "Ein Übersetzer kann jede WordPress-Rolle haben."
+
+#: src/js/components/roles/CreateUser.js:98
+msgid "Username"
+msgstr "Benutzername"
+
+#: src/js/components/roles/CreateUser.js:99
+msgid "Email"
+msgstr "E-Mail"
+
+#: src/js/components/roles/ExistingUserSelect.js:46
+#: src/js/translationServices/components/SearchForm.js:13
+msgid "Search"
+msgstr "Suchen"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:23
+msgid "Who will translate?"
+msgstr "Wer wird übersetzen?"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:27
+msgid "Only myself"
+msgstr "Nur ich selbst"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:28
+msgid "You will be the sole translator for this site."
+msgstr "Sie werden der einzige Übersetzer für diese Website sein."
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:35
+msgid "Users of this site"
+msgstr "Benutzer dieser Website"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:36
+msgid ""
+"You will choose or create new users of this WordPress site as the "
+"translators. You can also choose yourself. This allows you to set up a team "
+"of translators working in different language pairs."
+msgstr "Sie werden Benutzer dieser WordPress-Website als Übersetzer auswählen oder neue erstellen. Sie können sich auch selbst auswählen. Dies ermöglicht es Ihnen, ein Team von Übersetzern aufzubauen, die in verschiedenen Sprachpaaren arbeiten."
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:45
+msgid "Translation Service: %s"
+msgstr "Übersetzungsdienst: %s"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:46
+msgid "A Professional Translation Service"
+msgstr "Ein professioneller Übersetzungsdienst"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:49
+msgid ""
+"You have preselected %s to translate your content. Finish setting it up by "
+"entering the API token they provided to you."
+msgstr "Sie haben %s vorausgewählt, um Ihre Inhalte zu übersetzen. Schließen Sie die Einrichtung ab, indem Sie den API-Token eingeben, den sie Ihnen zur Verfügung gestellt haben."
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:50
+msgid ""
+"WPML offers tight integration with over 70 translation services. You will "
+"choose the translation service that you prefer and enjoy a streamlined "
+"process for sending jobs and receiving completed translations."
+msgstr "WPML bietet eine enge Integration mit über 70 Übersetzungsdiensten. Sie wählen den Übersetzungsdienst, den Sie bevorzugen, und genießen einen optimierten Prozess für das Senden von Aufträgen und den Empfang fertiger Übersetzungen."
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:59
+msgid ""
+"I want to set a \"Translation Manager\" who will choose the translators for "
+"this site"
+msgstr "Ich möchte einen „Übersetzungsmanager“ festlegen, der die Übersetzer für diese Website auswählt"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:60
+msgid ""
+"You will choose a user of this site and delegate the setup of translators "
+"to him/her. Choose this option when you are building a website for a "
+"client, who will set up translator users or choose a translation service."
+msgstr "Sie werden einen Benutzer dieser Website auswählen und ihm/ihr die Einrichtung von Übersetzern übertragen. Wählen Sie diese Option, wenn Sie eine Website für einen Kunden erstellen, der Übersetzer-Benutzer einrichten oder einen Übersetzungsdienst auswählen wird."
+
+#: src/js/components/translation-managers/AddManagerDialog.js:47
+msgid "user"
+msgstr "benutzer"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:47
+msgid "Editor"
+msgstr "Redakteur"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:61
+msgid "Select an existing %s and set as Translation Manager"
+msgstr "Wählen Sie einen bestehenden %s aus und setzen Sie ihn als Übersetzungsmanager"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:72
+msgid "Create a new %s and set as Translation Manager"
+msgstr "Erstellen Sie einen neuen %s und setzen Sie ihn als Übersetzungsmanager"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:85
+#: src/js/components/translators/AddTranslatorDialog.js:121
+#: src/js/components/translators/EditLanguagesDialog.js:73
+#: src/js/setup/components/Steps/AddLanguagesModal.js:496
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/ListModal.js:32
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:90
+msgid "Add Translation Manager"
+msgstr "Übersetzungsmanager hinzufügen"
+
+#: src/js/components/translation-managers/ManagerSection.js:27
+msgid "Add a Translation Manager"
+msgstr "Einen Übersetzungsmanager hinzufügen"
+
+#: src/js/components/translators/AddTranslatorDialog.js:111
+msgid "Set language pair(s)"
+msgstr "Sprachpaar(e) festlegen"
+
+#: src/js/components/translators/AddTranslatorDialog.js:126
+msgid "Previous"
+msgstr "Zurück"
+
+#: src/js/components/translators/AddTranslatorDialog.js:129
+#: src/js/components/translators/EditLanguagesDialog.js:78
+msgid "Save"
+msgstr "Speichern"
+
+#: src/js/components/translators/AddTranslatorDialog.js:65
+#: src/js/components/translators/UserSection.js:45
+msgid "Add a Translator"
+msgstr "Einen Übersetzer hinzufügen"
+
+#: src/js/components/translators/AddTranslatorDialog.js:91
+msgid "Select an existing user and set as Translator"
+msgstr "Wählen Sie einen bestehenden Benutzer aus und setzen Sie ihn als Übersetzer"
+
+#: src/js/components/translators/AddTranslatorDialog.js:95
+msgid "Create a new user and set as Translator"
+msgstr "Erstellen Sie einen neuen Benutzer und setzen Sie ihn als Übersetzer"
+
+#: src/js/components/translators/EditLanguagesDialog.js:55
+msgid "Edit language pair(s) for translator"
+msgstr "Sprachpaar(e) für Übersetzer bearbeiten"
+
+#: src/js/components/translators/TranslatorsTable.js:128
+#: src/js/setup/components/Steps/AddLanguagesModal.js:346
+#: src/js/translationServices/components/ServicesList.js:69
+msgid "Name"
+msgstr "Name"
+
+#: src/js/components/translators/TranslatorsTable.js:140
+msgid "Language Pairs"
+msgstr "Sprachpaare"
+
+#: src/js/components/translators/TranslatorsTable.js:144
+msgid "You can translate to and from all languages"
+msgstr "Sie können in alle Sprachen und aus allen Sprachen übersetzen"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:48
+msgid "%s file upload failed."
+msgstr "%s Datei-Upload fehlgeschlagen."
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:69
+msgid "Flag"
+msgstr "Flagge"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:87
+msgid "Flag file"
+msgstr "Flaggendatei"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:160
+msgid ""
+"You just added  language. Next, select it as the site's default language or "
+"a translation language."
+msgstr "Sie haben gerade eine Sprache hinzugefügt. Wählen Sie sie als Standardsprache der Website oder als Übersetzungssprache aus."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:162
+msgid "Language added"
+msgstr "Sprache hinzugefügt"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:192
+msgid "The value \"%s\" already exists"
+msgstr "Der Wert „%s“ existiert bereits"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:215
+msgid "Add a new language"
+msgstr "Eine neue Sprache hinzufügen"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:224
+msgid ""
+"Create a country-specific language by choosing the general language from "
+"the list below. Then, choose the country it should be localized for."
+msgstr "Erstellen Sie eine länderspezifische Sprache, indem Sie die allgemeine Sprache aus der Liste unten auswählen. Wählen Sie dann das Land aus, für das sie lokalisiert werden soll."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:229
+msgid ""
+"By choosing a combination that already exists in the database, WPML can "
+"help fill out the necessary fields. Read more about "
+"<AddingACustomLanguageLink />."
+msgstr "Durch die Auswahl einer bereits in der Datenbank vorhandenen Kombination kann WPML beim Ausfüllen der erforderlichen Felder helfen. Lesen Sie mehr über <AddingACustomLanguageLink />."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:242
+msgid "Cannot find?"
+msgstr "Nicht gefunden?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:244
+msgid "Click here"
+msgstr "Hier klicken"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:300
+msgid ""
+"The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" "
+", \"pt-br\", \"zh-hans\""
+msgstr "Das falsche Format. Es darf nur Kleinbuchstaben und „-“ enthalten. Z.B.: „fr“, „pt-br“, „zh-hans“"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:308
+msgid "Language"
+msgstr "Sprache"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:331
+msgid "Location"
+msgstr "Standort"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:360
+msgid "Code"
+msgstr "Code"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:374
+msgid "The language will not be supported by automatic translations"
+msgstr "Die Sprache wird nicht von automatischen Übersetzungen unterstützt"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:392
+msgid "Language mapping"
+msgstr "Sprachzuordnung"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:404
+msgid "Don't map this language"
+msgstr "Diese Sprache nicht zuordnen"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:418
+msgid "Default locale"
+msgstr "Standardgebietsschema"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:423
+msgid ""
+"The wrong format. It may contain only small letters and \"_\". E.g: \"de\" "
+", \"de_DE\", \"zh_Hant_TW\""
+msgstr "Das falsche Format. Es darf nur Kleinbuchstaben und „_“ enthalten. Z.B.: „de“, „de_DE“, „zh_Hant_TW“"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:435
+msgid "hreflang"
+msgstr "hreflang"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:449
+msgid "Encode url?"
+msgstr "URL codieren?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:45
+msgid "Flags must be:"
+msgstr "Flaggen müssen:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:453
+msgid "NO"
+msgstr "NEIN"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:454
+msgid "YES"
+msgstr "JA"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:460
+msgid " (required)"
+msgstr " (erforderlich)"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:483
+msgid "Please fill in the field"
+msgstr "Bitte füllen Sie das Feld aus"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:49
+msgid "PNG, SVG, or JPG files"
+msgstr "PNG-, SVG- oder JPG-Dateien sein"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:501
+msgid "Save language"
+msgstr "Sprache speichern"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:52
+msgid "18 x 12 pixels"
+msgstr "18 x 12 Pixel groß sein"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:55
+msgid "Read more about "
+msgstr "Mehr lesen über "
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:60
+msgid ""
+"The name of your language as it will appear on your site's language "
+"switcher."
+msgstr "Der Name Ihrer Sprache, wie er im Sprachumschalter Ihrer Website erscheinen wird."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:61
+msgid ""
+"A unique value that identifies the language in the database and URL. Once "
+"saved, the language code cannot be changed."
+msgstr "Ein eindeutiger Wert, der die Sprache in der Datenbank und URL identifiziert. Nach dem Speichern kann der Sprachcode nicht mehr geändert werden."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:62
+msgid ""
+"If your custom language is similar to an existing language, you can use the "
+"existing language's spellcheck and automatic translation. For example, if "
+"your custom language is Swiss-German, you can map to German as the language "
+"to use for spellcheck and automatic translation. If you don't map your "
+"custom language to an existing language, spellcheck and automatic "
+"translation features will be unavailable in that language."
+msgstr "Wenn Ihre benutzerdefinierte Sprache einer bestehenden Sprache ähnlich ist, können Sie die Rechtschreibprüfung und automatische Übersetzung der bestehenden Sprache verwenden. Wenn Ihre benutzerdefinierte Sprache zum Beispiel Schweizerdeutsch ist, können Sie sie Deutsch zuordnen, um dessen Rechtschreibprüfung und automatische Übersetzung zu nutzen. Wenn Sie Ihre benutzerdefinierte Sprache keiner bestehenden Sprache zuordnen, werden die Funktionen für Rechtschreibprüfung und automatische Übersetzung in dieser Sprache nicht verfügbar sein."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:66
+msgid ""
+"The value WPML checks when loading translations from MO and PO files. The "
+"default locale is included in the filenames in your /wp-content/languages/ "
+"folder in your WordPress setup."
+msgstr "Der Wert, den WPML beim Laden von Übersetzungen aus MO- und PO-Dateien prüft. Das Standardgebietsschema ist in den Dateinamen in Ihrem /wp-content/languages/ Ordner in Ihrer WordPress-Installation enthalten."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:69
+msgid ""
+"Google uses the hreflang attribute to direct users to sites in their "
+"relevant language and location. Examples:"
+msgstr "Google verwendet das hreflang-Attribut, um Benutzer zu Websites in ihrer relevanten Sprache und an ihrem relevanten Standort zu leiten. Beispiele:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:71
+msgid "All English-speaking users: en"
+msgstr "Alle englischsprachigen Benutzer: en"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:72
+msgid "English for UK users: en-gb"
+msgstr "Englisch für Benutzer aus Großbritannien: en-gb"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:73
+msgid "English for US users: en-us"
+msgstr "Englisch für Benutzer aus den USA: en-us"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:81
+msgid ""
+"Determines if URLs in this language are encoded or use ASCII characters (if "
+"unsure, leave it as \"No\")."
+msgstr "Bestimmt, ob URLs in dieser Sprache kodiert sind oder ASCII-Zeichen verwenden (wenn Sie unsicher sind, belassen Sie es bei „Nein“)."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:98
+msgid "adding a custom language"
+msgstr "hinzufügen einer benutzerdefinierten Sprache"
+
+#: src/js/setup/components/Steps/Address.js:103
+msgid ""
+"Learn more about required server settings to use a different domain per "
+"language"
+msgstr "Erfahren Sie mehr über die erforderlichen Servereinstellungen, um eine andere Domain pro Sprache zu verwenden"
+
+#: src/js/setup/components/Steps/Address.js:113
+msgid "Language name added as a parameter"
+msgstr "Sprachname als Parameter hinzugefügt"
+
+#: src/js/setup/components/Steps/Address.js:160
+msgid "I will set up the domains for my secondary languages later."
+msgstr "Ich werde die Domains für meine sekundären Sprachen später einrichten."
+
+#: src/js/setup/components/Steps/Address.js:209
+msgid "The domain you have entered is invalid."
+msgstr "Die eingegebene Domain ist ungültig."
+
+#: src/js/setup/components/Steps/Address.js:211
+msgid "The domain you have entered must be unique."
+msgstr "Die eingegebene Domain muss eindeutig sein."
+
+#: src/js/setup/components/Steps/Address.js:231
+msgid ""
+"Please Note: Your site won't work in your secondary languages until this is "
+"successfully set up or you switch to a different URL option."
+msgstr "Bitte beachten Sie: Ihre Website wird in Ihren sekundären Sprachen nicht funktionieren, bis dies erfolgreich eingerichtet ist oder Sie zu einer anderen URL-Option wechseln."
+
+#: src/js/setup/components/Steps/Address.js:53
+msgid "Learn more about Language URL Options"
+msgstr "Erfahren Sie mehr über URL-Optionen für Sprachen"
+
+#: src/js/setup/components/Steps/Address.js:60
+msgid "How would you like to format your site's URL?"
+msgstr "Wie möchten Sie die URL Ihrer Website formatieren?"
+
+#: src/js/setup/components/Steps/Address.js:65
+msgid "Different languages in directories"
+msgstr "Verschiedene Sprachen in Verzeichnissen"
+
+#: src/js/setup/components/Steps/Address.js:74
+msgid "The URL rewrite is not configured in your server."
+msgstr "Die URL-Umschreibung ist auf Ihrem Server nicht konfiguriert."
+
+#: src/js/setup/components/Steps/Address.js:77
+msgid ""
+"Learn more about required server settings to display languages in "
+"directories"
+msgstr "Erfahren Sie mehr über die erforderlichen Servereinstellungen, um Sprachen in Verzeichnissen anzuzeigen"
+
+#: src/js/setup/components/Steps/Address.js:82
+msgid "I will fix my server settings to display languages in directories later."
+msgstr "Ich werde meine Servereinstellungen später anpassen, um Sprachen in Verzeichnissen anzuzeigen."
+
+#: src/js/setup/components/Steps/Address.js:84
+msgid "Your server settings do not allow for languages in directories. "
+msgstr "Ihre Servereinstellungen erlauben keine Sprachen in Verzeichnissen."
+
+#: src/js/setup/components/Steps/Address.js:87
+msgid "Learn more about the required server settings."
+msgstr "Erfahren Sie mehr über die erforderlichen Servereinstellungen."
+
+#: src/js/setup/components/Steps/Address.js:96
+msgid "A different domain per language"
+msgstr "Eine andere Domain pro Sprache"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:108
+msgid "Translate your pages"
+msgstr "Übersetzen Sie Ihre Seiten"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:113
+msgid "Translate your posts"
+msgstr "Übersetzen Sie Ihre Beiträge"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:29
+msgid "Next, you need to set-up your multilingual store."
+msgstr "Als Nächstes müssen Sie Ihren mehrsprachigen Shop einrichten."
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:46
+msgid "Continue to WooCommerce Multilingual Setup"
+msgstr "Weiter zur WooCommerce Multilingual-Einrichtung"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:54
+msgid "Start translating your site by visiting the <s>Translation Dashboard</s>."
+msgstr "Beginnen Sie mit der Übersetzung Ihrer Website, indem Sie das <s>Übersetzungs-Dashboard</s> besuchen."
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:72
+msgid "Go to Translation Dashboard"
+msgstr "Zum Übersetzungs-Dashboard gehen"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:80
+msgid "Need help? <a>Using WPML's Plus Icons to Translate Content</a>"
+msgstr "Benötigen Sie Hilfe? <a>Verwendung der Plus-Symbole von WPML zur Übersetzung von Inhalten</a>"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:99
+msgid ""
+"To start translating, look for the \"plus\" icons that WPML introduces next "
+"to content lists and editors. Click the \"plus\" icon under each language "
+"to translate."
+msgstr "Um mit der Übersetzung zu beginnen, achten Sie auf die „Plus“-Symbole, die WPML neben Inhaltslisten und Editoren einführt. Klicken Sie auf das „Plus“-Symbol unter jeder Sprache, um zu übersetzen."
+
+#: src/js/setup/components/Steps/Finished/CriticalError.js:10
+msgid "support forum"
+msgstr "support-Forum"
+
+#: src/js/setup/components/Steps/Finished/CriticalError.js:14
+msgid ""
+"There was a critical error setting up WPML. Please contact our "
+"<LinkToSupportForum /> to resolve it."
+msgstr "Bei der Einrichtung von WPML ist ein kritischer Fehler aufgetreten. Bitte kontaktieren Sie unser <LinkToSupportForum />, um das Problem zu lösen."
+
+#: src/js/setup/components/Steps/Finished/CriticalError.js:23
+msgid "Hide error message"
+msgstr "Fehlermeldung ausblenden"
+
+#: src/js/setup/components/Steps/Finished/CriticalError.js:23
+msgid "Show error message"
+msgstr "Fehlermeldung anzeigen"
+
+#: src/js/setup/components/Steps/Finished/Header.js:12
+msgid "Congratulations, your website is now multilingual with WPML!"
+msgstr "Glückwunsch, Ihre Website ist jetzt mit WPML mehrsprachig!"
+
+#: src/js/setup/components/Steps/Finished/LanguageSwitcherBox.js:6
+msgid ""
+"For language switcher customization and more language options, navigate to "
+"<a>WPML → Languages</a>."
+msgstr "Für die Anpassung des Sprachumschalters und weitere Sprachoptionen navigieren Sie zu <a>WPML → Sprachen</a>."
+
+#: src/js/setup/components/Steps/Languages.js:110
+msgid "What are the languages of your site?"
+msgstr "Was sind die Sprachen Ihrer Website?"
+
+#: src/js/setup/components/Steps/Languages.js:120
+msgid "Default language"
+msgstr "Standardsprache"
+
+#: src/js/setup/components/Steps/Languages.js:122
+msgid "What is the current language of your website?"
+msgstr "Was ist die aktuelle Sprache Ihrer Website?"
+
+#: src/js/setup/components/Steps/Languages.js:133
+msgid "Translation languages"
+msgstr "Übersetzungssprachen"
+
+#: src/js/setup/components/Steps/Languages.js:135
+msgid "Which languages do you want to translate your site into?"
+msgstr "In welche Sprachen möchten Sie Ihre Website übersetzen?"
+
+#: src/js/setup/components/Steps/Languages.js:149
+msgid "If you cannot find languages that you need in the list"
+msgstr "Wenn Sie die benötigten Sprachen nicht in der Liste finden können"
+
+#: src/js/setup/components/Steps/Languages.js:150
+msgid "create a custom language"
+msgstr "eine benutzerdefinierte Sprache erstellen"
+
+#: src/js/setup/components/Steps/License.js:27
+#. %1$s is <a href="..."> and %2$s is </a>
+msgid ""
+"If you don't have a WPML.org account or a valid subscription, %1$spurchase "
+"one%2$s to get automatic updates, full support, and a 30-day money-back "
+"guarantee."
+msgstr "Wenn Sie kein WPML.org-Konto oder kein gültiges Abonnement haben, %1$skaufen Sie eines%2$s, um automatische Updates, vollen Support und eine 30-tägige Geld-zurück-Garantie zu erhalten."
+
+#: src/js/setup/components/Steps/License.js:58
+msgid "Already purchased WPML?"
+msgstr "WPML bereits gekauft?"
+
+#: src/js/setup/components/Steps/License.js:62
+msgid "Enter your site key from your WPML account to receive automatic updates."
+msgstr "Geben Sie Ihren Site-Schlüssel aus Ihrem WPML-Konto ein, um automatische Updates zu erhalten."
+
+#: src/js/setup/components/Steps/License.js:69
+msgid "Site key"
+msgstr "Site-Schlüssel"
+
+#: src/js/setup/components/Steps/License.js:76
+msgid "Get a key for this site"
+msgstr "Einen Schlüssel für diese Website erhalten"
+
+#: src/js/setup/components/Steps/Plugins.js:130
+msgid "Improve your site’s translations using helpful plugins"
+msgstr "Verbessern Sie die Übersetzungen Ihrer Website mit hilfreichen Plugins"
+
+#: src/js/setup/components/Steps/Plugins.js:135
+msgid ""
+"Based on the themes and other plugins running on your site, we recommend "
+"that you enable the following WPML components. These are included with your "
+"WPML purchase and allow you to translate strings, media, admin texts, and "
+"more."
+msgstr "Basierend auf den Themes und anderen Plugins, die auf Ihrer Website laufen, empfehlen wir Ihnen, die folgenden WPML-Komponenten zu aktivieren. Diese sind in Ihrem WPML-Kauf enthalten und ermöglichen es Ihnen, Strings, Medien, Admin-Texte und mehr zu übersetzen."
+
+#: src/js/setup/components/Steps/Plugins.js:97
+msgid "Error in activating plugin."
+msgstr "Fehler beim Aktivieren des Plugins."
+
+#: src/js/setup/components/Steps/Plugins.js:99
+msgid "Error in installing plugin."
+msgstr "Fehler beim Installieren des Plugins."
+
+#: src/js/setup/components/Steps/Support.js:22
+msgid ""
+"Yes, send theme and plugins information, in order to get faster support and "
+"compatibility alerts"
+msgstr "Ja, senden Sie Theme- und Plugin-Informationen, um schnelleren Support und Kompatibilitätswarnungen zu erhalten"
+
+#: src/js/setup/components/Steps/Support.js:25
+msgid "No, don't send this information and skip compatibility alerts"
+msgstr "Nein, senden Sie diese Informationen nicht und überspringen Sie Kompatibilitätswarnungen"
+
+#: src/js/setup/components/Steps/Support.js:34
+msgid "Do you want to get better and faster support?"
+msgstr "Möchten Sie besseren und schnelleren Support erhalten?"
+
+#: src/js/setup/components/Steps/Support.js:39
+msgid ""
+"The WPML plugin can send a list of active plugins and theme used in your "
+"site to wpml.org. This allows our support team to help you much faster and "
+"to contact you in advance about potential compatibility problems and their "
+"solutions."
+msgstr "Das WPML-Plugin kann eine Liste der aktiven Plugins und des verwendeten Themes Ihrer Website an wpml.org senden. Dies ermöglicht es unserem Support-Team, Ihnen viel schneller zu helfen und Sie im Voraus über potenzielle Kompatibilitätsprobleme und deren Lösungen zu informieren."
+
+#: src/js/setup/components/Steps/Support.js:51
+msgid "Privacy and data usage policy"
+msgstr "Datenschutz- und Datennutzungsrichtlinie"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Authorize/Actions.js:16
+msgid "Error: %s"
+msgstr "Fehler: %s"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Authorize/Actions.js:36
+msgid "Authenticate"
+msgstr "Authentifizieren"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:24
+msgid ""
+"To send content and receive translations from <service_name />, enter the "
+"credentials you received from them."
+msgstr "Um Inhalte zu senden und Übersetzungen von <service_name /> zu erhalten, geben Sie die von ihnen erhaltenen Zugangsdaten ein."
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:30
+msgid "Need credentials? Contact <link_to_service />"
+msgstr "Benötigen Sie Zugangsdaten? Kontaktieren Sie <link_to_service />"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:34
+msgid ""
+"Success! You can start sending content to %s for translation after you "
+"finish the setup wizard."
+msgstr "Erfolg! Sie können damit beginnen, Inhalte zur Übersetzung an %s zu senden, nachdem Sie den Einrichtungsassistenten abgeschlossen haben."
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:58
+msgid "The credentials are invalid. Please, try again."
+msgstr "Die Zugangsdaten sind ungültig. Bitte versuchen Sie es erneut."
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/ListModal.js:12
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Main.js:84
+msgid "Choose a Translation Service"
+msgstr "Wählen Sie einen Übersetzungsdienst"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Main.js:71
+msgid "Loading"
+msgstr "Wird geladen"
+
+#: src/js/setup/models/Languages.js:57
+msgid "A new language could not be added correctly"
+msgstr "Eine neue Sprache konnte nicht korrekt hinzugefügt werden"
+
+#: src/js/setup/store.js:108
+msgid "Back"
+msgstr "Zurück"
+
+#: src/js/setup/store.js:113
+msgid "Continue"
+msgstr "Fortfahren"
+
+#: src/js/setup/store.js:118
+msgid "Skip"
+msgstr "Überspringen"
+
+#: src/js/setup/store.js:122
+msgid "Install and activate"
+msgstr "Installieren und aktivieren"
+
+#: src/js/setup/store.js:127
+msgid "Finish"
+msgstr "Abschließen"
+
+#: src/js/setup/store.js:70
+msgid "Languages"
+msgstr "Sprachen"
+
+#: src/js/setup/store.js:73
+msgid "URL Format"
+msgstr "URL-Format"
+
+#: src/js/setup/store.js:76
+msgid "Register WPML"
+msgstr "WPML registrieren"
+
+#: src/js/setup/store.js:79
+msgid "Who Will Translate"
+msgstr "Wer wird übersetzen"
+
+#: src/js/setup/store.js:84
+msgid "Support"
+msgstr "Support"
+
+#: src/js/setup/store.js:87
+msgid "Plugins"
+msgstr "Plugins"
+
+#: src/js/setup/store.js:90
+msgid "Finished"
+msgstr "Fertig"
+
+#: src/js/translationServices/components/Sections.js:16
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: src/js/translationServices/components/Sections.js:42
+msgid ""
+"It’s not currently possible to connect a translation service when WPML is "
+"set to translate your site’s content automatically. To use a translation "
+"service, please change your translation mode on the <LinkToSettingsPage /> "
+"page."
+msgstr "Es ist derzeit nicht möglich, einen Übersetzungsdienst zu verbinden, wenn WPML so eingestellt ist, dass der Inhalt Ihrer Website automatisch übersetzt wird. Um einen Übersetzungsdienst zu nutzen, ändern Sie bitte Ihren Übersetzungsmodus auf der <LinkToSettingsPage /> Seite."
+
+#: src/js/translationServices/components/ServicesList.js:41
+msgid "Documentation"
+msgstr "Dokumentation"
+
+#: src/js/translationServices/components/ServicesList.js:57
+msgid "Activate"
+msgstr "Aktivieren"
+
+#: src/js/translationServices/components/ServicesList.js:74
+msgid "Description"
+msgstr "Beschreibung"
+
+#: src/js/translationServices/components/ServicesList.js:81
+msgid "Ranking"
+msgstr "Rangfolge"

@@ -183,6 +183,12 @@ class WPML_Media_Attachments_Duplication {
 						continue;
 					}
 
+					// Preserve thumbs file names. Otherwise they will be overwritten by the original attachment's thumbs even if they are translated.
+					// It happens when the original attachment is trashed or edited.
+					if ( isset( $attachment_meta_data[0]['sizes'] ) ) {
+						$metadata['sizes'] = $attachment_meta_data[0]['sizes'];
+					}
+
 					update_post_meta( $translation->element_id, '_wp_attachment_metadata', $metadata );
 					$mime_type = get_post_mime_type( $attachment_id );
 					if ( $mime_type ) {
@@ -1060,28 +1066,28 @@ class WPML_Media_Attachments_Duplication {
 	public function batch_translate_media( $outputResult = true ) {
 		$response = [];
 
-		$activeLanguagesCount = count( $this->sitepress->get_active_languages() );
+		$activeLanguages      = $this->sitepress->get_active_languages();
+		$activeLanguagesCount = count( $activeLanguages );
+		$placeholders         = implode( ',', array_fill( 0, $activeLanguagesCount, '%s' ) );
 		$limit                = $this->get_batch_translate_limit( $activeLanguagesCount );
 
 		$sql          = "
             SELECT SQL_CALC_FOUND_ROWS p1.ID, p1.post_parent
             FROM {$this->wpdb->prefix}icl_translations t
             INNER JOIN {$this->wpdb->posts} p1
-            	ON t.element_id = p1.ID
+            	ON t.element_id = p1.ID AND p1.post_type = 'attachment'
             LEFT JOIN {$this->wpdb->prefix}icl_translations tt
             	ON t.trid = tt.trid
 			WHERE t.element_type = 'post_attachment'
 				AND t.source_language_code IS null
+				AND tt.language_code IN ($placeholders)
 			GROUP BY p1.ID, p1.post_parent
 			HAVING count(tt.language_code) < %d
             LIMIT %d
         ";
 
-		$sql_prepared = $this->wpdb->prepare( $sql,
-			[
-				$activeLanguagesCount,
-				$limit
-			] );
+		$params       = array_merge( array_keys( $activeLanguages ), [ $activeLanguagesCount, $limit ] );
+		$sql_prepared = $this->wpdb->prepare( $sql, ...$params );
 
 		$attachments = $this->wpdb->get_results( $sql_prepared );
 

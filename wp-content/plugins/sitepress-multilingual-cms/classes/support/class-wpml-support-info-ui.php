@@ -82,7 +82,8 @@ class WPML_Support_Info_UI {
 						'value' => $this->support_info->is_utf8mb4_charset_supported() ? __( 'Yes' ) : __( 'No' ),
 						'url'        => 'https://dev.mysql.com/doc/refman/5.5/en/charset-unicode-utf8mb4.html',
 						'messages'   => array(
-							__( 'Some features related to String Translations may not work correctly without utf8mb4 character.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore',
+							__( 'Some WPML String Translation features may not work correctly without utf8mb4 character support.', 'sitepress' ) => 'https://wpml.org/home/minimum-requirements/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore',
+									
 						),
 						'is_error' => ! $this->support_info->is_utf8mb4_charset_supported(),
 					) ,

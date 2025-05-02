@@ -17,6 +17,8 @@ class WPML_Cornerstone_Integration_Factory {
 				\WPML\PB\Cornerstone\Hooks\Editor::class,
 				\WPML\PB\Cornerstone\Hooks\ShortcodeAttributes::class,
 				\WPML\PB\Cornerstone\Hooks\Media::class,
+				\WPML\PB\Cornerstone\Hooks\TranslationJobLabels::class,
+				\WPML\PB\Cornerstone\Hooks\TranslationGuiLabels::class,
 			]
 		);
 

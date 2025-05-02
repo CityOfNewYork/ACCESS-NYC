@@ -5,7 +5,7 @@ namespace WPML\Compatibility\FusionBuilder\Backend;
 class Hooks implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 
 	public function add_hooks() {
-		add_action( 'wp_update_nav_menu_item', [ $this, 'invalidateMegamenuHook' ], 1, 3 );
+		add_action( 'wp_update_nav_menu_item', [ $this, 'invalidateMegamenuHook' ], 1 );
 	}
 
 	public function invalidateMegamenuHook() {

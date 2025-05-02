@@ -12,16 +12,19 @@
             "Âncora HTML"
          ],
          "Add a shortcut to this block when loading the page using the “#anchor” URL.": [
-            "Adicione um atalho a este bloco ao carregar a página usando o URL “#anchor”."
+            "Adicione um atalho para este bloco ao carregar a página usando a URL “#anchor”."
          ],
          "Additional CSS class(es)": [
-            "Classe(s) CSS adicional(s)"
+            "Classe(s) CSS adicional(is)"
          ],
          "Separate multiple classes with spaces.": [
-            "Separe várias classes com espaços."
+            "Separe múltiplas classes com espaços."
          ],
          "Color": [
             "Cor"
+         ],
+         "px": [
+            "px"
          ],
          "%": [
             "%"
@@ -30,28 +33,28 @@
             "Dimensões"
          ],
          "BLOCK": [
-            "Bloco"
+            "BLOCO"
          ],
          "Block margin": [
-            "Margem de bloco"
+            "Margem do bloco"
          ],
          "Block padding": [
-            "Preenchimento de bloco"
+            "Preenchimento do bloco"
          ],
          "LANGUAGE": [
-            "Idioma"
+            "IDIOMA"
          ],
          "Language spacing": [
-            "Espaçamento de idioma"
+            "Espaçamento do idioma"
          ],
          "Language padding": [
-            "Preenchimento de idioma"
+            "Preenchimento do idioma"
          ],
          "Display": [
-            "Exibir"
+            "Exibição"
          ],
          "Show flag": [
-            "Mostrar sinalizador"
+            "Mostrar bandeira"
          ],
          "Show language name": [
             "Mostrar nome do idioma"
@@ -63,7 +66,7 @@
             "Estilo"
          ],
          "Flag settings": [
-            "Configurações de sinalizador"
+            "Configurações da bandeira"
          ],
          "Width": [
             "Largura"
@@ -75,7 +78,7 @@
             "Espaçamento"
          ],
          "Allow wrapping to multiple lines": [
-            "Permitir quebra de texto em várias linhas"
+            "Permitir quebra em múltiplas linhas"
          ],
          "Open on click": [
             "Abrir ao clicar"
@@ -87,7 +90,7 @@
             "Layout"
          ],
          "Justification": [
-            "Justificativa"
+            "Alinhamento"
          ],
          "Orientation": [
             "Orientação"
@@ -96,7 +99,7 @@
             "Tipografia"
          ],
          "Background": [
-            "Fundo"
+            "Plano de fundo"
          ],
          "Language Text": [
             "Texto do idioma"
@@ -117,16 +120,16 @@
             "Código"
          ],
          "Justify items left": [
-            "Justificar itens à esquerda"
+            "Alinhar itens à esquerda"
          ],
          "Justify items center": [
-            "Justificar itens ao centro"
+            "Alinhar itens ao centro"
          ],
          "Justify items right": [
-            "Justificar itens à direita"
+            "Alinhar itens à direita"
          ],
          "Justify items space between": [
-            "Justificar itens entre espaços"
+            "Alinhar itens com espaço entre"
          ],
          "Horizontal": [
             "Horizontal"
@@ -156,22 +159,22 @@
             "ab"
          ],
          "Small": [
-            "Pequena"
+            "Pequeno"
          ],
          "Displays the WPML Language Switcher.": [
-            "Exibe o seletor de idioma do WPML."
+            "Exibe o Seletor de Idiomas do WPML."
          ],
          "Language Switcher": [
-            "Seletor de Idioma"
+            "Seletor de Idiomas"
          ],
          "displays the WPML Language Switcher": [
-            "exibe o seletor de idioma do WPML."
+            "exibe o Seletor de Idiomas do WPML"
          ],
          "Displays the WPML Language Switcher. <br/> Learn <a>how to translate this block</a>.": [
-            "Exibe o Seletor de Idioma do WPML. <br/> Saiba <a>como traduzir este bloco</a>."
+            "Exibe o Seletor de Idiomas do WPML. <br/> Saiba <a>como traduzir este bloco</a>."
          ],
          "Navigation Language Switcher": [
-            "Seletor de idioma de navegação"
+            "Seletor de Idiomas de Navegação"
          ],
          "Reset all": [
             "Redefinir tudo"

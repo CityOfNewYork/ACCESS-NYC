@@ -16,7 +16,6 @@ if ( ! class_exists( 'acf_field_tab' ) ) :
 		 * @param   n/a
 		 * @return  n/a
 		 */
-
 		function initialize() {
 
 			// vars
@@ -26,45 +25,51 @@ if ( ! class_exists( 'acf_field_tab' ) ) :
 			$this->description   = __( 'Allows you to group fields into tabbed sections in the edit screen. Useful for keeping fields organized and structured.', 'acf' );
 			$this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-tabs.png';
 			$this->doc_url       = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/tab/', 'docs', 'field-type-selection' );
-			$this->supports      = array( 'required' => false );
+			$this->supports      = array(
+				'required' => false,
+				'bindings' => false,
+			);
 			$this->defaults      = array(
 				'placement' => 'top',
 				'endpoint'  => 0, // added in 5.2.8
+				'selected'  => 0, // added in 6.3
 			);
 		}
 
-
 		/**
-		 * Create the HTML interface for your field
+		 * Output the HTML required for a tab.
 		 *
-		 * @param   $field - an array holding all the field's data
+		 * @since 3.6
 		 *
-		 * @type    action
-		 * @since   3.6
-		 * @date    23/01/13
+		 * @param array $field An array of the field data.
 		 */
-
-		function render_field( $field ) {
-
-			// vars
+		public function render_field( $field ) {
 			$atts = array(
 				'href'           => '',
 				'class'          => 'acf-tab-button',
 				'data-placement' => $field['placement'],
 				'data-endpoint'  => $field['endpoint'],
 				'data-key'       => $field['key'],
+				'data-selected'  => $field['selected'],
 			);
 
+			if ( isset( $field['unique_tab_key'] ) && ! empty( $field['unique_tab_key'] ) ) {
+				$atts['data-unique-tab-key'] = $field['unique_tab_key'];
+			}
+
 			if ( isset( $field['settings-type'] ) ) {
-				$atts['class'] .= ' acf-settings-type-' . acf_slugify( $field['settings-type'] );
+				$atts['data-settings-type'] = acf_slugify( $field['settings-type'] );
+				$atts['class']             .= ' acf-settings-type-' . acf_slugify( $field['settings-type'] );
+			}
+
+			if ( isset( $field['class'] ) && ! empty( $field['class'] ) ) {
+				$atts['class'] .= ' ' . $field['class'];
 			}
 
 			?>
-		<a <?php echo acf_esc_attrs( $atts ); ?>><?php echo acf_esc_html( $field['label'] ); ?></a>
+			<a <?php echo acf_esc_attrs( $atts ); ?>><?php echo acf_esc_html( $field['label'] ); ?></a>
 			<?php
 		}
-
-
 
 		/**
 		 * Create extra options for your field. This is rendered when editing a field.
@@ -76,7 +81,6 @@ if ( ! class_exists( 'acf_field_tab' ) ) :
 		 * @since   3.6
 		 * @date    23/01/13
 		 */
-
 		function render_field_settings( $field ) {
 
 			/*

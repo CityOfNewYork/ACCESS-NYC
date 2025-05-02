@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Advanced Custom Fields Multilingual plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Advanced Custom Fields Multilingual 2.1.0-rc.1\n"
+"Project-Id-Version: Advanced Custom Fields Multilingual 2.1.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/acfml\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-04-17T14:16:53-03:00\n"
+"POT-Creation-Date: 2024-11-05T09:05:07-03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
 "X-Domain: acfml\n"
@@ -35,26 +35,20 @@ msgid "http://www.onthegosystems.com/"
 msgstr "http://www.onthegosystems.com/"
 
 #. translators: Displayed when editing an ACF field in a translation, showing its value in the original language; %1$s and %2$s turn the string into bold, and %3$s is the actual original value.
-#: classes/class-wpml-acf-field-annotations.php:98
+#: classes/class-wpml-acf-field-annotations.php:97
 msgctxt "Displayed when editing an ACF field in a translation, showing its value in the original language; %1$s and %2$s turn the string into bold, and %3$s is the actual original value."
 msgid "%1$sOriginal%2$s: %3$s"
 msgstr "%1$sOriginal%2$s: %3$s"
 
-#. translators: Displayed when editing a relational ACF field in a translation when the related object is set to Display as Translated; %1$s and %2$s turn the string into bold.
-#: classes/class-wpml-acf-field-annotations.php:137
-msgctxt "Displayed when editing a relational ACF field in a translation when the related object is set to Display as Translated; %1$s and %2$s turn the string into bold."
-msgid "%1$sWarning%2$s: This field allows to select post type or taxonomy which you set in WPML translation options to \"Translatable - use translation if available or fallback to default language\". Whatever you set in this field for a secondary language post (this post) will be ignored and values from original post will be used (if you set to copy or duplicate value for this field)."
-msgstr "%1$sAviso%2$s: Esse campo permite selecionar o tipo de postagem ou a taxonomia que você definiu nas opções de tradução do site WPML como \"Translatable - use a tradução se disponível ou recorra ao idioma padrão\". Tudo o que você definir nesse campo para uma postagem em idioma secundário (esta postagem) será ignorado e os valores da postagem original serão usados (se você definir copiar ou duplicar o valor desse campo)."
-
-#: classes/class-wpml-acf-field-annotations.php:194
+#: classes/class-wpml-acf-field-annotations.php:155
 msgid "This type of ACF field will always be set to \"Copy once\"."
 msgstr "Este tipo de campo ACF sempre será definido como \"Copiar uma vez\"."
 
-#: classes/class-wpml-acf-field-annotations.php:198
+#: classes/class-wpml-acf-field-annotations.php:159
 msgid "ACF field name:"
 msgstr "Nome do campo ACF:"
 
-#: classes/class-wpml-acf-field-annotations.php:200
+#: classes/class-wpml-acf-field-annotations.php:161
 msgid "ACF field type:"
 msgstr "Tipo do campo ACF:"
 
@@ -144,17 +138,17 @@ msgid "Translation Option"
 msgstr "Opção de tradução"
 
 #: classes/FieldGroup/TranslationModeColumnHooks.php:48
-#: classes/FieldGroup/UIHooks.php:206
+#: classes/FieldGroup/UIHooks.php:181
 msgid "Expert"
 msgstr "Avançada"
 
 #: classes/FieldGroup/TranslationModeColumnHooks.php:49
-#: classes/FieldGroup/UIHooks.php:196
+#: classes/FieldGroup/UIHooks.php:171
 msgid "Same fields across languages"
 msgstr "Mesmos campos em vários idiomas"
 
 #: classes/FieldGroup/TranslationModeColumnHooks.php:50
-#: classes/FieldGroup/UIHooks.php:201
+#: classes/FieldGroup/UIHooks.php:176
 msgid "Different fields across languages"
 msgstr "Campos diferentes em vários idiomas"
 
@@ -167,176 +161,149 @@ msgstr "Configuração Multilíngue"
 msgid "Loading..."
 msgstr "Carregando..."
 
-#: classes/FieldGroup/UIHooks.php:96
+#: classes/FieldGroup/UIHooks.php:94
 msgid "Activate String Translation"
 msgstr "Ativar String Translation"
 
 #. translators: %1$s and %2$s will wrap the string in a <a> link html tag
-#: classes/FieldGroup/UIHooks.php:99
+#: classes/FieldGroup/UIHooks.php:97
 msgid "To translate field group names and labels, please %1$sinstall and activate WPML’s String Translation add-on%2$s."
 msgstr "Para traduzir nomes e rótulos de grupos de campos, %1$sinstale e ative o complemento String Translation do WPML%2$s."
 
-#: classes/FieldGroup/UIHooks.php:103
+#: classes/FieldGroup/UIHooks.php:101
 msgid "Activate now"
 msgstr "Ativar agora"
 
-#: classes/FieldGroup/UIHooks.php:104
-#: classes/FieldGroup/UIHooks.php:145
-#: classes/FieldGroup/UIHooks.php:146
-#: classes/FieldGroup/UIHooks.php:147
-#: classes/FieldGroup/UIHooks.php:163
-#: classes/FieldGroup/UIHooks.php:228
+#: classes/FieldGroup/UIHooks.php:102
+#: classes/FieldGroup/UIHooks.php:139
+#: classes/FieldGroup/UIHooks.php:203
 msgid "Go back"
 msgstr "Voltar"
 
+#: classes/FieldGroup/UIHooks.php:109
+msgid "Set Up Field Group Translation"
+msgstr "Configurar a conversão de grupos de campos"
+
 #: classes/FieldGroup/UIHooks.php:110
-msgid "Choose a translation option for your field groups"
-msgstr "Escolha uma opção de tradução para seus grupos de campos"
+msgid "To translate field labels from the Translation Management dashboard, finish the Multilingual Setup and save your field group settings."
+msgstr "Para traduzir rótulos de campo do painel do Translation Management, conclua a Configuração multilíngue e salve as configurações do grupo de campos."
 
 #: classes/FieldGroup/UIHooks.php:111
-msgid "To translate field labels in String Translation, please complete the Multilingual Setup for your existing field groups and save your changes."
-msgstr "Para traduzir rótulos de campo no String Translation, conclua a configuração multilíngue para seus grupos de campos existentes e salve suas alterações."
-
-#: classes/FieldGroup/UIHooks.php:112
-#: classes/FieldGroup/UIHooks.php:222
+#: classes/FieldGroup/UIHooks.php:197
 msgid "OK"
 msgstr "OK"
 
-#: classes/FieldGroup/UIHooks.php:113
-msgid "Cancel"
-msgstr "Cancelar"
-
 #: classes/FieldGroup/UIHooks.php:119
-#: classes/FieldGroup/UIHooks.php:160
-msgid "Translating field labels"
-msgstr "Traduzindo rótulos de campo"
+msgid "Translate Field Labels"
+msgstr "Traduzir rótulos de campo"
+
+#: classes/FieldGroup/UIHooks.php:120
+msgid "To translate field labels, use the Translation Management dashboard."
+msgstr "Para traduzir rótulos de campo, use o painel do Translation Management."
 
 #: classes/FieldGroup/UIHooks.php:121
-msgid "The first time you translate a post that uses this field group, you can translate the field labels in the Advanced Translation Editor or using automatic translation."
-msgstr "Na primeira vez que traduzir uma postagem que usa esse grupo de campos, você pode traduzir os rótulos de campo no Editor de Tradução Avançado ou usar a tradução automática."
-
-#: classes/FieldGroup/UIHooks.php:122
-msgid "Or, you can translate the field labels on the String Translation page anytime."
-msgstr "Ou você pode traduzir os rótulos de campo na página do String Translation a qualquer momento."
+msgid "Translate in Translation Management"
+msgstr "Traduzir no gerenciamento de traduções"
 
 #. translators: %1$s and %2$s will wrap the string in a <a> link html tag
-#: classes/FieldGroup/UIHooks.php:125
+#: classes/FieldGroup/UIHooks.php:126
 msgid "Don’t want to translate field labels? %1$sLearn how to disable field label translation%2$s"
 msgstr "Você não quer traduzir rótulos de campo? %1$sSaiba como desativar a tradução de rótulos de campo%2$s"
 
-#: classes/FieldGroup/UIHooks.php:129
-msgid "You can translate field labels and labels for Choices in String Translation."
-msgstr "Você pode traduzir rótulos de campo e rótulos de escolha no String Translation."
+#: classes/FieldGroup/UIHooks.php:136
+msgid "Fields Labels Already Translated"
+msgstr "Rótulos de campos já traduzidos"
 
-#. translators: %1$s and %2$s will wrap the string in a <a> link html tag
-#: classes/FieldGroup/UIHooks.php:133
-msgid "You can translate field labels in the Advanced Translation Editor or in String Translation, depending on the %1$stranslation preferences you select for your custom fields%2$s."
-msgstr "Você pode traduzir rótulos de campo no Editor de Tradução Avançado ou no String Translation, dependendo das %1$spreferências de tradução selecionadas para seus campos personalizados%2$s."
+#: classes/FieldGroup/UIHooks.php:137
+msgid "You already translated all field labels in this group. To update any translations, go to the Translation Management dashboard."
+msgstr "Você já traduziu todos os rótulos de campo desse grupo. Para atualizar qualquer tradução, vá para o painel do Translation Management."
 
-#: classes/FieldGroup/UIHooks.php:140
-msgid "Translate in String Translation"
-msgstr "Traduzir no String Translation"
+#: classes/FieldGroup/UIHooks.php:138
+msgid "Go to Translation Management"
+msgstr "Ir para o gerenciamento de traduções"
 
-#: classes/FieldGroup/UIHooks.php:141
-#: classes/FieldGroup/UIHooks.php:142
-#: classes/FieldGroup/UIHooks.php:162
-msgid "Go to String Translation"
-msgstr "Ir ao String Translation"
-
-#: classes/FieldGroup/UIHooks.php:145
-msgid "Translate with the post"
-msgstr "Traduzir com a postagem"
-
-#: classes/FieldGroup/UIHooks.php:156
-msgid "You already translated the labels in this field group. You can update these translations on the String Translation page."
-msgstr "Você já traduziu os rótulos neste grupo de campos. Você pode atualizar essas traduções na página do String Translation."
-
-#: classes/FieldGroup/UIHooks.php:157
-msgid "You already translated all field labels. You can update these translations on the String Translation page."
-msgstr "Você já traduziu todos os rótulos de campo. Você pode atualizar essas traduções na página do String Translation."
-
-#: classes/FieldGroup/UIHooks.php:193
+#: classes/FieldGroup/UIHooks.php:168
 msgid "Select a translation option for this field group"
 msgstr "Selecione uma opção de tradução para este grupo de campos"
 
-#: classes/FieldGroup/UIHooks.php:197
+#: classes/FieldGroup/UIHooks.php:172
 msgid "Translate your site’s content while keeping the same visual design across all languages. All languages will share the same field order, number of fields, and field types. All you need to do is translate the content."
 msgstr "Traduza o conteúdo do seu site mantendo o mesmo design visual em todos os idiomas. Todos os idiomas compartilharão a mesma ordem de campo, número de campos e tipos de campo. Tudo o que você precisa fazer é traduzir o conteúdo."
 
-#: classes/FieldGroup/UIHooks.php:198
+#: classes/FieldGroup/UIHooks.php:173
 msgid "You’ll be able to use automatic translation, WPML’s Advanced Translation Editor, and translation services."
 msgstr "Você poderá usar a tradução automática, o Editor de Tradução Avançado do WPML e os serviços de tradução."
 
-#: classes/FieldGroup/UIHooks.php:202
+#: classes/FieldGroup/UIHooks.php:177
 msgid "Use a different visual design in different languages. You can have a different field order, layout, and number of fields per language. With this option, you cannot use WPML’s Advanced Translation Editor or translation services."
 msgstr "Use um design visual diferente em diferentes idiomas. Você pode ter uma ordem de campo, layout e número de campos diferentes por idioma. Com esta opção, você não pode usar o Editor de Tradução Avançado do WPML ou os serviços de tradução."
 
-#: classes/FieldGroup/UIHooks.php:203
+#: classes/FieldGroup/UIHooks.php:178
 msgid "You’ll need to create each translation with the native WordPress editor."
 msgstr "Você precisará criar cada tradução com o editor nativo do WordPress."
 
-#: classes/FieldGroup/UIHooks.php:207
+#: classes/FieldGroup/UIHooks.php:182
 msgid "If you are migrating a site, your existing field groups will use the Expert setup. This allows you to manually choose the translation option for each field in the group."
 msgstr "Se você está migrando um site, os seus grupos já existentes vão utilizar a opção 'Avançada'. Isso te permite escolher manualmente a opção de tradução para cada um dos campos do grupo."
 
 #. translators: %1$s and %2$s will wrap the string in a <b> html tag
-#: classes/FieldGroup/UIHooks.php:209
+#: classes/FieldGroup/UIHooks.php:184
 msgid "This option is %1$snot recommended%2$s for new field groups."
 msgstr "Esta opção %1$snão é recomendada%2$s para novos grupos de campos."
 
-#: classes/FieldGroup/UIHooks.php:210
+#: classes/FieldGroup/UIHooks.php:185
 msgid "Expert setup documentation"
 msgstr "Documentação da opção avançada"
 
-#: classes/FieldGroup/UIHooks.php:213
+#: classes/FieldGroup/UIHooks.php:188
 msgid "Choose"
 msgstr "Escolher"
 
-#: classes/FieldGroup/UIHooks.php:214
+#: classes/FieldGroup/UIHooks.php:189
 msgid "Change option"
 msgstr "Alterar opção"
 
-#: classes/FieldGroup/UIHooks.php:216
+#: classes/FieldGroup/UIHooks.php:191
 msgid "A Much Simpler Way to Translate Your ACF Sites"
 msgstr "A Maneira Mais Simples de Traduzir Seus Sites ACF"
 
-#: classes/FieldGroup/UIHooks.php:217
+#: classes/FieldGroup/UIHooks.php:192
 msgid "This new release of ACFML allows you to configure multilingual sites in one-click, instead of many complex settings. Choose how to setup the translation for the fields."
 msgstr "Esta nova versão do ACFML permite configurar sites multilíngues com um clique, em vez de muitas configurações complexas. Escolha como configurar a tradução para os campos."
 
-#: classes/FieldGroup/UIHooks.php:220
+#: classes/FieldGroup/UIHooks.php:195
 msgid "Select a Translation Option"
 msgstr "Selecionar uma opção de tradução"
 
-#: classes/FieldGroup/UIHooks.php:221
+#: classes/FieldGroup/UIHooks.php:196
 msgid "Select a translation option in the Multilingual Setup section to save your changes."
 msgstr "Selecione uma opção de tradução na seção Configuração Multilíngue para salvar suas alterações."
 
-#: classes/FieldGroup/UIHooks.php:227
+#: classes/FieldGroup/UIHooks.php:202
 msgid "Go to WPML Settings"
 msgstr "Ir a Configurações do WPML"
 
-#: classes/FieldGroup/UIHooks.php:231
+#: classes/FieldGroup/UIHooks.php:206
 msgid "Are you sure you want to change the translation option?"
 msgstr "Tem certeza de que deseja alterar a opção de tradução?"
 
-#: classes/FieldGroup/UIHooks.php:233
+#: classes/FieldGroup/UIHooks.php:208
 msgid "Yes, continue"
 msgstr "Sim, continuar"
 
-#: classes/FieldGroup/UIHooks.php:234
+#: classes/FieldGroup/UIHooks.php:209
 msgid "No, go back"
 msgstr "Não, voltar"
 
-#: classes/FieldGroup/UIHooks.php:236
+#: classes/FieldGroup/UIHooks.php:211
 msgid "Need help choosing?"
 msgstr "Precisa de ajuda para escolher?"
 
-#: classes/FieldGroup/UIHooks.php:237
+#: classes/FieldGroup/UIHooks.php:212
 msgid "Documentation"
 msgstr "Documentação"
 
-#: classes/FieldGroup/UIHooks.php:238
+#: classes/FieldGroup/UIHooks.php:213
 msgid "How to translate field labels »"
 msgstr "Como traduzir rótulos de campo »"
 

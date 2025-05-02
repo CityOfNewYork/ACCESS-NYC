@@ -916,3 +916,8 @@ if ( ! function_exists( 'wpml_get_flag_file_name' ) ) {
 		return $file;
 	}
 }
+
+
+function wpml_is_st_loaded(): bool {
+	return defined( 'WPML_ST_VERSION' );
+}

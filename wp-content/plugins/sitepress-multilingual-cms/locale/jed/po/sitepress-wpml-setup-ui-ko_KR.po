@@ -1,0 +1,736 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/language/LanguagePairs.js:57
+msgid "From:"
+msgstr "출발어:"
+
+#: src/js/components/language/LanguagePairs.js:69
+msgid "--Choose language--"
+msgstr "--언어 선택--"
+
+#: src/js/components/language/LanguagePairs.js:81
+msgid "to:"
+msgstr "도착어:"
+
+#: src/js/components/language/SelectLanguagePairs.js:39
+msgid "Set language pair(s) for Translator %s:"
+msgstr "번역기 %s의 언어 쌍 설정:"
+
+#: src/js/components/language/SelectLanguagePairs.js:64
+msgid "+ Add more language pairs for this translator"
+msgstr "+ 이 번역기에 더 많은 언어 쌍 추가"
+
+#: src/js/components/roles/CreateUser.js:100
+msgid "First Name"
+msgstr "이름"
+
+#: src/js/components/roles/CreateUser.js:101
+msgid "Last Name"
+msgstr "성"
+
+#: src/js/components/roles/CreateUser.js:105
+msgid "Role"
+msgstr "역할"
+
+#: src/js/components/roles/CreateUser.js:137
+msgid "(required)"
+msgstr "(필수)"
+
+#: src/js/components/roles/CreateUser.js:46
+msgid ""
+"Make sure that you have provided a correct email address e.g. "
+"name@domain.com"
+msgstr "올바른 이메일 주소를 입력했는지 확인하세요. 예: name@domain.com"
+
+#: src/js/components/roles/CreateUser.js:64
+msgid "This field is required"
+msgstr "이 필드는 필수입니다"
+
+#: src/js/components/roles/CreateUser.js:84
+msgid "A translator can be any WordPress role."
+msgstr "번역가는 어떤 WordPress 역할이든 될 수 있습니다."
+
+#: src/js/components/roles/CreateUser.js:98
+msgid "Username"
+msgstr "사용자 이름"
+
+#: src/js/components/roles/CreateUser.js:99
+msgid "Email"
+msgstr "이메일"
+
+#: src/js/components/roles/ExistingUserSelect.js:46
+#: src/js/translationServices/components/SearchForm.js:13
+msgid "Search"
+msgstr "검색"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:23
+msgid "Who will translate?"
+msgstr "누가 번역할 예정인가요?"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:27
+msgid "Only myself"
+msgstr "나만"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:28
+msgid "You will be the sole translator for this site."
+msgstr "이 사이트의 유일한 번역가가 될 것입니다."
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:35
+msgid "Users of this site"
+msgstr "이 사이트의 사용자들"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:36
+msgid ""
+"You will choose or create new users of this WordPress site as the "
+"translators. You can also choose yourself. This allows you to set up a team "
+"of translators working in different language pairs."
+msgstr "이 WordPress 사이트의 기존 사용자를 선택하거나 새로운 사용자를 만들어 번역가로 지정할 수 있습니다. 자신을 선택할 수도 있습니다. 이를 통해 다양한 언어 쌍으로 작업하는 번역 팀을 구성할 수 있습니다."
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:45
+msgid "Translation Service: %s"
+msgstr "번역 서비스: %s"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:46
+msgid "A Professional Translation Service"
+msgstr "전문 번역 서비스"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:49
+msgid ""
+"You have preselected %s to translate your content. Finish setting it up by "
+"entering the API token they provided to you."
+msgstr "%s을(를) 콘텐츠 번역을 위해 미리 선택했습니다. 제공받은 API 토큰을 입력하여 설정을 완료하세요."
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:50
+msgid ""
+"WPML offers tight integration with over 70 translation services. You will "
+"choose the translation service that you prefer and enjoy a streamlined "
+"process for sending jobs and receiving completed translations."
+msgstr "WPML은 70개 이상의 번역 서비스와 긴밀하게 통합되어 있습니다. 선호하는 번역 서비스를 선택하고 작업 전송 및 완료된 번역 수신을 위한 간소화된 프로세스를 즐길 수 있습니다."
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:59
+msgid ""
+"I want to set a \"Translation Manager\" who will choose the translators for "
+"this site"
+msgstr "이 사이트의 번역가를 선택할 <q id=\"q-first-1\">번역 관리자</q>를 설정하고 싶습니다"
+
+#: src/js/components/settings/TranslationMode/ManualWhoTranslates.js:60
+msgid ""
+"You will choose a user of this site and delegate the setup of translators "
+"to him/her. Choose this option when you are building a website for a "
+"client, who will set up translator users or choose a translation service."
+msgstr "이 사이트의 사용자를 선택하고 번역가 설정을 위임할 수 있습니다. 클라이언트를 위해 웹사이트를 구축하고 있고, 클라이언트가 번역가 사용자를 설정하거나 번역 서비스를 선택할 때 이 옵션을 선택하세요."
+
+#: src/js/components/translation-managers/AddManagerDialog.js:47
+msgid "user"
+msgstr "사용자"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:47
+msgid "Editor"
+msgstr "편집자"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:61
+msgid "Select an existing %s and set as Translation Manager"
+msgstr "기존 %s을(를) 선택하고 번역 관리자로 설정"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:72
+msgid "Create a new %s and set as Translation Manager"
+msgstr "새로운 %s을(를) 생성하고 번역 관리자로 설정"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:85
+#: src/js/components/translators/AddTranslatorDialog.js:121
+#: src/js/components/translators/EditLanguagesDialog.js:73
+#: src/js/setup/components/Steps/AddLanguagesModal.js:496
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/ListModal.js:32
+msgid "Cancel"
+msgstr "취소"
+
+#: src/js/components/translation-managers/AddManagerDialog.js:90
+msgid "Add Translation Manager"
+msgstr "번역 관리자 추가"
+
+#: src/js/components/translation-managers/ManagerSection.js:27
+msgid "Add a Translation Manager"
+msgstr "번역 관리자 추가"
+
+#: src/js/components/translators/AddTranslatorDialog.js:111
+msgid "Set language pair(s)"
+msgstr "언어 쌍 설정"
+
+#: src/js/components/translators/AddTranslatorDialog.js:126
+msgid "Previous"
+msgstr "이전"
+
+#: src/js/components/translators/AddTranslatorDialog.js:129
+#: src/js/components/translators/EditLanguagesDialog.js:78
+msgid "Save"
+msgstr "저장"
+
+#: src/js/components/translators/AddTranslatorDialog.js:65
+#: src/js/components/translators/UserSection.js:45
+msgid "Add a Translator"
+msgstr "번역가 추가"
+
+#: src/js/components/translators/AddTranslatorDialog.js:91
+msgid "Select an existing user and set as Translator"
+msgstr "기존 사용자를 선택하고 번역가로 설정"
+
+#: src/js/components/translators/AddTranslatorDialog.js:95
+msgid "Create a new user and set as Translator"
+msgstr "새 사용자를 생성하고 번역가로 설정"
+
+#: src/js/components/translators/EditLanguagesDialog.js:55
+msgid "Edit language pair(s) for translator"
+msgstr "번역가의 언어 쌍 편집"
+
+#: src/js/components/translators/TranslatorsTable.js:128
+#: src/js/setup/components/Steps/AddLanguagesModal.js:346
+#: src/js/translationServices/components/ServicesList.js:69
+msgid "Name"
+msgstr "이름"
+
+#: src/js/components/translators/TranslatorsTable.js:140
+msgid "Language Pairs"
+msgstr "언어 쌍"
+
+#: src/js/components/translators/TranslatorsTable.js:144
+msgid "You can translate to and from all languages"
+msgstr "모든 언어에서 모든 언어로 번역할 수 있습니다"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:48
+msgid "%s file upload failed."
+msgstr "%s 파일 업로드 실패."
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:69
+msgid "Flag"
+msgstr "국기"
+
+#: src/js/setup/components/Steps/AddLanguages/Flag.js:87
+msgid "Flag file"
+msgstr "국기 파일"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:160
+msgid ""
+"You just added  language. Next, select it as the site's default language or "
+"a translation language."
+msgstr "방금 언어를 추가했습니다. 다음으로, 이를 사이트의 기본 언어 또는 번역 언어로 선택하세요."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:162
+msgid "Language added"
+msgstr "언어 추가됨"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:192
+msgid "The value \"%s\" already exists"
+msgstr "<q id=\"q-first-1\">%s</q> 값이 이미 존재합니다"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:215
+msgid "Add a new language"
+msgstr "새 언어 추가"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:224
+msgid ""
+"Create a country-specific language by choosing the general language from "
+"the list below. Then, choose the country it should be localized for."
+msgstr "아래 목록에서 일반 언어를 선택한 다음 현지화할 국가를 선택하여 국가별 언어를 만드세요."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:229
+msgid ""
+"By choosing a combination that already exists in the database, WPML can "
+"help fill out the necessary fields. Read more about "
+"<AddingACustomLanguageLink />."
+msgstr "데이터베이스에 이미 존재하는 조합을 선택하면 WPML이 필요한 필드를 채우는 데 도움을 줄 수 있습니다. <AddingACustomLanguageLink />에 대해 자세히 읽어보세요."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:242
+msgid "Cannot find?"
+msgstr "찾을 수 없나요?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:244
+msgid "Click here"
+msgstr "여기를 클릭하세요"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:300
+msgid ""
+"The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" "
+", \"pt-br\", \"zh-hans\""
+msgstr "잘못된 형식입니다. 소문자와 <q id=\"q-first-1\">-</q>만 포함할 수 있습니다. 예: <q id=\"q-first-2\">fr</q>, <q id=\"q-first-3\">pt-br</q>, <q id=\"q-first-4\">zh-hans</q>"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:308
+msgid "Language"
+msgstr "언어"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:331
+msgid "Location"
+msgstr "위치"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:360
+msgid "Code"
+msgstr "코드"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:374
+msgid "The language will not be supported by automatic translations"
+msgstr "이 언어는 자동 번역으로 지원되지 않습니다"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:392
+msgid "Language mapping"
+msgstr "언어 매핑"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:404
+msgid "Don't map this language"
+msgstr "이 언어를 매핑하지 않음"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:418
+msgid "Default locale"
+msgstr "기본 로케일"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:423
+msgid ""
+"The wrong format. It may contain only small letters and \"_\". E.g: \"de\" "
+", \"de_DE\", \"zh_Hant_TW\""
+msgstr "잘못된 형식입니다. 소문자와 <q id=\"q-first-1\">_</q>만 포함할 수 있습니다. 예: <q id=\"q-first-2\">de</q>, <q id=\"q-first-3\">de_DE</q>, <q id=\"q-first-4\">zh_Hant_TW</q>"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:435
+msgid "hreflang"
+msgstr "hreflang"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:449
+msgid "Encode url?"
+msgstr "URL 인코딩?"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:45
+msgid "Flags must be:"
+msgstr "국기 요구사항:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:453
+msgid "NO"
+msgstr "아니오"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:454
+msgid "YES"
+msgstr "예"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:460
+msgid " (required)"
+msgstr " (필수)"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:483
+msgid "Please fill in the field"
+msgstr "필드를 작성해 주세요"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:49
+msgid "PNG, SVG, or JPG files"
+msgstr "PNG, SVG, 또는 JPG 파일"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:501
+msgid "Save language"
+msgstr "언어 저장"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:52
+msgid "18 x 12 pixels"
+msgstr "18 x 12 픽셀"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:55
+msgid "Read more about "
+msgstr "자세히 알아보기 "
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:60
+msgid ""
+"The name of your language as it will appear on your site's language "
+"switcher."
+msgstr "사이트의 언어 전환기에 표시될 언어 이름입니다."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:61
+msgid ""
+"A unique value that identifies the language in the database and URL. Once "
+"saved, the language code cannot be changed."
+msgstr "데이터베이스와 URL에서 언어를 식별하는 고유한 값입니다. 저장 후에는 언어 코드를 변경할 수 없습니다."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:62
+msgid ""
+"If your custom language is similar to an existing language, you can use the "
+"existing language's spellcheck and automatic translation. For example, if "
+"your custom language is Swiss-German, you can map to German as the language "
+"to use for spellcheck and automatic translation. If you don't map your "
+"custom language to an existing language, spellcheck and automatic "
+"translation features will be unavailable in that language."
+msgstr "사용자 정의 언어가 기존 언어와 유사한 경우, 기존 언어의 맞춤법 검사와 자동 번역을 사용할 수 있습니다. 예를 들어, 사용자 정의 언어가 스위스 독일어인 경우 맞춤법 검사와 자동 번역에 독일어를 매핑할 수 있습니다. 사용자 정의 언어를 기존 언어에 매핑하지 않으면 해당 언어에서 맞춤법 검사와 자동 번역 기능을 사용할 수 없습니다."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:66
+msgid ""
+"The value WPML checks when loading translations from MO and PO files. The "
+"default locale is included in the filenames in your /wp-content/languages/ "
+"folder in your WordPress setup."
+msgstr "WPML이 MO 및 PO 파일에서 번역을 로드할 때 확인하는 값입니다. 기본 로케일은 WordPress 설정의  /wp-content/languages/ 폴더에 있는 파일 이름에 포함되어 있습니다."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:69
+msgid ""
+"Google uses the hreflang attribute to direct users to sites in their "
+"relevant language and location. Examples:"
+msgstr "Google은 hreflang 속성을 사용하여 사용자를 관련 언어와 위치의 사이트로 안내합니다. 예시:"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:71
+msgid "All English-speaking users: en"
+msgstr "모든 영어 사용자: en"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:72
+msgid "English for UK users: en-gb"
+msgstr "영국 사용자를 위한 영어: en-gb"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:73
+msgid "English for US users: en-us"
+msgstr "미국 사용자를 위한 영어: en-us"
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:81
+msgid ""
+"Determines if URLs in this language are encoded or use ASCII characters (if "
+"unsure, leave it as \"No\")."
+msgstr "이 언어의 URL이 인코딩되었는지 또는 ASCII 문자를 사용하는지 결정합니다 (확실하지 않은 경우 <q id=\"q-first-1\">아니오</q>로 두세요)."
+
+#: src/js/setup/components/Steps/AddLanguagesModal.js:98
+msgid "adding a custom language"
+msgstr "사용자 정의 언어 추가"
+
+#: src/js/setup/components/Steps/Address.js:103
+msgid ""
+"Learn more about required server settings to use a different domain per "
+"language"
+msgstr "언어별로 다른 도메인을 사용하는 데 필요한 서버 설정에 대해 자세히 알아보기"
+
+#: src/js/setup/components/Steps/Address.js:113
+msgid "Language name added as a parameter"
+msgstr "매개변수로 추가된 언어 이름"
+
+#: src/js/setup/components/Steps/Address.js:160
+msgid "I will set up the domains for my secondary languages later."
+msgstr "나중에 보조 언어의 도메인을 설정하겠습니다."
+
+#: src/js/setup/components/Steps/Address.js:209
+msgid "The domain you have entered is invalid."
+msgstr "입력한 도메인이 유효하지 않습니다."
+
+#: src/js/setup/components/Steps/Address.js:211
+msgid "The domain you have entered must be unique."
+msgstr "입력한 도메인은 고유해야 합니다."
+
+#: src/js/setup/components/Steps/Address.js:231
+msgid ""
+"Please Note: Your site won't work in your secondary languages until this is "
+"successfully set up or you switch to a different URL option."
+msgstr "주의: 이 설정이 성공적으로 완료되거나 다른 URL 옵션으로 전환하기 전까지는 보조 언어에서 사이트가 작동하지 않습니다."
+
+#: src/js/setup/components/Steps/Address.js:53
+msgid "Learn more about Language URL Options"
+msgstr "언어 URL 옵션에 대해 자세히 알아보기"
+
+#: src/js/setup/components/Steps/Address.js:60
+msgid "How would you like to format your site's URL?"
+msgstr "사이트 URL을 어떻게 포맷하시겠습니까?"
+
+#: src/js/setup/components/Steps/Address.js:65
+msgid "Different languages in directories"
+msgstr "디렉토리에 다른 언어"
+
+#: src/js/setup/components/Steps/Address.js:74
+msgid "The URL rewrite is not configured in your server."
+msgstr "서버에 URL 재작성이 구성되어 있지 않습니다."
+
+#: src/js/setup/components/Steps/Address.js:77
+msgid ""
+"Learn more about required server settings to display languages in "
+"directories"
+msgstr "디렉토리에 언어를 표시하는 데 필요한 서버 설정에 대해 자세히 알아보기"
+
+#: src/js/setup/components/Steps/Address.js:82
+msgid "I will fix my server settings to display languages in directories later."
+msgstr "나중에 디렉토리에 언어를 표시하도록 서버 설정을 수정하겠습니다."
+
+#: src/js/setup/components/Steps/Address.js:84
+msgid "Your server settings do not allow for languages in directories. "
+msgstr "서버 설정에서 디렉토리에 언어를 허용하지 않습니다."
+
+#: src/js/setup/components/Steps/Address.js:87
+msgid "Learn more about the required server settings."
+msgstr "필요한 서버 설정에 대해 자세히 알아보기."
+
+#: src/js/setup/components/Steps/Address.js:96
+msgid "A different domain per language"
+msgstr "언어별로 다른 도메인"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:108
+msgid "Translate your pages"
+msgstr "페이지 번역하기"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:113
+msgid "Translate your posts"
+msgstr "게시물 번역하기"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:29
+msgid "Next, you need to set-up your multilingual store."
+msgstr "다음으로, 다국어 스토어를 설정해야 합니다."
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:46
+msgid "Continue to WooCommerce Multilingual Setup"
+msgstr "WooCommerce 다국어 설정으로 계속하기"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:54
+msgid "Start translating your site by visiting the <s>Translation Dashboard</s>."
+msgstr "<s>번역 대시보드</s>를 방문하여 사이트 번역을 시작하세요."
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:72
+msgid "Go to Translation Dashboard"
+msgstr "번역 대시보드로 이동"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:80
+msgid "Need help? <a>Using WPML's Plus Icons to Translate Content</a>"
+msgstr "도움이 필요하신가요? <a>WPML의 플러스 아이콘을 사용하여 콘텐츠 번역하기</a>"
+
+#: src/js/setup/components/Steps/Finished/ContinueFinishMessage.js:99
+msgid ""
+"To start translating, look for the \"plus\" icons that WPML introduces next "
+"to content lists and editors. Click the \"plus\" icon under each language "
+"to translate."
+msgstr "번역을 시작하려면 WPML이 콘텐츠 목록과 편집기 옆에 추가한 <q id=\"q-first-1\">플러스</q> 아이콘을 찾으세요. 각 언어 아래의 <q id=\"q-first-2\">플러스</q> 아이콘을 클릭하여 번역하세요."
+
+#: src/js/setup/components/Steps/Finished/CriticalError.js:10
+msgid "support forum"
+msgstr "지원 포럼"
+
+#: src/js/setup/components/Steps/Finished/CriticalError.js:14
+msgid ""
+"There was a critical error setting up WPML. Please contact our "
+"<LinkToSupportForum /> to resolve it."
+msgstr "WPML 설정 중 심각한 오류가 발생했습니다. 해결을 위해 <LinkToSupportForum />에 문의해 주세요."
+
+#: src/js/setup/components/Steps/Finished/CriticalError.js:23
+msgid "Hide error message"
+msgstr "오류 메시지 숨기기"
+
+#: src/js/setup/components/Steps/Finished/CriticalError.js:23
+msgid "Show error message"
+msgstr "오류 메시지 표시"
+
+#: src/js/setup/components/Steps/Finished/Header.js:12
+msgid "Congratulations, your website is now multilingual with WPML!"
+msgstr "축하합니다, 이제 WPML로 귀하의 웹사이트가 다국어를 지원합니다!"
+
+#: src/js/setup/components/Steps/Finished/LanguageSwitcherBox.js:6
+msgid ""
+"For language switcher customization and more language options, navigate to "
+"<a>WPML → Languages</a>."
+msgstr "언어 전환기 사용자 정의 및 추가 언어 옵션을 위해 <a>WPML → 언어</a>로 이동하세요."
+
+#: src/js/setup/components/Steps/Languages.js:110
+msgid "What are the languages of your site?"
+msgstr "사이트의 언어는 무엇인가요?"
+
+#: src/js/setup/components/Steps/Languages.js:120
+msgid "Default language"
+msgstr "기본 언어"
+
+#: src/js/setup/components/Steps/Languages.js:122
+msgid "What is the current language of your website?"
+msgstr "현재 웹사이트의 언어는 무엇인가요?"
+
+#: src/js/setup/components/Steps/Languages.js:133
+msgid "Translation languages"
+msgstr "번역 언어"
+
+#: src/js/setup/components/Steps/Languages.js:135
+msgid "Which languages do you want to translate your site into?"
+msgstr "사이트를 어떤 언어로 번역하고 싶으신가요?"
+
+#: src/js/setup/components/Steps/Languages.js:149
+msgid "If you cannot find languages that you need in the list"
+msgstr "목록에서 필요한 언어를 찾을 수 없는 경우"
+
+#: src/js/setup/components/Steps/Languages.js:150
+msgid "create a custom language"
+msgstr "사용자 정의 언어 만들기"
+
+#: src/js/setup/components/Steps/License.js:27
+#. %1$s is <a href="..."> and %2$s is </a>
+msgid ""
+"If you don't have a WPML.org account or a valid subscription, %1$spurchase "
+"one%2$s to get automatic updates, full support, and a 30-day money-back "
+"guarantee."
+msgstr "WPML.org 계정이나 유효한 구독이 없다면 %1$s구매하여%2$s 자동 업데이트, 전체 지원 및 30일 환불 보증을 받으세요."
+
+#: src/js/setup/components/Steps/License.js:58
+msgid "Already purchased WPML?"
+msgstr "이미 WPML을 구매하셨나요?"
+
+#: src/js/setup/components/Steps/License.js:62
+msgid "Enter your site key from your WPML account to receive automatic updates."
+msgstr "WPML 계정에서 사이트 키를 입력하여 자동 업데이트를 받으세요."
+
+#: src/js/setup/components/Steps/License.js:69
+msgid "Site key"
+msgstr "사이트 키"
+
+#: src/js/setup/components/Steps/License.js:76
+msgid "Get a key for this site"
+msgstr "이 사이트용 키 받기"
+
+#: src/js/setup/components/Steps/Plugins.js:130
+msgid "Improve your site’s translations using helpful plugins"
+msgstr "유용한 플러그인을 사용하여 사이트의 번역을 개선하세요"
+
+#: src/js/setup/components/Steps/Plugins.js:135
+msgid ""
+"Based on the themes and other plugins running on your site, we recommend "
+"that you enable the following WPML components. These are included with your "
+"WPML purchase and allow you to translate strings, media, admin texts, and "
+"more."
+msgstr "귀하의 사이트에서 실행 중인 테마와 다른 플러그인을 기반으로, 다음 WPML 구성 요소를 활성화할 것을 권장합니다. 이들은 WPML 구매에 포함되어 있으며 문자열, 미디어, 관리자 텍스트 등을 번역할 수 있게 해줍니다."
+
+#: src/js/setup/components/Steps/Plugins.js:97
+msgid "Error in activating plugin."
+msgstr "플러그인 활성화 중 오류가 발생했습니다."
+
+#: src/js/setup/components/Steps/Plugins.js:99
+msgid "Error in installing plugin."
+msgstr "플러그인 설치 중 오류가 발생했습니다."
+
+#: src/js/setup/components/Steps/Support.js:22
+msgid ""
+"Yes, send theme and plugins information, in order to get faster support and "
+"compatibility alerts"
+msgstr "예, 더 빠른 지원과 호환성 알림을 받기 위해 테마 및 플러그인 정보를 보냅니다"
+
+#: src/js/setup/components/Steps/Support.js:25
+msgid "No, don't send this information and skip compatibility alerts"
+msgstr "아니요, 이 정보를 보내지 않고 호환성 알림을 건너뜁니다"
+
+#: src/js/setup/components/Steps/Support.js:34
+msgid "Do you want to get better and faster support?"
+msgstr "더 나은 빠른 지원을 받고 싶으십니까?"
+
+#: src/js/setup/components/Steps/Support.js:39
+msgid ""
+"The WPML plugin can send a list of active plugins and theme used in your "
+"site to wpml.org. This allows our support team to help you much faster and "
+"to contact you in advance about potential compatibility problems and their "
+"solutions."
+msgstr "WPML 플러그인은 사이트에서 사용 중인 활성 플러그인과 테마 목록을 wpml.org에 보낼 수 있습니다. 이를 통해 저희 지원팀이 훨씬 더 빠르게 도움을 드리고 잠재적인 호환성 문제와 그 해결책에 대해 미리 연락드릴 수 있습니다."
+
+#: src/js/setup/components/Steps/Support.js:51
+msgid "Privacy and data usage policy"
+msgstr "개인정보 및 데이터 사용 정책"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Authorize/Actions.js:16
+msgid "Error: %s"
+msgstr "오류: %s"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Authorize/Actions.js:36
+msgid "Authenticate"
+msgstr "인증"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:24
+msgid ""
+"To send content and receive translations from <service_name />, enter the "
+"credentials you received from them."
+msgstr "<service_name />에 콘텐츠를 보내고 번역을 받으려면 해당 서비스에서 받은 자격 증명을 입력하세요."
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:30
+msgid "Need credentials? Contact <link_to_service />"
+msgstr "자격 증명이 필요하신가요? <link_to_service />에 문의하세요"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:34
+msgid ""
+"Success! You can start sending content to %s for translation after you "
+"finish the setup wizard."
+msgstr "성공! 설정 마법사를 마치면 %s에 번역할 콘텐츠를 보내기 시작할 수 있습니다."
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/AuthorizeService.js:58
+msgid "The credentials are invalid. Please, try again."
+msgstr "자격 증명이 유효하지 않습니다. 다시 시도해 주세요."
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/ListModal.js:12
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Main.js:84
+msgid "Choose a Translation Service"
+msgstr "번역 서비스 선택"
+
+#: src/js/setup/components/Steps/TranslationSettings/TranslationServices/Main.js:71
+msgid "Loading"
+msgstr "로딩 중"
+
+#: src/js/setup/models/Languages.js:57
+msgid "A new language could not be added correctly"
+msgstr "새 언어를 올바르게 추가할 수 없습니다"
+
+#: src/js/setup/store.js:108
+msgid "Back"
+msgstr "뒤로"
+
+#: src/js/setup/store.js:113
+msgid "Continue"
+msgstr "계속"
+
+#: src/js/setup/store.js:118
+msgid "Skip"
+msgstr "건너뛰기"
+
+#: src/js/setup/store.js:122
+msgid "Install and activate"
+msgstr "설치 및 활성화"
+
+#: src/js/setup/store.js:127
+msgid "Finish"
+msgstr "완료"
+
+#: src/js/setup/store.js:70
+msgid "Languages"
+msgstr "언어"
+
+#: src/js/setup/store.js:73
+msgid "URL Format"
+msgstr "URL 형식"
+
+#: src/js/setup/store.js:76
+msgid "Register WPML"
+msgstr "WPML 등록"
+
+#: src/js/setup/store.js:79
+msgid "Who Will Translate"
+msgstr "번역 담당자"
+
+#: src/js/setup/store.js:84
+msgid "Support"
+msgstr "지원"
+
+#: src/js/setup/store.js:87
+msgid "Plugins"
+msgstr "플러그인"
+
+#: src/js/setup/store.js:90
+msgid "Finished"
+msgstr "완료"
+
+#: src/js/translationServices/components/Sections.js:16
+msgid "Settings"
+msgstr "설정"
+
+#: src/js/translationServices/components/Sections.js:42
+msgid ""
+"It’s not currently possible to connect a translation service when WPML is "
+"set to translate your site’s content automatically. To use a translation "
+"service, please change your translation mode on the <LinkToSettingsPage /> "
+"page."
+msgstr "현재 WPML이 사이트 콘텐츠를 자동으로 번역하도록 설정되어 있어 번역 서비스에 연결할 수 없습니다. 번역 서비스를 사용하려면 <LinkToSettingsPage /> 페이지에서 번역 모드를 변경해 주세요."
+
+#: src/js/translationServices/components/ServicesList.js:41
+msgid "Documentation"
+msgstr "문서"
+
+#: src/js/translationServices/components/ServicesList.js:57
+msgid "Activate"
+msgstr "활성화"
+
+#: src/js/translationServices/components/ServicesList.js:74
+msgid "Description"
+msgstr "설명"
+
+#: src/js/translationServices/components/ServicesList.js:81
+msgid "Ranking"
+msgstr "순위"

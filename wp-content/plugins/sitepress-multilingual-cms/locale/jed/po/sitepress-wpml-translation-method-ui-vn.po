@@ -1,0 +1,150 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:13
+msgid "What should happen with your automatically translated content?"
+msgstr "Điều gì nên xảy ra với nội dung được dịch tự động của bạn?"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:30
+msgid "Wait for review"
+msgstr "Chờ xét duyệt"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:31
+msgid "You check and approve translations before publishing."
+msgstr "Bạn kiểm tra và phê duyệt bản dịch trước khi xuất bản."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:32
+msgid "Your translators check and approve translations before publishing."
+msgstr "Các dịch giả của bạn kiểm tra và phê duyệt bản dịch trước khi xuất bản."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:36
+msgid "Publish and mark for review"
+msgstr "Xuất bản và đánh dấu để xét duyệt"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:37
+msgid ""
+"WPML publishes translations immediately but flags them for you to check at "
+"your convenience."
+msgstr "WPML xuất bản bản dịch ngay lập tức nhưng đánh dấu chúng để bạn kiểm tra khi thuận tiện."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:38
+msgid ""
+"WPML publishes translations immediately but flags them for your translators "
+"to check at their convenience."
+msgstr "WPML xuất bản bản dịch ngay lập tức nhưng đánh dấu chúng để dịch giả của bạn kiểm tra khi thuận tiện."
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:42
+msgid "Publish without review"
+msgstr "Xuất bản mà không cần xét duyệt"
+
+#: src/js/components/settings/TranslationMode/AutomaticReviewMode.js:44
+msgid ""
+"The system publishes translations straight away, skipping the review "
+"process."
+msgstr "Hệ thống xuất bản bản dịch ngay lập tức, bỏ qua quy trình xét duyệt."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:22
+msgid "Automatic translation"
+msgstr "Dịch tự động"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:28
+msgid "What should happen with your automatically translated content"
+msgstr "Điều gì nên xảy ra với nội dung được dịch tự động của bạn"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslationSection.js:54
+msgid "Save settings"
+msgstr "Lưu cài đặt"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:13
+msgid "Translate drafts as I save them (consumes a bit more translation credits)."
+msgstr "Dịch bản nháp khi tôi lưu chúng (tiêu tốn nhiều tín dụng dịch thuật hơn một chút)."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:26
+msgid "Do you want to translate drafts automatically?"
+msgstr "Bạn có muốn dịch bản nháp tự động không?"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:42
+msgid ""
+"This feature is only available when you enable \"Translate Everything "
+"Automatically\" from the %sTranslation Dashboard%s."
+msgstr "Tính năng này chỉ khả dụng khi bạn kích hoạt <q id=\"q-first-1\">Dịch Mọi Thứ Tự Động</q> từ %sBảng Điều Khiển Dịch Thuật%s."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslateEverythingDrafts.js:9
+msgid "Don't translate drafts. Only translate when I publish content."
+msgstr "Không dịch bản nháp. Chỉ dịch khi tôi xuất bản nội dung."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:116
+msgid "%d credits/word"
+msgstr "%d tín dụng/từ"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:15
+msgid "Informal"
+msgstr "Không trang trọng"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:16
+msgid "Automatic"
+msgstr "Tự động"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:17
+msgid "Formal"
+msgstr "Trang trọng"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:45
+msgid "Which translation engines do you want to use?"
+msgstr "Bạn muốn sử dụng công cụ dịch nào?"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:46
+msgid ""
+"Automatic translation engines differ in translation style and supported "
+"language pairs.\n"
+"If your preferred translation engine does not support a language pair that "
+"you want to use, we fall back to your next preferred engine that does "
+"support it.\n"
+msgstr "Các công cụ dịch tự động khác nhau về phong cách dịch và các cặp ngôn ngữ được hỗ trợ.
+Nếu công cụ dịch ưa thích của bạn không hỗ trợ cặp ngôn ngữ bạn muốn sử dụng, chúng tôi sẽ chuyển sang công cụ ưa thích tiếp theo của bạn có hỗ trợ nó.\n"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:48
+msgid "Drag & drop to sort from the most to the least preferred engine."
+msgstr "Kéo & thả để sắp xếp từ công cụ ưa thích nhất đến ít ưa thích nhất."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:51
+msgid "Choose the tone of your automatic translations."
+msgstr "Chọn giọng điệu cho bản dịch tự động của bạn."
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:57
+msgid "Read more"
+msgstr "Đọc thêm"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:73
+msgid "Learn more"
+msgstr "Tìm hiểu thêm"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:92
+msgid "On"
+msgstr "Bật"
+
+#: src/js/translation-method/compontents/Sections/AutomaticTranslations/TranslationEngineSettings.js:93
+msgid "Off"
+msgstr "Tắt"
+
+#: src/js/translation-method/store.js:120
+msgid "Could not load translation engines"
+msgstr "Không thể tải các công cụ dịch thuật"
+
+#: src/js/translation-method/store.js:140
+msgid "Could not update engine"
+msgstr "Không thể cập nhật công cụ"
+
+#: src/js/translation-method/store.js:168
+msgid "Could not save review mode"
+msgstr "Không thể lưu chế độ xem xét"
+
+#: src/js/translation-method/store.js:196
+msgid "Could not save translate everything drafts"
+msgstr "Không thể lưu bản nháp dịch mọi thứ"
+
+#: src/js/translation-method/store.js:97
+msgid "Settings saved successfully"
+msgstr "Đã lưu cài đặt thành công"

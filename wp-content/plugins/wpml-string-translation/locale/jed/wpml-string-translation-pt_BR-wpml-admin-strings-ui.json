@@ -1,0 +1,82 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Not included in String Translation": [
+            "Não incluído na tradução de strings"
+         ],
+         "Registered and locked": [
+            "Registrado e bloqueado"
+         ],
+         "Text": [
+            "Texto"
+         ],
+         "Numeric": [
+            "Numérico"
+         ],
+         "All Types": [
+            "Todos os tipos"
+         ],
+         "Search": [
+            "Pesquisar"
+         ],
+         "Communication error": [
+            "Erro de comunicação"
+         ],
+         "The action failed.": [
+            "A ação falhou."
+         ],
+         "All (%d)": [
+            "Todos (%d)"
+         ],
+         "Included in String Translation (%d)": [
+            "Incluído na tradução de strings (%d)"
+         ],
+         "Not included in String Translation (%d)": [
+            "Não incluído na tradução de strings (%d)"
+         ],
+         "This setting is locked by a WPML configuration file.": [
+            "Essa configuração é bloqueada por um arquivo de configuração do WPML."
+         ],
+         "Option": [
+            "Opção"
+         ],
+         "Value": [
+            "Valor"
+         ],
+         "Type": [
+            "Tipo"
+         ],
+         "State": [
+            "Estado"
+         ],
+         "Export as a WPML configuration file": [
+            "Exportar como um arquivo de configuração do WPML"
+         ],
+         "Cancel": [
+            "Cancelar"
+         ],
+         "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
+            "Salve o seguinte em um wpml-config.xml na raiz do seu tema ou plug-in."
+         ],
+         "No options found.": [
+            "Não foram encontradas opções."
+         ],
+         "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
+            "Certifique-se de que você salvou as opções do tema pelo menos uma vez. Alguns temas só as adicionam à tabela wp_options depois que o usuário salva explicitamente as alterações nos padrões do tema."
+         ],
+         "Add to String Translation": [
+            "Adicionar à tradução de strings"
+         ],
+         "Remove from String Translation": [
+            "Remover da tradução da string"
+         ],
+         "Included in String Translation": [
+            "Incluído na tradução de strings"
+         ]
+      }
+   }
+}

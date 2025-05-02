@@ -1,3 +1,12 @@
+:root {
+    --gray-dark: #373737;
+    --gray-dim: #666;
+    --wpml-blue: #33879e;
+    --wpml-blue-lightest: #ebf3f5;
+    --wpml-red: #db552b;
+    --orange: #e88357;
+}
+
 .otgsi_site_key_form{
     display:none;
 }
@@ -5,10 +14,10 @@
 .installer-status-installing, .installer-status-installed, .installer-status-updating, .installer-status-updated, .installer-status-activating, .installer-status-activated, .installer-status-success{
     display: none;
 }
-.installer-status-installing{color: #FF9900; }
-.installer-status-installed{color: #003300; font-weight: bold; }
-.installer-status-updating{color: #FF9900; }
-.installer-status-updated{color: #003300; font-weight: bold; }
+.installer-status-installing{color: var(--orange); }
+.installer-status-installed{color: var(--wpml-blue); font-weight: 500; }
+.installer-status-updating{color: var(--orange); }
+.installer-status-updated{color: var(--wpml-blue); font-weight: 500; }
 
 .installer-status-installed .error-details:before,
 .installer-status-updated .error-details:before{
@@ -20,11 +29,11 @@
     cursor: help;
 }
 
-.installer-status-activating{color: #996666 }
-.installer-status-activated{color: #333366; font-weight: bold; }
+.installer-status-activating{color: var(--gray-dim); }
+.installer-status-activated{color: var(--gray-dark); font-weight: 500; }
 
 .js-status-success p{
-    color: #FF9900;
+    color: var(--orange);
     padding: 4px;
 }
 
@@ -64,7 +73,7 @@
 }
 
 .installer-status-error{
-    color: #f00;
+    color: var(--wpml-red);
 }
 
 .installer-status-note{
@@ -78,12 +87,12 @@
 
 .installer-warn-box{
     -webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;border:1px solid #FF6400;background-color:#df8a48;
-    color: #333;
+    color: var(--gray-dark);
     padding: 5px;
 }
 .installer-warn-box span.details{
     font-style: italic;
-    color:#777;
+    color: var(--gray-dim);
 }
 
 .installer-error-box{
@@ -197,9 +206,8 @@
 .installer-download-progress-status{
     display: none;
     float:right;
-    color: #006600;
+    color: var(--wpml-blue);
     font-style: italic;
-    background: url('../img/spinner.gif') no-repeat;
     padding-left:24px;
 }
 
@@ -214,18 +222,196 @@
 }
 .installer-table-wrap table.installer-plugins{
     margin-bottom: 20px;
+    border: none;
+    box-shadow: unset;
+}
+
+.installer-table-wrap table.installer-plugins tr th {
+    padding: 13px 16px;
+    border-bottom: 2px solid var(--gray-dark);
+    color: var(--gray-dim);
+}
+
+.installer-table-wrap {
+    padding-right: 22px;
+}
+
+.installer-table-wrap table.installer-plugins tbody tr td {
+    padding: 16px;
+    border-bottom: 1px solid rgba(51, 135, 158, 0.2);
+}
+.installer-table-wrap table.installer-plugins tbody tr td:first-of-type {
+    border-left: 1px solid rgba(51, 135, 158, 0.2);
+}
+.rtl .installer-table-wrap table.installer-plugins tbody tr td:first-of-type {
+    border-left: none;
+    border-right: 1px solid rgba(51, 135, 158, 0.2);
+}
+.installer-table-wrap table.installer-plugins tbody tr td:last-of-type {
+    border-right: 1px solid rgba(51, 135, 158, 0.2);
+}
+.rtl .installer-table-wrap table.installer-plugins tbody tr td:last-of-type {
+    border-right: none;
+    border-left: 1px solid rgba(51, 135, 158, 0.2);
+}
+.rtl #sitepress-multilingual-cms_release-notes td {
+    border-right: 1px solid rgba(51, 135, 158, 0.2);
+}
+.rtl #sitepress-multilingual-cms_release-notes .arrow_box::before,
+.rtl #sitepress-multilingual-cms_release-notes .arrow_box::after {
+    left: 3%;
+}
+.installer-table-wrap table.installer-plugins tbody tr td:last-of-type {
+    text-align: right;
+}
+
+.installer-table-wrap table.installer-plugins tbody tr td:last-of-type .js-release-notes {
+    color: var(--wpml-blue);
+    text-decoration: underline;
+    white-space: nowrap;
+}
+
+.installer-table-wrap table.installer-plugins tbody tr td:last-of-type .js-release-notes:hover,
+.installer-table-wrap table.installer-plugins tbody tr td:last-of-type .js-release-notes:focus {
+    text-decoration: none;
+}
+
+.installer-table-wrap table.installer-plugins tbody tr td.installer_plugin_name span {
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--gray-dark);
+}
+.installer-table-wrap table.installer-plugins tbody tr td.installer_plugin_name p {
+    font-size: 12px;
+    line-height: 1.625;
+    color: var(--gray-dim);
+}
+.installer-plugins .installer_checkbox input[type=checkbox] {
+    width: 16px;
+    height: 16px;
+    border: 1px solid rgba(51, 135, 158, 0.5);
+    border-radius: 2px;
+    position: relative;
+}
+.installer-plugins .installer_checkbox input[type=checkbox]:hover,
+.installer-plugins .installer_checkbox input[type=checkbox]:focus {
+    border-color: var(--wpml-blue);
+}
+.installer-plugins .installer-plugins .installer_checkbox input[type=checkbox]:checked::before {
+    content: '';
+    width: 4px;
+    height: 8px;
+    border: solid var(--wpml-blue);
+    border-width: 0 2px 2px 0;
+    position: absolute;
+    top: 4px;
+    left: 8px;
+    transform: rotate(45deg);
+}
+@media (max-width: 782px) {
+    .installer-plugins .installer-plugins .installer_checkbox input[type=checkbox]:checked::before {
+        left: 9px;
+    }
+}
+.installer-plugins .installer-plugins .installer_checkbox input[type=checkbox]:disabled {
+    border: 1px solid rgba(51, 135, 158, 0.15);
+    background-color: var(--wpml-blue-lightest);
+    cursor: not-allowed;
+}
+
+.installer-table-wrap table.installer-plugins tbody tr td.installer_version_installed .installer-green-text,
+.installer-table-wrap table.installer-plugins tbody tr td.installer_version_installed  .installer-red-text {
+    padding: 3px 12px;
+    display: inline-block;
+    border-radius: 100px;
+    background-color: var(--wpml-blue-lightest);
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 500;
+    color: var(--wpml-blue);
+    white-space: nowrap;
+}
+
+.installer-table-wrap table.installer-plugins tbody tr td.installer_version_installed  .installer-red-text {
+    width: fit-content;
+    display: flex;
+    gap: 8px;
+    background-color: rgba(219, 85, 43, 0.1);
+    color: var(--wpml-red);
+}
+
+.installer-table-wrap table.installer-plugins tbody tr td.installer_version_installed  .installer-red-text::after {
+    content: '\f64c';
+    font-family: 'otgs-icons';
+    font-size: 12px;
+    color: var(--wpml-red);
+}
+
+.installer-table-wrap table.installer-plugins tbody tr td .installer_version_installed_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.wp-core-ui .button-secondary[type="submit"] {
+    margin: 0 0 32px;
+    padding: 8px 20px;
+    border-radius: 3px;
+    border-color: var(--wpml-blue);
+    background-color: var(--wpml-blue);
+    font-size: 13px;
+    color: #fff;
+    line-height: 20px;
+    font-weight: 500;
+    transition: background-color 0.3s ease-out;
+}
+
+.wp-core-ui .button-secondary[type="submit"]:hover,
+.wp-core-ui .button-secondary[type="submit"]:focus {
+    background-color: var(--gray-dark);
+}
+
+label.activate-label {
+    margin-left: 16px;
+    display: inline-block;
+    transform: translateY(12px);
+    color: var(--gray-dark);
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.installer-table-wrap .for_spinner_js .spinner {
+    background: unset;
+}
+
+.installer-download-progress-status::before,
+.installer-table-wrap .for_spinner_js .spinner::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNyIgaGVpZ2h0PSIxNiIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iIzMzODc5RSIgZD0iTTguMDc1LjUzM2EuNTMzLjUzMyAwIDEgMSAxLjA2NyAwdjMuMmEuNTMzLjUzMyAwIDAgMS0xLjA2NyAwdi0zLjJaTTguMDc1IDEyLjI2N2EuNTMzLjUzMyAwIDEgMSAxLjA2NyAwdjMuMmEuNTMzLjUzMyAwIDAgMS0xLjA2NyAwdi0zLjJaTTEyLjM0MiA4YzAgLjI5NS4yMzkuNTMzLjUzMy41MzNoMy4yYS41MzMuNTMzIDAgMSAwIDAtMS4wNjZoLTMuMmEuNTMzLjUzMyAwIDAgMC0uNTMzLjUzM1pNMS4xNDIgOC41MzNhLjUzMy41MzMgMCAxIDEgMC0xLjA2NmgzLjJhLjUzMy41MzMgMCAwIDEgMCAxLjA2NmgtMy4yWk0xMS4yNDYgMTAuNjM3YS41MzMuNTMzIDAgMCAwIDAgLjc1NGwyLjI2NCAyLjI2NGEuNTMzLjUzMyAwIDAgMCAuNzU0LS43NTRMMTIgMTAuNjM3YS41MzMuNTMzIDAgMCAwLS43NTQgMFpNNS44NjcgMTEuMzc5YS41MzMuNTMzIDAgMCAwLS43NTQtLjc1NEwyLjg1IDEyLjg4N2EuNTMzLjUzMyAwIDEgMCAuNzU1Ljc1NWwyLjI2Mi0yLjI2M1pNMTQuMjM1IDIuMjU2YS41MzMuNTMzIDAgMCAxIDAgLjc1NGwtMi4yNjEgMi4yNjFhLjUzMy41MzMgMCAxIDEtLjc1NS0uNzU0bDIuMjYyLTIuMjYxYS41MzMuNTMzIDAgMCAxIC43NTQgMFoiLz48L3N2Zz4=") no-repeat center;
+    animation: spin 0.8s infinite linear;
+    transform-origin: center;
+}
+
+.installer-download-progress-status::before {
+    margin: 0 8px;
 }
 
 td.installer_plugin_name {
-    width: 300px;
+    width: 500px;
 }
 
 td.installer_version {
     width: 100px;
-}
-
-td.installer_release_date {
-    width: 300px;
 }
 
 td.installer_checkbox {
@@ -243,10 +429,18 @@ td.installer_checkbox {
     position: relative;
     background: #eee;
     border: 1px solid #ccc;
+    border-radius: 3px;
+    text-align: left;
+}
+.rtl .installer-release-notes .arrow_box {
+    text-align: right;
+}
+.installer-release-notes .arrow_box h3 {
+    margin: 0;
 }
 .installer-release-notes .arrow_box:after, .installer-release-notes .arrow_box:before {
     bottom: 100%;
-    left: 50%;
+    left: 97%;
     border: solid transparent;
     content: " ";
     height: 0;
@@ -286,8 +480,8 @@ td.installer_checkbox {
     margin: -5px 5px;
 }
 
-.otgsi_downloads_form{
-    margin-top: 15px;
+.otgsi_downloads_form {
+    margin-top: 40px;
 }
 
 .spinner-with-text{
@@ -357,4 +551,71 @@ td.installer_checkbox {
     vertical-align: baseline;
     line-height: 1;
     display: inline-block;
+}
+
+.installer-channel-selector-wrap select.installer-channel-selector {
+    min-width: 122px;
+    width: fit-content;
+    border-radius: 2px;
+    border-color: rgba(0,0,0, 0.15);
+    font-size: 13px;
+    line-height: 1.5;
+}
+.installer-channel-selector-wrap select.installer-channel-selector:hover,
+.installer-channel-selector-wrap select.installer-channel-selector:focus {
+    border-color: var(--wpml-blue);
+    box-shadow: none;
+    color: var(--gray-dark);
+}
+
+.installer-channel-selector-wrap label {
+    font-size: 13px;
+    color: var(--gray-dim);
+}
+
+tr#repository-wpml_wpml td:nth-of-type(2) p {
+    color: var(--gray-dim);
+}
+
+tr#repository-wpml_wpml td:nth-of-type(2) p strong {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--gray-dark);
+}
+
+
+/** Notification */
+
+.widefat .otgs-reset * {
+    all: unset;
+}
+
+.otgs-reset .notification {
+    display: flex;
+    align-items: center;
+    padding: 12px 40px 12px 20px;
+    gap: 12px;
+    border-radius: 5px;
+    background: #33879E1A;
+    border-left: 4px solid #33879E;
+    max-width:  552px;
+    width:50%;
+}
+
+.otgs-reset .otgs-blue{
+    color:#33879E;
+}
+.otgs-reset .otgs-text-xs{
+    font-size: 12px;
+}
+.otgs-reset .otgs-text-sm{
+    font-size: 16px;
+    line-height: 16px;
+}
+.otgs-reset .otgs-ml-auto{
+    margin-left: auto;
+}
+
+.otgs-cursor-pointer{
+    cursor:pointer !important;
 }

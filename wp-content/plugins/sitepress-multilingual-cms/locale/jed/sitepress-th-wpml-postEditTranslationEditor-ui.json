@@ -1,0 +1,61 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "WPML Translation Editor": [
+            "โปรแกรมแปล WPML"
+         ],
+         "WordPress Editor": [
+            "ตัวแก้ไข WordPress"
+         ],
+         "Translate with the WordPress Editor when you want to create different designs for translations, or if you're translating content that's incompatible with WPML's Translation Editor.": [
+            "ใช้ตัวแก้ไข WordPress ในการแปลเมื่อคุณต้องการสร้างการออกแบบที่แตกต่างกันสำหรับการแปล หรือถ้าคุณกำลังแปลเนื้อหาที่ไม่สามารถใช้งานร่วมกับตัวแก้ไขการแปลของ WPML ได้."
+         ],
+         "What do you want to translate with the WordPress Editor?": [
+            "คุณต้องการแปลอะไรด้วยตัวแก้ไข WordPress?"
+         ],
+         "I understand, switch to the WordPress Editor": [
+            "ฉันเข้าใจแล้ว เปลี่ยนไปใช้ตัวแก้ไข WordPress"
+         ],
+         "What do you want to translate with WPML Translation Editor?": [
+            "คุณต้องการแปลอะไรด้วยตัวแก้ไขการแปลของ WPML?"
+         ],
+         "I understand, switch to WPML's Translation Editor": [
+            "ฉันเข้าใจแล้ว เปลี่ยนไปใช้ตัวแก้ไขการแปลของ WPML"
+         ],
+         "Apply": [
+            "นำไปใช้"
+         ],
+         "Cancel": [
+            "ยกเลิก"
+         ],
+         "Only this %s": [
+            "เฉพาะ %s นี้"
+         ],
+         "Recommended": [
+            "แนะนำ"
+         ],
+         "All %s": [
+            "ทุก %s"
+         ],
+         "All the site's content": [
+            "เนื้อหาทั้งหมดของเว็บไซต์"
+         ],
+         "Are you sure?": [
+            "คุณแน่ใจหรือไม่?"
+         ],
+         "The WordPress Editor doesn't offer Automatic Translation, Translation Memory and other features that make translation easier.": [
+            "ตัวแก้ไข WordPress ไม่มีการแปลอัตโนมัติ หน่วยความจำการแปล และคุณสมบัติอื่นๆ ที่ทำให้การแปลง่ายขึ้น."
+         ],
+         "And, if you switch back to WPML's Translation Editor, you will need to translate from scratch what you translated with the WordPress editor.": [
+            "และหากคุณเปลี่ยนกลับไปใช้ตัวแก้ไขการแปลของ WPML คุณจะต้องแปลสิ่งที่คุณได้แปลด้วยตัวแก้ไข WordPress ใหม่ทั้งหมด."
+         ],
+         "When you update content that you previously translated with the WordPress Editor, you will need to translate from scratch.": [
+            "เมื่อคุณอัปเดตเนื้อหาที่คุณเคยแปลด้วยตัวแก้ไข WordPress คุณจะต้องแปลใหม่ทั้งหมด."
+         ]
+      }
+   }
+}

@@ -15,10 +15,10 @@ class MainLayoutTemplate {
 	const SERVICES_LIST_TEMPLATE = 'services-layout.twig';
 
 	/**
-	 * @param  callable $templateRenderer
-	 * @param  callable $activeServiceRenderer
-	 * @param  bool     $hasPreferredService
-	 * @param  callable $retrieveServiceTabsData
+	 * @param callable $templateRenderer
+	 * @param callable $activeServiceRenderer
+	 * @param bool     $hasPreferredService
+	 * @param callable $retrieveServiceTabsData
 	 */
 	public static function render(
 		$templateRenderer,
@@ -33,9 +33,9 @@ class MainLayoutTemplate {
 	}
 
 	/**
-	 * @param  callable $activeServiceRenderer
-	 * @param  bool     $hasPreferredService
-	 * @param  callable $retrieveServiceTabsData
+	 * @param callable $activeServiceRenderer
+	 * @param bool     $hasPreferredService
+	 * @param callable $retrieveServiceTabsData
 	 *
 	 * @return array
 	 */
@@ -60,19 +60,20 @@ class MainLayoutTemplate {
 				ActivationAjax::NONCE_ACTION    => wp_create_nonce( ActivationAjax::NONCE_ACTION ),
 				AuthenticationAjax::AJAX_ACTION => wp_create_nonce( AuthenticationAjax::AJAX_ACTION ),
 			],
-			'settings_url'         => UIPage::getSettings(),
-			'lsp_logo_placeholder' => WPML_TM_URL . '/res/img/lsp-logo-placeholder.png',
-			'strings'                => [
-				'translation_services'             => __( 'Translation Services', 'wpml-translation-management' ),
-				'translation_services_description' => __( $sectionDescription, 'wpml-translation-management' ),
-				'ts'                   => [
+			'settings_url'          => UIPage::getSettings(),
+			'lsp_logo_placeholder'  => WPML_TM_URL . '/res/img/lsp-logo-placeholder.png',
+			'strings'               => [
+				'translation_services'                => __( 'Translation Services', 'wpml-translation-management' ),
+				'translation_services_description'    => __( $sectionDescription, 'wpml-translation-management' ),
+				'enable_unlisted_translation_service' => __( 'Activate a translation service that\'s not listed here', 'sitepress' ),
+				'ts'                                  => [
 					'different'   => __( 'Looking for a different translation service?', 'wpml-translation-management' ),
 					'tell_us_url' => DocPage::addTranslationServiceForm(),
 					'tell_us'     => __( 'Tell us which one', 'wpml-translation-management' ),
 				],
 			],
-			'endpoints' => [
-				'selectService' => [
+			'endpoints'             => [
+				'selectService'     => [
 					'endpoint' => Select::class,
 					'nonce'    => Nonce::create( Select::class )
 				],
@@ -80,7 +81,7 @@ class MainLayoutTemplate {
 					'nonce'    => Nonce::create( Deactivate::class ),
 					'endpoint' => Deactivate::class
 				],
-				'activateService' => [
+				'activateService'   => [
 					'nonce'    => Nonce::create( Activate::class ),
 					'endpoint' => Activate::class
 				],

@@ -11,7 +11,7 @@ class WPML_Upgrade_Fix_Non_Admin_With_Admin_Cap implements IWPML_Upgrade_Command
 		$user = new WP_User( 'admin' );
 
 		if ( $user->exists() && ! is_super_admin( $user->get( 'ID' ) ) ) {
-			$wpml_capabilities = array_keys( wpml_get_capabilities() );
+			$wpml_capabilities = wpml_get_capability_keys();
 			foreach ( $wpml_capabilities as $capability ) {
 				$user->remove_cap( $capability );
 			}

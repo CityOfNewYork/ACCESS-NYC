@@ -1,0 +1,97 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "WPML has detected changed or new MO files": [
+            "WPML が変更または新しいMOファイルを検出しました。"
+         ],
+         "There are new or updated .mo files. WPML needs to scan them to find strings for translation.": [
+            "新しい、または更新された .mo ファイルがあります。WPMLはそれらをスキャンして翻訳する文字列を見つける必要があります。"
+         ],
+         "Scan translation files": [
+            "翻訳ファイルのスキャン"
+         ],
+         "Scanned %1$d of %2$d files...": [
+            "%2$d ファイルのスキャン% 1$d..."
+         ],
+         "Generated files for %1$d of %2$d sites...": [
+            "%2$d 、% 1$d のファイルを作成した。"
+         ],
+         "Generated %1$d of %2$d files...": [
+            "%2$d ファイルの% 1$d 。"
+         ],
+         "WPML needs to generate .mo files": [
+            "WPMLは .moファイルを生成する必要がある"
+         ],
+         "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end. However, the folder that should hold these .mo files is not open for writing.": [
+            "WPML 文字列翻訳では、データベース呼び出しの代わりに .mo ファイルを使用します。WPMLはフロントエンドに翻訳を表示するために、これらの.moファイルを生成する必要があります。しかし、これらの.moファイルを保存するフォルダは書き込み可能ではありません。"
+         ],
+         "Please use your admin control panel or an FTP program to make the following folder writeable:": [
+            "管理コントロールパネルまたはFTPプログラムを使用して、以下のフォルダを書き込み可能にしてください："
+         ],
+         "There was a problem creating the .mo files": [
+            ".moファイルの作成に問題がありました。"
+         ],
+         "You can try again now or try again later by going to ": [
+            "今すぐ再試行することも、後でもう一度試行することもできます。 "
+         ],
+         "Translations are missing from the front-end until you generate .mo files": [
+            ".moファイルを生成するまで、フロントエンドから翻訳が消えてしまう"
+         ],
+         "Your site doesn't have the .mo files that WPML needs in order to display translated strings on the front-end. To generate these .mo files, remember to go to ": [
+            "あなたのサイトには、フロントエンドで翻訳された文字列を表示するためにWPMLが必要とする.moファイルがありません。これらの.moファイルを生成するには、忘れずに "
+         ],
+         "WPML->Theme and plugins localization.": [
+            "WPML->テーマとプラグインのローカライズ。"
+         ],
+         "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end.": [
+            "WPML String Translationはデータベース呼び出しの代わりに.moファイルを使用します。WPMLは、フロントエンドに翻訳を表示するために、これらの.moファイルを生成する必要があります。"
+         ],
+         "Try again": [
+            "再試行"
+         ],
+         "Generate .mo files": [
+            ".moファイルの生成"
+         ],
+         "Close this message": [
+            "このメッセージを閉じる"
+         ],
+         "Find additional texts that WordPress, the theme and plugins created and choose which ones to translate": [
+            "WordPress、テーマ、プラグインが作成した追加テキストを検索し、翻訳するテキストを選択します。"
+         ],
+         "Choose texts for translation": [
+            "翻訳するテキストを選ぶ"
+         ],
+         "Some of the translations have changed": [
+            "翻訳の一部が変更されている"
+         ],
+         "Scan the selected components to make new texts available for translation.": [
+            "選択したコンポーネントをスキャンして、新しいテキストを翻訳できるようにします。"
+         ],
+         "Select all": [
+            "すべて選択"
+         ],
+         "Plugins:": [
+            "プラグイン："
+         ],
+         "Themes:": [
+            "テーマ"
+         ],
+         "Core:": [
+            "コアだ："
+         ],
+         "Can't find the strings you're looking to translate?": [
+            "翻訳したい文字列が見つかりませんか？"
+         ],
+         "Most likely you cannot see the strings you want to translate because:": [
+            "ほとんどの場合、翻訳したい文字列を見ることができないからだ："
+         ],
+         "Texts are not selected for translation": [
+            "テキストが翻訳用に選択されない"
+         ]
+      }
+   }
+}

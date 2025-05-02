@@ -1,0 +1,55 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Preparing...": [
+            "Chuẩn bị..."
+         ],
+         "All jobs have been cancelled": [
+            "Tất cả công việc đã bị hủy"
+         ],
+         "There is no more jobs to cancel": [
+            "Không còn công việc nào để hủy"
+         ],
+         "The jobs cancellation has failed": [
+            "Hủy công việc thất bại"
+         ],
+         "Cancel in-progress automatic jobs": [
+            "Hủy công việc tự động đang làm"
+         ],
+         "Enabling WPML's Advanced Translation Editor...": [
+            "Đang kích hoạt Trình biên tập Dịch thuật Nâng cao của WPML..."
+         ],
+         "Force-enable WPML's Advanced Translation Editor": [
+            "Bật cưỡng chế Trình biên tập Dịch thuật Nâng cao của WPML"
+         ],
+         "If you're running this website from two or more domains on the same installation, this action will allow both to use the Advanced Translation Editor. Don't use this if you've moved or copied the site to a different domain on a different server.": [
+            "Nếu bạn đang chạy trang web này từ hai hoặc nhiều tên miền trên cùng một cài đặt, hành động này sẽ cho phép cả hai sử dụng Trình biên tập Dịch thuật Nâng cao. Đừng sử dụng tính năng này nếu bạn đã di chuyển hoặc sao chép trang web sang một tên miền khác trên một máy chủ khác."
+         ],
+         "An error occurred while enabling WPML on both domains. Please try again.": [
+            "Đã xảy ra lỗi khi kích hoạt WPML trên cả hai tên miền. Vui lòng thử lại."
+         ],
+         "You can now use the Advanced Translation Editor from this site, as well as the other site(s) running from a different domain on the same installation.": [
+            "Bạn giờ đây có thể sử dụng Trình biên tập Dịch thuật Nâng cao từ trang web này, cũng như (các) trang web khác đang chạy từ một tên miền khác trên cùng một cài đặt."
+         ],
+         "Domain name has been updated": [
+            "Tên miền đã được cập nhật"
+         ],
+         "Domain name update has been failed": [
+            "Cập nhật tên miền thất bại"
+         ],
+         "Update domain name in language switcher settings": [
+            "Cập nhật tên miền trong cài đặt ngôn ngữ"
+         ],
+         "Refresh license data to recognise license update": [
+            "Làm mới dữ liệu giấy phép"
+         ],
+         "WPML License has been refreshed": [
+            "Giấy phép WPML đã được làm mới"
+         ]
+      }
+   }
+}

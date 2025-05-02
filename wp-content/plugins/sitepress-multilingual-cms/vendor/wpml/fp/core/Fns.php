@@ -115,19 +115,6 @@ use WPML\Collect\Support\Traits\Macroable;
  *
  * @method static callable|mixed until( ...$predicate, ...$fns ) - Curried :: ( b → bool ) → [( a → b )] → a → b
  *
- * Executes consecutive functions until their $predicate($fn(...$args)) is true. When a result fulfils predicate then it is returned.
- *
- * ```
- *       $fns = [
- *         $add(1),
- *         $add(5),
- *         $add(10),
- *         $add(23),
- *      ];
- *
- *      $this->assertSame( 20, Fns::until( Relation::gt( Fns::__, 18 ), $fns )( 10 ) );
- * ```
- *
  */
 class Fns {
 

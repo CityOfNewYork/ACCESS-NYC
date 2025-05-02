@@ -73,12 +73,18 @@ class WPML_ST_Upgrade_Command_Factory {
 			case 'WPML_ST_Upgrade_DB_String_Packages_Word_Count':
 				$result = new WPML_ST_Upgrade_DB_String_Packages_Word_Count( wpml_get_upgrade_schema() );
 				break;
+			case 'WPML_ST_Upgrade_DB_String_Packages_Translator_Note':
+				$result = new WPML_ST_Upgrade_DB_String_Packages_Translator_Note( wpml_get_upgrade_schema() );
+				break;
 			case '\WPML\ST\Upgrade\Command\RegenerateMoFilesWithStringNames':
 				$isBackground = true;
 				$result       = new RegenerateMoFilesWithStringNames(
 					\WPML\ST\MO\Generate\Process\ProcessFactory::createStatus( $isBackground ),
 					\WPML\ST\MO\Generate\Process\ProcessFactory::createSingle( $isBackground )
 				);
+				break;
+			case 'WPML\ST\Upgrade\Command\UpgradeAutoregisteringStrings':
+				$result = new \WPML\ST\Upgrade\Command\UpgradeAutoregisteringStrings( $this->wpdb, $this->sitepress );
 				break;
 			case MigrateMultilingualWidgets::class:
 				$result = new MigrateMultilingualWidgets();

@@ -80,8 +80,6 @@ module.exports = window["ReactDOM"];
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-(() => {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
@@ -134,9 +132,9 @@ __webpack_require__.d(__webpack_exports__, {
   useTransition: () => (/* reexport */ external_React_namespaceObject.useTransition)
 });
 
-;// CONCATENATED MODULE: external "React"
+;// external "React"
 const external_React_namespaceObject = window["React"];
-;// CONCATENATED MODULE: ./node_modules/@wordpress/element/build-module/create-interpolate-element.js
+;// ./node_modules/@wordpress/element/build-module/create-interpolate-element.js
 /**
  * Internal dependencies
  */
@@ -446,7 +444,7 @@ function closeOuterElement(endOffset) {
 }
 /* harmony default export */ const create_interpolate_element = (createInterpolateElement);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/element/build-module/react.js
+;// ./node_modules/@wordpress/element/build-module/react.js
 /**
  * External dependencies
  */
@@ -472,10 +470,24 @@ function closeOuterElement(endOffset) {
  */
 
 /**
- * Object containing a React synthetic event.
+ * Object containing a React ref object.
  *
  * @template T
  * @typedef {import('react').RefObject<T>} RefObject<T>
+ */
+
+/**
+ * Object containing a React ref callback.
+ *
+ * @template T
+ * @typedef {import('react').RefCallback<T>} RefCallback<T>
+ */
+
+/**
+ * Object containing a React ref.
+ *
+ * @template T
+ * @typedef {import('react').Ref<T>} Ref<T>
  */
 
 /**
@@ -558,7 +570,7 @@ function closeOuterElement(endOffset) {
 
 
 /**
- * @see https://reactjs.org/docs/react-api.html#reactmemo
+ * @see https://react.dev/reference/react/memo
  */
 
 
@@ -568,97 +580,97 @@ function closeOuterElement(endOffset) {
 
 
 /**
- * @see https://reactjs.org/docs/hooks-reference.html#usecallback
+ * @see https://react.dev/reference/react/useCallback
  */
 
 
 /**
- * @see https://reactjs.org/docs/hooks-reference.html#usecontext
+ * @see https://react.dev/reference/react/useContext
  */
 
 
 /**
- * @see https://reactjs.org/docs/hooks-reference.html#usedebugvalue
+ * @see https://react.dev/reference/react/useDebugValue
  */
 
 
 /**
- * @see https://reactjs.org/docs/hooks-reference.html#usedeferredvalue
+ * @see https://react.dev/reference/react/useDeferredValue
  */
 
 
 /**
- * @see https://reactjs.org/docs/hooks-reference.html#useeffect
+ * @see https://react.dev/reference/react/useEffect
  */
 
 
 /**
- * @see https://reactjs.org/docs/hooks-reference.html#useid
+ * @see https://react.dev/reference/react/useId
  */
 
 
 /**
- * @see https://reactjs.org/docs/hooks-reference.html#useimperativehandle
+ * @see https://react.dev/reference/react/useImperativeHandle
  */
 
 
 /**
- * @see https://reactjs.org/docs/hooks-reference.html#useinsertioneffect
+ * @see https://react.dev/reference/react/useInsertionEffect
  */
 
 
 /**
- * @see https://reactjs.org/docs/hooks-reference.html#uselayouteffect
+ * @see https://react.dev/reference/react/useLayoutEffect
  */
 
 
 /**
- * @see https://reactjs.org/docs/hooks-reference.html#usememo
+ * @see https://react.dev/reference/react/useMemo
  */
 
 
 /**
- * @see https://reactjs.org/docs/hooks-reference.html#usereducer
+ * @see https://react.dev/reference/react/useReducer
  */
 
 
 /**
- * @see https://reactjs.org/docs/hooks-reference.html#useref
+ * @see https://react.dev/reference/react/useRef
  */
 
 
 /**
- * @see https://reactjs.org/docs/hooks-reference.html#usestate
+ * @see https://react.dev/reference/react/useState
  */
 
 
 /**
- * @see https://reactjs.org/docs/hooks-reference.html#usesyncexternalstore
+ * @see https://react.dev/reference/react/useSyncExternalStore
  */
 
 
 /**
- * @see https://reactjs.org/docs/hooks-reference.html#usetransition
+ * @see https://react.dev/reference/react/useTransition
  */
 
 
 /**
- * @see https://reactjs.org/docs/react-api.html#starttransition
+ * @see https://react.dev/reference/react/startTransition
  */
 
 
 /**
- * @see https://reactjs.org/docs/react-api.html#reactlazy
+ * @see https://react.dev/reference/react/lazy
  */
 
 
 /**
- * @see https://reactjs.org/docs/react-api.html#reactsuspense
+ * @see https://react.dev/reference/react/Suspense
  */
 
 
 /**
- * @see https://reactjs.org/docs/react-api.html#reactpurecomponent
+ * @see https://react.dev/reference/react/PureComponent
  */
 
 
@@ -713,7 +725,7 @@ function switchChildrenNodeName(children, nodeName) {
 var external_ReactDOM_ = __webpack_require__(5795);
 // EXTERNAL MODULE: ./node_modules/react-dom/client.js
 var client = __webpack_require__(4140);
-;// CONCATENATED MODULE: ./node_modules/@wordpress/element/build-module/react-platform.js
+;// ./node_modules/@wordpress/element/build-module/react-platform.js
 /**
  * External dependencies
  */
@@ -785,7 +797,7 @@ var client = __webpack_require__(4140);
  */
 
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/element/build-module/utils.js
+;// ./node_modules/@wordpress/element/build-module/utils.js
 /**
  * Checks if the provided WP element is empty.
  *
@@ -802,7 +814,7 @@ const isEmptyElement = element => {
   return !element;
 };
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/element/build-module/platform.js
+;// ./node_modules/@wordpress/element/build-module/platform.js
 /**
  * Parts of this source were derived and modified from react-native-web,
  * released under the MIT license.
@@ -818,11 +830,11 @@ const Platform = {
 };
 /**
  * Component used to detect the current Platform being used.
- * Use Platform.OS === 'web' to detect if running on web enviroment.
+ * Use Platform.OS === 'web' to detect if running on web environment.
  *
  * This is the same concept as the React Native implementation.
  *
- * @see https://facebook.github.io/react-native/docs/platform-specific-code#platform-module
+ * @see https://reactnative.dev/docs/platform-specific-code#platform-module
  *
  * Here is an example of how to use the select method:
  * @example
@@ -837,7 +849,7 @@ const Platform = {
  */
 /* harmony default export */ const platform = (Platform);
 
-;// CONCATENATED MODULE: ./node_modules/is-plain-object/dist/is-plain-object.mjs
+;// ./node_modules/is-plain-object/dist/is-plain-object.mjs
 /*!
  * is-plain-object <https://github.com/jonschlinkert/is-plain-object>
  *
@@ -873,7 +885,7 @@ function isPlainObject(o) {
 
 
 
-;// CONCATENATED MODULE: ./node_modules/tslib/tslib.es6.mjs
+;// ./node_modules/tslib/tslib.es6.mjs
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -888,7 +900,7 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
-/* global Reflect, Promise, SuppressedError, Symbol */
+/* global Reflect, Promise, SuppressedError, Symbol, Iterator */
 
 var extendStatics = function(d, b) {
   extendStatics = Object.setPrototypeOf ||
@@ -999,8 +1011,8 @@ function __awaiter(thisArg, _arguments, P, generator) {
 }
 
 function __generator(thisArg, body) {
-  var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-  return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+  var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+  return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
   function verb(n) { return function (v) { return step([n, v]); }; }
   function step(op) {
       if (f) throw new TypeError("Generator is already executing.");
@@ -1104,8 +1116,9 @@ function __await(v) {
 function __asyncGenerator(thisArg, _arguments, generator) {
   if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
   var g = generator.apply(thisArg, _arguments || []), i, q = [];
-  return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-  function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+  return i = Object.create((typeof AsyncIterator === "function" ? AsyncIterator : Object).prototype), verb("next"), verb("throw"), verb("return", awaitReturn), i[Symbol.asyncIterator] = function () { return this; }, i;
+  function awaitReturn(f) { return function (v) { return Promise.resolve(v).then(f, reject); }; }
+  function verb(n, f) { if (g[n]) { i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; if (f) i[n] = f(i[n]); } }
   function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
   function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
   function fulfill(value) { resume("next", value); }
@@ -1138,10 +1151,19 @@ var __setModuleDefault = Object.create ? (function(o, v) {
   o["default"] = v;
 };
 
+var ownKeys = function(o) {
+  ownKeys = Object.getOwnPropertyNames || function (o) {
+    var ar = [];
+    for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+    return ar;
+  };
+  return ownKeys(o);
+};
+
 function __importStar(mod) {
   if (mod && mod.__esModule) return mod;
   var result = {};
-  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
   __setModuleDefault(result, mod);
   return result;
 }
@@ -1171,16 +1193,18 @@ function __classPrivateFieldIn(state, receiver) {
 function __addDisposableResource(env, value, async) {
   if (value !== null && value !== void 0) {
     if (typeof value !== "object" && typeof value !== "function") throw new TypeError("Object expected.");
-    var dispose;
+    var dispose, inner;
     if (async) {
-        if (!Symbol.asyncDispose) throw new TypeError("Symbol.asyncDispose is not defined.");
-        dispose = value[Symbol.asyncDispose];
+      if (!Symbol.asyncDispose) throw new TypeError("Symbol.asyncDispose is not defined.");
+      dispose = value[Symbol.asyncDispose];
     }
     if (dispose === void 0) {
-        if (!Symbol.dispose) throw new TypeError("Symbol.dispose is not defined.");
-        dispose = value[Symbol.dispose];
+      if (!Symbol.dispose) throw new TypeError("Symbol.dispose is not defined.");
+      dispose = value[Symbol.dispose];
+      if (async) inner = dispose;
     }
     if (typeof dispose !== "function") throw new TypeError("Object not disposable.");
+    if (inner) dispose = function() { try { inner.call(this); } catch (e) { return Promise.reject(e); } };
     env.stack.push({ value: value, dispose: dispose, async: async });
   }
   else if (async) {
@@ -1199,20 +1223,34 @@ function __disposeResources(env) {
     env.error = env.hasError ? new _SuppressedError(e, env.error, "An error was suppressed during disposal.") : e;
     env.hasError = true;
   }
+  var r, s = 0;
   function next() {
-    while (env.stack.length) {
-      var rec = env.stack.pop();
+    while (r = env.stack.pop()) {
       try {
-        var result = rec.dispose && rec.dispose.call(rec.value);
-        if (rec.async) return Promise.resolve(result).then(next, function(e) { fail(e); return next(); });
+        if (!r.async && s === 1) return s = 0, env.stack.push(r), Promise.resolve().then(next);
+        if (r.dispose) {
+          var result = r.dispose.call(r.value);
+          if (r.async) return s |= 2, Promise.resolve(result).then(next, function(e) { fail(e); return next(); });
+        }
+        else s |= 1;
       }
       catch (e) {
-          fail(e);
+        fail(e);
       }
     }
+    if (s === 1) return env.hasError ? Promise.reject(env.error) : Promise.resolve();
     if (env.hasError) throw env.error;
   }
   return next();
+}
+
+function __rewriteRelativeImportExtension(path, preserveJsx) {
+  if (typeof path === "string" && /^\.\.?\//.test(path)) {
+      return path.replace(/\.(tsx)$|((?:\.d)?)((?:\.[^./]+?)?)\.([cm]?)ts$/i, function (m, tsx, d, ext, cm) {
+          return tsx ? preserveJsx ? ".jsx" : ".js" : d && (!ext || !cm) ? m : (d + ext + "." + cm.toLowerCase() + "js");
+      });
+  }
+  return path;
 }
 
 /* harmony default export */ const tslib_es6 = ({
@@ -1221,6 +1259,10 @@ function __disposeResources(env) {
   __rest,
   __decorate,
   __param,
+  __esDecorate,
+  __runInitializers,
+  __propKey,
+  __setFunctionName,
   __metadata,
   __awaiter,
   __generator,
@@ -1243,9 +1285,10 @@ function __disposeResources(env) {
   __classPrivateFieldIn,
   __addDisposableResource,
   __disposeResources,
+  __rewriteRelativeImportExtension,
 });
 
-;// CONCATENATED MODULE: ./node_modules/lower-case/dist.es2015/index.js
+;// ./node_modules/lower-case/dist.es2015/index.js
 /**
  * Source: ftp://ftp.unicode.org/Public/UCD/latest/ucd/SpecialCasing.txt
  */
@@ -1294,7 +1337,7 @@ function lowerCase(str) {
     return str.toLowerCase();
 }
 
-;// CONCATENATED MODULE: ./node_modules/no-case/dist.es2015/index.js
+;// ./node_modules/no-case/dist.es2015/index.js
 
 // Support camel case ("camelCase" -> "camel Case" and "CAMELCase" -> "CAMEL Case").
 var DEFAULT_SPLIT_REGEXP = [/([a-z0-9])([A-Z])/g, /([A-Z])([A-Z][a-z])/g];
@@ -1326,7 +1369,7 @@ function replace(input, re, value) {
     return re.reduce(function (input, re) { return input.replace(re, value); }, input);
 }
 
-;// CONCATENATED MODULE: ./node_modules/dot-case/dist.es2015/index.js
+;// ./node_modules/dot-case/dist.es2015/index.js
 
 
 function dotCase(input, options) {
@@ -1334,7 +1377,7 @@ function dotCase(input, options) {
     return noCase(input, __assign({ delimiter: "." }, options));
 }
 
-;// CONCATENATED MODULE: ./node_modules/param-case/dist.es2015/index.js
+;// ./node_modules/param-case/dist.es2015/index.js
 
 
 function paramCase(input, options) {
@@ -1342,9 +1385,9 @@ function paramCase(input, options) {
     return dotCase(input, __assign({ delimiter: "-" }, options));
 }
 
-;// CONCATENATED MODULE: external ["wp","escapeHtml"]
+;// external ["wp","escapeHtml"]
 const external_wp_escapeHtml_namespaceObject = window["wp"]["escapeHtml"];
-;// CONCATENATED MODULE: ./node_modules/@wordpress/element/build-module/raw-html.js
+;// ./node_modules/@wordpress/element/build-module/raw-html.js
 /**
  * Internal dependencies
  */
@@ -1387,7 +1430,7 @@ function RawHTML({
   });
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/element/build-module/serialize.js
+;// ./node_modules/@wordpress/element/build-module/serialize.js
 /**
  * Parts of this source were derived and modified from fast-react-render,
  * released under the MIT license.
@@ -1765,7 +1808,7 @@ function renderNativeComponent(type, props, context, legacyContext = {}) {
  * @return {string} Serialized element
  */
 function renderComponent(Component, props, context, legacyContext = {}) {
-  const instance = new ( /** @type {import('react').ComponentClass} */
+  const instance = new (/** @type {import('react').ComponentClass} */
   Component)(props, legacyContext);
   if (typeof
   // Ignore reason: Current prettier reformats parens and mangles type assertion
@@ -1813,7 +1856,7 @@ function renderAttributes(props) {
     }
     let value = getNormalAttributeValue(key, props[key]);
 
-    // If value is not of serializeable type, skip.
+    // If value is not of serializable type, skip.
     if (!ATTRIBUTES_TYPES.has(typeof value)) {
       continue;
     }
@@ -1880,7 +1923,7 @@ function renderStyle(style) {
 }
 /* harmony default export */ const serialize = (renderElement);
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/element/build-module/index.js
+;// ./node_modules/@wordpress/element/build-module/index.js
 
 
 
@@ -1888,8 +1931,6 @@ function renderStyle(style) {
 
 
 
-
-})();
 
 (window.wp = window.wp || {}).element = __webpack_exports__;
 /******/ })()

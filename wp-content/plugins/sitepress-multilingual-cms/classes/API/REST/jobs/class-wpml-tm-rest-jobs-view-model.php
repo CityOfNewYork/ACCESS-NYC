@@ -90,6 +90,7 @@ class WPML_TM_Rest_Jobs_View_Model {
 
 		return [
 			'id'                     => $job->get_rid(),
+			'original_element_id'    => $job->get_original_element_id(),
 			'type'                   => $job->get_type(),
 			'tp_id'                  => $job->get_tp_id(),
 			'status'                 => $job->get_status(),
@@ -169,7 +170,6 @@ class WPML_TM_Rest_Jobs_View_Model {
 	 * @return string
 	 */
 	private function getReviewUrl( WPML_TM_Post_Job_Entity $job, WPML_TM_Jobs_Search_Params $jobs_search_params ) {
-		$translation     = PostTranslations::getInLanguage( $job->get_original_element_id(), $job->get_target_language() );
 		$target_language = $jobs_search_params->get_target_language();
 		$element_type    = $jobs_search_params->get_element_type();
 
@@ -184,6 +184,9 @@ class WPML_TM_Rest_Jobs_View_Model {
 
 		$returnUrl    = admin_url( 'admin.php?page=' . WPML_TM_FOLDER . '/menu/translations-queue.php' . $filterParams );
 
-		return PreviewLink::getWithSpecifiedReturnUrl( $returnUrl, $translation->element_id, $job->get_translate_job_id() );
+		$translation     = PostTranslations::getInLanguage( $job->get_original_element_id(), $job->get_target_language() );
+		$element_id = $translation ? $translation->element_id : 0;
+
+		return PreviewLink::getWithSpecifiedReturnUrl( $returnUrl, $element_id, $job->get_translate_job_id() );
 	}
 }

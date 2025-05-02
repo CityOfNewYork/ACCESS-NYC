@@ -554,13 +554,16 @@ class WPML_Mobile_Detect {
 	 *
 	 * @todo: search in the HTTP headers too.
 	 */
-	function match( $regex, $userAgent = null ) {
+	function match($regex, $userAgent = null) {
+		$regex = str_replace('/', '\/', $regex);
 
-		// Escape the special character which is the delimiter.
-		$regex = str_replace( '/', '\/', $regex );
+		if ( is_string($userAgent) ) {
+			$subject = $userAgent;
+		} else {
+			$subject = $this->userAgent ?? '';
+		}
 
-		return (bool) preg_match( '/' . $regex . '/is', ( ! empty( $userAgent ) ? $userAgent : $this->userAgent ) );
-
+		return (bool) preg_match('/' . $regex . '/is', $subject);
 	}
 
 	/**

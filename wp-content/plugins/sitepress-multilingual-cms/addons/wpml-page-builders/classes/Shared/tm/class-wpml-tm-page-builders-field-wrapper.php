@@ -35,7 +35,7 @@ class WPML_TM_Page_Builders_Field_Wrapper {
 	/**
 	 * WPML_TM_Page_Builders_Field_Wrapper constructor.
 	 *
-	 * @param string $field_slug Field slug.
+	 * @param string|false $field_slug Field slug.
 	 */
 	public function __construct( $field_slug ) {
 		$this->field_slug = $field_slug;
@@ -150,9 +150,9 @@ class WPML_TM_Page_Builders_Field_Wrapper {
 	/**
 	 * Extract string id.
 	 *
-	 * @param string $field_slug Field slug.
+	 * @param string|false $field_slug Field slug.
 	 *
-	 * @return false|string
+	 * @return string|false
 	 */
 	private function extract_string_id( $field_slug ) {
 		$result = false;
@@ -167,9 +167,9 @@ class WPML_TM_Page_Builders_Field_Wrapper {
 	/**
 	 * Extract string package id.
 	 *
-	 * @param string $field_slug Field slug.
+	 * @param string|false $field_slug Field slug.
 	 *
-	 * @return false|string
+	 * @return string|false
 	 */
 	private function extract_string_package_id( $field_slug ) {
 		$result = false;

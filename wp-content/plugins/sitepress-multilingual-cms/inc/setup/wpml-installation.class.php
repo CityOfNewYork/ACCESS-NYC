@@ -359,7 +359,7 @@ class WPML_Installation extends WPML_WPDB_And_SP_User {
 			$this->wpdb->prepare(
 				"
 			INSERT INTO {$this->wpdb->prefix}icl_translations(element_type, element_id, trid, language_code, source_language_code)
-			SELECT CONCAT('post_',post_type), ID, ID, %s, NULL FROM {$this->wpdb->posts} WHERE post_status IN ('draft', 'publish','schedule','future','private', 'pending')
+			SELECT CONCAT('post_',post_type), ID, ID, %s, NULL FROM {$this->wpdb->posts} WHERE post_status IN ('draft', 'publish','schedule','future','private', 'pending', 'trash')
 			",
 				$lang
 			)

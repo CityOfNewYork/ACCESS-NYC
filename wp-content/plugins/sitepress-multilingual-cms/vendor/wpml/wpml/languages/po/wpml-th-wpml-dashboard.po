@@ -1,0 +1,1217 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-04-22T15:22:39+02:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: wpml\n"
+
+msgid "Untranslated strings that I encounter on front-end while logged in"
+msgstr "สตริงที่ไม่ได้แปลที่ฉันพบในส่วนหน้าเว็บขณะที่เข้าสู่ระบบ"
+
+msgid "Untranslated strings that all front-end users encounter"
+msgstr "สตริงที่ไม่ได้แปลที่ผู้ใช้ทุกคนพบในส่วนหน้าเว็บ"
+
+msgid "Disable auto-registration of strings"
+msgstr "ปิดการลงทะเบียนสตริงอัตโนมัติ"
+
+msgid "Plugins"
+msgstr "ปลั๊กอิน"
+
+msgid "Themes"
+msgstr "ธีม"
+
+msgid "WordPress"
+msgstr "WordPress"
+
+msgid "Other"
+msgstr "อื่นๆ"
+
+msgid "Error in fetching default translation batch name"
+msgstr "เกิดข้อผิดพลาดในการดึงชื่อชุดการแปลเริ่มต้น"
+
+msgid "Error in fetching translation editor type."
+msgstr "เกิดข้อผิดพลาดในการดึงประเภทของตัวแก้ไขการแปล."
+
+msgid "Error in fetching untranslated types count"
+msgstr "เกิดข้อผิดพลาดในการดึงจำนวนประเภทที่ไม่ได้แปล"
+
+msgid "Error in fetching remote translation service data."
+msgstr "เกิดข้อผิดพลาดในการดึงข้อมูลบริการแปลระยะไกล."
+
+msgid "An error occurred while sending the translation."
+msgstr "เกิดข้อผิดพลาดขณะส่งการแปล."
+
+msgid "Validation failed"
+msgstr "การตรวจสอบล้มเหลว"
+
+msgid "Please wait until download finishes"
+msgstr "โปรดรอจนกว่าการดาวน์โหลดจะเสร็จสิ้น"
+
+msgid "You need to wait 5 minutes after the last check"
+msgstr "คุณต้องรอ 5 นาทีหลังจากการตรวจสอบครั้งล่าสุด"
+
+msgid "Check status and get translations"
+msgstr "ตรวจสอบสถานะและรับการแปล"
+
+msgid "Status: "
+msgstr "สถานะ: "
+
+msgid "Downloaded jobs: "
+msgstr "งานที่ดาวน์โหลด: "
+
+msgid "Cancelled jobs: "
+msgstr "งานที่ยกเลิก: "
+
+msgid "none of your translation jobs have been completed"
+msgstr "ไม่มีงานแปลของคุณที่เสร็จสมบูรณ์"
+
+msgid "Checking translation jobs status. Please don't close this page!"
+msgstr "กำลังตรวจสอบสถานะงานแปล โปรดอย่าปิดหน้านี้!"
+
+msgid " have been sent to remote translators"
+msgstr " ได้ถูกส่งไปยังนักแปลระยะไกลแล้ว"
+
+msgid " has been sent to remote translators"
+msgstr " ได้ถูกส่งไปยังนักแปลระยะไกลแล้ว"
+
+msgid "Last check: Never"
+msgstr "ตรวจสอบครั้งล่าสุด: ไม่เคย"
+
+msgid "Filtering is disabled to show all selected items. "
+msgstr "การกรองถูกปิดใช้งานเพื่อแสดงรายการที่เลือกทั้งหมด. "
+
+msgid "Apply filters"
+msgstr "ใช้ตัวกรอง"
+
+msgid "%d item selected"
+msgid_plural "%d items selected"
+msgstr[0] "%d รายการที่เลือก"
+msgstr[1] "%d รายการที่เลือก"
+
+msgid "(%d word count)"
+msgstr "(%d จำนวนคำ)"
+
+msgid "%s item not showing."
+msgid_plural "%s items not showing."
+msgstr[0] "%s รายการที่ไม่แสดง."
+msgstr[1] "%s รายการที่ไม่แสดง."
+
+msgid "Show all selected items"
+msgstr "แสดงรายการที่เลือกทั้งหมด"
+
+msgid "Translate your content"
+msgstr "แปลเนื้อหาของคุณ"
+
+msgid "Unselect all"
+msgstr "ยกเลิกการเลือกทั้งหมด"
+
+msgid "Source Language:"
+msgstr "ภาษาต้นฉบับ:"
+
+msgid "translated to:"
+msgstr "แปลเป็น:"
+
+msgid "Filter"
+msgstr "กรอง"
+
+msgid "You are about to change the source language filter from %s to %s"
+msgstr "คุณกำลังจะเปลี่ยนตัวกรองภาษาต้นฉบับจาก %s เป็น %s"
+
+msgid "Updating the source language filter will clear the items you've selected for translation. Are you sure you want to continue?"
+msgstr "การอัปเดตตัวกรองภาษาต้นฉบับจะล้างรายการที่คุณได้เลือกไว้สำหรับการแปล คุณแน่ใจหรือไม่ว่าต้องการดำเนินการต่อ?"
+
+msgid "Change source language"
+msgstr "เปลี่ยนภาษาต้นฉบับ"
+
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+msgid "All Statuses"
+msgstr "ทุกสถานะ"
+
+msgid "All languages"
+msgstr "ทุกภาษา"
+
+msgid "All translation statuses"
+msgstr "ทุกสถานะการแปล"
+
+msgid "Not completed"
+msgstr "ยังไม่เสร็จสมบูรณ์"
+
+msgid "Needs updating"
+msgstr "ต้องการอัปเดต"
+
+msgid "Translation in progress"
+msgstr "กำลังแปล"
+
+msgid "Translation complete"
+msgstr "การแปลเสร็จสมบูรณ์"
+
+msgid "Global Filter"
+msgstr "ตัวกรองทั่วไป"
+
+msgid "Parent:"
+msgstr "หมวดหมู่หลัก:"
+
+msgid "Search parent by title"
+msgstr "ค้นหาหมวดหมู่หลักตามชื่อเรื่อง"
+
+msgid "Search by term title in %s"
+msgstr "ค้นหาตามชื่อคำศัพท์ใน %s"
+
+msgid "All taxonomies"
+msgstr "ทุกอนุกรมวิธาน"
+
+msgid "Loading"
+msgstr "กำลังโหลด"
+
+msgid "Taxonomy Term:"
+msgstr "คำศัพท์อนุกรมวิธาน:"
+
+msgid "Loading terms"
+msgstr "กำลังโหลดคำศัพท์"
+
+msgid "No terms found"
+msgstr "ไม่พบคำศัพท์"
+
+msgid "Filter by:"
+msgstr "กรองตาม:"
+
+msgid "Title"
+msgstr "ชื่อเรื่อง"
+
+msgid "There is an issue with automatic translation that needs your attention."
+msgstr "มีปัญหากับการแปลอัตโนมัติที่ต้องการความสนใจจากคุณ."
+
+msgid "Fix to continue translating automatically"
+msgstr "แก้ไขเพื่อดำเนินการแปลอัตโนมัติต่อไป"
+
+msgid "View"
+msgstr "ดู"
+
+msgid "Edit"
+msgstr "แก้ไข"
+
+msgid "Edit note for the translators"
+msgstr "แก้ไขบันทึกสำหรับนักแปล"
+
+msgid "Add note for the translators"
+msgstr "เพิ่มบันทึกสำหรับนักแปล"
+
+msgid "This page is set to be %1$stranslated manually%2$s using the WordPress Editor"
+msgstr "หน้านี้ถูกตั้งค่าให้%1$sแปลด้วยตนเอง%2$sโดยใช้WordPress Editor"
+
+msgid "(no title)"
+msgstr "(ไม่มีชื่อเรื่อง)"
+
+msgid "Image"
+msgstr "รูปภาพ"
+
+msgid "Date / Status"
+msgstr "วันที่ / สถานะ"
+
+msgid "Word count"
+msgstr "จำนวนคำ"
+
+msgid "Loading items..."
+msgstr "กำลังโหลดรายการ..."
+
+msgid "%1$d %2$s selected"
+msgstr "%1$d %2$s ที่เลือก"
+
+msgid "items"
+msgstr "รายการ"
+
+msgid "Filtering is disabled to show all selected items"
+msgstr "การกรองถูกปิดใช้งานเพื่อแสดงรายการที่เลือกทั้งหมด"
+
+msgid "Apply filter"
+msgstr "ใช้ตัวกรอง"
+
+msgid "%1$d %2$s not showing"
+msgstr "%1$d %2$s ไม่แสดง"
+
+msgid "Show selected items"
+msgstr "แสดงรายการที่เลือก"
+
+msgid " / page"
+msgstr " / หน้า"
+
+msgid "Previous"
+msgstr "ก่อนหน้า"
+
+msgid "Next"
+msgstr "ถัดไป"
+
+msgid "Your site's content is too vast for a single translation batch. Use filters to reduce the selection, then \"select all\"."
+msgstr "เนื้อหาของเว็บไซต์คุณมีมากเกินไปสำหรับชุดการแปลเดียว ใช้ตัวกรองเพื่อลดการเลือก จากนั้น “เลือกทั้งหมด”."
+
+msgid "The current filter captures too much content. Narrow it down to enable \"select all\" for translation."
+msgstr "ตัวกรองปัจจุบันครอบคลุมเนื้อหามากเกินไป จำกัดให้แคบลงเพื่อเปิดใช้งาน “เลือกทั้งหมด” สำหรับการแปล."
+
+msgid "Select All"
+msgstr "เลือกทั้งหมด"
+
+msgid "All %d items matching criteria are selected"
+msgstr "รายการทั้งหมด %d รายการที่ตรงกับเกณฑ์ถูกเลือก"
+
+msgid "All %d items in this section are selected"
+msgstr "รายการทั้งหมด %d ในส่วนนี้ถูกเลือก"
+
+msgid "You have too many items to send for translation at once. Apply a filter to narrow down the items to enable this option."
+msgstr "คุณมีรายการมากเกินไปที่จะส่งไปแปลพร้อมกัน กรุณาใช้ตัวกรองเพื่อจำกัดรายการและเปิดใช้งานตัวเลือกนี้."
+
+msgid "Clear selection"
+msgstr "ล้างการเลือก"
+
+msgid "Select all items that match this search"
+msgstr "เลือกรายการทั้งหมดที่ตรงกับการค้นหานี้"
+
+msgid "Loading..."
+msgstr "กำลังโหลด..."
+
+msgid "Save note"
+msgstr "บันทึกโน้ต"
+
+msgid "The following target languages do not support automatic translation: %s. <a>Map to known languages</a> to enable automatic translation."
+msgstr "ภาษาเป้าหมายต่อไปนี้ไม่รองรับการแปลอัตโนมัติ: %s <a>จับคู่กับภาษาที่รู้จัก</a>เพื่อเปิดใช้งานการแปลอัตโนมัติ."
+
+msgid "The site's default language %s doesn't support automatic translation."
+msgstr "ภาษาเริ่มต้นของเว็บไซต์ %s ไม่รองรับการแปลอัตโนมัติ."
+
+msgid "Some sections are hidden due to current filter settings or because they have no items. <show_all>Show all translation statuses</show_all>"
+msgstr "บางส่วนถูกซ่อนเนื่องจากการตั้งค่าตัวกรองปัจจุบันหรือเพราะไม่มีรายการ <show_all>แสดงสถานะการแปลทั้งหมด</show_all>"
+
+msgid "Step 1"
+msgstr "ขั้นตอนที่ 1"
+
+msgid "Select items for translation"
+msgstr "เลือกรายการสำหรับการแปล"
+
+msgid "Clear filters"
+msgstr "ล้างตัวกรอง"
+
+msgid "strings"
+msgstr "สตริง"
+
+msgid "WPML didn't find any %s matching your criteria."
+msgstr "WPML ไม่พบ %s ที่ตรงกับเกณฑ์ของคุณ."
+
+msgid "You have too many items selected to use this feature. Deselect some of the items to enable it."
+msgstr "คุณเลือกรายการมากเกินไปที่จะใช้คุณสมบัตินี้ ยกเลิกการเลือกรายการบางรายการเพื่อเปิดใช้งาน."
+
+msgid "Show strings in:"
+msgstr "แสดงสตริงใน:"
+
+msgid "All domains"
+msgstr "ทุกโดเมน"
+
+msgid "All sources"
+msgstr "ทุกแหล่งที่มา"
+
+msgid "Frontend (viewed)"
+msgstr "ส่วนหน้า (ที่แสดง)"
+
+msgid "Backend (viewed)"
+msgstr "ส่วนหลัง (ที่แสดง)"
+
+msgid "Unknown"
+msgstr "ไม่ทราบ"
+
+msgid "String"
+msgstr "สตริง"
+
+msgid "All Translation Priorities"
+msgstr "ทุกลำดับความสำคัญการแปล"
+
+msgid "This filter is available only if source is set to \"Frontend\" or \"Backend\"."
+msgstr "ตัวกรองนี้จะใช้ได้เฉพาะเมื่อตั้งค่าแหล่งที่มาเป็น “ฟรอนต์เอนด์” หรือ “แบ็กเอนด์”."
+
+msgid "front-end"
+msgstr "ส่วนหน้า"
+
+msgid "back-end"
+msgstr "ส่วนหลัง"
+
+msgid "viewed"
+msgstr "ที่แสดง"
+
+msgid "Domain"
+msgstr "โดเมน"
+
+msgid "Source"
+msgstr "แหล่งที่มา"
+
+msgid "Type"
+msgstr "ประเภท"
+
+msgid "Strings in the theme and plugins"
+msgstr "ข้อความในธีมและปลั๊กอิน"
+
+msgid "Translate front-end texts you can customize from the WordPress admin like footer text, copyright notices, plugin options and settings, time format, widget texts, and more."
+msgstr "แปลข้อความส่วนหน้าที่คุณสามารถปรับแต่งได้จากส่วนผู้ดูแลระบบ WordPress เช่น ข้อความส่วนท้าย ประกาศลิขสิทธิ์ ตัวเลือกและการตั้งค่าปลั๊กอิน รูปแบบเวลา ข้อความวิดเจ็ต และอื่นๆ."
+
+msgid "Translating Strings From Admin and Settings"
+msgstr "การแปลข้อความจากส่วนผู้ดูแลระบบและการตั้งค่า"
+
+msgid "Translate texts in admin screens"
+msgstr "แปลข้อความในหน้าจอผู้ดูแลระบบ"
+
+msgid "Translate User Meta Information"
+msgstr "แปลข้อมูลเมตาของผู้ใช้"
+
+msgid "Making User Meta Information Translatable"
+msgstr "การทำให้ข้อมูลเมตาของผู้ใช้สามารถแปลได้"
+
+msgid "Translate user profile strings"
+msgstr "แปลข้อความในโปรไฟล์ผู้ใช้"
+
+msgid "You need to visit translations on your site's front-end (<a/>) and WPML will identify all untranslated strings and list them here. "
+msgstr "คุณต้องเข้าชมการแปลบนส่วนหน้าของเว็บไซต์ของคุณ (<a/>) และ WPML จะระบุสตริงที่ยังไม่ได้แปลทั้งหมดและแสดงรายการไว้ที่นี่."
+
+msgid "hide details"
+msgstr "ซ่อนรายละเอียด"
+
+msgid "more details"
+msgstr "รายละเอียดเพิ่มเติม"
+
+msgid "Still can't find the strings you're looking to translate? Add more strings for translation."
+msgstr "ยังหาสตริงที่คุณต้องการแปลไม่พบใช่ไหม? เพิ่มสตริงสำหรับการแปล."
+
+msgid "Translate Everything translates only those strings which are registered in English language"
+msgstr "แปลทุกอย่างจะแปลเฉพาะข้อความที่ลงทะเบียนในภาษาอังกฤษเท่านั้น"
+
+msgid "Most strings from your plugins and theme are in English, so we’re showing them alongside your default language. Use the <b>Source Language</b> filter to view strings in a specific language."
+msgstr "สตริงส่วนใหญ่จากปลั๊กอินและธีมของคุณเป็นภาษาอังกฤษ ดังนั้นเราจึงแสดงพวกมันพร้อมกับภาษาเริ่มต้นของคุณ ใช้ตัวกรอง <b>ภาษาต้นฉบับ</b> เพื่อดูสตริงในภาษาเฉพาะ."
+
+msgid "You’re using <b>%s</b> to cache your site, which may prevent WPML from automatically registering new strings. To fix this, clear your page cache, then visit your translated pages again on the frontend to detect new strings."
+msgstr "คุณกำลังใช้ <b>%s</b> เพื่อแคชเว็บไซต์ของคุณ ซึ่งอาจป้องกันไม่ให้ WPML ลงทะเบียนสตริงใหม่โดยอัตโนมัติ เพื่อแก้ไขปัญหานี้ ให้ล้างแคชหน้าเพจของคุณ จากนั้นเข้าชมหน้าที่แปลแล้วของคุณอีกครั้งที่ส่วนหน้าเพื่อตรวจหาสตริงใหม่."
+
+msgid "WPML can detect strings that appear on the site and list them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here only the strings that actually appear on the site, you need to enable this feature."
+msgstr "WPML สามารถตรวจหาสตริงที่ปรากฏบนเว็บไซต์และแสดงรายการที่นี่ คุณสมบัตินี้ช่วยคุณระบุสตริงที่ปรากฏจริงบนเว็บไซต์และแปลได้ หากต้องการเห็นเฉพาะสตริงที่ปรากฏจริงบนเว็บไซต์ที่นี่ คุณต้องเปิดใช้งานคุณสมบัตินี้."
+
+msgid "WPML detects strings that appear on the site and lists them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here all the strings in the site, you need to disable this feature."
+msgstr "WPML ตรวจหาสตริงที่ปรากฏบนเว็บไซต์และแสดงรายการที่นี่ คุณสมบัตินี้ช่วยคุณระบุสตริงที่ปรากฏจริงบนเว็บไซต์และแปลได้ หากต้องการเห็นสตริงทั้งหมดในเว็บไซต์ที่นี่ คุณต้องปิดใช้งานคุณสมบัตินี้."
+
+msgid "Detect untranslated strings"
+msgstr "ตรวจหาสตริงที่ยังไม่ได้แปล"
+
+msgid "WPML can detect untranslated strings and automatically register them for translation. This happens in real time as you or your visitors browse your website."
+msgstr "WPML สามารถตรวจจับสตริงที่ยังไม่ได้แปลและลงทะเบียนอัตโนมัติเพื่อการแปล สิ่งนี้เกิดขึ้นแบบเรียลไทม์ขณะที่คุณหรือผู้เยี่ยมชมเรียกดูเว็บไซต์ของคุณ."
+
+msgid "Automatically register untranslated strings"
+msgstr "ลงทะเบียนสตริงที่ยังไม่ได้แปลโดยอัตโนมัติ"
+
+msgid "Learn how to use auto-registration"
+msgstr "เรียนรู้วิธีใช้การลงทะเบียนอัตโนมัติ"
+
+msgid "recommended"
+msgstr "แนะนำ"
+
+msgid "Also register strings from the website's back-end"
+msgstr "ลงทะเบียนสตริงจากส่วนหลังเว็บของเว็บไซต์ด้วย"
+
+msgid "Save settings"
+msgstr "บันทึกการตั้งค่า"
+
+msgid "Request failed because of the network error"
+msgstr "คำขอล้มเหลวเนื่องจากข้อผิดพลาดของเครือข่าย"
+
+msgid "Try again"
+msgstr "ลองอีกครั้ง"
+
+msgid "Enabled"
+msgstr "เปิดใช้งาน"
+
+msgid "Disabled"
+msgstr "ปิดการใช้งาน"
+
+msgid "Modify"
+msgstr "แก้ไข"
+
+msgid "You can only translate %1$s from the site's default language (%2$s)."
+msgstr "คุณสามารถแปล %1$s ได้เฉพาะจากภาษาเริ่มต้นของเว็บไซต์ (%2$s) เท่านั้น."
+
+msgid "Leave existing translations as they are"
+msgstr "ปล่อยการแปลที่มีอยู่ไว้ตามเดิม"
+
+msgid "Overwrite existing translations"
+msgstr "เขียนทับการแปลที่มีอยู่"
+
+msgid "Some of the content you want to translate is already translated"
+msgstr "เนื้อหาบางส่วนที่คุณต้องการแปลได้รับการแปลแล้ว"
+
+msgid "What do you want to do with the content that's already translated?"
+msgstr "คุณต้องการทำอย่างไรกับเนื้อหาที่แปลแล้ว?"
+
+msgid "Suggested deadline:"
+msgstr "กำหนดเวลาที่แนะนำ:"
+
+msgid "Set a batch name and deadline"
+msgstr "ตั้งชื่อและกำหนดเวลาสำหรับชุดงาน"
+
+msgid "You can assign a custom name to this batch for easy tracking and suggest a deadline to clarify the priority for translators."
+msgstr "คุณสามารถกำหนดชื่อที่กำหนดเองให้กับชุดงานนี้เพื่อการติดตามที่ง่ายขึ้น และแนะนำกำหนดเวลาเพื่อชี้แจงลำดับความสำคัญสำหรับนักแปล."
+
+msgid "Batch name:"
+msgstr "ชื่อชุดงาน:"
+
+msgid "Default translation engine: "
+msgstr "เครื่องมือแปลภาษาอัตโนมัติเริ่มต้น: "
+
+msgid "Change"
+msgstr "เปลี่ยน"
+
+msgid "Failed to load engines"
+msgstr "โหลดเครื่องมือแปลภาษาอัตโนมัติไม่สำเร็จ"
+
+msgid "Your Automatic Translation Credits"
+msgstr "เครดิตการแปลอัตโนมัติของคุณ"
+
+msgid "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s translator</add_yourself> to the site.<br/> Add yourself as %s translator and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "เพื่อที่จะมอบหมายตัวคุณเองเป็นนักแปล คุณต้อง <add_yourself>เพิ่มตัวคุณเองเป็นนักแปล %s</add_yourself> ให้กับเว็บไซต์ก่อน<br/> เพิ่มตัวคุณเองเป็นนักแปล %s และคลิก <check_again>ตรวจสอบอีกครั้ง</check_again> หรือเลือกตัวเลือกการแปลอื่น."
+
+msgid "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s to %s translator</add_yourself> to the site.<br/> Add yourself as %s to %s translator and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "เพื่อมอบหมายตัวคุณเองเป็นนักแปล คุณต้อง <add_yourself>เพิ่มตัวคุณเองเป็นนักแปล %s เป็น %s</add_yourself> ให้กับเว็บไซต์ก่อน<br/> เพิ่มตัวคุณเองเป็นนักแปล %s เป็น %s และคลิก <check_again>ตรวจสอบอีกครั้ง</check_again> หรือเลือกตัวเลือกการแปลอื่น."
+
+msgid "Checking"
+msgstr "กำลังตรวจสอบ"
+
+msgid "In order to assign a translation service, you first need to <activate_ts>activate a translation service</activate_ts>.<br/>Activate a translation service and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "เพื่อที่จะมอบหมายบริการแปล คุณต้อง <activate_ts>เปิดใช้งานบริการแปล</activate_ts> ก่อน<br/>เปิดใช้งานบริการแปลและคลิก <check_again>ตรวจสอบอีกครั้ง</check_again> หรือเลือกตัวเลือกการแปลอื่น."
+
+msgid " Checking "
+msgstr " กำลังตรวจสอบ "
+
+msgid "In order to translate automatically, you first need to <enable_ate>enable WPML's Advanced Translation Editor</enable_ate>.<br/>Enable the Advanced Translation Editor and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "เพื่อที่จะแปลโดยอัตโนมัติ คุณต้อง <enable_ate>เปิดใช้งานตัวแก้ไขการแปลขั้นสูงของ WPML</enable_ate> ก่อน<br/>เปิดใช้งานตัวแก้ไขการแปลขั้นสูงและคลิก <check_again>ตรวจสอบอีกครั้ง</check_again> หรือเลือกตัวเลือกการแปลอื่น."
+
+msgid "The items you selected were translated with the Classic Translation Editor and cannot be sent for automatic translation."
+msgstr "รายการที่คุณเลือกถูกแปลด้วยตัวแก้ไขการแปลแบบคลาสสิกและไม่สามารถส่งไปแปลอัตโนมัติได้."
+
+msgid "Some of the items you selected were translated with the Classic Translation Editor. These cannot be sent for automatic translation."
+msgstr "รายการบางส่วนที่คุณเลือกถูกแปลด้วยตัวแก้ไขการแปลแบบคลาสสิก รายการเหล่านี้ไม่สามารถส่งไปแปลอัตโนมัติได้."
+
+msgid ""
+"Any existing content (translations) will be overwritten when creating duplicates.\n"
+"When duplicating content, please first duplicate parent pages to maintain the site's hierarchy."
+msgstr "เนื้อหา (การแปล) ที่มีอยู่จะถูกเขียนทับเมื่อสร้างสำเนา
+เมื่อทำสำเนาเนื้อหา โปรดทำสำเนาหน้าหลักก่อนเพื่อรักษาลำดับชั้นของเว็บไซต์."
+
+msgid "Some of the selected content is already being translated. This will cancel any in-progress translations."
+msgstr "เนื้อหาบางส่วนที่เลือกกำลังอยู่ในระหว่างการแปล การดำเนินการนี้จะยกเลิกการแปลที่กำลังดำเนินการอยู่."
+
+msgid "Connection Error. Please wait a minute and reload this page. If the problem continues, please contact WPML support."
+msgstr "ข้อผิดพลาดในการเชื่อมต่อ กรุณารอสักครู่และโหลดหน้านี้ใหม่ หากปัญหายังคงอยู่ กรุณาติดต่อฝ่ายสนับสนุนของ WPML."
+
+msgid "Buy credits"
+msgstr "ซื้อเครดิต"
+
+msgid "You don't have enough credits to translate your content automatically."
+msgstr "คุณมีเครดิตไม่เพียงพอที่จะแปลเนื้อหาของคุณโดยอัตโนมัติ."
+
+msgid "In order to assign to a translator, you first need to <add_translators>add %s translators</add_translators> to the site.<br/> Add %s translators and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "เพื่อที่จะมอบหมายให้นักแปล คุณต้อง <add_translators>เพิ่มนักแปล %s</add_translators> ให้กับเว็บไซต์ก่อน<br/> เพิ่มนักแปล %s และคลิก <check_again>ตรวจสอบอีกครั้ง</check_again> หรือเลือกตัวเลือกการแปลอื่น."
+
+msgid "In order to assign to a translator, you first need to <add_translators>add %s to %s translators</add_translators> to the site.<br/> Add %s to %s translators and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "เพื่อมอบหมายให้นักแปล คุณต้อง <add_translators>เพิ่มนักแปล %s เป็น %s</add_translators> ให้กับเว็บไซต์ก่อน<br/> เพิ่มนักแปล %s เป็น %s และคลิก <check_again>ตรวจสอบอีกครั้ง</check_again> หรือเลือกตัวเลือกการแปลอื่น."
+
+msgid "Your site doesn't have any reviewers for %s. This means that you’re the only person who can review these translations."
+msgstr "เว็บไซต์ของคุณไม่มีผู้ตรวจสอบสำหรับ %s นั่นหมายความว่าคุณเป็นคนเดียวที่สามารถตรวจสอบการแปลเหล่านี้ได้."
+
+msgid "Your site doesn't have any reviewers yet. This means that you’re the only person who can review translations."
+msgstr "เว็บไซต์ของคุณยังไม่มีผู้ตรวจสอบ นั่นหมายความว่าคุณเป็นคนเดียวที่สามารถตรวจสอบการแปลได้."
+
+msgid "If you want other people to review the translations, go to <a>WPML → Translation Management → Translators</a> and add translators. They will be able to both review and translate content for you."
+msgstr "หากคุณต้องการให้คนอื่นตรวจสอบการแปล ไปที่ <a>WPML → การจัดการการแปล → นักแปล</a> และเพิ่มนักแปล พวกเขาจะสามารถทั้งตรวจสอบและแปลเนื้อหาให้คุณได้."
+
+msgid "WPML does not support duplicating strings. Your selection to duplicate strings to %1$s will be ignored if you proceed with the translation."
+msgstr "WPML ไม่รองรับการทำซ้ำสตริง การเลือกทำซ้ำสตริงไปยัง %1$s จะถูกละเว้นหากคุณดำเนินการแปลต่อ."
+
+msgid "WPML does not support duplicating %1$s elements. Your selection to duplicate elements to %2$s will be ignored if you proceed with the translation."
+msgstr "WPML ไม่รองรับการทำซ้ำองค์ประกอบ %1$s การเลือกทำซ้ำองค์ประกอบไปยัง %2$s จะถูกละเว้นหากคุณดำเนินการแปลต่อ."
+
+msgid "WPML does not support duplicating %1$s elements and strings. Your selection to duplicate elements and strings to %2$s will be ignored if you proceed with the translation."
+msgstr "WPML ไม่รองรับการทำซ้ำองค์ประกอบและสตริง %1$s การเลือกทำซ้ำองค์ประกอบและสตริงไปยัง %2$s จะถูกละเว้นหากคุณดำเนินการแปลต่อ."
+
+msgid "WPML does not support duplicating strings."
+msgstr "WPML ไม่รองรับการทำสำเนาสตริง."
+
+msgid "WPML does not support duplicating %1$s elements."
+msgstr "WPML ไม่รองรับการทำซ้ำองค์ประกอบ %1$s."
+
+msgid "WPML does not support duplicating %1$s elements and strings."
+msgstr "WPML ไม่รองรับการทำซ้ำองค์ประกอบและสตริง %1$s."
+
+msgid "Finish setting up %s on your site"
+msgstr "ตั้งค่า %s บนเว็บไซต์ของคุณให้เสร็จสมบูรณ์"
+
+msgid "You need to authenticate %s to send them content for translation.<br/>Visit the <a>Translators tab</a> to finish the setup and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "คุณต้องยืนยันตัวตนกับ %s เพื่อส่งเนื้อหาไปแปล<br/>เยี่ยมชม <a>แท็บนักแปล</a> เพื่อตั้งค่าให้เสร็จสมบูรณ์และคลิก <check_again>ตรวจสอบอีกครั้ง</check_again> หรือเลือกตัวเลือกการแปลอื่น."
+
+msgid "Set Up Translate Everything Automatically"
+msgstr "ตั้งค่าการแปลทุกอย่างโดยอัตโนมัติ"
+
+msgid "WPML will translate your content into %d languages"
+msgstr "WPML จะแปลเนื้อหาของคุณเป็น %d ภาษา"
+
+msgid "Content selected for translation"
+msgstr "เนื้อหาที่เลือกสำหรับการแปล"
+
+msgid "Volume"
+msgstr "ปริมาณ"
+
+msgid "~ %d words"
+msgstr "ประมาณ %d คำ"
+
+msgid "Total"
+msgstr "รวม"
+
+msgid "Sent for translation"
+msgstr "ส่งไปแปลแล้ว"
+
+msgid "Sending for translation failed"
+msgstr "การส่งไปแปลล้มเหลว"
+
+msgid "You selected multiple translation methods for content across different languages:"
+msgstr "คุณได้เลือกวิธีการแปลหลายวิธีสำหรับเนื้อหาในภาษาต่างๆ:"
+
+msgid "Ok"
+msgstr "ตกลง"
+
+msgid "<s>1 item</s> is being translated automatically."
+msgid_plural "<s>%d items</s> are being translated automatically."
+msgstr[0] "<s>1 รายการ</s> กำลังถูกแปลโดยอัตโนมัติ."
+msgstr[1] "<s>%d รายการ</s> กำลังถูกแปลโดยอัตโนมัติ."
+
+msgid "You can track their progress at the top of the page."
+msgstr "คุณสามารถติดตามความคืบหน้าของพวกเขาได้ที่ด้านบนของหน้า."
+
+msgid "From now on, WPML will automatically translate new content on your site."
+msgstr "ตั้งแต่นี้ไป WPML จะแปลเนื้อหาใหม่บนเว็บไซต์ของคุณโดยอัตโนมัติ."
+
+msgid "This number might vary because you enabled the Translate Everything Automatically Mode."
+msgstr "จำนวนนี้อาจแตกต่างกันเนื่องจากคุณเปิดใช้งานโหมดแปลทุกอย่างโดยอัตโนมัติ."
+
+msgid "From now on, WPML will automatically translate your site's content."
+msgstr "ตั้งแต่นี้ไป WPML จะแปลเนื้อหาของเว็บไซต์ของคุณโดยอัตโนมัติ."
+
+msgid "Automatic translations summary"
+msgstr "สรุปการแปลอัตโนมัติ"
+
+msgid "Some of the content that you selected for translation includes fields that are encoded. Translators will not be able to work on this kind of content, so we removed it from the job."
+msgstr "เนื้อหาบางส่วนที่คุณเลือกสำหรับการแปลมีฟิลด์ที่ถูกเข้ารหัส นักแปลจะไม่สามารถทำงานกับเนื้อหาประเภทนี้ได้ ดังนั้นเราจึงนำออกจากงาน."
+
+msgid "To fix this problem, please contact our support team and describe this issue."
+msgstr "เพื่อแก้ไขปัญหานี้ กรุณาติดต่อทีมสนับสนุนของเราและอธิบายปัญหานี้."
+
+msgid "WPML cannot send some fo the content to translation"
+msgstr "WPML ไม่สามารถส่งเนื้อหาบางส่วนไปแปลได้"
+
+msgid "Open support ticket"
+msgstr "เปิดตั๋วสนับสนุน"
+
+msgid "<s>1 item</s> has been successfully assigned to you! To check its status, please go to <s>WPML → Translations</s>. <translations_queue/>"
+msgid_plural "<s>%d items</s> have been successfully assigned to you! For status updates, please go to <s>WPML → Translations</s>. <translations_queue/>"
+msgstr[0] "<s>1 รายการ</s>ได้รับการมอบหมายให้คุณเรียบร้อยแล้ว! หากต้องการตรวจสอบสถานะ โปรดไปที่ <s>WPML → การแปล</s> <translations_queue/>"
+msgstr[1] "<s>%d รายการ</s>ได้รับการมอบหมายให้คุณเรียบร้อยแล้ว! สำหรับการอัปเดตสถานะ โปรดไปที่ <s>WPML → การแปล</s> <translations_queue/>"
+
+msgid "Currently logged in translator summary"
+msgstr "สรุปผู้แปลที่เข้าสู่ระบบในปัจจุบัน"
+
+msgid "Go to Translations"
+msgstr "ไปที่การแปล"
+
+msgid "<s>1 item</s> has been duplicated."
+msgid_plural "<s>%d items</s> have been duplicated."
+msgstr[0] "<s>1 รายการ</s>ได้รับการทำซ้ำแล้ว."
+msgstr[1] "<s>%d รายการ</s>ได้รับการทำซ้ำแล้ว."
+
+msgid "Duplication summary"
+msgstr "สรุปการทำซ้ำ"
+
+msgid "There was a problem sending your content for translation."
+msgstr "เกิดปัญหาในการส่งเนื้อหาของคุณไปแปล."
+
+msgid "Please try again in a few minutes. If the issue persists, please contact our support."
+msgstr "โปรดลองอีกครั้งในอีกสักครู่ หากปัญหายังคงอยู่ โปรดติดต่อฝ่ายสนับสนุนของเรา."
+
+msgid "Some of the selected strings are already registered or translated into %s. Since their source language matches the target language, they cannot be retranslated."
+msgstr "สตริงบางส่วนที่เลือกได้ถูกลงทะเบียนหรือแปลเป็น %s แล้ว เนื่องจากภาษาต้นฉบับตรงกับภาษาเป้าหมาย จึงไม่สามารถแปลซ้ำได้."
+
+msgid "Some of the selected content has already been translated from %s to %s and cannot be re-translated from %s to %s."
+msgstr "เนื้อหาบางส่วนที่เลือกได้ถูกแปลจาก %s เป็น %s แล้วและไม่สามารถแปลซ้ำจาก %s เป็น %s ได้."
+
+msgid "Content already translated"
+msgstr "เนื้อหาได้รับการแปลแล้ว"
+
+msgid "Some content couldn't be sent to translation."
+msgstr "เนื้อหาบางส่วนไม่สามารถส่งไปแปลได้."
+
+msgid "WPML did not create translations for some languages because of the following reasons:"
+msgstr "WPML ไม่ได้สร้างการแปลสำหรับบางภาษาเนื่องจากเหตุผลต่อไปนี้:"
+
+msgid "<s>1 item</s> has been successfully sent to translators!"
+msgid_plural "<s>%d items</s> have been successfully sent to translators!"
+msgstr[0] "<s>1 รายการ</s>ได้ถูกส่งไปยังนักแปลเรียบร้อยแล้ว!"
+msgstr[1] "<s>%d รายการ</s>ได้ถูกส่งไปยังนักแปลเรียบร้อยแล้ว!"
+
+msgid "Local translations summary"
+msgstr "สรุปการแปลในเครื่อง"
+
+msgid "You can check their status in WPML → Translation"
+msgstr "คุณสามารถตรวจสอบสถานะของพวกเขาได้ใน WPML → การแปล"
+
+msgid "Continue to %s"
+msgstr "ดำเนินการต่อไปยัง %s"
+
+msgid "We were unable to send the following batches for professional translation:"
+msgstr "เราไม่สามารถส่งชุดข้อมูลต่อไปนี้ไปแปลแบบมืออาชีพได้:"
+
+msgid "<p><a><s>Contact WPML support for help</s></a></p>"
+msgstr "<p><a><s>ติดต่อฝ่ายสนับสนุนของ WPML เพื่อขอความช่วยเหลือ</s></a></p>"
+
+msgid "Translation Service"
+msgstr "บริการแปล"
+
+msgid "sending for professional translation.."
+msgstr "กำลังส่งไปแปลแบบมืออาชีพ.."
+
+msgid "<s>%d item</s> is being sent for translation to %s. Please continue to their site to start the translation."
+msgid_plural "<s>%d items</s> are being sent for translation to %s. Please continue to their site to start the translation."
+msgstr[0] "<s>%d รายการ</s> กำลังถูกส่งไปแปลที่ %s กรุณาดำเนินการต่อบนเว็บไซต์ของพวกเขาเพื่อเริ่มการแปล."
+msgstr[1] "<s>%d รายการ</s> กำลังถูกส่งไปแปลที่ %s กรุณาดำเนินการต่อบนเว็บไซต์ของพวกเขาเพื่อเริ่มการแปล."
+
+msgid "Translation service translations summary"
+msgstr "สรุปการแปลของบริการแปล"
+
+msgid "One or more assigned translators are invalid. The translator may have been removed or their language permissions changed.<br/> Review your settings on the <translators_page>Translators page</translators_page>."
+msgstr "นักแปลที่ได้รับมอบหมายหนึ่งคนหรือมากกว่าไม่ถูกต้อง นักแปลอาจถูกลบออกหรือสิทธิ์ด้านภาษาของพวกเขาอาจเปลี่ยนแปลง<br/> ตรวจสอบการตั้งค่าของคุณบน <translators_page>หน้านักแปล</translators_page>."
+
+msgid "The selected translation service is no longer valid. It may have been changed, unauthenticated, or deactivated.<br/> Review your settings on the <translators_page>Translators page</translators_page>."
+msgstr "บริการแปลที่เลือกไม่ถูกต้องอีกต่อไป อาจมีการเปลี่ยนแปลง ไม่ได้รับการรับรอง หรือถูกปิดใช้งาน<br/> ตรวจสอบการตั้งค่าของคุณบน <translators_page>หน้านักแปล</translators_page>."
+
+msgid "Currently selected translation editor doesn't support automatic translation. You must enable the Advanced Translation Editor to send content for automatic translation.<br/> Check your settings on the <wpml_settings>WPML settings page</wpml_settings>."
+msgstr "ตัวแก้ไขการแปลที่เลือกในปัจจุบันไม่รองรับการแปลอัตโนมัติ คุณต้องเปิดใช้งานตัวแก้ไขการแปลขั้นสูงเพื่อส่งเนื้อหาสำหรับการแปลอัตโนมัติ<br/> ตรวจสอบการตั้งค่าของคุณที่ <wpml_settings>หน้าการตั้งค่า WPML</wpml_settings>."
+
+msgid "Validation error happened during send to translation."
+msgstr "เกิดข้อผิดพลาดในการตรวจสอบระหว่างการส่งไปแปล."
+
+msgid "Sending for translation"
+msgstr "กำลังส่งเพื่อแปล"
+
+msgid "Translate and Duplicate"
+msgstr "แปลและทำซ้ำ"
+
+msgid "Duplicate"
+msgstr "ทำซ้ำ"
+
+msgid "Translate"
+msgstr "แปล"
+
+msgid "Selected content is already translated"
+msgstr "เนื้อหาที่เลือกได้รับการแปลแล้ว"
+
+msgid "Please select a review option"
+msgstr "โปรดเลือกตัวเลือกการตรวจสอบ"
+
+msgid "Assign local translator or choose another option"
+msgstr "มอบหมายนักแปลในเครื่องหรือเลือกตัวเลือกอื่น"
+
+msgid "Assign yourself or choose another option"
+msgstr "มอบหมายให้ตัวคุณเองหรือเลือกตัวเลือกอื่น"
+
+msgid "Activate translation service or choose another option"
+msgstr "เปิดใช้งานบริการแปลหรือเลือกตัวเลือกอื่น"
+
+msgid "Activate ATE or choose another option"
+msgstr "เปิดใช้งาน ATE หรือเลือกตัวเลือกอื่น"
+
+msgid "Authenticate translation service or choose another option"
+msgstr "ยืนยันตัวตนบริการแปลหรือเลือกตัวเลือกอื่น"
+
+msgid "Please don't close this page or refresh it, as doing so will cancel the translation process."
+msgstr "โปรดอย่าปิดหรือรีเฟรชหน้านี้ เนื่องจากการทำเช่นนั้นจะยกเลิกกระบวนการแปล."
+
+msgid "<s>%s</s> cannot process more than <s>%d</s> jobs in a single batch. WPML will automatically split your jobs into separate batches to ensure an error-free delivery to <s>%s</s>. <br/><br/> Do you want to proceed?"
+msgstr "<s>%s</s> ไม่สามารถประมวลผลงานมากกว่า <s>%d</s> งานในชุดเดียวได้ WPML จะแบ่งงานของคุณเป็นชุดย่อยโดยอัตโนมัติเพื่อให้แน่ใจว่าจะส่งไปยัง <s>%s</s> โดยไม่มีข้อผิดพลาด <br/><br/> คุณต้องการดำเนินการต่อหรือไม่?"
+
+msgid "WPML will send jobs to %s in separate batches"
+msgstr "WPML จะส่งงานไปยัง %s เป็นชุดย่อยแยกกัน"
+
+msgid "Yes, send jobs in separate batches"
+msgstr "ใช่ ส่งงานเป็นชุดย่อยแยกกัน"
+
+msgid "No, I will split jobs myself"
+msgstr "ไม่ ฉันจะแบ่งงานเอง"
+
+msgid "This will translate only your future content"
+msgstr "นี่จะแปลเฉพาะเนื้อหาในอนาคตของคุณ"
+
+msgid "This will translate your entire site"
+msgstr "นี่จะแปลทั้งเว็บไซต์ของคุณ"
+
+msgid "Translate everything automatically from now on, without asking me."
+msgstr "แปลทุกอย่างโดยอัตโนมัติตั้งแต่นี้เป็นต้นไป โดยไม่ต้องถามฉัน."
+
+msgid "What content do you want to translate?"
+msgstr "คุณต้องการแปลเนื้อหาใด?"
+
+msgid "Translate my entire site"
+msgstr "แปลทั้งเว็บไซต์ของฉัน"
+
+msgid "WPML will translate all of your site's content, including:"
+msgstr "WPML จะแปลเนื้อหาทั้งหมดของเว็บไซต์คุณ รวมถึง:"
+
+msgid "Any content that already exists but hasn't been translated yet"
+msgstr "เนื้อหาที่มีอยู่แล้วแต่ยังไม่ได้รับการแปล"
+
+msgid "All new content you create in the future"
+msgstr "เนื้อหาใหม่ทั้งหมดที่คุณสร้างในอนาคต"
+
+msgid "Hide what WPML will translate now"
+msgstr "ซ่อนสิ่งที่ WPML จะแปลตอนนี้"
+
+msgid "See what WPML will translate now"
+msgstr "ดูสิ่งที่ WPML จะแปลตอนนี้"
+
+msgid "Translate only future content"
+msgstr "แปลเฉพาะเนื้อหาในอนาคต"
+
+msgid "WPML will translate only the content you create after enabling this translation mode."
+msgstr "WPML จะแปลเฉพาะเนื้อหาที่คุณสร้างหลังจากเปิดใช้งานโหมดการแปลนี้."
+
+msgid "Existing untranslated content on your side will not be translated."
+msgstr "เนื้อหาที่มีอยู่แล้วแต่ยังไม่ได้แปลในเว็บไซต์ของคุณจะไม่ถูกแปล."
+
+msgid "Existing content"
+msgstr "เนื้อหาที่มีอยู่"
+
+msgid "You selected to translate strings that are in %s. Only these strings will be translated to %s."
+msgstr "คุณเลือกที่จะแปลสตริงที่อยู่ใน %s เฉพาะสตริงเหล่านี้เท่านั้นที่จะถูกแปลเป็น %s."
+
+msgid "You selected to translate strings that are in %s and %s. Only these strings will be translated to %s."
+msgstr "คุณเลือกที่จะแปลสตริงที่อยู่ใน %s และ %s เฉพาะสตริงเหล่านี้เท่านั้นที่จะถูกแปลเป็น %s."
+
+msgid "Source language"
+msgstr "ภาษาต้นฉบับ"
+
+msgid "Target language"
+msgstr "ภาษาเป้าหมาย"
+
+msgid "Translation Method"
+msgstr "วิธีการแปล"
+
+msgid "Translation service additional options"
+msgstr "ตัวเลือกเพิ่มเติมของบริการแปล"
+
+msgid "Refresh"
+msgstr "รีเฟรช"
+
+msgid "Fetching translation service data..."
+msgstr "กำลังดึงข้อมูลบริการแปล..."
+
+msgid "-"
+msgstr "-"
+
+msgid "Translate automatically"
+msgstr "แปลอัตโนมัติ"
+
+msgid "Translate myself"
+msgstr "แปลด้วยตัวเอง"
+
+msgid "Assign a translator"
+msgstr "มอบหมายนักแปล"
+
+msgid "Assign translation service"
+msgstr "มอบหมายบริการแปล"
+
+msgid "Do nothing"
+msgstr "ไม่ต้องทำอะไร"
+
+msgid "Please choose"
+msgstr "โปรดเลือก"
+
+msgid "Choose a translator"
+msgstr "เลือกนักแปล"
+
+msgid "First available"
+msgstr "คนแรกที่ว่าง"
+
+msgid "(Me)"
+msgstr "(ฉัน)"
+
+msgid "Translation controls"
+msgstr "การควบคุมการแปล"
+
+msgid "Step 2"
+msgstr "ขั้นตอนที่ 2"
+
+msgid "Get More Features with WPML's Advanced Translation Editor"
+msgstr "รับคุณสมบัติเพิ่มเติมด้วยตัวแก้ไขการแปลขั้นสูงของ WPML"
+
+msgid "Close banner"
+msgstr "ปิดแบนเนอร์"
+
+msgid "You're using the Classic Translation Editor, an old legacy tool, and missing out on the many features and efficiency of our Advanced Translation Editor:"
+msgstr "คุณกำลังใช้ตัวแก้ไขการแปลแบบคลาสสิก ซึ่งเป็นเครื่องมือเก่าที่ล้าสมัย และกำลังพลาดคุณสมบัติและประสิทธิภาพมากมายของตัวแก้ไขการแปลขั้นสูงของเรา:"
+
+msgid "Translation Memory"
+msgstr "หน่วยความจำการแปล"
+
+msgid "HTML Protection"
+msgstr "การป้องกัน HTML"
+
+msgid "Glossary"
+msgstr "อภิธานศัพท์"
+
+msgid "Spellchecker"
+msgstr "ตัวตรวจการสะกดคำ"
+
+msgid "AI Assistant"
+msgstr "ผู้ช่วย AI"
+
+msgid "Automatic Translation"
+msgstr "การแปลอัตโนมัติ"
+
+msgid "Switch now for a faster, more convenient, and reliable translation experience."
+msgstr "เปลี่ยนตอนนี้เพื่อประสบการณ์การแปลที่เร็วขึ้น สะดวกขึ้น และน่าเชื่อถือมากขึ้น."
+
+msgid "Switch Now"
+msgstr "เปลี่ยนตอนนี้"
+
+msgid "Learn More"
+msgstr "เรียนรู้เพิ่มเติม"
+
+msgid "<a><s>Read more about automatic translation credits</s></a>"
+msgstr "<a><s>อ่านเพิ่มเติมเกี่ยวกับเครดิตการแปลอัตโนมัติ</s></a>"
+
+msgid "I understand that automatic translation uses credits"
+msgstr "ฉันเข้าใจว่าการแปลอัตโนมัติใช้เครดิต"
+
+msgid "Translate Everything Automatically - credit wizard error"
+msgstr "แปลทุกอย่างโดยอัตโนมัติ - ข้อผิดพลาดตัวช่วยสร้างเครดิต"
+
+msgid "There was an error when loading the credit wizard."
+msgstr "เกิดข้อผิดพลาดขณะโหลดตัวช่วยสร้างเครดิต."
+
+msgid "Translate Everything Automatically - no credits"
+msgstr "แปลทุกอย่างโดยอัตโนมัติ - ไม่มีเครดิต"
+
+msgid "Start Translate Everything Automatically"
+msgstr "เริ่มแปลทุกอย่างโดยอัตโนมัติ"
+
+msgid "Continue"
+msgstr "ดำเนินการต่อ"
+
+msgid "Go back"
+msgstr "กลับไป"
+
+msgid "You can start using Translate Everything Automatically after sending some content for translation. We recommend that you review these translations and make sure that they are good before translating your entire site's content."
+msgstr "คุณสามารถเริ่มใช้การแปลทุกอย่างโดยอัตโนมัติหลังจากส่งเนื้อหาบางส่วนไปแปล เราแนะนำให้คุณตรวจสอบการแปลเหล่านี้และตรวจสอบให้แน่ใจว่าดีก่อนที่จะแปลเนื้อหาทั้งหมดของเว็บไซต์ของคุณ."
+
+msgid "Translate Everything Automatically - disabled"
+msgstr "แปลทุกอย่างโดยอัตโนมัติ - ปิดใช้งาน"
+
+msgid "Translate Everything Automatically"
+msgstr "แปลทุกอย่างโดยอัตโนมัติ"
+
+msgid "Automatically translate your entire site, but only from %s to %s."
+msgstr "แปลทั้งเว็บไซต์ของคุณโดยอัตโนมัติ แต่เฉพาะจาก %s เป็น %s."
+
+msgid "Translate Everything Automatically - pausing"
+msgstr "แปลทุกอย่างโดยอัตโนมัติ - กำลังหยุดชั่วคราว"
+
+msgid "Translate Everything Automatically is pausing"
+msgstr "กำลังหยุดชั่วคราวการแปลทุกอย่างโดยอัตโนมัติ"
+
+msgid "Translate Everything Automatically - paused"
+msgstr "แปลทุกอย่างโดยอัตโนมัติ - หยุดชั่วคราว"
+
+msgid "%d translation left in the queue. Preparing more content for translation."
+msgid_plural "%d translations left in the queue. Preparing more content for translation."
+msgstr[0] "เหลือการแปล %d รายการในคิว กำลังเตรียมเนื้อหาเพิ่มเติมสำหรับการแปล."
+msgstr[1] "เหลือการแปล %d รายการในคิว กำลังเตรียมเนื้อหาเพิ่มเติมสำหรับการแปล."
+
+msgid "Preparing content for translation..."
+msgstr "กำลังเตรียมเนื้อหาสำหรับการแปล..."
+
+msgid "%d translation left in the queue..."
+msgid_plural "%d translations left in the queue..."
+msgstr[0] "เหลือการแปล %d รายการในคิว..."
+msgstr[1] "เหลือการแปล %d รายการในคิว..."
+
+msgid "Translate Everything Automatically has finished translating your content. There are no pending translations in the queue."
+msgstr "การแปลทั้งหมดโดยอัตโนมัติได้แปลเนื้อหาของคุณเสร็จสิ้นแล้ว ไม่มีการแปลที่รอดำเนินการในคิว."
+
+msgid "Some items were translated using the Classic Translation Editor and cannot be sent for automatic translation. Please select these items and choose the option to translate them yourself."
+msgstr "บางรายการถูกแปลโดยใช้ตัวแก้ไขการแปลแบบคลาสสิกและไม่สามารถส่งไปแปลอัตโนมัติได้ โปรดเลือกรายการเหล่านี้และเลือกตัวเลือกในการแปลด้วยตัวเอง."
+
+msgid "Translate Everything Automatically - enabled"
+msgstr "เปิดใช้งานการแปลทุกอย่างโดยอัตโนมัติ"
+
+msgid "Translate Everything Automatically is enabled"
+msgstr "เปิดใช้งานการแปลทุกอย่างโดยอัตโนมัติแล้ว"
+
+msgid "As you create new content or edit existing content, WPML will automatically translate it, but only from %s to %s."
+msgstr "เมื่อคุณสร้างเนื้อหาใหม่หรือแก้ไขเนื้อหาที่มีอยู่ WPML จะแปลโดยอัตโนมัติ แต่เฉพาะจาก %s เป็น %s."
+
+msgid "You have <s>%s</s> prepaid translation credits in your wpml.org account. Assign these credits to your site to start using automatic translation"
+msgstr "คุณมีเครดิตการแปลแบบชำระล่วงหน้า <s>%s</s> ในบัญชี wpml.org ของคุณ กำหนดเครดิตเหล่านี้ให้กับไซต์ของคุณเพื่อเริ่มใช้การแปลอัตโนมัติ"
+
+msgid "Translation not running... there is an issue that needs your attention. Fix it to continue."
+msgstr "การแปลไม่ทำงาน... มีปัญหาที่ต้องการความสนใจจากคุณ แก้ไขเพื่อดำเนินการต่อ."
+
+msgid "Assign credits now"
+msgstr "มอบเครดิตตอนนี้"
+
+msgid "Fix now"
+msgstr "แก้ไขตอนนี้"
+
+msgid "Translate Everything Automatically is stopped"
+msgstr "การแปลทุกอย่างโดยอัตโนมัติหยุดทำงาน"
+
+msgid "Out of Credits for Automatic Translation"
+msgstr "เครดิตสำหรับการแปลอัตโนมัติหมดแล้ว"
+
+msgid "Automatic translations completed"
+msgstr "การแปลอัตโนมัติเสร็จสมบูรณ์"
+
+msgid "<s>1 translation</s> has been successfully translated automatically"
+msgid_plural "<s>%d translations</s> have been successfully translated automatically"
+msgstr[0] "<s>1 การแปล</s>ได้รับการแปลโดยอัตโนมัติเรียบร้อยแล้ว"
+msgstr[1] "<s>%d การแปล</s>ได้รับการแปลโดยอัตโนมัติเรียบร้อยแล้ว"
+
+msgid "Automatic jobs in progress"
+msgstr "งานอัตโนมัติกำลังดำเนินการ"
+
+msgid "<s>%d automatic translation</s> is in progress"
+msgid_plural "<s>%d automatic translations</s> are in progress"
+msgstr[0] "<s>%d การแปลอัตโนมัติ</s>กำลังดำเนินการ"
+msgstr[1] "<s>%d การแปลอัตโนมัติ</s>กำลังดำเนินการ"
+
+msgid "Your default language, %s, must be mapped to a supported language in order to use automatic translation"
+msgstr "ภาษาเริ่มต้นของคุณ %s ต้องถูกจับคู่กับภาษาที่รองรับเพื่อใช้การแปลอัตโนมัติ"
+
+msgid "Map the language"
+msgstr "จับคู่ภาษา"
+
+msgid "%d translations "
+msgstr "%d การแปล"
+
+msgid "%d translation "
+msgstr "%d การแปล"
+
+msgid "this includes translations from Translate Everything Automatically"
+msgstr "รวมถึงการแปลจากการแปลทุกอย่างโดยอัตโนมัติ"
+
+msgid "are waiting for your review"
+msgstr "กำลังรอการตรวจสอบของคุณ"
+
+msgid "is waiting for your review"
+msgstr "กำลังรอการตรวจสอบของคุณ"
+
+msgid "Review Translations"
+msgstr "ตรวจสอบการแปล"
+
+msgid "Translate existing content"
+msgstr "แปลเนื้อหาที่มีอยู่"
+
+msgid "Translate now"
+msgstr "แปลตอนนี้"
+
+msgid "Starting with version 4.7, WPML will also automatically translate texts (strings) coming from %s."
+msgstr "เริ่มตั้งแต่เวอร์ชัน 4.7 WPML จะแปลข้อความ (สตริง) ที่มาจาก %s โดยอัตโนมัติด้วย."
+
+msgid "WPML will not translate existing texts of this type but any new ones you create will be automatically translated. If you prefer, you can <button />."
+msgstr "WPML จะไม่แปลข้อความที่มีอยู่ของประเภทนี้ แต่ข้อความใหม่ที่คุณสร้างจะถูกแปลโดยอัตโนมัติ หากคุณต้องการ คุณสามารถ <button />."
+
+msgid "Starting with version 4.7, WPML will also automatically translate:"
+msgstr "เริ่มตั้งแต่เวอร์ชัน 4.7 WPML จะแปลโดยอัตโนมัติด้วย:"
+
+msgid "Content set to \"use translation if available or fallback to default language\": %s."
+msgstr "เนื้อหาที่ตั้งค่าให้ “ใช้การแปลหากมีหรือใช้ภาษาเริ่มต้นถ้าไม่มี”: %s."
+
+msgid "Texts (strings) coming from: %s."
+msgstr "ข้อความ (สตริง) ที่มาจาก: %s."
+
+msgid "WPML will not translate existing content for these post types and texts but any new content you create will be automatically translated. If you prefer, you can start <button />."
+msgstr "WPML จะไม่แปลเนื้อหาที่มีอยู่สำหรับประเภทโพสต์และข้อความเหล่านี้ แต่เนื้อหาใหม่ที่คุณสร้างจะถูกแปลโดยอัตโนมัติ หากคุณต้องการ คุณสามารถเริ่ม <button />."
+
+msgid "WPML will not translate existing content for these post types but any new content you create will be automatically translated. If you prefer, you can start <button />."
+msgstr "WPML จะไม่แปลเนื้อหาที่มีอยู่สำหรับประเภทโพสต์เหล่านี้ แต่เนื้อหาใหม่ที่คุณสร้างจะถูกแปลโดยอัตโนมัติ หากคุณต้องการ คุณสามารถเริ่ม <button />."
+
+msgid "start translating existing content now"
+msgstr "เริ่มแปลเนื้อหาที่มีอยู่ตอนนี้"
+
+msgid "The following target languages do not support automatic translations: %s"
+msgstr "ภาษาเป้าหมายต่อไปนี้ไม่รองรับการแปลอัตโนมัติ: %s"
+
+msgid "To enable automatic translation map them to known languages."
+msgstr "เพื่อเปิดใช้การแปลอัตโนมัติ โปรดจับคู่กับภาษาที่รู้จัก."
+
+msgid "Map to known languages"
+msgstr "จับคู่กับภาษาที่รู้จัก"
+
+msgid "Translation status"
+msgstr "สถานะการแปล"
+
+msgid "Default language does not support automatic translations."
+msgstr "ภาษาเริ่มต้นไม่รองรับการแปลอัตโนมัติ."
+
+msgid "You must enable ATE to activate Translate Everything Automatically."
+msgstr "คุณต้องเปิดใช้งาน ATE เพื่อเปิดใช้งานการแปลทุกอย่างโดยอัตโนมัติ."
+
+msgid ""
+"This item needs an update but cannot be translated automatically because it was manually translated.\n"
+"Please, select the item and send for manual translation."
+msgstr "รายการนี้ต้องการการอัปเดตแต่ไม่สามารถแปลโดยอัตโนมัติได้เนื่องจากถูกแปลด้วยตนเอง
+โปรดเลือกรายการและส่งไปแปลด้วยตนเอง."
+
+msgid "This item needs update. Please, select the item and send for translation."
+msgstr "รายการนี้ต้องการการอัปเดต โปรดเลือกรายการและส่งไปแปล."
+
+msgid "Translations completed with the Classic Translation Editor cannot be sent for automatic translation"
+msgstr "การแปลที่เสร็จสมบูรณ์ด้วยตัวแก้ไขการแปลแบบคลาสสิกไม่สามารถส่งไปแปลอัตโนมัติได้"
+
+msgid "automatic translation"
+msgstr "การแปลอัตโนมัติ"
+
+msgid "unassigned"
+msgstr "ยังไม่ได้มอบหมาย"
+
+msgid "not translated"
+msgstr "ยังไม่ได้แปล"
+
+msgid "waiting for translator"
+msgstr "รอนักแปล"
+
+msgid "in progress"
+msgstr "กำลังดำเนินการ"
+
+msgid "needs update"
+msgstr "ต้องการการอัปเดต"
+
+msgid "duplicate"
+msgstr "ซ้ำ"
+
+msgid "complete"
+msgstr "เสร็จสมบูรณ์"
+
+msgid "needs review"
+msgstr "ต้องการการตรวจสอบ"
+
+msgid "preparing for translation"
+msgstr "กำลังเตรียมการแปล"
+
+msgid "needs attention"
+msgstr "ต้องการความสนใจ"
+
+msgid "%1$s: %2$s%3$s"
+msgstr "%1$s: %2$s%3$s"
+
+msgid "Could not fetch engines data"
+msgstr "ไม่สามารถดึงข้อมูลเครื่องมือแปลภาษาอัตโนมัติได้"
+
+msgid "Error in fetching currently logged in translator"
+msgstr "เกิดข้อผิดพลาดในการดึงข้อมูลนักแปลที่เข้าสู่ระบบในปัจจุบัน"
+
+msgid "Error in fetching local translators"
+msgstr "เกิดข้อผิดพลาดในการดึงข้อมูลนักแปลในพื้นที่"
+
+msgid "Published"
+msgstr "เผยแพร่แล้ว"
+
+msgid "Draft"
+msgstr "ฉบับร่าง"
+
+msgid "Trash"
+msgstr "ถังขยะ"
+
+msgid "Pending"
+msgstr "รอดำเนินการ"
+
+msgid "Private"
+msgstr "ส่วนตัว"
+
+msgid "Future"
+msgstr "กำหนดเวลา"
+
+msgid "Auto Draft"
+msgstr "ฉบับร่างอัตโนมัติ"
+
+msgid "External"
+msgstr "ภายนอก"
+
+msgid "Collapse"
+msgstr "ย่อ"
+
+msgid "Expand"
+msgstr "ขยาย"
+
+msgid "Close modal"
+msgstr "ปิดหน้าต่างโมดอล"
+
+msgid "Select an item"
+msgstr "เลือกรายการ"
+
+msgid "Search"
+msgstr "ค้นหา"
+
+msgid "No items found"
+msgstr "ไม่พบรายการ"
+
+msgid "OFF"
+msgstr "ปิด"
+
+msgid "ON"
+msgstr "เปิด"
+
+msgid "%1$s Flag"
+msgstr "%1$s ธง"
+
+msgid "What would you like to do after WPML finishes translating your content automatically?"
+msgstr "คุณต้องการทำอะไรหลังจาก WPML เสร็จสิ้นการแปลเนื้อหาของคุณโดยอัตโนมัติ?"
+
+msgid "Wait for review"
+msgstr "รอการตรวจสอบ"
+
+msgid "Recommended with DeepL, Google and Microsoft"
+msgstr "แนะนำสำหรับ DeepL, Google และ Microsoft"
+
+msgid "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process."
+msgstr "DeepL, Google และ Microsoft ให้บริการแปลที่ยอดเยี่ยม แต่เราแนะนำให้มีการตรวจสอบโดยมนุษย์เพื่อยืนยันว่าถูกต้อง WPML AI ให้บริการการแปลที่ดีกว่ามนุษย์ที่เข้าใจบริบท ดังนั้นคุณจึงสามารถข้ามขั้นตอนการตรวจสอบได้อย่างมั่นใจ."
+
+msgid "WPML keeps translations unpublished, so you can review them first."
+msgstr "WPML เก็บการแปลไว้โดยไม่เผยแพร่ เพื่อให้คุณสามารถตรวจสอบก่อน."
+
+msgid "Your translators review and approve translations before publishing."
+msgstr "นักแปลของคุณตรวจสอบและอนุมัติการแปลก่อนเผยแพร่."
+
+msgid "Publish and mark for review"
+msgstr "เผยแพร่และทำเครื่องหมายเพื่อตรวจสอบ"
+
+msgid "WPML publishes translations immediately but flags them for you to check at your convenience."
+msgstr "WPML เผยแพร่การแปลทันทีแต่ทำเครื่องหมายไว้ให้คุณตรวจสอบเมื่อสะดวก."
+
+msgid "WPML publishes translations immediately but flags them for translators to review later."
+msgstr "WPML เผยแพร่การแปลทันที แต่ทำเครื่องหมายให้นักแปลตรวจสอบในภายหลัง."
+
+msgid "Publish without review"
+msgstr "เผยแพร่โดยไม่ต้องตรวจสอบ"
+
+msgid "Recommended with WPML AI"
+msgstr "แนะนำสำหรับ WPML AI"
+
+msgid "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy."
+msgstr "WPML AI ให้การแปลที่ดีกว่ามนุษย์ซึ่งแทบไม่ต้องปรับปรุง ดังนั้นคุณจึงสามารถข้ามขั้นตอนการตรวจสอบได้อย่างมั่นใจ สำหรับเครื่องมือแปลอื่นๆ แนะนำให้มีการตรวจสอบโดยมนุษย์เพื่อยืนยันความถูกต้อง."
+
+msgid "WPML publishes translations immediately, skipping the review process."
+msgstr "WPML เผยแพร่การแปลทันทีโดยข้ามกระบวนการตรวจสอบ."

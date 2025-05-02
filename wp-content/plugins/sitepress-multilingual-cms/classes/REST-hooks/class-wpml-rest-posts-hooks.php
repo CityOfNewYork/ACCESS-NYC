@@ -163,15 +163,21 @@ class WPML_REST_Posts_Hooks implements IWPML_Action {
 	 * @return WP_HTTP_Response|WP_Error
 	 */
 	public function reload_wpml_post_translation( $response, array $handler, WP_REST_Request $request ) {
-		if ( ! is_wp_error( $response ) && $this->is_saving_reusable_block( $request ) ) {
+		if ( ! is_wp_error( $response ) && $this->isRestSavingBlockResources( $request ) ) {
 			wpml_load_post_translation( is_admin(), $this->sitepress->get_settings() );
 		}
 
 		return $response;
 	}
 
-	private function is_saving_reusable_block( WP_REST_Request $request ) {
-		return in_array( $request->get_method(), array( 'POST', 'PUT', 'PATCH' ) )
-		       && preg_match( '#\/wp\/v2\/blocks(?:\/\d+)*#', $request->get_route() );
+	private function isRestSavingBlockResources( WP_REST_Request $request ) {
+		$methods = array( 'POST', 'PUT', 'PATCH' );
+		$route = $request->get_route();
+		// Create a regex that matches endpoints for:
+		// - reusable blocks,
+		// - block templates, and
+		// - template parts.
+		$pattern = '#\/wp\/v2\/(?:blocks|templates|template-parts)(?:\/\d+)*#';
+		return in_array( $request->get_method(), $methods ) && preg_match( $pattern, $route );
 	}
 }

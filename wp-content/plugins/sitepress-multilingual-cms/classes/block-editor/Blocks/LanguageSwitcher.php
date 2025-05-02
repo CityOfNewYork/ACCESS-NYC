@@ -8,6 +8,7 @@ use WPML\FP\Lst;
 use WPML\FP\Obj;
 use WPML\FP\Relation;
 use WPML\LIB\WP\Hooks;
+use WPML_Block_Editor_Helper;
 use function WPML\Container\make;
 use function WPML\FP\spreadArgs;
 use WPML\BlockEditor\Blocks\LanguageSwitcher\Render;
@@ -45,8 +46,8 @@ class LanguageSwitcher {
 		];
 
 		register_block_type( self::BLOCK_LANGUAGE_SWITCHER, $blockSettings );
-	}
 
+	}
 	private function registerNavigationLanguageSwitcherBlock() {
 		$blockSettings = [
 			'render_callback' => [ $this->render, 'render_block' ],

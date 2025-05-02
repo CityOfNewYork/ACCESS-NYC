@@ -70,6 +70,7 @@ __webpack_require__.d(__webpack_exports__, {
   isNumberInput: () => (/* reexport */ isNumberInput),
   isPhrasingContent: () => (/* reexport */ isPhrasingContent),
   isRTL: () => (/* reexport */ isRTL),
+  isSelectionForward: () => (/* reexport */ isSelectionForward),
   isTextContent: () => (/* reexport */ isTextContent),
   isTextField: () => (/* reexport */ isTextField),
   isVerticalEdge: () => (/* reexport */ isVerticalEdge),
@@ -101,7 +102,7 @@ __webpack_require__.d(tabbable_namespaceObject, {
   isTabbableIndex: () => (isTabbableIndex)
 });
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/focusable.js
+;// ./node_modules/@wordpress/dom/build-module/focusable.js
 /**
  * References:
  *
@@ -186,9 +187,7 @@ function isValidFocusableArea(element) {
 function find(context, {
   sequential = false
 } = {}) {
-  /* eslint-disable jsdoc/no-undefined-types */
   /** @type {NodeListOf<HTMLElement>} */
-  /* eslint-enable jsdoc/no-undefined-types */
   const elements = context.querySelectorAll(buildSelector(sequential));
   return Array.from(elements).filter(element => {
     if (!isVisible(element)) {
@@ -198,13 +197,13 @@ function find(context, {
       nodeName
     } = element;
     if ('AREA' === nodeName) {
-      return isValidFocusableArea( /** @type {HTMLAreaElement} */element);
+      return isValidFocusableArea(/** @type {HTMLAreaElement} */element);
     }
     return true;
   });
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/tabbable.js
+;// ./node_modules/@wordpress/dom/build-module/tabbable.js
 /**
  * Internal dependencies
  */
@@ -238,7 +237,7 @@ function isTabbableIndex(element) {
   return getTabIndex(element) !== -1;
 }
 
-/** @typedef {Element & { type?: string, checked?: boolean, name?: string }} MaybeHTMLInputElement */
+/** @typedef {HTMLElement & { type?: string, checked?: boolean, name?: string }} MaybeHTMLInputElement */
 
 /**
  * Returns a stateful reducer function which constructs a filtered array of
@@ -251,7 +250,7 @@ function isTabbableIndex(element) {
 function createStatefulCollapseRadioGroup() {
   /** @type {Record<string, MaybeHTMLInputElement>} */
   const CHOSEN_RADIO_BY_NAME = {};
-  return function collapseRadioGroup( /** @type {MaybeHTMLInputElement[]} */result, /** @type {MaybeHTMLInputElement} */element) {
+  return function collapseRadioGroup(/** @type {MaybeHTMLInputElement[]} */result, /** @type {MaybeHTMLInputElement} */element) {
     const {
       nodeName,
       type,
@@ -289,10 +288,10 @@ function createStatefulCollapseRadioGroup() {
  * sort where equal tabIndex should be left in order of their occurrence in the
  * document.
  *
- * @param {Element} element Element.
- * @param {number}  index   Array index of element.
+ * @param {HTMLElement} element Element.
+ * @param {number}      index   Array index of element.
  *
- * @return {{ element: Element, index: number }} Mapped object with element, index.
+ * @return {{ element: HTMLElement, index: number }} Mapped object with element, index.
  */
 function mapElementToObjectTabbable(element, index) {
   return {
@@ -305,9 +304,9 @@ function mapElementToObjectTabbable(element, index) {
  * An array map callback, returning an element of the given mapped object's
  * element value.
  *
- * @param {{ element: Element }} object Mapped object with element.
+ * @param {{ element: HTMLElement }} object Mapped object with element.
  *
- * @return {Element} Mapped object element.
+ * @return {HTMLElement} Mapped object element.
  */
 function mapObjectTabbableToElement(object) {
   return object.element;
@@ -318,8 +317,8 @@ function mapObjectTabbableToElement(object) {
  *
  * @see mapElementToObjectTabbable
  *
- * @param {{ element: Element, index: number }} a First object to compare.
- * @param {{ element: Element, index: number }} b Second object to compare.
+ * @param {{ element: HTMLElement, index: number }} a First object to compare.
+ * @param {{ element: HTMLElement, index: number }} b Second object to compare.
  *
  * @return {number} Comparator result.
  */
@@ -335,9 +334,9 @@ function compareObjectTabbables(a, b) {
 /**
  * Givin focusable elements, filters out tabbable element.
  *
- * @param {Element[]} focusables Focusable elements to filter.
+ * @param {HTMLElement[]} focusables Focusable elements to filter.
  *
- * @return {Element[]} Tabbable elements.
+ * @return {HTMLElement[]} Tabbable elements.
  */
 function filterTabbable(focusables) {
   return focusables.filter(isTabbableIndex).map(mapElementToObjectTabbable).sort(compareObjectTabbables).map(mapObjectTabbableToElement).reduce(createStatefulCollapseRadioGroup(), []);
@@ -345,7 +344,7 @@ function filterTabbable(focusables) {
 
 /**
  * @param {Element} context
- * @return {Element[]} Tabbable elements within the context.
+ * @return {HTMLElement[]} Tabbable elements within the context.
  */
 function tabbable_find(context) {
   return filterTabbable(find(context));
@@ -357,15 +356,12 @@ function tabbable_find(context) {
  * @param {Element} element The focusable element before which to look. Defaults
  *                          to the active element.
  *
- * @return {Element|undefined} Preceding tabbable element.
+ * @return {HTMLElement|undefined} Preceding tabbable element.
  */
 function findPrevious(element) {
-  return filterTabbable(find(element.ownerDocument.body)).reverse().find(focusable => {
-    return (
-      // eslint-disable-next-line no-bitwise
-      element.compareDocumentPosition(focusable) & element.DOCUMENT_POSITION_PRECEDING
-    );
-  });
+  return filterTabbable(find(element.ownerDocument.body)).reverse().find(focusable =>
+  // eslint-disable-next-line no-bitwise
+  element.compareDocumentPosition(focusable) & element.DOCUMENT_POSITION_PRECEDING);
 }
 
 /**
@@ -374,23 +370,20 @@ function findPrevious(element) {
  * @param {Element} element The focusable element after which to look. Defaults
  *                          to the active element.
  *
- * @return {Element|undefined} Next tabbable element.
+ * @return {HTMLElement|undefined} Next tabbable element.
  */
 function findNext(element) {
-  return filterTabbable(find(element.ownerDocument.body)).find(focusable => {
-    return (
-      // eslint-disable-next-line no-bitwise
-      element.compareDocumentPosition(focusable) & element.DOCUMENT_POSITION_FOLLOWING
-    );
-  });
+  return filterTabbable(find(element.ownerDocument.body)).find(focusable =>
+  // eslint-disable-next-line no-bitwise
+  element.compareDocumentPosition(focusable) & element.DOCUMENT_POSITION_FOLLOWING);
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/utils/assert-is-defined.js
+;// ./node_modules/@wordpress/dom/build-module/utils/assert-is-defined.js
 function assertIsDefined(val, name) {
   if (false) {}
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/get-rectangle-from-range.js
+;// ./node_modules/@wordpress/dom/build-module/dom/get-rectangle-from-range.js
 /**
  * Internal dependencies
  */
@@ -440,10 +433,18 @@ function getRectangleFromRange(range) {
       left,
       right
     } of filteredRects) {
-      if (top < furthestTop) furthestTop = top;
-      if (bottom > furthestBottom) furthestBottom = bottom;
-      if (left < furthestLeft) furthestLeft = left;
-      if (right > furthestRight) furthestRight = right;
+      if (top < furthestTop) {
+        furthestTop = top;
+      }
+      if (bottom > furthestBottom) {
+        furthestBottom = bottom;
+      }
+      if (left < furthestLeft) {
+        furthestLeft = left;
+      }
+      if (right > furthestRight) {
+        furthestRight = right;
+      }
     }
     return new window.DOMRect(furthestLeft, furthestTop, furthestRight - furthestLeft, furthestBottom - furthestTop);
   }
@@ -493,7 +494,7 @@ function getRectangleFromRange(range) {
   return rect;
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/compute-caret-rect.js
+;// ./node_modules/@wordpress/dom/build-module/dom/compute-caret-rect.js
 /**
  * Internal dependencies
  */
@@ -517,7 +518,7 @@ function computeCaretRect(win) {
   return getRectangleFromRange(range);
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/document-has-text-selection.js
+;// ./node_modules/@wordpress/dom/build-module/dom/document-has-text-selection.js
 /**
  * Internal dependencies
  */
@@ -542,7 +543,7 @@ function documentHasTextSelection(doc) {
   return !!range && !range.collapsed;
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/is-html-input-element.js
+;// ./node_modules/@wordpress/dom/build-module/dom/is-html-input-element.js
 /* eslint-disable jsdoc/valid-types */
 /**
  * @param {Node} node
@@ -553,7 +554,7 @@ function isHTMLInputElement(node) {
   return node?.nodeName === 'INPUT';
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/is-text-field.js
+;// ./node_modules/@wordpress/dom/build-module/dom/is-text-field.js
 /**
  * Internal dependencies
  */
@@ -575,7 +576,7 @@ function isTextField(node) {
   return isHTMLInputElement(node) && node.type && !nonTextInputs.includes(node.type) || node.nodeName === 'TEXTAREA' || /** @type {HTMLElement} */node.contentEditable === 'true';
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/input-field-has-uncollapsed-selection.js
+;// ./node_modules/@wordpress/dom/build-module/dom/input-field-has-uncollapsed-selection.js
 /**
  * Internal dependencies
  */
@@ -627,7 +628,7 @@ function inputFieldHasUncollapsedSelection(element) {
   }
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/document-has-uncollapsed-selection.js
+;// ./node_modules/@wordpress/dom/build-module/dom/document-has-uncollapsed-selection.js
 /**
  * Internal dependencies
  */
@@ -647,7 +648,7 @@ function documentHasUncollapsedSelection(doc) {
   return documentHasTextSelection(doc) || !!doc.activeElement && inputFieldHasUncollapsedSelection(doc.activeElement);
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/document-has-selection.js
+;// ./node_modules/@wordpress/dom/build-module/dom/document-has-selection.js
 /**
  * Internal dependencies
  */
@@ -667,7 +668,7 @@ function documentHasSelection(doc) {
   return !!doc.activeElement && (isHTMLInputElement(doc.activeElement) || isTextField(doc.activeElement) || documentHasTextSelection(doc));
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/get-computed-style.js
+;// ./node_modules/@wordpress/dom/build-module/dom/get-computed-style.js
 /**
  * Internal dependencies
  */
@@ -684,7 +685,7 @@ function getComputedStyle(element) {
   return element.ownerDocument.defaultView.getComputedStyle(element);
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/get-scroll-container.js
+;// ./node_modules/@wordpress/dom/build-module/dom/get-scroll-container.js
 /**
  * Internal dependencies
  */
@@ -732,10 +733,10 @@ function getScrollContainer(node, direction = 'vertical') {
   }
 
   // Continue traversing.
-  return getScrollContainer( /** @type {Element} */node.parentNode, direction);
+  return getScrollContainer(/** @type {Element} */node.parentNode, direction);
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/get-offset-parent.js
+;// ./node_modules/@wordpress/dom/build-module/dom/get-offset-parent.js
 /**
  * Internal dependencies
  */
@@ -767,7 +768,7 @@ function getOffsetParent(node) {
 
   // If the closest element is already positioned, return it, as offsetParent
   // does not otherwise consider the node itself.
-  if (getComputedStyle( /** @type {Element} */closestElement).position !== 'static') {
+  if (getComputedStyle(/** @type {Element} */closestElement).position !== 'static') {
     return closestElement;
   }
 
@@ -775,7 +776,7 @@ function getOffsetParent(node) {
   return /** @type {Node & { offsetParent: Node }} */closestElement.offsetParent;
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/is-input-or-text-area.js
+;// ./node_modules/@wordpress/dom/build-module/dom/is-input-or-text-area.js
 /* eslint-disable jsdoc/valid-types */
 /**
  * @param {Element} element
@@ -786,7 +787,7 @@ function isInputOrTextArea(element) {
   return element.tagName === 'INPUT' || element.tagName === 'TEXTAREA';
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/is-entirely-selected.js
+;// ./node_modules/@wordpress/dom/build-module/dom/is-entirely-selected.js
 /**
  * Internal dependencies
  */
@@ -858,7 +859,7 @@ function isDeepChild(query, container, propName) {
   return false;
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/is-form-element.js
+;// ./node_modules/@wordpress/dom/build-module/dom/is-form-element.js
 /**
  * Internal dependencies
  */
@@ -883,7 +884,7 @@ function isFormElement(element) {
   return checkForInputTextarea || tagName === 'BUTTON' || tagName === 'SELECT';
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/is-rtl.js
+;// ./node_modules/@wordpress/dom/build-module/dom/is-rtl.js
 /**
  * Internal dependencies
  */
@@ -900,7 +901,7 @@ function isRTL(element) {
   return getComputedStyle(element).direction === 'rtl';
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/get-range-height.js
+;// ./node_modules/@wordpress/dom/build-module/dom/get-range-height.js
 /**
  * Gets the height of the range without ignoring zero width rectangles, which
  * some browsers ignore when creating a union.
@@ -922,7 +923,7 @@ function getRangeHeight(range) {
   return lowestBottom - highestTop;
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/is-selection-forward.js
+;// ./node_modules/@wordpress/dom/build-module/dom/is-selection-forward.js
 /**
  * Internal dependencies
  */
@@ -972,7 +973,7 @@ function isSelectionForward(selection) {
   return true;
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/caret-range-from-point.js
+;// ./node_modules/@wordpress/dom/build-module/dom/caret-range-from-point.js
 /**
  * Polyfill.
  * Get a collapsed range for a given point.
@@ -1010,7 +1011,7 @@ function caretRangeFromPoint(doc, x, y) {
  * @typedef {{ readonly offset: number; readonly offsetNode: Node; getClientRect(): DOMRect | null; }} CaretPosition
  */
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/hidden-caret-range-from-point.js
+;// ./node_modules/@wordpress/dom/build-module/dom/hidden-caret-range-from-point.js
 /**
  * Internal dependencies
  */
@@ -1047,7 +1048,7 @@ function hiddenCaretRangeFromPoint(doc, x, y, container) {
   return range;
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/scroll-if-no-range.js
+;// ./node_modules/@wordpress/dom/build-module/dom/scroll-if-no-range.js
 /**
  * If no range range can be created or it is outside the container, the element
  * may be out of view, so scroll it into view and try again.
@@ -1073,7 +1074,7 @@ function scrollIfNoRange(container, alignToTop, callback) {
   return range;
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/is-edge.js
+;// ./node_modules/@wordpress/dom/build-module/dom/is-edge.js
 /**
  * Internal dependencies
  */
@@ -1107,7 +1108,7 @@ function isEdge(container, isReverse, onlyVertical = false) {
     }
     return container.value.length === container.selectionStart;
   }
-  if (!( /** @type {HTMLElement} */container.isContentEditable)) {
+  if (!container.isContentEditable) {
     return true;
   }
   const {
@@ -1179,7 +1180,7 @@ function isEdge(container, isReverse, onlyVertical = false) {
   return onlyVertical ? hasVerticalDiff : hasVerticalDiff && hasHorizontalDiff;
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/is-horizontal-edge.js
+;// ./node_modules/@wordpress/dom/build-module/dom/is-horizontal-edge.js
 /**
  * Internal dependencies
  */
@@ -1197,10 +1198,10 @@ function isHorizontalEdge(container, isReverse) {
   return isEdge(container, isReverse);
 }
 
-;// CONCATENATED MODULE: external ["wp","deprecated"]
+;// external ["wp","deprecated"]
 const external_wp_deprecated_namespaceObject = window["wp"]["deprecated"];
 var external_wp_deprecated_default = /*#__PURE__*/__webpack_require__.n(external_wp_deprecated_namespaceObject);
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/is-number-input.js
+;// ./node_modules/@wordpress/dom/build-module/dom/is-number-input.js
 /**
  * WordPress dependencies
  */
@@ -1228,7 +1229,7 @@ function isNumberInput(node) {
   return isHTMLInputElement(node) && node.type === 'number' && !isNaN(node.valueAsNumber);
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/is-vertical-edge.js
+;// ./node_modules/@wordpress/dom/build-module/dom/is-vertical-edge.js
 /**
  * Internal dependencies
  */
@@ -1246,7 +1247,7 @@ function isVerticalEdge(container, isReverse) {
   return isEdge(container, isReverse, true);
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/place-caret-at-edge.js
+;// ./node_modules/@wordpress/dom/build-module/dom/place-caret-at-edge.js
 /**
  * Internal dependencies
  */
@@ -1317,7 +1318,9 @@ function placeCaretAtEdge(container, isReverse, x) {
     return;
   }
   const range = scrollIfNoRange(container, isReverse, () => getRange(container, isReverse, x));
-  if (!range) return;
+  if (!range) {
+    return;
+  }
   const {
     ownerDocument
   } = container;
@@ -1331,7 +1334,7 @@ function placeCaretAtEdge(container, isReverse, x) {
   selection.addRange(range);
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/place-caret-at-horizontal-edge.js
+;// ./node_modules/@wordpress/dom/build-module/dom/place-caret-at-horizontal-edge.js
 /**
  * Internal dependencies
  */
@@ -1347,7 +1350,7 @@ function placeCaretAtHorizontalEdge(container, isReverse) {
   return placeCaretAtEdge(container, isReverse, undefined);
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/place-caret-at-vertical-edge.js
+;// ./node_modules/@wordpress/dom/build-module/dom/place-caret-at-vertical-edge.js
 /**
  * Internal dependencies
  */
@@ -1364,7 +1367,7 @@ function placeCaretAtVerticalEdge(container, isReverse, rect) {
   return placeCaretAtEdge(container, isReverse, rect?.left);
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/insert-after.js
+;// ./node_modules/@wordpress/dom/build-module/dom/insert-after.js
 /**
  * Internal dependencies
  */
@@ -1383,7 +1386,7 @@ function insertAfter(newNode, referenceNode) {
   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/remove.js
+;// ./node_modules/@wordpress/dom/build-module/dom/remove.js
 /**
  * Internal dependencies
  */
@@ -1400,7 +1403,7 @@ function remove(node) {
   node.parentNode.removeChild(node);
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/replace.js
+;// ./node_modules/@wordpress/dom/build-module/dom/replace.js
 /**
  * Internal dependencies
  */
@@ -1421,7 +1424,7 @@ function replace(processedNode, newNode) {
   remove(processedNode);
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/unwrap.js
+;// ./node_modules/@wordpress/dom/build-module/dom/unwrap.js
 /**
  * Internal dependencies
  */
@@ -1443,7 +1446,7 @@ function unwrap(node) {
   parent.removeChild(node);
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/replace-tag.js
+;// ./node_modules/@wordpress/dom/build-module/dom/replace-tag.js
 /**
  * Internal dependencies
  */
@@ -1467,7 +1470,7 @@ function replaceTag(node, tagName) {
   return newNode;
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/wrap.js
+;// ./node_modules/@wordpress/dom/build-module/dom/wrap.js
 /**
  * Internal dependencies
  */
@@ -1485,7 +1488,7 @@ function wrap(newNode, referenceNode) {
   newNode.appendChild(referenceNode);
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/safe-html.js
+;// ./node_modules/@wordpress/dom/build-module/dom/safe-html.js
 /**
  * Internal dependencies
  */
@@ -1524,7 +1527,7 @@ function safeHTML(html) {
   return body.innerHTML;
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/strip-html.js
+;// ./node_modules/@wordpress/dom/build-module/dom/strip-html.js
 /**
  * Internal dependencies
  */
@@ -1546,7 +1549,7 @@ function stripHTML(html) {
   return doc.body.textContent || '';
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/is-empty.js
+;// ./node_modules/@wordpress/dom/build-module/dom/is-empty.js
 /**
  * Recursively checks if an element is empty. An element is not empty if it
  * contains text or contains elements with attributes such as images.
@@ -1573,7 +1576,7 @@ function isEmpty(element) {
   }
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/phrasing-content.js
+;// ./node_modules/@wordpress/dom/build-module/phrasing-content.js
 /**
  * All phrasing content elements.
  *
@@ -1769,7 +1772,7 @@ function isTextContent(node) {
   return textContentSchema.hasOwnProperty(tag) || tag === 'span';
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/is-element.js
+;// ./node_modules/@wordpress/dom/build-module/dom/is-element.js
 /* eslint-disable jsdoc/valid-types */
 /**
  * @param {Node | null | undefined} node
@@ -1780,7 +1783,7 @@ function isElement(node) {
   return !!node && node.nodeType === node.ELEMENT_NODE;
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/clean-node-list.js
+;// ./node_modules/@wordpress/dom/build-module/dom/clean-node-list.js
 /**
  * Internal dependencies
  */
@@ -1816,7 +1819,7 @@ const noop = () => {};
  * @param {boolean}  inline   Whether to clean for inline mode.
  */
 function cleanNodeList(nodeList, doc, schema, inline) {
-  Array.from(nodeList).forEach(( /** @type {Node & { nextElementSibling?: unknown }} */node) => {
+  Array.from(nodeList).forEach((/** @type {Node & { nextElementSibling?: unknown }} */node) => {
     const tag = node.nodeName.toLowerCase();
 
     // It's a valid child, if the tag exists in the schema without an isMatch
@@ -1852,10 +1855,13 @@ function cleanNodeList(nodeList, doc, schema, inline) {
           // TODO: Explore patching this in jsdom-jscore.
           if (node.classList && node.classList.length) {
             const mattchers = classes.map(item => {
-              if (typeof item === 'string') {
-                return ( /** @type {string} */className) => className === item;
+              if (item === '*') {
+                // Keep all classes.
+                return () => true;
+              } else if (typeof item === 'string') {
+                return (/** @type {string} */className) => className === item;
               } else if (item instanceof RegExp) {
-                return ( /** @type {string} */className) => item.test(className);
+                return (/** @type {string} */className) => item.test(className);
               }
               return noop;
             });
@@ -1915,7 +1921,7 @@ function cleanNodeList(nodeList, doc, schema, inline) {
   });
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/remove-invalid-html.js
+;// ./node_modules/@wordpress/dom/build-module/dom/remove-invalid-html.js
 /**
  * Internal dependencies
  */
@@ -1937,7 +1943,7 @@ function removeInvalidHTML(HTML, schema, inline) {
   return doc.body.innerHTML;
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/dom/index.js
+;// ./node_modules/@wordpress/dom/build-module/dom/index.js
 
 
 
@@ -1965,7 +1971,8 @@ function removeInvalidHTML(HTML, schema, inline) {
 
 
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/data-transfer.js
+
+;// ./node_modules/@wordpress/dom/build-module/data-transfer.js
 /**
  * Gets all files from a DataTransfer object.
  *
@@ -1988,7 +1995,7 @@ function getFilesFromDataTransfer(dataTransfer) {
   return files;
 }
 
-;// CONCATENATED MODULE: ./node_modules/@wordpress/dom/build-module/index.js
+;// ./node_modules/@wordpress/dom/build-module/index.js
 /**
  * Internal dependencies
  */

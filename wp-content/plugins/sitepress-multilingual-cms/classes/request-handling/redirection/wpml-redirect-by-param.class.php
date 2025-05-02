@@ -67,10 +67,13 @@ class WPML_Redirect_By_Param extends WPML_Redirection {
 		} elseif ( count( $translatable_params = array_intersect_key( $query_params, $this->term_like_params ) ) === 1 ) {
 			/** @var WPML_Term_Translation $wpml_term_translations */
 			global $wpml_term_translations;
-			$potential_translation = $wpml_term_translations->term_id_in(
-				$query_params[ ( $parameter = key( $translatable_params ) ) ],
-				$lang_code
-			);
+
+			$termId = $query_params[ ( $parameter = key( $translatable_params ) ) ];
+			if ( is_array( $termId ) ) {
+				$termId = $termId[0];
+			}
+
+			$potential_translation = $wpml_term_translations->term_id_in( (int) $termId, $lang_code );
 		}
 		/** @var String $parameter */
 		return isset( $potential_translation, $parameter ) ? array( $parameter, $potential_translation ) : false;

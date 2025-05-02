@@ -9,6 +9,9 @@ class WPML_Cornerstone_Update_Translation extends WPML_Page_Builders_Update_Tran
 		foreach ( $data_array as $key => &$data ) {
 			if ( isset( $data['_type'] ) && ! Utils::typeIsLayout( $data['_type'] ) ) {
 				$data = $this->update_strings_in_node( Utils::getNodeId( $data ), $data );
+				if ( Utils::shouldCheckForSubmodules( $data['_type'] ) ) {
+					$this->update_strings_in_modules( $data );
+				}
 			} elseif ( is_array( $data ) ) {
 				$this->update_strings_in_modules( $data );
 			}

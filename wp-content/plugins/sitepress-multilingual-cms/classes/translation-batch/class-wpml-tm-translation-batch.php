@@ -19,21 +19,25 @@ class WPML_TM_Translation_Batch {
 	/** @var DateTime */
 	private $deadline;
 
-	/** @var "auto"|"manual"|null  */
+	/** @var "auto"|"manual"|null */
 	private $translationMode = null;
 
-	/** @var string  */
+	/** @var array<string,string>|null */
+	private $tpBatchInfo;
+
+	/** @var string */
 	private $howToHandleExisting = self::HANDLE_EXISTING_LEAVE;
 
 	/**
 	 * @param WPML_TM_Translation_Batch_Element[] $elements
-	 * @param string                              $basket_name
-	 * @param array                               $translators
-	 * @param DateTime                            $deadline
+	 * @param string $basket_name
+	 * @param array $translators
+	 * @param DateTime $deadline
+	 * @param array<string,string>|null $tpBatchInfo
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $elements, $basket_name, array $translators, DateTime $deadline = null ) {
+	public function __construct( array $elements, $basket_name, array $translators, DateTime $deadline = null, $tpBatchInfo = null ) {
 		if ( empty( $elements ) ) {
 			throw new InvalidArgumentException( 'Batch elements cannot be empty' );
 		}
@@ -50,6 +54,7 @@ class WPML_TM_Translation_Batch {
 		$this->basket_name = (string) $basket_name;
 		$this->translators = $translators;
 		$this->deadline    = $deadline;
+		$this->tpBatchInfo = $tpBatchInfo;
 	}
 
 	/**
@@ -102,6 +107,11 @@ class WPML_TM_Translation_Batch {
 	 */
 	public function get_deadline() {
 		return $this->deadline;
+	}
+
+	/** @return array<string,string>|null */
+	public function getTpBatchInfo() {
+		return $this->tpBatchInfo;
 	}
 
 	/**

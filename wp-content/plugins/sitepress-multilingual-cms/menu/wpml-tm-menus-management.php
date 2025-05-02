@@ -2,19 +2,13 @@
 
 use WPML\API\Sanitize;
 use WPML\Setup\Option;
-use WPML\TM\API\Basket;
 use WPML\TM\ATE\ClonedSites\Lock as AteApiLock;
-use WPML\TM\Menu\TranslationBasket\Utility;
-use WPML\TM\Menu\TranslationServices\Section;
 use WPML\LIB\WP\User;
 use function WPML\Container\make;
 
 class WPML_TM_Menus_Management extends WPML_TM_Menus {
 
 	const SKIP_TM_WIZARD_META_KEY = 'wpml_skip_tm_wizard';
-
-	/** @var IWPML_Template_Service $template_service */
-	private $template_service;
 
 	private $active_languages;
 	private $translatable_types;
@@ -37,24 +31,30 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 	 */
 	private $admin_sections;
 
-	public function __construct( IWPML_Template_Service $template_service ) {
-		$this->template_service   = $template_service;
-
+	public function __construct() {
 		$this->admin_sections = WPML\Container\make( 'WPML_TM_Admin_Sections' );
 		$this->admin_sections->init_hooks();
 
 		parent::__construct();
 	}
 
-	protected function render_main() {
+	public function renderEmbeddedDashboard( $embeddedRenderCallback ) {
+		if ( true !== apply_filters( 'wpml_tm_lock_ui', false ) ) {
+			$this->render_main( $embeddedRenderCallback );
+		}
+	}
+
+	protected function render_main( $embeddedRenderCallback = null ) {
 		if ( ! AteApiLock::isLocked() ) {
 			?>
 		<div class="wrap">
-			<h1><?php echo esc_html__( 'Translation Management', 'wpml-translation-management' ); ?></h1>
+			<?php if ( $embeddedRenderCallback === null ): ?>
+				<h1><?php echo esc_html__( 'Translation Management', 'wpml-translation-management' ); ?></h1>
+			<?php endif; ?>
 
 			<?php
 			do_action( 'icl_tm_messages' );
-			$this->build_tab_items();
+			$this->build_tab_items($embeddedRenderCallback);
 			$this->render_items();
 			?>
 		</div>
@@ -65,11 +65,10 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 	/**
 	 * It builds all the sections.
 	 */
-	protected function build_tab_items() {
+	protected function build_tab_items($embeddedRenderCallback=null) {
 		$this->tab_items = array();
 
-		$this->build_dashboard_item();
-		$this->build_basket_item();
+		$this->build_dashboard_item( $embeddedRenderCallback );
 
 		/** @var \WPML_TM_Admin_Sections $admin_sections */
 		foreach ( $this->admin_sections->get_tab_items() as $slug => $tab_item ) {
@@ -99,11 +98,11 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 		}
 	}
 
-	private function build_dashboard_item() {
+	private function build_dashboard_item( $embeddedRenderCallback = null ) {
 		$this->tab_items['dashboard'] = [
-			'caption'          => __( 'Dashboard', 'wpml-translation-management' ),
+			'caption'          => __( 'Translation Dashboard', 'sitepress' ),
 			'current_user_can' => [ User::CAP_ADMINISTRATOR, User::CAP_MANAGE_TRANSLATIONS ],
-			'callback'         => [ $this, 'build_content_dashboard' ],
+			'callback'         => $embeddedRenderCallback ?: [ $this, 'build_content_dashboard' ],
 			'order'            => 100,
 		];
 	}
@@ -460,167 +459,6 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 		<?php
 	}
 
-	private function build_basket_item() {
-		$basket_items_count = TranslationProxy_Basket::get_basket_items_count( true );
-
-		if ( $basket_items_count > 0 ) {
-
-			$this->tab_items['basket'] = [
-				'caption'          => $this->build_basket_item_caption( $basket_items_count ),
-				'current_user_can' => [ User::CAP_ADMINISTRATOR, User::CAP_MANAGE_TRANSLATIONS ],
-				'callback'         => [ $this, 'build_content_basket' ],
-				'order'            => 101,
-			];
-
-		}
-	}
-
-	/**
-	 * @param int $basket_items_count
-	 *
-	 * @return string
-	 */
-	private function build_basket_item_caption( $basket_items_count = 0 ) {
-		if ( isset( $_GET['clear_basket'] ) && $_GET['clear_basket'] ) {
-			$basket_items_count = 0;
-		} else {
-
-			if ( ! is_numeric( $basket_items_count ) ) {
-				$basket_items_count = TranslationProxy_Basket::get_basket_items_count( true );
-			}
-			if ( isset( $_GET['action'], $_GET['id'] ) && $_GET['action'] === 'delete' && $_GET['id'] ) {
-				-- $basket_items_count;
-			}
-		}
-
-		$basket_items_count_caption = esc_html__( 'Translation Basket', 'wpml-translation-management' );
-		if ( $basket_items_count > 0 ) {
-			$basket_item_count_badge     = '<span id="wpml-basket-items"><span id="basket-item-count">' . $basket_items_count . '</span></span>';
-			$basket_items_count_caption .= $basket_item_count_badge;
-		}
-
-		return $basket_items_count_caption;
-	}
-
-	public function build_content_basket() {
-		$basket_table = new SitePress_Table_Basket();
-
-		do_action( 'wpml_tm_before_basket_items_display' );
-
-		$basket_table->prepare_items();
-
-		$action_url = esc_attr( 'admin.php?page=' . WPML_TM_FOLDER . $this->get_page_slug() . '&sm=' . $_GET['sm'] );
-
-		$this->heading( __( '1. Review documents for translation', 'wpml-translation-management' ) );
-		?>
-
-		<form method="post" id="translation-jobs-basket-form" class="js-translation-jobs-basket-form"
-			  data-message="
-			  <?php
-				echo esc_attr__(
-					'You are about to delete selected items from the basket. Are you sure you want to do that?',
-					'wpml-translation-management'
-				)
-				?>
-												   "
-			  name="translation-jobs-basket" action="<?php echo $action_url; ?>">
-			<?php
-			$basket_table->display();
-			?>
-		</form>
-		<?php
-		$this->build_translation_options();
-	}
-
-	private function build_translation_options() {
-		global $sitepress, $wpdb;
-		$basket_items_number = TranslationProxy_Basket::get_basket_items_count( true );
-
-		if ( $basket_items_number > 0 ) {
-			$deadline_estimate_factory = new WPML_TM_Jobs_Deadline_Estimate_Factory();
-			$deadline_estimate_date    = $deadline_estimate_factory->create()->get(
-				TranslationProxy_Basket::get_basket(),
-				array(
-					'translator_id' => TranslationProxy_Service::get_wpml_translator_id(),
-					'service'       => TranslationProxy::get_current_service_id(),
-				)
-			);
-
-			$basket_name_max_length  = TranslationProxy::get_current_service_batch_name_max_length();
-			$source_language         = TranslationProxy_Basket::get_source_language();
-			$basket                  = new WPML_Translation_Basket( $wpdb );
-			$basket_name_placeholder = sprintf(
-				__( '%1$s|WPML|%2$s', 'wpml-translation-management' ),
-				htmlspecialchars_decode( get_option( 'blogname' ), ENT_QUOTES ),
-				$source_language
-			);
-			$basket_name_placeholder = $basket->get_unique_basket_name( $basket_name_placeholder, $basket_name_max_length );
-
-			$utility                      = make( Utility::class );
-			$target_languages             = $utility->getTargetLanguages();
-			$isTheOnlyAvailableTranslator = $utility->isTheOnlyAvailableTranslatorForTargetLanguages( $target_languages );
-
-			$translators_dropdowns = wpml_collect( $target_languages )->pluck( 'code', 'code' )
-			                                                          ->map( [ $this, 'get_translators_dropdown' ] );
-
-			$tooltip_content = esc_html__( 'This deadline is what WPML suggests according to the amount of work that you already sent to this translator. You can modify this date to set the deadline manually.', 'wpml-translation-management' );
-
-			$translation_service_enabled = $this->is_translation_service_enabled();
-
-			$model = array(
-				'strings'                      => array(
-					'heading_basket_name'    => __( '2. Set a batch name and deadline', 'wpml-translation-management' ),
-					'heading_translators'    => __( '3. Choose translator or Translation Service', 'wpml-translation-management' ),
-					'batch_name_label'       => __( 'Batch name:', 'wpml-translation-management' ),
-					'batch_name_desc'        => __( 'Give a name to the batch. If omitted, the default name will be applied.', 'wpml-translation-management' ),
-					'column_language'        => __( 'Language pair', 'wpml-translation-management' ),
-					'column_translator'      => __( 'Translator', 'wpml-translation-management' ),
-					'pro_translation_tip'    => __( 'Did you know that you can also set Translation Services and professional translators will handle your translation?', 'wpml-translation-management' ),
-					'batch_deadline_label'   => __( 'Suggested deadline:', 'wpml-translation-management' ),
-					'batch_deadline_tooltip' => $tooltip_content,
-					'button_send_all'        => __( 'Send all items for translation', 'wpml-translation-management' ),
-				),
-				'source_language'              => $sitepress->get_language_details( $source_language ),
-				'source_language_flag'         => $sitepress->get_flag_img( $source_language ),
-				'basket_name_max_length'       => $basket_name_max_length,
-				'basket_name_placeholder'      => $basket_name_placeholder,
-				'target_languages'             => $target_languages,
-				'dropdowns_translators'        => $translators_dropdowns,
-				'pro_translation_link'         => '<br /><a href="' . admin_url( 'admin.php?page=' . WPML_TM_FOLDER . $this->get_page_slug() . '&sm=translators' ) . '">'
-												  . __( 'Check available Translation Services', 'wpml-translation-management' ) . '</a>',
-				'deadline_estimation_date'     => $deadline_estimate_date,
-				'extra_basket_fields'          => TranslationProxy_Basket::get_basket_extra_fields_section(),
-				'nonces'                       => array(
-					'_icl_nonce_send_basket_items'  => wp_create_nonce( 'send_basket_items_nonce' ),
-					'_icl_nonce_send_basket_item'   => wp_create_nonce( 'send_basket_item_nonce' ),
-					'_icl_nonce_send_basket_commit' => wp_create_nonce( 'send_basket_commit_nonce' ),
-					'_icl_nonce_check_basket_name'  => wp_create_nonce( 'check_basket_name_nonce' ),
-					'_icl_nonce_refresh_deadline'   => wp_create_nonce( 'wpml-tm-jobs-deadline-estimate-ajax-action' ),
-					'_icl_nonce_rollback_basket'    => wp_create_nonce( 'rollback_basket_nonce' ),
-				),
-				'translation_service_enabled'  => $translation_service_enabled,
-				'current_user_only_translator' => $isTheOnlyAvailableTranslator,
-			);
-			echo $this->template_service->show( $model, 'basket/options.twig' );
-		}
-
-		do_action( 'wpml_translation_basket_page_after' );
-	}
-
-	public function get_translators_dropdown( $lang_code ) {
-		$selected_translator = TranslationProxy_Service::get_wpml_translator_id();
-
-		$args = array(
-			'from'     => TranslationProxy_Basket::get_source_language(),
-			'to'       => $lang_code,
-			'name'     => 'translator[' . $lang_code . ']',
-			'selected' => $selected_translator,
-			'services' => array( 'local', TranslationProxy::get_current_service_id() ),
-			'echo'     => false,
-		);
-
-		return wpml_tm_get_translators_dropdown()->render( $args );
-	}
 
 	private function build_translation_jobs_item() {
 		$jobs_repository = wpml_tm_get_jobs_repository();
@@ -628,7 +466,7 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 
 		if ( $jobs_count ) {
 			$this->tab_items['jobs'] = [
-				'caption'          => __( 'Jobs', 'wpml-translation-management' ),
+				'caption'          => __( 'Translation Jobs', 'sitepress' ),
 				'current_user_can' => [ User::CAP_ADMINISTRATOR, User::CAP_MANAGE_TRANSLATIONS ],
 				'callback'         => [ $this, 'build_content_translation_jobs' ],
 				'order'            => 100000,
@@ -772,5 +610,9 @@ class WPML_TM_Menus_Management extends WPML_TM_Menus {
 		}
 
 		return $translation_service_enabled;
+	}
+
+	public static function getInstance() {
+	 	return make( self::class );
 	}
 }

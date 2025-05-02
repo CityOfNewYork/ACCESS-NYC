@@ -27,6 +27,9 @@ class Config {
 			\WPML_Theme_Localization_Type::class,
 			\WPML_ST_Translations_File_Dictionary_Storage_Table::class,
 			\WPML\ST\TranslationFile\Sync\TranslationUpdates::class,
+			\WPML_ST_Plugin_Localization_Utils::class,
+			\WPML_ST_Theme_Localization_Utils::class,
+			\WPML_PO_Import_Strings::class,
 		];
 	}
 

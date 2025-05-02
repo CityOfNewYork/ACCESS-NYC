@@ -108,4 +108,50 @@ class WPML_TM_Translation_Priorities {
 		$sitepress->switch_locale( $current_language );
 	}
 
+	public static function insert_missing_term_relationship() {
+		global $wpdb;
+		$term = get_term_by( 'slug', self::DEFAULT_TRANSLATION_PRIORITY_VALUE_SLUG, self::TAXONOMY );
+		if ( ! $term ) {
+			return;
+		}
+
+		$postIds = $wpdb->get_col(
+			"
+               SELECT ID
+               FROM {$wpdb->posts}
+               WHERE post_type IN ('post', 'page') 
+               AND post_status NOT IN ('inherit', 'auto-draft', 'trash')
+            "
+		);
+		if ( count( $postIds ) === 0 ) {
+			return;
+		}
+
+		foreach ( $postIds as $postId ) {
+			$existingTermRel = $wpdb->get_var(
+				$wpdb->prepare(
+					"
+                        SELECT object_id
+                        FROM {$wpdb->term_relationships}
+                        WHERE object_id = %d AND term_taxonomy_id = %d
+                        LIMIT 1
+                    ",
+					$postId,
+					$term->term_taxonomy_id
+				)
+			);
+			if ( $existingTermRel ) {
+				continue;
+			}
+			$wpdb->insert(
+				$wpdb->term_relationships,
+				[
+					'object_id'        => $postId,
+					'term_taxonomy_id' => $term->term_taxonomy_id,
+					'term_order'       => 0,
+				],
+				[ '%d', '%d', '%d' ]
+			);
+		}
+	}
 }

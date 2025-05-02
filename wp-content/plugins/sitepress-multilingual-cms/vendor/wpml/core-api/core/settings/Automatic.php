@@ -12,13 +12,13 @@ use WPML\WP\OptionManager;
 
 class Automatic {
 
-	const GROUP       = 'post-type';
+	const GROUP = 'post-type';
 	const FROM_CONFIG = 'automatic-config';
-	const OVERRIDE    = 'automatic-override';
+	const OVERRIDE = 'automatic-override';
 
 	public static function saveFromConfig( array $config ) {
-		$getCustomTypes = Obj::pathOr( [], [ 'wpml-config', 'custom-types', 'custom-type' ] );
-		$keyByPostType  = Lst::keyBy( 'value' );
+		$getCustomTypes      = Obj::pathOr( [], [ 'wpml-config', 'custom-types', 'custom-type' ] );
+		$keyByPostType       = Lst::keyBy( 'value' );
 		$getAutomaticSetting = Fns::map( Obj::pathOr( true, [ 'attr', 'automatic' ] ) );
 
 		Wrapper::of( $config )
@@ -34,6 +34,25 @@ class Automatic {
 		$current    = OptionManager::getOr( [], self::GROUP, self::OVERRIDE );
 
 		return Obj::propOr( $fromConfig, $postType, $current );
+	}
+
+	private static function getAllAutoTranslatePerPostTypeValues(): array {
+		return array_merge(
+			OptionManager::getOr( [], self::GROUP, self::FROM_CONFIG ),
+			OptionManager::getOr( [], self::GROUP, self::OVERRIDE )
+		);
+	}
+
+	public static function getAllPostTypesDisabledForAutoTranslate(): array {
+		return array_keys(
+			array_filter( self::getAllAutoTranslatePerPostTypeValues(), function ( $autoTranslate ) {
+				return $autoTranslate === false;
+			} )
+		);
+	}
+
+	public static function isAnyPostTypeDisabledForAutoTranslate(): bool {
+		return count( self::getAllPostTypesDisabledForAutoTranslate() ) > 0;
 	}
 
 	public static function set( $postType, $state ) {

@@ -14,7 +14,7 @@
                     {% else %}
                         <label for="{{ option.name }}">
                             <input type="{{ option.type }}" {{ option.checked }}
-                                   name="{{ option.name }}" id="{{ option.name }}"
+                                   name="{{ option.name }}" id="{{ option.name }}" class="wpml-{{ option.type }}-native"
                                    value="{{ option.value }}"
                             >
                             {{ option.label }}
@@ -31,7 +31,7 @@
             </ul>
 
         </div>
-        <input id="wpml-js-theme-plugin-save-option" type="button" class="other-options-save button button-primary" value="{{ button_label }}">
+        <input id="wpml-js-theme-plugin-save-option" type="button" class="other-options-save wpml-button base-btn" value="{{ button_label }}">
         <span id="wpml-js-theme-plugin-options-spinner" class="spinner"></span><span class="wpml-ajax-response" id="wpml-js-theme-plugin-options-response"></span>
     </div>
 </div>

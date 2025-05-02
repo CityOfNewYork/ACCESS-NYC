@@ -182,7 +182,7 @@ class RecommendationsManager {
 
 						if (
 							array_key_exists( 'download_recommendation_section', $pluginData ) &&
-							is_string( $pluginData['download_recommendation_section'] )
+							is_string( $pluginData['download_recommendation_section']) &&  !empty( $pluginData['download_recommendation_section'] )
 						) {
 							$pluginsRecommendations[ $pluginData['download_recommendation_section'] ]['plugins'][ $pluginData['slug'] ] = $sectionPlugin;
 							$pluginsData[ $pluginData['slug'] ]                                                                         = $recommendation;

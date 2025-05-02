@@ -1,0 +1,244 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/ate/AutoTranslate.js:21
+msgid "Sending for translation"
+msgstr "กำลังส่งเพื่อแปล"
+
+#: src/js/ate/TranslationDashboardJobsActions.js:23
+msgid ""
+"This content is being automatically translated. If you want to do something "
+"different with it cancel translation jobs first."
+msgstr "เนื้อหานี้กำลังถูกแปลโดยอัตโนมัติ หากคุณต้องการทำอย่างอื่นกับเนื้อหานี้ โปรดยกเลิกงานแปลก่อน."
+
+#: src/js/ate/enable/init.js:53
+msgid "Connecting to WPML’s Advanced Translation Editor"
+msgstr "กำลังเชื่อมต่อกับโปรแกรมแก้ไขการแปลขั้นสูงของ WPML"
+
+#: src/js/ate/enable/init.js:67
+msgid "Try again"
+msgstr "ลองอีกครั้ง"
+
+#: src/js/ate/review/init.js:17
+msgid "You don't have the rights to review this language"
+msgstr "คุณไม่มีสิทธิ์ตรวจสอบภาษานี้"
+
+#: src/js/ate/status-bar/components/AteJobsStatus.js:33
+msgid "translations"
+msgstr "การแปล"
+
+#: src/js/ate/status-bar/components/AteJobsStatus.js:34
+msgid "left in the queue"
+msgstr "เหลืออยู่ในคิว"
+
+#: src/js/ate/status-bar/components/AteJobsStatus.js:43
+msgid "Translation on hold"
+msgstr "การแปลถูกระงับ"
+
+#: src/js/ate/status-bar/components/AteJobsStatus.js:45
+#: src/js/ate/status-bar/components/constants.js:15
+msgid "No translations in the queue"
+msgstr "ไม่มีการแปลในคิว"
+
+#: src/js/ate/status-bar/components/AteJobsStatus.js:50
+msgid "%d translations left"
+msgstr "%d การแปลที่เหลือ"
+
+#: src/js/ate/status-bar/components/StatusBar/Notifications.js:38
+msgid "%d min remaining"
+msgstr "%d นาทีที่เหลือ"
+
+#: src/js/ate/status-bar/components/StatusBar/Notifications.js:39
+msgid "less than 1 min remaining"
+msgstr "เหลือเวลาน้อยกว่า 1 นาที"
+
+#: src/js/ate/status-bar/components/constants.js:13
+#: src/js/ate/translate-everything/components/Status/index.js:50
+msgid "Automatic translation status"
+msgstr "สถานะการแปลอัตโนมัติ"
+
+#: src/js/ate/status-bar/components/constants.js:17
+msgid "Translate Everything Automatically"
+msgstr "แปลทุกอย่างโดยอัตโนมัติ"
+
+#: src/js/ate/status-bar/components/constants.js:19
+msgid "Translate Everything Automatically is active"
+msgstr "การแปลทุกอย่างโดยอัตโนมัติกำลังทำงาน"
+
+#: src/js/ate/status-bar/components/constants.js:21
+msgid "Translate Everything Automatically is paused"
+msgstr "การแปลทุกอย่างโดยอัตโนมัติถูกหยุดชั่วคราว"
+
+#: src/js/ate/status-bar/components/constants.js:23
+msgid "Translate Everything Automatically is stopped"
+msgstr "การแปลทุกอย่างโดยอัตโนมัติถูกหยุด"
+
+#: src/js/ate/status-bar/components/constants.js:25
+msgid "Out of Credits for Automatic Translation"
+msgstr "เครดิตสำหรับการแปลอัตโนมัติหมดแล้ว"
+
+#: src/js/ate/status-bar/components/constants.js:28
+msgid "You have <b>1</b> prepaid translation credit in your wpml.org account. Assign these credits to your site to start using automatic translation"
+msgid_plural "You have <b>%s</b> prepaid translation credits in your wpml.org account. Assign these credits to your site to start using automatic translation"
+msgstr[0] "คุณมีเครดิตการแปลแบบชำระล่วงหน้า <b>1</b> เครดิตในบัญชี wpml.org ของคุณ กรุณาจัดสรรเครดิตเหล่านี้ให้กับเว็บไซต์ของคุณเพื่อเริ่มใช้การแปลอัตโนมัติ"
+msgstr[1] "คุณมีเครดิตการแปลแบบชำระล่วงหน้า <b>%s</b> เครดิตในบัญชี wpml.org ของคุณ กรุณาจัดสรรเครดิตเหล่านี้ให้กับเว็บไซต์ของคุณเพื่อเริ่มใช้การแปลอัตโนมัติ"
+
+#: src/js/ate/status-bar/components/constants.js:40
+#: src/js/ate/status-bar/components/sending/index.js:10
+msgid "Preparing content for translation"
+msgstr "กำลังเตรียมเนื้อหาสำหรับการแปล"
+
+#: src/js/ate/status-bar/components/constants.js:42
+#: src/js/ate/status-bar/components/sending/index.js:9
+msgid "Preparing more content for translation"
+msgstr "กำลังเตรียมเนื้อหาเพิ่มเติมสำหรับการแปล"
+
+#: src/js/ate/status-bar/components/constants.js:44
+msgid "An error occured, fix it to continue."
+msgstr "เกิดข้อผิดพลาด แก้ไขเพื่อดำเนินการต่อ."
+
+#: src/js/ate/status-bar/components/constants.js:46
+msgid ""
+"There is an issue with automatic translation that needs your attention. Fix "
+"it to continue."
+msgstr "มีปัญหากับการแปลอัตโนมัติที่ต้องการความสนใจจากคุณ แก้ไขเพื่อดำเนินการต่อ."
+
+#: src/js/ate/status-bar/components/constants.js:49
+#. %s is replaced by the name of the language.
+msgid ""
+"Your default language, %s, must be mapped to a supported language in order "
+"to use automatic translation."
+msgstr "ภาษาเริ่มต้นของคุณ %s ต้องถูกจับคู่กับภาษาที่รองรับเพื่อใช้การแปลอัตโนมัติ."
+
+#: src/js/ate/status-bar/components/constants.js:57
+#. %s is replaced by the language(s) name.
+msgid "Your language, %s, must be mapped to a supported language in order to use automatic translation."
+msgid_plural "The following languages on your site must be mapped to a supported language in order to use automatic translation: %s"
+msgstr[0] "ภาษาของคุณ %s ต้องถูกจับคู่กับภาษาที่รองรับเพื่อใช้การแปลอัตโนมัติ."
+msgstr[1] "ภาษาต่อไปนี้บนเว็บไซต์ของคุณต้องถูกจับคู่กับภาษาที่รองรับเพื่อใช้การแปลอัตโนมัติ: %s"
+
+#: src/js/ate/status-bar/components/constants.js:67
+msgid ""
+"Content in those languages: %s, cannot be automatically translated unless "
+"you map them to a language that's different from the default."
+msgstr "เนื้อหาในภาษาเหล่านี้: %s ไม่สามารถแปลโดยอัตโนมัติได้ เว้นแต่คุณจะจับคู่กับภาษาที่แตกต่างจากภาษาเริ่มต้น."
+
+#: src/js/ate/status-bar/components/constants.js:77
+#. %d is replaced by the number of jobs to review.
+msgid "%d translation waiting for review"
+msgid_plural "%d translations waiting for review"
+msgstr[0] "%d การแปลรอการตรวจสอบ"
+msgstr[1] "%d การแปลรอการตรวจสอบ"
+
+#: src/js/ate/status-bar/components/credit/index.js:100
+msgid "Account credits used"
+msgstr "เครดิตบัญชีที่ใช้ไป"
+
+#: src/js/ate/status-bar/components/credit/index.js:110
+msgid ""
+"Once you’ve used all your prepaid credits, we’ll invoice you for any "
+"additional credits you use after the end of the month"
+msgstr "เมื่อคุณใช้เครดิตที่ชำระล่วงหน้าหมดแล้ว เราจะออกใบแจ้งหนี้สำหรับเครดิตเพิ่มเติมที่คุณใช้หลังจากสิ้นเดือน"
+
+#: src/js/ate/status-bar/components/credit/index.js:115
+msgid "Payment limit:"
+msgstr "ขีดจำกัดการชำระเงิน:"
+
+#: src/js/ate/status-bar/components/credit/index.js:116
+msgid "%s credits"
+msgstr "%s เครดิต"
+
+#: src/js/ate/status-bar/components/credit/index.js:119
+msgid "Credits used:"
+msgstr "เครดิตที่ใช้ไป:"
+
+#: src/js/ate/status-bar/components/credit/index.js:123
+msgid "Credits left:"
+msgstr "เครดิตที่เหลือ:"
+
+#: src/js/ate/status-bar/components/credit/index.js:133
+msgid ""
+"The number of credit you will receive an invoice for at the end of the "
+"month. View your pay-as-you-go details in your site’s automatic translation "
+"settings."
+msgstr "จำนวนเครดิตที่คุณจะได้รับใบแจ้งหนี้ ณ สิ้นเดือน ดูรายละเอียดการชำระเงินตามการใช้งานในการตั้งค่าการแปลอัตโนมัติของเว็บไซต์ของคุณ."
+
+#: src/js/ate/status-bar/components/credit/index.js:139
+msgid "Calculating"
+msgstr "กำลังคำนวณ"
+
+#: src/js/ate/status-bar/components/credit/index.js:59
+msgid "Remaining prepaid credits that are assigned to this site on WPML.org."
+msgstr "เครดิตที่ชำระล่วงหน้าที่เหลือซึ่งถูกกำหนดให้กับเว็บไซต์นี้บน WPML.org."
+
+#: src/js/ate/status-bar/components/credit/index.js:73
+msgid "Prepaid credits left"
+msgstr "เครดิตที่ชำระล่วงหน้าที่เหลือ"
+
+#: src/js/ate/status-bar/components/credit/index.js:99
+msgid "Pay-as-you-go credits used"
+msgstr "เครดิตแบบชำระตามการใช้งานที่ใช้ไป"
+
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:17
+msgid "Stop"
+msgstr "หยุด"
+
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:26
+msgid "Fix it"
+msgstr "แก้ไข"
+
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:34
+msgid "Assign credits now"
+msgstr "จัดสรรเครดิตเดี๋ยวนี้"
+
+#: src/js/ate/status-bar/model/notification-center-action-presets.js:8
+msgid "Resume"
+msgstr "ดำเนินการต่อ"
+
+#: src/js/ate/status-icons/StatusUpdater.js:80
+msgid "Refreshing translation status"
+msgstr "กำลังรีเฟรชสถานะการแปล"
+
+#: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:26
+msgid ""
+"Read more about how to translate your content in the <a>Getting Started "
+"Guide</a>"
+msgstr "อ่านเพิ่มเติมเกี่ยวกับวิธีการแปลเนื้อหาของคุณใน <a>คู่มือเริ่มต้นใช้งาน</a>"
+
+#: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:36
+msgid "Let's Start Translating!"
+msgstr "มาเริ่มแปลกันเถอะ!"
+
+#: src/js/ate/translate-everything/components/ManualTranslationStatus/index.js:38
+msgid ""
+"Choose your content from the Translation Dashboard below and create your "
+"first translation job!"
+msgstr "เลือกเนื้อหาของคุณจากแดชบอร์ดการแปลด้านล่างและสร้างงานแปลแรกของคุณ!"
+
+#: src/js/ate/translate-everything/components/Status/index.js:105
+msgid ""
+"Change your <a>automatic translation settings</a> (in-progress translation "
+"jobs will be completed with the current settings)."
+msgstr "เปลี่ยน<a>การตั้งค่าการแปลอัตโนมัติ</a>ของคุณ (งานแปลที่กำลังดำเนินการจะเสร็จสมบูรณ์ด้วยการตั้งค่าปัจจุบัน)."
+
+#: src/js/ate/translate-everything/components/Status/index.js:115
+msgid "Read more about translating your site automatically."
+msgstr "อ่านเพิ่มเติมเกี่ยวกับการแปลเว็บไซต์ของคุณโดยอัตโนมัติ."
+
+#: src/js/ate/translate-everything/components/Status/index.js:49
+msgid "Your site is being automatically translated!"
+msgstr "เว็บไซต์ของคุณกำลังถูกแปลโดยอัตโนมัติ!"
+
+#: src/js/ate/translate-everything/components/Status/index.js:58
+msgid "Calculating..."
+msgstr "กำลังคำนวณ..."
+
+#: src/js/ate/translate-everything/components/Status/index.js:88
+msgid "Do not close WP admin!"
+msgstr "อย่าปิดหน้า WP admin!"
+
+#: src/js/ate/translate-everything/components/Status/index.js:96
+msgid "The number of translations"
+msgstr "จำนวนการแปล"

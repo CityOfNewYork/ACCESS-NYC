@@ -1,0 +1,184 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Close": [
+            ""
+         ],
+         "Please take a screenshot of this message and report this issue to <a>WPML support</a>.": [
+            ""
+         ],
+         "This copy of the site has the same content as the original site on %s, but it doesn’t have credits for automatic translation.": [
+            ""
+         ],
+         "If you want to use automatic translation for this site in the future, you can either <a1>add credits to this site</a1> or <a2>share the credits from the original site</a2>.": [
+            ""
+         ],
+         "There was an error checking for credits to share. Please take a screenshot of this message and report it in <a>WPML support</a>.": [
+            ""
+         ],
+         "You’re all set": [
+            ""
+         ],
+         "To allow the sites running on %s and %s to use the same credits for automatic translation, you need to:": [
+            ""
+         ],
+         "Follow <a>this link</a> to access the migration code (you can't get it by visiting %s manually)": [
+            ""
+         ],
+         "Click on <b>Copy migration code</b>": [
+            ""
+         ],
+         "Paste the migration code into the field below.": [
+            ""
+         ],
+         "Migration code": [
+            ""
+         ],
+         "Continue": [
+            ""
+         ],
+         "Go back": [
+            ""
+         ],
+         "Let’s connect the automatic translation credits between the two copies of this site": [
+            ""
+         ],
+         "WPML was unable to copy your site's translations, translation memory, and glossary to this new URL.": [
+            ""
+         ],
+         "Error with copying translation information to new URL": [
+            ""
+         ],
+         "Great. Now this site and its copy on %s are sharing the credits for automatic translation.": [
+            ""
+         ],
+         "Credits that you add on either site will be available on both sites. If you stop using this site, you don’t need to worry about losing credits.": [
+            ""
+         ],
+         "WPML was unable to connect your old and new URLs to share automatic translation credits.": [
+            ""
+         ],
+         "Error with sharing automatic translation credits": [
+            ""
+         ],
+         "The site on %s has %d credits for automatic translation. Do you want to share these credits between %s and this new location (%s)?": [
+            ""
+         ],
+         "The site on %s has a pay-as-you-go subscription for automatic translation. Do you want to share these credits between %s and this new location (%s)?": [
+            ""
+         ],
+         "Yes (recommended)": [
+            ""
+         ],
+         "In the next step, you will receive instructions for how to approve the credits sharing": [
+            ""
+         ],
+         "No": [
+            ""
+         ],
+         "You will need to assign credits or set up a pay-as-you-go plan for this site to use automatic translation": [
+            ""
+         ],
+         "What happens when you share credits for automatic translation between sites?": [
+            ""
+         ],
+         "Translation credits for this site": [
+            ""
+         ],
+         "You can continue translating content normally on this site.": [
+            ""
+         ],
+         "Please keep in mind that there shouldn’t be a copy of this site at %s. If there still is a copy of it there, you will not be able to translate content on that site.": [
+            ""
+         ],
+         "You indicated that you’re no longer running a copy of this site at %s. This means that:": [
+            ""
+         ],
+         "You will not be able to use automatic translation on the old site": [
+            ""
+         ],
+         "If you access the old site, it will trigger warnings on this site": [
+            ""
+         ],
+         "I understand and am no longer running this site at %s": [
+            ""
+         ],
+         "Back": [
+            ""
+         ],
+         "Please check and confirm": [
+            ""
+         ],
+         "WPML was unable to update our records with your new URL.": [
+            ""
+         ],
+         "Error with moving translation information to new URL": [
+            ""
+         ],
+         "Looks like this site was previously at %s and now it’s at %s.": [
+            ""
+         ],
+         "Do you still have the same site running at %s?": [
+            ""
+         ],
+         "Yes": [
+            "是"
+         ],
+         "This is only a copy - original site is still running": [
+            "这只是一个副本 - 原始网站仍在运行"
+         ],
+         "I changed the address of the site to this new one": [
+            "我已将网站地址更改为这个新地址"
+         ],
+         "WPML detected a new address for this site": [
+            "WPML 检测到此网站的新地址"
+         ],
+         "How to manage translations when migrating from development to production and more...": [
+            "如何在从开发环境迁移到生产环境时管理翻译等..."
+         ],
+         "Looks like this site is a copy of a different site, or moved to a different URL. Please contact your translation manager to update Translation Management plugin configuration.": [
+            "看起来这个网站是另一个网站的副本，或者已移动到不同的 URL。请联系您的翻译管理员更新翻译管理插件配置。"
+         ],
+         "Site Moved or Copied - Action Required": [
+            "网站已移动或复制 - 需要采取行动"
+         ],
+         "You or someone else moved this site to %s. Please keep in mind that:": [
+            "您或其他人已将此网站移动到 %s。请记住："
+         ],
+         "Translations that you do at %s will not appear on this site.": [
+            "您在 %s 上进行的翻译不会出现在此网站上。"
+         ],
+         "You cannot edit translations on this site.": [
+            "您无法在此网站上编辑翻译。"
+         ],
+         "The site at %s is using the same credits for automatic translation as this site.": [
+            "%s 上的网站正在使用与此网站相同的自动翻译额度。"
+         ],
+         "If you didn't intend to move this site to %s, you can <a>indicate that this site should be at %s</a>.": [
+            "如果您不打算将此网站移动到 %s，您可以<a>指明此网站应该位于 %s</a>。"
+         ],
+         "This site has moved to a new location": [
+            "此网站已移动到新位置"
+         ],
+         "If you prefer not to move this site, you can <a>mark it as a copy</a> and enable automatic translation for it.": [
+            "如果您不想移动此网站，您可以<a>将其标记为副本</a>并为其启用自动翻译。"
+         ],
+         "Moving the site back here will mean that you will be able to translate on this domain again, but you will not be able to update translations at %s.": [
+            "将网站移回此处意味着您将能够再次在此域名上进行翻译，但您将无法在 %s 上更新翻译。"
+         ],
+         "Yes - move back here": [
+            "是 - 移回此处"
+         ],
+         "No - keep the site on %s": [
+            "否 - 保持网站在 %s"
+         ],
+         "Are you sure that this site should run on %s and not %s?": [
+            "您确定此网站应该在 %s 而不是 %s 上运行吗？"
+         ]
+      }
+   }
+}

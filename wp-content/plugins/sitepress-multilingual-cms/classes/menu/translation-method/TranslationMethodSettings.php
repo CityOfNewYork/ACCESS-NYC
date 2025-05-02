@@ -12,6 +12,7 @@ use WPML\FP\Maybe;
 use WPML\FP\Obj;
 use WPML\LIB\WP\User;
 use WPML\TranslationRoles\UI\Initializer as TranslationRolesInitializer;
+use function WPML\Container\make;
 use function WPML\FP\partial;
 use WPML\LIB\WP\Hooks;
 use WPML\LIB\WP\Nonce;
@@ -29,10 +30,6 @@ class TranslationMethodSettings {
 
 	public static function addHooks() {
 		if ( UIPage::isMainSettingsTab( $_GET ) ) {
-			Hooks::onAction( 'admin_enqueue_scripts' )
-			     ->then( [ self::class, 'localize' ] )
-			     ->then( Resources::enqueueApp( 'translation-method' ) );
-
 			if ( Obj::prop( 'disable_translate_everything', $_GET ) ) {
 				Hooks::onAction( 'wp_loaded' )
 				     ->then( Fns::tap( partial( [ Option::class, 'setTranslateEverything' ], false ) ) )
@@ -41,50 +38,6 @@ class TranslationMethodSettings {
 		}
 	}
 
-	public static function localize()
-	{
-		$getPostTypeName = function ($postType) {
-			return PostType::getPluralName($postType)->getOrElse($postType);
-		};
-
-		$editor = (string)Settings::pathOr(ICL_TM_TMETHOD_MANUAL, ['translation-management', 'doc_translation_method']);
-
-		return [
-			'name' => 'wpml_translation_method',
-			'data' => [
-				'mode' => self::getModeSettingsData(),
-				'languages' => TranslationRolesInitializer::getLanguagesData(),
-				'translateEverything' => Option::shouldTranslateEverything(),
-				'reviewMode' => Option::getReviewMode(),
-				'endpoints' => Lst::concat(
-					[
-						'setTranslateEverything'    => SetTranslateEverything::class,
-						'untranslatedCount'         => UntranslatedCount::class,
-					],
-					TranslationRolesInitializer::getEndPoints()
-				),
-				'urls' => [
-					'tmDashboard' => UIPage::getTMDashboard(),
-					'translateAutomaticallyDoc'  => DocPage::getTranslateAutomatically(),
-					'translatorsTabLink'         => UIPage::getTMTranslators(),
-				],
-				'disableTranslateEverything' => (bool)Obj::prop('disable_translate_everything', $_GET),
-				'hasSubscription' => Account::isAbleToTranslateAutomatically(),
-				'createAccountLink' => UIPage::getTMATE() . '&widget_action=wpml_signup',
-				'translateAutomaticallyDoc' => DocPage::getTranslateAutomatically(),
-				'postTypes' => Fns::map($getPostTypeName, PostTypes::getAutomaticTranslatable()),
-				'hasTranslationService' => ActiveServiceRepository::get() !== null,
-				'translatorsTabLink' => UIPage::getTMTranslators(),
-				'hasJobsInProgress' => count(Jobs::getJobsToSync()),
-				'isTMAllowed' => \WPML\Setup\Option::isTMAllowed(),
-				'isClassicEditor' => Lst::includes($editor, [
-					(string)ICL_TM_TMETHOD_EDITOR,
-					(string)ICL_TM_TMETHOD_MANUAL
-				]),
-				'translationRoles' => TranslationRolesInitializer::getTranslationData( null, false ),
-			],
-		];
-	}
 
 	/**
 	 * @return array
@@ -92,36 +45,13 @@ class TranslationMethodSettings {
 	public static function getModeSettingsData() {
 		$defaultServiceName = self::getDefaultTranslationServiceName();
 		Option::setDefaultTranslationMode( ! empty( $defaultServiceName ) );
-		$translationMethod = null;
-
-		// User selected translation method.
-		$userSelectedTranslationMethod = Option::shouldTranslateEverything( 'unknown' );
-
-		if ( true === $userSelectedTranslationMethod ) {
-			// User selected Translate Everything.
-			$translationMethod = 'automatic';
-		} elseif ( false === $userSelectedTranslationMethod ) {
-			// User selected Translate Some.
-			$translationMethod = 'manual';
-		} else {
-			// No user selection.
-			if ( ! empty( $defaultServiceName ) ) {
-				// Pre-select "Translate Some" if a Translation Service is defined.
-				$translationMethod = 'manual';
-			}
-		}
 
 		return [
 			'whoModes'           => Option::getTranslationMode(),
 			'defaultServiceName' => $defaultServiceName,
-			'method'             => $translationMethod,
 			'reviewMode'         => Option::getReviewMode(),
 			'isTMAllowed' => true,
 		];
-	}
-
-	public static function render() {
-		echo '<div id="translation-method-settings"></div>';
 	}
 
 	/**

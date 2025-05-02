@@ -3,8 +3,7 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "lang": "it_IT"
+            "domain": "messages"
          },
          "From:": [
             "Da:"
@@ -58,22 +57,22 @@
             "Editor"
          ],
          "Select an existing %s and set as Translation Manager": [
-            "Seleziona un %s esistente e impostalo come responsabile delle traduzioni"
+            "Seleziona un %s esistente e imposta come Responsabile delle traduzioni"
          ],
          "Create a new %s and set as Translation Manager": [
-            "Crea un nuovo %s e impostalo come responsabile delle traduzioni"
+            "Crea un nuovo %s e imposta come Responsabile delle traduzioni"
          ],
          "Cancel": [
             "Annulla"
          ],
          "Add Translation Manager": [
-            "Aggiungi il responsabile delle traduzioni"
+            "Aggiungi Responsabile delle traduzioni"
          ],
          "Add a Translation Manager": [
-            "Aggiungi un responsabile delle traduzioni"
+            "Aggiungi un Responsabile delle traduzioni"
          ],
          "Set language pair(s)": [
-            "Imposta una o più combinazioni linguistiche"
+            "Imposta coppia/e di lingue"
          ],
          "Previous": [
             "Precedente"
@@ -82,16 +81,16 @@
             "Salva"
          ],
          "Add a Translator": [
-            "Aggiungi un traduttore"
+            "Aggiungi un Traduttore"
          ],
          "Select an existing user and set as Translator": [
-            "Seleziona un utente esistente e impostalo come traduttore"
+            "Seleziona un utente esistente e imposta come Traduttore"
          ],
          "Create a new user and set as Translator": [
-            "Crea un nuovo utente e impostalo come traduttore"
+            "Crea un nuovo utente e imposta come Traduttore"
          ],
          "Edit language pair(s) for translator": [
-            "Modifica una o più combinazioni linguistiche del traduttore"
+            "Modifica coppia/e di lingue per il traduttore"
          ],
          "Name": [
             "Nome"
@@ -118,7 +117,7 @@
             "La lingua è stata aggiunta"
          ],
          "The value \"%s\" already exists": [
-            "Il valore \"%s\" esiste già"
+            "Il valore “%s” esiste già"
          ],
          "Add a new language": [
             "Aggiungi una nuova lingua"
@@ -136,7 +135,7 @@
             "Fai clic qui"
          ],
          "The wrong format. It may contain only small letters and \"-\". E.g: \"fr\" , \"pt-br\", \"zh-hans\"": [
-            "Formato errato. Può contenere solo lettere minuscole e \"-\". Es.: \"fr\" , \"pt-br\", \"zh-hans\""
+            "Formato errato. Può contenere solo lettere minuscole e “-”. Ad esempio: “fr”, “pt-br”, “zh-hans”"
          ],
          "Language": [
             "Lingua"
@@ -160,7 +159,7 @@
             "Codice predefinito della lingua"
          ],
          "The wrong format. It may contain only small letters and \"_\". E.g: \"de\" , \"de_DE\", \"zh_Hant_TW\"": [
-            "Formato errato. Può contenere solo lettere minuscole e \"_\". Es.: \"de\" , \"de_DE\", \"zh_Hant_TW\""
+            "Formato errato. Può contenere solo lettere minuscole e “_”. Ad esempio: “de”, “de_DE”, “zh_Hant_TW”"
          ],
          "hreflang": [
             "hreflang"
@@ -220,10 +219,13 @@
             "Inglese per gli utenti statunitensi: en-us"
          ],
          "Determines if URLs in this language are encoded or use ASCII characters (if unsure, leave it as \"No\").": [
-            "Stabilisce se gli URL in questa lingua sono codificati o utilizzano caratteri ASCII (in caso di dubbi, lascia \"No\")."
+            "Determina se gli URL in questa lingua sono codificati o utilizzano caratteri ASCII (in caso di dubbi, lascialo come “No”)."
          ],
          "adding a custom language": [
             "aggiunta di una lingua personalizzata"
+         ],
+         "What are the languages of your site?": [
+            "Quali sono le lingue del tuo sito?"
          ],
          "Default language": [
             "Lingua predefinita"
@@ -243,23 +245,20 @@
          "create a custom language": [
             "crea una lingua personalizzata"
          ],
-         "What are the languages of your site?": [
-            "Quali sono le lingue del tuo sito?"
-         ],
          "You can add a dedicated person to oversee everything translation-related on your site. %sTranslation Managers%s can add new local translators or professional translation services, create and assign translation jobs, review completed translations, and change translation-related settings.": [
-            "Puoi aggiungere una persona dedicata per supervisionare tutto quello che riguarda la traduzione sul tuo sito. Il %sresponsabile delle traduzioni%s può aggiungere nuovi traduttori locali o servizi di traduzione professionale, creare e assegnare lavori di traduzione, rivedere le traduzioni completate e modificare le impostazioni relative alla traduzione."
+            "Puoi aggiungere una persona dedicata per supervisionare tutto ciò che riguarda le traduzioni sul tuo sito. I %sResponsabili delle traduzioni%s possono aggiungere nuovi traduttori locali o servizi di traduzione professionale, creare e assegnare lavori di traduzione, rivedere le traduzioni completate e modificare le impostazioni relative alle traduzioni."
          ],
          "Translation Managers": [
             "Responsabili delle traduzioni"
          ],
          "Note: All Administrators are automatically given Translation Manager privileges.": [
-            "Nota: i privilegi di responsabile delle traduzioni vengono assegnati automaticamente a tutti gli amministratori."
+            "Nota: Tutti gli Amministratori ricevono automaticamente i privilegi di Responsabile delle traduzioni."
          ],
          "%sLocal translators%s are users of your site that can log in and add, edit, and review your site's translations. Add a translator and their associated translation pairs to assign them translation jobs.": [
-            "I %sTraduttori locali%s sono utenti del tuo sito che possono accedere a quest'ultimo, nonché aggiungere, modificare e rivedere le traduzioni. Aggiungi un traduttore e le relative combinazioni linguistiche per assegnargli i lavori di traduzione."
+            "I %straduttori locali%s sono utenti del tuo sito che possono accedere e aggiungere, modificare e rivedere le traduzioni del tuo sito. Aggiungi un traduttore e le sue coppie di traduzione associate per assegnargli lavori di traduzione."
          ],
          "You can %shire an experienced translator%s to review your automatic translations for perfect quality.": [
-            "Puoi %sassumere un traduttore esperto%s per revisionare le tue traduzioni automatiche in modo da ottenere una qualità perfetta."
+            "Puoi %sassumere un traduttore esperto%s per rivedere le tue traduzioni automatiche per una qualità perfetta."
          ],
          "Translators": [
             "Traduttori"

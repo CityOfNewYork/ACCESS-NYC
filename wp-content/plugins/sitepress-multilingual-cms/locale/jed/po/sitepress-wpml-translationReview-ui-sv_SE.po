@@ -1,0 +1,67 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/translationReview/components/AcceptedMessage.js:8
+msgid "Accepted"
+msgstr "Accepterad"
+
+#: src/js/translationReview/components/AcceptedText.js:8
+msgid "Approved!"
+msgstr "Godkänd!"
+
+#: src/js/translationReview/components/AcceptedText.js:9
+#: src/js/translationReview/components/PublishedText.js:9
+msgid "Loading the next translation for review..."
+msgstr "Laddar nästa översättning för granskning..."
+
+#: src/js/translationReview/components/BackButton.js:7
+msgid "Back"
+msgstr "Tillbaka"
+
+#: src/js/translationReview/components/ContinueReviewToggle.js:17
+msgid ""
+"Turn off to not automatically load the next translation after finishing "
+"this review."
+msgstr "Stäng av för att inte automatiskt ladda nästa översättning efter att du avslutat denna granskning."
+
+#: src/js/translationReview/components/ContinueReviewToggle.js:18
+msgid "Turn on to automatically load the next translation after finishing this  ."
+msgstr "Slå på för att automatiskt ladda nästa översättning efter att du avslutat denna granskning."
+
+#: src/js/translationReview/components/EditButton.js:10
+msgid "Edit"
+msgstr "Redigera"
+
+#: src/js/translationReview/components/EditButton.js:9
+msgid "Edit translation"
+msgstr "Redigera översättning"
+
+#: src/js/translationReview/components/InProgressText.js:8
+msgid "Please wait, applying translation.."
+msgstr "Vänligen vänta, tillämpar översättning.."
+
+#: src/js/translationReview/components/NextTranslationReview.js:22
+msgid "Next review"
+msgstr "Nästa granskning"
+
+#: src/js/translationReview/components/PublishButton.js:10
+msgid "Publish this translation"
+msgstr "Publicera denna översättning"
+
+#: src/js/translationReview/components/PublishButton.js:9
+msgid "Accept this translation"
+msgstr "Acceptera denna översättning"
+
+#: src/js/translationReview/components/PublishedText.js:8
+msgid "Published!"
+msgstr "Publicerad!"
+
+#: src/js/translationReview/hooks/useATESync.js:34
+msgid "Someone is already reviewing this translation. Please try again later."
+msgstr "Någon granskar redan denna översättning. Vänligen försök igen senare."
+
+#: src/js/translationReview/store.js:29
+msgid "There was an error in applying translation."
+msgstr "Det uppstod ett fel vid tillämpningen av översättningen."

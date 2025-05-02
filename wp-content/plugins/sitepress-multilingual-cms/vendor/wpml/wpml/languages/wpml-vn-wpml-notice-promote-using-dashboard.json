@@ -1,0 +1,31 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Dissmiss Notice": [
+            "Bỏ qua thông báo"
+         ],
+         "Streamline your site's translation using WPML's Translation Dashboard": [
+            "Hợp lý hóa bản dịch trang web của bạn bằng Bảng điều khiển quản lý dịch thuật của WPML"
+         ],
+         "Translate pages, posts, products and strings from one place": [
+            "Dịch các trang, bài đăng, sản phẩm và chuỗi từ một nơi"
+         ],
+         "Bulk automatic translation": [
+            "Dịch tự động hàng loạt"
+         ],
+         "Translate everything automatically": [
+            "Tự động dịch mọi nội dung"
+         ],
+         "Go to the Translation Dashboard": [
+            "Đi đến bảng điều khiển quản lý dịch thuật"
+         ],
+         "Learn More": [
+            "Tìm hiểu thêm"
+         ]
+      }
+   }
+}

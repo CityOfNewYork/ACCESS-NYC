@@ -73,39 +73,38 @@ class OptionsPage extends Strategy {
 		$fields  = get_fields( $id );
 		$fields  = $fields ? $fields : [];
 		foreach ( $fields as $key => $value ) {
-			$options = $this->addNormalizedValuesForFieldState( $options, '', $key, $value );
+			$options = $this->addNormalizedValuesForFieldState( $options, $key, $value );
 		}
 		return $options;
 	}
 
 	/**
 	 * @param array  $options
-	 * @param string $prefix
-	 * @param string $key
+	 * @param string $prefixedKey
 	 * @param mixed  $value
 	 *
 	 * @return array
 	 */
-	private function addNormalizedValuesForFieldState( $options, $prefix, $key, $value ) {
+	private function addNormalizedValuesForFieldState( $options, $prefixedKey, $value ) {
 		if ( $value instanceof \WP_Post || ( is_array( $value ) && isset( $value['ID'] ) ) ) {
-			return array_merge( $options, [ "${prefix}${key}" => Obj::prop( 'ID', $value ) ] );
+			return array_merge( $options, [ $prefixedKey => Obj::prop( 'ID', $value ) ] );
 		} elseif ( $value instanceof \WP_Term ) {
-			return array_merge( $options, [ "${prefix}${key}" => Obj::prop( 'term_id', $value ) ] );
+			return array_merge( $options, [ $prefixedKey => Obj::prop( 'term_id', $value ) ] );
 		} elseif ( $this->isArrayOfStringsOrArrayOfIntegers( $value ) ) {
-			return array_merge( $options, [ "${prefix}${key}" => $value ] );
+			return array_merge( $options, [ $prefixedKey => $value ] );
 		} elseif ( is_array( $value ) ) {
 			foreach ( $value as $index => $item ) {
 				if ( is_numeric( $index ) ) {
 					foreach ( $item as $field => $field_value ) {
-						$options = array_merge( $options, $this->addNormalizedValuesForFieldState( $options, "${prefix}${key}_${index}_", $field, $field_value ) );
+						$options = array_merge( $options, $this->addNormalizedValuesForFieldState( $options, $prefixedKey . '_' . $index . '_' . $field, $field_value ) );
 					}
 				} else {
-					$options = $this->addNormalizedValuesForFieldState( $options, "${prefix}${key}_", $index, $item );
+					$options = $this->addNormalizedValuesForFieldState( $options, $prefixedKey . '_' . $index, $item );
 				}
 			}
 			return $options;
 		} else {
-			return array_merge( $options, [ "${prefix}${key}" => $value ] );
+			return array_merge( $options, [ $prefixedKey => $value ] );
 		}
 	}
 
@@ -161,7 +160,7 @@ class OptionsPage extends Strategy {
 	}
 
 	private function getOptionName( $id, $key ) {
-		return "${id}_${key}";
+		return $id . '_' . $key;
 	}
 
 	/**

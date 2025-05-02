@@ -1,0 +1,61 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "hide the translations instead.": [
+            "ซ่อนการแปลแทน."
+         ],
+         "Error happened! Please try again.": [
+            "เกิดข้อผิดพลาด! กรุณาลองอีกครั้ง."
+         ],
+         "Cancel": [
+            "ยกเลิก"
+         ],
+         "Choose Content to Automatically Translate into": [
+            "เลือกเนื้อหาที่จะแปลโดยอัตโนมัติเป็น"
+         ],
+         "Save Changes and Enable Automatic Translation": [
+            "บันทึกการเปลี่ยนแปลงและเปิดใช้งานการแปลอัตโนมัติ"
+         ],
+         "Cancel Language Changes": [
+            "ยกเลิกการเปลี่ยนแปลงภาษา"
+         ],
+         "Save": [
+            "บันทึก"
+         ],
+         "Add new languages": [
+            "เพิ่มภาษาใหม่"
+         ],
+         "Add new language": [
+            "เพิ่มภาษาใหม่"
+         ],
+         "Never mind - don't add new languages": [
+            "ไม่เป็นไร - ไม่ต้องเพิ่มภาษาใหม่"
+         ],
+         "Never mind - don't add new language": [
+            "ไม่เป็นไร - ไม่ต้องเพิ่มภาษาใหม่"
+         ],
+         "Choose which content to translate into the new language": [
+            "เลือกเนื้อหาที่ต้องการแปลเป็นภาษาใหม่"
+         ],
+         "Automatically translate all my posts and pages, plus new content as I create it.": [
+            "แปลโพสต์และหน้าทั้งหมดของฉันโดยอัตโนมัติ รวมถึงเนื้อหาใหม่ขณะที่ฉันสร้าง."
+         ],
+         "Only automatically translate new content.": [
+            "แปลเฉพาะเนื้อหาใหม่โดยอัตโนมัติ."
+         ],
+         "Which content do you want to translate into the new language?": [
+            "คุณต้องการแปลเนื้อหาใดเป็นภาษาใหม่?"
+         ],
+         "When you unpause automatic translation, this content will be <a>translated automatically</a>.": [
+            "เมื่อคุณยกเลิกการหยุดชั่วคราวการแปลอัตโนมัติ เนื้อหานี้จะได้รับการ<a>แปลโดยอัตโนมัติ</a>."
+         ],
+         "You can still translate existing content any time from the Translation Management Dashboard.": [
+            "คุณยังสามารถแปลเนื้อหาที่มีอยู่ได้ทุกเมื่อจากแดชบอร์ดการจัดการการแปล."
+         ]
+      }
+   }
+}

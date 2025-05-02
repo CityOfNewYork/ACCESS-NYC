@@ -23,6 +23,12 @@
          "Color": [
             "Farbe"
          ],
+         "px": [
+            "px"
+         ],
+         "%": [
+            "%"
+         ],
          "Dimensions": [
             "Maße"
          ],
@@ -142,6 +148,15 @@
          ],
          "X-Large": [
             "Sehr groß"
+         ],
+         "Ab": [
+            "Ab"
+         ],
+         "AB": [
+            "AB"
+         ],
+         "ab": [
+            "ab"
          ],
          "Small": [
             "Klein"

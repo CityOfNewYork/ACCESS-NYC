@@ -11,4 +11,6 @@ interface WPML_ST_Translations_File_Dictionary_Storage {
 	 * @return WPML_ST_Translations_File_Entry[]
 	 */
 	public function find( $path = null, $status = null );
+
+	public function findAllUniqueComponentIds( string $componentType = null, array $fileExtensions = [] ): array;
 }

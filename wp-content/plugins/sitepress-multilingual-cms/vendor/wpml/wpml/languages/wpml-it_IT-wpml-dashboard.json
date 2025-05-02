@@ -1,0 +1,1197 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "Untranslated strings that I encounter on front-end while logged in": [
+            "Stringhe non tradotte che incontro sul front-end mentre sono loggato"
+         ],
+         "Untranslated strings that all front-end users encounter": [
+            "Stringhe non tradotte che tutti gli utenti del front-end incontrano"
+         ],
+         "Disable auto-registration of strings": [
+            "Disattiva la registrazione automatica delle stringhe"
+         ],
+         "Plugins": [
+            "Plugin"
+         ],
+         "Themes": [
+            "Temi"
+         ],
+         "WordPress": [
+            "WordPress"
+         ],
+         "Other": [
+            "Altro"
+         ],
+         "Error in fetching default translation batch name": [
+            "Errore nel recupero del nome predefinito del lotto di traduzione"
+         ],
+         "Error in fetching translation editor type.": [
+            "Errore nel recupero del tipo di editor di traduzione."
+         ],
+         "Error in fetching untranslated types count": [
+            "Errore nel recupero del conteggio dei tipi non tradotti"
+         ],
+         "Error in fetching remote translation service data.": [
+            "Errore nel recupero dei dati del servizio di traduzione remoto."
+         ],
+         "An error occurred while sending the translation.": [
+            "Si è verificato un errore durante l'invio della traduzione."
+         ],
+         "Validation failed": [
+            "Convalida fallita"
+         ],
+         "Please wait until download finishes": [
+            "Attendere fino al completamento del download"
+         ],
+         "You need to wait 5 minutes after the last check": [
+            "Devi aspettare 5 minuti dopo l'ultimo controllo"
+         ],
+         "Check status and get translations": [
+            "Controlla lo stato e ottieni le traduzioni"
+         ],
+         "Status: ": [
+            "Stato: "
+         ],
+         "Downloaded jobs: ": [
+            "Lavori scaricati: "
+         ],
+         "Cancelled jobs: ": [
+            "Lavori annullati: "
+         ],
+         "none of your translation jobs have been completed": [
+            "nessuno dei tuoi lavori di traduzione è stato completato"
+         ],
+         "Checking translation jobs status. Please don't close this page!": [
+            "Controllo dello stato dei lavori di traduzione in corso. Non chiudere questa pagina!"
+         ],
+         " have been sent to remote translators": [
+            " sono stati inviati a traduttori remoti"
+         ],
+         " has been sent to remote translators": [
+            " è stato inviato a traduttori remoti"
+         ],
+         "Last check: Never": [
+            "Ultimo controllo: Mai"
+         ],
+         "Filtering is disabled to show all selected items. ": [
+            "Il filtraggio è disattivato per mostrare tutti gli elementi selezionati. "
+         ],
+         "Apply filters": [
+            "Applica filtri"
+         ],
+         "%d item selected": [
+            "%d elemento selezionato",
+            "%d elementi selezionati"
+         ],
+         "(%d word count)": [
+            "(%d conteggio parole)"
+         ],
+         "%s item not showing.": [
+            "%s elemento non visualizzato.",
+            "%s elementi non visualizzati."
+         ],
+         "Show all selected items": [
+            "Mostra tutti gli elementi selezionati"
+         ],
+         "Translate your content": [
+            "Traduci il tuo contenuto"
+         ],
+         "Unselect all": [
+            "Deseleziona tutto"
+         ],
+         "Source Language:": [
+            "Lingua di origine:"
+         ],
+         "translated to:": [
+            "tradotto in:"
+         ],
+         "Filter": [
+            "Filtra"
+         ],
+         "You are about to change the source language filter from %s to %s": [
+            "Stai per cambiare il filtro della lingua di origine da %s a %s"
+         ],
+         "Updating the source language filter will clear the items you've selected for translation. Are you sure you want to continue?": [
+            "L'aggiornamento del filtro della lingua di origine cancellerà gli elementi selezionati per la traduzione. Sei sicuro di voler continuare?"
+         ],
+         "Change source language": [
+            "Cambia lingua di origine"
+         ],
+         "Cancel": [
+            "Annulla"
+         ],
+         "All Statuses": [
+            "Tutti gli stati"
+         ],
+         "All languages": [
+            "Tutte le lingue"
+         ],
+         "All translation statuses": [
+            "Tutti gli stati di traduzione"
+         ],
+         "Not completed": [
+            "Non completato"
+         ],
+         "Needs updating": [
+            "Necessita di aggiornamento"
+         ],
+         "Translation in progress": [
+            "Traduzione in corso"
+         ],
+         "Translation complete": [
+            "Traduzione completata"
+         ],
+         "Global Filter": [
+            "Filtro globale"
+         ],
+         "Parent:": [
+            "Genitore:"
+         ],
+         "Search parent by title": [
+            "Cerca genitore per titolo"
+         ],
+         "Search by term title in %s": [
+            "Cerca per titolo del termine in %s"
+         ],
+         "All taxonomies": [
+            "Tutte le tassonomie"
+         ],
+         "Loading": [
+            "Caricamento"
+         ],
+         "Taxonomy Term:": [
+            "Termine di tassonomia:"
+         ],
+         "Loading terms": [
+            "Caricamento dei termini"
+         ],
+         "No terms found": [
+            "Nessun termine trovato"
+         ],
+         "Filter by:": [
+            "Filtra per:"
+         ],
+         "Title": [
+            "Titolo"
+         ],
+         "There is an issue with automatic translation that needs your attention.": [
+            "C'è un problema con la traduzione automatica che richiede la tua attenzione."
+         ],
+         "Fix to continue translating automatically": [
+            "Correggi per continuare a tradurre automaticamente"
+         ],
+         "View": [
+            "Visualizza"
+         ],
+         "Edit": [
+            "Modifica"
+         ],
+         "Edit note for the translators": [
+            "Modifica nota per i traduttori"
+         ],
+         "Add note for the translators": [
+            "Aggiungi nota per i traduttori"
+         ],
+         "This page is set to be %1$stranslated manually%2$s using the WordPress Editor": [
+            "Questa pagina è impostata per essere %1$stradotta manualmente%2$s utilizzando l'Editor WordPress"
+         ],
+         "(no title)": [
+            "(nessun titolo)"
+         ],
+         "Image": [
+            "Immagine"
+         ],
+         "Date / Status": [
+            "Data / Stato"
+         ],
+         "Word count": [
+            "Conteggio parole"
+         ],
+         "Loading items...": [
+            "Caricamento elementi..."
+         ],
+         "%1$d %2$s selected": [
+            "%1$d %2$s selezionati"
+         ],
+         "items": [
+            "elementi"
+         ],
+         "Filtering is disabled to show all selected items": [
+            "Il filtraggio è disattivato per mostrare tutti gli elementi selezionati"
+         ],
+         "Apply filter": [
+            "Applica filtro"
+         ],
+         "%1$d %2$s not showing": [
+            "%1$d %2$s non visualizzati"
+         ],
+         "Show selected items": [
+            "Mostra elementi selezionati"
+         ],
+         " / page": [
+            " / pagina"
+         ],
+         "Previous": [
+            "Precedente"
+         ],
+         "Next": [
+            "Successivo"
+         ],
+         "Your site's content is too vast for a single translation batch. Use filters to reduce the selection, then \"select all\".": [
+            "Il contenuto del tuo sito è troppo vasto per un singolo lotto di traduzione. Usa i filtri per ridurre la selezione, poi “seleziona tutto”."
+         ],
+         "The current filter captures too much content. Narrow it down to enable \"select all\" for translation.": [
+            "Il filtro corrente cattura troppo contenuto. Restringilo per abilitare “seleziona tutto” per la traduzione."
+         ],
+         "Select All": [
+            "Seleziona tutto"
+         ],
+         "All %d items matching criteria are selected": [
+            "Tutti i %d elementi che corrispondono ai criteri sono selezionati"
+         ],
+         "All %d items in this section are selected": [
+            "Tutti gli elementi %d in questa sezione sono selezionati"
+         ],
+         "You have too many items to send for translation at once. Apply a filter to narrow down the items to enable this option.": [
+            "Hai troppi elementi da inviare per la traduzione in una volta sola. Applica un filtro per ridurre gli elementi per abilitare questa opzione."
+         ],
+         "Clear selection": [
+            "Cancella selezione"
+         ],
+         "Select all items that match this search": [
+            "Seleziona tutti gli elementi che corrispondono a questa ricerca"
+         ],
+         "Loading...": [
+            "Caricamento..."
+         ],
+         "Save note": [
+            "Salva nota"
+         ],
+         "The following target languages do not support automatic translation: %s. <a>Map to known languages</a> to enable automatic translation.": [
+            "Le seguenti lingue di destinazione non supportano la traduzione automatica: %s. <a>Associa a lingue conosciute</a> per abilitare la traduzione automatica."
+         ],
+         "The site's default language %s doesn't support automatic translation.": [
+            "La lingua predefinita del sito %s non supporta la traduzione automatica."
+         ],
+         "Some sections are hidden due to current filter settings or because they have no items. <show_all>Show all translation statuses</show_all>": [
+            "Alcune sezioni sono nascoste a causa delle impostazioni del filtro corrente o perché non hanno elementi. <show_all>Mostra tutti gli stati di traduzione</show_all>"
+         ],
+         "Step 1": [
+            "Passo 1"
+         ],
+         "Select items for translation": [
+            "Seleziona elementi per la traduzione"
+         ],
+         "Clear filters": [
+            "Cancella filtri"
+         ],
+         "strings": [
+            "stringhe"
+         ],
+         "WPML didn't find any %s matching your criteria.": [
+            "WPML non ha trovato alcun %s che corrisponda ai tuoi criteri."
+         ],
+         "You have too many items selected to use this feature. Deselect some of the items to enable it.": [
+            "Hai selezionato troppi elementi per utilizzare questa funzione. Deseleziona alcuni elementi per abilitarla."
+         ],
+         "Show strings in:": [
+            "Mostra stringhe in:"
+         ],
+         "All domains": [
+            "Tutti i domini"
+         ],
+         "All sources": [
+            "Tutte le fonti"
+         ],
+         "Frontend (viewed)": [
+            "Frontend (visualizzato)"
+         ],
+         "Backend (viewed)": [
+            "Backend (visualizzato)"
+         ],
+         "Unknown": [
+            "Sconosciuto"
+         ],
+         "String": [
+            "Stringa"
+         ],
+         "All Translation Priorities": [
+            "Tutte le Priorità di Traduzione"
+         ],
+         "This filter is available only if source is set to \"Frontend\" or \"Backend\".": [
+            "Questo filtro è disponibile solo se la fonte è impostata su “\"Frontend\"” o “\"Backend\"”."
+         ],
+         "front-end": [
+            "front-end"
+         ],
+         "back-end": [
+            "back-end"
+         ],
+         "viewed": [
+            "visualizzato"
+         ],
+         "Domain": [
+            "Dominio"
+         ],
+         "Source": [
+            "Fonte"
+         ],
+         "Type": [
+            "Tipo"
+         ],
+         "Strings in the theme and plugins": [
+            "Stringhe nel tema e nei plugin"
+         ],
+         "Translate front-end texts you can customize from the WordPress admin like footer text, copyright notices, plugin options and settings, time format, widget texts, and more.": [
+            "Traduci i testi del front-end che puoi personalizzare dall'amministrazione di WordPress come il testo del piè di pagina, gli avvisi di copyright, le opzioni e le impostazioni dei plugin, il formato dell'ora, i testi dei widget e altro ancora."
+         ],
+         "Translating Strings From Admin and Settings": [
+            "Traduzione delle stringhe da Admin e Impostazioni"
+         ],
+         "Translate texts in admin screens": [
+            "Traduci i testi nelle schermate di amministrazione"
+         ],
+         "Translate User Meta Information": [
+            "Traduci le informazioni dei metadati utente"
+         ],
+         "Making User Meta Information Translatable": [
+            "Rendere traducibili le informazioni dei metadati utente"
+         ],
+         "Translate user profile strings": [
+            "Traduci le stringhe del profilo utente"
+         ],
+         "You need to visit translations on your site's front-end (<a/>) and WPML will identify all untranslated strings and list them here. ": [
+            "Devi visitare le traduzioni sul front-end del tuo sito (<a/>) e WPML identificherà tutte le stringhe non tradotte e le elencherà qui."
+         ],
+         "hide details": [
+            "nascondi dettagli"
+         ],
+         "more details": [
+            "più dettagli"
+         ],
+         "Still can't find the strings you're looking to translate? Add more strings for translation.": [
+            "Non trovi ancora le stringhe da tradurre? Aggiungi altre stringhe per la traduzione."
+         ],
+         "Translate Everything translates only those strings which are registered in English language": [
+            "Traduci Tutto traduce solo le stringhe che sono registrate in lingua inglese"
+         ],
+         "Most strings from your plugins and theme are in English, so we’re showing them alongside your default language. Use the <b>Source Language</b> filter to view strings in a specific language.": [
+            "La maggior parte delle stringhe dei tuoi plugin e del tema sono in inglese, quindi le stiamo mostrando insieme alla tua lingua predefinita. Usa il filtro <b>Lingua di origine</b> per visualizzare le stringhe in una lingua specifica."
+         ],
+         "You’re using <b>%s</b> to cache your site, which may prevent WPML from automatically registering new strings. To fix this, clear your page cache, then visit your translated pages again on the frontend to detect new strings.": [
+            "Stai usando <b>%s</b> per mettere in cache il tuo sito, il che potrebbe impedire a WPML di registrare automaticamente nuove stringhe. Per risolvere, cancella la cache della pagina, poi visita di nuovo le tue pagine tradotte nel frontend per rilevare nuove stringhe."
+         ],
+         "WPML can detect strings that appear on the site and list them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here only the strings that actually appear on the site, you need to enable this feature.": [
+            "WPML può rilevare le stringhe che appaiono sul sito e elencarle qui. Questa funzione ti aiuta a identificare le stringhe che effettivamente appaiono sul sito e a tradurle. Per vedere qui solo le stringhe che effettivamente appaiono sul sito, devi abilitare questa funzione."
+         ],
+         "WPML detects strings that appear on the site and lists them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here all the strings in the site, you need to disable this feature.": [
+            "WPML rileva le stringhe che appaiono sul sito e le elenca qui. Questa funzione ti aiuta a identificare le stringhe che effettivamente appaiono sul sito e a tradurle. Per vedere qui tutte le stringhe del sito, devi disabilitare questa funzione."
+         ],
+         "Detect untranslated strings": [
+            "Rileva stringhe non tradotte"
+         ],
+         "WPML can detect untranslated strings and automatically register them for translation. This happens in real time as you or your visitors browse your website.": [
+            "WPML può rilevare stringhe non tradotte e registrarle automaticamente per la traduzione. Questo avviene in tempo reale mentre tu o i tuoi visitatori navigate nel sito."
+         ],
+         "Automatically register untranslated strings": [
+            "Registra automaticamente le stringhe non tradotte"
+         ],
+         "Learn how to use auto-registration": [
+            "Scopri come utilizzare la registrazione automatica"
+         ],
+         "recommended": [
+            "consigliato"
+         ],
+         "Also register strings from the website's back-end": [
+            "Registra anche le stringhe dal back-end del sito web"
+         ],
+         "Save settings": [
+            "Salva impostazioni"
+         ],
+         "Request failed because of the network error": [
+            "La richiesta è fallita a causa di un errore di rete"
+         ],
+         "Try again": [
+            "Riprova"
+         ],
+         "Enabled": [
+            "Abilitato"
+         ],
+         "Disabled": [
+            "Disabilitato"
+         ],
+         "Modify": [
+            "Modifica"
+         ],
+         "You can only translate %1$s from the site's default language (%2$s).": [
+            "Puoi tradurre solo %1$s dalla lingua predefinita del sito (%2$s)."
+         ],
+         "Leave existing translations as they are": [
+            "Lascia le traduzioni esistenti come sono"
+         ],
+         "Overwrite existing translations": [
+            "Sovrascrivi le traduzioni esistenti"
+         ],
+         "Some of the content you want to translate is already translated": [
+            "Alcuni dei contenuti che desideri tradurre sono già stati tradotti"
+         ],
+         "What do you want to do with the content that's already translated?": [
+            "Cosa vuoi fare con i contenuti già tradotti?"
+         ],
+         "Suggested deadline:": [
+            "Scadenza suggerita:"
+         ],
+         "Set a batch name and deadline": [
+            "Imposta un nome per il lotto e una scadenza"
+         ],
+         "You can assign a custom name to this batch for easy tracking and suggest a deadline to clarify the priority for translators.": [
+            "Puoi assegnare un nome personalizzato a questo lotto per un facile monitoraggio e suggerire una scadenza per chiarire la priorità per i traduttori."
+         ],
+         "Batch name:": [
+            "Nome del lotto:"
+         ],
+         "Default translation engine: ": [
+            "Motore di traduzione predefinito: "
+         ],
+         "Change": [
+            "Cambia"
+         ],
+         "Failed to load engines": [
+            "Caricamento dei motori fallito"
+         ],
+         "Your Automatic Translation Credits": [
+            "I tuoi Crediti di Traduzione Automatica"
+         ],
+         "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s translator</add_yourself> to the site.<br/> Add yourself as %s translator and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Per assegnarti come traduttore, devi prima <add_yourself>aggiungerti come traduttore %s</add_yourself> al sito.<br/> Aggiungiti come traduttore %s e clicca <check_again>controlla di nuovo</check_again> o scegli un'opzione di traduzione diversa."
+         ],
+         "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s to %s translator</add_yourself> to the site.<br/> Add yourself as %s to %s translator and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Per assegnarti come traduttore, devi prima <add_yourself>aggiungerti come traduttore da %s a %s</add_yourself> al sito.<br/> Aggiungiti come traduttore da %s a %s e clicca <check_again>controlla di nuovo</check_again> o scegli un'opzione di traduzione diversa."
+         ],
+         "Checking": [
+            "Controllo in corso"
+         ],
+         "In order to assign a translation service, you first need to <activate_ts>activate a translation service</activate_ts>.<br/>Activate a translation service and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Per assegnare un servizio di traduzione, devi prima <activate_ts>attivare un servizio di traduzione</activate_ts>.<br/>Attiva un servizio di traduzione e clicca <check_again>controlla di nuovo</check_again> o scegli un'opzione di traduzione diversa."
+         ],
+         " Checking ": [
+            " Controllo in corso "
+         ],
+         "In order to translate automatically, you first need to <enable_ate>enable WPML's Advanced Translation Editor</enable_ate>.<br/>Enable the Advanced Translation Editor and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Per tradurre automaticamente, devi prima <enable_ate>abilitare l'Editor di Traduzione Avanzato di WPML</enable_ate>.<br/>Abilita l'Editor di Traduzione Avanzato e clicca <check_again>controlla di nuovo</check_again> o scegli un'opzione di traduzione diversa."
+         ],
+         "The items you selected were translated with the Classic Translation Editor and cannot be sent for automatic translation.": [
+            "Gli elementi selezionati sono stati tradotti con l'Editor di Traduzione Classico e non possono essere inviati per la traduzione automatica."
+         ],
+         "Some of the items you selected were translated with the Classic Translation Editor. These cannot be sent for automatic translation.": [
+            "Alcuni degli elementi selezionati sono stati tradotti con l'Editor di Traduzione Classico. Questi non possono essere inviati per la traduzione automatica."
+         ],
+         "Any existing content (translations) will be overwritten when creating duplicates.\nWhen duplicating content, please first duplicate parent pages to maintain the site's hierarchy.": [
+            "Qualsiasi contenuto esistente (traduzioni) sarà sovrascritto durante la creazione di duplicati.\nQuando duplichi i contenuti, duplica prima le pagine principali per mantenere la gerarchia del sito."
+         ],
+         "Some of the selected content is already being translated. This will cancel any in-progress translations.": [
+            "Alcuni dei contenuti selezionati sono già in fase di traduzione. Questo annullerà tutte le traduzioni in corso."
+         ],
+         "Connection Error. Please wait a minute and reload this page. If the problem continues, please contact WPML support.": [
+            "Errore di connessione. Attendi un minuto e ricarica questa pagina. Se il problema persiste, contatta il supporto di WPML."
+         ],
+         "Buy credits": [
+            "Acquista crediti"
+         ],
+         "You don't have enough credits to translate your content automatically.": [
+            "Non hai abbastanza crediti per tradurre automaticamente i tuoi contenuti."
+         ],
+         "In order to assign to a translator, you first need to <add_translators>add %s translators</add_translators> to the site.<br/> Add %s translators and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Per assegnare a un traduttore, devi prima <add_translators>aggiungere traduttori %s</add_translators> al sito.<br/> Aggiungi traduttori %s e clicca <check_again>controlla di nuovo</check_again> o scegli un'opzione di traduzione diversa."
+         ],
+         "In order to assign to a translator, you first need to <add_translators>add %s to %s translators</add_translators> to the site.<br/> Add %s to %s translators and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Per assegnare a un traduttore, devi prima <add_translators>aggiungere traduttori da %s a %s</add_translators> al sito.<br/> Aggiungi traduttori da %s a %s e clicca <check_again>controlla di nuovo</check_again> o scegli un'opzione di traduzione diversa."
+         ],
+         "Your site doesn't have any reviewers for %s. This means that you’re the only person who can review these translations.": [
+            "Il tuo sito non ha revisori per %s. Questo significa che sei l'unica persona che può rivedere queste traduzioni."
+         ],
+         "Your site doesn't have any reviewers yet. This means that you’re the only person who can review translations.": [
+            "Il tuo sito non ha ancora revisori. Questo significa che sei l'unica persona che può rivedere le traduzioni."
+         ],
+         "If you want other people to review the translations, go to <a>WPML → Translation Management → Translators</a> and add translators. They will be able to both review and translate content for you.": [
+            "Se vuoi che altre persone revisionino le traduzioni, vai su <a>WPML → Gestione Traduzioni → Traduttori</a> e aggiungi dei traduttori. Potranno sia revisionare che tradurre contenuti per te."
+         ],
+         "WPML does not support duplicating strings. Your selection to duplicate strings to %1$s will be ignored if you proceed with the translation.": [
+            "WPML non supporta la duplicazione delle stringhe. Se procedi con la traduzione, la tua scelta di duplicare le stringhe in %1$s sarà ignorata."
+         ],
+         "WPML does not support duplicating %1$s elements. Your selection to duplicate elements to %2$s will be ignored if you proceed with the translation.": [
+            "WPML non supporta la duplicazione degli elementi %1$s. Se procedi con la traduzione, la tua scelta di duplicare gli elementi in %2$s sarà ignorata."
+         ],
+         "WPML does not support duplicating %1$s elements and strings. Your selection to duplicate elements and strings to %2$s will be ignored if you proceed with the translation.": [
+            "WPML non supporta la duplicazione di elementi e stringhe %1$s. Se procedi, la tua scelta di duplicarli in %2$s sarà ignorata."
+         ],
+         "WPML does not support duplicating strings.": [
+            "WPML non supporta la duplicazione delle stringhe."
+         ],
+         "WPML does not support duplicating %1$s elements.": [
+            "WPML non supporta la duplicazione degli elementi %1$s."
+         ],
+         "WPML does not support duplicating %1$s elements and strings.": [
+            "WPML non supporta la duplicazione di elementi e stringhe %1$s."
+         ],
+         "Finish setting up %s on your site": [
+            "Completa la configurazione di %s sul tuo sito"
+         ],
+         "You need to authenticate %s to send them content for translation.<br/>Visit the <a>Translators tab</a> to finish the setup and click <check_again>check again</check_again> or choose a different translation option.": [
+            "Devi autenticare %s per inviargli contenuti da tradurre.<br/>Visita la <a>scheda Traduttori</a> per completare la configurazione e clicca <check_again>controlla di nuovo</check_again> o scegli un'altra opzione di traduzione."
+         ],
+         "Set Up Translate Everything Automatically": [
+            "Configura Traduci Tutto Automaticamente"
+         ],
+         "WPML will translate your content into %d languages": [
+            "WPML tradurrà il tuo contenuto in %d lingue"
+         ],
+         "Content selected for translation": [
+            "Contenuto selezionato per la traduzione"
+         ],
+         "Volume": [
+            "Volume"
+         ],
+         "~ %d words": [
+            "~ %d parole"
+         ],
+         "Total": [
+            "Totale"
+         ],
+         "Sent for translation": [
+            "Inviato per la traduzione"
+         ],
+         "Sending for translation failed": [
+            "Invio per la traduzione fallito"
+         ],
+         "You selected multiple translation methods for content across different languages:": [
+            "Hai selezionato più metodi di traduzione per contenuti in diverse lingue:"
+         ],
+         "Ok": [
+            "Ok"
+         ],
+         "<s>1 item</s> is being translated automatically.": [
+            "<s>1 elemento</s> è in corso di traduzione automatica.",
+            "<s>%d elementi</s> sono in corso di traduzione automatica."
+         ],
+         "You can track their progress at the top of the page.": [
+            "Puoi tracciare il loro progresso nella parte superiore della pagina."
+         ],
+         "From now on, WPML will automatically translate new content on your site.": [
+            "D'ora in poi, WPML tradurrà automaticamente i nuovi contenuti sul tuo sito."
+         ],
+         "This number might vary because you enabled the Translate Everything Automatically Mode.": [
+            "Questo numero potrebbe variare perché hai attivato la modalità Traduci Tutto Automaticamente."
+         ],
+         "From now on, WPML will automatically translate your site's content.": [
+            "D'ora in poi, WPML tradurrà automaticamente i contenuti del tuo sito."
+         ],
+         "Automatic translations summary": [
+            "Riepilogo traduzioni automatiche"
+         ],
+         "Some of the content that you selected for translation includes fields that are encoded. Translators will not be able to work on this kind of content, so we removed it from the job.": [
+            "Alcuni dei contenuti selezionati per la traduzione includono campi codificati. I traduttori non saranno in grado di lavorare su questo tipo di contenuto, quindi lo abbiamo rimosso dal lavoro."
+         ],
+         "To fix this problem, please contact our support team and describe this issue.": [
+            "Per risolvere questo problema, contatta il nostro team di supporto e descrivi il problema."
+         ],
+         "WPML cannot send some fo the content to translation": [
+            "WPML non può inviare alcuni contenuti alla traduzione"
+         ],
+         "Open support ticket": [
+            "Apri ticket di supporto"
+         ],
+         "<s>1 item</s> has been successfully assigned to you! To check its status, please go to <s>WPML → Translations</s>. <translations_queue/>": [
+            "<s>1 cosa</s> ti è stata assegnata con successo! Per controllarne lo stato, vai su <s>WPML → Traduzioni</s>. <translations_queue/>",
+            "<s>%d cose</s> ti sono state assegnate con successo! Per gli aggiornamenti sullo stato, vai su <s>WPML → Traduzioni</s>. <translations_queue/>"
+         ],
+         "Currently logged in translator summary": [
+            "Riepilogo del traduttore attualmente connesso"
+         ],
+         "Go to Translations": [
+            "Vai a Traduzioni"
+         ],
+         "<s>1 item</s> has been duplicated.": [
+            "<s>1 cosa</s> è stata duplicata.",
+            "<s>%d cose</s> sono state duplicate."
+         ],
+         "Duplication summary": [
+            "Riepilogo duplicazione"
+         ],
+         "There was a problem sending your content for translation.": [
+            "Si è verificato un problema nell'invio del tuo contenuto per la traduzione."
+         ],
+         "Please try again in a few minutes. If the issue persists, please contact our support.": [
+            "Per favore riprova tra qualche minuto. Se il problema persiste, contatta il nostro supporto."
+         ],
+         "Some of the selected strings are already registered or translated into %s. Since their source language matches the target language, they cannot be retranslated.": [
+            "Alcune delle stringhe selezionate sono già registrate o tradotte in %s. Poiché la loro lingua di origine corrisponde alla lingua di destinazione, non possono essere ritradotte."
+         ],
+         "Some of the selected content has already been translated from %s to %s and cannot be re-translated from %s to %s.": [
+            "Alcuni dei contenuti selezionati sono già stati tradotti da %s a %s e non possono essere ritradotti da %s a %s."
+         ],
+         "Content already translated": [
+            "Contenuto già tradotto"
+         ],
+         "Some content couldn't be sent to translation.": [
+            "Alcuni contenuti non possono essere inviati alla traduzione."
+         ],
+         "WPML did not create translations for some languages because of the following reasons:": [
+            "WPML non ha creato traduzioni per alcune lingue per i seguenti motivi:"
+         ],
+         "<s>1 item</s> has been successfully sent to translators!": [
+            "<s>1 cosa</s> è stata inviata con successo ai traduttori!",
+            "<s>%d cose</s> sono state inviate con successo ai traduttori!"
+         ],
+         "Local translations summary": [
+            "Riepilogo traduzioni locali"
+         ],
+         "You can check their status in WPML → Translation": [
+            "Puoi controllare il loro stato in WPML → Traduzione"
+         ],
+         "Continue to %s": [
+            "Continua su %s"
+         ],
+         "We were unable to send the following batches for professional translation:": [
+            "Non siamo riusciti a inviare i seguenti lotti per la traduzione professionale:"
+         ],
+         "<p><a><s>Contact WPML support for help</s></a></p>": [
+            "<p><a><s>Contatta il supporto di WPML per assistenza</s></a></p>"
+         ],
+         "Translation Service": [
+            "Servizio di Traduzione"
+         ],
+         "sending for professional translation..": [
+            "invio per traduzione professionale.."
+         ],
+         "<s>%d item</s> is being sent for translation to %s. Please continue to their site to start the translation.": [
+            "<s>%d elemento</s> viene inviato per la traduzione a %s. Continua sul loro sito per iniziare la traduzione.",
+            "<s>%d elementi</s> vengono inviati per la traduzione a %s. Continua sul loro sito per iniziare la traduzione."
+         ],
+         "Translation service translations summary": [
+            "Riepilogo traduzioni del servizio di traduzione"
+         ],
+         "One or more assigned translators are invalid. The translator may have been removed or their language permissions changed.<br/> Review your settings on the <translators_page>Translators page</translators_page>.": [
+            "Uno o più traduttori assegnati non sono validi. Il traduttore potrebbe essere stato rimosso o le sue autorizzazioni linguistiche modificate.<br/> Rivedi le tue impostazioni nella <translators_page>pagina Traduttori</translators_page>."
+         ],
+         "The selected translation service is no longer valid. It may have been changed, unauthenticated, or deactivated.<br/> Review your settings on the <translators_page>Translators page</translators_page>.": [
+            "Il servizio di traduzione selezionato non è più valido. Potrebbe essere stato modificato, non autenticato o disattivato.<br/> Rivedi le tue impostazioni nella <translators_page>pagina Traduttori</translators_page>."
+         ],
+         "Currently selected translation editor doesn't support automatic translation. You must enable the Advanced Translation Editor to send content for automatic translation.<br/> Check your settings on the <wpml_settings>WPML settings page</wpml_settings>.": [
+            "L'editor di traduzione attualmente selezionato non supporta la traduzione automatica. Devi abilitare l'Editor di Traduzione Avanzato per inviare contenuti per la traduzione automatica.<br/> Controlla le tue impostazioni nella pagina delle <wpml_settings>impostazioni di WPML</wpml_settings>."
+         ],
+         "Validation error happened during send to translation.": [
+            "Si è verificato un errore di convalida durante l'invio alla traduzione."
+         ],
+         "Sending for translation": [
+            "Invio per la traduzione"
+         ],
+         "Translate and Duplicate": [
+            "Traduci e Duplica"
+         ],
+         "Duplicate": [
+            "Duplica"
+         ],
+         "Translate": [
+            "Traduci"
+         ],
+         "Selected content is already translated": [
+            "Il contenuto selezionato è già tradotto"
+         ],
+         "Please select a review option": [
+            "Per favore seleziona un'opzione di revisione"
+         ],
+         "Assign local translator or choose another option": [
+            "Assegna traduttore locale o scegli un'altra opzione"
+         ],
+         "Assign yourself or choose another option": [
+            "Assegna a te stesso o scegli un'altra opzione"
+         ],
+         "Activate translation service or choose another option": [
+            "Attiva il servizio di traduzione o scegli un'altra opzione"
+         ],
+         "Activate ATE or choose another option": [
+            "Attiva ATE o scegli un'altra opzione"
+         ],
+         "Authenticate translation service or choose another option": [
+            "Autentica il servizio di traduzione o scegli un'altra opzione"
+         ],
+         "Please don't close this page or refresh it, as doing so will cancel the translation process.": [
+            "Non chiudere o aggiornare questa pagina, altrimenti il processo di traduzione verrà annullato."
+         ],
+         "<s>%s</s> cannot process more than <s>%d</s> jobs in a single batch. WPML will automatically split your jobs into separate batches to ensure an error-free delivery to <s>%s</s>. <br/><br/> Do you want to proceed?": [
+            "<s>%s</s> non può elaborare più di <s>%d</s> lavori in un singolo batch. WPML dividerà automaticamente i tuoi lavori in batch separati per garantire una consegna senza errori a <s>%s</s>. <br/><br/> Vuoi procedere?"
+         ],
+         "WPML will send jobs to %s in separate batches": [
+            "WPML invierà i lavori a %s in batch separati"
+         ],
+         "Yes, send jobs in separate batches": [
+            "Sì, invia i lavori in batch separati"
+         ],
+         "No, I will split jobs myself": [
+            "No, dividerò i lavori io stesso"
+         ],
+         "This will translate only your future content": [
+            "Questo tradurrà solo i tuoi contenuti futuri"
+         ],
+         "This will translate your entire site": [
+            "Questo tradurrà l'intero tuo sito"
+         ],
+         "Translate everything automatically from now on, without asking me.": [
+            "Traduci tutto automaticamente d'ora in poi, senza chiedermi."
+         ],
+         "What content do you want to translate?": [
+            "Quale contenuto vuoi tradurre?"
+         ],
+         "Translate my entire site": [
+            "Traduci l'intero mio sito"
+         ],
+         "WPML will translate all of your site's content, including:": [
+            "WPML tradurrà tutto il contenuto del tuo sito, incluso:"
+         ],
+         "Any content that already exists but hasn't been translated yet": [
+            "Qualsiasi contenuto già esistente ma non ancora tradotto"
+         ],
+         "All new content you create in the future": [
+            "Tutti i nuovi contenuti che creerai in futuro"
+         ],
+         "Hide what WPML will translate now": [
+            "Nascondi cosa tradurrà WPML ora"
+         ],
+         "See what WPML will translate now": [
+            "Vedi cosa tradurrà WPML ora"
+         ],
+         "Translate only future content": [
+            "Traduci solo i contenuti futuri"
+         ],
+         "WPML will translate only the content you create after enabling this translation mode.": [
+            "WPML tradurrà solo i contenuti che creerai dopo aver abilitato questa modalità di traduzione."
+         ],
+         "Existing untranslated content on your side will not be translated.": [
+            "I contenuti esistenti non tradotti sul tuo sito non verranno tradotti."
+         ],
+         "Existing content": [
+            "Contenuti esistenti"
+         ],
+         "You selected to translate strings that are in %s. Only these strings will be translated to %s.": [
+            "Hai selezionato di tradurre le stringhe che sono in %s. Solo queste stringhe saranno tradotte in %s."
+         ],
+         "You selected to translate strings that are in %s and %s. Only these strings will be translated to %s.": [
+            "Hai selezionato di tradurre le stringhe che sono in %s e %s. Solo queste stringhe saranno tradotte in %s."
+         ],
+         "Source language": [
+            "Lingua di origine"
+         ],
+         "Target language": [
+            "Lingua di destinazione"
+         ],
+         "Translation Method": [
+            "Metodo di Traduzione"
+         ],
+         "Translation service additional options": [
+            "Opzioni aggiuntive del servizio di traduzione"
+         ],
+         "Refresh": [
+            "Aggiorna"
+         ],
+         "Fetching translation service data...": [
+            "Recupero dei dati del servizio di traduzione..."
+         ],
+         "-": [
+            "-"
+         ],
+         "Translate automatically": [
+            "Traduci automaticamente"
+         ],
+         "Translate myself": [
+            "Traduci io stesso"
+         ],
+         "Assign a translator": [
+            "Assegna un traduttore"
+         ],
+         "Assign translation service": [
+            "Assegna servizio di traduzione"
+         ],
+         "Do nothing": [
+            "Non fare nulla"
+         ],
+         "Please choose": [
+            "Per favore scegli"
+         ],
+         "Choose a translator": [
+            "Scegli un traduttore"
+         ],
+         "First available": [
+            "Primo disponibile"
+         ],
+         "(Me)": [
+            "(Io)"
+         ],
+         "Translation controls": [
+            "Controlli di traduzione"
+         ],
+         "Step 2": [
+            "Passo 2"
+         ],
+         "Get More Features with WPML's Advanced Translation Editor": [
+            "Ottieni più funzionalità con l'Editor di Traduzione Avanzato di WPML"
+         ],
+         "Close banner": [
+            "Chiudi banner"
+         ],
+         "You're using the Classic Translation Editor, an old legacy tool, and missing out on the many features and efficiency of our Advanced Translation Editor:": [
+            "Stai utilizzando l'Editor di Traduzione Classico, uno strumento legacy obsoleto, e ti stai perdendo le numerose funzionalità e l'efficienza del nostro Editor di Traduzione Avanzato:"
+         ],
+         "Translation Memory": [
+            "Memoria di Traduzione"
+         ],
+         "HTML Protection": [
+            "Protezione HTML"
+         ],
+         "Glossary": [
+            "Glossario"
+         ],
+         "Spellchecker": [
+            "Correttore ortografico"
+         ],
+         "AI Assistant": [
+            "Assistente AI"
+         ],
+         "Automatic Translation": [
+            "Traduzione Automatica"
+         ],
+         "Switch now for a faster, more convenient, and reliable translation experience.": [
+            "Passa ora per un'esperienza di traduzione più veloce, conveniente e affidabile."
+         ],
+         "Switch Now": [
+            "Passa Ora"
+         ],
+         "Learn More": [
+            "Scopri di Più"
+         ],
+         "<a><s>Read more about automatic translation credits</s></a>": [
+            "<a><s>Leggi di più sui crediti di traduzione automatica</s></a>"
+         ],
+         "I understand that automatic translation uses credits": [
+            "Capisco che la traduzione automatica utilizza crediti"
+         ],
+         "Translate Everything Automatically - credit wizard error": [
+            "Traduci tutto automaticamente - errore della procedura guidata dei crediti"
+         ],
+         "There was an error when loading the credit wizard.": [
+            "Si è verificato un errore durante il caricamento della procedura guidata dei crediti."
+         ],
+         "Translate Everything Automatically - no credits": [
+            "Traduci tutto automaticamente - nessun credito"
+         ],
+         "Start Translate Everything Automatically": [
+            "Avvia Traduci Tutto Automaticamente"
+         ],
+         "Continue": [
+            "Continua"
+         ],
+         "Go back": [
+            "Torna indietro"
+         ],
+         "You can start using Translate Everything Automatically after sending some content for translation. We recommend that you review these translations and make sure that they are good before translating your entire site's content.": [
+            "Puoi iniziare a utilizzare Traduci Tutto Automaticamente dopo aver inviato alcuni contenuti per la traduzione. Ti consigliamo di rivedere queste traduzioni e assicurarti che siano buone prima di tradurre l'intero contenuto del tuo sito."
+         ],
+         "Translate Everything Automatically - disabled": [
+            "Traduci tutto automaticamente - disabilitato"
+         ],
+         "Translate Everything Automatically": [
+            "Traduci tutto automaticamente"
+         ],
+         "Automatically translate your entire site, but only from %s to %s.": [
+            "Traduci automaticamente l'intero tuo sito, ma solo da %s a %s."
+         ],
+         "Translate Everything Automatically - pausing": [
+            "Traduci tutto automaticamente - in pausa"
+         ],
+         "Translate Everything Automatically is pausing": [
+            "Traduci tutto automaticamente è in pausa"
+         ],
+         "Translate Everything Automatically - paused": [
+            "Traduci tutto automaticamente - in pausa"
+         ],
+         "%d translation left in the queue. Preparing more content for translation.": [
+            "%d traduzione rimasta in coda. Preparazione di più contenuti per la traduzione.",
+            "%d traduzioni rimaste in coda. Preparazione di più contenuti per la traduzione."
+         ],
+         "Preparing content for translation...": [
+            "Preparazione dei contenuti per la traduzione..."
+         ],
+         "%d translation left in the queue...": [
+            "%d traduzione rimasta in coda...",
+            "%d traduzioni rimaste in coda..."
+         ],
+         "Translate Everything Automatically has finished translating your content. There are no pending translations in the queue.": [
+            "Traduci Tutto Automaticamente ha finito di tradurre i tuoi contenuti. Non ci sono traduzioni in sospeso nella coda."
+         ],
+         "Some items were translated using the Classic Translation Editor and cannot be sent for automatic translation. Please select these items and choose the option to translate them yourself.": [
+            "Alcuni elementi sono stati tradotti utilizzando l'Editor di Traduzione Classico e non possono essere inviati per la traduzione automatica. Seleziona questi elementi e scegli l'opzione per tradurli tu stesso."
+         ],
+         "Translate Everything Automatically - enabled": [
+            "Traduci tutto automaticamente - abilitato"
+         ],
+         "Translate Everything Automatically is enabled": [
+            "Traduci Tutto Automaticamente è abilitato"
+         ],
+         "As you create new content or edit existing content, WPML will automatically translate it, but only from %s to %s.": [
+            "Mentre crei nuovi contenuti o modifichi contenuti esistenti, WPML li tradurrà automaticamente, ma solo da %s a %s."
+         ],
+         "You have <s>%s</s> prepaid translation credits in your wpml.org account. Assign these credits to your site to start using automatic translation": [
+            "Hai <s>%s</s> crediti prepagati nel tuo account wpml.org. Assegnali al tuo sito per iniziare a usare la traduzione automatica"
+         ],
+         "Translation not running... there is an issue that needs your attention. Fix it to continue.": [
+            "Traduzione ferma... c'è un problema che richiede la tua attenzione. Risolvilo per continuare."
+         ],
+         "Assign credits now": [
+            "Assegna crediti ora"
+         ],
+         "Fix now": [
+            "Risolvi ora"
+         ],
+         "Translate Everything Automatically is stopped": [
+            "Traduci tutto automaticamente è interrotto"
+         ],
+         "Out of Credits for Automatic Translation": [
+            "Crediti esauriti per la Traduzione Automatica"
+         ],
+         "Automatic translations completed": [
+            "Traduzioni automatiche completate"
+         ],
+         "<s>1 translation</s> has been successfully translated automatically": [
+            "<s>1 traduzione</s> è stata tradotta automaticamente con successo",
+            "<s>%d traduzioni</s> sono state tradotte automaticamente con successo"
+         ],
+         "Automatic jobs in progress": [
+            "Lavori automatici in corso"
+         ],
+         "<s>%d automatic translation</s> is in progress": [
+            "<s>%d traduzione automatica</s> è in corso",
+            "<s>%d traduzioni automatiche</s> sono in corso"
+         ],
+         "Your default language, %s, must be mapped to a supported language in order to use automatic translation": [
+            "La tua lingua predefinita, %s, deve essere mappata a una lingua supportata per usare la traduzione automatica"
+         ],
+         "Map the language": [
+            "Mappa la lingua"
+         ],
+         "%d translations ": [
+            "%d traduzioni "
+         ],
+         "%d translation ": [
+            "%d traduzione "
+         ],
+         "this includes translations from Translate Everything Automatically": [
+            "questo include le traduzioni da Traduci Tutto Automaticamente"
+         ],
+         "are waiting for your review": [
+            "sono in attesa della tua revisione"
+         ],
+         "is waiting for your review": [
+            "è in attesa della tua revisione"
+         ],
+         "Review Translations": [
+            "Rivedi traduzioni"
+         ],
+         "Translate existing content": [
+            "Traduci contenuti esistenti"
+         ],
+         "Translate now": [
+            "Traduci ora"
+         ],
+         "Starting with version 4.7, WPML will also automatically translate texts (strings) coming from %s.": [
+            "A partire dalla versione 4.7, WPML tradurrà automaticamente anche i testi (stringhe) provenienti da %s."
+         ],
+         "WPML will not translate existing texts of this type but any new ones you create will be automatically translated. If you prefer, you can <button />.": [
+            "WPML non tradurrà i testi esistenti di questo tipo, ma tutti i nuovi testi che creerai saranno tradotti automaticamente. Se preferisci, puoi <button />."
+         ],
+         "Starting with version 4.7, WPML will also automatically translate:": [
+            "A partire dalla versione 4.7, WPML tradurrà automaticamente anche:"
+         ],
+         "Content set to \"use translation if available or fallback to default language\": %s.": [
+            "Contenuti impostati per “utilizzare la traduzione se disponibile o ricadere sulla lingua predefinita”: %s."
+         ],
+         "Texts (strings) coming from: %s.": [
+            "Testi (stringhe) provenienti da: %s."
+         ],
+         "WPML will not translate existing content for these post types and texts but any new content you create will be automatically translated. If you prefer, you can start <button />.": [
+            "WPML non tradurrà i contenuti esistenti per questi tipi di post e testi, ma tutti i nuovi contenuti che creerai saranno tradotti automaticamente. Se preferisci, puoi iniziare a <button />."
+         ],
+         "WPML will not translate existing content for these post types but any new content you create will be automatically translated. If you prefer, you can start <button />.": [
+            "WPML non tradurrà i contenuti esistenti per questi tipi di post, ma tutti i nuovi contenuti che creerai saranno tradotti automaticamente. Se preferisci, puoi iniziare a <button />."
+         ],
+         "start translating existing content now": [
+            "iniziare a tradurre i contenuti esistenti ora"
+         ],
+         "The following target languages do not support automatic translations: %s": [
+            "Le seguenti lingue di destinazione non supportano le traduzioni automatiche: %s"
+         ],
+         "To enable automatic translation map them to known languages.": [
+            "Per abilitare la traduzione automatica, mappale a lingue conosciute."
+         ],
+         "Map to known languages": [
+            "Mappa a lingue conosciute"
+         ],
+         "Translation status": [
+            "Stato traduzione"
+         ],
+         "Default language does not support automatic translations.": [
+            "La lingua predefinita non supporta le traduzioni automatiche."
+         ],
+         "You must enable ATE to activate Translate Everything Automatically.": [
+            "È necessario abilitare ATE per attivare Traduci tutto automaticamente."
+         ],
+         "This item needs an update but cannot be translated automatically because it was manually translated.\nPlease, select the item and send for manual translation.": [
+            "Questo elemento necessita di un aggiornamento ma non può essere tradotto automaticamente perché è stato tradotto manualmente.\nPer favore, seleziona l'elemento e invialo per la traduzione manuale."
+         ],
+         "This item needs update. Please, select the item and send for translation.": [
+            "Questo elemento necessita di un aggiornamento. Per favore, seleziona l'elemento e invialo per la traduzione."
+         ],
+         "Translations completed with the Classic Translation Editor cannot be sent for automatic translation": [
+            "Le traduzioni completate con l'Editor di Traduzione Classico non possono essere inviate per la traduzione automatica"
+         ],
+         "automatic translation": [
+            "traduzione automatica"
+         ],
+         "unassigned": [
+            "non assegnato"
+         ],
+         "not translated": [
+            "non tradotto"
+         ],
+         "waiting for translator": [
+            "in attesa del traduttore"
+         ],
+         "in progress": [
+            "in corso"
+         ],
+         "needs update": [
+            "necessita di aggiornamento"
+         ],
+         "duplicate": [
+            "duplicato"
+         ],
+         "complete": [
+            "completato"
+         ],
+         "needs review": [
+            "necessita di revisione"
+         ],
+         "preparing for translation": [
+            "preparazione per la traduzione"
+         ],
+         "needs attention": [
+            "richiede attenzione"
+         ],
+         "%1$s: %2$s%3$s": [
+            "%1$s: %2$s%3$s"
+         ],
+         "Could not fetch engines data": [
+            "Impossibile recuperare i dati dei motori"
+         ],
+         "Error in fetching currently logged in translator": [
+            "Errore nel recupero del traduttore attualmente connesso"
+         ],
+         "Error in fetching local translators": [
+            "Errore nel recupero dei traduttori locali"
+         ],
+         "Published": [
+            "Pubblicato"
+         ],
+         "Draft": [
+            "Bozza"
+         ],
+         "Trash": [
+            "Cestino"
+         ],
+         "Pending": [
+            "In attesa"
+         ],
+         "Private": [
+            "Privato"
+         ],
+         "Future": [
+            "Futuro"
+         ],
+         "Auto Draft": [
+            "Bozza automatica"
+         ],
+         "External": [
+            "Esterno"
+         ],
+         "Collapse": [
+            "Comprimi"
+         ],
+         "Expand": [
+            "Espandi"
+         ],
+         "Close modal": [
+            "Chiudi modale"
+         ],
+         "Select an item": [
+            "Seleziona un elemento"
+         ],
+         "Search": [
+            "Cerca"
+         ],
+         "No items found": [
+            "Nessun elemento trovato"
+         ],
+         "OFF": [
+            "DISATTIVATO"
+         ],
+         "ON": [
+            "ATTIVATO"
+         ],
+         "%1$s Flag": [
+            "Bandiera %1$s"
+         ],
+         "What would you like to do after WPML finishes translating your content automatically?": [
+            "Cosa vorresti fare dopo che WPML avrà finito di tradurre automaticamente i tuoi contenuti?"
+         ],
+         "Wait for review": [
+            "Attendi la revisione"
+         ],
+         "Recommended with DeepL, Google and Microsoft": [
+            "Consigliato con DeepL, Google e Microsoft"
+         ],
+         "DeepL, Google, and Microsoft deliver great translations, but we recommend a human review to confirm they are correct. WPML AI provides Better Than Human Translations that understand context, so you can confidently skip the review process.": [
+            "DeepL, Google e Microsoft forniscono ottime traduzioni, ma ti consigliamo una revisione umana per confermare che siano corrette. WPML IA offre traduzioni migliori di quelle umane che capiscono il contesto, quindi puoi tranquillamente saltare il processo di revisione."
+         ],
+         "WPML keeps translations unpublished, so you can review them first.": [
+            "WPML mantiene le traduzioni non pubblicate, così puoi rivederle prima."
+         ],
+         "Your translators review and approve translations before publishing.": [
+            "I tuoi traduttori rivedono e approvano le traduzioni prima della pubblicazione."
+         ],
+         "Publish and mark for review": [
+            "Pubblica e contrassegna per la revisione"
+         ],
+         "WPML publishes translations immediately but flags them for you to check at your convenience.": [
+            "WPML pubblica immediatamente le traduzioni ma le contrassegna affinché tu le controlli quando ti è comodo."
+         ],
+         "WPML publishes translations immediately but flags them for translators to review later.": [
+            "WPML pubblica immediatamente le traduzioni ma le contrassegna per la revisione successiva dei traduttori."
+         ],
+         "Publish without review": [
+            "Pubblica senza revisione"
+         ],
+         "Recommended with WPML AI": [
+            "Consigliato con WPML AI"
+         ],
+         "WPML AI provides Better Than Human Translations that rarely need improvements, so you can confidently skip the review process. For other translation engines, a human review is recommended to confirm accuracy.": [
+            "WPML AI fornisce Traduzioni Migliori di Quelle Umane che raramente necessitano di miglioramenti, quindi puoi saltare con fiducia il processo di revisione. Per altri motori di traduzione, si consiglia una revisione umana per confermare l'accuratezza."
+         ],
+         "WPML publishes translations immediately, skipping the review process.": [
+            "WPML pubblica le traduzioni immediatamente, saltando il processo di revisione."
+         ]
+      }
+   }
+}

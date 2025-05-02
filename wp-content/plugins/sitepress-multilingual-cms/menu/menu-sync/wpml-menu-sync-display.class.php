@@ -33,7 +33,7 @@ class WPML_Menu_Sync_Display {
 		$context_menu_name = $icl_menus_sync->menus[ $menu_id ]['name'] . ' menu';
 		$res               = '&nbsp;' . sprintf(
 			esc_html__(
-				'The selected strings can now be translated using the %1$s string translation %2$s screen',
+				'The selected strings can now be translated using the %1$s String Translation %2$s screen',
 				'sitepress'
 			),
 			'<a href="admin.php?page=' . WPML_ST_FOLDER . '/menu/string-translation.php&context=' . $context_menu_name . '"',
@@ -60,6 +60,7 @@ class WPML_Menu_Sync_Display {
 					<tr>
 						<th scope="row" class="check-column">
 							<input type="checkbox"
+								   class="wpml-checkbox-native"
 								   name="<?php echo $input_name; ?>"
 								   value="<?php echo esc_attr( $item_name ); ?>"/>
 						</th>

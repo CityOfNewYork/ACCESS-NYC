@@ -1,0 +1,62 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/translationServices/components/AuthorizeModal.js:22
+msgid "Connect this site to your %s account"
+msgstr "ربط هذا الموقع بحساب %s الخاص بك"
+
+#: src/js/translationServices/components/AuthorizeModal.js:45
+msgid "Error"
+msgstr "خطأ"
+
+#: src/js/translationServices/components/AuthorizeModal.js:57
+msgid "« Use a different Translation Service"
+msgstr "« استخدام خدمة ترجمة أخرى"
+
+#: src/js/translationServices/components/AuthorizeModal.js:62
+msgid "Authenticate"
+msgstr "المصادقة"
+
+#: src/js/translationServices/components/Connect.js:22
+msgid ""
+"Visit <link_to_service /> to request an API Token. This token allows WPML "
+"to connect to <service_name /> to send and receive jobs."
+msgstr "تفضل بزيارة <link_to_service /> لطلب رمز واجهة البرمجة. هذا الرمز يتيح لـ WPML الربط مع <service_name /> لإرسال مهام الترجمة واستلامها."
+
+#: src/js/translationServices/components/SearchForm.js:13
+msgid "Search"
+msgstr "بحث"
+
+#: src/js/translationServices/components/Sections.js:16
+msgid "Settings"
+msgstr "الإعدادات"
+
+#: src/js/translationServices/components/Sections.js:42
+msgid ""
+"It’s not currently possible to connect a translation service when WPML is "
+"set to translate your site’s content automatically. To use a translation "
+"service, please change your translation mode on the <LinkToSettingsPage /> "
+"page."
+msgstr "من غير الممكن حاليًا الربط مع خدمة ترجمة بينما قد تم ضبط WPML على ترجمة محتوى موقعك آليًا. لاستخدام إحدى خدمات الترجمة، يُرجى تغيير وضع الترجمة الخاص بك من صفحة <LinkToSettingsPage />."
+
+#: src/js/translationServices/components/ServicesList.js:41
+msgid "Documentation"
+msgstr "الوثائق"
+
+#: src/js/translationServices/components/ServicesList.js:57
+msgid "Activate"
+msgstr "تفعيل"
+
+#: src/js/translationServices/components/ServicesList.js:69
+msgid "Name"
+msgstr "الاسم"
+
+#: src/js/translationServices/components/ServicesList.js:74
+msgid "Description"
+msgstr "الوصف"
+
+#: src/js/translationServices/components/ServicesList.js:81
+msgid "Ranking"
+msgstr "الترتيب"

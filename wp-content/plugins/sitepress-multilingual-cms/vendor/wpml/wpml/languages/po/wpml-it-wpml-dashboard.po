@@ -1,0 +1,1001 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-08-22T09:24:13+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: wpml\n"
+
+#: dashboard.js:2
+msgid "Untranslated strings that I encounter on front-end while logged in"
+msgstr "Stringhe non tradotte che incontro nel frontend durante il login"
+
+#: dashboard.js:2
+msgid "Untranslated strings that all front-end users encounter"
+msgstr "Stringhe non tradotte che tutti gli utenti del Frontend incontrano"
+
+#: dashboard.js:2
+msgid "Disable auto-registration of strings"
+msgstr "Disabilita la registrazione automatica delle stringhe"
+
+#: dashboard.js:2
+msgid "Frontend"
+msgstr "Frontend"
+
+#: dashboard.js:2
+msgid "Backend"
+msgstr "Backend"
+
+#: dashboard.js:2
+msgid "Plugins"
+msgstr "Plugin"
+
+#: dashboard.js:2
+msgid "Themes"
+msgstr "Temi"
+
+#: dashboard.js:2
+msgid "WordPress"
+msgstr "WordPress"
+
+#: dashboard.js:2
+msgid "Other"
+msgstr "Altro"
+
+#: dashboard.js:2
+msgid "Error in fetching default translation batch name"
+msgstr "Errore nel recupero del nome del batch di traduzione di default"
+
+#: dashboard.js:2
+msgid "Error in fetching translation editor type."
+msgstr "Errore nell'acquisizione del tipo di editor di traduzione."
+
+#: dashboard.js:2
+msgid "Error in fetching untranslated types count"
+msgstr "Errore nel recupero del conteggio dei tipi non tradotti"
+
+#: dashboard.js:2
+msgid "Error in fetching remote translation service data."
+msgstr "Errore nel recupero dei dati del servizio di traduzione remota."
+
+#: dashboard.js:2
+msgid "Status checked: "
+msgstr "Stato controllato: "
+
+#: dashboard.js:2
+msgid "none of your translation jobs have been completed"
+msgstr "nessuno dei tuoi lavori di traduzione è stato portato a termine"
+
+#: dashboard.js:2
+msgid "Downloaded jobs: "
+msgstr "Lavori scaricati: "
+
+#: dashboard.js:2
+msgid "Cancelled jobs: "
+msgstr "Lavori cancellati: "
+
+#: dashboard.js:2
+msgid "Checking translation jobs status. Please don't close this page!"
+msgstr "Controllo dello stato dei lavori di traduzione. Non chiudere questa Pagina!"
+
+#: dashboard.js:2
+msgid "Last check: Never"
+msgstr "Ultimo controllo: Mai"
+
+#: dashboard.js:2
+msgid "Please wait until download finishes"
+msgstr "Attendi il termine del download"
+
+#: dashboard.js:2
+msgid "You need to wait 5 minutes after last pick up"
+msgstr "Devi aspettare 5 minuti dopo l'ultimo ritiro"
+
+#: dashboard.js:2
+msgid "Check status and get translations"
+msgstr "Controlla lo stato e ottieni le traduzioni"
+
+#: dashboard.js:2
+msgid "Filtering is disabled to show all selected items. "
+msgstr "Il filtro è disattivato per mostrare tutti gli elementi selezionati. "
+
+#: dashboard.js:2
+msgid "Apply filters"
+msgstr "Applica i filtri"
+
+#: dashboard.js:2
+msgid "%s posts selected"
+msgstr "%s Articoli selezionati"
+
+#: dashboard.js:2
+msgid "(%d word count)"
+msgstr "(%d conteggio parole)"
+
+#: dashboard.js:2
+msgid "%s item not showing."
+msgid_plural "%s items not showing."
+msgstr[0] "%s L'articolo non viene visualizzato."
+msgstr[1] "%s Gli articoli non vengono visualizzati."
+
+#: dashboard.js:2
+msgid "Show all selected items"
+msgstr "Mostra tutti gli elementi selezionati"
+
+#: dashboard.js:2
+msgid "Translate your content"
+msgstr "Traduci i tuoi contenuti"
+
+#: dashboard.js:2
+msgid "Unselect all"
+msgstr "Deseleziona tutti"
+
+#: dashboard.js:2
+msgid "Source Language:"
+msgstr "Lingua di fonte:"
+
+#: dashboard.js:2
+msgid "translated to:"
+msgstr "tradotto in:"
+
+#: dashboard.js:2
+msgid "Clear filters"
+msgstr "Cancella i filtri"
+
+#: dashboard.js:2
+msgid "Filter"
+msgstr "Filtra"
+
+#: dashboard.js:2
+msgid "You are about to change the source language filter from %s to %s"
+msgstr "Stai per cambiare il filtro della lingua sorgente da %s a %s"
+
+#: dashboard.js:2
+msgid "Updating the source language filter will clear the items you've selected for translation. Are you sure you want to continue?"
+msgstr "L'aggiornamento del filtro della lingua di origine cancella gli elementi che hai selezionato per la traduzione. Sei sicuro di voler continuare?"
+
+#: dashboard.js:2
+msgid "Cancel"
+msgstr "Annulla"
+
+#: dashboard.js:2
+msgid "Change source language"
+msgstr "Cambia la lingua della fonte"
+
+#: dashboard.js:2
+msgid "All Statuses"
+msgstr "Tutti gli stati"
+
+#: dashboard.js:2
+msgid "All languages"
+msgstr "Tutte le lingue"
+
+#: dashboard.js:2
+msgid "All translation statuses"
+msgstr "Tutti gli stati di traduzione"
+
+#: dashboard.js:2
+msgid "Not translated"
+msgstr "Non tradotto"
+
+#: dashboard.js:2
+msgid "Not translated or needs updating"
+msgstr "Non tradotto o da aggiornare"
+
+#: dashboard.js:2
+msgid "Needs updating"
+msgstr "Ha bisogno di essere aggiornato"
+
+#: dashboard.js:2
+msgid "Translation in progress"
+msgstr "Traduzione in corso"
+
+#: dashboard.js:2
+msgid "Translation complete"
+msgstr "Traduzione completa"
+
+#: dashboard.js:2
+msgid "Parent:"
+msgstr "Genitore:"
+
+#: dashboard.js:2
+msgid "All taxonomies"
+msgstr "Tutti i tassonomi"
+
+#: dashboard.js:2
+msgid "Taxonomy Term:"
+msgstr "Termine della tassonomia:"
+
+#: dashboard.js:2
+msgid "No terms found"
+msgstr "Nessun termine trovato"
+
+#: dashboard.js:2
+msgid "Filter by:"
+msgstr "Filtri per..:"
+
+#: dashboard.js:2
+msgid "Title"
+msgstr "Titolo"
+
+#: dashboard.js:2
+msgid "View"
+msgstr "Vista"
+
+#: dashboard.js:2
+msgid "Edit note for the translators"
+msgstr "Nota di modifica per i traduttori"
+
+#: dashboard.js:2
+msgid "Add note for the translators"
+msgstr "Aggiungi una nota per i traduttori"
+
+#: dashboard.js:2
+msgid "(no title)"
+msgstr "(senza titolo)"
+
+#: dashboard.js:2
+msgid "Image"
+msgstr "Immagine"
+
+#: dashboard.js:2
+msgid "Date / Status"
+msgstr "Data / Stato"
+
+#: dashboard.js:2
+msgid "Word count"
+msgstr "Conteggio delle parole"
+
+#: dashboard.js:2
+msgid "Loading..."
+msgstr "Caricamento in corso..."
+
+#: dashboard.js:2
+msgid "No items"
+msgstr "Nessun articolo"
+
+#: dashboard.js:2
+msgid "%1$d %2$s selected"
+msgstr "%1$d %2$s selezionato"
+
+#: dashboard.js:2
+msgid "Filtering is disabled to show all selected items"
+msgstr "Il filtro è disattivato per mostrare tutti gli elementi selezionati"
+
+#: dashboard.js:2
+msgid "Apply filter"
+msgstr "Applica un filtro"
+
+#: dashboard.js:2
+msgid "%1$d %2$s not showing"
+msgstr "%1$d %2$s non si vede"
+
+#: dashboard.js:2
+msgid "Show selected items"
+msgstr "Mostra gli elementi selezionati"
+
+#: dashboard.js:2
+msgid "Previous"
+msgstr "Precedente"
+
+#: dashboard.js:2
+msgid "Next"
+msgstr "Avanti"
+
+#: dashboard.js:2
+msgid "Your site's content is too vast for a single translation batch. Use filters to reduce the selection, then \"select all\"."
+msgstr "I contenuti del tuo sito sono troppo vasti per un unico lotto di traduzione. Usa i filtri per ridurre la selezione e poi \"seleziona tutto\"."
+
+#: dashboard.js:2
+msgid "The current filter captures too much content. Narrow it down to enable \"select all\" for translation."
+msgstr "Il filtro attuale cattura troppi contenuti. Restringilo e abilita la funzione \"seleziona tutto\" per la traduzione."
+
+#: dashboard.js:2
+msgid "Select All"
+msgstr "Seleziona tutti"
+
+#: dashboard.js:2
+msgid "All %d items matching criteria are selected"
+msgstr "Tutti gli articoli di %d che corrispondono ai criteri vengono selezionati"
+
+#: dashboard.js:2
+msgid "All %d items on this page are selected"
+msgstr "Tutte le voci di %d presenti in questa Pagina sono selezionate"
+
+#: dashboard.js:2
+msgid "Unselect all items that match this search"
+msgstr "Deseleziona tutti gli articoli che corrispondono a questa ricerca"
+
+#: dashboard.js:2
+msgid "Select all items that match this search"
+msgstr "Seleziona tutti gli articoli che corrispondono a questa ricerca"
+
+#: dashboard.js:2
+msgid "Save note"
+msgstr "Salva la nota"
+
+#: dashboard.js:2
+msgid "Step 1"
+msgstr "Passo 1"
+
+#: dashboard.js:2
+msgid "Select items for translation"
+msgstr "Seleziona gli elementi da tradurre"
+
+#: dashboard.js:2
+msgid "You have too many items selected to use this feature. Deselect some of the items to enable it."
+msgstr "Sono stati selezionati troppi elementi per utilizzare questa funzionalità. Deseleziona alcuni elementi per abilitarla."
+
+#: dashboard.js:2
+msgid "Show strings in:"
+msgstr "Mostra le stringhe in:"
+
+#: dashboard.js:2
+msgid "All domains"
+msgstr "Tutti i domini"
+
+#: dashboard.js:2
+msgid "All sources"
+msgstr "Tutte le fonti"
+
+#: dashboard.js:2
+msgid "String"
+msgstr "Stringhe"
+
+#: dashboard.js:2
+msgid "All Translation Priorities"
+msgstr "Tutte le priorità di traduzione"
+
+#: dashboard.js:2
+msgid "WPML doesn't know of any strings that need translation. Visit translations on your site's front-end (<a/>). WPML will identify all untranslated strings and list them here. To see all the strings in your site, disable \"Detect untranslated strings\" at the top of this section."
+msgstr "WPML non è a conoscenza di stringhe che necessitano di traduzione. Visita le traduzioni sul frontend del tuo sito (<a/>). WPML identificherà tutte le stringhe non tradotte e le elencherà qui. Per vedere tutte le stringhe del tuo sito, disattiva \"Rileva le stringhe\" non tradotte\" all'inizio di questa sezione."
+
+#: dashboard.js:2
+msgid "Domain"
+msgstr "Dominio"
+
+#: dashboard.js:2
+msgid "Source"
+msgstr "Fonte"
+
+#: dashboard.js:2
+msgid "Type"
+msgstr "Tipo"
+
+#: dashboard.js:2
+msgid "Disabled"
+msgstr "Disattivato"
+
+#: dashboard.js:2
+msgid "WPML can detect strings that appear on the site and list them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here only the strings that actually appear on the site, you need to enable this feature."
+msgstr "WPML è in grado di rilevare le stringhe che compaiono sul sito e di elencarle qui. Questa funzionalità ti aiuta a identificare le stringhe che appaiono effettivamente sul sito e a tradurle. Per vedere solo le stringhe che appaiono effettivamente sul sito, devi abilitare questa funzionalità."
+
+#: dashboard.js:2
+msgid "Enabled"
+msgstr "Attivato"
+
+#: dashboard.js:2
+msgid "WPML detects strings that appear on the site and lists them here. This feature helps you identify the strings that actually appear on the site and translate them. To see here all the strings in the site, you need to disable this feature."
+msgstr "WPML rileva le stringhe che appaiono sul sito e le elenca qui. Questa funzionalità ti aiuta a identificare le stringhe che appaiono effettivamente sul sito e a tradurle. Per vedere tutte le stringhe presenti nel sito, devi disabilitare questa funzionalità."
+
+#: dashboard.js:2
+msgid "Detect untranslated strings"
+msgstr "Rilevare le stringhe non tradotte"
+
+#: dashboard.js:2
+msgid "Modify"
+msgstr "Modifica"
+
+#: dashboard.js:2
+msgid "Automatically register untranslated strings"
+msgstr "Registra automaticamente le stringhe non tradotte"
+
+#: dashboard.js:2
+msgid "Learn how to use auto-registration"
+msgstr "Scopri come utilizzare la registrazione automatica"
+
+#: dashboard.js:2
+msgid "recommended"
+msgstr "raccomandato"
+
+#: dashboard.js:2
+msgid "Also register strings from the website's back-end"
+msgstr "Registra anche le stringhe dal back-end del sito web"
+
+#: dashboard.js:2
+msgid "Save settings"
+msgstr "Salva le impostazioni"
+
+#: dashboard.js:2
+msgid "Leave existing translations as are"
+msgstr "Lascia le traduzioni esistenti così come sono"
+
+#: dashboard.js:2
+msgid "Overwrite existing translations"
+msgstr "Sovrascrivi le traduzioni esistenti"
+
+#: dashboard.js:2
+msgid "Some of the content you want to translate is already translated"
+msgstr "Alcuni dei contenuti che vuoi tradurre sono già tradotti"
+
+#: dashboard.js:2
+msgid "What do you want to do with the content that's already translated?"
+msgstr "Cosa vuoi fare con i contenuti già tradotti?"
+
+#: dashboard.js:2
+msgid "What would you like to do when WPML finishes translating your content automatically?"
+msgstr "Cosa vorresti fare quando WPML finisce di tradurre automaticamente i tuoi contenuti?"
+
+#: dashboard.js:2
+msgid "Choose how you want to handle your site's automatically translated content before it goes live. Remember that you can always edit translations, regardless of the review process."
+msgstr "Scegli come gestire i contenuti tradotti automaticamente dal tuo sito prima che vengano pubblicati. Ricorda che puoi sempre modificare le traduzioni, indipendentemente dal processo di revisione."
+
+#: dashboard.js:2
+msgid "Wait for review"
+msgstr "Attendere la revisione"
+
+#: dashboard.js:2
+msgid "You check and approve translations before publishing."
+msgstr "Controlla e approva le traduzioni prima di pubblicarle."
+
+#: dashboard.js:2
+msgid "Your translators check and approve translations before publishing."
+msgstr "I tuoi traduttori controllano e approvano le traduzioni prima di pubblicarle."
+
+#: dashboard.js:2
+msgid "Publish and mark for review"
+msgstr "Pubblica e segna per la revisione"
+
+#: dashboard.js:2
+msgid "WPML publishes translations immediately but flags them for you to check at your convenience."
+msgstr "WPML pubblica le traduzioni immediatamente ma le segnala per consentirti di controllarle quando vuoi."
+
+#: dashboard.js:2
+msgid "WPML publishes translations immediately but flags them for your translators to check at their convenience."
+msgstr "WPML pubblica le traduzioni immediatamente, ma le segnala affinché i tuoi traduttori possano controllarle a loro piacimento."
+
+#: dashboard.js:2
+msgid "Publish without review"
+msgstr "Pubblica senza revisione"
+
+#: dashboard.js:2
+msgid "The system publishes translations straight away, skipping the review process."
+msgstr "Il sistema pubblica le traduzioni immediatamente, saltando il processo di revisione."
+
+#: dashboard.js:2
+msgid "Suggested deadline:"
+msgstr "Scadenza suggerita:"
+
+#: dashboard.js:2
+msgid "Set a batch name and deadline"
+msgstr "Imposta il nome del lotto e la scadenza"
+
+#: dashboard.js:2
+msgid "You can assign a custom name to this batch for easy tracking and suggest a deadline to clarify the priority for translators."
+msgstr "Puoi assegnare un nome personalizzato a questo lotto per facilitarne la tracciabilità e suggerire una scadenza per chiarire la priorità dei traduttori."
+
+#: dashboard.js:2
+msgid "Batch name:"
+msgstr "Nome del lotto:"
+
+#: dashboard.js:2
+msgid "Your Automatic Translation Credits"
+msgstr "I tuoi crediti di traduzione automatica"
+
+#: dashboard.js:2
+msgid "In order to assign yourself as translator, you first need to <add_yourself>add yourself as %s translator</add_yourself> to the site.<br/> Add yourself as %s translator and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Per assegnare te stesso come traduttore, devi prima <add_yourself>aggiungere te stesso come %s traduttore</add_yourself> al sito.<br/> Aggiungi te stesso come %s traduttore e clicca su <check_again>controlla di nuovo</check_again> o scegli un'altra opzione di traduzione."
+
+#: dashboard.js:2
+msgid "Checking"
+msgstr "Controllo"
+
+#: dashboard.js:2
+msgid "In order to assign a translation service, you first need to <activate_ts>activate a translation service</activate_ts>.<br/>Activate a translation service and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Per assegnare un servizio di traduzione, devi prima <activate_ts>attivare un servizio di traduzione</activate_ts>.<br/>Attiva un servizio di traduzione e clicca su <check_again>controlla di nuovo</check_again> o scegli un'altra opzione di traduzione."
+
+#: dashboard.js:2
+msgid "In order to translate automatically, you first need to <enable_ate>enable WPML's Advanced Translation Editor</enable_ate>.<br/>Enable the Advanced Translation Editor and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Per poter tradurre automaticamente, devi prima <enable_ate>abilitare l'Editor di traduzione avanzato di WPML</enable_ate>.<br/>Abilita l'Editor di traduzione avanzato e clicca <check_again>nuovamente sulla spunta</check_again> o scegli un'altra opzione di traduzione."
+
+#: dashboard.js:2
+msgid ""
+"Any existing content (translations) will be overwritten when creating duplicates.\n"
+"When duplicating content, please first duplicate parent pages to maintain the site's hierarchy."
+msgstr "Qualsiasi contenuto esistente (traduzioni) verrà sovrascritto quando si creano dei duplicati.\nQuando si duplicano i contenuti, si consiglia di duplicare prima le pagine madri per mantenere la gerarchia del sito."
+
+#: dashboard.js:2
+msgid "Some of the selected content is already being translated. This will cancel any in-progress translations."
+msgstr "Alcuni dei contenuti selezionati sono già in corso di traduzione. Questo annulla le traduzioni in corso."
+
+#: dashboard.js:2
+msgid "Buy credits"
+msgstr "Acquista crediti"
+
+#: dashboard.js:2
+msgid "You don't have enough credits to translate your content automatically."
+msgstr "Non hai abbastanza crediti per tradurre automaticamente i tuoi contenuti."
+
+#: dashboard.js:2
+msgid "In order to assign to a translator, you first need to <add_translators>add %s translators</add_translators> to the site.<br/> Add %s translators and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Per assegnare un traduttore, devi prima <add_translators>aggiungere i traduttori di %s </add_translators> al sito.<br/> Aggiungi i traduttori di %s e clicca <check_again>di nuovo su Controlla</check_again> o scegli un'altra opzione di traduzione."
+
+#: dashboard.js:2
+msgid "Your site doesn't have any reviewers for %s. This means that you’re the only person who can review these translations."
+msgstr "Il tuo sito non ha revisioni per %s. Questo significa che sei l'unica persona che può revisionare queste traduzioni."
+
+#: dashboard.js:2
+msgid "Your site doesn't have any reviewers yet. This means that you’re the only person who can review translations."
+msgstr "Il tuo sito non ha ancora nessun revisore. Questo significa che sei l'unica persona che può revisionare le traduzioni."
+
+#: dashboard.js:2
+msgid "If you want other people to review the translations, go to <a>WPML → Translation Management → Translators</a> and add translators. They will be able to both review and translate content for you."
+msgstr "Se vuoi che altre persone rivedano le traduzioni, vai su <a>WPML → Gestione traduzioni → Traduttori</a> e aggiungi dei traduttori. Questi potranno sia revisionare che tradurre i contenuti per te."
+
+#: dashboard.js:2
+msgid "WPML does not support duplicating strings."
+msgstr "WPML non supporta la duplicazione delle stringhe."
+
+#: dashboard.js:2
+msgid "Finish setting up %s on your site"
+msgstr "Termina la configurazione di %s sul tuo sito"
+
+#: dashboard.js:2
+msgid "You need to authenticate %s to send them content for translation.<br/>Visit the <a>Translators tab</a> to finish the setup and click <check_again>check again</check_again> or choose a different translation option."
+msgstr "Devi autenticare %s per inviare loro i contenuti da tradurre.<br/>Visita la <a>scheda Traduttori</a> per terminare la configurazione e clicca su <check_again>Controlla di nuovo</check_again> o scegli un'altra opzione di traduzione."
+
+#: dashboard.js:2
+msgid "Content selected for translation"
+msgstr "Contenuti selezionati per la traduzione"
+
+#: dashboard.js:2
+msgid "Volume"
+msgstr "Volume"
+
+#: dashboard.js:2
+msgid "~ %d words"
+msgstr "~ %d parole"
+
+#: dashboard.js:2
+msgid "Total"
+msgstr "Totale"
+
+#: dashboard.js:2
+msgid "Sending for translation..."
+msgstr "Invio per la traduzione..."
+
+#: dashboard.js:2
+msgid "Sending for translation failed"
+msgstr "L'invio per la traduzione è fallito"
+
+#: dashboard.js:2
+msgid "You selected multiple translation methods for content across different languages:"
+msgstr "Hai selezionato più metodi di traduzione per i contenuti in diverse lingue:"
+
+#: dashboard.js:2
+msgid "WPML did not create translations for some languages because:"
+msgstr "WPML non ha creato traduzioni per alcune lingue perché:"
+
+#: dashboard.js:2
+msgid "Close"
+msgstr "Chiudi"
+
+#: dashboard.js:2
+msgid "1 item is being translated automatically."
+msgid_plural "%d items are being translated automatically."
+msgstr[0] "1 articolo viene tradotto automaticamente."
+msgstr[1] "%d gli articoli vengono tradotti automaticamente."
+
+#: dashboard.js:2
+msgid "From now on, WPML will automatically translate new content on your site."
+msgstr "D'ora in poi, WPML tradurrà automaticamente i nuovi contenuti del tuo sito."
+
+#: dashboard.js:2
+msgid "From now on, WPML will automatically translate your site's content."
+msgstr "D'ora in poi, WPML tradurrà automaticamente i contenuti del tuo sito."
+
+#: dashboard.js:2
+msgid "Automatic translations summary"
+msgstr "Riepilogo delle traduzioni automatiche"
+
+#: dashboard.js:2
+msgid "1 item has been duplicated."
+msgid_plural "%d items have been duplicated."
+msgstr[0] "1 articolo è stato duplicato."
+msgstr[1] "%d gli articoli sono stati duplicati."
+
+#: dashboard.js:2
+msgid "Duplication summary"
+msgstr "Riepilogo della duplicazione"
+
+#: dashboard.js:2
+msgid "There was a problem sending your content for translation."
+msgstr "Si è verificato un problema nell'invio dei tuoi contenuti per la traduzione."
+
+#: dashboard.js:2
+msgid "Please try again in a few minutes. If the issue persists, please contact our support."
+msgstr "Riprova tra qualche minuto. Se il problema persiste, contatta il nostro supporto."
+
+#: dashboard.js:2
+msgid "1 item has been successfully sent to translators! To check its status, please visit the <s>Jobs</s> tab in <s>WPML → Translation Management</s>."
+msgid_plural "%d items have been successfully sent to translators! For status updates, please visit the <s>Jobs</s> tab in <s>WPML → Translation Management</s>."
+msgstr[0] "1 articolo è stato inviato con successo ai traduttori! Per verificarne lo stato, visita la scheda <s>Lavori</s> in <s>WPML → Gestione traduzioni</s>."
+msgstr[1] "%d gli articoli sono stati inviati con successo ai traduttori! Per aggiornamenti sullo stato, visita la scheda <s>Lavori</s> in <s>WPML → Gestione traduzioni</s>."
+
+#: dashboard.js:2
+msgid "Local translations summary"
+msgstr "Riassunto delle traduzioni locali"
+
+#: dashboard.js:2
+msgid "Go to Translation Jobs"
+msgstr "Vai a Lavori di traduzione"
+
+#: dashboard.js:2
+msgid "%d item has been sent for translation to %s. Please continue to their site to start the translation."
+msgid_plural "%d items have been sent for translation to %s. Please continue to their site to start the translation."
+msgstr[0] "%d l'articolo è stato inviato per la traduzione a %s. Per favore, continua a visitare il loro sito per iniziare la traduzione."
+msgstr[1] "%d sono stati inviati per la traduzione a %s. Ti invitiamo a visitare il loro sito per iniziare la traduzione."
+
+#: dashboard.js:2
+msgid "Translation service translations summary"
+msgstr "Riassunto delle traduzioni del servizio di traduzione"
+
+#: dashboard.js:2
+msgid "Continue to %s"
+msgstr "Continua a %s"
+
+#: dashboard.js:2
+msgid "Translate and Duplicate"
+msgstr "Tradurre e duplicare"
+
+#: dashboard.js:2
+msgid "Duplicate"
+msgstr "Duplica"
+
+#: dashboard.js:2
+msgid "Translate"
+msgstr "Traduci"
+
+#: dashboard.js:2
+msgid "Selected content is already translated"
+msgstr "I contenuti selezionati sono già stati tradotti"
+
+#: dashboard.js:2
+msgid "Please select a review option"
+msgstr "Seleziona un'opzione di revisione"
+
+#: dashboard.js:2
+msgid "Assign local translator or choose another option"
+msgstr "Assegna un traduttore locale o scegli un'altra opzione"
+
+#: dashboard.js:2
+msgid "Assign yourself or choose another option"
+msgstr "Assegnati o scegli un'altra opzione"
+
+#: dashboard.js:2
+msgid "Activate translation service or choose another option"
+msgstr "Attiva il servizio di traduzione o scegli un'altra opzione"
+
+#: dashboard.js:2
+msgid "Activate ATE or choose another option"
+msgstr "Attiva l 'ATE o scegli un'altra opzione"
+
+#: dashboard.js:2
+msgid "Authenticate translation service or choose another option"
+msgstr "Autentica il servizio di traduzione o scegli un'altra opzione"
+
+#: dashboard.js:2
+msgid "<s>%s</s> cannot process more than <s>%d</s> jobs in a single batch. WPML will automatically split your jobs into separate batches to ensure an error-free delivery to <s>%s</s>. <br/><br/> Do you want to proceed?"
+msgstr "<s>%s</s> non può elaborare più di <s>%d</s>WPML dividerà automaticamente i tuoi lavori in batch separati per garantire una consegna senza errori a <s>%s</s>. <br/><br/> Vuoi procedere?"
+
+#: dashboard.js:2
+msgid "WPML will send jobs to %s in separate batches"
+msgstr "WPML invierà i lavori a %s in lotti separati"
+
+#: dashboard.js:2
+msgid "Yes, send jobs in separate batches"
+msgstr "Sì, invia i lavori in lotti separati"
+
+#: dashboard.js:2
+msgid "No, I will split jobs myself"
+msgstr "No, mi divido i lavori da solo"
+
+#: dashboard.js:2
+msgid "From now on, translate new content automatically, without asking me."
+msgstr "D'ora in poi, traduci i nuovi contenuti automaticamente, senza chiedermelo."
+
+#: dashboard.js:2
+msgid "Do you want to translate existing content too?"
+msgstr "Vuoi tradurre anche i contenuti esistenti?"
+
+#: dashboard.js:2
+msgid "Yes, translate all new and existing content"
+msgstr "Sì, traduci tutti i contenuti nuovi ed esistenti"
+
+#: dashboard.js:2
+msgid "No, only translate new content"
+msgstr "No, traduci solo i nuovi contenuti"
+
+#: dashboard.js:2
+msgid "You can translate existing content from the Translation Management Dashboard"
+msgstr "Puoi tradurre i contenuti esistenti dalla Bacheca di Gestione Traduzioni"
+
+#: dashboard.js:2
+msgid "Existing content"
+msgstr "Contenuti esistenti"
+
+#: dashboard.js:2
+msgid "You selected to translate strings that are in %s. Only these strings will be translated to %s."
+msgstr "Hai selezionato di tradurre le stringhe che si trovano in %s. Solo queste stringhe saranno tradotte in %s."
+
+#: dashboard.js:2
+msgid "You selected to translate strings that are in %s and %s. Only these strings will be translated to %s."
+msgstr "Hai selezionato di tradurre le stringhe che si trovano in %s e %s. Solo queste stringhe saranno tradotte in %s."
+
+#: dashboard.js:2
+msgid "Source language"
+msgstr "Lingua della fonte"
+
+#: dashboard.js:2
+msgid "Target language"
+msgstr "Lingua di destinazione"
+
+#: dashboard.js:2
+msgid "Action"
+msgstr "Azione"
+
+#: dashboard.js:2
+msgid "Select an option"
+msgstr "Seleziona un'opzione"
+
+#: dashboard.js:2
+msgid "-"
+msgstr "-"
+
+#: dashboard.js:2
+msgid "Translate automatically"
+msgstr "Tradurre automaticamente"
+
+#: dashboard.js:2
+msgid "Translate myself"
+msgstr "Tradurre me stesso"
+
+#: dashboard.js:2
+msgid "Assign a translator"
+msgstr "Assegna un traduttore"
+
+#: dashboard.js:2
+msgid "Assign translation service"
+msgstr "Assegnazione del servizio di traduzione"
+
+#: dashboard.js:2
+msgid "Do nothing"
+msgstr "Non fare nulla"
+
+#: dashboard.js:2
+msgid "Please choose"
+msgstr "Scegliere"
+
+#: dashboard.js:2
+msgid "Choose a translator"
+msgstr "Scegli un traduttore"
+
+#: dashboard.js:2
+msgid "First available"
+msgstr "Prima disponibile"
+
+#: dashboard.js:2
+msgid "(Me)"
+msgstr "(Me)"
+
+#: dashboard.js:2
+msgid "Translation controls"
+msgstr "Controlli di traduzione"
+
+#: dashboard.js:2
+msgid "Step 2"
+msgstr "Passo 2"
+
+#: dashboard.js:2
+msgid "Action needed"
+msgstr "Azione necessaria"
+
+#: dashboard.js:2
+msgid "Automatic jobs in progress"
+msgstr "Lavori automatici in corso"
+
+#: dashboard.js:2
+msgid "<s>%d automatic translation jobs</s> are currently in progress"
+msgstr "<s>%d i lavori di traduzione automatica</s> sono attualmente in corso"
+
+#: dashboard.js:2
+msgid "Pause"
+msgstr "Pausa"
+
+#: dashboard.js:2
+msgid "Start"
+msgstr "Avvia"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - credit wizard error"
+msgstr "Traduci tutto automaticamente - errore dell'assistente al credito"
+
+#: dashboard.js:2
+msgid "There was an error when loading the credit wizard."
+msgstr "Si è verificato un errore durante il caricamento dell'assistente crediti."
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - no credits"
+msgstr "Traduci tutto automaticamente - senza crediti"
+
+#: dashboard.js:2
+msgid "Start translating everything"
+msgstr "Inizia a tradurre tutto"
+
+#: dashboard.js:2
+msgid "Automatic translation uses credit. <a>Read more about automatic translation credits</a>"
+msgstr "La traduzione automatica utilizza i crediti. <a>Leggi di più sui crediti della traduzione automatica</a>"
+
+#: dashboard.js:2
+msgid "Start translating everything automatically"
+msgstr "Inizia a tradurre tutto automaticamente"
+
+#: dashboard.js:2
+msgid "WPML will translate any new content you create into %d languages."
+msgstr "WPML tradurrà tutti i nuovi contenuti che creerai nelle lingue di %d."
+
+#: dashboard.js:2
+msgid "You will be able to start Translate Everything Automatically after you send some content for translation. We recommend that you review the translations and make sure that they are good before translating your entire site's content."
+msgstr "Potrai avviare Traduci tutto automaticamente dopo aver inviato alcuni contenuti da tradurre. Ti consigliamo di revisionare le traduzioni e di assicurarti che siano valide prima di tradurre i contenuti dell'intero sito."
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - disabled"
+msgstr "Traduci tutto automaticamente - disattivato"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically"
+msgstr "Traduci tutto automaticamente"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - pausing"
+msgstr "Traduci tutto automaticamente - in pausa"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically is pausing"
+msgstr "Traduci tutto automaticamente è in pausa"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - paused"
+msgstr "Traduci tutto automaticamente - in pausa"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically is paused"
+msgstr "Traduci tutto automaticamente è in pausa"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically will translate all of your site's content and not only specific post types."
+msgstr "Traduci tutto automaticamente tradurrà tutti i contenuti del tuo sito e non solo specifici tipi di articoli."
+
+#: dashboard.js:2
+msgid "%d translations left in the queue. Preparing more content for translation."
+msgstr "%d traduzioni rimaste in coda. Preparare altri contenuti da tradurre."
+
+#: dashboard.js:2
+msgid "Preparing content for translation"
+msgstr "Preparare i contenuti per la traduzione"
+
+#: dashboard.js:2
+msgid "%d translations left in the queue"
+msgstr "%d traduzioni lasciate in coda"
+
+#: dashboard.js:2
+msgid "All translations are up to date"
+msgstr "Tutte le traduzioni sono aggiornate"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically - enabled"
+msgstr "Traduci tutto automaticamente - abilitato"
+
+#: dashboard.js:2
+msgid "As you create new content or edit existing content, WPML will automatically translate it from %s to %s."
+msgstr "Quando crei nuovi contenuti o modifichi quelli esistenti, WPML li tradurrà automaticamente da %s a %s."
+
+#: dashboard.js:2
+msgid "Hide details"
+msgstr "Nascondi i dettagli"
+
+#: dashboard.js:2
+msgid "Show details"
+msgstr "Mostra i dettagli"
+
+#: dashboard.js:2
+msgid "Translate Everything Automatically is stopped"
+msgstr "Traduci tutto automaticamente viene interrotto"
+
+#: dashboard.js:2
+msgid "Translation not running… there is an issue that needs your attention. Fix it to continue."
+msgstr "La traduzione non funziona... c'è un problema che richiede la tua attenzione. Risolvilo per continuare."
+
+#: dashboard.js:2
+msgid "Fix now"
+msgstr "Ripara ora"
+
+#: dashboard.js:2
+msgid "%d Translations are waiting for your review"
+msgstr "%d Le traduzioni sono in attesa della tua revisione"
+
+#: dashboard.js:2
+msgid "Review Translations"
+msgstr "Revisione delle traduzioni"
+
+#: dashboard.js:2
+msgid "Error in fetching currently logged in translator"
+msgstr "Errore nella ricerca del traduttore attualmente connesso"
+
+#: dashboard.js:2
+msgid "Error in fetching local translators"
+msgstr "Errore nel recupero dei traduttori locali"
+
+#: dashboard.js:2
+msgid "published"
+msgstr "pubblicato"
+
+#: dashboard.js:2
+msgid "Collapse"
+msgstr "Riduci"
+
+#: dashboard.js:2
+msgid "Expand"
+msgstr "Espandi"
+
+#: dashboard.js:2
+msgid "Close modal"
+msgstr "Chiudi la finestra modale"
+
+#: dashboard.js:2
+msgid "Search parent by title"
+msgstr "Cerca un genitore per titolo"
+
+#: dashboard.js:2
+msgid "No items found"
+msgstr "Nessun articolo trovato"
+
+#: dashboard.js:2
+msgid "%1$s Flag"
+msgstr "%1$s Bandiera"
+
+#: dashboard.js:2
+msgid "not translated"
+msgstr "non tradotto"
+
+#: dashboard.js:2
+msgid "waiting for translator"
+msgstr "in attesa del traduttore"
+
+#: dashboard.js:2
+msgid "in progress"
+msgstr "in corso"
+
+#: dashboard.js:2
+msgid "needs update"
+msgstr "necessita di un aggiornamento"
+
+#: dashboard.js:2
+msgid "duplicate"
+msgstr "duplica"
+
+#: dashboard.js:2
+msgid "complete"
+msgstr "completo"
+
+#: dashboard.js:2
+msgid "needs review"
+msgstr "necessita di una revisione"
+
+#: dashboard.js:2
+msgid "%1$s: %2$s"
+msgstr "%1$s: %2$s"

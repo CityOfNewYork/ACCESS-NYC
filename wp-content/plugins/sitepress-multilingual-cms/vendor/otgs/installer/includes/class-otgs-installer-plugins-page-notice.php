@@ -116,7 +116,8 @@ class OTGS_Installer_Plugins_Page_Notice {
 
 			case 'legacy_free':
 				$message = sprintf(
-					__( 'You have an old Types-free subscription, which doesn\'t provide automatic updates. %sUpgrade your account%s', 'installer' ),
+					__( 'You have an old, free subscription for Toolset Types which doesn\'t provide automatic updates. %sUpgrade your account%s', 'installer' ),
+							
 					'<a href="' . $menu_url . '">',
 					'</a>'
 				);

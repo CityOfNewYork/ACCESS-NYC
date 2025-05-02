@@ -1,0 +1,61 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages"
+         },
+         "WPML Translation Editor": [
+            "Trình biên dịch Wpml"
+         ],
+         "WordPress Editor": [
+            "Trình biên tập Wordpress"
+         ],
+         "Translate with the WordPress Editor when you want to create different designs for translations, or if you're translating content that's incompatible with WPML's Translation Editor.": [
+            "Dịch bằng Trình soạn thảo WordPress khi bạn muốn tạo các thiết kế khác nhau cho bản dịch, hoặc nếu bạn đang dịch nội dung không tương thích với Trình biên tập Dịch thuật của WPML."
+         ],
+         "What do you want to translate with the WordPress Editor?": [
+            "Bạn muốn dịch gì bằng Trình soạn thảo WordPress?"
+         ],
+         "I understand, switch to the WordPress Editor": [
+            "Tôi hiểu, chuyển sang Trình soạn thảo WordPress"
+         ],
+         "What do you want to translate with WPML Translation Editor?": [
+            "Bạn muốn dịch gì bằng Trình biên tập Dịch thuật của WPML?"
+         ],
+         "I understand, switch to WPML's Translation Editor": [
+            "Tôi hiểu, chuyển sang Trình biên tập Dịch thuật của WPML"
+         ],
+         "Apply": [
+            "Áp dụng"
+         ],
+         "Cancel": [
+            "Hủy"
+         ],
+         "Only this %s": [
+            "Chỉ %s này"
+         ],
+         "Recommended": [
+            "Được đề xuất"
+         ],
+         "All %s": [
+            "Tất cả%s"
+         ],
+         "All the site's content": [
+            "Tất cả nội dung của trang web"
+         ],
+         "Are you sure?": [
+            "Bạn có chắc chắn không?"
+         ],
+         "The WordPress Editor doesn't offer Automatic Translation, Translation Memory and other features that make translation easier.": [
+            "Trình soạn thảo WordPress không cung cấp tính năng Dịch tự động, Bộ nhớ Dịch thuật và các tính năng khác giúp việc dịch thuật dễ dàng hơn."
+         ],
+         "And, if you switch back to WPML's Translation Editor, you will need to translate from scratch what you translated with the WordPress editor.": [
+            "Và, nếu bạn chuyển lại sang Trình biên tập Dịch thuật của WPML, bạn sẽ cần phải dịch lại từ đầu những gì bạn đã dịch bằng trình soạn thảo WordPress."
+         ],
+         "When you update content that you previously translated with the WordPress Editor, you will need to translate from scratch.": [
+            "Khi bạn cập nhật nội dung mà bạn đã dịch trước đó bằng Trình soạn thảo WordPress, bạn sẽ cần phải dịch lại từ đầu."
+         ]
+      }
+   }
+}

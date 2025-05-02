@@ -1,11 +1,5 @@
 <?php
 
-use WPML\API\Sanitize;
-
-if ( Sanitize::stringProp( 'sm', $_GET ) === 'basket' ) {
-    add_action( 'admin_enqueue_scripts', array( 'SitePress_Table_Basket', 'enqueue_js' ) );
-}
-
 abstract class WPML_TM_Menus {
 
 	protected $post_types;
@@ -65,12 +59,18 @@ abstract class WPML_TM_Menus {
 				'nav-tab',
 				'nav-tab-' . $id,
 			);
+
+			if ( WPML_TM_AMS_Translation_Quality_Console_Section::SLUG === $id ) {
+				$classes[] = 'hidden-translation-quality';
+			}
+
 			if ( $tm_sub_menu === $id ) {
 				$classes[] = 'nav-tab-active';
 			}
 
 			$class = implode( ' ', $classes );
 			$href  = 'admin.php?page=' . WPML_TM_FOLDER . $this->get_page_slug() . '&sm=' . $id;
+
 			?>
 			<a class="<?php echo esc_attr( $class ); ?>" href="<?php echo esc_attr( $href ); ?>">
 				<?php echo $caption; ?>
