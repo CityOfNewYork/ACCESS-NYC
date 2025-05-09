@@ -145,7 +145,7 @@ Amazon SES Service email send action | `email_send`
 
 Name       | Value Description
 -----------|-
-`to`       | A valid email address (validates against the [`FILTER_VALIDATE_EMAIL`](https://www.php.net/manual/en/filter.filters.validate.php) validate filter) or phone number (10 digit number including area code), depending on the action.
+`to`       | A valid email address (validates against the [`FILTER_VALIDATE_EMAIL`](https://www.php.net/manual/en/filter.filters.validate.php) validate filter) or phone number (10 digit number including area code), depending on the action. Example email addresses and phone numbers (such as the example.com domain or 555 area code) are not allowed. 
 `action`   | The Ajax action callback name; `sms_send` or `email_send`.
 `url`      | The URL to be shared with the recipient, this is what replaces the contents of the `{{ BITLY_URL }}` and `{{ URL }}` in the post content.
 `template` | The slug of the SMNYC Post to use as the template for sms or email content.

@@ -185,6 +185,10 @@ class EmailMe extends ContactMe {
       $this->failure(2, 'Invalid email address. Please provide a valid email');
 
       return false;
+    } elseif (str_ends_with($addr, 'example.com')){
+      $this->failure(2, 'Invalid email address. Please provide a valid email');
+
+      return false;
     }
 
     return true;
