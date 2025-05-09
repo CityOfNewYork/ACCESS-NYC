@@ -57,7 +57,7 @@
           template: 'screener-results'
         }} only %}
 
-        {% include 'components/share-form.twig' with {this: {
+        {# {% include 'components/share-form.twig' with {this: {
           class: 'mb-2',
           type: 'email',
           button: __('Email', 'accessnyc-results'),
@@ -68,7 +68,7 @@
           hash: shareHash,
           guid: getParams.guid,
           template: 'screener-results'
-        }} only %}
+        }} only %} #}
 
         <div class="hidden" aria-hidden="true" id="aria-db-share-disclaimer">
           {% include 'components/disclaimer-small.twig' %}
