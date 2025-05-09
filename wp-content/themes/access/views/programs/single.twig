@@ -176,7 +176,7 @@
                   template: 'programs'
                 }} only %}
 
-                {% include 'components/share-form.twig' with {this: {
+                {# {% include 'components/share-form.twig' with {this: {
                   type: 'email',
                   button: __('Email', 'accessnyc-program-detail'),
                   placeholder: __('Email address', 'accessnyc-program-detail'),
@@ -186,7 +186,7 @@
                   hash: post.share_hash,
                   program_name: post.program_name,
                   template: 'programs'
-                }} only %}
+                }} only %} #}
               </div>
 
               <div class="mt-3 screen-tablet:m-0 hidden" aria-hidden="true" id="aria-db-share-disclaimer">
