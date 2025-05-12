@@ -3,6 +3,7 @@
 namespace SMNYC;
 
 use Exception;
+use Timber;
 
 /**
  * Generic parent class for specific contact methods to extend
@@ -136,28 +137,39 @@ class ContactMe {
       $this->failure(400, 'url required');
     }
 
+    // URL must belong to current site
+    if (!str_starts_with($_POST['url'], get_site_url(null, '', 'https')) && !str_starts_with($_POST['url'], get_site_url(null, '', 'http'))) {
+      $this->failure(400, 'invalid URL');
+    }
+
     $valid = $this->validateNonce($_POST['hash'], $_POST['url']);
-    $valid = $this->validConfiguration();
-    $valid = $this->validRecipient($_POST['to']);
+    $valid = $valid && $this->validConfiguration();
+    $valid = $valid && $this->validRecipient($_POST['to']);
 
     if ($valid) {
       $to = $this->sanitizeRecipient($_POST['to']);
 
       $guid = isset($_POST['GUID']) ? $_POST['GUID'] : '';
 
-      $url = $_POST['url'];
-
-      $share_text = isset($_POST['sharetext']) ? $_POST['sharetext'] : '';
+      $url = sanitize_url($_POST['url']);
 
       $url_shortened = (is_plugin_active('wp-bitly/wp-bitly.php')) ? $this->shorten($url) : $url;
 
-      $program_name = isset($_POST['program_name']) ? $_POST['program_name'] : '';
+      $program_name = '';
+
+      if(isset($_POST['post_id'])) {
+        $post = Timber::get_post($_POST['post_id']);
+        error_log(print_r($post, true));
+        error_log(print_r($post->custom, true));
+        error_log(print_r($post->custom['program_name'], true));
+        $program_name = $post->custom['program_name'];
+      }
 
       $template = $_POST['template'];
 
       $lang = (!isset($_POST['lang']) || empty($_POST['lang'])) ? 'en' : $_POST['lang'];
 
-      $content = $this->content($url_shortened, $url, $program_name, $share_text, $template, $lang);
+      $content = $this->content($url_shortened, $url, $program_name, $template, $lang);
 
       $this->send($to, $content);
       $this->success($to, $guid, $url, $content);

@@ -43,7 +43,7 @@ class SmsMe extends ContactMe {
    *
    * @return  String                  The text message being shared.
    */
-  protected function content($url_shortened, $url, $program_name, $share_text, $template, $lang) {
+  protected function content($url_shortened, $url, $program_name, $template, $lang) {
     // Get post and filter ID through WPML
     $post = get_page_by_path($template, OBJECT, $this->post_type);
 
@@ -56,7 +56,6 @@ class SmsMe extends ContactMe {
 
     // Get content and replace template tag with bitly url, share text, url, and program name
     $text = trim(strip_tags(get_post($id)->post_content));
-    $text = str_replace('{{ SHARE_TEXT }}', $share_text, $text);
     $text = str_replace('{{ BITLY_URL }}', $url_shortened, $text);
     $text = str_replace('{{ URL }}', $url, $text);
     $text = str_replace('{{ PROGRAM_NAME }}', $program_name, $text);

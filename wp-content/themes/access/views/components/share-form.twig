@@ -7,9 +7,9 @@
     {% if this.action %}<input name="action" type="hidden" value="{{ this.action }}" data-toggle-tabindex="-1" tabindex="-1" />{% endif %}
     {% if this.url %}<input name="url" readonly type="hidden" value="{{ this.url }}" data-toggle-tabindex="-1" tabindex="-1" />{% endif %}
     {% if this.hash %}<input name="hash" readonly type="hidden" value="{{ this.hash }}" data-toggle-tabindex="-1" tabindex="-1" />{% endif %}
-    {% if this.program_name %}<input name="program_name" readonly type="hidden" value="{{ this.program_name }}" data-toggle-tabindex="-1" tabindex="-1" />{% endif %}
     {% if this.guid %}<input maxlength="13" name="GUID" readonly type="hidden" value="{{ this.guid }}" data-toggle-tabindex="-1" tabindex="-1" />{% endif %}
     {% if this.template %}<input name="template" readonly type="hidden" value="{{ this.template }}" data-toggle-tabindex="-1" tabindex="-1" />{% endif %}
+    {% if this.post_id %}<input name="post_id" readonly type="hidden" value="{{ this.post_id }}" data-toggle-tabindex="-1" tabindex="-1" />{% endif %}
 
     <div class="c-share-form__fieldset">
       <div class="c-share-form__input {% if this.type == 'tel' %}input-phone-us{% endif %}">
