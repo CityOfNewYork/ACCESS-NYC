@@ -159,10 +159,9 @@ class ContactMe {
 
       if(isset($_POST['post_id'])) {
         $post = Timber::get_post($_POST['post_id']);
-        error_log(print_r($post, true));
-        error_log(print_r($post->custom, true));
-        error_log(print_r($post->custom['program_name'], true));
-        $program_name = $post->custom['program_name'];
+        if ($post && isset($post->custom['program_name'])) {
+          $program_name = $post->custom['program_name'];
+        }
       }
 
       $template = $_POST['template'];
