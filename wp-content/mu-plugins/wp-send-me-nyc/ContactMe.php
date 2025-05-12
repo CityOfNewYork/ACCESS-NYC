@@ -146,6 +146,8 @@ class ContactMe {
     $valid = $valid && $this->validConfiguration();
     $valid = $valid && $this->validRecipient($_POST['to']);
 
+    error_log("User IP address: " . print_r($_SERVER['REMOTE_ADDR'], true) . " Recipient: " . print_r($this->sanitizeRecipient($_POST['to']), true));
+
     if ($valid) {
       $to = $this->sanitizeRecipient($_POST['to']);
 
