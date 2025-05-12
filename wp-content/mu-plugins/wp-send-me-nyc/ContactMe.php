@@ -133,6 +133,8 @@ class ContactMe {
    * Submission handler for the Share Form Component.
    */
   public function submission() {
+    error_log("User IP address: " . print_r($_SERVER['REMOTE_ADDR'], true));
+
     if (!isset($_POST['url']) || empty($_POST['url'])) {
       $this->failure(400, 'url required');
     }
