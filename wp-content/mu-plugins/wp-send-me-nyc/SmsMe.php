@@ -126,8 +126,12 @@ class SmsMe extends ContactMe {
       $this->failure(2, 'Invalid phone number. Please provide 10-digit number with area code');
 
       return false;
-    }
+    } elseif (substr($to, 0, 3) == '555') { // 555 is a sample area code
+      $this->failure(2, 'Invalid phone number. Please provide 10-digit number with area code');
 
+      return false;
+    }
+ 
     // assume longer numbers have country code specified
     return true;
   }
