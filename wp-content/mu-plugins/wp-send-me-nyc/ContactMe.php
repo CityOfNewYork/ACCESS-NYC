@@ -133,6 +133,8 @@ class ContactMe {
    * Submission handler for the Share Form Component.
    */
   public function submission() {
+    error_log("User IP address: " . print_r($_SERVER['REMOTE_ADDR'], true));
+
     if (!isset($_POST['url']) || empty($_POST['url'])) {
       $this->failure(400, 'url required');
     }
@@ -145,8 +147,6 @@ class ContactMe {
     $valid = $this->validateNonce($_POST['hash'], $_POST['url']);
     $valid = $valid && $this->validConfiguration();
     $valid = $valid && $this->validRecipient($_POST['to']);
-
-    error_log("User IP address: " . print_r($_SERVER['REMOTE_ADDR'], true) . " Recipient: " . print_r($this->sanitizeRecipient($_POST['to']), true));
 
     if ($valid) {
       $to = $this->sanitizeRecipient($_POST['to']);
