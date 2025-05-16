@@ -70,6 +70,10 @@ class SmsMe extends ContactMe {
    * @param   String  $msg  The message to send.
    */
   protected function send($to, $msg) {
+    if ($msg == null || empty($msg)) {
+      return $this->failure(3, 'Message cannot be empty');
+    }
+
     try {
       $user = get_option($this->info()['option_prefix'] . 'user');
       $apiKeySid = get_option($this->info()['option_prefix'] . 'api_key_sid');
