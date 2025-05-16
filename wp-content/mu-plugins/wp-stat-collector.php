@@ -46,19 +46,21 @@ add_action('statc_register', function($statc) {
   /**
    * Hook for the Stat Collector action for saving the email content to the DB
    *
-   * @param   String  $type  email/sms/whatever the class type is
-   * @param   String  $to    The number/email sent to
-   * @param   String  $uid   The GUID of the results
-   * @param   String  $url   The main url shared
-   * @param   String  $msg   The body of the message
+   * @param   String  $type         email/sms/whatever the class type is
+   * @param   String  $to           The number/email sent to
+   * @param   String  $uid          The GUID of the results
+   * @param   String  $url          The main url shared
+   * @param   String  $msg          The body of the message
+   * @param   String  $ip_address   IP address of the sender
    */
-  add_action('smnyc_message_sent', function($type, $to, $uid, $url = null, $message = null) use ($statc) {
+  add_action('smnyc_message_sent', function($type, $to, $uid, $url = null, $message = null, $ip_address = null) use ($statc) {
     $statc->collect('messages', [
       'uid' => $uid,
       'msg_type' => strtolower($type),
       'address' => $to,
       'url' => $url,
-      'message' => $message
+      'message' => $message,
+      'ip_address' => $ip_address
     ]);
   }, $statc->settings->priority, 5);
 
@@ -80,6 +82,7 @@ add_action('statc_bootstrap', function($db) {
       date DATETIME DEFAULT NOW(),
       url VARCHAR(512) DEFAULT NULL,
       message TEXT DEFAULT NULL,
+      ip_address VARCHAR(255) DEFAULT NULL,
       PRIMARY KEY(id)
     ) ENGINE=InnoDB'
   );

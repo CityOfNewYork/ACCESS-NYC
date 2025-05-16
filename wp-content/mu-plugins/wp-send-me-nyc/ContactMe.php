@@ -142,9 +142,13 @@ class ContactMe {
       $this->failure(400, 'invalid URL');
     }
 
+    $ip_address = $_SERVER['REMOTE_ADDR'];
+
     $valid = $this->validateNonce($_POST['hash'], $_POST['url']);
     $valid = $valid && $this->validConfiguration();
     $valid = $valid && $this->validRecipient($_POST['to']);
+    $valid = $valid && !$this->is_rate_limited($ip_address, 'ip_address', 15, HOUR_IN_SECONDS);
+    $valid = $valid && !$this->is_rate_limited($_POST['to'], 'to_address', 15, HOUR_IN_SECONDS);
 
     if ($valid) {
       $to = $this->sanitizeRecipient($_POST['to']);
@@ -171,7 +175,7 @@ class ContactMe {
       $content = $this->content($url_shortened, $url, $program_name, $template, $lang);
 
       $this->send($to, $content);
-      $this->success($to, $guid, $url, $content);
+      $this->success($to, $guid, $url, $ip_address, $content);
     }
   }
 
@@ -298,6 +302,33 @@ class ContactMe {
   }
 
   /**
+   * Determines whether the action should be rate limited
+   * 
+   * @param   String   $value     The value that we are checking
+   * @param   String   $type      The type of value (to_address or ip_address)
+   * @param   Number   $limit     The maximum number of events that can occur in the interval before rate limiting starts
+   * @param   Number   $interval  The number of seconds in the interval
+   * 
+   * @return true if the action should be rate limited, false otherwise
+   */
+  private function is_rate_limited($value, $type, $limit = 15, $interval = 3600) {
+    $key = 'rate_limit_' . $type . '_' . md5($value);
+    $attempts = get_transient($key);
+
+    if (!$attempts) {
+        set_transient($key, 1, $interval);
+        return false;
+    }
+
+    if ($attempts < $limit) {
+        set_transient($key, $attempts + 1, $interval);
+        return false;
+    }
+
+    return true;
+}
+
+  /**
    * Uses the wp_send_json() method to send a php key/value array as json response.
    *
    * @param   Array  $response  Key/value array of the response object.
@@ -309,12 +340,13 @@ class ContactMe {
   /**
    * Action hook for Stat Collector and sends success response key/value array.
    *
-   * @param   String        $to       Recipient of message.
-   * @param   String        $guid     Session GUID.
-   * @param   String        $url      URL to that has been shared.
-   * @param   String/Array  $content  Content sent in the email or sms.
+   * @param   String        $to           Recipient of message.
+   * @param   String        $guid         Session GUID.
+   * @param   String        $url          URL to that has been shared.
+   * @param   String        $ip_address   IP address of the sender
+   * @param   String/Array  $content      Content sent in the email or sms.
    */
-  protected function success($to, $guid, $url, $content = null) {
+  protected function success($to, $guid, $url, $ip_address, $content = null) {
     /**
      * Action hook for Stat Collector to save message details to the DB
      *
@@ -324,7 +356,7 @@ class ContactMe {
     $type = $this->action;
     $msg = is_array($content) ? $content['body'] : $content;
 
-    do_action('smnyc_message_sent', $type, $to, $guid, $url, $msg);
+    do_action('smnyc_message_sent', $type, $to, $guid, $url, $msg, $ip_address);
 
     /**
      * Send the success message
