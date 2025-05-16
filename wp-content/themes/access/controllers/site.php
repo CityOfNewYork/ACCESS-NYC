@@ -113,10 +113,21 @@ class Site extends TimberSite {
     if ($context['a_b_testing_on']) {
       if (isset($_COOKIE['ab_test_variant']) and (
           $_COOKIE['ab_test_variant'] == 'a'
-          or $_COOKIE['ab_test_variant'] == 'b')) { // Variant cookie must be a valid value
+          or $_COOKIE['ab_test_variant'] == 'b'
+          or $_COOKIE['ab_test_variant'] == 'c')) { // Variant cookie must be a valid value
         $context['variant'] = $_COOKIE['ab_test_variant'];
       } else {
-        $variant = rand(0, 1) ? 'a' : 'b';
+        $rand_val = rand(0, 2);
+        $variant = 'a';
+        if ($rand_val == 0) {
+          $variant = 'a';
+        }
+        elseif ($rand_val == 1) {
+          $variant = 'b';
+        }
+        else {
+          $variant = 'c';
+        }
         setcookie('ab_test_variant', $variant, time() + (DAY_IN_SECONDS * 30), COOKIEPATH, COOKIE_DOMAIN);
         $context['variant'] = $variant;
       }

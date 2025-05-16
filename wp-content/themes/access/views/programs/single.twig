@@ -87,7 +87,17 @@
       
       {% if more_information_section %}
       <a id="top-nav-link-more-information" class="top-nav-link" data-step-go-to="more-information" href="#more-information">
-        {{ __('More information', 'accessnyc-program-detail') }}
+        {% if variant is not null and variant is not empty %}
+          {% if variant == 'a' %}
+              {{ __('More information', 'accessnyc-program-detail') }}
+          {% elseif variant == 'b' %}
+              {{ __('Need help?', 'accessnyc-program-detail') }}
+          {% else %}
+              {{ __('Get help', 'accessnyc-program-detail') }}
+          {% endif %}
+      {% else %}
+          {{ __('More information', 'accessnyc-program-detail') }}
+      {% endif %}
       </a>
       {% endif %}
     </nav>
@@ -114,13 +124,33 @@
             {% if more_information_section %}
               <li class="pl-0">
                 <a id="side-nav-link-more-information" class="side-nav-link" data-step-go-to="more-information" href="#more-information">
-                  {{ __('More information', 'accessnyc-program-detail') }}
+                  {% if variant is not null and variant is not empty %}
+                    {% if variant == 'a' %}
+                        {{ __('More information', 'accessnyc-program-detail') }}
+                    {% elseif variant == 'b' %}
+                        {{ __('Need help?', 'accessnyc-program-detail') }}
+                    {% else %}
+                        {{ __('Get help', 'accessnyc-program-detail') }}
+                    {% endif %}
+                {% else %}
+                    {{ __('More information', 'accessnyc-program-detail') }}
+                {% endif %}
                 </a>
               </li>
 
               {# This exists only to make the sidebar size consistent regardless of which element is active #}
               <div aria-hidden="true" class="side-nav-link invisible font-bold pr-2" style="height: 0px">
-                {{ __('More information', 'accessnyc-program-detail') }}
+                {% if variant is not null and variant is not empty %}
+                  {% if variant == 'a' %}
+                      {{ __('More information', 'accessnyc-program-detail') }}
+                  {% elseif variant == 'b' %}
+                      {{ __('Need help?', 'accessnyc-program-detail') }}
+                  {% else %}
+                      {{ __('Get help', 'accessnyc-program-detail') }}
+                  {% endif %}
+              {% else %}
+                  {{ __('More information', 'accessnyc-program-detail') }}
+              {% endif %}
               </div>
             {% endif %}
           </ul>
