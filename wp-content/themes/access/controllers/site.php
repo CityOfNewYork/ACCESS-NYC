@@ -121,11 +121,9 @@ class Site extends TimberSite {
         $variant = 'a';
         if ($rand_val == 0) {
           $variant = 'a';
-        }
-        elseif ($rand_val == 1) {
+        } elseif ($rand_val == 1) {
           $variant = 'b';
-        }
-        else {
+        } else {
           $variant = 'c';
         }
         setcookie('ab_test_variant', $variant, time() + (DAY_IN_SECONDS * 30), COOKIEPATH, COOKIE_DOMAIN);
