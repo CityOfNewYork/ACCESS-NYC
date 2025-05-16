@@ -62,7 +62,7 @@ add_action('statc_register', function($statc) {
       'message' => $message,
       'ip_address' => $ip_address
     ]);
-  }, $statc->settings->priority, 5);
+  }, $statc->settings->priority, 6);
 
   return true;
 });
