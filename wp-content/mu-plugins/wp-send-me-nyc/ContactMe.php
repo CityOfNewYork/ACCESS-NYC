@@ -147,8 +147,7 @@ class ContactMe {
     $valid = $this->validateNonce($_POST['hash'], $_POST['url']);
     $valid = $valid && $this->validConfiguration();
     $valid = $valid && $this->validRecipient($_POST['to']);
-    $valid = $valid && !$this->is_rate_limited($ip_address, 'ip_address', 15, HOUR_IN_SECONDS);
-    $valid = $valid && !$this->is_rate_limited($_POST['to'], 'to_address', 15, HOUR_IN_SECONDS);
+    $valid = $valid && !$this->is_rate_limited($_POST['to'] . $_POST['url'], 'to_address_url', 1, DAY_IN_SECONDS);
 
     if ($valid) {
       $to = $this->sanitizeRecipient($_POST['to']);
