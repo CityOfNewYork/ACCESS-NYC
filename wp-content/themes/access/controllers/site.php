@@ -136,6 +136,8 @@ class Site extends TimberSite {
       $rand_val = wp_generate_uuid4();
       setcookie('visitor_id', $rand_val, time() + DAY_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN);
       $context['visitor_id'] = $rand_val;
+    } else {
+      $context['visitor_id'] = $_COOKIE['visitor_id'];
     }
 
     /**
