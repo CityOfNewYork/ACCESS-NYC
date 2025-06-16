@@ -204,7 +204,8 @@
                   hash: post.share_hash,
                   program_name: post.program_name,
                   template: 'programs',
-                  post_id: post.id
+                  post_id: post.id,
+                  visitor_id: visitor_id
                 }} only %}
 
                 {% include 'components/share-form.twig' with {this: {
@@ -217,7 +218,8 @@
                   hash: post.share_hash,
                   program_name: post.program_name,
                   template: 'programs',
-                  post_id: post.id
+                  post_id: post.id,
+                  visitor_id: visitor_id
                 }} only %}
               </div>
 

@@ -54,7 +54,8 @@
           url: shareUrl,
           hash: shareHash,
           guid: getParams.guid,
-          template: 'screener-results'
+          template: 'screener-results',
+          visitor_id: visitor_id
         }} only %}
 
         {% include 'components/share-form.twig' with {this: {
@@ -67,7 +68,8 @@
           url: shareUrl,
           hash: shareHash,
           guid: getParams.guid,
-          template: 'screener-results'
+          template: 'screener-results',
+          visitor_id: visitor_id
         }} only %}
 
         <div class="hidden" aria-hidden="true" id="aria-db-share-disclaimer">

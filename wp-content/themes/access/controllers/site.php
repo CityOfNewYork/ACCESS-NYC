@@ -131,6 +131,15 @@ class Site extends TimberSite {
       }
     }
 
+    // Set visitor_id cookie
+    if (!isset($_COOKIE['visitor_id'])) {
+      $rand_val = wp_generate_uuid4();
+      setcookie('visitor_id', $rand_val, time() + DAY_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN);
+      $context['visitor_id'] = $rand_val;
+    } else {
+      $context['visitor_id'] = $_COOKIE['visitor_id'];
+    }
+
     /**
      * Get the default page meta description for the page
      */
