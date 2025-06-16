@@ -143,8 +143,8 @@ class ContactMe {
     }
 
     $ip_address = $_SERVER['REMOTE_ADDR'];
-    $user_agent = $_SERVER['HTTP_USER_AGENT'];
-    $visitor_id = $_COOKIE['visitor_id'];
+    $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+    $visitor_id = $_POST['visitor_id'] ?? '';
 
     $valid = $this->validateNonce($_POST['hash'], $_POST['url']);
     $valid = $valid && $this->validConfiguration();

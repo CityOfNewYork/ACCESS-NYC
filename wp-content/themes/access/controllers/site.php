@@ -133,7 +133,9 @@ class Site extends TimberSite {
 
     // Set visitor_id cookie
     if (!isset($_COOKIE['visitor_id'])) {
-      setcookie('visitor_id', rand(), time() + DAY_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN);
+      $rand_val = rand();
+      setcookie('visitor_id', $rand_val, time() + DAY_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN);
+      $context['visitor_id'] = $rand_val;
     }
 
     /**
