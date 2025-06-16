@@ -66,7 +66,7 @@ add_action('statc_register', function($statc) {
       'user_agent' => $user_agent,
       'visitor_id' => $visitor_id
     ]);
-  }, $statc->settings->priority, 6);
+  }, $statc->settings->priority, 8);
 
   return true;
 });
