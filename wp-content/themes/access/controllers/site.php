@@ -131,6 +131,11 @@ class Site extends TimberSite {
       }
     }
 
+    // Set visitor_id cookie
+    if (!isset($_COOKIE['visitor_id'])) {
+      setcookie('visitor_id', rand(), time() + DAY_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN);
+    }
+
     /**
      * Get the default page meta description for the page
      */

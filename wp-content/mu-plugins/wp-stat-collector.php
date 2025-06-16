@@ -52,15 +52,19 @@ add_action('statc_register', function($statc) {
    * @param   String  $url          The main url shared
    * @param   String  $msg          The body of the message
    * @param   String  $ip_address   IP address of the sender
+   * @param   String  $user_agent   user-agent header of the sender
+   * @param   String  $visitor_id   visitor_id cookie of the sender
    */
-  add_action('smnyc_message_sent', function($type, $to, $uid, $url = null, $message = null, $ip_address = null) use ($statc) {
+  add_action('smnyc_message_sent', function($type, $to, $uid, $url = null, $message = null, $ip_address = null, $user_agent = null, $visitor_id = null) use ($statc) {
     $statc->collect('messages', [
       'uid' => $uid,
       'msg_type' => strtolower($type),
       'address' => $to,
       'url' => $url,
       'message' => $message,
-      'ip_address' => $ip_address
+      'ip_address' => $ip_address,
+      'user_agent' => $user_agent,
+      'visitor_id' => $visitor_id
     ]);
   }, $statc->settings->priority, 6);
 
@@ -83,6 +87,8 @@ add_action('statc_bootstrap', function($db) {
       url VARCHAR(512) DEFAULT NULL,
       message TEXT DEFAULT NULL,
       ip_address VARCHAR(255) DEFAULT NULL,
+      user_agent VARCHAR(255) DEFAULT NULL,
+      visitor_id VARCHAR(255) DEFAULT NULL,
       PRIMARY KEY(id)
     ) ENGINE=InnoDB'
   );
