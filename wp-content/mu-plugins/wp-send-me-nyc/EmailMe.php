@@ -91,7 +91,8 @@ class EmailMe extends ContactMe {
     return array(
       'subject' => $subject,
       'html' => $html,
-      'body' => $text_body
+      'body' => $text_body,
+      'message_type' => empty($program_name) ? 'results' : 'program_guide'
     );
   }
 
@@ -150,6 +151,13 @@ class EmailMe extends ContactMe {
           )
         )
       );
+
+      if (!empty($info['message_type'])) {
+        $config['Tags'] = array( array(
+          'Name' => 'message_type',
+          'Value' => $info['message_type']
+        ));
+      }
 
       if (!empty($reply)) {
         $config['ReplyToAddresses'] = [$reply];
