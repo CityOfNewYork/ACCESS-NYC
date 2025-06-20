@@ -149,12 +149,15 @@ class EmailMe extends ContactMe {
             'Text' => array('Data' => $info['body']),
             'Html' => array('Data' => $info['html'])
           )
-        ),
-        'Tags' => array( array(
+        )
+      );
+
+      if (!empty($info['message_type'])) {
+        $config['Tags'] = array( array(
           'Name' => 'message_type',
           'Value' => $info['message_type']
-        ))
-      );
+        ));
+      }
 
       if (!empty($reply)) {
         $config['ReplyToAddresses'] = [$reply];
