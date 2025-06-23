@@ -142,10 +142,6 @@ class ContactMe {
       $this->failure(400, 'invalid URL');
     }
 
-    $ip_address = $_SERVER['REMOTE_ADDR'];
-    $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
-    $visitor_id = $_POST['visitor_id'] ?? '';
-
     $valid = $this->validateNonce($_POST['hash'], $_POST['url']);
     $valid = $valid && $this->validConfiguration();
     $valid = $valid && $this->validRecipient($_POST['to']);
@@ -176,7 +172,7 @@ class ContactMe {
       $content = $this->content($url_shortened, $url, $program_name, $template, $lang);
 
       $this->send($to, $content);
-      $this->success($to, $guid, $url, $ip_address, $user_agent, $visitor_id, $content);
+      $this->success($to, $guid, $url, $content);
     }
   }
 
@@ -306,7 +302,7 @@ class ContactMe {
    * Determines whether the action should be rate limited
    * 
    * @param   String   $value     The value that we are checking
-   * @param   String   $type      The type of value (to_address or ip_address)
+   * @param   String   $type      The type of value
    * @param   Number   $limit     The maximum number of events that can occur in the interval before rate limiting starts
    * @param   Number   $interval  The number of seconds in the interval
    * 
@@ -344,12 +340,9 @@ class ContactMe {
    * @param   String        $to           Recipient of message.
    * @param   String        $guid         Session GUID.
    * @param   String        $url          URL to that has been shared.
-   * @param   String        $ip_address   IP address of the sender
-   * @param   String        $user_agent   user-agent header of the sender
-   * @param   String        $visitor_id   visitor_id cookie of the sender
    * @param   String/Array  $content      Content sent in the email or sms.
    */
-  protected function success($to, $guid, $url, $ip_address, $user_agent, $visitor_id, $content = null) {
+  protected function success($to, $guid, $url, $content = null) {
     /**
      * Action hook for Stat Collector to save message details to the DB
      *
@@ -359,7 +352,7 @@ class ContactMe {
     $type = $this->action;
     $msg = is_array($content) ? $content['body'] : $content;
 
-    do_action('smnyc_message_sent', $type, $to, $guid, $url, $msg, $ip_address, $user_agent, $visitor_id);
+    do_action('smnyc_message_sent', $type, $to, $guid, $url, $msg);
 
     /**
      * Send the success message
