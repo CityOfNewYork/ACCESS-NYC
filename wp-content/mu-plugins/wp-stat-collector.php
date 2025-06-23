@@ -79,7 +79,7 @@ add_action('statc_bootstrap', function($db) {
       address VARCHAR(255) NOT NULL,
       date DATETIME DEFAULT NOW(),
       url VARCHAR(512) DEFAULT NULL,
-      message TEXT DEFAULT NULL
+      message TEXT DEFAULT NULL,
       PRIMARY KEY(id)
     ) ENGINE=InnoDB'
   );
