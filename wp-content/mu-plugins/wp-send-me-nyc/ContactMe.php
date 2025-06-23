@@ -145,7 +145,17 @@ class ContactMe {
     $valid = $this->validateNonce($_POST['hash'], $_POST['url']);
     $valid = $valid && $this->validConfiguration();
     $valid = $valid && $this->validRecipient($_POST['to']);
-    // $valid = $valid && !$this->is_rate_limited($_POST['to'] . $_POST['url'], 'to_address_url', 1, DAY_IN_SECONDS);
+
+    // If you send a program guide email to an email address, 
+    // you have to wait at least 15 seconds before sending an email about ANY program guide to that email address
+    $valid = $valid && !$this->is_rate_limited($_POST['to'], 'to_address_15_second', 1, 15);
+
+    // If you send a program guide email to an email address, 
+    // you have to wait at least 3 minutes before sending the SAME program guide email to that email address
+    $valid = $valid && !$this->is_rate_limited($_POST['to'] . $_POST['url'], 'to_address_url_3_minute', 1, 3 * MINUTE_IN_SECONDS);
+
+    // You can only email a specific program guide to a specific email address 3 times in a day
+    $valid = $valid && !$this->is_rate_limited($_POST['to'] . $_POST['url'], 'to_address_url_day', 3, DAY_IN_SECONDS);
 
     if ($valid) {
       $to = $this->sanitizeRecipient($_POST['to']);
