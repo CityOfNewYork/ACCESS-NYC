@@ -235,9 +235,9 @@ This action is fired after a message is sent successfully.
 #### Examples
 
 ```php
-add_action('smnyc_message_sent', function($type, $to, $uid, $url, $message, $ip_address, $user_agent, $visitor_id) {
+add_action('smnyc_message_sent', function($type, $to, $uid, $url, $message) {
   // Successful message sent handler
-}, 10, 8);
+}, 10, 5);
 ```
 
 ---
