@@ -8,6 +8,9 @@ import Disclaimer from 'components/disclaimer/disclaimer';
 // Patterns Framework
 import localize from 'utilities/localize/localize';
 
+// public-facing site key
+const siteKey = '6Lf0tTgUAAAAACnS4fRKqbLll_oFxFzeaVfbQxyX';
+
 (() => {
   'use strict';
 
@@ -43,5 +46,39 @@ import localize from 'utilities/localize/localize';
 
     new Disclaimer();
   })(document.querySelectorAll(ShareForm.selector));
+
+  /** 
+   * Add ReCAPTCHA to Share Form
+   */
+  (elements => {
+    elements.forEach(element => {
+      element.addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent immediate form submission
+  
+        grecaptcha.ready(function () {
+          grecaptcha.execute(siteKey, {action: 'share_form'}).then(function (token) {
+            // Inject the token into the hidden field
+            const tokenField = element.querySelector('input[name="g-recaptcha-response"]');
+            if (tokenField) {
+              tokenField.value = token;
+            } else {
+              // Defensive fallback
+              const hidden = document.createElement('input');
+              hidden.type = 'hidden';
+              hidden.name = 'g-recaptcha-response';
+              hidden.value = token;
+              element.appendChild(hidden);
+            }
+  
+            // Finally submit the form
+            element.submit();
+          });
+        });
+      });
+    });
+
+    new Disclaimer();
+  })(document.querySelectorAll(ShareForm.selector));
+    
 })();
 
