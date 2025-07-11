@@ -68,7 +68,7 @@
     path: config/integrations/body/google-tag-manager.html
 
 - handle: google-recaptcha
-  path: https://www.google.com/recaptcha/api.js?render=6Lf0tTgUAAAAACnS4fRKqbLll_oFxFzeaVfbQxyX
+  path: https://www.google.com/recaptcha/api.js?render=6LcToXYrAAAAAAOw2A3VryPr2nFBnZWig0Pomz8E
   in_footer: false
   attrs:
     async: true

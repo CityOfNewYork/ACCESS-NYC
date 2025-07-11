@@ -9,7 +9,7 @@ import Disclaimer from 'components/disclaimer/disclaimer';
 import localize from 'utilities/localize/localize';
 
 // public-facing site key
-const siteKey = '6Lf0tTgUAAAAACnS4fRKqbLll_oFxFzeaVfbQxyX';
+const siteKey = '6LcToXYrAAAAAAOw2A3VryPr2nFBnZWig0Pomz8E';
 
 (() => {
   'use strict';
@@ -52,13 +52,15 @@ const siteKey = '6Lf0tTgUAAAAACnS4fRKqbLll_oFxFzeaVfbQxyX';
    */
   (elements => {
     elements.forEach(element => {
-      element.addEventListener('submit', function (e) {
+      const elementForm = element.querySelector('form');
+
+      elementForm.addEventListener('submit', function (e) {
         e.preventDefault(); // Prevent immediate form submission
-  
+        
         grecaptcha.ready(function () {
-          grecaptcha.execute(siteKey, {action: 'share_form'}).then(function (token) {
+          grecaptcha.execute(siteKey, {action: 'submit'}).then(function (token) {
             // Inject the token into the hidden field
-            const tokenField = element.querySelector('input[name="g-recaptcha-response"]');
+            const tokenField = elementForm.querySelector('input[name="g-recaptcha-response"]');
             if (tokenField) {
               tokenField.value = token;
             } else {
@@ -67,17 +69,15 @@ const siteKey = '6Lf0tTgUAAAAACnS4fRKqbLll_oFxFzeaVfbQxyX';
               hidden.type = 'hidden';
               hidden.name = 'g-recaptcha-response';
               hidden.value = token;
-              element.appendChild(hidden);
+              elementForm.appendChild(hidden);
             }
   
             // Finally submit the form
-            element.submit();
+            elementForm.submit();
           });
         });
       });
     });
-
-    new Disclaimer();
   })(document.querySelectorAll(ShareForm.selector));
     
 })();

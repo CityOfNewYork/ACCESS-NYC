@@ -142,6 +142,8 @@ class ContactMe {
       $this->failure(400, 'invalid URL');
     }
 
+    error_log(print_r($_POST, true));
+
     $valid = $this->validateNonce($_POST['hash'], $_POST['url']);
     $valid = $valid && $this->validConfiguration();
     $valid = $valid && $this->validRecipient($_POST['to']);
