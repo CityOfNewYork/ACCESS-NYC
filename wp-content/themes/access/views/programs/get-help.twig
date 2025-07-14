@@ -1,17 +1,7 @@
-<section id="more-information" data-step="more-information" aria-hidden="false">
+<section id="get-help" data-step="get-help" aria-hidden="false">
     <header>
     <h3 class="text-blue-dark">
-    {% if variant is not null and variant is not empty %}
-        {% if variant == 'a' %}
-            {{ __('More information', 'accessnyc-program-detail') }}
-        {% elseif variant == 'b' %}
-            {{ __('Need help?', 'accessnyc-program-detail') }}
-        {% else %}
-            {{ __('Get help', 'accessnyc-program-detail') }}
-        {% endif %}
-    {% else %}
-        {{ __('More information', 'accessnyc-program-detail') }}
-    {% endif %}
+        {{ __('Get help', 'accessnyc-program-detail') }}
     </h3>
     </header>
 

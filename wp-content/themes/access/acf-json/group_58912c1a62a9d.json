@@ -147,10 +147,10 @@
             },
             "show_in_rest": 1,
             "choices": {
-                "how-it-works": "How It Works",
-                "determine-your-eligibility": "Determine Your Eligibility",
-                "what-you-need-to-include": "What You Need to Include",
-                "how-to-apply": "How to Apply"
+                "how-it-works": "How it works",
+                "determine-your-eligibility": "Eligibility requirements",
+                "what-you-need-to-include": "Required documents",
+                "how-to-apply": "How to apply"
             },
             "allow_custom": 0,
             "default_value": [
@@ -475,7 +475,7 @@
         },
         {
             "key": "field_589de18fca4e0",
-            "label": "What You Need to Include Intro Text",
+            "label": "Required documents Intro Text",
             "name": "what_you_need_to_include_intro_text",
             "aria-label": "",
             "type": "wysiwyg",
@@ -495,7 +495,7 @@
         },
         {
             "key": "field_58912c1a8a9de",
-            "label": "What You Need To Include",
+            "label": "Required documents",
             "name": "what_you_need_to_include",
             "aria-label": "",
             "type": "repeater",
@@ -579,7 +579,7 @@
         },
         {
             "key": "field_58912c1a8a83e",
-            "label": "How to Apply Summary",
+            "label": "How to apply Summary",
             "name": "how_to_apply_summary",
             "aria-label": "",
             "type": "wysiwyg",
@@ -599,7 +599,7 @@
         },
         {
             "key": "field_58912c1a8a850",
-            "label": "How to Apply or Enroll Online?",
+            "label": "How to apply or Enroll Online?",
             "name": "how_to_apply_or_enroll_online",
             "aria-label": "",
             "type": "wysiwyg",
@@ -656,7 +656,7 @@
         },
         {
             "key": "field_58912c1a8a885",
-            "label": "How to Apply or Enroll by Mail?",
+            "label": "How to apply or Enroll by Mail?",
             "name": "how_to_apply_or_enroll_by_mail",
             "aria-label": "",
             "type": "wysiwyg",
@@ -778,7 +778,7 @@
         },
         {
             "key": "field_58912c1a8a8cb",
-            "label": "How to Apply or Enroll in Person?",
+            "label": "How to apply or Enroll in Person?",
             "name": "how_to_apply_or_enroll_in_person",
             "aria-label": "",
             "type": "wysiwyg",
@@ -835,7 +835,7 @@
         },
         {
             "key": "field_58912c1a8a900",
-            "label": "How to Apply or Enroll by Phone?",
+            "label": "How to apply or Enroll by Phone?",
             "name": "how_to_apply_or_enroll_by_phone",
             "aria-label": "",
             "type": "wysiwyg",
