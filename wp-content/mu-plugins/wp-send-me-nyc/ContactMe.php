@@ -133,6 +133,11 @@ class ContactMe {
    * Submission handler for the Share Form Component.
    */
   public function submission() {
+    // ReCAPTCHA "constants"
+    $RECAPTCHA_URL = 'https://recaptchaenterprise.googleapis.com/v1/projects/access-nyc/assessments?key=' . GOOGLE_RECAPTCHA_PRIVATE_API_KEY;
+    $RECAPTCHA_EXPECTED_ACTION = 'submit';
+    $RECAPTCHA_MIN_SCORE = 0.5;
+
     if (!isset($_POST['url']) || empty($_POST['url'])) {
       $this->failure(400, 'url required');
     }
@@ -160,17 +165,16 @@ class ContactMe {
     // Final validation is with ReCAPTCHA. Do this after the others to limit requests to ReCAPTCHA
     if ($valid) {
       $token = $_POST['g-recaptcha-response'];
-      $url = 'https://recaptchaenterprise.googleapis.com/v1/projects/access-nyc/assessments?key=' . GOOGLE_RECAPTCHA_PRIVATE_API_KEY;
-
+      
       $body = [
         'event' => [
           'token' => $token,
-          'expectedAction' => 'submit',
+          'expectedAction' => $RECAPTCHA_EXPECTED_ACTION,
           'siteKey' => GOOGLE_RECAPTCHA_SITE_KEY,
         ]
       ];
 
-      $response = wp_remote_post($url, [
+      $response = wp_remote_post($RECAPTCHA_URL, [
         'headers' => [
           'Content-Type' => 'application/json',
         ],
@@ -187,7 +191,7 @@ class ContactMe {
         $valid = false;
       } else {
         $data = json_decode(wp_remote_retrieve_body($response));
-        $valid = $data->riskAnalysis->score > 0.5;
+        $valid = $data->riskAnalysis->score > $RECAPTCHA_MIN_SCORE;
       }
     }
 

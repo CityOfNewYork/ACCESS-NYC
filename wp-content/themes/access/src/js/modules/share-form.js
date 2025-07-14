@@ -13,7 +13,16 @@ class ShareFormAccess extends ShareForm {
     super(element);
 
     // Public-facing ReCAPTCHA site key
-    this.siteKey = document.querySelector('meta[name="g_recaptcha_site_key"]').content;
+    const siteKeyTag = document.querySelector('meta[name="g_recaptcha_site_key"]');
+
+    // Fail quietly if site key doesn't exist - form will not send though
+    if (siteKeyTag) {
+      this.siteKey = document.querySelector('meta[name="g_recaptcha_site_key"]').content;
+    }
+    else {
+      this.siteKey = "";
+    }
+    
   }
   
   /**
