@@ -8,8 +8,53 @@ import Disclaimer from 'components/disclaimer/disclaimer';
 // Patterns Framework
 import localize from 'utilities/localize/localize';
 
-// public-facing site key
-const siteKey = '6LcToXYrAAAAAAOw2A3VryPr2nFBnZWig0Pomz8E';
+class ShareFormAccess extends ShareForm {
+  constructor(element) {
+    super(element);
+
+    // Public-facing ReCAPTCHA site key
+    this.siteKey = document.querySelector('meta[name="g_recaptcha_site_key"]').content;
+  }
+  
+  /**
+   * POSTs the serialized form data using the Fetch Method
+   * Overrides ShareForm to add ReCAPTCHA
+   * @return {Promise} Fetch promise
+   */
+  submit() {
+    // To send the data with the application/x-www-form-urlencoded header
+    // we need to use URLSearchParams(); instead of FormData(); which uses
+    // multipart/form-data
+    let formData = new URLSearchParams();
+
+    Object.keys(this._data).map(k => {
+      formData.append(k, this._data[k]);
+    });
+
+    let html = document.querySelector('html');
+
+    if (html.hasAttribute('lang')){
+      formData.append('lang', html.getAttribute('lang'));
+    }
+
+    // Return a promise that resolves only after the token is fetched and added
+    return new Promise((resolve, reject) => {
+      grecaptcha.enterprise.ready(() => {
+        grecaptcha.enterprise.execute(this.siteKey, {action: 'submit'}).then(token => {
+          formData.set("g-recaptcha-response", token);
+
+          fetch(this.form.FORM.getAttribute('action'), {
+            method: this.form.FORM.getAttribute('method'),
+            body: formData
+          })
+          .then(resolve)
+          .catch(reject);
+        }).catch(reject); // catch reCAPTCHA error
+      });
+    });
+  }
+
+}
 
 (() => {
   'use strict';
@@ -19,7 +64,7 @@ const siteKey = '6LcToXYrAAAAAAOw2A3VryPr2nFBnZWig0Pomz8E';
    */
   (elements => {
     elements.forEach(element => {
-      let shareForm = new ShareForm(element);
+      let shareForm = new ShareFormAccess(element);
       let strings = Object.fromEntries([
         'SHARE_FORM_SERVER',
         'SHARE_FORM_SERVER_TEL_INVALID',
@@ -45,40 +90,6 @@ const siteKey = '6LcToXYrAAAAAAOw2A3VryPr2nFBnZWig0Pomz8E';
     });
 
     new Disclaimer();
-  })(document.querySelectorAll(ShareForm.selector));
-
-  /** 
-   * Add ReCAPTCHA to Share Form
-   */
-  (elements => {
-    elements.forEach(element => {
-      const elementForm = element.querySelector('form');
-
-      elementForm.addEventListener('submit', function (e) {
-        e.preventDefault(); // Prevent immediate form submission
-        
-        grecaptcha.ready(function () {
-          grecaptcha.execute(siteKey, {action: 'submit'}).then(function (token) {
-            // Inject the token into the hidden field
-            const tokenField = elementForm.querySelector('input[name="g-recaptcha-response"]');
-            if (tokenField) {
-              tokenField.value = token;
-            } else {
-              // Defensive fallback
-              const hidden = document.createElement('input');
-              hidden.type = 'hidden';
-              hidden.name = 'g-recaptcha-response';
-              hidden.value = token;
-              elementForm.appendChild(hidden);
-            }
-  
-            // Finally submit the form
-            elementForm.submit();
-          });
-        });
-      });
-    });
-  })(document.querySelectorAll(ShareForm.selector));
+  })(document.querySelectorAll(ShareFormAccess.selector));
     
 })();
-

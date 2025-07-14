@@ -132,6 +132,11 @@ class Site extends TimberSite {
     }
 
     /**
+     * Set up Google ReCAPTCHA site key (public key)
+     */
+    $context['g_recaptcha_site_key'] = GOOGLE_RECAPTCHA_SITE_KEY;
+
+    /**
      * Get the default page meta description for the page
      */
 
