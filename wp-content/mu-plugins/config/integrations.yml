@@ -69,6 +69,9 @@
 
 - handle: google-recaptcha
   path: https://www.google.com/recaptcha/enterprise.js?render={{ GOOGLE_RECAPTCHA_SITE_KEY }}
+  dep: GOOGLE_RECAPTCHA_SITE_KEY
+  localize:
+    - GOOGLE_RECAPTCHA_SITE_KEY
   in_footer: false
   attrs:
     async: true
