@@ -86,18 +86,8 @@
       {% endfor %}
       
       {% if more_information_section %}
-      <a id="top-nav-link-more-information" class="top-nav-link" data-step-go-to="more-information" href="#more-information">
-        {% if variant is not null and variant is not empty %}
-          {% if variant == 'a' %}
-              {{ __('More information', 'accessnyc-program-detail') }}
-          {% elseif variant == 'b' %}
-              {{ __('Need help?', 'accessnyc-program-detail') }}
-          {% else %}
-              {{ __('Get help', 'accessnyc-program-detail') }}
-          {% endif %}
-      {% else %}
-          {{ __('More information', 'accessnyc-program-detail') }}
-      {% endif %}
+      <a id="top-nav-link-get-help" class="top-nav-link" data-step-go-to="get-help" href="#get-help">
+        {{ __('Get help', 'accessnyc-program-detail') }}
       </a>
       {% endif %}
     </nav>
@@ -123,34 +113,14 @@
 
             {% if more_information_section %}
               <li class="pl-0">
-                <a id="side-nav-link-more-information" class="side-nav-link" data-step-go-to="more-information" href="#more-information">
-                  {% if variant is not null and variant is not empty %}
-                    {% if variant == 'a' %}
-                        {{ __('More information', 'accessnyc-program-detail') }}
-                    {% elseif variant == 'b' %}
-                        {{ __('Need help?', 'accessnyc-program-detail') }}
-                    {% else %}
-                        {{ __('Get help', 'accessnyc-program-detail') }}
-                    {% endif %}
-                {% else %}
-                    {{ __('More information', 'accessnyc-program-detail') }}
-                {% endif %}
+                <a id="side-nav-link-get-help" class="side-nav-link" data-step-go-to="get-help" href="#get-help">
+                  {{ __('Get help', 'accessnyc-program-detail') }}
                 </a>
               </li>
 
               {# This exists only to make the sidebar size consistent regardless of which element is active #}
               <div aria-hidden="true" class="side-nav-link invisible font-bold pr-2" style="height: 0px">
-                {% if variant is not null and variant is not empty %}
-                  {% if variant == 'a' %}
-                      {{ __('More information', 'accessnyc-program-detail') }}
-                  {% elseif variant == 'b' %}
-                      {{ __('Need help?', 'accessnyc-program-detail') }}
-                  {% else %}
-                      {{ __('Get help', 'accessnyc-program-detail') }}
-                  {% endif %}
-              {% else %}
-                  {{ __('More information', 'accessnyc-program-detail') }}
-              {% endif %}
+                {{ __('Get help', 'accessnyc-program-detail') }}
               </div>
             {% endif %}
           </ul>
@@ -174,7 +144,7 @@
         {% endfor %}
 
         {% if more_information_section %}
-          {% include 'programs/more-information.twig' with { 'post': post } %}
+          {% include 'programs/get-help.twig' with { 'post': post } %}
           <br>
         {% endif %}
 
