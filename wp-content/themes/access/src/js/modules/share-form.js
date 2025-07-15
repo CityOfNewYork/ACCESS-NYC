@@ -8,6 +8,63 @@ import Disclaimer from 'components/disclaimer/disclaimer';
 // Patterns Framework
 import localize from 'utilities/localize/localize';
 
+class ShareFormAccess extends ShareForm {
+  constructor(element) {
+    super(element);
+
+    // Public-facing ReCAPTCHA site key
+    const siteKeyTag = document.querySelector('meta[name="g_recaptcha_site_key"]');
+
+    // Fail quietly if site key doesn't exist - form will not send though
+    if (siteKeyTag) {
+      this.siteKey = document.querySelector('meta[name="g_recaptcha_site_key"]').content;
+    }
+    else {
+      this.siteKey = "";
+    }
+    
+  }
+  
+  /**
+   * POSTs the serialized form data using the Fetch Method
+   * Overrides ShareForm to add ReCAPTCHA
+   * @return {Promise} Fetch promise
+   */
+  submit() {
+    // To send the data with the application/x-www-form-urlencoded header
+    // we need to use URLSearchParams(); instead of FormData(); which uses
+    // multipart/form-data
+    let formData = new URLSearchParams();
+
+    Object.keys(this._data).map(k => {
+      formData.append(k, this._data[k]);
+    });
+
+    let html = document.querySelector('html');
+
+    if (html.hasAttribute('lang')){
+      formData.append('lang', html.getAttribute('lang'));
+    }
+
+    // Return a promise that resolves only after the token is fetched and added
+    return new Promise((resolve, reject) => {
+      grecaptcha.enterprise.ready(() => {
+        grecaptcha.enterprise.execute(this.siteKey, {action: 'submit'}).then(token => {
+          formData.set("g-recaptcha-response", token);
+
+          fetch(this.form.FORM.getAttribute('action'), {
+            method: this.form.FORM.getAttribute('method'),
+            body: formData
+          })
+          .then(resolve)
+          .catch(reject);
+        }).catch(reject); // catch reCAPTCHA error
+      });
+    });
+  }
+
+}
+
 (() => {
   'use strict';
 
@@ -16,7 +73,7 @@ import localize from 'utilities/localize/localize';
    */
   (elements => {
     elements.forEach(element => {
-      let shareForm = new ShareForm(element);
+      let shareForm = new ShareFormAccess(element);
       let strings = Object.fromEntries([
         'SHARE_FORM_SERVER',
         'SHARE_FORM_SERVER_TEL_INVALID',
@@ -42,6 +99,6 @@ import localize from 'utilities/localize/localize';
     });
 
     new Disclaimer();
-  })(document.querySelectorAll(ShareForm.selector));
+  })(document.querySelectorAll(ShareFormAccess.selector));
+    
 })();
-

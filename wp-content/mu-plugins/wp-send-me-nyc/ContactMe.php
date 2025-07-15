@@ -133,6 +133,11 @@ class ContactMe {
    * Submission handler for the Share Form Component.
    */
   public function submission() {
+    // ReCAPTCHA "constants"
+    $RECAPTCHA_URL = 'https://recaptchaenterprise.googleapis.com/v1/projects/access-nyc/assessments?key=' . GOOGLE_RECAPTCHA_PRIVATE_API_KEY;
+    $RECAPTCHA_EXPECTED_ACTION = 'submit';
+    $RECAPTCHA_MIN_SCORE = 0.5;
+
     if (!isset($_POST['url']) || empty($_POST['url'])) {
       $this->failure(400, 'url required');
     }
@@ -156,6 +161,39 @@ class ContactMe {
 
     // You can only email a specific program guide to a specific email address 3 times in a day
     $valid = $valid && !$this->is_rate_limited($_POST['to'] . $_POST['url'], 'to_address_url_day', 3, DAY_IN_SECONDS);
+
+    // Final validation is with ReCAPTCHA. Do this after the others to limit requests to ReCAPTCHA
+    if ($valid) {
+      $token = $_POST['g-recaptcha-response'];
+      
+      $body = [
+        'event' => [
+          'token' => $token,
+          'expectedAction' => $RECAPTCHA_EXPECTED_ACTION,
+          'siteKey' => GOOGLE_RECAPTCHA_SITE_KEY,
+        ]
+      ];
+
+      $response = wp_remote_post($RECAPTCHA_URL, [
+        'headers' => [
+          'Content-Type' => 'application/json',
+        ],
+        'body' => wp_json_encode($body),
+        'method' => 'POST',
+        'data_format' => 'body',
+      ]);
+
+      if (is_wp_error($response)) {
+        error_log('WP error when evaluating ReCAPTCHA: ' . $response->get_error_message());
+        $valid = false;
+      } elseif (wp_remote_retrieve_response_code($response) !== 200) {
+        error_log('Bad response when evaluating ReCAPTCHA: ' . wp_remote_retrieve_body($response));
+        $valid = false;
+      } else {
+        $data = json_decode(wp_remote_retrieve_body($response));
+        $valid = $data->riskAnalysis->score > $RECAPTCHA_MIN_SCORE;
+      }
+    }
 
     if ($valid) {
       $to = $this->sanitizeRecipient($_POST['to']);

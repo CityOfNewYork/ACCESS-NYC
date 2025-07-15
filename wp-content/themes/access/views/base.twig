@@ -11,6 +11,10 @@
     {% if variant is not null and variant is not empty %}
     <meta name="a-b-variant" content="{{ variant }}">
     {% endif %}
+
+    {% if g_recaptcha_site_key %}
+    <meta name="g_recaptcha_site_key" content="{{ g_recaptcha_site_key }}">
+    {% endif %}
     
     {% endblock %}
 
