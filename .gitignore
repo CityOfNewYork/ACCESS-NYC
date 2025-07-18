@@ -46,6 +46,10 @@
 /wp-content/cache/supercache/*
 /wp-content/wpallimport/*
 
+# Translations
+###########
+/wp-content/languages/wpml/*
+
 # Plugins #
 ###########
 /wp-content/plugins/akismet/
