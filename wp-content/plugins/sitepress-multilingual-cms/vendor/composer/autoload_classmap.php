@@ -1935,7 +1935,6 @@ return array(
     'WPML_WP_Taxonomy_Query' => $baseDir . '/classes/utilities/class-wpml-wp-taxonomy-query.php',
     'WPML_WP_User_Factory' => $baseDir . '/classes/utilities/user/class-wpml-wp-user-factory.php',
     'WPML_WP_User_Query_Factory' => $baseDir . '/classes/utilities/user/class-wpml-wp-user-query-factory.php',
-    'WPML_Whip_Requirements' => $baseDir . '/classes/requirements/class-wpml-whip-requirements.php',
     'WPML_Widgets_Support_Backend' => $baseDir . '/classes/widgets/class-wpml-widgets-support-backend.php',
     'WPML_Widgets_Support_Factory' => $baseDir . '/classes/widgets/class-wpml-widgets-support-factory.php',
     'WPML_Widgets_Support_Frontend' => $baseDir . '/classes/widgets/class-wpml-widgets-support-frontend.php',

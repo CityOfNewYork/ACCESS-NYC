@@ -15,6 +15,7 @@ use WPML\API\PostTypes;
 use WPML\TM\API\Jobs;
 use function WPML\FP\partial;
 use WPML\LIB\WP\User;
+use WPML\UIPage;
 use WPML\FP\Relation;
 use function WPML\FP\pipe;
 
@@ -432,26 +433,52 @@ class WPML_TM_Translation_Status_Display {
 	}
 
 	private static function get_return_url() {
-		$args = [ 'wpml_tm_saved', 'wpml_tm_cancel' ];
+		$getBaseUrl = function (): string {
+			$removeUnwantedArgs = function ( $url = false ) {
+				$args = [ 'wpml_tm_saved', 'wpml_tm_cancel' ];
 
-		if ( wpml_is_ajax() || ! is_admin() ) {
-			if ( ! isset( $_SERVER['HTTP_REFERER'] ) ) {
-				return null;
-			}
+				return remove_query_arg( $args, $url );
+			};
 
-			$url = remove_query_arg( $args, $_SERVER['HTTP_REFERER'] );
-		} else {
-			$url = remove_query_arg( $args );
-		}
+			$returnToTMDashboard = function () use ( $removeUnwantedArgs ) {
+				return $removeUnwantedArgs( admin_url( UIPage::getTMDashboard() ) );
+			};
+
+			$returnToThePageWhichTriggeredAjaxIfThatPageCanBeDetermined = function () use ( $removeUnwantedArgs ) {
+				if ( wpml_is_ajax() && isset( $_SERVER['HTTP_REFERER'] ) ) {
+					return $removeUnwantedArgs( $_SERVER['HTTP_REFERER'] );
+				}
+			};
+
+			$returnToTMDashboardIfItIsAjaxAndTriggeringPageCannotBeDetermined = function () use ( $returnToTMDashboard ) {
+				if ( wpml_is_ajax() && ! isset( $_SERVER['HTTP_REFERER'] ) ) {
+					return $returnToTMDashboard();
+				}
+			};
+
+			$otherwiseReturnToCurrentPage = function () use ( $removeUnwantedArgs ) {
+				$currentUrl = \WPML\TM\API\Jobs::getCurrentUrl();
+
+				return $removeUnwantedArgs( $currentUrl );
+			};
+
+			$strategies = [
+				$returnToThePageWhichTriggeredAjaxIfThatPageCanBeDetermined,
+				$returnToTMDashboardIfItIsAjaxAndTriggeringPageCannotBeDetermined,
+				$otherwiseReturnToCurrentPage,
+			];
+
+			return Logic::firstSatisfying( Logic::isTruthy(), $strategies, null );
+		};
 
 		// We add the lang parameter to the return url to return from CTE to the post list in the same language.
 		return add_query_arg(
-            [
+			[
 				'lang'    => Languages::getCurrentCode(),
 				'referer' => 'ate',
 			],
-            $url
-        );
+			$getBaseUrl()
+		);
 	}
 
 	/**

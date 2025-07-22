@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitcae5c4903bcc218a3f2d9bdcbd83a504
+class ComposerStaticInit8d01fd42a23d19e0bb886b3d056496ae
 {
     public static $files = array (
         'b45b351e6b6f7487d819961fef2fda77' => __DIR__ . '/..' . '/jakeasmith/http_build_url/src/http_build_url.php',
@@ -17,14 +17,9 @@ class ComposerStaticInitcae5c4903bcc218a3f2d9bdcbd83a504
         '766b758ee51e52c53cf3312a1dba9e34' => __DIR__ . '/..' . '/wpml/fp/core/system.php',
         'eb448fa46cda5b84481dffc8382d9ef6' => __DIR__ . '/..' . '/wpml/wpml/lib/Php/Array.php',
         '28e2be02acfad2db17864492ad19bd2f' => __DIR__ . '/..' . '/wpml/wpml/lib/Php/Logger/logger.php',
-        '81db02b30f563b92907e271b66bd7559' => __DIR__ . '/..' . '/yoast/whip/src/Facades/wordpress.php',
     );
 
     public static $prefixLengthsPsr4 = array (
-        'Y' => 
-        array (
-            'Yoast\\WHIPv2\\' => 13,
-        ),
         'W' => 
         array (
             'WPML\\WordPress\\' => 15,
@@ -54,10 +49,6 @@ class ComposerStaticInitcae5c4903bcc218a3f2d9bdcbd83a504
     );
 
     public static $prefixDirsPsr4 = array (
-        'Yoast\\WHIPv2\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/yoast/whip/src',
-        ),
         'WPML\\WordPress\\' => 
         array (
             0 => __DIR__ . '/..' . '/wpml/wpml/lib/WordPress',
@@ -2034,7 +2025,6 @@ class ComposerStaticInitcae5c4903bcc218a3f2d9bdcbd83a504
         'WPML_WP_Taxonomy_Query' => __DIR__ . '/../..' . '/classes/utilities/class-wpml-wp-taxonomy-query.php',
         'WPML_WP_User_Factory' => __DIR__ . '/../..' . '/classes/utilities/user/class-wpml-wp-user-factory.php',
         'WPML_WP_User_Query_Factory' => __DIR__ . '/../..' . '/classes/utilities/user/class-wpml-wp-user-query-factory.php',
-        'WPML_Whip_Requirements' => __DIR__ . '/../..' . '/classes/requirements/class-wpml-whip-requirements.php',
         'WPML_Widgets_Support_Backend' => __DIR__ . '/../..' . '/classes/widgets/class-wpml-widgets-support-backend.php',
         'WPML_Widgets_Support_Factory' => __DIR__ . '/../..' . '/classes/widgets/class-wpml-widgets-support-factory.php',
         'WPML_Widgets_Support_Frontend' => __DIR__ . '/../..' . '/classes/widgets/class-wpml-widgets-support-frontend.php',
@@ -2059,9 +2049,9 @@ class ComposerStaticInitcae5c4903bcc218a3f2d9bdcbd83a504
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitcae5c4903bcc218a3f2d9bdcbd83a504::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitcae5c4903bcc218a3f2d9bdcbd83a504::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitcae5c4903bcc218a3f2d9bdcbd83a504::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit8d01fd42a23d19e0bb886b3d056496ae::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit8d01fd42a23d19e0bb886b3d056496ae::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit8d01fd42a23d19e0bb886b3d056496ae::$classMap;
 
         }, null, ClassLoader::class);
     }

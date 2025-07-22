@@ -132,7 +132,9 @@ class DisplayConditions implements \IWPML_Frontend_Action {
 	 * @return array
 	 */
 	private function convertConditionIds( $conditionGroups ) {
-		$result = $conditionGroups;
+		$isSingleLegacyCondition = $conditionGroups && array_keys( $conditionGroups )[0] !== 0;
+
+		$result = $isSingleLegacyCondition ? [ $conditionGroups ] : $conditionGroups;
 
 		foreach ( $result as $key => $conditionGroup ) {
 			$configForCondition = $this->getConfigForCondition( $conditionGroup['condition'] );
@@ -142,7 +144,7 @@ class DisplayConditions implements \IWPML_Frontend_Action {
 			}
 		}
 
-		return $result;
+		return $isSingleLegacyCondition ? $result[0] : $result;
 	}
 
 	/**

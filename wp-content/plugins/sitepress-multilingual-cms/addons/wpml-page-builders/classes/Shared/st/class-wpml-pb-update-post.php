@@ -55,6 +55,10 @@ class WPML_PB_Update_Post {
 	}
 
 	private function update_post( $translated_post_id, $original_post, $string_translations, $lang ) {
+		if ( WPML_PB_Last_Translation_Edit_Mode::is_native_editor( $translated_post_id) ) {
+			return;
+		}
+
 		$content_updater = $this->strategy->get_content_updater();
 		$content_updater->update( $translated_post_id, $original_post, $string_translations, $lang );
 	}

@@ -348,7 +348,20 @@ $resource( [
 										?>
 											 >
 
-											<p><?php esc_html_e( 'What to show for the root url:', 'sitepress' ); ?></p>
+											<p><?php esc_html_e( 'What to show for the root url:', 'sitepress' ); ?>
+												<a href="#" class="js-wpml-root-url-tooltip-open wpml-ls-tooltip-open otgs-ico-help" data-content="
+													<?php
+														echo esc_attr(
+															wp_kses(
+																__( 'Enable the <strong>Use directory for default language</strong> option to show the same starting page to all visitors, regardless of language. This requires you to set up a root page.', 'sitepress' ),
+																[
+																	'strong' => [],
+																]
+															)
+														)
+													?>
+												"></a>
+											</p>
 
 											<ul>
 												<li>
@@ -362,7 +375,14 @@ $resource( [
 															   value="html_file" <?php checked( 'html_file' === $setting_urls['show_on_root'] ); ?> />
 														<?php esc_html_e( 'HTML file', 'sitepress' ); ?> &ndash;
 														<span class="explanation-text">
-															<?php esc_html_e( 'please enter path: absolute or relative to the WordPress installation folder', 'sitepress' ); ?>
+															<?php
+																echo wp_kses(
+																	__( 'Please enter a path – <strong>absolute</strong> or <strong>relative</strong> – to the WordPress installation folder', 'sitepress' ),
+																	[
+																		'strong' => [],
+																	]
+																)
+															?>
 														</span>
 													</label>
 													<p>
@@ -556,7 +576,22 @@ $resource( [
 							<div class="wpml-form-errors icl_form_errors" style="display: none;"></div>
 							<p class="buttons-wrap">
 								<span class="icl_ajx_response" id="icl_ajx_response2"></span>
-								<input class="button-primary wpml-button base-btn" name="save" value="<?php esc_html_e( 'Save', 'sitepress' ); ?>" type="submit" />
+								<input class="button-primary wpml-button base-btn" name="save" value="<?php esc_html_e( 'Save', 'sitepress' ); ?>" type="submit" data-type="submit-btn" data-content="
+									<?php
+										echo esc_attr(
+											wp_kses(
+												__( "To enable the <strong>Use directory for default language</strong> option, you need to <a href='https://wpml.org/documentation/getting-started-guide/language-setup/directory-default-language/?utm_source=plugin&utm_medium=gui&utm_campaign=core&utm_term=root-page-dialog' target='_blank'>specify what to show for your site's root URL</a>.", 'sitepress' ),
+												[
+													'a' => [
+														'href'   => true,
+														'target' => true,
+													],
+													'strong' => [],
+												]
+											)
+										)
+									?>
+								"/>
 							</p>
 						</form>
 					</div>

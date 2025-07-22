@@ -1,6 +1,6 @@
 <?php
 
-class WPML_Elementor_Adjust_Global_Widget_ID {
+class WPML_Elementor_Adjust_Global_Widget_ID implements IWPML_Action {
 
 	/** @var IWPML_Page_Builders_Data_Settings */
 	private $elementor_settings;

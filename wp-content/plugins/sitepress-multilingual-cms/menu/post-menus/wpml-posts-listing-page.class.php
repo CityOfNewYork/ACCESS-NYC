@@ -23,7 +23,7 @@ class WPML_Posts_Listing_Page {
 	public function pre_populate_caches() {
 		global $wp_query, $wpml_post_translations;
 
-		if ( count( $wp_query->posts ) === 0 ) {
+		if ( ! $wp_query->posts ) {
 			return;
 		}
 
