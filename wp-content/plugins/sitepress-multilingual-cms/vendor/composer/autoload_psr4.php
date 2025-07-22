@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Yoast\\WHIPv2\\' => array($vendorDir . '/yoast/whip/src'),
     'WPML\\WordPress\\' => array($vendorDir . '/wpml/wpml/lib/WordPress'),
     'WPML\\PHP\\' => array($vendorDir . '/wpml/wpml/lib/Php'),
     'WPML\\Collect\\' => array($vendorDir . '/wpml/collect/src/Illuminate'),

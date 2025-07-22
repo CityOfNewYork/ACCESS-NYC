@@ -684,15 +684,19 @@ class WPML_Media_Attachments_Duplication {
 
 		if ( $source_lang == null || $source_lang == '' ) {
 			// This is the original see if we should copy to translations
-
 			if ( Option::shouldDuplicateMedia( $pidd ) || Option::shouldDuplicateFeatured( $pidd ) ) {
-				$translations       = $wpdb->get_col(
+				$active_language_codes  = array_keys( $this->sitepress->get_active_languages() );
+				$lang_codes_placeholder = implode( ',', array_fill( 0, count( $active_language_codes ), '%s' ) );
+
+				$translations = $wpdb->get_col(
 					$wpdb->prepare(
-						'SELECT element_id FROM ' . $wpdb->prefix . 'icl_translations WHERE trid = %d',
-						array( $icl_trid )
+						// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+						"SELECT element_id FROM {$wpdb->prefix}icl_translations WHERE trid = %d AND language_code IN ( $lang_codes_placeholder )",
+						array_merge( [ $icl_trid ], $active_language_codes )
 					)
 				);
-				$translations       = array_map( 'intval', $translations );
+				$translations = array_map( 'intval', $translations );
+
 				$source_attachments = $wpdb->get_col(
 					$wpdb->prepare(
 						'SELECT ID FROM ' . $wpdb->posts . ' WHERE post_parent = %d AND post_type = %s',

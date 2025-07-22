@@ -1,6 +1,6 @@
 <?php
 
-class WPML_Elementor_WooCommerce_Hooks {
+class WPML_Elementor_WooCommerce_Hooks implements IWPML_Action {
 
 	public function add_hooks() {
 		add_filter( 'pre_get_posts', [ $this, 'do_not_suppress_filters_on_product_widget' ] );

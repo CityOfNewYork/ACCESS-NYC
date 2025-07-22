@@ -1,6 +1,6 @@
 <?php
 
-class WPML_PB_Handle_Custom_Fields {
+class WPML_PB_Handle_Custom_Fields implements IWPML_Action {
 
 	protected $data_settings;
 

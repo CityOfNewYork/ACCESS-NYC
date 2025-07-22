@@ -25,7 +25,13 @@ class WPML_Model_Attachments {
 	 * @param int $duplicated_attachment_id
 	 */
 	public function duplicate_post_meta_data( $attachment_id, $duplicated_attachment_id ) {
-		foreach ( array( '_wp_attachment_metadata', '_wp_attached_file' ) as $meta_key ) {
+		$media_meta_data_duplicate = apply_filters( 'wpml_media_meta_data_duplicate', [
+			'_wp_attachment_metadata',
+			'_wp_attached_file',
+			'_wp_attachment_image_alt',
+		] );
+
+		foreach ( $media_meta_data_duplicate as $meta_key ) {
 			$duplicated_meta_value = get_post_meta( $duplicated_attachment_id, $meta_key, true );
 
 			if ( ! $duplicated_meta_value ) {

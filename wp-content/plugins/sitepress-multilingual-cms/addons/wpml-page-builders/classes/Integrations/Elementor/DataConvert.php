@@ -5,12 +5,12 @@ namespace WPML\PB\Elementor;
 class DataConvert {
 
 	/**
-	 * @param array $data
-	 * @param bool  $escape
+	 * @param array|object $data
+	 * @param bool         $escape
 	 *
 	 * @return string
 	 */
-	public static function serialize( array $data, $escape = true ) {
+	public static function serialize( $data, $escape = true ) {
 		$data = wp_json_encode( $data );
 		if ( $escape ) {
 			$data = wp_slash( $data );
@@ -23,7 +23,7 @@ class DataConvert {
 	 * @param array|string $data
 	 * @param bool         $associative
 	 *
-	 * @return array
+	 * @return array|object|mixed
 	 */
 	public static function unserialize( $data, $associative = true ) {
 		if ( self::isElementorArray( $data ) ) {
@@ -43,7 +43,7 @@ class DataConvert {
 	 * @param string $string
 	 * @param bool   $associative
 	 *
-	 * @return array
+	 * @return array|object|mixed
 	 */
 	private static function unserializeString( $string, $associative ) {
 		// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize
