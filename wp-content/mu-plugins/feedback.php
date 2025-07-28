@@ -40,8 +40,7 @@ function feedbackHandler() {
         } elseif (wp_remote_retrieve_response_code($response) !== 200) {
           error_log('Bad response submitting feedback to Airtable: ' . wp_remote_retrieve_body($response));
           failure(400, 'Error when submitting feedback');
-        }
-        else {
+        } else {
           wp_send_json([
             'success' => true,
             'error' => 200,
@@ -50,7 +49,6 @@ function feedbackHandler() {
           ]);
         }
       }
-      
     } catch (Exception $e) {
       $message = $e->getMessage();
 
