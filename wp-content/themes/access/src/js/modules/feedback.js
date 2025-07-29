@@ -20,7 +20,79 @@ import Spinner from '@nycopportunity/pttrn-scripts/src/spinner/spinner';
 
   Form.watch(); // Automatically watch for input errors on blur
 
-  window.reCaptchaCallback = () => { };
+  /** ---------------------------------------------------------------------------- */
+  // Dynamically render input fields and submit based on radio button
+  const radios = Form.FORM.querySelectorAll('input[name="helpful"]');
+  const detailsFieldset = document.getElementById('feedback-details');
+  const labelYes = document.getElementById('feedback-input-text-yes');
+  const labelNo = document.getElementById('feedback-input-text-no');
+  const submitButton = document.getElementById('feedback-submit-button');
+
+  // Initially hide details and labels
+  function hideAllFollowUps() {
+    detailsFieldset.classList.add('hidden');
+    detailsFieldset.setAttribute('aria-hidden', 'true');
+
+    labelYes.classList.add('hidden');
+    labelYes.setAttribute('aria-hidden', 'true');
+
+    labelNo.classList.add('hidden');
+    labelNo.setAttribute('aria-hidden', 'true');
+
+    submitButton.classList.add('hidden');
+    submitButton.setAttribute('aria-hidden', 'true');
+  }
+
+  // Setup default state
+  hideAllFollowUps();
+
+  radios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      if (radio.checked) {
+        // Always show details fieldset and submit button
+        detailsFieldset.classList.remove('hidden');
+        detailsFieldset.setAttribute('aria-hidden', 'false');
+
+        submitButton.classList.remove('hidden');
+        submitButton.setAttribute('aria-hidden', 'false');
+
+        // Show only one label based on value
+        if (radio.value === 'Yes') {
+          labelYes.classList.remove('hidden');
+          labelYes.setAttribute('aria-hidden', 'false');
+
+          labelNo.classList.add('hidden');
+          labelNo.setAttribute('aria-hidden', 'true');
+        } else if (radio.value === 'No') {
+          labelNo.classList.remove('hidden');
+          labelNo.setAttribute('aria-hidden', 'false');
+
+          labelYes.classList.add('hidden');
+          labelYes.setAttribute('aria-hidden', 'true');
+        }
+      }
+    });
+  });
+
+  const cancelBtn = Form.FORM.querySelector('button[type="reset"]');
+  cancelBtn.addEventListener('click', () => {
+    // Clear selected radio buttons
+    const radios = Form.FORM.querySelectorAll('input[name="helpful"]');
+    radios.forEach(radio => {
+      radio.checked = false;
+    });
+
+    // Hide follow-up fields and labels
+    hideAllFollowUps();
+
+    // Clear the input field
+    const description = Form.FORM.querySelector('input[name="description"]');
+    if (description) {
+      description.value = '';
+    }
+  });
+
+  /** ---------------------------------------------------------------------------- */
 
   /**
    * The form submission handler

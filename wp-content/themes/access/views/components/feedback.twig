@@ -48,15 +48,16 @@
                     </label>
 
                     <label class="toggle" tabindex="-1">
-                      <input checked="true" data-type="boolean" name="helpful" type="radio" value="No" tabindex="-1" />
+                      <input data-type="boolean" name="helpful" type="radio" value="No" tabindex="-1" />
                       <span class="toggle__label">{{ __('No', 'accessnyctheme') }}</span>
                     </label>
                   </div>
                 </div>
               </fieldset>
 
-              <fieldset class="c-question" tabindex="-1">
-                <label class="c-question__label" for="description" tabindex="-1">{{ __('Why or why not?', 'accessnyctheme') }}</label>
+              <fieldset class="c-question" id="feedback-details" class="hidden" aria-hidden="true" tabindex="-1">
+                <label class="c-question__label" id="feedback-input-text-yes" for="description" class="hidden" aria-hidden="true" tabindex="-1">{{ __('What information was helpful?', 'accessnyctheme') }}</label>
+                <label class="c-question__label" id="feedback-input-text-no" for="description" class="hidden" aria-hidden="true" tabindex="-1">{{ __('What information do you need?', 'accessnyctheme') }}</label>
 
                 <div class="c-question__container">
                   <div>
@@ -68,7 +69,7 @@
               <div class="flex justify-between">
                 <button class="btn-small screen-tablet:btn" type="reset" aria-controls="aria-c-modal" aria-expanded="false" data-js="dialog" tabindex="-1">{{ __('Cancel', 'accessnyctheme') }}</button>
 
-                <button class="btn-small screen-tablet:btn btn-primary" type="submit" value="Submit" tabindex="-1">{{ __('Submit', 'accessnyctheme') }}</button>
+                <button class="btn-small screen-tablet:btn btn-primary" id="feedback-submit-button" class="hidden" aria-hidden="true" type="submit" value="Submit" tabindex="-1">{{ __('Submit', 'accessnyctheme') }}</button>
               </div>
             </div>
           </form>
