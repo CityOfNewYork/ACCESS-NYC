@@ -55,25 +55,27 @@ import Spinner from '@nycopportunity/pttrn-scripts/src/spinner/spinner';
    * Add reCaptcha
    */
   const recaptcha = () => {
-    let questions = Form.FORM.querySelector('[data-js*="questions"]');
-    let questionRecaptcha = Form.FORM.querySelector('[data-js*="question-recaptcha"]');
+    loading();
+    submit();
+    // let questions = Form.FORM.querySelector('[data-js*="questions"]');
+    // let questionRecaptcha = Form.FORM.querySelector('[data-js*="question-recaptcha"]');
 
-    questions.classList.add('hidden');
-    questions.setAttribute('aria-hidden', 'true');
+    // questions.classList.add('hidden');
+    // questions.setAttribute('aria-hidden', 'true');
 
-    questionRecaptcha.classList.remove('hidden');
-    questionRecaptcha.setAttribute('aria-hidden', 'false');
+    // questionRecaptcha.classList.remove('hidden');
+    // questionRecaptcha.setAttribute('aria-hidden', 'false');
 
-    window.grecaptcha.render(Form.FORM.querySelector('[data-js="recaptcha"]'), {
-      'sitekey': '6Lf0tTgUAAAAACnS4fRKqbLll_oFxFzeaVfbQxyX',
-      'callback': () => {
-        loading();
-        submit();
-      },
-      'error-callback': () => {
-        failure();
-      }
-    });
+    // window.grecaptcha.render(Form.FORM.querySelector('[data-js="recaptcha"]'), {
+    //   'sitekey': '6Lf0tTgUAAAAACnS4fRKqbLll_oFxFzeaVfbQxyX',
+    //   'callback': () => {
+    //     loading();
+    //     submit();
+    //   },
+    //   'error-callback': () => {
+    //     failure();
+    //   }
+    // });
   };
 
   /**

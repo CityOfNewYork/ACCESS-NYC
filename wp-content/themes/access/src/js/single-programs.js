@@ -1,6 +1,6 @@
 /* eslint-env browser */
 
-// import 'modules/feedback';
+import 'modules/feedback';
 import 'modules/share-form';
 
 (() => {
