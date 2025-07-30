@@ -149,7 +149,7 @@ import Spinner from '@nycopportunity/pttrn-scripts/src/spinner/spinner';
     }
   
     grecaptcha.enterprise.ready(() => {
-      grecaptcha.enterprise.execute(siteKey, { action: 'submit' }).then(token => {
+      grecaptcha.enterprise.execute(siteKey, { action: 'feedback_submit' }).then(token => {
         submit(token);
       }).catch(err => {
         if (process.env.NODE_ENV === 'development'){

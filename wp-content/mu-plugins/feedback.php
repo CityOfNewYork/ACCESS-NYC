@@ -11,18 +11,54 @@ add_action('wp_ajax_nopriv_feedback', 'FeedbackNYC\feedbackHandler');
  * @return Array - If successful, returns a response from Airtable client.
  */
 function feedbackHandler() {
+  // "constants"
   $AIRTABLE_API_URL = 'https://api.airtable.com/v0';
+  $RECAPTCHA_URL = 'https://recaptchaenterprise.googleapis.com/v1/projects/access-nyc/assessments?key=' . GOOGLE_RECAPTCHA_PRIVATE_API_KEY;
+  $RECAPTCHA_EXPECTED_ACTION = 'feedback_submit';
+  $RECAPTCHA_MIN_SCORE = 0.5;
 
   $nonce = $_POST['feedback-nonce'];
+  $nonce_valid = wp_verify_nonce($nonce, 'feedback');
+  $recaptcha_valid = false;
 
-  if (wp_verify_nonce($nonce, 'feedback')) {
+  if ($nonce_valid) {
+    // validate ReCAPTCHA
+    $token = $_POST['g-recaptcha-response'];
+      
+    $body = [
+      'event' => [
+        'token' => $token,
+        'expectedAction' => $RECAPTCHA_EXPECTED_ACTION,
+        'siteKey' => GOOGLE_RECAPTCHA_SITE_KEY,
+      ]
+    ];
+
+    $response = wp_remote_post($RECAPTCHA_URL, [
+      'headers' => [
+        'Content-Type' => 'application/json',
+      ],
+      'body' => wp_json_encode($body),
+      'method' => 'POST',
+      'data_format' => 'body',
+    ]);
+
+    if (is_wp_error($response)) {
+      error_log('WP error when evaluating ReCAPTCHA: ' . $response->get_error_message());
+      $recaptcha_valid = false;
+    } elseif (wp_remote_retrieve_response_code($response) !== 200) {
+      error_log('Bad response when evaluating ReCAPTCHA: ' . wp_remote_retrieve_body($response));
+      $recaptcha_valid = false;
+    } else {
+      $data = json_decode(wp_remote_retrieve_body($response));
+      $recaptcha_valid = $data->riskAnalysis->score > $RECAPTCHA_MIN_SCORE;
+    }
+  }
+
+  if ($recaptcha_valid) {
     try {
       if (defined('AIRTABLE_FEEDBACK_API_TOKEN') && defined('AIRTABLE_FEEDBACK_BASE_KEY') && defined('AIRTABLE_FEEDBACK_TABLE_KEY')) {
         $feedback_fields = get_values_from_submission($_POST);
         $api_request_url = $AIRTABLE_API_URL . '/' . AIRTABLE_FEEDBACK_BASE_KEY . '/' . AIRTABLE_FEEDBACK_TABLE_KEY;
-
-        error_log($api_request_url);
-        error_log(print_r($feedback_fields, true));
 
         $response = wp_remote_post($api_request_url, [
           'headers' => [
