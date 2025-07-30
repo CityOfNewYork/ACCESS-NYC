@@ -35,10 +35,7 @@
     "timber/timber": "^1",
     "wpackagist-plugin/aryo-activity-log": "*",
     "wpackagist-plugin/enable-media-replace": "*",
-    "wpackagist-plugin/gathercontent-import": "*",
-    "wpackagist-plugin/search-everything": "*",
-    "wpackagist-plugin/wp-bitly": "2.7.1",
-    "wpackagist-plugin/wp-security-questions": "*",
+    "wpackagist-plugin/wp-bitly": "2.7.4",
     "wpackagist-plugin/wps-hide-login": "*"
   },
   "require-dev": {

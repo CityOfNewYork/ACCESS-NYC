@@ -3,7 +3,7 @@
     <div id="modal-body" class="o-modal__body color-light-background animated fadeInUp p-4" style="max-width: 100%; width: 376px">
       <div class="flex justify-end">
         <button aria-controls="aria-c-modal" aria-expanded="false" data-dialog="close" data-js="dialog" class="btn btn-text text-small flex items-center" tabindex="-1">
-          <svg class="icon-ui icon-3 m-0 text-blue-dark" tabindex="-1">
+          <svg class="icon-ui icon-3 m-0 text-blue-dark" style="pointer-events: none" tabindex="-1">
             <use xlink:href="#icon-ui-x"></use>
           </svg>
 
@@ -48,15 +48,16 @@
                     </label>
 
                     <label class="toggle" tabindex="-1">
-                      <input checked="true" data-type="boolean" name="helpful" type="radio" value="No" tabindex="-1" />
+                      <input data-type="boolean" name="helpful" type="radio" value="No" tabindex="-1" />
                       <span class="toggle__label">{{ __('No', 'accessnyctheme') }}</span>
                     </label>
                   </div>
                 </div>
               </fieldset>
 
-              <fieldset class="c-question" tabindex="-1">
-                <label class="c-question__label" for="description" tabindex="-1">{{ __('Why or why not?', 'accessnyctheme') }}</label>
+              <fieldset class="c-question" id="feedback-details" class="hidden" aria-hidden="true" tabindex="-1">
+                <label class="c-question__label" id="feedback-input-text-yes" for="description" class="hidden" aria-hidden="true" tabindex="-1">{{ __('What information was helpful?', 'accessnyctheme') }}</label>
+                <label class="c-question__label" id="feedback-input-text-no" for="description" class="hidden" aria-hidden="true" tabindex="-1">{{ __('What information do you need?', 'accessnyctheme') }}</label>
 
                 <div class="c-question__container">
                   <div>
@@ -68,19 +69,9 @@
               <div class="flex justify-between">
                 <button class="btn-small screen-tablet:btn" type="reset" aria-controls="aria-c-modal" aria-expanded="false" data-js="dialog" tabindex="-1">{{ __('Cancel', 'accessnyctheme') }}</button>
 
-                <button class="btn-small screen-tablet:btn btn-primary" type="submit" value="Submit" tabindex="-1">{{ __('Submit', 'accessnyctheme') }}</button>
+                <button class="btn-small screen-tablet:btn btn-primary" id="feedback-submit-button" class="hidden" aria-hidden="true" type="submit" value="Submit" tabindex="-1">{{ __('Submit', 'accessnyctheme') }}</button>
               </div>
             </div>
-
-            <fieldset class="c-question my-3 hidden" tabindex="-1" data-js="question-recaptcha" aria-hidden="true">
-              <label class="c-question__label" for="description" tabindex="-1">{{ __('Please check "I\'m not a robot"', 'accessnyctheme') }}</label>
-
-              <div class="c-question__container">
-                <div>
-                  <div data-js="recaptcha" class="flex justify-center"></div>
-                </div>
-              </div>
-            </fieldset>
           </form>
         </div>
       </div>

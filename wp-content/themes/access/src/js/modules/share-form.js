@@ -49,7 +49,7 @@ class ShareFormAccess extends ShareForm {
     // Return a promise that resolves only after the token is fetched and added
     return new Promise((resolve, reject) => {
       grecaptcha.enterprise.ready(() => {
-        grecaptcha.enterprise.execute(this.siteKey, {action: 'submit'}).then(token => {
+        grecaptcha.enterprise.execute(this.siteKey, {action: 'share_form_submit'}).then(token => {
           formData.set("g-recaptcha-response", token);
 
           fetch(this.form.FORM.getAttribute('action'), {

@@ -32,7 +32,6 @@ class ComposerStaticInite075c4026d211701dae3f1417011784e
             'Twilio\\' => 7,
             'Twig\\' => 5,
             'Timber\\' => 7,
-            'TANIOS\\Airtable\\' => 16,
         ),
         'S' => 
         array (
@@ -100,10 +99,6 @@ class ComposerStaticInite075c4026d211701dae3f1417011784e
         'Timber\\' => 
         array (
             0 => __DIR__ . '/..' . '/timber/timber/lib',
-        ),
-        'TANIOS\\Airtable\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sleiman/airtable-php/src',
         ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
@@ -2024,9 +2019,6 @@ class ComposerStaticInite075c4026d211701dae3f1417011784e
         'Symfony\\Polyfill\\Php72\\Php72' => __DIR__ . '/..' . '/symfony/polyfill-php72/Php72.php',
         'Symfony\\Polyfill\\Php80\\Php80' => __DIR__ . '/..' . '/symfony/polyfill-php80/Php80.php',
         'Symfony\\Polyfill\\Php80\\PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/PhpToken.php',
-        'TANIOS\\Airtable\\Airtable' => __DIR__ . '/..' . '/sleiman/airtable-php/src/Airtable.php',
-        'TANIOS\\Airtable\\Request' => __DIR__ . '/..' . '/sleiman/airtable-php/src/Request.php',
-        'TANIOS\\Airtable\\Response' => __DIR__ . '/..' . '/sleiman/airtable-php/src/Response.php',
         'Timber\\Admin' => __DIR__ . '/..' . '/timber/timber/lib/Admin.php',
         'Timber\\Archives' => __DIR__ . '/..' . '/timber/timber/lib/Archives.php',
         'Timber\\Cache\\Cleaner' => __DIR__ . '/..' . '/timber/timber/lib/Cache/Cleaner.php',

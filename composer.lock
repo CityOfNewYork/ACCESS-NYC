@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f013c617f6581f24b411da55fe9618c4",
+    "content-hash": "afe157addaf517dc467fabebbc8d3dfe",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -3251,58 +3251,22 @@
             "homepage": "https://wordpress.org/plugins/enable-media-replace/"
         },
         {
-            "name": "wpackagist-plugin/gathercontent-import",
-            "version": "3.2.20",
+            "name": "wpackagist-plugin/wp-bitly",
+            "version": "2.7.4",
             "source": {
                 "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/gathercontent-import/",
-                "reference": "tags/3.2.20"
+                "url": "https://plugins.svn.wordpress.org/wp-bitly/",
+                "reference": "tags/2.7.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gathercontent-import.3.2.20.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-bitly.2.7.4.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/gathercontent-import/"
-        },
-        {
-            "name": "wpackagist-plugin/search-everything",
-            "version": "8.1.9",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/search-everything/",
-                "reference": "tags/8.1.9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/search-everything.8.1.9.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/search-everything/"
-        },
-        {
-            "name": "wpackagist-plugin/wp-security-questions",
-            "version": "1.0.5",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/wp-security-questions/",
-                "reference": "trunk"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-security-questions.zip?timestamp=1582179208"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/wp-security-questions/"
+            "homepage": "https://wordpress.org/plugins/wp-bitly/"
         },
         {
             "name": "wpackagist-plugin/wps-hide-login",

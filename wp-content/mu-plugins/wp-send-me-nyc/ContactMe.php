@@ -135,7 +135,7 @@ class ContactMe {
   public function submission() {
     // ReCAPTCHA "constants"
     $RECAPTCHA_URL = 'https://recaptchaenterprise.googleapis.com/v1/projects/access-nyc/assessments?key=' . GOOGLE_RECAPTCHA_PRIVATE_API_KEY;
-    $RECAPTCHA_EXPECTED_ACTION = 'submit';
+    $RECAPTCHA_EXPECTED_ACTION = 'share_form_submit';
     $RECAPTCHA_MIN_SCORE = 0.5;
 
     if (!isset($_POST['url']) || empty($_POST['url'])) {
@@ -191,7 +191,7 @@ class ContactMe {
         $valid = false;
       } else {
         $data = json_decode(wp_remote_retrieve_body($response));
-        $valid = $data->riskAnalysis->score > $RECAPTCHA_MIN_SCORE;
+        $valid = $data->riskAnalysis->score >= $RECAPTCHA_MIN_SCORE;
       }
     }
 
