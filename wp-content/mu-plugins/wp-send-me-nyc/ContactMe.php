@@ -191,7 +191,7 @@ class ContactMe {
         $valid = false;
       } else {
         $data = json_decode(wp_remote_retrieve_body($response));
-        $valid = $data->riskAnalysis->score > $RECAPTCHA_MIN_SCORE;
+        $valid = $data->riskAnalysis->score >= $RECAPTCHA_MIN_SCORE;
       }
     }
 

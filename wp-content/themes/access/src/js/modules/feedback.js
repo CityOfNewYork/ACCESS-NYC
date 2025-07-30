@@ -77,7 +77,6 @@ import Spinner from '@nycopportunity/pttrn-scripts/src/spinner/spinner';
   const cancelBtn = Form.FORM.querySelector('button[type="reset"]');
   cancelBtn.addEventListener('click', () => {
     // Clear selected radio buttons
-    const radios = Form.FORM.querySelectorAll('input[name="helpful"]');
     radios.forEach(radio => {
       radio.checked = false;
     });

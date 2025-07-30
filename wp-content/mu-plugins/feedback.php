@@ -50,7 +50,7 @@ function feedbackHandler() {
       $recaptcha_valid = false;
     } else {
       $data = json_decode(wp_remote_retrieve_body($response));
-      $recaptcha_valid = $data->riskAnalysis->score > $RECAPTCHA_MIN_SCORE;
+      $recaptcha_valid = $data->riskAnalysis->score >= $RECAPTCHA_MIN_SCORE;
     }
   }
 
@@ -98,24 +98,7 @@ function feedbackHandler() {
 }
 
 /**
- * Return the client to interact with the Airtable API.
- *
- * @return Array - The Airtable PHP client
- */
-function get_airtable_client() {
-  if (defined('AIRTABLE_FEEDBACK_API_KEY') && defined('AIRTABLE_FEEDBACK_BASE_KEY')) {
-    $airtable = new Airtable(array(
-      'api_key' => AIRTABLE_FEEDBACK_API_KEY,
-      'base'    => AIRTABLE_FEEDBACK_BASE_KEY
-    ));
-    return $airtable;
-  } else {
-    failure(400, 'Airtable API Keys are missing.');
-  }
-}
-
-/**
- * Pass values from the submission inthe Airtable fields
+ * Pass values from the submission in the Airtable fields
  *
  * @param Array $submission - The POST request data from the feedback form.
  *
