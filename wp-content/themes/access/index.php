@@ -80,14 +80,13 @@ preload_fonts($context['language_code']);
 if (is_home()) {
   $template = 'home.twig';
 
-  if ($context['a_b_testing_on'] and $context['variant'] == 'b'){
+  if ($context['a_b_testing_on'] and $context['variant'] == 'b') {
     $context['post'] = Timber::get_post(array(
       'post_type' => 'homepage',
       'meta_key' => 'ab_test_variant',
       'meta_value' => 'b'
     ));
-  }
-  else {
+  } else {
     $context['post'] = Timber::get_post(array(
       'post_type' => 'homepage',
       'meta_key' => 'ab_test_variant',
