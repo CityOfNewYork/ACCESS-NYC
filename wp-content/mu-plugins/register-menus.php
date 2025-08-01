@@ -8,7 +8,8 @@
 add_action('init', function() {
   register_nav_menus(
     array(
-      'header-menu' => __('Header Primary Menu'),
+      'header-menu' => __('Nav bar'),
+      'header-menu-b' => __('Nav bar [variant B for A/B testing]'),
       'get-help-now' => __('Footer Menu 1 [left]'),
       'for-caseworkers' => __('Footer Menu 2 [left]'),
       'programs' => __('Footer Menu 3 [center]'),
