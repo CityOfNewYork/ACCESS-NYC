@@ -95,7 +95,7 @@ if (is_home()) {
   }
 
   // fallback if variant has not been set
-  if (!$context['post']){
+  if (!$context['post']) {
     $context['post'] = Timber::get_post(array(
       'post_type' => 'homepage'
     ));
