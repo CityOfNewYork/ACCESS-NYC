@@ -80,9 +80,26 @@ preload_fonts($context['language_code']);
 if (is_home()) {
   $template = 'home.twig';
 
-  $context['post'] = Timber::get_post(array(
-    'post_type' => 'homepage'
-  ));
+  if ($context['a_b_testing_on'] and $context['variant'] == 'b') {
+    $context['post'] = Timber::get_post(array(
+      'post_type' => 'homepage',
+      'meta_key' => 'ab_test_variant',
+      'meta_value' => 'b'
+    ));
+  } else {
+    $context['post'] = Timber::get_post(array(
+      'post_type' => 'homepage',
+      'meta_key' => 'ab_test_variant',
+      'meta_value' => 'a'
+    ));
+  }
+
+  // fallback if variant has not been set
+  if (!$context['post']) {
+    $context['post'] = Timber::get_post(array(
+      'post_type' => 'homepage'
+    ));
+  }
 
   /**
    * Touts
