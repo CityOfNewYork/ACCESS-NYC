@@ -5,13 +5,17 @@
   <form class="js-filtered-search" method="get" action="/">
     {{ fn('do_action', 'wpml_add_language_form_field' ) }}
     
-    {% if alerts %}
+    {% if alerts or alert_sitewide %}
     <div class="p-2 screen-tablet:p-3">
       {% for alert in alerts %}
         {% set class = loop.last ? '' : 'mb-2 screen-tablet:mb-3' %}
 
         {% include 'components/alert.twig' with {this: alert, class: class} only %}
       {% endfor %}
+      
+      {% if alert_sitewide %}
+        {% include 'components/alert.twig' with {this: alert_sitewide} only %}
+      {% endif %}
     </div>
     {% endif %}
 
@@ -47,11 +51,5 @@
       </div>
     </div>
   </form>
-
-  <div class="sticky bottom-0 pointer-events-none z-10">
-    {% if alert_sitewide %}
-    {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
-    {% endif %}
-  </div>
 </main>
 {% endblock %}

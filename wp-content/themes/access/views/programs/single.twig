@@ -25,13 +25,16 @@
 {% block content %}
   <main id="content" class="color-light-background screen-desktop:flex screen-desktop:flex-col">
 
-    {% if alerts %}
+    {% if alerts or alert_sitewide %}
     <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
       {% for alert in alerts %}
         {% set class = loop.last ? '' : 'mb-2 screen-tablet:mb-3' %}
 
         {% include 'components/alert.twig' with {this: alert, class: class} only %}
       {% endfor %}
+      {% if alert_sitewide %}
+        {% include 'components/alert.twig' with {this: alert_sitewide} only %}
+      {% endif %}
     </div>
     {% endif %}
 
@@ -215,10 +218,6 @@
       <div class="wrap text-end pb-2">
         <button aria-controls="aria-c-modal" aria-expanded="false" class="btn btn-small btn-tertiary" data-dialog="open" data-dialog-lock="true" data-js="dialog">{{ __('Feedback', 'accessnyctheme') }}</button>
       </div>
-      {% endif %}
-
-      {% if alert_sitewide %}
-      {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
       {% endif %}
     </div>
   </main>
