@@ -10,7 +10,7 @@
 
 {% block content %}
 <main class="main-content screen-desktop:my-2 screen-desktop:mx-4 screen-desktop:px-2" id="content" data-js="view">
-  {% if alerts %}
+  {% if alerts or alert_sitewide %}
   <div class="px-3 pt-3 screen-desktop:px-4 screen-desktop:pt-2 bg-white screen-desktop:bg-transparent">
     {% for alert in alerts %}
       {% set class = loop.last ? 'screen-desktop:border border-grey-light' : 'mb-2 screen-tablet:mb-3 screen-desktop:border border-grey-light' %}
