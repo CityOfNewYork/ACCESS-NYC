@@ -1,0 +1,45 @@
+{
+    "packages": [
+        {
+            "name": "gravityforms/gravity-tools",
+            "version": "0.2.17",
+            "version_normalized": "0.2.17.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gravityforms/gravity-tools.git",
+                "reference": "c6d21cbf0b8c42437dd8f9cdcd0f8675b94ae609"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gravityforms/gravity-tools/zipball/c6d21cbf0b8c42437dd8f9cdcd0f8675b94ae609",
+                "reference": "c6d21cbf0b8c42437dd8f9cdcd0f8675b94ae609",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">4.0 <7"
+            },
+            "time": "2025-01-08T21:44:46+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Rocket Genius",
+                    "email": "info@rocketgenius.com"
+                }
+            ],
+            "description": "PHP libraries to support Gravity Forms applications.",
+            "support": {
+                "source": "https://github.com/gravityforms/gravity-tools/tree/0.2.17"
+            },
+            "install-path": "../gravityforms/gravity-tools"
+        }
+    ],
+    "dev": false,
+    "dev-package-names": []
+}

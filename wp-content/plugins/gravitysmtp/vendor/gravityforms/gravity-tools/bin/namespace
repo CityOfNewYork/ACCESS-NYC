@@ -1,0 +1,45 @@
+#!/usr/bin/env php
+<?php
+
+function rsearch($folder, $regPattern) {
+	$dir = new RecursiveDirectoryIterator($folder);
+	$ite = new RecursiveIteratorIterator($dir);
+	$files = new RegexIterator($ite, $regPattern, RegexIterator::GET_MATCH);
+	$fileList = array();
+	foreach($files as $file) {
+		$fileList = array_merge($fileList, $file);
+	}
+	return $fileList;
+}
+
+$new_namespace = $argv[1];
+
+// First, replace all lib file namespaces.
+$vendor_files_to_mod = rsearch( './vendor/gravityforms/gravity-tools/src', '/.*php/' );
+
+foreach( $vendor_files_to_mod as $path ) {
+	$contents = file_get_contents( $path );
+	if ( strpos( $contents, 'Gravity_Forms\Gravity_Tools' ) === false ) {
+		continue;
+	}
+
+	$replaced = str_replace( 'Gravity_Forms\Gravity_Tools', "Gravity_Forms\\$new_namespace\Gravity_Tools", $contents );
+
+	file_put_contents( $path, $replaced );
+}
+
+// Next, do the same to plugin files.
+$files_to_mod = rsearch( './includes', '/.*php/' );
+
+foreach( $files_to_mod as $path ) {
+	$contents = file_get_contents( $path );
+	if ( strpos( $contents, 'Gravity_Forms\Gravity_Tools' ) === false ) {
+		continue;
+	}
+
+	$replaced = str_replace( 'Gravity_Forms\Gravity_Tools', "Gravity_Forms\\$new_namespace\Gravity_Tools", $contents );
+
+	file_put_contents( $path, $replaced );
+}
+
+?>
