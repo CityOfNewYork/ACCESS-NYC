@@ -15,6 +15,12 @@
     </div>
     {% endif %}
 
+    {% if alert_sitewide %}
+    <div class="p-2 screen-tablet:p-3">
+      {% include 'components/alert.twig' with {this: alert_sitewide} only %}
+    </div>
+    {% endif %}
+
     <div class="wrap screen-desktop:layout-sidebar-small-gutter mt-3">
       <aside>
         <h2 class="type-h4">{{__('Filter Programs', 'accessnyctheme')}}:</h2>
@@ -47,11 +53,5 @@
       </div>
     </div>
   </form>
-
-  <div class="sticky bottom-0 pointer-events-none z-10">
-    {% if alert_sitewide %}
-    {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
-    {% endif %}
-  </div>
 </main>
 {% endblock %}

@@ -8,6 +8,10 @@
 {% block content %}
   <main class="color-light-background" id="content">
     {# Banner #}
+    {# Banner Alert #}
+    {% if alert_sitewide %}
+      {% include 'components/alert.twig' with {this: alert_sitewide} %}
+    {% endif %}
     <div class="o-banner color-dark-background">
       <div class="o-banner__inner">
         <h1 class="o-banner__title">{{ post.hero_headline }}</h1>
@@ -118,13 +122,6 @@
             </div>
           </div>
 
-          {# Banner Alert #}
-          {# {% if alert_sitewide %}
-          <div class="sticky top-0 py-3">
-            {% include 'components/alert.twig' with {this: alert_sitewide} %}
-          </div>
-          {% endif %} #}
-
           {# Contact Us #}
           <footer class="py-2 {% if post.contact_us_text == '' %}text-center{% endif %}">
             {% if post.contact_us_cta and post.contact_us_link %}
@@ -148,11 +145,5 @@
         </div>
       </div>
     </div>
-
-    {% if alert_sitewide %}
-    <div class="sticky bottom-0 z-10">
-      {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true, static: true} only %}
-    </div>
-    {% endif %}
   </main>
 {% endblock %}

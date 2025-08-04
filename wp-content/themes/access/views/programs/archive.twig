@@ -11,6 +11,11 @@
     {% endfor %}
   </div>
   {% endif %}
+  {% if alert_sitewide %}
+  <div class="px-2 screen-tablet:px-3 pt-2 screen-tablet:pt-3">
+    {% include 'components/alert.twig' with {this: alert_sitewide} only %}
+  </div>
+  {% endif %}
 
   <div data-js="preload">
     <header class="c-header p-2 screen-tablet:p-3 {% if post.alerts %}{% else %}mt-3{% endif %} mb-3 print:mt-0">
@@ -84,12 +89,6 @@
     data-count="{{ count }}"
     data-pagination-next-link="{{ pagination.next.link }}">
     {# The client rendered template is stored in ./archive.vue #}
-  </div>
-
-  <div class="sticky bottom-0 pointer-events-none z-10">
-    {% if alert_sitewide %}
-    {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
-    {% endif %}
   </div>
 </main>
 {% endblock %}

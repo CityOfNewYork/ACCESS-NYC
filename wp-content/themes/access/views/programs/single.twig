@@ -35,6 +35,10 @@
     </div>
     {% endif %}
 
+    {% if alert_sitewide %}
+      {% include 'components/alert.twig' with {this: alert_sitewide} only %}
+    {% endif %}
+
     <p class="wrap m-0 pt-3 hidden print:block" aria-hidden="true">
       <strong>{{ __('Get back to this page', 'accessnyc-program-detail') }}:</strong>
 
@@ -215,10 +219,6 @@
       <div class="wrap text-end pb-2">
         <button aria-controls="aria-c-modal" aria-expanded="false" class="btn btn-small btn-tertiary" data-dialog="open" data-dialog-lock="true" data-js="dialog">{{ __('Feedback', 'accessnyctheme') }}</button>
       </div>
-      {% endif %}
-
-      {% if alert_sitewide %}
-      {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
       {% endif %}
     </div>
   </main>
