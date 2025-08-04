@@ -107,7 +107,7 @@
                 },
                 {
                     "key": "field_58912c8d18e01",
-                    "label": "H3 text",
+                    "label": "Banner body text",
                     "name": "body",
                     "aria-label": "",
                     "type": "wysiwyg",
@@ -532,5 +532,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "translation",
-    "modified": 1754077615
+    "modified": 1754336653
 }
