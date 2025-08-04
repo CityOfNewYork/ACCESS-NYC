@@ -1,0 +1,286 @@
+### 1.9.5 | 2025-07-17
+- Added email address validation for the force from email setting in all integrations.
+- Added a database check section to the system report to confirm required tables are in place.
+- Fixed an issue that causes fatal errors when Signup Sheets forms are submitted.
+- Fixed an issue that can cause resending to fail when attachments are deleted by third-party code.
+- Fixed an issue that causes SVG's to not display for certain company logos.
+- Fixed an issue that can cause a fatal error when some other plugins bypass normal WordPress init in certain contexts.
+- Fixed an issue that causes fatal errors when Signup Sheets forms are submitted.
+- Fixed an issue where the `pre_wp_mail` filter is not applied when sending emails.
+- Fixed an issue that can cause the Configuration status of Connectors to be inaccurate if cached.
+- Updated data grids to use the latest version of our components.
+
+### 1.9.4 | 2025-06-20
+- Fixed an issue that can cause some emails to fail to send due to duplicate headers.
+- Fixed an issue that causes some WordFence emails not to send.
+
+### 1.9.3 | 2025-06-03
+- Fixed an issue which can cause emails with invalid reply-to addresses to fail to send.
+- Fixed an issue that can cause calls to strpos to use a deprecated null value.
+- Fixed an issue that causes resends to fail if the original message had a BCC or CC.
+
+### 1.9.2 | 2025-05-08
+- Fixed a bug where the app will show an integration as not configured when it is activated in the setup wizard.
+- Fixed an issue that causes all SparkPost emails to include List-related headers.
+- Fixed an issue that causes date filters and on the email log to not respect the server timezone settings.
+- Fixed an issue that causes special characters in the From Name value to interfere with SMTP2GO sends.
+- Fixed an issue that causes the encryption settings for Custom SMTP to not be clickable in some cases.
+- Fixed an issue that causes the Integrations Settings page to show outdated configurations statuses for oauth connections.
+
+### 1.9.1 | 2025-04-17
+- Fixed an issue that can cause script conflicts in other applications such as Yoast and Customizer.
+
+### 1.9.0 | 2025-04-16
+- Fixed an issue that causes SMTP2GO to ignore forced from names.
+- Fixed an issue that allows sensitive keys set by constant to display their values in the system report.
+- Fixed an issue that causes the usage analytics constant override to not display its state properly.
+- Fixed an issue that causes the debug log timestamps to always display in UTC.
+- Updated plugin init to a priority of -10 to ensure we run before most other plugins.
+- Updated MailerSend integration description to properly describe the integration.
+- Updated the Microsoft Integration settings to clarify how From Name is handled.
+
+### 1.8.1 | 2025-04-02
+- Added BCC and CC details to the Email Log Detail screen.
+- Fixed an issue that causes emails sent from the Group File Access plugin to fail.
+- Fixed an issue that causes From Name to not be included when using the Elastic Email integration.
+- Fixed an issue that causes messages from Groundhogg to fail to send if sent via the AWS integration.
+- Fixed an issue which can cause some emails to not be logged when their message body exceeds a certain length.
+- Removed an unnecessary X-Mailer header from Mailgun requests.
+
+### 1.8.0 | 2025-03-12
+- Added Mailjet as a connector.
+- Added SparkPost as a connector.
+- Fixed a bug that causes settings locked by a constant to save to the database on various operations.
+- Fixed an issue that causes the Events table on the Dashboard to show events in the incorrect order if they span multiple years.
+- Fixed an issue that causes the events log table to show no results if the date filter is used with a single date for to and from values.
+
+### 1.7.0 | 2025-02-26
+- Added the ability to send a test Alert for all existing Alert types.
+- Added a lock icon tooltip to integration card when the integration is set as primary or backup by a constant.
+- Added Elastic Email as an integration.
+- Added MailerSend as an integration.
+- Added SMTP2GO as an integration.
+- Added migration fields for Elastic Email and SMTP2GO
+- Fixed an issue that can cause Password Reset emails to ignore management settings if Woocommerce is the source.
+- Updated telemetry data for Setup Wizard.
+
+### 1.6.2 | 2025-02-12
+- Added a Headers section to Email Log Details sent via Custom SMTP.
+- Added a link to the attached files when viewing Email Log Details.
+- Added support for custom file names in attachments.
+- Fixed an issue that can cause some table pagination to break on custom site setups.
+- Fixed an issue that causes PHPMail to disregard the Return-Path value.
+- Fixed an issue that causes tooltip buttons to redirect to a blank page.
+- Fixed an issue where the drag handle icon for Twilio alerts was not displaying correctly.
+- Fixed an issue which can cause deferred EDD emails to fail.
+- Fixed an issue which can cause some failed emails to not trigger an alert.
+- Fixed an issue which can cause the Primary Connector to be ignored if settings have not been saved a single time.
+- Fixed an issue which causes some settings defined by constants to not display the correct value.
+- Updated all dialogs to be vertically centered on the page.
+- Updated saving of integration settings to assign the one being saved as Primary if none currently are.
+
+### 1.6.1 | 2025-01-16
+- Added a feature that obfuscates sensitive settings field values if those fields are set via a defined constant.
+- Added resend email button to the activity log.
+- Added support for SQLite in the System Report.
+- Added the ability to set Primary and Backup integrations via the constants `GRAVITYSMTP_INTEGRATION_PRIMARY` and `GRAVITYSMTP_INTEGRATION_BACKUP`
+- Fixed a bug that causes warnings or errors due to undefined array keys.
+- Fixed an issue that can cause email sends to fail when providing a BCC or Reply-to address while using the Mailchimp connector.
+- Fixed an issue that causes fatal errors with the Google Integration when there is a token error.
+- Fixed an issue that causes PHP notices if the from name of an email is empty in the Generic Integration.
+- Fixed an issue where the app size was incorrect when the menu is auto folded.
+- Fixed an issue where the tracking pixel url is generated with a slash.
+- Updated the resend email functionality to be confirmed through a confirmation dialog before resending the email.
+
+### 1.6.0 | 2024-12-12
+- Added Zoho Mail integration.
+- Added suppressions management system with manual email suppression capabilities.
+- Added date filters and simple filters to the activity log.
+- Added experiments setting area to the plugin general settings.
+- Added experimental alerts for when the plugin is unable to send emails (using Slack and Twilio).
+- Fixed a bug that causes the Email Log to not render when a service is missing for an entry.
+- Fixed a bug that causes pagination endpoints for the Email and Debug logs to not work when wp-includes is in a non-standard location.
+- Fixed a bug that causes the Amazon SES integration to not display the correct state of the force from email setting.
+
+### 1.5.0 | 2024-11-06
+- Added Mailchimp as an integration type.
+- Added ability to track email open rates.
+- Fixed an issue which can cause some environments to throw a fatal when parsing the source of an email send.
+- Fixed an issue that can cause fatal errors when Microsoft 365 tokens are invalidated.
+- Fixed an issue that can cause special characters to render incorrectly with Amazon SES.
+- Fixed an issue that can cause a fatal error when AffiliateWP sends emails on an early hook.
+
+### 1.4.2 | 2024-10-15
+- Fixed an issue that can cause messages with attachments to not be logged in the Event Log.
+- Fixed an issue which causes some connectors to throw fatal errors if an email is sent without any recipients.
+- Fixed a bug that causes some plugins that dont set a from email to cause fatal errors when routing through this plugin.
+- Updated Force From Email toggle to be disabled if the Default From Email is not set.
+
+#### 1.4.0 | 2024-09-13
+- Added Amazon SES as an integration type.
+- Added a Dashboard Screen to the Admin Menu.
+- Added a feature to append Gravity Forms entry notes with a link to the associated Gravity SMTP event log.
+- Added Return Path as a setting for integration types which support it.
+- Updated Debug Logging for Custom SMTP to be more thorough and useful.
+- Fixed an issue which can cause Gravity Forms Add-ons to display incorrect update messaging.
+
+### 1.3.1 | 2024-08-21
+- Added the ability to view and delete the email log from the logging settings screen.
+- Fixed some issues that cause warnings to be displayed in PHP 8 and above.
+- Updated all toggles and their icons for better accessibility and readability.
+- Updated the mobile layout for the Email Log detail screen.
+
+### 1.3.0 | 2024-08-07
+- Added an email management screen to allow granular control over the sending of WordPress core emails.
+- Fixed an issue that could cause the Setup Wizard to display incorrect migrated settings.
+- Fixed an issue that causes special characters to be improperly encoded in the Microsoft integration.
+- Fixed an issue that causes emails with malformed headers to fail sending when no integration is enabled.
+- Updated the "Send a Test" screen to allow the selection of any configured integration for testing.
+- Updated the "Send a Test" screen to provide control over whether or not to send HTML in the email body.
+- API: Added Feature Flags architecture.
+- API: Added the [`gravitysmtp_managed_email_types`](https://docs.gravitysmtp.com/gravitysmtp-managed-email-types) filter to control/extend what email types appear on the email management screen.
+
+### 1.2.2 | 2024-07-22
+- Fixed an issue that can cause license key checks to fire on every page load in some contexts.
+- Fixed an issue that causes failed resends to return a success message.
+- Fixed an issue that causes integration statuses to be incorrectly preserved after uninstalling the plugin.
+
+### 1.2.1 | 2024-07-18
+- Changed the default email log retention period to 7 days.
+- Fixed a deprecation notice for PHP 8.2 and dynamic properties.
+- Fixed a conflict with the Email Templates plugin that causes a fatal error for some enabled integrations.
+- Fixed an issue that causes emails with BCC fields to be unable to resend.
+- Fixed an issue that can cause OAuth connections to fail due to expired refresh tokens.
+- Updated error handling for the debug log to catch more mailer related errors.
+
+### 1.2.0 | 2024-07-03
+- Added log email message and save attachments functionality.
+- Added migration feature for WP Mail SMTP users.
+- Added resend email functionality.
+- Added Translation and Locale data to the System Report.
+- Fixed bug that causes update notices to be delayed after a release.
+- Fixed an issue that allows username and password fields to be editable in Custom SMTP settings when authentication is disabled.
+- Fixed a bug that causes update notices to be delayed after a release.
+- Fixed an issue that causes fatal errors when sending emails with PHP Mail.
+
+### 1.1.2 | 2024-06-20
+- Fixed an issue that causes the Google and Microsoft connectors to lose authentication after a period of time.
+- Fixed an issue that causes the email log to display incorrect from name and email data for the PHP Mail integration.
+- Updated Brevo help text for the api key setting to remind people to check their Authorized IPs setting in Brevo.
+
+### 1.1.1 | 2024-06-14
+- Fixed an issue that causes primary or backup status to be lost if saving settings for that connector in that session.
+- Fixed an issue that causes only the first of multiple notifications to send.
+- Fixed an issue that causes only the first of multiple reply to emails to pass through.
+- Fixed an issue that causes Microsoft work/school accounts to not be able to authenticate.
+- Fixed an issue that causes the  system report to not display all enabled connector information correctly.
+
+### 1.1.0 | 2024-06-11
+- Added information about the current active integrations to the System Report.
+- Added the Google connector.
+- Added the Microsoft connector.
+- Added the PHP Mail connector.
+- Added primary and backup connections.
+- Fixed an issue that caused emails to send in test mode if no integrations were configured.
+- Fixed an issue that caused deleting a single activity from the log to break the data grid display.
+- Fixed an issue that can cause a fatal error when viewing the Email log on translated sites.
+- Fixed an issue that prevents Telemetry data from being properly sent to the Telemetry API.
+
+### 1.0.3 | 2024-05-20
+- Fixed a bug that causes plaintext emails to send with some html tags in Postmark.
+- Fixed a bug that causes attachments to not send with Postmark.
+
+### 1.0.2 | 2024-05-07
+- Added integration column to the data grid to show which service sent an email.
+- Fixed a bug that allows incorrect credentials for Custom SMTP to cause the Settings page to hang.
+- Fixed a bug that causes domain level mailgun api keys to not validate.
+
+### 1.0.1 | 2024-04-23
+- Added status headers for test mode and debug mode to all screens.
+- Fixed a bug that causes the plugin to appear in the Gravity Forms updates screen.
+- Fixed a bug that causes incorrect display of the debug log retention time on the system status screen.
+- Fixed a number of small display issues in various screens.
+- Updated the debug logger to hide the license key in the debug log.
+
+### 1.0 | 2024-04-09
+- Added debug log feature to the plugin.
+- Added the ability to activate the configured integration on the last step of the setup wizard.
+- Added uninstallation feature to remove all plugin data.
+- Fixed a bug that causes pagination issues when the activity log is cleared.
+- Fixed some issues with RTL layouts.
+- Fixed a bug that causes configured integrations in the Setup Wizard to always be activated.
+- Fixed a bug that causes the analytics toggle in the Setup Wizard to not reflect its true state.
+- Updated headers data on log detail to be hidden by default.
+- Updated the Setup Wizard to import a valid Gravity Forms key if present on initial setup.
+- Updated button attributes in various areas for better accessibility.
+
+### 1.0-rc-5 | 2024-03-07
+- Added ability to preview emails from the activity log.
+- Added bulk delete functionality to the activity log.
+- Added search to the activity log.
+- Added the first layer of roles and capabilities to the plugin.
+
+### 1.0-rc-4 | 2024-02-22
+- Added optional usage analytics to the plugin.
+- Added the Google connector.
+- Added ajax pagination to the activity log.
+- Added recipient and gravatar plus full recipient count to the activity log.
+- Added caching to the settings area to prevent repeated calls for licence checks resulting in long load times.
+- Updated test email image urls to come from the plugin.
+- Updated the system report page to be part of the tools page.
+- Updated the position of the screen navigation buttons in the setup wizard.
+
+### 1.0-rc-3 | 2024-02-06
+- Added a source column to the activity log to show where the activity originated from.
+- Fixed an issue with recipient formatting that causes issues with a select amount of other plugins.
+- Fixed an issue that can cause fatal errors when the email log is accessed in some conditions.
+
+### 1.0-rc-2 | 2024-01-25
+- Fixed an issue that causes restricted api keys in SendGrid to falsely report they are invalid keys on validation.
+- Fixed an issue that causes the Brevo connector to fail to send emails in certain cases.
+- Fixed an issue with our translations class that causes a missing variable notice on certain admin screens.
+- Fixed an issue that causes the Custom SMTP connector to send emails to the wrong recipients when sending multiple emails.
+- Fixed an issue that causes custom headers to be dropped when sending emails.
+- Updated Activity Log to properly translate all strings.
+- Updated the SendGrid api key validation to also confirm the key has mail send capabilities.
+- Updated the authentication toggle position in the Custom SMTP connector settings.
+
+### 1.0-rc-1 | 2024-01-18
+- Added translation support with TranslationsPress.
+- Fixed a bug with Postmark that causes html emails to send as plain text.
+- Fixed a bug that shows the activity log as disabled by default when it actually is enabled.
+- Fixed a bug that causes the Custom SMTP connector to show auto tls and authentication toggles as enabled by default in the setup wizard, when they are actually not.
+- Fixed various accessibility issues with the setup wizard.
+- Update some icons in the setup wizard.
+- Updated copy for the plugin.
+
+### 1.0-beta-3 | 2024-01-05
+- Added new sections to the technical information on the log details page.
+- Added the Brevo connector.
+- Fixed various issues with app screen layouts and modals that prevent the WordPress navigation from being scrollable in some cases.
+- Fixed an issue where every connector is sending an API verification request on page load.
+- Fixed an issue with character encoding in the custom SMTP connector.
+- Updated test emails to use an HTML email format instead of plain text.
+
+### 1.0-beta-2 | 2023-12-19
+- Added email previews to the log details screen.
+- Added force email address and name settings to all integrations.
+- Fixed an issue that causes some constants to not correctly override when set.
+- Fixed some accessibility issues with various screens.
+- Updated all string prefixes throughout the codebase and database from gsmtp to gravitysmtp. Note: updating to beta-2 will result in losing all previously stored settings and logs.
+- Updated the suggest an integration link.
+- Updated license handling.
+- Updated sidebar menu name to SMTP.
+
+### 1.0-beta-1 | 2023-12-07
+- Added update icon to dashboard screen.
+- Added connector settings validation and ui messaging.
+- Added pagination to the log details screen.
+- Added a link to the settings page from the manage plugins screen.
+- Added setup wizard.
+- Added the ability to log emails when all integrations are disabled.
+- Fixed an incompatibility with the Stop Emails plugin.
+- Fixed an issue that causes failed Mailgun test emails to not display their error message correctly.
+- Updated data grid to display 20 entries per page by default.
+- Updated plugin branding to match new branding.
+- Updated the log schema to be agnostic of activity type.
