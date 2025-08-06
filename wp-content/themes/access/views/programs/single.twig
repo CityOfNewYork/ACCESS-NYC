@@ -213,10 +213,10 @@
 
     {% include 'components/feedback.twig' with {this: post, action: shareAction} only %}
 
-    <div class="sticky bottom-0 z-10">
+    <div class="sticky bottom-0 z-10 pointer-events-none">
       {% if fn('defined', 'AIRTABLE_FEEDBACK_BASE_KEY') and fn('defined', 'AIRTABLE_FEEDBACK_TABLE_KEY') and fn('defined', 'AIRTABLE_FEEDBACK_API_TOKEN') %}
       <div class="wrap text-end pb-2">
-        <button aria-controls="aria-c-modal" aria-expanded="false" class="btn btn-small btn-tertiary" data-dialog="open" data-dialog-lock="true" data-js="dialog">{{ __('Feedback', 'accessnyctheme') }}</button>
+        <button aria-controls="aria-c-modal" aria-expanded="false" class="btn btn-small btn-tertiary pointer-events-auto" data-dialog="open" data-dialog-lock="true" data-js="dialog">{{ __('Feedback', 'accessnyctheme') }}</button>
       </div>
       {% endif %}
     </div>
