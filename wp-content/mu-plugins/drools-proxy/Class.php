@@ -19,6 +19,8 @@ class DroolsProxy {
     $user = get_option('drools_user');
     $pass = get_option('drools_pass');
 
+    // check if SCREENING_API_URL exists and if so use the replatformed URL; if not, use the existing logic
+
     $url = (!empty($url)) ? $url : DROOLS_URL;
     $user = (!empty($user)) ? $user : DROOLS_USER;
     $pass = (!empty($pass)) ? $pass : DROOLS_PASS;
@@ -37,6 +39,12 @@ class DroolsProxy {
     $uid = uniqid();
 
     do_action('drools_request', $_POST['data'], $uid);
+
+    // make a copy of the request() function that works with the replatformed Screening API
+    // have the new request() function use get_transient and set_transient to cache
+    // an auth token
+    // e.g. get_transient('screening_api_auth_token')
+    // set_transient('screening_api_auth_token', $screening_api_auth_token, 1800) # 30 minutes
 
     $response = $this->request($url, json_encode($_POST['data']), $user, $pass);
 
