@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: Content Workflow Format Meta Fields
- * Description: Format meta fields before pushing to Content Workflow/GatherContent 
+ * Description: Format meta fields before pushing to Content Workflow/GatherContent
  * Author: NYC Opportunity
  */
 
