@@ -71,6 +71,17 @@
 
                 <button class="btn-small screen-tablet:btn btn-primary" id="feedback-submit-button" class="hidden" aria-hidden="true" type="submit" value="Submit" tabindex="-1">{{ __('Submit', 'accessnyctheme') }}</button>
               </div>
+
+              <div class="c-disclaimer">
+                <p>
+                  <small>
+                    <svg class="icon c-disclaimer__icon c-disclaimer__icon--pre text-grey-dark" aria-hidden="true">
+                      <use xlink:href="#icon-info"></use>
+                    </svg>
+                    {{ __('This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.', 'accessnyc-share')}}
+                  </small>
+                </p>
+              </div>
             </div>
           </form>
         </div>
