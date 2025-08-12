@@ -116,6 +116,12 @@ $path-to-images: 'img/';
   white-space: nowrap
 }
 
+// hide recaptcha badge and use disclaimer text instead
+.grecaptcha-badge { 
+  visibility: hidden; 
+}
+
+
 // this class isn't available in access-patterns for some reason
 
 @media screen and (min-width: 960px) {
