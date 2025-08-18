@@ -59,18 +59,15 @@ class Site extends TimberSite {
     // If A/B testing is on, add the A/B test variant to the cookies and the context
     // The variant cookie is stored for 30 days
     if ($context['a_b_testing_on']) {
-      if (isset($_COOKIE['ab_test_variant']) and (
-          $_COOKIE['ab_test_variant'] == 'a'
-          or $_COOKIE['ab_test_variant'] == 'b')) { // Variant cookie must be a valid value
-        $context['variant'] = $_COOKIE['ab_test_variant'];
-      } else {
-        $rand_val = rand(0, 1);
-        $variant = 'a';
-        if ($rand_val == 1) {
-          $variant = 'b';
-        }
-        setcookie('ab_test_variant', $variant, time() + (DAY_IN_SECONDS * 30), COOKIEPATH, COOKIE_DOMAIN);
-        $context['variant'] = $variant;
+      $context['COOKIEPATH'] = COOKIEPATH;
+      $context['COOKIE_DOMAIN'] = COOKIE_DOMAIN;
+      if (isset($_COOKIE['a_b_test_variant']) and (
+          $_COOKIE['a_b_test_variant'] == 'a'
+          or $_COOKIE['a_b_test_variant'] == 'b')) { // Variant cookie must be a valid value
+        $context['variant'] = $_COOKIE['a_b_test_variant'];
+      } 
+      else {
+        $context['variant'] = '';
       }
     }
 

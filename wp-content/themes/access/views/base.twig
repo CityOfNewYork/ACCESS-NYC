@@ -95,7 +95,10 @@
     {% include 'partials/strings-newsletter.twig' %}
 
     <script type="text/javascript" nonce="{{ csp_script_nonce }}">
-      window.STYLESHEETS = {{ stylesheets|json_encode() }}
+      window.STYLESHEETS = {{ stylesheets|json_encode() }};
+      window.COOKIEPATH = "{{ COOKIEPATH }}";
+      window.COOKIE_DOMAIN = "{{ COOKIE_DOMAIN }}";
+      window.A_B_TESTING_ON = {{ a_b_testing_on }};
     </script>
 
     {{ wp_footer }}
