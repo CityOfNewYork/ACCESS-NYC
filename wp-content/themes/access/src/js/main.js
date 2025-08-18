@@ -41,16 +41,23 @@ import WebShare from 'utilities/web-share/web-share';
         let variant = Math.random() < 0.5 ? 'a' : 'b';
         // Set cookie for 30 days
         let cookie = VARIANT_KEY + "=" + variant;
-        cookie += "; path=" + (window.wpCookiePath || "/");
-        if (window.wpCookieDomain) {
-          cookie += "; domain=" + window.wpCookieDomain;
+        cookie += "; path=" + (window.COOKIEPATH || "/");
+        if (window.COOKIE_DOMAIN) {
+          cookie += "; domain=" + window.COOKIE_DOMAIN;
         }
         cookie += "; max-age=" + (60*60*24*30);
 
+        // Harden cookie delivery where possible
+        if (window.location.protocol === 'https:') {
+          cookie += "; secure";
+        }
+
         document.cookie = cookie;
 
-        // Reload before first paint
-        window.location.reload();
+        // Reload before first paint, but only if cookie persisted (avoid loops when cookies are disabled)
+        if (navigator.cookieEnabled && getCookie(VARIANT_KEY)) {
+          window.location.reload();
+        }
       } 
     }
   })();
