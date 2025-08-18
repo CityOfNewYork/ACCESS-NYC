@@ -65,8 +65,7 @@ class Site extends TimberSite {
           $_COOKIE['a_b_test_variant'] == 'a'
           or $_COOKIE['a_b_test_variant'] == 'b')) { // Variant cookie must be a valid value
         $context['variant'] = $_COOKIE['a_b_test_variant'];
-      } 
-      else {
+      } else {
         $context['variant'] = '';
       }
     }
