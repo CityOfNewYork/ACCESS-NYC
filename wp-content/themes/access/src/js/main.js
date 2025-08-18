@@ -20,6 +20,48 @@ import WebShare from 'utilities/web-share/web-share';
 (function(window) {
   'use strict';
 
+  // Set A/B variant if A/B testing is on 
+  (function(){
+    if (window.A_B_TESTING_ON) {
+      const VARIANT_KEY = 'a_b_test_variant';
+  
+      function getCookie(name) {
+        var parts = document.cookie.split('; ');
+        for (var i = 0; i < parts.length; i++) {
+          var row = parts[i].split('=');
+          if (row[0] === name) {
+            return row[1];
+          }
+        }
+        return null;
+      }
+        
+      if (!getCookie(VARIANT_KEY)) {
+        // Randomly assign
+        let variant = Math.random() < 0.5 ? 'a' : 'b';
+        // Set cookie for 30 days
+        let cookie = VARIANT_KEY + "=" + variant;
+        cookie += "; path=" + (window.COOKIEPATH || "/");
+        if (window.COOKIE_DOMAIN) {
+          cookie += "; domain=" + window.COOKIE_DOMAIN;
+        }
+        cookie += "; max-age=" + (60*60*24*30);
+
+        // Harden cookie delivery where possible
+        if (window.location.protocol === 'https:') {
+          cookie += "; secure";
+        }
+
+        document.cookie = cookie;
+
+        // Reload before first paint, but only if cookie persisted (avoid loops when cookies are disabled)
+        if (navigator.cookieEnabled && getCookie(VARIANT_KEY)) {
+          window.location.reload();
+        }
+      } 
+    }
+  })();
+
   /**
    * Configure Rollbar
    */

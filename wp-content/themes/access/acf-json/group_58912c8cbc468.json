@@ -5,7 +5,7 @@
         {
             "key": "field_688ce11cabd7d",
             "label": "A\/B test variant",
-            "name": "ab_test_variant",
+            "name": "a_b_test_variant",
             "aria-label": "",
             "type": "radio",
             "instructions": "",

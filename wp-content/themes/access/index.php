@@ -83,13 +83,13 @@ if (is_home()) {
   if ($context['a_b_testing_on'] and $context['variant'] == 'b') {
     $context['post'] = Timber::get_post(array(
       'post_type' => 'homepage',
-      'meta_key' => 'ab_test_variant',
+      'meta_key' => 'a_b_test_variant',
       'meta_value' => 'b'
     ));
   } else {
     $context['post'] = Timber::get_post(array(
       'post_type' => 'homepage',
-      'meta_key' => 'ab_test_variant',
+      'meta_key' => 'a_b_test_variant',
       'meta_value' => 'a'
     ));
   }
