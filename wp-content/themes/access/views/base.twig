@@ -26,6 +26,54 @@
     </script>
     {% endif %}
 
+    {# Set A/B variant if A/B testing is on  #}
+    {# Done here instead of main.js so it runs before content is displayed #}
+    {% if a_b_testing_on %}
+    <script type="text/javascript">
+    (function(){
+      const VARIANT_KEY = 'a_b_test_variant';
+      const COOKIEPATH =  "{{ COOKIEPATH }}";
+      const COOKIE_DOMAIN = "{{ COOKIE_DOMAIN }}";
+  
+      function getCookie(name) {
+        var parts = document.cookie.split('; ');
+        for (var i = 0; i < parts.length; i++) {
+          var row = parts[i].split('=');
+          if (row[0] === name) {
+            return row[1];
+          }
+        }
+        return null;
+      }
+        
+      if (!getCookie(VARIANT_KEY)) {
+        // Randomly assign
+        let variant = Math.random() < 0.5 ? 'a' : 'b';
+        // Set cookie for 30 days
+        let cookie = VARIANT_KEY + "=" + variant;
+        cookie += "; path=" + (COOKIEPATH || "/");
+        if (COOKIE_DOMAIN) {
+          cookie += "; domain=" + COOKIE_DOMAIN;
+        }
+        cookie += "; max-age=" + (60*60*24*30);
+
+        // Harden cookie delivery where possible
+        if (window.location.protocol === 'https:') {
+          cookie += "; secure";
+        }
+
+        document.cookie = cookie;
+
+        // Reload before first paint, but only if cookie persisted (avoid loops when cookies are disabled)
+        if (navigator.cookieEnabled && getCookie(VARIANT_KEY)) {
+          window.location.reload();
+        }
+      } 
+      })();
+    </script>
+
+    {% endif %}
+
     {% endblock %}
   </head>
 
@@ -96,9 +144,6 @@
 
     <script type="text/javascript" nonce="{{ csp_script_nonce }}">
       window.STYLESHEETS = {{ stylesheets|json_encode() }};
-      window.COOKIEPATH = "{{ COOKIEPATH }}";
-      window.COOKIE_DOMAIN = "{{ COOKIE_DOMAIN }}";
-      window.A_B_TESTING_ON = {{ a_b_testing_on|json_encode() }};
     </script>
 
     {{ wp_footer }}
