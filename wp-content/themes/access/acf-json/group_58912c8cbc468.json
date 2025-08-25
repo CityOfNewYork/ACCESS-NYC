@@ -71,7 +71,7 @@
             },
             "show_in_rest": 0,
             "relevanssi_exclude": 0,
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 3,
             "layout": "row",
             "pagination": 0,
             "min": 0,
@@ -171,7 +171,7 @@
                     },
                     "show_in_rest": 0,
                     "relevanssi_exclude": 0,
-                    "wpml_cf_preferences": 1,
+                    "wpml_cf_preferences": 3,
                     "default_value": "",
                     "allow_in_bindings": 1,
                     "placeholder": "",
@@ -531,6 +531,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "acfml_field_group_mode": "translation",
-    "modified": 1756158137
+    "acfml_field_group_mode": "advanced",
+    "modified": 1756162356
 }
