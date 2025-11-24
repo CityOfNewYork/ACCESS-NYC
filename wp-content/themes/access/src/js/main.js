@@ -9,7 +9,7 @@ import Filter from 'components/filter/filter';
 import AlertBanner from 'objects/alert-banner/alert-banner';
 
 // Use a local version of accordion
-import Accordion from 'components/accordion/accordion';
+import Accordion from 'modules/accordion';
 
 // Patterns Framework
 import Icons from 'utilities/icons/icons';
