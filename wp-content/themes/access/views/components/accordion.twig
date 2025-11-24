@@ -1,18 +1,14 @@
 <article id="{{ this.id }}" class="c-accordion">
 
-  <header class="c-accordion__header color-dark-background flex-row">
+  <button data-js="accordion" aria-controls="aria-c-{{ this.id }}" aria-expanded="{{ this.active }}" class="c-accordion__header w-full text-left print:hidden {% if this.active %}active{% endif %} color-dark-background flex-row">
     <p id="aria-lb-{{ this.id }}">
       {{ this.header }}
     </p>
 
-    <button data-js="accordion" aria-controls="aria-c-{{ this.id }}" aria-expanded="{{ this.active }}" class="c-accordion__toggle print:hidden {% if this.active %}active{% endif %}">
-      <svg class="c-accordion__toggle-active icon icon-ui icon-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
-      {# <span class="c-accordion__toggle-active">
-        {{ __('hide this list', 'accessnyc-program-detail') }}
-      </span> #}
-      <svg class="c-accordion__toggle-inactive icon icon-ui icon-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-    </button>
-  </header>
+    {# Manually defined SVGs for chevrons because imports weren't working #}
+    <svg class="c-accordion__toggle-active icon icon-ui icon-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+    <svg class="c-accordion__toggle-inactive icon icon-ui icon-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+  </button>
 
   <div id="aria-c-{{ this.id }}" aria-labelledby="aria-lb-{{ this.id }}" class="c-accordion__body color-mid-background text-small screen-tablet:text-normal print:active hidden:overflow animated {% if this.active %}active{% else %}hidden{% endif %}" aria-hidden="{% if this.active %}false{% else %}true{% endif %}">
     <div class="c-accordion__padding">
