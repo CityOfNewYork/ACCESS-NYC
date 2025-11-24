@@ -1,0 +1,110 @@
+/**
+ * Accordion - copied from ACCESS patterns but modified
+ */
+
+// Dependencies
+@import 'config/fonts';
+@import 'config/dimensions';
+@import 'config/media';
+@import 'config/interaction';
+
+// Declarations
+.c-accordion {
+  margin: 0 0 $spacing-base;
+}
+
+.c-accordion__header {
+  display: flex;
+  overflow: hidden;
+  padding: $spacing-base;
+
+  flex-direction: column;
+  align-items: flex-start;
+
+  @media screen and (min-width: $screen-tablet) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  p {
+    flex: 1;
+    font-weight: $font-weight-bold;
+    margin-bottom: 0;
+  }
+}
+
+.c-accordion__toggle {
+  text-decoration: underline;
+  display: inline-flex;
+}
+
+.c-accordion__toggle-active {
+  display: none;
+  visibility: hidden;
+
+  .c-accordion__toggle.active & {
+    @include disable-pointer-events;
+    visibility: visible;
+  }
+}
+
+.c-accordion__toggle-inactive {
+  @include disable-pointer-events;
+  visibility: visible;
+
+  .c-accordion__toggle.active & {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+.c-accordion__body {
+  h5 {
+    font-weight: bold;
+    margin-top: $spacing-base * 2;
+  }
+
+  li {
+    margin: .25rem 0;
+  }
+}
+
+.c-accordion__padding {
+  padding: $spacing-base;
+}
+
+.c-accordion__padding > *:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+@mixin accordion-print {
+  .c-accordion {
+    color: inherit;
+    background-color: transparent;
+  }
+
+  .c-accordion__header {
+    color: inherit;
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: inherit
+  }
+
+  .c-accordion__padding {
+    padding: 0;
+  }
+
+  .c-accordion__body {
+    color: inherit;
+    background-color: transparent;
+  }
+}
+
+.print-view {
+  @include accordion-print
+}
+
+@media print {
+  @include accordion-print
+}

@@ -58,7 +58,7 @@ $path-to-images: 'img/';
  * Components
  *************/
 
-@import '@nycopportunity/access-patterns/src/components/accordion/accordion';
+@import 'accordion'; // Modified local version of accordion styles
 @import '@nycopportunity/access-patterns/src/components/alert-box/alert-box';
 @import '@nycopportunity/access-patterns/src/components/card/card';
 @import '@nycopportunity/access-patterns/src/components/checklist/checklist';
