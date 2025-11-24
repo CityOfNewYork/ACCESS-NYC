@@ -46,6 +46,10 @@
     @include disable-pointer-events;
     visibility: visible;
   }
+  .c-accordion__header.active & {
+    @include disable-pointer-events;
+    visibility: visible;
+  }
 }
 
 .c-accordion__toggle-inactive {
@@ -53,6 +57,10 @@
   visibility: visible;
 
   .c-accordion__toggle.active & {
+    display: none;
+    visibility: hidden;
+  }
+  .c-accordion__header.active & {
     display: none;
     visibility: hidden;
   }

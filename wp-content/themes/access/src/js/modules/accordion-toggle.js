@@ -56,17 +56,20 @@ class Toggle {
           let tggleEvent = Toggle.events[i];
 
           body.addEventListener(tggleEvent, event => {
-            if (!event.target.matches(this.settings.selector))
-              return;
+            const trigger = event.target.closest ? event.target.closest(this.settings.selector) : null;
+
+            if (!trigger) return;
 
             this.event = event;
+            // attach the resolved trigger so handlers can use it
+            event._toggleTrigger = trigger;
 
             let type = event.type.toUpperCase();
 
             if (
               this[event.type] &&
               Toggle.elements[type] &&
-              Toggle.elements[type].includes(event.target.tagName)
+              Toggle.elements[type].includes(trigger.tagName)
             ) this[event.type](event);
           });
         }
@@ -157,7 +160,7 @@ class Toggle {
    * @return {Object}         The Toggle instance
    */
   toggle(event) {
-    let element = event.target;
+    let element = event._toggleTrigger || event.target;
     let target = false;
     let focusable = [];
 
