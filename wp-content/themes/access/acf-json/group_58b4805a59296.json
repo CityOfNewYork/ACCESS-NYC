@@ -178,6 +178,30 @@
                 }
             ],
             "rows_per_page": 20
+        },
+        {
+            "key": "field_692626efdfc3b",
+            "label": "Footer text (legacy page only)",
+            "name": "footer_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "relevanssi_exclude": 0,
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -202,10 +226,9 @@
     "hide_on_screen": [
         "the_content"
     ],
-    "active": 1,
+    "active": true,
     "description": "",
-    "show_in_rest": false,
-    "modified": 1714587205,
-    "local_file": "\/var\/www\/html\/wp-content\/themes\/access\/acf-json\/group_58b4805a59296.json",
-    "acfml_field_group_mode": "advanced"
+    "show_in_rest": 0,
+    "acfml_field_group_mode": "advanced",
+    "modified": 1764108986
 }

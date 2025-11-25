@@ -60,6 +60,9 @@
         {% endfor %}
 
         <footer class="pb-3">
+          <p class="text-grey-mid mb-4 italic">
+              {{ post.footer_text }}
+          </p>
           <p class="text-grey-mid m-0">
             {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date(fn('get_option', 'date_format')) }}
           </p>
