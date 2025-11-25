@@ -15,13 +15,9 @@
   <article>
     <header class="c-header mt-3 print:mt-0">
       <div>
-        <h1 class="c-header__descriptor">{{ post.title }}</h1>
+        <h1 class="c-header__descriptor mb-4">{{ post.title }}</h1>
 
         {% set lead = post.get_field('field_58b480ca3081c') %} {# lead #}
-
-        <h2 class="c-header__information color__alt {% if lead %}mb-4{% endif %}">
-          {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date(fn('get_option', 'date_format')) }}
-        </h2>
 
         {% if lead %}<div class="font-serif screen-tablet:text-large">{{ lead }}</div>{% endif %}
       </div>
