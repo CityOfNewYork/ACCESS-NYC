@@ -77,14 +77,6 @@
                   </h3>
                   {% endif %}
 
-                  <p class='c-card__subtitle color__alt'>
-                    {% if tout.link_to_content %}
-                      {{ __('Updated', 'accessnyctheme') }} {{ tout.get_field('link_to_content')[0].post_modified|date(fn('get_option', 'date_format')) }}
-                    {% else %}
-                      {{ __('Updated', 'accessnyctheme') }} {{ tout.post_modified|date(fn('get_option', 'date_format')) }}
-                    {% endif %}
-                  </p>
-
                   {% if tout.link_text %}
                     <div class="c-card__summary">{{ tout.link_text }}</div>
                   {% endif %}

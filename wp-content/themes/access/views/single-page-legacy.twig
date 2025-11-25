@@ -15,13 +15,9 @@
   <article>
     <header class="c-header mt-3 print:mt-0">
       <div>
-        <h1 class="c-header__descriptor">{{ post.title }}</h1>
+        <h1 class="c-header__descriptor mb-4">{{ post.title }}</h1>
 
         {% set lead = post.get_field('field_58b480ca3081c') %} {# lead #}
-
-        <h2 class="c-header__information color__alt {% if lead %}mb-4{% endif %}">
-          {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date(fn('get_option', 'date_format')) }}
-        </h2>
 
         {% if lead %}<div class="font-serif screen-tablet:text-large">{{ lead }}</div>{% endif %}
       </div>
@@ -64,38 +60,16 @@
         {% endfor %}
 
         <footer class="pb-3">
+          {% if post.footer_text %}
+          <p class="text-grey-mid mb-4 italic">
+              {{ post.footer_text }}
+          </p>
+          {% endif %}
           <p class="text-grey-mid m-0">
             {{ __('Last Updated', 'accessnyc-page') }} {{ post.post_modified|date(fn('get_option', 'date_format')) }}
           </p>
         </footer>
       </div>
-    </div>
-
-    <div class="sticky bottom-0 pointer-events-none z-10">
-      <div class="wrap pb-3 flex justify-end items-end flex-col screen-tablet:flex-row">
-        {% include 'components/web-share.twig' with {this: {
-          class: 'mb-1 screen-tablet:mb-0 screen-tablet:me-2',
-          fallback_class: 'right-0 bottom-100',
-          fallback_style: 'width: 458px; max-width: calc(100vw - 32px);',
-          share: {
-            title: (post.custom.og_title) ? post.custom.og_title : post.title,
-            text: (post.custom.web_share_text) ? post.custom.web_share_text : site.description,
-            url: fn('wp_get_shortlink')
-          }
-        }} only %}
-
-        {# <a class="btn btn-small btn-primary mb-1 screen-tablet:mb-0 screen-tablet:me-2">
-          <svg class="icon-2 icon-ui">
-            <use xlink:href="#icon-ui-mail"></use>
-          </svg>{{ __('Subscribe', 'accessnyctheme') }}
-        </a> #}
-
-        <a href="#content" class="btn btn-small text-blue pointer-events-auto">{{ __('Back to top', 'accessnyctheme') }}</a>
-      </div>
-
-      {% if alert_sitewide %}
-      {% include 'objects/alert-banner.twig' with {this: alert_sitewide, active: true} only %}
-      {% endif %}
     </div>
   </article>
 </main>
