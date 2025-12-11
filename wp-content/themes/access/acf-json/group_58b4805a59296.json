@@ -17,8 +17,10 @@
                 "id": ""
             },
             "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
+            "relevanssi_exclude": 0,
+            "wpml_cf_preferences": 2,
             "default_value": "",
+            "allow_in_bindings": 1,
             "tabs": "all",
             "toolbar": "basic",
             "media_upload": 0,
@@ -39,9 +41,11 @@
                 "id": ""
             },
             "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
+            "relevanssi_exclude": 0,
+            "wpml_cf_preferences": 1,
             "message": "Show jump navigation",
             "default_value": 1,
+            "allow_in_bindings": 1,
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
@@ -61,12 +65,15 @@
                 "id": ""
             },
             "show_in_rest": 0,
-            "wpml_cf_preferences": 0,
-            "collapsed": "field_58b481043081e",
+            "relevanssi_exclude": 0,
+            "wpml_cf_preferences": 3,
+            "layout": "block",
+            "pagination": 0,
             "min": 0,
             "max": 0,
-            "layout": "block",
+            "collapsed": "field_58b481043081e",
             "button_label": "Add Section",
+            "rows_per_page": 20,
             "sub_fields": [
                 {
                     "key": "field_58b481043081e",
@@ -83,12 +90,14 @@
                         "id": ""
                     },
                     "show_in_rest": 0,
-                    "wpml_cf_preferences": 0,
+                    "relevanssi_exclude": 0,
+                    "wpml_cf_preferences": 2,
                     "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 1,
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "maxlength": "",
                     "parent_repeater": "field_58b480f33081d"
                 },
                 {
@@ -106,9 +115,11 @@
                         "id": ""
                     },
                     "show_in_rest": 0,
-                    "wpml_cf_preferences": 0,
+                    "relevanssi_exclude": 0,
+                    "wpml_cf_preferences": 1,
                     "message": "Check to use a raw content field",
                     "default_value": 0,
+                    "allow_in_bindings": 1,
                     "ui": 0,
                     "ui_on_text": "",
                     "ui_off_text": "",
@@ -137,8 +148,10 @@
                         "id": ""
                     },
                     "show_in_rest": 0,
-                    "wpml_cf_preferences": 0,
+                    "relevanssi_exclude": 0,
+                    "wpml_cf_preferences": 2,
                     "default_value": "",
+                    "allow_in_bindings": 1,
                     "tabs": "all",
                     "toolbar": "basic",
                     "media_upload": 1,
@@ -168,16 +181,17 @@
                         "id": ""
                     },
                     "show_in_rest": 0,
+                    "relevanssi_exclude": 0,
+                    "wpml_cf_preferences": 2,
                     "default_value": "",
-                    "placeholder": "",
                     "maxlength": "",
+                    "allow_in_bindings": 1,
                     "rows": "",
+                    "placeholder": "",
                     "new_lines": "",
-                    "wpml_cf_preferences": 0,
                     "parent_repeater": "field_58b480f33081d"
                 }
-            ],
-            "rows_per_page": 20
+            ]
         },
         {
             "key": "field_692626efdfc3b",
@@ -195,7 +209,7 @@
             },
             "show_in_rest": 0,
             "relevanssi_exclude": 0,
-            "wpml_cf_preferences": 0,
+            "wpml_cf_preferences": 2,
             "default_value": "",
             "maxlength": "",
             "allow_in_bindings": 0,
@@ -230,5 +244,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1764108986
+    "modified": 1765474685
 }
