@@ -94,8 +94,6 @@ class Site extends TimberSite {
 
     $context['footer_get_help_now_menu'] = new TimberMenu('get-help-now');
 
-    $context['footer_for_caseworkers_menu'] = new TimberMenu('for-caseworkers');
-
     $context['footer_programs_menu'] = new TimberMenu('programs');
 
     $context['footer_about_access_nyc_menu'] = new TimberMenu('about-access-nyc');
