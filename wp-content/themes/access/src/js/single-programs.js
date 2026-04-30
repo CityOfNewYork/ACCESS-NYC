@@ -106,7 +106,7 @@ import 'modules/share-form';
 
                 // Add the hash to the URL unless the user is at the top of the page
                 if (window.scrollY > navBottom) {
-                    history.pushState(null, "", `#${topSection.id}`);
+                    history.replaceState(null, "", `#${topSection.id}`);
                 }
             }
         };
@@ -140,24 +140,45 @@ import 'modules/share-form';
         // Adjust scroll when clicking jump links
         document.querySelectorAll(".top-nav-link").forEach((link) => {
             link.addEventListener("click", (e) => {
-                const { bottom: navBottom, size: navSize } = getNavSize();
+                e.preventDefault(); // Prevent default jump behavior
 
-                if (navBottom > 0) {
-                    e.preventDefault(); // Prevent default jump behavior
-                    const targetId = link.getAttribute("href").substring(1);
-                    const targetElement = document.getElementById(targetId);
+                const navSize = getNavSize();
+                const targetId = link.getAttribute("href").substring(1);
+                const targetElement = document.getElementById(targetId);
 
-                    if (targetElement) {
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navSize;
-                        window.scrollTo({
-                            top: targetPosition
-                        });
+                if (targetElement) {
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navSize;
+                    window.scrollTo({
+                        top: targetPosition
+                    });
 
-                        centerActiveLinkIfScrollable();
-                    }
-
-                    history.pushState(null, "", `#${targetId}`);
+                    centerActiveLinkIfScrollable();
                 }
+
+                history.replaceState(null, "", `#${targetId}`);
+            });
+        });
+
+        document.querySelectorAll(".side-nav-link").forEach((link) => {
+            link.addEventListener("click", (e) => {
+                e.preventDefault(); // Prevent default jump behavior
+                
+                const navSize = getNavSize();
+                const targetId = link.getAttribute("href").substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    const targetPosition =
+                        targetElement.getBoundingClientRect().top +
+                        window.scrollY -
+                        navSize;
+
+                    window.scrollTo({
+                        top: targetPosition
+                    });
+                }
+
+                history.replaceState(null, "", `#${targetId}`);
             });
         });
 
