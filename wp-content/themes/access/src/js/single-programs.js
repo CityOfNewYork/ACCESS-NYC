@@ -137,33 +137,11 @@ import 'modules/share-form';
             })
         }
 
-        // Adjust scroll when clicking jump links
-        document.querySelectorAll(".top-nav-link").forEach((link) => {
+        function handleNavClick(link, extraCallback) {
             link.addEventListener("click", (e) => {
-                e.preventDefault(); // Prevent default jump behavior
+                e.preventDefault();
 
-                const navSize = getNavSize();
-                const targetId = link.getAttribute("href").substring(1);
-                const targetElement = document.getElementById(targetId);
-
-                if (targetElement) {
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navSize;
-                    window.scrollTo({
-                        top: targetPosition
-                    });
-
-                    centerActiveLinkIfScrollable();
-                }
-
-                history.replaceState(null, "", `#${targetId}`);
-            });
-        });
-
-        document.querySelectorAll(".side-nav-link").forEach((link) => {
-            link.addEventListener("click", (e) => {
-                e.preventDefault(); // Prevent default jump behavior
-                
-                const navSize = getNavSize();
+                const navSize = getNavSize().size;
                 const targetId = link.getAttribute("href").substring(1);
                 const targetElement = document.getElementById(targetId);
 
@@ -179,7 +157,23 @@ import 'modules/share-form';
                 }
 
                 history.replaceState(null, "", `#${targetId}`);
+
+                if (extraCallback) {
+                    extraCallback();
+                }
             });
+        }
+
+        // Adjust scroll when clicking jump links on top navigation bar
+        document.querySelectorAll(".top-nav-link").forEach((link) => {
+            handleNavClick(link, () => {
+                centerActiveLinkIfScrollable();
+            });
+        });
+
+        // Adjust scroll when clicking jump links on side navigation bar
+        document.querySelectorAll(".side-nav-link").forEach((link) => {
+            handleNavClick(link);
         });
 
     });
