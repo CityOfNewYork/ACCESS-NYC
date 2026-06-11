@@ -106,7 +106,7 @@ import 'modules/share-form';
 
                 // Add the hash to the URL unless the user is at the top of the page
                 if (window.scrollY > navBottom) {
-                    history.pushState(null, "", `#${topSection.id}`);
+                    history.replaceState(null, "", `#${topSection.id}`);
                 }
             }
         };
@@ -137,28 +137,43 @@ import 'modules/share-form';
             })
         }
 
-        // Adjust scroll when clicking jump links
-        document.querySelectorAll(".top-nav-link").forEach((link) => {
+        function handleNavClick(link, extraCallback) {
             link.addEventListener("click", (e) => {
-                const { bottom: navBottom, size: navSize } = getNavSize();
+                e.preventDefault();
 
-                if (navBottom > 0) {
-                    e.preventDefault(); // Prevent default jump behavior
-                    const targetId = link.getAttribute("href").substring(1);
-                    const targetElement = document.getElementById(targetId);
+                const navSize = getNavSize().size;
+                const targetId = link.getAttribute("href").substring(1);
+                const targetElement = document.getElementById(targetId);
 
-                    if (targetElement) {
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navSize;
-                        window.scrollTo({
-                            top: targetPosition
-                        });
+                if (targetElement) {
+                    const targetPosition =
+                        targetElement.getBoundingClientRect().top +
+                        window.scrollY -
+                        navSize;
 
-                        centerActiveLinkIfScrollable();
-                    }
+                    window.scrollTo({
+                        top: targetPosition
+                    });
+                }
 
-                    history.pushState(null, "", `#${targetId}`);
+                history.replaceState(null, "", `#${targetId}`);
+
+                if (extraCallback) {
+                    extraCallback();
                 }
             });
+        }
+
+        // Adjust scroll when clicking jump links on top navigation bar
+        document.querySelectorAll(".top-nav-link").forEach((link) => {
+            handleNavClick(link, () => {
+                centerActiveLinkIfScrollable();
+            });
+        });
+
+        // Adjust scroll when clicking jump links on side navigation bar
+        document.querySelectorAll(".side-nav-link").forEach((link) => {
+            handleNavClick(link);
         });
 
     });
