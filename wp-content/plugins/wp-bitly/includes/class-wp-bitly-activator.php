@@ -1,13 +1,8 @@
 <?php
-
 /**
- * Fired during plugin activation
- *
- * @link       https://watermelonwebworks.com
- * @since      2.6.0
+ * Wp_Bitly_Activator
  *
  * @package    Wp_Bitly
- * @subpackage Wp_Bitly/includes
  */
 
 /**
@@ -18,7 +13,6 @@
  * @since      2.6.0
  * @package    Wp_Bitly
  * @subpackage Wp_Bitly/includes
- * @author     Watermelon Web Works <projects@watermelonwebworks.com>
  */
 class Wp_Bitly_Activator {
 
@@ -30,7 +24,5 @@ class Wp_Bitly_Activator {
 	 * @since    2.6.0
 	 */
 	public static function activate() {
-
 	}
-
 }

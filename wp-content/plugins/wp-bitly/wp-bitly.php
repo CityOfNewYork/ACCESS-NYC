@@ -1,16 +1,16 @@
 <?php
-
 /**
+ * Plugin file for WP Bitly.
  *
  * @link              https://bitly.com/
  * @since             2.6.0
  * @package           Wp_Bitly
  *
  * @wordpress-plugin
- * Plugin Name:       Bitly's Wordpress Plugin
+ * Plugin Name:       Bitly's WordPress Plugin
  * Plugin URI:        https://wordpress.org/plugins/wp-bitly/
  * Description:       WP Bitly can be used to generate shortlinks for your website posts, pages, and custom post types. Extremely lightweight and easy to set up!
- * Version:           2.7.4
+ * Version:           2.8.1
  * Author:            Bitly
  * Author URI:        https://bitly.com/
  * License:           GPL-2.0+
@@ -24,31 +24,42 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'WPBITLY_VERSION', '2.7.2' );
+define( 'WPBITLY_VERSION', '2.8.1' );
 
 
-define('WPBITLY_DIR', WP_PLUGIN_DIR . '/' . basename(dirname(__FILE__)));
-define('WPBITLY_URL', plugins_url() . '/' . basename(dirname(__FILE__)));
+define( 'WPBITLY_DIR', WP_PLUGIN_DIR . '/' . basename( __DIR__ ) );
+define( 'WPBITLY_URL', plugins_url() . '/' . basename( __DIR__ ) );
 
-define('WPBITLY_LOG', WPBITLY_DIR . '/log/debug.txt');
-define('WPBITLY_ERROR', esc_attr__('WP Bitly Error: No such option %1$s', 'wp-bitly'));
+// translators: %1$s is the option name that was not found.
+define( 'WPBITLY_ERROR', esc_attr__( 'WP Bitly Error: No such option %1$s', 'wp-bitly' ) );
 
-define('WPBITLY_OPTIONS', 'wpbitly-options');
-define('WPBITLY_AUTHORIZED', 'wpbitly-authorized');
+define( 'WPBITLY_OPTIONS', 'wpbitly-options' );
+define( 'WPBITLY_AUTHORIZED', 'wpbitly-authorized' );
 
-define('WPBITLY_BITLY_API', 'https://api-ssl.bitly.com/v4/');
-define('WPBITLY_OAUTH_API', 'https://bitly.com/oauth/authorize');
+define( 'WPBITLY_BITLY_API', 'https://api-ssl.bitly.com' );
+define( 'WPBITLY_OAUTH_API', 'https://bitly.com/oauth/authorize' );
+define( 'WBBITLY_SSL_VERIFY', true );
 
-define('WPBITLY_OAUTH_CLIENT_ID', '7a259846da22b485c711c5bc3a31ac83290aae99');
+define( 'WPBITLY_OAUTH_CLIENT_ID', '7a259846da22b485c711c5bc3a31ac83290aae99' );
 
-define('WPBITLY_OAUTH_REDIRECT_URI', 'urn:ietf:wg:oauth:2.0:oob:auto');
+define( 'WPBITLY_OAUTH_REDIRECT_URI', 'urn:ietf:wg:oauth:2.0:oob:auto' );
 
 
+/**
+ * Run during plugin activation.
+ *
+ * @since 2.6.0
+ */
 function activate_wp_bitly() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-bitly-activator.php';
 	Wp_Bitly_Activator::activate();
 }
 
+/**
+ * Run during plugin deactivation.
+ *
+ * @since 2.6.0
+ */
 function deactivate_wp_bitly() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-bitly-deactivator.php';
 	Wp_Bitly_Deactivator::deactivate();
@@ -79,6 +90,5 @@ function run_wp_bitly() {
 
 	$plugin = new Wp_Bitly();
 	$plugin->run();
-
 }
 run_wp_bitly();

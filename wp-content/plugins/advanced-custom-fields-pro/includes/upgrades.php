@@ -1,4 +1,13 @@
 <?php
+/**
+ * @package ACF
+ * @author  WP Engine
+ *
+ * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
+ * "ACF" is a trademark of WP Engine.
+ * Licensed under the GNU General Public License v2 or later.
+ * https://www.gnu.org/licenses/gpl-2.0.html
+ */
 
 /**
  * acf_has_upgrade
@@ -469,13 +478,8 @@ function acf_upgrade_550_taxonomy( $taxonomy ) {
 	global $wpdb;
 
 	// vars
-	$search  = $taxonomy . '_%';
-	$_search = '_' . $search;
-
-	// escape '_'
-	// http://stackoverflow.com/questions/2300285/how-do-i-escape-in-sql-server
-	$search  = str_replace( '_', '\_', $search );
-	$_search = str_replace( '_', '\_', $_search );
+	$search  = $wpdb->esc_like( $taxonomy . '_' ) . '%';
+	$_search = $wpdb->esc_like( '_' . $taxonomy . '_' ) . '%';
 
 	// search
 	// results show faster query times using 2 LIKE vs 2 wildcards

@@ -1,23 +1,22 @@
 <?php
-
 /**
  * Display the WP Bitly Metabox on enabled posts
  *
  * This file is used to markup the admin-facing aspects of the plugin.
  *
- * @link       https://watermelonwebworks.com
  * @since      1.0.0
  *
  * @package    Wp_bitly
  * @subpackage Wp_bitly/admin/partials
  */
+
 ?>
 
 <?php
-if($shortlink){
-    $text = "Regenerate";
-}else{
-    $text = "Generate new Shortlink";
+if ( $shortlink ) {
+	$text = 'Regenerate';
+} else {
+	$text = 'Generate new Shortlink';
 }
 ?>
 
@@ -25,11 +24,20 @@ if($shortlink){
 
 
 <div id="wpbitly-actions">
-    <div id="regenerate-action">
-        <a href="<?php echo esc_html(add_query_arg('wpbr', 'true', esc_url($request_uri))); ?>" class="regeneratelink"><?php echo esc_attr($text);?></a>
-    </div>
-    <div class="clear"></div>
+	<div id="regenerate-action">
+		<?php
+		$regenerate_url = add_query_arg(
+			array(
+				'wpbr'     => 'true',
+				'_wpnonce' => wp_create_nonce( 'wpbitly_regenerate' ),
+			),
+			$request_uri
+		);
+		?>
+		<a href="<?php echo esc_url( $regenerate_url ); ?>" class="regeneratelink"><?php echo esc_attr( $text ); ?></a>
+	</div>
+	<div class="clear"></div>
 
-    
-    <div class="clear"></div>
+	
+	<div class="clear"></div>
 </div>

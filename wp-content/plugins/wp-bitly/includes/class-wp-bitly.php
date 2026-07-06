@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The file that defines the core plugin class
  *
@@ -70,14 +69,13 @@ class Wp_Bitly {
 		if ( defined( 'WPBITLY_VERSION' ) ) {
 			$this->version = WPBITLY_VERSION;
 		} else {
-			$this->version = '2.6.0';
+			$this->version = '2.8.1';
 		}
 		$this->plugin_name = 'wp-bitly';
 
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
-
 	}
 
 	/**
@@ -86,7 +84,7 @@ class Wp_Bitly {
 	 * Include the following files that make up the plugin:
 	 *
 	 * - Wp_Bitly_Loader. Orchestrates the hooks of the plugin.
-	 * - Wp_Bitly_i18n. Defines internationalization functionality.
+	 * - Wp_Bitly_I18n. Defines internationalization functionality.
 	 * - Wp_Bitly_Admin. Defines all hooks for the admin area.
 	 * - Wp_Bitly_Public. Defines all hooks for the public side of the site.
 	 *
@@ -102,64 +100,61 @@ class Wp_Bitly {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-bitly-loader.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-wp-bitly-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-bitly-i18n.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-wp-bitly-i18n.php';
 
 		/**
 		 * The class responsible for authorizing with Bitly and interacting with the Bitly API.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-bitly-auth.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-wp-bitly-auth.php';
 
 		/**
 		 * The class responsible for managing options for the WP Bitly plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-bitly-options.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-wp-bitly-options.php';
 
 		/**
 		 * The class responsible for managing settings for the WP Bitly plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-bitly-settings.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-wp-bitly-settings.php';
 
 		/**
 		 * The class responsible for logging for the WP Bitly plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-bitly-logger.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-wp-bitly-logger.php';
 
 		/**
 		 * The class responsible for showing the metabox for the WP Bitly plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-bitly-metabox.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-wp-bitly-metabox.php';
 
 		/**
 		 * The class responsible for managing shortlinks and the shortcode for the WP Bitly plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-bitly-shortlink.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-wp-bitly-shortlink.php';
 
 		/**
 		 * The class responsible for interacting with the Bitly API.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-bitly-api.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-wp-bitly-api.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area for the WP Bitly plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-bitly-admin.php';
-
-	
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-wp-bitly-admin.php';
 
 		$this->loader = new Wp_Bitly_Loader();
-
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Wp_Bitly_i18n class in order to set the domain and to register the hook
+	 * Uses the Wp_Bitly_I18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    2.6.0
@@ -167,10 +162,9 @@ class Wp_Bitly {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Wp_Bitly_i18n();
+		$plugin_i18n = new Wp_Bitly_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -182,35 +176,32 @@ class Wp_Bitly {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Wp_Bitly_Admin($this->get_plugin_name(), $this->get_version());
-		$plugin_settings = new Wp_Bitly_Settings();
-		$plugin_auth = new Wp_Bitly_Auth();
-		$plugin_metabox = new Wp_Bitly_Metabox();
+		$plugin_admin     = new Wp_Bitly_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_settings  = new Wp_Bitly_Settings();
+		$plugin_auth      = new Wp_Bitly_Auth();
+		$plugin_metabox   = new Wp_Bitly_Metabox();
 		$plugin_shortlink = new Wp_Bitly_Shortlink();
-		$plugin_api = new Wp_Bitly_Api();
+		$plugin_api       = new Wp_Bitly_Api();
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-	
 
 		$this->loader->add_action( 'init', $plugin_admin, 'check_for_authorization' );
 		$this->loader->add_action( 'init', $plugin_admin, 'regenerate_links' );
 		$this->loader->add_action( 'admin_init', $plugin_settings, 'register_settings' );
 		$this->loader->add_action( 'wp_ajax_get_domain_options', $plugin_settings, 'get_domain_options' );
-                $this->loader->add_action( 'wp_ajax_get_group_options', $plugin_settings, 'get_group_options' );
-                $this->loader->add_action( 'wp_ajax_get_org_options', $plugin_settings, 'get_org_options' );
-		
-		//these functions are used to automatically get the shortlink for a post on save and in the shortcode
-		$this->loader->add_action('save_post',$plugin_shortlink,'wpbitly_get_shortlink', 20, 2);
-		// $this->loader->add_filter('pre_get_shortlink',$plugin_shortlink,'wpbitly_get_shortlink', 20, 2);
+		$this->loader->add_action( 'wp_ajax_get_group_options', $plugin_settings, 'get_group_options' );
+		$this->loader->add_action( 'wp_ajax_get_org_options', $plugin_settings, 'get_org_options' );
 
-		//register shortcode
+		// These functions are used to automatically get the shortlink for a post on save and in the shortcode.
+		$this->loader->add_action( 'save_post', $plugin_shortlink, 'wpbitly_get_shortlink', 20, 2 );
+
+		// Register shortcode.
 		$this->loader->add_action( 'init', $plugin_shortlink, 'wpbitly_register_shortlink' );
 
 		$this->loader->add_action( 'admin_init', $plugin_metabox, 'register_metaboxes' );
 
-		$this->loader->add_filter('plugin_action_links_' . plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_name . '.php' ), $plugin_admin, 'add_action_links');
-
+		$this->loader->add_filter( 'plugin_action_links_' . plugin_basename( plugin_dir_path( __DIR__ ) . $this->plugin_name . '.php' ), $plugin_admin, 'add_action_links' );
 	}
 
 
@@ -254,5 +245,4 @@ class Wp_Bitly {
 	public function get_version() {
 		return $this->version;
 	}
-
 }

@@ -6,11 +6,11 @@ var windowFeatures = "menubar=0,location=0,resizable=yes,toolbar=0,scrollbars=ye
 (function( $ ) {
 	'use strict';
         
-        function populate_org_options(token){
+        function populate_org_options(){
             $.ajax({
                 url:ajaxurl,
-                data:{token:token,action:"get_org_options"},
-                method: "POST"   
+                data:{action:"get_org_options",nonce:wpBitlyData.nonce},
+                method: "POST"
             })
             .done(function( options ) {
                 $( "#wpbitly_default_org" ).html( options );
@@ -22,8 +22,8 @@ var windowFeatures = "menubar=0,location=0,resizable=yes,toolbar=0,scrollbars=ye
         function change_group_options(curr_org){
             $.ajax({
                 url:ajaxurl,
-                data:{curr_org:curr_org,action:"get_group_options"},
-                method: "POST"   
+                data:{curr_org:curr_org,action:"get_group_options",nonce:wpBitlyData.nonce},
+                method: "POST"
             })
             .done(function( options ) {
                 $( "#wpbitly_default_group" ).html( options );
@@ -35,8 +35,8 @@ var windowFeatures = "menubar=0,location=0,resizable=yes,toolbar=0,scrollbars=ye
         function change_domain_options(curr_group){
             $.ajax({
                 url:ajaxurl,
-                data:{curr_group:curr_group,action:"get_domain_options"},
-                method: "POST"   
+                data:{curr_group:curr_group,action:"get_domain_options",nonce:wpBitlyData.nonce},
+                method: "POST"
             })
             .done(function( options ) {
                 $( "#wpbitly_default_domain" ).html( options );
@@ -84,7 +84,7 @@ var windowFeatures = "menubar=0,location=0,resizable=yes,toolbar=0,scrollbars=ye
                     console.log( data )
                     if( data.status == 'error' ) alert( 'ERROR: '+ data.message );
                     if( data.status == 'disconnected' ) {
-                        location.reload();
+                        window.location.reload();
                     }
 
                 });//end ajax
@@ -98,7 +98,7 @@ var windowFeatures = "menubar=0,location=0,resizable=yes,toolbar=0,scrollbars=ye
                 window.addEventListener("message", function(event) {
 
                     // Ignore messages from unexpected origins
-                    if(event.origin !== "https://bitly.com") {
+                    if(event.origin !== "https://bitly.com" && event.origin !== "https://bitly.org" && event.origin !== "https://bitly.net") {
                         return;
                     }
 
@@ -116,24 +116,25 @@ var windowFeatures = "menubar=0,location=0,resizable=yes,toolbar=0,scrollbars=ye
                 var sendData = {
                     action:'wpbitly_oauth_get_token',
                     code:code,
+                    nonce:wpBitlyData.nonce,
                 };
 
                 $.ajax({
-                url: ajaxurl,
-                type: "POST",
-                data: sendData,
-                dataType : "json",
+                    url: ajaxurl,
+                    type: "POST",
+                    data: sendData,
+                    dataType : "json",
                 }).done( function(data) {
 
                     console.log( data )
                     if( data.status == 'error' ) alert( 'ERROR: '+ data.message );
                     if( data.status == 'success' ) {
-                        $( '#wpbitly_oauth_token' ).val( data.token ).removeClass( 'not_authorized' ).addClass( 'authorized' );
                         $( '#authorization_button' ).remove();
-                        $( '#disconnect_button' ).show().css( 'display', 'inline-block' );
+                        document.getElementById( 'disconnect_button' ).style.display = 'inline-block';
+                        document.getElementById( 'connected_feedback' ).classList.remove( 'hidden' );
                         //also show the meta boxes
                         $( '.wpbitly_default_org_fieldset' ).show();
-                        populate_org_options(data.token);
+                        populate_org_options();
                     }
 
                 });//end ajax

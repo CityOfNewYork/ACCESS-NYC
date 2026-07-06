@@ -1,9 +1,31 @@
 <?php
+/**
+ * @package ACF
+ * @author  WP Engine
+ *
+ * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
+ * "ACF" is a trademark of WP Engine.
+ * Licensed under the GNU General Public License v2 or later.
+ * https://www.gnu.org/licenses/gpl-2.0.html
+ */
 
 if ( ! class_exists( 'acf_field_checkbox' ) ) :
 
 	class acf_field_checkbox extends acf_field {
 
+		/**
+		 * A local store of all values for de-duplication.
+		 *
+		 * @var array
+		 */
+		private array $_values; //phpcs:ignore PSR2.Classes.PropertyDeclaration.Underscore -- backwards compatibility.
+
+		/**
+		 * An internal boolean tracking if all checkboxes are checked.
+		 *
+		 * @var boolean
+		 */
+		private bool $_all_checked; //phpcs:ignore PSR2.Classes.PropertyDeclaration.Underscore -- backwards compatibility.
 
 		/**
 		 * This function will setup the field type data
@@ -66,7 +88,13 @@ if ( ! class_exists( 'acf_field_checkbox' ) ) :
 			$li = '';
 			$ul = array(
 				'class' => 'acf-checkbox-list',
+				'role'  => 'group',
 			);
+
+			// Add aria-labelledby if field has an ID for proper screen reader announcement
+			if ( ! empty( $field['id'] ) ) {
+				$ul['aria-labelledby'] = $field['id'] . '-label';
+			}
 
 			// append to class
 			$ul['class'] .= ' ' . ( $field['layout'] == 'horizontal' ? 'acf-hl' : 'acf-bl' );
@@ -448,20 +476,18 @@ if ( ! class_exists( 'acf_field_checkbox' ) ) :
 
 
 		/**
-		 * This filter is appied to the $value before it is updated in the db
+		 * Filters the $value before it is updated in the db.
 		 *
-		 * @type    filter
 		 * @since   3.6
 		 * @date    23/01/13
 		 *
-		 * @param   $value - the value which will be saved in the database
-		 * @param   $post_id - the post_id of which the value will be saved
-		 * @param   $field - the field array holding all the field options
+		 * @param mixed          $value   The value which will be saved in the database.
+		 * @param integer|string $post_id The post_id of which the value will be saved.
+		 * @param array          $field   The field array holding all the field options.
 		 *
-		 * @return  $value - the modified value
+		 * @return mixed
 		 */
 		function update_value( $value, $post_id, $field ) {
-
 			// bail early if is empty
 			if ( empty( $value ) ) {
 				return $value;
@@ -470,7 +496,7 @@ if ( ! class_exists( 'acf_field_checkbox' ) ) :
 			// select -> update_value()
 			$value = acf_get_field_type( 'select' )->update_value( $value, $post_id, $field );
 
-			// save_other_choice
+			// save_custom
 			if ( $field['save_custom'] ) {
 
 				// get raw $field (may have been changed via repeater field)
@@ -486,32 +512,12 @@ if ( ! class_exists( 'acf_field_checkbox' ) ) :
 					return $value;
 				}
 
-				// loop
-				foreach ( $value as $v ) {
-
-					// ignore if already eixsts
-					if ( isset( $field['choices'][ $v ] ) ) {
-						continue;
-					}
-
-					// unslash (fixes serialize single quote issue)
-					$v = wp_unslash( $v );
-
-					// sanitize (remove tags)
-					$v = sanitize_text_field( $v );
-
-					// append
-					$field['choices'][ $v ] = $v;
-				}
-
-				// save
-				acf_update_field( $field );
+				acf_get_field_type( 'select' )->append_user_choices_to_field( $value, $post_id, $field );
 			}
 
 			// return
 			return $value;
 		}
-
 
 		/**
 		 * This function will translate field settings
@@ -584,8 +590,18 @@ if ( ! class_exists( 'acf_field_checkbox' ) ) :
 
 			return $schema;
 		}
-	}
 
+		/**
+		 * Returns an array of JSON-LD Property output types that are supported by this field type.
+		 *
+		 * @since 6.8
+		 *
+		 * @return string[]
+		 */
+		public function get_jsonld_output_types(): array {
+			return array( 'Text' );
+		}
+	}
 
 	// initialize
 	acf_register_field_type( 'acf_field_checkbox' );
