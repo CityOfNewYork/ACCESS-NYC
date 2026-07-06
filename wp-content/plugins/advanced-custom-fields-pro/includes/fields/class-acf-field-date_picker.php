@@ -1,4 +1,13 @@
 <?php
+/**
+ * @package ACF
+ * @author  WP Engine
+ *
+ * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
+ * "ACF" is a trademark of WP Engine.
+ * Licensed under the GNU General Public License v2 or later.
+ * https://www.gnu.org/licenses/gpl-2.0.html
+ */
 
 if ( ! class_exists( 'acf_field_date_picker' ) ) :
 
@@ -25,9 +34,10 @@ if ( ! class_exists( 'acf_field_date_picker' ) ) :
 			$this->preview_image = acf_get_url() . '/assets/images/field-type-previews/field-preview-date-picker.png';
 			$this->doc_url       = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/resources/date-picker/', 'docs', 'field-type-selection' );
 			$this->defaults      = array(
-				'display_format' => 'd/m/Y',
-				'return_format'  => 'd/m/Y',
-				'first_day'      => 1,
+				'display_format'          => 'd/m/Y',
+				'return_format'           => 'd/m/Y',
+				'first_day'               => 1,
+				'default_to_current_date' => 0,
 			);
 		}
 
@@ -111,6 +121,7 @@ if ( ! class_exists( 'acf_field_date_picker' ) ) :
 			$text_input   = array(
 				'class' => $field['class'] . ' input',
 				'value' => $display_value,
+				'data-default-to-today' => $field['default_to_current_date'],
 			);
 
 			// special attributes
@@ -225,6 +236,17 @@ if ( ! class_exists( 'acf_field_date_picker' ) ) :
 					'choices'      => array_values( $wp_locale->weekday ),
 				)
 			);
+
+			acf_render_field_setting(
+				$field,
+				array(
+					'label'        => __( 'Default to the current date', 'acf' ),
+					'instructions' => __( 'Use the current date as the default value for this field.', 'acf' ),
+					'type'         => 'true_false',
+					'name'         => 'default_to_current_date',
+					'ui'           => 1,
+				)
+			);
 		}
 
 		/**
@@ -303,6 +325,44 @@ if ( ! class_exists( 'acf_field_date_picker' ) ) :
 			}
 
 			return (string) $value;
+		}
+
+		/**
+		 * Returns an array of JSON-LD Property output types that are supported by this field type.
+		 *
+		 * @since 6.8
+		 *
+		 * @return string[]
+		 */
+		public function get_jsonld_output_types(): array {
+			return array( 'Date' );
+		}
+
+		/**
+		 * Formats the field value for JSON-LD output.
+		 *
+		 * Converts the stored Ymd format to ISO 8601 date format.
+		 *
+		 * @since 6.8.0
+		 *
+		 * @param mixed          $value   The value of the field.
+		 * @param integer|string $post_id The ID of the post.
+		 * @param array          $field   The field array.
+		 * @return string|null ISO 8601 formatted date or null.
+		 */
+		public function format_value_for_jsonld( $value, $post_id, $field ) {
+			if ( empty( $value ) || ! is_string( $value ) ) {
+				return null;
+			}
+
+			// ACF stores date_picker internally as 'Ymd' (e.g., 20231225).
+			$date = \DateTime::createFromFormat( 'Ymd', $value );
+			if ( ! $date ) {
+				return null;
+			}
+
+			// Return ISO 8601 date format (YYYY-MM-DD).
+			return $date->format( 'Y-m-d' );
 		}
 	}
 

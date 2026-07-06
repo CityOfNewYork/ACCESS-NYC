@@ -1,4 +1,13 @@
 <?php
+/**
+ * @package ACF
+ * @author  WP Engine
+ *
+ * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
+ * "ACF" is a trademark of WP Engine.
+ * Licensed under the GNU General Public License v2 or later.
+ * https://www.gnu.org/licenses/gpl-2.0.html
+ */
 
 if ( ! class_exists( 'acf_field_post_object' ) ) :
 
@@ -48,7 +57,7 @@ if ( ! class_exists( 'acf_field_post_object' ) ) :
 				return $choices;
 			}
 			if ( ! empty( $rule_value ) ) {
-				$post_title = get_the_title( $rule_value );
+				$post_title = esc_html( get_the_title( $rule_value ) );
 				$choices    = array( $rule_value => $post_title );
 			}
 			return $choices;
@@ -76,7 +85,7 @@ if ( ! class_exists( 'acf_field_post_object' ) ) :
 				$key   = '';
 			}
 
-			if ( ! acf_verify_ajax( $nonce, $key, ! $conditional_logic ) ) {
+			if ( ! acf_verify_ajax( $nonce, $key, ! $conditional_logic, 'post_object' ) ) {
 				die();
 			}
 
@@ -84,7 +93,7 @@ if ( ! class_exists( 'acf_field_post_object' ) ) :
 		}
 
 		/**
-		 * This function will return an array of data formatted for use in a select2 AJAX response
+		 * Returns an array of data formatted for use in a select2 AJAX response.
 		 *
 		 * @since 5.0.9
 		 *
@@ -118,7 +127,7 @@ if ( ! class_exists( 'acf_field_post_object' ) ) :
 
 			// paged
 			$args['posts_per_page'] = 20;
-			$args['paged']          = $options['paged'];
+			$args['paged']          = (int) $options['paged'];
 
 			// search
 			if ( $options['s'] !== '' ) {
@@ -132,7 +141,7 @@ if ( ! class_exists( 'acf_field_post_object' ) ) :
 			}
 
 			if ( ! empty( $options['include'] ) ) {
-				$args['include'] = $options['include'];
+				$args['include'] = (int) $options['include'];
 			}
 
 			// post_type
@@ -142,10 +151,8 @@ if ( ! class_exists( 'acf_field_post_object' ) ) :
 				$args['post_type'] = acf_get_post_types();
 			}
 
-			// post status
-			if ( ! empty( $options['post_status'] ) ) {
-				$args['post_status'] = acf_get_array( $options['post_status'] );
-			} elseif ( ! empty( $field['post_status'] ) ) {
+			// Post status - use field config only, don't accept from user input.
+			if ( ! empty( $field['post_status'] ) ) {
 				$args['post_status'] = acf_get_array( $field['post_status'] );
 			}
 
@@ -752,6 +759,46 @@ if ( ! class_exists( 'acf_field_post_object' ) ) :
 		 */
 		public function format_value_for_rest( $value, $post_id, array $field ) {
 			return acf_format_numerics( $value );
+		}
+
+		/**
+		 * Formats the field value for JSON-LD output.
+		 *
+		 * @since 6.8.0
+		 *
+		 * @param mixed          $value   The value of the field.
+		 * @param integer|string $post_id The ID of the post.
+		 * @param array          $field   The field array.
+		 * @return mixed
+		 */
+		public function format_value_for_jsonld( $value, $post_id, $field ) {
+			$value = acf_format_numerics( $value );
+
+			if ( ! $value ) {
+				return $value;
+			}
+
+			if ( is_array( $value ) ) {
+				return array_map(
+					function ( $post_id ) {
+						return get_permalink( $post_id );
+					},
+					$value
+				);
+			}
+
+			return get_permalink( $value );
+		}
+
+		/**
+		 * Returns an array of JSON-LD Property output types that are supported by this field type.
+		 *
+		 * @since 6.8
+		 *
+		 * @return string[]
+		 */
+		public function get_jsonld_output_types(): array {
+			return array( 'Thing', 'URL' );
 		}
 	}
 

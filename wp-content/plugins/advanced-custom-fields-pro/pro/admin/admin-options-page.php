@@ -1,4 +1,13 @@
 <?php
+/**
+ * @package ACF
+ * @author  WP Engine
+ *
+ * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
+ * "ACF" is a trademark of WP Engine.
+ * Licensed under the GNU General Public License v2 or later.
+ * https://www.gnu.org/licenses/gpl-2.0.html
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -109,6 +118,9 @@ if ( ! class_exists( 'acf_admin_options_page' ) ) :
 			// load acf scripts
 			acf_enqueue_scripts();
 
+			// Localize options page slug for repeater pagination capability checks.
+			acf_localize_data( array( 'options_page_slug' => $this->page['menu_slug'] ) );
+
 			// actions
 			add_action( 'acf/input/admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 			add_action( 'acf/input/admin_head', array( $this, 'admin_head' ) );
@@ -162,10 +174,7 @@ if ( ! class_exists( 'acf_admin_options_page' ) ) :
 				acf_add_admin_notice( sprintf( __( 'No Custom Field Groups found for this options page. <a href="%s">Create a Custom Field Group</a>', 'acf' ), admin_url( 'post-new.php?post_type=acf-field-group' ) ), 'warning' );
 			} else {
 				foreach ( $field_groups as $i => $field_group ) {
-
-					// vars
 					$id       = "acf-{$field_group['key']}";
-					$title    = $field_group['title'];
 					$context  = $field_group['position'];
 					$priority = 'high';
 					$args     = array( 'field_group' => $field_group );
@@ -181,7 +190,15 @@ if ( ! class_exists( 'acf_admin_options_page' ) ) :
 					$priority = apply_filters( 'acf/input/meta_box_priority', $priority, $field_group );
 
 					// add meta box
-					add_meta_box( $id, acf_esc_html( $title ), array( $this, 'postbox_acf' ), 'acf_options_page', $context, $priority, $args );
+					add_meta_box(
+						$id,
+						acf_esc_html( acf_get_field_group_title( $field_group ) ),
+						array( $this, 'postbox_acf' ),
+						'acf_options_page',
+						$context,
+						$priority,
+						$args
+					);
 				}
 				// foreach
 			}
