@@ -1,63 +1,59 @@
 <?php
-
 /**
  * Logging for the plugin
  *
- * @link       https://watermelonwebworks.com
  * @since      2.6.0
  *
  * @package    Wp_Bitly
  * @subpackage Wp_Bitly/includes
  */
 
-
+/**
+ * Plugin debug logging functionality.
+ *
+ * @since      2.6.0
+ * @package    Wp_Bitly
+ * @subpackage Wp_Bitly/includes
+ */
 class Wp_Bitly_Logger {
 
 	/**
-     * The options class.
-     *
-     * @since    2.6.0
-     * @access   protected
-     * @var      class $wp_bitly_options
-     */
-    protected $wp_bitly_options;
+	 * The options class.
+	 *
+	 * @since    2.6.0
+	 * @access   protected
+	 * @var      class $wp_bitly_options
+	 */
+	protected $wp_bitly_options;
 
 	/**
-	 * Initialize 
+	 * Initialize
 	 *
 	 * @since    2.6.0
 	 */
 	public function __construct() {
-		$this->wp_bitly_options = new Wp_Bitly_Options(); 
+		$this->wp_bitly_options = new Wp_Bitly_Options();
 	}
 
 
 	/**
-	 * Logging function
+	 * Logging function.
 	 *
 	 * @since    2.6.0
+	 * @param    mixed  $towrite The data to write to the log file.
+	 * @param    string $message A label/message describing what is being logged.
+	 * @param    bool   $bypass  Whether to bypass the debug option check.
 	 */
+	public function wpbitly_debug_log( $towrite, $message, $bypass = true ) {
 
+		if ( ! $this->wp_bitly_options->get_option( 'debug' ) || ! $bypass ) {
+			return;
+		}
 
-	public function wpbitly_debug_log( $towrite, $message, $bypass = true )
-	{
-
-	    if( !$this->wp_bitly_options->get_option( 'debug' ) || !$bypass ) {
-	        return;
-	    }
-
-		if( !is_dir( WPBITLY_DIR . '/log/' ) ) return;
-
-	    $log = fopen(WPBITLY_LOG, 'a');
-
-	    fwrite($log, '# [ ' . date('F j, Y, g:i a') . " ]\n");
-	    fwrite($log, '# [ ' . $message . " ]\n\n");
-	    fwrite($log, (is_array($towrite) ? print_r($towrite, true) : var_export($towrite, 1)));
-	    fwrite($log, "\n\n\n");
-
-	    fclose($log);
-
+		$entry = 'WP Bitly [' . $message . ']';
+		if ( '' !== $towrite ) {
+			$entry .= ': ' . ( is_array( $towrite ) || is_object( $towrite ) ? print_r( $towrite, true ) : var_export( $towrite, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r,WordPress.PHP.DevelopmentFunctions.error_log_var_export
+		}
+		error_log( $entry ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 	}
-	
-
 }

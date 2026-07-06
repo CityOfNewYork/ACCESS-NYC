@@ -1,10 +1,9 @@
 === Bitly's Wordpress Plugin ===
-Contributors: clint.s, Kelseystevensonbitly
-Donate link: https://watermelonwebworks.com
+Contributors: clint.s, Kelseystevensonbitly, muhammadfaizanhaidar
 Tags: shortlink, bitly, url, shortener, custom domain, social, media, twitter, facebook, share
 Requires at least: 5.0
 Tested up to: 6.7.2
-Stable tag: 2.7.4
+Stable tag: 2.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +54,11 @@ Click metrics for a short link will appear in the post’s or page’s settings.
 No. The first time a short link is requested for a particular post, the plugin will automatically generate one.
 
 == Changelog ==
+= 2.8.1 =
+* Version 2.8.1 release.
+= 2.8.0 =
+* Security Updates.
+* Fixes WordPress coding standards.
 = 2.7.4 =
 * Fixed nonce verification on disconnected
 * Enforce capability check for authorized user operations

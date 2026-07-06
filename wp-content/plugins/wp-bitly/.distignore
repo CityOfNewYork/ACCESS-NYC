@@ -1,0 +1,14 @@
+/.github
+/.travis.yml
+/bin
+/tests
+/phpunit.xml
+/phpunit.xml.dist
+/.phpcs.xml.dist
+/phpcs.xml
+/composer.json
+/.gitignore
+/Makefile
+/docker-compose.yml
+/admin/css/source
+/.claude

@@ -1,24 +1,22 @@
-[![Build Status](https://travis-ci.com/watermelon503/bitly.svg?token=uPXx2RMyux8y6zxLL8f6&branch=main)](https://travis-ci.com/watermelon503/bitly)
 # WordPress Bitly Integration Plugin #
 This plugin is used to integrate WordPress posts with [Bitly](https://bitly.com/) by generating a Bitly shortlink for selected post types. It has been tested up to WordPress version 6.7.2.
+
 ##  Installation ##
 Note: you must have a Bitly account in order to use this plugin. Any level of account will work.
 * Either install automatically through the WordPress admin, or download the .zip file, unzip to a folder, and upload the folder to your /wp-content/plugins/ directory. Read Installing Plugins in the WordPress Codex for details.
 * Activate the plugin through the Plugins menu in WordPress.
+
 ## Configuration ##
 Settings for this plugin are found on the Settings->Writing page. You can also access this page directly via the Settings link under this plugin on the Plugins page.
 
-To begin using this plugin, you must first obtain an Authorization Token. 
-To do so, in a separate browser tab login to the Bitly account to which you would like to connect. 
-Back on the WordPress Writing Settings page, simply click the large Authorize button next 
-to "Connect with Bitly". If that works successfully the "Bitly OAuth Token" field will be populated with an Authorization Token string.
+To begin using this plugin, you must click "Authorize" and connect to yuor Bitly account.After connecting you will see "Connected" displayed.
 
-Once you have an Authorization Token in place, you can proceed with the related configuration settings.
 * **Post Types:** Check which available post types will automatically have shortlinks created automatically upon creation. 
-* **Default Organization:** This select box will allow users with [Enterprise] (https://bitly.com/pages/pricing) level accounts to choose which Account the shortlinks will be associated with. Other account levels will just see their default Account listed.
+* **Default Organization:** Users with multiple accounts can choose which Account the shortlinks will be associated with. 
 * **Default Group:** This select box will allow users with [Enterprise] (https://bitly.com/pages/pricing) level accounts to choose which Group the shortlinks will be associated with. Other account levels will just see their default Group listed.
-* **Default Domain:** This select box will allow users with [Basic or Enterprise] (https://bitly.com/pages/pricing) level accounts to choose the shortlink domain that will be used for link creation. By default (and the only option for Free users) this is bit.ly.
-* **Debug WP Bitly:** Checking this will create a debug log in /wp-content/plugins/wp-bitly/log/debug.txt.
+* **Default Domain:** This select box will allow users with custom domains to choose the shortlink domain that will be used for link creation. By default this is bit.ly.
+* **Debug WP Bitly:** Checking this will create a debug log.
+
 ## Creating Shortlinks ##
 There are two ways to create shortlinks:
 * **Using the Post Type Configuration Option:** If all posts of a certain post type are to have shortlinks, simply check that post type's box in the Settings page to automatically create shortlinks for that post type on publish.
