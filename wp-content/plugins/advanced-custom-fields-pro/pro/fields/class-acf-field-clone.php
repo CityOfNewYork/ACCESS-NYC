@@ -1,9 +1,23 @@
 <?php
+/**
+ * @package ACF
+ * @author  WP Engine
+ *
+ * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
+ * "ACF" is a trademark of WP Engine.
+ * Licensed under the GNU General Public License v2 or later.
+ * https://www.gnu.org/licenses/gpl-2.0.html
+ */
 
 if ( ! class_exists( 'acf_field_clone' ) ) :
 
 	class acf_field_clone extends acf_field {
 
+		/**
+		 * Array of fields being cloned.
+		 * @var array
+		 */
+		public $cloning = array();
 
 		/**
 		 * This function will setup the field type data
@@ -34,7 +48,6 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 				'display'      => 'seamless',
 				'layout'       => 'block',
 			);
-			$this->cloning       = array();
 			$this->have_rows     = 'single';
 
 			// register filter
@@ -941,6 +954,10 @@ if ( ! class_exists( 'acf_field_clone' ) ) :
 			$nonce = acf_request_arg( 'nonce', '' );
 
 			if ( ! acf_verify_ajax( $nonce, 'acf/fields/clone/query' ) ) {
+				die();
+			}
+
+			if ( ! acf_current_user_can_admin() ) {
 				die();
 			}
 

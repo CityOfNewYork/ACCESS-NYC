@@ -1,7 +1,15 @@
 <?php
+/**
+ * @package ACF
+ * @author  WP Engine
+ *
+ * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
+ * "ACF" is a trademark of WP Engine.
+ * Licensed under the GNU General Public License v2 or later.
+ * https://www.gnu.org/licenses/gpl-2.0.html
+ */
 
 if ( ! class_exists( 'acf_field' ) ) :
-	#[AllowDynamicProperties]
 	class acf_field {
 
 		// field information properties.
@@ -21,6 +29,12 @@ if ( ! class_exists( 'acf_field' ) ) :
 			'escaping_html' => false, // Set true when a field handles its own HTML escaping in format_value
 			'required'      => true,
 		);
+
+		// Additional properties used by field types
+		public $default_values = array();
+		public $have_rows      = '';
+		public $width          = '';
+		public $height         = '';
 
 		/**
 		 * Initializes the `acf_field` class. To initialize a field type that is
@@ -231,6 +245,39 @@ if ( ! class_exists( 'acf_field' ) ) :
 		}
 
 		/**
+		 * Returns the JSON schema for creating this field type.
+		 *
+		 * @since 6.8.0
+		 *
+		 * @return array JSON Schema definition for this field type, or an empty array if none exists.
+		 */
+		public function get_field_creation_schema(): array {
+			$schema = acf_get_field_json_schema( $this->name );
+
+			if ( empty( $schema ) ) {
+				$schema = array(
+					'type'       => 'object',
+					'properties' => array(
+						'label' => array(
+							'type'        => 'string',
+							'description' => 'The label for the field',
+							'minLength'   => 1,
+							'required'    => true,
+						),
+						'type'  => array(
+							'type'        => 'string',
+							'enum'        => array( $this->name ),
+							'description' => 'The field type',
+							'required'    => true,
+						),
+					),
+				);
+			}
+
+			return $schema;
+		}
+
+		/**
 		 * Return the schema array for the REST API.
 		 *
 		 * @param array $field
@@ -291,6 +338,20 @@ if ( ! class_exists( 'acf_field' ) ) :
 		}
 
 		/**
+		 * Returns an array of JSON-LD Property output types that are supported by this field type.
+		 *
+		 * Override in field type classes to declare supported ranges.
+		 * Used to determine valid properties and output formats.
+		 *
+		 * @since 6.8
+		 *
+		 * @return string[]
+		 */
+		public function get_jsonld_output_types(): array {
+			return array();
+		}
+
+		/**
 		 * Renders the "Required" setting on the field type "Validation" settings tab.
 		 *
 		 * @since 6.2.5
@@ -344,9 +405,9 @@ if ( ! class_exists( 'acf_field' ) ) :
 				$binding_url
 			);
 
-			// This field setting has a unique behaviour. If the value isn't defined on the field object, it defaults to true, but for new fields, it defaults to off.
+			// This field setting has unique behavior. If the value isn't defined on the field object, it defaults to true, but for new fields or when changing field types, it defaults to off.
 			if ( ! isset( $field['allow_in_bindings'] ) ) {
-				if ( empty( $field['ID'] ) ) {
+				if ( empty( $field['ID'] ) || doing_action( 'wp_ajax_acf/field_group/render_field_settings' ) ) {
 					$field['allow_in_bindings'] = false;
 				} else {
 					$field['allow_in_bindings'] = true;
