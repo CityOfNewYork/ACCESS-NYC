@@ -1,13 +1,12 @@
 <?php
 /**
- * @package ACF
- * @author  WP Engine
+ * Network Admin Database Upgrade
  *
- * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
- * "ACF" is a trademark of WP Engine.
- * Licensed under the GNU General Public License v2 or later.
- * https://www.gnu.org/licenses/gpl-2.0.html
+ * Shows the databse upgrade process.
+ *
+ * @package ACF
  */
+
 ?>
 <style type="text/css">
 	
@@ -74,16 +73,8 @@
 				</td>
 				<td>
 				<?php if ( acf_has_upgrade() ) : ?>
-					<span class="response">
-						<?php
-						printf(
-							/* translators: %1$s current db version, %2$s available db version */
-							esc_html__( 'Site requires database upgrade from %1$s to %2$s', 'acf' ),
-							esc_html( acf_get_db_version() ),
-							esc_html( ACF_VERSION )
-						);
-						?>
-					</span>
+					<?php // translators: %1 current db version, %2 available db version ?>
+					<span class="response"><?php echo esc_html( printf( __( 'Site requires database upgrade from %1$s to %2$s', 'acf' ), acf_get_db_version(), ACF_VERSION ) ); ?></span>
 				<?php else : ?>
 					<?php esc_html_e( 'Site is up to date', 'acf' ); ?>
 				<?php endif; ?>

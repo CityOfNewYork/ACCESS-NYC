@@ -1,13 +1,4 @@
 <?php
-/**
- * @package ACF
- * @author  WP Engine
- *
- * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
- * "ACF" is a trademark of WP Engine.
- * Licensed under the GNU General Public License v2 or later.
- * https://www.gnu.org/licenses/gpl-2.0.html
- */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -102,9 +93,6 @@ if ( ! class_exists( 'ACF_Field_Group' ) ) {
 				'active'                => true,
 				'description'           => '',
 				'show_in_rest'          => false,
-				'display_title'         => '',
-				'allow_ai_access'       => false,
-				'ai_description'        => '',
 			);
 		}
 
@@ -357,15 +345,10 @@ if ( ! class_exists( 'ACF_Field_Group' ) ) {
 				$post['title'] .= ' (' . __( 'copy', 'acf' ) . ')';
 			}
 
-			// When duplicating a field group, insert a temporary post and set the field group's ID.
+			// When importing a new field group, insert a temporary post and set the field group's ID.
 			// This allows fields to be updated before the field group (field group ID is needed for field parent setting).
 			if ( ! $post['ID'] ) {
-				$post['ID'] = wp_insert_post(
-					array(
-						'post_title' => $post['key'],
-						'post_type'  => $this->post_type,
-					)
-				);
+				$post['ID'] = wp_insert_post( array( 'post_title' => $post['key'] ) );
 			}
 
 			// Duplicate fields and update post.
@@ -512,13 +495,9 @@ if ( ! class_exists( 'ACF_Field_Group' ) ) {
 			// When importing a new field group, insert a temporary post and set the field group's ID.
 			// This allows fields to be updated before the field group (field group ID is needed for field parent setting).
 			if ( ! $post['ID'] ) {
-				$post['ID'] = wp_insert_post(
-					array(
-						'post_title' => $post['key'],
-						'post_type'  => $this->post_type,
-					)
-				);
+				$post['ID'] = wp_insert_post( array( 'post_title' => $post['key'] ) );
 			}
+
 			// Add field group data to $ids map.
 			$ids[ $post['key'] ] = $post['ID'];
 

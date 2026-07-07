@@ -1,13 +1,4 @@
 <?php
-/**
- * @package ACF
- * @author  WP Engine
- *
- * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
- * "ACF" is a trademark of WP Engine.
- * Licensed under the GNU General Public License v2 or later.
- * https://www.gnu.org/licenses/gpl-2.0.html
- */
 
 /**
  * This function will return a custom field value for a specific field name/key + post_id.
@@ -151,7 +142,7 @@ function the_field( $selector, $post_id = false, $format_value = true ) {
  */
 function _acf_log_escaped_html( $function, $selector, $field, $post_id ) {
 	// If the notice isn't shown, no use in logging the errors.
-	if ( apply_filters( 'acf/admin/prevent_escaped_html_notice', true ) ) {
+	if ( apply_filters( 'acf/admin/prevent_escaped_html_notice', false ) ) {
 		return;
 	}
 
@@ -339,7 +330,7 @@ function acf_maybe_get_sub_field( $selectors, $post_id = false, $strict = true )
 	}
 
 	// vars
-	$offset    = (int) acf_get_setting( 'row_index_offset' );
+	$offset    = acf_get_setting( 'row_index_offset' );
 	$selector  = acf_extract_var( $selectors, 0 );
 	$selectors = array_values( $selectors ); // reset keys
 
@@ -355,7 +346,7 @@ function acf_maybe_get_sub_field( $selectors, $post_id = false, $strict = true )
 	for ( $j = 0; $j < count( $selectors ); $j += 2 ) {
 
 		// vars
-		$sub_i      = (int) $selectors[ $j ];
+		$sub_i      = $selectors[ $j ];
 		$sub_s      = $selectors[ $j + 1 ];
 		$field_name = $field['name'];
 
@@ -634,7 +625,7 @@ function have_rows( $selector, $post_id = false ) {
 	}
 
 	// Return true if next row exists.
-	if ( $active_loop && isset( $active_loop['value'][ (int) $active_loop['i'] + 1 ] ) ) {
+	if ( $active_loop && isset( $active_loop['value'][ $active_loop['i'] + 1 ] ) ) {
 		return true;
 	}
 
@@ -716,8 +707,8 @@ function get_row( $format = false ) {
 function get_row_index() {
 
 	// vars
-	$i      = (int) acf_get_loop( 'active', 'i' );
-	$offset = (int) acf_get_setting( 'row_index_offset' );
+	$i      = acf_get_loop( 'active', 'i' );
+	$offset = acf_get_setting( 'row_index_offset' );
 
 	// return
 	return $offset + $i;
@@ -1344,8 +1335,8 @@ function add_sub_row( $selector, $row = false, $post_id = false ) {
 function update_row( $selector, $i = 1, $row = false, $post_id = false ) {
 
 	// vars
-	$offset = (int) acf_get_setting( 'row_index_offset' );
-	$i      = (int) $i - $offset;
+	$offset = acf_get_setting( 'row_index_offset' );
+	$i      = $i - $offset;
 
 	// filter post_id
 	$post_id = acf_get_valid_post_id( $post_id );
@@ -1389,8 +1380,8 @@ function update_sub_row( $selector, $i = 1, $row = false, $post_id = false ) {
 
 	// vars
 	$sub_field = false;
-	$offset    = (int) acf_get_setting( 'row_index_offset' );
-	$i         = (int) $i - $offset;
+	$offset    = acf_get_setting( 'row_index_offset' );
+	$i         = $i - $offset;
 
 	// get sub field
 	if ( is_array( $selector ) ) {
@@ -1436,8 +1427,8 @@ function update_sub_row( $selector, $i = 1, $row = false, $post_id = false ) {
 function delete_row( $selector, $i = 1, $post_id = false ) {
 
 	// vars
-	$offset = (int) acf_get_setting( 'row_index_offset' );
-	$i      = (int) $i - $offset;
+	$offset = acf_get_setting( 'row_index_offset' );
+	$i      = $i - $offset;
 
 	// filter post_id
 	$post_id = acf_get_valid_post_id( $post_id );
@@ -1486,8 +1477,8 @@ function delete_sub_row( $selector, $i = 1, $post_id = false ) {
 
 	// vars
 	$sub_field = false;
-	$offset    = (int) acf_get_setting( 'row_index_offset' );
-	$i         = (int) $i - $offset;
+	$offset    = acf_get_setting( 'row_index_offset' );
+	$i         = $i - $offset;
 
 	// get sub field
 	if ( is_array( $selector ) ) {

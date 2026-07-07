@@ -1,224 +1,216 @@
 <?php
+
 /**
  * Register all actions and filters for the plugin
  *
+ * @link       https://watermelonwebworks.com
  * @since      2.6.0
  *
  * @package    Wp_Bitly
  * @subpackage Wp_Bitly/includes
  */
 
-/**
- * Bitly authorization and token management.
- *
- * @since      2.6.0
- * @package    Wp_Bitly
- * @subpackage Wp_Bitly/includes
- */
 class Wp_Bitly_Auth {
 
+
+    /**
+     * The logger class.
+     *
+     * @since    2.6.0
+     * @access   protected
+     * @var      class wp_bitly_logger
+     */
+    protected $wp_bitly_logger;
+
+
+    /**
+     * The options class.
+     *
+     * @since    2.6.0
+     * @access   protected
+     * @var      class $wp_bitly_options
+     */
+    protected $wp_bitly_options;
+
+	
 	/**
-	 * The logger class.
+	 * Initialize 
 	 *
 	 * @since    2.6.0
-	 * @access   protected
-	 * @var      class wp_bitly_logger
 	 */
-	protected $wp_bitly_logger;
+	public function __construct() 
+    {
 
+        $this->wp_bitly_logger = new Wp_Bitly_Logger(); 
+        $this->wp_bitly_options = new Wp_Bitly_Options(); 
 
-	/**
-	 * The options class.
-	 *
-	 * @since    2.6.0
-	 * @access   protected
-	 * @var      class $wp_bitly_options
-	 */
-	protected $wp_bitly_options;
+        add_action( 'wp_ajax_wpbitly_oauth_get_token', array( $this, 'get_token' ) );
+        add_action( 'wp_ajax_wpbitly_oauth_disconnect', array( $this, 'disconnect' ) );
 
-
-	/**
-	 * Initialize
-	 *
-	 * @since    2.6.0
-	 */
-	public function __construct() {
-
-		$this->wp_bitly_logger  = new Wp_Bitly_Logger();
-		$this->wp_bitly_options = new Wp_Bitly_Options();
-
-		add_action( 'wp_ajax_wpbitly_oauth_get_token', array( $this, 'get_token' ) );
-		add_action( 'wp_ajax_wpbitly_oauth_disconnect', array( $this, 'disconnect' ) );
 	}
+	
+
+	 /**
+     * Used to short circuit any shortlink functions if we haven't authenticated to Bitly
+     *
+     * @since 2.4.0
+     * @return bool
+     */
+    public function isAuthorized()
+    {
+        return get_option(WPBITLY_AUTHORIZED, false);
+    }
 
 
-	/**
-	 * Used to short circuit any shortlink functions if we haven't authenticated to Bitly.
-	 *
-	 * @since 2.4.0
-	 * @return bool
-	 */
-	public function is_authorized() {
-		return get_option( WPBITLY_AUTHORIZED, false );
-	}
+    /**
+     * @param bool $auth
+     */
+    public function authorize($auth = true)
+    {
+        if ($auth != true) {
+            $auth = false;
+        }
 
+        update_option(WPBITLY_AUTHORIZED, $auth);
+    }
+	
+	 /**
+     * Ajax callback function to disconnect from bitly
+     *
+     * @since 2.6.0
+     */
+    public function disconnect() 
+    {
+        // Check if user is an administrator
+        if (!current_user_can('manage_options')) {
+            wp_die(json_encode(['status' => 'error', 'message' => 'Unauthorized access.']));
+        }
 
-	/**
-	 * Set the authorization state for the plugin.
-	 *
-	 * @since 2.4.0
-	 * @param bool $auth Whether the plugin is authorized.
-	 */
-	public function authorize( $auth = true ) {
-		if ( true !== $auth ) {
-			$auth = false;
-		}
+        $wp_nonce = $_REQUEST['nonce'] ?? '';
+        $valid_nonce = wp_verify_nonce( $wp_nonce, 'bitly_disconnect' );
+        if( ! $valid_nonce )
+        {
+            $this->wp_bitly_logger->wpbitly_debug_log('', 'Disconnect (Ajax) Failed due to invalid nonce.');
+            wp_die( json_encode( ['status' => 'error', 'message' => 'Invalid Nonce.'] ) );
+        }
 
-		update_option( WPBITLY_AUTHORIZED, $auth );
-	}
+        $this->wp_bitly_logger->wpbitly_debug_log('', 'Disconnecting (Ajax)');
+        $this->wp_bitly_options->set_option('oauth_token', '');
+        $this->wp_bitly_options->set_option('oauth_login', '');
 
-	/**
-	 * Ajax callback function to disconnect from bitly.
-	 *
-	 * @since 2.6.0
-	 */
-	public function disconnect() {
-		// Check if user is an administrator.
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die(
-				wp_json_encode(
-					array(
-						'status'  => 'error',
-						'message' => 'Unauthorized access.',
-					)
-				)
-			);
-		}
+        $this->authorize(false);
 
-		$wp_nonce    = isset( $_REQUEST['nonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ) : '';
-		$valid_nonce = wp_verify_nonce( $wp_nonce, 'bitly_disconnect' );
-		if ( ! $valid_nonce ) {
-			$this->wp_bitly_logger->wpbitly_debug_log( '', 'Disconnect (Ajax) Failed due to invalid nonce.' );
-			wp_die(
-				wp_json_encode(
-					array(
-						'status'  => 'error',
-						'message' => 'Invalid Nonce.',
-					)
-				)
-			);
-		}
+        echo json_encode( ['status' => 'disconnected'] );
+        exit;
+    }
+	
+	 /**
+     * Ajax callback function to retrieve Bitly Access Token
+     *
+     * @since 2.6.0
+     */
+    public function get_token() 
+    {
+        // Check if user is an administrator
+        if (!current_user_can('manage_options')) {
+            wp_die(json_encode(['status' => 'error', 'message' => 'Unauthorized access.']));
+        }
 
-		$this->wp_bitly_logger->wpbitly_debug_log( '', 'Disconnecting (Ajax).' );
-		$this->wp_bitly_options->set_option( 'oauth_token', '' );
-		$this->wp_bitly_options->set_option( 'oauth_login', '' );
+        if( !isset( $_POST['code'] ) || !$_POST['code'] ) {
+            $response = array(
+                'status' => 'error',
+                'message' => 'Failed to retrieve authorization code.',
+            );
+            echo json_encode( $response );
+            exit;
+        }
+        
+        $code = sanitize_text_field($_POST['code']);
 
-		$this->authorize( false );
+        $param_arr = array(
+            'client_id' => WPBITLY_OAUTH_CLIENT_ID,
+            'code' => $code,
+            'redirect_uri' => WPBITLY_OAUTH_REDIRECT_URI,
+        );
+        
+        $params = urldecode( http_build_query( $param_arr ) );
+        $url = str_replace('v4/', '', WPBITLY_BITLY_API) . 'oauth/access_token?' . $params;
 
-		echo wp_json_encode( array( 'status' => 'disconnected' ) );
-		exit;
-	}
+        $curl = curl_init();
 
-	/**
-	 * Ajax callback function to retrieve Bitly Access Token.
-	 *
-	 * @since 2.6.0
-	 */
-	public function get_token() {
-		// Check if user is an administrator.
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die(
-				wp_json_encode(
-					array(
-						'status'  => 'error',
-						'message' => 'Unauthorized access.',
-					)
-				)
-			);
-		}
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_HTTPHEADER => array(
+                "Content-Length: 0",
+                "Accept: */*",
+                "Accept-Encoding: gzip, deflate, br",
+                "Connection: keep-alive",
+                "Cache-Control: no-cache",
+            ),
+        ));
 
-		check_ajax_referer( 'wpbitly_settings', 'nonce' );
+        $curl_response = curl_exec($curl);
 
-		if ( ! isset( $_POST['code'] ) || empty( $_POST['code'] ) ) {
-			$response = array(
-				'status'  => 'error',
-				'message' => 'Failed to retrieve authorization code.',
-			);
-			echo wp_json_encode( $response );
-			exit;
-		}
+        curl_close($curl);
 
-		$code = sanitize_text_field( wp_unslash( $_POST['code'] ) );
+        $this->wp_bitly_logger->wpbitly_debug_log( $curl_response, 'class-wp-bitly-auth.php: Raw curl response' );
 
-		$param_arr = array(
-			'client_id'    => WPBITLY_OAUTH_CLIENT_ID,
-			'code'         => $code,
-			'redirect_uri' => WPBITLY_OAUTH_REDIRECT_URI,
-		);
+        if( is_array( json_decode( $curl_response ) ) ) {
+            $curl_response = json_decode( $curl_response );
+        } else {
+            $curl_data = explode( '&', $curl_response );
+            $curl_response = array();
+            foreach( $curl_data as $curl_item ) {
+                $curl_item = explode( '=', $curl_item );
+                $curl_response[ $curl_item[0] ] = $curl_item[1];
+            }
+        }
 
-		$params = urldecode( http_build_query( $param_arr ) );
-		$url    = WPBITLY_BITLY_API . '/oauth/access_token?' . $params;
+        $this->wp_bitly_logger->wpbitly_debug_log( $curl_response, 'class-wp-bitly-auth.php: Processed curl response' );
 
-		$http_response = wp_remote_post(
-			$url,
-			array(
-				'timeout'   => 30,
-				'headers'   => array(
-					'Accept' => 'application/json',
-				),
-				'sslverify' => WBBITLY_SSL_VERIFY,
-			)
-		);
+        $access_token = isset( $curl_response['access_token'] ) ? sanitize_text_field($curl_response['access_token']) : NULL;
+        $login = isset( $curl_response['login'] ) ? sanitize_text_field($curl_response['login']) : NULL;
 
-		// Check for an HTTP error.
-		if ( is_wp_error( $http_response ) ) {
-			$this->wp_bitly_logger->wpbitly_debug_log( $http_response, 'class-wp-bitly-auth.php: HTTP request failed.' );
-			$response = array(
-				'status'  => 'error',
-				'message' => 'HTTP request failed.',
-			);
-			echo wp_json_encode( $response );
-			exit;
-		}
+        if( !$access_token ) {
+            $response = array(
+                'status' => 'error',
+                'message' => 'Failed to retrieve access token.',
+            );
+            echo json_encode( $response );
+            exit;
+        }
 
-		$body = wp_remote_retrieve_body( $http_response );
+        if( !$login ) {
+            $response = array(
+                'status' => 'error',
+                'message' => 'Failed to retrieve login.',
+            );
+            echo json_encode( $response );
+            exit;
+        }
 
-		$this->wp_bitly_logger->wpbitly_debug_log( $body, 'class-wp-bitly-auth.php: Raw response.' );
+        // Sanitize values
+        $access_token = preg_replace('/[^0-9a-z]/', '', $access_token);
+        $login = preg_replace('/[^0-9a-z_-]/', '', $login);
 
-		$token_data = json_decode( $body, true );
+        $this->wp_bitly_options->set_option('oauth_token', $access_token);
+        $this->wp_bitly_options->set_option('oauth_login', $login);
+        $this->authorize( true );
 
-		$this->wp_bitly_logger->wpbitly_debug_log( $token_data, 'class-wp-bitly-auth.php: Processed response.' );
+        $response = array(
+            'status' => 'success',
+            'message' => 'Got the access token.',
+            'token' => $access_token,
+        );
+        echo json_encode( $response );
+        exit;
+    }
 
-		$access_token = isset( $token_data['access_token'] ) ? sanitize_text_field( $token_data['access_token'] ) : null;
-		$login        = isset( $token_data['login'] ) ? sanitize_text_field( $token_data['login'] ) : null;
-
-		if ( ! $access_token ) {
-			$response = array(
-				'status'  => 'error',
-				'message' => 'Failed to retrieve access token.',
-			);
-			echo wp_json_encode( $response );
-			exit;
-		}
-
-		if ( ! $login ) {
-			$response = array(
-				'status'  => 'error',
-				'message' => 'Failed to retrieve login.',
-			);
-			echo wp_json_encode( $response );
-			exit;
-		}
-
-		$this->wp_bitly_options->set_option( 'oauth_token', $access_token );
-		$this->wp_bitly_options->set_option( 'oauth_login', $login );
-		$this->authorize( true );
-
-		$response = array(
-			'status'  => 'success',
-			'message' => 'Got the access token.',
-		);
-		echo wp_json_encode( $response );
-		exit;
-	}
 }

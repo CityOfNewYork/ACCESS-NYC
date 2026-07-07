@@ -1,12 +1,11 @@
 <?php
 /**
- * @package ACF
- * @author  WP Engine
+ * ACF Admin Taxonomy Class
  *
- * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
- * "ACF" is a trademark of WP Engine.
- * Licensed under the GNU General Public License v2 or later.
- * https://www.gnu.org/licenses/gpl-2.0.html
+ * @class       ACF_Admin_Taxonomiy
+ *
+ * @package     ACF
+ * @subpackage  Admin
  */
 
 if ( ! class_exists( 'ACF_Admin_Taxonomy' ) ) :

@@ -1,257 +1,248 @@
 <?php
+
 /**
  * Register all actions and filters for the plugin
  *
+ * @link       https://watermelonwebworks.com
  * @since      2.6.0
  *
  * @package    Wp_Bitly
  * @subpackage Wp_Bitly/includes
  */
 
-/**
- * Shortlink generation and management.
- *
- * @since      2.6.0
- * @package    Wp_Bitly
- * @subpackage Wp_Bitly/includes
- */
 class Wp_Bitly_Shortlink {
 
-	/**
-	 * The auth class.
-	 *
-	 * @since    2.6.0
-	 * @access   protected
-	 * @var      class  $wp_bitly_auth
-	 */
-	protected $wp_bitly_auth;
+    /**
+     * The auth class.
+     *
+     * @since    2.6.0
+     * @access   protected
+     * @var      class  $wp_bitly_auth
+     */
+    protected $wp_bitly_auth;
+
+    /**
+     * The options class.
+     *
+     * @since    2.6.0
+     * @access   protected
+     * @var      class $wp_bitly_options
+     */
+    protected $wp_bitly_options;
+
+    /**
+     * The logger class.
+     *
+     * @since    2.6.0
+     * @access   protected
+     * @var      class wp_bitly_logger
+     */
+    protected $wp_bitly_logger;
+
+    /**
+     * The api class.
+     *
+     * @since    2.6.0
+     * @access   protected
+     * @var      class $wp_bitly_api
+     */
+    protected $wp_bitly_api;
 
 	/**
-	 * The options class.
-	 *
-	 * @since    2.6.0
-	 * @access   protected
-	 * @var      class $wp_bitly_options
-	 */
-	protected $wp_bitly_options;
-
-	/**
-	 * The logger class.
-	 *
-	 * @since    2.6.0
-	 * @access   protected
-	 * @var      class wp_bitly_logger
-	 */
-	protected $wp_bitly_logger;
-
-	/**
-	 * The api class.
-	 *
-	 * @since    2.6.0
-	 * @access   protected
-	 * @var      class $wp_bitly_api
-	 */
-	protected $wp_bitly_api;
-
-	/**
-	 * Initialize
+	 * Initialize 
 	 *
 	 * @since    2.6.0
 	 */
 	public function __construct() {
-		$this->wp_bitly_auth    = new Wp_Bitly_Auth();
-		$this->wp_bitly_options = new Wp_Bitly_Options();
-		$this->wp_bitly_logger  = new Wp_Bitly_Logger();
-		$this->wp_bitly_api     = new Wp_Bitly_Api();
-	}
+		$this->wp_bitly_auth = new Wp_Bitly_Auth(); 
+        $this->wp_bitly_options = new Wp_Bitly_Options(); 
+        $this->wp_bitly_logger = new Wp_Bitly_Logger(); 
+        $this->wp_bitly_api = new Wp_Bitly_Api(); 
+	}	
 
 
 	/**
 	 * Generates the shortlink for the post specified by $post_id.
 	 *
 	 * @since   0.1
-	 * @param   int  $post_id Identifies the post being shortened.
-	 * @param   bool $bypass True bypasses the link expand API check.
-	 * @return  bool|string  Returns the shortlink on success.
+	 * @param   int $post_id Identifies the post being shortened
+	 * @param   bool $bypass True bypasses the link expand API check
+	 * @return  bool|string  Returns the shortlink on success
 	 */
-	public function wpbitly_generate_shortlink( $post_id, $bypass = false ) {
 
-		// Token hasn't been verified, bail.
-		if ( ! $this->wp_bitly_auth->is_authorized() ) {
-			return false;
-		}
+	public function wpbitly_generate_shortlink($post_id, $bypass = false)
+	{
 
-		// Verify this is a post we want to generate short links for.
-		if ( ! in_array( get_post_status( $post_id ), array( 'publish', 'future', 'private' ), true ) ) {
-			return false;
-		}
+	    // Token hasn't been verified, bail
+	    if (!$this->wp_bitly_auth->isAuthorized()) {
+	        return false;
+	    }
 
-		// We made it this far? Let's get a shortlink.
-		$permalink      = get_permalink( $post_id );
-		$shortlink      = get_post_meta( $post_id, '_wpbitly', true );
-		$token          = $this->wp_bitly_options->get_option( 'oauth_token' );
-		$default_domain = $this->wp_bitly_options->get_option( 'default_domain' );
-		$default_group  = $this->wp_bitly_options->get_option( 'default_group' );
+	    // Verify this is a post we want to generate short links for
+	    if (!in_array(get_post_status($post_id), array('publish', 'future', 'private'))) {
+	        return false;
+	    }
 
-		if ( ! empty( $shortlink ) && ! $bypass ) {
-			$url      = $this->wp_bitly_api->wpbitly_api( 'expand' );
-			$data     = array( 'bitlink_id' => $shortlink );
-			$response = $this->wp_bitly_api->wpbitly_post( $url, $token, $data );
+	    // We made it this far? Let's get a shortlink
+	    $permalink = get_permalink($post_id);
+	    $shortlink = get_post_meta($post_id, '_wpbitly', true);
+	    $token = $this->wp_bitly_options->get_option('oauth_token');
+		$default_domain = $this->wp_bitly_options->get_option('default_domain');
+		$default_group = $this->wp_bitly_options->get_option('default_group');
 
-			$this->wp_bitly_logger->wpbitly_debug_log( $response, '/expand/' );
+	    if (!empty($shortlink) && !$bypass) {
+	        $url = $this->wp_bitly_api->wpbitly_api('expand');
+			$data = array("bitlink_id" => $shortlink);
+	        $response = $this->wp_bitly_api->wpbitly_post($url,$token,$data);
 
-			if ( is_array( $response ) && $permalink === $response['long_url'] ) {
-				update_post_meta( $post_id, '_wpbitly', $shortlink );
-				return $shortlink;
-			}
-		}
+	        $this->wp_bitly_logger->wpbitly_debug_log($response, '/expand/');
 
-		$url     = $this->wp_bitly_api->wpbitly_api( 'shorten' );
-		$options = array( 'long_url' => $permalink );
-		if ( $default_domain ) {
-			$options['domain'] = $default_domain;
-		}
-		if ( $default_group ) {
-			$options['group_guid'] = $default_group;
-		}
+	        if (is_array($response) && $permalink == $response['long_url']) {
+	            update_post_meta($post_id, '_wpbitly', $shortlink);
+	            return $shortlink;
+	        }
+	    }
 
-		$response = $this->wp_bitly_api->wpbitly_post( $url, $token, $options );
-		if ( ! $response || empty( $response ) ) {
-			$response = $this->wp_bitly_api->wpbitly_post( $url, $token, $options );
-		}
+	    $url = $this->wp_bitly_api->wpbitly_api('shorten');
+            $options = array("long_url" => $permalink);
+            if($default_domain){
+                $options['domain']=$default_domain;
+            }
+            if($default_group){
+                $options['group_guid']=$default_group;
+            }
+            
+	    $response = $this->wp_bitly_api->wpbitly_post($url,$token,$options);
+		if (!$response || empty($response)) $response = $this->wp_bitly_api->wpbitly_post($url,$token,$options);
 
-		$this->wp_bitly_logger->wpbitly_debug_log( $response, '/shorten/' );
+	    $this->wp_bitly_logger->wpbitly_debug_log($response, '/shorten/');
 
-		if ( is_array( $response ) ) {
-			$shortlink = $response['link'];
-			update_post_meta( $post_id, '_wpbitly', $shortlink );
-		}
+	    if (is_array($response)) {
+	        $shortlink = $response['link'];
+	        update_post_meta($post_id, '_wpbitly', $shortlink);
+	    }
 
-		return $shortlink ? $shortlink : false;
+	    return $shortlink ?: false;
 	}
 
 	/**
 	 * Short circuits the `pre_get_shortlink` filter.
 	 *
 	 * @since   0.1
-	 * @param   bool       $original False if no shortlink generated.
-	 * @param   int|object $post     Current $post->ID or post object, or 0 for the current post.
-	 * @param   bool       $force    Whether to force shortlink generation.
-	 * @return  string|mixed A shortlink if generated, $original if not.
+	 * @param   bool $original False if no shortlink generated
+	 * @param   int $post_id Current $post->ID, or 0 for the current post
+	 * @return  string|mixed A shortlink if generated, $original if not
 	 */
-	public function wpbitly_get_shortlink( $original, $post, $force = false ) {
+	public function wpbitly_get_shortlink($original, $post, $force = false)
+	{
 
-		// Avoid creating shortlinks during bulk edit.
-		$nonce = isset( $_REQUEST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ) : '';
-		if ( isset( $_GET['bulk_edit'] ) && wp_verify_nonce( $nonce, 'bulk-posts' ) ) {
-			return;
-		}
+		// Avoid creating shortlinks during bulk edit
+		if( isset( $_GET['bulk_edit'] ) ) return;
 
-		// Avoid creating shortlinks during an autosave.
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-			return;
-		}
+	    // Avoid creating shortlinks during an autosave
+	    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+	        return;
+	    }
 
-		if ( is_object( $post ) ) {
+		if (is_object($post)) {
 			$post_id = $post->ID;
-		} elseif ( is_integer( $post ) ) {
+		} else if (is_integer($post)) {
 			$post_id = $post;
 		} else {
 			$post_id = 0;
 		}
+	    
+	    $shortlink = false;
 
-		$shortlink = false;
+	    // or for revisions
+	    if (wp_is_post_revision($post_id)) {
+	        return;
+	    }
 
-		// Or for revisions.
-		if ( wp_is_post_revision( $post_id ) ) {
-			return;
-		}
+	    if (0 == $post_id) {
+	        $post = get_post();
+	        if (is_object($post) && !empty($post->ID)) {
+	            $post_id = $post->ID;
+	        }
+	    }
 
-		if ( 0 === $post_id ) {
-			$post = get_post();
-			if ( is_object( $post ) && ! empty( $post->ID ) ) {
-				$post_id = $post->ID;
-			}
-		}
+	    if ($post_id) {
+	        $shortlink = get_post_meta($post_id, '_wpbitly', true);
 
-		if ( $post_id ) {
-			$shortlink = get_post_meta( $post_id, '_wpbitly', true );
+	        if (!$shortlink && (in_array(get_post_type($post_id), $this->wp_bitly_options->get_option('post_types')) || $force)) {
+                    
+	            $shortlink = $this->wpbitly_generate_shortlink($post_id);
 
-			if ( ! $shortlink && ( in_array( get_post_type( $post_id ), $this->wp_bitly_options->get_option( 'post_types' ), true ) || $force ) ) {
-
-				$shortlink = $this->wpbitly_generate_shortlink( $post_id );
-
-				if ( $shortlink && ! get_post_meta( $post_id, '_wpbitly', true ) ) {
-					update_post_meta( $post_id, '_wpbitly', $shortlink );
+				if ($shortlink && !get_post_meta($post_id, '_wpbitly', true)) {
+					update_post_meta($post_id, '_wpbitly', $shortlink);
 				}
-			}
-		}
 
-		return $shortlink ? $shortlink : $original;
+	        }
+	    }
+
+	    return $shortlink ?: $original;
 	}
 
 	/**
-	 * Register the shortcode.
+	 * Register the shortcode
 	 *
 	 * @since   2.6.0
+	 * @param   array $atts Default shortcode attributes
 	 */
 	public function wpbitly_register_shortlink() {
-		add_shortcode( 'wpbitly', array( $this, 'wpbitly_shortlink' ) );
+		add_shortcode('wpbitly', array($this,'wpbitly_shortlink'));
 	}
 
 	/**
 	 * This can be used as a direct php call within a theme or another plugin. It also handles the [wp_bitly] shortcode.
 	 *
 	 * @since   0.1
-	 * @param   array $atts Default shortcode attributes.
-	 * @return  string The shortlink output HTML.
+	 * @param   array $atts Default shortcode attributes
 	 */
-	public function wpbitly_shortlink( $atts = array() ) {
+	public function wpbitly_shortlink($atts = array())
+	{
 
-		$output = '';
 
-		$post    = get_post();
-		$post_id = ( is_object( $post ) && ! empty( $post->ID ) ) ? $post->ID : '';
+	    $output = '';
 
-		$defaults = array(
-			'text'    => '',
-			'title'   => '',
-			'before'  => '',
-			'after'   => '',
-			'post_id' => $post_id,
-		);
+	    $post = get_post();
+	    $post_id = (is_object($post) && !empty($post->ID)) ? $post->ID : '';
 
-		$shortcode_atts = shortcode_atts( $defaults, $atts );
-		$text           = $shortcode_atts['text'];
-		$title          = $shortcode_atts['title'];
-		$before         = $shortcode_atts['before'];
-		$after          = $shortcode_atts['after'];
-		$post_id        = $shortcode_atts['post_id'];
+	    $defaults = array(
+	        'text' => '',
+	        'title' => '',
+	        'before' => '',
+	        'after' => '',
+	        'post_id' => $post_id
+	    );
 
-		if ( ! $post_id ) {
-			return $output;
-		}
+	    extract(shortcode_atts($defaults, $atts));
+	    if (!$post_id) {
+	        return $output;
+	    }
 
-		$permalink = get_permalink( $post_id );
-		$shortlink = $this->wpbitly_get_shortlink( $permalink, $post_id, true );
+	    $permalink = get_permalink($post_id);
+	    $shortlink = $this->wpbitly_get_shortlink($permalink, $post_id, true);
 
-		if ( empty( $text ) ) {
-			$text = $shortlink;
-		}
+	    if (empty($text)) {
+	        $text = $shortlink;
+	    }
 
-		if ( empty( $title ) ) {
-			$title = the_title_attribute(
-				array(
-					'echo' => false,
-				)
-			);
-		}
+	    if (empty($title)) {
+	        $title = the_title_attribute(array(
+	            'echo' => false
+	        ));
+	    }
 
-		if ( ! empty( $shortlink ) ) {
-			$output = apply_filters( 'the_shortlink', sprintf( '<a rel="shortlink" href="%s" title="%s">%s</a>', esc_url( $shortlink ), esc_attr( $title ), esc_html( $text ) ), $shortlink, $text, $title );
-			$output = $before . $output . $after;
-		}
+	    if (!empty($shortlink)) {
+	        $output = apply_filters('the_shortlink', sprintf('<a rel="shortlink" href="%s" title="%s">%s</a>', esc_url($shortlink), esc_attr($title), esc_html($text)), $shortlink, $text, $title);
+	        $output = $before . $output . $after;
+	    }
 
-		return $output;
+	    return $output;
 	}
+
+	
+
 }
+

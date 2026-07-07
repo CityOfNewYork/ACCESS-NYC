@@ -1,5 +1,5 @@
 {
-	"name": "wpengine/advanced-custom-fields",
+	"name": "wp-engine/advanced-custom-fields",
 	"description": "Advanced Custom Fields",
 	"type": "wordpress-plugin",
 	"license": "GPLv2 or later",
@@ -14,13 +14,7 @@
 		}
 	],
 	"config": {
-		"optimize-autoloader": false,
-		"classmap-authoritative": false
-	},
-	"scripts": {
-		"post-autoload-dump": [
-			"sed -i.bak '/InstalledVersions.php/d' vendor/composer/autoload_static.php && rm -f vendor/composer/autoload_static.php.bak"
-		]
+		"optimize-autoloader": true
 	},
 	"require": {}
 }

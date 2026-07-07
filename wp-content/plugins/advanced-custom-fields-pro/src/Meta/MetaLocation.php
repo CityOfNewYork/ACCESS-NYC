@@ -1,12 +1,11 @@
 <?php
 /**
- * @package ACF
- * @author  WP Engine
+ * A class that can be extended to add support
+ * for different meta types/locations in ACF.
  *
- * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
- * "ACF" is a trademark of WP Engine.
- * Licensed under the GNU General Public License v2 or later.
- * https://www.gnu.org/licenses/gpl-2.0.html
+ * @package    AdvancedCustomFields
+ * @subpackage Meta
+ * @author     WP Engine
  */
 
 namespace ACF\Meta;
