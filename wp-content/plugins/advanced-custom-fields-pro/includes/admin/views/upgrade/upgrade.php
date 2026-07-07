@@ -1,13 +1,12 @@
 <?php
 /**
- * @package ACF
- * @author  WP Engine
+ * Admin Database Upgrade
  *
- * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
- * "ACF" is a trademark of WP Engine.
- * Licensed under the GNU General Public License v2 or later.
- * https://www.gnu.org/licenses/gpl-2.0.html
+ * Shows the databse upgrade process.
+ *
+ * @package ACF
  */
+
 ?>
 <style type="text/css">
 	

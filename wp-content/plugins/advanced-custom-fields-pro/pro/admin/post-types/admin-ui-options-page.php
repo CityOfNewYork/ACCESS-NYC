@@ -1,12 +1,9 @@
 <?php
 /**
- * @package ACF
- * @author  WP Engine
+ * ACF Admin Post Type Class
  *
- * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
- * "ACF" is a trademark of WP Engine.
- * Licensed under the GNU General Public License v2 or later.
- * https://www.gnu.org/licenses/gpl-2.0.html
+ * @package    ACF
+ * @subpackage Admin
  */
 
 if ( ! class_exists( 'ACF_Admin_UI_Options_Page' ) ) :

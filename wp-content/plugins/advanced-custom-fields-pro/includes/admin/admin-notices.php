@@ -1,12 +1,11 @@
 <?php
 /**
- * @package ACF
- * @author  WP Engine
+ * ACF Admin Notices
  *
- * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
- * "ACF" is a trademark of WP Engine.
- * Licensed under the GNU General Public License v2 or later.
- * https://www.gnu.org/licenses/gpl-2.0.html
+ * Functions and classes to manage admin notices.
+ *
+ * @date    10/1/19
+ * @since   5.7.10
  */
 
 // Exit if accessed directly.
