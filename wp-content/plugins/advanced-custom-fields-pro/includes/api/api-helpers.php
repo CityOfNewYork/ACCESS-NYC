@@ -1,4 +1,13 @@
 <?php
+/**
+ * @package ACF
+ * @author  WP Engine
+ *
+ * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
+ * "ACF" is a trademark of WP Engine.
+ * Licensed under the GNU General Public License v2 or later.
+ * https://www.gnu.org/licenses/gpl-2.0.html
+ */
 
 /**
  * This function will return true for a non empty array
@@ -687,12 +696,13 @@ function acf_verify_nonce( $value ) {
  *
  * @since   5.2.3
  *
- * @param string  $nonce           The nonce to check.
- * @param string  $action          The action of the nonce.
- * @param boolean $action_is_field If the action is a field, modify the action to match validate the field type.
+ * @param string  $nonce               The nonce to check.
+ * @param string  $action              The action of the nonce.
+ * @param boolean $action_is_field     If the action is a field, modify the action to match validate the field type.
+ * @param string  $expected_field_type Optional field type the resolved field must be when $action_is_field is true. Prevents a nonce minted for one field type from being accepted by an AJAX handler that expects a different one. Defaults to empty (no type validation).
  * @return boolean
  */
-function acf_verify_ajax( $nonce = '', $action = '', $action_is_field = false ) {
+function acf_verify_ajax( $nonce = '', $action = '', $action_is_field = false, $expected_field_type = '' ) {
 	// Bail early if we don't have a nonce to check.
 	if ( empty( $nonce ) && empty( $_REQUEST['nonce'] ) ) {
 		return false;
@@ -707,6 +717,10 @@ function acf_verify_ajax( $nonce = '', $action = '', $action_is_field = false ) 
 		$field = acf_get_field( $action );
 
 		if ( empty( $field['type'] ) ) {
+			return false;
+		}
+
+		if ( ! empty( $expected_field_type ) && $field['type'] !== $expected_field_type ) {
 			return false;
 		}
 
@@ -1287,8 +1301,19 @@ function acf_get_grouped_posts( $args ) {
 
 	// find array of post_type
 	$post_types          = acf_get_array( $args['post_type'] );
-	$post_types_labels   = acf_get_pretty_post_types( $post_types );
-	$is_single_post_type = ( count( $post_types ) == 1 );
+	$is_single_post_type = ( count( $post_types ) === 1 );
+
+	// WordPress 6.8+ sorts post_type arrays for cache key generation
+	// We need to use the same sorted order when processing results
+	if (
+		! $is_single_post_type &&
+		$args['posts_per_page'] !== -1 &&
+		version_compare( get_bloginfo( 'version' ), '6.8', '>=' )
+	) {
+		sort( $post_types );
+	}
+
+	$post_types_labels = acf_get_pretty_post_types( $post_types );
 
 	// attachment doesn't work if it is the only item in an array
 	if ( $is_single_post_type ) {
@@ -2757,6 +2782,61 @@ function acf_current_user_can_edit_post( int $post_id ): bool {
 }
 
 /**
+ * Checks if the current user can edit a given ACF context.
+ *
+ * Handles post, user, term, comment, woo_order, block, and option contexts returned by acf_decode_post_id().
+ *
+ * @since 6.7.2
+ *
+ * @param array  $post_id_info      The result of acf_decode_post_id(), containing 'type' and 'id'.
+ * @param string $options_page_slug Optional. The options page menu slug, used to look up the page's capability.
+ * @return boolean
+ */
+function acf_current_user_can_edit_in_context( array $post_id_info, string $options_page_slug = '' ): bool {
+	$type = $post_id_info['type'] ?? '';
+	$id   = $post_id_info['id'] ?? 0;
+
+	switch ( $type ) {
+		case 'post':
+			return acf_current_user_can_edit_post( (int) $id );
+
+		case 'user':
+			return current_user_can( 'edit_user', (int) $id );
+
+		case 'term':
+			return current_user_can( 'edit_term', (int) $id );
+
+		case 'comment':
+			return current_user_can( 'edit_comment', (int) $id );
+
+		case 'woo_order':
+			return current_user_can( 'edit_shop_orders' ); // phpcs:ignore
+
+		case 'block':
+			return current_user_can( 'edit_posts' );
+
+		case 'option':
+			if ( ! empty( $options_page_slug ) && function_exists( 'acf_get_options_page' ) ) {
+				$page = acf_get_options_page( $options_page_slug );
+
+				if ( ! empty( $page['capability'] ) && ! empty( $page['post_id'] ) ) {
+					// Ensure the page's post_id matches the requested post_id.
+					if ( acf_get_valid_post_id( $page['post_id'] ) !== $id ) {
+						return false;
+					}
+
+					return current_user_can( $page['capability'] );
+				}
+			}
+
+			return current_user_can( 'manage_options' );
+
+		default:
+			return (bool) apply_filters( 'acf/current_user_can_edit_in_context', false, $post_id_info );
+	}
+}
+
+/**
  * acf_get_filesize
  *
  * This function will return a numeric value of bytes for a given filesize string
@@ -3735,28 +3815,32 @@ function acf_encrypt( $data = '' ) {
 }
 
 /**
- * acf_decrypt
- *
- * This function will decrypt an encrypted string using PHP
+ * Decrypts an encrypted string using PHP.
  * https://bhoover.com/using-php-openssl_encrypt-openssl_decrypt-encrypt-decrypt-data/
  *
  * @since   5.5.8
  *
- * @param   $data (string)
- * @return  (string)
+ * @param string $data The string to decrypt.
+ * @return string|false Decrypted string, or false if the payload is malformed or decryption fails.
  */
 function acf_decrypt( $data = '' ) {
-
 	// bail early if no decrypt function
 	if ( ! function_exists( 'openssl_decrypt' ) ) {
-		return base64_decode( $data );
+		return base64_decode( (string) $data );
+	}
+
+	// Treat malformed input as a decrypt failure: list() destructuring below would
+	// otherwise warn on PHP 8 when the payload isn't the "base64(data::iv)" shape.
+	$raw = base64_decode( (string) $data, true );
+	if ( false === $raw || strpos( $raw, '::' ) === false ) {
+		return false;
 	}
 
 	// generate a key
 	$key = wp_hash( 'acf_encrypt' );
 
 	// To decrypt, split the encrypted data from our IV - our unique separator used was "::"
-	list($encrypted_data, $iv) = explode( '::', base64_decode( $data ), 2 );
+	list( $encrypted_data, $iv ) = explode( '::', $raw, 2 );
 
 	// decrypt
 	return openssl_decrypt( $encrypted_data, 'aes-256-cbc', $key, 0, $iv );

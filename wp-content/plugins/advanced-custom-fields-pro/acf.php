@@ -2,21 +2,31 @@
 /**
  * Advanced Custom Fields PRO
  *
- * @package       ACF
- * @author        WP Engine
+ * @package ACF
+ * @author  WP Engine
  *
  * @wordpress-plugin
  * Plugin Name:       Advanced Custom Fields PRO
  * Plugin URI:        https://www.advancedcustomfields.com
  * Description:       Customize WordPress with powerful, professional and intuitive fields.
- * Version:           6.4.0.1
+ * Version:           6.8.5
  * Author:            WP Engine
  * Author URI:        https://wpengine.com/?utm_source=wordpress.org&utm_medium=referral&utm_campaign=plugin_directory&utm_content=advanced_custom_fields
  * Update URI:        https://www.advancedcustomfields.com/pro
  * Text Domain:       acf
  * Domain Path:       /lang
  * Requires PHP:      7.4
- * Requires at least: 6.0
+ * Requires at least: 6.2
+ */
+
+/**
+ * @package ACF
+ * @author  WP Engine
+ *
+ * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
+ * "ACF" is a trademark of WP Engine.
+ * Licensed under the GNU General Public License v2 or later.
+ * https://www.gnu.org/licenses/gpl-2.0.html
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -28,7 +38,6 @@ if ( ! class_exists( 'ACF' ) ) {
 	/**
 	 * The main ACF class
 	 */
-	#[AllowDynamicProperties]
 	class ACF {
 
 		/**
@@ -36,7 +45,7 @@ if ( ! class_exists( 'ACF' ) ) {
 		 *
 		 * @var string
 		 */
-		public $version = '6.4.0.1';
+		public $version = '6.8.5';
 
 		/**
 		 * The plugin settings array.
@@ -58,6 +67,48 @@ if ( ! class_exists( 'ACF' ) ) {
 		 * @var array
 		 */
 		public $instances = array();
+
+		/**
+		 * The loop instance.
+		 *
+		 * @var acf_loop
+		 */
+		public $loop;
+
+		/**
+		 * The revisions instance.
+		 *
+		 * @var acf_revisions
+		 */
+		public $revisions;
+
+		/**
+		 * The fields instance.
+		 *
+		 * @var acf_fields
+		 */
+		public $fields;
+
+		/**
+		 * The form front instance.
+		 *
+		 * @var acf_form_front
+		 */
+		public $form_front;
+
+		/**
+		 * The validation instance.
+		 *
+		 * @var acf_validation
+		 */
+		public $validation;
+
+		/**
+		 * The admin tools instance.
+		 *
+		 * @var acf_admin_tools
+		 */
+		public $admin_tools;
 
 		/**
 		 * A dummy constructor to ensure ACF is only setup once.
@@ -131,6 +182,8 @@ if ( ! class_exists( 'ACF' ) ) {
 				'enable_bidirection'      => true,
 				'enable_block_bindings'   => true,
 				'enable_meta_box_cb_edit' => true,
+				'enable_acf_ai'           => false,
+				'enable_schema'           => false,
 			);
 
 			// Include autoloader.
@@ -161,6 +214,11 @@ if ( ! class_exists( 'ACF' ) ) {
 			acf_new_instance( 'ACF\Meta\Post' );
 			acf_new_instance( 'ACF\Meta\Term' );
 			acf_new_instance( 'ACF\Meta\User' );
+			acf_new_instance( 'ACF\Meta\Option' );
+
+			if ( defined( 'WP_CLI' ) && WP_CLI ) {
+				acf_new_instance( 'ACF\CLI\CLI' );
+			}
 
 			acf_include( 'includes/acf-hook-functions.php' );
 			acf_include( 'includes/acf-field-functions.php' );
@@ -415,6 +473,9 @@ if ( ! class_exists( 'ACF' ) ) {
 			if ( version_compare( get_bloginfo( 'version' ), '6.5', '>=' ) ) {
 				new ACF\Blocks\Bindings();
 			}
+
+			// Initialize ACF AI.
+			acf_new_instance( '\ACF\AI\AI' );
 
 			/**
 			 * Fires after ACF is completely "initialized".

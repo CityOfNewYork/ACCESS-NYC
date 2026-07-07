@@ -1,4 +1,13 @@
 <?php
+/**
+ * @package ACF
+ * @author  WP Engine
+ *
+ * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
+ * "ACF" is a trademark of WP Engine.
+ * Licensed under the GNU General Public License v2 or later.
+ * https://www.gnu.org/licenses/gpl-2.0.html
+ */
 
 if ( ! class_exists( 'acf_field_image' ) ) :
 
@@ -126,13 +135,13 @@ if ( ! class_exists( 'acf_field_image' ) ) :
 				)
 			);
 			?>
-	<div class="show-if-value image-wrap" style="max-width: <?php echo esc_attr( $size_w ); ?>">
+	<div class="show-if-value image-wrap" style="max-width: <?php echo esc_attr( $size_w ); ?>" tabindex="0" role="button" aria-label="<?php esc_attr_e( 'Selected image. Press tab to access image options.', 'acf' ); ?>">
 		<img <?php echo acf_esc_attrs( $img_attrs ); ?> />
 		<div class="acf-actions -hover">
 			<?php if ( $uploader !== 'basic' ) : ?>
-			<a class="acf-icon -pencil dark" data-name="edit" href="#" title="<?php esc_attr_e( 'Edit', 'acf' ); ?>"></a>
+			<a class="acf-icon -pencil dark" data-name="edit" href="#" title="<?php esc_attr_e( 'Edit', 'acf' ); ?>" aria-label="<?php esc_attr_e( 'Edit image', 'acf' ); ?>"></a>
 			<?php endif; ?>
-			<a class="acf-icon -cancel dark" data-name="remove" href="#" title="<?php esc_attr_e( 'Remove', 'acf' ); ?>"></a>
+			<a class="acf-icon -cancel dark" data-name="remove" href="#" title="<?php esc_attr_e( 'Remove', 'acf' ); ?>" aria-label="<?php esc_attr_e( 'Remove image', 'acf' ); ?>"></a>
 		</div>
 	</div>
 	<div class="hide-if-value">
@@ -456,6 +465,85 @@ if ( ! class_exists( 'acf_field_image' ) ) :
 		 */
 		public function format_value_for_rest( $value, $post_id, array $field ) {
 			return acf_format_numerics( $value );
+		}
+
+		/**
+		 * Formats the field value for JSON-LD output.
+		 *
+		 * @since 6.8.0
+		 *
+		 * @param mixed          $value   The value of the field.
+		 * @param integer|string $post_id The ID of the post.
+		 * @param array          $field   The field array.
+		 * @return mixed
+		 */
+		public function format_value_for_jsonld( $value, $post_id, $field ) {
+			if ( empty( $value ) ) {
+				return null;
+			}
+
+			// Get output format with fallback.
+			$output_format = $field['schema_output_format'] ?? '';
+			if ( empty( $output_format ) ) {
+				$property      = $field['schema_property'] ?? '';
+				$output_format = \ACF\AI\GEO\Schema::get_default_output_format( $this->name, $property );
+			}
+
+			// Get the attachment ID.
+			$attachment_id = is_array( $value ) ? ( $value['ID'] ?? 0 ) : (int) $value;
+			if ( ! $attachment_id ) {
+				return null;
+			}
+
+			$url = wp_get_attachment_url( $attachment_id );
+			if ( ! $url ) {
+				return null;
+			}
+
+			// URL format - just return the URL string.
+			if ( 'URL' === $output_format ) {
+				return $url;
+			}
+
+			// ImageObject format - return structured object.
+			$image_object = array(
+				'@type' => 'ImageObject',
+				'url'   => $url,
+			);
+
+			// Add dimensions if available.
+			$metadata = wp_get_attachment_metadata( $attachment_id );
+			if ( ! empty( $metadata['width'] ) ) {
+				$image_object['width'] = (int) $metadata['width'];
+			}
+			if ( ! empty( $metadata['height'] ) ) {
+				$image_object['height'] = (int) $metadata['height'];
+			}
+
+			// Add caption/alt text if available.
+			$alt = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
+			if ( $alt ) {
+				$image_object['caption'] = $alt;
+			}
+
+			// Add name from attachment title.
+			$attachment = get_post( $attachment_id );
+			if ( $attachment && $attachment->post_title ) {
+				$image_object['name'] = $attachment->post_title;
+			}
+
+			return $image_object;
+		}
+
+		/**
+		 * Returns an array of JSON-LD Property output types that are supported by this field type.
+		 *
+		 * @since 6.8
+		 *
+		 * @return string[]
+		 */
+		public function get_jsonld_output_types(): array {
+			return array( 'ImageObject', 'URL' );
 		}
 	}
 
