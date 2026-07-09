@@ -1,0 +1,13 @@
+<?php
+if (!defined('WORDFENCE_VERSION')) { exit; }
+/**
+ * Presents an issue template.
+ */
+echo wfView::create('scanner/text/issue-base', array(
+	'internalType' => 'coreUnknown',
+	'displayType' => __('Unknown Core File', 'wordfence'),
+	'textOutput' => (isset($textOutput) ? $textOutput : null),
+	'textOutputDetailPairs' => array(
+		__('Details', 'wordfence') => '$longMsg',
+	),
+))->render();
