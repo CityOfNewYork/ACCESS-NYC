@@ -236,8 +236,8 @@ class WPML_ACF_Repeater_Shuffle implements \IWPML_Backend_Action {
 		if ( CheckboxUI::isSelected() && is_array( $customFields ) && ! empty( $customFields ) && is_numeric( $postId ) && $postId > 0 ) {
 			foreach ( $customFields as $key => $value ) {
 				if ( isset( $this->field_state->getStateBefore()[ $key ] )
-					 && $this->isChildOfRepeaterField( $key, $postId )
-					 && $this->get_keys_for_meta_value_changed( $key, $value )
+						&& $this->isChildOfRepeaterField( $key, $postId )
+						&& $this->get_keys_for_meta_value_changed( $key, $value )
 				) {
 					$customFields[ $key ] = $this->field_state->getStateBefore()[ $key ];
 				}
@@ -257,15 +257,16 @@ class WPML_ACF_Repeater_Shuffle implements \IWPML_Backend_Action {
 	 */
 	private function isChildOfRepeaterField( $key, $postId ) {
 		$acfFieldObject = get_field_object( $key, $postId );
-		if ( isset( $acfFieldObject['parent'] )
-			 && $acfFieldObject['parent'] > 0 ) {
-			$fieldParent        = get_post( $acfFieldObject['parent'] );
-			$fieldParentContent = maybe_unserialize( $fieldParent->post_content );
-			if ( isset( $fieldParentContent['type'] ) && 'repeater' === $fieldParentContent['type'] ) {
-				return true;
-			}
+		if ( ! isset( $acfFieldObject['parent'] ) ) {
+			return false;
 		}
-		return false;
+
+		$acfFieldParent = acf_get_field( $acfFieldObject['parent'] );
+		if ( ! isset( $acfFieldParent['type'] ) ) {
+			return false;
+		}
+
+		return 'repeater' === $acfFieldParent['type'];
 	}
 
 	private function calculateHash( $post_id ) {
@@ -273,7 +274,11 @@ class WPML_ACF_Repeater_Shuffle implements \IWPML_Backend_Action {
 			return Fields::isWrapper( $field ) || Relation::propEq( 'type', 'group', $field );
 		};
 
-		// $normalize :: ( array|false ) -> array
+		/**
+		 * @param array|false $fields
+		 *
+		 * @return array
+		 */
 		$normalize = Logic::ifElse( Logic::isArray(), Fns::identity(), Fns::always( [] ) );
 
 		$values = wpml_collect( $normalize( get_field_objects( $post_id ) ) )

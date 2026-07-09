@@ -2,10 +2,10 @@
 /**
  * Plugin Name: WPML String Translation
  * Plugin URI: https://wpml.org/
- * Description: Adds theme and plugins localization capabilities to WPML | <a href="https://wpml.org/documentation/getting-started-guide/string-translation/">Documentation</a> | <a href="https://wpml.org/version/wpml-string-translation-3-3-3/">WPML String Translation 3.3.3 release notes</a>
+ * Description: Adds theme and plugins localization capabilities to WPML | <a href="https://wpml.org/documentation/getting-started-guide/string-translation/">Documentation</a> | <a href="https://wpml.org/version/wpml-string-translation-3-5-3/">WPML String Translation 3.5.3 release notes</a>
  * Author: OnTheGoSystems
  * Author URI: http://www.onthegosystems.com/
- * Version: 3.3.3
+ * Version: 3.5.3
  * Plugin Slug: wpml-string-translation
  *
  * @package WPML\ST
@@ -24,7 +24,7 @@ if ( ! defined( 'WPML_ST_PATH' ) ) {
 
 add_action( 'admin_init', 'wpml_st_verify_wpml' );
 
-//define( 'ICL_SITEPRESS_VERSION', '3.3.3' );
+//define( 'ICL_SITEPRESS_VERSION', '3.5.3' );
 if ( ! defined( 'ICL_SITEPRESS_VERSION' ) ) {
 	return;
 }
@@ -35,7 +35,7 @@ if ( ! WPML_Core_Version_Check::is_ok( dirname( __FILE__ ) . '/wpml-dependencies
 }
 
 
-define( 'WPML_ST_VERSION', '3.3.3' );
+define( 'WPML_ST_VERSION', '3.5.3' );
 
 
 require WPML_ST_PATH . '/inc/functions-load.php';

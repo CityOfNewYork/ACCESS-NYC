@@ -12,7 +12,7 @@ class MixedFieldGroupModesHooks implements \IWPML_Backend_Action {
 	public function add_hooks() {
 		if ( self::shouldDisplayNotice() ) {
 			Hooks::onAction( 'admin_notices' )->then( [ $this, 'displayWarningClassic'] );
-			Hooks::onAction( 'wp_print_scripts' )->then( [ $this, 'displayWarningOnGutenberg' ] );
+			Hooks::onAction( 'admin_head' )->then( [ $this, 'displayWarningOnGutenberg' ] );
 		}
 	}
 

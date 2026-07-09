@@ -541,7 +541,7 @@
     .wpml-strings-widgets-wrap .wpml-string-widgets .postbox .form-in-column .select-and-button-button #icl_st_importpo_existingbutton {
       margin: 0 0 0 10px;
       white-space: nowrap; }
-      .wpml-strings-widgets-wrap .wpml-string-widgets .postbox .form-in-column .select-and-button-button #icl_st_importpo_existingbutton .rtl {
+      .rtl .wpml-strings-widgets-wrap .wpml-string-widgets .postbox .form-in-column .select-and-button-button #icl_st_importpo_existingbutton {
         margin: 0 10px 0 0; }
 
 @media (min-width: 782px) and (max-width: 1200px) {
@@ -753,9 +753,6 @@ html[dir="rtl"] .rtl .wpml-strings-widgets-wrap .wpml-string-widgets .postbox .f
 
 html[dir="rtl"] .rtl #dashboard_wpml_user_properties #action-buttons #wpml-user-properties {
   margin: 0 0 0 16px; }
-
-html[dir="rtl"] .rtl .wpml-picker-container .wp-picker-container-wrap {
-  padding: 5px 10px 0 2px; }
 
 html[dir="rtl"] .rtl .wpml-picker-container .wp-picker-label {
   padding: 0 0 0 24px; }
@@ -1348,6 +1345,8 @@ label[for="wpml-cdl-set-default"] {
     word-break: break-word; }
   #icl_string_translations_wrap #icl_string_translations.widefat thead td.check-column, #icl_string_translations_wrap #icl_string_translations.widefat tfoot td.check-column {
     padding: 8px 10px; }
+  #icl_string_translations_wrap tfoot input[type="checkbox"] {
+    margin-right: 0; }
 
 .wpml-strings-widgets-wrap {
   margin: 48px 0 0; }

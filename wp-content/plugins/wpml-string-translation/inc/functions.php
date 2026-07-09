@@ -16,7 +16,7 @@ add_action( 'plugins_loaded', 'icl_st_init' );
 function icl_st_init() {
 	global $sitepress_settings, $sitepress, $pagenow, $authordata;
 
-	if ( empty( $sitepress_settings['setup_complete'] ) || ( $pagenow === 'site-new.php' && isset( $_REQUEST['action'] ) && 'add-site' === $_REQUEST['action'] ) ) {
+	if ( empty( $sitepress_settings['setup_complete'] ) || ( 'site-new.php' === $pagenow && isset( $_REQUEST['action'] ) && 'add-site' === $_REQUEST['action'] ) ) {
 		return;
 	}
 
@@ -373,13 +373,15 @@ function icl_unregister_string( $context, $name ) {
 
 	if ( $string_id ) {
 		/**
-		 * This action is is fired before several strings are deleted at once.
+		 * This action is fired before several strings are deleted at once.
 		 *
 		 * @param array $string_ids Here containing only the single string that is deleted.
 		 *
 		 * @since 3.0.0
 		 */
 		do_action( 'wpml_st_before_remove_strings', [ $string_id ] );
+
+		wpml_st_flush_string_cache_for_ids( [ $string_id ] );
 
 		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}icl_strings WHERE id=%d", $string_id ) );
 		$wpdb->query(
@@ -415,14 +417,20 @@ function icl_unregister_string( $context, $name ) {
 function wpml_unregister_string_multi( array $string_ids ) {
 	global $wpdb;
 
+	if ( empty( $string_ids ) ) {
+		return;
+	}
+
 	/**
-	 * This action is is fired before several strings are deleted at once.
+	 * This action is fired before several strings are deleted at once.
 	 *
 	 * @param array $string_ids
 	 *
 	 * @since 3.0.0
 	 */
 	do_action( 'wpml_st_before_remove_strings', $string_ids );
+
+	wpml_st_flush_string_cache_for_ids( $string_ids );
 
 	$str = wpml_prepare_in( $string_ids, '%d' );
 	$wpdb->query(
@@ -445,6 +453,31 @@ function wpml_unregister_string_multi( array $string_ids ) {
 	 * Action that fires after strings are unregistered
 	 */
 	do_action( 'wpml_st_string_unregistered' );
+}
+
+/**
+ * Flushes the string cache for the given string IDs
+ *
+ * @param array $string_ids
+ */
+function wpml_st_flush_string_cache_for_ids( array $string_ids ) {
+	global $wpdb;
+
+	if ( empty( $string_ids ) ) {
+		return;
+	}
+
+	$str      = wpml_prepare_in( $string_ids, '%d' );
+	$contexts = $wpdb->get_col(
+		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		"SELECT DISTINCT context FROM {$wpdb->prefix}icl_strings WHERE id IN ( {$str} ) AND context != ''"
+	);
+
+	foreach ( $contexts as $context ) {
+		$group = 'WPML_Register_String_Filter--' . $context;
+		$cache = new WPML_WP_Cache( $group );
+		$cache->flush_group_cache();
+	}
 }
 
 /**
@@ -920,7 +953,7 @@ function icl_st_update_text_widgets_actions( $old_options, $new_options ) {
 
 	$widget_text = get_option( 'widget_text' );
 	if ( is_array( $widget_text ) ) {
-	    $defaultLang = Languages::getDefaultCode();
+		$defaultLang = Languages::getDefaultCode();
 
 		foreach ( $widget_text as $k => $w ) {
 			if ( isset( $old_options[ $k ]['text'] ) && trim( $old_options[ $k ]['text'] ) && $old_options[ $k ]['text'] != $w['text'] ) {
@@ -1063,52 +1096,6 @@ function icl_is_string_translation( $translation ) {
 	// if we get here assume it's not a string.
 	return false;
 
-}
-
-function icl_translation_add_string_translation( $rid, $translation, $lang_code ) {
-	global $wpdb;
-	foreach ( $translation as $key => $value ) {
-		if ( preg_match( '/string-(.*)/', $key, $match ) ) {
-			$string_id = $match[1];
-
-			$string_translation_id = $wpdb->get_var(
-				$wpdb->prepare(
-					"SELECT id
-                                                      FROM {$wpdb->prefix}icl_string_translations
-                                                      WHERE string_id=%d AND language=%s",
-					$string_id,
-					$lang_code
-				)
-			);
-
-			$md5_when_sent        = $wpdb->get_var(
-				$wpdb->prepare(
-					"	SELECT md5
-																		FROM {$wpdb->prefix}icl_string_status
-                														WHERE rid=%d AND string_translation_id=%d",
-					$rid,
-					$string_translation_id
-				)
-			);
-			$current_string_value = $wpdb->get_var(
-				$wpdb->prepare(
-					"	SELECT value
-																		FROM {$wpdb->prefix}icl_strings
-																		WHERE id=%d",
-					$string_id
-				)
-			);
-			if ( $md5_when_sent == md5( $current_string_value ) ) {
-				$status = ICL_TM_COMPLETE;
-			} else {
-				$status = ICL_TM_NEEDS_UPDATE;
-			}
-			$value = str_replace( '&#0A;', "\n", $value );
-			icl_add_string_translation( $string_id, $lang_code, html_entity_decode( $value ), $status );
-		}
-	}
-
-	return true;
 }
 
 function icl_st_admin_notices_string_updated() {

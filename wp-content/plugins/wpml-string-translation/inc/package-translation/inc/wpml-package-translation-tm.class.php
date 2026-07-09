@@ -75,77 +75,6 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 		return false;
 	}
 
-	/**
-	 * Update translations
-	 *
-	 * @param bool $is_new_package
-	 * @param bool $needs_update - when deleting single field we do not need to change the translation status of the form
-	 *
-	 * @return bool
-	 */
-	public function update_package_translations( $is_new_package, $needs_update = true ) {
-
-		global $iclTranslationManagement;
-
-		$updated = false;
-
-		$package = $this->package;
-		$trid    = $this->get_trid();
-
-		if ( $is_new_package ) {
-			$this->set_language_details();
-
-			return true;
-		}
-
-		$item_md5_translations = $this->get_item_md5_translations( $trid );
-
-		if ( $item_md5_translations ) {
-			$md5 = $iclTranslationManagement->post_md5( $this->package );
-
-			if ( $md5 != $item_md5_translations[0]->md5 ) { // all translations need update
-
-				$translation_package = $iclTranslationManagement->create_translation_package( $this->package );
-
-				foreach ( $item_md5_translations as $translation ) {
-					$translation_id = $translation->translation_id;
-					$previous_state = $this->get_translation_state( $translation );
-
-					$data = array();
-					if ( ! empty( $previous_state ) ) {
-						$data['previous_state'] = serialize( $previous_state );
-					}
-					$data = array(
-						'translation_id'      => $translation_id,
-						'translation_package' => serialize( $translation_package ),
-						'md5'                 => $md5,
-					);
-
-					if ( $needs_update ) {
-						$data['needs_update'] = 1;
-					}
-
-					$update_result = $iclTranslationManagement->update_translation_status( $data );
-
-					$rid = $update_result[0];
-
-					$this->update_translation_job( $rid, $this->package );
-
-					// change job status only when needs update
-					if ( $needs_update ) {
-						$job_id = $this->get_translation_job_id( $rid );
-						if ( $job_id ) {
-							$this->update_translation_job_needs_update( $job_id );
-							$updated = true;
-						}
-					}
-				}
-			}
-		}
-
-		return $updated;
-	}
-
 	private function get_item_md5_translations( $trid ) {
 		global $wpdb;
 
@@ -173,20 +102,6 @@ class WPML_Package_TM extends WPML_Package_TM_Jobs {
 		$previous_state         = $wpdb->get_row( $previous_state_prepare, ARRAY_A );
 
 		return $previous_state;
-	}
-
-	public function add_package_to_basket( $translation_action, $source_language, $target_language ) {
-		if ( ! $this->validate_basket_package_item( $translation_action, $source_language ) ) {
-			return false;
-		}
-
-		if ( $this->is_duplicate_or_do_nothing( $translation_action ) ) {
-			$this->duplicate_or_do_nothing( $translation_action, $target_language );
-		} elseif ( $translation_action == 1 ) {
-			$this->send_package_to_basket( $source_language, $target_language );
-		}
-
-		return true;
 	}
 
 	private function duplicate_package( $package_id ) {

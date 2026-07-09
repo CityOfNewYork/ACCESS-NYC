@@ -3,10 +3,12 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);",
+            "lang": "ru_RU"
          },
          "Not included in String Translation": [
-            "Не включено в Перевод строки"
+            "Не включено в String Translation"
          ],
          "Registered and locked": [
             "Зарегистрировано и заблокировано"
@@ -15,7 +17,7 @@
             "Текст"
          ],
          "Numeric": [
-            "Числовой"
+            "Число"
          ],
          "All Types": [
             "Все типы"
@@ -33,16 +35,16 @@
             "Все (%d)"
          ],
          "Included in String Translation (%d)": [
-            "Включено в перевод строк (%d)"
+            "Включено в String Translation (%d)"
          ],
          "Not included in String Translation (%d)": [
-            "Не включено в Перевод строк (%d)"
+            "Не включено в String Translation (%d)"
          ],
          "This setting is locked by a WPML configuration file.": [
-            "Эта настройка блокируется файлом конфигурации WPML."
+            "Этот параметр заблокирован файлом конфигурации WPML."
          ],
          "Option": [
-            "Вариант"
+            "Параметр"
          ],
          "Value": [
             "Значение"
@@ -51,31 +53,31 @@
             "Тип"
          ],
          "State": [
-            "Государство"
+            "Состояние"
          ],
          "Export as a WPML configuration file": [
-            "Экспорт в файл конфигурации WPML"
+            "Экспортировать как файл конфигурации WPML"
          ],
          "Cancel": [
             "Отмена"
          ],
          "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
-            "Сохраните следующее в файле wpml-config.xml в корне Вашей темы или плагина."
+            "Сохраните следующее в wpml-config.xml в корне вашей темы или плагина."
          ],
          "No options found.": [
-            "Никаких вариантов не найдено."
+            "Параметры не найдены."
          ],
          "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
-            "Убедитесь, что Вы сохранили параметры темы хотя бы один раз. Некоторые темы добавляют их в таблицу wp_options только после того, как пользователь явно сохранит изменения в настройках темы по умолчанию."
+            "Убедитесь, что вы сохранили параметры темы хотя бы один раз. Некоторые темы добавляют их в таблицу wp_options только после того, как пользователь явно сохранит изменения в настройках темы по умолчанию."
          ],
          "Add to String Translation": [
-            "Добавьте к переводу строки"
+            "Добавить в String Translation"
          ],
          "Remove from String Translation": [
-            "Удалите из перевода строки"
+            "Удалить из String Translation"
          ],
          "Included in String Translation": [
-            "Включено в перевод строки"
+            "Включено в String Translation"
          ]
       }
    }

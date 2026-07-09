@@ -3,10 +3,12 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "sv_SE"
          },
          "Not included in String Translation": [
-            "Ej inkluderad i översättningen"
+            "Ingår inte i strängöversättning"
          ],
          "Registered and locked": [
             "Registrerad och låst"
@@ -33,13 +35,13 @@
             "Alla (%d)"
          ],
          "Included in String Translation (%d)": [
-            "Inkluderad i strängöversättning (%d)"
+            "Ingår i strängöversättning (%d)"
          ],
          "Not included in String Translation (%d)": [
-            "Ej inkluderad i strängöversättning (%d)"
+            "Ingår inte i strängöversättning (%d)"
          ],
          "This setting is locked by a WPML configuration file.": [
-            "Inställningen är låst av en WPML-konfigurationsfil."
+            "Denna inställning är låst av en WPML-konfigurationsfil."
          ],
          "Option": [
             "Alternativ"
@@ -51,22 +53,22 @@
             "Typ"
          ],
          "State": [
-            "Tillstånd"
+            "Status"
          ],
          "Export as a WPML configuration file": [
-            "Exportera som WPML-konfigurationsfil"
+            "Exportera som en WPML-konfigurationsfil"
          ],
          "Cancel": [
             "Avbryt"
          ],
          "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
-            "Spara följande i wpml-config.xml i temats eller pluginets rot."
+            "Spara följande till en wpml-config.xml i roten av ditt tema eller tillägg."
          ],
          "No options found.": [
             "Inga alternativ hittades."
          ],
          "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
-            "Spara temainställningar minst en gång. Vissa teman lägger till dessa i wp_options-tabellen först efter att användaren sparar ändringar."
+            "Se till att du har sparat dina temaalternativ minst en gång. Vissa teman lägger bara till dessa i tabellen wp_options efter att användaren uttryckligen har sparat ändringar i temats standardinställningar."
          ],
          "Add to String Translation": [
             "Lägg till i strängöversättning"
@@ -75,7 +77,7 @@
             "Ta bort från strängöversättning"
          ],
          "Included in String Translation": [
-            "Inkluderad i strängöversättning"
+            "Ingår i strängöversättning"
          ]
       }
    }

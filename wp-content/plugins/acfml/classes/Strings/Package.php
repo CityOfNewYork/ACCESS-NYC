@@ -5,16 +5,34 @@ namespace ACFML\Strings;
 use WPML\Element\API\Languages;
 use WPML\FP\Fns;
 use WPML\FP\Obj;
+use WPML\LIB\WP\Cache;
 
 class Package {
 
 	// Deprecated! Use one of the constants below.
 	const KIND_SLUG = 'acf-field-group';
 
+	const FIELD_GROUP_PACKAGE_KIND      = 'ACF Field Group';
 	const FIELD_GROUP_PACKAGE_KIND_SLUG = 'acf-field-group';
-	const CPT_PACKAGE_KIND_SLUG         = 'acf-post-type-labels';
-	const TAXONOMY_PACKAGE_KIND_SLUG    = 'acf-taxonomy-labels';
+	const FIELD_GROUP_PACKAGE_TITLE     = 'Field Group Labels %s';
+
+	const CPT_PACKAGE_KIND      = 'ACF Post Type Labels';
+	const CPT_PACKAGE_KIND_SLUG = 'acf-post-type-labels';
+	const CPT_PACKAGE_TITLE     = 'Post Type Labels for %s';
+
+	const TAXONOMY_PACKAGE_KIND      = 'ACF Taxonomy Labels';
+	const TAXONOMY_PACKAGE_KIND_SLUG = 'acf-taxonomy-labels';
+	const TAXONOMY_PACKAGE_TITLE     = 'Taxonomy Labels for %s';
+
+	const OPTION_PAGE_PACKAGE_KIND      = 'ACF Options Page Labels';
 	const OPTION_PAGE_PACKAGE_KIND_SLUG = 'acf-options-page-labels';
+	const OPTION_PAGE_PACKAGE_TITLE     = 'Options Page Labels for %s';
+
+	const OPTION_PACKAGE_KIND          = 'ACF Options';
+	const OPTION_PACKAGE_KIND_SLUG     = 'acf-options';
+	const OPTION_PACKAGE_TITLE         = 'ACF Options Values for %s';
+	const OPTION_PACKAGE_TITLE_DEFAULT = 'ACF Options Values';
+	const OPTION_PACKAGE_NAMESPACE     = 'options';
 
 	const STATUS_ST_INACTIVE          = 'st_inactive';
 	const STATUS_NOT_REGISTERED       = 'not_registered';
@@ -60,31 +78,38 @@ class Package {
 		switch ( $this->kind ) {
 			case self::CPT_PACKAGE_KIND_SLUG:
 				return [
-					'kind'      => 'ACF Post Type Labels',
+					'kind'      => self::CPT_PACKAGE_KIND,
 					'kind_slug' => self::CPT_PACKAGE_KIND_SLUG,
 					'name'      => $this->packageId,
-					'title'     => 'Post Type Labels for ' . $this->packageId,
+					'title'     => sprintf( self::CPT_PACKAGE_TITLE, $this->packageId ),
 				];
 			case self::TAXONOMY_PACKAGE_KIND_SLUG:
 				return [
-					'kind'      => 'ACF Taxonomy Labels',
+					'kind'      => self::TAXONOMY_PACKAGE_KIND,
 					'kind_slug' => self::TAXONOMY_PACKAGE_KIND_SLUG,
 					'name'      => $this->packageId,
-					'title'     => 'Taxonomy Labels for ' . $this->packageId,
+					'title'     => sprintf( self::TAXONOMY_PACKAGE_TITLE, $this->packageId ),
 				];
 			case self::OPTION_PAGE_PACKAGE_KIND_SLUG:
 				return [
-					'kind'      => 'ACF Options Page Labels',
+					'kind'      => self::OPTION_PAGE_PACKAGE_KIND,
 					'kind_slug' => self::OPTION_PAGE_PACKAGE_KIND_SLUG,
 					'name'      => $this->packageId,
-					'title'     => 'Options Page Labels for ' . $this->packageId,
+					'title'     => sprintf( self::OPTION_PAGE_PACKAGE_TITLE, $this->packageId ),
+				];
+			case self::OPTION_PACKAGE_KIND_SLUG:
+				return [
+					'kind'      => self::OPTION_PACKAGE_KIND,
+					'kind_slug' => self::OPTION_PACKAGE_KIND_SLUG,
+					'name'      => $this->packageId,
+					'title'     => self::OPTION_PACKAGE_NAMESPACE === $this->packageId ? self::OPTION_PACKAGE_TITLE_DEFAULT : sprintf( self::OPTION_PACKAGE_TITLE, $this->packageId ),
 				];
 			default:
 				return [
-					'kind'      => 'ACF Field Group',
+					'kind'      => self::FIELD_GROUP_PACKAGE_KIND,
 					'kind_slug' => self::FIELD_GROUP_PACKAGE_KIND_SLUG,
 					'name'      => $this->packageId,
-					'title'     => 'Field Group Labels ' . $this->packageId,
+					'title'     => sprintf( self::FIELD_GROUP_PACKAGE_TITLE, $this->packageId ),
 				];
 		}
 	}
@@ -145,7 +170,7 @@ class Package {
 	 *
 	 * @return string
 	 */
-	private static function getStringName( $value, $meta ) {
+	public static function getStringName( $value, $meta ) {
 		return $meta['namespace'] . '-' . $meta['id'] . '-' . $meta['key'] . '-' . md5( $value );
 	}
 
@@ -154,6 +179,11 @@ class Package {
 	 */
 	private function getWpmlPackage() {
 		return Factory::createWpmlPackage( $this->getPackageData() );
+	}
+
+	public function flushCache() {
+		$this->getWpmlPackage()->flush_cache();
+		Cache::flushGroup( 'WPML_ST_CACHE' );
 	}
 
 	/**

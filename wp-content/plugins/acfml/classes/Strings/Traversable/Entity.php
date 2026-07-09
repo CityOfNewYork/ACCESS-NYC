@@ -3,6 +3,7 @@
 namespace ACFML\Strings\Traversable;
 
 use ACFML\Strings\Transformer\Transformer;
+use WPML\FP\Obj;
 
 // phpcs:ignore PHPCompatibility.Interfaces.InternalInterfaces.traversableFound
 abstract class Entity implements Traversable {
@@ -11,7 +12,7 @@ abstract class Entity implements Traversable {
 	protected $data = [];
 
 	/** @var string $idKey */
-	protected $idKey = 'ID';
+	protected $idKey = 'key';
 
 	public function __construct( array $data, array $context = [] ) {
 		$this->data = $this->prepareData( $data, $context );
@@ -31,11 +32,12 @@ abstract class Entity implements Traversable {
 
 	/**
 	 * @param Transformer $transformer
+	 * @param string|null $context
 	 *
 	 * @return array
 	 */
-	public function traverse( Transformer $transformer ) {
-		foreach ( $this->getConfig() as $config ) {
+	public function traverse( Transformer $transformer, $context = null ) {
+		foreach ( $this->getFilteredConfig( $context ) as $config ) {
 			$key = $config['key'];
 
 			if ( isset( $this->data[ $key ] ) ) {
@@ -62,6 +64,26 @@ abstract class Entity implements Traversable {
 	 * @return array
 	 */
 	abstract protected function getConfig();
+
+	/**
+	 * @param string|null $context
+	 *
+	 * @return array
+	 */
+	protected function getFilteredConfig( $context = null ) {
+		$config = $this->getConfig();
+
+		if ( ! $context ) {
+			return $config;
+		}
+
+		return wpml_collect( $config )
+			->filter( function( $configItem ) use ( $context ) {
+				return Obj::prop( 'context', $configItem ) && in_array( $context, Obj::prop( 'context', $configItem ), true );
+			} )
+			->values()
+			->toArray();
+	}
 
 	/**
 	 * @param array $config

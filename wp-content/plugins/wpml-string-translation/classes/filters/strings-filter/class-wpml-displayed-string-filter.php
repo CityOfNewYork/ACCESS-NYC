@@ -29,7 +29,7 @@ class WPML_Displayed_String_Filter {
 	/**
 	 * Translate by name and context.
 	 *
-	 * @param string|bool   $untranslated_text Untranslated text.
+	 * @param string|bool  $untranslated_text Untranslated text.
 	 * @param string       $name Name of the string.
 	 * @param string|array $context Context.
 	 * @param null|boolean $has_translation If string has translation.
@@ -69,15 +69,18 @@ class WPML_Displayed_String_Filter {
 
 	/**
 	 * Truncates a string to the maximum string table column width.
+	 * Note: if the string is longer than maximum length (currently 160 characters),
+	 * we return the MD5 hash of the string. It will avoid issues on translation processes.
 	 *
 	 * @param string $string String to translate.
-	 *
 	 * @return string
 	 */
 	public static function truncate_long_string( $string ) {
-		return strlen( $string ) > WPML_STRING_TABLE_NAME_CONTEXT_LENGTH
-			? mb_substr( $string, 0, WPML_STRING_TABLE_NAME_CONTEXT_LENGTH )
-			: $string;
+		if ( strlen( $string ) <= WPML_STRING_TABLE_NAME_CONTEXT_LENGTH ) {
+			return $string;
+		}
+
+		return md5( $string );
 	}
 
 	/**

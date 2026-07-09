@@ -43,19 +43,35 @@ class SearchCriteria {
 	/** @var int[] */
 	private $ids = [];
 
+	/**
+	 * Constructor for SearchCriteria
+	 *
+	 * @param int|null                              $kind The kind of search criteria.
+	 * @param int|null                              $type The type of search criteria.
+	 * @param int|null                              $source The source of the search criteria.
+	 * @param string|null                           $domain The domain to search in.
+	 * @param string|null                           $title The title to search for.
+	 * @param string|null                           $translationPriority The translation priority to filter by.
+	 * @param string|null                           $sourceLanguageCode The source language code.
+	 * @param string|null                           $targetLanguageCode The target language code.
+	 * @param int[]                                 $translationStatuses Array of translation statuses to filter by.
+	 * @param int                                   $limit Maximum number of results to return.
+	 * @param int                                   $offset Number of results to skip.
+	 * @param array{by: string, order: string}|null $sorting Sorting criteria.
+	 */
 	public function __construct(
-		int $kind = null,
-		int $type = null,
-		int $source = null,
-		string $domain = null,
-		string $title = null,
-		string $translationPriority = null,
-		string $sourceLanguageCode = null,
-		string $targetLanguageCode = null,
+		?int $kind = null,
+		?int $type = null,
+		?int $source = null,
+		?string $domain = null,
+		?string $title = null,
+		?string $translationPriority = null,
+		?string $sourceLanguageCode = null,
+		?string $targetLanguageCode = null,
 		array $translationStatuses = [],
 		int $limit = 10,
 		int $offset = 0,
-		array $sorting = null
+		?array $sorting = null
 	) {
 		$this->kind                = $kind;
 		$this->type                = $type;
@@ -132,7 +148,7 @@ class SearchCriteria {
 	}
 
 	/**
-	 * @param int[]|array<int, array> $strings
+	 * @param int[]|array<int, array> $strings.
 	 */
 	public function addIds( array $strings ) {
 		$this->ids = array_map(

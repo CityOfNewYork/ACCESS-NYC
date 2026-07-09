@@ -14,25 +14,27 @@ class StringTranslation {
 	private $value;
 
 	/**
-	 * @param StringItem|null $string
-	 * @param string          $language
-	 * @param string          $value
+	 * @param string          $language   The language code.
+	 * @param string          $value      The translation value.
+	 * @param StringItem|null $string     The string item, or null if not available.
+	 *
+	 * @return void
 	 */
 	public function __construct(
-		StringItem $string = null,
-		string     $language,
-		string     $value
+		string $language,
+		string $value,
+		?StringItem $string = null
 	) {
 		$this->setString( $string );
 		$this->setLanguage( $language );
 		$this->setValue( $value );
 	}
 
-	public function setString( StringItem $string ) {
+	public function setString( ?StringItem $string ) {
 		$this->string = $string;
 	}
 
-	public function getString(): StringItem {
+	public function getString(): ?StringItem {
 		return $this->string;
 	}
 
@@ -52,3 +54,4 @@ class StringTranslation {
 		$this->value = $value;
 	}
 }
+

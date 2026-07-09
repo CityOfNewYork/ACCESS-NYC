@@ -1,0 +1,99 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "zh_CN"
+         },
+         "WPML has detected changed or new MO files": [
+            "WPML 检测到已更改或新的 MO 文件"
+         ],
+         "There are new or updated .mo files. WPML needs to scan them to find strings for translation.": [
+            "有新的或已更新的 .mo 文件。WPML 需要扫描它们以查找要翻译的字符串。"
+         ],
+         "Scan translation files": [
+            "扫描翻译文件"
+         ],
+         "Scanned %1$d of %2$d files...": [
+            "已扫描 %1$d 个文件中的 %2$d 个..."
+         ],
+         "Generated files for %1$d of %2$d sites...": [
+            "已为 %2$d 个站点中的 %1$d 个生成文件..."
+         ],
+         "Generated %1$d of %2$d files...": [
+            "已生成 %2$d 个文件中的 %1$d 个..."
+         ],
+         "WPML needs to generate .mo files": [
+            "WPML 需要生成 .mo 文件"
+         ],
+         "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end. However, the folder that should hold these .mo files is not open for writing.": [
+            "WPML String Translation 使用 .mo 文件而不是数据库调用。WPML 需要生成这些 .mo 文件，以便翻译显示在前端。但是，应包含这些 .mo 文件的文件夹未开放写入。"
+         ],
+         "Please use your admin control panel or an FTP program to make the following folder writeable:": [
+            "请使用您的管理控制面板或 FTP 程序使以下文件夹可写入："
+         ],
+         "There was a problem creating the .mo files": [
+            "创建 .mo 文件时出现问题"
+         ],
+         "You can try again now or try again later by going to ": [
+            "您现在可以重试，或者稍后通过转到 "
+         ],
+         "Translations are missing from the front-end until you generate .mo files": [
+            "在您生成 .mo 文件之前，前端缺少翻译"
+         ],
+         "Your site doesn't have the .mo files that WPML needs in order to display translated strings on the front-end. To generate these .mo files, remember to go to ": [
+            "您的站点没有 WPML 显示前端翻译字符串所需的 .mo 文件。要生成这些 .mo 文件，请记住转到 "
+         ],
+         "WPML->Theme and plugins localization.": [
+            "WPML->主题和插件本地化。"
+         ],
+         "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end.": [
+            "WPML String Translation 使用 .mo 文件而不是数据库调用。WPML 需要生成这些 .mo 文件，以便翻译显示在前端。"
+         ],
+         "Try again": [
+            "重试"
+         ],
+         "Generate .mo files": [
+            "生成 .mo 文件"
+         ],
+         "Close this message": [
+            "关闭此消息"
+         ],
+         "Find additional texts that WordPress, the theme and plugins created and choose which ones to translate": [
+            "查找 WordPress、主题和插件创建的其他文本，并选择要翻译的文本"
+         ],
+         "Choose texts for translation": [
+            "选择要翻译的文本"
+         ],
+         "Some of the translations have changed": [
+            "部分翻译已更改"
+         ],
+         "Scan the selected components to make new texts available for translation.": [
+            "扫描选定的组件，使新文本可用于翻译。"
+         ],
+         "Select all": [
+            "全选"
+         ],
+         "Plugins:": [
+            "插件："
+         ],
+         "Themes:": [
+            "主题："
+         ],
+         "Core:": [
+            "核心："
+         ],
+         "Can't find the strings you're looking to translate?": [
+            "找不到您要翻译的字符串？"
+         ],
+         "Most likely you cannot see the strings you want to translate because:": [
+            "您最有可能看不到要翻译的字符串，因为："
+         ],
+         "Texts are not selected for translation": [
+            "未选择文本进行翻译"
+         ]
+      }
+   }
+}

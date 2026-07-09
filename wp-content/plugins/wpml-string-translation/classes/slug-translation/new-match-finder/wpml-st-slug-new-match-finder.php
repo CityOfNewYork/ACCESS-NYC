@@ -55,6 +55,20 @@ class WPML_ST_Slug_New_Match_Finder {
 	}
 
 	private function filter_slug_using_tag( $slug ) {
+		$tag_patterns = [
+			'%year%'     => '([0-9]{4})',
+			'%monthnum%' => '([0-9]{1,2})',
+			'%day%'      => '([0-9]{1,2})',
+			'%hour%'     => '([0-9]{1,2})',
+			'%minute%'   => '([0-9]{1,2})',
+			'%second%'   => '([0-9]{1,2})',
+			'%post_id%'  => '([0-9]+)',
+		];
+
+		foreach ( $tag_patterns as $tag => $pattern ) {
+			$slug = preg_replace( '#' . $tag . '#', $pattern, $slug );
+		}
+
 		if ( preg_match( '#%([^/]+)%#', $slug ) ) {
 			$slug = preg_replace( '#%[^/]+%#', '.+?', $slug );
 		}
@@ -80,9 +94,9 @@ class WPML_ST_Slug_New_Match_Finder {
 			&& $slug !== $slug_translation
 		) {
 			$replace = function( $match ) use ( $slug, $slug_translation ) {
-				return str_replace( $slug, $slug_translation, $match[0]);
+				return str_replace( $slug, $slug_translation, $match[0] );
 			};
-			$match = preg_replace_callback( '#^\(?' . preg_quote( addslashes( $slug ) ) . '\)?/#', $replace, $match );
+			$match   = preg_replace_callback( '#^\(?' . preg_quote( addslashes( $slug ) ) . '\)?/#', $replace, $match );
 		}
 
 		return $match;

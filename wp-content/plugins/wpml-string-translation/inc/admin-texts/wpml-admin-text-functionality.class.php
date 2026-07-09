@@ -2,6 +2,9 @@
 
 abstract class WPML_Admin_Text_Functionality {
 
+	const TRANSLATABLE_NAMES_SETTING    = '_icl_admin_option_names';
+	const TRANSLATABLE_ID_NAMES_SETTING = '_icl_admin_option_id_names';
+
 	final public function is_blacklisted( $option_name ) {
 		global $wp_taxonomies;
 
@@ -43,7 +46,8 @@ abstract class WPML_Admin_Text_Functionality {
 				'wpml-package-translation-db-updates-run',
 				'wpml_media',
 				'wpml_ta_settings',
-				'_icl_admin_option_names',
+				self::TRANSLATABLE_NAMES_SETTING,
+				self::TRANSLATABLE_ID_NAMES_SETTING,
 				'_icl_cache',
 				'icl_sitepress_version',
 				'rewrite_rules',
@@ -113,6 +117,19 @@ abstract class WPML_Admin_Text_Functionality {
 			   || preg_match( $matcher, $option_name ) === 1;
 	}
 
+	/**
+	 * Read information from XML key nodes with or without nested key nodes.
+	 *
+	 * @param array  $keys
+	 * @param string $admin_text_context
+	 * @param string $type
+	 * @param array  $arr_context
+	 * @param array  $arr_type
+	 *
+	 * @return array|false
+	 *
+	 * @deprecated 3.3.4 Only used by WPML_Admin_Text_Import until 3.3.3, kept for backward compatibility.
+	 */
 	protected function read_admin_texts_recursive( $keys, $admin_text_context, $type, &$arr_context, &$arr_type ) {
 		$keys = ! empty( $keys ) && isset( $keys ['attr']['name'] ) ? array( $keys ) : $keys;
 		foreach ( $keys as $key ) {

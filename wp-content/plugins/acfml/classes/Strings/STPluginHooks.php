@@ -42,7 +42,7 @@ class STPluginHooks implements \IWPML_Backend_Action {
 	 * @return bool
 	 */
 	public function hasPackage( $fieldGroup ) {
-		return Package::STATUS_NOT_REGISTERED !== Package::create( $fieldGroup['ID'] )->getStatus();
+		return Package::STATUS_NOT_REGISTERED !== Package::create( $fieldGroup['key'] )->getStatus();
 	}
 
 	/**

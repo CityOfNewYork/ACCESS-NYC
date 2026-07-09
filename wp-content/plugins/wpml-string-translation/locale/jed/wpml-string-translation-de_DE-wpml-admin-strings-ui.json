@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "de_DE"
          },
          "Not included in String Translation": [
             "Nicht in der String-Übersetzung enthalten"
@@ -27,16 +29,16 @@
             "Kommunikationsfehler"
          ],
          "The action failed.": [
-            "Die Klage ist gescheitert."
+            "Die Aktion ist fehlgeschlagen."
          ],
          "All (%d)": [
             "Alle (%d)"
          ],
          "Included in String Translation (%d)": [
-            "In der String-Übersetzung enthalten (%d)"
+            "In String-Übersetzung enthalten (%d)"
          ],
          "Not included in String Translation (%d)": [
-            "Nicht in der String-Übersetzung enthalten (%d)"
+            "Nicht in String-Übersetzung enthalten (%d)"
          ],
          "This setting is locked by a WPML configuration file.": [
             "Diese Einstellung ist durch eine WPML-Konfigurationsdatei gesperrt."
@@ -51,22 +53,22 @@
             "Typ"
          ],
          "State": [
-            "Staat"
+            "Status"
          ],
          "Export as a WPML configuration file": [
-            "Export als WPML-Konfigurationsdatei"
+            "Als WPML-Konfigurationsdatei exportieren"
          ],
          "Cancel": [
             "Abbrechen"
          ],
          "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
-            "Speichern Sie das Folgende in einer wpml-config.xml im Stammverzeichnis Ihres Themes oder Plugins."
+            "Speichern Sie Folgendes in einer wpml-config.xml im Stammverzeichnis Ihres Themes oder Plugins."
          ],
          "No options found.": [
             "Keine Optionen gefunden."
          ],
          "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
-            "Stellen Sie sicher, dass Sie Ihre Themenoptionen mindestens einmal gespeichert haben. Einige Themes fügen diese erst dann der Tabelle wp_options hinzu, wenn der Benutzer die Änderungen an den Theme-Standardeinstellungen explizit gespeichert hat."
+            "Stellen Sie sicher, dass Sie Ihre Theme-Optionen mindestens einmal gespeichert haben. Einige Themes fügen diese erst nach dem expliziten Speichern von Änderungen an den Theme-Standardeinstellungen durch den Benutzer zur Tabelle wp_options hinzu."
          ],
          "Add to String Translation": [
             "Zur String-Übersetzung hinzufügen"
@@ -75,7 +77,7 @@
             "Aus String-Übersetzung entfernen"
          ],
          "Included in String Translation": [
-            "In der String-Übersetzung enthalten"
+            "In String-Übersetzung enthalten"
          ]
       }
    }

@@ -24,11 +24,11 @@ class WPML_Autoregister_Save_Strings {
 	private $lang_of_domain;
 
 	/**
-	 * @param wpdb                    $wpdb
-	 * @param SitePress               $sitepress
-	 * @param WPML_Language_Of_Domain $language_of_domain
+	 * @param wpdb                         $wpdb
+	 * @param SitePress                    $sitepress
+	 * @param WPML_Language_Of_Domain|null $language_of_domain
 	 */
-	public function __construct( wpdb $wpdb, SitePress $sitepress, WPML_Language_Of_Domain $language_of_domain = null ) {
+	public function __construct( wpdb $wpdb, SitePress $sitepress, ?WPML_Language_Of_Domain $language_of_domain = null ) {
 		$this->wpdb           = $wpdb;
 		$this->sitepress      = $sitepress;
 		$this->lang_of_domain = $language_of_domain ? $language_of_domain : new WPML_Language_Of_Domain( $this->sitepress );

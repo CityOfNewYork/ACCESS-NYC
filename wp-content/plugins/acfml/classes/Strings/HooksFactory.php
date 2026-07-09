@@ -2,6 +2,8 @@
 
 namespace ACFML\Strings;
 
+use WPML_ACF;
+
 class HooksFactory implements \IWPML_Backend_Action_Loader, \IWPML_Frontend_Action_Loader {
 
 	/**
@@ -13,7 +15,7 @@ class HooksFactory implements \IWPML_Backend_Action_Loader, \IWPML_Frontend_Acti
 
 		$hooks = [];
 
-		if ( self::isWpmlSetupComplete() ) {
+		if ( WPML_ACF::isWpmlSetupComplete() ) {
 			$hooks[] = new STPluginHooks( $translator );
 		}
 
@@ -34,12 +36,5 @@ class HooksFactory implements \IWPML_Backend_Action_Loader, \IWPML_Frontend_Acti
 	 */
 	public static function isStActivated() {
 		return defined( 'WPML_ST_VERSION' );
-	}
-
-	/**
-	 * @return bool
-	 */
-	public static function isWpmlSetupComplete() {
-		return (bool) apply_filters( 'wpml_setting', false, 'setup_complete' );
 	}
 }

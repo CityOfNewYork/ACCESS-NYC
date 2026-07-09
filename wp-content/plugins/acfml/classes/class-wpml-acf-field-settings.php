@@ -2,7 +2,10 @@
 
 use ACFML\FieldGroup\Mode;
 use ACFML\Helper\FieldGroup;
+use ACFML\Helper\Fields;
+use WPML\FP\Fns;
 use WPML\FP\Obj;
+use WPML\FP\Str;
 
 class WPML_ACF_Field_Settings implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 
@@ -22,6 +25,11 @@ class WPML_ACF_Field_Settings implements \IWPML_Backend_Action, \IWPML_Frontend_
 	private $new_preference_set = false;
 
 	/**
+	 * @var array
+	 */
+	private $subfieldsQueue = [];
+
+	/**
 	 * WPML_ACF_Field_Settings constructor.
 	 *
 	 * @param TranslationManagement $translation_management TranslationManagement object.
@@ -38,7 +46,7 @@ class WPML_ACF_Field_Settings implements \IWPML_Backend_Action, \IWPML_Frontend_
 		add_action( 'acf/render_field_settings', [ $this, 'render_field_settings' ], 10, 1 );
 
 		// handle setting sync preferences on Field Group page.
-		add_filter( 'acf/update_field', [ $this, 'update_field_settings' ], 10, 1 );
+		add_action( 'acf/updated_field', [ $this, 'update_field_settings' ], 10, 1 );
 
 		// when user adds new field value on post edit screen.
 		add_filter( 'acf/update_value', [ $this, 'field_value_updated' ], 10, 4 );
@@ -49,6 +57,9 @@ class WPML_ACF_Field_Settings implements \IWPML_Backend_Action, \IWPML_Frontend_
 
 		// mark field as not migrated yet.
 		add_filter( 'acf/get_field_label', [ $this, 'mark_not_migrated_field' ], 10, 2 );
+
+		// Save changes in translation preferences for existing subfields.
+		add_action( 'shutdown', [ $this, 'processSubfieldsQueue' ] );
 	}
 
 	/**
@@ -74,14 +85,17 @@ class WPML_ACF_Field_Settings implements \IWPML_Backend_Action, \IWPML_Frontend_
 		);
 	}
 
-	public function update_field_settings( $field ) {
-
+	/**
+	 * @param array $field           The ACF field.
+	 * @param bool  $updateSubfields Add to the list of potential subfields to process at shutdown.
+	 */
+	public function update_field_settings( $field, $updateSubfields = true ) {
 		if ( $this->is_field_parsable( $field ) ) {
-			$this->update_existing_subfields( $field );
 			$this->save_field_settings( $field );
+			if ( $updateSubfields ) {
+				$this->maybeAddToSubfieldsQueue( $field );
+			}
 		}
-
-		return $field;
 	}
 
 	/**
@@ -154,6 +168,7 @@ class WPML_ACF_Field_Settings implements \IWPML_Backend_Action, \IWPML_Frontend_
 			}
 			if ( $this->new_preference_set ) {
 				$this->translation_management->save_settings();
+				$this->new_preference_set = false;
 			}
 		}
 	}
@@ -164,7 +179,6 @@ class WPML_ACF_Field_Settings implements \IWPML_Backend_Action, \IWPML_Frontend_
 	 * @param array $cft Custom fields translation preferences.
 	 */
 	public function user_set_sync_preferences( $cft ) {
-
 		foreach ( $cft as $field_name => $field_preferences ) {
 			$post_id      = $this->get_post_with_custom_field( $field_name );
 			$field_object = get_field_object( $field_name, $post_id );
@@ -235,38 +249,20 @@ class WPML_ACF_Field_Settings implements \IWPML_Backend_Action, \IWPML_Frontend_
 	}
 
 	/**
-	 * Find current field subfields and udpate their translation preferences.
+	 * Register a potential subfield to check changes in its translation preferences at shutdown.
 	 *
-	 * @param array $field The ACF field.
+	 * @param array $field
 	 */
-	private function update_existing_subfields( $field ) {
-		if ( isset( $field['parent'] ) ) {
-			$parent_post_type = get_post_type( $field['parent'] );
-			if ( 'acf-field' === $parent_post_type ) { // yes, it is subfield.
-				global $wpdb;
-				$query          = "SELECT * FROM {$wpdb->postmeta} WHERE meta_key LIKE %s";
-				$prepared       = $wpdb->prepare( $query, '%' . $wpdb->esc_like( $field['name'] ) );
-				$query_result   = $wpdb->get_results( $prepared ); // all custom fields from postmeta created on base of this ACF subfield.
-				$handled_fields = [];
-				if ( is_array( $query_result ) && ! empty( $query_result ) ) {
-					foreach ( $query_result as $custom_field ) {
-						if ( ! in_array( $custom_field->meta_key, $handled_fields ) ) {
-							$handled_fields[] = $custom_field->meta_key;
-							if ( substr( $custom_field->meta_key, 0, 1 ) !== '_' ) { // this is not a field with name starting with.
-								$acf_field_object = get_field_object( $custom_field->meta_key, $custom_field->post_id );
-								if ( $acf_field_object ) { // this is valid ACF field.
-									foreach ( $this->tm_setting_index as $setting_index ) {
-										$this->maybe_set_new_preference( $setting_index, $custom_field->meta_key, $field['wpml_cf_preferences'] );
-									}
-									if ( WPML_IGNORE_CUSTOM_FIELD !== (int) $field['wpml_cf_preferences'] ) {
-										$this->update_corresponding_system_field_settings( $acf_field_object, $custom_field->meta_key );
-									}
-								}
-							}
-						}
-					}
-				}
-			}
+	public function maybeAddToSubfieldsQueue( $field ) {
+		if (
+			$this->is_field_parsable( $field )
+			&& isset( $field['parent'] )
+			&& isset( $field['wpml_cf_preferences'] )
+		) {
+			$this->subfieldsQueue[ $field['key'] ] = [
+				'parent'              => $field['parent'],
+				'wpml_cf_preferences' => $field['wpml_cf_preferences'],
+			];
 		}
 	}
 
@@ -282,9 +278,9 @@ class WPML_ACF_Field_Settings implements \IWPML_Backend_Action, \IWPML_Frontend_
 	 * @return void
 	 */
 	private function update_corresponding_system_field_settings( $field, $field_name ) {
-		$fieldGroupId = FieldGroup::getId( Obj::prop( 'parent', $field ) );
-		if ( $fieldGroupId ) {
-			$preference = Mode::LOCALIZATION === Mode::getMode( acf_get_field_group( $fieldGroupId ) ) ? WPML_COPY_ONCE_CUSTOM_FIELD : WPML_COPY_CUSTOM_FIELD;
+		$fieldGroupKey = FieldGroup::getKey( Obj::prop( 'parent', $field ) );
+		if ( $fieldGroupKey ) {
+			$preference = Mode::LOCALIZATION === Mode::getMode( acf_get_field_group( $fieldGroupKey ) ) ? WPML_COPY_ONCE_CUSTOM_FIELD : WPML_COPY_CUSTOM_FIELD;
 
 			$corresponding_field_name = '_' . $field_name;
 			foreach ( $this->tm_setting_index as $setting_index ) {
@@ -358,6 +354,116 @@ class WPML_ACF_Field_Settings implements \IWPML_Backend_Action, \IWPML_Frontend_
 		) {
 			$this->translation_management->settings[ $setting_index ][ $field ] = $preference;
 			$this->new_preference_set = true;
+		}
+	}
+
+	/**
+	 * Process the queque and eventually update the existing subfields translation preferences.
+	 */
+	public function processSubfieldsQueue() {
+		if ( empty( $this->subfieldsQueue ) ) {
+			return;
+		}
+
+		$isLocalEnabled = acf_is_local_enabled();
+		if ( ! $isLocalEnabled ) {
+			acf_enable_local();
+		}
+
+		$patternsByGroup    = [];
+		$getPatternsByGroup = function( $fieldGroupKey ) use ( &$patternsByGroup ) {
+			if ( ! array_key_exists( $fieldGroupKey, $patternsByGroup ) ) {
+				$fieldNamePatterns   = wpml_collect();
+				$getFieldNamePattern = function( $field, $fieldPattern ) use ( $fieldNamePatterns ) {
+					$fieldNamePatterns->put( $field['key'], $fieldPattern );
+					return $field;
+				};
+				Fields::iterate( acf_get_fields( $fieldGroupKey ), $getFieldNamePattern, Fns::identity() );
+				$patternsByGroup[ $fieldGroupKey ] = $fieldNamePatterns->toArray();
+			}
+
+			return $patternsByGroup[ $fieldGroupKey ];
+		};
+
+		// Our field must be inside another field, which has to belong to a group.
+		$getGroupKeyFromParentField = function( $fieldData ) {
+			$parentField = acf_get_field( $fieldData['parent'] );
+			if ( ! $parentField ) {
+				return null;
+			}
+			$grandParentKey = Obj::prop( 'parent', $parentField );
+			if ( ! $grandParentKey ) {
+				return null;
+			}
+			return FieldGroup::getKey( $grandParentKey );
+		};
+
+		foreach ( $this->subfieldsQueue as $fieldKey => $fieldData ) {
+			$fieldGroupKey = $getGroupKeyFromParentField( $fieldData );
+			if ( ! $fieldGroupKey ) {
+				continue;
+			}
+
+			$fieldNamePatternsByKey = $getPatternsByGroup( $fieldGroupKey );
+
+			if ( array_key_exists( $fieldKey, $fieldNamePatternsByKey ) ) {
+				$fieldPattern = $fieldNamePatternsByKey[ $fieldKey ];
+				$this->updateSubfieldsByPatterns( $fieldPattern, $fieldData['wpml_cf_preferences'], $fieldGroupKey );
+			}
+		}
+
+		$this->subfieldsQueue = [];
+		if ( ! $isLocalEnabled ) {
+			acf_disable_local();
+		}
+
+		if ( $this->new_preference_set ) {
+			$this->translation_management->save_settings();
+			$this->new_preference_set = false;
+		}
+	}
+
+	/**
+	 * @param string $fieldPattern  The pattern for existing meta entries for a subfield
+	 * @param int    $preference    The new translation preference for that subfield
+	 * @param string $fieldGroupKey The key of the group housing the subfield
+	 */
+	private function updateSubfieldsByPatterns( $fieldPattern, $preference, $fieldGroupKey ) {
+		$fieldPatterns = [
+			$fieldPattern => (int) $preference,
+		];
+
+		// Update the companion system field unless the subfield isset to "Don't translate".
+		if ( WPML_IGNORE_CUSTOM_FIELD !== (int) $preference ) {
+			$systemFieldPattern                 = '_' . $fieldPattern;
+			$fieldPatterns[ $systemFieldPattern ] = ( Mode::LOCALIZATION === Mode::getMode( acf_get_field_group( $fieldGroupKey ) ) ) ? WPML_COPY_ONCE_CUSTOM_FIELD : WPML_COPY_CUSTOM_FIELD;
+		}
+
+		foreach ( $this->tm_setting_index as $settingIndex ) {
+			$this->updateSubfieldsInIndexByPatterns( $settingIndex, $fieldPatterns );
+		}
+	}
+
+	/**
+	 * @param string             $settingIndex  The index matching WPML settings for posts or terms custom fields
+	 * @param array<string,int>  $fieldPatterns Pairs matching subfield patterns to new translation preferences
+	 */
+	private function updateSubfieldsInIndexByPatterns( $settingIndex, $fieldPatterns ) {
+		$matchByPatterns = function( $fieldName, $storedPreference ) use ( $settingIndex, $fieldPatterns ) {
+			foreach ( $fieldPatterns as $fieldPattern => $newPreference ) {
+				if ( $storedPreference === $newPreference ) {
+					continue;
+				}
+				if ( ! Str::match( '/^' . $fieldPattern . '$/', $fieldName ) ) {
+					continue;
+				}
+				$this->translation_management->settings[ $settingIndex ][ $fieldName ] = $newPreference;
+				$this->new_preference_set = true;
+			}
+		};
+
+		foreach ( $this->translation_management->settings[ $settingIndex ] as $fieldName => $storedPreference ) {
+			$matchByPatterns( $fieldName, $storedPreference );
 		}
 	}
 }

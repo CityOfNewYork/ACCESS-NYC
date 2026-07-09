@@ -143,6 +143,10 @@ class WPML_Admin_Text_Configuration extends WPML_Admin_Text_Functionality {
 	}
 
 	private function reformat_array( $option_value ) {
+		if ( is_object( $option_value ) ) {
+			$option_value = get_object_vars( $option_value );
+		}
+
 		$ret = array();
 		if ( is_array( $option_value ) ) {
 			foreach ( $option_value as $key => $value ) {

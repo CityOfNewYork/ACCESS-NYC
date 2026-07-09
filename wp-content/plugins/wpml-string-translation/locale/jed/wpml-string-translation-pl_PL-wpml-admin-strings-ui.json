@@ -3,19 +3,21 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);",
+            "lang": "pl_PL"
          },
          "Not included in String Translation": [
-            "Nie uwzględniono w tłumaczeniu ciągów znaków"
+            "Nie uwzględniono w String Translation"
          ],
          "Registered and locked": [
-            "Zarejestrowany i zablokowany"
+            "Zarejestrowane i zablokowane"
          ],
          "Text": [
             "Tekst"
          ],
          "Numeric": [
-            "Numeryczny"
+            "Liczbowe"
          ],
          "All Types": [
             "Wszystkie typy"
@@ -33,10 +35,10 @@
             "Wszystkie (%d)"
          ],
          "Included in String Translation (%d)": [
-            "Uwzględnione w tłumaczeniu ciągów znaków (%d)"
+            "Uwzględniono w String Translation (%d)"
          ],
          "Not included in String Translation (%d)": [
-            "Nie uwzględniono w tłumaczeniu ciągów znaków (%d)"
+            "Nie uwzględniono w String Translation (%d)"
          ],
          "This setting is locked by a WPML configuration file.": [
             "To ustawienie jest zablokowane przez plik konfiguracyjny WPML."
@@ -60,22 +62,22 @@
             "Anuluj"
          ],
          "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
-            "Zapisz poniższe ustawienia w pliku wpml-config.xml w katalogu głównym motywu lub wtyczki."
+            "Zapisz poniższe do pliku wpml-config.xml w katalogu głównym swojego motywu lub wtyczki."
          ],
          "No options found.": [
-            "Nie znaleziono żadnych opcji."
+            "Nie znaleziono opcji."
          ],
          "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
-            "Upewnij się, że przynajmniej raz zapisałeś opcje motywu. Niektóre motywy dodają je do tabeli wp_options dopiero po tym, jak użytkownik wyraźnie zapisze zmiany w domyślnych ustawieniach motywu."
+            "Upewnij się, że zapisałeś opcje motywu przynajmniej raz. Niektóre motywy dodają je do tabeli wp_options dopiero po tym, jak użytkownik wyraźnie zapisze zmiany w domyślnych ustawieniach motywu."
          ],
          "Add to String Translation": [
-            "Dodaj do tłumaczenia ciągów znaków"
+            "Dodaj do String Translation"
          ],
          "Remove from String Translation": [
-            "Usuń z tłumaczenia ciąg znaków"
+            "Usuń z String Translation"
          ],
          "Included in String Translation": [
-            "Uwzględnione w tłumaczeniu ciągów znaków"
+            "Uwzględniono w String Translation"
          ]
       }
    }

@@ -75,7 +75,7 @@ abstract class WPML_Slug_Translation_Records {
 		return __CLASS__ . '::' . $this->get_element_type();
 	}
 
-	private function flush_cache() {
+	public function flush_cache() {
 		$cache_group = $this->cache_factory->create_cache_group( $this->get_cache_group() );
 		$cache_group->flush_group_cache();
 	}
@@ -140,10 +140,25 @@ abstract class WPML_Slug_Translation_Records {
 	 * @return int|null
 	 */
 	public function register_slug( $type, $slug ) {
+		/**
+		 * This hook allows to override the source language for translation in:
+		 * - custom post type
+		 * - taxonomy slug
+		 *
+		 * @param ?string $source_lang
+		 * @param string  $type
+		 * @param string  $slug
+		 *
+		 * @since 3.4.2
+		 */
+		$source_lang = apply_filters( 'wpml_st_register_slug_set_source_language', null, $type, $slug );
+
 		$string_id = icl_register_string(
 			self::CONTEXT_WORDPRESS,
 			$this->get_string_name( $type ),
-			$slug
+			$slug,
+			false,
+			$source_lang
 		);
 
 		$this->flush_cache();
