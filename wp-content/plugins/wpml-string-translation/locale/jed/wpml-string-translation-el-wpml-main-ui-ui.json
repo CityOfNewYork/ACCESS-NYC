@@ -3,7 +3,9 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "el"
          },
          "Edit": [
             "Επεξεργασία"
@@ -15,43 +17,43 @@
             "Tab"
          ],
          "Translation to:": [
-            "Μετάφραση προς:"
+            "Μετάφραση σε:"
          ],
          "Copy from original": [
-            "Αντιγραφή πρωτοτύπου"
+            "Αντιγραφή από το πρωτότυπο"
          ],
          "Use Shift+Enter to add a new line.": [
-            "Shift+Enter: νέα γραμμή."
+            "Χρησιμοποιήστε Shift+Enter για να προσθέσετε μια νέα γραμμή."
          ],
          "Original:": [
             "Πρωτότυπο:"
          ],
          "Add %s translation": [
-            "Προσθήκη %s"
+            "Προσθήκη μετάφρασης %s"
          ],
          "Edit %s translation": [
-            "Επεξεργασία %s"
+            "Επεξεργασία μετάφρασης %s"
          ],
          "Add %s translation (the string appears on the site and is not translated)": [
-            "Προσθήκη %s (αμετάφραστο)"
+            "Προσθήκη μετάφρασης %s (η συμβολοσειρά εμφανίζεται στον ιστότοπο και δεν μεταφράζεται)"
          ],
          "Original language %s": [
-            "Γλώσσα πηγής %s"
+            "Πρωτότυπη γλώσσα %s"
          ],
          "Waiting for translator to %s": [
-            "Αναμονή μεταφραστή %s"
+            "Αναμονή για μεταφραστή σε %s"
          ],
          "Translation in progress to %s": [
-            "Μετάφραση σε εξέλιξη %s"
+            "Μετάφραση σε εξέλιξη σε %s"
          ],
          "In basket for translation to %s": [
-            "Σε αναμονή %s"
+            "Στο καλάθι για μετάφραση σε %s"
          ],
          "Translation saved.": [
-            "Αποθήκευση επιτυχής."
+            "Η μετάφραση αποθηκεύτηκε."
          ],
          "Translation update failed.": [
-            "Αποτυχία ενημέρωσης."
+            "Η ενημέρωση μετάφρασης απέτυχε."
          ]
       }
    }

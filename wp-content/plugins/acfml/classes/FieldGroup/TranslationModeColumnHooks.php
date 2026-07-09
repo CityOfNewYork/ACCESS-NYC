@@ -3,6 +3,7 @@
 namespace ACFML\FieldGroup;
 
 use ACFML\Helper\FieldGroup;
+use ACFML\TranslationDataColumnHooks;
 use WPML\LIB\WP\Hooks;
 use function WPML\FP\spreadArgs;
 
@@ -17,11 +18,11 @@ class TranslationModeColumnHooks implements \IWPML_Backend_Action {
 	const COLUMN_HOOK_PRIORITY = 11;
 
 	public function add_hooks() {
-		if ( FieldGroup::isListScreen() ) {
+		if ( FieldGroup::isListScreen() && TranslationDataColumnHooks::shouldRegisterColumn() ) {
 			Hooks::onFilter( 'manage_acf-field-group_posts_columns', self::COLUMN_HOOK_PRIORITY )
-				 ->then( spreadArgs( [ $this, 'translationOptionsColumTitle' ] ) );
+				->then( spreadArgs( [ $this, 'translationOptionsColumTitle' ] ) );
 			Hooks::onAction( 'manage_acf-field-group_posts_custom_column', 10, 2 )
-				 ->then( spreadArgs( [ $this, 'translationOptionsColumContent' ] ) );
+				->then( spreadArgs( [ $this, 'translationOptionsColumContent' ] ) );
 		}
 	}
 
@@ -44,11 +45,13 @@ class TranslationModeColumnHooks implements \IWPML_Backend_Action {
 	 */
 	public function translationOptionsColumContent( $column, $postId ) {
 		if ( self::COLUMN_KEY === $column ) {
+			// phpcs:disable WordPress.XSS.EscapeOutput.OutputNotEscaped
 			echo wpml_collect( [
 				Mode::ADVANCED     => esc_html__( 'Expert', 'acfml' ),
 				Mode::TRANSLATION  => esc_html__( 'Same fields across languages', 'acfml' ),
 				Mode::LOCALIZATION => esc_html__( 'Different fields across languages', 'acfml' ),
 			] )->get( Mode::getMode( acf_get_field_group( $postId ) ), '__' );
+			// phpcs:enable
 		}
 	}
 }

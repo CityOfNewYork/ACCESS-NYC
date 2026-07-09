@@ -8,13 +8,16 @@ use WPML\LIB\WP\Hooks;
 
 class FieldGroupModes implements \IWPML_Backend_Action {
 
-	const NOTICE_GROUP = 'acfml';
-	const NOTICE_ID    = 'field-group-modes';
+	// Before 10, where WPML processes the notices.
+	const NOTICE_PRIORITY = 9;
+	const NOTICE_SCREEN   = 'edit-acf-field-group';
+	const NOTICE_GROUP    = 'acfml';
+	const NOTICE_ID       = 'field-group-modes';
 
 	public function add_hooks() {
-		if( ! wp_doing_ajax() ) {
-			Hooks::onAction( 'shutdown' )
-			     ->then( [ $this, 'onFieldGroupsListNotice' ] );
+		if ( ! wp_doing_ajax() ) {
+			Hooks::onAction( 'admin_notices', self::NOTICE_PRIORITY )
+				->then( [ $this, 'onFieldGroupsListNotice' ] );
 		}
 	}
 
@@ -24,10 +27,17 @@ class FieldGroupModes implements \IWPML_Backend_Action {
 	public function onFieldGroupsListNotice() {
 		if (
 			! function_exists( 'wpml_get_admin_notices' )
+			|| ! function_exists( 'get_current_screen' )
 			|| ! \WPML_ACF::is_acf_active()
 		) {
 			return;
 		}
+
+		$screen = get_current_screen();
+		if ( self::NOTICE_SCREEN !== $screen->id ) {
+			return;
+		}
+
 		if ( $this->hasFieldGroupMissingMode() ) {
 			$this->createNotice( wpml_get_admin_notices() );
 		} else {
@@ -50,10 +60,10 @@ class FieldGroupModes implements \IWPML_Backend_Action {
 			'</a>'
 		) . '</p>';
 
-		$notice  = $notices->create_notice( self::NOTICE_ID, $text, self::NOTICE_GROUP );
+		$notice = $notices->create_notice( self::NOTICE_ID, $text, self::NOTICE_GROUP );
 		$notice->set_hideable( true );
 		$notice->set_css_class_types( [ 'acfml-notice' ] );
-		$notice->set_restrict_to_screen_ids( [ 'edit-acf-field-group' ] );
+		$notice->set_restrict_to_screen_ids( [ self::NOTICE_SCREEN ] );
 		$notices->add_notice( $notice );
 	}
 

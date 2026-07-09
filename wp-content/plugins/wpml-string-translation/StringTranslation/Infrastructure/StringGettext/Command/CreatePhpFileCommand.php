@@ -22,7 +22,10 @@ class CreatePhpFileCommand implements CreateFileCommandInterface {
 	public function run( array $queue, string $filepath ) {
 		$contents = $this->export( $queue );
 		$this->saveFileCommand->run( $filepath, $contents );
-		if ( function_exists( 'opcache_invalidate' ) ) {
+		$restrict_api = (string) ini_get( 'opcache.restrict_api' );
+		if ( function_exists( 'opcache_invalidate' )
+			&& ( ! $restrict_api || stripos( __FILE__, $restrict_api ) === 0 )
+		) {
 			opcache_invalidate( $filepath, true );
 		}
 	}

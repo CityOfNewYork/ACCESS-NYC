@@ -84,6 +84,9 @@ class WPML_ST_String {
 			$this->language = $language;
 			$this->set_property( 'language', $language );
 			$this->update_status();
+
+			$key = md5( $this->get_context() . '_' . $this->get_name() );
+			wp_cache_delete( $key, 'wpml-string-translation' );
 		}
 	}
 
@@ -302,7 +305,9 @@ class WPML_ST_String {
 		 * @deprecated Use wpml_st_add_string_translation instead
 		 */
 		do_action( 'icl_st_add_string_translation', $st_id );
-		do_action( 'wpml_st_add_string_translation', $st_id );
+		do_action( 'wpml_st_add_string_translation', $st_id, $translation_data, $language, $this->string_id );
+
+		$this->flush_cache();
 
 		return $st_id;
 	}
@@ -400,5 +405,41 @@ class WPML_ST_String {
 		}
 
 		return $translation_string;
+	}
+
+	private function flush_cache() {
+		$this->maybe_flush_slug_translation_cache();
+		// Add other cache flush methods here.
+	}
+
+
+	private function maybe_flush_slug_translation_cache() {
+		$string_name = $this->get_name();
+
+		if ( ! $string_name ) {
+			return;
+		}
+
+		$factory = new WPML_Slug_Translation_Records_Factory();
+
+		// Post slug.
+		if ( strpos( $string_name, 'URL slug:' ) !== false ) {
+			$factory->create( WPML_Slug_Translation_Factory::POST )->flush_cache();
+		}
+
+		// Tax slug.
+		if ( strpos( $string_name, 'tax slug' ) !== false ) {
+			$factory->create( WPML_Slug_Translation_Factory::TAX )->flush_cache();
+
+			if ( function_exists( 'wp_cache_supports' )
+				&& wp_cache_supports( 'flush_group' )
+			) {
+				// See WPML_ST_Term_Link_Filter::replace_slug_in_termlink() function.
+				wp_cache_flush_group( WPML_ST_Term_Link_Filter::CACHE_GROUP );
+
+				// See WPML_Tax_Permalink_Filters::cached_filter_tax_permalink() function.
+				wp_cache_flush_group( WPML_Tax_Permalink_Filters::CACHE_GROUP );
+			}
+		}
 	}
 }

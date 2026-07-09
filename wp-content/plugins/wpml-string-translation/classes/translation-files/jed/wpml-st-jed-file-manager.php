@@ -25,4 +25,14 @@ class WPML_ST_JED_File_Manager extends Manager {
 	protected function getDomains() {
 		return $this->domains->getJEDDomains();
 	}
+
+	/**
+	 * @param string $domain
+	 *
+	 * @return bool
+	 */
+	public function handles( $domain ) {
+		return $this->getDomains()->contains( $domain )
+			|| $this->domains->hasNoNativeTranslationFile( $domain );
+	}
 }

@@ -40,7 +40,12 @@ class LoadedMODictionary {
 			$translationsController = \WP_Translation_Controller::get_instance();
 			$reflection = new \ReflectionClass( $translationsController );
 			$property = $reflection->getProperty( 'loaded_files' );
-			$property->setAccessible( true );
+			// setAccessible() is required on PHP < 8.1 to read non-public members.
+			// It became a no-op in PHP 8.1 and was removed in PHP 8.4, so only
+			// call it when running on a version where it exists and is needed.
+			if ( PHP_VERSION_ID < 80100 ) {
+				$property->setAccessible( true );
+			}
 			$loaded_files = $property->getValue( $translationsController );
 
 			foreach ( $loaded_files as $loaded_file => $loaded_file_data ) {

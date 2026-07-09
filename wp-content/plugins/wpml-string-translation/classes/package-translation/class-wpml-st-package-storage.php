@@ -8,7 +8,10 @@
  */
 class WPML_ST_Package_Storage {
 
+	/** @var int */
 	private $package_id;
+
+	/** @var \wpdb */
 	private $wpdb;
 
 	/**
@@ -56,6 +59,7 @@ class WPML_ST_Package_Storage {
 		return $type_or_title_updated || $package_id_or_value_updated;
 	}
 
+	// phpcs:disable WordPress.WP.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.LikeWildcardsInQuery
 	private function set_string_status_to_needs_update_if_translated( $string_id ) {
 		$this->wpdb->query(
 			$this->wpdb->prepare(
@@ -102,10 +106,10 @@ class WPML_ST_Package_Storage {
 		}
 	}
 
+	// phpcs:enable WordPress.WP.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQLPlaceholders.LikeWildcardsInQuery
+
 	private function truncate_long_string( $string ) {
-		return strlen( $string ) > WPML_STRING_TABLE_NAME_CONTEXT_LENGTH
-			? mb_substr( $string, 0, WPML_STRING_TABLE_NAME_CONTEXT_LENGTH )
-			: $string;
+		return WPML_Displayed_String_Filter::truncate_long_string( $string );
 	}
 
 

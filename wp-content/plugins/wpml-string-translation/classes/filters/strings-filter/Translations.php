@@ -16,7 +16,7 @@ class Translations {
 	 * @param TranslationEntity $translation
 	 */
 	public function add( StringEntity $string, TranslationEntity $translation ) {
-		$this->data->attach( $string, $translation );
+		$this->data->offsetSet( $string, $translation );
 	}
 
 
@@ -26,6 +26,6 @@ class Translations {
 	 * @return TranslationEntity|null
 	 */
 	public function get( StringEntity $string ) {
-		return $this->data->contains( $string ) ? $this->data[ $string ] : null;
+		return $this->data->offsetExists( $string ) ? $this->data[ $string ] : null;
 	}
 }

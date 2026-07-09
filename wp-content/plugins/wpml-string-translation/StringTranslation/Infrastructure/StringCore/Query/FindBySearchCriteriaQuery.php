@@ -207,6 +207,7 @@ class FindBySearchCriteriaQuery implements FindBySearchCriteriaQueryInterface {
 				'review_status' => $translationDetails->getReviewStatus(),
 				'translated' => is_array( $translation ) ? $translation['value'] : '',
 				'translator_id' => $translationDetails->getTranslatorId(),
+				'editor_job_id' => $translationDetails->getEditorJobId(),
 			];
 		}
 

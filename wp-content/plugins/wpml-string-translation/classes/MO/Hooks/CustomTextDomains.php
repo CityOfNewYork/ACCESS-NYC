@@ -45,7 +45,7 @@ class CustomTextDomains implements \IWPML_Action {
 		LoadedMODictionary $loadedDictionary,
 		StoragePerLanguageInterface $cache,
 		WPML_Locale $locale,
-		callable $syncMissingFile = null
+		?callable $syncMissingFile = null
 	) {
 		$this->manager          = $file_manager;
 		$this->domains          = $domains;

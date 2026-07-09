@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'ACFML\\Cache\\Flush' => $baseDir . '/classes/Cache/Flush.php',
     'ACFML\\Container\\Config' => $baseDir . '/classes/Container/Config.php',
     'ACFML\\Convertable\\LinkFieldData' => $baseDir . '/classes/Convertable/LinkFieldData.php',
     'ACFML\\Cpt\\HooksFactory' => $baseDir . '/classes/Cpt/HooksFactory.php',
@@ -42,6 +43,10 @@ return array(
     'ACFML\\Notice\\Links' => $baseDir . '/classes/Notice/Links.php',
     'ACFML\\Options' => $baseDir . '/classes/Options.php',
     'ACFML\\OptionsPage\\HooksFactory' => $baseDir . '/classes/OptionsPage/HooksFactory.php',
+    'ACFML\\Options\\CustomNamespacesHooks' => $baseDir . '/classes/Options/CustomNamespacesHooks.php',
+    'ACFML\\Options\\EditorHooks' => $baseDir . '/classes/Options/EditorHooks.php',
+    'ACFML\\Options\\HooksFactory' => $baseDir . '/classes/Options/HooksFactory.php',
+    'ACFML\\Options\\TranslationJobHooks' => $baseDir . '/classes/Options/TranslationJobHooks.php',
     'ACFML\\Post\\EditorHooksFactory' => $baseDir . '/classes/Post/EditorHooksFactory.php',
     'ACFML\\Post\\MixedFieldGroupModesHooks' => $baseDir . '/classes/Post/MixedFieldGroupModesHooks.php',
     'ACFML\\Post\\NativeEditorTranslationHooks' => $baseDir . '/classes/Post/NativeEditorTranslationHooks.php',
@@ -58,6 +63,7 @@ return array(
     'ACFML\\Repeater\\Sync\\OptionPageHooks' => $baseDir . '/classes/strategy/repeater-sync/OptionPageHooks.php',
     'ACFML\\Repeater\\Sync\\PostHooks' => $baseDir . '/classes/strategy/repeater-sync/PostHooks.php',
     'ACFML\\Repeater\\Sync\\TermHooks' => $baseDir . '/classes/strategy/repeater-sync/TermHooks.php',
+    'ACFML\\StringTaxonomyHooks' => $baseDir . '/classes/StringTaxonomyHooks.php',
     'ACFML\\Strings\\Config' => $baseDir . '/classes/Strings/Config.php',
     'ACFML\\Strings\\CptHooks' => $baseDir . '/classes/Strings/CptHooks.php',
     'ACFML\\Strings\\Factory' => $baseDir . '/classes/Strings/Factory.php',
@@ -100,6 +106,7 @@ return array(
     'ACFML\\Upgrade\\Commands\\Command' => $baseDir . '/classes/Upgrade/Commands/Command.php',
     'ACFML\\Upgrade\\Commands\\MigrateToV2' => $baseDir . '/classes/Upgrade/Commands/MigrateToV2.php',
     'ACFML\\Upgrade\\Commands\\MigrateToV2_1' => $baseDir . '/classes/Upgrade/Commands/MigrateToV2_1.php',
+    'ACFML\\Upgrade\\Commands\\MigrateToV2_2' => $baseDir . '/classes/Upgrade/Commands/MigrateToV2_2.php',
     'ACFML\\Upgrade\\Upgrade' => $baseDir . '/classes/Upgrade/Upgrade.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'WPML_ACF' => $baseDir . '/classes/class-wpml-acf.php',
@@ -118,7 +125,6 @@ return array(
     'WPML_ACF_Link_Field' => $baseDir . '/classes/class-wpml-acf-link-field.php',
     'WPML_ACF_Location_Rules' => $baseDir . '/classes/class-wpml-acf-location-rules.php',
     'WPML_ACF_Migrate_Option_Page_Strings' => $baseDir . '/classes/class-wpml-acf-migrate-option-page-strings.php',
-    'WPML_ACF_Options_Page' => $baseDir . '/classes/class-wpml-acf-options-page.php',
     'WPML_ACF_Page_Link_Field' => $baseDir . '/classes/class-wpml-acf-page-link-field.php',
     'WPML_ACF_Post_Id' => $baseDir . '/classes/class-wpml-acf-post-id.php',
     'WPML_ACF_Post_Ids' => $baseDir . '/classes/class-wpml-acf-post-ids.php',
