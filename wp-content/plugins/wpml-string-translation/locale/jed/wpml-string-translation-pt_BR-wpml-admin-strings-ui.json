@@ -3,12 +3,10 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "pt_BR"
+            "domain": "messages"
          },
          "Not included in String Translation": [
-            "Não incluído na String Translation"
+            "Não incluído na tradução de strings"
          ],
          "Registered and locked": [
             "Registrado e bloqueado"
@@ -32,16 +30,16 @@
             "A ação falhou."
          ],
          "All (%d)": [
-            "Todos os (%d)"
+            "Todos (%d)"
          ],
          "Included in String Translation (%d)": [
-            "Incluído na String Translation (%d)"
+            "Incluído na tradução de strings (%d)"
          ],
          "Not included in String Translation (%d)": [
-            "Não incluído na String Translation (%d)"
+            "Não incluído na tradução de strings (%d)"
          ],
          "This setting is locked by a WPML configuration file.": [
-            "Esta configuração está bloqueada por um arquivo de configuração do WPML."
+            "Essa configuração é bloqueada por um arquivo de configuração do WPML."
          ],
          "Option": [
             "Opção"
@@ -62,22 +60,22 @@
             "Cancelar"
          ],
          "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
-            "Salvar o seguinte em um wpml-config.xml na raiz do seu tema ou plugin."
+            "Salve o seguinte em um wpml-config.xml na raiz do seu tema ou plug-in."
          ],
          "No options found.": [
-            "Nenhuma opção encontrada."
+            "Não foram encontradas opções."
          ],
          "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
-            "Certifique-se de ter salvo as opções do seu tema pelo menos uma vez. Alguns temas só as adicionam à tabela wp_options depois que o usuário salva explicitamente as alterações nos padrões do tema."
+            "Certifique-se de que você salvou as opções do tema pelo menos uma vez. Alguns temas só as adicionam à tabela wp_options depois que o usuário salva explicitamente as alterações nos padrões do tema."
          ],
          "Add to String Translation": [
-            "Adicionar à String Translation"
+            "Adicionar à tradução de strings"
          ],
          "Remove from String Translation": [
-            "Remover da String Translation"
+            "Remover da tradução da string"
          ],
          "Included in String Translation": [
-            "Incluído na String Translation"
+            "Incluído na tradução de strings"
          ]
       }
    }

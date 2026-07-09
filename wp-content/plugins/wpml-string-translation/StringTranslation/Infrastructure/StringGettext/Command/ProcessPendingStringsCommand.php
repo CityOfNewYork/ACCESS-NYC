@@ -16,7 +16,7 @@ use WPML\StringTranslation\Application\StringCore\Command\UpdateStringsCommandIn
 
 class ProcessPendingStringsCommand implements ProcessPendingStringsCommandInterface {
 
-	const TIME_LIMIT = 60; // seconds.
+	const TIME_LIMIT = 60; // seconds
 
 	/** @var SaveStringsCommandInterface */
 	private $saveStringsCommand;
@@ -43,14 +43,14 @@ class ProcessPendingStringsCommand implements ProcessPendingStringsCommandInterf
 	private $stringItemFactory;
 
 	public function __construct(
-		SaveStringsCommandInterface $saveStringsCommand,
-		TranslationsRepositoryInterface $translationsRepository,
-		SettingsRepositoryInterface $settingsRepository,
-		SaveStringPositionsCommandInterface $saveStringPositionsCommand,
+		SaveStringsCommandInterface                    $saveStringsCommand,
+		TranslationsRepositoryInterface                $translationsRepository,
+		SettingsRepositoryInterface                    $settingsRepository,
+		SaveStringPositionsCommandInterface            $saveStringPositionsCommand,
 		LoadExistingStringTranslationsCommandInterface $loadExistingStringTranslationsCommand,
-		InsertStringTranslationsCommandInterface $insertStringTranslations,
-		UpdateStringsCommandInterface $updateStringsCommand,
-		StringItemFactory $stringItemFactory
+		InsertStringTranslationsCommandInterface       $insertStringTranslations,
+		UpdateStringsCommandInterface                  $updateStringsCommand,
+		StringItemFactory                              $stringItemFactory
 	) {
 		$this->saveStringsCommand                    = $saveStringsCommand;
 		$this->translationsRepository                = $translationsRepository;
@@ -62,12 +62,12 @@ class ProcessPendingStringsCommand implements ProcessPendingStringsCommandInterf
 		$this->stringItemFactory                     = $stringItemFactory;
 	}
 
-	public function run( array $allPendingStrings ) : bool {
-		$createString = function( array $stringData, string $domain, string $text, ?string $name = null, ?string $context = null ) {
+	public function run( array $allPendingStrings ): bool {
+		$createString = function( array $stringData, string $name = null, string $domain, string $text, string $context = null ) {
 			return $this->stringItemFactory->create(
 				$domain,
-				$text,
 				$context,
+				$text,
 				[
 					'name'          => $name,
 					'componentId'   => isset( $stringData['cmp'] ) ? $stringData['cmp'][0] : null,
@@ -85,7 +85,6 @@ class ProcessPendingStringsCommand implements ProcessPendingStringsCommandInterf
 			foreach ( $pendingStrings as $textAndContext => $stringData ) {
 				list( $text, $context ) = StringItem::parseTextAndContextKey( $textAndContext );
 				$allStringsForKey       = [];
-
 				/*
 				 * 'names' property does not exist when we are registering string from gettext hooks.
 				 * In that case only domain, text and context properties are available.
@@ -99,10 +98,10 @@ class ProcessPendingStringsCommand implements ProcessPendingStringsCommandInterf
 				 */
 				if ( isset( $stringData['names'] ) && is_array( $stringData['names'] ) && count( $stringData['names'] ) > 0 ) {
 					foreach ( $stringData['names'] as $name ) {
-						$allStringsForKey[] = $createString( $stringData, $domain, $text, $name, $context );
+						$allStringsForKey[] = $createString( $stringData, $name, $domain, $text, $context );
 					}
 				} else {
-					$allStringsForKey[] = $createString( $stringData, $domain, $text, null, $context );
+					$allStringsForKey[] = $createString( $stringData, null, $domain, $text, $context );
 				}
 
 				// Notice that string position has no id setup here yet, so we do not know yet if it already exists in db.

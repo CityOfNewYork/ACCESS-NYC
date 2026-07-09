@@ -15,10 +15,7 @@ use WPML\PHP\ConstructableFromArrayTrait;
  *   reviewStatus: ReviewStatusString,
  *   jobId: int|null,
  *   method: MethodString,
- *   editor: EditorString,
- *   isTranslated: bool,
- *   translatorId: int|null,
- *   ateJobId: int|null
+ *   editor: EditorString
  * }
  */
 final class TranslationStatusDto {
@@ -41,32 +38,18 @@ final class TranslationStatusDto {
 	/** @var bool */
 	private $isTranslated;
 
-	/** @var int|null */
-	private $translatorId;
-
-	/** @var int|null */
-	private $ateJobId;
+	/** @var int|null	*/
+  private $translatorId;
 
 
-	/**
-	 * @param int         $status
-	 * @param string|null $reviewStatus
-	 * @param int|null    $jobId
-	 * @param string|null $method
-	 * @param string|null $editor
-	 * @param bool        $isTranslated
-	 * @param int|null    $translatorId
-	 * @param int|null    $ateJobId
-	 */
 	public function __construct(
-	$status,
-	$reviewStatus = null,
-	$jobId = null,
-	$method = null,
-	$editor = null,
-	$isTranslated = false,
-	$translatorId = null,
-	$ateJobId = null
+	int $status,
+	string $reviewStatus = null,
+	int $jobId = null,
+	string $method = null,
+	string $editor = null,
+	bool $isTranslated = false,
+	int $translatorId = null
 	) {
 		$allowedReviewStatus = [ 'NEEDS_REVIEW', 'EDITING', 'ACCEPTED' ];
 		$allowedMethod       = [ 'duplicate', 'translation-service', 'automatic', 'manual', 'local-translator' ];
@@ -79,7 +62,6 @@ final class TranslationStatusDto {
 		$this->editor       = in_array( $editor, $allowedEditor, true ) ? $editor : null;
 		$this->isTranslated = $isTranslated;
 		$this->translatorId = $translatorId;
-		$this->ateJobId     = $ateJobId;
 	}
 
 
@@ -134,13 +116,6 @@ final class TranslationStatusDto {
 	}
 
 	/**
-	 * @return int|null
-	 */
-	public function getAteJobId() {
-		return $this->ateJobId;
-	}
-
-	/**
 	 * @return TranslationStatusDtoArray
 	 */
 	public function toArray(): array {
@@ -152,7 +127,6 @@ final class TranslationStatusDto {
 			'editor'       => $this->editor,
 			'isTranslated' => $this->isTranslated,
 			'translatorId' => $this->translatorId,
-			'ateJobId'     => $this->ateJobId,
 		];
 	}
 

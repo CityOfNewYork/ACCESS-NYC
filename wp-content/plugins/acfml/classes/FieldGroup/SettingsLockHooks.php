@@ -2,6 +2,7 @@
 
 namespace ACFML\FieldGroup;
 
+use ACFML\Helper\FieldGroup;
 use WPML\FP\Obj;
 use WPML\LIB\WP\Hooks;
 use function WPML\FP\spreadArgs;
@@ -35,22 +36,7 @@ class SettingsLockHooks implements \IWPML_Action {
 	 * @return bool
 	 */
 	public function disableCustomFieldPreference( $isDisabled, $cfSetting ) {
-		$fieldName = $cfSetting->get_index();
-		$groupKey  = $this->fieldNamePatterns->findMatchingGroup( $fieldName );
-
-		if ( $groupKey ) {
-			$fieldGroup = acf_get_field_group( $groupKey );
-			if ( false === $fieldGroup ) {
-				return $isDisabled;
-			}
-			return true;
-		}
-
-		if ( $this->fieldNamePatterns->findMatchingLocalGroup( $fieldName ) ) {
-			return true;
-		}
-
-		return $isDisabled;
+		return (bool) $this->getGroupId( $cfSetting ) ?: $isDisabled;
 	}
 
 	/**
@@ -60,21 +46,16 @@ class SettingsLockHooks implements \IWPML_Action {
 	 * @return bool
 	 */
 	public function renderCustomFieldLock( $override, $cfSetting ) {
-		$fieldName = $cfSetting->get_index();
-		$groupKey  = $this->fieldNamePatterns->findMatchingGroup( $fieldName );
+		$groupId = $this->getGroupId( $cfSetting );
 
-		if ( $groupKey ) {
-			$fieldGroup = acf_get_field_group( $groupKey );
+		if ( $groupId ) {
+			$fieldGroup = acf_get_field_group( $groupId );
+
 			if ( false === $fieldGroup ) {
 				return $override;
 			}
 
-			$groupId = Obj::prop( 'ID', $fieldGroup );
-			if ( ! $groupId ) {
-				return $override;
-			}
-
-			$groupTitle = Obj::propOr( $groupKey, 'title', $fieldGroup );
+			$groupTitle = Obj::propOr( $groupId, 'title', $fieldGroup );
 
 			?>
 			<a href="<?php echo esc_url( acf_get_field_group_edit_link( $groupId ) ); ?>" style="text-decoration: none;">
@@ -85,30 +66,6 @@ class SettingsLockHooks implements \IWPML_Action {
 					<i class="otgs-ico-lock"></i>
 				</button>
 			</a>
-			<?php
-
-			return true;
-		}
-
-		if ( $this->fieldNamePatterns->findMatchingLocalGroup( $fieldName ) ) {
-			?>
-			<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=acf-field-group&post_status=sync' ) ); ?>" style="text-decoration: none;">
-				<button type="button"
-						class="button-secondary wpml-button-lock"
-						title="<?php esc_attr_e( 'These fields come from ACF’s Local JSON files. To change their translation options, go to ACF → Field Groups, sync them, and then edit their settings.', 'acfml' ); // phpcs:ignore ?>">
-					<i class="otgs-ico-lock"></i>
-				</button>
-			</a>
-			<?php
-
-			return true;
-		}
-
-		if ( $this->fieldNamePatterns->findMatchingLocalGroup( $fieldName, 'php' ) ) {
-			?>
-			<span class="acfml-field-info">
-				<i class="otgs-ico-info-o" title="<?php esc_attr_e( 'This field and its translation setting are registered via PHP by your theme or plugin. Changes made here will override the original configuration.', 'acfml' ); ?>"></i>
-			</span>
 			<?php
 
 			return true;
@@ -126,4 +83,18 @@ class SettingsLockHooks implements \IWPML_Action {
 		$this->fieldNamePatterns->updateGroup( Obj::prop( 'ID', $fieldGroup ), [] );
 	}
 
+	/**
+	 * @param \WPML_Custom_Field_Setting $cfSetting
+	 *
+	 * @return int|null
+	 */
+	private function getGroupId( $cfSetting ) {
+		$name = $cfSetting->get_index();
+
+		if ( acf_is_local_field( $name ) ) {
+			return FieldGroup::getId( (int) Obj::prop( 'parent', acf_get_local_field( $name ) ) );
+		}
+
+		return $this->fieldNamePatterns->findMatchingGroup( $name ) ?: null;
+	}
 }

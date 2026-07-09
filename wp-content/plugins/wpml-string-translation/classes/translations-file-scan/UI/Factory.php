@@ -23,7 +23,8 @@ class Factory implements \IWPML_Backend_Action_Loader, \IWPML_Deferred_Action_Lo
 	 */
 	public function create() {
 		if (
-			current_user_can( 'manage_options' )
+			current_user_can( 'manage_options' ) &&
+			function_exists( 'wpml_is_rest_enabled' ) && wpml_is_rest_enabled()
 		) {
 			global $sitepress;
 			$wp_api = $sitepress->get_wp_api();

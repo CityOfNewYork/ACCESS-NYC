@@ -3,15 +3,13 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "sv_SE"
+            "domain": "messages"
          },
          "Clean up the String Translation table by removing untranslated strings by domain.": [
-            "Rensa tabellen för strängöversättning genom att ta bort oöversatta strängar per domän."
+            "Rensa strängtabellen genom att ta bort oöversatta."
          ],
          "Remove strings by domain": [
-            "Ta bort strängar per domän"
+            "Ta bort strängar efter domän"
          ],
          "Remove strings": [
             "Ta bort strängar"
@@ -23,22 +21,22 @@
             "Ta bort"
          ],
          "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
-            "Tabellen för strängöversättning innehåller för närvarande strängar från domänerna nedan. Om du inte planerar att översätta strängar från en viss domän, välj den nedan för att ta bort dess oöversatta strängar från tabellen för strängöversättning. Alla strängar som redan har översättningar kommer fortfarande att vara tillgängliga."
+            "Strängtabellen innehåller domäner nedan."
          ],
          "Search": [
             "Sök"
          ],
          "Removing strings from String Translation table": [
-            "Tar bort strängar från tabellen för strängöversättning"
+            "Tar bort strängar från strängtabellen"
          ],
          "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
-            "För att lägga till strängar tillbaka till tabellen för strängöversättning kan du behöva skanna om översättningsfiler eller registrera strängar som översättningsbara."
+            "Skanna filer för att lägga till strängar igen."
          ],
          "Read more about ": [
             "Läs mer om "
          ],
          "scanning your site for strings and registering them as translatable.": [
-            "att skanna din webbplats efter strängar och registrera dem som översättningsbara."
+            "skanning av webbplatsen för strängar."
          ],
          "Successfully removed strings": [
             "Strängar har tagits bort"

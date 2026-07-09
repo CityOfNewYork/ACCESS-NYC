@@ -12,10 +12,10 @@ class WPML_ST_Reset {
 	private $settings;
 
 	/**
-	 * @param wpdb                  $wpdb
-	 * @param WPML_ST_Settings|null $settings
+	 * @param wpdb             $wpdb
+	 * @param WPML_ST_Settings $settings
 	 */
-	public function __construct( $wpdb, ?WPML_ST_Settings $settings = null ) {
+	public function __construct( $wpdb, WPML_ST_Settings $settings = null ) {
 		$this->wpdb = $wpdb;
 
 		if ( ! $settings ) {

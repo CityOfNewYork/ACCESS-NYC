@@ -26,11 +26,6 @@ class HtmlStringsRepository implements HtmlStringsRepositoryInterface {
 	private function loadHtml( string $html ) {
 		$dom = new \DOMDocument();
 		$dom->encoding = 'utf-8';
-
-		if ( trim( $html ) === '' ) {
-			return $dom;
-		}
-
 		// Hiding warnings for invalid html.
 		$prevErrors = libxml_use_internal_errors(true);
 		$dom->loadHTML( $html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOWARNING );

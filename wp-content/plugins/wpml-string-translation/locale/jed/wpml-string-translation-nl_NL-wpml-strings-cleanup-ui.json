@@ -3,18 +3,16 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "nl_NL"
+            "domain": "messages"
          },
          "Clean up the String Translation table by removing untranslated strings by domain.": [
-            "Ruim de String Translation-tabel op door niet-vertaalde strings per domein te verwijderen."
+            "Maak de String Translation tabel schoon door onvertaalde strings per domein te verwijderen."
          ],
          "Remove strings by domain": [
-            "Strings per domein verwijderen"
+            "Tekenreeksen per domein verwijderen"
          ],
          "Remove strings": [
-            "Strings verwijderen"
+            "Touwtjes verwijderen"
          ],
          "Cancel": [
             "Annuleren"
@@ -23,37 +21,37 @@
             "Verwijderen"
          ],
          "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
-            "De String Translation-tabel bevat momenteel strings van de hieronder vermelde domeinen. Als u niet van plan bent strings van een bepaald domein te vertalen, selecteer het dan hieronder om de niet-vertaalde strings uit de String Translation-tabel te verwijderen. Alle strings die al vertalingen hebben, blijven beschikbaar."
+            "De tabel String Translation bevat momenteel strings uit de onderstaande domeinen. Als je niet van plan bent om strings uit een bepaald domein te vertalen, selecteer het dan hieronder om de onvertaalde strings uit de tabel String Translation te verwijderen. Alle strings die al vertalingen hebben, blijven beschikbaar."
          ],
          "Search": [
             "Zoeken"
          ],
          "Removing strings from String Translation table": [
-            "Strings verwijderen uit de String Translation-tabel"
+            "Tekenreeksen verwijderen uit de snaarvertaaltabel"
          ],
          "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
-            "Om strings weer toe te voegen aan de String Translation-tabel, moet u mogelijk vertaalbestanden opnieuw scannen of strings als vertaalbaar registreren."
+            "Om strings terug toe te voegen aan de String Vertalingstabel, moet je mogelijk vertaalbestanden opnieuw scannen of strings registreren als vertaalbaar."
          ],
          "Read more about ": [
             "Lees meer over "
          ],
          "scanning your site for strings and registering them as translatable.": [
-            "het scannen van uw site op strings en het registreren ervan als vertaalbaar."
+            "scant je site op strings en registreert ze als vertaalbaar."
          ],
          "Successfully removed strings": [
-            "Strings succesvol verwijderd"
+            "Touwtjes met succes verwijderd"
          ],
          "OK, Great": [
-            "Oké, prima"
+            "OK, geweldig"
          ],
          "Domain": [
             "Domein"
          ],
          "Strings count": [
-            "Aantal strings"
+            "Tekens tellen"
          ],
          "Translated strings": [
-            "Vertaalde strings"
+            "Vertaalde snaren"
          ]
       }
    }

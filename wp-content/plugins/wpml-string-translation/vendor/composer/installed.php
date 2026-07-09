@@ -1,11 +1,11 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '3.5.3',
-        'version' => '3.5.3.0',
+        'pretty_version' => '3.3.3',
+        'version' => '3.3.3.0',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '63e2a068e57fab11b2e419f71e2fbe332ae144a0',
+        'reference' => '8a4dac95e81ef08efd9a064db80749c02e4f4b3a',
         'name' => 'wpml/st',
         'dev' => false,
     ),
@@ -20,12 +20,12 @@
             'dev_requirement' => false,
         ),
         'wpml/st' => array(
-            'pretty_version' => '3.5.3',
-            'version' => '3.5.3.0',
+            'pretty_version' => '3.3.3',
+            'version' => '3.3.3.0',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '63e2a068e57fab11b2e419f71e2fbe332ae144a0',
+            'reference' => '8a4dac95e81ef08efd9a064db80749c02e4f4b3a',
             'dev_requirement' => false,
         ),
         'wpml/st-api' => array(

@@ -31,15 +31,14 @@ class WPML_Theme_String_Scanner extends WPML_String_Scanner implements IWPML_ST_
 
 			foreach ( $_POST['files'] as $file ) {
 				$file = (string) \WPML\API\Sanitize::string( $file );
+				if ( $this->file_hashing->hash_changed( $file ) ) {
 
-				if ( $this->is_js_file( $file ) ) {
-					$jsScanner = new \WPML\ST\StringsScanning\JS\Scanner();
-					$jsScanner->scan( $file, $this->text_domain, [ $this, 'store_results' ] );
-					$this->add_scanned_file( $file );
-				} else {
 					$this->add_stat( sprintf( __( 'Scanning file: %s', 'wpml-string-translation' ), $file ) );
-					_potx_process_file( $file, 0, array( $this, 'store_results' ), '_potx_save_version', $this->get_default_domain() );
 					$this->add_scanned_file( $file );
+					_potx_process_file( $file, 0, array( $this, 'store_results' ), '_potx_save_version', $this->get_default_domain() );
+
+				} else {
+					$this->add_stat( sprintf( __( 'Skipping file: %s', 'wpml-string-translation' ), $file ) );
 				}
 			}
 		}

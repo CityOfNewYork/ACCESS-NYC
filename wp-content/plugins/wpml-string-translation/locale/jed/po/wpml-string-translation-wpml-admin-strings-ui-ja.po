@@ -1,0 +1,103 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/admin-strings/texts.js:10
+msgid "Not included in String Translation"
+msgstr "文字列翻訳には含まれません"
+
+#: src/js/admin-strings/texts.js:11
+msgid "Registered and locked"
+msgstr "登録とロック"
+
+#: src/js/admin-strings/texts.js:13
+msgid "Text"
+msgstr "テキスト"
+
+#: src/js/admin-strings/texts.js:14
+msgid "Numeric"
+msgstr "数値"
+
+#: src/js/admin-strings/texts.js:15
+msgid "All Types"
+msgstr "全種類"
+
+#: src/js/admin-strings/texts.js:17
+msgid "Search"
+msgstr "検索"
+
+#: src/js/admin-strings/texts.js:19
+msgid "Communication error"
+msgstr "通信エラー"
+
+#: src/js/admin-strings/texts.js:20
+msgid "The action failed."
+msgstr "アクションは失敗した。"
+
+#: src/js/admin-strings/texts.js:22
+msgid "All (%d)"
+msgstr "すべて (%d)"
+
+#: src/js/admin-strings/texts.js:23
+msgid "Included in String Translation (%d)"
+msgstr "文字列翻訳に含まれるもの (%d)"
+
+#: src/js/admin-strings/texts.js:24
+msgid "Not included in String Translation (%d)"
+msgstr "文字列翻訳には含まれません (%d)"
+
+#: src/js/admin-strings/texts.js:26
+msgid "This setting is locked by a WPML configuration file."
+msgstr "この設定はWPML設定ファイルによってロックされます。"
+
+#: src/js/admin-strings/texts.js:28
+msgid "Option"
+msgstr "オプション"
+
+#: src/js/admin-strings/texts.js:29
+msgid "Value"
+msgstr "値"
+
+#: src/js/admin-strings/texts.js:30
+msgid "Type"
+msgstr "タイプ"
+
+#: src/js/admin-strings/texts.js:31
+msgid "State"
+msgstr "州"
+
+#: src/js/admin-strings/texts.js:34
+msgid "Export as a WPML configuration file"
+msgstr "WPML設定ファイルとしてエクスポート"
+
+#: src/js/admin-strings/texts.js:35
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: src/js/admin-strings/texts.js:36
+msgid "Save the following to a wpml-config.xml in the root of your theme or plugin."
+msgstr "テーマまたはプラグインのルートにあるwpml-config.xmlに以下を保存します。"
+
+#: src/js/admin-strings/texts.js:38
+msgid "No options found."
+msgstr "オプションが見つかりません。"
+
+#: src/js/admin-strings/texts.js:39
+msgid ""
+"Make sure you saved your theme options at least once. Some themes only add "
+"these to the wp_options table after the user explicitly saves changes to "
+"the theme defaults."
+msgstr "テーマオプションを少なくとも一度は保存したことを確認してください。テーマによっては、ユーザーが明示的にテーマデフォルトの変更を保存した後にのみ、wp_options テーブルに追加するものもあります。"
+
+#: src/js/admin-strings/texts.js:6
+msgid "Add to String Translation"
+msgstr "文字列翻訳に追加"
+
+#: src/js/admin-strings/texts.js:7
+msgid "Remove from String Translation"
+msgstr "文字列翻訳から削除"
+
+#: src/js/admin-strings/texts.js:9
+msgid "Included in String Translation"
+msgstr "文字列翻訳に含まれる"

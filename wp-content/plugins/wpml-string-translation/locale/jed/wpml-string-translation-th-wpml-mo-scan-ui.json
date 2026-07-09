@@ -3,66 +3,64 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=1; plural=0;",
-            "lang": "th"
+            "domain": "messages"
          },
          "WPML has detected changed or new MO files": [
-            "WPML ตรวจพบไฟล์ MO ที่เปลี่ยนแปลงหรือใหม่"
+            "WPML ตรวจพบการเปลี่ยนแปลงหรือใหม่ เดือน ไฟล์"
          ],
          "There are new or updated .mo files. WPML needs to scan them to find strings for translation.": [
-            "มีไฟล์.mo ใหม่หรือที่อัปเดตแล้ว WPML จำเป็นต้องสแกนไฟล์เหล่านี้เพื่อค้นหาสตริงสำหรับการแปล"
+            "มีไฟล์ .mo ใหม่หรือที่อัปเดต WPML จำเป็นต้องสแกนเพื่อค้นหาสตริงสำหรับการแปล."
          ],
          "Scan translation files": [
             "สแกนไฟล์การแปล"
          ],
          "Scanned %1$d of %2$d files...": [
-            "สแกน %1$d จาก %2$d ไฟล์..."
+            "สแกนแล้ว %1$d ของ %2$d ไฟล์..."
          ],
          "Generated files for %1$d of %2$d sites...": [
-            "สร้างไฟล์สำหรับ %1$d จาก %2$d ไซต์..."
+            "ไฟล์ที่สร้างขึ้นสำหรับ %1$d ของ %2$d เว็บไซต์..."
          ],
          "Generated %1$d of %2$d files...": [
-            "สร้าง %1$d จาก %2$d ไฟล์..."
+            "สร้างขึ้น %1$d ของ %2$d ไฟล์..."
          ],
          "WPML needs to generate .mo files": [
-            "WPML จำเป็นต้องสร้างไฟล์.mo"
+            "WPML จำเป็นต้องสร้างไฟล์ .mo"
          ],
          "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end. However, the folder that should hold these .mo files is not open for writing.": [
-            "WPML String Translation ใช้ไฟล์.mo แทนการเรียกฐานข้อมูล WPML จำเป็นต้องสร้างไฟล์.mo เหล่านี้เพื่อให้การแปลปรากฏบนส่วนหน้า อย่างไรก็ตาม โฟลเดอร์ที่ควรเก็บไฟล์.mo เหล่านี้ไม่สามารถเขียนได้"
+            "การแปลสตริง WPML ใช้ไฟล์ .mo แทนการเรียกฐานข้อมูล WPML จำเป็นต้องสร้างไฟล์ .mo เหล่านี้เพื่อให้คำแปลปรากฏที่ส่วนหน้า อย่างไรก็ตาม โฟลเดอร์ที่ควรเก็บไฟล์ .mo เหล่านี้ไม่ได้เปิดไว้สำหรับเขียน."
          ],
          "Please use your admin control panel or an FTP program to make the following folder writeable:": [
             "โปรดใช้แผงควบคุมผู้ดูแลระบบหรือโปรแกรม FTP เพื่อทำให้โฟลเดอร์ต่อไปนี้สามารถเขียนได้:"
          ],
          "There was a problem creating the .mo files": [
-            "เกิดปัญหาในการสร้างไฟล์.mo"
+            "เกิดปัญหาในการสร้างไฟล์ .mo"
          ],
          "You can try again now or try again later by going to ": [
-            "คุณสามารถลองอีกครั้งตอนนี้ หรือลองอีกครั้งในภายหลังโดยไปที่ "
+            "คุณสามารถลองอีกครั้งตอนนี้หรือลองอีกครั้งในภายหลังโดยไปที่ "
          ],
          "Translations are missing from the front-end until you generate .mo files": [
-            "การแปลหายไปจากส่วนหน้าจนกว่าคุณจะสร้างไฟล์.mo"
+            "การแปลหายไปจากส่วนหน้าจนกว่าคุณจะสร้างไฟล์ .mo"
          ],
          "Your site doesn't have the .mo files that WPML needs in order to display translated strings on the front-end. To generate these .mo files, remember to go to ": [
-            "ไซต์ของคุณไม่มีไฟล์.mo ที่ WPML ต้องการเพื่อแสดงสตริงที่แปลแล้วบนส่วนหน้า หากต้องการสร้างไฟล์.mo เหล่านี้ โปรดไปที่ "
+            "เว็บไซต์ของคุณไม่มีไฟล์ .mo ที่ WPML ต้องใช้เพื่อแสดงสตริงที่แปลแล้วที่ส่วนหน้า หากต้องการสร้างไฟล์ .mo เหล่านี้ อย่าลืมไปที่ "
          ],
          "WPML->Theme and plugins localization.": [
-            "WPML->การแปลธีมและปลั๊กอิน"
+            "WPML->การแปลธีมและปลั๊กอิน."
          ],
          "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end.": [
-            "WPML String Translation ใช้ไฟล์.mo แทนการเรียกฐานข้อมูล WPML จำเป็นต้องสร้างไฟล์.mo เหล่านี้เพื่อให้การแปลปรากฏบนส่วนหน้า"
+            "การแปลสตริง WPML ใช้ไฟล์ .mo แทนการเรียกฐานข้อมูล WPML จำเป็นต้องสร้างไฟล์ .mo เหล่านี้เพื่อให้คำแปลปรากฏที่ส่วนหน้า."
          ],
          "Try again": [
             "ลองอีกครั้ง"
          ],
          "Generate .mo files": [
-            "สร้างไฟล์.mo"
+            "สร้างไฟล์ .mo"
          ],
          "Close this message": [
             "ปิดข้อความนี้"
          ],
          "Find additional texts that WordPress, the theme and plugins created and choose which ones to translate": [
-            "ค้นหาข้อความเพิ่มเติมที่ WordPress, ธีม และปลั๊กอินสร้างขึ้น และเลือกข้อความที่จะแปล"
+            "ค้นหาข้อความเพิ่มเติมที่ WordPress ธีมและปลั๊กอินสร้างขึ้น และเลือกข้อความที่จะแปล"
          ],
          "Choose texts for translation": [
             "เลือกข้อความสำหรับการแปล"
@@ -71,7 +69,7 @@
             "การแปลบางส่วนมีการเปลี่ยนแปลง"
          ],
          "Scan the selected components to make new texts available for translation.": [
-            "สแกนส่วนประกอบที่เลือกเพื่อให้ข้อความใหม่พร้อมสำหรับการแปล"
+            "สแกนส่วนประกอบที่เลือกเพื่อให้ข้อความใหม่พร้อมสำหรับการแปล."
          ],
          "Select all": [
             "เลือกทั้งหมด"
@@ -80,16 +78,16 @@
             "ปลั๊กอิน:"
          ],
          "Themes:": [
-            "ธีม:"
+            "ธีมส์:"
          ],
          "Core:": [
-            "หลัก:"
+            "แกนหลัก:"
          ],
          "Can't find the strings you're looking to translate?": [
-            "ไม่พบสตริงที่คุณต้องการแปลใช่หรือไม่"
+            "ไม่พบสตริงที่คุณต้องการแปลใช่ไหม?"
          ],
          "Most likely you cannot see the strings you want to translate because:": [
-            "เป็นไปได้มากที่สุดที่คุณไม่เห็นสตริงที่คุณต้องการแปลเนื่องจาก:"
+            "เป็นไปได้มากว่าคุณจะไม่เห็นสตริงที่คุณต้องการแปลเนื่องจาก:"
          ],
          "Texts are not selected for translation": [
             "ไม่ได้เลือกข้อความสำหรับการแปล"

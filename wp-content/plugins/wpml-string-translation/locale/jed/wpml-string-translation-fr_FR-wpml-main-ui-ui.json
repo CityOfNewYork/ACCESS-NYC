@@ -3,57 +3,55 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=2; plural=(n > 1);",
-            "lang": "fr_FR"
+            "domain": "messages"
          },
          "Edit": [
-            "Modifier"
+            "Éditer"
          ],
          "Shift+Tab": [
-            "Maj+Tab"
+            "Maj+tab"
          ],
          "Tab": [
-            "Tab"
+            "Onglet"
          ],
          "Translation to:": [
-            "Traduction vers :"
+            "Traduction à:"
          ],
          "Copy from original": [
-            "Copier de l’original"
+            "Copie de l'original"
          ],
          "Use Shift+Enter to add a new line.": [
-            "Utilisez Maj+Entrée pour ajouter une nouvelle ligne."
+            "Utilisez les touches Maj+Entrée pour ajouter une nouvelle ligne."
          ],
          "Original:": [
-            "Original :"
+            "Original:"
          ],
          "Add %s translation": [
-            "Ajouter la traduction %s"
+            "Ajouter la traduction de %s "
          ],
          "Edit %s translation": [
-            "Modifier la traduction %s"
+            "Editer la traduction de %s "
          ],
          "Add %s translation (the string appears on the site and is not translated)": [
-            "Ajouter la traduction %s (la chaîne apparaît sur le site et n’est pas traduite)"
+            "Ajouter la traduction de %s (la chaîne apparaît sur le site et n'est pas traduite)"
          ],
          "Original language %s": [
-            "Langue d’origine %s"
+            "Langue originale %s"
          ],
          "Waiting for translator to %s": [
-            "En attente du traducteur pour %s"
+            "En attendant que le traducteur %s"
          ],
          "Translation in progress to %s": [
-            "Traduction en cours vers %s"
+            "Conversion en cours en %s"
          ],
          "In basket for translation to %s": [
-            "Dans le panier pour la traduction vers %s"
+            "En corbeille pour la traduction en %s"
          ],
          "Translation saved.": [
-            "Traduction enregistrée."
+            "La traduction est sauvée."
          ],
          "Translation update failed.": [
-            "Échec de la mise à jour de la traduction."
+            "La mise à jour de la traduction a échoué."
          ]
       }
    }

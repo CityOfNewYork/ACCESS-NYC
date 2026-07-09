@@ -1,15 +1,11 @@
 <?php
-
 namespace WPML\StringTranslation\UserInterface\RestApi;
 
-use WP_REST_Request;
 use WPML\Rest\Adaptor;
-use WPML\StringTranslation\Application\Setting\Repository\PluginRepositoryInterface;
-use WPML\StringTranslation\Application\Setting\Repository\SettingsRepositoryInterface;
+use \WPML\StringTranslation\Application\Setting\Repository\SettingsRepositoryInterface;
+use \WPML\StringTranslation\Application\Setting\Repository\PluginRepositoryInterface;
 
 class StringSettingsApiController extends AbstractController {
-
-	const ROUTE = 'strings/settings';
 
 	/** @var SettingsRepositoryInterface */
 	private $settingsRepository;
@@ -18,27 +14,27 @@ class StringSettingsApiController extends AbstractController {
 	private $pluginRepository;
 
 	public function __construct(
-		Adaptor $adaptor,
+		Adaptor                     $adaptor,
 		SettingsRepositoryInterface $settingsRepository,
-		PluginRepositoryInterface $pluginRepository
+		PluginRepositoryInterface   $pluginRepository
 	) {
 		parent::__construct( $adaptor );
 		$this->settingsRepository = $settingsRepository;
-		$this->pluginRepository   = $pluginRepository;
+		$this->pluginRepository = $pluginRepository;
 	}
 
 	/**
 	 * @return array
 	 */
-	public function get_routes() {
+	function get_routes() {
 		return [
 			[
-				'route' => self::ROUTE,
+				'route' => 'strings/settings',
 				'args'  => [
 					'methods'  => 'POST',
 					'callback' => [ $this, 'post' ],
 					'args'     => [
-						'autoregisterType'             => [
+						'autoregisterType' => [
 							'type'    => 'integer',
 							'default' => 0,
 						],
@@ -49,16 +45,12 @@ class StringSettingsApiController extends AbstractController {
 						'setNoticeThatCachePluginCanBlockAutoregisterAsDismissed' => [
 							'type'    => 'integer',
 							'default' => 0,
-						],
-						'setDetectStringsInJS' => [
-							'type'    => 'integer',
-							'default' => 0,
-						],
-					],
-				],
+						]
+					]
+				]
 			],
 			[
-				'route' => self::ROUTE,
+				'route' => 'strings/settings',
 				'args'  => [
 					'methods'  => 'GET',
 					'callback' => [ $this, 'get' ],
@@ -68,50 +60,34 @@ class StringSettingsApiController extends AbstractController {
 	}
 
 	/**
-	 * @param WP_REST_Request $request The request object.
-	 *
 	 * @return array
 	 */
-	public function post( WP_REST_Request $request ) {
-		$visibleColumns                                      = $request->get_param( 'visibleColumns' );
-		$autoregisterType                                    = $request->get_param( 'autoregisterType' );
-		$shouldRegisterBackendStrings                        = $request->get_param( 'shouldRegisterBackendStrings' );
-		$shouldShowNoticeThatCachePluginCanBlockAutoregister = $request->get_param( 'shouldShowNoticeThatCachePluginCanBlockAutoregister' );
-		$detectStringsInJS                                   = $request->get_param( 'detectStringsInJS' );
+	public function post( \WP_REST_Request $request ) {
+		$autoregisterType             = $request->get_param( 'autoregisterType' );
+		$shouldRegisterBackendStrings = (bool) $request->get_param( 'shouldRegisterBackendStrings' );
+		$shouldShowNoticeThatCachePluginCanBlockAutoregister = (bool) $request->get_param('shouldShowNoticeThatCachePluginCanBlockAutoregister');
 
-		if ( ! empty( $visibleColumns ) && is_array( $visibleColumns ) ) {
-			$this->settingsRepository->setVisibleColumns( $visibleColumns );
-		}
-
-		if ( null !== $autoregisterType ) {
+		if ( ! is_null( $autoregisterType ) ) {
 			$this->settingsRepository->setAutoregisterStringsTypeSetting( $autoregisterType );
 		}
 
-		if ( null !== $shouldRegisterBackendStrings ) {
-			$this->settingsRepository->setShouldRegisterBackendStringsSetting( (bool) $shouldRegisterBackendStrings );
-		}
+		$this->settingsRepository->setShouldRegisterBackendStringsSetting( $shouldRegisterBackendStrings );
 
-		if ( null !== $shouldShowNoticeThatCachePluginCanBlockAutoregister && ! $shouldShowNoticeThatCachePluginCanBlockAutoregister ) {
+		if ( ! $shouldShowNoticeThatCachePluginCanBlockAutoregister ) {
 			$this->pluginRepository->setNoticeThatCachePluginCanBlockAutoregisterAsDismissed();
-		}
-
-		if ( null !== $detectStringsInJS ) {
-			$this->settingsRepository->setDetectStringsInJS( (int) $detectStringsInJS );
 		}
 
 		return [];
 	}
 
 	/**
-	 * @param WP_REST_Request $request The request object.
-	 *
 	 * @return array
 	 */
-	public function get( WP_REST_Request $request ) {
+	public function get( \WP_REST_Request $request ) {
 		global $sitepress;
 		$autoregisterAllowedLanguages = array_values(
 			array_map(
-				function ( $data ) use ( $sitepress ) {
+				function( $data ) use ( $sitepress ) {
 					return [
 						'name' => $data['display_name'],
 						'url'  => $sitepress->language_url( $data['code'] ),
@@ -119,8 +95,8 @@ class StringSettingsApiController extends AbstractController {
 				},
 				array_filter(
 					$sitepress->get_active_languages(),
-					function ( $data ) {
-						return 'en' !== $data['code'];
+					function( $data ) {
+						return $data['code'] !== 'en';
 					}
 				)
 			)
@@ -133,7 +109,6 @@ class StringSettingsApiController extends AbstractController {
 			'activeCachePluginName'        => $this->pluginRepository->shouldShowNoticeThatCachePluginCanBlockAutoregister()
 				? $this->pluginRepository->getActiveCachePluginName()
 				: '',
-			'visibleColumns'               => $this->settingsRepository->getVisibleColumns(),
 			'shouldShowNoticeThatCachePluginCanBlockAutoregister' => $this->pluginRepository->shouldShowNoticeThatCachePluginCanBlockAutoregister(),
 		];
 	}

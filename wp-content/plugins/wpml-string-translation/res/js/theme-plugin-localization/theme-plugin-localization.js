@@ -148,6 +148,8 @@ jQuery(function($) {
 				'folderNonce': source.attr('data-scan_folder-nonce'),
 				'filesAction': source.attr('data-scan_files-action'),
 				'filesNonce': source.attr('data-scan_files-nonce'),
+				'updateHashAction': source.attr('data-update_hash-action'),
+				'updateHashNonce': source.attr('data-update_hash-nonce'),
 				'updateStatsEndpoint': source.attr('data-update_stats-endpoint'),
 				'updateStatsNonce': source.attr('data-update_stats-nonce'),
 			};
@@ -616,7 +618,9 @@ jQuery(function($) {
 			ajaxFilesChunk.nonce = this.scanningSection.getNonces()['filesNonce'];
 			ajaxFilesChunk[sectionType] = elementValue;
 
-			filesChunks = this.buildFilesChunks(dirFiles);
+			while ( 0 < dirFiles.length ) {
+				filesChunks.push( dirFiles.splice(0, this.numberOfFilesPerChunk) );
+			}
 
 			this.counter.filesChunkToScanCount = this.counter.filesChunkToScanCount + filesChunks.length;
 			this.counter.scannedDirsCount++;
@@ -647,39 +651,6 @@ jQuery(function($) {
 			}, this);
 		},
 
-		buildFilesChunks: function(files) {
-			var filesChunks = [];
-			var chunk = [];
-			var jsFiles = [];
-			var nonJsFiles = [];
-
-			(files || []).forEach(function(file) {
-				if(/\.js$/i.test(file)) {
-					jsFiles.push(file);
-				} else {
-					nonJsFiles.push(file);
-				}
-			});
-
-			nonJsFiles.forEach(function(file) {
-				chunk.push(file);
-				if(chunk.length === this.numberOfFilesPerChunk) {
-					filesChunks.push(chunk);
-					chunk = [];
-				}
-			}, this);
-
-			if(chunk.length) {
-				filesChunks.push(chunk);
-			}
-
-			jsFiles.forEach(function(file) {
-				filesChunks.push([file]);
-			});
-
-			return filesChunks;
-		},
-
 		scanFilesAjax: function(ajax_files_chunk, files_chunks, index) {
 			var self = this;
 
@@ -696,13 +667,6 @@ jQuery(function($) {
 				context: this,
 				success: $.proxy(this.scanFilesSuccess, this),
 				error: function() {
-					var is_single_file_scan = 1 === files_chunks[index].length;
-
-					if(is_single_file_scan) {
-						self.skipErrorOnSingleFileScan(files_chunks, ajax_files_chunk, index);
-						return;
-					}
-
 					var origChunkFiles = files_chunks[index].slice();
 					var smallerFilesChunks = [];
 
@@ -715,18 +679,6 @@ jQuery(function($) {
 			}).done(function() {
 				this.scanFilesAjaxDone(files_chunks, ajax_files_chunk, index);
 			});
-		},
-
-		skipErrorOnSingleFileScan: function(files_chunks, ajax_files_chunk, index) {
-			this.counter.scannedFilesChunkCount++;
-
-			if(this.counter.scannedFilesChunkCount === this.counter.filesChunkToScanCount) {
-				this.scheduledFileChunks = [];
-				this.updateStatsAjax();
-				return;
-			}
-
-			this.scanFilesAjaxDone(files_chunks, ajax_files_chunk, index);
 		},
 
 		rescanFilesAjax: function(ajax_files_chunk, files_chunks, index, orig_files_chunks, orig_index) {
@@ -813,7 +765,35 @@ jQuery(function($) {
 					}),
 				},
 				success: function() {
-					self.maybeRescanMo();
+					var origScannedFiles = self.counter.scannedFiles.slice();
+					var scannedFilesChunks = [];
+
+					while ( 0 < origScannedFiles.length ) {
+						scannedFilesChunks.push( origScannedFiles.splice(0, 500) );
+					}
+
+					self.updateHashAjax(scannedFilesChunks, 0);
+				},
+			});
+		},
+
+		updateHashAjax: function(scannedFilesChunks, index) {
+			var self = this;
+			$.ajax({
+				type: 'POST',
+				url: ajaxurl,
+				data: {
+					'action': this.scanningSection.getNonces()['updateHashAction'],
+					'nonce': this.scanningSection.getNonces()['updateHashNonce'],
+					'files': scannedFilesChunks[index],
+				},
+				success: function() {
+					if(index === scannedFilesChunks.length - 1) {
+						self.maybeRescanMo();
+						return;
+					}
+
+					self.updateHashAjax(scannedFilesChunks, index + 1);
 				},
 			});
 		},

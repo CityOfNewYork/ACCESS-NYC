@@ -7,25 +7,16 @@ use ACFML\Strings\Transformer\Transformer;
 
 class Translator {
 
-	const CONTEXT_BACKEND  = 'backend';
-	const CONTEXT_FRONTEND = 'frontend';
-
 	/**
 	 * @var Factory $factory
 	 */
 	private $factory;
 
 	/**
-	 * @var string $context
-	 */
-	private $context = self::CONTEXT_BACKEND;
-
-	/**
 	 * @param Factory $factory
 	 */
 	public function __construct( Factory $factory ) {
 		$this->factory = $factory;
-		$this->context = is_admin() ? self::CONTEXT_BACKEND : self::CONTEXT_FRONTEND;
 	}
 
 	/**
@@ -34,7 +25,7 @@ class Translator {
 	 * @return void
 	 */
 	public function registerGroupAndFieldsAndLayouts( $fieldGroup ) {
-		$register = $this->factory->createRegister( $fieldGroup['key'], Package::FIELD_GROUP_PACKAGE_KIND_SLUG );
+		$register = $this->factory->createRegister( $fieldGroup['ID'], Package::FIELD_GROUP_PACKAGE_KIND_SLUG );
 
 		$register->start();
 
@@ -55,7 +46,7 @@ class Translator {
 	 * @return array
 	 */
 	public function translateGroup( $fieldGroup ) {
-		return $this->factory->createFieldGroup( $fieldGroup )->traverse( $this->factory->createTranslate( $fieldGroup['key'], Package::FIELD_GROUP_PACKAGE_KIND_SLUG ), $this->context );
+		return $this->factory->createFieldGroup( $fieldGroup )->traverse( $this->factory->createTranslate( $fieldGroup['ID'], Package::FIELD_GROUP_PACKAGE_KIND_SLUG ) );
 	}
 
 	/**
@@ -68,8 +59,8 @@ class Translator {
 
 		$wrappedField = Fields::iterate(
 			[ $field ],
-			$this->getFieldTraverser( $translate, $this->context ),
-			$this->getLayoutTraverser( $translate, $this->context )
+			$this->getFieldTraverser( $translate ),
+			$this->getLayoutTraverser( $translate )
 		);
 
 		return $wrappedField[0];
@@ -77,35 +68,33 @@ class Translator {
 
 	/**
 	 * @param Transformer $transformer
-	 * @param string|null $context
 	 *
 	 * @return \Closure
 	 */
-	private function getFieldTraverser( $transformer, $context = null ) {
+	private function getFieldTraverser( $transformer ) {
 		/**
 		 * @param array $field
 		 *
 		 * @return array
 		 */
-		return function( $field ) use ( $transformer, $context ) {
-			return $this->factory->createField( $field )->traverse( $transformer, $context );
+		return function( $field ) use ( $transformer ) {
+			return $this->factory->createField( $field )->traverse( $transformer );
 		};
 	}
 
 	/**
 	 * @param Transformer $transformer
-	 * @param string|null $context
 	 *
 	 * @return \Closure
 	 */
-	private function getLayoutTraverser( $transformer, $context = null ) {
+	private function getLayoutTraverser( $transformer ) {
 		/**
 		 * @param array $layout
 		 *
 		 * @return array
 		 */
-		return function( $layout ) use ( $transformer, $context ) {
-			return $this->factory->createLayout( $layout )->traverse( $transformer, $context );
+		return function( $layout ) use ( $transformer ) {
+			return $this->factory->createLayout( $layout )->traverse( $transformer );
 		};
 	}
 
@@ -129,7 +118,7 @@ class Translator {
 	 * @return array
 	 */
 	public function translateCpt( $postData, $postTypeArgs = [] ) {
-		return $this->factory->createCpt( $postData, $postTypeArgs )->traverse( $this->factory->createTranslate( $postData['post_type'], Package::CPT_PACKAGE_KIND_SLUG ), $this->context );
+		return $this->factory->createCpt( $postData, $postTypeArgs )->traverse( $this->factory->createTranslate( $postData['post_type'], Package::CPT_PACKAGE_KIND_SLUG ) );
 	}
 
 	/**
@@ -152,7 +141,7 @@ class Translator {
 	 * @return array
 	 */
 	public function translateTaxonomy( $taxonomyData, $taxonomyArgs = [] ) {
-		return $this->factory->createTaxonomy( $taxonomyData, $taxonomyArgs )->traverse( $this->factory->createTranslate( $taxonomyData['taxonomy'], Package::TAXONOMY_PACKAGE_KIND_SLUG ), $this->context );
+		return $this->factory->createTaxonomy( $taxonomyData, $taxonomyArgs )->traverse( $this->factory->createTranslate( $taxonomyData['taxonomy'], Package::TAXONOMY_PACKAGE_KIND_SLUG ) );
 	}
 
 	/**
@@ -174,7 +163,7 @@ class Translator {
 	 * @return array
 	 */
 	public function translateOptionsPage( $optionsPageData ) {
-		return $this->factory->createOptionsPage( $optionsPageData )->traverse( $this->factory->createTranslate( $optionsPageData['menu_slug'], Package::OPTION_PAGE_PACKAGE_KIND_SLUG ), $this->context );
+		return $this->factory->createOptionsPage( $optionsPageData )->traverse( $this->factory->createTranslate( $optionsPageData['menu_slug'], Package::OPTION_PAGE_PACKAGE_KIND_SLUG ) );
 	}
 
 }

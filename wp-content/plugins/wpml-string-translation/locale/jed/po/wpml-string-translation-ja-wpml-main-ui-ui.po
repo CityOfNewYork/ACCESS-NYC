@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/main-ui/components/Actions.js:46
+msgid "Edit"
+msgstr "編集"
+
+#: src/js/main-ui/components/Actions.js:57
+msgid "Shift+Tab"
+msgstr "Shift+タブ"
+
+#: src/js/main-ui/components/Actions.js:62
+msgid "Tab"
+msgstr "タブ"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:104
+msgid "Translation to:"
+msgstr "に翻訳する："
+
+#: src/js/main-ui/components/EditTranslationPopup.js:123
+msgid "Copy from original"
+msgstr "オリジナルからのコピー"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:138
+msgid "Use Shift+Enter to add a new line."
+msgstr "Shift+Enterで改行する。"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:97
+msgid "Original:"
+msgstr "オリジナルだ："
+
+#: src/js/main-ui/components/LanguagesCell.js:169
+msgid "Add %s translation"
+msgstr "%s 翻訳を追加"
+
+#: src/js/main-ui/components/LanguagesCell.js:188
+msgid "Edit %s translation"
+msgstr "編集 %s 翻訳"
+
+#: src/js/main-ui/components/LanguagesCell.js:198
+msgid "Add %s translation (the string appears on the site and is not translated)"
+msgstr "%s 翻訳を追加する（文字列はサイト上に表示され、翻訳されない）"
+
+#: src/js/main-ui/components/LanguagesCell.js:63
+msgid "Original language %s"
+msgstr "原語 %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:70
+msgid "Waiting for translator to %s"
+msgstr "翻訳者待ち %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:77
+msgid "Translation in progress to %s"
+msgstr "翻訳中 %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:84
+msgid "In basket for translation to %s"
+msgstr "翻訳用バスケット %s"
+
+#: src/js/main-ui/components/notification.js:13
+msgid "Translation saved."
+msgstr "翻訳が保存された。"
+
+#: src/js/main-ui/components/notification.js:17
+msgid "Translation update failed."
+msgstr "翻訳の更新に失敗しました。"

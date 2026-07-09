@@ -46,7 +46,6 @@ class UIHooks implements \IWPML_Action {
 	 */
 	private static function getData() {
 		$fieldGroupId        = Obj::prop( 'ID', get_post() );
-		$fieldGroupKey       = Obj::prop( 'post_name', get_post() );
 		$fieldGroup          = (array) acf_get_field_group( $fieldGroupId );
 		$isNewGroup          = self::isNewGroup( $fieldGroupId );
 		$attachedPosts       = AttachedPosts::getCount( $fieldGroupId );
@@ -61,7 +60,7 @@ class UIHooks implements \IWPML_Action {
 				'fieldGroupId'                       => $fieldGroupId,
 				'pluginImageURI'                     => ACFML_PLUGIN_URL . '/assets/img/',
 				'fieldGroupMode'                     => Mode::getMode( $fieldGroup ),
-				'STModalData'                        => self::getSTModal( $fieldGroupKey ),
+				'STModalData'                        => self::getSTModal( $fieldGroupId ),
 				'strings'                            => self::getStrings( $attachedPosts, $nonTranslatableType ),
 				'hasAcfml1Tooltip'                   => $isNewGroup && MigrateToV2::needsNotification(),
 				'hasTranslateCptModal'               => (bool) $nonTranslatableType,
@@ -82,12 +81,12 @@ class UIHooks implements \IWPML_Action {
 	}
 
 	/**
-	 * @param string $fieldGroupKey
+	 * @param int $fieldGroupId
 	 *
 	 * @return array
 	 */
-	private static function getSTModal( $fieldGroupKey ) {
-		$status = Package::create( $fieldGroupKey )->getStatus();
+	private static function getSTModal( $fieldGroupId ) {
+		$status = Package::create( $fieldGroupId )->getStatus();
 
 		switch ( $status ) {
 			case Package::STATUS_ST_INACTIVE:
@@ -121,7 +120,7 @@ class UIHooks implements \IWPML_Action {
 					'content'      => '<p>' . esc_html__( 'To translate field labels, use the Translation Management dashboard.', 'acfml' ) . '</p>',
 					'okText'       => esc_html__( 'Translate in Translation Management', 'acfml' ),
 					'cancelText'   => null,
-					'redirectOnOk' => self::getLinkToTMDashboard( $fieldGroupKey ),
+					'redirectOnOk' => self::getLinkToTMDashboard( $fieldGroupId ),
 					'footerText'   => '<p>' . sprintf(
 						/* translators: %1$s and %2$s will wrap the string in a <a> link html tag */
 						esc_html__( 'Don’t want to translate field labels? %1$sLearn how to disable field label translation%2$s', 'acfml' ),
@@ -138,18 +137,18 @@ class UIHooks implements \IWPML_Action {
 					'content'      => '<p>' . esc_html__( 'You already translated all field labels in this group. To update any translations, go to the Translation Management dashboard.', 'acfml' ) . '</p>',
 					'okText'       => esc_html__( 'Go to Translation Management', 'acfml' ),
 					'cancelText'   => esc_html__( 'Go back', 'acfml' ),
-					'redirectOnOk' => self::getLinkToTMDashboard( $fieldGroupKey ),
+					'redirectOnOk' => self::getLinkToTMDashboard( $fieldGroupId ),
 					'footerText'   => null,
 				];
 		}
 	}
 
 	/**
-	 * @param string $fieldGroupKey
+	 * @param int $fieldGroupId
 	 *
 	 * @return string
 	 */
-	private static function getLinkToTMDashboard( $fieldGroupKey ) {
+	private static function getLinkToTMDashboard( $fieldGroupId ) {
 		/* @todo: The TM Dashboard does not support filtering in generic sections, besides the Strings section */
 		return AdminUrl::getWPMLTMDashboardPackageSection( Package::FIELD_GROUP_PACKAGE_KIND_SLUG );
 	}

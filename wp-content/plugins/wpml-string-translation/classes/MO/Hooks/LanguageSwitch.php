@@ -4,7 +4,6 @@ namespace WPML\ST\MO\Hooks;
 
 use WPML\ST\MO\JustInTime\MOFactory;
 use WPML\ST\MO\WPLocaleProxy;
-use WPML\ST\MO\WPML_Locale;
 use WPML\ST\Utils\LanguageResolution;
 
 class LanguageSwitch implements \IWPML_Action {
@@ -105,12 +104,11 @@ class LanguageSwitch implements \IWPML_Action {
 			$GLOBALS['wp_locale'] = self::$globals_cache[ $new_locale ]['wp_locale'];
 		} else {
 			/**
-			 * WPML_Locale changes the behavior of WP_Locale so that it generates the necessary translation
-			 * only when it is needed (instead of when the object is created)
-			 * - to avoid loading the default domain for strings that
-			 *   we don't use in this transitory language.
+			 * WPLocaleProxy is a wrapper of \WP_Locale with a kind of lazy initialization
+			 * to avoid loading the default domain for strings that
+			 * we don't use in this transitory language.
 			 */
-			$GLOBALS['wp_locale'] = new WPML_Locale();
+			$GLOBALS['wp_locale'] = new WPLocaleProxy();
 		}
 	}
 

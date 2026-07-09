@@ -3,9 +3,7 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=1; plural=0;",
-            "lang": "ko_KR"
+            "domain": "messages"
          },
          "Not included in String Translation": [
             "문자열 번역에 포함되지 않음"
@@ -23,13 +21,13 @@
             "모든 유형"
          ],
          "Search": [
-            "검색"
+            "찾다"
          ],
          "Communication error": [
             "통신 오류"
          ],
          "The action failed.": [
-            "작업에 실패했습니다."
+            "작업이 실패했습니다."
          ],
          "All (%d)": [
             "모두 (%d)"
@@ -62,13 +60,13 @@
             "취소"
          ],
          "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
-            "다음 내용을 테마 또는 플러그인 루트의 wpml-config.xml에 저장하세요."
+            "테마 또는 플러그인의 루트에 있는 wpml-config.xml에 다음을 저장하세요."
          ],
          "No options found.": [
             "옵션을 찾을 수 없습니다."
          ],
          "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
-            "테마 옵션을 한 번 이상 저장했는지 확인하세요. 일부 테마는 사용자가 테마 기본값에 대한 변경 사항을 명시적으로 저장한 후에만 이러한 내용을 wp_options 테이블에 추가합니다."
+            "테마 옵션을 한 번 이상 저장했는지 확인하세요. 일부 테마는 다음 항목만 추가합니다.wp_options 사용자가 테마 기본값에 대한 변경 사항을 명시적으로 저장한 후의 테이블입니다."
          ],
          "Add to String Translation": [
             "문자열 번역에 추가"

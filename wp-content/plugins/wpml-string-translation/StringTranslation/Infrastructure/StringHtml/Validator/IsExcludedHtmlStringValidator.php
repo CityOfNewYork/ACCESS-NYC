@@ -6,12 +6,7 @@ use WPML\StringTranslation\Application\StringHtml\Validator\IsExcludedHtmlString
 
 class IsExcludedHtmlStringValidator implements IsExcludedHtmlStringValidatorInterface {
 
-	/**
-	 * @param string|null $text
-	 *
-	 * @return bool
-	 */
-	public function validate( ?string $text = null ): bool {
+	public function validate( string $text = null ): bool {
 		if ( is_null( $text ) ) {
 			return false;
 		}
@@ -26,7 +21,7 @@ class IsExcludedHtmlStringValidator implements IsExcludedHtmlStringValidatorInte
 			return false;
 		}
 
-		$digitsCount  = preg_match_all( '/[0-9]/', $text );
+		$digitsCount  = preg_match_all( "/[0-9]/", $text );
 		$lettersCount = $len - $digitsCount;
 
 		// Filtering out identifiers.
@@ -47,7 +42,7 @@ class IsExcludedHtmlStringValidator implements IsExcludedHtmlStringValidatorInte
 
 		// Page builders are outputting long json content.
 		// In the same time we should not block short strings like '{site_title} — Built with {WooCommerce}'.
-		$firstChar = substr( $text, 0, 1 );
+		$firstChar = substr( $text, 0,1);
 		$lastChar  = substr( $text, -1 );
 		if ( $firstChar === '{' && $lastChar === '}' && $len > 50 ) {
 			return false;

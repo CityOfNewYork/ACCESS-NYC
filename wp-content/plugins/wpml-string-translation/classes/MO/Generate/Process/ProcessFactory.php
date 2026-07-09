@@ -16,9 +16,9 @@ class ProcessFactory {
 	private $multiSiteCondition;
 
 	/**
-	 * @param Condition|null $multiSiteCondition
+	 * @param Condition $multiSiteCondition
 	 */
-	public function __construct( ?Condition $multiSiteCondition = null ) {
+	public function __construct( Condition $multiSiteCondition = null ) {
 		$this->multiSiteCondition = $multiSiteCondition ?: new Condition();
 	}
 

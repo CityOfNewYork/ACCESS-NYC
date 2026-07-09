@@ -22,31 +22,21 @@ class FetchFiltersCriteria {
 	/** @var string|null */
 	private $translationPriority;
 
-	/** @var string|null */
+	/** @var ?string */
 	private $sourceLanguageCode;
 
 	/** @var int[] */
 	private $translationStatuses = [];
 
-	/**
-	 * @param int|null    $kind                 The kind of filter.
-	 * @param int|null    $type                 The type of filter.
-	 * @param int|null    $source               The source of the filter.
-	 * @param string|null $domain               The domain to filter by.
-	 * @param string|null $title                The title to filter by.
-	 * @param string|null $translationPriority  The translation priority to filter by.
-	 * @param string|null $sourceLanguageCode   The source language code.
-	 * @param array       $translationStatuses  Array of translation statuses to filter by.
-	 */
 	public function __construct(
-		?int $kind = null,
-		?int $type = null,
-		?int $source = null,
-		?string $domain = null,
-		?string $title = null,
-		?string $translationPriority = null,
-		?string $sourceLanguageCode = null,
-		array $translationStatuses = []
+		int $kind                   = null,
+		int $type                   = null,
+		int $source                 = null,
+		string $domain              = null,
+		string $title               = null,
+		string $translationPriority = null,
+		string $sourceLanguageCode  = null,
+		array  $translationStatuses = []
 	) {
 		$this->kind                = $kind;
 		$this->type                = $type;

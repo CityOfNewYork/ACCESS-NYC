@@ -1,7 +1,5 @@
 <?php
 
-use WPML\FP\Obj;
-
 class WPML_ACF_Blocks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 
 	/**
@@ -22,8 +20,8 @@ class WPML_ACF_Blocks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, 
 	 * Initialize hooks.
 	 */
 	public function add_hooks() {
-		add_filter( 'wpml_found_strings_in_block', [ $this, 'add_block_data_attribute_strings' ], 10, 2 );
-		add_filter( 'wpml_update_strings_in_block', [ $this, 'update_block_data_attribute' ], 10, 3 );
+		add_filter( 'wpml_found_strings_in_block', array( $this, 'add_block_data_attribute_strings' ), 10, 2 );
+		add_filter( 'wpml_update_strings_in_block', array( $this, 'update_block_data_attribute' ), 10, 3 );
 	}
 
 	/**
@@ -33,25 +31,29 @@ class WPML_ACF_Blocks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, 
 	 * @return array $strings
 	 */
 	public function add_block_data_attribute_strings( array $strings, WP_Block_Parser_Block $block ) {
+
 		if ( $this->is_acf_block( $block ) && isset( $block->attrs['data'] ) ) {
+
 			if ( ! is_array( $block->attrs['data'] ) ) {
-				$block->attrs['data'] = [ $block->attrs['data'] ];
+				$block->attrs['data'] = array( $block->attrs['data'] );
 			}
 
-			$addStringRecursive = function( $value, $name ) use ( $block, &$strings, &$addStringRecursive ) {
-				$type = $this->get_text_type( $value );
+			foreach ( $block->attrs['data'] as $field_name => $text ) {
+
+				if ( $this->must_skip( $field_name, $text ) ) {
+					continue;
+				}
+
+				$type = $this->get_text_type( $text );
 
 				if ( 'array' === $type ) {
-					foreach ( $value as $innerName => $innerValue ) {
-						$addStringRecursive( $innerValue, $name . '/' . $innerName );
+					foreach ( $text as $inner_field_name => $inner_text ) {
+						$inner_type = $this->get_text_type( $inner_text );
+						$strings[]  = $this->add_string( $block, $inner_text, $field_name . '/' . $inner_field_name, $inner_type );
 					}
-				} elseif ( ! $this->must_skip( $name, $value ) ) {
-					$strings[] = $this->add_string( $block, $value, $name, $type );
+				} else {
+					$strings[] = $this->add_string( $block, $text, $field_name, $type );
 				}
-			};
-
-			foreach ( $block->attrs['data'] as $fieldName => $fieldValue ) {
-				$addStringRecursive( $fieldValue, $fieldName );
 			}
 		}
 
@@ -67,12 +69,12 @@ class WPML_ACF_Blocks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, 
 	 * @return object
 	 */
 	private function add_string( $block, $text, $field_name, $type ) {
-		return (object) [
+		return (object) array(
 			'id'    => $this->get_string_hash( $block->blockName, $text ),
 			'name'  => $this->get_string_name( $block, $field_name ),
 			'value' => $text,
 			'type'  => $type,
-		];
+		);
 	}
 
 	/**
@@ -88,7 +90,7 @@ class WPML_ACF_Blocks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, 
 				if ( $this->is_system_field( $field_name ) ) {
 					continue;
 				}
-				$block = $this->set_block_field_translation_recursive( $block, $string_translations, $lang, $text, [ $field_name ] );
+				$block = $this->get_block_field_translation_recursive( $block, $string_translations, $lang, $text, $field_name );
 			}
 		}
 		return $block;
@@ -96,49 +98,47 @@ class WPML_ACF_Blocks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, 
 
 	/**
 	 * @param WP_Block_Parser_Block $block
-	 * @param array                 $stringTranslations
-	 * @param string                $language
-	 * @param string|array          $value
-	 * @param array                 $stringPath
+	 * @param array                 $string_translations
+	 * @param string                $lang
+	 * @param string|array          $text
+	 * @param string                $field_name
+	 * @param null|string           $inner_field_name
 	 *
 	 * @return mixed
 	 */
-	private function set_block_field_translation_recursive( $block, $stringTranslations, $language, $value, $stringPath ) {
-		if ( is_array( $value ) ) {
-			foreach ( $value as $innerPath => $innerValue ) {
-				$innerStringPath   = $stringPath;
-				$innerStringPath[] = $innerPath;
-				$block             = $this->set_block_field_translation_recursive( $block, $stringTranslations, $language, $innerValue, $innerStringPath );
+	private function get_block_field_translation_recursive( $block, $string_translations, $lang, $text, $field_name, $inner_field_name = null ) {
+		if ( is_array( $text ) ) {
+			foreach ( $text as $inner_field_name => $inner_text ) {
+				$block = $this->get_block_field_translation_recursive( $block, $string_translations, $lang, $inner_text, $field_name, $inner_field_name );
 			}
 		} else {
-			$block = $this->set_block_field_translation( $block, $stringTranslations, $language, $value, $stringPath );
+			$block = $this->get_block_field_translation( $block, $string_translations, $lang, $text, $field_name, $inner_field_name );
 		}
 		return $block;
 	}
 
 	/**
 	 * @param WP_Block_Parser_Block $block
-	 * @param array                 $stringTranslations
-	 * @param string                $language
-	 * @param string                $value
-	 * @param array                 $stringPath
+	 * @param array                 $string_translations
+	 * @param string                $lang
+	 * @param string                $text
+	 * @param string                $field_name
+	 * @param null|string           $inner_field_name
 	 *
 	 * @return mixed
 	 */
-	private function set_block_field_translation( $block, $stringTranslations, $language, $value, $stringPath ) {
-		$stringHash = $this->get_string_hash( $block->blockName, $value );
+	private function get_block_field_translation( $block, $string_translations, $lang, $text, $field_name, $inner_field_name = null ) {
+		$string_hash = $this->get_string_hash( $block->blockName, $text );
 
-		if (
-			isset( $stringTranslations[ $stringHash ][ $language ]['status'] )
-			&& ICL_TM_COMPLETE === (int) $stringTranslations[ $stringHash ][ $language ]['status']
-			&& isset( $stringTranslations[ $stringHash ][ $language ]['value'] )
-			&& Obj::hasPath( $stringPath, $block->attrs['data'] )
+		if ( isset( $string_translations[ $string_hash ][ $lang ]['status'] )
+			 && ICL_TM_COMPLETE === (int) $string_translations[ $string_hash ][ $lang ]['status']
+			 && isset( $string_translations[ $string_hash ][ $lang ]['value'] )
 		) {
-			$block->attrs['data'] = Obj::set(
-				Obj::lensPath( $stringPath ),
-				$stringTranslations[ $stringHash ][ $language ]['value'],
-				$block->attrs['data']
-			);
+			if ( $inner_field_name ) {
+				$block->attrs['data'][ $field_name ][ $inner_field_name ] = $string_translations[ $string_hash ][ $lang ]['value'];
+			} else {
+				$block->attrs['data'][ $field_name ] = $string_translations[ $string_hash ][ $lang ]['value'];
+			}
 		}
 
 		return $block;
@@ -196,10 +196,7 @@ class WPML_ACF_Blocks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, 
 			$type = 'VISUAL';
 		} elseif ( strpos( $text, "\n" ) !== false ) {
 			$type = 'AREA';
-		} elseif ( filter_var( $text, FILTER_VALIDATE_URL ) ) {
-			$type = 'LINK';
 		}
-
 		return $type;
 	}
 	/**
@@ -227,7 +224,7 @@ class WPML_ACF_Blocks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, 
 			$acfField = $this->maybeGetSubfield( $fieldName );
 		}
 		if ( isset( $acfField['wpml_cf_preferences'] ) ) {
-			return WPML_TRANSLATE_CUSTOM_FIELD === (int) $acfField['wpml_cf_preferences'];
+			return (int) $acfField['wpml_cf_preferences'] === WPML_TRANSLATE_CUSTOM_FIELD;
 		}
 		return true;
 	}

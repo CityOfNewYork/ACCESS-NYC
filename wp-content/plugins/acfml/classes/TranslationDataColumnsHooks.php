@@ -20,7 +20,7 @@ class TranslationDataColumnHooks implements \IWPML_Backend_Action {
 	const COLUMN_HOOK_PRIORITY = 11;
 
 	public function add_hooks() {
-		if ( $this->contentTypeHelper->isListingScreen() && self::shouldRegisterColumn() ) {
+		if ( $this->contentTypeHelper->isListingScreen() ) {
 			Hooks::onFilter(
 				sprintf( 'manage_%s_posts_columns', $this->contentTypeHelper->getInternalPostType() ),
 				self::COLUMN_HOOK_PRIORITY
@@ -32,13 +32,6 @@ class TranslationDataColumnHooks implements \IWPML_Backend_Action {
 				2
 			)->then( spreadArgs( [ $this, 'setColumnsContent' ] ) );
 		}
-	}
-
-	/**
-	 * @return bool
-	 */
-	public static function shouldRegisterColumn() {
-		return filter_input( INPUT_GET, 'post_status' ) !== 'sync';
 	}
 
 	/**

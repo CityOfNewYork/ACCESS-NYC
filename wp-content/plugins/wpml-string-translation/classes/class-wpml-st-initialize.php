@@ -16,12 +16,11 @@ class WPML_ST_Initialize {
 	public function run() {
 		$this->includeAutoloader();
 		$this->configureDIC();
+		$this->loadEarlyHooks();
 
-		if ( has_action( 'wpml_before_init', 'load_wpml_st_basics' ) !== false ) {
-			$this->loadEarlyHooks();
-			$app = new \WPML\StringTranslation\Application( $this->config );
-			$app->run();
-		}
+		$app = new \WPML\StringTranslation\Application( $this->config );
+		$app->run();
+
 	}
 
 	private function includeAutoloader() {

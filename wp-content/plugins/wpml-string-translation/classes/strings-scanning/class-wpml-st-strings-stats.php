@@ -1,9 +1,6 @@
 <?php
 
-use WPML\ST\TranslationFile\StringCollation;
-
 class WPML_ST_Strings_Stats {
-	use StringCollation;
 
 	/**
 	 * @var SitePress
@@ -52,7 +49,7 @@ class WPML_ST_Strings_Stats {
 	}
 
 	private function set_stats() {
-		$count_query = 'SELECT context, COUNT(id) count FROM ' . $this->wpdb->prefix . 'icl_strings GROUP BY context ' . $this->getCollateForContextColumn( $this->wpdb );
+		$count_query = 'SELECT context, COUNT(id) count FROM ' . $this->wpdb->prefix . 'icl_strings GROUP BY context';
 		$this->stats = $this->wpdb->get_results( $count_query, OBJECT_K );
 	}
 }

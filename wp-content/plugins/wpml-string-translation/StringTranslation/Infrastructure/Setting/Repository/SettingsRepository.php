@@ -11,8 +11,6 @@ class SettingsRepository implements SettingsRepositoryInterface {
 
 	const STRING_TRACKING_SETTINGS_KEY = 'track_strings';
 
-	const DETECT_JS_STRINGS = 'detect_js_strings';
-
 	/**
 	 * Some plugin in the frontend can contain bug and output random string, example:
 	 * echo __( 'Some string from plugin' . rand(1, X), 'Y');
@@ -72,11 +70,11 @@ class SettingsRepository implements SettingsRepositoryInterface {
 	public function isAutoregisterStringsTypeOnlyViewedByAdmin(): bool {
 		return $this->getAutoregisterStringsTypeSetting() === SettingsRepositoryInterface::AUTOREGISTER_STRINGS_TYPE_ONLY_VIEWED_BY_ADMIN;
 	}
-
+	
 	public function isAutoregisterStringsTypeViewedByAllUsers(): bool {
 		return $this->getAutoregisterStringsTypeSetting() === SettingsRepositoryInterface::AUTOREGISTER_STRINGS_TYPE_VIEWED_BY_ALL_USERS;
 	}
-
+	
 	public function isAutoregisterStringsTypeDisabled(): bool {
 		return $this->getAutoregisterStringsTypeSetting() === SettingsRepositoryInterface::AUTOREGISTER_STRINGS_TYPE_DISABLED;
 	}
@@ -120,17 +118,6 @@ class SettingsRepository implements SettingsRepositoryInterface {
 
 		return (int)$settings['autoregister_strings'];
 	}
-
-	public function getVisibleColumns(): array {
-		$settings = $this->getSettings();
-		if ( ! isset( $settings['visible_columns'] ) || ! is_array( $settings['visible_columns'] ) ) {
-			$settings['visible_columns'] = array('title' => true, 'name' => true, 'domain' => true, 'source' => true, 'type' => false);
-			$this->saveSettings( $settings );
-		}
-
-		return $settings['visible_columns'];
-	}
-
 
 	public function setShouldRegisterBackendStringsSetting( bool $shouldRegisterBackendStrings ) {
 		$settings = $this->getSettings();
@@ -198,7 +185,7 @@ class SettingsRepository implements SettingsRepositoryInterface {
 		if ( ! is_null( $this->settings ) ) {
 			return $this->settings;
 		}
-
+ 
 		$this->settings = $this->sitepress->get_setting( 'st' );
 		if ( ! is_array( $this->settings ) ) {
 			$this->settings = [];
@@ -480,33 +467,5 @@ class SettingsRepository implements SettingsRepositoryInterface {
 		$settings = $this->getSettings();
 		$settings[self::STRING_TRACKING_SETTINGS_KEY] = 0;
 		$this->saveSettings( $settings );
-	}
-
-	public function setVisibleColumns( array $columns ) {
-
-		$filteredColumns = array_filter(
-			$columns,
-			function ( $value,$column ) {
-				return in_array( $column, [ 'title', 'name', 'domain','source','type' ], true ) && is_bool( $value );
-			},
-			ARRAY_FILTER_USE_BOTH
-		);
-
-		$settings = $this->getSettings();
-
-		$settings['visible_columns'] = $filteredColumns;
-		$this->saveSettings( $settings );
-	}
-
-	public function setDetectStringsInJS( int $detectStringsInJS ) {
-		$settings = $this->getSettings();
-		$settings[ self::DETECT_JS_STRINGS ] = $detectStringsInJS;
-		$this->saveSettings( $settings );
-	}
-
-	public function getDetectStringsInJS(): bool {
-		$settings = $this->getSettings();
-
-		return (bool) ( $settings[ self::DETECT_JS_STRINGS ] ?? false );
 	}
 }

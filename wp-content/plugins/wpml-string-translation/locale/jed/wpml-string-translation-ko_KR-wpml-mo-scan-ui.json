@@ -3,66 +3,64 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=1; plural=0;",
-            "lang": "ko_KR"
+            "domain": "messages"
          },
          "WPML has detected changed or new MO files": [
-            "WPML에서 변경되거나 새로운 MO 파일이 감지되었습니다."
+            "WPML이 변경되었거나 새로운 것을 감지했습니다. 모 파일"
          ],
          "There are new or updated .mo files. WPML needs to scan them to find strings for translation.": [
-            "새롭거나 업데이트된.mo 파일이 있습니다. WPML에서 번역할 문자열을 찾으려면 이 파일을 스캔해야 합니다."
+            "새롭거나 업데이트된 .mo 파일이 있습니다. WPML은 번역할 문자열을 찾기 위해 이를 스캔해야 합니다."
          ],
          "Scan translation files": [
             "번역 파일 스캔"
          ],
          "Scanned %1$d of %2$d files...": [
-            "%2$d개 파일 중 %1$d개 스캔됨..."
+            "스캔됨 %1$d ~의 %2$d 파일..."
          ],
          "Generated files for %1$d of %2$d sites...": [
-            "%2$d개 사이트 중 %1$d개에 대한 파일 생성됨..."
+            "다음에 대해 생성된 파일 %1$d ~의 %2$d 사이트..."
          ],
          "Generated %1$d of %2$d files...": [
-            "%2$d개 파일 중 %1$d개 생성됨..."
+            "생성됨 %1$d ~의 %2$d 파일..."
          ],
          "WPML needs to generate .mo files": [
-            "WPML에서.mo 파일을 생성해야 합니다."
+            "WPML은 .mo 파일을 생성해야 합니다."
          ],
          "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end. However, the folder that should hold these .mo files is not open for writing.": [
-            "WPML String Translation은 데이터베이스 호출 대신.mo 파일을 사용합니다. WPML에서 프런트엔드에 번역이 표시되려면 이.mo 파일을 생성해야 합니다. 하지만 이.mo 파일을 보관해야 하는 폴더에 쓰기 권한이 없습니다."
+            "WPML 문자열 번역은 데이터베이스 호출 대신 .mo 파일을 사용합니다. 번역이 프런트엔드에 표시되려면 WPML이 이러한 .mo 파일을 생성해야 합니다. 그러나 이러한 .mo 파일을 보관해야 하는 폴더는 쓰기 위해 열려 있지 않습니다."
          ],
          "Please use your admin control panel or an FTP program to make the following folder writeable:": [
-            "관리자 제어판 또는 FTP 프로그램을 사용하여 다음 폴더를 쓰기 가능하게 만드세요."
+            "관리자 제어판이나 FTP 프로그램을 사용하여 다음 폴더를 쓰기 가능하게 만드세요."
          ],
          "There was a problem creating the .mo files": [
             ".mo 파일을 생성하는 중에 문제가 발생했습니다."
          ],
          "You can try again now or try again later by going to ": [
-            "지금 다시 시도하거나 나중에 다시 시도할 수 있습니다. "
+            "지금 다시 시도하거나 나중에 다음으로 이동하여 다시 시도할 수 있습니다. "
          ],
          "Translations are missing from the front-end until you generate .mo files": [
             ".mo 파일을 생성할 때까지 프런트엔드에서 번역이 누락됩니다."
          ],
          "Your site doesn't have the .mo files that WPML needs in order to display translated strings on the front-end. To generate these .mo files, remember to go to ": [
-            "사이트에 WPML에서 프런트엔드에 번역된 문자열을 표시하는 데 필요한.mo 파일이 없습니다. 이.mo 파일을 생성하려면 다음으로 이동하세요. "
+            "귀하의 사이트에는 프런트 엔드에 번역된 문자열을 표시하기 위해 WPML에 필요한 .mo 파일이 없습니다. 이러한 .mo 파일을 생성하려면 다음으로 이동하세요. "
          ],
          "WPML->Theme and plugins localization.": [
             "WPML->테마 및 플러그인 현지화."
          ],
          "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end.": [
-            "WPML String Translation은 데이터베이스 호출 대신.mo 파일을 사용합니다. WPML에서 프런트엔드에 번역이 표시되려면 이.mo 파일을 생성해야 합니다."
+            "WPML 문자열 번역은 데이터베이스 호출 대신 .mo 파일을 사용합니다. 번역이 프런트엔드에 표시되려면 WPML이 이러한 .mo 파일을 생성해야 합니다."
          ],
          "Try again": [
-            "다시 시도"
+            "다시 시도하십시오"
          ],
          "Generate .mo files": [
             ".mo 파일 생성"
          ],
          "Close this message": [
-            "이 메시지 닫기"
+            "이 메시지를 닫습니다"
          ],
          "Find additional texts that WordPress, the theme and plugins created and choose which ones to translate": [
-            "WordPress, 테마 및 플러그인이 생성한 추가 텍스트를 찾아 번역할 텍스트를 선택하세요."
+            "WordPress, 테마 및 플러그인이 생성한 추가 텍스트를 찾고 번역할 텍스트를 선택하세요."
          ],
          "Choose texts for translation": [
             "번역할 텍스트 선택"
@@ -71,7 +69,7 @@
             "일부 번역이 변경되었습니다."
          ],
          "Scan the selected components to make new texts available for translation.": [
-            "선택한 구성 요소를 스캔하여 새 텍스트를 번역에 사용할 수 있도록 합니다."
+            "번역에 사용할 수 있는 새 텍스트를 만들려면 선택한 구성요소를 스캔하세요."
          ],
          "Select all": [
             "모두 선택"
@@ -83,16 +81,16 @@
             "테마:"
          ],
          "Core:": [
-            "코어:"
+            "핵심:"
          ],
          "Can't find the strings you're looking to translate?": [
             "번역하려는 문자열을 찾을 수 없습니까?"
          ],
          "Most likely you cannot see the strings you want to translate because:": [
-            "번역하려는 문자열이 표시되지 않는 가장 큰 이유는 다음과 같습니다."
+            "다음과 같은 이유로 번역하려는 문자열을 볼 수 없을 가능성이 높습니다."
          ],
          "Texts are not selected for translation": [
-            "텍스트가 번역용으로 선택되지 않았습니다."
+            "번역할 텍스트가 선택되지 않았습니다."
          ]
       }
    }

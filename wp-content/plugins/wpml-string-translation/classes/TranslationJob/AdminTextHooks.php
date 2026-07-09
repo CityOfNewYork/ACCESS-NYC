@@ -26,7 +26,7 @@ class AdminTextHooks implements \IWPML_REST_Action {
 	 */
 	private function isAdminText( $slug ) {
 		if ( null === $this->optionNames ) {
-			$this->optionNames = array_keys( get_option( \WPML_Admin_Text_Functionality::TRANSLATABLE_NAMES_SETTING, [] ) );
+			$this->optionNames = array_keys( get_option( '_icl_admin_option_names', [] ) );
 		}
 
 		return in_array( $slug, $this->optionNames, true );

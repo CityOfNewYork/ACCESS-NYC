@@ -3,12 +3,10 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=1; plural=0;",
-            "lang": "th"
+            "domain": "messages"
          },
          "Clean up the String Translation table by removing untranslated strings by domain.": [
-            "ล้างตาราง String Translation โดยการลบสตริงที่ยังไม่ได้แปลตามโดเมน"
+            "ทำความสะอาดตารางการแปลสตริงโดยการลบสตริงที่ไม่ได้แปลตามโดเมน"
          ],
          "Remove strings by domain": [
             "ลบสตริงตามโดเมน"
@@ -23,28 +21,28 @@
             "ลบ"
          ],
          "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
-            "ตาราง String Translation ปัจจุบันมีสตริงจากโดเมนที่แสดงด้านล่าง หากคุณไม่ได้วางแผนที่จะแปลสตริงจากโดเมนใดโดเมนหนึ่ง ให้เลือกโดเมนนั้นด้านล่างเพื่อลบสตริงที่ยังไม่ได้แปลออกจากตาราง String Translation สตริงใดๆ ที่มีการแปลแล้วจะยังคงใช้งานได้"
+            "ตารางการแปลสตริงในปัจจุบันมีสตริงจากโดเมนที่แสดงด้านล่าง หากคุณไม่ได้วางแผนที่จะแปลสตริงจากโดเมนใดโดเมนหนึ่ง ให้เลือกโดเมนด้านล่างเพื่อลบสตริงที่ยังไม่ได้แปลออกจากตารางการแปลสตริง สตริงใดๆ ที่มีคำแปลอยู่แล้วจะยังคงมีอยู่"
          ],
          "Search": [
             "ค้นหา"
          ],
          "Removing strings from String Translation table": [
-            "กำลังลบสตริงออกจากตาราง String Translation"
+            "การลบสตริงออกจากตารางการแปลสตริง"
          ],
          "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
-            "หากต้องการเพิ่มสตริงกลับไปยังตาราง String Translation คุณอาจต้องสแกนไฟล์การแปลใหม่หรือลงทะเบียนสตริงเป็นสตริงที่แปลได้"
+            "หากต้องการเพิ่มสตริงกลับไปยังตารางการแปลสตริง คุณอาจต้องสแกนไฟล์การแปลอีกครั้งหรือลงทะเบียนสตริงว่าสามารถแปลได้"
          ],
          "Read more about ": [
-            "อ่านเพิ่มเติมเกี่ยวกับการ "
+            "อ่านเพิ่มเติมเกี่ยวกับ "
          ],
          "scanning your site for strings and registering them as translatable.": [
-            "สแกนไซต์ของคุณเพื่อหาสตริงและลงทะเบียนเป็นสตริงที่แปลได้"
+            "สแกนไซต์ของคุณเพื่อหาสตริงและลงทะเบียนว่าสามารถแปลได้"
          ],
          "Successfully removed strings": [
             "ลบสตริงสำเร็จแล้ว"
          ],
          "OK, Great": [
-            "ตกลง เยี่ยมมาก"
+            "ตกลง, ยอดเยี่ยม"
          ],
          "Domain": [
             "โดเมน"
@@ -53,7 +51,7 @@
             "จำนวนสตริง"
          ],
          "Translated strings": [
-            "สตริงที่แปลแล้ว"
+            "สตริงที่แปล"
          ]
       }
    }

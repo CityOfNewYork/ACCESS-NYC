@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/strings-cleanup/App.js:17
+msgid ""
+"Clean up the String Translation table by removing untranslated strings by "
+"domain."
+msgstr "נקה את טבלת תרגום מחרוזות על ידי הסרת מחרוזות לא מתורגמות לפי תחום."
+
+#: src/js/strings-cleanup/App.js:30
+#: src/js/strings-cleanup/components/CleanupModal.js:38
+msgid "Remove strings by domain"
+msgstr "הסר מחרוזות לפי דומיין"
+
+#: src/js/strings-cleanup/components/CleanupButton.js:12
+msgid "Remove strings"
+msgstr "הסר מחרוזות"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:51
+msgid "Cancel"
+msgstr "לְבַטֵל"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:55
+msgid "Remove"
+msgstr "לְהַסִיר"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:61
+msgid ""
+"The String Translation table currently contains strings from the domains "
+"listed below. If you do not plan to translate strings from a particular "
+"domain, select it below to remove its untranslated strings from the String "
+"Translation table. Any strings that already have translations will still be "
+"available."
+msgstr "טבלת תרגום מחרוזות מכילה כעת מחרוזות מהתחומים המפורטים להלן. אם אינך מתכוון לתרגם מחרוזות מדומיין מסוים, בחר אותו למטה כדי להסיר את המחרוזות הלא מתורגמות שלו מטבלת תרגום מחרוזות. מחרוזות שכבר יש להן תרגומים עדיין יהיו זמינות."
+
+#: src/js/strings-cleanup/components/CleanupModal.js:66
+msgid "Search"
+msgstr "לחפש"
+
+#: src/js/strings-cleanup/components/CleanupProgress.js:21
+msgid "Removing strings from String Translation table"
+msgstr "הסרת מחרוזות מטבלת תרגום מחרוזות"
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:27
+msgid ""
+"To add strings back to the String Translation table, you may need to rescan "
+"translation files or register strings as translatable."
+msgstr "כדי להוסיף מחרוזות בחזרה לטבלת תרגום מחרוזות, ייתכן שיהיה עליך לסרוק מחדש קבצי תרגום או לרשום מחרוזות כניתנות לתרגום."
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:29
+msgid "Read more about "
+msgstr "קרא עוד על "
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:31
+msgid "scanning your site for strings and registering them as translatable."
+msgstr "סורק את האתר שלך לאיתור מחרוזות ורישום אותן כניתנות לתרגום."
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:40
+msgid "Successfully removed strings"
+msgstr "מחרוזות הוסרו בהצלחה"
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:44
+msgid "OK, Great"
+msgstr "בסדר, גדול"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:14
+msgid "Domain"
+msgstr "תְחוּם"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:18
+msgid "Strings count"
+msgstr "ספירת מיתרים"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:24
+msgid "Translated strings"
+msgstr "מחרוזות מתורגמות"
