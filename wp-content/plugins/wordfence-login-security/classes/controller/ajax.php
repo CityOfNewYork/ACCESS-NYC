@@ -4,6 +4,7 @@ namespace WordfenceLS;
 
 use WordfenceLS\Crypto\Model_JWT;
 use WordfenceLS\Crypto\Model_Symmetric;
+use WordfenceLS\Utility_Number;
 
 class Controller_AJAX {
 
@@ -183,7 +184,7 @@ class Controller_AJAX {
 			}
 		}
 		if (empty($username) || empty($password)) {
-			self::send_json(array('error' => wp_kses(sprintf(__('<strong>ERROR</strong>: A username and password must be provided. <a href="%s" title="Password Lost and Found">Lost your password</a>?', 'wordfence-login-security'), wp_lostpassword_url()), array('strong'=>array(), 'a'=>array('href'=>array(), 'title'=>array())))));
+			self::send_json(array('error' => wp_kses(sprintf(/* translators: Forgot password URL */ __('<strong>ERROR</strong>: A username and password must be provided. <a href="%s" title="Password Lost and Found">Lost your password</a>?', 'wordfence-login-security'), wp_lostpassword_url()), array('strong'=>array(), 'a'=>array('href'=>array(), 'title'=>array())))));
 		}
 		
 		$legacy2FAActive = Controller_WordfenceLS::shared()->legacy_2fa_active();
@@ -207,7 +208,7 @@ class Controller_AJAX {
 			$reset = false;
 			foreach ($user->get_error_codes() as $code) {
 				if ($code == 'invalid_username' || $code == 'invalid_email' || $code == 'incorrect_password' || $code == 'authentication_failed') {
-					$errors[] = wp_kses(sprintf(__('<strong>ERROR</strong>: The username or password you entered is incorrect. <a href="%s" title="Password Lost and Found">Lost your password</a>?', 'wordfence-login-security'), wp_lostpassword_url()), array('strong'=>array(), 'a'=>array('href'=>array(), 'title'=>array())));
+					$errors[] = wp_kses(sprintf(/* translators: Forgot password URL */ __('<strong>ERROR</strong>: The username or password you entered is incorrect. <a href="%s" title="Password Lost and Found">Lost your password</a>?', 'wordfence-login-security'), wp_lostpassword_url()), array('strong'=>array(), 'a'=>array('href'=>array(), 'title'=>array())));
 				}
 				else {
 					if ($code == 'wfls_twofactor_invalid') {
@@ -239,7 +240,7 @@ class Controller_AJAX {
 			}
 		}
 		
-		self::send_json(array('error' => wp_kses(sprintf(__('<strong>ERROR</strong>: The username or password you entered is incorrect. <a href="%s" title="Password Lost and Found">Lost your password</a>?', 'wordfence-login-security'), wp_lostpassword_url()), array('strong'=>array(), 'a'=>array('href'=>array(), 'title'=>array())))));
+		self::send_json(array('error' => wp_kses(sprintf(/* translators: Forgot password URL */ __('<strong>ERROR</strong>: The username or password you entered is incorrect. <a href="%s" title="Password Lost and Found">Lost your password</a>?', 'wordfence-login-security'), wp_lostpassword_url()), array('strong'=>array(), 'a'=>array('href'=>array(), 'title'=>array())))));
 	}
 	
 	public function _ajax_register_support_callback() {
@@ -285,7 +286,7 @@ class Controller_AJAX {
 			$email = array(
 				'to'      => get_site_option('admin_email'),
 				'subject' => __('Blocked User Registration Contact Form', 'wordfence-login-security'),
-				'body'    => sprintf(__("A visitor blocked from registration sent the following message.\n\n----------------------------------------\n\nIP: %s\nUsername: %s\nEmail: %s\nreCAPTCHA Score: %f\n\n----------------------------------------\n\n%s", 'wordfence-login-security'), $decryptedIP, $login, $email, $decryptedScore, $message),
+				'body'    => sprintf(/* translators: 1. IP address; 2. Username; 3. Email address; 4. Score; 5. Message */ __("A visitor blocked from registration sent the following message.\n\n----------------------------------------\n\nIP: %1\$s\nUsername: %2\$s\nEmail: %3\$s\nreCAPTCHA Score: %4\$f\n\n----------------------------------------\n\n%5\$s", 'wordfence-login-security'), $decryptedIP, $login, $email, $decryptedScore, $message),
 				'headers' => '',
 			);
 			$success = wp_mail($email['to'], $email['subject'], $email['body'], $email['headers']);
@@ -304,31 +305,31 @@ class Controller_AJAX {
 		$user = wp_get_current_user();
 		if ($user->ID != $userID) {
 			if (!user_can($user, Controller_Permissions::CAP_ACTIVATE_2FA_OTHERS)) {
-				self::send_json(array('error' => esc_html__('You do not have permission to activate the given user.', 'wordfence-login-security')));
+				self::send_json(array('error' => __('You do not have permission to activate the given user.', 'wordfence-login-security')));
 			}
 			else {
 				$user = new \WP_User($userID);
 				if (!$user->exists()) {
-					self::send_json(array('error' => esc_html__('The given user does not exist.', 'wordfence-login-security')));
+					self::send_json(array('error' => __('The given user does not exist.', 'wordfence-login-security')));
 				}
 			}
 		}
 		else if (!user_can($user, Controller_Permissions::CAP_ACTIVATE_2FA_SELF)) {
-			self::send_json(array('error' => esc_html__('You do not have permission to activate 2FA.', 'wordfence-login-security')));
+			self::send_json(array('error' => __('You do not have permission to activate 2FA.', 'wordfence-login-security')));
 		}
 		
 		if (Controller_Users::shared()->has_2fa_active($user)) {
-			self::send_json(array('error' => esc_html__('The given user already has two-factor authentication active.', 'wordfence-login-security')));
+			self::send_json(array('error' => __('The given user already has two-factor authentication active.', 'wordfence-login-security')));
 		}
 		
 		$matches = (isset($_POST['secret']) && isset($_POST['code']) && is_string($_POST['secret']) && is_string($_POST['code']) && Controller_TOTP::shared()->check_code($_POST['secret'], $_POST['code']));
 		if ($matches === false) {
-			self::send_json(array('error' => esc_html__('The code provided does not match the expected value. Please verify that the time on your authenticator device is correct and that this server\'s time is correct.', 'wordfence-login-security')));
+			self::send_json(array('error' => __('The code provided does not match the expected value. Please verify that the time on your authenticator device is correct and that this server\'s time is correct.', 'wordfence-login-security')));
 		}
 		
 		Controller_TOTP::shared()->activate_2fa($user, $_POST['secret'], $_POST['recovery'], $matches);
 		Controller_Notices::shared()->remove_notice(false, 'wfls-will-be-required', $user);
-		self::send_json(array('activated' => 1, 'text' => sprintf(count($_POST['recovery']) == 1 ? esc_html__('%d unused recovery code remains. You may generate a new set by clicking below.', 'wordfence-login-security') : esc_html__('%d unused recovery codes remain. You may generate a new set by clicking below.', 'wordfence-login-security'), count($_POST['recovery']))));
+		self::send_json(array('activated' => 1, 'text' => sprintf(/* translators: count */ _n('%d unused recovery code remains. You may generate a new set by clicking below.', '%d unused recovery codes remain. You may generate a new set by clicking below.', count($_POST['recovery']), 'wordfence-login-security'), count($_POST['recovery']))));
 	}
 	
 	public function _ajax_deactivate_callback() {
@@ -336,21 +337,21 @@ class Controller_AJAX {
 		$user = wp_get_current_user();
 		if ($user->ID != $userID) {
 			if (!user_can($user, Controller_Permissions::CAP_ACTIVATE_2FA_OTHERS)) {
-				self::send_json(array('error' => esc_html__('You do not have permission to deactivate the given user.', 'wordfence-login-security')));
+				self::send_json(array('error' => __('You do not have permission to deactivate the given user.', 'wordfence-login-security')));
 			}
 			else {
 				$user = new \WP_User($userID);
 				if (!$user->exists()) {
-					self::send_json(array('error' => esc_html__('The user does not exist.', 'wordfence-login-security')));
+					self::send_json(array('error' => __('The user does not exist.', 'wordfence-login-security')));
 				}
 			}
 		}
 		else if (!user_can($user, Controller_Permissions::CAP_ACTIVATE_2FA_SELF)) {
-			self::send_json(array('error' => esc_html__('You do not have permission to deactivate 2FA.', 'wordfence-login-security')));
+			self::send_json(array('error' => __('You do not have permission to deactivate 2FA.', 'wordfence-login-security')));
 		}
 		
 		if (!Controller_Users::shared()->has_2fa_active($user)) {
-			self::send_json(array('error' => esc_html__('The user specified does not have two-factor authentication active.', 'wordfence-login-security')));
+			self::send_json(array('error' => __('The user specified does not have two-factor authentication active.', 'wordfence-login-security')));
 		}
 		
 		Controller_Users::shared()->deactivate_2fa($user);
@@ -362,25 +363,25 @@ class Controller_AJAX {
 		$user = wp_get_current_user();
 		if ($user->ID != $userID) {
 			if (!user_can($user, Controller_Permissions::CAP_ACTIVATE_2FA_OTHERS)) {
-				self::send_json(array('error' => esc_html__('You do not have permission to generate new recovery codes for the given user.', 'wordfence-login-security')));
+				self::send_json(array('error' => __('You do not have permission to generate new recovery codes for the given user.', 'wordfence-login-security')));
 			}
 			else {
 				$user = new \WP_User($userID);
 				if (!$user->exists()) {
-					self::send_json(array('error' => esc_html__('The user does not exist.', 'wordfence-login-security')));
+					self::send_json(array('error' => __('The user does not exist.', 'wordfence-login-security')));
 				}
 			}
 		}
 		else if (!user_can($user, Controller_Permissions::CAP_ACTIVATE_2FA_SELF)) {
-			self::send_json(array('error' => esc_html__('You do not have permission to generate new recovery codes.', 'wordfence-login-security')));
+			self::send_json(array('error' => __('You do not have permission to generate new recovery codes.', 'wordfence-login-security')));
 		}
 		
 		if (!Controller_Users::shared()->has_2fa_active($user)) {
-			self::send_json(array('error' => esc_html__('The user specified does not have two-factor authentication active.', 'wordfence-login-security')));
+			self::send_json(array('error' => __('The user specified does not have two-factor authentication active.', 'wordfence-login-security')));
 		}
 		
 		$codes = Controller_Users::shared()->regenerate_recovery_codes($user);
-		self::send_json(array('regenerated' => 1, 'recovery' => array_map(function($r) { return implode(' ', str_split(bin2hex($r), 4)); }, $codes), 'text' => sprintf(count($codes) == 1 ? esc_html__('%d unused recovery code remains. You may generate a new set by clicking below.', 'wordfence-login-security') : esc_html__('%d unused recovery codes remain. You may generate a new set by clicking below.', 'wordfence-login-security'), count($codes))));
+		self::send_json(array('regenerated' => 1, 'recovery' => array_map(function($r) { return implode(' ', str_split(bin2hex($r), 4)); }, $codes), 'text' => sprintf(/* translators: count */ _n('%d unused recovery code remains. You may generate a new set by clicking below.', '%d unused recovery codes remain. You may generate a new set by clicking below.', count($codes), 'wordfence-login-security'), count($codes))));
 	}
 	
 	public function _ajax_save_options_callback() {
@@ -390,7 +391,7 @@ class Controller_AJAX {
 				if ($errors !== true) {
 					if (count($errors) == 1) {
 						$e = array_shift($errors);
-						self::send_json(array('error' => esc_html(sprintf(__('An error occurred while saving the configuration: %s', 'wordfence-login-security'), $e))));
+						self::send_json(array('error' => esc_html(sprintf(/* translators: Error message. */ __('An error occurred while saving the configuration: %s', 'wordfence-login-security'), $e))));
 					}
 					else if (count($errors) > 1) {
 						$compoundMessage = array();
@@ -429,23 +430,25 @@ class Controller_AJAX {
 	}
 	
 	public function _ajax_send_grace_period_notification_callback() {
-		$notifyAll = isset($_POST['notify_all']);
+		$notifyAll = isset($_POST['notify_all']) && Utility_Number::truthyToBool($_POST['notify_all']);
 		$users = Controller_Users::shared()->get_users_by_role($_POST['role'], $notifyAll ? null: self::MAX_USERS_TO_NOTIFY + 1);
 		$url = $_POST['url'];
 		if (!empty($url)) {
 			$url = get_site_url(null, $url);
 			if (filter_var($url, FILTER_VALIDATE_URL) === false) {
-				self::send_json(array('error' => esc_html__('The specified URL is invalid.', 'wordfence-login-security')));
+				self::send_json(array('error' => __('The specified URL is invalid.', 'wordfence-login-security')));
 			}
 		}
 		$userCount = count($users);
-		if (!$notifyAll && $userCount > self::MAX_USERS_TO_NOTIFY)
-			self::send_json(array('error' => esc_html(sprintf(__('More than %d users exist for the selected role. This notification is not designed to handle large groups of users. In such instances, using a different solution for notifying users of upcoming 2FA requirements is recommended.', 'wordfence-login-security'), self::MAX_USERS_TO_NOTIFY)), 'limit_exceeded' => true));
+		if (!$notifyAll && $userCount > self::MAX_USERS_TO_NOTIFY) {
+			self::send_json(array('error' => sprintf(/* translators: user count */ __('More than %d users exist for the selected role. This notification is not designed to handle large groups of users. In such instances, using a different solution for notifying users of upcoming 2FA requirements is recommended.', 'wordfence-login-security'), self::MAX_USERS_TO_NOTIFY), 'limit_exceeded' => true));
+		}
 		$sent = 0;
+		$failed = 0;
 		foreach ($users as $user) {
 			Controller_Users::shared()->requires_2fa($user, $inGracePeriod, $requiredAt);
 			if ($inGracePeriod && !Controller_Users::shared()->has_2fa_active($user)) {
-				$subject = sprintf(__('2FA will soon be required on %s', 'wordfence-login-security'), home_url());
+				$subject = sprintf(/* translators: site url */ __('2FA will soon be required on %s', 'wordfence-login-security'), home_url());
 				$requiredDate = Controller_Time::format_local_time('F j, Y g:i A', $requiredAt);
 				if (empty($url)) {
 					$userUrl = (is_multisite() && is_super_admin($user->ID)) ? network_admin_url('admin.php?page=WFLS') : admin_url('admin.php?page=WFLS');
@@ -455,26 +458,37 @@ class Controller_AJAX {
 				}
 
 				$message = sprintf(
-					__("<html><body><p>You do not currently have two-factor authentication active on your account, which will be required beginning %s.</p><p><a href=\"%s\">Configure 2FA</a></p></body></html>", 'wordfence-login-security'),
+				/* translators: 1. Date; 2. Configuration URL */ __('<html><body><p>You do not currently have two-factor authentication active on your account, which will be required beginning %1$s.</p><p><a href="%2$s">Configure 2FA</a></p></body></html>', 'wordfence-login-security'),
 					$requiredDate,
 					htmlentities($userUrl)
 				);
 				
-				wp_mail($user->user_email, $subject, $message, array('Content-Type: text/html'));
-				$sent++;
+				if (wp_mail($user->user_email, $subject, $message, array('Content-Type: text/html'))) {
+					$sent++;
+				}
+				else {
+					$failed++;
+				}
 			}
 		}
 
 		if ($userCount == 0) {
-			self::send_json(array('error' => esc_html__('No users currently exist with the selected role.', 'wordfence-login-security')));
+			self::send_json(array('error' => __('No users currently exist with the selected role.', 'wordfence-login-security')));
 		}
-		else if ($sent == 0) {
-			self::send_json(array('confirmation' => esc_html__('All users with the selected role already have two-factor authentication activated or have been locked out.', 'wordfence-login-security')));
+		else if ($sent == 0 && $failed == 0) {
+			self::send_json(array('confirmation' => __('All users with the selected role already have two-factor authentication activated or have been locked out.', 'wordfence-login-security')));
 		}
-		else if ($sent == 1) {
-			self::send_json(array('confirmation' => esc_html(sprintf(__('A reminder to activate two-factor authentication was sent to %d user.', 'wordfence-login-security'), $sent))));
+		else if ($sent > 0 && $failed > 0) {
+			self::send_json(array('confirmation' =>
+				sprintf(/* translators: number of users */ _n('A reminder to activate two-factor authentication was sent to %d user.', 'A reminder to activate two-factor authentication was sent to %d users.', $sent, 'wordfence-login-security'), $sent)
+				. ' ' .
+				sprintf(/* translators: number of users */ _n('It failed sending to %d user. Failures typically occur because of a missing or invalid email address.', 'It failed sending to %d users. Failures typically occur because of a missing or invalid email address.', $failed, 'wordfence-login-security'), $failed)
+			));
 		}
-		self::send_json(array('confirmation' => esc_html(sprintf(__('A reminder to activate two-factor authentication was sent to %d users.', 'wordfence-login-security'), $sent))));
+		else if ($sent > 0) {
+			self::send_json(array('confirmation' => sprintf(/* translators: number of users */ _n('A reminder to activate two-factor authentication was sent to %d user.', 'A reminder to activate two-factor authentication was sent to %d users.', $sent, 'wordfence-login-security'), $sent)));
+		}
+		self::send_json(array('confirmation' => sprintf(/* translators: number of users */ _n('A reminder to activate two-factor authentication failed sending to %d user.', 'A reminder to activate two-factor authentication failed sending to %d users.', $failed, 'wordfence-login-security'), $failed)));
 	}
 	
 	public function _ajax_update_ip_preview_callback() {
@@ -509,7 +523,7 @@ class Controller_AJAX {
 	}
 	
 	public function _ajax_reset_recaptcha_stats_callback() {
-		Controller_Settings::shared()->set_array(Controller_Settings::OPTION_CAPTCHA_STATS, array('counts' => array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 'avg' => 0));
+		Controller_Settings::shared()->set(Controller_Settings::OPTION_CAPTCHA_STATS, array('counts' => array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), 'avg' => 0));
 		$response = array('success' => true);
 		self::send_json($response);
 	}

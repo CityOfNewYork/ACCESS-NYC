@@ -1296,7 +1296,10 @@
   margin-bottom: 10px;
   float: right;
   clear: both;
-  background-color: #dcfdff;
+  background-color: #fff;
+}
+.emr_upload_form .shortpixel-offer.fp {
+  background-color: #fff;
 }
 .emr_upload_form .shortpixel-offer h3 {
   color: #00d0e5;
@@ -1313,7 +1316,7 @@
   color: #ff0000;
 }
 .emr_upload_form .shortpixel-offer .cyan {
-  color: #00d0e5;
+  color: #116C7E;
 }
 .emr_upload_form .shortpixel-offer .grey {
   color: grey;
@@ -1323,6 +1326,9 @@
 }
 .emr_upload_form .shortpixel-offer a {
   text-decoration: none;
+}
+.emr_upload_form .shortpixel-offer.fp .cyan {
+  color: #00d0e5;
 }
 .emr_upload_form .shortpixel-offer .button-wrapper {
   text-align: center;
@@ -1337,13 +1343,14 @@
   font-weight: 700;
   font-size: 20px;
   text-transform: uppercase;
+  border: 0;
 }
 .emr_upload_form .shortpixel-offer .hidden {
   display: none !important;
 }
 .emr_upload_form .shortpixel-offer .img-wrapper {
   text-align: center;
-  margin: 0 0 25px 0;
+  margin: 10px 0 20px 0;
 }
 .emr_upload_form .shortpixel-offer .img-wrapper img {
   max-width: 140px;
@@ -1358,6 +1365,9 @@
 }
 .emr_upload_form .shortpixel-offer.theme-offer img {
   max-width: 100%;
+}
+.emr_upload_form .shortpixel-offer.theme-offer .button-wrapper {
+  margin-top: 20px;
 }
 @media (max-width: 1200px) {
   .emr_upload_form .image_previews {

@@ -24,7 +24,7 @@ class YoastSeo
 			 global $wpdb;
 			 $this->yoastTable = $wpdb->prefix . 'yoast_indexable';
 
-			 add_action('shortpixel/replacer/replace_urls', array($this, 'removeIndexes'),10,2);
+			 add_action('emr/replacer/replace_urls', array($this, 'removeIndexes'),10,2);
 		}
 	}
 

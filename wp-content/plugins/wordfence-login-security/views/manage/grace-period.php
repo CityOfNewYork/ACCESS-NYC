@@ -28,8 +28,8 @@ $hasGracePeriod =  $defaultGracePeriod > 0;
 			<p><?php
 				$requiredDateFormatted = \WordfenceLS\Controller_Time::format_local_time('F j, Y g:i A', $requiredAt);
 				echo $ownAccount ?
-					sprintf(wp_kses(__('Two-factor authentication will be required for your account beginning <strong>%s</strong>', 'wordfence-login-security'), array('strong'=>array())), $requiredDateFormatted) :
-					sprintf(wp_kses(__('Two-factor authentication will be required for user <strong>%s</strong> beginning <strong>%s</strong>.', 'wordfence-login-security'), array('strong'=>array())), esc_html($user->user_login), $requiredDateFormatted)
+					sprintf(wp_kses(/* translators: Date */ __('Two-factor authentication will be required for your account beginning <strong>%s</strong>', 'wordfence-login-security'), array('strong'=>array())), $requiredDateFormatted) :
+					sprintf(wp_kses(/* translators: 1. Username; 2. Date */ __('Two-factor authentication will be required for user <strong>%1$s</strong> beginning <strong>%2$s</strong>.', 'wordfence-login-security'), array('strong'=>array())), esc_html($user->user_login), $requiredDateFormatted)
 			?></p>
 			<?php if (\WordfenceLS\Controller_Users::shared()->has_revokable_grace_period($user)): ?>
 			<?php echo \WordfenceLS\Model_View::create(

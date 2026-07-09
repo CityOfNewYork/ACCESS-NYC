@@ -16,11 +16,11 @@ use EnableMediaReplace\ShortPixelLogger\ShortPixelLogger as Log;
 
 	<div class='content'>
 		<h1><?php _e('An error occured', 'enable-media-replace'); ?></h1>
-		<p class="error-message"> <?php echo $view->errorMessage; ?> </p>
+		<p class="error-message"> <?php echo esc_html($view->errorMessage); ?> </p>
 
 		<?php if (property_exists($view, 'errorDescription'))
 		{
-				echo '<p class="description">' . $view->errorDescription . '</p>';
+				echo '<p class="description">' . esc_html($view->errorDescription) . '</p>';
 		} ?>
 
 		<p><?php printf(esc_html__('You can return to %s previous page %s','enable-media-replace'),

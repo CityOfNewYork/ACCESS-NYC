@@ -1,604 +1,1067 @@
-# Copyright (C) 2025 Wordfence
+# Copyright (C) 2026 Wordfence
 # This file is distributed under the same license as the Wordfence Login Security plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Wordfence Login Security 1.1.15\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wordfence-login-security-zip-gND5QjeUN\n"
+"Project-Id-Version: Wordfence Login Security 1.1.16\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/src\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-01-15T16:53:13+00:00\n"
+"POT-Creation-Date: 2026-04-28T22:07:42+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.7.1\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wordfence-login-security\n"
 
 #. Plugin Name of the plugin
 #. Description of the plugin
-#: classes/controller/wordfencels.php:483
+#: wordfence-login-security.php
+#: classes/controller/wordfencels.php:567
 msgid "Wordfence Login Security"
 msgstr ""
 
 #. Author of the plugin
+#: wordfence-login-security.php
 msgid "Wordfence"
 msgstr ""
 
 #. Author URI of the plugin
+#: wordfence-login-security.php
 msgid "https://www.wordfence.com/"
 msgstr ""
 
-#: classes/controller/ajax.php:60
-#: classes/controller/ajax.php:70
+#: classes/controller/ajax.php:61
+#: classes/controller/ajax.php:71
 msgid "You do not have permission to change options."
 msgstr ""
 
-#: classes/controller/ajax.php:65
+#: classes/controller/ajax.php:66
 msgid "You do not have permission to send notifications."
 msgstr ""
 
-#: classes/controller/ajax.php:80
+#: classes/controller/ajax.php:81
 msgid "You do not have permission to reset reCAPTCHA statistics."
 msgstr ""
 
-#: classes/controller/ajax.php:85
+#: classes/controller/ajax.php:86
 msgid "You do not have permission to reset the 2FA grace period."
 msgstr ""
 
-#: classes/controller/ajax.php:90
+#: classes/controller/ajax.php:91
 msgid "You do not have permission to revoke the 2FA grace period."
 msgstr ""
 
-#: classes/controller/ajax.php:95
+#: classes/controller/ajax.php:96
 msgid "You do not have permission to reset the NTP failure count."
 msgstr ""
 
-#: classes/controller/ajax.php:100
+#: classes/controller/ajax.php:101
 msgid "You do not have permission to disable NTP."
 msgstr ""
 
-#: classes/controller/ajax.php:105
+#: classes/controller/ajax.php:106
 msgid "You do not have permission to dismiss this notice."
 msgstr ""
 
-#: classes/controller/ajax.php:139
+#: classes/controller/ajax.php:140
 msgid "An unknown action was provided."
 msgstr ""
 
-#: classes/controller/ajax.php:146
+#: classes/controller/ajax.php:147
 msgid "An expected parameter was not provided."
 msgstr ""
 
-#: classes/controller/ajax.php:154
+#: classes/controller/ajax.php:155
 msgid "Your browser sent an invalid security token. Please try reloading this page."
 msgstr ""
 
-#: classes/controller/ajax.php:186
+#. translators: Forgot password URL
+#: classes/controller/ajax.php:187
+#, php-format
 msgid "<strong>ERROR</strong>: A username and password must be provided. <a href=\"%s\" title=\"Password Lost and Found\">Lost your password</a>?"
 msgstr ""
 
-#: classes/controller/ajax.php:210
-#: classes/controller/ajax.php:242
+#. translators: Forgot password URL
+#: classes/controller/ajax.php:211
+#: classes/controller/ajax.php:243
+#, php-format
 msgid "<strong>ERROR</strong>: The username or password you entered is incorrect. <a href=\"%s\" title=\"Password Lost and Found\">Lost your password</a>?"
 msgstr ""
 
-#: classes/controller/ajax.php:257
-#: classes/controller/ajax.php:268
-#: classes/controller/ajax.php:276
-#: classes/controller/ajax.php:299
+#: classes/controller/ajax.php:258
+#: classes/controller/ajax.php:269
+#: classes/controller/ajax.php:277
+#: classes/controller/ajax.php:300
 msgid "<strong>ERROR</strong>: Unable to send message. Please refresh the page and try again."
 msgstr ""
 
-#: classes/controller/ajax.php:282
+#: classes/controller/ajax.php:283
 msgid "<strong>ERROR</strong>: Unable to send message. You have exceeded the maximum number of messages that may be sent at this time. Please try again later."
 msgstr ""
 
-#: classes/controller/ajax.php:287
+#: classes/controller/ajax.php:288
 msgid "Blocked User Registration Contact Form"
 msgstr ""
 
-#: classes/controller/ajax.php:288
+#. translators: 1. IP address; 2. Username; 3. Email address; 4. Score; 5. Message
+#: classes/controller/ajax.php:289
+#, php-format
 msgid ""
 "A visitor blocked from registration sent the following message.\n"
 "\n"
 "----------------------------------------\n"
 "\n"
-"IP: %s\n"
-"Username: %s\n"
-"Email: %s\n"
-"reCAPTCHA Score: %f\n"
+"IP: %1$s\n"
+"Username: %2$s\n"
+"Email: %3$s\n"
+"reCAPTCHA Score: %4$f\n"
 "\n"
 "----------------------------------------\n"
 "\n"
-"%s"
+"%5$s"
 msgstr ""
 
-#: classes/controller/ajax.php:293
+#: classes/controller/ajax.php:294
 msgid "<strong>MESSAGE SENT</strong>: Your message was sent to the site owner."
 msgstr ""
 
-#: classes/controller/ajax.php:296
+#: classes/controller/ajax.php:297
 msgid "<strong>ERROR</strong>: An error occurred while sending the message. Please try again."
 msgstr ""
 
-#: classes/controller/ajax.php:307
+#: classes/controller/ajax.php:308
 msgid "You do not have permission to activate the given user."
 msgstr ""
 
-#: classes/controller/ajax.php:312
+#: classes/controller/ajax.php:313
 msgid "The given user does not exist."
 msgstr ""
 
-#: classes/controller/ajax.php:317
+#: classes/controller/ajax.php:318
 msgid "You do not have permission to activate 2FA."
 msgstr ""
 
-#: classes/controller/ajax.php:321
+#: classes/controller/ajax.php:322
 msgid "The given user already has two-factor authentication active."
 msgstr ""
 
-#: classes/controller/ajax.php:326
+#: classes/controller/ajax.php:327
 msgid "The code provided does not match the expected value. Please verify that the time on your authenticator device is correct and that this server's time is correct."
 msgstr ""
 
-#: classes/controller/ajax.php:331
-#: classes/controller/ajax.php:383
+#. translators: count
+#: classes/controller/ajax.php:332
+#: classes/controller/ajax.php:384
 #: views/manage/regenerate.php:17
+#, php-format
 msgid "%d unused recovery code remains. You may generate a new set by clicking below."
-msgstr ""
+msgid_plural "%d unused recovery codes remain. You may generate a new set by clicking below."
+msgstr[0] ""
+msgstr[1] ""
 
-#: classes/controller/ajax.php:331
-#: classes/controller/ajax.php:383
-#: views/manage/regenerate.php:17
-msgid "%d unused recovery codes remain. You may generate a new set by clicking below."
-msgstr ""
-
-#: classes/controller/ajax.php:339
+#: classes/controller/ajax.php:340
 msgid "You do not have permission to deactivate the given user."
 msgstr ""
 
-#: classes/controller/ajax.php:344
-#: classes/controller/ajax.php:370
+#: classes/controller/ajax.php:345
+#: classes/controller/ajax.php:371
 msgid "The user does not exist."
 msgstr ""
 
-#: classes/controller/ajax.php:349
+#: classes/controller/ajax.php:350
 msgid "You do not have permission to deactivate 2FA."
 msgstr ""
 
-#: classes/controller/ajax.php:353
-#: classes/controller/ajax.php:379
+#: classes/controller/ajax.php:354
+#: classes/controller/ajax.php:380
 msgid "The user specified does not have two-factor authentication active."
 msgstr ""
 
-#: classes/controller/ajax.php:365
+#: classes/controller/ajax.php:366
 msgid "You do not have permission to generate new recovery codes for the given user."
 msgstr ""
 
-#: classes/controller/ajax.php:375
+#: classes/controller/ajax.php:376
 msgid "You do not have permission to generate new recovery codes."
 msgstr ""
 
-#: classes/controller/ajax.php:393
+#. translators: Error message.
+#: classes/controller/ajax.php:394
+#, php-format
 msgid "An error occurred while saving the configuration: %s"
 msgstr ""
 
-#: classes/controller/ajax.php:401
+#: classes/controller/ajax.php:402
+#, php-format
 msgid "Errors occurred while saving the configuration: %s"
 msgstr ""
 
-#: classes/controller/ajax.php:407
+#: classes/controller/ajax.php:408
 msgid "Errors occurred while saving the configuration."
 msgstr ""
 
-#: classes/controller/ajax.php:427
+#: classes/controller/ajax.php:428
 msgid "No configuration changes were provided to save."
 msgstr ""
 
-#: classes/controller/ajax.php:438
+#: classes/controller/ajax.php:439
 msgid "The specified URL is invalid."
 msgstr ""
 
-#: classes/controller/ajax.php:443
+#. translators: user count
+#: classes/controller/ajax.php:444
+#, php-format
 msgid "More than %d users exist for the selected role. This notification is not designed to handle large groups of users. In such instances, using a different solution for notifying users of upcoming 2FA requirements is recommended."
 msgstr ""
 
-#: classes/controller/ajax.php:448
+#. translators: site url
+#: classes/controller/ajax.php:451
+#, php-format
 msgid "2FA will soon be required on %s"
 msgstr ""
 
-#: classes/controller/ajax.php:458
-msgid "<html><body><p>You do not currently have two-factor authentication active on your account, which will be required beginning %s.</p><p><a href=\"%s\">Configure 2FA</a></p></body></html>"
+#. translators: 1. Date; 2. Configuration URL
+#: classes/controller/ajax.php:461
+#, php-format
+msgid "<html><body><p>You do not currently have two-factor authentication active on your account, which will be required beginning %1$s.</p><p><a href=\"%2$s\">Configure 2FA</a></p></body></html>"
 msgstr ""
 
-#: classes/controller/ajax.php:469
+#: classes/controller/ajax.php:476
 msgid "No users currently exist with the selected role."
 msgstr ""
 
-#: classes/controller/ajax.php:472
+#: classes/controller/ajax.php:479
 msgid "All users with the selected role already have two-factor authentication activated or have been locked out."
 msgstr ""
 
-#: classes/controller/ajax.php:475
+#. translators: number of users
+#: classes/controller/ajax.php:483
+#: classes/controller/ajax.php:489
+#, php-format
 msgid "A reminder to activate two-factor authentication was sent to %d user."
-msgstr ""
+msgid_plural "A reminder to activate two-factor authentication was sent to %d users."
+msgstr[0] ""
+msgstr[1] ""
 
-#: classes/controller/ajax.php:477
-msgid "A reminder to activate two-factor authentication was sent to %d users."
-msgstr ""
+#. translators: number of users
+#: classes/controller/ajax.php:485
+#, php-format
+msgid "It failed sending to %d user. Failures typically occur because of a missing or invalid email address."
+msgid_plural "It failed sending to %d users. Failures typically occur because of a missing or invalid email address."
+msgstr[0] ""
+msgstr[1] ""
 
-#: classes/controller/ajax.php:522
+#. translators: number of users
+#: classes/controller/ajax.php:491
+#, php-format
+msgid "A reminder to activate two-factor authentication failed sending to %d user."
+msgid_plural "A reminder to activate two-factor authentication failed sending to %d users."
+msgstr[0] ""
+msgstr[1] ""
+
 #: classes/controller/ajax.php:536
+#: classes/controller/ajax.php:550
 msgid "Invalid user specified"
 msgstr ""
 
-#: classes/controller/ajax.php:524
+#: classes/controller/ajax.php:538
 msgid "Invalid grace period override"
 msgstr ""
 
-#: classes/controller/ajax.php:529
+#: classes/controller/ajax.php:543
 msgid "Failed to reset grace period"
 msgstr ""
 
-#: classes/controller/ajax.php:555
+#: classes/controller/ajax.php:569
 msgid "Unable to dismiss notice"
 msgstr ""
 
-#: classes/controller/settings.php:203
-msgid "The IP/range %s is invalid."
+#: classes/controller/javascript.php:25
+msgid "(definitely a human)"
 msgstr ""
 
-#: classes/controller/settings.php:209
-msgid "An invalid IP source was provided."
+#: classes/controller/javascript.php:26
+msgid "(probably a bot)"
 msgstr ""
 
-#: classes/controller/settings.php:215
-msgid "The grace period end time must be in the future."
+#: classes/controller/javascript.php:27
+msgid "(probably a human)"
 msgstr ""
 
-#: classes/controller/settings.php:237
-msgid "Unable to validate the reCAPTCHA site key. Please check the key and try again."
-msgstr ""
-
-#: classes/controller/settings.php:241
-msgid "An error was encountered while validating the reCAPTCHA site key: %s"
-msgstr ""
-
-#: classes/controller/users.php:530
-#: classes/controller/wordfencels.php:486
-msgid "2FA Status"
-msgstr ""
-
-#: classes/controller/users.php:534
-msgid "Last Login"
-msgstr ""
-
-#: classes/controller/users.php:536
-msgid "Last CAPTCHA"
-msgstr ""
-
-#: classes/controller/users.php:546
-msgid "Not Allowed"
-msgstr ""
-
-#: classes/controller/users.php:551
-#: classes/controller/wordfencels.php:490
-msgid "Active"
-msgstr ""
-
-#: classes/controller/users.php:554
-msgid "Inactive<small class=\"wfls-sub-status\">(Grace Period)</small>"
-msgstr ""
-
-#: classes/controller/users.php:557
-msgid "Locked Out<small class=\"wfls-sub-status\">(Grace Period Disabled)</small>"
-msgstr ""
-
-#: classes/controller/users.php:557
-msgid "Locked Out<small class=\"wfls-sub-status\">(Grace Period Exceeded)</small>"
-msgstr ""
-
-#: classes/controller/users.php:560
-#: classes/controller/wordfencels.php:490
-msgid "Inactive"
-msgstr ""
-
-#: classes/controller/users.php:662
-msgid "Edit two-factor authentication for %s"
-msgstr ""
-
-#: classes/controller/users.php:662
-#: views/settings/options.php:9
+#. translators: Username
+#: classes/controller/javascript.php:28
+#: classes/controller/users.php:664
 msgid "2FA"
 msgstr ""
 
-#: classes/controller/users.php:673
-#: views/settings/user-stats.php:25
-msgid "2FA Active"
+#: classes/controller/javascript.php:29
+msgid "2FA Notifications"
 msgstr ""
 
-#: classes/controller/users.php:674
-#: views/settings/user-stats.php:26
-msgid "2FA Inactive"
+#: classes/controller/javascript.php:30
+msgid "2FA Relative URL (optional)"
 msgstr ""
 
-#: classes/controller/wordfencels.php:111
-msgid "Login Security: Enable 2FA for these roles"
+#: classes/controller/javascript.php:31
+msgid "2FA Role"
 msgstr ""
 
-#: classes/controller/wordfencels.php:112
-msgid "Login Security: Allow remembering device for 30 days"
+#: classes/controller/javascript.php:32
+msgid "2FA Roles"
 msgstr ""
 
-#: classes/controller/wordfencels.php:113
-msgid "Login Security: Require 2FA for XML-RPC call authentication"
+#: classes/controller/javascript.php:33
+msgid "2FA management shortcode"
 msgstr ""
 
-#: classes/controller/wordfencels.php:114
-msgid "Login Security: Disable XML-RPC authentication"
+#: classes/controller/javascript.php:34
+msgid "A reCAPTCHA score equal to or higher than this value will be considered human. Anything lower will be treated as a bot and require additional verification for login and registration."
 msgstr ""
 
-#: classes/controller/wordfencels.php:115
-msgid "Login Security: Allowlisted IP addresses that bypass 2FA and reCAPTCHA"
+#: classes/controller/javascript.php:35
+msgid "Allow remembering device for 30 days"
 msgstr ""
 
-#: classes/controller/wordfencels.php:116
-msgid "Login Security: Enable reCAPTCHA on the login and user registration pages"
+#: classes/controller/javascript.php:36
+msgid "Allowlisted IP addresses that bypass 2FA and reCAPTCHA"
 msgstr ""
 
-#: classes/controller/wordfencels.php:118
-#: classes/controller/wordfencels.php:121
-msgid "Login Security Options"
+#: classes/controller/javascript.php:37
+msgid "Allowlisted IPs must be placed on separate lines. You can specify ranges using the following formats: 127.0.0.1/24, 127.0.0.[1-100], or 127.0.0.1-127.0.1.100."
 msgstr ""
 
-#: classes/controller/wordfencels.php:119
-msgid "Login Security options are available on the Login Security options page"
+#: classes/controller/javascript.php:38
+msgid "An error occurred"
 msgstr ""
 
-#: classes/controller/wordfencels.php:191
-msgid "XML-RPC authentication is disabled. Jetpack is currently active and requires XML-RPC authentication to work correctly. <a href=\"%s\">Manage Settings</a>"
+#: classes/controller/javascript.php:39
+msgid "An error was encountered while trying to disable NTP. Please try again."
 msgstr ""
 
-#: classes/controller/wordfencels.php:195
-msgid "reCAPTCHA test mode is enabled. While enabled, login and registration requests will be checked for their score but will not be blocked if the score is below the minimum score. <a href=\"%s\">Manage Settings</a>"
+#: classes/controller/javascript.php:40
+msgid "An error was encountered while trying to reset the NTP state. Please try again."
 msgstr ""
 
-#: classes/controller/wordfencels.php:202
-msgid "WooCommerce appears to be installed, but the Wordfence Login Security WooCommerce integration is not currently enabled. Without this feature, WooCommerce forms will not support all functionality provided by Wordfence Login Security, including CAPTCHA for the login page and user registration."
+#: classes/controller/javascript.php:41
+msgid "An error was encountered while trying to send the notification. Please try again."
 msgstr ""
 
-#: classes/controller/wordfencels.php:203
-msgid "Manage Settings"
+#: classes/controller/javascript.php:42
+#: views/manage/deactivate.php:32
+#: views/manage/regenerate.php:27
+msgid "Cancel"
 msgstr ""
 
-#: classes/controller/wordfencels.php:340
-msgid "Message to Support"
+#: classes/controller/javascript.php:43
+msgid "Cancel Changes"
 msgstr ""
 
-#: classes/controller/wordfencels.php:341
-msgid "Send"
-msgstr ""
-
-#: classes/controller/wordfencels.php:342
-msgid "An error was encountered while trying to send the message. Please try again."
-msgstr ""
-
-#: classes/controller/wordfencels.php:343
-msgid "<strong>ERROR</strong>: An error was encountered while trying to send the message. Please try again."
-msgstr ""
-
-#: classes/controller/wordfencels.php:344
-msgid "Login failed with status code 403. Please contact the site administrator."
-msgstr ""
-
-#: classes/controller/wordfencels.php:345
-msgid "<strong>ERROR</strong>: Login failed with status code 403. Please contact the site administrator."
-msgstr ""
-
-#: classes/controller/wordfencels.php:346
-msgid "Login failed with status code 503. Please contact the site administrator."
-msgstr ""
-
-#: classes/controller/wordfencels.php:347
-msgid "<strong>ERROR</strong>: Login failed with status code 503. Please contact the site administrator."
-msgstr ""
-
-#: classes/controller/wordfencels.php:348
-msgid "Wordfence 2FA Code"
-msgstr ""
-
-#: classes/controller/wordfencels.php:349
-msgid "Remember for 30 days"
-msgstr ""
-
-#: classes/controller/wordfencels.php:350
-msgid "Log In"
-msgstr ""
-
-#: classes/controller/wordfencels.php:351
-msgid "<strong>ERROR</strong>: An error was encountered while trying to authenticate. Please try again."
-msgstr ""
-
-#: classes/controller/wordfencels.php:352
-msgid "The Wordfence 2FA Code can be found within the authenticator app you used when first activating two-factor authentication. You may also use one of your recovery codes."
-msgstr ""
-
-#: classes/controller/wordfencels.php:373
-#: classes/controller/wordfencels.php:376
+#: classes/controller/javascript.php:44
+#: classes/controller/wordfencels.php:406
+#: classes/controller/wordfencels.php:409
 msgid "Close"
 msgstr ""
 
-#: classes/controller/wordfencels.php:375
-msgid "Reload"
+#: classes/controller/javascript.php:45
+msgid "Count"
 msgstr ""
 
-#: classes/controller/wordfencels.php:400
-msgid "You have unsaved changes to your options. If you leave this page, those changes will be lost."
+#: classes/controller/javascript.php:46
+msgid "Detected IP(s)"
 msgstr ""
 
-#: classes/controller/wordfencels.php:490
-#: classes/controller/wordfencels.php:869
+#: classes/controller/javascript.php:47
+#: views/common/reset-grace-period.php:13
+msgid "days"
+msgstr ""
+
+#: classes/controller/javascript.php:48
+msgid "Delete Login Security tables and data on deactivation"
+msgstr ""
+
+#: classes/controller/javascript.php:49
+msgid "Disable"
+msgstr ""
+
+#: classes/controller/javascript.php:50
+msgid "Disable XML-RPC authentication"
+msgstr ""
+
+#: classes/controller/javascript.php:51
+msgid "Edit trusted proxies"
+msgstr ""
+
+#: classes/controller/javascript.php:52
+msgid "e.g., /my-account/"
+msgstr ""
+
+#: classes/controller/javascript.php:53
+msgid "Enable reCAPTCHA on the login and user registration pages"
+msgstr ""
+
+#: classes/controller/javascript.php:54
+msgid "Error Disabling NTP"
+msgstr ""
+
+#: classes/controller/javascript.php:55
+msgid "Error Resetting NTP"
+msgstr ""
+
+#: classes/controller/javascript.php:56
+msgid "Error Resetting reCAPTCHA Statistics"
+msgstr ""
+
+#: classes/controller/javascript.php:57
+msgid "Error Saving Option"
+msgstr ""
+
+#: classes/controller/javascript.php:58
+msgid "Error Saving Options"
+msgstr ""
+
+#: classes/controller/javascript.php:59
+msgid "Error Sending Notification"
+msgstr ""
+
+#: classes/controller/javascript.php:60
+msgid "For roles that require 2FA, users will have this many days to set up 2FA. Failure to set up 2FA during this period will result in the user losing account access. This grace period will apply to new users from the time of account creation. For existing users, this grace period will apply relative to the time at which the requirement is implemented. This grace period will not automatically apply to admins and must be manually enabled for each admin user."
+msgstr ""
+
+#: classes/controller/javascript.php:61
+msgid "General"
+msgstr ""
+
+#: classes/controller/javascript.php:62
+#: classes/controller/wordfencels.php:949
 #: views/manage/grace-period.php:22
-msgid "Locked Out"
+msgid "Grace Period"
 msgstr ""
 
-#: classes/controller/wordfencels.php:492
-#: views/manage/grace-period.php:44
-msgid "Two-factor authentication is required for your account, but has not been configured."
+#: classes/controller/javascript.php:63
+msgid "How to get IPs"
 msgstr ""
 
-#: classes/controller/wordfencels.php:492
-#: views/manage/grace-period.php:45
-msgid "Two-factor authentication is required for this account, but has not been configured."
+#: classes/controller/javascript.php:64
+msgid "If enabled, users with 2FA enabled may choose to be prompted for a code only once every 30 days per device."
 msgstr ""
 
-#: classes/controller/wordfencels.php:493
-msgid "Wordfence 2FA is active."
+#: classes/controller/javascript.php:65
+msgid "If enabled, XML-RPC calls that require authentication will also require a valid 2FA code to be appended to the password. You must choose the \"Skipped\" option if you use the WordPress app, the Jetpack plugin, or other services that require XML-RPC."
 msgstr ""
 
-#: classes/controller/wordfencels.php:493
-msgid "Wordfence 2FA is inactive."
+#: classes/controller/javascript.php:66
+msgid "If enabled, all settings and 2FA records will be deleted on deactivation. If later reactivated, all users that previously had 2FA active will need to set it up again."
 msgstr ""
 
-#: classes/controller/wordfencels.php:494
-#: classes/controller/wordfencels.php:506
-#: views/options/option-roles.php:62
+#: classes/controller/javascript.php:67
+msgid "In order to use 2FA with the WooCommerce customer role, you must either enable the \"WooCommerce integration\" option or use the \"wordfence_2fa_management\" shortcode to provide customers with access to the 2FA management interface. The default interface is only available through WordPress admin pages which are not accessible to users in the customer role."
+msgstr ""
+
+#: classes/controller/javascript.php:68
+#: classes/controller/wordfencels.php:578
+#: classes/controller/wordfencels.php:590
 msgid "Learn More"
 msgstr ""
 
-#: classes/controller/wordfencels.php:498
-msgid "Two-factor authentication must be activated for your account prior to %s to avoid losing access."
+#: classes/controller/javascript.php:69
+msgid "NTP"
 msgstr ""
 
-#: classes/controller/wordfencels.php:499
-msgid "Two-factor authentication must be activated for this account prior to %s."
+#: classes/controller/javascript.php:70
+msgid "NTP is a protocol that allows for remote time synchronization. Wordfence Login Security uses this protocol to ensure that it has the most accurate time which is necessary for TOTP-based two-factor authentication."
 msgstr ""
 
-#: classes/controller/wordfencels.php:502
-msgid "Manage 2FA"
+#: classes/controller/javascript.php:71
+msgid "NTP is currently <strong>enabled</strong>."
 msgstr ""
 
-#: classes/controller/wordfencels.php:502
-msgid "Activate 2FA"
+#. translators: number of attempts
+#: classes/controller/javascript.php:72
+#, php-format
+msgid "NTP is currently disabled as %d subsequent attempts have failed."
 msgstr ""
 
-#: classes/controller/wordfencels.php:506
-#: views/options/option-roles.php:8
+#. translators: number of attempts
+#: classes/controller/javascript.php:73
+msgid "NTP updates are currently failing."
+msgstr ""
+
+#: classes/controller/javascript.php:74
+msgid "NTP was manually disabled."
+msgstr ""
+
+#. translators: number of attempts
+#: classes/controller/javascript.php:75
+#, php-format
+msgid "NTP will be automatically disabled after %d more attempts."
+msgstr ""
+
+#. translators: number of attempts
+#: classes/controller/javascript.php:76
+msgid "NTP will be automatically disabled after 1 more attempt."
+msgstr ""
+
+#: classes/controller/javascript.php:77
+msgid "Note: This feature requires a free site key and secret for the <a href=\"https://www.google.com/recaptcha/about/\" target=\"_blank\" rel=\"noopener noreferrer\">Google reCAPTCHA v3 Service</a>. To set up new reCAPTCHA keys, log into your Google account and go to the <a href=\"https://www.google.com/recaptcha/admin\" target=\"_blank\" rel=\"noopener noreferrer\">reCAPTCHA admin page</a>."
+msgstr ""
+
+#: classes/controller/javascript.php:78
+msgid "Notification Results"
+msgstr ""
+
+#: classes/controller/javascript.php:79
+msgid "Notification Sent"
+msgstr ""
+
+#: classes/controller/javascript.php:80
+msgid "Notify"
+msgstr ""
+
+#: classes/controller/javascript.php:81
+msgid "reCAPTCHA"
+msgstr ""
+
+#: classes/controller/javascript.php:82
+msgid "reCAPTCHA human/bot threshold score"
+msgstr ""
+
+#: classes/controller/javascript.php:83
+msgid "reCAPTCHA Score History"
+msgstr ""
+
+#. translators: Support URL
+#: classes/controller/javascript.php:84
+#, php-format
+msgid "reCAPTCHA v3 does not make users solve puzzles or click a checkbox like previous versions. The only visible part is the reCAPTCHA logo. If a visitor's browser fails the CAPTCHA, Wordfence will send an email to the user's address with a link they can click to verify that they are a user of your site. You can read further details <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">in our documentation</a>."
+msgstr ""
+
+#. translators: Support URL
+#: classes/controller/javascript.php:85
+msgid "reCAPTCHA v3 Secret"
+msgstr ""
+
+#: classes/controller/javascript.php:86
+msgid "reCAPTCHA v3 Site Key"
+msgstr ""
+
+#: classes/controller/javascript.php:87
+msgid "Requests"
+msgstr ""
+
+#: classes/controller/javascript.php:88
+#: classes/controller/javascript.php:150
+msgid "Required"
+msgstr ""
+
+#: classes/controller/javascript.php:89
+msgid "Requiring 2FA for customers is not recommended as some customers may experience difficulties setting up or using two-factor authentication. Instead, using the \"Optional\" mode for users with the customer role is recommended which will allow customers to enable 2FA, but will not require them to do so."
+msgstr ""
+
+#: classes/controller/javascript.php:90
+msgid "Reset"
+msgstr ""
+
+#: classes/controller/javascript.php:91
+msgid "Reset Score Statistics"
+msgstr ""
+
+#: classes/controller/javascript.php:92
+msgid "Run reCAPTCHA in test mode"
+msgstr ""
+
+#: classes/controller/javascript.php:93
+msgid "Save"
+msgstr ""
+
+#: classes/controller/javascript.php:94
+msgid "Save Changes"
+msgstr ""
+
+#: classes/controller/javascript.php:95
+msgid "Send Anyway"
+msgstr ""
+
+#: classes/controller/javascript.php:96
+msgid "Send an email to users with the selected role to notify them of the grace period for enabling 2FA. Select the desired role and optionally specify the URL to be sent in the email to setup 2FA. If left blank, the URL defaults to the standard wordpress login and Wordfence’s Two-Factor Authentication plugin page. For example, if using WooCommerce, input the relative URL of the account page."
+msgstr ""
+
+#: classes/controller/javascript.php:97
+msgid "Setting the grace period to 0 will prevent users in roles where 2FA is required, including newly created users, from logging in if they have not already enabled two-factor authentication."
+msgstr ""
+
+#: classes/controller/javascript.php:98
+msgid "Skipped"
+msgstr ""
+
+#: classes/controller/javascript.php:99
+msgid "Show Wordfence 2FA menu on WooCommerce Account page"
+msgstr ""
+
+#: classes/controller/javascript.php:100
+msgid "Show last login column on WP Users page"
+msgstr ""
+
+#: classes/controller/javascript.php:101
+msgid "The constant WORDFENCE_LS_DISABLE_NTP is defined which disables NTP entirely. Remove this constant or set it to a falsy value to enable NTP."
+msgstr ""
+
+#: classes/controller/javascript.php:102
+msgid "These IPs (or CIDR ranges) will be ignored when determining the requesting IP via the X-Forwarded-For HTTP header. Enter one IP or CIDR range per line."
+msgstr ""
+
+#: classes/controller/javascript.php:103
+msgid "Trusted Proxies"
+msgstr ""
+
+#: classes/controller/javascript.php:104
+msgid "Use single-column layout for WooCommerce/shortcode 2FA management interface"
+msgstr ""
+
+#: classes/controller/javascript.php:105
+msgid "When enabled, a Wordfence 2FA tab will be added to the WooCommerce account menu which will provide access for users to manage 2FA settings outside of the WordPress admin area. Testing the WooCommerce account interface after enabling this feature is recommended to ensure theme compatibility."
+msgstr ""
+
+#: classes/controller/javascript.php:106
+msgid "When enabled, reCAPTCHA and 2FA prompt support will be added to WooCommerce login and registration forms in addition to the default WordPress forms. Testing WooCommerce forms after enabling this feature is recommended to ensure plugin compatibility."
+msgstr ""
+
+#: classes/controller/javascript.php:107
+msgid "When enabled, the \"wordfence_2fa_management\" shortcode may be used to provide access for users to manage 2FA settings on custom pages."
+msgstr ""
+
+#: classes/controller/javascript.php:108
+msgid "When enabled, the 2FA management interface embedded through the WooCommerce integration or via a shortcode will use a vertical stacked layout as opposed to horizontal columns. Adjust this setting as appropriate to match your theme. This may be overridden using the \"stacked\" attribute for individual shortcodes."
+msgstr ""
+
+#: classes/controller/javascript.php:109
+msgid "When enabled, the last login timestamp will be displayed for each user on the WP Users page. When used in conjunction with reCAPTCHA, the most recent score will also be displayed for each user."
+msgstr ""
+
+#: classes/controller/javascript.php:110
+msgid "While in test mode, reCAPTCHA will score login and registration requests but not actually block them. The scores will be recorded and can be used to select a human/bot threshold value."
+msgstr ""
+
+#: classes/controller/javascript.php:111
+msgid "Wordfence Login Security Installed"
+msgstr ""
+
+#: classes/controller/javascript.php:112
+msgid "You have just installed the Wordfence Login Security plugin. It contains a subset of the functionality found in the full Wordfence plugin: Two-factor Authentication, XML-RPC Protection and Login Page CAPTCHA."
+msgstr ""
+
+#: classes/controller/javascript.php:113
+msgid "If you're looking for a more comprehensive solution, the <a href=\"https://wordpress.org/plugins/wordfence/\" target=\"_blank\" rel=\"noopener noreferrer\">full Wordfence plugin</a> includes all of the features in this plugin as well as a full-featured WordPress firewall, a security scanner, live traffic, and more. The standard installation includes a robust set of free features that can be upgraded via a Premium license key."
+msgstr ""
+
+#: classes/controller/javascript.php:114
+msgid "Your IP with this setting"
+msgstr ""
+
+#: classes/controller/javascript.php:115
+msgid "WooCommerce & Custom Integrations"
+msgstr ""
+
+#: classes/controller/javascript.php:116
+msgid "WooCommerce integration"
+msgstr ""
+
+#: classes/controller/javascript.php:148
+#: classes/controller/wordfencels.php:590
 msgid "Disabled"
 msgstr ""
 
-#: classes/controller/wordfencels.php:506
-msgid "Two-factor authentication is not currently enabled for this account type. To enable it, visit the Wordfence 2FA Settings page."
+#: classes/controller/javascript.php:149
+#: views/manage/activate.php:18
+msgid "Optional"
 msgstr ""
 
-#: classes/controller/wordfencels.php:523
-msgid "Manage 2FA Settings"
-msgstr ""
-
-#: classes/controller/wordfencels.php:645
-msgid "<strong>CAPTCHA EXPIRED</strong>: The CAPTCHA verification for this login attempt has expired. Please try again."
-msgstr ""
-
-#: classes/controller/wordfencels.php:685
-msgid "Login Verification Required"
-msgstr ""
-
-#: classes/controller/wordfencels.php:690
-msgid "<strong>VERIFICATION REQUIRED</strong>: Additional verification is required for login. If there is a valid account for the provided login credentials, please check the email address associated with it for a verification link to continue logging in."
-msgstr ""
-
-#: classes/controller/wordfencels.php:706
-msgid "<strong>CODE INVALID</strong>: The 2FA code provided is either expired or invalid. Please try again."
-msgstr ""
-
-#: classes/controller/wordfencels.php:715
-msgid "<strong>CODE REQUIRED</strong>: Please enter your 2FA code immediately after your password in the same field."
-msgstr ""
-
-#: classes/controller/wordfencels.php:717
-msgid "<strong>CODE REQUIRED</strong>: Please provide your 2FA code when prompted."
-msgstr ""
-
-#: classes/controller/wordfencels.php:720
-msgid "<strong>LOGIN BLOCKED</strong>: 2FA is required to be active on your account. Please contact the site administrator."
-msgstr ""
-
-#: classes/controller/wordfencels.php:723
-msgid "You do not currently have two-factor authentication active on your account, which will be required beginning %s. <a href=\"%s\">Configure 2FA</a>"
-msgstr ""
-
-#: classes/controller/wordfencels.php:773
-msgid "Email verification succeeded. Please continue logging in."
-msgstr ""
-
-#: classes/controller/wordfencels.php:776
-msgid "Email verification invalid or expired. Please try again."
-msgstr ""
-
-#: classes/controller/wordfencels.php:830
-#: classes/controller/wordfencels.php:833
-msgid "Login Security"
-msgstr ""
-
-#: classes/controller/wordfencels.php:861
-#: views/settings/options.php:23
+#: classes/controller/javascript.php:169
+#: classes/controller/wordfencels.php:945
 #: views/settings/user-stats.php:33
 msgid "Super Administrator"
 msgstr ""
 
-#: classes/controller/wordfencels.php:865
-#: views/manage/grace-period.php:22
-#: views/options/option-roles.php:57
-msgid "Grace Period"
+#: classes/controller/javascript.php:190
+msgid "Use the most secure method to get visitor IP addresses. Prevents spoofing and works with most sites."
 msgstr ""
 
-#: classes/controller/wordfencels.php:884
+#: classes/controller/javascript.php:191
+msgid "Use PHP's built in REMOTE_ADDR and don't use anything else. Very secure if this is compatible with your site."
+msgstr ""
+
+#: classes/controller/javascript.php:192
+msgid "Use the X-Forwarded-For HTTP header. Only use if you have a front-end proxy or spoofing may result."
+msgstr ""
+
+#: classes/controller/javascript.php:193
+msgid "Use the X-Real-IP HTTP header. Only use if you have a front-end proxy or spoofing may result."
+msgstr ""
+
+#. translators: IP or range
+#: classes/controller/settings.php:232
+#, php-format
+msgid "The IP/range %s is invalid."
+msgstr ""
+
+#: classes/controller/settings.php:238
+msgid "An invalid IP source was provided."
+msgstr ""
+
+#: classes/controller/settings.php:244
+msgid "The grace period end time must be in the future."
+msgstr ""
+
+#: classes/controller/settings.php:266
+msgid "Unable to validate the reCAPTCHA site key. Please check the key and try again."
+msgstr ""
+
+#. translators: validation error
+#: classes/controller/settings.php:270
+#, php-format
+msgid "An error was encountered while validating the reCAPTCHA site key: %s"
+msgstr ""
+
+#. translators: 1. Minimum number of days. 2. Maximum number of days.
+#: classes/controller/settings.php:273
+#, php-format
+msgid "The grace period day limit must be between %1$d and %2$d."
+msgstr ""
+
+#: classes/controller/users.php:532
+#: classes/controller/wordfencels.php:570
+msgid "2FA Status"
+msgstr ""
+
+#: classes/controller/users.php:536
+msgid "Last Login"
+msgstr ""
+
+#: classes/controller/users.php:538
+msgid "Last CAPTCHA"
+msgstr ""
+
+#: classes/controller/users.php:548
+msgid "Not Allowed"
+msgstr ""
+
+#: classes/controller/users.php:553
+#: classes/controller/wordfencels.php:574
+msgid "Active"
+msgstr ""
+
+#: classes/controller/users.php:556
+msgid "Inactive<small class=\"wfls-sub-status\">(Grace Period)</small>"
+msgstr ""
+
+#: classes/controller/users.php:559
+msgid "Locked Out<small class=\"wfls-sub-status\">(Grace Period Disabled)</small>"
+msgstr ""
+
+#: classes/controller/users.php:559
+msgid "Locked Out<small class=\"wfls-sub-status\">(Grace Period Exceeded)</small>"
+msgstr ""
+
+#: classes/controller/users.php:562
+#: classes/controller/wordfencels.php:574
+msgid "Inactive"
+msgstr ""
+
+#. translators: Username
+#: classes/controller/users.php:664
+#, php-format
+msgid "Edit two-factor authentication for %s"
+msgstr ""
+
+#: classes/controller/users.php:675
+#: views/settings/user-stats.php:25
+msgid "2FA Active"
+msgstr ""
+
+#: classes/controller/users.php:676
+#: views/settings/user-stats.php:26
+msgid "2FA Inactive"
+msgstr ""
+
+#: classes/controller/wordfencels.php:115
+msgid "Login Security: Enable 2FA for these roles"
+msgstr ""
+
+#: classes/controller/wordfencels.php:116
+msgid "Login Security: Allow remembering device for 30 days"
+msgstr ""
+
+#: classes/controller/wordfencels.php:117
+msgid "Login Security: Require 2FA for XML-RPC call authentication"
+msgstr ""
+
+#: classes/controller/wordfencels.php:118
+msgid "Login Security: Disable XML-RPC authentication"
+msgstr ""
+
+#: classes/controller/wordfencels.php:119
+msgid "Login Security: Allowlisted IP addresses that bypass 2FA and reCAPTCHA"
+msgstr ""
+
+#: classes/controller/wordfencels.php:120
+msgid "Login Security: Enable reCAPTCHA on the login and user registration pages"
+msgstr ""
+
+#: classes/controller/wordfencels.php:122
+#: classes/controller/wordfencels.php:125
+msgid "Login Security Options"
+msgstr ""
+
+#: classes/controller/wordfencels.php:123
+msgid "Login Security options are available on the Login Security options page"
+msgstr ""
+
+#. translators: Configuration URL
+#: classes/controller/wordfencels.php:213
+#, php-format
+msgid "XML-RPC authentication is disabled. Jetpack is currently active and requires XML-RPC authentication to work correctly. <a href=\"%s\">Manage Settings</a>"
+msgstr ""
+
+#. translators: Configuration URL
+#: classes/controller/wordfencels.php:217
+#, php-format
+msgid "reCAPTCHA test mode is enabled. While enabled, login and registration requests will be checked for their score but will not be blocked if the score is below the minimum score. <a href=\"%s\">Manage Settings</a>"
+msgstr ""
+
+#: classes/controller/wordfencels.php:224
+msgid "WooCommerce appears to be installed, but the Wordfence Login Security WooCommerce integration is not currently enabled. Without this feature, WooCommerce forms will not support all functionality provided by Wordfence Login Security, including CAPTCHA for the login page and user registration."
+msgstr ""
+
+#: classes/controller/wordfencels.php:225
+msgid "Manage Settings"
+msgstr ""
+
+#: classes/controller/wordfencels.php:234
+msgid "Your site is currently using the \"Wordfence Login Security” plugin."
+msgstr ""
+
+#: classes/controller/wordfencels.php:235
+msgid "This plugin will be discontinued on or around July 1, 2026, because its features are already included in the main Wordfence plugin."
+msgstr ""
+
+#: classes/controller/wordfencels.php:236
+msgid "To continue receiving updates and security improvements, please install and activate the main Wordfence plugin — also available for free."
+msgstr ""
+
+#: classes/controller/wordfencels.php:237
+msgid "Install Wordfence"
+msgstr ""
+
+#: classes/controller/wordfencels.php:373
+msgid "Message to Support"
+msgstr ""
+
+#: classes/controller/wordfencels.php:374
+msgid "Send"
+msgstr ""
+
+#: classes/controller/wordfencels.php:375
+msgid "An error was encountered while trying to send the message. Please try again."
+msgstr ""
+
+#: classes/controller/wordfencels.php:376
+msgid "<strong>ERROR</strong>: An error was encountered while trying to send the message. Please try again."
+msgstr ""
+
+#: classes/controller/wordfencels.php:377
+msgid "Login failed with status code 403. Please contact the site administrator."
+msgstr ""
+
+#: classes/controller/wordfencels.php:378
+msgid "<strong>ERROR</strong>: Login failed with status code 403. Please contact the site administrator."
+msgstr ""
+
+#: classes/controller/wordfencels.php:379
+msgid "Login failed with status code 503. Please contact the site administrator."
+msgstr ""
+
+#: classes/controller/wordfencels.php:380
+msgid "<strong>ERROR</strong>: Login failed with status code 503. Please contact the site administrator."
+msgstr ""
+
+#: classes/controller/wordfencels.php:381
+msgid "Wordfence 2FA Code"
+msgstr ""
+
+#: classes/controller/wordfencels.php:382
+msgid "Remember for 30 days"
+msgstr ""
+
+#: classes/controller/wordfencels.php:383
+msgid "Log In"
+msgstr ""
+
+#: classes/controller/wordfencels.php:384
+msgid "<strong>ERROR</strong>: An error was encountered while trying to authenticate. Please try again."
+msgstr ""
+
+#: classes/controller/wordfencels.php:385
+msgid "The Wordfence 2FA Code can be found within the authenticator app you used when first activating two-factor authentication. You may also use one of your recovery codes."
+msgstr ""
+
+#: classes/controller/wordfencels.php:408
+msgid "Reload"
+msgstr ""
+
+#: classes/controller/wordfencels.php:426
+msgid "You have unsaved changes to your options. If you leave this page, those changes will be lost."
+msgstr ""
+
+#: classes/controller/wordfencels.php:574
+#: classes/controller/wordfencels.php:953
+#: views/manage/grace-period.php:22
+msgid "Locked Out"
+msgstr ""
+
+#: classes/controller/wordfencels.php:576
+#: views/manage/grace-period.php:44
+msgid "Two-factor authentication is required for your account, but has not been configured."
+msgstr ""
+
+#: classes/controller/wordfencels.php:576
+#: views/manage/grace-period.php:45
+msgid "Two-factor authentication is required for this account, but has not been configured."
+msgstr ""
+
+#: classes/controller/wordfencels.php:577
+msgid "Wordfence 2FA is active."
+msgstr ""
+
+#: classes/controller/wordfencels.php:577
+msgid "Wordfence 2FA is inactive."
+msgstr ""
+
+#. translators: Date
+#: classes/controller/wordfencels.php:582
+#, php-format
+msgid "Two-factor authentication must be activated for your account prior to %s to avoid losing access."
+msgstr ""
+
+#. translators: Date
+#: classes/controller/wordfencels.php:583
+#, php-format
+msgid "Two-factor authentication must be activated for this account prior to %s."
+msgstr ""
+
+#: classes/controller/wordfencels.php:586
+msgid "Manage 2FA"
+msgstr ""
+
+#: classes/controller/wordfencels.php:586
+msgid "Activate 2FA"
+msgstr ""
+
+#: classes/controller/wordfencels.php:590
+msgid "Two-factor authentication is not currently enabled for this account type. To enable it, visit the Wordfence 2FA Settings page."
+msgstr ""
+
+#: classes/controller/wordfencels.php:607
+msgid "Manage 2FA Settings"
+msgstr ""
+
+#: classes/controller/wordfencels.php:729
+msgid "<strong>CAPTCHA EXPIRED</strong>: The CAPTCHA verification for this login attempt has expired. Please try again."
+msgstr ""
+
+#: classes/controller/wordfencels.php:769
+msgid "Login Verification Required"
+msgstr ""
+
+#: classes/controller/wordfencels.php:774
+msgid "<strong>VERIFICATION REQUIRED</strong>: Additional verification is required for login. If there is a valid account for the provided login credentials, please check the email address associated with it for a verification link to continue logging in."
+msgstr ""
+
+#: classes/controller/wordfencels.php:790
+msgid "<strong>CODE INVALID</strong>: The 2FA code provided is either expired or invalid. Please try again."
+msgstr ""
+
+#: classes/controller/wordfencels.php:799
+msgid "<strong>CODE REQUIRED</strong>: Please enter your 2FA code immediately after your password in the same field."
+msgstr ""
+
+#: classes/controller/wordfencels.php:801
+msgid "<strong>CODE REQUIRED</strong>: Please provide your 2FA code when prompted."
+msgstr ""
+
+#: classes/controller/wordfencels.php:804
+msgid "<strong>LOGIN BLOCKED</strong>: 2FA is required to be active on your account. Please contact the site administrator."
+msgstr ""
+
+#. translators: 1. Date; 2. Configuration URL
+#: classes/controller/wordfencels.php:807
+#, php-format
+msgid "You do not currently have two-factor authentication active on your account, which will be required beginning %1$s. <a href=\"%2$s\">Configure 2FA</a>"
+msgstr ""
+
+#: classes/controller/wordfencels.php:857
+msgid "Email verification succeeded. Please continue logging in."
+msgstr ""
+
+#: classes/controller/wordfencels.php:860
+msgid "Email verification invalid or expired. Please try again."
+msgstr ""
+
+#: classes/controller/wordfencels.php:914
+#: classes/controller/wordfencels.php:917
+msgid "Login Security"
+msgstr ""
+
+#. translators: User count
+#: classes/controller/wordfencels.php:968
+#, php-format
 msgid "Users without 2FA active (%s)"
 msgstr ""
 
-#: classes/controller/wordfencels.php:902
-#: classes/controller/wordfencels.php:903
+#: classes/controller/wordfencels.php:986
+#: classes/controller/wordfencels.php:987
 msgid "Two-Factor Authentication"
 msgstr ""
 
-#: classes/controller/wordfencels.php:903
+#: classes/controller/wordfencels.php:987
 msgid "Learn more<span class=\"wfls-hidden-xs\"> about Two-Factor Authentication</span>"
 msgstr ""
 
-#: classes/controller/wordfencels.php:912
+#: classes/controller/wordfencels.php:996
 msgid "Settings"
 msgstr ""
 
-#: classes/controller/wordfencels.php:913
+#: classes/controller/wordfencels.php:997
 msgid "Login Security Settings"
 msgstr ""
 
-#: classes/controller/wordfencels.php:913
+#: classes/controller/wordfencels.php:997
 msgid "Learn more<span class=\"wfls-hidden-xs\"> about Login Security</span>"
 msgstr ""
 
-#: classes/controller/wordfencels.php:939
+#: classes/controller/wordfencels.php:1023
 msgid "<strong>REGISTRATION ATTEMPT BLOCKED</strong>: This site requires a security token created when the page loads for all registration attempts. Please ensure JavaScript is enabled and try again."
 msgstr ""
 
-#: classes/controller/wordfencels.php:946
+#: classes/controller/wordfencels.php:1030
 msgid "<strong>REGISTRATION ATTEMPT BLOCKED</strong>: The security token for the login attempt was invalid or expired. Please reload the page and try again."
 msgstr ""
 
-#: classes/controller/wordfencels.php:959
+#. translators: Security token
+#: classes/controller/wordfencels.php:1046
+#, php-format
 msgid "<strong>REGISTRATION BLOCKED</strong>: The registration request was blocked because it was flagged as spam. Please try again or <a href=\"#\" class=\"wfls-registration-captcha-contact\" data-token=\"%s\">contact the site owner</a> for help."
 msgstr ""
 
-#: classes/controller/wordfencels.php:962
+#: classes/controller/wordfencels.php:1049
 msgid "<strong>REGISTRATION BLOCKED</strong>: The registration request was blocked because it was flagged as spam. Please try again or contact the site owner for help."
 msgstr ""
 
-#: classes/controller/wordfencels.php:1032
+#: classes/controller/wordfencels.php:1119
 msgid "Wordfence 2FA"
 msgstr ""
 
-#: classes/model/notice.php:31
-msgid "<a class=\"wfls-btn wfls-btn-default wfls-btn-sm wfls-dismiss-link\" href=\"#\" onclick=\"GWFLS.dismiss_notice('%s'); return false;\">Dismiss</a>"
+#: classes/model/notice.php:41
+msgid "Dismiss"
 msgstr ""
 
 #: views/common/reset-grace-period.php:7
@@ -613,11 +1076,6 @@ msgstr ""
 msgid "Grace Period Override"
 msgstr ""
 
-#: views/common/reset-grace-period.php:13
-#: views/options/option-roles.php:59
-msgid "days"
-msgstr ""
-
 #: views/common/reset-grace-period.php:17
 msgid "Activate Grace Period"
 msgstr ""
@@ -626,11 +1084,11 @@ msgstr ""
 msgid "Reset Grace Period"
 msgstr ""
 
-#: views/common/reset-grace-period.php:48
+#: views/common/reset-grace-period.php:47
 msgid "An unexpected error occurred while attempting to activate the grace period."
 msgstr ""
 
-#: views/common/reset-grace-period.php:48
+#: views/common/reset-grace-period.php:47
 msgid "An unexpected error occurred while attempting to reset the grace period."
 msgstr ""
 
@@ -642,11 +1100,13 @@ msgstr ""
 msgid "Revoke Grace Period"
 msgstr ""
 
-#: views/common/revoke-grace-period.php:38
+#: views/common/revoke-grace-period.php:37
 msgid "An unexpected error occurred while attempting to revoke the grace period."
 msgstr ""
 
+#. translators: site name
 #: views/email/login-verification.php:10
+#, php-format
 msgid "Please verify a login attempt for your account on: %s"
 msgstr ""
 
@@ -662,7 +1122,9 @@ msgstr ""
 msgid "The request was flagged as suspicious, and we need verification that you attempted to log in to allow it to proceed. This verification link <b>will be valid for 15 minutes</b> from the time it was sent. If you did not attempt this login, please change your password immediately."
 msgstr ""
 
+#. translators: Verification URL
 #: views/email/login-verification.php:17
+#, php-format
 msgid "If you were attempting to log in to this site, <a href=\"%s\"><strong>Verify and Log In</strong></a>"
 msgstr ""
 
@@ -671,33 +1133,34 @@ msgid "2. Enter Code from Authenticator App"
 msgstr ""
 
 #: views/manage/activate.php:18
-#: views/manage/activate.php:131
+#: views/manage/activate.php:52
 msgid "Download Recovery Codes"
 msgstr ""
 
-#: views/manage/activate.php:18
-#: views/options/option-roles.php:9
-msgid "Optional"
-msgstr ""
-
+#. translators: 1. Count; 2. length
 #: views/manage/activate.php:19
-#: views/manage/regenerate.php:66
-msgid "Use one of these %d codes to log in if you lose access to your authenticator device. Codes are %d characters long plus optional spaces. Each one may be used only once."
+#: views/manage/regenerate.php:62
+#, php-format
+msgid "Use one of these %1$d codes to log in if you lose access to your authenticator device. Codes are %2$d characters long plus optional spaces. Each one may be used only once."
 msgstr ""
 
+#. translators: 1. Site address; 2. Username
 #: views/manage/activate.php:22
-#: views/manage/regenerate.php:68
-msgid "Two-Factor Authentication Recovery Codes - %s (%s)"
+#: views/manage/regenerate.php:64
+#, php-format
+msgid "Two-Factor Authentication Recovery Codes - %1$s (%2$s)"
 msgstr ""
 
+#. translators: count
 #: views/manage/activate.php:23
-#: views/manage/regenerate.php:69
+#: views/manage/regenerate.php:65
+#, php-format
 msgid "Each line of %d letters and numbers is a single recovery code, with optional spaces for readability. To use a recovery code, after entering your username and password, enter the code like \"1234 5678 90AB CDEF\" at the 2FA prompt. If your site has a custom login prompt and does not show a 2FA prompt, you can use the single-step method by entering your password and the code together in the Password field, like \"mypassword1234 5678 90AB CDEF\". Your recovery codes are:"
 msgstr ""
 
 #: views/manage/activate.php:32
-#: views/manage/activate.php:133
-#: views/manage/regenerate.php:77
+#: views/manage/activate.php:54
+#: views/manage/regenerate.php:73
 msgid "Download"
 msgstr ""
 
@@ -713,21 +1176,21 @@ msgstr ""
 msgid "Activate"
 msgstr ""
 
-#: views/manage/activate.php:89
-#: views/manage/activate.php:120
-msgid "Error Activating 2FA"
-msgstr ""
-
-#: views/manage/activate.php:120
-msgid "An error was encountered while trying to activate two-factor authentication. Please try again."
-msgstr ""
-
-#: views/manage/activate.php:132
+#: views/manage/activate.php:53
 msgid "Reminder: If you lose access to your authenticator device, you can use recovery codes to log in. If you have not saved a copy of your recovery codes, we recommend downloading them now."
 msgstr ""
 
-#: views/manage/activate.php:134
+#: views/manage/activate.php:55
 msgid "Skip"
+msgstr ""
+
+#: views/manage/activate.php:100
+#: views/manage/activate.php:126
+msgid "Error Activating 2FA"
+msgstr ""
+
+#: views/manage/activate.php:126
+msgid "An error was encountered while trying to activate two-factor authentication. Please try again."
 msgstr ""
 
 #: views/manage/code.php:11
@@ -746,364 +1209,100 @@ msgstr ""
 msgid "Wordfence two-factor authentication is currently active on your account. You may deactivate it by clicking the button below."
 msgstr ""
 
+#. translators: Username
 #: views/manage/deactivate.php:22
+#, php-format
 msgid "Wordfence two-factor authentication is currently active on the account <strong>%s</strong>. You may deactivate it by clicking the button below."
 msgstr ""
 
+#. translators: Username
 #: views/manage/deactivate.php:23
-#: views/manage/deactivate.php:32
+#: views/manage/deactivate.php:33
 msgid "Deactivate"
 msgstr ""
 
-#: views/manage/deactivate.php:29
+#: views/manage/deactivate.php:30
 msgid "Deactivate 2FA"
 msgstr ""
 
-#: views/manage/deactivate.php:30
+#: views/manage/deactivate.php:31
 msgid "Are you sure you want to deactivate two-factor authentication?"
 msgstr ""
 
-#: views/manage/deactivate.php:31
-#: views/manage/regenerate.php:26
-msgid "Cancel"
-msgstr ""
-
-#: views/manage/deactivate.php:66
-#: views/manage/deactivate.php:75
+#: views/manage/deactivate.php:60
+#: views/manage/deactivate.php:68
 msgid "Error Deactivating 2FA"
 msgstr ""
 
-#: views/manage/deactivate.php:75
+#: views/manage/deactivate.php:68
 msgid "An error was encountered while trying to deactivate two-factor authentication. Please try again."
 msgstr ""
 
+#. translators: Date
 #: views/manage/grace-period.php:31
+#, php-format
 msgid "Two-factor authentication will be required for your account beginning <strong>%s</strong>"
 msgstr ""
 
+#. translators: 1. Username; 2. Date
 #: views/manage/grace-period.php:32
-msgid "Two-factor authentication will be required for user <strong>%s</strong> beginning <strong>%s</strong>."
+#, php-format
+msgid "Two-factor authentication will be required for user <strong>%1$s</strong> beginning <strong>%2$s</strong>."
 msgstr ""
 
 #: views/manage/regenerate.php:12
 msgid "Recovery Codes"
 msgstr ""
 
+#. translators: count
 #: views/manage/regenerate.php:18
 msgid "Generate New Codes"
 msgstr ""
 
-#: views/manage/regenerate.php:24
+#: views/manage/regenerate.php:25
 msgid "Generate New Recovery Codes"
 msgstr ""
 
-#: views/manage/regenerate.php:25
+#: views/manage/regenerate.php:26
 msgid "Are you sure you want to generate new recovery codes? Any remaining unused codes will be disabled."
 msgstr ""
 
-#: views/manage/regenerate.php:27
+#: views/manage/regenerate.php:28
 msgid "Generate"
 msgstr ""
 
-#: views/manage/regenerate.php:61
-#: views/manage/regenerate.php:92
+#: views/manage/regenerate.php:57
+#: views/manage/regenerate.php:87
 msgid "Error Generating New Codes"
 msgstr ""
 
-#: views/manage/regenerate.php:80
+#: views/manage/regenerate.php:75
 msgid "New Recovery Codes"
 msgstr ""
 
-#: views/manage/regenerate.php:92
+#: views/manage/regenerate.php:87
 msgid "An error was encountered while trying to generate new recovery codes. Please try again."
 msgstr ""
 
-#: views/onboarding/standalone-header.php:9
-msgid "Wordfence Login Security Installed"
-msgstr ""
-
-#: views/onboarding/standalone-header.php:13
-msgid "You have just installed the Wordfence Login Security plugin. It contains a subset of the functionality found in the full Wordfence plugin: Two-factor Authentication, XML-RPC Protection and Login Page CAPTCHA."
-msgstr ""
-
-#: views/onboarding/standalone-header.php:14
-msgid "If you're looking for a more comprehensive solution, the <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">full Wordfence plugin</a> includes all of the features in this plugin as well as a full-featured WordPress firewall, a security scanner, live traffic, and more. The standard installation includes a robust set of free features that can be upgraded via a Premium license key."
-msgstr ""
-
-#: views/options/option-captcha-threshold.php:7
-msgid "1.0 (definitely a human)"
-msgstr ""
-
-#: views/options/option-captcha-threshold.php:8
-msgid "0.9"
-msgstr ""
-
-#: views/options/option-captcha-threshold.php:9
-msgid "0.8"
-msgstr ""
-
-#: views/options/option-captcha-threshold.php:10
-msgid "0.7"
-msgstr ""
-
-#: views/options/option-captcha-threshold.php:11
-msgid "0.6"
-msgstr ""
-
-#: views/options/option-captcha-threshold.php:12
-msgid "0.5 (probably a human)"
-msgstr ""
-
-#: views/options/option-captcha-threshold.php:13
-msgid "0.4"
-msgstr ""
-
-#: views/options/option-captcha-threshold.php:14
-msgid "0.3"
-msgstr ""
-
-#: views/options/option-captcha-threshold.php:15
-msgid "0.2"
-msgstr ""
-
-#: views/options/option-captcha-threshold.php:16
-msgid "0.1 (probably a bot)"
-msgstr ""
-
-#: views/options/option-captcha-threshold.php:27
-msgid "reCAPTCHA human/bot threshold score"
-msgstr ""
-
-#: views/options/option-captcha-threshold.php:28
-msgid "A reCAPTCHA score equal to or higher than this value will be considered human. Anything lower will be treated as a bot and require additional verification for login and registration."
-msgstr ""
-
-#: views/options/option-captcha-threshold.php:50
-msgid "Reset Score Statistics"
-msgstr ""
-
-#: views/options/option-captcha-threshold.php:87
-msgid "Requests"
-msgstr ""
-
-#: views/options/option-captcha-threshold.php:105
-msgid "reCAPTCHA Score History"
-msgstr ""
-
-#: views/options/option-captcha-threshold.php:112
-msgid "Count"
-msgstr ""
-
-#: views/options/option-captcha.php:20
-msgid "Enable reCAPTCHA on the login and user registration pages"
-msgstr ""
-
-#: views/options/option-captcha.php:22
-msgid "reCAPTCHA v3 does not make users solve puzzles or click a checkbox like previous versions. The only visible part is the reCAPTCHA logo. If a visitor's browser fails the CAPTCHA, Wordfence will send an email to the user's address with a link they can click to verify that they are a user of your site. You can read further details <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">in our documentation</a>."
-msgstr ""
-
-#: views/options/option-captcha.php:33
-msgid "reCAPTCHA v3 Site Key"
-msgstr ""
-
-#: views/options/option-captcha.php:37
-msgid "reCAPTCHA v3 Secret"
-msgstr ""
-
-#: views/options/option-captcha.php:47
-msgid "Note: This feature requires a free site key and secret for the <a href=\"https://www.google.com/recaptcha/about/\" target=\"_blank\" rel=\"noopener noreferrer\">Google reCAPTCHA v3 Service</a>. To set up new reCAPTCHA keys, log into your Google account and go to the <a href=\"https://www.google.com/recaptcha/admin\" target=\"_blank\" rel=\"noopener noreferrer\">reCAPTCHA admin page</a>."
-msgstr ""
-
-#: views/options/option-ip-source.php:8
-msgid "Use the most secure method to get visitor IP addresses. Prevents spoofing and works with most sites."
-msgstr ""
-
-#: views/options/option-ip-source.php:8
-msgid "(Recommended)"
-msgstr ""
-
-#: views/options/option-ip-source.php:9
-msgid "Use PHP's built in REMOTE_ADDR and don't use anything else. Very secure if this is compatible with your site."
-msgstr ""
-
-#: views/options/option-ip-source.php:10
-msgid "Use the X-Forwarded-For HTTP header. Only use if you have a front-end proxy or spoofing may result."
-msgstr ""
-
-#: views/options/option-ip-source.php:11
-msgid "Use the X-Real-IP HTTP header. Only use if you have a front-end proxy or spoofing may result."
-msgstr ""
-
-#: views/options/option-ip-source.php:19
-msgid "How to get IPs"
-msgstr ""
-
-#: views/options/option-ip-source.php:47
-msgid "Trusted Proxies"
-msgstr ""
-
-#: views/options/option-ip-source.php:48
-msgid "These IPs (or CIDR ranges) will be ignored when determining the requesting IP via the X-Forwarded-For HTTP header. Enter one IP or CIDR range per line."
-msgstr ""
-
-#: views/options/option-ntp.php:8
-msgid "NTP"
-msgstr ""
-
-#: views/options/option-ntp.php:10
-msgid "NTP is a protocol that allows for remote time synchronization. Wordfence Login Security uses this protocol to ensure that it has the most accurate time which is necessary for TOTP-based two-factor authentication."
-msgstr ""
-
-#: views/options/option-ntp.php:12
-msgid "The constant WORDFENCE_LS_DISABLE_NTP is defined which disables NTP entirely. Remove this constant or set it to a falsy value to enable NTP."
-msgstr ""
-
-#: views/options/option-ntp.php:15
-msgid "NTP is currently disabled as %d subsequent attempts have failed."
-msgstr ""
-
-#: views/options/option-ntp.php:17
-msgid "NTP was manually disabled."
-msgstr ""
-
-#: views/options/option-ntp.php:19
-msgid "Reset"
-msgstr ""
-
-#: views/options/option-ntp.php:21
-msgid "NTP is currently <strong>enabled</strong>."
-msgstr ""
-
-#: views/options/option-ntp.php:25
-msgid "NTP updates are currently failing."
-msgstr ""
-
-#: views/options/option-ntp.php:26
-msgid "NTP will be automatically disabled after %d more attempts."
-msgstr ""
-
-#: views/options/option-ntp.php:26
-msgid "NTP will be automatically disabled after 1 more attempt."
-msgstr ""
-
-#: views/options/option-ntp.php:29
-msgid "Disable"
-msgstr ""
-
-#: views/options/option-ntp.php:43
-msgid "Error Resetting NTP"
-msgstr ""
-
-#: views/options/option-ntp.php:44
-msgid "An error was encountered while trying to reset the NTP state. Please try again."
-msgstr ""
-
-#: views/options/option-ntp.php:68
-msgid "Error Disabling NTP"
-msgstr ""
-
-#: views/options/option-ntp.php:69
-msgid "An error was encountered while trying to disable NTP. Please try again."
-msgstr ""
-
-#: views/options/option-roles.php:10
-#: views/settings/options.php:65
-msgid "Required"
-msgstr ""
-
-#: views/options/option-roles.php:23
-msgid "Requiring 2FA for customers is not recommended as some customers may experience difficulties setting up or using two-factor authentication. Instead, using the \"Optional\" mode for users with the customer role is recommended which will allow customers to enable 2FA, but will not require them to do so."
-msgstr ""
-
-#: views/options/option-roles.php:28
-msgid "2FA Roles"
-msgstr ""
-
-#: views/options/option-roles.php:53
-msgid "In order to use 2FA with the WooCommerce customer role, you must either enable the \"WooCommerce integration\" option or use the \"wordfence_2fa_management\" shortcode to provide customers with access to the 2FA management interface. The default interface is only available through WordPress admin pages which are not accessible to users in the customer role."
-msgstr ""
-
-#: views/options/option-roles.php:61
-msgid "Setting the grace period to 0 will prevent users in roles where 2FA is required, including newly created users, from logging in if they have not already enabled two-factor authentication."
-msgstr ""
-
-#: views/options/option-roles.php:64
-msgid "For roles that require 2FA, users will have this many days to set up 2FA. Failure to set up 2FA during this period will result in the user losing account access. This grace period will apply to new users from the time of account creation. For existing users, this grace period will apply relative to the time at which the requirement is implemented. This grace period will not automatically apply to admins and must be manually enabled for each admin user."
-msgstr ""
-
-#: views/options/option-roles.php:68
-msgid "2FA Notifications"
-msgstr ""
-
-#: views/options/option-roles.php:70
-msgid "Send an email to users with the selected role to notify them of the grace period for enabling 2FA. Select the desired role and optionally specify the URL to be sent in the email to setup 2FA. If left blank, the URL defaults to the standard wordpress login and Wordfence’s Two-Factor Authentication plugin page. For example, if using WooCommerce, input the relative URL of the account page."
-msgstr ""
-
-#: views/options/option-roles.php:74
-msgid "2FA Role"
-msgstr ""
-
-#: views/options/option-roles.php:82
-msgid "2FA Relative URL (optional)"
-msgstr ""
-
-#: views/options/option-roles.php:85
-msgid "Notify"
-msgstr ""
-
-#: views/options/option-roles.php:106
-msgid "Send Anyway"
-msgstr ""
-
-#: views/options/option-roles.php:110
-#: views/options/option-roles.php:120
-msgid "Error Sending Notification"
-msgstr ""
-
-#: views/options/option-roles.php:113
-msgid "Notification Sent"
-msgstr ""
-
-#: views/options/option-roles.php:120
-msgid "An error was encountered while trying to send the notification. Please try again."
-msgstr ""
-
-#: views/options/option-roles.php:161
-msgid "Not Recommended"
-msgstr ""
-
-#: views/options/option-roles.php:165
-msgid "Make Optional"
-msgstr ""
-
-#: views/options/option-roles.php:170
-msgid "Proceed"
-msgstr ""
-
-#: views/options/option-select.php:22
-#: views/options/option-text.php:30
-#: views/options/option-toggled-boolean-switch.php:32
-#: views/options/option-toggled-segmented.php:21
-#: views/options/option-toggled-select.php:27
-#: views/options/option-toggled-sub.php:44
-#: views/options/option-toggled-sub.php:52
-#: views/options/option-toggled-textarea.php:24
-#: views/options/option-token.php:25
-msgid "Premium Feature"
-msgstr ""
-
+#. translators: Support URL
 #: views/page/manage-embedded.php:26
+#, php-format
 msgid "Two-Factor Authentication, or 2FA, significantly improves login security for your account. Wordfence 2FA works with a number of TOTP-based apps like Google Authenticator, FreeOTP, and Authy. For a full list of tested TOTP-based apps, <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">click here</a>."
 msgstr ""
 
+#. translators: Support URL
 #: views/page/manage.php:24
+#, php-format
 msgid "Two-Factor Authentication, or 2FA, significantly improves login security for your website. Wordfence 2FA works with a number of TOTP-based apps like Google Authenticator, FreeOTP, and Authy. For a full list of tested TOTP-based apps, <a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">click here</a>."
 msgstr ""
 
+#. translators: 1. WordPress avatar tag; 2. WordPress username
 #: views/page/manage.php:31
-msgid "Editing User:&nbsp;&nbsp;%s <span class=\"wfls-text-plain\">%s</span>"
+#, php-format
+msgid "Editing User:&nbsp;&nbsp;%1$s <span class=\"wfls-text-plain\">%2$s</span>"
 msgstr ""
 
+#. translators: 1. WordPress avatar tag; 2. WordPress username
 #: views/page/manage.php:31
 msgid "(you)"
 msgstr ""
@@ -1144,15 +1343,21 @@ msgstr ""
 msgid "This page only shows users and roles on the main site of this network"
 msgstr ""
 
+#. translators: Role name
 #: views/page/role.php:10
+#, php-format
 msgid "2FA is not required for the %s role"
 msgstr ""
 
+#. translators: 1. 2FA state; 2. Role name
 #: views/page/role.php:16
-msgid "No users found in the %s state for the %s role"
+#, php-format
+msgid "No users found in the %1$s state for the %2$s role"
 msgstr ""
 
+#. translators: page number
 #: views/page/role.php:18
+#, php-format
 msgid "Page %d is out of range"
 msgstr ""
 
@@ -1162,120 +1367,6 @@ msgstr ""
 
 #: views/page/role.php:46
 msgid "Page "
-msgstr ""
-
-#. translators: word order may be reversed as long as HTML remains around "Changes"
-#: views/page/settings.php:5
-msgid "Cancel<span class=\"wfls-visible-sm-inline\"> Changes</span>"
-msgstr ""
-
-#. translators: word order may be reversed as long as HTML remains around "Changes"
-#: views/page/settings.php:5
-msgid "Save<span class=\"wfls-visible-sm-inline\"> Changes</span>"
-msgstr ""
-
-#: views/settings/options.php:51
-msgid "Allow remembering device for 30 days"
-msgstr ""
-
-#: views/settings/options.php:52
-msgid "If enabled, users with 2FA enabled may choose to be prompted for a code only once every 30 days per device."
-msgstr ""
-
-#: views/settings/options.php:61
-msgid "Require 2FA for XML-RPC call authentication"
-msgstr ""
-
-#: views/settings/options.php:62
-msgid "If enabled, XML-RPC calls that require authentication will also require a valid 2FA code to be appended to the password. You must choose the \"Skipped\" option if you use the WordPress app, the Jetpack plugin, or other services that require XML-RPC."
-msgstr ""
-
-#: views/settings/options.php:64
-msgid "Skipped"
-msgstr ""
-
-#: views/settings/options.php:79
-msgid "Disable XML-RPC authentication"
-msgstr ""
-
-#: views/settings/options.php:80
-msgid "If disabled, XML-RPC requests that attempt authentication will be rejected, whether the user has 2FA enabled or not."
-msgstr ""
-
-#: views/settings/options.php:94
-msgid "WooCommerce & Custom Integrations"
-msgstr ""
-
-#: views/settings/options.php:107
-msgid "WooCommerce integration"
-msgstr ""
-
-#: views/settings/options.php:108
-msgid "When enabled, reCAPTCHA and 2FA prompt support will be added to WooCommerce login and registration forms in addition to the default WordPress forms. Testing WooCommerce forms after enabling this feature is recommended to ensure plugin compatibility."
-msgstr ""
-
-#: views/settings/options.php:119
-msgid "Show Wordfence 2FA menu on WooCommerce Account page"
-msgstr ""
-
-#: views/settings/options.php:120
-msgid "When enabled, a Wordfence 2FA tab will be added to the WooCommerce account menu which will provide access for users to manage 2FA settings outside of the WordPress admin area. Testing the WooCommerce account interface after enabling this feature is recommended to ensure theme compatibility."
-msgstr ""
-
-#: views/settings/options.php:134
-msgid "2FA management shortcode"
-msgstr ""
-
-#: views/settings/options.php:135
-msgid "When enabled, the \"wordfence_2fa_management\" shortcode may be used to provide access for users to manage 2FA settings on custom pages."
-msgstr ""
-
-#: views/settings/options.php:147
-msgid "Use single-column layout for WooCommerce/shortcode 2FA management interface"
-msgstr ""
-
-#: views/settings/options.php:148
-msgid "When enabled, the 2FA management interface embedded through the WooCommerce integration or via a shortcode will use a vertical stacked layout as opposed to horizontal columns. Adjust this setting as appropriate to match your theme. This may be overridden using the \"stacked\" attribute for individual shortcodes."
-msgstr ""
-
-#: views/settings/options.php:163
-msgid "reCAPTCHA"
-msgstr ""
-
-#: views/settings/options.php:188
-msgid "Run reCAPTCHA in test mode"
-msgstr ""
-
-#: views/settings/options.php:189
-msgid "While in test mode, reCAPTCHA will score login and registration requests but not actually block them. The scores will be recorded and can be used to select a human/bot threshold value."
-msgstr ""
-
-#: views/settings/options.php:203
-msgid "General"
-msgstr ""
-
-#: views/settings/options.php:214
-msgid "Allowlisted IP addresses that bypass 2FA and reCAPTCHA"
-msgstr ""
-
-#: views/settings/options.php:216
-msgid "Allowlisted IPs must be placed on separate lines. You can specify ranges using the following formats: 127.0.0.1/24, 127.0.0.[1-100], or 127.0.0.1-127.0.1.100."
-msgstr ""
-
-#: views/settings/options.php:242
-msgid "Show last login column on WP Users page"
-msgstr ""
-
-#: views/settings/options.php:243
-msgid "When enabled, the last login timestamp will be displayed for each user on the WP Users page. When used in conjunction with reCAPTCHA, the most recent score will also be displayed for each user."
-msgstr ""
-
-#: views/settings/options.php:254
-msgid "Delete Login Security tables and data on deactivation"
-msgstr ""
-
-#: views/settings/options.php:255
-msgid "If enabled, all settings and 2FA records will be deleted on deactivation. If later reactivated, all users that previously had 2FA active will need to set it up again."
 msgstr ""
 
 #: views/settings/user-stats.php:11

@@ -23,7 +23,7 @@ $columnClasses = 'wfls-flex-row wfls-flex-item-xs-100 ' . ($stacked ? '' : 'wfls
 	<?php $asset->renderInlineIfNotEnqueued(); ?>
 <?php endforeach ?>
 <div id="wfls-management-embedded"<?php if ($stacked): ?> class="stacked" <?php endif ?>>
-	<p><?php echo wp_kses(sprintf(__('Two-Factor Authentication, or 2FA, significantly improves login security for your account. Wordfence 2FA works with a number of TOTP-based apps like Google Authenticator, FreeOTP, and Authy. For a full list of tested TOTP-based apps, <a href="%s" target="_blank" rel="noopener noreferrer">click here</a>.', 'wordfence-login-security'), \WordfenceLS\Controller_Support::esc_supportURL(\WordfenceLS\Controller_Support::ITEM_MODULE_LOGIN_SECURITY_2FA)), array('a'=>array('href'=>array(), 'target'=>array(), 'rel'=>array()))); ?></p>
+	<p><?php echo wp_kses(sprintf(/* translators: Support URL */ __('Two-Factor Authentication, or 2FA, significantly improves login security for your account. Wordfence 2FA works with a number of TOTP-based apps like Google Authenticator, FreeOTP, and Authy. For a full list of tested TOTP-based apps, <a href="%s" target="_blank" rel="noopener noreferrer">click here</a>.', 'wordfence-login-security'), \WordfenceLS\Controller_Support::esc_supportURL(\WordfenceLS\Controller_Support::ITEM_MODULE_LOGIN_SECURITY_2FA)), array('a'=>array('href'=>array(), 'target'=>array(), 'rel'=>array()))); ?></p>
 	<div id="wfls-deactivation-controls" class="<?php echo $containerClasses ?>"<?php if (!$enabled) { echo ' style="display: none;"'; } ?>>
 		<!-- begin status content -->
 		<div class="<?php echo $columnClasses ?>">

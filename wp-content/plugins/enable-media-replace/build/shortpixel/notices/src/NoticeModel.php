@@ -145,7 +145,6 @@ class NoticeModel //extends ShortPixelModel
 	}
 
 
-
   /** Set a notice persistent. Meaning it shows every page load until dismissed.
   * @param $key Unique Key of this message. Required
   * @param $suppress When dismissed do not show this message again for X amount of time. When -1 it will just be dropped from the Notices and not suppressed
@@ -268,26 +267,28 @@ class NoticeModel //extends ShortPixelModel
     }
 
     $id = ! is_null($this->id) ?  $this->id : uniqid();
-    //'id="' . $this->id . '"'
-    $output = "<div id='$id' class='$class'><span class='icon'> " . $icon . "</span> <span class='content'>" . $this->message;
+
+    $output = sprintf('<div id="%s" class="%s"><span class="icon">%s</span><span class="content">%s', $id, $class, $icon,$this->message);
+
     if ($this->hasDetails())
     {
-      $output .= '<div class="details-wrapper">
-      <input type="checkbox" name="detailhider" id="check-' . $id .'">
-      <label for="check-' . $id . '"  class="show-details"><span>' . __('See Details', 'shortpixel-image-optimiser')   . '</span>
-      </label>';
 
-      $output .= "<div class='detail-content-wrapper'><p class='detail-content'>" . $this->parseDetails() . "</p></div>";
-      $output .= '<label for="check-' . $id . '" class="hide-details"><span>' . __('Hide Details', 'shortpixel-image-optimiser') . '</span></label>';
+      $details = sprintf('<div class="details-wrapper">
+            <input type="checkbox" name="detailhider" id="check-%s">
+            <label for="check-%s"  class="show-details"><span>%s</span>
+            </label>
+             <div class="detail-content-wrapper"><p class="detail-content">%s</p></div>
+          <label for="check-%s" class="hide-details"><span>%s</span></label>
+            </div>', $id, $id, __('See Details', 'enable-media-replace/'), $this->parseDetails(), $id, __('Hide Details', 'enable-media-replace/') );
 
-      $output .= '</div>'; // detail wrapper
+      $output .= $details;
 
     }
     $output .= "</span>";
 
     if ($this->is_removable)
     {
-			      $output .= '<button type="button" id="button-' . $id . '" class="notice-dismiss" data-dismiss="' . $this->suppress_period . '" ><span class="screen-reader-text">' . __('Dismiss this notice', 'shortpixel-image-optimiser') . '</span></button>';
+        $output .= sprintf('<button type="button" id="button-%s" class="notice-dismiss" data-dismiss="%s" ><span class="screen-reader-text">%s</span></button>', $id,  $this->suppress_period, __('Dismiss this notice', 'enable-media-replace/') );
 
        if (! $this->is_persistent)
        {
@@ -311,7 +312,6 @@ class NoticeModel //extends ShortPixelModel
         $output .= "<script type='text/javascript'>\n" . $this->getDismissJS() . "\n</script>";
     }
     return $output;
-
   }
 
   protected function hasDetails()
@@ -337,14 +337,26 @@ class NoticeModel //extends ShortPixelModel
           $url = wp_json_encode(admin_url('admin-ajax.php'));
           $js = "function shortpixel_notice_dismiss(event) {
                     event.preventDefault();
-                    var ev = event.detail;
                     var target = event.target;
-                    var parent = target.parentElement;
+                    if (target.tagName !== 'button') // tricky this
+                    {
+                        target = target.closest('button');
+                    }
+                    var parent = target.closest('.shortpixel-notice');
+
+                    if (target.hasAttribute('data-dismisstype'))
+                    {
+                       var type = target.getAttribute('data-dismisstype');
+                    }
+                    else {
+                       var type = 'dismiss';
+                    }
 
                     var data = {
                       'plugin_action': 'dismiss',
                       'action' : '$this->notice_action',
                       'nonce' : '$nonce',
+                      'dismisstype' : type,
                     }
                     data.time = target.getAttribute('data-dismiss');
                     data.id = parent.getAttribute('id');
@@ -358,7 +370,8 @@ class NoticeModel //extends ShortPixelModel
           }";
       }
 
-      $js .=  ' jQuery("#' . $this->id . '").find(".notice-dismiss").on("click", shortpixel_notice_dismiss); ';
+      // This all needs to be formalized in a better script, regardless of class, also in proper scope.
+      $js .=  ' jQuery("#' . $this->id . '").find(".notice-dismiss, .notice-dismiss-action").on("click", shortpixel_notice_dismiss); ';
 
       return "\n jQuery(document).ready(function(){ \n" . $js . "\n});";
   }

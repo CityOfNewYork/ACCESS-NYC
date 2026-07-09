@@ -20,6 +20,7 @@ class DirectoryModel
   protected $is_writable = null;
   protected $is_readable = null;
   protected $is_virtual = null;
+  protected $is_restricted = false;
 
   protected $fields = array();
 
@@ -48,7 +49,21 @@ class DirectoryModel
         $this->exists = true;
       }
 
-      if (! $this->is_virtual() && ! is_dir($path) ) // path is wrong, *or* simply doesn't exist.
+      if( false == $this->is_virtual() && true === $this->fileIsRestricted($path) )
+      {
+         $this->exists = false;
+         $this->is_readable = false;
+         $this->is_writable = false;
+         $this->is_restricted = true;
+      }
+      else {
+        $this->is_virtual = false;
+      }
+
+      if (false === $this->is_virtual() &&
+          false === $this->is_restricted &&
+          false === is_dir($path)
+          ) // path is wrong, *or* simply doesn't exist.
       {
         /* Test for file input.
         * If pathinfo is fed a fullpath, it rips of last entry without setting extension, don't further trust.
@@ -64,7 +79,10 @@ class DirectoryModel
           $path = dirname($path);
       }
 
-      if (! $this->is_virtual() && ! is_dir($path))
+      if (false === $this->is_virtual() &&
+          false === $this->is_restricted &&
+          false === is_dir($path)
+          ) // path is wrong, *or* simply doesn't exist.
       {
         /* Check if realpath improves things. We support non-existing paths, which realpath fails on, so only apply on result.
         Moved realpath to check after main pathinfo is set. Reason is that symlinked directories which don't include the WordPress upload dir will start to fail in file_model on processpath ( doesn't see it as a wp path, starts to try relative path). Not sure if realpath should be used anyhow in this model /BS
@@ -224,6 +242,37 @@ class DirectoryModel
 
   }
 
+  /** Check if path is allowed within openbasedir restrictions. This is an attempt to limit notices in file funtions if so.  Most likely the path will be relative in that case.
+  * @param String Path as String
+  */
+  private function fileIsRestricted($path)
+  {
+
+     $basedir = ini_get('open_basedir');
+
+     if (false === $basedir || strlen($basedir) == 0)
+     {
+         return false;
+     }
+
+     $restricted = true;
+     $basedirs = preg_split('/:|;/i', $basedir);
+
+     foreach($basedirs as $basepath)
+     {
+          if (strpos($path, $basepath) !== false)
+          {
+             $restricted = false;
+             break;
+          }
+     }
+
+     // Allow this to be overridden due to specific server configs ( ie symlinks ) might get this flagged falsely.
+     $restricted = apply_filters('emr/file/basedir_check', $restricted);
+
+     return $restricted;
+  }
+
 
   /* Last Resort function to just reduce path to various known WorPress paths. */
   private function constructUsualDirectories($path)
@@ -301,6 +350,11 @@ class DirectoryModel
 	public function getPermissionRecursive()
 	{
 		 $parent = $this->getParent();
+      // Edge-case when the whole structure doesn't exist and / or getParent can only retrieve same-level path ? 
+      if (false === $parent)
+      {
+          return false; 
+      }
 		  if (! $parent->exists())
 			{
 				 return $parent->getPermissionRecursive();
@@ -484,6 +538,10 @@ class DirectoryModel
       $path = $this->getPath();
       $parentPath = dirname($path);
 
+      if ($path === $parentPath)
+      {
+         return false;
+      }
       $parentDir = new DirectoryModel($parentPath);
 
       return $parentDir;

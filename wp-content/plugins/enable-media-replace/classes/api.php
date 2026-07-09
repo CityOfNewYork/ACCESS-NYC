@@ -6,6 +6,7 @@ namespace EnableMediaReplace;
 
 use EnableMediaReplace\ShortPixelLogger\ShortPixelLogger as Log;
 use EnableMediaReplace\Controller\ReplaceController as ReplaceController;
+use EnableMediaReplace\ApiKeyManager as ApiKeyManager;
 
 
 use Exception;
@@ -23,11 +24,18 @@ class Api {
 	private $counter = 0;
 
 	/**
-	 * ShortPixel api url
+	 * ShortPixel api url (free tier — used when no API key is configured)
 	 *
 	 * @var string $url
 	 */
 	private $url = 'http://api.shortpixel.com/v2/free-reducer.php';
+
+	/**
+	 * ShortPixel authenticated api url — used when a valid API key is configured.
+	 */
+	private $authenticated_url = 'https://api.shortpixel.com/v2/reducer.php';
+
+	private $cleanup_url = 'https://api.shortpixel.com/v2/cleanup.php';
 
 	/**
 	 * ShortPixel api request headers
@@ -91,34 +99,67 @@ class Api {
 			$bg_remove = $posted_data['background']['color'];
 
 			$transparency = isset($posted_data['background']['transparency']) ? intval($posted_data['background']['transparency']) : -1;
-			// if transparancy without acceptable boundaries, add it to color ( as rgba I presume )
-			if ($transparency >= 0 && $transparency < 100)
+			if ($transparency >= 0 && $transparency <= 100)
 			{
-				if ($transparency == 100)
-					$transparency = 'FF';
-
-			  // Strpad for lower than 10 should add 09, 08 etc.
-				 $bg_remove .= str_pad($transparency, 2, '0', STR_PAD_LEFT);
+				if ($transparency == 100) {
+					$alpha = 'FF';
+				} else {
+					$alpha = str_pad($transparency, 2, '0', STR_PAD_LEFT);
+				}
+				$bg_remove .= $alpha;
 			}
 		}
 
 
 
 		$data = array(
-			'plugin_version' => EMR_VERSION,
+			'plugin_version' => 'EMR4.2.0',
 			'bg_remove'      => $bg_remove,
 			'urllist'        => array( urlencode( esc_url($url) ) ),
 			'lossy'          => $compression_level,
 			'refresh'				 => $this->refresh,
 		);
 
-		$request = array(
-			'method'  => 'POST',
-			'timeout' => 60,
-			'headers' => $this->headers,
-			'body'    => json_encode( $data ),
+		$apiKeyManager = ApiKeyManager::getInstance();
+		$apiKey   = $apiKeyManager->getApiKey();
+		$endpoint = $this->url;
+		if ( ! empty( $apiKey ) ) {
+			if ( $this->counter === 0 && ! $apiKeyManager->verifyUnlimitedPlan() ) {
+				$result = $this->getResponseObject();
+				$result->success      = false;
+				$result->plan_expired = true;
+				$result->message      = __( 'Your Unlimited plan is no longer active. Please renew at shortpixel.com/pricing or remove your API Key to use the Free plan.', 'enable-media-replace' );
+				return $result;
+			}
+			$data['key']     = $apiKey;
+			$data['urllist'] = array( esc_url_raw( $url ) );
+			$data['item_id'] = intval( $attachment_id );
+			$endpoint        = $this->authenticated_url;
 
-		);
+			if ( $this->counter === 0 && $this->refresh ) {
+				$this->purgeRemoteCache( $apiKey, esc_url_raw( $url ), intval( $attachment_id ) );
+			}
+		}
+
+		if ( ! empty( $apiKey ) ) {
+			$request = array(
+				'method'      => 'POST',
+				'timeout'     => 15,
+				'redirection' => 3,
+				'httpversion' => '1.0',
+				'blocking'    => true,
+				'headers'     => array(),
+				'body'        => json_encode( $data, JSON_UNESCAPED_UNICODE ),
+				'cookies'     => array(),
+			);
+		} else {
+			$request = array(
+				'method'  => 'POST',
+				'timeout' => 60,
+				'headers' => $this->headers,
+				'body'    => json_encode( $data ),
+			);
+		}
 
 		$settingsData = '';
 		//unset($settingsData['url']);
@@ -133,19 +174,21 @@ class Api {
 		}
 
 
-		//we need to wait a bit until we try to check if the image is ready
-		if ($this->counter > 0)
-			sleep( $this->counter + 3 );
+		if ($this->counter > 0) {
+			sleep( ! empty( $apiKey ) ? 3 : ( $this->counter + 3 ) );
+		}
 
 		$this->counter++;
 
 		$result = $this->getResponseObject();
 
-		if ( $this->counter < 10 ) {
+		$maxAttempts = ! empty( $apiKey ) ? 30 : 10;
+
+		if ( $this->counter < $maxAttempts ) {
 			try {
 
 				Log::addDebug('Sending request', $request);
-				$response = wp_remote_post( $this->url, $request );
+				$response = wp_remote_post( $endpoint, $request );
 
 				$this->refresh = false;
 
@@ -184,6 +227,12 @@ class Api {
 						{
 							 $result->message = $json->Status->Message;
 						}
+
+						// Friendly override + flag when the free-reducer quota is exhausted.
+						if ( ! empty( $result->message ) && stripos( $result->message, 'Quota exceeded' ) !== false ) {
+							$result->quota_exceeded = true;
+							$result->message       = __( 'Quota exceeded. Please purchase the Unlimited or Unlimited AI plan and add your API key to continue removing backgrounds.', 'enable-media-replace' );
+						}
 					}
 				}
 			} catch ( Exception $e ) {
@@ -194,6 +243,38 @@ class Api {
 		}
 
 		return $result;
+	}
+
+	private function purgeRemoteCache( $apiKey, $imageUrl, $itemId = 0 )
+	{
+		$body = array(
+			'plugin_version' => 'EMR4.2.0',
+			'key'            => $apiKey,
+			'urllist'        => array( $imageUrl ),
+			'item_id'        => intval( $itemId ),
+		);
+
+		$request = array(
+			'method'      => 'POST',
+			'timeout'     => 15,
+			'redirection' => 3,
+			'httpversion' => '1.0',
+			'blocking'    => true,
+			'headers'     => array(),
+			'body'        => json_encode( $body, JSON_UNESCAPED_UNICODE ),
+			'cookies'     => array(),
+		);
+
+		Log::addDebug( 'Purging remote cache', $request );
+		$cleanup_response = wp_remote_post( $this->cleanup_url, $request );
+		if ( is_wp_error( $cleanup_response ) ) {
+			Log::addDebug( 'Cleanup error', $cleanup_response->get_error_message() );
+		} else {
+			Log::addDebug( 'Cleanup response', array(
+				'code' => wp_remote_retrieve_response_code( $cleanup_response ),
+				'body' => wp_remote_retrieve_body( $cleanup_response ),
+			) );
+		}
 	}
 
 	public function handleSuccess($result)

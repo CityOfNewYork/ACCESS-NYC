@@ -71,7 +71,6 @@ class UploadViewController extends \EnableMediaReplace\ViewController
 		 $params = $this->getPost();
 
 		 // UploadController here / replacerController here with save Settings as well? s
-		 $this->updateSettings($params);
 		 $this->setView($post_id, $params); // set variables needed for view.
 
 		 $replaceController = new ReplaceController($post_id);
@@ -88,8 +87,12 @@ class UploadViewController extends \EnableMediaReplace\ViewController
 
 		if (true == $result)
 		{
+			 // Save settings only on success run, to prevent bad data becoming default.
+			 $this->updateSettings($params);
 			 $this->viewSuccess();
 		}
+
+
 	 }
 
 

@@ -24,14 +24,14 @@ class PackageLoader
       return $this->composerFile;
   }
 
-    public function load($dir)
+    public function load($dir, $prepend = false)
     {
         $this->dir = $dir;
         $composer = $this->getComposerFile();
 
 
         if(isset($composer["autoload"]["psr-4"])){
-            $this->loadPSR4($composer['autoload']['psr-4']);
+            $this->loadPSR4($composer['autoload']['psr-4'], $prepend);
         }
         if(isset($composer["autoload"]["psr-0"])){
             $this->loadPSR0($composer['autoload']['psr-0']);
@@ -50,9 +50,9 @@ class PackageLoader
         }
     }
 
-    public function loadPSR4($namespaces)
+    public function loadPSR4($namespaces, $prepend)
     {
-        $this->loadPSR($namespaces, true);
+        $this->loadPSR($namespaces, true, $prepend);
     }
 
     public function loadPSR0($namespaces)
@@ -60,7 +60,7 @@ class PackageLoader
         $this->loadPSR($namespaces, false);
     }
 
-    public function loadPSR($namespaces, $psr4)
+    public function loadPSR($namespaces, $psr4, $prepend = false)
     {
         $dir = $this->dir;
         // Foreach namespace specified in the composer, load the given classes
@@ -88,7 +88,7 @@ class PackageLoader
                         }
                     }
                 }
-            });
+            }, true, $prepend);
         }
     }
 }

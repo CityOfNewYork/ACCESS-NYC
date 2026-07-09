@@ -12,27 +12,30 @@ function emr_plugin_install() {
 	if ( ! current_user_can('install_plugins'))
 	{
 		// Send back a response.
-		wp_send_json(array('result'=> false));
+		
+		wp_send_json(array('result'=> false, 'message' => 'Install permission issue'));
 		die;
 	}
 
 	switch($plugin)
 	{
 		 case "envira":
-		    $download_url = 'https://downloads.wordpress.org/plugin/envira-gallery-lite.zip';
+			$download_url = 'https://downloads.wordpress.org/plugin/envira-gallery-lite.zip';
 		 break;
 		 case 'spio':
-		 		$download_url = 'https://downloads.wordpress.org/plugin/shortpixel-image-optimiser.zip';
+			$download_url = 'https://downloads.wordpress.org/plugin/shortpixel-image-optimiser.zip';
 		 break;
 		 case 'spai':
-		 	 $download_url = 'https://downloads.wordpress.org/plugin/shortpixel-adaptive-images.zip';
+			$download_url = 'https://downloads.wordpress.org/plugin/shortpixel-adaptive-images.zip';
+		 break;
+		 case 'fp':
+			$download_url = 'https://downloads.wordpress.org/plugin/fastpixel-website-accelerator.zip';
 		 break;
 	}
 
 	// Install the addon.
 	if ( ! is_null($download_url ) ) {
 
-		//$download_url = esc_url_raw( wp_unslash( $_POST['plugin'] ) );
 		global $hook_suffix;
 
 		// Set the current screen to avoid undefined notices.
@@ -42,7 +45,6 @@ function emr_plugin_install() {
 		$method = '';
 		$url    = add_query_arg(
 			array(
-			//	'page' => 'envira-gallery-settings',
 			),
 			admin_url( 'admin.php' )
 		);
@@ -68,10 +70,9 @@ function emr_plugin_install() {
 
 		// We do not need any extra credentials if we have gotten this far, so let's install the plugin.
 		require_once (ABSPATH . 'wp-admin/includes/class-wp-upgrader.php');
-		require_once (plugin_dir_path( EMR_ROOT_FILE ) . 'classes/external/upgrader_skin.php');
 
 		// Create the plugin upgrader with our custom skin.
-		$skin      = new EMR_Envira_Gallery_Skin();
+		$skin      = new Automatic_Upgrader_Skin();
 		$installer = new Plugin_Upgrader( $skin );
 		$installer->install( $download_url );
 
@@ -81,7 +82,7 @@ function emr_plugin_install() {
 		if ( $installer->plugin_info() ) {
 			$plugin_basename = $installer->plugin_info();
 
-		ob_clean();
+		ob_end_clean();
 
 
 			wp_send_json_success( array( 'plugin' => $plugin_basename ) );
@@ -91,7 +92,7 @@ function emr_plugin_install() {
 	}
 
 	// Send back a response.
-	wp_send_json(array('result'=> false));
+	wp_send_json(array('result'=> false, 'download url issue'));
 	die;
 
 }
@@ -127,7 +128,10 @@ switch($plugin)
 			$plugin = 'shortpixel-image-optimiser/wp-shortpixel.php';
 	 break;
 	 case 'spai':
-		 $plugin = 'shortpixel-adaptive-images/short-pixel-ai.php';
+			$plugin = 'shortpixel-adaptive-images/short-pixel-ai.php';
+	 break;
+	 case 'fp':
+			$plugin = 'fastpixel-website-accelerator/fastpixel.php';
 	 break;
 }
 

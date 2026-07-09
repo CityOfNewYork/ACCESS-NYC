@@ -2,9 +2,11 @@
 
 namespace WordfenceLS;
 
+use WordfenceLS\Controller_Javascript;
 use WordfenceLS\Crypto\Model_JWT;
 use WordfenceLS\Crypto\Model_Symmetric;
 use WordfenceLS\Text\Model_HTML;
+use WordfenceLS\Utility_URL;
 use WordfenceLS\View\Model_Tab;
 use WordfenceLS\View\Model_Title;
 
@@ -75,6 +77,8 @@ class Controller_WordfenceLS {
 			add_action('network_admin_menu', array($this, '_admin_menu'), $useSubmenu ? 55 : 10);
 		}
 		add_action('admin_enqueue_scripts', array($this, '_admin_enqueue_scripts'));
+		add_action('admin_print_scripts', array($this, '_setupImportMap'), 0);
+		add_filter('script_loader_tag', array($this, '_tagVueScriptAsModule') , 10, 3);
 		
 		add_action('show_user_profile', array($this, '_edit_user_profile'), 0); //We can't add it to the password section directly -- priority 0 is as close as we can get
 		add_action('edit_user_profile', array($this, '_edit_user_profile'), 0);
@@ -180,6 +184,24 @@ END
 					add_action(is_multisite() ? 'network_admin_notices' : 'admin_notices', array($this, '_woocommerce_integration_notice'));
 				}
 			}
+
+
+
+			if (!WORDFENCE_LS_FROM_CORE) {
+				if (!Controller_Notices::shared()->is_persistent_notice_dismissed(get_current_user_id(), Controller_Notices::PERSISTENT_NOTICE_STANDALONE_DISCONTINUING)) {
+					Controller_Notices::shared()->register_persistent_notice(Controller_Notices::PERSISTENT_NOTICE_STANDALONE_DISCONTINUING);
+					add_action('admin_notices', array($this, '_standalone_discontinuing_integration_notice'));
+					if (is_multisite()) {
+						add_action('network_admin_notices', array($this, '_standalone_discontinuing_integration_notice'));
+					}
+				}
+				else if (isset($_GET['page']) && $_GET['page'] == 'WFLS') {
+					add_action('admin_notices', array($this, '_standalone_discontinuing_integration_notice'));
+					if (is_multisite()) {
+						add_action('network_admin_notices', array($this, '_standalone_discontinuing_integration_notice'));
+					}
+				}
+			}
 		}
 	}
 	
@@ -188,11 +210,11 @@ END
 	 */
 	
 	public function _jetpack_xml_rpc_notice() {
-		echo '<div class="notice notice-warning"><p>' . wp_kses(sprintf(__('XML-RPC authentication is disabled. Jetpack is currently active and requires XML-RPC authentication to work correctly. <a href="%s">Manage Settings</a>', 'wordfence-login-security'), esc_url(network_admin_url('admin.php?page=WFLS#top#settings'))), array('a'=>array('href'=>array()))) . '</p></div>';
+		echo '<div class="notice notice-warning"><p>' . wp_kses(sprintf(/* translators: Configuration URL */ __('XML-RPC authentication is disabled. Jetpack is currently active and requires XML-RPC authentication to work correctly. <a href="%s">Manage Settings</a>', 'wordfence-login-security'), esc_url(network_admin_url('admin.php?page=WFLS#top#settings'))), array('a'=>array('href'=>array()))) . '</p></div>';
 	}
 	
 	public function _recaptcha_test_notice() {
-		echo '<div class="notice notice-warning"><p>' . wp_kses(sprintf(__('reCAPTCHA test mode is enabled. While enabled, login and registration requests will be checked for their score but will not be blocked if the score is below the minimum score. <a href="%s">Manage Settings</a>', 'wordfence-login-security'), esc_url(network_admin_url('admin.php?page=WFLS#top#settings'))), array('a'=>array('href'=>array()))) . '</p></div>';
+		echo '<div class="notice notice-warning"><p>' . wp_kses(sprintf(/* translators: Configuration URL */ __('reCAPTCHA test mode is enabled. While enabled, login and registration requests will be checked for their score but will not be blocked if the score is below the minimum score. <a href="%s">Manage Settings</a>', 'wordfence-login-security'), esc_url(network_admin_url('admin.php?page=WFLS#top#settings'))), array('a'=>array('href'=>array()))) . '</p></div>';
 	}
 
 	public function _woocommerce_integration_notice() {
@@ -204,6 +226,17 @@ END
 			</p>
 		</div>
 <?php
+	}
+
+	public function _standalone_discontinuing_integration_notice() {
+		?>
+		<div id="<?php echo esc_attr(Controller_Notices::PERSISTENT_NOTICE_STANDALONE_DISCONTINUING) ?>" class="notice notice-warning <?php if (!(isset($_GET['page']) && $_GET['page'] == 'WFLS')): ?>is-dismissible<?php endif; ?> wfls-persistent-notice">
+			<p><strong><?php esc_html_e('Your site is currently using the "Wordfence Login Security” plugin.', 'wordfence-login-security') ?></strong></p>
+			<p><?php esc_html_e('This plugin will be discontinued on or around July 1, 2026, because its features are already included in the main Wordfence plugin.', 'wordfence-login-security') ?></p>
+			<p><?php esc_html_e('To continue receiving updates and security improvements, please install and activate the main Wordfence plugin — also available for free.', 'wordfence-login-security') ?></p>
+			<p><a class="wfls-btn wfls-btn-primary wfls-btn-sm" href="<?php echo esc_url(Utility_URL::maybe_network_admin_url('plugin-install.php?s=wordfence&tab=search&type=term')) ?>"><?php esc_html_e('Install Wordfence', 'wordfence-login-security') ?></a></p>
+		</div>
+		<?php
 	}
 	
 	/**
@@ -388,21 +421,12 @@ END
 	private function get_2fa_management_assets($embedded = false) {
 		$assets = array(
 			Model_Script::create('wordfence-ls-jquery.qrcode', Model_Asset::js('jquery.qrcode.min.js'), array('jquery'), WORDFENCE_LS_VERSION),
-			Model_Script::create('wordfence-ls-jquery.tmpl', Model_Asset::js('jquery.tmpl.min.js'), array('jquery'), WORDFENCE_LS_VERSION),
-			Model_Script::create('wordfence-ls-jquery.colorbox', Model_Asset::js('jquery.colorbox.min.js'), array('jquery'), WORDFENCE_LS_VERSION)
 		);
-		if (Controller_Permissions::shared()->can_manage_settings()) { 
-			$assets[] = Model_Style::create('wordfence-ls-jquery-ui-css', Model_Asset::css('jquery-ui.min.css'), array(), WORDFENCE_LS_VERSION);
-			$assets[] = Model_Style::create('wordfence-ls-jquery-ui-css.structure', Model_Asset::css('jquery-ui.structure.min.css'), array(), WORDFENCE_LS_VERSION);
-			$assets[] = Model_Style::create('wordfence-ls-jquery-ui-css.theme', Model_Asset::css('jquery-ui.theme.min.css'), array(), WORDFENCE_LS_VERSION);
-		}
 		$assets[] = Model_Script::create('wordfence-ls-admin', Model_Asset::js('admin.js'), array('jquery'), WORDFENCE_LS_VERSION)
 			->withTranslation('You have unsaved changes to your options. If you leave this page, those changes will be lost.', __('You have unsaved changes to your options. If you leave this page, those changes will be lost.', 'wordfence-login-security'))
 			->setTranslationObjectName('WFLS_ADMIN_TRANSLATIONS');
 		$registered = array(
 			Model_Script::create('chart-js', Model_Asset::js('chart.umd.js'), array('jquery'), '4.2.1')->setRegistered(),
-			Model_Script::create('wordfence-select2-js', Model_Asset::js('wfselect2.min.js'), array('jquery'), WORDFENCE_LS_VERSION)->setRegistered(),
-			Model_Style::create('wordfence-select2-css', Model_Asset::css('wfselect2.min.css'), array(), WORDFENCE_LS_VERSION)->setRegistered()
 		);
 		if (!WORDFENCE_LS_FROM_CORE && !$this->management_assets_registered) {
 			foreach ($registered as $asset)
@@ -411,25 +435,37 @@ END
 		}
 		$assets = array_merge($assets, $registered);
 		$assets[] = Model_Style::create('wordfence-ls-admin', Model_Asset::css('admin.css'), array(), WORDFENCE_LS_VERSION);
-		$assets[] = Model_Style::create('wordfence-ls-colorbox', Model_Asset::css('colorbox.css'), array(), WORDFENCE_LS_VERSION);
 		$assets[] = Model_Style::create('wordfence-ls-ionicons', Model_Asset::css('ionicons.css'), array(), WORDFENCE_LS_VERSION);
 		if ($embedded) {
 			$assets[] = Model_Style::create('dashicons');
 			$assets[] = Model_Style::create('wordfence-ls-embedded', Model_Asset::css('embedded.css'), array(), WORDFENCE_LS_VERSION);
 		}
+		else {
+			$assets[] = Model_Script::create('wflsi18njs', Model_Asset::js('wflsi18n.js'), array(), WORDFENCE_LS_VERSION)->withTranslations(Controller_Javascript::i18nStrings())->setTranslationObjectName('WordfenceLSI18nStrings');
+			if (!WORDFENCE_LS_FROM_CORE) {
+				$assets[] = Model_Script::create('wordfence-ls-vue', Model_Asset::js('wordfence-login-security.js'), array('jquery'), WORDFENCE_LS_VERSION);
+			}
+		}
+
 		if (!$this->should_use_core_font_awesome_styles()) {
 			$assets[] = Model_Style::create('wordfence-ls-font-awesome', Model_Asset::css('font-awesome.css'), array(), WORDFENCE_LS_VERSION);
 		}
+
+
 		return $assets;
 	}
 
 	private function enqueue_2fa_management_assets($embedded = false) {
-		if ($this->management_assets_enqueued)
-			return;
-		foreach ($this->get_2fa_management_assets($embedded) as $asset)
+		if ($this->management_assets_enqueued) { return; }
+		wp_enqueue_script('jquery-ui-dialog');
+		wp_enqueue_style('wp-jquery-ui-dialog');
+		foreach ($this->get_2fa_management_assets($embedded) as $asset) {
 			$asset->enqueue();
-		foreach ($this->get_2fa_management_script_data() as $key => $data)
+		}
+		foreach ($this->get_2fa_management_script_data() as $key => $data) {
 			wp_localize_script('wordfence-ls-admin', $key, $data);
+		}
+		$this->setupJSConstants();
 		$this->management_assets_enqueued = true;
 	}
 
@@ -453,6 +489,54 @@ END
 			));
 		}
 
+	}
+
+	/**
+	 * Leverages an internalized version of `wp_localize_script` to pass through a set of constants for the Vue side to
+	 * avoid hardcoding values.
+	 */
+	private function setupJSConstants() {
+		static $called;
+		if ($called) {
+			return;
+		}
+		$called = true;
+
+		global $wp_scripts;
+		$script = "var WordfenceLSJSConstants = " . wp_json_encode(Controller_Javascript::jsConstants()) . ";\n";
+
+		$handle = WORDFENCE_LS_FROM_CORE ? 'wordfenceVuejs' : 'wordfence-ls-vue';
+		$data = $wp_scripts->get_data($handle, 'data');
+
+		if (!empty($data)) {
+			$script = "$data\n$script";
+		}
+
+		$wp_scripts->add_data($handle, 'data', $script);
+	}
+
+	public function _setupImportMap() {
+		if (!WORDFENCE_LS_FROM_CORE && isset($_GET['page']) && $_GET['page'] == 'WFLS') {
+			echo "<script type=\"importmap\">" . wp_json_encode(Controller_Javascript::importMap()) . "</script>\n";
+		}
+	}
+
+	public function _tagVueScriptAsModule($tag, $handle, $src) {
+		if (WORDFENCE_LS_FROM_CORE) {
+			return $tag;
+		}
+
+		if ('wordfence-ls-vue' == $handle && strpos($tag, 'module') === false) {
+			if (($typeIndex = strpos($tag, 'type=')) !== false) {
+				$quoteChar = substr($tag, $typeIndex + 5, 1);
+				$closingQuoteIndex = strpos($tag, $quoteChar, $typeIndex + 6);
+				$tag = str_replace(substr($tag, $typeIndex, $closingQuoteIndex - $typeIndex + 1), 'type="module"', $tag);
+			}
+			else {
+				$tag = str_replace(' src', ' type="module" src', $tag);
+			}
+		}
+		return $tag;
 	}
 	
 	public function _edit_user_profile($user) {
@@ -495,8 +579,8 @@ END
 						</p>
 						<?php if (!$has2fa && $inGracePeriod): ?>
 							<p><strong><?php echo sprintf($viewerIsUser ?
-								esc_html__('Two-factor authentication must be activated for your account prior to %s to avoid losing access.', 'wordfence-login-security')
-								: esc_html__('Two-factor authentication must be activated for this account prior to %s.', 'wordfence-login-security')
+										/* translators: Date */ esc_html__('Two-factor authentication must be activated for your account prior to %s to avoid losing access.', 'wordfence-login-security')
+								: /* translators: Date */ esc_html__('Two-factor authentication must be activated for this account prior to %s.', 'wordfence-login-security')
 								, Controller_Time::format_local_time('F j, Y g:i A', $requiredAt)) ?></strong></p>
 						<?php endif ?>
 						<?php if ($has2fa || $viewerIsUser): ?><p><a href="<?php echo esc_url($manageURL); ?>" class="button"><?php echo (Controller_Users::shared()->has_2fa_active($user) ? esc_html__('Manage 2FA', 'wordfence-login-security') :  esc_html__('Activate 2FA', 'wordfence-login-security')); ?></a></p><?php endif ?>
@@ -720,7 +804,7 @@ END
 					return new \WP_Error('wfls_twofactor_blocked', wp_kses(__('<strong>LOGIN BLOCKED</strong>: 2FA is required to be active on your account. Please contact the site administrator.', 'wordfence-login-security'), array('strong'=>array())));
 				}
 				else if ($in2faGracePeriod) {
-					Controller_Notices::shared()->add_notice(Model_Notice::SEVERITY_CRITICAL, new Model_HTML(wp_kses(sprintf(__('You do not currently have two-factor authentication active on your account, which will be required beginning %s. <a href="%s">Configure 2FA</a>', 'wordfence-login-security'), Controller_Time::format_local_time('F j, Y g:i A', $time2faRequired), esc_url((is_multisite() && is_super_admin($user->ID)) ? network_admin_url('admin.php?page=WFLS') : admin_url('admin.php?page=WFLS'))), array('a'=>array('href'=>array())))), 'wfls-will-be-required', $user);
+					Controller_Notices::shared()->add_notice(Model_Notice::SEVERITY_CRITICAL, new Model_HTML(wp_kses(sprintf(/* translators: 1. Date; 2. Configuration URL */ __('You do not currently have two-factor authentication active on your account, which will be required beginning %1$s. <a href="%2$s">Configure 2FA</a>', 'wordfence-login-security'), Controller_Time::format_local_time('F j, Y g:i A', $time2faRequired), esc_url((is_multisite() && is_super_admin($user->ID)) ? network_admin_url('admin.php?page=WFLS') : admin_url('admin.php?page=WFLS'))), array('a'=>array('href'=>array())))), 'wfls-will-be-required', $user);
 				}
 			}
 
@@ -881,7 +965,7 @@ END
 					$users = Controller_Users::shared()->get_inactive_2fa_users($roleKey, $state['gracePeriod'], $page, self::USERS_PER_PAGE, $lastPage);
 				$sections[] = array(
 					'tab' => new Model_Tab($key, $key, $title, $title),
-					'title' => new Model_Title($key, sprintf(__('Users without 2FA active (%s)', 'wordfence-login-security'), $title) . ' - ' . $roleTitle),
+					'title' => new Model_Title($key, sprintf(/* translators: User count */ __('Users without 2FA active (%s)', 'wordfence-login-security'), $title) . ' - ' . $roleTitle),
 					'content' => new Model_View('page/role', array(
 						'role' => $role,
 						'roleTitle' => $roleTitle,
@@ -947,7 +1031,10 @@ END
 					'category' => 'wfls_captcha_required'
 				);
 			}
-			Controller_Users::shared()->record_captcha_score(null, $score);
+			else if (is_numeric($score)) {
+				Controller_Users::shared()->record_captcha_score(null, $score);
+			}
+
 			if (!$captchaController->is_human($score)) {
 				$encryptedIP = Model_Symmetric::encrypt(Model_Request::current()->ip());
 				$encryptedScore = Model_Symmetric::encrypt($score);
@@ -956,7 +1043,7 @@ END
 				);
 				if ($encryptedIP && $encryptedScore && filter_var(get_site_option('admin_email'), FILTER_VALIDATE_EMAIL)) {
 					$jwt = new Model_JWT(array('ip' => $encryptedIP, 'score' => $encryptedScore), Controller_Time::time() + 600);
-					$result['message'] = wp_kses(sprintf(__('<strong>REGISTRATION BLOCKED</strong>: The registration request was blocked because it was flagged as spam. Please try again or <a href="#" class="wfls-registration-captcha-contact" data-token="%s">contact the site owner</a> for help.', 'wordfence-login-security'), esc_attr((string)$jwt)), array('strong'=>array(), 'a'=>array('href'=>array(), 'class'=>array(), 'data-token'=>array())));
+					$result['message'] = wp_kses(sprintf(/* translators: Security token */ __('<strong>REGISTRATION BLOCKED</strong>: The registration request was blocked because it was flagged as spam. Please try again or <a href="#" class="wfls-registration-captcha-contact" data-token="%s">contact the site owner</a> for help.', 'wordfence-login-security'), esc_attr((string)$jwt)), array('strong'=>array(), 'a'=>array('href'=>array(), 'class'=>array(), 'data-token'=>array())));
 				}
 				else {
 					$result['message'] = wp_kses(__('<strong>REGISTRATION BLOCKED</strong>: The registration request was blocked because it was flagged as spam. Please try again or contact the site owner for help.', 'wordfence-login-security'), array('strong'=>array()));

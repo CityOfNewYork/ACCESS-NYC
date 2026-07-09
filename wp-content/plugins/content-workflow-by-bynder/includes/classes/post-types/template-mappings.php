@@ -774,11 +774,6 @@ class Template_Mappings extends Base {
 	}
 
 	public function add_clear_pending_imports_button() {
-		// We only want this to show when in debug mode
-		if (!defined('WP_DEBUG') || !WP_DEBUG) {
-			return;
-		}
-
 		$screen = get_current_screen();
 
 		// Only show on template mappings list page

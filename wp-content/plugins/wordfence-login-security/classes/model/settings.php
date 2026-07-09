@@ -17,5 +17,6 @@ abstract class Model_Settings {
 	abstract public function set($key, $value, $autoload = self::AUTOLOAD_YES, $allowOverwrite = true);
 	abstract public function set_multiple($values);
 	abstract public function get($key, $default);
+	abstract public function get_multiple($keysDefaults);
 	abstract public function remove($key);
 }

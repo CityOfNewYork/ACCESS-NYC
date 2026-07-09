@@ -7,15 +7,15 @@ if (!defined('WORDFENCE_LS_VERSION')) { exit; }
 <div class="wfls-block wfls-always-active wfls-flex-item-full-width wfls-add-bottom">
 	<?php if ($requiredAt === false): ?>
 	<div class="wfls-block-content">
-		<p><?php echo esc_html(sprintf(__('2FA is not required for the %s role', 'wordfence-login-security'), $roleTitle)) ?></p>
+		<p><?php echo esc_html(sprintf(/* translators: Role name */ __('2FA is not required for the %s role', 'wordfence-login-security'), $roleTitle)) ?></p>
 	</div>
 	<?php elseif (empty($users)): ?>
 	<div class="wfls-block-content">
 		<p>
 		<?php if ($page == 1): ?>
-			<?php echo esc_html(sprintf(__('No users found in the %s state for the %s role', 'wordfence-login-security'), $stateTitle, $roleTitle)) ?>
+			<?php echo esc_html(sprintf(/* translators: 1. 2FA state; 2. Role name */ __('No users found in the %1$s state for the %2$s role', 'wordfence-login-security'), $stateTitle, $roleTitle)) ?>
 		<?php else: ?>
-			<?php echo esc_html(sprintf(__('Page %d is out of range', 'wordfence-login-security'), $page)) ?>
+			<?php echo esc_html(sprintf(/* translators: page number */__('Page %d is out of range', 'wordfence-login-security'), $page)) ?>
 		<?php endif ?>
 		</p>
 	</div>

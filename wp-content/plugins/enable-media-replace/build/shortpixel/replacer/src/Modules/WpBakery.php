@@ -19,7 +19,7 @@ class WpBakery
     {
       if ($this->bakery_is_active())   // elementor is active
       {
-        add_filter('shortpixel/replacer/custom_replace_query', array($this, 'addURLEncoded'), 10, 4); // custom query for elementor \ // problem
+        add_filter('emr/replacer/custom_replace_query', array($this, 'addURLEncoded'), 10, 4); // custom query for elementor \ // problem
       }
     }
 

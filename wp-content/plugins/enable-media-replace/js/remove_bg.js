@@ -1,5 +1,10 @@
 jQuery(document).ready(function ($) {
 
+	// Dismiss handler for the in-form notice.
+	$(document).on('click', '#emr-bg-notice .notice-dismiss', function () {
+		$('#emr-bg-notice').fadeOut(150);
+	});
+
 	// Init
 	$('input[type=radio][name=background_type]').on('change', backgroundInputs);
 	$('#bg_transparency').on('input', transparancyOptions);
@@ -49,6 +54,7 @@ jQuery(document).ready(function ($) {
         $('input[type=radio][name=compression_level]').attr('disabled', 'disabled');
         $('#remove_background_button').attr('disabled', 'disabled');
 				$('h1.response').remove();
+				$('#emr-bg-notice').hide().find('p').empty();
         $('#overlay').css('visibility', 'visible');
 				var preview = $('.image_placeholder').last();
 				preview.find('img').remove();
@@ -98,11 +104,34 @@ jQuery(document).ready(function ($) {
      //     initComparisons();
         }else{
 
-          preview.prepend(`<h1 class='response'>${response.message}</h1>`);
+          $('#overlay').css('visibility', 'hidden');
+          if (response.plan_expired || response.quota_exceeded) {
+            // Leave the preview empty; surface the message as a dismissible notice instead.
+            var $p = $('#emr-bg-notice').find('p').empty();
+            $('<strong></strong>').text('Enable Media Replace: ').appendTo($p);
+
+            var msg = response.message;
+            var linkText = 'shortpixel.com/pricing';
+            var idx = msg.indexOf(linkText);
+            if (idx !== -1) {
+              $p.append(document.createTextNode(msg.substring(0, idx)));
+              $('<a></a>')
+                .attr({ href: 'https://shortpixel.com/pricing', target: '_blank', rel: 'noopener' })
+                .text(linkText)
+                .appendTo($p);
+              $p.append(document.createTextNode(msg.substring(idx + linkText.length)));
+            } else {
+              $p.append(document.createTextNode(msg));
+            }
+
+            $('#emr-bg-notice').show();
+            $('html, body').animate({ scrollTop: 0 }, 400);
+          } else {
+            preview.prepend(`<h1 class='response'>${response.message}</h1>`);
+          }
           $('#remove_background_button').attr('disabled', false)
           $('input[type=radio][name=background_type]').attr('disabled', false)
           $('input[type=radio][name=compression_level]').attr('disabled', false)
-          $('#overlay').css('visibility', 'hidden');
          //$('#preview-area').show();
         }
       }

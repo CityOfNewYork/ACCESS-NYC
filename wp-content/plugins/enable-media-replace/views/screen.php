@@ -225,7 +225,7 @@ $uiHelper = emr()->uiHelper();
 					 if (true === $view->is_movable): ?>
            <label><input type="checkbox" name="new_location" value="1" <?php checked($settings['new_location'], 1); ?>  /> <?php _e('Place the newly uploaded file in this folder: ', 'enable-media-replace'); ?></label>
 					 <br>
-            <?php echo $view->custom_basedir ?> <input type="text" name="location_dir" value="<?php echo $subdir ?>" />
+            <?php echo $view->custom_basedir ?> <input type="text" name="location_dir" value="<?php echo esc_attr($subdir) ?>" />
 						<?php
 						else:
 								echo __('File is offloaded and can\'t be moved to other directory', 'enable-media-replace');

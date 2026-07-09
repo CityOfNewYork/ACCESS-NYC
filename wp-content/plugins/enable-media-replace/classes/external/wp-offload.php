@@ -206,16 +206,15 @@ class WPOffload
 					 return;
 				}
 
-
 				$original_path = $item->original_path(); // Original path (non-scaled-)
 				$original_source_path = $item->original_source_path();
 				$path = $item->path();
 				$source_path = $item->source_path();
 
 				$wp_original = wp_get_original_image_path($post_id, apply_filters( 'emr_unfiltered_get_attached_file', true ));
+
 				$wp_original = apply_filters('emr/replace/original_image_path', $wp_original, $post_id);
 				$wp_source = trim(get_attached_file($post_id, apply_filters( 'emr_unfiltered_get_attached_file', true )));
-
 				$updated = false;
 
 				// If image is replaced with another name, the original soruce path will not match.  This could also happen when an image is with -scaled as main is replaced by an image that doesn't have it.  In all cases update the table to reflect proper changes.
@@ -232,6 +231,7 @@ class WPOffload
 					 $item->set_original_source_path($newpath);
 
 					 $item->save();
+
 				}
 		}
 

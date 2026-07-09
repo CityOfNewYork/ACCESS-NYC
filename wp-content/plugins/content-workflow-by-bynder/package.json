@@ -2,7 +2,7 @@
   "name": "gathercontent-importer",
   "title": "Content Workflow (by Bynder)",
   "description": "Imports items from Content Workflow to your wordpress site",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "license": "GPLv2",
   "scripts": {
     "build": "grunt build"

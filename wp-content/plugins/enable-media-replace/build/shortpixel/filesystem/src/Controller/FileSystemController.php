@@ -70,7 +70,7 @@ Class FileSystemController
 				if (defined('UPLOADS')) // if this is set, lead.
 					$abspath = trailingslashit(ABSPATH) . UPLOADS;
 
-        $abspath = apply_filters('shortpixel/filesystem/abspath', $abspath );
+        $abspath = apply_filters('emr/filesystem/abspath', $abspath );
 
         return $this->getDirectory($abspath);
     }
