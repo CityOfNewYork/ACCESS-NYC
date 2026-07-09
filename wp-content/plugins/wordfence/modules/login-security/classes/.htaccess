@@ -1,0 +1,16 @@
+<IfModule mod_rewrite.c>
+        RewriteEngine On
+        RewriteCond %{REQUEST_URI} \.php$
+        RewriteRule .* - [F,L,NC]
+</IfModule>
+<IfModule !mod_rewrite.c>
+	<FilesMatch "\.php$">
+	<IfModule mod_authz_core.c>
+		Require all denied
+	</IfModule>
+	<IfModule !mod_authz_core.c>
+		Order deny,allow
+		Deny from all
+	</IfModule>
+	</FilesMatch>
+</IfModule>

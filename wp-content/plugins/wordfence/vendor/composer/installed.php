@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'reference' => 'f7e640f16c0caa9077e4eaf4f42a42c9d1c76a05',
+        'name' => '__root__',
+        'dev' => true,
+    ),
+    'versions' => array(
+        '__root__' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'reference' => 'f7e640f16c0caa9077e4eaf4f42a42c9d1c76a05',
+            'dev_requirement' => false,
+        ),
+        'wordfence/mmdb-reader' => array(
+            'pretty_version' => 'v1.0.0',
+            'version' => '1.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../wordfence/mmdb-reader',
+            'aliases' => array(),
+            'reference' => 'f72435e75f6654da08c2f0983e527cb207ef1f2a',
+            'dev_requirement' => false,
+        ),
+        'wordfence/wf-waf' => array(
+            'pretty_version' => '1.0.0',
+            'version' => '1.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../wordfence/wf-waf',
+            'aliases' => array(),
+            'reference' => 'origin/master',
+            'dev_requirement' => false,
+        ),
+    ),
+);
