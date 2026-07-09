@@ -21,6 +21,9 @@ function relevanssi_spamblock_tab() {
 	if ( ! isset( $spamblock['regex'] ) ) {
 		$spamblock['regex'] = '';
 	}
+	if ( ! isset( $spamblock['limit'] ) ) {
+		$spamblock['limit'] = 0;
+	}
 	if ( ! isset( $spamblock['chinese'] ) ) {
 		$spamblock['chinese'] = '';
 	}
@@ -71,6 +74,11 @@ function relevanssi_spamblock_tab() {
 			<td><textarea name="relevanssi_spamblock_regex" id="relevanssi_spamblock_regex" rows="9" cols="60"><?php echo esc_textarea( $spamblock['regex'] ); ?></textarea>
 			<?php // Translators: %1$s is <code>/.../iu</code>. ?>
 			<p class="description"><?php printf( esc_html__( 'These keywords support the use of regular expressions with preg_match(). The keywords will be wrapped with %1$s.', 'relevanssi' ), '<code>/.../iu</code>' ); ?></p></td>
+		</tr>
+		<tr id="row_limit">
+			<th scope="row"><label for="relevanssi_spamblock_limit"><?php esc_html_e( 'Limit characters', 'relevanssi' ); ?></label></th>
+			<td><input name="relevanssi_spamblock_limit" id="relevanssi_spamblock_limit" type="number" min="0" value="<?php echo esc_attr( $spamblock['limit'] ); ?>"/>
+			<p class="description"><?php esc_html_e( 'Maximum allowed query length. Searches longer than this will be blocked as spam. Set to 0 to disable this check.', 'relevanssi' ); ?></p></td>
 		</tr>
 		<tr id="row_chinese">
 			<th scope="row"><label for="relevanssi_spamblock_chinese"><?php esc_html_e( 'Block Chinese queries', 'relevanssi' ); ?></label></th>

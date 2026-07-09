@@ -192,7 +192,7 @@ function relevanssi_wildcards_pre( $str ) {
 	/**
 	 * If true, enables wildcard operators (*, ?).
 	 *
-	 * @param boolean If true, enable wildcard operator. Default false.
+	 * @param boolean $allow If true, enable wildcard operator. Default false.
 	 */
 	if ( apply_filters( 'relevanssi_wildcard_search', false ) ) {
 		$str = preg_replace( '/(\w)\?(\w)/', '\1SINGLEWILDCARDSYMBOL\2', $str );
@@ -242,4 +242,46 @@ function relevanssi_query_wildcards( $query, $term ) {
 		$query = str_replace( array( '?', '*' ), array( '_', '%' ), $query );
 	}
 	return $query;
+}
+
+/**
+ * Fallback to spell-corrected search ("Did you mean?").
+ *
+ * Runs on relevanssi_fallback. If the base search finds no results, this
+ * function passes the search query through Relevanssi_SpellCorrector and
+ * uses that to search. The new search query is stored in a global
+ * variable $relevanssi_dym_fallback.
+ *
+ * @uses relevanssi_fallback
+ *
+ * @param array $args The search parameters.
+ * @return array Modified search parameters with corrected query.
+ */
+function relevanssi_didyoumean_fallback( $args ) {
+	global $relevanssi_dym_fallback;
+	$query  = $args['args']['q'];
+	$query  = htmlspecialchars_decode( $query );
+	$tokens = relevanssi_tokenize( $query );
+
+	$sc = new Relevanssi_SpellCorrector();
+
+	$new_query = $query;
+	foreach ( array_keys( $tokens ) as $token ) {
+		$token = trim( $token );
+		$c     = $sc->correct( $token );
+		if ( ! empty( $c ) && strval( $token ) !== $c ) {
+			$new_query = str_ireplace( $token, $c, $new_query );
+		}
+	}
+
+	if ( $new_query !== $query ) {
+		$relevanssi_dym_fallback = $new_query;
+
+		$args['args']['q'] = $new_query;
+		remove_filter( 'relevanssi_fallback', 'relevanssi_didyoumean_fallback' );
+		$return = relevanssi_search( $args['args'] );
+		add_filter( 'relevanssi_fallback', 'relevanssi_didyoumean_fallback' );
+		$args['return'] = $return;
+	}
+	return $args;
 }

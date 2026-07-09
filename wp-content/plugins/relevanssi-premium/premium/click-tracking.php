@@ -27,7 +27,6 @@ function relevanssi_enable_clicktracking() {
 	add_action( 'wp_footer', 'relevanssi_remove_clicktracking' );
 	add_filter( 'relevanssi_hits_filter', 'relevanssi_record_positions', PHP_INT_MAX );
 	add_filter( 'relevanssi_hits_to_show', 'relevanssi_current_page_hits', PHP_INT_MAX );
-
 }
 
 /**
@@ -586,8 +585,6 @@ function relevanssi_show_insights( string $query ) {
  * @return string The link to the insights page.
  */
 function relevanssi_get_insights_url( $target ): string {
-	global $relevanssi_variables;
-
 	$parameter = is_int( $target ) ? 'post_insights' : 'insights';
 
 	return admin_url(
@@ -901,7 +898,7 @@ function relevanssi_user_searches_clicks( string $from, string $to, int $total )
 	if ( count( $list ) > 0 ) {
 		?>
 		<div>
-			<p><?php echo esc_html__( 'These posts were got clicks from a low ranking. Should they be boosted higher?', 'relevanssi' ); ?></p>
+			<p><?php echo esc_html__( 'These posts got clicks from a low ranking. Should they be boosted higher?', 'relevanssi' ); ?></p>
 			<ul>
 		<?php
 		echo '<ul>' . implode( "\n", $list ) . '</ul>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -963,6 +960,9 @@ function relevanssi_remove_clicktracking() {
 	$script = <<<EOJS
 	var relevanssi_rt_regex = /(&|\?)_(rt|rt_nonce)=(\w+)/g
 	var newUrl = window.location.search.replace(relevanssi_rt_regex, '')
+	if (newUrl.substr(0, 1) == '&') {
+		newUrl = '?' + newUrl.substr(1)
+	}
 	history.replaceState(null, null, window.location.pathname + newUrl + window.location.hash)
 EOJS;
 	if ( function_exists( 'wp_print_inline_script_tag' ) ) {

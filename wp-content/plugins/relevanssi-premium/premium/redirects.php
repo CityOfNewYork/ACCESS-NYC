@@ -188,6 +188,39 @@ function relevanssi_process_redirects( $request ) {
 }
 
 /**
+ * Parses the redirects CSV and injects them into the $request array.
+ *
+ * @param array $request The options request array.
+ *
+ * @return array The modified request array.
+ */
+function relevanssi_parse_csv_redirects( $request ) {
+	if ( ! empty( $request['relevanssi_csv_redirects'] ) ) {
+		$csv_text = str_replace( "\r", '', $request['relevanssi_csv_redirects'] );
+		$lines    = explode( "\n", $csv_text );
+
+		foreach ( $lines as $line ) {
+			$columns = explode( ';', $line );
+			if ( count( $columns ) < 2 ) {
+				continue;
+			}
+
+			$phrase  = trim( $columns[0] );
+			$url     = trim( $columns[1] );
+			$partial = isset( $columns[2] ) ? trim( $columns[2] ) : '0';
+			$suffix  = '_csv_' . uniqid();
+
+			$request[ 'query' . $suffix ] = $phrase;
+			$request[ 'url' . $suffix ]   = $url;
+			if ( '1' === $partial ) {
+				$request[ 'partial' . $suffix ] = 'on';
+			}
+		}
+	}
+	return $request;
+}
+
+/**
  * Gets the search query for FacetWP searches.
  *
  * @return string The search query, empty string if nothing is found.

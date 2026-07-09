@@ -1,3 +1,59 @@
+= 2.27.7 =
+* Security: Relevanssi will now strip tags from excerpt text (keeping only the whitelisted tags) to avoid XSS attacks. An attack was possible if you used comments for excerpts or if you had a malicious contributor.
+* Minor fix: Stop the Did you mean feature from returning the original search phrase as a suggestion.
+* Minor fix: Improve performance by enabling caching for password protection check.
+* Minor fix: Relevanssi's removal of page builder shortcodes is less greedy and won't cause missed content anymore.
+
+= 2.27.6 =
+* Security: Exporting logs now checks for user capability. The default setting is 'manage_options', but it can be adjusted with the `relevanssi_options_capability` filter hook.
+* Security: Certain query parameters allowed SQL injection attacks. Thanks to Jack Taylor.
+* Minor fix: Tag and category weights from settings page weren't applied correctly.
+* Minor fix: The block editor sidebar JS code was missing from the package.
+
+= 2.27.5 =
+* Security: Stop XSS attacks in comments when highlighting post content.
+* Minor fix: Add support for disabling the Restrict Content Pro 'Hide restricted posts' option.
+* Minor fix: Avoid errors from non-existing author_name values.
+* Minor fix: More connection problems with PDF server are classified as temporary.
+* Minor fix: Wiping server errors for attachments didn't always work correctly.
+* Minor fix: Click tracking permalinks are no longer passed through `esc_attr()` as that would sometimes break the links.
+
+= 2.27.4.1 =
+* Minor fix: Remove the update nag.
+
+= 2.27.4 =
+* New feature: New filter hook `relevanssi_cached_post_object` can be used to modify the cached post objects.
+* Minor fix: Relevanssi cache population now creates stdClass objects instead of WP_Post objects to avoid out of memory issues. If you need WP_Post objects, use the `relevanssi_cached_post_object` filter hook to create them.
+
+= 2.27.3 =
+* Minor fix: Make click-tracking code more error-resistant.
+* Minor fix: Avoid problems with object custom field values.
+* Minor fix: Fix problems with click-tracking, pinning and WPML support.
+
+= 2.27.2 =
+* Minor fix: Fix excerpts broken in 2.27.0.
+
+= 2.27.1 =
+* Minor fix: Version 2.26.1 had broken the auto updates. This version fixes it.
+
+= 2.27.0 =
+* New feature: You can now set the `rlv_source` parameter in a search form and then filter the search logs based on that.
+* New feature: New filter hooks `relevanssi_after_index_doc_n` and `relevanssi_truncate_index` for potential compatibility integrations.
+* Minor fix: Related posts keyword source taxonomy list now shows the taxonomy slug to distinguish between taxonomies with the same name.
+* Minor fix: Building excerpts from PDF content didn't work in multisite context, leading to wrong excerpts or no excerpts at all.
+* Minor fix: Adjust post type parameter handling so that it doesn't change the `post_type` query var.
+* Minor fix: SEO Framework local search exclude option description now tells what the option actually does.
+* Minor fix: Click tracking code is now only used when click tracking option is enabled.
+* Minor fix: The relevanssi_post_type_archive_ok hook second parameter didn't match the documentation. It does now.
+* Minor fix: SEOPress compatibility mode is enabled again.
+* Minor fix: Update counts link had the wrong tab query parameter.
+* Minor fix: Stop fatal errors from pinning and `relevanssi_index_content` filter hooks.
+* Minor fix: Click tracking is disabled for non-existing posts.
+* Minor fix: Remove errors from textdomain loading.
+* Minor fix: Relevanssi cache population now creates WP_Post objects instead of stdClass objects.
+* Minor fix: Avoid fatal errors in installation process with Polylang enabled.
+* Minor fix: Make it possible to remove search queries with emoji from the log.
+
 = 2.26.1 =
 * Security fix: Prevent an XSS attack by a malicious contributor.
 * Minor fix: 'Hide Relevanssi on edit pages' didn't affect the block editor sidebar visibility. It does now.

@@ -126,7 +126,7 @@ function relevanssi_sku_boost( $match_object ) {
 		/**
 		 * Filters the SKU boost value.
 		 *
-		 * @param float The boost multiplier, default 2.
+		 * @param float $boost The boost multiplier, default 2.
 		 */
 		$match_object->weight *= apply_filters( 'relevanssi_sku_boost', 2 );
 	}
@@ -290,7 +290,7 @@ function relevanssi_filtered_term_product_counts_query( $query ) {
  *
  * @return bool
  */
-function relevanssi_variation_post_ok( $ok, $post_id ) : bool {
+function relevanssi_variation_post_ok( $ok, $post_id ): bool {
 	$post_type = relevanssi_get_post_type( $post_id );
 	if ( 'product_variation' === $post_type ) {
 		$parent = get_post_parent( $post_id );

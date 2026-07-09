@@ -20,7 +20,7 @@ function relevanssi_enable_proximity_sorting() {
 	/**
 	 * Controls whether the proximity searching is enabled or not.
 	 *
-	 * @param boolean If true, enable proximity sorting. Default false.
+	 * @param boolean $enable If true, enable proximity sorting. Default false.
 	 */
 	if ( apply_filters( 'relevanssi_proximity_sorting', false ) ) {
 		add_filter( 'relevanssi_results', 'relevanssi_add_distance', 1 );
@@ -53,7 +53,7 @@ function relevanssi_add_distance( $doc_weight ) {
 	/**
 	 * Filters the comparison coordinates Relevanssi uses.
 	 *
-	 * @param string The coordinates in "latitude, longitude" format.
+	 * @param string $coords The coordinates in "latitude, longitude" format.
 	 */
 	$compare_coordinates = apply_filters(
 		'relevanssi_proximity_comparison',
@@ -76,8 +76,8 @@ function relevanssi_add_distance( $doc_weight ) {
 		/**
 		 * Filters the coordinates for each post.
 		 *
-		 * @param string The coordinates.
-		 * @param int    The post ID.
+		 * @param string $coords  The coordinates.
+		 * @param int    $post_id The post ID.
 		 */
 		$hit_coordinates = apply_filters(
 			'relevanssi_proximity_coordinates',
@@ -88,7 +88,7 @@ function relevanssi_add_distance( $doc_weight ) {
 			/**
 			 * Filters the default distance for posts without coordinates.
 			 *
-			 * @param int The default distance, default PHP_INT_MAX.
+			 * @param int $distance The default distance, default PHP_INT_MAX.
 			 */
 			$default_distance                = apply_filters(
 				'relevanssi_proximity_default_distance',
@@ -175,7 +175,7 @@ function relevanssi_get_proximity_values( $post_a, $post_b ) {
  * the $relevanssi_coordinates global variable, because that is the easiest way
  * to access that data in the relevanssi_add_distance() function.
  *
- * @see relevanssi_add_distance().
+ * @see relevanssi_add_distance()
  *
  * @param array    $params The search parameters; ignored.
  * @param WP_Query $query  The query object.

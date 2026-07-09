@@ -212,7 +212,7 @@ function relevanssi_process_tax_query_row(
 	}
 
 	if ( $exists_query ) {
-		$taxonomy = $row['taxonomy'];
+		$taxonomy = sanitize_key( $row['taxonomy'] );
 		$operator = 'IN';
 		if ( 'not exists' === strtolower( $row['operator'] ) ) {
 			$operator = 'NOT IN';
@@ -222,6 +222,7 @@ function relevanssi_process_tax_query_row(
 				FROM $wpdb->term_relationships AS tr, $wpdb->term_taxonomy AS tt
 				WHERE tr.term_taxonomy_id = tt.term_taxonomy_id
 				AND tt.taxonomy = '$taxonomy' )";
+		// Clean, $taxonomy is sanitized, $operator is Relevanssi-generated.
 		$exist_queries[] = $exist_query_sql;
 		if ( 'and' === $tax_query_relation ) {
 			$query_restrictions .= ' AND ' . $exist_query_sql;
@@ -368,7 +369,7 @@ function relevanssi_get_term_in(
 		} elseif ( isset( $term->term_id ) && in_array( $field_name, array( 'slug', 'name' ), true ) ) {
 			$names[] = "'" . esc_sql( $name ) . "'";
 		} else {
-			$numeric_terms[] = $name;
+			$numeric_terms[] = absint( $name ); // Convert to integer to avoid SQL injections.
 		}
 	}
 
@@ -414,5 +415,5 @@ function relevanssi_term_tax_id_from_row( array $row ): array {
 		$term_tax_id = $wpdb->get_col( $tt_q ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 	}
 
-	return $term_tax_id;
+	return array_map( 'absint', $term_tax_id ); // Convert to integers to avoid SQL injections.
 }

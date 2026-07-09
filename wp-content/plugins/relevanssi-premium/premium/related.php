@@ -25,7 +25,7 @@ function relevanssi_related_init() {
 		 * By default the relevanssi_related_posts_the_content_wrapper filter is added to
 		 * the_content with priority 99. This filter can be used to alter that value.
 		 *
-		 * @param int Priority, default 99.
+		 * @param int $priority Priority, default 99.
 		 */
 		add_filter( 'the_content', 'relevanssi_related_posts_the_content_wrapper', apply_filters( 'relevanssi_related_priority', 99 ) );
 		add_action( 'transition_post_status', 'relevanssi_flush_caches_on_transition', 99, 3 );
@@ -74,7 +74,8 @@ function relevanssi_related_posts( $post_id = null, $just_objects = false, $no_t
 	/**
 	 * Filters the related posts transient cache name.
 	 *
-	 * @param string The transient name, defaults to relevanssi_related_posts_[ID].
+	 * @param string $transient The transient name, defaults to
+	 * relevanssi_related_posts_[ID].
 	 */
 	$transient_name = apply_filters( 'relevanssi_related_posts_cache_id', 'relevanssi_related_posts_' . $post_id );
 	if ( $just_objects ) {
@@ -95,7 +96,7 @@ function relevanssi_related_posts( $post_id = null, $just_objects = false, $no_t
 			/**
 			 * Filters the related posts output.
 			 *
-			 * @param string The output, ready to be displayed.
+			 * @param string $output The output, ready to be displayed.
 			 */
 			return apply_filters( 'relevanssi_related_output', $related );
 		} else {
@@ -130,7 +131,7 @@ function relevanssi_related_posts( $post_id = null, $just_objects = false, $no_t
 	/**
 	 * Filters the related posts output.
 	 *
-	 * @param string The output, ready to be displayed.
+	 * @param string $output The output, ready to be displayed.
 	 */
 	return apply_filters( 'relevanssi_related_output', $related );
 }
@@ -193,7 +194,8 @@ function relevanssi_related_cache_available( $post_id, $settings ) {
 	 * Disables the caching for related posts. Do not use unless you know
 	 * what you are doing.
 	 *
-	 * @param boolean Set true to disable caching. Default false.
+	 * @param boolean $disable_cache Set true to disable caching. Default
+	 * false.
 	 */
 	if ( apply_filters( 'relevanssi_disable_related_cache', false ) ) {
 		$use_cache = false;
@@ -308,6 +310,8 @@ function relevanssi_get_related_post_ids( $post_id, $use_cache = true ) {
 			if ( $date_query ) {
 				$args['date_query'] = $date_query;
 			}
+			remove_filter( 'relevanssi_hits_filter', 'relevanssi_record_positions', PHP_INT_MAX );
+			remove_filter( 'relevanssi_hits_to_show', 'relevanssi_current_page_hits', PHP_INT_MAX );
 			$related_posts_query = new WP_Query();
 			$related_posts_query->parse_query(
 				/**
@@ -397,6 +401,8 @@ function relevanssi_get_related_post_ids( $post_id, $use_cache = true ) {
 		if ( 'random_cat' === $settings['notenough'] ) {
 			$args['tax_query'] = $tax_query;
 		}
+		remove_filter( 'relevanssi_hits_filter', 'relevanssi_record_positions', PHP_INT_MAX );
+		remove_filter( 'relevanssi_hits_to_show', 'relevanssi_current_page_hits', PHP_INT_MAX );
 		/** Documented in premium/related.php */
 		$more_related_posts = new WP_Query(
 			apply_filters(
@@ -674,8 +680,9 @@ function relevanssi_related_generate_keywords( $post_id ) {
 	 * This filter sees the words right before they are fed into Relevanssi to
 	 * find the related posts.
 	 *
-	 * @param string A space-separated list of keywords for related posts.
-	 * @param int    The post ID.
+	 * @param string $keywords A space-separated list of keywords for related
+	 * posts.
+	 * @param int    $post_id  The post ID.
 	 */
 	return apply_filters(
 		'relevanssi_related_words',

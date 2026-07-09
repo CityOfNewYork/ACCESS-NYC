@@ -16,11 +16,12 @@
 function relevanssi_support_tab() {
 	global $relevanssi_variables;
 
+	$support_email = $relevanssi_variables['autoupdate']->get_remote_license();
+
 	if ( isset( $_REQUEST['relevanssi_support_form'] ) ) {
 		check_admin_referer( 'relevanssi_support_form', 'relevanssi_support_form' );
-		relevanssi_support_send_email( $_REQUEST );
+		relevanssi_support_send_email( $_REQUEST, $support_email );
 	}
-	$support_email = $relevanssi_variables['autoupdate']->get_remote_license();
 
 	?>
 <h2 id="options"><?php esc_html_e( 'Support', 'relevanssi' ); ?></h2>
@@ -56,8 +57,11 @@ function relevanssi_support_tab() {
 
 <form method="post">
 		<?php wp_nonce_field( 'relevanssi_support_form', 'relevanssi_support_form' ); ?>
-		<input type="hidden" name="relevanssi_support_to_email" value="<?php echo esc_attr( $support_email ); ?>" />
 		<table class="form-table">
+			<tr>
+				<th scope="row"><label for="relevanssi_support_name"><?php esc_html_e( 'Your name', 'relevanssi' ); ?></label></th>
+				<td><input type="text" name="relevanssi_support_name" id="relevanssi_support_name" value="" size="40" /></td>
+			</tr>
 			<tr>
 				<th scope="row"><label for="relevanssi_support_email"><?php esc_html_e( 'Your email address', 'relevanssi' ); ?></label></th>
 				<td><input type="text" name="relevanssi_support_email" id="relevanssi_support_email" value="" size="40" /></td>
@@ -86,24 +90,38 @@ function relevanssi_support_tab() {
 /**
  * Sends out an email to Relevanssi support.
  *
- * @param array $request The request array.
+ * @param array  $request The request array.
+ * @param string $to      The recipient email address.
  */
-function relevanssi_support_send_email( $request ) {
+function relevanssi_support_send_email( $request, $to ) {
 	global $wp_version, $relevanssi_variables;
 
-	$message = $request['relevanssi_support_message'];
-	$from    = 'From: ' . $request['relevanssi_support_email'];
-	$to      = $request['relevanssi_support_to_email'];
-	$subject = $request['relevanssi_support_subject'];
+	if ( empty( $to ) || ! is_email( $to ) ) {
+		return;
+	}
+
+	$user_name  = ! empty( $request['relevanssi_support_name'] ) ? sanitize_text_field( $request['relevanssi_support_name'] ) : 'User';
+	$user_email = sanitize_email( $request['relevanssi_support_email'] );
+	$message    = $request['relevanssi_support_message'];
+	$subject    = $request['relevanssi_support_subject'];
+
+	$headers   = array();
+	$headers[] = 'Content-Type: text/plain; charset=UTF-8';
+
+	if ( is_email( $user_email ) ) {
+		$headers[] = "Reply-To: $user_name <$user_email>";
+	}
 
 	$message_intro  = 'WP version: ' . $wp_version . "\n";
 	$message_intro .= 'PHP version: ' . phpversion() . "\n";
 	$message_intro .= 'Relevanssi version: ' . $relevanssi_variables['plugin_version'] . "\n";
+	$message_intro .= 'Name: ' . $user_name . "\n";
+	$message_intro .= 'Email: ' . $user_email . "\n";
 	$message_intro .= "\n";
 
 	$message = $message_intro . stripslashes( $message );
 
-	$success = wp_mail( $to, $subject, $message, array( $from ) );
+	$success = wp_mail( $to, $subject, $message, $headers );
 
 	if ( $success ) {
 		?>

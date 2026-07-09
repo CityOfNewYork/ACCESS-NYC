@@ -58,6 +58,7 @@ add_action( 'relevanssi_custom_field_value', 'relevanssi_filter_custom_fields', 
 add_filter( 'relevanssi_index_custom_fields', 'relevanssi_remove_metadata_fields' );
 add_filter( 'relevanssi_join', 'relevanssi_post_date_throttle_join', 1 );
 add_filter( 'relevanssi_where', 'relevanssi_post_date_throttle_where', 1 );
+add_filter( 'relevanssi_results', 'relevanssi_add_exact_match_boost', 10, 2 );
 
 // Excerpts and highlights.
 add_action( 'relevanssi_pre_the_content', 'relevanssi_kill_autoembed' );
@@ -93,25 +94,11 @@ function relevanssi_init() {
 	$plugin_dir = dirname( plugin_basename( $relevanssi_variables['file'] ) );
 	load_plugin_textdomain( 'relevanssi', false, $plugin_dir . '/languages' );
 	$on_relevanssi_page = false;
-	if ( isset( $_GET['page'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+	if ( isset( $_GET['page'] ) && is_string( $_GET['page'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 		$page = sanitize_file_name( wp_unslash( $_GET['page'] ) ); // phpcs:ignore WordPress.Security.NonceVerification
 		$base = sanitize_file_name( wp_unslash( plugin_basename( $relevanssi_variables['file'] ) ) );
 		if ( $base === $page ) {
 			$on_relevanssi_page = true;
-		}
-	}
-
-	$restriction_notice = relevanssi_check_indexing_restriction();
-	if ( $restriction_notice ) {
-		if ( 'options-general.php' === $pagenow && $on_relevanssi_page ) {
-			if ( 'indexing' === $_GET['tab'] ) { // phpcs:ignore WordPress.Security.NonceVerification
-				add_action(
-					'admin_notices',
-					function () use ( $restriction_notice ) {
-						echo $restriction_notice; // phpcs:ignore WordPress.Security.EscapeOutput
-					}
-				);
-			}
 		}
 	}
 
@@ -496,12 +483,26 @@ function relevanssi_rest_api_disable() {
  */
 function relevanssi_export_log_check() {
 	if ( isset( $_REQUEST['relevanssi_export'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification, just checking the parameter exists.
-		check_admin_referer( 'relevanssi_export_logs', '_relevanssi_export_nonce' );
-		relevanssi_export_log();
+		/**
+		 * Filters the capability required to access Relevanssi options.
+		 *
+		 * @param string $capability The capability required. Default 'manage_options'.
+		 */
+		if ( current_user_can( apply_filters( 'relevanssi_options_capability', 'manage_options' ) ) ) {
+			check_admin_referer( 'relevanssi_export_logs', '_relevanssi_export_nonce' );
+			relevanssi_export_log();
+		}
 	}
 	if ( isset( $_REQUEST['relevanssi_export_clicks'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification, just checking the parameter exists.
-		check_admin_referer( 'relevanssi_export_logs', '_relevanssi_export_nonce' );
-		function_exists( 'relevanssi_export_click_log' ) && relevanssi_export_click_log();
+		/**
+		 * Filters the capability required to access Relevanssi options.
+		 *
+		 * @param string $capability The capability required. Default 'manage_options'.
+		 */
+		if ( current_user_can( apply_filters( 'relevanssi_options_capability', 'manage_options' ) ) ) {
+			check_admin_referer( 'relevanssi_export_logs', '_relevanssi_export_nonce' );
+			function_exists( 'relevanssi_export_click_log' ) && relevanssi_export_click_log();
+		}
 	}
 }
 
@@ -511,6 +512,7 @@ function relevanssi_export_log_check() {
 function relevanssi_load_compatibility_code() {
 	class_exists( 'acf', false ) && require_once 'compatibility/acf.php';
 	class_exists( 'DGWT_WC_Ajax_Search', false ) && require_once 'compatibility/fibosearch.php';
+	class_exists( 'Inpsyde\MultilingualPress\MultilingualPress' ) && require_once 'compatibility/multilingualpress.php';
 	class_exists( 'Jet_Smart_Filters', false ) && require_once 'compatibility/jetsmartfilters.php';
 	class_exists( 'MeprUpdateCtrl', false ) && MeprUpdateCtrl::is_activated() && require_once 'compatibility/memberpress.php';
 	class_exists( 'Obenland_Wp_Search_Suggest', false ) && require_once 'compatibility/wp-search-suggest.php';

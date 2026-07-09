@@ -194,21 +194,21 @@ function relevanssi_form_hide_post_controls() {
 		<td>
 			<label for='relevanssi_hide_post_controls'>
 				<input type='checkbox' name='relevanssi_hide_post_controls' id='relevanssi_hide_post_controls' <?php echo esc_attr( $hide_post_controls ); ?> />
-				<?php esc_html_e( 'Hide Relevanssi on edit pages', 'relevanssi' ); ?>
+				<?php esc_html_e( 'Hide Relevanssi on edit pages and quick edit', 'relevanssi' ); ?>
 			</label>
-			<p class="description"><?php esc_html_e( 'Enabling this option hides Relevanssi on all post edit pages.', 'relevanssi' ); ?></p>
+			<p class="description"><?php esc_html_e( 'Enabling this option hides Relevanssi on all post edit pages and quick edit.', 'relevanssi' ); ?></p>
 		</td>
 	</tr>
 	<tr id="show_post_controls" class="<?php echo esc_attr( $show_post_controls_class ); ?>">
 		<th scope="row">
-			<label for='relevanssi_show_post_controls'><?php esc_html_e( 'Show Relevanssi for admins', 'relevanssi' ); ?></label>
+			<?php esc_html_e( 'Show Relevanssi for admins', 'relevanssi' ); ?>
 		</th>
 		<td>
 		<fieldset>
-			<legend class="screen-reader-text"><?php esc_html_e( 'Show Relevanssi for admins on edit pages', 'relevanssi' ); ?></legend>
+			<legend class="screen-reader-text"><?php esc_html_e( 'Show Relevanssi for admins on edit pages and quick edit', 'relevanssi' ); ?></legend>
 			<label for='relevanssi_show_post_controls'>
 				<input type='checkbox' name='relevanssi_show_post_controls' id='relevanssi_show_post_controls' <?php echo esc_attr( $show_post_controls ); ?> />
-				<?php esc_html_e( 'Show Relevanssi on edit pages for admins', 'relevanssi' ); ?>
+				<?php esc_html_e( 'Show Relevanssi on edit pages and quick edit for admins', 'relevanssi' ); ?>
 			</label>
 		</fieldset>
 		<?php /* translators: first placeholder has the capability used for determining admins, second has the filter hook name to change that */ ?>
@@ -632,7 +632,7 @@ function relevanssi_form_index_synonyms() {
 		</fieldset>
 		<p class="description">
 		<?php
-			_e( 'If checked, Relevanssi will use the synonyms in indexing. If you add <code>dog = hound</code> to the synonym list and enable this feature, every time the indexer sees <code>hound</code> in post content or post title, it will index it as <code>hound dog</code>. Thus, the post will be found when searching with either word. This makes it possible to use synonyms with AND searches, but will slow down indexing, especially with large databases and large lists of synonyms. You can use multi-word values, but phrases do not work.', 'relevanssi' ); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction
+			_e( 'If checked, Relevanssi will use the synonyms in indexing. If you add <code>dog = hound</code> to the synonym list and enable this feature, every time the indexer sees <code>hound</code> in post content or post title, it will index it as <code>hound dog</code>. Thus, the post will be found when searching with either word. This makes it possible to use synonyms with AND searches, but will slow down indexing, especially with large databases and large lists of synonyms. You can use multi-word values on the left side of the synonym, but not on the right side. <code>canine dog = hound</code> will make both <code>canine</code> and <code>dog</code> synonyms of <code>hound</code>. <code>dog = hound canine</code> does not do anything. Phrases do not work, either.', 'relevanssi' ); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction
 		?>
 		</p>
 		</td>
@@ -860,6 +860,120 @@ function relevanssi_form_max_excerpts( $enabled ) {
 }
 
 /**
+ * Prints out the form fields for enabling "Did you mean?" searches.
+ *
+ * Prints out the form fields for enabling the automatic "Did you mean?"
+ * searching for misspelled keywords.
+ */
+function relevanssi_form_enable_didyoumean() {
+	$enable_didyoumean = get_option( 'relevanssi_enable_didyoumean' );
+	$enable_didyoumean = relevanssi_check( $enable_didyoumean );
+	?>
+	<tr id="row_enable_didyoumean">
+		<th scope="row">
+		<?php esc_html_e( 'Automatic "Did you mean?" search', 'relevanssi' ); ?>
+		</th>
+		<td>
+		<fieldset>
+			<legend class="screen-reader-text"><?php esc_html_e( 'Automatic "Did you mean?" search', 'relevanssi' ); ?></legend>
+			<label for='relevanssi_enable_didyoumean'>
+				<input type='checkbox' name='relevanssi_enable_didyoumean' id='relevanssi_enable_didyoumean' <?php echo esc_html( $enable_didyoumean ); ?> />
+				<?php esc_html_e( 'Activate automatic "did you mean?" searching.', 'relevanssi' ); ?>
+			</label>
+		</fieldset>
+		<p class="description"><?php esc_html_e( 'If checked, Relevanssi will automatically search for corrected search terms if there are no results found for the original search term.', 'relevanssi' ); ?></p>
+		</td>
+	</tr>
+	<?php
+}
+
+/**
+ * Prints out the form fields for voice search.
+ *
+ * Prints out the form fields for enabling voice search feature and adjusting
+ * the voice search options.
+ */
+function relevanssi_form_voice_search() {
+	$voice_search            = get_option( 'relevanssi_voice_search' );
+	$voice_search_autosubmit = get_option( 'relevanssi_voice_search_autosubmit' );
+	$voice_search_css        = get_option( 'relevanssi_voice_search_css' );
+	$voice_search            = relevanssi_check( $voice_search );
+	$voice_search_autosubmit = relevanssi_check( $voice_search_autosubmit );
+	$voice_search_css        = relevanssi_check( $voice_search_css );
+	?>
+	<tr id="row_voice_search">
+		<th scope="row">
+		<?php esc_html_e( 'Voice search', 'relevanssi' ); ?>
+		</th>
+		<td>
+		<fieldset>
+			<legend class="screen-reader-text"><?php esc_html_e( 'Enable voice search.', 'relevanssi' ); ?></legend>
+			<label for='relevanssi_voice_search'>
+				<input type='checkbox' name='relevanssi_voice_search' id='relevanssi_voice_search' <?php echo esc_html( $voice_search ); ?> />
+				<?php esc_html_e( 'Enable voice search.', 'relevanssi' ); ?>
+			</label>
+		</fieldset>
+		<p class="description"><?php print( esc_html__( 'If you enable this option, users will be able to search for content with their voice. The voice search uses the WebSpeech API and prioritizes the use of local speech detection. However, it is possible the WebSpeech API uses external speech recognition services (such as Google or Apple), and your privacy policy may need to reflect that.', 'relevanssi' ) ); ?></p>
+		</td>
+	</tr>
+	<tr id="row_voice_search_autosubmit"
+	<?php
+	if ( empty( $voice_search ) ) {
+		echo 'style="display: none"';
+	}
+	?>
+	>
+		<th scope="row">
+		<?php esc_html_e( 'Voice search autosubmit', 'relevanssi' ); ?>
+		</th>
+		<td>
+		<fieldset>
+			<legend class="screen-reader-text"><?php esc_html_e( 'Enable voice search autosubmit.', 'relevanssi' ); ?></legend>
+			<label for='relevanssi_voice_search_autosubmit'>
+				<input type='checkbox' name='relevanssi_voice_search_autosubmit' id='relevanssi_voice_search_autosubmit' <?php echo esc_html( $voice_search_autosubmit ); ?> />
+				<?php esc_html_e( 'Enable voice search autosubmit.', 'relevanssi' ); ?>
+			</label>
+		</fieldset>
+		<p class="description"><?php print( esc_html__( 'If you enable this option, the search will automatically trigger when the user stops talking.', 'relevanssi' ) ); ?></p>
+		</td>
+	</tr>
+	<tr id="row_voice_search_css"
+	<?php
+	if ( empty( $voice_search ) ) {
+		echo 'style="display: none"';
+	}
+	?>
+	>
+		<th scope="row">
+		<?php esc_html_e( 'Voice search CSS', 'relevanssi' ); ?>
+		</th>
+		<td>
+		<fieldset>
+			<legend class="screen-reader-text"><?php esc_html_e( 'Enable voice search CSS', 'relevanssi' ); ?></legend>
+			<label for='relevanssi_voice_search_css'>
+				<input type='checkbox' name='relevanssi_voice_search_css' id='relevanssi_voice_search_css' <?php echo esc_html( $voice_search_css ); ?> />
+				<?php esc_html_e( 'Enable voice search CSS.', 'relevanssi' ); ?>
+			</label>
+		</fieldset>
+		<p class="description">
+			<?php
+			printf(
+				// Translators: %1$s opens the link to the voice search article, %2$s closes it.
+				esc_html__(
+					'If this setting is enabled, Relevanssi automatically adds the CSS for the Voice Search. If this doesn\'t work with your theme, you can disable the Relevanssi CSS and provide your own styles. See the Knowledge Base %1$sVoice Search article%2$s for help.',
+					'relevanssi'
+				),
+				'<a href="https://www.relevanssi.com/knowledge-base/voice-search/" target="_blank">',
+				'</a>'
+			);
+			?>
+			</p>
+		</td>
+	</tr>
+	<?php
+}
+
+/**
  * Adds admin PDF scripts for Relevanssi Premium.
  *
  * Adds the admin-side Javascript for Relevanssi Premium PDF controls and
@@ -1044,6 +1158,16 @@ function relevanssi_update_premium_options() {
 	}
 
 	if ( 'searching' === $request['rlv_tab'] ) {
+		relevanssi_turn_off_options(
+			$request,
+			array(
+				'relevanssi_enable_didyoumean',
+				'relevanssi_voice_search',
+				'relevanssi_voice_search_autosubmit',
+				'relevanssi_voice_search_css',
+			)
+		);
+
 		if ( isset( $request['relevanssi_recency_bonus'] ) && isset( $request['relevanssi_recency_days'] ) ) {
 			$relevanssi_recency_bonus          = array();
 			$relevanssi_recency_bonus['bonus'] = floatval( $request['relevanssi_recency_bonus'] );
@@ -1129,6 +1253,8 @@ function relevanssi_update_premium_options() {
 		$settings['keywords'] = stripslashes( $request['relevanssi_spamblock_keywords'] );
 		$settings['regex']    = stripslashes( $request['relevanssi_spamblock_regex'] );
 
+		$settings['limit'] = absint( $request['relevanssi_spamblock_limit'] );
+
 		$settings['chinese']  = relevanssi_off_or_on( $request, 'relevanssi_spamblock_chinese' );
 		$settings['cyrillic'] = relevanssi_off_or_on( $request, 'relevanssi_spamblock_cyrillic' );
 		$settings['emoji']    = relevanssi_off_or_on( $request, 'relevanssi_spamblock_emoji' );
@@ -1142,6 +1268,7 @@ function relevanssi_update_premium_options() {
 	}
 	relevanssi_update_off_or_on( $request, 'relevanssi_click_tracking', false );
 	relevanssi_update_off_or_on( $request, 'relevanssi_do_not_call_home', false );
+	relevanssi_update_off_or_on( $request, 'relevanssi_enable_didyoumean', true );
 	relevanssi_update_off_or_on( $request, 'relevanssi_hide_branding', false );
 	relevanssi_update_off_or_on( $request, 'relevanssi_hide_post_controls', false );
 	relevanssi_update_off_or_on( $request, 'relevanssi_index_pdf_parent', false );
@@ -1156,6 +1283,9 @@ function relevanssi_update_premium_options() {
 	relevanssi_update_off_or_on( $request, 'relevanssi_send_pdf_files', false );
 	relevanssi_update_off_or_on( $request, 'relevanssi_show_post_controls', false );
 	relevanssi_update_off_or_on( $request, 'relevanssi_update_translations', false );
+	relevanssi_update_off_or_on( $request, 'relevanssi_voice_search', true );
+	relevanssi_update_off_or_on( $request, 'relevanssi_voice_search_autosubmit', true );
+	relevanssi_update_off_or_on( $request, 'relevanssi_voice_search_css', true );
 	relevanssi_update_sanitized( $request, 'relevanssi_api_key', true );
 	relevanssi_update_sanitized( $request, 'relevanssi_disable_shortcodes', false );
 	relevanssi_update_sanitized( $request, 'relevanssi_index_user_fields', false );
@@ -1173,7 +1303,8 @@ function relevanssi_update_premium_options() {
 	);
 
 	if ( 'redirects' === $request['rlv_tab'] ) {
-		$value = relevanssi_process_redirects( $request );
+		$request = relevanssi_parse_csv_redirects( $request );
+		$value   = relevanssi_process_redirects( $request );
 		update_option( 'relevanssi_redirects', $value );
 	}
 }
@@ -1386,6 +1517,7 @@ function relevanssi_manage_columns( $columns, $post_type = 'page' ) {
 		return $columns;
 	}
 
+	$columns['relevanssi']        = 'Relevanssi';
 	$columns['pinned_keywords']   = __( 'Pinned keywords', 'relevanssi' );
 	$columns['unpinned_keywords'] = __( 'Excluded keywords', 'relevanssi' );
 	$columns['pin_for_all']       = __( 'Pin for all searches', 'relevanssi' );
@@ -1401,6 +1533,33 @@ function relevanssi_manage_columns( $columns, $post_type = 'page' ) {
  * @param int   $post_id The post ID.
  */
 function relevanssi_manage_custom_column( $column, $post_id ) {
+	if ( 'relevanssi' === $column ) {
+		$pin_for_all    = get_post_meta( $post_id, '_relevanssi_pin_for_all', true );
+		$hide_post      = get_post_meta( $post_id, '_relevanssi_hide_post', true );
+		$hide_content   = get_post_meta( $post_id, '_relevanssi_hide_content', true );
+		$pin_keywords   = get_post_meta( $post_id, '_relevanssi_pin_keywords', true );
+		$unpin_keywords = get_post_meta( $post_id, '_relevanssi_unpin_keywords', true );
+
+		if ( ! empty( $pin_keywords ) ) {
+			echo esc_html( __( 'Pinned keywords', 'relevanssi' ) ) . ': <em>' . esc_html( $pin_keywords ) . '</em><br />';
+		}
+
+		if ( ! empty( $unpin_keywords ) ) {
+			echo esc_html( __( 'Excluded keywords', 'relevanssi' ) ) . ': <em>' . esc_html( $unpin_keywords ) . '</em><br />';
+		}
+
+		if ( ! empty( $pin_for_all ) ) {
+			echo esc_html( __( 'Pinned for all searches', 'relevanssi' ) ) . '<br />';
+		}
+
+		if ( ! empty( $hide_post ) ) {
+			echo esc_html( __( 'Excluded from search', 'relevanssi' ) ) . '<br />';
+		}
+
+		if ( ! empty( $hide_content ) ) {
+			echo esc_html( __( 'Post content ignored', 'relevanssi' ) );
+		}
+	}
 	switch ( $column ) {
 		case 'pinned_keywords':
 			$keywords = get_post_meta( $post_id, '_relevanssi_pin_keywords', true );
@@ -1447,6 +1606,14 @@ function relevanssi_manage_custom_column( $column, $post_id ) {
  * @param string $column    The column name.
  */
 function relevanssi_quick_edit_custom_box( $column ) {
+	$hide_post_controls = get_option( 'relevanssi_hide_post_controls' );
+	$show_post_controls = get_option( 'relevanssi_show_post_controls' );
+
+	if ( 'on' === $hide_post_controls && 'on' !== $show_post_controls ) {
+		// Don't show quick edit if Relevanssi is hidden in post edit pages.
+		return;
+	}
+
 	switch ( $column ) {
 		case 'pinned_keywords':
 			?>
@@ -1485,7 +1652,6 @@ function relevanssi_quick_edit_custom_box( $column ) {
 						</label>
 					</div>
 				</fieldset>
-			</div>
 			<?php
 			break;
 		case 'pin_for_all':
@@ -1514,6 +1680,7 @@ function relevanssi_quick_edit_custom_box( $column ) {
 						</label>
 					</div>
 				</fieldset>
+			</div>
 			<?php
 			break;
 	}
@@ -1616,5 +1783,6 @@ function relevanssi_hide_columns( $columns ) {
 	$columns[] = 'pin_for_all';
 	$columns[] = 'exclude_post';
 	$columns[] = 'ignore_content';
+	$columns[] = 'relevanssi';
 	return $columns;
 }

@@ -61,6 +61,7 @@ class Plugin {
 
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ), 9999 );
+		add_action( 'init', array( $this, 'init_block_access' ) );
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'network_admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'wp_loaded', array( $this, 'wp_loaded' ) );
@@ -491,14 +492,6 @@ class Plugin {
 
 		global $pagenow;
 
-		if ( ! is_multisite()
-		     && ( strpos( rawurldecode( $_SERVER['REQUEST_URI'] ), 'wp-signup' ) !== false
-		          || strpos( rawurldecode( $_SERVER['REQUEST_URI'] ), 'wp-activate' ) !== false ) && apply_filters( 'wps_hide_login_signup_enable', false ) === false ) {
-
-			wp_die( __( 'This feature is not enabled.', 'wps-hide-login' ) );
-
-		}
-
 		$request = parse_url( rawurldecode( $_SERVER['REQUEST_URI'] ) );
 
 		if ( ( strpos( rawurldecode( $_SERVER['REQUEST_URI'] ), 'wp-login.php' ) !== false
@@ -899,14 +892,28 @@ class Plugin {
 		}
 	}
 
-    public function manage_sites_action_links( $actions, $blog_id, $blogname ) {
+	public function manage_sites_action_links( $actions, $blog_id, $blogname ) {
 
-	    $actions['backend'] = sprintf(
-		    '<a href="%1$s" class="edit">%2$s</a>',
-		    esc_url( get_site_url( $blog_id, $this->new_login_slug() ) ),
-		    __( 'Dashboard' )
-	    );
+		$actions['backend'] = sprintf(
+			'<a href="%1$s" class="edit">%2$s</a>',
+			esc_url( get_site_url( $blog_id, $this->new_login_slug() ) ),
+			__( 'Dashboard' )
+		);
 
-        return $actions;
-    }
+		return $actions;
+	}
+
+	/**
+	 * Block access to wp-signup.php and wp-activate.php on non-multisite installations.
+	 * This runs on 'init' hook to ensure translations are loaded.
+	 */
+	public function init_block_access() {
+		if ( ! is_multisite()
+		     && ( strpos( rawurldecode( $_SERVER['REQUEST_URI'] ), 'wp-signup' ) !== false
+		          || strpos( rawurldecode( $_SERVER['REQUEST_URI'] ), 'wp-activate' ) !== false ) && apply_filters( 'wps_hide_login_signup_enable', false ) === false ) {
+
+			wp_die( __( 'This feature is not enabled.', 'wps-hide-login' ) );
+
+		}
+	}
 }

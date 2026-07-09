@@ -51,9 +51,10 @@ function relevanssi_search_multi( $multi_args ) {
 
 	$total_hits = 0;
 
-	$match_arrays = relevanssi_initialize_match_arrays();
-	$term_hits    = array();
-	$hitsbyweight = array();
+	$match_arrays  = relevanssi_initialize_match_arrays();
+	$term_hits     = array();
+	$hitsbyweight  = array();
+	$missing_terms = array();
 
 	if ( 'all' === $search_blogs ) {
 		$raw_blog_list = get_sites( array( 'number' => 2000 ) ); // There's likely flaming death with even lower values of 'number'.
@@ -71,6 +72,7 @@ function relevanssi_search_multi( $multi_args ) {
 	}
 
 	$post_type_weights = get_option( 'relevanssi_post_type_weights' );
+	$post_objects      = array();
 
 	foreach ( $search_blogs as $blogid ) {
 		$search_again = false;
@@ -101,14 +103,25 @@ function relevanssi_search_multi( $multi_args ) {
 		}
 
 		$remove_stopwords = false;
-		$terms            = relevanssi_tokenize( $q, $remove_stopwords, 1, 'search_query' );
 
-		if ( count( $terms ) < 1 ) {
+		$terms['terms'] = array_keys( relevanssi_tokenize( $q, $remove_stopwords, 1, 'search_query' ) );
+
+		$terms['original_terms'] = $q_no_synonyms !== $q
+			? array_keys( relevanssi_tokenize( $q_no_synonyms, $remove_stopwords, 1, 'search_query' ) )
+			: $terms['terms'];
+
+		if ( count( $terms['terms'] ) < 1 ) {
 			// Tokenizer killed all the search terms.
 			restore_current_blog();
 			continue;
 		}
-		$terms = array_keys( $terms ); // Don't care about tf in query.
+
+		if ( function_exists( 'relevanssi_process_terms' ) ) {
+			$process_terms_results   = relevanssi_process_terms( $terms['terms'], $terms['original_terms'], $q );
+			$query_restrictions     .= $process_terms_results['query_restrictions'];
+			$terms['terms']          = $process_terms_results['terms'];
+			$terms['original_terms'] = $process_terms_results['original_terms'];
+		}
 
 		/**
 		 * Filters the query restrictions in Relevanssi.
@@ -130,11 +143,12 @@ function relevanssi_search_multi( $multi_args ) {
 
 		$no_matches = true;
 		$doc_weight = array();
+		$doc_terms  = array();
 		$term_hits  = array();
 
 		do {
 			$df_counts = relevanssi_generate_df_counts(
-				$terms,
+				$terms['terms'],
 				array(
 					'no_terms'           => false,
 					'operator'           => $operator,
@@ -167,7 +181,7 @@ function relevanssi_search_multi( $multi_args ) {
 				foreach ( $matches as $match ) {
 					$match->doc    = relevanssi_adjust_match_doc( $match );
 					$match->tf     = relevanssi_calculate_tf( $match, $post_type_weights );
-					$match->weight = relevanssi_calculate_weight( $match, $idf, $post_type_weights, $q );
+					$match->weight = relevanssi_calculate_weight( $match, $idf, $post_type_weights );
 
 					/**
 					 * Documented in /lib/search.php.
@@ -195,12 +209,10 @@ function relevanssi_search_multi( $multi_args ) {
 						continue;
 					}
 
-					relevanssi_update_term_hits( $term_hits, $match_arrays, $match, $term );
-
-					$doc_id = $blogid . '|' . $match->doc;
+					relevanssi_update_term_hits( $term_hits, $match_arrays, $match, $term, $blogid );
 
 					$doc_terms[ $match->doc ][ $term ] = true; // Count how many terms are matched to a doc.
-					if ( ! isset( $doc_weight[ $doc_id ] ) ) {
+					if ( ! isset( $doc_weight[ $match->doc ] ) ) {
 						$doc_weight[ $match->doc ] = 0;
 					}
 					$doc_weight[ $match->doc ] += $match->weight;
@@ -220,7 +232,7 @@ function relevanssi_search_multi( $multi_args ) {
 		} while ( $search_again );
 
 		$strip_stopwords     = true;
-		$terms_without_stops = array_keys( relevanssi_tokenize( implode( ' ', $terms ), $strip_stopwords, -1, 'search_query' ) );
+		$terms_without_stops = array_keys( relevanssi_tokenize( implode( ' ', $terms['original_terms'] ), $strip_stopwords, -1, 'search_query' ) );
 		$total_terms         = count( $terms_without_stops );
 
 		if ( isset( $doc_weight ) ) {
@@ -253,6 +265,29 @@ function relevanssi_search_multi( $multi_args ) {
 				$object_id                  = $blogid . '|' . $doc;
 				$hitsbyweight[ $object_id ] = $weight;
 				$post_objects[ $object_id ] = $post_object;
+
+				$doc_terms_for_doc = array_keys( $doc_terms[ $doc ] );
+				$original_terms    = array_values( $terms_without_stops );
+
+				if ( count( $doc_terms[ $doc ] ) < $total_terms ) {
+					if ( $q !== $q_no_synonyms ) {
+						$missing_terms[ $object_id ] = array_diff(
+							$original_terms,
+							relevanssi_replace_synonyms_in_terms( $doc_terms_for_doc )
+						);
+						if ( count( $missing_terms[ $object_id ] ) + count( relevanssi_replace_stems_in_terms( $doc_terms_for_doc ) ) !== count( $terms_without_stops ) ) {
+							$missing_terms[ $object_id ] = array_diff(
+								$original_terms,
+								$doc_terms_for_doc
+							);
+						}
+					} else {
+						$missing_terms[ $object_id ] = array_diff(
+							$original_terms,
+							$doc_terms_for_doc
+						);
+					}
+				}
 			}
 		}
 		restore_current_blog();
@@ -277,9 +312,16 @@ function relevanssi_search_multi( $multi_args ) {
 
 	$i = 0;
 	foreach ( $hitsbyweight as $hit => $weight ) {
+		$object_id = $hit;
+
 		$hit                                   = $post_objects[ $hit ];
 		$hits[ intval( $i ) ]                  = $hit;
 		$hits[ intval( $i ) ]->relevance_score = round( $weight, 2 );
+
+		if ( isset( $missing_terms[ $object_id ] ) ) {
+			$hits[ intval( $i ) ]->missing_terms = $missing_terms[ $object_id ];
+		}
+
 		++$i;
 	}
 
@@ -301,6 +343,7 @@ function relevanssi_search_multi( $multi_args ) {
 			$match_arrays['mysqlcolumn'] = $return['mysqlcolumn_matches'];
 			$match_arrays['excerpt']     = $return['excerpt_matches'];
 			$term_hits                   = $return['term_hits'];
+			$missing_terms               = $return['missing_terms'];
 			$query                       = $return['query'];
 		}
 	}
@@ -323,6 +366,7 @@ function relevanssi_search_multi( $multi_args ) {
 		'term_hits'           => $term_hits,
 		'query'               => $q,
 		'query_no_synonyms'   => $q_no_synonyms,
+		'missing_terms'       => $missing_terms,
 	);
 
 	return $return;

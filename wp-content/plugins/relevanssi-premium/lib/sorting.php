@@ -176,22 +176,27 @@ function relevanssi_get_compare_values( $key, $item_1, $item_2 ) {
 		if ( empty( $key ) ) {
 			// If empty, try the Relevanssi meta_query.
 			global $relevanssi_meta_query;
-			foreach ( $relevanssi_meta_query as $meta_row ) {
-				// There may be many rows. Choose the one where there's just key
-				// and no value.
-				if ( ! is_array( $meta_row ) ) {
-					continue;
-				}
-				if ( isset( $meta_row['value'] ) ) {
-					continue;
-				}
-				if ( isset( $meta_row['key'] ) ) {
-					$key = $meta_row['key'];
+			if ( is_array( $relevanssi_meta_query ) ) {
+				foreach ( $relevanssi_meta_query as $meta_row ) {
+					// There may be many rows. Choose the one where there's just key
+					// and no value.
+					if ( ! is_array( $meta_row ) ) {
+						continue;
+					}
+					if ( isset( $meta_row['value'] ) ) {
+						continue;
+					}
+					if ( isset( $meta_row['key'] ) ) {
+						$key = $meta_row['key'];
+					}
 				}
 			}
 			if ( empty( $key ) ) {
 				// The key is not set.
-				return array( 'key1' => '', 'key2' => '' );
+				return array(
+					'key1' => '',
+					'key2' => '',
+				);
 			}
 		}
 		$key1 = get_post_meta( $item_1->ID, $key, true );
@@ -233,12 +238,26 @@ function relevanssi_get_compare_values( $key, $item_1, $item_2 ) {
 			 */
 			$key1 = apply_filters( 'relevanssi_missing_sort_key', $key1, $key );
 		}
+		if ( 'menu_order' === $key && ! $key1 ) {
+			/**
+			 * Documented in lib/sorting.php.
+			 *
+			 * Non-existing values of menu_order are 0, so pass them through the filter.
+			 */
+			$key1 = apply_filters( 'relevanssi_missing_sort_key', $key1, $key );
+		}
 		if ( isset( $item_2->$key ) ) {
 			$key2 = relevanssi_strtolower( $item_2->$key );
 		} elseif ( isset( $relevanssi_meta_query[ $key ] ) ) {
 			// Named meta queries.
 			$key2 = get_post_meta( $item_2->ID, $relevanssi_meta_query[ $key ]['key'], true );
 		} else {
+			/**
+			 * Documented in lib/sorting.php.
+			 */
+			$key2 = apply_filters( 'relevanssi_missing_sort_key', $key2, $key );
+		}
+		if ( 'menu_order' === $key && ! $key2 ) {
 			/**
 			 * Documented in lib/sorting.php.
 			 */
@@ -327,7 +346,7 @@ function relevanssi_filter_compare( $key1, $key2 ) {
 	 * This would sort posts first, pages second, books third. Values that do
 	 * not appear in the array are sorted last.
 	 *
-	 * @param array Sorting guidance array.
+	 * @param array $array Sorting guidance array.
 	 */
 	$order = apply_filters( 'relevanssi_comparison_order', array() );
 

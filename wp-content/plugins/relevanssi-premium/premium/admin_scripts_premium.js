@@ -134,6 +134,13 @@ jQuery(document).ready(function ($) {
 		)
 	})
 
+	$("#relevanssi_voice_search").on("change", function() {
+		if (this.checked) $("#row_voice_search_autosubmit").show()
+		if (!this.checked) $("#row_voice_search_autosubmit").hide()
+		if (this.checked) $("#row_voice_search_css").show()
+		if (!this.checked) $("#row_voice_search_css").hide()
+	})
+
 	$("#build_index").on("click", function () {
 		$("#relevanssi-progress").show()
 		$("#results").show()

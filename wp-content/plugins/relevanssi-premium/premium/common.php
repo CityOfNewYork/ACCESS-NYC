@@ -239,8 +239,8 @@ function relevanssi_premium_get_post( $id, int $blog_id = -1 ) {
 				 * are stored outside the WP attachment system, use this filter
 				 * to provide a link to the attachment.
 				 *
-				 * @param string The URL to the attachment file.
-				 * @param int    The attachment post ID number.
+				 * @param string $url The URL to the attachment file.
+				 * @param int    $id  The attachment post ID number.
 				 */
 				$post->relevanssi_link = apply_filters(
 					'relevanssi_get_attachment_url',
@@ -303,9 +303,9 @@ function relevanssi_get_child_pdf_content( $post_id ): array {
 		/**
 		 * Filters the custom field value before indexing.
 		 *
-		 * @param array            Custom field values.
+		 * @param array  $values   Custom field values.
 		 * @param string $field    The custom field name.
-		 * @param int    $post_id The post ID.
+		 * @param int    $post_id  The post ID.
 		 */
 		return apply_filters(
 			'relevanssi_custom_field_value',
@@ -386,7 +386,7 @@ function relevanssi_premium_didyoumean( $query, $pre, $post, $n = 5 ) {
  *
  * @param string $query The search query to correct.
  *
- * @return string $query Corrected query, empty string if there are no
+ * @return string|bool Corrected query, empty string if there are no
  * corrections available and true if the query was already correct.
  */
 function relevanssi_premium_generate_suggestion( $query ) {
@@ -395,6 +395,10 @@ function relevanssi_premium_generate_suggestion( $query ) {
 	if ( class_exists( 'Relevanssi_SpellCorrector' ) ) {
 		$query  = htmlspecialchars_decode( $query, ENT_QUOTES );
 		$tokens = relevanssi_tokenize( $query, true, -1, 'search_query' );
+
+		$shadow_query = apply_filters( 'relevanssi_remove_punctuation', $query );
+		$shadow_query = apply_filters( 'relevanssi_remove_accents', $shadow_query );
+		$shadow_query = relevanssi_strtolower( $shadow_query );
 
 		$sc = new Relevanssi_SpellCorrector();
 
@@ -421,10 +425,38 @@ function relevanssi_premium_generate_suggestion( $query ) {
 			if ( true === $c ) {
 				++$exact_matches;
 			} elseif ( ! empty( $c ) && strval( $token ) !== $c ) {
-				array_push( $correct, $c );
-				$query = str_ireplace( $token, $c, $query ); // Replace misspelled word in query with suggestion.
+				$token_length = relevanssi_strlen( $token );
+
+				$c_shadow = apply_filters( 'relevanssi_remove_punctuation', $c );
+				$c_shadow = apply_filters( 'relevanssi_remove_accents', $c_shadow );
+				$c_shadow = relevanssi_strtolower( $c_shadow );
+
+				$offset   = 0;
+				$position = relevanssi_stripos( $shadow_query, $token, $offset );
+
+				while ( false !== $position ) {
+					$old_query = $query;
+
+					$query        = relevanssi_substr_replace( $query, $c, $position, $token_length );
+					$shadow_query = relevanssi_substr_replace( $shadow_query, $c_shadow, $position, $token_length );
+
+					if ( $old_query !== $query ) {
+						/**
+						* Only push to correct answers if a replacement can be made.
+						*
+						* This is necessary when a search with accents is made but Relevanssi
+						* removes the accents, making it difficult to map the unaccented
+						* suggestion back to the original accented query.
+						*/
+						array_push( $correct, $c );
+					}
+
+					$offset   = $position + relevanssi_strlen( $c_shadow );
+					$position = relevanssi_stripos( $shadow_query, $token, $offset );
+				}
 			}
 		}
+
 		if ( count( $tokens ) === $exact_matches ) {
 			// All tokens are correct.
 			return true;
@@ -510,7 +542,7 @@ function relevanssi_premium_init() {
 
 	global $pagenow, $relevanssi_variables;
 	$on_relevanssi_page = false;
-	if ( isset( $_GET['page'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
+	if ( isset( $_GET['page'] ) && is_string( $_GET['page'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 		$page = sanitize_file_name( wp_unslash( $_GET['page'] ) ); // phpcs:ignore WordPress.Security.NonceVerification
 		$base = sanitize_file_name( wp_unslash( plugin_basename( $relevanssi_variables['file'] ) ) );
 		if ( $base === $page ) {
@@ -581,6 +613,13 @@ function relevanssi_premium_init() {
 		'in_plugin_update_message-' . $relevanssi_variables['plugin_basename'],
 		'relevanssi_premium_modify_plugin_update_message'
 	);
+
+	if ( 'on' === get_option( 'relevanssi_enable_didyoumean' ) ) {
+		add_filter( 'relevanssi_fallback', 'relevanssi_didyoumean_fallback' );
+	}
+
+	// Voice search.
+	add_action( 'wp_enqueue_scripts', 'relevanssi_voice_search_assets' );
 
 	// Add the related posts filters if necessary.
 	relevanssi_related_init();
@@ -664,6 +703,7 @@ function relevanssi_premium_install() {
 	add_option( 'relevanssi_click_tracking', 'on' );
 	add_option( 'relevanssi_disable_shortcodes', '' );
 	add_option( 'relevanssi_do_not_call_home', 'off' );
+	add_option( 'relevanssi_enable_didyoumean', 'off' );
 	add_option( 'relevanssi_hide_post_controls', 'off' );
 	add_option( 'relevanssi_index_pdf_parent', 'off' );
 	add_option( 'relevanssi_index_post_type_archives', 'off' );
@@ -689,6 +729,9 @@ function relevanssi_premium_install() {
 	add_option( 'relevanssi_thousand_separator', '' );
 	add_option( 'relevanssi_trim_click_logs', '180' );
 	add_option( 'relevanssi_update_translations', 'off' );
+	add_option( 'relevanssi_voice_search', 'off' );
+	add_option( 'relevanssi_voice_search_autosubmit', 'on' );
+	add_option( 'relevanssi_voice_search_css', 'on' );
 	add_option(
 		'relevanssi_recency_bonus',
 		array(
@@ -710,13 +753,14 @@ function relevanssi_default_server_location(): string {
 	$server = 'us';
 	$locale = get_locale();
 
+	$country = '';
 	if ( strpos( $locale, '_' ) === false ) {
 		$language = $locale;
 	} else {
 		list( $language, $country ) = explode( '_', $locale );
 	}
 
-	$eu_languages = array( 'ast', 'bel', 'ca', 'cy', 'el', 'et', 'eu', 'fi', 'fur', 'gd', 'hr', 'hsb', 'lv', 'oci', 'roh', 'sq', 'uk' );
+	$eu_languages = array( 'ast', 'bel', 'ca', 'cy', 'de', 'el', 'et', 'eu', 'fi', 'fur', 'gd', 'hr', 'hsb', 'lv', 'oci', 'roh', 'sq', 'uk' );
 	$eu_countries = array( 'AL', 'AT', 'BA', 'BE', 'BG', 'CH', 'CY', 'DE', 'EE', 'ES', 'FR', 'GB', 'GR', 'HR', 'HU', 'IE', 'IL', 'IS', 'IT', 'LI', 'LT', 'LU', 'LV', 'MC', 'MD', 'ME', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RS', 'SE', 'SI', 'SK', 'UA' );
 
 	if ( in_array( strtolower( $language ), $eu_languages, true ) ||
@@ -743,7 +787,7 @@ function relevanssi_get_server_url() {
 	/**
 	 * Allows changing the attachment reading server URL.
 	 *
-	 * @param string The server URL.
+	 * @param string $server The server URL.
 	 */
 	return apply_filters( 'relevanssi_attachment_server_url', $server );
 }
@@ -769,6 +813,10 @@ function relevanssi_extract_specifier( $query ) {
 	if ( preg_match_all( '/{(.*?):(.*?)}/', $query, $matches, PREG_SET_ORDER ) ) {
 		foreach ( $matches as $match ) {
 			list( $whole, $target, $keyword ) = $match;
+			if ( empty( $target ) ) {
+				$query = str_replace( $whole, $keyword, $query );
+				continue;
+			}
 
 			$phrases = relevanssi_extract_phrases( $keyword );
 			if ( ! empty( $phrases ) ) {
@@ -846,7 +894,7 @@ function relevanssi_target_matches( $match_object ) {
 				$no_matches = false;
 				break;
 			}
-			if ( ! is_object( $match_object->taxonomy_detail ) ) {
+			if ( ! is_object( $match_object->taxonomy_detail ) && ! empty( $match_object->taxonomy_detail ) ) {
 				$match_object->taxonomy_detail = json_decode( $match_object->taxonomy_detail );
 			}
 			if (
@@ -857,7 +905,7 @@ function relevanssi_target_matches( $match_object ) {
 				$no_matches = false;
 				break;
 			}
-			if ( ! is_object( $match_object->mysqlcolumn_detail ) ) {
+			if ( ! is_object( $match_object->mysqlcolumn_detail ) && ! empty( $match_object->mysqlcolumn_detail ) ) {
 				$match_object->mysqlcolumn_detail = json_decode( $match_object->mysqlcolumn_detail );
 			}
 			if (
@@ -913,6 +961,18 @@ function relevanssi_targeted_phrases( $phrase ) {
 	$excerpt    = 'off';
 	$fields     = array();
 
+	$non_field_targets = array(
+		'excerpt',
+		'content',
+		'tag',
+		'author',
+		'link',
+		'comment',
+		'media',
+	);
+
+	$likely_a_field = ! in_array( $target, $non_field_targets, true );
+
 	if ( 'excerpt' === $target ) {
 		$excerpt = 'on';
 	}
@@ -920,8 +980,11 @@ function relevanssi_targeted_phrases( $phrase ) {
 		$target = 'post_tag';
 	}
 	if ( taxonomy_exists( $target ) ) {
-		$taxonomies = array( $target );
-	} else {
+		$taxonomies     = array( $target );
+		$likely_a_field = false;
+	}
+
+	if ( $likely_a_field ) {
 		$fields = array( $target );
 	}
 
@@ -933,27 +996,39 @@ function relevanssi_targeted_phrases( $phrase ) {
 	);
 
 	if ( 'excerpt' === $target ) {
-		$find                  = array(
-			"post_content LIKE '%$phrase%' OR ",
+		$find                                = array(
+			"post_content LIKE '%$phrase%' OR",
 			"post_title LIKE '%$phrase%' OR ",
 		);
-		$queries[ $phrase ][0] = str_replace( $find, '', $queries[ $phrase ][0] );
+		$queries[ $phrase ]['content_title'] = str_replace( $find, '', $queries[ $phrase ]['content_title'] );
 	} elseif ( 'title' === $target ) {
-		$find                  = array(
+		$find                                = array(
 			"post_content LIKE '%$phrase%' OR ",
 		);
-		$queries[ $phrase ][0] = str_replace( $find, '', $queries[ $phrase ][0] );
+		$queries[ $phrase ]['content_title'] = str_replace( $find, '', $queries[ $phrase ]['content_title'] );
+	} elseif ( 'content' === $target ) {
+		$find                                = array(
+			"OR post_title LIKE '%$phrase%'",
+		);
+		$queries[ $phrase ]['content_title'] = str_replace( $find, '', $queries[ $phrase ]['content_title'] );
 	} else {
-		unset( $queries[ $phrase ][0] ); // Remove the generic post content or title query.
+		unset( $queries[ $phrase ]['content_title'] );
 	}
+
 	if ( $fields ) {
 		// Custom field targeting, remove PDF content custom frield from the list.
-		$queries[ $phrase ][1] = str_replace(
+		$queries[ $phrase ]['custom_fields'] = str_replace(
 			",'_relevanssi_pdf_content'",
 			'',
-			$queries[ $phrase ][1]
+			$queries[ $phrase ]['custom_fields']
 		);
+		unset( $queries[ $phrase ]['pdf_content'] );
+		unset( $queries[ $phrase ]['pdf_parent_content'] );
 	}
+
+	// The post type targeting does not support taxonomy terms and user profiles yet.
+	unset( $queries[ $phrase ]['taxonomy_terms'] );
+	unset( $queries[ $phrase ]['user_profiles'] );
 
 	return $queries;
 }
@@ -983,7 +1058,7 @@ function relevanssi_premium_phrase_queries( $queries, $phrase, $status ) {
 		AND m.meta_value LIKE '%$phrase%'
 		AND p.post_status IN ($status))";
 
-		$queries[] = array(
+		$queries['pdf_content'] = array(
 			'query'  => $query,
 			'target' => 'doc',
 		);
@@ -998,7 +1073,7 @@ function relevanssi_premium_phrase_queries( $queries, $phrase, $status ) {
 		AND m.meta_value LIKE '%$phrase%'
 		AND p.post_status = 'inherit')";
 
-		$queries[] = array(
+		$queries['pdf_parent_content'] = array(
 			'query'  => $query,
 			'target' => 'doc',
 		);
@@ -1015,7 +1090,7 @@ function relevanssi_premium_phrase_queries( $queries, $phrase, $status ) {
 		AND t.name LIKE '%$phrase%'
 		$taxonomies_sql)";
 
-		$queries[] = array(
+		$queries['taxonomy_terms'] = array(
 			'query'  => $query,
 			'target' => 'item',
 		);
@@ -1037,7 +1112,7 @@ function relevanssi_premium_phrase_queries( $queries, $phrase, $status ) {
 		WHERE ($meta_keys_sql AND meta_value LIKE '%$phrase%')
 		OR u.display_name LIKE '%$phrase%')";
 
-		$queries[] = array(
+		$queries['user_profiles'] = array(
 			'query'  => $query,
 			'target' => 'item',
 		);
@@ -1103,14 +1178,16 @@ function relevanssi_update_words_option() {
  */
 function relevanssi_add_must_have( $post ) {
 	$query_string    = $GLOBALS['wp']->query_string ?? '';
-	$request         = $GLOBALS['request'] ?? '/';
+	$request         = trailingslashit( get_bloginfo( 'url' ) );
 	$search_term     = implode( '', $post->relevanssi_hits['missing_terms'] );
-	$search_page_url = add_query_arg( $query_string, '', home_url( $request ) );
-	$search_page_url = str_replace( rawurlencode( $search_term ), '%2B' . $search_term, $search_page_url );
+	$plain_term      = $search_term;
+	$query_string    = str_replace( rawurlencode( $search_term ), '%2B' . $search_term, $query_string );
+	$search_page_url = add_query_arg( $query_string, '', $request );
+	$search_page_url = remove_query_arg( 'paged', $search_page_url );
 
 	return apply_filters(
 		'relevanssi_missing_terms_must_have',
-		' | ' . __( 'Must have', 'relevanssi' ) . ': <a href="' . $search_page_url . '">' . $search_term . '</a>'
+		' | ' . __( 'Must have', 'relevanssi' ) . ': <a href="' . $search_page_url . '">' . $plain_term . '</a>'
 	);
 }
 
@@ -1274,14 +1351,14 @@ function relevanssi_get_user_field_content( $user_id ): array {
  *
  * @return string Validated identifier or an empty string.
  */
-function relevanssi_validate_source( string $source ) : string {
+function relevanssi_validate_source( string $source ): string {
 	/**
 	 * Filters an array to provide a list of valid source identifiers.
 	 *
 	 * Return an array with strings that are valid source identifiers. All other
 	 * values will be ignored.
 	 *
-	 * @param array An empty array.
+	 * @param array $sources An empty array.
 	 */
 	$valid_sources = apply_filters( 'relevanssi_valid_sources', array() );
 
@@ -1299,7 +1376,7 @@ function relevanssi_validate_source( string $source ) : string {
  *
  * @return string The HTML code for the source dropdown.
  */
-function relevanssi_generate_source_select( string $source ) : string {
+function relevanssi_generate_source_select( string $source ): string {
 	global $wpdb, $relevanssi_variables;
 
 	$sources = $wpdb->get_results(
@@ -1324,8 +1401,49 @@ function relevanssi_generate_source_select( string $source ) : string {
 
 	$select = '<p>' . __( 'Source', 'relevanssi' ) . ': <select name="source">'
 		. '<option>' . __( 'All', 'relevanssi' ) . '</option>'
-	    . $source_options
+		. $source_options
 		. '</select></p>';
 
 	return $select;
+}
+
+/**
+ * Enqueues the voice search assets on the front end.
+ */
+function relevanssi_voice_search_assets() {
+	global $relevanssi_variables;
+	if ( 'on' !== get_option( 'relevanssi_voice_search', 'off' ) ) {
+		return;
+	}
+
+	$dir_url = plugin_dir_url( __FILE__ );
+
+	wp_enqueue_script(
+		'relevanssi-voice-search',
+		$dir_url . 'relevanssi-voice-search.js',
+		array(),
+		$relevanssi_variables['plugin_version'],
+		true
+	);
+
+	wp_localize_script(
+		'relevanssi-voice-search',
+		'relevanssiVoiceData',
+		array(
+			'language'    => get_bloginfo( 'language' ),
+			'mic_label'   => esc_html__( 'Search by voice', 'relevanssi' ),
+			'error_msg'   => esc_html__( 'Microphone access denied.', 'relevanssi' ),
+			'auto_submit' => get_option( 'relevanssi_voice_search_autosubmit', 'off' ),
+			'debug'       => get_option( 'relevanssi_debugging_mode', 'off' ),
+		)
+	);
+
+	if ( 'off' !== get_option( 'relevanssi_voice_search_css', 'on' ) ) {
+		wp_enqueue_style(
+			'relevanssi-voice-search-css',
+			$dir_url . 'relevanssi-voice-search.css',
+			array(),
+			'1.0.0'
+		);
+	}
 }

@@ -4,9 +4,9 @@ Contributors: WPServeur, NicolasKulka, wpformation
 Donate link : https://www.paypal.me/donateKulkaNicolas
 Tags: rename, login, wp-login, wp-login.php, custom login url
 Requires at least: 4.1
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.0
-Stable tag: 1.9.17.2
+Stable tag: 1.9.18
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -139,6 +139,10 @@ Ce cas peut provenir de plugins modifiant vos fichiers .htaccess pour ajouter ou
 La première étape consiste à vérifier votre fichier .htaccess et à le comparer à un fichier .htaccess normal, pour voir si le problème provient de ce fichier.
 
 == Changelog ==
+
+= 1.9.18 =
+* Tested up to 6.9
+* Fix early translation loading (Thanks @mondalaci)
 
 = 1.9.17.2 =
 * Tested up to 6.8
