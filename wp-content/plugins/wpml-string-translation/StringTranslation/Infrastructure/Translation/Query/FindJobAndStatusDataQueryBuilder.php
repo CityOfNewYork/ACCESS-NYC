@@ -22,6 +22,7 @@ class FindJobAndStatusDataQueryBuilder {
                 job.translator_id,
                 job.automatic,
                 job.editor,
+                job.editor_job_id,
                 translation_status.translation_service,
                 translation_status.review_status
             FROM {$this->getPrefix()}icl_translate_job job

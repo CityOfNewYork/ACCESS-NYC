@@ -141,7 +141,10 @@ class FindByDomainValueAndContextQuery implements FindByDomainValueAndContextQue
 
 		$stringById = [];
 		foreach ( $strings as $string ) {
-			$stringById[ $string->getId() ] = $string;
+			$id = $string->getId();
+			if ( null !== $id ) {
+				$stringById[ $id ] = $string;
+			}
 		}
 
 		foreach ( $res as $row ) {

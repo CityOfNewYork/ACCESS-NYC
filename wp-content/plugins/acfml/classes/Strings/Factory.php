@@ -89,7 +89,7 @@ class Factory {
 	public function createRegister( $id, $kind = Package::FIELD_GROUP_PACKAGE_KIND_SLUG ) {
 		if ( Package::FIELD_GROUP_PACKAGE_KIND_SLUG === $kind ) {
 			return new Register(
-				$this->createPackage( GroupHelper::getId( $id ), $kind )
+				$this->createPackage( GroupHelper::getKey( $id ), $kind )
 			);
 		}
 		return new Register(
@@ -106,7 +106,7 @@ class Factory {
 	public function createTranslate( $id, $kind = Package::FIELD_GROUP_PACKAGE_KIND_SLUG ) {
 		if ( Package::FIELD_GROUP_PACKAGE_KIND_SLUG === $kind ) {
 			return new Translate(
-				$this->createPackage( GroupHelper::getId( $id ), $kind )
+				$this->createPackage( GroupHelper::getKey( $id ), $kind )
 			);
 		}
 		return new Translate(

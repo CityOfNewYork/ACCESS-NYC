@@ -11,9 +11,9 @@ class StringItem {
 
 	// String type is unknown by default for compatibility with already existing and not autoregistered yet strings.
 	const COMPONENT_TYPE_UNKNOWN = 0;
-	const COMPONENT_TYPE_PLUGIN = 1;
-	const COMPONENT_TYPE_THEME = 2;
-	const COMPONENT_TYPE_CORE = 3;
+	const COMPONENT_TYPE_PLUGIN  = 1;
+	const COMPONENT_TYPE_THEME   = 2;
+	const COMPONENT_TYPE_CORE    = 3;
 
 	// “End of Transmission” character (U+0004, or "\4" in PHP).
 	// It’s the same delimiter as in gettext used to glue the context with the singular string. Also used in WP core from 6.5.
@@ -72,11 +72,11 @@ class StringItem {
 	public function __construct(
 		string $language = '',
 		string $domain = '',
-		string $context = null,
+		?string $context = null,
 		string $value = '',
 		int $status = ICL_TM_NOT_TRANSLATED,
-		string $name = null,
-		string $componentId = null,
+		?string $name = null,
+		?string $componentId = null,
 		int $componentType = self::COMPONENT_TYPE_UNKNOWN,
 		int $stringType = self::STRING_TYPE_DEFAULT
 	) {
@@ -102,7 +102,7 @@ class StringItem {
 		return count( $res ) > 1 ? $res : [ $res[0], null ];
 	}
 
-	public static function createTextAndContextKey( string $text, string $context = null ): string {
+	public static function createTextAndContextKey( string $text, ?string $context = null ): string {
 		return is_string( $context ) && strlen( $context ) > 0
 			? $text . self::EOT_CHARACTER . $context
 			: $text;
@@ -233,7 +233,7 @@ class StringItem {
 		return $this->domainNameContextMd5;
 	}
 
-	public function setComponentId( string $componentId = null ) {
+	public function setComponentId( ?string $componentId = null ) {
 		$this->componentId = $componentId;
 	}
 

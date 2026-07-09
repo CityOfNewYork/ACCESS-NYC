@@ -3,10 +3,15 @@
 use function WPML\Container\make;
 
 class WPML_ST_Translations_File_Scan_Factory {
+	/** @var WPML_ST_Translations_File_Dictionary */
 	private $dictionary;
+	/** @var WPML_ST_Translations_File_Queue */
 	private $queue;
+	/** @var WPML_ST_Translations_File_Scan_Storage */
 	private $storage;
+	/** @var WPML_File */
 	private $wpml_file;
+	/** @var WPML_ST_Translations_File_Component_Details */
 	private $find_aggregate;
 
 	public function check_core_dependencies() {
@@ -40,26 +45,26 @@ class WPML_ST_Translations_File_Scan_Factory {
 	 */
 	public function create_hooks() {
 		$st_upgrade = WPML\Container\make( 'WPML_ST_Upgrade' );
+
 		if ( ! $st_upgrade->has_command_been_executed( 'WPML_ST_Upgrade_MO_Scanning' ) ) {
 			return [];
 		}
 
 		$load = [
 			// Listener of 'wpml_st_translations_file_post_import' hook.
-			'stats-update' => $this->get_stats_update(),
+			'stats-update'         => $this->get_stats_update(),
 			'string-status-update' => $this->get_string_status_update(),
 		];
 
 		if (
 			current_user_can( 'manage_options' )
-			&& ( ! is_admin() || $this->isThemeAndLocalizationPage() )
 		) {
 			// Only register / update .mo files when the user is an admin.
 			// NOTE: it's tending to only load this on the Themen and Plugins
 			// localization page, but some .mo files are only loaded on the
 			// frontend (plugins which separating frontend and backend strings).
-			$load['mo-file-registration'] =
-				$this->store_translation_files_info_on_db();
+			// NOTE: From WP 6.7 most of the .mo files will load only on the front-end and not on the Theme and Plugins localization page.
+			$load['mo-file-registration'] = $this->store_translation_files_info_on_db();
 		}
 
 		return $load;
@@ -168,11 +173,18 @@ class WPML_ST_Translations_File_Scan_Factory {
 	 * @return WPML_ST_Translations_File_Registration
 	 */
 	private function store_translation_files_info_on_db() {
+		$is_on_frontend_page               = ! is_admin();
+		$is_on_admin_page                  = is_admin();
+		$is_on_theme_and_localization_page = $this->isThemeAndLocalizationPage();
+
 		return new WPML_ST_Translations_File_Registration(
 			$this->create_dictionary(),
 			$this->get_wpml_file(),
 			$this->get_aggregate_find_component(),
-			$this->get_sitepress()->get_active_languages()
+			$this->get_sitepress()->get_active_languages(),
+			$is_on_frontend_page,
+			$is_on_admin_page,
+			$is_on_theme_and_localization_page
 		);
 	}
 

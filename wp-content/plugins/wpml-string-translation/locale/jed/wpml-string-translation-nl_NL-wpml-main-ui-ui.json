@@ -3,13 +3,15 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "nl_NL"
          },
          "Edit": [
             "Bewerken"
          ],
          "Shift+Tab": [
-            "Shift+tab"
+            "Shift+Tab"
          ],
          "Tab": [
             "Tab"
@@ -18,7 +20,7 @@
             "Vertaling naar:"
          ],
          "Copy from original": [
-            "Kopie van origineel"
+            "Kopiëren van origineel"
          ],
          "Use Shift+Enter to add a new line.": [
             "Gebruik Shift+Enter om een nieuwe regel toe te voegen."
@@ -27,31 +29,31 @@
             "Origineel:"
          ],
          "Add %s translation": [
-            "%s vertaling toevoegen"
+            "Voeg %s vertaling toe"
          ],
          "Edit %s translation": [
             "Bewerk %s vertaling"
          ],
          "Add %s translation (the string appears on the site and is not translated)": [
-            "%s vertaling toevoegen (de string verschijnt op de site en wordt niet vertaald)"
+            "Voeg %s vertaling toe (de string verschijnt op de site en is niet vertaald)"
          ],
          "Original language %s": [
-            "Originele taal %s"
+            "Oorspronkelijke taal %s"
          ],
          "Waiting for translator to %s": [
             "Wachten op vertaler om %s"
          ],
          "Translation in progress to %s": [
-            "Vertaling in uitvoering naar %s"
+            "Vertaling bezig naar %s"
          ],
          "In basket for translation to %s": [
-            "In mand voor vertaling naar %s"
+            "In winkelmandje voor vertaling naar %s"
          ],
          "Translation saved.": [
             "Vertaling opgeslagen."
          ],
          "Translation update failed.": [
-            "Vertaalupdate mislukt."
+            "Vertaling bijwerken mislukt."
          ]
       }
    }

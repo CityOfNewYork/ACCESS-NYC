@@ -28,7 +28,6 @@ class Config {
 			\WPML_ACF_Field_Settings::class,
 			\WPML_ACF_Location_Rules::class,
 			\WPML_ACF_Migrate_Option_Page_Strings::class,
-			\WPML_ACF_Options_Page::class,
 			\WPML_ACF_Pro::class,
 			\WPML_ACF_Repeater_Shuffle::class,
 			\WPML_ACF_Translatable_Groups_Checker::class,

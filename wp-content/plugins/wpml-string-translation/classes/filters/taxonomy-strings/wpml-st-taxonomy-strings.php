@@ -49,7 +49,7 @@ class WPML_ST_Taxonomy_Strings {
 		return $this->string_factory->get_string_id( $text, $context, $name );
 	}
 
-	/**
+	/**f
 	 * @param string       $text
 	 * @param string       $gettext_context
 	 * @param string       $domain
@@ -124,7 +124,7 @@ class WPML_ST_Taxonomy_Strings {
 	 * @return WPML_ST_String
 	 */
 	private function get_slug_string( $taxonomy ) {
-		$string_id = $this->slug_translation_records->get_slug_id( $taxonomy->name );
+		$string_id = $this->slug_translation_records->get_slug( $taxonomy->name )->get_original_id();
 
 		if ( ! $string_id ) {
 			$slug      = isset( $taxonomy->rewrite['slug'] ) ? trim( $taxonomy->rewrite['slug'], '/' ) : $taxonomy->name;

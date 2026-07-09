@@ -3,10 +3,12 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "it_IT"
          },
          "Not included in String Translation": [
-            "Non incluso nella traduzione delle stringhe"
+            "Non incluso in String Translation"
          ],
          "Registered and locked": [
             "Registrato e bloccato"
@@ -27,19 +29,19 @@
             "Errore di comunicazione"
          ],
          "The action failed.": [
-            "L'azione è fallita."
+            "L'azione non è riuscita."
          ],
          "All (%d)": [
             "Tutti (%d)"
          ],
          "Included in String Translation (%d)": [
-            "Incluso nella traduzione delle stringhe (%d)"
+            "Incluso in String Translation (%d)"
          ],
          "Not included in String Translation (%d)": [
-            "Non incluso nella traduzione delle stringhe (%d)"
+            "Non incluso in String Translation (%d)"
          ],
          "This setting is locked by a WPML configuration file.": [
-            "Questa impostazione è bloccata da un file di configurazione di WPML."
+            "Questa impostazione è bloccata da un file di configurazione WPML."
          ],
          "Option": [
             "Opzione"
@@ -54,28 +56,28 @@
             "Stato"
          ],
          "Export as a WPML configuration file": [
-            "Esportazione come file di configurazione WPML"
+            "Esporta come file di configurazione WPML"
          ],
          "Cancel": [
             "Annulla"
          ],
          "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
-            "Salva quanto segue in un file wpml-config.xml nella root del tuo tema o plugin."
+            "Salva quanto segue in un file wpml-config.xml nella directory principale del tuo tema o plugin."
          ],
          "No options found.": [
-            "Non sono state trovate opzioni."
+            "Nessuna opzione trovata."
          ],
          "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
-            "Assicurati di aver salvato le opzioni del tema almeno una volta. Alcuni temi aggiungono le opzioni alla tabella wp_options solo dopo che l'utente ha salvato esplicitamente le modifiche alle impostazioni predefinite del tema."
+            "Assicurati di aver salvato le opzioni del tuo tema almeno una volta. Alcuni temi le aggiungono alla tabella wp_options solo dopo che l'utente ha esplicitamente salvato le modifiche alle impostazioni predefinite del tema."
          ],
          "Add to String Translation": [
-            "Aggiungi alla traduzione delle stringhe"
+            "Aggiungi a String Translation"
          ],
          "Remove from String Translation": [
-            "Rimuovi dalla traduzione delle stringhe"
+            "Rimuovi da String Translation"
          ],
          "Included in String Translation": [
-            "Incluso nella traduzione delle stringhe"
+            "Incluso in String Translation"
          ]
       }
    }

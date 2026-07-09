@@ -8,6 +8,9 @@ use WPML\FP\Relation;
 
 class FieldHooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 
+	// See _acf_apply_get_local_internal_posts loaded at priority 20.
+	const AFTER_LOAD_LOCAL_FIELD_GROUPS_PRIORITY = 30;
+
 	/**
 	 * @var Factory $factory
 	 */
@@ -33,10 +36,13 @@ class FieldHooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPM
 	public function add_hooks() {
 		add_action( 'acf/update_field_group', [ $this, 'registerGroupAndFieldsAndLayouts' ] );
 
+		add_filter( 'acf/load_field_groups', Fns::withoutRecursion( Fns::identity(), [ $this, 'translateGroups' ] ), self::AFTER_LOAD_LOCAL_FIELD_GROUPS_PRIORITY );
 		add_filter( 'acf/load_field_group', Fns::withoutRecursion( Fns::identity(), [ $this, 'translateGroup' ] ) );
-		add_filter( 'acf/load_field', [ $this, 'translateField' ] );
+		add_filter( 'acf/load_field', Fns::withoutRecursion( Fns::identity(), [ $this, 'translateField' ] ) );
 
 		add_action( 'acf/delete_field_group', [ $this, 'deleteFieldGroupPackage' ] );
+
+		add_action( 'acf/duplicate_field_group', [ $this, 'duplicateFieldGroup' ] );
 	}
 
 	/**
@@ -46,6 +52,21 @@ class FieldHooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPM
 	 */
 	public function registerGroupAndFieldsAndLayouts( $fieldGroup ) {
 		$this->translator->registerGroupAndFieldsAndLayouts( $fieldGroup );
+	}
+
+	/**
+	 * @param array $fieldGroups
+	 *
+	 * @return array
+	 */
+	public function translateGroups( $fieldGroups ) {
+		if ( self::isAcfFieldGroupScreen() ) {
+			return $fieldGroups;
+		}
+
+		return array_map( function( $fieldGroup ) {
+			return $this->translateGroup( $fieldGroup );
+		}, $fieldGroups );
 	}
 
 	/**
@@ -104,7 +125,7 @@ class FieldHooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPM
 	 * @return void
 	 */
 	public function deleteFieldGroupPackage( $fieldGroup ) {
-		$this->factory->createPackage( $fieldGroup['ID'], Package::FIELD_GROUP_PACKAGE_KIND_SLUG )->delete();
+		$this->factory->createPackage( $fieldGroup['key'], Package::FIELD_GROUP_PACKAGE_KIND_SLUG )->delete();
 	}
 
 	/**
@@ -128,4 +149,25 @@ class FieldHooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPM
 
 		return $isSeamlessClone( $field );
 	}
+
+	/**
+	 * @param array $fieldGroup
+	 *
+	 * @return void
+	 */
+	public function duplicateFieldGroup( $fieldGroup ) {
+		$this->flushAcfCache( $fieldGroup );
+	}
+
+	/**
+	 * @param array $fieldGroup
+	 *
+	 * @return void
+	 */
+	private function flushAcfCache( $fieldGroup ) {
+		wp_cache_delete( 'acf_get_field_group_posts', 'acf' );
+		wp_cache_delete( 'acf_get_field_group_post:key:' . $fieldGroup['key'], 'acf' );
+		wp_cache_delete( 'acf_get_field_posts:' . $fieldGroup['ID'], 'acf' );
+	}
+
 }

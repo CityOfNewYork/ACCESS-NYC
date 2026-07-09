@@ -3,16 +3,18 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "ja"
          },
          "Clean up the String Translation table by removing untranslated strings by domain.": [
-            "ドメインごとに未翻訳の文字列を削除して、文字列変換テーブルをクリーンアップする。"
+            "ドメイン別に未翻訳の文字列を削除して、String Translationテーブルをクリーンアップします。"
          ],
          "Remove strings by domain": [
-            "ドメインごとに文字列を削除する"
+            "ドメイン別に文字列を削除"
          ],
          "Remove strings": [
-            "文字列の削除"
+            "文字列を削除"
          ],
          "Cancel": [
             "キャンセル"
@@ -21,37 +23,37 @@
             "削除"
          ],
          "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
-            "文字列翻訳テーブルには現在、以下のドメインの文字列が含まれています。特定のドメインからの文字列を翻訳する予定がない場合、そのドメインを以下で選択すると、文字列翻訳テーブルから未翻訳の文字列が削除されます。すでに翻訳がある文字列は、そのまま使用できます。"
+            "String Translationテーブルには現在、以下のドメインからの文字列が含まれています。特定のドメインからの文字列を翻訳する予定がない場合は、以下で選択して、その未翻訳の文字列をString Translationテーブルから削除してください。すでに翻訳されている文字列は引き続き利用可能です。"
          ],
          "Search": [
             "検索"
          ],
          "Removing strings from String Translation table": [
-            "文字列翻訳テーブルから文字列を削除する"
+            "String Translationテーブルから文字列を削除しています"
          ],
          "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
-            "文字列を文字列翻訳テーブルに戻すには、翻訳ファイルを再スキャンするか、文字列を翻訳可能として登録する必要があるかもしれません。"
+            "文字列をString Translationテーブルに戻すには、翻訳ファイルを再スキャンするか、文字列を翻訳可能として登録する必要がある場合があります。"
          ],
          "Read more about ": [
-            "続きを読む "
+            "詳細はこちら "
          ],
          "scanning your site for strings and registering them as translatable.": [
-            "あなたのサイトの文字列をスキャンし、翻訳可能なものとして登録します。"
+            "サイトをスキャンして文字列を翻訳可能として登録する。"
          ],
          "Successfully removed strings": [
-            "文字列の削除に成功"
+            "文字列を正常に削除しました"
          ],
          "OK, Great": [
-            "よし、いいぞ"
+            "OK、了解"
          ],
          "Domain": [
             "ドメイン"
          ],
          "Strings count": [
-            "ストリングスカウント"
+            "文字列数"
          ],
          "Translated strings": [
-            "翻訳された文字列"
+            "翻訳済み文字列"
          ]
       }
    }

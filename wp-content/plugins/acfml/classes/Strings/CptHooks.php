@@ -7,6 +7,9 @@ use WPML\FP\Obj;
 
 class CptHooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 
+	// See _acf_apply_get_local_internal_posts loaded at priority 20.
+	const AFTER_LOAD_LOCAL_CPTS_PRIORITY = 30;
+
 	/**
 	 * @var Factory $factory
 	 */
@@ -29,7 +32,7 @@ class CptHooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_
 	public function add_hooks() {
 		add_action( 'acf/update_post_type', [ $this, 'register' ] );
 		add_filter( 'acf/post_type/registration_args', [ $this, 'translate' ], 10, 2 );
-		add_filter( 'acf/load_post_types', [ $this, 'enterCptTitleHere' ] );
+		add_filter( 'acf/load_post_types', [ $this, 'enterCptTitleHere' ], self::AFTER_LOAD_LOCAL_CPTS_PRIORITY );
 		add_action( 'acf/delete_post_type', [ $this, 'delete' ] );
 	}
 

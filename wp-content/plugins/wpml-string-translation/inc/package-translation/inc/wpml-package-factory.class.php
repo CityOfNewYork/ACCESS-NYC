@@ -5,7 +5,12 @@ class WPML_ST_Package_Factory {
 	/** @var WPML_WP_Cache_Factory $cache_factory */
 	private $cache_factory;
 
-	public function __construct( WPML_WP_Cache_Factory $cache_factory = null ) {
+	/**
+	 * WPML_ST_Package_Factory constructor.
+	 *
+	 * @param WPML_WP_Cache_Factory|null $cache_factory Cache factory instance.
+	 */
+	public function __construct( ?WPML_WP_Cache_Factory $cache_factory = null ) {
 		$this->cache_factory = $cache_factory;
 		wp_cache_add_non_persistent_groups( __CLASS__ );
 	}

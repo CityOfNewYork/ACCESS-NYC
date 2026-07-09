@@ -3,55 +3,57 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);",
+            "lang": "ru_RU"
          },
          "Edit": [
             "Редактировать"
          ],
          "Shift+Tab": [
-            "Shift+tab"
+            "Shift+Tab"
          ],
          "Tab": [
-            "Вкладка"
+            "Tab"
          ],
          "Translation to:": [
             "Перевод на:"
          ],
          "Copy from original": [
-            "Копия с оригинала"
+            "Копировать из оригинала"
          ],
          "Use Shift+Enter to add a new line.": [
-            "Используйте Shift+Enter, чтобы добавить новую строку."
+            "Используйте Shift+Enter для добавления новой строки."
          ],
          "Original:": [
             "Оригинал:"
          ],
          "Add %s translation": [
-            "Добавить перевод %s "
+            "Добавить перевод %s"
          ],
          "Edit %s translation": [
-            "Редактировать перевод %s "
+            "Редактировать перевод %s"
          ],
          "Add %s translation (the string appears on the site and is not translated)": [
-            "Добавьте перевод %s (строка появляется на сайте и не переводится)"
+            "Добавить перевод %s (строка отображается на сайте и не переведена)"
          ],
          "Original language %s": [
             "Язык оригинала %s"
          ],
          "Waiting for translator to %s": [
-            "Ожидание переводчика %s"
+            "Ожидание переводчика для %s"
          ],
          "Translation in progress to %s": [
-            "Незавершенный перевод в %s"
+            "Перевод на %s в процессе"
          ],
          "In basket for translation to %s": [
-            "В корзину для перевода на %s"
+            "В корзине для перевода на %s"
          ],
          "Translation saved.": [
             "Перевод сохранен."
          ],
          "Translation update failed.": [
-            "Обновление перевода не удалось."
+            "Не удалось обновить перевод."
          ]
       }
    }

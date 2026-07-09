@@ -4,6 +4,7 @@ namespace ACFML\Upgrade;
 
 use ACFML\Upgrade\Commands\MigrateToV2;
 use ACFML\Upgrade\Commands\MigrateToV2_1;
+use ACFML\Upgrade\Commands\MigrateToV2_2;
 
 class CommandsProvider {
 
@@ -14,6 +15,7 @@ class CommandsProvider {
 		return wpml_collect( [
 			MigrateToV2::class,
 			MigrateToV2_1::class,
+			MigrateToV2_2::class,
 		] );
 	}
 

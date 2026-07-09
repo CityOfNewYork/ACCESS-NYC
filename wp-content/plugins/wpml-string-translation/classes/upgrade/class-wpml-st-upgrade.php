@@ -39,7 +39,7 @@ class WPML_ST_Upgrade {
 	 * @param SitePress                            $sitepress SitePress instance.
 	 * @param WPML_ST_Upgrade_Command_Factory|null $command_factory Upgrade Command Factory instance.
 	 */
-	public function __construct( SitePress $sitepress, WPML_ST_Upgrade_Command_Factory $command_factory = null ) {
+	public function __construct( SitePress $sitepress, ?WPML_ST_Upgrade_Command_Factory $command_factory = null ) {
 		$this->sitepress       = $sitepress;
 		$this->command_factory = $command_factory;
 	}
@@ -81,6 +81,8 @@ class WPML_ST_Upgrade {
 		$this->maybe_run( '\WPML\ST\Upgrade\Command\RegenerateMoFilesWithStringNames' );
 		$this->maybe_run( \WPML\ST\Upgrade\Command\MigrateMultilingualWidgets::class );
 		$this->maybe_run( \WPML\ST\Upgrade\Command\UpgradeAutoregisteringStrings::class );
+		$this->maybe_run( \WPML\ST\Upgrade\Command\UpgradeWpSettingsStrings::class );
+		$this->maybe_run( \WPML\ST\Upgrade\Command\DeleteFileHashingOption::class );
 	}
 
 	/**

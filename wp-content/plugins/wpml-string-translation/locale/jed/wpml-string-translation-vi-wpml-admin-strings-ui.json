@@ -1,0 +1,84 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "vi"
+         },
+         "Not included in String Translation": [
+            "Không bao gồm trong Dịch chuỗi"
+         ],
+         "Registered and locked": [
+            "Đã đăng ký và bị khóa"
+         ],
+         "Text": [
+            "Văn bản"
+         ],
+         "Numeric": [
+            "Số"
+         ],
+         "All Types": [
+            "Tất cả các loại"
+         ],
+         "Search": [
+            "Tìm kiếm"
+         ],
+         "Communication error": [
+            "Lỗi giao tiếp"
+         ],
+         "The action failed.": [
+            "Thao tác không thành công."
+         ],
+         "All (%d)": [
+            "Tất cả (%d)"
+         ],
+         "Included in String Translation (%d)": [
+            "Đã bao gồm trong Dịch chuỗi (%d)"
+         ],
+         "Not included in String Translation (%d)": [
+            "Không bao gồm trong Dịch chuỗi (%d)"
+         ],
+         "This setting is locked by a WPML configuration file.": [
+            "Cài đặt này bị khóa bởi tệp cấu hình WPML."
+         ],
+         "Option": [
+            "Tùy chọn"
+         ],
+         "Value": [
+            "Giá trị"
+         ],
+         "Type": [
+            "Loại"
+         ],
+         "State": [
+            "Trạng thái"
+         ],
+         "Export as a WPML configuration file": [
+            "Xuất dưới dạng tệp cấu hình WPML"
+         ],
+         "Cancel": [
+            "Hủy"
+         ],
+         "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
+            "Lưu nội dung sau vào tệp wpml-config.xml trong thư mục gốc của giao diện hoặc plugin của bạn."
+         ],
+         "No options found.": [
+            "Không tìm thấy tùy chọn nào."
+         ],
+         "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
+            "Đảm bảo bạn đã lưu tùy chọn giao diện của mình ít nhất một lần. Một số giao diện chỉ thêm các tùy chọn này vào bảng wp_options sau khi người dùng lưu rõ ràng các thay đổi đối với cài đặt mặc định của giao diện."
+         ],
+         "Add to String Translation": [
+            "Thêm vào Dịch chuỗi"
+         ],
+         "Remove from String Translation": [
+            "Xóa khỏi Dịch chuỗi"
+         ],
+         "Included in String Translation": [
+            "Đã bao gồm trong Dịch chuỗi"
+         ]
+      }
+   }
+}

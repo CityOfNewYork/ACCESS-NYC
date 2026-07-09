@@ -18,6 +18,8 @@ interface SettingsRepositoryInterface {
 	 */
 	public function setAutoregisterStringsTypeSetting( $value );
 	public function getAutoregisterStringsTypeSetting(): int;
+
+	public function getVisibleColumns(): array;
 	public function setShouldRegisterBackendStringsSetting( bool $shouldRegisterBackendStrings );
 	public function getShouldRegisterBackendStringsSetting(): bool;
 	public function setNewTranslationsWereLoadedSetting();
@@ -33,6 +35,14 @@ interface SettingsRepositoryInterface {
 	public function getIsCurrentUserAdmin(): bool;
 	public function isAdminViewingFrontendPage(): bool;
 	public function setIsAutoregistrationEnabled( bool $isAutoregistrationEnabled );
+
+	/**
+	 * @param array $columns
+	 *
+	 * @return void
+	 */
+	public function setVisibleColumns( array $columns );
+
 	public function getIsAutoregistrationEnabled(): bool;
 	public function getCurrentLanguage(): string;
 	public function getActiveLanguageCodes(): array;
@@ -74,4 +84,5 @@ interface SettingsRepositoryInterface {
 	public function isStringTrackingEnabled(): bool;
 	public function enableStringTracking();
 	public function disableStringTracking();
+	public function setDetectStringsInJS( int $detectStringsInJS );
 }

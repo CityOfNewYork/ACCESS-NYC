@@ -19,14 +19,20 @@ class WPML_ST_Translations_File_Scan_UI_Block {
 
 	public function block_ui() {
 		$this->disable_option();
-		$this->remove_default_notice();
-		$this->display_notice();
+		$this->add_hooks();
+	}
+
+	public function add_hooks() {
+		add_action( 'admin_init', [ $this, 'remove_default_notice' ] );
+		add_action( 'admin_init', [ $this, 'display_notice' ] );
 	}
 
 	public function unblock_ui() {
-		if ( is_admin() ) {
-			$this->notices->remove_notice( self::NOTICES_GROUP, self::NOTICES_MO_SCANNING_BLOCKED );
-		}
+		add_action( 'admin_init', [ $this, 'remove_notice' ] );
+	}
+
+	public function remove_notice() {
+		$this->notices->remove_notice( self::NOTICES_GROUP, self::NOTICES_MO_SCANNING_BLOCKED );
 	}
 
 	private function disable_option() {
@@ -69,7 +75,7 @@ class WPML_ST_Translations_File_Scan_UI_Block {
 		return '<span class="icl_error_text" >' . $message . '</span>';
 	}
 
-	private function display_notice() {
+	public function display_notice() {
 		$message = _x(
 			'There is a problem with the String Translation table in your site.',
 			'MO Import blocked 1/4',
@@ -119,7 +125,7 @@ class WPML_ST_Translations_File_Scan_UI_Block {
 		$this->notices->add_notice( $notice );
 	}
 
-	private function remove_default_notice() {
+	public function remove_default_notice() {
 		$this->notices->remove_notice( WPML_ST_Themes_And_Plugins_Settings::NOTICES_GROUP, WPML_ST_Themes_And_Plugins_Updates::WPML_ST_FASTER_SETTINGS_NOTICE_ID );
 	}
 }

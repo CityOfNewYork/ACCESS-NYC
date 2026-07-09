@@ -6,6 +6,7 @@ use WPML\ST\MO\Hooks\LanguageSwitch;
 use WPML\ST\MO\File\Manager;
 use WPML\ST\StringsFilter\Provider;
 use WPML_Locale;
+use WPML_Displayed_String_Filter;
 
 class TranslateWpmlString {
 
@@ -33,10 +34,10 @@ class TranslateWpmlString {
 		WPML_Locale $locale,
 		Manager $fileManager
 	) {
-		$this->filterProvider  = $filterProvider;
-		$this->languageSwitch  = $languageSwitch;
-		$this->locale          = $locale;
-		$this->fileManager     = $fileManager;
+		$this->filterProvider = $filterProvider;
+		$this->languageSwitch = $languageSwitch;
+		$this->locale         = $locale;
+		$this->fileManager    = $fileManager;
 	}
 
 	public function init() {
@@ -85,15 +86,29 @@ class TranslateWpmlString {
 	 */
 	private function translateByMOFile( $wpmlContext, $name, $value, &$hasTranslation, $targetLang ) {
 		list ( $domain, $gettextContext ) = wpml_st_extract_context_parameters( $wpmlContext );
+		$normalizedName                   = WPML_Displayed_String_Filter::truncate_long_string( $name );
 
-		$translateByName = function ( $locale ) use ( $name, $domain, $gettextContext ) {
+		$translateByName = function ( $locale ) use ( $normalizedName, $name, $domain, $gettextContext ) {
 			$this->loadTextDomain( $domain, $locale );
 
 			if ( $gettextContext ) {
-				return _x( $name, $gettextContext, $domain );
+				$result = _x( $normalizedName, $gettextContext, $domain );
 			} else {
-				return __( $name, $domain );
+				$result = __( $normalizedName, $domain );
 			}
+
+			// When the name was hashed (> column limit), the MO file stores the original name as
+			// the primary msgid. If the hash lookup returned nothing, retry with the original name.
+			if ( $result === $normalizedName && $normalizedName !== $name ) {
+				$fallback = $gettextContext
+					? _x( $name, $gettextContext, $domain )
+					: __( $name, $domain );
+				if ( $fallback !== $name ) {
+					return $fallback;
+				}
+			}
+
+			return $result;
 		};
 
 		/*
@@ -109,11 +124,19 @@ class TranslateWpmlString {
 		 */
 		do_action( 'wpml_st_update_settings', 'disableAutoregistration' );
 		$new_value      = $this->withMOLocale( $targetLang, $translateByName );
-		$hasTranslation = $new_value !== $name;
+		$hasTranslation = $new_value !== $normalizedName;
 		if ( $hasTranslation ) {
 			$value = $new_value;
 		} else {
-			do_action('wpml_st_add_to_queue', $value, $domain, $gettextContext, $name);
+			if ( $normalizedName !== $name ) {
+				// Name exceeded the column limit and was hashed. The re-entrant icl_translate call
+				// inside the gettext filter is blocked by $this->lock, so __() returns the hash
+				// verbatim. Fall back to the DB path, which normalises the name via
+				// truncate_long_string() internally and can reach the stored row.
+				$value = $this->translateByDBQuery( $wpmlContext, $name, $value, $hasTranslation, $targetLang );
+			} else {
+				do_action( 'wpml_st_add_to_queue', $value, $domain, $gettextContext, $name );
+			}
 		}
 		do_action( 'wpml_st_update_settings', 'enableAutoregistration' );
 
@@ -151,7 +174,8 @@ class TranslateWpmlString {
 		) {
 			load_textdomain(
 				$domain,
-				$this->fileManager->getFilepath( $domain, $locale )
+				$this->fileManager->getFilepath( $domain, $locale ),
+				$locale
 			);
 
 			self::$loadedDomains[ $locale ][ $domain ] = true;

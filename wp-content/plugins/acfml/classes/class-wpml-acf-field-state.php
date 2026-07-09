@@ -54,7 +54,12 @@ class FieldState implements \IWPML_Backend_Action {
 	 * @return array Flatten array of ACF fields.
 	 */
 	public function getCurrentMetadata( $id ) {
-		$metaData = (array) $this->shuffled->getAllMeta( $id );
+		try {
+			$metaData = (array) $this->shuffled->getAllMeta( $id );
+		} catch ( \Throwable $e ) {
+			$metaData = [];
+		}
+
 		foreach ( $metaData as $key => $maybeArray ) {
 			$acf_field = get_field_object( $key, $id );
 			if ( ! $acf_field ) {

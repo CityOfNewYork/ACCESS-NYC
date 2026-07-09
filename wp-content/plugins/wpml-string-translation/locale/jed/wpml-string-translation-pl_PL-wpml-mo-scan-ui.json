@@ -3,52 +3,54 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);",
+            "lang": "pl_PL"
          },
          "WPML has detected changed or new MO files": [
-            "WPML wykrył zmienione lub nowe pliki MO "
+            "WPML wykrył zmienione lub nowe pliki MO"
          ],
          "There are new or updated .mo files. WPML needs to scan them to find strings for translation.": [
-            "Istnieją nowe lub zaktualizowane pliki .mo. WPML musi je przeskanować, aby znaleźć ciągi do przetłumaczenia."
+            "Istnieją nowe lub zaktualizowane pliki .mo. WPML musi je przeskanować, aby znaleźć ciągi do tłumaczenia."
          ],
          "Scan translation files": [
             "Skanuj pliki tłumaczeń"
          ],
          "Scanned %1$d of %2$d files...": [
-            "Skan %1$d plików %2$d..."
+            "Przeskanowano %1$d z %2$d plików..."
          ],
          "Generated files for %1$d of %2$d sites...": [
-            "Wygenerowane pliki dla %1$d stron %2$d..."
+            "Wygenerowano pliki dla %1$d z %2$d witryn..."
          ],
          "Generated %1$d of %2$d files...": [
-            "Wygenerowano %1$d plików %2$d..."
+            "Wygenerowano %1$d z %2$d plików..."
          ],
          "WPML needs to generate .mo files": [
-            "WPML musi generować pliki .mo"
+            "WPML musi wygenerować pliki .mo"
          ],
          "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end. However, the folder that should hold these .mo files is not open for writing.": [
-            "WPML String Translation używa plików .mo zamiast wywołań bazy danych. WPML musi wygenerować te pliki .mo, aby tłumaczenia pojawiły się w interfejsie użytkownika. Jednak folder, który powinien przechowywać te pliki .mo, nie jest otwarty do zapisu."
+            "WPML String Translation używa plików .mo zamiast wywołań bazy danych. WPML musi wygenerować te pliki .mo, aby tłumaczenia pojawiły się na stronie głównej. Jednak folder, który powinien zawierać te pliki .mo, nie jest otwarty do zapisu."
          ],
          "Please use your admin control panel or an FTP program to make the following folder writeable:": [
-            "Użyj panelu administracyjnego lub programu FTP, aby umożliwić zapis następującego folderu:"
+            "Użyj panelu administracyjnego lub programu FTP, aby folder był zapisywalny:"
          ],
          "There was a problem creating the .mo files": [
-            "Wystąpił problem z utworzeniem plików .mo"
+            "Wystąpił problem podczas tworzenia plików .mo"
          ],
          "You can try again now or try again later by going to ": [
-            "Możesz spróbować ponownie teraz lub później, przechodząc na stronę "
+            "Możesz spróbować ponownie teraz lub później, przechodząc do "
          ],
          "Translations are missing from the front-end until you generate .mo files": [
-            "Tłumaczenia nie są dostępne w interfejsie użytkownika, dopóki nie wygenerujesz plików .mo."
+            "Tłumaczenia są niedostępne na stronie głównej, dopóki nie wygenerujesz plików .mo"
          ],
          "Your site doesn't have the .mo files that WPML needs in order to display translated strings on the front-end. To generate these .mo files, remember to go to ": [
-            "Twoja witryna nie ma plików .mo, których WPML potrzebuje do wyświetlania przetłumaczonych ciągów znaków w interfejsie użytkownika. Aby wygenerować te pliki .mo, pamiętaj, aby przejść do "
+            "Twoja witryna nie ma plików .mo, których WPML potrzebuje do wyświetlania przetłumaczonych ciągów na stronie głównej. Aby wygenerować te pliki .mo, pamiętaj, aby przejść do "
          ],
          "WPML->Theme and plugins localization.": [
-            "WPML->Lokalizacja motywów i wtyczek."
+            "WPML->Tłumaczenie motywów i wtyczek."
          ],
          "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end.": [
-            "WPML String Translation używa plików .mo zamiast wywołań bazy danych. WPML musi wygenerować te pliki .mo, aby tłumaczenia pojawiły się w interfejsie użytkownika."
+            "WPML String Translation używa plików .mo zamiast wywołań bazy danych. WPML musi wygenerować te pliki .mo, aby tłumaczenia pojawiły się na stronie głównej."
          ],
          "Try again": [
             "Spróbuj ponownie"
@@ -60,37 +62,37 @@
             "Zamknij tę wiadomość"
          ],
          "Find additional texts that WordPress, the theme and plugins created and choose which ones to translate": [
-            "Znajdź dodatkowe teksty utworzone przez WordPress, motyw i wtyczki i wybierz, które z nich mają zostać przetłumaczone."
+            "Znajdź dodatkowe teksty utworzone przez WordPress, motyw i wtyczki oraz wybierz, które z nich chcesz przetłumaczyć"
          ],
          "Choose texts for translation": [
             "Wybierz teksty do tłumaczenia"
          ],
          "Some of the translations have changed": [
-            "Niektóre tłumaczenia uległy zmianie"
+            "Niektóre tłumaczenia zostały zmienione"
          ],
          "Scan the selected components to make new texts available for translation.": [
-            "Zeskanuj wybrane komponenty, aby udostępnić nowe teksty do tłumaczenia."
+            "Skanuj wybrane komponenty, aby nowe teksty były dostępne do tłumaczenia."
          ],
          "Select all": [
-            "Wybierz wszystko"
+            "Zaznacz wszystko"
          ],
          "Plugins:": [
             "Wtyczki:"
          ],
          "Themes:": [
-            "Tematy:"
+            "Motywy:"
          ],
          "Core:": [
             "Rdzeń:"
          ],
          "Can't find the strings you're looking to translate?": [
-            "Nie możesz znaleźć ciągów znaków, które chcesz przetłumaczyć?"
+            "Nie możesz znaleźć ciągów, które chcesz przetłumaczyć?"
          ],
          "Most likely you cannot see the strings you want to translate because:": [
             "Najprawdopodobniej nie widzisz ciągów, które chcesz przetłumaczyć, ponieważ:"
          ],
          "Texts are not selected for translation": [
-            "Teksty nie są wybierane do tłumaczenia"
+            "Teksty nie są wybrane do tłumaczenia"
          ]
       }
    }

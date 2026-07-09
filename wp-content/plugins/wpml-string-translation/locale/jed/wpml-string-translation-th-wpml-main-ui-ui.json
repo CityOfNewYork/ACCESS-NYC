@@ -3,22 +3,24 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "th"
          },
          "Edit": [
             "แก้ไข"
          ],
          "Shift+Tab": [
-            "Shift+แท็บ"
+            "Shift+Tab"
          ],
          "Tab": [
-            "แท็บ"
+            "Tab"
          ],
          "Translation to:": [
             "แปลเป็น:"
          ],
          "Copy from original": [
-            "คัดลอกมาจากต้นฉบับ"
+            "คัดลอกจากต้นฉบับ"
          ],
          "Use Shift+Enter to add a new line.": [
             "ใช้ Shift+Enter เพื่อเพิ่มบรรทัดใหม่"
@@ -27,31 +29,31 @@
             "ต้นฉบับ:"
          ],
          "Add %s translation": [
-            "เพิ่ม %s การแปล"
+            "เพิ่มการแปล %s"
          ],
          "Edit %s translation": [
-            "แก้ไข %s การแปล"
+            "แก้ไขการแปล %s"
          ],
          "Add %s translation (the string appears on the site and is not translated)": [
-            "เพิ่ม%s การแปล (สตริงปรากฎอยู่ในเว็บไซต์และไม่ได้รับการแปล)"
+            "เพิ่มการแปล %s (สตริงปรากฏบนไซต์และไม่ได้แปล)"
          ],
          "Original language %s": [
             "ภาษาต้นฉบับ %s"
          ],
          "Waiting for translator to %s": [
-            "รอคนแปลอยู่. %s"
+            "กำลังรอผู้แปลเพื่อ %s"
          ],
          "Translation in progress to %s": [
-            "อยู่ระหว่างการแปลถึง %s"
+            "กำลังแปลเป็น %s"
          ],
          "In basket for translation to %s": [
-            "ในตะกร้าสำหรับการแปลไปที่ %s"
+            "อยู่ในตะกร้าสำหรับการแปลเป็น %s"
          ],
          "Translation saved.": [
-            "บันทึกคำแปลแล้ว"
+            "บันทึกการแปลแล้ว"
          ],
          "Translation update failed.": [
-            "การอัปเดตการแปลล้มเหลว"
+            "อัปเดตการแปลล้มเหลว"
          ]
       }
    }

@@ -243,7 +243,7 @@
     .wpml-strings-widgets-wrap .wpml-string-widgets .postbox .form-in-column .select-and-button-button #icl_st_importpo_existingbutton {
       margin: 0 0 0 10px;
       white-space: nowrap; }
-      .wpml-strings-widgets-wrap .wpml-string-widgets .postbox .form-in-column .select-and-button-button #icl_st_importpo_existingbutton .rtl {
+      .rtl .wpml-strings-widgets-wrap .wpml-string-widgets .postbox .form-in-column .select-and-button-button #icl_st_importpo_existingbutton {
         margin: 0 10px 0 0; }
 
 @media (min-width: 782px) and (max-width: 1200px) {

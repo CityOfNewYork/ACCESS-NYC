@@ -70,10 +70,10 @@ class Module {
 	}
 
 	/**
-	 * @param callable|curried $saveBatch
-	 * @param int|curried $batchId
-	 * @param int|curried $stringId
-	 * @param string|curried $sourceLang
+	 * @param callable|curried|null $saveBatch
+	 * @param int|curried           $batchId
+	 * @param int|curried           $stringId
+	 * @param string|curried        $sourceLang
 	 * @return void|callable
 	 *
 	 * @phpstan-param ?callable $saveBatch
@@ -84,7 +84,7 @@ class Module {
 	 * @phpstan-return ( $sourceLang is not null ? void : callable )
 	 *
 	 */
-	public static function batchStringsStorage( callable $saveBatch = null, $batchId  = null, $stringId  = null, $sourceLang  = null ) {
+	public static function batchStringsStorage( ?callable $saveBatch = null, $batchId  = null, $stringId  = null, $sourceLang  = null ) {
 		return call_user_func_array(
 			curryN( 4, function ( callable $saveBatch, $batchId, $stringId, $sourceLang ) {
 				self::setBatchLanguage( $batchId, $sourceLang );

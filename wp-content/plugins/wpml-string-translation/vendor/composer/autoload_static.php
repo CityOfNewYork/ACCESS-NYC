@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitdab9449ec861009ffc60ad37d2be0097
+class ComposerStaticInitdcecc39e7a4fa5a78bbd497bfbb29412
 {
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -16,6 +16,7 @@ class ComposerStaticInitdab9449ec861009ffc60ad37d2be0097
         'WPML\\ST\\API\\Fns' => __DIR__ . '/..' . '/wpml/st-api/core/Fns.php',
         'WPML\\ST\\Actions' => __DIR__ . '/../..' . '/classes/actions/Actions.php',
         'WPML\\ST\\AdminTexts\\SendStringsForTranslationNotice' => __DIR__ . '/../..' . '/classes/SendStringsForTranslationNotice.php',
+        'WPML\\ST\\AdminTexts\\TranslateNestedIds' => __DIR__ . '/../..' . '/inc/admin-texts/TranslateNestedIds.php',
         'WPML\\ST\\AdminTexts\\UI' => __DIR__ . '/../..' . '/inc/admin-texts/UI.php',
         'WPML\\ST\\AutoRegisterStringsNotice' => __DIR__ . '/../..' . '/classes/AutoRegisterStringsNotice.php',
         'WPML\\ST\\Basket\\Status' => __DIR__ . '/../..' . '/classes/basket/Status.php',
@@ -88,6 +89,7 @@ class ComposerStaticInitdab9449ec861009ffc60ad37d2be0097
         'WPML\\ST\\MO\\Scan\\UI\\Model' => __DIR__ . '/../..' . '/classes/translations-file-scan/UI/Model.php',
         'WPML\\ST\\MO\\Scan\\UI\\UI' => __DIR__ . '/../..' . '/classes/translations-file-scan/UI/UI.php',
         'WPML\\ST\\MO\\WPLocaleProxy' => __DIR__ . '/../..' . '/classes/MO/WPLocaleProxy.php',
+        'WPML\\ST\\MO\\WPML_Locale' => __DIR__ . '/../..' . '/classes/MO/WPML_Locale.php',
         'WPML\\ST\\Main\\Ajax\\FetchCompletedStrings' => __DIR__ . '/../..' . '/classes/string-translation-ui/ajax/FetchCompletedStrings.php',
         'WPML\\ST\\Main\\Ajax\\FetchTranslationMemory' => __DIR__ . '/../..' . '/classes/translation-memory/FetchTranslationMemory.php',
         'WPML\\ST\\Main\\Ajax\\SaveTranslation' => __DIR__ . '/../..' . '/classes/string-translation-ui/ajax/SaveTranslation.php',
@@ -121,6 +123,11 @@ class ComposerStaticInitdab9449ec861009ffc60ad37d2be0097
         'WPML\\ST\\StringsFilter\\TranslationsObjectStorage' => __DIR__ . '/../..' . '/classes/filters/strings-filter/TranslationsObjectStorage.php',
         'WPML\\ST\\StringsFilter\\Translator' => __DIR__ . '/../..' . '/classes/filters/strings-filter/Translator.php',
         'WPML\\ST\\StringsRepository' => __DIR__ . '/../..' . '/classes/StringsRepository.php',
+        'WPML\\ST\\StringsScanning\\JS\\HooksFactory' => __DIR__ . '/../..' . '/classes/strings-scanning/JS/HooksFactory.php',
+        'WPML\\ST\\StringsScanning\\JS\\Scanner' => __DIR__ . '/../..' . '/classes/strings-scanning/JS/Scanner.php',
+        'WPML\\ST\\StringsScanning\\JS\\ScriptRegisterHooks' => __DIR__ . '/../..' . '/classes/strings-scanning/JS/ScriptRegisterHooks.php',
+        'WPML\\ST\\StringsScanning\\JS\\ScriptRegistry' => __DIR__ . '/../..' . '/classes/strings-scanning/JS/ScriptRegistry.php',
+        'WPML\\ST\\StringsScanning\\JS\\SettingsHooks' => __DIR__ . '/../..' . '/classes/strings-scanning/JS/SettingsHooks.php',
         'WPML\\ST\\StringsScanning\\UpdateStats' => __DIR__ . '/../..' . '/classes/strings-scanning/UpdateStats.php',
         'WPML\\ST\\ThemePluginLocalization\\OtherLocalizationUI' => __DIR__ . '/../..' . '/classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php',
         'WPML\\ST\\ThemePluginLocalization\\OtherLocalizationUIFactory' => __DIR__ . '/../..' . '/classes/menus/theme-plugin-localization-ui/factory/OtherLocalizationUIFactory.php',
@@ -133,6 +140,7 @@ class ComposerStaticInitdab9449ec861009ffc60ad37d2be0097
         'WPML\\ST\\TranslationFile\\Hooks' => __DIR__ . '/../..' . '/classes/translation-files/Hooks.php',
         'WPML\\ST\\TranslationFile\\Manager' => __DIR__ . '/../..' . '/classes/translation-files/Manager.php',
         'WPML\\ST\\TranslationFile\\QueueFilter' => __DIR__ . '/../..' . '/classes/translations-file-scan/QueueFilter.php',
+        'WPML\\ST\\TranslationFile\\StringCollation' => __DIR__ . '/../..' . '/classes/translation-files/StringCollation.php',
         'WPML\\ST\\TranslationFile\\StringEntity' => __DIR__ . '/../..' . '/classes/translation-files/StringEntity.php',
         'WPML\\ST\\TranslationFile\\StringsRetrieve' => __DIR__ . '/../..' . '/classes/translation-files/StringsRetrieve.php',
         'WPML\\ST\\TranslationFile\\Sync\\FileSync' => __DIR__ . '/../..' . '/classes/translation-files/Sync/FileSync.php',
@@ -144,11 +152,16 @@ class ComposerStaticInitdab9449ec861009ffc60ad37d2be0097
         'WPML\\ST\\Troubleshooting\\BackendHooks' => __DIR__ . '/../..' . '/classes/Troubleshooting/BackendHooks.php',
         'WPML\\ST\\Troubleshooting\\Cleanup\\Database' => __DIR__ . '/../..' . '/classes/Troubleshooting/Cleanup/Database.php',
         'WPML\\ST\\Troubleshooting\\RequestHandle' => __DIR__ . '/../..' . '/classes/Troubleshooting/RequestHandle.php',
+        'WPML\\ST\\Upgrade\\Command\\DeleteFileHashingOption' => __DIR__ . '/../..' . '/classes/upgrade/Command/DeleteFileHashingOption.php',
         'WPML\\ST\\Upgrade\\Command\\MigrateMultilingualWidgets' => __DIR__ . '/../..' . '/classes/upgrade/Command/MigrateMultilingualWidgets.php',
         'WPML\\ST\\Upgrade\\Command\\RegenerateMoFilesWithStringNames' => __DIR__ . '/../..' . '/classes/upgrade/Command/RegenerateMoFilesWithStringNames.php',
         'WPML\\ST\\Upgrade\\Command\\UpgradeAutoregisteringStrings' => __DIR__ . '/../..' . '/classes/upgrade/UpgradeAutoregisteringStrings.php',
+        'WPML\\ST\\Upgrade\\Command\\UpgradeWpSettingsStrings' => __DIR__ . '/../..' . '/classes/upgrade/Command/UpgradeWpSettingsStrings.php',
         'WPML\\ST\\Utils\\LanguageResolution' => __DIR__ . '/../..' . '/classes/utilities/LanguageResolution.php',
         'WPML\\ST\\WP\\App\\Resources' => __DIR__ . '/../..' . '/classes/utilities/Resources.php',
+        'WPML\\ST\\WpSettings\\DateTimeFormatsDefaultLocaleValues' => __DIR__ . '/../..' . '/classes/WpSettings/DateTimeFormatsDefaultLocaleValues.php',
+        'WPML\\ST\\WpSettings\\DefaultMO' => __DIR__ . '/../..' . '/classes/WpSettings/DefaultMO.php',
+        'WPML\\ST\\WpSettings\\Factory' => __DIR__ . '/../..' . '/classes/WpSettings/Factory.php',
         'WPML\\StringTranslation\\Application' => __DIR__ . '/../..' . '/StringTranslation/Application.php',
         'WPML\\StringTranslation\\Application\\Debug\\Repository\\ComponentDebugRepository' => __DIR__ . '/../..' . '/StringTranslation/Application/Debug/Repository/ComponentDebugRepository.php',
         'WPML\\StringTranslation\\Application\\Debug\\Service\\DebugService' => __DIR__ . '/../..' . '/StringTranslation/Application/Debug/Service/DebugService.php',
@@ -393,7 +406,6 @@ class ComposerStaticInitdab9449ec861009ffc60ad37d2be0097
         'WPML_ST_DB_Mappers_Strings' => __DIR__ . '/../..' . '/classes/db-mappers/class-wpml-st-db-mappers-strings.php',
         'WPML_ST_Element_Slug_Translation_UI' => __DIR__ . '/../..' . '/classes/slug-translation/wpml-st-element-slug-translation-ui.php',
         'WPML_ST_Element_Slug_Translation_UI_Model' => __DIR__ . '/../..' . '/classes/slug-translation/wpml-st-element-slug-translation-ui-model.php',
-        'WPML_ST_File_Hashing' => __DIR__ . '/../..' . '/classes/strings-scanning/class-wpml-st-file-hashing.php',
         'WPML_ST_ICL_String_Translations' => __DIR__ . '/../..' . '/classes/records/class-wpml-st-icl-string-translations.php',
         'WPML_ST_ICL_Strings' => __DIR__ . '/../..' . '/classes/records/class-wpml-st-icl-strings.php',
         'WPML_ST_Initialize' => __DIR__ . '/../..' . '/classes/class-wpml-st-initialize.php',
@@ -462,8 +474,6 @@ class ComposerStaticInitdab9449ec861009ffc60ad37d2be0097
         'WPML_ST_Theme_Localization_UI' => __DIR__ . '/../..' . '/classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php',
         'WPML_ST_Theme_Localization_UI_Factory' => __DIR__ . '/../..' . '/classes/menus/theme-plugin-localization-ui/factory/class-wpml-st-theme-localization-ui-factory.php',
         'WPML_ST_Theme_Localization_Utils' => __DIR__ . '/../..' . '/classes/menus/theme-plugin-localization-ui/class-st-theme-localization-ui-utils.php',
-        'WPML_ST_Theme_Plugin_Hooks' => __DIR__ . '/../..' . '/classes/strings-scanning/class-wpml-st-theme-plugin-hooks.php',
-        'WPML_ST_Theme_Plugin_Hooks_Factory' => __DIR__ . '/../..' . '/classes/strings-scanning/factory/class-st-theme-plugin-hooks-factory.php',
         'WPML_ST_Theme_Plugin_Localization_Options_Settings' => __DIR__ . '/../..' . '/classes/menus/theme-plugin-localization-ui/class-wpml-st-theme-plugin-localization-options-settings.php',
         'WPML_ST_Theme_Plugin_Localization_Options_Settings_Factory' => __DIR__ . '/../..' . '/classes/menus/theme-plugin-localization-ui/factory/class-wpml-st-theme-plugin-localization-options-settings-factory.php',
         'WPML_ST_Theme_Plugin_Localization_Options_UI' => __DIR__ . '/../..' . '/classes/menus/theme-plugin-localization-ui/class-st-theme-plugin-localization-options-ui.php',
@@ -504,8 +514,6 @@ class ComposerStaticInitdab9449ec861009ffc60ad37d2be0097
         'WPML_ST_Translations_File_String_Status_Update' => __DIR__ . '/../..' . '/classes/translations-file-scan/wpml-st-translations-file-string-status-update.php',
         'WPML_ST_Translations_File_Translation' => __DIR__ . '/../..' . '/classes/translations-file-scan/wpml-st-translations-file-translation.php',
         'WPML_ST_Translations_File_Unicode_Characters_Filter' => __DIR__ . '/../..' . '/classes/translations-file-scan/wpml-st-translations-file-unicode-characters-filter.php',
-        'WPML_ST_Update_File_Hash_Ajax' => __DIR__ . '/../..' . '/classes/strings-scanning/class-wpml-st-update-file-hash-ajax.php',
-        'WPML_ST_Update_File_Hash_Ajax_Factory' => __DIR__ . '/../..' . '/classes/strings-scanning/factory/class-st-update-file-hash-ajax-factory.php',
         'WPML_ST_Upgrade' => __DIR__ . '/../..' . '/classes/upgrade/class-wpml-st-upgrade.php',
         'WPML_ST_Upgrade_Command_Factory' => __DIR__ . '/../..' . '/classes/upgrade/class-wpml-st-upgrade-command-factory.php',
         'WPML_ST_Upgrade_Command_Not_Found_Exception' => __DIR__ . '/../..' . '/classes/upgrade/class-wpml-st-upgrade-command-not-found-exception.php',
@@ -542,7 +550,7 @@ class ComposerStaticInitdab9449ec861009ffc60ad37d2be0097
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInitdab9449ec861009ffc60ad37d2be0097::$classMap;
+            $loader->classMap = ComposerStaticInitdcecc39e7a4fa5a78bbd497bfbb29412::$classMap;
 
         }, null, ClassLoader::class);
     }

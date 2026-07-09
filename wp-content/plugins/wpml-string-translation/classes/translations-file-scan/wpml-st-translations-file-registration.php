@@ -29,28 +29,50 @@ class WPML_ST_Translations_File_Registration {
 	/** @var callable - string->string */
 	private $getWPLocale;
 
+	/** @var bool */
+	private $is_on_frontend_page;
+
+	/** @var bool */
+	private $is_on_admin_page;
+
+	/** @var bool */
+	private $is_on_theme_and_localization_page;
+
 	/**
 	 * @param WPML_ST_Translations_File_Dictionary        $file_dictionary
 	 * @param WPML_File                                   $wpml_file
 	 * @param WPML_ST_Translations_File_Component_Details $components_find
 	 * @param array                                       $active_languages
+	 * @param bool                                        $is_on_frontend_page
+	 * @param bool                                        $is_on_admin_page
+	 * @param bool                                        $is_on_theme_and_localization_page
 	 */
 	public function __construct(
 		WPML_ST_Translations_File_Dictionary $file_dictionary,
 		WPML_File $wpml_file,
 		WPML_ST_Translations_File_Component_Details $components_find,
-		array $active_languages
+		array $active_languages,
+		$is_on_frontend_page = false,
+		$is_on_admin_page = false,
+		$is_on_theme_and_localization_page = false
 	) {
-		$this->file_dictionary  = $file_dictionary;
-		$this->wpml_file        = $wpml_file;
-		$this->components_find  = $components_find;
-		$this->active_languages = $active_languages;
-		$this->getWPLocale      = Fns::memorize( Languages::getWPLocale() );
+		$this->file_dictionary                   = $file_dictionary;
+		$this->wpml_file                         = $wpml_file;
+		$this->components_find                   = $components_find;
+		$this->active_languages                  = $active_languages;
+		$this->getWPLocale                       = Fns::memorize( Languages::getWPLocale() );
+		$this->is_on_frontend_page               = $is_on_frontend_page;
+		$this->is_on_admin_page                  = $is_on_admin_page;
+		$this->is_on_theme_and_localization_page = $is_on_theme_and_localization_page;
 	}
 
 	public function add_hooks() {
-		add_filter( 'override_load_textdomain', array( $this, 'cached_save_mo_file_info' ), 11, 3 );
-		add_filter( 'pre_load_script_translations', array( $this, 'add_json_translations_to_import_queue' ), 10, 4 );
+		if ( $this->is_on_frontend_page || $this->is_on_theme_and_localization_page ) {
+			add_filter( 'override_load_textdomain', array( $this, 'cached_save_mo_file_info' ), 11, 3 );
+			add_filter( 'pre_load_script_translations', array( $this, 'add_json_translations_to_import_queue' ), 10, 4 );
+		}
+
+		add_filter( 'load_script_translation_file', array( $this, 'load_script_translation_file' ), PHP_INT_MAX, 3 );
 	}
 
 	/**
@@ -68,8 +90,14 @@ class WPML_ST_Translations_File_Registration {
 		return $override;
 	}
 
+	public function load_script_translation_file( $file, $handle, $original_domain ) {
+		$this->add_json_translations_to_import_queue( false, $file, $handle, $original_domain );
+
+		return $file;
+	}
+
 	/**
-	 * @param string|false $translations translations in the JED format
+	 * @param string|false $translations translations in the JED format.
 	 * @param string|false $file
 	 * @param string       $handle
 	 * @param string       $original_domain
@@ -87,7 +115,7 @@ class WPML_ST_Translations_File_Registration {
 
 	/**
 	 * @param string $original_domain
-	 * @param string $registration_domain which can be composed with the script-handle for JED files
+	 * @param string $registration_domain which can be composed with the script-handle for JED files.
 	 * @param string $file_path
 	 *
 	 * @return true
@@ -101,7 +129,7 @@ class WPML_ST_Translations_File_Registration {
 				$this->register_single_file( $registration_domain, $file_path_in_lang );
 			}
 		} catch ( Exception $e ) {
-
+			;
 		}
 
 		return true;
@@ -112,7 +140,7 @@ class WPML_ST_Translations_File_Registration {
 	 * @param string $original_domain
 	 *
 	 * @return string|null
-	 * @throws InvalidArgumentException
+	 * @throws RuntimeException 0 file type is not supported.
 	 */
 	private function get_file_path_pattern( $file_path, $original_domain ) {
 		$pathinfo  = pathinfo( $file_path );

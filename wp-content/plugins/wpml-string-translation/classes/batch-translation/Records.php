@@ -30,13 +30,13 @@ class Records {
 	';
 
 	/**
-	 * @param \wpdb|null $wpdb
+	 * @param \wpdb|null  $wpdb
 	 * @param int|curried $batchId
 	 * @return int|callable
 	 *
 	 * @phpstan-return ($batchId is not null ? int : callable)
 	 */
-	public static function get( \wpdb $wpdb = null, $batchId = null ) {
+	public static function get( ?\wpdb $wpdb = null, $batchId = null ) {
 		return call_user_func_array(
 			curryN(
 				2,

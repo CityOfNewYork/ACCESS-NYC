@@ -161,7 +161,7 @@ class WPML_ST_Translations_File_Dictionary_Storage_Table implements WPML_ST_Tran
 		$this->data = null;
 	}
 
-	public function findAllUniqueComponentIds( string $componentType = null, array $fileExtensions = [] ): array {
+	public function findAllUniqueComponentIds( ?string $componentType = null, array $fileExtensions = [] ): array {
 		$sql = "SELECT DISTINCT(component_id) FROM {$this->wpdb->prefix}icl_mo_files_domains";
 
 		$conditions = [];
