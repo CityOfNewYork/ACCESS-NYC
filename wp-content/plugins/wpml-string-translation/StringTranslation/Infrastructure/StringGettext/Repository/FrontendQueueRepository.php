@@ -81,8 +81,8 @@ class FrontendQueueRepository implements FrontendQueueRepositoryInterface {
 				function ($item) {
 					return $this->stringItemFactory->create(
 						$item['domain'] ?? '',
-						$item['value'] ?? '',
-						$item['context'] ?? ''
+						$item['context'] ?? '',
+						$item['value'] ?? ''
 					);
 				},
 				$entry['gettextStrings']

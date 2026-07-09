@@ -3,15 +3,13 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "el"
+            "domain": "messages"
          },
          "WPML has detected changed or new MO files": [
-            "Το WPML εντόπισε αλλαγμένα ή νέα αρχεία MO"
+            "Το WPML εντόπισε αλλαγές σε αρχεία MO"
          ],
          "There are new or updated .mo files. WPML needs to scan them to find strings for translation.": [
-            "Υπάρχουν νέα ή ενημερωμένα αρχεία.mo. Το WPML πρέπει να τα σαρώσει για να βρει συμβολοσειρές προς μετάφραση."
+            "Νέα ή ενημερωμένα αρχεία.mo. Απαιτείται σάρωση."
          ],
          "Scan translation files": [
             "Σάρωση αρχείων μετάφρασης"
@@ -20,7 +18,7 @@
             "Σαρώθηκαν %1$d από %2$d αρχεία..."
          ],
          "Generated files for %1$d of %2$d sites...": [
-            "Δημιουργήθηκαν αρχεία για %1$d από %2$d ιστότοπους..."
+            "Δημιουργήθηκαν αρχεία για %1$d από %2$d ιστοτόπους..."
          ],
          "Generated %1$d of %2$d files...": [
             "Δημιουργήθηκαν %1$d από %2$d αρχεία..."
@@ -29,28 +27,28 @@
             "Το WPML πρέπει να δημιουργήσει αρχεία.mo"
          ],
          "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end. However, the folder that should hold these .mo files is not open for writing.": [
-            "Η Μετάφραση Συμβολοσειρών του WPML χρησιμοποιεί αρχεία.mo αντί για κλήσεις βάσης δεδομένων. Το WPML πρέπει να δημιουργήσει αυτά τα αρχεία.mo για να εμφανίζονται οι μεταφράσεις στο frontend. Ωστόσο, ο φάκελος που θα έπρεπε να περιέχει αυτά τα αρχεία.mo δεν είναι ανοιχτός για εγγραφή."
+            "Το WPML χρειάζεται αρχεία.mo. Ο φάκελος δεν είναι εγγράψιμος."
          ],
          "Please use your admin control panel or an FTP program to make the following folder writeable:": [
-            "Παρακαλούμε χρησιμοποιήστε τον πίνακα ελέγχου διαχείρισης ή ένα πρόγραμμα FTP για να κάνετε τον ακόλουθο φάκελο εγγράψιμο:"
+            "Καταστήστε εγγράψιμο τον ακόλουθο φάκελο:"
          ],
          "There was a problem creating the .mo files": [
-            "Προέκυψε πρόβλημα κατά τη δημιουργία των αρχείων.mo"
+            "Πρόβλημα δημιουργίας αρχείων.mo"
          ],
          "You can try again now or try again later by going to ": [
-            "Μπορείτε να δοκιμάσετε ξανά τώρα ή αργότερα μεταβαίνοντας στο "
+            "Δοκιμάστε ξανά τώρα ή αργότερα μεταβαίνοντας στο"
          ],
          "Translations are missing from the front-end until you generate .mo files": [
-            "Οι μεταφράσεις λείπουν από το frontend μέχρι να δημιουργήσετε αρχεία.mo"
+            "Λείπουν μεταφράσεις χωρίς αρχεία.mo"
          ],
          "Your site doesn't have the .mo files that WPML needs in order to display translated strings on the front-end. To generate these .mo files, remember to go to ": [
-            "Ο ιστότοπός σας δεν διαθέτει τα αρχεία.mo που χρειάζεται το WPML για να εμφανίσει μεταφρασμένες συμβολοσειρές στο frontend. Για να δημιουργήσετε αυτά τα αρχεία.mo, θυμηθείτε να μεταβείτε στο "
+            "Απουσιάζουν αρχεία.mo. Μεταβείτε στο"
          ],
          "WPML->Theme and plugins localization.": [
-            "WPML->Μετάφραση θέματος και προσθέτων."
+            "WPML->Τοπικοποίηση θέματος και πρόσθετων."
          ],
          "WPML String Translation uses .mo files instead of database calls. WPML needs to generate these .mo files in order for translations to appear on the front-end.": [
-            "Η Μετάφραση Συμβολοσειρών του WPML χρησιμοποιεί αρχεία.mo αντί για κλήσεις βάσης δεδομένων. Το WPML πρέπει να δημιουργήσει αυτά τα αρχεία.mo για να εμφανίζονται οι μεταφράσεις στο frontend."
+            "Το WPML απαιτεί αρχεία.mo για εμφάνιση μεταφράσεων."
          ],
          "Try again": [
             "Δοκιμάστε ξανά"
@@ -59,19 +57,19 @@
             "Δημιουργία αρχείων.mo"
          ],
          "Close this message": [
-            "Κλείσιμο αυτού του μηνύματος"
+            "Κλείσιμο μηνύματος"
          ],
          "Find additional texts that WordPress, the theme and plugins created and choose which ones to translate": [
-            "Βρείτε επιπλέον κείμενα που δημιούργησαν το WordPress, το θέμα και τα πρόσθετα και επιλέξτε ποια θα μεταφράσετε"
+            "Εύρεση πρόσθετων κειμένων προς μετάφραση"
          ],
          "Choose texts for translation": [
-            "Επιλέξτε κείμενα για μετάφραση"
+            "Επιλογή κειμένων προς μετάφραση"
          ],
          "Some of the translations have changed": [
-            "Ορισμένες από τις μεταφράσεις έχουν αλλάξει"
+            "Αλλαγές σε ορισμένες μεταφράσεις"
          ],
          "Scan the selected components to make new texts available for translation.": [
-            "Σαρώστε τα επιλεγμένα στοιχεία για να κάνετε νέα κείμενα διαθέσιμα για μετάφραση."
+            "Σάρωση επιλεγμένων στοιχείων για νέα κείμενα."
          ],
          "Select all": [
             "Επιλογή όλων"
@@ -86,13 +84,13 @@
             "Πυρήνας:"
          ],
          "Can't find the strings you're looking to translate?": [
-            "Δεν μπορείτε να βρείτε τις συμβολοσειρές που θέλετε να μεταφράσετε;"
+            "Δεν βρίσκετε τις επιθυμητές συμβολοσειρές;?"
          ],
          "Most likely you cannot see the strings you want to translate because:": [
-            "Πιθανότατα δεν μπορείτε να δείτε τις συμβολοσειρές που θέλετε να μεταφράσετε επειδή:"
+            "Πιθανές αιτίες μη εμφάνισης:"
          ],
          "Texts are not selected for translation": [
-            "Τα κείμενα δεν έχουν επιλεγεί για μετάφραση"
+            "Μη επιλεγμένα κείμενα προς μετάφραση"
          ]
       }
    }

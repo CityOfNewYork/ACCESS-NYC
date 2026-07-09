@@ -47,8 +47,7 @@ class JobsQuery {
                 tj.automatic,
                 ts.translation_service,
                 tj.editor,
-                tj.translated,
-                tj.editor_job_id
+                tj.translated
             FROM {$this->wpdb->prefix}icl_translate_job tj
             LEFT JOIN {$this->wpdb->prefix}icl_translation_status ts
                 ON tj.rid = ts.rid

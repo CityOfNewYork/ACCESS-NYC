@@ -278,23 +278,13 @@ abstract class QueryBuilder {
 			}
 		}
 		if ( $criteria->getTitle() ) {
-			$title = '%' . $this->prepareLike( $criteria->getTitle() ) . '%';
-			$escTitle = '%' . $this->prepareLike( esc_html( $criteria->getTitle() ) ) . '%';
+			$title = $this->prepareLike( $criteria->getTitle() );
+			$escTitle = $this->prepareLike( esc_html( $criteria->getTitle() ) );
 
 			if ( $title === $escTitle ) {
-				$sqlParts[] = $this->prepare(
-					'strings.value LIKE %s OR strings.name LIKE %s',
-					$title,
-					$title
-				);
+				$sqlParts[] = $this->prepare('strings.value LIKE %s', '%' . $title . '%');
 			} else {
-				$sqlParts[] = $this->prepare(
-					'strings.value LIKE %s OR strings.value LIKE %s OR strings.name LIKE %s OR strings.name LIKE %s',
-					$title,
-					$escTitle,
-					$title,
-					$escTitle
-				);
+				$sqlParts[] = $this->prepare('strings.value LIKE %s OR strings.value LIKE %s', '%' . $title . '%', '%' . $escTitle . '%' );
 			}
 		}
 		if ( $criteria->getTranslationPriority() ) {

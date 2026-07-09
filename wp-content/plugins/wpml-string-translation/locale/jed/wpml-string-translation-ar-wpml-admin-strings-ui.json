@@ -3,15 +3,13 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);",
-            "lang": "ar"
+            "domain": "messages"
          },
          "Not included in String Translation": [
-            "غير متضمن في ترجمة السلاسل"
+            "غير مدرجة في ترجمة السلسلة"
          ],
          "Registered and locked": [
-            "مسجل ومقفل"
+            "مسجلة ومقفلة"
          ],
          "Text": [
             "نص"
@@ -20,10 +18,10 @@
             "رقمي"
          ],
          "All Types": [
-            "جميع الأنواع"
+            "كل الانواع"
          ],
          "Search": [
-            "بحث"
+            "يبحث"
          ],
          "Communication error": [
             "خطأ في الاتصال"
@@ -32,16 +30,16 @@
             "فشل الإجراء."
          ],
          "All (%d)": [
-            "كل (%d)"
+            "الجميع (%d)"
          ],
          "Included in String Translation (%d)": [
-            "متضمن في ترجمة السلاسل (%d)"
+            "مضمن في ترجمة السلسلة (%d)"
          ],
          "Not included in String Translation (%d)": [
-            "غير متضمن في ترجمة السلاسل (%d)"
+            "غير مضمن في ترجمة السلسلة (%d)"
          ],
          "This setting is locked by a WPML configuration file.": [
-            "هذا الإعداد مقفل بواسطة ملف تهيئة WPML."
+            "يتم قفل هذا الإعداد بواسطة ملف تكوين WPML."
          ],
          "Option": [
             "خيار"
@@ -50,16 +48,16 @@
             "قيمة"
          ],
          "Type": [
-            "النوع"
+            "يكتب"
          ],
          "State": [
-            "الحالة"
+            "ولاية"
          ],
          "Export as a WPML configuration file": [
-            "تصدير كملف تهيئة WPML"
+            "قم بالتصدير كملف تكوين WPML"
          ],
          "Cancel": [
-            "إلغاء"
+            "يلغي"
          ],
          "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
             "احفظ ما يلي في ملف wpml-config.xml في جذر القالب أو المكون الإضافي الخاص بك."
@@ -68,16 +66,16 @@
             "لم يتم العثور على خيارات."
          ],
          "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
-            "تأكد من حفظ خيارات القالب الخاص بك مرة واحدة على الأقل. بعض القوالب لا تضيف هذه إلى جدول wp_options إلا بعد أن يحفظ المستخدم التغييرات على إعدادات القالب الافتراضية صراحةً."
+            "تأكد من حفظ خيارات السمة الخاصة بك مرة واحدة على الأقل. تضيف بعض السمات هذه فقط إلى ملفwp_options الجدول بعد أن يقوم المستخدم بحفظ التغييرات بشكل صريح على الإعدادات الافتراضية للموضوع."
          ],
          "Add to String Translation": [
-            "إضافة إلى ترجمة السلاسل"
+            "أضف إلى سلسلة الترجمة"
          ],
          "Remove from String Translation": [
-            "إزالة من ترجمة السلاسل"
+            "إزالة من ترجمة السلسلة"
          ],
          "Included in String Translation": [
-            "متضمن في ترجمة السلاسل"
+            "المدرجة في ترجمة السلسلة"
          ]
       }
    }

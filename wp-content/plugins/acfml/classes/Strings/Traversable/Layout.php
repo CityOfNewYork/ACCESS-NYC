@@ -6,6 +6,9 @@ use ACFML\Strings\Config;
 
 class Layout extends Entity {
 
+	/** @var string $idKey */
+	protected $idKey = 'key';
+
 	/**
 	 * @return array
 	 */

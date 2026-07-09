@@ -40,7 +40,7 @@ class CheckboxCondition {
 		};
 
 		return (bool) wpml_collect( $fieldGroups )
-			->pluck( 'key' )
+			->pluck( 'ID' )
 			->first( $groupHasFieldOfTypes );
 	}
 

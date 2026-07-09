@@ -180,13 +180,9 @@ class WPML_String_Translation {
 
 		wp_enqueue_script( $handle );
 
-		wp_localize_script(
-			$handle,
-			'wpml_st_change_lang_data',
-			[
-				'nonce' => wp_create_nonce( 'wpml_change_string_language_nonce' ),
-			]
-		);
+		wp_localize_script( $handle, 'wpml_st_change_lang_data', [
+			'nonce' => wp_create_nonce( 'wpml_change_string_language_nonce' ),
+		] );
 	}
 
 	public function admin_script_change_string_domain() {
@@ -202,13 +198,9 @@ class WPML_String_Translation {
 
 		wp_enqueue_script( $handle );
 
-		wp_localize_script(
-			$handle,
-			'wpml_st_change_domain_data',
-			[
-				'nonce' => wp_create_nonce( 'wpml_change_string_domain_language_nonce' ),
-			]
-		);
+		wp_localize_script( $handle, 'wpml_st_change_domain_data', [
+			'nonce' => wp_create_nonce( 'wpml_change_string_domain_language_nonce' ),
+		] );
 
 	}
 
@@ -225,19 +217,15 @@ class WPML_String_Translation {
 
 		wp_enqueue_script( $handle );
 
-		wp_localize_script(
-			$handle,
-			'wpml_scripts_data',
-			[
-				'nonce_icl_st_pop_download_nonce' => wp_create_nonce( 'icl_st_pop_download_nonce' ),
-			]
-		);
+		wp_localize_script( $handle, 'wpml_scripts_data', [
+			'nonce_icl_st_pop_download_nonce' => wp_create_nonce( 'icl_st_pop_download_nonce' ),
+		] );
 
 	}
 
 	private function maybe_add_script_for_string_tracking_modal_iframe() {
-		$trackingValueKey                                = 'icl_string_track_value';
-		$trackingContextKey                              = 'icl_string_track_context';
+		$trackingValueKey = 'icl_string_track_value';
+		$trackingContextKey = 'icl_string_track_context';
 		$isRenderingStringTrackingModalContentIntoIframe = (
 			isset( $_GET[ $trackingValueKey ], $_GET[ $trackingContextKey ] ) &&
 			strlen( $_GET[ $trackingValueKey ] ) > 0 && strlen( $_GET[ $trackingContextKey ] ) > 0
@@ -250,14 +238,11 @@ class WPML_String_Translation {
 		$cssHandle = 'wpml-st-loaded-page-with-tracked-string';
 		wp_register_style( $cssHandle, false );
 		wp_enqueue_style( $cssHandle );
-		wp_add_inline_style(
-			$cssHandle,
-			"
+		wp_add_inline_style( $cssHandle, "
             .wpml-st-loaded-page-with-tracked-string-highlight, .wpml-st-loaded-page-with-tracked-string-highlight * {
                 color: {$this->settings->getTrackStringColor()} !important;
             }
-        "
-		);
+        " );
 
 		$handle = 'wpml-st-loaded-page-with-tracked-string';
 		wp_enqueue_script(
@@ -266,15 +251,11 @@ class WPML_String_Translation {
 			[],
 			WPML_ST_VERSION
 		);
-		wp_localize_script(
-			$handle,
-			'wpml_st_loaded_page_with_tracked_string_data',
-			[
-				'tokenStart' => StringHighlighting::HIGHLIGHT_ID_TO_REPLACE_IN_HTML_START,
-				'tokenEnd'   => StringHighlighting::HIGHLIGHT_ID_TO_REPLACE_IN_HTML_END,
-				'hgColor'    => $this->settings->getTrackStringColor(),
-			]
-		);
+		wp_localize_script( $handle, 'wpml_st_loaded_page_with_tracked_string_data', [
+			'tokenStart' => StringHighlighting::HIGHLIGHT_ID_TO_REPLACE_IN_HTML_START,
+			'tokenEnd' => StringHighlighting::HIGHLIGHT_ID_TO_REPLACE_IN_HTML_END,
+			'hgColor' => $this->settings->getTrackStringColor(),
+		] );
 	}
 
 	function init() {
@@ -356,36 +337,32 @@ class WPML_String_Translation {
 
 		wp_enqueue_script( $handle );
 
-		wp_localize_script(
-			$handle,
-			'wpml_st_exec_batch_action_data',
-			[
-				'countStringsInDomain'            => [
-					'endpoint' => \WPML\ST\BatchAction\CountStringsInDomain::class,
-					'nonce'    => \WPML\LIB\WP\Nonce::create( \WPML\ST\BatchAction\CountStringsInDomain::class ),
-				],
-				'deleteStringsInDomain'           => [
-					'endpoint' => \WPML\ST\BatchAction\DeleteStringsInDomain::class,
-					'nonce'    => \WPML\LIB\WP\Nonce::create( \WPML\ST\BatchAction\DeleteStringsInDomain::class ),
-				],
-				'initChangeStringLangOfDomain'    => [
-					'endpoint' => \WPML\ST\BatchAction\InitChangeStringLangOfDomain::class,
-					'nonce'    => \WPML\LIB\WP\Nonce::create( \WPML\ST\BatchAction\InitChangeStringLangOfDomain::class ),
-				],
-				'changeLanguageOfStringsInDomain' => [
-					'endpoint' => \WPML\ST\BatchAction\ChangeLanguageOfStringsInDomain::class,
-					'nonce'    => \WPML\LIB\WP\Nonce::create( \WPML\ST\BatchAction\ChangeLanguageOfStringsInDomain::class ),
-				],
-				'countStringsInDomainWithDifferentPriority' => [
-					'endpoint' => \WPML\ST\BatchAction\CountStringsInDomainWithDifferentPriority::class,
-					'nonce'    => \WPML\LIB\WP\Nonce::create( \WPML\ST\BatchAction\CountStringsInDomainWithDifferentPriority::class ),
-				],
-				'changeTranslationPriorityBatchOfStringsInDomain' => [
-					'endpoint' => \WPML\ST\BatchAction\ChangeTranslationPriorityOfStringsInDomain::class,
-					'nonce'    => \WPML\LIB\WP\Nonce::create( \WPML\ST\BatchAction\ChangeTranslationPriorityOfStringsInDomain::class ),
-				],
-			]
-		);
+		wp_localize_script( $handle, 'wpml_st_exec_batch_action_data', [
+			'countStringsInDomain' => [
+				'endpoint' => \WPML\ST\BatchAction\CountStringsInDomain::class,
+				'nonce'    => \WPML\LIB\WP\Nonce::create( \WPML\ST\BatchAction\CountStringsInDomain::class ),
+			],
+			'deleteStringsInDomain' => [
+				'endpoint' => \WPML\ST\BatchAction\DeleteStringsInDomain::class,
+				'nonce'    => \WPML\LIB\WP\Nonce::create( \WPML\ST\BatchAction\DeleteStringsInDomain::class ),
+			],
+			'initChangeStringLangOfDomain' => [
+				'endpoint' => \WPML\ST\BatchAction\InitChangeStringLangOfDomain::class,
+				'nonce'    => \WPML\LIB\WP\Nonce::create( \WPML\ST\BatchAction\InitChangeStringLangOfDomain::class ),
+			],
+			'changeLanguageOfStringsInDomain' => [
+				'endpoint' => \WPML\ST\BatchAction\ChangeLanguageOfStringsInDomain::class,
+				'nonce'    => \WPML\LIB\WP\Nonce::create( \WPML\ST\BatchAction\ChangeLanguageOfStringsInDomain::class ),
+			],
+			'countStringsInDomainWithDifferentPriority' => [
+				'endpoint' => \WPML\ST\BatchAction\CountStringsInDomainWithDifferentPriority::class,
+				'nonce'    => \WPML\LIB\WP\Nonce::create( \WPML\ST\BatchAction\CountStringsInDomainWithDifferentPriority::class ),
+			],
+			'changeTranslationPriorityBatchOfStringsInDomain' => [
+				'endpoint' => \WPML\ST\BatchAction\ChangeTranslationPriorityOfStringsInDomain::class,
+				'nonce'    => \WPML\LIB\WP\Nonce::create( \WPML\ST\BatchAction\ChangeTranslationPriorityOfStringsInDomain::class ),
+			],
+		] );
 	}
 
 	/**
@@ -397,6 +374,7 @@ class WPML_String_Translation {
 	 *
 	 * @return string|bool
 	 * @since 2.2.3
+	 *
 	 */
 	function translate_string( $context, $name, $original_value = false, &$has_translation = null, $target_lang = null ) {
 
@@ -560,38 +538,36 @@ class WPML_String_Translation {
 				</div>
 				<div id="wpml-st-localization-section" class="wpml-section-content wpml-section-content-wide">';
 		$this->renderChangedMoFilesBlock( $plugin_localization );
-
-		do_action( 'wpml_st_before_localization_ui_table' );
-
 		echo '		<table id="wpml-st-localization-table" class="widefat striped">';
 		/** @phpstan-ignore-next-line */
-		echo $localization->renderTemplate(
-			'theme-plugin-localization-ui-table-header.twig',
-			[
-				'name'               => __( 'Name', 'wpml-string-translation' ),
-				'status'             => __( 'Status', 'wpml-string-translation' ),
-				'textdomain'         => __( 'Textdomain', 'wpml-string-translation' ),
-				'action'             => __( 'Action', 'wpml-string-translation' ),
-				'completed_title'    => __( 'Completely translated strings', 'wpml-string-translation' ),
-				'needs_update_title' => __( 'Strings that need translation', 'wpml-string-translation' ),
-				'nonces'             => [
-					'scan_folder' => [
-						'action' => WPML_ST_Theme_Plugin_Scan_Dir_Ajax_Factory::AJAX_ACTION,
-						'nonce'  => wp_create_nonce( WPML_ST_Theme_Plugin_Scan_Dir_Ajax_Factory::AJAX_ACTION ),
-					],
-					'scan_files'  => [
-						'action' => WPML_ST_Theme_Plugin_Scan_Files_Ajax_Factory::AJAX_ACTION,
-						'nonce'  => wp_create_nonce( WPML_ST_Theme_Plugin_Scan_Files_Ajax_Factory::AJAX_ACTION ),
-					],
+		echo $localization->renderTemplate( 'theme-plugin-localization-ui-table-header.twig', [
+			'name'               => __( 'Name', 'wpml-string-translation' ),
+			'status'             => __( 'Status', 'wpml-string-translation' ),
+			'textdomain'         => __( 'Textdomain', 'wpml-string-translation' ),
+			'action'             => __( 'Action', 'wpml-string-translation' ),
+			'completed_title'    => __( 'Completely translated strings', 'wpml-string-translation' ),
+			'needs_update_title' => __( 'Strings that need translation', 'wpml-string-translation' ),
+			'nonces'             => [
+				'scan_folder' => [
+					'action' => WPML_ST_Theme_Plugin_Scan_Dir_Ajax_Factory::AJAX_ACTION,
+					'nonce'  => wp_create_nonce( WPML_ST_Theme_Plugin_Scan_Dir_Ajax_Factory::AJAX_ACTION ),
 				],
-				'endpoints'          => [
-					'update_stats' => [
-						'endpoint' => \WPML\ST\StringsScanning\UpdateStats::class,
-						'nonce'    => \WPML\LIB\WP\Nonce::create( \WPML\ST\StringsScanning\UpdateStats::class ),
-					],
+				'scan_files'  => [
+					'action' => WPML_ST_Theme_Plugin_Scan_Files_Ajax_Factory::AJAX_ACTION,
+					'nonce'  => wp_create_nonce( WPML_ST_Theme_Plugin_Scan_Files_Ajax_Factory::AJAX_ACTION ),
 				],
-			]
-		);
+				'update_hash' => [
+					'action' => WPML_ST_Update_File_Hash_Ajax_Factory::AJAX_ACTION,
+					'nonce'  => wp_create_nonce( WPML_ST_Update_File_Hash_Ajax_Factory::AJAX_ACTION ),
+				],
+			],
+			'endpoints' => [
+				'update_stats' => [
+					'endpoint' => \WPML\ST\StringsScanning\UpdateStats::class,
+					'nonce'    => \WPML\LIB\WP\Nonce::create( \WPML\ST\StringsScanning\UpdateStats::class ),
+				],
+			],
+		] );
 		echo $localization->render( $theme_localization );
 		echo $localization->render( $plugin_localization );
 		echo $localization->render( $other_localization );
@@ -623,8 +599,8 @@ class WPML_String_Translation {
 			return '<b>' . $name . '</b>';
 		};
 
-		$parts             = $this->splitLastElement( $pluginNames );
-		$formattedNames    = implode( ', ', array_map( $wrap, $parts['rest'] ) );
+		$parts = $this->splitLastElement( $pluginNames );
+		$formattedNames = implode( ', ', array_map( $wrap, $parts['rest'] ) );
 		$formattedLastName = $parts['last'] ? $wrap( $parts['last'] ) : null;
 
 		$message = $this->getTranslatedMissingTranslationsMessage( count( $pluginNames ), $formattedNames, $formattedLastName );
@@ -632,17 +608,7 @@ class WPML_String_Translation {
 		return $this->wrapMissingTranslationsMessageInHtml( $message );
 	}
 
-	/**
-	 * Returns a translated message based on the number of plugins
-	 * that WPML could not detect the translation files (.mo) for.
-	 *
-	 * @param int         $count The number of plugins that WPML could not detect the translation files for.
-	 * @param string      $namesList A list of plugin names.
-	 * @param null|string $lastItem The last plugin name in the list.
-	 *
-	 * @return string A translated message based on the number of plugins.
-	 */
-	private function getTranslatedMissingTranslationsMessage( int $count, string $namesList, ?string $lastItem = null ): string {
+	private function getTranslatedMissingTranslationsMessage( int $count, string $namesList, string $lastItem = null ): string {
 		$msgTemplate = _n(
 			'WPML could not detect the translation files (.mo) for %s. To fix this, visit your site\'s frontend in a secondary language.',
 			'WPML could not detect the translation files (.mo) for %s and %s. To fix this, visit your site\'s frontend in a secondary language.',
@@ -658,31 +624,22 @@ class WPML_String_Translation {
 	/**
 	 * Splits array into two parts: all elements except last one, and the last element
 	 *
-	 * @param array $items Array to split.
+	 * @param array $items Array to split
 	 *
 	 * @return array{rest: array, last: mixed|null} Array with 'rest' and 'last' keys
 	 */
 	private function splitLastElement( array $items ): array {
 		if ( empty( $items ) ) {
-			return [
-				'rest' => [],
-				'last' => null,
-			];
+			return [ 'rest' => [], 'last' => null ];
 		}
 
 		if ( count( $items ) === 1 ) {
-			return [
-				'rest' => [],
-				'last' => $items[0],
-			];
+			return [ 'rest' => [], 'last' => $items[0] ];
 		}
 
 		$last = array_pop( $items );
 
-		return [
-			'rest' => $items,
-			'last' => $last,
-		];
+		return [ 'rest' => $items, 'last' => $last ];
 	}
 
 	private function wrapMissingTranslationsMessageInHtml( string $message ): string {
@@ -722,13 +679,15 @@ class WPML_String_Translation {
 	function scan_theme_for_strings() {
 		require_once WPML_ST_PATH . '/inc/gettext/wpml-theme-string-scanner.class.php';
 
-		$scan_for_strings = new WPML_Theme_String_Scanner( wpml_get_filesystem_direct() );
+		$file_hashing     = new WPML_ST_File_Hashing();
+		$scan_for_strings = new WPML_Theme_String_Scanner( wpml_get_filesystem_direct(), $file_hashing );
 		$scan_for_strings->scan();
 	}
 
 	function scan_plugins_for_strings() {
 		require_once WPML_ST_PATH . '/inc/gettext/wpml-plugin-string-scanner.class.php';
-		$scan_for_strings = new WPML_Plugin_String_Scanner( wpml_get_filesystem_direct() );
+		$file_hashing     = new WPML_ST_File_Hashing();
+		$scan_for_strings = new WPML_Plugin_String_Scanner( wpml_get_filesystem_direct(), $file_hashing );
 		$scan_for_strings->scan();
 	}
 
@@ -798,8 +757,8 @@ class WPML_String_Translation {
 	}
 
 	/**
-	 * @param string $string value of a string.
-	 * @param string $lang_code language code of the string.
+	 * @param string $string value of a string
+	 * @param string $lang_code language code of the string
 	 *
 	 * @return int number of words in the string
 	 */
@@ -822,6 +781,62 @@ class WPML_String_Translation {
 			)
 		) ? strlen( $string ) / 6
 			: count( explode( ' ', $string ) );
+	}
+
+	function cancel_remote_translation( $rid ) {
+		/** @var wpdb $wpdb */
+		global $wpdb;
+
+		/** @var string $sql */
+		$sql = $wpdb->prepare(
+			"	SELECT string_translation_id
+															FROM {$wpdb->prefix}icl_string_status
+															WHERE rid = %d",
+			$rid
+		);
+
+		$translation_ids = $wpdb->get_col(
+			$sql
+		);
+		$cancel_count    = 0;
+		foreach ( $translation_ids as $translation_id ) {
+			$res          = (bool) $this->cancel_local_translation( $translation_id );
+			$cancel_count = $res ? $cancel_count + 1 : $cancel_count;
+		}
+
+		return $cancel_count;
+	}
+
+	function cancel_local_translation( $id, $return_original_id = false ) {
+		global $wpdb;
+		$string_id = $wpdb->get_var(
+			$wpdb->prepare(
+				"	SELECT string_id
+														FROM {$wpdb->prefix}icl_string_translations
+														WHERE id=%d AND status IN (%d, %d)",
+				$id,
+				ICL_TM_IN_PROGRESS,
+				ICL_TM_WAITING_FOR_TRANSLATOR
+			)
+		);
+		if ( $string_id ) {
+			$wpdb->update(
+				$wpdb->prefix . 'icl_string_translations',
+				array(
+					'status'              => ICL_TM_NOT_TRANSLATED,
+					'translation_service' => null,
+					'translator_id'       => null,
+					'batch_id'            => null,
+				),
+				array( 'id' => $id )
+			);
+			icl_update_string_status( $string_id );
+			$res = $return_original_id ? $string_id : $id;
+		} else {
+			$res = false;
+		}
+
+		return $res;
 	}
 
 	/**
@@ -853,9 +868,9 @@ class WPML_String_Translation {
 	}
 
 	/**
-	 * @param string       $option name of the option.
-	 * @param string|array $value new value of the option.
-	 * @param string|array $old_value currently saved value for the option.
+	 * @param string       $option name of the option
+	 * @param string|array $value new value of the option
+	 * @param string|array $old_value currently saved value for the option
 	 *
 	 * @return string|array the value actually to be written into the wp_options table
 	 */
@@ -935,7 +950,7 @@ class WPML_String_Translation {
 
 		if ( isset( $sitepress_settings['st']['db_ok_for_gettext_context'] ) ) {
 			if ( ! ( isset( $this->string_filters[ $lang ] )
-					 && 'WPML_Register_String_Filter' == get_class( $this->string_filters[ $lang ] ) )
+			         && 'WPML_Register_String_Filter' == get_class( $this->string_filters[ $lang ] ) )
 			) {
 				$this->string_filters[ $lang ] = isset( $this->string_filters[ $lang ] ) ? $this->string_filters[ $lang ] : false;
 
@@ -975,14 +990,17 @@ class WPML_String_Translation {
 		global $wpdb;
 
 		$icl_string_positions_query    = "DELETE FROM {$wpdb->prefix}icl_string_positions WHERE string_id=%d";
+		$icl_string_status_query       = "DELETE FROM {$wpdb->prefix}icl_string_status WHERE string_translation_id IN (SELECT id FROM {$wpdb->prefix}icl_string_translations WHERE string_id=%d)";
 		$icl_string_translations_query = "DELETE FROM {$wpdb->prefix}icl_string_translations WHERE string_id=%d";
 		$icl_strings_query             = "DELETE FROM {$wpdb->prefix}icl_strings WHERE id=%d";
 
 		$icl_string_positions_prepare    = $wpdb->prepare( $icl_string_positions_query, $string_id );
+		$icl_string_status_prepare       = $wpdb->prepare( $icl_string_status_query, $string_id );
 		$icl_string_translations_prepare = $wpdb->prepare( $icl_string_translations_query, $string_id );
 		$icl_strings_prepare             = $wpdb->prepare( $icl_strings_query, $string_id );
 
 		$wpdb->query( $icl_string_positions_prepare );
+		$wpdb->query( $icl_string_status_prepare );
 		$wpdb->query( $icl_string_translations_prepare );
 		$wpdb->query( $icl_strings_prepare );
 
@@ -1011,7 +1029,7 @@ class WPML_String_Translation {
 	}
 
 	/**
-	 * @param null $empty   Not used, but needed for the hooked filter.
+	 * @param null $empty   Not used, but needed for the hooked filter
 	 * @param int  $string_id
 	 *
 	 * @return null|string
@@ -1021,8 +1039,8 @@ class WPML_String_Translation {
 	}
 
 	/**
-	 * @param int|null $default     Set the default value to return in case no string or more than one string is found.
-	 * @param array    $string_data {.
+	 * @param int|null $default     Set the default value to return in case no string or more than one string is found
+	 * @param array    $string_data {
 	 *
 	 * @type string    $context
 	 * @type string    $name        Optional
@@ -1055,7 +1073,7 @@ class WPML_String_Translation {
 	}
 
 	/**
-	 * @param array $string_data {.
+	 * @param array $string_data {
 	 *
 	 * @type string $context
 	 * @type string $name        Optional
@@ -1085,7 +1103,7 @@ class WPML_String_Translation {
 	}
 
 	/**
-	 * @param null   $empty   Not used, but needed for the hooked filter.
+	 * @param null   $empty   Not used, but needed for the hooked filter
 	 * @param string $domain
 	 * @param string $name
 	 *

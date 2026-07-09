@@ -512,7 +512,7 @@ class WPML_Package_Helper {
 
 		$tm = new WPML_Package_TM( $package );
 
-		$tm->set_language_details();
+		$tm->update_package_translations( true );
 
 		return (int) $package_id;
 	}
@@ -770,6 +770,49 @@ class WPML_Package_Helper {
 					'title'  => 'Widget',
 					'plural' => 'Widgets',
 					'slug'   => 'Block',
+				],
+			],
+			'ACFML_VERSION'                     => [
+				'acf-field-group'         => [
+					'title'  => 'Widget',
+					'plural' => 'Widgets',
+					'slug'   => 'acf-field-group',
+				],
+				'acf-post-type-labels'    => [
+					'title'  => 'ACF Custom Post Type',
+					'plural' => 'ACF Custom Post Type',
+					'slug'   => 'acf-post-type-labels',
+				],
+				'acf-taxonomy-labels'     => [
+					'title'  => 'ACF Custom Taxonomy',
+					'plural' => 'ACF Custom Taxonomies',
+					'slug'   => 'acf-taxonomy-labels',
+				],
+				'acf-options-page-labels' => [
+					'title'  => 'ACF Option Page',
+					'plural' => 'ACF Option Pages',
+					'slug'   => 'acf-options-page-labels',
+				],
+			],
+			'WPML_WP_FORMS_VERSION'             => [
+				'wpforms'  => [
+					'title'  => 'WP Form',
+					'plural' => 'WP Forms',
+					'slug'   => 'wpforms',
+				],
+			],
+			'GRAVITYFORMS_MULTILINGUAL_VERSION' => [
+				'gravity_form'  => [
+					'title'  => 'Gravity Form',
+					'plural' => 'Gravity Forms',
+					'slug'   => 'gravity_form',
+				],
+			],
+			'WPML_NINJA_FORMS_VERSION'          => [
+				'ninja-forms'  => [
+					'title'  => 'Ninja Form',
+					'plural' => 'Ninja Forms',
+					'slug'   => 'ninja-forms',
 				],
 			],
 		];

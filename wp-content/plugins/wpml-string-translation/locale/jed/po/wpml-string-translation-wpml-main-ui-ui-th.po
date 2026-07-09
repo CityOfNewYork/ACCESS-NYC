@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/main-ui/components/Actions.js:46
+msgid "Edit"
+msgstr "แก้ไข"
+
+#: src/js/main-ui/components/Actions.js:57
+msgid "Shift+Tab"
+msgstr "Shift+แท็บ"
+
+#: src/js/main-ui/components/Actions.js:62
+msgid "Tab"
+msgstr "แท็บ"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:102
+msgid "Translation to:"
+msgstr "แปลเป็น:"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:121
+msgid "Copy from original"
+msgstr "คัดลอกมาจากต้นฉบับ"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:136
+msgid "Use Shift+Enter to add a new line."
+msgstr "ใช้ Shift+Enter เพื่อเพิ่มบรรทัดใหม่"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:95
+msgid "Original:"
+msgstr "ต้นฉบับ:"
+
+#: src/js/main-ui/components/LanguagesCell.js:166
+msgid "Add %s translation"
+msgstr "เพิ่ม %s การแปล"
+
+#: src/js/main-ui/components/LanguagesCell.js:185
+msgid "Edit %s translation"
+msgstr "แก้ไข %s การแปล"
+
+#: src/js/main-ui/components/LanguagesCell.js:61
+msgid "Original language %s"
+msgstr "ภาษาต้นฉบับ %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:68
+msgid "Waiting for translator to %s"
+msgstr "รอคนแปลอยู่. %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:75
+msgid "Translation in progress to %s"
+msgstr "อยู่ระหว่างการแปลถึง %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:82
+msgid "In basket for translation to %s"
+msgstr "ในตะกร้าสำหรับการแปลไปที่ %s"
+
+#: src/js/main-ui/components/notification.js:13
+msgid "Translation saved."
+msgstr "บันทึกคำแปลแล้ว"
+
+#: src/js/main-ui/components/notification.js:17
+msgid "Translation update failed."
+msgstr "การอัปเดตการแปลล้มเหลว"

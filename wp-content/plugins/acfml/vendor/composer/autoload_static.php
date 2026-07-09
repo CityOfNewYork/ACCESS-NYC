@@ -4,10 +4,9 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit67579b796f9a605f9c40b7672766949c
+class ComposerStaticInitff1a5445702eaf616c6f2580f8ddba5c
 {
     public static $classMap = array (
-        'ACFML\\Cache\\Flush' => __DIR__ . '/../..' . '/classes/Cache/Flush.php',
         'ACFML\\Container\\Config' => __DIR__ . '/../..' . '/classes/Container/Config.php',
         'ACFML\\Convertable\\LinkFieldData' => __DIR__ . '/../..' . '/classes/Convertable/LinkFieldData.php',
         'ACFML\\Cpt\\HooksFactory' => __DIR__ . '/../..' . '/classes/Cpt/HooksFactory.php',
@@ -44,10 +43,6 @@ class ComposerStaticInit67579b796f9a605f9c40b7672766949c
         'ACFML\\Notice\\Links' => __DIR__ . '/../..' . '/classes/Notice/Links.php',
         'ACFML\\Options' => __DIR__ . '/../..' . '/classes/Options.php',
         'ACFML\\OptionsPage\\HooksFactory' => __DIR__ . '/../..' . '/classes/OptionsPage/HooksFactory.php',
-        'ACFML\\Options\\CustomNamespacesHooks' => __DIR__ . '/../..' . '/classes/Options/CustomNamespacesHooks.php',
-        'ACFML\\Options\\EditorHooks' => __DIR__ . '/../..' . '/classes/Options/EditorHooks.php',
-        'ACFML\\Options\\HooksFactory' => __DIR__ . '/../..' . '/classes/Options/HooksFactory.php',
-        'ACFML\\Options\\TranslationJobHooks' => __DIR__ . '/../..' . '/classes/Options/TranslationJobHooks.php',
         'ACFML\\Post\\EditorHooksFactory' => __DIR__ . '/../..' . '/classes/Post/EditorHooksFactory.php',
         'ACFML\\Post\\MixedFieldGroupModesHooks' => __DIR__ . '/../..' . '/classes/Post/MixedFieldGroupModesHooks.php',
         'ACFML\\Post\\NativeEditorTranslationHooks' => __DIR__ . '/../..' . '/classes/Post/NativeEditorTranslationHooks.php',
@@ -64,7 +59,6 @@ class ComposerStaticInit67579b796f9a605f9c40b7672766949c
         'ACFML\\Repeater\\Sync\\OptionPageHooks' => __DIR__ . '/../..' . '/classes/strategy/repeater-sync/OptionPageHooks.php',
         'ACFML\\Repeater\\Sync\\PostHooks' => __DIR__ . '/../..' . '/classes/strategy/repeater-sync/PostHooks.php',
         'ACFML\\Repeater\\Sync\\TermHooks' => __DIR__ . '/../..' . '/classes/strategy/repeater-sync/TermHooks.php',
-        'ACFML\\StringTaxonomyHooks' => __DIR__ . '/../..' . '/classes/StringTaxonomyHooks.php',
         'ACFML\\Strings\\Config' => __DIR__ . '/../..' . '/classes/Strings/Config.php',
         'ACFML\\Strings\\CptHooks' => __DIR__ . '/../..' . '/classes/Strings/CptHooks.php',
         'ACFML\\Strings\\Factory' => __DIR__ . '/../..' . '/classes/Strings/Factory.php',
@@ -107,7 +101,6 @@ class ComposerStaticInit67579b796f9a605f9c40b7672766949c
         'ACFML\\Upgrade\\Commands\\Command' => __DIR__ . '/../..' . '/classes/Upgrade/Commands/Command.php',
         'ACFML\\Upgrade\\Commands\\MigrateToV2' => __DIR__ . '/../..' . '/classes/Upgrade/Commands/MigrateToV2.php',
         'ACFML\\Upgrade\\Commands\\MigrateToV2_1' => __DIR__ . '/../..' . '/classes/Upgrade/Commands/MigrateToV2_1.php',
-        'ACFML\\Upgrade\\Commands\\MigrateToV2_2' => __DIR__ . '/../..' . '/classes/Upgrade/Commands/MigrateToV2_2.php',
         'ACFML\\Upgrade\\Upgrade' => __DIR__ . '/../..' . '/classes/Upgrade/Upgrade.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'WPML_ACF' => __DIR__ . '/../..' . '/classes/class-wpml-acf.php',
@@ -126,6 +119,7 @@ class ComposerStaticInit67579b796f9a605f9c40b7672766949c
         'WPML_ACF_Link_Field' => __DIR__ . '/../..' . '/classes/class-wpml-acf-link-field.php',
         'WPML_ACF_Location_Rules' => __DIR__ . '/../..' . '/classes/class-wpml-acf-location-rules.php',
         'WPML_ACF_Migrate_Option_Page_Strings' => __DIR__ . '/../..' . '/classes/class-wpml-acf-migrate-option-page-strings.php',
+        'WPML_ACF_Options_Page' => __DIR__ . '/../..' . '/classes/class-wpml-acf-options-page.php',
         'WPML_ACF_Page_Link_Field' => __DIR__ . '/../..' . '/classes/class-wpml-acf-page-link-field.php',
         'WPML_ACF_Post_Id' => __DIR__ . '/../..' . '/classes/class-wpml-acf-post-id.php',
         'WPML_ACF_Post_Ids' => __DIR__ . '/../..' . '/classes/class-wpml-acf-post-ids.php',
@@ -150,7 +144,7 @@ class ComposerStaticInit67579b796f9a605f9c40b7672766949c
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit67579b796f9a605f9c40b7672766949c::$classMap;
+            $loader->classMap = ComposerStaticInitff1a5445702eaf616c6f2580f8ddba5c::$classMap;
 
         }, null, ClassLoader::class);
     }

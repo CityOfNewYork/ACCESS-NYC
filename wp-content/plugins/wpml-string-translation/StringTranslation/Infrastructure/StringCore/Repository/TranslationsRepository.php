@@ -16,16 +16,7 @@ class TranslationsRepository implements TranslationsRepositoryInterface {
 		$this->settingsRepository = $settingsRepository;
 	}
 
-	/**
-	 * Checks if a translation for a given string is available
-	 *
-	 * @param string      $text The string to check for.
-	 * @param string      $domain The domain of the string.
-	 * @param null|string $context The context of the string.
-	 *
-	 * @return bool True if a translation is available, false otherwise
-	 */
-	public function isTranslationAvailable( string $text, string $domain, ?string $context = null ): bool {
+	public function isTranslationAvailable( string $text, string $domain, string $context = null ): bool {
 		// Use WP i18n global to determine if the string is translated
 		global $l10n;
 		$translations = get_translations_for_domain( $domain );
@@ -49,12 +40,10 @@ class TranslationsRepository implements TranslationsRepositoryInterface {
 
 	/*
 	 * @param Translations|NOOP_Translations $translations
-	 * @param string                         $text
-	 * @param string|null                    $context
 	 *
 	 * @return string|null
 	 */
-	private function getTranslatedStringText( $translations, string $text, ?string $context = null ) {
+	private function getTranslatedStringText( $translations, string $text, string $context = null ) {
 		// WP_Translation_Controller is for WP 6.5.
 		if ( class_exists('\WP_Translation_Controller') || method_exists( $translations, 'translate' ) ) {
 			$translation = $translations->translate( $text, $context );
@@ -160,9 +149,9 @@ class TranslationsRepository implements TranslationsRepositoryInterface {
 			);
 			if ( $translation ) {
 				$stringTranslation = new StringTranslation(
+					$string,
 					$language,
-					$translation,
-					$string
+					$translation
 				);
 
 				$stringTranslations[] = $stringTranslation;

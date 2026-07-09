@@ -87,13 +87,8 @@ class WPML_ST_Translations_File_Scan_Storage {
 				continue;
 			}
 
-			$context = (string) $translation->get_context();
-			if ( ! isset( $value_id_map[ $translation->get_original() ][ $context ] ) ) {
-				continue;
-			}
-
 			$result[] = new WPML_ST_Models_String_Translation(
-				$value_id_map[ $translation->get_original() ][ $context ],
+				$value_id_map[ $translation->get_original() ][ $translation->get_context() ],
 				$lang,
 				ICL_TM_NOT_TRANSLATED,
 				null,

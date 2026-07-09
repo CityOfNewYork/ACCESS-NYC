@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/strings-cleanup/App.js:17
+msgid ""
+"Clean up the String Translation table by removing untranslated strings by "
+"domain."
+msgstr "Rensa strängtabellen genom att ta bort oöversatta."
+
+#: src/js/strings-cleanup/App.js:30
+#: src/js/strings-cleanup/components/CleanupModal.js:38
+msgid "Remove strings by domain"
+msgstr "Ta bort strängar efter domän"
+
+#: src/js/strings-cleanup/components/CleanupButton.js:12
+msgid "Remove strings"
+msgstr "Ta bort strängar"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:51
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:55
+msgid "Remove"
+msgstr "Ta bort"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:61
+msgid ""
+"The String Translation table currently contains strings from the domains "
+"listed below. If you do not plan to translate strings from a particular "
+"domain, select it below to remove its untranslated strings from the String "
+"Translation table. Any strings that already have translations will still be "
+"available."
+msgstr "Strängtabellen innehåller domäner nedan."
+
+#: src/js/strings-cleanup/components/CleanupModal.js:66
+msgid "Search"
+msgstr "Sök"
+
+#: src/js/strings-cleanup/components/CleanupProgress.js:21
+msgid "Removing strings from String Translation table"
+msgstr "Tar bort strängar från strängtabellen"
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:27
+msgid ""
+"To add strings back to the String Translation table, you may need to rescan "
+"translation files or register strings as translatable."
+msgstr "Skanna filer för att lägga till strängar igen."
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:29
+msgid "Read more about "
+msgstr "Läs mer om "
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:31
+msgid "scanning your site for strings and registering them as translatable."
+msgstr "skanning av webbplatsen för strängar."
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:40
+msgid "Successfully removed strings"
+msgstr "Strängar har tagits bort"
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:44
+msgid "OK, Great"
+msgstr "OK, bra"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:14
+msgid "Domain"
+msgstr "Domän"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:18
+msgid "Strings count"
+msgstr "Antal strängar"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:24
+msgid "Translated strings"
+msgstr "Översatta strängar"

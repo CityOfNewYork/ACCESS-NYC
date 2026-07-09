@@ -1,0 +1,103 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/admin-strings/texts.js:10
+msgid "Not included in String Translation"
+msgstr "不包括在字符串翻译中"
+
+#: src/js/admin-strings/texts.js:11
+msgid "Registered and locked"
+msgstr "已注册并锁定"
+
+#: src/js/admin-strings/texts.js:13
+msgid "Text"
+msgstr "文本"
+
+#: src/js/admin-strings/texts.js:14
+msgid "Numeric"
+msgstr "数字"
+
+#: src/js/admin-strings/texts.js:15
+msgid "All Types"
+msgstr "所有类型"
+
+#: src/js/admin-strings/texts.js:17
+msgid "Search"
+msgstr "搜索"
+
+#: src/js/admin-strings/texts.js:19
+msgid "Communication error"
+msgstr "通信错误"
+
+#: src/js/admin-strings/texts.js:20
+msgid "The action failed."
+msgstr "行动失败。"
+
+#: src/js/admin-strings/texts.js:22
+msgid "All (%d)"
+msgstr "所有 (%d)"
+
+#: src/js/admin-strings/texts.js:23
+msgid "Included in String Translation (%d)"
+msgstr "包含在字符串翻译中 (%d)"
+
+#: src/js/admin-strings/texts.js:24
+msgid "Not included in String Translation (%d)"
+msgstr "不包括在字符串翻译中 (%d)"
+
+#: src/js/admin-strings/texts.js:26
+msgid "This setting is locked by a WPML configuration file."
+msgstr "此设置由 WPML 配置文件锁定。"
+
+#: src/js/admin-strings/texts.js:28
+msgid "Option"
+msgstr "选项"
+
+#: src/js/admin-strings/texts.js:29
+msgid "Value"
+msgstr "值"
+
+#: src/js/admin-strings/texts.js:30
+msgid "Type"
+msgstr "类型"
+
+#: src/js/admin-strings/texts.js:31
+msgid "State"
+msgstr "状态"
+
+#: src/js/admin-strings/texts.js:34
+msgid "Export as a WPML configuration file"
+msgstr "导出为 WPML 配置文件"
+
+#: src/js/admin-strings/texts.js:35
+msgid "Cancel"
+msgstr "取消"
+
+#: src/js/admin-strings/texts.js:36
+msgid "Save the following to a wpml-config.xml in the root of your theme or plugin."
+msgstr "将以下内容保存到主题或插件根目录下的 wpml-config.xml。"
+
+#: src/js/admin-strings/texts.js:38
+msgid "No options found."
+msgstr "未找到任何选项。"
+
+#: src/js/admin-strings/texts.js:39
+msgid ""
+"Make sure you saved your theme options at least once. Some themes only add "
+"these to the wp_options table after the user explicitly saves changes to "
+"the theme defaults."
+msgstr "确保至少保存过一次主题选项。有些主题只有在用户明确保存对主题默认设置的更改后，才会将这些选项添加到wp_options 表中。"
+
+#: src/js/admin-strings/texts.js:6
+msgid "Add to String Translation"
+msgstr "添加到字符串翻译"
+
+#: src/js/admin-strings/texts.js:7
+msgid "Remove from String Translation"
+msgstr "从字符串翻译中移除"
+
+#: src/js/admin-strings/texts.js:9
+msgid "Included in String Translation"
+msgstr "包含在字符串翻译中"

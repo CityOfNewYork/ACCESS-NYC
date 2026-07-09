@@ -3,15 +3,13 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "el"
+            "domain": "messages"
          },
          "Not included in String Translation": [
-            "Δεν περιλαμβάνεται στη Μετάφραση Συμβολοσειρών"
+            "Δεν περιλαμβάνεται στη Μετάφραση"
          ],
          "Registered and locked": [
-            "Καταχωρισμένο και κλειδωμένο"
+            "Καταχωρημένο και κλειδωμένο"
          ],
          "Text": [
             "Κείμενο"
@@ -32,16 +30,16 @@
             "Η ενέργεια απέτυχε."
          ],
          "All (%d)": [
-            "Όλα τα (%d)"
+            "Όλα (%d)"
          ],
          "Included in String Translation (%d)": [
-            "Περιλαμβάνεται στη Μετάφραση Συμβολοσειρών (%d)"
+            "Συμπεριλαμβάνεται (%d)"
          ],
          "Not included in String Translation (%d)": [
-            "Δεν περιλαμβάνεται στη Μετάφραση Συμβολοσειρών (%d)"
+            "Δεν συμπεριλαμβάνεται (%d)"
          ],
          "This setting is locked by a WPML configuration file.": [
-            "Αυτή η ρύθμιση είναι κλειδωμένη από ένα αρχείο διαμόρφωσης WPML."
+            "Κλειδωμένο από αρχείο WPML."
          ],
          "Option": [
             "Επιλογή"
@@ -56,28 +54,28 @@
             "Κατάσταση"
          ],
          "Export as a WPML configuration file": [
-            "Εξαγωγή ως αρχείο διαμόρφωσης WPML"
+            "Εξαγωγή ως αρχείο WPML"
          ],
          "Cancel": [
             "Ακύρωση"
          ],
          "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
-            "Αποθηκεύστε τα ακόλουθα σε ένα wpml-config.xml στον ριζικό φάκελο του θέματος ή του πρόσθετού σας."
+            "Αποθήκευση στο wpml-config.xml."
          ],
          "No options found.": [
             "Δεν βρέθηκαν επιλογές."
          ],
          "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
-            "Βεβαιωθείτε ότι έχετε αποθηκεύσει τις επιλογές του θέματός σας τουλάχιστον μία φορά. Ορισμένα θέματα τα προσθέτουν στον πίνακα wp_options μόνο αφού ο χρήστης αποθηκεύσει ρητά τις αλλαγές στις προεπιλογές του θέματος."
+            "Βεβαιωθείτε ότι έχετε αποθηκεύσει τις επιλογές του θέματος τουλάχιστον μία φορά. Ορισμένα θέματα τις προσθέτουν στον πίνακα wp_options μόνο αφού ο χρήστης αποθηκεύσει ρητά τις αλλαγές στις προεπιλογές του θέματος."
          ],
          "Add to String Translation": [
-            "Προσθήκη στη Μετάφραση Συμβολοσειρών"
+            "Προσθήκη στη μετάφραση"
          ],
          "Remove from String Translation": [
-            "Αφαίρεση από τη Μετάφραση Συμβολοσειρών"
+            "Αφαίρεση από τη μετάφραση"
          ],
          "Included in String Translation": [
-            "Περιλαμβάνεται στη Μετάφραση Συμβολοσειρών"
+            "Συμπεριλαμβάνεται"
          ]
       }
    }

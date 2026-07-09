@@ -11,6 +11,8 @@ class Actions {
 			'WPML_ST_Theme_Plugin_Localization_Options_Settings_Factory',
 			'WPML_ST_Theme_Plugin_Scan_Dir_Ajax_Factory',
 			'WPML_ST_Theme_Plugin_Scan_Files_Ajax_Factory',
+			'WPML_ST_Update_File_Hash_Ajax_Factory',
+			'WPML_ST_Theme_Plugin_Hooks_Factory',
 			'WPML_ST_Taxonomy_Labels_Translation_Factory',
 			'WPML_ST_String_Translation_AJAX_Hooks_Factory',
 			'WPML_ST_Privacy_Content_Factory',
@@ -32,8 +34,6 @@ class Actions {
 			\WPML\ST\StringsCleanup\UI::class,
 			\WPML\ST\DisplayAsTranslated\CheckRedirect::class,
 			\WPML\ST\TranslationJob\AdminTextHooks::class,
-			WpSettings\Factory::class,
-			StringsScanning\JS\HooksFactory::class,
 		);
 	}
 }

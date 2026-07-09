@@ -103,16 +103,7 @@ class QueueRepository implements QueueRepositoryInterface {
 	private $stringItemFactory;
 
 	/**
-	 * @param \wpdb                                    $wpdb
-	 * @param Factory                                 $factory
-	 * @param SettingsRepositoryInterface             $settingsRepository
-	 * @param ComponentRepositoryInterface            $componentRepository
-	 * @param UrlRepositoryInterface                  $urlRepository
-	 * @param DeletePendingStringsCommandInterface    $deletePendingStrings
-	 * @param InitStorageCommandInterface             $initStorage
-	 * @param SavePendingStringsCommandInterface      $savePendingStrings
-	 * @param SaveProcessedStringsCommandInterface    $saveProcessedStrings
-	 * @param StringItemFactory                       $stringItemFactory
+	 * @param \wpdb $wpdb
 	 */
 	public function __construct(
 		$wpdb,
@@ -147,14 +138,7 @@ class QueueRepository implements QueueRepositoryInterface {
 		return $this->factory->getGettextStringsQueueStorage();
 	}
 
-	/**
-	 * @param string      $text
-	 * @param string      $domain
-	 * @param string|null $context
-	 *
-	 * @return void
-	 */
-	public function addCurrentUrlString( string $text, string $domain, ?string $context = null ) {
+	public function addCurrentUrlString( string $text, string $domain, string $context = null ) {
 		$key = $text . $domain . $context;
 		$this->currentUrlStrings[ $key ] = [ $text, $domain, $context ];
 	}
@@ -222,17 +206,7 @@ class QueueRepository implements QueueRepositoryInterface {
 		return $hasEntry ? $pendingString[ $entryKey ]: [];
 	}
 
-	/**
-	 * Check if a string is already registered as processed or pending.
-	 *
-	 * @param string      $text
-	 * @param string      $domain
-	 * @param string|null $context
-	 * @param string|null $name
-	 *
-	 * @return bool
-	 */
-	public function isStringAlreadyRegistered( string $text, string $domain, ?string $context = null, ?string $name = null ): bool {
+	public function isStringAlreadyRegistered( string $text, string $domain, string $context = null, string $name = null ): bool {
 		$key = StringItem::createTextAndContextKey( $text, $context );
 		$this->loadDomainProcessedStrings( $domain );
 		$this->loadDomainPendingStrings( $domain );
@@ -248,16 +222,7 @@ class QueueRepository implements QueueRepositoryInterface {
 		return $isProcessed || $isPending;
 	}
 
-	/**
-	 * Check if a string can be tracked on the current request.
-	 *
-	 * @param string      $text
-	 * @param string      $domain
-	 * @param string|null $context
-	 *
-	 * @return bool
-	 */
-	public function canTrackString( string $text, string $domain, ?string $context = null ): bool {
+	public function canTrackString( string $text, string $domain, string $context = null ): bool {
 		$key = StringItem::createTextAndContextKey( $text, $context );
 		$this->loadDomainProcessedStrings( $domain );
 		$this->loadDomainPendingStrings( $domain );
@@ -281,21 +246,7 @@ class QueueRepository implements QueueRepositoryInterface {
 		return $totalCount <= $maxCount;
 	}
 
-	/**
-	 * Check if a string is already tracked on the current request url.
-	 *
-	 * The string is considered already tracked if it was already registered and
-	 * tracked on the current request url, or if it was already registered and
-	 * is scheduled to be tracked on the current request url.
-	 *
-	 * @param string      $text
-	 * @param string      $domain
-	 * @param string|null $context
-	 * @param string      $requestUrl
-	 *
-	 * @return bool
-	 */
-	public function isStringAlreadyTrackedOnUrl( string $text, string $domain, string $requestUrl, ?string $context = null ): bool {
+	public function isStringAlreadyTrackedOnUrl( string $text, string $domain, string $context = null, string $requestUrl ): bool {
 		$key = StringItem::createTextAndContextKey( $text, $context );
 		$this->loadDomainProcessedStrings( $domain );
 		$this->loadDomainPendingStrings( $domain );
@@ -326,24 +277,7 @@ class QueueRepository implements QueueRepositoryInterface {
 		);
 	}
 
-	/**
-	 * Queue a string as pending for translation.
-	 *
-	 * This method registers a string as pending for translation. It stores the string in the pending strings array
-	 * and sets the 'saveStringInDb' flag to true. It also stores the component id and type of the string,
-	 * and any registered names and urls for the string.
-	 *
-	 * If the number of pending strings for the given domain exceeds the maximum allowed count, the method
-	 * returns false.
-	 *
-	 * @param string $text The string to register as pending.
-	 * @param string $domain The domain of the string.
-	 * @param string|null $context The context of the string.
-	 * @param string|null $name The name of the string.
-	 *
-	 * @return bool True if the string was successfully queued as pending, false otherwise.
-	 */
-	public function queueStringAsPending( string $text, string $domain, ?string $context = null, ?string $name = null ): bool {
+	public function queueStringAsPending( string $text, string $domain, string $context = null, string $name = null ): bool {
 		$key = StringItem::createTextAndContextKey( $text, $context );
 		$this->loadDomainProcessedStrings( $domain );
 		$this->loadDomainPendingStrings( $domain );
@@ -370,22 +304,7 @@ class QueueRepository implements QueueRepositoryInterface {
 		return $this->hasNewPendingStrings = true;
 	}
 
-	/**
-	 * Track a string that was previously registered as pending.
-	 *
-	 * The method tracks the string on the current request url, and sets the 'saveStringInDb' flag to true.
-	 * It also stores the component id and type of the string, and any registered names and urls for the string.
-	 *
-	 * If the string was not previously registered as pending, the method does nothing.
-	 *
-	 * @param string $text The string to track.
-	 * @param string $domain The domain of the string.
-	 * @param string|null $context The context of the string.
-	 * @param string $requestUrl The url on which the string was tracked.
-	 *
-	 * @return void
-	 */
-	public function trackString( string $text, string $domain, string $requestUrl, ?string $context = null ) {
+	public function trackString( string $text, string $domain, string $context = null, string $requestUrl ) {
 		if ( ! $this->settingsRepository->isStringTrackingEnabled() ) {
 			return;
 		}
@@ -456,13 +375,6 @@ class QueueRepository implements QueueRepositoryInterface {
 
 		foreach ( $pendingStringDomains as $domain ) {
 			$this->loadDomainProcessedStrings( $domain );
-
-			// Skip domains that appeared in filesystem after loadPendingStrings() was called.
-			// This handles race conditions where concurrent requests create new pending files.
-			if ( ! isset( $this->pendingStrings[ $domain ] ) ) {
-				continue;
-			}
-
 
 			foreach ( $this->pendingStrings[ $domain ] as $textAndContext => $string ) {
 				$key = $textAndContext;

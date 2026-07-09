@@ -8,10 +8,8 @@ use WPML\ST\MO\Hooks\PreloadThemeMoFile;
 use WPML\ST\Package\Domains;
 use function wpml_collect;
 use WPML_ST_Settings;
-use WPML\ST\TranslationFile\StringCollation;
 
 class AutoRegisterSettings {
-	use StringCollation;
 
 	const KEY_EXCLUDED_DOMAINS   = 'wpml_st_auto_reg_excluded_contexts';
 	const KEY_ENABLED            = 'auto_register_enabled';
@@ -163,7 +161,7 @@ class AutoRegisterSettings {
 	 */
 	public function getAllDomains() {
 		$sql = "
-			SELECT DISTINCT context {$this->getCollateForContextColumn( $this->wpdb )}
+			SELECT DISTINCT context
 			FROM {$this->wpdb->prefix}icl_strings 
 		";
 

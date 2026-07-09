@@ -24,19 +24,17 @@ class SearchPopulatedKindsCriteria {
 
 
 	/**
-	 * Constructor for SearchPopulatedKindsCriteria
-	 *
-	 * @param string[] $itemSectionIds Array of item section IDs to search in.
-	 * @param string|null $publicationStatus Optional publication status to filter by.
-	 * @param string $sourceLanguageCode The source language code.
-	 * @param string|null $targetLanguageCode Optional target language code.
-	 * @param int[] $translationStatuses Array of translation statuses to filter by.
+	 * @param string[] $itemSectionIds
+	 * @param string|null $publicationStatus
+	 * @param string $sourceLanguageCode
+	 * @param string|null $targetLanguageCode
+	 * @param array<int> $translationStatuses
 	 */
 	public function __construct(
-		array $itemSectionIds = [],
-		?string $publicationStatus = null,
-		string $sourceLanguageCode = '',
-		?string $targetLanguageCode = null,
+		array $itemSectionIds,
+		string $publicationStatus = null,
+		string $sourceLanguageCode,
+		string $targetLanguageCode = null,
 		array $translationStatuses = []
 	) {
 		$this->sourceLanguageCode  = $sourceLanguageCode;

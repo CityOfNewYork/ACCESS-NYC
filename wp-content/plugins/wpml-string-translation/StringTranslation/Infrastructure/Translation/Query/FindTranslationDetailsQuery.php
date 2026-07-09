@@ -88,8 +88,7 @@ class FindTranslationDetailsQuery implements FindTranslationDetailsQueryInterfac
 					$getStringOrNull( $row, 'editor' ),
 					$getStringOrNull( $row, 'translation_service' ),
 					$getStringOrNull( $row, 'review_status' ),
-					$getIntOrNull( $row, 'translator_id' ),
-					$getIntOrNull( $row, 'editor_job_id' )
+					$getIntOrNull( $row, 'translator_id' )
 				);
 			},
 			$res

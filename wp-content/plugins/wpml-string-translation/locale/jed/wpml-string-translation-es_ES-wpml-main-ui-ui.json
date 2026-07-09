@@ -3,57 +3,55 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "es_ES"
+            "domain": "messages"
          },
          "Edit": [
             "Editar"
          ],
          "Shift+Tab": [
-            "Mayús + Tab"
+            "Mayús+tab"
          ],
          "Tab": [
-            "Tab"
+            "Pestaña"
          ],
          "Translation to:": [
             "Traducción a:"
          ],
          "Copy from original": [
-            "Copiar del original"
+            "Copia del original"
          ],
          "Use Shift+Enter to add a new line.": [
-            "Use Mayús + Intro para añadir una nueva línea."
+            "Utiliza Mayús+Intro para añadir una nueva línea."
          ],
          "Original:": [
             "Original:"
          ],
          "Add %s translation": [
-            "Añadir traducción de %s"
+            "Añade la traducción de %s "
          ],
          "Edit %s translation": [
-            "Editar traducción de %s"
+            "Edita la traducción de %s "
          ],
          "Add %s translation (the string appears on the site and is not translated)": [
-            "Añadir traducción de %s (la cadena aparece en el sitio y no está traducida)"
+            "Añadir traducción a %s (la cadena aparece en el sitio y no se traduce)"
          ],
          "Original language %s": [
             "Idioma original %s"
          ],
          "Waiting for translator to %s": [
-            "Esperando a que el traductor %s"
+            "A la espera de que el traductor %s"
          ],
          "Translation in progress to %s": [
             "Traducción en curso a %s"
          ],
          "In basket for translation to %s": [
-            "En la cesta para traducir a %s"
+            "En cesta para traducir a %s"
          ],
          "Translation saved.": [
             "Traducción guardada."
          ],
          "Translation update failed.": [
-            "Error al actualizar la traducción."
+            "Ha fallado la actualización de la traducción."
          ]
       }
    }

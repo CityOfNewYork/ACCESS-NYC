@@ -8,8 +8,6 @@
 use function WPML\Container\make;
 use WPML\ST\Upgrade\Command\RegenerateMoFilesWithStringNames;
 use WPML\ST\Upgrade\Command\MigrateMultilingualWidgets;
-use WPML\ST\Upgrade\Command\UpgradeWpSettingsStrings;
-use WPML\ST\Upgrade\Command\DeleteFileHashingOption;
 
 /**
  * Class WPML_ST_Upgrade_Command_Factory
@@ -90,12 +88,6 @@ class WPML_ST_Upgrade_Command_Factory {
 				break;
 			case MigrateMultilingualWidgets::class:
 				$result = new MigrateMultilingualWidgets();
-				break;
-			case UpgradeWpSettingsStrings::class:
-				$result = new UpgradeWpSettingsStrings();
-				break;
-			case DeleteFileHashingOption::class:
-				$result = new DeleteFileHashingOption();
 				break;
 			default:
 				throw new WPML_ST_Upgrade_Command_Not_Found_Exception( $class_name );

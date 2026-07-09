@@ -3,18 +3,16 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "he_IL"
+            "domain": "messages"
          },
          "Not included in String Translation": [
-            "לא כלול בתרגום מחרוזות"
+            "לא כלול בתרגום מחרוזת"
          ],
          "Registered and locked": [
             "רשום ונעול"
          ],
          "Text": [
-            "טקסט"
+            "טֶקסט"
          ],
          "Numeric": [
             "מספרי"
@@ -23,7 +21,7 @@
             "כל הסוגים"
          ],
          "Search": [
-            "חיפוש"
+            "לחפש"
          ],
          "Communication error": [
             "שגיאת תקשורת"
@@ -32,52 +30,52 @@
             "הפעולה נכשלה."
          ],
          "All (%d)": [
-            "כל (%d)"
+            "את כל (%d)"
          ],
          "Included in String Translation (%d)": [
-            "כלול בתרגום מחרוזות (%d)"
+            "כלול בתרגום מחרוזת (%d)"
          ],
          "Not included in String Translation (%d)": [
-            "לא כלול בתרגום מחרוזות (%d)"
+            "לא כלול בתרגום מחרוזת (%d)"
          ],
          "This setting is locked by a WPML configuration file.": [
             "הגדרה זו נעולה על ידי קובץ תצורה של WPML."
          ],
          "Option": [
-            "אפשרות"
+            "אוֹפְּצִיָה"
          ],
          "Value": [
             "ערך"
          ],
          "Type": [
-            "סוג"
+            "סוּג"
          ],
          "State": [
-            "מצב"
+            "מדינה"
          ],
          "Export as a WPML configuration file": [
-            "ייצוא כקובץ תצורה של WPML"
+            "ייצא כקובץ תצורה של WPML"
          ],
          "Cancel": [
-            "ביטול"
+            "לְבַטֵל"
          ],
          "Save the following to a wpml-config.xml in the root of your theme or plugin.": [
-            "שמור את הדברים הבאים לקובץ wpml-config.xml בתיקיית הבסיס של התבנית או התוסף שלך."
+            "שמור את הדברים הבאים בקובץ wpml-config.xml בשורש ערכת הנושא או הפלאגין שלך."
          ],
          "No options found.": [
             "לא נמצאו אפשרויות."
          ],
          "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
-            "ודא ששמרת את אפשרויות התבנית שלך לפחות פעם אחת. חלק מהתבניות מוסיפות אותן לטבלת wp_options רק לאחר שהמשתמש שומר במפורש שינויים לברירות המחדל של התבנית."
+            "ודא ששמרת את אפשרויות העיצוב שלך לפחות פעם אחת. ערכות נושא מסוימות רק מוסיפים אותן ל-wp_options טבלה לאחר שהמשתמש שומר במפורש שינויים בברירות המחדל של ערכת הנושא."
          ],
          "Add to String Translation": [
-            "הוסף לתרגום מחרוזות"
+            "הוסף לתרגום מחרוזת"
          ],
          "Remove from String Translation": [
-            "הסר מתרגום מחרוזות"
+            "הסר מתרגום מחרוזת"
          ],
          "Included in String Translation": [
-            "כלול בתרגום מחרוזות"
+            "כלול בתרגום מחרוזת"
          ]
       }
    }

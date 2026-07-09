@@ -8,17 +8,14 @@ use WPML\FP\Fns;
 use WPML\FP\Just;
 use WPML\FP\Maybe;
 use WPML\FP\Nothing;
-use WPML\FP\Relation;
 use WPML\LIB\WP\Cache;
 use WPML\ST\Package\Domains as PackageDomains;
 use WPML_Admin_Texts;
 use WPML_ST_Blog_Name_And_Description_Hooks;
 use WPML_ST_Translations_File_Dictionary;
 use WPML\ST\Shortcode;
-use WPML\ST\TranslationFile\StringCollation;
 
 class Domains {
-	use StringCollation;
 
 	const MO_DOMAINS_CACHE_GROUP = 'WPML_ST_CACHE';
 	const MO_DOMAINS_CACHE_KEY   = 'wpml_string_translation_has_mo_domains';
@@ -57,54 +54,43 @@ class Domains {
 	 * @return Collection
 	 */
 	public function getMODomains() {
-		$transient_key = self::MO_DOMAINS_CACHE_KEY;
+		$getMODomainsFromDB = function () {
+			$cacheLifeTime = HOUR_IN_SECONDS;
 
+			$excluded_domains = self::getReservedDomains()->merge( $this->getJEDDomains() );
+
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$sql = "
+				SELECT DISTINCT context {$this->getCollateForContextColumn()}
+				FROM {$this->wpdb->prefix}icl_strings
+			";
+			// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$mo_domains = wpml_collect( $this->wpdb->get_col( $sql ) )
+				->diff( $excluded_domains )
+				->values();
+
+			if ( $mo_domains->count() <= 0 ) {
+				// if we don't get any data from DB, we set cache expire time to be 15 minutes so that cache refreshes in lesser time.
+				$cacheLifeTime = 15 * MINUTE_IN_SECONDS;
+			}
+
+			Cache::set(
+				self::MO_DOMAINS_CACHE_GROUP,
+				self::MO_DOMAINS_CACHE_KEY,
+				$cacheLifeTime,
+				$mo_domains
+			);
+
+			return $mo_domains;
+		};
+
+		/** @var Just|Nothing $cacheItem */
 		$cacheItem = Cache::get( self::MO_DOMAINS_CACHE_GROUP, self::MO_DOMAINS_CACHE_KEY );
-		if ( $cacheItem instanceof Just ) {
-			return $cacheItem->get();
-		}
-
-		// If not in object cache, try transient.
-		$transient = get_transient( $transient_key );
-		if ( false !== $transient ) {
-			return $transient;
-		}
-
-		// If not in any cache, fetch from database.
-		$excluded_domains = self::getReservedDomains()->merge( $this->getJEDDomains() );
-
-		$sql = "
-			SELECT DISTINCT context {$this->getCollateForContextColumn( $this->wpdb )}
-			FROM {$this->wpdb->prefix}icl_strings
-		";
-
-		$mo_domains = wpml_collect( $this->wpdb->get_col( $sql ) )
-			->diff( $excluded_domains )
-			->values();
-
-		// If we don't get any data from DB, we set cache expire time to be 15 minutes so that cache refreshes in lesser time.
-		$cacheLifeTime = $mo_domains->count() <= 0 ? 15 * MINUTE_IN_SECONDS : HOUR_IN_SECONDS;
-
-		// Try to store in object cache first.
-		Cache::set(
-			self::MO_DOMAINS_CACHE_GROUP,
-			self::MO_DOMAINS_CACHE_KEY,
-			$cacheLifeTime,
-			$mo_domains
-		);
-
-		// Use transient as fallback only if object cache is not being used.
-		if ( ! wp_using_ext_object_cache() ) {
-			set_transient( $transient_key, $mo_domains, $cacheLifeTime );
-		}
-
-		return $mo_domains;
+		return $cacheItem->getOrElse( $getMODomainsFromDB );
 	}
 
 	public static function invalidateMODomainCache() {
 		static $invalidationScheduled = false;
-
-		delete_transient( self::MO_DOMAINS_CACHE_KEY );
 
 		if ( ! $invalidationScheduled ) {
 			$invalidationScheduled = true;
@@ -117,7 +103,38 @@ class Domains {
 		}
 	}
 
+	/**
+	 * @return string
+	 */
+	private function getCollateForContextColumn() {
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared		
+		$sql = "
+			SELECT COLLATION_NAME
+			 FROM information_schema.columns
+			 WHERE TABLE_SCHEMA = '" . DB_NAME . "' AND TABLE_NAME = '{$this->wpdb->prefix}icl_strings' AND COLUMN_NAME = 'context'
+		";
+		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$collation = $this->wpdb->get_var( $sql );
+		if ( ! $collation ) {
+			return '';
+		}
 
+		list( $type ) = explode( '_', $collation );
+
+		// Whitelisted character sets that are known to support _bin collation.
+		$supported_charsets = [ 'utf8', 'utf8mb3', 'utf8mb4', 'latin1', 'latin2', 'ascii', 'binary' ];
+
+		if ( in_array( $type, $supported_charsets ) ) {
+			if ( 'binary' === $type ) {
+				return 'COLLATE binary';
+			} else {
+				return 'COLLATE ' . $type . '_bin';
+			}
+		}
+
+		// Return empty string for unsupported character sets to avoid MySQL errors.
+		return '';
+	}
 
 	/**
 	 * Returns a collection of MO domains that
@@ -153,16 +170,6 @@ class Domains {
 		}
 
 		return self::$jed_domains;
-	}
-
-	/**
-	 * @param string $domain
-	 *
-	 * @return bool
-	 */
-	public function hasNoNativeTranslationFile( $domain ) {
-		return ! wpml_collect( $this->file_dictionary->get_domains() )
-			->first( Relation::equals( $domain ) );
 	}
 
 	public static function resetCache() {

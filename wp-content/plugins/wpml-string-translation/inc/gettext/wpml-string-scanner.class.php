@@ -1,7 +1,5 @@
 <?php
 
-use WPML\FP\Str;
-
 class WPML_String_Scanner {
 
 	const DEFAULT_DOMAIN = 'default';
@@ -47,12 +45,16 @@ class WPML_String_Scanner {
 	 */
 	private $strings_mapper;
 
+	/** @var WPML_ST_File_Hashing */
+	protected $file_hashing;
+
 	/**
 	 * WPML_String_Scanner constructor.
 	 *
 	 * @param WP_Filesystem_Base   $wp_filesystem
+	 * @param WPML_ST_File_Hashing $file_hashing
 	 */
-	public function __construct( WP_Filesystem_Base $wp_filesystem ) {
+	public function __construct( WP_Filesystem_Base $wp_filesystem, WPML_ST_File_Hashing $file_hashing ) {
 		global $wpdb;
 
 		$this->domains            = array();
@@ -64,6 +66,7 @@ class WPML_String_Scanner {
 
 		$this->default_domain = 'default';
 		$this->wp_filesystem  = $wp_filesystem;
+		$this->file_hashing   = $file_hashing;
 	}
 
 	protected function scan_starting( $scanning ) {
@@ -714,14 +717,5 @@ class WPML_String_Scanner {
 		$path = $this->get_wpml_file()->get_relative_path( $path );
 		$path = $this->get_wpml_file()->fix_dir_separator( $path );
 		return $path;
-	}
-
-	/**
-	 * @param string $filepath
-	 *
-	 * @return bool
-	 */
-	protected function is_js_file( $filepath ) {
-		return Str::endsWith( '.js', $filepath );
 	}
 }

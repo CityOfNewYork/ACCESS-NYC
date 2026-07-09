@@ -1,0 +1,1213 @@
+# Copyright (C) 2025 OnTheGoSystems
+# This file is distributed under the same license as the WPML String Translation plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: WPML String Translation 3.3.0-rc.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpml-string-translation\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-01-16T17:40:28+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: wpml-string-translation\n"
+
+#. Plugin Name of the plugin
+#: plugin.php
+msgid "WPML String Translation"
+msgstr "Wpml 字符串翻译"
+
+#. Plugin URI of the plugin
+#: plugin.php
+msgid "https://wpml.org/"
+msgstr "https://wpml.org/"
+
+#. Description of the plugin
+#: plugin.php
+msgid "Adds theme and plugins localization capabilities to WPML | <a href=\"https://wpml.org\">Documentation</a> | <a href=\"https://wpml.org/version/string-translation-3-3-0-rc-1/\">WPML String Translation 3.3.0 RC 1 release notes</a>"
+msgstr "为WPML添加主题和插件本地化功能 | <a href=\"https://wpml.org\">文档</a> | <a href=\"https://wpml.org/version/string-translation-3-3-0-rc-1/\">WPML字符串翻译3.3.0 RC 1发布说明</a>"
+
+#. Author of the plugin
+#: plugin.php
+msgid "OnTheGoSystems"
+msgstr "本系统"
+
+#. Author URI of the plugin
+#: plugin.php
+msgid "http://www.onthegosystems.com/"
+msgstr "http://www.onthegosystems.com/"
+
+#: classes/API/rest/mo/Import.php:65
+msgid "WPML found %s new or updated .mo files. Their texts were added to the translations table."
+msgstr "WPML发现%s个新的或更新的.mo文件。它们的文本已添加到翻译表中。"
+
+#: classes/AutoRegisterStringsNotice.php:26
+msgid "Click here to enable it"
+msgstr "点击此处启用"
+
+#: classes/AutoRegisterStringsNotice.php:27
+msgid "String auto registration is disabled. "
+msgstr "字符串自动注册已禁用。"
+
+#: classes/batch-action/ChangeLanguageOfStringsInDomain.php:43
+#: classes/batch-action/ChangeTranslationPriorityOfStringsInDomain.php:43
+#: classes/batch-action/CountStringsInDomain.php:16
+#: classes/batch-action/CountStringsInDomainWithDifferentPriority.php:27
+#: classes/batch-action/DeleteStringsInDomain.php:29
+#: classes/batch-action/InitChangeStringLangOfDomain.php:49
+#: classes/strings-cleanup/ajax/InitStringsRemoving.php:33
+#: classes/strings-cleanup/ajax/RemoveStringsFromDomains.php:34
+msgid "Error: please try again"
+msgstr "错误：请重试"
+
+#: classes/class-wpml-st-string-statuses.php:14
+msgid "Translation complete"
+msgstr "翻译完毕"
+
+#: classes/class-wpml-st-string-statuses.php:17
+msgid "Partial translation"
+msgstr "部分翻译"
+
+#: classes/class-wpml-st-string-statuses.php:20
+msgid "Translation needs update"
+msgstr "翻译需要更新"
+
+#: classes/class-wpml-st-string-statuses.php:23
+#: inc/package-translation/inc/wpml-package-translation-metabox.class.php:403
+#: inc/package-translation/inc/wpml-package-translation-metabox.class.php:443
+msgid "Not translated"
+msgstr "未翻译"
+
+#: classes/class-wpml-st-string-statuses.php:26
+#: inc/package-translation/inc/wpml-package-translation-metabox.class.php:391
+#: menu/string-translation.php:206
+msgid "Waiting for translator"
+msgstr "等待翻译"
+
+#: classes/class-wpml-st-verify-dependencies.php:36
+msgid "Please activate WPML Multilingual CMS to have WPML String Translation working."
+msgstr "请激活 WPML 多语言内容管理系统，使 WPML 字符串翻译正常工作。"
+
+#: classes/class-wpml-st-verify-dependencies.php:45
+msgid "WPML String Translation is enabled but not effective, because WPML is outdated. Please update WPML first."
+msgstr "WPML 字符串翻译已启用但无效，因为 WPML 已过期。请先更新 WPML。"
+
+#: classes/filters/class-wpml-st-taxonomy-labels-translation.php:205
+msgid "Missing parameters"
+msgstr "参数缺失"
+
+#: classes/filters/class-wpml-st-taxonomy-labels-translation.php:230
+msgid "Invalid nonce"
+msgstr "无效的 nonce"
+
+#: classes/gettext-hooks/AutoRegisterSettings.php:226
+msgid "Nonce value is invalid"
+msgstr "Nonce 值无效"
+
+#: classes/gettext-hooks/AutoRegisterSettings.php:233
+msgid "Automatic string registration will remain active for <span class='counter-msg'>%s</span>. Please visit the site's front-end to allow WPML to find strings for translation."
+msgstr "自动字符串注册将在<span class=“counter-msg”>%s</span>内保持活跃。请访问网站前端，以允许WPML查找需要翻译的字符串。"
+
+#: classes/gettext-hooks/AutoRegisterSettings.php:238
+msgid "* This feature is only intended for sites that are in development. It will significantly slow down the site, but help you find strings that WPML cannot detect in the PHP code."
+msgstr "* 此功能仅适用于开发中的网站。它会大大降低网站的运行速度，但可以帮助您找到 WPML 无法在 PHP 代码中检测到的字符串。"
+
+#: classes/menus/theme-plugin-localization-ui/class-st-theme-plugin-localization-options-ui.php:30
+msgid "Use theme or plugin text domains when gettext calls do not use a string literal"
+msgstr "当 gettext 调用不使用字符串字面量时，使用主题或插件文本域"
+
+#: classes/menus/theme-plugin-localization-ui/class-st-theme-plugin-localization-options-ui.php:31
+msgid "Some themes and plugins don't properly set the textdomain (second argument) in GetText calls. When you select this option, WPML will assume that the strings found in GetText calls in the PHP files of the theme and plugin should have the textdomain with the theme/plugin's name."
+msgstr "有些主题和插件在调用 GetText 时没有正确设置 textdomain（第二个参数）。选择此选项后，WPML 将认为主题和插件的 PHP 文件中的 GetText 调用中的字符串的 textdomain 应与主题/插件的名称相同。"
+
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:40
+#: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:40
+msgid "Scan selected plugins for strings"
+msgstr "扫描所选插件以查找字符串"
+
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:41
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:38
+#: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:41
+#: inc/wpml-string-translation.class.php:548
+msgid "Completely translated strings"
+msgstr "完全翻译的字符串"
+
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:42
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:39
+#: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:42
+msgid "Strings in need of translation"
+msgstr "需要翻译的字符串"
+
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:43
+msgid "Plugins"
+msgstr "插件"
+
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:44
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:41
+#: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:44
+#: inc/wpml-string-translation.class.php:546
+msgid "Textdomain"
+msgstr "文本域"
+
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:45
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:42
+msgid "All"
+msgstr "全部"
+
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:46
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:43
+#: inc/package-translation/inc/wpml-package-translation.class.php:419
+msgid "Active"
+msgstr "活跃"
+
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:47
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:44
+msgid "Inactive"
+msgstr "不活动"
+
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:48
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:45
+#: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:45
+msgid "show textdomains"
+msgstr "显示文本域"
+
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:49
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:46
+#: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:46
+msgid "hide textdomains"
+msgstr "隐藏文本域"
+
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:92
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:79
+msgid "Not scanned yet"
+msgstr "尚未扫描"
+
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:98
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:85
+msgid "Scanned"
+msgstr "已扫描"
+
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-plugin-localization-ui.php:104
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:91
+#: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:78
+msgid "Needs re-scanning"
+msgstr "需要重新扫描"
+
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:37
+msgid "Scan selected themes for strings"
+msgstr "扫描所选主题以查找字符串"
+
+#: classes/menus/theme-plugin-localization-ui/strategy/class-wpml-st-theme-localization-ui.php:40
+msgid "Themes"
+msgstr "主题"
+
+#: classes/menus/theme-plugin-localization-ui/strategy/OtherLocalizationUI.php:43
+msgid "Core"
+msgstr "核心"
+
+#: classes/MO/File/FailureHooks.php:87
+msgid "WPML String Translation is attempting to write .mo files with translations to folder:"
+msgstr "WPML 字符串翻译正在尝试将带有翻译的 .mo 文件写入文件夹："
+
+#: classes/MO/File/FailureHooks.php:92
+msgid "This folder appears to be not writable. This is blocking translation for strings from appearing on the site."
+msgstr "该文件夹似乎不可写。这就阻止了网站上出现字符串的翻译。"
+
+#: classes/MO/File/FailureHooks.php:97
+msgid "If this is a %1$slocal development site%2$s, make sure that your local server can write to this folder."
+msgstr "如果这是一个%1$s本地开发站点%2$s，请确保您的本地服务器可以写入此文件夹。"
+
+#: classes/MO/File/FailureHooks.php:102
+msgid "If it's an %1$sonline site%2$s, contact your hosting company and request that they make that folder writable."
+msgstr "如果这是一个%1$s在线站点%2$s，请联系您的托管公司并要求他们使该文件夹可写。"
+
+#: classes/MO/File/FailureHooks.php:110
+msgid "WPML's documentation on troubleshooting .mo files generation."
+msgstr "WPML 有关 .mo 文件生成故障排除的文档。"
+
+#: classes/MO/File/FailureHooks.php:114
+msgid "For more details, see %s."
+msgstr "更多详情，请参阅 %s 。"
+
+#: classes/po-import/class-wpml-po-import-strings.php:25
+msgid "File upload error"
+msgstr "文件上传错误"
+
+#: classes/privacy/class-wpml-st-privacy-content.php:19
+msgid "WPML String Translation will send all strings to WPML’s Advanced Translation Editor and to the translation services which are used."
+msgstr "WPML 字符串翻译会将所有字符串发送到 WPML 高级翻译编辑器和使用的翻译服务。"
+
+#. translators: %s: translation dashboard link
+#: classes/SendStringsForTranslationNotice.php:21
+msgid "To translate strings automatically, by your translators or a translation service, use the %sTranslation Dashboard%s."
+msgstr "要自动翻译字符串，通过您的翻译人员或翻译服务，请使用%s翻译仪表板%s。"
+
+#: classes/slug-translation/wpml-st-element-slug-translation-ui-model.php:54
+msgid "Set different slugs in different languages for %s."
+msgstr "为 %s 设置不同语言的不同标点符号。"
+
+#: classes/slug-translation/wpml-st-element-slug-translation-ui-model.php:55
+msgid "Not marked as 'complete'. Press 'Save' to enable."
+msgstr "未标记为 \"完成\"。按 \"保存 \"启用。"
+
+#: classes/slug-translation/wpml-st-element-slug-translation-ui-model.php:56
+msgid "(original)"
+msgstr "(原文)"
+
+#: classes/slug-translation/wpml-st-element-slug-translation-ui-model.php:66
+msgid "%s slugs are set to be translated, but they are missing their translation"
+msgstr "%s 已设置要翻译的短语，但它们缺少翻译"
+
+#: classes/string-tracking/class-wpml-st-string-positions-in-source.php:52
+msgid "No records found"
+msgstr "未找到记录"
+
+#: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:28
+msgid "Language of domains"
+msgstr "领域语言"
+
+#: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:30
+#: inc/wpml-string-translation.class.php:498
+#: menu/string-translation.php:354
+#: menu/string-translation.php:995
+#: menu/string-translation.php:1071
+msgid "Apply"
+msgstr "应用"
+
+#: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:31
+#: menu/auto-download-mo.php:207
+#: menu/string-translation.php:183
+#: menu/string-translation.php:355
+msgid "Cancel"
+msgstr "取消"
+
+#: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:36
+msgid "Select for which domain to set the language: "
+msgstr "选择要为哪个域设置语言： "
+
+#: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:41
+msgid "-- Please select --"
+msgstr "-- 请选择--"
+
+#: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:78
+msgid "This domain currently has the following strings:"
+msgstr "该域名目前有以下字符串："
+
+#: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:85
+msgid "Current source language"
+msgstr "当前源语言"
+
+#: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:86
+msgid "Number of strings"
+msgstr "字符串数量"
+
+#: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:96
+msgid "Set the source language of these strings to:"
+msgstr "将这些字符串的源语言设置为"
+
+#: classes/string-translation-ui/class-wpml-change-string-domain-language-dialog.php:108
+msgid "Use this language as the default language for new strings in this domain"
+msgstr "将此语言作为此域中新字符串的默认语言"
+
+#: classes/string-translation-ui/class-wpml-change-string-language-select.php:31
+msgid "Change the language of selected strings"
+msgstr "更改所选字符串的语言"
+
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:63
+msgid "No strings found"
+msgstr "未找到字符串"
+
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:79
+msgid "Processing"
+msgstr "处理中"
+
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:158
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:286
+msgid "Domain"
+msgstr "域名"
+
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:160
+msgid "Context"
+msgstr "背景"
+
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:163
+#: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:103
+#: inc/wpml-string-translation.class.php:544
+msgid "Name"
+msgstr "名字"
+
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:166
+msgid "Usage"
+msgstr "使用情况"
+
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:168
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:287
+#: menu/auto-download-mo.php:128
+#: menu/auto-download-mo.php:161
+#: menu/auto-download-mo.php:175
+#: menu/auto-download-mo.php:193
+#: menu/string-translation.php:140
+#: menu/string-translation.php:146
+msgid "String"
+msgstr "字符串"
+
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:182
+msgid "All %d strings on this page are selected."
+msgstr "此页面上的所有%d个字符串都已被选中。"
+
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:183
+msgid "Select all strings that match this search"
+msgstr "选择所有匹配此搜索的字符串"
+
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:184
+msgid "All %d strings from all pages are selected."
+msgstr "所有页面中的%d个字符串都已被选中。"
+
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:185
+msgid "Unselect all strings that match this search"
+msgstr "取消选择所有匹配此搜索的字符串"
+
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:290
+msgid "Preview string on site"
+msgstr "在网站上预览字符串"
+
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:291
+msgid "This preview shows where the selected string appears on your site’s front-end."
+msgstr "此预览显示所选字符串在您网站前端的出现位置。"
+
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:292
+msgid "Frontend preview"
+msgstr "前端预览"
+
+#: classes/string-translation-ui/class-wpml-string-translation-table.php:295
+msgid "Preview where this string appears on your site"
+msgstr "预览此字符串在您网站上的出现位置"
+
+#: classes/string-translation-ui/class-wpml-translation-priority-select.php:20
+msgid "Change translation priority of selected strings"
+msgstr "更改所选字符串的翻译优先级"
+
+#: classes/strings-scanning/class-wpml-themes-and-plugins-settings.php:40
+msgid "Dismiss all notices"
+msgstr "驳回所有通知"
+
+#: classes/strings-scanning/class-wpml-themes-and-plugins-settings.php:41
+msgid "Also prevent similar messages in the future?"
+msgstr "还能防止今后再出现类似信息吗？"
+
+#: classes/strings-scanning/class-wpml-themes-and-plugins-settings.php:42
+msgid "No - keep showing these message"
+msgstr "不 - 继续显示这些信息"
+
+#: classes/strings-scanning/class-wpml-themes-and-plugins-settings.php:43
+msgid "Yes - disable these notifications completely"
+msgstr "是 - 完全禁用这些通知"
+
+#: classes/strings-scanning/wpml-st-theme-plugin-scan-dir-ajax.php:52
+msgid "Files already scanned."
+msgstr "已扫描的文件。"
+
+#: classes/support/class-wpml-st-support-info-filter.php:27
+msgid "Multibyte String extension"
+msgstr "多字节字符串扩展"
+
+#: classes/support/class-wpml-st-support-info-filter.php:28
+msgid "Loaded"
+msgstr "已装载"
+
+#: classes/support/class-wpml-st-support-info-filter.php:28
+msgid "Not loaded"
+msgstr "未加载"
+
+#: classes/support/class-wpml-st-support-info-filter.php:31
+msgid "Multibyte String extension is required for WPML String Translation."
+msgstr "WPML 字符串翻译需要多字节字符串扩展。"
+
+#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:48
+msgctxt "MO Import blocked short 1/3"
+msgid "WPML cannot replace .mo files because of technical problems in the String Translation table."
+msgstr "由于字符串翻译表的技术问题，WPML 无法替换 .mo 文件。"
+
+#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:54
+msgctxt "MO Import blocked short 2/3"
+msgid "WPML support team knows how to fix it."
+msgstr "WPML 支持团队知道如何解决这个问题。"
+
+#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:61
+msgctxt "MO Import blocked short 3/3"
+msgid "Please add a message in the relevant <a href=\"%s\" target=\"_blank\" >support thread</a> and we'll fix it for you."
+msgstr "请在相关 <a href=\"%s\" target=\"_blank\" >支持主题</a> 中添加一条信息，我们会为您修复。"
+
+#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:73
+msgctxt "MO Import blocked 1/4"
+msgid "There is a problem with the String Translation table in your site."
+msgstr "您网站中的字符串翻译表有问题。"
+
+#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:79
+msgctxt "MO Import blocked 2/4"
+msgid "This problem is not causing a problem running the site right now, but can become a critical issue in the future."
+msgstr "这个问题现在不会给网站运行带来问题，但将来可能会成为一个关键问题。"
+
+#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:85
+msgctxt "MO Import blocked 3/4"
+msgid "WPML support team knows how to fix it."
+msgstr "WPML 支持团队知道如何解决这个问题。"
+
+#: classes/translations-file-scan/wpml-st-translations-file-scan-ui-block.php:92
+msgctxt "MO Import blocked 4/4"
+msgid "Please add a message in the relevant <a href=\"%s\" target=\"_blank\">support thread</a> and we'll fix it for you."
+msgstr "请在相关 <a href=\"%s\" target=\"_blank\">支持主题</a> 中添加一条信息，我们会为您修复。"
+
+#: classes/Troubleshooting/BackendHooks.php:33
+msgid "Show custom MO Files Pre-generation dialog box"
+msgstr "显示自定义MO文件预生成对话框"
+
+#: classes/Troubleshooting/BackendHooks.php:40
+msgid "Cleanup and optimize string tables"
+msgstr "清理和优化字符串表"
+
+#: classes/Troubleshooting/BackendHooks.php:41
+msgid "Cleanup and optimization completed!"
+msgstr "已完成清理和优化！"
+
+#: classes/Troubleshooting/BackendHooks.php:46
+msgid "Check for string issues"
+msgstr "检查字符串问题"
+
+#: classes/upgrade/class-wpml-st-upgrade-migrate-originals.php:43
+msgid "WPML needs to update the database. This update will help improve WPML's performance when fetching translated strings."
+msgstr "WPML 需要更新数据库。此更新将有助于提高 WPML 在获取翻译字符串时的性能。"
+
+#: classes/upgrade/class-wpml-st-upgrade-migrate-originals.php:45
+msgid "Update Now"
+msgstr "立即更新"
+
+#: classes/upgrade/class-wpml-st-upgrade-migrate-originals.php:51
+msgid "The database has been updated."
+msgstr "数据库已更新。"
+
+#: classes/upgrade/class-wpml-st-upgrade-migrate-originals.php:53
+#: menu/string-translation.php:1089
+msgid "Close"
+msgstr "关闭"
+
+#: classes/upgrade/repair-schema/wpml-st-repair-strings-schema.php:84
+msgid "We have detected a problem with some tables in the database. Please contact %1$sWPML support%2$s to get this fixed."
+msgstr "我们检测到数据库中的某些表格存在问题。请联系 %1$sWPML 支持%2$s 以获得修复。"
+
+#: inc/auto-download-locales.php:140
+msgid "Updated %s translation is available"
+msgstr "更新后的 %s 译文已发布"
+
+#: inc/auto-download-locales.php:144
+msgid "Review changes and update"
+msgstr "审查变更和更新"
+
+#: inc/auto-download-locales.php:153
+msgid "No updates found."
+msgstr "未找到更新信息。"
+
+#: inc/auto-download-locales.php:209
+msgid "Failed downloading the language information file."
+msgstr "下载语言信息文件失败。"
+
+#: inc/auto-download-locales.php:210
+msgid "Errors: %s"
+msgstr "错误： %s"
+
+#: inc/auto-download-locales.php:212
+msgid "Failed downloading the language information file. Please go back and try a little later."
+msgstr "下载语言信息文件失败。请稍后再试。"
+
+#: inc/functions.php:1134
+msgid "Translations for strings updated"
+msgstr "字符串的翻译已更新"
+
+#: inc/gettext/wpml-po-import.class.php:89
+msgid "No string found"
+msgstr "未找到字符串"
+
+#: inc/gettext/wpml-string-scanner.class.php:82
+msgid "Scan successful: WPML found %s strings."
+msgstr "扫描成功：WPML找到%s个字符串。"
+
+#: inc/gettext/wpml-string-scanner.class.php:83
+msgid "The following files were processed:"
+msgstr "处理了以下文件"
+
+#: inc/gettext/wpml-string-scanner.class.php:90
+msgid " They were added to the translations table."
+msgstr "它们已添加到翻译表中。"
+
+#: inc/gettext/wpml-theme-string-scanner.class.php:36
+msgid "Scanning file: %s"
+msgstr "扫描文件： %s"
+
+#: inc/gettext/wpml-theme-string-scanner.class.php:41
+msgid "Skipping file: %s"
+msgstr "跳过文件： %s"
+
+#: inc/package-translation/inc/wpml-package-translation-helper.class.php:665
+msgid "Some of the strings selected belong to packages. You can only change the language of these strings if all strings in the packages are selected."
+msgstr "选择的某些字符串属于软件包。只有选择了软件包中的所有字符串，才能更改这些字符串的语言。"
+
+#: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:35
+msgid "Package Management"
+msgstr "软件包管理"
+
+#: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:36
+#: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:37
+msgid "Display packages for this kind:"
+msgstr "这种显示套餐："
+
+#: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:65
+msgid "Delete Selected Packages"
+msgstr "删除选定的软件包"
+
+#: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:68
+msgid ""
+"Are you sure you want to delete these packages?\n"
+"Their strings and translations will be deleted too."
+msgstr "您确定要删除这些软件包吗？\n它们的字符串和翻译也将被删除。"
+
+#: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:98
+msgid "Select All"
+msgstr "选择所有"
+
+#: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:102
+msgid "Kind"
+msgstr "种类"
+
+#: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:104
+msgid "Info"
+msgstr "信息"
+
+#: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:110
+msgid "Contains %s strings"
+msgstr "包含 %s 字符串"
+
+#: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:112
+msgid "Translation is in progress"
+msgstr "翻译中"
+
+#: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:114
+msgid "Default package language"
+msgstr "默认软件包语言"
+
+#: inc/package-translation/inc/wpml-package-translation-html-packages.class.php:123
+msgid "No packages found"
+msgstr "未找到软件包"
+
+#: inc/package-translation/inc/wpml-package-translation-metabox.class.php:76
+msgid "WPML Translation"
+msgstr "Wpml 翻译"
+
+#: inc/package-translation/inc/wpml-package-translation-metabox.class.php:78
+msgid "Send to translation"
+msgstr "发送到翻译"
+
+#: inc/package-translation/inc/wpml-package-translation-metabox.class.php:80
+msgid "Translate strings"
+msgstr "翻译字符串"
+
+#: inc/package-translation/inc/wpml-package-translation-metabox.class.php:84
+msgid "Translation status:"
+msgstr "翻译状态："
+
+#: inc/package-translation/inc/wpml-package-translation-metabox.class.php:86
+msgid "Language of this %1$s is %2$s"
+msgstr "%1$s 的语言是% 2$s"
+
+#: inc/package-translation/inc/wpml-package-translation-metabox.class.php:89
+msgid "There is nothing to translate."
+msgstr "没什么好翻译的。"
+
+#: inc/package-translation/inc/wpml-package-translation-metabox.class.php:394
+msgid "In progress"
+msgstr "进行中"
+
+#: inc/package-translation/inc/wpml-package-translation-metabox.class.php:400
+msgid "Complete"
+msgstr "完成"
+
+#: inc/package-translation/inc/wpml-package-translation-metabox.class.php:411
+msgid "Needs update"
+msgstr "需要更新"
+
+#: inc/package-translation/inc/wpml-package-translation-metabox.class.php:441
+msgid "In translation basket"
+msgstr "翻译篮"
+
+#: inc/package-translation/inc/wpml-package-translation-tm.class.php:216
+msgid ""
+"You cannot add packages in this language to the basket since it already contains posts, packages or strings of another source language!\n"
+"\t\t\t\t\tEither submit the current basket and then add the post or delete the posts of differing language in the current basket"
+msgstr "您不能向篮子中添加该语言的软件包，因为篮子中已经包含了另一种源语言的帖子、软件包或字符串！\n\t\t\t\t\t 要么提交当前篮子，然后添加帖子，要么删除当前篮子中不同语言的帖子。"
+
+#: inc/package-translation/inc/wpml-package-translation-tm.class.php:229
+msgid "Please select at least one language to translate into."
+msgstr "请至少选择一种语言进行翻译。"
+
+#: inc/package-translation/inc/wpml-package-translation-tm.class.php:248
+msgid "Please select at least one document to translate."
+msgstr "请至少选择一份文件进行翻译。"
+
+#: inc/package-translation/inc/wpml-package-translation-tm.class.php:340
+msgid "Post \"%1$s\" will be ignored for %2$s, because translation is already in progress."
+msgstr "对于%2$s ，帖子 \" %1$s\" 将被忽略，因为翻译已经在进行中。"
+
+#: inc/package-translation/inc/wpml-package-translation-tm.class.php:353
+msgid "Post \"%1$s\" will be ignored for %2$s, because translation is already waiting for translator."
+msgstr "对于%2$s ，帖子 \" %1$s\" 将被忽略，因为翻译已在等待译员。"
+
+#: inc/package-translation/inc/wpml-package-translation-ui.class.php:65
+#: inc/package-translation/inc/wpml-package-translation-ui.class.php:66
+msgid "Packages"
+msgstr "套餐"
+
+#: inc/package-translation/inc/wpml-package-translation.class.php:765
+msgid "WPML Package Translation is active but requires both the <a href=\"%s\">WPML core</a> and WPML String Translation plugins to function properly."
+msgstr "WPML包翻译已激活，但需要同时安装<a href=\"%s\">WPML核心</a>和WPML字符串翻译插件才能正常运行。"
+
+#: inc/wpml-localization.class.php:205
+msgid "No TextDomain"
+msgstr "无文本域"
+
+#: inc/wpml-localization.class.php:235
+msgid "Translate strings in %s"
+msgstr "翻译字符串 %s"
+
+#: inc/wpml-localization.class.php:236
+msgid "All strings in %s"
+msgstr "中的所有字符串 %s"
+
+#: inc/wpml-string-translation.class.php:443
+#: inc/wpml-string-translation.class.php:444
+msgid "String Translation"
+msgstr "字符串翻译"
+
+#: inc/wpml-string-translation.class.php:486
+msgid "Show page builder packages"
+msgstr "显示页面构建器包"
+
+#: inc/wpml-string-translation.class.php:508
+msgid "Configure"
+msgstr "配置"
+
+#: inc/wpml-string-translation.class.php:537
+msgid "Scan strings in themes, plugins and WordPress"
+msgstr "扫描主题、插件和WordPress中的字符串"
+
+#: inc/wpml-string-translation.class.php:545
+msgid "Status"
+msgstr "状态"
+
+#: inc/wpml-string-translation.class.php:547
+msgid "Action"
+msgstr "操作"
+
+#: inc/wpml-string-translation.class.php:549
+msgid "Strings that need translation"
+msgstr "需要翻译的字符串"
+
+#: inc/wpml-string-translation.class.php:575
+msgid "Scan selected components for strings"
+msgstr "扫描选定组件的字符串"
+
+#: inc/wpml-string-translation.class.php:612
+msgid "WPML could not detect the translation files (.mo) for %s. To fix this, visit your site's frontend in a secondary language."
+msgid_plural "WPML could not detect the translation files (.mo) for %s and %s. To fix this, visit your site's frontend in a secondary language."
+msgstr[0] "WPML无法检测到%s的翻译文件（.mo）。要解决此问题，请以次要语言访问您网站的前端。"
+msgstr[1] "WPML无法检测到%s和%s的翻译文件（.mo）。要解决此问题，请以次要语言访问您网站的前端。"
+
+#: inc/wpml-string-translation.class.php:646
+msgid "This will load the translation files and WPML will be able to scan them."
+msgstr "这将加载翻译文件，WPML将能够扫描它们。"
+
+#: inc/wpml-string-translation.class.php:667
+msgid "Scan the selected components to make new texts available for translation."
+msgstr "扫描选定的组件以使新文本可用于翻译。"
+
+#: inc/wpml-string-translation.class.php:671
+msgid "Updated or new translation files detected"
+msgstr "检测到更新或新的翻译文件"
+
+#: inc/wpml-string-translation.class.php:672
+msgid "WPML has found new or updated translation (.mo) files and needs to scan them to find translatable strings."
+msgstr "WPML已发现新的或更新的翻译（.mo）文件，需要扫描它们以查找可翻译的字符串。"
+
+#: inc/wpml-string-translation.class.php:673
+msgid "Select affected components"
+msgstr "选择受影响的组件"
+
+#: menu/auto-download-mo.php:41
+msgid "%d new translation was added."
+msgid_plural "%d new translations were added."
+msgstr[0] "%d 增加了新的译文。"
+msgstr[1] "%d 增加了新的译文。"
+
+#: menu/auto-download-mo.php:58
+msgid "%d translation was updated."
+msgid_plural "%d translations were updated."
+msgstr[0] "%d 翻译已更新。"
+msgstr[1] "%d 更新了译文。"
+
+#: menu/auto-download-mo.php:65
+msgid "No action performed. Please select the strings that you need to update or add."
+msgstr "未执行任何操作。请选择需要更新或添加的字符串。"
+
+#: menu/auto-download-mo.php:75
+msgid "Auto-download WordPress translations"
+msgstr "自动下载 WordPress 翻译"
+
+#: menu/auto-download-mo.php:79
+msgid "Success!"
+msgstr "成功！"
+
+#: menu/auto-download-mo.php:87
+#: menu/auto-download-mo.php:214
+msgid "Check other languages"
+msgstr "检查其他语言"
+
+#: menu/auto-download-mo.php:91
+msgid "Missing version number for translation."
+msgstr "翻译版本号缺失。"
+
+#: menu/auto-download-mo.php:95
+msgid "Invalid language: %s"
+msgstr "语言无效： %s"
+
+#: menu/auto-download-mo.php:108
+msgid "This update includes %d new strings and %d updated strings. You can review the strings below. Then, go to the <a%s>bottom of this page</a> and click on the Proceed button."
+msgstr "本次更新包括 %d 新字符串和 %d 更新字符串。您可以查看下面的字符串。然后，转到 <a%s>本页底部</a> 并单击 \"继续 \"按钮。"
+
+#: menu/auto-download-mo.php:122
+msgid "Updated translations (%d)"
+msgstr "更新翻译 (%d)"
+
+#: menu/auto-download-mo.php:129
+#: menu/auto-download-mo.php:162
+msgid "Existing translation"
+msgstr "现有翻译"
+
+#: menu/auto-download-mo.php:130
+#: menu/auto-download-mo.php:163
+msgid "New translation"
+msgstr "新译文"
+
+#: menu/auto-download-mo.php:171
+msgid "New translations (%d)"
+msgstr "新译文 (%d)"
+
+#: menu/auto-download-mo.php:176
+#: menu/auto-download-mo.php:194
+msgid "Translation"
+msgstr "翻译"
+
+#: menu/auto-download-mo.php:200
+msgid "Add the new translations."
+msgstr "添加新的翻译。"
+
+#: menu/auto-download-mo.php:206
+msgid "Proceed"
+msgstr "继续"
+
+#: menu/auto-download-mo.php:213
+msgid "There is nothing to be updated or to be added."
+msgstr "没有任何内容需要更新或添加。"
+
+#: menu/string-translation-translate-options.php:2
+msgid "Admin Texts Translation"
+msgstr "管理文本翻译"
+
+#: menu/string-translation-translate-options.php:13
+msgid "Translate texts you can customize from the WordPress admin but which appear on the front-end."
+msgstr "翻译您可以从WordPress管理员自定义但在前端显示的文本。"
+
+#: menu/string-translation-translate-options.php:16
+msgid "This includes strings like footer text, copyright notices, plugin options and settings, time format, widget texts, and more."
+msgstr "这包括页脚文本、版权声明、插件选项和设置、时间格式、小部件文本等字符串。"
+
+#: menu/string-translation-translate-options.php:19
+msgid "Learn more about %1$stranslating admin and settings strings.%2$s"
+msgstr "了解更多关于%1$s翻译管理员和设置字符串的信息。%2$s"
+
+#: menu/string-translation-translate-options.php:29
+msgid "Return to String Translation"
+msgstr "返回字符串翻译"
+
+#: menu/string-translation.php:101
+msgid "This is the list of strings that are not used or they are linked to wrong translation data."
+msgstr "这是未使用或链接到错误翻译数据的字符串列表。"
+
+#: menu/string-translation.php:113
+msgid "These are the strings that we found in your .po file. Please carefully review them. Then, click on the 'add' or 'cancel' buttons at the %1$sbottom of this screen%2$s. You can exclude individual strings by clearing the check boxes next to them."
+msgstr "这些是我们在您的 .po 文件中发现的字符串。请仔细查看。然后，点击 %1$s底部的 \"添加 \"或 \"取消 \"按钮%2$s 。您可以清除个别字符串旁边的复选框，将其排除在外。"
+
+#: menu/string-translation.php:174
+msgid "Name: %s"
+msgstr "名称： %s"
+
+#: menu/string-translation.php:185
+msgid "Add selected strings"
+msgstr "添加选定的字符串"
+
+#: menu/string-translation.php:192
+msgid "Display:"
+msgstr "显示屏"
+
+#: menu/string-translation.php:203
+msgid "All strings"
+msgstr "所有弦乐"
+
+#: menu/string-translation.php:205
+msgid "Translation needed"
+msgstr "需要翻译"
+
+#: menu/string-translation.php:207
+msgid "Partial Translation"
+msgstr "部分翻译"
+
+#: menu/string-translation.php:208
+msgid "Auto-registered, translation needed"
+msgstr "自动注册，需要翻译"
+
+#: menu/string-translation.php:214
+msgid "Search for:"
+msgstr "搜索"
+
+#: menu/string-translation.php:216
+msgid "Search"
+msgstr "搜索"
+
+#: menu/string-translation.php:232
+msgid "Exact match"
+msgstr "完全匹配"
+
+#: menu/string-translation.php:246
+msgid "Search in both the original language and in translations. Searching in translations may take a bit of time."
+msgstr "在原始语言和翻译中搜索。在翻译中搜索可能需要一些时间。"
+
+#: menu/string-translation.php:248
+msgid "Include translations"
+msgstr "包括翻译"
+
+#: menu/string-translation.php:255
+msgid "In domain:"
+msgstr "在领域内："
+
+#: menu/string-translation.php:260
+msgid "All domains"
+msgstr "所有领域"
+
+#: menu/string-translation.php:279
+msgid "With Priority:"
+msgstr "有优先权："
+
+#: menu/string-translation.php:280
+msgid "All Translation Priorities"
+msgstr "所有翻译优先事项"
+
+#: menu/string-translation.php:293
+msgid "Filter"
+msgstr "筛选"
+
+#: menu/string-translation.php:296
+msgid "Showing only strings that contain %s"
+msgstr "只显示包含 %s"
+
+#: menu/string-translation.php:298
+msgid "x &nbsp;Clear filters"
+msgstr "x &nbsp;清除筛选器"
+
+#: menu/string-translation.php:309
+msgid "Can't find the strings you're looking to translate? Add more strings for translation."
+msgstr "找不到您要翻译的字符串？添加更多字符串以供翻译。"
+
+#: menu/string-translation.php:311
+#: menu/string-translation.php:640
+#: menu/string-translation.php:715
+#: menu/string-translation.php:735
+#: menu/string-translation.php:870
+#: menu/string-translation.php:888
+#: menu/string-translation.php:917
+#: menu/string-translation.php:936
+#: menu/string-translation.php:1015
+msgid "Click to toggle"
+msgstr "点击切换"
+
+#: menu/string-translation.php:324
+msgid "Strings in the theme and plugins"
+msgstr "主题和插件中的字符串"
+
+#: menu/string-translation.php:330
+msgid "Translate front-end texts you can customize from the WordPress admin like footer text, copyright notices, plugin options and settings, time format, widget texts, and more."
+msgstr "翻译您可以从WordPress管理员自定义的前端文本，如页脚文本、版权声明、插件选项和设置、时间格式、小部件文本等。"
+
+#: menu/string-translation.php:331
+msgid "Translating Strings From Admin and Settings"
+msgstr "翻译来自管理员和设置的字符串"
+
+#: menu/string-translation.php:335
+msgid "Translate texts in admin screens"
+msgstr "翻译管理界面的文本"
+
+#: menu/string-translation.php:342
+#: menu/string-translation.php:347
+#: menu/string-translation.php:353
+msgid "Translate User Meta Information"
+msgstr "翻译用户元信息"
+
+#: menu/string-translation.php:343
+msgid "Making User Meta Information Translatable"
+msgstr "使用户元信息可翻译"
+
+#: menu/string-translation.php:356
+msgid "Data saved"
+msgstr "数据已保存"
+
+#: menu/string-translation.php:360
+msgid "WPML allows you to translate user information like the name, nickname, biography, and more."
+msgstr "WPML允许您翻译用户信息，如姓名、昵称、个人简介等。"
+
+#: menu/string-translation.php:363
+msgid "Select the user roles whose information you want to make translatable and then use the String Translation page to translate it."
+msgstr "选择您想要使其信息可翻译的用户角色，然后使用字符串翻译页面来翻译它。"
+
+#: menu/string-translation.php:367
+msgid "Learn more about %1$stranslating user meta information.%2$s"
+msgstr "了解更多关于%1$s翻译用户元信息的信息。%2$s"
+
+#: menu/string-translation.php:394
+msgid "Select all"
+msgstr "选择所有"
+
+#: menu/string-translation.php:432
+msgid "Languages of domains"
+msgstr "领域语言"
+
+#: menu/string-translation.php:488
+msgid "Display %d results per page"
+msgstr "每页显示 %d 结果"
+
+#: menu/string-translation.php:517
+msgid "Displaying %1$s&#8211;%2$s of %3$s"
+msgstr "显示 %1$s&#8211;%2$s of %3$s"
+
+#: menu/string-translation.php:531
+msgid "Strings per page:"
+msgstr "每页字符串："
+
+#: menu/string-translation.php:555
+msgid "Display all results"
+msgstr "显示所有结果"
+
+#: menu/string-translation.php:573
+msgid "You have selected strings belonging to a package. Please select all strings from the affected package or unselect these strings."
+msgstr "您选择了属于某个软件包的字符串。请选择受影响软件包中的所有字符串或取消选择这些字符串。"
+
+#: menu/string-translation.php:578
+msgid "Selected strings are not in the site's default language and will not be translated automatically if you're using the \"Translate Everything Automatically\" mode. Instead, after sending them for translation here, you need to go to the WPML -> Translations page and translate them manually."
+msgstr "如果您使用的是 \"自动翻译所有内容\" 模式，所选字符串不是网站默认语言，因此不会自动翻译。相反，在发送到这里进行翻译后，您需要转到 WPML -> 翻译页面并手动翻译。"
+
+#: menu/string-translation.php:583
+msgid ""
+"Are you sure you want to delete these strings?\n"
+"Their translations will be deleted too."
+msgstr "您确定要删除这些字符串吗？\n它们的翻译也将被删除。"
+
+#: menu/string-translation.php:584
+msgid "WPML could not delete the strings"
+msgstr "WPML 无法删除字符串"
+
+#: menu/string-translation.php:587
+msgid "Delete selected strings"
+msgstr "删除所选字符串"
+
+#: menu/string-translation.php:629
+msgid "Auto register untranslated strings"
+msgstr "自动注册未翻译的字符串"
+
+#: menu/string-translation.php:634
+msgid "This feature is disabled. %1$sClick here to enable it.%2$s"
+msgstr "此功能已禁用。%1$s点击此处启用。%2$s"
+
+#: menu/string-translation.php:656
+msgid "Untranslated strings that I encounter while logged in"
+msgstr "我在登录时遇到的未翻译字符串"
+
+#: menu/string-translation.php:667
+msgid "Untranslated strings that all logged in, logged out users, and site visitors encounter"
+msgstr "所有登录用户、未登录用户和网站访客遇到的未翻译字符串"
+
+#: menu/string-translation.php:677
+msgid "Disable auto register of untranslated strings"
+msgstr "禁用未翻译字符串的自动注册"
+
+#: menu/string-translation.php:685
+msgid "Save settings"
+msgstr "保存设置"
+
+#: menu/string-translation.php:713
+msgid "Translate strings automatically, with your translators or a translation service"
+msgstr "自动翻译字符串，使用您的翻译人员或翻译服务"
+
+#: menu/string-translation.php:722
+msgid "Use WPML's %1$sTranslation Dashboard%2$s to send strings to translation."
+msgstr "使用WPML的%1$s翻译仪表板%2$s发送字符串进行翻译。"
+
+#: menu/string-translation.php:733
+msgid "Import / export .po"
+msgstr "导入/ 导出 .po"
+
+#: menu/string-translation.php:743
+msgid "Import"
+msgstr "导入"
+
+#: menu/string-translation.php:748
+msgid ".po file :"
+msgstr ".po文件："
+
+#: menu/string-translation.php:759
+msgid "Also create translations according to the .po file"
+msgstr "还可根据 .po 文件创建翻译"
+
+#: menu/string-translation.php:775
+msgid "Select what the strings are for:"
+msgstr "选择字符串的用途："
+
+#: menu/string-translation.php:793
+msgid "New"
+msgstr "新建"
+
+#: menu/string-translation.php:794
+msgid "select from existing"
+msgstr "从现有数据中选择"
+
+#: menu/string-translation.php:801
+#: menu/string-translation.php:854
+msgid "Submit"
+msgstr "提交"
+
+#: menu/string-translation.php:802
+msgid "Please enter a domain!"
+msgstr "请输入域名！"
+
+#: menu/string-translation.php:803
+msgid "Please select the .po file to upload!"
+msgstr "请选择要上传的 .po 文件！"
+
+#: menu/string-translation.php:811
+msgid "Export strings into .po/.pot file"
+msgstr "将字符串导出为 .po/.pot 文件"
+
+#: menu/string-translation.php:816
+msgid "PO export may be glitchy. We are working to fix it."
+msgstr "PO导出可能会出现故障。我们正在努力修复。"
+
+#: menu/string-translation.php:824
+msgid "Select domain:"
+msgstr "选择域："
+
+#: menu/string-translation.php:839
+msgid "Also include translations"
+msgstr "还包括翻译"
+
+#: menu/string-translation.php:868
+msgid "Remove strings by domain"
+msgstr "按域移除字符串"
+
+#: menu/string-translation.php:886
+msgid "Set the original language of themes and plugins"
+msgstr "设置主题和插件的原始语言"
+
+#: menu/string-translation.php:895
+msgid "By default WPML assumes that strings in themes and plugins are in English. If you're using a theme or plugin that has strings in other languages you can set the language of text-domains."
+msgstr "默认情况下，WPML假设主题和插件中的字符串是英语。如果您使用的主题或插件包含其他语言的字符串，您可以设置文本域的语言。"
+
+#: menu/string-translation.php:915
+msgid "Not seeing strings that you are looking for?"
+msgstr "没有看到您要查找的字符串？"
+
+#: menu/string-translation.php:924
+msgid "You can add to the String Translations table texts that appear in the admin screens of the theme and plugins. To do this, go to %1$sAdmin Texts Translation%2$s"
+msgstr "您可以将主题和插件管理界面中出现的文本添加到字符串翻译表中。要执行此操作，请转到%1$s管理文本翻译%2$s"
+
+#: menu/string-translation.php:934
+msgid "Translate User properties"
+msgstr "翻译用户属性"
+
+#: menu/string-translation.php:962
+msgid "none"
+msgstr "无"
+
+#: menu/string-translation.php:967
+msgid "Choose the user roles you would like to make translatable: %s"
+msgstr "选择您希望使其可翻译的用户角色：%s"
+
+#: menu/string-translation.php:994
+#: menu/string-translation.php:996
+msgid "Edit user roles"
+msgstr "编辑用户角色"
+
+#: menu/string-translation.php:1000
+msgid "Translating User Meta Information With WPML"
+msgstr "使用WPML翻译用户元信息"
+
+#: menu/string-translation.php:1013
+#: menu/string-translation.php:1046
+msgid "Track where strings appear on the site"
+msgstr "跟踪字符串在网站上出现的位置"
+
+#: menu/string-translation.php:1024
+msgid ""
+"This feature helps you find where the text (strings) appears on your site, so you can translate it more easily. \n"
+"\t\t\t\t\t\t\t\t\t\t\tIt may slow down your site while it's running, so it's best to use it only during development. \n"
+"\t\t\t\t\t\t\t\t\t\t\tRemember to turn it off when your site goes live to keep things running smoothly."
+msgstr "此功能可帮助您找到文本（字符串）在您网站上的出现位置，以便更轻松地进行翻译。\n\t\t\t\t\t\t\t\t\t\t	在运行时可能会减慢您的网站速度，因此最好仅在开发期间使用它。\n\t\t\t\t\t\t\t\t\t\t	请记住在您的网站上线时关闭它，以保持运行顺畅。"
+
+#: menu/string-translation.php:1033
+msgid "Learn more about finding strings"
+msgstr "了解更多关于查找字符串的信息"
+
+#: menu/string-translation.php:1053
+msgid "Highlight color for strings"
+msgstr "字符串的高亮颜色"
+
+#: menu/string-translation.php:1087
+msgid "String Tracking Enabled"
+msgstr "字符串跟踪已启用"
+
+#: menu/string-translation.php:1088
+msgid "OK"
+msgstr "确定"
+
+#: menu/string-translation.php:1092
+msgid "WPML will now track where your site's text (strings) appears as you browse both the admin and front-end."
+msgstr "WPML现在将在您浏览管理后台和前端时跟踪您网站文本（字符串）的出现位置。"
+
+#: menu/string-translation.php:1099
+msgid "Be sure to turn off this feature before your site goes live to avoid performance issues."
+msgstr "请确保在您的网站上线之前关闭此功能，以避免性能问题。"
+
+#: menu/_slug-translation-options.php:7
+msgid "Slug translations"
+msgstr "鼻涕虫翻译"
+
+#: menu/_slug-translation-options.php:17
+msgid "Translate base slugs of custom post types and taxonomies (via WPML -> Taxonomy translation)."
+msgstr "翻译自定义文章类型和分类法的基本别名（通过WPML -> 分类法翻译）。"
+
+#: menu/_slug-translation-options.php:23
+msgid "Save"
+msgstr "保存"
+
+#: StringTranslation/Infrastructure/StringPackage/Repository/WidgetPackageRepository.php:49
+msgid "Inactive Widgets"
+msgstr "未激活的小工具"
+
+#: StringTranslation/Infrastructure/StringPackage/Repository/WidgetPackageRepository.php:57
+msgid "Widgets"
+msgstr "小工具"

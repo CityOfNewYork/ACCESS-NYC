@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/main-ui/components/Actions.js:46
+msgid "Edit"
+msgstr "Biên tập"
+
+#: src/js/main-ui/components/Actions.js:57
+msgid "Shift+Tab"
+msgstr "Tab Shift+"
+
+#: src/js/main-ui/components/Actions.js:62
+msgid "Tab"
+msgstr "Chuyển hướng"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:102
+msgid "Translation to:"
+msgstr "Bản dịch sang:"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:121
+msgid "Copy from original"
+msgstr "Sao chép từ bản gốc"
+
+#: src/js/main-ui/components/EditTranslationPopup.js:136
+msgid "Use Shift+Enter to add a new line."
+msgstr "Sử dụng Shift+Enter để thêm dòng mới."
+
+#: src/js/main-ui/components/EditTranslationPopup.js:95
+msgid "Original:"
+msgstr "Nguyên bản:"
+
+#: src/js/main-ui/components/LanguagesCell.js:166
+msgid "Add %s translation"
+msgstr "Thêm vào %s dịch"
+
+#: src/js/main-ui/components/LanguagesCell.js:185
+msgid "Edit %s translation"
+msgstr "Biên tập %s dịch"
+
+#: src/js/main-ui/components/LanguagesCell.js:61
+msgid "Original language %s"
+msgstr "Ngôn ngữ gốc %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:68
+msgid "Waiting for translator to %s"
+msgstr "Đang chờ người dịch %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:75
+msgid "Translation in progress to %s"
+msgstr "Đang dịch sang %s"
+
+#: src/js/main-ui/components/LanguagesCell.js:82
+msgid "In basket for translation to %s"
+msgstr "Trong giỏ để dịch sang %s"
+
+#: src/js/main-ui/components/notification.js:13
+msgid "Translation saved."
+msgstr "Đã lưu bản dịch."
+
+#: src/js/main-ui/components/notification.js:17
+msgid "Translation update failed."
+msgstr "Cập nhật bản dịch không thành công."

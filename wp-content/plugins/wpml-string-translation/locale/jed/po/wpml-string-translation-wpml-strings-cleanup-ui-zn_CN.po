@@ -1,0 +1,82 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/strings-cleanup/App.js:17
+msgid ""
+"Clean up the String Translation table by removing untranslated strings by "
+"domain."
+msgstr "按域删除未翻译的字符串，清理字符串翻译表。"
+
+#: src/js/admin-strings/texts.js:10
+msgid "Translated with PTC"
+msgstr "由PTC翻译"
+
+#: src/js/strings-cleanup/App.js:30
+#: src/js/strings-cleanup/components/CleanupModal.js:38
+msgid "Remove strings by domain"
+msgstr "按域删除字符串"
+
+#: src/js/strings-cleanup/components/CleanupButton.js:12
+msgid "Remove strings"
+msgstr "删除字符串"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:51
+msgid "Cancel"
+msgstr "取消"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:55
+msgid "Remove"
+msgstr "移除"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:61
+msgid ""
+"The String Translation table currently contains strings from the domains "
+"listed below. If you do not plan to translate strings from a particular "
+"domain, select it below to remove its untranslated strings from the String "
+"Translation table. Any strings that already have translations will still be "
+"available."
+msgstr "字符串翻译表目前包含来自下列域的字符串。如果不打算翻译某个域的字符串，请在下面选择该域，以从字符串翻译表中删除其未翻译的字符串。任何已经有翻译的字符串仍然可用。"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:66
+msgid "Search"
+msgstr "搜索"
+
+#: src/js/strings-cleanup/components/CleanupProgress.js:21
+msgid "Removing strings from String Translation table"
+msgstr "从字符串翻译表中删除字符串"
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:27
+msgid ""
+"To add strings back to the String Translation table, you may need to rescan "
+"translation files or register strings as translatable."
+msgstr "要将字符串添加回字符串翻译表，可能需要重新扫描翻译文件或将字符串注册为可翻译字符串。"
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:29
+msgid "Read more about "
+msgstr "了解更多 "
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:31
+msgid "scanning your site for strings and registering them as translatable."
+msgstr "扫描网站字符串，并将其注册为可翻译字符串。"
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:40
+msgid "Successfully removed strings"
+msgstr "成功移除字符串"
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:44
+msgid "OK, Great"
+msgstr "好的，很好"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:14
+msgid "Domain"
+msgstr "域名"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:18
+msgid "Strings count"
+msgstr "字符串计数"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:24
+msgid "Translated strings"
+msgstr "翻译字符串"

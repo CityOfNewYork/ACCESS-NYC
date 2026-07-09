@@ -28,7 +28,7 @@ class FieldGroup {
 	}
 
 	/**
-	 * @param int $id
+	 * @param  int $id
 	 *
 	 * @return int|null
 	 */
@@ -39,31 +39,9 @@ class FieldGroup {
 			return (int) Obj::prop( 'ID', $group );
 		} else {
 			$parentId = (int) Obj::prop( 'ID', get_post_parent( $id ) );
+
 			if ( $parentId ) {
 				return self::getId( $parentId );
-			}
-		}
-
-		return null;
-	}
-
-	/**
-	 * @param string $key
-	 *
-	 * @return string|null
-	 */
-	public static function getKey( $key ) {
-		$group = acf_get_field_group( $key );
-
-		if ( $group ) {
-			return Obj::prop( 'key', $group );
-		}
-
-		$field = acf_get_field( $key );
-		if ( $field ) {
-			$parentKey = Obj::prop( 'parent', $field );
-			if ( $parentKey ) {
-				return self::getKey( $parentKey );
 			}
 		}
 
@@ -78,8 +56,8 @@ class FieldGroup {
 	}
 
 	/**
-	 * @param int   $id
-	 * @param array $fieldTypes
+	 * @param  int   $id
+	 * @param  array $fieldTypes
 	 *
 	 * @return bool
 	 */

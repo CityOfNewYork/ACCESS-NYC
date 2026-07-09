@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/strings-cleanup/App.js:17
+msgid ""
+"Clean up the String Translation table by removing untranslated strings by "
+"domain."
+msgstr "도메인별로 번역되지 않은 문자열을 제거하여 문자열 번역 테이블을 정리합니다."
+
+#: src/js/strings-cleanup/App.js:30
+#: src/js/strings-cleanup/components/CleanupModal.js:38
+msgid "Remove strings by domain"
+msgstr "도메인별로 문자열 제거"
+
+#: src/js/strings-cleanup/components/CleanupButton.js:12
+msgid "Remove strings"
+msgstr "문자열 제거"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:51
+msgid "Cancel"
+msgstr "취소"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:55
+msgid "Remove"
+msgstr "제거하다"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:61
+msgid ""
+"The String Translation table currently contains strings from the domains "
+"listed below. If you do not plan to translate strings from a particular "
+"domain, select it below to remove its untranslated strings from the String "
+"Translation table. Any strings that already have translations will still be "
+"available."
+msgstr "문자열 번역 테이블에는 현재 아래 나열된 도메인의 문자열이 포함되어 있습니다. 특정 도메인의 문자열을 번역하지 않으려면 아래에서 해당 도메인을 선택하여 문자열 번역 테이블에서 번역되지 않은 문자열을 제거하세요. 이미 번역된 문자열은 계속 사용할 수 있습니다."
+
+#: src/js/strings-cleanup/components/CleanupModal.js:66
+msgid "Search"
+msgstr "찾다"
+
+#: src/js/strings-cleanup/components/CleanupProgress.js:21
+msgid "Removing strings from String Translation table"
+msgstr "문자열 번역 테이블에서 문자열 제거"
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:27
+msgid ""
+"To add strings back to the String Translation table, you may need to rescan "
+"translation files or register strings as translatable."
+msgstr "문자열 번역 테이블에 문자열을 다시 추가하려면 번역 파일을 다시 검색하거나 문자열을 번역 가능으로 등록해야 할 수도 있습니다."
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:29
+msgid "Read more about "
+msgstr "자세히 알아보기 "
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:31
+msgid "scanning your site for strings and registering them as translatable."
+msgstr "사이트에서 문자열을 검색하고 번역 가능한 것으로 등록합니다."
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:40
+msgid "Successfully removed strings"
+msgstr "문자열을 성공적으로 제거했습니다."
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:44
+msgid "OK, Great"
+msgstr "좋아요, 엄청난"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:14
+msgid "Domain"
+msgstr "도메인"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:18
+msgid "Strings count"
+msgstr "문자열 개수"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:24
+msgid "Translated strings"
+msgstr "번역된 문자열"

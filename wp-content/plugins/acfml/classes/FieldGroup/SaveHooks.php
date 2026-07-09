@@ -6,15 +6,10 @@ use ACFML\Helper\Fields;
 use WPML\FP\Fns;
 use WPML\FP\Obj;
 use WPML\LIB\WP\Hooks;
-use WPML\Element\API\Languages;
 use WPML\TM\Settings\CustomFieldChangeDetector;
 use function WPML\FP\spreadArgs;
 
 class SaveHooks implements \IWPML_Action {
-
-	// On 10, group settings might get stored in local JSON files:
-	// we need to update field translation settings before that.
-	const UPDATE_FIELD_GROUP_PRIORITY = 9;
 
 	/**
 	 * @var FieldNamePatterns $fieldNamePatterns
@@ -35,7 +30,7 @@ class SaveHooks implements \IWPML_Action {
 	}
 
 	public function add_hooks() {
-		Hooks::onAction( 'acf/update_field_group', self::UPDATE_FIELD_GROUP_PRIORITY )
+		Hooks::onAction( 'acf/update_field_group' )
 			->then( spreadArgs( [ $this, 'onUpdateFieldGroup' ] ) );
 	}
 
@@ -46,10 +41,9 @@ class SaveHooks implements \IWPML_Action {
 	 */
 	public function onUpdateFieldGroup( $fieldGroup ) {
 		$this->overwriteAllFieldPreferencesWithGroupMode( $fieldGroup );
-		$this->fieldNamePatterns->updateFieldNamePatterns( $fieldGroup );
+		$this->updateFieldNamePatterns( $fieldGroup );
 		$this->detectNonTranslatableLoc->process( $fieldGroup );
 		$this->maybeForceTranslationStatusProcessOnAttachedPosts( $fieldGroup );
-		$this->flushAcfCache( $fieldGroup );
 	}
 
 	/**
@@ -64,13 +58,32 @@ class SaveHooks implements \IWPML_Action {
 
 		$getFieldPreference = ModeDefaults::get( Mode::getMode( $fieldGroup ) );
 
-		$updateFieldTranslationPreference = Fns::tap(
-			function( $field ) use ( $getFieldPreference ) {
-				acf_update_field( Obj::assoc( 'wpml_cf_preferences', $getFieldPreference( $field ), wp_slash( $field ) ) );
-			}
-		);
+		$updateFieldTranslationPreference = Fns::tap( function( $field ) use ( $getFieldPreference ) {
+			acf_update_field( Obj::assoc( 'wpml_cf_preferences', $getFieldPreference( $field ), $field ) );
+		} );
 
 		Fields::iterate( acf_get_fields( $fieldGroup ), $updateFieldTranslationPreference, Fns::identity() );
+	}
+
+	/**
+	 * @param array $fieldGroup
+	 *
+	 * @return void
+	 */
+	private function updateFieldNamePatterns( $fieldGroup ) {
+		$namePatterns = wpml_collect();
+
+		if ( ! Mode::isAdvanced( $fieldGroup ) ) {
+			$getFieldNamePattern = function( $field, $fieldPattern ) use ( $namePatterns ) {
+				$namePatterns->push( $fieldPattern );
+
+				return $field;
+			};
+
+			Fields::iterate( acf_get_fields( $fieldGroup ), $getFieldNamePattern, Fns::identity() );
+		}
+
+		$this->fieldNamePatterns->updateGroup( $fieldGroup['ID'], $namePatterns->toArray() );
 	}
 
 	/**
@@ -85,24 +98,6 @@ class SaveHooks implements \IWPML_Action {
 				->toArray();
 
 			CustomFieldChangeDetector::notify( $fieldNames ); // @phpstan-ignore-line
-		}
-	}
-
-	/**
-	 * @param array $fieldGroup
-	 *
-	 * @return void
-	 */
-	private function flushAcfCache( $fieldGroup ) {
-		$active_languages = Languages::getActive();
-
-		wp_cache_delete( 'acf_get_field_group_posts', 'acf' );
-		wp_cache_delete( 'acf_get_field_group_post:key:' . $fieldGroup['key'], 'acf' );
-		wp_cache_delete( 'acf_get_field_posts:' . $fieldGroup['ID'], 'acf' );
-		if ( ! empty( $active_languages ) ) {
-			foreach ( $active_languages as $lang_code => $language ) {
-				wp_cache_delete( 'acf_get_field_posts:' . $fieldGroup['ID'] . ':' . $lang_code, 'acf' );
-			}
 		}
 	}
 }

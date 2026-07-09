@@ -3,57 +3,55 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);",
-            "lang": "ar"
+            "domain": "messages"
          },
          "Clean up the String Translation table by removing untranslated strings by domain.": [
-            "تنظيف جدول String Translation عن طريق إزالة السلاسل غير المترجمة حسب النطاق."
+            "قم بتنظيف جدول ترجمة السلسلة عن طريق إزالة السلاسل غير المترجمة حسب المجال."
          ],
          "Remove strings by domain": [
-            "إزالة السلاسل حسب النطاق"
+            "إزالة السلاسل حسب المجال"
          ],
          "Remove strings": [
             "إزالة السلاسل"
          ],
          "Cancel": [
-            "إلغاء"
+            "يلغي"
          ],
          "Remove": [
-            "إزالة"
+            "يزيل"
          ],
          "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
-            "يحتوي جدول String Translation حاليًا على سلاسل من النطاقات المدرجة أدناه. إذا كنت لا تخطط لترجمة سلاسل من نطاق معين، فحدده أدناه لإزالة سلاسله غير المترجمة من جدول String Translation. ستظل أي سلاسل تحتوي على ترجمات متاحة."
+            "يحتوي جدول ترجمة السلسلة حاليًا على سلاسل من المجالات المدرجة أدناه. إذا كنت لا تخطط لترجمة سلاسل من مجال معين، فحدده أدناه لإزالة سلاسله غير المترجمة من جدول ترجمة السلسلة. أي سلاسل تحتوي على ترجمات بالفعل ستظل متاحة."
          ],
          "Search": [
-            "بحث"
+            "يبحث"
          ],
          "Removing strings from String Translation table": [
-            "إزالة السلاسل من جدول String Translation"
+            "إزالة السلاسل من جدول ترجمة السلسلة"
          ],
          "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
-            "لإضافة السلاسل مرة أخرى إلى جدول String Translation، قد تحتاج إلى إعادة فحص ملفات الترجمة أو تسجيل السلاسل كقابلة للترجمة."
+            "لإضافة سلاسل مرة أخرى إلى جدول ترجمة السلسلة، قد تحتاج إلى إعادة فحص ملفات الترجمة أو تسجيل سلاسل باعتبارها قابلة للترجمة."
          ],
          "Read more about ": [
-            "اقرأ المزيد حول "
+            "اقرأ المزيد عن "
          ],
          "scanning your site for strings and registering them as translatable.": [
-            "فحص موقعك بحثًا عن السلاسل وتسجيلها كقابلة للترجمة."
+            "فحص موقعك بحثًا عن سلاسل وتسجيلها على أنها قابلة للترجمة."
          ],
          "Successfully removed strings": [
             "تمت إزالة السلاسل بنجاح"
          ],
          "OK, Great": [
-            "حسنًا، ممتاز"
+            "نعم ، عظيم"
          ],
          "Domain": [
-            "النطاق"
+            "اِختِصاص"
          ],
          "Strings count": [
             "عدد السلاسل"
          ],
          "Translated strings": [
-            "السلاسل المترجمة"
+            "سلاسل مترجمة"
          ]
       }
    }

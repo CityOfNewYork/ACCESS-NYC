@@ -8,9 +8,8 @@ interface Traversable {
 
 	/**
 	 * @param Transformer $transformer
-	 * @param string|null $context
 	 *
 	 * @return mixed
 	 */
-	public function traverse( Transformer $transformer, $context = null );
+	public function traverse( Transformer $transformer );
 }

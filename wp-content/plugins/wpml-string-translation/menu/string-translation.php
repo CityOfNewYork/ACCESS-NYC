@@ -1,7 +1,6 @@
 <?php
 
 use WPML\ST\Gettext\AutoRegisterSettings;
-use WPML\ST\StringsScanning\JS\SettingsHooks as JSScanSettingsHooks;
 use function WPML\Container\make;
 use WPML\UIPage;
 
@@ -331,9 +330,6 @@ wp_enqueue_style( 'wpml-tooltip', WPML_ST_URL . '/res/css/tooltip/tooltip.css', 
 								?>
 								<p class="link-wrap">
 									<a href="admin.php?page=<?php echo WPML_PLUGIN_FOLDER; ?>/menu/theme-localization.php" class="external-link"><?php esc_html_e( 'Strings in the theme and plugins', 'wpml-string-translation' ); ?></a>
-								</p>
-								<p class="link-wrap">
-									<a href="<?php echo JSScanSettingsHooks::getSettingsURL(); ?>" class="external-link"><?php esc_html_e( 'Strings in JavaScript files', 'wpml-string-translation' ); ?></a>
 								</p>
 								<p class="link-wrap">
 									<a
@@ -702,7 +698,7 @@ wp_enqueue_style( 'wpml-tooltip', WPML_ST_URL . '/res/css/tooltip/tooltip.css', 
 											<?php echo $auto_register_settings->getIsTypeDisabled() ? 'disabled="disabled"' : ""; ?>
 											/>
 											<span <?php echo $auto_register_settings->getIsTypeDisabled() ? 'class="wpml-disabled-text"' : ""; ?>>
-												<?php echo __('Also register strings from the website\'s back-end', 'wpml-string-translation'); ?>
+												<?php echo __('Also register strings from the website\'s back-end', 'sitepress'); ?>
 											</span>
 										</label>
 									</div>
@@ -932,7 +928,7 @@ wp_enqueue_style( 'wpml-tooltip', WPML_ST_URL . '/res/css/tooltip/tooltip.css', 
 										<input type="button"
 											   class="button-secondary wpml-button base-btn wpml-button--outlined"
 											   id="wpml-language-of-domains-link"
-											   value="<?php echo __( "Set the language of text-domains", "wpml-string-translation" ); ?>"
+											   value="<?php echo __( "Set the language of text-domains", "sitepress" ); ?>"
 										/>
 									</p>
 								</div>

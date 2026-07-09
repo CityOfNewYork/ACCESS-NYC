@@ -3,21 +3,19 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=1; plural=0;",
-            "lang": "ko_KR"
+            "domain": "messages"
          },
          "Edit": [
-            "편집"
+            "편집하다"
          ],
          "Shift+Tab": [
-            "Shift+Tab"
+            "Shift+탭"
          ],
          "Tab": [
-            "Tab"
+            "탭"
          ],
          "Translation to:": [
-            "번역 대상:"
+            "다음으로 번역:"
          ],
          "Copy from original": [
             "원본에서 복사"
@@ -26,28 +24,28 @@
             "새 줄을 추가하려면 Shift+Enter를 사용하세요."
          ],
          "Original:": [
-            "원본:"
+            "원래의:"
          ],
          "Add %s translation": [
-            "%s 번역 추가"
+            "추가하다 %s 번역"
          ],
          "Edit %s translation": [
-            "%s 번역 편집"
+            "편집하다 %s 번역"
          ],
          "Add %s translation (the string appears on the site and is not translated)": [
-            "%s 번역 추가 (문자열이 사이트에 표시되며 번역되지 않음)"
+            "%s 번역 추가(문자열이 사이트에 표시되며 번역되지 않음)"
          ],
          "Original language %s": [
-            "원본 언어 %s"
+            "원어 %s"
          ],
          "Waiting for translator to %s": [
-            "번역자가 %s을(를) 기다리는 중"
+            "번역가를 기다리는 중 %s"
          ],
          "Translation in progress to %s": [
-            "%s으로 번역 진행 중"
+            "번역 진행 중 %s"
          ],
          "In basket for translation to %s": [
-            "%s으로 번역할 바구니에 있음"
+            "번역할 장바구니에 담기 %s"
          ],
          "Translation saved.": [
             "번역이 저장되었습니다."

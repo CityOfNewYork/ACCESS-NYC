@@ -3,21 +3,19 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "it_IT"
+            "domain": "messages"
          },
          "Edit": [
             "Modifica"
          ],
          "Shift+Tab": [
-            "Shift+Tab"
+            "Shift+tab"
          ],
          "Tab": [
-            "Tab"
+            "Scheda"
          ],
          "Translation to:": [
-            "Traduzione in:"
+            "Traduzione a:"
          ],
          "Copy from original": [
             "Copia dall'originale"
@@ -29,31 +27,31 @@
             "Originale:"
          ],
          "Add %s translation": [
-            "Aggiungi traduzione %s"
+            "Aggiungi la traduzione di %s "
          ],
          "Edit %s translation": [
-            "Modifica traduzione %s"
+            "Modifica la traduzione di %s "
          ],
          "Add %s translation (the string appears on the site and is not translated)": [
-            "Aggiungi traduzione %s (la stringa appare sul sito e non è tradotta)"
+            "Aggiungi la traduzione di %s (la stringa appare sul sito e non viene tradotta)"
          ],
          "Original language %s": [
             "Lingua originale %s"
          ],
          "Waiting for translator to %s": [
-            "In attesa che il traduttore %s"
+            "In attesa del traduttore %s"
          ],
          "Translation in progress to %s": [
             "Traduzione in corso in %s"
          ],
          "In basket for translation to %s": [
-            "Nel carrello per la traduzione in %s"
+            "Nel cestino per la traduzione in %s"
          ],
          "Translation saved.": [
             "Traduzione salvata."
          ],
          "Translation update failed.": [
-            "Aggiornamento traduzione non riuscito."
+            "Aggiornamento della traduzione non riuscito."
          ]
       }
    }

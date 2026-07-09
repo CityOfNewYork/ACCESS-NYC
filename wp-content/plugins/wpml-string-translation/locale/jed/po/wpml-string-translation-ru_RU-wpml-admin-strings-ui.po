@@ -1,0 +1,103 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/admin-strings/texts.js:10
+msgid "Not included in String Translation"
+msgstr "Не включено в Перевод строки"
+
+#: src/js/admin-strings/texts.js:11
+msgid "Registered and locked"
+msgstr "Зарегистрировано и заблокировано"
+
+#: src/js/admin-strings/texts.js:13
+msgid "Text"
+msgstr "Текст"
+
+#: src/js/admin-strings/texts.js:14
+msgid "Numeric"
+msgstr "Числовой"
+
+#: src/js/admin-strings/texts.js:15
+msgid "All Types"
+msgstr "Все типы"
+
+#: src/js/admin-strings/texts.js:17
+msgid "Search"
+msgstr "Поиск"
+
+#: src/js/admin-strings/texts.js:19
+msgid "Communication error"
+msgstr "Ошибка связи"
+
+#: src/js/admin-strings/texts.js:20
+msgid "The action failed."
+msgstr "Действие не удалось."
+
+#: src/js/admin-strings/texts.js:22
+msgid "All (%d)"
+msgstr "Все (%d)"
+
+#: src/js/admin-strings/texts.js:23
+msgid "Included in String Translation (%d)"
+msgstr "Включено в перевод строк (%d)"
+
+#: src/js/admin-strings/texts.js:24
+msgid "Not included in String Translation (%d)"
+msgstr "Не включено в Перевод строк (%d)"
+
+#: src/js/admin-strings/texts.js:26
+msgid "This setting is locked by a WPML configuration file."
+msgstr "Эта настройка блокируется файлом конфигурации WPML."
+
+#: src/js/admin-strings/texts.js:28
+msgid "Option"
+msgstr "Вариант"
+
+#: src/js/admin-strings/texts.js:29
+msgid "Value"
+msgstr "Значение"
+
+#: src/js/admin-strings/texts.js:30
+msgid "Type"
+msgstr "Тип"
+
+#: src/js/admin-strings/texts.js:31
+msgid "State"
+msgstr "Государство"
+
+#: src/js/admin-strings/texts.js:34
+msgid "Export as a WPML configuration file"
+msgstr "Экспорт в файл конфигурации WPML"
+
+#: src/js/admin-strings/texts.js:35
+msgid "Cancel"
+msgstr "Отмена"
+
+#: src/js/admin-strings/texts.js:36
+msgid "Save the following to a wpml-config.xml in the root of your theme or plugin."
+msgstr "Сохраните следующее в файле wpml-config.xml в корне Вашей темы или плагина."
+
+#: src/js/admin-strings/texts.js:38
+msgid "No options found."
+msgstr "Никаких вариантов не найдено."
+
+#: src/js/admin-strings/texts.js:39
+msgid ""
+"Make sure you saved your theme options at least once. Some themes only add "
+"these to the wp_options table after the user explicitly saves changes to "
+"the theme defaults."
+msgstr "Убедитесь, что Вы сохранили параметры темы хотя бы один раз. Некоторые темы добавляют их в таблицу wp_options только после того, как пользователь явно сохранит изменения в настройках темы по умолчанию."
+
+#: src/js/admin-strings/texts.js:6
+msgid "Add to String Translation"
+msgstr "Добавьте к переводу строки"
+
+#: src/js/admin-strings/texts.js:7
+msgid "Remove from String Translation"
+msgstr "Удалите из перевода строки"
+
+#: src/js/admin-strings/texts.js:9
+msgid "Included in String Translation"
+msgstr "Включено в перевод строки"

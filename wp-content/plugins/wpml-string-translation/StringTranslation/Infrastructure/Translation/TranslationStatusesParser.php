@@ -47,7 +47,6 @@ class TranslationStatusesParser {
 				$values['reviewStatus']       = $job['review_status'];
 				$values['translated']         = $job['translated'];
 				$values['translatorId']       = $job['translator_id'];
-				$values['editorJobId']        = $job['editor_job_id'];
 
 			}
 
@@ -58,7 +57,6 @@ class TranslationStatusesParser {
 			$translationService = $values['translationService'] ?? 'local';
 			$editor             = $values['editor'] ?? null;
 			$translatorId       = isset( $values['translatorId'] ) && $values['translatorId'] !== 'NULL' ? (int) $values['translatorId'] : null;
-			$editorJobId        = isset( $values['editorJobId'] ) && $values['editorJobId'] !== 'NULL' ? (int) $values['editorJobId'] : null;
 
 			$method = null;
 			if ( $status === ICL_TM_DUPLICATE ) {
@@ -81,8 +79,7 @@ class TranslationStatusesParser {
 				$method,
 				$editor,
 				$isTranslated,
-				$translatorId,
-				$editorJobId
+				$translatorId
 			);
 		}
 

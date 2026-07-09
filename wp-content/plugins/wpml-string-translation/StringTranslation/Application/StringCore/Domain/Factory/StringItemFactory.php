@@ -16,20 +16,10 @@ class StringItemFactory {
 		$this->settingsRepository = $settingsRepository;
 	}
 
-	/**
-	 * Create a new StringItem instance.
-	 *
-	 * @param string      $domain      The domain of the string.
-	 * @param string      $value       The string value.
-	 * @param string|null $context     The context of the string.
-	 * @param array       $extraParams Additional parameters for the string.
-	 *
-	 * @return StringItem
-	 */
 	public function create(
 		string $domain,
+		string $context = null,
 		string $value,
-		?string $context = null,
 		array $extraParams = []
 	) {
 		$name          = $extraParams['name'] ?? null;
@@ -50,4 +40,3 @@ class StringItemFactory {
 		);
 	}
 }
-

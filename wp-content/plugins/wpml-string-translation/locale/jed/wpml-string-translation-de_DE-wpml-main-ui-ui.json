@@ -3,27 +3,25 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages",
-            "plural_forms": "nplurals=2; plural=(n != 1);",
-            "lang": "de_DE"
+            "domain": "messages"
          },
          "Edit": [
             "Bearbeiten"
          ],
          "Shift+Tab": [
-            "Umschalt+Tab"
+            "Umschalttaste+Tabulator"
          ],
          "Tab": [
-            "Tab"
+            "Registerkarte"
          ],
          "Translation to:": [
-            "Übersetzung nach:"
+            "Übersetzung in:"
          ],
          "Copy from original": [
-            "Aus Original kopieren"
+            "Kopie vom Original"
          ],
          "Use Shift+Enter to add a new line.": [
-            "Verwenden Sie Umschalt+Eingabe, um eine neue Zeile hinzuzufügen."
+            "Verwenden Sie Shift+Enter, um eine neue Zeile hinzuzufügen."
          ],
          "Original:": [
             "Original:"
@@ -32,22 +30,22 @@
             "%s Übersetzung hinzufügen"
          ],
          "Edit %s translation": [
-            "%s Übersetzung bearbeiten"
+            "Bearbeiten %s Übersetzung"
          ],
          "Add %s translation (the string appears on the site and is not translated)": [
-            "%s Übersetzung hinzufügen (der String erscheint auf der Website und ist nicht übersetzt)"
+            "%s Übersetzung hinzufügen (der String erscheint auf der Website und wird nicht übersetzt)"
          ],
          "Original language %s": [
             "Originalsprache %s"
          ],
          "Waiting for translator to %s": [
-            "Warten auf Übersetzer für %s"
+            "Warten auf den Übersetzer %s"
          ],
          "Translation in progress to %s": [
-            "Übersetzung läuft für %s"
+            "Übersetzung in Arbeit nach %s"
          ],
          "In basket for translation to %s": [
-            "Im Warenkorb für die Übersetzung nach %s"
+            "Im Korb für die Übersetzung in %s"
          ],
          "Translation saved.": [
             "Übersetzung gespeichert."

@@ -28,11 +28,6 @@ class TranslateEverythingHooks implements \IWPML_Backend_Action, \IWPML_Frontend
 			'plural' => 'ACF Option Pages',
 			'slug'   => Package::OPTION_PAGE_PACKAGE_KIND_SLUG,
 		],
-		Package::OPTION_PACKAGE_KIND_SLUG      => [
-			'title'  => Package::OPTION_PACKAGE_TITLE,
-			'plural' => Package::OPTION_PACKAGE_TITLE,
-			'slug'   => Package::OPTION_PACKAGE_KIND_SLUG,
-		],
 	];
 
 	public function add_hooks() {

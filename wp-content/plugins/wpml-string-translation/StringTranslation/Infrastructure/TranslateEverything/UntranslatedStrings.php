@@ -34,11 +34,7 @@ class UntranslatedStrings implements UntranslatedElementsInterface {
 	 */
 	private $stringBatchRepository;
 
-	/**
-	 * @param StringBatchRepositoryInterface $stringBatchRepository
-	 * @param \wpdb|null                     $wpdb
-	 */
-	public function __construct( StringBatchRepositoryInterface $stringBatchRepository, ?\wpdb $wpdb = null ) {
+	public function __construct( StringBatchRepositoryInterface $stringBatchRepository, \wpdb $wpdb = null ) {
 		$this->stringBatchRepository = $stringBatchRepository;
 
 		if ( ! $wpdb ) {
@@ -61,7 +57,7 @@ class UntranslatedStrings implements UntranslatedElementsInterface {
 	}
 
 	/**
-	 * @param string[] $languages Language codes.
+	 * @param string[] $languages Language codes
 	 * @param string   $type
 	 * @param int      $queueSize
 	 *
@@ -102,13 +98,13 @@ class UntranslatedStrings implements UntranslatedElementsInterface {
 			LIMIT %d
 		";
 
-		$sql = $this->wpdb->prepare(
-			$sql,
-			[
-				ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_FRONTEND,
+		$sql = $this->wpdb->prepare( 
+			$sql, 
+			[ 
+				ICL_STRING_TRANSLATION_STRING_TRACKING_TYPE_FRONTEND, 
 				self::ENGLISH_SOURCE_LANGUAGE,
-				$queueSize,
-			]
+				$queueSize 
+			] 
 		);
 
 		$rowset = $this->wpdb->get_results( $sql, ARRAY_N );
@@ -123,8 +119,8 @@ class UntranslatedStrings implements UntranslatedElementsInterface {
 
 	/**
 	 * @param Actions $actions
-	 * @param array   $elements [ [element_id1, language_code1], [element_id1, language_code2], ... ].
-	 * @param string  $type (not used for strings).
+	 * @param array   $elements [ [element_id1, language_code1], [element_id1, language_code2], ... ]
+	 * @param string  $type (not used for strings)
 	 *
 	 * @return {
 	 *  elementId: int,
@@ -201,7 +197,7 @@ class UntranslatedStrings implements UntranslatedElementsInterface {
 		$targetLanguages = Languages::getSecondaryCodes();
 
 		if ( Languages::getDefaultCode() !== self::ENGLISH_SOURCE_LANGUAGE ) {
-			$primary         = [ Languages::getDefaultCode() ];
+			$primary   = [ Languages::getDefaultCode() ];
 			$targetLanguages = array_merge( $targetLanguages, $primary );
 		}
 
@@ -211,7 +207,7 @@ class UntranslatedStrings implements UntranslatedElementsInterface {
 	}
 
 	/**
-	 * @param string $type It's irrelevant for strings.
+	 * @param string $type It's irrelevant for strings
 	 * @param array  $languages
 	 *
 	 * @return void
@@ -248,7 +244,7 @@ class UntranslatedStrings implements UntranslatedElementsInterface {
 	}
 
 	/**
-	 * @param string[] $completed For example ['fr', 'de'].
+	 * @param string[] $completed For example ['fr', 'de']
 	 *
 	 * @return void
 	 */
@@ -262,19 +258,16 @@ class UntranslatedStrings implements UntranslatedElementsInterface {
 	 * @return array
 	 */
 	private function removeEnglishFromTargetLanguages( array $targetLanguages ): array {
-		$targetLanguages = array_filter(
-			$targetLanguages,
-			function ( $languageCode ) {
-				return $languageCode !== self::ENGLISH_SOURCE_LANGUAGE;
-			}
-		);
+		$targetLanguages = array_filter( $targetLanguages, function ( $languageCode ) {
+			return $languageCode !== self::ENGLISH_SOURCE_LANGUAGE;
+		} );
 
 		return $targetLanguages;
 	}
 
 	/**
 	 * @param string $languageMapper
-	 * @param array  $targetLanguages
+	 * @param array $targetLanguages
 	 *
 	 * @return array
 	 */

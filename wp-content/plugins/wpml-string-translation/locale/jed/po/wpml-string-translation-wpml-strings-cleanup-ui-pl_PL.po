@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/js/strings-cleanup/App.js:17
+msgid ""
+"Clean up the String Translation table by removing untranslated strings by "
+"domain."
+msgstr "Wyczyść tabelę tłumaczeń ciągów, usuwając nieprzetłumaczone ciągi według domeny."
+
+#: src/js/strings-cleanup/App.js:30
+#: src/js/strings-cleanup/components/CleanupModal.js:38
+msgid "Remove strings by domain"
+msgstr "Usuń ciągi znaków według domeny"
+
+#: src/js/strings-cleanup/components/CleanupButton.js:12
+msgid "Remove strings"
+msgstr "Usuń ciągi znaków"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:51
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:55
+msgid "Remove"
+msgstr "Usuń"
+
+#: src/js/strings-cleanup/components/CleanupModal.js:61
+msgid ""
+"The String Translation table currently contains strings from the domains "
+"listed below. If you do not plan to translate strings from a particular "
+"domain, select it below to remove its untranslated strings from the String "
+"Translation table. Any strings that already have translations will still be "
+"available."
+msgstr "Tabela tłumaczeń ciągów znaków zawiera obecnie ciągi znaków z domen wymienionych poniżej. Jeśli nie planujesz tłumaczyć ciągów z określonej domeny, wybierz ją poniżej, aby usunąć nieprzetłumaczone ciągi z tabeli tłumaczeń ciągów. Wszystkie ciągi, które mają już tłumaczenia, będą nadal dostępne."
+
+#: src/js/strings-cleanup/components/CleanupModal.js:66
+msgid "Search"
+msgstr "Szukaj"
+
+#: src/js/strings-cleanup/components/CleanupProgress.js:21
+msgid "Removing strings from String Translation table"
+msgstr "Usuwanie ciągów znaków z tabeli tłumaczeń ciągów znaków"
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:27
+msgid ""
+"To add strings back to the String Translation table, you may need to rescan "
+"translation files or register strings as translatable."
+msgstr "Aby dodać ciągi z powrotem do tabeli tłumaczeń ciągów, może być konieczne ponowne przeskanowanie plików tłumaczeń lub zarejestrowanie ciągów jako przetłumaczalnych."
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:29
+msgid "Read more about "
+msgstr "Przeczytaj więcej o "
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:31
+msgid "scanning your site for strings and registering them as translatable."
+msgstr "skanuje Twoją witrynę w poszukiwaniu ciągów znaków i rejestruje je jako przetłumaczalne."
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:40
+msgid "Successfully removed strings"
+msgstr "Pomyślnie usunięto ciągi znaków"
+
+#: src/js/strings-cleanup/components/CleanupSuccess.js:44
+msgid "OK, Great"
+msgstr "OK, świetnie"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:14
+msgid "Domain"
+msgstr "Domena"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:18
+msgid "Strings count"
+msgstr "Liczenie ciągów znaków"
+
+#: src/js/strings-cleanup/components/CleanupTable.js:24
+msgid "Translated strings"
+msgstr "Przetłumaczone ciągi znaków"

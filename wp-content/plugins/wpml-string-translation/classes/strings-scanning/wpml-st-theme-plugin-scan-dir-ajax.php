@@ -1,19 +1,22 @@
 <?php
 
-use WPML\ST\StringsScanning\JS\ScriptRegistry;
-
 class WPML_ST_Theme_Plugin_Scan_Dir_Ajax {
 
 	/** @var WPML_ST_Scan_Dir */
 	private $scan_dir;
 
+	/** @var WPML_ST_File_Hashing */
+	private $file_hashing;
+
 	/**
 	 * WPML_ST_Theme_Plugin_Scan_Dir_Ajax constructor.
 	 *
-	 * @param WPML_ST_Scan_Dir $scan_dir
+	 * @param WPML_ST_Scan_Dir     $scan_dir
+	 * @param WPML_ST_File_Hashing $file_hashing
 	 */
-	public function __construct( WPML_ST_Scan_Dir $scan_dir ) {
-		$this->scan_dir = $scan_dir;
+	public function __construct( WPML_ST_Scan_Dir $scan_dir, WPML_ST_File_Hashing $file_hashing ) {
+		$this->scan_dir     = $scan_dir;
+		$this->file_hashing = $file_hashing;
 	}
 
 	public function add_hooks() {
@@ -21,23 +24,24 @@ class WPML_ST_Theme_Plugin_Scan_Dir_Ajax {
 	}
 
 	public function get_files() {
-		list( $type, $id, $folder ) = $this->get_component_data();
-		$files_found_chunks         = [];
-		$result                     = [];
+		$folders = $this->get_folder();
+		$result  = array();
 
-		if ( $folder ) {
-			$file_type = [ 'php', 'inc' ];
+		if ( $folders ) {
+			$file_type          = array( 'php', 'inc' );
+			$files_found_chunks = array();
 
-			$files_found_chunks[] = $this->scan_dir->scan(
-				$folder,
-				$file_type,
-				$this->is_one_file_plugin(),
-				$this->get_folders_to_ignore()
-			);
-
-			$files_found_chunks[] = ScriptRegistry::getAbsScriptPathsForComponents( $id, $type );
+			foreach ( $folders as $folder ) {
+				$files_found_chunks[] = $this->scan_dir->scan(
+					$folder,
+					$file_type,
+					$this->is_one_file_plugin(),
+					$this->get_folders_to_ignore()
+				);
+			}
 
 			$files = call_user_func_array( 'array_merge', $files_found_chunks );
+			$files = $this->filter_modified_files( $files );
 
 			if ( ! $files ) {
 				$this->clear_items_to_scan_buffer();
@@ -60,28 +64,36 @@ class WPML_ST_Theme_Plugin_Scan_Dir_Ajax {
 		delete_option( WPML_ST_Themes_And_Plugins_Updates::WPML_ST_ITEMS_TO_SCAN );
 	}
 
-	/** @return array */
-	private function get_component_data() {
-		$type   = null;
-		$id     = null;
-		$folder = null;
-
-		if ( array_key_exists( 'theme', $_POST ) ) {
-			$type   = 'theme';
-			$id     = sanitize_text_field( $_POST['theme'] );
-			$folder = get_theme_root() . '/' . $id;
-		} elseif ( array_key_exists( 'plugin', $_POST ) ) {
-			$type          = 'plugin';
-			$id            = sanitize_text_field( $_POST['plugin'] );
-			$plugin_folder = explode( '/', $_POST['plugin'] );
-			$folder        = WPML_PLUGINS_DIR . '/' . sanitize_text_field( $plugin_folder[0] );
-		} elseif ( array_key_exists( 'mu-plugin', $_POST ) ) {
-			$type   = 'mu-plugin';
-			$id     = sanitize_text_field( $_POST['mu-plugin'] );
-			$folder = WPMU_PLUGIN_DIR . '/' . sanitize_text_field( $_POST['mu-plugin'] );
+	/**
+	 * @param array $files
+	 *
+	 * @return array
+	 */
+	private function filter_modified_files( $files ) {
+		$modified_files = array();
+		foreach ( $files as $file ) {
+			if ( $this->file_hashing->hash_changed( $file ) ) {
+				$modified_files[] = $file;
+			}
 		}
 
-		return [ $type, $id, $folder ];
+		return $modified_files;
+	}
+
+	/** @return array */
+	private function get_folder() {
+		$folder = array();
+
+		if ( array_key_exists( 'theme', $_POST ) ) {
+			$folder[] = get_theme_root() . '/' . sanitize_text_field( $_POST['theme'] );
+		} elseif ( array_key_exists( 'plugin', $_POST ) ) {
+			$plugin_folder = explode( '/', $_POST['plugin'] );
+			$folder[]      = WPML_PLUGINS_DIR . '/' . sanitize_text_field( $plugin_folder[0] );
+		} elseif ( array_key_exists( 'mu-plugin', $_POST ) ) {
+			$folder[] = WPMU_PLUGIN_DIR . '/' . sanitize_text_field( $_POST['mu-plugin'] );
+		}
+
+		return $folder;
 	}
 
 	private function is_one_file_plugin() {

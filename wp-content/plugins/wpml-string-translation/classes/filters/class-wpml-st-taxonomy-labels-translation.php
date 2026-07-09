@@ -148,7 +148,7 @@ class WPML_ST_Taxonomy_Labels_Translation implements IWPML_Action {
 
 		$general_translation  = $this->get_string_var_from_post( 'plural' );
 		$singular_translation = $this->get_string_var_from_post( 'singular' );
-		$slug_translation     = $this->get_string_var_from_post( 'slug', FILTER_UNSAFE_RAW );
+		$slug_translation     = $this->get_string_var_from_post( 'slug' );
 		$taxonomy_name        = $this->get_string_var_from_post( 'taxonomy' );
 		$language             = $this->get_string_var_from_post( 'taxonomy_language_code' );
 
@@ -217,13 +217,11 @@ class WPML_ST_Taxonomy_Labels_Translation implements IWPML_Action {
 
 	/**
 	 * @param string $key
-	 * @param int    $filter
-	 * @param mixed  $options
 	 *
 	 * @return false|string
 	 */
-	private function get_string_var_from_post( $key, $filter = FILTER_SANITIZE_FULL_SPECIAL_CHARS, $options = null ) {
-		$value = $this->super_globals->post( $key, $filter, $options );
+	private function get_string_var_from_post( $key ) {
+		$value = $this->super_globals->post( $key );
 		return null !== $value ? sanitize_text_field( $value ) : false;
 	}
 
