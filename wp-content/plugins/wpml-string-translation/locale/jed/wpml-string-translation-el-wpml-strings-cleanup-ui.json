@@ -3,13 +3,15 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "el"
          },
          "Clean up the String Translation table by removing untranslated strings by domain.": [
-            "Καθαρισμός πίνακα μεταφράσεων."
+            "Εκκαθαρίστε τον πίνακα String Translation αφαιρώντας μη μεταφρασμένες συμβολοσειρές ανά τομέα."
          ],
          "Remove strings by domain": [
-            "Αφαίρεση ανά τομέα"
+            "Αφαίρεση συμβολοσειρών ανά τομέα"
          ],
          "Remove strings": [
             "Αφαίρεση συμβολοσειρών"
@@ -21,28 +23,28 @@
             "Αφαίρεση"
          ],
          "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
-            "Επιλέξτε τομείς προς αφαίρεση."
+            "Ο πίνακας String Translation περιέχει αυτήν τη στιγμή συμβολοσειρές από τους τομείς που αναφέρονται παρακάτω. Εάν δεν σκοπεύετε να μεταφράσετε συμβολοσειρές από έναν συγκεκριμένο τομέα, επιλέξτε τον παρακάτω για να αφαιρέσετε τις μη μεταφρασμένες συμβολοσειρές του από τον πίνακα String Translation. Όλες οι συμβολοσειρές που έχουν ήδη μεταφράσεις θα εξακολουθούν να είναι διαθέσιμες."
          ],
          "Search": [
             "Αναζήτηση"
          ],
          "Removing strings from String Translation table": [
-            "Αφαίρεση από πίνακα μεταφράσεων"
+            "Αφαίρεση συμβολοσειρών από τον πίνακα String Translation"
          ],
          "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
-            "Επανεισαγωγή απαιτεί επανάληψη."
+            "Για να προσθέσετε ξανά συμβολοσειρές στον πίνακα String Translation, ίσως χρειαστεί να σαρώσετε ξανά τα αρχεία μετάφρασης ή να καταχωρίσετε συμβολοσειρές ως μεταφράσιμες."
          ],
          "Read more about ": [
-            "Περαιτέρω πληροφορίες"
+            "Διαβάστε περισσότερα σχετικά με "
          ],
          "scanning your site for strings and registering them as translatable.": [
-            "σάρωση και καταχώριση μεταφράσεων."
+            "τη σάρωση του ιστότοπού σας για συμβολοσειρές και την καταχώρισή τους ως μεταφράσιμες."
          ],
          "Successfully removed strings": [
-            "Επιτυχής αφαίρεση"
+            "Οι συμβολοσειρές αφαιρέθηκαν επιτυχώς"
          ],
          "OK, Great": [
-            "Εντάξει"
+            "Εντάξει, τέλεια"
          ],
          "Domain": [
             "Τομέας"

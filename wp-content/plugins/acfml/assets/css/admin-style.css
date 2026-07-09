@@ -125,3 +125,17 @@
 .rtl .acfml-translation-status-metabox .acfml-translation-info {
 	margin: 0 0 0 24px;
 }
+
+.wpml-translation-setup-table .acfml-field-info {
+	display: inline-block;
+	vertical-align: baseline;
+	margin: 0 4px 0 0;
+	padding: 0 6px 1px;
+	height: 23px;
+	line-height: 21px;
+	color: #33879E;
+}
+
+.rtl .wpml-translation-setup-table .acfml-field-info {
+	margin: 0 0 0 4px;
+}

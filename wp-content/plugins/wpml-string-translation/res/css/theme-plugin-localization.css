@@ -5,7 +5,16 @@
 .widefat td, .widefat td ul {
   font-size: 14px; }
 
-.postbox .inside {
+body.wpml_page_tm-menu-settings .postbox .inside,
+body.wpml_page_sitepress-multilingual-cms-menu-taxonomy-translation .postbox .inside,
+body.sitepress-multilingual-cms-menu-support-php .postbox .inside,
+body.wpml_page_wpml-package-management .postbox .inside,
+.wpml-string-translation-menu-string-translation-php .postbox .inside,
+.sitepress-multilingual-cms-menu-menu-sync-menus-sync-php .postbox .inside,
+.wpml_page_tm-menu-translations-queue .postbox .inside,
+.sitepress-multilingual-cms-menu-theme-localization-php .postbox .inside,
+.sitepress-multilingual-cms-menu-languages-php .postbox .inside,
+body.wpml_page_wpml-media .postbox .inside {
   font-size: 14px;
   line-height: 1.5; }
 
@@ -57,6 +66,49 @@ h5 {
     content: "";
     display: block;
     clear: both; }
+
+.wpml-st-localization .warning-content-wrap {
+	border-left: 4px #E8AE57 solid;
+	border-radius: 5px;
+	background-color: #FBF6E5;
+	padding: 15px;
+	margin: 20px 0;
+	position: relative; }
+.wpml-st-localization .warning-content-wrap:before {
+	content: "";
+	display: block;
+	float: left;
+	width: 16px;
+	height: 16px;
+	content: '\f64c';
+	font-family: 'otgs-icons';
+	font-size: 16px;
+	color: #E8AE57; }
+.wpml-st-localization .warning-content-wrap .help-icon:after {
+	content: "";
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	content: '\f642';
+	font-family: 'otgs-icons';
+	color: black;
+	font-size: 14px;
+	padding-left: 5px;
+	vertical-align: -3px; }
+.wpml-st-localization .warning-content-wrap .warning-content {
+	padding-left: 15px; }
+.wpml-st-localization .warning-content-wrap .warning-content > * {
+	margin: 0;
+	padding-left: 15px; }
+.wpml-st-localization .warning-content-wrap .warning-content .heading {
+	font-weight: bold;
+	font-size: 14px; }
+.wpml-st-localization .warning-content-wrap .warning-content form {
+	padding-top: 15px; }
+.wpml-st-localization .warning-content-wrap:after {
+	content: "";
+	display: block;
+	clear: both; }
 
 .wpml-st-localization .info-content-wrap--light {
   background: #fbf6e5;
@@ -116,7 +168,9 @@ h5 {
   .wpml-st-localization table .item .hidden-cell {
     display: none; }
   .wpml-st-localization table .item .icon-cell {
-    text-align: center; }
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle; }
   .wpml-st-localization table .item .icon:after {
     content: "";
     display: inline-block;

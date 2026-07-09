@@ -1,0 +1,60 @@
+{
+   "domain": "messages",
+   "locale_data": {
+      "messages": {
+         "": {
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "pt_PT"
+         },
+         "Clean up the String Translation table by removing untranslated strings by domain.": [
+            "Limpar a tabela de String Translation, removendo as strings não traduzidas por domínio."
+         ],
+         "Remove strings by domain": [
+            "Remover strings por domínio"
+         ],
+         "Remove strings": [
+            "Remover strings"
+         ],
+         "Cancel": [
+            "Cancelar"
+         ],
+         "Remove": [
+            "Remover"
+         ],
+         "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
+            "A tabela de String Translation contém atualmente strings dos domínios listados abaixo. Se não planeia traduzir strings de um domínio específico, selecione-o abaixo para remover as suas strings não traduzidas da tabela de String Translation. Quaisquer strings que já tenham traduções continuarão disponíveis."
+         ],
+         "Search": [
+            "Pesquisar"
+         ],
+         "Removing strings from String Translation table": [
+            "A remover strings da tabela de String Translation"
+         ],
+         "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
+            "Para adicionar strings de volta à tabela de String Translation, poderá ser necessário voltar a analisar os ficheiros de tradução ou registar as strings como traduzíveis."
+         ],
+         "Read more about ": [
+            "Ler mais sobre "
+         ],
+         "scanning your site for strings and registering them as translatable.": [
+            "analisar o seu site para strings e registá-las como traduzíveis."
+         ],
+         "Successfully removed strings": [
+            "Strings removidas com sucesso"
+         ],
+         "OK, Great": [
+            "OK, excelente"
+         ],
+         "Domain": [
+            "Domínio"
+         ],
+         "Strings count": [
+            "Contagem de strings"
+         ],
+         "Translated strings": [
+            "Strings traduzidas"
+         ]
+      }
+   }
+}

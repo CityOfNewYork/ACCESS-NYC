@@ -3,49 +3,51 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);",
+            "lang": "ar"
          },
          "Edit": [
-            "يحرر"
+            "تعديل"
          ],
          "Shift+Tab": [
-            "التحول+علامة التبويب"
+            "Shift+Tab"
          ],
          "Tab": [
-            "فاتورة غير مدفوعة"
+            "Tab"
          ],
          "Translation to:": [
             "الترجمة إلى:"
          ],
          "Copy from original": [
-            "نسخة من الأصل"
+            "نسخ من الأصل"
          ],
          "Use Shift+Enter to add a new line.": [
             "استخدم Shift+Enter لإضافة سطر جديد."
          ],
          "Original:": [
-            "إبداعي:"
+            "الأصل:"
          ],
          "Add %s translation": [
-            "يضيف %s ترجمة"
+            "أضف ترجمة %s"
          ],
          "Edit %s translation": [
-            "يحرر %s ترجمة"
+            "تعديل ترجمة %s"
          ],
          "Add %s translation (the string appears on the site and is not translated)": [
-            "إضافة %s ترجمة (تظهر السلسلة على الموقع ولا تتم ترجمتها)"
+            "أضف ترجمة %s (النص يظهر على الموقع وغير مترجم)"
          ],
          "Original language %s": [
             "اللغة الأصلية %s"
          ],
          "Waiting for translator to %s": [
-            "في انتظار المترجم %s"
+            "في انتظار المترجم لـ %s"
          ],
          "Translation in progress to %s": [
-            "جاري الترجمة إلى %s"
+            "الترجمة قيد التقدم إلى %s"
          ],
          "In basket for translation to %s": [
-            "في سلة للترجمة إلى %s"
+            "في السلة للترجمة إلى %s"
          ],
          "Translation saved.": [
             "تم حفظ الترجمة."

@@ -26,9 +26,18 @@ class ComponentRepository implements ComponentRepositoryInterface {
 	}
 
 	/**
-	 * @return array {id: string, type: int}
+	 * Get the component ID and type for a given string, domain, and optional context.
+	 *
+	 * @param string      $text    The text to get the component for.
+	 * @param string      $domain  The domain of the text.
+	 * @param string|null $context Optional context for the text.
+	 *
+	 * @return array{
+	 *     0: string,  // component ID
+	 *     1: int      // component type
+	 * }
 	 */
-	public function getComponentIdAndType( string $text, string $domain, string $context = null ): array {
+	public function getComponentIdAndType( string $text, string $domain, ?string $context = null ): array {
 		// Some themes like 'Divi' create special integrations for woocommerce plugin template parts in the theme source codes.
 		// We should detect those strings as coming from woocommerce plugin too, as they are related to plugin and not theme itself.
 		// Also, otherwise we will incorrectly set all next strings coming from woocommerce plugin as coming from theme(because of the cache).
@@ -66,7 +75,20 @@ class ComponentRepository implements ComponentRepositoryInterface {
 		];
 	}
 
-	private function getCmpIdAndTypeData( string $text, string $domain, string $context = null ): array {
+	/**
+	 * Get the component ID and type for a given string, domain, and optional context.
+	 *
+	 * @param string      $text    The text to get the component for.
+	 * @param string      $domain  The domain of the text.
+	 * @param string|null $context Optional context for the text.
+	 *
+	 * @return array{
+	 *     0: string,  // component ID
+	 *     1: int      // component type
+	 *     2: bool     // whether to add to cache
+	 * }
+	 */
+	private function getCmpIdAndTypeData( string $text, string $domain, ?string $context = null ): array {
 		list( $id, $type ) = $this->getCmpIdAndType( $text, $domain, $context );
 		$addToCache        = ! $this->isPluginMetadataTranslation( $id );
 
@@ -77,7 +99,24 @@ class ComponentRepository implements ComponentRepositoryInterface {
 		];
 	}
 
-	private function getCmpIdAndType( string $text, string $domain, string $context = null ): array {
+	/**
+	 * Get the component ID and type for a given string, domain, and optional context.
+	 *
+	 * This function will return the component ID and type for a given string, domain, and optional context.
+	 * It will first check if the domain is one of the theme domains, if so it will return the theme ID and type.
+	 * If not, it will check if the domain is one of the plugin domains, if so it will return the plugin ID and type.
+	 * If not, it will get the trace of the current exception and try to find the component ID and type from the trace.
+	 *
+	 * @param string      $text    The text to get the component for.
+	 * @param string      $domain  The domain of the text.
+	 * @param string|null $context Optional context for the text.
+	 *
+	 * @return array{
+	 *     0: string,  // component ID
+	 *     1: int      // component type
+	 * }
+	 */
+	private function getCmpIdAndType( string $text, string $domain, ?string $context = null ): array {
 		$id   = 'WordPress';
 		$type = StringItem::COMPONENT_TYPE_CORE;
 
@@ -128,9 +167,9 @@ class ComponentRepository implements ComponentRepositoryInterface {
 			$fn = $item['function'];
 
  			if (
-				'translate' === $fn || 
-				'translate_plural' === $fn || 
-				'translate_with_gettext_context' === $fn 
+				'translate' === $fn ||
+				'translate_plural' === $fn ||
+				'translate_with_gettext_context' === $fn
 			) {
 				$gettextIndex = $i;
 				break;
@@ -183,7 +222,20 @@ class ComponentRepository implements ComponentRepositoryInterface {
 		return $filepath === self::PLUGIN_METADATA_TRANSLATION;
 	}
 
-	private function isPlugin( string $filepath = null, string $fn = null ): bool {
+	/**
+	 * Checks if the given filepath is a plugin filepath or if the given function name is a call from plugin.
+	 *
+	 * If the filepath is null, it will return false.
+	 * If the filepath is self::PLUGIN_METADATA_TRANSLATION, it will return true.
+	 * If the function name is 'callTranslateFromPlugin' it will return true.
+	 * If the filepath contains 'wp-content/plugins' it will return true.
+	 *
+	 * @param string|null $filepath The filepath to check.
+	 * @param string|null $fn The function name to check.
+	 *
+	 * @return bool True if the filepath is a plugin filepath or if the function name is a call from plugin, false otherwise
+	 */
+	private function isPlugin( ?string $filepath = null, ?string $fn = null ): bool {
 		if ( is_null( $filepath ) ) {
 			return false;
 		}
@@ -197,7 +249,19 @@ class ComponentRepository implements ComponentRepositoryInterface {
 		return ( $isPluginFnCallFromTests || strpos( $filepath, 'wp-content/plugins' ) !== false );
 	}
 
-	private function isTheme( string $filepath = null, string $fn = null ): bool {
+	/**
+	 * Checks if the given filepath is a theme filepath or if the given function name is a call from theme.
+	 *
+	 * If the filepath is null, it will return false.
+	 * If the filepath contains 'wp-content/themes' it will return true.
+	 * If the function name is '_register_theme_block_patterns' or 'register_block_core_template_part' it will return true.
+	 *
+	 * @param string|null $filepath The filepath to check.
+	 * @param string|null $fn The function name to check.
+	 *
+	 * @return bool True if the filepath is a theme filepath or if the function name is a call from theme, false otherwise
+	 */
+	private function isTheme( ?string $filepath = null, ?string $fn = null ): bool {
 		if ( is_null( $filepath ) ) {
 			return false;
 		}
@@ -208,17 +272,34 @@ class ComponentRepository implements ComponentRepositoryInterface {
 			$fn === 'register_block_core_template_part'
 		);
 	}
-
-	// Call with plugin textdomain can happen when we are loading plugin metadata from other plugin.
-	// In such case we cannot determine real plugin name by reading the trace, because other plugin path will be used instead.
-	// Like for 'ntechdev-devtools' textdomain and plugin we expect find in trace '.../wp-content/plugins/ntechdev-devtools/...' but it will not exist.
-	// Instead we will have just a call for WP Core -> get_plugin_data -> _get_plugin_data_markup_translate -> translate calls.
-	// In ST we will have calls from sitepress/.../wpml-lib-dependencies/.../class-wpml-dependencies.php -> add_installed_plugin -> get_plugin_data(...).
-	private function isLoadingAndTranslatingPluginMetadataNotFromPluginItself( string $function = null ): bool {
+	
+	/**
+	 * Check if we are currently loading plugin metadata from another plugin.
+	 * When we are loading plugin metadata from another plugin, the trace will not contain the path to the plugin itself.
+	 * Instead, the trace will contain a call from WP Core -> get_plugin_data -> _get_plugin_data_markup_translate -> translate calls.
+	 * In ST we will have calls from sitepress/.../wpml-lib-dependencies/.../class-wpml-dependencies.php -> add_installed_plugin -> get_plugin_data(...).
+	 *
+	 * @param string|null $function The function name to check.
+	 *
+	 * @return bool True if we are currently loading plugin metadata from another plugin, false otherwise
+	 */
+	private function isLoadingAndTranslatingPluginMetadataNotFromPluginItself( ?string $function = null ): bool {
 		return ( is_null( $function ) ) ? false : ( $function === '_get_plugin_data_markup_translate' );
 	}
 
-	private function getPluginId( string $filepath, string $fn = null ): string {
+	/**
+	 * Get the plugin ID for a given filepath and optional function name.
+	 *
+	 * If the filepath is self::PLUGIN_METADATA_TRANSLATION, it will return the filepath itself.
+	 * If the function name is 'callTranslateFromPlugin', it will return 'wpml-string-translation'.
+	 * If the filepath contains 'wp-content/plugins', it will explode the filepath and return the first part after 'wp-content/plugins/'.
+	 *
+	 * @param string $filepath The filepath to get the plugin ID for.
+	 * @param string|null $fn The function name to check.
+	 *
+	 * @return string The plugin ID
+	 */
+	private function getPluginId( string $filepath, ?string $fn = null ): string {
 		if ( $this->isPluginMetadataTranslation( $filepath ) ) {
 			return $filepath;
 		}

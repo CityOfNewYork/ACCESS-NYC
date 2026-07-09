@@ -3,22 +3,24 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "pt_BR"
          },
          "Edit": [
             "Editar"
          ],
          "Shift+Tab": [
-            "Shift+tab"
+            "Shift+Tab"
          ],
          "Tab": [
-            "Guia"
+            "Tab"
          ],
          "Translation to:": [
             "Tradução para:"
          ],
          "Copy from original": [
-            "Cópia do original"
+            "Copiar do original"
          ],
          "Use Shift+Enter to add a new line.": [
             "Use Shift+Enter para adicionar uma nova linha."
@@ -27,25 +29,25 @@
             "Original:"
          ],
          "Add %s translation": [
-            "Adicionar tradução para %s "
+            "Adicionar tradução %s"
          ],
          "Edit %s translation": [
-            "Editar a tradução de %s "
+            "Editar tradução %s"
          ],
          "Add %s translation (the string appears on the site and is not translated)": [
-            "Adicione a tradução %s (a string aparece no site e não é traduzida)"
+            "Adicionar tradução %s (a string aparece no site e não está traduzida)"
          ],
          "Original language %s": [
             "Idioma original %s"
          ],
          "Waiting for translator to %s": [
-            "Aguardando o tradutor para %s"
+            "Aguardando tradutor para %s"
          ],
          "Translation in progress to %s": [
-            "Conversão em andamento para %s"
+            "Tradução em andamento para %s"
          ],
          "In basket for translation to %s": [
-            "Na cesta de tradução para %s"
+            "Na cesta para tradução para %s"
          ],
          "Translation saved.": [
             "Tradução salva."

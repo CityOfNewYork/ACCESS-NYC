@@ -35,24 +35,29 @@ class WPML_ACF_Translatable_Groups_Checker implements \IWPML_Backend_Action, \IW
 		}
 	}
 
+	private function get_report_untranslated_groups_message() {
+		return sprintf(
+			'<h2>%s</h2><p>%s</p>',
+			esc_html__( 'Change the field group translation setting', 'acfml' ),
+			sprintf(
+				/* translators: %1$s and %4$s are placeholders for <a> link tags and %2$s and %3$s are for <b> tags. */
+				esc_html__( 'You can translate field labels and labels for Choices using String Translation. To do this, %1$sset the field group post type to %2$sNot Translatable%3$s%4$s.', 'acfml' ),
+				'<a href="' . esc_url( Links::getAcfmlExpertDoc( [ 'anchor' => 'field-group-translation-settings' ] ) ) . '" class="wpml-external-link" target="_blank">',
+				'<b>',
+				'</b>',
+				'</a>'
+			)
+		);
+	}
+
 	public function report_untranslated_groups() {
-		?>
-		<div class="notice notice-error is-dismissible">
-			<h2><?php esc_html_e( 'Change the field group translation setting', 'acfml' ); ?></h2>
-			<p>
-				<?php
-				printf(
-					/* translators: %1$s and %4$s are placeholders for <a> link tags and %2$s and %3$s are for <b> tags. */
-					esc_html__( 'You can translate field labels and labels for Choices using String Translation. To do this, %1$sset the field group post type to %2$sNot Translatable%3$s%4$s.', 'acfml' ),
-					'<a href="' . esc_url( Links::getAcfmlExpertDoc( [ 'anchor' => 'field-group-translation-settings' ] ) ) . '" class="wpml-external-link" target="_blank">',
-					'<b>',
-					'</b>',
-					'</a>'
-				);
-				?>
-			</p>
-		</div>
-		<?php
+		if ( function_exists( 'wpml_get_admin_notices' ) ) {
+			$notices = wpml_get_admin_notices();
+			$notice  = $notices->create_notice( 'acfml-field-group-translation-notice', $this->get_report_untranslated_groups_message(), 'acfml' );
+			$notice->set_dismissible( true );
+			$notice->set_css_class_types( [ 'notice-error' ] );
+			$notices->add_notice( $notice );
+		}
 	}
 
 	/**

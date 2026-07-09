@@ -27,6 +27,7 @@ class WPML_ST_User_Fields {
 		if ( ! is_admin() ) {
 			add_action( 'init', array( $this, 'add_get_the_author_field_filters' ) );
 			add_filter( 'the_author', array( $this, 'the_author_filter' ), 10, 1 );
+			add_filter( 'get_user_metadata', array( $this, 'translate_get_user_metadata' ), 10, 4 );
 		}
 
 		add_action( 'profile_update', array( $this, 'profile_update_action' ), 10 );
@@ -206,5 +207,61 @@ class WPML_ST_User_Fields {
 			}
 		}
 		return $processed_ids;
+	}
+
+	/**
+	 * @param mixed  $check
+	 * @param int    $user_id
+	 * @param string $meta_key
+	 * @param bool   $single
+	 *
+	 * @return mixed
+	 */
+	public function translate_get_user_metadata( $check, $user_id, $meta_key, $single ) {
+		$flag = apply_filters( 'wpml_translate_get_user_meta', false );
+		if ( ! $flag ) {
+			return $check;
+		}
+
+		$translatable_fields = $this->get_translatable_meta_fields();
+		if ( ! in_array( $meta_key, $translatable_fields, true ) ) {
+			return $check;
+		}
+
+		if ( ! $this->is_user_role_translatable( $user_id ) ) {
+			return $check;
+		}
+
+		$meta_cache = wp_cache_get( $user_id, 'user_meta' );
+		if ( ! $meta_cache ) {
+			update_meta_cache( 'user', [ $user_id ] );
+			$meta_cache = wp_cache_get( $user_id, 'user_meta' );
+		}
+
+		if ( ! isset( $meta_cache[ $meta_key ] ) ) {
+			return $check;
+		}
+
+		$meta_value = $meta_cache[ $meta_key ][0];
+		if ( empty( $meta_value ) ) {
+			return $check;
+		}
+
+		// User meta strings are dynamic, so their DB translations can exist before MO files are generated.
+		$name         = $this->get_string_name( $meta_key, $user_id );
+		$string_id    = icl_get_string_id( $meta_value, $this->context, $name );
+		$current_lang = $this->sitepress->get_current_language();
+
+		$translated_value = $string_id ? icl_get_string_by_id( $string_id, $current_lang ) : false;
+		if ( false === $translated_value ) {
+			$translated_value = $meta_value;
+		}
+
+		// Return in the format WordPress expects.
+		if ( $single ) {
+			return $translated_value;
+		}
+
+		return array( $translated_value );
 	}
 }

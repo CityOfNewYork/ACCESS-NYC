@@ -26,7 +26,12 @@ class WPML_Plugin_String_Scanner extends WPML_String_Scanner implements IWPML_ST
 
 		foreach ( $_POST['files'] as $file ) {
 			$file = (string) Sanitize::string( $file );
-			if ( $this->file_hashing->hash_changed( $file ) ) {
+
+			if ( $this->is_js_file( $file ) ) {
+				$jsScanner = new \WPML\ST\StringsScanning\JS\Scanner();
+				$jsScanner->scan( $file, $this->text_domain, [ $this, 'store_results' ] );
+				$this->add_scanned_file( $file );
+			} else {
 				_potx_process_file( $file, 0, array( $this, 'store_results' ), '_potx_save_version', $this->get_default_domain() );
 				$this->add_scanned_file( $file );
 			}

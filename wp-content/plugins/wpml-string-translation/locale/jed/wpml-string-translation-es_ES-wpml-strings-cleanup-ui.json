@@ -3,10 +3,12 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "es_ES"
          },
          "Clean up the String Translation table by removing untranslated strings by domain.": [
-            "Limpia la tabla de traducción de cadenas eliminando las cadenas no traducidas por dominio."
+            "Limpie la tabla de String Translation eliminando las cadenas sin traducir por dominio."
          ],
          "Remove strings by domain": [
             "Eliminar cadenas por dominio"
@@ -18,31 +20,31 @@
             "Cancelar"
          ],
          "Remove": [
-            "Quitar"
+            "Eliminar"
          ],
          "The String Translation table currently contains strings from the domains listed below. If you do not plan to translate strings from a particular domain, select it below to remove its untranslated strings from the String Translation table. Any strings that already have translations will still be available.": [
-            "La tabla de Traducción de cadenas contiene actualmente cadenas de los dominios que se indican a continuación. Si no piensas traducir cadenas de un dominio concreto, selecciónalo a continuación para eliminar sus cadenas sin traducir de la tabla Traducción de cadenas. Las cadenas que ya tengan traducción seguirán estando disponibles."
+            "La tabla de String Translation contiene actualmente cadenas de los dominios que se enumeran a continuación. Si no tiene previsto traducir cadenas de un dominio en particular, selecciónelo a continuación para eliminar sus cadenas sin traducir de la tabla de String Translation. Todas las cadenas que ya tengan traducciones seguirán estando disponibles."
          ],
          "Search": [
             "Buscar"
          ],
          "Removing strings from String Translation table": [
-            "Eliminar cadenas de la tabla de traducción de cadenas"
+            "Eliminando cadenas de la tabla de String Translation"
          ],
          "To add strings back to the String Translation table, you may need to rescan translation files or register strings as translatable.": [
-            "Para volver a añadir cadenas a la tabla de traducción de cadenas, puede que tengas que volver a escanear los archivos de traducción o registrar las cadenas como traducibles."
+            "Para volver a añadir cadenas a la tabla de String Translation, es posible que deba volver a escanear los archivos de traducción o registrar las cadenas como traducibles."
          ],
          "Read more about ": [
-            "Más información "
+            "Leer más sobre "
          ],
          "scanning your site for strings and registering them as translatable.": [
-            "escanea tu sitio en busca de cadenas y regístralas como traducibles."
+            "cómo escanear su sitio en busca de cadenas y registrarlas como traducibles."
          ],
          "Successfully removed strings": [
-            "Cadenas eliminadas con éxito"
+            "Cadenas eliminadas correctamente"
          ],
          "OK, Great": [
-            "OK, genial"
+            "De acuerdo, genial"
          ],
          "Domain": [
             "Dominio"

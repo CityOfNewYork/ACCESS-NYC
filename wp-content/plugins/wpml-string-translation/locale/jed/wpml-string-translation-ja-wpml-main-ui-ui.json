@@ -3,52 +3,54 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "ja"
          },
          "Edit": [
             "編集"
          ],
          "Shift+Tab": [
-            "Shift+タブ"
+            "Shift+Tab"
          ],
          "Tab": [
-            "タブ"
+            "Tab"
          ],
          "Translation to:": [
-            "に翻訳する："
+            "翻訳先:"
          ],
          "Copy from original": [
-            "オリジナルからのコピー"
+            "オリジナルからコピー"
          ],
          "Use Shift+Enter to add a new line.": [
-            "Shift+Enterで改行する。"
+            "Shift+Enterで改行を追加します。"
          ],
          "Original:": [
-            "オリジナルだ："
+            "オリジナル:"
          ],
          "Add %s translation": [
-            "%s 翻訳を追加"
+            "%s の翻訳を追加"
          ],
          "Edit %s translation": [
-            "編集 %s 翻訳"
+            "%s の翻訳を編集"
          ],
          "Add %s translation (the string appears on the site and is not translated)": [
-            "%s 翻訳を追加する（文字列はサイト上に表示され、翻訳されない）"
+            "%s の翻訳を追加 (文字列はサイトに表示され、翻訳されていません)"
          ],
          "Original language %s": [
-            "原語 %s"
+            "元の言語 %s"
          ],
          "Waiting for translator to %s": [
-            "翻訳者待ち %s"
+            "翻訳者が %s を待機中"
          ],
          "Translation in progress to %s": [
-            "翻訳中 %s"
+            "%s への翻訳を進行中"
          ],
          "In basket for translation to %s": [
-            "翻訳用バスケット %s"
+            "%s への翻訳用バスケット内"
          ],
          "Translation saved.": [
-            "翻訳が保存された。"
+            "翻訳を保存しました。"
          ],
          "Translation update failed.": [
             "翻訳の更新に失敗しました。"

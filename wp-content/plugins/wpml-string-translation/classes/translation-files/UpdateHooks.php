@@ -23,10 +23,17 @@ class UpdateHooks implements \IWPML_Action {
 	/** @var callable */
 	private $resetDomainsCache;
 
+	/**
+	 * Constructor.
+	 *
+	 * @param Manager              $file_manager
+	 * @param DomainsLocalesMapper $domains_locales_mapper
+	 * @param callable|null        $resetDomainsCache
+	 */
 	public function __construct(
 		Manager $file_manager,
 		DomainsLocalesMapper $domains_locales_mapper,
-		callable $resetDomainsCache = null
+		?callable $resetDomainsCache = null
 	) {
 		$this->file_manager           = $file_manager;
 		$this->domains_locales_mapper = $domains_locales_mapper;
@@ -43,7 +50,7 @@ class UpdateHooks implements \IWPML_Action {
 		add_action( 'wpml_st_add_string_translation', array( $this, 'add_to_update_queue' ) );
 		add_action( 'wpml_st_update_string', array( $this, 'refresh_after_update_original_string' ), 10, 6 );
 		add_action( 'wpml_st_before_remove_strings', array( $this, 'refresh_before_remove_strings' ) );
-		add_action( 'wpml_st_translation_files_process_queue', [ $this,  'process_update_queue_action' ] );
+		add_action( 'wpml_st_translation_files_process_queue', [ $this, 'process_update_queue_action' ] );
 
 		/**
 		 * @see UpdateHooks::refresh_domain
@@ -96,12 +103,12 @@ class UpdateHooks implements \IWPML_Action {
 	}
 
 	/**
-	 * @param string $domain
-	 * @param string $name
-	 * @param string $old_value
-	 * @param string $new_value
+	 * @param string     $domain
+	 * @param string     $name
+	 * @param string     $old_value
+	 * @param string     $new_value
 	 * @param bool|false $force_complete
-	 * @param stdClass $string
+	 * @param stdClass   $string
 	 */
 	public function refresh_after_update_original_string( $domain, $name, $old_value, $new_value, $force_complete, $string ) {
 		$outdated_entities        = $this->domains_locales_mapper->get_from_string_ids( [ $string->id ] );

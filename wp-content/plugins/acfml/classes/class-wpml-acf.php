@@ -11,7 +11,7 @@ class WPML_ACF {
 	 * @return void
 	 */
 	public function init_worker() {
-		if ( self::is_acf_active() ) {
+		if ( self::is_acf_active() && self::isWpmlSetupComplete() ) {
 			\ACFML\Upgrade\Upgrade::init();
 
 			$loaders = wpml_collect( [
@@ -19,7 +19,6 @@ class WPML_ACF {
 				\ACFML\FieldPreferences\TranslationJobs::class => true,
 				\WPML_ACF_Migrate_Option_Page_Strings::class   => true,
 				\ACFML\MigrateBlockPreferences::class          => true,
-				\WPML_ACF_Options_Page::class                  => true,
 				\WPML_ACF_Field_Groups::class                  => true,
 				\WPML_ACF_Xliff::class                         => $this->can_create_xliff(),
 				\WPML_ACF_Pro::class                           => true,
@@ -40,12 +39,14 @@ class WPML_ACF {
 				\ACFML\Field\FrontendHooks::class              => true,
 				\ACFML\FieldGroup\HooksFactory::class          => true,
 				\ACFML\OptionsPage\HooksFactory::class         => true,
+				\ACFML\Options\HooksFactory::class             => $this->canSetCurrentOptionsPage(),
 				\ACFML\Taxonomy\HooksFactory::class            => true,
 				\ACFML\Notice\FieldGroupModes::class           => true,
 				\ACFML\Post\EditorHooksFactory::class          => true,
 				\ACFML\TranslationEditor\DisableHooks::class   => true,
 				\ACFML\TranslationEditor\JobFilter::class      => true,
 				\ACFML\Repeater\Sync\HooksFactory::class       => true,
+				\ACFML\Cache\Flush::class                      => true,
 			] )
 				->filter( Logic::isTruthy() )
 				->keys()
@@ -67,7 +68,21 @@ class WPML_ACF {
 	/**
 	 * @return bool
 	 */
+	public static function isWpmlSetupComplete() {
+		return (bool) apply_filters( 'wpml_setting', false, 'setup_complete' );
+	}
+
+	/**
+	 * @return bool
+	 */
 	private function can_create_xliff() {
 		return defined( 'WPML_ACF_XLIFF_SUPPORT' ) && WPML_ACF_XLIFF_SUPPORT && is_admin() && class_exists( 'acf' );
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function canSetCurrentOptionsPage() {
+		return function_exists( 'acf_get_options_page' );
 	}
 }

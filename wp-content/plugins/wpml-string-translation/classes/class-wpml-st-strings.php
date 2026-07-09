@@ -1,8 +1,10 @@
 <?php
 
 use WPML\API\Sanitize;
+use WPML\ST\TranslationFile\StringCollation;
 
 class WPML_ST_Strings {
+	use StringCollation;
 
 	const EMPTY_CONTEXT_LABEL = 'empty-context-domain';
 
@@ -307,7 +309,7 @@ class WPML_ST_Strings {
 			{$extra_sql}
 			WHERE 1 {$extra_cond} AND TRIM(s.value) <> ''
 			{$excluded_package_condition}
-			GROUP BY context
+			GROUP BY context {$this->getCollateForContextColumn( $this->wpdb )}
 			ORDER BY context ASC
 		";
 

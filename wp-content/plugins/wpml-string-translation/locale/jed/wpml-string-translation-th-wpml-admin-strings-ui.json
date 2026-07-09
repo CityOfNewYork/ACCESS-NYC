@@ -3,13 +3,15 @@
    "locale_data": {
       "messages": {
          "": {
-            "domain": "messages"
+            "domain": "messages",
+            "plural_forms": "nplurals=1; plural=0;",
+            "lang": "th"
          },
          "Not included in String Translation": [
             "ไม่รวมอยู่ในการแปลสตริง"
          ],
          "Registered and locked": [
-            "ลงทะเบียนและล็อคแล้ว"
+            "ลงทะเบียนและล็อก"
          ],
          "Text": [
             "ข้อความ"
@@ -48,7 +50,7 @@
             "ค่า"
          ],
          "Type": [
-            "พิมพ์"
+            "ประเภท"
          ],
          "State": [
             "สถานะ"
@@ -66,7 +68,7 @@
             "ไม่พบตัวเลือก"
          ],
          "Make sure you saved your theme options at least once. Some themes only add these to the wp_options table after the user explicitly saves changes to the theme defaults.": [
-            "ตรวจสอบให้แน่ใจว่าคุณได้บันทึกตัวเลือกธีมของคุณอย่างน้อยหนึ่งครั้ง บางธีมจะเพิ่มสิ่งเหล่านี้ลงในเท่านั้นwp_options ตารางหลังจากที่ผู้ใช้บันทึกการเปลี่ยนแปลงค่าเริ่มต้นของธีมอย่างชัดเจน"
+            "ตรวจสอบให้แน่ใจว่าคุณได้บันทึกตัวเลือกธีมของคุณอย่างน้อยหนึ่งครั้ง ธีมบางธีมจะเพิ่มสิ่งเหล่านี้ลงในตาราง wp_options หลังจากที่ผู้ใช้บันทึกการเปลี่ยนแปลงค่าเริ่มต้นของธีมอย่างชัดเจนเท่านั้น"
          ],
          "Add to String Translation": [
             "เพิ่มในการแปลสตริง"

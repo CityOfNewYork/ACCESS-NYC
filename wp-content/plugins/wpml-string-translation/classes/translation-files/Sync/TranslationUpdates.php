@@ -3,8 +3,10 @@
 namespace WPML\ST\TranslationFile\Sync;
 
 use WPML\Collect\Support\Collection;
+use WPML\ST\TranslationFile\StringCollation;
 
 class TranslationUpdates {
+	use StringCollation;
 
 	// The global constant is not defined yet.
 	const ICL_STRING_TRANSLATION_COMPLETE = 10;
@@ -37,15 +39,16 @@ class TranslationUpdates {
 
 	private function loadData() {
 		if ( ! $this->data ) {
+			$collation = $this->getCollateForContextColumn( $this->wpdb );
 			$sql = "
 				SELECT
-					CONCAT(st.language,'#',s.context) AS lang_domain,
+					CONCAT(st.language,'#',s.context $collation) AS lang_domain,
 					UNIX_TIMESTAMP(MAX(st.translation_date)) as last_update
 				FROM {$this->wpdb->prefix}icl_string_translations AS st
 				INNER JOIN {$this->wpdb->prefix}icl_strings AS s
 					ON st.string_id = s.id
 				WHERE st.value IS NOT NULL AND st.status = %d
-				GROUP BY s.context, st.language;
+				GROUP BY lang_domain;
 			";
 
 			$this->data = wpml_collect(

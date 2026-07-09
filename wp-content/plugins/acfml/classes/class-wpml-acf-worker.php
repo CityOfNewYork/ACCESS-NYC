@@ -67,7 +67,8 @@ class WPML_ACF_Worker implements \IWPML_Backend_Action, \IWPML_Frontend_Action, 
 	 * @param string     $objectType   The type of the object holding the meta field: a post type slug or a taxonomy slug.
 	 */
 	private function afterCopyObjectField( $objectFromId, $objectToId, $metaKey, $metaType, $objectType ) {
-		$field = get_field_object( $metaKey, $objectFromId, false, false );
+		$field = $this->getFieldObjectWithFilteredReference( $metaKey, $objectFromId );
+
 		if ( ! $field ) {
 			return;
 		}
@@ -84,6 +85,29 @@ class WPML_ACF_Worker implements \IWPML_Backend_Action, \IWPML_Frontend_Action, 
 		if ( $metaValue !== $metaValueConverted ) {
 			update_metadata( $metaType, $objectToId, $metaKey, $metaValueConverted, $metaValue );
 		}
+	}
+
+	/**
+	 * @param string     $metaKey
+	 * @param string|int $objectFromId
+	 *
+	 * @return array|false
+	 */
+	private function getFieldObjectWithFilteredReference( $metaKey, $objectFromId ) {
+		$keepOnlyLastFieldReference = function( $reference ) {
+			if ( ! $reference ) {
+				return $reference;
+			}
+
+			preg_match( '/(field_[a-zA-Z0-9]+)$/', $reference, $m );
+			return $m[1] ?? $reference;
+		};
+
+		add_filter( 'acf/load_reference', $keepOnlyLastFieldReference );
+		$field = get_field_object( $metaKey, $objectFromId, false, false );
+		remove_filter( 'acf/$metaKey', $keepOnlyLastFieldReference );
+
+		return $field;
 	}
 
 	/**

@@ -45,6 +45,7 @@ class WPML_ACF_Custom_Fields_Sync implements \IWPML_Backend_Action {
 			&& isset( $field['wpml_cf_preferences'] )
 			&& WPML_COPY_ONCE_CUSTOM_FIELD === $field['wpml_cf_preferences']
 			&& ! $this->isFieldType( $field, 'group' )
+			&& ! $this->isFieldType( $field, 'clone' )
 		) {
 			$value = null;
 		}

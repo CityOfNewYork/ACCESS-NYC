@@ -4,6 +4,9 @@ namespace WPML\ST\MO;
 
 use WP_Locale;
 
+/**
+ * @depreacted since wpml 4.9.0
+ */
 class WPLocaleProxy {
 
 	/**
