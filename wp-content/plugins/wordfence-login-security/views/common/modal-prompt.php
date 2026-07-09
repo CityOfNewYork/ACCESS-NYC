@@ -3,6 +3,7 @@ if (!defined('WORDFENCE_LS_VERSION')) { exit; }
 /**
  * Presents a modal prompt.
  *
+ * @var string $id (optional) The CSS ID to apply to the modal.
  * @var string|\WordfenceLS\Text\Model_HTML $title The title for the prompt. Required.
  * @var string|\WordfenceLS\Text\Model_HTML $message The message for the prompt. Required.
  * @var array $primaryButton The parameters for the primary button. The array is in the format array('id' => <element id>, 'label' => <button text>, 'link' => <href value>). Optional.
@@ -18,7 +19,7 @@ if (!isset($secondaryButtons)) {
 }
 $secondaryButtons = array_reverse($secondaryButtons);
 ?>
-<div class="wfls-modal">
+<div<?php if (!empty($id)): ?> id="<?php echo esc_attr($id); ?>"<?php endif; ?> class="wfls-modal">
 	<div class="wfls-modal-header">
 		<div class="wfls-modal-header-content">
 			<div class="wfls-modal-title">
@@ -26,7 +27,7 @@ $secondaryButtons = array_reverse($secondaryButtons);
 			</div>
 		</div>
 		<div class="wfls-modal-header-action">
-			<div class="wfls-padding-add-left-small wfls-modal-header-action-close"><a href="#" onclick="WFLS.panelClose(); return false"><i class="<?php echo (\WordfenceLS\Controller_WordfenceLS::shared()->should_use_core_font_awesome_styles() ? 'wf-fa wf-fa-times-circle' : 'wfls-fa wfls-fa-times-circle'); ?>" aria-hidden="true"></i></a></div>
+			<div class="wfls-padding-add-left-small wfls-modal-header-action-close"><a href="#" onclick="WFLS.closeStandaloneModal(); return false"><i class="<?php echo (\WordfenceLS\Controller_WordfenceLS::shared()->should_use_core_font_awesome_styles() ? 'wf-fa wf-fa-times-circle' : 'wfls-fa wfls-fa-times-circle'); ?>" aria-hidden="true"></i></a></div>
 		</div>
 	</div>
 	<div class="wfls-modal-content">
@@ -35,10 +36,10 @@ $secondaryButtons = array_reverse($secondaryButtons);
 	<div class="wfls-modal-footer">
 		<ul class="wfls-flex-horizontal wfls-flex-align-right wfls-full-width">
 			<?php foreach ($secondaryButtons as $button): ?>
-				<li class="wfls-padding-add-left-small"><a href="<?php echo esc_url($button['link']); ?>" class="wfls-btn <?php echo isset($button['type']) ? $button['type'] : 'wfls-btn-default'; ?> wfls-btn-callout-subtle" id="<?php echo esc_attr($button['id']); ?>"><?php echo isset($button['labelHTML']) ? $button['labelHTML'] : esc_html($button['label']); ?></a></li>
+				<li class="wfls-padding-add-left-small"><a href="<?php echo esc_url($button['link']); ?>" class="wfls-btn <?php echo isset($button['type']) ? $button['type'] : 'wfls-btn-default'; ?> wfls-btn-callout-subtle<?php if (!empty($button['class'])): ?> <?php echo esc_attr($button['class']); ?><?php endif; ?>"<?php if (!empty($button['id'])): ?> id="<?php echo esc_attr($button['id']); ?>"<?php endif; ?>><?php echo isset($button['labelHTML']) ? $button['labelHTML'] : esc_html($button['label']); ?></a></li>
 			<?php endforeach; ?>
 			<?php if (isset($primaryButton) && is_array($primaryButton)): ?>
-				<li class="wfls-padding-add-left-small"><a href="<?php echo esc_url($primaryButton['link']); ?>" class="wfls-btn <?php echo isset($primaryButton['type']) ? $primaryButton['type'] : 'wfls-btn-primary'; ?> wfls-btn-callout-subtle" id="<?php echo esc_attr($primaryButton['id']); ?>"><?php echo isset($primaryButton['labelHTML']) ? $primaryButton['labelHTML'] : esc_html($primaryButton['label']); ?></a></li>
+				<li class="wfls-padding-add-left-small"><a href="<?php echo esc_url($primaryButton['link']); ?>" class="wfls-btn <?php echo isset($primaryButton['type']) ? $primaryButton['type'] : 'wfls-btn-primary'; ?> wfls-btn-callout-subtle<?php if (!empty($primaryButton['class'])): ?> <?php echo esc_attr($primaryButton['class']); ?><?php endif; ?>"<?php if (!empty($primaryButton['id'])): ?> id="<?php echo esc_attr($primaryButton['id']); ?>"<?php endif; ?>><?php echo isset($primaryButton['labelHTML']) ? $primaryButton['labelHTML'] : esc_html($primaryButton['label']); ?></a></li>
 			<?php endif ?>
 		</ul>
 	</div>

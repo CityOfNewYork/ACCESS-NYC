@@ -1,0 +1,8 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: cw-wordpress-plugin
+  description: Bynder cw-wordpress-plugin
+spec:
+  owner: content-workflow
+  lifecycle: production

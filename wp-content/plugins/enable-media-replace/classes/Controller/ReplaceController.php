@@ -194,8 +194,8 @@ class ReplaceController
 			do_action('emr/converter/prevent-offload', $this->post_id);
       $target_metadata = wp_generate_attachment_metadata( $this->post_id, $this->targetFile->getFullPath() );
 			do_action('emr/converter/prevent-offload-off', $this->post_id);
-      wp_update_attachment_metadata( $this->post_id, $target_metadata );
 
+      wp_update_attachment_metadata( $this->post_id, $target_metadata );
 
 			$Replacer->setTargetMeta($target_metadata);
 			//$this->target_metadata = $metadata;
@@ -248,8 +248,11 @@ class ReplaceController
           'thumbnails_only' => ($this->replaceType == self::MODE_SEARCHREPLACE) ? false : true,
       );
 
-			$Replacer->replace($args);
-
+			$doreplace = apply_filters('emr/replace/doreplace', true);
+			if(true === $doreplace){
+				$Replacer->replace($args);
+			}
+			
 			// Here Updatedata and a ffew others.
 			$this->updateDate();
 
@@ -397,9 +400,11 @@ class ReplaceController
 
 		protected function getNewTitle($meta)
 		{
-			// get basename without extension
-			$title = basename($this->targetFile->getFileName(), '.' . $this->targetFile->getExtension());
-		//	$meta = $this->target_metadata;
+			// Use the original uploaded filename (preserves diacritics and spaces)
+			// rather than $this->targetFile, whose name has been run through
+			// sanitize_file_name() and lost accents/spaces by this point.
+			$source = ! empty($this->new_filename) ? $this->new_filename : $this->targetFile->getFileName();
+			$title  = pathinfo($source, PATHINFO_FILENAME);
 
 			if (isset($meta['image_meta']))
 			{

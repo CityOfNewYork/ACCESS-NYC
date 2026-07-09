@@ -1,0 +1,346 @@
+/**
+ * Enable Media Replace — ShortPixel design-language redesign.
+ *
+ * Self-contained override layer. Loaded after admin.css and remove_background.css.
+ * To revert: dequeue this file in classes/emr-plugin.php and delete it.
+ */
+
+/* ---------- Page-level ---------- */
+.emr_upload_form {
+	color: #1d2327;
+}
+
+.emr_upload_form h1 {
+	font-size: 23px;
+	font-weight: 600;
+	margin: 18px 0 18px;
+	color: #1d2327;
+}
+
+.emr_upload_form form {
+	gap: 20px;
+}
+
+/* ---------- Card-ify every .wrapper ---------- */
+.emr_upload_form .wrapper {
+	background: #fff;
+	border: 1px solid #e6e7e9;
+	border-radius: 10px;
+	box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04);
+	padding: 22px 24px;
+	margin-bottom: 18px;
+}
+
+/* Override harsh inner borders that admin.css adds on individual cards */
+.emr_upload_form .replace_type.wrapper,
+.emr_upload_form .options.wrapper,
+.emr_upload_form .image_chooser.wrapper,
+.emr_upload_form .form_controls.wrapper {
+	border: 1px solid #e6e7e9;
+	margin-top: 0;
+}
+
+.emr_upload_form .form_controls.wrapper {
+	box-shadow: none;
+	border: none;
+	background: transparent;
+	padding: 4px 0 0;
+}
+
+/* Add a little gap between side-by-side cards in option-flex */
+.emr_upload_form .option-flex-wrapper {
+	gap: 18px;
+}
+.emr_upload_form .option-flex-wrapper .options.wrapper {
+	margin-left: 0;
+}
+
+/* ---------- Section headers ---------- */
+.emr_upload_form .wrapper .section-header {
+	font-size: 15px;
+	font-weight: 600;
+	color: #1d2327;
+	border-bottom: 1px solid #f0f0f1;
+	padding: 0 0 12px;
+	margin: 0 0 16px;
+	letter-spacing: 0;
+}
+
+/* ---------- Image previews ---------- */
+.emr_upload_form .image_chooser.wrapper .image_previews .image_placeholder {
+	border: 1px solid #e6e7e9;
+	border-radius: 8px;
+	background: #fafafa;
+	overflow: hidden;
+}
+
+/* ---------- Form controls (radio rows, helpers) ---------- */
+.emr_upload_form .replace_type.wrapper .option,
+.emr_upload_form .replace_type.wrapper .option:last-child {
+	padding: 4px 0;
+}
+
+.emr_upload_form .replace_type.wrapper .option label {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.emr_upload_form .replace_type.wrapper .option .howto,
+.emr_upload_form .options.wrapper .option .howto {
+	color: #646970;
+	font-size: 13px;
+	line-height: 1.55;
+	margin: 6px 0 14px 24px;
+}
+
+.emr_upload_form .options.wrapper .small {
+	color: #646970;
+}
+
+/* ---------- Action buttons (ShortPixel teal) ---------- */
+.emr_upload_form .button,
+.emr_upload_form .button-primary,
+.emr_upload_form input[type=submit].button,
+.emr_upload_form input[type=submit].button-primary {
+	border-radius: 6px;
+	font-weight: 600;
+	padding: 0 18px;
+	height: 36px !important;
+	min-height: 36px !important;
+	line-height: 34px;
+	min-width: 110px;
+	text-align: center;
+	box-sizing: border-box;
+	vertical-align: middle;
+	text-shadow: none;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+a.emr_upload_form .button,
+.emr_upload_form a.button,
+.emr_upload_form button.button,
+.emr_upload_form button.button-primary {
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	line-height: 1 !important;
+}
+
+.emr_upload_form .button-primary,
+.emr_upload_form input[type=submit].button-primary {
+	background: #1abdca;
+	border-color: #15a8b4;
+	color: #fff;
+}
+.emr_upload_form .button-primary:hover,
+.emr_upload_form input[type=submit].button-primary:hover {
+	background: #15a8b4;
+	border-color: #138c96;
+	color: #fff;
+}
+.emr_upload_form .button-primary:focus,
+.emr_upload_form .button-primary:active {
+	background: #15a8b4;
+	border-color: #138c96;
+	box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba(26, 189, 202, 0.4);
+}
+.emr_upload_form .button-primary[disabled],
+.emr_upload_form input[type=submit][disabled] {
+	background: #c8cdd1 !important;
+	border-color: #c8cdd1 !important;
+	color: #fff !important;
+}
+
+.emr_upload_form .button:not(.button-primary) {
+	border-color: #d6d8db;
+	background: #fff;
+	color: #50575e;
+}
+.emr_upload_form .button:not(.button-primary):hover {
+	border-color: #1abdca;
+	color: #1abdca;
+}
+
+/* ---------- Inline notices inside form ---------- */
+.emr_upload_form .form-error,
+.emr_upload_form .form-warning {
+	border-radius: 6px;
+	padding: 10px 14px;
+}
+
+/* ---------- Remove background screen specifics ---------- */
+#remove-background-form .image_chooser.wrapper {
+	min-height: 0;
+}
+
+#remove-background-form .image_previews {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+	align-items: stretch;
+}
+
+#remove-background-form .image_placeholder,
+#remove-background-form .image_placeholder.is_image {
+	width: 100% !important;
+	max-width: none !important;
+	height: 360px !important;
+	min-height: 280px;
+	margin: 0 !important;
+	padding: 38px 14px 38px;
+	border: none !important;
+	border-radius: 10px;
+	background: #fafafa;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+#remove-background-form .image_placeholder img {
+	max-width: 100%;
+	max-height: 100%;
+	width: auto;
+	height: auto;
+	object-fit: contain;
+	display: block;
+	margin: 0 auto;
+}
+
+#remove-background-form .image_placeholder .upload-title {
+	position: absolute;
+	top: 12px;
+	left: 0;
+	right: 0;
+	text-align: center;
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: .08em;
+	color: #6c757d;
+	z-index: 2;
+}
+
+#remove-background-form .image_placeholder .image_size {
+	bottom: 8px;
+	font-size: 11px;
+	color: #6c757d;
+}
+
+#remove-background-form .bad-button {
+	margin-top: 12px;
+}
+
+@media (max-width: 720px) {
+	#remove-background-form .image_previews {
+		grid-template-columns: 1fr;
+	}
+	#remove-background-form .image_placeholder,
+	#remove-background-form .image_placeholder.is_image {
+		height: 300px !important;
+	}
+}
+
+/* ---------- Loading overlay ---------- */
+#remove-background-form .overlay {
+	background-color: #fafafa !important;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 18px;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#remove-background-form .overlay h3 {
+	margin: 0;
+	color: #1d2327;
+	font-size: 15px;
+	font-weight: 600;
+	letter-spacing: .01em;
+	text-align: center;
+}
+
+#remove-background-form .overlay h3::after {
+	content: '';
+	display: block;
+	margin-top: 6px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #6c757d;
+	letter-spacing: 0;
+}
+
+/* Hide the legacy 12-spoke spinner and replace with a clean teal ring */
+#remove-background-form .lds-spinner {
+	width: 52px;
+	height: 52px;
+	border-radius: 50%;
+	border: 4px solid rgba(26, 189, 202, 0.18);
+	border-top-color: #1abdca;
+	animation: emr-spin 0.85s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+}
+#remove-background-form .lds-spinner div { display: none; }
+
+@keyframes emr-spin {
+	to { transform: rotate(360deg); }
+}
+
+/* ---------- ShortPixel offer/upsell boxes ---------- */
+.emr_upload_form .shortpixel-offer,
+.emr_upload_form .shortpixel-offer.spio,
+.emr_upload_form .shortpixel-offer.fp,
+.emr_upload_form .shortpixel-offer.spai,
+.emr_upload_form .shortpixel-offer.envira-shortpixel-install,
+.emr_upload_form .shortpixel-offer.theme-offer {
+	border: 1px solid #e6e7e9;
+	border-radius: 10px;
+	box-shadow: 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04);
+	overflow: hidden;
+}
+
+.emr_upload_form .shortpixel-offer .button-wrapper a {
+	border-radius: 6px;
+}
+
+/* ---------- ShortPixel Account panel ---------- */
+.emr-sp-account.wrapper {
+	background: #f8fafb;
+	border: 1px solid #e2e8ea;
+}
+
+.emr-sp-account .emr-sp-intro {
+	font-size: 13px;
+}
+
+.emr-sp-account .emr-sp-key-card {
+	background: #fff;
+	border-color: #e6e7e9;
+	border-radius: 8px;
+}
+
+.emr-sp-account .emr-sp-edit-form {
+	border-radius: 8px;
+}
+
+/* ---------- Datepicker fields ---------- */
+.emr_upload_form .options.wrapper .custom_date input[type=text] {
+	border-radius: 6px;
+	border-color: #d6d8db;
+}
+
+/* ---------- Spacing fix for the form footer ---------- */
+.emr_upload_form .editor-wrapper > button,
+.emr_upload_form .editor-wrapper > .button,
+.emr_upload_form .editor-wrapper > a.button {
+	margin-top: 8px;
+	margin-right: 6px;
+}

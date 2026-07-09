@@ -1,4 +1,4 @@
-# Content Workflow (by Bynder) - Version 1.0.5 #
+# Content Workflow (by Bynder) - Version 1.0.6 #
 
 This plugin allows you to transfer content from your Content Workflow projects into your WordPress site and vice-versa.
 
@@ -80,6 +80,11 @@ This plugin relies on the following third-party services:
    and [Privacy Policy](https://www.bynder.com/en/legal/privacy-policy/) are available for review.
 
 ## Changelog
+
+### 1.0.6 ###
+* Added a `Clear Pending Imports` button to the template mapping page. This allows you to clear any pending imports
+  that are stuck in the queue, for example if there was an error during import or if the import was cancelled before
+  completion.
 
 ### 1.0.5 ###
 * Fixes an issue where plain text fields in a component were being imported as rich text fields

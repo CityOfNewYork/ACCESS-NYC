@@ -19,6 +19,15 @@ class Replacer
 	protected $source_metadata = array();
 	protected $target_metadata = array();
 
+	private $default_replace_settings = array(
+			'component' => 'unset',
+			'json_flags' => JSON_UNESCAPED_SLASHES,
+			'replacer_do_save' => true,
+			'replace_no_serialize' => false,
+	);
+
+	private $replace_settings;
+
 	public function __construct()
 	{
 		  //$this->source_url = $source_url;
@@ -32,6 +41,7 @@ class Replacer
 			Modules\Elementor::getInstance();
 			Modules\WpBakery::getInstance();
 			Modules\YoastSeo::getInstance();
+			Modules\Breakdance::getInstance();
 	}
 
 	public function setSource($url)
@@ -78,23 +88,25 @@ class Replacer
 			$errors = array();
 	    $args = wp_parse_args($args, $defaults);
 
+			$this->setReplaceSettings(['component' => 'emr']); // set to defaults.
+
 	     // Search-and-replace filename in post database
 	     // @todo Check this with scaled images.
 	 		$base_url = parse_url($this->source_url, PHP_URL_PATH);// emr_get_match_url( $this->source_url);
 	    $base_url = str_replace('.' . pathinfo($base_url, PATHINFO_EXTENSION), '', $base_url);
 
 	    /** Fail-safe if base_url is a whole directory, don't go search/replace */
-	    if (is_dir($base_url))
+	    if (false === $this->fileIsRestricted($base_url) && is_dir($base_url))
 	    {
 	      Log::addError('Search Replace tried to replace to directory - ' . $base_url);
-				$errors[] = __('Fail Safe :: Source Location seems to be a directory.', 'enable-media-replace');
+				$errors[] = __('Fail Safe :: Source Location seems to be a directory.', 'enable-media-replace/');
 	      return $errors;
 	    }
 
 	    if (strlen(trim($base_url)) == 0)
 	    {
 	      Log::addError('Current Base URL emtpy - ' . $base_url);
-	      $errors[] = __('Fail Safe :: Source Location returned empty string. Not replacing content','enable-media-replace');
+	      $errors[] = __('Fail Safe :: Source Location returned empty string. Not replacing content','enable-media-replace/');
 	      return $errors;
 	    }
 
@@ -178,16 +190,26 @@ class Replacer
 	    Log::addDebug('Doing meta search and replace -', array($search_urls, $replace_urls) );
 	    Log::addDebug('Searching with BaseuRL ' . $base_url);
 
-	    do_action('shortpixel/replacer/replace_urls', $search_urls, $replace_urls);
+	    do_action('emr/replacer/replace_urls', $search_urls, $replace_urls);
 	    $updated = 0;
 
 	    $updated += $this->doReplaceQuery($base_url, $search_urls, $replace_urls);
 
-	    $replaceRuns = apply_filters('shortpixel/replacer/custom_replace_query', array(), $base_url, $search_urls, $replace_urls);
-	    Log::addDebug("REPLACE RUNS", $replaceRuns);
+	    $replaceRuns = apply_filters('emr/replacer/custom_replace_query', array(), $base_url, $search_urls, $replace_urls);
+
 	    foreach($replaceRuns as $component => $run)
 	    {
 	       Log::addDebug('Running additional replace for : '. $component, $run);
+
+				 // @todo This could perhaps benefit from a more general approach somewhere in class for settings.
+				 if (isset($run['args']))
+				 {
+						// Update current settings for this run only.
+						$this->setReplaceSettings($run['args']);
+				 }
+				 else {
+						$this->setReplaceSettings();
+				 }
 	       $updated += $this->doReplaceQuery($run['base_url'], $run['search_urls'], $run['replace_urls']);
 	    }
 
@@ -245,77 +267,126 @@ class Replacer
 	  {
 	    global $wpdb;
 
-	    $meta_options = apply_filters('shortpixel/replacer/metadata_tables', array('post', 'comment', 'term', 'user'));
+	    $meta_options = apply_filters('emr/replacer/metadata_tables', array('post', 'comment', 'term', 'user', 'options'));
 	    $number_of_updates = 0;
 
-	    foreach($meta_options as $type)
+			$meta_default = [
+					'id' => 'meta_id',
+					'value' => 'meta_value',
+			];
+
+			$table_options = [
+					'postmeta' => $meta_default,
+					'commentmeta' => $meta_default,
+					'termmeta' => $meta_default,
+					'usermeta' => $meta_default,
+					'options' => [
+							'id' => 'option_id',
+							'value' => 'option_value',
+					]
+
+			];
+
+			$table_options = apply_filters('emr/replacer/replacement_tables', $table_options );
+
+			// Exeception in user meta table.
+			$table_options['usermeta']['id'] = 'umeta_id';
+
+	    foreach($table_options as $table => $data)
 	    {
-	        switch($type)
+				 	// These must be always defined.
+					$id_field = esc_sql($data['id']);
+					$value_field = esc_sql($data['value']);
+
+	        switch($table)
 	        {
-	          case "post": // special case.
-	              $sql = 'SELECT meta_id as id, meta_key, meta_value FROM ' . $wpdb->postmeta . '
+	          case "postmeta": // special case.
+	              $sql = 'SELECT * FROM ' . $wpdb->postmeta . '
 	                WHERE post_id in (SELECT ID from '. $wpdb->posts . ' where post_status in ("publish", "future", "draft", "pending", "private") ) AND meta_value like %s';
 	              $type = 'post';
 
 	              $update_sql = ' UPDATE ' . $wpdb->postmeta . ' SET meta_value = %s WHERE meta_id = %d';
 	          break;
 	          default:
-	              $table = $wpdb->{$type . 'meta'};  // termmeta, commentmeta etc
+	              $wp_table = $wpdb->{$table};  // termmeta, commentmeta etc
 
-	              $meta_id = 'meta_id';
-	              if ($type == 'user')
-	                $meta_id = 'umeta_id';
+	              $sql = "SELECT $id_field , $value_field FROM $wp_table WHERE $value_field like %s";
 
-	              $sql = 'SELECT ' . $meta_id . ' as id, meta_value FROM ' . $table . '
-	                WHERE meta_value like %s';
-
-	              $update_sql = " UPDATE $table set meta_value = %s WHERE $meta_id  = %d ";
+	              $update_sql = " UPDATE $wp_table set $value_field = %s WHERE $id_field  = %d ";
 	          break;
 	        }
 
 	        $sql = $wpdb->prepare($sql, '%' . $url . '%');
 
+
 	        // This is a desparate solution. Can't find anyway for wpdb->prepare not the add extra slashes to the query, which messes up the query.
-	    //    $postmeta_sql = str_replace('[JSON_URL]', $json_url, $postmeta_sql);
 	        $rsmeta = $wpdb->get_results($sql, ARRAY_A);
+
 
 	        if (! empty($rsmeta))
 	        {
 	          foreach ($rsmeta as $row)
 	          {
 	            $number_of_updates++;
-	            $content = $row['meta_value'];
+	            $content = $row[$value_field];
+
+							$component = $this->replace_settings['component'];
+
+	            $id = $row[$id_field];
+
+						 // Content as how it's loading.
+						 $content = apply_filters('emr/replacer/load_meta_value', $content, $row, $component);
+
+						 // If content is null, break out of everything and don't replace this.
+						 if (null === $content)
+						 {
+							 	Log::addDebug('Content returned null, aborting this record, meta_id : ' . $id_field);
+						 }
+						 else {
+								 $content = $this->replaceContent($content, $search_urls, $replace_urls);
+
+								 // Content as how it's going to dbase.
+								 $content = apply_filters('emr/replacer/save_meta_value', $content, $row, $component );
+
+								 // Check if usual save should be prevented. This is for integrations.
+								 if (true === $this->replace_settings['replacer_do_save'])
+								 {
+			           		$prepared_sql = $wpdb->prepare($update_sql, $content, $id);
+			           		$result = $wpdb->query($prepared_sql);
+								}
+						 }
 
 
-	            $id = $row['id'];
-
-	           $content = $this->replaceContent($content, $search_urls, $replace_urls); //str_replace($search_urls, $replace_urls, $content);
-
-	           $prepared_sql = $wpdb->prepare($update_sql, $content, $id);
-
-	           Log::addDebug('Update Meta SQl' . $prepared_sql);
-	           $result = $wpdb->query($prepared_sql);
-
-	          }
-	        }
+						} // Loop
+	        } // if
 	    } // foreach
 
 	    return $number_of_updates;
 	  } // function
 
 
+		private function setReplaceSettings($settings = array())
+		{
+			 $this->replace_settings = wp_parse_args($settings, $this->default_replace_settings);
+		}
 
 	  /**
 	  * Replaces Content across several levels of possible data
 	  * @param $content String The Content to replace
-	  * @param $search String Search string
-	  * @param $replace String Replacement String
+	  * @param $search Array Search string
+	  * @param $replace Array Replacement String
 	  * @param $in_deep Boolean.  This is use to prevent serialization of sublevels. Only pass back serialized from top.
 	  * @param $strict_check Boolean . If true, remove all classes from serialization check and fail. This should be done on post_content, not on metadata.
 	  */
-	  private function replaceContent($content, $search, $replace, $in_deep = false, $strict_check = false)
+		public function replaceContent($content, $search, $replace, $in_deep = false, $strict_check = false)
 	  {
-	    //$is_serial = false;
+
+			// Since ReplaceContent can now be called directly, this might not be set, set defaults if so
+			if (is_null($this->replace_settings))
+			{
+				 $this->setReplaceSettings([]);
+			}
+
 	    if ( true === is_serialized($content))
 			{
 				$serialized_content = $content; // use to return content back if incomplete classes are found, prevent destroying the original information
@@ -325,7 +396,7 @@ class Replacer
 						$args = array('allowed_classes' => false);
 				}
 				else
-				{
+				{ 
 						$args = array('allowed_classes' => true);
 				}
 
@@ -342,13 +413,12 @@ class Replacer
 	    if ($isJson)
 	    {
 	      $content = json_decode($content);
-	      Log::addDebug('JSon Content', $content);
+
 	    }
 
 	    if (is_string($content))  // let's check the normal one first.
 	    {
-	      $content = apply_filters('shortpixel/replacer/content', $content, $search, $replace);
-
+	      $content = apply_filters('emr/replacer/content', $content, $search, $replace);
 	      $content = str_replace($search, $replace, $content);
 	    }
 	    elseif (is_wp_error($content)) // seen this.
@@ -362,6 +432,7 @@ class Replacer
 	        $content[$index] = $this->replaceContent($value, $search, $replace, true); //str_replace($value, $search, $replace);
 	        if (is_string($index)) // If the key is the URL (sigh)
 	        {
+
 	           $index_replaced = $this->replaceContent($index, $search,$replace, true);
 	           if ($index_replaced !== $index)
 	             $content = $this->change_key($content, array($index => $index_replaced));
@@ -384,21 +455,57 @@ class Replacer
 				}
 	      foreach($content as $key => $value)
 	      {
-	        $content->{$key} = $this->replaceContent($value, $search, $replace, true); //str_replace($value, $search, $replace);
+	        $content->{$key} = $this->replaceContent($value, $search, $replace, true);
 	      }
 	    }
 
 	    if ($isJson && $in_deep === false) // convert back to JSON, if this was JSON. Different than serialize which does WP automatically.
 	    {
-	      Log::addDebug('Value was found to be JSON, encoding');
-	      // wp-slash -> WP does stripslashes_deep which destroys JSON
-	      $content = json_encode($content, JSON_UNESCAPED_SLASHES);
-	      Log::addDebug('Content returning', array($content));
-	    }
-	    elseif($in_deep === false && (is_array($content) || is_object($content)))
-	      $content = maybe_serialize($content);
 
+	      // wp-slash -> WP does stripslashes_deep which destroys JSON
+				$json_flags = $this->replace_settings['json_flags'];
+				Log::addDebug('Value was found to be JSON, encoding with flag: ' . $json_flags);
+				$content = json_encode($content, $json_flags);
+	      Log::addDebug('Content returning (array ours) ', array($content));
+	    }
+	    elseif($this->replace_settings['replace_no_serialize'] === false &&
+			 			$in_deep === false && (is_array($content) || is_object($content))
+						)
+			{
+				$content = maybe_serialize($content);
+			}
 	    return $content;
+	}
+
+	/** Check if path is allowed within openbasedir restrictions. This is an attempt to limit notices in file funtions if so.  Most likely the path will be relative in that case.
+	* @param String Path as String
+	*/
+	private function fileIsRestricted($path)
+	{
+
+		 $basedir = ini_get('open_basedir');
+
+		 if (false === $basedir || strlen($basedir) == 0)
+		 {
+				 return false;
+		 }
+
+		 $restricted = true;
+		 $basedirs = preg_split('/:|;/i', $basedir);
+
+		 foreach($basedirs as $basepath)
+		 {
+					if (strpos($path, $basepath) !== false)
+					{
+						 $restricted = false;
+						 break;
+					}
+		 }
+
+		 // Allow this to be overridden due to specific server configs ( ie symlinks ) might get this flagged falsely.
+		 $restricted = apply_filters('emr/file/basedir_check', $restricted);
+
+		 return $restricted;
 	}
 
 	private function change_key($arr, $set) {

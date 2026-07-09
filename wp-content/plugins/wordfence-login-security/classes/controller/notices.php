@@ -8,6 +8,7 @@ class Controller_Notices {
 	const USER_META_KEY = 'wfls_notices';
 	const PERSISTENT_NOTICE_DISMISS_PREFIX = 'wfls-dismiss-';
 	const PERSISTENT_NOTICE_WOOCOMMERCE_INTEGRATION = 'wfls-woocommerce-integration-notice';
+	const PERSISTENT_NOTICE_STANDALONE_DISCONTINUING = 'wfls-standalone-will-be-discontinued';
 	
 	/**
 	 * Returns the singleton Controller_Notices.
@@ -32,8 +33,9 @@ class Controller_Notices {
 	 * @param string|Model_HTML $message
 	 * @param bool|string $category If not false, notices with the same category will be removed prior to adding this one.
 	 * @param bool|\WP_User $user If not false, the user that the notice should show for.
+	 * @param array $buttons Additional buttons to display before the dismiss button.
 	 */
-	public function add_notice($severity, $message, $category = false, $user = false) {
+	public function add_notice($severity, $message, $category = false, $user = false, $buttons = array()) {
 		$notices = $this->_notices($user);
 		foreach ($notices as $id => $n) {
 			if ($category !== false && isset($n['category']) && $n['category'] == $category) { //Same category overwrites previous entry
@@ -45,6 +47,7 @@ class Controller_Notices {
 		$notices[$id] = array(
 			'severity' => $severity,
 			'messageHTML' => Model_HTML::esc_html($message),
+			'buttons' => $buttons,
 		);
 		
 		if ($category !== false) {
@@ -122,7 +125,7 @@ class Controller_Notices {
 		$notices = array_merge($notices, $userNotices);
 		
 		foreach ($notices as $nid => $n) {
-			$notice = new Model_Notice($nid, $n['severity'], $n['messageHTML'], $n['category']);
+			$notice = new Model_Notice($nid, $n['severity'], $n['messageHTML'], $n['category'], $n['buttons'] ?? array());
 			if (is_multisite()) {
 				add_action('network_admin_notices', array($notice, 'display_notice'));
 			}
@@ -165,12 +168,13 @@ class Controller_Notices {
 			update_user_meta($user->ID, self::USER_META_KEY, $notices);
 			return;
 		}
-		Controller_Settings::shared()->set_array(Controller_Settings::OPTION_GLOBAL_NOTICES, $notices, true);
+		Controller_Settings::shared()->set(Controller_Settings::OPTION_GLOBAL_NOTICES, $notices, true);
 	}
 
 	public function get_persistent_notice_ids() {
 		return array(
-			self::PERSISTENT_NOTICE_WOOCOMMERCE_INTEGRATION
+			self::PERSISTENT_NOTICE_WOOCOMMERCE_INTEGRATION,
+			self::PERSISTENT_NOTICE_STANDALONE_DISCONTINUING,
 		);
 	}
 

@@ -42,8 +42,7 @@ $errorMessage = $gracePeriod === null ? __('Unable to Activate Grace Period', 'w
 			}
 			function handleError() {
 				if (typeof WFLS === 'object') {
-					WFLS.panelModal(
-						(WFLS.screenSize(500) ? '300px' : '400px'),
+					WFLS.standaloneModal(
 						<?php echo json_encode($errorMessage) ?>,
 						<?php echo json_encode($gracePeriod === null ? __('An unexpected error occurred while attempting to activate the grace period.', 'wordfence-login-security') : __('An unexpected error occurred while attempting to reset the grace period.', 'wordfence-login-security')) ?>
 					);

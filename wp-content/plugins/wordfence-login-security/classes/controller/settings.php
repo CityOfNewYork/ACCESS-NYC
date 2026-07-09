@@ -4,6 +4,7 @@ namespace WordfenceLS;
 
 use WordfenceLS\Settings\Model_DB;
 use WordfenceLS\Settings\Model_WPOptions;
+use WordfenceLS\Utility_Number;
 
 class Controller_Settings {
 	//Configurable
@@ -76,41 +77,61 @@ class Controller_Settings {
 		$this->_migrate_admin_2fa_requirements_to_roles();
 	}
 	
+	/**
+	 * Returns a key/value array of all defaults. The value is the storage-ready value (e.g., a JSON string for array
+	 * settings).
+	 */
+	protected function _defaults() {
+		return array(
+			self::OPTION_XMLRPC_ENABLED => true,
+			self::OPTION_2FA_WHITELISTED => '',
+			self::OPTION_IP_SOURCE => Model_Request::IP_SOURCE_AUTOMATIC,
+			self::OPTION_IP_TRUSTED_PROXIES => '',
+			self::OPTION_REQUIRE_2FA_ADMIN => false,
+			self::OPTION_REQUIRE_2FA_GRACE_PERIOD_ENABLED => false,
+			self::OPTION_REQUIRE_2FA_USER_GRACE_PERIOD => self::DEFAULT_REQUIRE_2FA_USER_GRACE_PERIOD,
+			self::OPTION_GLOBAL_NOTICES => '[]',
+			self::OPTION_REMEMBER_DEVICE_ENABLED => false,
+			self::OPTION_REMEMBER_DEVICE_DURATION => 30 * 86400,
+			self::OPTION_ALLOW_XML_RPC => true,
+			self::OPTION_ENABLE_AUTH_CAPTCHA => false,
+			self::OPTION_CAPTCHA_TEST_MODE => false,
+			self::OPTION_RECAPTCHA_SITE_KEY => '',
+			self::OPTION_RECAPTCHA_SECRET => '',
+			self::OPTION_CAPTCHA_STATS => '{"counts": [0,0,0,0,0,0,0,0,0,0,0], "avg": 0}',
+			self::OPTION_RECAPTCHA_THRESHOLD => 0.5,
+			self::OPTION_LAST_SECRET_REFRESH => 0,
+			self::OPTION_DELETE_ON_DEACTIVATION => false,
+			self::OPTION_ENABLE_WOOCOMMERCE_INTEGRATION => false,
+			self::OPTION_ENABLE_WOOCOMMERCE_ACCOUNT_INTEGRATION => false,
+			self::OPTION_ENABLE_SHORTCODE => false,
+			self::OPTION_ENABLE_LOGIN_HISTORY_COLUMNS => true,
+			self::OPTION_STACK_UI_COLUMNS => true,
+			self::OPTION_SCHEMA_VERSION => false,
+			self::OPTION_USER_COUNT_QUERY_STATE => false,
+			self::OPTION_DISABLE_TEMPORARY_TABLES => false,
+			self::OPTION_USE_NTP => true,
+			self::OPTION_ALLOW_DISABLING_NTP => false,
+			self::OPTION_NTP_FAILURE_COUNT => 0,
+			self::OPTION_NTP_OFFSET => 0,
+			self::OPTION_DISMISSED_FRESH_INSTALL_MODAL => false,
+		);
+	}
+	
 	public function set_defaults() {
-		$this->_settingsStorage->set_multiple(array(
-			self::OPTION_XMLRPC_ENABLED => array('value' => true, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_2FA_WHITELISTED => array('value' => '', 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false), 
-			self::OPTION_IP_SOURCE => array('value' => Model_Request::IP_SOURCE_AUTOMATIC, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_IP_TRUSTED_PROXIES => array('value' => '', 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_REQUIRE_2FA_ADMIN => array('value' => false, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_REQUIRE_2FA_GRACE_PERIOD_ENABLED => array('value' => false, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_REQUIRE_2FA_USER_GRACE_PERIOD => array('value' => self::DEFAULT_REQUIRE_2FA_USER_GRACE_PERIOD, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_GLOBAL_NOTICES => array('value' => '[]', 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_REMEMBER_DEVICE_ENABLED => array('value' => false, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_REMEMBER_DEVICE_DURATION => array('value' => (30 * 86400), 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_ALLOW_XML_RPC => array('value' => true, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_ENABLE_AUTH_CAPTCHA => array('value' => false, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_CAPTCHA_STATS => array('value' => '{"counts":[0,0,0,0,0,0,0,0,0,0,0],"avg":0}', 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_RECAPTCHA_THRESHOLD => array('value' => 0.5, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_LAST_SECRET_REFRESH => array('value' => 0, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_DELETE_ON_DEACTIVATION => array('value' => false, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_ENABLE_WOOCOMMERCE_INTEGRATION => array('value' => false, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_ENABLE_WOOCOMMERCE_ACCOUNT_INTEGRATION => array('value' => false, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_ENABLE_SHORTCODE => array('value' => false, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_ENABLE_LOGIN_HISTORY_COLUMNS => array('value' => true, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_STACK_UI_COLUMNS => array('value' => true, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_SCHEMA_VERSION => array('value' => 0, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_USER_COUNT_QUERY_STATE => array('value' => 0, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false),
-			self::OPTION_DISABLE_TEMPORARY_TABLES => array('value' => 0, 'autoload' => Model_Settings::AUTOLOAD_YES, 'allowOverwrite' => false)
-		));
+		$defaults = $this->_defaults();
+		$defaults = array_column(array_map(function($k, $v) {
+			return array('k' => $k, 'v' => array(
+				'value' => $v,
+				'autoload' => Model_Settings::AUTOLOAD_YES,
+				'allowOverwrite' => false,
+			));
+			}, array_keys($defaults), array_values($defaults)), 'v', 'k');
+		$this->_settingsStorage->set_multiple($defaults);
 	}
 	
 	public function set($key, $value, $already_validated = false) {
 		return $this->set_multiple(array($key => $value), $already_validated);
-	}
-	
-	public function set_array($key, $value, $already_validated = false) {
-		return $this->set_multiple(array($key => json_encode($value)), $already_validated);
 	}
 	
 	public function set_multiple($changes, $already_validated = false) {
@@ -128,7 +149,7 @@ class Controller_Settings {
 	}
 	
 	public function get_bool($key, $default = false) {
-		return $this->_truthy_to_bool($this->get($key, $default));
+		return Utility_Number::truthyToBool($this->get($key, $default));
 	}
 	
 	public function get_int($key, $default = 0) {
@@ -152,6 +173,14 @@ class Controller_Settings {
 	
 	public function remove($key) {
 		$this->_settingsStorage->remove($key);
+	}
+	
+	public function all() {
+		$result = $this->_settingsStorage->get_multiple($this->_defaults());
+		foreach ($result as $key => &$value) {
+			$value = $this->inflate($key, $value);
+		}
+		return $result;
 	}
 	
 	/**
@@ -191,7 +220,7 @@ class Controller_Settings {
 			//Array
 			case self::OPTION_GLOBAL_NOTICES:
 			case self::OPTION_CAPTCHA_STATS:
-				return preg_match('/^\[.*\]$/', $value) || preg_match('/^\{.*\}$/', $value); //Only a rough JSON validation
+				return is_array($value);
 				
 			//Special
 			case self::OPTION_IP_TRUSTED_PROXIES:
@@ -200,7 +229,7 @@ class Controller_Settings {
 				$parsed = array_filter(array_map(function($s) { return trim($s); }, preg_split('/[\r\n]/', $value)));
 				foreach ($parsed as $entry) {
 					if (!Controller_Whitelist::shared()->is_valid_range($entry)) {
-						return sprintf(__('The IP/range %s is invalid.', 'wordfence-login-security'), esc_html($entry));
+						return sprintf(/* translators: IP or range */ __('The IP/range %s is invalid.', 'wordfence-login-security'), esc_html($entry));
 					}
 				}
 				return true;
@@ -238,9 +267,12 @@ class Controller_Settings {
 					}
 					return true;
 				}
-				return sprintf(__('An error was encountered while validating the reCAPTCHA site key: %s', 'wordfence-login-security'), $response->get_error_message());
+				return sprintf(/* translators: validation error */ __('An error was encountered while validating the reCAPTCHA site key: %s', 'wordfence-login-security'), $response->get_error_message());
 			case self::OPTION_REQUIRE_2FA_USER_GRACE_PERIOD:
-				return is_numeric($value) && $value >= 0 && $value <= self::MAX_REQUIRE_2FA_USER_GRACE_PERIOD;
+				if (!is_numeric($value) || $value < 0 || $value > self::MAX_REQUIRE_2FA_USER_GRACE_PERIOD) {
+					return sprintf(/* translators: 1. Minimum number of days. 2. Maximum number of days. */ __('The grace period day limit must be between %1$d and %2$d.', 'wordfence-login-security'), 0, self::MAX_REQUIRE_2FA_USER_GRACE_PERIOD);
+				}
+				return true;
 		}
 		return true;
 	}
@@ -282,12 +314,12 @@ class Controller_Settings {
 			case self::OPTION_DELETE_ON_DEACTIVATION:
 			case self::OPTION_ENABLE_WOOCOMMERCE_INTEGRATION:
 			case self::OPTION_ENABLE_WOOCOMMERCE_ACCOUNT_INTEGRATION:
-			case self::OPTION_ENABLE_SHORTCODE;
+			case self::OPTION_ENABLE_SHORTCODE:
 			case self::OPTION_ENABLE_LOGIN_HISTORY_COLUMNS:
 			case self::OPTION_STACK_UI_COLUMNS:
 			case self::OPTION_USER_COUNT_QUERY_STATE:
 			case self::OPTION_DISABLE_TEMPORARY_TABLES:
-				return $this->_truthy_to_bool($value);
+				return Utility_Number::truthyToBool($value);
 				
 			//Int
 			case self::OPTION_REMEMBER_DEVICE_DURATION:
@@ -299,6 +331,11 @@ class Controller_Settings {
 			//Float
 			case self::OPTION_RECAPTCHA_THRESHOLD:
 				return (float) $value;
+			
+			//Array
+			case self::OPTION_GLOBAL_NOTICES:
+			case self::OPTION_CAPTCHA_STATS:
+				return json_encode($value);
 			
 			//Special
 			case self::OPTION_IP_TRUSTED_PROXIES:
@@ -316,6 +353,59 @@ class Controller_Settings {
 			case self::OPTION_RECAPTCHA_SITE_KEY:
 			case self::OPTION_RECAPTCHA_SECRET:
 				return trim($value);
+		}
+		return $value;
+	}
+	
+	/**
+	 * Normalizes a setting value from its saved state into the desired type.
+	 *
+	 * @param string $key
+	 * @param mixed $value
+	 * @return mixed
+	 */
+	public function inflate($key, $value) {
+		switch ($key) {
+			//Boolean
+			case self::OPTION_XMLRPC_ENABLED:
+			case self::OPTION_REQUIRE_2FA_ADMIN:
+			case self::OPTION_REQUIRE_2FA_GRACE_PERIOD_ENABLED:
+			case self::OPTION_REMEMBER_DEVICE_ENABLED:
+			case self::OPTION_ALLOW_XML_RPC:
+			case self::OPTION_ENABLE_AUTH_CAPTCHA:
+			case self::OPTION_CAPTCHA_TEST_MODE:
+			case self::OPTION_DISMISSED_FRESH_INSTALL_MODAL:
+			case self::OPTION_DELETE_ON_DEACTIVATION:
+			case self::OPTION_ENABLE_WOOCOMMERCE_INTEGRATION:
+			case self::OPTION_ENABLE_WOOCOMMERCE_ACCOUNT_INTEGRATION:
+			case self::OPTION_ENABLE_SHORTCODE:
+			case self::OPTION_ENABLE_LOGIN_HISTORY_COLUMNS:
+			case self::OPTION_STACK_UI_COLUMNS:
+			case self::OPTION_USER_COUNT_QUERY_STATE:
+			case self::OPTION_DISABLE_TEMPORARY_TABLES:
+				return Utility_Number::truthyToBool($value);
+			
+			//Int
+			case self::OPTION_REMEMBER_DEVICE_DURATION:
+			case self::OPTION_LAST_SECRET_REFRESH:
+			case self::OPTION_REQUIRE_2FA_USER_GRACE_PERIOD:
+			case self::OPTION_SCHEMA_VERSION:
+				return (int) $value;
+			
+			//Float
+			case self::OPTION_RECAPTCHA_THRESHOLD:
+				return (float) $value;
+			
+			//Array
+			case self::OPTION_GLOBAL_NOTICES:
+			case self::OPTION_CAPTCHA_STATS:
+				return json_decode($value, true);
+			
+			//Special
+			case self::OPTION_IP_TRUSTED_PROXIES:
+			case self::OPTION_2FA_WHITELISTED:
+				$value = !is_string($value) ? '' : $value;
+				return implode("\n", array_filter(array_map(function($s) { return trim($s); }, preg_split('/[\r\n]/', $value))));
 		}
 		return $value;
 	}
@@ -650,35 +740,6 @@ class Controller_Settings {
 	/**
 	 * Utility
 	 */
-	
-	/**
-	 * Translates a value to a boolean, correctly interpreting various textual representations.
-	 *
-	 * @param $value
-	 * @return bool
-	 */
-	protected function _truthy_to_bool($value) {
-		if ($value === true || $value === false) {
-			return $value;
-		}
-		
-		if (is_null($value)) {
-			return false;
-		}
-		
-		if (is_numeric($value)) {
-			return !!$value;
-		}
-		
-		if (preg_match('/^(?:f(?:alse)?|no?|off)$/i', $value)) {
-			return false;
-		}
-		else if (preg_match('/^(?:t(?:rue)?|y(?:es)?|on)$/i', $value)) {
-			return true;
-		}
-		
-		return !empty($value);
-	}
 	
 	/**
 	 * Parses the given time string and returns its DateTime with the server's configured time zone.

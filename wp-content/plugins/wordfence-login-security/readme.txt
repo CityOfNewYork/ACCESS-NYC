@@ -3,8 +3,8 @@ Contributors: wfryan, wfmattr, mmaunder, wfmatt
 Tags: security, login security, 2fa, two factor authentication, captcha, xml-rpc, mfa, 2 factor
 Requires at least: 4.7
 Requires PHP: 7.0
-Tested up to: 6.7
-Stable tag: 1.1.15
+Tested up to: 7.0
+Stable tag: 1.1.16
 
 Secure your website with Wordfence Login Security, providing two-factor authentication, login and registration CAPTCHA, and XML-RPC protection.
 
@@ -12,9 +12,13 @@ Secure your website with Wordfence Login Security, providing two-factor authenti
 
 ### WORDFENCE LOGIN SECURITY
 
-Wordfence Login Security contains a subset of the functionality found in the full Wordfence plugin: Two-factor Authentication, XML-RPC Protection and Login Page CAPTCHA.
-     
-Are you looking for comprehensive WordPress Security? [Check out the full Wordfence plugin](https://wordpress.org/plugins/wordfence/).
+Wordfence Login Security contains a subset of the functionality found in the full Wordfence plugin: Two-factor Authentication, XML-RPC Protection, and Login Page CAPTCHA.
+
+**This plugin is being discontinued on or around July 1, 2026.**
+
+All of its features are already included in the main Wordfence plugin, which is also available to use for free. We recommend installing Wordfence to continue receiving updates, security improvements, and full functionality.
+
+[Install the full Wordfence plugin](https://wordpress.org/plugins/wordfence/)
 
 #### TWO-FACTOR AUTHENTICATION
 
@@ -57,6 +61,12 @@ Secure your website with Wordfence Login Security.
 3. Configuration options include XML-RPC protection and login page CAPTCHA.
 
 == Changelog ==
+
+= 1.1.16 - April 29, 2026 =
+* Improvement: Migrated all deprecated JavaScript libraries in use to a Vue-based infrastructure
+* Improvement: Better coverage of `aria-` accessibility attributes
+* Fix: WordPress 7.0 compatibility fixes
+* Note: The standalone Login Security plugin will be discontinued around July 1, 2026. Sites using it should [install the full Wordfence plugin](https://wordpress.org/plugins/wordfence/) to retain this functionality
 
 = 1.1.15 - January 15, 2025 =
 * Change: Reworked setting caching to avoid issues with some object caches

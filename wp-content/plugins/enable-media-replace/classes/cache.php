@@ -11,6 +11,10 @@ class emrCache
     protected $has_fastestcache = false;
     protected $has_siteground = false;
     protected $has_litespeed = false;
+    protected $has_fastpixel = false;
+    protected $has_wprocket = false;
+    protected $has_breeze = false;
+    protected $has_cacheenabler = false;
 
     public function __construct()
     {
@@ -43,7 +47,22 @@ class emrCache
           $this->has_litespeed = true;
       }
 
-      // @todo WpRocket?
+      if (has_action('fastpixel/purge/all')) {
+          $this->has_fastpixel = true;
+      }
+
+      if (function_exists('rocket_clean_domain')) {
+          $this->has_wprocket = true;
+      }
+
+      if (defined('BREEZE_VERSION')) {
+          $this->has_breeze = true;
+      }
+
+      if (class_exists('Cache_Enabler')) {
+          $this->has_cacheenabler = true;
+      }
+
       // @todo BlueHost Caching?
     }
 
@@ -89,6 +108,18 @@ class emrCache
         if ($this->has_litespeed)
             $this->litespeedReset($post_id);
 
+        if ($this->has_fastpixel)
+            $this->fastpixelReset();
+
+        if ($this->has_wprocket)
+            $this->wprocketReset();
+
+        if ($this->has_breeze)
+            $this->breezeReset();
+
+        if ($this->has_cacheenabler)
+            $this->cacheEnablerReset();
+
         do_action('emr/cache/flush', $post_id);
     }
 
@@ -132,7 +163,27 @@ class emrCache
 
     protected function litespeedReset($post_id)
     {
-      do_action('litespeed_media_reset', $post_id);
+      do_action('litespeed_purge_all');
+    }
+
+    protected function fastpixelReset()
+    {
+      do_action('fastpixel/purge/all');
+    }
+
+    protected function wprocketReset()
+    {
+      rocket_clean_domain();
+    }
+
+    protected function breezeReset()
+    {
+      do_action('breeze_clear_all_cache');
+    }
+
+    protected function cacheEnablerReset()
+    {
+      do_action('cache_enabler_clear_complete_cache');
     }
 
 }

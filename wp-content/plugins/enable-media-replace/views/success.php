@@ -8,7 +8,6 @@ if (! defined('ABSPATH')) {
 //use \EnableMediaReplace\UIHelper;
 use EnableMediaReplace\ShortPixelLogger\ShortPixelLogger as Log;
 
-
 ?>
 
 <div class='enable-media-replace emr-screen success-screen'>
@@ -18,9 +17,11 @@ use EnableMediaReplace\ShortPixelLogger\ShortPixelLogger as Log;
 
 	<p><?php _e('Your image has been successfully replaced!', 'enable-media-replace'); ?></p>
 
-	<p><?php _e('Did you know that you can also optimize the images on your website to make them load faster?', 'enable-media-replace'); ?></p>
+	<?php if (apply_filters('emr/upsell', current_user_can('install_plugins'))) { ?>
+		<p><?php _e('Did you know that you can also optimize the images on your website to make them load faster?', 'enable-media-replace'); ?></p>
 
-	<p><?php printf(esc_html__('Try the %sShortPixel Image Optimizer%s plugin!', 'enable-media-replace'), '<a href="https://wordpress.org/plugins/shortpixel-image-optimiser/" target="_blank">', '</a>'); ?></p>
+		<p><?php printf(esc_html__('Try the %sShortPixel Image Optimizer%s plugin!', 'enable-media-replace'), '<a href="https://wordpress.org/plugins/shortpixel-image-optimiser/" target="_blank">', '</a>'); ?></p>
+	<?php } ?>
 
 	<p><?php _e('You will be redirect to the image screen in a few seconds.', 'enable-media-replace');
 		printf(esc_html__('( %s ) or %s click here to continue %s', 'enable-media-replace'), '<span id="redirect_counter"></span>',

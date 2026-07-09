@@ -4,7 +4,7 @@ Donate link: https://www.bynder.com/products/content-workflow/
 Tags: structured content, gather content, gathercontent, import, migrate, export, mapping, production, writing, collaboration, platform, connect, link, gather, client, word, production, bynder, content, workflow
 Requires at least: 5.6.0
 Tested up to: 6.6.0
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPL-2.0+
 Requires PHP: 7.0
 License URI: https://opensource.org/licenses/GPL-2.0
@@ -67,6 +67,11 @@ Below the text box is a button that will allow you to simply save all of that in
 4. Bulk import your content at scale
 
 == Changelog ==
+
+= 1.0.6 =
+* Added a `Clear Pending Imports` button to the template mapping page. This allows you to clear any pending imports
+that are stuck in the queue, for example if there was an error during import or if the import was cancelled before
+completion.
 
 = 1.0.5 =
 * Fixes an issue where plain text fields in a component were being imported as rich text fields

@@ -114,7 +114,7 @@ abstract class ViewController
 						$message = __('Error updating WordPress post in the database', 'enable-media-replace');
 					break;
 					case self::ERROR_DIRECTORY_SECURITY:
-						$message = __('Specificed directory is outside the upload directory. This is not allowed for security reasons', 'enable-media-replace');
+						$message = __('Specified directory is outside the upload directory. This is not allowed for security reasons', 'enable-media-replace');
 						$path = isset($errorData['path']) ? $errorData['path'] : false;
 						$basedir = isset($errorData['basedir']) ? $errorData['basedir'] : false;
 
@@ -124,7 +124,7 @@ abstract class ViewController
 						}
 					break;
 					case self::ERROR_DIRECTORY_NOTEXIST:
-						$message = __('Specificed new directory does not exist. Path must be a relative path from the upload directory and exist', 'enable-media-replace');
+						$message = __('Specified new directory does not exist. Path must be a relative path from the upload directory and exist', 'enable-media-replace');
 					break;
 
 					case self::ERROR_NONCE:

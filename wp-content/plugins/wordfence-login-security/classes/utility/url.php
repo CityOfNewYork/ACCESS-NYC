@@ -24,4 +24,14 @@ class Utility_URL {
 		}
 		return $s;
 	}
+	
+	/**
+	 * Convenience function to generate an admin URL using the appropriate function depending on multisite status.
+	 *
+	 * @param string $path
+	 * @return string
+	 */
+	public static function maybe_network_admin_url($path) {
+		return function_exists('network_admin_url') && is_multisite() ? network_admin_url($path) : admin_url($path);
+	}
 }

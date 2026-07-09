@@ -57,6 +57,14 @@ class Model_WPOptions extends Model_Settings {
 		return $value;
 	}
 	
+	public function get_multiple($keysDefaults) {
+		$results = array();
+		foreach ($keysDefaults as $key => $default) {
+			$results[$key] = $this->get($key, $default); //`get_options` exists in WP 6.4+ but can't use it at our supported version
+		}
+		return $results;
+	}
+	
 	public function remove($key) {
 		$key = $this->_translate_key($this->_prefix . $key);
 		if (is_multisite()) {

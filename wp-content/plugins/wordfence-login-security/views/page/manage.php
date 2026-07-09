@@ -21,14 +21,14 @@ $requires2fa = \WordfenceLS\Controller_Users::shared()->requires_2fa($user, $inG
 $lockedOut = $requires2fa && !$enabled;
 
 ?>
-<p><?php echo wp_kses(sprintf(__('Two-Factor Authentication, or 2FA, significantly improves login security for your website. Wordfence 2FA works with a number of TOTP-based apps like Google Authenticator, FreeOTP, and Authy. For a full list of tested TOTP-based apps, <a href="%s" target="_blank" rel="noopener noreferrer">click here</a>.', 'wordfence-login-security'), \WordfenceLS\Controller_Support::esc_supportURL(\WordfenceLS\Controller_Support::ITEM_MODULE_LOGIN_SECURITY_2FA)), array('a'=>array('href'=>array(), 'target'=>array(), 'rel'=>array()))); ?></p>
+<p><?php echo wp_kses(sprintf(/* translators: Support URL */ __('Two-Factor Authentication, or 2FA, significantly improves login security for your website. Wordfence 2FA works with a number of TOTP-based apps like Google Authenticator, FreeOTP, and Authy. For a full list of tested TOTP-based apps, <a href="%s" target="_blank" rel="noopener noreferrer">click here</a>.', 'wordfence-login-security'), \WordfenceLS\Controller_Support::esc_supportURL(\WordfenceLS\Controller_Support::ITEM_MODULE_LOGIN_SECURITY_2FA)), array('a'=>array('href'=>array(), 'target'=>array(), 'rel'=>array()))); ?></p>
 <?php if ($canEditUsers): ?>
 <div id="wfls-editing-display" class="wfls-flex-row wfls-flex-row-xs-wrappable wfls-flex-row-equal-heights">
 	<div class="wfls-block wfls-always-active wfls-flex-item-full-width wfls-add-bottom">
 		<div class="wfls-block-header wfls-block-header-border-bottom">
 			<div class="wfls-block-header-content">
 				<div class="wfls-block-title">
-					<strong><?php echo wp_kses(sprintf(__('Editing User:&nbsp;&nbsp;%s <span class="wfls-text-plain">%s</span>', 'wordfence-login-security'), get_avatar($user->ID, 16, '', $user->user_login), \WordfenceLS\Text\Model_HTML::esc_html($user->user_login) . ($ownAccount ? ' ' . __('(you)', 'wordfence-login-security') : '')), array('span'=>array('class'=>array()))); ?></strong>
+					<strong><?php echo wp_kses(sprintf(/* translators: 1. WordPress avatar tag; 2. WordPress username */ __('Editing User:&nbsp;&nbsp;%1$s <span class="wfls-text-plain">%2$s</span>', 'wordfence-login-security'), get_avatar($user->ID, 16, '', $user->user_login), \WordfenceLS\Text\Model_HTML::esc_html($user->user_login) . ($ownAccount ? ' ' . __('(you)', 'wordfence-login-security') : '')), array('span'=>array('class'=>array()))); ?></strong>
 				</div>
 			</div>
 		</div>

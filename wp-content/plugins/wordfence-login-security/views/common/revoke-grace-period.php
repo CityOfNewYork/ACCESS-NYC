@@ -32,8 +32,7 @@ $errorMessage = __('Unable to Revoke Grace Period', 'wordfence-login-security');
 			}
 			function handleError() {
 				if (typeof WFLS === 'object') {
-					WFLS.panelModal(
-						(WFLS.screenSize(500) ? '300px' : '400px'),
+					WFLS.standaloneModal(
 						<?php echo json_encode($errorMessage) ?>,
 						<?php echo json_encode(__('An unexpected error occurred while attempting to revoke the grace period.', 'wordfence-login-security')) ?>
 					);

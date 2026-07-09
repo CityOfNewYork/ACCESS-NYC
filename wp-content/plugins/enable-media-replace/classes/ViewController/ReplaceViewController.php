@@ -64,6 +64,20 @@ class ReplaceViewController extends \EnableMediaReplace\ViewController
 			$this->view->sourceMime = $source_mime;
 			$this->view->settings = array_merge($defaults, $settings); // might miss some
 
+			/**
+			 * Filters the default replace_type ('replace' or 'replace_and_search')
+			 * shown on the media replace screen. Overrides whatever was last
+			 * remembered in the stored option.
+			 *
+			 * @param string $replace_type   Current default ('replace' or 'replace_and_search').
+			 * @param int    $attachment_id  The attachment being replaced.
+			 */
+			$this->view->settings['replace_type'] = apply_filters(
+				'emr/replace/default_type',
+				$this->view->settings['replace_type'],
+				$attachment_id
+			);
+
 			// Indicates if file can be moved to other location. Can't be done when offloaded.
 			$this->view->is_movable = apply_filters('emr/replace/file_is_movable', true, $attachment_id);
 

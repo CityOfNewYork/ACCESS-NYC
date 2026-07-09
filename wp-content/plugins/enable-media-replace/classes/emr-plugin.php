@@ -21,7 +21,8 @@ class EnableMediaReplacePlugin
 
     public function __construct()
     {
-        add_action('plugins_loaded', array($this, 'runtime')); //lowInit, before theme setup!
+        add_action('init', array($this, 'runtime')); 
+       // add_action('init', [$this, 'init']);  // init for user authentication, not set on plugins_loaded.
 				add_action('admin_init', array($this, 'adminInit')); // adminInit, after functions.php
     }
 
@@ -29,27 +30,33 @@ class EnableMediaReplacePlugin
     {
          $this->nopriv_plugin_actions();
 
-        if (EMR_CAPABILITY !== false) {
-            if (is_array(EMR_CAPABILITY)) {
-                $this->general_cap = EMR_CAPABILITY[0];
-                $this->user_cap = EMR_CAPABILITY[1];
+         if (EMR_CAPABILITY !== false) {
+          if (is_array(EMR_CAPABILITY)) {
+              $this->general_cap = EMR_CAPABILITY[0];
+              $this->user_cap = EMR_CAPABILITY[1];
 
-                if (! current_user_can($this->general_cap) && ! current_user_can($this->user_cap)) {
-                    return;
-                }
-            } else {
-                $this->general_cap = EMR_CAPABILITY;
-                if (! current_user_can($this->general_cap)) {
-                    return;
-                }
-            }
-        } elseif (! current_user_can('upload_files')) {
-            return;
-        }
-
+              if (! current_user_can($this->general_cap) && ! current_user_can($this->user_cap)) {
+                  return;
+              }
+          } else {
+              $this->general_cap = EMR_CAPABILITY;
+              if (! current_user_can($this->general_cap)) {
+                  return;
+              }
+          }
+      } elseif (false === current_user_can('upload_files')) {
+          return;
+      }
+      
 				new Externals();
 
         $this->plugin_actions(); // init
+    }
+
+    public function init()
+    {
+
+
     }
 
 		public function adminInit()
@@ -140,7 +147,6 @@ class EnableMediaReplacePlugin
       // content filters
         add_filter('media_row_actions', array($this,'add_media_action'), 10, 2);
         add_action('attachment_submitbox_misc_actions', array($this,'admin_date_replaced_media_on_edit_media_screen'), 91);
-      //add_filter('upload_mimes', array($this,'add_mime_types'), 1, 1);
 
       // notices
 
@@ -217,6 +223,7 @@ class EnableMediaReplacePlugin
             case 'enable-media-replace/enable-media-replace.php':
                 $action = isset($_GET['action']) ? sanitize_text_field($_GET['action']) : '';
                 wp_enqueue_style('emr_style');
+                wp_enqueue_style('emr-redesign');
                 wp_enqueue_script('jquery-ui-datepicker');
                 wp_enqueue_style('jquery-ui-datepicker');
                 wp_enqueue_script('emr_admin');
@@ -290,15 +297,19 @@ class EnableMediaReplacePlugin
   */
     public function admin_scripts()
     {
-        if (is_rtl()) {
-            wp_register_style('emr_style', plugins_url('css/admin.rtl.css', EMR_ROOT_FILE));
+       if (is_rtl()) {
+            wp_register_style('emr_style', plugins_url('css/rtl/admin.css', EMR_ROOT_FILE));
         } else {
             wp_register_style('emr_style', plugins_url('css/admin.css', EMR_ROOT_FILE));
-        }
+       }
 
         wp_register_style('emr_edit-attachment', plugins_url('css/edit_attachment.css', EMR_ROOT_FILE));
 
 				wp_register_style('emr-remove-background', plugins_url('css/remove_background.css', EMR_ROOT_FILE));
+
+				$emr_redesign_path = plugin_dir_path(EMR_ROOT_FILE) . 'css/redesign.css';
+				$emr_redesign_ver  = file_exists($emr_redesign_path) ? filemtime($emr_redesign_path) : EMR_VERSION;
+				wp_register_style('emr-redesign', plugins_url('css/redesign.css', EMR_ROOT_FILE), array('emr_style'), $emr_redesign_ver);
 
         $mimes = array_values(get_allowed_mime_types());
 
@@ -321,7 +332,9 @@ class EnableMediaReplacePlugin
 				$ajax_url = admin_url('admin-ajax.php');
 
 
-        wp_register_script('emr_remove_bg', plugins_url('js/remove_bg.js', EMR_ROOT_FILE), array('jquery'), EMR_VERSION, true);
+        $emr_remove_bg_path = plugin_dir_path(EMR_ROOT_FILE) . 'js/remove_bg.js';
+        $emr_remove_bg_ver  = file_exists($emr_remove_bg_path) ? filemtime($emr_remove_bg_path) : EMR_VERSION;
+        wp_register_script('emr_remove_bg', plugins_url('js/remove_bg.js', EMR_ROOT_FILE), array('jquery'), $emr_remove_bg_ver, true);
 				wp_localize_script('emr_remove_bg', 'emrObject', array(
 					'ajax_url' => $ajax_url,
 					'nonce'    => wp_create_nonce('emr_remove_background')
@@ -538,17 +551,6 @@ class EnableMediaReplacePlugin
     }
 
   /**
-   * @param array $mime_types
-   * @return array
-   */
-     /* Off, no clue why this is here.
-  public function add_mime_types($mime_types)
-  {
-    $mime_types['dat'] = 'text/plain';     // Adding .dat extension
-    return $mime_types;
-  }
-*/
-  /**
    * Function called by filter 'media_row_actions'
    * Enables linking to EMR straight from the media library
   */
@@ -606,7 +608,7 @@ class EnableMediaReplacePlugin
             $modified = date_i18n(__('M j, Y @ H:i'), strtotime($post->post_modified));
             ?>
         <div class="misc-pub-section curtime">
-            <span id="timestamp"><?php echo esc_html__('Revised', 'enable-media-replace'); ?>: <b><?php echo $modified; ?></b></span>
+            <span id="timestamp"><?php echo esc_html__('Revised', 'enable-media-replace'); ?>: <b><?php echo esc_html($modified); ?></b></span>
         </div>
 
             <?php
@@ -617,7 +619,7 @@ class EnableMediaReplacePlugin
             $display_name = get_the_author_meta('display_name', $author_id);
             ?>
       <div class="misc-pub-section replace_author">
-        <span><?php echo esc_html__('Replaced By', 'enable-media-replace'); ?>: <b><?php echo $display_name; ?></b></span>
+        <span><?php echo esc_html__('Replaced By', 'enable-media-replace'); ?>: <b><?php echo esc_html($display_name); ?></b></span>
       </div>
             <?php
         }
@@ -642,20 +644,17 @@ class EnableMediaReplacePlugin
    * @return string content / replacement shorttag
    * @todo Note this returns the wrong date, ie. server date not corrected for timezone. Function could be removed altogether, not sure about purpose.
    */
-    public function get_modified_date($atts)
+    public function get_modified_date($args)
     {
-        $id=0;
-        $format= '';
 
-        extract(shortcode_atts(array(
-        'id' => '',
-        'format' => get_option('date_format') . " " . get_option('time_format'),
-        ), $atts));
+        $id = isset($args['id']) ? intval($args['id']) : false; 
+        $format = isset($args['format']) ? sanitize_text_field($args['format']) : false; 
 
-        if ($id == '') {
-            return false;
+        if (false === $id)
+        {
+          return false; 
         }
-
+ 
         // Get path to file
         $current_file = get_attached_file($id);
 
@@ -666,9 +665,14 @@ class EnableMediaReplacePlugin
       // Get file modification time
         $filetime = filemtime($current_file);
 
+        if (false === $format)
+        {
+          $format = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
+        }
+
         if (false !== $filetime) {
             // do date conversion
-            return date($format, $filetime);
+            return wp_date($format, $filetime);
         }
 
         return false;

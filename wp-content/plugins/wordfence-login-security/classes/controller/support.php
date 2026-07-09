@@ -24,6 +24,21 @@ class Controller_Support {
 	const ITEM_MODULE_LOGIN_SECURITY_OPTION_STACK_UI_COLUMNS = 'module-login-security-option-stack-ui-columns';
 	const ITEM_MODULE_LOGIN_SECURITY_2FA_NOTIFICATIONS = 'module-login-security-2fa-notifications';
 	
+	public static function supportURLs(): array {
+		$ref = new \ReflectionClass(static::class);
+		$constants = $ref->getConstants();
+		
+		$items = [];
+		foreach ($constants as $name => $value) {
+			if (strpos($name, 'ITEM_') === 0) {
+				$name = strtolower(substr($name, 5));
+				$items[$name] = static::supportURL($value);
+			}
+		}
+		
+		return $items;
+	}
+	
 	public static function esc_supportURL($item = self::ITEM_INDEX) {
 		return esc_url(self::supportURL($item));
 	}

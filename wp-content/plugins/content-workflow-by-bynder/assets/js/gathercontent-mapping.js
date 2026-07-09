@@ -1,8 +1,8 @@
 /**
- * Content Workflow (by Bynder) - v1.0.5 - 2025-04-10
+ * Content Workflow (by Bynder) - v1.0.6 - 2026-03-20
  * 
  *
- * Copyright (c) 2025 Content Workflow (by Bynder)
+ * Copyright (c) 2026 Content Workflow (by Bynder)
  * Licensed under the GPLv2 license.
  */
 
