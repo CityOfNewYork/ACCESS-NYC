@@ -184,7 +184,7 @@ function relevanssi_update_pin_fields( $post_id, $keywords ) {
 			if ( $weight < 1 ) {
 				$weight = 1;
 			}
-			$pin = trim( $pin );
+			$pin = trim( strtolower( $pin ) );
 
 			if ( $weight > 1 ) {
 				$pin_weights[ $pin ] = $weight;

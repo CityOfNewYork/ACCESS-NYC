@@ -89,7 +89,7 @@ function relevanssi_pinning( $hits ) {
 
 	$pin_weights = array();
 	foreach ( $pin_weights_sql as $row ) {
-		$pin_weights[ $row->post_id ] = $row->meta_value;
+		$pin_weights[ $row->post_id ] = strtolower( $row->meta_value );
 	}
 	unset( $pin_weights_sql );
 
@@ -99,11 +99,27 @@ function relevanssi_pinning( $hits ) {
 	*/
 	if ( is_array( $term_list ) ) {
 		$term_list_array = $term_list;
+		$term_lenghts    = array_map( 'relevanssi_strlen', $term_list_array );
+		array_multisort( $term_lenghts, SORT_DESC, $term_list_array );
 
-		array_multisort( array_map( 'relevanssi_strlen', $term_list_array ), SORT_DESC, $term_list_array );
+		// If there are many terms, the database queries can become long.
+		$term_lists    = array();
+		$slice_length  = 16 * 1024;
+		$running_count = 0;
+		$index         = 0;
 
-		$term_list = implode( "','", $term_list );
-		$term_list = "'$term_list'";
+		foreach ( $term_list as $term ) {
+			$term_lists[ $index ][] = $term;
+			$running_count         += strlen( $term ) + 4;
+			if ( $running_count > $slice_length ) {
+				$term_lists[ $index ] = "'" . implode( "', '", $term_lists[ $index ] ) . "'";
+				++$index;
+				$running_count = 0;
+			}
+		}
+		if ( isset( $term_lists[ $index ] ) ) {
+			$term_lists[ $index ] = "'" . implode( "', '", $term_lists[ $index ] ) . "'";
+		}
 
 		$positive_ids = array();
 		$negative_ids = array();
@@ -123,8 +139,22 @@ function relevanssi_pinning( $hits ) {
 				$blog_id = $hit->blog_id;
 				switch_to_blog( $blog_id );
 				if ( ! isset( $pins_fetched[ $blog_id ] ) ) {
-					$positive_ids[ $blog_id ] = $wpdb->get_col( 'SELECT post_id FROM ' . $wpdb->prefix . "postmeta WHERE meta_key = '_relevanssi_pin' AND meta_value IN ( $term_list )" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-					$negative_ids[ $blog_id ] = $wpdb->get_col( 'SELECT post_id FROM ' . $wpdb->prefix . "postmeta WHERE meta_key = '_relevanssi_unpin' AND meta_value IN ( $term_list )" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+					foreach ( $term_lists as $term_list ) {
+						if ( ! isset( $positive_ids[ $blog_id ] ) ) {
+							$positive_ids[ $blog_id ] = array();
+						}
+						if ( ! isset( $negative_ids[ $blog_id ] ) ) {
+							$negative_ids[ $blog_id ] = array();
+						}
+						$positive_ids[ $blog_id ] = array_merge(
+							$positive_ids[ $blog_id ],
+							$wpdb->get_col( 'SELECT post_id FROM ' . $wpdb->prefix . "postmeta WHERE meta_key = '_relevanssi_pin' AND meta_value IN ( $term_list )" ) // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+						);
+						$negative_ids[ $blog_id ] = array_merge(
+							$negative_ids[ $blog_id ],
+							$wpdb->get_col( 'SELECT post_id FROM ' . $wpdb->prefix . "postmeta WHERE meta_key = '_relevanssi_unpin' AND meta_value IN ( $term_list )" ) // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+						);
+					}
 					if ( ! is_array( $pins_fetched ) ) {
 						$pins_fetched = array();
 					}
@@ -132,9 +162,23 @@ function relevanssi_pinning( $hits ) {
 				}
 				restore_current_blog();
 			} elseif ( ! $pins_fetched ) { // Single site.
-				$positive_ids[0] = $wpdb->get_col( "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_relevanssi_pin' AND meta_value IN ( $term_list )" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-				$negative_ids[0] = $wpdb->get_col( "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_relevanssi_unpin' AND meta_value IN ( $term_list )" ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-				$pins_fetched    = true;
+				foreach ( $term_lists as $term_list ) {
+					if ( ! isset( $positive_ids[0] ) ) {
+						$positive_ids[0] = array();
+					}
+					if ( ! isset( $negative_ids[0] ) ) {
+						$negative_ids[0] = array();
+					}
+					$positive_ids[0] = array_merge(
+						$positive_ids[0],
+						$wpdb->get_col( "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_relevanssi_pin' AND meta_value IN ( $term_list )" ) // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+					);
+					$negative_ids[0] = array_merge(
+						$negative_ids[0],
+						$wpdb->get_col( "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_relevanssi_unpin' AND meta_value IN ( $term_list )" ) // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+					);
+					$pins_fetched    = true;
+				}
 			}
 			$hit_id = strval( $hit->ID ); // The IDs from the database are strings, the one from the post is an integer in some contexts.
 
@@ -148,6 +192,7 @@ function relevanssi_pinning( $hits ) {
 
 			$pin_weight = 0;
 			$weights    = unserialize( $pin_weights[ $hit->ID ] ?? '' ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize
+			$term       = '';
 			foreach ( $term_list_array as $term ) {
 				if ( isset( $weights[ $term ] ) ) {
 					$pin_weight = $weights[ $term ];
@@ -170,7 +215,8 @@ function relevanssi_pinning( $hits ) {
 				$other_posts[] = relevanssi_return_value( $hit, $return_value );
 			}
 		}
-		array_multisort( array_map( 'relevanssi_strlen', array_keys( $pinned_posts ) ), SORT_DESC, $pinned_posts );
+		$pinned_posts_keys = array_map( 'relevanssi_strlen', array_keys( $pinned_posts ) );
+		array_multisort( $pinned_posts_keys, SORT_DESC, $pinned_posts );
 
 		$all_pinned_posts = array();
 		foreach ( $pinned_posts as $term => $posts_for_term ) {
@@ -237,7 +283,7 @@ function relevanssi_admin_search_pinning( $post, $query ) {
 
 	$pinned_words = array();
 	if ( isset( $post->relevanssi_pinned ) ) {
-		$pinned_words = get_post_meta( $post->ID, '_relevanssi_pin' );
+		$pinned_words = get_post_meta( $post->ID, '_relevanssi_pin', false );
 		$pinned       = '<strong>' . __( '(pinned)', 'relevanssi' ) . '</strong>';
 	}
 

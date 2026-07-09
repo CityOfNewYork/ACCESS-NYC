@@ -49,7 +49,7 @@ function relevanssi_extract_multiple_excerpts( $terms, $content, $excerpt_length
 		 * The default value for the gap is number of words / 200 minus the
 		 * excerpt length, which means Relevanssi tries to create 200 excerpts.
 		 *
-		 * @param int The gap between excerpt candidates.
+		 * @param int $gap            The gap between excerpt candidates.
 		 * @param int $count_words    The number of words in the content.
 		 * @param int $excerpt_length The length of the excerpt.
 		 */
@@ -106,7 +106,8 @@ function relevanssi_extract_multiple_excerpts( $terms, $content, $excerpt_length
 		 * To speed up the process, you can enable optimization, which means
 		 * Relevanssi only creates 50 excerpt candidates.
 		 *
-		 * @param boolean Return true to enable optimization, default false.
+		 * @param boolean $optimize Return true to enable optimization, default
+		 * false.
 		 */
 		if ( apply_filters( 'relevanssi_optimize_excerpts', false ) ) {
 			if ( $tries > 50 ) {

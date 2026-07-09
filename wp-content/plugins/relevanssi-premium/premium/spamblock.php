@@ -27,7 +27,7 @@ function relevanssi_spamblock() {
 		 * used. Relevanssi assumes the pretty URL prefix is /search/, but in
 		 * case it's something else, you can adjust that with this filter.
 		 *
-		 * @param string The search URL prefix, default '/search/'.
+		 * @param string $prefix The search URL prefix, default '/search/'.
 		 */
 		$url_prefix = apply_filters( 'relevanssi_search_url_prefix', '/search/' );
 		if ( substr( $_SERVER['REQUEST_URI'], '0', strlen( $url_prefix ) ) === $url_prefix ) {
@@ -41,6 +41,7 @@ function relevanssi_spamblock() {
 	$settings = get_option( 'relevanssi_spamblock', array() );
 	$keywords = $settings['keywords'] ?? '';
 	$regex    = $settings['regex'] ?? '';
+	$limit    = $settings['limit'] ?? '';
 	$chinese  = $settings['chinese'] ?? 'off';
 	$cyrillic = $settings['cyrillic'] ?? 'off';
 	$emoji    = $settings['emoji'] ?? 'off';
@@ -62,6 +63,11 @@ function relevanssi_spamblock() {
 	}
 
 	if ( 'on' === $bots && ! $is_highlight_match && relevanssi_user_agent_is_bot() ) {
+		http_response_code( 410 );
+		exit();
+	}
+
+	if ( isset( $limit ) && $limit > 0 && relevanssi_string_longer_than_limit( $query, $limit ) ) {
 		http_response_code( 410 );
 		exit();
 	}
@@ -108,6 +114,18 @@ function relevanssi_string_contains_chinese( string $text ): bool {
  */
 function relevanssi_string_contains_cyrillic( string $text ): bool {
 	return (bool) preg_match( '/\p{Cyrillic}/u', $text );
+}
+
+/**
+ * Checks if a string is longer than the defined limit.
+ *
+ * @param string $text The text to check.
+ * @param int    $limit The limit to check against.
+ *
+ * @return boolean
+ */
+function relevanssi_string_longer_than_limit( string $text, int $limit ): bool {
+	return strlen( $text ) > $limit;
 }
 
 /**

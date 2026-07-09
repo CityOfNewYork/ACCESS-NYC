@@ -634,7 +634,7 @@ function relevanssi_index_pdf_for_parent( $insert_data, $post_id ) {
 		/**
 		 * Filters the custom field value before indexing.
 		 *
-		 * @param array            Custom field values.
+		 * @param array  $values   Custom field values.
 		 * @param string $field    The custom field name.
 		 * @param int    $post_id The post ID.
 		 */
@@ -775,7 +775,7 @@ function relevanssi_get_users( array $args ) {
 	 * Useful to control the user role, for example: just set 'role__in' to whatever
 	 * you need.
 	 *
-	 * @param array User fetching arguments.
+	 * @param array $args User fetching arguments.
 	 */
 	$users_list = get_users( apply_filters( 'relevanssi_user_indexing_args', $args ) );
 	$users      = array();
@@ -1636,8 +1636,8 @@ function relevanssi_index_post_type_archive( $post_type, $remove_first = true ) 
 	 * If this filter hook returns false, the post type archive won't be
 	 * indexed and if it's already indexed, it will be removed from the index.
 	 *
-	 * @param boolean If true, index the archive. Default true.
-	 * @param object  The post type object.
+	 * @param boolean $index       If true, index the archive. Default true.
+	 * @param object  $type_object The post type object.
 	 */
 	if ( ! apply_filters( 'relevanssi_post_type_archive_ok', true, $post_type_object ) ) {
 		relevanssi_delete_post_type_object( $post_type );
@@ -1810,7 +1810,7 @@ function relevanssi_get_indexed_post_type_archives() {
 	/**
 	 * Filters the list of post type archives that are indexed by Relevanssi.
 	 *
-	 * @param array An array of post types.
+	 * @param array $post_types An array of post types.
 	 *
 	 * @return array An array of post types.
 	 */

@@ -92,6 +92,7 @@ function relevanssi_query_log() {
 	$source_select = '';
 	if ( function_exists( 'relevanssi_generate_source_select' ) ) {
 		$source_select = relevanssi_generate_source_select( $source );
+		// No user input here.
 	}
 	?>
 	<form method="post" style="background: white; padding: 10px; margin-top: 20px;">
@@ -104,7 +105,7 @@ function relevanssi_query_log() {
 			<?php echo esc_html__( 'To:', 'relevanssi' ); ?> <input type="date" name="to" value="<?php echo esc_attr( $to ); ?>" />
 			<input type="submit" value="<?php echo esc_attr( __( 'Filter', 'relevanssi' ) ); ?>" /></p>
 
-			<?php echo $source_select; ?>
+			<?php echo $source_select; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 		</div>
 		<div>
 			<input type="submit" value="<?php echo esc_attr( __( 'Year so far', 'relevanssi' ) ); ?>" name="this_year" style="margin-bottom: 10px" />
@@ -143,7 +144,7 @@ function relevanssi_query_log() {
 			</div>
 			<?php
 			if ( function_exists( 'relevanssi_user_searches_clicks' ) ) {
-				relevanssi_user_searches_clicks( $from, $to, $total_queries, $source );
+				relevanssi_user_searches_clicks( $from, $to, $total_queries );
 			}
 			?>
 		</div>
@@ -240,7 +241,7 @@ function relevanssi_total_queries( string $from, string $to, string $source ) {
 		);
 	}
 
-	$count = $wpdb->get_var( $query );
+	$count = $wpdb->get_var( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
 	return $count;
 }
@@ -281,7 +282,7 @@ function relevanssi_nothing_found_queries( string $from, string $to, string $sou
 		);
 	}
 
-	$count = $wpdb->get_var( $query );
+	$count = $wpdb->get_var( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
 	return $count;
 }
@@ -305,10 +306,11 @@ function relevanssi_date_queries( string $from, string $to, string $version = 'g
 	/**
 	 * Filters the number of most common queries to show.
 	 *
-	 * @param int The number of most common queries to show, default 100.
+	 * @param int $limit The number of most common queries to show, default 100.
 	 */
 	$limit = apply_filters( 'relevanssi_user_searches_limit', 100 );
 
+	$queries = array();
 	if ( 'good' === $version ) {
 		if ( ! $source ) {
 			$query = $wpdb->prepare(
@@ -341,7 +343,7 @@ function relevanssi_date_queries( string $from, string $to, string $version = 'g
 				$limit
 			);
 		}
-		$queries = $wpdb->get_results( $query );
+		$queries = $wpdb->get_results( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 	}
 
 	if ( 'bad' === $version ) {
@@ -376,7 +378,7 @@ function relevanssi_date_queries( string $from, string $to, string $version = 'g
 				$limit
 			);
 		}
-		$queries = $wpdb->get_results( $query );
+		$queries = $wpdb->get_results( $query ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 	}
 
 	if ( count( $queries ) > 0 ) {
@@ -420,7 +422,7 @@ function relevanssi_date_queries( string $from, string $to, string $version = 'g
 			/**
 			 * Filters the query URL for the user searches page.
 			 *
-			 * @param string Query URL.
+			 * @param string $url Query URL.
 			 */
 			$query_url = apply_filters( 'relevanssi_user_searches_query_url', $url . '/?s=' . $search_parameter );
 

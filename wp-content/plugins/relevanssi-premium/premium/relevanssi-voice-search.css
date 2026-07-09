@@ -1,0 +1,98 @@
+/* relevanssi voice search css */
+.relevanssi-voice-search-wrapper {
+    position: relative;
+    display: inline-flex;
+    flex-grow: 1;
+    vertical-align: middle;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.relevanssi-voice-search-wrapper .search-field,
+.relevanssi-voice-search-wrapper .wp-block-search__input {
+    margin: 0 !important;
+    padding-right: 35px !important;
+}
+
+/* Gutenberg AND Elementor Overrides */
+.wp-block-search__inside-wrapper .relevanssi-voice-search-wrapper,
+.elementor-search-form__container .relevanssi-voice-search-wrapper {
+    flex-grow: 1;
+    width: 100%;
+}
+
+.wp-block-search__inside-wrapper .wp-block-search__input,
+.elementor-search-form__container .search-field {
+    width: 100% !important;
+}
+
+.relevanssi-mic-button {
+    all: unset;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 9;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+.relevanssi-voice-search-wrapper br {
+    display: none !important;
+}
+
+.relevanssi-mic-button svg {
+    width: 22px !important;
+    height: 22px !important;
+    display: block;
+    pointer-events: none;
+}
+
+.relevanssi-mic-button .relevanssi-svg-mic-blocked {
+    display: none !important;
+}
+
+.relevanssi-mic-button .relevanssi-svg-mic-open {
+    display: block !important;
+}
+
+.relevanssi-mic-button:disabled .relevanssi-svg-mic-open {
+    display: none !important;
+}
+
+.relevanssi-mic-button:disabled .relevanssi-svg-mic-blocked {
+    display: block !important;
+    color: #cc0000;
+    opacity: 0.6;
+}
+
+.relevanssi-mic-button.is-active {
+    color: #d63638;
+}
+
+.relevanssi-mic-button.is-talking svg {
+    animation: relevanssi-pulse 1s infinite ease-in-out;
+}
+
+@keyframes relevanssi-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

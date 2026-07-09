@@ -3,7 +3,7 @@
  * /premium/class-spellcorrector.php
  *
  * @package Relevanssi_Premium
- * @author  Felipe Ribeiro <felipernb@gmail.com> with modifications by Mikko Saari
+ * @author  Felipe Ribeiro <felipernb@gmail.com>
  * @see     https://www.relevanssi.com/
  */
 

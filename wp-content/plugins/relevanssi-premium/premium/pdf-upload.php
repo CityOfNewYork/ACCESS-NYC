@@ -15,15 +15,18 @@ add_filter( 'relevanssi_index_custom_fields', 'relevanssi_add_pdf_customfield' )
 add_filter( 'relevanssi_pre_excerpt_content', 'relevanssi_add_pdf_content_to_excerpt', 10, 2 );
 add_filter( 'wp_media_attach_action', 'relevanssi_media_attach_action', 10, 3 );
 
-add_action( 'init', function() {
-	// Avoid problems with _load_textdomain_just_in_time being called early.
-	define( 'RELEVANSSI_ERROR_01', 'R_ERR01: ' . __( 'Post excluded from the index by the user.', 'relevanssi' ) );
-	define( 'RELEVANSSI_ERROR_02', 'R_ERR02: ' . __( 'Relevanssi is in privacy mode and not allowed to contact Relevanssiservices.com.', 'relevanssi' ) );
-	define( 'RELEVANSSI_ERROR_03', 'R_ERR03: ' . __( 'Attachment MIME type blocked.', 'relevanssi' ) );
-	define( 'RELEVANSSI_ERROR_04', 'R_ERR04: ' . __( 'Attachment file size is too large.', 'relevanssi' ) );
-	define( 'RELEVANSSI_ERROR_05', 'R_ERR05: ' . __( 'Attachment reading in process, please try again later.', 'relevanssi' ) );
-	define( 'RELEVANSSI_ERROR_06', 'R_ERR06: ' . __( 'Server did not respond.', 'relevanssi' ) );
-} );
+add_action(
+	'init',
+	function () {
+		// Avoid problems with _load_textdomain_just_in_time being called early.
+		define( 'RELEVANSSI_ERROR_01', 'R_ERR01: ' . __( 'Post excluded from the index by the user.', 'relevanssi' ) );
+		define( 'RELEVANSSI_ERROR_02', 'R_ERR02: ' . __( 'Relevanssi is in privacy mode and not allowed to contact Relevanssiservices.com.', 'relevanssi' ) );
+		define( 'RELEVANSSI_ERROR_03', 'R_ERR03: ' . __( 'Attachment MIME type blocked.', 'relevanssi' ) );
+		define( 'RELEVANSSI_ERROR_04', 'R_ERR04: ' . __( 'Attachment file size is too large.', 'relevanssi' ) );
+		define( 'RELEVANSSI_ERROR_05', 'R_ERR05: ' . __( 'Attachment reading in process, please try again later.', 'relevanssi' ) );
+		define( 'RELEVANSSI_ERROR_06', 'R_ERR06: ' . __( 'Server did not respond.', 'relevanssi' ) );
+	}
+);
 
 /**
  * Reads the attachment content when an attachment is saved.
@@ -128,7 +131,7 @@ function relevanssi_prime_pdf_content( $hits, $query ) {
 	}
 
 	$multisite_search = false;
-	if ( isset( $hits[0]->blog_id) ) {
+	if ( isset( $hits[0]->blog_id ) ) {
 		$multisite_search = true;
 		$multisite_posts  = array();
 	}
@@ -239,8 +242,8 @@ function relevanssi_attachment_metabox() {
 	 * files that are stored outside the WP attachment system, use this
 	 * filter to provide the URL of the file.
 	 *
-	 * @param string The URL of the attached file.
-	 * @param int    The post ID of the attachment post.
+	 * @param string $url     The URL of the attached file.
+	 * @param int    $post_id The post ID of the attachment post.
 	 */
 	$url         = apply_filters(
 		'relevanssi_get_attachment_url',
@@ -411,8 +414,8 @@ function relevanssi_index_pdf( $post_id, $ajax = false, $send_file = null ) {
 		 * files that are stored outside the WP attachment system, use this
 		 * filter to provide the name of the file.
 		 *
-		 * @param string The filename of the attached file.
-		 * @param int    The post ID of the attachment post.
+		 * @param string $filename The filename of the attached file.
+		 * @param int    $post_id  The post ID of the attachment post.
 		 */
 		$file_name = apply_filters(
 			'relevanssi_get_attached_file',
@@ -455,8 +458,8 @@ function relevanssi_index_pdf( $post_id, $ajax = false, $send_file = null ) {
 		 * files that are stored outside the WP attachment system, use this
 		 * filter to provide the URL of the file.
 		 *
-		 * @param string The URL of the attached file.
-		 * @param int    The post ID of the attachment post.
+		 * @param string $url     The URL of the attached file.
+		 * @param int    $post_id The post ID of the attachment post.
 		 */
 		$url = apply_filters(
 			'relevanssi_get_attachment_url',
@@ -804,7 +807,7 @@ function relevanssi_pdf_action_javascript() {
 			}
 			jQuery.post(ajaxurl, data, function(response ) {
 				var delete_response = JSON.parse(response);
-				if ( ! delete_response.deleted_rows ) {
+				if ( ! delete_response.deleted_rows && delete_response.deleted_rows !== 0 ) {
 					alert( relevanssi.error_reset_problems );
 				} else {
 					alert( relevanssi.error_reset_done );

@@ -151,6 +151,34 @@ function relevanssi_redirects_tab() {
 	</table>
 
 	<button type="button" class="secondary" id="add_redirect"><?php esc_html_e( 'Add a redirect', 'relevanssi' ); ?></button>
+	
+	<hr />
+
+	<details style="margin-top: 20px; border: 1px solid #ccc; padding: 10px; border-radius: 4px;">
+		<summary style="font-weight: bold; cursor: pointer; font-size: 1.1em;">
+			<?php esc_html_e( 'Bulk Add via CSV', 'relevanssi' ); ?>
+		</summary>
+		
+		<div style="margin-top: 15px;">
+			<table class="form-table">
+				<tbody>
+					<tr id="row_csv_redirects">
+						<th scope="row">
+							<label for="relevanssi_csv_redirects"><?php esc_html_e( 'CSV bulk insert', 'relevanssi' ); ?></label>
+							<p class="description">Paste your CSV here. These redirects will be added to the list above once you click the 'Save Changes' button below.</p>
+						</th>
+						<td>
+							<textarea name="relevanssi_csv_redirects" id="relevanssi_csv_redirects" rows="5" cols="60" style="width: 100%; max-width: 600px;"></textarea>
+							<p class="description">
+								<?php esc_html_e( 'Format: query;url;partial matching flag [1|0]. One per line.', 'relevanssi' ); ?>
+							</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</details>
+	
 
 	<p><?php esc_html_e( "Once you're done, remember to click the save button below!", 'relevanssi' ); ?></p>
 	<?php
