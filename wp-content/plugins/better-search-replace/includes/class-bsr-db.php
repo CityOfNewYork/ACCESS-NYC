@@ -1,0 +1,536 @@
+<?php
+/**
+ * Processes database-related functionality.
+ * @since      1.0
+ *
+ * @package    Better_Search_Replace
+ * @subpackage Better_Search_Replace/includes
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+// Prevent direct access.
+if ( ! defined( 'BSR_PATH' ) ) exit;
+
+class BSR_DB {
+
+	/**
+	 * The page size used throughout the plugin.
+	 * @var int
+	 */
+	public $page_size;
+
+	/**
+	 * The name of the backup file.
+	 * @var string
+	 */
+	public $file;
+
+	/**
+	 * The WordPress database class.
+	 * @var WPDB
+	 */
+	private $wpdb;
+
+	/**
+	 * Initializes the class and its properties.
+	 * @access public
+	 */
+	public function __construct() {
+
+		global $wpdb;
+		$this->wpdb = $wpdb;
+
+		$this->page_size = $this->get_page_size();
+	}
+
+	/**
+	 * Returns an array of tables in the database.
+	 * @access public
+	 * @return array
+	 */
+	public static function get_tables() {
+		global $wpdb;
+
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Schema discovery; not suitable for long-lived object cache.
+		if ( function_exists( 'is_multisite' ) && is_multisite() ) {
+
+			if ( is_main_site() ) {
+				$tables = $wpdb->get_col( 'SHOW TABLES' );
+			} else {
+				$blog_id = get_current_blog_id();
+				$tables  = $wpdb->get_col( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->base_prefix . absint( $blog_id ) . '\_%' ) );
+			}
+		} else {
+			$tables = $wpdb->get_col( 'SHOW TABLES' );
+		}
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
+
+		return $tables;
+	}
+
+	/**
+	 * Returns an array containing the size of each database table.
+	 * @access public
+	 * @return array
+	 */
+	public static function get_sizes() {
+		global $wpdb;
+
+		$sizes = array();
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Server metadata for admin display only.
+		$tables = $wpdb->get_results( 'SHOW TABLE STATUS', ARRAY_A );
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
+
+		if ( is_array( $tables ) && ! empty( $tables ) ) {
+
+			foreach ( $tables as $table ) {
+				$size = round( $table['Data_length'] / 1024 / 1024, 2 );
+				$sizes[ $table['Name'] ] = sprintf(
+					/* translators: %s: table size in megabytes. */
+					__( '(%s MB)', 'better-search-replace' ),
+					$size
+				);
+			}
+		}
+
+		return $sizes;
+	}
+
+	/**
+	 * Returns the current page size.
+	 * @access public
+	 * @return int
+	 */
+	public function get_page_size() {
+		$page_size = get_option( 'bsr_page_size' ) ? get_option( 'bsr_page_size' ) : 20000;
+		return absint( $page_size );
+	}
+
+	/**
+	 * Returns the number of pages in a table.
+	 * @access public
+	 * @return int
+	 */
+	public function get_pages_in_table( $table ) {
+		if ( false === $this->table_exists( $table ) ) {
+			return 0;
+		}
+
+		$wpdb = $this->wpdb;
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Row count on allowlisted table name; not suitable for object cache.
+		$rows = $wpdb->get_var( $wpdb->prepare( 'SELECT COUNT(*) FROM %i', $table ) );
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
+
+		$pages = ceil( $rows / $this->page_size );
+
+		return absint( $pages );
+	}
+
+	/**
+	 * Gets the total number of pages in the DB.
+	 * @access public
+	 * @return int
+	 */
+	public function get_total_pages( $tables ) {
+		$total_pages = 0;
+
+		foreach ( $tables as $table ) {
+
+			// Get the number of rows & pages in the table.
+			$pages = $this->get_pages_in_table( $table );
+
+			// Always include 1 page in case we have to create schemas, etc.
+			if ( $pages == 0 ) {
+				$pages = 1;
+			}
+
+			$total_pages += $pages;
+		}
+
+		return absint( $total_pages );
+	}
+
+	/**
+	 * Gets the columns in a table and its primary key column names (composite keys supported).
+	 *
+	 * @access public
+	 * @param  string $table The table to check.
+	 * @return array First element: list of primary key column names (DESCRIBE order). Second: all column names.
+	 */
+	public function get_columns( $table ) {
+		$primary_keys 	= null;
+		$columns 		= array();
+
+		if ( false === $this->table_exists( $table ) ) {
+			return array( $primary_keys, $columns );
+		}
+
+		$wpdb = $this->wpdb;
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared,PluginCheck.Security.DirectDB.UnescapedDBParameter -- DESCRIBE on allowlisted table for SRDB column list.
+		$fields = $wpdb->get_results( $wpdb->prepare( 'DESCRIBE %i', $table ) );
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared,PluginCheck.Security.DirectDB.UnescapedDBParameter
+
+		if ( is_array( $fields ) ) {
+			foreach ( $fields as $column ) {
+				$columns[] = $column->Field;
+				if ( 'PRI' == $column->Key ) {
+					$primary_keys[] = $column->Field;
+				}
+			}
+		}
+
+		return array( $primary_keys, $columns );
+	}
+
+	/**
+	 * Adapated from interconnect/it's search/replace script.
+	 *
+	 * Modified to use WordPress wpdb functions instead of PHP's native mysql/pdo functions,
+	 * and to be compatible with batch processing via AJAX.
+	 *
+	 * @link https://interconnectit.com/products/search-and-replace-for-wordpress-databases/
+	 *
+	 * @access public
+	 * @param  string 	$table 	The table to run the replacement on.
+	 * @param  int 		$page  	The page/block to begin the query on.
+	 * @param  array 	$args 	An associative array containing arguements for this run.
+	 * @return array
+	 */
+	public function srdb( $table, $page, $args ) {
+
+		if ( ! $this->table_exists( $table ) ) {
+			$table_report = array(
+				'change'    => 0,
+				'updates'   => 0,
+				'start'     => microtime( true ),
+				'end'       => microtime( true ),
+				'errors'    => array(),
+				'skipped'   => true,
+			);
+			return array( 'table_complete' => true, 'table_report' => $table_report );
+		}
+
+		$wpdb = $this->wpdb;
+
+		$current_page = absint( $page );
+		$pages        = $this->get_pages_in_table( $table );
+		$done         = false;
+
+		$args['search_for']   = str_replace( '#BSR_BACKSLASH#', '\\', $args['search_for'] );
+		$args['replace_with'] = str_replace( '#BSR_BACKSLASH#', '\\', $args['replace_with'] );
+
+		$table_report = array(
+			'change'   => 0,
+			'updates'  => 0,
+			'start'    => microtime( true ),
+			'end'      => microtime( true ),
+			'errors'   => array(),
+			'skipped'  => false,
+		);
+
+		// Get a list of columns in this table.
+		list( $primary_keys, $columns ) = $this->get_columns( $table );
+
+		// Bail out early if there isn't a primary key.
+		if ( empty( $primary_keys ) ) {
+			$table_report['skipped'] = true;
+			return array( 'table_complete' => true, 'table_report' => $table_report );
+		}
+
+		$current_row = 0;
+		$start       = $page * $this->page_size;
+		$end         = $this->page_size;
+
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared,PluginCheck.Security.DirectDB.UnescapedDBParameter -- Paged read of allowlisted table for batch search/replace.
+		$data = $wpdb->get_results(
+			$wpdb->prepare(
+				'SELECT * FROM %i LIMIT %d, %d',
+				$table,
+				$start,
+				$end
+			),
+			ARRAY_A
+		);
+		// phpcs:enable WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared,PluginCheck.Security.DirectDB.UnescapedDBParameter
+
+		foreach ( $data as $row ) {
+			$current_row++;
+			$update_sql    = array();
+			$where_sql     = array();
+			$update_values = array();
+			$where_values  = array();
+			$upd           = false;
+
+			foreach ( $columns as $column ) {
+
+				$data_to_fix = $row[ $column ];
+
+				if ( in_array( $column, $primary_keys, true ) ) {
+					$where_sql[]    = '%i = %s';
+					$where_values[] = $column;
+					$where_values[] = $data_to_fix;
+					continue;
+				}
+
+				// Skip GUIDs by default.
+				if ( 'on' !== $args['replace_guids'] && 'guid' == $column ) {
+					continue;
+				}
+
+				if ( $wpdb->options === $table ) {
+
+					// Skip any BSR options as they may contain the search field.
+					if ( isset( $should_skip ) && true === $should_skip ) {
+						$should_skip = false;
+						continue;
+					}
+
+					// If the Site URL needs to be updated, let's do that last.
+					if ( isset( $update_later ) && true === $update_later ) {
+						$update_later = false;
+						$edited_data  = $this->recursive_unserialize_replace( $args['search_for'], $args['replace_with'], $data_to_fix, false, $args['case_insensitive'] );
+
+						if ( $edited_data != $data_to_fix ) {
+							$table_report['change']++;
+							$table_report['updates']++;
+							update_option( 'bsr_update_site_url', $edited_data );
+							continue;
+						}
+					}
+
+					if ( '_transient_bsr_results' === $data_to_fix || 'bsr_profiles' === $data_to_fix || 'bsr_update_site_url' === $data_to_fix || 'bsr_data' === $data_to_fix ) {
+						$should_skip = true;
+					}
+
+					if ( 'siteurl' === $data_to_fix && $args['dry_run'] !== 'on' ) {
+						$update_later = true;
+					}
+				}
+
+				// Run a search replace on the data that'll respect the serialisation.
+				$edited_data = $this->recursive_unserialize_replace( $args['search_for'], $args['replace_with'], $data_to_fix, false, $args['case_insensitive'] );
+
+				// Something was changed
+				if ( $edited_data != $data_to_fix ) {
+					$update_sql[]    = '%i = %s';
+					$update_values[] = $column;
+					$update_values[] = $edited_data;
+					$upd             = true;
+					$table_report['change']++;
+				}
+			}
+
+			// Determine what to do with updates.
+			if ( $args['dry_run'] === 'on' ) {
+				// Don't do anything if a dry run
+			} elseif ( $upd && ! empty( $where_sql ) ) {
+				// If there are changes to make, run the query.
+				$sql_template = 'UPDATE %i SET ' . implode( ', ', $update_sql ) . ' WHERE ' . implode( ' AND ', array_filter( $where_sql ) );
+				$prepare_args = array_merge( array( $sql_template, $table ), $update_values, $where_values );
+
+				// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange -- Dynamic UPDATE: table and columns allowlisted; values passed through $wpdb->prepare().
+				$result = $wpdb->query( call_user_func_array( array( $wpdb, 'prepare' ), $prepare_args ) );
+				// phpcs:enable WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
+
+				if ( ! $result ) {
+					$table_report['errors'][] = sprintf(
+						/* translators: %d: database row number that failed to update. */
+						__( 'Error updating row: %d.', 'better-search-replace' ),
+						$current_row
+					);
+				} else {
+					$table_report['updates']++;
+				}
+			}
+		} // end row loop
+
+		if ( $current_page >= $pages - 1 ) {
+			$done = true;
+		}
+
+		$table_report['end'] = microtime( true );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- Clear wpdb result buffers after batch SRDB.
+		$wpdb->flush();
+
+		return array( 'table_complete' => $done, 'table_report' => $table_report );
+	}
+
+	/**
+	 * Adapated from interconnect/it's search/replace script.
+	 *
+	 * @link https://interconnectit.com/products/search-and-replace-for-wordpress-databases/
+	 *
+	 * Take a serialised array and unserialise it replacing elements as needed and
+	 * unserialising any subordinate arrays and performing the replace on those too.
+	 *
+	 * @access private
+	 * @param  string 			$from       		String we're looking to replace.
+	 * @param  string 			$to         		What we want it to be replaced with
+	 * @param  array  			$data       		Used to pass any subordinate arrays back to in.
+	 * @param  boolean 			$serialised 		Does the array passed via $data need serialising.
+	 * @param  sting|boolean 	$case_insensitive 	Set to 'on' if we should ignore case, false otherwise.
+	 *
+	 * @return string|array	The original array with all elements replaced as needed.
+	 */
+	public function recursive_unserialize_replace( $from = '', $to = '', $data = '', $serialised = false, $case_insensitive = false ) {
+		try {
+			// Exit early if $data is a string but has no search matches.
+			if ( is_string( $data ) ) {
+				$has_match = $case_insensitive ? false !== stripos( $data, $from ) : false !== strpos( $data, $from );
+				if ( ! $has_match ) {
+					return $data;
+				}
+			}
+
+			if ( is_string( $data ) && ! is_serialized_string( $data ) && ( $unserialized = $this->unserialize( $data ) ) !== false ) {
+				$data = $this->recursive_unserialize_replace( $from, $to, $unserialized, true, $case_insensitive );
+			}
+
+			elseif ( is_array( $data ) ) {
+				$_tmp = array( );
+				foreach ( $data as $key => $value ) {
+					$_tmp[ $key ] = $this->recursive_unserialize_replace( $from, $to, $value, false, $case_insensitive );
+				}
+
+				$data = $_tmp;
+				unset( $_tmp );
+			}
+
+			// Submitted by Tina Matter
+			elseif ( 'object' == gettype( $data ) ) {
+				if($this->is_object_cloneable($data)) {
+					$_tmp = clone $data;
+					$props = get_object_vars( $data );
+					foreach ( $props as $key => $value ) {
+						// Integer properties are crazy and the best thing we can do is to just ignore them.
+						// see http://stackoverflow.com/a/10333200
+						if ( is_int( $key ) ) {
+							continue;
+						}
+
+						// Skip any representation of a protected property
+						// https://github.com/deliciousbrains/better-search-replace/issues/71#issuecomment-1369195244
+						if ( is_string( $key ) && 1 === preg_match( "/^(\\\\0).+/im", preg_quote( $key ) ) ) {
+							continue;
+						}
+
+						$_tmp->$key = $this->recursive_unserialize_replace( $from, $to, $value, false, $case_insensitive );
+					}
+
+					$data = $_tmp;
+					unset( $_tmp );
+				}
+			}
+
+			elseif ( is_serialized_string( $data ) ) {
+				$unserialized = $this->unserialize( $data );
+
+				if ( $unserialized !== false ) {
+					$data = $this->recursive_unserialize_replace( $from, $to, $unserialized, true, $case_insensitive );
+				}
+			}
+
+			else {
+				if ( is_string( $data ) ) {
+					$data = $this->str_replace( $from, $to, $data, $case_insensitive );
+				}
+			}
+
+			if ( $serialised ) {
+				return serialize( $data );
+			}
+
+		} catch( Exception $error ) {
+
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Updates the Site URL if necessary.
+	 * @access public
+	 * @return boolean
+	 */
+	public function maybe_update_site_url() {
+		$option = get_option( 'bsr_update_site_url' );
+
+		if ( $option ) {
+			update_option( 'siteurl', $option );
+			delete_option( 'bsr_update_site_url' );
+			return true;
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Return unserialized object or array
+	 *
+	 * @param string $serialized_string Serialized string.
+	 * @param string $method            The name of the caller method.
+	 *
+	 * @return mixed, false on failure
+	 */
+	public static function unserialize( $serialized_string ) {
+		if ( ! is_serialized( $serialized_string ) ) {
+			return false;
+		}
+
+		$serialized_string   = trim( $serialized_string );
+
+		if ( PHP_VERSION_ID >= 70000 ) {
+			$unserialized_string = @unserialize( $serialized_string, array('allowed_classes' => false ) );
+		} else {
+			$unserialized_string = @BSR\Brumann\Polyfill\Unserialize::unserialize( $serialized_string, array( 'allowed_classes' => false ) );
+		}
+
+		return $unserialized_string;
+	}
+
+	/**
+	 * Wrapper for str_replace
+	 *
+	 * @param string $from
+	 * @param string $to
+	 * @param string $data
+	 * @param string|bool $case_insensitive
+	 *
+	 * @return string
+	 */
+	public function str_replace( $from, $to, $data, $case_insensitive = false ) {
+		if ( 'on' === $case_insensitive ) {
+			$data = str_ireplace( $from, $to, $data );
+		} else {
+			$data = str_replace( $from, $to, $data );
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Checks whether a table exists in DB.
+	 *
+	 * @param $table
+	 *
+	 * @return bool
+	 */
+	private function table_exists( $table ) {
+		return in_array( $table, self::get_tables(), true );
+	}
+
+	/**
+	 * Check if a given object can be cloned.
+	 *
+	 * @param object $object
+	 *
+	 * @return bool
+	 */
+	private function is_object_cloneable( $object ) {
+		return ( new \ReflectionClass( get_class( $object ) ) )->isCloneable();
+	}
+}

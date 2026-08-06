@@ -1,0 +1,164 @@
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * The core plugin class.
+ *
+ * This is used to define internationalization, dashboard-specific hooks, and
+ * public-facing site hooks.
+ *
+ * Also maintains the unique identifier of this plugin as well as the current
+ * version of the plugin.
+ *
+ * @since      1.0
+ * @package    Better_Search_Replace
+ * @subpackage Better_Search_Replace/includes
+ */
+
+// Prevent direct access.
+if ( ! defined( 'BSR_PATH' ) ) exit;
+
+class Better_Search_Replace {
+
+	/**
+	 * The loader that's responsible for maintaining and registering all hooks that power
+	 * the plugin.
+	 *
+	 * @since    1.0
+	 * @access   protected
+	 * @var      BSR_Loader   $loader   Maintains and registers all hooks for the plugin.
+	 */
+	protected $loader;
+
+	/**
+	 * The unique identifier of this plugin.
+	 *
+	 * @since    1.0
+	 * @access   protected
+	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+	 */
+	protected $plugin_name;
+
+	/**
+	 * The current version of the plugin.
+	 *
+	 * @since    1.0
+	 * @access   protected
+	 * @var      string    $version    The current version of the plugin.
+	 */
+	protected $version;
+
+	/**
+	 * Define the core functionality of the plugin.
+	 *
+	 * Set the plugin name and the plugin version that can be used throughout the plugin.
+	 * Load the dependencies, define the locale, and set the hooks for the Dashboard and
+	 * the public-facing side of the site.
+	 *
+	 * @since    1.0
+	 */
+	public function __construct() {
+		$this->plugin_name 	= 'better-search-replace';
+		$this->version 		= BSR_VERSION;
+		$this->load_dependencies();
+		$this->define_admin_hooks();
+	}
+
+	/**
+	 * Load the required dependencies for this plugin.
+	 *
+	 * Create an instance of the loader which will be used to register the hooks
+	 * with WordPress.
+	 *
+	 * @since    1.0
+	 * @access   private
+	 */
+	private function load_dependencies() {
+		require_once BSR_PATH . 'includes/class-bsr-loader.php';
+		require_once BSR_PATH . 'includes/class-bsr-admin.php';
+		require_once BSR_PATH . 'includes/class-bsr-ajax.php';
+		require_once BSR_PATH . 'includes/class-bsr-db.php';
+		require_once BSR_PATH . 'includes/class-bsr-compatibility.php';
+		require_once BSR_PATH . 'includes/class-bsr-plugin-footer.php';
+		require_once BSR_PATH . 'includes/class-bsr-utils.php';
+
+		if ( PHP_VERSION_ID < 70000 ) {
+			require_once BSR_PATH . 'vendor/brumann/polyfill-unserialize/src/Unserialize.php';
+			require_once BSR_PATH . 'vendor/brumann/polyfill-unserialize/src/DisallowedClassesSubstitutor.php';
+		}
+		
+		$this->loader = new BSR_Loader();
+	}
+
+	/**
+	 * Register all of the hooks related to the dashboard functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0
+	 * @access   private
+	 */
+	private function define_admin_hooks() {
+
+		// Initialize the admin class.
+		$plugin_admin  = new BSR_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_footer = new BSR_Plugin_Footer();
+
+		/// Register the admin pages and scripts.
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'bsr_menu_pages' );
+
+		// Other admin actions.
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_option' );
+		$this->loader->add_action( 'admin_post_bsr_view_details', $plugin_admin, 'load_details' );
+		$this->loader->add_action( 'admin_post_bsr_download_sysinfo', $plugin_admin, 'download_sysinfo' );
+		$this->loader->add_action( 'plugin_row_meta', $plugin_admin, 'meta_upgrade_link', 10, 2 );
+
+		// Footer Actions
+		$this->loader->add_filter( 'update_footer', $plugin_footer, 'update_footer', 20);
+		$this->loader->add_filter( 'admin_footer_text', $plugin_footer, 'admin_footer_text', 20);
+	}
+
+	/**
+	 * Run the loader to execute all of the hooks with WordPress.
+	 *
+	 * @since    1.0
+	 */
+	public function run() {
+		$this->loader->run();
+	}
+
+	/**
+	 * The name of the plugin used to uniquely identify it within the context of
+	 * WordPress and to define internationalization functionality.
+	 *
+	 * @since     1.0
+	 * @return    string    The name of the plugin.
+	 */
+	public function get_plugin_name() {
+		return $this->plugin_name;
+	}
+
+	/**
+	 * The reference to the class that orchestrates the hooks with the plugin.
+	 *
+	 * @since     1.0
+	 * @return    Better_Search_Replace_Loader    Orchestrates the hooks of the plugin.
+	 */
+	public function get_loader() {
+		return $this->loader;
+	}
+
+	/**
+	 * Retrieve the version number of the plugin.
+	 *
+	 * @since     1.0
+	 * @return    string    The version number of the plugin.
+	 */
+	public function get_version() {
+		return $this->version;
+	}
+
+}
