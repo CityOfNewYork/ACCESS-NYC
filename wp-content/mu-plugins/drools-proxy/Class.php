@@ -3,6 +3,9 @@
 namespace DroolsProxy;
 
 class DroolsProxy {
+  const SCREENING_TOKEN_TRANSIENT = 'drools_proxy_screening_api_token';
+  const TOKEN_REFRESH_BUFFER_SECONDS = 300;
+
   /**
    * Add AJAX action for logged in and non-logged in users.
    */
@@ -12,19 +15,13 @@ class DroolsProxy {
   }
 
   /**
-   * The request handler for the Drools Engine
+   * The request handler for eligibility screening via Screening API.
    */
   public function incoming() {
-    $url = get_option('drools_url');
-    $user = get_option('drools_user');
-    $pass = get_option('drools_pass');
+    $config = $this->getScreeningApiConfig();
 
-    $url = (!empty($url)) ? $url : DROOLS_URL;
-    $user = (!empty($user)) ? $user : DROOLS_USER;
-    $pass = (!empty($pass)) ? $pass : DROOLS_PASS;
-
-    if (empty($url) || empty($user) || empty($pass)) {
-      $this->notify(__('The configuration is missing information.'), true);
+    if (empty($config['base_url']) || empty($config['user']) || empty($config['pass'])) {
+      $this->notify(__('Screening API configuration is missing information.'), true);
 
       wp_send_json([
         'status' => 'fail',
@@ -34,26 +31,38 @@ class DroolsProxy {
       wp_die();
     }
 
-    $uid = uniqid();
-
-    do_action('drools_request', $_POST['data'], $uid);
-
-    $response = $this->request($url, json_encode($_POST['data']), $user, $pass);
-
-    if ($response === false || empty($response)) {
-      $msg = __('The response is false or empty');
-
-      $this->notify($msg . ', "' . var_export($response, true) . '"', true);
-
-      wp_send_json(array(
-        'status' => 'fail',
-        'message' => $msg
-      ), 500);
+    if (!isset($_POST['data'])) {
+      wp_send_json([
+        'type' => 'FAILURE',
+        'errors' => [['message' => 'Missing screener submission data']]
+      ], 400);
 
       wp_die();
     }
 
-    $ret = json_decode($response);
+    $uid = uniqid();
+    $payload = wp_unslash($_POST['data']);
+
+    do_action('drools_request', $payload, $uid);
+
+    $response = $this->requestScreeningApiEligibility($config, $payload);
+
+    if ($response['error']) {
+      $this->notify($response['error'], true);
+
+      wp_send_json(
+        $response['body'] ?: ['type' => 'FAILURE', 'errors' => [['message' => $response['error']]]],
+        $response['code'] ?: 500
+      );
+
+      wp_die();
+    }
+
+    $ret = $response['body'];
+
+    if (!is_object($ret)) {
+      $ret = json_decode(wp_json_encode($ret));
+    }
 
     do_action('drools_response', $ret, $uid);
 
@@ -64,98 +73,245 @@ class DroolsProxy {
   }
 
   /**
-   * A wrapper around the PHP CURL request to the Drools Engine.
-   *
-   * @param   String  $url    The API endpoint of the Drools application
-   * @param   JSON    $data   A JSON encoded Drools Object
-   * @param   String  $user   The Drools account username
-   * @param   String  $pass   The Drools account password
-   *
-   * @return  String/Boolean  The Drools response or false if request failed
+   * @return array{base_url:string,user:string,pass:string}
    */
-  private function request($url, $data, $user, $pass) {
+  private function getScreeningApiConfig() {
+    $base_url = get_option('screening_api_base_url');
+    $user = get_option('screening_api_user');
+    $pass = get_option('screening_api_pass');
+
+    if (empty($base_url) && defined('SCREENING_API_BASE_URL')) {
+      $base_url = SCREENING_API_BASE_URL;
+    }
+    if (empty($user) && defined('SCREENING_API_USER')) {
+      $user = SCREENING_API_USER;
+    }
+    if (empty($pass) && defined('SCREENING_API_PASS')) {
+      $pass = SCREENING_API_PASS;
+    }
+
+    return [
+      'base_url' => rtrim((string) $base_url, '/'),
+      'user' => (string) $user,
+      'pass' => (string) $pass,
+    ];
+  }
+
+  /**
+   * @param array{base_url:string,user:string,pass:string} $config
+   * @param mixed $payload
+   * @return array{error:?string,code:?int,body:?object}
+   */
+  private function requestScreeningApiEligibility($config, $payload, $allowRetry = true) {
+    $tokenResponse = $this->getScreeningApiToken($config, false);
+
+    if (!empty($tokenResponse['error'])) {
+      return [
+        'error' => $tokenResponse['error'],
+        'code' => 500,
+        'body' => null,
+      ];
+    }
+
+    $url = $config['base_url'] . '/eligibilityPrograms';
+    $body = wp_json_encode($payload);
+
+    $httpResponse = $this->httpPost($url, $body, [
+      'Content-Type: application/json',
+      'Authorization: ' . $tokenResponse['token'],
+    ], 30);
+
+    if ($allowRetry && $this->isTransientEligibilityHttpCode($httpResponse['code'])) {
+      return $this->requestScreeningApiEligibility($config, $payload, false);
+    }
+
+    if ($httpResponse['body'] === false || $httpResponse['body'] === '') {
+      return [
+        'error' => __('The Screening API response is false or empty'),
+        'code' => $httpResponse['code'] ?: 500,
+        'body' => null,
+      ];
+    }
+
+    $decoded = json_decode($httpResponse['body']);
+
+    if ($httpResponse['code'] >= 400) {
+      return [
+        'error' => __('The Screening API request failed, response code ') . $httpResponse['code'],
+        'code' => $httpResponse['code'],
+        'body' => $decoded,
+      ];
+    }
+
+    return [
+      'error' => null,
+      'code' => $httpResponse['code'],
+      'body' => $decoded,
+    ];
+  }
+
+  /**
+   * HTTP status codes where a single immediate retry may succeed (gateway / upstream blips).
+   *
+   * @param int $code
+   * @return bool
+   */
+  private function isTransientEligibilityHttpCode($code) {
+    return in_array((int) $code, [408, 502, 503, 504], true);
+  }
+
+  /**
+   * @param array{base_url:string,user:string,pass:string} $config
+   * @param bool $forceRefresh
+   * @return array{token:?string,error:?string}
+   */
+  private function getScreeningApiToken($config, $forceRefresh = false) {
+    if (!$forceRefresh) {
+      $cached = get_transient(self::SCREENING_TOKEN_TRANSIENT);
+
+      if (is_array($cached) && !empty($cached['token']) && !empty($cached['expires_at'])) {
+        if ((int) $cached['expires_at'] > (time() + self::TOKEN_REFRESH_BUFFER_SECONDS)) {
+          return ['token' => $cached['token'], 'error' => null];
+        }
+      }
+    }
+
+    $auth = $this->fetchScreeningApiToken($config);
+
+    if (!empty($auth['error'])) {
+      return $auth;
+    }
+
+    $expires_at = time() + 3300;
+    set_transient(self::SCREENING_TOKEN_TRANSIENT, [
+      'token' => $auth['token'],
+      'expires_at' => $expires_at,
+    ], 3300);
+
+    return $auth;
+  }
+
+  /**
+   * @param array{base_url:string,user:string,pass:string} $config
+   * @return array{token:?string,error:?string}
+   */
+  private function fetchScreeningApiToken($config) {
+    $url = $config['base_url'] . '/authToken';
+    $body = wp_json_encode([
+      'username' => $config['user'],
+      'password' => $config['pass'],
+    ]);
+
+    $response = $this->httpPost($url, $body, [
+      'Content-Type: application/json',
+    ], 30);
+
+    if ($response['body'] === false || $response['body'] === '') {
+      return [
+        'token' => null,
+        'error' => __('Screening API authToken returned an empty response'),
+      ];
+    }
+
+    $decoded = json_decode($response['body']);
+
+    if ($response['code'] >= 400 || !is_object($decoded)) {
+      return [
+        'token' => null,
+        'error' => __('Screening API authToken failed with response code ') . $response['code'],
+      ];
+    }
+
+    if (!isset($decoded->type) || $decoded->type !== 'SUCCESS' || empty($decoded->token)) {
+      return [
+        'token' => null,
+        'error' => __('Screening API authToken did not return a success token'),
+      ];
+    }
+
+    return [
+      'token' => $decoded->token,
+      'error' => null,
+    ];
+  }
+
+  /**
+   * @param string $url
+   * @param string $body
+   * @param string[] $headers
+   * @param int $timeout
+   * @return array{code:int,body:string|false}
+   */
+  private function httpPost($url, $body, $headers, $timeout = 15) {
     $ch = curl_init();
 
     curl_setopt_array($ch, [
       CURLOPT_URL => $url,
       CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_CONNECTTIMEOUT => 3,
-      CURLOPT_TIMEOUT => 5,
+      CURLOPT_CONNECTTIMEOUT => 5,
+      CURLOPT_TIMEOUT => $timeout,
       CURLOPT_POST => true,
-      CURLOPT_POSTFIELDS => $data,
-      CURLOPT_USERPWD => $user.":".$pass,
+      CURLOPT_POSTFIELDS => $body,
       CURLOPT_FRESH_CONNECT => true,
-      CURLOPT_HTTPHEADER => [
-        "Content-Type: application/json",
-        "X-KIE-ContentType: json",
-        "Content-Length: " . strlen($data)
-      ]
+      CURLOPT_HTTPHEADER => $headers,
     ]);
 
-    $response = curl_exec($ch);
-
-    $code = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
-
-    if ($code >= 400) {
-      $this->notify(__('The request failed, response code ') . $code  . '.', true);
-
-      wp_send_json(['status' => 'fail'], $code);
-
-      curl_close($ch);
-
-      wp_die();
-    }
+    $responseBody = curl_exec($ch);
+    $code = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
 
     curl_close($ch);
 
-    return $response;
+    return [
+      'code' => $code,
+      'body' => $responseBody,
+    ];
   }
 
   /**
-   * Create the settings for the Drools Proxy plugin
+   * Create the settings for the eligibility proxy plugin.
    */
   public function createSettingsSection() {
     add_settings_section(
       'drools_proxy',
-      'Drools Settings',
-      '<p>Enter your Drools credentials here.</p>',
+      'Screening API Settings',
+      '<p>Enter Screening API credentials for the ACCESS NYC eligibility screener.</p>',
       'drools_config'
     );
 
     add_settings_field(
-      'drools_url',                 // field name
-      'Drools Endpoint (URL)',      // label
-      [$this, 'settingsFieldHtml'], // HTML content
-      'drools_config',              // page
-      'drools_proxy',               // section
+      'screening_api_base_url',
+      'Screening API Base URL',
+      [$this, 'settingsFieldHtml'],
+      'drools_config',
+      'drools_proxy',
       array(
-        'id' => 'drools_url',
+        'id' => 'screening_api_base_url',
         'placeholder' => '',
         'private' => false
       )
     );
 
     add_settings_field(
-      'drools_user',
-      'User',
+      'screening_api_user',
+      'Screening API Username',
       [$this, 'settingsFieldHtml'],
       'drools_config',
       'drools_proxy',
       array(
-        'id' => 'drools_user',
+        'id' => 'screening_api_user',
         'placeholder' => '',
         'private' => false
       )
     );
 
     add_settings_field(
-      'drools_pass',
-      'Password',
+      'screening_api_pass',
+      'Screening API Password',
       [$this, 'settingsFieldHtml'],
       'drools_config',
       'drools_proxy',
       array(
-        'id' => 'drools_pass',
+        'id' => 'screening_api_pass',
         'placeholder' => '',
         'private' => true
       )
@@ -177,9 +333,9 @@ class DroolsProxy {
       )
     );
 
-    register_setting('drools_settings', 'drools_url');
-    register_setting('drools_settings', 'drools_user');
-    register_setting('drools_settings', 'drools_pass');
+    register_setting('drools_settings', 'screening_api_base_url');
+    register_setting('drools_settings', 'screening_api_user');
+    register_setting('drools_settings', 'screening_api_pass');
     register_setting('drools_settings', 'drools_notify');
   }
 
@@ -200,8 +356,9 @@ class DroolsProxy {
       '/>'
     ]);
 
-    if (defined(strtoupper($args['id']))) {
-      $constant = constant(strtoupper($args['id']));
+    $constantName = $this->settingsConstantName($args['id']);
+    if ($constantName && defined($constantName)) {
+      $constant = constant($constantName);
       $html = $constant;
       $html = ($args['private']) ? str_repeat('•', strlen($constant)) : $constant;
 
@@ -212,6 +369,23 @@ class DroolsProxy {
         '<p>'
       ]);
     }
+  }
+
+  /**
+   * Maps a settings option id to an environment constant name.
+   *
+   * @param string $optionId
+   * @return string|null
+   */
+  private function settingsConstantName($optionId) {
+    $map = [
+      'screening_api_base_url' => 'SCREENING_API_BASE_URL',
+      'screening_api_user' => 'SCREENING_API_USER',
+      'screening_api_pass' => 'SCREENING_API_PASS',
+      'drools_notify' => 'DROOLS_NOTIFY',
+    ];
+
+    return isset($map[$optionId]) ? $map[$optionId] : strtoupper($optionId);
   }
 
   /**
@@ -234,12 +408,12 @@ class DroolsProxy {
     ]);
 
     if (defined(strtoupper($args['id']))) {
-      echo implode([
+      echo implode('', [
         '<p class="description">',
         __('Environment currently set to '),
         '<code>' . constant(strtoupper($args['id'])) . '</code>',
         '<p>'
-      ], '');
+      ]);
     }
   }
 

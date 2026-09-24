@@ -95,13 +95,6 @@ const mapHousehold = household => {
     livingPreferNotToSay: raw.livingPreferNotToSay
   };
 
-  if (raw.zip) {
-    mapped.zip = raw.zip;
-  }
-  if (raw.city === 'NYC') {
-    mapped.city = raw.city;
-  }
-
   return mapped;
 };
 

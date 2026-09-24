@@ -37,7 +37,7 @@ add_action('admin_menu', function() {
   );
 });
 
-add_filter('plugin_action_links_' . plugin_basename(dirname(__FILE__) . '/DroolsProxy.php'), function() {
+add_filter('plugin_action_links_' . plugin_basename(dirname(__FILE__) . '/DroolsProxy.php'), function($links) {
   $settings_link = '<a href="'.esc_url(
     add_query_arg('page', 'drools_config', admin_url('options-general.php'))
   ).'">Settings</a>';
