@@ -274,7 +274,9 @@ class DroolsProxy {
     add_settings_section(
       'drools_proxy',
       'Screening API Settings',
-      '<p>Enter Screening API credentials for the ACCESS NYC eligibility screener.</p>',
+      function () {
+        echo '<p>Enter Screening API credentials for the ACCESS NYC eligibility screener.</p>';
+      },
       'drools_config'
     );
 
