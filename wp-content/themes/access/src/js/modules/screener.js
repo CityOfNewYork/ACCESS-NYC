@@ -19,11 +19,11 @@ import _ from 'underscore';
  * created.
  *
  * When the screener is submitted, these objects are compiled into the proper
- * formatting for the Drools rules engine and sent off to the Drools Proxy.
+ * formatting for the Screening API and sent off to the Screening API proxy.
  * Assuming a successful response is received, we then redirect the user to
  * the screener results page, building a redirect URL based on the program
  * codes in the Droosl results, the categories they selected in step 1, the
- * current time, and a [guid] parameter provided by the Drools proxy.
+ * current time, and a [guid] parameter provided by the Screening API proxy.
  *
  * The screener relies on Underscore templates to render any dynamic views and
  * the Utility.localize function to translate any strings within those views to
@@ -1303,7 +1303,7 @@ class Screener {
   }
 
   /**
-   * Submits the JSON payload to the eligibility proxy (Screening API).
+   * Submits the JSON payload to the Screening API.
    * @private
    * @param {string} postUrl - AJAX URL destination.
    * @return {jqXHR}
@@ -1328,7 +1328,7 @@ class Screener {
       url: postUrl,
       type: 'post',
       data: {
-        action: 'drools',
+        action: 'screening_api',
         data: this._getScreeningApiPayload()
       }
     }).done(data => {

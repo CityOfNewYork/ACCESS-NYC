@@ -8,7 +8,7 @@
  *   programs: a comma separated list of program codes
  *   categories: a comma separated list of category slugs
  *   date: a UNIX timestamp of when the screener was completed
- *   guid: a unique user ID provided in the Drools Proxy response
+ *   guid: a unique user ID provided in the Screening API proxy response
  *
  * The screener results list is composed of programs listed in the programs
  * parameter. They are organized into "programs you are interested in" and

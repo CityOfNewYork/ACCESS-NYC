@@ -1,17 +1,17 @@
 <?php
 
-namespace DroolsProxy;
+namespace ScreeningApiProxy;
 
-class DroolsProxy {
-  const SCREENING_TOKEN_TRANSIENT = 'drools_proxy_screening_api_token';
+class ScreeningApiProxy {
+  const SCREENING_TOKEN_TRANSIENT = 'screening_api_proxy_token';
   const TOKEN_REFRESH_BUFFER_SECONDS = 300;
 
   /**
    * Add AJAX action for logged in and non-logged in users.
    */
   public function __construct() {
-    add_action('wp_ajax_drools', [$this, 'incoming']);
-    add_action('wp_ajax_nopriv_drools', [$this, 'incoming']);
+    add_action('wp_ajax_screening_api', [$this, 'incoming']);
+    add_action('wp_ajax_nopriv_screening_api', [$this, 'incoming']);
   }
 
   /**
@@ -43,7 +43,7 @@ class DroolsProxy {
     $uid = uniqid();
     $payload = wp_unslash($_POST['data']);
 
-    do_action('drools_request', $payload, $uid);
+    do_action('screening_api_request', $payload, $uid);
 
     $response = $this->requestScreeningApiEligibility($config, $payload);
 
@@ -64,7 +64,7 @@ class DroolsProxy {
       $ret = json_decode(wp_json_encode($ret));
     }
 
-    do_action('drools_response', $ret, $uid);
+    do_action('screening_api_response', $ret, $uid);
 
     $ret->GUID = $uid;
 
@@ -272,20 +272,20 @@ class DroolsProxy {
    */
   public function createSettingsSection() {
     add_settings_section(
-      'drools_proxy',
+      'screening_api_proxy',
       'Screening API Settings',
       function () {
         echo '<p>Enter Screening API credentials for the ACCESS NYC eligibility screener.</p>';
       },
-      'drools_config'
+      'screening_api_config'
     );
 
     add_settings_field(
       'screening_api_base_url',
       'Screening API Base URL',
       [$this, 'settingsFieldHtml'],
-      'drools_config',
-      'drools_proxy',
+      'screening_api_config',
+      'screening_api_proxy',
       array(
         'id' => 'screening_api_base_url',
         'placeholder' => '',
@@ -297,8 +297,8 @@ class DroolsProxy {
       'screening_api_user',
       'Screening API Username',
       [$this, 'settingsFieldHtml'],
-      'drools_config',
-      'drools_proxy',
+      'screening_api_config',
+      'screening_api_proxy',
       array(
         'id' => 'screening_api_user',
         'placeholder' => '',
@@ -310,8 +310,8 @@ class DroolsProxy {
       'screening_api_pass',
       'Screening API Password',
       [$this, 'settingsFieldHtml'],
-      'drools_config',
-      'drools_proxy',
+      'screening_api_config',
+      'screening_api_proxy',
       array(
         'id' => 'screening_api_pass',
         'placeholder' => '',
@@ -320,13 +320,13 @@ class DroolsProxy {
     );
 
     add_settings_field(
-      'drools_notify',
+      'screening_api_notify',
       'Notify',
       [$this, 'settingsFieldCheckbox'],
-      'drools_config',
-      'drools_proxy',
+      'screening_api_config',
+      'screening_api_proxy',
       array(
-        'id' => 'drools_notify',
+        'id' => 'screening_api_notify',
         'value' => '5',
         'label' => 'Check to notify the admin if there is an
           error. This will be disabled on the first instance of an error,
@@ -335,10 +335,10 @@ class DroolsProxy {
       )
     );
 
-    register_setting('drools_settings', 'screening_api_base_url');
-    register_setting('drools_settings', 'screening_api_user');
-    register_setting('drools_settings', 'screening_api_pass');
-    register_setting('drools_settings', 'drools_notify');
+    register_setting('screening_api_settings', 'screening_api_base_url');
+    register_setting('screening_api_settings', 'screening_api_user');
+    register_setting('screening_api_settings', 'screening_api_pass');
+    register_setting('screening_api_settings', 'screening_api_notify');
   }
 
   /**
@@ -384,7 +384,7 @@ class DroolsProxy {
       'screening_api_base_url' => 'SCREENING_API_BASE_URL',
       'screening_api_user' => 'SCREENING_API_USER',
       'screening_api_pass' => 'SCREENING_API_PASS',
-      'drools_notify' => 'DROOLS_NOTIFY',
+      'screening_api_notify' => 'SCREENING_API_NOTIFY',
     ];
 
     return isset($map[$optionId]) ? $map[$optionId] : strtoupper($optionId);
@@ -426,9 +426,9 @@ class DroolsProxy {
    * @param  String  $msg  The message to send.
    */
   public function notify($msg, $mail = false, $throttle = true) {
-    $msg = 'Drools Proxy: ' . $msg;
+    $msg = 'Screening API Proxy: ' . $msg;
 
-    $notify = get_option('drools_notify');
+    $notify = get_option('screening_api_notify');
 
     error_log($msg);
 
@@ -437,11 +437,11 @@ class DroolsProxy {
       'following instances will be logged to the server. Recheck the "Send ' .
       'Notifications" option in the admin menu.');
 
-      wp_mail(get_option('admin_email'), 'Drools Proxy', $msg);
+      wp_mail(get_option('admin_email'), 'Screening API Proxy', $msg);
 
-      update_option('drools_notify', '0');
+      update_option('screening_api_notify', '0');
     } elseif ($mail && !$throttle) {
-      wp_mail(get_option('admin_email'), 'Drools Proxy', $msg);
+      wp_mail(get_option('admin_email'), 'Screening API Proxy', $msg);
     }
   }
 }
