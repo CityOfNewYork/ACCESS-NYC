@@ -337,8 +337,28 @@ class ScreeningApiProxy {
 
     register_setting('screening_api_settings', 'screening_api_base_url');
     register_setting('screening_api_settings', 'screening_api_user');
-    register_setting('screening_api_settings', 'screening_api_pass');
+    register_setting(
+      'screening_api_settings',
+      'screening_api_pass',
+      ['sanitize_callback' => [$this, 'sanitizeScreeningApiPasswordSetting']]
+    );
     register_setting('screening_api_settings', 'screening_api_notify');
+  }
+
+  /**
+   * Preserve stored password when the settings field is left blank on save.
+   *
+   * @param mixed $value
+   * @return string
+   */
+  public function sanitizeScreeningApiPasswordSetting($value) {
+    $value = is_string($value) ? trim($value) : '';
+
+    if ($value === '') {
+      return (string) get_option('screening_api_pass', '');
+    }
+
+    return $value;
   }
 
   /**
@@ -347,13 +367,15 @@ class ScreeningApiProxy {
    * @param  Array  $args  An array containing [privacy, input ID, and placeholder text] for the input
    */
   public function settingsFieldHtml($args) {
+    $value = !empty($args['private']) ? '' : get_option($args['id'], '');
+
     echo implode('', [
       '<input ',
       ($args['private']) ? 'type="password" ' : 'type="text" ',
       'size="40" ',
       'name="' . $args['id'] . '" ',
       'id="' . $args['id'] . '" ',
-      'value="' . get_option($args['id'], '') . '" ',
+      'value="' . $value . '" ',
       'placeholder="' . __($args['placeholder']) . '" ',
       '/>'
     ]);
