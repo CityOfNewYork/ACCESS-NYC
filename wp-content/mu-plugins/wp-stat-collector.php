@@ -18,7 +18,7 @@ add_action('statc_register', function($statc) {
   }
 
   /**
-   * Hook to save the eligibility screening request
+   * Hook to save the screening API request
    *
    * @param   String  $data  The JSON object of the request
    * @param   String  $uid   The GUID of the request
@@ -31,7 +31,7 @@ add_action('statc_register', function($statc) {
   }, $statc->settings->priority, 2);
 
   /**
-   * Hook to save the eligibility screening response
+   * Hook to save the screening API response
    *
    * @param   String  $response  The JSON object of the response
    * @param   String  $uid       The GUID of the response
