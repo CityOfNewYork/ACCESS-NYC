@@ -166,7 +166,7 @@ class ScreeningApiProxy {
 
   /**
    * HTTP status codes where the request is unauthorized.
-   * 
+   *
    * @param int $code
    * @return bool
    */
