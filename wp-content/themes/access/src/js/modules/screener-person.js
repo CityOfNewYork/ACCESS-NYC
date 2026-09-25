@@ -13,7 +13,7 @@ class ScreenerPerson {
    * @constructor
    */
   constructor(obj) {
-    /** @private {object} The attributes that are exposed to Drools. */
+    /** @private {object} The attributes that are exposed to the Screening API. */
     this._attrs = {
       /** @type {Number} must be an integer */
       age: 0,

@@ -7,6 +7,7 @@ import ScreenerHousehold from 'modules/screener-household';
 import ScreenerPerson from 'modules/screener-person';
 import Utility from 'modules/utility';
 import Track from 'modules/track';
+import buildScreeningApiPayload from 'modules/screener-screening-api-payload';
 import _ from 'underscore';
 
 /**
@@ -18,11 +19,11 @@ import _ from 'underscore';
  * created.
  *
  * When the screener is submitted, these objects are compiled into the proper
- * formatting for the Drools rules engine and sent off to the Drools Proxy.
+ * formatting for the Screening API and sent off to the Screening API proxy.
  * Assuming a successful response is received, we then redirect the user to
  * the screener results page, building a redirect URL based on the program
  * codes in the Droosl results, the categories they selected in step 1, the
- * current time, and a [guid] parameter provided by the Drools proxy.
+ * current time, and a [guid] parameter provided by the Screening API proxy.
  *
  * The screener relies on Underscore templates to render any dynamic views and
  * the Utility.localize function to translate any strings within those views to
@@ -1289,64 +1290,20 @@ class Screener {
   }
 
   /**
-   * Returns the JSON object for Drools submission.
+   * Returns the JSON body for NYC Benefits Screening API submission.
    * @private
-   * @return {object} drools JSON
+   * @return {Array<object>} screening API payload
    */
-  _getDroolsJSON() {
-    const droolsJSON = {
-      lookup: 'KieStatelessSession',
-      commands: []
-    };
-    // Insert Household data.
-    droolsJSON.commands.push({
-      insert: {
-        object: {
-          'accessnyc.request.Household': this._household.toObject()
-        }
-      }
-    });
-    // Insert Person data.
-    _.each(this._people.slice(0, this._household.get('members')), person => {
-      if (person) {
-        droolsJSON.commands.push({
-          insert: {
-            object: {
-              'accessnyc.request.Person': person.toObject()
-            }
-          }
-        });
-      }
-    });
-    // Additional Drools commands.
-    droolsJSON.commands.push({
-      'fire-all-rules': {
-        'out-identifier': 'rulesFiredCountOut'
-      }
-    });
-    droolsJSON.commands.push({
-      query: {
-        'name': 'findEligibility',
-        'arguments': [],
-        'out-identifier': 'eligibility'
-      }
-    });
-
-    // This Drools command outputs a large number of debugging variables that
-    // are not necessary for production.
-    if (Utility.getUrlParameter('debug') === '1') {
-      droolsJSON.commands.push({
-        'get-objects': {
-          'out-identifier': 'getObjects'
-        }
-      });
-    }
-
-    return droolsJSON;
+  _getScreeningApiPayload() {
+    return buildScreeningApiPayload(
+      this._household,
+      this._people,
+      this._household.get('members')
+    );
   }
 
   /**
-   * Submits the JSON payload to Drools.
+   * Submits the JSON payload to the Screening API.
    * @private
    * @param {string} postUrl - AJAX URL destination.
    * @return {jqXHR}
@@ -1361,8 +1318,8 @@ class Screener {
     /* eslint-disable no-console, no-debugger */
     if (Utility.getUrlParameter('debug') === '1') {
       console.dir(this);
-      console.log(this._getDroolsJSON());
-      console.log(JSON.stringify(this._getDroolsJSON()));
+      console.log(this._getScreeningApiPayload());
+      console.log(JSON.stringify(this._getScreeningApiPayload()));
       debugger;
     }
     /* eslint-enable no-console, no-debugger */
@@ -1371,8 +1328,8 @@ class Screener {
       url: postUrl,
       type: 'post',
       data: {
-        action: 'drools',
-        data: this._getDroolsJSON()
+        action: 'screening_api',
+        data: this._getScreeningApiPayload()
       }
     }).done(data => {
       /* eslint-disable no-console, no-debugger */
