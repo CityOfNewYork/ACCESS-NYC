@@ -121,7 +121,11 @@ class ScreeningApiProxy {
       'Authorization: ' . $tokenResponse['token'],
     ], 30);
 
-    if ($allowRetry && $this->isTransientEligibilityHttpCode($httpResponse['code'])) {
+    if ($allowRetry && $this->shouldRetryEligibilityRequest($httpResponse['code'])) {
+      if ($this->isUnauthorizedEligibilityHttpCode($httpResponse['code'])) {
+        $this->clearScreeningApiTokenCache();
+      }
+
       return $this->requestScreeningApiEligibility($config, $payload, false);
     }
 
@@ -158,6 +162,32 @@ class ScreeningApiProxy {
    */
   private function isTransientEligibilityHttpCode($code) {
     return in_array((int) $code, [408, 502, 503, 504], true);
+  }
+
+  /**
+   * HTTP status codes where the request is unauthorized.
+   * 
+   * @param int $code
+   * @return bool
+   */
+  private function isUnauthorizedEligibilityHttpCode($code) {
+    return in_array((int) $code, [401, 403], true);
+  }
+
+  /**
+   * @param int $code
+   * @return bool
+   */
+  private function shouldRetryEligibilityRequest($code) {
+    return $this->isTransientEligibilityHttpCode($code)
+      || $this->isUnauthorizedEligibilityHttpCode($code);
+  }
+
+  /**
+   * Drop cached Screening API auth token.
+   */
+  public function clearScreeningApiTokenCache() {
+    delete_transient(self::SCREENING_TOKEN_TRANSIENT);
   }
 
   /**
