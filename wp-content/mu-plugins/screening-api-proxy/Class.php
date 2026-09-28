@@ -102,8 +102,8 @@ class ScreeningApiProxy {
    * @param mixed $payload
    * @return array{error:?string,code:?int,body:?object}
    */
-  private function requestScreeningApiEligibility($config, $payload, $allowRetry = true) {
-    $tokenResponse = $this->getScreeningApiToken($config, false);
+  private function requestScreeningApiEligibility($config, $payload, $allowRetry = true, $forceTokenRefresh = false) {
+    $tokenResponse = $this->getScreeningApiToken($config, $forceTokenRefresh);
 
     if (!empty($tokenResponse['error'])) {
       return [
@@ -121,12 +121,14 @@ class ScreeningApiProxy {
       'Authorization: ' . $tokenResponse['token'],
     ], 30);
 
-    if ($allowRetry && $this->shouldRetryEligibilityRequest($httpResponse['code'])) {
-      if ($this->isUnauthorizedEligibilityHttpCode($httpResponse['code'])) {
-        $this->clearScreeningApiTokenCache();
-      }
+    if ($allowRetry && $this->isUnauthorizedEligibilityHttpCode($httpResponse['code'])) {
+      $this->clearScreeningApiTokenCache();
 
-      return $this->requestScreeningApiEligibility($config, $payload, false);
+      return $this->requestScreeningApiEligibility($config, $payload, false, true);
+    }
+
+    if ($allowRetry && $this->isTransientEligibilityHttpCode($httpResponse['code'])) {
+      return $this->requestScreeningApiEligibility($config, $payload, false, false);
     }
 
     if ($httpResponse['body'] === false || $httpResponse['body'] === '') {
@@ -172,15 +174,6 @@ class ScreeningApiProxy {
    */
   private function isUnauthorizedEligibilityHttpCode($code) {
     return in_array((int) $code, [401, 403], true);
-  }
-
-  /**
-   * @param int $code
-   * @return bool
-   */
-  private function shouldRetryEligibilityRequest($code) {
-    return $this->isTransientEligibilityHttpCode($code)
-      || $this->isUnauthorizedEligibilityHttpCode($code);
   }
 
   /**
