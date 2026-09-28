@@ -375,9 +375,9 @@ class ScreeningApiProxy {
    * @return string
    */
   public function sanitizeScreeningApiPasswordSetting($value) {
-    $value = is_string($value) ? trim($value) : '';
+    $value = is_string($value) ? $value : '';
 
-    if ($value === '') {
+    if (trim($value) === '') {
       return (string) get_option('screening_api_pass', '');
     }
 
