@@ -276,7 +276,7 @@ Script        | Description
 --------------|-
 `development` | Rebuilds the autoloader including development dependencies.
 `production`  | Rebuilds the autoloader omitting development dependencies.
-`predeploy`   | Rebuilds the autoloader using the `production` script then runs [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) using the `lint` script (described below).
+`predeploy`   | Rebuilds the autoloader using the `production` script then runs [PHP Code Sniffer](https://github.com/PHPCSStandards/PHP_CodeSniffer) using the `lint` script (described below).
 `lint`        | Runs PHP Code Sniffer which will display violations of the standard defined in the [phpcs.xml](phpcs.xml) file.
 `fix`         | Runs PHP Code Sniffer in fix mode which will attempt to fix violations automatically. It is not necessarily recommended to run this on large scripts because if it fails it will leave a script partially formatted and malformed.
 `version`     | Regenerates the **composer.lock** file and rebuilds the autoloader for production.
@@ -341,7 +341,7 @@ The query parameter `?debug=1` to the site URL in any environment to help in deb
 
 ### PHP
 
-PHP is linted using [PHP Code Sniffer](https://github.com/squizlabs/PHP_CodeSniffer) with the [PSR-2 standard](https://www.php-fig.org/psr/psr-2/). The configuration can be found in the [phpcs.xml](https://github.com/cityofnewyork/access-nyc/blob/main/phpcs.xml). Linting must be done manually using the command:
+PHP is linted using [PHP Code Sniffer](https://github.com/PHPCSStandards/PHP_CodeSniffer) with the [PSR-2 standard](https://www.php-fig.org/psr/psr-2/). The configuration can be found in the [phpcs.xml](https://github.com/cityofnewyork/access-nyc/blob/main/phpcs.xml). Linting must be done manually using the command:
 
 ```shell
 $ composer run lint
