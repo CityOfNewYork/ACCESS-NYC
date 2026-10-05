@@ -3,7 +3,7 @@
 // phpcs:disable
 /**
  * Plugin Name: Stat Collector
- * Description: Adds WordPress hooks to enable the logging of data from the site to a specified MySQL database. Currently, it collects information from the Drools Request/Response, and Send Me NYC SMS and Email messages.
+ * Description: Adds WordPress hooks to enable the logging of data from the site to a specified MySQL database. Currently, it collects information from the Screening API request/response, and Send Me NYC SMS and Email messages.
  * Author:      Blue State Digital, maintained by NYC Opportunity
  */
 // phpcs:enable
@@ -18,12 +18,12 @@ add_action('statc_register', function($statc) {
   }
 
   /**
-   * Hook to save the Drools (eligibility screening) request
+   * Hook to save the screening API request
    *
    * @param   String  $data  The JSON object of the request
    * @param   String  $uid   The GUID of the request
    */
-  add_action('drools_request', function($data, $uid) use ($statc) {
+  add_action('screening_api_request', function($data, $uid) use ($statc) {
     $statc->collect('requests', [
       'uid' => $uid,
       'data' => json_encode($data),
@@ -31,12 +31,12 @@ add_action('statc_register', function($statc) {
   }, $statc->settings->priority, 2);
 
   /**
-   * Hook to save the Drools (eligibility screening) Response
+   * Hook to save the screening API response
    *
    * @param   String  $response  The JSON object of the response
    * @param   String  $uid       The GUID of the response
    */
-  add_action('drools_response', function($response, $uid) use ($statc) {
+  add_action('screening_api_response', function($response, $uid) use ($statc) {
     $statc->collect('responses', [
       'uid' => $uid,
       'data' => json_encode($response),
