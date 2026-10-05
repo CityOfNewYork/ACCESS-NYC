@@ -43,7 +43,7 @@ class ScreeningApiProxy {
     $uid = uniqid();
     $payload = wp_unslash($_POST['data']);
 
-    $this->deferScreeningLogging('screening_api_request', $payload, $uid);
+    do_action('screening_api_request', $payload, $uid);
 
     $response = $this->requestScreeningApiEligibility($config, $payload);
 
@@ -64,25 +64,12 @@ class ScreeningApiProxy {
       $ret = json_decode(wp_json_encode($ret));
     }
 
-    $this->deferScreeningLogging('screening_api_response', $ret, $uid);
+    do_action('screening_api_response', $ret, $uid);
 
     $ret->GUID = $uid;
 
     wp_send_json($ret, 200);
     wp_die();
-  }
-
-  /**
-   * Log screening api requests and responses after screener response has been sent to the frontend
-   *
-   * @param string $hook  screening_api_request|screening_api_response
-   * @param mixed  $data  request or response payload
-   * @param string $uid   Correlation id
-   */
-  private function deferScreeningLogging($hook, $data, $uid) {
-    add_action('shutdown', function() use ($hook, $data, $uid) {
-      do_action($hook, $data, $uid);
-    });
   }
 
   /**
