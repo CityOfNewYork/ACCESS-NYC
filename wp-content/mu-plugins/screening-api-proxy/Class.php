@@ -42,8 +42,9 @@ class ScreeningApiProxy {
 
     $uid = uniqid();
     $payload = wp_unslash($_POST['data']);
+    $fullScreenerPayload = wp_unslash($_POST['fullScreenerData']);
 
-    do_action('screening_api_request', $payload, $uid);
+    do_action('screening_api_request', $fullScreenerPayload, $uid);
 
     $response = $this->requestScreeningApiEligibility($config, $payload);
 

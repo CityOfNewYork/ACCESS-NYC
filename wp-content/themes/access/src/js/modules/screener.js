@@ -7,7 +7,9 @@ import ScreenerHousehold from 'modules/screener-household';
 import ScreenerPerson from 'modules/screener-person';
 import Utility from 'modules/utility';
 import Track from 'modules/track';
-import buildScreeningApiPayload from 'modules/screener-screening-api-payload';
+import buildScreeningApiPayload, {
+  buildFullScreenerPayload
+} from 'modules/screener-screening-api-payload';
 import _ from 'underscore';
 
 /**
@@ -1302,6 +1304,14 @@ class Screener {
     );
   }
 
+  _getFullScreenerPayload() {
+    return buildFullScreenerPayload(
+      this._household,
+      this._people,
+      this._household.get('members')
+    );
+  }
+
   /**
    * Submits the JSON payload to the Screening API.
    * @private
@@ -1329,7 +1339,8 @@ class Screener {
       type: 'post',
       data: {
         action: 'screening_api',
-        data: this._getScreeningApiPayload()
+        data: this._getScreeningApiPayload(),
+        fullScreenerData: JSON.stringify(this._getFullScreenerPayload())
       }
     }).done(data => {
       /* eslint-disable no-console, no-debugger */

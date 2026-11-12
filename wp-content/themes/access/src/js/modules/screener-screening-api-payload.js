@@ -118,4 +118,23 @@ export const buildScreeningApiPayload = (household, people, memberCount) => {
   }];
 };
 
+
+/**
+ * @param {ScreenerHousehold} household
+ * @param {ScreenerPerson[]} people
+ * @param {number} memberCount
+ * @return {object} Full original screener submission payload
+ */
+export const buildFullScreenerPayload = (household, people, memberCount) => {
+  return {
+    household: household.toObject(),
+    person: _.chain(people)
+      .slice(0, memberCount)
+      .filter(Boolean)
+      .map(person => person.toObject())
+      .value()
+  };
+};
+
+
 export default buildScreeningApiPayload;
