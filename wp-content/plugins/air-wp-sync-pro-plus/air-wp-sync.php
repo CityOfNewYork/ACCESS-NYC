@@ -66,7 +66,7 @@ define( 'AIR_WP_SYNC_PRO_BASENAME', plugin_basename( __FILE__ ) );
 define( 'AIR_WP_SYNC_PRO_LOGDIR', wp_upload_dir( null, false )['basedir'] . '/airwpsync-logs/' );
 define( 'AIR_WP_SYNC_PRO_TRANSLATIONS_PACK_URL', 'https://packages.translationspress.com/wp-connect/air-wp-sync-pro-plus/packages.json' );
 
-require_once 'vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 require_once AIR_WP_SYNC_PRO_PLUGIN_DIR . 'vendor/woocommerce/action-scheduler/action-scheduler.php';
 require_once AIR_WP_SYNC_PRO_PLUGIN_DIR . 'includes/class-air-wp-sync-bootstrap.php';
 
