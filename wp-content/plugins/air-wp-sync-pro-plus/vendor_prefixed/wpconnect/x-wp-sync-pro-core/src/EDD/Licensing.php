@@ -45,7 +45,7 @@ class Licensing {
 				'edd_action'  => 'activate_license',
 				'license'     => $license,
 				'item_id'     => $this->licensing_data->get_wpc_product_id(),
-				'url'         => str_ireplace( array( 'http://', 'https://' ), '', home_url() ),
+				'url'         => home_url(),
 				'environment' => function_exists( 'wp_get_environment_type' ) ? wp_get_environment_type() : 'production',
 			),
 		);
@@ -87,7 +87,7 @@ class Licensing {
 				'edd_action'  => 'deactivate_license',
 				'license'     => $license,
 				'item_id'     => $this->licensing_data->get_wpc_product_id(),
-				'url'         => str_ireplace( array( 'http://', 'https://' ), '', home_url() ),
+				'url'         => home_url(),
 				'environment' => function_exists( 'wp_get_environment_type' ) ? wp_get_environment_type() : 'production',
 			),
 		);
@@ -126,7 +126,7 @@ class Licensing {
 				'edd_action'  => 'check_license',
 				'license'     => $license,
 				'item_id'     => $this->licensing_data->get_wpc_product_id(),
-				'url'         => str_ireplace( array( 'http://', 'https://' ), '', home_url() ),
+				'url'         => home_url(),
 				'environment' => function_exists( 'wp_get_environment_type' ) ? wp_get_environment_type() : 'production',
 			),
 		);

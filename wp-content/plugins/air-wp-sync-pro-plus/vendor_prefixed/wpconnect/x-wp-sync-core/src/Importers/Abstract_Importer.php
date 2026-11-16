@@ -204,8 +204,8 @@ abstract class Abstract_Importer {
 	 */
 	public function cron() {
 		if ( $this->get_run_id() ) {
-			$this->log( esc_html__( 'A sync should have been started by a cron job but it has been skipped, a sync is already running.', 'air-wp-sync-pro-plus' ), 'warning' );
-			return false;
+			$this->log( esc_html__( 'A recurring sync is cancelling the currently running sync before starting a new one.', 'air-wp-sync-pro-plus' ), 'warning' );
+			$this->end_run( 'cancel' );
 		}
 		return $this->run();
 	}
@@ -275,6 +275,7 @@ abstract class Abstract_Importer {
 	 */
 	public function reset_errors() {
 		delete_post_meta( $this->infos()->get( 'id' ), 'errors' );
+		delete_post_meta( $this->infos()->get( 'id' ), 'last_error' );
 	}
 
 	/**
@@ -436,7 +437,22 @@ abstract class Abstract_Importer {
 		$latest_log_url = $this->get_latest_log_file_url();
 
 		$count_deleted = 0;
-		if ( 'add_update_delete' === $this->config()->get( 'sync_strategy' ) && 'success' === $status ) {
+		// Check for failed Action Scheduler tasks before potentially deleting removed contents.
+		$failed_action_ids = \ActionScheduler::store()->query_actions(
+			array(
+				'hook'                  => 'airwpsync_process_records',
+				'status'                => \ActionScheduler_Store::STATUS_FAILED,
+				'partial_args_matching' => 'like',
+				'args'                  => array(
+					'importer_id' => $importer_id,
+					'run_id'      => $run_id,
+				),
+				'per_page'              => -1,
+			)
+		);
+		$has_failed_tasks  = count( $failed_action_ids ) > 0;
+		$has_errors        = count( $this->get_errors() ) > 0;
+		if ( 'add_update_delete' === $this->config()->get( 'sync_strategy' ) && 'success' === $status && ! $has_errors && ! $has_failed_tasks ) {
 			$count_deleted = $this->delete_removed_contents( $run_id );
 		}
 		$processed_content_id = $this->get_run_option( $run_id, 'content_ids', array() );
@@ -461,19 +477,7 @@ abstract class Abstract_Importer {
 			)
 		);
 
-		$action_ids = \ActionScheduler::store()->query_actions(
-			array(
-				'hook'                  => 'airwpsync_process_records',
-				'status'                => \ActionScheduler_Store::STATUS_FAILED,
-				'partial_args_matching' => 'like',
-				'args'                  => array(
-					'importer_id' => $importer_id,
-					'run_id'      => $run_id,
-				),
-				'per_page'              => -1,
-			)
-		);
-		if ( count( $action_ids ) > 0 ) {
+		if ( $has_failed_tasks ) {
 			$this->add_error(
 				sprintf(
 				// translators: %1$s: start link tag, %2$s end link tag.

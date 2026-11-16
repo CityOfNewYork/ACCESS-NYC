@@ -90,8 +90,9 @@ class Admin_Settings_Page {
 	 * Register admin styles and scripts
 	 */
 	public function register_styles_scripts() {
-		$screen = get_current_screen();
-		if ( is_object( $screen ) && 'air-wp-sync-pro-plus_page_air-wp-sync-pro-plus-settings' === $screen->id ) {
+		$screen            = get_current_screen();
+		$settings_screen_id = Admin::TOP_MENU_SLUG . '_page_' . $this->page_slug;
+		if ( is_object( $screen ) && $settings_screen_id === $screen->id ) {
 			wp_enqueue_script( 'air-wp-sync-pro-plus-settings', plugins_url( 'assets/js/settings-page.js', $this->plugin_context->get_plugin_file() ), array( 'jquery-ui-tooltip' ), $this->plugin_context->get_plugin_version(), false );
 		}
 	}

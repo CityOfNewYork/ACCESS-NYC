@@ -3,9 +3,9 @@
  * Plugin Name: Air WP Sync Pro+ - Airtable to WordPress
  * Plugin URI: https://wpconnect.co/air-wp-sync-plugin/
  * Description: Swiftly sync Airtable to your WordPress website!
- * Version: 2.9.4
+ * Version: 2.9.5
  * Requires at least: 6.0
- * Tested up to: 7.0
+ * Tested up to: 7.1
  * Requires PHP: 7.4
  * Author: WP connect
  * Author URI: https://wpconnect.co/
@@ -58,7 +58,7 @@ if ( ! defined( 'WPINC' ) ) {
 	}
 } )();
 
-define( 'AIR_WP_SYNC_PRO_VERSION', '2.9.4' );
+define( 'AIR_WP_SYNC_PRO_VERSION', '2.9.5' );
 define( 'AIR_WP_SYNC_PRO_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AIR_WP_SYNC_PRO_PLUGIN_FILE', __FILE__ );
 define( 'AIR_WP_SYNC_PRO_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -76,7 +76,7 @@ require_once AIR_WP_SYNC_PRO_PLUGIN_DIR . 'includes/class-air-wp-sync-bootstrap.
 		'plugin_context',
 		Plugin_Context::from_array(
 			array(
-				'plugin_name'                => 'Air WP Sync Pro',
+				'plugin_name'                => 'Air WP Sync Pro+',
 				'admin_menu_name'            => 'Air WP Sync',
 				'plugin_vendor_prefixed_url' => trailingslashit( AIR_WP_SYNC_PRO_PLUGIN_URL ) . 'vendor_prefixed',
 				'plugin_file'                => AIR_WP_SYNC_PRO_PLUGIN_FILE,

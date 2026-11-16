@@ -26,10 +26,12 @@ class Barcode_Source {
 	 * @return array
 	 */
 	public function explode_fields( $fields ) {
+		$offset = 0;
 		foreach ( $fields as $i => $field ) {
 			if ( in_array( $field->type, array( 'barcode' ), true ) ) {
-				$part_one   = array_slice( $fields, 0, $i );
-				$part_two   = array_slice( $fields, $i + 1 );
+				$actual_i   = $i + $offset;
+				$part_one   = array_slice( $fields, 0, $actual_i );
+				$part_two   = array_slice( $fields, $actual_i + 1 );
 				$new_values = array(
 					(object) array(
 						'type' => sprintf( '%s.%s', $field->type, 'type' ),
@@ -42,7 +44,8 @@ class Barcode_Source {
 						'name' => sprintf( '%s (%s)', $field->name, __( 'Value', 'air-wp-sync-pro-plus' ) ),
 					),
 				);
-				$fields     = array_merge( $part_one, $new_values, $part_two );
+				$fields  = array_merge( $part_one, $new_values, $part_two );
+				$offset += count( $new_values ) - 1;
 			}
 		}
 		return $fields;

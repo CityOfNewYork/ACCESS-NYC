@@ -4,9 +4,9 @@ Author URI: https://wpconnect.co/
 Contributors: wpconnectco, thomascharbit, vincentdubroeucq
 Tags: airtable, api, automation, synchronization
 Requires at least: 6.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.9.4
+Stable tag: 2.9.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,156 +102,169 @@ If you need some assistance, open a ticket on our Support center at [https://sup
 
 == Changelog ==
 
+= 2.9.5 =
+*Release Date: 6th November 2026*
+
+* Compatibility with WordPress 7.1
+* Improvement: Recurring sync now cancels a stale running sync before starting a new one
+* Fix: License activation now works correctly on www and non-www sites
+* Fix: Resetting sync errors also clears the last error status
+* Fix: Field mapping dropdown correctly lists all subfields when multiple barcode or collaborator columns are present
+* Fix: Settings page tooltips now load on the correct admin screen
+* Fix: Removed contents are no longer deleted when record processing tasks have failed
+* Fix: Changing a field's mapping destination now clears the previous field name so values are written to the correct destination
+* Fix: WP-CLI command no longer fails to load due to a missing class import
+
 = 2.9.4 =
 *Release Date: 15th June 2026*
 
-Fix: Broken WP Cli command.
-Fix: Breaking change regarding post custom field management / formatting.
+* Fix: Broken WP Cli command.
+* Fix: Breaking change regarding post custom field management / formatting.
 
 = 2.9.3 =
 *Release Date: 26th May 2026*
 
-Compatibility with WordPress 7.0
-Fix: Multiple webhook calls for the same connection won’t stop the running sync anymore, a new sync will be started once the running one is completed.
-Feature: New strategy "Delete". Allows to have a connection dedicated to content deletion.
-Feature: New option "Delete attached media automatically". Allows to delete attached media when a content is deleted during a sync.
+* Compatibility with WordPress 7.0
+* Fix: Multiple webhook calls for the same connection won’t stop the running sync anymore, a new sync will be started once the running one is completed.
+* Feature: New strategy "Delete". Allows to have a connection dedicated to content deletion.
+* Feature: New option "Delete attached media automatically". Allows to delete attached media when a content is deleted during a sync.
 
 = 2.9.2 =
 *Release Date: 20th Jan. 2026*
 
-Compatibility with WordPress 6.9
-Fix: Fixed email sanitization.
-Fix: Fixed importer error not saving properly.
-Fix: Fixed special characters handling in log filenames.
-Improvement: Moved to TranslationsPress for translations.
+* Compatibility with WordPress 6.9
+* Fix: Fixed email sanitization.
+* Fix: Fixed importer error not saving properly.
+* Fix: Fixed special characters handling in log filenames.
+* Improvement: Moved to TranslationsPress for translations.
 
 = 2.9.1 =
 *Release Date: 30th Sept. 2025*
 
-Improvement: Added license status messages in settings page and admin plugins page.
-Fix: Fixed automatic update disabling bug.
+* Improvement: Added license status messages in settings page and admin plugins page.
+* Fix: Fixed automatic update disabling bug.
 
 = 2.9.0 =
 *Release Date: 04th June 2025*
 
-Fix: Added missing translations.
-Fix: Added WP connect logos.
-Fix: Fixed bug caused by empty ACF Repeater fields.
-Improvement: Added number of post processed on sync status metabox.
-Improvement: Added cache duration setting and clear cache button.
-Feature: Added support for The Events Calendar.
+* Fix: Added missing translations.
+* Fix: Added WP connect logos.
+* Fix: Fixed bug caused by empty ACF Repeater fields.
+* Improvement: Added number of post processed on sync status metabox.
+* Improvement: Added cache duration setting and clear cache button.
+* Feature: Added support for The Events Calendar.
 
 = 2.8.0 =
 *Release Date: 11th Mar. 2025*
 
-Fix: Moved menu declaration to default priority
-Fix: Switched logo on connection page
-Feature: Added support for Yoast SEO data for taxonomy terms
-Improvement: Changed required capabilities for connections
+* Fix: Moved menu declaration to default priority
+* Fix: Switched logo on connection page
+* Feature: Added support for Yoast SEO data for taxonomy terms
+* Improvement: Changed required capabilities for connections
 
 = 2.7.0 =
 *Release Date: 26th Nov. 2024*
 
-Compatibility with WordPress 6.7
-Fix: Fixed creation of dynamic property deprecation warning.
-Fix: Prevent empty ACF relationship values from linking to home page.
-Feature: Added checkbox to allow comma-seperated lists of taxonomy terms.
-Improvement: Added support for Rollup field in ACF number fields.
-Improvement: Added hook to Air_WP_Sync_Helper::maybe_convert_emoji() helper function.
-Improvement: Minor code cleanup.
+* Compatibility with WordPress 6.7
+* Fix: Fixed creation of dynamic property deprecation warning.
+* Fix: Prevent empty ACF relationship values from linking to home page.
+* Feature: Added checkbox to allow comma-seperated lists of taxonomy terms.
+* Improvement: Added support for Rollup field in ACF number fields.
+* Improvement: Added hook to Air_WP_Sync_Helper::maybe_convert_emoji() helper function.
+* Improvement: Minor code cleanup.
 
 = 2.6.1 =
 *Release Date: 18th Sept. 2024*
 
-Fix: Added support for singleSelect and multipleSelect fields returned by formula fields. 
+* Fix: Added support for singleSelect and multipleSelect fields returned by formula fields. 
 
 = 2.6.0 =
 *Release Date: 06th Aug. 2024*
 
-Compatibility with WordPress 6.6
-Feature: Added new UI for Airtable views filters
-Improvement: Support for Multiple Link to Another Record for ACF taxonomy field
-Improvement: Support for comma-seperated list of terms for taxonomy fields
+* Compatibility with WordPress 6.6
+* Feature: Added new UI for Airtable views filters
+* Improvement: Support for Multiple Link to Another Record for ACF taxonomy field
+* Improvement: Support for comma-seperated list of terms for taxonomy fields
 
 = 2.5.0 =
 *Release Date: 11th June 2024*
 
-Feature: Added ability to import taxonomy terms
-Improvement: Author mapping support both email and username
-Improvement: Delete options on uninstall
+* Feature: Added ability to import taxonomy terms
+* Improvement: Author mapping support both email and username
+* Improvement: Delete options on uninstall
 
 = 2.4.0 =
 *Release Date: 02nd Apr. 2024*
 
-Fix: Prevent password reset when updating users from Airtable.
-Fix: Added missing default features for custom post type mapping
-Improvement: Whitelisting values mapped to post_status
-Improvement: Remove shorter problematic synchronization schedules
-Improvement: Better emoji support
-Improvement: Force updates for posts with images when importer started more than 2 hours ago
+* Fix: Prevent password reset when updating users from Airtable.
+* Fix: Added missing default features for custom post type mapping
+* Improvement: Whitelisting values mapped to post_status
+* Improvement: Remove shorter problematic synchronization schedules
+* Improvement: Better emoji support
+* Improvement: Force updates for posts with images when importer started more than 2 hours ago
 
 = 2.3.0 =
 *Release Date: 10th Jan. 2024*
 
-Improvement: Better update notice if license status has changed
-Fix: Empty column mapped to a taxonomy no longer trigger error log.
-Improvement: Better ACF field filters in the mapping table
+* Improvement: Better update notice if license status has changed
+* Fix: Empty column mapped to a taxonomy no longer trigger error log.
+* Improvement: Better ACF field filters in the mapping table
 
 = 2.2.0 =
 *Release Date: 21th Nov. 2023*
 
-Fix: Added support for emoji
-Feature: Mapping for post_parent
-Feature: Added support for RankMath SEO plugin
-Feature: Added support for SEOPress SEO plugin
-Feature: Added support for All In One SEO plugin
+* Fix: Added support for emoji
+* Feature: Mapping for post_parent
+* Feature: Added support for RankMath SEO plugin
+* Feature: Added support for SEOPress SEO plugin
+* Feature: Added support for All In One SEO plugin
 
 = 2.1.0 =
 *Release Date: 30th Sept. 2023*
 
-Feature: Extend ACF field support to taxonomy field
-Fix: better error management
+* Feature: Extend ACF field support to taxonomy field
+* Fix: better error management
 
 = 2.0.4 =
 *Release Date: 26th Sept. 2023*
 
-Fix: Filter image urls from record hashes to avoid unnecessary updates
+* Fix: Filter image urls from record hashes to avoid unnecessary updates
 
 = 2.0.3 =
 *Release Date: 19th Sept. 2023*
 
-Feature: Option to enable support for Link to another record fields
+* Feature: Option to enable support for Link to another record fields
 
 = 2.0.2 =
 *Release Date: 23th Aug. 2023*
 
-Fix: Added cache for table data
+* Fix: Added cache for table data
 
 = 2.0.1 =
 *Release Date: 05nd Aug. 2023*
 
-Fix: formula field was missing from the mapping
+* Fix: formula field was missing from the mapping
 
 = 2.0.0 =
 *Release Date: 01st Aug. 2023*
 
-Feature: Import airtable content as users
-Feature: Added Post Status and Post Author options when importing posts
-Feature: Extend ACF field support to Gallery, Color picker, Post object, User, Relationship and Page link fields
-Feature: Support for "Link to another record" field type
+* Feature: Import airtable content as users
+* Feature: Added Post Status and Post Author options when importing posts
+* Feature: Extend ACF field support to Gallery, Color picker, Post object, User, Relationship and Page link fields
+* Feature: Support for "Link to another record" field type
 
 = 1.1.0 =
 *Release Date: 07th July 2023*
 
-Fix: In field mapping reordering
-Fix: Synchronization declared finished too soon
-Compatibility with WordPress 6.2
-Feature: Support for Yoast SEO
+* Fix: In field mapping reordering
+* Fix: Synchronization declared finished too soon
+* Compatibility with WordPress 6.2
+* Feature: Support for Yoast SEO
 
 = 1.0.0 =
 *Release Date: 04th Apr. 2023*
 
-Initial release
+* Initial release
 
 
 

@@ -18,6 +18,7 @@ use Air_WP_Sync_Pro_Vendor\WPConnect\X_WP_Sync_Core\Formatters\Format_Path_To_UR
 use Air_WP_Sync_Pro_Vendor\WPConnect\X_WP_Sync_Core\Formatters\Format_To_Array_Strategy;
 use Air_WP_Sync_Pro_Vendor\WPConnect\X_WP_Sync_Core\Formatters\Format_To_Boolean_Strategy;
 use Air_WP_Sync_Pro_Vendor\WPConnect\X_WP_Sync_Core\Formatters\Format_To_Datetime_Strategy;
+use Air_WP_Sync_Pro_Vendor\WPConnect\X_WP_Sync_Core\Formatters\Format_To_Timezone_Strategy;
 use Air_WP_Sync_Pro_Vendor\WPConnect\X_WP_Sync_Core\Formatters\Format_To_Email_Strategy;
 use Air_WP_Sync_Pro_Vendor\WPConnect\X_WP_Sync_Core\Formatters\Format_To_First_Array_Item_Strategy;
 use Air_WP_Sync_Pro_Vendor\WPConnect\X_WP_Sync_Core\Formatters\Format_To_Int_List_Strategy;
@@ -157,6 +158,7 @@ class Bootstrap {
 				->register_strategy( new Format_To_Number_Strategy() )
 				->register_strategy( new Format_To_Integer_Strategy() )
 				->register_strategy( new Format_To_Datetime_Strategy() )
+				->register_strategy( new Format_To_Timezone_Strategy() )
 				->register_strategy( new Format_Datetime_To_ISO8601_Strategy() )
 				->register_strategy( new Format_To_Int_List_Strategy() )
 				->register_strategy( new Format_Email_To_User_Id_Strategy() )

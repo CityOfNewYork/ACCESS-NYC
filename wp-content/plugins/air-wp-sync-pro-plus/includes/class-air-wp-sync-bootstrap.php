@@ -32,6 +32,7 @@ use Air_WP_Sync_Pro_Vendor\WPConnect\X_WP_Sync_Core\Modules\Term\Term_Module;
 use Air_WP_Sync_Pro_Vendor\WPConnect\X_WP_Sync_Core\Modules\User\User_Module;
 use Air_WP_Sync_Pro_Vendor\WPConnect\X_WP_Sync_Core\Util\Services;
 use Air_WP_Sync_Pro_Vendor\WPConnect\X_WP_Sync_Core\WP_Cli\Api_Import_Route;
+use Air_WP_Sync_Pro_Vendor\WPConnect\X_WP_Sync_Core\WP_Cli\CLI;
 use Air_WP_Sync_Pro_Vendor\WPConnect\X_WP_Sync_Pro_Core\Bootstrap_Pro;
 use Air_WP_Sync_Pro_Vendor\WPConnect\X_WP_Sync_Pro_Core\Models\Licensing_Data;
 use WP_CLI;

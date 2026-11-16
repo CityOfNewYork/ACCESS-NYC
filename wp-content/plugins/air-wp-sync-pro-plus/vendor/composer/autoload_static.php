@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitca2706d6ac6d8aa3ad628231893f32f0
+class ComposerStaticInit0fdd8610ffd22604e4935bc485ab9494
 {
     public static $classMap = array (
         'Air_WP_Sync_Pro_Vendor\\WPConnect\\Air_WP_Sync_Core\\API\\Client' => __DIR__ . '/../..' . '/vendor_prefixed/wpconnect/air-wp-sync-core/src/API/Client.php',
@@ -132,7 +132,7 @@ class ComposerStaticInitca2706d6ac6d8aa3ad628231893f32f0
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInitca2706d6ac6d8aa3ad628231893f32f0::$classMap;
+            $loader->classMap = ComposerStaticInit0fdd8610ffd22604e4935bc485ab9494::$classMap;
 
         }, null, ClassLoader::class);
     }
