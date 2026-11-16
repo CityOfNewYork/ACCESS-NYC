@@ -132,6 +132,30 @@
             "append": ""
         },
         {
+            "key": "field_6af652cb50686",
+            "label": "Unique ID Number",
+            "name": "unique_id_number",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_rest": 0,
+            "relevanssi_exclude": 0,
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_589e43563c471",
             "label": "Show Sections",
             "name": "show_sections",
